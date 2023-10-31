@@ -9,10 +9,10 @@
             "rule_id": "22-24",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "For baseline chilled-water systems served by chiller(s), the primary pump shall be modeled as constant volume.  ",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -154,10 +154,10 @@
             "rule_id": "22-24",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "For baseline chilled-water systems served by chiller(s), the primary pump shall be modeled as constant volume.  ",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -299,10 +299,10 @@
             "rule_id": "22-24",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "For baseline chilled-water systems served by chiller(s), the primary pump shall be modeled as constant volume.  ",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -446,10 +446,10 @@
             "rule_id": "22-24",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "For baseline chilled-water systems served by chiller(s), the primary pump shall be modeled as constant volume.  ",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -593,10 +593,10 @@
             "rule_id": "22-24",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "For baseline chilled-water systems served by chiller(s), the primary pump shall be modeled as constant volume.  ",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {

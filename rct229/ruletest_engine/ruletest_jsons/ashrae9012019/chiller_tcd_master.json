@@ -9,10 +9,10 @@
             "rule_id": "22-1",
             "ruleset_reference": "G3.1.3.8",
             "rule_description": "Baseline chilled water design supply temperature shall be modeled at 44F.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -158,10 +158,10 @@
             "rule_id": "22-1",
             "ruleset_reference": "G3.1.3.8",
             "rule_description": "Baseline chilled water design supply temperature shall be modeled at 44F.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -307,10 +307,10 @@
             "rule_id": "22-1",
             "ruleset_reference": "G3.1.3.8",
             "rule_description": "Baseline chilled water design supply temperature shall be modeled at 44F.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -456,10 +456,10 @@
             "rule_id": "22-1",
             "ruleset_reference": "G3.1.3.8",
             "rule_description": "Baseline chilled water design supply temperature shall be modeled at 44F.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -605,10 +605,10 @@
             "rule_id": "22-1",
             "ruleset_reference": "G3.1.3.8",
             "rule_description": "Baseline chilled water design supply temperature shall be modeled at 44F.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -694,10 +694,10 @@
             "rule_id": "22-2",
             "ruleset_reference": "G3.1.3.8",
             "rule_description": "For applicable baseline system types 7, 8, 11, 12 and 13, the baseline chilled water design return temperature shall be modeled at 56F.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -843,10 +843,10 @@
             "rule_id": "22-2",
             "ruleset_reference": "G3.1.3.8",
             "rule_description": "For applicable baseline system types 7, 8, 11, 12 and 13, the baseline chilled water design return temperature shall be modeled at 56F.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -992,10 +992,10 @@
             "rule_id": "22-2",
             "ruleset_reference": "G3.1.3.8",
             "rule_description": "For applicable baseline system types 7, 8, 11, 12 and 13, the baseline chilled water design return temperature shall be modeled at 56F.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -1148,10 +1148,10 @@
             "rule_id": "22-2",
             "ruleset_reference": "G3.1.3.8",
             "rule_description": "For applicable baseline system types 7, 8, 11, 12 and 13, the baseline chilled water design return temperature shall be modeled at 56F.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -1304,10 +1304,10 @@
             "rule_id": "22-2",
             "ruleset_reference": "G3.1.3.8",
             "rule_description": "For applicable baseline system types 7, 8, 11, 12 and 13, the baseline chilled water design return temperature shall be modeled at 56F.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -1379,10 +1379,10 @@
             "rule_id": "22-3",
             "ruleset_reference": "G3.1.3.9",
             "rule_description": "For Baseline chilled water loop that is not purchased cooling, chilled-water supply temperature shall be reset based on outdoor dry-bulb temperature if loop does not serve any Baseline System Type-11.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -1528,10 +1528,10 @@
             "rule_id": "22-3",
             "ruleset_reference": "G3.1.3.9",
             "rule_description": "For Baseline chilled water loop that is not purchased cooling, chilled-water supply temperature shall be reset based on outdoor dry-bulb temperature if loop does not serve any Baseline System Type-11.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -1677,10 +1677,10 @@
             "rule_id": "22-3",
             "ruleset_reference": "G3.1.3.9",
             "rule_description": "For Baseline chilled water loop that is not purchased cooling, chilled-water supply temperature shall be reset based on outdoor dry-bulb temperature if loop does not serve any Baseline System Type-11.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -1828,10 +1828,10 @@
             "rule_id": "22-3",
             "ruleset_reference": "G3.1.3.9",
             "rule_description": "For Baseline chilled water loop that is not purchased cooling, chilled-water supply temperature shall be reset based on outdoor dry-bulb temperature if loop does not serve any Baseline System Type-11.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -1979,10 +1979,10 @@
             "rule_id": "22-3",
             "ruleset_reference": "G3.1.3.9",
             "rule_description": "For Baseline chilled water loop that is not purchased cooling, chilled-water supply temperature shall be reset based on outdoor dry-bulb temperature if loop does not serve any Baseline System Type-11.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -2111,10 +2111,10 @@
             "rule_id": "22-4",
             "ruleset_reference": "G3.1.3.9",
             "rule_description": "For baseline chilled water loop that is not purchased chilled water and does not serve any computer room HVAC systems, chilled-water supply temperature shall be reset using the following schedule: 44F at outdoor dry-bulb temperature of 80F and above, 54F at 60F and below, and ramped linearly between 44F and 54F at temperature between 80F and 60F.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -2263,10 +2263,10 @@
             "rule_id": "22-4",
             "ruleset_reference": "G3.1.3.9",
             "rule_description": "For baseline chilled water loop that is not purchased chilled water and does not serve any computer room HVAC systems, chilled-water supply temperature shall be reset using the following schedule: 44F at outdoor dry-bulb temperature of 80F and above, 54F at 60F and below, and ramped linearly between 44F and 54F at temperature between 80F and 60F.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -2415,10 +2415,10 @@
             "rule_id": "22-4",
             "ruleset_reference": "G3.1.3.9",
             "rule_description": "For baseline chilled water loop that is not purchased chilled water and does not serve any computer room HVAC systems, chilled-water supply temperature shall be reset using the following schedule: 44F at outdoor dry-bulb temperature of 80F and above, 54F at 60F and below, and ramped linearly between 44F and 54F at temperature between 80F and 60F.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -2567,10 +2567,10 @@
             "rule_id": "22-4",
             "ruleset_reference": "G3.1.3.9",
             "rule_description": "For baseline chilled water loop that is not purchased chilled water and does not serve any computer room HVAC systems, chilled-water supply temperature shall be reset using the following schedule: 44F at outdoor dry-bulb temperature of 80F and above, 54F at 60F and below, and ramped linearly between 44F and 54F at temperature between 80F and 60F.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -2702,10 +2702,10 @@
             "rule_id": "22-4",
             "ruleset_reference": "G3.1.3.9",
             "rule_description": "For baseline chilled water loop that is not purchased chilled water and does not serve any computer room HVAC systems, chilled-water supply temperature shall be reset using the following schedule: 44F at outdoor dry-bulb temperature of 80F and above, 54F at 60F and below, and ramped linearly between 44F and 54F at temperature between 80F and 60F.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -2837,10 +2837,10 @@
             "rule_id": "22-4",
             "ruleset_reference": "G3.1.3.9",
             "rule_description": "For baseline chilled water loop that is not purchased chilled water and does not serve any computer room HVAC systems, chilled-water supply temperature shall be reset using the following schedule: 44F at outdoor dry-bulb temperature of 80F and above, 54F at 60F and below, and ramped linearly between 44F and 54F at temperature between 80F and 60F.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -2972,10 +2972,10 @@
             "rule_id": "22-4",
             "ruleset_reference": "G3.1.3.9",
             "rule_description": "For baseline chilled water loop that is not purchased chilled water and does not serve any computer room HVAC systems, chilled-water supply temperature shall be reset using the following schedule: 44F at outdoor dry-bulb temperature of 80F and above, 54F at 60F and below, and ramped linearly between 44F and 54F at temperature between 80F and 60F.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -3073,10 +3073,10 @@
             "rule_id": "22-5",
             "ruleset_reference": "G3.1.3.9",
             "rule_description": "For Baseline chilled water loop that is not purchased chilled water and serves computer room HVAC systems (Baseline   System Type-11), chilled-water supply temperature shall be reset higher based on the HVAC system requiring the most cooling.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -3188,10 +3188,10 @@
             "rule_id": "22-5",
             "ruleset_reference": "G3.1.3.9",
             "rule_description": "For Baseline chilled water loop that is not purchased chilled water and serves computer room HVAC systems (Baseline   System Type-11), chilled-water supply temperature shall be reset higher based on the HVAC system requiring the most cooling.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -3303,10 +3303,10 @@
             "rule_id": "22-5",
             "ruleset_reference": "G3.1.3.9",
             "rule_description": "For Baseline chilled water loop that is not purchased chilled water and serves computer room HVAC systems (Baseline   System Type-11), chilled-water supply temperature shall be reset higher based on the HVAC system requiring the most cooling.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -3435,10 +3435,10 @@
             "rule_id": "22-5",
             "ruleset_reference": "G3.1.3.9",
             "rule_description": "For Baseline chilled water loop that is not purchased chilled water and serves computer room HVAC systems (Baseline   System Type-11), chilled-water supply temperature shall be reset higher based on the HVAC system requiring the most cooling.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -3567,10 +3567,10 @@
             "rule_id": "22-6",
             "ruleset_reference": "G3.1.3.9",
             "rule_description": "For baseline chilled water loop that is not purchased chilled water and serves computer room HVAC systems (System Type-11), The maximum reset chilled-water supply temperature shall be 54F.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -3682,10 +3682,10 @@
             "rule_id": "22-6",
             "ruleset_reference": "G3.1.3.9",
             "rule_description": "For baseline chilled water loop that is not purchased chilled water and serves computer room HVAC systems (System Type-11), The maximum reset chilled-water supply temperature shall be 54F.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -3797,10 +3797,10 @@
             "rule_id": "22-6",
             "ruleset_reference": "G3.1.3.9",
             "rule_description": "For baseline chilled water loop that is not purchased chilled water and serves computer room HVAC systems (System Type-11), The maximum reset chilled-water supply temperature shall be 54F.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -3929,10 +3929,10 @@
             "rule_id": "22-6",
             "ruleset_reference": "G3.1.3.9",
             "rule_description": "For baseline chilled water loop that is not purchased chilled water and serves computer room HVAC systems (System Type-11), The maximum reset chilled-water supply temperature shall be 54F.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -4061,10 +4061,10 @@
             "rule_id": "22-6",
             "ruleset_reference": "G3.1.3.9",
             "rule_description": "For baseline chilled water loop that is not purchased chilled water and serves computer room HVAC systems (System Type-11), The maximum reset chilled-water supply temperature shall be 54F.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -4217,10 +4217,10 @@
             "rule_id": "22-7",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water system that does not use purchased chilled water shall be modeled as primary/secondary systems.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -4362,10 +4362,10 @@
             "rule_id": "22-7",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water system that does not use purchased chilled water shall be modeled as primary/secondary systems.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -4496,10 +4496,10 @@
             "rule_id": "22-7",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water system that does not use purchased chilled water shall be modeled as primary/secondary systems.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -4641,10 +4641,10 @@
             "rule_id": "22-7",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water system that does not use purchased chilled water shall be modeled as primary/secondary systems.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -4774,10 +4774,10 @@
             "rule_id": "22-7",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water system that does not use purchased chilled water shall be modeled as primary/secondary systems.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -4851,10 +4851,10 @@
             "rule_id": "22-8",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "For baseline chilled water system with cooling capacity of 300 tons or more, the secondary pump shall be modeled with variable-speed drives.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -4997,10 +4997,10 @@
             "rule_id": "22-8",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "For baseline chilled water system with cooling capacity of 300 tons or more, the secondary pump shall be modeled with variable-speed drives.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -5143,10 +5143,10 @@
             "rule_id": "22-8",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "For baseline chilled water system with cooling capacity of 300 tons or more, the secondary pump shall be modeled with variable-speed drives.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -5289,10 +5289,10 @@
             "rule_id": "22-8",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "For baseline chilled water system with cooling capacity of 300 tons or more, the secondary pump shall be modeled with variable-speed drives.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -5418,10 +5418,10 @@
             "rule_id": "22-8",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "For baseline chilled water system with cooling capacity of 300 tons or more, the secondary pump shall be modeled with variable-speed drives.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -5547,10 +5547,10 @@
             "rule_id": "22-9",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "For Baseline chilled water system with cooling capacity of 300 tons or more, the secondary loop shall be modeled with a minimum flow of 25% of the design flow rate.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -5697,10 +5697,10 @@
             "rule_id": "22-9",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "For Baseline chilled water system with cooling capacity of 300 tons or more, the secondary loop shall be modeled with a minimum flow of 25% of the design flow rate.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -5847,10 +5847,10 @@
             "rule_id": "22-9",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "For Baseline chilled water system with cooling capacity of 300 tons or more, the secondary loop shall be modeled with a minimum flow of 25% of the design flow rate.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -5997,10 +5997,10 @@
             "rule_id": "22-9",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "For Baseline chilled water system with cooling capacity of 300 tons or more, the secondary loop shall be modeled with a minimum flow of 25% of the design flow rate.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -6113,10 +6113,10 @@
             "rule_id": "22-9",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "For Baseline chilled water system with cooling capacity of 300 tons or more, the secondary loop shall be modeled with a minimum flow of 25% of the design flow rate.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -6229,10 +6229,10 @@
             "rule_id": "22-10",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "For Baseline chilled water system with cooling capacity less than 300ton, the secondary pump shall be modeled as riding the pump curve.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -6375,10 +6375,10 @@
             "rule_id": "22-10",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "For Baseline chilled water system with cooling capacity less than 300ton, the secondary pump shall be modeled as riding the pump curve.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -6521,10 +6521,10 @@
             "rule_id": "22-10",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "For Baseline chilled water system with cooling capacity less than 300ton, the secondary pump shall be modeled as riding the pump curve.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -6650,10 +6650,10 @@
             "rule_id": "22-10",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "For Baseline chilled water system with cooling capacity less than 300ton, the secondary pump shall be modeled as riding the pump curve.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -6779,10 +6779,10 @@
             "rule_id": "22-10",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "For Baseline chilled water system with cooling capacity less than 300ton, the secondary pump shall be modeled as riding the pump curve.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -6924,10 +6924,10 @@
             "rule_id": "22-10",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "For Baseline chilled water system with cooling capacity less than 300ton, the secondary pump shall be modeled as riding the pump curve.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -7058,10 +7058,10 @@
             "rule_id": "22-11",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "For Baseline chilled-water system that does not use purchased chilled water, variable-flow secondary pump shall be modeled as 13W/gpm at design conditions.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -7204,10 +7204,10 @@
             "rule_id": "22-11",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "For Baseline chilled-water system that does not use purchased chilled water, variable-flow secondary pump shall be modeled as 13W/gpm at design conditions.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -7350,10 +7350,10 @@
             "rule_id": "22-11",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "For Baseline chilled-water system that does not use purchased chilled water, variable-flow secondary pump shall be modeled as 13W/gpm at design conditions.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -7462,10 +7462,10 @@
             "rule_id": "22-11",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "For Baseline chilled-water system that does not use purchased chilled water, variable-flow secondary pump shall be modeled as 13W/gpm at design conditions.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -7574,10 +7574,10 @@
             "rule_id": "22-11",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "For Baseline chilled-water system that does not use purchased chilled water, variable-flow secondary pump shall be modeled as 13W/gpm at design conditions.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -7640,10 +7640,10 @@
             "rule_id": "22-12",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The heat rejection system shall be a single loop, modeled with a single cooling tower",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -7796,10 +7796,10 @@
             "rule_id": "22-12",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The heat rejection system shall be a single loop, modeled with a single cooling tower",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -7961,10 +7961,10 @@
             "rule_id": "22-12",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The heat rejection system shall be a single loop, modeled with a single cooling tower",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -8121,10 +8121,10 @@
             "rule_id": "22-12",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The heat rejection system shall be a single loop, modeled with a single cooling tower",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -8290,10 +8290,10 @@
             "rule_id": "22-12",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The heat rejection system shall be a single loop, modeled with a single cooling tower",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -8435,10 +8435,10 @@
             "rule_id": "22-13",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat rejection loop shall be an axial-fan open circuit cooling tower.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -8593,10 +8593,10 @@
             "rule_id": "22-13",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat rejection loop shall be an axial-fan open circuit cooling tower.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -8751,10 +8751,10 @@
             "rule_id": "22-13",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat rejection loop shall be an axial-fan open circuit cooling tower.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -8909,10 +8909,10 @@
             "rule_id": "22-14",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat-rejection device shall have a design temperature rise of 10\u00b0F.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -9068,10 +9068,10 @@
             "rule_id": "22-14",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat-rejection device shall have a design temperature rise of 10\u00b0F.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -9227,10 +9227,10 @@
             "rule_id": "22-14",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat-rejection device shall have a design temperature rise of 10\u00b0F.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -9386,10 +9386,10 @@
             "rule_id": "22-14",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat-rejection device shall have a design temperature rise of 10\u00b0F.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -9545,10 +9545,10 @@
             "rule_id": "22-14",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat-rejection device shall have a design temperature rise of 10\u00b0F.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -9646,10 +9646,10 @@
             "rule_id": "22-15",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "Heat Rejection Device Approach calaculated correctly (T/F), Approach = 25.72-(0.24*WB)",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -9804,10 +9804,10 @@
             "rule_id": "22-15",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "Heat Rejection Device Approach calaculated correctly (T/F), Approach = 25.72-(0.24*WB)",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -9962,10 +9962,10 @@
             "rule_id": "22-15",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "Heat Rejection Device Approach calaculated correctly (T/F), Approach = 25.72-(0.24*WB)",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -10120,10 +10120,10 @@
             "rule_id": "22-16",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline condenser-water design supply temperature shall be calculated using the cooling tower approach to the 0.4% evaporation design wet-bulb temperature, valid for wet-bulbs from 55\u00b0F to 90\u00b0F.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -10282,10 +10282,10 @@
             "rule_id": "22-16",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline condenser-water design supply temperature shall be calculated using the cooling tower approach to the 0.4% evaporation design wet-bulb temperature, valid for wet-bulbs from 55\u00b0F to 90\u00b0F.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -10444,10 +10444,10 @@
             "rule_id": "22-16",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline condenser-water design supply temperature shall be calculated using the cooling tower approach to the 0.4% evaporation design wet-bulb temperature, valid for wet-bulbs from 55\u00b0F to 90\u00b0F.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -10606,10 +10606,10 @@
             "rule_id": "22-16",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline condenser-water design supply temperature shall be calculated using the cooling tower approach to the 0.4% evaporation design wet-bulb temperature, valid for wet-bulbs from 55\u00b0F to 90\u00b0F.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -10751,10 +10751,10 @@
             "rule_id": "22-16",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline condenser-water design supply temperature shall be calculated using the cooling tower approach to the 0.4% evaporation design wet-bulb temperature, valid for wet-bulbs from 55\u00b0F to 90\u00b0F.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -10896,10 +10896,10 @@
             "rule_id": "22-16",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline condenser-water design supply temperature shall be calculated using the cooling tower approach to the 0.4% evaporation design wet-bulb temperature, valid for wet-bulbs from 55\u00b0F to 90\u00b0F.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -11590,10 +11590,10 @@
             "rule_id": "22-18",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat rejection device shall be modeled with variable speed fan control",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -11747,10 +11747,10 @@
             "rule_id": "22-18",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat rejection device shall be modeled with variable speed fan control",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -11904,10 +11904,10 @@
             "rule_id": "22-18",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat rejection device shall be modeled with variable speed fan control",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -12049,10 +12049,10 @@
             "rule_id": "22-19",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline cooling tower shall be controlled to maintain a leaving water temperature, where weather permits, as specified in Table G3.1.3.11",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -12208,10 +12208,10 @@
             "rule_id": "22-19",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline cooling tower shall be controlled to maintain a leaving water temperature, where weather permits, as specified in Table G3.1.3.11",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -12367,10 +12367,10 @@
             "rule_id": "22-19",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline cooling tower shall be controlled to maintain a leaving water temperature, where weather permits, as specified in Table G3.1.3.11",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -12509,10 +12509,10 @@
             "rule_id": "22-19",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline cooling tower shall be controlled to maintain a leaving water temperature, where weather permits, as specified in Table G3.1.3.11",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -12651,10 +12651,10 @@
             "rule_id": "22-19",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline cooling tower shall be controlled to maintain a leaving water temperature, where weather permits, as specified in Table G3.1.3.11",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -12783,10 +12783,10 @@
             "rule_id": "22-20",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline condenser loop minimum condenser leaving water temperature shall be modeled as specified in Table G3.1.3.11.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -12942,10 +12942,10 @@
             "rule_id": "22-20",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline condenser loop minimum condenser leaving water temperature shall be modeled as specified in Table G3.1.3.11.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -13101,10 +13101,10 @@
             "rule_id": "22-20",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline condenser loop minimum condenser leaving water temperature shall be modeled as specified in Table G3.1.3.11.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -13267,10 +13267,10 @@
             "rule_id": "22-20",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline condenser loop minimum condenser leaving water temperature shall be modeled as specified in Table G3.1.3.11.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -13433,10 +13433,10 @@
             "rule_id": "22-20",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline condenser loop minimum condenser leaving water temperature shall be modeled as specified in Table G3.1.3.11.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -13565,10 +13565,10 @@
             "rule_id": "22-21",
             "ruleset_reference": "G3.1.3.7",
             "rule_description": "The baseline building design\u2019s chiller plant shall be modeled with chillers having the type as indicated in Table G3.1.3.7 as a function of building peak cooling load.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -13723,10 +13723,10 @@
             "rule_id": "22-21",
             "ruleset_reference": "G3.1.3.7",
             "rule_description": "The baseline building design\u2019s chiller plant shall be modeled with chillers having the type as indicated in Table G3.1.3.7 as a function of building peak cooling load.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -13881,10 +13881,10 @@
             "rule_id": "22-21",
             "ruleset_reference": "G3.1.3.7",
             "rule_description": "The baseline building design\u2019s chiller plant shall be modeled with chillers having the type as indicated in Table G3.1.3.7 as a function of building peak cooling load.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -14041,10 +14041,10 @@
             "rule_id": "22-21",
             "ruleset_reference": "G3.1.3.7",
             "rule_description": "The baseline building design\u2019s chiller plant shall be modeled with chillers having the type as indicated in Table G3.1.3.7 as a function of building peak cooling load.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -14201,10 +14201,10 @@
             "rule_id": "22-21",
             "ruleset_reference": "G3.1.3.7",
             "rule_description": "The baseline building design\u2019s chiller plant shall be modeled with chillers having the type as indicated in Table G3.1.3.7 as a function of building peak cooling load.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -14290,10 +14290,10 @@
             "rule_id": "22-22",
             "ruleset_reference": "Table G3.5.3",
             "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for full load, in accordance with Tables G3.5.3.  ",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -14438,10 +14438,10 @@
             "rule_id": "22-22",
             "ruleset_reference": "Table G3.5.3",
             "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for full load, in accordance with Tables G3.5.3.  ",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -14586,10 +14586,10 @@
             "rule_id": "22-22",
             "ruleset_reference": "Table G3.5.3",
             "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for full load, in accordance with Tables G3.5.3.  ",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -14700,10 +14700,10 @@
             "rule_id": "22-22",
             "ruleset_reference": "Table G3.5.3",
             "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for full load, in accordance with Tables G3.5.3.  ",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -14814,10 +14814,10 @@
             "rule_id": "22-22",
             "ruleset_reference": "Table G3.5.3",
             "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for full load, in accordance with Tables G3.5.3.  ",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -14889,10 +14889,10 @@
             "rule_id": "22-23",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Each baseline chiller shall be modeled with separate chilled water pump interlocked to operate with the associated chiller.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -15035,10 +15035,10 @@
             "rule_id": "22-23",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Each baseline chiller shall be modeled with separate chilled water pump interlocked to operate with the associated chiller.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -15181,10 +15181,10 @@
             "rule_id": "22-23",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Each baseline chiller shall be modeled with separate chilled water pump interlocked to operate with the associated chiller.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -15332,10 +15332,10 @@
             "rule_id": "22-23",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Each baseline chiller shall be modeled with separate chilled water pump interlocked to operate with the associated chiller.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -15485,10 +15485,10 @@
             "rule_id": "22-23",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Each baseline chiller shall be modeled with separate chilled water pump interlocked to operate with the associated chiller.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -15643,10 +15643,10 @@
             "rule_id": "22-23",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Each baseline chiller shall be modeled with separate chilled water pump interlocked to operate with the associated chiller.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -15737,10 +15737,10 @@
             "rule_id": "22-24",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "For baseline chilled-water systems served by chiller(s), the primary pump shall be modeled as constant volume.  ",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -15882,10 +15882,10 @@
             "rule_id": "22-24",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "For baseline chilled-water systems served by chiller(s), the primary pump shall be modeled as constant volume.  ",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -16027,10 +16027,10 @@
             "rule_id": "22-24",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "For baseline chilled-water systems served by chiller(s), the primary pump shall be modeled as constant volume.  ",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -16174,10 +16174,10 @@
             "rule_id": "22-24",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "For baseline chilled-water systems served by chiller(s), the primary pump shall be modeled as constant volume.  ",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -16321,10 +16321,10 @@
             "rule_id": "22-24",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "For baseline chilled-water systems served by chiller(s), the primary pump shall be modeled as constant volume.  ",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -16455,10 +16455,10 @@
             "rule_id": "22-25",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "For chilled-water systems served by chiller(s) and does not serve baseline System-11, the baseline building constant-volume primary pump power shall be modeled as 9 W/gpm.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -16601,10 +16601,10 @@
             "rule_id": "22-25",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "For chilled-water systems served by chiller(s) and does not serve baseline System-11, the baseline building constant-volume primary pump power shall be modeled as 9 W/gpm.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -16747,10 +16747,10 @@
             "rule_id": "22-25",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "For chilled-water systems served by chiller(s) and does not serve baseline System-11, the baseline building constant-volume primary pump power shall be modeled as 9 W/gpm.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -16876,10 +16876,10 @@
             "rule_id": "22-25",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "For chilled-water systems served by chiller(s) and does not serve baseline System-11, the baseline building constant-volume primary pump power shall be modeled as 9 W/gpm.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -17005,10 +17005,10 @@
             "rule_id": "22-25",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "For chilled-water systems served by chiller(s) and does not serve baseline System-11, the baseline building constant-volume primary pump power shall be modeled as 9 W/gpm.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -17134,10 +17134,10 @@
             "rule_id": "22-26",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "For chilled-water systems served by chiller(s) and serves baseline System-11, the baseline building constant-volume primary pump power shall be modeled as 12 W/gpm.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -17246,10 +17246,10 @@
             "rule_id": "22-26",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "For chilled-water systems served by chiller(s) and serves baseline System-11, the baseline building constant-volume primary pump power shall be modeled as 12 W/gpm.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -17358,10 +17358,10 @@
             "rule_id": "22-26",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "For chilled-water systems served by chiller(s) and serves baseline System-11, the baseline building constant-volume primary pump power shall be modeled as 12 W/gpm.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -17487,10 +17487,10 @@
             "rule_id": "22-26",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "For chilled-water systems served by chiller(s) and serves baseline System-11, the baseline building constant-volume primary pump power shall be modeled as 12 W/gpm.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -17616,10 +17616,10 @@
             "rule_id": "22-26",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "For chilled-water systems served by chiller(s) and serves baseline System-11, the baseline building constant-volume primary pump power shall be modeled as 12 W/gpm.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -17744,10 +17744,10 @@
             "rule_id": "22-27",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "Each baseline chiller shall be modeled with separate condenser-water pump interlocked to operate with the associated chiller.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -17890,10 +17890,10 @@
             "rule_id": "22-27",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "Each baseline chiller shall be modeled with separate condenser-water pump interlocked to operate with the associated chiller.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -18036,10 +18036,10 @@
             "rule_id": "22-27",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "Each baseline chiller shall be modeled with separate condenser-water pump interlocked to operate with the associated chiller.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -18165,10 +18165,10 @@
             "rule_id": "22-27",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "Each baseline chiller shall be modeled with separate condenser-water pump interlocked to operate with the associated chiller.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -18294,10 +18294,398 @@
             "rule_id": "22-27",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "Each baseline chiller shall be modeled with separate condenser-water pump interlocked to operate with the associated chiller.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
+            "schema_version": "0.0.29"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "Air Terminal",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System Type 4"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System Type 4",
+                                                "cooling_system": {
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
+                                                },
+                                                "heating_system": {
+                                                    "id": "HP Coil 1",
+                                                    "type": "HEAT_PUMP"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-28-a": {
+        "Section": 22,
+        "Rule": 28,
+        "Test": "a",
+        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is correctly modeled with a condenser pump that is constant volume.  Expected Result: PASS",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "22-28",
+            "ruleset_reference": "G3.1.3.11",
+            "rule_description": "The baseline building design condenser-water pump shall be modeled as constant volume.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.0.29"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 7",
+                                                "cooling_system": {
+                                                    "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "chillers": [
+                            {
+                                "id": "Chiller 1",
+                                "cooling_loop": "Chiller Loop 1",
+                                "condensing_loop": "Condensing Loop 1"
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Boiler Pump 1",
+                                "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Chiller Pump 1",
+                                "loop_or_piping": "Chiller Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
+                            },
+                            {
+                                "id": "Condenser Pump 1",
+                                "loop_or_piping": "Condensing Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            },
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "Condensing Loop 1"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-28-b": {
+        "Section": 22,
+        "Rule": 28,
+        "Test": "b",
+        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is incorrectly modeled with a condenser pumpthat is variable volume.  Expected result: FAIL",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "22-28",
+            "ruleset_reference": "G3.1.3.11",
+            "rule_description": "The baseline building design condenser-water pump shall be modeled as constant volume.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.0.29"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 7",
+                                                "cooling_system": {
+                                                    "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "chillers": [
+                            {
+                                "id": "Chiller 1",
+                                "cooling_loop": "Chiller Loop 1",
+                                "condensing_loop": "Condensing Loop 1"
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Boiler Pump 1",
+                                "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Chiller Pump 1",
+                                "loop_or_piping": "Chiller Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
+                            },
+                            {
+                                "id": "Condenser Pump 1",
+                                "loop_or_piping": "Condensing Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            },
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "Condensing Loop 1"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-28-c": {
+        "Section": 22,
+        "Rule": 28,
+        "Test": "c",
+        "test_description": "Baseline building has one zone.  HVAC is system type 4 and does not have a chilled water plant.  Expected Result: Not Applicable",
+        "expected_rule_outcome": "not_applicable",
+        "standard": {
+            "rule_id": "22-28",
+            "ruleset_reference": "G3.1.3.11",
+            "rule_description": "The baseline building design condenser-water pump shall be modeled as constant volume.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -18374,10 +18762,10 @@
             "rule_id": "22-29",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "For chilled-water systems served by chiller(s) and does not serve baseline System-11, condenser-water pump power shall be 19 W/gpm.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -18524,10 +18912,10 @@
             "rule_id": "22-29",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "For chilled-water systems served by chiller(s) and does not serve baseline System-11, condenser-water pump power shall be 19 W/gpm.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -18674,10 +19062,10 @@
             "rule_id": "22-29",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "For chilled-water systems served by chiller(s) and does not serve baseline System-11, condenser-water pump power shall be 19 W/gpm.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -18790,10 +19178,10 @@
             "rule_id": "22-29",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "For chilled-water systems served by chiller(s) and does not serve baseline System-11, condenser-water pump power shall be 19 W/gpm.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -18906,10 +19294,10 @@
             "rule_id": "22-29",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "For chilled-water systems served by chiller(s) and does not serve baseline System-11, condenser-water pump power shall be 19 W/gpm.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -19034,10 +19422,10 @@
             "rule_id": "22-30",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "For chilled-water systems served by chiller(s) and serves baseline System-11, condenser-water pump power shall be 22 W/gpm.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -19150,10 +19538,10 @@
             "rule_id": "22-30",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "For chilled-water systems served by chiller(s) and serves baseline System-11, condenser-water pump power shall be 22 W/gpm.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -19266,10 +19654,10 @@
             "rule_id": "22-30",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "For chilled-water systems served by chiller(s) and serves baseline System-11, condenser-water pump power shall be 22 W/gpm.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -19399,10 +19787,10 @@
             "rule_id": "22-30",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "For chilled-water systems served by chiller(s) and serves baseline System-11, condenser-water pump power shall be 22 W/gpm.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -19532,10 +19920,10 @@
             "rule_id": "22-30",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "For chilled-water systems served by chiller(s) and serves baseline System-11, condenser-water pump power shall be 22 W/gpm.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -19677,10 +20065,10 @@
             "rule_id": "22-31",
             "ruleset_reference": "G3.1.3.7",
             "rule_description": "The baseline building design\u2019s chiller plant shall be modeled with chillers having the number as indicated in Table G3.1.3.7 as a function of building peak cooling load",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -19834,10 +20222,10 @@
             "rule_id": "22-31",
             "ruleset_reference": "G3.1.3.7",
             "rule_description": "The baseline building design\u2019s chiller plant shall be modeled with chillers having the number as indicated in Table G3.1.3.7 as a function of building peak cooling load",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -19995,10 +20383,10 @@
             "rule_id": "22-31",
             "ruleset_reference": "G3.1.3.7",
             "rule_description": "The baseline building design\u2019s chiller plant shall be modeled with chillers having the number as indicated in Table G3.1.3.7 as a function of building peak cooling load",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -20156,10 +20544,10 @@
             "rule_id": "22-31",
             "ruleset_reference": "G3.1.3.7",
             "rule_description": "The baseline building design\u2019s chiller plant shall be modeled with chillers having the number as indicated in Table G3.1.3.7 as a function of building peak cooling load",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -20313,10 +20701,10 @@
             "rule_id": "22-31",
             "ruleset_reference": "G3.1.3.7",
             "rule_description": "The baseline building design\u2019s chiller plant shall be modeled with chillers having the number as indicated in Table G3.1.3.7 as a function of building peak cooling load",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -20478,10 +20866,10 @@
             "rule_id": "22-31",
             "ruleset_reference": "G3.1.3.7",
             "rule_description": "The baseline building design\u2019s chiller plant shall be modeled with chillers having the number as indicated in Table G3.1.3.7 as a function of building peak cooling load",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -20639,10 +21027,10 @@
             "rule_id": "22-31",
             "ruleset_reference": "G3.1.3.7",
             "rule_description": "The baseline building design\u2019s chiller plant shall be modeled with chillers having the number as indicated in Table G3.1.3.7 as a function of building peak cooling load",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -20757,10 +21145,10 @@
             "rule_id": "22-32",
             "ruleset_reference": "Section G3.1.2.1",
             "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for part load, in accordance with Tables G3.5.3.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -20906,10 +21294,10 @@
             "rule_id": "22-32",
             "ruleset_reference": "Section G3.1.2.1",
             "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for part load, in accordance with Tables G3.5.3.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -21055,10 +21443,10 @@
             "rule_id": "22-32",
             "ruleset_reference": "Section G3.1.2.1",
             "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for part load, in accordance with Tables G3.5.3.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -21204,10 +21592,10 @@
             "rule_id": "22-32",
             "ruleset_reference": "Section G3.1.2.1",
             "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for part load, in accordance with Tables G3.5.3.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -21360,10 +21748,10 @@
             "rule_id": "22-32",
             "ruleset_reference": "Section G3.1.2.1",
             "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for part load, in accordance with Tables G3.5.3.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -21516,10 +21904,10 @@
             "rule_id": "22-32",
             "ruleset_reference": "Section G3.1.2.1",
             "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for part load, in accordance with Tables G3.5.3.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -21672,10 +22060,10 @@
             "rule_id": "22-32",
             "ruleset_reference": "Section G3.1.2.1",
             "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for part load, in accordance with Tables G3.5.3.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -21769,10 +22157,10 @@
             "rule_id": "22-33",
             "ruleset_reference": "Section G3.1.3.2",
             "rule_description": "Baseline chilled water system that does not use purchased chilled water must only have no more than one CHW plant.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -21921,10 +22309,10 @@
             "rule_id": "22-33",
             "ruleset_reference": "Section G3.1.3.2",
             "rule_description": "Baseline chilled water system that does not use purchased chilled water must only have no more than one CHW plant.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -22077,10 +22465,10 @@
             "rule_id": "22-33",
             "ruleset_reference": "Section G3.1.3.2",
             "rule_description": "Baseline chilled water system that does not use purchased chilled water must only have no more than one CHW plant.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -22222,10 +22610,10 @@
             "rule_id": "22-33",
             "ruleset_reference": "Section G3.1.3.2",
             "rule_description": "Baseline chilled water system that does not use purchased chilled water must only have no more than one CHW plant.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -22356,10 +22744,10 @@
             "rule_id": "22-33",
             "ruleset_reference": "Section G3.1.3.2",
             "rule_description": "Baseline chilled water system that does not use purchased chilled water must only have no more than one CHW plant.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -22507,10 +22895,10 @@
             "rule_id": "22-33",
             "ruleset_reference": "Section G3.1.3.2",
             "rule_description": "Baseline chilled water system that does not use purchased chilled water must only have no more than one CHW plant.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -22642,10 +23030,10 @@
             "rule_id": "22-34",
             "ruleset_reference": "Section G3.1.2.2",
             "rule_description": "For baseline cooling chilled water plant that is served by chiller(s), the capacity shall be based on coincident loads.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -22791,10 +23179,10 @@
             "rule_id": "22-34",
             "ruleset_reference": "Section G3.1.2.2",
             "rule_description": "For baseline cooling chilled water plant that is served by chiller(s), the capacity shall be based on coincident loads.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -22940,10 +23328,10 @@
             "rule_id": "22-34",
             "ruleset_reference": "Section G3.1.2.2",
             "rule_description": "For baseline cooling chilled water plant that is served by chiller(s), the capacity shall be based on coincident loads.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -23091,10 +23479,10 @@
             "rule_id": "22-34",
             "ruleset_reference": "Section G3.1.2.2",
             "rule_description": "For baseline cooling chilled water plant that is served by chiller(s), the capacity shall be based on coincident loads.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -23242,10 +23630,10 @@
             "rule_id": "22-34",
             "ruleset_reference": "Section G3.1.2.2",
             "rule_description": "For baseline cooling chilled water plant that is served by chiller(s), the capacity shall be based on coincident loads.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -25603,10 +25991,10 @@
             "rule_id": "22-40",
             "ruleset_reference": "Section G3.1.1.1 & G3.1.1.3.1",
             "rule_description": "For systems using purchased chilled water, the cooling source shall be modeled based on G3.1.1.3 as purchased chilled water in both the proposed design and baseline building design. On-site chillers and direct expansion equipment shall not be modeled in the baseline building design.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -25850,10 +26238,10 @@
             "rule_id": "22-40",
             "ruleset_reference": "Section G3.1.1.1 & G3.1.1.3.1",
             "rule_description": "For systems using purchased chilled water, the cooling source shall be modeled based on G3.1.1.3 as purchased chilled water in both the proposed design and baseline building design. On-site chillers and direct expansion equipment shall not be modeled in the baseline building design.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -26128,10 +26516,10 @@
             "rule_id": "22-40",
             "ruleset_reference": "Section G3.1.1.1 & G3.1.1.3.1",
             "rule_description": "For systems using purchased chilled water, the cooling source shall be modeled based on G3.1.1.3 as purchased chilled water in both the proposed design and baseline building design. On-site chillers and direct expansion equipment shall not be modeled in the baseline building design.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -26299,10 +26687,10 @@
             "rule_id": "22-40",
             "ruleset_reference": "Section G3.1.1.1 & G3.1.1.3.1",
             "rule_description": "For systems using purchased chilled water, the cooling source shall be modeled based on G3.1.1.3 as purchased chilled water in both the proposed design and baseline building design. On-site chillers and direct expansion equipment shall not be modeled in the baseline building design.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {

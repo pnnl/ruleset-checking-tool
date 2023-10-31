@@ -9,10 +9,10 @@
             "rule_id": "22-40",
             "ruleset_reference": "Section G3.1.1.1 & G3.1.1.3.1",
             "rule_description": "For systems using purchased chilled water, the cooling source shall be modeled based on G3.1.1.3 as purchased chilled water in both the proposed design and baseline building design. On-site chillers and direct expansion equipment shall not be modeled in the baseline building design.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -256,10 +256,10 @@
             "rule_id": "22-40",
             "ruleset_reference": "Section G3.1.1.1 & G3.1.1.3.1",
             "rule_description": "For systems using purchased chilled water, the cooling source shall be modeled based on G3.1.1.3 as purchased chilled water in both the proposed design and baseline building design. On-site chillers and direct expansion equipment shall not be modeled in the baseline building design.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -534,10 +534,10 @@
             "rule_id": "22-40",
             "ruleset_reference": "Section G3.1.1.1 & G3.1.1.3.1",
             "rule_description": "For systems using purchased chilled water, the cooling source shall be modeled based on G3.1.1.3 as purchased chilled water in both the proposed design and baseline building design. On-site chillers and direct expansion equipment shall not be modeled in the baseline building design.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -705,10 +705,10 @@
             "rule_id": "22-40",
             "ruleset_reference": "Section G3.1.1.1 & G3.1.1.3.1",
             "rule_description": "For systems using purchased chilled water, the cooling source shall be modeled based on G3.1.1.3 as purchased chilled water in both the proposed design and baseline building design. On-site chillers and direct expansion equipment shall not be modeled in the baseline building design.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {

@@ -9,10 +9,10 @@
             "rule_id": "22-10",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "For Baseline chilled water system with cooling capacity less than 300ton, the secondary pump shall be modeled as riding the pump curve.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -155,10 +155,10 @@
             "rule_id": "22-10",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "For Baseline chilled water system with cooling capacity less than 300ton, the secondary pump shall be modeled as riding the pump curve.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -301,10 +301,10 @@
             "rule_id": "22-10",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "For Baseline chilled water system with cooling capacity less than 300ton, the secondary pump shall be modeled as riding the pump curve.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -430,10 +430,10 @@
             "rule_id": "22-10",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "For Baseline chilled water system with cooling capacity less than 300ton, the secondary pump shall be modeled as riding the pump curve.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -559,10 +559,10 @@
             "rule_id": "22-10",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "For Baseline chilled water system with cooling capacity less than 300ton, the secondary pump shall be modeled as riding the pump curve.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -704,10 +704,10 @@
             "rule_id": "22-10",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "For Baseline chilled water system with cooling capacity less than 300ton, the secondary pump shall be modeled as riding the pump curve.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {

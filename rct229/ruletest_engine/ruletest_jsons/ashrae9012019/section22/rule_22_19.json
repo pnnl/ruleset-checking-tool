@@ -9,10 +9,10 @@
             "rule_id": "22-19",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline cooling tower shall be controlled to maintain a leaving water temperature, where weather permits, as specified in Table G3.1.3.11",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -168,10 +168,10 @@
             "rule_id": "22-19",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline cooling tower shall be controlled to maintain a leaving water temperature, where weather permits, as specified in Table G3.1.3.11",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -327,10 +327,10 @@
             "rule_id": "22-19",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline cooling tower shall be controlled to maintain a leaving water temperature, where weather permits, as specified in Table G3.1.3.11",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -469,10 +469,10 @@
             "rule_id": "22-19",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline cooling tower shall be controlled to maintain a leaving water temperature, where weather permits, as specified in Table G3.1.3.11",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -611,10 +611,10 @@
             "rule_id": "22-19",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline cooling tower shall be controlled to maintain a leaving water temperature, where weather permits, as specified in Table G3.1.3.11",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
