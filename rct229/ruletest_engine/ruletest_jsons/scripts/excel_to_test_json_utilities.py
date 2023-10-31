@@ -48,6 +48,9 @@ def get_rmr_key_list_from_tcd_key_list(tcd_key_list):
     for index, unclean_key in enumerate(rmr_schema_key_list):
         rmr_schema_key_list[index] = remove_index_references_from_key(unclean_key)
 
+    # Remove /xa0 ASCII character from key lists that are sometimes introduced unexpectedly from spreadsheets
+    rmr_schema_key_list = [item for item in rmr_schema_key_list if item != '\xa0']
+
     return rmr_schema_key_list
 
 
@@ -252,6 +255,10 @@ def create_dictionary_from_excel(spreadsheet_name, sheet_name, rule_set):
                 # row_value = what will be set to the dictionary's key/value pair
                 row_value = rule_value_list[row_i]
 
+                # Ignore values that somehow return a blank ASCII string = '\xa0'
+                if row_value == '\xa0':
+                    continue
+
                 # Skip empty rows
                 if not isinstance(row_value, str):
                     if math.isnan(row_value):
@@ -262,6 +269,11 @@ def create_dictionary_from_excel(spreadsheet_name, sheet_name, rule_set):
 
                 for key in keys:
                     key_value = keys_df[key][row_i]
+
+                    # Ignore values that somehow return a blank ASCII string = '\xa0'
+                    if key_value == '\xa0':
+                        continue
+
                     if isinstance(key_value, str):
                         # If the key includes a JSON_PATH, parse for the short hand enumeration name and adjust the key list
                         if "JSON_PATH" in key_value:

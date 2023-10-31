@@ -185,7 +185,7 @@ def quantify_rmr(rmr):
 
 
 def return_json_schema_reference(object_dict, key):
-    """This function takes a schema object's dictionary, passes it a key, and returns it's respective reference
+    """This function takes a schema object's dictionary, passes it a key, and returns its respective reference
     definition dictionary. For example, the Building object in ASHRAE229.schema.json dictionary has a
     "building_segments" key. Passing in the Building dictionary with the "building_segments" key would return
     the definition for the BuildingSegment element in the ASHRAE229 schema.
