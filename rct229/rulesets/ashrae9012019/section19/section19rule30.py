@@ -23,7 +23,7 @@ class Section19Rule30(RuleDefinitionListIndexedBase):
             each_rule=Section19Rule30.HVACRule(),
             index_rmr="baseline",
             id="19-30",
-            description="or Systems 6 and 8, only the terminal-unit fan and reheat coil shall be energized to meet heating set point during unoccupied hours in the baseline design.",
+            description="For Systems 6 and 8, only the terminal-unit fan and reheat coil shall be energized to meet heating set point during unoccupied hours in the baseline design.",
             ruleset_section_title="HVAC - General",
             standard_section="Exception to Section G3.1.2.4",
             is_primary_rule=False,
@@ -60,4 +60,4 @@ class Section19Rule30(RuleDefinitionListIndexedBase):
             hvac_b = context.baseline
             hvac_id_b = hvac_b["id"]
 
-            return f"FOR {hvac_id_b} perform manual check that only the terminal-unit fan and reheat coil are being energized to meet the heating set point during unoccupied hours."
+            return f"For {hvac_id_b} perform manual check that only the terminal-unit fan and reheat coil are being energized to meet the heating set point during unoccupied hours."
