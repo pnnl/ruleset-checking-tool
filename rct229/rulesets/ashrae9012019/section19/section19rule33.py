@@ -38,16 +38,21 @@ class Section19Rule33(RuleDefinitionListIndexedBase):
             get_proposed_hvac_modeled_with_virtual_heating(rmd_u, rmd_p)
         )
 
-        applicable_HVAC_systems_list_p = (
-            applicable_HVAC_systems_cooling_list_p
-            + applicable_HVAC_systems_heating_list_p
+        applicable_HVAC_systems_list_p = list(
+            set(
+                (
+                    applicable_HVAC_systems_cooling_list_p
+                    + applicable_HVAC_systems_heating_list_p
+                )
+            )
         )
+
         return {"applicable_HVAC_systems_list_p": applicable_HVAC_systems_list_p}
 
     class HVACRule(PartialRuleDefinition):
         def __init__(self):
             super(Section19Rule33.HVACRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(True, False, True),
+                rmrs_used=UserBaselineProposedVals(False, False, True),
             )
 
         def applicability_check(self, context, calc_vals, data):
@@ -58,9 +63,6 @@ class Section19Rule33(RuleDefinitionListIndexedBase):
             return hvac_id_p in applicable_HVAC_systems_list_p
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
-            hvac_b = context.baseline
-            hvac_id_b = hvac_b["id"]
-
             hvac_p = context.proposed
             hvac_id_p = hvac_p["id"]
 
@@ -71,6 +73,6 @@ class Section19Rule33(RuleDefinitionListIndexedBase):
             return (
                 f"It appears that {hvac_id_p} is only being simulated in the P_RMI to meet the requirements described in Section G3.1-10 HVAC Systems proposed column c and d for heating and/or cooling. "
                 f"Check that the heating and/or cooling system fans are simulated to be cycled ON and OFF to meet heating and/or cooling loads during occupied hours as applicable. "
-                f"Note that per the RMD the fan associated with {hvac_id_b} is operating as {operation_during_occupied_p} during occupied hours. "
+                f"Note that per the RMD the fan associated with {hvac_p} is operating as {operation_during_occupied_p} during occupied hours. "
                 f"This may require further investigation if only heating or cooling is being simulated to meet Section G3.1-10 HVAC Systems proposed column c or d because different fan operation will be required depending on whether the system is operating in heating or cooling mode. "
             )
