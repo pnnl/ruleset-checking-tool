@@ -9,10 +9,10 @@
             "rule_id": "21-3",
             "ruleset_reference": "G3.1.2.2",
             "rule_description": "When the baseline building is modeled with a hot water or chilled water plant the plant shall be sized based on coincident loads.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -158,10 +158,10 @@
             "rule_id": "21-3",
             "ruleset_reference": "G3.1.2.2",
             "rule_description": "When the baseline building is modeled with a hot water or chilled water plant the plant shall be sized based on coincident loads.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -307,10 +307,10 @@
             "rule_id": "21-3",
             "ruleset_reference": "G3.1.2.2",
             "rule_description": "When the baseline building is modeled with a hot water or chilled water plant the plant shall be sized based on coincident loads.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -429,10 +429,10 @@
             "rule_id": "21-3",
             "ruleset_reference": "G3.1.2.2",
             "rule_description": "When the baseline building is modeled with a hot water or chilled water plant the plant shall be sized based on coincident loads.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -551,10 +551,10 @@
             "rule_id": "21-3",
             "ruleset_reference": "G3.1.2.2",
             "rule_description": "When the baseline building is modeled with a hot water or chilled water plant the plant shall be sized based on coincident loads.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {

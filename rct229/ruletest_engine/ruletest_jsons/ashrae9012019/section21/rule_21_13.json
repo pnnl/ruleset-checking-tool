@@ -9,10 +9,10 @@
             "rule_id": "21-13",
             "ruleset_reference": "G3.1.3.5",
             "rule_description": "When the baseline building uses boiler(s) or purchased hot water, the hot water pumping system shall be modeled with a minimum turndown ratio of 0.25.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -158,10 +158,10 @@
             "rule_id": "21-13",
             "ruleset_reference": "G3.1.3.5",
             "rule_description": "When the baseline building uses boiler(s) or purchased hot water, the hot water pumping system shall be modeled with a minimum turndown ratio of 0.25.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -307,10 +307,10 @@
             "rule_id": "21-13",
             "ruleset_reference": "G3.1.3.5",
             "rule_description": "When the baseline building uses boiler(s) or purchased hot water, the hot water pumping system shall be modeled with a minimum turndown ratio of 0.25.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -405,10 +405,10 @@
             "rule_id": "21-13",
             "ruleset_reference": "G3.1.3.5",
             "rule_description": "When the baseline building uses boiler(s) or purchased hot water, the hot water pumping system shall be modeled with a minimum turndown ratio of 0.25.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -503,10 +503,10 @@
             "rule_id": "21-13",
             "ruleset_reference": "G3.1.3.5",
             "rule_description": "When the baseline building uses boiler(s) or purchased hot water, the hot water pumping system shall be modeled with a minimum turndown ratio of 0.25.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {

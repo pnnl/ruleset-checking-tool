@@ -9,10 +9,10 @@
             "rule_id": "21-16",
             "ruleset_reference": "G3.1.3.2",
             "rule_description": "Baseline shall have only one heating hot water plant.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -154,10 +154,10 @@
             "rule_id": "21-16",
             "ruleset_reference": "G3.1.3.2",
             "rule_description": "Baseline shall have only one heating hot water plant.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -303,10 +303,10 @@
             "rule_id": "21-16",
             "ruleset_reference": "G3.1.3.2",
             "rule_description": "Baseline shall have only one heating hot water plant.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -421,10 +421,10 @@
             "rule_id": "21-16",
             "ruleset_reference": "G3.1.3.2",
             "rule_description": "Baseline shall have only one heating hot water plant.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -543,10 +543,10 @@
             "rule_id": "21-16",
             "ruleset_reference": "G3.1.3.2",
             "rule_description": "Baseline shall have only one heating hot water plant.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
