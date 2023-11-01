@@ -77,7 +77,7 @@ class Section19Rule16((RuleDefinitionListIndexedBase)):
             )
         }
 
-        zone_hvac_has_non_mech_cooling_bool_p = any(
+        hvac_has_non_mech_cooling_bool_p = any(
             [
                 getattr_(hvac_p, "HVAC", "cooling_system", "type")
                 == COOLING_SYSTEM.NON_MECHANICAL
@@ -92,7 +92,7 @@ class Section19Rule16((RuleDefinitionListIndexedBase)):
             "baseline_system_types_dict": get_baseline_system_types(rmd_b),
             "hvac_sys_repo_b": hvac_sys_repo_b,
             "hvac_sys_repo_p": hvac_sys_repo_p,
-            "zone_hvac_has_non_mech_cooling_bool_p": zone_hvac_has_non_mech_cooling_bool_p,
+            "hvac_has_non_mech_cooling_bool_p": hvac_has_non_mech_cooling_bool_p,
         }
 
     class ZoneRule(PartialRuleDefinition):
@@ -110,20 +110,21 @@ class Section19Rule16((RuleDefinitionListIndexedBase)):
 
             hvac_sys_list_b = data["hvac_sys_repo_b"][zone_id_b]
             hvac_sys_list_p = data["hvac_sys_repo_p"][zone_id_p]
-            zone_hvac_has_non_mech_cooling_bool_p = data[
-                "zone_hvac_has_non_mech_cooling_bool_p"
+            hvac_has_non_mech_cooling_bool_p = data[
+                "hvac_has_non_mech_cooling_bool_p"
             ]
+
 
             return {
                 "hvac_sys_list_b": hvac_sys_list_b,
                 "hvac_sys_list_p": hvac_sys_list_p,
-                "zone_hvac_has_non_mech_cooling_bool_p": zone_hvac_has_non_mech_cooling_bool_p,
+                "hvac_has_non_mech_cooling_bool_p": hvac_has_non_mech_cooling_bool_p,
             }
 
         def applicability_check(self, context, calc_vals, data):
             zone_p = context.proposed
-            zone_hvac_has_non_mech_cooling_bool_p = calc_vals[
-                "zone_hvac_has_non_mech_cooling_bool_p"
+            hvac_has_non_mech_cooling_bool_p = calc_vals[
+                "hvac_has_non_mech_cooling_bool_p"
             ]
             baseline_system_types_dict = data["baseline_system_types_dict"]
             hvac_sys_list_b = calc_vals["hvac_sys_list_b"]
@@ -140,7 +141,7 @@ class Section19Rule16((RuleDefinitionListIndexedBase)):
                     zone_p.get("non_mechanical_cooling_fan_airflow") is not None
                     and zone_p["non_mechanical_cooling_fan_airflow"] != ZERO.FLOW
                 )
-                or zone_hvac_has_non_mech_cooling_bool_p
+                or hvac_has_non_mech_cooling_bool_p
             ) and any(
                 [
                     baseline_system_type_compare(
