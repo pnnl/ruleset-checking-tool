@@ -26295,7 +26295,8 @@
                                 "id": "Chilled Water Loop 1",
                                 "type": "COOLING"
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             },
@@ -26562,7 +26563,8 @@
                                 "loop": "Chilled Water Loop 1",
                                 "type": "CHILLED_WATER"
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             },
@@ -26790,7 +26792,8 @@
                                 "loop": "Chilled Water Loop 1",
                                 "type": "CHILLED_WATER"
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             },
@@ -26936,7 +26939,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             },
