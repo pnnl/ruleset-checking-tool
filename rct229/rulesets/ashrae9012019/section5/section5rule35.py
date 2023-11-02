@@ -1,14 +1,9 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
-from rct229.rulesets.ashrae9012019 import BASELINE_0
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_building_segment_skylight_roof_areas_dict import (
-    get_building_segment_skylight_roof_areas_dict,
-)
-from rct229.utils.pint_utils import ZERO
-from rct229.utils.std_comparisons import std_equal
-
-SKYLIGHT_THRESHOLD = 0.03
+from rct229.rulesets.ashrae9012019 import PROPOSED
+from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.match_lists import match_lists_by_id
 
 
 class Section5Rule35(RuleDefinitionListIndexedBase):
@@ -19,96 +14,58 @@ class Section5Rule35(RuleDefinitionListIndexedBase):
             rmrs_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            required_fields={
-                "$": ["weather"],
-                "weather": ["climate_zone"],
-            },
             each_rule=Section5Rule35.BuildingRule(),
-            index_rmr=BASELINE_0,
+            index_rmr=PROPOSED,
             id="5-35",
-            description="If the skylight area of the proposed design is greater than 3%, baseline skylight area shall be decreased in all roof components in which skylights are located to reach 3%.",
+            description="The infiltration shall be modeled using the same methodology and adjustments for weather and building operation in both the proposed design and the baseline building design.",
             ruleset_section_title="Envelope",
-            standard_section="Section G3.1-5(e) Building Envelope Modeling Requirements for the Baseline building",
+            standard_section="Section G3.1-5(b) Building Envelope Modeling Requirements for the Proposed design and Baseline",
             is_primary_rule=True,
-            list_path="ruleset_model_descriptions[0].buildings[*]",
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
+            rmr_context="ruleset_model_descriptions/0/buildings",
         )
 
-    class BuildingRule(RuleDefinitionListIndexedBase):
+    class BuildingRule(RuleDefinitionBase):
         def __init__(self):
             super(Section5Rule35.BuildingRule, self).__init__(
                 rmrs_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
-                each_rule=Section5Rule35.BuildingRule.BuildingSegmentRule(),
-                index_rmr=BASELINE_0,
-                list_path="building_segments[*]",
+                required_fields={
+                    "$.building_segments[*].zones[*]": ["infiltration"],
+                    "$.building_segments[*].zones[*].infiltration": [
+                        "algorithm_name",
+                        "modeling_method",
+                    ],
+                },
             )
 
-        def create_data(self, context, data=None):
-            building_b = context.BASELINE_0
-            building_p = context.PROPOSED
-            return {
-                "skylight_roof_areas_dictionary_b": get_building_segment_skylight_roof_areas_dict(
-                    data["climate_zone"], building_b
-                ),
-                "skylight_roof_areas_dictionary_p": get_building_segment_skylight_roof_areas_dict(
-                    data["climate_zone"], building_p
-                ),
-            }
+        def get_calc_vals(self, context, data=None):
+            failing_infiltration_zone_ids = []
+            baseline_zones = find_all(
+                "$.building_segments[*].zones[*]", context.BASELINE_0
+            )
+            proposed_zones = find_all(
+                "$.building_segments[*].zones[*]", context.PROPOSED
+            )
 
-        class BuildingSegmentRule(RuleDefinitionBase):
-            def __init__(self):
-                super(Section5Rule35.BuildingRule.BuildingSegmentRule, self).__init__(
-                    rmrs_used=produce_ruleset_model_instance(
-                        USER=False, BASELINE_0=True, PROPOSED=True
-                    ),
-                )
+            # This assumes that the surfaces all match
+            matched_baseline_zones = match_lists_by_id(proposed_zones, baseline_zones)
+            proposed_baseline_zone_pairs = zip(proposed_zones, matched_baseline_zones)
+            for p_zone, b_zone in proposed_baseline_zone_pairs:
+                # need a method like match object
+                p_zone_infiltration = p_zone["infiltration"]
+                # b_zone could be NONE - add a check.
+                b_zone_infiltration = b_zone["infiltration"]
 
-            def is_applicable(self, context, data=None):
-                building_p = context.PROPOSED
-                skylight_roof_areas_dictionary_p = data[
-                    "skylight_roof_areas_dictionary_p"
-                ]
-                total_skylight_area = skylight_roof_areas_dictionary_p[
-                    building_p["id"]
-                ]["total_skylight_area"]
-                total_envelope_roof_area = skylight_roof_areas_dictionary_p[
-                    building_p["id"]
-                ]["total_envelope_roof_area"]
-                # avoid zero division
-                return (
-                    total_envelope_roof_area > ZERO.AREA
-                    and total_skylight_area / total_envelope_roof_area
-                    > SKYLIGHT_THRESHOLD
-                )
+                if (
+                    p_zone_infiltration["algorithm_name"]
+                    != b_zone_infiltration["algorithm_name"]
+                    or p_zone_infiltration["modeling_method"]
+                    != b_zone_infiltration["modeling_method"]
+                ):
+                    failing_infiltration_zone_ids.append(p_zone["id"])
 
-            def get_calc_vals(self, context, data=None):
-                building_segment_b = context.BASELINE_0
-                skylight_roof_areas_dictionary_b = data[
-                    "skylight_roof_areas_dictionary_b"
-                ]
-                skylight_roof_areas_dictionary_p = data[
-                    "skylight_roof_areas_dictionary_p"
-                ]
+            return {"failing_infiltration_zone_ids": failing_infiltration_zone_ids}
 
-                return {
-                    "skylight_roof_ratio_b": skylight_roof_areas_dictionary_b[
-                        building_segment_b["id"]
-                    ]["total_skylight_area"]
-                    / skylight_roof_areas_dictionary_b[building_segment_b["id"]][
-                        "total_envelope_roof_area"
-                    ],
-                    "skylight_total_roof_ratio_p": sum(
-                        component["total_skylight_area"]
-                        for component in skylight_roof_areas_dictionary_p.values()
-                    )
-                    / sum(
-                        component["total_envelope_roof_area"]
-                        for component in skylight_roof_areas_dictionary_p.values()
-                    ),
-                }
-
-            def rule_check(self, context, calc_vals=None, data=None):
-                skylight_roof_ratio_b = calc_vals["skylight_roof_ratio_b"]
-                return std_equal(skylight_roof_ratio_b, 0.03)
+        def rule_check(self, context, calc_vals=None, data=None):
+            return len(calc_vals["failing_infiltration_zone_ids"]) == 0

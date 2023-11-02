@@ -31,7 +31,7 @@ class Section5Rule7(RuleDefinitionListIndexedBase):
             each_rule=Section5Rule7.BuildingRule(),
             index_rmr=BASELINE_0,
             id="5-7",
-            description="Baseline below-grade walls shall conform with assemblies detailed in Appendix A Concrete block, A4)",
+            description="Baseline above-grade wall assemblies must conform with assemblies detailed in  Appendix A (Steel-framed A3.3) ",
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=False,
@@ -51,7 +51,7 @@ class Section5Rule7(RuleDefinitionListIndexedBase):
             )
 
         def create_data(self, context, data=None):
-            building_b = context.BASELINE_0
+            building_b = context.BASELINE_0_0
             return {
                 "surface_conditioning_category_dict": get_surface_conditioning_category_dict(
                     data["climate_zone"], building_b
@@ -60,7 +60,7 @@ class Section5Rule7(RuleDefinitionListIndexedBase):
 
         def list_filter(self, context_item, data):
             surface_b = context_item.BASELINE_0
-            return get_opaque_surface_type(surface_b) == OST.BELOW_GRADE_WALL
+            return get_opaque_surface_type(surface_b) == OST.ABOVE_GRADE_WALL
 
         class SurfaceRule(PartialRuleDefinition):
             def __init__(self):

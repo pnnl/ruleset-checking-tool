@@ -21,17 +21,17 @@ UNDETERMINED_MSG = "Roof surface solar reflectance in the proposed model {absorp
 PASS_DIFFERS_MSG_REGULATED = "Roof surface solar reflectance is equal to the prescribed default value of 0.3 but differs from the solar reflectance in the user model {absorptance_solar_exterior}"
 
 
-class Section5Rule43(RuleDefinitionListIndexedBase):
-    """Rule 43 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
+class Section5Rule33(RuleDefinitionListIndexedBase):
+    """Rule 33 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule43, self).__init__(
+        super(Section5Rule33, self).__init__(
             rmrs_used=produce_ruleset_model_instance(
                 USER=True, BASELINE_0=False, PROPOSED=True
             ),
-            each_rule=Section5Rule43.BuildingRule(),
+            each_rule=Section5Rule33.BuildingRule(),
             index_rmr=PROPOSED,
-            id="5-43",
+            id="5-33",
             description="The proposed roof surfaces shall be modeled using the same solar reflectance as in the user "
             "model if the aged test data are available, or equal to 0.7 default reflectance",
             ruleset_section_title="Envelope",
@@ -43,12 +43,12 @@ class Section5Rule43(RuleDefinitionListIndexedBase):
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section5Rule43.BuildingRule, self).__init__(
+            super(Section5Rule33.BuildingRule, self).__init__(
                 rmrs_used=produce_ruleset_model_instance(
                     USER=True, BASELINE_0=False, PROPOSED=True
                 ),
-                each_rule=Section5Rule43.BuildingRule.RoofRule(),
-                index_rmr="proposed",
+                each_rule=Section5Rule33.BuildingRule.RoofRule(),
+                index_rmr=PROPOSED,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
 
@@ -70,7 +70,7 @@ class Section5Rule43(RuleDefinitionListIndexedBase):
 
         class RoofRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section5Rule43.BuildingRule.RoofRule, self).__init__(
+                super(Section5Rule33.BuildingRule.RoofRule, self).__init__(
                     rmrs_used=produce_ruleset_model_instance(
                         USER=True, BASELINE_0=False, PROPOSED=True
                     ),

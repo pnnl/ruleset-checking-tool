@@ -19,11 +19,11 @@ from rct229.utils.std_comparisons import std_equal
 TARGET_ABSORPTANCE_SOLAR_EXTERIOR = 0.7
 
 
-class Section5Rule42(RuleDefinitionListIndexedBase):
-    """Rule 42 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
+class Section5Rule32(RuleDefinitionListIndexedBase):
+    """Rule 32 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule42, self).__init__(
+        super(Section5Rule32, self).__init__(
             rmrs_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
@@ -31,7 +31,7 @@ class Section5Rule42(RuleDefinitionListIndexedBase):
                 "$": ["weather"],
                 "weather": ["climate_zone"],
             },
-            each_rule=Section5Rule42.BuildingRule(),
+            each_rule=Section5Rule32.BuildingRule(),
             index_rmr=BASELINE_0,
             id="5-42",
             description=" The baseline roof surfaces shall be modeled using a solar reflectance of 0.30",
@@ -44,11 +44,11 @@ class Section5Rule42(RuleDefinitionListIndexedBase):
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section5Rule42.BuildingRule, self).__init__(
+            super(Section5Rule32.BuildingRule, self).__init__(
                 rmrs_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
-                each_rule=Section5Rule42.BuildingRule.RoofRule(),
+                each_rule=Section5Rule32.BuildingRule.RoofRule(),
                 index_rmr=BASELINE_0,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
@@ -70,7 +70,7 @@ class Section5Rule42(RuleDefinitionListIndexedBase):
 
         class RoofRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section5Rule42.BuildingRule.RoofRule, self).__init__(
+                super(Section5Rule32.BuildingRule.RoofRule, self).__init__(
                     rmrs_used=produce_ruleset_model_instance(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),

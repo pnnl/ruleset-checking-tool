@@ -11,11 +11,11 @@ from rct229.utils.std_comparisons import std_equal
 SKYLIGHT_THRESHOLD = 0.03
 
 
-class Section5Rule24(RuleDefinitionListIndexedBase):
-    """Rule 24 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
+class Section5Rule25(RuleDefinitionListIndexedBase):
+    """Rule 25 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule24, self).__init__(
+        super(Section5Rule25, self).__init__(
             rmrs_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
@@ -23,10 +23,10 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
                 "$": ["weather"],
                 "weather": ["climate_zone"],
             },
-            each_rule=Section5Rule24.BuildingRule(),
+            each_rule=Section5Rule25.BuildingRule(),
             index_rmr=BASELINE_0,
-            id="5-24",
-            description="If skylight area in the proposed design is 3% or less of the roof surface, the skylight area in baseline shall be equal to that in the proposed design.",
+            id="5-25",
+            description="If the skylight area of the proposed design is greater than 3%, baseline skylight area shall be decreased in all roof components in which skylights are located to reach 3%.",
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(e) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
@@ -36,11 +36,11 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section5Rule24.BuildingRule, self).__init__(
+            super(Section5Rule25.BuildingRule, self).__init__(
                 rmrs_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
-                each_rule=Section5Rule24.BuildingRule.BuildingSegmentRule(),
+                each_rule=Section5Rule25.BuildingRule.BuildingSegmentRule(),
                 index_rmr=BASELINE_0,
                 list_path="building_segments[*]",
             )
@@ -59,30 +59,28 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
 
         class BuildingSegmentRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section5Rule24.BuildingRule.BuildingSegmentRule, self).__init__(
+                super(Section5Rule25.BuildingRule.BuildingSegmentRule, self).__init__(
                     rmrs_used=produce_ruleset_model_instance(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
                 )
 
             def is_applicable(self, context, data=None):
-                building_segment_p = context.PROPOSED
+                building_p = context.PROPOSED
                 skylight_roof_areas_dictionary_p = data[
                     "skylight_roof_areas_dictionary_p"
                 ]
-
-                total_skylight_area_p = skylight_roof_areas_dictionary_p[
-                    building_segment_p["id"]
+                total_skylight_area = skylight_roof_areas_dictionary_p[
+                    building_p["id"]
                 ]["total_skylight_area"]
-                total_envelope_roof_area_p = skylight_roof_areas_dictionary_p[
-                    building_segment_p["id"]
+                total_envelope_roof_area = skylight_roof_areas_dictionary_p[
+                    building_p["id"]
                 ]["total_envelope_roof_area"]
                 # avoid zero division
                 return (
-                    total_envelope_roof_area_p > ZERO.AREA
-                    and 0
-                    < total_skylight_area_p / total_envelope_roof_area_p
-                    <= SKYLIGHT_THRESHOLD
+                    total_envelope_roof_area > ZERO.AREA
+                    and total_skylight_area / total_envelope_roof_area
+                    > SKYLIGHT_THRESHOLD
                 )
 
             def get_calc_vals(self, context, data=None):
@@ -113,5 +111,4 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
 
             def rule_check(self, context, calc_vals=None, data=None):
                 skylight_roof_ratio_b = calc_vals["skylight_roof_ratio_b"]
-                skylight_roof_ratio_p = calc_vals["skylight_total_roof_ratio_p"]
-                return std_equal(skylight_roof_ratio_b, skylight_roof_ratio_p)
+                return std_equal(skylight_roof_ratio_b, 0.03)

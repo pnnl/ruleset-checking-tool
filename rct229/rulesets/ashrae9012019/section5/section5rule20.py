@@ -21,17 +21,17 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_ca
     get_surface_conditioning_category_dict,
 )
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.pint_utils import ZERO, CalcQ
+from rct229.utils.pint_utils import ZERO
 
 DOOR = SchemaEnums.schema_enums["SubsurfaceClassificationOptions"].DOOR
-MANUAL_CHECK_REQUIRED_MSG = "Manual review is requested to verify vertical fenestration meets U-factor requirement as per Table G3.4. "
+MANUAL_CHECK_REQUIRED_MSG = "Manual review is requested to verify vertical fenestration meets SHGC requirement as per Table G3.4. "
 
 
-class Section5Rule19(RuleDefinitionListIndexedBase):
-    """Rule 24 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
+class Section5Rule20(RuleDefinitionListIndexedBase):
+    """Rule 20 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule19, self).__init__(
+        super(Section5Rule20, self).__init__(
             rmrs_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
@@ -39,10 +39,10 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
                 "$": ["weather"],
                 "weather": ["climate_zone"],
             },
-            each_rule=Section5Rule19.BuildingRule(),
+            each_rule=Section5Rule20.BuildingRule(),
             index_rmr=BASELINE_0,
-            id="5-19",
-            description="Vertical fenestration U-factors for residential, non-residential and semi-heated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8 for the appropriate WWR in the baseline RMD.",
+            id="5-20",
+            description="Vertical fenestration SHGC shall match the appropriate requirements in Tables G3.4-1 through G3.4-8.",
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(d) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
@@ -53,13 +53,14 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
         rmr_baseline = context.BASELINE_0
         climate_zone = rmr_baseline["weather"]["climate_zone"]
 
-        # TODO It is determined later we will modify this function to RMD level -
-        # The implementation is temporary
-        bldg_scc_wwr_ratio_dict = {}
-        for building_b in find_all(self.list_path, rmr_baseline):
-            bldg_scc_wwr_ratio_dict[
-                building_b["id"]
-            ] = get_building_scc_window_wall_ratios_dict(climate_zone, building_b)
+        # TODO It is determined that later we will modify this function to RMD level -
+        # This implementation is temporary
+        bldg_scc_wwr_ratio_dict = {
+            building_b["id"]: get_building_scc_window_wall_ratios_dict(
+                climate_zone, building_b
+            )
+            for building_b in find_all(self.list_path, rmr_baseline)
+        }
 
         return {
             "climate_zone": rmr_baseline["weather"]["climate_zone"],
@@ -68,11 +69,11 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section5Rule19.BuildingRule, self).__init__(
+            super(Section5Rule20.BuildingRule, self).__init__(
                 rmrs_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
-                each_rule=Section5Rule19.BuildingRule.AboveGradeWallRule(),
+                each_rule=Section5Rule20.BuildingRule.AboveGradeWallRule(),
                 index_rmr=BASELINE_0,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
@@ -91,25 +92,25 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
                         SCC.EXTERIOR_RESIDENTIAL,
                         "VERTICAL GLAZING",
                         wwr=0.1,
-                    )["u_value"]
+                    )["solar_heat_gain_coefficient"]
                     == table_G34_lookup(
                         climate_zone,
                         SCC.EXTERIOR_RESIDENTIAL,
                         "VERTICAL GLAZING",
                         wwr=10.1,
-                    )["u_value"]
+                    )["solar_heat_gain_coefficient"]
                     == table_G34_lookup(
                         climate_zone,
                         SCC.EXTERIOR_RESIDENTIAL,
                         "VERTICAL GLAZING",
                         wwr=20.1,
-                    )["u_value"]
+                    )["solar_heat_gain_coefficient"]
                     == table_G34_lookup(
                         climate_zone,
                         SCC.EXTERIOR_RESIDENTIAL,
                         "VERTICAL GLAZING",
                         wwr=30.1,
-                    )["u_value"]
+                    )["solar_heat_gain_coefficient"]
                 )
                 and (
                     table_G34_lookup(
@@ -117,25 +118,25 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
                         SCC.EXTERIOR_NON_RESIDENTIAL,
                         "VERTICAL GLAZING",
                         wwr=0.1,
-                    )["u_value"]
+                    )["solar_heat_gain_coefficient"]
                     == table_G34_lookup(
                         climate_zone,
                         SCC.EXTERIOR_NON_RESIDENTIAL,
                         "VERTICAL GLAZING",
                         wwr=10.1,
-                    )["u_value"]
+                    )["solar_heat_gain_coefficient"]
                     == table_G34_lookup(
                         climate_zone,
                         SCC.EXTERIOR_NON_RESIDENTIAL,
                         "VERTICAL GLAZING",
                         wwr=20.1,
-                    )["u_value"]
+                    )["solar_heat_gain_coefficient"]
                     == table_G34_lookup(
                         climate_zone,
                         SCC.EXTERIOR_NON_RESIDENTIAL,
                         "VERTICAL GLAZING",
                         wwr=30.1,
-                    )["u_value"]
+                    )["solar_heat_gain_coefficient"]
                 )
                 and (
                     table_G34_lookup(
@@ -143,67 +144,66 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
                         SCC.EXTERIOR_RESIDENTIAL,
                         "VERTICAL GLAZING",
                         wwr=0.1,
-                    )["u_value"]
+                    )["solar_heat_gain_coefficient"]
                     == table_G34_lookup(
                         climate_zone,
                         SCC.EXTERIOR_NON_RESIDENTIAL,
                         "VERTICAL GLAZING",
                         wwr=0.1,
-                    )["u_value"]
+                    )["solar_heat_gain_coefficient"]
                 )
             )
             # get standard code data
-            target_u_factor_mix = (
+            target_shgc_mix = (
                 table_G34_lookup(
                     climate_zone,
                     SCC.EXTERIOR_RESIDENTIAL,
                     "VERTICAL GLAZING",
                     wwr=bldg_scc_wwr_ratio[SCC.EXTERIOR_MIXED],
-                )["u_value"]
+                )["solar_heat_gain_coefficient"]
                 if bldg_scc_wwr_ratio[SCC.EXTERIOR_MIXED] > 0
-                else ZERO.U_FACTOR
+                else None
             )
-            target_u_factor_res = (
+            target_shgc_res = (
                 table_G34_lookup(
                     climate_zone,
                     SCC.EXTERIOR_RESIDENTIAL,
                     "VERTICAL GLAZING",
                     wwr=bldg_scc_wwr_ratio[SCC.EXTERIOR_RESIDENTIAL],
-                )["u_value"]
+                )["solar_heat_gain_coefficient"]
                 if bldg_scc_wwr_ratio[SCC.EXTERIOR_RESIDENTIAL] > 0
-                else ZERO.U_FACTOR
+                else None
             )
-            target_u_factor_nonres = (
+            target_shgc_nonres = (
                 table_G34_lookup(
                     climate_zone,
                     SCC.EXTERIOR_NON_RESIDENTIAL,
                     "VERTICAL GLAZING",
                     wwr=bldg_scc_wwr_ratio[SCC.EXTERIOR_NON_RESIDENTIAL],
-                )["u_value"]
+                )["solar_heat_gain_coefficient"]
                 if bldg_scc_wwr_ratio[SCC.EXTERIOR_NON_RESIDENTIAL] > 0
-                else ZERO.U_FACTOR
+                else None
             )
-            target_u_factor_semiheated = (
+            target_shgc_semiheated = (
                 table_G34_lookup(
                     climate_zone,
                     SCC.SEMI_EXTERIOR,
                     "VERTICAL GLAZING",
                     wwr=bldg_scc_wwr_ratio[SCC.SEMI_EXTERIOR],
-                )["u_value"]
+                )["solar_heat_gain_coefficient"]
                 if bldg_scc_wwr_ratio[SCC.SEMI_EXTERIOR] > 0
-                else ZERO.U_FACTOR
+                else None
             )
-
             return {
                 # TODO this function will likely need to be revised to RMD level later.
                 "scc_dict_b": get_surface_conditioning_category_dict(
                     climate_zone, building_b
                 ),
                 "manual_check_required_flag": manual_check_required_flag,
-                "target_u_factor_mix": target_u_factor_mix,
-                "target_u_factor_res": target_u_factor_res,
-                "target_u_factor_nonres": target_u_factor_nonres,
-                "target_u_factor_semiheated": target_u_factor_semiheated,
+                "target_shgc_mix": target_shgc_mix,
+                "target_shgc_res": target_shgc_res,
+                "target_shgc_nonres": target_shgc_nonres,
+                "target_shgc_semiheated": target_shgc_semiheated,
             }
 
         def list_filter(self, context_item, data=None):
@@ -215,19 +215,17 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
 
         class AboveGradeWallRule(RuleDefinitionListIndexedBase):
             def __init__(self):
-                super(Section5Rule19.BuildingRule.AboveGradeWallRule, self).__init__(
+                super(Section5Rule20.BuildingRule.AboveGradeWallRule, self).__init__(
                     rmrs_used=produce_ruleset_model_instance(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
-                    each_rule=Section5Rule19.BuildingRule.AboveGradeWallRule.SubsurfaceRule(),
+                    each_rule=Section5Rule20.BuildingRule.AboveGradeWallRule.SubsurfaceRule(),
                     index_rmr=BASELINE_0,
                     list_path="subsurfaces[*]",
                     required_fields={
                         "$.subsurfaces[*]": [
                             "classification",
-                            "glazed_area",
-                            "opaque_area",
-                            "u_factor",
+                            "solar_heat_gain_coefficient",
                         ]
                     },
                     manual_check_required_msg=MANUAL_CHECK_REQUIRED_MSG,
@@ -250,15 +248,14 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
 
             def list_filter(self, context_item, data=None):
                 subsurface_b = context_item.BASELINE_0
-                return (
-                    subsurface_b["classification"] != DOOR
-                    or subsurface_b["glazed_area"] > subsurface_b["opaque_area"]
-                )
+                return subsurface_b["classification"] != DOOR or subsurface_b.get(
+                    ["glazed_area"], ZERO.AREA
+                ) > subsurface_b.get(["opaque_area"], ZERO.AREA)
 
             class SubsurfaceRule(RuleDefinitionBase):
                 def __init__(self):
                     super(
-                        Section5Rule19.BuildingRule.AboveGradeWallRule.SubsurfaceRule,
+                        Section5Rule20.BuildingRule.AboveGradeWallRule.SubsurfaceRule,
                         self,
                     ).__init__(
                         rmrs_used=produce_ruleset_model_instance(
@@ -267,32 +264,27 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
                     )
 
                 def get_calc_vals(self, context, data=None):
-                    subsurface_b = context.BASELINE_0
                     scc = data["scc"]
-                    target_u_factor = None
+                    subsurface_b = context.BASELINE_0
+                    target_shgc = 0.0
                     if scc == SCC.EXTERIOR_MIXED:
-                        target_u_factor = data["target_u_factor_mix"]
+                        target_shgc = data["target_shgc_mix"]
                     elif scc == SCC.EXTERIOR_RESIDENTIAL:
-                        target_u_factor = data["target_u_factor_res"]
+                        target_shgc = data["target_shgc_res"]
                     elif scc == SCC.EXTERIOR_NON_RESIDENTIAL:
-                        target_u_factor = data["target_u_factor_nonres"]
+                        target_shgc = data["target_shgc_nonres"]
                     elif scc == SCC.SEMI_EXTERIOR:
-                        target_u_factor = data["target_u_factor_semiheated"]
+                        target_shgc = data["target_shgc_semiheated"]
                     else:
-                        assert (
-                            False
-                        ), f"Severe Error: No matching surface category for: {scc}"
-
+                        assert f"Severe Error: No matching surface category for: {scc}"
                     return {
-                        "target_u_factor": CalcQ(
-                            "thermal_transmittance", target_u_factor
-                        ),
-                        "subsurface_u_factor": CalcQ(
-                            "thermal_transmittance", subsurface_b["u_factor"]
-                        ),
+                        "subsurface_shgc": subsurface_b["solar_heat_gain_coefficient"],
+                        "target_shgc": target_shgc,
                     }
 
                 def rule_check(self, context, calc_vals=None, data=None):
-                    target_u_factor = calc_vals["target_u_factor"]
-                    subsurface_u_factor = calc_vals["subsurface_u_factor"]
-                    return std_le(std_val=target_u_factor, val=subsurface_u_factor)
+                    target_shgc = calc_vals["target_shgc"]
+                    subsurface_shgc = calc_vals["subsurface_shgc"]
+                    return target_shgc is not None and std_le(
+                        std_val=target_shgc, val=subsurface_shgc
+                    )
