@@ -9,10 +9,10 @@
             "rule_id": "22-15",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "Heat Rejection Device Approach calaculated correctly (T/F), Approach = 25.72-(0.24*WB)",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -168,10 +168,10 @@
             "rule_id": "22-15",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "Heat Rejection Device Approach calaculated correctly (T/F), Approach = 25.72-(0.24*WB)",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -327,10 +327,10 @@
             "rule_id": "22-15",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "Heat Rejection Device Approach calaculated correctly (T/F), Approach = 25.72-(0.24*WB)",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {

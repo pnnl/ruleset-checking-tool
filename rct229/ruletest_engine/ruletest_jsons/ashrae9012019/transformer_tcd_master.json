@@ -51,7 +51,8 @@
                             {
                                 "id": "Transformer_3"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -106,7 +107,8 @@
                             {
                                 "id": "Transformer_2"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -161,7 +163,8 @@
                             {
                                 "id": "Transformer_3"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -219,7 +222,8 @@
                             {
                                 "id": "Transformer_3"
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             }
@@ -274,7 +278,8 @@
                             {
                                 "id": "Transformer_2"
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             }
@@ -329,7 +334,8 @@
                             {
                                 "id": "Transformer_3"
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             }
@@ -381,7 +387,8 @@
                             {
                                 "id": "Transformer_2"
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             }
@@ -433,7 +440,8 @@
                             {
                                 "id": "Transformer_4"
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             }
@@ -485,7 +493,8 @@
                             {
                                 "id": "Transformer_2"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -537,7 +546,8 @@
                             {
                                 "id": "Transformer_4"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -591,7 +601,8 @@
                                 "capacity": 25000,
                                 "efficiency": 0.989
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -645,7 +656,8 @@
                                 "capacity": 25000,
                                 "efficiency": 0.99
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -699,7 +711,8 @@
                                 "capacity": 30000,
                                 "efficiency": 0.9823
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -753,7 +766,8 @@
                                 "capacity": 30000,
                                 "efficiency": 0.98
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -790,7 +804,8 @@
                                 "capacity": 25000,
                                 "efficiency": 0.99
                             }
-                        ]
+                        ],
+                        "type": "USER"
                     }
                 ]
             }
@@ -827,7 +842,8 @@
                                 "capacity": 25000,
                                 "efficiency": 0.97
                             }
-                        ]
+                        ],
+                        "type": "USER"
                     }
                 ]
             }
@@ -864,7 +880,8 @@
                                 "capacity": 25000,
                                 "efficiency": 0.9929
                             }
-                        ]
+                        ],
+                        "type": "USER"
                     }
                 ]
             }
@@ -901,7 +918,8 @@
                                 "capacity": 25000,
                                 "efficiency": 0.98
                             }
-                        ]
+                        ],
+                        "type": "USER"
                     }
                 ]
             }

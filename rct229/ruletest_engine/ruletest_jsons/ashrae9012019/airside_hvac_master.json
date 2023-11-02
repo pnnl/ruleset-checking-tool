@@ -133,15 +133,10 @@
                             },
                             {
                                 "id": "Chiller Loop 1",
-                                "type": "COOLING",
-                                "child_loops": [
-                                    {
-                                        "id": "Secondary CHW Loop 1",
-                                        "type": "COOLING"
-                                    }
-                                ]
+                                "type": "COOLING"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -281,15 +276,10 @@
                             },
                             {
                                 "id": "Chiller Loop 1",
-                                "type": "COOLING",
-                                "child_loops": [
-                                    {
-                                        "id": "Secondary CHW Loop 1",
-                                        "type": "COOLING"
-                                    }
-                                ]
+                                "type": "COOLING"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -429,15 +419,10 @@
                             },
                             {
                                 "id": "Chiller Loop 1",
-                                "type": "COOLING",
-                                "child_loops": [
-                                    {
-                                        "id": "Secondary CHW Loop 1",
-                                        "type": "COOLING"
-                                    }
-                                ]
+                                "type": "COOLING"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -581,15 +566,10 @@
                             },
                             {
                                 "id": "Chiller Loop 1",
-                                "type": "COOLING",
-                                "child_loops": [
-                                    {
-                                        "id": "Secondary CHW Loop 1",
-                                        "type": "COOLING"
-                                    }
-                                ]
+                                "type": "COOLING"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -733,15 +713,10 @@
                             },
                             {
                                 "id": "Chiller Loop 1",
-                                "type": "COOLING",
-                                "child_loops": [
-                                    {
-                                        "id": "Secondary CHW Loop 1",
-                                        "type": "COOLING"
-                                    }
-                                ]
+                                "type": "COOLING"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -885,15 +860,10 @@
                             },
                             {
                                 "id": "Chiller Loop 1",
-                                "type": "COOLING",
-                                "child_loops": [
-                                    {
-                                        "id": "Secondary CHW Loop 1",
-                                        "type": "COOLING"
-                                    }
-                                ]
+                                "type": "COOLING"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -1003,7 +973,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -1113,7 +1084,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -1218,7 +1190,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -1323,7 +1296,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -1509,15 +1483,10 @@
                             },
                             {
                                 "id": "Chiller Loop 1",
-                                "type": "COOLING",
-                                "child_loops": [
-                                    {
-                                        "id": "Secondary CHW Loop 1",
-                                        "type": "COOLING"
-                                    }
-                                ]
+                                "type": "COOLING"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -1703,15 +1672,10 @@
                             },
                             {
                                 "id": "Chiller Loop 1",
-                                "type": "COOLING",
-                                "child_loops": [
-                                    {
-                                        "id": "Secondary CHW Loop 1",
-                                        "type": "COOLING"
-                                    }
-                                ]
+                                "type": "COOLING"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -1852,15 +1816,10 @@
                             },
                             {
                                 "id": "Chiller Loop 1",
-                                "type": "COOLING",
-                                "child_loops": [
-                                    {
-                                        "id": "Secondary CHW Loop 1",
-                                        "type": "COOLING"
-                                    }
-                                ]
+                                "type": "COOLING"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -2001,15 +1960,10 @@
                             },
                             {
                                 "id": "Chiller Loop 1",
-                                "type": "COOLING",
-                                "child_loops": [
-                                    {
-                                        "id": "Secondary CHW Loop 1",
-                                        "type": "COOLING"
-                                    }
-                                ]
+                                "type": "COOLING"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

@@ -9,10 +9,10 @@
             "rule_id": "22-5",
             "ruleset_reference": "G3.1.3.9",
             "rule_description": "For Baseline chilled water loop that is not purchased chilled water and serves computer room HVAC systems (Baseline   System Type-11), chilled-water supply temperature shall be reset higher based on the HVAC system requiring the most cooling.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -125,10 +125,10 @@
             "rule_id": "22-5",
             "ruleset_reference": "G3.1.3.9",
             "rule_description": "For Baseline chilled water loop that is not purchased chilled water and serves computer room HVAC systems (Baseline   System Type-11), chilled-water supply temperature shall be reset higher based on the HVAC system requiring the most cooling.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -241,10 +241,10 @@
             "rule_id": "22-5",
             "ruleset_reference": "G3.1.3.9",
             "rule_description": "For Baseline chilled water loop that is not purchased chilled water and serves computer room HVAC systems (Baseline   System Type-11), chilled-water supply temperature shall be reset higher based on the HVAC system requiring the most cooling.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -374,10 +374,10 @@
             "rule_id": "22-5",
             "ruleset_reference": "G3.1.3.9",
             "rule_description": "For Baseline chilled water loop that is not purchased chilled water and serves computer room HVAC systems (Baseline   System Type-11), chilled-water supply temperature shall be reset higher based on the HVAC system requiring the most cooling.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {

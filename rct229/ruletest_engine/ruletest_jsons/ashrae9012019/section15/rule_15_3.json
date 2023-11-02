@@ -45,7 +45,8 @@
                             {
                                 "id": "Transformer_2"
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             }
@@ -97,7 +98,8 @@
                             {
                                 "id": "Transformer_4"
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             }

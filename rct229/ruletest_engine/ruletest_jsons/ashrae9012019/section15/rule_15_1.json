@@ -51,7 +51,8 @@
                             {
                                 "id": "Transformer_3"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -106,7 +107,8 @@
                             {
                                 "id": "Transformer_2"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -161,7 +163,8 @@
                             {
                                 "id": "Transformer_3"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
