@@ -404,11 +404,11 @@ def add_ruleset_model_types(json_dict: dict):
                     "type"
                 ] = "BASELINE_0"
             elif rmr_transformation_context.get("proposed"):
-                rmr_transformation_context["baseline"]["ruleset_model_descriptions"][0][
+                rmr_transformation_context["proposed"]["ruleset_model_descriptions"][0][
                     "type"
                 ] = "PROPOSED"
             elif rmr_transformation_context.get("user"):
-                rmr_transformation_context["baseline"]["ruleset_model_descriptions"][0][
+                rmr_transformation_context["user"]["ruleset_model_descriptions"][0][
                     "type"
                 ] = "USER"
     return json_dict
