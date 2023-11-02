@@ -3,8 +3,8 @@
         "Section": 5,
         "Rule": 2,
         "Test": "a",
-        "test_description": "U-RMR includes two surfaces. Azimuth of each surface in P-RMR is the same as in U-RMR.",
-        "expected_rule_outcome": "pass",
+        "test_description": "Project has one building segment with two zones. Zones include both interior and exterior surfaces. All exterior surfaces are correctly modeled as not casting shade in the baseline.",
+        "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "5-2",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (a)",
@@ -36,13 +36,36 @@
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
-                                                        "azimuth": 20
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "does_cast_shade": false
                                                     },
                                                     {
                                                         "id": "Surface 2",
-                                                        "azimuth": 190
+                                                        "adjacent_to": "INTERIOR",
+                                                        "adjacent_zone": "Zone 2",
+                                                        "does_cast_shade": true
+                                                    },
+                                                    {
+                                                        "id": "Surface 3",
+                                                        "adjacent_to": "IDENTICAL",
+                                                        "does_cast_shade": true
+                                                    },
+                                                    {
+                                                        "id": "Surface 4",
+                                                        "adjacent_to": "GROUND",
+                                                        "does_cast_shade": true
+                                                    },
+                                                    {
+                                                        "id": "Surface 5",
+                                                        "adjacent_to": "UNDEFINED",
+                                                        "does_cast_shade": true
                                                     }
                                                 ]
+                                            },
+                                            {
+                                                "id": "Zone 2",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1"
                                             }
                                         ]
                                     }
@@ -59,8 +82,8 @@
         "Section": 5,
         "Rule": 2,
         "Test": "b",
-        "test_description": "U-RMR includes two surfaces. Azimuth of one surface in P-RMR is different U-RMR.",
-        "expected_rule_outcome": "fail",
+        "test_description": "Project has one building segment with two zones. Zones include both interior and exterior surfaces. One exterior surface is incorrectly modeled as casting shade in the baseline.",
+        "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "5-2",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (a)",
@@ -92,13 +115,36 @@
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
-                                                        "azimuth": 20
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "does_cast_shade": true
                                                     },
                                                     {
                                                         "id": "Surface 2",
-                                                        "azimuth": 190
+                                                        "adjacent_to": "INTERIOR",
+                                                        "adjacent_zone": "Zone 2",
+                                                        "does_cast_shade": true
+                                                    },
+                                                    {
+                                                        "id": "Surface 3",
+                                                        "adjacent_to": "IDENTICAL",
+                                                        "does_cast_shade": true
+                                                    },
+                                                    {
+                                                        "id": "Surface 4",
+                                                        "adjacent_to": "GROUND",
+                                                        "does_cast_shade": true
+                                                    },
+                                                    {
+                                                        "id": "Surface 5",
+                                                        "adjacent_to": "UNDEFINED",
+                                                        "does_cast_shade": true
                                                     }
                                                 ]
+                                            },
+                                            {
+                                                "id": "Zone 2",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1"
                                             }
                                         ]
                                     }

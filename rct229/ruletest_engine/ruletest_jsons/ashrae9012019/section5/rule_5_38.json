@@ -46,6 +46,11 @@
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
+                                                "infiltration": {
+                                                    "id": "Infiltration 1",
+                                                    "multiplier_schedule": "Infiltration Schedule 1",
+                                                    "flow_rate": 0.3171486818303999
+                                                },
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
@@ -64,6 +69,7 @@
                                                                 "classification": "SKYLIGHT",
                                                                 "glazed_area": 4.6451519999999995,
                                                                 "opaque_area": 0.9290303999999999,
+                                                                "u_factor": 6.927482243853377,
                                                                 "solar_heat_gain_coefficient": 0.19
                                                             }
                                                         ]
@@ -141,6 +147,11 @@
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
+                                                "infiltration": {
+                                                    "id": "Infiltration 1",
+                                                    "multiplier_schedule": "Infiltration Schedule 1",
+                                                    "flow_rate": 0.5285811363839998
+                                                },
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
@@ -159,11 +170,25 @@
                                                                 "classification": "SKYLIGHT",
                                                                 "glazed_area": 4.6451519999999995,
                                                                 "opaque_area": 0.9290303999999999,
+                                                                "u_factor": 6.927482243853377,
                                                                 "solar_heat_gain_coefficient": 0.39
                                                             }
                                                         ]
                                                     }
                                                 ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 35170.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 9378.275555555556
+                                                }
                                             }
                                         ]
                                     }
@@ -223,6 +248,12 @@
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
+                                                "infiltration": {
+                                                    "id": "Infiltration 1",
+                                                    "multiplier_schedule": "Infiltration Schedule 1",
+                                                    "flow_rate": 0.3171486818303999,
+                                                    "measured_air_leakage_rate": 2.831684659199999
+                                                },
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
@@ -241,11 +272,25 @@
                                                                 "classification": "SKYLIGHT",
                                                                 "glazed_area": 4.6451519999999995,
                                                                 "opaque_area": 0.9290303999999999,
+                                                                "u_factor": 6.927482243853377,
                                                                 "solar_heat_gain_coefficient": 0.39
                                                             }
                                                         ]
                                                     }
                                                 ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 35170.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 9378.275555555556
+                                                }
                                             }
                                         ]
                                     }
@@ -305,6 +350,12 @@
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
+                                                "infiltration": {
+                                                    "id": "Infiltration 1",
+                                                    "multiplier_schedule": "Infiltration Schedule 1",
+                                                    "flow_rate": 0.5285811363839998,
+                                                    "measured_air_leakage_rate": 2.359737215999999
+                                                },
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
@@ -323,11 +374,25 @@
                                                                 "classification": "SKYLIGHT",
                                                                 "glazed_area": 4.6451519999999995,
                                                                 "opaque_area": 0.9290303999999999,
+                                                                "u_factor": 6.927482243853377,
                                                                 "solar_heat_gain_coefficient": 0.58
                                                             }
                                                         ]
                                                     }
                                                 ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 35170.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 9378.275555555556
+                                                }
                                             }
                                         ]
                                     }
