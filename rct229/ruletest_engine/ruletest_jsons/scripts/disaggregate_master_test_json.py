@@ -4,7 +4,7 @@ from rct229.ruletest_engine.ruletest_jsons.scripts.json_generation_utilities imp
 )
 
 # Name of master spreadsheet in rct229.ruletest_engine.ruletest_jsons
-json_name = "envelope_tests.json"
+json_name = "chiller_tcd_master_temp.json"
 # output_dir = "system_types"
 ruleset_doc = "ashrae9012019"
 disaggregate_master_ruletest_json(json_name, ruleset_doc)

@@ -1,7 +1,6 @@
 from jsonpointer import resolve_pointer
 
 from rct229.rule_engine.rule_base import RuleDefinitionBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.utils.json_utils import slash_prefix_guarantee
 
 
@@ -54,13 +53,13 @@ class RuleDefinitionListBase(RuleDefinitionBase):
 
         Parameters
         ----------
-        context : UserBaselineProposedVals
-            Object containing the contexts for the user, baseline, and proposed RMRs
+        context : RuleSetModels
+            Object containing the contexts for RMRs required by model type schema
         data : An optional data object.
 
         Returns
         -------
-        list of UserBaselineProposedVals
+        list of RuleSetModels
             A list of context trios
         """
         raise NotImplementedError
@@ -86,7 +85,7 @@ class RuleDefinitionListBase(RuleDefinitionBase):
 
         Parameters
         ----------
-        context : UserBaselineProposedVals
+        context : RuleSetModels
             Object containing the user, baseline, and proposed contexts
         data : any
             The data object that was passed into the rule.
@@ -142,7 +141,7 @@ class RuleDefinitionListBase(RuleDefinitionBase):
 
         Parameters
         ----------
-        context : UserBaselineProposedVals
+        context : RuleSetModels
             Object containing the contexts for the user, baseline, and proposed RMRs
         data : dict
             An optional dictionary. New data, based on data_pointers, data_paths, or
@@ -172,14 +171,10 @@ class RuleDefinitionListBase(RuleDefinitionBase):
         for ubp in filtered_context_list:
             item_outcome = self.each_rule.evaluate(ubp, data)
 
-            # Set the id for item_outcome
-            if ubp.user and ubp.user["id"]:
-                item_outcome["id"] = ubp.user["id"]
-            elif ubp.baseline and ubp.baseline["id"]:
-                item_outcome["id"] = ubp.baseline["id"]
-            elif ubp.proposed and ubp.proposed["id"]:
-                item_outcome["id"] = ubp.proposed["id"]
-
+            # All ids are supposedly match so any no-none value should have the correct id.
+            for ruleset_model in ubp.get_ruleset_model_types():
+                if ubp[ruleset_model] and ubp[ruleset_model]["id"]:
+                    item_outcome["id"] = ubp[ruleset_model]["id"]
             outcomes.append(item_outcome)
 
         return outcomes

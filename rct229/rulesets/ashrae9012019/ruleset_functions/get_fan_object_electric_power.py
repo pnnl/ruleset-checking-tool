@@ -1,8 +1,8 @@
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import assert_, getattr_
 from rct229.utils.pint_utils import ZERO
 
-FAN_SPECIFICATION_METHOD = schema_enums["FanSpecificationMethodOptions"]
+FAN_SPECIFICATION_METHOD = SchemaEnums.schema_enums["FanSpecificationMethodOptions"]
 
 
 def get_fan_object_electric_power(fan):
