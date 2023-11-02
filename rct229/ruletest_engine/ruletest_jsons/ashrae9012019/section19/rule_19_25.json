@@ -85,7 +85,9 @@
                                                         {
                                                             "id": "Return Fan 1"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "operation_during_occupied": "CONTINUOUS",
+                                                    "minimum_outdoor_airflow": 47.194744319999984
                                                 }
                                             }
                                         ]
@@ -212,7 +214,9 @@
                                                         {
                                                             "id": "Return Fan 1"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "operation_during_occupied": "CONTINUOUS",
+                                                    "minimum_outdoor_airflow": 47.194744319999984
                                                 }
                                             }
                                         ]
@@ -487,7 +491,9 @@
                                                         {
                                                             "id": "Return Fan 1"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "operation_during_occupied": "CYCLING",
+                                                    "minimum_outdoor_airflow": 47.194744319999984
                                                 }
                                             }
                                         ]
@@ -614,7 +620,9 @@
                                                         {
                                                             "id": "Return Fan 1"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "operation_during_occupied": "CYCLING",
+                                                    "minimum_outdoor_airflow": 47.194744319999984
                                                 }
                                             }
                                         ]
@@ -870,7 +878,9 @@
                                                         {
                                                             "id": "Return Fan 1"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "operation_during_occupied": "CYCLING",
+                                                    "minimum_outdoor_airflow": 0.0
                                                 }
                                             }
                                         ]
@@ -932,7 +942,9 @@
                                                         {
                                                             "id": "Return Fan 1"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "operation_during_occupied": "CYCLING",
+                                                    "minimum_outdoor_airflow": 0.0
                                                 }
                                             }
                                         ]
@@ -1077,7 +1089,9 @@
                                                         {
                                                             "id": "Return Fan 1"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "operation_during_occupied": "KEEP_OFF",
+                                                    "minimum_outdoor_airflow": 0.0
                                                 }
                                             }
                                         ]
@@ -1139,7 +1153,9 @@
                                                         {
                                                             "id": "Return Fan 1"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "operation_during_occupied": "KEEP_OFF",
+                                                    "minimum_outdoor_airflow": 0.0
                                                 }
                                             }
                                         ]
