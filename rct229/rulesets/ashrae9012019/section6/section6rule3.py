@@ -43,7 +43,7 @@ class Section6Rule3(RuleDefinitionListIndexedBase):
                     USER=True, BASELINE_0=False, PROPOSED=True
                 ),
                 each_rule=Section6Rule3.BuildingSegmentRule.SpaceRule(),
-                index_rmr="proposed",
+                index_rmr=PROPOSED,
                 list_path="zones[*].spaces[*]",
             )
 

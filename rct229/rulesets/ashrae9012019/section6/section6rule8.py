@@ -99,7 +99,7 @@ class Section6Rule8(RuleDefinitionListIndexedBase):
                             USER=False, BASELINE_0=True, PROPOSED=True
                         ),
                         each_rule=Section6Rule8.RulesetModelInstanceRule.BuildingRule.ZoneRule.SpaceRule(),
-                        index_rmr="proposed",
+                        index_rmr=PROPOSED,
                         list_path="spaces[*]",
                         required_fields={"$": ["volume"]},
                     )

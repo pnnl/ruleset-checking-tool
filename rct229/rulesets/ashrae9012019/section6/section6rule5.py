@@ -73,7 +73,7 @@ class Section6Rule5(RuleDefinitionListIndexedBase):
                     required_fields={"$": ["building_open_schedule"]},
                     data_items={
                         "building_open_schedule_id_b": (
-                            "baseline",
+                            BASELINE_0,
                             "building_open_schedule",
                         ),
                     },
