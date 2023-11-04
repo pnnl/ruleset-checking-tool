@@ -1,4 +1,4 @@
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
     OpaqueSurfaceType as OST,
 )
@@ -15,7 +15,7 @@ from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
 
-DOOR = schema_enums["SubsurfaceClassificationOptions"].DOOR
+DOOR = SchemaEnums.schema_enums["SubsurfaceClassificationOptions"].DOOR
 NONE_AREA_TYPE = "NONE"
 
 

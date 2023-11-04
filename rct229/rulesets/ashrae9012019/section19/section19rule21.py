@@ -1,8 +1,9 @@
 from pydash import flat_map, map_
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import BASELINE_0
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
@@ -24,11 +25,11 @@ from rct229.utils.jsonpath_utils import find_all, find_one
 from rct229.utils.pint_utils import ZERO, CalcQ
 from rct229.utils.utility_functions import find_exactly_one_schedule
 
-ENERGY_RECOVERY = schema_enums["EnergyRecoveryOptions"]
-LIGHTING_SPACE = schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
-VENTILATION_SPACE = schema_enums["VentilationSpaceOptions2019ASHRAE901"]
-DEHUMIDIFICATION = schema_enums["DehumidificationOptions"]
-ClimateZoneOption = schema_enums["ClimateZoneOptions2019ASHRAE901"]
+ENERGY_RECOVERY = SchemaEnums.schema_enums["EnergyRecoveryOptions"]
+LIGHTING_SPACE = SchemaEnums.schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
+VENTILATION_SPACE = SchemaEnums.schema_enums["VentilationSpaceOptions2019ASHRAE901"]
+DEHUMIDIFICATION = SchemaEnums.schema_enums["DehumidificationOptions"]
+ClimateZoneOption = SchemaEnums.schema_enums["ClimateZoneOptions2019ASHRAE901"]
 OA_fraction_b_70 = 0.7
 SUPPLY_AIRFLOW_5000CFM = 5000 * ureg("cfm")
 REQ_HEATING_SETPOINT = 60 * ureg("degF")
@@ -58,13 +59,15 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section19Rule21, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, True),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=True
+            ),
             required_fields={
                 "$": ["weather", "ruleset_model_descriptions"],
                 "weather": ["climate_zone"],
             },
             each_rule=Section19Rule21.RMDRule(),
-            index_rmr="baseline",
+            index_rmr=BASELINE_0,
             id="19-21",
             description="Baseline systems with >= 5,000 CFM supply air and >= 70 %OA shall have energy recovery modeled in the baseline design model. The following exceptions apply:"
             "1. Systems serving spaces that are not cooled and that are heated to less than 60°F."
@@ -78,21 +81,23 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1.2.10 and exceptions 1-7",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            data_items={"climate_zone": ("baseline", "weather/climate_zone")},
+            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
         )
 
     class RMDRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section19Rule21.RMDRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, True),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=True
+                ),
                 each_rule=Section19Rule21.RMDRule.HVACRule(),
-                index_rmr="baseline",
+                index_rmr=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
             )
 
         def create_data(self, context, data):
-            rmd_b = context.baseline
-            rmd_p = context.proposed
+            rmd_b = context.BASELINE_0
+            rmd_p = context.PROPOSED
 
             dict_of_zones_and_terminal_units_served_by_hvac_sys_b = (
                 get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmd_b)
@@ -230,7 +235,9 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
         class HVACRule(RuleDefinitionBase):
             def __init__(self):
                 super(Section19Rule21.RMDRule.HVACRule, self).__init__(
-                    rmrs_used=UserBaselineProposedVals(False, True, True),
+                    rmrs_used=produce_ruleset_model_instance(
+                        USER=False, BASELINE_0=True, PROPOSED=True
+                    ),
                     required_fields={
                         "$": ["fan_system"],
                         "fan_system": [
@@ -242,8 +249,8 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                 )
 
             def get_calc_vals(self, context, data=None):
-                hvac_b = context.baseline
-                hvac_p = context.proposed
+                hvac_b = context.BASELINE_0
+                hvac_p = context.PROPOSED
                 hvac_id_b = hvac_b["id"]
 
                 climate_zone_b = data["climate_zone"]
@@ -378,7 +385,7 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                 )
 
             def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
-                hvac_b = context.baseline
+                hvac_b = context.BASELINE_0
                 hvac_id_b = hvac_b["id"]
 
                 ER_modeled_p = calc_vals["ER_modeled_p"]

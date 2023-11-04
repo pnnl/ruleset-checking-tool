@@ -1,6 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_system_type_compare import (
     baseline_system_type_compare,
 )
@@ -34,9 +35,11 @@ class Section19Rule17(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section19Rule17, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=False
+            ),
             each_rule=Section19Rule17.HVACRule(),
-            index_rmr="baseline",
+            index_rmr=BASELINE_0,
             id="19-17",
             description="For baseline system 1 and 2, the total fan electrical power (Pfan) for supply, return, exhaust, and relief shall be = CFMs × 0.3, where, CFMs = the baseline system maximum design supply fan airflow rate, cfm.",
             ruleset_section_title="HVAC - General",
@@ -47,7 +50,7 @@ class Section19Rule17(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
 
         return any(
@@ -59,7 +62,7 @@ class Section19Rule17(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
 
         return {
@@ -83,14 +86,16 @@ class Section19Rule17(RuleDefinitionListIndexedBase):
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
             super(Section19Rule17.HVACRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, False),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=False
+                ),
                 required_fields={
                     "$": ["fan_system"],
                 },
             )
 
         def is_applicable(self, context, data=None):
-            hvac_b = context.baseline
+            hvac_b = context.BASELINE_0
             hvac_id_b = hvac_b["id"]
             baseline_system_types_dict = data["baseline_system_types_dict"]
 
@@ -100,7 +105,7 @@ class Section19Rule17(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            hvac_b = context.baseline
+            hvac_b = context.BASELINE_0
             hvac_id_b = hvac_b["id"]
             dict_of_zones_and_terminal_units_served_by_hvac_sys = data[
                 "dict_of_zones_and_terminal_units_served_by_hvac_sys"

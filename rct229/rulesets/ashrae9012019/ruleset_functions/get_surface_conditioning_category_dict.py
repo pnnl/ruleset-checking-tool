@@ -1,6 +1,6 @@
 import pandas as pd
 
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
     ZoneConditioningCategory as ZCC,
 )
@@ -12,7 +12,7 @@ from rct229.utils.jsonpath_utils import find_all
 
 # Constants
 # TODO: These should directly from the enumerations
-SurfaceAdjacency = schema_enums["SurfaceAdjacencyOptions"]
+SurfaceAdjacency = SchemaEnums.schema_enums["SurfaceAdjacencyOptions"]
 
 
 # Intended for export and internal use
