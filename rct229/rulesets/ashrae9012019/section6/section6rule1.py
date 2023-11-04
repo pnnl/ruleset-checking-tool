@@ -1,10 +1,12 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_7_fns import table_G3_7_lookup
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_8_fns import table_G3_8_lookup
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO, CalcQ
+from rct229.rulesets.ashrae9012019 import RMT
+
 
 CASE3_WARNING = "Project passes based on space-by-space method. Verify if project sues space-by-space method."
 CASE4_WARNING = "Project fails based on space-by-space method. LIGHTING_BUILDING_AREA_TYPE is not known to determine building area method allowance."
@@ -18,9 +20,11 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section6Rule1, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, False, True),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=False, PROPOSED=True
+            ),
             each_rule=Section6Rule1.BuildingSegmentRule(),
-            index_rmr="proposed",
+            index_rmr=RMT.PROPOSED,
             id="6-1",
             description="The total building interior lighting power shall not exceed the interior lighting power "
             "allowance determined using either Table G3.7 or G3.8",
@@ -33,12 +37,14 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
     class BuildingSegmentRule(RuleDefinitionBase):
         def __init__(self):
             super(Section6Rule1.BuildingSegmentRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, False, True),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=False, PROPOSED=True
+                ),
                 required_fields={"$.zones[*]": ["volume"]},
             )
 
         def get_calc_vals(self, context, data=None):
-            building_segment_p = context.proposed
+            building_segment_p = context.PROPOSED
 
             allowable_LPD_BAM = (
                 table_G3_8_lookup(building_segment_p["lighting_building_area_type"])[

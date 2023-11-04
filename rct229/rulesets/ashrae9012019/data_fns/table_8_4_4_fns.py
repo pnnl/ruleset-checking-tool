@@ -1,10 +1,10 @@
 from numpy import interp
 
 from rct229.rulesets.ashrae9012019.data import data
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.schema.config import ureg
 
-ElectricalPhase = schema_enums["ElectricalPhaseOptions"]
+ElectricalPhase = SchemaEnums.schema_enums["ElectricalPhaseOptions"]
 SINGLE_PHASE = ElectricalPhase.SINGLE_PHASE
 THREE_PHASE = ElectricalPhase.THREE_PHASE
 _table_8_4_4 = data["ashrae_90_1_prm_transformers"]

@@ -1,6 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_heat_rejection_loops_connected_to_baseline_systems import (
     get_heat_rejection_loops_connected_to_baseline_systems,
 )
@@ -17,9 +18,11 @@ class Section22Rule15(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section22Rule15, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=False
+            ),
             each_rule=Section22Rule15.HeatRejectionRule(),
-            index_rmr="baseline",
+            index_rmr=BASELINE_0,
             id="22-15",
             description="Heat Rejection Device Approach calaculated correctly (T/F), Approach = 25.72-(0.24*WB)",
             ruleset_section_title="HVAC - Chiller",
@@ -30,7 +33,7 @@ class Section22Rule15(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmd_b = context.baseline
+        rmd_b = context.BASELINE_0
         heat_rejection_loop_ids_b = (
             get_heat_rejection_loops_connected_to_baseline_systems(rmd_b)
         )
@@ -40,14 +43,16 @@ class Section22Rule15(RuleDefinitionListIndexedBase):
     class HeatRejectionRule(RuleDefinitionBase):
         def __init__(self):
             super(Section22Rule15.HeatRejectionRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, False),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=False
+                ),
                 required_fields={
                     "$": ["approach", "loop", "design_wetbulb_temperature"],
                 },
             )
 
         def is_applicable(self, context, data=None):
-            heat_rejection_b = context.baseline
+            heat_rejection_b = context.BASELINE_0
             heat_rejection_loop_ids_b = data["heat_rejection_loop_ids_b"]
             heat_rejection_loop_b = heat_rejection_b["loop"]
             design_wetbulb_temp_b = heat_rejection_b["design_wetbulb_temperature"]
@@ -58,7 +63,7 @@ class Section22Rule15(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            heat_rejection_b = context.baseline
+            heat_rejection_b = context.BASELINE_0
             approach_b = heat_rejection_b["approach"]
             target_approach_b = 25.72 * ureg("degF") - (
                 0.24 * heat_rejection_b["design_wetbulb_temperature"].to(ureg.F)
