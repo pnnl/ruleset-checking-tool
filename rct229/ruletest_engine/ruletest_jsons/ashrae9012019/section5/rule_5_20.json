@@ -1,18 +1,18 @@
 {
-    "rule-5-5-a": {
+    "rule-5-20-a": {
         "Section": 5,
-        "Rule": 5,
+        "Rule": 20,
         "Test": "a",
-        "test_description": "Project has one building segment with an exterior roof surface. Building is located in climate zone 4A, includes a space that has residential occupancy type, and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline roof U-factor for the space is established correctly.",
+        "test_description": "Project has one building segment and includes a space with an above-grade wall surface and window. The building is located in climate zone 4A, the space has residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it.  The WWR is less than 10% of the gross wall area. The baseline vertical fenestration SHGC is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "5-5",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
-            "rule_description": "Baseline roof assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
-            "applicable_rmr": "Baseline RMR",
+            "rule_id": "5-20",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (d)",
+            "rule_description": "Vertical fenestration SHGC shall match the appropriate requirements in Tables G3.4-1 through G3.4-8",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -37,6 +37,7 @@
                                                 "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 21.237634943999996,
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
@@ -55,10 +56,21 @@
                                                     {
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
-                                                        "tilt": 0,
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "SubSurface 1",
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 5.5741824,
+                                                                "opaque_area": 1.8580607999999998,
+                                                                "u_factor": 3.2366105565544463,
+                                                                "solar_heat_gain_coefficient": 0.39
+                                                            }
+                                                        ],
                                                         "construction": {
                                                             "id": "Construction 1",
-                                                            "u_factor": 0.35773064046128095
+                                                            "u_factor": 3.2366105565544463
                                                         }
                                                     }
                                                 ]
@@ -69,7 +81,7 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "design_sensible_cool_capacity": 17585.0
+                                                    "design_sensible_cool_capacity": 3517.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
@@ -80,26 +92,27 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
         }
     },
-    "rule-5-5-b": {
+    "rule-5-20-b": {
         "Section": 5,
-        "Rule": 5,
+        "Rule": 20,
         "Test": "b",
-        "test_description": "Project has one building segment with an exterior roof surface. Building is located in climate zone 4A, includes a space that has residential occupancy type, and is conditioned based on  cooling capacity of the HVAC system that serves the parent zone. The baseline roof U-factor for the space is established correctly.",
-        "expected_rule_outcome": "pass",
+        "test_description": "Project has one building segment and includes a space with an above-grade wall surface and window. The building is located in climate zone 4A, the space has residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it.  The WWR is less than 10% of the gross wall area. The baseline vertical fenestration SHGC is not established correctly.",
+        "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "5-5",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
-            "rule_description": "Baseline roof assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
-            "applicable_rmr": "Baseline RMR",
+            "rule_id": "5-20",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (d)",
+            "rule_description": "Vertical fenestration SHGC shall match the appropriate requirements in Tables G3.4-1 through G3.4-8",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -124,6 +137,7 @@
                                                 "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 21.237634943999996,
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
@@ -142,10 +156,21 @@
                                                     {
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
-                                                        "tilt": 0,
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "SubSurface 1",
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 5.5741824,
+                                                                "opaque_area": 1.8580607999999998,
+                                                                "u_factor": 3.2366105565544463,
+                                                                "solar_heat_gain_coefficient": 0.4
+                                                            }
+                                                        ],
                                                         "construction": {
                                                             "id": "Construction 1",
-                                                            "u_factor": 0.35773064046128095
+                                                            "u_factor": 3.2366105565544463
                                                         }
                                                     }
                                                 ]
@@ -156,37 +181,38 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "design_sensible_cool_capacity": 42204.0
+                                                    "design_sensible_cool_capacity": 3517.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "design_capacity": 8792.133333333333
+                                                    "design_capacity": 9378.275555555556
                                                 }
                                             }
                                         ]
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
         }
     },
-    "rule-5-5-c": {
+    "rule-5-20-c": {
         "Section": 5,
-        "Rule": 5,
+        "Rule": 20,
         "Test": "c",
-        "test_description": "Project has one building segment with an exterior roof surface. Building is located in climate zone 4A, includes a space that has residential occupancy type, and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline roof U-factor for the space is not established correctly.",
-        "expected_rule_outcome": "fail",
+        "test_description": "Project has one building segment and includes a space with an above-grade wall surface and window. The building is located in climate zone 4A, the space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it.  The WWR is less than 10% of the gross wall area. The baseline vertical fenestration SHGC is established correctly.",
+        "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "5-5",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
-            "rule_description": "Baseline roof assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
-            "applicable_rmr": "Baseline RMR",
+            "rule_id": "5-20",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (d)",
+            "rule_description": "Vertical fenestration SHGC shall match the appropriate requirements in Tables G3.4-1 through G3.4-8",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -211,11 +237,12 @@
                                                 "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 21.237634943999996,
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "DWELLING_UNIT",
+                                                        "lighting_space_type": "STAIRWELL",
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
@@ -229,10 +256,21 @@
                                                     {
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
-                                                        "tilt": 0,
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "SubSurface 1",
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 5.5741824,
+                                                                "opaque_area": 1.8580607999999998,
+                                                                "u_factor": 3.2366105565544463,
+                                                                "solar_heat_gain_coefficient": 0.39
+                                                            }
+                                                        ],
                                                         "construction": {
                                                             "id": "Construction 1",
-                                                            "u_factor": 1.2378615812787181
+                                                            "u_factor": 3.2366105565544463
                                                         }
                                                     }
                                                 ]
@@ -243,7 +281,7 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "design_sensible_cool_capacity": 17585.0
+                                                    "design_sensible_cool_capacity": 3517.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
@@ -254,26 +292,27 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
         }
     },
-    "rule-5-5-d": {
+    "rule-5-20-d": {
         "Section": 5,
-        "Rule": 5,
+        "Rule": 20,
         "Test": "d",
-        "test_description": "Project has one building segment with an exterior roof surface. Building is located in climate zone 4A and includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline roof U-factor for the space is established correctly.",
-        "expected_rule_outcome": "pass",
+        "test_description": "Project has one building segment and includes a space with an above-grade wall surface and window. The building is located in climate zone 4A, the space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it.  The WWR is less than 10% of the gross wall area. The baseline vertical fenestration SHGC is not established correctly.",
+        "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "5-5",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
-            "rule_description": "Baseline roof assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
-            "applicable_rmr": "Baseline RMR",
+            "rule_id": "5-20",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (d)",
+            "rule_description": "Vertical fenestration SHGC shall match the appropriate requirements in Tables G3.4-1 through G3.4-8",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -298,11 +337,12 @@
                                                 "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 21.237634943999996,
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "CORRIDOR_ALL_OTHERS",
+                                                        "lighting_space_type": "STAIRWELL",
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
@@ -316,10 +356,21 @@
                                                     {
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
-                                                        "tilt": 0,
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "SubSurface 1",
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 5.5741824,
+                                                                "opaque_area": 1.8580607999999998,
+                                                                "u_factor": 3.2366105565544463,
+                                                                "solar_heat_gain_coefficient": 0.4
+                                                            }
+                                                        ],
                                                         "construction": {
                                                             "id": "Construction 1",
-                                                            "u_factor": 0.35773064046128095
+                                                            "u_factor": 3.2366105565544463
                                                         }
                                                     }
                                                 ]
@@ -330,7 +381,7 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "design_sensible_cool_capacity": 17585.0
+                                                    "design_sensible_cool_capacity": 3517.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
@@ -341,26 +392,27 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
         }
     },
-    "rule-5-5-e": {
+    "rule-5-20-e": {
         "Section": 5,
-        "Rule": 5,
+        "Rule": 20,
         "Test": "e",
-        "test_description": "Project has one building segment with an exterior roof surface. Building is located in climate zone 4A and includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline roof U-factor for the space is not established correctly.",
-        "expected_rule_outcome": "fail",
+        "test_description": "Project has one building segment and includes a space with an above-grade wall surface and window. The building is located in climate zone 4A, the space is semiheated based on heating capacity of the HVAC system that serves it.  The WWR is less than 10% of the gross wall area.  The baseline vertical fenestration SHGC is established correctly.",
+        "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "5-5",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
-            "rule_description": "Baseline roof assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
-            "applicable_rmr": "Baseline RMR",
+            "rule_id": "5-20",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (d)",
+            "rule_description": "Vertical fenestration SHGC shall match the appropriate requirements in Tables G3.4-1 through G3.4-8",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -385,11 +437,12 @@
                                                 "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 21.237634943999996,
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "CORRIDOR_ALL_OTHERS",
+                                                        "lighting_space_type": "STAIRWELL",
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
@@ -403,10 +456,21 @@
                                                     {
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
-                                                        "tilt": 0,
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "SubSurface 1",
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 5.5741824,
+                                                                "opaque_area": 1.8580607999999998,
+                                                                "u_factor": 3.2366105565544463,
+                                                                "solar_heat_gain_coefficient": 0.4
+                                                            }
+                                                        ],
                                                         "construction": {
                                                             "id": "Construction 1",
-                                                            "u_factor": 1.2378615812787181
+                                                            "u_factor": 3.2366105565544463
                                                         }
                                                     }
                                                 ]
@@ -417,37 +481,38 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "design_sensible_cool_capacity": 17585.0
+                                                    "design_sensible_cool_capacity": 0.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "design_capacity": 9378.275555555556
+                                                    "design_capacity": 699.8538133333334
                                                 }
                                             }
                                         ]
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
         }
     },
-    "rule-5-5-f": {
+    "rule-5-20-f": {
         "Section": 5,
-        "Rule": 5,
+        "Rule": 20,
         "Test": "f",
-        "test_description": "Project has one building segment with an exterior roof surface. Building is located in climate zone 4A and includes a space that has non-residential occupancy type and is semiheated based on heating and cooling capacity of the HVAC system that serves the the parent zone. The baseline roof U-factor for the space is established correctly.",
-        "expected_rule_outcome": "pass",
+        "test_description": "Project has one building segment and includes a space with an above-grade wall surface and window. The building is located in climate zone 4A, the space is semiheated based on heating capacity of the HVAC system that serves it.  The WWR is less than 10% of the gross wall area.  The baseline vertical fenestration SHGC is not established correctly.",
+        "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "5-5",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
-            "rule_description": "Baseline roof assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
-            "applicable_rmr": "Baseline RMR",
+            "rule_id": "5-20",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (d)",
+            "rule_description": "Vertical fenestration SHGC shall match the appropriate requirements in Tables G3.4-1 through G3.4-8",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -472,11 +537,12 @@
                                                 "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 21.237634943999996,
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "CORRIDOR_ALL_OTHERS",
+                                                        "lighting_space_type": "STAIRWELL",
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
@@ -490,11 +556,21 @@
                                                     {
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
-                                                        "tilt": 0,
-                                                        "area": 9.290303999999999,
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "SubSurface 1",
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 5.5741824,
+                                                                "opaque_area": 1.8580607999999998,
+                                                                "u_factor": 3.2366105565544463,
+                                                                "solar_heat_gain_coefficient": 0.39
+                                                            }
+                                                        ],
                                                         "construction": {
                                                             "id": "Construction 1",
-                                                            "u_factor": 1.2378615812787181
+                                                            "u_factor": 3.2366105565544463
                                                         }
                                                     }
                                                 ]
@@ -516,121 +592,34 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
         }
     },
-    "rule-5-5-g": {
+    "rule-5-20-g": {
         "Section": 5,
-        "Rule": 5,
+        "Rule": 20,
         "Test": "g",
-        "test_description": "Project has one building segment with an exterior roof surface. Building is located in climate zone 4A and includes a space that has non-residential occupancy type and is semiheated based on heating and cooling capacity of the HVAC system that serves the the parent zone. The baseline roof U-factor for the space is not established correctly.",
-        "expected_rule_outcome": "fail",
-        "standard": {
-            "rule_id": "5-5",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
-            "rule_description": "Baseline roof assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
-            "applicable_rmr": "Baseline RMR",
-            "rule_assertion": "=",
-            "comparison_value": "Expected Value",
-            "primary_rule": "Y",
-            "schema_version": "0.0.29"
-        },
-        "rmr_transformations": {
-            "baseline": {
-                "id": "ASHRAE229",
-                "weather": {
-                    "climate_zone": "CZ4A",
-                    "data_source_type": "OTHER"
-                },
-                "ruleset_model_descriptions": [
-                    {
-                        "id": "RMR 1",
-                        "buildings": [
-                            {
-                                "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
-                                "building_segments": [
-                                    {
-                                        "id": "Building Segment 1",
-                                        "zones": [
-                                            {
-                                                "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "CORRIDOR_ALL_OTHERS",
-                                                        "floor_area": 23.225759999999998
-                                                    }
-                                                ],
-                                                "terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
-                                                    }
-                                                ],
-                                                "surfaces": [
-                                                    {
-                                                        "id": "Surface 1",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 0,
-                                                        "area": 9.290303999999999,
-                                                        "construction": {
-                                                            "id": "Construction 1",
-                                                            "u_factor": 0.35773064046128095
-                                                        }
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        "heating_ventilating_air_conditioning_systems": [
-                                            {
-                                                "id": "HVAC 1",
-                                                "cooling_system": {
-                                                    "id": "Cooling System 1",
-                                                    "design_sensible_cool_capacity": 0.0
-                                                },
-                                                "heating_system": {
-                                                    "id": "Heating System 1",
-                                                    "design_capacity": 699.8538133333334
-                                                }
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            }
-        }
-    },
-    "rule-5-5-h": {
-        "Section": 5,
-        "Rule": 5,
-        "Test": "h",
-        "test_description": "Project has one building segment with an exterior roof surface. Building is located in climate zone 8 and includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline roof U-factor for the space is established correctly.",
+        "test_description": "Project has one building segment and includes a space with an above-grade wall surface and window. The building is located in climate zone 3C, the space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it.  The WWR is 20-30% of the gross wall area. The baseline vertical fenestration SHGC is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "5-5",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
-            "rule_description": "Baseline roof assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
-            "applicable_rmr": "Baseline RMR",
+            "rule_id": "5-20",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (d)",
+            "rule_description": "Vertical fenestration SHGC shall match the appropriate requirements in Tables G3.4-1 through G3.4-8",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229",
                 "weather": {
-                    "climate_zone": "CZ8",
+                    "climate_zone": "CZ3C",
                     "data_source_type": "OTHER"
                 },
                 "ruleset_model_descriptions": [
@@ -648,11 +637,12 @@
                                                 "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 21.237634943999996,
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "CORRIDOR_ALL_OTHERS",
+                                                        "lighting_space_type": "STAIRWELL",
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
@@ -666,10 +656,21 @@
                                                     {
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
-                                                        "tilt": 0,
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "SubSurface 1",
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 22.2967296,
+                                                                "opaque_area": 3.7161215999999997,
+                                                                "u_factor": 3.2366105565544463,
+                                                                "solar_heat_gain_coefficient": 0.39
+                                                            }
+                                                        ],
                                                         "construction": {
                                                             "id": "Construction 1",
-                                                            "u_factor": 0.27255667844669024
+                                                            "u_factor": 3.2366105565544463
                                                         }
                                                     }
                                                 ]
@@ -680,7 +681,7 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "design_sensible_cool_capacity": 17585.0
+                                                    "design_sensible_cool_capacity": 3517.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
@@ -691,33 +692,34 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
         }
     },
-    "rule-5-5-i": {
+    "rule-5-20-h": {
         "Section": 5,
-        "Rule": 5,
-        "Test": "i",
-        "test_description": "Project has one building segment with an exterior roof surface. Building is located in climate zone 8 and includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline roof U-factor for the space is not established correctly.",
+        "Rule": 20,
+        "Test": "h",
+        "test_description": "Project has one building segment and includes a space with an above-grade wall surface and window. The building is located in climate zone 3C, the space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it.  The WWR is 20-30% of the gross wall area. The baseline vertical fenestration SHGC is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "5-5",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
-            "rule_description": "Baseline roof assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
-            "applicable_rmr": "Baseline RMR",
+            "rule_id": "5-20",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (d)",
+            "rule_description": "Vertical fenestration SHGC shall match the appropriate requirements in Tables G3.4-1 through G3.4-8",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229",
                 "weather": {
-                    "climate_zone": "CZ8",
+                    "climate_zone": "CZ3C",
                     "data_source_type": "OTHER"
                 },
                 "ruleset_model_descriptions": [
@@ -735,11 +737,12 @@
                                                 "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 21.237634943999996,
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "CORRIDOR_ALL_OTHERS",
+                                                        "lighting_space_type": "STAIRWELL",
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
@@ -753,10 +756,21 @@
                                                     {
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
-                                                        "tilt": 0,
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "SubSurface 1",
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 22.2967296,
+                                                                "opaque_area": 3.7161215999999997,
+                                                                "u_factor": 3.2366105565544463,
+                                                                "solar_heat_gain_coefficient": 0.61
+                                                            }
+                                                        ],
                                                         "construction": {
                                                             "id": "Construction 1",
-                                                            "u_factor": 0.35773064046128095
+                                                            "u_factor": 3.2366105565544463
                                                         }
                                                     }
                                                 ]
@@ -767,7 +781,7 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "design_sensible_cool_capacity": 17585.0
+                                                    "design_sensible_cool_capacity": 3517.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
@@ -778,7 +792,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

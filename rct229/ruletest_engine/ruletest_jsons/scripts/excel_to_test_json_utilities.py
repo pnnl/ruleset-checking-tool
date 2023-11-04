@@ -6,8 +6,10 @@ import os
 import pandas as pd
 import pint
 
+from rct229.rule_engine.rulesets import RuleSet
 from rct229.ruletest_engine.ruletest_jsons.scripts.json_generation_utilities import *
 from rct229.schema.config import ureg
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.schema.schema_utils import *
 
 
@@ -47,6 +49,8 @@ def get_rmr_key_list_from_tcd_key_list(tcd_key_list):
     # Remove index references
     for index, unclean_key in enumerate(rmr_schema_key_list):
         rmr_schema_key_list[index] = remove_index_references_from_key(unclean_key)
+
+    rmr_schema_key_list = [item for item in rmr_schema_key_list if item != "\xa0"]
 
     return rmr_schema_key_list
 
@@ -252,6 +256,10 @@ def create_dictionary_from_excel(spreadsheet_name, sheet_name, rule_set):
                 # row_value = what will be set to the dictionary's key/value pair
                 row_value = rule_value_list[row_i]
 
+                # Ignore values that somehow return a blank ASCII string = '\xa0'
+                if row_value == "\xa0":
+                    continue
+
                 # Skip empty rows
                 if not isinstance(row_value, str):
                     if math.isnan(row_value):
@@ -262,6 +270,10 @@ def create_dictionary_from_excel(spreadsheet_name, sheet_name, rule_set):
 
                 for key in keys:
                     key_value = keys_df[key][row_i]
+                    # Ignore values that somehow return a blank ASCII string = '\xa0'
+                    if key_value == "\xa0":
+                        continue
+
                     if isinstance(key_value, str):
                         # If the key includes a JSON_PATH, parse for the short hand enumeration name and adjust the key list
                         if "JSON_PATH" in key_value:
@@ -374,7 +386,14 @@ def create_test_json_from_excel(
     # Define output json file path
     json_file_path = os.path.join(file_dir, "..", rule_set, json_name)
 
+    # Load Schemas
+    if rule_set == RuleSet.ASHRAE9012019_RULESET:
+        SchemaStore.set_ruleset(RuleSet.ASHRAE9012019_RULESET)
+        SchemaEnums.update_schema_enum()
+
     json_dict = create_dictionary_from_excel(spreadsheet_name, sheet_name, rule_set)
+
+    json_dict = add_ruleset_model_types(json_dict)
 
     # Dump JSON to string for writing
     json_string = json.dumps(json_dict, indent=4)
@@ -383,6 +402,26 @@ def create_test_json_from_excel(
     with open(json_file_path, "w") as json_file:
         json_file.write(json_string)
         print("JSON complete and written to file: " + json_name)
+
+
+def add_ruleset_model_types(json_dict: dict):
+    # dirty code to check if this works.
+    for test_context in json_dict.values():
+        if test_context.get("rmr_transformations"):
+            rmr_transformation_context = test_context["rmr_transformations"]
+            if rmr_transformation_context.get("baseline"):
+                rmr_transformation_context["baseline"]["ruleset_model_descriptions"][0][
+                    "type"
+                ] = "BASELINE_0"
+            if rmr_transformation_context.get("proposed"):
+                rmr_transformation_context["proposed"]["ruleset_model_descriptions"][0][
+                    "type"
+                ] = "PROPOSED"
+            if rmr_transformation_context.get("user"):
+                rmr_transformation_context["user"]["ruleset_model_descriptions"][0][
+                    "type"
+                ] = "USER"
+    return json_dict
 
 
 def update_unit_convention_record(

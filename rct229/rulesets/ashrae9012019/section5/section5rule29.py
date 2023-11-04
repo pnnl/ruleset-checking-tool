@@ -1,20 +1,11 @@
-from rct229.rule_engine.rule_base import RuleDefinitionBase
+from rct229.rule_engine.partial_rule_definition import PartialRuleDefinition
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
-    OpaqueSurfaceType as OST,
-)
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
-    get_opaque_surface_type,
-)
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
-    SurfaceConditioningCategory as SCC,
-)
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
-    get_surface_conditioning_category_dict,
-)
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import PROPOSED
+from rct229.schema.schema_enums import SchemaEnums
 
-FAIL_MSG = "Baseline fenestration was modeled with shading projections and/or overhangs, which is incorrect."
+SUBSURFACE_DYNAMIC_GLAZING = SchemaEnums.schema_enums["SubsurfaceDynamicGlazingOptions"]
+UNDETERMINED_MSG = "SUBSURFACE INCLUDES MANUALLY CONTROLLED DYNAMIC GLAZING IN THE PROPOSED DESIGN. VERIFY THAT SHGC AND VT WERE MODELED AS THE AVERAGE OF THE MINIMUM AND MAXIMUM SHGC AND VT."
 
 
 class Section5Rule29(RuleDefinitionListIndexedBase):
@@ -22,78 +13,41 @@ class Section5Rule29(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule29, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
-            required_fields={
-                "$": ["weather"],
-                "weather": ["climate_zone"],
-            },
-            each_rule=Section5Rule29.BuildingRule(),
-            index_rmr="baseline",
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=False, PROPOSED=True
+            ),
+            each_rule=Section5Rule29.SubsurfaceRule(),
+            index_rmr=PROPOSED,
             id="5-29",
-            description="Baseline fenestration shall be assumed to be flush with the exterior wall, and no shading "
-            "projections shall be modeled.",
+            description="Manually controlled dynamic glazing shall use the average of the minimum and maximum SHGC and VT.",
             ruleset_section_title="Envelope",
-            standard_section="Section G3.1-5(d) Building Modeling Requirements for the Baseline building",
-            is_primary_rule=True,
-            list_path="ruleset_model_descriptions[0].buildings[*]",
-            data_items={"climate_zone": ("baseline", "weather/climate_zone")},
+            standard_section="Section G3.1-5(a)5 Building Envelope Modeling Requirements for the Proposed design",
+            is_primary_rule=False,
+            list_path="ruleset_model_descriptions[0].buildings[*].building_segments[*].zones[*].surfaces[*].subsurfaces[*]",
         )
 
-    class BuildingRule(RuleDefinitionListIndexedBase):
+    class SubsurfaceRule(PartialRuleDefinition):
         def __init__(self):
-            super(Section5Rule29.BuildingRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, False),
-                each_rule=Section5Rule29.BuildingRule.AboveGradeWallRule(),
-                index_rmr="baseline",
-                list_path="$.building_segments[*].zones[*].surfaces[*]",
+            super(Section5Rule29.SubsurfaceRule, self).__init__(
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=False, PROPOSED=True
+                ),
+                required_fields={"$": ["dynamic_glazing_type"]},
+                manual_check_required_msg=UNDETERMINED_MSG,
             )
 
-        def create_data(self, context, data):
-            building_b = context.baseline
+        def get_calc_vals(self, context, data=None):
+            subsurface_p = context.PROPOSED
+            subsurface_dynamic_glazing_type_p = subsurface_p["dynamic_glazing_type"]
             return {
-                "scc_dict_b": get_surface_conditioning_category_dict(
-                    data["climate_zone"], building_b
-                ),
+                "subsurface_dynamic_glazing_type_p": subsurface_dynamic_glazing_type_p
             }
 
-        def list_filter(self, context_item, data):
-            surface_b = context_item.baseline
+        def applicability_check(self, context, calc_vals, data):
+            subsurface_dynamic_glazing_type_p = calc_vals[
+                "subsurface_dynamic_glazing_type_p"
+            ]
             return (
-                get_opaque_surface_type(surface_b) == OST.ABOVE_GRADE_WALL
-                and data["scc_dict_b"][surface_b["id"]] != SCC.UNREGULATED
+                subsurface_dynamic_glazing_type_p
+                == SUBSURFACE_DYNAMIC_GLAZING.MANUAL_DYNAMIC
             )
-
-        class AboveGradeWallRule(RuleDefinitionListIndexedBase):
-            def __init__(self):
-                super(Section5Rule29.BuildingRule.AboveGradeWallRule, self).__init__(
-                    rmrs_used=UserBaselineProposedVals(False, True, False),
-                    list_path="subsurfaces[*]",
-                    each_rule=Section5Rule29.BuildingRule.AboveGradeWallRule.SubsurfaceRule(),
-                    index_rmr="baseline",
-                )
-
-            class SubsurfaceRule(RuleDefinitionBase):
-                def __init__(self):
-                    super(
-                        Section5Rule29.BuildingRule.AboveGradeWallRule.SubsurfaceRule,
-                        self,
-                    ).__init__(
-                        rmrs_used=UserBaselineProposedVals(False, True, False),
-                        fail_msg=FAIL_MSG,
-                        required_fields={
-                            "$": ["has_shading_overhang", "has_shading_sidefins"]
-                        },
-                    )
-
-                def get_calc_vals(self, context, data=None):
-                    subsurface_b = context.baseline
-                    return {
-                        "has_shading_overhang": subsurface_b["has_shading_overhang"],
-                        "has_shading_sidefins": subsurface_b["has_shading_sidefins"],
-                    }
-
-                def rule_check(self, context, calc_vals=None, data=None):
-                    return not (
-                        calc_vals["has_shading_overhang"]
-                        or calc_vals["has_shading_sidefins"]
-                    )
