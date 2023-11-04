@@ -1,5 +1,5 @@
 from rct229.rule_engine.partial_rule_definition import PartialRuleDefinition
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rulesets.ashrae9012019.ruleset_functions.check_purchased_chw_hhw_status_dict import (
     check_purchased_chw_hhw_status_dict,
 )
@@ -10,7 +10,9 @@ class Section22Rule41(PartialRuleDefinition):
 
     def __init__(self):
         super(Section22Rule41, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=False
+            ),
             id="22-41",
             description="Purchased CHW systems must be modeled with only one external fluid loop in the baseline design.",
             ruleset_section_title="HVAC - Chiller",
@@ -21,7 +23,7 @@ class Section22Rule41(PartialRuleDefinition):
         )
 
     def applicability_check(self, context, calc_vals, data):
-        rmd_b = context.baseline
+        rmd_b = context.BASELINE_0
         purchased_chw_hhw_status_dict_b = check_purchased_chw_hhw_status_dict(rmd_b)
 
         return not purchased_chw_hhw_status_dict_b["purchased_cooling"]

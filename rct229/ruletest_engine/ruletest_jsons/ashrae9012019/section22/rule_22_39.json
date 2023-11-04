@@ -138,7 +138,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -274,7 +275,8 @@
                                 "type": "COOLING",
                                 "pump_power_per_flow_rate": 253.6327608982827
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -410,7 +412,8 @@
                                 "type": "COOLING",
                                 "pump_power_per_flow_rate": 317.04095112285336
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
