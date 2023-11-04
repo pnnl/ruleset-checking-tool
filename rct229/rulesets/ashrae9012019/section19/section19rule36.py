@@ -1,14 +1,15 @@
 from rct229.rule_engine.partial_rule_definition import PartialRuleDefinition
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.schema.config import ureg
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_one
 from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
 
-ENERGY_RECOVERY = schema_enums["EnergyRecoveryOptions"]
+ENERGY_RECOVERY = SchemaEnums.schema_enums["EnergyRecoveryOptions"]
 REQ_SENSIBLE_EFFECTIVENESS = 0.5
 REQ_LATENT_EFFECTIVENESS = 0.5
 
@@ -18,9 +19,11 @@ class Section19Rule36(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section19Rule36, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=False
+            ),
             each_rule=Section19Rule36.HVACRule(),
-            index_rmr="baseline",
+            index_rmr=BASELINE_0,
             id="19-36",
             description="Baseline systems required to model energy recovery per G3.1.2.10 shall be modeled with a 50% enthalpy recovery ratio.",
             ruleset_section_title="HVAC - General",
@@ -32,12 +35,14 @@ class Section19Rule36(RuleDefinitionListIndexedBase):
     class HVACRule(PartialRuleDefinition):
         def __init__(self):
             super(Section19Rule36.HVACRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, False),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=False
+                ),
                 required_fields={"$": ["fan_system"]},
             )
 
         def is_applicable(self, context, data=None):
-            hvac_b = context.baseline
+            hvac_b = context.BASELINE_0
 
             return (
                 hvac_b.get("fan_system")
@@ -47,7 +52,7 @@ class Section19Rule36(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            hvac_b = context.baseline
+            hvac_b = context.BASELINE_0
             energy_recovery_b = find_one("$.fan_system.air_energy_recovery", hvac_b)
 
             sensible_eff_b = getattr_(
@@ -91,7 +96,7 @@ class Section19Rule36(RuleDefinitionListIndexedBase):
             )
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
-            hvac_b = context.baseline
+            hvac_b = context.BASELINE_0
             hvac_id_b = hvac_b["id"]
 
             sensible_eff_b = calc_vals["sensible_eff_b"]
