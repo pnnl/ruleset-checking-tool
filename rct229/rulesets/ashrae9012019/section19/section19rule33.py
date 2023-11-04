@@ -1,6 +1,7 @@
 from rct229.rule_engine.partial_rule_definition import PartialRuleDefinition
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_proposed_hvac_modeled_with_virtual_cooling import (
     get_proposed_hvac_modeled_with_virtual_cooling,
 )
@@ -15,9 +16,11 @@ class Section19Rule33(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section19Rule33, self).__init__(
-            rmrs_used=UserBaselineProposedVals(True, False, True),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=True
+            ),
             each_rule=Section19Rule33.HVACRule(),
-            index_rmr="baseline",
+            index_rmr=BASELINE_0,
             id="19-33",
             description="Where no heating and/or cooling system is to be installed, and a heating or cooling system is being simulated only to meet the requirements described in Section G3.1-10 HVAC Systems proposed column c and d, "
             "heating and/or cooling system fans shall simulated to be cycled ON and OFF to meet heating and cooling loads during occupied hours in the proposed design.",
@@ -29,8 +32,8 @@ class Section19Rule33(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmd_u = context.user
-        rmd_p = context.proposed
+        rmd_u = context.USER
+        rmd_p = context.PROPOSED
         applicable_HVAC_systems_cooling_list_p = (
             get_proposed_hvac_modeled_with_virtual_cooling(rmd_u, rmd_p)
         )
@@ -52,18 +55,20 @@ class Section19Rule33(RuleDefinitionListIndexedBase):
     class HVACRule(PartialRuleDefinition):
         def __init__(self):
             super(Section19Rule33.HVACRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, False, True),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=False, PROPOSED=True
+                ),
             )
 
         def applicability_check(self, context, calc_vals, data):
-            hvac_p = context.proposed
+            hvac_p = context.PROPOSED
             hvac_id_p = hvac_p["id"]
             applicable_HVAC_systems_list_p = data["applicable_HVAC_systems_list_p"]
 
             return hvac_id_p in applicable_HVAC_systems_list_p
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
-            hvac_p = context.proposed
+            hvac_p = context.PROPOSED
             hvac_id_p = hvac_p["id"]
 
             operation_during_occupied_p = getattr_(
