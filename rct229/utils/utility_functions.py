@@ -1,8 +1,11 @@
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
-from rct229.utils.jsonpath_utils import find_exactly_one_with_field_value, find_one
+from rct229.schema.schema_enums import SchemaEnums
+from rct229.utils.jsonpath_utils import (
+    find_exactly_one_with_field_value,
+    find_exactly_one,
+)
 
-HEATING_SYSTEM = schema_enums["HeatingSystemOptions"]
-COOLING_SYSTEM = schema_enums["CoolingSystemOptions"]
+HEATING_SYSTEM = SchemaEnums.schema_enums["HeatingSystemOptions"]
+COOLING_SYSTEM = SchemaEnums.schema_enums["CoolingSystemOptions"]
 
 
 def find_exactly_one_hvac_system(rmi, hvac_id):
@@ -82,7 +85,10 @@ def find_exactly_one_space(rmi, space_id):
 
     """
     return find_exactly_one_with_field_value(
-        "$.buildings[*].building_segments[*].zones[*].spaces[*]", "id", space_id, rmi
+        "$.buildings[*].building_segments[*].zones[*].spaces[*]",
+        "id",
+        space_id,
+        rmi,
     )
 
 

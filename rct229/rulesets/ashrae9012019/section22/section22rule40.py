@@ -1,5 +1,5 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
@@ -40,7 +40,9 @@ class Section22Rule40(RuleDefinitionBase):
 
     def __init__(self):
         super(Section22Rule40, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, True),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=True
+            ),
             id="22-40",
             description="For systems using purchased chilled water, the cooling source "
             "shall be modeled as purchased chilled water in both the proposed design "
@@ -55,13 +57,13 @@ class Section22Rule40(RuleDefinitionBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_p = context.proposed
+        rmi_p = context.PROPOSED
         purchased_chw_hhw_status_dict_p = check_purchased_chw_hhw_status_dict(rmi_p)
 
         return purchased_chw_hhw_status_dict_p["purchased_cooling"]
 
     def get_calc_vals(self, context, data=None):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
 
         return {"baseline_system_types_dict": baseline_system_types_dict}
