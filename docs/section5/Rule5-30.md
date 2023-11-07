@@ -2,42 +2,43 @@
 # Envelope - Rule 5-30  
 
 **Rule ID:** 5-30  
-**Rule Description:** Proposed fenestration has the same shading projections as the user model.  
-**Rule Assertion:** P-RMR subsurface:has_shading_overhang = U-RMR subsurface:has_shading_overhang; P-RMR subsurface:has_shading_sidefins = U-RMR subsurface:has_shading_sidefins  
-**Appendix G Section:** Section G3.1-1(a) Building Modeling Requirements for the Proposed design  
-**Appendix G Section Reference:**  None
+**Rule Description:** The  baseline roof surfaces shall be modeled using a thermal emittance of 0.9.  
+**Rule Assertion:** B-RMR SurfaceOpticalProperties:thermal_emittance = 0.9  
+**Appendix G Section:** Section G3.1-5(f) Building Envelope Modeling Requirements for the Baseline building  
+**Appendix G Section Reference:** None  
 
-**Applicability:** All required data elements exist for P_RMR  
-**Applicability Checks:** None  
+**Applicability:** All required data elements exist for B_RMR  
+**Applicability Checks:**  None  
 
-**Manual Checks:** None  
-**Evaluation Context:**  Each Data Element  
+**Manual Check:** None  
+**Evaluation Context:** Each Data Element  
 **Data Lookup:** None  
 **Function Call:**  
 
-  1. match_data_element()
-  2. get_opaque_surface_type()
+  1. get_opaque_surface_type()
+  2. get_surface_conditioning_category()
 
-## Rule Logic:
+## Rule Logic:  
 
-- For each building segment in the Proposed model: `for building_segment_p in P_RMR.building.building_segments:`
+- Get surface conditioning category dictionary for B_RMR: ```scc_dictionary_b = get_surface_conditioning_category(B_RMR)```  
 
-  - For each thermal block in building segment: `for thermal_block_p in building_segment_p.thermal_blocks:`
+- For each building segment in the Baseline model: `for building_segment_b in B_RMR.building.building_segments:`
 
-    - For each zone in thermal block: `for zone_p in thermal_block_p.zones:`
+  - For each zone_b in building_segment_b: `for zone_b in building_segments.zones:`
 
-      - For each surface in zone: `for surface_p in zone_p.surfaces:`
+    - For each surface_b in zone_b: `for surface_b in zone_b.surfaces;`
 
-        - Check if surface is above-grade wall or roof: `if get_opaque_surface_type(surface_p) in ["ABOVE-GRADE WALL", "ROOF"]:`
+      - Check if surface is roof and is regulated, get surface optical properties: `if ( get_opaque_surface_type(surface_b.id) == "ROOF" ) AND ( scc_dictionary_b[surface_b.id] != "UNREGULATED" ): surface_optical_properties_b = surface_b.surface_optical_properties`
 
-          - For each subsurface in surface: `for subsurface_p in surface_p:`
+        **Rule Assertion:**  
 
-            - Get matching subsurface in U_RMR: `subsurface_u = match_data_element(U_RMR, Subsurfaces, surface_p.id)`
+        - Case 1: If roof surface thermal emittance is equal to 0.9: `if surface_optical_properties_b.absorptance_thermal_exterior == 0.9: PASS`
 
-              **Rule Assertion:**
+        - Case 2: Else: `Else: FAIL`
 
-              - Case 1: For each subsurface, if subsurface shading projections in P_RMR are the same as in U_RMR: `if ( subsurface_p.has_shading_overhang == subsurface_u.has_shading_overhang ) AND ( subsurface_p.has_shading_sidefins == subsurface_u.has_shading_sidefins ): PASS`
+**Notes:**
 
-              - Case 2: Else: `else: FAIL and raise_warning "FENESTRATION IN THE PROPOSED DESIGN DOES NOT HAVE THE SAME SHADING PROJECTIONS AS IN THE USER MODEL."`
+1. Update Rule ID from 5-40 to 5-30 on 10/26/2023
+
 
 **[Back](../_toc.md)**

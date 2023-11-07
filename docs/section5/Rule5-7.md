@@ -2,14 +2,14 @@
 **Schema Version** 0.0.23  
 **Primary Rule:** False 
 **Rule ID:** 5-7  
-**Rule Description:** Baseline below-grade walls shall conform with assemblies detailed in Appendix A Concrete block, A4).  
+**Rule Description:** Baseline above-grade wall assemblies must conform with assemblies detailed in  Appendix A (Steel-framed A3.3).  
 **Appendix G Section:** Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building  
 **Appendix G Section Reference:** None  
 
 **Applicability:** All required data elements exist for B_RMR  
-**Applicability Checks:**  
-  1. Surfaces that are a regulated below-grade wall 
-
+**Applicability Checks:** 
+  1. Surfaces that are a regulated above-grade wall
+ 
 **Evaluation Context:** Each Data Element  
 **Data Lookup:** None  
 **Function Call:**
@@ -29,7 +29,13 @@
 
         **Rule Assertion:**  
 
-        Case 1: Surface is a below-grade wall and is regulated; outcome is UNDETERMINED: ```if ( ( get_opaque_surface_type(surface_b) == "BELOW-GRADE WALL" ) AND ( scc_dictionary_b[surface_b.id] != UNREGULATED ) ): 
-        outcome = "UNDETERMINED" and raise_message "<Insert surface_b.id> is a regulated below-grade wall surface. Conduct a manual check to confirm that Baseline below-grade wall assemblies conform with assemblies detailed in Appendix A."```  
+        Case 1: Surface is an above-grade wall and is regulated: ```if ( ( get_opaque_surface_type(surface_b) == "ABOVE-GRADE WALL" ) AND ( scc_dictionary_b[surface_b.id] != UNREGULATED ) ):
+        outcome = "UNDETERMINED" and raise_message "<Insert surface_b.id> is a regulated above-grade wall surface. Conduct a manual check to confirm that Baseline above-grade wall assemblies conform with assemblies detailed in Appendix A."```  
 
         Case 2: Else; outcome is NOT_APPLICABLE: ```else: outcome = NOT_APPLICABLE```  
+
+**Notes:**
+
+1. Update Rule ID from 5-10 to 5-7 on 10/26/2023
+
+**[Back](../_toc.md)

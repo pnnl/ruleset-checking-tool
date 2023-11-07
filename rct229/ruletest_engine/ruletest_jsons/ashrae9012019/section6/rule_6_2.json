@@ -7,13 +7,13 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "6-2",
-            "ruleset_reference": "(previously 6-2)Table G3.1 (6)(e)",
+            "ruleset_reference": "Table G3.1 (6)(e)",
             "rule_description": "Interior lighting power for spaces in proposed building with hardwired lighting, including hotel/motel guest rooms and dormitory living quarters shall be >= the value prescribed by Standard 90.1-2019 in Table 9.6.1.\nInterior lighting power for dwelling units shall be >=0.60 W/ft2",
-            "applicable_rmr": "Proposed RMR",
+            "applicable_rmr": "Proposed Design",
             "rule_assertion": "<=",
-            "comparison_value": "User RMR",
-            "rule_dependency": "None",
-            "mandatory_rule": "Yes",
+            "comparison_value": "User Design",
+            "rule_dependency": "-",
+            "mandatory_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -67,7 +67,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "USER"
                     }
                 ]
             },
@@ -121,7 +122,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             }
@@ -135,13 +137,13 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "6-2",
-            "ruleset_reference": "(previously 6-2)Table G3.1 (6)(e)",
+            "ruleset_reference": "Table G3.1 (6)(e)",
             "rule_description": "Interior lighting power for spaces in proposed building with hardwired lighting, including hotel/motel guest rooms and dormitory living quarters shall be >= the value prescribed by Standard 90.1-2019 in Table 9.6.1.\nInterior lighting power for dwelling units shall be >=0.60 W/ft2",
-            "applicable_rmr": "Proposed RMR",
+            "applicable_rmr": "Proposed Design",
             "rule_assertion": "<=",
-            "comparison_value": "User RMR",
-            "rule_dependency": "None",
-            "mandatory_rule": "Yes",
+            "comparison_value": "User Design",
+            "rule_dependency": "-",
+            "mandatory_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -195,7 +197,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "USER"
                     }
                 ]
             },
@@ -249,7 +252,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             }
@@ -263,13 +267,13 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "6-2",
-            "ruleset_reference": "(previously 6-2)Table G3.1 (6)(e)",
+            "ruleset_reference": "Table G3.1 (6)(e)",
             "rule_description": "Interior lighting power for spaces in proposed building with hardwired lighting, including hotel/motel guest rooms and dormitory living quarters shall be >= the value prescribed by Standard 90.1-2019 in Table 9.6.1.\nInterior lighting power for dwelling units shall be >=0.60 W/ft2",
-            "applicable_rmr": "Proposed RMR",
+            "applicable_rmr": "Proposed Design",
             "rule_assertion": "<=",
-            "comparison_value": "User RMR",
-            "rule_dependency": "None",
-            "mandatory_rule": "Yes",
+            "comparison_value": "User Design",
+            "rule_dependency": "-",
+            "mandatory_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -323,7 +327,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "USER"
                     }
                 ]
             },
@@ -377,7 +382,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             }
@@ -391,13 +397,13 @@
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "6-2",
-            "ruleset_reference": "(previously 6-2)Table G3.1 (6)(e)",
+            "ruleset_reference": "Table G3.1 (6)(e)",
             "rule_description": "Interior lighting power for spaces in proposed building with hardwired lighting, including hotel/motel guest rooms and dormitory living quarters shall be >= the value prescribed by Standard 90.1-2019 in Table 9.6.1.\nInterior lighting power for dwelling units shall be >=0.60 W/ft2",
-            "applicable_rmr": "Proposed RMR",
+            "applicable_rmr": "Proposed Design",
             "rule_assertion": "<=",
-            "comparison_value": "User RMR",
-            "rule_dependency": "None",
-            "mandatory_rule": "Yes",
+            "comparison_value": "User Design",
+            "rule_dependency": "-",
+            "mandatory_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -451,7 +457,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "USER"
                     }
                 ]
             },
@@ -505,7 +512,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             }

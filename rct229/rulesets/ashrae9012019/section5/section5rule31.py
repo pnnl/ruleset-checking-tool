@@ -1,13 +1,29 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.utils.jsonpath_utils import find_all
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import PROPOSED
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
+    OpaqueSurfaceType as OST,
+)
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
+    get_opaque_surface_type,
+)
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
+    SurfaceConditioningCategory as SCC,
+)
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
+    get_surface_conditioning_category_dict,
+)
 
-MANUAL_CHECK_MSG = "Surface in P-RMR has subsurfaces modeled with different manual shade status. Verify if subsurfaces manual shade status in B-RMR are modeled the same as in P-RMR"
-
-# Json path for subsurfaces with has_manual_interior_shades set to True
-MANUALLY_SHADED_SUBSURFACES_JSON = (
-    "$.subsurfaces[*][?(@.has_manual_interior_shades=true)]"
+ABSORPTION_THERMAL_EXTERIOR = 0.9
+UNDETERMINED_MSG = (
+    "Roof surface emittance in the proposed model {absorptance_thermal_exterior} matches that in the "
+    "user model but is not equal to the prescribed default value of 0.9. Verify that the modeled value "
+    "is based on testing in accordance with section 5.5.3.1.1(a). "
+)
+PASS_DIFFERS_MSG = (
+    "Roof thermal emittance is equal to the prescribed default value of 0.9 but differs from the "
+    "thermal emittance in the user model {absorptance_thermal_exterior} "
 )
 
 
@@ -16,88 +32,113 @@ class Section5Rule31(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule31, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, True),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=True, BASELINE_0=False, PROPOSED=True
+            ),
             each_rule=Section5Rule31.BuildingRule(),
-            index_rmr="baseline",
+            index_rmr=PROPOSED,
             id="5-31",
-            description="Manual fenestration shading devices, such as blinds or shades, shall be modeled or not modeled the same as in the baseline building design.",
+            description="The proposed roof surfaces shall be modeled using the same thermal emittance as in the user model.",
             ruleset_section_title="Envelope",
-            standard_section="Section G3.1-5(a)(4) Building Modeling Requirements for the Proposed design and G3.1-5(d) Building Modeling Requirements for Baseline building",
+            standard_section="Section G3.1-1(a) Building Envelope Modeling Requirements for the Proposed design",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].buildings[*]",
+            data_items={"climate_zone": (PROPOSED, "weather/climate_zone")},
         )
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule31.BuildingRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, True),
-                # Make sure surfaces are matched in SurfaceRule
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=True, BASELINE_0=False, PROPOSED=True
+                ),
+                each_rule=Section5Rule31.BuildingRule.RoofRule(),
+                index_rmr=PROPOSED,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
-                each_rule=Section5Rule31.BuildingRule.SurfaceRule(),
-                index_rmr="baseline",
             )
 
-        class SurfaceRule(RuleDefinitionListIndexedBase):
+        def create_data(self, context, data=None):
+            building_p = context.PROPOSED
+            return {
+                "scc_dict_p": get_surface_conditioning_category_dict(
+                    data["climate_zone"], building_p
+                ),
+            }
+
+        def list_filter(self, context_item, data=None):
+            surface_p = context_item.PROPOSED
+            scc = data["scc_dict_p"][surface_p["id"]]
+            return (
+                get_opaque_surface_type(surface_p) == OST.ROOF
+                and scc is not SCC.UNREGULATED
+            )
+
+        class RoofRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section5Rule31.BuildingRule.SurfaceRule, self).__init__(
-                    rmrs_used=UserBaselineProposedVals(False, True, True),
-                    each_rule=Section5Rule31.BuildingRule.SurfaceRule.SubsurfaceRule(),
-                    index_rmr="baseline",
-                    # Make sure subsurfaces are matched
-                    # List_path will be evaluated after manual check
-                    list_path="subsurfaces[*]",
-                    manual_check_required_msg=MANUAL_CHECK_MSG,
+                super(Section5Rule31.BuildingRule.RoofRule, self).__init__(
+                    rmrs_used=produce_ruleset_model_instance(
+                        USER=True, BASELINE_0=False, PROPOSED=True
+                    ),
+                    required_fields={
+                        "$": ["optical_properties"],
+                        "optical_properties": ["absorptance_thermal_exterior"],
+                    },
                 )
 
-            def manual_check_required(self, context, calc_vals=None, data=None):
-                surface_p = context.proposed
-                subsurfaces_p = find_all("$.subsurfaces[*]", surface_p)
-                subsurfaces_with_manual_interior_shades_p = find_all(
-                    MANUALLY_SHADED_SUBSURFACES_JSON, surface_p
-                )
+            def get_calc_vals(self, context, data=None):
+                roof_p = context.PROPOSED
+                roof_u = context.USER
 
-                return len(subsurfaces_with_manual_interior_shades_p) != 0 and len(
-                    subsurfaces_with_manual_interior_shades_p
-                ) != len(subsurfaces_p)
-
-            def create_data(self, context, data=None):
-                surface_p = context.proposed
-                subsurfaces_with_manual_interior_shades_p = find_all(
-                    MANUALLY_SHADED_SUBSURFACES_JSON, surface_p
-                )
-                # None - if no subsurfaces, then the code wont evaluate the subsurface rule
                 return {
-                    "proposed_subsurface_manual_shade": subsurfaces_with_manual_interior_shades_p[
-                        0
-                    ][
-                        "has_manual_interior_shades"
-                    ]
-                    if subsurfaces_with_manual_interior_shades_p
-                    else None,
+                    "absorptance_thermal_exterior_p": roof_p["optical_properties"][
+                        "absorptance_thermal_exterior"
+                    ],
+                    "absorptance_thermal_exterior_u": roof_u["optical_properties"][
+                        "absorptance_thermal_exterior"
+                    ],
                 }
 
-            class SubsurfaceRule(RuleDefinitionBase):
-                def __init__(self):
-                    super(
-                        Section5Rule31.BuildingRule.SurfaceRule.SubsurfaceRule, self
-                    ).__init__(
-                        rmrs_used=UserBaselineProposedVals(False, True, False),
-                        required_fields={"$": ["has_manual_interior_shades"]},
-                    )
+            def manual_check_required(self, context, calc_vals=None, data=None):
+                absorptance_thermal_exterior_p = calc_vals[
+                    "absorptance_thermal_exterior_p"
+                ]
+                absorptance_thermal_exterior_u = calc_vals[
+                    "absorptance_thermal_exterior_u"
+                ]
+                return (
+                    absorptance_thermal_exterior_p == absorptance_thermal_exterior_u
+                    and absorptance_thermal_exterior_p != ABSORPTION_THERMAL_EXTERIOR
+                )
 
-                def get_calc_vals(self, context, data=None):
-                    subsurface_b = context.baseline
-                    return {
-                        "subsurface_p_manual_shade": data[
-                            "proposed_subsurface_manual_shade"
-                        ],
-                        "subsurface_b_manual_shade": subsurface_b[
-                            "has_manual_interior_shades"
-                        ],
-                    }
+            def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
+                absorptance_thermal_exterior_p = calc_vals[
+                    "absorptance_thermal_exterior_p"
+                ]
+                return UNDETERMINED_MSG.format(
+                    absorptance_thermal_exterior=absorptance_thermal_exterior_p
+                )
 
-                def rule_check(self, context, calc_vals=None, data=None):
-                    return (
-                        calc_vals["subsurface_p_manual_shade"]
-                        == calc_vals["subsurface_b_manual_shade"]
+            def rule_check(self, context, calc_vals=None, data=None):
+                return (
+                    calc_vals["absorptance_thermal_exterior_p"]
+                    == ABSORPTION_THERMAL_EXTERIOR
+                )
+
+            def get_pass_msg(self, context, calc_vals=None, data=None):
+                """Pre-condition: see rule_check"""
+                absorptance_thermal_exterior_p = calc_vals[
+                    "absorptance_thermal_exterior_p"
+                ]
+                absorptance_thermal_exterior_u = calc_vals[
+                    "absorptance_thermal_exterior_u"
+                ]
+
+                pass_msg = (
+                    PASS_DIFFERS_MSG.format(
+                        absorptance_thermal_exterior=absorptance_thermal_exterior_u
                     )
+                    if absorptance_thermal_exterior_p != absorptance_thermal_exterior_u
+                    else ""
+                )
+
+                return pass_msg
