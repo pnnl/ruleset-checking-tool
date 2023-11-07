@@ -1,6 +1,7 @@
 from rct229.rule_engine.partial_rule_definition import PartialRuleDefinition
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_target_baseline_system import (
     SYSTEMORIGIN,
     get_zone_target_baseline_system,
@@ -12,9 +13,11 @@ class Section18Rule23(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section18Rule23, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, True),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=True
+            ),
             each_rule=Section18Rule23.RuleModelDescriptionRule(),
-            index_rmr="baseline",
+            index_rmr=BASELINE_0,
             id="18-23",
             description="The lab exhaust fan shall be modeled as constant horsepower (kilowatts) reflecting constant-volume stack discharge with outdoor air bypass in the baseline",
             ruleset_section_title="HVAC",
@@ -27,20 +30,22 @@ class Section18Rule23(RuleDefinitionListIndexedBase):
                 "$.calendar": ["is_leap_year"],
             },
             data_items={
-                "climate_zone": ("baseline", "weather/climate_zone"),
-                "is_leap_year": ("baseline", "calendar/is_leap_year"),
+                "climate_zone": (BASELINE_0, "weather/climate_zone"),
+                "is_leap_year": (BASELINE_0, "calendar/is_leap_year"),
             },
         )
 
     class RuleModelDescriptionRule(PartialRuleDefinition):
         def __init__(self):
             super(Section18Rule23.RuleModelDescriptionRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, True),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=True
+                )
             )
 
         def get_calc_vals(self, context, data=None):
-            rmd_b = context.baseline
-            rmd_p = context.proposed
+            rmd_b = context.BASELINE_0
+            rmd_p = context.PROPOSED
             climate_zone_b = data["climate_zone"]
             is_leap_year_b = data["is_leap_year"]
 
