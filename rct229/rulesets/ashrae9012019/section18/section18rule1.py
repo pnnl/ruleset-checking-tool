@@ -1,6 +1,8 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_functions.get_building_lab_zones_list import (
     get_building_lab_zones_list,
 )
@@ -31,9 +33,11 @@ class Section18Rule1(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section18Rule1, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, True),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=True
+            ),
             each_rule=Section18Rule1.RMDRule(),
-            index_rmr="baseline",
+            index_rmr=BASELINE_0,
             id="18-1",
             description="HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h).",
             ruleset_section_title="HVAC - System Zone Assignment",
@@ -56,13 +60,13 @@ class Section18Rule1(RuleDefinitionListIndexedBase):
             super(Section18Rule1.RMDRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, True),
                 each_rule=Section18Rule1.RMDRule.ZoneRule(),
-                index_rmr="baseline",
+                index_rmr=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].zones[*]",
             )
 
         def is_applicable(self, context, data=None):
-            rmd_b = context.baseline
-            rmd_p = context.proposed
+            rmd_b = context.BASELINE_0
+            rmd_p = context.PROPOSED
             climate_zone_b = data["climate_zone"]
             is_leap_year_b = data["is_leap_year"]
 
@@ -73,8 +77,8 @@ class Section18Rule1(RuleDefinitionListIndexedBase):
             return bool(zone_target_baseline_system_dict_b)
 
         def create_data(self, context, data):
-            rmd_b = context.baseline
-            rmd_p = context.proposed
+            rmd_b = context.BASELINE_0
+            rmd_p = context.PROPOSED
             climate_zone_b = data["climate_zone"]
             is_leap_year_b = data["is_leap_year"]
 
@@ -109,7 +113,7 @@ class Section18Rule1(RuleDefinitionListIndexedBase):
             }
 
         def list_filter(self, context_item, data):
-            zone_b = context_item.baseline
+            zone_b = context_item.BASELINE_0
             zone_id_b = zone_b["id"]
             zone_target_baseline_system_dict_b = data[
                 "zone_target_baseline_system_dict_b"
@@ -120,11 +124,13 @@ class Section18Rule1(RuleDefinitionListIndexedBase):
         class ZoneRule(RuleDefinitionBase):
             def __init__(self):
                 super(Section18Rule1.RMDRule.ZoneRule, self).__init__(
-                    rmrs_used=UserBaselineProposedVals(False, True, True),
+                    rmrs_used=produce_ruleset_model_instance(
+                        USER=False, BASELINE_0=True, PROPOSED=True
+                    ),
                 )
 
             def get_calc_vals(self, context, data=None):
-                zone_b = context.baseline
+                zone_b = context.BASELINE_0
                 zone_id_b = zone_b["id"]
 
                 expected_system_type_b = data["zone_target_baseline_system_dict_b"][
@@ -150,7 +156,7 @@ class Section18Rule1(RuleDefinitionListIndexedBase):
                 }
 
             def manual_check_required(self, context, calc_vals=None, data=None):
-                zone_b = context.baseline
+                zone_b = context.BASELINE_0
                 zone_id_b = zone_b["id"]
                 is_zone_likely_a_vestibule_b = data["is_zone_likely_a_vestibule_b"]
                 building_total_lab_exhaust_p = data["building_total_lab_exhaust_p"]
@@ -170,7 +176,7 @@ class Section18Rule1(RuleDefinitionListIndexedBase):
                 return is_undetermined
 
             def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
-                zone_b = context.baseline
+                zone_b = context.BASELINE_0
                 zone_id_b = zone_b["id"]
 
                 system_origin_b = data["zone_target_baseline_system_dict_b"][zone_id_b][
@@ -207,7 +213,7 @@ class Section18Rule1(RuleDefinitionListIndexedBase):
                 return is_system_part_of_expected_sys_type_b
 
             def get_fail_msg(self, context, calc_vals=None, data=None):
-                zone_b = context.baseline
+                zone_b = context.BASELINE_0
                 zone_id_b = zone_b["id"]
 
                 zone_target_baseline_system_dict_b = data[
@@ -223,7 +229,7 @@ class Section18Rule1(RuleDefinitionListIndexedBase):
                 return f"HVAC system type {expected_system_type_b} was selected based on {system_type_origin_b}."
 
             def get_pass_msg(self, context, calc_vals=None, data=None):
-                zone_b = context.baseline
+                zone_b = context.BASELINE_0
                 zone_id_b = zone_b["id"]
 
                 zone_target_baseline_system_dict_b = data[
