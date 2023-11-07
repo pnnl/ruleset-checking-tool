@@ -1,7 +1,6 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_functions.get_building_lab_zones_list import (
     get_building_lab_zones_list,
@@ -50,15 +49,17 @@ class Section18Rule1(RuleDefinitionListIndexedBase):
                 "calendar": ["is_leap_year"],
             },
             data_items={
-                "climate_zone": ("baseline", "weather/climate_zone"),
-                "is_leap_year": ("baseline", "calendar/is_leap_year"),
+                "climate_zone": ("BASELINE_0", "weather/climate_zone"),
+                "is_leap_year": ("BASELINE_0", "calendar/is_leap_year"),
             },
         )
 
     class RMDRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section18Rule1.RMDRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, True),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=True
+                ),
                 each_rule=Section18Rule1.RMDRule.ZoneRule(),
                 index_rmr=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].zones[*]",
