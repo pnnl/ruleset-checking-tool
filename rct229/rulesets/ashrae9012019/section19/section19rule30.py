@@ -38,7 +38,7 @@ class Section19Rule30(RuleDefinitionListIndexedBase):
     def create_data(self, context, data):
         rmd_b = context.BASELINE_0
 
-        return {"baseline_system_types_dict_b": get_baseline_system_types(rmd_b)}
+        return {"baseline_system_types_dict": get_baseline_system_types(rmd_b)}
 
     class HVACRule(PartialRuleDefinition):
         def __init__(self):
@@ -49,15 +49,19 @@ class Section19Rule30(RuleDefinitionListIndexedBase):
             )
 
         def applicability_check(self, context, calc_vals, data):
-            rmd_b = context.BASELINE_0
-            baseline_system_types_dict_b = get_baseline_system_types(rmd_b)
+            hvac_b = context.BASELINE_0
+            hvac_b_id = hvac_b["id"]
+            baseline_system_types_dict = data["baseline_system_types_dict"]
+
+            system_type_b = list(baseline_system_types_dict.keys())[
+                list(baseline_system_types_dict.values()).index([hvac_b_id])
+            ]
 
             return not any(
                 [
                     baseline_system_type_compare(
-                        system_type, applicable_sys_type, False
+                        system_type_b, applicable_sys_type, False
                     )
-                    for system_type in baseline_system_types_dict_b
                     for applicable_sys_type in APPLICABLE_SYS_TYPES
                 ]
             )
