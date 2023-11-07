@@ -1,6 +1,6 @@
 from pydash import flat_map
 
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_functions.is_zone_mechanically_cooled import (
     is_zone_mechanically_cooled,
 )
@@ -13,8 +13,8 @@ from rct229.utils.utility_functions import (
     find_exactly_one_zone,
 )
 
-HeatingSystemOptions = schema_enums["HeatingSystemOptions"]
-HeatingSourceOptions = schema_enums["HeatingSourceOptions"]
+HeatingSystemOptions = SchemaEnums.schema_enums["HeatingSystemOptions"]
+HeatingSourceOptions = SchemaEnums.schema_enums["HeatingSourceOptions"]
 
 
 def is_zone_mechanically_heated_and_not_cooled(rmi, zone_id):

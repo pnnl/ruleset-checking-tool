@@ -12,7 +12,7 @@
             "applicable_rmr": "Proposed RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -44,7 +44,7 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "floor_area": 1000,
+                                                        "floor_area": 92.90303999999999,
                                                         "lighting_space_type": "AUDIENCE_SEATING_AREA_GYMNASIUM"
                                                     }
                                                 ]
@@ -77,7 +77,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             }
@@ -96,7 +97,7 @@
             "applicable_rmr": "Proposed RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -130,7 +131,7 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "floor_area": 1000,
+                                                        "floor_area": 92.90303999999999,
                                                         "lighting_space_type": "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_ALL_OTHER"
                                                     }
                                                 ]
@@ -231,7 +232,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             }
