@@ -12,7 +12,7 @@ from rct229.utils.assertions import getattr_
 
 
 class Section19Rule33(RuleDefinitionListIndexedBase):
-    """Rule 33 of ASHRAE 90.1-2019 Appendix G Section 19 (Envelope)"""
+    """Rule 33 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
 
     def __init__(self):
         super(Section19Rule33, self).__init__(

@@ -127,7 +127,7 @@
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
-                                                    "id": "PTAC Fan 1",
+                                                    "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
@@ -289,7 +289,7 @@
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
-                                                    "id": "PTAC Fan 1",
+                                                    "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
