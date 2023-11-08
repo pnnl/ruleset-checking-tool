@@ -1,6 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import PROPOSED
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
     OpaqueSurfaceType as OST,
 )
@@ -20,35 +21,39 @@ UNDETERMINED_MSG = "Roof surface solar reflectance in the proposed model {absorp
 PASS_DIFFERS_MSG_REGULATED = "Roof surface solar reflectance is equal to the prescribed default value of 0.3 but differs from the solar reflectance in the user model {absorptance_solar_exterior}"
 
 
-class Section5Rule43(RuleDefinitionListIndexedBase):
-    """Rule 43 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
+class Section5Rule33(RuleDefinitionListIndexedBase):
+    """Rule 33 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule43, self).__init__(
-            rmrs_used=UserBaselineProposedVals(True, False, True),
-            each_rule=Section5Rule43.BuildingRule(),
-            index_rmr="proposed",
-            id="5-43",
+        super(Section5Rule33, self).__init__(
+            rmrs_used=produce_ruleset_model_instance(
+                USER=True, BASELINE_0=False, PROPOSED=True
+            ),
+            each_rule=Section5Rule33.BuildingRule(),
+            index_rmr=PROPOSED,
+            id="5-33",
             description="The proposed roof surfaces shall be modeled using the same solar reflectance as in the user "
             "model if the aged test data are available, or equal to 0.7 default reflectance",
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-1(a) Building Envelope Modeling Requirements for the Proposed design",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].buildings[*]",
-            data_items={"climate_zone": ("proposed", "weather/climate_zone")},
+            data_items={"climate_zone": (PROPOSED, "weather/climate_zone")},
         )
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section5Rule43.BuildingRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(True, False, True),
-                each_rule=Section5Rule43.BuildingRule.RoofRule(),
-                index_rmr="proposed",
+            super(Section5Rule33.BuildingRule, self).__init__(
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=True, BASELINE_0=False, PROPOSED=True
+                ),
+                each_rule=Section5Rule33.BuildingRule.RoofRule(),
+                index_rmr=PROPOSED,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
 
         def create_data(self, context, data=None):
-            building_p = context.proposed
+            building_p = context.PROPOSED
             return {
                 "scc_dict_p": get_surface_conditioning_category_dict(
                     data["climate_zone"], building_p
@@ -56,7 +61,7 @@ class Section5Rule43(RuleDefinitionListIndexedBase):
             }
 
         def list_filter(self, context_item, data=None):
-            surface_p = context_item.proposed
+            surface_p = context_item.PROPOSED
             scc = data["scc_dict_p"][surface_p["id"]]
             return (
                 get_opaque_surface_type(surface_p) == OST.ROOF
@@ -65,8 +70,10 @@ class Section5Rule43(RuleDefinitionListIndexedBase):
 
         class RoofRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section5Rule43.BuildingRule.RoofRule, self).__init__(
-                    rmrs_used=UserBaselineProposedVals(True, False, True),
+                super(Section5Rule33.BuildingRule.RoofRule, self).__init__(
+                    rmrs_used=produce_ruleset_model_instance(
+                        USER=True, BASELINE_0=False, PROPOSED=True
+                    ),
                     required_fields={
                         "$": ["optical_properties"],
                         "optical_properties": ["absorptance_solar_exterior"],
@@ -74,8 +81,8 @@ class Section5Rule43(RuleDefinitionListIndexedBase):
                 )
 
             def get_calc_vals(self, context, data=None):
-                roof_p = context.proposed
-                roof_u = context.user
+                roof_p = context.PROPOSED
+                roof_u = context.USER
                 scc_dict_p = data["scc_dict_p"]
 
                 return {
