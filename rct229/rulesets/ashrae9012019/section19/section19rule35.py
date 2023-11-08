@@ -1,7 +1,7 @@
 from rct229.rule_engine.partial_rule_definition import PartialRuleDefinition
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.aggregate_min_OA_schedule_across_zones import (
     aggregate_min_OA_schedule_across_zones,
 )
@@ -11,19 +11,22 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_dict_of_zones_and_termi
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_min_oa_cfm_sch_zone import (
     get_min_oa_cfm_sch_zone,
 )
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.jsonpath_utils import find_all
 
-LIGHTING_SPACE = schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
+LIGHTING_SPACE = SchemaEnums.schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
 
 
 class Section19Rule35(RuleDefinitionListIndexedBase):
-    """Rule 35 of ASHRAE 90.1-2019 Appendix G Section 19 (Envelope)"""
+    """Rule 35 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
 
     def __init__(self):
         super(Section19Rule35, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, True),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=True
+            ),
             each_rule=Section19Rule35.RMDRule(),
-            index_rmr="baseline",
+            index_rmr=BASELINE_0,
             id="19-35",
             description="For baseline systems serving only laboratory spaces that are prohibited from recirculating return air by code or accreditation standards, "
             "the baseline system shall be modeled as 100% outdoor air. Rule only applies when baseline outdoor air CFM is modeled as greater than proposed design outdoor air CFM.",
@@ -36,23 +39,25 @@ class Section19Rule35(RuleDefinitionListIndexedBase):
                 "weather": ["is_leap_year"],
             },
             data_items={
-                "is_leap_year_b": ("baseline", "calendar/is_leap_year"),
-                "is_leap_year_p": ("baseline", "calendar/is_leap_year"),
+                "is_leap_year_b": (BASELINE_0, "calendar/is_leap_year"),
+                "is_leap_year_p": (BASELINE_0, "calendar/is_leap_year"),
             },
         )
 
     class RMDRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section19Rule35.RMDRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, True),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=True
+                ),
                 each_rule=Section19Rule35.RMDRule.HVACRule(),
                 index_rmr="baseline",
                 list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
             )
 
         def create_data(self, context, data):
-            rmd_b = context.baseline
-            rmd_p = context.proposed
+            rmd_b = context.BASELINE_0
+            rmd_p = context.PROPOSED
             leap_year_b = data["is_leap_year_b"]
             leap_year_p = data["is_leap_year_p"]
 
@@ -124,7 +129,9 @@ class Section19Rule35(RuleDefinitionListIndexedBase):
         class HVACRule(PartialRuleDefinition):
             def __init__(self):
                 super(Section19Rule35.RMDRule.HVACRule, self).__init__(
-                    rmrs_used=UserBaselineProposedVals(False, True, True),
+                    rmrs_used=produce_ruleset_model_instance(
+                        USER=False, BASELINE_0=True, PROPOSED=True
+                    ),
                 )
 
             def applicability_check(self, context, calc_vals, data):
@@ -143,7 +150,7 @@ class Section19Rule35(RuleDefinitionListIndexedBase):
                 )
 
             def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
-                hvac_b = context.baseline
+                hvac_b = context.BASELINE_0
                 hvac_id_b = hvac_b["id"]
 
                 hvac_system_serves_only_labs = data["hvac_system_serves_only_labs"]
