@@ -1,3 +1,4 @@
+from pydash import flatten
 from rct229.rule_engine.partial_rule_definition import PartialRuleDefinition
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
@@ -60,19 +61,23 @@ class Section19Rule34(RuleDefinitionListIndexedBase):
 
         zones_virtual_heating_cooling_list = list(
             set(
-                [
-                    hvac_sys_zones_served_dict_p[hvac_id_p]["zone_list"].value()
-                    for hvac_id_p in HVAC_systems_virtual_list_p
-                ]
+                flatten(
+                    [
+                        hvac_sys_zones_served_dict_p[hvac_id_p]["zone_list"].value()
+                        for hvac_id_p in HVAC_systems_virtual_list_p
+                    ]
+                )
             )
         )
 
         applicable_hvac_with_virtual_heating_cooling_b = list(
             set(
-                [
-                    get_list_hvac_systems_associated_with_zone(rmd_b, zone_id_p)
-                    for zone_id_p in zones_virtual_heating_cooling_list
-                ]
+                flatten(
+                    [
+                        get_list_hvac_systems_associated_with_zone(rmd_b, zone_id_p)
+                        for zone_id_p in zones_virtual_heating_cooling_list
+                    ]
+                )
             )
         )
 
@@ -100,16 +105,14 @@ class Section19Rule34(RuleDefinitionListIndexedBase):
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
             hvac_b = context.BASELINE_0
-            hvac_p = context.PROPOSED
             hvac_id_b = hvac_b["id"]
-            hvac_id_p = hvac_p["id"]
 
             operation_during_occupied_b = getattr_(
                 hvac_b, "HVAC", "fan_system", "operation_during_occupied"
             )
 
             return (
-                f"t appears that {hvac_id_p} is only being simulated in the P_RMI to meet the requirements described in Section G3.1-10 HVAC Systems proposed column c and d for heating and/or cooling. "
+                f"t appears that {hvac_id_b} is only being simulated in the P_RMI to meet the requirements described in Section G3.1-10 HVAC Systems proposed column c and d for heating and/or cooling. "
                 f"Check that the hvac system fan is simulated to be cycled ON and OFF to meet heating and/or cooling loads during occupied hours as applicable. "
                 f"Note that per the RMD the fan associated with {hvac_id_b} is operating as {operation_during_occupied_b} during occupied hours. "
                 f"This may require further investigation if only heating or cooling is being simulated to meet Section G3.1-10 HVAC Systems proposed column c or d because different fan operation will be required depending on whether the system is operating in heating or cooling mode."
