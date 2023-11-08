@@ -3,15 +3,16 @@ import os
 
 import jsonschema
 
+from rct229.schema.schema_store import SchemaStore
 from rct229.utils.jsonpath_utils import find_all
 
 file_dir = os.path.dirname(__file__)
 
-SCHEMA_KEY = "ASHRAE229.schema.json"
-SCHEMA_ENUM_KEY = "Enumerations2019ASHRAE901.schema.json"
-SCHEMA_RESNET_ENUM_KEY = "EnumerationsRESNET.schema.json"
-SCHEMA_T24_ENUM_KEY = "Enumerations2019T24.schema.json"
-SCHEMA_OUTPUT_KEY = "Output2019ASHRAE901.schema.json"
+SCHEMA_KEY = SchemaStore.SCHEMA_KEY
+SCHEMA_ENUM_KEY = SchemaStore.SCHEMA_9012019_ENUM_KEY
+SCHEMA_RESNET_ENUM_KEY = SchemaStore.SCHEMA_RESNET_ENUM_KEY
+SCHEMA_T24_ENUM_KEY = SchemaStore.SCHEMA_T24_ENUM_KEY
+SCHEMA_OUTPUT_KEY = SchemaStore.SCHEMA_9012019_OUTPUT_KEY
 SCHEMA_PATH = os.path.join(file_dir, SCHEMA_KEY)
 SCHEMA_ENUM_PATH = os.path.join(file_dir, SCHEMA_ENUM_KEY)
 SCHEMA_T24_ENUM_PATH = os.path.join(file_dir, SCHEMA_T24_ENUM_KEY)

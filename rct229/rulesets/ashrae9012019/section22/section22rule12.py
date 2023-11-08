@@ -1,5 +1,5 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_heat_rejection_loops_connected_to_baseline_systems import (
     get_heat_rejection_loops_connected_to_baseline_systems,
 )
@@ -12,7 +12,9 @@ class Section22Rule12(RuleDefinitionBase):
 
     def __init__(self):
         super(Section22Rule12, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=False
+            ),
             id="22-12",
             description="The heat rejection system shall be a single loop, modeled with a single cooling tower.",
             ruleset_section_title="HVAC - Chiller",
@@ -22,7 +24,7 @@ class Section22Rule12(RuleDefinitionBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmd_b = context.baseline
+        rmd_b = context.BASELINE_0
         heat_rejection_loop_ids_b = (
             get_heat_rejection_loops_connected_to_baseline_systems(rmd_b)
         )
@@ -30,7 +32,7 @@ class Section22Rule12(RuleDefinitionBase):
         return heat_rejection_loop_ids_b
 
     def get_calc_vals(self, context, data=None):
-        rmd_b = context.baseline
+        rmd_b = context.BASELINE_0
         heat_rejection_loop_ids_b = (
             get_heat_rejection_loops_connected_to_baseline_systems(rmd_b)
         )

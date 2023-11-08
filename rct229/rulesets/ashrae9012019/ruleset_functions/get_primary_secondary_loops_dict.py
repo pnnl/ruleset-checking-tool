@@ -1,4 +1,4 @@
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
@@ -8,7 +8,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types i
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 
-FLUID_LOOP = schema_enums["FluidLoopOptions"]
+FLUID_LOOP = SchemaEnums.schema_enums["FluidLoopOptions"]
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_7,

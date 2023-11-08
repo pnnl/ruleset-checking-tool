@@ -1,18 +1,18 @@
 {
-    "rule-5-40-a": {
+    "rule-5-32-a": {
         "Section": 5,
-        "Rule": 40,
+        "Rule": 32,
         "Test": "a",
         "test_description": "Project has one building segment and includes a space with a roof surface. The baseline roof emittance is correctly set to 0.9",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "5-40",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (f)",
-            "rule_description": "The baseline roof surfaces shall be modeled using a thermal emittance of 0.9",
-            "applicable_rmr": "Baseline RMR",
+            "rule_id": "5-32",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance",
+            "rule_description": "The baseline roof surfaces shall be modeled using a solar reflectance of 0.30.",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -56,9 +56,14 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 50,
+                                                        "area": 929.0303999999999,
                                                         "optical_properties": {
-                                                            "id": "Optical Properties 1",
-                                                            "absorptance_thermal_exterior": 0.9
+                                                            "id": "Surface Optical Properties 1",
+                                                            "absorptance_solar_exterior": 0.7
+                                                        },
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "u_factor": 3.2366105565544463
                                                         }
                                                     }
                                                 ]
@@ -73,33 +78,34 @@
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "design_capacity": 9378.275555555556
+                                                    "design_capacity": 0.0
                                                 }
                                             }
                                         ]
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
         }
     },
-    "rule-5-40-b": {
+    "rule-5-32-b": {
         "Section": 5,
-        "Rule": 40,
+        "Rule": 32,
         "Test": "b",
         "test_description": "Project has one building segment and includes a space with a roof surface. The baseline roof emittance is incorrectly set to 0.5 ",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "5-40",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (f)",
-            "rule_description": "The baseline roof surfaces shall be modeled using a thermal emittance of 0.9",
-            "applicable_rmr": "Baseline RMR",
+            "rule_id": "5-32",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance",
+            "rule_description": "The baseline roof surfaces shall be modeled using a solar reflectance of 0.30.",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -143,9 +149,14 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 50,
+                                                        "area": 929.0303999999999,
                                                         "optical_properties": {
-                                                            "id": "Optical Properties 1",
-                                                            "absorptance_thermal_exterior": 0.5
+                                                            "id": "Surface Optical Properties 1",
+                                                            "absorptance_solar_exterior": 0.5
+                                                        },
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "u_factor": 3.2366105565544463
                                                         }
                                                     }
                                                 ]
@@ -160,14 +171,15 @@
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "design_capacity": 9378.275555555556
+                                                    "design_capacity": 0.0
                                                 }
                                             }
                                         ]
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

@@ -7,6 +7,7 @@ from jsonpath_ng.ext import parse as parse_jsonpath
 from pydash.objects import set_
 
 import rct229.schema.config as config
+from rct229.schema.schema_store import SchemaStore
 
 
 def clean_schema_units(schema_unit_str):
@@ -64,7 +65,7 @@ def find_schema_unit_for_json_path(key_list):
 
     root_key = "RulesetProjectDescription"
 
-    secondary_schema_files = ["Output2019ASHRAE901.schema.json"]
+    secondary_schema_files = [SchemaStore.get_output_schema_by_ruleset()]
     schema_dict = config.schema_dict
 
     # Initialize first reference to top level key

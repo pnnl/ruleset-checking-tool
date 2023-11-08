@@ -1,6 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
@@ -32,9 +33,11 @@ class Section22Rule29(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section22Rule29, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=False
+            ),
             each_rule=Section22Rule29.CondensingFluidLoopRule(),
-            index_rmr="baseline",
+            index_rmr=BASELINE_0,
             id="22-29",
             description="For chilled-water systems served by chiller(s) and does not serve baseline System-11, condenser-water pump power shall be 19 W/gpm.",
             ruleset_section_title="HVAC - Chiller",
@@ -45,7 +48,7 @@ class Section22Rule29(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
         # create a list containing all HVAC systems that are modeled in the rmi_b
         available_type_list = [
@@ -66,7 +69,7 @@ class Section22Rule29(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         condenser_loop_pump_power_dict = {
             chiller["condensing_loop"]: find_exactly_one_fluid_loop(
                 rmi_b, getattr_(chiller, "Chiller", "condensing_loop")
@@ -76,17 +79,19 @@ class Section22Rule29(RuleDefinitionListIndexedBase):
         return {"condenser_loop_pump_power_dict": condenser_loop_pump_power_dict}
 
     def list_filter(self, context_item, data):
-        fluid_loops_b = context_item.baseline
+        fluid_loops_b = context_item.BASELINE_0
         return fluid_loops_b.get("pump_power_per_flow_rate")
 
     class CondensingFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
             super(Section22Rule29.CondensingFluidLoopRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, False),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=False
+                ),
             )
 
         def get_calc_vals(self, context, data=None):
-            fluid_loop_b = context.baseline
+            fluid_loop_b = context.BASELINE_0
             pump_power_per_flow_rate = fluid_loop_b["pump_power_per_flow_rate"]
             required_pump_power = REQUIRED_PUMP_POWER
 
