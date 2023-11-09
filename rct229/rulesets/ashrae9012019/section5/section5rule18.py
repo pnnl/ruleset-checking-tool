@@ -21,7 +21,7 @@ class Section5Rule18(PartialRuleDefinition):
             ),
             id="5-18",
             description="The baseline fenestration area for an existing building shall equal the existing "
-                        "fenestration area prior to the proposed work.",
+            "fenestration area prior to the proposed work.",
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(c) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=False,
