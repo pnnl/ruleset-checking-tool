@@ -34,7 +34,7 @@
 
           **Rule Assertion:**  
 
-          - Case 1: If thermal emittance and solar reflectance in B_RMR matches P_RMR; PASS: `if  AND (surface_b.construction.optical_properties.absorptance_thermal_exterior == surface_p.construction.optical_properties.absorptance_thermal_exterior) AND (surface_b.construction.optical_properties.absorptance_solar_exterior == surface_p.construction.optical_properties.absorptance_solar_exterior): PASS`
+          - Case 1: If thermal emittance and solar reflectance in B_RMR matches P_RMR; PASS: `if (surface_b.construction.optical_properties.absorptance_thermal_exterior == surface_p.construction.optical_properties.absorptance_thermal_exterior) AND (surface_b.construction.optical_properties.absorptance_solar_exterior == surface_p.construction.optical_properties.absorptance_solar_exterior): PASS`
 
           - Case 2: Else: `else: FAIL`
 
