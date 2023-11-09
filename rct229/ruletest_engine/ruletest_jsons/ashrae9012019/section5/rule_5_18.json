@@ -155,7 +155,7 @@
         "Section": 5,
         "Rule": 18,
         "Test": "c",
-        "test_description": "Project has one building segment and includes a space whose status type doesn't exist. The status type is correctly modeled in the baseline.",
+        "test_description": "Project has one building segment and includes a space whose status type is NEW. The status type is correctly modeled in the baseline.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "5-18",
@@ -192,7 +192,8 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1"
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "status_type": "NEW"
                                                     }
                                                 ],
                                                 "terminals": [
