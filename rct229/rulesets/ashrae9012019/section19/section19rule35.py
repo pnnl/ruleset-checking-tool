@@ -1,7 +1,7 @@
 from rct229.rule_engine.partial_rule_definition import PartialRuleDefinition
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
-from rct229.rulesets.ashrae9012019 import BASELINE_0
+from rct229.rulesets.ashrae9012019 import BASELINE_0, PROPOSED
 from rct229.rulesets.ashrae9012019.ruleset_functions.aggregate_min_OA_schedule_across_zones import (
     aggregate_min_OA_schedule_across_zones,
 )
@@ -36,11 +36,11 @@ class Section19Rule35(RuleDefinitionListIndexedBase):
             list_path="ruleset_model_descriptions[0]",
             required_fields={
                 "$": ["calendar", "ruleset_model_descriptions"],
-                "weather": ["is_leap_year"],
+                "calendar": ["is_leap_year"],
             },
             data_items={
                 "is_leap_year_b": (BASELINE_0, "calendar/is_leap_year"),
-                "is_leap_year_p": (BASELINE_0, "calendar/is_leap_year"),
+                "is_leap_year_p": (PROPOSED, "calendar/is_leap_year"),
             },
         )
 
@@ -51,7 +51,7 @@ class Section19Rule35(RuleDefinitionListIndexedBase):
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
                 each_rule=Section19Rule35.RMDRule.HVACRule(),
-                index_rmr="baseline",
+                index_rmr=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
             )
 
@@ -100,14 +100,10 @@ class Section19Rule35(RuleDefinitionListIndexedBase):
                     )
 
             aggregated_min_OA_schedule_across_zones_b = (
-                aggregate_min_OA_schedule_across_zones(
-                    rmd_b, zone_OA_flow_list_of_schedules_b
-                )
+                aggregate_min_OA_schedule_across_zones(zone_OA_flow_list_of_schedules_b)
             )
             aggregated_min_OA_schedule_across_zones_p = (
-                aggregate_min_OA_schedule_across_zones(
-                    rmd_p, zone_OA_flow_list_of_schedules_p
-                )
+                aggregate_min_OA_schedule_across_zones(zone_OA_flow_list_of_schedules_p)
             )
 
             modeled_baseline_total_zone_min_OA_flow = sum(
@@ -134,7 +130,7 @@ class Section19Rule35(RuleDefinitionListIndexedBase):
                     ),
                 )
 
-            def applicability_check(self, context, calc_vals, data):
+            def is_applicable(self, context, data=None):
                 hvac_system_serves_only_labs = data["hvac_system_serves_only_labs"]
                 modeled_baseline_total_zone_min_OA_flow = data[
                     "modeled_baseline_total_zone_min_OA_flow"
@@ -143,10 +139,37 @@ class Section19Rule35(RuleDefinitionListIndexedBase):
                     "modeled_proposed_total_zone_min_OA_flow"
                 ]
 
-                return not (
+                return (
                     hvac_system_serves_only_labs
-                    or modeled_baseline_total_zone_min_OA_flow
-                    <= modeled_proposed_total_zone_min_OA_flow
+                    and modeled_baseline_total_zone_min_OA_flow
+                    > modeled_proposed_total_zone_min_OA_flow
+                )
+
+            def applicability_check(self, context, calc_vals, data):
+                hvac_system_serves_only_labs = data["hvac_system_serves_only_labs"]
+                modeled_baseline_total_zone_min_OA_flow = data[
+                    "modeled_baseline_total_zone_min_OA_flow"
+                ]
+                modeled_proposed_total_zone_min_OA_flow = data[
+                    "modeled_proposed_total_zone_min_OA_flow"
+                ]
+                all_lighting_space_types_defined = data[
+                    "all_lighting_space_types_defined"
+                ]
+                are_any_lighting_space_types_defined = data[
+                    "are_any_lighting_space_types_defined"
+                ]
+
+                return (
+                    modeled_baseline_total_zone_min_OA_flow
+                    > modeled_proposed_total_zone_min_OA_flow
+                ) and (
+                    (
+                        hvac_system_serves_only_labs
+                        and (all_lighting_space_types_defined)
+                        or are_any_lighting_space_types_defined
+                    )
+                    or not are_any_lighting_space_types_defined
                 )
 
             def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
