@@ -166,8 +166,10 @@ class Section19Rule35(RuleDefinitionListIndexedBase):
                 ) and (
                     (
                         hvac_system_serves_only_labs
-                        and (all_lighting_space_types_defined)
-                        or are_any_lighting_space_types_defined
+                        and (
+                            all_lighting_space_types_defined
+                            or are_any_lighting_space_types_defined
+                        )
                     )
                     or not are_any_lighting_space_types_defined
                 )
