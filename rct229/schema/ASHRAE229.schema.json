@@ -559,7 +559,7 @@
                 },
                 "status_type": {
                     "description": "Choice of new, existing, addition, alteration, etc. for each ruleset.",
-                    "oneOf": [
+                    "anyOf": [
                         {
                             "$ref": "Enumerations2019ASHRAE901.schema.json#/definitions/SpaceStatusOptions2019ASHRAE901"
                         },
