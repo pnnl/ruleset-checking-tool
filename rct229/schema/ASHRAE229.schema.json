@@ -563,7 +563,7 @@
                         {
                             "$ref": "Enumerations2019ASHRAE901.schema.json#/definitions/SpaceStatusOptions2019ASHRAE901"
                         },
-                                                {
+                        {
                             "$ref": "Enumerations2019T24.schema.json#/definitions/GeneralStatusOptions2019T24"
                         }
                     ]
