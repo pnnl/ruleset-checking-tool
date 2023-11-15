@@ -2,7 +2,7 @@
 # Airside System - Rule 23-1 
 
 **Schema Version:** 0.0.34  
-**Mandatory Rule:** False 
+**Mandatory Rule:** False   
 **Rule ID:** 23-1  
 **Rule Description:** System 2 and 4 - Electric air-source heat pumps shall be modeled with electric auxiliary heat and an outdoor air thermostat. The systems shall be controlled to energize auxiliary heat only when the outdoor air temperature is less than 40°F. The air-source heat pump shall be modeled to continue to operate while auxiliary heat is energized.  
 **Rule Assertion:** B-RMR = expected value  
