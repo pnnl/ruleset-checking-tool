@@ -20,7 +20,7 @@
 **Applicability Check - Check if there is more than 1 building area type for the project**  
 - APPLICABILITY CHECK HERE `APPLICABILITY CHECK HERE`
 
-- Get the project climate zone: `climate_zone = ASHRAE229.weather.climate_zone`
+- Get the project climate zone: `climate_zone = RulesetProjectDescription.weather.climate_zone`
 - Initialize the total project area: `total_area = 0`
 - Initialize the BPF*Area product sum value: `bpf_area_product_sum = 0`
 - For each building segment in B_RMD: `for building_segment_b in B_RMD...building_segments:`
