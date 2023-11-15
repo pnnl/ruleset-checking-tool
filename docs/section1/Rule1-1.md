@@ -20,7 +20,7 @@ get_area_type_bpf()
 ## Rule Logic:   
 **Applicability Check - Check if there is only 1 building area type for the project**  
 - Get the project building area type: `building_area_type = `
-- Get the project climate zone: `climate_zone = ASHRAE229.weather.climate_zone`
+- Get the project climate zone: `climate_zone = RulesetProjectDescription.weather.climate_zone`
 - Get the expected BPF value from Table 4.2.1.1 based on building area and climate zone: `expected_bpf = data_lookup(Table_4_2_1_1, building_area_type)`
 - Get the output BPF value: `output_bpf = Output2019ASHRAE901.total_area_weighted_building_performance_factor`
 **Rule Assertion:**
