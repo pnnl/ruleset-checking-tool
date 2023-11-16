@@ -52,30 +52,26 @@ class Section5Rule18(RuleDefinitionListIndexedBase):
         def get_calc_vals(self, context, data=None):
             zone_b = context.BASELINE_0
 
-            has_existing_or_altered_space_b = any(
-                [
-                    space_b["id"]
-                    for space_b in find_all("$.spaces[*]", zone_b)
-                    if space_b.get("status_type") in APPLICABLE_GENERAL_STATUS
-                ]
-            )
+            existing_or_altered_space_list_b = [
+                space_b["id"]
+                for space_b in find_all("$.spaces[*]", zone_b)
+                if space_b.get("status_type") in APPLICABLE_GENERAL_STATUS
+            ]
 
-            return {"has_existing_or_altered_space_b": has_existing_or_altered_space_b}
+            return {
+                "existing_or_altered_space_list_b": existing_or_altered_space_list_b
+            }
 
         def applicability_check(self, context, calc_vals, data):
-            has_existing_or_altered_space_b = calc_vals[
-                "has_existing_or_altered_space_b"
+            existing_or_altered_space_list_b = calc_vals[
+                "existing_or_altered_space_list_b"
             ]
 
-            return has_existing_or_altered_space_b
+            return len(existing_or_altered_space_list_b) > 0
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
-            has_existing_or_altered_space_b = calc_vals[
-                "has_existing_or_altered_space_b"
+            existing_or_altered_space_list_b = calc_vals[
+                "existing_or_altered_space_list_b"
             ]
 
-            return (
-                f"Part or all of zones listed below is existing or altered. The baseline vertical fenestration "
-                f"area for existing zones must equal to the fenestration area prior to the proposed scope of "
-                f"work. The baseline fenestration area in zone must be checked manually.{has_existing_or_altered_space_b}"
-            )
+            return f"Part or all of spaces listed below is existing or altered. The baseline vertical fenestration area for a existing zone must equal to the fenestration area prior to the proposed scope of work. The baseline fenestration area in zone must be checked manually. ${existing_or_altered_space_list_b}"
