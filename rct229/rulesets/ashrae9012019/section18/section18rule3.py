@@ -8,15 +8,15 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_target_baseline_sy
 )
 
 
-class Section18Rule23(RuleDefinitionListIndexedBase):
-    """Rule 23 of ASHRAE 90.1-2019 Appendix G Section 5 (HVAC - System Zone Assignment)"""
+class Section18Rule3(RuleDefinitionListIndexedBase):
+    """Rule 3 of ASHRAE 90.1-2019 Appendix G Section 5 (HVAC - System Zone Assignment)"""
 
     def __init__(self):
-        super(Section18Rule23, self).__init__(
+        super(Section18Rule3, self).__init__(
             rmrs_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section18Rule23.RuleModelDescriptionRule(),
+            each_rule=Section18Rule3.RuleModelDescriptionRule(),
             index_rmr=BASELINE_0,
             id="18-23",
             description="The lab exhaust fan shall be modeled as constant horsepower (kilowatts) reflecting constant-volume stack discharge with outdoor air bypass in the baseline",
@@ -26,8 +26,8 @@ class Section18Rule23(RuleDefinitionListIndexedBase):
             list_path="ruleset_model_descriptions[0]",
             required_fields={
                 "$": ["calendar", "weather"],
-                "$.weather": ["climate_zone"],
-                "$.calendar": ["is_leap_year"],
+                "weather": ["climate_zone"],
+                "calendar": ["is_leap_year"],
             },
             data_items={
                 "climate_zone": (BASELINE_0, "weather/climate_zone"),
@@ -37,7 +37,7 @@ class Section18Rule23(RuleDefinitionListIndexedBase):
 
     class RuleModelDescriptionRule(PartialRuleDefinition):
         def __init__(self):
-            super(Section18Rule23.RuleModelDescriptionRule, self).__init__(
+            super(Section18Rule3.RuleModelDescriptionRule, self).__init__(
                 rmrs_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 )
