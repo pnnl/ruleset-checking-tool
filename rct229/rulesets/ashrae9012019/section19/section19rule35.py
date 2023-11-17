@@ -77,20 +77,27 @@ class Section19Rule35(RuleDefinitionListIndexedBase):
                 for zone_id_b in dict_of_zones_and_terminal_units_served_by_hvac_sys_b[
                     hvac_id_b
                 ]["zone_list"]:
-                    for space_b in find_all(
-                        f'$.buildings[*].building_segments[*].zones[*][?(@.id="{zone_id_b}")].spaces[*]',
+                    lighting_space_types_b = find_all(
+                        f'$.buildings[*].building_segments[*].zones[*][?(@.id="{zone_id_b}")].spaces[*].lighting_space_type',
                         rmd_b,
-                    ):
-                        lighting_space_type_b = space_b.get("lighting_space_type")
-                        if lighting_space_type_b is None:
-                            all_lighting_space_types_defined = False
-                        else:
-                            are_any_lighting_space_types_defined = True
-                            if (
-                                lighting_space_type_b
-                                != LIGHTING_SPACE.LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM
-                            ):
-                                hvac_system_serves_only_labs = False
+                    )
+                    all_lighting_space_types_defined = (
+                        all(lighting_space_types_b) and all_lighting_space_types_defined
+                    )
+                    are_any_lighting_space_types_defined = (
+                        any(lighting_space_types_b)
+                        or are_any_lighting_space_types_defined
+                    )
+                    hvac_system_serves_only_labs = (
+                        all(
+                            map(
+                                lambda space_type: space_type
+                                == LIGHTING_SPACE.LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM,
+                                lighting_space_types_b,
+                            )
+                        )
+                        and hvac_system_serves_only_labs
+                    )
 
                     zone_OA_flow_list_of_schedules_b.append(
                         get_min_oa_cfm_sch_zone(rmd_b, zone_id_b, leap_year_b)
