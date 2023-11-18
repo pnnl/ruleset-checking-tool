@@ -5,7 +5,15 @@ from rct229.schema.schema_enums import SchemaEnums
 from rct229.schema.schema_store import SchemaStore
 
 # Add all available rule modules in __all__
-__all__ = ["section5", "section6", "section19", "section21", "section22", "section23"]
+__all__ = [
+    "section5",
+    "section6",
+    "section18",
+    "section19",
+    "section21",
+    "section22",
+    "section23",
+]
 
 
 if SchemaEnums.schema_enums.get("RulesetModelOptions2019ASHRAE901"):
