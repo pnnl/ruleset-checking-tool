@@ -1,6 +1,6 @@
-
 # Envelope - Rule 5-41
-
+**Schema Version:** 0.0.29
+**Mandatory Rule:** True    
 **Rule ID:** 5-41
 **Rule Description:** Opaque roof surfaces that are not regulated (not part of opaque building envelope) must be modeled with the same thermal emittance and solar reflectance in the baseline as in the proposed design. 
 **Appendix G Section:** Section G3.1-5 Building Envelope Modeling Requirements for the Baseline building  
@@ -35,8 +35,10 @@
           **Rule Assertion:**  
 
           - Case 1: If thermal emittance and solar reflectance in B_RMD matches P_RMD; PASS: `if (surface_b.optical_properties.absorptance_thermal_exterior == surface_p.optical_properties.absorptance_thermal_exterior) AND (surface_b.optical_properties.absorptance_solar_exterior == surface_p.optical_properties.absorptance_solar_exterior): PASS`
+          
+          - Case 2: Else if the thermal emittance or solar reflectance in B_RMD or P_RMD is NULL; UNDETERMINED: `if any(absorptance_property == "NULL" for absorptance_property in [surface_b.optical_properties.absorptance_thermal_exterior, surface_p.optical_properties.absorptance_thermal_exterior, surface_b.optical_properties.absorptance_solar_exterior, surface_p.optical_properties.absorptance_solar_exterior]): UNDETERMINED`
 
-          - Case 2: Else: `else: FAIL`
+          - Case 3: Else: `else: FAIL`
 
 **Notes:**
 
