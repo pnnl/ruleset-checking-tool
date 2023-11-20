@@ -2,8 +2,7 @@
 **Schema Version:** 0.0.29
 
 **Description:** Get a dictionary of the BPF_BAT and areas for a given zone.
-- The function looks at the space lighting type to guess a building area type  
-- for a BuildingSegment whose bpf_building_area_type has not been specified AND lighting_building_area_type is NONE
+- The function looks at the space lighting type to guess a building area type for a BuildingSegment whose bpf_building_area_type has not been specified AND lighting_building_area_type is NONE
 
 **Inputs:**  
 - **B-RMD**: The baseline ruleset model instance
@@ -136,8 +135,8 @@
 1. at the time of writing this RDS, bpf_building_area_type is not yet a part of the schema.
 2. Check Mapping Scheme:
    - Scheme Overview:
-   - UNDETERMINED - Space type could exist in more than one of the BPF Building Area Types. Lean towards UNDETERMINED in uncertainty because misinterpretation by this function could cause false FAIL outcomes
-   - MULTIFAMILY, HEALTHCARE_HOSPITAL, OFFICE, RESTAURANT, RETAIL, SCHOOL, or WAREHOUSE - Space type is most likely to exist in one of these building area type
-   - ALL_OTHER - Space type is not likely to exist in any of MULTIFAMILY, HEALTHCARE_HOSPITAL, OFFICE, RESTAURANT, RETAIL, SCHOOL, or WAREHOUSE building area types
+   - UNDETERMINED = Space type could exist in more than one of the BPF Building Area Types. Lean towards UNDETERMINED in uncertainty because misinterpretation by this function could cause false FAIL outcomes
+   - [MULTIFAMILY, HEALTHCARE_HOSPITAL, OFFICE, RESTAURANT, RETAIL, SCHOOL, WAREHOUSE] = Space type is most likely to exist in one of these building area types
+   - ALL_OTHER = Space type is not likely to exist in any of [MULTIFAMILY, HEALTHCARE_HOSPITAL, OFFICE, RESTAURANT, RETAIL, SCHOOL, WAREHOUSE] building area types
 
 **[Back](../_toc.md)**
