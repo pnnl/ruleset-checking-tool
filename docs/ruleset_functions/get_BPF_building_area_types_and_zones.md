@@ -12,8 +12,7 @@
 **Returns:**  
 - **building_area_types_with_total_area_and_zones_dict**: A dict that saves all the BPF building area types and includes a list of all the zone ids associated with area type as well as the total area of each building area type: {SCHOOL: {"ZONE_IDS": ["zone_1","zone_5"], "AREA": 50000, "CLASSIFICATION_SOURCE": "BUILDING_SEGMENT_BPF_BAT"}, MULTIFAMILY: {"ZONE_IDS": ["zone_2", "zone_3", "zone_4"], "AREA": 34567, "CLASSIFICATION_SOURCE": "BUILDING_SEGMENT_LIGHTING"}, HEALTHCARE_HOSPITAL: {"ZONE_IDS": ["r1","r2","r3"], "AREA": 20381, "CLASSIFICATION_SOURCE": "SPACE_LIGHTING"}
  
-**Function Call:** 
-- **get_zone_conditioning_category**
+**Function Call:**
 - **get_zone_BPF_BAT**
 
 ## Logic:  
@@ -54,30 +53,28 @@
 	NONE: NONE, 
 	}```
 
-- use the function get_zone_conditioning_category to get a dictionary of zone id's and their conditioning category - we will only include conditioned zones in the building_area_types_with_total_area_and_zones_dict: `zone_conditioning_category_dict = get_zone_conditioning_category(RMD)`
-- create dict `building_area_types_with_total_area_and_zones_dict`: `building_area_types_with_total_area_and_zones_dict = {}`
+- Create a dict to store results`building_area_types_with_total_area_and_zones_dict`: `building_area_types_with_total_area_and_zones_dict = {}`
 - For each building segment in RMD: `for building_segment in RMR.building.building_segments:`
-	- if the building segment has a BPF_BAT assigned, assign all zones in that building segment to the BPF_BAT: `if building_segment.bpf_building_area_type != NULL:`
-		- assign the BPF_BAT to be the building_segment_BPF_BAT: `building_segment_BPF_BAT = building_segment.bpf_building_area_type`
-		- assign "BUILDING_SEGMENT_BPF_BAT" to classification_source: `classification_source = "BUILDING_SEGMENT_BPF_BAT"`
-	- else if there is no BPF_BAT assigned, look in the building_segment lighting_building_area_type: `elif building_segment.lighting_building_area_type != NULL and building_segment.lighting_building_area_type != NONE`
-		- assign the BPF_BAT to the building_segment_BPF_BAT using the lighting_space_lookup: `building_segment_BPF_BAT = building_area_lookup[building_segment.lighting_building_area_type]`
-		- assign "BUILDING_SEGMENT_LIGHTING" to classification_source: `classification_source = "BUILDING_SEGMENT_LIGHTING"`
-	- else look at each zone, and then each space and determine the building_segment_BPF_BAT using the largest space.lighting_space_type: `else:`
-		- create a dictionary to keep track of the space types and areas: `building_segment_space_types_areas_dict = {}`
-		- loop through each zone: `for zone in building_segment.zones:`
-			- create a dictionary for the zone BPF_BAT space types using the function get_zone_BPF_BAT: `zone_BPF_BAT_dict = get_zone_BPF_BAT(B_RMI, zone.id)`
-			- loop through the zone_BPF_BAT_dict: `for space_BPF_BAT in zone_BPF_BAT_dict:`
-				- add this space type to the building_segment_space_types_areas_dict if it doesn't exist yet: `building_segment_space_types_areas_dict[space_BPF_BAT] = building_segment_space_types_areas_dict[space_BPF_BAT] or 0`
-				- add the space area: `building_segment_space_types_areas_dict[space_BPF_BAT] += zone_BPF_BAT_dict[space_BPF_BAT]`
-		- get the BPF_BAT with the largest floor area from building_segment_space_types_areas_dict: `building_segment_BPF_BAT = max(building_segment_space_types_areas_dict, key=lambda k: building_segment_space_types_areas_dict[k])`
-		- assign "SPACE_LIGHTING" to classification_source: `classification_source = "SPACE_LIGHTING"`
-	- at this point, the building_segment_BPF_BAT has been defined by one of the three approaches, add a nested dict for this type of BPF_BAT to the building_area_types_with_total_area_and_zones_dict if it doesn't exist already: `if building_segment_BPF_BAT not in building_area_types_with_total_area_and_zones_dict: building_area_types_with_total_area_and_zones_dict[building_segment_BPF_BAT] = {"ZONE_IDS":[], "AREA":0, "CLASSIFICATION_SOURCE": classification_source}`
-	- loop through each zone: `for zone in building_segment.zones:`
-		- using zone_conditioning_category_dict, check if the zone is conditioned. `if zone_conditioning_category_dict[zone.id] in ["CONDITIONED RESIDENTIAL", "CONDITIONED NON-RESIDENTIAL", "CONDITIONED MIXED"]`:
-			- add the zone to the building_area_types_with_total_area_and_zones_dict: `building_area_types_with_total_area_and_zones_dict[building_segment_BPF_BAT]["ZONE_IDS"].append(zone.id)`
-				- loop through each space: `for space in zone.spaces:`
-					- add the space area to the building_area_types_with_total_area_and_zones_dict: `building_area_types_with_total_area_and_zones_dict[building_segment_BPF_BAT]["AREA"] += space.floor_area`
+	- If the building segment has a BPF_BAT assigned, assign all zones in that building segment to the BPF_BAT: `if building_segment.bpf_building_area_type != NULL:`
+		- Assign the BPF_BAT to be the building_segment_BPF_BAT: `building_segment_BPF_BAT = building_segment.bpf_building_area_type`
+		- Assign "BUILDING_SEGMENT_BPF_BAT" to classification_source: `classification_source = "BUILDING_SEGMENT_BPF_BAT"`
+	- Else if there is no BPF_BAT assigned, look in the building_segment lighting_building_area_type: `elif building_segment.lighting_building_area_type != NULL and building_segment.lighting_building_area_type != NONE`
+		- Assign the BPF_BAT to the building_segment_BPF_BAT using the lighting_space_lookup: `building_segment_BPF_BAT = building_area_lookup[building_segment.lighting_building_area_type]`
+		- Assign "BUILDING_SEGMENT_LIGHTING" to classification_source: `classification_source = "BUILDING_SEGMENT_LIGHTING"`
+	- Else look at each zone, and then each space and determine the building_segment_BPF_BAT using the largest space.lighting_space_type: `else:`
+		- Create a dictionary to keep track of the space types and areas: `building_segment_space_types_areas_dict = {}`
+		- For each zone in the building segment: `for zone in building_segment.zones:`
+			- Create a dictionary for the zone BPF_BAT space types using the function get_zone_BPF_BAT: `zone_BPF_BAT_dict = get_zone_BPF_BAT(B_RMI, zone.id)`
+			- For each mapped building area type in the zone_BPF_BAT_dict: `for space_BPF_BAT in zone_BPF_BAT_dict:`
+				- Add this space type to the building_segment_space_types_areas_dict if it doesn't exist yet: `building_segment_space_types_areas_dict[space_BPF_BAT] = building_segment_space_types_areas_dict[space_BPF_BAT] or 0`
+				- Add the space area: `building_segment_space_types_areas_dict[space_BPF_BAT] += zone_BPF_BAT_dict[space_BPF_BAT]`
+		- Get the BPF_BAT with the largest floor area from building_segment_space_types_areas_dict: `building_segment_BPF_BAT = max(building_segment_space_types_areas_dict, key=lambda k: building_segment_space_types_areas_dict[k])`
+		- Assign "SPACE_LIGHTING" to classification_source: `classification_source = "SPACE_LIGHTING"`
+	- At this point, the building_segment_BPF_BAT has been defined by one of the three approaches, add a nested dict for this type of BPF_BAT to the building_area_types_with_total_area_and_zones_dict if it doesn't exist already: `if building_segment_BPF_BAT not in building_area_types_with_total_area_and_zones_dict: building_area_types_with_total_area_and_zones_dict[building_segment_BPF_BAT] = {"ZONE_IDS":[], "AREA":0, "CLASSIFICATION_SOURCE": classification_source}`
+	- For each zone in the building segment: `for zone in building_segment.zones:`
+        - Add the zone to the building_area_types_with_total_area_and_zones_dict: `building_area_types_with_total_area_and_zones_dict[building_segment_BPF_BAT]["ZONE_IDS"].append(zone.id)`
+        - For each space in the zone: `for space in zone.spaces:`
+            - Add the space area to the building_area_types_with_total_area_and_zones_dict: `building_area_types_with_total_area_and_zones_dict[building_segment_BPF_BAT]["AREA"] += space.floor_area`
 
 	 **Returns** `return building_area_types_with_total_area_and_zones_dict`  
 
