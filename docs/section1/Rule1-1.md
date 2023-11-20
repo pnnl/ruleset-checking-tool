@@ -38,5 +38,6 @@ get_BPF_building_area_types_and_zones()
 1. JDJ: Rule assertion at the RPD level, not at the building level. For projects that include more than one building, there will be a single compliance calculation that includes all buildings.
 2. The way this is written will also cover the requirements of rule 1-2 without needing to repeat the logic of get_BPF_building_area_types_and_zones() again.
 3. Could technically compare the summed product values without dividing by total area, but this way the expected BPF and outcome BPF values are available for a potential failure message.
+4. This rule and subfunctions are dependent on a new schema element in the BuildingSegment data group, with proposed name `bpf_building_area_type`
 
 **[Back](../_toc.md)**
