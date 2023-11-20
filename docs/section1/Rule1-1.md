@@ -24,7 +24,7 @@ get_BPF_building_area_types_and_zones()
 - Create a variable to store the expected summed product of BPF and Area: `expected_bpf_bat_sum_prod = 0`
 - Create a variable to store the Total Area: `total_area = 0`
 - Iterate through the building area type(s) in the BPF building area type dictionary: `for bpf_bat in bpf_building_area_type_dict:`
-  - Get the expected BPF value from Table 4.2.1.1 based on building area and climate zone: `expected_bpf = data_lookup(Table_4_2_1_1, bpf_bat)`
+  - Get the expected BPF value from Table 4.2.1.1 based on building area and climate zone: `expected_bpf = data_lookup(Table_4_2_1_1, bpf_bat, climate_zone)`
   - Get the output BPF value: `output_bpf = Output2019ASHRAE901.total_area_weighted_building_performance_factor`
   - Add the area to the total: `total_area += bpf_building_area_type_dict[bpf_bat]["AREA"]`
   - Add the product of expected BPF and area to the expected summed product of BPF and area: `expected_bpf_bat_sum_prod += (expected_bpf * bpf_building_area_type_dict[bpf_bat]["AREA"])`
