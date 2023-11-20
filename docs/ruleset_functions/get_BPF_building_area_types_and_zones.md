@@ -82,5 +82,7 @@
 1. Mapping scheme from lighting building area types to BPF building area types is replicated from the 90.1 Performance Based Compliance Form
 2. Review subroutine 'get_zone_BPF_BAT.md' for mapping scheme from lighting space types to BPF building area types
 3. The description of BuildingSegment data group in the schema defines building segments as "large portions of a building that share a building area type".
+4. Functions `get_BPF_building_area_types_and_zones()` and `get_zone_BPF_BAT()` are based on similar concept used for determining the HVAC building area types `get_HVAC_building_area_types_and_zones()` and `get_zone_HVAC_BAT()`
+5. This rule and subfunctions are dependent on a new schema element in the BuildingSegment data group, with proposed name `bpf_building_area_type`
 
 **[Back](../_toc.md)**
