@@ -16,10 +16,9 @@
 **Function Calls:**
 
 
-## Rule Logic:   
-- Get the output PCI: `output_performance_cost_index = Output2019ASHRAE901.performance_cost_index`
-    **Rule Assertion**
-- Case 1: If the PCI is the correct ratio between proposed and baseline building performance; PASS: `if output_performance_cost_index == Output2019ASHRAE901.total_proposed_building_energy_cost_including_renewable_energy/Output2019ASHRAE901.baseline_building_performance_energy_cost`
+## Rule Logic:
+**Rule Assertion**
+- Case 1: If the PCI is the correct ratio between proposed and baseline building performance; PASS: `if Output2019ASHRAE901.performance_cost_index == Output2019ASHRAE901.total_proposed_building_energy_cost_including_renewable_energy/Output2019ASHRAE901.baseline_building_performance_energy_cost`
 - Case 2: Else; FAIL: `else: FAIL`
 
 **Notes/Questions:** None
