@@ -24,12 +24,10 @@ class Section5Rule39(RuleDefinitionBase):
 
     def get_calc_vals(self, context, data=None):
         rpd = context.BASELINE_0
-        ground_temperature_schedule_id = find_one(
-            "$.weather.ground_temperature_schedule", rpd
-        )
+        ground_temperature_schedule = rpd["weather"]["ground_temperature_schedule"]
         has_ground_temperature_schedule = any(
             [
-                schedule["id"] == ground_temperature_schedule_id
+                schedule["id"] == ground_temperature_schedule
                 for schedule in find_all(
                     "$.ruleset_model_descriptions[0].schedules[*]", rpd
                 )
