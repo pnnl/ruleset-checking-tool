@@ -1,6 +1,6 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
-from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.jsonpath_utils import find_all, find_one
 
 
 class Section5Rule39(RuleDefinitionBase):
@@ -24,13 +24,15 @@ class Section5Rule39(RuleDefinitionBase):
 
     def get_calc_vals(self, context, data=None):
         rpd = context.BASELINE_0
-        weather = rpd.get("weather")
-        ground_temperature_schedule_id = weather.get("ground_temperature_schedule")
-        rmds = rpd.get("ruleset_model_descriptions")
+        ground_temperature_schedule_id = find_one(
+            "$.weather.ground_temperature_schedule", rpd
+        )
         has_ground_temperature_schedule = any(
             [
                 schedule["id"] == ground_temperature_schedule_id
-                for schedule in find_all("$.schedules[*]", rmds)
+                for schedule in find_all(
+                    "$.ruleset_model_descriptions[0].schedules[*]", rpd
+                )
             ]
         )
         return {"has_ground_temperature_schedule": has_ground_temperature_schedule}
