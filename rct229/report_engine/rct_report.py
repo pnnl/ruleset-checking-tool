@@ -8,6 +8,8 @@ from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
 class RCTReport:
     def __init__(self):
         self.title = "Ruleset Checking Tool"
+        self.tool = "Ruleset Checking Tool"
+        self.version = "0.1"
         self.purpose = "report"
         self.ruleset = "ruleset"
         self.date_run = str(datetime.utcnow())

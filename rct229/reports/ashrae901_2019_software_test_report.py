@@ -3,15 +3,20 @@ from copy import deepcopy
 from datetime import datetime
 
 from rct229.report_engine.rct_report import RCTReport
+from rct229 import __version__ as version
+from rct229.reports.utils import software_test_evaluation_converter
+from rct229.schema import config
 
 
 class ASHRAE9012019SoftwareTestReport(RCTReport):
     def __init__(self):
         super(ASHRAE9012019SoftwareTestReport, self).__init__()
         self.title = "ASHRAE STD 229P RULESET CHECKING TOOL"
+        self.tool = "PNNL Ruleset Checking Tool"
+        self.version = version
         self.purpose = "RCT Ruleset Software Testing Report"
         self.ruleset = "ASHRAE 90.1-2019 Performance Rating Method (Appendix G)"
-        self.schema_version = "0.0.23"
+        self.schema_version = config.schema_version
         self.date_run = str(datetime.now())
         self.ruleset_report_file = "ashrae901_2019_software_testing_report.json"
 
@@ -19,6 +24,8 @@ class ASHRAE9012019SoftwareTestReport(RCTReport):
         report_json = dict()
         report_json["title"] = self.title
         report_json["purpose"] = self.purpose
+        report_json["tool_name"] = self.tool
+        report_json["tool_version"] = self.version
         report_json["ruleset"] = self.ruleset
         report_json["date_run"] = self.date_run
         report_json["schema_version"] = self.schema_version
@@ -29,10 +36,12 @@ class ASHRAE9012019SoftwareTestReport(RCTReport):
     def generate_rule_report(self, rule_test_dict, outcome_dict):
         # Sum up the outcomes for every rule unit test evaluation in this rule test. The outcome of this is used by
         # the calculate_rule_outcome function to determine the overall actual_rule_unit_test_evaluation_outcome
+        test_evaluations = []
         for test_evaluation in rule_test_dict["rule_unit_test_evaluation"]:
             result = test_evaluation["result"]
             outcome_dict[result] += 1
-
+            test_evaluations.append(software_test_evaluation_converter(test_evaluation))
+        rule_test_dict["rule_unit_test_evaluation"] = test_evaluations
         return rule_test_dict
 
     def add_rule_to_ruleset_report(self, ruleset_report, rule_test_dict, rule_outcome):
