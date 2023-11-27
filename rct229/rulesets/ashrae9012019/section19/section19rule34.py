@@ -63,7 +63,7 @@ class Section19Rule34(RuleDefinitionListIndexedBase):
             set(
                 flatten(
                     [
-                        hvac_sys_zones_served_dict_p[hvac_id_p]["zone_list"].value()
+                        hvac_sys_zones_served_dict_p[hvac_id_p]["zone_list"]
                         for hvac_id_p in HVAC_systems_virtual_list_p
                     ]
                 )
@@ -89,7 +89,7 @@ class Section19Rule34(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section19Rule34.HVACRule, self).__init__(
                 rmrs_used=produce_ruleset_model_instance(
-                    USER=False, BASELINE_0=True, PROPOSED=True
+                    USER=False, BASELINE_0=True, PROPOSED=False
                 ),
             )
 
