@@ -1,7 +1,7 @@
-# HVAC_SystemZoneAssignment – Rule 18-23  
+# HVAC_SystemZoneAssignment – Rule 18-3    
 **Schema Version:** 0.0.28  
 **Mandatory Rule:** False    
-**Rule ID:** 18-23  
+**Rule ID:** 18-3  
  
 **Rule Description:** The lab exhaust fan shall be modeled as constant horsepower (kilowatts) reflecting constant-volume stack discharge with outdoor air bypass in the baseline
 
