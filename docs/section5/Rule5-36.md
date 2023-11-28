@@ -2,10 +2,10 @@
 # Envelope - Rule 5-36  
 
 **Rule ID:** 5-36  
-**Rule Description:**  Skylight area must be allocated to surfaces in the same proportion in the baseline as in the proposed design.  
-**Rule Assertion:** B-RMR (subsurface.glazed_area+subsurface.opaque_area) = expected value for each zone  
-**Appendix G Section:** Section G3.1-5(e) Building Envelope Modeling Requirements for the Baseline building  
-**Appendix G Section Reference:** None  
+**Rule Description:** The baseline air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1 cfm/ft2.  The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section G3.1.1.4.  
+**Rule Assertion:** Sum of B-RMR infiltration.infiltration.air_leakage_rate = expected value.  
+**Appendix G Section:** Section 5 Envelope  
+**Appendix G Section Reference:** Section G3.1-5(h) Building Envelope Modeling Requirements for the Baseline building  
 
 **Applicability:** All required data elements exist for B_RMR  
 **Applicability Checks:**  None  
@@ -13,43 +13,35 @@
 **Manual Check:** None  
 **Evaluation Context:** Each Data Element  
 **Data Lookup:** None  
-**Function Call:**  
+**Function Call:** 
 
-  1. get_building_segment_skylight_roof_areas()  
-  2. get_surface_conditioning_category()
-  3. get_opaque_surface_type()
-  4. match_data_element()
+  1. get_surface_conditioning_category()
+  2. get_zone_conditioning_category()
 
-## Rule Logic:
+## Rule Logic:  
 
-- Get building segment skylight roof areas dictionary for B_RMR: `skylight_roof_areas_dictionary_b = get_building_segment_skylight_roof_areas(B_RMR)`
+- Get surface conditioning category dictionary for B_RMR: `scc_dict_b = get_surface_conditioning_category(B_RMR)`
 
-- Get building segment skylight roof areas dictionary for P_RMR: `skylight_roof_areas_dictionary_p = get_building_segment_skylight_roof_areas(P_RMR)`
+- Get zone conditioning category dictionary for B_RMR: `zone_conditioning_category_dict_b = get_zone_conditioning_category(B_RMR)`
 
-- Get surface conditioning category dictionary for B_RMR: `scc_dictionary_b = get_surface_conditioning_category(B_RMR)`  
+- For each zone in the Baseline model: `for zone_b in B_RMR...zones:`
 
-- For each building segment in the Baseline model: `For building_segment_b in B_RMR.building.building_segments:`
+  - For each surface in zone: `for surface_b in zone_b.surfaces:`
 
-  - Get total skylight area for building segment: `total_skylight_area_b = skylight_roof_areas_dictionary_b[building_segment_b.id][0]`
+    - Check if surface is regulated, add zone total area of building envelope to building total: `if scc_dict_b[surface_b.id] != "UNREGULATED": building_total_envelope_area += sum(surface.area for surface in zone_b.surfaces)`
 
-  - Get matching building segment in P_RMR: `building_segment_p = match_data_element(P_RMR, BuildingSegments, building_segment_b.id)`
-  
-    - Get total skylight area for building segment in P_RMR: `total_skylight_area_p = skylight_roof_areas_dictionary_p[building_segment_p.id][0]`
+  - Check if zone is conditioned or semi-heated, add zone infiltration flow rate to building total: `if zone_conditioning_category_dict_b[zone.id] in [CONDITIONED RESIDENTIAL, CONDITIONED NON-RESIDENTIAL, CONDITIONED MIXED, SEMI-HEATED]: building_total_air_leakage_rate_b += zone_b.infiltration.infiltration_flow_rate`
 
-  - For each zone in building segment: `for zone_b in building_segment_b.zones:`
-  
-    - For each surface in zone: `for surface_b in zone_b.surfaces:`  
+- Calculate the required baseline air leakage rate at 75Pa in cfm: `target_air_leakage_rate_75pa_b = 1.0 * building_total_envelope_area`
 
-      - Check if surface is roof and is regulated: `if ( get_opaque_surface_type(surface_b.id) == "ROOF" ) AND ( scc_dictionary_b[surface_b.id] != "UNREGULATED" ):`
+**Rule Assertion:**  
 
-        - Add total skylight area to roof total skylight area: `total_skylight_area_surface_b = sum(subsurface.glazed_area + subsurface.opaque_area for subsurface in surface_b.subsurfaces)`
+- Case 1: For B_RMR, if the total zone infiltration rate for conditioned and semi-heated zones is equal to the required baseline infiltration rate at 75Pa with a conversion factor of 0.112 as per Section G3.1.1.4: `if building_total_air_leakage_rate_b == target_air_leakage_rate_75pa_b * 0.112: PASS`
 
-        - Get matching surface in P_RMR: `surface_p = match_data_element(P_RMR, Surfaces, surface_b.id)`
+- Case 2: Else: `else: FAIL`
 
-          - Add total skylight area to roof total skylight area in P_RMR: `total_skylight_area_surface_p = sum(subsurface.glazed_area + subsurface.opaque_area for subsurface in surface_p.subsurfaces)`
+**Notes:**
 
-          **Rule Assertion:**
+1. Update Rule ID from 5-47 to 5-36 on 10/26/2023
 
-          - Case 1: For each surface, if total skylight area in B_RMR is in the same proportion as in P_RMR: `if total_skylight_area_surface_b / total_skylight_area_b == total_skylight_area_surface_p / total_skylight_area_p: PASS`
-
-          - Case 2: Else: `else: FAIL`
+**[Back](../_toc.md)**

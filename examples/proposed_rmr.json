@@ -4,7 +4,7 @@
         "climate_zone": "CZ4A",
         "data_source_type": "HISTORIC_AGGREGATION"
     },
-    "ruleset_model_instances": [{
+    "ruleset_model_descriptions": [{
         "id": "987",
         "buildings": [
             {
@@ -57,7 +57,7 @@
                                 ],
                                 "infiltration": {
                                     "id": "Infiltration 1",
-                                    "infiltration_flow_rate": 4.009193529983999,
+                                    "flow_rate": 4.009193529983999,
                                     "modeling_method": "WEATHER_DRIVEN",
                                     "algorithm_name": "AIR-CHANGE"
                                 },

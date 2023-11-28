@@ -1,48 +1,49 @@
-
 # Envelope - Rule 5-31  
-
+**Schema Version** 0.0.23  
+**Primary Rule:** True
 **Rule ID:** 5-31  
-**Rule Description:** Manual fenestration shading devices, such as blinds or shades, shall be modeled or not modeled the same as in the baseline building design.  
-**Rule Assertion:** B-RMR subsurface.has_manual_interior_shades=P-RMR subsurface.has_manual_interior_shades  
-**Appendix G Section:** Section G3.1-5(a)(4) Building Modeling Requirements for the Proposed design and G3.1-5(d) Building Modeling Requirements for Baseline building  
-**Appendix G Section Reference:**  None
+**Rule Description:** The proposed roof surfaces shall be modeled using the same thermal emittance as in the user model if the aged test data are available, or equal to 0.9 default emittance.
+**Appendix G Section:** Section G3.1-1(a) Building Envelope Modeling Requirements for the Proposed design  
+**Appendix G Section Reference:** None  
 
-**Applicability:** All required data elements exist for B_RMR  
-**Applicability Checks:** None  
+**Applicability:** All required data elements exist for P_RMR  
+**Applicability Checks:**  
+  1. The proposed building has a roof surface
 
-**Manual Checks:** None  
-**Evaluation Context:**  Each Data Element  
+**Evaluation Context:** Each Data Element  
 **Data Lookup:** None  
 **Function Call:**  
 
-  1. match_data_element()
+  1. get_opaque_surface_type()
+  2. match_data_element()
 
-## Rule Logic:
+## Rule Logic:  
 
-- For each building segment in the Baseline model: `for building_segment_b in B_RMR.building.building_segments:`
+- For each building segment in the Proposed model: ```for building_segment_p in P_RMR.building.building_segments:```
 
-  - For each zone in thermal block: `for zone_b in building_segment_b.zones:`
+  - For each zone in building segment: ```for zone_p in building_segment_p.zones:```
 
-    - For each surface in zone: `for surface_b in zone_b.surfaces:`
+    - For each surface in zone: ```for surface_p in zone_p.surfaces:```
 
-      - Get matching surface in P_RMR: `surface_p = match_data_element(P_RMR, Surfaces, surface_b.id)`
+        - Check if surface is roof, set rule applicability check to True: ```if get_opaque_surface_type(surface_p.id) == "ROOF": rule_applicability_check = TRUE```
 
-        - For each subsurface in surface in P_RMR: `for subsurface_p in surface_p.subsurfaces:`
+          - Get matching surface in U_RMR : ```surface_u = match_data_element(U_RMR, Surfaces, surface_p.id)```
+          **Rule Assertion:**  
 
-          - Calculate the total number of subsurfaces that have manual shades modeled: `if subsurface_p.has_manual_interior_shades: num_shades += 1`
+          - Case 1: If roof surface thermal emittance in P_RMR matches that in U_RMR and is equal to 0.9, outcome is PASS: ```if ( surface_p.surface_optical_properties.absorptance_thermal_exterior == surface_u.surface_optical_properties.absorptance_thermal_exterior ) AND ( surface_p.surface_optical_properties.absorptance_thermal_exterior == 0.9 ):
+            outcome = PASS```
 
-        - Check if subsurfaces in P_RMR have different manual shade status, flag for manual check: `if ( num_shades != LEN(surface_p.subsurfaces) ) AND ( num_shades != 0 ): manual_check_flag = TRUE`
+          - Case 2: Else if roof surface thermal emittance in P_RMR matches that in U_RMR but is not equal to 0.9, outcome is UNDETERMINED: ```else if ( surface_p.surface_optical_properties.absorptance_thermal_exterior == surface_u.surface_optical_properties.absorptance_thermal_exterior ) AND ( surface_p.surface_optical_properties.absorptance_thermal_exterior != 0.9 ):
+            outcome = UNDETERMINED and raise_message "ROOF SURFACE EMITTANCE IN THE PROPOSED MDOEL (${surface_p.surface_optical_properties.absorptance_thermal_exterior}) MATCHES THAT IN THE USER MODEL BUT IS NOT EQUAL TO THE PRESCRIBED DEFAULT VALUE OF 0.9. VERIFY THAT THE MODELED VALUE IS BASED ON TESTING IN ACCORDANCE WITH SECTION 5.5.3.1.1(a)."```
 
-        - Else, for each subsurface in surface in B_RMR: `else: for subsurface_b in surface_b.subsurfaces:`
+          - Case 3: Else if roof surface thermal emittance in P_RMR does not match that in U_RMR but is equal to 0.9, outcome is PASS and raise message: ```else if surface_p.surface_optical_properties.absorptance_thermal_exterior == 0.9:
+            outcome = PASS and raise_message "ROOF THERMAL EMITTANCE IS EQUAL TO THE PRESCRIBED DEFAULT VALUE OF 0.9 BUT DIFFERS FROM THE THERMAL EMITTANCE IN THE USER MODEL (${surface_u.surface_optical_properties.absorptance_thermal_exterior})."```
 
-          - Check if subsurface is modeled with the same manual shade status as in P_RMR: `if subsurface_b.has_manual_interior_shades == surface_p.subsurfaces[0].has_manual_interior_shades: shade_match_flag = TRUE`
+          - Case 4: Else, roof surface thermal emittance in P_RMR does not match that in U_RMR and is not equal to 0.9, outcome is FAIL: ```Else: outcome = FAIL```
 
-        **Rule Assertion:**
 
-        - Case 1: For each surface, if manual check flag is True: `if manual_check_flag: CAUTION and raise_warning "SURFACE IN P-RMR HAS SUBSURFACES MODELED WITH DIFFERENT MANUAL SHADE STATUS. VERIFY IF SUBSURFACES MANUAL SHADE STATUS IN B-RMR ARE MODELED THE SAME AS IN P-RMR".`
+**Notes:**
 
-        - Case 2: Else if shade_match_flag is True: `if shade_match_flag: PASS`
-
-        - Case 3: Else: `else: FAIL`
+1. Update Rule ID from 5-41 to 5-31 on 10/26/2023
 
 **[Back](../_toc.md)**
