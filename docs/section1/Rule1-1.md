@@ -9,7 +9,7 @@
 
 **Data Lookup:** Table 4.2.1.1 
 
-**Evaluation Context:** Output2019ASHRAE901
+**Evaluation Context:** Baseline RMD
 
 **Applicability Checks:** None
 
@@ -20,7 +20,7 @@ get_BPF_building_area_types_and_zones()
 - Get the dictionary of interpreted BPF building area types for the project: `bpf_building_area_type_dict = get_BPF_building_area_types_and_zones(B_RMD)`
 - If the BPF building area type dictionary contains any building segments with UNDETERMINED BPF building area type, is_undetermined=TRUE (can skip remaining logic and proceed to rule assertion from here): `if "UNDETERMINED" in bpf_building_area_type_dict: is_undetermined = True`
 - Get the project climate zone: `climate_zone = RulesetProjectDescription.weather.climate_zone`
-- Get the output BPF value: `output_bpf = Output2019ASHRAE901.total_area_weighted_building_performance_factor`
+- Get the baseline RMD output BPF value: `output_bpf = B_RMD.output.total_area_weighted_building_performance_factor`
 - Create a variable to store the summed product of BPF and Area: `bpf_bat_sum_prod = 0`
 - Create a variable to store the Total Area: `total_area = 0`
 - Iterate through the building area type(s) in the BPF building area type dictionary: `for bpf_bat in bpf_building_area_type_dict:`
@@ -34,7 +34,7 @@ get_BPF_building_area_types_and_zones()
 - Otherwise, outcome=FAIL: `else: FAIL`
 
 **Notes/Questions:** 
-1. JDJ: Rule assertion at the RPD level, not at the building level. For projects that include more than one building, there will be a single compliance calculation that includes all buildings.
+1. JDJ: Rule assertion at the RMD level, not at the building level. For projects that include more than one building, there will be a single compliance calculation that includes all buildings.
 2. The way this is written will also cover the requirements of rule 1-2 without needing to repeat the logic of get_BPF_building_area_types_and_zones() again.
 3. This rule and subfunctions are dependent on a new schema element in the BuildingSegment data group, with proposed name `bpf_building_area_type`
 
