@@ -3,7 +3,7 @@ import os
 
 from rct229.rule_engine.engine import evaluate_rule
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
-from rct229.utils.file import deserialize_rmr_file
+from rct229.utils.file import deserialize_rpd_file
 
 SCRIPT_DIR = os.path.dirname(__file__)  # <-- absolute dir the script is in
 """
@@ -21,21 +21,21 @@ def evaluate_single_rule(user_rmr_dir, baseline_rmr_dir, proposed_rmr_dir, rule)
     if user_rmr_dir:
         user_rmr = io.open(os.path.join(SCRIPT_DIR, user_rmr_dir), "rb")
         try:
-            user_rmr_obj = deserialize_rmr_file(user_rmr)
+            user_rmr_obj = deserialize_rpd_file(user_rmr)
         except:
             rmr_are_valid_json = False
 
     if baseline_rmr_dir:
         baseline_rmr = io.open(os.path.join(SCRIPT_DIR, baseline_rmr_dir), "rb")
         try:
-            baseline_rmr_obj = deserialize_rmr_file(baseline_rmr)
+            baseline_rmr_obj = deserialize_rpd_file(baseline_rmr)
         except:
             rmr_are_valid_json = False
 
     if proposed_rmr_dir:
         proposed_rmr = io.open(os.path.join(SCRIPT_DIR, proposed_rmr_dir), "rb")
         try:
-            proposed_rmr_obj = deserialize_rmr_file(proposed_rmr)
+            proposed_rmr_obj = deserialize_rpd_file(proposed_rmr)
         except:
             rmr_are_valid_json = False
 
