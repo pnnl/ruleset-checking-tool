@@ -434,7 +434,11 @@ def generate_rct_outcomes_list_from_section_list(section_list):
     for section in section_list:
         # Get list of rule JSONs in section
         master_json_path = os.path.join(
-            os.path.dirname(__file__), "ruletest_jsons", SchemaStore.SELECTED_RULESET, section, "rule*.json"
+            os.path.dirname(__file__),
+            "ruletest_jsons",
+            SchemaStore.SELECTED_RULESET,
+            section,
+            "rule*.json",
         )
         json_list = glob.glob(master_json_path)
 
@@ -500,9 +504,9 @@ def generate_rct_outcomes_list_from_section_list(section_list):
                         rule_test_outcome_dict["ruleset_section_title"] = section_dict[
                             str(test_dict["Section"])
                         ]
-                        rule_test_outcome_dict[
-                            "evaluation_type"
-                        ] = "FULL" if rule.is_primary_rule else "APPLICABILITY"
+                        rule_test_outcome_dict["evaluation_type"] = (
+                            "FULL" if rule.is_primary_rule else "APPLICABILITY"
+                        )
                         rule_test_outcome_dict[
                             "expected_rule_unit_test_evaluation_outcome"
                         ] = ruletest_outcome_dict[test_dict["expected_rule_outcome"]]

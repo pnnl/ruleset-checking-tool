@@ -1,8 +1,10 @@
 import json
 
 from rct229.report_engine.rct_report import RCTReport
-from rct229.reports.utils import calc_vals_converter
+from rct229.reports.utils import calc_vals_converter, test_evaluation_converter
 from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
+from rct229 import __version__ as version
+from rct229.schema import config
 
 
 class ASHRAE9012019DetailReport(RCTReport):
@@ -10,11 +12,13 @@ class ASHRAE9012019DetailReport(RCTReport):
         super(ASHRAE9012019DetailReport, self).__init__()
         self.title = "ASHRAE STD 229P RULESET CHECKING TOOL"
         self.purpose = "Project Testing Report"
+        self.tool = "PNNL Ruleset Checking Tool"
+        self.version = version
         self.ruleset = "ASHRAE 90.1-2019 Performance Rating Method (Appendix G)"
-        self.schema_version = "0.0.23"
+        self.schema_version = config.schema_version
         self.ruleset_report_file = "ashrae901_2019_detail_report.json"
 
-    def initialize_ruleset_report(self):
+    def initialize_ruleset_report(self, rule_outcome=None):
         report_json = dict()
         report_json["title"] = self.title
         report_json["purpose"] = self.purpose
@@ -30,12 +34,16 @@ class ASHRAE9012019DetailReport(RCTReport):
         rule_report = dict()
         rule_report["rule_id"] = rule_id
         rule_report["description"] = rule_outcome["description"]
-        rule_report["ruleset_section_title"] = rule_outcome["ruleset_section_title"]
-        rule_report["primary_rule"] = "Yes" if rule_outcome["primary_rule"] else "No"
+        rule_report["primary_rule"] = (
+            "FULL" if rule_outcome["primary_rule"] else "APPLICABILITY"
+        )
         rule_report["standard_section"] = rule_outcome["standard_section"]
         rule_report_list = []
         self._rule_outcome_helper(rule_outcome, rule_report_list, outcome_dict)
-        rule_report["evaluations"] = rule_report_list
+        rule_report["evaluations"] = [
+            test_evaluation_converter(rule_evaluation)
+            for rule_evaluation in rule_report_list
+        ]
         return rule_report
 
     def add_rule_to_ruleset_report(self, ruleset_report, rule_report, rule_outcome):

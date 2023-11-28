@@ -95,10 +95,14 @@ class RCTReport:
         """
         return rule_outcome
 
-    def initialize_ruleset_report(self):
+    def initialize_ruleset_report(self, rule_outcome=None):
         """
         Initialize a data structure for generating a ruleset report
         default is list
+
+        Parameters
+        ----------
+        rule_outcome: json contains a rule's raw report
 
         Returns: data structure, default is list
         -------

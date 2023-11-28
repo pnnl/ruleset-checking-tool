@@ -1,7 +1,7 @@
 import io
 import os
 
-from rct229.rule_engine.engine import evaluate_all_rules, evaluate_rule
+from rct229.rule_engine.engine import evaluate_rule
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.utils.file import deserialize_rmr_file
 

@@ -4,7 +4,7 @@ from datetime import datetime
 
 from rct229.report_engine.rct_report import RCTReport
 from rct229 import __version__ as version
-from rct229.reports.utils import software_test_evaluation_converter
+from rct229.reports.utils import test_evaluation_converter
 from rct229.schema import config
 
 
@@ -20,7 +20,7 @@ class ASHRAE9012019SoftwareTestReport(RCTReport):
         self.date_run = str(datetime.now())
         self.ruleset_report_file = "ashrae901_2019_software_testing_report.json"
 
-    def initialize_ruleset_report(self):
+    def initialize_ruleset_report(self, rule_outcome=None):
         report_json = dict()
         report_json["title"] = self.title
         report_json["purpose"] = self.purpose
@@ -29,6 +29,7 @@ class ASHRAE9012019SoftwareTestReport(RCTReport):
         report_json["ruleset"] = self.ruleset
         report_json["date_run"] = self.date_run
         report_json["schema_version"] = self.schema_version
+        report_json["rpd_files"] = rule_outcome["rpd_files"]
         report_json["rule_tests"] = []
 
         return report_json
@@ -40,7 +41,7 @@ class ASHRAE9012019SoftwareTestReport(RCTReport):
         for test_evaluation in rule_test_dict["rule_unit_test_evaluation"]:
             result = test_evaluation["result"]
             outcome_dict[result] += 1
-            test_evaluations.append(software_test_evaluation_converter(test_evaluation))
+            test_evaluations.append(test_evaluation_converter(test_evaluation))
         rule_test_dict["rule_unit_test_evaluation"] = test_evaluations
         return rule_test_dict
 

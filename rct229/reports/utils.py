@@ -1,9 +1,15 @@
-def software_test_evaluation_converter(evaluation: dict):
+def test_evaluation_converter(evaluation: dict):
     output_evaluation = {}
     output_evaluation["data_group_id"] = evaluation["id"]
-    output_evaluation["message"] = evaluation["message"] if evaluation.get("message") else ""
+    output_evaluation["message"] = (
+        evaluation["message"] if evaluation.get("message") else ""
+    )
     output_evaluation["evaluation_outcome"] = evaluation["result"]
-    output_evaluation["calculated_values"] = calc_vals_converter(evaluation["calculated_values"]) if evaluation.get("calculated_values") else None
+    output_evaluation["calculated_values"] = (
+        calc_vals_converter(evaluation["calculated_values"])
+        if evaluation.get("calculated_values")
+        else None
+    )
     return output_evaluation
 
 

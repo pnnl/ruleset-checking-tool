@@ -2,10 +2,10 @@ import json
 import os
 
 
-def deserialize_rmr_file(rmr_file):
+def deserialize_rpd_file(rpd_file):
     # with open(file_name) as f:
-    if rmr_file:
-        data = json.load(rmr_file)
+    if rpd_file:
+        data = json.load(rpd_file)
 
         return data
 
