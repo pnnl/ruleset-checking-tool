@@ -18,26 +18,24 @@ get_BPF_building_area_types_and_zones()
 
 ## Rule Logic:
 - Get the dictionary of interpreted BPF building area types for the project: `bpf_building_area_type_dict = get_BPF_building_area_types_and_zones(B_RMD)`
-- If the BPF building area type dictionary contains any building segments with UNDETERMINED BPF building area type; outcome = UNDETERMINED: `if "UNDETERMINED" in bpf_building_area_type_dict: UNDETERMINED and raise_message "One or more building area types could not be determined for the project's building segments."`
+- If the BPF building area type dictionary contains any building segments with UNDETERMINED BPF building area type, is_undetermined=TRUE (can skip remaining logic and proceed to rule assertion from here): `if "UNDETERMINED" in bpf_building_area_type_dict: is_undetermined = True`
 - Get the project climate zone: `climate_zone = RulesetProjectDescription.weather.climate_zone`
+- Get the output BPF value: `output_bpf = Output2019ASHRAE901.total_area_weighted_building_performance_factor`
 - Create a variable to store the summed product of BPF and Area: `bpf_bat_sum_prod = 0`
-- Create a variable to store the expected summed product of BPF and Area: `expected_bpf_bat_sum_prod = 0`
 - Create a variable to store the Total Area: `total_area = 0`
 - Iterate through the building area type(s) in the BPF building area type dictionary: `for bpf_bat in bpf_building_area_type_dict:`
   - Get the expected BPF value from Table 4.2.1.1 based on building area and climate zone: `expected_bpf = data_lookup(Table_4_2_1_1, bpf_bat, climate_zone)`
-  - Get the output BPF value: `output_bpf = Output2019ASHRAE901.total_area_weighted_building_performance_factor`
   - Add the area to the total: `total_area += bpf_building_area_type_dict[bpf_bat]["AREA"]`
   - Add the product of expected BPF and area to the expected summed product of BPF and area: `expected_bpf_bat_sum_prod += (expected_bpf * bpf_building_area_type_dict[bpf_bat]["AREA"])`
-  - Add the product of the output BPF and area to the summed product of BPF and area: `bpf_bat_sum_prod += (output_bpf * bpf_building_area_type_dict[bpf_bat]["AREA"])`
 
 **Rule Assertion:**
-- If the output BPF matches the expected BPF; outcome=PASS: `if bpf_bat_sum_prod/total_area == expected_bpf_bat_sum_prod/total_area: PASS`
+- If is_undetermined is TRUE; outcome=UNDETERMINED: `if is_undetermined: UNDETERMINED and raise_message "One or more building area types could not be determined for the project's building segments."`
+- Else if the output BPF matches the expected BPF; outcome=PASS: `elif bpf_bat_sum_prod/total_area == output_bpf: PASS`
 - Otherwise, outcome=FAIL: `else: FAIL`
 
 **Notes/Questions:** 
 1. JDJ: Rule assertion at the RPD level, not at the building level. For projects that include more than one building, there will be a single compliance calculation that includes all buildings.
 2. The way this is written will also cover the requirements of rule 1-2 without needing to repeat the logic of get_BPF_building_area_types_and_zones() again.
-3. Could technically compare the summed product values without dividing by total area, but this way the expected BPF and outcome BPF values are available for a potential failure message.
-4. This rule and subfunctions are dependent on a new schema element in the BuildingSegment data group, with proposed name `bpf_building_area_type`
+3. This rule and subfunctions are dependent on a new schema element in the BuildingSegment data group, with proposed name `bpf_building_area_type`
 
 **[Back](../_toc.md)**
