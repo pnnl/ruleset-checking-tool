@@ -19,14 +19,22 @@
 
 1. get_baseline_system_types()
 2. baseline_system_type_compare()
+3. get_lab_zone_hvac_systems()
 
 **Applicability Checks:**  
 - create a list of the target system types: `APPLICABLE_SYS_TYPES = [HVAC_SYS.SYS_5, HVAC_SYS.SYS_7]`
 - Get B-RMR system types: `baseline_hvac_system_dict = get_baseline_system_types(B-RMR)`
 
-  - Check if B-RMR is modeled with at least one air-side system that is Type-2, or 4, continue to madatort review: `if any(baseline_system_type_compare(system_type, target_sys_type, false) for system_type in baseline_system_types_dict.keys() for applicable_sys_type in APPLICABLE_SYS_TYPES): UNDETERMINED`
+- make a list of hvac system type ids for systems that are one of 5 or 7: `hvac_sys_5_or_7_list = []`
+- loop through the applicable system types: `for target_sys_type in APPLICABLE_SYS_TYPES:`
+    - and loop through the baseline_system_types_dict to check the system types of the baseline systems: `for system_type in baseline_system_types_dict:`
+        - do baseline_system_type_compare to determine whether the baseline_system_type is the applicable_system_type: `if((baseline_system_type_compare(system_type, target_sys_type, false)):`
+            - the systems in the list: baseline_system_types_dict[system_type] are either sys-5 or 7, add them to hvac_sys_5_or_7_list: `hvac_sys_5_or_7_list.extend(baseline_system_types_dict[system_type])`
+- use the function get_lab_zone_hvac_systems to get a list of systems serving lab zones: `hvac_systems_serving_lab_zones = get_lab_zone_hvac_systems(B-RMR)`
+- we'll iterate through the hvac systems serving labs.  hvac_systems_serving_lab_zones has two keys - one indicating "LAB_ZONES_ONLY" and one indicating "LAB_AND_OTHER", because this rule references G3.1.1c, which requires systems to serve only lab zones, we will concern ourselves only with "LAB_ZONES_ONLY": `for hvac_system_id in hvac_systems_serving_lab_zones["LAB_ZONES_ONLY"]:`
+      - now check if this system is a System 5 or System 7 by looking for the hvac_system_id in hvac_sys_5_or_7_list, it is, the rule is applicable: `if(hvac_system_id in hvac_sys_5_or_7_list): UNDETERMINED`
 
-  - Else, rule is not applicable to B-RMR: `else: RULE_NOT_APPLICABLE`
+      - Else, rule is not applicable to B-RMR: `else: RULE_NOT_APPLICABLE`
 
 **Notes:**
 
