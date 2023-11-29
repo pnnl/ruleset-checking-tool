@@ -2,7 +2,7 @@
 # Airside System - Rule 23-9 
 
 **Schema Version:** 0.0.34  
-**Mandatory Rule:** True  
+**Mandatory Rule:** False  
 **Rule ID:** 23-9  
 **Rule Description:** System 11 Minimum volume setpoint shall be the largest of 50% of the maximum design airflow rate, the minimum ventilation airflow rate or the airflow required to comply with codes or accredidation standards.    
 **Rule Assertion:** B-RMR = expected value  
