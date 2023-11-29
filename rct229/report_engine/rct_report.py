@@ -1,19 +1,19 @@
 import os
 from datetime import datetime
-
+from rct229 import __version__ as version
 # rule outcome evaluation logic
 from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
-
+from rct229.schema import config
 
 class RCTReport:
     def __init__(self):
         self.title = "Ruleset Checking Tool"
-        self.tool = "Ruleset Checking Tool"
-        self.version = "0.1"
+        self.tool = "PNNL Ruleset Checking Tool"
+        self.version = version
         self.purpose = "report"
         self.ruleset = "ruleset"
         self.date_run = str(datetime.utcnow())
-        self.schema_version = "0"
+        self.schema_version = config.schema_version
         self.ruleset_report_file = "report.txt"
         self.ruleset_outcome = {
             RCTOutcomeLabel.PASS: 0,

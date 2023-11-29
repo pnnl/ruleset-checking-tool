@@ -12,10 +12,7 @@ class ASHRAE9012019DetailReport(RCTReport):
         super(ASHRAE9012019DetailReport, self).__init__()
         self.title = "ASHRAE STD 229P RULESET CHECKING TOOL"
         self.purpose = "Project Testing Report"
-        self.tool = "PNNL Ruleset Checking Tool"
-        self.version = version
         self.ruleset = "ASHRAE 90.1-2019 Performance Rating Method (Appendix G)"
-        self.schema_version = config.schema_version
         self.ruleset_report_file = "ashrae901_2019_detail_report.json"
 
     def initialize_ruleset_report(self, rule_outcome=None):

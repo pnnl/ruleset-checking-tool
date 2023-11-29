@@ -12,12 +12,8 @@ class ASHRAE9012019SoftwareTestReport(RCTReport):
     def __init__(self):
         super(ASHRAE9012019SoftwareTestReport, self).__init__()
         self.title = "ASHRAE STD 229P RULESET CHECKING TOOL"
-        self.tool = "PNNL Ruleset Checking Tool"
-        self.version = version
         self.purpose = "RCT Ruleset Software Testing Report"
         self.ruleset = "ASHRAE 90.1-2019 Performance Rating Method (Appendix G)"
-        self.schema_version = config.schema_version
-        self.date_run = str(datetime.now())
         self.ruleset_report_file = "ashrae901_2019_software_testing_report.json"
 
     def initialize_ruleset_report(self, rule_outcome=None):
@@ -29,7 +25,6 @@ class ASHRAE9012019SoftwareTestReport(RCTReport):
         report_json["ruleset"] = self.ruleset
         report_json["date_run"] = self.date_run
         report_json["schema_version"] = self.schema_version
-        report_json["rpd_files"] = rule_outcome["rpd_files"]
         report_json["rule_tests"] = []
 
         return report_json
