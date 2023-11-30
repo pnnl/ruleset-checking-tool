@@ -7,7 +7,7 @@
 **Rule Description:** Baseline systems 5 & 7 serving lab spaces per G3.1.1c shall reduce lab exhaust and makeup air during unoccupied periods to 50% of zone peak airflow, the minimum outdoor airflow, or rate required to comply with minimum accreditation standards whichever is larger.
 **Rule Assertion:** B-RMR = expected value  
 **Appendix G Section:** Section 23 Air-side  
-**90.1 Section Reference:** G3.1.3.13 VAV Minimum Flow Set Points (Systems 5 and 7)  
+**90.1 Section Reference:** Exception to G3.1.3.13 VAV Minimum Flow Set Points (Systems 5 and 7)  
 **Data Lookup:** None  
 **Evaluation Context:** Building  
 
