@@ -3,7 +3,7 @@
         "Section": 5,
         "Rule": 3,
         "Test": "a",
-        "test_description": "Project has one building segment with two zones. Zone 1 has an interior roof specified to be adjacent to Zone 2",
+        "test_description": "Project has one building segment with two unconditioned zones. Zone 1 has an unregulated interior roof for which this rule does not apply.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "5-3",
@@ -80,7 +80,7 @@
         "Section": 5,
         "Rule": 3,
         "Test": "b",
-        "test_description": "Project has one building segment with two zones. Zones include both interior and exterior surfaces. One exterior surface is incorrectly modeled as casting shade in the baseline.",
+        "test_description": "Project has one building segment with two unconditioned zones. Zone 1 has a regulated exterior roof for which this rule cannot be fully evaluated.",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "5-3",
