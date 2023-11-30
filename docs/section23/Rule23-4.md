@@ -13,7 +13,7 @@
 
 **Applicability Checks:**  
 
-1. B-RMR is modeled with at least one air-side system that is Type-5 or 7.  
+1. B-RMR is modeled with at least one air-side system that is Type-5 or 7 and serves at least one lab space.  
 
 **Function Calls:**  
 
