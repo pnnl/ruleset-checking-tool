@@ -1,9 +1,11 @@
 import os
 from datetime import datetime
 from rct229 import __version__ as version
+
 # rule outcome evaluation logic
 from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
 from rct229.schema import config
+
 
 class RCTReport:
     def __init__(self):
