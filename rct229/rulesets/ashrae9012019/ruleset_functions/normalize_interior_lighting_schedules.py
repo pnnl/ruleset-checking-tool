@@ -5,8 +5,11 @@ from rct229.rulesets.ashrae9012019.data_fns.table_G3_7_fns import (
     PARTIAL_AUTO_ON,
     table_G3_7_lookup,
 )
-from rct229.utils.assertions import assert_, assert_required_fields, getattr_
-from rct229.utils.jsonpath_utils import find_exactly_one_with_field_value
+from rct229.utils.assertions import assert_, getattr_
+from rct229.utils.jsonpath_utils import (
+    find_exactly_one_with_field_value,
+    find_exactly_required_fields,
+)
 
 # Intended for internal use
 from rct229.utils.pint_utils import ZERO
@@ -43,7 +46,7 @@ def normalize_interior_lighting_schedules(
     # cancel in the final result, an array of plain numbers can be returned, and the choice
     # of units for power_per_area does not matter.
 
-    assert_required_fields(
+    find_exactly_required_fields(
         GET_NORMALIZE_SPACE_SCHEDULE__REQUIRED_FIELDS["space"], space
     )
 
