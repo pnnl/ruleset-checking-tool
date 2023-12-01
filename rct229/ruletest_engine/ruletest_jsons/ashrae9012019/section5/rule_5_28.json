@@ -3,7 +3,7 @@
         "Section": 5,
         "Rule": 28,
         "Test": "a",
-        "test_description": "Project has one building segment with 2 zones separated by a roof surface with a skylight. The building is located in climate zone 3C, the surface is EXTERIOR MIXED based on the adjacency to a zone with mixed residential and non-residential use and at least one unenclosed space. Rule cannot be evaluated because the baseline requirements for residential and nonresidential differ.",
+        "test_description": "Project has one building segment with 2 zones separated by a roof surface with a skylight. The building is located in climate zone 6A, the surface is EXTERIOR MIXED based on the adjacency to a zone with mixed residential and non-residential use and at least one unenclosed space. Rule cannot be evaluated because the baseline requirements for residential and nonresidential differ.",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "5-28",
@@ -117,7 +117,7 @@
         "Section": 5,
         "Rule": 28,
         "Test": "b",
-        "test_description": "Project has one building segment and includes a space with a roof surface and a skylight. The building is located in climate zone 3C, the space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. Skylight area in the building is greater than 2.0%. The baseline skylight SHGC-factor is established correctly.",
+        "test_description": "Project has one building segment and includes a space with a roof surface and a skylight. The building is located in climate zone 6A, the space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. Skylight area in the building is greater than 2.0%. The baseline skylight SHGC-factor is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-28",
@@ -213,7 +213,7 @@
         "Section": 5,
         "Rule": 28,
         "Test": "c",
-        "test_description": "Project has one building segment and includes a space with a roof surface and a skylight. The building is located in climate zone 3C, the space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. Skylight area in the building is greater than 2.0%. The baseline skylight SHGC-factor is not established correctly.",
+        "test_description": "Project has one building segment and includes a space with a roof surface and a skylight. The building is located in climate zone 6A, the space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. Skylight area in the building is greater than 2.0%. The baseline skylight SHGC-factor is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-28",
