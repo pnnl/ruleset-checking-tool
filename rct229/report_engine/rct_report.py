@@ -64,7 +64,7 @@ class RCTReport:
         if invalid_msg:
             print(f"Invalid RMDs: {str(invalid_msg)}\n")
         else:
-            ruleset_report = self.initialize_ruleset_report()
+            ruleset_report = self.initialize_ruleset_report(rct_outcome)
             for outcome in outcomes:
                 # if outcome["primary_rule"]:  #  TODO Do we output ONLY primary rules?
                 rule_outcome_dict = {
