@@ -6,7 +6,6 @@ from rct229.reports.utils import calc_vals_converter
 from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
 
 
-
 class ASHRAE9012019DetailReport(RCTReport):
     def __init__(self):
         super(ASHRAE9012019DetailReport, self).__init__()
