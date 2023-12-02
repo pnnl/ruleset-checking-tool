@@ -3,7 +3,7 @@
         "Section": 5,
         "Rule": 28,
         "Test": "a",
-        "test_description": "Project has one building segment with 2 zones separated by a roof surface with a skylight. The building is located in climate zone 6A, the surface is EXTERIOR MIXED based on the adjacency to a zone with mixed residential and non-residential use and at least one unenclosed space. Rule cannot be evaluated because the baseline requirements for residential and nonresidential differ.",
+        "test_description": "Project has one building segment with 2 zones separated by a roof surface with a skylight. The building is located in climate zone 6A, the surface is EXTERIOR MIXED based on space types in the zone and the adjacency to an unconditioned zone with unenclosed space. Rule cannot be evaluated because the baseline requirements for residential and nonresidential differ.",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "5-28",
@@ -37,12 +37,18 @@
                                                 "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                                "volume": 21.237634943999996,
+                                                "volume": 42.47526988799999,
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
                                                         "lighting_space_type": "OFFICE_ENCLOSED",
+                                                        "floor_area": 23.225759999999998
+                                                    },
+                                                    {
+                                                        "id": "Space 2",
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "lighting_space_type": "DWELLING_UNIT",
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
@@ -75,16 +81,11 @@
                                                 "id": "Zone 2",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                                "volume": 42.47526988799999,
+                                                "volume": 21.237634943999996,
                                                 "spaces": [
                                                     {
-                                                        "id": "Space 2",
-                                                        "lighting_space_type": "OFFICE_ENCLOSED",
-                                                        "floor_area": 23.225759999999998
-                                                    },
-                                                    {
                                                         "id": "Space 3",
-                                                        "lighting_space_type": "DWELLING_UNIT",
+                                                        "lighting_space_type": "PARKING_AREA_INTERIOR",
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ]
