@@ -61,8 +61,7 @@
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
-                                                        "adjacent_to": "INTERIOR",
-                                                        "adjacent_zone": "Zone 2",
+                                                        "adjacent_to": "EXTERIOR",
                                                         "tilt": 30,
                                                         "area": 929.0303999999999,
                                                         "subsurfaces": [
@@ -71,22 +70,10 @@
                                                                 "classification": "SKYLIGHT",
                                                                 "glazed_area": 23.225759999999998,
                                                                 "opaque_area": 4.6451519999999995,
-                                                                "u_factor": 6.927482243853377
+                                                                "u_factor": 6.927482243853377,
+                                                                "solar_heat_gain_coefficient": 0.49
                                                             }
                                                         ]
-                                                    }
-                                                ]
-                                            },
-                                            {
-                                                "id": "Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                                "volume": 21.237634943999996,
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 3",
-                                                        "lighting_space_type": "PARKING_AREA_INTERIOR",
-                                                        "floor_area": 23.225759999999998
                                                     }
                                                 ]
                                             }
