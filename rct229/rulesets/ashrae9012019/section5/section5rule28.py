@@ -23,7 +23,6 @@ from rct229.utils.std_comparisons import std_equal
 
 MANUAL_CHECK_MSG = "MANUAL REVIEW IS REQUESTED TO VERIFY SKYLIGHT MEETS SHGC REQUIREMENT AS PER TABLE G3.4."
 
-
 SURFACE_CLASSIFICATION = SchemaEnums.schema_enums["SubsurfaceClassificationOptions"]
 
 
@@ -101,10 +100,16 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
             return all(
                 [
                     building_scc_skylight_roof_ratios_dict_b[SCC.EXTERIOR_MIXED] > 0,
-                    target_shgc_2per_residential == target_shgc_above2_residential,
-                    target_shgc_2per_nonresidential
-                    == target_shgc_above2_nonresidential,
-                    target_shgc_2per_residential == target_shgc_2per_nonresidential,
+                    any(
+                        [
+                            target_shgc_2per_residential
+                            != target_shgc_above2_residential,
+                            target_shgc_2per_nonresidential
+                            != target_shgc_above2_nonresidential,
+                            target_shgc_2per_residential
+                            != target_shgc_2per_nonresidential,
+                        ]
+                    ),
                 ]
             )
 
