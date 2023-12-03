@@ -16,7 +16,7 @@ class ASHRAE9012019SummaryReport(RCTReport):
         self.proposed_rmd = input_dict["proposed_rmd"]
         self.baseline_rmd = input_dict["baseline_rmd"]
 
-    def initialize_ruleset_report(self):
+    def initialize_ruleset_report(self, rule_outcome=None):
         self.section_list = [
             "All",
             "Envelope",
