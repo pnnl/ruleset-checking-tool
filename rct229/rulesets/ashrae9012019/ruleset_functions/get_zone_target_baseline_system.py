@@ -192,7 +192,9 @@ def get_zone_target_baseline_system(
             zones_and_systems_b[zone_id_b] = {
                 "system_origin": SYSTEMORIGIN.G311F,
                 "expected_system_type": expected_system_type_from_table_g3_1_1_dict(
-                    get_zone_hvac_bat_dict(rmd_b, zone_id_b),
+                    list(get_zone_hvac_bat_dict(rmd_b, zone_id_b).keys())[
+                        0
+                    ],  # TODO: check if the return value always has one BAT. Otherwise, this is wrong.
                     climate_zone_b,
                     num_floors_b,
                     floor_area_b,
@@ -210,30 +212,23 @@ def get_zone_target_baseline_system(
             if (
                 total_computer_zones_peak_cooling_load_b
                 > COMPUTER_ROOM_PEAK_COOLING_LOAD_3000000_BTUH
+            ) or (
+                zones_and_systems_b[zone_id_b]["expected_system_type"]
+                in (
+                    HVAC_SYS.SYS_7,
+                    HVAC_SYS.SYS_8,
+                )
             ):
                 zones_and_systems_b[zone_id_b] = {
                     "expected_system_type": HVAC_SYS.SYS_11_1,
                     "system_origin": "G3_1_1g_part2",
                 }
-
-            elif zones_and_systems_b[zone_id_b]["expected_system_type"] in (
-                HVAC_SYS.SYS_7,
-                HVAC_SYS.SYS_8,
-            ):
-                if (
-                    total_computer_zones_peak_cooling_load_b
-                    > COMPUTER_ROOM_PEAK_COOLING_LOAD_600000_BTUH
-                ):
-                    zones_and_systems_b[zone_id_b] = {
-                        "expected_system_type": HVAC_SYS.SYS_11_1,
-                        "system_origin": "G3_1_1g_part1",
-                    }
-                else:
-                    zones_and_systems_b[zone_id_b] = {
-                        "expected_system_type": HVAC_SYS.SYS_4
-                        if is_cz_0_to_3a_result_bool
-                        else HVAC_SYS.SYS_3,
-                        "system_origin": "G3_1_1g_part3",
-                    }
+            else:
+                zones_and_systems_b[zone_id_b] = {
+                    "expected_system_type": HVAC_SYS.SYS_4
+                    if is_cz_0_to_3a_result_bool
+                    else HVAC_SYS.SYS_3,
+                    "system_origin": "G3_1_1g_part3",
+                }
 
     return zones_and_systems_b
