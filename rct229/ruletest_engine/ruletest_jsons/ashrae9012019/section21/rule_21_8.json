@@ -132,8 +132,8 @@
                                     "temperature_reset_type": "OUTSIDE_AIR_RESET",
                                     "outdoor_high_for_loop_supply_reset_temperature": 10.000000000000057,
                                     "outdoor_low_for_loop_supply_reset_temperature": -6.666666666666629,
-                                    "loop_supply_temperature_at_outdoor_high": 82.22222222222229,
-                                    "loop_supply_temperature_at_outdoor_low": 65.5555555555556
+                                    "loop_supply_temperature_at_outdoor_high": 65.5555555555556,
+                                    "loop_supply_temperature_at_outdoor_low": 82.22222222222229
                                 }
                             },
                             {
@@ -269,8 +269,8 @@
                                     "temperature_reset_type": "OUTSIDE_AIR_RESET",
                                     "outdoor_high_for_loop_supply_reset_temperature": 10.000000000000057,
                                     "outdoor_low_for_loop_supply_reset_temperature": -6.666666666666629,
-                                    "loop_supply_temperature_at_outdoor_high": 82.22222222222229,
-                                    "loop_supply_temperature_at_outdoor_low": 65.5555555555556
+                                    "loop_supply_temperature_at_outdoor_high": 65.5555555555556,
+                                    "loop_supply_temperature_at_outdoor_low": 82.22222222222229
                                 }
                             }
                         ],
@@ -413,8 +413,8 @@
                                     "temperature_reset_type": "OUTSIDE_AIR_RESET",
                                     "outdoor_high_for_loop_supply_reset_temperature": 10.000000000000057,
                                     "outdoor_low_for_loop_supply_reset_temperature": -6.666666666666629,
-                                    "loop_supply_temperature_at_outdoor_high": 87.77777777777783,
-                                    "loop_supply_temperature_at_outdoor_low": 71.11111111111114
+                                    "loop_supply_temperature_at_outdoor_high": 71.11111111111114,
+                                    "loop_supply_temperature_at_outdoor_low": 87.77777777777783
                                 }
                             },
                             {
@@ -550,8 +550,8 @@
                                     "temperature_reset_type": "OUTSIDE_AIR_RESET",
                                     "outdoor_high_for_loop_supply_reset_temperature": 10.000000000000057,
                                     "outdoor_low_for_loop_supply_reset_temperature": -6.666666666666629,
-                                    "loop_supply_temperature_at_outdoor_high": 87.77777777777783,
-                                    "loop_supply_temperature_at_outdoor_low": 71.11111111111114
+                                    "loop_supply_temperature_at_outdoor_high": 71.11111111111114,
+                                    "loop_supply_temperature_at_outdoor_low": 87.77777777777783
                                 }
                             }
                         ],
