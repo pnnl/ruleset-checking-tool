@@ -78,7 +78,7 @@ class Section21Rule8(RuleDefinitionListIndexedBase):
 
         def get_calc_vals(self, context, data=None):
             fluid_loop_b = context.BASELINE_0
-            temperature_reset_type_b= fluid_loop_b["heating_design_and_control"][
+            temperature_reset_type_b = fluid_loop_b["heating_design_and_control"][
                 "temperature_reset_type"
             ]
             design_outdoor_high_for_loop_supply_reset_temperature_b = fluid_loop_b[
@@ -96,10 +96,12 @@ class Section21Rule8(RuleDefinitionListIndexedBase):
             return {
                 "temperature_reset_type_b": temperature_reset_type_b,
                 "design_outdoor_high_for_loop_supply_reset_temperature_b": CalcQ(
-                    "temperature", design_outdoor_high_for_loop_supply_reset_temperature_b
+                    "temperature",
+                    design_outdoor_high_for_loop_supply_reset_temperature_b,
                 ),
                 "design_outdoor_low_for_loop_supply_reset_temperature_b": CalcQ(
-                    "temperature", design_outdoor_low_for_loop_supply_reset_temperature_b
+                    "temperature",
+                    design_outdoor_low_for_loop_supply_reset_temperature_b,
                 ),
                 "design_supply_temperature_at_outdoor_high_b": CalcQ(
                     "temperature", design_supply_temperature_at_outdoor_high_b
