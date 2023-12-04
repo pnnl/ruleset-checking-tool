@@ -106,5 +106,5 @@ class Section5Rule22(RuleDefinitionListIndexedBase):
                 def rule_check(self, context, calc_vals=None, data=None):
                     return (
                         calc_vals["has_shading_overhang"] is False
-                        or calc_vals["depth_of_overhang"] == ZERO
+                        or calc_vals["depth_of_overhang"] == ZERO.LENGTH
                     ) and calc_vals["has_shading_sidefins"] is False
