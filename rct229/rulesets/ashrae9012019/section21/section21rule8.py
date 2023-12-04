@@ -40,7 +40,7 @@ class Section21Rule8(RuleDefinitionListIndexedBase):
     def is_applicable(self, context, data=None):
         rmi_b = context.BASELINE_0
         hw_loop_zone_list_w_area_dict_b = get_hw_loop_zone_list_w_area(rmi_b)
-        boiler_loop_ids_b = find_all("boilers[*].loop", rmi_b)
+        boiler_loop_ids_b = find_all("$.boilers[*].loop", rmi_b)
         boiler_fluid_loops_set_b = set(
             boiler_loop_id
             for boiler_loop_id in boiler_loop_ids_b
@@ -50,13 +50,13 @@ class Section21Rule8(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data):
         rmi_b = context.BASELINE_0
-        boiler_loop_ids = find_all("boilers[*].loop", rmi_b)
-        return {"loop_boiler_dict": boiler_loop_ids}
+        boiler_loop_ids_b = find_all("$.boilers[*].loop", rmi_b)
+        return {"boiler_loop_ids_b": boiler_loop_ids_b}
 
     def list_filter(self, context_item, data):
         fluid_loop_b = context_item.BASELINE_0
-        loop_boiler_dict = data["loop_boiler_dict"]
-        return fluid_loop_b["id"] in loop_boiler_dict
+        boiler_loop_ids_b = data["boiler_loop_ids_b"]
+        return fluid_loop_b["id"] in boiler_loop_ids_b
 
     class HeatingFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
@@ -78,99 +78,99 @@ class Section21Rule8(RuleDefinitionListIndexedBase):
 
         def get_calc_vals(self, context, data=None):
             fluid_loop_b = context.BASELINE_0
-            temperature_reset_type = fluid_loop_b["heating_design_and_control"][
+            temperature_reset_type_b= fluid_loop_b["heating_design_and_control"][
                 "temperature_reset_type"
             ]
-            design_outdoor_high_for_loop_supply_reset_temperature = fluid_loop_b[
+            design_outdoor_high_for_loop_supply_reset_temperature_b = fluid_loop_b[
                 "heating_design_and_control"
             ]["outdoor_high_for_loop_supply_reset_temperature"]
-            design_outdoor_low_for_loop_supply_reset_temperature = fluid_loop_b[
+            design_outdoor_low_for_loop_supply_reset_temperature_b = fluid_loop_b[
                 "heating_design_and_control"
             ]["outdoor_low_for_loop_supply_reset_temperature"]
-            design_supply_temperature_at_outdoor_high = fluid_loop_b[
+            design_supply_temperature_at_outdoor_high_b = fluid_loop_b[
                 "heating_design_and_control"
             ]["loop_supply_temperature_at_outdoor_high"]
-            design_supply_temperature_at_outdoor_low = fluid_loop_b[
+            design_supply_temperature_at_outdoor_low_b = fluid_loop_b[
                 "heating_design_and_control"
             ]["loop_supply_temperature_at_outdoor_low"]
             return {
-                "temperature_reset_type": temperature_reset_type,
-                "design_outdoor_high_for_loop_supply_reset_temperature": CalcQ(
-                    "temperature", design_outdoor_high_for_loop_supply_reset_temperature
+                "temperature_reset_type_b": temperature_reset_type_b,
+                "design_outdoor_high_for_loop_supply_reset_temperature_b": CalcQ(
+                    "temperature", design_outdoor_high_for_loop_supply_reset_temperature_b
                 ),
-                "design_outdoor_low_for_loop_supply_reset_temperature": CalcQ(
-                    "temperature", design_outdoor_low_for_loop_supply_reset_temperature
+                "design_outdoor_low_for_loop_supply_reset_temperature_b": CalcQ(
+                    "temperature", design_outdoor_low_for_loop_supply_reset_temperature_b
                 ),
-                "design_supply_temperature_at_outdoor_high": CalcQ(
-                    "temperature", design_supply_temperature_at_outdoor_high
+                "design_supply_temperature_at_outdoor_high_b": CalcQ(
+                    "temperature", design_supply_temperature_at_outdoor_high_b
                 ),
-                "design_supply_temperature_at_outdoor_low": CalcQ(
-                    "temperature", design_supply_temperature_at_outdoor_low
+                "design_supply_temperature_at_outdoor_low_b": CalcQ(
+                    "temperature", design_supply_temperature_at_outdoor_low_b
                 ),
-                "required_outdoor_high_for_loop_supply_reset_temperature": CalcQ(
+                "required_outdoor_high_for_loop_supply_reset_temperature_b": CalcQ(
                     "temperature", DESIGN_OUTDOOR_TEMP_FOR_RESET_HIGH
                 ),
-                "required_outdoor_low_for_loop_supply_reset_temperature": CalcQ(
+                "required_outdoor_low_for_loop_supply_reset_temperature_b": CalcQ(
                     "temperature", DESIGN_OUTDOOR_TEMP_FOR_RESET_LOW
                 ),
-                "required_supply_temperature_at_outdoor_high": CalcQ(
+                "required_supply_temperature_at_outdoor_high_b": CalcQ(
                     "temperature", DESIGN_SUPPLY_TEMP_AT_OUTDOOR_HIGH
                 ),
-                "required_supply_temperature_at_outdoor_low": CalcQ(
+                "required_supply_temperature_at_outdoor_low_b": CalcQ(
                     "temperature", DESIGN_SUPPLY_TEMP_AT_OUTDOOR_LOW
                 ),
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
-            temperature_reset_type = calc_vals["temperature_reset_type"]
-            design_outdoor_high_for_loop_supply_reset_temperature = calc_vals[
-                "design_outdoor_high_for_loop_supply_reset_temperature"
+            temperature_reset_type_b = calc_vals["temperature_reset_type_b"]
+            design_outdoor_high_for_loop_supply_reset_temperature_b = calc_vals[
+                "design_outdoor_high_for_loop_supply_reset_temperature_b"
             ]
-            design_outdoor_low_for_loop_supply_reset_temperature = calc_vals[
-                "design_outdoor_low_for_loop_supply_reset_temperature"
+            design_outdoor_low_for_loop_supply_reset_temperature_b = calc_vals[
+                "design_outdoor_low_for_loop_supply_reset_temperature_b"
             ]
-            design_supply_temperature_at_outdoor_high = calc_vals[
-                "design_supply_temperature_at_outdoor_high"
+            design_supply_temperature_at_outdoor_high_b = calc_vals[
+                "design_supply_temperature_at_outdoor_high_b"
             ]
-            design_supply_temperature_at_outdoor_low = calc_vals[
-                "design_supply_temperature_at_outdoor_low"
+            design_supply_temperature_at_outdoor_low_b = calc_vals[
+                "design_supply_temperature_at_outdoor_low_b"
             ]
-            required_outdoor_high_for_loop_supply_reset_temperature = calc_vals[
-                "required_outdoor_high_for_loop_supply_reset_temperature"
+            required_outdoor_high_for_loop_supply_reset_temperature_b = calc_vals[
+                "required_outdoor_high_for_loop_supply_reset_temperature_b"
             ]
-            required_outdoor_low_for_loop_supply_reset_temperature = calc_vals[
-                "required_outdoor_low_for_loop_supply_reset_temperature"
+            required_outdoor_low_for_loop_supply_reset_temperature_b = calc_vals[
+                "required_outdoor_low_for_loop_supply_reset_temperature_b"
             ]
-            required_supply_temperature_at_outdoor_high = calc_vals[
-                "required_supply_temperature_at_outdoor_high"
+            required_supply_temperature_at_outdoor_high_b = calc_vals[
+                "required_supply_temperature_at_outdoor_high_b"
             ]
-            required_supply_temperature_at_outdoor_low = calc_vals[
-                "required_supply_temperature_at_outdoor_low"
+            required_supply_temperature_at_outdoor_low_b = calc_vals[
+                "required_supply_temperature_at_outdoor_low_b"
             ]
             return (
-                (temperature_reset_type == DESIGN_TEMP_RESET_TYPE.OUTSIDE_AIR_RESET)
+                (temperature_reset_type_b == DESIGN_TEMP_RESET_TYPE.OUTSIDE_AIR_RESET)
                 and std_equal(
-                    design_outdoor_high_for_loop_supply_reset_temperature.to(
+                    design_outdoor_high_for_loop_supply_reset_temperature_b.to(
                         ureg.kelvin
                     ),
-                    required_outdoor_high_for_loop_supply_reset_temperature.to(
-                        ureg.kelvin
-                    ),
-                )
-                and std_equal(
-                    design_outdoor_low_for_loop_supply_reset_temperature.to(
-                        ureg.kelvin
-                    ),
-                    required_outdoor_low_for_loop_supply_reset_temperature.to(
+                    required_outdoor_high_for_loop_supply_reset_temperature_b.to(
                         ureg.kelvin
                     ),
                 )
                 and std_equal(
-                    design_supply_temperature_at_outdoor_high.to(ureg.kelvin),
-                    required_supply_temperature_at_outdoor_high.to(ureg.kelvin),
+                    design_outdoor_low_for_loop_supply_reset_temperature_b.to(
+                        ureg.kelvin
+                    ),
+                    required_outdoor_low_for_loop_supply_reset_temperature_b.to(
+                        ureg.kelvin
+                    ),
                 )
                 and std_equal(
-                    design_supply_temperature_at_outdoor_low.to(ureg.kelvin),
-                    required_supply_temperature_at_outdoor_low.to(ureg.kelvin),
+                    design_supply_temperature_at_outdoor_high_b.to(ureg.kelvin),
+                    required_supply_temperature_at_outdoor_high_b.to(ureg.kelvin),
+                )
+                and std_equal(
+                    design_supply_temperature_at_outdoor_low_b.to(ureg.kelvin),
+                    required_supply_temperature_at_outdoor_low_b.to(ureg.kelvin),
                 )
             )
