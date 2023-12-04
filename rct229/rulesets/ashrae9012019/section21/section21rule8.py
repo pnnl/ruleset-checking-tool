@@ -61,7 +61,7 @@ class Section21Rule8(RuleDefinitionListIndexedBase):
 
     def list_filter(self, context_item, data):
         fluid_loop_b = context_item.BASELINE_0
-        boiler_loop_ids_b = data["boiler_loop_ids_b"]
+        boiler_loop_ids_b = data["boiler_loop_ids_list_b"]
         return fluid_loop_b["id"] in boiler_loop_ids_b
 
     class HeatingFluidLoopRule(RuleDefinitionBase):
