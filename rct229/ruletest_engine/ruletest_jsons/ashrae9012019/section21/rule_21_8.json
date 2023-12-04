@@ -285,6 +285,7 @@
         "Rule": 8,
         "Test": "c",
         "test_description": "Baseline System 7's boiler has outdoor air temperature based supply temperature reset. Hot water temperatures are at 160 F when temperature are high, and 190 F when they are low. High outdoor air temperature set to 50F and low outdoor air temperature set to 20 F. Expected Result: Fail",
+        "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-8",
             "ruleset_reference": "G3.1.3.4",
@@ -438,6 +439,7 @@
         "Rule": 8,
         "Test": "d",
         "test_description": "Baseline System 5's boiler has outdoor air temperature based supply temperature reset. Hot water temperatures are at 160 F when temperature are high, and 190 F when they are low. High outdoor air temperature set to 50F and low outdoor air temperature set to 20 F. Expected Result: Fail",
+        "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-8",
             "ruleset_reference": "G3.1.3.4",
