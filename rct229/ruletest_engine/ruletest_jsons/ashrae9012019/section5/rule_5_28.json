@@ -3,7 +3,7 @@
         "Section": 5,
         "Rule": 28,
         "Test": "a",
-        "test_description": "Project has one building segment with 2 zones separated by a roof surface with a skylight. The building is located in climate zone 6A, the surface is EXTERIOR MIXED based on space types in the zone and the adjacency to an unconditioned zone with unenclosed space. Rule cannot be evaluated because the baseline requirements for residential and nonresidential differ.",
+        "test_description": "Project has one building segment with 1 zones containing 2 spaces and a roof surface with a skylight. The building is located in climate zone 6A, the surface is EXTERIOR MIXED based on space types in the zone and the adjacency to exterior. Rule cannot be evaluated because the baseline requirements for residential and nonresidential differ.",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "5-28",
