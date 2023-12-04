@@ -50,8 +50,14 @@ class Section21Rule8(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data):
         rmi_b = context.BASELINE_0
+        hw_loop_zone_list_w_area_dict_b = get_hw_loop_zone_list_w_area(rmi_b)
         boiler_loop_ids_b = find_all("$.boilers[*].loop", rmi_b)
-        return {"boiler_loop_ids_b": boiler_loop_ids_b}
+        boiler_fluid_loops_set_b = set(
+            boiler_loop_id
+            for boiler_loop_id in boiler_loop_ids_b
+            if boiler_loop_id in hw_loop_zone_list_w_area_dict_b
+        )
+        return {"boiler_loop_ids_list_b": list(boiler_fluid_loops_set_b)}
 
     def list_filter(self, context_item, data):
         fluid_loop_b = context_item.BASELINE_0
