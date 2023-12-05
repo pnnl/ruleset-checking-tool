@@ -1,6 +1,6 @@
 # Envelope - Rule 5-9
 **Schema Version** 0.0.23  
-**Primary Rule:** False 
+**Primary Rule:** False  
 **Rule ID:** 5-9  
 **Rule Description:** Baseline floor assemblies must conform with assemblies detailed in  Appendix A (Floors—Steel-joist (A5.3)).  
 **Appendix G Section:** Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building  
