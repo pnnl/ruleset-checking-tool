@@ -189,12 +189,12 @@ def get_zone_target_baseline_system(
             HVAC_SYS.SYS_9,
             HVAC_SYS.SYS_10,
         ):
+            zone_hvac_bat_dict_b = get_zone_hvac_bat_dict(rmd_b, zone_id_b)
+
             zones_and_systems_b[zone_id_b] = {
                 "system_origin": SYSTEMORIGIN.G311F,
                 "expected_system_type": expected_system_type_from_table_g3_1_1_dict(
-                    list(get_zone_hvac_bat_dict(rmd_b, zone_id_b).keys())[
-                        0
-                    ],  # TODO: check if the return value always has one BAT. Otherwise, this is wrong.
+                    max(zone_hvac_bat_dict_b, key=zone_hvac_bat_dict_b.get),
                     climate_zone_b,
                     num_floors_b,
                     floor_area_b,
