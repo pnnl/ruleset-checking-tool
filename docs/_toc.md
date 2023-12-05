@@ -229,6 +229,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [5-38](section5/Rule5-38.md): The proposed air leakage rate of the building envelope (I<sub>75Pa</sub>) at a fixed building pressure differential of 0.3 in. of water shall be 0.6 cfm/ft2 for buildings providing verification in accordance with Section 5.9.1.2. The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section G3.1.1.4. Exceptions: When whole-building air leakage testing, in accordance with Section 5.4.3.1.1, is specified during design and completed after construction, the proposed design air leakage rate of the building envelope shall be as measured. 
   * [5-39](section5/Rule5-39.md): It is acceptable to use either an annual average ground temperature or monthly average ground temperatures for calculation of heat loss through basement floors.
   * [5-40](section5/Rule5-40.md): U-factor of the baseline door is based on Tables G3.4-1 through G3.4-8 for the applicable door type (swinging or non-swinging) and envelope conditioning category.
+  * [5-41](section5/Rule5-41.md): Opaque roof surfaces that are not regulated (not part of opaque building envelope) must be modeled with the same thermal emittance and solar reflectance in the baseline as in the proposed design.
 
 ## Section 6 - Lighting
   * [6-1](section6/Rule6-1.md): Proposed building interior lighting power shall not exceel total interior lighting power allowance determined using either G3.7 or G3.8
