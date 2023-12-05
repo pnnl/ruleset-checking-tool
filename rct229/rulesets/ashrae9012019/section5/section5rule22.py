@@ -104,7 +104,10 @@ class Section5Rule22(RuleDefinitionListIndexedBase):
                     }
 
                 def rule_check(self, context, calc_vals=None, data=None):
+                    has_shading_overhang_b = calc_vals["has_shading_overhang"]
+                    depth_of_overhang_b = calc_vals["depth_of_overhang"]
+                    has_shading_sidefins_b = calc_vals["has_shading_sidefins"]
                     return (
-                        calc_vals["has_shading_overhang"] is False
-                        or calc_vals["depth_of_overhang"] == ZERO.LENGTH
-                    ) and calc_vals["has_shading_sidefins"] is False
+                        has_shading_overhang_b is False
+                        or depth_of_overhang_b == ZERO.LENGTH
+                    ) and has_shading_sidefins_b is False
