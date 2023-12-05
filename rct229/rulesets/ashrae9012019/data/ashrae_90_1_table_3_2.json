@@ -1,0 +1,48 @@
+{
+    "heated_space_criteria":[
+        {
+            "climate_zone": "0",
+            "heating_output_btu/h-^2": 5
+        },
+        {
+            "climate_zone": "1",
+            "heating_output_btu/h-^2": 5
+        },
+        {
+            "climate_zone": "2",
+            "heating_output_btu/h-^2": 5
+        },
+        {
+            "climate_zone": "3A,3B",
+            "heating_output_btu/h-^2": 9
+        },
+        {
+            "climate_zone": "3C",
+            "heating_output_btu/h-^2": 7
+        },
+        {
+            "climate_zone": "4A,4B",
+            "heating_output_btu/h-^2": 10
+        },
+        {
+            "climate_zone": "4C",
+            "heating_output_btu/h-^2": 8
+        },
+        {
+            "climate_zone": "5",
+            "heating_output_btu/h-^2": 12
+        },
+        {
+            "climate_zone": "6",
+            "heating_output_btu/h-^2": 14
+        },
+        {
+            "climate_zone": "7",
+            "heating_output_btu/h-^2": 16
+        },
+        {
+            "climate_zone": "8",
+            "heating_output_btu/h-^2": 19
+        }
+    ]
+}

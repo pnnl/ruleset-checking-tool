@@ -16,7 +16,7 @@ def test__clean_schema_units__with_dash_in_denominator():
 
 TEST_RMR = {
     "id": "229-01",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "user_rmd",
             "transformers": [
@@ -43,7 +43,7 @@ def test__quantify_rmr():
     ureg = get_pint_unit_registry()
     assert quantify_rmr(TEST_RMR) == {
         "id": "229-01",
-        "ruleset_model_instances": [
+        "ruleset_model_descriptions": [
             {
                 "id": "user_rmd",
                 "transformers": [
