@@ -1,7 +1,7 @@
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.jsonpath_utils import find_all, find_one
 
-CoolingSystemOptions = schema_enums["CoolingSystemOptions"]
+CoolingSystemOptions = SchemaEnums.schema_enums["CoolingSystemOptions"]
 
 APPLICABLE_COOLING_SYSTEM = [
     CoolingSystemOptions.DIRECT_EXPANSION,
@@ -14,7 +14,7 @@ APPLICABLE_COOLING_SYSTEM = [
 def get_proposed_hvac_modeled_with_virtual_cooling(rmi_u, rmi_p):
     """
 
-    Get the list of HeatingVentilationAirAconditioningSystem in which Appendix G Table G3.1 #10 d is applicable (i.e.
+    Get the list of HeatingVentilatingAirconditioningSystem in which Appendix G Table G3.1 #10 d is applicable (i.e.
     space cooling is modeled in the P_RMR but not the U_RMR). Table G3.1 #10 d states that "where no cooling system
     exists or no cooling system has been submitted with design documents, the cooling system type shall be the same in
     the proposed as modeled in the baseline building design and shall comply with the requirements of Section 6."

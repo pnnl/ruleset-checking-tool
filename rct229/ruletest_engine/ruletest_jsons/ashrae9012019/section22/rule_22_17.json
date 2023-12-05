@@ -151,7 +151,8 @@
                                 "fan_shaft_power": 14914.0,
                                 "rated_water_flowrate": 50.46666666666668
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -309,7 +310,8 @@
                                 "fan_shaft_power": 14914.0,
                                 "rated_water_flowrate": 48.19566666666668
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -467,7 +469,8 @@
                                 "fan_shaft_power": 14914.0,
                                 "rated_water_flowrate": 25.23333333333334
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -542,7 +545,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

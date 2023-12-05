@@ -229,6 +229,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [5-38](section5/Rule5-38.md): The proposed air leakage rate of the building envelope (I<sub>75Pa</sub>) at a fixed building pressure differential of 0.3 in. of water shall be 0.6 cfm/ft2 for buildings providing verification in accordance with Section 5.9.1.2. The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section G3.1.1.4. Exceptions: When whole-building air leakage testing, in accordance with Section 5.4.3.1.1, is specified during design and completed after construction, the proposed design air leakage rate of the building envelope shall be as measured. 
   * [5-39](section5/Rule5-39.md): It is acceptable to use either an annual average ground temperature or monthly average ground temperatures for calculation of heat loss through basement floors.
   * [5-40](section5/Rule5-40.md): U-factor of the baseline door is based on Tables G3.4-1 through G3.4-8 for the applicable door type (swinging or non-swinging) and envelope conditioning category.
+  * [5-41](section5/Rule5-41.md): Opaque roof surfaces that are not regulated (not part of opaque building envelope) must be modeled with the same thermal emittance and solar reflectance in the baseline as in the proposed design.
 
 ## Section 6 - Lighting
   * [6-1](section6/Rule6-1.md): Proposed building interior lighting power shall not exceel total interior lighting power allowance determined using either G3.7 or G3.8
@@ -278,6 +279,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
 ## Section 19 - Air Side Baseline HVAC System
   * [19-1](section19/Rule19-1.md): HVAC system coil capacities for the baseline building design shall be oversized by 15% for cooling and 25% for heating.
   * [19-2](section19/Rule19-2.md): Baseline building plant capacities shall be based on coincident loads.
+  * [19-3](section19/Rule19-3.md): Weather conditions used in sizing runs to determine baseline equipment capacities shall be based either on design days developed using 99.6% heating design temperatures and 1% dry-bulb and 1% wet-bulb cooling design temperatures.
   * [19-4](section19/Rule19-4.md): For baseline cooling sizing runs in residential dwelling units, the infiltration, occupants, lighting, gas and electricity using equipment hourly schedule shall be the same as the most used hourly weekday schedule from the annual simulation.
   * [19-5](section19/Rule19-5.md): Unmet load hours for the proposed design shall not exceed 300 (of the 8760 hours simulated).
   * [19-6](section19/Rule19-6.md): Unmet load hours for the baseline design shall not exceed 300 (of the 8760 hours simulated).
@@ -319,6 +321,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [21-5](section21/Rule21-5.md): The baseline building design boiler plant shall be modeled as having a single boiler if the baseline building design plant serves a conditioned floor area of 15,000sq.ft. or less, and as having two equally sized boilers for plants serving more than 15,000sq.ft.
   * [21-6](section21/Rule21-6.md): When baseline building includes two boilers each shall stage as required by load.  
   * [21-7](section21/Rule21-7.md): When baseline building requires boilers, systems 1,5,7,11 and 12 - Model HWST = 180F and return design temp = 130F.
+  * [21-8](section21/Rule21-8.md): When the baseline building requires boilers, (for baseline system type = 1,5,7,11 and 12),  HWST for the baseline building shall be reset using an outdoor air dry-bulb reset schedule. 180F at 20F OAT, 150Fat 50F OAT, ramped linerarly between 150F and 180F.
   * [21-9](section21/Rule21-9.md): When baseline building includes boilers, Hot Water Pump Power = 19W/gpm.  
   * [21-10](section21/Rule21-10.md): When the building is modeled with HHW plant (served by either boiler(s) or purchased hot water/steam), the hot water pump shall be modeled as riding the pump curve if the hot water system serves less than 120,000 ft^2 otherwise it shall be modeled with a VFD.  
   * [21-11](section21/Rule21-11.md): When the system uses boilers the hot water system shall be modeled as primary only.  

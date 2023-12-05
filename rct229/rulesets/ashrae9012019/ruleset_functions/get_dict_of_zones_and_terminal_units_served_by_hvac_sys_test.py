@@ -11,6 +11,12 @@ TEST_BUILDING = {
             "building_segments": [
                 {
                     "id": "building_segment_1",
+                    "heating_ventilating_air_conditioning_systems": [
+                        {"id": "hvac_1"},
+                        {"id": "hvac_2"},
+                        {"id": "hvac_3"},
+                        {"id": "hvac_4"},
+                    ],
                     "zones": [
                         {
                             "id": "zone_1",

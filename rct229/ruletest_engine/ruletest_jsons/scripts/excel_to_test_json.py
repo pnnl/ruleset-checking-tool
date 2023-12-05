@@ -9,7 +9,7 @@ from rct229.ruletest_engine.ruletest_jsons.scripts.excel_to_test_json_utilities 
 # ---------------------------------------USER INPUTS---------------------------------------
 
 # Excel to master test JSON inputs
-spreadsheet_name = "chiller_tcd_master_temp.xlsx"
+spreadsheet_name = "chiller_tcd_master.xlsx"
 test_json_name = "chiller_tcd_master_temp.json"
 sheet_name = "TCDs"
 
