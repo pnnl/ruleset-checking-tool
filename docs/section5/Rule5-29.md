@@ -1,43 +1,34 @@
-
 # Envelope - Rule 5-29  
-
+**Schema Version** 0.0.23  
+**Primary Rule:** False
 **Rule ID:** 5-29  
-**Rule Description:** Baseline fenestration shall be assumed to be flush with the exterior wall, and no shading projections shall be modeled.  
-**Rule Assertion:** B-RMR subsurface:has_shading_overhang = false; B-RMR subsurface:has_shading_sidefins = false  
-**Appendix G Section:** Section G3.1-5(d) Building Modeling Requirements for the Baseline building  
-**Appendix G Section Reference:**  None  
+**Rule Description:** Manually controlled dynamic glazing shall use the average of the minimum and maximum SHGC and VT.
+**Appendix G Section:** Section 5 Envelope  
+**Appendix G Section Reference:** Section G3.1-5(a)5 Building Envelope Modeling Requirements for the Proposed design   
 
-**Applicability:** All required data elements exist for B_RMR  
-**Applicability Checks:** None  
+**Applicability:** All required data elements exist for P_RMR  
+**Applicability Checks:**
+  1. The proposed building uses manually controlled dynamic glazing
 
-**Manual Checks:** None  
-**Evaluation Context:**  Each Data Element  
+**Evaluation Context:** Each Data Element  
 **Data Lookup:** None  
-**Function Call:**  
-
-  1. get_opaque_surface_type()
-  2. get_surface_conditioning_category()
+**Function Call:** None
 
 ## Rule Logic:
+- For each building segment in the Proposed model: ```for building_segment_p in P_RMR.building.building_segments:```
 
-- Get surface conditioning category dictionary for B_RMR: `scc_dictionary_b = get_surface_conditioning_category(B_RMR)`
+  - For each zone in building segment: ```for zone_p in building_segment_p.zones:```
 
-- For each building segment in the Baseline model: `for building_segment_b in B_RMR.building.building_segments:`
+    - For each surface in zone: ```for surface_p in zone_p.surfaces:```
 
-  - For each thermal block in building segment: `for thermal_block_b in building_segment_b.thermal_blocks:`
+      - For each subsurface in surface: ```for subsurface_p in surface_p.subsurfaces:```
+        
+      **Rule Assertion:**
+      - Case 1: If subsurface has manual dynamic glazing, outcome is UNDETERMINED: ```if subsurface_p.dynamic_glazing_type == "MANUAL_DYNAMIC: outcome = UNDETERMINED and raise_message "SUBSURFACE ${subsurface_p} INCLUDES MANUALLY CONTROLLED DYNAMIC GLAZING IN THE PROPOSED DESIGN. VERIFY THAT SHGC AND VT WERE MODELED AS THE AVERAGE OF THE MINIMUM AND MAXIMUM SHGC AND VT."```
+      - Case 2: Else, outcome is NOT_APPLICABLE: ```else: outcome = NOT_APPLICABLE```
 
-    - For each zone in thermal block: `for zone_b in thermal_block_b.zones:`
+**Notes:**
 
-      - For each surface in zone: `for surface_b in zone_b.surfaces:`
-
-        - Check if surface is above-grade wall or roof and is exterior: `if ( get_opaque_surface_type(surface_b) == "ABOVE-GRADE WALL" ) AND ( scc_dictionary_b[surface_b.id] != "UNREGULATED" ):`
-
-          - For each subsurface in surface: `for subsurface_b in surface_b:`
-
-            **Rule Assertion:**
-
-            - Case 1: For each subsurface, if subsurface is flush with the exterior wall, and no shading projections are modeled: `if ( NOT subsurface_b.has_shading_overhang ) AND ( NOT subsurface_b.has_shading_sidefins ): PASS`
-
-            - Case 2: Else: `else: FAIL and raise_warning "BASELINE FENESTRATION WAS MODELED WITH SHADING PROJECTIONS AND/OR OVERHANGS, WHICH IS INCORRECT."`
+1. Update Rule ID from 5-39 to 5-29 on 10/26/2023
 
 **[Back](../_toc.md)**

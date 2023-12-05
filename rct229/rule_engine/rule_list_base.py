@@ -1,7 +1,6 @@
 from jsonpointer import resolve_pointer
 
 from rct229.rule_engine.rule_base import RuleDefinitionBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.utils.json_utils import slash_prefix_guarantee
 
 
@@ -16,6 +15,9 @@ class RuleDefinitionListBase(RuleDefinitionBase):
         each_rule,
         id=None,
         description=None,
+        ruleset_section_title=None,
+        standard_section=None,
+        is_primary_rule=None,
         rmr_context="",
         required_fields=None,
         manual_check_required_msg="Manual Check Required",
@@ -34,6 +36,9 @@ class RuleDefinitionListBase(RuleDefinitionBase):
             required_fields=required_fields,
             manual_check_required_msg=manual_check_required_msg,
             not_applicable_msg=not_applicable_msg,
+            ruleset_section_title=ruleset_section_title,
+            standard_section=standard_section,
+            is_primary_rule=is_primary_rule,
         )
 
     def create_context_list(self, context, data):
@@ -48,13 +53,13 @@ class RuleDefinitionListBase(RuleDefinitionBase):
 
         Parameters
         ----------
-        context : UserBaselineProposedVals
-            Object containing the contexts for the user, baseline, and proposed RMRs
+        context : RuleSetModels
+            Object containing the contexts for RMRs required by model type schema
         data : An optional data object.
 
         Returns
         -------
-        list of UserBaselineProposedVals
+        list of RuleSetModels
             A list of context trios
         """
         raise NotImplementedError
@@ -80,7 +85,7 @@ class RuleDefinitionListBase(RuleDefinitionBase):
 
         Parameters
         ----------
-        context : UserBaselineProposedVals
+        context : RuleSetModels
             Object containing the user, baseline, and proposed contexts
         data : any
             The data object that was passed into the rule.
@@ -124,10 +129,9 @@ class RuleDefinitionListBase(RuleDefinitionBase):
 
         Returns
         -------
-        list of UserBaselineProposedVals
-            A filtered list of context trios
+        bool True iff context_item should passed through the filter.
         """
-        return context_item
+        return True
 
     def rule_check(self, context, calc_vals=None, data={}):
         """Overrides the base implementation to apply a rule to each entry in
@@ -137,7 +141,7 @@ class RuleDefinitionListBase(RuleDefinitionBase):
 
         Parameters
         ----------
-        context : UserBaselineProposedVals
+        context : RuleSetModels
             Object containing the contexts for the user, baseline, and proposed RMRs
         data : dict
             An optional dictionary. New data, based on data_pointers, data_paths, or
@@ -167,14 +171,10 @@ class RuleDefinitionListBase(RuleDefinitionBase):
         for ubp in filtered_context_list:
             item_outcome = self.each_rule.evaluate(ubp, data)
 
-            # Set the id for item_outcome
-            if ubp.user and ubp.user["id"]:
-                item_outcome["id"] = ubp.user["id"]
-            elif ubp.baseline and ubp.baseline["id"]:
-                item_outcome["id"] = ubp.baseline["id"]
-            elif ubp.proposed and ubp.proposed["id"]:
-                item_outcome["id"] = ubp.proposed["id"]
-
+            # All ids are supposedly match so any no-none value should have the correct id.
+            for ruleset_model in ubp.get_ruleset_model_types():
+                if ubp[ruleset_model] and ubp[ruleset_model]["id"]:
+                    item_outcome["id"] = ubp[ruleset_model]["id"]
             outcomes.append(item_outcome)
 
         return outcomes

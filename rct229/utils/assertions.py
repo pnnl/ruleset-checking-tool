@@ -1,6 +1,3 @@
-from rct229.utils.jsonpath_utils import find_all
-
-
 class AssertionStatusCategory:
     """Enumeration class for RCT execution status"""
 
@@ -28,20 +25,7 @@ class MissingKeyException(RCTException):
 def assert_(bool, err_msg):
     if not bool:
         raise RCTFailureException(err_msg)
-
-
-def assert_nonempty_lists(req_nonempty_lists, obj):
-    for jpath in req_nonempty_lists:
-        for req_list in find_all(jpath + "[*]", obj):
-            assert len(req_list) > 0, f"{jpath} id:{req_list['id']} is empty"
-
-
-def assert_required_fields(req_fields, obj):
-    for (jpath, fields) in req_fields.items():
-        for element in find_all(jpath, obj):
-            for field in fields:
-                if field not in element:
-                    raise MissingKeyException(jpath, element.get("id"), field)
+    return bool
 
 
 def getattr_(obj, obj_name: str, first_key, *remaining_keys):

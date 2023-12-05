@@ -3,15 +3,16 @@ import os
 
 import jsonschema
 
+from rct229.schema.schema_store import SchemaStore
 from rct229.utils.jsonpath_utils import find_all
 
 file_dir = os.path.dirname(__file__)
 
-SCHEMA_KEY = "ASHRAE229.schema.json"
-SCHEMA_ENUM_KEY = "Enumerations2019ASHRAE901.schema.json"
-SCHEMA_RESNET_ENUM_KEY = "EnumerationsRESNET.schema.json"
-SCHEMA_T24_ENUM_KEY = "Enumerations2019T24.schema.json"
-SCHEMA_OUTPUT_KEY = "Output2019ASHRAE901.schema.json"
+SCHEMA_KEY = SchemaStore.SCHEMA_KEY
+SCHEMA_ENUM_KEY = SchemaStore.SCHEMA_9012019_ENUM_KEY
+SCHEMA_RESNET_ENUM_KEY = SchemaStore.SCHEMA_RESNET_ENUM_KEY
+SCHEMA_T24_ENUM_KEY = SchemaStore.SCHEMA_T24_ENUM_KEY
+SCHEMA_OUTPUT_KEY = SchemaStore.SCHEMA_9012019_OUTPUT_KEY
 SCHEMA_PATH = os.path.join(file_dir, SCHEMA_KEY)
 SCHEMA_ENUM_PATH = os.path.join(file_dir, SCHEMA_ENUM_KEY)
 SCHEMA_T24_ENUM_PATH = os.path.join(file_dir, SCHEMA_T24_ENUM_KEY)
@@ -19,7 +20,7 @@ SCHEMA_RESNET_ENUM_PATH = os.path.join(file_dir, SCHEMA_RESNET_ENUM_KEY)
 SCHEMA_OUTPUT_PATH = os.path.join(file_dir, SCHEMA_OUTPUT_KEY)
 
 
-def check_unique_ids_in_ruleset_model_instances(rmd):
+def check_unique_ids_in_ruleset_model_descriptions(rmd):
     """Checks that the ids within each group inside a
     RuleSetModelInstance are unique
 
@@ -40,11 +41,11 @@ def check_unique_ids_in_ruleset_model_instances(rmd):
         An error message listing any paths that do not have unique ids. The empty string
         indicates that all appropriate ids are unique.
     """
-    # The schema does not require the ruleset_model_instances field, default to []
-    ruleset_model_instances = rmd.get("ruleset_model_instances", [])
+    # The schema does not require the ruleset_model_descriptions field, default to []
+    ruleset_model_descriptions = rmd.get("ruleset_model_descriptions", [])
 
     bad_paths = []
-    for rmi_index, rmi in enumerate(ruleset_model_instances):
+    for rmi_index, rmi in enumerate(ruleset_model_descriptions):
         # Collect all jsonpaths to lists
         paths = json_paths_to_lists(rmi)
 
@@ -53,7 +54,7 @@ def check_unique_ids_in_ruleset_model_instances(rmd):
             if len(ids) != len(set(ids)):
                 # The ids are not unique
                 # list_path starts with "$" that must be removed
-                bad_path = f"ruleset_model_instances[{rmi_index}]{list_path[1:]}"
+                bad_path = f"ruleset_model_descriptions[{rmi_index}]{list_path[1:]}"
                 bad_paths.append(bad_path)
 
     error_msg = f"Non-unique ids for paths: {'; '.join(bad_paths)}" if bad_paths else ""
@@ -111,7 +112,7 @@ def json_paths_to_lists_from_dict(rmd_dict, path):
         A set of unique generic json paths to lists inside rmd_dict
     """
     paths = set()
-    for (key, val) in rmd_dict.items():
+    for key, val in rmd_dict.items():
         new_path = f"{path}.{key}"
         new_paths = json_paths_to_lists(val, new_path)
         paths = paths.union(new_paths)
@@ -149,7 +150,7 @@ def json_paths_to_lists_from_list(rmd_list, path):
 def non_schema_validate_rmr(rmr_obj):
     """Provides non-schema validation for an RMR"""
 
-    unique_id_error = check_unique_ids_in_ruleset_model_instances(rmr_obj)
+    unique_id_error = check_unique_ids_in_ruleset_model_descriptions(rmr_obj)
     passed = not unique_id_error
     error = unique_id_error or None
 
