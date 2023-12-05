@@ -191,6 +191,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [4-19](section4/4-19.md): Schedules for HVAC fans in the baseline design model that provide outdoor air for ventilation shall be cycled ON and OFF to meet heating and cooling loads during unoccupied hours excluding HVAC systems that meet Table G3.1-4 Schedules per the proposed column exceptions #s 2 and 3.  
 
 ## Section 5 - Building Envelope
+  * [5-1](section5/Rule5-1.md): There are four baseline rotations (i.e., four baseline models differing in azimuth by 90 degrees and four sets of baseline model results) if vertical fenestration area per each orientation differ by more than 5%.
   * [5-2](section5/Rule5-2.md): Baseline building must be modeled so that it doesn't shade itself  
   * [5-3](section5/Rule5-3.md): Baseline roof assemblies must conform with assemblies detailed in Appendix A ( Above-grade walls—Steel-framed A2.2) 
   * [5-4](section5/Rule5-4.md): Baseline roof assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8.  
