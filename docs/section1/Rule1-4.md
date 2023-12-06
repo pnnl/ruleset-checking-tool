@@ -2,24 +2,27 @@
 **Schema Version:** 0.0.29  
 **Mandatory Rule:** True  
 **Rule ID:** 1-4
-**Rule Description:** The performance of the proposed design is calculated in accordance with provisions of Standard 90.1-2019 Appendix G, where Performance Cost Index = Proposed building performance/Baseline building performance, where both  the  proposed  building  performance  and  the  baseline  building  performance include all end-use load components associated with the building when calculating the Performance Cost Index.
-**Rule Assertion:** Options are Pass/Fail/IN_APPLICABLE     
-**Appendix G Section:** G1.2.2 
+**Rule Description:** The PCI shall be less than or equal to the PCIt when calculated in accordance with Standard 90.1 2019, Section 4.2.1.1
+**Rule Assertion:** Options are Pass/Fail  
+**Appendix G Section:** 4.2.1.1
 **90.1 Section Reference:** None  
 
 **Data Lookup:** None  
 
-**Evaluation Context:** 
+**Evaluation Context:** RMD
 
-**Applicability Checks:** 
+**Applicability Checks:** None
 
-**Function Calls:**
+**Function Calls:** None
 
 
 ## Rule Logic:
+- Get the Performance Cost Index-Target from the output of the proposed model: `output_pci_target = P_RMD.output.performance_cost_index_target`
+- Get the Performance Cost Index from the output of the proposed model: `output_pci = P_RMD.output.performance_cost_index`
 **Rule Assertion**
-- Case 1: If the PCI is the correct ratio between proposed and baseline building performance; PASS: `if Output2019ASHRAE901.performance_cost_index == Output2019ASHRAE901.total_proposed_building_energy_cost_including_renewable_energy/Output2019ASHRAE901.baseline_building_performance_energy_cost`
-- Case 2: Else; FAIL: `else: FAIL`
+- Case 1: If the PCI is less than or equal to the PCI target, PASS: `if output_pci <= output_pci_target: outcome = PASS`
+- Case 2: Else, FAIL `else: outcome = FAIL`
+
 
 **Notes/Questions:** None
 
