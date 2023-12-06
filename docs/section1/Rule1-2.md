@@ -3,13 +3,13 @@
 **Mandatory Rule:** True  
 **Rule ID:** 1-2  
 **Rule Description:** The performance of the proposed design is calculated in accordance with Standard 90.1-2019 Appendix G, where Performance Cost Index = Proposed building performance (PBP) /Baseline building performance (BBP), where both the PBP and the BBP include all end-use load components associated with the building when calculating the Performance Cost Index (PCI).
-**Rule Assertion:** Options are Pass/Fail   
-**Appendix G Section:** None
-**90.1 Section Reference:** G1.2.2
+**Rule Assertion:** Options are Pass/Fail/NOT_APPLICABLE
+**Appendix G Section:** G1.2.2
+**90.1 Section Reference:** None
 
 **Data Lookup:** None
 
-**Evaluation Context:** RPD
+**Evaluation Context:** RMD
 
 **Applicability Checks:** 
 1. Applies to projects where the proposed on site renewable energy production offsets less than or equal to 5% of the baseline building performance
@@ -26,7 +26,7 @@
 - Else, continue to rule assertion: `else:`
 
   **Rule Assertion:** 
-  - If PCI = PBP / BBP: PASS `if output_pci == output_pbp / output_bbp: outcome = PASS`
-  - Else: FAIL `else: outcome = FAIL`
+  - Case 1: If PCI = PBP / BBP: PASS `if output_pci == output_pbp / output_bbp: outcome = PASS`
+  - Case 2: Else: FAIL `else: outcome = FAIL`
 
 **[Back](../_toc.md)**
