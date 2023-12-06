@@ -27,8 +27,8 @@
 - Else, continue to rule assertion: `else:`
 
   **Rule Assertion:** 
-  - If PCI + ((PBPnre - PBP)/BBP) - 0.05 <= PCIt: PASS `if output_pci + ((output_pbp_nre - output_pbp)/output_bbp) - 0.05 <= output_pci_target: outcome = PASS`
-  - Else: FAIL `else: outcome = FAIL`
+  - Case 1: If PCI + ((PBPnre - PBP)/BBP) - 0.05 <= PCIt, PASS `if output_pci + ((output_pbp_nre - output_pbp)/output_bbp) - 0.05 <= output_pci_target: outcome = PASS`
+  - Case 2: Else, FAIL `else: outcome = FAIL`
 
 
 **Notes/Questions:** None
