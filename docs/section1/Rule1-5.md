@@ -3,7 +3,7 @@
 **Mandatory Rule:** True  
 **Rule ID:** 1-5
 **Rule Description:** When on-site renewable energy generation exceeds the thresholds defined in Section 4.2.1.1, the methodology defined in this section shall be used to calculate the PCIt.
-**Rule Assertion:** Options are Pass/Fail/IN_APPLICABLE     
+**Rule Assertion:** Options are Pass/Fail/NOT_APPLICABLE     
 **Appendix G Section:** None
 **90.1 Section Reference:** Section 4.2.1.1  
 
