@@ -4,8 +4,8 @@
 **Rule ID:** 1-4
 **Rule Description:** The PCI shall be less than or equal to the PCIt when calculated in accordance with Standard 90.1 2019, Section 4.2.1.1
 **Rule Assertion:** Options are Pass/Fail  
-**Appendix G Section:** 4.2.1.1
-**90.1 Section Reference:** None  
+**Appendix G Section:** None
+**90.1 Section Reference:** 4.2.1.1
 
 **Data Lookup:** None  
 
