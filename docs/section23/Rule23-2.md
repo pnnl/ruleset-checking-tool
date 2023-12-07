@@ -28,23 +28,32 @@
   - Else, rule is not applicable to B-RMD: `else: RULE_NOT_APPLICABLE`
 
 ## Rule Logic:  
-
 - For each hvac system type in the building: `for baseline_system_type in baseline_hvac_system_dict:`
 
   - for each hvac system in the building: `for hvac_b_id in baseline_hvac_system_dict[baseline_system_type]:`
 
     - check if it is one of the eligible system types: `if any(baseline_system_type_compare(baseline_system_type, target_system_type, false) for target_system_type in target_system_types):`
+   
+    - make a boolean is_sys_11 and set it to false: `is_sys_11 = FALSE`
+   
+    - Check if the system is a System-11 type system: `sys_11_types = [HVAC_SYS.SYS_11.1,HVAC_SYS.SYS_11.2]`
+   
+        - check if it is one of the system 11 system types & if true, set sys_11_types to TRUE: `if any(baseline_system_type_compare(baseline_system_type, sys_11_types, false) for target_system_type in target_system_types): sys_11_types = TRUE`
+  
 
     - get the hvac system: `hvac_b = get_component_by_id(B_RMI, hvac_id)`
     
       - For each fan system in HVAC system: `for fan_system_b in hvac_b.fan_systems:`
         **Rule Assertion:**
 
-        - Case 1: For each HVAC system that is Type-5, 6, 7, 8, 11.1, 11.2, 7a, 8a, 11.1a, 11.2a, 5b, 6b, 7b, 8b, 11b, 7c, 11.1c, if supply air temperature is reset higher by 5F under minimum cooling load condition: `if ( fan_system_b.temperature_control == "ZONE_RESET" ) AND ( fan_system_b.reset_differential_temperature == 5 ): PASS`
+        - Case 1: if the system is a type 11 system, return UNDETERMINED: `if is_sys_11: UNDETERMINED`
+        
+        - Case 2: For each HVAC system that is Type-5, 6, 7, 8, 11.1, 11.2, 7a, 8a, 11.1a, 11.2a, 5b, 6b, 7b, 8b, 11b, 7c, 11.1c, if supply air temperature is reset higher by 5F under minimum cooling load condition: `if ( fan_system_b.temperature_control == "ZONE_RESET" ) AND ( fan_system_b.reset_differential_temperature == 5 ): PASS`
 
-        - Case 2: Else: `else: FAIL`
+        - Case 3: Else: `else: FAIL`
 
 **Notes:**
 1. Updated the Rule ID from 23-1 to 23-2 on 11/28/2022
+2. made UNDETERMINED for System Type 11 based on conflict between G3.1.3.12 and G3.1.3.17
 
 **[Back](../_toc.md)**
