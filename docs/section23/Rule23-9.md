@@ -41,8 +41,9 @@
         - add the supply fan design_airflow to the maximum_supply_flowrate: `maximum_supply_flowrate += supply_fan.design_airflow`
  
   **Rule Assertion:** 
-    - Case 1: the minimum volume flow rate is equal to the maximum of the min_ventilation_flowrate and 50% of the maximum_supply_flowrate - return UNDETERMINED with a note: `if min_volume_flowrate == max(min_ventilation_flowrate, 0.5 * maximum_supply_flowrate): UNDETERMINED; note = "The minimum volume flowrate is equal to the maximum of the minimum ventilation flowrate and 50% of the maximum supply flow rate.  If any airflow required to comply with codes or accredidation standards is LESS than this value, the system passes.  We are not able to determine the airflow required to comply with codes or accreditation standards at this time. `
-    - Case 2: all other cases, the rule fails: `else: FAIL`
+    - Case 1: the minimum volume flow rate is equal to the maximum of the min_ventilation_flowrate and 50% of the maximum_supply_flowrate - return UNDETERMINED with a note: `if min_volume_flowrate == max(min_ventilation_flowrate, 0.5 * maximum_supply_flowrate): UNDETERMINED; note = "The minimum volume flowrate is equal to the maximum of the minimum ventilation flowrate and 50% of the maximum supply flow rate.  If any airflow required to comply with codes or accredidation standards is LESS than this value, the system passes.  We are not able to determine the airflow required to comply with codes or accreditation standards at this time." `  
+    - Case 2: the minimum volume flow rate is greater than the maximum of the min_ventilation_flowrate and 50% of the maximum_supply_flowrate - return UNDETERMINED with a note: `elif min_volume_flowrate > max(min_ventilation_flowrate, 0.5 * maximum_supply_flowrate): UNDETERMINED; note = "The minimum volume flowrate is greater than the maximum of the minimum ventilation flowrate and 50% of the maximum supply flow rate.  This is correct IF the minimum volume flowrate is equal to any airflow required to comply with codes or accredidation standards, the system passes, otherwise it fails.  We are not able to determine the airflow required to comply with codes or accreditation standards at this time." ` 
+    - Case 3: all other cases, the rule fails: `else: FAIL`
 
 
 **Notes:**
