@@ -36,12 +36,12 @@
             - `CONTINUE TO RULE LOGIC`
         - otherwise not applicable: `else: NOT_APPLICABLE`
 **Rule Logic:**
-- if the terminal runs the fan as a first stage of heating before the reheat coil is turned on, then this terminal is compliant with the rule, return PASS: `if terminal.fan_powered_box_heat_first_stage: PASS`
+- if the terminal runs the fan as a first stage of heating before the reheat coil is turned on, then this terminal is compliant with the rule, return PASS: `if terminal.is_first_stage_heat_fan_powered_box: PASS`
 - otherwise, the terminal is not compliant, return fail: `else: FAIL`
 
 
 **Notes:**
 
-1.  This rule relies on the data element terminal.fan_powered_box_heat_first_stage, which does not yet exist in the schema.  Furthermore, this rule logic assumes that it will be implemented as a boolean
+1.  This rule relies on the data element terminal.is_first_stage_heat_fan_powered_box, which does not yet exist in the schema.  Furthermore, this rule logic assumes that it will be implemented as a boolean
 
 **[Back](../_toc.md)**
