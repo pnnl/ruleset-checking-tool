@@ -31,7 +31,7 @@
             - `CONTINUE TO RULE LOGIC`
             - otherwise, rule not applicable: `else: RULE_NOT_APPLICABLE`
  
-**Rule Logic**
+**Rule Logic:**  
     - get the hvac system: `hvac_system = get_object_by_id(hvac_system_id)`  
     - get the fan system: `fan_system = hvac_system.fan_system`  
     - get the fan system minimum volume flow rate: `min_volume_flowrate = fan_system.minimum_airflow`  
