@@ -38,7 +38,7 @@
     - get the fan system minimum ventilation air flow rate: `min_ventilation_flowrate = fan_system.minimum_outdoor_airflow`  
     - create a variable for the maximum volume flow rate: `maximum_supply_flowrate = 0`  
     - loop through each supply fan: `for supply_fan in fan_system.supply_fans:`  
-         - add the supply fan design_airflow to the maximum_supply_flowrate: `maximum_supply_flowrate += supply_fan.design_airflow`  
+        - add the supply fan design_airflow to the maximum_supply_flowrate: `maximum_supply_flowrate += supply_fan.design_airflow`  
  
   **Rule Assertion:** 
     - Case 1: the minimum volume flow rate is equal to the maximum of the min_ventilation_flowrate and 50% of the maximum_supply_flowrate - return UNDETERMINED with a note: `if min_volume_flowrate == max(min_ventilation_flowrate, 0.5 * maximum_supply_flowrate): UNDETERMINED; note = "The minimum volume flowrate is equal to the maximum of the minimum ventilation flowrate and 50% of the maximum supply flow rate.  If any airflow required to comply with codes or accredidation standards is LESS than this value, the system passes.  We are not able to determine the airflow required to comply with codes or accreditation standards at this time." `  
