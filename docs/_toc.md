@@ -363,6 +363,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [22-25](section22/Rule22-25.md): For chilled-water systems served by chiller(s) and does not serve baseline System-11, the baseline building constant-volume primary pump power shall be modeled as 9 W/gpm. 
   * [22-26](section22/Rule22-26.md): For chilled-water systems served by chiller(s) and serves baseline System-11, the baseline building constant-volume primary pump power shall be modeled as 12 W/gpm. 
   * [22-27](section22/Rule22-27.md): Each baseline chiller shall be modeled with separate condenser-water pump interlocked to operate with the associated chiller.
+  * [22-28](section22/Rule22-28.md): The baseline building design condenser-water pump shall be modeled as constant volume.
   * [22-29](section22/Rule22-29.md): For chilled-water systems served by chiller(s) and does not serve baseline System-11, condenser-water pump power shall be 19 W/gpm. 
   * [22-30](section22/Rule22-30.md): For chilled-water systems served by chiller(s) and serves baseline System-11, condenser-water pump power shall be 22 W/gpm. 
   * [22-31](section22/Rule22-31.md): The baseline building design’s chiller plant shall be modeled with chillers having the number as indicated in Table G3.1.3.7 as a function of building peak cooling load. 
