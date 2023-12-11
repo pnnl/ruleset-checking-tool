@@ -10,17 +10,6 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types i
     get_baseline_system_types,
 )
 
-# APPLICABLE_SYS_TYPES = [
-#     HVAC_SYS.SYS_11_1,
-#     HVAC_SYS.SYS_11_1A,
-#     HVAC_SYS.SYS_11_1B,
-#     HVAC_SYS.SYS_11_1C,
-#     HVAC_SYS.SYS_11_2,
-#     HVAC_SYS.SYS_11_2A,
-# ]
-
-# SYS_11_1A = "Sys-11.1a"
-
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_11_1,
     HVAC_SYS.SYS_11_2,
