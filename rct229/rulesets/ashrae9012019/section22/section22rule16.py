@@ -1,6 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
@@ -34,25 +35,27 @@ class Section22Rule16(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section22Rule16, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=False
+            ),
             each_rule=Section22Rule16.HeatRejectionRule(),
-            index_rmr="baseline",
+            index_rmr=BASELINE_0,
             id="22-16",
             description="The baseline condenser-water design supply temperature shall be calculated using the cooling tower approach to the 0.4% evaporation design wet-bulb temperature, valid for wet-bulbs from 55°F to 90°F.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.11 Heat Rejection (System 7, 8, 11, 12 and 13)",
             is_primary_rule=True,
-            rmr_context="ruleset_model_instances/0",
+            rmr_context="ruleset_model_descriptions/0",
             list_path="heat_rejections[*]",
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
         # create a list containing all HVAC systems that are modeled in the rmi_b
         available_type_list = [
             hvac_type
-            for hvac_type in baseline_system_types_dict.keys()
+            for hvac_type in baseline_system_types_dict
             if len(baseline_system_types_dict[hvac_type]) > 0
         ]
         return any(
@@ -70,23 +73,25 @@ class Section22Rule16(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         heat_rejection_loop_dict = {
             heat_rejection_loop: find_exactly_one_with_field_value(
-                "$..fluid_loops[*]", "id", heat_rejection_loop, rmi_b
+                "$.fluid_loops[*]", "id", heat_rejection_loop, rmi_b
             )
-            for heat_rejection_loop in find_all("heat_rejections[*].loop", rmi_b)
+            for heat_rejection_loop in find_all("$.heat_rejections[*].loop", rmi_b)
         }
         return {"heat_rejection_loop_dict": heat_rejection_loop_dict}
 
     class HeatRejectionRule(RuleDefinitionBase):
         def __init__(self):
             super(Section22Rule16.HeatRejectionRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, False),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=False
+                ),
             )
 
         def get_calc_vals(self, context, data=None):
-            heat_rejection_b = context.baseline
+            heat_rejection_b = context.BASELINE_0
             loop_b = heat_rejection_b["loop"]
             design_wetbulb_temperature_b = heat_rejection_b[
                 "design_wetbulb_temperature"

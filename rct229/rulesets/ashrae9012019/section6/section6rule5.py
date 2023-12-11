@@ -1,6 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import BASELINE_0, PROPOSED
 from rct229.rulesets.ashrae9012019.ruleset_functions.compare_schedules import (
     compare_schedules,
 )
@@ -14,7 +15,7 @@ from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all, find_exactly_one_with_field_value
 from rct229.utils.masks import invert_mask
-from rct229.utils.pint_utils import ZERO, pint_sum
+from rct229.utils.pint_utils import ZERO
 
 BUILDING_AREA_CUTTOFF = ureg("5000 ft2")
 
@@ -25,9 +26,11 @@ class Section6Rule5(RuleDefinitionListIndexedBase):
     def __init__(self):
         super(Section6Rule5, self).__init__(
             id="6-5",
-            rmrs_used=UserBaselineProposedVals(False, True, True),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=True
+            ),
             each_rule=Section6Rule5.RulesetModelInstanceRule(),
-            index_rmr="baseline",
+            index_rmr=BASELINE_0,
             description="Baseline building is modeled with automatic shutoff controls in buildings >5000 sq.ft.",
             required_fields={
                 "$": ["calendar"],
@@ -36,21 +39,23 @@ class Section6Rule5(RuleDefinitionListIndexedBase):
             ruleset_section_title="Lighting",
             standard_section="Section G3.1-6 Modeling Requirements for the Baseline building",
             is_primary_rule=True,
-            list_path="ruleset_model_instances[0]",
-            data_items={"is_leap_year_b": ("baseline", "calendar/is_leap_year")},
+            list_path="ruleset_model_descriptions[0]",
+            data_items={"is_leap_year_b": (BASELINE_0, "calendar/is_leap_year")},
         )
 
     class RulesetModelInstanceRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section6Rule5.RulesetModelInstanceRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, True),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=True
+                ),
                 each_rule=Section6Rule5.RulesetModelInstanceRule.BuildingRule(),
-                index_rmr="baseline",
+                index_rmr=BASELINE_0,
                 list_path="buildings[*]",
                 required_fields={"$": ["schedules"]},
                 data_items={
-                    "schedules_b": ("baseline", "schedules"),
-                    "schedules_p": ("proposed", "schedules"),
+                    "schedules_b": (BASELINE_0, "schedules"),
+                    "schedules_p": (PROPOSED, "schedules"),
                 },
             )
 
@@ -59,23 +64,29 @@ class Section6Rule5(RuleDefinitionListIndexedBase):
                 super(
                     Section6Rule5.RulesetModelInstanceRule.BuildingRule, self
                 ).__init__(
-                    rmrs_used=UserBaselineProposedVals(False, True, True),
+                    rmrs_used=produce_ruleset_model_instance(
+                        USER=False, BASELINE_0=True, PROPOSED=True
+                    ),
                     each_rule=Section6Rule5.RulesetModelInstanceRule.BuildingRule.ZoneRule(),
-                    index_rmr="baseline",
-                    list_path="$..zones[*]",
+                    index_rmr=BASELINE_0,
+                    list_path="$.building_segments[*].zones[*]",
                     required_fields={"$": ["building_open_schedule"]},
                     data_items={
                         "building_open_schedule_id_b": (
-                            "baseline",
+                            BASELINE_0,
                             "building_open_schedule",
                         ),
                     },
                 )
 
             def is_applicable(self, context, data):
-                building_b = context.baseline
-                building_total_area_b = pint_sum(
-                    find_all("$..spaces[*].floor_area", building_b), ZERO.AREA
+                building_b = context.BASELINE_0
+                building_total_area_b = sum(
+                    find_all(
+                        "$.building_segments[*].zones[*].spaces[*].floor_area",
+                        building_b,
+                    ),
+                    ZERO.AREA,
                 )
 
                 return building_total_area_b > BUILDING_AREA_CUTTOFF
@@ -86,15 +97,17 @@ class Section6Rule5(RuleDefinitionListIndexedBase):
                         Section6Rule5.RulesetModelInstanceRule.BuildingRule.ZoneRule,
                         self,
                     ).__init__(
-                        rmrs_used=UserBaselineProposedVals(False, True, True),
+                        rmrs_used=produce_ruleset_model_instance(
+                            USER=False, BASELINE_0=True, PROPOSED=True
+                        ),
                         each_rule=Section6Rule5.RulesetModelInstanceRule.BuildingRule.ZoneRule.SpaceRule(),
-                        index_rmr="baseline",
+                        index_rmr=BASELINE_0,
                         list_path="spaces[*]",
                     )
 
                 def create_data(self, context, data=None):
-                    zone_b = context.baseline
-                    zone_p = context.proposed
+                    zone_b = context.BASELINE_0
+                    zone_p = context.PROPOSED
                     return {
                         "avg_zone_height_b": get_avg_zone_height(zone_b),
                         "avg_zone_height_p": get_avg_zone_height(zone_p),
@@ -106,13 +119,20 @@ class Section6Rule5(RuleDefinitionListIndexedBase):
                             Section6Rule5.RulesetModelInstanceRule.BuildingRule.ZoneRule.SpaceRule,
                             self,
                         ).__init__(
-                            rmrs_used=UserBaselineProposedVals(False, True, True)
+                            rmrs_used=produce_ruleset_model_instance(
+                                USER=False, BASELINE_0=True, PROPOSED=True
+                            ),
                         )
+
+                    def is_applicable(self, context, data=None):
+                        # set space has no lighting space type to not applicable
+                        space_b = context.BASELINE_0
+                        return space_b.get("lighting_space_type") is not None
 
                     def get_calc_vals(self, context, data=None):
                         schedules_b = data["schedules_b"]
-                        space_b = context.baseline
-                        space_p = context.proposed
+                        space_b = context.BASELINE_0
+                        space_p = context.PROPOSED
                         building_open_schedule_id_b = data[
                             "building_open_schedule_id_b"
                         ]

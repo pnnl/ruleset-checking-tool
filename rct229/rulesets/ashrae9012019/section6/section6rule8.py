@@ -1,6 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import PROPOSED, BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.compare_schedules import (
     compare_schedules,
 )
@@ -9,7 +10,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.normalize_interior_lighting
 )
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all, find_exactly_one_with_field_value
-from rct229.utils.pint_utils import ZERO, pint_sum
+from rct229.utils.pint_utils import ZERO
 
 MANUAL_CHECK_MSG = (
     "Lighting schedule in P-RMD including adjusted lighting occupancy sensor reduction factor is "
@@ -27,31 +28,35 @@ class Section6Rule8(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section6Rule8, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, True),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=True
+            ),
             each_rule=Section6Rule8.RulesetModelInstanceRule(),
-            index_rmr="proposed",
+            index_rmr=PROPOSED,
             id="6-8",
             description="Additional occupancy sensor controls in the proposed building are modeled through schedule "
             "adjustments based on factors defined in Table G3.7.",
             ruleset_section_title="Lighting",
             standard_section="Section G3.1-6(i) Modeling Requirements for the Proposed design",
             is_primary_rule=True,
-            list_path="ruleset_model_instances[0]",
+            list_path="ruleset_model_descriptions[0]",
             required_fields={"$": ["calendar"], "calendar": ["is_leap_year"]},
-            data_items={"is_leap_year": ("baseline", "calendar/is_leap_year")},
+            data_items={"is_leap_year": (BASELINE_0, "calendar/is_leap_year")},
         )
 
     class RulesetModelInstanceRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section6Rule8.RulesetModelInstanceRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, True),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=True
+                ),
                 each_rule=Section6Rule8.RulesetModelInstanceRule.BuildingRule(),
-                index_rmr="proposed",
+                index_rmr=PROPOSED,
                 list_path="buildings[*]",
                 required_fields={"$": ["schedules"]},
                 data_items={
-                    "schedules_b": ("baseline", "schedules"),
-                    "schedules_p": ("proposed", "schedules"),
+                    "schedules_b": (BASELINE_0, "schedules"),
+                    "schedules_p": (PROPOSED, "schedules"),
                 },
             )
 
@@ -60,14 +65,16 @@ class Section6Rule8(RuleDefinitionListIndexedBase):
                 super(
                     Section6Rule8.RulesetModelInstanceRule.BuildingRule, self
                 ).__init__(
-                    rmrs_used=UserBaselineProposedVals(False, True, True),
+                    rmrs_used=produce_ruleset_model_instance(
+                        USER=False, BASELINE_0=True, PROPOSED=True
+                    ),
                     each_rule=Section6Rule8.RulesetModelInstanceRule.BuildingRule.ZoneRule(),
-                    index_rmr="proposed",
+                    index_rmr=PROPOSED,
                     list_path="$..zones[*]",
                 )
 
             def create_data(self, context, data=None):
-                building_p = context.proposed
+                building_p = context.PROPOSED
                 schedules_p = data["schedules_p"]
                 return {
                     "building_open_schedule_p": getattr_(
@@ -88,18 +95,20 @@ class Section6Rule8(RuleDefinitionListIndexedBase):
                         Section6Rule8.RulesetModelInstanceRule.BuildingRule.ZoneRule,
                         self,
                     ).__init__(
-                        rmrs_used=UserBaselineProposedVals(False, True, True),
+                        rmrs_used=produce_ruleset_model_instance(
+                            USER=False, BASELINE_0=True, PROPOSED=True
+                        ),
                         each_rule=Section6Rule8.RulesetModelInstanceRule.BuildingRule.ZoneRule.SpaceRule(),
-                        index_rmr="proposed",
+                        index_rmr=PROPOSED,
                         list_path="spaces[*]",
                         required_fields={"$": ["volume"]},
                     )
 
                 def create_data(self, context, data=None):
-                    zone_p = context.proposed
+                    zone_p = context.PROPOSED
                     return {
                         "avg_space_height": zone_p.get("volume", ZERO.VOLUME)
-                        / pint_sum(find_all("spaces[*].floor_area", zone_p), ZERO.AREA),
+                        / sum(find_all("spaces[*].floor_area", zone_p), ZERO.AREA),
                     }
 
                 class SpaceRule(RuleDefinitionBase):
@@ -108,14 +117,16 @@ class Section6Rule8(RuleDefinitionListIndexedBase):
                             Section6Rule8.RulesetModelInstanceRule.BuildingRule.ZoneRule.SpaceRule,
                             self,
                         ).__init__(
-                            rmrs_used=UserBaselineProposedVals(False, True, True),
+                            rmrs_used=produce_ruleset_model_instance(
+                                USER=False, BASELINE_0=True, PROPOSED=True
+                            ),
                             manual_check_required_msg=MANUAL_CHECK_MSG,
                             fail_msg=FAIL_MSG,
                         )
 
                     def get_calc_vals(self, context, data=None):
-                        space_p = context.proposed
-                        space_b = context.baseline
+                        space_p = context.PROPOSED
+                        space_b = context.BASELINE_0
                         avg_space_height = data["avg_space_height"]
                         schedules_b = data["schedules_b"]
                         schedules_p = data["schedules_p"]

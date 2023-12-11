@@ -1,10 +1,12 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_7_fns import table_G3_7_lookup
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_8_fns import table_G3_8_lookup
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.pint_utils import ZERO, CalcQ, pint_sum
+from rct229.utils.pint_utils import ZERO, CalcQ
+from rct229.rulesets.ashrae9012019 import RMT
+
 
 CASE3_WARNING = "Project passes based on space-by-space method. Verify if project sues space-by-space method."
 CASE4_WARNING = "Project fails based on space-by-space method. LIGHTING_BUILDING_AREA_TYPE is not known to determine building area method allowance."
@@ -18,27 +20,31 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section6Rule1, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, False, True),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=False, PROPOSED=True
+            ),
             each_rule=Section6Rule1.BuildingSegmentRule(),
-            index_rmr="proposed",
+            index_rmr=RMT.PROPOSED,
             id="6-1",
             description="The total building interior lighting power shall not exceed the interior lighting power "
             "allowance determined using either Table G3.7 or G3.8",
             ruleset_section_title="Lighting",
             standard_section="Section G1.2.1(b) Mandatory Provisions related to interior lighting power",
             is_primary_rule=True,
-            rmr_context="ruleset_model_instances/0/buildings/0/building_segments",
+            rmr_context="ruleset_model_descriptions/0/buildings/0/building_segments",
         )
 
     class BuildingSegmentRule(RuleDefinitionBase):
         def __init__(self):
             super(Section6Rule1.BuildingSegmentRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, False, True),
-                required_fields={"$..zones[*]": ["volume"]},
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=False, PROPOSED=True
+                ),
+                required_fields={"$.zones[*]": ["volume"]},
             )
 
         def get_calc_vals(self, context, data=None):
-            building_segment_p = context.proposed
+            building_segment_p = context.PROPOSED
 
             allowable_LPD_BAM = (
                 table_G3_8_lookup(building_segment_p["lighting_building_area_type"])[
@@ -52,15 +58,15 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
             total_building_segment_area_p = ZERO.AREA
             check_BAM_flag = False
             allowable_lighting_wattage_SBS = ZERO.POWER
-            for zone_p in find_all("$..zones[*]", building_segment_p):
-                zone_avg_height = zone_p["volume"] / pint_sum(
-                    find_all("$..spaces[*].floor_area", zone_p)
+            for zone_p in find_all("$.zones[*]", building_segment_p):
+                zone_avg_height = zone_p["volume"] / sum(
+                    find_all("$.spaces[*].floor_area", zone_p)
                 )
 
-                for space_p in find_all("$..spaces[*]", zone_p):
+                for space_p in find_all("$.spaces[*]", zone_p):
                     building_segment_design_lighting_wattage += (
-                        pint_sum(
-                            find_all("$..interior_lighting[*].power_per_area", space_p),
+                        sum(
+                            find_all("$.interior_lighting[*].power_per_area", space_p),
                             ZERO.POWER_PER_AREA,
                         )
                         * space_p["floor_area"]

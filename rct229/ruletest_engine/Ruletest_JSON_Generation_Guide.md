@@ -122,7 +122,7 @@ The next step would be to write this interpretation into a Test JSON. The user, 
         "rmr_transformations": {
             "user": {
                 "id": "ashrae229",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "transformers": [
@@ -141,7 +141,7 @@ The next step would be to write this interpretation into a Test JSON. The user, 
             },
             "baseline": {
                 "id": "ashrae229",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "transformers": [

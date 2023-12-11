@@ -14,12 +14,12 @@
             "comparison_value": "User RMR",
             "rule_dependency": "none",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "user": {
                 "id": "ashrae229",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "transformers": [
@@ -32,13 +32,14 @@
                             {
                                 "id": "Transformer_3"
                             }
-                        ]
+                        ],
+                        "type": "USER"
                     }
                 ]
             },
             "proposed": {
                 "id": "ashrae229",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "transformers": [
@@ -51,7 +52,8 @@
                             {
                                 "id": "Transformer_3"
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             }
@@ -72,12 +74,12 @@
             "comparison_value": "User RMR",
             "rule_dependency": "none",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "user": {
                 "id": "ashrae229",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "transformers": [
@@ -90,13 +92,14 @@
                             {
                                 "id": "Transformer_3"
                             }
-                        ]
+                        ],
+                        "type": "USER"
                     }
                 ]
             },
             "proposed": {
                 "id": "ashrae229",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "transformers": [
@@ -106,7 +109,8 @@
                             {
                                 "id": "Transformer_2"
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             }
@@ -127,12 +131,12 @@
             "comparison_value": "User RMR",
             "rule_dependency": "none",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "user": {
                 "id": "ashrae229",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "transformers": [
@@ -142,13 +146,14 @@
                             {
                                 "id": "Transformer_2"
                             }
-                        ]
+                        ],
+                        "type": "USER"
                     }
                 ]
             },
             "proposed": {
                 "id": "ashrae229",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "transformers": [
@@ -161,7 +166,8 @@
                             {
                                 "id": "Transformer_3"
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             }

@@ -7,6 +7,7 @@ from jsonpath_ng.ext import parse as parse_jsonpath
 from pydash.objects import set_
 
 import rct229.schema.config as config
+from rct229.schema.schema_store import SchemaStore
 
 
 def clean_schema_units(schema_unit_str):
@@ -34,7 +35,6 @@ def clean_schema_units(schema_unit_str):
         substring_list = schema_unit_str.split("/")
 
         for i, substring in enumerate(substring_list):
-
             # Wrap element in parentheses and replace - with *
             if "-" in substring:
                 substring_list[i] = "(" + re.sub("-", "*", substring) + ")"
@@ -63,9 +63,9 @@ def find_schema_unit_for_json_path(key_list):
 
     """
 
-    root_key = "ASHRAE229"
+    root_key = "RulesetProjectDescription"
 
-    secondary_schema_files = ["Output2019ASHRAE901.schema.json"]
+    secondary_schema_files = [SchemaStore.get_output_schema_by_ruleset()]
     schema_dict = config.schema_dict
 
     # Initialize first reference to top level key
@@ -213,20 +213,16 @@ def return_json_schema_reference(object_dict, key):
 
     # $ref elements are either at the top level or buried inside "items"
     if "items" in properties_dict:
-
         # Return the reference string (the last element separated by the '/'s)
         return properties_dict["items"]["$ref"].split("/")[-1]
 
     elif "$ref" in properties_dict:
-
         # Return the reference string (the last element separated by the '/'s)
         return properties_dict["$ref"].split("/")[-1]
 
     # Check 'oneOf' key for secondary json schema references
     elif "oneOf" in properties_dict:
-
         if "$ref" in properties_dict["oneOf"][0]:
-
             secondary_json = properties_dict["oneOf"][0]["$ref"].split("#")[0]
 
             if secondary_json in secondary_schema_files:
@@ -242,5 +238,4 @@ def return_json_schema_reference(object_dict, key):
         )
 
     else:
-
         raise ValueError(f"OUTCOME: Could not find a $ref key for {properties_dict} ")

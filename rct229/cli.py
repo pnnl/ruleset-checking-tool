@@ -7,8 +7,8 @@ from rct229.reports.engine_raw_summary import EngineRawSummary
 from rct229.rule_engine.engine import evaluate_all_rules
 from rct229.rule_engine.rulesets import RuleSet, RuleSetTest
 from rct229.ruletest_engine.run_ruletests import run_ashrae9012019_tests
+from rct229.schema.schema_store import SchemaStore
 from rct229.schema.validate import validate_rmr
-from rct229.utils.file import deserialize_rmr_file
 
 CONTEXT_SETTINGS = dict(help_option_names=["-h", "--help"])
 REPORT_MODULE = {
@@ -48,6 +48,7 @@ test_short_help_text = (
 def run_test(ruleset, section=None):
     print(f"software test workflow for section {section}")
     if ruleset == RuleSet.ASHRAE9012019_RULESET:
+        SchemaStore.set_ruleset(RuleSet.ASHRAE9012019_RULESET)
         outcome_list = run_ashrae9012019_tests(section)
         if section is None:
             for idx, outcome in enumerate(outcome_list):
@@ -65,7 +66,7 @@ def run_test(ruleset, section=None):
 # Evaluate RMR Triplet
 short_help_text = """
     Test RMD triplet. arguments are user_rmd, baseline_rmd, proposed_rmd,
-    --ruleset or -s: ruleset name. Default is ashrae9012019, available options include: ashrae9012019
+    --ruleset or -rs: ruleset name. Default is ashrae9012019, available options include: ashrae9012019
     --reports or -r: reports. Default is RAW_OUTPUT, available options include: RAW_OUTPUT, RAW_SUMMARY, ASHRAE9012019_DETAIL, ASHRAE9012019_SUMMARY, multiple allowed.
     """
 help_text = short_help_text
@@ -81,7 +82,9 @@ help_text = short_help_text
     "--reports_directory", "-rd", multiple=False, default="./examples/output/"
 )
 def evaluate(user_rmd, baseline_rmd, proposed_rmd, ruleset, reports, reports_directory):
-    report = evaluate_rmr_triplet(user_rmd, baseline_rmd, proposed_rmd, ruleset)
+    # TODO need to switch this to a if-else for selecting rulesets
+    SchemaStore.set_ruleset(RuleSet.ASHRAE9012019_RULESET)
+    report = evaluate_rmr_triplet(user_rmd, baseline_rmd, proposed_rmd)
     # have report attached.
 
     props = {
@@ -98,40 +101,11 @@ def evaluate(user_rmd, baseline_rmd, proposed_rmd, ruleset, reports, reports_dir
         report_module.generate(report, reports_directory)
 
 
-def evaluate_rmr_triplet(user_rmr, baseline_rmr, proposed_rmr, ruleset_doc):
+def evaluate_rmr_triplet(user_rmr, baseline_rmr, proposed_rmr):
     print("Test implementation of rule engine for ASHRAE Std 229 RCT.")
     print("")
 
-    user_rmr_obj = None
-    baseline_rmr_obj = None
-    proposed_rmr_obj = None
-    rmr_are_valid_json = True
-    try:
-        user_rmr_obj = deserialize_rmr_file(user_rmr)
-    except:
-        rmr_are_valid_json = False
-        print("User RMD is not a valid JSON file")
-    try:
-        baseline_rmr_obj = deserialize_rmr_file(baseline_rmr)
-    except:
-        rmr_are_valid_json = False
-        print("Baseline RMD is not a valid JSON file")
-    try:
-        proposed_rmr_obj = deserialize_rmr_file(proposed_rmr)
-    except:
-        rmr_are_valid_json = False
-        print("Proposed RMD is not a valid JSON file")
-
-    if not rmr_are_valid_json:
-        print("")
-        return
-    else:
-        print("Processing rules...")
-        print("")
-
-        return evaluate_all_rules(
-            user_rmr_obj, baseline_rmr_obj, proposed_rmr_obj, ruleset_doc
-        )
+    return evaluate_all_rules([user_rmr, baseline_rmr, proposed_rmr])
 
 
 if __name__ == "__main__":

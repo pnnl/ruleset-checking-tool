@@ -1,6 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.utils.jsonpath_utils import find_all
 
 
@@ -9,36 +10,32 @@ class Section6Rule6(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section6Rule6, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=False
+            ),
             each_rule=Section6Rule6.BuildingRule(),
-            index_rmr="baseline",
+            index_rmr=BASELINE_0,
             id="6-6",
             description="Baseline building is not modeled with daylighting control",
             ruleset_section_title="Lighting",
             standard_section="Section G3.1-6 Modeling Requirements for the baseline building",
             is_primary_rule=True,
-            rmr_context="ruleset_model_instances/0/buildings",
+            rmr_context="ruleset_model_descriptions/0/buildings",
         )
 
     class BuildingRule(RuleDefinitionBase):
         def __init__(self):
             super(Section6Rule6.BuildingRule, self).__init__(
-                required_fields={
-                    "$": ["building_segments"],
-                    "$.building_segments[*]": ["zones"],
-                    "$.building_segments[*].zones[*]": ["spaces"],
-                    "$.building_segments[*].zones[*].spaces[*]": ["interior_lighting"],
-                    "$.building_segments[*].zones[*].spaces[*].interior_lighting[*]": [
-                        "daylighting_control_type"
-                    ],
-                },
-                rmrs_used=UserBaselineProposedVals(False, True, False),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=False
+                ),
             )
 
         def get_calc_vals(self, context, data=None):
+            building_p = context.BASELINE_0
             interior_lighting_instances_with_daylighting_control = find_all(
-                f'$..spaces[*].interior_lighting[*][?(@.daylighting_control_type != "NONE")]',
-                context.baseline,
+                f'$.building_segments[*].zones[*].spaces[*].interior_lighting[*][?(@.daylighting_control_type != "NONE")]',
+                building_p,
             )
             ids_for_interior_lighting_instances_with_daylighting_control = [
                 instance["id"]

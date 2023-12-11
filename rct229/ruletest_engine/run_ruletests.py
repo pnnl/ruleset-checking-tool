@@ -30,6 +30,33 @@ def run_ashrae9012019_tests(section=None):
     ]
 
 
+def generate_ashrae9012019_software_test_report(
+    section_list=None, output_dir=os.path.dirname(__file__)
+):
+    """
+    Generate a software test JSON for ASHRAE 90.1 RCT for a given set of sections If section is None, then this
+    function runs all the rule sections
+
+    Parameters
+    ----------
+    section_list: list
+
+        List of strings representing section lists to run. If None, all are ran per those listed in
+        RuleSetTest.ASHRAE9012019_TEST_LIST
+
+    output_dir: str
+
+        Directory in which you want the ashrae901_2019_software_testing_report.json to appear
+
+    """
+
+    # If no section list is defined, rune all ASHRAE90.1 sections
+    if section_list is None:
+        section_list = RuleSetTest.ASHRAE9012019_TEST_LIST
+
+    generate_software_test_report("ashrae9012019", section_list, output_dir)
+
+
 def _helper_get_all_test_file_by_section(ruleset: str, path: str):
     """
     Helper function to retrieve the list of test files by ruleset and the sections
@@ -124,6 +151,20 @@ def run_airside_tests():
     return run_test_helper(json_tests, RuleSet.ASHRAE9012019_RULESET)
 
 
+def run_hvac_general_tests():
+    """Runs all tests found in the hvac general tests JSON.
+    Returns
+    -------
+    None
+    Results of lighting test are spit out to console
+    """
+
+    json_tests = _helper_get_all_test_file_by_section(
+        RuleSet.ASHRAE9012019_RULESET, "section19"
+    )
+    return run_test_helper(json_tests, RuleSet.ASHRAE9012019_RULESET)
+
+
 def run_test_helper(test_list, ruleset_doc):
     # sort the list in a human order
     test_list.sort(key=natural_keys)
@@ -141,8 +182,8 @@ def run_test_one_jsontest(test_json):
     return run_section_tests(test_json, RuleSet.ASHRAE9012019_RULESET)
 
 
-if __name__ == "__main__":
-    outcome = run_ashrae9012019_tests(section="section6")
+# if __name__ == "__main__":
+#     outcome = run_ashrae9012019_tests(section="section19")
 
 # run_transformer_tests()
 # run_lighting_tests()
@@ -151,5 +192,10 @@ if __name__ == "__main__":
 # run_envelope_tests()
 # run_receptacle_tests()
 # run_airside_tests()
+# run_hvac_general_tests()
 
-# run_test_one_jsontest("ashrae9012019/section5/rule_5_3.json")
+# run_test_one_jsontest("ashrae9012019/section22/rule_22_12.json")
+# run_ashrae9012019_tests()
+# output_dir = os.path.dirname(__file__)
+# generate_ashrae9012019_software_test_report(['tester'])
+# generate_ashrae9012019_software_test_report(None, output_dir)

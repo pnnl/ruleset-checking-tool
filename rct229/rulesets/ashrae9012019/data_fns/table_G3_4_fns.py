@@ -57,6 +57,7 @@ CLIMATE_ZONE_ENUMERATION_TO_CLIMATE_ZONE_SET_MAP = {
 
 # Helper function to add WWR to the search criteria for getting the correct
 
+
 # Exterior windows, skylight and glass doors
 def wwr_to_search_criteria(wwr):
     wwr_search_list = []

@@ -1,6 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
@@ -32,25 +33,27 @@ class Section21Rule7(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section21Rule7, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=False
+            ),
             each_rule=Section21Rule7.HeatingFluidLoopRule(),
-            index_rmr="baseline",
+            index_rmr=BASELINE_0,
             id="21-7",
             description="When baseline building requires boilers, systems 1,5,7,11 and 12 - Model HWST = 180F and return design temp = 130F.",
             ruleset_section_title="HVAC - Water Side",
             standard_section="Section G3.1.3.3 Building System-Specific Modeling Requirements for the Baseline model",
             is_primary_rule=True,
-            rmr_context="ruleset_model_instances/0",
-            list_path="fluid_loops[*]",
+            rmr_context="ruleset_model_descriptions/0",
+            list_path="$.fluid_loops[*]",
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
         # create a list containing all HVAC systems that are modeled in the rmi_b
         available_type_list = [
             hvac_type
-            for hvac_type in baseline_system_types_dict.keys()
+            for hvac_type in baseline_system_types_dict
             if len(baseline_system_types_dict[hvac_type]) > 0
         ]
         return any(
@@ -61,19 +64,21 @@ class Section21Rule7(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         boiler_loop_ids = find_all("boilers[*].loop", rmi_b)
         return {"loop_boiler_dict": boiler_loop_ids}
 
     def list_filter(self, context_item, data):
-        fluid_loop_b = context_item.baseline
+        fluid_loop_b = context_item.BASELINE_0
         loop_boiler_dict = data["loop_boiler_dict"]
         return fluid_loop_b["id"] in loop_boiler_dict
 
     class HeatingFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
             super(Section21Rule7.HeatingFluidLoopRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, False),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=False
+                ),
                 required_fields={
                     "$": ["heating_design_and_control"],
                     "heating_design_and_control": [
@@ -84,7 +89,7 @@ class Section21Rule7(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            fluid_loop_b = context.baseline
+            fluid_loop_b = context.BASELINE_0
             design_supply_temperature = fluid_loop_b["heating_design_and_control"][
                 "design_supply_temperature"
             ]

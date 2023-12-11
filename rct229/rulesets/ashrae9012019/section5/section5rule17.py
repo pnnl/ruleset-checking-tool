@@ -1,6 +1,11 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import BASELINE_0
+from rct229.schema.schema_enums import SchemaEnums
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_area_type_window_wall_area_dict import (
+    get_area_type_window_wall_area_dict,
+)
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
     OpaqueSurfaceType as OST,
 )
@@ -14,8 +19,12 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_ca
     get_surface_conditioning_category_dict,
 )
 from rct229.utils.assertions import getattr_
-from rct229.utils.pint_utils import CalcQ
+from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.pint_utils import ZERO, CalcQ
 from rct229.utils.std_comparisons import std_equal
+
+DOOR = SchemaEnums.schema_enums["SubsurfaceClassificationOptions"].DOOR
+FAIL_MSG = "The vertical fenestration is not distributed across baseline opaque surfaces in the same proportion as in the proposed design. Verify if envelope is existing or altered and can be excluded from this check."
 
 
 class Section5Rule17(RuleDefinitionListIndexedBase):
@@ -23,134 +32,144 @@ class Section5Rule17(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule17, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, True),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=True
+            ),
             required_fields={
                 "$": ["weather"],
                 "weather": ["climate_zone"],
             },
             each_rule=Section5Rule17.BuildingRule(),
-            index_rmr="baseline",
+            index_rmr=BASELINE_0,
             id="5-17",
-            description="Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same in the baseline as in the proposed design. ",
+            description="The vertical fenestration shall be distributed on each face of the building in the same proportion as in the proposed design.",
             ruleset_section_title="Envelope",
-            standard_section="Section G3.1-5 Building Envelope Modeling Requirements for the Baseline building",
+            standard_section="Section G3.1-5(c) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
-            list_path="ruleset_model_instances[0].buildings[*]",
-            data_items={"climate_zone": ("baseline", "weather/climate_zone")},
+            list_path="ruleset_model_descriptions[0].buildings[*]",
+            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
         )
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule17.BuildingRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, True),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=True
+                ),
                 required_fields={},
-                each_rule=Section5Rule17.BuildingRule.UnregulatedSurfaceRule(),
-                index_rmr="baseline",
-                list_path="$..surfaces[*]",
+                each_rule=Section5Rule17.BuildingRule.AboveGradeWallRule(),
+                index_rmr=BASELINE_0,
+                # list_path and list_filter together determine the list of
+                # above grade walls to be passed to AboveGradeWallRule
+                list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
 
         def create_data(self, context, data=None):
-            building = context.baseline
+            building_b = context.BASELINE_0
+            building_p = context.PROPOSED
+            climate_zone = data["climate_zone"]
+
+            window_wall_areas_dictionary_b = get_area_type_window_wall_area_dict(
+                climate_zone, building_b
+            )
+            window_wall_areas_dictionary_p = get_area_type_window_wall_area_dict(
+                climate_zone, building_p
+            )
+
             return {
-                "surface_conditioning_category_dict": get_surface_conditioning_category_dict(
-                    data["climate_zone"], building
+                "total_fenestration_area_b": sum(
+                    find_all("$..total_window_area", window_wall_areas_dictionary_b),
+                    ZERO.AREA,
+                ),
+                "total_fenestration_area_p": sum(
+                    find_all("$..total_window_area", window_wall_areas_dictionary_p),
+                    ZERO.AREA,
+                ),
+                "surface_conditioning_category_dict_b": get_surface_conditioning_category_dict(
+                    data["climate_zone"], building_b
                 ),
             }
 
         def list_filter(self, context_item, data=None):
-            scc = data["surface_conditioning_category_dict"]
-            surface_b = context_item.baseline
-            return scc[surface_b["id"]] == SCC.UNREGULATED
+            surface_b = context_item.BASELINE_0
 
-        class UnregulatedSurfaceRule(RuleDefinitionBase):
+            return (
+                get_opaque_surface_type(surface_b) == OST.ABOVE_GRADE_WALL
+                and data["surface_conditioning_category_dict_b"][surface_b["id"]]
+                != SCC.UNREGULATED
+            )
+
+        class AboveGradeWallRule(RuleDefinitionBase):
             def __init__(self):
-                super(
-                    Section5Rule17.BuildingRule.UnregulatedSurfaceRule, self
-                ).__init__(
-                    rmrs_used=UserBaselineProposedVals(False, True, True),
-                    required_fields={"$": ["construction"]},
+                super(Section5Rule17.BuildingRule.AboveGradeWallRule, self).__init__(
+                    rmrs_used=produce_ruleset_model_instance(
+                        USER=False, BASELINE_0=True, PROPOSED=True
+                    ),
+                    required_fields={
+                        "$": ["construction"],
+                        "construction": ["u_factor"],
+                    },
+                    fail_msg=FAIL_MSG,
                 )
 
             def get_calc_vals(self, context, data=None):
-                surface_b = context.baseline
-                surface_p = context.proposed
+                above_grade_wall_b = context.BASELINE_0
+                above_grade_wall_p = context.PROPOSED
 
-                surface_b_type = get_opaque_surface_type(surface_b)
-                surface_b_construction = surface_b["construction"]
-                surface_p_type = get_opaque_surface_type(surface_p)
-                surface_p_construction = surface_p["construction"]
+                def _helper_calc_val(above_grade_wall):
+                    """Helper function for calculating the total fenestration area for an above grade wall"""
+                    return sum(
+                        [
+                            subsurface.get("glazed_area", ZERO.AREA)
+                            + subsurface.get("opaque_area", ZERO.AREA)
+                            for subsurface in find_all(
+                                "subsurfaces[*]", above_grade_wall
+                            )
+                            if (
+                                getattr_(subsurface, "subsurface", "classification")
+                                == DOOR
+                                and (
+                                    subsurface.get("glazed_area", ZERO.AREA)
+                                    > subsurface.get("opaque_area", ZERO.AREA)
+                                )
+                                or (
+                                    getattr_(subsurface, "subsurface", "classification")
+                                    != DOOR
+                                )
+                            )
+                        ],
+                        ZERO.AREA,
+                    )
 
-                calc_vals = {
-                    "baseline_surface_type": surface_b_type,
-                    "proposed_surface_type": surface_p_type,
+                return {
+                    "total_fenestration_area_surface_b": CalcQ(
+                        "area", _helper_calc_val(above_grade_wall_b)
+                    ),
+                    "total_fenestration_area_b": CalcQ(
+                        "area", data["total_fenestration_area_b"]
+                    ),
+                    "total_fenestration_area_surface_p": CalcQ(
+                        "area", _helper_calc_val(above_grade_wall_p)
+                    ),
+                    "total_fenestration_area_p": CalcQ(
+                        "area", data["total_fenestration_area_p"]
+                    ),
                 }
 
-                if surface_b_type in [OST.ABOVE_GRADE_WALL, OST.FLOOR, OST.ROOF]:
-                    return {
-                        **calc_vals,
-                        "baseline_surface_u_factor": getattr_(
-                            surface_b_construction, "construction", "u_factor"
-                        ),
-                        "proposed_surface_u_factor": getattr_(
-                            surface_p_construction, "construction", "u_factor"
-                        ),
-                    }
-                elif surface_b_type in [OST.UNHEATED_SOG, OST.HEATED_SOG]:
-                    return {
-                        **calc_vals,
-                        "baseline_surface_f_factor": getattr_(
-                            surface_b_construction, "construction", "f_factor"
-                        ),
-                        "proposed_surface_f_factor": getattr_(
-                            surface_p_construction, "construction", "f_factor"
-                        ),
-                    }
-                elif surface_b_type == OST.BELOW_GRADE_WALL:
-                    return {
-                        **calc_vals,
-                        "baseline_surface_c_factor": CalcQ(
-                            "thermal_transmittance",
-                            getattr_(
-                                surface_b_construction, "construction", "c_factor"
-                            ),
-                        ),
-                        "proposed_surface_c_factor": CalcQ(
-                            "thermal_transmittance",
-                            getattr_(
-                                surface_p_construction, "construction", "c_factor"
-                            ),
-                        ),
-                    }
-                else:
-                    # Will never reach this line
-                    # The OST defaults all unidentifiable surfaces to above wall grade
-                    # Serve code completeness
-                    raise Exception(f"Unrecognized surface type: {surface_b_type}")
-
             def rule_check(self, context, calc_vals=None, data=None):
-                baseline_surface_type = calc_vals["baseline_surface_type"]
-                proposed_surface_type = calc_vals["proposed_surface_type"]
-                # Check 1. surface type needs to be matched
-                if (
-                    proposed_surface_type is None
-                    or baseline_surface_type != proposed_surface_type
-                ):
-                    return False
+                total_fenestration_area_surface_b = calc_vals[
+                    "total_fenestration_area_surface_b"
+                ]
+                total_fenestration_area_surface_p = calc_vals[
+                    "total_fenestration_area_surface_p"
+                ]
+                total_fenestration_area_b = calc_vals["total_fenestration_area_b"]
+                total_fenestration_area_p = calc_vals["total_fenestration_area_p"]
 
-                if baseline_surface_type in [OST.ABOVE_GRADE_WALL, OST.FLOOR, OST.ROOF]:
-                    return std_equal(
-                        calc_vals["baseline_surface_u_factor"],
-                        calc_vals["proposed_surface_u_factor"],
-                    )
-                elif baseline_surface_type in [OST.UNHEATED_SOG, OST.HEATED_SOG]:
-                    return std_equal(
-                        calc_vals["baseline_surface_f_factor"],
-                        calc_vals["proposed_surface_f_factor"],
-                    )
-                elif baseline_surface_type == OST.BELOW_GRADE_WALL:
-                    return std_equal(
-                        calc_vals["baseline_surface_c_factor"],
-                        calc_vals["proposed_surface_c_factor"],
-                    )
-                else:
-                    return False
+                return (
+                    total_fenestration_area_b == ZERO.AREA
+                    and total_fenestration_area_p == ZERO.AREA
+                ) or std_equal(
+                    (total_fenestration_area_surface_b / total_fenestration_area_b),
+                    (total_fenestration_area_surface_p / total_fenestration_area_p),
+                )

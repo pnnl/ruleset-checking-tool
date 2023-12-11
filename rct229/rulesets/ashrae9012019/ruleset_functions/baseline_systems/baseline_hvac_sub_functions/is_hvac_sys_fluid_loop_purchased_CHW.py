@@ -1,10 +1,8 @@
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
-    find_exactly_one_hvac_system,
-)
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.jsonpath_utils import find_all, find_one
+from rct229.utils.utility_functions import find_exactly_one_hvac_system
 
-EXTERNAL_FLUID_SOURCE = schema_enums["ExternalFluidSourceOptions"]
+EXTERNAL_FLUID_SOURCE = SchemaEnums.schema_enums["ExternalFluidSourceOptions"]
 
 
 def is_hvac_sys_fluid_loop_purchased_chw(rmi_b, hvac_b_id):
@@ -23,7 +21,7 @@ def is_hvac_sys_fluid_loop_purchased_chw(rmi_b, hvac_b_id):
     """
     purchased_cooling_loop_id_list_b = [
         *find_all(
-            f'external_fluid_source[*][?(@.type="{EXTERNAL_FLUID_SOURCE.CHILLED_WATER}")].loop',
+            f'external_fluid_sources[*][?(@.type="{EXTERNAL_FLUID_SOURCE.CHILLED_WATER}")].loop',
             rmi_b,
         )
     ]

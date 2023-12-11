@@ -11,6 +11,12 @@ TEST_BUILDING = {
             "building_segments": [
                 {
                     "id": "building_segment_1",
+                    "heating_ventilating_air_conditioning_systems": [
+                        {"id": "hvac_1"},
+                        {"id": "hvac_2"},
+                        {"id": "hvac_3"},
+                        {"id": "hvac_4"},
+                    ],
                     "zones": [
                         {
                             "id": "zone_1",
@@ -63,7 +69,7 @@ TEST_BUILDING = {
 }
 
 
-TEST_RMD = {"id": "ASHRAE229", "ruleset_model_instances": [TEST_BUILDING]}
+TEST_RMD = {"id": "ASHRAE229", "ruleset_model_descriptions": [TEST_BUILDING]}
 
 
 def test__TEST_RMD__is_valid():
