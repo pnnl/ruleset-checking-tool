@@ -25,7 +25,7 @@ class Section19Rule3(PartialRuleDefinition):
             },
         )
 
-    def manual_check_required(self, context, calc_vals=None, data=None):
+    def applicability_check(self, context, calc_vals, data):
         rpd_b = context.BASELINE_0
         weather_b = rpd_b["weather"]
 
@@ -54,13 +54,3 @@ class Section19Rule3(PartialRuleDefinition):
             )
 
         return undetermined_msg
-
-    def applicability_check(self, context, calc_vals, data):
-        rpd_b = context.BASELINE_0
-        weather_b = rpd_b["weather"]
-
-        return not (
-            weather_b.get("cooling_design_day_type") != COOLING_DESIGN_DAY.COOLING_1_0
-            or weather_b.get("heating_design_day_type")
-            != HEATING_DESIGN_DAY.HEATING_99_6
-        )
