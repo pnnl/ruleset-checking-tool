@@ -218,18 +218,18 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
                     subsurface_b = context.BASELINE_0
                     subsurface_shgc_b = subsurface_b["solar_heat_gain_coefficient"]
 
-                    subsuface_type_b = data["scc_dict_b"][data["surface_id_b"]]
+                    subsurface_type_b = data["scc_dict_b"][data["surface_id_b"]]
                     target_shgc_res_b = data["target_shgc_res"]
                     target_shgc_nonres_b = data["target_shgc_nonres"]
                     target_shgc_semiheated_b = data["target_shgc_semiheated"]
                     target_shgc = 0.0
 
                     if (
-                        subsuface_type_b == SCC.EXTERIOR_MIXED
-                        or subsuface_type_b == SCC.EXTERIOR_RESIDENTIAL
+                        subsurface_type_b == SCC.EXTERIOR_MIXED
+                        or subsurface_type_b == SCC.EXTERIOR_RESIDENTIAL
                     ):
                         target_shgc = target_shgc_res_b
-                    elif subsuface_type_b == SCC.EXTERIOR_NON_RESIDENTIAL:
+                    elif subsurface_type_b == SCC.EXTERIOR_NON_RESIDENTIAL:
                         target_shgc = target_shgc_nonres_b
                     else:
                         target_shgc = target_shgc_semiheated_b
