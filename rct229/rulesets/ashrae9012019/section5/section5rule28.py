@@ -212,7 +212,7 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
                     surface_b = context.BASELINE_0
                     # if exterior mixed and required manual check
                     return (
-                        scc_dict_b[surface_b["id"]] == SCC.EXTERIOR_MIXED
+                        scc_dict_b["surface_id_b"] == SCC.EXTERIOR_MIXED
                         and manual_check_required_flag
                     )
 
