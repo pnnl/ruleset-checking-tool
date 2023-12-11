@@ -218,9 +218,7 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
                     subsurface_b = context.BASELINE_0
                     subsurface_shgc_b = subsurface_b["solar_heat_gain_coefficient"]
 
-                    subsuface_type_b = data["scc_dict_b"][
-                        data["surface_id_b"]
-                    ]
+                    subsuface_type_b = data["scc_dict_b"][data["surface_id_b"]]
                     target_shgc_res_b = data["target_shgc_res"]
                     target_shgc_nonres_b = data["target_shgc_nonres"]
                     target_shgc_semiheated_b = data["target_shgc_semiheated"]
