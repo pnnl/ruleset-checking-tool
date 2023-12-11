@@ -154,7 +154,7 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
 
         def list_filter(self, context_item, data=None):
             surface_b = context_item.BASELINE_0
-            scc = data["surface_conditioning_category_dict"][surface_b["id"]]
+            scc = data["scc_dict_b"][surface_b["id"]]
 
             return (
                 get_opaque_surface_type(surface_b) == OST.ROOF
@@ -220,7 +220,7 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
                     subsurface_b = context.BASELINE_0
                     subsurface_shgc_b = subsurface_b["solar_heat_gain_coefficient"]
 
-                    subsuface_type_b = data["surface_conditioning_category_dict"][
+                    subsuface_type_b = data["scc_dict_b"][
                         data["surface_id_b"]
                     ]
                     target_shgc_res_b = data["target_shgc_res"]
