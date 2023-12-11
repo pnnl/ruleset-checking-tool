@@ -207,12 +207,10 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
                     ) or subsurface_b["classification"] != SURFACE_CLASSIFICATION.DOOR
 
                 def manual_check_required(self, context, calc_vals=None, data=None):
-                    scc_dict_b = data["scc_dict_b"]
                     manual_check_required_flag = data["manual_check_required_flag"]
-                    surface_b = context.BASELINE_0
                     # if exterior mixed and required manual check
                     return (
-                        scc_dict_b["surface_id_b"] == SCC.EXTERIOR_MIXED
+                        data["surface_id_b"] == SCC.EXTERIOR_MIXED
                         and manual_check_required_flag
                     )
 
