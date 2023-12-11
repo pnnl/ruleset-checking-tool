@@ -1,7 +1,7 @@
 import pydash
 from pint import Quantity
 
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
@@ -18,7 +18,7 @@ OTHER_NON_RESIDENTIAL_BUILDING_AREA_LOWER_THRESHOLD = 25_000 * ureg("ft2")
 OTHER_NON_RESIDENTIAL_BUILDING_AREA_HIGHER_THRESHOLD = 150_000 * ureg("ft2")
 OTHER_NON_RESIDENTIAL_FLOOR_NUMBER_LOWER_THRESHOLD = 4
 OTHER_NON_RESIDENTIAL_FLOOR_NUMBER_HIGHER_THRESHOLD = 5
-HVAC_BUILDING_AREA_TYPE_OPTIONS = schema_enums[
+HVAC_BUILDING_AREA_TYPE_OPTIONS = SchemaEnums.schema_enums[
     "HeatingVentilatingAirConditioningBuildingAreaOptions2019ASHRAE901"
 ]
 

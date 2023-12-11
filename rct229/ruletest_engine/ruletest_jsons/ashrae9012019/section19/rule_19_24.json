@@ -12,7 +12,7 @@
             "applicable_rmr": "Proposed RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -123,7 +123,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             },
@@ -234,7 +235,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "USER"
                     }
                 ]
             }
@@ -253,7 +255,7 @@
             "applicable_rmr": "Proposed RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -364,7 +366,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             },
@@ -475,7 +478,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "USER"
                     }
                 ]
             }
@@ -494,7 +498,7 @@
             "applicable_rmr": "Proposed RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -557,7 +561,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             },
@@ -619,7 +624,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "USER"
                     }
                 ]
             }
@@ -638,7 +644,7 @@
             "applicable_rmr": "Proposed RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -701,7 +707,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             },
@@ -763,7 +770,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "USER"
                     }
                 ]
             }

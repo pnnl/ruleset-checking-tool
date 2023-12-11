@@ -19,7 +19,7 @@ class PartialRuleDefinition(RuleDefinitionBase):
 
         Parameters
         ----------
-        rmrs_used : UserBaselineProposedVals
+        rmrs_used : RuleSetModels
             A trio of boolean values indicating which RMDs are required by the rule
         id : string
             Unique id for the rule
@@ -65,8 +65,8 @@ class PartialRuleDefinition(RuleDefinitionBase):
 
         Parameters
         ----------
-        context : UserBaselineProposedVals
-            Object containing the contexts for the user, baseline, and proposed RMDs
+        context : RuleSetModels
+            Object containing the contexts for RMDs
         calc_vals: dictionary
             Dictionary contains calculated values for rule check and reporting.
         data : dict
@@ -89,8 +89,8 @@ class PartialRuleDefinition(RuleDefinitionBase):
 
         Parameters
         ----------
-        context : UserBaselineProposedVals
-            Object containing the contexts for the user, baseline, and proposed RMRs
+        context : RuleSetModels
+            Object containing the contexts for RMDs
         calc_vals: dict. It contains the calculated values
         data : An optional data object. It is ignored by this base implementation.
 

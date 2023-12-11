@@ -1,6 +1,5 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
-from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.schema.config import ureg
 
 MAX_COINCIDENT_UNMET_LOAD_HOUR = 300 * ureg("hr")
@@ -13,7 +12,9 @@ class Section19Rule6(RuleDefinitionBase):
 
     def __init__(self):
         super(Section19Rule6, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=False
+            ),
             id="19-6",
             description=" Unmet load hours for the baseline design shall not exceed 300 (of the 8760 hours simulated).",
             ruleset_section_title="HVAC - General",
@@ -33,7 +34,7 @@ class Section19Rule6(RuleDefinitionBase):
         )
 
     def get_calc_vals(self, context, data=None):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         output_instance_b = rmi_b["output"]["output_instance"]
 
         unmet_load_hours_heating_b = output_instance_b["unmet_load_hours_heating"]
