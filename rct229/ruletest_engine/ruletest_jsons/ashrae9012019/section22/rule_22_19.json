@@ -9,10 +9,10 @@
             "rule_id": "22-19",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline cooling tower shall be controlled to maintain a leaving water temperature, where weather permits, as specified in Table G3.1.3.11",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -136,7 +136,11 @@
                                         "id": "Secondary CHW Loop 1",
                                         "type": "COOLING"
                                     }
-                                ],
+                                ]
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER",
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
                                     "temperature_reset_type": "CONSTANT"
@@ -146,9 +150,10 @@
                         "heat_rejections": [
                             {
                                 "id": "Heat Rejection 1",
-                                "loop": "Chiller Loop 1"
+                                "loop": "Condenser Loop 1"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -164,10 +169,10 @@
             "rule_id": "22-19",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline cooling tower shall be controlled to maintain a leaving water temperature, where weather permits, as specified in Table G3.1.3.11",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -291,7 +296,11 @@
                                         "id": "Secondary CHW Loop 1",
                                         "type": "COOLING"
                                     }
-                                ],
+                                ]
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER",
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
                                     "temperature_reset_type": "OUTSIDE_AIR_RESET"
@@ -301,9 +310,10 @@
                         "heat_rejections": [
                             {
                                 "id": "Heat Rejection 1",
-                                "loop": "Chiller Loop 1"
+                                "loop": "Condenser Loop 1"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -319,10 +329,10 @@
             "rule_id": "22-19",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline cooling tower shall be controlled to maintain a leaving water temperature, where weather permits, as specified in Table G3.1.3.11",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -429,7 +439,11 @@
                                         "id": "Secondary CHW Loop 1",
                                         "type": "COOLING"
                                     }
-                                ],
+                                ]
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER",
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
                                     "temperature_reset_type": "CONSTANT"
@@ -439,9 +453,10 @@
                         "heat_rejections": [
                             {
                                 "id": "Heat Rejection 1",
-                                "loop": "Chiller Loop 1"
+                                "loop": "Condenser Loop 1"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -457,10 +472,10 @@
             "rule_id": "22-19",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline cooling tower shall be controlled to maintain a leaving water temperature, where weather permits, as specified in Table G3.1.3.11",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -567,7 +582,11 @@
                                         "id": "Secondary CHW Loop 1",
                                         "type": "COOLING"
                                     }
-                                ],
+                                ]
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER",
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
                                     "temperature_reset_type": "OUTSIDE_AIR_RESET"
@@ -577,9 +596,10 @@
                         "heat_rejections": [
                             {
                                 "id": "Heat Rejection 1",
-                                "loop": "Chiller Loop 1"
+                                "loop": "Condenser Loop 1"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -595,10 +615,10 @@
             "rule_id": "22-19",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline cooling tower shall be controlled to maintain a leaving water temperature, where weather permits, as specified in Table G3.1.3.11",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -695,7 +715,11 @@
                             },
                             {
                                 "id": "Chilled Water Loop 1",
-                                "type": "COOLING",
+                                "type": "COOLING"
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER",
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
                                     "temperature_reset_type": "OUTSIDE_AIR_RESET"
@@ -705,9 +729,10 @@
                         "heat_rejections": [
                             {
                                 "id": "Heat Rejection 1",
-                                "loop": "Chiller Loop 1"
+                                "loop": "Condenser Loop 1"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

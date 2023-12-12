@@ -1,7 +1,8 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_system_type_compare import (
     baseline_system_type_compare,
 )
@@ -24,9 +25,10 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_lab_zone_hvac_systems i
     get_lab_zone_hvac_systems,
 )
 from rct229.schema.config import ureg
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.jsonpath_utils import find_all
 
-FAN_SYSTEM_OPERATION = schema_enums["FanSystemOperationOptions"]
+FAN_SYSTEM_OPERATION = SchemaEnums.schema_enums["FanSystemOperationOptions"]
 
 
 APPLICABLE_SYS_TYPES = [
@@ -49,9 +51,11 @@ class Section18Rule2(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section18Rule2, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, True),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=True
+            ),
             each_rule=Section18Rule2.RMDRule(),
-            index_rmr="baseline",
+            index_rmr=BASELINE_0,
             id="18-2",
             description="Does the modeled system serve the appropriate zones (one system per zone for system types 1, 2, 3, 4, 9, 10, 11, 12, and 13 and "
             "one system per floor for system types 5, 6, 7, and 8, with the exception of system types 5 or 7 serving laboratory spaces - these systems should serve ALL laboratory zones in the buidling).",
@@ -65,8 +69,8 @@ class Section18Rule2(RuleDefinitionListIndexedBase):
                 "calendar": ["is_leap_year"],
             },
             data_items={
-                "climate_zone": ("baseline", "weather/climate_zone"),
-                "is_leap_year": ("baseline", "calendar/is_leap_year"),
+                "climate_zone": (BASELINE_0, "weather/climate_zone"),
+                "is_leap_year": (BASELINE_0, "calendar/is_leap_year"),
             },
         )
 
@@ -75,13 +79,13 @@ class Section18Rule2(RuleDefinitionListIndexedBase):
             super(Section18Rule2.RMDRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, True),
                 each_rule=Section18Rule2.RMDRule.HVACRule(),
-                index_rmr="baseline",
+                index_rmr=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
             )
 
         def create_data(self, context, data):
-            rmd_b = context.baseline
-            rmd_p = context.proposed
+            rmd_b = context.BASELINE_0
+            rmd_p = context.PROPOSED
             climate_zone_b = data["climate_zone"]
             is_leap_year_b = data["is_leap_year"]
 
@@ -226,7 +230,7 @@ class Section18Rule2(RuleDefinitionListIndexedBase):
                 )
 
             def get_calc_vals(self, context, data=None):
-                hvac_b = context.baseline
+                hvac_b = context.BASELINE_0
                 hvac_id_b = hvac_b["id"]
                 hvac_data_b = data["hvac_data_b"][hvac_id_b]
 

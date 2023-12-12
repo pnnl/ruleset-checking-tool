@@ -2,8 +2,9 @@
 import importlib
 
 __all__ = [
-    # "section18rule1",
+    "section18rule1",
     "section18rule2",
+    "section18rule3",
 ]
 
 

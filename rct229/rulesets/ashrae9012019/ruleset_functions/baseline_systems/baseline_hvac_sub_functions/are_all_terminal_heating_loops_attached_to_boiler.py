@@ -1,4 +1,4 @@
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all, find_one
 from rct229.utils.utility_functions import (
@@ -6,7 +6,7 @@ from rct229.utils.utility_functions import (
     find_exactly_one_terminal_unit,
 )
 
-FLUID_LOOP_TYPE = schema_enums["FluidLoopOptions"]
+FLUID_LOOP_TYPE = SchemaEnums.schema_enums["FluidLoopOptions"]
 
 
 def are_all_terminal_heating_loops_attached_to_boiler(rmi_b, terminal_unit_id_list):
