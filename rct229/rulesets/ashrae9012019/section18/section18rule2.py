@@ -139,7 +139,7 @@ class Section18Rule2(RuleDefinitionListIndexedBase):
                             hvac_id_b in lab_zones_only_b
                             and building_total_lab_zone_exhaust_b <= AIRFLOW_15000_CFM
                         ),
-                        "does_two_sys_exist_on_same_fl_b": False,
+                        "does_two_sys_exist_on_same_fl_b": "false",
                         "hvac_sys2_id_b": None,
                     }
 
