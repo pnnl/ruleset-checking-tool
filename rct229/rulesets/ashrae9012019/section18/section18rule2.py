@@ -120,24 +120,17 @@ class Section18Rule2(RuleDefinitionListIndexedBase):
                     hvac_data_b[hvac_id_b] = {
                         "is_zone_single_zone_sys_b": any(
                             [
-                                [
-                                    hvac_id_b in baseline_system_types_dict_b[sys_type]
-                                    for sys_type in baseline_system_types_dict_b
-                                ]
+                                hvac_id_b in baseline_system_types_dict_b[sys_type]
+                                for sys_type in baseline_system_types_dict_b
                             ]
                         ),
                         "does_sys_only_serve_lab_b": (
                             hvac_id_b in lab_zones_only_b
-                            and building_total_lab_zone_exhaust_b > AIRFLOW_15000_CFM
                             and len(lab_zone_hvac_systems["lab_zones_only"]) == 1
                         ),
-                        "does_sys_serve_lab_b": (
-                            hvac_id_b in lab_zones_only_b
-                            and building_total_lab_zone_exhaust_b <= AIRFLOW_15000_CFM
-                        ),
+                        "does_sys_serve_lab_b": (hvac_id_b in lab_zones_only_b),
                         "does_sys_serve_lab_and_other_b": (
-                            hvac_id_b in lab_zones_only_b
-                            and building_total_lab_zone_exhaust_b <= AIRFLOW_15000_CFM
+                            hvac_id_b in lab_zone_hvac_systems["lab_and_other"]
                         ),
                         "does_two_sys_exist_on_same_fl_b": "false",
                         "hvac_sys2_id_b": None,
@@ -170,9 +163,9 @@ class Section18Rule2(RuleDefinitionListIndexedBase):
                     # check if all the zones served by the system are on the same floor
                     if all([zone in zones_on_floor for zone in zones_served_by_system]):
                         # check if there are any other systems of the same system type that serve zones on this floor
-                        for hvac_system_type2 in applicable_hvac_sys_ids_b:
+                        for hvac_sys_type2 in applicable_hvac_sys_ids_b:
                             for hvac_sys2_id_b in baseline_system_types_dict_b[
-                                hvac_system_type2
+                                hvac_sys_type2
                             ]:
                                 # check if hvac_id_b and hvac_sys2_id_b are the same system
                                 if hvac_sys2_id_b != hvac_id_b:
@@ -203,10 +196,8 @@ class Section18Rule2(RuleDefinitionListIndexedBase):
                                         ] = "true"
 
                                     elif (
-                                        hvac_sys2_id_b
-                                        in lab_zone_hvac_systems["lab_zones_only"]
-                                        and len(lab_zone_hvac_systems["lab_zones_only"])
-                                        == 1
+                                        hvac_sys2_id_b in lab_zones_only_b
+                                        and len(lab_zones_only_b) == 1
                                         and building_total_lab_zone_exhaust_b
                                         <= AIRFLOW_15000_CFM
                                     ):
@@ -222,13 +213,16 @@ class Section18Rule2(RuleDefinitionListIndexedBase):
                                         "hvac_sys2_id_b"
                                     ] = hvac_sys2_id_b
 
-            return {"hvac_data_b": hvac_data_b}
+            return {
+                "hvac_data_b": hvac_data_b,
+                "building_total_lab_zone_exhaust_b": building_total_lab_zone_exhaust_b,
+            }
 
         class HVACRule(RuleDefinitionBase):
             def __init__(self):
                 super(Section18Rule2.RMDRule.HVACRule, self).__init__(
                     rmrs_used=produce_ruleset_model_instance(
-                        USER=False, BASELINE_0=True, PROPOSED=True
+                        USER=False, BASELINE_0=True, PROPOSED=False
                     ),
                 )
 
@@ -256,16 +250,33 @@ class Section18Rule2(RuleDefinitionListIndexedBase):
 
             def manual_check_required(self, context, calc_vals=None, data=None):
                 does_sys_only_serve_lab_b = calc_vals["does_sys_only_serve_lab_b"]
-                does_sys_serve_lab_b = calc_vals["does_sys_serve_lab_b"]
                 does_sys_serve_lab_and_other_b = calc_vals[
                     "does_sys_serve_lab_and_other_b"
                 ]
+                building_total_lab_zone_exhaust_b = data[
+                    "building_total_lab_zone_exhaust_b"
+                ]
+                does_two_sys_exist_on_same_fl_b = calc_vals[
+                    "does_two_sys_exist_on_same_fl_b"
+                ]
 
-                return not (
-                    does_sys_only_serve_lab_b
-                    and does_sys_serve_lab_b
-                    and does_sys_serve_lab_and_other_b
-                )
+                return (
+                    not (does_sys_only_serve_lab_b and does_sys_serve_lab_and_other_b)
+                    and building_total_lab_zone_exhaust_b <= AIRFLOW_15000_CFM
+                ) or does_two_sys_exist_on_same_fl_b == "undetermined"
+
+                # below will be deleted - left to understand the logic easier
+                # return (
+                #     (
+                #         not does_sys_only_serve_lab_b
+                #         and building_total_lab_zone_exhaust_b <= AIRFLOW_15000_CFM
+                #     )
+                #     or (
+                #         not does_sys_serve_lab_and_other_b
+                #         and building_total_lab_zone_exhaust_b <= AIRFLOW_15000_CFM
+                #     )
+                #     or does_two_sys_exist_on_same_fl_b == "undetermined"
+                # )
 
             def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
                 does_sys_only_serve_lab_b = calc_vals["does_sys_only_serve_lab_b"]
@@ -276,18 +287,22 @@ class Section18Rule2(RuleDefinitionListIndexedBase):
                     "does_two_sys_exist_on_same_fl_b"
                 ]
                 hvac_sys2_id_b = calc_vals["hvac_sys2_id_b"]
+                building_total_lab_zone_exhaust_b = data[
+                    "building_total_lab_zone_exhaust_b"
+                ]
 
                 undetermined_msg = ""
-                if not does_sys_only_serve_lab_b:
-                    undetermined_msg = (
-                        "This system serves only lab zones, which is correct if the building has total lab exhaust greater than 15,000 cfm. "
-                        "However, we could not determine with accuracy the total building exhuast."
-                    )
-                elif not does_sys_serve_lab_and_other_b:
-                    undetermined_msg = (
-                        "This HVAC system serves lab zones in a building with > 15,000 cfm of laboratory exhaust. "
-                        "The baseline system for laboratory zones should be type 5 or 7 and should serve only and all laboratory zones."
-                    )
+                if building_total_lab_zone_exhaust_b <= AIRFLOW_15000_CFM:
+                    if not does_sys_only_serve_lab_b:
+                        undetermined_msg = (
+                            "This system serves only lab zones, which is correct if the building has total lab exhaust greater than 15,000 cfm. "
+                            "However, we could not determine with accuracy the total building exhuast."
+                        )
+                    elif not does_sys_serve_lab_and_other_b:
+                        undetermined_msg = (
+                            "This HVAC system serves lab zones in a building with > 15,000 cfm of laboratory exhaust. "
+                            "The baseline system for laboratory zones should be type 5 or 7 and should serve only and all laboratory zones."
+                        )
                 elif does_two_sys_exist_on_same_fl_b == "undetermined":
                     undetermined_msg = (
                         f"This HVAC system is on the same floor as {hvac_sys2_id_b}, which servese lab zones in the building. "
@@ -297,21 +312,29 @@ class Section18Rule2(RuleDefinitionListIndexedBase):
                 return undetermined_msg
 
             def rule_check(self, context, calc_vals=None, data=None):
-                is_zone_single_zone_sys_b = context["is_zone_single_zone_sys_b"]
-                does_sys_only_serve_lab_b = context["does_sys_only_serve_lab_b"]
-                does_sys_serve_lab_b = context["does_sys_serve_lab_b"]
-                does_sys_serve_lab_and_other_b = context[
+                is_zone_single_zone_sys_b = calc_vals["is_zone_single_zone_sys_b"]
+                does_sys_only_serve_lab_b = calc_vals["does_sys_only_serve_lab_b"]
+                does_sys_serve_lab_b = calc_vals["does_sys_serve_lab_b"]
+                does_sys_serve_lab_and_other_b = calc_vals[
                     "does_sys_serve_lab_and_other_b"
                 ]
-                does_two_sys_exist_on_same_fl_b = context[
+                does_two_sys_exist_on_same_fl_b = calc_vals[
                     "does_two_sys_exist_on_same_fl_b"
+                ]
+                building_total_lab_zone_exhaust_b = data[
+                    "building_total_lab_zone_exhaust_b"
                 ]
 
                 return (
                     is_zone_single_zone_sys_b
-                    or does_sys_only_serve_lab_b
-                    or does_sys_serve_lab_b
-                    or does_sys_serve_lab_and_other_b
+                    or (
+                        does_sys_only_serve_lab_b
+                        and building_total_lab_zone_exhaust_b > AIRFLOW_15000_CFM
+                    )
+                    or (
+                        (building_total_lab_zone_exhaust_b <= AIRFLOW_15000_CFM)
+                        and (does_sys_serve_lab_b or does_sys_serve_lab_and_other_b)
+                    )
                     or does_two_sys_exist_on_same_fl_b == "true"
                 )
 
@@ -320,18 +343,22 @@ class Section18Rule2(RuleDefinitionListIndexedBase):
                 does_sys_serve_lab_and_other_b = context[
                     "does_sys_serve_lab_and_other_b"
                 ]
+                building_total_lab_zone_exhaust_b = data[
+                    "building_total_lab_zone_exhaust_b"
+                ]
 
                 fail_msg = ""
-                if not does_sys_serve_lab_b:
-                    fail_msg = (
-                        "This HVAC system serves lab zones in a building with > 15,000 cfm of laboratory exhaust. "
-                        "The baseline system should be type 5 or 7 and should serve ALL laboratory zones."
-                    )
+                if building_total_lab_zone_exhaust_b <= AIRFLOW_15000_CFM:
+                    if not does_sys_serve_lab_b:
+                        fail_msg = (
+                            "This HVAC system serves lab zones in a building with > 15,000 cfm of laboratory exhaust. "
+                            "The baseline system should be type 5 or 7 and should serve ALL laboratory zones."
+                        )
 
-                elif not does_sys_serve_lab_and_other_b:
-                    fail_msg = (
-                        "This HVAC system serves lab zones in a building with > 15,000 cfm of laboratory exhaust. "
-                        "The baseline system for laboratory zones should be type 5 or 7 and should serve only and all laboratory zones."
-                    )
+                    elif not does_sys_serve_lab_and_other_b:
+                        fail_msg = (
+                            "This HVAC system serves lab zones in a building with > 15,000 cfm of laboratory exhaust. "
+                            "The baseline system for laboratory zones should be type 5 or 7 and should serve only and all laboratory zones."
+                        )
 
                 return fail_msg
