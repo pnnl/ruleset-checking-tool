@@ -126,7 +126,7 @@ class Section18Rule2(RuleDefinitionListIndexedBase):
                         ),
                         "does_sys_only_serve_lab_b": (
                             hvac_id_b in lab_zones_only_b
-                            and len(lab_zone_hvac_systems["lab_zones_only"]) == 1
+                            and len(lab_zones_only_b) == 1
                         ),
                         "does_sys_serve_lab_b": (hvac_id_b in lab_zones_only_b),
                         "does_sys_serve_lab_and_other_b": (
@@ -260,23 +260,23 @@ class Section18Rule2(RuleDefinitionListIndexedBase):
                     "does_two_sys_exist_on_same_fl_b"
                 ]
 
-                return (
-                    not (does_sys_only_serve_lab_b and does_sys_serve_lab_and_other_b)
-                    and building_total_lab_zone_exhaust_b <= AIRFLOW_15000_CFM
-                ) or does_two_sys_exist_on_same_fl_b == "undetermined"
+                # return (
+                #     not (does_sys_only_serve_lab_b and does_sys_serve_lab_and_other_b)
+                #     and building_total_lab_zone_exhaust_b <= AIRFLOW_15000_CFM
+                # ) or does_two_sys_exist_on_same_fl_b == "undetermined"
 
                 # below will be deleted - left to understand the logic easier
-                # return (
-                #     (
-                #         not does_sys_only_serve_lab_b
-                #         and building_total_lab_zone_exhaust_b <= AIRFLOW_15000_CFM
-                #     )
-                #     or (
-                #         not does_sys_serve_lab_and_other_b
-                #         and building_total_lab_zone_exhaust_b <= AIRFLOW_15000_CFM
-                #     )
-                #     or does_two_sys_exist_on_same_fl_b == "undetermined"
-                # )
+                return (
+                    (
+                        not does_sys_only_serve_lab_b
+                        and building_total_lab_zone_exhaust_b <= AIRFLOW_15000_CFM
+                    )
+                    or (
+                        not does_sys_serve_lab_and_other_b
+                        and building_total_lab_zone_exhaust_b <= AIRFLOW_15000_CFM
+                    )
+                    or does_two_sys_exist_on_same_fl_b == "undetermined"
+                )
 
             def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
                 does_sys_only_serve_lab_b = calc_vals["does_sys_only_serve_lab_b"]
