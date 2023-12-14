@@ -846,7 +846,7 @@ def test__get_zone_target_baseline_system_G3_1_1_f__true():
         TEST_RMD_B_UNIT_G311F, TEST_RMD_UNIT_P, "CZ4A", False
     ) == {
         "Thermal Zone 2": {
-            "expected_system_type": "",
+            "expected_system_type": HVAC_SYS.SYS_5,
             "system_origin": SYSTEMORIGIN.G311F,
         }
     }

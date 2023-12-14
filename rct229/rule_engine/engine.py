@@ -3,6 +3,7 @@ import inspect
 from rct229.schema.schema_utils import quantify_rmr
 from rct229.schema.validate import validate_rmr
 from rct229.utils.assertions import assert_
+from rct229.utils.file import deserialize_rpd_file
 from rct229.utils.jsonpath_utils import (
     find_all,
     find_exactly_one,
@@ -29,19 +30,43 @@ def get_available_rules():
 
 
 # Functions for evaluating rules
-def evaluate_all_rules(ruleset_model_list):
+def evaluate_all_rules(ruleset_model_path_list):
+    """
+    Function to evaluation all rules
+
+    Parameters
+    ----------
+    ruleset_model_path_list: List
+        list of file paths to the ruleset project description files
+
+    Returns
+    -------
+
+    """
     # Get reference to rule functions in rules model
     available_rule_definitions = rulesets.__getrules__()
     ruleset_models = get_rmd_instance()
 
     # register all ruleset model list
-    for rpd_json in ruleset_model_list:
+    rpd_rmd_map_list = []
+    for rpd_path in ruleset_model_path_list:
+        rpd_json = None
+        try:
+            rpd_json = deserialize_rpd_file(rpd_path)
+        except:
+            print(f"{rpd_path} is not a valid JSON file")
+            return
+
         for rmd_json in find_all("$.ruleset_model_descriptions[*]", rpd_json):
             model_type = find_exactly_one("$.type", rmd_json)
             ruleset_models.__setitem__(model_type, rpd_json)
+            rpd_rmd_map = {"ruleset_model_type": model_type, "file_name": rpd_path}
+            rpd_rmd_map_list.append(rpd_rmd_map)
 
+    print("Processing rules...")
     rules_list = [rule_def[1]() for rule_def in available_rule_definitions]
     report = evaluate_rules(rules_list, ruleset_models)
+    report["rpd_files"] = rpd_rmd_map_list
 
     return report
 

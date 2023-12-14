@@ -34,6 +34,10 @@ def get_hvac_systems_primarily_serving_comp_room(rmi):
         "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
         rmi,
     ):
+        assert_(
+            hvac_zone_list_w_area_dict.get(hvac["id"]),
+            f"HVAC system {hvac['id']} is missing in the  zone.terminals data group.",
+        )
         hvac_sys_total_floor_area = hvac_zone_list_w_area_dict[hvac["id"]]["total_area"]
         hvac_sys_zone_id_list = hvac_zone_list_w_area_dict[hvac["id"]]["zone_list"]
 
