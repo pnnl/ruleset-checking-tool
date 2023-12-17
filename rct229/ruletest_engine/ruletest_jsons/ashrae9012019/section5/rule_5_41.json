@@ -46,12 +46,6 @@
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
-                                                "terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
-                                                    }
-                                                ],
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
@@ -106,12 +100,6 @@
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
                                                         "lighting_space_type": "PARKING_AREA_INTERIOR",
                                                         "floor_area": 23.225759999999998
-                                                    }
-                                                ],
-                                                "terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -189,12 +177,6 @@
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
-                                                "terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
-                                                    }
-                                                ],
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
@@ -249,12 +231,6 @@
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
                                                         "lighting_space_type": "PARKING_AREA_INTERIOR",
                                                         "floor_area": 23.225759999999998
-                                                    }
-                                                ],
-                                                "terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -332,12 +308,6 @@
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
-                                                "terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
-                                                    }
-                                                ],
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
@@ -391,12 +361,6 @@
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
                                                         "lighting_space_type": "PARKING_AREA_INTERIOR",
                                                         "floor_area": 23.225759999999998
-                                                    }
-                                                ],
-                                                "terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
