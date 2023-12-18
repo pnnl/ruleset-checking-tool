@@ -303,7 +303,7 @@ class Section19Rule23(RuleDefinitionListIndexedBase):
                             ]
                         )
 
-                        return (is_dwelling_unit_b and is_heating_schedule_pass) or (is_building_area_MF_dormitory_or_hotel_b and is_heating_schedule_pass and is_cooling_schedule_pass)
+                        return (is_dwelling_unit_b and is_heating_schedule_pass) or (not is_building_area_MF_dormitory_or_hotel_b and is_heating_schedule_pass and is_cooling_schedule_pass)
 
                     def get_fail_msg(self, context, calc_vals=None, data=None):
                         space_b = context.BASELINE_0
