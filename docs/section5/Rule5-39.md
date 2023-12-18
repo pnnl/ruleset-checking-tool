@@ -23,8 +23,8 @@ get_opaque_surface_type()
 
 **Rule Assertion:**  
 - Case 1: If B_RMD has no below-grade wall surfaces and therefore also no basement floor surfaces: `if not is_applicable: NOT_APPLICABLE`  
-- Case 2: If RPD includes a ground temperature schedule: `if RPD.weather.ground_temperature_schedule: UNDETERMINED`  
-- Case 3: Else: `else: FAIL`  
+- Case 2: If RPD includes a ground temperature schedule: `if RPD.weather.ground_temperature_schedule: UNDETERMINED and raise_message: "It cannot be determined if the ground temperature schedule for the project is representative of the project climate."`  
+- Case 3: Else: `else: FAIL and raise_message: "A ground temperature schedule was not found for the project."`  
 
 
 **Notes:**
