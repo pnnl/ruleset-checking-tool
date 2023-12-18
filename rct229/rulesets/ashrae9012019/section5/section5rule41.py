@@ -62,7 +62,7 @@ class Section5Rule41(RuleDefinitionListIndexedBase):
             scc = data["scc_dict_b"][surface_b["id"]]
             return (
                 get_opaque_surface_type(surface_b) == OST.ROOF
-                and scc is not SCC.UNREGULATED
+                and scc is SCC.UNREGULATED
             )
 
         class RoofRule(RuleDefinitionBase):
