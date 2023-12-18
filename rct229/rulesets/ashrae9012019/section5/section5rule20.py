@@ -231,16 +231,6 @@ class Section5Rule20(RuleDefinitionListIndexedBase):
                     manual_check_required_msg=MANUAL_CHECK_REQUIRED_MSG,
                 )
 
-            def manual_check_required(self, context, calc_vals=None, data=None):
-                scc_dict_b = data["scc_dict_b"]
-                manual_check_required_flag = data["manual_check_required_flag"]
-                surface_b = context.BASELINE_0
-                # if exterior mixed and required manual check
-                return (
-                    scc_dict_b[surface_b["id"]] == SCC.EXTERIOR_MIXED
-                    and manual_check_required_flag
-                )
-
             def create_data(self, context, data=None):
                 surface_b = context.BASELINE_0
                 scc_dict_b = data["scc_dict_b"]
@@ -261,6 +251,14 @@ class Section5Rule20(RuleDefinitionListIndexedBase):
                         rmrs_used=produce_ruleset_model_instance(
                             USER=False, BASELINE_0=True, PROPOSED=False
                         ),
+                    )
+
+                def manual_check_required(self, context, calc_vals=None, data=None):
+                    manual_check_required_flag = data["manual_check_required_flag"]
+                    # if exterior mixed and required manual check
+                    return (
+                            data["scc"] == SCC.EXTERIOR_MIXED
+                            and manual_check_required_flag
                     )
 
                 def get_calc_vals(self, context, data=None):
