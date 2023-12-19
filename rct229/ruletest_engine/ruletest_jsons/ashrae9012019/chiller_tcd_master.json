@@ -18643,10 +18643,17 @@
                             },
                             {
                                 "id": "Condensing Loop 1",
+                                "type": "CONDENSER",
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
                                     "flow_control": "FIXED_FLOW"
                                 }
+                            }
+                        ],
+                        "heat_rejections": [
+                            {
+                                "id": "Heat Rejection 1",
+                                "loop": "Condenser Loop 1"
                             }
                         ],
                         "type": "BASELINE_0"
@@ -18659,7 +18666,7 @@
         "Section": 22,
         "Rule": 28,
         "Test": "b",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is incorrectly modeled with a condenser pumpthat is variable volume.  Expected result: FAIL",
+        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is incorrectly modeled with a condenser pump that is variable volume.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-28",
@@ -18802,10 +18809,17 @@
                             },
                             {
                                 "id": "Condensing Loop 1",
+                                "type": "CONDENSER",
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
                                     "flow_control": "VARIABLE_FLOW"
                                 }
+                            }
+                        ],
+                        "heat_rejections": [
+                            {
+                                "id": "Heat Rejection 1",
+                                "loop": "Condenser Loop 1"
                             }
                         ],
                         "type": "BASELINE_0"
