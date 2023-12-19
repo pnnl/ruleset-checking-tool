@@ -71,15 +71,11 @@ class Section5Rule41(RuleDefinitionListIndexedBase):
                     rmrs_used=produce_ruleset_model_instance(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
-                    required_fields={
-                        "$": ["optical_properties"],
-                    },
                 )
 
             def get_calc_vals(self, context, data=None):
                 roof_b = context.BASELINE_0
                 roof_p = context.PROPOSED
-                scc_dict_b = data["scc_dict_b"]
                 return {
                     "absorptance_solar_exterior_b": find_one(
                         "$.optical_properties.absorptance_solar_exterior", roof_b
@@ -93,7 +89,6 @@ class Section5Rule41(RuleDefinitionListIndexedBase):
                     "absorptance_thermal_exterior_p": find_one(
                         "$.optical_properties.absorptance_thermal_exterior", roof_p
                     ),
-                    "surface_conditioning_category_b": scc_dict_b[roof_b["id"]],
                 }
 
             def manual_check_required(self, context, calc_vals=None, data=None):
