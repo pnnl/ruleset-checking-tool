@@ -7,7 +7,8 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_heat_rejection_loops_co
 )
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import getattr_
-from rct229.utils.jsonpath_utils import find_all, find_exactly_one_with_field_value
+from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.utility_functions import find_exactly_one_fluid_loop
 
 FLUID_LOOP_FLOW_CONTROL = SchemaEnums.schema_enums["FluidLoopFlowControlOptions"]
 
@@ -38,11 +39,8 @@ class Section22Rule28(RuleDefinitionListIndexedBase):
         )
 
         fluid_loop_b = {
-            heat_rej_b["id"]: find_exactly_one_with_field_value(
-                "$.fluid_loops[*]",
-                "id",
-                getattr_(heat_rej_b, "heat_rejections", "loop"),
-                rmd_b,
+            heat_rej_b["id"]: find_exactly_one_fluid_loop(
+                rmd_b, getattr_(heat_rej_b, "heat_rejections", "loop")
             )
             for heat_rej_b in find_all("$.heat_rejections[*]", rmd_b)
         }
