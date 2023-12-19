@@ -257,8 +257,7 @@ class Section5Rule20(RuleDefinitionListIndexedBase):
                     manual_check_required_flag = data["manual_check_required_flag"]
                     # if exterior mixed and required manual check
                     return (
-                            data["scc"] == SCC.EXTERIOR_MIXED
-                            and manual_check_required_flag
+                        data["scc"] == SCC.EXTERIOR_MIXED and manual_check_required_flag
                     )
 
                 def get_calc_vals(self, context, data=None):
