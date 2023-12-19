@@ -268,11 +268,11 @@ class Section18Rule2(RuleDefinitionListIndexedBase):
                 # below will be deleted - left to understand the logic easier
                 return (
                     (
-                        not does_sys_only_serve_lab_b
+                        does_sys_only_serve_lab_b
                         and building_total_lab_zone_exhaust_b <= AIRFLOW_15000_CFM
                     )
                     or (
-                        not does_sys_serve_lab_and_other_b
+                        does_sys_serve_lab_and_other_b
                         and building_total_lab_zone_exhaust_b <= AIRFLOW_15000_CFM
                     )
                     or does_two_sys_exist_on_same_fl_b == "undetermined"
