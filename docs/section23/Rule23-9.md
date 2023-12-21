@@ -7,7 +7,7 @@
 **Rule Description:** System 11 Minimum volume setpoint shall be the largest of 50% of the maximum design airflow rate, the minimum ventilation airflow rate or the airflow required to comply with codes or accredidation standards.    
 **Rule Assertion:** B-RMR = expected value  
 **Appendix G Section:** Section 23 Air-side  
-**90.1 Section Reference:** System 11 Minimum volume setpoint shall be the largest of 50% of the maximum design airflow rate, the minimum ventilation airflow rate or the airflow required to comply with codes or accredidation standards.  
+**90.1 Section Reference:** Exception to G3.1.3.13  
 **Data Lookup:** None  
 **Evaluation Context:** HVAC System  
 
