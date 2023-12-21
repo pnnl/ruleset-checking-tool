@@ -20,9 +20,12 @@
                 "id": "ASHRAE229",
                 "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMD 1",
                         "output": {
-                            "id": "Output 1"
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1"
+                            }
                         },
                         "buildings": [
                             {
@@ -73,9 +76,12 @@
                 "id": "ASHRAE229",
                 "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMD 1",
                         "output": {
-                            "id": "Output 1"
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1"
+                            }
                         },
                         "buildings": [
                             {
@@ -126,9 +132,12 @@
                 "id": "ASHRAE229",
                 "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMD 1",
                         "output": {
-                            "id": "Output 1"
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1"
+                            }
                         },
                         "buildings": [
                             {
@@ -177,7 +186,10 @@
                     {
                         "id": "90 Rotation RMD",
                         "output": {
-                            "id": "Output 1"
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1"
+                            }
                         },
                         "buildings": [
                             {
@@ -226,7 +238,10 @@
                     {
                         "id": "180 Rotation RMD",
                         "output": {
-                            "id": "Output 1"
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1"
+                            }
                         },
                         "buildings": [
                             {
@@ -275,7 +290,10 @@
                     {
                         "id": "270 Rotation RMD",
                         "output": {
-                            "id": "Output 1"
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1"
+                            }
                         },
                         "buildings": [
                             {
@@ -346,9 +364,12 @@
                 "id": "ASHRAE229",
                 "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMD 1",
                         "output": {
-                            "id": "Output 1"
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1"
+                            }
                         },
                         "buildings": [
                             {
@@ -399,9 +420,12 @@
                 "id": "ASHRAE229",
                 "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMD 1",
                         "output": {
-                            "id": "Output 1"
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1"
+                            }
                         },
                         "buildings": [
                             {
@@ -452,9 +476,12 @@
                 "id": "ASHRAE229",
                 "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMD 1",
                         "output": {
-                            "id": "Output 1"
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1"
+                            }
                         },
                         "buildings": [
                             {
@@ -525,9 +552,12 @@
                 "id": "ASHRAE229",
                 "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMD 1",
                         "output": {
-                            "id": "Output 1"
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1"
+                            }
                         },
                         "buildings": [
                             {
@@ -578,9 +608,12 @@
                 "id": "ASHRAE229",
                 "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMD 1",
                         "output": {
-                            "id": "Output 1"
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1"
+                            }
                         },
                         "buildings": [
                             {
@@ -631,9 +664,12 @@
                 "id": "ASHRAE229",
                 "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMD 1",
                         "output": {
-                            "id": "Output 1"
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1"
+                            }
                         },
                         "buildings": [
                             {
