@@ -42,7 +42,7 @@
 
         - Case 1: For each HVAC system that is Type-5, 6, 7, 8, 7a, 8a, 5b, 6b, 7b, 8b, 11b, 7c, if supply air temperature is reset higher by 5F under minimum cooling load condition: `if ( fan_system_b.temperature_control == "ZONE_RESET" ) AND ( fan_system_b.reset_differential_temperature == 5 ): PASS`
 
-        - Case 3: Else: `else: FAIL`
+        - Case 2: Else: `else: FAIL`
 
 **Notes:**
 1. Updated the Rule ID from 23-1 to 23-2 on 11/28/2022
