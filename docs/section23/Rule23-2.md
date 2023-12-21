@@ -7,7 +7,7 @@
 **Rule Description:** For baseline systems 5-8, the SAT is reset higher by 5F under minimum cooling load conditions.  
 **Rule Assertion:** B-RMD = expected value  
 **Appendix G Section:** Section 23 Air-side  
-**90.1 Section Reference:** Section G3.1.3.12 Supply Air Temperature Reset (Systems 5 through 8 and 11)  
+**90.1 Section Reference:** Section G3.1.3.12 Supply Air Temperature Reset (Systems 5 through 8)  
 **Data Lookup:** None  
 **Evaluation Context:** Building  
 **Applicability Checks:**  
@@ -40,7 +40,7 @@
       - For each fan system in HVAC system: `for fan_system_b in hvac_b.fan_systems:`
         **Rule Assertion:**
 
-        - Case 1: For each HVAC system that is Type-5, 6, 7, 8, 7a, 8a, 5b, 6b, 7b, 8b, 11b, 7c, if supply air temperature is reset higher by 5F under minimum cooling load condition: `if ( fan_system_b.temperature_control == "ZONE_RESET" ) AND ( fan_system_b.reset_differential_temperature == 5 ): PASS`
+        - Case 1: For each HVAC system that is Type-5, 6, 7, 8, 7a, 8a, 5b, 6b, 7b, 8b, 7c, if supply air temperature is reset higher by 5F under minimum cooling load condition: `if ( fan_system_b.temperature_control == "ZONE_RESET" ) AND ( fan_system_b.reset_differential_temperature == 5 ): PASS`
 
         - Case 2: Else: `else: FAIL`
 
