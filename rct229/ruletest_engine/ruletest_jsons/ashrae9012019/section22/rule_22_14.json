@@ -9,10 +9,10 @@
             "rule_id": "22-14",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat-rejection device shall have a design temperature rise of 10\u00b0F.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -152,7 +152,8 @@
                                 "loop": "Condenser Loop 1",
                                 "range": 5.555555555555555
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -168,10 +169,10 @@
             "rule_id": "22-14",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat-rejection device shall have a design temperature rise of 10\u00b0F.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -311,7 +312,8 @@
                                 "loop": "Condenser Loop 1",
                                 "range": 8.333333333333334
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -327,10 +329,10 @@
             "rule_id": "22-14",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat-rejection device shall have a design temperature rise of 10\u00b0F.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -470,7 +472,8 @@
                                 "loop": "Condenser Loop 1",
                                 "range": 5.555555555555555
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -486,10 +489,10 @@
             "rule_id": "22-14",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat-rejection device shall have a design temperature rise of 10\u00b0F.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -629,7 +632,8 @@
                                 "loop": "Condenser Loop 1",
                                 "range": 8.333333333333334
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -645,10 +649,10 @@
             "rule_id": "22-14",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat-rejection device shall have a design temperature rise of 10\u00b0F.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -730,7 +734,8 @@
                                 "id": "Chilled Water Loop 1",
                                 "type": "COOLING"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

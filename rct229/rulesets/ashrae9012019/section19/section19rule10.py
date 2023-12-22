@@ -1,7 +1,8 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import BASELINE_0
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_system_type_compare import (
     baseline_system_type_compare,
 )
@@ -19,9 +20,9 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.is_economizer_modeled_in_pr
 )
 from rct229.utils.jsonpath_utils import find_all, find_one
 
-ClimateZoneOption = schema_enums["ClimateZoneOptions2019ASHRAE901"]
-AIR_ECONOMIZER = schema_enums["AirEconomizerOptions"]
-LIGHTING_BUILDING_AREA = schema_enums[
+ClimateZoneOption = SchemaEnums.schema_enums["ClimateZoneOptions2019ASHRAE901"]
+AIR_ECONOMIZER = SchemaEnums.schema_enums["AirEconomizerOptions"]
+LIGHTING_BUILDING_AREA = SchemaEnums.schema_enums[
     "LightingBuildingAreaOptions2019ASHRAE901T951TG38"
 ]
 
@@ -55,13 +56,15 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section19Rule10, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, True),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=True
+            ),
             required_fields={
                 "$": ["weather", "ruleset_model_descriptions"],
                 "weather": ["climate_zone"],
             },
             each_rule=Section19Rule10.RulesetModelInstanceRule(),
-            index_rmr="baseline",
+            index_rmr=BASELINE_0,
             id="19-10",
             description="Air economizers shall be included in baseline HVAC Systems 3 through 8, and 11, 12, and 13 based on climate as specified in Section G3.1.2.6 with exceptions."
             "1. Systems that include gas-phase air cleaning to meet the requirements of Standard 62.1, Section 6.1.2. This exception shall be used only if the system in the proposed design does not match the building design."
@@ -71,21 +74,23 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1.2.6 including exceptions 1-3",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            data_items={"climate_zone": ("baseline", "weather/climate_zone")},
+            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
         )
 
     class RulesetModelInstanceRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section19Rule10.RulesetModelInstanceRule, self,).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, True),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=True
+                ),
                 each_rule=Section19Rule10.RulesetModelInstanceRule.HVACRule(),
-                index_rmr="baseline",
+                index_rmr=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
             )
 
         def is_applicable(self, context, data=None):
             climate_zone = data["climate_zone"]
-            rmi_b = context.baseline
+            rmi_b = context.BASELINE_0
 
             baseline_system_types_dict_b = get_baseline_system_types(rmi_b)
 
@@ -100,8 +105,8 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
             )
 
         def create_data(self, context, data):
-            rmi_b = context.baseline
-            rmi_p = context.proposed
+            rmi_b = context.BASELINE_0
+            rmi_p = context.PROPOSED
 
             hvac_system_exception_2_list = []
             if find_all("$.buildings[*].refrigerated_cases", rmi_b):
@@ -125,14 +130,16 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
         class HVACRule(RuleDefinitionBase):
             def __init__(self):
                 super(Section19Rule10.RulesetModelInstanceRule.HVACRule, self).__init__(
-                    rmrs_used=UserBaselineProposedVals(False, True, True),
+                    rmrs_used=produce_ruleset_model_instance(
+                        USER=False, BASELINE_0=True, PROPOSED=True
+                    ),
                     required_fields={
                         "$": ["fan_system"],
                     },
                 )
 
             def is_applicable(self, context, data=None):
-                hvac_b = context.baseline
+                hvac_b = context.BASELINE_0
                 hvac_id_b = hvac_b["id"]
                 baseline_system_types_dict = data["baseline_system_types_dict"]
                 baseline_system_types_dict_b = {
@@ -147,7 +154,7 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
                 )
 
             def get_calc_vals(self, context, data=None):
-                hvac_b = context.baseline
+                hvac_b = context.BASELINE_0
                 hvac_id_b = hvac_b["id"]
 
                 baseline_system_types_dict = data["baseline_system_types_dict"]

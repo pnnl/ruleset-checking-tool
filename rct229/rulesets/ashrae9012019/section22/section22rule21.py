@@ -1,7 +1,8 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import BASELINE_0
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
@@ -23,7 +24,7 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_11_1B,
     HVAC_SYS.SYS_12B,
 ]
-CHILLER_COMPRESSOR = schema_enums["ChillerCompressorOptions"]
+CHILLER_COMPRESSOR = SchemaEnums.schema_enums["ChillerCompressorOptions"]
 REQUIRED_BUILDING_PEAK_LOAD_600 = 600 * ureg("ton")
 
 
@@ -32,9 +33,11 @@ class Section22Rule21(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section22Rule21, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=False
+            ),
             each_rule=Section22Rule21.ChillerRule(),
-            index_rmr="baseline",
+            index_rmr=BASELINE_0,
             id="22-21",
             description="The baseline building design’s chiller plant shall be modeled with chillers having the type as indicated in Table G3.1.3.7 as a function of building peak cooling load.",
             ruleset_section_title="HVAC - Chiller",
@@ -48,7 +51,7 @@ class Section22Rule21(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
         # create a list containing all HVAC systems that are modeled in the rmi_b
         available_type_list = [
@@ -64,7 +67,7 @@ class Section22Rule21(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
 
         output_b = rmi_b["output"]
         building_cooling_peak_load = getattr_(
@@ -79,14 +82,16 @@ class Section22Rule21(RuleDefinitionListIndexedBase):
     class ChillerRule(RuleDefinitionBase):
         def __init__(self):
             super(Section22Rule21.ChillerRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, False),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=False
+                ),
                 required_fields={
                     "$": ["compressor_type"],
                 },
             )
 
         def get_calc_vals(self, context, data=None):
-            chiller_b = context.baseline
+            chiller_b = context.BASELINE_0
             compressor_type = chiller_b["compressor_type"]
 
             building_cooling_peak_load = data["building_cooling_peak_load"]
