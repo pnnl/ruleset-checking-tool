@@ -3,23 +3,62 @@ import os
 
 import jsonschema
 
+from rct229.schema.schema_store import SchemaStore
 from rct229.utils.jsonpath_utils import find_all
 
 file_dir = os.path.dirname(__file__)
 
-SCHEMA_KEY = "ASHRAE229.schema.json"
-SCHEMA_ENUM_KEY = "Enumerations2019ASHRAE901.schema.json"
-SCHEMA_RESNET_ENUM_KEY = "EnumerationsRESNET.schema.json"
-SCHEMA_T24_ENUM_KEY = "Enumerations2019T24.schema.json"
-SCHEMA_OUTPUT_KEY = "Output2019ASHRAE901.schema.json"
+SCHEMA_KEY = SchemaStore.SCHEMA_KEY
+SCHEMA_ENUM_KEY = SchemaStore.SCHEMA_9012019_ENUM_KEY
+SCHEMA_RESNET_ENUM_KEY = SchemaStore.SCHEMA_RESNET_ENUM_KEY
+SCHEMA_T24_ENUM_KEY = SchemaStore.SCHEMA_T24_ENUM_KEY
+SCHEMA_OUTPUT_KEY = SchemaStore.SCHEMA_9012019_OUTPUT_KEY
 SCHEMA_PATH = os.path.join(file_dir, SCHEMA_KEY)
 SCHEMA_ENUM_PATH = os.path.join(file_dir, SCHEMA_ENUM_KEY)
 SCHEMA_T24_ENUM_PATH = os.path.join(file_dir, SCHEMA_T24_ENUM_KEY)
 SCHEMA_RESNET_ENUM_PATH = os.path.join(file_dir, SCHEMA_RESNET_ENUM_KEY)
 SCHEMA_OUTPUT_PATH = os.path.join(file_dir, SCHEMA_OUTPUT_KEY)
 
+# def check_fluid_loop_association(rmd)
 
-def check_unique_ids_in_ruleset_model_instances(rmd):
+# def check_zone_association(rmd)
+
+# def check_schedule_association(rmd)
+
+# def check_fluid_loop_or_piping_association(rmd)
+
+# def check_service_water_heating_association(rmd)
+
+# search schedule with key words: Constraint to use when implemented :
+
+
+def check_hvac_association(rmd):
+    """
+    Check the association between hvac systems and the terminals served by HVAC systems.
+    Parameters
+    ----------
+    rmd
+
+    Returns list of mismatched hvac ids
+    -------
+
+    """
+    mismatch_list = []
+    hvac_id_list = find_all(
+        "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].id",
+        rmd,
+    )
+    served_by_hvac_id_list = find_all(
+        "$.buildings[*].building_segments[*].zones[*].terminals[*].served_by_heating_ventilating_air_conditioning_system",
+        rmd,
+    )
+    for hvac_id in served_by_hvac_id_list:
+        if hvac_id not in hvac_id_list:
+            mismatch_list.append(hvac_id)
+    return mismatch_list
+
+
+def check_unique_ids_in_ruleset_model_descriptions(rmd):
     """Checks that the ids within each group inside a
     RuleSetModelInstance are unique
 
@@ -40,11 +79,11 @@ def check_unique_ids_in_ruleset_model_instances(rmd):
         An error message listing any paths that do not have unique ids. The empty string
         indicates that all appropriate ids are unique.
     """
-    # The schema does not require the ruleset_model_instances field, default to []
-    ruleset_model_instances = rmd.get("ruleset_model_instances", [])
+    # The schema does not require the ruleset_model_descriptions field, default to []
+    ruleset_model_descriptions = rmd.get("ruleset_model_descriptions", [])
 
     bad_paths = []
-    for rmi_index, rmi in enumerate(ruleset_model_instances):
+    for rmi_index, rmi in enumerate(ruleset_model_descriptions):
         # Collect all jsonpaths to lists
         paths = json_paths_to_lists(rmi)
 
@@ -53,7 +92,7 @@ def check_unique_ids_in_ruleset_model_instances(rmd):
             if len(ids) != len(set(ids)):
                 # The ids are not unique
                 # list_path starts with "$" that must be removed
-                bad_path = f"ruleset_model_instances[{rmi_index}]{list_path[1:]}"
+                bad_path = f"ruleset_model_descriptions[{rmi_index}]{list_path[1:]}"
                 bad_paths.append(bad_path)
 
     error_msg = f"Non-unique ids for paths: {'; '.join(bad_paths)}" if bad_paths else ""
@@ -111,7 +150,7 @@ def json_paths_to_lists_from_dict(rmd_dict, path):
         A set of unique generic json paths to lists inside rmd_dict
     """
     paths = set()
-    for (key, val) in rmd_dict.items():
+    for key, val in rmd_dict.items():
         new_path = f"{path}.{key}"
         new_paths = json_paths_to_lists(val, new_path)
         paths = paths.union(new_paths)
@@ -148,12 +187,20 @@ def json_paths_to_lists_from_list(rmd_list, path):
 
 def non_schema_validate_rmr(rmr_obj):
     """Provides non-schema validation for an RMR"""
-
-    unique_id_error = check_unique_ids_in_ruleset_model_instances(rmr_obj)
+    error = []
+    unique_id_error = check_unique_ids_in_ruleset_model_descriptions(rmr_obj)
     passed = not unique_id_error
-    error = unique_id_error or None
+    if not passed:
+        error.append(unique_id_error)
 
-    return {"passed": passed, "error": error}
+    mismatch_hvac_errors = check_hvac_association(rmr_obj)
+    passed = passed and not mismatch_hvac_errors
+    if mismatch_hvac_errors:
+        error.append(
+            f"Cannot find HVAC systems {mismatch_hvac_errors} in the HeatingVentilationAirConditioningSystems data group."
+        )
+
+    return {"passed": passed, "error": error if error else None}
 
 
 def schema_validate_rmr(rmr_obj):
@@ -197,12 +244,13 @@ def schema_validate_rmr(rmr_obj):
         return {"passed": False, "error": "schema invalid: " + err.message}
 
 
-def validate_rmr(rmr_obj):
+def validate_rmr(rmr_obj, test=False):
     """Validate an RMR against the schema and other high-level checks"""
     # Validate against the schema
     result = schema_validate_rmr(rmr_obj)
 
-    if result["passed"]:
+    if result["passed"] and not test:
+        # Only check if it is not software test workflow.
         # Provide non-schema validation
         result = non_schema_validate_rmr(rmr_obj)
 

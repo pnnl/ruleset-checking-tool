@@ -1,0 +1,61 @@
+{
+    "id": "ASHRAE229 1",
+    "ruleset_model_descriptions": [
+        {
+            "id": "RMD 1",
+            "buildings": [
+                {
+                    "id": "Building 1",
+                    "building_open_schedule": "Required Building Schedule 1",
+                    "building_segments": [
+                        {
+                            "id": "Building Segment 1",
+                            "zones": [
+                                {
+                                    "id": "Thermal Zone 1",
+                                    "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                    "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                    "terminals": [
+                                        {
+                                            "id": "Air Terminal",
+                                            "is_supply_ducted": true,
+                                            "type": "CONSTANT_AIR_VOLUME",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System Type 3"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "heating_ventilating_air_conditioning_systems": [
+                                {
+                                    "id": "System Type 3",
+                                    "cooling_system": {
+                                        "id": "DX Coil 1",
+                                        "type": "DIRECT_EXPANSION"
+                                    },
+                                    "heating_system": {
+                                        "id": "Furnace Coil 1",
+                                        "type": "FURNACE"
+                                    },
+                                    "fan_system": {
+                                        "id": "CAV Fan System 1",
+                                        "fan_control": "CONSTANT",
+                                        "supply_fans": [
+                                            {
+                                                "id": "Supply Fan 1"
+                                            }
+                                        ],
+                                        "return_fans": [
+                                            {
+                                                "id": "Return Fan 1"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

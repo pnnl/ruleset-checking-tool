@@ -1,0 +1,22 @@
+# Add all available rule modules in __all__
+import importlib
+
+__all__ = [
+    "section23rule2",
+    "section23rule3",
+    "section23rule6",
+    "section23rule7",
+    "section23rule8",
+    "section23rule12",
+    "section23rule16",
+]
+
+
+def __getattr__(name):
+    if name in __all__:
+        return importlib.import_module("." + name, __name__)
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
+
+
+def __dir__():
+    return sorted(__all__)
