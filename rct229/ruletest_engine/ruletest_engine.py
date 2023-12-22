@@ -15,11 +15,13 @@ from rct229.reports.ashrae901_2019_software_test_report import (
 from rct229.rule_engine.engine import evaluate_rule
 from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
 from rct229.rule_engine.rulesets import RuleSet, RuleSetTest
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.rulesets import rulesets
 from rct229.ruletest_engine.ruletest_jsons.scripts.json_generation_utilities import (
     merge_nested_dictionary,
 )
+from rct229.ruletest_engine.ruletest_rmd_factory import get_ruletest_rmd_models
+from rct229.schema.schema_enums import SchemaEnums
+from rct229.schema.schema_store import SchemaStore
 from rct229.schema.validate import validate_rmr
 
 
@@ -177,7 +179,7 @@ def process_test_result(test_result, test_dict, test_id):
     return outcome_text, received_expected_outcome
 
 
-def run_section_tests(test_json_name: str, ruleset_doc: str):
+def run_section_tests(test_json_name: str, ruleset_doc: RuleSet):
     """Runs all tests found in a given test JSON and prints results to console. Returns true/false describing whether
     or not all tests in the JSON result in the expected outcome.
 
@@ -227,7 +229,9 @@ def run_section_tests(test_json_name: str, ruleset_doc: str):
         test_list_dictionary = json.load(f)
 
     # get all rules in the ruleset.
-    available_rule_definitions = rulesets.__getrules__(ruleset_doc)
+    SchemaStore.set_ruleset(ruleset_doc)
+    SchemaEnums.update_schema_enum()
+    available_rule_definitions = rulesets.__getrules__()
     available_rule_definitions_dict = {
         rule_class[0]: rule_class[1] for rule_class in available_rule_definitions
     }
@@ -238,8 +242,7 @@ def run_section_tests(test_json_name: str, ruleset_doc: str):
         test_dict = test_list_dictionary[test_id]
 
         # Generate RMR dictionaries for testing
-        user_rmr, baseline_rmr, proposed_rmr = generate_test_rmrs(test_dict)
-        rmr_trio = UserBaselineProposedVals(user_rmr, baseline_rmr, proposed_rmr)
+        rmr_trio = get_ruletest_rmd_models(test_dict)
 
         # Identify Section and rule
         section = test_dict["Section"]
@@ -267,7 +270,7 @@ def run_section_tests(test_json_name: str, ruleset_doc: str):
             continue
 
         # Evaluate rule and check for invalid RMRs
-        evaluation_dict = evaluate_rule(rule, rmr_trio)
+        evaluation_dict = evaluate_rule(rule, rmr_trio, True)
         # pprint.pprint(evaluation_dict)
         invalid_rmrs_dict = evaluation_dict["invalid_rmrs"]
 
@@ -351,14 +354,16 @@ def generate_software_test_report(ruleset, section_list, output_json_path):
     """
 
     # Initialize report dictionary from which to continue testing. TODO- Future rulesets can be added here
-    if ruleset == "ashrae9012019":
+    if ruleset == RuleSet.ASHRAE9012019_RULESET:
+        SchemaStore.set_ruleset(RuleSet.ASHRAE9012019_RULESET)
+        SchemaEnums.update_schema_enum()
         report_dict = ASHRAE9012019SoftwareTestReport()
         report_dict.initialize_ruleset_report()
     else:
         raise Exception(f"Ruleset '{ruleset}' has no default software test report.")
 
     if section_list is None:
-        if ruleset == "ashrae902019":
+        if ruleset == RuleSet.ASHRAE9012019_RULESET:
             section_list = RuleSetTest.ASHRAE9012019_TEST_LIST
         else:
             raise Exception(
@@ -366,13 +371,13 @@ def generate_software_test_report(ruleset, section_list, output_json_path):
             )
 
     # Master list of RCT engine outcomes, used to populate report.
-    rct_outcomes = generate_rct_outcomes_list_from_section_list(section_list, ruleset)
+    rct_outcomes = generate_rct_outcomes_list_from_section_list(section_list)
 
     # Generate
     report_dict.generate(rct_outcomes, output_json_path)
 
 
-def generate_rct_outcomes_list_from_section_list(section_list, ruleset):
+def generate_rct_outcomes_list_from_section_list(section_list):
     """Runs all the ruletest JSONs for every section in section_list for a given ruleset. Returns the aggregated
     results as a dictionary that can be used in the generate function for ashrae901_2019_software_test_report
 
@@ -381,10 +386,6 @@ def generate_rct_outcomes_list_from_section_list(section_list, ruleset):
     section_list : list
 
         List of test JSON directorys in 'test_jsons/[MY_STANDARD]' directory. (e.g., ['section5', 'section6'])
-
-    ruleset: string
-
-        Name of the ruleset (e.g., 'ashrae9012019')
 
     Returns
     ----------
@@ -422,7 +423,7 @@ def generate_rct_outcomes_list_from_section_list(section_list, ruleset):
     }
 
     # get all rules in the ruleset.
-    available_rule_definitions = rulesets.__getrules__(ruleset)
+    available_rule_definitions = rulesets.__getrules__()
     available_rule_definitions_dict = {
         rule_class[0]: rule_class[1] for rule_class in available_rule_definitions
     }
@@ -433,7 +434,11 @@ def generate_rct_outcomes_list_from_section_list(section_list, ruleset):
     for section in section_list:
         # Get list of rule JSONs in section
         master_json_path = os.path.join(
-            os.path.dirname(__file__), "ruletest_jsons", ruleset, section, "rule*.json"
+            os.path.dirname(__file__),
+            "ruletest_jsons",
+            SchemaStore.SELECTED_RULESET,
+            section,
+            "rule*.json",
         )
         json_list = glob.glob(master_json_path)
 
@@ -449,11 +454,7 @@ def generate_rct_outcomes_list_from_section_list(section_list, ruleset):
                     # Load next test dictionary from test list
                     test_dict = test_list_dictionary[test_id]
 
-                    # Generate RMR dictionaries for testing
-                    user_rmr, baseline_rmr, proposed_rmr = generate_test_rmrs(test_dict)
-                    rmr_trio = UserBaselineProposedVals(
-                        user_rmr, baseline_rmr, proposed_rmr
-                    )
+                    rmr_trio = get_ruletest_rmd_models(test_dict)
 
                     # Identify Section and rule
                     section = test_dict["Section"]
@@ -471,7 +472,7 @@ def generate_rct_outcomes_list_from_section_list(section_list, ruleset):
                         continue
 
                     # Evaluate rule and check for invalid RMRs
-                    evaluation_dict = evaluate_rule(rule, rmr_trio)
+                    evaluation_dict = evaluate_rule(rule, rmr_trio, True)
 
                     invalid_rmrs_dict = evaluation_dict["invalid_rmrs"]
 
@@ -503,9 +504,9 @@ def generate_rct_outcomes_list_from_section_list(section_list, ruleset):
                         rule_test_outcome_dict["ruleset_section_title"] = section_dict[
                             str(test_dict["Section"])
                         ]
-                        rule_test_outcome_dict[
-                            "evaluation_type"
-                        ] = "FULL"  # TODO primary rule = FULL, else = APPLICABILITY
+                        rule_test_outcome_dict["evaluation_type"] = (
+                            "FULL" if rule.is_primary_rule else "APPLICABILITY"
+                        )
                         rule_test_outcome_dict[
                             "expected_rule_unit_test_evaluation_outcome"
                         ] = ruletest_outcome_dict[test_dict["expected_rule_outcome"]]

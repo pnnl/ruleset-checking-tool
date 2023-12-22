@@ -14,6 +14,34 @@ class UNIT_SYSTEM:
     SI = "SI"
 
 
+_UNIT_LIST = [
+    "V*A",
+    "W",
+    "m3",
+    "m2",
+    "W/m2",
+    "W/(m2*K)",
+    "W/(m*K)",
+    "m3/s",
+    "C",
+    "W/W",
+    "W-s/L",
+    "L/s",
+    "ft3",
+    "ft2",
+    "W/ft2",
+    "Btu/(hr*ft2*R)",
+    "Btu/(hr*ft*R)",
+    "ton",
+    "Btu/hr",
+    "cfm",
+    "F",
+    "kW/ton",
+    "W/gpm",
+    "W/gpm",
+    "cfm",
+]
+
 _UNIT_CONVENTIONS = {
     UNIT_SYSTEM.SI: {
         "transformer_capacity": "V*A",

@@ -7,13 +7,13 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "6-6",
-            "ruleset_reference": "(Previously 6-11, then 6-8) Table G3.1(6) Baseline Building Performance",
+            "ruleset_reference": "Table G3.1(6) Baseline Building Performance",
             "rule_description": "Baseline building shall not be modeled with daylighting control",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Design",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "None",
-            "mandatory_rule": "Yes",
+            "rule_dependency": "-",
+            "mandatory_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -53,7 +53,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -67,13 +68,13 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "6-6",
-            "ruleset_reference": "(Previously 6-11, then 6-8) Table G3.1(6) Baseline Building Performance",
+            "ruleset_reference": "Table G3.1(6) Baseline Building Performance",
             "rule_description": "Baseline building shall not be modeled with daylighting control",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Design",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "None",
-            "mandatory_rule": "Yes",
+            "rule_dependency": "-",
+            "mandatory_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -113,7 +114,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

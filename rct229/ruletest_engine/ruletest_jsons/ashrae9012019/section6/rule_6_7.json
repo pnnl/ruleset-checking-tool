@@ -7,13 +7,13 @@
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "6-7",
-            "ruleset_reference": "(Previously 6-12, then 6-11) Table G3.1(6) Proposed Building Performance (h)",
+            "ruleset_reference": "Table G3.1(6) Proposed Building Performance (h)",
             "rule_description": "Automatic daylighting responsive controls shall be modeled directly in the proposed design or through schedule adjustments determined by a separate daylighting analysis. Modeling and schedule  adjustments shall separately account for primary sidelighted areas, secondary sidelighted areas, and toplighted areas",
-            "applicable_rmr": "Proposed RMR",
+            "applicable_rmr": "Proposed Design",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "None",
-            "mandatory_rule": "Yes",
+            "rule_dependency": "-",
+            "mandatory_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -66,7 +66,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             }
@@ -80,13 +81,13 @@
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "6-7",
-            "ruleset_reference": "(Previously 6-12, then 6-11) Table G3.1(6) Proposed Building Performance (h)",
+            "ruleset_reference": "Table G3.1(6) Proposed Building Performance (h)",
             "rule_description": "Automatic daylighting responsive controls shall be modeled directly in the proposed design or through schedule adjustments determined by a separate daylighting analysis. Modeling and schedule  adjustments shall separately account for primary sidelighted areas, secondary sidelighted areas, and toplighted areas",
-            "applicable_rmr": "Proposed RMR",
+            "applicable_rmr": "Proposed Design",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "None",
-            "mandatory_rule": "Yes",
+            "rule_dependency": "-",
+            "mandatory_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -148,7 +149,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             }
@@ -162,13 +164,13 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "6-7",
-            "ruleset_reference": "(Previously 6-12, then 6-11) Table G3.1(6) Proposed Building Performance (h)",
+            "ruleset_reference": "Table G3.1(6) Proposed Building Performance (h)",
             "rule_description": "Automatic daylighting responsive controls shall be modeled directly in the proposed design or through schedule adjustments determined by a separate daylighting analysis. Modeling and schedule  adjustments shall separately account for primary sidelighted areas, secondary sidelighted areas, and toplighted areas",
-            "applicable_rmr": "Proposed RMR",
+            "applicable_rmr": "Proposed Design",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "None",
-            "mandatory_rule": "Yes",
+            "rule_dependency": "-",
+            "mandatory_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -230,7 +232,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             }
@@ -244,13 +247,13 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "6-7",
-            "ruleset_reference": "(Previously 6-12, then 6-11) Table G3.1(6) Proposed Building Performance (h)",
+            "ruleset_reference": "Table G3.1(6) Proposed Building Performance (h)",
             "rule_description": "Automatic daylighting responsive controls shall be modeled directly in the proposed design or through schedule adjustments determined by a separate daylighting analysis. Modeling and schedule  adjustments shall separately account for primary sidelighted areas, secondary sidelighted areas, and toplighted areas",
-            "applicable_rmr": "Proposed RMR",
+            "applicable_rmr": "Proposed Design",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "None",
-            "mandatory_rule": "Yes",
+            "rule_dependency": "-",
+            "mandatory_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -307,7 +310,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             }
@@ -321,13 +325,13 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "6-7",
-            "ruleset_reference": "(Previously 6-12, then 6-11) Table G3.1(6) Proposed Building Performance (h)",
+            "ruleset_reference": "Table G3.1(6) Proposed Building Performance (h)",
             "rule_description": "Automatic daylighting responsive controls shall be modeled directly in the proposed design or through schedule adjustments determined by a separate daylighting analysis. Modeling and schedule  adjustments shall separately account for primary sidelighted areas, secondary sidelighted areas, and toplighted areas",
-            "applicable_rmr": "Proposed RMR",
+            "applicable_rmr": "Proposed Design",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "None",
-            "mandatory_rule": "Yes",
+            "rule_dependency": "-",
+            "mandatory_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -380,7 +384,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             }
