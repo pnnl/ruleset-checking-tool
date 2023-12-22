@@ -91,7 +91,11 @@ class Section5Rule22(RuleDefinitionListIndexedBase):
                         ),
                         fail_msg=FAIL_MSG,
                         required_fields={
-                            "$": ["has_shading_overhang", "has_shading_sidefins"]
+                            "$": [
+                                "has_shading_overhang",
+                                "has_shading_sidefins",
+                                "depth_of_overhang",
+                            ]
                         },
                     )
 
