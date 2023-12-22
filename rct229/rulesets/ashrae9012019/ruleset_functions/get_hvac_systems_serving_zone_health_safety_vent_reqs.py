@@ -1,14 +1,18 @@
 from functools import reduce
 from operator import concat
 
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_list_hvac_systems_associated_with_zone import (
     get_list_hvac_systems_associated_with_zone,
 )
 from rct229.utils.jsonpath_utils import find_all
 
-LightingSpaceOptionsG37 = schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
-VentilationSpaceOptions = schema_enums["VentilationSpaceOptions2019ASHRAE901"]
+LightingSpaceOptionsG37 = SchemaEnums.schema_enums[
+    "LightingSpaceOptions2019ASHRAE901TG37"
+]
+VentilationSpaceOptions = SchemaEnums.schema_enums[
+    "VentilationSpaceOptions2019ASHRAE901"
+]
 
 LIGHTING_SPACE_TYPES_MATCH_REQ = [
     LightingSpaceOptionsG37.MANUFACTURING_FACILITY_DETAILED_MANUFACTURING_AREA,
