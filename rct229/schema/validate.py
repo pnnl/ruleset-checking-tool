@@ -19,6 +19,44 @@ SCHEMA_T24_ENUM_PATH = os.path.join(file_dir, SCHEMA_T24_ENUM_KEY)
 SCHEMA_RESNET_ENUM_PATH = os.path.join(file_dir, SCHEMA_RESNET_ENUM_KEY)
 SCHEMA_OUTPUT_PATH = os.path.join(file_dir, SCHEMA_OUTPUT_KEY)
 
+# def check_fluid_loop_association(rmd)
+
+# def check_zone_association(rmd)
+
+# def check_schedule_association(rmd)
+
+# def check_fluid_loop_or_piping_association(rmd)
+
+# def check_service_water_heating_association(rmd)
+
+# search schedule with key words: Constraint to use when implemented :
+
+
+def check_hvac_association(rmd):
+    """
+    Check the association between hvac systems and the terminals served by HVAC systems.
+    Parameters
+    ----------
+    rmd
+
+    Returns list of mismatched hvac ids
+    -------
+
+    """
+    mismatch_list = []
+    hvac_id_list = find_all(
+        "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].id",
+        rmd,
+    )
+    served_by_hvac_id_list = find_all(
+        "$.buildings[*].building_segments[*].zones[*].terminals[*].served_by_heating_ventilating_air_conditioning_system",
+        rmd,
+    )
+    for hvac_id in served_by_hvac_id_list:
+        if hvac_id not in hvac_id_list:
+            mismatch_list.append(hvac_id)
+    return mismatch_list
+
 
 def check_unique_ids_in_ruleset_model_descriptions(rmd):
     """Checks that the ids within each group inside a
@@ -149,12 +187,20 @@ def json_paths_to_lists_from_list(rmd_list, path):
 
 def non_schema_validate_rmr(rmr_obj):
     """Provides non-schema validation for an RMR"""
-
+    error = []
     unique_id_error = check_unique_ids_in_ruleset_model_descriptions(rmr_obj)
     passed = not unique_id_error
-    error = unique_id_error or None
+    if not passed:
+        error.append(unique_id_error)
 
-    return {"passed": passed, "error": error}
+    mismatch_hvac_errors = check_hvac_association(rmr_obj)
+    passed = passed and not mismatch_hvac_errors
+    if mismatch_hvac_errors:
+        error.append(
+            f"Cannot find HVAC systems {mismatch_hvac_errors} in the HeatingVentilationAirConditioningSystems data group."
+        )
+
+    return {"passed": passed, "error": error if error else None}
 
 
 def schema_validate_rmr(rmr_obj):
@@ -198,12 +244,13 @@ def schema_validate_rmr(rmr_obj):
         return {"passed": False, "error": "schema invalid: " + err.message}
 
 
-def validate_rmr(rmr_obj):
+def validate_rmr(rmr_obj, test=False):
     """Validate an RMR against the schema and other high-level checks"""
     # Validate against the schema
     result = schema_validate_rmr(rmr_obj)
 
-    if result["passed"]:
+    if result["passed"] and not test:
+        # Only check if it is not software test workflow.
         # Provide non-schema validation
         result = non_schema_validate_rmr(rmr_obj)
 
