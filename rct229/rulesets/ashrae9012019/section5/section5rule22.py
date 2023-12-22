@@ -14,6 +14,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_ca
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
+from rct229.utils.pint_utils import ZERO
 
 FAIL_MSG = "Baseline fenestration was modeled with shading projections and/or overhangs, which is incorrect."
 
@@ -99,10 +100,14 @@ class Section5Rule22(RuleDefinitionListIndexedBase):
                     return {
                         "has_shading_overhang": subsurface_b["has_shading_overhang"],
                         "has_shading_sidefins": subsurface_b["has_shading_sidefins"],
+                        "depth_of_overhang": subsurface_b.get("depth_of_overhang"),
                     }
 
                 def rule_check(self, context, calc_vals=None, data=None):
-                    return not (
-                        calc_vals["has_shading_overhang"]
-                        or calc_vals["has_shading_sidefins"]
-                    )
+                    has_shading_overhang_b = calc_vals["has_shading_overhang"]
+                    depth_of_overhang_b = calc_vals["depth_of_overhang"]
+                    has_shading_sidefins_b = calc_vals["has_shading_sidefins"]
+                    return (
+                        has_shading_overhang_b is False
+                        or depth_of_overhang_b == ZERO.LENGTH
+                    ) and has_shading_sidefins_b is False

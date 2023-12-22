@@ -116,7 +116,9 @@ def test__check_unique_ids_in_ruleset_model_descriptions__unique():
 def test__non_schema_validate_rmr__not_unique():
     assert non_schema_validate_rmr(TEST_IDS_RMD) == {
         "passed": False,
-        "error": "Non-unique ids for paths: ruleset_model_descriptions[0].buildings[*].building_segments",
+        "error": [
+            "Non-unique ids for paths: ruleset_model_descriptions[0].buildings[*].building_segments",
+        ],
     }
 
 
