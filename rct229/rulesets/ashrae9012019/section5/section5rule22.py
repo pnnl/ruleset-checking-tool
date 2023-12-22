@@ -91,11 +91,7 @@ class Section5Rule22(RuleDefinitionListIndexedBase):
                         ),
                         fail_msg=FAIL_MSG,
                         required_fields={
-                            "$": [
-                                "has_shading_overhang",
-                                "has_shading_sidefins",
-                                "depth_of_overhang",
-                            ]
+                            "$": ["has_shading_overhang", "has_shading_sidefins"]
                         },
                     )
 
@@ -104,7 +100,7 @@ class Section5Rule22(RuleDefinitionListIndexedBase):
                     return {
                         "has_shading_overhang": subsurface_b["has_shading_overhang"],
                         "has_shading_sidefins": subsurface_b["has_shading_sidefins"],
-                        "depth_of_overhang": subsurface_b["depth_of_overhang"],
+                        "depth_of_overhang": subsurface_b.get["depth_of_overhang"],
                     }
 
                 def rule_check(self, context, calc_vals=None, data=None):
@@ -114,4 +110,5 @@ class Section5Rule22(RuleDefinitionListIndexedBase):
                     return (
                         has_shading_overhang_b is False
                         or depth_of_overhang_b == ZERO.LENGTH
+                        or depth_of_overhang_b == None
                     ) and has_shading_sidefins_b is False
