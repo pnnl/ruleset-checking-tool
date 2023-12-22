@@ -1,4 +1,5 @@
 import json
+from copy import deepcopy
 
 from rct229.report_engine.rct_report import RCTReport
 from rct229.reports.utils import calc_vals_converter
@@ -11,17 +12,19 @@ class ASHRAE9012019DetailReport(RCTReport):
         self.title = "ASHRAE STD 229P RULESET CHECKING TOOL"
         self.purpose = "Project Testing Report"
         self.ruleset = "ASHRAE 90.1-2019 Performance Rating Method (Appendix G)"
-        self.schema_version = "0.0.23"
         self.ruleset_report_file = "ashrae901_2019_detail_report.json"
 
-    def initialize_ruleset_report(self):
+    def initialize_ruleset_report(self, rule_outcome=None):
         report_json = dict()
         report_json["title"] = self.title
         report_json["purpose"] = self.purpose
+        report_json["tool_name"] = self.tool
+        report_json["tool_version"] = self.version
         report_json["ruleset"] = self.ruleset
         report_json["date_run"] = self.date_run
         report_json["schema_version"] = self.schema_version
-        report_json["rules"] = dict()
+        report_json["rpd_files"] = rule_outcome.get("rpd_files")
+        report_json["rules"] = []
         return report_json
 
     def generate_rule_report(self, rule_outcome, outcome_dict):
@@ -30,9 +33,11 @@ class ASHRAE9012019DetailReport(RCTReport):
         rule_report = dict()
         rule_report["rule_id"] = rule_id
         rule_report["description"] = rule_outcome["description"]
-        rule_report["ruleset_section_title"] = rule_outcome["ruleset_section_title"]
-        rule_report["primary_rule"] = "Yes" if rule_outcome["primary_rule"] else "No"
+        rule_report["evaluation_type"] = (
+            "FULL" if rule_outcome["primary_rule"] else "APPLICABILITY"
+        )
         rule_report["standard_section"] = rule_outcome["standard_section"]
+        rule_report["data_group_names"] = []
         rule_report_list = []
         self._rule_outcome_helper(rule_outcome, rule_report_list, outcome_dict)
         rule_report["evaluations"] = rule_report_list
@@ -40,7 +45,7 @@ class ASHRAE9012019DetailReport(RCTReport):
 
     def add_rule_to_ruleset_report(self, ruleset_report, rule_report, rule_outcome):
         # rule_report["rule_evaluation_outcome"] = rule_outcome
-        ruleset_report["rules"][rule_report["rule_id"]] = rule_report
+        ruleset_report["rules"].append(deepcopy(rule_report))
 
     def save_ruleset_report(self, ruleset_report, report_dir):
         with open(report_dir, "w") as output_report:
@@ -70,7 +75,7 @@ class ASHRAE9012019DetailReport(RCTReport):
                     output_outcome_dict[RCTOutcomeLabel.UNDETERMINED] += 1
                 if outcome_label == RCTOutcomeLabel.NOT_APPLICABLE:
                     output_outcome_dict[RCTOutcomeLabel.NOT_APPLICABLE] += 1
-                evaluation_outcome["id"] = output_result["id"]
+                evaluation_outcome["data_group_id"] = output_result["id"]
                 evaluation_outcome["outcome"] = outcome_label
                 evaluation_outcome["messages"] = (
                     output_result["message"]

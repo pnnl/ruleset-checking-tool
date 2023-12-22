@@ -12,7 +12,7 @@
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -111,7 +111,8 @@
                                 "id": "Boiler Loop 1",
                                 "type": "HEATING"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -130,7 +131,7 @@
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -229,7 +230,8 @@
                                 "id": "Boiler Loop 1",
                                 "type": "HEATING"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -248,7 +250,7 @@
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -347,7 +349,8 @@
                                 "id": "Boiler Loop 1",
                                 "type": "HEATING"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

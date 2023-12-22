@@ -30,7 +30,8 @@
                                 "capacity": 25000,
                                 "efficiency": 0.99
                             }
-                        ]
+                        ],
+                        "type": "USER"
                     }
                 ]
             }
@@ -67,7 +68,8 @@
                                 "capacity": 25000,
                                 "efficiency": 0.97
                             }
-                        ]
+                        ],
+                        "type": "USER"
                     }
                 ]
             }
@@ -104,7 +106,8 @@
                                 "capacity": 25000,
                                 "efficiency": 0.9929
                             }
-                        ]
+                        ],
+                        "type": "USER"
                     }
                 ]
             }
@@ -141,7 +144,8 @@
                                 "capacity": 25000,
                                 "efficiency": 0.98
                             }
-                        ]
+                        ],
+                        "type": "USER"
                     }
                 ]
             }

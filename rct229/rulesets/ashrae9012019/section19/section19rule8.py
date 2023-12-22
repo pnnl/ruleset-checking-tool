@@ -1,7 +1,8 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import BASELINE_0
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_zone_list_w_area_dict import (
     get_hvac_zone_list_w_area_dict,
 )
@@ -10,7 +11,7 @@ from rct229.utils.jsonpath_utils import find_all
 
 MIN_OA_CFM = 3000 * ureg("cfm")
 OCCUPANT_DENSITY_LIMIT = 0.1 / ureg("ft2")
-DEMAND_CONTROL_VENTILATION_CONTROL = schema_enums[
+DEMAND_CONTROL_VENTILATION_CONTROL = SchemaEnums.schema_enums[
     "DemandControlVentilationControlOptions"
 ]
 
@@ -20,9 +21,11 @@ class Section19Rule8(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section19Rule8, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=False
+            ),
             each_rule=Section19Rule8.BuildingRule(),
-            index_rmr="baseline",
+            index_rmr=BASELINE_0,
             id="19-8",
             description="Demand control ventilation is modeled in the baseline design in systems with outdoor air capacity greater than 3000 cfm serving areas with an average occupant design capacity greater than 100 people per 1000 ft^2.",
             ruleset_section_title="HVAC - General",
@@ -34,14 +37,16 @@ class Section19Rule8(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section19Rule8.BuildingRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, False),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=False
+                ),
                 each_rule=Section19Rule8.BuildingRule.HVACRule(),
-                index_rmr="baseline",
+                index_rmr=BASELINE_0,
                 list_path="$.building_segments[*].heating_ventilating_air_conditioning_systems[*]",
             )
 
         def create_data(self, context, data=None):
-            building_b = context.baseline
+            building_b = context.BASELINE_0
             hvac_zone_list_w_area_dict_b = get_hvac_zone_list_w_area_dict(building_b)
 
             zone_total_occupant_dict_b = {
@@ -58,7 +63,7 @@ class Section19Rule8(RuleDefinitionListIndexedBase):
             }
 
         def list_filter(self, context_item, data=None):
-            hvac_b = context_item.baseline
+            hvac_b = context_item.BASELINE_0
             hvac_id_b = hvac_b["id"]
             hvac_zone_list_w_area_dict_b = data["hvac_zone_list_w_area_dict_b"]
 
@@ -67,7 +72,9 @@ class Section19Rule8(RuleDefinitionListIndexedBase):
         class HVACRule(RuleDefinitionBase):
             def __init__(self):
                 super(Section19Rule8.BuildingRule.HVACRule, self).__init__(
-                    rmrs_used=UserBaselineProposedVals(False, True, False),
+                    rmrs_used=produce_ruleset_model_instance(
+                        USER=False, BASELINE_0=True, PROPOSED=False
+                    ),
                     required_fields={
                         "$": ["fan_system"],
                         "fan_system": ["minimum_outdoor_airflow"],
@@ -75,7 +82,7 @@ class Section19Rule8(RuleDefinitionListIndexedBase):
                 )
 
             def get_calc_vals(self, context, data=None):
-                hvac_b = context.baseline
+                hvac_b = context.BASELINE_0
                 hvac_zone_list_w_area_dict_b = data["hvac_zone_list_w_area_dict_b"]
                 zone_total_occupant_dict_b = data["zone_total_occupant_dict_b"]
 
