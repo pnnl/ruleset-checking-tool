@@ -1,0 +1,146 @@
+from pydash import reject
+
+from rct229.rule_engine.partial_rule_definition import PartialRuleDefinition
+from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import PROPOSED
+from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_system_type_compare import (
+    baseline_system_type_compare,
+)
+from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
+    HVAC_SYS,
+)
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types import (
+    get_baseline_system_types,
+)
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_dict_of_zones_and_terminal_units_served_by_hvac_sys import (
+    get_dict_of_zones_and_terminal_units_served_by_hvac_sys,
+)
+from rct229.schema.schema_enums import SchemaEnums
+from rct229.utils.utility_functions import find_exactly_one_zone
+
+APPLICABLE_SYS_TYPES = [
+    HVAC_SYS.SYS_3,
+    HVAC_SYS.SYS_4,
+    HVAC_SYS.SYS_5,
+    HVAC_SYS.SYS_6,
+    HVAC_SYS.SYS_7,
+    HVAC_SYS.SYS_8,
+    HVAC_SYS.SYS_11_1,
+    HVAC_SYS.SYS_11_2,
+    HVAC_SYS.SYS_12,
+    HVAC_SYS.SYS_13,
+]
+
+DehumidificationOptions = SchemaEnums.schema_enums["DehumidificationOptions"]
+
+
+class Section23Rule13(RuleDefinitionListIndexedBase):
+    """Rule 13 of ASHRAE 90.1-2019 Appendix G Section 23 (Air-side)"""
+
+    def __init__(self):
+        super(Section23Rule13, self).__init__(
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=False, PROPOSED=True
+            ),
+            each_rule=Section23Rule13.HVACRule(),
+            index_rmr=PROPOSED,
+            id="23-13",
+            description="If proposed design includes humidistatic controls then the baseline shall use mechanical cooling for dehumidification and shall reheat to avoid overcooling.",
+            ruleset_section_title="HVAC - Airside",
+            standard_section="G3.1.3.18 Dehumidification (Systems 3 through 8 and 11, 12, and 13)",
+            is_primary_rule=False,
+            rmr_context="ruleset_model_descriptions/0",
+            list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
+        )
+
+    def is_applicable(self, context, data=None):
+        rmi_b = context.BASELINE_0
+        baseline_system_types_dict = get_baseline_system_types(rmi_b)
+
+        return any(
+            [
+                baseline_system_type_compare(system_type, applicable_sys_type, False)
+                for system_type in baseline_system_types_dict
+                for applicable_sys_type in APPLICABLE_SYS_TYPES
+            ]
+        )
+
+    def create_data(self, context, data):
+        rmi_b = context.PROPOSED
+        baseline_system_types_dict = get_baseline_system_types(rmi_b)
+        applicable_hvac_sys_ids = [
+            hvac_id
+            for sys_type in baseline_system_types_dict
+            for target_sys_type in APPLICABLE_SYS_TYPES
+            if baseline_system_type_compare(sys_type, target_sys_type, False)
+            for hvac_id in baseline_system_types_dict[sys_type]
+        ]
+
+        # Create a new dict that maps hvac_id to zones with humidity setpoints
+
+        hvac_systems_and_zones_p = (
+            get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmi_b)
+        )
+        hvac_system_zone_with_humidistatic_dict = {
+            key: reject(
+                hvac_systems_and_zones_p[key]["zone_list"],
+                lambda zone_id: find_exactly_one_zone(rmi_b, zone_id).get(
+                    "maximum_humidity_setpoint_schedule"
+                )
+                is None,
+            )
+            for key in hvac_systems_and_zones_p
+        }
+
+        return {
+            "applicable_hvac_sys_ids": applicable_hvac_sys_ids,
+            "hvac_system_zone_with_humidistatic_dict": hvac_system_zone_with_humidistatic_dict,
+        }
+
+    def list_filter(self, context_item, data):
+        hvac_sys_b = context_item.PROPOSED
+        applicable_hvac_sys_ids = data["applicable_hvac_sys_ids"]
+
+        return hvac_sys_b["id"] in applicable_hvac_sys_ids
+
+    class HVACRule(PartialRuleDefinition):
+        def __init__(self):
+            super(Section23Rule13.HVACRule, self).__init__(
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=False
+                ),
+                required_fields={"$": ["cooling_system"]},
+            )
+
+        def get_calc_vals(self, context, data=None):
+            hvac_p = context.PROPOSED
+            hvac_systems_and_zones_p = data["hvac_system_zone_with_humidistatic_dict"]
+            dehumidification_type_p = hvac_p["cooling_system"].get(
+                "dehumidification_type"
+            )
+            zones_with_humidity_schedules_list_p = hvac_systems_and_zones_p[
+                hvac_p["id"]
+            ]
+
+            return {
+                "dehumidification_type": dehumidification_type_p,
+                "zones_with_humidity_schedules_list": zones_with_humidity_schedules_list_p,
+            }
+
+        def applicability_check(self, context, calc_vals, data):
+            dehumidification_type_p = calc_vals["dehumidification_type"]
+            zones_with_humidity_schedules_list_p = calc_vals[
+                "zones_with_humidity_schedules_list"
+            ]
+            return (
+                dehumidification_type_p
+                and dehumidification_type_p != DehumidificationOptions.NONE
+                and len(zones_with_humidity_schedules_list_p) > 0
+            )
+
+        def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
+            zones_with_humidity_schedules_list_p = calc_vals[
+                "zones_with_humidity_schedules_list"
+            ]
+            return f"The following zones have humidity schedules: {zones_with_humidity_schedules_list_p}"
