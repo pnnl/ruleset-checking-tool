@@ -41,7 +41,7 @@ class Section23Rule13(RuleDefinitionListIndexedBase):
     def __init__(self):
         super(Section23Rule13, self).__init__(
             rmrs_used=produce_ruleset_model_instance(
-                USER=False, BASELINE_0=False, PROPOSED=True
+                USER=False, BASELINE_0=True, PROPOSED=True
             ),
             each_rule=Section23Rule13.HVACRule(),
             index_rmr=PROPOSED,
@@ -57,7 +57,7 @@ class Section23Rule13(RuleDefinitionListIndexedBase):
     def is_applicable(self, context, data=None):
         rmi_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
-
+        # if baseline does not have system 3-8 or 11, 12, 13, then this rule is not applicable
         return any(
             [
                 baseline_system_type_compare(system_type, applicable_sys_type, False)
@@ -67,25 +67,15 @@ class Section23Rule13(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.PROPOSED
-        baseline_system_types_dict = get_baseline_system_types(rmi_b)
-        applicable_hvac_sys_ids = [
-            hvac_id
-            for sys_type in baseline_system_types_dict
-            for target_sys_type in APPLICABLE_SYS_TYPES
-            if baseline_system_type_compare(sys_type, target_sys_type, False)
-            for hvac_id in baseline_system_types_dict[sys_type]
-        ]
-
+        rmi_p = context.PROPOSED
         # Create a new dict that maps hvac_id to zones with humidity setpoints
-
         hvac_systems_and_zones_p = (
-            get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmi_b)
+            get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmi_p)
         )
         hvac_system_zone_with_humidistatic_dict = {
             key: reject(
                 hvac_systems_and_zones_p[key]["zone_list"],
-                lambda zone_id: find_exactly_one_zone(rmi_b, zone_id).get(
+                lambda zone_id: find_exactly_one_zone(rmi_p, zone_id).get(
                     "maximum_humidity_setpoint_schedule"
                 )
                 is None,
@@ -94,21 +84,14 @@ class Section23Rule13(RuleDefinitionListIndexedBase):
         }
 
         return {
-            "applicable_hvac_sys_ids": applicable_hvac_sys_ids,
             "hvac_system_zone_with_humidistatic_dict": hvac_system_zone_with_humidistatic_dict,
         }
-
-    def list_filter(self, context_item, data):
-        hvac_sys_b = context_item.PROPOSED
-        applicable_hvac_sys_ids = data["applicable_hvac_sys_ids"]
-
-        return hvac_sys_b["id"] in applicable_hvac_sys_ids
 
     class HVACRule(PartialRuleDefinition):
         def __init__(self):
             super(Section23Rule13.HVACRule, self).__init__(
                 rmrs_used=produce_ruleset_model_instance(
-                    USER=False, BASELINE_0=True, PROPOSED=False
+                    USER=False, BASELINE_0=False, PROPOSED=True
                 ),
                 required_fields={"$": ["cooling_system"]},
             )
