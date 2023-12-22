@@ -1,5 +1,5 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
@@ -29,7 +29,9 @@ class Section22Rule7(RuleDefinitionBase):
 
     def __init__(self):
         super(Section22Rule7, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=False
+            ),
             id="22-7",
             description="Baseline chilled water system that does not use purchased chilled water shall be modeled as primary/secondary systems.",
             ruleset_section_title="HVAC - Chiller",
@@ -39,7 +41,7 @@ class Section22Rule7(RuleDefinitionBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
         # create a list containing all HVAC systems that are modeled in the rmi_b
         available_types_list = [
@@ -55,7 +57,7 @@ class Section22Rule7(RuleDefinitionBase):
         )
 
     def get_calc_vals(self, context, data=None):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         num_primary_loops = len(get_primary_secondary_loops_dict(rmi_b))
 
         return {"num_primary_loops": num_primary_loops}

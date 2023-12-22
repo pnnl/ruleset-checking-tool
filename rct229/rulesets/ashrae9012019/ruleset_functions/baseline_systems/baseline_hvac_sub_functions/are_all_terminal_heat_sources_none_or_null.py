@@ -1,7 +1,7 @@
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.utility_functions import find_exactly_one_terminal_unit
 
-HEATING_SOURCE = schema_enums["HeatingSourceOptions"]
+HEATING_SOURCE = SchemaEnums.schema_enums["HeatingSourceOptions"]
 
 
 def are_all_terminal_heat_sources_none_or_null(rmi_b, terminal_unit_id_list):

@@ -1,18 +1,18 @@
 import pandas as pd
 
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
     ZoneConditioningCategory as ZCC,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
     get_zone_conditioning_category_dict,
 )
-from rct229.utils.assertions import assert_required_fields, getattr_
-from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.assertions import getattr_
+from rct229.utils.jsonpath_utils import find_all, find_exactly_required_fields
 
 # Constants
 # TODO: These should directly from the enumerations
-SurfaceAdjacency = schema_enums["SurfaceAdjacencyOptions"]
+SurfaceAdjacency = SchemaEnums.schema_enums["SurfaceAdjacencyOptions"]
 
 
 # Intended for export and internal use
@@ -128,7 +128,7 @@ def get_surface_conditioning_category_dict(climate_zone, building):
         EXTERIOR_RESIDENTIAL, EXTERIOR_NON_RESIDENTIAL, EXTERIOR_MIXED,
         SEMI_EXTERIOR, UNREGULATED
     """
-    assert_required_fields(
+    find_exactly_required_fields(
         GET_SURFACE_CONDITIONING_CATEGORY_DICT__REQUIRED_FIELDS["building"], building
     )
 
