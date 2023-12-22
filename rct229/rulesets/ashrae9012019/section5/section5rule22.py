@@ -100,7 +100,7 @@ class Section5Rule22(RuleDefinitionListIndexedBase):
                     return {
                         "has_shading_overhang": subsurface_b["has_shading_overhang"],
                         "has_shading_sidefins": subsurface_b["has_shading_sidefins"],
-                        "depth_of_overhang": subsurface_b.get["depth_of_overhang"],
+                        "depth_of_overhang": subsurface_b.get("depth_of_overhang"),
                     }
 
                 def rule_check(self, context, calc_vals=None, data=None):
