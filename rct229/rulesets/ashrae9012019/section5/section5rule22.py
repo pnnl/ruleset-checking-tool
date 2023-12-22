@@ -110,5 +110,4 @@ class Section5Rule22(RuleDefinitionListIndexedBase):
                     return (
                         has_shading_overhang_b is False
                         or depth_of_overhang_b == ZERO.LENGTH
-                        or depth_of_overhang_b == None
                     ) and has_shading_sidefins_b is False
