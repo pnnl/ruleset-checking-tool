@@ -2,20 +2,17 @@ from rct229.rule_engine.partial_rule_definition import PartialRuleDefinition
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rulesets.ashrae9012019 import BASELINE_0, PROPOSED
-from rct229.schema.config import ureg
-from rct229.utils.assertions import getattr_
-from rct229.utils.pint_utils import ZERO, CalcQ
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
-    HVAC_SYS,
-)
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_system_type_compare import (
     baseline_system_type_compare,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_lab_zone_hvac_systems import (
-    get_lab_zone_hvac_systems,
+from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
+    HVAC_SYS,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types import (
     get_baseline_system_types,
+)
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_lab_zone_hvac_systems import (
+    get_lab_zone_hvac_systems,
 )
 
 APPLICABLE_SYS_TYPES = [
@@ -42,12 +39,12 @@ class Section23Rule4(RuleDefinitionListIndexedBase):
             list_path="ruleset_model_descriptions[0]",
             required_fields={
                 "$": ["calendar", "weather"],
-                "calendar": ["is_leap_year"],
                 "weather": ["climate_zone"],
+                "calendar": ["is_leap_year"],
             },
             data_items={
-                "is_leap_year": (BASELINE_0, "calendar/is_leap_year"),
-                "climate_zone": (BASELINE_0, "weather/climate_zone"),
+                "climate_zone_b": (BASELINE_0, "weather/climate_zone"),
+                "is_leap_year_b": (BASELINE_0, "calendar/is_leap_year"),
             },
         )
 
@@ -62,8 +59,8 @@ class Section23Rule4(RuleDefinitionListIndexedBase):
             def get_calc_vals(self, context, data=None):
                 rmd_b = context.BASELINE_0
                 rmd_p = context.PROPOSED
-                climate_zone_b = data[""]
-                is_leap_year_b = data["is_leap_year"]
+                climate_zone_b = data["climate_zone_b"]
+                is_leap_year_b = data["is_leap_year_b"]
 
                 baseline_system_types_dict = get_baseline_system_types(rmd_b)
 
