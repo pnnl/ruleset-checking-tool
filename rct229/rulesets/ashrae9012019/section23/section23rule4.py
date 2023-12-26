@@ -32,7 +32,7 @@ class Section23Rule4(RuleDefinitionListIndexedBase):
             each_rule=Section23Rule4.RuleSetModelInstanceRule(),
             index_rmr=BASELINE_0,
             id="23-4",
-            description="aseline systems 5 & 7 serving lab spaces per G3.1.1c shall reduce lab exhaust and makeup air during unoccupied periods to 50% of zone peak airflow, the minimum outdoor airflow, or rate required to comply with minimum accreditation standards whichever is larger.",
+            description="Baseline systems 5 & 7 serving lab spaces per G3.1.1c shall reduce lab exhaust and makeup air during unoccupied periods to 50% of zone peak airflow, the minimum outdoor airflow, or rate required to comply with minimum accreditation standards whichever is larger.",
             ruleset_section_title="HVAC - Airside",
             standard_section="Exception to G3.1.3.13 VAV Minimum Flow Set Points (Systems 5 and 7)",
             is_primary_rule=False,
