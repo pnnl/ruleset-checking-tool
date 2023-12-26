@@ -270,7 +270,7 @@ def run_section_tests(test_json_name: str, ruleset_doc: RuleSet):
             continue
 
         # Evaluate rule and check for invalid RMRs
-        evaluation_dict = evaluate_rule(rule, rmr_trio)
+        evaluation_dict = evaluate_rule(rule, rmr_trio, True)
         # pprint.pprint(evaluation_dict)
         invalid_rmrs_dict = evaluation_dict["invalid_rmrs"]
 
@@ -472,7 +472,7 @@ def generate_rct_outcomes_list_from_section_list(section_list):
                         continue
 
                     # Evaluate rule and check for invalid RMRs
-                    evaluation_dict = evaluate_rule(rule, rmr_trio)
+                    evaluation_dict = evaluate_rule(rule, rmr_trio, True)
 
                     invalid_rmrs_dict = evaluation_dict["invalid_rmrs"]
 
