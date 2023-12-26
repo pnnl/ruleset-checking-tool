@@ -9,11 +9,11 @@
             "rule_id": "23-7",
             "ruleset_reference": "G3.1.3.14",
             "rule_description": "For baseline systems 6 and 8,  supply air temperature setpoint shall be constant at the design condition",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "System 6, 8 (Rule18-a, to be confirmed)",
-            "mandatory_rule": "Yes",
+            "mandatory_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -115,11 +115,11 @@
             "rule_id": "23-7",
             "ruleset_reference": "G3.1.3.14",
             "rule_description": "For baseline systems 6 and 8,  supply air temperature setpoint shall be constant at the design condition",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "System 6, 8 (Rule18-a, to be confirmed)",
-            "mandatory_rule": "Yes",
+            "mandatory_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
