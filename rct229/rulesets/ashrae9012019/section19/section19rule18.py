@@ -224,36 +224,38 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
                     for target_sys_type in CONSTANT_VOLUME_SYS_TYPES
                 ]
             ):
-                expected_BHP = ((0.00094 * supply_flow_b) + A).m * ureg("hp")
-                min_BHP = (0.00094 * supply_flow_b).m * ureg("hp")
+                expected_BHP_b = ((0.00094 * supply_flow_b) + A).m * ureg("hp")
+                min_BHP_b = (0.00094 * supply_flow_b).m * ureg("hp")
             elif any(
                 [
                     baseline_system_type_compare(sys_type_b, target_sys_type, False)
                     for target_sys_type in VARIABLE_VOLUME_SYS_TYPES
                 ]
             ):
-                expected_BHP = ((0.0013 * supply_flow_b) + A).m * ureg("hp")
-                min_BHP = (0.0013 * supply_flow_b).m * ureg("hp")
+                expected_BHP_b = ((0.0013 * supply_flow_b) + A).m * ureg("hp")
+                min_BHP_b = (0.0013 * supply_flow_b).m * ureg("hp")
             else:
-                expected_BHP = ((0.00062 * supply_flow_b) + A).m * ureg("hp")
-                min_BHP = (0.00062 * supply_flow_b).m * ureg("hp")
+                expected_BHP_b = ((0.00062 * supply_flow_b) + A).m * ureg("hp")
+                min_BHP_b = (0.00062 * supply_flow_b).m * ureg("hp")
 
-            expected_motor_efficiency = table_G3_9_1_lookup(expected_BHP)[
+            expected_motor_efficiency_b = table_G3_9_1_lookup(expected_BHP_b)[
                 "nominal_full_load_efficiency"
             ]
-            min_motor_efficiency = table_G3_9_1_lookup(min_BHP)[
+            min_motor_efficiency_b = table_G3_9_1_lookup(min_BHP_b)[
                 "nominal_full_load_efficiency"
             ]
 
-            expected_fan_wattage = expected_BHP * 746 * (1 / expected_motor_efficiency)
-            min_fan_wattage = min_BHP * 746 * (1 / min_motor_efficiency)
+            expected_fan_wattage_b = (
+                expected_BHP_b * 746 * (1 / expected_motor_efficiency_b)
+            )
+            min_fan_wattage_b = min_BHP_b * 746 * (1 / min_motor_efficiency_b)
 
             return {
                 "more_than_one_supply_fan_b": more_than_one_supply_fan_b,
                 "more_than_one_exhaust_fan_and_energy_rec_is_relevant_b": more_than_one_exhaust_fan_and_energy_rec_is_relevant_b,
                 "total_fan_power_b": total_fan_power_b,
-                "expected_fan_wattage": expected_fan_wattage,
-                "min_fan_wattage": min_fan_wattage,
+                "expected_fan_wattage_b": expected_fan_wattage_b,
+                "min_fan_wattage_b": min_fan_wattage_b,
             }
 
         def manual_check_required(self, context, calc_vals=None, data=None):
@@ -262,7 +264,7 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
                 "more_than_one_exhaust_fan_and_energy_rec_is_relevant_b"
             ]
             total_fan_power_b = calc_vals["total_fan_power_b"]
-            expected_fan_wattage = calc_vals["expected_fan_wattage"]
+            expected_fan_wattage_b = calc_vals["expected_fan_wattage_b"]
 
             return not (
                 (
@@ -270,14 +272,14 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
                     and (
                         (
                             not more_than_one_supply_fan_b
-                            and std_equal(total_fan_power_b, expected_fan_wattage)
+                            and std_equal(total_fan_power_b, expected_fan_wattage_b)
                         )
-                        or (total_fan_power_b < expected_fan_wattage)
+                        or (total_fan_power_b < expected_fan_wattage_b)
                     )
                 )
                 or (
                     not more_than_one_supply_fan_b
-                    and total_fan_power_b < expected_fan_wattage
+                    and total_fan_power_b < expected_fan_wattage_b
                 )
             )
 
@@ -289,7 +291,7 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
                 "more_than_one_exhaust_fan_and_energy_rec_is_relevant_b"
             ]
             more_than_one_supply_fan_b = calc_vals["more_than_one_supply_fan_b"]
-            expected_fan_wattage = calc_vals["expected_fan_wattage"]
+            expected_fan_wattage_b = calc_vals["expected_fan_wattage_b"]
 
             black_word = (
                 ""
@@ -311,7 +313,7 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
                     f"Fan power for {hvac_id_b} is greater than expected per Section and Table G3.1.2.9 assuming no pressure drop adjustments (e.g., sound attenuation, air filtration, fully ducted return "
                     f"when required by code, airflow control devices, carbon and other gas-phase air cleaners, coil runaround loops, evaporative humidifier/coolers in series with another cooling coil, "
                     f"exhaust systems serving fume hoods, and laboratory and vivarium exhaust systems in high-rise buildings) per Table 6.5.3.1-2 other than {black_word} and "
-                    f"MERV filters defined in the RMD (if modeled). Expected Wattage = {expected_fan_wattage.to(ureg.kW)} kW. however not all pressure drop adjustments are able to be captured in the RMD so conduct manual check."
+                    f"MERV filters defined in the RMD (if modeled). Expected Wattage = {expected_fan_wattage_b.to(ureg.kW)} kW. however not all pressure drop adjustments are able to be captured in the RMD so conduct manual check."
                 )
 
             return undetermined_msg
@@ -322,14 +324,14 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
             ]
             more_than_one_supply_fan_b = calc_vals["more_than_one_supply_fan_b"]
             total_fan_power_b = calc_vals["total_fan_power_b"]
-            expected_fan_wattage = calc_vals["expected_fan_wattage"]
+            expected_fan_wattage_b = calc_vals["expected_fan_wattage_b"]
 
             return not more_than_one_exhaust_fan_and_energy_rec_is_relevant_b and (
                 (
                     not more_than_one_supply_fan_b
-                    and std_equal(total_fan_power_b, expected_fan_wattage)
+                    and std_equal(total_fan_power_b, expected_fan_wattage_b)
                 )
-                or (total_fan_power_b < expected_fan_wattage)
+                or (total_fan_power_b < expected_fan_wattage_b)
             )
 
         def get_pass_msg(self, context, calc_vals=None, data=None):
@@ -339,26 +341,26 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
                 "more_than_one_exhaust_fan_and_energy_rec_is_relevant_b"
             ]
             total_fan_power_b = calc_vals["total_fan_power_b"]
-            expected_fan_wattage = calc_vals["expected_fan_wattage"]
-            min_fan_wattage = calc_vals["min_fan_wattage"]
+            expected_fan_wattage_b = calc_vals["expected_fan_wattage_b"]
+            min_fan_wattage_b = calc_vals["min_fan_wattage_b"]
 
             pass_msg = ""
             if (
                 not more_than_one_exhaust_fan_and_energy_rec_is_relevant_b
-                and total_fan_power_b < expected_fan_wattage
+                and total_fan_power_b < expected_fan_wattage_b
             ):
                 pass_msg = (
                     f"The total fan power for {hvac_id_b} is modeled as {total_fan_power_b.to(ureg.kW)} kW which is less than the expected including pressure drop adjustments "
-                    f"for exhaust air energy recovery and MERV filters as applicable which was calculated as {min_fan_wattage.to(ureg.kW)} kW. Pass because this is generally considered more conservative."
+                    f"for exhaust air energy recovery and MERV filters as applicable which was calculated as {min_fan_wattage_b.to(ureg.kW)} kW. Pass because this is generally considered more conservative."
                 )
 
             return pass_msg
 
         def get_fail_msg(self, context, calc_vals=None, data=None):
             total_fan_power_b = calc_vals["total_fan_power_b"]
-            min_fan_wattage = calc_vals["min_fan_wattage"]
+            min_fan_wattage_b = calc_vals["min_fan_wattage_b"]
 
             return (
                 f"The total fan power for <insert hvac.id> is modeled as {total_fan_power_b.to(ureg.kW)} kW which is less than the expected including pressure drop adjustments "
-                f"for exhaust air energy recovery and MERV filters as applicable which was calculated as {min_fan_wattage.to(ureg.kW)} kW ."
+                f"for exhaust air energy recovery and MERV filters as applicable which was calculated as {min_fan_wattage_b.to(ureg.kW)} kW ."
             )
