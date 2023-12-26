@@ -18653,7 +18653,7 @@
                         "heat_rejections": [
                             {
                                 "id": "Heat Rejection 1",
-                                "loop": "Condenser Loop 1"
+                                "loop": "Condensing Loop 1"
                             }
                         ],
                         "type": "BASELINE_0"
@@ -18819,7 +18819,7 @@
                         "heat_rejections": [
                             {
                                 "id": "Heat Rejection 1",
-                                "loop": "Condenser Loop 1"
+                                "loop": "Condensing Loop 1"
                             }
                         ],
                         "type": "BASELINE_0"
