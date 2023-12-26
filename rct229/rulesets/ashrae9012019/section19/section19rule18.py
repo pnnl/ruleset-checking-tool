@@ -24,8 +24,8 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_fan_system_object_suppl
 from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all, find_one
-from rct229.utils.std_comparisons import std_equal
 from rct229.utils.pint_utils import ZERO
+from rct229.utils.std_comparisons import std_equal
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_3,
@@ -38,7 +38,18 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_12,
     HVAC_SYS.SYS_13,
 ]
-CV_system_types = [HVAC_SYS.SYS_3, HVAC_SYS.SYS_4, HVAC_SYS.SYS_12, HVAC_SYS.SYS_13]
+CONSTANT_VOLUME_SYS_TYPES = [
+    HVAC_SYS.SYS_3,
+    HVAC_SYS.SYS_4,
+    HVAC_SYS.SYS_12,
+    HVAC_SYS.SYS_13,
+]
+VARIABLE_VOLUME_SYS_TYPES = [
+    HVAC_SYS.SYS_5,
+    HVAC_SYS.SYS_6,
+    HVAC_SYS.SYS_7,
+    HVAC_SYS.SYS_8,
+]
 
 
 class Section19Rule18(RuleDefinitionListIndexedBase):
@@ -90,20 +101,24 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
         )
 
         zonal_exhaust_fan_b_elec_power_b = ZERO.POWER
-        for hvac_id_b in find_all("$.", rmd_b):
+        for hvac_id_b in find_all(
+            "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].id",
+            rmd_b,
+        ):
             for zone_id_b in zones_and_terminal_units_served_by_hvac_sys_dict_b[
                 hvac_id_b
             ]["zone_list"]:
                 zonal_exhaust_fan_b = find_one(
-                    "$.buildings[*].building_segments[*].zones[*].zonal_exhaust_fan_b",
+                    f'$.buildings[*].building_segments[*].zones[*][?(@.id="{zone_id_b}")].zonal_exhaust_fan',
                     rmd_b,
                 )
-                if zonal_exhaust_fan_b.get("zonal_exhaust_fan") is not None:
+                if zonal_exhaust_fan_b is not None:
                     zonal_exhaust_fan_b_elec_power_b = get_fan_object_electric_power(
                         zonal_exhaust_fan_b
                     )
 
         return {
+            "baseline_system_types_dict": baseline_system_types_dict,
             "applicable_hvac_sys_ids": applicable_hvac_sys_ids,
             "zones_and_terminal_units_served_by_hvac_sys_dict_b": zones_and_terminal_units_served_by_hvac_sys_dict_b,
             "zonal_exhaust_fan_b_elec_power_b": zonal_exhaust_fan_b_elec_power_b,
@@ -135,11 +150,14 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
 
         def get_calc_vals(self, context, data=None):
             hvac_b = context.BASELINE_0
+            hvac_b_id = hvac_b["id"]
 
-            zones_and_terminal_units_served_by_hvac_sys_dict_b = data[
-                "zones_and_terminal_units_served_by_hvac_sys_dict_b"
-            ]
+            baseline_system_types_dict = data["baseline_system_types_dict"]
             zonal_exhaust_fan_b_elec_power_b = data["zonal_exhaust_fan_b_elec_power_b"]
+
+            sys_type_b = list(baseline_system_types_dict.keys())[
+                list(baseline_system_types_dict.values()).index([hvac_b_id])
+            ]
 
             fan_sys_b = hvac_b["fan_system"]
             fan_sys_info_b = (
@@ -147,23 +165,28 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
                     fan_sys_b
                 )
             )
-            supply_flow_b = fan_sys_info_b["supply_fans_airflow"]
+            supply_flow_b = fan_sys_info_b["supply_fans_airflow"].to(ureg.cfm)
 
-            total_fan_power_b = (
-                fan_sys_info_b["supply_fans_power"]
-                + fan_sys_info_b["return_fans_power"]
-                + fan_sys_info_b["exhaust_fans_power"]
-                + fan_sys_info_b["relief_fans_power"]
-                + zonal_exhaust_fan_b_elec_power_b
-            )
+            more_than_one_supply_fan_b = True
+            total_fan_power_b = ZERO.POWER
+            if fan_sys_info_b["supply_fans_qty"] == 1:
+                more_than_one_supply_fan_b = False
 
-            more_than_one_exhaust_fan_and_energy_rec_is_relevant = True
+                total_fan_power_b = (
+                    fan_sys_info_b["supply_fans_power"]
+                    + fan_sys_info_b["return_fans_power"]
+                    + fan_sys_info_b["exhaust_fans_power"]
+                    + fan_sys_info_b["relief_fans_power"]
+                    + zonal_exhaust_fan_b_elec_power_b
+                )
+
+            more_than_one_exhaust_fan_and_energy_rec_is_relevant_b = True
             A = 0.0
             if (
-                fan_sys_b.get("air_energy_recovery") is None
+                fan_sys_b.get("air_energy_recovery") is not None
                 and fan_sys_info_b["exhaust_fans_qty"] == 1
             ):
-                more_than_one_exhaust_fan_and_energy_rec_is_relevant = False
+                more_than_one_exhaust_fan_and_energy_rec_is_relevant_b = False
                 enthalpy_rec_ratio = getattr_(
                     fan_sys_b,
                     "fan_system",
@@ -172,10 +195,10 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
                 )
                 ERV_OA_air_flow_b = getattr_(
                     fan_sys_b, "fan_system", "air_energy_recovery", "outside_air_flow"
-                )
+                ).to(ureg.cfm)
                 ERV_EX_air_flow_b = getattr_(
                     fan_sys_b, "fan_system", "air_energy_recovery", "exhaust_air_flow"
-                )
+                ).to(ureg.cfm)
                 A = (
                     ((2.2 * enthalpy_rec_ratio) - 0.5)
                     * (ERV_EX_air_flow_b + ERV_OA_air_flow_b)
@@ -196,60 +219,65 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
 
             A += MERV_adj * supply_flow_b / 4131
             if any(
-                baseline_system_type_compare(sys_type, APPLICABLE_SYS_TYPES, False)
-                for sys_type in CV_system_types
-            ):
-                expected_BHP = (0.00094 * supply_flow_b) + A
-                min_BHP = 0.00094 * supply_flow_b
-            elif any(
-                baseline_system_type_compare(sys_type, APPLICABLE_SYS_TYPES, False)
-                for sys_type in [
-                    HVAC_SYS.SYS_5,
-                    HVAC_SYS.SYS_6,
-                    HVAC_SYS.SYS_7,
-                    HVAC_SYS.SYS_8,
+                [
+                    baseline_system_type_compare(sys_type_b, target_sys_type, False)
+                    for target_sys_type in CONSTANT_VOLUME_SYS_TYPES
                 ]
             ):
-                expected_BHP = (0.0013 * supply_flow_b) + A
-                min_BHP = 0.0013 * supply_flow_b
+                expected_BHP = ((0.00094 * supply_flow_b) + A).m * ureg("hp")
+                min_BHP = (0.00094 * supply_flow_b).m * ureg("hp")
+            elif any(
+                [
+                    baseline_system_type_compare(sys_type_b, target_sys_type, False)
+                    for target_sys_type in VARIABLE_VOLUME_SYS_TYPES
+                ]
+            ):
+                expected_BHP = ((0.0013 * supply_flow_b) + A).m * ureg("hp")
+                min_BHP = (0.0013 * supply_flow_b).m * ureg("hp")
             else:
-                expected_BHP = (0.00062 * supply_flow_b) + A
-                min_BHP = 0.00062 * supply_flow_b
+                expected_BHP = ((0.00062 * supply_flow_b) + A).m * ureg("hp")
+                min_BHP = (0.00062 * supply_flow_b).m * ureg("hp")
 
-            expected_motor_efficiency = table_G3_9_1_lookup(expected_BHP.to(ureg.hp))
-            min_motor_efficiency = table_G3_9_1_lookup(min_BHP.to(ureg.hp))
+            expected_motor_efficiency = table_G3_9_1_lookup(expected_BHP)[
+                "nominal_full_load_efficiency"
+            ]
+            min_motor_efficiency = table_G3_9_1_lookup(min_BHP)[
+                "nominal_full_load_efficiency"
+            ]
 
-            expected_fan_Wattage = expected_BHP * 746 * (1 / expected_motor_efficiency)
-            min_fan_Wattage = min_BHP * 746 * (1 / min_motor_efficiency)
+            expected_fan_wattage = expected_BHP * 746 * (1 / expected_motor_efficiency)
+            min_fan_wattage = min_BHP * 746 * (1 / min_motor_efficiency)
 
             return {
-                "more_than_one_exhaust_fan_and_energy_rec_is_relevant": more_than_one_exhaust_fan_and_energy_rec_is_relevant,
+                "more_than_one_supply_fan_b": more_than_one_supply_fan_b,
+                "more_than_one_exhaust_fan_and_energy_rec_is_relevant_b": more_than_one_exhaust_fan_and_energy_rec_is_relevant_b,
                 "total_fan_power_b": total_fan_power_b,
-                "expected_fan_Wattage": expected_fan_Wattage,
-                "min_fan_Wattage": min_fan_Wattage,
+                "expected_fan_wattage": expected_fan_wattage,
+                "min_fan_wattage": min_fan_wattage,
             }
 
         def manual_check_required(self, context, calc_vals=None, data=None):
-            more_than_one_supply_fan = calc_vals["more_than_one_supply_fan"]
-            more_than_one_exhaust_fan_and_energy_rec_is_relevant = calc_vals[
-                "more_than_one_exhaust_fan_and_energy_rec_is_relevant"
+            more_than_one_supply_fan_b = calc_vals["more_than_one_supply_fan_b"]
+            more_than_one_exhaust_fan_and_energy_rec_is_relevant_b = calc_vals[
+                "more_than_one_exhaust_fan_and_energy_rec_is_relevant_b"
             ]
             total_fan_power_b = calc_vals["total_fan_power_b"]
-            expected_fan_Wattage = calc_vals["expected_fan_Wattage"]
+            expected_fan_wattage = calc_vals["expected_fan_wattage"]
 
             return not (
                 (
-                    not more_than_one_exhaust_fan_and_energy_rec_is_relevant
-                    and not more_than_one_supply_fan
-                    and std_equal(total_fan_power_b, expected_fan_Wattage)
+                    not more_than_one_exhaust_fan_and_energy_rec_is_relevant_b
+                    and (
+                        (
+                            not more_than_one_supply_fan_b
+                            and std_equal(total_fan_power_b, expected_fan_wattage)
+                        )
+                        or (total_fan_power_b < expected_fan_wattage)
+                    )
                 )
                 or (
-                    not more_than_one_exhaust_fan_and_energy_rec_is_relevant
-                    and total_fan_power_b < expected_fan_Wattage
-                )
-                or (
-                    not more_than_one_supply_fan
-                    and total_fan_power_b < expected_fan_Wattage
+                    not more_than_one_supply_fan_b
+                    and total_fan_power_b < expected_fan_wattage
                 )
             )
 
@@ -257,22 +285,22 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
             hvac_b = context.BASELINE_0
             hvac_id_b = hvac_b["id"]
 
-            more_than_one_exhaust_fan_and_energy_rec_is_relevant = calc_vals[
-                "more_than_one_exhaust_fan_and_energy_rec_is_relevant"
+            more_than_one_exhaust_fan_and_energy_rec_is_relevant_b = calc_vals[
+                "more_than_one_exhaust_fan_and_energy_rec_is_relevant_b"
             ]
-            more_than_one_supply_fan = calc_vals["more_than_one_supply_fan"]
-            expected_fan_Wattage = calc_vals["expected_fan_Wattage"]
+            more_than_one_supply_fan_b = calc_vals["more_than_one_supply_fan_b"]
+            expected_fan_wattage = calc_vals["expected_fan_wattage"]
 
             black_word = (
                 ""
-                if more_than_one_exhaust_fan_and_energy_rec_is_relevant
+                if more_than_one_exhaust_fan_and_energy_rec_is_relevant_b
                 else "energy recovery"
             )
 
             undetermined_msg = ""
             if (
-                more_than_one_supply_fan
-                and more_than_one_exhaust_fan_and_energy_rec_is_relevant
+                more_than_one_supply_fan_b
+                and more_than_one_exhaust_fan_and_energy_rec_is_relevant_b
             ):
                 undetermined_msg = (
                     f"{hvac_id_b} has more than one supply fan and/or more than one exhaust fan associated with the HVAC system in the baseline and "
@@ -283,56 +311,54 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
                     f"Fan power for {hvac_id_b} is greater than expected per Section and Table G3.1.2.9 assuming no pressure drop adjustments (e.g., sound attenuation, air filtration, fully ducted return "
                     f"when required by code, airflow control devices, carbon and other gas-phase air cleaners, coil runaround loops, evaporative humidifier/coolers in series with another cooling coil, "
                     f"exhaust systems serving fume hoods, and laboratory and vivarium exhaust systems in high-rise buildings) per Table 6.5.3.1-2 other than {black_word} and "
-                    f"MERV filters defined in the RMD (if modeled). Expected Wattage = {expected_fan_Wattage.to(ureg.kW)} kW. however not all pressure drop adjustments are able to be captured in the RMD so conduct manual check."
+                    f"MERV filters defined in the RMD (if modeled). Expected Wattage = {expected_fan_wattage.to(ureg.kW)} kW. however not all pressure drop adjustments are able to be captured in the RMD so conduct manual check."
                 )
 
             return undetermined_msg
 
         def rule_check(self, context, calc_vals=None, data=None):
-            more_than_one_exhaust_fan_and_energy_rec_is_relevant = calc_vals[
-                "more_than_one_exhaust_fan_and_energy_rec_is_relevant"
+            more_than_one_exhaust_fan_and_energy_rec_is_relevant_b = calc_vals[
+                "more_than_one_exhaust_fan_and_energy_rec_is_relevant_b"
             ]
-            more_than_one_supply_fan = calc_vals["more_than_one_supply_fan"]
+            more_than_one_supply_fan_b = calc_vals["more_than_one_supply_fan_b"]
             total_fan_power_b = calc_vals["total_fan_power_b"]
-            expected_fan_Wattage = calc_vals["expected_fan_Wattage"]
+            expected_fan_wattage = calc_vals["expected_fan_wattage"]
 
-            return (
-                not more_than_one_exhaust_fan_and_energy_rec_is_relevant
-                and not more_than_one_supply_fan
-                and std_equal(total_fan_power_b, expected_fan_Wattage)
-                or (
-                    not more_than_one_exhaust_fan_and_energy_rec_is_relevant
-                    and total_fan_power_b < expected_fan_Wattage
+            return not more_than_one_exhaust_fan_and_energy_rec_is_relevant_b and (
+                (
+                    not more_than_one_supply_fan_b
+                    and std_equal(total_fan_power_b, expected_fan_wattage)
                 )
+                or (total_fan_power_b < expected_fan_wattage)
             )
 
         def get_pass_msg(self, context, calc_vals=None, data=None):
             hvac_b = context.BASELINE_0
             hvac_id_b = hvac_b["id"]
-            more_than_one_exhaust_fan_and_energy_rec_is_relevant = calc_vals[
-                "more_than_one_exhaust_fan_and_energy_rec_is_relevant"
+            more_than_one_exhaust_fan_and_energy_rec_is_relevant_b = calc_vals[
+                "more_than_one_exhaust_fan_and_energy_rec_is_relevant_b"
             ]
             total_fan_power_b = calc_vals["total_fan_power_b"]
-            expected_fan_Wattage = calc_vals["expected_fan_Wattage"]
-            min_fan_Wattage = calc_vals["min_fan_Wattage"]
+            expected_fan_wattage = calc_vals["expected_fan_wattage"]
+            min_fan_wattage = calc_vals["min_fan_wattage"]
 
             pass_msg = ""
             if (
-                not more_than_one_exhaust_fan_and_energy_rec_is_relevant
-                and total_fan_power_b < expected_fan_Wattage
+                not more_than_one_exhaust_fan_and_energy_rec_is_relevant_b
+                and total_fan_power_b < expected_fan_wattage
             ):
                 pass_msg = (
                     f"The total fan power for {hvac_id_b} is modeled as {total_fan_power_b.to(ureg.kW)} kW which is less than the expected including pressure drop adjustments "
-                    f"for exhaust air energy recovery and MERV filters as applicable which was calculated as {min_fan_Wattage.to(ureg.kW)} kW. Pass because this is generally considered more conservative."
+                    f"for exhaust air energy recovery and MERV filters as applicable which was calculated as {min_fan_wattage.to(ureg.kW)} kW. Pass because this is generally considered more conservative."
                 )
 
             return pass_msg
 
         def get_fail_msg(self, context, calc_vals=None, data=None):
             total_fan_power_b = calc_vals["total_fan_power_b"]
-            min_fan_Wattage = calc_vals["min_fan_Wattage"]
+            min_fan_wattage = calc_vals["min_fan_wattage"]
 
             return (
                 f"The total fan power for <insert hvac.id> is modeled as {total_fan_power_b.to(ureg.kW)} kW which is less than the expected including pressure drop adjustments "
-                f"for exhaust air energy recovery and MERV filters as applicable which was calculated as {min_fan_Wattage.to(ureg.kW)} kW ."
+                f"for exhaust air energy recovery and MERV filters as applicable which was calculated as {min_fan_wattage.to(ureg.kW)} kW ."
             )
