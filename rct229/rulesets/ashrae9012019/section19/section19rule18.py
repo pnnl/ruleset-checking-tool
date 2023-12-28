@@ -100,11 +100,12 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
             get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmd_b)
         )
 
-        zonal_exhaust_fan_b_elec_power_b = ZERO.POWER
+        zonal_exhaust_fan_elec_power_b = {}
         for hvac_id_b in find_all(
             "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].id",
             rmd_b,
         ):
+            zonal_exhaust_fan_elec_power_b[hvac_id_b] = ZERO.POWER
             for zone_id_b in zones_and_terminal_units_served_by_hvac_sys_dict_b[
                 hvac_id_b
             ]["zone_list"]:
@@ -112,23 +113,17 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
                     f'$.buildings[*].building_segments[*].zones[*][?(@.id="{zone_id_b}")].zonal_exhaust_fan',
                     rmd_b,
                 )
-                if zonal_exhaust_fan_b is not None:
-                    zonal_exhaust_fan_b_elec_power_b = get_fan_object_electric_power(
-                        zonal_exhaust_fan_b
-                    )
+                if zonal_exhaust_fan_b:
+                    zonal_exhaust_fan_elec_power_b[
+                        hvac_id_b
+                    ] += get_fan_object_electric_power(zonal_exhaust_fan_b)
 
         return {
             "baseline_system_types_dict": baseline_system_types_dict,
             "applicable_hvac_sys_ids": applicable_hvac_sys_ids,
             "zones_and_terminal_units_served_by_hvac_sys_dict_b": zones_and_terminal_units_served_by_hvac_sys_dict_b,
-            "zonal_exhaust_fan_b_elec_power_b": zonal_exhaust_fan_b_elec_power_b,
+            "zonal_exhaust_fan_elec_power_b": zonal_exhaust_fan_elec_power_b,
         }
-
-    def list_filter(self, context_item, data):
-        hvac_b = context_item.BASELINE_0
-        applicable_hvac_sys_ids = data["applicable_hvac_sys_ids"]
-
-        return hvac_b["id"] in applicable_hvac_sys_ids
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
@@ -153,7 +148,9 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
             hvac_b_id = hvac_b["id"]
 
             baseline_system_types_dict = data["baseline_system_types_dict"]
-            zonal_exhaust_fan_b_elec_power_b = data["zonal_exhaust_fan_b_elec_power_b"]
+            zonal_exhaust_fan_elec_power_b = data["zonal_exhaust_fan_elec_power_b"][
+                hvac_b_id
+            ]
 
             sys_type_b = list(baseline_system_types_dict.keys())[
                 list(baseline_system_types_dict.values()).index([hvac_b_id])
@@ -177,13 +174,13 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
                     + fan_sys_info_b["return_fans_power"]
                     + fan_sys_info_b["exhaust_fans_power"]
                     + fan_sys_info_b["relief_fans_power"]
-                    + zonal_exhaust_fan_b_elec_power_b
+                    + zonal_exhaust_fan_elec_power_b
                 )
 
             more_than_one_exhaust_fan_and_energy_rec_is_relevant_b = True
             A = 0.0
             if (
-                fan_sys_b.get("air_energy_recovery") is not None
+                fan_sys_b.get("air_energy_recovery")
                 and fan_sys_info_b["exhaust_fans_qty"] == 1
             ):
                 more_than_one_exhaust_fan_and_energy_rec_is_relevant_b = False
@@ -194,10 +191,10 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
                     "enthalpy_recovery_ratio",
                 )
                 ERV_OA_air_flow_b = getattr_(
-                    fan_sys_b, "fan_system", "air_energy_recovery", "outside_air_flow"
+                    fan_sys_b, "fan_system", "air_energy_recovery", "outdoor_airflow"
                 ).to(ureg.cfm)
                 ERV_EX_air_flow_b = getattr_(
-                    fan_sys_b, "fan_system", "air_energy_recovery", "exhaust_air_flow"
+                    fan_sys_b, "fan_system", "air_energy_recovery", "exhaust_airflow"
                 ).to(ureg.cfm)
                 A = (
                     ((2.2 * enthalpy_rec_ratio) - 0.5)
@@ -268,14 +265,15 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
 
             return not (
                 (
-                    not more_than_one_exhaust_fan_and_energy_rec_is_relevant_b
-                    and (
-                        (
-                            not more_than_one_supply_fan_b
-                            and std_equal(total_fan_power_b, expected_fan_wattage_b)
-                        )
-                        or (total_fan_power_b < expected_fan_wattage_b)
+                    not (
+                        more_than_one_exhaust_fan_and_energy_rec_is_relevant_b
+                        or more_than_one_supply_fan_b
                     )
+                    and std_equal(total_fan_power_b, expected_fan_wattage_b)
+                )
+                or (
+                    not more_than_one_supply_fan_b
+                    and total_fan_power_b < expected_fan_wattage_b
                 )
                 or (
                     not more_than_one_supply_fan_b
@@ -302,7 +300,7 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
             undetermined_msg = ""
             if (
                 more_than_one_supply_fan_b
-                and more_than_one_exhaust_fan_and_energy_rec_is_relevant_b
+                or more_than_one_exhaust_fan_and_energy_rec_is_relevant_b
             ):
                 undetermined_msg = (
                     f"{hvac_id_b} has more than one supply fan and/or more than one exhaust fan associated with the HVAC system in the baseline and "
@@ -326,35 +324,10 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
             total_fan_power_b = calc_vals["total_fan_power_b"]
             expected_fan_wattage_b = calc_vals["expected_fan_wattage_b"]
 
-            return not more_than_one_exhaust_fan_and_energy_rec_is_relevant_b and (
-                (
-                    not more_than_one_supply_fan_b
-                    and std_equal(total_fan_power_b, expected_fan_wattage_b)
-                )
-                or (total_fan_power_b < expected_fan_wattage_b)
-            )
-
-        def get_pass_msg(self, context, calc_vals=None, data=None):
-            hvac_b = context.BASELINE_0
-            hvac_id_b = hvac_b["id"]
-            more_than_one_exhaust_fan_and_energy_rec_is_relevant_b = calc_vals[
-                "more_than_one_exhaust_fan_and_energy_rec_is_relevant_b"
-            ]
-            total_fan_power_b = calc_vals["total_fan_power_b"]
-            expected_fan_wattage_b = calc_vals["expected_fan_wattage_b"]
-            min_fan_wattage_b = calc_vals["min_fan_wattage_b"]
-
-            pass_msg = ""
-            if (
-                not more_than_one_exhaust_fan_and_energy_rec_is_relevant_b
-                and total_fan_power_b < expected_fan_wattage_b
-            ):
-                pass_msg = (
-                    f"The total fan power for {hvac_id_b} is modeled as {total_fan_power_b.to(ureg.kW)} kW which is less than the expected including pressure drop adjustments "
-                    f"for exhaust air energy recovery and MERV filters as applicable which was calculated as {min_fan_wattage_b.to(ureg.kW)} kW. Pass because this is generally considered more conservative."
-                )
-
-            return pass_msg
+            return not (
+                more_than_one_exhaust_fan_and_energy_rec_is_relevant_b
+                or more_than_one_supply_fan_b
+            ) and std_equal(total_fan_power_b, expected_fan_wattage_b)
 
         def get_fail_msg(self, context, calc_vals=None, data=None):
             total_fan_power_b = calc_vals["total_fan_power_b"]

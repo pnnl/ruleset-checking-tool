@@ -21,7 +21,7 @@ def get_fan_system_object_supply_return_exhaust_relief_total_power_flow(fan_syst
     ----------
     fan_system: dict fan_system at heating_ventilating_air_conditioning_systems level
 
-    Returns dict dict that includes supply/return/relief/exhaust fans power/cfm/quantify/pressure_rise keys
+    Returns dict that includes supply/return/relief/exhaust fans power/cfm/quantify/pressure_rise keys
     -------
 
     """

@@ -59,7 +59,7 @@ def table_G3_9_1_lookup(shaft_input_power):
         minimum_shaft_input_power = 200.0
 
     nominal_full_load_efficiency = find_osstd_table_entry(
-        [("minimum_shaft_input_power", minimum_shaft_input_power)],
+        [("minimum_capacity", minimum_shaft_input_power)],
         osstd_table=data["ashrae_90_1_prm_2019.motors"],
     )["nominal_full_load_efficiency"]
 
