@@ -13,7 +13,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types i
 )
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.pint_utils import ZERO
+from rct229.utils.pint_utils import ZERO, CalcQ
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_11_1,
@@ -113,9 +113,11 @@ class Section23Rule9(RuleDefinitionListIndexedBase):
             )
 
             return {
-                "minimum_airflow": min_volume_flowrate_b,
-                "minimum_ventilation_airflow": min_ventilation_flowrate_b,
-                "max_supply_airflow": max_supply_flowrate,
+                "minimum_airflow": CalcQ("air_flow_rate", min_volume_flowrate_b),
+                "minimum_ventilation_airflow": CalcQ(
+                    "air_flow_rate", min_ventilation_flowrate_b
+                ),
+                "max_supply_airflow": CalcQ("air_flow_rate", max_supply_flowrate),
             }
 
         def manual_check_required(self, context, calc_vals=None, data=None):

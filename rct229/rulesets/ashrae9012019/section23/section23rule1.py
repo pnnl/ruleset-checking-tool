@@ -13,6 +13,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types i
 )
 from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_
+from rct229.utils.pint_utils import CalcQ
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_2,
@@ -106,12 +107,14 @@ class Section23Rule1(RuleDefinitionListIndexedBase):
                 None,
             )
             return {
-                "heatpump_low_shutoff": heatpump_low_shutoff_b,
+                "heatpump_low_shutoff_temperature": CalcQ(
+                    "temperature", heatpump_low_shutoff_b
+                ),
                 "hvac_type": hvac_type_b,
             }
 
         def manual_check_required(self, context, calc_vals=None, data=None):
-            heatpump_low_shutoff_b = calc_vals["heatpump_low_shutoff"]
+            heatpump_low_shutoff_b = calc_vals["heatpump_low_shutoff_temperature"]
             hvac_type_b = calc_vals["hvac_type"]
             return (
                 hvac_type_b == HVAC_SYS.SYS_2
@@ -121,7 +124,7 @@ class Section23Rule1(RuleDefinitionListIndexedBase):
             )
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
-            heatpump_low_shutoff_b = calc_vals["heatpump_low_shutoff"]
+            heatpump_low_shutoff_b = calc_vals["heatpump_low_shutoff_temperature"]
             return (
                 f"Undetermined because the low temperature shutoff is between 17F and 25F for System Type 2.  "
                 f"Check with the rating authority to ensure correct shutoff temperature.  Low shutoff temperature "
@@ -129,7 +132,7 @@ class Section23Rule1(RuleDefinitionListIndexedBase):
             )
 
         def rule_check(self, context, calc_vals=None, data=None):
-            heatpump_low_shutoff_b = calc_vals["heatpump_low_shutoff"]
+            heatpump_low_shutoff_b = calc_vals["heatpump_low_shutoff_temperature"]
             hvac_type_b = calc_vals["hvac_type"]
             return (
                 hvac_type_b == HVAC_SYS.SYS_2
@@ -140,7 +143,7 @@ class Section23Rule1(RuleDefinitionListIndexedBase):
             )
 
         def get_fail_msg(self, context, calc_vals=None, data=None):
-            heatpump_low_shutoff_b = calc_vals["heatpump_low_shutoff"]
+            heatpump_low_shutoff_b = calc_vals["heatpump_low_shutoff_temperature"]
             return (
                 f"Fail because low temperature heat pump shutoff is above 25F for system 2. The modeled low "
                 f"temperature heat pump shutoff value is {heatpump_low_shutoff_b}. "
