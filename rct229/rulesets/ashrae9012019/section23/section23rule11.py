@@ -120,7 +120,9 @@ class Section23Rule11(RuleDefinitionListIndexedBase):
             return {
                 "temperature_control": temperature_control_b,
                 "supply_air_temperature_reset_load_fraction": supply_air_temp_reset_load_frac_b,
-                "reset_differential_temperature": CalcQ("temperature_difference", reset_differential_temperature_b),
+                "reset_differential_temperature": CalcQ(
+                    "temperature_difference", reset_differential_temperature_b
+                ),
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
@@ -138,5 +140,7 @@ class Section23Rule11(RuleDefinitionListIndexedBase):
                 == TARGET_SUPPLY_AIR_TEMP_RESET_LOAD_FRAC
             ) or (
                 temperature_control_b == FanSystemTemperatureControlOptions.ZONE_RESET
-                and std_equal(TARGET_RESET_DIFFERENTIAL_TEMP, reset_differential_temperature_b)
+                and std_equal(
+                    TARGET_RESET_DIFFERENTIAL_TEMP, reset_differential_temperature_b
+                )
             )
