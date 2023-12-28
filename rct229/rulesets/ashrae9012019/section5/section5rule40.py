@@ -118,8 +118,9 @@ class Section5Rule40(RuleDefinitionListIndexedBase):
                     climate_zone = data["climate_zone"]
                     u_factor_b = subsurface_b["u_factor"]
                     subsurface_class_b = subsurface_b["subclassification"]
+                    target_u_factor_b = ZERO.U_FACTOR
 
-                    target_u_factor_nonres = (
+                    target_u_factor_nonres_b = (
                         table_G34_lookup(
                             climate_zone,
                             SCC.EXTERIOR_NON_RESIDENTIAL,
@@ -130,7 +131,7 @@ class Section5Rule40(RuleDefinitionListIndexedBase):
                         else ZERO.U_FACTOR
                     )
 
-                    target_u_factor_res = (
+                    target_u_factor_res_b = (
                         table_G34_lookup(
                             climate_zone,
                             SCC.EXTERIOR_RESIDENTIAL,
@@ -141,7 +142,7 @@ class Section5Rule40(RuleDefinitionListIndexedBase):
                         else ZERO.U_FACTOR
                     )
 
-                    target_u_factor_semiheated = (
+                    target_u_factor_semiheated_b = (
                         table_G34_lookup(
                             climate_zone,
                             SCC.SEMI_EXTERIOR,
@@ -153,46 +154,18 @@ class Section5Rule40(RuleDefinitionListIndexedBase):
                     )
 
                     if scc_dict_b == SCC.EXTERIOR_NON_RESIDENTIAL:
-                        target_u_factor = target_u_factor_nonres
+                        target_u_factor_b = target_u_factor_nonres_b
                     elif scc_dict_b == SCC.EXTERIOR_RESIDENTIAL:
-                        target_u_factor = target_u_factor_res
+                        target_u_factor_b = target_u_factor_res_b
                     elif scc_dict_b == SCC.SEMI_EXTERIOR:
-                        target_u_factor = target_u_factor_semiheated
+                        target_u_factor_b = target_u_factor_semiheated_b
                     else:
                         assert scc_dict_b == SCC.EXTERIOR_MIXED, (
                             f"Surface conditioning category is not one of the five types: EXTERIOR_NON_RESIDENTIAL, "
                             f"EXTERIOR_RESIDENTIAL, SEMI_EXTERIOR, EXTERIOR_MIXED, UNREGULATED, "
                             f"got {scc_dict_b} instead "
                         )
-                        target_u_factor = target_u_factor_res
-
-                    return {
-                        "scc_dict_b": scc_dict_b,
-                        "target_u_factor_res_b": CalcQ(
-                            "thermal_transmittance", target_u_factor_res
-                        ),
-                        "target_u_factor_nonres_b": CalcQ(
-                            "thermal_transmittance", target_u_factor_nonres
-                        ),
-                        "target_u_factor_semiheated_b": CalcQ(
-                            "thermal_transmittance", target_u_factor_semiheated
-                        ),
-                        "u_factor_b": CalcQ("thermal_transmittance", u_factor_b),
-                        "target_u_factor_b": CalcQ(
-                            "thermal_transmittance", target_u_factor
-                        ),
-                    }
-
-                def manual_check_required(self, context, calc_vals=None, data=None):
-                    subsurface_b = context.BASELINE_0
-                    scc_dict_b = calc_vals["scc_dict_b"]
-
-                    target_u_factor_res_b = calc_vals["target_u_factor_res_b"]
-                    target_u_factor_nonres_b = calc_vals["target_u_factor_nonres_b"]
-                    target_u_factor_semiheated_b = calc_vals[
-                        "target_u_factor_semiheated_b"
-                    ]
-                    return subsurface_b["subclassification"] in UNEXPECTED_DOOR or (
+                    manual_check_required_flag = (
                         scc_dict_b == SCC.EXTERIOR_MIXED
                         and not (
                             std_equal(target_u_factor_nonres_b, target_u_factor_res_b)
@@ -202,27 +175,79 @@ class Section5Rule40(RuleDefinitionListIndexedBase):
                         )
                     )
 
+                    return {
+                        "scc_dict_b": scc_dict_b,
+                        "subsurface_class_b": subsurface_class_b,
+                        "target_u_factor_res_b": CalcQ(
+                            "thermal_transmittance", target_u_factor_res_b
+                        ),
+                        "target_u_factor_nonres_b": CalcQ(
+                            "thermal_transmittance", target_u_factor_nonres_b
+                        ),
+                        "target_u_factor_semiheated_b": CalcQ(
+                            "thermal_transmittance", target_u_factor_semiheated_b
+                        ),
+                        "u_factor_b": CalcQ("thermal_transmittance", u_factor_b),
+                        "target_u_factor_b": CalcQ(
+                            "thermal_transmittance", target_u_factor_b
+                        ),
+                        "manual_check_required_flag": manual_check_required_flag,
+                    }
+
+                def manual_check_required(self, context, calc_vals=None, data=None):
+                    manual_check_required_flag = calc_vals["manual_check_required_flag"]
+                    target_u_factor_res_b = calc_vals["target_u_factor_res_b"]
+                    target_u_factor_nonres_b = calc_vals["target_u_factor_nonres_b"]
+                    target_u_factor_semiheated_b = calc_vals[
+                        "target_u_factor_semiheated_b"
+                    ]
+                    subsurface_class_b = calc_vals["subsurface_class_b"]
+                    u_factor_b = calc_vals["u_factor_b"]
+
+                    return subsurface_class_b in UNEXPECTED_DOOR or (
+                        manual_check_required_flag
+                        and (
+                            std_equal(u_factor_b, target_u_factor_res_b)
+                            or std_equal(u_factor_b, target_u_factor_nonres_b)
+                            or std_equal(u_factor_b, target_u_factor_semiheated_b)
+                        )
+                    )
+
                 def get_manual_check_required_msg(
                     self, context, calc_vals=None, data=None
                 ):
                     u_factor_b = calc_vals["u_factor_b"]
-
-                    return (
-                        f"Zone has both residential and non-residential type spaces and the requirement for "
-                        f"U-factor for doors are different. Verify door U-factor {u_factor_b} is modeled "
-                        f"correctly."
+                    manual_check_required_flag = calc_vals["manual_check_required_flag"]
+                    target_u_factor_res_b = calc_vals["target_u_factor_res_b"]
+                    target_u_factor_nonres_b = calc_vals["target_u_factor_nonres_b"]
+                    target_u_factor_semiheated_b = calc_vals[
+                        "target_u_factor_semiheated_b"
+                    ]
+                    manual_check_required_msg = (
+                        f"Prescribed u-factor requirement could not be determined. Verify "
+                        f"the baseline door u-factor (${u_factor_b}) is modeled correctly."
+                        if manual_check_required_flag
+                        and (not std_equal(u_factor_b, target_u_factor_res_b))
+                        and (not std_equal(u_factor_b, target_u_factor_nonres_b))
+                        and (not std_equal(u_factor_b, target_u_factor_semiheated_b))
+                        else ""
                     )
+                    return manual_check_required_msg
 
                 def rule_check(self, context, calc_vals=None, data=None):
                     u_factor_b = calc_vals["u_factor_b"]
                     target_u_factor_b = calc_vals["target_u_factor_b"]
-                    return std_equal(target_u_factor_b, u_factor_b)
+                    manual_check_required_flag = calc_vals["manual_check_required_flag"]
+                    return (not manual_check_required_flag) and std_equal(
+                        target_u_factor_b, u_factor_b
+                    )
 
                 def get_fail_msg(self, context, calc_vals=None, data=None):
                     u_factor_b = calc_vals["u_factor_b"]
                     target_u_factor_b = calc_vals["target_u_factor_b"]
-                    if std_lt(std_val=target_u_factor_b, val=u_factor_b):
-                        fail_msg = "Rule evaluation fails with a conservative outcome."
-                    else:
-                        fail_msg = ""
+                    fail_msg = (
+                        "Rule evaluation fails with a conservative outcome."
+                        if std_lt(std_val=target_u_factor_b, val=u_factor_b)
+                        else ""
+                    )
                     return fail_msg
