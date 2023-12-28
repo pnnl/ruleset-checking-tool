@@ -164,26 +164,25 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
             )
             supply_flow_b = fan_sys_info_b["supply_fans_airflow"].to(ureg.cfm)
 
-            more_than_one_supply_fan_b = True
-            total_fan_power_b = ZERO.POWER
-            if fan_sys_info_b["supply_fans_qty"] == 1:
-                more_than_one_supply_fan_b = False
-
-                total_fan_power_b = (
+            more_than_one_supply_fan_b = fan_sys_info_b["supply_fans_qty"] == 1
+            total_fan_power_b = (
+                (
                     fan_sys_info_b["supply_fans_power"]
                     + fan_sys_info_b["return_fans_power"]
                     + fan_sys_info_b["exhaust_fans_power"]
                     + fan_sys_info_b["relief_fans_power"]
                     + zonal_exhaust_fan_elec_power_b
                 )
+                if not more_than_one_supply_fan_b
+                else ZERO.POWER
+            )
 
-            more_than_one_exhaust_fan_and_energy_rec_is_relevant_b = True
             A = 0.0
-            if (
+            more_than_one_exhaust_fan_and_energy_rec_is_relevant_b = (
                 fan_sys_b.get("air_energy_recovery")
                 and fan_sys_info_b["exhaust_fans_qty"] == 1
-            ):
-                more_than_one_exhaust_fan_and_energy_rec_is_relevant_b = False
+            )
+            if more_than_one_exhaust_fan_and_energy_rec_is_relevant_b:
                 enthalpy_rec_ratio = getattr_(
                     fan_sys_b,
                     "fan_system",
@@ -263,22 +262,10 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
             total_fan_power_b = calc_vals["total_fan_power_b"]
             expected_fan_wattage_b = calc_vals["expected_fan_wattage_b"]
 
-            return not (
-                (
-                    not (
-                        more_than_one_exhaust_fan_and_energy_rec_is_relevant_b
-                        or more_than_one_supply_fan_b
-                    )
-                    and std_equal(total_fan_power_b, expected_fan_wattage_b)
-                )
-                or (
-                    not more_than_one_supply_fan_b
-                    and total_fan_power_b < expected_fan_wattage_b
-                )
-                or (
-                    not more_than_one_supply_fan_b
-                    and total_fan_power_b < expected_fan_wattage_b
-                )
+            return (
+                more_than_one_supply_fan_b
+                or more_than_one_exhaust_fan_and_energy_rec_is_relevant_b
+                or total_fan_power_b > expected_fan_wattage_b
             )
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
@@ -317,17 +304,10 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
             return undetermined_msg
 
         def rule_check(self, context, calc_vals=None, data=None):
-            more_than_one_exhaust_fan_and_energy_rec_is_relevant_b = calc_vals[
-                "more_than_one_exhaust_fan_and_energy_rec_is_relevant_b"
-            ]
-            more_than_one_supply_fan_b = calc_vals["more_than_one_supply_fan_b"]
             total_fan_power_b = calc_vals["total_fan_power_b"]
             expected_fan_wattage_b = calc_vals["expected_fan_wattage_b"]
 
-            return not (
-                more_than_one_exhaust_fan_and_energy_rec_is_relevant_b
-                or more_than_one_supply_fan_b
-            ) and std_equal(total_fan_power_b, expected_fan_wattage_b)
+            return std_equal(total_fan_power_b, expected_fan_wattage_b)
 
         def get_fail_msg(self, context, calc_vals=None, data=None):
             total_fan_power_b = calc_vals["total_fan_power_b"]
