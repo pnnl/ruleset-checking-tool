@@ -71,13 +71,15 @@ def evaluate_all_rules(ruleset_model_path_list):
     return report
 
 
-def evaluate_rule(rule, rmrs):
+def evaluate_rule(rule, rmrs, test=False):
     """Evaluates a single rule against an RMR trio
 
     Parameters
     ----------
     rmrs : RuleSetModels
         Object containing the RMRs required by enum schema
+    test: Boolean
+        A flag to indicate whether the evaluate rule is a software test workflow or not.
 
     Returns
     -------
@@ -98,10 +100,12 @@ def evaluate_rule(rule, rmrs):
         }
     """
 
-    return evaluate_rules([rule], rmrs)
+    return evaluate_rules([rule], rmrs, test=test)
 
 
-def evaluate_rules(rules_list: list, rmds: RuleSetModels, unit_system=UNIT_SYSTEM.IP):
+def evaluate_rules(
+    rules_list: list, rmds: RuleSetModels, unit_system=UNIT_SYSTEM.IP, test=False
+):
     """Evaluates a list of rules against an RMDs
 
     Parameters
@@ -110,6 +114,8 @@ def evaluate_rules(rules_list: list, rmds: RuleSetModels, unit_system=UNIT_SYSTE
         list of rule definitions
     rmds : RuleSetModels
         Object containing RPDs for ruleset evaluation
+    test: Boolean
+        Flag to indicate whether this run is for software testing workflow or not.
 
     Returns
     -------
@@ -141,7 +147,7 @@ def evaluate_rules(rules_list: list, rmds: RuleSetModels, unit_system=UNIT_SYSTE
 
     for rule_model in rmds.get_ruleset_model_types():
         if rmds_used[rule_model]:
-            rmd_validation = validate_rmr(rmds[rule_model])
+            rmd_validation = validate_rmr(rmds[rule_model], test)
             if rmd_validation["passed"] is not True:
                 invalid_rmds[rule_model] = rmd_validation["error"]
 
