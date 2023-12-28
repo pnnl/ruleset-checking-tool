@@ -1,5 +1,4 @@
 from rct229.rule_engine.partial_rule_definition import PartialRuleDefinition
-from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rulesets.ashrae9012019 import BASELINE_0
@@ -30,13 +29,13 @@ class Section23Rule5(RuleDefinitionListIndexedBase):
             ),
             each_rule=Section23Rule5.RuleSetModelInstanceRule(),
             index_rmr=BASELINE_0,
-            id="23-4",
+            id="23-5",
             description="For baseline systems 6 and 8, Fans in parallel VAV fan-powered boxes shall run as the first stage of heating before the reheat coil is energized.",
             ruleset_section_title="HVAC - Airside",
             standard_section="G3.1.3.14 Fan Power and Control (Systems 6 and 8)",
             is_primary_rule=True,
             rmr_context="ruleset_model_descriptions/0",
-            list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
+            list_path="$.buildings[*].building_segments[*].zones[*].terminals[*]",
         )
 
     def create_data(self, context, data):
