@@ -11,8 +11,11 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_s
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types import (
     get_baseline_system_types,
 )
+from rct229.schema.config import ureg
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import getattr_
+from rct229.utils.pint_utils import CalcQ
+from rct229.utils.std_comparisons import std_equal
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_11_1,
@@ -24,7 +27,7 @@ FanSystemTemperatureControlOptions = SchemaEnums.schema_enums[
 ]
 
 TARGET_SUPPLY_AIR_TEMP_RESET_LOAD_FRAC = 0.5
-TARGET_RESET_DIFFERENTIAL_TEMP = 5
+TARGET_RESET_DIFFERENTIAL_TEMP = 5 * ureg("R")
 
 
 class Section23Rule11(RuleDefinitionListIndexedBase):
@@ -117,7 +120,7 @@ class Section23Rule11(RuleDefinitionListIndexedBase):
             return {
                 "temperature_control": temperature_control_b,
                 "supply_air_temperature_reset_load_fraction": supply_air_temp_reset_load_frac_b,
-                "reset_differential_temperature": reset_differential_temperature_b,
+                "reset_differential_temperature": CalcQ("temperature_difference", reset_differential_temperature_b),
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
@@ -135,5 +138,5 @@ class Section23Rule11(RuleDefinitionListIndexedBase):
                 == TARGET_SUPPLY_AIR_TEMP_RESET_LOAD_FRAC
             ) or (
                 temperature_control_b == FanSystemTemperatureControlOptions.ZONE_RESET
-                and reset_differential_temperature_b == TARGET_RESET_DIFFERENTIAL_TEMP
+                and std_equal(TARGET_RESET_DIFFERENTIAL_TEMP, reset_differential_temperature_b)
             )
