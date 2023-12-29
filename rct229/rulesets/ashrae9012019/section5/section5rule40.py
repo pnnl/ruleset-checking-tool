@@ -159,14 +159,14 @@ class Section5Rule40(RuleDefinitionListIndexedBase):
                         target_u_factor_b = target_u_factor_res_b
                     elif scc_dict_b == SCC.SEMI_EXTERIOR:
                         target_u_factor_b = target_u_factor_semiheated_b
+                    elif target_u_factor_nonres_b == target_u_factor_res_b:
+                        target_u_factor_b = target_u_factor_nonres_b
                     else:
                         assert scc_dict_b == SCC.EXTERIOR_MIXED, (
                             f"Surface conditioning category is not one of the five types: EXTERIOR_NON_RESIDENTIAL, "
                             f"EXTERIOR_RESIDENTIAL, SEMI_EXTERIOR, EXTERIOR_MIXED, UNREGULATED, "
                             f"got {scc_dict_b} instead "
                         )
-                        if target_u_factor_nonres_b == target_u_factor_res_b:
-                            target_u_factor_b = target_u_factor_res_b
                     manual_check_required_flag = (
                         scc_dict_b == SCC.EXTERIOR_MIXED
                         and target_u_factor_nonres_b != target_u_factor_res_b
