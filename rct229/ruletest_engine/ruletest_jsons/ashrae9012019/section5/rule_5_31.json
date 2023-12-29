@@ -3,7 +3,7 @@
         "Section": 5,
         "Rule": 31,
         "Test": "a",
-        "test_description": "Project has one building segment and includes a space with a roof surface. The baseline roof emittance is correctly set to 0.9",
+        "test_description": "Project has one building segment and includes a space with a roof surface. The roof surface thermal emittance in the proposed and user models is equal to 0.9",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-31",
@@ -11,7 +11,7 @@
             "rule_description": "The baseline roof surfaces shall be modeled using a solar reflectance of 0.30.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
-            "comparison_value": "Expected Value",
+            "comparison_value": "User Model",
             "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
@@ -86,7 +86,7 @@
                                 ]
                             }
                         ],
-                        "type": "BASELINE_0"
+                        "type": "USER"
                     }
                 ]
             }
@@ -179,7 +179,7 @@
                                 ]
                             }
                         ],
-                        "type": "BASELINE_0"
+                        "type": "PROPOSED"
                     }
                 ]
             }
