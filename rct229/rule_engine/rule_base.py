@@ -212,12 +212,12 @@ class RuleDefinitionBase:
                     outcome["result"] = RCTOutcomeLabel.FAILED
                     outcome["message"] = str(fe)
             else:
-                outcome["result"] = "UNDETERMINED"
+                outcome["result"] = RCTOutcomeLabel.UNDETERMINED
                 outcome["message"] = context_validity_dict
         else:
             # context should be a string indicating the RMDs that are missing
             # such as "MISSING_BASELINE"
-            outcome["result"] = "UNDETERMINED"
+            outcome["result"] = RCTOutcomeLabel.UNDETERMINED
             outcome["message"] = context_or_string
 
         return outcome
@@ -333,7 +333,7 @@ class RuleDefinitionBase:
                 else ""
             )
             if invalid_str:
-                retval[f"INVALID_{ruleset_model}_CONTEXT"] = invalid_str
+                retval[f"{ruleset_model}_MISSING_DATA"] = invalid_str
 
         return retval
 
