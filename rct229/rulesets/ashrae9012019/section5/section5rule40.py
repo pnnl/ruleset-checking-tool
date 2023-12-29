@@ -165,14 +165,11 @@ class Section5Rule40(RuleDefinitionListIndexedBase):
                             f"EXTERIOR_RESIDENTIAL, SEMI_EXTERIOR, EXTERIOR_MIXED, UNREGULATED, "
                             f"got {scc_dict_b} instead "
                         )
+                        if target_u_factor_nonres_b == target_u_factor_res_b:
+                            target_u_factor_b = target_u_factor_res_b
                     manual_check_required_flag = (
                         scc_dict_b == SCC.EXTERIOR_MIXED
-                        and not (
-                            std_equal(target_u_factor_nonres_b, target_u_factor_res_b)
-                            and std_equal(
-                                target_u_factor_nonres_b, target_u_factor_semiheated_b
-                            )
-                        )
+                        and target_u_factor_nonres_b != target_u_factor_res_b
                     )
 
                     return {
@@ -183,9 +180,6 @@ class Section5Rule40(RuleDefinitionListIndexedBase):
                         ),
                         "target_u_factor_nonres_b": CalcQ(
                             "thermal_transmittance", target_u_factor_nonres_b
-                        ),
-                        "target_u_factor_semiheated_b": CalcQ(
-                            "thermal_transmittance", target_u_factor_semiheated_b
                         ),
                         "u_factor_b": CalcQ("thermal_transmittance", u_factor_b),
                         "target_u_factor_b": CalcQ(
@@ -198,18 +192,14 @@ class Section5Rule40(RuleDefinitionListIndexedBase):
                     manual_check_required_flag = calc_vals["manual_check_required_flag"]
                     target_u_factor_res_b = calc_vals["target_u_factor_res_b"]
                     target_u_factor_nonres_b = calc_vals["target_u_factor_nonres_b"]
-                    target_u_factor_semiheated_b = calc_vals[
-                        "target_u_factor_semiheated_b"
-                    ]
                     subsurface_class_b = calc_vals["subsurface_class_b"]
                     u_factor_b = calc_vals["u_factor_b"]
 
                     return subsurface_class_b in UNEXPECTED_DOOR or (
                         manual_check_required_flag
                         and (
-                            std_equal(u_factor_b, target_u_factor_res_b)
-                            or std_equal(u_factor_b, target_u_factor_nonres_b)
-                            or std_equal(u_factor_b, target_u_factor_semiheated_b)
+                            std_equal(u_factor_b, target_u_factor_nonres_b)
+                            or std_equal(u_factor_b, target_u_factor_res_b)
                         )
                     )
 
@@ -220,16 +210,14 @@ class Section5Rule40(RuleDefinitionListIndexedBase):
                     manual_check_required_flag = calc_vals["manual_check_required_flag"]
                     target_u_factor_res_b = calc_vals["target_u_factor_res_b"]
                     target_u_factor_nonres_b = calc_vals["target_u_factor_nonres_b"]
-                    target_u_factor_semiheated_b = calc_vals[
-                        "target_u_factor_semiheated_b"
-                    ]
                     manual_check_required_msg = (
                         f"Prescribed u-factor requirement could not be determined. Verify "
                         f"the baseline door u-factor (${u_factor_b}) is modeled correctly."
                         if manual_check_required_flag
-                        and (not std_equal(u_factor_b, target_u_factor_res_b))
-                        and (not std_equal(u_factor_b, target_u_factor_nonres_b))
-                        and (not std_equal(u_factor_b, target_u_factor_semiheated_b))
+                        and (
+                            std_equal(u_factor_b, target_u_factor_nonres_b)
+                            or std_equal(u_factor_b, target_u_factor_res_b)
+                        )
                         else ""
                     )
                     return manual_check_required_msg
@@ -237,10 +225,7 @@ class Section5Rule40(RuleDefinitionListIndexedBase):
                 def rule_check(self, context, calc_vals=None, data=None):
                     u_factor_b = calc_vals["u_factor_b"]
                     target_u_factor_b = calc_vals["target_u_factor_b"]
-                    manual_check_required_flag = calc_vals["manual_check_required_flag"]
-                    return (not manual_check_required_flag) and std_equal(
-                        target_u_factor_b, u_factor_b
-                    )
+                    return std_equal(target_u_factor_b, u_factor_b)
 
                 def get_fail_msg(self, context, calc_vals=None, data=None):
                     u_factor_b = calc_vals["u_factor_b"]
