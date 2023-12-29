@@ -1,30 +1,30 @@
 {
-    "rule-5-32-a": {
+    "rule-5-31-a": {
         "Section": 5,
-        "Rule": 32,
+        "Rule": 31,
         "Test": "a",
-        "test_description": "Project has one building segment and includes a space with a roof surface. The baseline roof emittance is correctly set to 0.9",
+        "test_description": "Project has one building segment and includes a space with a roof surface. The roof surface thermal emittance in the proposed and user models is equal to 0.9",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "5-32",
+            "rule_id": "5-31",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance",
             "rule_description": "The baseline roof surfaces shall be modeled using a solar reflectance of 0.30.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
-            "comparison_value": "Expected Value",
+            "comparison_value": "User Model",
             "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "baseline": {
-                "id": "ASHRAE229",
+                "id": "RPD 1",
                 "weather": {
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
                 "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -86,20 +86,20 @@
                                 ]
                             }
                         ],
-                        "type": "BASELINE_0"
+                        "type": "USER"
                     }
                 ]
             }
         }
     },
-    "rule-5-32-b": {
+    "rule-5-31-b": {
         "Section": 5,
-        "Rule": 32,
+        "Rule": 31,
         "Test": "b",
         "test_description": "Project has one building segment and includes a space with a roof surface. The baseline roof emittance is incorrectly set to 0.5 ",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "5-32",
+            "rule_id": "5-31",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance",
             "rule_description": "The baseline roof surfaces shall be modeled using a solar reflectance of 0.30.",
             "applicable_rmr": "Baseline Model",
@@ -110,14 +110,14 @@
         },
         "rmr_transformations": {
             "baseline": {
-                "id": "ASHRAE229",
+                "id": "RPD 1",
                 "weather": {
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
                 "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -179,7 +179,7 @@
                                 ]
                             }
                         ],
-                        "type": "BASELINE_0"
+                        "type": "PROPOSED"
                     }
                 ]
             }
