@@ -27,17 +27,17 @@ OTHER = SUBSURFACE_SUBCLASSIFICATION_OPTIONS.OTHER
 UNEXPECTED_DOOR = [SPANDREL_GLASS, GLASS_BLOCK, OTHER]
 
 
-class Section5Rule40(RuleDefinitionListIndexedBase):
-    """Rule 40 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
+class Section5Rule39(RuleDefinitionListIndexedBase):
+    """Rule 39 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule40, self).__init__(
+        super(Section5Rule39, self).__init__(
             rmrs_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section5Rule40.BuildingRule(),
+            each_rule=Section5Rule39.BuildingRule(),
             index_rmr=BASELINE_0,
-            id="5-40",
+            id="5-39",
             description="U-factor of the baseline door is based on Tables G3.4-1 through G3.4-8 for the applicable door "
             "type (swinging or non-swinging) and envelope conditioning category.",
             ruleset_section_title="Envelope",
@@ -49,11 +49,11 @@ class Section5Rule40(RuleDefinitionListIndexedBase):
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section5Rule40.BuildingRule, self).__init__(
+            super(Section5Rule39.BuildingRule, self).__init__(
                 rmrs_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
-                each_rule=Section5Rule40.BuildingRule.SurfaceRule(),
+                each_rule=Section5Rule39.BuildingRule.SurfaceRule(),
                 index_rmr=BASELINE_0,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
@@ -72,12 +72,12 @@ class Section5Rule40(RuleDefinitionListIndexedBase):
 
         class SurfaceRule(RuleDefinitionListIndexedBase):
             def __init__(self):
-                super(Section5Rule40.BuildingRule.SurfaceRule, self).__init__(
+                super(Section5Rule39.BuildingRule.SurfaceRule, self).__init__(
                     rmrs_used=produce_ruleset_model_instance(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
                     list_path="$.subsurfaces[*]",
-                    each_rule=Section5Rule40.BuildingRule.SurfaceRule.SubSurfaceRule(),
+                    each_rule=Section5Rule39.BuildingRule.SurfaceRule.SubSurfaceRule(),
                     index_rmr=BASELINE_0,
                     required_fields={
                         "$.subsurfaces[*]": [
@@ -102,7 +102,7 @@ class Section5Rule40(RuleDefinitionListIndexedBase):
             class SubSurfaceRule(RuleDefinitionBase):
                 def __init__(self):
                     super(
-                        Section5Rule40.BuildingRule.SurfaceRule.SubSurfaceRule, self
+                        Section5Rule39.BuildingRule.SurfaceRule.SubSurfaceRule, self
                     ).__init__(
                         rmrs_used=produce_ruleset_model_instance(
                             USER=False, BASELINE_0=True, PROPOSED=False
