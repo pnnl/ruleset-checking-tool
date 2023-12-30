@@ -43,6 +43,7 @@ def get_fan_system_object_supply_return_exhaust_relief_total_power_flow(fan_syst
 
             design_pressure_rise_data.append(fan.get("design_pressure_rise"))
 
+        fan_pressure_drop = FanPressureDropCompareCategory.UNDEFINED
         if design_pressure_rise_data:
             if None in design_pressure_rise_data:
                 fan_pressure_drop = FanPressureDropCompareCategory.UNDEFINED

@@ -9,10 +9,10 @@
             "rule_id": "22-20",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline condenser loop minimum condenser leaving water temperature shall be modeled as specified in Table G3.1.3.11.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -149,7 +149,8 @@
                                 "loop": "Condenser Loop 1",
                                 "leaving_water_setpoint_temperature": 23.888888888888914
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ],
                 "weather": {
@@ -168,10 +169,10 @@
             "rule_id": "22-20",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline condenser loop minimum condenser leaving water temperature shall be modeled as specified in Table G3.1.3.11.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -308,7 +309,8 @@
                                 "loop": "Condenser Loop 1",
                                 "leaving_water_setpoint_temperature": 26.666666666666686
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ],
                 "weather": {
@@ -327,10 +329,10 @@
             "rule_id": "22-20",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline condenser loop minimum condenser leaving water temperature shall be modeled as specified in Table G3.1.3.11.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -474,7 +476,8 @@
                                 "loop": "Condenser Loop 1",
                                 "leaving_water_setpoint_temperature": 18.33333333333337
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ],
                 "weather": {
@@ -493,10 +496,10 @@
             "rule_id": "22-20",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline condenser loop minimum condenser leaving water temperature shall be modeled as specified in Table G3.1.3.11.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -640,7 +643,8 @@
                                 "loop": "Condenser Loop 1",
                                 "leaving_water_setpoint_temperature": 21.111111111111143
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ],
                 "weather": {
@@ -659,10 +663,10 @@
             "rule_id": "22-20",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline condenser loop minimum condenser leaving water temperature shall be modeled as specified in Table G3.1.3.11.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -772,7 +776,8 @@
                                 "loop": "Condenser Loop 1",
                                 "leaving_water_setpoint_temperature": 21.111111111111143
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ],
                 "weather": {
