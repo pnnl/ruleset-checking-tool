@@ -3,7 +3,7 @@
         "Section": 19,
         "Rule": 18,
         "Test": "a",
-        "test_description": "In baseline system 7, the system fan electrical power for supply, return, exhaust, and relief equals the bhp \u00d7 746/fan motor efficiency.  BHP = 13 HP (per Table G3.1.29), motor eff = 0.91 (per Table G3.9.1), CFM = 10,000. There is no MERV13 or ERV on this air loop.",
+        "test_description": "In baseline system 7, the system fan electrical power for supply, return, exhaust, and relief equals the bhp/fan motor efficiency.  BHP = 13 HP (per Table G3.1.29), motor eff = 0.91 (per Table G3.9.1), CFM = 10,000. There is no MERV13 or ERV on this air loop.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-18",
@@ -79,14 +79,16 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1",
-                                                            "design_electric_power": 10657.1,
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 5326.4,
                                                             "design_airflow": 4719.474431999998
                                                         }
                                                     ],
                                                     "return_fans": [
                                                         {
                                                             "id": "Return Fan 1",
-                                                            "design_electric_power": 10657.1,
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 5326.4,
                                                             "design_airflow": 4719.474431999998
                                                         }
                                                     ]
@@ -153,7 +155,7 @@
         "Section": 19,
         "Rule": 18,
         "Test": "b",
-        "test_description": "In baseline system 3, the system fan electrical power for supply, return, exhaust, and relief equals the bhp \u00d7 746/fan motor efficiency.  BHP = 1.3 HP (per Table G3.1.29), motor eff = 0.825 (per Table G3.9.1), CFM = 1,000. There is no MERV13 or ERV on this air loop.",
+        "test_description": "In baseline system 3, the system fan electrical power for supply, return, exhaust, and relief equals the bhp/fan motor efficiency.  BHP = 0.94 HP (per Table G3.1.29), motor eff = 0.825 (per Table G3.9.1), CFM = 1,000. There is no MERV13 or ERV on this air loop.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-18",
@@ -210,14 +212,16 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1",
-                                                            "design_electric_power": 850,
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 424.8,
                                                             "design_airflow": 471.94744319999984
                                                         }
                                                     ],
                                                     "return_fans": [
                                                         {
                                                             "id": "Return Fan 1",
-                                                            "design_electric_power": 850,
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 424.8,
                                                             "design_airflow": 471.94744319999984
                                                         }
                                                     ]
@@ -238,7 +242,7 @@
         "Section": 19,
         "Rule": 18,
         "Test": "c",
-        "test_description": "In baseline system 3, the system fan electrical power for supply, return, exhaust, and relief equals the bhp \u00d7 746/fan motor efficiency.  BHP = 1.3 HP (per Table G3.1.29), motor eff = 0.825 (per Table G3.9.1), CFM = 1,000. There is no MERV13 or ERV on this air loop.",
+        "test_description": "In baseline system 3, the system fan electrical power for supply, return, exhaust, and relief equals the bhp/fan motor efficiency.  BHP = 4.7 HP (per Table G3.1.29), motor eff = 0.875 (per Table G3.9.1), CFM = 5,000. There is no MERV13 or ERV on this air loop.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-18",
@@ -295,15 +299,17 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1",
-                                                            "design_electric_power": 560.6,
-                                                            "design_airflow": 471.94744319999984
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 2002.7,
+                                                            "design_airflow": 2359.737215999999
                                                         }
                                                     ],
                                                     "return_fans": [
                                                         {
                                                             "id": "Return Fan 1",
-                                                            "design_electric_power": 850,
-                                                            "design_airflow": 471.94744319999984
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 2002.7,
+                                                            "design_airflow": 2359.737215999999
                                                         }
                                                     ]
                                                 }
@@ -323,7 +329,7 @@
         "Section": 19,
         "Rule": 18,
         "Test": "d",
-        "test_description": "In baseline system 7, the system fan electrical power for supply, return, exhaust, and relief is less than the minimum value of bhp \u00d7 746/fan motor efficiency. ",
+        "test_description": "In baseline system 7, the system fan electrical power for supply, return, exhaust, and relief is less than the minimum value of bhp/fan motor efficiency. ",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-18",
@@ -399,6 +405,7 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1",
+                                                            "specification_method": "SIMPLE",
                                                             "design_electric_power": 5000,
                                                             "design_airflow": 4719.474431999998
                                                         }
@@ -406,7 +413,8 @@
                                                     "return_fans": [
                                                         {
                                                             "id": "Return Fan 1",
-                                                            "design_electric_power": 10657.1,
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 5000,
                                                             "design_airflow": 4719.474431999998
                                                         }
                                                     ]
@@ -530,6 +538,7 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1",
+                                                            "specification_method": "SIMPLE",
                                                             "design_electric_power": 400,
                                                             "design_airflow": 471.94744319999984
                                                         }
@@ -537,6 +546,7 @@
                                                     "return_fans": [
                                                         {
                                                             "id": "Return Fan 1",
+                                                            "specification_method": "SIMPLE",
                                                             "design_electric_power": 400,
                                                             "design_airflow": 471.94744319999984
                                                         }
@@ -633,15 +643,21 @@
                                                     "fan_control": "VARIABLE_SPEED_DRIVE",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan 1"
+                                                            "id": "Supply Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 100
                                                         }
                                                     ],
                                                     "return_fans": [
                                                         {
-                                                            "id": "Return Fan 1"
+                                                            "id": "Return Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 100
                                                         },
                                                         {
-                                                            "id": "Return Fan 2"
+                                                            "id": "Return Fan 2",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 100
                                                         }
                                                     ]
                                                 }
