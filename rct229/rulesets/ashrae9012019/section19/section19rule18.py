@@ -164,7 +164,9 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
             )
             supply_flow_b = fan_sys_info_b["supply_fans_airflow"].to(ureg.cfm)
 
-            more_than_one_supply_fan_b = fan_sys_info_b["supply_fans_qty"] == 1
+            more_than_one_supply_fan_b = (
+                fan_sys_info_b["supply_fans_qty"] != 1
+            )  # the reason why > 1 isn't used is to prevent an error when no supply fan exists
             total_fan_power_b = (
                 (
                     fan_sys_info_b["supply_fans_power"]
@@ -175,15 +177,16 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
                 )
                 if not more_than_one_supply_fan_b
                 else ZERO.POWER
-            )
+            ).to(ureg.hp)
 
             A = 0.0
-            more_than_one_exhaust_fan_and_energy_rec_is_relevant_b = (
+            more_than_one_exhaust_fan_and_energy_rec_is_relevant_b = False
+            if (
                 fan_sys_b.get("air_energy_recovery")
                 and fan_sys_info_b["exhaust_fans_qty"] == 1
-            )
-            if more_than_one_exhaust_fan_and_energy_rec_is_relevant_b:
-                enthalpy_rec_ratio = getattr_(
+            ):
+                more_than_one_exhaust_fan_and_energy_rec_is_relevant_b = True
+                enthalpy_reco_ratio_b = getattr_(
                     fan_sys_b,
                     "fan_system",
                     "air_energy_recovery",
@@ -196,9 +199,10 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
                     fan_sys_b, "fan_system", "air_energy_recovery", "exhaust_airflow"
                 ).to(ureg.cfm)
                 A = (
-                    ((2.2 * enthalpy_rec_ratio) - 0.5)
-                    * (ERV_EX_air_flow_b + ERV_OA_air_flow_b)
-                ) / 4131
+                    (2.2 * enthalpy_reco_ratio_b - 0.5)
+                    * (ERV_OA_air_flow_b + ERV_EX_air_flow_b)
+                    / 4131
+                )
 
             MERV_rating = (
                 fan_sys_b["air_filter_merv_rating"]
@@ -208,10 +212,10 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
 
             if 9 <= MERV_rating <= 12:
                 MERV_adj = 0.5
-            elif MERV_rating > 23:
+            elif MERV_rating > 12:
                 MERV_adj = 0.9
             else:
-                MERV_adj = 0
+                MERV_adj = 0.0
 
             A += MERV_adj * supply_flow_b / 4131
             if any(
@@ -220,7 +224,7 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
                     for target_sys_type in CONSTANT_VOLUME_SYS_TYPES
                 ]
             ):
-                expected_BHP_b = ((0.00094 * supply_flow_b) + A).m * ureg("hp")
+                expected_BHP_b = (0.00094 * supply_flow_b + A).m * ureg("hp")
                 min_BHP_b = (0.00094 * supply_flow_b).m * ureg("hp")
             elif any(
                 [
@@ -228,10 +232,10 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
                     for target_sys_type in VARIABLE_VOLUME_SYS_TYPES
                 ]
             ):
-                expected_BHP_b = ((0.0013 * supply_flow_b) + A).m * ureg("hp")
+                expected_BHP_b = (0.0013 * supply_flow_b + A).m * ureg("hp")
                 min_BHP_b = (0.0013 * supply_flow_b).m * ureg("hp")
             else:
-                expected_BHP_b = ((0.00062 * supply_flow_b) + A).m * ureg("hp")
+                expected_BHP_b = (0.00062 * supply_flow_b + A).m * ureg("hp")
                 min_BHP_b = (0.00062 * supply_flow_b).m * ureg("hp")
 
             expected_motor_efficiency_b = table_G3_9_1_lookup(expected_BHP_b)[
@@ -241,10 +245,8 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
                 "nominal_full_load_efficiency"
             ]
 
-            expected_fan_wattage_b = (
-                expected_BHP_b * 746 * (1 / expected_motor_efficiency_b)
-            )
-            min_fan_wattage_b = min_BHP_b * 746 * (1 / min_motor_efficiency_b)
+            expected_fan_wattage_b = expected_BHP_b / expected_motor_efficiency_b
+            min_fan_wattage_b = min_BHP_b / min_motor_efficiency_b
 
             return {
                 "more_than_one_supply_fan_b": more_than_one_supply_fan_b,
@@ -307,7 +309,7 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
             total_fan_power_b = calc_vals["total_fan_power_b"]
             expected_fan_wattage_b = calc_vals["expected_fan_wattage_b"]
 
-            return std_equal(total_fan_power_b, expected_fan_wattage_b)
+            return std_equal(expected_fan_wattage_b, total_fan_power_b)
 
         def get_fail_msg(self, context, calc_vals=None, data=None):
             total_fan_power_b = calc_vals["total_fan_power_b"]
