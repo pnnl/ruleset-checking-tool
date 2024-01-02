@@ -3,7 +3,7 @@
         "Section": 19,
         "Rule": 18,
         "Test": "a",
-        "test_description": "In baseline system 7, the system fan electrical power for supply, return, exhaust, and relief equals the bhp/fan motor efficiency.  BHP = 13 HP (per Table G3.1.29), motor eff = 0.91 (per Table G3.9.1), CFM = 10,000. There is no MERV13 or ERV on this air loop.",
+        "test_description": "In baseline system 3, the system fan electrical power for supply, return, exhaust, and relief equals the bhp/fan motor efficiency.  BHP = 4.7 HP (per Table G3.1.29), motor eff = 0.875 (per Table G3.9.1), CFM = 5,000. There is no MERV13 or ERV on this air loop.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-18",
@@ -155,7 +155,7 @@
         "Section": 19,
         "Rule": 18,
         "Test": "b",
-        "test_description": "In baseline system 3, the system fan electrical power for supply, return, exhaust, and relief equals the bhp/fan motor efficiency.  BHP = 0.94 HP (per Table G3.1.29), motor eff = 0.825 (per Table G3.9.1), CFM = 1,000. There is no MERV13 or ERV on this air loop.",
+        "test_description": "In baseline system 7, the system fan electrical power for supply, return, exhaust, and relief is less than the minimum value of bhp/fan motor efficiency. ",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-18",
@@ -242,7 +242,7 @@
         "Section": 19,
         "Rule": 18,
         "Test": "c",
-        "test_description": "In baseline system 3, the system fan electrical power for supply, return, exhaust, and relief equals the bhp/fan motor efficiency.  BHP = 4.7 HP (per Table G3.1.29), motor eff = 0.875 (per Table G3.9.1), CFM = 5,000. There is no MERV13 or ERV on this air loop.",
+        "test_description": "In baseline system 3, the system fan electrical power for supply, return, exhaust, and relief is less than the minimum value of bhp/fan motor efficiency. ",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-18",
@@ -329,7 +329,7 @@
         "Section": 19,
         "Rule": 18,
         "Test": "d",
-        "test_description": "In baseline system 7, the system fan electrical power for supply, return, exhaust, and relief is less than the minimum value of bhp/fan motor efficiency. ",
+        "test_description": "A baseline system 7 has two return fans and therefore this rule requires manual check compliance with G3.1.2.9",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-18",
@@ -481,7 +481,7 @@
         "Section": 19,
         "Rule": 18,
         "Test": "e",
-        "test_description": "In baseline system 3, the system fan electrical power for supply, return, exhaust, and relief is less than the minimum value of bhp \u00d7 746/fan motor efficiency. ",
+        "test_description": "Baseline System 1 is is not applicable for Section 19 rule 18.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-18",
