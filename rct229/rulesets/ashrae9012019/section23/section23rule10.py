@@ -37,7 +37,7 @@ class Section23Rule10(RuleDefinitionListIndexedBase):
             index_rmr=BASELINE_0,
             id="23-10",
             description="System 11 Fan volume shall be reset from 100% airflow at 100% cooling load to minimum "
-                        "airflow at 50% cooling load. ",
+            "airflow at 50% cooling load. ",
             ruleset_section_title="HVAC - Airside",
             standard_section="G3.1.3.17 System 11 Supply Air Temperature and Fan Control",
             is_primary_rule=True,
