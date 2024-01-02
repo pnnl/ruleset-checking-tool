@@ -363,6 +363,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [22-25](section22/Rule22-25.md): For chilled-water systems served by chiller(s) and does not serve baseline System-11, the baseline building constant-volume primary pump power shall be modeled as 9 W/gpm. 
   * [22-26](section22/Rule22-26.md): For chilled-water systems served by chiller(s) and serves baseline System-11, the baseline building constant-volume primary pump power shall be modeled as 12 W/gpm. 
   * [22-27](section22/Rule22-27.md): Each baseline chiller shall be modeled with separate condenser-water pump interlocked to operate with the associated chiller.
+  * [22-28](section22/Rule22-28.md): The baseline building design condenser-water pump shall be modeled as constant volume.
   * [22-29](section22/Rule22-29.md): For chilled-water systems served by chiller(s) and does not serve baseline System-11, condenser-water pump power shall be 19 W/gpm. 
   * [22-30](section22/Rule22-30.md): For chilled-water systems served by chiller(s) and serves baseline System-11, condenser-water pump power shall be 22 W/gpm. 
   * [22-31](section22/Rule22-31.md): The baseline building design’s chiller plant shall be modeled with chillers having the number as indicated in Table G3.1.3.7 as a function of building peak cooling load. 
@@ -378,10 +379,19 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [22-41](section22/Rule22-41.md): Purchased CHW systems must be modeled with only one external fluid loop in the baseline design.
 
 ## Section 23 - Chilled Water Systems and Condenser Water Systems
+  * [23-2](section23/Rule23-1.md): System 2 and 4 - Electric air-source heat pumps shall be modeled with electric auxiliary heat and an outdoor air thermostat. The systems shall be controlled to energize auxiliary heat only when the outdoor air temperature is less than 40°F. The air-source heat pump shall be modeled to continue to operate while auxiliary heat is energized.
   * [23-2](section23/Rule23-2.md): For baseline systems 5-8 and 11, the SAT is reset higher by 5F under minimum cooling load conditions.
   * [23-3](section23/Rule23-3.md): System 5, 6, 7 and 8 minimum volume setpoint shall be 30% of zone peak airflow, minimum outdoor airflow, or rate required to comply with minimum accreditation standards whichever is larger.
+  * [23-4](section23/Rule23-4.md): Baseline systems 5 & 7 serving lab spaces per G3.1.1c shall reduce lab exhaust and makeup air during unoccupied periods to 50% of zone peak airflow, the minimum outdoor airflow, or rate required to comply with minimum accreditation standards whichever is larger.
+  * [23-5](section23/Rule23-5.md): For baseline systems 6 and 8, Fans in parallel VAV fan-powered boxes shall run as the first stage of heating before the reheat coil is energized.
   * [23-6](section23/Rule23-6.md): For baseline systems 6 and 8, Fans in parallel VAV fan-powered boxes shall be sized for 50% of the peak design primary air (from the VAV air-handling unit) flow rate and shall be modeled with 0.35 W/cfm fan power.
   * [23-7](section23/Rule23-7.md): Systems 6&8: Supply air temperature setpoint shall be constant at the design condition.
   * [23-8](section23/Rule23-8.md): System 5-8 and 11 - part load VAV fan power shall be modeled using either method 1 or 2 in Table G3.1.3.15. This rule will only validate data points from Method-1 Part-load Fan Power Data. However, both methods are equivalent. When modeling inputs are based on Method 2, values should be converted to Method 1 when writing to RMD.
+  * [23-9](section23/Rule23-9.md): System 11 Minimum volume setpoint shall be the largest of 50% of the maximum design airflow rate, the minimum ventilation airflow rate or the airflow required to comply with codes or accredidation standards.
+  * [23-10](section23/Rule23-10.md): System 11 Fan volume shall be reset from 100% airflow at 100% load to minimum airflow at 50% load.
+  * [23-11](section23/Rule23-11.md): System 11 Supply air temperature shall be reset from minimum supply air temp at 50% cooling load to room temp at 0% cooling load.  OR the SAT is reset higher by 5F under minimum cooling load conditions.
   * [23-12](section23/Rule23-12.md): System 11 in heating mode supply air temperature shall be modulated to maintain space temp and airflow shall be fixed at minimum airflow.
+  * [23-13](section23/Rule23-13.md): If proposed design includes humidistatic controls then the baseline shall use mechanical cooling for dehumidification and shall reheat to avoid overcooling.
+  * [23-14](section23/Rule23-14.md): If the baseline system does not comply with exceptions in Section 6.5.2.3 then only 25% of the system reheat energy shall be included in the baseline building performance.
+  * [23-15](section23/Rule23-15.md): Dehumidification reheat shall be the same as the system heating type.
   * [23-16](section23/Rule23-16.md): Systems 5 - 8, the baseline system shall be modeled with preheat coils controlled to a fixed set point 20F less than the design room heating temperature setpoint.
