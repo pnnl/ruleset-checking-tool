@@ -152,9 +152,14 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
                 hvac_b_id
             ]
 
-            sys_type_b = list(baseline_system_types_dict.keys())[
-                list(baseline_system_types_dict.values()).index([hvac_b_id])
-            ]
+            sys_type_b = next(
+                (
+                    key
+                    for key, values in baseline_system_types_dict.items()
+                    if hvac_b_id in values
+                ),
+                None,
+            )
 
             fan_sys_b = hvac_b["fan_system"]
             fan_sys_info_b = (
