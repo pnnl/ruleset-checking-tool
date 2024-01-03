@@ -109,7 +109,9 @@ def does_zone_meet_g3_1_1c(rmi, zone_id, is_leap_year, zones_and_systems):
             zone_load_and_eflh_list = [
                 (
                     # tuple, 0 is peak load dict, 1 is weekly eflh
-                    get_zone_peak_internal_load_floor_area_dict(rmi, other_match_zone_id),
+                    get_zone_peak_internal_load_floor_area_dict(
+                        rmi, other_match_zone_id
+                    ),
                     get_zone_weekly_eflh(other_match_zone_id),
                 )
                 for other_match_zone_id in zones_same_floor_same_system_type
@@ -117,10 +119,7 @@ def does_zone_meet_g3_1_1c(rmi, zone_id, is_leap_year, zones_and_systems):
         else:
             # if this is only zone on the same floor has the same system type
             # calculate it using the zone itself.
-            zone_load_and_eflh_list = [(
-                zone_internal_loads,
-                zone_eflh
-            )]
+            zone_load_and_eflh_list = [(zone_internal_loads, zone_eflh)]
 
         system_total_area = sum(map_(zone_load_and_eflh_list, "0.area"), ZERO.AREA)
         system_total_load = sum(map_(zone_load_and_eflh_list, "0.peak"), ZERO.POWER)
