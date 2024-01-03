@@ -50,9 +50,15 @@ class Section19Rule11((RuleDefinitionListIndexedBase)):
             hvac_b_id = hvac_b["id"]
 
             baseline_system_types_dict = data["baseline_system_types_dict"]
-            system_type_b = list(baseline_system_types_dict.keys())[
-                list(baseline_system_types_dict.values()).index([hvac_b_id])
-            ]
+            system_type_b = next(
+                (
+                    key
+                    for key, values in baseline_system_types_dict.items()
+                    if hvac_b_id in values
+                ),
+                None,
+            )
+
             does_hvac_system_match_b = baseline_system_type_compare(
                 system_type_b, HVAC_SYS.SYS_11_1, False
             )
