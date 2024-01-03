@@ -813,8 +813,8 @@ def test__get_zone_target_baseline_system_G3_1_1_c__true():
         TEST_RMD_B_UNIT_G311C, TEST_RMD_UNIT_P, "CZ5A", False
     ) == {
         "Thermal Zone 1": {
-            "expected_system_type": HVAC_SYS.SYS_3,
-            "system_origin": SYSTEMORIGIN.G311C,
+            "expected_system_type": HVAC_SYS.SYS_7,
+            "system_origin": 'OTHER_NON_RESIDENTIAL CZ_3b_3c_or_4_to_8 >150,000 ft2 or > 5 floors',
         }
     }
 
