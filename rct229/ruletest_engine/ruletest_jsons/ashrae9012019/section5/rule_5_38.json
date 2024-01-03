@@ -228,8 +228,8 @@
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 30,
+                                                        "adjacent_to": "GROUND",
+                                                        "tilt": 120,
                                                         "area": 929.0303999999999
                                                     }
                                                 ]
