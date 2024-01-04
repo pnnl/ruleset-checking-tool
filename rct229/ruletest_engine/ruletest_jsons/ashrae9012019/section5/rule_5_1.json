@@ -43,6 +43,9 @@
                                                     {
                                                         "id": "Surface 1",
                                                         "azimuth": 20,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "Window 1",
@@ -54,6 +57,9 @@
                                                     {
                                                         "id": "Surface 2",
                                                         "azimuth": 190,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "Window 2",
@@ -70,7 +76,8 @@
                             }
                         ]
                     }
-                ]
+                ],
+                "type": "USER"
             },
             "proposed": {
                 "id": "ASHRAE229",
@@ -99,6 +106,9 @@
                                                     {
                                                         "id": "Surface 1",
                                                         "azimuth": 20,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "Window 1",
@@ -110,6 +120,9 @@
                                                     {
                                                         "id": "Surface 2",
                                                         "azimuth": 190,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "Window 2",
@@ -126,7 +139,8 @@
                             }
                         ]
                     }
-                ]
+                ],
+                "type": "PROPOSED"
             },
             "baseline": {
                 "id": "ASHRAE229",
@@ -155,6 +169,9 @@
                                                     {
                                                         "id": "Surface 1",
                                                         "azimuth": 20,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "Window 1",
@@ -166,6 +183,9 @@
                                                     {
                                                         "id": "Surface 2",
                                                         "azimuth": 190,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "Window 2",
@@ -207,6 +227,9 @@
                                                     {
                                                         "id": "Surface 1",
                                                         "azimuth": 110,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "Window 1",
@@ -218,6 +241,9 @@
                                                     {
                                                         "id": "Surface 2",
                                                         "azimuth": 280,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "Window 2",
@@ -259,6 +285,9 @@
                                                     {
                                                         "id": "Surface 1",
                                                         "azimuth": 200,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "Window 1",
@@ -270,6 +299,9 @@
                                                     {
                                                         "id": "Surface 2",
                                                         "azimuth": 10,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "Window 2",
@@ -311,6 +343,9 @@
                                                     {
                                                         "id": "Surface 1",
                                                         "azimuth": 290,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "Window 1",
@@ -322,6 +357,9 @@
                                                     {
                                                         "id": "Surface 2",
                                                         "azimuth": 100,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "Window 2",
@@ -387,6 +425,9 @@
                                                     {
                                                         "id": "Surface 1",
                                                         "azimuth": 20,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "Window 1",
@@ -398,6 +439,9 @@
                                                     {
                                                         "id": "Surface 2",
                                                         "azimuth": 190,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "Window 2",
@@ -414,7 +458,8 @@
                             }
                         ]
                     }
-                ]
+                ],
+                "type": "USER"
             },
             "proposed": {
                 "id": "ASHRAE229",
@@ -443,6 +488,9 @@
                                                     {
                                                         "id": "Surface 1",
                                                         "azimuth": 20,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "Window 1",
@@ -454,6 +502,9 @@
                                                     {
                                                         "id": "Surface 2",
                                                         "azimuth": 190,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "Window 2",
@@ -470,7 +521,8 @@
                             }
                         ]
                     }
-                ]
+                ],
+                "type": "PROPOSED"
             },
             "baseline": {
                 "id": "ASHRAE229",
@@ -499,6 +551,9 @@
                                                     {
                                                         "id": "Surface 1",
                                                         "azimuth": 20,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "Window 1",
@@ -510,6 +565,9 @@
                                                     {
                                                         "id": "Surface 2",
                                                         "azimuth": 190,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "Window 2",
@@ -575,6 +633,9 @@
                                                     {
                                                         "id": "Surface 1",
                                                         "azimuth": 20,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "Window 1",
@@ -586,6 +647,9 @@
                                                     {
                                                         "id": "Surface 2",
                                                         "azimuth": 190,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "Window 2",
@@ -602,7 +666,8 @@
                             }
                         ]
                     }
-                ]
+                ],
+                "type": "USER"
             },
             "proposed": {
                 "id": "ASHRAE229",
@@ -631,6 +696,9 @@
                                                     {
                                                         "id": "Surface 1",
                                                         "azimuth": 20,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "Window 1",
@@ -642,6 +710,9 @@
                                                     {
                                                         "id": "Surface 2",
                                                         "azimuth": 190,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "Window 2",
@@ -658,7 +729,8 @@
                             }
                         ]
                     }
-                ]
+                ],
+                "type": "PROPOSED"
             },
             "baseline": {
                 "id": "ASHRAE229",
@@ -687,6 +759,9 @@
                                                     {
                                                         "id": "Surface 1",
                                                         "azimuth": 20,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "Window 1",
@@ -698,6 +773,9 @@
                                                     {
                                                         "id": "Surface 2",
                                                         "azimuth": 190,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "Window 2",
