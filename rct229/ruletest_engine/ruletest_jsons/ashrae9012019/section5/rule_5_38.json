@@ -177,7 +177,7 @@
         "Rule": 38,
         "Test": "c",
         "test_description": "Project has one building segment with one space that includes floor surfaces adjacent to ground. The RPD does not specify a ground temperature schedule.",
-        "expected_rule_outcome": "fail",
+        "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "5-38",
             "ruleset_reference": "Table G3.1(14) Proposed Building Performance (b)",
