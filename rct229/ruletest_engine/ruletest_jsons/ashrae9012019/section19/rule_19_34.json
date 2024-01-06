@@ -54,11 +54,11 @@
                                                 "id": "PTAC 1",
                                                 "cooling_system": {
                                                     "id": "DX Coil 1",
-                                                    "type": "NONE"
+                                                    "type": "DIRECT_EXPANSION"
                                                 },
                                                 "heating_system": {
                                                     "id": "HHW Coil 1",
-                                                    "type": "FLUID_LOOP",
+                                                    "type": "NONE",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
