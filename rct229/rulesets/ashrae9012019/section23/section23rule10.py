@@ -94,7 +94,7 @@ class Section23Rule10(RuleDefinitionListIndexedBase):
                 "fan_volume_reset_fraction": fan_system_b.get(
                     "fan_volume_reset_fraction"
                 ),
-                "fan_volume_reset": fan_system_b.get("fan_volume_reset_type"),
+                "fan_volume_reset_type": fan_system_b.get("fan_volume_reset_type"),
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
