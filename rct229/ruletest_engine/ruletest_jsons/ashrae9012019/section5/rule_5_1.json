@@ -24,7 +24,13 @@
                         "output": {
                             "id": "Output 1",
                             "output_instance": {
-                                "id": "Output Instance 1"
+                                "id": "Output Instance 1",
+                                "unmet_load_hours": 0,
+                                "unmet_load_hours_heating": 0,
+                                "unmet_load_hours_cooling": 0,
+                                "unmet_occupied_load_hours_heating": 0,
+                                "unmet_occupied_load_hours_cooling": 0,
+                                "building_peak_cooling_load": 25000
                             }
                         },
                         "buildings": [
@@ -74,10 +80,10 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "USER"
                     }
-                ],
-                "type": "USER"
+                ]
             },
             "proposed": {
                 "id": "ASHRAE229",
@@ -87,7 +93,13 @@
                         "output": {
                             "id": "Output 1",
                             "output_instance": {
-                                "id": "Output Instance 1"
+                                "id": "Output Instance 1",
+                                "unmet_load_hours": 0,
+                                "unmet_load_hours_heating": 0,
+                                "unmet_load_hours_cooling": 0,
+                                "unmet_occupied_load_hours_heating": 0,
+                                "unmet_occupied_load_hours_cooling": 0,
+                                "building_peak_cooling_load": 25000
                             }
                         },
                         "buildings": [
@@ -137,10 +149,10 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
-                ],
-                "type": "PROPOSED"
+                ]
             },
             "baseline": {
                 "id": "ASHRAE229",
@@ -150,7 +162,13 @@
                         "output": {
                             "id": "Output 1",
                             "output_instance": {
-                                "id": "Output Instance 1"
+                                "id": "Output Instance 1",
+                                "unmet_load_hours": 0,
+                                "unmet_load_hours_heating": 0,
+                                "unmet_load_hours_cooling": 0,
+                                "unmet_occupied_load_hours_heating": 0,
+                                "unmet_occupied_load_hours_cooling": 0,
+                                "building_peak_cooling_load": 25000
                             }
                         },
                         "buildings": [
@@ -208,7 +226,13 @@
                         "output": {
                             "id": "Output 1",
                             "output_instance": {
-                                "id": "Output Instance 1"
+                                "id": "Output Instance 1",
+                                "unmet_load_hours": 0,
+                                "unmet_load_hours_heating": 0,
+                                "unmet_load_hours_cooling": 0,
+                                "unmet_occupied_load_hours_heating": 0,
+                                "unmet_occupied_load_hours_cooling": 0,
+                                "building_peak_cooling_load": 25000
                             }
                         },
                         "buildings": [
@@ -266,7 +290,13 @@
                         "output": {
                             "id": "Output 1",
                             "output_instance": {
-                                "id": "Output Instance 1"
+                                "id": "Output Instance 1",
+                                "unmet_load_hours": 0,
+                                "unmet_load_hours_heating": 0,
+                                "unmet_load_hours_cooling": 0,
+                                "unmet_occupied_load_hours_heating": 0,
+                                "unmet_occupied_load_hours_cooling": 0,
+                                "building_peak_cooling_load": 25000
                             }
                         },
                         "buildings": [
@@ -324,7 +354,13 @@
                         "output": {
                             "id": "Output 1",
                             "output_instance": {
-                                "id": "Output Instance 1"
+                                "id": "Output Instance 1",
+                                "unmet_load_hours": 0,
+                                "unmet_load_hours_heating": 0,
+                                "unmet_load_hours_cooling": 0,
+                                "unmet_occupied_load_hours_heating": 0,
+                                "unmet_occupied_load_hours_cooling": 0,
+                                "building_peak_cooling_load": 25000
                             }
                         },
                         "buildings": [
@@ -406,7 +442,13 @@
                         "output": {
                             "id": "Output 1",
                             "output_instance": {
-                                "id": "Output Instance 1"
+                                "id": "Output Instance 1",
+                                "unmet_load_hours": 0,
+                                "unmet_load_hours_heating": 0,
+                                "unmet_load_hours_cooling": 0,
+                                "unmet_occupied_load_hours_heating": 0,
+                                "unmet_occupied_load_hours_cooling": 0,
+                                "building_peak_cooling_load": 25000
                             }
                         },
                         "buildings": [
@@ -456,10 +498,10 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "USER"
                     }
-                ],
-                "type": "USER"
+                ]
             },
             "proposed": {
                 "id": "ASHRAE229",
@@ -469,7 +511,13 @@
                         "output": {
                             "id": "Output 1",
                             "output_instance": {
-                                "id": "Output Instance 1"
+                                "id": "Output Instance 1",
+                                "unmet_load_hours": 0,
+                                "unmet_load_hours_heating": 0,
+                                "unmet_load_hours_cooling": 0,
+                                "unmet_occupied_load_hours_heating": 0,
+                                "unmet_occupied_load_hours_cooling": 0,
+                                "building_peak_cooling_load": 25000
                             }
                         },
                         "buildings": [
@@ -519,10 +567,10 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
-                ],
-                "type": "PROPOSED"
+                ]
             },
             "baseline": {
                 "id": "ASHRAE229",
@@ -532,7 +580,13 @@
                         "output": {
                             "id": "Output 1",
                             "output_instance": {
-                                "id": "Output Instance 1"
+                                "id": "Output Instance 1",
+                                "unmet_load_hours": 0,
+                                "unmet_load_hours_heating": 0,
+                                "unmet_load_hours_cooling": 0,
+                                "unmet_occupied_load_hours_heating": 0,
+                                "unmet_occupied_load_hours_cooling": 0,
+                                "building_peak_cooling_load": 25000
                             }
                         },
                         "buildings": [
@@ -614,7 +668,13 @@
                         "output": {
                             "id": "Output 1",
                             "output_instance": {
-                                "id": "Output Instance 1"
+                                "id": "Output Instance 1",
+                                "unmet_load_hours": 0,
+                                "unmet_load_hours_heating": 0,
+                                "unmet_load_hours_cooling": 0,
+                                "unmet_occupied_load_hours_heating": 0,
+                                "unmet_occupied_load_hours_cooling": 0,
+                                "building_peak_cooling_load": 25000
                             }
                         },
                         "buildings": [
@@ -664,10 +724,10 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "USER"
                     }
-                ],
-                "type": "USER"
+                ]
             },
             "proposed": {
                 "id": "ASHRAE229",
@@ -677,7 +737,13 @@
                         "output": {
                             "id": "Output 1",
                             "output_instance": {
-                                "id": "Output Instance 1"
+                                "id": "Output Instance 1",
+                                "unmet_load_hours": 0,
+                                "unmet_load_hours_heating": 0,
+                                "unmet_load_hours_cooling": 0,
+                                "unmet_occupied_load_hours_heating": 0,
+                                "unmet_occupied_load_hours_cooling": 0,
+                                "building_peak_cooling_load": 25000
                             }
                         },
                         "buildings": [
@@ -727,10 +793,10 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
-                ],
-                "type": "PROPOSED"
+                ]
             },
             "baseline": {
                 "id": "ASHRAE229",
@@ -740,7 +806,13 @@
                         "output": {
                             "id": "Output 1",
                             "output_instance": {
-                                "id": "Output Instance 1"
+                                "id": "Output Instance 1",
+                                "unmet_load_hours": 0,
+                                "unmet_load_hours_heating": 0,
+                                "unmet_load_hours_cooling": 0,
+                                "unmet_occupied_load_hours_heating": 0,
+                                "unmet_occupied_load_hours_cooling": 0,
+                                "building_peak_cooling_load": 25000
                             }
                         },
                         "buildings": [
