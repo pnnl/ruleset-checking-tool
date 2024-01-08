@@ -112,8 +112,8 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
                 no_of_rmds = data["no_of_rmds"]
                 no_of_output_instance = data["no_of_output_instance"]
 
-                has_proposed = building_p.get("type") == RULESET_MODEL.PROPOSED
-                has_user = building_u.get("type") == RULESET_MODEL.USER
+                has_proposed = find_one("$.type", building_p, False)
+                has_user = find_one("$.type", building_u, False)
                 has_baseline_0 = RULESET_MODEL.BASELINE_0 in baseline_list
                 has_baseline_90 = RULESET_MODEL.BASELINE_90 in baseline_list
                 has_baseline_180 = RULESET_MODEL.BASELINE_180 in baseline_list
