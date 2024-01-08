@@ -40,6 +40,7 @@ __all__ = [
     "section5rule36",
     "section5rule37",
     "section5rule38",
+    "section5rule41",
 ]
 
 
