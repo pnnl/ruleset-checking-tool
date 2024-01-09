@@ -142,12 +142,7 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
                 def get_key_for_azi(azi):
                     azi_value = azi.to("degrees").magnitude
                     low_bound = azi_value - (azi_value % 3)
-                    if low_bound == azi_value:
-                        low_bound -= 3
-
-                    # Find the multiple of 3 greater than n
                     high_bound = low_bound + 3
-
                     return f"{low_bound}-{high_bound}"
 
                 azimuth_fen_area_dict_b = {}
