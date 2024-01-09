@@ -138,19 +138,19 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
                     "$.output.output_instance", building_b270, False
                 )
 
-                # define a function to find the azimuth's corresponding key
-                find_key_for_azi = lambda azi: next(
-                    (
-                        key
-                        for key, range_ in azimuth_fen_area_dict_b.items()
-                        if int(key.split("-")[0]) <= azi <= int(key.split("-")[1])
-                    ),
-                    None,
-                )
+                # define a function to get the azimuth's corresponding key
+                def get_key_for_azi(azi):
+                    azi_value = azi.to("degrees").magnitude
+                    low_bound = azi_value - (azi_value % 3)
+                    if low_bound == azi_value:
+                        low_bound -= 3
 
-                azimuth_fen_area_dict_b = {
-                    f"{azi}-{azi+3}": ZERO.AREA for azi in range(3, 360, 3)
-                }
+                    # Find the multiple of 3 greater than n
+                    high_bound = low_bound + 3
+
+                    return f"{low_bound}-{high_bound}"
+
+                azimuth_fen_area_dict_b = {}
                 total_surface_fenestration_area_b = ZERO.AREA
                 for surface_b in find_all(
                     "$.building_segments[*].zones[*].surfaces[*]", building_b0
@@ -158,8 +158,13 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
                     if get_opaque_surface_type(surface_b) == OST.ABOVE_GRADE_WALL:
                         surface_azimuth_b = surface_b["azimuth"]
 
-                        if surface_azimuth_b not in azimuth_fen_area_dict_b:
-                            azimuth_fen_area_dict_b[surface_azimuth_b] = ZERO.AREA
+                        if (
+                            get_key_for_azi(surface_azimuth_b)
+                            not in azimuth_fen_area_dict_b
+                        ):
+                            azimuth_fen_area_dict_b[
+                                get_key_for_azi(surface_azimuth_b)
+                            ] = ZERO.AREA
 
                         for subsurface_b in find_all("$.subsurfaces[*]", surface_b):
                             glazed_area_b = subsurface_b.get("glazed_area", ZERO.AREA)
@@ -178,15 +183,11 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
                                     glazed_area_b + opaque_area_b
                                 )
                     azimuth_fen_area_dict_b[
-                        find_key_for_azi(surface_azimuth_b)
+                        get_key_for_azi(surface_azimuth_b)
                     ] += total_surface_fenestration_area_b
 
-                max_fen_area_b = max(
-                    azimuth_fen_area_dict_b, key=azimuth_fen_area_dict_b.get
-                )
-                min_fen_area_b = min(
-                    azimuth_fen_area_dict_b, key=azimuth_fen_area_dict_b.get
-                )
+                max_fen_area_b = max(azimuth_fen_area_dict_b.values())
+                min_fen_area_b = min(azimuth_fen_area_dict_b.values())
 
                 percent_difference = max(
                     abs(max_fen_area_b - min_fen_area_b) / max_fen_area_b,
@@ -206,12 +207,13 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
                     "has_baseline_0": has_baseline_0,
                     "has_baseline_90": has_baseline_90,
                     "has_baseline_180": has_baseline_180,
+                    "has_baseline_270": has_baseline_270,
                     "has_proposed_output": has_proposed_output,
                     "has_user_output": has_user_output,
-                    "has_basseline_0_output": has_basseline_0_output,
-                    "has_basseline_90_output": has_basseline_90_output,
-                    "has_basseline_180_output": has_basseline_180_output,
-                    "has_basseline_270_output": has_basseline_270_output,
+                    "has_baseline_0_output": has_basseline_0_output,
+                    "has_baseline_90_output": has_basseline_90_output,
+                    "has_baseline_180_output": has_basseline_180_output,
+                    "has_baseline_270_output": has_basseline_270_output,
                 }
 
             def rule_check(self, context, calc_vals=None, data=None):
@@ -228,26 +230,26 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
                 has_baseline_270 = calc_vals["has_baseline_270"]
 
                 has_proposed_output = calc_vals["has_proposed_output"]
-                has_basseline_0_output = calc_vals["has_basseline_0_output"]
-                has_basseline_90_output = calc_vals["has_basseline_90_output"]
-                has_basseline_180_output = calc_vals["has_basseline_180_output"]
-                has_basseline_270_output = calc_vals["has_basseline_270_output"]
+                has_baseline_0_output = calc_vals["has_baseline_0_output"]
+                has_baseline_90_output = calc_vals["has_baseline_90_output"]
+                has_baseline_180_output = calc_vals["has_baseline_180_output"]
+                has_baseline_270_output = calc_vals["has_baseline_270_output"]
 
                 return (
                     has_user
                     and has_proposed
                     and has_baseline_0
                     and has_proposed_output
-                    and has_basseline_0_output
+                    and has_baseline_0_output
                 ) and (
                     (
                         rotation_expected_b
                         and has_baseline_90
                         and has_baseline_180
                         and has_baseline_270
-                        and has_basseline_90_output
-                        and has_basseline_180_output
-                        and has_basseline_270_output
+                        and has_baseline_90_output
+                        and has_baseline_180_output
+                        and has_baseline_270_output
                         and no_of_rmds == 5
                         and no_of_output_instance == 6
                     )
