@@ -16,6 +16,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type imp
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
     get_opaque_surface_type,
 )
+from rct229.schema.config import ureg
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.jsonpath_utils import find_all, find_one
 from rct229.utils.pint_utils import ZERO
@@ -33,6 +34,9 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
             rmrs_used=produce_ruleset_model_instance(
                 USER=True,
                 BASELINE_0=True,
+                BASELINE_90=True,
+                BASELINE_180=True,
+                BASELINE_270=True,
                 PROPOSED=True,
             ),
             each_rule=Section5Rule1.RMDRule(),
@@ -49,7 +53,12 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule1.RMDRule, self).__init__(
                 rmrs_used=produce_ruleset_model_instance(
-                    USER=True, BASELINE_0=True, PROPOSED=True
+                    USER=True,
+                    BASELINE_0=True,
+                    BASELINE_90=True,
+                    BASELINE_180=True,
+                    BASELINE_270=True,
+                    PROPOSED=True,
                 ),
                 each_rule=Section5Rule1.RMDRule.BuildingRule(),
                 index_rmr=BASELINE_0,
@@ -64,6 +73,9 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
             rmd_p = context.PROPOSED
             rmd_u = context.USER
 
+            has_proposed = True if find_one("$.type", rmd_p) else False
+            has_user = True if find_one("$.type", rmd_u, False) else False
+
             baseline_rmd_list = [rmd_b0, rmd_b90, rmd_b180, rmd_b270]
             rmd_list = [rmd_b0, rmd_b90, rmd_b180, rmd_b270, rmd_p, rmd_u]
 
@@ -77,12 +89,16 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
 
             # filter out baseline rmds that have the type key
             baseline_list = [
-                rmd_b for rmd_b in baseline_rmd_list if find_one("$.type", rmd_b, False)
+                find_one("$.type", rmd_b)
+                for rmd_b in baseline_rmd_list
+                if find_one("$.type", rmd_b, False)
             ]
 
             no_of_output_instance = len(baseline_list)
 
             return {
+                "has_proposed": has_proposed,
+                "has_user": has_user,
                 "baseline_list": baseline_list,
                 "no_of_rmds": no_of_rmds,
                 "no_of_output_instance": no_of_output_instance,
@@ -92,7 +108,12 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
             def __init__(self):
                 super(Section5Rule1.RMDRule.BuildingRule, self).__init__(
                     rmrs_used=produce_ruleset_model_instance(
-                        USER=True, BASELINE_0=True, PROPOSED=True
+                        USER=True,
+                        BASELINE_0=True,
+                        BASELINE_90=True,
+                        BASELINE_180=True,
+                        BASELINE_270=True,
+                        PROPOSED=True,
                     ),
                     required_fields={
                         "$.building_segments[*].zones[*].surfaces[*]": ["azimuth"],
@@ -108,12 +129,12 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
                 building_p = context.PROPOSED
                 building_u = context.USER
 
+                has_proposed = data["has_proposed"]
+                has_user = data["has_user"]
                 baseline_list = data["baseline_list"]
                 no_of_rmds = data["no_of_rmds"]
                 no_of_output_instance = data["no_of_output_instance"]
 
-                has_proposed = find_one("$.type", building_p, False)
-                has_user = find_one("$.type", building_u, False)
                 has_baseline_0 = RULESET_MODEL.BASELINE_0 in baseline_list
                 has_baseline_90 = RULESET_MODEL.BASELINE_90 in baseline_list
                 has_baseline_180 = RULESET_MODEL.BASELINE_180 in baseline_list
@@ -142,14 +163,16 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
                 find_key_for_azi = lambda azi: next(
                     (
                         key
-                        for key, range_ in azimuth_fen_area_dict_b.items()
-                        if int(key.split("-")[0]) <= azi <= int(key.split("-")[1])
+                        for key, _ in azimuth_fen_area_dict_b.items()
+                        if int(key.split("-")[0])
+                        <= azi.to(ureg("degree")).m
+                        <= int(key.split("-")[1])
                     ),
                     None,
                 )
 
                 azimuth_fen_area_dict_b = {
-                    f"{azi}-{azi+3}": ZERO.AREA for azi in range(3, 360, 3)
+                    f"{azi}-{azi+3}": ZERO.AREA for azi in range(0, 360, 3)
                 }
                 total_surface_fenestration_area_b = ZERO.AREA
                 for surface_b in find_all(
@@ -157,9 +180,6 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
                 ):
                     if get_opaque_surface_type(surface_b) == OST.ABOVE_GRADE_WALL:
                         surface_azimuth_b = surface_b["azimuth"]
-
-                        if surface_azimuth_b not in azimuth_fen_area_dict_b:
-                            azimuth_fen_area_dict_b[surface_azimuth_b] = ZERO.AREA
 
                         for subsurface_b in find_all("$.subsurfaces[*]", surface_b):
                             glazed_area_b = subsurface_b.get("glazed_area", ZERO.AREA)
@@ -181,16 +201,20 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
                         find_key_for_azi(surface_azimuth_b)
                     ] += total_surface_fenestration_area_b
 
-                max_fen_area_b = max(
-                    azimuth_fen_area_dict_b, key=azimuth_fen_area_dict_b.get
-                )
-                min_fen_area_b = min(
-                    azimuth_fen_area_dict_b, key=azimuth_fen_area_dict_b.get
-                )
+                max_fen_area_b = azimuth_fen_area_dict_b[
+                    max(azimuth_fen_area_dict_b, key=azimuth_fen_area_dict_b.get)
+                ]
+                min_fen_area_b = azimuth_fen_area_dict_b[
+                    min(azimuth_fen_area_dict_b, key=azimuth_fen_area_dict_b.get)
+                ]
 
                 percent_difference = max(
-                    abs(max_fen_area_b - min_fen_area_b) / max_fen_area_b,
-                    abs(min_fen_area_b - max_fen_area_b) / min_fen_area_b,
+                    abs(max_fen_area_b - min_fen_area_b) / max_fen_area_b
+                    if max_fen_area_b != ZERO.AREA
+                    else 0.0,
+                    abs(min_fen_area_b - max_fen_area_b) / min_fen_area_b
+                    if min_fen_area_b != ZERO.AREA
+                    else 0.0,
                 )
 
                 rotation_expected_b = (
@@ -206,6 +230,7 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
                     "has_baseline_0": has_baseline_0,
                     "has_baseline_90": has_baseline_90,
                     "has_baseline_180": has_baseline_180,
+                    "has_baseline_270": has_baseline_270,
                     "has_proposed_output": has_proposed_output,
                     "has_user_output": has_user_output,
                     "has_basseline_0_output": has_basseline_0_output,
