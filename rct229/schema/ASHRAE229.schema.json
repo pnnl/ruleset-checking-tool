@@ -3572,7 +3572,6 @@
                     "description": "Efficiency value based on the selected part_load_efficiency_metric",
                     "type": "number",
                     "minimum": 0.0,
-                    "maximum": 1.0,
                     "units": "W/W"
                 },
                 "part_load_efficiency_metric": {
