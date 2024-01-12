@@ -34,8 +34,9 @@
     - look at the zone terminal, and then the zone terminal hvac system to determine if the zone terminal is connected to a system type 6 or 8: `for terminal in zone.terminals:`
         - check if the terminal is connected to a hvac system 6 or 8: `if zone.served_by_heating_ventilating_air_conditioning_system in hvac_sys_6_or_8_list:`
             - `CONTINUE TO RULE LOGIC`
-        - otherwise not applicable: `else: NOT_APPLICABLE`
-**Rule Logic:**
+        - otherwise not applicable: `else: NOT_APPLICABLE`  
+        
+**Rule Logic:**   
 - if the terminal runs the fan as a first stage of heating before the reheat coil is turned on, then this terminal is compliant with the rule, return PASS: `if terminal.is_first_stage_heat_fan_powered_box: PASS`
 - otherwise, the terminal is not compliant, return fail: `else: FAIL`
 
