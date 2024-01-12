@@ -1,4 +1,4 @@
-from pydash import filter_
+from pydash import compact
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
@@ -103,16 +103,16 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
             rmd_list_no_user = [rmd_b0, rmd_b90, rmd_b180, rmd_b270, rmd_p]
 
             # count the rmds that aren't None
-            no_of_rmds = len(
-                filter_(
-                    rmd_list,
-                    lambda rmd: rmd is not None,
-                )
-            )
+            no_of_rmds = len(compact(rmd_list))
 
-            # filter out baseline rmds that aren't None then count the length
+            # filter out rmds that aren't None then count the length
             no_of_output_instance = len(
-                [rmd["type"] for rmd in rmd_list_no_user if rmd is not None]
+                compact(
+                    [
+                        find_one("$.output.output_instance", rmd)
+                        for rmd in rmd_list_no_user
+                    ]
+                )
             )
 
             return {
