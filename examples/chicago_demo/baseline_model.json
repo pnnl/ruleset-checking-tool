@@ -5177,9 +5177,9 @@
           "condensing_loop": "CW Loop 1",
           "rated_capacity": 1310149.42,
           "compressor_type": "CENTRIFUGAL",
-          "full_load_efficiency": 6.10590277777778,
+          "full_load_efficiency": 0.5759999999999998,
           "part_load_efficiency_metric": "INTEGRATED_PART_LOAD_VALUE",
-          "part_load_efficiency": 8.79,
+          "part_load_efficiency": 0.40011376564,
           "is_chilled_water_pump_interlocked": true,
           "is_condenser_water_pump_interlocked": true
 
@@ -5190,9 +5190,9 @@
           "condensing_loop": "CW Loop 1",
           "rated_capacity": 1310149.42,
           "compressor_type": "CENTRIFUGAL",
-          "full_load_efficiency": 6.10590277777778,
+          "full_load_efficiency": 0.5759999999999998,
           "part_load_efficiency_metric": "INTEGRATED_PART_LOAD_VALUE",
-          "part_load_efficiency": 8.79,
+          "part_load_efficiency": 0.40011376564,
           "is_chilled_water_pump_interlocked": true,
           "is_condenser_water_pump_interlocked": true
         }
