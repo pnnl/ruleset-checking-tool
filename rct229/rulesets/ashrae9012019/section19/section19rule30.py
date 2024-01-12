@@ -62,7 +62,7 @@ class Section19Rule30(RuleDefinitionListIndexedBase):
                 None,
             )
 
-            return not any(
+            return any(
                 [
                     baseline_system_type_compare(
                         system_type_b, applicable_sys_type, False

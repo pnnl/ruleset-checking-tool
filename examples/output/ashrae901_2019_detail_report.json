@@ -4,7 +4,7 @@
     "tool_name": "PNNL Ruleset Checking Tool",
     "tool_version": "0.0.1",
     "ruleset": "ASHRAE 90.1-2019 Performance Rating Method (Appendix G)",
-    "date_run": "2024-01-04 01:54:41.726272",
+    "date_run": "2024-01-11 21:58:43.508052",
     "schema_version": "0.0.29",
     "rpd_files": [
         {
@@ -9128,8 +9128,8 @@
             "evaluations": [
                 {
                     "data_group_id": "19-15",
-                    "outcome": "UNDETERMINED",
-                    "messages": "supply_fan:BUILDING STORY 1 VAV_REHEAT (SYS7)-supplyFan is missing is_airflow_autosized",
+                    "outcome": "NOT_APPLICABLE",
+                    "messages": "Not Applicable",
                     "calculated_values": ""
                 }
             ]
@@ -9157,21 +9157,9 @@
             "data_group_names": [],
             "evaluations": [
                 {
-                    "data_group_id": "BUILDING STORY 1 VAV_REHEAT (SYS7)",
-                    "outcome": "UNDETERMINED",
-                    "messages": "fan:BUILDING STORY 1 VAV_REHEAT (SYS7)-supplyFan is missing specification_method",
-                    "calculated_values": ""
-                },
-                {
-                    "data_group_id": "BUILDING STORY 2 VAV_REHEAT (SYS7)",
-                    "outcome": "UNDETERMINED",
-                    "messages": "fan:BUILDING STORY 2 VAV_REHEAT (SYS7)-supplyFan is missing specification_method",
-                    "calculated_values": ""
-                },
-                {
-                    "data_group_id": "BUILDING STORY 3 VAV_REHEAT (SYS7)",
-                    "outcome": "UNDETERMINED",
-                    "messages": "fan:BUILDING STORY 3 VAV_REHEAT (SYS7)-supplyFan is missing specification_method",
+                    "data_group_id": "19-17",
+                    "outcome": "NOT_APPLICABLE",
+                    "messages": "Not Applicable",
                     "calculated_values": ""
                 }
             ]
@@ -9212,8 +9200,8 @@
             "evaluations": [
                 {
                     "data_group_id": "19-19",
-                    "outcome": "FAILED",
-                    "messages": "Object: fan provided is None, failed to search for key: specification_method",
+                    "outcome": "NOT_APPLICABLE",
+                    "messages": "Not Applicable",
                     "calculated_values": ""
                 }
             ]
@@ -12082,7 +12070,14 @@
             "evaluation_type": "FULL",
             "standard_section": "G3.1.3.1 Heat Pumps (Systems 2 and 4)",
             "data_group_names": [],
-            "evaluations": []
+            "evaluations": [
+                {
+                    "data_group_id": "23-1",
+                    "outcome": "NOT_APPLICABLE",
+                    "messages": "Not Applicable",
+                    "calculated_values": ""
+                }
+            ]
         },
         {
             "rule_id": "23-2",
@@ -12498,7 +12493,14 @@
             "evaluation_type": "FULL",
             "standard_section": "Section G3.1.3.14 Fan Power and Control (Systems 6 and 8)",
             "data_group_names": [],
-            "evaluations": []
+            "evaluations": [
+                {
+                    "data_group_id": "23-6",
+                    "outcome": "NOT_APPLICABLE",
+                    "messages": "Not Applicable",
+                    "calculated_values": ""
+                }
+            ]
         },
         {
             "rule_id": "23-7",
@@ -12506,7 +12508,14 @@
             "evaluation_type": "FULL",
             "standard_section": "Section G3.1.3.14 Fan Power and Control (Systems 6 and 8)",
             "data_group_names": [],
-            "evaluations": []
+            "evaluations": [
+                {
+                    "data_group_id": "23-7",
+                    "outcome": "NOT_APPLICABLE",
+                    "messages": "Not Applicable",
+                    "calculated_values": ""
+                }
+            ]
         },
         {
             "rule_id": "23-8",
@@ -12547,7 +12556,29 @@
             "evaluation_type": "FULL",
             "standard_section": "Exception to G3.1.3.13",
             "data_group_names": [],
-            "evaluations": []
+            "evaluations": [
+                {
+                    "data_group_id": "23-9",
+                    "outcome": "NOT_APPLICABLE",
+                    "messages": "Not Applicable",
+                    "calculated_values": ""
+                }
+            ]
+        },
+        {
+            "rule_id": "23-10",
+            "description": "System 11 Fan volume shall be reset from 100% airflow at 100% cooling load to minimum airflow at 50% cooling load. ",
+            "evaluation_type": "FULL",
+            "standard_section": "G3.1.3.17 System 11 Supply Air Temperature and Fan Control",
+            "data_group_names": [],
+            "evaluations": [
+                {
+                    "data_group_id": "23-10",
+                    "outcome": "NOT_APPLICABLE",
+                    "messages": "Not Applicable",
+                    "calculated_values": ""
+                }
+            ]
         },
         {
             "rule_id": "23-11",
@@ -12555,7 +12586,14 @@
             "evaluation_type": "FULL",
             "standard_section": "G3.1.3.17 System 11 Supply Air Temperature and Fan Control & G3.1.3.12 OR Section G3.1.3.12 Supply Air Temperature Reset.",
             "data_group_names": [],
-            "evaluations": []
+            "evaluations": [
+                {
+                    "data_group_id": "23-11",
+                    "outcome": "NOT_APPLICABLE",
+                    "messages": "Not Applicable",
+                    "calculated_values": ""
+                }
+            ]
         },
         {
             "rule_id": "23-12",
@@ -12566,7 +12604,7 @@
             "evaluations": [
                 {
                     "data_group_id": "23-12",
-                    "outcome": "UNDETERMINED",
+                    "outcome": "NOT_APPLICABLE",
                     "messages": "",
                     "calculated_values": ""
                 }
@@ -12742,10 +12780,91 @@
             "data_group_names": [],
             "evaluations": [
                 {
-                    "data_group_id": "23-16",
-                    "outcome": "UNDETERMINED",
-                    "messages": "zone:FIRSTFLOOR_PLENUM ZN is missing design_thermostat_heating_setpoint",
-                    "calculated_values": ""
+                    "data_group_id": "BUILDING STORY 1 VAV_REHEAT (SYS7)",
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": [
+                        {
+                            "variable": "hvac_id",
+                            "value": "BUILDING STORY 1 VAV_REHEAT (SYS7)"
+                        },
+                        {
+                            "variable": "heating_system_type_b",
+                            "value": "FLUID_LOOP"
+                        },
+                        {
+                            "variable": "hot_water_loop_type",
+                            "value": "HEATING"
+                        },
+                        {
+                            "variable": "heating_coil_setpoint",
+                            "value": "40.08000000000002",
+                            "unit": "F"
+                        },
+                        {
+                            "variable": "hvac_max_zone_setpoint",
+                            "value": "60.07999999999998",
+                            "unit": "F"
+                        }
+                    ]
+                },
+                {
+                    "data_group_id": "BUILDING STORY 2 VAV_REHEAT (SYS7)",
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": [
+                        {
+                            "variable": "hvac_id",
+                            "value": "BUILDING STORY 2 VAV_REHEAT (SYS7)"
+                        },
+                        {
+                            "variable": "heating_system_type_b",
+                            "value": "FLUID_LOOP"
+                        },
+                        {
+                            "variable": "hot_water_loop_type",
+                            "value": "HEATING"
+                        },
+                        {
+                            "variable": "heating_coil_setpoint",
+                            "value": "40.08000000000002",
+                            "unit": "F"
+                        },
+                        {
+                            "variable": "hvac_max_zone_setpoint",
+                            "value": "60.07999999999998",
+                            "unit": "F"
+                        }
+                    ]
+                },
+                {
+                    "data_group_id": "BUILDING STORY 3 VAV_REHEAT (SYS7)",
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": [
+                        {
+                            "variable": "hvac_id",
+                            "value": "BUILDING STORY 3 VAV_REHEAT (SYS7)"
+                        },
+                        {
+                            "variable": "heating_system_type_b",
+                            "value": "FLUID_LOOP"
+                        },
+                        {
+                            "variable": "hot_water_loop_type",
+                            "value": "HEATING"
+                        },
+                        {
+                            "variable": "heating_coil_setpoint",
+                            "value": "40.08000000000002",
+                            "unit": "F"
+                        },
+                        {
+                            "variable": "hvac_max_zone_setpoint",
+                            "value": "60.07999999999998",
+                            "unit": "F"
+                        }
+                    ]
                 }
             ]
         }

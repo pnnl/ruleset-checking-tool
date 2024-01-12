@@ -11,6 +11,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types i
     get_baseline_system_types,
 )
 from rct229.utils.assertions import getattr_
+from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
 
 CHILLER_PART_LOAD_EFFICIENCY_METRIC = SchemaEnums.schema_enums[
@@ -91,8 +92,12 @@ class Section22Rule32(RuleDefinitionListIndexedBase):
             )["minimum_integrated_part_load"]
 
             return {
-                "chiller_part_load_efficiency": chiller_part_load_efficiency,
-                "target_part_load_efficiency": target_part_load_efficiency,
+                "chiller_part_load_efficiency": CalcQ(
+                    "cooling_efficiency", chiller_part_load_efficiency
+                ),
+                "target_part_load_efficiency": CalcQ(
+                    "cooling_efficiency", target_part_load_efficiency
+                ),
                 "part_load_efficiency_metric": part_load_efficiency_metric,
             }
 

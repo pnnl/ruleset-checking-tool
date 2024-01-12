@@ -5153,7 +5153,7 @@
           "draft_type": "NATURAL",
           "energy_source_type": "NATURAL_GAS",
           "efficiency": 0.8,
-          "efficiency_metric": "ANNUAL_FUEL_UTILIZATION",
+          "efficiency_metric": "COMBUSTION",
           "rated_capacity": 1600560.89,
           "operation_lower_limit": 0.0,
           "operation_upper_limit": 1600560.00
@@ -5163,7 +5163,7 @@
           "loop": "Boiler Loop 1",
           "draft_type": "NATURAL",
           "efficiency": 0.8,
-          "efficiency_metric": "ANNUAL_FUEL_UTILIZATION",
+          "efficiency_metric": "COMBUSTION",
           "energy_source_type": "NATURAL_GAS",
           "rated_capacity": 1600560.89,
           "operation_lower_limit": 1600560.00,
@@ -5174,7 +5174,7 @@
         {
           "id": "Chiller 1",
           "cooling_loop": "Chiller Loop 1",
-          "condensing_loop": "Condenser Loop 1",
+          "condensing_loop": "CW Loop 1",
           "rated_capacity": 1310149.42,
           "compressor_type": "CENTRIFUGAL",
           "full_load_efficiency": 6.10590277777778,
@@ -5187,7 +5187,7 @@
         {
           "id": "Chiller 2",
           "cooling_loop": "Chiller Loop 1",
-          "condensing_loop": "Condenser Loop 1",
+          "condensing_loop": "CW Loop 1",
           "rated_capacity": 1310149.42,
           "compressor_type": "CENTRIFUGAL",
           "full_load_efficiency": 6.10590277777778,
@@ -5261,6 +5261,7 @@
             {
               "id": "Secondary CHW Loop 1",
               "type": "COOLING",
+              "pump_power_per_flow_rate": 348.701,
               "cooling_or_condensing_design_and_control": {
                 "id": "CLCLDC 1",
                 "minimum_flow_fraction": 0.25,
