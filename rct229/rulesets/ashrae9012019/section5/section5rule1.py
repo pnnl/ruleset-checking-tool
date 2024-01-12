@@ -80,27 +80,27 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
             has_proposed = rmd_p is not None
             has_user = rmd_u is not None
 
-            has_basseline_0_output = has_baseline_0 and find_one(
-                "$.output.output_instance", rmd_b0, False
+            has_basseline_0_output = has_baseline_0 and bool(
+                find_one("$.output.output_instance", rmd_b0)
             )
-            has_basseline_90_output = has_baseline_90 and find_one(
-                "$.output.output_instance", rmd_b90, False
+            has_basseline_90_output = has_baseline_90 and bool(
+                find_one("$.output.output_instance", rmd_b90)
             )
-            has_basseline_180_output = has_baseline_180 and find_one(
-                "$.output.output_instance", rmd_b180, False
+            has_basseline_180_output = has_baseline_180 and bool(
+                find_one("$.output.output_instance", rmd_b180)
             )
-            has_basseline_270_output = has_baseline_270 and find_one(
-                "$.output.output_instance", rmd_b270, False
+            has_basseline_270_output = has_baseline_270 and bool(
+                find_one("$.output.output_instance", rmd_b270)
             )
-            has_proposed_output = has_proposed and find_one(
-                "$.output.output_instance", rmd_p, False
+            has_proposed_output = has_proposed and bool(
+                find_one("$.output.output_instance", rmd_p)
             )
-            has_user_output = has_user and find_one(
-                "$.output.output_instance", rmd_u, False
+            has_user_output = has_user and bool(
+                find_one("$.output.output_instance", rmd_u)
             )
 
-            baseline_rmd_list = [rmd_b0, rmd_b90, rmd_b180, rmd_b270]
             rmd_list = [rmd_b0, rmd_b90, rmd_b180, rmd_b270, rmd_p, rmd_u]
+            rmd_list_no_user = [rmd_b0, rmd_b90, rmd_b180, rmd_b270, rmd_p]
 
             # count the rmds that aren't None
             no_of_rmds = len(
@@ -112,7 +112,7 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
 
             # filter out baseline rmds that aren't None then count the length
             no_of_output_instance = len(
-                [rmd_b["type"] for rmd_b in baseline_rmd_list if rmd_b is not None]
+                [rmd["type"] for rmd in rmd_list_no_user if rmd is not None]
             )
 
             return {
@@ -250,18 +250,18 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
                 no_of_rmds = calc_vals["no_of_rmds"]
                 no_of_output_instance = calc_vals["no_of_output_instance"]
 
-                has_proposed = calc_vals["has_proposed"]
-                has_user = calc_vals["has_user"]
                 has_baseline_0 = calc_vals["has_baseline_0"]
                 has_baseline_90 = calc_vals["has_baseline_90"]
                 has_baseline_180 = calc_vals["has_baseline_180"]
                 has_baseline_270 = calc_vals["has_baseline_270"]
+                has_proposed = calc_vals["has_proposed"]
+                has_user = calc_vals["has_user"]
 
-                has_proposed_output = calc_vals["has_proposed_output"]
                 has_basseline_0_output = calc_vals["has_basseline_0_output"]
                 has_basseline_90_output = calc_vals["has_basseline_90_output"]
                 has_basseline_180_output = calc_vals["has_basseline_180_output"]
                 has_basseline_270_output = calc_vals["has_basseline_270_output"]
+                has_proposed_output = calc_vals["has_proposed_output"]
 
                 return (
                     has_user
