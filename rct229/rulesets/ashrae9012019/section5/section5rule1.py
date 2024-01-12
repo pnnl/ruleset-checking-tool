@@ -73,8 +73,31 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
             rmd_p = context.PROPOSED
             rmd_u = context.USER
 
-            has_proposed = True if find_one("$.type", rmd_p) else False
-            has_user = True if find_one("$.type", rmd_u, False) else False
+            has_baseline_0 = rmd_b0 is not None
+            has_baseline_90 = rmd_b90 is not None
+            has_baseline_180 = rmd_b180 is not None
+            has_baseline_270 = rmd_b270 is not None
+            has_proposed = rmd_p is not None
+            has_user = rmd_u is not None
+
+            has_basseline_0_output = has_baseline_0 and find_one(
+                "$.output.output_instance", rmd_b0, False
+            )
+            has_basseline_90_output = has_baseline_90 and find_one(
+                "$.output.output_instance", rmd_b90, False
+            )
+            has_basseline_180_output = has_baseline_180 and find_one(
+                "$.output.output_instance", rmd_b180, False
+            )
+            has_basseline_270_output = has_baseline_270 and find_one(
+                "$.output.output_instance", rmd_b270, False
+            )
+            has_proposed_output = has_proposed and find_one(
+                "$.output.output_instance", rmd_p, False
+            )
+            has_user_output = has_user and find_one(
+                "$.output.output_instance", rmd_u, False
+            )
 
             baseline_rmd_list = [rmd_b0, rmd_b90, rmd_b180, rmd_b270]
             rmd_list = [rmd_b0, rmd_b90, rmd_b180, rmd_b270, rmd_p, rmd_u]
@@ -87,19 +110,24 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
                 )
             )
 
-            # filter out baseline rmds that have the type key
-            baseline_list = [
-                find_one("$.type", rmd_b)
-                for rmd_b in baseline_rmd_list
-                if find_one("$.type", rmd_b, False)
-            ]
-
-            no_of_output_instance = len(baseline_list)
+            # filter out baseline rmds that aren't None then count the length
+            no_of_output_instance = len(
+                [rmd_b["type"] for rmd_b in baseline_rmd_list if rmd_b is not None]
+            )
 
             return {
+                "has_baseline_0": has_baseline_0,
+                "has_baseline_90": has_baseline_90,
+                "has_baseline_180": has_baseline_180,
+                "has_baseline_270": has_baseline_270,
                 "has_proposed": has_proposed,
                 "has_user": has_user,
-                "baseline_list": baseline_list,
+                "has_basseline_0_output": has_basseline_0_output,
+                "has_basseline_90_output": has_basseline_90_output,
+                "has_basseline_180_output": has_basseline_180_output,
+                "has_basseline_270_output": has_basseline_270_output,
+                "has_proposed_output": has_proposed_output,
+                "has_user_output": has_user_output,
                 "no_of_rmds": no_of_rmds,
                 "no_of_output_instance": no_of_output_instance,
             }
@@ -108,12 +136,12 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
             def __init__(self):
                 super(Section5Rule1.RMDRule.BuildingRule, self).__init__(
                     rmrs_used=produce_ruleset_model_instance(
-                        USER=True,
+                        USER=False,
                         BASELINE_0=True,
-                        BASELINE_90=True,
-                        BASELINE_180=True,
-                        BASELINE_270=True,
-                        PROPOSED=True,
+                        BASELINE_90=False,
+                        BASELINE_180=False,
+                        BASELINE_270=False,
+                        PROPOSED=False,
                     ),
                     required_fields={
                         "$.building_segments[*].zones[*].surfaces[*]": ["azimuth"],
@@ -123,63 +151,40 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
 
             def get_calc_vals(self, context, data=None):
                 building_b0 = context.BASELINE_0
-                building_b90 = context.BASELINE_90
-                building_b180 = context.BASELINE_180
-                building_b270 = context.BASELINE_270
-                building_p = context.PROPOSED
-                building_u = context.USER
 
+                has_baseline_0 = data["has_baseline_0"]
+                has_baseline_90 = data["has_baseline_90"]
+                has_baseline_180 = data["has_baseline_180"]
+                has_baseline_270 = data["has_baseline_270"]
                 has_proposed = data["has_proposed"]
                 has_user = data["has_user"]
-                baseline_list = data["baseline_list"]
+                has_basseline_0_output = data["has_basseline_0_output"]
+                has_basseline_90_output = data["has_basseline_90_output"]
+                has_basseline_180_output = data["has_basseline_180_output"]
+                has_basseline_270_output = data["has_basseline_270_output"]
+                has_proposed_output = data["has_proposed_output"]
+                has_user_output = data["has_user_output"]
                 no_of_rmds = data["no_of_rmds"]
                 no_of_output_instance = data["no_of_output_instance"]
 
-                has_baseline_0 = RULESET_MODEL.BASELINE_0 in baseline_list
-                has_baseline_90 = RULESET_MODEL.BASELINE_90 in baseline_list
-                has_baseline_180 = RULESET_MODEL.BASELINE_180 in baseline_list
-                has_baseline_270 = RULESET_MODEL.BASELINE_270 in baseline_list
+                # define a function to get the azimuth's corresponding key
+                def get_key_for_azi(azi):
+                    azi_value = azi.to("degrees").m
+                    low_bound = azi_value - (azi_value % 3)
+                    high_bound = low_bound + 3
+                    return f"{low_bound}-{high_bound}"
 
-                has_proposed_output = has_proposed and find_one(
-                    "$.output.output_instance", building_p, False
-                )
-                has_user_output = has_user and find_one(
-                    "$.output.output_instance", building_u, False
-                )
-                has_basseline_0_output = has_baseline_0 and find_one(
-                    "$.output.output_instance", building_b0, False
-                )
-                has_basseline_90_output = has_baseline_90 and find_one(
-                    "$.output.output_instance", building_b90, False
-                )
-                has_basseline_180_output = has_baseline_180 and find_one(
-                    "$.output.output_instance", building_b180, False
-                )
-                has_basseline_270_output = has_baseline_270 and find_one(
-                    "$.output.output_instance", building_b270, False
-                )
-
-                # define a function to find the azimuth's corresponding key
-                find_key_for_azi = lambda azi: next(
-                    (
-                        key
-                        for key, _ in azimuth_fen_area_dict_b.items()
-                        if int(key.split("-")[0])
-                        <= azi.to(ureg("degree")).m
-                        <= int(key.split("-")[1])
-                    ),
-                    None,
-                )
-
-                azimuth_fen_area_dict_b = {
-                    f"{azi}-{azi+3}": ZERO.AREA for azi in range(0, 360, 3)
-                }
+                azimuth_fen_area_dict_b = {}
                 total_surface_fenestration_area_b = ZERO.AREA
                 for surface_b in find_all(
                     "$.building_segments[*].zones[*].surfaces[*]", building_b0
                 ):
                     if get_opaque_surface_type(surface_b) == OST.ABOVE_GRADE_WALL:
                         surface_azimuth_b = surface_b["azimuth"]
+                        surface_azimuth_bin = get_key_for_azi(surface_azimuth_b)
+
+                        if surface_azimuth_bin not in azimuth_fen_area_dict_b:
+                            azimuth_fen_area_dict_b[surface_azimuth_bin] = ZERO.AREA
 
                         for subsurface_b in find_all("$.subsurfaces[*]", surface_b):
                             glazed_area_b = subsurface_b.get("glazed_area", ZERO.AREA)
@@ -198,7 +203,7 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
                                     glazed_area_b + opaque_area_b
                                 )
                     azimuth_fen_area_dict_b[
-                        find_key_for_azi(surface_azimuth_b)
+                        surface_azimuth_bin
                     ] += total_surface_fenestration_area_b
 
                 max_fen_area_b = azimuth_fen_area_dict_b[
@@ -225,18 +230,18 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
                     "no_of_rmds": no_of_rmds,
                     "no_of_output_instance": no_of_output_instance,
                     "rotation_expected_b": rotation_expected_b,
-                    "has_proposed": has_proposed,
-                    "has_user": has_user,
                     "has_baseline_0": has_baseline_0,
                     "has_baseline_90": has_baseline_90,
                     "has_baseline_180": has_baseline_180,
                     "has_baseline_270": has_baseline_270,
-                    "has_proposed_output": has_proposed_output,
-                    "has_user_output": has_user_output,
+                    "has_proposed": has_proposed,
+                    "has_user": has_user,
                     "has_basseline_0_output": has_basseline_0_output,
                     "has_basseline_90_output": has_basseline_90_output,
                     "has_basseline_180_output": has_basseline_180_output,
                     "has_basseline_270_output": has_basseline_270_output,
+                    "has_proposed_output": has_proposed_output,
+                    "has_user_output": has_user_output,
                 }
 
             def rule_check(self, context, calc_vals=None, data=None):
@@ -273,8 +278,8 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
                         and has_basseline_90_output
                         and has_basseline_180_output
                         and has_basseline_270_output
-                        and no_of_rmds == 5
-                        and no_of_output_instance == 6
+                        and no_of_rmds == 6
+                        and no_of_output_instance == 5
                     )
                     or (not rotation_expected_b)
                 )
