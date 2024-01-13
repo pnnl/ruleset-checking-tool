@@ -222,7 +222,7 @@
                         "type": "BASELINE_0"
                     },
                     {
-                        "id": "90 Rotation RMD",
+                        "id": "RMD 1",
                         "output": {
                             "id": "Output 1",
                             "output_instance": {
@@ -286,7 +286,7 @@
                         "type": "BASELINE_90"
                     },
                     {
-                        "id": "180 Rotation RMD",
+                        "id": "RMD 1",
                         "output": {
                             "id": "Output 1",
                             "output_instance": {
@@ -350,7 +350,7 @@
                         "type": "BASELINE_180"
                     },
                     {
-                        "id": "270 Rotation RMD",
+                        "id": "RMD 1",
                         "output": {
                             "id": "Output 1",
                             "output_instance": {
