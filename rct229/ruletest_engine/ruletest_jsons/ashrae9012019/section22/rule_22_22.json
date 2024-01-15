@@ -9,10 +9,10 @@
             "rule_id": "22-22",
             "ruleset_reference": "Table G3.5.3",
             "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for full load, in accordance with Tables G3.5.3.  ",
-            "applicable_rmr": "Baseline Model",
+            "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Full",
+            "primary_rule": "Yes",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -106,7 +106,7 @@
                                 "cooling_loop": "Chiller Loop 1",
                                 "compressor_type": "POSITIVE_DISPLACEMENT",
                                 "rated_capacity": 457210.0,
-                                "full_load_efficiency": 0.22462325845891384
+                                "full_load_efficiency": 4.452
                             }
                         ],
                         "pumps": [
@@ -158,10 +158,10 @@
             "rule_id": "22-22",
             "ruleset_reference": "Table G3.5.3",
             "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for full load, in accordance with Tables G3.5.3.  ",
-            "applicable_rmr": "Baseline Model",
+            "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Full",
+            "primary_rule": "Yes",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -255,7 +255,7 @@
                                 "cooling_loop": "Chiller Loop 1",
                                 "compressor_type": "POSITIVE_DISPLACEMENT",
                                 "rated_capacity": 562720.0,
-                                "full_load_efficiency": 0.25305658231447253
+                                "full_load_efficiency": 3.952
                             }
                         ],
                         "pumps": [
@@ -307,10 +307,10 @@
             "rule_id": "22-22",
             "ruleset_reference": "Table G3.5.3",
             "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for full load, in accordance with Tables G3.5.3.  ",
-            "applicable_rmr": "Baseline Model",
+            "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Full",
+            "primary_rule": "Yes",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -379,7 +379,7 @@
                                 "cooling_loop": "Chiller Loop 1",
                                 "compressor_type": "CENTRIFUGAL",
                                 "rated_capacity": 703400.0,
-                                "full_load_efficiency": 0.18026727324424224
+                                "full_load_efficiency": 5.547
                             }
                         ],
                         "pumps": [
@@ -422,10 +422,10 @@
             "rule_id": "22-22",
             "ruleset_reference": "Table G3.5.3",
             "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for full load, in accordance with Tables G3.5.3.  ",
-            "applicable_rmr": "Baseline Model",
+            "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Full",
+            "primary_rule": "Yes",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -494,7 +494,7 @@
                                 "cooling_loop": "Chiller Loop 1",
                                 "compressor_type": "CENTRIFUGAL",
                                 "rated_capacity": 703400.0,
-                                "full_load_efficiency": 0.16377594540801818
+                                "full_load_efficiency": 6.106
                             }
                         ],
                         "pumps": [
@@ -537,10 +537,10 @@
             "rule_id": "22-22",
             "ruleset_reference": "Table G3.5.3",
             "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for full load, in accordance with Tables G3.5.3.  ",
-            "applicable_rmr": "Baseline Model",
+            "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Full",
+            "primary_rule": "Yes",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
