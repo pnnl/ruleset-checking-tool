@@ -1,3 +1,4 @@
+import copy
 import inspect
 
 from rct229.schema.schema_utils import quantify_rmr
@@ -59,7 +60,10 @@ def evaluate_all_rules(ruleset_model_path_list):
 
         for rmd_json in find_all("$.ruleset_model_descriptions[*]", rpd_json):
             model_type = find_exactly_one("$.type", rmd_json)
-            ruleset_models.__setitem__(model_type, rpd_json)
+            # if a rpd json contains multiple, we need to recreate rpd_json
+            rpd_json_copy = copy.deepcopy(rpd_json)
+            rpd_json_copy["ruleset_model_descriptions"] = [rmd_json]
+            ruleset_models.__setitem__(model_type, rpd_json_copy)
             rpd_rmd_map = {"ruleset_model_type": model_type, "file_name": rpd_path}
             rpd_rmd_map_list.append(rpd_rmd_map)
 

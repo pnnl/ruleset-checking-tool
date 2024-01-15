@@ -96,7 +96,8 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
 
             return climate_zone not in NOT_APPLICABLE_CLIMATE_ZONE and any(
                 [
-                    baseline_system_type_compare(
+                    baseline_system_types_dict_b[system_type]
+                    and baseline_system_type_compare(
                         system_type, applicable_sys_type, False
                     )
                     for system_type in baseline_system_types_dict_b
