@@ -16,7 +16,6 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type imp
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
     get_opaque_surface_type,
 )
-from rct229.schema.config import ureg
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.jsonpath_utils import find_all, find_one
 from rct229.utils.pint_utils import ZERO
@@ -80,16 +79,16 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
             has_proposed = rmd_p is not None
             has_user = rmd_u is not None
 
-            has_basseline_0_output = has_baseline_0 and bool(
+            has_baseline_0_output = has_baseline_0 and bool(
                 find_one("$.output.output_instance", rmd_b0)
             )
-            has_basseline_90_output = has_baseline_90 and bool(
+            has_baseline_90_output = has_baseline_90 and bool(
                 find_one("$.output.output_instance", rmd_b90)
             )
-            has_basseline_180_output = has_baseline_180 and bool(
+            has_baseline_180_output = has_baseline_180 and bool(
                 find_one("$.output.output_instance", rmd_b180)
             )
-            has_basseline_270_output = has_baseline_270 and bool(
+            has_baseline_270_output = has_baseline_270 and bool(
                 find_one("$.output.output_instance", rmd_b270)
             )
             has_proposed_output = has_proposed and bool(
@@ -122,10 +121,10 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
                 "has_baseline_270": has_baseline_270,
                 "has_proposed": has_proposed,
                 "has_user": has_user,
-                "has_basseline_0_output": has_basseline_0_output,
-                "has_basseline_90_output": has_basseline_90_output,
-                "has_basseline_180_output": has_basseline_180_output,
-                "has_basseline_270_output": has_basseline_270_output,
+                "has_baseline_0_output": has_baseline_0_output,
+                "has_baseline_90_output": has_baseline_90_output,
+                "has_baseline_180_output": has_baseline_180_output,
+                "has_baseline_270_output": has_baseline_270_output,
                 "has_proposed_output": has_proposed_output,
                 "has_user_output": has_user_output,
                 "no_of_rmds": no_of_rmds,
@@ -158,10 +157,10 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
                 has_baseline_270 = data["has_baseline_270"]
                 has_proposed = data["has_proposed"]
                 has_user = data["has_user"]
-                has_basseline_0_output = data["has_basseline_0_output"]
-                has_basseline_90_output = data["has_basseline_90_output"]
-                has_basseline_180_output = data["has_basseline_180_output"]
-                has_basseline_270_output = data["has_basseline_270_output"]
+                has_baseline_0_output = data["has_baseline_0_output"]
+                has_baseline_90_output = data["has_baseline_90_output"]
+                has_baseline_180_output = data["has_baseline_180_output"]
+                has_baseline_270_output = data["has_baseline_270_output"]
                 has_proposed_output = data["has_proposed_output"]
                 has_user_output = data["has_user_output"]
                 no_of_rmds = data["no_of_rmds"]
@@ -175,12 +174,12 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
                     return f"{low_bound}-{high_bound}"
 
                 azimuth_fen_area_dict_b = {}
-                total_surface_fenestration_area_b = ZERO.AREA
                 for surface_b in find_all(
                     "$.building_segments[*].zones[*].surfaces[*]", building_b0
                 ):
                     if get_opaque_surface_type(surface_b) == OST.ABOVE_GRADE_WALL:
                         surface_azimuth_b = surface_b["azimuth"]
+                        total_surface_fenestration_area_b = ZERO.AREA
                         surface_azimuth_bin = get_key_for_azi(surface_azimuth_b)
 
                         if surface_azimuth_bin not in azimuth_fen_area_dict_b:
@@ -236,10 +235,10 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
                     "has_baseline_270": has_baseline_270,
                     "has_proposed": has_proposed,
                     "has_user": has_user,
-                    "has_basseline_0_output": has_basseline_0_output,
-                    "has_basseline_90_output": has_basseline_90_output,
-                    "has_basseline_180_output": has_basseline_180_output,
-                    "has_basseline_270_output": has_basseline_270_output,
+                    "has_baseline_0_output": has_baseline_0_output,
+                    "has_baseline_90_output": has_baseline_90_output,
+                    "has_baseline_180_output": has_baseline_180_output,
+                    "has_baseline_270_output": has_baseline_270_output,
                     "has_proposed_output": has_proposed_output,
                     "has_user_output": has_user_output,
                 }
@@ -257,10 +256,10 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
                 has_proposed = calc_vals["has_proposed"]
                 has_user = calc_vals["has_user"]
 
-                has_basseline_0_output = calc_vals["has_basseline_0_output"]
-                has_basseline_90_output = calc_vals["has_basseline_90_output"]
-                has_basseline_180_output = calc_vals["has_basseline_180_output"]
-                has_basseline_270_output = calc_vals["has_basseline_270_output"]
+                has_baseline_0_output = calc_vals["has_baseline_0_output"]
+                has_baseline_90_output = calc_vals["has_baseline_90_output"]
+                has_baseline_180_output = calc_vals["has_baseline_180_output"]
+                has_baseline_270_output = calc_vals["has_baseline_270_output"]
                 has_proposed_output = calc_vals["has_proposed_output"]
 
                 return (
@@ -268,16 +267,16 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
                     and has_proposed
                     and has_baseline_0
                     and has_proposed_output
-                    and has_basseline_0_output
+                    and has_baseline_0_output
                 ) and (
                     (
                         rotation_expected_b
                         and has_baseline_90
                         and has_baseline_180
                         and has_baseline_270
-                        and has_basseline_90_output
-                        and has_basseline_180_output
-                        and has_basseline_270_output
+                        and has_baseline_90_output
+                        and has_baseline_180_output
+                        and has_baseline_270_output
                         and no_of_rmds == 6
                         and no_of_output_instance == 5
                     )
