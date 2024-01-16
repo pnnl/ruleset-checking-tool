@@ -173,7 +173,7 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                             rmd_p,
                         )
 
-                        zone_data[hvac_id_p][
+                        zone_data[hvac_id_b][
                             "serves_zones_that_have_dehumid_heat_recovery_p"
                         ] = (
                             find_one("$.cooling_system.dehumidification_type", hvac_p)

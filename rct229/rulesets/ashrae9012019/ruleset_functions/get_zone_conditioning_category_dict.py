@@ -8,11 +8,10 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type imp
 from rct229.schema.config import ureg
 from rct229.utils.assertions import (
     assert_,
-    assert_required_fields,
     get_first_attr_,
     getattr_,
 )
-from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.jsonpath_utils import find_all, find_one, find_exactly_required_fields
 from rct229.utils.pint_utils import ZERO
 
 CAPACITY_THRESHOLD = 3.4 * ureg("Btu/(hr * ft2)")
@@ -98,7 +97,7 @@ def get_zone_conditioning_category_dict(climate_zone, building):
         CONDITIONED_MIXED, CONDITIONED_NON_RESIDENTIAL, CONDITIONED_RESIDENTIAL,
         SEMI_HEATED, UNCONDITIONED, UNENCOLOSED
     """
-    assert_required_fields(
+    find_exactly_required_fields(
         GET_ZONE_CONDITIONING_CATEGORY_DICT__REQUIRED_FIELDS["building"], building
     )
 
@@ -124,7 +123,14 @@ def get_zone_conditioning_category_dict(climate_zone, building):
                 hvac_systems_dict[hvac_sys_id]["cooling_system"][
                     "design_sensible_cool_capacity"
                 ]
-                if "cooling_system" in hvac_systems_dict[hvac_sys_id]
+                if assert_(
+                    hvac_systems_dict.get(hvac_sys_id),
+                    f"HVAC system {hvac_sys_id} is missing in the HeatingVentilatingAiConditioningSystems data group.",
+                )
+                and find_one(
+                    "$.cooling_system.design_sensible_cool_capacity",
+                    hvac_systems_dict[hvac_sys_id],
+                )
                 # Handle nonexistent cooling_system
                 else ZERO.POWER
             )
@@ -138,13 +144,25 @@ def get_zone_conditioning_category_dict(climate_zone, building):
         hvac_sys_id: (
             (
                 hvac_systems_dict[hvac_sys_id]["heating_system"]["design_capacity"]
-                if "heating_system" in hvac_systems_dict[hvac_sys_id]
+                if assert_(
+                    hvac_systems_dict.get(hvac_sys_id),
+                    f"HVAC system {hvac_sys_id} is missing in the HeatingVentilatingAiConditioningSystems data group.",
+                )
+                and find_one(
+                    "$.heating_system.design_capacity", hvac_systems_dict[hvac_sys_id]
+                )
                 # Handle missing heating_system
                 else ZERO.POWER
             )
             + (
                 hvac_systems_dict[hvac_sys_id]["preheat_system"]["design_capacity"]
-                if "preheat_system" in hvac_systems_dict[hvac_sys_id]
+                if assert_(
+                    hvac_systems_dict.get(hvac_sys_id),
+                    f"HVAC system {hvac_sys_id} is missing in the HeatingVentilatingAiConditioningSystems data group.",
+                )
+                and find_one(
+                    "$.preheat_system.design_capacity", hvac_systems_dict[hvac_sys_id]
+                )
                 # Handle missing preheat_system
                 else ZERO.POWER
             )

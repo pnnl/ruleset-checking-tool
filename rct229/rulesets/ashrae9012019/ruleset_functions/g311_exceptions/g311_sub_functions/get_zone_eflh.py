@@ -100,11 +100,6 @@ def get_zone_eflh(rmi: dict, zone_id: str, is_leap_year: bool):
     # sum of the maximum number of occupants
     total_zone_occupants = sum(num_of_occupant_per_space_list)
 
-    assert_(
-        total_zone_occupants > 0,
-        f"The calculated total zone occupants is 0.0 in thermal zone {zone_id}, Check the model inputs",
-    )
-
     # list of list of annual hourly_values per space.
     # this shall guarantee the num_hours length per hourly_values list.
     # [[0,0,0.2,0.2...], [0,0,0.2,0.2...]...]
@@ -143,9 +138,12 @@ def get_zone_eflh(rmi: dict, zone_id: str, is_leap_year: bool):
         hvac_systems_operational_this_hour = any(
             map_(hvac_operation_schedule_list, lambda schedule: schedule[hour])
         )
-
+        # Allow plenum as indirectly conditioned zone but has 0.0 occupants.
+        # In such case, we do not add flh value
         if (
-            occupants_this_hour / total_zone_occupants > ZONE_OCCUPANTS_RATIO_THRESHOLD
+            total_zone_occupants > 0
+            and occupants_this_hour / total_zone_occupants
+            > ZONE_OCCUPANTS_RATIO_THRESHOLD
             and hvac_systems_operational_this_hour
         ):
             flh += 1
