@@ -1,25 +1,26 @@
 {
-    "rule-5-3-a": {
+    "rule-5-31-a": {
         "Section": 5,
-        "Rule": 3,
+        "Rule": 31,
         "Test": "a",
-        "test_description": "Project has one building segment with one zone and a single surface. The surface is not a roof so this rule does not apply.",
-        "expected_rule_outcome": "not_applicable",
+        "test_description": "Project has one building segment and includes a space with a roof surface. The roof surface thermal emittance in the proposed and user models is equal to 0.9",
+        "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "5-3",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b) ",
-            "rule_description": "Baseline roof assemblies must conform with assemblies detailed in Appendix A",
+            "rule_id": "5-31",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance",
+            "rule_description": "The baseline roof surfaces shall be modeled using a solar reflectance of 0.30.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
-            "comparison_value": "Expected Value",
-            "primary_rule": "Applicability",
+            "comparison_value": "User Model",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "weather": {
-                    "climate_zone": "CZ4A"
+                    "climate_zone": "CZ4A",
+                    "data_source_type": "OTHER"
                 },
                 "ruleset_model_descriptions": [
                     {
@@ -36,97 +37,11 @@
                                                 "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 21.237634943999996,
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "DWELLING_UNIT",
-                                                        "floor_area": 23.225759999999998
-                                                    }
-                                                ],
-                                                "terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
-                                                    }
-                                                ],
-                                                "surfaces": [
-                                                    {
-                                                        "id": "Surface 1",
-                                                        "adjacent_to": "INTERIOR",
-                                                        "tilt": 90,
-                                                        "construction": {
-                                                            "id": "Construction 1"
-                                                        }
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        "heating_ventilating_air_conditioning_systems": [
-                                            {
-                                                "id": "HVAC 1",
-                                                "cooling_system": {
-                                                    "id": "Cooling System 1",
-                                                    "design_sensible_cool_capacity": 10551.0
-                                                },
-                                                "heating_system": {
-                                                    "id": "Heating System 1",
-                                                    "design_capacity": 9378.275555555556
-                                                }
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ],
-                        "type": "BASELINE_0"
-                    }
-                ]
-            }
-        }
-    },
-    "rule-5-3-b": {
-        "Section": 5,
-        "Rule": 3,
-        "Test": "b",
-        "test_description": "Project has one building segment with one zone and a single surface. The surface is a regulated exterior roof for which this rule cannot be fully evaluated.",
-        "expected_rule_outcome": "undetermined",
-        "standard": {
-            "rule_id": "5-3",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b) ",
-            "rule_description": "Baseline roof assemblies must conform with assemblies detailed in Appendix A",
-            "applicable_rmr": "Baseline Model",
-            "rule_assertion": "=",
-            "comparison_value": "Expected Value",
-            "primary_rule": "Applicability",
-            "schema_version": "0.0.29"
-        },
-        "rmr_transformations": {
-            "baseline": {
-                "id": "RPD 1",
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
-                "ruleset_model_descriptions": [
-                    {
-                        "id": "RMD 1",
-                        "buildings": [
-                            {
-                                "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
-                                "building_segments": [
-                                    {
-                                        "id": "Building Segment 1",
-                                        "zones": [
-                                            {
-                                                "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "DWELLING_UNIT",
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
@@ -140,9 +55,11 @@
                                                     {
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
-                                                        "tilt": 0,
-                                                        "construction": {
-                                                            "id": "Construction 1"
+                                                        "tilt": 50,
+                                                        "area": 929.0303999999999,
+                                                        "optical_properties": {
+                                                            "id": "Surface Optical Properties 1",
+                                                            "absorptance_solar_exterior": 0.7
                                                         }
                                                     }
                                                 ]
@@ -153,7 +70,7 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "design_sensible_cool_capacity": 10551.0
+                                                    "design_sensible_cool_capacity": 35170.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
@@ -165,7 +82,96 @@
                                 ]
                             }
                         ],
-                        "type": "BASELINE_0"
+                        "type": "USER"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-31-b": {
+        "Section": 5,
+        "Rule": 31,
+        "Test": "b",
+        "test_description": "Project has one building segment and includes a space with a roof surface. The roof surface solar reflectance in the proposed and user models is equal to 0.7",
+        "expected_rule_outcome": "undetermined",
+        "standard": {
+            "rule_id": "5-31",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance",
+            "rule_description": "The baseline roof surfaces shall be modeled using a solar reflectance of 0.30.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "User Model",
+            "primary_rule": "Full",
+            "schema_version": "0.0.29"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "RPD 1",
+                "weather": {
+                    "climate_zone": "CZ4A",
+                    "data_source_type": "OTHER"
+                },
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 21.237634943999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 50,
+                                                        "area": 929.0303999999999,
+                                                        "optical_properties": {
+                                                            "id": "Surface Optical Properties 1",
+                                                            "absorptance_solar_exterior": 0.5
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 35170.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 9378.275555555556
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             }
