@@ -8,6 +8,9 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type imp
 )
 from rct229.utils.jsonpath_utils import find_all
 
+UNDETERMINED_MSG = "It cannot be determined if the ground temperature schedule for the project is representative of the project climate."
+NOT_APPLICABLE_MSG = "A ground temperature schedule was not found for the project."
+
 
 class Section5Rule38(PartialRuleDefinition):
     """Rule 38 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
@@ -23,7 +26,7 @@ class Section5Rule38(PartialRuleDefinition):
             standard_section="Section G3.1-14(b) Building Envelope Modeling Requirements for the Proposed design and Baseline",
             is_primary_rule=False,
             required_fields={
-                "$": ["weather", "ruleset_model_descriptions"],
+                "$": ["weather"],
             },
         )
 
@@ -31,13 +34,12 @@ class Section5Rule38(PartialRuleDefinition):
         rpd = context.BASELINE_0
         return any(
             [
-                surface_b
+                get_opaque_surface_type(surface_b) == OST.BELOW_GRADE_WALL
                 for surface_b in find_all(
                     "$.ruleset_model_descriptions[0].buildings[*].building_segments[*].zones["
                     "*].surfaces[*]",
                     rpd,
                 )
-                if get_opaque_surface_type(surface_b) == OST.BELOW_GRADE_WALL
             ]
         )
 
@@ -49,3 +51,7 @@ class Section5Rule38(PartialRuleDefinition):
     def applicability_check(self, context, calc_vals, data):
         ground_temperature_schedule = calc_vals["ground_temperature_schedule"]
         return ground_temperature_schedule
+
+    def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
+        ground_temperature_schedule = calc_vals["ground_temperature_schedule"]
+        return UNDETERMINED_MSG if ground_temperature_schedule else NOT_APPLICABLE_MSG
