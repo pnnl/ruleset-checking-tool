@@ -19,7 +19,7 @@ class Section22Rule41(PartialRuleDefinition):
             standard_section="Section 22 CHW&CW Loop",
             is_primary_rule=False,
             rmr_context="ruleset_model_descriptions/0/heat_rejections",
-            manual_check_required_msg="B-RMD IS MODELED WITH PURCHASED CHILLED WATER. VERIFY THAT THERE IS ONLY ONE PURCHASED CHILLED WATER LOOP IN THE BASELINE MODEL.",
+            manual_check_required_msg="B-RMD SHOULD BE MODELED WITH PURCHASED CHILLED WATER. VERIFY THAT THERE IS ONLY ONE PURCHASED CHILLED WATER LOOP IN THE BASELINE MODEL.",
         )
 
     def applicability_check(self, context, calc_vals, data):

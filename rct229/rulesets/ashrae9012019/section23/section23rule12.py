@@ -38,7 +38,10 @@ class Section23Rule12(PartialRuleDefinition):
 
         return any(
             [
-                baseline_system_type_compare(system_type, applicable_sys_type, False)
+                baseline_system_types_dict_b[system_type]
+                and baseline_system_type_compare(
+                    system_type, applicable_sys_type, False
+                )
                 for system_type in baseline_system_types_dict_b
                 for applicable_sys_type in APPLICABLE_SYS_TYPES
             ]
