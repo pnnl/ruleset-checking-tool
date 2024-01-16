@@ -60,7 +60,10 @@ class Section23Rule14(RuleDefinitionListIndexedBase):
         # if baseline does not have system 3-8 or 11, 12, 13, then this rule is not applicable
         return any(
             [
-                baseline_system_type_compare(system_type, applicable_sys_type, False)
+                baseline_system_types_dict[system_type]
+                and baseline_system_type_compare(
+                    system_type, applicable_sys_type, False
+                )
                 for system_type in baseline_system_types_dict
                 for applicable_sys_type in APPLICABLE_SYS_TYPES
             ]
