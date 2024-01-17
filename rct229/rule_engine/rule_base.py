@@ -291,8 +291,9 @@ class RuleDefinitionBase:
                 # rmr used
                 self.rmrs_used[ruleset_model]
                 and not (
-                # and rmr is not optional
-                    self.rmrs_used_optional and self.rmrs_used_optional[ruleset_model]
+                    # and rmr is not optional
+                    self.rmrs_used_optional
+                    and self.rmrs_used_optional[ruleset_model]
                 )
                 # and rmds[ruleset_model] is None or empty
                 and (rmds[ruleset_model] is None or not rmds[ruleset_model])
