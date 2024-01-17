@@ -49,7 +49,10 @@ class Section23Rule5(RuleDefinitionListIndexedBase):
                 baseline_system_types_dict[system_type]
                 for system_type in baseline_system_types_dict
                 for applicable_sys_type in APPLICABLE_SYS_TYPES
-                if baseline_system_type_compare(system_type, applicable_sys_type, False)
+                if baseline_system_types_dict[system_type]
+                and baseline_system_type_compare(
+                    system_type, applicable_sys_type, False
+                )
             ]
         )
 
@@ -63,7 +66,6 @@ class Section23Rule5(RuleDefinitionListIndexedBase):
                 rmrs_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
-                required_fields={"$": ["is_first_stage_heat_fan_powered_box"]},
             )
 
         def is_applicable(self, context, data=None):
@@ -79,9 +81,9 @@ class Section23Rule5(RuleDefinitionListIndexedBase):
 
         def get_calc_vals(self, context, data=None):
             terminal_b = context.BASELINE_0
-            is_first_stage_heat_fan_powered_box_b = terminal_b[
-                "is_first_stage_heat_fan_powered_box"
-            ]
+            is_first_stage_heat_fan_powered_box_b = getattr_(
+                terminal_b, "terminals", "is_first_stage_heat_fan_powered_box"
+            )
 
             return {
                 "is_first_stage_heat_fan_powered_box_b": is_first_stage_heat_fan_powered_box_b
