@@ -1,5 +1,5 @@
 from rct229.ruletest_engine.ruletest_jsons.scripts.excel_generation_utilities import (
-    create_rule_test_documentation_spreadsheet
+    create_rule_test_documentation_spreadsheet,
 )
 
 # INPUT:

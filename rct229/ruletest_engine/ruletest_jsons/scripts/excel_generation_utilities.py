@@ -1,27 +1,27 @@
 import glob
-import os
 import json
+import os
 import re
 
 import pandas as pd
 from openpyxl import utils
-from openpyxl.styles import Font, PatternFill, Alignment
+from openpyxl.styles import Alignment, Font, PatternFill
 
 
 def create_rule_test_documentation_spreadsheet(ruleset_standard):
-    """ Generates an Excel documentation file for all ruletest JSONS found for a particular ruleset standard in:
-        ruleset_checking_tool/rct229/ruletest_engine/ruletest_jsons/RULESET_STANDARD.
+    """Generates an Excel documentation file for all ruletest JSONS found for a particular ruleset standard in:
+    ruleset_checking_tool/rct229/ruletest_engine/ruletest_jsons/RULESET_STANDARD.
 
-        Resulting Excel file will be titled RULESET_STANDARD_rules.xlsx in the directory mentioned above.
+    Resulting Excel file will be titled RULESET_STANDARD_rules.xlsx in the directory mentioned above.
 
-        Parameters
-        ----------
+    Parameters
+    ----------
 
-        ruleset_standard : str
+    ruleset_standard : str
 
-            A string representing a ruleset standard directory as specified under:
-                ruleset_checking_tool/rct229/ruletest_engine/ruletest_jsons/RULESET_STANDARD
-            Example: "ashrae902019"
+        A string representing a ruleset standard directory as specified under:
+            ruleset_checking_tool/rct229/ruletest_engine/ruletest_jsons/RULESET_STANDARD
+        Example: "ashrae902019"
 
 
     """
@@ -40,26 +40,26 @@ def create_rule_test_documentation_spreadsheet(ruleset_standard):
 
 def generate_rule_test_dictionary(ruleset_standard):
     """Aggregates all ruletest JSON information found in the specified directory into a dictionary for easy data
-        manipulation and processing.
+    manipulation and processing.
 
-        Parameters
-        ----------
+    Parameters
+    ----------
 
-        ruleset_standard : str
-            A string representing a ruleset standard directory as specified under:
-                ruleset_checking_tool/rct229/ruletest_engine/ruletest_jsons/RULESET_STANDARD
-            Example: "ashrae902019"
+    ruleset_standard : str
+        A string representing a ruleset standard directory as specified under:
+            ruleset_checking_tool/rct229/ruletest_engine/ruletest_jsons/RULESET_STANDARD
+        Example: "ashrae902019"
 
-        Returns
-        -------
-        master_rule_data_dict: dict
-            Dictionary containing aggregated ruletest JSON information for all different sections
-            Format: master_rule_data_dict[SECTION] = { rule_data_columns[i]: [x1, x2, x3]}
-                EX: master_rule_data_dict["section23"] = {"Rule": ["23-1", "23-1", ...],
-                                                          "Rule_Unit_Test": ["23-1-a", "23-1-b", ...]
-                                                           etc.
+    Returns
+    -------
+    master_rule_data_dict: dict
+        Dictionary containing aggregated ruletest JSON information for all different sections
+        Format: master_rule_data_dict[SECTION] = { rule_data_columns[i]: [x1, x2, x3]}
+            EX: master_rule_data_dict["section23"] = {"Rule": ["23-1", "23-1", ...],
+                                                      "Rule_Unit_Test": ["23-1-a", "23-1-b", ...]
+                                                       etc.
 
-        """
+    """
 
     ruletest_directory = f"../{ruleset_standard}"
     ruletest_url = f"https://github.com/pnnl/ruleset-checking-tool/tree/develop/rct229/ruletest_engine/ruletest_jsons/{ruleset_standard}"
@@ -78,17 +78,25 @@ def generate_rule_test_dictionary(ruleset_standard):
 
                 # Initialize the dictionary as a list then populate it with rule test JSONs
                 ruletest_dict[section] = []
-                ruletest_dict[section].extend(glob.glob(os.path.join(subdirectory, "rule*.json")))
+                ruletest_dict[section].extend(
+                    glob.glob(os.path.join(subdirectory, "rule*.json"))
+                )
 
     # Reorder sections to be in numerical order (i.e., avoid section1, section11, section12, section5, section6)
     sections_list = list(ruletest_dict.keys())
-    sorted_sections = sorted(sections_list, key=lambda x: int(re.sub(r'\D', '', x)))
+    sorted_sections = sorted(sections_list, key=lambda x: int(re.sub(r"\D", "", x)))
     ruletest_dict = {key: ruletest_dict[key] for key in sorted_sections}
 
     # Initialize dict to hold Rules information.
     # Keys include: Rule, Rule_Unit_Test, Test_Description, Expected_Rule_Outcome, Rule_Unit_Test_JSON
     master_rule_data_dict = {}
-    rule_data_columns = ['Rule', 'Rule_Unit_Test', 'Test_Description', 'Expected_Rule_Outcome', 'Rule_Unit_Test_JSON']
+    rule_data_columns = [
+        "Rule",
+        "Rule_Unit_Test",
+        "Test_Description",
+        "Expected_Rule_Outcome",
+        "Rule_Unit_Test_JSON",
+    ]
 
     # Aggregate JSON information into master_rule_data_dict
     # Format: master_rule_data_dict[SECTION] = { rule_data_columns[i]: [x1, x2, x3]}
@@ -105,21 +113,29 @@ def generate_rule_test_dictionary(ruleset_standard):
 
         # Read JSON files and populate master_rule_data_dict
         for ruletest_json in ruletest_dict[section_key]:
-            with open(ruletest_json, 'r') as json_file:
+            with open(ruletest_json, "r") as json_file:
                 ruletest_json_dict = json.load(json_file)
 
                 # Append this test JSONs case information
                 for test_case in ruletest_json_dict:
                     case_dict = ruletest_json_dict[test_case]
-                    section = case_dict['Section']
-                    rule = case_dict['Rule']
-                    master_rule_data_dict[section_key]["Rule"].append(f"{section}-{rule}")
-                    master_rule_data_dict[section_key]["Rule_Unit_Test"].append(f"{section}-{rule}-{case_dict['Test']}")
-                    master_rule_data_dict[section_key]["Test_Description"].append(f"{case_dict['test_description']}")
+                    section = case_dict["Section"]
+                    rule = case_dict["Rule"]
+                    master_rule_data_dict[section_key]["Rule"].append(
+                        f"{section}-{rule}"
+                    )
+                    master_rule_data_dict[section_key]["Rule_Unit_Test"].append(
+                        f"{section}-{rule}-{case_dict['Test']}"
+                    )
+                    master_rule_data_dict[section_key]["Test_Description"].append(
+                        f"{case_dict['test_description']}"
+                    )
                     master_rule_data_dict[section_key]["Expected_Rule_Outcome"].append(
-                        f"{case_dict['expected_rule_outcome']}")
+                        f"{case_dict['expected_rule_outcome']}"
+                    )
                     master_rule_data_dict[section_key]["Rule_Unit_Test_JSON"].append(
-                        f"{ruletest_url}/section{section}/rule_{section}_{rule}.json")
+                        f"{ruletest_url}/section{section}/rule_{section}_{rule}.json"
+                    )
 
     return master_rule_data_dict
 
@@ -127,13 +143,13 @@ def generate_rule_test_dictionary(ruleset_standard):
 def write_rule_test_excel_from_dictionary(master_ruletest_dict, excel_path):
 
     """Takes an aggregates ruletest information dict and generates a styled Excel spreadsheet documenting all the
-        information contained in said dictionary.
+    information contained in said dictionary.
 
-        Parameters
-        ----------
+    Parameters
+    ----------
 
-        master_ruletest_dict : dict
-            Dictionary of aggregated ruletest information. Generated by the generate_rule_test_dictionary function
+    master_ruletest_dict : dict
+        Dictionary of aggregated ruletest information. Generated by the generate_rule_test_dictionary function
 
     """
 
@@ -146,10 +162,10 @@ def write_rule_test_excel_from_dictionary(master_ruletest_dict, excel_path):
         "Rule_Unit_Test": "B",
         "Test_Description": "C",
         "Expected_Rule_Outcome": "D",
-        "Rule_Unit_Test_JSON": "E"
+        "Rule_Unit_Test_JSON": "E",
     }
 
-    with pd.ExcelWriter(excel_path, engine='openpyxl') as writer:
+    with pd.ExcelWriter(excel_path, engine="openpyxl") as writer:
 
         # Write each section to a different sheet and style it
         for section_key in master_ruletest_dict:
@@ -161,8 +177,10 @@ def write_rule_test_excel_from_dictionary(master_ruletest_dict, excel_path):
 
             # Changing header font color and fill color
             for cell in worksheet[1]:
-                cell.font = Font(color='000000', bold=True)
-                cell.fill = PatternFill(start_color='EBF1DE', end_color='EBF1DE', fill_type='solid')
+                cell.font = Font(color="000000", bold=True)
+                cell.fill = PatternFill(
+                    start_color="EBF1DE", end_color="EBF1DE", fill_type="solid"
+                )
 
             # Update column widths
             for i, width in enumerate(column_widths, start=1):
@@ -183,13 +201,25 @@ def write_rule_test_excel_from_dictionary(master_ruletest_dict, excel_path):
                 display_value = f"rule{json_name}.json"
                 url_value = worksheet[hyperlink_cell].value
 
-                worksheet[hyperlink_cell].value = f'=HYPERLINK("{url_value}", "{display_value}")'
+                worksheet[
+                    hyperlink_cell
+                ].value = f'=HYPERLINK("{url_value}", "{display_value}")'
                 worksheet[hyperlink_cell].style = "Hyperlink"
-                worksheet[hyperlink_cell].font = Font(color='0000FF', underline='single')
+                worksheet[hyperlink_cell].font = Font(
+                    color="0000FF", underline="single"
+                )
 
                 # Set cell alignments
-                worksheet[rule_cell].alignment = Alignment(horizontal='center', vertical='center')
-                worksheet[rule_unit_test_cell].alignment = Alignment(horizontal='center', vertical='center')
+                worksheet[rule_cell].alignment = Alignment(
+                    horizontal="center", vertical="center"
+                )
+                worksheet[rule_unit_test_cell].alignment = Alignment(
+                    horizontal="center", vertical="center"
+                )
                 worksheet[test_description].alignment = Alignment(wrap_text=True)
-                worksheet[rule_outcome_cell].alignment = Alignment(horizontal='center', vertical='center')
-                worksheet[hyperlink_cell].alignment = Alignment(horizontal='center', vertical='center')
+                worksheet[rule_outcome_cell].alignment = Alignment(
+                    horizontal="center", vertical="center"
+                )
+                worksheet[hyperlink_cell].alignment = Alignment(
+                    horizontal="center", vertical="center"
+                )
