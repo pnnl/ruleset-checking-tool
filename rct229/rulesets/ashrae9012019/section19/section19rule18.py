@@ -275,7 +275,10 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
             return (
                 more_than_one_supply_fan_b
                 or more_than_one_exhaust_fan_and_energy_rec_is_relevant_b
-                or total_fan_power_b > expected_fan_wattage_b
+                or (
+                    not std_equal(total_fan_power_b, expected_fan_wattage_b)
+                    and total_fan_power_b > expected_fan_wattage_b
+                )
             )
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):

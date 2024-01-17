@@ -39,16 +39,16 @@
                     "fan_control": "VARIABLE_SPEED_DRIVE",
                     "temperature_control": "ZONE_RESET",
                     "reset_differential_temperature": 2.7777777777778,
+                    "operation_during_unoccupied": "CYCLING",
+                    "minimum_outdoor_airflow":6399.8,
+                    "demand_control_ventilation_control": "NONE",
                     "supply_fans": [
                       {
                         "id": "BUILDING STORY 1 VAV_REHEAT (SYS7)-supplyFan",
                         "design_airflow": 38717.08308614894,
-                        "design_electric_power":84189.91
-                      }
-                    ],
-                    "return_fans": [
-                      {
-                        "id": "BUILDING STORY 1 VAV_REHEAT (SYS7)-returnFan"
+                        "design_electric_power":84189.91,
+                        "specification_method": "SIMPLE",
+                        "is_airflow_autosized": true
                       }
                     ]
                   }
@@ -74,16 +74,16 @@
                     "fan_control": "VARIABLE_SPEED_DRIVE",
                     "temperature_control": "ZONE_RESET",
                     "reset_differential_temperature": 2.7777777777778,
+                    "operation_during_unoccupied": "CYCLING",
+                    "minimum_outdoor_airflow":8398.5,
+                    "demand_control_ventilation_control": "NONE",
                     "supply_fans": [
                       {
                         "id": "BUILDING STORY 2 VAV_REHEAT (SYS7)-supplyFan",
                         "design_airflow": 36364.02558760905,
-                        "design_electric_power":79073.21
-                      }
-                    ],
-                    "return_fans": [
-                      {
-                        "id": "BUILDING STORY 2 VAV_REHEAT (SYS7)-returnFan"
+                        "design_electric_power":79073.21,
+                        "specification_method": "SIMPLE",
+                        "is_airflow_autosized": true
                       }
                     ]
                   }
@@ -109,16 +109,16 @@
                     "fan_control": "VARIABLE_SPEED_DRIVE",
                     "temperature_control": "ZONE_RESET",
                     "reset_differential_temperature": 2.7777777777778,
+                    "operation_during_unoccupied": "CYCLING",
+                    "minimum_outdoor_airflow":7657.4,
+                    "demand_control_ventilation_control": "NONE",
                     "supply_fans": [
                       {
                         "id": "BUILDING STORY 3 VAV_REHEAT (SYS7)-supplyFan",
                         "design_airflow": 51222.64960426067,
-                        "design_electric_power":110796.64
-                      }
-                    ],
-                    "return_fans": [
-                      {
-                        "id": "BUILDING STORY 3 VAV_REHEAT (SYS7)-returnFan"
+                        "design_electric_power":110796.64,
+                        "specification_method": "SIMPLE",
+                        "is_airflow_autosized": true
                       }
                     ]
                   }
@@ -130,7 +130,8 @@
                   "volume": 16188.24,
                   "thermostat_cooling_setpoint_schedule": "OfficeMedium CLGSETP_SCH_YES_OPTIMUM",
                   "thermostat_heating_setpoint_schedule": "OfficeMedium HTGSETP_SCH_YES_OPTIMUM",
-                  "design_thermostat_heating_setpoint": 15.6,
+                  "design_thermostat_heating_setpoint": 21.0,
+                  "design_thermostat_cooling_setpoint": 25.0,
                   "surfaces": [
                     {
                       "id": "CORE_BOT_ZN_5_FLOOR",
@@ -378,7 +379,8 @@
                   "volume": 16188.24,
                   "thermostat_cooling_setpoint_schedule": "OfficeMedium CLGSETP_SCH_YES_OPTIMUM",
                   "thermostat_heating_setpoint_schedule": "OfficeMedium HTGSETP_SCH_YES_OPTIMUM",
-                  "design_thermostat_heating_setpoint": 15.6,
+                  "design_thermostat_heating_setpoint": 21.0,
+                  "design_thermostat_cooling_setpoint": 25.0,
                   "surfaces": [
                     {
                       "id": "CORE_MID_ZN_5_FLOOR",
@@ -615,7 +617,8 @@
                   "volume": 16188.24,
                   "thermostat_cooling_setpoint_schedule": "OfficeMedium CLGSETP_SCH_YES_OPTIMUM",
                   "thermostat_heating_setpoint_schedule": "OfficeMedium HTGSETP_SCH_YES_OPTIMUM",
-                  "design_thermostat_heating_setpoint": 15.6,
+                  "design_thermostat_heating_setpoint": 21.0,
+                  "design_thermostat_cooling_setpoint": 25.0,
                   "surfaces": [
                     {
                       "id": "CORE_TOP_ZN_5_CEILING",
@@ -1740,7 +1743,8 @@
                   "volume": 3412.62,
                   "thermostat_cooling_setpoint_schedule": "OfficeMedium CLGSETP_SCH_YES_OPTIMUM",
                   "thermostat_heating_setpoint_schedule": "OfficeMedium HTGSETP_SCH_YES_OPTIMUM",
-                  "design_thermostat_heating_setpoint": 15.6,
+                  "design_thermostat_heating_setpoint": 21.0,
+                  "design_thermostat_cooling_setpoint": 25.0,
                   "surfaces": [
                     {
                       "id": "PERIMETER_BOT_ZN_1_CEILING",
@@ -1986,7 +1990,8 @@
                   "volume": 2160.48,
                   "thermostat_cooling_setpoint_schedule": "OfficeMedium CLGSETP_SCH_YES_OPTIMUM",
                   "thermostat_heating_setpoint_schedule": "OfficeMedium HTGSETP_SCH_YES_OPTIMUM",
-                  "design_thermostat_heating_setpoint": 15.6,
+                  "design_thermostat_heating_setpoint": 21.0,
+                  "design_thermostat_cooling_setpoint": 25.0,
                   "surfaces": [
                     {
                       "id": "PERIMETER_BOT_ZN_2_CEILING",
@@ -2232,7 +2237,8 @@
                   "volume": 3412.62,
                   "thermostat_cooling_setpoint_schedule": "OfficeMedium CLGSETP_SCH_YES_OPTIMUM",
                   "thermostat_heating_setpoint_schedule": "OfficeMedium HTGSETP_SCH_YES_OPTIMUM",
-                  "design_thermostat_heating_setpoint": 15.6,
+                  "design_thermostat_heating_setpoint": 21.0,
+                  "design_thermostat_cooling_setpoint": 25.0,
                   "surfaces": [
                     {
                       "id": "PERIMETER_BOT_ZN_3_CEILILNG",
@@ -2478,7 +2484,8 @@
                   "volume": 2160.48,
                   "thermostat_cooling_setpoint_schedule": "OfficeMedium CLGSETP_SCH_YES_OPTIMUM",
                   "thermostat_heating_setpoint_schedule": "OfficeMedium HTGSETP_SCH_YES_OPTIMUM",
-                  "design_thermostat_heating_setpoint": 15.6,
+                  "design_thermostat_heating_setpoint": 21.0,
+                  "design_thermostat_cooling_setpoint": 25.0,
                   "surfaces": [
                     {
                       "id": "PERIMETER_BOT_ZN_4_CEILING",
@@ -2724,7 +2731,8 @@
                   "volume": 3412.62,
                   "thermostat_cooling_setpoint_schedule": "OfficeMedium CLGSETP_SCH_YES_OPTIMUM",
                   "thermostat_heating_setpoint_schedule": "OfficeMedium HTGSETP_SCH_YES_OPTIMUM",
-                  "design_thermostat_heating_setpoint": 15.6,
+                  "design_thermostat_heating_setpoint": 21.0,
+                  "design_thermostat_cooling_setpoint": 25.0,
                   "surfaces": [
                     {
                       "id": "PERIMETER_MID_ZN_1_CEILING",
@@ -2983,7 +2991,8 @@
                   "volume": 2160.48,
                   "thermostat_cooling_setpoint_schedule": "OfficeMedium CLGSETP_SCH_YES_OPTIMUM",
                   "thermostat_heating_setpoint_schedule": "OfficeMedium HTGSETP_SCH_YES_OPTIMUM",
-                  "design_thermostat_heating_setpoint": 15.6,
+                  "design_thermostat_heating_setpoint": 21.0,
+                  "design_thermostat_cooling_setpoint": 25.0,
                   "surfaces": [
                     {
                       "id": "PERIMETER_MID_ZN_2_CEILING",
@@ -3242,7 +3251,8 @@
                   "volume": 3412.62,
                   "thermostat_cooling_setpoint_schedule": "OfficeMedium CLGSETP_SCH_YES_OPTIMUM",
                   "thermostat_heating_setpoint_schedule": "OfficeMedium HTGSETP_SCH_YES_OPTIMUM",
-                  "design_thermostat_heating_setpoint": 15.6,
+                  "design_thermostat_heating_setpoint": 21.0,
+                  "design_thermostat_cooling_setpoint": 25.0,
                   "surfaces": [
                     {
                       "id": "PERIMETER_MID_ZN_3_CEILING",
@@ -3501,7 +3511,8 @@
                   "volume": 2160.48,
                   "thermostat_cooling_setpoint_schedule": "OfficeMedium CLGSETP_SCH_YES_OPTIMUM",
                   "thermostat_heating_setpoint_schedule": "OfficeMedium HTGSETP_SCH_YES_OPTIMUM",
-                  "design_thermostat_heating_setpoint": 15.6,
+                  "design_thermostat_heating_setpoint": 21.0,
+                  "design_thermostat_cooling_setpoint": 25.0,
                   "surfaces": [
                     {
                       "id": "PERIMETER_MID_ZN_4_CEILING",
@@ -3760,7 +3771,8 @@
                   "volume": 3412.62,
                   "thermostat_cooling_setpoint_schedule": "OfficeMedium CLGSETP_SCH_YES_OPTIMUM",
                   "thermostat_heating_setpoint_schedule": "OfficeMedium HTGSETP_SCH_YES_OPTIMUM",
-                  "design_thermostat_heating_setpoint": 15.6,
+                  "design_thermostat_heating_setpoint": 21.0,
+                  "design_thermostat_cooling_setpoint": 25.0,
                   "surfaces": [
                     {
                       "id": "PERIMETER_TOP_ZN_1_CEILING",
@@ -4019,7 +4031,8 @@
                   "volume": 2160.48,
                   "thermostat_cooling_setpoint_schedule": "OfficeMedium CLGSETP_SCH_YES_OPTIMUM",
                   "thermostat_heating_setpoint_schedule": "OfficeMedium HTGSETP_SCH_YES_OPTIMUM",
-                  "design_thermostat_heating_setpoint": 15.6,
+                  "design_thermostat_heating_setpoint": 21.0,
+                  "design_thermostat_cooling_setpoint": 25.0,
                   "surfaces": [
                     {
                       "id": "PERIMETER_TOP_ZN_2_CEILING",
@@ -4278,7 +4291,8 @@
                   "volume": 3412.62,
                   "thermostat_cooling_setpoint_schedule": "OfficeMedium CLGSETP_SCH_YES_OPTIMUM",
                   "thermostat_heating_setpoint_schedule": "OfficeMedium HTGSETP_SCH_YES_OPTIMUM",
-                  "design_thermostat_heating_setpoint": 15.6,
+                  "design_thermostat_heating_setpoint": 21.0,
+                  "design_thermostat_cooling_setpoint": 25.0,
                   "surfaces": [
                     {
                       "id": "PERIMETER_TOP_ZN_3_CEILING",
@@ -4537,7 +4551,8 @@
                   "volume": 2160.48,
                   "thermostat_cooling_setpoint_schedule": "OfficeMedium CLGSETP_SCH_YES_OPTIMUM",
                   "thermostat_heating_setpoint_schedule": "OfficeMedium HTGSETP_SCH_YES_OPTIMUM",
-                  "design_thermostat_heating_setpoint": 15.6,
+                  "design_thermostat_heating_setpoint": 21.0,
+                  "design_thermostat_cooling_setpoint": 25.0,
                   "surfaces": [
                     {
                       "id": "PERIMETER_TOP_ZN_4_CEILING",
@@ -5177,9 +5192,9 @@
           "condensing_loop": "CW Loop 1",
           "rated_capacity": 1310149.42,
           "compressor_type": "CENTRIFUGAL",
-          "full_load_efficiency": 0.5759999999999998,
+          "full_load_efficiency": 6.10590277777778,
           "part_load_efficiency_metric": "INTEGRATED_PART_LOAD_VALUE",
-          "part_load_efficiency": 0.40011376564,
+          "part_load_efficiency": 8.790,
           "is_chilled_water_pump_interlocked": true,
           "is_condenser_water_pump_interlocked": true
 
@@ -5190,9 +5205,9 @@
           "condensing_loop": "CW Loop 1",
           "rated_capacity": 1310149.42,
           "compressor_type": "CENTRIFUGAL",
-          "full_load_efficiency": 0.5759999999999998,
+          "full_load_efficiency": 6.10590277777778,
           "part_load_efficiency_metric": "INTEGRATED_PART_LOAD_VALUE",
-          "part_load_efficiency": 0.40011376564,
+          "part_load_efficiency": 8.790,
           "is_chilled_water_pump_interlocked": true,
           "is_condenser_water_pump_interlocked": true
         }
@@ -5242,7 +5257,7 @@
         {
           "id": "Chiller Loop 1",
           "type": "COOLING",
-          "pump_power_per_flow_rate": 348.701,
+          "pump_power_per_flow_rate": 95.10177,
           "cooling_or_condensing_design_and_control": {
             "id": "CLDC 1",
             "design_supply_temperature": 6.66666666666669,
@@ -5287,7 +5302,8 @@
           "id": "Heat Rejection 1",
           "loop": "CW Loop 1",
           "design_wetbulb_temperature": 12.777777777777828,
-          "approach": 2.7777777777777777,
+          "approach": 3.88888888888888,
+          "range": 5.55555555555556,
           "fan_type": "AXIAL",
           "type": "OPEN_CIRCUIT_COOLING_TOWER",
           "rated_water_flowrate": 146.335,
@@ -84681,7 +84697,7 @@
     "file_name": "New York J F Kennedy IntL Ar NY USA TMY3 WMO#=744860",
     "data_source_type": "OTHER",
     "climate_zone": "CZ4A",
-    "cooling_design_day_type": "COOLING_0_4",
+    "cooling_design_day_type": "COOLING_1_0",
     "heating_design_day_type": "HEATING_99_6"
   },
   "calendar": {

@@ -61,6 +61,8 @@
                   "volume": 2698.04,
                   "thermostat_cooling_setpoint_schedule": "OfficeMedium CLGSETP_SCH_YES_OPTIMUM",
                   "thermostat_heating_setpoint_schedule": "OfficeMedium HTGSETP_SCH_YES_OPTIMUM",
+                  "design_thermostat_heating_setpoint": 21.0,
+                  "design_thermostat_cooling_setpoint": 25.0,
                   "surfaces": [
                     {
                       "id": "CORE_BOT_ZN_5_FLOOR",
@@ -237,7 +239,10 @@
                     {
                       "id": "CORE_BOTTOM ZN-terminal",
                       "served_by_heating_ventilating_air_conditioning_system": "5 ZONE PVAV",
-                      "heating_capacity": 222715.375
+                      "heating_capacity": 222715.375,
+                      "minimum_airflow":4880.0,
+                      "minimum_outdoor_airflow": 2548.15,
+                      "primary_airflow":21920.0
                     }
                   ],
                   "spaces": [
@@ -301,6 +306,8 @@
                   "volume": 2698.04,
                   "thermostat_cooling_setpoint_schedule": "OfficeMedium CLGSETP_SCH_YES_OPTIMUM",
                   "thermostat_heating_setpoint_schedule": "OfficeMedium HTGSETP_SCH_YES_OPTIMUM",
+                  "design_thermostat_heating_setpoint": 21.0,
+                  "design_thermostat_cooling_setpoint": 25.0,
                   "surfaces": [
                     {
                       "id": "CORE_MID_ZN_5_FLOOR",
@@ -490,7 +497,10 @@
                     {
                       "id": "CORE_MID ZN-terminal",
                       "served_by_heating_ventilating_air_conditioning_system": "5 ZONE PVAV 1",
-                      "heating_capacity": 130538.386
+                      "heating_capacity": 130538.386,
+                      "minimum_airflow":2860.0,
+                      "minimum_outdoor_airflow": 2548.15,
+                      "primary_airflow":13010.0
                     }
                   ],
                   "spaces": [
@@ -530,6 +540,8 @@
                   "volume": 2698.04,
                   "thermostat_cooling_setpoint_schedule": "OfficeMedium CLGSETP_SCH_YES_OPTIMUM",
                   "thermostat_heating_setpoint_schedule": "OfficeMedium HTGSETP_SCH_YES_OPTIMUM",
+                  "design_thermostat_heating_setpoint": 21.0,
+                  "design_thermostat_cooling_setpoint": 25.0,
                   "surfaces": [
                     {
                       "id": "CORE_TOP_ZN_5_CEILING",
@@ -719,7 +731,10 @@
                     {
                       "id": "CORE_TOP ZN-terminal",
                       "served_by_heating_ventilating_air_conditioning_system": "5 ZONE PVAV 2",
-                      "heating_capacity": 170174.635
+                      "heating_capacity": 170174.635,
+                      "minimum_airflow":2840.00,
+                      "minimum_outdoor_airflow": 2548.15,
+                      "primary_airflow":13230.00
                     }
                   ],
                   "spaces": [
@@ -1647,6 +1662,8 @@
                   "volume": 568.77,
                   "thermostat_cooling_setpoint_schedule": "OfficeMedium CLGSETP_SCH_YES_OPTIMUM",
                   "thermostat_heating_setpoint_schedule": "OfficeMedium HTGSETP_SCH_YES_OPTIMUM",
+                  "design_thermostat_heating_setpoint": 21.0,
+                  "design_thermostat_cooling_setpoint": 25.0,
                   "surfaces": [
                     {
                       "id": "PERIMETER_BOT_ZN_1_CEILING",
@@ -1845,7 +1862,10 @@
                     {
                       "id": "PERIMETER_BOT_ZN_1 ZN-terminal",
                       "served_by_heating_ventilating_air_conditioning_system": "5 ZONE PVAV",
-                      "heating_capacity": 65422.774
+                      "heating_capacity": 65422.774,
+                      "minimum_airflow":970.035,
+                      "minimum_outdoor_airflow": 2548.15,
+                      "primary_airflow":4770.0
                     }
                   ],
                   "spaces": [
@@ -1885,6 +1905,8 @@
                   "volume": 360.08,
                   "thermostat_cooling_setpoint_schedule": "OfficeMedium CLGSETP_SCH_YES_OPTIMUM",
                   "thermostat_heating_setpoint_schedule": "OfficeMedium HTGSETP_SCH_YES_OPTIMUM",
+                  "design_thermostat_heating_setpoint": 21.0,
+                  "design_thermostat_cooling_setpoint": 25.0,
                   "surfaces": [
                     {
                       "id": "PERIMETER_BOT_ZN_2_CEILING",
@@ -2083,7 +2105,10 @@
                     {
                       "id": "PERIMETER_BOT_ZN_2 ZN-terminal",
                       "served_by_heating_ventilating_air_conditioning_system": "5 ZONE PVAV",
-                      "heating_capacity": 45152.741
+                      "heating_capacity": 45152.741,
+                      "minimum_airflow":825.850,
+                      "minimum_outdoor_airflow": 2548.15,
+                      "primary_airflow":4130.0
                     }
                   ],
                   "spaces": [
@@ -2123,6 +2148,8 @@
                   "volume": 568.77,
                   "thermostat_cooling_setpoint_schedule": "OfficeMedium CLGSETP_SCH_YES_OPTIMUM",
                   "thermostat_heating_setpoint_schedule": "OfficeMedium HTGSETP_SCH_YES_OPTIMUM",
+                  "design_thermostat_heating_setpoint": 21.0,
+                  "design_thermostat_cooling_setpoint": 25.0,
                   "surfaces": [
                     {
                       "id": "PERIMETER_BOT_ZN_3_CEILILNG",
@@ -2321,7 +2348,10 @@
                     {
                       "id": "PERIMETER_BOT_ZN_3 ZN-terminal",
                       "served_by_heating_ventilating_air_conditioning_system": "5 ZONE PVAV",
-                      "heating_capacity": 69679.032
+                      "heating_capacity": 69679.032,
+                      "minimum_airflow":953.698,
+                      "minimum_outdoor_airflow": 2548.15,
+                      "primary_airflow":3420.0
                     }
                   ],
                   "spaces": [
@@ -2361,6 +2391,8 @@
                   "volume": 360.05,
                   "thermostat_cooling_setpoint_schedule": "OfficeMedium CLGSETP_SCH_YES_OPTIMUM",
                   "thermostat_heating_setpoint_schedule": "OfficeMedium HTGSETP_SCH_YES_OPTIMUM",
+                  "design_thermostat_heating_setpoint": 21.0,
+                  "design_thermostat_cooling_setpoint": 25.0,
                   "surfaces": [
                     {
                       "id": "PERIMETER_BOT_ZN_4_CEILING",
@@ -2559,7 +2591,10 @@
                     {
                       "id": "PERIMETER_BOT_ZN_4 ZN-terminal",
                       "served_by_heating_ventilating_air_conditioning_system": "5 ZONE PVAV",
-                      "heating_capacity": 45790.631
+                      "heating_capacity": 45790.631,
+                      "minimum_airflow":841.134,
+                      "minimum_outdoor_airflow": 2548.15,
+                      "primary_airflow":4210.0
                     }
                   ],
                   "spaces": [
@@ -2599,6 +2634,8 @@
                   "volume": 568.77,
                   "thermostat_cooling_setpoint_schedule": "OfficeMedium CLGSETP_SCH_YES_OPTIMUM",
                   "thermostat_heating_setpoint_schedule": "OfficeMedium HTGSETP_SCH_YES_OPTIMUM",
+                  "design_thermostat_heating_setpoint": 21.0,
+                  "design_thermostat_cooling_setpoint": 25.0,
                   "surfaces": [
                     {
                       "id": "PERIMETER_MID_ZN_1_CEILING",
@@ -2810,7 +2847,10 @@
                     {
                       "id": "PERIMETER_MID_ZN_1 ZN-terminal",
                       "served_by_heating_ventilating_air_conditioning_system": "5 ZONE PVAV 1",
-                      "heating_capacity": 67889.405
+                      "heating_capacity": 67889.405,
+                      "minimum_airflow":1150.0,
+                      "minimum_outdoor_airflow": 2548.15,
+                      "primary_airflow":5240.0
                     }
                   ],
                   "spaces": [
@@ -2850,6 +2890,8 @@
                   "volume": 360.08,
                   "thermostat_cooling_setpoint_schedule": "OfficeMedium CLGSETP_SCH_YES_OPTIMUM",
                   "thermostat_heating_setpoint_schedule": "OfficeMedium HTGSETP_SCH_YES_OPTIMUM",
+                  "design_thermostat_heating_setpoint": 21.0,
+                  "design_thermostat_cooling_setpoint": 25.0,
                   "surfaces": [
                     {
                       "id": "PERIMETER_MID_ZN_2_CEILING",
@@ -3061,7 +3103,10 @@
                     {
                       "id": "PERIMETER_MID_ZN_2 ZN-terminal",
                       "served_by_heating_ventilating_air_conditioning_system": "5 ZONE PVAV 1",
-                      "heating_capacity": 48347.306
+                      "heating_capacity": 48347.306,
+                      "minimum_airflow":1060.0,
+                      "minimum_outdoor_airflow": 2548.15,
+                      "primary_airflow":4820.0
                     }
                   ],
                   "spaces": [
@@ -3101,6 +3146,8 @@
                   "volume": 568.77,
                   "thermostat_cooling_setpoint_schedule": "OfficeMedium CLGSETP_SCH_YES_OPTIMUM",
                   "thermostat_heating_setpoint_schedule": "OfficeMedium HTGSETP_SCH_YES_OPTIMUM",
+                  "design_thermostat_heating_setpoint": 21.0,
+                  "design_thermostat_cooling_setpoint": 25.0,
                   "surfaces": [
                     {
                       "id": "PERIMETER_MID_ZN_3_CEILING",
@@ -3312,7 +3359,10 @@
                     {
                       "id": "PERIMETER_MID_ZN_3 ZN-terminal",
                       "served_by_heating_ventilating_air_conditioning_system": "5 ZONE PVAV 1",
-                      "heating_capacity": 68852.437
+                      "heating_capacity": 68852.437,
+                      "minimum_airflow":793.175,
+                      "minimum_outdoor_airflow": 2548.15,
+                      "primary_airflow":3610.0
                     }
                   ],
                   "spaces": [
@@ -3352,6 +3402,8 @@
                   "volume": 360.05,
                   "thermostat_cooling_setpoint_schedule": "OfficeMedium CLGSETP_SCH_YES_OPTIMUM",
                   "thermostat_heating_setpoint_schedule": "OfficeMedium HTGSETP_SCH_YES_OPTIMUM",
+                  "design_thermostat_heating_setpoint": 21.0,
+                  "design_thermostat_cooling_setpoint": 25.0,
                   "surfaces": [
                     {
                       "id": "PERIMETER_MID_ZN_4_CEILING",
@@ -3563,7 +3615,10 @@
                     {
                       "id": "PERIMETER_MID_ZN_4 ZN-terminal",
                       "served_by_heating_ventilating_air_conditioning_system": "5 ZONE PVAV 1",
-                      "heating_capacity": 48876.655
+                      "heating_capacity": 48876.655,
+                       "minimum_airflow":1070.0,
+                      "minimum_outdoor_airflow": 2548.15,
+                      "primary_airflow":4870.0
                     }
                   ],
                   "spaces": [
@@ -3603,6 +3658,8 @@
                   "volume": 568.77,
                   "thermostat_cooling_setpoint_schedule": "OfficeMedium CLGSETP_SCH_YES_OPTIMUM",
                   "thermostat_heating_setpoint_schedule": "OfficeMedium HTGSETP_SCH_YES_OPTIMUM",
+                  "design_thermostat_heating_setpoint": 21.0,
+                  "design_thermostat_cooling_setpoint": 25.0,
                   "surfaces": [
                     {
                       "id": "PERIMETER_TOP_ZN_1_CEILING",
@@ -3814,7 +3871,10 @@
                     {
                       "id": "PERIMETER_TOP_ZN_1 ZN-terminal",
                       "served_by_heating_ventilating_air_conditioning_system": "5 ZONE PVAV 2",
-                      "heating_capacity": 81866.547
+                      "heating_capacity": 81866.547,
+                      "minimum_airflow":1160.0,
+                      "minimum_outdoor_airflow": 2548.15,
+                      "primary_airflow":5930.0
                     }
                   ],
                   "spaces": [
@@ -3854,6 +3914,8 @@
                   "volume": 360.08,
                   "thermostat_cooling_setpoint_schedule": "OfficeMedium CLGSETP_SCH_YES_OPTIMUM",
                   "thermostat_heating_setpoint_schedule": "OfficeMedium HTGSETP_SCH_YES_OPTIMUM",
+                  "design_thermostat_heating_setpoint": 21.0,
+                  "design_thermostat_cooling_setpoint": 25.0,
                   "surfaces": [
                     {
                       "id": "PERIMETER_TOP_ZN_2_CEILING",
@@ -4065,7 +4127,10 @@
                     {
                       "id": "PERIMETER_TOP_ZN_2 ZN-terminal",
                       "served_by_heating_ventilating_air_conditioning_system": "5 ZONE PVAV 2",
-                      "heating_capacity": 53632.718
+                      "heating_capacity": 53632.718,
+                      "minimum_airflow":1040.0,
+                      "minimum_outdoor_airflow": 2548.15,
+                      "primary_airflow":4860.0
                     }
                   ],
                   "spaces": [
@@ -4105,6 +4170,8 @@
                   "volume": 568.77,
                   "thermostat_cooling_setpoint_schedule": "OfficeMedium CLGSETP_SCH_YES_OPTIMUM",
                   "thermostat_heating_setpoint_schedule": "OfficeMedium HTGSETP_SCH_YES_OPTIMUM",
+                  "design_thermostat_heating_setpoint": 21.0,
+                  "design_thermostat_cooling_setpoint": 25.0,
                   "surfaces": [
                     {
                       "id": "PERIMETER_TOP_ZN_3_CEILING",
@@ -4316,7 +4383,10 @@
                     {
                       "id": "PERIMETER_TOP_ZN_3 ZN-terminal",
                       "served_by_heating_ventilating_air_conditioning_system": "5 ZONE PVAV 2",
-                      "heating_capacity": 82867.678
+                      "heating_capacity": 82867.678,
+                      "minimum_airflow":815.922,
+                      "minimum_outdoor_airflow": 2548.15,
+                      "primary_airflow":3800.0
                     }
                   ],
                   "spaces": [
@@ -4356,6 +4426,8 @@
                   "volume": 360.05,
                   "thermostat_cooling_setpoint_schedule": "OfficeMedium CLGSETP_SCH_YES_OPTIMUM",
                   "thermostat_heating_setpoint_schedule": "OfficeMedium HTGSETP_SCH_YES_OPTIMUM",
+                  "design_thermostat_heating_setpoint": 21.0,
+                  "design_thermostat_cooling_setpoint": 25.0,
                   "surfaces": [
                     {
                       "id": "PERIMETER_TOP_ZN_4_CEILING",
@@ -4567,7 +4639,10 @@
                     {
                       "id": "PERIMETER_TOP_ZN_4 ZN-terminal",
                       "served_by_heating_ventilating_air_conditioning_system": "5 ZONE PVAV 2",
-                      "heating_capacity": 54300.579
+                      "heating_capacity": 54300.579,
+                      "minimum_airflow":1070.0,
+                      "minimum_outdoor_airflow": 2548.15,
+                      "primary_airflow":5000.0
                     }
                   ],
                   "spaces": [

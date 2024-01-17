@@ -56,44 +56,38 @@ class Section23Rule4(RuleDefinitionListIndexedBase):
                 ),
             )
 
-            def get_calc_vals(self, context, data=None):
-                rmd_b = context.BASELINE_0
-                rmd_p = context.PROPOSED
-                climate_zone_b = data["climate_zone_b"]
-                is_leap_year_b = data["is_leap_year_b"]
+        def get_calc_vals(self, context, data=None):
+            rmd_b = context.BASELINE_0
+            rmd_p = context.PROPOSED
+            climate_zone_b = data["climate_zone_b"]
+            is_leap_year_b = data["is_leap_year_b"]
 
-                baseline_system_types_dict = get_baseline_system_types(rmd_b)
+            baseline_system_types_dict = get_baseline_system_types(rmd_b)
 
-                hvac_sys_5_or_7_list = [
-                    system_type
-                    for system_type in baseline_system_types_dict
-                    for applicable_sys_type in APPLICABLE_SYS_TYPES
-                    if baseline_system_type_compare(
-                        system_type, applicable_sys_type, False
-                    )
+            hvac_sys_5_or_7_list = [
+                system_type
+                for system_type in baseline_system_types_dict
+                for applicable_sys_type in APPLICABLE_SYS_TYPES
+                if baseline_system_type_compare(system_type, applicable_sys_type, False)
+            ]
+
+            hvac_systems_serving_lab_zones = get_lab_zone_hvac_systems(
+                rmd_b, rmd_p, climate_zone_b, is_leap_year_b
+            )
+
+            return {
+                "hvac_sys_5_or_7_list": hvac_sys_5_or_7_list,
+                "hvac_systems_serving_lab_zones": hvac_systems_serving_lab_zones,
+            }
+
+        def applicability_check(self, context, calc_vals, data):
+            hvac_sys_5_or_7_list = calc_vals["hvac_sys_5_or_7_list"]
+            hvac_systems_serving_lab_zones = calc_vals["hvac_systems_serving_lab_zones"]
+
+            return any(
+                [
+                    hvac_sys_id
+                    for hvac_sys_id in hvac_systems_serving_lab_zones["lab_zones_only"]
+                    if hvac_sys_id in hvac_sys_5_or_7_list
                 ]
-
-                hvac_systems_serving_lab_zones = get_lab_zone_hvac_systems(
-                    rmd_b, rmd_p, climate_zone_b, is_leap_year_b
-                )
-
-                return {
-                    "hvac_sys_5_or_7_list": hvac_sys_5_or_7_list,
-                    "hvac_systems_serving_lab_zones": hvac_systems_serving_lab_zones,
-                }
-
-            def applicability_check(self, context, calc_vals, data):
-                hvac_sys_5_or_7_list = calc_vals["hvac_sys_5_or_7_list"]
-                hvac_systems_serving_lab_zones = calc_vals[
-                    "hvac_systems_serving_lab_zones"
-                ]
-
-                return any(
-                    [
-                        hvac_sys_id
-                        for hvac_sys_id in hvac_systems_serving_lab_zones[
-                            "lab_zones_only"
-                        ]
-                        if hvac_sys_id in hvac_sys_5_or_7_list
-                    ]
-                )
+            )

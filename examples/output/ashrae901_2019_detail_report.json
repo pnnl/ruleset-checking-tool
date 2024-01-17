@@ -4,7 +4,7 @@
     "tool_name": "PNNL Ruleset Checking Tool",
     "tool_version": "0.0.1",
     "ruleset": "ASHRAE 90.1-2019 Performance Rating Method (Appendix G)",
-    "date_run": "2024-01-11 21:58:43.508052",
+    "date_run": "2024-01-17 23:03:14.408339",
     "schema_version": "0.0.29",
     "rpd_files": [
         {
@@ -4777,7 +4777,7 @@
             ]
         },
         {
-            "rule_id": "5-17",
+            "rule_id": "5-16",
             "description": "The vertical fenestration shall be distributed on each face of the building in the same proportion as in the proposed design.",
             "evaluation_type": "FULL",
             "standard_section": "Section G3.1-5(c) Building Envelope Modeling Requirements for the Baseline building",
@@ -5434,12 +5434,117 @@
             ]
         },
         {
-            "rule_id": "5-18",
+            "rule_id": "5-17",
             "description": "The baseline fenestration area for an existing building shall equal the existing fenestration area prior to the proposed work.",
             "evaluation_type": "APPLICABILITY",
             "standard_section": "Section G3.1-5(c) Building Envelope Modeling Requirements for the Baseline building",
             "data_group_names": [],
             "evaluations": []
+        },
+        {
+            "rule_id": "5-18",
+            "description": "Manually controlled dynamic glazing shall use the average of the minimum and maximum SHGC and VT.",
+            "evaluation_type": "APPLICABILITY",
+            "standard_section": "Section G3.1-5(a)5 Building Envelope Modeling Requirements for the Proposed design",
+            "data_group_names": [],
+            "evaluations": [
+                {
+                    "data_group_id": "PERIMETER_BOT_ZN_1_WALL_SOUTH_WINDOW",
+                    "outcome": "UNDETERMINED",
+                    "messages": {
+                        "PROPOSED_MISSING_DATA": "id:PERIMETER_BOT_ZN_1_WALL_SOUTH_WINDOW missing:dynamic_glazing_type"
+                    },
+                    "calculated_values": ""
+                },
+                {
+                    "data_group_id": "PERIMETER_BOT_ZN_2_WALL_EAST_WINDOW",
+                    "outcome": "UNDETERMINED",
+                    "messages": {
+                        "PROPOSED_MISSING_DATA": "id:PERIMETER_BOT_ZN_2_WALL_EAST_WINDOW missing:dynamic_glazing_type"
+                    },
+                    "calculated_values": ""
+                },
+                {
+                    "data_group_id": "PERIMETER_BOT_ZN_3_WALL_NORTH_WINDOW",
+                    "outcome": "UNDETERMINED",
+                    "messages": {
+                        "PROPOSED_MISSING_DATA": "id:PERIMETER_BOT_ZN_3_WALL_NORTH_WINDOW missing:dynamic_glazing_type"
+                    },
+                    "calculated_values": ""
+                },
+                {
+                    "data_group_id": "PERIMETER_BOT_ZN_4_WALL_WEST_WINDOW",
+                    "outcome": "UNDETERMINED",
+                    "messages": {
+                        "PROPOSED_MISSING_DATA": "id:PERIMETER_BOT_ZN_4_WALL_WEST_WINDOW missing:dynamic_glazing_type"
+                    },
+                    "calculated_values": ""
+                },
+                {
+                    "data_group_id": "PERIMETER_MID_ZN_1_WALL_SOUTH_WINDOW",
+                    "outcome": "UNDETERMINED",
+                    "messages": {
+                        "PROPOSED_MISSING_DATA": "id:PERIMETER_MID_ZN_1_WALL_SOUTH_WINDOW missing:dynamic_glazing_type"
+                    },
+                    "calculated_values": ""
+                },
+                {
+                    "data_group_id": "PERIMETER_MID_ZN_2_WALL_EAST_WINDOW",
+                    "outcome": "UNDETERMINED",
+                    "messages": {
+                        "PROPOSED_MISSING_DATA": "id:PERIMETER_MID_ZN_2_WALL_EAST_WINDOW missing:dynamic_glazing_type"
+                    },
+                    "calculated_values": ""
+                },
+                {
+                    "data_group_id": "PERIMETER_MID_ZN_3_WALL_NORTH_WINDOW",
+                    "outcome": "UNDETERMINED",
+                    "messages": {
+                        "PROPOSED_MISSING_DATA": "id:PERIMETER_MID_ZN_3_WALL_NORTH_WINDOW missing:dynamic_glazing_type"
+                    },
+                    "calculated_values": ""
+                },
+                {
+                    "data_group_id": "PERIMETER_MID_ZN_4_WALL_WEST_WINDOW",
+                    "outcome": "UNDETERMINED",
+                    "messages": {
+                        "PROPOSED_MISSING_DATA": "id:PERIMETER_MID_ZN_4_WALL_WEST_WINDOW missing:dynamic_glazing_type"
+                    },
+                    "calculated_values": ""
+                },
+                {
+                    "data_group_id": "PERIMETER_TOP_ZN_1_WALL_SOUTH_WINDOW",
+                    "outcome": "UNDETERMINED",
+                    "messages": {
+                        "PROPOSED_MISSING_DATA": "id:PERIMETER_TOP_ZN_1_WALL_SOUTH_WINDOW missing:dynamic_glazing_type"
+                    },
+                    "calculated_values": ""
+                },
+                {
+                    "data_group_id": "PERIMETER_TOP_ZN_2_WALL_EAST_WINDOW",
+                    "outcome": "UNDETERMINED",
+                    "messages": {
+                        "PROPOSED_MISSING_DATA": "id:PERIMETER_TOP_ZN_2_WALL_EAST_WINDOW missing:dynamic_glazing_type"
+                    },
+                    "calculated_values": ""
+                },
+                {
+                    "data_group_id": "PERIMETER_TOP_ZN_3_WALL_NORTH_WINDOW",
+                    "outcome": "UNDETERMINED",
+                    "messages": {
+                        "PROPOSED_MISSING_DATA": "id:PERIMETER_TOP_ZN_3_WALL_NORTH_WINDOW missing:dynamic_glazing_type"
+                    },
+                    "calculated_values": ""
+                },
+                {
+                    "data_group_id": "PERIMETER_TOP_ZN_4_WALL_WEST_WINDOW",
+                    "outcome": "UNDETERMINED",
+                    "messages": {
+                        "PROPOSED_MISSING_DATA": "id:PERIMETER_TOP_ZN_4_WALL_WEST_WINDOW missing:dynamic_glazing_type"
+                    },
+                    "calculated_values": ""
+                }
+            ]
         },
         {
             "rule_id": "5-19",
@@ -6136,111 +6241,6 @@
         },
         {
             "rule_id": "5-29",
-            "description": "Manually controlled dynamic glazing shall use the average of the minimum and maximum SHGC and VT.",
-            "evaluation_type": "APPLICABILITY",
-            "standard_section": "Section G3.1-5(a)5 Building Envelope Modeling Requirements for the Proposed design",
-            "data_group_names": [],
-            "evaluations": [
-                {
-                    "data_group_id": "PERIMETER_BOT_ZN_1_WALL_SOUTH_WINDOW",
-                    "outcome": "UNDETERMINED",
-                    "messages": {
-                        "PROPOSED_MISSING_DATA": "id:PERIMETER_BOT_ZN_1_WALL_SOUTH_WINDOW missing:dynamic_glazing_type"
-                    },
-                    "calculated_values": ""
-                },
-                {
-                    "data_group_id": "PERIMETER_BOT_ZN_2_WALL_EAST_WINDOW",
-                    "outcome": "UNDETERMINED",
-                    "messages": {
-                        "PROPOSED_MISSING_DATA": "id:PERIMETER_BOT_ZN_2_WALL_EAST_WINDOW missing:dynamic_glazing_type"
-                    },
-                    "calculated_values": ""
-                },
-                {
-                    "data_group_id": "PERIMETER_BOT_ZN_3_WALL_NORTH_WINDOW",
-                    "outcome": "UNDETERMINED",
-                    "messages": {
-                        "PROPOSED_MISSING_DATA": "id:PERIMETER_BOT_ZN_3_WALL_NORTH_WINDOW missing:dynamic_glazing_type"
-                    },
-                    "calculated_values": ""
-                },
-                {
-                    "data_group_id": "PERIMETER_BOT_ZN_4_WALL_WEST_WINDOW",
-                    "outcome": "UNDETERMINED",
-                    "messages": {
-                        "PROPOSED_MISSING_DATA": "id:PERIMETER_BOT_ZN_4_WALL_WEST_WINDOW missing:dynamic_glazing_type"
-                    },
-                    "calculated_values": ""
-                },
-                {
-                    "data_group_id": "PERIMETER_MID_ZN_1_WALL_SOUTH_WINDOW",
-                    "outcome": "UNDETERMINED",
-                    "messages": {
-                        "PROPOSED_MISSING_DATA": "id:PERIMETER_MID_ZN_1_WALL_SOUTH_WINDOW missing:dynamic_glazing_type"
-                    },
-                    "calculated_values": ""
-                },
-                {
-                    "data_group_id": "PERIMETER_MID_ZN_2_WALL_EAST_WINDOW",
-                    "outcome": "UNDETERMINED",
-                    "messages": {
-                        "PROPOSED_MISSING_DATA": "id:PERIMETER_MID_ZN_2_WALL_EAST_WINDOW missing:dynamic_glazing_type"
-                    },
-                    "calculated_values": ""
-                },
-                {
-                    "data_group_id": "PERIMETER_MID_ZN_3_WALL_NORTH_WINDOW",
-                    "outcome": "UNDETERMINED",
-                    "messages": {
-                        "PROPOSED_MISSING_DATA": "id:PERIMETER_MID_ZN_3_WALL_NORTH_WINDOW missing:dynamic_glazing_type"
-                    },
-                    "calculated_values": ""
-                },
-                {
-                    "data_group_id": "PERIMETER_MID_ZN_4_WALL_WEST_WINDOW",
-                    "outcome": "UNDETERMINED",
-                    "messages": {
-                        "PROPOSED_MISSING_DATA": "id:PERIMETER_MID_ZN_4_WALL_WEST_WINDOW missing:dynamic_glazing_type"
-                    },
-                    "calculated_values": ""
-                },
-                {
-                    "data_group_id": "PERIMETER_TOP_ZN_1_WALL_SOUTH_WINDOW",
-                    "outcome": "UNDETERMINED",
-                    "messages": {
-                        "PROPOSED_MISSING_DATA": "id:PERIMETER_TOP_ZN_1_WALL_SOUTH_WINDOW missing:dynamic_glazing_type"
-                    },
-                    "calculated_values": ""
-                },
-                {
-                    "data_group_id": "PERIMETER_TOP_ZN_2_WALL_EAST_WINDOW",
-                    "outcome": "UNDETERMINED",
-                    "messages": {
-                        "PROPOSED_MISSING_DATA": "id:PERIMETER_TOP_ZN_2_WALL_EAST_WINDOW missing:dynamic_glazing_type"
-                    },
-                    "calculated_values": ""
-                },
-                {
-                    "data_group_id": "PERIMETER_TOP_ZN_3_WALL_NORTH_WINDOW",
-                    "outcome": "UNDETERMINED",
-                    "messages": {
-                        "PROPOSED_MISSING_DATA": "id:PERIMETER_TOP_ZN_3_WALL_NORTH_WINDOW missing:dynamic_glazing_type"
-                    },
-                    "calculated_values": ""
-                },
-                {
-                    "data_group_id": "PERIMETER_TOP_ZN_4_WALL_WEST_WINDOW",
-                    "outcome": "UNDETERMINED",
-                    "messages": {
-                        "PROPOSED_MISSING_DATA": "id:PERIMETER_TOP_ZN_4_WALL_WEST_WINDOW missing:dynamic_glazing_type"
-                    },
-                    "calculated_values": ""
-                }
-            ]
-        },
-        {
-            "rule_id": "5-30",
             "description": "The baseline roof surfaces shall be modeled using a thermal emittance of 0.9",
             "evaluation_type": "FULL",
             "standard_section": "Section G3.1-5(f) Building Envelope Modeling Requirements for the Baseline building",
@@ -6257,7 +6257,7 @@
             ]
         },
         {
-            "rule_id": "5-31",
+            "rule_id": "5-30",
             "description": "The proposed roof surfaces shall be modeled using the same thermal emittance as in the user model.",
             "evaluation_type": "FULL",
             "standard_section": "Section G3.1-1(a) Building Envelope Modeling Requirements for the Proposed design",
@@ -6275,7 +6275,24 @@
             ]
         },
         {
-            "rule_id": "5-33",
+            "rule_id": "5-31",
+            "description": " The baseline roof surfaces shall be modeled using a solar reflectance of 0.30",
+            "evaluation_type": "FULL",
+            "standard_section": "Section G3.1-5(g) Building Envelope Modeling Requirements for the Baseline building",
+            "data_group_names": [],
+            "evaluations": [
+                {
+                    "data_group_id": "BUILDING_ROOF",
+                    "outcome": "UNDETERMINED",
+                    "messages": {
+                        "BASELINE_0_MISSING_DATA": "id:BUILDING_ROOF missing:optical_properties"
+                    },
+                    "calculated_values": ""
+                }
+            ]
+        },
+        {
+            "rule_id": "5-32",
             "description": "The proposed roof surfaces shall be modeled using the same solar reflectance as in the user model if the aged test data are available, or equal to 0.7 default reflectance",
             "evaluation_type": "FULL",
             "standard_section": "Section G3.1-1(a) Building Envelope Modeling Requirements for the Proposed design",
@@ -6293,7 +6310,7 @@
             ]
         },
         {
-            "rule_id": "5-34",
+            "rule_id": "5-33",
             "description": "The infiltration modeling method in the baseline includes adjustment for weather and building operation.",
             "evaluation_type": "FULL",
             "standard_section": "Section G3.1-5(b) Building Envelope Modeling Requirements for the Proposed design and Baseline",
@@ -6313,7 +6330,7 @@
             ]
         },
         {
-            "rule_id": "5-35",
+            "rule_id": "5-34",
             "description": "The infiltration shall be modeled using the same methodology and adjustments for weather and building operation in both the proposed design and the baseline building design.",
             "evaluation_type": "FULL",
             "standard_section": "Section G3.1-5(b) Building Envelope Modeling Requirements for the Proposed design and Baseline",
@@ -6333,7 +6350,7 @@
             ]
         },
         {
-            "rule_id": "5-36",
+            "rule_id": "5-35",
             "description": "The baseline air leakage rate of the building envelope (I_75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1 cfm/ft2. The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section G3.1.1.4.",
             "evaluation_type": "FULL",
             "standard_section": "Section G3.1-5(h) Building Envelope Modeling Requirements for the Baseline building",
@@ -6359,7 +6376,7 @@
             ]
         },
         {
-            "rule_id": "5-37",
+            "rule_id": "5-36",
             "description": "The air leakage rate in unconditioned and unenclosed spaces must be the same the baseline and proposed design.",
             "evaluation_type": "FULL",
             "standard_section": "Section G3.1-1 Building Envelope Modeling Requirements for the Proposed design and Baseline building",
@@ -6367,7 +6384,7 @@
             "evaluations": []
         },
         {
-            "rule_id": "5-38",
+            "rule_id": "5-37",
             "description": "The proposed air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 0.6 cfm/ft2 for buildings providing verification in accordance with Section 5.9.1.2. The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section G3.1.1.4. Exceptions: When whole-building air leakage testing, in accordance with Section 5.4.3.1.1, is specified during design and completed after construction, the proposed design air leakage rate of the building envelope shall be as measured.",
             "evaluation_type": "FULL",
             "standard_section": "Section G3.1-5(b) Building Envelope Modeling Requirements for the Proposed design",
@@ -6402,7 +6419,30 @@
             ]
         },
         {
-            "rule_id": "5-41",
+            "rule_id": "5-38",
+            "description": "It is acceptable to use either an annual average ground temperature or monthly average ground temperatures for calculation of heat loss through below-grade walls and basement floors.",
+            "evaluation_type": "APPLICABILITY",
+            "standard_section": "Section G3.1-14(b) Building Envelope Modeling Requirements for the Proposed design and Baseline",
+            "data_group_names": [],
+            "evaluations": [
+                {
+                    "data_group_id": "5-38",
+                    "outcome": "NOT_APPLICABLE",
+                    "messages": "",
+                    "calculated_values": ""
+                }
+            ]
+        },
+        {
+            "rule_id": "5-39",
+            "description": "U-factor of the baseline door is based on Tables G3.4-1 through G3.4-8 for the applicable door type (swinging or non-swinging) and envelope conditioning category.",
+            "evaluation_type": "FULL",
+            "standard_section": "Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline model",
+            "data_group_names": [],
+            "evaluations": []
+        },
+        {
+            "rule_id": "5-40",
             "description": "Opaque roof surfaces that are not regulated (not part of opaque building envelope) must be modeled with the same thermal emittance and solar reflectance in the baseline as in the proposed design. ",
             "evaluation_type": "FULL",
             "standard_section": "Section G3.1-5 Building Envelope Modeling Requirements for the Baseline building",
@@ -6982,23 +7022,6 @@
                             "value": "None"
                         }
                     ]
-                }
-            ]
-        },
-        {
-            "rule_id": "5-42",
-            "description": " The baseline roof surfaces shall be modeled using a solar reflectance of 0.30",
-            "evaluation_type": "FULL",
-            "standard_section": "Section G3.1-5(g) Building Envelope Modeling Requirements for the Baseline building",
-            "data_group_names": [],
-            "evaluations": [
-                {
-                    "data_group_id": "BUILDING_ROOF",
-                    "outcome": "UNDETERMINED",
-                    "messages": {
-                        "BASELINE_0_MISSING_DATA": "id:BUILDING_ROOF missing:optical_properties"
-                    },
-                    "calculated_values": ""
                 }
             ]
         },
@@ -8747,8 +8770,8 @@
                 },
                 {
                     "data_group_id": "CW Loop 1",
-                    "outcome": "NOT_APPLICABLE",
-                    "messages": "",
+                    "outcome": "UNDETERMINED",
+                    "messages": "cooling_or_condensing_design_and_control:CCDC 1 is missing is_sized_using_coincident_load",
                     "calculated_values": ""
                 }
             ]
@@ -8762,8 +8785,8 @@
             "evaluations": [
                 {
                     "data_group_id": "19-3",
-                    "outcome": "NOT_APPLICABLE",
-                    "messages": "",
+                    "outcome": "UNDETERMINED",
+                    "messages": "Check that the weather conditions used in sizing runs to determine baseline equipment capacities is based on design days developed using 99.6% heating design temperatures and 1% dry-bulb and 1% wet-bulb cooling design temperatures.",
                     "calculated_values": ""
                 }
             ]
@@ -8954,27 +8977,60 @@
             "evaluations": [
                 {
                     "data_group_id": "BUILDING STORY 1 VAV_REHEAT (SYS7)",
-                    "outcome": "UNDETERMINED",
-                    "messages": {
-                        "BASELINE_0_MISSING_DATA": "id:BUILDING STORY 1 VAV_REHEAT (SYS7)-fanSystem missing:minimum_outdoor_airflow"
-                    },
-                    "calculated_values": ""
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": [
+                        {
+                            "variable": "hvac_min_OA_flow",
+                            "value": "6399.8 liter / second"
+                        },
+                        {
+                            "variable": "is_DCV_modeled_b",
+                            "value": "False"
+                        },
+                        {
+                            "variable": "avg_occ_density",
+                            "value": "0.0 / square_foot"
+                        }
+                    ]
                 },
                 {
                     "data_group_id": "BUILDING STORY 2 VAV_REHEAT (SYS7)",
-                    "outcome": "UNDETERMINED",
-                    "messages": {
-                        "BASELINE_0_MISSING_DATA": "id:BUILDING STORY 2 VAV_REHEAT (SYS7)-fanSystem missing:minimum_outdoor_airflow"
-                    },
-                    "calculated_values": ""
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": [
+                        {
+                            "variable": "hvac_min_OA_flow",
+                            "value": "8398.5 liter / second"
+                        },
+                        {
+                            "variable": "is_DCV_modeled_b",
+                            "value": "False"
+                        },
+                        {
+                            "variable": "avg_occ_density",
+                            "value": "0.0 / square_foot"
+                        }
+                    ]
                 },
                 {
                     "data_group_id": "BUILDING STORY 3 VAV_REHEAT (SYS7)",
-                    "outcome": "UNDETERMINED",
-                    "messages": {
-                        "BASELINE_0_MISSING_DATA": "id:BUILDING STORY 3 VAV_REHEAT (SYS7)-fanSystem missing:minimum_outdoor_airflow"
-                    },
-                    "calculated_values": ""
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": [
+                        {
+                            "variable": "hvac_min_OA_flow",
+                            "value": "7657.4 liter / second"
+                        },
+                        {
+                            "variable": "is_DCV_modeled_b",
+                            "value": "False"
+                        },
+                        {
+                            "variable": "avg_occ_density",
+                            "value": "0.0 / square_foot"
+                        }
+                    ]
                 }
             ]
         },
@@ -9099,7 +9155,7 @@
                 {
                     "data_group_id": "19-13",
                     "outcome": "UNDETERMINED",
-                    "messages": "supply_fan:BUILDING STORY 1 VAV_REHEAT (SYS7)-supplyFan is missing is_airflow_autosized",
+                    "messages": "zones:CORE_BOTTOM ZN is missing design_thermostat_cooling_setpoint",
                     "calculated_values": ""
                 }
             ]
@@ -9112,9 +9168,21 @@
             "data_group_names": [],
             "evaluations": [
                 {
-                    "data_group_id": "19-14",
+                    "data_group_id": "BUILDING STORY 1 VAV_REHEAT (SYS7)",
                     "outcome": "UNDETERMINED",
-                    "messages": "fan:BUILDING STORY 1 VAV_REHEAT (SYS7)-supplyFan is missing specification_method",
+                    "messages": "MISSING_PROPOSED",
+                    "calculated_values": ""
+                },
+                {
+                    "data_group_id": "BUILDING STORY 2 VAV_REHEAT (SYS7)",
+                    "outcome": "UNDETERMINED",
+                    "messages": "MISSING_PROPOSED",
+                    "calculated_values": ""
+                },
+                {
+                    "data_group_id": "BUILDING STORY 3 VAV_REHEAT (SYS7)",
+                    "outcome": "UNDETERMINED",
+                    "messages": "MISSING_PROPOSED",
                     "calculated_values": ""
                 }
             ]
@@ -9174,20 +9242,83 @@
                 {
                     "data_group_id": "BUILDING STORY 1 VAV_REHEAT (SYS7)",
                     "outcome": "UNDETERMINED",
-                    "messages": "fan:BUILDING STORY 1 VAV_REHEAT (SYS7)-supplyFan is missing specification_method",
-                    "calculated_values": ""
+                    "messages": "Fan power for BUILDING STORY 1 VAV_REHEAT (SYS7) is greater than expected per Section and Table G3.1.2.9 assuming no pressure drop adjustments (e.g., sound attenuation, air filtration, fully ducted return when required by code, airflow control devices, carbon and other gas-phase air cleaners, coil runaround loops, evaporative humidifier/coolers in series with another cooling coil, exhaust systems serving fume hoods, and laboratory and vivarium exhaust systems in high-rise buildings) per Table 6.5.3.1-2 other than energy recovery and MERV filters defined in the RMD (if modeled). Expected Wattage = 84.15592148092404 kilowatt kW. however not all pressure drop adjustments are able to be captured in the RMD so conduct manual check.",
+                    "calculated_values": [
+                        {
+                            "variable": "more_than_one_supply_fan_b",
+                            "value": "False"
+                        },
+                        {
+                            "variable": "more_than_one_exhaust_fan_and_energy_rec_is_relevant_b",
+                            "value": "False"
+                        },
+                        {
+                            "variable": "total_fan_power_b",
+                            "value": "112.9005095883063 hp"
+                        },
+                        {
+                            "variable": "expected_fan_wattage_b",
+                            "value": "112.85493024128206 hp"
+                        },
+                        {
+                            "variable": "min_fan_wattage_b",
+                            "value": "112.85493024128206 hp"
+                        }
+                    ]
                 },
                 {
                     "data_group_id": "BUILDING STORY 2 VAV_REHEAT (SYS7)",
                     "outcome": "UNDETERMINED",
-                    "messages": "fan:BUILDING STORY 2 VAV_REHEAT (SYS7)-supplyFan is missing specification_method",
-                    "calculated_values": ""
+                    "messages": "Fan power for BUILDING STORY 2 VAV_REHEAT (SYS7) is greater than expected per Section and Table G3.1.2.9 assuming no pressure drop adjustments (e.g., sound attenuation, air filtration, fully ducted return when required by code, airflow control devices, carbon and other gas-phase air cleaners, coil runaround loops, evaporative humidifier/coolers in series with another cooling coil, exhaust systems serving fume hoods, and laboratory and vivarium exhaust systems in high-rise buildings) per Table 6.5.3.1-2 other than energy recovery and MERV filters defined in the RMD (if modeled). Expected Wattage = 79.04128715667493 kilowatt kW. however not all pressure drop adjustments are able to be captured in the RMD so conduct manual check.",
+                    "calculated_values": [
+                        {
+                            "variable": "more_than_one_supply_fan_b",
+                            "value": "False"
+                        },
+                        {
+                            "variable": "more_than_one_exhaust_fan_and_energy_rec_is_relevant_b",
+                            "value": "False"
+                        },
+                        {
+                            "variable": "total_fan_power_b",
+                            "value": "106.03890304411965 hp"
+                        },
+                        {
+                            "variable": "expected_fan_wattage_b",
+                            "value": "105.99609381343022 hp"
+                        },
+                        {
+                            "variable": "min_fan_wattage_b",
+                            "value": "105.99609381343022 hp"
+                        }
+                    ]
                 },
                 {
                     "data_group_id": "BUILDING STORY 3 VAV_REHEAT (SYS7)",
                     "outcome": "UNDETERMINED",
-                    "messages": "fan:BUILDING STORY 3 VAV_REHEAT (SYS7)-supplyFan is missing specification_method",
-                    "calculated_values": ""
+                    "messages": "Fan power for BUILDING STORY 3 VAV_REHEAT (SYS7) is greater than expected per Section and Table G3.1.2.9 assuming no pressure drop adjustments (e.g., sound attenuation, air filtration, fully ducted return when required by code, airflow control devices, carbon and other gas-phase air cleaners, coil runaround loops, evaporative humidifier/coolers in series with another cooling coil, exhaust systems serving fume hoods, and laboratory and vivarium exhaust systems in high-rise buildings) per Table 6.5.3.1-2 other than energy recovery and MERV filters defined in the RMD (if modeled). Expected Wattage = 110.75218219032297 kilowatt kW. however not all pressure drop adjustments are able to be captured in the RMD so conduct manual check.",
+                    "calculated_values": [
+                        {
+                            "variable": "more_than_one_supply_fan_b",
+                            "value": "False"
+                        },
+                        {
+                            "variable": "more_than_one_exhaust_fan_and_energy_rec_is_relevant_b",
+                            "value": "False"
+                        },
+                        {
+                            "variable": "total_fan_power_b",
+                            "value": "148.58071610567254 hp"
+                        },
+                        {
+                            "variable": "expected_fan_wattage_b",
+                            "value": "148.52109721110764 hp"
+                        },
+                        {
+                            "variable": "min_fan_wattage_b",
+                            "value": "148.52109721110764 hp"
+                        }
+                    ]
                 }
             ]
         },
@@ -9215,21 +9346,120 @@
             "evaluations": [
                 {
                     "data_group_id": "BUILDING STORY 1 VAV_REHEAT (SYS7)",
-                    "outcome": "UNDETERMINED",
-                    "messages": "MISSING_PROPOSED",
-                    "calculated_values": ""
+                    "outcome": "FAILED",
+                    "messages": "The calculated system fan power doesn't appear to be distributed to the supply, return, exhaust, and relief fans in the same proportion as the proposed design for BUILDING STORY 1 VAV_REHEAT (SYS7).The expected modeled baseline supply, return, exhaust, and relief kW is 0.0 british_thermal_unit / hour, 0.0 british_thermal_unit / hour, 0.0 british_thermal_unit / hour, 0.0 british_thermal_unit / hour respectively.",
+                    "calculated_values": [
+                        {
+                            "variable": "hvac_sys_total_supply_fan_power_b",
+                            "value": "287267.85687205236 british_thermal_unit / hour"
+                        },
+                        {
+                            "variable": "hvac_sys_total_return_fan_power_b",
+                            "value": "0.0 british_thermal_unit / hour"
+                        },
+                        {
+                            "variable": "hvac_sys_total_exhaust_fan_power_b",
+                            "value": "0.0 british_thermal_unit / hour"
+                        },
+                        {
+                            "variable": "hvac_sys_total_relief_fan_power_b",
+                            "value": "0.0 british_thermal_unit / hour"
+                        },
+                        {
+                            "variable": "expected_baseline_fan_power_supply",
+                            "value": "0.0 british_thermal_unit / hour"
+                        },
+                        {
+                            "variable": "expected_baseline_fan_power_return",
+                            "value": "0.0 british_thermal_unit / hour"
+                        },
+                        {
+                            "variable": "expected_baseline_fan_power_exhaust",
+                            "value": "0.0 british_thermal_unit / hour"
+                        },
+                        {
+                            "variable": "expected_baseline_fan_power_relief",
+                            "value": "0.0 british_thermal_unit / hour"
+                        }
+                    ]
                 },
                 {
                     "data_group_id": "BUILDING STORY 2 VAV_REHEAT (SYS7)",
-                    "outcome": "UNDETERMINED",
-                    "messages": "MISSING_PROPOSED",
-                    "calculated_values": ""
+                    "outcome": "FAILED",
+                    "messages": "The calculated system fan power doesn't appear to be distributed to the supply, return, exhaust, and relief fans in the same proportion as the proposed design for BUILDING STORY 2 VAV_REHEAT (SYS7).The expected modeled baseline supply, return, exhaust, and relief kW is 0.0 british_thermal_unit / hour, 0.0 british_thermal_unit / hour, 0.0 british_thermal_unit / hour, 0.0 british_thermal_unit / hour respectively.",
+                    "calculated_values": [
+                        {
+                            "variable": "hvac_sys_total_supply_fan_power_b",
+                            "value": "269808.9542166483 british_thermal_unit / hour"
+                        },
+                        {
+                            "variable": "hvac_sys_total_return_fan_power_b",
+                            "value": "0.0 british_thermal_unit / hour"
+                        },
+                        {
+                            "variable": "hvac_sys_total_exhaust_fan_power_b",
+                            "value": "0.0 british_thermal_unit / hour"
+                        },
+                        {
+                            "variable": "hvac_sys_total_relief_fan_power_b",
+                            "value": "0.0 british_thermal_unit / hour"
+                        },
+                        {
+                            "variable": "expected_baseline_fan_power_supply",
+                            "value": "0.0 british_thermal_unit / hour"
+                        },
+                        {
+                            "variable": "expected_baseline_fan_power_return",
+                            "value": "0.0 british_thermal_unit / hour"
+                        },
+                        {
+                            "variable": "expected_baseline_fan_power_exhaust",
+                            "value": "0.0 british_thermal_unit / hour"
+                        },
+                        {
+                            "variable": "expected_baseline_fan_power_relief",
+                            "value": "0.0 british_thermal_unit / hour"
+                        }
+                    ]
                 },
                 {
                     "data_group_id": "BUILDING STORY 3 VAV_REHEAT (SYS7)",
-                    "outcome": "UNDETERMINED",
-                    "messages": "MISSING_PROPOSED",
-                    "calculated_values": ""
+                    "outcome": "FAILED",
+                    "messages": "The calculated system fan power doesn't appear to be distributed to the supply, return, exhaust, and relief fans in the same proportion as the proposed design for BUILDING STORY 3 VAV_REHEAT (SYS7).The expected modeled baseline supply, return, exhaust, and relief kW is 0.0 british_thermal_unit / hour, 0.0 british_thermal_unit / hour, 0.0 british_thermal_unit / hour, 0.0 british_thermal_unit / hour respectively.",
+                    "calculated_values": [
+                        {
+                            "variable": "hvac_sys_total_supply_fan_power_b",
+                            "value": "378053.77534462634 british_thermal_unit / hour"
+                        },
+                        {
+                            "variable": "hvac_sys_total_return_fan_power_b",
+                            "value": "0.0 british_thermal_unit / hour"
+                        },
+                        {
+                            "variable": "hvac_sys_total_exhaust_fan_power_b",
+                            "value": "0.0 british_thermal_unit / hour"
+                        },
+                        {
+                            "variable": "hvac_sys_total_relief_fan_power_b",
+                            "value": "0.0 british_thermal_unit / hour"
+                        },
+                        {
+                            "variable": "expected_baseline_fan_power_supply",
+                            "value": "0.0 british_thermal_unit / hour"
+                        },
+                        {
+                            "variable": "expected_baseline_fan_power_return",
+                            "value": "0.0 british_thermal_unit / hour"
+                        },
+                        {
+                            "variable": "expected_baseline_fan_power_exhaust",
+                            "value": "0.0 british_thermal_unit / hour"
+                        },
+                        {
+                            "variable": "expected_baseline_fan_power_relief",
+                            "value": "0.0 british_thermal_unit / hour"
+                        }
+                    ]
                 }
             ]
         },
@@ -10332,19 +10562,25 @@
                 {
                     "data_group_id": "BUILDING STORY 1 VAV_REHEAT (SYS7)",
                     "outcome": "UNDETERMINED",
-                    "messages": "MISSING_USER_PROPOSED",
+                    "messages": {
+                        "BASELINE_0_MISSING_DATA": "id:BUILDING STORY 1 VAV_REHEAT (SYS7)-fanSystem missing:operation_during_occupied"
+                    },
                     "calculated_values": ""
                 },
                 {
                     "data_group_id": "BUILDING STORY 2 VAV_REHEAT (SYS7)",
                     "outcome": "UNDETERMINED",
-                    "messages": "MISSING_USER_PROPOSED",
+                    "messages": {
+                        "BASELINE_0_MISSING_DATA": "id:BUILDING STORY 2 VAV_REHEAT (SYS7)-fanSystem missing:operation_during_occupied"
+                    },
                     "calculated_values": ""
                 },
                 {
                     "data_group_id": "BUILDING STORY 3 VAV_REHEAT (SYS7)",
                     "outcome": "UNDETERMINED",
-                    "messages": "MISSING_USER_PROPOSED",
+                    "messages": {
+                        "BASELINE_0_MISSING_DATA": "id:BUILDING STORY 3 VAV_REHEAT (SYS7)-fanSystem missing:operation_during_occupied"
+                    },
                     "calculated_values": ""
                 }
             ]
@@ -10391,26 +10627,20 @@
             "evaluations": [
                 {
                     "data_group_id": "BUILDING STORY 1 VAV_REHEAT (SYS7)",
-                    "outcome": "UNDETERMINED",
-                    "messages": {
-                        "BASELINE_0_MISSING_DATA": "id:BUILDING STORY 1 VAV_REHEAT (SYS7)-fanSystem missing:operation_during_unoccupied,minimum_outdoor_airflow"
-                    },
+                    "outcome": "NOT_APPLICABLE",
+                    "messages": "",
                     "calculated_values": ""
                 },
                 {
                     "data_group_id": "BUILDING STORY 2 VAV_REHEAT (SYS7)",
-                    "outcome": "UNDETERMINED",
-                    "messages": {
-                        "BASELINE_0_MISSING_DATA": "id:BUILDING STORY 2 VAV_REHEAT (SYS7)-fanSystem missing:operation_during_unoccupied,minimum_outdoor_airflow"
-                    },
+                    "outcome": "NOT_APPLICABLE",
+                    "messages": "",
                     "calculated_values": ""
                 },
                 {
                     "data_group_id": "BUILDING STORY 3 VAV_REHEAT (SYS7)",
-                    "outcome": "UNDETERMINED",
-                    "messages": {
-                        "BASELINE_0_MISSING_DATA": "id:BUILDING STORY 3 VAV_REHEAT (SYS7)-fanSystem missing:operation_during_unoccupied,minimum_outdoor_airflow"
-                    },
+                    "outcome": "NOT_APPLICABLE",
+                    "messages": "",
                     "calculated_values": ""
                 }
             ]
@@ -10457,27 +10687,36 @@
             "evaluations": [
                 {
                     "data_group_id": "BUILDING STORY 1 VAV_REHEAT (SYS7)",
-                    "outcome": "UNDETERMINED",
-                    "messages": {
-                        "BASELINE_0_MISSING_DATA": "id:BUILDING STORY 1 VAV_REHEAT (SYS7)-fanSystem missing:operation_during_unoccupied"
-                    },
-                    "calculated_values": ""
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": [
+                        {
+                            "variable": "operation_during_unoccupied_b",
+                            "value": "CYCLING"
+                        }
+                    ]
                 },
                 {
                     "data_group_id": "BUILDING STORY 2 VAV_REHEAT (SYS7)",
-                    "outcome": "UNDETERMINED",
-                    "messages": {
-                        "BASELINE_0_MISSING_DATA": "id:BUILDING STORY 2 VAV_REHEAT (SYS7)-fanSystem missing:operation_during_unoccupied"
-                    },
-                    "calculated_values": ""
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": [
+                        {
+                            "variable": "operation_during_unoccupied_b",
+                            "value": "CYCLING"
+                        }
+                    ]
                 },
                 {
                     "data_group_id": "BUILDING STORY 3 VAV_REHEAT (SYS7)",
-                    "outcome": "UNDETERMINED",
-                    "messages": {
-                        "BASELINE_0_MISSING_DATA": "id:BUILDING STORY 3 VAV_REHEAT (SYS7)-fanSystem missing:operation_during_unoccupied"
-                    },
-                    "calculated_values": ""
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": [
+                        {
+                            "variable": "operation_during_unoccupied_b",
+                            "value": "CYCLING"
+                        }
+                    ]
                 }
             ]
         },
@@ -10490,20 +10729,20 @@
             "evaluations": [
                 {
                     "data_group_id": "BUILDING STORY 1 VAV_REHEAT (SYS7)",
-                    "outcome": "UNDETERMINED",
-                    "messages": "For BUILDING STORY 1 VAV_REHEAT (SYS7) perform manual check that only the terminal-unit fan and reheat coil are being energized to meet the heating set point during unoccupied hours.",
+                    "outcome": "NOT_APPLICABLE",
+                    "messages": "",
                     "calculated_values": ""
                 },
                 {
                     "data_group_id": "BUILDING STORY 2 VAV_REHEAT (SYS7)",
-                    "outcome": "UNDETERMINED",
-                    "messages": "For BUILDING STORY 2 VAV_REHEAT (SYS7) perform manual check that only the terminal-unit fan and reheat coil are being energized to meet the heating set point during unoccupied hours.",
+                    "outcome": "NOT_APPLICABLE",
+                    "messages": "",
                     "calculated_values": ""
                 },
                 {
                     "data_group_id": "BUILDING STORY 3 VAV_REHEAT (SYS7)",
-                    "outcome": "UNDETERMINED",
-                    "messages": "For BUILDING STORY 3 VAV_REHEAT (SYS7) perform manual check that only the terminal-unit fan and reheat coil are being energized to meet the heating set point during unoccupied hours.",
+                    "outcome": "NOT_APPLICABLE",
+                    "messages": "",
                     "calculated_values": ""
                 }
             ]
@@ -11061,7 +11300,7 @@
             "evaluations": [
                 {
                     "data_group_id": "Boiler 1",
-                    "outcome": "FAILED",
+                    "outcome": "PASS",
                     "messages": "",
                     "calculated_values": [
                         {
@@ -11071,7 +11310,7 @@
                         },
                         {
                             "variable": "boiler_efficiency_metric_b",
-                            "value": "ANNUAL_FUEL_UTILIZATION"
+                            "value": "COMBUSTION"
                         },
                         {
                             "variable": "boiler_efficiency_b",
@@ -11081,7 +11320,7 @@
                 },
                 {
                     "data_group_id": "Boiler 2",
-                    "outcome": "FAILED",
+                    "outcome": "PASS",
                     "messages": "",
                     "calculated_values": [
                         {
@@ -11091,7 +11330,7 @@
                         },
                         {
                             "variable": "boiler_efficiency_metric_b",
-                            "value": "ANNUAL_FUEL_UTILIZATION"
+                            "value": "COMBUSTION"
                         },
                         {
                             "variable": "boiler_efficiency_b",
@@ -11383,11 +11622,20 @@
             "evaluations": [
                 {
                     "data_group_id": "Secondary CHW Loop 1",
-                    "outcome": "UNDETERMINED",
-                    "messages": {
-                        "BASELINE_0_MISSING_DATA": "id:Secondary CHW Loop 1 missing:pump_power_per_flow_rate"
-                    },
-                    "calculated_values": ""
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": [
+                        {
+                            "variable": "secondary_loop_pump_power_per_flow_rate",
+                            "value": "21.99722141666667",
+                            "unit": "W/gpm"
+                        },
+                        {
+                            "variable": "req_pump_flow_rate",
+                            "value": "13.0",
+                            "unit": "W/gpm"
+                        }
+                    ]
                 }
             ]
         },
@@ -11400,16 +11648,16 @@
             "evaluations": [
                 {
                     "data_group_id": "22-12",
-                    "outcome": "FAILED",
-                    "messages": "There is more than one cooling tower on this loop and there is more than one condenser loop for the chiller plant. For the baseline chiller plant, there should be only one condenser loop with only one cooling tower.",
+                    "outcome": "PASS",
+                    "messages": "",
                     "calculated_values": [
                         {
                             "variable": "heat_rejection_loop_ids_b",
-                            "value": "['Condenser Loop 1']"
+                            "value": "['CW Loop 1']"
                         },
                         {
                             "variable": "number_of_baseline_heat_rejections_b",
-                            "value": "0"
+                            "value": "1"
                         }
                     ]
                 }
@@ -11424,9 +11672,18 @@
             "evaluations": [
                 {
                     "data_group_id": "Heat Rejection 1",
-                    "outcome": "NOT_APPLICABLE",
+                    "outcome": "PASS",
                     "messages": "",
-                    "calculated_values": ""
+                    "calculated_values": [
+                        {
+                            "variable": "fan_type_b",
+                            "value": "AXIAL"
+                        },
+                        {
+                            "variable": "heat_rejection_type_b",
+                            "value": "OPEN_CIRCUIT_COOLING_TOWER"
+                        }
+                    ]
                 }
             ]
         },
@@ -11439,26 +11696,46 @@
             "evaluations": [
                 {
                     "data_group_id": "Heat Rejection 1",
-                    "outcome": "UNDETERMINED",
-                    "messages": {
-                        "BASELINE_0_MISSING_DATA": "id:Heat Rejection 1 missing:range"
-                    },
-                    "calculated_values": ""
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": [
+                        {
+                            "variable": "heat_rejection_range",
+                            "value": "-449.66999999999996",
+                            "unit": "F"
+                        },
+                        {
+                            "variable": "required_heat_rejection_range",
+                            "value": "-449.67",
+                            "unit": "F"
+                        }
+                    ]
                 }
             ]
         },
         {
             "rule_id": "22-15",
-            "description": "Heat Rejection Device Approach calaculated correctly (T/F), Approach = 25.72-(0.24*WB)",
+            "description": "Heat Rejection Device Approach calculated correctly (T/F), Approach = 25.72-(0.24*WB)",
             "evaluation_type": "FULL",
             "standard_section": "Section 22 CHW&CW Loop",
             "data_group_names": [],
             "evaluations": [
                 {
                     "data_group_id": "Heat Rejection 1",
-                    "outcome": "NOT_APPLICABLE",
+                    "outcome": "FAILED",
                     "messages": "",
-                    "calculated_values": ""
+                    "calculated_values": [
+                        {
+                            "variable": "approach_b",
+                            "value": "-452.67",
+                            "unit": "F"
+                        },
+                        {
+                            "variable": "target_approach_b",
+                            "value": "-447.15000000000003",
+                            "unit": "F"
+                        }
+                    ]
                 }
             ]
         },
@@ -11485,7 +11762,7 @@
                         },
                         {
                             "variable": "approach_b",
-                            "value": "-454.67",
+                            "value": "-452.67",
                             "unit": "F"
                         },
                         {
@@ -11506,9 +11783,24 @@
             "evaluations": [
                 {
                     "data_group_id": "Heat Rejection 1",
-                    "outcome": "NOT_APPLICABLE",
-                    "messages": "",
-                    "calculated_values": ""
+                    "outcome": "UNDETERMINED",
+                    "messages": "The project includes a cooling tower. We calculated the cooling tower efficiency to be 39.1, which is greater than the required efficiency of 38.2 gpm/hp, resulting in a more stringent baseline. However, it was not possible to verify that the modeling inputs correspond to the rating conditions in Table 6.8.1-7. ",
+                    "calculated_values": [
+                        {
+                            "variable": "fan_shaft_power_b",
+                            "value": "44193.9806597599",
+                            "unit": "W"
+                        },
+                        {
+                            "variable": "rated_water_flowrate_b",
+                            "value": "310.06630528134207",
+                            "unit": "cfm"
+                        },
+                        {
+                            "variable": "heat_rejection_efficiency_b",
+                            "value": "39.141241820538234 gpm/hp"
+                        }
+                    ]
                 }
             ]
         },
@@ -11521,9 +11813,14 @@
             "evaluations": [
                 {
                     "data_group_id": "Heat Rejection 1",
-                    "outcome": "NOT_APPLICABLE",
+                    "outcome": "PASS",
                     "messages": "",
-                    "calculated_values": ""
+                    "calculated_values": [
+                        {
+                            "variable": "fan_speed_control_b",
+                            "value": "VARIABLE_SPEED"
+                        }
+                    ]
                 }
             ]
         },
@@ -11621,7 +11918,7 @@
             "evaluations": [
                 {
                     "data_group_id": "Chiller 1",
-                    "outcome": "FAILED",
+                    "outcome": "PASS",
                     "messages": "",
                     "calculated_values": [
                         {
@@ -11638,7 +11935,7 @@
                 },
                 {
                     "data_group_id": "Chiller 2",
-                    "outcome": "FAILED",
+                    "outcome": "PASS",
                     "messages": "",
                     "calculated_values": [
                         {
@@ -11728,7 +12025,7 @@
                     "calculated_values": [
                         {
                             "variable": "primary_pump_power_per_flow_rate",
-                            "value": "21.99722141666667",
+                            "value": "5.999336657500001",
                             "unit": "W/gpm"
                         },
                         {
@@ -11795,9 +12092,14 @@
             "evaluations": [
                 {
                     "data_group_id": "Heat Rejection 1",
-                    "outcome": "NOT_APPLICABLE",
+                    "outcome": "PASS",
                     "messages": "",
-                    "calculated_values": ""
+                    "calculated_values": [
+                        {
+                            "variable": "heat_rejection_flow_ctrl_b",
+                            "value": "FIXED_FLOW"
+                        }
+                    ]
                 }
             ]
         },
@@ -11809,10 +12111,21 @@
             "data_group_names": [],
             "evaluations": [
                 {
-                    "data_group_id": "22-29",
-                    "outcome": "FAILED",
-                    "messages": "Search data referenced in $.fluid_loops[*] with key:value id:Condenser Loop 1 returned 0 results instead of one",
-                    "calculated_values": ""
+                    "data_group_id": "CW Loop 1",
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": [
+                        {
+                            "variable": "pump_power_per_flow_rate",
+                            "value": "18.997948793293926",
+                            "unit": "W/gpm"
+                        },
+                        {
+                            "variable": "required_pump_power",
+                            "value": "19.0",
+                            "unit": "W/gpm"
+                        }
+                    ]
                 }
             ]
         },
@@ -11833,7 +12146,7 @@
         },
         {
             "rule_id": "22-31",
-            "description": "The baseline building design\u2019s chiller plant shall be modeled with chillers having the number as indicated in Table G3.1.3.7 as a function of building peak cooling load.",
+            "description": "The baseline building design's chiller plant shall be modeled with chillers having the number as indicated in Table G3.1.3.7 as a function of building peak cooling load.",
             "evaluation_type": "FULL",
             "standard_section": "Section G3.1.3.1 Type and Number of Chillers (System 7, 8, 11, 12 and 13)",
             "data_group_names": [],
@@ -11869,11 +12182,13 @@
                     "calculated_values": [
                         {
                             "variable": "chiller_part_load_efficiency",
-                            "value": "8.79 dimensionless"
+                            "value": "30.914429999999996",
+                            "unit": "kW/ton"
                         },
                         {
                             "variable": "target_part_load_efficiency",
-                            "value": "0.549 kilowatt / ton"
+                            "value": "0.549",
+                            "unit": "kW/ton"
                         },
                         {
                             "variable": "part_load_efficiency_metric",
@@ -11888,11 +12203,13 @@
                     "calculated_values": [
                         {
                             "variable": "chiller_part_load_efficiency",
-                            "value": "8.79 dimensionless"
+                            "value": "30.914429999999996",
+                            "unit": "kW/ton"
                         },
                         {
                             "variable": "target_part_load_efficiency",
-                            "value": "0.549 kilowatt / ton"
+                            "value": "0.549",
+                            "unit": "kW/ton"
                         },
                         {
                             "variable": "part_load_efficiency_metric",
@@ -12059,7 +12376,7 @@
                 {
                     "data_group_id": "22-41",
                     "outcome": "UNDETERMINED",
-                    "messages": "B-RMD IS MODELED WITH PURCHASED CHILLED WATER. VERIFY THAT THERE IS ONLY ONE PURCHASED CHILLED WATER LOOP IN THE BASELINE MODEL.",
+                    "messages": "B-RMD SHOULD BE MODELED WITH PURCHASED CHILLED WATER. VERIFY THAT THERE IS ONLY ONE PURCHASED CHILLED WATER LOOP IN THE BASELINE MODEL.",
                     "calculated_values": ""
                 }
             ]
@@ -12482,6 +12799,30 @@
                             "variable": "minimum_outdoor_airflow_b",
                             "value": "720.5251451185319",
                             "unit": "cfm"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "rule_id": "23-4",
+            "description": "Baseline systems 5 & 7 serving lab spaces per G3.1.1c shall reduce lab exhaust and makeup air during unoccupied periods to 50% of zone peak airflow, the minimum outdoor airflow, or rate required to comply with minimum accreditation standards whichever is larger.",
+            "evaluation_type": "APPLICABILITY",
+            "standard_section": "Exception to G3.1.3.13 VAV Minimum Flow Set Points (Systems 5 and 7)",
+            "data_group_names": [],
+            "evaluations": [
+                {
+                    "data_group_id": "Only model description",
+                    "outcome": "NOT_APPLICABLE",
+                    "messages": "",
+                    "calculated_values": [
+                        {
+                            "variable": "hvac_sys_5_or_7_list",
+                            "value": "['Sys-5', 'Sys-5b', 'Sys-7', 'Sys-7a', 'Sys-7b', 'Sys-7c']"
+                        },
+                        {
+                            "variable": "hvac_systems_serving_lab_zones",
+                            "value": "{'lab_zones_only': [], 'lab_and_other': []}"
                         }
                     ]
                 }
