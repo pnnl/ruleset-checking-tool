@@ -316,6 +316,7 @@
                       "heating_capacity": 164592.668,
                       "minimum_airflow":7690.00,
                       "minimum_outdoor_airflow": 2548.15,
+                      "minimum_outdoor_airflow_multiplier_schedule": "ALWAYS ON DISCRETE",
                       "primary_airflow":25640.00
                     }
                   ],
@@ -579,6 +580,7 @@
                       "heating_capacity": 241017.988,
                       "minimum_airflow":4560.0,
                       "minimum_outdoor_airflow": 2548.15,
+                      "minimum_outdoor_airflow_multiplier_schedule": "ALWAYS ON DISCRETE",
                       "primary_airflow":15210.0
                     }
                   ],
@@ -818,6 +820,7 @@
                       "heating_capacity": 430718.34,
                       "minimum_airflow":5440.0,
                       "minimum_outdoor_airflow": 2548.15,
+                      "minimum_outdoor_airflow_multiplier_schedule": "ALWAYS ON DISCRETE",
                       "primary_airflow":18130.0
                     }
                   ],
@@ -2202,6 +2205,7 @@
                       "heating_capacity": 107094.418,
                       "minimum_airflow":1360.00,
                       "minimum_outdoor_airflow": 340.07,
+                      "minimum_outdoor_airflow_multiplier_schedule": "ALWAYS ON DISCRETE",
                       "primary_airflow":4520.0
                     }
                   ],
@@ -2450,6 +2454,7 @@
                       "heating_capacity": 164512.866,
                       "minimum_airflow":2080.00,
                       "minimum_outdoor_airflow": 537.17,
+                      "minimum_outdoor_airflow_multiplier_schedule": "ALWAYS ON DISCRETE",
                       "primary_airflow":6940.0
                     }
                   ],
@@ -2698,6 +2703,7 @@
                       "heating_capacity": 108253.672,
                       "minimum_airflow":1370.00,
                       "minimum_outdoor_airflow": 340.05,
+                      "minimum_outdoor_airflow_multiplier_schedule": "ALWAYS ON DISCRETE",
                       "primary_airflow":4570.0
                     }
                   ],
@@ -2959,6 +2965,7 @@
                       "heating_capacity": 186473.849,
                       "minimum_airflow":2360.0,
                       "minimum_outdoor_airflow": 537.17,
+                      "minimum_outdoor_airflow_multiplier_schedule": "ALWAYS ON DISCRETE",
                       "primary_airflow":7870.0
                     }
                   ],
@@ -3220,6 +3227,7 @@
                       "heating_capacity": 123021.968,
                       "minimum_airflow":1560.00,
                       "minimum_outdoor_airflow": 340.07,
+                      "minimum_outdoor_airflow_multiplier_schedule": "ALWAYS ON DISCRETE",
                       "primary_airflow":5190.0
                     }
                   ],
@@ -3481,6 +3489,7 @@
                       "heating_capacity": 188195.779,
                       "minimum_airflow":2380.00,
                       "minimum_outdoor_airflow": 537.17,
+                      "minimum_outdoor_airflow_multiplier_schedule": "ALWAYS ON DISCRETE",
                       "primary_airflow":7940.0
                     }
                   ],
@@ -3742,6 +3751,7 @@
                       "heating_capacity": 124172.148,
                       "minimum_airflow":1570.00,
                       "minimum_outdoor_airflow": 340.05,
+                      "minimum_outdoor_airflow_multiplier_schedule": "ALWAYS ON DISCRETE",
                       "primary_airflow":5240.0
                     }
                   ],
@@ -4003,6 +4013,7 @@
                       "heating_capacity": 235714.979,
                       "minimum_airflow":2990.00,
                       "minimum_outdoor_airflow": 537.17,
+                      "minimum_outdoor_airflow_multiplier_schedule": "ALWAYS ON DISCRETE",
                       "primary_airflow":9950.0
                     }
                   ],
@@ -4264,6 +4275,7 @@
                       "heating_capacity": 154605.767,
                       "minimum_airflow":1960.00,
                       "minimum_outdoor_airflow": 340.07,
+                      "minimum_outdoor_airflow_multiplier_schedule": "ALWAYS ON DISCRETE",
                       "primary_airflow":6530.0
                     }
                   ],
@@ -4525,6 +4537,7 @@
                       "heating_capacity": 237481.21,
                       "minimum_airflow":3010.00,
                       "minimum_outdoor_airflow": 537.17,
+                      "minimum_outdoor_airflow_multiplier_schedule": "ALWAYS ON DISCRETE",
                       "primary_airflow":10030.0
                     }
                   ],
@@ -4786,6 +4799,7 @@
                       "heating_capacity": 155784.016,
                       "minimum_airflow":1970.00,
                       "minimum_outdoor_airflow": 340.05,
+                      "minimum_outdoor_airflow_multiplier_schedule": "ALWAYS ON DISCRETE",
                       "primary_airflow":6580.0
                     }
                   ],
