@@ -63,6 +63,7 @@
                   "thermostat_heating_setpoint_schedule": "OfficeMedium HTGSETP_SCH_YES_OPTIMUM",
                   "design_thermostat_heating_setpoint": 21.0,
                   "design_thermostat_cooling_setpoint": 25.0,
+                  "air_distribution_effectiveness": 1.2,
                   "surfaces": [
                     {
                       "id": "CORE_BOT_ZN_5_FLOOR",
@@ -308,6 +309,7 @@
                   "thermostat_heating_setpoint_schedule": "OfficeMedium HTGSETP_SCH_YES_OPTIMUM",
                   "design_thermostat_heating_setpoint": 21.0,
                   "design_thermostat_cooling_setpoint": 25.0,
+                  "air_distribution_effectiveness": 1.2,
                   "surfaces": [
                     {
                       "id": "CORE_MID_ZN_5_FLOOR",
@@ -542,6 +544,7 @@
                   "thermostat_heating_setpoint_schedule": "OfficeMedium HTGSETP_SCH_YES_OPTIMUM",
                   "design_thermostat_heating_setpoint": 21.0,
                   "design_thermostat_cooling_setpoint": 25.0,
+                  "air_distribution_effectiveness": 1.2,
                   "surfaces": [
                     {
                       "id": "CORE_TOP_ZN_5_CEILING",
@@ -1664,6 +1667,7 @@
                   "thermostat_heating_setpoint_schedule": "OfficeMedium HTGSETP_SCH_YES_OPTIMUM",
                   "design_thermostat_heating_setpoint": 21.0,
                   "design_thermostat_cooling_setpoint": 25.0,
+                  "air_distribution_effectiveness": 1.2,
                   "surfaces": [
                     {
                       "id": "PERIMETER_BOT_ZN_1_CEILING",
@@ -1907,6 +1911,7 @@
                   "thermostat_heating_setpoint_schedule": "OfficeMedium HTGSETP_SCH_YES_OPTIMUM",
                   "design_thermostat_heating_setpoint": 21.0,
                   "design_thermostat_cooling_setpoint": 25.0,
+                  "air_distribution_effectiveness": 1.2,
                   "surfaces": [
                     {
                       "id": "PERIMETER_BOT_ZN_2_CEILING",
@@ -2150,6 +2155,7 @@
                   "thermostat_heating_setpoint_schedule": "OfficeMedium HTGSETP_SCH_YES_OPTIMUM",
                   "design_thermostat_heating_setpoint": 21.0,
                   "design_thermostat_cooling_setpoint": 25.0,
+                  "air_distribution_effectiveness": 1.2,
                   "surfaces": [
                     {
                       "id": "PERIMETER_BOT_ZN_3_CEILILNG",
@@ -2393,6 +2399,7 @@
                   "thermostat_heating_setpoint_schedule": "OfficeMedium HTGSETP_SCH_YES_OPTIMUM",
                   "design_thermostat_heating_setpoint": 21.0,
                   "design_thermostat_cooling_setpoint": 25.0,
+                  "air_distribution_effectiveness": 1.2,
                   "surfaces": [
                     {
                       "id": "PERIMETER_BOT_ZN_4_CEILING",
@@ -2636,6 +2643,7 @@
                   "thermostat_heating_setpoint_schedule": "OfficeMedium HTGSETP_SCH_YES_OPTIMUM",
                   "design_thermostat_heating_setpoint": 21.0,
                   "design_thermostat_cooling_setpoint": 25.0,
+                  "air_distribution_effectiveness": 1.2,
                   "surfaces": [
                     {
                       "id": "PERIMETER_MID_ZN_1_CEILING",
@@ -2892,6 +2900,7 @@
                   "thermostat_heating_setpoint_schedule": "OfficeMedium HTGSETP_SCH_YES_OPTIMUM",
                   "design_thermostat_heating_setpoint": 21.0,
                   "design_thermostat_cooling_setpoint": 25.0,
+                  "air_distribution_effectiveness": 1.2,
                   "surfaces": [
                     {
                       "id": "PERIMETER_MID_ZN_2_CEILING",
@@ -3148,6 +3157,7 @@
                   "thermostat_heating_setpoint_schedule": "OfficeMedium HTGSETP_SCH_YES_OPTIMUM",
                   "design_thermostat_heating_setpoint": 21.0,
                   "design_thermostat_cooling_setpoint": 25.0,
+                  "air_distribution_effectiveness": 1.2,
                   "surfaces": [
                     {
                       "id": "PERIMETER_MID_ZN_3_CEILING",
@@ -3404,6 +3414,7 @@
                   "thermostat_heating_setpoint_schedule": "OfficeMedium HTGSETP_SCH_YES_OPTIMUM",
                   "design_thermostat_heating_setpoint": 21.0,
                   "design_thermostat_cooling_setpoint": 25.0,
+                  "air_distribution_effectiveness": 1.2,
                   "surfaces": [
                     {
                       "id": "PERIMETER_MID_ZN_4_CEILING",
@@ -3660,6 +3671,7 @@
                   "thermostat_heating_setpoint_schedule": "OfficeMedium HTGSETP_SCH_YES_OPTIMUM",
                   "design_thermostat_heating_setpoint": 21.0,
                   "design_thermostat_cooling_setpoint": 25.0,
+                  "air_distribution_effectiveness": 1.2,
                   "surfaces": [
                     {
                       "id": "PERIMETER_TOP_ZN_1_CEILING",
@@ -3916,6 +3928,7 @@
                   "thermostat_heating_setpoint_schedule": "OfficeMedium HTGSETP_SCH_YES_OPTIMUM",
                   "design_thermostat_heating_setpoint": 21.0,
                   "design_thermostat_cooling_setpoint": 25.0,
+                  "air_distribution_effectiveness": 1.2,
                   "surfaces": [
                     {
                       "id": "PERIMETER_TOP_ZN_2_CEILING",
@@ -4172,6 +4185,7 @@
                   "thermostat_heating_setpoint_schedule": "OfficeMedium HTGSETP_SCH_YES_OPTIMUM",
                   "design_thermostat_heating_setpoint": 21.0,
                   "design_thermostat_cooling_setpoint": 25.0,
+                  "air_distribution_effectiveness": 1.2,
                   "surfaces": [
                     {
                       "id": "PERIMETER_TOP_ZN_3_CEILING",
@@ -4428,6 +4442,7 @@
                   "thermostat_heating_setpoint_schedule": "OfficeMedium HTGSETP_SCH_YES_OPTIMUM",
                   "design_thermostat_heating_setpoint": 21.0,
                   "design_thermostat_cooling_setpoint": 25.0,
+                  "air_distribution_effectiveness": 1.2,
                   "surfaces": [
                     {
                       "id": "PERIMETER_TOP_ZN_4_CEILING",
@@ -83945,7 +83960,22 @@
           "hourly_heating_design_day": [],
           "hourly_cooling_design_day": []
         }
-      ]
+      ],
+      "output": {
+        "id": "Proposed Output",
+        "reporting_name": "Simulation Output",
+        "output_instance": {
+          "id": "Outputs",
+          "ruleset_model_type": "PROPOSED",
+          "rotation_angle": 0,
+          "unmet_load_hours": 352.34,
+          "unmet_load_hours_heating": 152.67,
+          "unmet_occupied_load_hours_heating": 75.33,
+          "unmet_load_hours_cooling": 2.50,
+          "unmet_occupied_load_hours_cooling": 199.67,
+          "building_peak_cooling_load": 2620298.85
+        }
+      }
     }
   ],
   "weather": {

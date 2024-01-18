@@ -4,7 +4,7 @@
     "tool_name": "PNNL Ruleset Checking Tool",
     "tool_version": "0.0.1",
     "ruleset": "ASHRAE 90.1-2019 Performance Rating Method (Appendix G)",
-    "date_run": "2024-01-17 23:03:14.408339",
+    "date_run": "2024-01-18 00:13:10.418504",
     "schema_version": "0.0.29",
     "rpd_files": [
         {
@@ -8917,11 +8917,22 @@
             "evaluations": [
                 {
                     "data_group_id": "19-5",
-                    "outcome": "UNDETERMINED",
-                    "messages": {
-                        "PROPOSED_MISSING_DATA": "id:Only model description missing:output"
-                    },
-                    "calculated_values": ""
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": [
+                        {
+                            "variable": "unmet_load_hours_heating_p",
+                            "value": "152.67 hour"
+                        },
+                        {
+                            "variable": "unmet_load_hours_cooling_p",
+                            "value": "2.5 hour"
+                        },
+                        {
+                            "variable": "coincident_unmet_load_hours_p",
+                            "value": "352.34 hour"
+                        }
+                    ]
                 }
             ]
         },
@@ -8961,9 +8972,21 @@
             "data_group_names": [],
             "evaluations": [
                 {
-                    "data_group_id": "19-7",
+                    "data_group_id": "BUILDING STORY 1 VAV_REHEAT (SYS7)",
                     "outcome": "UNDETERMINED",
-                    "messages": "terminal:CORE_BOTTOM ZN-terminal is missing minimum_outdoor_airflow",
+                    "messages": "MISSING_PROPOSED",
+                    "calculated_values": ""
+                },
+                {
+                    "data_group_id": "BUILDING STORY 2 VAV_REHEAT (SYS7)",
+                    "outcome": "UNDETERMINED",
+                    "messages": "MISSING_PROPOSED",
+                    "calculated_values": ""
+                },
+                {
+                    "data_group_id": "BUILDING STORY 3 VAV_REHEAT (SYS7)",
+                    "outcome": "UNDETERMINED",
+                    "messages": "MISSING_PROPOSED",
                     "calculated_values": ""
                 }
             ]
@@ -9155,7 +9178,7 @@
                 {
                     "data_group_id": "19-13",
                     "outcome": "UNDETERMINED",
-                    "messages": "zones:CORE_BOTTOM ZN is missing design_thermostat_cooling_setpoint",
+                    "messages": "terminals:CORE_BOTTOM ZN-terminal is missing supply_design_heating_setpoint_temperature",
                     "calculated_values": ""
                 }
             ]
@@ -9169,21 +9192,159 @@
             "evaluations": [
                 {
                     "data_group_id": "BUILDING STORY 1 VAV_REHEAT (SYS7)",
-                    "outcome": "UNDETERMINED",
-                    "messages": "MISSING_PROPOSED",
-                    "calculated_values": ""
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": [
+                        {
+                            "variable": "more_than_one_supply_and_return_fan",
+                            "value": "False"
+                        },
+                        {
+                            "variable": "is_modeled_with_return_fan_p",
+                            "value": "False"
+                        },
+                        {
+                            "variable": "is_modeled_with_relief_fan_p",
+                            "value": "False"
+                        },
+                        {
+                            "variable": "return_fans_airflow",
+                            "value": "0.0",
+                            "unit": "cfm"
+                        },
+                        {
+                            "variable": "relief_fans_airflow",
+                            "value": "0.0",
+                            "unit": "cfm"
+                        },
+                        {
+                            "variable": "baseline_modeled_return_as_expected",
+                            "value": "True"
+                        },
+                        {
+                            "variable": "baseline_modeled_relief_as_expected",
+                            "value": "True"
+                        },
+                        {
+                            "variable": "modeled_cfm",
+                            "value": "0.0",
+                            "unit": "cfm"
+                        },
+                        {
+                            "variable": "supply_minus_OA_flow",
+                            "value": "68476.444891881",
+                            "unit": "cfm"
+                        },
+                        {
+                            "variable": "supply_cfm_90_percent",
+                            "value": "73833.16782323876",
+                            "unit": "cfm"
+                        }
+                    ]
                 },
                 {
                     "data_group_id": "BUILDING STORY 2 VAV_REHEAT (SYS7)",
-                    "outcome": "UNDETERMINED",
-                    "messages": "MISSING_PROPOSED",
-                    "calculated_values": ""
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": [
+                        {
+                            "variable": "more_than_one_supply_and_return_fan",
+                            "value": "False"
+                        },
+                        {
+                            "variable": "is_modeled_with_return_fan_p",
+                            "value": "False"
+                        },
+                        {
+                            "variable": "is_modeled_with_relief_fan_p",
+                            "value": "False"
+                        },
+                        {
+                            "variable": "return_fans_airflow",
+                            "value": "0.0",
+                            "unit": "cfm"
+                        },
+                        {
+                            "variable": "relief_fans_airflow",
+                            "value": "0.0",
+                            "unit": "cfm"
+                        },
+                        {
+                            "variable": "baseline_modeled_return_as_expected",
+                            "value": "True"
+                        },
+                        {
+                            "variable": "baseline_modeled_relief_as_expected",
+                            "value": "True"
+                        },
+                        {
+                            "variable": "modeled_cfm",
+                            "value": "0.0",
+                            "unit": "cfm"
+                        },
+                        {
+                            "variable": "supply_minus_OA_flow",
+                            "value": "59255.5929490605",
+                            "unit": "cfm"
+                        },
+                        {
+                            "variable": "supply_cfm_90_percent",
+                            "value": "69345.90599101724",
+                            "unit": "cfm"
+                        }
+                    ]
                 },
                 {
                     "data_group_id": "BUILDING STORY 3 VAV_REHEAT (SYS7)",
-                    "outcome": "UNDETERMINED",
-                    "messages": "MISSING_PROPOSED",
-                    "calculated_values": ""
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": [
+                        {
+                            "variable": "more_than_one_supply_and_return_fan",
+                            "value": "False"
+                        },
+                        {
+                            "variable": "is_modeled_with_return_fan_p",
+                            "value": "False"
+                        },
+                        {
+                            "variable": "is_modeled_with_relief_fan_p",
+                            "value": "False"
+                        },
+                        {
+                            "variable": "return_fans_airflow",
+                            "value": "0.0",
+                            "unit": "cfm"
+                        },
+                        {
+                            "variable": "relief_fans_airflow",
+                            "value": "0.0",
+                            "unit": "cfm"
+                        },
+                        {
+                            "variable": "baseline_modeled_return_as_expected",
+                            "value": "True"
+                        },
+                        {
+                            "variable": "baseline_modeled_relief_as_expected",
+                            "value": "True"
+                        },
+                        {
+                            "variable": "modeled_cfm",
+                            "value": "0.0",
+                            "unit": "cfm"
+                        },
+                        {
+                            "variable": "supply_minus_OA_flow",
+                            "value": "92309.5362247757",
+                            "unit": "cfm"
+                        },
+                        {
+                            "variable": "supply_cfm_90_percent",
+                            "value": "97681.18316576697",
+                            "unit": "cfm"
+                        }
+                    ]
                 }
             ]
         },
@@ -9241,8 +9402,8 @@
             "evaluations": [
                 {
                     "data_group_id": "BUILDING STORY 1 VAV_REHEAT (SYS7)",
-                    "outcome": "UNDETERMINED",
-                    "messages": "Fan power for BUILDING STORY 1 VAV_REHEAT (SYS7) is greater than expected per Section and Table G3.1.2.9 assuming no pressure drop adjustments (e.g., sound attenuation, air filtration, fully ducted return when required by code, airflow control devices, carbon and other gas-phase air cleaners, coil runaround loops, evaporative humidifier/coolers in series with another cooling coil, exhaust systems serving fume hoods, and laboratory and vivarium exhaust systems in high-rise buildings) per Table 6.5.3.1-2 other than energy recovery and MERV filters defined in the RMD (if modeled). Expected Wattage = 84.15592148092404 kilowatt kW. however not all pressure drop adjustments are able to be captured in the RMD so conduct manual check.",
+                    "outcome": "PASS",
+                    "messages": "",
                     "calculated_values": [
                         {
                             "variable": "more_than_one_supply_fan_b",
@@ -9268,8 +9429,8 @@
                 },
                 {
                     "data_group_id": "BUILDING STORY 2 VAV_REHEAT (SYS7)",
-                    "outcome": "UNDETERMINED",
-                    "messages": "Fan power for BUILDING STORY 2 VAV_REHEAT (SYS7) is greater than expected per Section and Table G3.1.2.9 assuming no pressure drop adjustments (e.g., sound attenuation, air filtration, fully ducted return when required by code, airflow control devices, carbon and other gas-phase air cleaners, coil runaround loops, evaporative humidifier/coolers in series with another cooling coil, exhaust systems serving fume hoods, and laboratory and vivarium exhaust systems in high-rise buildings) per Table 6.5.3.1-2 other than energy recovery and MERV filters defined in the RMD (if modeled). Expected Wattage = 79.04128715667493 kilowatt kW. however not all pressure drop adjustments are able to be captured in the RMD so conduct manual check.",
+                    "outcome": "PASS",
+                    "messages": "",
                     "calculated_values": [
                         {
                             "variable": "more_than_one_supply_fan_b",
@@ -9295,8 +9456,8 @@
                 },
                 {
                     "data_group_id": "BUILDING STORY 3 VAV_REHEAT (SYS7)",
-                    "outcome": "UNDETERMINED",
-                    "messages": "Fan power for BUILDING STORY 3 VAV_REHEAT (SYS7) is greater than expected per Section and Table G3.1.2.9 assuming no pressure drop adjustments (e.g., sound attenuation, air filtration, fully ducted return when required by code, airflow control devices, carbon and other gas-phase air cleaners, coil runaround loops, evaporative humidifier/coolers in series with another cooling coil, exhaust systems serving fume hoods, and laboratory and vivarium exhaust systems in high-rise buildings) per Table 6.5.3.1-2 other than energy recovery and MERV filters defined in the RMD (if modeled). Expected Wattage = 110.75218219032297 kilowatt kW. however not all pressure drop adjustments are able to be captured in the RMD so conduct manual check.",
+                    "outcome": "PASS",
+                    "messages": "",
                     "calculated_values": [
                         {
                             "variable": "more_than_one_supply_fan_b",
@@ -10869,9 +11030,21 @@
             "data_group_names": [],
             "evaluations": [
                 {
-                    "data_group_id": "Only model description",
+                    "data_group_id": "BUILDING STORY 1 VAV_REHEAT (SYS7)",
                     "outcome": "UNDETERMINED",
-                    "messages": "terminal:CORE_BOTTOM ZN-terminal is missing minimum_outdoor_airflow",
+                    "messages": "MISSING_PROPOSED",
+                    "calculated_values": ""
+                },
+                {
+                    "data_group_id": "BUILDING STORY 2 VAV_REHEAT (SYS7)",
+                    "outcome": "UNDETERMINED",
+                    "messages": "MISSING_PROPOSED",
+                    "calculated_values": ""
+                },
+                {
+                    "data_group_id": "BUILDING STORY 3 VAV_REHEAT (SYS7)",
+                    "outcome": "UNDETERMINED",
+                    "messages": "MISSING_PROPOSED",
                     "calculated_values": ""
                 }
             ]
@@ -13144,7 +13317,7 @@
                         },
                         {
                             "variable": "hvac_max_zone_setpoint",
-                            "value": "60.07999999999998",
+                            "value": "69.79999999999994",
                             "unit": "F"
                         }
                     ]
@@ -13173,7 +13346,7 @@
                         },
                         {
                             "variable": "hvac_max_zone_setpoint",
-                            "value": "60.07999999999998",
+                            "value": "69.79999999999994",
                             "unit": "F"
                         }
                     ]
@@ -13202,7 +13375,7 @@
                         },
                         {
                             "variable": "hvac_max_zone_setpoint",
-                            "value": "60.07999999999998",
+                            "value": "69.79999999999994",
                             "unit": "F"
                         }
                     ]
