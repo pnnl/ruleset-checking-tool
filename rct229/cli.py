@@ -32,13 +32,11 @@ def cli():
 
 
 # Software Test Workflow
-test_short_help_text = (
-    """
+test_short_help_text = """
     Software test workflow, add sections to do test. \n
     --ruleset or -rs: default is ashrae9012019, available: ashrae9012019\n
     argument (optional): section string, \n
     currently available: section5, section6, section18, section19, section21, section22 and section23"""
-)
 
 
 @cli.command(
