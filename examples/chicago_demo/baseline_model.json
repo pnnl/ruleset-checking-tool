@@ -1957,6 +1957,7 @@
                       "heating_capacity": 162741.076,
                       "minimum_airflow":2060.0,
                       "minimum_outdoor_airflow": 537.17,
+                      "minimum_outdoor_airflow_multiplier_schedule": "ALWAYS ON DISCRETE",
                       "primary_airflow":6870.0
                     }
                   ],
