@@ -4,7 +4,7 @@
     "tool_name": "PNNL Ruleset Checking Tool",
     "tool_version": "0.0.1",
     "ruleset": "ASHRAE 90.1-2019 Performance Rating Method (Appendix G)",
-    "date_run": "2024-01-18 00:13:10.418504",
+    "date_run": "2024-01-18 00:18:01.724059",
     "schema_version": "0.0.29",
     "rpd_files": [
         {
@@ -8973,21 +8973,144 @@
             "evaluations": [
                 {
                     "data_group_id": "BUILDING STORY 1 VAV_REHEAT (SYS7)",
-                    "outcome": "UNDETERMINED",
-                    "messages": "MISSING_PROPOSED",
-                    "calculated_values": ""
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": [
+                        {
+                            "variable": "hvac_id_b",
+                            "value": "BUILDING STORY 1 VAV_REHEAT (SYS7)"
+                        },
+                        {
+                            "variable": "hvac_system_serves_only_labs",
+                            "value": "False"
+                        },
+                        {
+                            "variable": "are_any_lighting_space_types_defined",
+                            "value": "True"
+                        },
+                        {
+                            "variable": "all_lighting_space_types_defined",
+                            "value": "False"
+                        },
+                        {
+                            "variable": "OA_CFM_schedule_match",
+                            "value": "True"
+                        },
+                        {
+                            "variable": "zone_air_distribution_effectiveness_greater_than_1",
+                            "value": "True"
+                        },
+                        {
+                            "variable": "modeled_baseline_total_zone_min_OA_CFM",
+                            "value": "0"
+                        },
+                        {
+                            "variable": "modeled_proposed_total_zone_min_OA_CFM",
+                            "value": "0"
+                        },
+                        {
+                            "variable": "was_DCV_modeled_baseline",
+                            "value": "False"
+                        },
+                        {
+                            "variable": "was_DCV_modeled_proposed",
+                            "value": "False"
+                        }
+                    ]
                 },
                 {
                     "data_group_id": "BUILDING STORY 2 VAV_REHEAT (SYS7)",
-                    "outcome": "UNDETERMINED",
-                    "messages": "MISSING_PROPOSED",
-                    "calculated_values": ""
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": [
+                        {
+                            "variable": "hvac_id_b",
+                            "value": "BUILDING STORY 2 VAV_REHEAT (SYS7)"
+                        },
+                        {
+                            "variable": "hvac_system_serves_only_labs",
+                            "value": "False"
+                        },
+                        {
+                            "variable": "are_any_lighting_space_types_defined",
+                            "value": "True"
+                        },
+                        {
+                            "variable": "all_lighting_space_types_defined",
+                            "value": "False"
+                        },
+                        {
+                            "variable": "OA_CFM_schedule_match",
+                            "value": "True"
+                        },
+                        {
+                            "variable": "zone_air_distribution_effectiveness_greater_than_1",
+                            "value": "True"
+                        },
+                        {
+                            "variable": "modeled_baseline_total_zone_min_OA_CFM",
+                            "value": "0"
+                        },
+                        {
+                            "variable": "modeled_proposed_total_zone_min_OA_CFM",
+                            "value": "0"
+                        },
+                        {
+                            "variable": "was_DCV_modeled_baseline",
+                            "value": "False"
+                        },
+                        {
+                            "variable": "was_DCV_modeled_proposed",
+                            "value": "False"
+                        }
+                    ]
                 },
                 {
                     "data_group_id": "BUILDING STORY 3 VAV_REHEAT (SYS7)",
-                    "outcome": "UNDETERMINED",
-                    "messages": "MISSING_PROPOSED",
-                    "calculated_values": ""
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": [
+                        {
+                            "variable": "hvac_id_b",
+                            "value": "BUILDING STORY 3 VAV_REHEAT (SYS7)"
+                        },
+                        {
+                            "variable": "hvac_system_serves_only_labs",
+                            "value": "False"
+                        },
+                        {
+                            "variable": "are_any_lighting_space_types_defined",
+                            "value": "True"
+                        },
+                        {
+                            "variable": "all_lighting_space_types_defined",
+                            "value": "False"
+                        },
+                        {
+                            "variable": "OA_CFM_schedule_match",
+                            "value": "True"
+                        },
+                        {
+                            "variable": "zone_air_distribution_effectiveness_greater_than_1",
+                            "value": "True"
+                        },
+                        {
+                            "variable": "modeled_baseline_total_zone_min_OA_CFM",
+                            "value": "0"
+                        },
+                        {
+                            "variable": "modeled_proposed_total_zone_min_OA_CFM",
+                            "value": "0"
+                        },
+                        {
+                            "variable": "was_DCV_modeled_baseline",
+                            "value": "False"
+                        },
+                        {
+                            "variable": "was_DCV_modeled_proposed",
+                            "value": "False"
+                        }
+                    ]
                 }
             ]
         },
