@@ -99,4 +99,13 @@ class Section22Rule22(RuleDefinitionListIndexedBase):
                 "kilowatt / kilowatt"
             )
 
+            return full_load_efficiency_b == required_cop_full_load_b
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            full_load_efficiency_b = calc_vals["full_load_efficiency_b"]
+            required_kw_ton_full_load_b = calc_vals["required_kw_ton_full_load_b"]
+            required_cop_full_load_b = 1.0 / required_kw_ton_full_load_b.to(
+                "kilowatt / kilowatt"
+            )
+
             return std_equal(full_load_efficiency_b, required_cop_full_load_b)
