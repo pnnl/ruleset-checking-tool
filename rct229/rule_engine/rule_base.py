@@ -1,7 +1,6 @@
 from jsonpointer import resolve_pointer
 from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
 from rct229.rule_engine.ruleset_model_factory import RuleSetModels, get_rmd_instance
-from rct229.rulesets.ashrae9012019 import BASELINE_90, BASELINE_180, BASELINE_270
 from rct229.utils.assertions import MissingKeyException, RCTFailureException
 from rct229.utils.json_utils import slash_prefix_guarantee
 from rct229.utils.jsonpath_utils import find_all
@@ -298,7 +297,7 @@ class RuleDefinitionBase:
                 # and rmds[ruleset_model] is None or empty
                 and (rmds[ruleset_model] is None or not rmds[ruleset_model])
             ):
-                    missing_contexts.append(ruleset_model)
+                missing_contexts.append(ruleset_model)
 
         if len(missing_contexts) > 0:
             retval = "MISSING_" + "_".join(missing_contexts)
