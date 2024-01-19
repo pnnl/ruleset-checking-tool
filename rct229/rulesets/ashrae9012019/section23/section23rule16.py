@@ -167,6 +167,19 @@ class Section23Rule16(RuleDefinitionListIndexedBase):
             return (
                 heating_system_type_b == HEATING_SYSTEM.FLUID_LOOP
                 and hot_water_loop_type == FLUID_LOOP.HEATING
+                and heating_coil_setpoint
+                == hvac_max_zone_setpoint - REQUIRED_SET_POINT_REDUCTION,
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            heating_system_type_b = calc_vals["heating_system_type_b"]
+            hot_water_loop_type = calc_vals["hot_water_loop_type"]
+            heating_coil_setpoint = calc_vals["heating_coil_setpoint"]
+            hvac_max_zone_setpoint = calc_vals["hvac_max_zone_setpoint"]
+
+            return (
+                heating_system_type_b == HEATING_SYSTEM.FLUID_LOOP
+                and hot_water_loop_type == FLUID_LOOP.HEATING
                 and std_equal(
                     heating_coil_setpoint,
                     hvac_max_zone_setpoint - REQUIRED_SET_POINT_REDUCTION,
