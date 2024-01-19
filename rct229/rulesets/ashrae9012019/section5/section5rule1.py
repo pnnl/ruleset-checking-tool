@@ -38,6 +38,9 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
                 BASELINE_270=True,
                 PROPOSED=True,
             ),
+            rmrs_used_optional=produce_ruleset_model_instance(
+                BASELINE_90=True, BASELINE_180=True, BASELINE_270=True
+            ),
             each_rule=Section5Rule1.RMDRule(),
             index_rmr=BASELINE_0,
             id="5-1",
@@ -58,6 +61,9 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
                     BASELINE_180=True,
                     BASELINE_270=True,
                     PROPOSED=True,
+                ),
+                rmrs_used_optional=produce_ruleset_model_instance(
+                    BASELINE_90=True, BASELINE_180=True, BASELINE_270=True
                 ),
                 each_rule=Section5Rule1.RMDRule.BuildingRule(),
                 index_rmr=BASELINE_0,
@@ -135,12 +141,7 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
             def __init__(self):
                 super(Section5Rule1.RMDRule.BuildingRule, self).__init__(
                     rmrs_used=produce_ruleset_model_instance(
-                        USER=False,
                         BASELINE_0=True,
-                        BASELINE_90=False,
-                        BASELINE_180=False,
-                        BASELINE_270=False,
-                        PROPOSED=False,
                     ),
                     required_fields={
                         "$.building_segments[*].zones[*].surfaces[*]": ["azimuth"],
