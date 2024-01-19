@@ -33,6 +33,8 @@ class RuleDefinitionBase:
         rmrs_used : RulesetModels
             A boolean values indicating which RMDs are required by the
             rule
+        rmrs_used_optional: RulesetModels
+            A boolean values indicating which RMDs are optional by the rule (True optional, False not optional).
         id : string
             Unique id for the rule
             Usually unspecified for nested rules
