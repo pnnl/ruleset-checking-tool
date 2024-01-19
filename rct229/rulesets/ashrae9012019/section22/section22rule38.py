@@ -32,10 +32,7 @@ class Section22Rule38(RuleDefinitionListIndexedBase):
 
     class RulesetModelInstanceRule(PartialRuleDefinition):
         def __init__(self):
-            super(
-                Section22Rule38.RulesetModelInstanceRule,
-                self,
-            ).__init__(
+            super(Section22Rule38.RulesetModelInstanceRule, self,).__init__(
                 rmrs_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
