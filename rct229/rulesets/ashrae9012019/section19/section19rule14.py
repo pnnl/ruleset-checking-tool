@@ -247,6 +247,35 @@ class Section19Rule14(RuleDefinitionListIndexedBase):
             ) or (
                 not is_modeled_with_return_fan_in_p
                 and not is_modeled_with_relief_fan_p
+                and ZERO.FLOW == return_fans_airflow
+                and ZERO.FLOW == relief_fans_airflow
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            return_fans_airflow = calc_vals["return_fans_airflow"]
+            relief_fans_airflow = calc_vals["relief_fans_airflow"]
+            baseline_modeled_return_as_expected = calc_vals[
+                "baseline_modeled_return_as_expected"
+            ]
+            baseline_modeled_relief_as_expected = calc_vals[
+                "baseline_modeled_relief_as_expected"
+            ]
+            modeled_cfm = calc_vals["modeled_cfm"]
+            supply_minus_OA_flow = calc_vals["supply_minus_OA_flow"]
+            supply_cfm_90_percent = calc_vals["supply_cfm_90_percent"]
+            is_modeled_with_return_fan_in_p = calc_vals["is_modeled_with_return_fan_p"]
+            is_modeled_with_relief_fan_p = calc_vals["is_modeled_with_relief_fan_p"]
+
+            return (
+                baseline_modeled_return_as_expected
+                and baseline_modeled_relief_as_expected
+                and (is_modeled_with_return_fan_in_p or is_modeled_with_relief_fan_p)
+                and std_equal(
+                    modeled_cfm, max(supply_minus_OA_flow, supply_cfm_90_percent)
+                )
+            ) or (
+                not is_modeled_with_return_fan_in_p
+                and not is_modeled_with_relief_fan_p
                 and std_equal(ZERO.FLOW, return_fans_airflow)
                 and std_equal(ZERO.FLOW, relief_fans_airflow)
             )

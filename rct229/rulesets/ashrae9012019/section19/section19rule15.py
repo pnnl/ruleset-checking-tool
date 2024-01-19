@@ -236,6 +236,26 @@ class Section19Rule15(RuleDefinitionListIndexedBase):
                 )
                 or (
                     not all_design_setpoints_105
+                    and minimum_outdoor_airflow_b == supply_fan_airflow_b
+                )
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            hvac_id_b = calc_vals["hvac_id_b"]
+            supply_fan_qty_b = calc_vals["supply_fan_qty_b"]
+            supply_fan_airflow_b = calc_vals["supply_fan_airflow_b"]
+            minimum_outdoor_airflow_b = calc_vals["minimum_outdoor_airflow_b"]
+            all_design_setpoints_105 = data["hvac_info_dict_b"][hvac_id_b][
+                "all_design_setpoints_105"
+            ]
+
+            return supply_fan_qty_b == 1 and (
+                (
+                    all_design_setpoints_105
+                    and supply_fan_airflow_b > minimum_outdoor_airflow_b
+                )
+                or (
+                    not all_design_setpoints_105
                     and std_equal(minimum_outdoor_airflow_b, supply_fan_airflow_b)
                 )
             )
