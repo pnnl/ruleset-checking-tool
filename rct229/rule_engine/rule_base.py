@@ -298,8 +298,6 @@ class RuleDefinitionBase:
                 # and rmds[ruleset_model] is None or empty
                 and (rmds[ruleset_model] is None or not rmds[ruleset_model])
             ):
-                # BASELINE 90, 180, and 270 are optional
-                if ruleset_model not in [BASELINE_90, BASELINE_180, BASELINE_270]:
                     missing_contexts.append(ruleset_model)
 
         if len(missing_contexts) > 0:
