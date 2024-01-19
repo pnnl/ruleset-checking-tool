@@ -30,6 +30,34 @@ def get_available_rules():
     return available_rules
 
 
+def evaluate_all_rules_rpd(ruleset_project_descriptions):
+    # Get reference to rule functions in rules model
+    available_rule_definitions = rulesets.__getrules__()
+    ruleset_models = get_rmd_instance()
+
+    # register all ruleset model list
+    rpd_rmd_map_list = []
+    for rpd_json in ruleset_project_descriptions:
+        for rmd_json in find_all("$.ruleset_model_descriptions[*]", rpd_json):
+            model_type = find_exactly_one("$.type", rmd_json)
+            # if a rpd json contains multiple, we need to recreate rpd_json
+            rpd_json_copy = copy.deepcopy(rpd_json)
+            rpd_json_copy["ruleset_model_descriptions"] = [rmd_json]
+            ruleset_models.__setitem__(model_type, rpd_json_copy)
+            rpd_rmd_map = {
+                "ruleset_model_type": model_type,
+                "file_name": rpd_json["id"],
+            }
+            rpd_rmd_map_list.append(rpd_rmd_map)
+
+    print("Processing rules...")
+    rules_list = [rule_def[1]() for rule_def in available_rule_definitions]
+    report = evaluate_rules(rules_list, ruleset_models)
+    report["rpd_files"] = rpd_rmd_map_list
+
+    return report
+
+
 # Functions for evaluating rules
 def evaluate_all_rules(ruleset_model_path_list):
     """
