@@ -3,28 +3,28 @@
         "Section": 5,
         "Rule": 29,
         "Test": "a",
-        "test_description": "Project has one building segment and includes a space with a roof surface and a skylight. The building is located in climate zone 4A, the space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. The skylight uses manually controlled dynamic shading, and the average SHGC and VT cannot be determined.",
-        "expected_rule_outcome": "undetermined",
+        "test_description": "Project has one building segment and includes a space with a roof surface. The baseline roof emittance is correctly set to 0.9",
+        "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-29",
-            "ruleset_reference": "Table G3.1(5) Proposed Building Performance (a)",
-            "rule_description": "Manually controlled dynamic glazing shall use the average of the minimum and maximum SHGC and VT.",
-            "applicable_rmr": "Proposed Model",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (f)",
+            "rule_description": "The baseline roof surfaces shall be modeled using a thermal emittance of 0.9",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Applicability",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
-            "proposed": {
-                "id": "ASHRAE229",
+            "baseline": {
+                "id": "RPD 1",
                 "weather": {
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
                 "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -42,7 +42,6 @@
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "OFFICE_ENCLOSED",
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
@@ -56,19 +55,11 @@
                                                     {
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
-                                                        "tilt": 30,
-                                                        "area": 929.0303999999999,
-                                                        "subsurfaces": [
-                                                            {
-                                                                "id": "Subsurface 1",
-                                                                "classification": "SKYLIGHT",
-                                                                "glazed_area": 23.225759999999998,
-                                                                "opaque_area": 4.6451519999999995,
-                                                                "u_factor": 6.927482243853377,
-                                                                "solar_heat_gain_coefficient": 0.39,
-                                                                "dynamic_glazing_type": "MANUAL_DYNAMIC"
-                                                            }
-                                                        ]
+                                                        "tilt": 50,
+                                                        "optical_properties": {
+                                                            "id": "Optical Properties 1",
+                                                            "absorptance_thermal_exterior": 0.9
+                                                        }
                                                     }
                                                 ]
                                             }
@@ -90,7 +81,7 @@
                                 ]
                             }
                         ],
-                        "type": "PROPOSED"
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -100,28 +91,28 @@
         "Section": 5,
         "Rule": 29,
         "Test": "b",
-        "test_description": "Project has one building segment and includes a space with a roof surface and a skylight. The building is located in climate zone 4A, the space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. The skylight does not use manually controlled dynamic shading, so this rule does not apply.",
-        "expected_rule_outcome": "not_applicable",
+        "test_description": "Project has one building segment and includes a space with a roof surface. The baseline roof emittance is incorrectly set to 0.5 ",
+        "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-29",
-            "ruleset_reference": "Table G3.1(5) Proposed Building Performance (a)",
-            "rule_description": "Manually controlled dynamic glazing shall use the average of the minimum and maximum SHGC and VT.",
-            "applicable_rmr": "Proposed Model",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (f)",
+            "rule_description": "The baseline roof surfaces shall be modeled using a thermal emittance of 0.9",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Applicability",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
-            "proposed": {
-                "id": "ASHRAE229",
+            "baseline": {
+                "id": "RPD 1",
                 "weather": {
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
                 "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -139,7 +130,6 @@
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "OFFICE_ENCLOSED",
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
@@ -153,19 +143,11 @@
                                                     {
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
-                                                        "tilt": 30,
-                                                        "area": 929.0303999999999,
-                                                        "subsurfaces": [
-                                                            {
-                                                                "id": "Subsurface 1",
-                                                                "classification": "SKYLIGHT",
-                                                                "glazed_area": 23.225759999999998,
-                                                                "opaque_area": 4.6451519999999995,
-                                                                "u_factor": 6.927482243853377,
-                                                                "solar_heat_gain_coefficient": 0.39,
-                                                                "dynamic_glazing_type": "NOT_DYNAMIC"
-                                                            }
-                                                        ]
+                                                        "tilt": 50,
+                                                        "optical_properties": {
+                                                            "id": "Optical Properties 1",
+                                                            "absorptance_thermal_exterior": 0.5
+                                                        }
                                                     }
                                                 ]
                                             }
@@ -187,7 +169,7 @@
                                 ]
                             }
                         ],
-                        "type": "PROPOSED"
+                        "type": "BASELINE_0"
                     }
                 ]
             }

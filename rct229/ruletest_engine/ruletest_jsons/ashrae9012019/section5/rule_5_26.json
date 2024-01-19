@@ -17,14 +17,14 @@
         },
         "rmr_transformations": {
             "proposed": {
-                "id": "ASHRAE229",
+                "id": "RPD 1",
                 "weather": {
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
                 "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -107,14 +107,14 @@
                 ]
             },
             "baseline": {
-                "id": "ASHRAE229",
+                "id": "RPD 1",
                 "weather": {
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
                 "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -216,14 +216,14 @@
         },
         "rmr_transformations": {
             "proposed": {
-                "id": "ASHRAE229",
+                "id": "RPD 1",
                 "weather": {
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
                 "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -306,14 +306,14 @@
                 ]
             },
             "baseline": {
-                "id": "ASHRAE229",
+                "id": "RPD 1",
                 "weather": {
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
                 "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",

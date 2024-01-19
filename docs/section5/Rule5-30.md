@@ -1,44 +1,50 @@
-
 # Envelope - Rule 5-30  
-
+**Schema Version** 0.0.23  
+**Primary Rule:** True
 **Rule ID:** 5-30  
-**Rule Description:** The  baseline roof surfaces shall be modeled using a thermal emittance of 0.9.  
-**Rule Assertion:** B-RMR SurfaceOpticalProperties:thermal_emittance = 0.9  
-**Appendix G Section:** Section G3.1-5(f) Building Envelope Modeling Requirements for the Baseline building  
+**Rule Description:** The proposed roof surfaces shall be modeled using the same thermal emittance as in the user model if the aged test data are available, or equal to 0.9 default emittance.
+**Appendix G Section:** Section G3.1-1(a) Building Envelope Modeling Requirements for the Proposed design  
 **Appendix G Section Reference:** None  
 
-**Applicability:** All required data elements exist for B_RMR  
-**Applicability Checks:**  None  
+**Applicability:** All required data elements exist for P_RMR  
+**Applicability Checks:**  
+  1. The proposed building has a roof surface
 
-**Manual Check:** None  
 **Evaluation Context:** Each Data Element  
 **Data Lookup:** None  
 **Function Call:**  
 
   1. get_opaque_surface_type()
-  2. get_surface_conditioning_category()
+  2. match_data_element()
 
 ## Rule Logic:  
 
-- Get surface conditioning category dictionary for B_RMR: ```scc_dictionary_b = get_surface_conditioning_category(B_RMR)```  
+- For each building segment in the Proposed model: ```for building_segment_p in P_RMR.building.building_segments:```
 
-- For each building segment in the Baseline model: `for building_segment_b in B_RMR.building.building_segments:`
+  - For each zone in building segment: ```for zone_p in building_segment_p.zones:```
 
-  - For each zone_b in building_segment_b: `for zone_b in building_segments.zones:`
+    - For each surface in zone: ```for surface_p in zone_p.surfaces:```
 
-    - For each surface_b in zone_b: `for surface_b in zone_b.surfaces;`
+        - Check if surface is roof, set rule applicability check to True: ```if get_opaque_surface_type(surface_p.id) == "ROOF": rule_applicability_check = TRUE```
 
-      - Check if surface is roof and is regulated, get surface optical properties: `if ( get_opaque_surface_type(surface_b.id) == "ROOF" ) AND ( scc_dictionary_b[surface_b.id] != "UNREGULATED" ): surface_optical_properties_b = surface_b.surface_optical_properties`
+          - Get matching surface in U_RMR : ```surface_u = match_data_element(U_RMR, Surfaces, surface_p.id)```
+          **Rule Assertion:**  
 
-        **Rule Assertion:**  
+          - Case 1: If roof surface thermal emittance in P_RMR matches that in U_RMR and is equal to 0.9, outcome is PASS: ```if ( surface_p.surface_optical_properties.absorptance_thermal_exterior == surface_u.surface_optical_properties.absorptance_thermal_exterior ) AND ( surface_p.surface_optical_properties.absorptance_thermal_exterior == 0.9 ):
+            outcome = PASS```
 
-        - Case 1: If roof surface thermal emittance is equal to 0.9: `if surface_optical_properties_b.absorptance_thermal_exterior == 0.9: PASS`
+          - Case 2: Else if roof surface thermal emittance in P_RMR matches that in U_RMR but is not equal to 0.9, outcome is UNDETERMINED: ```else if ( surface_p.surface_optical_properties.absorptance_thermal_exterior == surface_u.surface_optical_properties.absorptance_thermal_exterior ) AND ( surface_p.surface_optical_properties.absorptance_thermal_exterior != 0.9 ):
+            outcome = UNDETERMINED and raise_message "ROOF SURFACE EMITTANCE IN THE PROPOSED MDOEL (${surface_p.surface_optical_properties.absorptance_thermal_exterior}) MATCHES THAT IN THE USER MODEL BUT IS NOT EQUAL TO THE PRESCRIBED DEFAULT VALUE OF 0.9. VERIFY THAT THE MODELED VALUE IS BASED ON TESTING IN ACCORDANCE WITH SECTION 5.5.3.1.1(a)."```
 
-        - Case 2: Else: `Else: FAIL`
+          - Case 3: Else if roof surface thermal emittance in P_RMR does not match that in U_RMR but is equal to 0.9, outcome is PASS and raise message: ```else if surface_p.surface_optical_properties.absorptance_thermal_exterior == 0.9:
+            outcome = PASS and raise_message "ROOF THERMAL EMITTANCE IS EQUAL TO THE PRESCRIBED DEFAULT VALUE OF 0.9 BUT DIFFERS FROM THE THERMAL EMITTANCE IN THE USER MODEL (${surface_u.surface_optical_properties.absorptance_thermal_exterior})."```
+
+          - Case 4: Else, roof surface thermal emittance in P_RMR does not match that in U_RMR and is not equal to 0.9, outcome is FAIL: ```Else: outcome = FAIL```
+
 
 **Notes:**
 
-1. Update Rule ID from 5-40 to 5-30 on 10/26/2023
-
+1. Update Rule ID from 5-41 to 5-31 on 10/26/2023
+2. Update Rule ID from 5-31 to 5-30 on 12/22/2023
 
 **[Back](../_toc.md)**

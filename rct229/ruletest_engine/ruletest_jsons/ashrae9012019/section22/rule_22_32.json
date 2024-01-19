@@ -9,10 +9,10 @@
             "rule_id": "22-32",
             "ruleset_reference": "Section G3.1.2.1",
             "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for part load, in accordance with Tables G3.5.3.",
-            "applicable_rmr": "Baseline Model",
+            "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Full",
+            "primary_rule": "Yes",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -106,7 +106,7 @@
                                 "cooling_loop": "Chiller Loop 1",
                                 "compressor_type": "POSITIVE_DISPLACEMENT",
                                 "rated_capacity": 703400.0,
-                                "part_load_efficiency": 0.1788456070514643,
+                                "part_load_efficiency": 5.591,
                                 "part_load_efficiency_metric": "INTEGRATED_PART_LOAD_VALUE"
                             }
                         ],
@@ -159,10 +159,10 @@
             "rule_id": "22-32",
             "ruleset_reference": "Section G3.1.2.1",
             "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for part load, in accordance with Tables G3.5.3.",
-            "applicable_rmr": "Baseline Model",
+            "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Full",
+            "primary_rule": "Yes",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -256,7 +256,7 @@
                                 "cooling_loop": "Chiller Loop 1",
                                 "compressor_type": "POSITIVE_DISPLACEMENT",
                                 "rated_capacity": 703400.0,
-                                "part_load_efficiency": 0.1788456070514643,
+                                "part_load_efficiency": 5.591,
                                 "part_load_efficiency_metric": "NONSTANDARD_PART_LOAD_VALUE"
                             }
                         ],
@@ -309,10 +309,10 @@
             "rule_id": "22-32",
             "ruleset_reference": "Section G3.1.2.1",
             "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for part load, in accordance with Tables G3.5.3.",
-            "applicable_rmr": "Baseline Model",
+            "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Full",
+            "primary_rule": "Yes",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -406,7 +406,7 @@
                                 "cooling_loop": "Chiller Loop 1",
                                 "compressor_type": "POSITIVE_DISPLACEMENT",
                                 "rated_capacity": 703400.0,
-                                "part_load_efficiency": 0.17059994313335228,
+                                "part_load_efficiency": 5.862,
                                 "part_load_efficiency_metric": "INTEGRATED_PART_LOAD_VALUE"
                             }
                         ],
@@ -459,10 +459,10 @@
             "rule_id": "22-32",
             "ruleset_reference": "Section G3.1.2.1",
             "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for part load, in accordance with Tables G3.5.3.",
-            "applicable_rmr": "Baseline Model",
+            "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Full",
+            "primary_rule": "Yes",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -563,7 +563,7 @@
                                 "cooling_loop": "Chiller Loop 1",
                                 "compressor_type": "POSITIVE_DISPLACEMENT",
                                 "rated_capacity": 1058617.0,
-                                "part_load_efficiency": 0.16263861245379582,
+                                "part_load_efficiency": 6.149,
                                 "part_load_efficiency_metric": "INTEGRATED_PART_LOAD_VALUE"
                             }
                         ],
@@ -616,10 +616,10 @@
             "rule_id": "22-32",
             "ruleset_reference": "Section G3.1.2.1",
             "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for part load, in accordance with Tables G3.5.3.",
-            "applicable_rmr": "Baseline Model",
+            "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Full",
+            "primary_rule": "Yes",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -720,7 +720,7 @@
                                 "cooling_loop": "Chiller Loop 1",
                                 "compressor_type": "POSITIVE_DISPLACEMENT",
                                 "rated_capacity": 1058617.0,
-                                "part_load_efficiency": 0.16263861245379582,
+                                "part_load_efficiency": 6.149,
                                 "part_load_efficiency_metric": "NONSTANDARD_PART_LOAD_VALUE"
                             }
                         ],
@@ -773,10 +773,10 @@
             "rule_id": "22-32",
             "ruleset_reference": "Section G3.1.2.1",
             "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for part load, in accordance with Tables G3.5.3.",
-            "applicable_rmr": "Baseline Model",
+            "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Full",
+            "primary_rule": "Yes",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -877,7 +877,7 @@
                                 "cooling_loop": "Chiller Loop 1",
                                 "compressor_type": "POSITIVE_DISPLACEMENT",
                                 "rated_capacity": 1058617.0,
-                                "part_load_efficiency": 0.17059994313335228,
+                                "part_load_efficiency": 5.862,
                                 "part_load_efficiency_metric": "INTEGRATED_PART_LOAD_VALUE"
                             }
                         ],
@@ -930,10 +930,10 @@
             "rule_id": "22-32",
             "ruleset_reference": "Section G3.1.2.1",
             "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for part load, in accordance with Tables G3.5.3.",
-            "applicable_rmr": "Baseline Model",
+            "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Full",
+            "primary_rule": "Yes",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {

@@ -3,7 +3,7 @@ import inspect
 
 from rct229.schema.schema_utils import quantify_rmr
 from rct229.schema.validate import validate_rmr
-from rct229.utils.assertions import assert_
+from rct229.utils.assertions import assert_, RCTException
 from rct229.utils.file import deserialize_rpd_file
 from rct229.utils.jsonpath_utils import (
     find_all,
@@ -44,6 +44,8 @@ def evaluate_all_rules(ruleset_model_path_list):
     -------
 
     """
+    if not ruleset_model_path_list:
+        raise RCTException("Missing ruleset project description files")
     # Get reference to rule functions in rules model
     available_rule_definitions = rulesets.__getrules__()
     ruleset_models = get_rmd_instance()

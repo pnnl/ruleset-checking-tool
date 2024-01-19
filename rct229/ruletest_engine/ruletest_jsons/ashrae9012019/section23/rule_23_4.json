@@ -1,22 +1,23 @@
 {
-    "rule-22-22-a": {
-        "Section": 22,
-        "Rule": 22,
+    "rule-23-4-a": {
+        "Section": 23,
+        "Rule": 4,
         "Test": "a",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is correctly modeled with the chiller rated capacity and full load efficiency in accordance with Table G3.5.3.  Expected result: PASS",
-        "expected_rule_outcome": "pass",
+        "test_description": "Baseline System 5 serves a laboratory space. Per G3.1.1c, these systems must adjust lab exhaust and makeup air. Expected result: UNDETERMINED",
+        "expected_rule_outcome": "undetermined",
         "standard": {
-            "rule_id": "22-22",
-            "ruleset_reference": "Table G3.5.3",
-            "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for full load, in accordance with Tables G3.5.3.  ",
-            "applicable_rmr": "Baseline RMR",
+            "rule_id": "23-4",
+            "ruleset_reference": "G3.1.3.13",
+            "rule_description": "Baseline systems 5 and 7 serving lab spaces per Standard 90.1-2019 G3.1.1(c), shall reduce lab exhaust and makeup air during unoccupied periods to 50% of zone peak airflow, the minimum outdoor airflow, or rate required to comply with minimum accreditation standards whichever is larger.",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "rule_dependency": "System 5, 7 (Rule18-a, to be confirmed), lab space",
+            "mandatory_rule": "Applicability",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
-            "baseline": {
+            "proposed": {
                 "id": "ASHRAE229 1",
                 "ruleset_model_descriptions": [
                     {
@@ -38,7 +39,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 5",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -53,7 +54,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 5",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -62,11 +63,10 @@
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System 7",
+                                                "id": "System 5",
                                                 "cooling_system": {
-                                                    "id": "CHW Coil 1",
-                                                    "type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
@@ -100,13 +100,110 @@
                                 "energy_source_type": "NATURAL_GAS"
                             }
                         ],
-                        "chillers": [
+                        "pumps": [
                             {
-                                "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1",
-                                "compressor_type": "POSITIVE_DISPLACEMENT",
-                                "rated_capacity": 457210.0,
-                                "full_load_efficiency": 4.452
+                                "id": "Boiler Pump 1",
+                                "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 5",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 5",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 5",
+                                                "cooling_system": {
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
                             }
                         ],
                         "pumps": [
@@ -114,437 +211,45 @@
                                 "id": "Boiler Pump 1",
                                 "loop_or_piping": "Boiler Loop 1",
                                 "speed_control": "FIXED_SPEED"
-                            },
-                            {
-                                "id": "Chiller Pump 1",
-                                "loop_or_piping": "Chiller Loop 1",
-                                "speed_control": "FIXED_SPEED"
-                            },
-                            {
-                                "id": "Secondary CHW Pump",
-                                "loop_or_piping": "Secondary CHW Loop 1",
-                                "speed_control": "VARIABLE_SPEED"
                             }
                         ],
                         "fluid_loops": [
                             {
                                 "id": "Boiler Loop 1",
                                 "type": "HEATING"
-                            },
-                            {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING",
-                                "child_loops": [
-                                    {
-                                        "id": "Secondary CHW Loop 1",
-                                        "type": "COOLING"
-                                    }
-                                ]
                             }
                         ],
                         "type": "BASELINE_0"
                     }
-                ]
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                }
             }
         }
     },
-    "rule-22-22-b": {
-        "Section": 22,
-        "Rule": 22,
+    "rule-23-4-b": {
+        "Section": 23,
+        "Rule": 4,
         "Test": "b",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is incorrectly modeled with the chiller rated capacity and full load efficiency not in accordance with Table G3.5.3.  Expected result: FAIL",
-        "expected_rule_outcome": "fail",
-        "standard": {
-            "rule_id": "22-22",
-            "ruleset_reference": "Table G3.5.3",
-            "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for full load, in accordance with Tables G3.5.3.  ",
-            "applicable_rmr": "Baseline RMR",
-            "rule_assertion": "=",
-            "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
-        },
-        "rmr_transformations": {
-            "baseline": {
-                "id": "ASHRAE229 1",
-                "ruleset_model_descriptions": [
-                    {
-                        "id": "RMD 1",
-                        "buildings": [
-                            {
-                                "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
-                                "building_segments": [
-                                    {
-                                        "id": "Building Segment 1",
-                                        "zones": [
-                                            {
-                                                "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "terminals": [
-                                                    {
-                                                        "id": "VAV Air Terminal 1",
-                                                        "is_supply_ducted": true,
-                                                        "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
-                                                        "heating_source": "HOT_WATER",
-                                                        "heating_from_loop": "Boiler Loop 1"
-                                                    }
-                                                ]
-                                            },
-                                            {
-                                                "id": "Thermal Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "terminals": [
-                                                    {
-                                                        "id": "VAV Air Terminal 2",
-                                                        "is_supply_ducted": true,
-                                                        "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
-                                                        "heating_source": "HOT_WATER",
-                                                        "heating_from_loop": "Boiler Loop 1"
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        "heating_ventilating_air_conditioning_systems": [
-                                            {
-                                                "id": "System 7",
-                                                "cooling_system": {
-                                                    "id": "CHW Coil 1",
-                                                    "type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Secondary CHW Loop 1"
-                                                },
-                                                "preheat_system": {
-                                                    "id": "Preheat Coil 1",
-                                                    "type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1"
-                                                },
-                                                "fan_system": {
-                                                    "id": "VAV Fan System 1",
-                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
-                                                    "supply_fans": [
-                                                        {
-                                                            "id": "Supply Fan 1"
-                                                        }
-                                                    ],
-                                                    "return_fans": [
-                                                        {
-                                                            "id": "Return Fan 1"
-                                                        }
-                                                    ]
-                                                }
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ],
-                        "boilers": [
-                            {
-                                "id": "Boiler 1",
-                                "loop": "Boiler Loop 1",
-                                "energy_source_type": "NATURAL_GAS"
-                            }
-                        ],
-                        "chillers": [
-                            {
-                                "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1",
-                                "compressor_type": "POSITIVE_DISPLACEMENT",
-                                "rated_capacity": 562720.0,
-                                "full_load_efficiency": 3.952
-                            }
-                        ],
-                        "pumps": [
-                            {
-                                "id": "Boiler Pump 1",
-                                "loop_or_piping": "Boiler Loop 1",
-                                "speed_control": "FIXED_SPEED"
-                            },
-                            {
-                                "id": "Chiller Pump 1",
-                                "loop_or_piping": "Chiller Loop 1",
-                                "speed_control": "FIXED_SPEED"
-                            },
-                            {
-                                "id": "Secondary CHW Pump",
-                                "loop_or_piping": "Secondary CHW Loop 1",
-                                "speed_control": "VARIABLE_SPEED"
-                            }
-                        ],
-                        "fluid_loops": [
-                            {
-                                "id": "Boiler Loop 1",
-                                "type": "HEATING"
-                            },
-                            {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING",
-                                "child_loops": [
-                                    {
-                                        "id": "Secondary CHW Loop 1",
-                                        "type": "COOLING"
-                                    }
-                                ]
-                            }
-                        ],
-                        "type": "BASELINE_0"
-                    }
-                ]
-            }
-        }
-    },
-    "rule-22-22-c": {
-        "Section": 22,
-        "Rule": 22,
-        "Test": "c",
-        "test_description": "Baseline building has one zone.  HVAC is system type 13 and is correctly modeled with the chiller rated capacity and full load efficiency in accordance with Table G3.5.3.  Expected result: PASS",
-        "expected_rule_outcome": "pass",
-        "standard": {
-            "rule_id": "22-22",
-            "ruleset_reference": "Table G3.5.3",
-            "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for full load, in accordance with Tables G3.5.3.  ",
-            "applicable_rmr": "Baseline RMR",
-            "rule_assertion": "=",
-            "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
-        },
-        "rmr_transformations": {
-            "baseline": {
-                "id": "ASHRAE229 1",
-                "ruleset_model_descriptions": [
-                    {
-                        "id": "RMD 1",
-                        "buildings": [
-                            {
-                                "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
-                                "building_segments": [
-                                    {
-                                        "id": "Building Segment 1",
-                                        "zones": [
-                                            {
-                                                "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "terminals": [
-                                                    {
-                                                        "id": "CAV Air Terminal 1",
-                                                        "is_supply_ducted": true,
-                                                        "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 13"
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        "heating_ventilating_air_conditioning_systems": [
-                                            {
-                                                "id": "System 13",
-                                                "cooling_system": {
-                                                    "id": "CHW Coil 1",
-                                                    "type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Secondary CHW Loop 1"
-                                                },
-                                                "heating_system": {
-                                                    "id": "Heating Coil 1",
-                                                    "type": "ELECTRIC_RESISTANCE"
-                                                },
-                                                "fan_system": {
-                                                    "id": "CAV Fan System 1",
-                                                    "fan_control": "CONSTANT",
-                                                    "supply_fans": [
-                                                        {
-                                                            "id": "Supply Fan 1"
-                                                        }
-                                                    ],
-                                                    "return_fans": [
-                                                        {
-                                                            "id": "Return Fan 1"
-                                                        }
-                                                    ]
-                                                }
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ],
-                        "chillers": [
-                            {
-                                "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1",
-                                "compressor_type": "CENTRIFUGAL",
-                                "rated_capacity": 703400.0,
-                                "full_load_efficiency": 5.547
-                            }
-                        ],
-                        "pumps": [
-                            {
-                                "id": "Chiller Pump 1",
-                                "loop_or_piping": "Chiller Loop 1",
-                                "speed_control": "FIXED_SPEED"
-                            },
-                            {
-                                "id": "Secondary CHW Pump",
-                                "loop_or_piping": "Secondary CHW Loop 1",
-                                "speed_control": "VARIABLE_SPEED"
-                            }
-                        ],
-                        "fluid_loops": [
-                            {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING",
-                                "child_loops": [
-                                    {
-                                        "id": "Secondary CHW Loop 1",
-                                        "type": "COOLING"
-                                    }
-                                ]
-                            }
-                        ],
-                        "type": "BASELINE_0"
-                    }
-                ]
-            }
-        }
-    },
-    "rule-22-22-d": {
-        "Section": 22,
-        "Rule": 22,
-        "Test": "d",
-        "test_description": "Baseline building has one zone.  HVAC is system type 13 and is incorrectly modeled with the chiller rated capacity and full load efficiency not in accordance with Table G3.5.3.  Expected result: FAIL",
-        "expected_rule_outcome": "fail",
-        "standard": {
-            "rule_id": "22-22",
-            "ruleset_reference": "Table G3.5.3",
-            "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for full load, in accordance with Tables G3.5.3.  ",
-            "applicable_rmr": "Baseline RMR",
-            "rule_assertion": "=",
-            "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
-        },
-        "rmr_transformations": {
-            "baseline": {
-                "id": "ASHRAE229 1",
-                "ruleset_model_descriptions": [
-                    {
-                        "id": "RMD 1",
-                        "buildings": [
-                            {
-                                "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
-                                "building_segments": [
-                                    {
-                                        "id": "Building Segment 1",
-                                        "zones": [
-                                            {
-                                                "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "terminals": [
-                                                    {
-                                                        "id": "CAV Air Terminal 1",
-                                                        "is_supply_ducted": true,
-                                                        "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 13"
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        "heating_ventilating_air_conditioning_systems": [
-                                            {
-                                                "id": "System 13",
-                                                "cooling_system": {
-                                                    "id": "CHW Coil 1",
-                                                    "type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Secondary CHW Loop 1"
-                                                },
-                                                "heating_system": {
-                                                    "id": "Heating Coil 1",
-                                                    "type": "ELECTRIC_RESISTANCE"
-                                                },
-                                                "fan_system": {
-                                                    "id": "CAV Fan System 1",
-                                                    "fan_control": "CONSTANT",
-                                                    "supply_fans": [
-                                                        {
-                                                            "id": "Supply Fan 1"
-                                                        }
-                                                    ],
-                                                    "return_fans": [
-                                                        {
-                                                            "id": "Return Fan 1"
-                                                        }
-                                                    ]
-                                                }
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ],
-                        "chillers": [
-                            {
-                                "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1",
-                                "compressor_type": "CENTRIFUGAL",
-                                "rated_capacity": 703400.0,
-                                "full_load_efficiency": 6.106
-                            }
-                        ],
-                        "pumps": [
-                            {
-                                "id": "Chiller Pump 1",
-                                "loop_or_piping": "Chiller Loop 1",
-                                "speed_control": "FIXED_SPEED"
-                            },
-                            {
-                                "id": "Secondary CHW Pump",
-                                "loop_or_piping": "Secondary CHW Loop 1",
-                                "speed_control": "VARIABLE_SPEED"
-                            }
-                        ],
-                        "fluid_loops": [
-                            {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING",
-                                "child_loops": [
-                                    {
-                                        "id": "Secondary CHW Loop 1",
-                                        "type": "COOLING"
-                                    }
-                                ]
-                            }
-                        ],
-                        "type": "BASELINE_0"
-                    }
-                ]
-            }
-        }
-    },
-    "rule-22-22-e": {
-        "Section": 22,
-        "Rule": 22,
-        "Test": "e",
-        "test_description": "Baseline building has one zone.  HVAC is system type 2 and does not have a chilled water system.  Expected result: Not Applicable",
+        "test_description": "Baseline System 3 serves a laboratory space. Per G3.1.1c, this only applies to system 5 and 7. Expected result: NOT_APPLICABLE.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "22-22",
-            "ruleset_reference": "Table G3.5.3",
-            "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for full load, in accordance with Tables G3.5.3.  ",
-            "applicable_rmr": "Baseline RMR",
+            "rule_id": "23-4",
+            "ruleset_reference": "G3.1.3.13",
+            "rule_description": "Baseline systems 5 and 7 serving lab spaces per Standard 90.1-2019 G3.1.1(c), shall reduce lab exhaust and makeup air during unoccupied periods to 50% of zone peak airflow, the minimum outdoor airflow, or rate required to comply with minimum accreditation standards whichever is larger.",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "rule_dependency": "System 5, 7 (Rule18-a, to be confirmed), lab space",
+            "mandatory_rule": "Applicability",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
-            "baseline": {
+            "proposed": {
                 "id": "ASHRAE229 1",
                 "ruleset_model_descriptions": [
                     {
@@ -563,24 +268,24 @@
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
-                                                        "id": "PTHP Terminal 1",
-                                                        "is_supply_ducted": false,
+                                                        "id": "Air Terminal",
+                                                        "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "PTHP 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System Type 3"
                                                     }
                                                 ]
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "PTHP 1",
+                                                "id": "System Type 3",
                                                 "cooling_system": {
-                                                    "id": "HP Cooling Coil 1",
+                                                    "id": "DX Coil 1",
                                                     "type": "DIRECT_EXPANSION"
                                                 },
                                                 "heating_system": {
-                                                    "id": "HP Heating Coil 1",
-                                                    "type": "HEAT_PUMP"
+                                                    "id": "Furnace Coil 1",
+                                                    "type": "FURNACE"
                                                 },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
@@ -588,6 +293,79 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "Air Terminal",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System Type 3"
+                                                    }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System Type 3",
+                                                "cooling_system": {
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
+                                                },
+                                                "heating_system": {
+                                                    "id": "Furnace Coil 1",
+                                                    "type": "FURNACE"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
                                                         }
                                                     ]
                                                 }
@@ -599,7 +377,13 @@
                         ],
                         "type": "BASELINE_0"
                     }
-                ]
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                }
             }
         }
     }

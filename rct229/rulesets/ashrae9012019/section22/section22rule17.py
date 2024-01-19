@@ -87,7 +87,9 @@ class Section22Rule17(RuleDefinitionListIndexedBase):
                 "rated_water_flowrate_b": CalcQ(
                     "volumetric_flow_rate", rated_water_flowrate_b
                 ),
-                "heat_rejection_efficiency_b": heat_rejection_efficiency_b,
+                "heat_rejection_efficiency_b": CalcQ(
+                    "volumetric_flow_rate_per_power", heat_rejection_efficiency_b
+                ),
             }
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):

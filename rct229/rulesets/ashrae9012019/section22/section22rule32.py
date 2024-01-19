@@ -104,7 +104,9 @@ class Section22Rule32(RuleDefinitionListIndexedBase):
         def rule_check(self, context, calc_vals=None, data=None):
             chiller_part_load_efficiency = calc_vals["chiller_part_load_efficiency"]
             target_part_load_efficiency = calc_vals["target_part_load_efficiency"]
-            target_cop_part_load_efficiency = 1.0 / target_part_load_efficiency.to("kilowatt / kilowatt")
+            target_cop_part_load_efficiency = 1.0 / target_part_load_efficiency.to(
+                "kilowatt / kilowatt"
+            )
             part_load_efficiency_metric = calc_vals["part_load_efficiency_metric"]
 
             return (
