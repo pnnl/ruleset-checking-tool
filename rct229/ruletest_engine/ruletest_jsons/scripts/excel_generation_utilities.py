@@ -121,17 +121,15 @@ def generate_rule_test_dictionary(ruleset_standard):
                 case_dict = ruletest_json_dict[test_case]
                 section = case_dict["Section"]
                 rule = case_dict["Rule"]
-                master_rule_data_dict[section_key]["Rule"].append(
-                    f"{section}-{rule}"
-                )
+                master_rule_data_dict[section_key]["Rule"].append(f"{section}-{rule}")
                 master_rule_data_dict[section_key]["Rule_Unit_Test"].append(
                     f"{section}-{rule}-{case_dict['Test']}"
                 )
                 master_rule_data_dict[section_key]["Test_Description"].append(
-                    case_dict['test_description']
+                    case_dict["test_description"]
                 )
                 master_rule_data_dict[section_key]["Expected_Rule_Outcome"].append(
-                    case_dict['expected_rule_outcome']
+                    case_dict["expected_rule_outcome"]
                 )
                 master_rule_data_dict[section_key]["Rule_Unit_Test_JSON"].append(
                     f"{ruletest_url}/section{section}/rule_{section}_{rule}.json"
