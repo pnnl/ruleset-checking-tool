@@ -4,16 +4,16 @@
     "tool_name": "PNNL Ruleset Checking Tool",
     "tool_version": "0.0.1",
     "ruleset": "ASHRAE 90.1-2019 Performance Rating Method (Appendix G)",
-    "date_run": "2024-01-18 20:29:07.389080",
+    "date_run": "2024-01-21 22:25:34.016365",
     "schema_version": "0.0.29",
     "rpd_files": [
         {
-            "ruleset_model_type": "USER",
-            "file_name": "examples\\chicago_demo\\user_model.json"
-        },
-        {
             "ruleset_model_type": "BASELINE_0",
             "file_name": "examples\\chicago_demo\\baseline_model.json"
+        },
+        {
+            "ruleset_model_type": "USER",
+            "file_name": "examples\\chicago_demo\\user_model.json"
         },
         {
             "ruleset_model_type": "PROPOSED",
@@ -7874,21 +7874,36 @@
             "evaluations": [
                 {
                     "data_group_id": "CORE_BOTTOM",
-                    "outcome": "FAILED",
-                    "messages": "Search data referenced in $[*] with key:value id:always_1 returned 0 results instead of one",
-                    "calculated_values": ""
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": [
+                        {
+                            "variable": "schedule_comparison_result",
+                            "value": "{'total_hours_compared': 0, 'total_hours_matched': 0, 'eflh_difference': 0.0}"
+                        }
+                    ]
                 },
                 {
                     "data_group_id": "CORE_MID",
-                    "outcome": "FAILED",
-                    "messages": "Search data referenced in $[*] with key:value id:always_1 returned 0 results instead of one",
-                    "calculated_values": ""
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": [
+                        {
+                            "variable": "schedule_comparison_result",
+                            "value": "{'total_hours_compared': 0, 'total_hours_matched': 0, 'eflh_difference': 0.0}"
+                        }
+                    ]
                 },
                 {
                     "data_group_id": "CORE_TOP",
-                    "outcome": "FAILED",
-                    "messages": "Search data referenced in $[*] with key:value id:always_1 returned 0 results instead of one",
-                    "calculated_values": ""
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": [
+                        {
+                            "variable": "schedule_comparison_result",
+                            "value": "{'total_hours_compared': 0, 'total_hours_matched': 0, 'eflh_difference': 0.0}"
+                        }
+                    ]
                 },
                 {
                     "data_group_id": "FIRSTFLOOR_PLENUM",
@@ -7904,75 +7919,135 @@
                 },
                 {
                     "data_group_id": "PERIMETER_BOT_ZN_1",
-                    "outcome": "FAILED",
-                    "messages": "Search data referenced in $[*] with key:value id:always_1 returned 0 results instead of one",
-                    "calculated_values": ""
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": [
+                        {
+                            "variable": "schedule_comparison_result",
+                            "value": "{'total_hours_compared': 0, 'total_hours_matched': 0, 'eflh_difference': 0.0}"
+                        }
+                    ]
                 },
                 {
                     "data_group_id": "PERIMETER_BOT_ZN_2",
-                    "outcome": "FAILED",
-                    "messages": "Search data referenced in $[*] with key:value id:always_1 returned 0 results instead of one",
-                    "calculated_values": ""
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": [
+                        {
+                            "variable": "schedule_comparison_result",
+                            "value": "{'total_hours_compared': 0, 'total_hours_matched': 0, 'eflh_difference': 0.0}"
+                        }
+                    ]
                 },
                 {
                     "data_group_id": "PERIMETER_BOT_ZN_3",
-                    "outcome": "FAILED",
-                    "messages": "Search data referenced in $[*] with key:value id:always_1 returned 0 results instead of one",
-                    "calculated_values": ""
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": [
+                        {
+                            "variable": "schedule_comparison_result",
+                            "value": "{'total_hours_compared': 0, 'total_hours_matched': 0, 'eflh_difference': 0.0}"
+                        }
+                    ]
                 },
                 {
                     "data_group_id": "PERIMETER_BOT_ZN_4",
-                    "outcome": "FAILED",
-                    "messages": "Search data referenced in $[*] with key:value id:always_1 returned 0 results instead of one",
-                    "calculated_values": ""
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": [
+                        {
+                            "variable": "schedule_comparison_result",
+                            "value": "{'total_hours_compared': 0, 'total_hours_matched': 0, 'eflh_difference': 0.0}"
+                        }
+                    ]
                 },
                 {
                     "data_group_id": "PERIMETER_MID_ZN_1",
-                    "outcome": "FAILED",
-                    "messages": "Search data referenced in $[*] with key:value id:always_1 returned 0 results instead of one",
-                    "calculated_values": ""
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": [
+                        {
+                            "variable": "schedule_comparison_result",
+                            "value": "{'total_hours_compared': 0, 'total_hours_matched': 0, 'eflh_difference': 0.0}"
+                        }
+                    ]
                 },
                 {
                     "data_group_id": "PERIMETER_MID_ZN_2",
-                    "outcome": "FAILED",
-                    "messages": "Search data referenced in $[*] with key:value id:always_1 returned 0 results instead of one",
-                    "calculated_values": ""
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": [
+                        {
+                            "variable": "schedule_comparison_result",
+                            "value": "{'total_hours_compared': 0, 'total_hours_matched': 0, 'eflh_difference': 0.0}"
+                        }
+                    ]
                 },
                 {
                     "data_group_id": "PERIMETER_MID_ZN_3",
-                    "outcome": "FAILED",
-                    "messages": "Search data referenced in $[*] with key:value id:always_1 returned 0 results instead of one",
-                    "calculated_values": ""
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": [
+                        {
+                            "variable": "schedule_comparison_result",
+                            "value": "{'total_hours_compared': 0, 'total_hours_matched': 0, 'eflh_difference': 0.0}"
+                        }
+                    ]
                 },
                 {
                     "data_group_id": "PERIMETER_MID_ZN_4",
-                    "outcome": "FAILED",
-                    "messages": "Search data referenced in $[*] with key:value id:always_1 returned 0 results instead of one",
-                    "calculated_values": ""
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": [
+                        {
+                            "variable": "schedule_comparison_result",
+                            "value": "{'total_hours_compared': 0, 'total_hours_matched': 0, 'eflh_difference': 0.0}"
+                        }
+                    ]
                 },
                 {
                     "data_group_id": "PERIMETER_TOP_ZN_1",
-                    "outcome": "FAILED",
-                    "messages": "Search data referenced in $[*] with key:value id:always_1 returned 0 results instead of one",
-                    "calculated_values": ""
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": [
+                        {
+                            "variable": "schedule_comparison_result",
+                            "value": "{'total_hours_compared': 0, 'total_hours_matched': 0, 'eflh_difference': 0.0}"
+                        }
+                    ]
                 },
                 {
                     "data_group_id": "PERIMETER_TOP_ZN_2",
-                    "outcome": "FAILED",
-                    "messages": "Search data referenced in $[*] with key:value id:always_1 returned 0 results instead of one",
-                    "calculated_values": ""
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": [
+                        {
+                            "variable": "schedule_comparison_result",
+                            "value": "{'total_hours_compared': 0, 'total_hours_matched': 0, 'eflh_difference': 0.0}"
+                        }
+                    ]
                 },
                 {
                     "data_group_id": "PERIMETER_TOP_ZN_3",
-                    "outcome": "FAILED",
-                    "messages": "Search data referenced in $[*] with key:value id:always_1 returned 0 results instead of one",
-                    "calculated_values": ""
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": [
+                        {
+                            "variable": "schedule_comparison_result",
+                            "value": "{'total_hours_compared': 0, 'total_hours_matched': 0, 'eflh_difference': 0.0}"
+                        }
+                    ]
                 },
                 {
                     "data_group_id": "PERIMETER_TOP_ZN_4",
-                    "outcome": "FAILED",
-                    "messages": "Search data referenced in $[*] with key:value id:always_1 returned 0 results instead of one",
-                    "calculated_values": ""
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": [
+                        {
+                            "variable": "schedule_comparison_result",
+                            "value": "{'total_hours_compared': 0, 'total_hours_matched': 0, 'eflh_difference': 0.0}"
+                        }
+                    ]
                 },
                 {
                     "data_group_id": "TOPFLOOR_PLENUM",
