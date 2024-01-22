@@ -1,8 +1,10 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rulesets.ashrae9012019 import BASELINE_0
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_4_fns import table_G34_lookup
+from rct229.rulesets.ashrae9012019.ruleset_functions.compare_standard_val import std_le
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_building_scc_window_wall_ratios_dict import (
     get_building_scc_window_wall_ratios_dict,
 )
@@ -18,10 +20,8 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_ca
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
-from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
-from rct229.utils.std_comparisons import std_equal
 
 DOOR = SchemaEnums.schema_enums["SubsurfaceClassificationOptions"].DOOR
 MANUAL_CHECK_REQUIRED_MSG = "Manual review is requested to verify vertical fenestration meets SHGC requirement as per Table G3.4. "
@@ -32,7 +32,7 @@ class Section5Rule20(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule20, self).__init__(
-            rmds_used=produce_ruleset_model_description(
+            rmrs_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             required_fields={
@@ -40,7 +40,7 @@ class Section5Rule20(RuleDefinitionListIndexedBase):
                 "weather": ["climate_zone"],
             },
             each_rule=Section5Rule20.BuildingRule(),
-            index_rmd=BASELINE_0,
+            index_rmr=BASELINE_0,
             id="5-20",
             description="Vertical fenestration SHGC shall match the appropriate requirements in Tables G3.4-1 through G3.4-8.",
             ruleset_section_title="Envelope",
@@ -70,11 +70,11 @@ class Section5Rule20(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule20.BuildingRule, self).__init__(
-                rmds_used=produce_ruleset_model_description(
+                rmrs_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 each_rule=Section5Rule20.BuildingRule.AboveGradeWallRule(),
-                index_rmd=BASELINE_0,
+                index_rmr=BASELINE_0,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
 
@@ -216,11 +216,11 @@ class Section5Rule20(RuleDefinitionListIndexedBase):
         class AboveGradeWallRule(RuleDefinitionListIndexedBase):
             def __init__(self):
                 super(Section5Rule20.BuildingRule.AboveGradeWallRule, self).__init__(
-                    rmds_used=produce_ruleset_model_description(
+                    rmrs_used=produce_ruleset_model_instance(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
                     each_rule=Section5Rule20.BuildingRule.AboveGradeWallRule.SubsurfaceRule(),
-                    index_rmd=BASELINE_0,
+                    index_rmr=BASELINE_0,
                     list_path="subsurfaces[*]",
                     required_fields={
                         "$.subsurfaces[*]": [
@@ -248,7 +248,7 @@ class Section5Rule20(RuleDefinitionListIndexedBase):
                         Section5Rule20.BuildingRule.AboveGradeWallRule.SubsurfaceRule,
                         self,
                     ).__init__(
-                        rmds_used=produce_ruleset_model_description(
+                        rmrs_used=produce_ruleset_model_instance(
                             USER=False, BASELINE_0=True, PROPOSED=False
                         ),
                     )
@@ -282,6 +282,11 @@ class Section5Rule20(RuleDefinitionListIndexedBase):
                 def rule_check(self, context, calc_vals=None, data=None):
                     target_shgc = calc_vals["target_shgc"]
                     subsurface_shgc = calc_vals["subsurface_shgc"]
-                    return target_shgc is not None and std_equal(
+                    return target_shgc is not None and target_shgc == subsurface_shgc
+
+                def is_tolerance_fail(self, context, calc_vals=None, data=None):
+                    target_shgc = calc_vals["target_shgc"]
+                    subsurface_shgc = calc_vals["subsurface_shgc"]
+                    return target_shgc is not None and std_le(
                         std_val=target_shgc, val=subsurface_shgc
                     )

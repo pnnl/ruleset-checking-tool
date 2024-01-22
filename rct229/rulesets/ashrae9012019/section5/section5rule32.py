@@ -14,6 +14,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_ca
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
+from rct229.utils.std_comparisons import std_equal
 
 ABSORPTANCE_SOLAR_EXTERIOR = 0.7
 
@@ -113,6 +114,12 @@ class Section5Rule32(RuleDefinitionListIndexedBase):
                 return (
                     calc_vals["absorptance_solar_exterior_p"]
                     == ABSORPTANCE_SOLAR_EXTERIOR
+                )
+
+            def is_tolerance_fail(self, context, calc_vals=None, data=None):
+                return std_equal(
+                    calc_vals["absorptance_solar_exterior_p"],
+                    ABSORPTANCE_SOLAR_EXTERIOR,
                 )
 
             def get_pass_msg(self, context, calc_vals=None, data=None):

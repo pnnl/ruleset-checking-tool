@@ -114,4 +114,9 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
             def rule_check(self, context, calc_vals=None, data=None):
                 skylight_roof_ratio_b = calc_vals["skylight_roof_ratio_b"]
                 skylight_roof_ratio_p = calc_vals["skylight_total_roof_ratio_p"]
+                return skylight_roof_ratio_b == skylight_roof_ratio_p
+
+            def is_tolerance_fail(self, context, calc_vals=None, data=None):
+                skylight_roof_ratio_b = calc_vals["skylight_roof_ratio_b"]
+                skylight_roof_ratio_p = calc_vals["skylight_total_roof_ratio_p"]
                 return std_equal(skylight_roof_ratio_b, skylight_roof_ratio_p)

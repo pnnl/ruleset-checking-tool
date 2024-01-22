@@ -149,6 +149,31 @@ class Section5Rule37(RuleDefinitionListIndexedBase):
                 "empty_measured_air_leakage_rate_flow_flag"
             ]
 
+            return (
+                building_total_air_leakage_rate
+                == TOTAL_AIR_LEAKAGE_COEFF * target_air_leakage_rate_75pa_p
+                or (
+                    building_total_air_leakage_rate
+                    != TOTAL_AIR_LEAKAGE_COEFF * target_air_leakage_rate_75pa_p
+                    and empty_measured_air_leakage_rate_flow_flag == False
+                    and building_total_air_leakage_rate
+                    == TOTAL_AIR_LEAKAGE_COEFF
+                    * building_total_measured_air_leakage_rate,
+                )
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            building_total_air_leakage_rate = calc_vals[
+                "building_total_air_leakage_rate"
+            ]
+            building_total_measured_air_leakage_rate = calc_vals[
+                "building_total_measured_air_leakage_rate"
+            ]
+            target_air_leakage_rate_75pa_p = calc_vals["target_air_leakage_rate_75pa_p"]
+            empty_measured_air_leakage_rate_flow_flag = calc_vals[
+                "empty_measured_air_leakage_rate_flow_flag"
+            ]
+
             return std_equal(
                 building_total_air_leakage_rate,
                 TOTAL_AIR_LEAKAGE_COEFF * target_air_leakage_rate_75pa_p,

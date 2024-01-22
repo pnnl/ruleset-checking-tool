@@ -1,8 +1,9 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_4_fns import table_G34_lookup
+from rct229.rulesets.ashrae9012019.ruleset_functions.compare_standard_val import std_le
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
     OpaqueSurfaceType as OST,
 )
@@ -16,7 +17,6 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_ca
     get_surface_conditioning_category_dict,
 )
 from rct229.utils.pint_utils import CalcQ
-from rct229.utils.std_comparisons import std_equal
 
 
 class Section5Rule8(RuleDefinitionListIndexedBase):
@@ -24,7 +24,7 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule8, self).__init__(
-            rmds_used=produce_ruleset_model_description(
+            rmrs_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             required_fields={
@@ -32,7 +32,7 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
                 "weather": ["climate_zone"],
             },
             each_rule=Section5Rule8.BuildingRule(),
-            index_rmd=BASELINE_0,
+            index_rmr=BASELINE_0,
             id="5-8",
             description="Baseline above-grade wall assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8.",
             ruleset_section_title="Envelope",
@@ -45,12 +45,12 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule8.BuildingRule, self).__init__(
-                rmds_used=produce_ruleset_model_description(
+                rmrs_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={},
                 each_rule=Section5Rule8.BuildingRule.AboveGradeWallRule(),
-                index_rmd=BASELINE_0,
+                index_rmr=BASELINE_0,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
 
@@ -73,7 +73,7 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
         class AboveGradeWallRule(RuleDefinitionBase):
             def __init__(self):
                 super(Section5Rule8.BuildingRule.AboveGradeWallRule, self).__init__(
-                    rmds_used=produce_ruleset_model_description(
+                    rmrs_used=produce_ruleset_model_instance(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
                     required_fields={},
@@ -131,5 +131,9 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
             def rule_check(self, context, calc_vals=None, data=None):
                 above_grade_wall_u_factor = calc_vals["above_grade_wall_u_factor"]
                 target_u_factor = calc_vals["target_u_factor"]
+                return above_grade_wall_u_factor == target_u_factor
 
-                return std_equal(val=above_grade_wall_u_factor, std_val=target_u_factor)
+            def is_tolerance_fail(self, context, calc_vals=None, data=None):
+                above_grade_wall_u_factor = calc_vals["above_grade_wall_u_factor"]
+                target_u_factor = calc_vals["target_u_factor"]
+                return std_le(val=above_grade_wall_u_factor, std_val=target_u_factor)
