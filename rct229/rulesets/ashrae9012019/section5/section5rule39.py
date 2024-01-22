@@ -225,11 +225,6 @@ class Section5Rule39(RuleDefinitionListIndexedBase):
                 def rule_check(self, context, calc_vals=None, data=None):
                     u_factor_b = calc_vals["u_factor_b"]
                     target_u_factor_b = calc_vals["target_u_factor_b"]
-                    return target_u_factor_b == u_factor_b
-
-                def is_tolerance_fail(self, context, calc_vals=None, data=None):
-                    u_factor_b = calc_vals["u_factor_b"]
-                    target_u_factor_b = calc_vals["target_u_factor_b"]
                     return std_equal(target_u_factor_b, u_factor_b)
 
                 def get_fail_msg(self, context, calc_vals=None, data=None):

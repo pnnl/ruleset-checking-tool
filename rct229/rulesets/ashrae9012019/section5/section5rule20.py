@@ -282,11 +282,6 @@ class Section5Rule20(RuleDefinitionListIndexedBase):
                 def rule_check(self, context, calc_vals=None, data=None):
                     target_shgc = calc_vals["target_shgc"]
                     subsurface_shgc = calc_vals["subsurface_shgc"]
-                    return target_shgc is not None and target_shgc == subsurface_shgc
-
-                def is_tolerance_fail(self, context, calc_vals=None, data=None):
-                    target_shgc = calc_vals["target_shgc"]
-                    subsurface_shgc = calc_vals["subsurface_shgc"]
                     return target_shgc is not None and std_le(
                         std_val=target_shgc, val=subsurface_shgc
                     )

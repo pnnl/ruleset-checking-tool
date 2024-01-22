@@ -295,9 +295,4 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
                 def rule_check(self, context, calc_vals=None, data=None):
                     target_u_factor = calc_vals["target_u_factor"]
                     subsurface_u_factor = calc_vals["subsurface_u_factor"]
-                    return target_u_factor == subsurface_u_factor
-
-                def is_tolerance_fail(self, context, calc_vals=None, data=None):
-                    target_u_factor = calc_vals["target_u_factor"]
-                    subsurface_u_factor = calc_vals["subsurface_u_factor"]
                     return std_le(std_val=target_u_factor, val=subsurface_u_factor)

@@ -16,7 +16,6 @@ from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all, find_exactly_one_with_field_value
 from rct229.utils.masks import invert_mask
 from rct229.utils.pint_utils import ZERO
-from rct229.utils.std_comparisons import std_equal
 
 BUILDING_AREA_CUTTOFF = ureg("5000 ft2")
 
@@ -186,17 +185,8 @@ class Section6Rule5(RuleDefinitionListIndexedBase):
                         schedule_comparison_result = calc_vals[
                             "schedule_comparison_result"
                         ]
+
                         return (
                             schedule_comparison_result["total_hours_compared"]
                             == schedule_comparison_result["total_hours_matched"]
-                        )
-
-                    def is_tolerance_fail(self, context, calc_vals=None, data=None):
-                        schedule_comparison_result = calc_vals[
-                            "schedule_comparison_result"
-                        ]
-
-                        return std_equal(
-                            schedule_comparison_result["total_hours_compared"],
-                            schedule_comparison_result["total_hours_matched"],
                         )

@@ -3,7 +3,6 @@ from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedB
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.std_comparisons import std_equal
 
 MANUAL_CHECK_MSG = "Surface in P-RMR has subsurfaces modeled with different manual shade status. Verify if subsurfaces manual shade status in B-RMR are modeled the same as in P-RMR"
 
@@ -110,10 +109,4 @@ class Section5Rule23(RuleDefinitionListIndexedBase):
                     return (
                         calc_vals["subsurface_p_manual_shade"]
                         == calc_vals["subsurface_b_manual_shade"]
-                    )
-
-                def is_tolerance_fail(self, context, calc_vals=None, data=None):
-                    return std_equal(
-                        calc_vals["subsurface_p_manual_shade"],
-                        calc_vals["subsurface_b_manual_shade"],
                     )

@@ -111,8 +111,4 @@ class Section5Rule25(RuleDefinitionListIndexedBase):
 
             def rule_check(self, context, calc_vals=None, data=None):
                 skylight_roof_ratio_b = calc_vals["skylight_roof_ratio_b"]
-                return skylight_roof_ratio_b == 0.03
-
-            def is_tolerance_fail(self, context, calc_vals=None, data=None):
-                skylight_roof_ratio_b = calc_vals["skylight_roof_ratio_b"]
                 return std_equal(skylight_roof_ratio_b, 0.03)

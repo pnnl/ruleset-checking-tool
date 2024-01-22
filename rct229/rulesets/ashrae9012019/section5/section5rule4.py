@@ -135,9 +135,5 @@ class Section5Rule4(RuleDefinitionListIndexedBase):
             def rule_check(self, context=None, calc_vals=None, data=None):
                 roof_u_factor = calc_vals["roof_u_factor"]
                 target_u_factor = calc_vals["target_u_factor"]
-                return roof_u_factor == target_u_factor
 
-            def is_tolerance_fail(self, context, calc_vals=None, data=None):
-                roof_u_factor = calc_vals["roof_u_factor"]
-                target_u_factor = calc_vals["target_u_factor"]
                 return std_le(val=roof_u_factor, std_val=target_u_factor)
