@@ -242,5 +242,9 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
                 def rule_check(self, context, calc_vals=None, data=None):
                     target_shgc = calc_vals["target_shgc"]
                     subsurface_shgc_b = calc_vals["subsurface_shgc_b"]
+                    return target_shgc == subsurface_shgc_b
 
+                def is_tolerance_fail(self, context, calc_vals=None, data=None):
+                    target_shgc = calc_vals["target_shgc"]
+                    subsurface_shgc_b = calc_vals["subsurface_shgc_b"]
                     return std_equal(target_shgc, subsurface_shgc_b)
