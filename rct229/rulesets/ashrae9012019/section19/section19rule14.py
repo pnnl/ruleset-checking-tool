@@ -241,9 +241,7 @@ class Section19Rule14(RuleDefinitionListIndexedBase):
                 baseline_modeled_return_as_expected
                 and baseline_modeled_relief_as_expected
                 and (is_modeled_with_return_fan_in_p or is_modeled_with_relief_fan_p)
-                and std_equal(
-                    modeled_cfm, max(supply_minus_OA_flow, supply_cfm_90_percent)
-                )
+                and modeled_cfm == max(supply_minus_OA_flow, supply_cfm_90_percent)
             ) or (
                 not is_modeled_with_return_fan_in_p
                 and not is_modeled_with_relief_fan_p
