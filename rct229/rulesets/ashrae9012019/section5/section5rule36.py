@@ -9,6 +9,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_categ
     get_zone_conditioning_category_dict,
 )
 from rct229.utils.pint_utils import CalcQ
+from rct229.utils.std_comparisons import std_equal
 
 
 class Section5Rule36(RuleDefinitionListIndexedBase):
@@ -93,4 +94,10 @@ class Section5Rule36(RuleDefinitionListIndexedBase):
                 return (
                     calc_vals["baseline_infiltration"]
                     == calc_vals["proposed_infiltration"]
+                )
+
+            def is_tolerance_fail(self, context, calc_vals=None, data=None):
+                return std_equal(
+                    calc_vals["baseline_infiltration"],
+                    calc_vals["proposed_infiltration"],
                 )

@@ -131,5 +131,9 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
             def rule_check(self, context, calc_vals=None, data=None):
                 above_grade_wall_u_factor = calc_vals["above_grade_wall_u_factor"]
                 target_u_factor = calc_vals["target_u_factor"]
+                return above_grade_wall_u_factor == target_u_factor
 
+            def is_tolerance_fail(self, context, calc_vals=None, data=None):
+                above_grade_wall_u_factor = calc_vals["above_grade_wall_u_factor"]
+                target_u_factor = calc_vals["target_u_factor"]
                 return std_le(val=above_grade_wall_u_factor, std_val=target_u_factor)
