@@ -7,6 +7,7 @@ from rct229.rulesets.ashrae9012019.data_fns.table_9_6_1_fns import table_9_6_1_l
 from rct229.schema.config import ureg
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO, CalcQ
+from rct229.utils.std_comparisons import std_equal
 
 GUEST_ROOM = SchemaEnums.schema_enums[
     "LightingSpaceOptions2019ASHRAE901TG37"
@@ -115,4 +116,18 @@ class Section6Rule2(RuleDefinitionListIndexedBase):
 
             return space_lighting_power_per_area_p == max(
                 lighting_power_allowance_p, space_lighting_power_per_area_u
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            lighting_power_allowance_p = calc_vals["lighting_power_allowance_p"]
+            space_lighting_power_per_area_p = calc_vals[
+                "space_lighting_power_per_area_p"
+            ]
+            space_lighting_power_per_area_u = calc_vals[
+                "space_lighting_power_per_area_u"
+            ]
+
+            return std_equal(
+                space_lighting_power_per_area_p,
+                max(lighting_power_allowance_p, space_lighting_power_per_area_u),
             )
