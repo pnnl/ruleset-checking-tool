@@ -1,11 +1,10 @@
 from jsonpointer import resolve_pointer
-
 from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
+from rct229.rule_engine.ruleset_model_factory import RuleSetModels, get_rmd_instance
 from rct229.utils.assertions import MissingKeyException, RCTFailureException
 from rct229.utils.json_utils import slash_prefix_guarantee
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import calcq_to_q
-from rct229.rule_engine.ruleset_model_factory import RuleSetModels, get_rmd_instance
 
 
 class RuleDefinitionBase:
