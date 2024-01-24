@@ -41,7 +41,7 @@ The following is an example of a JSON output file produced by the RCT.
       "description": "Baseline roof assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8.",
       "evaluation_type": "FULL",
       "standard_section": "G3.1.2.2",
-      "data_group_name": "Surface",
+      "data_group_names": ["Surface"],
       "evaluations": [
         {
           "data_group_id": "Surface 1",

@@ -1,6 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_system_type_compare import (
     baseline_system_type_compare,
 )
@@ -44,9 +45,11 @@ class Section19Rule14(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section19Rule14, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, True),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=True
+            ),
             each_rule=Section19Rule14.HVACRule(),
-            index_rmr="baseline",
+            index_rmr=BASELINE_0,
             id="19-14",
             description="For baseline system types 1-8 and 11-13, if return or relief fans are specified in the proposed design, the baseline building design shall also be modeled with fans serving the same functions and sized for the baseline system supply fan air quantity less the minimum outdoor air, or 90% of the supply fan air quantity, whichever is larger.",
             ruleset_section_title="HVAC - General",
@@ -57,20 +60,23 @@ class Section19Rule14(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         baseline_system_types_dict_b = get_baseline_system_types(rmi_b)
 
         return any(
             [
-                baseline_system_type_compare(system_type, applicable_sys_type, False)
+                baseline_system_types_dict_b[system_type]
+                and baseline_system_type_compare(
+                    system_type, applicable_sys_type, False
+                )
                 for system_type in baseline_system_types_dict_b
                 for applicable_sys_type in APPLICABLE_SYS_TYPES
             ]
         )
 
     def create_data(self, context, data):
-        rmi_b = context.baseline
-        rmi_p = context.proposed
+        rmi_b = context.BASELINE_0
+        rmi_p = context.PROPOSED
 
         zone_supply_return_exhaust_relief_terminal_fan_power_dict = (
             get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(rmi_p)
@@ -114,14 +120,16 @@ class Section19Rule14(RuleDefinitionListIndexedBase):
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
             super(Section19Rule14.HVACRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, True),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=False
+                ),
                 required_fields={
                     "$": ["fan_system"],
                 },
             )
 
         def is_applicable(self, context, data=None):
-            hvac_b = context.baseline
+            hvac_b = context.BASELINE_0
             hvac_id_b = hvac_b["id"]
             baseline_system_types_dict_b = data["baseline_system_types_dict_b"]
 
@@ -131,7 +139,7 @@ class Section19Rule14(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            hvac_b = context.baseline
+            hvac_b = context.BASELINE_0
             hvac_id_b = hvac_b["id"]
 
             hvac_info_b = data["hvac_info_b"][hvac_id_b]
@@ -209,7 +217,7 @@ class Section19Rule14(RuleDefinitionListIndexedBase):
             return calc_vals["more_than_one_supply_and_return_fan"]
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
-            hvac_b = context.baseline
+            hvac_b = context.BASELINE_0
             hvac_id_b = hvac_b["id"]
 
             return f"{hvac_id_b} has more than one supply or return fan associated with the HVAC system in the baseline and therefore this check could not be conducted for this HVAC system. Conduct manual check for compliance with G3.1.2.8.1."

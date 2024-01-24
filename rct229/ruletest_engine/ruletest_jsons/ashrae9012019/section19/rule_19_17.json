@@ -12,7 +12,7 @@
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -111,7 +111,8 @@
                                 "id": "Boiler Loop 1",
                                 "type": "HEATING"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -121,7 +122,7 @@
         "Section": 19,
         "Rule": 17,
         "Test": "a2",
-        "test_description": "System 1 with `SIMPLE` specification method for supply/return/exhaust/relief fans and each of the 5 fans has 56 W design electric power for a total of 280 W with 1000 cfm design supply airflow.",
+        "test_description": "In baseline system 7, the system fan electrical power for supply, return, exhaust, and relief equals the bhp/fan motor efficiency.  BHP = 13 HP (per Table G3.1.29), motor eff = 0.91 (per Table G3.9.1), CFM = 10,000. There is no MERV13 or ERV on this air loop.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-17",
@@ -130,7 +131,7 @@
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -229,7 +230,8 @@
                                 "id": "Boiler Loop 1",
                                 "type": "HEATING"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -239,7 +241,7 @@
         "Section": 19,
         "Rule": 17,
         "Test": "b",
-        "test_description": "For baseline system 1 and 2, the total fan electrical power (Pfan) for supply, return, exhaust, and relief shall be = CFMs \u00d7 0.3, where, CFMs = the baseline system maximum design supply fan airflow rate, cfm",
+        "test_description": "In baseline system 3, the system fan electrical power for supply, return, exhaust, and relief equals the bhp/fan motor efficiency.  BHP = 0.94 HP (per Table G3.1.29), motor eff = 0.825 (per Table G3.9.1), CFM = 1,000. There is no MERV13 or ERV on this air loop.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-17",
@@ -248,7 +250,7 @@
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -347,7 +349,8 @@
                                 "id": "Boiler Loop 1",
                                 "type": "HEATING"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

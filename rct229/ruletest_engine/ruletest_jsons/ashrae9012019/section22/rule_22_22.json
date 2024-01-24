@@ -106,7 +106,7 @@
                                 "cooling_loop": "Chiller Loop 1",
                                 "compressor_type": "POSITIVE_DISPLACEMENT",
                                 "rated_capacity": 457210.0,
-                                "full_load_efficiency": 0.22462325845891384
+                                "full_load_efficiency": 4.452
                             }
                         ],
                         "pumps": [
@@ -141,7 +141,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -254,7 +255,7 @@
                                 "cooling_loop": "Chiller Loop 1",
                                 "compressor_type": "POSITIVE_DISPLACEMENT",
                                 "rated_capacity": 562720.0,
-                                "full_load_efficiency": 0.25305658231447253
+                                "full_load_efficiency": 3.952
                             }
                         ],
                         "pumps": [
@@ -289,7 +290,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -377,7 +379,7 @@
                                 "cooling_loop": "Chiller Loop 1",
                                 "compressor_type": "CENTRIFUGAL",
                                 "rated_capacity": 703400.0,
-                                "full_load_efficiency": 0.18026727324424224
+                                "full_load_efficiency": 5.547
                             }
                         ],
                         "pumps": [
@@ -403,7 +405,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -491,7 +494,7 @@
                                 "cooling_loop": "Chiller Loop 1",
                                 "compressor_type": "CENTRIFUGAL",
                                 "rated_capacity": 703400.0,
-                                "full_load_efficiency": 0.16377594540801818
+                                "full_load_efficiency": 6.106
                             }
                         ],
                         "pumps": [
@@ -517,7 +520,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -592,7 +596,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

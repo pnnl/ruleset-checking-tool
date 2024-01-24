@@ -1,6 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_system_type_compare import (
     baseline_system_type_compare,
 )
@@ -25,9 +26,11 @@ class Section23Rule6(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section23Rule6, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=False
+            ),
             each_rule=Section23Rule6.TerminalRule(),
-            index_rmr="baseline",
+            index_rmr=BASELINE_0,
             id="23-6",
             description="For baseline systems 6 and 8, Fans in parallel VAV fan-powered boxes shall be sized for 50% of the peak design primary air (from the VAV air-handling unit) flow rate and shall be modeled with 0.35 W/cfm fan power.",
             ruleset_section_title="HVAC - Airside",
@@ -38,19 +41,22 @@ class Section23Rule6(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
 
         return any(
             [
-                baseline_system_type_compare(system_type, applicable_sys_type, False)
+                baseline_system_types_dict[system_type]
+                and baseline_system_type_compare(
+                    system_type, applicable_sys_type, False
+                )
                 for system_type in baseline_system_types_dict
                 for applicable_sys_type in APPLICABLE_SYS_TYPES
             ]
         )
 
     def create_data(self, context, data):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
         applicable_hvac_sys_ids = [
             hvac_id
@@ -66,7 +72,7 @@ class Section23Rule6(RuleDefinitionListIndexedBase):
         applicable_hvac_sys_ids = data["applicable_hvac_sys_ids"]
 
         return (
-            context_item.baseline[
+            context_item.BASELINE_0[
                 "served_by_heating_ventilating_air_conditioning_system"
             ]
             in applicable_hvac_sys_ids
@@ -75,7 +81,9 @@ class Section23Rule6(RuleDefinitionListIndexedBase):
     class TerminalRule(RuleDefinitionBase):
         def __init__(self):
             super(Section23Rule6.TerminalRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, False),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=False
+                ),
                 required_fields={
                     "$": ["primary_airflow", "fan"],
                     "fan": [
@@ -86,7 +94,7 @@ class Section23Rule6(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            terminal_b = context.baseline
+            terminal_b = context.BASELINE_0
             design_airflow_b = terminal_b["fan"]["design_airflow"]
             primary_airflow_b = terminal_b["primary_airflow"]
             design_electric_power_b = terminal_b["fan"]["design_electric_power"]

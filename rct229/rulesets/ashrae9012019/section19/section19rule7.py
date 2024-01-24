@@ -1,7 +1,8 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import BASELINE_0
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.ruleset_functions.aggregate_min_OA_schedule_across_zones import (
     aggregate_min_OA_schedule_across_zones,
 )
@@ -19,8 +20,8 @@ from rct229.utils.utility_functions import (
     find_exactly_one_zone,
 )
 
-LIGHTING_SPACE = schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
-DEMAND_CONTROL_VENTILATION_CONTROL = schema_enums[
+LIGHTING_SPACE = SchemaEnums.schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
+DEMAND_CONTROL_VENTILATION_CONTROL = SchemaEnums.schema_enums[
     "DemandControlVentilationControlOptions"
 ]
 
@@ -30,9 +31,11 @@ class Section19Rule7(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section19Rule7, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, True),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=True
+            ),
             each_rule=Section19Rule7.HVACRule(),
-            index_rmr="baseline",
+            index_rmr=BASELINE_0,
             id="19-7",
             description="Minimum ventilation system outdoor air intake flow shall be the same for the proposed design and baseline building design except when any of the 4 exceptions defined in Section G3.1.2.5 are met."
             "Exceptions included in this RDS: 2. When designing systems in accordance with Standard 62.1, Section 6.2, `Ventilation Rate Procedure,`"
@@ -47,8 +50,8 @@ class Section19Rule7(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.baseline
-        rmi_p = context.proposed
+        rmi_b = context.BASELINE_0
+        rmi_p = context.PROPOSED
 
         dict_of_zones_and_terminal_units_served_by_hvac_sys_b = (
             get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmi_b)
@@ -166,7 +169,9 @@ class Section19Rule7(RuleDefinitionListIndexedBase):
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
             super(Section19Rule7.HVACRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, True),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=False
+                ),
             )
 
         def is_applicable(self, context, data=None):
@@ -178,7 +183,7 @@ class Section19Rule7(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            hvac_b = context.baseline
+            hvac_b = context.BASELINE_0
             hvac_id_b = hvac_b["id"]
 
             hvac_system_serves_only_labs = data["hvac_system_serves_only_labs"]

@@ -23,6 +23,17 @@
                     "description": "Supplementary information to provide context to the model reviewer",
                     "type": "string"
                 },
+                "data_timestamp": {
+                    "description": "Date and time of data publication",
+                    "$ref": "ASHRAE229.schema.json#/definitions/Timestamp",
+                    "notes": "Date and time of publication of the data"
+                },
+                "data_version": {
+                    "description": "Integer version identifier for the data",
+                    "type": "integer",
+                    "minimum": 1,
+                    "notes": "Used by data publisher to track revisions of the data and shall be incremented for each data revision"
+                },
                 "ruleset_model_descriptions": {
                     "description": "References an instance of a ruleset model with a unique ruleset_model_type.",
                     "type": "array",
@@ -79,16 +90,15 @@
                 },
                 "type": {
                     "description": "Describes the current model instance for rulesets with multiple simulation models",
-                    "oneOf": [
+                    "anyOf": [
                         {
                             "$ref": "Enumerations2019ASHRAE901.schema.json#/definitions/RulesetModelOptions2019ASHRAE901"
                         },
-                        {},
                         {
-                            "$ref": "Enumerations2019T24.schema.json#/definitions/RulesetModelOptions2019T24Com"
+                            "$ref": "EnumerationsRESNET.schema.json#/definitions/RulesetModelOptionsRESNET"
                         },
                         {
-                            "$ref": "Enumerations2019T24.schema.json#/definitions/RulesetModelOptions2019T24Res"
+                            "$ref": "Enumerations2019T24.schema.json#/definitions/RulesetModelOptions2019T24Com"
                         }
                     ]
                 },
@@ -560,7 +570,7 @@
                 },
                 "status_type": {
                     "description": "Choice of new, existing, addition, alteration, etc. for each ruleset.",
-                    "oneOf": [
+                    "anyOf": [
                         {
                             "$ref": "Enumerations2019ASHRAE901.schema.json#/definitions/SpaceStatusOptions2019ASHRAE901"
                         },
@@ -2963,6 +2973,11 @@
                     "description": "True if the zone has demand control ventilation",
                     "type": "boolean",
                     "notes": "The zone is either served by an air handler that responds to demand control ventilation signals from that zone or is served by a DOAS that specifically provides air to that zone on demand."
+                },
+                "is_first_stage_heat_fan_powered_box": {
+                    "description": "True if the zone has first stage heat fan powered box",
+                    "type": "boolean",
+                    "notes": "This key is temporarily added here because the schema 0.0.35 hasn't had the key yet."
                 }
             },
             "required": [
@@ -3562,7 +3577,6 @@
                     "description": "Efficiency value based on the selected part_load_efficiency_metric",
                     "type": "number",
                     "minimum": 0.0,
-                    "maximum": 1.0,
                     "units": "W/W"
                 },
                 "part_load_efficiency_metric": {

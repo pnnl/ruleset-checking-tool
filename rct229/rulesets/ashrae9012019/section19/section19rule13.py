@@ -1,7 +1,8 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import BASELINE_0
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.ruleset_functions.are_all_hvac_sys_fan_objects_autosized import (
     are_all_hvac_sys_fan_objs_autosized,
 )
@@ -41,7 +42,7 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_13,
 ]
 
-LIGHTING_SPACE = schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
+LIGHTING_SPACE = SchemaEnums.schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
 LABORATORY_TEMP_DELTA = 17.0 * ureg("degF")
 GENERAL_TEMP_DELTA = 20.0 * ureg("degF")
 
@@ -51,9 +52,11 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section19Rule13, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, True),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=True
+            ),
             each_rule=Section19Rule13.HVACRule(),
-            index_rmr="baseline",
+            index_rmr=BASELINE_0,
             id="19-13",
             description="For baseline system types 1-8 and 11-13, system design supply airflow rates shall be based on a supply-air-to-room temperature set-point difference of 20°F or the minimum outdoor airflow rate, or the airflow rate required to comply with applicable codes or accreditation standards, whichever is greater. For systems with multiple zone thermostat setpoints, use the design set point that will result in the lowest supply air cooling set point or highest supply air heating set point.",
             ruleset_section_title="HVAC - General",
@@ -64,20 +67,23 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
 
         return any(
             [
-                baseline_system_type_compare(system_type, applicable_sys_type, False)
+                baseline_system_types_dict[system_type]
+                and baseline_system_type_compare(
+                    system_type, applicable_sys_type, False
+                )
                 for system_type in baseline_system_types_dict
                 for applicable_sys_type in APPLICABLE_SYS_TYPES
             ]
         )
 
     def create_data(self, context, data):
-        rmi_b = context.baseline
-        rmi_p = context.proposed
+        rmi_b = context.BASELINE_0
+        rmi_p = context.PROPOSED
 
         dict_of_zones_and_terminal_units_served_by_hvac_sys_b = (
             get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmi_b)
@@ -197,7 +203,9 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
             super(Section19Rule13.HVACRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, True),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=False
+                ),
                 required_fields={
                     "$": ["fan_system"],
                     "fan_system": ["minimum_outdoor_airflow"],
@@ -205,7 +213,7 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            hvac_b = context.baseline
+            hvac_b = context.BASELINE_0
             fan_sys_b = hvac_b["fan_system"]
             hvac_id_b = hvac_b["id"]
             zone_info = data["zone_info"][hvac_id_b]
@@ -233,7 +241,7 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
             }
 
         def manual_check_required(self, context, calc_vals=None, data=None):
-            hvac_b = context.baseline
+            hvac_b = context.BASELINE_0
             hvac_id_b = hvac_b["id"]
             zone_info = data["zone_info"][hvac_id_b]
             supply_fans_airflow_b = calc_vals["supply_fans_airflow_b"]
@@ -246,7 +254,7 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
             )
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
-            hvac_b = context.baseline
+            hvac_b = context.BASELINE_0
             hvac_id_b = hvac_b["id"]
             supply_airflow_p = calc_vals["supply_airflow_p"]
 

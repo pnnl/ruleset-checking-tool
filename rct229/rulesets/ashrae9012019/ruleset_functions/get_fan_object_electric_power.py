@@ -1,8 +1,8 @@
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import assert_, getattr_
 from rct229.utils.pint_utils import ZERO
 
-FAN_SPECIFICATION_METHOD = schema_enums["FanSpecificationMethodOptions"]
+FAN_SPECIFICATION_METHOD = SchemaEnums.schema_enums["FanSpecificationMethodOptions"]
 
 
 def get_fan_object_electric_power(fan):
@@ -23,7 +23,7 @@ def get_fan_object_electric_power(fan):
     fan_elec_power = ZERO.POWER
     fan_spec_method = getattr_(fan, "fan", "specification_method")
     if fan_spec_method == FAN_SPECIFICATION_METHOD.SIMPLE:
-        fan_elec_power = getattr_(fan, "design_electric_power", "design_electric_power")
+        fan_elec_power = getattr_(fan, "fan", "design_electric_power")
     elif fan_spec_method == FAN_SPECIFICATION_METHOD.DETAILED:
         design_pressure_rise = fan.get("design_pressure_rise", 0.0)
         design_air_flow = fan.get("design_airflow", ZERO.FLOW)
