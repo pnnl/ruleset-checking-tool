@@ -189,4 +189,3 @@ class Section6Rule5(RuleDefinitionListIndexedBase):
                             schedule_comparison_result["total_hours_compared"]
                             == schedule_comparison_result["total_hours_matched"]
                         )
-

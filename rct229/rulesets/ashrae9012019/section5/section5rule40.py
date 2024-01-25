@@ -124,18 +124,3 @@ class Section5Rule40(RuleDefinitionListIndexedBase):
                     absorptance_solar_exterior_b == absorptance_solar_exterior_p
                     and absorptance_thermal_exterior_b == absorptance_thermal_exterior_p
                 )
-
-            def is_tolerance_fail(self, context, calc_vals=None, data=None):
-                absorptance_solar_exterior_b = calc_vals["absorptance_solar_exterior_b"]
-                absorptance_solar_exterior_p = calc_vals["absorptance_solar_exterior_p"]
-                absorptance_thermal_exterior_b = calc_vals[
-                    "absorptance_thermal_exterior_b"
-                ]
-                absorptance_thermal_exterior_p = calc_vals[
-                    "absorptance_thermal_exterior_p"
-                ]
-                return std_equal(
-                    absorptance_solar_exterior_b, absorptance_solar_exterior_p
-                ) and std_equal(
-                    absorptance_thermal_exterior_b, absorptance_thermal_exterior_p
-                )

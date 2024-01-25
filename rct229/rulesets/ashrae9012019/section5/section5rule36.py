@@ -95,9 +95,3 @@ class Section5Rule36(RuleDefinitionListIndexedBase):
                     calc_vals["baseline_infiltration"]
                     == calc_vals["proposed_infiltration"]
                 )
-
-            def is_tolerance_fail(self, context, calc_vals=None, data=None):
-                return std_equal(
-                    calc_vals["baseline_infiltration"],
-                    calc_vals["proposed_infiltration"],
-                )
