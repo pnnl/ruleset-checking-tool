@@ -180,7 +180,9 @@ def evaluate_rules(
                 rmds_used[rule_model] = True
 
     for rule_model in rmds.get_ruleset_model_types():
-        if rmds_used[rule_model]:
+        if rmds_used[rule_model] and not (
+            rule.rmrs_used_optional and rule.rmrs_used_optional[rule_model]
+        ):
             rmd_validation = validate_rmr(rmds[rule_model], test)
             if rmd_validation["passed"] is not True:
                 invalid_rmds[rule_model] = rmd_validation["error"]
