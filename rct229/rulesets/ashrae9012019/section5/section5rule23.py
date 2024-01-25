@@ -111,9 +111,3 @@ class Section5Rule23(RuleDefinitionListIndexedBase):
                         calc_vals["subsurface_p_manual_shade"]
                         == calc_vals["subsurface_b_manual_shade"]
                     )
-
-                def is_tolerance_fail(self, context, calc_vals=None, data=None):
-                    return std_equal(
-                        calc_vals["subsurface_p_manual_shade"],
-                        calc_vals["subsurface_b_manual_shade"],
-                    )
