@@ -17,6 +17,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_ca
     get_surface_conditioning_category_dict,
 )
 from rct229.utils.pint_utils import CalcQ
+from rct229.utils.std_comparisons import std_equal
 
 
 class Section5Rule8(RuleDefinitionListIndexedBase):
@@ -136,4 +137,4 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
             def is_tolerance_fail(self, context, calc_vals=None, data=None):
                 above_grade_wall_u_factor = calc_vals["above_grade_wall_u_factor"]
                 target_u_factor = calc_vals["target_u_factor"]
-                return std_le(val=above_grade_wall_u_factor, std_val=target_u_factor)
+                return std_equal(above_grade_wall_u_factor, target_u_factor)
