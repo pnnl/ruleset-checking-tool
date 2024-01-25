@@ -3,7 +3,7 @@
         "Section": 19,
         "Rule": 15,
         "Test": "a",
-        "test_description": "Baseline system type 10, minimum ventilation does not exceed auto-sized airflow rates. Supply airflow rates are correctly based on the temperature difference between 105F and the design space-heating temperature set point.",
+        "test_description": "The project has one building segment with one zone. Baseline system type 10, minimum ventilation does not exceed auto-sized airflow rates. Supply airflow rates are correctly based on the temperature difference between 105F and the design space-heating temperature set point. Expected outcome: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-15",
@@ -171,7 +171,7 @@
         "Section": 19,
         "Rule": 15,
         "Test": "b",
-        "test_description": "Baseline system type 10, minimum ventilation does not exceed auto-sized airflow rates. Supply airflow rates are incorrectly based on a supply-air-to-room temperature set-point difference of 20F.",
+        "test_description": "The project has one building segment with one zone. Baseline system type 10, minimum ventilation does not exceed auto-sized airflow rates. Supply airflow rates are incorrectly based on a supply-air-to-room temperature set-point difference of 20F. Expected outcome: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-15",
@@ -339,7 +339,7 @@
         "Section": 19,
         "Rule": 15,
         "Test": "c",
-        "test_description": "Baseline system type 9, minimum ventilation exceeds the auto-sized airflow rates. Supply airflow rates are correctly based on the minimum ventilation airflow rates.",
+        "test_description": "The project has one building segment with one zone. Baseline system type 9, minimum ventilation exceeds the auto-sized airflow rates. Supply airflow rates are correctly based on the minimum ventilation airflow rates. Expected outcome: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-15",
@@ -497,7 +497,7 @@
         "Section": 19,
         "Rule": 15,
         "Test": "d",
-        "test_description": "Baseline system type 9, minimum ventilation exceeds the auto-sized airflow rates. Supply airflow rates are incorrectly based on the temperature difference between 105F and the design space-heating temperature set point.",
+        "test_description": "The project has one building segment with one zone. Baseline system type 9, minimum ventilation exceeds the auto-sized airflow rates. Supply airflow rates are incorrectly based on the temperature difference between 105F and the design space-heating temperature set point. Expected outcome: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-15",
@@ -655,7 +655,7 @@
         "Section": 19,
         "Rule": 15,
         "Test": "e",
-        "test_description": "Baseline system type 9 with more than one supply fan.",
+        "test_description": "The project has one building segment with one zone. Baseline system type 9 with more than one supply fan. Expected outcome: UNDETERMINED",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "19-15",

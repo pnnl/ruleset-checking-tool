@@ -3,16 +3,16 @@
         "Section": 22,
         "Rule": 29,
         "Test": "a",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is correctly modeled with a condenser pump value of 19 W/GPM.  Expected Result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is correctly modeled with a condenser pump value of 19 W/GPM.  Expected Result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-29",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "For chilled-water systems served by chiller(s) and does not serve baseline System-11, condenser-water pump power shall be 19 W/gpm.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -141,8 +141,8 @@
                             },
                             {
                                 "id": "Condensing Loop 1",
-                                "pump_power_per_flow_rate": 301.1889035667107,
-                                "type": "CONDENSER"
+                                "type": "CONDENSER",
+                                "pump_power_per_flow_rate": 301.1889035667107
                             }
                         ],
                         "type": "BASELINE_0"
@@ -155,16 +155,16 @@
         "Section": 22,
         "Rule": 29,
         "Test": "b",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is incorrectly modeled with a condenser pump value of 21 W/GPM.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is incorrectly modeled with a condenser pump value of 21 W/GPM.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-29",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "For chilled-water systems served by chiller(s) and does not serve baseline System-11, condenser-water pump power shall be 19 W/gpm.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -293,8 +293,8 @@
                             },
                             {
                                 "id": "Condensing Loop 1",
-                                "pump_power_per_flow_rate": 332.89299867899604,
-                                "type": "CONDENSER"
+                                "type": "CONDENSER",
+                                "pump_power_per_flow_rate": 332.89299867899604
                             }
                         ],
                         "type": "BASELINE_0"
@@ -307,16 +307,16 @@
         "Section": 22,
         "Rule": 29,
         "Test": "c",
-        "test_description": "Baseline building has one zone.  HVAC is system type 13 and is correctly modeled with a condenser pump value of 19 W/GPM.  Expected Result: PASS",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 13 and is correctly modeled with a condenser pump value of 19 W/GPM.  Expected Result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-29",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "For chilled-water systems served by chiller(s) and does not serve baseline System-11, condenser-water pump power shall be 19 W/gpm.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -425,16 +425,16 @@
         "Section": 22,
         "Rule": 29,
         "Test": "d",
-        "test_description": "Baseline building has one zone.  HVAC is system type 13 and is incorrectly modeled with a condenser pump value of 21 W/GPM.  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 13 and is incorrectly modeled with a condenser pump value of 21 W/GPM.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-29",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "For chilled-water systems served by chiller(s) and does not serve baseline System-11, condenser-water pump power shall be 19 W/gpm.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -543,16 +543,16 @@
         "Section": 22,
         "Rule": 29,
         "Test": "e",
-        "test_description": "Baseline building has one zone.  HVAC is system type 11.1b.  Expected result: NOT APPLICABLE",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 11.1b.  Expected result: NOT APPLICABLE",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-29",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "For chilled-water systems served by chiller(s) and does not serve baseline System-11, condenser-water pump power shall be 19 W/gpm.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {

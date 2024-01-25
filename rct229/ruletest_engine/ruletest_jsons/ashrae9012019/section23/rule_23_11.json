@@ -3,7 +3,7 @@
         "Section": 23,
         "Rule": 11,
         "Test": "a",
-        "test_description": "System 11 has supply air temperature reset set to LOAD_RESET_TO_SPACE_TEMPERATURE and has a reset load fraction of 50%. EXPECTED: Pass",
+        "test_description": "The project has one building segment with one zone served by System 11 with supply air temperature reset set to LOAD_RESET_TO_SPACE_TEMPERATURE and has a reset load fraction of 50%. The expected result is: pass",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "23-11",
@@ -118,7 +118,7 @@
         "Section": 23,
         "Rule": 11,
         "Test": "b",
-        "test_description": "System 11 has supply air temperature reset set to ZONE_RESET and has a reset temperature differential of 5 F. EXPECTED: Pass",
+        "test_description": "The project has one building segment with one zone served by System 11 with supply air temperature reset set to ZONE_RESET and has a reset temperature differential of 5 F. The expected result is: pass",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "23-11",
@@ -233,7 +233,7 @@
         "Section": 23,
         "Rule": 11,
         "Test": "c",
-        "test_description": "System 11 has supply air temperature reset set to ZONE_RESET and has a reset temperature differential of 10 F. EXPECTED: Fail",
+        "test_description": "The project has one building segment with one zone served by System 11 with supply air temperature reset set to ZONE_RESET and has a reset temperature differential of 10 F.  The expected result is: fail",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "23-11",

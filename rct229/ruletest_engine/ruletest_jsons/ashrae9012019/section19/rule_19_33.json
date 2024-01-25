@@ -3,7 +3,7 @@
         "Section": 19,
         "Rule": 33,
         "Test": "a",
-        "test_description": "Project contains a NONE cooling system type served by a baseline system 1. The cooling system type is correctly modeled.",
+        "test_description": "The project has one building segment with one zone. Project contains a NONE cooling system type served by a baseline system 1. The cooling system type is correctly modeled. Expected outcome: UNDETERMINED",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "19-33",
@@ -165,7 +165,7 @@
         "Section": 19,
         "Rule": 33,
         "Test": "b",
-        "test_description": "Project contains a NONE heating system type served by a baseline system 1. The heating system type is correctly modeled.",
+        "test_description": "The project has one building segment with one zone. Project contains a NONE heating system type served by a baseline system 1. The heating system type is correctly modeled. Expected outcome: UNDETERMINED",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "19-33",
@@ -327,7 +327,7 @@
         "Section": 19,
         "Rule": 33,
         "Test": "c",
-        "test_description": "Project contains the DIRECT_EXPANSION cooling system type served by a baseline system 1. The heating and cooling system types are left as they are.",
+        "test_description": "The project has one building segment with one zone. Project contains the DIRECT_EXPANSION cooling system type served by a baseline system 1. The heating and cooling system types are left as they are. Expected outcome: NOT_APPLICABLE",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "19-33",

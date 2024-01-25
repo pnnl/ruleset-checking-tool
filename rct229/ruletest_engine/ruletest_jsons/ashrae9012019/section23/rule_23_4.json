@@ -3,7 +3,7 @@
         "Section": 23,
         "Rule": 4,
         "Test": "a",
-        "test_description": "Baseline System 5 serves a laboratory space. Per G3.1.1c, these systems must adjust lab exhaust and makeup air. Expected result: UNDETERMINED",
+        "test_description": "The project has one building segment with two zones and one  laboratory space served by  baseline System 7. Per G3.1.1c, these systems must adjust lab exhaust and makeup air.  The expected result is: undetermined",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "23-4",
@@ -235,7 +235,7 @@
         "Section": 23,
         "Rule": 4,
         "Test": "b",
-        "test_description": "Baseline System 3 serves a laboratory space. Per G3.1.1c, this only applies to system 5 and 7. Expected result: NOT_APPLICABLE.",
+        "test_description": "The project has one building segment with one zone and one laboratory space served by baseline System 3. Per G3.1.1c, this only applies to system 5 and 7. The expected result is: not_applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "23-4",

@@ -3,7 +3,7 @@
         "Section": 22,
         "Rule": 1,
         "Test": "a",
-        "test_description": "Baseline building has two zones and HVAC system type 7.  It is correctly modeled with a CHW Loop design supply temperature.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones. HVAC system type 7.  It is correctly modeled with a chilled water Loop design supply temperature.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-1",
@@ -153,7 +153,7 @@
         "Section": 22,
         "Rule": 1,
         "Test": "b",
-        "test_description": "Baseline building has two zones and HVAC system type 7.  It is correctly modeled with a CHW Loop design supply temperature.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones. HVAC system type 7.  It is correctly modeled with a chilled water Loop design supply temperature.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-1",
@@ -303,7 +303,7 @@
         "Section": 22,
         "Rule": 1,
         "Test": "c",
-        "test_description": "Baseline building has two zones and HVAC system type 7b.  It is correctly modeled with a CHW Loop design supply temperature.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones. HVAC system type 7b.  It is correctly modeled with a chilled water Loop design supply temperature.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-1",
@@ -453,7 +453,7 @@
         "Section": 22,
         "Rule": 1,
         "Test": "d",
-        "test_description": "Baseline building has two zones and HVAC system type 7b.  It is correctly modeled with a CHW Loop design supply temperature.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones. HVAC system type 7b.  It is correctly modeled with a chilled water Loop design supply temperature.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-1",
@@ -603,7 +603,7 @@
         "Section": 22,
         "Rule": 1,
         "Test": "e",
-        "test_description": "Baseline building has one zone and HVAC system type 1 and no chilled water loop.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone. HVAC system type 1 and no chilled water loop.  Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-1",
@@ -693,7 +693,7 @@
         "Section": 22,
         "Rule": 2,
         "Test": "a",
-        "test_description": "Baseline building has two zones.  HVAC system is system type 7 and is correctly modeled with a CHW Loop design return temperature.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC system is system type 7 and is correctly modeled with a chilled water Loop design return temperature.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-2",
@@ -843,7 +843,7 @@
         "Section": 22,
         "Rule": 2,
         "Test": "b",
-        "test_description": "Baseline building has two zones.  HVAC system is system type 7 and is incorrectly modeled with a CHW Loop design return temperature.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC system is system type 7 and is incorrectly modeled with a chilled water Loop design return temperature.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-2",
@@ -993,7 +993,7 @@
         "Section": 22,
         "Rule": 2,
         "Test": "c",
-        "test_description": "Baseline building has two zones.  HVAC system is system type 8 and is correctly modeled with a CHW Loop design return temperature.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC system is system type 8 and is correctly modeled with a chilled water Loop design return temperature.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-2",
@@ -1150,7 +1150,7 @@
         "Section": 22,
         "Rule": 2,
         "Test": "d",
-        "test_description": "Baseline building has two zones.  HVAC system is system type 8 and is incorrectly modeled with a CHW Loop design return temperature.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC system is system type 8 and is incorrectly modeled with a chilled water Loop design return temperature.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-2",
@@ -1307,7 +1307,7 @@
         "Section": 22,
         "Rule": 2,
         "Test": "e",
-        "test_description": "Baseline building has one zone.  HVAC system is system type 2 and has no CHW Loop.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone.  HVAC system is system type 2 and has no chilled water Loop.  Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-2",
@@ -1383,7 +1383,7 @@
         "Section": 22,
         "Rule": 3,
         "Test": "a",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and CHW Loop is correctly modeled with a temperature reset setpoint.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and chilled water Loop is correctly modeled with a temperature reset setpoint.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-3",
@@ -1533,7 +1533,7 @@
         "Section": 22,
         "Rule": 3,
         "Test": "b",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and CHW Loop is incorrectly modeled with a constant temperature setpoint.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and chilled water Loop is incorrectly modeled with a constant temperature setpoint.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-3",
@@ -1683,7 +1683,7 @@
         "Section": 22,
         "Rule": 3,
         "Test": "c",
-        "test_description": "Baseline building has two zones.  HVAC is system type 8b and CHW Loop is correctly modeled with a temperature reset setpoint.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 8b and chilled water Loop is correctly modeled with a temperature reset setpoint.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-3",
@@ -1835,7 +1835,7 @@
         "Section": 22,
         "Rule": 3,
         "Test": "d",
-        "test_description": "Baseline building has two zones.  HVAC is system type 8b and CHW Loop is incorrectly modeled with a constant temperature setpoint.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 8b and chilled water Loop is incorrectly modeled with a constant temperature setpoint.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-3",
@@ -1987,7 +1987,7 @@
         "Section": 22,
         "Rule": 3,
         "Test": "e",
-        "test_description": "Baseline building has one zone.  HVAC is system type 11.2.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 11.2.  Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-3",
@@ -2120,7 +2120,7 @@
         "Section": 22,
         "Rule": 4,
         "Test": "a",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is correctly modeled with outdoor air reset for CHW loop supply temperature control.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is correctly modeled with outdoor air reset for chilled water loop supply temperature control.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-4",
@@ -2273,7 +2273,7 @@
         "Section": 22,
         "Rule": 4,
         "Test": "b",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is incorrectly modeled with incorrect value for outdoor_high_for_loop_supply_reset_temperature for CHW loop supply temperature control.  Expected Result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is incorrectly modeled with incorrect value for outdoor_high_for_loop_supply_reset_temperature for chilled water loop supply temperature control.  Expected Result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-4",
@@ -2426,7 +2426,7 @@
         "Section": 22,
         "Rule": 4,
         "Test": "c",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is incorrectly modeled with incorrect value for outdoor_low_for_loop_supply_reset_temperature for CHW loop supply temperature control.  Expected Result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is incorrectly modeled with incorrect value for outdoor_low_for_loop_supply_reset_temperature for chilled water loop supply temperature control.  Expected Result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-4",
@@ -2579,7 +2579,7 @@
         "Section": 22,
         "Rule": 4,
         "Test": "d",
-        "test_description": "Baseline building has one zone.  HVAC is system type 12 and is correctly modeled with outdoor air reset for CHW loop supply temperature control.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 12 and is correctly modeled with outdoor air reset for chilled water loop supply temperature control.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-4",
@@ -2715,7 +2715,7 @@
         "Section": 22,
         "Rule": 4,
         "Test": "e",
-        "test_description": "Baseline building has one zone.  HVAC is system type 12 and is incorrectly modeled with incorrect value for loop_supply_temperature_at_outdoor_high for CHW loop supply temperature control.  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 12 and is incorrectly modeled with incorrect value for loop_supply_temperature_at_outdoor_high for chilled water loop supply temperature control.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-4",
@@ -2851,7 +2851,7 @@
         "Section": 22,
         "Rule": 4,
         "Test": "f",
-        "test_description": "Baseline building has one zone.  HVAC is system type 12 and is incorrectly modeled with incorrect value for loop_supply_temperature_at_outdoor_low for CHW loop supply temperature control.  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 12 and is incorrectly modeled with incorrect value for loop_supply_temperature_at_outdoor_low for chilled water loop supply temperature control.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-4",
@@ -2987,7 +2987,7 @@
         "Section": 22,
         "Rule": 4,
         "Test": "g",
-        "test_description": "Baseline building has one zone.  HVAC is system type 11.1a and does not have a chiller.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 11.1a and does not have a chiller.  Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-4",
@@ -3089,7 +3089,7 @@
         "Section": 22,
         "Rule": 5,
         "Test": "a",
-        "test_description": "Baseline building has one zone.  HVAC is system type 11.1 air-side system and is correctly modeled with temperature_reset_type",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 11.1 air-side system and is correctly modeled with temperature_reset_type. Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-5",
@@ -3205,7 +3205,7 @@
         "Section": 22,
         "Rule": 5,
         "Test": "b",
-        "test_description": "Baseline building has one zone.  HVAC is system type 11.1 air-side system and is incorrectly modeled with temperature_reset_type",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 11.1 air-side system and is incorrectly modeled with temperature_reset_type. Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-5",
@@ -3321,7 +3321,7 @@
         "Section": 22,
         "Rule": 5,
         "Test": "c",
-        "test_description": "Baseline building has one zone.  HVAC is system type 11.1c air-side system and is correctly modeled with temperature_reset_type.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 11.1c air-side system and is correctly modeled with temperature_reset_type.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-5",
@@ -3454,7 +3454,7 @@
         "Section": 22,
         "Rule": 5,
         "Test": "d",
-        "test_description": "Baseline building has one zone.  HVAC is system type 11.1c air-side system and is incorrectly modeled with temperature_reset_type.  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 11.1c air-side system and is incorrectly modeled with temperature_reset_type.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-5",
@@ -3587,7 +3587,7 @@
         "Section": 22,
         "Rule": 6,
         "Test": "a",
-        "test_description": "Baseline building has one zone.  HVAC is system type 11.1 air-side system and is correctly modeled with loop_supply_temperature_at_low_load set to 54F.  Expected outcome: PASS",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 11.1 air-side system and is correctly modeled with loop_supply_temperature_at_low_load set to 54F.  Expected outcome: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-6",
@@ -3703,7 +3703,7 @@
         "Section": 22,
         "Rule": 6,
         "Test": "b",
-        "test_description": "Baseline building has one zone.  HVAC is system type 11.1 air-side system and is incorrectly modeled with loop_supply_temperature_at_low_load set to 64F.  Expected outcome: FAIL",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 11.1 air-side system and is incorrectly modeled with loop_supply_temperature_at_low_load set to 64F.  Expected outcome: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-6",
@@ -3819,7 +3819,7 @@
         "Section": 22,
         "Rule": 6,
         "Test": "c",
-        "test_description": "Baseline building has one zone.  HVAC is system type 11.1b air-side system and is correctly modeled with loop_supply_temperature_at_low_load set to 54F.  Expected outcome: PASS",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 11.1b air-side system and is correctly modeled with loop_supply_temperature_at_low_load set to 54F.  Expected outcome: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-6",
@@ -3952,7 +3952,7 @@
         "Section": 22,
         "Rule": 6,
         "Test": "d",
-        "test_description": "Baseline building has one zone.  HVAC is system type 11.1b air-side system and is incorrectly modeled with loop_supply_temperature_at_low_load set to 64F.  Expected outcome: FAIL",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 11.1b air-side system and is incorrectly modeled with loop_supply_temperature_at_low_load set to 64F.  Expected outcome: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-6",
@@ -4085,7 +4085,7 @@
         "Section": 22,
         "Rule": 6,
         "Test": "e",
-        "test_description": "Baseline building has two zones.  HVAC is system type 8.  Expected outcome: Not Applicable",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 8.  Expected outcome: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-6",
@@ -4242,7 +4242,7 @@
         "Section": 22,
         "Rule": 7,
         "Test": "a",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is correctly modeled with the primary/secondary loops.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is correctly modeled with the primary/secondary loops.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-7",
@@ -4388,7 +4388,7 @@
         "Section": 22,
         "Rule": 7,
         "Test": "b",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is incorrectly modeled with the primary/secondary loops.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is incorrectly modeled with the primary/secondary loops.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-7",
@@ -4523,7 +4523,7 @@
         "Section": 22,
         "Rule": 7,
         "Test": "c",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7b and is correctly modeled with the primary/secondary loops.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7b and is correctly modeled with the primary/secondary loops.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-7",
@@ -4669,7 +4669,7 @@
         "Section": 22,
         "Rule": 7,
         "Test": "d",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7b and is incorrectly modeled with the primary/secondary loops.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7b and is incorrectly modeled with the primary/secondary loops.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-7",
@@ -4803,7 +4803,7 @@
         "Section": 22,
         "Rule": 7,
         "Test": "e",
-        "test_description": "Baseline building has one zone.  HVAC is system type 9 and does not have a CHW system.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 9 and does not have a chilled water system.  Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-7",
@@ -4881,7 +4881,7 @@
         "Section": 22,
         "Rule": 8,
         "Test": "a",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 having more than 300 ton capacity and is correctly modeled with the secondary pump having a vfd.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 having more than 300 ton capacity and is correctly modeled with the secondary pump having a vfd.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-8",
@@ -5028,7 +5028,7 @@
         "Section": 22,
         "Rule": 8,
         "Test": "b",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 having more than 300 ton capacity and is incorrectly modeled with the secondary pump operating without vfd.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 having more than 300 ton capacity and is incorrectly modeled with the secondary pump operating without vfd.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-8",
@@ -5175,7 +5175,7 @@
         "Section": 22,
         "Rule": 8,
         "Test": "c",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 having less than 300 ton capacity.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 having less than 300 ton capacity.  Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-8",
@@ -5322,7 +5322,7 @@
         "Section": 22,
         "Rule": 8,
         "Test": "d",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 having more than 300 ton capacity and is correctly modeled with the secondary pump having a vfd.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 7 having more than 300 ton capacity and is correctly modeled with the secondary pump having a vfd.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-8",
@@ -5452,7 +5452,7 @@
         "Section": 22,
         "Rule": 8,
         "Test": "e",
-        "test_description": "Baseline building has two zones.  HVAC is system type 12 having more than 300 ton capacity and is incorrectly modeled with the secondary pump operating without vfd.  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 12 having more than 300 ton capacity and is incorrectly modeled with the secondary pump operating without vfd.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-8",
@@ -5582,7 +5582,7 @@
         "Section": 22,
         "Rule": 9,
         "Test": "a",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 with more than 300 tons cooling capacity.  It is correctly modeled with the secondary cooling loop minimum flow equal to 25% of design flow.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 with more than 300 tons cooling capacity.  It is correctly modeled with the secondary cooling loop minimum flow equal to 25% of design flow.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-9",
@@ -5733,7 +5733,7 @@
         "Section": 22,
         "Rule": 9,
         "Test": "b",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 with more than 300 tons cooling capacity.  It is incorrectly modeled with the secondary cooling loop minimum flow equal to 35% of design flow.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 with more than 300 tons cooling capacity.  It is incorrectly modeled with the secondary cooling loop minimum flow equal to 35% of design flow.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-9",
@@ -5884,7 +5884,7 @@
         "Section": 22,
         "Rule": 9,
         "Test": "c",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 with less than 300 tons cooling capacity.  Expected result: Undetermined",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 with less than 300 tons cooling capacity.  Expected result: Undetermined",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "22-9",
@@ -6035,7 +6035,7 @@
         "Section": 22,
         "Rule": 9,
         "Test": "d",
-        "test_description": "Baseline building has one zone.  HVAC is system type 13 with more than 300 tons cooling capacity.  It is correctly modeled with the secondary cooling loop minimum flow equal to 25% of design flow.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 13 with more than 300 tons cooling capacity.  It is correctly modeled with the secondary cooling loop minimum flow equal to 25% of design flow.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-9",
@@ -6152,7 +6152,7 @@
         "Section": 22,
         "Rule": 9,
         "Test": "e",
-        "test_description": "Baseline building has one zone.  HVAC is system type 13 with more than 300 tons cooling capacity.  It is incorrectly modeled with the secondary cooling loop minimum flow equal to 35% of design flow.  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 13 with more than 300 tons cooling capacity.  It is incorrectly modeled with the secondary cooling loop minimum flow equal to 35% of design flow.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-9",
@@ -6269,7 +6269,7 @@
         "Section": 22,
         "Rule": 10,
         "Test": "a",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is correctly modeled with the pump speed_control FIXED_SPEED for CHW loop cooling capacity less than 300 tons.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is correctly modeled with the pump speed_control FIXED_SPEED for chilled water loop cooling capacity less than 300 tons.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-10",
@@ -6416,7 +6416,7 @@
         "Section": 22,
         "Rule": 10,
         "Test": "b",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is incorrectly modeled with the pump speed_control VARIABLE_SPEED for CHW loop cooling capacity less than 300 tons.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is incorrectly modeled with the pump speed_control VARIABLE_SPEED for chilled water loop cooling capacity less than 300 tons.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-10",
@@ -6563,7 +6563,7 @@
         "Section": 22,
         "Rule": 10,
         "Test": "c",
-        "test_description": "Baseline building has one zone.  HVAC is system type 12 and is correctly modeled with the pump speed_control VARIABLE_SPEED for CHW loop cooling capacity greater than 300 tons.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 12 and is correctly modeled with the pump speed_control VARIABLE_SPEED for chilled water loop cooling capacity greater than 300 tons.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-10",
@@ -6693,7 +6693,7 @@
         "Section": 22,
         "Rule": 10,
         "Test": "d",
-        "test_description": "Baseline building has one zone.  HVAC is system type 12 and is incorrectly modeled with the pump speed_control FIXED_SPEED for CHW loop cooling capacity greater than 300 tons.  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 12 and is incorrectly modeled with the pump speed_control FIXED_SPEED for chilled water loop cooling capacity greater than 300 tons.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-10",
@@ -6823,7 +6823,7 @@
         "Section": 22,
         "Rule": 10,
         "Test": "e",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is incorrectly modeled without a secondary loop.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is incorrectly modeled without a secondary loop.  Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-10",
@@ -6969,7 +6969,7 @@
         "Section": 22,
         "Rule": 10,
         "Test": "f",
-        "test_description": "Baseline building is system type 7 and is incorrectly modeled with the pump speed_control and CHW loop cooling capacity greater than 300 tons",
+        "test_description": "The project has one building segment with two zones. HVAC is system type 7 and is incorrectly modeled with the pump speed_control and chilled water loop cooling capacity greater than 300 tons. Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-10",
@@ -7104,7 +7104,7 @@
         "Section": 22,
         "Rule": 11,
         "Test": "a",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is correctly modeled with the secondary chilled water pump power per flow rate of 13 W/GPM.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is correctly modeled with the secondary chilled water pump power per flow rate of 13 W/GPM.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-11",
@@ -7251,7 +7251,7 @@
         "Section": 22,
         "Rule": 11,
         "Test": "b",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is incorrectly modeled with the secondary chilled water pump power per flow rate of 15 W/GPM.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is incorrectly modeled with the secondary chilled water pump power per flow rate of 15 W/GPM.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-11",
@@ -7398,7 +7398,7 @@
         "Section": 22,
         "Rule": 11,
         "Test": "c",
-        "test_description": "Baseline building has one zone.  HVAC is system type 13 and is correctly modeled with the secondary chilled water pump power per flow rate of 13 W/GPM.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 13 and is correctly modeled with the secondary chilled water pump power per flow rate of 13 W/GPM.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-11",
@@ -7511,7 +7511,7 @@
         "Section": 22,
         "Rule": 11,
         "Test": "d",
-        "test_description": "Baseline building has one zone.  HVAC is system type 13 and is incorrectly modeled with the secondary chilled water pump power per flow rate of 15 W/GPM.  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 13 and is incorrectly modeled with the secondary chilled water pump power per flow rate of 15 W/GPM.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-11",
@@ -7624,7 +7624,7 @@
         "Section": 22,
         "Rule": 11,
         "Test": "e",
-        "test_description": "Baseline building one zone.  HVAC is system type 10 with no chilled water system.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 10 with no chilled water system.  Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-11",
@@ -7691,7 +7691,7 @@
         "Section": 22,
         "Rule": 12,
         "Test": "a",
-        "test_description": "Baseline building utilizes HVAC system type 7 and correctly has exactly 1 heat rejection  and 1 heat rejection loop.",
+        "test_description": "The project has one building segment with two zones. HVAC system type 7 and correctly has exactly 1 heat rejection  and 1 heat rejection loop. Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-12",
@@ -7848,7 +7848,7 @@
         "Section": 22,
         "Rule": 12,
         "Test": "b",
-        "test_description": "Baseline building utilizes HVAC system type 7 and incorrectly has 1 heat rejection and 2 heat rejection loops.",
+        "test_description": "The project has one building segment with two zones. HVAC system type 7 and incorrectly has 1 heat rejection and 2 heat rejection loops. Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-12",
@@ -8014,7 +8014,7 @@
         "Section": 22,
         "Rule": 12,
         "Test": "c",
-        "test_description": "Baseline building utilizes HVAC system type 7 and incorrectly has 2 heat rejections and 1 heat rejection loop.",
+        "test_description": "The project has one building segment with two zones. HVAC system type 7 and incorrectly has 2 heat rejections and 1 heat rejection loop. Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-12",
@@ -8175,7 +8175,7 @@
         "Section": 22,
         "Rule": 12,
         "Test": "d",
-        "test_description": "Baseline building utilizes HVAC system type 7 and incorrectly has 2 heat rejections and 2 heat rejection loops.",
+        "test_description": "The project has one building segment with two zones. HVAC system type 7 and incorrectly has 2 heat rejections and 2 heat rejection loops. Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-12",
@@ -8345,7 +8345,7 @@
         "Section": 22,
         "Rule": 12,
         "Test": "e",
-        "test_description": "Baseline building utilizes System 7 but does not have a heat rejection loop",
+        "test_description": "The project has one building segment with two zones. System 7 but does not have a heat rejection loop. Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-12",
@@ -8491,7 +8491,7 @@
         "Section": 22,
         "Rule": 13,
         "Test": "a",
-        "test_description": "Baseline's System 7 cooling tower utilizes an axial fan type",
+        "test_description": "The project has one building segment with two zones. System 7 cooling tower utilizes an axial fan type. Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-13",
@@ -8650,7 +8650,7 @@
         "Section": 22,
         "Rule": 13,
         "Test": "b",
-        "test_description": "Baseline's System 7 cooling tower does not utilize an axial fan type",
+        "test_description": "The project has one building segment with two zones. System 7 cooling tower does not utilize an axial fan type. Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-13",
@@ -8809,7 +8809,7 @@
         "Section": 22,
         "Rule": 13,
         "Test": "c",
-        "test_description": "Baseline's System 7 cooling tower is not connected to a valid condensing loop",
+        "test_description": "The project has one building segment with two zones. System 7 cooling tower is not connected to a valid condensing loop. Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-13",
@@ -8968,7 +8968,7 @@
         "Section": 22,
         "Rule": 14,
         "Test": "a",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is correctly modeled with the design temperature rise range of 10 F.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is correctly modeled with the design temperature rise range of 10 F.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-14",
@@ -9128,7 +9128,7 @@
         "Section": 22,
         "Rule": 14,
         "Test": "b",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is incorrectly modeled with the design temperature rise range of 15 F.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is incorrectly modeled with the design temperature rise range of 15 F.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-14",
@@ -9288,7 +9288,7 @@
         "Section": 22,
         "Rule": 14,
         "Test": "c",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7b and is correctly modeled with the design temperature rise range of 10 F.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7b and is correctly modeled with the design temperature rise range of 10 F.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-14",
@@ -9448,7 +9448,7 @@
         "Section": 22,
         "Rule": 14,
         "Test": "d",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7b and is incorrectly modeled with the design temperature rise range of 15 F.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7b and is incorrectly modeled with the design temperature rise range of 15 F.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-14",
@@ -9608,7 +9608,7 @@
         "Section": 22,
         "Rule": 14,
         "Test": "e",
-        "test_description": "Baseline building has one zone.  HVAC is system type 11a and does not have a chiller.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 11a and does not have a chiller.  Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-14",
@@ -9710,7 +9710,7 @@
         "Section": 22,
         "Rule": 15,
         "Test": "a",
-        "test_description": "Approach temperature on System 7's heat rejection component correctly follows 25.72- (0.24 * design wet bulb temperature) delta Fahrenheit for design wetbulb temperatures between 55 F and 90 F",
+        "test_description": "The project has one building segment with two zones. Approach temperature on System 7's heat rejection component correctly follows 25.72- (0.24 * design wet bulb temperature) delta Fahrenheit for design wetbulb temperatures between 55 F and 90 F. Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-15",
@@ -9869,7 +9869,7 @@
         "Section": 22,
         "Rule": 15,
         "Test": "b",
-        "test_description": "Approach temperature on System 7's heat rejection component did not correctly follow 25.72- (0.24 * design wet bulb temperature) delta Fahrenheit for design wetbulb temperatures between 55 F and 90 F",
+        "test_description": "The project has one building segment with two zones. Approach temperature on System 7's heat rejection component did not correctly follow 25.72- (0.24 * design wet bulb temperature) delta Fahrenheit for design wetbulb temperatures between 55 F and 90 F. Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-15",
@@ -10028,7 +10028,7 @@
         "Section": 22,
         "Rule": 15,
         "Test": "c",
-        "test_description": "Approach temperature on System 7's heat rejection component does not fall between 55 F and 90 F. Not applicable.",
+        "test_description": "The project has one building segment with two zones. Approach temperature on System 7's heat rejection component does not fall between 55 F and 90 F. Not applicable.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-15",
@@ -10187,7 +10187,7 @@
         "Section": 22,
         "Rule": 16,
         "Test": "a",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and the HeatRejection is correctly modeled with the wet-bulb and approach temperatures.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and the HeatRejection is correctly modeled with the wet-bulb and approach temperatures.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-16",
@@ -10350,7 +10350,7 @@
         "Section": 22,
         "Rule": 16,
         "Test": "b",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and the HeatRejection is modeled with the incorrect wet-bulb and approach temperatures.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and the HeatRejection is modeled with the incorrect wet-bulb and approach temperatures.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-16",
@@ -10513,7 +10513,7 @@
         "Section": 22,
         "Rule": 16,
         "Test": "c",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and the HeatRejection design_wetbulb_temperature < 55.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and the HeatRejection design_wetbulb_temperature < 55.  Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-16",
@@ -10676,7 +10676,7 @@
         "Section": 22,
         "Rule": 16,
         "Test": "d",
-        "test_description": "Baseline building has two zones.  HVAC is system type 11.2 and the HeatRejection is correctly modeled with the wet-bulb and approach temperatures.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 11.2 and the HeatRejection is correctly modeled with the wet-bulb and approach temperatures.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-16",
@@ -10822,7 +10822,7 @@
         "Section": 22,
         "Rule": 16,
         "Test": "e",
-        "test_description": "Baseline building has two zones.  HVAC is system type 11.2 and the HeatRejection is modeled with the incorrect wet-bulb and approach temperatures.  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 11.2 and the HeatRejection is modeled with the incorrect wet-bulb and approach temperatures.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-16",
@@ -10968,7 +10968,7 @@
         "Section": 22,
         "Rule": 16,
         "Test": "f",
-        "test_description": "Baseline building has two zones.  HVAC is system type 11.2 and the HeatRejection design_wetbulb_temperature > 95.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 11.2 and the HeatRejection design_wetbulb_temperature > 95.  Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-16",
@@ -11114,7 +11114,7 @@
         "Section": 22,
         "Rule": 17,
         "Test": "a",
-        "test_description": "The project includes a cooling tower.  We calculated the cooling tower efficiency to be 40 gpm/hp, which is greater than the required efficiency of 38.2 gpm / hp, resulting in a more stringent baseline. This results in an undetermined value.",
+        "test_description": "The project has one building segment with two zones. The project includes a cooling tower.  We calculated the cooling tower efficiency to be 40 gpm/hp, which is greater than the required efficiency of 38.2 gpm / hp, resulting in a more stringent baseline. Expected result: Undetermined",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "22-17",
@@ -11273,7 +11273,7 @@
         "Section": 22,
         "Rule": 17,
         "Test": "b",
-        "test_description": "The project includes a cooling tower.  We calculated the cooling tower efficiency to be 38.2 gpm/hp, which is exactly equal to the required efficiency of 38.2 gpm / hp. ",
+        "test_description": "The project has one building segment with two zones. The project includes a cooling tower.  We calculated the cooling tower efficiency to be 38.2 gpm/hp, which is exactly equal to the required efficiency of 38.2 gpm / hp. Expected result: Undetermined",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "22-17",
@@ -11432,7 +11432,7 @@
         "Section": 22,
         "Rule": 17,
         "Test": "c",
-        "test_description": "The project includes a cooling tower.  We calculated the cooling tower efficiency to be 20 gpm/hp, which is less than the required efficiency of 38.2 gpm / hp. This results in an undetermined value.",
+        "test_description": "The project has one building segment with two zones. The project includes a cooling tower.  We calculated the cooling tower efficiency to be 20 gpm/hp, which is less than the required efficiency of 38.2 gpm / hp. Expected result: Undetermined",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "22-17",
@@ -11591,7 +11591,7 @@
         "Section": 22,
         "Rule": 17,
         "Test": "d",
-        "test_description": "Building does not include a cooling tower and is therefore not applicable",
+        "test_description": "The project has one building segment with one zone. Building does not include a cooling tower and is therefore not applicable. Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-17",
@@ -11667,7 +11667,7 @@
         "Section": 22,
         "Rule": 18,
         "Test": "a",
-        "test_description": "Baseline's System 7 cooling tower correctly utilizes variable speed fan control. ",
+        "test_description": "The project has one building segment with two zones. System 7 cooling tower correctly utilizes variable speed fan control. Expected result: Pass",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-18",
@@ -11825,7 +11825,7 @@
         "Section": 22,
         "Rule": 18,
         "Test": "b",
-        "test_description": "Baseline's System 7 cooling tower incorrectly utilizes constant speed fan control. ",
+        "test_description": "The project has one building segment with two zones. System 7 cooling tower incorrectly utilizes constant speed fan control. Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-18",
@@ -11983,7 +11983,7 @@
         "Section": 22,
         "Rule": 18,
         "Test": "c",
-        "test_description": "Baseline building utilizes System 7 but does not have a heat rejection loop",
+        "test_description": "The project has one building segment with two zones. System 7 but does not have a heat rejection loop. Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-18",
@@ -12129,7 +12129,7 @@
         "Section": 22,
         "Rule": 19,
         "Test": "a",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and HeatRejection is correctly modeled with the temperature reset type CONSTANT. Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and HeatRejection is correctly modeled with the temperature reset type CONSTANT. Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-19",
@@ -12289,7 +12289,7 @@
         "Section": 22,
         "Rule": 19,
         "Test": "b",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and HeatRejection is incorrectly modeled with the temperature reset type OUTSIDE_AIR_RESET.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and HeatRejection is incorrectly modeled with the temperature reset type OUTSIDE_AIR_RESET.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-19",
@@ -12449,7 +12449,7 @@
         "Section": 22,
         "Rule": 19,
         "Test": "c",
-        "test_description": "Baseline building has two zones.  HVAC is system type 12b and HeatRejection is correctly modeled with the temperature reset type CONSTANT. Expected result: PASS",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 12b and HeatRejection is correctly modeled with the temperature reset type CONSTANT. Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-19",
@@ -12592,7 +12592,7 @@
         "Section": 22,
         "Rule": 19,
         "Test": "d",
-        "test_description": "Baseline building has two zones.  HVAC is system type 12b and HeatRejection is incorrectly modeled with the temperature reset type OUTSIDE_AIR_RESET.  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 12b and HeatRejection is incorrectly modeled with the temperature reset type OUTSIDE_AIR_RESET.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-19",
@@ -12735,7 +12735,7 @@
         "Section": 22,
         "Rule": 19,
         "Test": "e",
-        "test_description": "Baseline building has one zone.  HVAC is system type 11.2a.  Expected result: NOT APPLICABLE",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 11.2a.  Expected result: NOT APPLICABLE",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-19",
@@ -12868,7 +12868,7 @@
         "Section": 22,
         "Rule": 20,
         "Test": "a",
-        "test_description": "Baseline building has two zones and is in climate zone 4A.  HVAC is system type 7 and is correctly modeled with cooling tower leaving water setpoint temperature of 75F.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones. climate zone 4A.  HVAC is system type 7 and is correctly modeled with cooling tower leaving water setpoint temperature of 75F.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-20",
@@ -13028,7 +13028,7 @@
         "Section": 22,
         "Rule": 20,
         "Test": "b",
-        "test_description": "Baseline building has two zones and is in climate zone 4A.  HVAC is system type 7 and is incorrectly modeled with cooling tower leaving water setpoint temperature of 80F.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones. climate zone 4A.  HVAC is system type 7 and is incorrectly modeled with cooling tower leaving water setpoint temperature of 80F.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-20",
@@ -13188,7 +13188,7 @@
         "Section": 22,
         "Rule": 20,
         "Test": "c",
-        "test_description": "Baseline building has two zones and is in climate zone 6B.  HVAC is system type 8 and is correctly modeled with cooling tower leaving water setpoint temperature of 75F.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones. climate zone 6B.  HVAC is system type 8 and is correctly modeled with cooling tower leaving water setpoint temperature of 75F.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-20",
@@ -13355,7 +13355,7 @@
         "Section": 22,
         "Rule": 20,
         "Test": "d",
-        "test_description": "Baseline building has two zones and is in climate zone 6B.  HVAC is system type 8 and is incorrectly modeled with cooling tower leaving water setpoint temperature of 70F.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones. climate zone 6B.  HVAC is system type 8 and is incorrectly modeled with cooling tower leaving water setpoint temperature of 70F.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-20",
@@ -13522,7 +13522,7 @@
         "Section": 22,
         "Rule": 20,
         "Test": "e",
-        "test_description": "Baseline building has one zone and is in climate zone 6B.  HVAC is system type 12a and does not have a chiller plant..  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 12a and does not have a chiller plant..  Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-20",
@@ -13655,7 +13655,7 @@
         "Section": 22,
         "Rule": 21,
         "Test": "a",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 with < 600 ton chiller and is correctly modeled with a screw chiller.  Expected output: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 with < 600 ton chiller and is correctly modeled with a screw chiller.  Expected output: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-21",
@@ -13814,7 +13814,7 @@
         "Section": 22,
         "Rule": 21,
         "Test": "b",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 with < 600 ton chiller and is not correctly modeled with a positive displacement chiller.  Expected output: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 with < 600 ton chiller and is not correctly modeled with a positive displacement chiller.  Expected output: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-21",
@@ -13973,7 +13973,7 @@
         "Section": 22,
         "Rule": 21,
         "Test": "c",
-        "test_description": "Baseline building has two zones.  HVAC is system type 8b with > 600 ton chiller and is correctly modeled with a centrifugal chiller.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 8b with > 600 ton chiller and is correctly modeled with a centrifugal chiller.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-21",
@@ -14134,7 +14134,7 @@
         "Section": 22,
         "Rule": 21,
         "Test": "d",
-        "test_description": "Baseline building has two zones.  HVAC is system type 8b with > 600 ton chiller and is incorrectly modeled with a Screw chiller.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 8b with > 600 ton chiller and is incorrectly modeled with a Screw chiller.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-21",
@@ -14295,7 +14295,7 @@
         "Section": 22,
         "Rule": 21,
         "Test": "e",
-        "test_description": "Baseline building has one zone.  HVAC is system type 1 with no chilled water.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 1 with no chilled water.  Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-21",
@@ -14385,7 +14385,7 @@
         "Section": 22,
         "Rule": 22,
         "Test": "a",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is correctly modeled with the chiller rated capacity and full load efficiency in accordance with Table G3.5.3.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is correctly modeled with the chiller rated capacity and full load efficiency in accordance with Table G3.5.3.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-22",
@@ -14488,7 +14488,7 @@
                                 "cooling_loop": "Chiller Loop 1",
                                 "compressor_type": "POSITIVE_DISPLACEMENT",
                                 "rated_capacity": 457210.0,
-                                "full_load_efficiency": 0.22462325845891384
+                                "full_load_efficiency": 4.452
                             }
                         ],
                         "pumps": [
@@ -14534,7 +14534,7 @@
         "Section": 22,
         "Rule": 22,
         "Test": "b",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is incorrectly modeled with the chiller rated capacity and full load efficiency not in accordance with Table G3.5.3.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is incorrectly modeled with the chiller rated capacity and full load efficiency not in accordance with Table G3.5.3.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-22",
@@ -14637,7 +14637,7 @@
                                 "cooling_loop": "Chiller Loop 1",
                                 "compressor_type": "POSITIVE_DISPLACEMENT",
                                 "rated_capacity": 562720.0,
-                                "full_load_efficiency": 0.25305658231447253
+                                "full_load_efficiency": 3.952
                             }
                         ],
                         "pumps": [
@@ -14683,7 +14683,7 @@
         "Section": 22,
         "Rule": 22,
         "Test": "c",
-        "test_description": "Baseline building has one zone.  HVAC is system type 13 and is correctly modeled with the chiller rated capacity and full load efficiency in accordance with Table G3.5.3.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 13 and is correctly modeled with the chiller rated capacity and full load efficiency in accordance with Table G3.5.3.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-22",
@@ -14761,7 +14761,7 @@
                                 "cooling_loop": "Chiller Loop 1",
                                 "compressor_type": "CENTRIFUGAL",
                                 "rated_capacity": 703400.0,
-                                "full_load_efficiency": 0.18026727324424224
+                                "full_load_efficiency": 5.547
                             }
                         ],
                         "pumps": [
@@ -14798,7 +14798,7 @@
         "Section": 22,
         "Rule": 22,
         "Test": "d",
-        "test_description": "Baseline building has one zone.  HVAC is system type 13 and is incorrectly modeled with the chiller rated capacity and full load efficiency not in accordance with Table G3.5.3.  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 13 and is incorrectly modeled with the chiller rated capacity and full load efficiency not in accordance with Table G3.5.3.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-22",
@@ -14876,7 +14876,7 @@
                                 "cooling_loop": "Chiller Loop 1",
                                 "compressor_type": "CENTRIFUGAL",
                                 "rated_capacity": 703400.0,
-                                "full_load_efficiency": 0.16377594540801818
+                                "full_load_efficiency": 6.106
                             }
                         ],
                         "pumps": [
@@ -14913,7 +14913,7 @@
         "Section": 22,
         "Rule": 22,
         "Test": "e",
-        "test_description": "Baseline building has one zone.  HVAC is system type 2 and does not have a chilled water system.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 2 and does not have a chilled water system.  Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-22",
@@ -14989,7 +14989,7 @@
         "Section": 22,
         "Rule": 23,
         "Test": "a",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is correctly modeled with the is_chilled_water_pump_interlocked set to true  and one pump per chiller.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is correctly modeled with the is_chilled_water_pump_interlocked set to true  and one pump per chiller.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-23",
@@ -15136,7 +15136,7 @@
         "Section": 22,
         "Rule": 23,
         "Test": "b",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is incorrectly modeled with the is_chilled_water_pump_interlocked set to false for associated chiller pump.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is incorrectly modeled with the is_chilled_water_pump_interlocked set to false for associated chiller pump.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-23",
@@ -15283,7 +15283,7 @@
         "Section": 22,
         "Rule": 23,
         "Test": "c",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is incorrectly modeled with two chillers and only one pump.  The is_chilled_water_pump_interlocked set to true for both chillers.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is incorrectly modeled with two chillers and only one pump.  The is_chilled_water_pump_interlocked set to true for both chillers.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-23",
@@ -15435,7 +15435,7 @@
         "Section": 22,
         "Rule": 23,
         "Test": "d",
-        "test_description": "Baseline building has two zones.  HVAC is system type 8 and is correctly modeled with the is_chilled_water_pump_interlocked set to true  and one pump per chiller.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 8 and is correctly modeled with the is_chilled_water_pump_interlocked set to true  and one pump per chiller.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-23",
@@ -15589,7 +15589,7 @@
         "Section": 22,
         "Rule": 23,
         "Test": "e",
-        "test_description": "Baseline building has two zones.  HVAC is system type 8 and is incorrectly modeled with two primary chilled water pumps and one chiller.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 8 and is incorrectly modeled with two primary chilled water pumps and one chiller.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-23",
@@ -15748,7 +15748,7 @@
         "Section": 22,
         "Rule": 23,
         "Test": "f",
-        "test_description": "Baseline building has one zone.  HVAC is system type 2 and does not have CHW.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 2 and does not have chilled water.  Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-23",
@@ -15843,7 +15843,7 @@
         "Section": 22,
         "Rule": 24,
         "Test": "a",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is correctly modeled with primary pump set to constant volume.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is correctly modeled with primary pump set to constant volume.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-24",
@@ -15989,7 +15989,7 @@
         "Section": 22,
         "Rule": 24,
         "Test": "b",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is incorrectly modeled with primary pump set to variable volume.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is incorrectly modeled with primary pump set to variable volume.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-24",
@@ -16135,7 +16135,7 @@
         "Section": 22,
         "Rule": 24,
         "Test": "c",
-        "test_description": "Baseline building has two zones.  HVAC is system type 8b and is correctly modeled with primary pump set to constant volume.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 8b and is correctly modeled with primary pump set to constant volume.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-24",
@@ -16283,7 +16283,7 @@
         "Section": 22,
         "Rule": 24,
         "Test": "d",
-        "test_description": "Baseline building has two zones.  HVAC is system type 8b and is incorrectly modeled with primary pump set to variable volume.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 8b and is incorrectly modeled with primary pump set to variable volume.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-24",
@@ -16431,7 +16431,7 @@
         "Section": 22,
         "Rule": 24,
         "Test": "e",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is incorrectly modeled withlut a secondary loop.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is incorrectly modeled withlut a secondary loop.  Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-24",
@@ -16566,7 +16566,7 @@
         "Section": 22,
         "Rule": 25,
         "Test": "a",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is correctly modeled with the primary CHW pump having 9 w/gpm.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is correctly modeled with the primary chilled water pump having 9 w/gpm.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-25",
@@ -16713,7 +16713,7 @@
         "Section": 22,
         "Rule": 25,
         "Test": "b",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is incorrectly modeled with the primary CHW pump having 11 w/gpm.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is incorrectly modeled with the primary chilled water pump having 11 w/gpm.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-25",
@@ -16860,7 +16860,7 @@
         "Section": 22,
         "Rule": 25,
         "Test": "c",
-        "test_description": "Baseline building has one zone.  HVAC is system type 12 and is correctly modeled with the primary CHW pump having 9 w/gpm.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 12 and is correctly modeled with the primary chilled water pump having 9 w/gpm.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-25",
@@ -16990,7 +16990,7 @@
         "Section": 22,
         "Rule": 25,
         "Test": "d",
-        "test_description": "Baseline building has one zone.  HVAC is system type 12 and is incorrectly modeled with the primary CHW pump having 11 w/gpm.  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 12 and is incorrectly modeled with the primary chilled water pump having 11 w/gpm.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-25",
@@ -17120,7 +17120,7 @@
         "Section": 22,
         "Rule": 25,
         "Test": "e",
-        "test_description": "Baseline building has one zone.  HVAC is system type 11.2  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 11.2  Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-25",
@@ -17250,7 +17250,7 @@
         "Section": 22,
         "Rule": 26,
         "Test": "a",
-        "test_description": "Baseline building has one zone.  HVAC is system type 11.1 and is correctly modeled with a 12 W/gpm primary pump.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 11.1 and is correctly modeled with a 12 W/gpm primary pump.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-26",
@@ -17363,7 +17363,7 @@
         "Section": 22,
         "Rule": 26,
         "Test": "b",
-        "test_description": "Baseline building has one zone.  HVAC is system type 11.1 and is incorrectly modeled with a 15 W/gpm primary pump.  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 11.1 and is incorrectly modeled with a 15 W/gpm primary pump.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-26",
@@ -17476,7 +17476,7 @@
         "Section": 22,
         "Rule": 26,
         "Test": "c",
-        "test_description": "Baseline building has one zone.  HVAC is system type 11.2 and is correctly modeled with a 12 W/gpm primary pump.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 11.2 and is correctly modeled with a 12 W/gpm primary pump.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-26",
@@ -17606,7 +17606,7 @@
         "Section": 22,
         "Rule": 26,
         "Test": "d",
-        "test_description": "Baseline building has one zone.  HVAC is system type 11.2 and is incorrectly modeled with a 15 W/gpm primary pump.  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 11.2 and is incorrectly modeled with a 15 W/gpm primary pump.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-26",
@@ -17736,7 +17736,7 @@
         "Section": 22,
         "Rule": 26,
         "Test": "e",
-        "test_description": "Baseline building has one zone.  HVAC is system type 12.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 12.  Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-26",
@@ -17865,7 +17865,7 @@
         "Section": 22,
         "Rule": 27,
         "Test": "a",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is correctly modeled with the is_condenser_water_pump_interlocked key set to true.  Expected Result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is correctly modeled with the is_condenser_water_pump_interlocked key set to true.  Expected Result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-27",
@@ -18012,7 +18012,7 @@
         "Section": 22,
         "Rule": 27,
         "Test": "b",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is incorrectly modeled with the is_condenser_water_pump_interlocked key set to false.  Expected Result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is incorrectly modeled with the is_condenser_water_pump_interlocked key set to false.  Expected Result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-27",
@@ -18159,7 +18159,7 @@
         "Section": 22,
         "Rule": 27,
         "Test": "c",
-        "test_description": "Baseline building has one zone.  HVAC is system type 12b and is correctly modeled with the is_condenser_water_pump_interlocked key set to true.  Expected Result: PASS",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 12b and is correctly modeled with the is_condenser_water_pump_interlocked key set to true.  Expected Result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-27",
@@ -18289,7 +18289,7 @@
         "Section": 22,
         "Rule": 27,
         "Test": "d",
-        "test_description": "Baseline building has one zone.  HVAC is system type 12b and is incorrectly modeled with the is_condenser_water_pump_interlocked key set to false.  Expected Result: FAIL",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 12b and is incorrectly modeled with the is_condenser_water_pump_interlocked key set to false.  Expected Result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-27",
@@ -18419,7 +18419,7 @@
         "Section": 22,
         "Rule": 27,
         "Test": "e",
-        "test_description": "Baseline building has one zone.  HVAC is system type 4 and does not have a chilled water plant.  Expected Result: Not Applicable",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 4 and does not have a chilled water plant.  Expected Result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-27",
@@ -18500,7 +18500,7 @@
         "Section": 22,
         "Rule": 28,
         "Test": "a",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is correctly modeled with a condenser pump that is constant volume.  Expected Result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is correctly modeled with a condenser pump that is constant volume.  Expected Result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-28",
@@ -18643,17 +18643,10 @@
                             },
                             {
                                 "id": "Condensing Loop 1",
-                                "type": "CONDENSER",
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
                                     "flow_control": "FIXED_FLOW"
                                 }
-                            }
-                        ],
-                        "heat_rejections": [
-                            {
-                                "id": "Heat Rejection 1",
-                                "loop": "Condensing Loop 1"
                             }
                         ],
                         "type": "BASELINE_0"
@@ -18666,7 +18659,7 @@
         "Section": 22,
         "Rule": 28,
         "Test": "b",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is incorrectly modeled with a condenser pump that is variable volume.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is incorrectly modeled with a condenser pumpthat is variable volume.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-28",
@@ -18809,17 +18802,10 @@
                             },
                             {
                                 "id": "Condensing Loop 1",
-                                "type": "CONDENSER",
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
                                     "flow_control": "VARIABLE_FLOW"
                                 }
-                            }
-                        ],
-                        "heat_rejections": [
-                            {
-                                "id": "Heat Rejection 1",
-                                "loop": "Condensing Loop 1"
                             }
                         ],
                         "type": "BASELINE_0"
@@ -18832,7 +18818,7 @@
         "Section": 22,
         "Rule": 28,
         "Test": "c",
-        "test_description": "Baseline building has one zone.  HVAC is system type 4 and does not have a chilled water plant.  Expected Result: Not Applicable",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 4 and does not have a chilled water plant.  Expected Result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-28",
@@ -18913,7 +18899,7 @@
         "Section": 22,
         "Rule": 29,
         "Test": "a",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is correctly modeled with a condenser pump value of 19 W/GPM.  Expected Result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is correctly modeled with a condenser pump value of 19 W/GPM.  Expected Result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-29",
@@ -19051,6 +19037,7 @@
                             },
                             {
                                 "id": "Condensing Loop 1",
+                                "type": "CONDENSER",
                                 "pump_power_per_flow_rate": 301.1889035667107
                             }
                         ],
@@ -19064,7 +19051,7 @@
         "Section": 22,
         "Rule": 29,
         "Test": "b",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is incorrectly modeled with a condenser pump value of 21 W/GPM.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is incorrectly modeled with a condenser pump value of 21 W/GPM.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-29",
@@ -19202,6 +19189,7 @@
                             },
                             {
                                 "id": "Condensing Loop 1",
+                                "type": "CONDENSER",
                                 "pump_power_per_flow_rate": 332.89299867899604
                             }
                         ],
@@ -19215,7 +19203,7 @@
         "Section": 22,
         "Rule": 29,
         "Test": "c",
-        "test_description": "Baseline building has one zone.  HVAC is system type 13 and is correctly modeled with a condenser pump value of 19 W/GPM.  Expected Result: PASS",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 13 and is correctly modeled with a condenser pump value of 19 W/GPM.  Expected Result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-29",
@@ -19319,7 +19307,8 @@
                             },
                             {
                                 "id": "Condensing Loop 1",
-                                "pump_power_per_flow_rate": 301.1889035667107
+                                "pump_power_per_flow_rate": 301.1889035667107,
+                                "type": "CONDENSER"
                             }
                         ],
                         "type": "BASELINE_0"
@@ -19332,7 +19321,7 @@
         "Section": 22,
         "Rule": 29,
         "Test": "d",
-        "test_description": "Baseline building has one zone.  HVAC is system type 13 and is incorrectly modeled with a condenser pump value of 21 W/GPM.  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 13 and is incorrectly modeled with a condenser pump value of 21 W/GPM.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-29",
@@ -19436,7 +19425,8 @@
                             },
                             {
                                 "id": "Condensing Loop 1",
-                                "pump_power_per_flow_rate": 332.89299867899604
+                                "pump_power_per_flow_rate": 332.89299867899604,
+                                "type": "CONDENSER"
                             }
                         ],
                         "type": "BASELINE_0"
@@ -19449,7 +19439,7 @@
         "Section": 22,
         "Rule": 29,
         "Test": "e",
-        "test_description": "Baseline building has one zone.  HVAC is system type 11.1b.  Expected result: NOT APPLICABLE",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 11.1b.  Expected result: NOT APPLICABLE",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-29",
@@ -19578,7 +19568,7 @@
         "Section": 22,
         "Rule": 30,
         "Test": "a",
-        "test_description": "Baseline building has two zones.  HVAC is system type 11.1 and is correctly modeled with the condenser pump value of 22 W/gpm.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 11.1 and is correctly modeled with the condenser pump value of 22 W/gpm.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-30",
@@ -19695,7 +19685,7 @@
         "Section": 22,
         "Rule": 30,
         "Test": "b",
-        "test_description": "Baseline building has one zone.  HVAC is system type 11.1 and is incorrectly modeled with the condenser pump value of 25 W/gpm.  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 11.1 and is incorrectly modeled with the condenser pump value of 25 W/gpm.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-30",
@@ -19812,7 +19802,7 @@
         "Section": 22,
         "Rule": 30,
         "Test": "c",
-        "test_description": "Baseline building has two zones.  HVAC is system type 11.2 and is correctly modeled with the condenser pump value of 22 W/gpm.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 11.2 and is correctly modeled with the condenser pump value of 22 W/gpm.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-30",
@@ -19946,7 +19936,7 @@
         "Section": 22,
         "Rule": 30,
         "Test": "d",
-        "test_description": "Baseline building has one zone.  HVAC is system type 11.2 and is incorrectly modeled with the condenser pump value of 25 W/gpm.  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 11.2 and is incorrectly modeled with the condenser pump value of 25 W/gpm.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-30",
@@ -20080,7 +20070,7 @@
         "Section": 22,
         "Rule": 30,
         "Test": "e",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7.  Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-30",
@@ -20226,7 +20216,7 @@
         "Section": 22,
         "Rule": 31,
         "Test": "a",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is correctly modeled with 1 chiller when the cooling peak load is 300 tons or less.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is correctly modeled with 1 chiller when the cooling peak load is 300 tons or less.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-31",
@@ -20384,7 +20374,7 @@
         "Section": 22,
         "Rule": 31,
         "Test": "b",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is inccorrectly modeled with 2 chillers when the cooling peak load is 300 tons or less.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is inccorrectly modeled with 2 chillers when the cooling peak load is 300 tons or less.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-31",
@@ -20546,7 +20536,7 @@
         "Section": 22,
         "Rule": 31,
         "Test": "c",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7b and is correctly modeled with 2 chillers when the cooling peak load is between 300 -> 600 tons.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7b and is correctly modeled with 2 chillers when the cooling peak load is between 300 -> 600 tons.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-31",
@@ -20708,7 +20698,7 @@
         "Section": 22,
         "Rule": 31,
         "Test": "d",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is incorrectly modeled with 1 chiller when the cooling peak load is between 300 -> 600 tons.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is incorrectly modeled with 1 chiller when the cooling peak load is between 300 -> 600 tons.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-31",
@@ -20866,7 +20856,7 @@
         "Section": 22,
         "Rule": 31,
         "Test": "e",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is correctly modeled with 3 chillers when the cooling peak load is 2400 tons.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is correctly modeled with 3 chillers when the cooling peak load is 2400 tons.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-31",
@@ -21032,7 +21022,7 @@
         "Section": 22,
         "Rule": 31,
         "Test": "f",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is incorrectly modeled with 2 chillers when the cooling peak load is 2400 tons.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is incorrectly modeled with 2 chillers when the cooling peak load is 2400 tons.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-31",
@@ -21194,7 +21184,7 @@
         "Section": 22,
         "Rule": 31,
         "Test": "g",
-        "test_description": "Baseline building has one zone.  HVAC is system type 5.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 5.  Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-31",
@@ -21313,7 +21303,7 @@
         "Section": 22,
         "Rule": 32,
         "Test": "a",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is correctly modeled with the chiller part_load_efficiency correctly matching the value in Table G3.5.3 part_load_efficiency_metric set to INTEGRATED_PART_LOAD_VALUE.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is correctly modeled with the chiller part_load_efficiency correctly matching the value in Table G3.5.3 part_load_efficiency_metric set to INTEGRATED_PART_LOAD_VALUE.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-32",
@@ -21416,7 +21406,7 @@
                                 "cooling_loop": "Chiller Loop 1",
                                 "compressor_type": "POSITIVE_DISPLACEMENT",
                                 "rated_capacity": 703400.0,
-                                "part_load_efficiency": 0.1788456070514643,
+                                "part_load_efficiency": 5.591,
                                 "part_load_efficiency_metric": "INTEGRATED_PART_LOAD_VALUE"
                             }
                         ],
@@ -21463,7 +21453,7 @@
         "Section": 22,
         "Rule": 32,
         "Test": "b",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is incorrectly modeled with the part_load_efficiency_metric set to NONSTANDARD_PART_LOAD_VALUE.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is incorrectly modeled with the part_load_efficiency_metric set to NONSTANDARD_PART_LOAD_VALUE.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-32",
@@ -21566,7 +21556,7 @@
                                 "cooling_loop": "Chiller Loop 1",
                                 "compressor_type": "POSITIVE_DISPLACEMENT",
                                 "rated_capacity": 703400.0,
-                                "part_load_efficiency": 0.1788456070514643,
+                                "part_load_efficiency": 5.591,
                                 "part_load_efficiency_metric": "NONSTANDARD_PART_LOAD_VALUE"
                             }
                         ],
@@ -21613,7 +21603,7 @@
         "Section": 22,
         "Rule": 32,
         "Test": "c",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is modeled with the part_load_efficiency_metric correctly set to INTEGRATED_PART_LOAD_VALUE, but an incorrect part_load_efficiency.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is modeled with the part_load_efficiency_metric correctly set to INTEGRATED_PART_LOAD_VALUE, but an incorrect part_load_efficiency.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-32",
@@ -21716,7 +21706,7 @@
                                 "cooling_loop": "Chiller Loop 1",
                                 "compressor_type": "POSITIVE_DISPLACEMENT",
                                 "rated_capacity": 703400.0,
-                                "part_load_efficiency": 0.17059994313335228,
+                                "part_load_efficiency": 5.862,
                                 "part_load_efficiency_metric": "INTEGRATED_PART_LOAD_VALUE"
                             }
                         ],
@@ -21763,7 +21753,7 @@
         "Section": 22,
         "Rule": 32,
         "Test": "d",
-        "test_description": "Baseline building has two zones.  HVAC is system type 8 and is correctly modeled with the chiller part_load_efficiency correctly matching the value in Table G3.5.3 part_load_efficiency_metric set to INTEGRATED_PART_LOAD_VALUE.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 8 and is correctly modeled with the chiller part_load_efficiency correctly matching the value in Table G3.5.3 part_load_efficiency_metric set to INTEGRATED_PART_LOAD_VALUE.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-32",
@@ -21873,7 +21863,7 @@
                                 "cooling_loop": "Chiller Loop 1",
                                 "compressor_type": "POSITIVE_DISPLACEMENT",
                                 "rated_capacity": 1058617.0,
-                                "part_load_efficiency": 0.16263861245379582,
+                                "part_load_efficiency": 6.149,
                                 "part_load_efficiency_metric": "INTEGRATED_PART_LOAD_VALUE"
                             }
                         ],
@@ -21920,7 +21910,7 @@
         "Section": 22,
         "Rule": 32,
         "Test": "e",
-        "test_description": "Baseline building has two zones.  HVAC is system type 8 and is incorrectly modeled with the part_load_efficiency_metric set to NONSTANDARD_PART_LOAD_VALUE.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 8 and is incorrectly modeled with the part_load_efficiency_metric set to NONSTANDARD_PART_LOAD_VALUE.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-32",
@@ -22030,7 +22020,7 @@
                                 "cooling_loop": "Chiller Loop 1",
                                 "compressor_type": "POSITIVE_DISPLACEMENT",
                                 "rated_capacity": 1058617.0,
-                                "part_load_efficiency": 0.16263861245379582,
+                                "part_load_efficiency": 6.149,
                                 "part_load_efficiency_metric": "NONSTANDARD_PART_LOAD_VALUE"
                             }
                         ],
@@ -22077,7 +22067,7 @@
         "Section": 22,
         "Rule": 32,
         "Test": "f",
-        "test_description": "Baseline building has two zones.  HVAC is system type 8 and is modeled with the part_load_efficiency_metric correctly set to INTEGRATED_PART_LOAD_VALUE, but an incorrect part_load_efficiency.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 8 and is modeled with the part_load_efficiency_metric correctly set to INTEGRATED_PART_LOAD_VALUE, but an incorrect part_load_efficiency.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-32",
@@ -22187,7 +22177,7 @@
                                 "cooling_loop": "Chiller Loop 1",
                                 "compressor_type": "POSITIVE_DISPLACEMENT",
                                 "rated_capacity": 1058617.0,
-                                "part_load_efficiency": 0.17059994313335228,
+                                "part_load_efficiency": 5.862,
                                 "part_load_efficiency_metric": "INTEGRATED_PART_LOAD_VALUE"
                             }
                         ],
@@ -22234,7 +22224,7 @@
         "Section": 22,
         "Rule": 32,
         "Test": "g",
-        "test_description": "Baseline building has one zone.  HVAC is system type 6 and does not have a CHW plant.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 6 and does not have a chilled water plant.  Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-32",
@@ -22332,7 +22322,7 @@
         "Section": 22,
         "Rule": 33,
         "Test": "a",
-        "test_description": "Baseline building has two zones.  HVAC is system type 8 and is correctly modeled with the correct number of one primary and one secondary CHW loop.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 8 and is correctly modeled with the correct number of one primary and one secondary chilled water loop.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-33",
@@ -22485,7 +22475,7 @@
         "Section": 22,
         "Rule": 33,
         "Test": "b",
-        "test_description": "Baseline building has two zones.  HVAC is system type 8 and is incorrectly modeled with two secondary CHW loops.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 8 and is incorrectly modeled with two secondary chilled water loops.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-33",
@@ -22642,7 +22632,7 @@
         "Section": 22,
         "Rule": 33,
         "Test": "c",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is correctly modeled with one primary and one secondary CHW loop.",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is correctly modeled with one primary and one secondary chilled water loop. Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-33",
@@ -22788,7 +22778,7 @@
         "Section": 22,
         "Rule": 33,
         "Test": "d",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is incorrectly modeled without a secondary CHW loop.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is incorrectly modeled without a secondary chilled water loop.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-33",
@@ -22923,7 +22913,7 @@
         "Section": 22,
         "Rule": 33,
         "Test": "e",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is incorrectly modeled with two primary CHW loops.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is incorrectly modeled with two primary chilled water loops.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-33",
@@ -23075,7 +23065,7 @@
         "Section": 22,
         "Rule": 33,
         "Test": "f",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7a and does not have chillers.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7a and does not have chillers.  Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-33",
@@ -23211,7 +23201,7 @@
         "Section": 22,
         "Rule": 34,
         "Test": "a",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is correctly modeled with chilled water plant sized using coincident loads.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is correctly modeled with chilled water plant sized using coincident loads.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-34",
@@ -23361,7 +23351,7 @@
         "Section": 22,
         "Rule": 34,
         "Test": "b",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is modeled with chilled water plant incorrectly sized not using coincident loads.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is modeled with chilled water plant incorrectly sized not using coincident loads.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-34",
@@ -23511,7 +23501,7 @@
         "Section": 22,
         "Rule": 34,
         "Test": "c",
-        "test_description": "Baseline building has two zones.  HVAC is system type 8b and is correctly modeled with chilled water plant sized using coincident loads.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 8b and is correctly modeled with chilled water plant sized using coincident loads.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-34",
@@ -23663,7 +23653,7 @@
         "Section": 22,
         "Rule": 34,
         "Test": "d",
-        "test_description": "Baseline building has two zones.  HVAC is system type 8b and is modeled with chilled water plant incorrectly sized not using coincident loads.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 8b and is modeled with chilled water plant incorrectly sized not using coincident loads.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-34",
@@ -23815,7 +23805,7 @@
         "Section": 22,
         "Rule": 34,
         "Test": "e",
-        "test_description": "Baseline building has one zone.  HVAC is system type 9 and does not have a CHW plant.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 9 and does not have a chilled water plant.  Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-34",
@@ -23893,7 +23883,7 @@
         "Section": 22,
         "Rule": 35,
         "Test": "a",
-        "test_description": "Baseline building does not have purchase chilled water. This rule does not apply.",
+        "test_description": "The project has one building segment with two zones. This rule does not apply. Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-35",
@@ -24039,7 +24029,7 @@
         "Section": 22,
         "Rule": 35,
         "Test": "b",
-        "test_description": "Baseline building is modeled with purchased chilled water and correctly does not have chilled water reset. Result is still undetermined",
+        "test_description": "The project has one building segment with two zones. Baseline building is modeled with purchased chilled water and correctly does not have chilled water reset. Expected result: Undetermined",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "22-35",
@@ -24175,7 +24165,7 @@
         "Section": 22,
         "Rule": 35,
         "Test": "c",
-        "test_description": "Baseline building is modeled with purchased chilled water and incorrectly has chilled water reset. Result is still undetermined",
+        "test_description": "The project has one building segment with two zones. Baseline building is modeled with purchased chilled water and incorrectly has chilled water reset. Expected result: Undetermined",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "22-35",
@@ -24315,7 +24305,7 @@
         "Section": 22,
         "Rule": 36,
         "Test": "a",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is correctly modeled with constant  primary/ variable secondary flow_control keys.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is correctly modeled with constant  primary/ variable secondary flow_control keys.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-36",
@@ -24469,7 +24459,7 @@
         "Section": 22,
         "Rule": 36,
         "Test": "b",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is incorrectly modeled with variable flow primary loop.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is incorrectly modeled with variable flow primary loop.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-36",
@@ -24623,7 +24613,7 @@
         "Section": 22,
         "Rule": 36,
         "Test": "c",
-        "test_description": "Baseline building has one zone.  HVAC is system type 13 and is correctly modeled with constant  primary/ variable secondary flow_control keys.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 13 and is correctly modeled with constant  primary/ variable secondary flow_control keys.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-36",
@@ -24743,7 +24733,7 @@
         "Section": 22,
         "Rule": 36,
         "Test": "d",
-        "test_description": "Baseline building has one zone.  HVAC is system type 13 and is incorrectly modeled with constant flow secondary loop.  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 13 and is incorrectly modeled with constant flow secondary loop.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-36",
@@ -24863,7 +24853,7 @@
         "Section": 22,
         "Rule": 36,
         "Test": "e",
-        "test_description": "Baseline building has one zone.  HVAC is system type 10 and does not have a CHW plant.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 10 and does not have a chilled water plant.  Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-36",
@@ -24930,7 +24920,7 @@
         "Section": 22,
         "Rule": 37,
         "Test": "a",
-        "test_description": "Baseline building does not have purchase chilled water. This rule does not apply.",
+        "test_description": "The project has one building segment with two zones. Baseline building does not have purchase chilled water. Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-37",
@@ -25076,7 +25066,7 @@
         "Section": 22,
         "Rule": 37,
         "Test": "b",
-        "test_description": "Baseline building is modeled with purchased chilled water and correctly has a variable speed distribution pump. Result is still undetermined",
+        "test_description": "The project has one building segment with two zones. Baseline building is modeled with purchased chilled water and correctly has a variable speed distribution pump. Expected result: Undetermined",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "22-37",
@@ -25212,7 +25202,7 @@
         "Section": 22,
         "Rule": 37,
         "Test": "c",
-        "test_description": "Baseline building is modeled with purchased chilled water and incorrectly has a constant speed distribution pump. Result is still undetermined",
+        "test_description": "The project has one building segment with two zones. Expected result: Undetermined",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "22-37",
@@ -25348,7 +25338,7 @@
         "Section": 22,
         "Rule": 38,
         "Test": "a",
-        "test_description": "Baseline building does not have purchase chilled water. This rule does not apply.",
+        "test_description": "The project has one building segment with two zones. Baseline building does not have purchase chilled water. Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-38",
@@ -25494,7 +25484,7 @@
         "Section": 22,
         "Rule": 38,
         "Test": "b",
-        "test_description": "Baseline building is modeled with purchased chilled water and correctly has a 25% minimum flow setpoint. Result is undetermined",
+        "test_description": "The project has one building segment with two zones. Baseline building is modeled with purchased chilled water and correctly has a 25% minimum flow setpoint. Expected result: Undetermined",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "22-38",
@@ -25634,7 +25624,7 @@
         "Section": 22,
         "Rule": 38,
         "Test": "c",
-        "test_description": "Baseline building is modeled with purchased chilled water and incorrectly has a 40% minimum flow setpoint. Result is undetermined",
+        "test_description": "The project has one building segment with two zones. Baseline building is modeled with purchased chilled water and incorrectly has a 40% minimum flow setpoint. Expected result: Undetermined",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "22-38",
@@ -25774,7 +25764,7 @@
         "Section": 22,
         "Rule": 39,
         "Test": "a",
-        "test_description": "Baseline building does not have purchase chilled water. This rule does not apply.",
+        "test_description": "The project has one building segment with two zones. Baseline building does not have purchase chilled water. Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-39",
@@ -25920,7 +25910,7 @@
         "Section": 22,
         "Rule": 39,
         "Test": "b",
-        "test_description": "Baseline building is modeled with purchased chilled water and correctly has a has a pump power of 16 W/gpm. Result is undetermined",
+        "test_description": "The project has one building segment with two zones. Baseline building is modeled with purchased chilled water and correctly has a has a pump power of 16 W/gpm. Expected result: Undetermined",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "22-39",
@@ -26057,7 +26047,7 @@
         "Section": 22,
         "Rule": 39,
         "Test": "c",
-        "test_description": "Baseline building is modeled with purchased chilled water and incorrectly has a has a pump power of 20 W/gpm. Result is undetermined",
+        "test_description": "The project has one building segment with two zones. Baseline building is modeled with purchased chilled water and incorrectly has a has a pump power of 20 W/gpm. Expected result: Undetermined",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "22-39",
@@ -26194,7 +26184,7 @@
         "Section": 22,
         "Rule": 40,
         "Test": "a",
-        "test_description": "Building has two zones.  Purchased chilled water is modeled in both the proposed and baseline systems for building utilizing system 7c.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  Purchased chilled water is modeled in both the proposed and baseline systems for building utilizing system 7c.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-40",
@@ -26443,7 +26433,7 @@
         "Section": 22,
         "Rule": 40,
         "Test": "b",
-        "test_description": "Building has two zones.  Purchased chilled water is modeled in the proposed model, but baseline uses a CHW plant (system 7).  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  Purchased chilled water is modeled in the proposed model, but baseline uses a chilled water plant (system 7).  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-40",
@@ -26723,7 +26713,7 @@
         "Section": 22,
         "Rule": 40,
         "Test": "c",
-        "test_description": "Building has one zone.  Purchased chilled water is modeled in the proposed model, but baseline uses DX cooling (system 1).  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone.  Purchased chilled water is modeled in the proposed model, but baseline uses DX cooling (system 1).  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-40",
@@ -26896,7 +26886,7 @@
         "Section": 22,
         "Rule": 40,
         "Test": "d",
-        "test_description": "Building has one zone.  Purchased chilled water is not modeled in the proposed model.  Both proposed and beaseline are modeled with system type 2.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone.  Purchased chilled water is not modeled in the proposed model.  Both proposed and beaseline are modeled with system type 2.  Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-40",
@@ -27029,7 +27019,7 @@
         "Section": 22,
         "Rule": 41,
         "Test": "a",
-        "test_description": "Purchased CHW systems modeled with only one external fluid loop in the baseline design. Returns undetermined  ",
+        "test_description": "The project has one building segment with two zones. Purchased chilled water systems modeled with only one external fluid loop in the baseline design. Expected result: Undetermined",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "22-41",
@@ -27165,7 +27155,7 @@
         "Section": 22,
         "Rule": 41,
         "Test": "b",
-        "test_description": "Purchased CHW systems modeled with two external fluid loops in the baseline design. Returns undetermined  ",
+        "test_description": "The project has one building segment with two zones. Purchased chilled water systems modeled with two external fluid loops in the baseline design. Expected result: Undetermined",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "22-41",
@@ -27306,7 +27296,7 @@
         "Section": 22,
         "Rule": 41,
         "Test": "c",
-        "test_description": "Baseline building does not utilize purchased chilled water and does not apply to rule 22-41",
+        "test_description": "The project has one building segment with two zones. Baseline building does not utilize purchased chilled water and does not apply to rule 22-41. Expected result: Undetermined",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-41",

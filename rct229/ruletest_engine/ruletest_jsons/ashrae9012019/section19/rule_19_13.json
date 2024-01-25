@@ -3,7 +3,7 @@
         "Section": 19,
         "Rule": 13,
         "Test": "a",
-        "test_description": "Baseline system type 7, supply-air-to-room temperature set-point difference of 20F, required ventilation or makeup air does not exceed. Airflow rate is correctly sized from temperature difference.",
+        "test_description": "The project has one building segment with two zones. Baseline system type 7, supply-air-to-room temperature set-point difference of 20F, required ventilation or makeup air does not exceed. Airflow rate is correctly sized from temperature difference. Expected outcome: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-13",
@@ -311,7 +311,7 @@
         "Section": 19,
         "Rule": 13,
         "Test": "b",
-        "test_description": "Baseline system type 11, serving lab space, supply-air-to-room temperature set-point difference of 17F, required ventilation or makeup air does not exceed. Airflow rate is correctly sized from temperature difference.",
+        "test_description": "The project has one building segment with one zone. Baseline system type 11, serving lab space, supply-air-to-room temperature set-point difference of 17F, required ventilation or makeup air does not exceed. Airflow rate is correctly sized from temperature difference. Expected outcome: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-13",
@@ -539,7 +539,7 @@
         "Section": 19,
         "Rule": 13,
         "Test": "c",
-        "test_description": "Baseline system type 7, supply-air-to-room temperature set-point difference of 20F, required ventilation exceeds sizing based on temperature difference. Airflow rate incorrectly based on temperature difference instead of required ventilation.",
+        "test_description": "The project has one building segment with two zones. Baseline system type 7, supply-air-to-room temperature set-point difference of 20F, required ventilation exceeds sizing based on temperature difference. Airflow rate incorrectly based on temperature difference instead of required ventilation. Expected outcome: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-13",
@@ -847,7 +847,7 @@
         "Section": 19,
         "Rule": 13,
         "Test": "d",
-        "test_description": "Baseline system type 11, serving lab space, supply-air-to-room temperature set-point difference of 20F, required ventilation or makeup air does not exceed sizing. Airflow rate is sized from the incorrect temperature difference.",
+        "test_description": "The project has one building segment with one zone. Baseline system type 11, serving lab space, supply-air-to-room temperature set-point difference of 20F, required ventilation or makeup air does not exceed sizing. Airflow rate is sized from the incorrect temperature difference. Expected outcome: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-13",
@@ -1075,7 +1075,7 @@
         "Section": 19,
         "Rule": 13,
         "Test": "e",
-        "test_description": "Baseline system type 7, supply-air-to-room temperature set-point difference of 15F. The sum of zone terminal primary airflow from zones served by the system is identical to the corresponding sum of terminal primary flow in the proposed model.",
+        "test_description": "The project has one building segment with two zones. Baseline system type 7, supply-air-to-room temperature set-point difference of 15F. The sum of zone terminal primary airflow from zones served by the system is identical to the corresponding sum of terminal primary flow in the proposed model. Expected outcome: UNDETERMINED",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "19-13",

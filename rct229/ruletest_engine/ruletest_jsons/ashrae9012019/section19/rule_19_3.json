@@ -3,7 +3,7 @@
         "Section": 19,
         "Rule": 3,
         "Test": "a",
-        "test_description": "Building correctly has peak conditions on design days set to 99.6% for heating and 1% dry-bulb and wetbulb for cooling. Expected result is undetermined",
+        "test_description": "The project has one building segment with one zone. Building correctly has peak conditions on design days set to 99.6% for heating and 1% dry-bulb and wetbulb for cooling. Expected result is undetermined",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "19-3",
@@ -88,7 +88,7 @@
         "Section": 19,
         "Rule": 3,
         "Test": "b",
-        "test_description": "Building incorrectly has peak conditions on design days set to 99.0% for heating and 0.4% dry-bulb and wetbulb for cooling. Expected result is undetermined",
+        "test_description": "The project has one building segment with one zone. Building incorrectly has peak conditions on design days set to 99.0% for heating and 0.4% dry-bulb and wetbulb for cooling. Expected result is undetermined",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "19-3",

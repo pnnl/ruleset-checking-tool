@@ -3,7 +3,7 @@
         "Section": 6,
         "Rule": 3,
         "Test": "a",
-        "test_description": "Project has one building segment with one zone with two spaces. The lighting power density in the proposed RMR is the same as the lighting power density in the user RMR for all spaces in the building. Expected result: PASS",
+        "test_description": "Project has one building segment with one zone with two spaces. The lighting power density in the proposed ruleset project description is the same as the lighting power density in the user ruleset project description for all spaces in the building. Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "6-3",
@@ -137,7 +137,7 @@
         "Section": 6,
         "Rule": 3,
         "Test": "b",
-        "test_description": "Project has one building segment with one zone with two spaces. The lighting power density in the proposed RMR is not the same as the lighting power density in the user RMR for all spaces in the building. Expected result: FAIL",
+        "test_description": "Project has one building segment with one zone with two spaces. The lighting power density in the proposed ruleset project description is not the same as the lighting power density in the user ruleset project description for all spaces in the building. Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "6-3",
@@ -271,7 +271,7 @@
         "Section": 6,
         "Rule": 3,
         "Test": "c",
-        "test_description": "Project has one building segment with one zone with two spaces. The lighting power density in the proposed RMR is not the same as the lighting power density in the user RMR for all spaces in the building. P RMR LPD matches Standard 90.1-2019 Table 9.5.1. Expected result: undetermined",
+        "test_description": "Project has one building segment with one zone with two spaces. The lighting power density in the proposed ruleset project description is not the same as the lighting power density in the user ruleset project description for all spaces in the building. P ruleset project description LPD matches Standard 90.1-2019 Table 9.5.1. Expected result: undetermined",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "6-3",

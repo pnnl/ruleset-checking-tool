@@ -3,7 +3,7 @@
         "Section": 19,
         "Rule": 35,
         "Test": "a",
-        "test_description": "Project is in climate zone 5A and contains system 7 with 2 zones. All spaces served by the system are defined as lab. 5,000 cfm of aggregated minimum OA flow for the baseline system, and 4,000 cfm in the proposed.",
+        "test_description": "The project has one building segment with two zones. Project is in climate zone 5A and contains system 7 with 2 zones. All spaces served by the system are defined as lab. 5,000 cfm of aggregated minimum outdoor air flow for the baseline system, and 4,000 cfm in the proposed. Expected outcome: UNDETERMINED",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "19-35",
@@ -17856,7 +17856,7 @@
         "Section": 19,
         "Rule": 35,
         "Test": "b",
-        "test_description": "Project is in climate zone 4A and contains system 7 with 2 zones. The only defined space type for spaces served by the system is lab, but not all space types are defined. 5,000 cfm of aggregated minimum OA flow for the baseline system, and 4,000 cfm in the proposed.",
+        "test_description": "The project has one building segment with two zones. Project is in climate zone 4A and contains system 7 with 2 zones. The only defined space type for spaces served by the system is lab, but not all space types are defined. 5,000 cfm of aggregated minimum outdoor air flow for the baseline system, and 4,000 cfm in the proposed. Expected outcome: UNDETERMINED",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "19-35",
@@ -35704,7 +35704,7 @@
         "Section": 19,
         "Rule": 35,
         "Test": "c",
-        "test_description": "Project is in climate zone 5A and contains system 5 with 2 zones. None of the spaces served by the system have space types defined. 5,000 cfm of aggregated minimum OA flow for the baseline system, and 4,000 cfm in the proposed.",
+        "test_description": "The project has one building segment with two zones. Project is in climate zone 5A and contains system 5 with 2 zones. None of the spaces served by the system have space types defined. 5,000 cfm of aggregated minimum outdoor air flow for the baseline system, and 4,000 cfm in the proposed. Expected outcome: UNDETERMINED",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "19-35",
@@ -53496,7 +53496,7 @@
         "Section": 19,
         "Rule": 35,
         "Test": "d",
-        "test_description": "Project is in climate zone 4A and contains system 5 with 2 zones. There are spaces served by the system with non-lab space types defined. 5,000 cfm of aggregated minimum OA flow for the baseline system, and 4,000 cfm in the proposed.",
+        "test_description": "The project has one building segment with two zones. Project is in climate zone 4A and contains system 5 with 2 zones. There are spaces served by the system with non-lab space types defined. 5,000 cfm of aggregated minimum outdoor air flow for the baseline system, and 4,000 cfm in the proposed. Expected outcome: NOT_APPLICABLE",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "19-35",

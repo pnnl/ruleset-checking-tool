@@ -3,7 +3,7 @@
         "Section": 21,
         "Rule": 18,
         "Test": "a",
-        "test_description": "The project consists of one building segment with two zones. System 7 is correctly modeled with a natural gas boiler.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones. System 7 is correctly modeled with a natural gas boiler.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-18",
@@ -149,7 +149,7 @@
         "Section": 21,
         "Rule": 18,
         "Test": "b",
-        "test_description": "The project consists of one building segment with two zones. System 7 is incorrectly modeld an electric boiler.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones. System 7 is incorrectly modeld an electric boiler.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-18",
@@ -295,7 +295,7 @@
         "Section": 21,
         "Rule": 18,
         "Test": "c",
-        "test_description": "The project consists of one building segment with two zones. A purchased hot water system does not have an applicable fuel type.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with two zones. A purchased hot water system does not have an applicable fuel type.  Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-18",
@@ -386,7 +386,7 @@
         "Section": 21,
         "Rule": 18,
         "Test": "d",
-        "test_description": "The project consists of one building segment with two zones. System 7 is modeld a propane boiler.  Expected result: Undetermined",
+        "test_description": "The project has one building segment with two zones. System 7 is modeld a propane boiler.  Expected result: Undetermined",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "21-18",
@@ -532,7 +532,7 @@
         "Section": 21,
         "Rule": 18,
         "Test": "e",
-        "test_description": "The project consists of one building segment with two zones. System 1 is correctly modeled with a natural gas boiler.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone. System 1 is correctly modeled with a natural gas boiler.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-18",
@@ -622,7 +622,7 @@
         "Section": 21,
         "Rule": 18,
         "Test": "f",
-        "test_description": "The project consists of one building segment with two zones. System 1 is incorrectly modeld an electric boiler.  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone. System 1 is incorrectly modeld an electric boiler.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-18",
@@ -712,7 +712,7 @@
         "Section": 21,
         "Rule": 18,
         "Test": "g",
-        "test_description": "The project consists of one building segment with two zones. System 1c Expected Result: Not Applicable",
+        "test_description": "The project has one building segment with one zone. System 1c Expected Result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-18",

@@ -3,7 +3,7 @@
         "Section": 18,
         "Rule": 3,
         "Test": "a",
-        "test_description": "The project has one building segment with one floor and four zones with HVAC BAT = OTHER NON RESIDENTIAL.  Building area is 160,000 sf.  Thermal Zones 1 and 2 are type Laboratory with total 16,000 cfm of zone exhaust.  Expected result: undetermined",
+        "test_description": "The project has one building segment with one floor and four zones with HVAC building area type = OTHER NON RESIDENTIAL.  Building area is 160,000 sf.  Thermal Zones 1 and 2 are type Laboratory with total 16,000 cfm of zone exhaust.  Expected result: undetermined",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "18-3",
@@ -425,7 +425,7 @@
         "Section": 18,
         "Rule": 3,
         "Test": "b",
-        "test_description": "The project has one building segment with one floor and four zones with HVAC BAT = OTHER NON RESIDENTIAL.  Building area is 160,000 sf.  Thermal Zones 1 and 2 are type Laboratory with total 8,000 cfm of zone exhaust.  Expected result: not applicable",
+        "test_description": "The project has one building segment with one floor and four zones with HVAC building area type = OTHER NON RESIDENTIAL.  Building area is 160,000 sf.  Thermal Zones 1 and 2 are type Laboratory with total 8,000 cfm of zone exhaust.  Expected result: not applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "18-3",
@@ -847,7 +847,7 @@
         "Section": 18,
         "Rule": 3,
         "Test": "c",
-        "test_description": "The project has one building segment with one floor and four zones with HVAC BAT = OTHER NON RESIDENTIAL.  Building area is 160,000 sf.  Thermal Zones 1 and 2 are NOT type Laboratory with total 16,000 cfm of zone exhaust.  Expected result: not applicable",
+        "test_description": "The project has one building segment with one floor and four zones with HVAC building area type = OTHER NON RESIDENTIAL.  Building area is 160,000 sf.  Thermal Zones 1 and 2 are NOT type Laboratory with total 16,000 cfm of zone exhaust.  Expected result: not applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "18-3",

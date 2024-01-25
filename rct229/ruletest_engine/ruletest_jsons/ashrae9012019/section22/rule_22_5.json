@@ -3,7 +3,7 @@
         "Section": 22,
         "Rule": 5,
         "Test": "a",
-        "test_description": "Baseline building has one zone.  HVAC is system type 11.1 air-side system and is correctly modeled with temperature_reset_type",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 11.1 air-side system and is correctly modeled with temperature_reset_type. Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-5",
@@ -119,7 +119,7 @@
         "Section": 22,
         "Rule": 5,
         "Test": "b",
-        "test_description": "Baseline building has one zone.  HVAC is system type 11.1 air-side system and is incorrectly modeled with temperature_reset_type",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 11.1 air-side system and is incorrectly modeled with temperature_reset_type. Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-5",
@@ -235,7 +235,7 @@
         "Section": 22,
         "Rule": 5,
         "Test": "c",
-        "test_description": "Baseline building has one zone.  HVAC is system type 11.1c air-side system and is correctly modeled with temperature_reset_type.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 11.1c air-side system and is correctly modeled with temperature_reset_type.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-5",
@@ -368,7 +368,7 @@
         "Section": 22,
         "Rule": 5,
         "Test": "d",
-        "test_description": "Baseline building has one zone.  HVAC is system type 11.1c air-side system and is incorrectly modeled with temperature_reset_type.  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 11.1c air-side system and is incorrectly modeled with temperature_reset_type.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-5",

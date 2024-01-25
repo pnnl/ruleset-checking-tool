@@ -3,7 +3,7 @@
         "Section": 19,
         "Rule": 1,
         "Test": "a",
-        "test_description": "System 3 correctly utilizes autosized furnace with 25% oversizing and autosized DX coil with 15% oversizing",
+        "test_description": "The project has one building segment with one zone. System 3 correctly utilizes autosized furnace with 25% oversizing and autosized DX coil with 15% oversizing. Expected outcome: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-1",
@@ -88,7 +88,7 @@
         "Section": 19,
         "Rule": 1,
         "Test": "b",
-        "test_description": "Airside HVAC has no cooling coil. It correctly utilizes an autosized furnace with 25% oversizing. Cooling side oversizing is not applicable",
+        "test_description": "The project has one building segment with one zone. Airside HVAC has no cooling coil. It correctly utilizes an autosized furnace with 25% oversizing. Cooling side oversizing is not applicable. Expected outcome: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-1",
@@ -167,7 +167,7 @@
         "Section": 19,
         "Rule": 1,
         "Test": "c",
-        "test_description": "Airside HVAC has no heating coil. It correctly utilizes an autosized DX coil with 15% oversizing. Heating side oversizing is not applicable",
+        "test_description": "The project has one building segment with one zone. Airside HVAC has no heating coil. It correctly utilizes an autosized DX coil with 15% oversizing. Heating side oversizing is not applicable. Expected outcome: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-1",
@@ -246,7 +246,7 @@
         "Section": 19,
         "Rule": 1,
         "Test": "d",
-        "test_description": "System 3 incorrectly utilizes autosized furnace with no oversizing and autosized DX coil with no oversizing",
+        "test_description": "The project has one building segment with one zone. System 3 incorrectly utilizes autosized furnace with no oversizing and autosized DX coil with no oversizing. Expected outcome: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-1",
@@ -331,7 +331,7 @@
         "Section": 19,
         "Rule": 1,
         "Test": "e",
-        "test_description": "Airside HVAC has no cooling coil. This RMD falls into NOT APPLICABLE case since it has OTHER heating system type.",
+        "test_description": "The project has one building segment with one zone. Airside HVAC has no cooling coil. This test falls into NOT APPLICABLE case since it has OTHER heating system type. Expected outcome: NA",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "19-1",

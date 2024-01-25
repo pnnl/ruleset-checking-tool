@@ -3,7 +3,7 @@
         "Section": 19,
         "Rule": 18,
         "Test": "a",
-        "test_description": "In baseline system 3, the system fan electrical power for supply, return, exhaust, and relief equals the bhp/fan motor efficiency.  BHP = 4.7 HP (per Table G3.1.29), motor eff = 0.875 (per Table G3.9.1), CFM = 5,000. There is no MERV13 or ERV on this air loop.",
+        "test_description": "The project has one building segment with two zones. In baseline system 3, the system fan electrical power for supply, return, exhaust, and relief equals the bhp/fan motor efficiency.  Baseline electric fan power = 4.7 HP (per Table G3.1.29), motor eff = 0.875 (per Table G3.9.1), CFM = 5,000. There is no MERV13 or ERV on this air loop. Expected outcome: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-18",
@@ -155,7 +155,7 @@
         "Section": 19,
         "Rule": 18,
         "Test": "b",
-        "test_description": "In baseline system 7, the system fan electrical power for supply, return, exhaust, and relief is less than the minimum value of bhp/fan motor efficiency. ",
+        "test_description": "The project has one building segment with one zone. In baseline system 7, the system fan electrical power for supply, return, exhaust, and relief is less than the minimum value of bhp/fan motor efficiency.  Expected outcome: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-18",
@@ -242,7 +242,7 @@
         "Section": 19,
         "Rule": 18,
         "Test": "c",
-        "test_description": "In baseline system 3, the system fan electrical power for supply, return, exhaust, and relief is less than the minimum value of bhp/fan motor efficiency. ",
+        "test_description": "The project has one building segment with one zone. In baseline system 3, the system fan electrical power for supply, return, exhaust, and relief is less than the minimum value of bhp/fan motor efficiency.  Expected outcome: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-18",
@@ -329,7 +329,7 @@
         "Section": 19,
         "Rule": 18,
         "Test": "d",
-        "test_description": "A baseline system 7 has two return fans and therefore this rule requires manual check compliance with G3.1.2.9",
+        "test_description": "The project has one building segment with two zones. A baseline system 7 has two return fans and therefore this rule requires manual check compliance with G3.1.2.9 Expected outcome: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-18",
@@ -481,7 +481,7 @@
         "Section": 19,
         "Rule": 18,
         "Test": "e",
-        "test_description": "Baseline System 1 is is not applicable for Section 19 rule 18.",
+        "test_description": "The project has one building segment with one zone. Baseline System 1 is is not applicable for Section 19 rule 18. Expected outcome: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-18",
@@ -568,7 +568,7 @@
         "Section": 19,
         "Rule": 18,
         "Test": "f",
-        "test_description": "A baseline system 7 has two return fans and therefore this rule requires manual check compliance with G3.1.2.9",
+        "test_description": "The project has one building segment with two zones. A baseline system 7 has two return fans and therefore this rule requires manual check compliance with G3.1.2.9 Expected outcome: UNDETERMINED",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "19-18",
@@ -723,7 +723,7 @@
         "Section": 19,
         "Rule": 18,
         "Test": "g",
-        "test_description": "Baseline System 1 is is not applicable for Section 19 rule 18.",
+        "test_description": "The project has one building segment with one zone. Baseline System 1 is is not applicable for Section 19 rule 18. Expected outcome: NOT_APPLICABLE",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "19-18",

@@ -3,7 +3,7 @@
         "Section": 19,
         "Rule": 31,
         "Test": "a",
-        "test_description": "Project contains a computer room served by a packaged terminal heat pump system. HVAC fans correctly operate continuously during unoccupied hours. ",
+        "test_description": "The project has one building segment with one zone. Project contains a computer room served by a packaged terminal heat pump system. HVAC fans correctly operate continuously during unoccupied hours.  Expected outcome: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-31",
@@ -88,7 +88,7 @@
         "Section": 19,
         "Rule": 31,
         "Test": "b",
-        "test_description": "Project contains a computer room served by a packaged terminal heat pump system. HVAC fans correctly operate continuously during unoccupied hours. ",
+        "test_description": "The project has one building segment with one zone. Project contains a computer room served by a packaged terminal heat pump system. HVAC fans correctly operate continuously during unoccupied hours.  Expected outcome: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-31",

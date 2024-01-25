@@ -3,7 +3,7 @@
         "Section": 22,
         "Rule": 15,
         "Test": "a",
-        "test_description": "Approach temperature on System 7's heat rejection component correctly follows 25.72- (0.24 * design wet bulb temperature) delta Fahrenheit for design wetbulb temperatures between 55 F and 90 F",
+        "test_description": "The project has one building segment with two zones. Approach temperature on System 7's heat rejection component correctly follows 25.72- (0.24 * design wet bulb temperature) delta Fahrenheit for design wetbulb temperatures between 55 F and 90 F. Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-15",
@@ -162,7 +162,7 @@
         "Section": 22,
         "Rule": 15,
         "Test": "b",
-        "test_description": "Approach temperature on System 7's heat rejection component did not correctly follow 25.72- (0.24 * design wet bulb temperature) delta Fahrenheit for design wetbulb temperatures between 55 F and 90 F",
+        "test_description": "The project has one building segment with two zones. Approach temperature on System 7's heat rejection component did not correctly follow 25.72- (0.24 * design wet bulb temperature) delta Fahrenheit for design wetbulb temperatures between 55 F and 90 F. Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-15",
@@ -321,7 +321,7 @@
         "Section": 22,
         "Rule": 15,
         "Test": "c",
-        "test_description": "Approach temperature on System 7's heat rejection component does not fall between 55 F and 90 F. Not applicable.",
+        "test_description": "The project has one building segment with two zones. Approach temperature on System 7's heat rejection component does not fall between 55 F and 90 F. Not applicable.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-15",

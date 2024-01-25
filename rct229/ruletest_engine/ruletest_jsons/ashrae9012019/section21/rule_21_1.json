@@ -3,7 +3,7 @@
         "Section": 21,
         "Rule": 1,
         "Test": "a",
-        "test_description": "A baseline system 7 with purchased hot water in both the proposed and baseline model. This requires a manual check. EXPECTED: Undetermined",
+        "test_description": "The project has one building segment with two zones. A baseline system 7 with purchased hot water in both the proposed and baseline model. This requires a manual check. EXPECTED: Undetermined",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "21-1",
@@ -276,7 +276,7 @@
         "Section": 21,
         "Rule": 1,
         "Test": "b",
-        "test_description": "A baseline system 7 with a conventional boiler and not purchased hot water in both the proposed and baseline model. This does not apply. EXPECTED: not_applicable",
+        "test_description": "The project has one building segment with two zones. A baseline system 7 with a conventional boiler and not purchased hot water in both the proposed and baseline model. This does not apply. EXPECTED: not_applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-1",

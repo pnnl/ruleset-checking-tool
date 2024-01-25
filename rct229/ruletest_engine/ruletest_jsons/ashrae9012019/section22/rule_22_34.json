@@ -3,7 +3,7 @@
         "Section": 22,
         "Rule": 34,
         "Test": "a",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is correctly modeled with chilled water plant sized using coincident loads.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is correctly modeled with chilled water plant sized using coincident loads.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-34",
@@ -153,7 +153,7 @@
         "Section": 22,
         "Rule": 34,
         "Test": "b",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is modeled with chilled water plant incorrectly sized not using coincident loads.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is modeled with chilled water plant incorrectly sized not using coincident loads.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-34",
@@ -303,7 +303,7 @@
         "Section": 22,
         "Rule": 34,
         "Test": "c",
-        "test_description": "Baseline building has two zones.  HVAC is system type 8b and is correctly modeled with chilled water plant sized using coincident loads.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 8b and is correctly modeled with chilled water plant sized using coincident loads.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-34",
@@ -455,7 +455,7 @@
         "Section": 22,
         "Rule": 34,
         "Test": "d",
-        "test_description": "Baseline building has two zones.  HVAC is system type 8b and is modeled with chilled water plant incorrectly sized not using coincident loads.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 8b and is modeled with chilled water plant incorrectly sized not using coincident loads.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-34",
@@ -607,7 +607,7 @@
         "Section": 22,
         "Rule": 34,
         "Test": "e",
-        "test_description": "Baseline building has one zone.  HVAC is system type 9 and does not have a CHW plant.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 9 and does not have a chilled water plant.  Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-34",

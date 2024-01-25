@@ -3,7 +3,7 @@
         "Section": 21,
         "Rule": 5,
         "Test": "a",
-        "test_description": "The project consists of one building segment with two zones and two spaces.  Building is 12,000 ft2, has baseline system type 7 and is correctly modeled with a HW Loop with a single boiler. Expected result: PASS",
+        "test_description": "The project has one building segment with two zones and two spaces.  Building is 12,000 ft2, has baseline system type 7 and is correctly modeled with a hot water Loop with a single boiler. Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-5",
@@ -167,7 +167,7 @@
         "Section": 21,
         "Rule": 5,
         "Test": "b",
-        "test_description": "The project consists of one building segment with two zones and two spaces.  Building is 12,000 ft2, has baseline system type 7 and is incorrectly modeled with a HW Loop with two boilers. Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones and two spaces.  Building is 12,000 ft2, has baseline system type 7 and is incorrectly modeled with a hot water Loop with two boilers. Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-5",
@@ -336,7 +336,7 @@
         "Section": 21,
         "Rule": 5,
         "Test": "c",
-        "test_description": "The project consists of one building segment with one zone and one space.  Building is  24,000 ft2, has baseline system type 12 and is correctly modeled with a HW Loop with two equally sized boiler(s). Expected result: PASS",
+        "test_description": "The project has one building segment with one zone and one space.  Building is  24,000 ft2, has baseline system type 12 and is correctly modeled with a hot water Loop with two equally sized boiler(s). Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-5",
@@ -482,7 +482,7 @@
         "Section": 21,
         "Rule": 5,
         "Test": "d",
-        "test_description": "The project consists of one building segment with one zone and one space.  Building is  24,000 ft2, has baseline system type 12 and is incorrectly modeled with a HW Loop with two unequally sized boiler(s). Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone and one space.  Building is  24,000 ft2, has baseline system type 12 and is incorrectly modeled with a hot water Loop with two unequally sized boiler(s). Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-5",
@@ -628,7 +628,7 @@
         "Section": 21,
         "Rule": 5,
         "Test": "e",
-        "test_description": "The project consists of one building segment with one zone and one space.  Building is 24,000 ft2, has baseline system type 12 and is incorrectly modeled with a HW Loop with one boiler. Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone and one space.  Building is 24,000 ft2, has baseline system type 12 and is incorrectly modeled with a hot water Loop with one boiler. Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-5",
@@ -769,7 +769,7 @@
         "Section": 21,
         "Rule": 5,
         "Test": "f",
-        "test_description": "The project consists of one building segment with one zone and one space.  Building is 24,000 ft2, has baseline system type 4.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone and one space.  Building is 24,000 ft2, has baseline system type 4.  Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-5",

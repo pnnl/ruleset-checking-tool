@@ -3,7 +3,7 @@
         "Section": 22,
         "Rule": 13,
         "Test": "a",
-        "test_description": "Baseline's System 7 cooling tower utilizes an axial fan type",
+        "test_description": "The project has one building segment with two zones. System 7 cooling tower utilizes an axial fan type. Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-13",
@@ -162,7 +162,7 @@
         "Section": 22,
         "Rule": 13,
         "Test": "b",
-        "test_description": "Baseline's System 7 cooling tower does not utilize an axial fan type",
+        "test_description": "The project has one building segment with two zones. System 7 cooling tower does not utilize an axial fan type. Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-13",
@@ -321,7 +321,7 @@
         "Section": 22,
         "Rule": 13,
         "Test": "c",
-        "test_description": "Baseline's System 7 cooling tower is not connected to a valid condensing loop",
+        "test_description": "The project has one building segment with two zones. System 7 cooling tower is not connected to a valid condensing loop. Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-13",

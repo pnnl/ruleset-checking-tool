@@ -3,7 +3,7 @@
         "Section": 21,
         "Rule": 11,
         "Test": "a",
-        "test_description": "The project consists of one building segment with two zones. Baseline RMD has system 7 with child loop value correctly set to null.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 7 with child loop value correctly set to null.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-11",
@@ -149,7 +149,7 @@
         "Section": 21,
         "Rule": 11,
         "Test": "b",
-        "test_description": "The project consists of one building segment with two zones. Baseline RMD has system 7 with child loop incorrectly referencing to  FluidLoop 2. Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 7 with child loop incorrectly referencing to  FluidLoop 2. Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-11",
@@ -301,7 +301,7 @@
         "Section": 21,
         "Rule": 11,
         "Test": "c",
-        "test_description": "The project consists of one building segment with one zone. Baseline RMD has system 12a with child loop value correctly set to null.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone. Baseline ruleset project description has system 12a with child loop value correctly set to null.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-11",
@@ -420,7 +420,7 @@
         "Section": 21,
         "Rule": 11,
         "Test": "d",
-        "test_description": "The project consists of one building segment with one zone. Baseline RMD has system 12a with child loop incorrectly referencing to  FluidLoop 2. Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone. Baseline ruleset project description has system 12a with child loop incorrectly referencing to  FluidLoop 2. Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-11",
@@ -545,7 +545,7 @@
         "Section": 21,
         "Rule": 11,
         "Test": "e",
-        "test_description": "The project consists of one building segment with one zone. Baseline RMD has system 10. Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone. Baseline ruleset project description has system 10. Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-11",

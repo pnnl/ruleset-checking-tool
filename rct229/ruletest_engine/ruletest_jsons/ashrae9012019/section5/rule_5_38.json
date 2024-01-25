@@ -89,7 +89,7 @@
         "Section": 5,
         "Rule": 38,
         "Test": "b",
-        "test_description": "Project has one building segment with one space that includes floor surfaces adjacent to ground. The RPD specifies a ground temperature schedule, but cannot be determined if it is representative of the project climate or if it was used in the calculation of heat loss.",
+        "test_description": "Project has one building segment with one space that includes floor surfaces adjacent to ground. The ruleset project description specifies a ground temperature schedule, but cannot be determined if it is representative of the project climate or if it was used in the calculation of heat loss.",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "5-38",
@@ -176,7 +176,7 @@
         "Section": 5,
         "Rule": 38,
         "Test": "c",
-        "test_description": "Project has one building segment with one space that includes floor surfaces adjacent to ground. The RPD does not specify a ground temperature schedule.",
+        "test_description": "Project has one building segment with one space that includes floor surfaces adjacent to ground. The ruleset project description does not specify a ground temperature schedule.",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "5-38",

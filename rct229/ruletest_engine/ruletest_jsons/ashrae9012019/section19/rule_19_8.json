@@ -3,7 +3,7 @@
         "Section": 19,
         "Rule": 8,
         "Test": "a",
-        "test_description": "System 3 with CO2_ZONE ventilation control type, 3500 minimum outdoor airflows, and 150 occupants in the 1000 ft2 zone",
+        "test_description": "The project has one building segment with one zone. System 3 with CO2_ZONE ventilation control type, 3500 minimum outdoor airflows, and 150 occupants in the 1000 ft2 zone. Expected outcome: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-8",
@@ -93,7 +93,7 @@
         "Section": 19,
         "Rule": 8,
         "Test": "b",
-        "test_description": "System 3 with NONE ventilation control type, 2800 minimum outdoor airflows, and 20 occupants in the 1000 ft2 zone",
+        "test_description": "The project has one building segment with one zone. System 3 with NONE ventilation control type, 2800 minimum outdoor airflows, and 20 occupants in the 1000 ft2 zone. Expected outcome: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-8",

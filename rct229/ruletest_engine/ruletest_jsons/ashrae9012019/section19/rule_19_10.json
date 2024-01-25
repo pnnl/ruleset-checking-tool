@@ -3,7 +3,7 @@
         "Section": 19,
         "Rule": 10,
         "Test": "a",
-        "test_description": "CZ 5A, System 11, w/ Economizer, economizer in the proposed - PASS (Case 5)",
+        "test_description": "The project has one building segment with one zone. Climate zone 5A, System 11, w/ Economizer, economizer in the proposed - PASS (Case 5)",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-10",
@@ -235,7 +235,7 @@
         "Section": 19,
         "Rule": 10,
         "Test": "b",
-        "test_description": "CZ 5A, System 5, w/o Economizer, economizer in the proposed - FAIL (Case 7)",
+        "test_description": "The project has one building segment with two zones. Climate zone 5A, System 5, w/o Economizer, economizer in the proposed - FAIL (Case 7)",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-10",
@@ -483,7 +483,7 @@
         "Section": 19,
         "Rule": 10,
         "Test": "c",
-        "test_description": "CZ 5A, System 3, primarily serving computer room, w/o Economizer, no economizer in the proposed - PASS (Case 1)",
+        "test_description": "The project has one building segment with one zone. Climate zone 5A, System 3, primarily serving computer room, w/o Economizer, no economizer in the proposed - PASS (Case 1)",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-10",
@@ -645,7 +645,7 @@
         "Section": 19,
         "Rule": 10,
         "Test": "d",
-        "test_description": "CZ 5A, System 3, primarily serving computer room, w Economizer, no economizer in the proposed - FAIL (Case 3)",
+        "test_description": "The project has one building segment with one zone. Climate zone 5A, System 3, primarily serving computer room, w Economizer, no economizer in the proposed - FAIL (Case 3)",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-10",
@@ -811,7 +811,7 @@
         "Section": 19,
         "Rule": 10,
         "Test": "e",
-        "test_description": "CZ 5A, System 5, w/o Economizer, no economizer in the proposed - FAIL (Case 6)",
+        "test_description": "The project has one building segment with one zone. Climate zone 5A, System 5, w/o Economizer, no economizer in the proposed - FAIL (Case 6)",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-10",
@@ -973,7 +973,7 @@
         "Section": 19,
         "Rule": 10,
         "Test": "f",
-        "test_description": "CZ 3A, System 5, w/o Economizer, no economizer in the proposed - NOT APPLICABLE (NA Climate Zone)",
+        "test_description": "The project has one building segment with two zones. Climate zone 3A, System 5, w/o Economizer, no economizer in the proposed - NOT APPLICABLE (NA Climate Zone)",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "19-10",
@@ -1217,7 +1217,7 @@
         "Section": 19,
         "Rule": 10,
         "Test": "g",
-        "test_description": "CZ 5A, System 9, w/o Economizer, no economizer in the proposed - NOT APPLICABLE (NA System Type)",
+        "test_description": "The project has one building segment with one zone. Climate zone 5A, System 9, w/o Economizer, no economizer in the proposed - NOT APPLICABLE (NA System Type)",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "19-10",
@@ -1373,7 +1373,7 @@
         "Section": 19,
         "Rule": 10,
         "Test": "h",
-        "test_description": "CZ 5A, System 5, w/o Economizer, building has refrigerated cases, building type is retail, no economizer in the proposed - UNDETERMINED (Case 2)",
+        "test_description": "The project has one building segment with two zones. Climate zone 5A, System 5, w/o Economizer, building has refrigerated cases, building type is retail, no economizer in the proposed - UNDETERMINED (Case 2)",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "19-10",
@@ -1623,7 +1623,7 @@
         "Section": 19,
         "Rule": 10,
         "Test": "i",
-        "test_description": "CZ 5A, System 5, w/ Economizer, building has refrigerated cases, building type is retail, no economizer in the proposed - UNDETERMINED (Case 4)",
+        "test_description": "The project has one building segment with two zones. Climate zone 5A, System 5, w/ Economizer, building has refrigerated cases, building type is retail, no economizer in the proposed - UNDETERMINED (Case 4)",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "19-10",

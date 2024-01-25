@@ -3,7 +3,7 @@
         "Section": 23,
         "Rule": 12,
         "Test": "a",
-        "test_description": "A building has System 11.1 and therefore is applicable to this rule. However the outcome cannot be determined.",
+        "test_description": "The project has one building segment with one zone served by System 11.1 and therefore is applicable to this rule. The expected result is: undetermined",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "23-12",
@@ -116,7 +116,7 @@
         "Section": 23,
         "Rule": 12,
         "Test": "b",
-        "test_description": "A building has System 7. Therefore, this rule no longer applies.",
+        "test_description": "The project has one building segment with two zones served by System 7. Therefore, this rule no longer applies. The expected result is: not_applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "23-12",

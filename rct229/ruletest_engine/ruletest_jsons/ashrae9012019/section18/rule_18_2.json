@@ -3,7 +3,7 @@
         "Section": 18,
         "Rule": 2,
         "Test": "a",
-        "test_description": "The project has one building segment with one floor and four zones in climate zone CZ4A with HVAC BAT = RESIDENTIAL.  The building is correctly modeled with Separate HVAC System 1 serving each zone.  Expected result: pass",
+        "test_description": "The project has one building segment with one floor and four zones in climate zone 4A with HVAC building area type = RESIDENTIAL.  The building is correctly modeled with Separate HVAC System 1 serving each zone.  Expected result: pass",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-2",
@@ -431,7 +431,7 @@
         "Section": 18,
         "Rule": 2,
         "Test": "b",
-        "test_description": "The project has one building segment with one floor and four zones in climate zone CZ4A with HVAC BAT = RESIDENTIAL.  The building is incorrectly modeled with multiple zones served by HVAC System 1a.  Expected result: fail",
+        "test_description": "The project has one building segment with one floor and four zones in climate zone 4A with HVAC building area type = RESIDENTIAL.  The building is incorrectly modeled with multiple zones served by HVAC System 1a.  Expected result: fail",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "18-2",
@@ -827,7 +827,7 @@
         "Section": 18,
         "Rule": 2,
         "Test": "c",
-        "test_description": "The project has one building segment with one floor and four zones in climate zone CZ1A with HVAC BAT = RETAIL.  The building is correctly modeled with one HVAC system 4 serving each zone.  Expected result: pass",
+        "test_description": "The project has one building segment with one floor and four zones in climate zone 1A with HVAC building area type = RETAIL.  The building is correctly modeled with one HVAC system 4 serving each zone.  Expected result: pass",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-2",
@@ -1261,7 +1261,7 @@
         "Section": 18,
         "Rule": 2,
         "Test": "d",
-        "test_description": "The project has one building segment with one floor and four zones in climate zone CZ1A with HVAC BAT = RETAIL.  The building is incorrectly modeled with one HVAC system 5b per floor.  Expected result: fail",
+        "test_description": "The project has one building segment with one floor and four zones in climate zone 1A with HVAC building area type = RETAIL.  The building is incorrectly modeled with one HVAC system 5b per floor.  Expected result: fail",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "18-2",
@@ -1645,7 +1645,7 @@
         "Section": 18,
         "Rule": 2,
         "Test": "e",
-        "test_description": "The project has one building segment with one floor and four zones in climate zone CZ4A with HVAC BAT = OTHER_NON_RESIDENTIAL.  The building area is 50,000 sf.  The building is correctly modeled with one HVAC system 5 per floor.  Expected result: pass",
+        "test_description": "The project has one building segment with one floor and four zones in climate zone 4A with HVAC building area type = OTHER_NON_RESIDENTIAL.  The building area is 50,000 sf.  The building is correctly modeled with one HVAC system 5 per floor.  Expected result: pass",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-2",
@@ -2047,7 +2047,7 @@
         "Section": 18,
         "Rule": 2,
         "Test": "f",
-        "test_description": "The project has one building segment with one floor and four zones in climate zone CZ4A with HVAC BAT = OTHER_NON_RESIDENTIAL.  The building area is 50,000 sf.  The building is incorrectly modeled with one HVAC system for the whole building.  Expected result: fail",
+        "test_description": "The project has one building segment with one floor and four zones in climate zone 4A with HVAC building area type = OTHER_NON_RESIDENTIAL.  The building area is 50,000 sf.  The building is incorrectly modeled with one HVAC system for the whole building.  Expected result: fail",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "18-2",
@@ -2369,7 +2369,7 @@
         "Section": 18,
         "Rule": 2,
         "Test": "g",
-        "test_description": "The project has one building segment with one floor and four zones in climate zone CZ4A with HVAC BAT = OTHER_NON_RESIDENTIAL.  The building area is 50,000 sf.  The building has two laboratory zones with a total lab exhaust rate of 16,000 cfm.  The two exhaust zones are correctly served by one System 5 HVAC system.  The other two zones are each served by a System 5 HVAC system (one per floor).  Expected result: pass",
+        "test_description": "The project has one building segment with one floor and four zones in climate zone 4A with HVAC building area type = OTHER_NON_RESIDENTIAL.  The building area is 50,000 sf.  The building has two laboratory zones with a total lab exhaust rate of 16,000 cfm.  The two exhaust zones are correctly served by one System 5 HVAC system.  The other two zones are each served by a System 5 HVAC system (one per floor).  Expected result: pass",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-2",
@@ -2841,7 +2841,7 @@
         "Section": 18,
         "Rule": 2,
         "Test": "h",
-        "test_description": "The project has one building segment with one floor and four zones in climate zone CZ4A with HVAC BAT = OTHER_NON_RESIDENTIAL.  The building area is 50,000 sf.  The building has two laboratory zones with a total lab exhaust rate of 12,000 cfm.  The two exhaust zones are served by one System 5 HVAC system.  The other two zones are each served by a System 5 HVAC system (one per floor).  We expect an undetermined result because with a lab exhaust rate of 12,000 cfm, and 4,000cfm of system exhaust, it is not possible to tell if there is more than 15,000cfm of lab exhaust.  Expected result: undetermined",
+        "test_description": "The project has one building segment with one floor and four zones in climate zone 4A with HVAC building area type = OTHER_NON_RESIDENTIAL.  The building area is 50,000 sf.  The building has two laboratory zones with a total lab exhaust rate of 12,000 cfm.  The two exhaust zones are served by one System 5 HVAC system.  The other two zones are each served by a System 5 HVAC system (one per floor).  We expect an undetermined result because with a lab exhaust rate of 12,000 cfm, and 4,000cfm of system exhaust, it is not possible to tell if there is more than 15,000cfm of lab exhaust.  Expected result: undetermined",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "18-2",
@@ -3319,7 +3319,7 @@
         "Section": 18,
         "Rule": 2,
         "Test": "i",
-        "test_description": "The project has one building segment with one floor and four zones with HVAC BAT = OTHER NON RESIDENTIAL.  Building area is 160,000 sf.  Thermal Zones 1 and 2 are type Laboratory with total 12,000 cfm of zone exhaust.  The building is modeled with one HVAC system 7b per floor and incorrectly with one HVAC system 7 for the Laboratory zones.  Expected result: fail",
+        "test_description": "The project has one building segment with one floor and four zones with HVAC building area type = OTHER NON RESIDENTIAL.  Building area is 160,000 sf.  Thermal Zones 1 and 2 are type Laboratory with total 12,000 cfm of zone exhaust.  The building is modeled with one HVAC system 7b per floor and incorrectly with one HVAC system 7 for the Laboratory zones.  Expected result: fail",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "18-2",

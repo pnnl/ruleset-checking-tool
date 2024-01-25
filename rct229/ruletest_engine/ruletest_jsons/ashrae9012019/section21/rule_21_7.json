@@ -3,7 +3,7 @@
         "Section": 21,
         "Rule": 7,
         "Test": "a",
-        "test_description": "The project consists of one building segment with two zones and two spaces.  Baseline RMD utilizes system 7 with supply and return temperatures correctly set to 180 F and 130 F respectively. Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  Baseline ruleset project description utilizes system 7 with supply and return temperatures correctly set to 180 F and 130 F respectively. Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-7",
@@ -154,7 +154,7 @@
         "Section": 21,
         "Rule": 7,
         "Test": "b",
-        "test_description": "The project consists of one building segment with two zones.  Baseline RMD has utilizes system 7 with supply and return temperatures incorrectly set to 200 F and correctly set to 130 F respectively. Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  Baseline ruleset project description has utilizes system 7 with supply and return temperatures incorrectly set to 200 F and correctly set to 130 F respectively. Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-7",
@@ -305,7 +305,7 @@
         "Section": 21,
         "Rule": 7,
         "Test": "c",
-        "test_description": "The project consists of one building segment with two zones.  Baseline RMD has utilizes system 7 with supply and return temperatures correctly set to 180 F and inccorectly to 150 F respectively.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  Baseline ruleset project description has utilizes system 7 with supply and return temperatures correctly set to 180 F and inccorectly to 150 F respectively.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-7",
@@ -456,7 +456,7 @@
         "Section": 21,
         "Rule": 7,
         "Test": "d",
-        "test_description": "The project consists of one building segment with two zones and two spaces.  Baseline RMD utilizes system 5 with supply and return temperatures correctly set to 180 F and 130 F respectively. Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  Baseline ruleset project description utilizes system 5 with supply and return temperatures correctly set to 180 F and 130 F respectively. Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-7",
@@ -580,7 +580,7 @@
         "Section": 21,
         "Rule": 7,
         "Test": "e",
-        "test_description": "The project consists of one building segment with two zones.  Baseline RMD has utilizes system 5 with supply and return temperatures incorrectly set to 200 F and correctly set to 130 F respectively. Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  Baseline ruleset project description has utilizes system 5 with supply and return temperatures incorrectly set to 200 F and correctly set to 130 F respectively. Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-7",
@@ -704,7 +704,7 @@
         "Section": 21,
         "Rule": 7,
         "Test": "f",
-        "test_description": "The project consists of one building segment with two zones.  Baseline RMD has utilizes system 5 with supply and return temperatures correctly set to 180 F and inccorectly to 150 F respectively.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  Baseline ruleset project description has utilizes system 5 with supply and return temperatures correctly set to 180 F and inccorectly to 150 F respectively.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-7",
@@ -828,7 +828,7 @@
         "Section": 21,
         "Rule": 7,
         "Test": "g",
-        "test_description": "The project consists of one building segment with two zones.  Baseline RMD has utilizes system 5b.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with two zones.  Baseline ruleset project description has utilizes system 5b.  Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-7",

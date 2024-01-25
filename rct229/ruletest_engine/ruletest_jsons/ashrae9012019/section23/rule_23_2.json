@@ -3,7 +3,7 @@
         "Section": 23,
         "Rule": 2,
         "Test": "a",
-        "test_description": "System 7 baseline has a SAT reset correctly set to 5 delta F",
+        "test_description": "The project has one building segment with two zones served by baseline System 7 with a supply air temperature reset correctly set to 5 delta F. The expected result is: pass",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "23-2",
@@ -152,7 +152,7 @@
         "Section": 23,
         "Rule": 2,
         "Test": "b",
-        "test_description": "System 7 baseline has a has SAT reset but not correctly set to 5 delta F",
+        "test_description": "The project has one building segment with two zones served by baseline System 7  with supply air temperature reset but not correctly set to 5 delta F. The expected result is: fail",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "23-2",
@@ -301,7 +301,7 @@
         "Section": 23,
         "Rule": 2,
         "Test": "c",
-        "test_description": "System 7 baseline has a does not have SAT reset",
+        "test_description": "The project has one building segment with two zones served by baseline System 7  with a does not have supply air temperature reset. The expected result is: fail",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "23-2",

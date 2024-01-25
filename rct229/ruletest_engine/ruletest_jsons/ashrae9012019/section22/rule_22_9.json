@@ -3,7 +3,7 @@
         "Section": 22,
         "Rule": 9,
         "Test": "a",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 with more than 300 tons cooling capacity.  It is correctly modeled with the secondary cooling loop minimum flow equal to 25% of design flow.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 with more than 300 tons cooling capacity.  It is correctly modeled with the secondary cooling loop minimum flow equal to 25% of design flow.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-9",
@@ -154,7 +154,7 @@
         "Section": 22,
         "Rule": 9,
         "Test": "b",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 with more than 300 tons cooling capacity.  It is incorrectly modeled with the secondary cooling loop minimum flow equal to 35% of design flow.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 with more than 300 tons cooling capacity.  It is incorrectly modeled with the secondary cooling loop minimum flow equal to 35% of design flow.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-9",
@@ -305,7 +305,7 @@
         "Section": 22,
         "Rule": 9,
         "Test": "c",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 with less than 300 tons cooling capacity.  Expected result: Undetermined",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 with less than 300 tons cooling capacity.  Expected result: Undetermined",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "22-9",
@@ -456,7 +456,7 @@
         "Section": 22,
         "Rule": 9,
         "Test": "d",
-        "test_description": "Baseline building has one zone.  HVAC is system type 13 with more than 300 tons cooling capacity.  It is correctly modeled with the secondary cooling loop minimum flow equal to 25% of design flow.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 13 with more than 300 tons cooling capacity.  It is correctly modeled with the secondary cooling loop minimum flow equal to 25% of design flow.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-9",
@@ -573,7 +573,7 @@
         "Section": 22,
         "Rule": 9,
         "Test": "e",
-        "test_description": "Baseline building has one zone.  HVAC is system type 13 with more than 300 tons cooling capacity.  It is incorrectly modeled with the secondary cooling loop minimum flow equal to 35% of design flow.  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 13 with more than 300 tons cooling capacity.  It is incorrectly modeled with the secondary cooling loop minimum flow equal to 35% of design flow.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-9",

@@ -3,7 +3,7 @@
         "Section": 19,
         "Rule": 5,
         "Test": "a",
-        "test_description": "System 3 with coincident_unmet_load_hours less than 300 hrs.",
+        "test_description": "The project has one building segment with one zone. System 3 with coincident_unmet_load_hours less than 300 hrs.Expected outcome: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-5",
@@ -96,7 +96,7 @@
         "Section": 19,
         "Rule": 5,
         "Test": "b",
-        "test_description": "System 3 with the sum of unmet_load_hours_heating and unmet_load_hours_cooling less than 300 hrs.",
+        "test_description": "The project has one building segment with one zone. System 3 with the sum of unmet_load_hours_heating and unmet_load_hours_cooling less than 300 hrs.Expected outcome: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-5",
@@ -189,7 +189,7 @@
         "Section": 19,
         "Rule": 5,
         "Test": "c",
-        "test_description": "System 3 with coincident_unmet_load_hours greater than 300 hrs.",
+        "test_description": "The project has one building segment with one zone. System 3 with coincident_unmet_load_hours greater than 300 hrs.Expected outcome: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-5",
@@ -282,7 +282,7 @@
         "Section": 19,
         "Rule": 5,
         "Test": "d",
-        "test_description": "System 3 with unmet_load_hours_cooling greater than 600 hrs.",
+        "test_description": "The project has one building segment with one zone. System 3 with unmet_load_hours_cooling greater than 600 hrs. Expected outcome: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-5",

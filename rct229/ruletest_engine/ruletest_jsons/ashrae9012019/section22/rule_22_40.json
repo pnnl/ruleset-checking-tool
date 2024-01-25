@@ -3,7 +3,7 @@
         "Section": 22,
         "Rule": 40,
         "Test": "a",
-        "test_description": "Building has two zones.  Purchased chilled water is modeled in both the proposed and baseline systems for building utilizing system 7c.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  Purchased chilled water is modeled in both the proposed and baseline systems for building utilizing system 7c.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-40",
@@ -252,7 +252,7 @@
         "Section": 22,
         "Rule": 40,
         "Test": "b",
-        "test_description": "Building has two zones.  Purchased chilled water is modeled in the proposed model, but baseline uses a CHW plant (system 7).  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  Purchased chilled water is modeled in the proposed model, but baseline uses a chilled water plant (system 7).  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-40",
@@ -532,7 +532,7 @@
         "Section": 22,
         "Rule": 40,
         "Test": "c",
-        "test_description": "Building has one zone.  Purchased chilled water is modeled in the proposed model, but baseline uses DX cooling (system 1).  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone.  Purchased chilled water is modeled in the proposed model, but baseline uses DX cooling (system 1).  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-40",
@@ -705,7 +705,7 @@
         "Section": 22,
         "Rule": 40,
         "Test": "d",
-        "test_description": "Building has one zone.  Purchased chilled water is not modeled in the proposed model.  Both proposed and beaseline are modeled with system type 2.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone.  Purchased chilled water is not modeled in the proposed model.  Both proposed and beaseline are modeled with system type 2.  Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-40",

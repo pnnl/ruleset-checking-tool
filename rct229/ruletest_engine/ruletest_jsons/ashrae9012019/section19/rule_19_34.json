@@ -3,7 +3,7 @@
         "Section": 19,
         "Rule": 34,
         "Test": "a",
-        "test_description": "Project contains a NONE cooling system type and a 5000 ft2 floor area served by baseline system 1.",
+        "test_description": "The project has one building segment with one zone. Project contains a NONE cooling system type and a 5000 ft2 floor area served by baseline system 1. Expected outcome: UNDETERMINED",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "19-34",
@@ -254,7 +254,7 @@
         "Section": 19,
         "Rule": 34,
         "Test": "b",
-        "test_description": "Project contains a 5000 ft2 floor area served by baseline system 1.",
+        "test_description": "The project has one building segment with one zone. Project contains a 5000 ft2 floor area served by baseline system 1. Expected outcome: NOT_APPLICABLE",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "19-34",

@@ -3,7 +3,7 @@
         "Section": 19,
         "Rule": 11,
         "Test": "a",
-        "test_description": "Baseline building  with computer room utilizese baseline System 11. The system includes an integrated fluid economizer",
+        "test_description": "The project has one building segment with one zone. Baseline building  with computer room utilizese baseline System 11. The system includes an integrated fluid economizer. Expected outcome: UNDETERMINED",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "19-11",
@@ -126,7 +126,7 @@
         "Section": 19,
         "Rule": 11,
         "Test": "b",
-        "test_description": "Baseline building  with computer room does not utilize baseline System 11. Therefore this building does not apply",
+        "test_description": "The project has one building segment with one zone. Baseline building  with computer room does not utilize baseline System 11. Therefore this building does not apply. Expected outcome: NOT APPLICABLE",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "19-11",
@@ -223,7 +223,7 @@
         "Section": 19,
         "Rule": 11,
         "Test": "c",
-        "test_description": "Baseline building  with computer room utilizese baseline System 11. The system does not include an integrated fluid economizer",
+        "test_description": "The project has one building segment with one zone. Baseline building  with computer room utilizese baseline System 11. The system does not include an integrated fluid economizer. Expected outcome: UNDETERMINED",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "19-11",

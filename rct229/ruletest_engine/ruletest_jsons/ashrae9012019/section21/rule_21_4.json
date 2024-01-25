@@ -3,7 +3,7 @@
         "Section": 21,
         "Rule": 4,
         "Test": "a",
-        "test_description": "The project consists of one building segment with one zone.  Space conditioning is provided by system type 7 with boiler and is correctly modeled with a natural draft boiler.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  Space conditioning is provided by system type 7 with boiler and is correctly modeled with a natural draft boiler.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-4",
@@ -150,7 +150,7 @@
         "Section": 21,
         "Rule": 4,
         "Test": "b",
-        "test_description": "The project consists of one building segment with one zone.  Space conditioning is provided by system type 7 with boiler and is incorrectly modeled with a forced draft boiler.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  Space conditioning is provided by system type 7 with boiler and is incorrectly modeled with a forced draft boiler.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-4",
@@ -297,7 +297,7 @@
         "Section": 21,
         "Rule": 4,
         "Test": "c",
-        "test_description": "The project consists of one building segment with one zone.  Space conditioning is provided by system type 11.2 with boiler and is correctly modeled with a natural draft boiler.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone.  Space conditioning is provided by system type 11.2 with boiler and is correctly modeled with a natural draft boiler.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-4",
@@ -427,7 +427,7 @@
         "Section": 21,
         "Rule": 4,
         "Test": "d",
-        "test_description": "The project consists of one building segment with one zone.  Space conditioning is provided by system type 11.2 with boiler and is incorrectly modeled with a forced draft boiler.  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone.  Space conditioning is provided by system type 11.2 with boiler and is incorrectly modeled with a forced draft boiler.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-4",
@@ -557,7 +557,7 @@
         "Section": 21,
         "Rule": 4,
         "Test": "e",
-        "test_description": "The project consists of one building segment with one zone.  Space conditioning is provided by system type 3 with no hot water loops.  Expected result: NOT APPLICABLE",
+        "test_description": "The project has one building segment with one zone.  Space conditioning is provided by system type 3 with no hot water loops.  Expected result: NOT APPLICABLE",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-4",

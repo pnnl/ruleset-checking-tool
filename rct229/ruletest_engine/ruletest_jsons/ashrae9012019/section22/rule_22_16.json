@@ -3,7 +3,7 @@
         "Section": 22,
         "Rule": 16,
         "Test": "a",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and the HeatRejection is correctly modeled with the wet-bulb and approach temperatures.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and the HeatRejection is correctly modeled with the wet-bulb and approach temperatures.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-16",
@@ -166,7 +166,7 @@
         "Section": 22,
         "Rule": 16,
         "Test": "b",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and the HeatRejection is modeled with the incorrect wet-bulb and approach temperatures.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and the HeatRejection is modeled with the incorrect wet-bulb and approach temperatures.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-16",
@@ -329,7 +329,7 @@
         "Section": 22,
         "Rule": 16,
         "Test": "c",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and the HeatRejection design_wetbulb_temperature < 55.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and the HeatRejection design_wetbulb_temperature < 55.  Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-16",
@@ -492,7 +492,7 @@
         "Section": 22,
         "Rule": 16,
         "Test": "d",
-        "test_description": "Baseline building has two zones.  HVAC is system type 11.2 and the HeatRejection is correctly modeled with the wet-bulb and approach temperatures.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 11.2 and the HeatRejection is correctly modeled with the wet-bulb and approach temperatures.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-16",
@@ -638,7 +638,7 @@
         "Section": 22,
         "Rule": 16,
         "Test": "e",
-        "test_description": "Baseline building has two zones.  HVAC is system type 11.2 and the HeatRejection is modeled with the incorrect wet-bulb and approach temperatures.  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 11.2 and the HeatRejection is modeled with the incorrect wet-bulb and approach temperatures.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-16",
@@ -784,7 +784,7 @@
         "Section": 22,
         "Rule": 16,
         "Test": "f",
-        "test_description": "Baseline building has two zones.  HVAC is system type 11.2 and the HeatRejection design_wetbulb_temperature > 95.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 11.2 and the HeatRejection design_wetbulb_temperature > 95.  Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-16",

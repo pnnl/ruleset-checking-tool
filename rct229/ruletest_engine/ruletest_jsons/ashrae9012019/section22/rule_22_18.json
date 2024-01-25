@@ -3,7 +3,7 @@
         "Section": 22,
         "Rule": 18,
         "Test": "a",
-        "test_description": "Baseline's System 7 cooling tower correctly utilizes variable speed fan control. ",
+        "test_description": "The project has one building segment with two zones. System 7 cooling tower correctly utilizes variable speed fan control. Expected result: Pass",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-18",
@@ -161,7 +161,7 @@
         "Section": 22,
         "Rule": 18,
         "Test": "b",
-        "test_description": "Baseline's System 7 cooling tower incorrectly utilizes constant speed fan control. ",
+        "test_description": "The project has one building segment with two zones. System 7 cooling tower incorrectly utilizes constant speed fan control. Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-18",
@@ -319,7 +319,7 @@
         "Section": 22,
         "Rule": 18,
         "Test": "c",
-        "test_description": "Baseline building utilizes System 7 but does not have a heat rejection loop",
+        "test_description": "The project has one building segment with two zones. System 7 but does not have a heat rejection loop. Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-18",

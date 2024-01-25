@@ -3,7 +3,7 @@
         "Section": 19,
         "Rule": 2,
         "Test": "a",
-        "test_description": "System 7a with is_sized_using_coincident_load set to true.",
+        "test_description": "The project has one building segment with two zones. System 7a with is_sized_using_coincident_load set to true. Expected outcome: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-2",
@@ -147,7 +147,7 @@
         "Section": 19,
         "Rule": 2,
         "Test": "b",
-        "test_description": "System 7a with is_sized_using_coincident_load set to false.",
+        "test_description": "The project has one building segment with two zones. System 7a with is_sized_using_coincident_load set to false. Expected outcome: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-2",

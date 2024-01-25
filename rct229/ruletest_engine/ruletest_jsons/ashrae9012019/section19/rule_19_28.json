@@ -3,7 +3,7 @@
         "Section": 19,
         "Rule": 28,
         "Test": "a",
-        "test_description": "Project does not have spaces with health and safety mandated minimum ventilation requirements. HVAC fans correctly cycle on and off to maintain temperature setpoint during unoccupied hours.",
+        "test_description": "The project has one building segment with one zone. Project does not have spaces with health and safety mandated minimum ventilation requirements. HVAC fans correctly cycle on and off to maintain temperature setpoint during unoccupied hours. Expected outcome: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-28",
@@ -88,7 +88,7 @@
         "Section": 19,
         "Rule": 28,
         "Test": "b",
-        "test_description": "Project does not have spaces with health and safety mandated minimum ventilation requirements. HVAC fans incorrectly stay off during unoccupied hours.",
+        "test_description": "The project has one building segment with two zones. Project does not have spaces with health and safety mandated minimum ventilation requirements. HVAC fans incorrectly stay off during unoccupied hours. Expected outcome: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-28",

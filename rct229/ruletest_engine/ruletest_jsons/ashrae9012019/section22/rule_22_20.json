@@ -3,7 +3,7 @@
         "Section": 22,
         "Rule": 20,
         "Test": "a",
-        "test_description": "Baseline building has two zones and is in climate zone 4A.  HVAC is system type 7 and is correctly modeled with cooling tower leaving water setpoint temperature of 75F.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones. climate zone 4A.  HVAC is system type 7 and is correctly modeled with cooling tower leaving water setpoint temperature of 75F.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-20",
@@ -163,7 +163,7 @@
         "Section": 22,
         "Rule": 20,
         "Test": "b",
-        "test_description": "Baseline building has two zones and is in climate zone 4A.  HVAC is system type 7 and is incorrectly modeled with cooling tower leaving water setpoint temperature of 80F.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones. climate zone 4A.  HVAC is system type 7 and is incorrectly modeled with cooling tower leaving water setpoint temperature of 80F.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-20",
@@ -323,7 +323,7 @@
         "Section": 22,
         "Rule": 20,
         "Test": "c",
-        "test_description": "Baseline building has two zones and is in climate zone 6B.  HVAC is system type 8 and is correctly modeled with cooling tower leaving water setpoint temperature of 75F.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones. climate zone 6B.  HVAC is system type 8 and is correctly modeled with cooling tower leaving water setpoint temperature of 75F.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-20",
@@ -490,7 +490,7 @@
         "Section": 22,
         "Rule": 20,
         "Test": "d",
-        "test_description": "Baseline building has two zones and is in climate zone 6B.  HVAC is system type 8 and is incorrectly modeled with cooling tower leaving water setpoint temperature of 70F.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones. climate zone 6B.  HVAC is system type 8 and is incorrectly modeled with cooling tower leaving water setpoint temperature of 70F.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-20",
@@ -657,7 +657,7 @@
         "Section": 22,
         "Rule": 20,
         "Test": "e",
-        "test_description": "Baseline building has one zone and is in climate zone 6B.  HVAC is system type 12a and does not have a chiller plant..  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 12a and does not have a chiller plant..  Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-20",

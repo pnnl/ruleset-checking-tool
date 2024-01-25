@@ -3,7 +3,7 @@
         "Section": 22,
         "Rule": 28,
         "Test": "a",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is correctly modeled with a condenser pump that is constant volume.  Expected Result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is correctly modeled with a condenser pump that is constant volume.  Expected Result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-28",
@@ -146,17 +146,10 @@
                             },
                             {
                                 "id": "Condensing Loop 1",
-                                "type": "CONDENSER",
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
                                     "flow_control": "FIXED_FLOW"
                                 }
-                            }
-                        ],
-                        "heat_rejections": [
-                            {
-                                "id": "Heat Rejection 1",
-                                "loop": "Condensing Loop 1"
                             }
                         ],
                         "type": "BASELINE_0"
@@ -169,7 +162,7 @@
         "Section": 22,
         "Rule": 28,
         "Test": "b",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is incorrectly modeled with a condenser pump that is variable volume.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is incorrectly modeled with a condenser pumpthat is variable volume.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-28",
@@ -312,17 +305,10 @@
                             },
                             {
                                 "id": "Condensing Loop 1",
-                                "type": "CONDENSER",
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
                                     "flow_control": "VARIABLE_FLOW"
                                 }
-                            }
-                        ],
-                        "heat_rejections": [
-                            {
-                                "id": "Heat Rejection 1",
-                                "loop": "Condensing Loop 1"
                             }
                         ],
                         "type": "BASELINE_0"
@@ -335,7 +321,7 @@
         "Section": 22,
         "Rule": 28,
         "Test": "c",
-        "test_description": "Baseline building has one zone.  HVAC is system type 4 and does not have a chilled water plant.  Expected Result: Not Applicable",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 4 and does not have a chilled water plant.  Expected Result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-28",

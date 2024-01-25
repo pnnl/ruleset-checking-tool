@@ -3,7 +3,7 @@
         "Section": 22,
         "Rule": 6,
         "Test": "a",
-        "test_description": "Baseline building has one zone.  HVAC is system type 11.1 air-side system and is correctly modeled with loop_supply_temperature_at_low_load set to 54F.  Expected outcome: PASS",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 11.1 air-side system and is correctly modeled with loop_supply_temperature_at_low_load set to 54F.  Expected outcome: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-6",
@@ -119,7 +119,7 @@
         "Section": 22,
         "Rule": 6,
         "Test": "b",
-        "test_description": "Baseline building has one zone.  HVAC is system type 11.1 air-side system and is incorrectly modeled with loop_supply_temperature_at_low_load set to 64F.  Expected outcome: FAIL",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 11.1 air-side system and is incorrectly modeled with loop_supply_temperature_at_low_load set to 64F.  Expected outcome: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-6",
@@ -235,7 +235,7 @@
         "Section": 22,
         "Rule": 6,
         "Test": "c",
-        "test_description": "Baseline building has one zone.  HVAC is system type 11.1b air-side system and is correctly modeled with loop_supply_temperature_at_low_load set to 54F.  Expected outcome: PASS",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 11.1b air-side system and is correctly modeled with loop_supply_temperature_at_low_load set to 54F.  Expected outcome: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-6",
@@ -368,7 +368,7 @@
         "Section": 22,
         "Rule": 6,
         "Test": "d",
-        "test_description": "Baseline building has one zone.  HVAC is system type 11.1b air-side system and is incorrectly modeled with loop_supply_temperature_at_low_load set to 64F.  Expected outcome: FAIL",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 11.1b air-side system and is incorrectly modeled with loop_supply_temperature_at_low_load set to 64F.  Expected outcome: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-6",
@@ -501,7 +501,7 @@
         "Section": 22,
         "Rule": 6,
         "Test": "e",
-        "test_description": "Baseline building has two zones.  HVAC is system type 8.  Expected outcome: Not Applicable",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 8.  Expected outcome: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-6",
