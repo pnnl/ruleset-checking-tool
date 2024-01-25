@@ -143,6 +143,7 @@ class Section5Rule30(RuleDefinitionListIndexedBase):
                 )
 
                 return pass_msg
+
             def is_tolerance_fail(self, context, calc_vals=None, data=None):
                 return std_equal(
                     calc_vals["absorptance_thermal_exterior_p"],

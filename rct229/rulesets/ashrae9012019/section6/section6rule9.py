@@ -187,11 +187,6 @@ class Section6Rule9(RuleDefinitionListIndexedBase):
                         total_hours_matched = calc_vals["total_hours_matched"]
                         return total_hours_matched == total_hours_compared
 
-                    def rule_check(self, context, calc_vals=None, data=None):
-                        total_hours_compared = calc_vals["total_hours_compared"]
-                        total_hours_matched = calc_vals["total_hours_matched"]
-                        return total_hours_matched == total_hours_compared
-
                     def get_fail_msg(self, context, calc_vals=None, data=None):
                         eflh_difference = calc_vals["eflh_difference"]
                         return f"Space lighting schedule EFLH in P-RMD is {eflh_difference} of that in B-RMD."

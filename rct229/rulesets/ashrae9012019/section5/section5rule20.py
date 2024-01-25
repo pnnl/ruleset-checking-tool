@@ -287,4 +287,6 @@ class Section5Rule20(RuleDefinitionListIndexedBase):
                 def is_tolerance_fail(self, context, calc_vals=None, data=None):
                     target_shgc = calc_vals["target_shgc"]
                     subsurface_shgc = calc_vals["subsurface_shgc"]
-                    return target_shgc is not None and std_equal(target_shgc, subsurface_shgc)
+                    return target_shgc is not None and std_equal(
+                        target_shgc, subsurface_shgc
+                    )

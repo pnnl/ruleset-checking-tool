@@ -99,8 +99,3 @@ class Section6Rule3(RuleDefinitionListIndexedBase):
                 total_space_lpd_u = calc_vals["total_space_lpd_u"]
                 total_space_lpd_p = calc_vals["total_space_lpd_p"]
                 return total_space_lpd_u == total_space_lpd_p
-
-            def is_tolerance_fail(self, context, calc_vals=None, data=None):
-                total_space_lpd_u = calc_vals["total_space_lpd_u"]
-                total_space_lpd_p = calc_vals["total_space_lpd_p"]
-                return std_equal(total_space_lpd_u, total_space_lpd_p)

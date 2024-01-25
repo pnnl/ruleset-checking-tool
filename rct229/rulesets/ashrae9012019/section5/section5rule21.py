@@ -128,23 +128,3 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
                         and calc_vals["subsurface_opaque_area_b"]
                         == calc_vals["subsurface_opaque_area_p"],
                     )
-
-                def is_tolerance_fail(self, context, calc_vals=None, data=None):
-                    return (
-                        std_equal(
-                            calc_vals["subsurface_u_factor_b"],
-                            calc_vals["subsurface_u_factor_p"],
-                        )
-                        and std_equal(
-                            calc_vals["subsurface_shgc_b"],
-                            calc_vals["subsurface_shgc_p"],
-                        )
-                        and std_equal(
-                            calc_vals["subsurface_glazed_area_b"],
-                            calc_vals["subsurface_glazed_area_p"],
-                        )
-                        and std_equal(
-                            calc_vals["subsurface_opaque_area_b"],
-                            calc_vals["subsurface_opaque_area_p"],
-                        )
-                    )

@@ -178,10 +178,11 @@ class Section5Rule37(RuleDefinitionListIndexedBase):
                 building_total_air_leakage_rate,
                 TOTAL_AIR_LEAKAGE_COEFF * target_air_leakage_rate_75pa_p,
             ) or (
-                not std_equal(building_total_air_leakage_rate, TOTAL_AIR_LEAKAGE_COEFF * target_air_leakage_rate_75pa_p)
-                and empty_measured_air_leakage_rate_flow_flag == False
-                and std_equal(
+                not std_equal(
                     building_total_air_leakage_rate,
-                    TOTAL_AIR_LEAKAGE_COEFF * building_total_measured_air_leakage_rate,
+                    TOTAL_AIR_LEAKAGE_COEFF * target_air_leakage_rate_75pa_p,
                 )
+                and empty_measured_air_leakage_rate_flow_flag == False
+                and building_total_air_leakage_rate
+                == TOTAL_AIR_LEAKAGE_COEFF * building_total_measured_air_leakage_rate
             )
