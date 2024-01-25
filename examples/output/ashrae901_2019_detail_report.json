@@ -4,20 +4,20 @@
     "tool_name": "PNNL Ruleset Checking Tool",
     "tool_version": "0.0.1",
     "ruleset": "ASHRAE 90.1-2019 Performance Rating Method (Appendix G)",
-    "date_run": "2024-01-21 22:25:34.016365",
+    "date_run": "2024-01-21 23:32:37.736556",
     "schema_version": "0.0.29",
     "rpd_files": [
         {
-            "ruleset_model_type": "BASELINE_0",
-            "file_name": "examples\\chicago_demo\\baseline_model.json"
+            "ruleset_model_type": "USER",
+            "file_name": "project description root"
         },
         {
-            "ruleset_model_type": "USER",
-            "file_name": "examples\\chicago_demo\\user_model.json"
+            "ruleset_model_type": "BASELINE_0",
+            "file_name": "project description root"
         },
         {
             "ruleset_model_type": "PROPOSED",
-            "file_name": "examples\\chicago_demo\\proposed_model.json"
+            "file_name": "project description root"
         }
     ],
     "rules": [
