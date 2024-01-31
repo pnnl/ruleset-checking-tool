@@ -90,7 +90,9 @@ def evaluate(rpds, ruleset, reports, reports_directory):
 
     for report_type in reports:
         if not REPORT_MODULE.get(report_type):
-            raise RCTException(f"Cannot find matching report type for {report_type}. Available ones are RAW_OUTPUT, RAW_SUMMARY, ASHRAE9012019_DETAIL, ASHRAE9012019_SUMMARY.")
+            raise RCTException(
+                f"Cannot find matching report type for {report_type}. Available ones are RAW_OUTPUT, RAW_SUMMARY, ASHRAE9012019_DETAIL, ASHRAE9012019_SUMMARY."
+            )
 
     report = evaluate_all_rules(rpds)
     # have report attached.
