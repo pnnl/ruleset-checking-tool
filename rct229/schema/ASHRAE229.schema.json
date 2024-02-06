@@ -51,7 +51,8 @@
                     "$ref": "ASHRAE229.schema.json#/definitions/Weather"
                 },
                 "compliance_path": {
-                    "description": "Indicates the chosen compliance path if the ruleset has multiple compliance paths such as 90.1 Appendix G has code compliance and beyond code"
+                    "description": "Indicates the chosen compliance path if the ruleset has multiple compliance paths such as 90.1 Appendix G has code compliance and beyond code",
+                    "$ref": "Enumerations2019ASHRAE901.schema.json#/definitions/CompliancePathOptions2019ASHRAE901"
                 },
                 "output_format_type": {
                     "description": "Indicates the chosen format for output",
@@ -69,7 +70,7 @@
                 }
             },
             "required": [
-                "id"
+                "id", "data_timestep", "ruleset_model_descriptions"
             ],
             "additionalProperties": false
         },
@@ -99,6 +100,9 @@
                         },
                         {
                             "$ref": "Enumerations2019T24.schema.json#/definitions/RulesetModelOptions2019T24Com"
+                        },
+                        {
+                            "$ref": "Enumerations2019T24.schema.json#/definitions/RulesetModelOptions2019T24Res"
                         }
                     ]
                 },
@@ -210,7 +214,7 @@
                 }
             },
             "required": [
-                "id"
+                "id", "type"
             ],
             "additionalProperties": false
         },
@@ -253,7 +257,7 @@
                     },
                     "notes": "Contains a list of exterior lighting systems for the building."
                 },
-                "refrigerated_casess": {
+                "refrigerated_cases": {
                     "description": "Refrigerated cases",
                     "type": "array",
                     "items": {
@@ -570,14 +574,9 @@
                 },
                 "status_type": {
                     "description": "Choice of new, existing, addition, alteration, etc. for each ruleset.",
-                    "anyOf": [
-                        {
-                            "$ref": "Enumerations2019ASHRAE901.schema.json#/definitions/SpaceStatusOptions2019ASHRAE901"
-                        },
-                        {
-                            "$ref": "Enumerations2019T24.schema.json#/definitions/GeneralStatusOptions2019T24"
-                        }
-                    ]
+                    "items": {
+                        "$ref": "ASHRAE229.schema.json#/definitions/StatusOptions"
+                    }
                 },
                 "function": {
                     "description": "Generic function for the space.",
@@ -792,7 +791,7 @@
                 },
                 "status_type": {
                     "description": "Choice of new, existing, addition, alteration, etc. for each ruleset.",
-                    "$ref": "Enumerations2019T24.schema.json#/definitions/GeneralStatusOptions2019T24"
+                    "$ref": "Enumerations2019T24.schema.json#/definitions/StatusOptions"
                 }
             },
             "required": [
@@ -1201,7 +1200,7 @@
                 },
                 "status_type": {
                     "description": "Choice of new, existing, addition, alteration, etc. for each ruleset.",
-                    "$ref": "Enumerations2019T24.schema.json#/definitions/GeneralStatusOptions2019T24"
+                    "$ref": "Enumerations2019T24.schema.json#/definitions/StatusOptions"
                 }
             },
             "required": [
@@ -1984,7 +1983,7 @@
                     "minimum": 0.0,
                     "notes": "Used for furnace or heat pump."
                 },
-                "is_autosized": {
+                "is_sized_based_on_design_day": {
                     "description": "True if the component is automatically sized by the simulation software",
                     "type": "boolean"
                 },
@@ -2194,7 +2193,7 @@
                     "type": "number",
                     "minimum": 0.0
                 },
-                "is_autosized": {
+                "is_sized_based_on_design_day": {
                     "description": "True if the component is automatically sized by the simulation software",
                     "type": "boolean"
                 },
@@ -2498,6 +2497,10 @@
                     "description": "High limit temperature shutoff",
                     "type": "number",
                     "units": "C"
+                },
+                "is_integrated": {
+                    "description": "",
+                    "type": "boolean"
                 }
             },
             "required": [
@@ -2738,7 +2741,7 @@
                     "units": "L/s",
                     "notes": "This value should be provided if automatically sized as a simulation output or explicitly provided as a simulation input."
                 },
-                "is_airflow_autosized": {
+                "is_airflow_sized_based_on_design_day": {
                     "description": "True if the airflow is automatically sized by the simulation software",
                     "type": "boolean"
                 },
@@ -3319,9 +3322,13 @@
                     "units": "L/s",
                     "notes": "This value should be provided if automatically sized or explicitly provided."
                 },
-                "is_flow_autosized": {
+                "is_flow_sized_based_on_design_day": {
                     "description": "True if the design_flow is autosized",
                     "type": "boolean"
+                },
+                "output_validation_points": {
+                    "description": "",
+                    "type": "array"
                 }
             },
             "required": [
