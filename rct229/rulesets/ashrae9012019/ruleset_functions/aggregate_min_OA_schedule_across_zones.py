@@ -1,6 +1,7 @@
 from typing import List
 
 from rct229.utils.assertions import assert_
+import numpy as np
 
 
 def aggregate_min_OA_schedule_across_zones(zone_OA_CFM_list_of_schedules: List[list]):
@@ -35,9 +36,17 @@ def aggregate_min_OA_schedule_across_zones(zone_OA_CFM_list_of_schedules: List[l
         "Not all schedules length is equal to 8760 or 8784 or equal each other.",
     )
 
-    hourly_zone_running_OA_CFM_total = [
-        sum(hour_oa_cfm_tuple)
-        for hour_oa_cfm_tuple in zip(*zone_OA_CFM_list_of_schedules)
-    ]
+    if len(zone_OA_CFM_list_of_schedules) == 1:
+        # one schedule sceanrio
+        hourly_zone_running_OA_CFM_total = zone_OA_CFM_list_of_schedules[0]
+    else:
+        # multi-schedule scenario
+        magnitudes = [[quantity.magnitude for quantity in sublist] for sublist in zone_OA_CFM_list_of_schedules]
+        units = zone_OA_CFM_list_of_schedules[0][0].units
+
+        zone_oa_cfm_magnitudes_array = np.array(magnitudes)
+        zone_oa_cfm_magnitudes_sum = np.sum(zone_oa_cfm_magnitudes_array, axis=0)
+
+        hourly_zone_running_OA_CFM_total = [magnitude * units for magnitude in zone_oa_cfm_magnitudes_sum]
 
     return hourly_zone_running_OA_CFM_total

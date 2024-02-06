@@ -1,5 +1,6 @@
 import inspect
 
+from rct229.rule_engine.memoize import memoize
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.get_dict_with_terminal_units_and_zones import (
     get_dict_with_terminal_units_and_zones,
 )
@@ -54,7 +55,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_dict_of_zones_and_termi
 from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_all
 
-
+@memoize
 def get_baseline_system_types(rmi_b):
     """
     Identify all the baseline system types modeled in a B-RMD.
