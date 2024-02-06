@@ -2977,7 +2977,7 @@
                     "type": "boolean",
                     "notes": "The zone is either served by an air handler that responds to demand control ventilation signals from that zone or is served by a DOAS that specifically provides air to that zone on demand."
                 },
-                "is_first_stage_heat_fan_powered_box": {
+                "is_fan_first_stage_heat": {
                     "description": "True if the zone has first stage heat fan powered box",
                     "type": "boolean",
                     "notes": "This key is temporarily added here because the schema 0.0.35 hasn't had the key yet."
