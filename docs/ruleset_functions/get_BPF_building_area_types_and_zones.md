@@ -54,11 +54,8 @@
 	}```
 
 - Create a dict to store results`building_area_types_with_total_area_and_zones_dict`: `building_area_types_with_total_area_and_zones_dict = {}`
-- For each building segment in RMD: `for building_segment in RMR.building.building_segments:`
-	- If the building segment has a BPF_BAT assigned, assign all zones in that building segment to the BPF_BAT: `if building_segment.bpf_building_area_type != NULL:`
-		- Assign the BPF_BAT to be the building_segment_BPF_BAT: `building_segment_BPF_BAT = building_segment.bpf_building_area_type`
-		- Assign "BUILDING_SEGMENT_BPF_BAT" to classification_source: `classification_source = "BUILDING_SEGMENT_BPF_BAT"`
-	- Else if there is no BPF_BAT assigned, look in the building_segment lighting_building_area_type: `elif building_segment.lighting_building_area_type != NULL and building_segment.lighting_building_area_type != NONE`
+- For each building segment in RMD: `for building_segment in RMD.building.building_segments:`
+	- If the building_segment lighting_building_area_type is defined: `if building_segment.lighting_building_area_type != NULL and building_segment.lighting_building_area_type != NONE`
 		- Assign the BPF_BAT to the building_segment_BPF_BAT using the lighting_space_lookup: `building_segment_BPF_BAT = building_area_lookup[building_segment.lighting_building_area_type]`
 		- Assign "BUILDING_SEGMENT_LIGHTING" to classification_source: `classification_source = "BUILDING_SEGMENT_LIGHTING"`
 	- Else look at each zone, and then each space and determine the building_segment_BPF_BAT using the largest space.lighting_space_type: `else:`

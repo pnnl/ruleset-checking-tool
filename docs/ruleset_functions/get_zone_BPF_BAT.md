@@ -2,7 +2,7 @@
 **Schema Version:** 0.0.29
 
 **Description:** Get a dictionary of the BPF_BAT and areas for a given zone.
-- The function looks at the space lighting type to guess a building area type for a BuildingSegment whose bpf_building_area_type has not been specified AND lighting_building_area_type is NONE
+- The function looks at the space lighting type to guess a building area type for a BuildingSegment whose lighting_building_area_type is NONE. The schema note suggests that lighting building area type always be populated - even when the space-by-space lighting method is used. This function ideally would not be used but is included as a backup.
 
 **Inputs:**  
 - **B-RMD**: The baseline ruleset model instance
