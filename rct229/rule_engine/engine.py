@@ -175,23 +175,36 @@ def evaluate_rules(
     invalid_rmds = {}
     rmds_used = get_rmd_instance()
     for rule in rules_list:
-        for rule_model in rmds.get_ruleset_model_types():
-            if rule.rmrs_used[rule_model]:
-                rmds_used[rule_model] = True
+        for ruleset_model in rmds.get_ruleset_model_types():
+            if rule.rmrs_used[ruleset_model] and not (
+                rule.rmrs_used_optional and rule.rmrs_used_optional[ruleset_model]
+            ):
+                rmds_used[ruleset_model] = True
 
-    for rule_model in rmds.get_ruleset_model_types():
-        if rmds_used[rule_model] and not (
-            rule.rmrs_used_optional and rule.rmrs_used_optional[rule_model]
-        ):
-            rmd_validation = validate_rmr(rmds[rule_model], test)
+    for ruleset_model in rmds.get_ruleset_model_types():
+        if rmds_used[ruleset_model]:
+            rmd_validation = validate_rmr(rmds[ruleset_model], test)
             if rmd_validation["passed"] is not True:
-                invalid_rmds[rule_model] = rmd_validation["error"]
+                invalid_rmds[ruleset_model] = rmd_validation["error"]
 
     assert_(
         len(invalid_rmds) == 0,
-        f"RPDs provided are invalid. See error messages in terminal.",
+        f"Required RPDs provided are invalid. See error messages in terminal.",
     )
 
+    ## Now check the optional RMDs
+    invalid_rmds = {}
+    for ruleset_model in rmds.get_ruleset_model_types():
+        # used is None but rmds contain this ruleset model
+        if not rmds_used[ruleset_model] and rmds.__getitem__(ruleset_model):
+            rmd_validation = validate_rmr(rmds[ruleset_model], test)
+            if rmd_validation["passed"] is not True:
+                invalid_rmds[ruleset_model] = rmd_validation["error"]
+
+    assert_(
+        len(invalid_rmds) == 0,
+        f"Optional RPDs provided are invalid. See error messages in terminal.",
+    )
     # Evaluate the rules if all the used rmrs are valid
     # Replace the numbers that have schema units in the RMRs with the
     # appropriate pint quantities
