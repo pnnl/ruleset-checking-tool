@@ -202,9 +202,9 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
                                 total_surface_fenestration_area_b += (
                                     glazed_area_b + opaque_area_b
                                 )
-                    azimuth_fen_area_dict_b[
-                        surface_azimuth_bin
-                    ] += total_surface_fenestration_area_b
+                        azimuth_fen_area_dict_b[
+                            surface_azimuth_bin
+                        ] += total_surface_fenestration_area_b
 
                 max_fen_area_b = azimuth_fen_area_dict_b[
                     max(azimuth_fen_area_dict_b, key=azimuth_fen_area_dict_b.get)
