@@ -54,11 +54,13 @@ def get_min_oa_cfm_sch_zone(rmi, zone_id, is_leap_year: bool = False):
             )
 
             assert_(
-                year_hrs
-                == len(minimum_outdoor_airflow_multiplier_schedule),
+                year_hrs == len(minimum_outdoor_airflow_multiplier_schedule),
                 f"The length of schedule has to be {year_hrs}, but is {len(minimum_outdoor_airflow_multiplier_schedule)}.",
             )
-            min_oa_cfm_sch_zone_array = np.array(minimum_outdoor_airflow_multiplier_schedule) * minimum_outdoor_airflow
+            min_oa_cfm_sch_zone_array = (
+                np.array(minimum_outdoor_airflow_multiplier_schedule)
+                * minimum_outdoor_airflow
+            )
             min_oa_cfm_sch_zone_array_list.append(min_oa_cfm_sch_zone_array)
 
     if min_oa_cfm_sch_zone_array_list:

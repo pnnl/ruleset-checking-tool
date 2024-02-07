@@ -55,6 +55,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_dict_of_zones_and_termi
 from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_all
 
+
 @memoize
 def get_baseline_system_types(rmi_b):
     """
