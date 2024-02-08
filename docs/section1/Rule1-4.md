@@ -1,5 +1,5 @@
 # Section 1 - Rule 1-4
-**Schema Version:** 0.0.29  
+**Schema Version:** 0.0.36  
 **Mandatory Rule:** True  
 **Rule ID:** 1-4
 **Rule Description:** The PCI shall be less than or equal to the PCIt when calculated in accordance with Standard 90.1 2019, Section 4.2.1.1
