@@ -1,5 +1,5 @@
 # Section 1 - Rule 1-5
-**Schema Version:** 0.0.29  
+**Schema Version:** 0.0.36  
 **Mandatory Rule:** True  
 **Rule ID:** 1-5
 **Rule Description:** When on-site renewable energy generation exceeds the thresholds defined in Section 4.2.1.1, the methodology defined in this section shall be used to calculate the PCIt.
