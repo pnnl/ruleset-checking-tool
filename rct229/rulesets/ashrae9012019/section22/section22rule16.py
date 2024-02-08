@@ -123,12 +123,3 @@ class Section22Rule16(RuleDefinitionListIndexedBase):
                 == design_wetbulb_temperature.to(ureg.kelvin)
                 + approach_b.to(ureg.kelvin),
             )
-
-        def is_tolerance_fail(self, context, calc_vals=None, data=None):
-            design_wetbulb_temperature = calc_vals["design_wetbulb_temperature_b"]
-            approach_b = calc_vals["approach_b"]
-            design_supply_temperature_b = calc_vals["design_supply_temperature_b"]
-            return std_equal(
-                design_supply_temperature_b.to(ureg.kelvin),
-                design_wetbulb_temperature.to(ureg.kelvin) + approach_b.to(ureg.kelvin),
-            )

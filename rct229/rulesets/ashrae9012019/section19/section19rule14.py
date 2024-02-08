@@ -245,8 +245,8 @@ class Section19Rule14(RuleDefinitionListIndexedBase):
             ) or (
                 not is_modeled_with_return_fan_in_p
                 and not is_modeled_with_relief_fan_p
-                and ZERO.FLOW == return_fans_airflow
-                and ZERO.FLOW == relief_fans_airflow
+                and std_equal(ZERO.FLOW, return_fans_airflow)
+                and std_equal(ZERO.FLOW, relief_fans_airflow)
             )
 
         def is_tolerance_fail(self, context, calc_vals=None, data=None):
