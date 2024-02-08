@@ -1,5 +1,5 @@
 # Section 1 - Rule 1-3
-**Schema Version:** 0.0.29  
+**Schema Version:** 0.0.36  
 **Mandatory Rule:** True  
 **Rule ID:** 1-3
 **Rule Description:** The Performance Cost Index-Target (PCIt) shall be calculated using the procedures defined in Section 4.2.1.1. The PCIt shall be equal to baseline building unregulated energy cost (BBUEC) + BPF x baseline building regulated energy cost (BBREC)/ BBP
