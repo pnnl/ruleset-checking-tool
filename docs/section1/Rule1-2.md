@@ -29,8 +29,9 @@
 - Get the Performance Cost Index: `output_pci = pci_set[0]`
 - Get the proposed building performance (PBP): `output_pbp = pbp_set[0]`
 - Get the baseline building performance (BBP): `output_bbp = bbp_set[0]`
-- Get the proposed building performance without any credit for on-site renewable energy generation systems: `output_pbp_nre = pbp_nre_set[0]`
-**Applicability Check 1:** If the proposed on site renewable energy production offsets more than 5% of the baseline building performance: NOT_APPLICABLE ` if (output_pbp_nre - output_pbp)/output_bbp > 0.05: NOT_APPLICABLE`
+- Get the proposed building performance without any credit for on-site renewable energy generation systems: `output_pbp_nre = pbp_nre_set[0]`  
+**Applicability Check 1:** 
+- If the proposed on site renewable energy production offsets more than 5% of the baseline building performance: NOT_APPLICABLE ` if (output_pbp_nre - output_pbp)/output_bbp > 0.05: NOT_APPLICABLE`
 - Else, continue to rule assertion: `else:`
 
   **Rule Assertion:** 
