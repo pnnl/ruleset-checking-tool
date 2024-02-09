@@ -31,7 +31,7 @@ def are_all_hvac_sys_fan_objs_autosized(rmi, hvac_id):
     return (
         all(
             [
-                getattr_(supply_fan, "supply_fan", "is_airflow_autosized")
+                getattr_(supply_fan, "supply_fan", "is_airflow_sized_based_on_design_day")
                 for supply_fan in find_all("$.fan_system.supply_fans[*]", hvac)
             ]
         )
@@ -42,7 +42,7 @@ def are_all_hvac_sys_fan_objs_autosized(rmi, hvac_id):
                     find_exactly_one_terminal_unit(rmi, terminal_id),
                     "terminal",
                     "fan",
-                    "is_airflow_autosized",
+                    "is_airflow_sized_based_on_design_day",
                 )
                 for terminal_id in dict_of_zones_and_terminal_units_served_by_hvac_sys[
                     hvac_id
