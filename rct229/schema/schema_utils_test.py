@@ -19,6 +19,7 @@ TEST_RMR = {
     "ruleset_model_descriptions": [
         {
             "id": "user_rmd",
+            "type": "Enumerations2019ASHRAE901.schema.json#/definitions/RulesetModelOptions2019ASHRAE901",
             "transformers": [
                 {
                     "id": "1",
