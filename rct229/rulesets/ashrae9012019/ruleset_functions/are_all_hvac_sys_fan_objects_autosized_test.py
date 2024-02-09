@@ -82,7 +82,10 @@ TEST_RMI = {
                                 "id": "VAV Fan System 1",
                                 "fan_control": "VARIABLE_SPEED_DRIVE",
                                 "supply_fans": [
-                                    {"id": "Supply Fan 1", "is_airflow_sized_based_on_design_day": True}
+                                    {
+                                        "id": "Supply Fan 1",
+                                        "is_airflow_sized_based_on_design_day": True,
+                                    }
                                 ],
                             },
                         },

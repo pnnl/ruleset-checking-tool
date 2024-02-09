@@ -31,7 +31,9 @@ def are_all_hvac_sys_fan_objs_autosized(rmi, hvac_id):
     return (
         all(
             [
-                getattr_(supply_fan, "supply_fan", "is_airflow_sized_based_on_design_day")
+                getattr_(
+                    supply_fan, "supply_fan", "is_airflow_sized_based_on_design_day"
+                )
                 for supply_fan in find_all("$.fan_system.supply_fans[*]", hvac)
             ]
         )

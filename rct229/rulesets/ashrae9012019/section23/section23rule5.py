@@ -85,13 +85,9 @@ class Section23Rule5(RuleDefinitionListIndexedBase):
                 terminal_b, "terminals", "is_fan_first_stage_heat"
             )
 
-            return {
-                "is_fan_first_stage_heat_b": is_fan_first_stage_heat_b
-            }
+            return {"is_fan_first_stage_heat_b": is_fan_first_stage_heat_b}
 
         def rule_check(self, context, calc_vals=None, data={}):
-            is_fan_first_stage_heat_b = calc_vals[
-                "is_fan_first_stage_heat_b"
-            ]
+            is_fan_first_stage_heat_b = calc_vals["is_fan_first_stage_heat_b"]
 
             return is_fan_first_stage_heat_b

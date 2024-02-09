@@ -109,7 +109,10 @@ class Section19Rule1(RuleDefinitionListIndexedBase):
                     hvac_b, "oversizing_factor", "heating_system", "oversizing_factor"
                 )
                 heating_is_sized_based_on_design_day = getattr_(
-                    hvac_b, "is_sized_based_on_design_day", "heating_system", "is_sized_based_on_design_day"
+                    hvac_b,
+                    "is_sized_based_on_design_day",
+                    "heating_system",
+                    "is_sized_based_on_design_day",
                 )
             else:
                 heating_oversizing_applicable = False
@@ -119,7 +122,10 @@ class Section19Rule1(RuleDefinitionListIndexedBase):
                     hvac_b, "oversizing_factor", "cooling_system", "oversizing_factor"
                 )
                 cooling_is_sized_based_on_design_day = getattr_(
-                    hvac_b, "is_sized_based_on_design_day", "cooling_system", "is_sized_based_on_design_day"
+                    hvac_b,
+                    "is_sized_based_on_design_day",
+                    "cooling_system",
+                    "is_sized_based_on_design_day",
                 )
             else:
                 cooling_oversizing_applicable = False
@@ -136,8 +142,12 @@ class Section19Rule1(RuleDefinitionListIndexedBase):
         def rule_check(self, context, calc_vals=None, data=None):
             heating_oversizing_factor = calc_vals["heating_oversizing_factor"]
             cooling_oversizing_factor = calc_vals["cooling_oversizing_factor"]
-            heating_is_sized_based_on_design_day = calc_vals["heating_is_sized_based_on_design_day"]
-            cooling_is_sized_based_on_design_day = calc_vals["cooling_is_sized_based_on_design_day"]
+            heating_is_sized_based_on_design_day = calc_vals[
+                "heating_is_sized_based_on_design_day"
+            ]
+            cooling_is_sized_based_on_design_day = calc_vals[
+                "cooling_is_sized_based_on_design_day"
+            ]
             heating_oversizing_applicable = calc_vals["heating_oversizing_applicable"]
             cooling_oversizing_applicable = calc_vals["cooling_oversizing_applicable"]
 
