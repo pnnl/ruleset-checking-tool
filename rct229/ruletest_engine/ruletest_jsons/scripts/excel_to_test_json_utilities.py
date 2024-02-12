@@ -8,6 +8,7 @@ import pint
 
 from rct229.rule_engine.rulesets import RuleSet
 from rct229.ruletest_engine.ruletest_jsons.scripts.json_generation_utilities import *
+from rct229.ruletest_engine.ruletest_jsons.scripts.excel_generation_utilities import generate_rule_test_dictionary
 from rct229.schema.config import ureg
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.schema.schema_utils import *
@@ -756,8 +757,8 @@ def add_baseline_terminals(
 
 
 def clean_system_name_for_multizone_airloop(rmr_dict, system_name):
-    """Checks the RMR dictionary for a particularly system name in the list of HVAC systems. Iterates the name of this
-    system to ensure IDs arent duplicated.
+    """Checks the RMR dictionary for a particular system name in the list of HVAC systems. Iterates the name of this
+    system to ensure IDs aren't duplicated.
 
          Parameters
          ----------
@@ -1126,3 +1127,22 @@ def determine_system_classification(system_rmd):
     # If not air loop, it's zone equipment
     else:
         return "ZoneEquipment"
+
+
+def count_number_of_ruletest_cases(ruleset_standard):
+
+    # Aggregate rule test information into a dictionary
+    master_ruletest_dict = generate_rule_test_dictionary(ruleset_standard)
+
+    # Dictionary with ruletest counts
+    count_dict = {}
+
+    # Iterate through each section and get the number of rule unit tests
+    for section_name, section_dict in master_ruletest_dict.items():
+        count_dict[section_name] = len(section_dict['Rule_Unit_Test'])
+
+    # Get total rule unit tests
+    count_dict['total'] = sum(count_dict.values())
+
+    return count_dict
+
