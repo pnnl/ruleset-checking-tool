@@ -142,8 +142,10 @@ SYS_11_2_TEST_RMD = {
                 },
                 {"id": "Purchased CHW Loop 1", "type": "COOLING"},
             ],
+            "type": "BASELINE_0",
         }
     ],
+    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 SYS_11_2_TEST_UNMATCHED_RMD = {
@@ -240,8 +242,10 @@ SYS_11_2_TEST_UNMATCHED_RMD = {
                 },
                 {"id": "CHW Loop 1", "type": "COOLING"},
             ],
+            "type": "BASELINE_0",
         }
     ],
+    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 

@@ -95,7 +95,7 @@
                 },
                 "type": {
                     "description": "Describes the current ruleset model description for rulesets with multiple simulation models",
-                    "oneOf": [
+                    "anyOf": [
                         {
                             "$ref": "Enumerations2019ASHRAE901.schema.json#/definitions/RulesetModelOptions2019ASHRAE901"
                         },

@@ -19,7 +19,7 @@ def are_all_hvac_sys_fan_objs_autosized(rmi, hvac_id):
     hvac_id: str HVAC id string
 
     Returns: bool True if all supply fan objects associate with an HVAC system are autosized, False otherwise,
-    MissingKey Exception if missing critcal keys
+    MissingKey Exception if missing critical keys
     -------
 
     """

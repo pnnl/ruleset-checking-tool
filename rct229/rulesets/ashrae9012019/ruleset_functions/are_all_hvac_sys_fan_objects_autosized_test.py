@@ -141,10 +141,15 @@ TEST_RMI = {
             ],
         }
     ],
+    "type": "BASELINE_0",
 }
 
 
-TEST_RMD = {"id": "ASHRAE229", "ruleset_model_descriptions": [TEST_RMI]}
+TEST_RMD = {
+    "id": "ASHRAE229",
+    "ruleset_model_descriptions": [TEST_RMI],
+    "data_timestamp": "2024-02-12T09:00Z",
+}
 
 
 def test__TEST_RMD__is_valid():
