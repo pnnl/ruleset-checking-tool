@@ -26,8 +26,10 @@ TEST_RMR = {
                     "capacity": 500,
                 }
             ],
+        "type": "BASELINE_0",
         },
     ],
+    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 
@@ -53,6 +55,8 @@ def test__quantify_rmr():
                         "capacity": 500 * ureg("ampere * volt"),
                     }
                 ],
+                "type": "BASELINE_0",
             },
         ],
+        "data_timestamp": "2024-02-12T09:00Z",
     }
