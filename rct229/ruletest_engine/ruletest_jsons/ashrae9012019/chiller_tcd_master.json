@@ -18776,10 +18776,17 @@
                             },
                             {
                                 "id": "Condensing Loop 1",
+                                "type": "CONDENSER",
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
                                     "flow_control": "FIXED_FLOW"
                                 }
+                            }
+                        ],
+                        "heat_rejections": [
+                            {
+                                "id": "Heat Rejection 1",
+                                "loop": "Condensing Loop 1"
                             }
                         ],
                         "type": "BASELINE_0"
@@ -18936,10 +18943,17 @@
                             },
                             {
                                 "id": "Condensing Loop 1",
+                                "type": "CONDENSER",
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
                                     "flow_control": "VARIABLE_FLOW"
                                 }
+                            }
+                        ],
+                        "heat_rejections": [
+                            {
+                                "id": "Heat Rejection 1",
+                                "loop": "Condensing Loop 1"
                             }
                         ],
                         "type": "BASELINE_0"
@@ -22707,7 +22721,7 @@
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
                                                     "type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "COOLING"
+                                                    "chilled_water_loop": "Chiller Loop 1"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
