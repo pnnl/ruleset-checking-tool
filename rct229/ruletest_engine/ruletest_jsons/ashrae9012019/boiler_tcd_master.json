@@ -3,7 +3,7 @@
         "Section": 21,
         "Rule": 1,
         "Test": "a",
-        "test_description": "A baseline system 7 with purchased hot water in both the proposed and baseline model. This requires a manual check. EXPECTED: Undetermined",
+        "test_description": "The project has one building segment with two zones. A baseline system 7 with purchased hot water in both the proposed and baseline model. This requires a manual check. EXPECTED: Undetermined",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "21-1",
@@ -13,11 +13,12 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "primary_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -145,6 +146,7 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -276,7 +278,7 @@
         "Section": 21,
         "Rule": 1,
         "Test": "b",
-        "test_description": "A baseline system 7 with a conventional boiler and not purchased hot water in both the proposed and baseline model. This does not apply. EXPECTED: not_applicable",
+        "test_description": "The project has one building segment with two zones. A baseline system 7 with a conventional boiler and not purchased hot water in both the proposed and baseline model. This does not apply. EXPECTED: not_applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-1",
@@ -286,11 +288,12 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "primary_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -418,6 +421,7 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -549,7 +553,7 @@
         "Section": 21,
         "Rule": 2,
         "Test": "a",
-        "test_description": "A baseline system 7 with purchased hot water in both the proposed and baseline model. This requires a manual check. EXPECTED: Undetermined",
+        "test_description": "The project has one building segment with two zones. A baseline system 7 with purchased hot water in both the proposed and baseline model. This requires a manual check. EXPECTED: Undetermined",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "21-2",
@@ -559,11 +563,12 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "primary_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -691,6 +696,7 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -822,7 +828,7 @@
         "Section": 21,
         "Rule": 2,
         "Test": "b",
-        "test_description": "A baseline system 7 with a conventional boiler and not purchased hot water in both the proposed and baseline model. This does not apply. EXPECTED: not_applicable",
+        "test_description": "The project has one building segment with two zones. A baseline system 7 with a conventional boiler and not purchased hot water in both the proposed and baseline model. This does not apply. EXPECTED: not_applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-2",
@@ -832,11 +838,12 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "primary_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -964,6 +971,7 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1095,7 +1103,7 @@
         "Section": 21,
         "Rule": 3,
         "Test": "a",
-        "test_description": "The project consists of one building segment with one zone.  Space conditioning is provided by system type 7 with boiler.  The baseline building's hot water system's sizing is based on coincident loads.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  Space conditioning is provided by system type 7 with boiler.  The baseline building's hot water system's sizing is based on coincident loads.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-3",
@@ -1105,11 +1113,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1245,7 +1254,7 @@
         "Section": 21,
         "Rule": 3,
         "Test": "b",
-        "test_description": "The project consists of one building segment with one zone.  Space conditioning is provided by system type 7 with boiler.  The baseline building's hot water system's sizing is NOT based on coincident loads.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  Space conditioning is provided by system type 7 with boiler.  The baseline building's hot water system's sizing is NOT based on coincident loads.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-3",
@@ -1255,11 +1264,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1395,7 +1405,7 @@
         "Section": 21,
         "Rule": 3,
         "Test": "c",
-        "test_description": "The project consists of one building segment with one zone.  Space conditioning is provided by system type 5 with boiler.  The baseline building's hot water system's sizing is based on coincident loads.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  Space conditioning is provided by system type 5 with boiler.  The baseline building's hot water system's sizing is based on coincident loads.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-3",
@@ -1405,11 +1415,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1518,7 +1529,7 @@
         "Section": 21,
         "Rule": 3,
         "Test": "d",
-        "test_description": "The project consists of one building segment with one zone.  Space conditioning is provided by system type 5 with boiler.  The baseline building's hot water system's sizing is NOT based on coincident loads.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  Space conditioning is provided by system type 5 with boiler.  The baseline building's hot water system's sizing is NOT based on coincident loads.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-3",
@@ -1528,11 +1539,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1641,7 +1653,7 @@
         "Section": 21,
         "Rule": 3,
         "Test": "e",
-        "test_description": "The project consists of one building segment with one zone.  Space conditioning is provided by system type 2.  Expected result: UNDETERMINED",
+        "test_description": "The project has one building segment with one zone.  Space conditioning is provided by system type 2.  Expected result: UNDETERMINED",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-3",
@@ -1651,11 +1663,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1717,7 +1730,7 @@
         "Section": 21,
         "Rule": 4,
         "Test": "a",
-        "test_description": "The project consists of one building segment with one zone.  Space conditioning is provided by system type 7 with boiler and is correctly modeled with a natural draft boiler.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  Space conditioning is provided by system type 7 with boiler and is correctly modeled with a natural draft boiler.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-4",
@@ -1727,11 +1740,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1864,7 +1878,7 @@
         "Section": 21,
         "Rule": 4,
         "Test": "b",
-        "test_description": "The project consists of one building segment with one zone.  Space conditioning is provided by system type 7 with boiler and is incorrectly modeled with a forced draft boiler.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  Space conditioning is provided by system type 7 with boiler and is incorrectly modeled with a forced draft boiler.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-4",
@@ -1874,11 +1888,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -2011,7 +2026,7 @@
         "Section": 21,
         "Rule": 4,
         "Test": "c",
-        "test_description": "The project consists of one building segment with one zone.  Space conditioning is provided by system type 11.2 with boiler and is correctly modeled with a natural draft boiler.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone.  Space conditioning is provided by system type 11.2 with boiler and is correctly modeled with a natural draft boiler.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-4",
@@ -2021,11 +2036,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -2141,7 +2157,7 @@
         "Section": 21,
         "Rule": 4,
         "Test": "d",
-        "test_description": "The project consists of one building segment with one zone.  Space conditioning is provided by system type 11.2 with boiler and is incorrectly modeled with a forced draft boiler.  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone.  Space conditioning is provided by system type 11.2 with boiler and is incorrectly modeled with a forced draft boiler.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-4",
@@ -2151,11 +2167,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -2271,7 +2288,7 @@
         "Section": 21,
         "Rule": 4,
         "Test": "e",
-        "test_description": "The project consists of one building segment with one zone.  Space conditioning is provided by system type 3 with no hot water loops.  Expected result: NOT APPLICABLE",
+        "test_description": "The project has one building segment with one zone.  Space conditioning is provided by system type 3 with no hot water loops.  Expected result: NOT APPLICABLE",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-4",
@@ -2281,11 +2298,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -2352,7 +2370,7 @@
         "Section": 21,
         "Rule": 5,
         "Test": "a",
-        "test_description": "The project consists of one building segment with two zones and two spaces.  Building is 12,000 ft2, has baseline system type 7 and is correctly modeled with a HW Loop with a single boiler. Expected result: PASS",
+        "test_description": "The project has one building segment with two zones and two spaces.  Building is 12,000 ft2, has baseline system type 7 and is correctly modeled with a hot water Loop with a single boiler. Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-5",
@@ -2362,11 +2380,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -2516,7 +2535,7 @@
         "Section": 21,
         "Rule": 5,
         "Test": "b",
-        "test_description": "The project consists of one building segment with two zones and two spaces.  Building is 12,000 ft2, has baseline system type 7 and is incorrectly modeled with a HW Loop with two boilers. Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones and two spaces.  Building is 12,000 ft2, has baseline system type 7 and is incorrectly modeled with a hot water Loop with two boilers. Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-5",
@@ -2526,11 +2545,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -2685,7 +2705,7 @@
         "Section": 21,
         "Rule": 5,
         "Test": "c",
-        "test_description": "The project consists of one building segment with one zone and one space.  Building is  24,000 ft2, has baseline system type 12 and is correctly modeled with a HW Loop with two equally sized boiler(s). Expected result: PASS",
+        "test_description": "The project has one building segment with one zone and one space.  Building is  24,000 ft2, has baseline system type 12 and is correctly modeled with a hot water Loop with two equally sized boiler(s). Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-5",
@@ -2695,11 +2715,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -2831,7 +2852,7 @@
         "Section": 21,
         "Rule": 5,
         "Test": "d",
-        "test_description": "The project consists of one building segment with one zone and one space.  Building is  24,000 ft2, has baseline system type 12 and is incorrectly modeled with a HW Loop with two unequally sized boiler(s). Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone and one space.  Building is  24,000 ft2, has baseline system type 12 and is incorrectly modeled with a hot water Loop with two unequally sized boiler(s). Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-5",
@@ -2841,11 +2862,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -2977,7 +2999,7 @@
         "Section": 21,
         "Rule": 5,
         "Test": "e",
-        "test_description": "The project consists of one building segment with one zone and one space.  Building is 24,000 ft2, has baseline system type 12 and is incorrectly modeled with a HW Loop with one boiler. Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone and one space.  Building is 24,000 ft2, has baseline system type 12 and is incorrectly modeled with a hot water Loop with one boiler. Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-5",
@@ -2987,11 +3009,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -3118,7 +3141,7 @@
         "Section": 21,
         "Rule": 5,
         "Test": "f",
-        "test_description": "The project consists of one building segment with one zone and one space.  Building is 24,000 ft2, has baseline system type 4.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone and one space.  Building is 24,000 ft2, has baseline system type 4.  Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-5",
@@ -3128,11 +3151,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -3208,7 +3232,7 @@
         "Section": 21,
         "Rule": 6,
         "Test": "a",
-        "test_description": "The project consists of one building segment with two zones and two spaces.  Baseline RMD has utilizes system 7 with two boilers staged based on load. Boiler 1 is staged before Boiler 2.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones and two spaces.  Baseline ruleset project description has utilizes system 7 with two boilers staged based on load. Boiler 1 is staged before Boiler 2.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-6",
@@ -3218,11 +3242,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -3376,7 +3401,7 @@
         "Section": 21,
         "Rule": 6,
         "Test": "b",
-        "test_description": "The project consists of one building segment with two zones and two spaces.  Baseline RMD has utilizes system 7 with two boilers staged based on load. Boiler 2 is staged before Boiler 1.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones and two spaces.  Baseline ruleset project description has utilizes system 7 with two boilers staged based on load. Boiler 2 is staged before Boiler 1.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-6",
@@ -3386,11 +3411,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -3544,7 +3570,7 @@
         "Section": 21,
         "Rule": 6,
         "Test": "c",
-        "test_description": "The project consists of one building segment with two zones.  Baseline RMD has utilizes system 7 with two boilers is not staged based on load. Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  Baseline ruleset project description has utilizes system 7 with two boilers is not staged based on load. Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-6",
@@ -3554,11 +3580,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -3700,7 +3727,7 @@
         "Section": 21,
         "Rule": 6,
         "Test": "d",
-        "test_description": "The project consists of one building segment with two zones and two spaces.  Baseline RMD has utilizes system 1 with two boilers staged based on load. Boiler 1 is staged before Boiler 2.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone and two spaces.  Baseline ruleset project description has utilizes system 1 with two boilers staged based on load. Boiler 1 is staged before Boiler 2.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-6",
@@ -3710,11 +3737,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -3815,7 +3843,7 @@
         "Section": 21,
         "Rule": 6,
         "Test": "e",
-        "test_description": "The project consists of one building segment with two zones and two spaces.  Baseline RMD has utilizes system 1 with two boilers staged based on load. Boiler 2 is staged before Boiler 1.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone and two spaces.  Baseline ruleset project description has utilizes system 1 with two boilers staged based on load. Boiler 2 is staged before Boiler 1.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-6",
@@ -3825,11 +3853,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -3930,7 +3959,7 @@
         "Section": 21,
         "Rule": 6,
         "Test": "f",
-        "test_description": "The project consists of one building segment with two zones.  Baseline RMD has utilizes system 1 with two boilers is not staged based on load. Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone.  Baseline ruleset project description has utilizes system 1 with two boilers is not staged based on load. Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-6",
@@ -3940,11 +3969,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -4030,7 +4060,7 @@
         "Section": 21,
         "Rule": 6,
         "Test": "g",
-        "test_description": "The project consists of one building segment with two zones.  Baseline RMD has utilizes system 6. Expected result: NOT APPLICABLE",
+        "test_description": "The project has one building segment with two zones.  Baseline ruleset project description has utilizes system 6. Expected result: NOT APPLICABLE",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-6",
@@ -4040,11 +4070,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -4134,7 +4165,7 @@
         "Section": 21,
         "Rule": 7,
         "Test": "a",
-        "test_description": "The project consists of one building segment with two zones and two spaces.  Baseline RMD utilizes system 7 with supply and return temperatures correctly set to 180 F and 130 F respectively. Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  Baseline ruleset project description utilizes system 7 with supply and return temperatures correctly set to 180 F and 130 F respectively. Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-7",
@@ -4144,11 +4175,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -4285,7 +4317,7 @@
         "Section": 21,
         "Rule": 7,
         "Test": "b",
-        "test_description": "The project consists of one building segment with two zones.  Baseline RMD has utilizes system 7 with supply and return temperatures incorrectly set to 200 F and correctly set to 130 F respectively. Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  Baseline ruleset project description has utilizes system 7 with supply and return temperatures incorrectly set to 200 F and correctly set to 130 F respectively. Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-7",
@@ -4295,11 +4327,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -4436,7 +4469,7 @@
         "Section": 21,
         "Rule": 7,
         "Test": "c",
-        "test_description": "The project consists of one building segment with two zones.  Baseline RMD has utilizes system 7 with supply and return temperatures correctly set to 180 F and inccorectly to 150 F respectively.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  Baseline ruleset project description has utilizes system 7 with supply and return temperatures correctly set to 180 F and inccorectly to 150 F respectively.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-7",
@@ -4446,11 +4479,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -4587,7 +4621,7 @@
         "Section": 21,
         "Rule": 7,
         "Test": "d",
-        "test_description": "The project consists of one building segment with two zones and two spaces.  Baseline RMD utilizes system 5 with supply and return temperatures correctly set to 180 F and 130 F respectively. Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  Baseline ruleset project description utilizes system 5 with supply and return temperatures correctly set to 180 F and 130 F respectively. Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-7",
@@ -4597,11 +4631,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -4711,7 +4746,7 @@
         "Section": 21,
         "Rule": 7,
         "Test": "e",
-        "test_description": "The project consists of one building segment with two zones.  Baseline RMD has utilizes system 5 with supply and return temperatures incorrectly set to 200 F and correctly set to 130 F respectively. Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  Baseline ruleset project description has utilizes system 5 with supply and return temperatures incorrectly set to 200 F and correctly set to 130 F respectively. Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-7",
@@ -4721,11 +4756,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -4835,7 +4871,7 @@
         "Section": 21,
         "Rule": 7,
         "Test": "f",
-        "test_description": "The project consists of one building segment with two zones.  Baseline RMD has utilizes system 5 with supply and return temperatures correctly set to 180 F and inccorectly to 150 F respectively.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  Baseline ruleset project description has utilizes system 5 with supply and return temperatures correctly set to 180 F and inccorectly to 150 F respectively.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-7",
@@ -4845,11 +4881,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -4959,7 +4996,7 @@
         "Section": 21,
         "Rule": 7,
         "Test": "g",
-        "test_description": "The project consists of one building segment with two zones.  Baseline RMD has utilizes system 5b.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with two zones.  Baseline ruleset project description has utilizes system 5b.  Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-7",
@@ -4969,11 +5006,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -5078,7 +5116,7 @@
         "Section": 21,
         "Rule": 8,
         "Test": "a",
-        "test_description": "Baseline System 7's boiler has outdoor air temperature based supply temperature reset. Hot water temperatures are at 150 F when temperature are high, and 180 F when they are low. High outdoor air temperature set to 50F and low outdoor air temperature set to 20 F. Expected Result: Pass",
+        "test_description": "The project has one building segment with two zones. Baseline System 7's boiler has outdoor air temperature based supply temperature reset. Hot water temperatures are at 150 F when temperature are high, and 180 F when they are low. High outdoor air temperature set to 50F and low outdoor air temperature set to 20 F. Expected Result: Pass",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-8",
@@ -5088,11 +5126,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -5232,7 +5271,7 @@
         "Section": 21,
         "Rule": 8,
         "Test": "b",
-        "test_description": "Baseline System 5's boiler has outdoor air temperature based supply temperature reset. Hot water temperatures are at 150 F when temperature are high, and 180 F when they are low. High outdoor air temperature set to 50F and low outdoor air temperature set to 20 F. Expected Result: Pass",
+        "test_description": "The project has one building segment with two zones. Baseline System 5's boiler has outdoor air temperature based supply temperature reset. Hot water temperatures are at 150 F when temperature are high, and 180 F when they are low. High outdoor air temperature set to 50F and low outdoor air temperature set to 20 F. Expected Result: Pass",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-8",
@@ -5242,11 +5281,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -5359,7 +5399,7 @@
         "Section": 21,
         "Rule": 8,
         "Test": "c",
-        "test_description": "Baseline System 7's boiler has outdoor air temperature based supply temperature reset. Hot water temperatures are at 160 F when temperature are high, and 190 F when they are low. High outdoor air temperature set to 50F and low outdoor air temperature set to 20 F. Expected Result: Fail",
+        "test_description": "The project has one building segment with two zones. Baseline System 7's boiler has outdoor air temperature based supply temperature reset. Hot water temperatures are at 160 F when temperature are high, and 190 F when they are low. High outdoor air temperature set to 50F and low outdoor air temperature set to 20 F. Expected Result: Fail",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-8",
@@ -5369,11 +5409,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -5513,7 +5554,7 @@
         "Section": 21,
         "Rule": 8,
         "Test": "d",
-        "test_description": "Baseline System 5's boiler has outdoor air temperature based supply temperature reset. Hot water temperatures are at 160 F when temperature are high, and 190 F when they are low. High outdoor air temperature set to 50F and low outdoor air temperature set to 20 F. Expected Result: Fail",
+        "test_description": "The project has one building segment with two zones. Baseline System 5's boiler has outdoor air temperature based supply temperature reset. Hot water temperatures are at 160 F when temperature are high, and 190 F when they are low. High outdoor air temperature set to 50F and low outdoor air temperature set to 20 F. Expected Result: Fail",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-8",
@@ -5523,11 +5564,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -5640,7 +5682,7 @@
         "Section": 21,
         "Rule": 9,
         "Test": "a",
-        "test_description": "The project consists of one building segment with two zones.  Baseline RMD utilizes system 7 with total pump power per flow rate correctly set to 19 W/gpm.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  Baseline ruleset project description utilizes system 7 with total pump power per flow rate correctly set to 19 W/gpm.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-9",
@@ -5650,11 +5692,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -5787,7 +5830,7 @@
         "Section": 21,
         "Rule": 9,
         "Test": "b",
-        "test_description": "The project consists of one building segment with two zones.  Baseline RMD utilizes system 7 with total pump power per flow rate incorrectly set to 21 W/gpm. Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  Baseline ruleset project description utilizes system 7 with total pump power per flow rate incorrectly set to 21 W/gpm. Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-9",
@@ -5797,11 +5840,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -5934,7 +5978,7 @@
         "Section": 21,
         "Rule": 9,
         "Test": "c",
-        "test_description": "The project consists of one building segment with one zone.  Baseline RMD utilizes system 1a with total pump power per flow rate correctly set to 19 W/gpm.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone.  Baseline ruleset project description utilizes system 1a with total pump power per flow rate correctly set to 19 W/gpm.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-9",
@@ -5944,11 +5988,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -6029,7 +6074,7 @@
         "Section": 21,
         "Rule": 9,
         "Test": "d",
-        "test_description": "The project consists of one building segment with one zone.  Baseline RMD utilizes system 1a with total pump power per flow rate incorrectly set to 21 W/gpm. Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone.  Baseline ruleset project description utilizes system 1a with total pump power per flow rate incorrectly set to 21 W/gpm. Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-9",
@@ -6039,11 +6084,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -6124,7 +6170,7 @@
         "Section": 21,
         "Rule": 9,
         "Test": "e",
-        "test_description": "The project consists of one building segment with one zone.  Baseline RMD utilizes system 1b. Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone.  Baseline ruleset project description utilizes system 1b. Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-9",
@@ -6134,11 +6180,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -6214,7 +6261,7 @@
         "Section": 21,
         "Rule": 10,
         "Test": "a",
-        "test_description": "The project consists of one building segment with two zones and two spaces.  Baseline RMD has HHW plant with the hot water pump that serves a total of 100,000 ft2 floor area. The pump's speed control value is correctly set to FIXED_SPEED.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones and two spaces.  Baseline ruleset project description has hot water plant with the hot water pump that serves a total of 100,000 ft2 floor area. The pump's speed control value is correctly set to FIXED_SPEED.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-10",
@@ -6224,11 +6271,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -6372,7 +6420,7 @@
         "Section": 21,
         "Rule": 10,
         "Test": "b",
-        "test_description": "The project consists of one building segment with two zones and two spaces.  Baseline RMD has HHW plant with the hot water pump that serves a total of 100,000 ft2 floor area. The pump's speed control value is incorrectly set to VARIABLE_SPEED.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones and two spaces.  Baseline ruleset project description has hot water plant with the hot water pump that serves a total of 100,000 ft2 floor area. The pump's speed control value is incorrectly set to VARIABLE_SPEED.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-10",
@@ -6382,11 +6430,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -6530,7 +6579,7 @@
         "Section": 21,
         "Rule": 10,
         "Test": "c",
-        "test_description": "The project consists of one building segment with one zone and one space.  Baseline RMD has HHW plant with the hot water pump that serves a total of 140,000 ft2 floor area. The pump's speed control value is correctly set to VARIABLE_SPEED.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone and one space.  Baseline ruleset project description has hot water plant with the hot water pump that serves a total of 140,000 ft2 floor area. The pump's speed control value is correctly set to VARIABLE_SPEED.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-10",
@@ -6540,11 +6589,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -6655,7 +6705,7 @@
         "Section": 21,
         "Rule": 10,
         "Test": "d",
-        "test_description": "The project consists of one building segment with one zone and one space.  Baseline RMD has HHW plant with the hot water pump that serves a total of 140,000 ft2 floor area. The pump's speed control value is incorrectly set to FIXED_SPEED.  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone and one space.  Baseline ruleset project description has hot water plant with the hot water pump that serves a total of 140,000 ft2 floor area. The pump's speed control value is incorrectly set to FIXED_SPEED.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-10",
@@ -6665,11 +6715,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -6780,7 +6831,7 @@
         "Section": 21,
         "Rule": 10,
         "Test": "e",
-        "test_description": "The project consists of one building segment with one zone and one space.  Baseline RMD system type 8  Expected result: Not Appicable",
+        "test_description": "The project has one building segment with two zones and one space.  Baseline ruleset project description system type 8  Expected result: Not Appicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-10",
@@ -6790,11 +6841,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -6939,7 +6991,7 @@
         "Section": 21,
         "Rule": 11,
         "Test": "a",
-        "test_description": "The project consists of one building segment with two zones. Baseline RMD has system 7 with child loop value correctly set to null.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 7 with child loop value correctly set to null.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-11",
@@ -6949,11 +7001,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -7085,7 +7138,7 @@
         "Section": 21,
         "Rule": 11,
         "Test": "b",
-        "test_description": "The project consists of one building segment with two zones. Baseline RMD has system 7 with child loop incorrectly referencing to  FluidLoop 2. Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 7 with child loop incorrectly referencing to  FluidLoop 2. Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-11",
@@ -7095,11 +7148,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -7237,7 +7291,7 @@
         "Section": 21,
         "Rule": 11,
         "Test": "c",
-        "test_description": "The project consists of one building segment with one zone. Baseline RMD has system 12a with child loop value correctly set to null.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone. Baseline ruleset project description has system 12a with child loop value correctly set to null.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-11",
@@ -7247,11 +7301,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -7356,7 +7411,7 @@
         "Section": 21,
         "Rule": 11,
         "Test": "d",
-        "test_description": "The project consists of one building segment with one zone. Baseline RMD has system 12a with child loop incorrectly referencing to  FluidLoop 2. Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone. Baseline ruleset project description has system 12a with child loop incorrectly referencing to  FluidLoop 2. Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-11",
@@ -7366,11 +7421,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -7481,7 +7537,7 @@
         "Section": 21,
         "Rule": 11,
         "Test": "e",
-        "test_description": "The project consists of one building segment with one zone. Baseline RMD has system 10. Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone. Baseline ruleset project description has system 10. Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-11",
@@ -7491,11 +7547,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -7549,7 +7606,7 @@
         "Section": 21,
         "Rule": 12,
         "Test": "a",
-        "test_description": "The project consists of one building segment with two zones. Baseline RMR has system 7 with flow control and operation correctly. Expected result: PASS",
+        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 7 with flow control and operation correctly. Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-12",
@@ -7559,11 +7616,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -7700,7 +7758,7 @@
         "Section": 21,
         "Rule": 12,
         "Test": "b",
-        "test_description": "The project consists of one building segment with two zones. Baseline RMD has system 7 with flow control specified correctly, and operation incorrectly.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 7 with flow control specified correctly, and operation incorrectly.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-12",
@@ -7710,11 +7768,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -7851,7 +7910,7 @@
         "Section": 21,
         "Rule": 12,
         "Test": "c",
-        "test_description": "The project consists of one building segment with two zones. Baseline RMD has system 7 with flow control specified incorrectly, and operation correctly.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 7 with flow control specified incorrectly, and operation correctly.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-12",
@@ -7861,11 +7920,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -8002,7 +8062,7 @@
         "Section": 21,
         "Rule": 12,
         "Test": "d",
-        "test_description": "The project consists of one building segment with two zones. Baseline RMR has system 1b with flow control and operation correctly. Expected result: PASS",
+        "test_description": "The project has one building segment with one zone. Baseline ruleset project description has system 1b with flow control and operation correctly. Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-12",
@@ -8012,11 +8072,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -8097,7 +8158,7 @@
         "Section": 21,
         "Rule": 12,
         "Test": "e",
-        "test_description": "The project consists of one building segment with two zones. Baseline RMD has system 1b with flow control specified correctly, and operation incorrectly.  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone. Baseline ruleset project description has system 1b with flow control specified correctly, and operation incorrectly.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-12",
@@ -8107,11 +8168,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -8192,7 +8254,7 @@
         "Section": 21,
         "Rule": 12,
         "Test": "f",
-        "test_description": "The project consists of one building segment with two zones. Baseline RMD has system 1b with flow control specified incorrectly, and operation correctly.  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone. Baseline ruleset project description has system 1b with flow control specified incorrectly, and operation correctly.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-12",
@@ -8202,11 +8264,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -8287,7 +8350,7 @@
         "Section": 21,
         "Rule": 12,
         "Test": "g",
-        "test_description": "The project consists of one building segment with two zones. Baseline RMD has system 9.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone. Baseline ruleset project description has system 9.  Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-12",
@@ -8297,11 +8360,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -8365,7 +8429,7 @@
         "Section": 21,
         "Rule": 13,
         "Test": "a",
-        "test_description": "The project consists of one building segment with two zones. Baseline RMD has system 7 with heating design and control's minimum flow fraction correctly set to 0.25.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 7 with heating design and control's minimum flow fraction correctly set to 0.25.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-13",
@@ -8375,11 +8439,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -8515,7 +8580,7 @@
         "Section": 21,
         "Rule": 13,
         "Test": "b",
-        "test_description": "The project consists of one building segment with two zones. Baseline RMD has system 7 with heating design and control's minimum flow fraction incorrectly set to 0.30. Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 7 with heating design and control's minimum flow fraction incorrectly set to 0.30. Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-13",
@@ -8525,11 +8590,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -8665,7 +8731,7 @@
         "Section": 21,
         "Rule": 13,
         "Test": "c",
-        "test_description": "The project consists of one building segment with two zones. Baseline RMD has system 3b with heating design and control's minimum flow fraction correctly set to 0.25.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone. Baseline ruleset project description has system 3b with heating design and control's minimum flow fraction correctly set to 0.25.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-13",
@@ -8675,11 +8741,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -8764,7 +8831,7 @@
         "Section": 21,
         "Rule": 13,
         "Test": "d",
-        "test_description": "The project consists of one building segment with two zones. Baseline RMD has system 3b with heating design and control's minimum flow fraction incorrectly set to 0.30. Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone. Baseline ruleset project description has system 3b with heating design and control's minimum flow fraction incorrectly set to 0.30. Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-13",
@@ -8774,11 +8841,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -8863,7 +8931,7 @@
         "Section": 21,
         "Rule": 13,
         "Test": "e",
-        "test_description": "The project consists of one building segment with two zones. Baseline RMD has system 11.1a. Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone. Baseline ruleset project description has system 11.1a. Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-13",
@@ -8873,11 +8941,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -8965,7 +9034,7 @@
         "Section": 21,
         "Rule": 16,
         "Test": "a",
-        "test_description": "The project consists of one building segment with two zones. Baseline RMR has system 7 correctly modeled with a single heating loop.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 7 correctly modeled with a single heating loop.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-16",
@@ -8975,11 +9044,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -9111,7 +9181,7 @@
         "Section": 21,
         "Rule": 16,
         "Test": "b",
-        "test_description": "The project consists of one building segment with two zones. Baseline RMR has system 7 incorrectly modeled with more than one heating loop.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 7 incorrectly modeled with more than one heating loop.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-16",
@@ -9121,11 +9191,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -9261,7 +9332,7 @@
         "Section": 21,
         "Rule": 16,
         "Test": "c",
-        "test_description": "The project consists of one building segment with two zones. Baseline RMR has system 5b correctly modeled with a single heating loop.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 5b correctly modeled with a single heating loop.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-16",
@@ -9271,11 +9342,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -9380,7 +9452,7 @@
         "Section": 21,
         "Rule": 16,
         "Test": "d",
-        "test_description": "The project consists of one building segment with two zones. Baseline RMR has system 5b incorrectly modeled with more than one heating loop.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 5b incorrectly modeled with more than one heating loop.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-16",
@@ -9390,11 +9462,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -9503,7 +9576,7 @@
         "Section": 21,
         "Rule": 16,
         "Test": "e",
-        "test_description": "The project consists of one building segment with two zones. Baseline RMR has system 11.1.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone. Baseline ruleset project description has system 11.1.  Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-16",
@@ -9513,11 +9586,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -9615,7 +9689,7 @@
         "Section": 21,
         "Rule": 17,
         "Test": "a",
-        "test_description": "The project consists of one building segment with two zones. Baseline RMR has system 7 with < 300 kBtu/hr, has AFUE equal to 80% as per Tables G3.5.6.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 7 with < 300 kBtu/hr, has AFUE equal to 80% as per Tables G3.5.6.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-17",
@@ -9625,11 +9699,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -9764,7 +9839,7 @@
         "Section": 21,
         "Rule": 17,
         "Test": "b",
-        "test_description": "The project consists of one building segment with two zones. Baseline RMR has system 7 with < 300 kBtu/hr, has AFUE equal to 80% as per Tables G3.5.6, BUT efficiency_metric is incorrect.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 7 with < 300 kBtu/hr, has AFUE equal to 80% as per Tables G3.5.6, BUT efficiency_metric is incorrect.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-17",
@@ -9774,11 +9849,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -9913,7 +9989,7 @@
         "Section": 21,
         "Rule": 17,
         "Test": "c",
-        "test_description": "The project consists of one building segment with two zones. Baseline RMR has system 7 with < 300 kBtu/hr, AFUE does not equal 80% as per Tables G3.5.6.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 7 with < 300 kBtu/hr, AFUE does not equal 80% as per Tables G3.5.6.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-17",
@@ -9923,11 +9999,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -10062,7 +10139,7 @@
         "Section": 21,
         "Rule": 17,
         "Test": "d",
-        "test_description": "The project consists of one building segment with two zones. Baseline RMR has system 7 with greater than 300 kBtu/hr but less than 2,500 kBtu/hr, has thermal efficiency equal to 75% as per Tables G3.5.6.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 7 with greater than 300 kBtu/hr but less than 2,500 kBtu/hr, has thermal efficiency equal to 75% as per Tables G3.5.6.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-17",
@@ -10072,11 +10149,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -10207,11 +10285,11 @@
             }
         }
     },
-    "Unnamed: 86": {
+    "rule-21-17-e": {
         "Section": 21,
         "Rule": 17,
         "Test": "e",
-        "test_description": "The project consists of one building segment with two zones. Baseline RMR has system 7 with greater than 300 kBtu/hr but less than 2,500 kBtu/hr, has thermal efficiency equal to 75% as per Tables G3.5.6, BUT efficiency_metric incorrect.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 7 with greater than 300 kBtu/hr but less than 2,500 kBtu/hr, has thermal efficiency equal to 75% as per Tables G3.5.6, BUT efficiency_metric incorrect.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-17",
@@ -10221,11 +10299,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -10360,7 +10439,7 @@
         "Section": 21,
         "Rule": 17,
         "Test": "f",
-        "test_description": "The project consists of one building segment with two zones. Baseline RMR has system 7 with greater than 300 kBtu/hr but less than 2,500 kBtu/hr, thermal efficiency does not equal 75% as per Tables G3.5.6.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 7 with greater than 300 kBtu/hr but less than 2,500 kBtu/hr, thermal efficiency does not equal 75% as per Tables G3.5.6.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-17",
@@ -10370,11 +10449,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -10509,7 +10589,7 @@
         "Section": 21,
         "Rule": 17,
         "Test": "g",
-        "test_description": "The project consists of one building segment with one zone. Baseline RMR has system 12a with greater than 2,500 kBtu/hr, has combustion efficiency equal to 80% as per Tables G3.5.6. Expected result: PASS",
+        "test_description": "The project has one building segment with one zone. Baseline ruleset project description has system 12a with greater than 2,500 kBtu/hr, has combustion efficiency equal to 80% as per Tables G3.5.6. Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-17",
@@ -10519,11 +10599,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -10631,7 +10712,7 @@
         "Section": 21,
         "Rule": 17,
         "Test": "h",
-        "test_description": "The project consists of one building segment with one zone. Baseline RMR has system 12a with greater than 2,500 kBtu/hr, has combustion efficiency equal to 80% as per Tables G3.5.6, BUT efficiency_metric incorrect. Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone. Baseline ruleset project description has system 12a with greater than 2,500 kBtu/hr, has combustion efficiency equal to 80% as per Tables G3.5.6, BUT efficiency_metric incorrect. Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-17",
@@ -10641,11 +10722,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -10753,7 +10835,7 @@
         "Section": 21,
         "Rule": 17,
         "Test": "i",
-        "test_description": "The project consists of one building segment with one zone. Baseline RMR has system 12a with greater than 2,500 kBtu/hr, combustion efficiency does not equal 80% as per Tables G3.5.6. Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone. Baseline ruleset project description has system 12a with greater than 2,500 kBtu/hr, combustion efficiency does not equal 80% as per Tables G3.5.6. Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-17",
@@ -10763,11 +10845,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -10875,7 +10958,7 @@
         "Section": 21,
         "Rule": 17,
         "Test": "i",
-        "test_description": "The project consists of one building segment with one zone. Baseline RMR has system 12b. Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone. Baseline ruleset project description has system 12b. Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-17",
@@ -10885,11 +10968,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -10994,7 +11078,7 @@
         "Section": 21,
         "Rule": 18,
         "Test": "a",
-        "test_description": "The project consists of one building segment with two zones. System 7 is correctly modeled with a natural gas boiler.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones. System 7 is correctly modeled with a natural gas boiler.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-18",
@@ -11004,11 +11088,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -11140,7 +11225,7 @@
         "Section": 21,
         "Rule": 18,
         "Test": "b",
-        "test_description": "The project consists of one building segment with two zones. System 7 is incorrectly modeld an electric boiler.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones. System 7 is incorrectly modeld an electric boiler.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-18",
@@ -11150,11 +11235,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -11286,7 +11372,7 @@
         "Section": 21,
         "Rule": 18,
         "Test": "c",
-        "test_description": "The project consists of one building segment with two zones. A purchased hot water system does not have an applicable fuel type.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with two zones. A purchased hot water system does not have an applicable fuel type.  Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-18",
@@ -11296,11 +11382,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -11377,7 +11464,7 @@
         "Section": 21,
         "Rule": 18,
         "Test": "d",
-        "test_description": "The project consists of one building segment with two zones. System 7 is modeld a propane boiler.  Expected result: Undetermined",
+        "test_description": "The project has one building segment with two zones. System 7 is modeld a propane boiler.  Expected result: Undetermined",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "21-18",
@@ -11387,11 +11474,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -11523,7 +11611,7 @@
         "Section": 21,
         "Rule": 18,
         "Test": "e",
-        "test_description": "The project consists of one building segment with two zones. System 1 is correctly modeled with a natural gas boiler.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone. System 1 is correctly modeled with a natural gas boiler.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-18",
@@ -11533,11 +11621,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -11613,7 +11702,7 @@
         "Section": 21,
         "Rule": 18,
         "Test": "f",
-        "test_description": "The project consists of one building segment with two zones. System 1 is incorrectly modeld an electric boiler.  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone. System 1 is incorrectly modeld an electric boiler.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-18",
@@ -11623,11 +11712,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -11703,7 +11793,7 @@
         "Section": 21,
         "Rule": 18,
         "Test": "g",
-        "test_description": "The project consists of one building segment with two zones. System 1c Expected Result: Not Applicable",
+        "test_description": "The project has one building segment with one zone. System 1c Expected Result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-18",
@@ -11713,11 +11803,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
