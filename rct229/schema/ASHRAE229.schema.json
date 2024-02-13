@@ -3311,6 +3311,7 @@
                 "OTHER"
             ],
             "descriptions": [
+				"Constant"
                 "No Reset",
                 "Outside air reset",
                 "Load Reset",
