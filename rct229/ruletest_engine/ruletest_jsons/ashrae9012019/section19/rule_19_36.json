@@ -3,7 +3,7 @@
         "Section": 19,
         "Rule": 36,
         "Test": "a",
-        "test_description": "Baseline system 7 with air capacity > 5,000 CFM and a minimum supply air ratio greater than 70% has an ERV greater than 50% enthalpy recovery ratio ",
+        "test_description": "The project has one building segment with two zones. Baseline system 7 with air capacity > 5,000 CFM and a minimum supply air ratio greater than 70% has an ERV greater than 50% enthalpy recovery ratio  Expected outcome: UNDETERMINED",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "19-36",
@@ -13,11 +13,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -145,6 +146,7 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -288,7 +290,7 @@
         "Section": 19,
         "Rule": 36,
         "Test": "b",
-        "test_description": "Baseline system 7 did not have ERV",
+        "test_description": "The project has one building segment with two zones. Baseline system 7 did not have ERV Expected outcome: NOT_APPLICABLE",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "19-36",
@@ -298,11 +300,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -430,6 +433,7 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",

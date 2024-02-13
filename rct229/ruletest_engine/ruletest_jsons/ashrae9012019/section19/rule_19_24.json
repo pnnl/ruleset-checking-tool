@@ -3,7 +3,7 @@
         "Section": 19,
         "Rule": 24,
         "Test": "a",
-        "test_description": "Project consists of a single-zone HW/CHW VAV HVAC system with a minimum outdoor airflow requirement of 100 cfm. The HVAC fan system correctly operates continuously during occupied hours.",
+        "test_description": "The project has one building segment with one zone. Project consists of a single-zone hot water/chilled water VAV HVAC system with a minimum outdoor airflow requirement of 100 cfm. The HVAC fan system correctly operates continuously during occupied hours. Expected outcome: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-24",
@@ -13,11 +13,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -130,6 +131,7 @@
             },
             "user": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -246,7 +248,7 @@
         "Section": 19,
         "Rule": 24,
         "Test": "b",
-        "test_description": "Project consists of a single-zone HW/CHW VAV HVAC system with a minimum outdoor airflow requirement of 100 cfm. The HVAC fan system incorrectly cycles on and off during occupied hours to maintain temperature setpoints, but not outdoor airflow requirements.",
+        "test_description": "The project has one building segment with one zone. Project consists of a single-zone hot water/hot water VAV HVAC system with a minimum outdoor airflow requirement of 100 cfm. The HVAC fan system incorrectly cycles on and off during occupied hours to maintain temperature setpoints, but not outdoor airflow requirements. Expected outcome: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-24",
@@ -256,11 +258,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -373,6 +376,7 @@
             },
             "user": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -489,7 +493,7 @@
         "Section": 19,
         "Rule": 24,
         "Test": "c",
-        "test_description": "Project consists of a packaged single-zone HVAC system with no minimum outdoor airflow requirement. The HVAC fan system correctly cycles on and off during occupied hours to maintain temperature setpoints.",
+        "test_description": "The project has one building segment with one zone. Project consists of a packaged single-zone HVAC system with no minimum outdoor airflow requirement. The HVAC fan system correctly cycles on and off during occupied hours to maintain temperature setpoints. Expected outcome: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-24",
@@ -499,11 +503,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -568,6 +573,7 @@
             },
             "user": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -635,7 +641,7 @@
         "Section": 19,
         "Rule": 24,
         "Test": "d",
-        "test_description": "Project consists of a packaged single-zone HVAC system with no minimum outdoor airflow requirement. The HVAC fan system is set to remain off during occupied hours. Under the current rule definition, this is a failed outcome.",
+        "test_description": "The project has one building segment with one zone. Project consists of a packaged single-zone HVAC system with no minimum outdoor airflow requirement. The HVAC fan system is set to remain off during occupied hours. Under the current rule definition, this is a failed outcome. Expected outcome: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-24",
@@ -645,11 +651,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -714,6 +721,7 @@
             },
             "user": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
