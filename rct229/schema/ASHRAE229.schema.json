@@ -3304,6 +3304,7 @@
         "TemperatureResetOptions": {
             "type": "string",
             "enum": [
+                "CONSTANT",
                 "NO_RESET",
                 "OUTSIDE_AIR_RESET",
                 "LOAD_RESET",
