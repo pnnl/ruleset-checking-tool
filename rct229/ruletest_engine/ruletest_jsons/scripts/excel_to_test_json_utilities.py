@@ -1129,20 +1129,3 @@ def determine_system_classification(system_rmd):
         return "ZoneEquipment"
 
 
-def count_number_of_ruletest_cases(ruleset_standard):
-
-    # Aggregate rule test information into a dictionary
-    master_ruletest_dict = generate_rule_test_dictionary(ruleset_standard)
-
-    # Dictionary with ruletest counts
-    count_dict = {}
-
-    # Iterate through each section and get the number of rule unit tests
-    for section_name, section_dict in master_ruletest_dict.items():
-        count_dict[section_name] = len(section_dict['Rule_Unit_Test'])
-
-    # Get total rule unit tests
-    count_dict['total'] = sum(count_dict.values())
-
-    return count_dict
-
