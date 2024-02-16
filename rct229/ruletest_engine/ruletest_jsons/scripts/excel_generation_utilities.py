@@ -62,6 +62,8 @@ def generate_rule_test_dictionary(ruleset_standard):
     """
 
     ruletest_directory = f"../{ruleset_standard}"
+    this_file_dir = os.path.abspath(os.path.dirname(__file__))
+    ruletest_path = os.path.join(this_file_dir, ruletest_directory)
     ruletest_url = f"https://github.com/pnnl/ruleset-checking-tool/tree/develop/rct229/ruletest_engine/ruletest_jsons/{ruleset_standard}"
 
     # Dictionary mapping sections to a list of rule test JSONs relevant to that section
@@ -69,7 +71,7 @@ def generate_rule_test_dictionary(ruleset_standard):
     ruletest_dict = {}
 
     # Use os.scandir to get directory entries
-    with os.scandir(ruletest_directory) as entries:
+    with os.scandir(ruletest_path) as entries:
         for entry in entries:
             if entry.is_dir() and entry.name.startswith("section"):
                 # Section is last subdirectory
