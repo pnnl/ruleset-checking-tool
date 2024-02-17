@@ -7,6 +7,8 @@ import pandas as pd
 from openpyxl import utils
 from openpyxl.styles import Alignment, Font, PatternFill
 
+from rct229.utils.natural_sort import natural_keys
+
 
 def create_rule_test_documentation_spreadsheet(ruleset_standard):
     """Generates an Excel documentation file for all ruletest JSONS found for a particular ruleset standard in:
@@ -64,7 +66,7 @@ def generate_rule_test_dictionary(ruleset_standard):
     ruletest_directory = f"../{ruleset_standard}"
     this_file_dir = os.path.abspath(os.path.dirname(__file__))
     ruletest_path = os.path.join(this_file_dir, ruletest_directory)
-    ruletest_url = f"https://github.com/pnnl/ruleset-checking-tool/tree/develop/rct229/ruletest_engine/ruletest_jsons/{ruleset_standard}"
+    ruletest_url = f"https://github.com/pnnl/ruleset-checking-tool/tree/master/rct229/ruletest_engine/ruletest_jsons/{ruleset_standard}"
 
     # Dictionary mapping sections to a list of rule test JSONs relevant to that section
     # Format ruletest_dict[SECTION_NAME] = ['ruletest1.json', 'ruletest2.json', ...]
@@ -86,7 +88,7 @@ def generate_rule_test_dictionary(ruleset_standard):
 
     # Reorder sections to be in numerical order (i.e., avoid section1, section11, section12, section5, section6)
     sections_list = list(ruletest_dict.keys())
-    sorted_sections = sorted(sections_list, key=lambda x: int(re.sub(r"\D", "", x)))
+    sorted_sections = sorted(sections_list, key=lambda x: natural_keys(x))
     ruletest_dict = {key: ruletest_dict[key] for key in sorted_sections}
 
     # Initialize dict to hold Rules information.
