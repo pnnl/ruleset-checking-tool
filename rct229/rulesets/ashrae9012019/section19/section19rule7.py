@@ -170,7 +170,7 @@ class Section19Rule7(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section19Rule7.HVACRule, self).__init__(
                 rmrs_used=produce_ruleset_model_instance(
-                    USER=False, BASELINE_0=True, PROPOSED=True
+                    USER=False, BASELINE_0=True, PROPOSED=False
                 ),
             )
 

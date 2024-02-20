@@ -2,33 +2,42 @@
 # Envelope - Rule 5-34  
 
 **Rule ID:** 5-34  
-**Rule Description:** The infiltration modeling method in the baseline includes adjustment for weather and building operation.  
-**Rule Assertion:** B-RMR infiltration:modeling_method = NOT "CONSTANT" for all zones  
+**Rule Description:** The infiltration shall be modeled using the same methodology and adjustments for weather and building operation in both the proposed design and the baseline building design.  
+**Rule Assertion:** For all zones, B-RMR infiltration:modeling_method_name = P-RMR infiltration:modeling_method_name and B-RMR infiltration:modeling_method = P-RMR infiltration:modeling_method.  
 **Appendix G Section:** Section G3.1-5(b) Building Envelope Modeling Requirements for the Proposed design and Baseline  
 **Appendix G Section Reference:** None  
 
-**Applicability:** All required data elements exist for B_RMR  
+**Applicability:** All required data elements exist for P_RMR  
 **Applicability Checks:**  None  
 
 **Manual Check:** None  
 **Evaluation Context:** Each Data Element  
 **Data Lookup:** None  
-**Function Call:** None  
+**Function Call:** 
+
+  1. match_data_element()
 
 ## Rule Logic:  
 
-- For each building segment in the Baseline model: `for building_segment_b in B_RMR.building.building_segments:`  
+- For each building segment in the Proposed model: `for building_segment_p in P_RMR.building.building_segments:`  
 
-    - For each zone in building segment, get zone infiltration: `for zone_b in building_segment_b.zones: infiltration_b = zone_b.infiltration`  
+    - For each zone in building segment: `for zone_p in building_segment_p.zones:`
 
-      **Rule Assertion:**  
+      - Get zone infiltration: `infiltration_p = zone_p.infiltration`  
 
-      - Case 1: If zone infiltration is not modeled as constant: `if infiltration_b.modeling_method != "CONSTANT": PASS`  
+      - Get matching zone in B_RMR: `zone_b = match_data_element(B_RMR, Zones, zone_p.id)`
 
-      - Case 2: Else: `Else: FAIL`
+        - Get zone infiltration in B_RMR: `infiltration_b = zone_b.infiltration`
+
+          **Rule Assertion:**  
+
+          - Case 1: For each zone, if both zone infiltration modeling method name and modeling method in P_RMR match that in B_RMR: `if ( infiltration_p.modeling_method_name == infiltration_b.modeling_method_name ) AND ( infiltration_p.modeling_method == infiltration_b.modeling_method ): PASS`
+
+          - Case 2: Else: `Else: FAIL`
 
 **Notes:**
 
-1. Update Rule ID from 5-44 to 5-34 on 10/26/2023
+1. Update Rule ID from 5-46 to 5-35 on 10/26/2023
+2. Update Rule ID from 5-35 to 5-34 on 12/22/2023
 
 **[Back](../_toc.md)**

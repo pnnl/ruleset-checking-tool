@@ -51,7 +51,7 @@ class Section19Rule20(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section19Rule20.HVACRule, self).__init__(
                 rmrs_used=produce_ruleset_model_instance(
-                    USER=False, BASELINE_0=True, PROPOSED=True
+                    USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={
                     "$": ["fan_system"],
@@ -128,18 +128,25 @@ class Section19Rule20(RuleDefinitionListIndexedBase):
                 + proposed_total_exhaust_fan_power
                 + proposed_total_relief_fan_power
             )
-            fraction_of_total_supply_p = (
-                proposed_total_supply_fan_power / total_modeled_fan_power_p
-            )
-            fraction_of_total_return_p = (
-                proposed_total_return_fan_power / total_modeled_fan_power_p
-            )
-            fraction_of_total_exhaust_p = (
-                proposed_total_exhaust_fan_power / total_modeled_fan_power_p
-            )
-            fraction_of_total_relief_p = (
-                proposed_total_relief_fan_power / total_modeled_fan_power_p
-            )
+
+            fraction_of_total_supply_p = 0.0
+            fraction_of_total_return_p = 0.0
+            fraction_of_total_exhaust_p = 0.0
+            fraction_of_total_relief_p = 0.0
+
+            if total_modeled_fan_power_p > ZERO.POWER:
+                fraction_of_total_supply_p = (
+                    proposed_total_supply_fan_power / total_modeled_fan_power_p
+                )
+                fraction_of_total_return_p = (
+                    proposed_total_return_fan_power / total_modeled_fan_power_p
+                )
+                fraction_of_total_exhaust_p = (
+                    proposed_total_exhaust_fan_power / total_modeled_fan_power_p
+                )
+                fraction_of_total_relief_p = (
+                    proposed_total_relief_fan_power / total_modeled_fan_power_p
+                )
             return {
                 "hvac_sys_total_supply_fan_power_b": hvac_sys_total_supply_fan_power_b,
                 "hvac_sys_total_return_fan_power_b": hvac_sys_total_return_fan_power_b,

@@ -1,34 +1,45 @@
+
 # Envelope - Rule 5-29  
-**Schema Version** 0.0.23  
-**Primary Rule:** False
+
 **Rule ID:** 5-29  
-**Rule Description:** Manually controlled dynamic glazing shall use the average of the minimum and maximum SHGC and VT.
-**Appendix G Section:** Section 5 Envelope  
-**Appendix G Section Reference:** Section G3.1-5(a)5 Building Envelope Modeling Requirements for the Proposed design   
+**Rule Description:** The  baseline roof surfaces shall be modeled using a thermal emittance of 0.9.  
+**Rule Assertion:** B-RMR SurfaceOpticalProperties:thermal_emittance = 0.9  
+**Appendix G Section:** Section G3.1-5(f) Building Envelope Modeling Requirements for the Baseline building  
+**Appendix G Section Reference:** None  
 
-**Applicability:** All required data elements exist for P_RMR  
-**Applicability Checks:**
-  1. The proposed building uses manually controlled dynamic glazing
+**Applicability:** All required data elements exist for B_RMR  
+**Applicability Checks:**  None  
 
+**Manual Check:** None  
 **Evaluation Context:** Each Data Element  
 **Data Lookup:** None  
-**Function Call:** None
+**Function Call:**  
 
-## Rule Logic:
-- For each building segment in the Proposed model: ```for building_segment_p in P_RMR.building.building_segments:```
+  1. get_opaque_surface_type()
+  2. get_surface_conditioning_category()
 
-  - For each zone in building segment: ```for zone_p in building_segment_p.zones:```
+## Rule Logic:  
 
-    - For each surface in zone: ```for surface_p in zone_p.surfaces:```
+- Get surface conditioning category dictionary for B_RMR: ```scc_dictionary_b = get_surface_conditioning_category(B_RMR)```  
 
-      - For each subsurface in surface: ```for subsurface_p in surface_p.subsurfaces:```
-        
-      **Rule Assertion:**
-      - Case 1: If subsurface has manual dynamic glazing, outcome is UNDETERMINED: ```if subsurface_p.dynamic_glazing_type == "MANUAL_DYNAMIC: outcome = UNDETERMINED and raise_message "SUBSURFACE ${subsurface_p} INCLUDES MANUALLY CONTROLLED DYNAMIC GLAZING IN THE PROPOSED DESIGN. VERIFY THAT SHGC AND VT WERE MODELED AS THE AVERAGE OF THE MINIMUM AND MAXIMUM SHGC AND VT."```
-      - Case 2: Else, outcome is NOT_APPLICABLE: ```else: outcome = NOT_APPLICABLE```
+- For each building segment in the Baseline model: `for building_segment_b in B_RMR.building.building_segments:`
+
+  - For each zone_b in building_segment_b: `for zone_b in building_segments.zones:`
+
+    - For each surface_b in zone_b: `for surface_b in zone_b.surfaces;`
+
+      - Check if surface is roof and is regulated, get surface optical properties: `if ( get_opaque_surface_type(surface_b.id) == "ROOF" ) AND ( scc_dictionary_b[surface_b.id] != "UNREGULATED" ): surface_optical_properties_b = surface_b.surface_optical_properties`
+
+        **Rule Assertion:**  
+
+        - Case 1: If roof surface thermal emittance is equal to 0.9: `if surface_optical_properties_b.absorptance_thermal_exterior == 0.9: PASS`
+
+        - Case 2: Else: `Else: FAIL`
 
 **Notes:**
 
-1. Update Rule ID from 5-39 to 5-29 on 10/26/2023
+1. Update Rule ID from 5-40 to 5-30 on 10/26/2023
+2. Update Rule ID from 5-30 to 5-29 on 12/22/2023
+
 
 **[Back](../_toc.md)**

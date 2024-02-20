@@ -3,24 +3,24 @@
         "Section": 5,
         "Rule": 34,
         "Test": "a",
-        "test_description": "Project has one building segment. \"weather_driven\" infiltration modeling method is used",
+        "test_description": "Project has one building segment. The proposed infiltration modeling method is the same as the baseline infiltration modeling method",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-34",
             "ruleset_reference": "Table G3.1(5) Proposed Building Performance (b)",
-            "rule_description": "The infiltration modeling method in the baseline includes adjustment for weather and building operation.",
-            "applicable_rmr": "Baseline Model",
+            "rule_description": "The infiltration modeling method in the proposed includes adjustment for weather and building operation.",
+            "applicable_rmr": "Proposed Model",
             "rule_assertion": "=",
-            "comparison_value": "Expected Value",
+            "comparison_value": "Baseline Model",
             "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
-            "baseline": {
-                "id": "ASHRAE229",
+            "proposed": {
+                "id": "RPD 1",
                 "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -35,7 +35,40 @@
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "infiltration": {
                                                     "id": "Infiltration 1",
-                                                    "modeling_method": "WEATHER_DRIVEN"
+                                                    "modeling_method": "WEATHER_DRIVEN",
+                                                    "algorithm_name": "AIR-CHANGE"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "infiltration": {
+                                                    "id": "Infiltration 1",
+                                                    "modeling_method": "WEATHER_DRIVEN",
+                                                    "algorithm_name": "AIR-CHANGE"
                                                 }
                                             }
                                         ]
@@ -53,24 +86,24 @@
         "Section": 5,
         "Rule": 34,
         "Test": "b",
-        "test_description": "Project has one building segment. \"pressure_based\" infiltration modeling method is used",
-        "expected_rule_outcome": "pass",
+        "test_description": "Project has one building segment. The proposed infiltration modeling method is the same as the baseline infiltration modeling method",
+        "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-34",
             "ruleset_reference": "Table G3.1(5) Proposed Building Performance (b)",
-            "rule_description": "The infiltration modeling method in the baseline includes adjustment for weather and building operation.",
-            "applicable_rmr": "Baseline Model",
+            "rule_description": "The infiltration modeling method in the proposed includes adjustment for weather and building operation.",
+            "applicable_rmr": "Proposed Model",
             "rule_assertion": "=",
-            "comparison_value": "Expected Value",
+            "comparison_value": "Baseline Model",
             "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
-            "baseline": {
-                "id": "ASHRAE229",
+            "proposed": {
+                "id": "RPD 1",
                 "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -85,7 +118,8 @@
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "infiltration": {
                                                     "id": "Infiltration 1",
-                                                    "modeling_method": "PRESSURE_BASED"
+                                                    "modeling_method": "WEATHER_DRIVEN",
+                                                    "algorithm_name": "ASHRAE-ENHANCED"
                                                 }
                                             }
                                         ]
@@ -93,34 +127,15 @@
                                 ]
                             }
                         ],
-                        "type": "BASELINE_0"
+                        "type": "PROPOSED"
                     }
                 ]
-            }
-        }
-    },
-    "rule-5-34-c": {
-        "Section": 5,
-        "Rule": 34,
-        "Test": "c",
-        "test_description": "Project has one building segment. \"constant\" infiltration modeling method is used",
-        "expected_rule_outcome": "fail",
-        "standard": {
-            "rule_id": "5-34",
-            "ruleset_reference": "Table G3.1(5) Proposed Building Performance (b)",
-            "rule_description": "The infiltration modeling method in the baseline includes adjustment for weather and building operation.",
-            "applicable_rmr": "Baseline Model",
-            "rule_assertion": "=",
-            "comparison_value": "Expected Value",
-            "primary_rule": "Full",
-            "schema_version": "0.0.29"
-        },
-        "rmr_transformations": {
+            },
             "baseline": {
-                "id": "ASHRAE229",
+                "id": "RPD 1",
                 "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -135,7 +150,8 @@
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "infiltration": {
                                                     "id": "Infiltration 1",
-                                                    "modeling_method": "CONSTANT"
+                                                    "modeling_method": "WEATHER_DRIVEN",
+                                                    "algorithm_name": "AIR-CHANGE"
                                                 }
                                             }
                                         ]

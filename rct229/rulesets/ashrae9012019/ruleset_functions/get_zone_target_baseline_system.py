@@ -1,4 +1,6 @@
 from pydash import juxtapose
+
+from rct229.rule_engine.memoize import memoize
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
@@ -63,6 +65,7 @@ class SYSTEMORIGIN:
     G311F = "G3_1_1f"
 
 
+@memoize
 def get_zone_target_baseline_system(
     rmd_b: dict, rmd_p: dict, climate_zone_b: str, is_leap_year: bool
 ):

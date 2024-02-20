@@ -27,9 +27,8 @@ APPLICABLE_SYS_TYPES = [
 ]
 NOT_APPLICABLE_SYS_TYPES = [HVAC_SYS.SYS_11_1, HVAC_SYS.SYS_11_2, HVAC_SYS.SYS_11_1B]
 REQUIRED_PUMP_POWER = 19 * ureg("W/gpm")
-FluidLoopOptions = SchemaEnums.schema_enums[
-    "FluidLoopOptions"
-]
+FluidLoopOptions = SchemaEnums.schema_enums["FluidLoopOptions"]
+
 
 class Section22Rule29(RuleDefinitionListIndexedBase):
     """Rule 29 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
@@ -93,7 +92,7 @@ class Section22Rule29(RuleDefinitionListIndexedBase):
                 ),
                 required_fields={
                     "$": ["pump_power_per_flow_rate"],
-                }
+                },
             )
 
         def get_calc_vals(self, context, data=None):

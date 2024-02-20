@@ -1,12 +1,12 @@
 {
-    "rule-5-41-a": {
+    "rule-5-40-a": {
         "Section": 5,
-        "Rule": 41,
+        "Rule": 40,
         "Test": "a",
         "test_description": "Project has one building segment with one space that includes an unregulated roof surface. The baseline roof optical properties are the same as in the proposed design.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "5-41",
+            "rule_id": "5-40",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
             "rule_description": "Opaque roof surfaces that are not regulated (not part of opaque building envelope) must be modeled with the same thermal emittance and solar reflectance in the baseline as in the proposed design",
             "applicable_rmr": "Baseline Model",
@@ -130,14 +130,14 @@
             }
         }
     },
-    "rule-5-41-b": {
+    "rule-5-40-b": {
         "Section": 5,
-        "Rule": 41,
+        "Rule": 40,
         "Test": "b",
         "test_description": "Project has one building segment with one space that includes an unregulated roof surface. The baseline roof optical properties are the different from the proposed design.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "5-41",
+            "rule_id": "5-40",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
             "rule_description": "Opaque roof surfaces that are not regulated (not part of opaque building envelope) must be modeled with the same thermal emittance and solar reflectance in the baseline as in the proposed design",
             "applicable_rmr": "Baseline Model",
@@ -261,14 +261,14 @@
             }
         }
     },
-    "rule-5-41-c": {
+    "rule-5-40-c": {
         "Section": 5,
-        "Rule": 41,
+        "Rule": 40,
         "Test": "c",
         "test_description": "Project has one building segment with one space that includes an unregulated roof surface. The proposed roof optical properties are not specified.",
         "expected_rule_outcome": "undetermined",
         "standard": {
-            "rule_id": "5-41",
+            "rule_id": "5-40",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
             "rule_description": "Opaque roof surfaces that are not regulated (not part of opaque building envelope) must be modeled with the same thermal emittance and solar reflectance in the baseline as in the proposed design",
             "applicable_rmr": "Baseline Model",

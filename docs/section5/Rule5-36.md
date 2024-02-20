@@ -2,10 +2,10 @@
 # Envelope - Rule 5-36  
 
 **Rule ID:** 5-36  
-**Rule Description:** The baseline air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1 cfm/ft2.  The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section G3.1.1.4.  
-**Rule Assertion:** Sum of B-RMR infiltration.infiltration.air_leakage_rate = expected value.  
+**Rule Description:** The air leakage rate in unconditioned and unenclosed spaces must be the same the baseline and proposed design.  
+**Rule Assertion:** B-RMR infiltration:air_leakage_rate = P-RMR infiltration:air_leakage_rate  
 **Appendix G Section:** Section 5 Envelope  
-**Appendix G Section Reference:** Section G3.1-5(h) Building Envelope Modeling Requirements for the Baseline building  
+**Appendix G Section Reference:** Section G3.1-1 Building Envelope Modeling Requirements for the Proposed design and Baseline building  
 
 **Applicability:** All required data elements exist for B_RMR  
 **Applicability Checks:**  None  
@@ -15,33 +15,32 @@
 **Data Lookup:** None  
 **Function Call:** 
 
-  1. get_surface_conditioning_category()
+  1. match_data_element()
   2. get_zone_conditioning_category()
 
 ## Rule Logic:  
 
-- Get surface conditioning category dictionary for B_RMR: `scc_dict_b = get_surface_conditioning_category(B_RMR)`
+- Get zone conditioning category for B_RMR: `zcc_b = get_zone_conditioning_category(B_RMR)`
 
-- Get zone conditioning category dictionary for B_RMR: `zone_conditioning_category_dict_b = get_zone_conditioning_category(B_RMR)`
+- For each zone in B_RMR: `for zone_b in B_RMR...zones:`
 
-- For each zone in the Baseline model: `for zone_b in B_RMR...zones:`
+  - Check if zone is unconditioned or unenclosed: `if zcc_b[zone_b.id] in ["UNENCLOSED", "UNCONDITIONED"]:`
 
-  - For each surface in zone: `for surface_b in zone_b.surfaces:`
+    - Get zone infiltration: `infiltration_b = zone_b.infiltration`
 
-    - Check if surface is regulated, add zone total area of building envelope to building total: `if scc_dict_b[surface_b.id] != "UNREGULATED": building_total_envelope_area += sum(surface.area for surface in zone_b.surfaces)`
+    - Get matching zone in P_RMR: `zone_p = match_data_element(P_RMR, Zones, zone_b.id)`
 
-  - Check if zone is conditioned or semi-heated, add zone infiltration flow rate to building total: `if zone_conditioning_category_dict_b[zone.id] in [CONDITIONED RESIDENTIAL, CONDITIONED NON-RESIDENTIAL, CONDITIONED MIXED, SEMI-HEATED]: building_total_air_leakage_rate_b += zone_b.infiltration.infiltration_flow_rate`
+      - Get zone infiltration in P_RMR: `infiltration_p = zone_p.infiltration`
 
-- Calculate the required baseline air leakage rate at 75Pa in cfm: `target_air_leakage_rate_75pa_b = 1.0 * building_total_envelope_area`
+        **Rule Assertion:**  
 
-**Rule Assertion:**  
+        - Case 1: For each unconditioned and unenclosed zone, if zone infiltration flow rate in B_RMR matches that in P_RMR: `if infiltration_b.infiltration_flow_rate == infiltration_p.infiltration_flow_rate: PASS`  
 
-- Case 1: For B_RMR, if the total zone infiltration rate for conditioned and semi-heated zones is equal to the required baseline infiltration rate at 75Pa with a conversion factor of 0.112 as per Section G3.1.1.4: `if building_total_air_leakage_rate_b == target_air_leakage_rate_75pa_b * 0.112: PASS`
-
-- Case 2: Else: `else: FAIL`
+        - Case 2: Else: `Else: FAIL`
 
 **Notes:**
 
-1. Update Rule ID from 5-47 to 5-36 on 10/26/2023
+1. Update Rule ID from 5-48 to 5-37 on 10/26/2023
+2. Update Rule ID from 5-37 to 5-36 on 12/22/2023
 
 **[Back](../_toc.md)**

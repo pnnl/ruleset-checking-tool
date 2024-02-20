@@ -3,7 +3,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "a",
-        "test_description": "The baseline building has one zone with HVAC BAT = public assembly.  It is 60,000 ft2 and has HVAC system type 4 and is in climate zone CZ3A",
+        "test_description": "The project has one building segment with one zone and one floor with HVAC BAT = public assembly.  It is 60,000 ft2 and has HVAC system type 4 and is in climate zone CZ3A",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-1",
@@ -173,7 +173,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "b",
-        "test_description": "The baseline building has one zone with HVAC BAT = public assembly.  It is 60,000 ft2 and has HVAC system type 5 and is in climate zone CZ3A",
+        "test_description": "The project has one building segment with one zone and one floor with HVAC BAT = public assembly.  It is 60,000 ft2 and has HVAC system type 5 and is in climate zone CZ3A",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "18-1",
@@ -397,7 +397,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "c",
-        "test_description": "The baseline building has one zone with HVAC BAT = public assembly.  It is 130,000 ft2 and has HVAC system type 13 and is in climate zone CZ3A",
+        "test_description": "The project has one building segment with one zone and one floor with HVAC BAT = public assembly.  It is 130,000 ft2 and has HVAC system type 13 and is in climate zone CZ3A",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-1",
@@ -629,7 +629,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "d",
-        "test_description": "The baseline building has one zone with HVAC BAT = public assembly.  It is 130,000 ft2 and has HVAC system type 5 and is in climate zone CZ3A",
+        "test_description": "The project has one building segment with one zone and one floor with HVAC BAT = public assembly.  It is 130,000 ft2 and has HVAC system type 5 and is in climate zone CZ3A",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "18-1",
@@ -853,7 +853,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "e",
-        "test_description": "The baseline building has one zone with HVAC BAT = public assembly.  It is 60,000 ft2 and has HVAC system type 3 and is in climate zone CZ5B",
+        "test_description": "The project has one building segment with one zone and one floor with HVAC BAT = public assembly.  It is 60,000 ft2 and has HVAC system type 3 and is in climate zone CZ5B",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-1",
@@ -1023,7 +1023,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "f",
-        "test_description": "The baseline building has one zone with HVAC BAT = public assembly.  It is 60,000 ft2 and has HVAC system type 5 and is in climate zone CZ5B",
+        "test_description": "The project has one building segment with one zone and one floor with HVAC BAT = public assembly.  It is 60,000 ft2 and has HVAC system type 5 and is in climate zone CZ5B",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "18-1",
@@ -1247,7 +1247,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "g",
-        "test_description": "The baseline building has one zone with HVAC BAT = public assembly.  It is 130,000 ft2 and has HVAC system type 12 and is in climate zone CZ5B",
+        "test_description": "The project has one building segment with one zone and one floor with HVAC BAT = public assembly.  It is 130,000 ft2 and has HVAC system type 12 and is in climate zone CZ5B",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-1",
@@ -1513,7 +1513,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "h",
-        "test_description": "The baseline building has one zone with HVAC BAT = public assembly.  It is 130,000 ft2 and has HVAC system type 5 and is in climate zone CZ5B",
+        "test_description": "The project has one building segment with one zone and one floor with HVAC BAT = public assembly.  It is 130,000 ft2 and has HVAC system type 5 and is in climate zone CZ5B",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "18-1",
@@ -1737,7 +1737,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "i",
-        "test_description": "The baseline building has one zone (one floor) with HVAC BAT = Hospital.  It is 120,000 ft2 and has HVAC system type 5.",
+        "test_description": "The project has one building segment with one zone and one floor with HVAC BAT = Hospital.  It is 120,000 ft2 and has HVAC system type 5.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-1",
@@ -1961,7 +1961,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "j",
-        "test_description": "The baseline building has one zone (one floor) with HVAC BAT = Hospital.  It is 120,000 ft2 and has HVAC system type 13.",
+        "test_description": "The project has one building segment with one zone and one floor with HVAC BAT = Hospital.  It is 120,000 ft2 and has HVAC system type 13.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "18-1",
@@ -2193,7 +2193,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "k",
-        "test_description": "The baseline building has one zone (one floor) with HVAC BAT = Hospital.  It is 160,000 ft2 and has HVAC system type 7.",
+        "test_description": "The project has one building segment with one zone and one floor with HVAC BAT = Hospital.  It is 160,000 ft2 and has HVAC system type 7.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-1",
@@ -2482,7 +2482,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "l",
-        "test_description": "The baseline building has six zones and six floors with HVAC BAT = Hospital.  It is 120,000 ft2 and has HVAC system type 7",
+        "test_description": "The project has one building segment with six zones and six floors with HVAC BAT = Hospital.  It is 120,000 ft2 and has HVAC system type 7",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-1",
@@ -3206,7 +3206,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "m",
-        "test_description": "The baseline building has six zones and six floors with HVAC BAT = Hospital.  It is 120,000 ft2 and has HVAC system type 5",
+        "test_description": "The project has one building segment with six zones and six floors with HVAC BAT = Hospital.  It is 120,000 ft2 and has HVAC system type 5",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "18-1",
@@ -3822,7 +3822,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "n",
-        "test_description": "The baseline building has one zone (one floor) with HVAC BAT = Retail.  It is 160,000 ft2 and has HVAC system type 4.  It is in climate zone CZ3A",
+        "test_description": "The project has one building segment with one zone and one floor with HVAC BAT = Retail.  It is 160,000 ft2 and has HVAC system type 4.  It is in climate zone CZ3A",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-1",
@@ -3992,7 +3992,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "o",
-        "test_description": "The baseline building has one zone (one floor) with HVAC BAT = Retail.  It is 160,000 ft2 and has HVAC system type 5.  It is in climate zone CZ3A",
+        "test_description": "The project has one building segment with one zone and one floor with HVAC BAT = Retail.  It is 160,000 ft2 and has HVAC system type 5.  It is in climate zone CZ3A",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "18-1",
@@ -4216,7 +4216,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "p",
-        "test_description": "The baseline building has one zone (one floor) with HVAC BAT = Retail.  It is 160,000 ft2 and has HVAC system type 3.  It is in climate zone CZ5A",
+        "test_description": "The project has one building segment with one zone and one floor with HVAC BAT = Retail.  It is 160,000 ft2 and has HVAC system type 3.  It is in climate zone CZ5A",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-1",
@@ -4386,7 +4386,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "q",
-        "test_description": "The baseline building has one zone (one floor) with HVAC BAT = Retail.  It is 160,000 ft2 and has HVAC system type 5.  It is in climate zone CZ5A",
+        "test_description": "The project has one building segment with one zone and one floor with HVAC BAT = Retail.  It is 160,000 ft2 and has HVAC system type 5.  It is in climate zone CZ5A",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "18-1",
@@ -4610,7 +4610,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "r",
-        "test_description": "The baseline building has one zone (one floor) with HVAC BAT = Other Non-Residential.  It is 20,000 ft2 and has HVAC system type 4.  It is in climate zone CZ3A",
+        "test_description": "The project has one building segment with one zone and one floor with HVAC BAT = Other Non-Residential.  It is 20,000 ft2 and has HVAC system type 4.  It is in climate zone CZ3A",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-1",
@@ -4780,7 +4780,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "s",
-        "test_description": "The baseline building has one zone (one floor) with HVAC BAT = Other Non-Residential.  It is 20,000 ft2 and has HVAC system type 5.  It is in climate zone CZ3A",
+        "test_description": "The project has one building segment with one zone and one floor with HVAC BAT = Other Non-Residential.  It is 20,000 ft2 and has HVAC system type 5.  It is in climate zone CZ3A",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "18-1",
@@ -5004,7 +5004,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "t",
-        "test_description": "The baseline building has one zone (one floor) with HVAC BAT = Other Non-Residential.  It is 20,000 ft2 and has HVAC system type 3.  It is in climate zone CZ6A",
+        "test_description": "The project has one building segment with one zone and one floor with HVAC BAT = Other Non-Residential.  It is 20,000 ft2 and has HVAC system type 3.  It is in climate zone CZ6A",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-1",
@@ -5174,7 +5174,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "u",
-        "test_description": "The baseline building has one zone (one floor) with HVAC BAT = Other Non-Residential.  It is 20,000 ft2 and has HVAC system type 5.  It is in climate zone CZ6A",
+        "test_description": "The project has one building segment with one zone and one floor with HVAC BAT = Other Non-Residential.  It is 20,000 ft2 and has HVAC system type 5.  It is in climate zone CZ6A",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "18-1",
@@ -5398,7 +5398,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "v",
-        "test_description": "The baseline building has four zones (four floors) with HVAC BAT = Other Non-Residential.  It is 20,000 ft2 and has HVAC system type 6.  It is in climate zone CZ3A",
+        "test_description": "The project has one building segment with four zones and one floor with HVAC BAT = Other Non-Residential.  It is 20,000 ft2 and has HVAC system type 6.  It is in climate zone CZ3A",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-1",
@@ -5842,7 +5842,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "w",
-        "test_description": "The baseline building has one zone (one floor) with HVAC BAT = Other Non-Residential.  It is 20,000 ft2 and has HVAC system type 5.  It is in climate zone CZ3A",
+        "test_description": "The project has one building segment with one zone and one floor with HVAC BAT = Other Non-Residential.  It is 20,000 ft2 and has HVAC system type 5.  It is in climate zone CZ3A",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "18-1",
@@ -6066,7 +6066,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "x",
-        "test_description": "The baseline building has one zone (one floor) with HVAC BAT = Other Non-Residential.  It is 20,000 ft2 and has HVAC system type 5.  It is in climate zone CZ6A",
+        "test_description": "The project has one building segment with four zones and one floor with HVAC BAT = Other Non-Residential.  It is 20,000 ft2 and has HVAC system type 5.  It is in climate zone CZ6A",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-1",
@@ -6532,7 +6532,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "y",
-        "test_description": "The baseline building has one zone (one floor) with HVAC BAT = Other Non-Residential.  It is 20,000 ft2 and has HVAC system type 6.  It is in climate zone CZ6A",
+        "test_description": "The project has one building segment with four zones and one floor with HVAC BAT = Other Non-Residential.  It is 20,000 ft2 and has HVAC system type 6.  It is in climate zone CZ6A",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "18-1",
@@ -6976,7 +6976,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "z",
-        "test_description": "The baseline building has four zones (four floors) with HVAC BAT = Other Non-Residential.  It is 40,000 ft2 and has HVAC system type 8.  It is in climate zone CZ3A",
+        "test_description": "The project has one building segment with four zones and one floor with HVAC BAT = Other Non-Residential.  It is 40,000 ft2 and has HVAC system type 4.  It is in climate zone CZ3A",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-1",
@@ -7510,7 +7510,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "aa",
-        "test_description": "The baseline building has one zone (one floor) with HVAC BAT = Other Non-Residential.  It is 40,000 ft2 and has HVAC system type 5.  It is in climate zone CZ3A",
+        "test_description": "The project has one building segment with one zone and one floor with HVAC BAT = Other Non-Residential.  It is 40,000 ft2 and has HVAC system type 5.  It is in climate zone CZ3A",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "18-1",
@@ -7734,7 +7734,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "ab",
-        "test_description": "The baseline building has one zone (one floor) with HVAC BAT = Other Non-Residential.  It is 40,000 ft2 and has HVAC system type 5.  It is in climate zone CZ6A",
+        "test_description": "The project has one building segment with four zones and one floor with HVAC BAT = Other Non-Residential.  It is 40,000 ft2 and has HVAC system type 5.  It is in climate zone CZ6A",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-1",
@@ -8072,7 +8072,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "ac",
-        "test_description": "The baseline building has one zone (one floor) with HVAC BAT = Other Non-Residential.  It is 40,000 ft2 and has HVAC system type 5.  It is in climate zone CZ6A",
+        "test_description": "The project has one building segment with four zones and one floor with HVAC BAT = Other Non-Residential.  It is 40,000 ft2 and has HVAC system type 6.  It is in climate zone CZ6A",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "18-1",
@@ -8516,7 +8516,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "ad",
-        "test_description": "The baseline building has six zones (six floors) with HVAC BAT = Other Non-Residential.  It is 60,000 ft2 and has HVAC system type 8.  It is in climate zone CZ3A",
+        "test_description": "The project has one building segment with six zones and six floors with HVAC BAT = Other Non-Residential.  It is 60,000 ft2 and has HVAC system type 8.  It is in climate zone CZ3A",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-1",
@@ -9228,7 +9228,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "ae",
-        "test_description": "The baseline building has six zones (six floors) with HVAC BAT = Other Non-Residential.  It is 60,000 ft2 and has HVAC system type 5.  It is in climate zone CZ3A",
+        "test_description": "The project has one building segment with six zones and six floors with HVAC BAT = Other Non-Residential.  It is 60,000 ft2 and has HVAC system type 5.  It is in climate zone CZ3A",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "18-1",
@@ -9840,7 +9840,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "af",
-        "test_description": "The baseline building has four zones (four floors) with HVAC BAT = Other Non-Residential.  It is 160,000 ft2 and has HVAC system type 8.  It is in climate zone CZ3A",
+        "test_description": "The project has one building segment with four zones and one floor with HVAC BAT = Other Non-Residential.  It is 160,000 ft2 and has HVAC system type 8.  It is in climate zone CZ3A",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-1",
@@ -10390,7 +10390,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "ag",
-        "test_description": "The baseline building has six zones (six floors) with HVAC BAT = Other Non-Residential.  It is 60,000 ft2 and has HVAC system type 7.  It is in climate zone CZ5A",
+        "test_description": "The project has one building segment with six zones and six floors with HVAC BAT = Other Non-Residential.  It is 60,000 ft2 and has HVAC system type 7.  It is in climate zone CZ5A",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-1",
@@ -11114,7 +11114,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "ah",
-        "test_description": "The baseline building has six zones (six floors) with HVAC BAT = Other Non-Residential.  It is 60,000 ft2 and has HVAC system type 5.  It is in climate zone CZ5A",
+        "test_description": "The project has one building segment with six zones and six floors with HVAC BAT = Other Non-Residential.  It is 60,000 ft2 and has HVAC system type 5.  It is in climate zone CZ5A",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "18-1",
@@ -11686,7 +11686,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "ai",
-        "test_description": "The baseline building has four zones (four floors) with HVAC BAT = Other Non-Residential.  It is 160,000 ft2 and has HVAC system type 7.  It is in climate zone CZ5A",
+        "test_description": "The project has one building segment with four zones and one floor with HVAC BAT = Other Non-Residential.  It is 160,000 ft2 and has HVAC system type 7.  It is in climate zone CZ5A",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-1",
@@ -12250,7 +12250,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "aj",
-        "test_description": "The baseline building has six zones (six floors) with HVAC BAT = Other Non-Residential for Thermal Zone 1 and HVAC BAT = HOSPITAL for the other five zones.  Thermal Zone 1 is 25,000 ft2 and the other zones are 20,000 sf each.  It is in climate zone CZ3A.  Thermal zone 1 is correctly conditioned with HVAC system type 8",
+        "test_description": "The project has one building segment with six zones and six floors with HVAC BAT = Other Non-Residential for Thermal Zone 1 and HVAC BAT = HOSPITAL for the other five zones.  Thermal Zone 1 is 25,000 ft2 and the other zones are 20,000 sf each.  It is in climate zone CZ3A.  Thermal zone 1 is correctly conditioned with HVAC system type 8",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-1",
@@ -12977,7 +12977,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "ak",
-        "test_description": "The baseline building has six zones (six floors) with HVAC BAT = Other Non-Residential for Thermal Zone 1 and HVAC BAT = HOSPITAL for the other five zones.  Thermal Zone 1 is 25,000 ft2 and the other zones are 20,000 sf each.  It is in climate zone CZ3A.  Thermal zone 1 is incorrectly conditioned with HVAC system type 6",
+        "test_description": "The project has one building segment with six zones and six floors with HVAC BAT = Other Non-Residential for Thermal Zone 1 and HVAC BAT = HOSPITAL for the other five zones.  Thermal Zone 1 is 25,000 ft2 and the other zones are 20,000 sf each.  It is in climate zone CZ3A.  Thermal zone 1 is incorrectly conditioned with HVAC system type 6",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "18-1",
@@ -13660,7 +13660,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "al",
-        "test_description": "The baseline building one floor and one zone with HVAC BAT = RESIDENTIAL.  It is in climate zone CZ3A and is correctly modeled with HVAC system type 2",
+        "test_description": "The project has one building segment with one zone and one floor with HVAC BAT = RESIDENTIAL.  It is in climate zone CZ3A and is correctly modeled with HVAC system type 2",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-1",
@@ -13820,7 +13820,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "am",
-        "test_description": "The baseline building one floor and one zone with HVAC BAT = RESIDENTIAL.  It is in climate zone CZ3A and is incorrectly modeled with HVAC system type 3",
+        "test_description": "The project has one building segment with one zone and one floor with HVAC BAT = RESIDENTIAL.  It is in climate zone CZ3A and is incorrectly modeled with HVAC system type 3",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "18-1",
@@ -13990,7 +13990,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "an",
-        "test_description": "The baseline building one floor and one zone with HVAC BAT = RESIDENTIAL.  It is in climate zone CZ4A and is correctly modeled with HVAC system type 1",
+        "test_description": "The project has one building segment with one zone and one floor with HVAC BAT = RESIDENTIAL.  It is in climate zone CZ4A and is correctly modeled with HVAC system type 1",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-1",
@@ -14178,7 +14178,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "ao",
-        "test_description": "The baseline building one floor and one zone with HVAC BAT = RESIDENTIAL.  It is in climate zone CZ4A and is incorrectly modeled with HVAC system type 3",
+        "test_description": "The project has one building segment with one zone and one floor with HVAC BAT = RESIDENTIAL.  It is in climate zone CZ4A and is incorrectly modeled with HVAC system type 3",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "18-1",
@@ -14348,7 +14348,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "ap",
-        "test_description": "The baseline building is one floor and four zones with HVAC BAT = OTHER NON RESIDENTIAL.  Building area is 50,000 sf, so the baseline system type is system 5.  Thermal Zone 1 has peak internal gains that differ by more than 10 Btu/h.ft2 and is correctly modeled with System type 5.  It is in climate zone CZ4A",
+        "test_description": "The project has one building segment with one floor and four zones with HVAC BAT = OTHER NON RESIDENTIAL.  Building area is 50,000 sf, so the baseline system type is system 5.  Thermal Zone 1 has peak internal gains that differ by more than 10 Btu/h.ft2.  It is in climate zone CZ4A",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-1",
@@ -14734,7 +14734,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "aq",
-        "test_description": "The baseline building is one floor and four zones with HVAC BAT = OTHER NON RESIDENTIAL.  Building area is 50,000 sf, so the baseline system type is system 5.  Thermal Zone 1 has peak internal gains that differ by more than 10 Btu/h.ft2 and is incorrectly modeled with System type 8.  It is in climate zone CZ4A",
+        "test_description": "The project has one building segment with one floor and four zones with HVAC BAT = OTHER NON RESIDENTIAL.  Building area is 50,000 sf, so the baseline system type is system 5.  Thermal Zone 1 has peak internal gains that differ by more than 10 Btu/h.ft2 and is incorrectly modeled with System type 8.  It is in climate zone CZ4A",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "18-1",
@@ -15244,7 +15244,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "ar",
-        "test_description": "The baseline building is one floor and four zones with HVAC BAT = OTHER NON RESIDENTIAL.  Building area is 50,000 sf, so the baseline system type is system 6.  Thermal Zone 1 has peak internal gains that differ by more than 10 Btu/h.ft2 and is correctly modeled with System type 6.  It is in climate zone CZ1A",
+        "test_description": "The project has one building segment with one floor and four zones with HVAC BAT = OTHER NON RESIDENTIAL.  Building area is 50,000 sf, so the baseline system type is system 6.  Thermal Zone 1 has peak internal gains that differ by more than 10 Btu/h.ft2.  It is in climate zone CZ1A",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-1",
@@ -15612,7 +15612,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "as",
-        "test_description": "The baseline building is one floor and four zones with HVAC BAT = OTHER NON RESIDENTIAL.  Building area is 50,000 sf, so the baseline system type is system 6.  Thermal Zone 1 has peak internal gains that differ by more than 10 Btu/h.ft2 and is incorrectly modeled with System type 4.  It is in climate zone CZ1A",
+        "test_description": "The project has one building segment with one floor and four zones with HVAC BAT = OTHER NON RESIDENTIAL.  Building area is 50,000 sf, so the baseline system type is system 6.  Thermal Zone 1 has peak internal gains that differ by more than 10 Btu/h.ft2 and is incorrectly modeled with System type 5.  It is in climate zone CZ1A",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "18-1",
@@ -16024,7 +16024,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "at",
-        "test_description": "The baseline building is one floor and four zones with HVAC BAT = OTHER NON RESIDENTIAL.  Building area is 40,000 sf.  Thermal Zone 1 is type Laboratory with 16,000 cfm of zone exhaust and HVAC system type 5.  Expected result: pass",
+        "test_description": "The project has one building segment with one floor and four zones with HVAC BAT = OTHER NON RESIDENTIAL.  Building area is 40,000 sf.  Thermal Zone 1 is type Laboratory with 16,000 cfm of zone exhaust and HVAC system type 5.  Expected result: pass",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-1",
@@ -16452,7 +16452,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "au",
-        "test_description": "The baseline building is one floor and four zones with HVAC BAT = OTHER NON RESIDENTIAL.  Building area is 160,000 sf.  Thermal Zone 1 is type Laboratory with 16,000 cfm of zone exhaust and HVAC system type 7.  Expected result: pass",
+        "test_description": "The project has one building segment with one floor and four zones with HVAC BAT = OTHER NON RESIDENTIAL.  Building area is 160,000 sf.  Thermal Zone 1 is type Laboratory with 16,000 cfm of zone exhaust and HVAC system type 7.  Expected result: pass",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-1",
@@ -16778,7 +16778,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "av",
-        "test_description": "The baseline building is one floor and four zones with HVAC BAT = OTHER NON RESIDENTIAL.  Building area is 640,000 sf.  Thermal Zones 1 and 2 are type Laboratory with total 16,000 cfm of zone exhaust and HVAC system type 5.  Expected result: pass",
+        "test_description": "The project has one building segment with one floor and four zones with HVAC BAT = OTHER NON RESIDENTIAL.  Building area is 640,000 sf.  Thermal Zones 1 and 2 are type Laboratory with total 16,000 cfm of zone exhaust and HVAC system type 5.  Expected result: pass",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-1",
@@ -17183,7 +17183,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "aw",
-        "test_description": "The baseline building is one floor and four zones with HVAC BAT = OTHER NON RESIDENTIAL.  Building area is 20,000 sf.  Thermal Zone 1 is type Laboratory with 16,000 cfm of zone exhaust and incorrectly modeled as being on the same System 6 as the rest of the zones.  Expected result: fail",
+        "test_description": "The project has one building segment with one floor and four zones with HVAC BAT = OTHER NON RESIDENTIAL.  Building area is 20,000 sf.  Thermal Zone 1 is type Laboratory with 16,000 cfm of zone exhaust and incorrectly modeled as being on the same System 6 as the rest of the zones.  Expected result: fail",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "18-1",
@@ -17513,7 +17513,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "ax",
-        "test_description": "The baseline building is one floor and four zones with HVAC BAT = OTHER NON RESIDENTIAL.  Building area is 160,000 sf.  Thermal Zone 1 is type Laboratory with 12,000 cfm of zone exhaust and is incorrectly modeled with a dedicated HVAC system type 7.  Expected result: fail",
+        "test_description": "The project has one building segment with one floor and four zones with HVAC BAT = OTHER NON RESIDENTIAL.  Building area is 160,000 sf.  Thermal Zone 1 is type Laboratory with 12,000 cfm of zone exhaust and is incorrectly modeled with a dedicated HVAC system type 7.  Expected result: fail",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "18-1",
@@ -17990,7 +17990,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "ay",
-        "test_description": "The baseline building is one floor and four zones with HVAC BAT = OTHER NON RESIDENTIAL.  Building area is 160,000 sf.  Thermal Zones 1 and 2 are type Laboratory.  They are served by one System 7 with total exhaust rate of 16,000cfm.  Expected result: undetermiend",
+        "test_description": "The project has one building segment with one floor and four zones with HVAC BAT = OTHER NON RESIDENTIAL.  Building area is 160,000 sf.  Thermal Zones 1 and 2 are type Laboratory.  They are served by one System 7 with total exhaust rate of 16,000cfm.  Expected result: undetermiend",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "18-1",
@@ -18474,7 +18474,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "az",
-        "test_description": "The baseline building is one floor and one zone with HVAC BAT = OTHER NON RESIDENTIAL.  Building area is 500 sf.  Thermal Zones 1 is a stairwell with a heating-only system.  Expected result: pass",
+        "test_description": "The project has one building segment with one floor and one zone with HVAC BAT = OTHER NON RESIDENTIAL.  Building area is 500 sf.  Thermal Zones 1 is a stairwell with a heating-only system.  Expected result: pass",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-1",
@@ -18617,7 +18617,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "ba",
-        "test_description": "The baseline building is one floor and one zone with HVAC BAT = OTHER NON RESIDENTIAL.  Building area is 500 sf.  Thermal Zones 1 is a stairwell with a heating-only system.  There is a cooling system in the proposed model.  Expected result: fail",
+        "test_description": "The project has one building segment with one floor and one zone with HVAC BAT = OTHER NON RESIDENTIAL.  Building area is 500 sf.  Thermal Zones 1 is a stairwell with a heating-only system.  There is a cooling system in the proposed model.  Expected result: fail",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "18-1",
@@ -18764,7 +18764,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "bb",
-        "test_description": "The baseline building is one floor and one zone with HVAC BAT = HEATED_ONLY_STORAGE.  Building area is 20,000 sf.  Thermal Zone 1 is a warehouse with a heating-only system.  Thermal Zones 2,3&4 are office with HVAC Sys-4  Expected result: pass",
+        "test_description": "The project has one building segment with one floor and four zones with HVAC BAT = HEATED_ONLY_STORAGE.  Building area is 20,000 sf.  Thermal Zone 1 is a warehouse with a heating-only system.  Thermal Zones 2,3&4 are office with HVAC Sys-4  Expected result: pass",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-1",
@@ -19171,7 +19171,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "bc",
-        "test_description": "The baseline building is one floor and one zone with HVAC BAT = HEATED_ONLY_STORAGE.  Building area is 20,000 sf.  Thermal Zone 1 is a warehouse with a heating-only system.  Thermal Zones 2,3&4 are office.  Only thermal zones 3&4 have HVAC Sys-3.  Thermal Zone 2 is incorrectly modeled with Sys-9 in the baseline despite having a DX coil in the proposed model  Expected result: fail",
+        "test_description": "The project has one building segment with one floor and four zones with HVAC BAT = HEATED_ONLY_STORAGE.  Building area is 20,000 sf.  Thermal Zone 1 is a warehouse with a heating-only system.  Thermal Zones 2,3&4 are office.  Only thermal zones 3&4 have HVAC Sys-3.  Thermal Zone 2 is incorrectly modeled with Sys-9 in the baseline despite having a DX coil in the proposed model  Expected result: fail",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "18-1",
@@ -19582,7 +19582,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "bd",
-        "test_description": "The baseline building is one floor and four zones with HVAC BAT = OTHER NON RESIDENTIAL.  Predominant HVAC type is System 7.  Building area is 160,000 sf.  Thermal Zone 1 has a lighting space type COMPUTER_ROOM with a peak cooling load greater than 650,000btu/hr and has HVAC system type 11.  Expected result: pass",
+        "test_description": "The project has one building segment with one floor and four zones with HVAC BAT = OTHER NON RESIDENTIAL.  Predominant HVAC type is System 7.  Building area is 160,000 sf.  Thermal Zone 1 has a lighting space type COMPUTER_ROOM with a peak cooling load greater than 650,000btu/hr and has HVAC system type 11.  Expected result: pass",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-1",
@@ -20069,7 +20069,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "be",
-        "test_description": "The baseline building is one floor and four zones with HVAC BAT = OTHER NON RESIDENTIAL.  Predominant HVAC type is System 7.  Building area is 160,000 sf.  Thermal Zone 1 has a lighting space type COMPUTER_ROOM,peak cooling load of 650,000btu/hr and is on the System 7.  Expected result: fail",
+        "test_description": "The project has one building segment with one floor and four zones with HVAC BAT = OTHER NON RESIDENTIAL.  Predominant HVAC type is System 7.  Building area is 160,000 sf.  Thermal Zone 1 has a lighting space type COMPUTER_ROOM,peak cooling load of 650,000btu/hr and is on the System 7.  Expected result: fail",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "18-1",
@@ -20289,7 +20289,8 @@
                                                         "miscellaneous_equipment": [
                                                             {
                                                                 "id": "Space 1 Equip",
-                                                                "power": 200000
+                                                                "power": 200000,
+                                                                "multiplier_schedule": "Misc Equip Mul Sch"
                                                             }
                                                         ],
                                                         "lighting_space_type": "COMPUTER_ROOM"
@@ -20468,7 +20469,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "bf",
-        "test_description": "The baseline building is one floor and four zones with HVAC BAT = OTHER NON RESIDENTIAL.  Predominant HVAC type is System 5.  Building area is 120,000 sf.  Thermal Zone 1 has a lighting space type COMPUTER_ROOM with a peak cooling load greater than 3,000,000btu/hr and has HVAC system type 11.  Expected result: pass",
+        "test_description": "The project has one building segment with one floor and four zones with HVAC BAT = OTHER NON RESIDENTIAL.  Predominant HVAC type is System 5.  Building area is 120,000 sf.  Thermal Zone 1 has a lighting space type COMPUTER_ROOM with a peak cooling load greater than 3,000,000btu/hr and has HVAC system type 11.  Expected result: pass",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-1",
@@ -20953,7 +20954,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "bg",
-        "test_description": "The baseline building is one floor and four zones with HVAC BAT = OTHER NON RESIDENTIAL.  Predominant HVAC type is System 5.  Building area is 120,000 sf.  Thermal Zone 1 has a lighting space type COMPUTER_ROOM with a peak cooling load greater than 3,000,000btu/hr and is incorrectly  modeled as being on the predominant hvac system 5.  Expected result: fail",
+        "test_description": "The project has one building segment with one floor and four zones with HVAC BAT = OTHER NON RESIDENTIAL.  Predominant HVAC type is System 5.  Building area is 120,000 sf.  Thermal Zone 1 has a lighting space type COMPUTER_ROOM with a peak cooling load greater than 3,000,000btu/hr and is incorrectly  modeled as being on the predominant hvac system 5.  Expected result: fail",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "18-1",
@@ -21334,7 +21335,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "bh",
-        "test_description": "The baseline building is one floor and four zones with HVAC BAT = OTHER NON RESIDENTIAL.  Predominant HVAC type is System 5.  Building area is 120,000 sf.  Thermal Zone 1 has a lighting space type COMPUTER_ROOM with a peak cooling load less than 3,000,000btu/hr and is modeled as being on the predominant hvac system 5.  Expected result: pass",
+        "test_description": "The project has one building segment with one floor and four zones with HVAC BAT = OTHER NON RESIDENTIAL.  Predominant HVAC type is System 5.  Building area is 120,000 sf.  Thermal Zone 1 has a lighting space type COMPUTER_ROOM with a peak cooling load less than 3,000,000btu/hr and is modeled as being on the predominant hvac system 5.  Expected result: pass",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-1",
@@ -21715,7 +21716,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "bi",
-        "test_description": "The baseline building is one floor and four zones in climate zone CZ4A with HVAC BAT = OTHER NON RESIDENTIAL.  Predominant HVAC type is System 7.  Building area is 160,000 sf.  Thermal Zone 1 has a lighting space type COMPUTER_ROOM,peak cooling load of less than 650,000btu/hr and has HVAC system type 3.  Expected result: pass",
+        "test_description": "The project has one building segment with one floor and four zones in climate zone CZ4A with HVAC BAT = OTHER NON RESIDENTIAL.  Predominant HVAC type is System 7.  Building area is 160,000 sf.  Thermal Zone 1 has a lighting space type COMPUTER_ROOM,peak cooling load of less than 650,000btu/hr and has HVAC system type 3.  Expected result: pass",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-1",
@@ -22150,7 +22151,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "bj",
-        "test_description": "The baseline building is one floor and four zones in climate zone CZ1A with HVAC BAT = OTHER NON RESIDENTIAL.  Predominant HVAC type is System 7.  Building area is 160,000 sf.  Thermal Zone 1 has a lighting space type COMPUTER_ROOM,peak cooling load of less than 650,000btu/hr and has HVAC system type 4.  Expected result: pass",
+        "test_description": "The project has one building segment with one floor and four zones in climate zone CZ1A with HVAC BAT = OTHER NON RESIDENTIAL.  Predominant HVAC type is System 7.  Building area is 160,000 sf.  Thermal Zone 1 has a lighting space type COMPUTER_ROOM,peak cooling load of less than 650,000btu/hr and has HVAC system type 4.  Expected result: pass",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-1",
@@ -22611,7 +22612,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "bk",
-        "test_description": "The baseline building is one floor and four zones in climate zone CZ4A with HVAC BAT = OTHER NON RESIDENTIAL.  Predominant HVAC type is System 7.  Building area is 160,000 sf.  Thermal Zone 1 has a lighting space type COMPUTER_ROOM,peak cooling load of less than 650,000btu/hr and has HVAC system type 3.  Expected result: fail",
+        "test_description": "The project has one building segment with one floor and four zones in climate zone CZ4A with HVAC BAT = OTHER NON RESIDENTIAL.  Predominant HVAC type is System 7.  Building area is 160,000 sf.  Thermal Zone 1 has a lighting space type COMPUTER_ROOM,peak cooling load of less than 650,000btu/hr and has HVAC system type 3.  Expected result: fail",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "18-1",
@@ -22856,7 +22857,8 @@
                                                         "miscellaneous_equipment": [
                                                             {
                                                                 "id": "Space 1 Equip",
-                                                                "power": 100000
+                                                                "power": 100000,
+                                                                "multiplier_schedule": "Misc Equip Mul Sch"
                                                             }
                                                         ],
                                                         "lighting_space_type": "COMPUTER_ROOM"
@@ -23060,7 +23062,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "bl",
-        "test_description": "The baseline building is one floor and four zones in climate zone CZ4A with HVAC BAT = OTHER NON RESIDENTIAL.  Building area is 20,000 sf.  The buidling is modeled with each zone having its own HVAC system type 3.  Expected result: pass",
+        "test_description": "The project has one building segment with one floor and four zones in climate zone CZ4A with HVAC BAT = OTHER NON RESIDENTIAL.  Building area is 20,000 sf.  The buidling is modeled with each zone having its own HVAC system type 3.  Expected result: pass",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-1",
@@ -23495,7 +23497,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "bm",
-        "test_description": "The baseline building is one floor and four zones in climate zone CZ4A with HVAC BAT = OTHER NON RESIDENTIAL.  Building area is 20,000 sf.  The buidling is modeled incorrectly with all zones being served by one HVAC system type 3.  Expected result: pass",
+        "test_description": "The project has one building segment with one floor and four zones in climate zone CZ4A with HVAC BAT = OTHER NON RESIDENTIAL.  Building area is 20,000 sf.  The buidling is modeled incorrectly with all zones being served by one HVAC system type 3.  Expected result: pass",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-1",
@@ -23930,7 +23932,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "bn",
-        "test_description": "The baseline building is two floors and four zones in climate zone CZ4A with HVAC BAT = OTHER NON RESIDENTIAL.  Building area is 160,000 sf.  The buidling is modeled with each floor having its own HVAC system type 7.  Expected result: pass",
+        "test_description": "The project has one building segment with one floor and four zones in climate zone CZ4A with HVAC BAT = OTHER NON RESIDENTIAL.  Building area is 160,000 sf.  The buidling is modeled with each floor having its own HVAC system type 7.  Expected result: pass",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-1",
@@ -24393,7 +24395,7 @@
         "Section": 18,
         "Rule": 1,
         "Test": "bo",
-        "test_description": "The baseline building is two floors and four zones in climate zone CZ4A with HVAC BAT = OTHER NON RESIDENTIAL.  Building area is 160,000 sf.  The buidling is modeled incorrectly with one HVAC System 7 serving all zones.  Expected result: fail",
+        "test_description": "The project has one building segment with one floor and four zones in climate zone CZ4A with HVAC BAT = OTHER NON RESIDENTIAL.  Building area is 160,000 sf.  The buidling is modeled incorrectly with one HVAC System 9 serving all zones.  Expected result: fail",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "18-1",
@@ -24431,12 +24433,10 @@
                                                 ],
                                                 "terminals": [
                                                     {
-                                                        "id": "System_7_VAV_HW_Reheat - Terminal for Thermal Zone 1",
+                                                        "id": "System_9_Warm_Air_Furnace_Gas - Terminal for Thermal Zone 1",
                                                         "is_supply_ducted": true,
-                                                        "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_7_VAV_HW_Reheat",
-                                                        "heating_source": "HOT_WATER",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_9_Warm_Air_Furnace_Gas Thermal Zone 1"
                                                     }
                                                 ]
                                             },
@@ -24449,12 +24449,10 @@
                                                 ],
                                                 "terminals": [
                                                     {
-                                                        "id": "System_7_VAV_HW_Reheat - Terminal for Thermal Zone 2",
+                                                        "id": "System_9_Warm_Air_Furnace_Gas - Terminal for Thermal Zone 2",
                                                         "is_supply_ducted": true,
-                                                        "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_7_VAV_HW_Reheat",
-                                                        "heating_source": "HOT_WATER",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_9_Warm_Air_Furnace_Gas Thermal Zone 2"
                                                     }
                                                 ]
                                             },
@@ -24467,12 +24465,10 @@
                                                 ],
                                                 "terminals": [
                                                     {
-                                                        "id": "System_7_VAV_HW_Reheat - Terminal for Thermal Zone 3",
+                                                        "id": "System_9_Warm_Air_Furnace_Gas - Terminal for Thermal Zone 3",
                                                         "is_supply_ducted": true,
-                                                        "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_7_VAV_HW_Reheat",
-                                                        "heating_source": "HOT_WATER",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_9_Warm_Air_Furnace_Gas Thermal Zone 3"
                                                     }
                                                 ]
                                             },
@@ -24485,98 +24481,121 @@
                                                 ],
                                                 "terminals": [
                                                     {
-                                                        "id": "System_7_VAV_HW_Reheat - Terminal for Thermal Zone 4",
+                                                        "id": "System_9_Warm_Air_Furnace_Gas - Terminal for Thermal Zone 4",
                                                         "is_supply_ducted": true,
-                                                        "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_7_VAV_HW_Reheat",
-                                                        "heating_source": "HOT_WATER",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_9_Warm_Air_Furnace_Gas Thermal Zone 4"
                                                     }
                                                 ]
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System_7_VAV_HW_Reheat",
-                                                "cooling_system": {
-                                                    "id": "CS1",
-                                                    "type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Secondary CHW Loop 1",
-                                                    "design_sensible_cool_capacity": 2813600000.0
-                                                },
-                                                "preheat_system": {
-                                                    "id": "Preheat Coil 1",
-                                                    "type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1",
-                                                    "design_capacity": 23445.68888888889
+                                                "id": "System_9_Warm_Air_Furnace_Gas Thermal Zone 1",
+                                                "heating_system": {
+                                                    "id": "HS1",
+                                                    "type": "FURNACE",
+                                                    "energy_source_type": "NATURAL_GAS",
+                                                    "design_capacity": 234456.8888888889
                                                 },
                                                 "fan_system": {
-                                                    "id": "VAV Fan System 1",
-                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "id": "Fan System - Thermal Zone 1",
+                                                    "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "System_7_VAV_HW_Reheat Supply Fan"
+                                                            "id": "Supply Fan - Thermal Zone 1"
                                                         }
                                                     ],
                                                     "return_fans": [
                                                         {
-                                                            "id": "System_7_VAV_HW_Reheat Return Fan"
+                                                            "id": "Return Fan - Thermal Zone 1"
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            {
+                                                "id": "System_9_Warm_Air_Furnace_Gas Thermal Zone 2",
+                                                "heating_system": {
+                                                    "id": "HS2",
+                                                    "type": "FURNACE",
+                                                    "energy_source_type": "NATURAL_GAS",
+                                                    "design_capacity": 234456.8888888889
+                                                },
+                                                "fan_system": {
+                                                    "id": "Fan System - Thermal Zone 2",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan - Thermal Zone 2"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan - Thermal Zone 2"
                                                         }
                                                     ]
                                                 },
+                                                "cooling_system": {
+                                                    "id": "CS2",
+                                                    "design_sensible_cool_capacity": 703400000.0
+                                                }
+                                            },
+                                            {
+                                                "id": "System_9_Warm_Air_Furnace_Gas Thermal Zone 3",
                                                 "heating_system": {
-                                                    "id": "HS1",
-                                                    "design_capacity": 937827.5555555556
+                                                    "id": "HS3",
+                                                    "type": "FURNACE",
+                                                    "energy_source_type": "NATURAL_GAS",
+                                                    "design_capacity": 234456.8888888889
+                                                },
+                                                "fan_system": {
+                                                    "id": "Fan System - Thermal Zone 3",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan - Thermal Zone 3"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan - Thermal Zone 3"
+                                                        }
+                                                    ]
+                                                },
+                                                "cooling_system": {
+                                                    "id": "CS3",
+                                                    "design_sensible_cool_capacity": 703400000.0
+                                                }
+                                            },
+                                            {
+                                                "id": "System_9_Warm_Air_Furnace_Gas Thermal Zone 4",
+                                                "heating_system": {
+                                                    "id": "HS4",
+                                                    "type": "FURNACE",
+                                                    "energy_source_type": "NATURAL_GAS",
+                                                    "design_capacity": 234456.8888888889
+                                                },
+                                                "fan_system": {
+                                                    "id": "Fan System - Thermal Zone 4",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan - Thermal Zone 4"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan - Thermal Zone 4"
+                                                        }
+                                                    ]
+                                                },
+                                                "cooling_system": {
+                                                    "id": "CS4",
+                                                    "design_sensible_cool_capacity": 703400000.0
                                                 }
                                             }
                                         ],
                                         "lighting_building_area_type": "OFFICE"
-                                    }
-                                ]
-                            }
-                        ],
-                        "boilers": [
-                            {
-                                "id": "Boiler 1",
-                                "loop": "Boiler Loop 1",
-                                "energy_source_type": "NATURAL_GAS"
-                            }
-                        ],
-                        "chillers": [
-                            {
-                                "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1"
-                            }
-                        ],
-                        "pumps": [
-                            {
-                                "id": "Boiler Pump 1",
-                                "loop_or_piping": "Boiler Loop 1",
-                                "speed_control": "FIXED_SPEED"
-                            },
-                            {
-                                "id": "Chiller Pump 1",
-                                "loop_or_piping": "Chiller Loop 1",
-                                "speed_control": "FIXED_SPEED"
-                            },
-                            {
-                                "id": "Secondary CHW Pump",
-                                "loop_or_piping": "Secondary CHW Loop 1",
-                                "speed_control": "VARIABLE_SPEED"
-                            }
-                        ],
-                        "fluid_loops": [
-                            {
-                                "id": "Boiler Loop 1",
-                                "type": "HEATING"
-                            },
-                            {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING",
-                                "child_loops": [
-                                    {
-                                        "id": "Secondary CHW Loop 1",
-                                        "type": "COOLING"
                                     }
                                 ]
                             }
@@ -24615,12 +24634,10 @@
                                                 ],
                                                 "terminals": [
                                                     {
-                                                        "id": "System_7_VAV_HW_Reheat - Terminal for Thermal Zone 1",
+                                                        "id": "System_9_Warm_Air_Furnace_Gas - Terminal for Thermal Zone 1",
                                                         "is_supply_ducted": true,
-                                                        "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_7_VAV_HW_Reheat",
-                                                        "heating_source": "HOT_WATER",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_9_Warm_Air_Furnace_Gas Thermal Zone 1"
                                                     }
                                                 ],
                                                 "floor_name": "flr 1"
@@ -24635,12 +24652,10 @@
                                                 ],
                                                 "terminals": [
                                                     {
-                                                        "id": "System_7_VAV_HW_Reheat - Terminal for Thermal Zone 2",
+                                                        "id": "System_9_Warm_Air_Furnace_Gas - Terminal for Thermal Zone 2",
                                                         "is_supply_ducted": true,
-                                                        "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_7_VAV_HW_Reheat",
-                                                        "heating_source": "HOT_WATER",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_9_Warm_Air_Furnace_Gas Thermal Zone 2"
                                                     }
                                                 ],
                                                 "floor_name": "flr 1"
@@ -24655,12 +24670,10 @@
                                                 ],
                                                 "terminals": [
                                                     {
-                                                        "id": "System_7_VAV_HW_Reheat - Terminal for Thermal Zone 3",
+                                                        "id": "System_9_Warm_Air_Furnace_Gas - Terminal for Thermal Zone 3",
                                                         "is_supply_ducted": true,
-                                                        "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_7_VAV_HW_Reheat",
-                                                        "heating_source": "HOT_WATER",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_9_Warm_Air_Furnace_Gas Thermal Zone 3"
                                                     }
                                                 ],
                                                 "floor_name": "flr 1"
@@ -24675,12 +24688,10 @@
                                                 ],
                                                 "terminals": [
                                                     {
-                                                        "id": "System_7_VAV_HW_Reheat - Terminal for Thermal Zone 4",
+                                                        "id": "System_9_Warm_Air_Furnace_Gas - Terminal for Thermal Zone 4",
                                                         "is_supply_ducted": true,
-                                                        "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_7_VAV_HW_Reheat",
-                                                        "heating_source": "HOT_WATER",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_9_Warm_Air_Furnace_Gas Thermal Zone 4"
                                                     }
                                                 ],
                                                 "floor_name": "flr 1"
@@ -24688,87 +24699,112 @@
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System_7_VAV_HW_Reheat",
-                                                "cooling_system": {
-                                                    "id": "CS1",
-                                                    "type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Secondary CHW Loop 1",
-                                                    "design_sensible_cool_capacity": 2813600000.0
-                                                },
-                                                "preheat_system": {
-                                                    "id": "Preheat Coil 1",
-                                                    "type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1",
-                                                    "design_capacity": 23445.68888888889
+                                                "id": "System_9_Warm_Air_Furnace_Gas Thermal Zone 1",
+                                                "heating_system": {
+                                                    "id": "HS1",
+                                                    "type": "FURNACE",
+                                                    "energy_source_type": "NATURAL_GAS",
+                                                    "design_capacity": 234456.8888888889
                                                 },
                                                 "fan_system": {
-                                                    "id": "VAV Fan System 1",
-                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "id": "Fan System - Thermal Zone 1",
+                                                    "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "System_7_VAV_HW_Reheat Supply Fan"
+                                                            "id": "Supply Fan - Thermal Zone 1"
                                                         }
                                                     ],
                                                     "return_fans": [
                                                         {
-                                                            "id": "System_7_VAV_HW_Reheat Return Fan"
+                                                            "id": "Return Fan - Thermal Zone 1"
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            {
+                                                "id": "System_9_Warm_Air_Furnace_Gas Thermal Zone 2",
+                                                "heating_system": {
+                                                    "id": "HS2",
+                                                    "type": "FURNACE",
+                                                    "energy_source_type": "NATURAL_GAS",
+                                                    "design_capacity": 234456.8888888889
+                                                },
+                                                "fan_system": {
+                                                    "id": "Fan System - Thermal Zone 2",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan - Thermal Zone 2"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan - Thermal Zone 2"
                                                         }
                                                     ]
                                                 },
+                                                "cooling_system": {
+                                                    "id": "CS2",
+                                                    "design_sensible_cool_capacity": 703400000.0
+                                                }
+                                            },
+                                            {
+                                                "id": "System_9_Warm_Air_Furnace_Gas Thermal Zone 3",
                                                 "heating_system": {
-                                                    "id": "HS1",
-                                                    "design_capacity": 937827.5555555556
+                                                    "id": "HS3",
+                                                    "type": "FURNACE",
+                                                    "energy_source_type": "NATURAL_GAS",
+                                                    "design_capacity": 234456.8888888889
+                                                },
+                                                "fan_system": {
+                                                    "id": "Fan System - Thermal Zone 3",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan - Thermal Zone 3"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan - Thermal Zone 3"
+                                                        }
+                                                    ]
+                                                },
+                                                "cooling_system": {
+                                                    "id": "CS3",
+                                                    "design_sensible_cool_capacity": 703400000.0
+                                                }
+                                            },
+                                            {
+                                                "id": "System_9_Warm_Air_Furnace_Gas Thermal Zone 4",
+                                                "heating_system": {
+                                                    "id": "HS4",
+                                                    "type": "FURNACE",
+                                                    "energy_source_type": "NATURAL_GAS",
+                                                    "design_capacity": 234456.8888888889
+                                                },
+                                                "fan_system": {
+                                                    "id": "Fan System - Thermal Zone 4",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan - Thermal Zone 4"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan - Thermal Zone 4"
+                                                        }
+                                                    ]
+                                                },
+                                                "cooling_system": {
+                                                    "id": "CS4",
+                                                    "design_sensible_cool_capacity": 703400000.0
                                                 }
                                             }
                                         ],
                                         "area_type_heating_ventilating_air_conditioning_system": "OTHER_NON_RESIDENTIAL",
                                         "lighting_building_area_type": "OFFICE"
-                                    }
-                                ]
-                            }
-                        ],
-                        "boilers": [
-                            {
-                                "id": "Boiler 1",
-                                "loop": "Boiler Loop 1",
-                                "energy_source_type": "NATURAL_GAS"
-                            }
-                        ],
-                        "chillers": [
-                            {
-                                "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1"
-                            }
-                        ],
-                        "pumps": [
-                            {
-                                "id": "Boiler Pump 1",
-                                "loop_or_piping": "Boiler Loop 1",
-                                "speed_control": "FIXED_SPEED"
-                            },
-                            {
-                                "id": "Chiller Pump 1",
-                                "loop_or_piping": "Chiller Loop 1",
-                                "speed_control": "FIXED_SPEED"
-                            },
-                            {
-                                "id": "Secondary CHW Pump",
-                                "loop_or_piping": "Secondary CHW Loop 1",
-                                "speed_control": "VARIABLE_SPEED"
-                            }
-                        ],
-                        "fluid_loops": [
-                            {
-                                "id": "Boiler Loop 1",
-                                "type": "HEATING"
-                            },
-                            {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING",
-                                "child_loops": [
-                                    {
-                                        "id": "Secondary CHW Loop 1",
-                                        "type": "COOLING"
                                     }
                                 ]
                             }

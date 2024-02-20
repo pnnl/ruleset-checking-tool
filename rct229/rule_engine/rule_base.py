@@ -1,11 +1,10 @@
 from jsonpointer import resolve_pointer
-
 from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
+from rct229.rule_engine.ruleset_model_factory import RuleSetModels, get_rmd_instance
 from rct229.utils.assertions import MissingKeyException, RCTFailureException
 from rct229.utils.json_utils import slash_prefix_guarantee
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import calcq_to_q
-from rct229.rule_engine.ruleset_model_factory import RuleSetModels, get_rmd_instance
 
 
 class RuleDefinitionBase:
@@ -14,6 +13,7 @@ class RuleDefinitionBase:
     def __init__(
         self,
         rmrs_used,
+        rmrs_used_optional=None,
         id=None,
         description=None,
         ruleset_section_title=None,
@@ -33,6 +33,8 @@ class RuleDefinitionBase:
         rmrs_used : RulesetModels
             A boolean values indicating which RMDs are required by the
             rule
+        rmrs_used_optional: RulesetModels
+            A boolean values indicating which RMDs are optional by the rule (True optional, False not optional).
         id : string
             Unique id for the rule
             Usually unspecified for nested rules
@@ -67,6 +69,7 @@ class RuleDefinitionBase:
             default message for NOT_APPLICABLE outcome
         """
         self.rmrs_used = rmrs_used
+        self.rmrs_used_optional = rmrs_used_optional
         self.id = id
         self.description = description
         self.ruleset_section_title = ruleset_section_title
@@ -198,6 +201,8 @@ class RuleDefinitionBase:
                             else:
                                 outcome["result"] = RCTOutcomeLabel.FAILED
                                 fail_msg = self.get_fail_msg(context, calc_vals, data)
+                                if self.is_tolerance_fail(context, calc_vals, data):
+                                    fail_msg = fail_msg + " ::TOLERANCE::"
                                 if fail_msg:
                                     outcome["message"] = fail_msg
                     else:
@@ -283,8 +288,16 @@ class RuleDefinitionBase:
         missing_contexts = []
         ruleset_model_types = rmds.get_ruleset_model_types()
         for ruleset_model in ruleset_model_types:
-            if self.rmrs_used[ruleset_model] and (
-                rmds[ruleset_model] is None or not rmds[ruleset_model]
+            if (
+                # rmr used
+                self.rmrs_used[ruleset_model]
+                and not (
+                    # and rmr is not optional
+                    self.rmrs_used_optional
+                    and self.rmrs_used_optional[ruleset_model]
+                )
+                # and rmds[ruleset_model] is None or empty
+                and (rmds[ruleset_model] is None or not rmds[ruleset_model])
             ):
                 missing_contexts.append(ruleset_model)
 
@@ -547,6 +560,27 @@ class RuleDefinitionBase:
         """
 
         raise NotImplementedError
+
+    def is_tolerance_fail(self, context, calc_vals=None, data=None):
+        """Check if the failure is because of tolerance
+
+        This method should only be overridden if the rule check is comparing
+        a number with another number.
+
+        Parameters
+        ----------
+        context : RuleSetModels
+            Object containing the contexts for RMRs
+        calc_vals : dict or None
+
+        data : An optional data object. It is ignored by this base implementation.
+
+        Returns
+        -------
+        bool
+            True fail because of tolerance, False otherwise.
+        """
+        return False
 
     def get_fail_msg(self, context, calc_vals=None, data=None):
         """Gets the message to include in the outcome for the FAIL case.

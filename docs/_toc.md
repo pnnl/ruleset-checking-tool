@@ -206,8 +206,9 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [5-13](section5/Rule5-13.md): Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same in the baseline as in the proposed design.
   * [5-14](section5/Rule5-14.md): For building area types included in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table G3.1.1-1 based on the area of gross above-grade walls that separate conditioned spaces and semi-heated spaces from the exterior
   * [5-15](section5/Rule5-15.md): For building areas not shown in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in the proposed design or 40% of gross above-grade wall area, whichever is smaller. 
-  * [5-17](section5/Rule5-17.md): The vertical fenestration shall be distributed on each face of the building in the same proportion as in the proposed design.  
-  * [5-18](section5/Rule5-18.md): The baseline fenestration area for an existing building shall equal the existing fenestration area prior to the proposed work.
+  * [5-16](section5/Rule5-16.md): The vertical fenestration shall be distributed on each face of the building in the same proportion as in the proposed design.  
+  * [5-17](section5/Rule5-17.md): The baseline fenestration area for an existing building shall equal the existing fenestration area prior to the proposed work.
+  * [5-18](section5/Rule5-18.md): Automatically controlled dynamic glazing may be modeled. Manually controlled dynamic glazing shall use the average of the minimum and maximum SHGC and VT.
   * [5-19](section5/Rule5-19.md): Vertical fenestration U-factors for residential, non-residential and semi-heated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8 for the appropriate WWR in the baseline RMD.  
   * [5-20](section5/Rule5-20.md): Fenestration (window and skylight) SHGC in the proposed model must match the user model.  
   * [5-21](section5/Rule5-21.md): Subsurface that is not regulated (not part of building envelope) must be modeled with the same area, U-factor and SHGC in the baseline as in the proposed design.
@@ -218,19 +219,18 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [5-26](section5/Rule5-26.md): Skylight area must be allocated to surfaces in the same proportion in the baseline as in the proposed design; Skylight orientation and tilt shall be the same as in the proposed design.  
   * [5-27](section5/Rule5-27.md): Skylight U-factors for residential, non-residential and semi-heated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8.
   * [5-28](section5/Rule5-28.md): Skylight SHGC properties shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value and the applicable skylight percentage.
-  * [5-29](section5/Rule5-29.md): Automatically controlled dynamic glazing may be modeled. Manually controlled dynamic glazing shall use the average of the minimum and maximum SHGC and VT.  
-  * [5-30](section5/Rule5-30.md): The baseline roof surfaces shall be modeled using a thermal emittance of 0.9.
-  * [5-31](section5/Rule5-31.md): The proposed roof surfaces shall be modeled using the same thermal emittance as in the user model.  
-  * [5-32](section5/Rule5-32.md): The baseline roof surfaces shall be modeled using a solar reflectance of 0.30.  
-  * [5-33](section5/Rule5-33.md): The proposed roof surfaces shall be modeled using the same solar reflectance as in the user model.  
-  * [5-34](section5/Rule5-34.md): The infiltration modeling method in the baseline includes adjustment for weather and building operation.  
-  * [5-35](section5/Rule5-35.md): The infiltration shall be modeled using the same methodology and adjustments for weather and building operation in both the proposed design and the baseline building design.  
-  * [5-36](section5/Rule5-36.md): The baseline air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1 cfm/ft2.  The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section G3.1.1.4.
-  * [5-37](section5/Rule5-37.md): The air leakage rate in unconditioned and unenclosed spaces must be the same the baseline and proposed design.  
-  * [5-38](section5/Rule5-38.md): The proposed air leakage rate of the building envelope (I<sub>75Pa</sub>) at a fixed building pressure differential of 0.3 in. of water shall be 0.6 cfm/ft2 for buildings providing verification in accordance with Section 5.9.1.2. The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section G3.1.1.4. Exceptions: When whole-building air leakage testing, in accordance with Section 5.4.3.1.1, is specified during design and completed after construction, the proposed design air leakage rate of the building envelope shall be as measured. 
-  * [5-39](section5/Rule5-39.md): It is acceptable to use either an annual average ground temperature or monthly average ground temperatures for calculation of heat loss through basement floors.
-  * [5-40](section5/Rule5-40.md): U-factor of the baseline door is based on Tables G3.4-1 through G3.4-8 for the applicable door type (swinging or non-swinging) and envelope conditioning category.
-  * [5-41](section5/Rule5-41.md): Opaque roof surfaces that are not regulated (not part of opaque building envelope) must be modeled with the same thermal emittance and solar reflectance in the baseline as in the proposed design.
+  * [5-29](section5/Rule5-29.md): The baseline roof surfaces shall be modeled using a thermal emittance of 0.9.
+  * [5-30](section5/Rule5-30.md): The proposed roof surfaces shall be modeled using the same thermal emittance as in the user model.  
+  * [5-31](section5/Rule5-31.md): The baseline roof surfaces shall be modeled using a solar reflectance of 0.30.  
+  * [5-32](section5/Rule5-32.md): The proposed roof surfaces shall be modeled using the same solar reflectance as in the user model.  
+  * [5-33](section5/Rule5-33.md): The infiltration modeling method in the baseline includes adjustment for weather and building operation.  
+  * [5-34](section5/Rule5-34.md): The infiltration shall be modeled using the same methodology and adjustments for weather and building operation in both the proposed design and the baseline building design.  
+  * [5-35](section5/Rule5-35.md): The baseline air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1 cfm/ft2.  The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section G3.1.1.4.
+  * [5-36](section5/Rule5-36.md): The air leakage rate in unconditioned and unenclosed spaces must be the same the baseline and proposed design.  
+  * [5-37](section5/Rule5-37.md): The proposed air leakage rate of the building envelope (I<sub>75Pa</sub>) at a fixed building pressure differential of 0.3 in. of water shall be 0.6 cfm/ft2 for buildings providing verification in accordance with Section 5.9.1.2. The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section G3.1.1.4. Exceptions: When whole-building air leakage testing, in accordance with Section 5.4.3.1.1, is specified during design and completed after construction, the proposed design air leakage rate of the building envelope shall be as measured. 
+  * [5-38](section5/Rule5-38.md): It is acceptable to use either an annual average ground temperature or monthly average ground temperatures for calculation of heat loss through basement floors.
+  * [5-39](section5/Rule5-39.md): U-factor of the baseline door is based on Tables G3.4-1 through G3.4-8 for the applicable door type (swinging or non-swinging) and envelope conditioning category.
+  * [5-40](section5/Rule5-40.md): Opaque roof surfaces that are not regulated (not part of opaque building envelope) must be modeled with the same thermal emittance and solar reflectance in the baseline as in the proposed design.
 
 ## Section 6 - Lighting
   * [6-1](section6/Rule6-1.md): Proposed building interior lighting power shall not exceel total interior lighting power allowance determined using either G3.7 or G3.8

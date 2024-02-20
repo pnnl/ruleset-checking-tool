@@ -17,17 +17,17 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_ca
 from rct229.utils.jsonpath_utils import find_one
 
 
-class Section5Rule41(RuleDefinitionListIndexedBase):
-    """Rule 41 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
+class Section5Rule40(RuleDefinitionListIndexedBase):
+    """Rule 40 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule41, self).__init__(
+        super(Section5Rule40, self).__init__(
             rmrs_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section5Rule41.BuildingRule(),
+            each_rule=Section5Rule40.BuildingRule(),
             index_rmr=BASELINE_0,
-            id="5-41",
+            id="5-40",
             description="Opaque roof surfaces that are not regulated (not part of opaque building envelope) must be "
             "modeled with the same thermal emittance and solar reflectance in the baseline as in the "
             "proposed design. ",
@@ -40,11 +40,11 @@ class Section5Rule41(RuleDefinitionListIndexedBase):
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section5Rule41.BuildingRule, self).__init__(
+            super(Section5Rule40.BuildingRule, self).__init__(
                 rmrs_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
-                each_rule=Section5Rule41.BuildingRule.RoofRule(),
+                each_rule=Section5Rule40.BuildingRule.RoofRule(),
                 index_rmr=BASELINE_0,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
@@ -67,7 +67,7 @@ class Section5Rule41(RuleDefinitionListIndexedBase):
 
         class RoofRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section5Rule41.BuildingRule.RoofRule, self).__init__(
+                super(Section5Rule40.BuildingRule.RoofRule, self).__init__(
                     rmrs_used=produce_ruleset_model_instance(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),

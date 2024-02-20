@@ -86,7 +86,7 @@ class Section19Rule25(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section19Rule25.HVACRule, self).__init__(
                 rmrs_used=produce_ruleset_model_instance(
-                    USER=True, BASELINE_0=True, PROPOSED=True
+                    USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={
                     "$": ["fan_system"],

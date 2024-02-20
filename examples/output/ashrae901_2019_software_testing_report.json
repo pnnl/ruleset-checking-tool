@@ -1835,7 +1835,7 @@
                         {
                             "variable": "proposed_surface_u_factor",
                             "value": "1.2500000000000004",
-                            "unit": "Btu/(hr*ft2*R)",
+                            "unit": "Btu/(hr*ft2*R)"
                         }
                     ]
                 }

@@ -1,20 +1,18 @@
 import re
 
+from pydash import find
+
 from rct229.report_engine.rct_report import RCTReport
 from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
 
 
 class ASHRAE9012019SummaryReport(RCTReport):
-    def __init__(self, input_dict):
+    def __init__(self):
         super(ASHRAE9012019SummaryReport, self).__init__()
         self.title = "ASHRAE STD 229P RULESET CHECKING TOOL"
         self.purpose = "Summary Report"
         self.ruleset = "ASHRAE 90.1-2019 Performance Rating Method (Appendix G)"
-        self.schema_version = "0.0.23"
         self.ruleset_report_file = "ashrae901_2019_summary_report.md"
-        self.user_rmd = input_dict["user_rmd"]
-        self.proposed_rmd = input_dict["proposed_rmd"]
-        self.baseline_rmd = input_dict["baseline_rmd"]
 
     def initialize_ruleset_report(self, rule_outcome=None):
         self.section_list = [
@@ -23,6 +21,7 @@ class ASHRAE9012019SummaryReport(RCTReport):
             "Lighting",
             "Receptacles",
             "Transformers",
+            "HVAC-Baseline",
             "HVAC-General",
             "HVAC-HotWaterSide",
             "HVAC-ChilledWaterSide",
@@ -33,6 +32,7 @@ class ASHRAE9012019SummaryReport(RCTReport):
             "6": "Lighting",
             "12": "Receptacles",
             "15": "Transformers",
+            "18": "HVAC-Baseline",
             "19": "HVAC-General",
             "21": "HVAC-HotWaterSide",
             "22": "HVAC-ChilledWaterSide",
@@ -47,6 +47,25 @@ class ASHRAE9012019SummaryReport(RCTReport):
             }
             for name in self.section_list
         }
+
+        rpd_files = rule_outcome["rpd_files"]
+        user_match = find(rpd_files, lambda item: item["ruleset_model_type"] == "USER")
+        proposed_match = find(
+            rpd_files, lambda item: item["ruleset_model_type"] == "PROPOSED"
+        )
+        baseline_0_match = find(
+            rpd_files, lambda item: item["ruleset_model_type"] == "BASELINE_0"
+        )
+        baseline_90_match = find(
+            rpd_files, lambda item: item["ruleset_model_type"] == "BASELINE_90"
+        )
+        baseline_180_match = find(
+            rpd_files, lambda item: item["ruleset_model_type"] == "BASELINE_180"
+        )
+        baseline_270_match = find(
+            rpd_files, lambda item: item["ruleset_model_type"] == "BASELINE_270"
+        )
+
         self.summary_report = f"""
 ## {self.title}
 ### {self.purpose} 
@@ -54,13 +73,16 @@ class ASHRAE9012019SummaryReport(RCTReport):
 ##### Date: {self.date_run}
 
 ### RMD Files
-- user: {self.user_rmd.split('/')[-1]}
-- proposed: {self.proposed_rmd.split('/')[-1]}
-- baseline: {self.baseline_rmd.split('/')[-1]}
+- user: {user_match["file_name"] if user_match else ""}
+- proposed: {proposed_match["file_name"] if proposed_match else ""}
+- baseline_0: {baseline_0_match["file_name"] if baseline_0_match else ""}
+- baseline_90: {baseline_90_match["file_name"] if baseline_90_match else ""}
+- baseline_180: {baseline_180_match["file_name"] if baseline_180_match else ""}
+- baseline_270: {baseline_270_match["file_name"] if baseline_270_match else ""}
 
 ### Summary: All Primary Rules
-|                              | All | Envelope | Lighting | Receptacles | Transformers | HVAC-HotWaterSide | HVAC - ChilledWaterSide | HVAC-AirSide | HVAC-General|
-|:----------------------------:|:---:|:--------:|:--------:|:-----------:|:------------:|:--------------:|:--------------:|:--------------:|:--------------:|
+|                              | All | Envelope | Lighting | Receptacles | Transformers | HVAC-HotWaterSide | HVAC - ChilledWaterSide | HVAC-AirSide | HVAC-General| HVAC-Baseline
+|:----------------------------:|:---:|:--------:|:--------:|:-----------:|:------------:|:--------------:|:--------------:|:--------------:|:--------------:|:-----------:|
 Replace-Rules
 Replace-Pass
 Replace-Fail
@@ -142,11 +164,11 @@ Replace-Undetermined
             ]:
                 overall_rules_count[key] += self.ruleset_outcome[key][outcome]
 
-        rules_line = f"|Rules|{overall_rules_count['All']}|{overall_rules_count['Envelope']}|{overall_rules_count['Lighting']}|{overall_rules_count['Receptacles']}|{overall_rules_count['Transformers']}|{overall_rules_count['HVAC-HotWaterSide']}|{overall_rules_count['HVAC-ChilledWaterSide']}|"
-        pass_line = f"|Pass|{self.ruleset_outcome['All'][RCTOutcomeLabel.PASS]}|{self.ruleset_outcome['Envelope'][RCTOutcomeLabel.PASS]}|{self.ruleset_outcome['Lighting'][RCTOutcomeLabel.PASS]}|{self.ruleset_outcome['Receptacles'][RCTOutcomeLabel.PASS]}|{self.ruleset_outcome['Transformers'][RCTOutcomeLabel.PASS]}|{self.ruleset_outcome['HVAC-HotWaterSide'][RCTOutcomeLabel.PASS]}|{self.ruleset_outcome['HVAC-ChilledWaterSide'][RCTOutcomeLabel.PASS]}|"
-        fail_line = f"|Fail|{self.ruleset_outcome['All'][RCTOutcomeLabel.FAILED]}|{self.ruleset_outcome['Envelope'][RCTOutcomeLabel.FAILED]}|{self.ruleset_outcome['Lighting'][RCTOutcomeLabel.FAILED]}|{self.ruleset_outcome['Receptacles'][RCTOutcomeLabel.FAILED]}|{self.ruleset_outcome['Transformers'][RCTOutcomeLabel.FAILED]}|{self.ruleset_outcome['HVAC-HotWaterSide'][RCTOutcomeLabel.FAILED]}|{self.ruleset_outcome['HVAC-ChilledWaterSide'][RCTOutcomeLabel.FAILED]}|"
-        not_applicable_line = f"|Not Applicable|{self.ruleset_outcome['All'][RCTOutcomeLabel.NOT_APPLICABLE]}|{self.ruleset_outcome['Envelope'][RCTOutcomeLabel.NOT_APPLICABLE]}|{self.ruleset_outcome['Lighting'][RCTOutcomeLabel.NOT_APPLICABLE]}|{self.ruleset_outcome['Receptacles'][RCTOutcomeLabel.NOT_APPLICABLE]}|{self.ruleset_outcome['Transformers'][RCTOutcomeLabel.NOT_APPLICABLE]}|{self.ruleset_outcome['HVAC-HotWaterSide'][RCTOutcomeLabel.NOT_APPLICABLE]}|{self.ruleset_outcome['HVAC-ChilledWaterSide'][RCTOutcomeLabel.NOT_APPLICABLE]}|"
-        undetermined_line = f"|Undetermined (manual review)|{self.ruleset_outcome['All'][RCTOutcomeLabel.UNDETERMINED]}|{self.ruleset_outcome['Envelope'][RCTOutcomeLabel.UNDETERMINED]}|{self.ruleset_outcome['Lighting'][RCTOutcomeLabel.UNDETERMINED]}|{self.ruleset_outcome['Receptacles'][RCTOutcomeLabel.UNDETERMINED]}|{self.ruleset_outcome['Transformers'][RCTOutcomeLabel.UNDETERMINED]}|{self.ruleset_outcome['HVAC-HotWaterSide'][RCTOutcomeLabel.UNDETERMINED]}|{self.ruleset_outcome['HVAC-ChilledWaterSide'][RCTOutcomeLabel.UNDETERMINED]}|"
+        rules_line = f"|Rules|{overall_rules_count['All']}|{overall_rules_count['Envelope']}|{overall_rules_count['Lighting']}|{overall_rules_count['Receptacles']}|{overall_rules_count['Transformers']}|{overall_rules_count['HVAC-HotWaterSide']}|{overall_rules_count['HVAC-ChilledWaterSide']}|{overall_rules_count['HVAC-AirSide']}|{overall_rules_count['HVAC-General']}|{overall_rules_count['HVAC-Baseline']}|"
+        pass_line = f"|Pass|{self.ruleset_outcome['All'][RCTOutcomeLabel.PASS]}|{self.ruleset_outcome['Envelope'][RCTOutcomeLabel.PASS]}|{self.ruleset_outcome['Lighting'][RCTOutcomeLabel.PASS]}|{self.ruleset_outcome['Receptacles'][RCTOutcomeLabel.PASS]}|{self.ruleset_outcome['Transformers'][RCTOutcomeLabel.PASS]}|{self.ruleset_outcome['HVAC-HotWaterSide'][RCTOutcomeLabel.PASS]}|{self.ruleset_outcome['HVAC-ChilledWaterSide'][RCTOutcomeLabel.PASS]}|{self.ruleset_outcome['HVAC-AirSide'][RCTOutcomeLabel.PASS]}|{self.ruleset_outcome['HVAC-General'][RCTOutcomeLabel.PASS]}|{self.ruleset_outcome['HVAC-Baseline'][RCTOutcomeLabel.PASS]}|"
+        fail_line = f"|Fail|{self.ruleset_outcome['All'][RCTOutcomeLabel.FAILED]}|{self.ruleset_outcome['Envelope'][RCTOutcomeLabel.FAILED]}|{self.ruleset_outcome['Lighting'][RCTOutcomeLabel.FAILED]}|{self.ruleset_outcome['Receptacles'][RCTOutcomeLabel.FAILED]}|{self.ruleset_outcome['Transformers'][RCTOutcomeLabel.FAILED]}|{self.ruleset_outcome['HVAC-HotWaterSide'][RCTOutcomeLabel.FAILED]}|{self.ruleset_outcome['HVAC-ChilledWaterSide'][RCTOutcomeLabel.FAILED]}|{self.ruleset_outcome['HVAC-AirSide'][RCTOutcomeLabel.FAILED]}|{self.ruleset_outcome['HVAC-General'][RCTOutcomeLabel.FAILED]}|{self.ruleset_outcome['HVAC-Baseline'][RCTOutcomeLabel.FAILED]}|"
+        not_applicable_line = f"|Not Applicable|{self.ruleset_outcome['All'][RCTOutcomeLabel.NOT_APPLICABLE]}|{self.ruleset_outcome['Envelope'][RCTOutcomeLabel.NOT_APPLICABLE]}|{self.ruleset_outcome['Lighting'][RCTOutcomeLabel.NOT_APPLICABLE]}|{self.ruleset_outcome['Receptacles'][RCTOutcomeLabel.NOT_APPLICABLE]}|{self.ruleset_outcome['Transformers'][RCTOutcomeLabel.NOT_APPLICABLE]}|{self.ruleset_outcome['HVAC-HotWaterSide'][RCTOutcomeLabel.NOT_APPLICABLE]}|{self.ruleset_outcome['HVAC-ChilledWaterSide'][RCTOutcomeLabel.NOT_APPLICABLE]}|{self.ruleset_outcome['HVAC-AirSide'][RCTOutcomeLabel.NOT_APPLICABLE]}|{self.ruleset_outcome['HVAC-General'][RCTOutcomeLabel.NOT_APPLICABLE]}|{self.ruleset_outcome['HVAC-Baseline'][RCTOutcomeLabel.NOT_APPLICABLE]}|"
+        undetermined_line = f"|Undetermined (manual review)|{self.ruleset_outcome['All'][RCTOutcomeLabel.UNDETERMINED]}|{self.ruleset_outcome['Envelope'][RCTOutcomeLabel.UNDETERMINED]}|{self.ruleset_outcome['Lighting'][RCTOutcomeLabel.UNDETERMINED]}|{self.ruleset_outcome['Receptacles'][RCTOutcomeLabel.UNDETERMINED]}|{self.ruleset_outcome['Transformers'][RCTOutcomeLabel.UNDETERMINED]}|{self.ruleset_outcome['HVAC-HotWaterSide'][RCTOutcomeLabel.UNDETERMINED]}|{self.ruleset_outcome['HVAC-ChilledWaterSide'][RCTOutcomeLabel.UNDETERMINED]}|{self.ruleset_outcome['HVAC-AirSide'][RCTOutcomeLabel.UNDETERMINED]}|{self.ruleset_outcome['HVAC-General'][RCTOutcomeLabel.UNDETERMINED]}|{self.ruleset_outcome['HVAC-Baseline'][RCTOutcomeLabel.UNDETERMINED]}|"
 
         self.summary_report = re.sub("Replace-Rules", rules_line, self.summary_report)
         self.summary_report = re.sub("Replace-Pass", pass_line, self.summary_report)

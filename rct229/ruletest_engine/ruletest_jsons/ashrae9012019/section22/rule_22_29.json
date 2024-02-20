@@ -9,10 +9,10 @@
             "rule_id": "22-29",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "For chilled-water systems served by chiller(s) and does not serve baseline System-11, condenser-water pump power shall be 19 W/gpm.",
-            "applicable_rmr": "Baseline Model",
+            "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Full",
+            "primary_rule": "Yes",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -141,7 +141,8 @@
                             },
                             {
                                 "id": "Condensing Loop 1",
-                                "pump_power_per_flow_rate": 301.1889035667107
+                                "pump_power_per_flow_rate": 301.1889035667107,
+                                "type": "CONDENSER"
                             }
                         ],
                         "type": "BASELINE_0"
@@ -160,10 +161,10 @@
             "rule_id": "22-29",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "For chilled-water systems served by chiller(s) and does not serve baseline System-11, condenser-water pump power shall be 19 W/gpm.",
-            "applicable_rmr": "Baseline Model",
+            "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Full",
+            "primary_rule": "Yes",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -292,7 +293,8 @@
                             },
                             {
                                 "id": "Condensing Loop 1",
-                                "pump_power_per_flow_rate": 332.89299867899604
+                                "pump_power_per_flow_rate": 332.89299867899604,
+                                "type": "CONDENSER"
                             }
                         ],
                         "type": "BASELINE_0"
@@ -311,10 +313,10 @@
             "rule_id": "22-29",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "For chilled-water systems served by chiller(s) and does not serve baseline System-11, condenser-water pump power shall be 19 W/gpm.",
-            "applicable_rmr": "Baseline Model",
+            "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Full",
+            "primary_rule": "Yes",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -409,7 +411,8 @@
                             },
                             {
                                 "id": "Condensing Loop 1",
-                                "pump_power_per_flow_rate": 301.1889035667107
+                                "pump_power_per_flow_rate": 301.1889035667107,
+                                "type": "CONDENSER"
                             }
                         ],
                         "type": "BASELINE_0"
@@ -428,10 +431,10 @@
             "rule_id": "22-29",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "For chilled-water systems served by chiller(s) and does not serve baseline System-11, condenser-water pump power shall be 19 W/gpm.",
-            "applicable_rmr": "Baseline Model",
+            "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Full",
+            "primary_rule": "Yes",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -526,7 +529,8 @@
                             },
                             {
                                 "id": "Condensing Loop 1",
-                                "pump_power_per_flow_rate": 332.89299867899604
+                                "pump_power_per_flow_rate": 332.89299867899604,
+                                "type": "CONDENSER"
                             }
                         ],
                         "type": "BASELINE_0"
@@ -545,10 +549,10 @@
             "rule_id": "22-29",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "For chilled-water systems served by chiller(s) and does not serve baseline System-11, condenser-water pump power shall be 19 W/gpm.",
-            "applicable_rmr": "Baseline Model",
+            "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Full",
+            "primary_rule": "Yes",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
