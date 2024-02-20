@@ -2,7 +2,6 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rulesets.ashrae9012019 import BASELINE_0
-from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.ruleset_functions.are_all_hvac_sys_fan_objects_autosized import (
     are_all_hvac_sys_fan_objs_autosized,
 )
@@ -22,7 +21,9 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_fan_system_object_suppl
     get_fan_system_object_supply_return_exhaust_relief_total_power_flow,
 )
 from rct229.schema.config import ureg
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import getattr_
+from rct229.utils.compare_standard_val import std_le
 from rct229.utils.jsonpath_utils import find_all, find_one
 from rct229.utils.pint_utils import ZERO, CalcQ
 from rct229.utils.std_comparisons import std_equal
@@ -294,7 +295,9 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
             return (
                 all_design_setpoints_delta_Ts_are_per_reqs_b
                 and are_all_hvac_sys_fan_objs_autosized_b
-                and supply_fans_airflow_b >= fan_minimum_outdoor_airflow_b
+                and std_le(
+                    val=supply_fans_airflow_b, std_val=fan_minimum_outdoor_airflow_b
+                )
             ) or (
                 (
                     not all_design_setpoints_delta_Ts_are_per_reqs_b
