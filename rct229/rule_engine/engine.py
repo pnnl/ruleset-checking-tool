@@ -30,6 +30,34 @@ def get_available_rules():
     return available_rules
 
 
+def evaluate_all_rules_rpd(ruleset_project_descriptions):
+    # Get reference to rule functions in rules model
+    available_rule_definitions = rulesets.__getrules__()
+    ruleset_models = get_rmd_instance()
+
+    # register all ruleset model list
+    rpd_rmd_map_list = []
+    for rpd_json in ruleset_project_descriptions:
+        for rmd_json in find_all("$.ruleset_model_descriptions[*]", rpd_json):
+            model_type = find_exactly_one("$.type", rmd_json)
+            # if a rpd json contains multiple, we need to recreate rpd_json
+            rpd_json_copy = copy.deepcopy(rpd_json)
+            rpd_json_copy["ruleset_model_descriptions"] = [rmd_json]
+            ruleset_models.__setitem__(model_type, rpd_json_copy)
+            rpd_rmd_map = {
+                "ruleset_model_type": model_type,
+                "file_name": rpd_json["id"],
+            }
+            rpd_rmd_map_list.append(rpd_rmd_map)
+
+    print("Processing rules...")
+    rules_list = [rule_def[1]() for rule_def in available_rule_definitions]
+    report = evaluate_rules(rules_list, ruleset_models)
+    report["rpd_files"] = rpd_rmd_map_list
+
+    return report
+
+
 # Functions for evaluating rules
 def evaluate_all_rules(ruleset_model_path_list):
     """
@@ -147,21 +175,36 @@ def evaluate_rules(
     invalid_rmds = {}
     rmds_used = get_rmd_instance()
     for rule in rules_list:
-        for rule_model in rmds.get_ruleset_model_types():
-            if rule.rmrs_used[rule_model]:
-                rmds_used[rule_model] = True
+        for ruleset_model in rmds.get_ruleset_model_types():
+            if rule.rmrs_used[ruleset_model] and not (
+                rule.rmrs_used_optional and rule.rmrs_used_optional[ruleset_model]
+            ):
+                rmds_used[ruleset_model] = True
 
-    for rule_model in rmds.get_ruleset_model_types():
-        if rmds_used[rule_model]:
-            rmd_validation = validate_rmr(rmds[rule_model], test)
+    for ruleset_model in rmds.get_ruleset_model_types():
+        if rmds_used[ruleset_model]:
+            rmd_validation = validate_rmr(rmds[ruleset_model], test)
             if rmd_validation["passed"] is not True:
-                invalid_rmds[rule_model] = rmd_validation["error"]
+                invalid_rmds[ruleset_model] = rmd_validation["error"]
 
     assert_(
         len(invalid_rmds) == 0,
-        f"RPDs provided are invalid. See error messages in terminal.",
+        f"Required RPDs provided are invalid. See error messages in terminal.",
     )
 
+    ## Now check the optional RMDs
+    invalid_rmds = {}
+    for ruleset_model in rmds.get_ruleset_model_types():
+        # used is None but rmds contain this ruleset model
+        if not rmds_used[ruleset_model] and rmds.__getitem__(ruleset_model):
+            rmd_validation = validate_rmr(rmds[ruleset_model], test)
+            if rmd_validation["passed"] is not True:
+                invalid_rmds[ruleset_model] = rmd_validation["error"]
+
+    assert_(
+        len(invalid_rmds) == 0,
+        f"Optional RPDs provided are invalid. See error messages in terminal.",
+    )
     # Evaluate the rules if all the used rmrs are valid
     # Replace the numbers that have schema units in the RMRs with the
     # appropriate pint quantities

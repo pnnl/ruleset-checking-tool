@@ -16,6 +16,8 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
     rmrs_used : RuleSetModels
         A list of boolean values indicating which RMRs are required by the
         rule
+    rmrs_used_optional: RulesetModels
+        A boolean values indicating which RMDs are optional by the rule (True optional, False not optional).
     each_rule : RuleDefinitionBase | RuleDefinitionListBase
         The rule to be applied to each element in the list
     index_rmr : "user" | "baseline" | "proposed"
@@ -57,6 +59,7 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
         each_rule,
         index_rmr,
         id=None,
+        rmrs_used_optional=None,
         description=None,
         ruleset_section_title=None,
         standard_section=None,
@@ -74,6 +77,7 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
         self.match_by = slash_prefix_guarantee(match_by)
         super(RuleDefinitionListIndexedBase, self).__init__(
             rmrs_used=rmrs_used,
+            rmrs_used_optional=rmrs_used_optional,
             each_rule=each_rule,
             id=id,
             description=description,

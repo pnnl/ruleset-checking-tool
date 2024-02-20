@@ -12,7 +12,7 @@
         {
           "id": "building",
           "notes": "this file contains only a single building",
-          "building_open_schedule": "always_1",
+          "building_open_schedule": "ALWAYS ON DISCRETE",
           "has_site_shading": false,
           "building_segments": [
             {
