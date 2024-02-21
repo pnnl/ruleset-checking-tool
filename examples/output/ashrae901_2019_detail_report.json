@@ -4,23 +4,99 @@
     "tool_name": "PNNL Ruleset Checking Tool",
     "tool_version": "0.0.1",
     "ruleset": "ASHRAE 90.1-2019 Performance Rating Method (Appendix G)",
-    "date_run": "2024-01-21 22:25:34.016365",
+    "date_run": "2024-02-02 21:39:59.588679",
     "schema_version": "0.0.29",
     "rpd_files": [
         {
             "ruleset_model_type": "BASELINE_0",
-            "file_name": "examples\\chicago_demo\\baseline_model.json"
-        },
-        {
-            "ruleset_model_type": "USER",
-            "file_name": "examples\\chicago_demo\\user_model.json"
+            "file_name": "examples/chicago_demo/baseline_model.json"
         },
         {
             "ruleset_model_type": "PROPOSED",
-            "file_name": "examples\\chicago_demo\\proposed_model.json"
+            "file_name": "examples/chicago_demo/proposed_model.json"
+        },
+        {
+            "ruleset_model_type": "USER",
+            "file_name": "examples/chicago_demo/user_model.json"
         }
     ],
     "rules": [
+        {
+            "rule_id": "5-1",
+            "description": "There are four baseline rotations (i.e., four baseline models differing in azimuth by 90 degrees and four sets of baseline model results) if vertical fenestration area per each orientation differ by more than 5%.",
+            "evaluation_type": "FULL",
+            "standard_section": "Table G3.1#5a baseline column",
+            "data_group_names": [],
+            "evaluations": [
+                {
+                    "data_group_id": "building",
+                    "outcome": "FAILED",
+                    "messages": "Fail unless Table G3.1#5a exception #2 is applicable and it can be demonstrated that the building orientation is dictated by site considerations.",
+                    "calculated_values": [
+                        {
+                            "variable": "no_of_rmds",
+                            "value": "3"
+                        },
+                        {
+                            "variable": "no_of_output_instance",
+                            "value": "2"
+                        },
+                        {
+                            "variable": "rotation_expected_b",
+                            "value": "True"
+                        },
+                        {
+                            "variable": "has_baseline_0",
+                            "value": "True"
+                        },
+                        {
+                            "variable": "has_baseline_90",
+                            "value": "False"
+                        },
+                        {
+                            "variable": "has_baseline_180",
+                            "value": "False"
+                        },
+                        {
+                            "variable": "has_baseline_270",
+                            "value": "False"
+                        },
+                        {
+                            "variable": "has_proposed",
+                            "value": "True"
+                        },
+                        {
+                            "variable": "has_user",
+                            "value": "True"
+                        },
+                        {
+                            "variable": "has_baseline_0_output",
+                            "value": "True"
+                        },
+                        {
+                            "variable": "has_baseline_90_output",
+                            "value": "False"
+                        },
+                        {
+                            "variable": "has_baseline_180_output",
+                            "value": "False"
+                        },
+                        {
+                            "variable": "has_baseline_270_output",
+                            "value": "False"
+                        },
+                        {
+                            "variable": "has_proposed_output",
+                            "value": "True"
+                        },
+                        {
+                            "variable": "has_user_output",
+                            "value": "False"
+                        }
+                    ]
+                }
+            ]
+        },
         {
             "rule_id": "5-2",
             "description": "The building shall be modeled so that it does not shade itself",
