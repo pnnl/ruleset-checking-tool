@@ -2,15 +2,15 @@
 ## ASHRAE STD 229P RULESET CHECKING TOOL
 ### Summary Report 
 ##### ASHRAE 90.1-2019 Performance Rating Method (Appendix G)
-##### Date: 2024-02-20 16:43:06.307565
+##### Date: 2024-02-20 18:20:45.887364
 
 ### RMD Files
-- user: C:\Users\Documents\GitHub\ruleset-checking-tool\examples\chicago_demo\user_model.json
-- proposed: C:\Users\Documents\GitHub\ruleset-checking-tool\examples\chicago_demo\proposed_model.json
-- baseline_0: C:\Users\Documents\GitHub\ruleset-checking-tool\examples\chicago_demo\baseline_model.json
-- baseline_90: C:\Users\Documents\GitHub\ruleset-checking-tool\examples\chicago_demo\baseline_model.json
-- baseline_180: C:\Users\Documents\GitHub\ruleset-checking-tool\examples\chicago_demo\baseline_model.json
-- baseline_270: C:\Users\Documents\GitHub\ruleset-checking-tool\examples\chicago_demo\baseline_model.json
+- user: C:\Users\xuwe123\Documents\GitHub\ruleset-checking-tool\examples\chicago_demo\user_model.json
+- proposed: C:\Users\xuwe123\Documents\GitHub\ruleset-checking-tool\examples\chicago_demo\proposed_model.json
+- baseline_0: C:\Users\xuwe123\Documents\GitHub\ruleset-checking-tool\examples\chicago_demo\baseline_model.json
+- baseline_90: 
+- baseline_180: 
+- baseline_270: 
 
 ### Summary: All Primary Rules
 |                              | All | Envelope | Lighting | Receptacles | Transformers | HVAC-HotWaterSide | HVAC - ChilledWaterSide | HVAC-AirSide | HVAC-General| HVAC-Baseline
@@ -32,7 +32,7 @@
     - **Number of applicable components**: 1 
       
       | Pass %: 0| Fail %: 100| Not applicable %: 0| Undetermined %: 0| 
-      |:--------------:|:--------------:|:--------------:|:----------:|
+      |:--------------:|:--------------:|:--------------:|:--------------:|
         
   - **Rule Id**: 5-2
     - **Description**: The building shall be modeled so that it does not shade itself
