@@ -3,7 +3,7 @@
         "Section": 23,
         "Rule": 6,
         "Test": "a",
-        "test_description": "VAV fans in system 6 are correctly sized to 50% of peak design load  with a performance efficiency of 0.35 W/cfm",
+        "test_description": "The project has one building segment with two zones served by system 6. VAV fans in system 6 are correctly sized to 50% of peak design load  with a performance efficiency of 0.35 W/cfm. The expected result is: pass",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "23-6",
@@ -19,6 +19,7 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -114,7 +115,7 @@
         "Section": 23,
         "Rule": 6,
         "Test": "b",
-        "test_description": "VAV fans in system 6 are neither sized to 50% of peak design load  nor and have performance efficiency of greater than 0.35 W/cfm",
+        "test_description": "The project has one building segment with two zones served by system 6. VAV fans in system 6 are neither sized to 50% of peak design load  nor and have performance efficiency of greater than 0.35 W/cfm. The expected result is: fail",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "23-6",
@@ -130,6 +131,7 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",

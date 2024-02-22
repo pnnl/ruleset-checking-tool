@@ -23,7 +23,7 @@ def __getrules__():
     ruleset_list = inspect.getmembers(rulesets, inspect.ismodule)
     for ruleset in ruleset_list:
         if ruleset[0] == SchemaStore.SELECTED_RULESET:
-            __getrules_module__helper(rulesets, modules)
+            __getrules_module__helper(ruleset[1], modules)
     # Adding the module names that should be excluded from the available rules. Such as RuleDefinitionBase
     base_class_names = [f[0] for f in inspect.getmembers(base_classes, inspect.isclass)]
     base_class_names = base_class_names + [

@@ -3,7 +3,7 @@
         "Section": 23,
         "Rule": 16,
         "Test": "a",
-        "test_description": "System 7's preheat coil is correctly controlled to 20 F less than the design room heating temperature setpoint",
+        "test_description": "The project has one building segment with two zones served by System 7. The preheat coil is correctly controlled to 20 F less than the design room heating temperature setpoint. The expected result is: pass",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "23-16",
@@ -19,6 +19,7 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -153,7 +154,7 @@
         "Section": 23,
         "Rule": 16,
         "Test": "b",
-        "test_description": "System 7's preheat coil is incorrectly controled to only 13 F less than the design room heating temperature setpoint. Should be 20 F.",
+        "test_description": "The project has one building segment with two zones served by System 7. The preheat coil is incorrectly controled to only 13 F less than the design room heating temperature setpoint. Should be 20 F. The expected result is: fail",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "23-16",
@@ -169,6 +170,7 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",

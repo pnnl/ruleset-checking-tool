@@ -3,7 +3,7 @@
         "Section": 21,
         "Rule": 8,
         "Test": "a",
-        "test_description": "Baseline System 7's boiler has outdoor air temperature based supply temperature reset. Hot water temperatures are at 150 F when temperature are high, and 180 F when they are low. High outdoor air temperature set to 50F and low outdoor air temperature set to 20 F. Expected Result: Pass",
+        "test_description": "The project has one building segment with two zones. Baseline System 7's boiler has outdoor air temperature based supply temperature reset. Hot water temperatures are at 150 F when temperature are high, and 180 F when they are low. High outdoor air temperature set to 50F and low outdoor air temperature set to 20 F. Expected Result: Pass",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-8",
@@ -13,11 +13,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -157,7 +158,7 @@
         "Section": 21,
         "Rule": 8,
         "Test": "b",
-        "test_description": "Baseline System 5's boiler has outdoor air temperature based supply temperature reset. Hot water temperatures are at 150 F when temperature are high, and 180 F when they are low. High outdoor air temperature set to 50F and low outdoor air temperature set to 20 F. Expected Result: Pass",
+        "test_description": "The project has one building segment with two zones. Baseline System 5's boiler has outdoor air temperature based supply temperature reset. Hot water temperatures are at 150 F when temperature are high, and 180 F when they are low. High outdoor air temperature set to 50F and low outdoor air temperature set to 20 F. Expected Result: Pass",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-8",
@@ -167,11 +168,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -284,7 +286,7 @@
         "Section": 21,
         "Rule": 8,
         "Test": "c",
-        "test_description": "Baseline System 7's boiler has outdoor air temperature based supply temperature reset. Hot water temperatures are at 160 F when temperature are high, and 190 F when they are low. High outdoor air temperature set to 50F and low outdoor air temperature set to 20 F. Expected Result: Fail",
+        "test_description": "The project has one building segment with two zones. Baseline System 7's boiler has outdoor air temperature based supply temperature reset. Hot water temperatures are at 160 F when temperature are high, and 190 F when they are low. High outdoor air temperature set to 50F and low outdoor air temperature set to 20 F. Expected Result: Fail",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-8",
@@ -294,11 +296,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -438,7 +441,7 @@
         "Section": 21,
         "Rule": 8,
         "Test": "d",
-        "test_description": "Baseline System 5's boiler has outdoor air temperature based supply temperature reset. Hot water temperatures are at 160 F when temperature are high, and 190 F when they are low. High outdoor air temperature set to 50F and low outdoor air temperature set to 20 F. Expected Result: Fail",
+        "test_description": "The project has one building segment with two zones. Baseline System 5's boiler has outdoor air temperature based supply temperature reset. Hot water temperatures are at 160 F when temperature are high, and 190 F when they are low. High outdoor air temperature set to 50F and low outdoor air temperature set to 20 F. Expected Result: Fail",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-8",
@@ -448,11 +451,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
