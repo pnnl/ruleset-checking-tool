@@ -3,7 +3,7 @@
         "Section": 19,
         "Rule": 14,
         "Test": "a",
-        "test_description": "System 11, no return or relief in the proposed, no return or relief cfm in the baseline - PASS",
+        "test_description": "The project has one building segment with one zone. System 11, no return or relief in the proposed, no return or relief cfm in the baseline - PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-14",
@@ -13,11 +13,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -110,6 +111,7 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -206,7 +208,7 @@
         "Section": 19,
         "Rule": 14,
         "Test": "b",
-        "test_description": "System 11, no return or relief in the proposed,  return fan cfm modeled in the baseline - FAIL",
+        "test_description": "The project has one building segment with one zone. System 11, no return or relief in the proposed,  return fan cfm modeled in the baseline - FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-14",
@@ -216,11 +218,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -313,6 +316,7 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -409,7 +413,7 @@
         "Section": 19,
         "Rule": 14,
         "Test": "c",
-        "test_description": "System 5, return fan in the proposed, baseline supply 1000 cfm, minimum OA 200 cfm, return sized correctly at 900 cfm - PASS",
+        "test_description": "The project has one building segment with two zones. System 5, return fan in the proposed, baseline supply 1000 cfm, minimum outdoor air 200 cfm, return sized correctly at 900 cfm - PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-14",
@@ -419,11 +423,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -535,6 +540,7 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -648,7 +654,7 @@
         "Section": 19,
         "Rule": 14,
         "Test": "d",
-        "test_description": "System 5, return fan in the proposed, baseline supply 1000 cfm, minimum OA 50 cfm, return sized correctly at 950 cfm - PASS",
+        "test_description": "The project has one building segment with two zones. System 5, return fan in the proposed, baseline supply 1000 cfm, minimum outdoor air 50 cfm, return sized correctly at 950 cfm - PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-14",
@@ -658,11 +664,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -774,6 +781,7 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -887,7 +895,7 @@
         "Section": 19,
         "Rule": 14,
         "Test": "e",
-        "test_description": "System 5, return fan in the proposed, baseline supply 1000 cfm, minimum OA 200 cfm, return sized incorrectly at 800 cfm - FAIL",
+        "test_description": "The project has one building segment with two zones. System 5, return fan in the proposed, baseline supply 1000 cfm, minimum outdoor air 200 cfm, return sized incorrectly at 800 cfm - FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-14",
@@ -897,11 +905,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1013,6 +1022,7 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1126,7 +1136,7 @@
         "Section": 19,
         "Rule": 14,
         "Test": "f",
-        "test_description": "System 5, multiple return fans modeled - UNDETERMINED",
+        "test_description": "The project has one building segment with two zones. System 5, multiple return fans modeled - UNDETERMINED",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "19-14",
@@ -1136,11 +1146,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1246,6 +1257,7 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",

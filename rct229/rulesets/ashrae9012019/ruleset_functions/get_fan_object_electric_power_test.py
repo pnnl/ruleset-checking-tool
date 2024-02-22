@@ -133,8 +133,10 @@ TEST_RMD = {
                     "child_loops": [{"id": "Chilled Water Loop 1", "type": "COOLING"}],
                 },
             ],
+            "type": "BASELINE_0",
         }
     ],
+    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 

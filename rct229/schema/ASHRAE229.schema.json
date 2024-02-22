@@ -95,7 +95,7 @@
                 },
                 "type": {
                     "description": "Describes the current ruleset model description for rulesets with multiple simulation models",
-                    "oneOf": [
+                    "anyOf": [
                         {
                             "$ref": "Enumerations2019ASHRAE901.schema.json#/definitions/RulesetModelOptions2019ASHRAE901"
                         },
@@ -3304,12 +3304,14 @@
         "TemperatureResetOptions": {
             "type": "string",
             "enum": [
+                "CONSTANT",
                 "NO_RESET",
                 "OUTSIDE_AIR_RESET",
                 "LOAD_RESET",
                 "OTHER"
             ],
             "descriptions": [
+				"Constant",
                 "No Reset",
                 "Outside air reset",
                 "Load Reset",

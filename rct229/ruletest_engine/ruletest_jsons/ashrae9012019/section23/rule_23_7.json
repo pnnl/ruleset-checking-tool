@@ -3,7 +3,7 @@
         "Section": 23,
         "Rule": 7,
         "Test": "a",
-        "test_description": "System 6's fan system correctly specified temperature control as constant",
+        "test_description": "The project has one building segment with two zones served by system 6. System 6's fan system correctly specified temperature control as constant. The expected result is: pass",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "23-7",
@@ -19,6 +19,7 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -109,7 +110,7 @@
         "Section": 23,
         "Rule": 7,
         "Test": "b",
-        "test_description": "System 6's fan system incorrectly specified temperature control as outside air reset",
+        "test_description": "The project has one building segment with two zones served by system 6. System 6's fan system incorrectly specified temperature control as outside air reset. The expected result is: fail",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "23-7",
@@ -125,6 +126,7 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
