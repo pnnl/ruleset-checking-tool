@@ -223,8 +223,10 @@ SYS_8_TEST_RMD = {
                 },
                 {"id": "Purchased Chilled Water Loop 1", "type": "COOLING"},
             ],
+            "type": "BASELINE_0",
         }
     ],
+    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 SYS_8_TEST_UNMATCHED_RMD = {
@@ -436,8 +438,10 @@ SYS_8_TEST_UNMATCHED_RMD = {
                 },
                 {"id": "Chilled Water Loop 1", "type": "COOLING"},
             ],
+            "type": "BASELINE_0",
         }
     ],
+    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 

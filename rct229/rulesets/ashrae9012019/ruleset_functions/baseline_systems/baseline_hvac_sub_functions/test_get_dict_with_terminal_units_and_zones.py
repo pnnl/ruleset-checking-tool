@@ -219,8 +219,10 @@ rmd_model = {
                     "type": "CHILLED_WATER",
                 },
             ],
+            "type": "BASELINE_0",
         }
     ],
+    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 

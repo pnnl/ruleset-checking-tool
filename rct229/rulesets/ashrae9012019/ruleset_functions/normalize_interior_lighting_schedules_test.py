@@ -63,9 +63,14 @@ TEST_RMR = {
             ],
         }
     ],
+    "type": "BASELINE_0",
 }
 
-TEST_SPACE_RMR = {"id": "229_01", "ruleset_model_descriptions": [TEST_RMR]}
+TEST_SPACE_RMR = {
+    "id": "229_01",
+    "ruleset_model_descriptions": [TEST_RMR],
+    "data_timestamp": "2024-02-12T09:00Z",
+}
 
 TEST_SCHEDULES = {
     "schedules": [{"id": "light_multiplier_sched_1", "hourly_values": [0.8] * 8760}]

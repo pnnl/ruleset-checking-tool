@@ -3,7 +3,7 @@
         "Section": 21,
         "Rule": 6,
         "Test": "a",
-        "test_description": "The project consists of one building segment with two zones and two spaces.  Baseline RMD has utilizes system 7 with two boilers staged based on load. Boiler 1 is staged before Boiler 2.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones and two spaces.  Baseline ruleset project description has utilizes system 7 with two boilers staged based on load. Boiler 1 is staged before Boiler 2.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-6",
@@ -13,11 +13,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -171,7 +172,7 @@
         "Section": 21,
         "Rule": 6,
         "Test": "b",
-        "test_description": "The project consists of one building segment with two zones and two spaces.  Baseline RMD has utilizes system 7 with two boilers staged based on load. Boiler 2 is staged before Boiler 1.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones and two spaces.  Baseline ruleset project description has utilizes system 7 with two boilers staged based on load. Boiler 2 is staged before Boiler 1.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-6",
@@ -181,11 +182,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -339,7 +341,7 @@
         "Section": 21,
         "Rule": 6,
         "Test": "c",
-        "test_description": "The project consists of one building segment with two zones.  Baseline RMD has utilizes system 7 with two boilers is not staged based on load. Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  Baseline ruleset project description has utilizes system 7 with two boilers is not staged based on load. Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-6",
@@ -349,11 +351,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -495,7 +498,7 @@
         "Section": 21,
         "Rule": 6,
         "Test": "d",
-        "test_description": "The project consists of one building segment with two zones and two spaces.  Baseline RMD has utilizes system 1 with two boilers staged based on load. Boiler 1 is staged before Boiler 2.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone and two spaces.  Baseline ruleset project description has utilizes system 1 with two boilers staged based on load. Boiler 1 is staged before Boiler 2.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-6",
@@ -505,11 +508,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -610,7 +614,7 @@
         "Section": 21,
         "Rule": 6,
         "Test": "e",
-        "test_description": "The project consists of one building segment with two zones and two spaces.  Baseline RMD has utilizes system 1 with two boilers staged based on load. Boiler 2 is staged before Boiler 1.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone and two spaces.  Baseline ruleset project description has utilizes system 1 with two boilers staged based on load. Boiler 2 is staged before Boiler 1.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-6",
@@ -620,11 +624,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -725,7 +730,7 @@
         "Section": 21,
         "Rule": 6,
         "Test": "f",
-        "test_description": "The project consists of one building segment with two zones.  Baseline RMD has utilizes system 1 with two boilers is not staged based on load. Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone.  Baseline ruleset project description has utilizes system 1 with two boilers is not staged based on load. Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-6",
@@ -735,11 +740,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -825,7 +831,7 @@
         "Section": 21,
         "Rule": 6,
         "Test": "g",
-        "test_description": "The project consists of one building segment with two zones.  Baseline RMD has utilizes system 6. Expected result: NOT APPLICABLE",
+        "test_description": "The project has one building segment with two zones.  Baseline ruleset project description has utilizes system 6. Expected result: NOT APPLICABLE",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-6",
@@ -835,11 +841,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",

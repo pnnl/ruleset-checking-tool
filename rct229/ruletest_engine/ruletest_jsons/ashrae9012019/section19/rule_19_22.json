@@ -3,7 +3,7 @@
         "Section": 19,
         "Rule": 22,
         "Test": "a",
-        "test_description": "Baseline system type 11 correctly modeled with \"WHEN MINIMUM OUTSIDE AIR\" energy recovery operations to allow bypass for economizer control.",
+        "test_description": "The project has one building segment with one zone. Baseline system type 11 correctly modeled with \"WHEN MINIMUM OUTSIDE AIR\" energy recovery operations to allow bypass for economizer control. Expected outcome: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-22",
@@ -13,11 +13,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -119,7 +120,7 @@
         "Section": 19,
         "Rule": 22,
         "Test": "b",
-        "test_description": "Baseline system type 11 incorrectly modeled with \"WHEN FANS ON\" energy recovery operations, preventing bypass for economizer control.",
+        "test_description": "The project has one building segment with one zone. Baseline system type 11 incorrectly modeled with \"WHEN FANS ON\" energy recovery operations, preventing bypass for economizer control. Expected outcome: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-22",
@@ -129,11 +130,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",

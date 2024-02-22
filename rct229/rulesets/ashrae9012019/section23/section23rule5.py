@@ -81,17 +81,13 @@ class Section23Rule5(RuleDefinitionListIndexedBase):
 
         def get_calc_vals(self, context, data=None):
             terminal_b = context.BASELINE_0
-            is_first_stage_heat_fan_powered_box_b = getattr_(
-                terminal_b, "terminals", "is_first_stage_heat_fan_powered_box"
+            is_fan_first_stage_heat_b = getattr_(
+                terminal_b, "terminals", "is_fan_first_stage_heat"
             )
 
-            return {
-                "is_first_stage_heat_fan_powered_box_b": is_first_stage_heat_fan_powered_box_b
-            }
+            return {"is_fan_first_stage_heat_b": is_fan_first_stage_heat_b}
 
         def rule_check(self, context, calc_vals=None, data={}):
-            is_first_stage_heat_fan_powered_box_b = calc_vals[
-                "is_first_stage_heat_fan_powered_box_b"
-            ]
+            is_fan_first_stage_heat_b = calc_vals["is_fan_first_stage_heat_b"]
 
-            return is_first_stage_heat_fan_powered_box_b
+            return is_fan_first_stage_heat_b
