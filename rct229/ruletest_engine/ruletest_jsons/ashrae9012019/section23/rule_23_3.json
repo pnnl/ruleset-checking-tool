@@ -3,7 +3,7 @@
         "Section": 23,
         "Rule": 3,
         "Test": "a",
-        "test_description": "The minimum outdoor airflow in System 7 is acceptably exactly 30% of primary airflow in both terminals",
+        "test_description": "The project has one building segment with two zones served by System 7. The minimum outdoor airflow in System 7 is acceptably exactly 30% of primary airflow in both terminals. The expected result is: pass",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "23-3",
@@ -19,6 +19,7 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -156,7 +157,7 @@
         "Section": 23,
         "Rule": 3,
         "Test": "b",
-        "test_description": "The minimum outdoor airflow in System 7 is acceptably greater than 30% of primary airflow in both terminals",
+        "test_description": "The project has one building segment with two zones served by System 7. The minimum outdoor airflow in System 7 is acceptably greater than 30% of primary airflow in both terminals. The expected result is: pass",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "23-3",
@@ -172,6 +173,7 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -309,7 +311,7 @@
         "Section": 23,
         "Rule": 3,
         "Test": "c",
-        "test_description": "The minimum outdoor airflow in System 7 is incorrectly less than 30% of primary airflow in both terminals",
+        "test_description": "The project has one building segment with two zones served by System 7. The minimum outdoor airflow in System 7 is incorrectly less than 30% of primary airflow in both terminals. The expected result is: fail",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "23-3",
@@ -325,6 +327,7 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",

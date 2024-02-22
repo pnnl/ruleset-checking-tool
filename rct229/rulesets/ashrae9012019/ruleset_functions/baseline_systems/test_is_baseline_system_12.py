@@ -214,8 +214,10 @@ SYS_12_TEST_RMD = {
                 {"id": "Chilled Water Loop 1", "type": "COOLING"},
                 {"id": "Purchased HW Loop 1", "type": "HEATING"},
             ],
+            "type": "BASELINE_0",
         }
     ],
+    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 SYS_12_TEST_UNMATCHED_RMD = {
@@ -322,8 +324,10 @@ SYS_12_TEST_UNMATCHED_RMD = {
                 {"id": "Chilled Water Loop 1", "type": "COOLING"},
                 {"id": "HW Loop 1", "type": "HEATING"},
             ],
+            "type": "BASELINE_0",
         }
     ],
+    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 

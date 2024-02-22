@@ -3,7 +3,7 @@
         "Section": 19,
         "Rule": 9,
         "Test": "a",
-        "test_description": "System 9 without air economizer.",
+        "test_description": "The project has one building segment with one zone. System 9 without air economizer. Expected outcome: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-9",
@@ -13,11 +13,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -81,7 +82,7 @@
         "Section": 19,
         "Rule": 9,
         "Test": "b",
-        "test_description": "System 9 with FIXED_FRACTION air economizer.",
+        "test_description": "The project has one building segment with one zone. System 9 with FIXED_FRACTION air economizer. Expected outcome: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-9",
@@ -91,11 +92,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -163,7 +165,7 @@
         "Section": 19,
         "Rule": 9,
         "Test": "c",
-        "test_description": "System 9 with ENTHALPY air economizer.",
+        "test_description": "The project has one building segment with one zone. System 9 with ENTHALPY air economizer.PASS (Case 5). Expected outcome: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-9",
@@ -173,11 +175,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
