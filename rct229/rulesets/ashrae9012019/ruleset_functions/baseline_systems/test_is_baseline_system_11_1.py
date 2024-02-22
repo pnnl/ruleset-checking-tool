@@ -198,8 +198,10 @@ SYS_11_1_TEST_RMD = {
                     "type": "COOLING",
                 },
             ],
+            "type": "BASELINE_0",
         }
     ],
+    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 SYS_11_1_TEST_UNMATCHED_RMD = {
@@ -323,8 +325,10 @@ SYS_11_1_TEST_UNMATCHED_RMD = {
                     "type": "COOLING",
                 },
             ],
+            "type": "BASELINE_0",
         }
     ],
+    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 
