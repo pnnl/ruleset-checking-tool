@@ -58,6 +58,7 @@ TEST_RMI_FIXED_TYPE = {
             ],
         }
     ],
+    "type": "BASELINE_0",
 }
 
 TEST_RMI_ENTHALPY_TYPE = {
@@ -114,6 +115,7 @@ TEST_RMI_ENTHALPY_TYPE = {
             ],
         }
     ],
+    "type": "BASELINE_0",
 }
 
 TEST_RMI_NO_ECONOMIZER_TYPE = {
@@ -169,22 +171,26 @@ TEST_RMI_NO_ECONOMIZER_TYPE = {
             ],
         }
     ],
+    "type": "BASELINE_0",
 }
 
 
 TEST_RMD_FIXED_TYPE = {
     "id": "229_01",
     "ruleset_model_descriptions": [TEST_RMI_FIXED_TYPE],
+    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 TEST_RMD_ENTHALPY_TYPE = {
     "id": "229_01",
     "ruleset_model_descriptions": [TEST_RMI_ENTHALPY_TYPE],
+    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 TEST_RMD_NO_ECONOMIZER_TYPE = {
     "id": "229_01",
     "ruleset_model_descriptions": [TEST_RMI_NO_ECONOMIZER_TYPE],
+    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 TEST_RMI_FIXED_TYPE_UNIT = quantify_rmr(TEST_RMD_FIXED_TYPE)[

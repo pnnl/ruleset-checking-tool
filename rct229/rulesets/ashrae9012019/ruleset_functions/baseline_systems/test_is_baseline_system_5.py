@@ -120,8 +120,10 @@ SYS_5_TEST_RMD = {
                     "type": "HOT_WATER",
                 }
             ],
+            "type": "BASELINE_0",
         }
     ],
+    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 SYS_5_TEST_UNMATCHED_RMD = {
@@ -196,8 +198,10 @@ SYS_5_TEST_UNMATCHED_RMD = {
                 {"id": "Purchased HW Loop 1", "type": "HEATING"},
                 {"id": "Preheat Loop 1", "type": "HEATING"},
             ],
+            "type": "BASELINE_0",
         }
     ],
+    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 

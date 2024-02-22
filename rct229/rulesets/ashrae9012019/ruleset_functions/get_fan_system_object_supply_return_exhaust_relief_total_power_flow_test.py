@@ -129,10 +129,15 @@ TEST_RMD = {
         {"id": "Boiler 1", "loop": "Boiler Loop 1", "energy_source_type": "NATURAL_GAS"}
     ],
     "fluid_loops": [{"id": "Boiler Loop 1", "type": "HEATING"}],
+    "type": "BASELINE_0",
 }
 
 
-TEST_RMD_FULL = {"id": "229", "ruleset_model_descriptions": [TEST_RMD]}
+TEST_RMD_FULL = {
+    "id": "229",
+    "ruleset_model_descriptions": [TEST_RMD],
+    "data_timestamp": "2024-02-12T09:00Z",
+}
 
 TEST_FAN_SYSTEM = quantify_rmr(TEST_RMD_FULL)["ruleset_model_descriptions"][0][
     "buildings"

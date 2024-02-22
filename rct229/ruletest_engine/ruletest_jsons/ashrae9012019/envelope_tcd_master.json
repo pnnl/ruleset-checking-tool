@@ -1,4 +1,883 @@
 {
+	    "rule-5-1-a": {
+        "Section": 5,
+        "Rule": 1,
+        "Test": "a",
+        "test_description": "Project has one building segment with two above-grade wall surfaces at different azimuth angles. Each wall has a window and the windows differ in area by more than 5%. Four sets of baseline model results are appropriately provided.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "5-1",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (a)",
+            "rule_description": "There are four baseline rotations (i.e., four baseline models differing in azimuth by 90 degrees and four sets of baseline model results) if vertical fenestration area per each orientation differ by more than 5%.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
+        },
+        "rmr_transformations": {
+            "user": {
+                "id": "ASHRAE229",
+				"data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "output": {
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1",
+                                "unmet_load_hours": 0,
+                                "unmet_load_hours_heating": 0,
+                                "unmet_load_hours_cooling": 0,
+                                "unmet_occupied_load_hours_heating": 0,
+                                "unmet_occupied_load_hours_cooling": 0,
+                                "building_peak_cooling_load": 25000
+                            }
+                        },
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "azimuth": 20,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Window 1",
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 1.3935456
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": "Surface 2",
+                                                        "azimuth": 190,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Window 2",
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 2.3225759999999998
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "USER"
+                    }
+                ]
+            },
+            "proposed": {
+                "id": "ASHRAE229",
+				"data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "output": {
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1",
+                                "unmet_load_hours": 0,
+                                "unmet_load_hours_heating": 0,
+                                "unmet_load_hours_cooling": 0,
+                                "unmet_occupied_load_hours_heating": 0,
+                                "unmet_occupied_load_hours_cooling": 0,
+                                "building_peak_cooling_load": 25000
+                            }
+                        },
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "azimuth": 20,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Window 1",
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 1.3935456
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": "Surface 2",
+                                                        "azimuth": 190,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Window 2",
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 2.3225759999999998
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229",
+				"data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "output": {
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1",
+                                "unmet_load_hours": 0,
+                                "unmet_load_hours_heating": 0,
+                                "unmet_load_hours_cooling": 0,
+                                "unmet_occupied_load_hours_heating": 0,
+                                "unmet_occupied_load_hours_cooling": 0,
+                                "building_peak_cooling_load": 25000
+                            }
+                        },
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "azimuth": 20,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Window 1",
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 1.3935456
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": "Surface 2",
+                                                        "azimuth": 190,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Window 2",
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 2.3225759999999998
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    },
+                    {
+                        "id": "RMD 1",
+                        "output": {
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1",
+                                "unmet_load_hours": 0,
+                                "unmet_load_hours_heating": 0,
+                                "unmet_load_hours_cooling": 0,
+                                "unmet_occupied_load_hours_heating": 0,
+                                "unmet_occupied_load_hours_cooling": 0,
+                                "building_peak_cooling_load": 25000
+                            }
+                        },
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "azimuth": 110,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Window 1",
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 1.3935456
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": "Surface 2",
+                                                        "azimuth": 280,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Window 2",
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 2.3225759999999998
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_90"
+                    },
+                    {
+                        "id": "RMD 1",
+                        "output": {
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1",
+                                "unmet_load_hours": 0,
+                                "unmet_load_hours_heating": 0,
+                                "unmet_load_hours_cooling": 0,
+                                "unmet_occupied_load_hours_heating": 0,
+                                "unmet_occupied_load_hours_cooling": 0,
+                                "building_peak_cooling_load": 25000
+                            }
+                        },
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "azimuth": 200,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Window 1",
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 1.3935456
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": "Surface 2",
+                                                        "azimuth": 10,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Window 2",
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 2.3225759999999998
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_180"
+                    },
+                    {
+                        "id": "RMD 1",
+                        "output": {
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1",
+                                "unmet_load_hours": 0,
+                                "unmet_load_hours_heating": 0,
+                                "unmet_load_hours_cooling": 0,
+                                "unmet_occupied_load_hours_heating": 0,
+                                "unmet_occupied_load_hours_cooling": 0,
+                                "building_peak_cooling_load": 25000
+                            }
+                        },
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "azimuth": 290,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Window 1",
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 1.3935456
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": "Surface 2",
+                                                        "azimuth": 100,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Window 2",
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 2.3225759999999998
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_270"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-1-b": {
+        "Section": 5,
+        "Rule": 1,
+        "Test": "b",
+        "test_description": "Project has one building segment with two above-grade wall surfaces at different azimuth angles. Each wall has a window and the windows differ in area by less than 5%. One set of baseline model results is appropriately provided.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "5-1",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (a)",
+            "rule_description": "There are four baseline rotations (i.e., four baseline models differing in azimuth by 90 degrees and four sets of baseline model results) if vertical fenestration area per each orientation differ by more than 5%.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.0.29"
+        },
+        "rmr_transformations": {
+            "user": {
+                "id": "ASHRAE229",
+				"data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "output": {
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1",
+                                "unmet_load_hours": 0,
+                                "unmet_load_hours_heating": 0,
+                                "unmet_load_hours_cooling": 0,
+                                "unmet_occupied_load_hours_heating": 0,
+                                "unmet_occupied_load_hours_cooling": 0,
+                                "building_peak_cooling_load": 25000
+                            }
+                        },
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "azimuth": 20,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Window 1",
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 2.22967296
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": "Surface 2",
+                                                        "azimuth": 190,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Window 2",
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 2.3225759999999998
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "USER"
+                    }
+                ]
+            },
+            "proposed": {
+                "id": "ASHRAE229",
+				"data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "output": {
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1",
+                                "unmet_load_hours": 0,
+                                "unmet_load_hours_heating": 0,
+                                "unmet_load_hours_cooling": 0,
+                                "unmet_occupied_load_hours_heating": 0,
+                                "unmet_occupied_load_hours_cooling": 0,
+                                "building_peak_cooling_load": 25000
+                            }
+                        },
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "azimuth": 20,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Window 1",
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 2.22967296
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": "Surface 2",
+                                                        "azimuth": 190,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Window 2",
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 2.3225759999999998
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229",
+				"data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "output": {
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1",
+                                "unmet_load_hours": 0,
+                                "unmet_load_hours_heating": 0,
+                                "unmet_load_hours_cooling": 0,
+                                "unmet_occupied_load_hours_heating": 0,
+                                "unmet_occupied_load_hours_cooling": 0,
+                                "building_peak_cooling_load": 25000
+                            }
+                        },
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "azimuth": 20,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Window 1",
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 2.22967296
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": "Surface 2",
+                                                        "azimuth": 190,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Window 2",
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 2.3225759999999998
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-1-c": {
+        "Section": 5,
+        "Rule": 1,
+        "Test": "c",
+        "test_description": "Project has one building segment with two above-grade wall surfaces at different azimuth angles. Each wall has a window and the windows differ in area by more than 5%. One set of baseline model results is provided, when four sets are expected.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "5-1",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (a)",
+            "rule_description": "There are four baseline rotations (i.e., four baseline models differing in azimuth by 90 degrees and four sets of baseline model results) if vertical fenestration area per each orientation differ by more than 5%.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.0.29"
+        },
+        "rmr_transformations": {
+            "user": {
+                "id": "ASHRAE229",
+				"data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "output": {
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1",
+                                "unmet_load_hours": 0,
+                                "unmet_load_hours_heating": 0,
+                                "unmet_load_hours_cooling": 0,
+                                "unmet_occupied_load_hours_heating": 0,
+                                "unmet_occupied_load_hours_cooling": 0,
+                                "building_peak_cooling_load": 25000
+                            }
+                        },
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "azimuth": 20,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Window 1",
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 1.3935456
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": "Surface 2",
+                                                        "azimuth": 190,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Window 2",
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 2.3225759999999998
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "USER"
+                    }
+                ]
+            },
+            "proposed": {
+                "id": "ASHRAE229",
+				"data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "output": {
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1",
+                                "unmet_load_hours": 0,
+                                "unmet_load_hours_heating": 0,
+                                "unmet_load_hours_cooling": 0,
+                                "unmet_occupied_load_hours_heating": 0,
+                                "unmet_occupied_load_hours_cooling": 0,
+                                "building_peak_cooling_load": 25000
+                            }
+                        },
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "azimuth": 20,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Window 1",
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 1.3935456
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": "Surface 2",
+                                                        "azimuth": 190,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Window 2",
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 2.3225759999999998
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229",
+				"data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "output": {
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1",
+                                "unmet_load_hours": 0,
+                                "unmet_load_hours_heating": 0,
+                                "unmet_load_hours_cooling": 0,
+                                "unmet_occupied_load_hours_heating": 0,
+                                "unmet_occupied_load_hours_cooling": 0,
+                                "building_peak_cooling_load": 25000
+                            }
+                        },
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "azimuth": 20,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Window 1",
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 1.3935456
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": "Surface 2",
+                                                        "azimuth": 190,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Window 2",
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 2.3225759999999998
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
     "rule-5-2-a": {
         "Section": 5,
         "Rule": 2,
@@ -13,11 +892,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "RPD 1",
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -92,11 +972,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "RPD 1",
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -171,7 +1052,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -179,6 +1060,7 @@
                 "weather": {
                     "climate_zone": "CZ4A"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -257,7 +1139,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -265,6 +1147,7 @@
                 "weather": {
                     "climate_zone": "CZ4A"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -343,7 +1226,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -352,6 +1235,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -431,7 +1315,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -440,6 +1324,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -519,7 +1404,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -528,6 +1413,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -607,7 +1493,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -616,6 +1502,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -695,7 +1582,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -704,6 +1591,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -783,7 +1671,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -792,6 +1680,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -872,7 +1761,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -881,6 +1770,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -961,7 +1851,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -970,6 +1860,7 @@
                     "climate_zone": "CZ8",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1049,7 +1940,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -1058,6 +1949,7 @@
                     "climate_zone": "CZ8",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1137,7 +2029,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -1146,6 +2038,7 @@
                     "climate_zone": "CZ8",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1224,7 +2117,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -1233,6 +2126,7 @@
                     "climate_zone": "CZ8",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1311,7 +2205,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -1320,6 +2214,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1399,7 +2294,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -1408,6 +2303,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1487,7 +2383,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -1496,6 +2392,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1575,7 +2472,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -1584,6 +2481,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1663,7 +2561,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -1672,6 +2570,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1751,7 +2650,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -1760,6 +2659,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1840,7 +2740,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -1849,6 +2749,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1929,7 +2830,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -1938,6 +2839,7 @@
                     "climate_zone": "CZ8",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -2017,7 +2919,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -2026,6 +2928,7 @@
                     "climate_zone": "CZ8",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -2105,7 +3008,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -2114,6 +3017,7 @@
                     "climate_zone": "CZ8",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -2192,7 +3096,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -2201,6 +3105,7 @@
                     "climate_zone": "CZ8",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -2279,7 +3184,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -2288,6 +3193,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -2367,7 +3273,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -2376,6 +3282,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -2455,7 +3362,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -2464,6 +3371,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -2543,7 +3451,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -2552,6 +3460,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -2631,7 +3540,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -2640,6 +3549,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -2719,7 +3629,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -2728,6 +3638,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -2808,7 +3719,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -2817,6 +3728,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -2897,7 +3809,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -2906,6 +3818,7 @@
                     "climate_zone": "CZ8",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -2986,7 +3899,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -2995,6 +3908,7 @@
                     "climate_zone": "CZ8",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -3075,7 +3989,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -3084,6 +3998,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -3162,7 +4077,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -3171,6 +4086,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -3249,7 +4165,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -3258,6 +4174,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -3337,7 +4254,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -3346,6 +4263,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -3425,7 +4343,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -3434,6 +4352,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -3513,7 +4432,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -3522,6 +4441,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -3601,7 +4521,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -3610,6 +4530,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -3689,7 +4610,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -3698,6 +4619,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -3778,7 +4700,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -3787,6 +4709,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -3867,7 +4790,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -3876,6 +4799,7 @@
                     "climate_zone": "CZ8",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -3955,7 +4879,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -3964,6 +4888,7 @@
                     "climate_zone": "CZ8",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -4043,7 +4968,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -4052,6 +4977,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -4130,7 +5056,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -4139,6 +5065,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -4217,7 +5144,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -4226,6 +5153,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -4306,7 +5234,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -4315,6 +5243,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -4395,7 +5324,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -4404,6 +5333,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -4484,7 +5414,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -4493,6 +5423,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -4573,7 +5504,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -4582,6 +5513,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -4662,7 +5594,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -4671,6 +5603,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -4751,7 +5684,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -4760,6 +5693,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -4840,7 +5774,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -4849,6 +5783,7 @@
                     "climate_zone": "CZ8",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -4929,7 +5864,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -4938,6 +5873,7 @@
                     "climate_zone": "CZ8",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -5018,7 +5954,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
@@ -5027,6 +5963,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -5078,6 +6015,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -5139,7 +6077,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
@@ -5148,6 +6086,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -5199,6 +6138,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -5260,7 +6200,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
@@ -5269,6 +6209,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -5334,6 +6275,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -5409,7 +6351,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
@@ -5418,6 +6360,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -5483,6 +6426,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -5558,7 +6502,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
@@ -5567,6 +6511,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -5618,6 +6563,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -5679,7 +6625,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
@@ -5688,6 +6634,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -5739,6 +6686,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -5800,7 +6748,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
@@ -5809,6 +6757,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -5874,6 +6823,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -5949,7 +6899,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
@@ -5958,6 +6908,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -6023,6 +6974,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -6098,7 +7050,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
@@ -6107,6 +7059,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -6158,6 +7111,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -6219,7 +7173,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
@@ -6228,6 +7182,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -6279,6 +7234,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -6340,7 +7296,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
@@ -6349,6 +7305,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -6401,6 +7358,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -6463,7 +7421,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
@@ -6472,6 +7430,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -6524,6 +7483,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -6586,7 +7546,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -6595,6 +7555,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -6697,7 +7658,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -6706,6 +7667,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -6808,7 +7770,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -6817,6 +7779,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -6927,7 +7890,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -6936,6 +7899,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -7046,7 +8010,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
@@ -7055,6 +8019,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -7154,6 +8119,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -7263,7 +8229,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
@@ -7272,6 +8238,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -7371,6 +8338,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -7480,7 +8448,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
@@ -7489,6 +8457,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -7588,6 +8557,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -7697,7 +8667,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
@@ -7706,6 +8676,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -7810,6 +8781,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -7924,7 +8896,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
@@ -7933,6 +8905,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -8037,6 +9010,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -8151,7 +9125,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -8160,6 +9134,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -8227,7 +9202,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -8236,6 +9211,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -8303,7 +9279,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -8312,6 +9288,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -8379,7 +9356,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
@@ -8388,6 +9365,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -8476,7 +9454,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
@@ -8485,6 +9463,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -8573,7 +9552,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -8582,6 +9561,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -8668,7 +9648,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -8677,6 +9657,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -8763,7 +9744,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -8772,6 +9753,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -8858,7 +9840,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -8867,6 +9849,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -8953,7 +9936,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -8962,6 +9945,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -9052,7 +10036,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -9061,6 +10045,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -9151,7 +10136,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -9160,6 +10145,7 @@
                     "climate_zone": "CZ3C",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -9250,7 +10236,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -9259,6 +10245,7 @@
                     "climate_zone": "CZ3C",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -9349,7 +10336,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -9358,6 +10345,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -9449,7 +10437,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -9458,6 +10446,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -9549,7 +10538,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -9558,6 +10547,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -9649,7 +10639,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -9658,6 +10648,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -9749,7 +10740,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -9758,6 +10749,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -9849,7 +10841,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -9858,6 +10850,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -9949,7 +10942,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -9958,6 +10951,7 @@
                     "climate_zone": "CZ3C",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -10049,7 +11043,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -10058,6 +11052,7 @@
                     "climate_zone": "CZ3C",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -10149,7 +11144,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
@@ -10158,6 +11153,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -10238,6 +11234,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -10328,7 +11325,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
@@ -10337,6 +11334,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -10417,6 +11415,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -10507,7 +11506,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
@@ -10516,6 +11515,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -10596,6 +11596,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -10686,7 +11687,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
@@ -10695,6 +11696,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -10775,6 +11777,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -10865,7 +11868,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -10874,6 +11877,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -10966,7 +11970,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -10975,6 +11979,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -11067,7 +12072,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -11076,6 +12081,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -11168,7 +12174,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
@@ -11176,6 +12182,7 @@
                 "weather": {
                     "climate_zone": "CZ4A"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -11217,6 +12224,7 @@
                 "weather": {
                     "climate_zone": "CZ4A"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -11269,7 +12277,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
@@ -11277,6 +12285,7 @@
                 "weather": {
                     "climate_zone": "CZ4A"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -11318,6 +12327,7 @@
                 "weather": {
                     "climate_zone": "CZ4A"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -11370,7 +12380,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
@@ -11379,6 +12389,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -11460,6 +12471,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -11551,7 +12563,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
@@ -11560,6 +12572,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -11641,6 +12654,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -11732,7 +12746,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
@@ -11741,6 +12755,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -11822,6 +12837,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -11913,7 +12929,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
@@ -11922,6 +12938,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -12003,6 +13020,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -12094,7 +13112,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
@@ -12103,6 +13121,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -12193,6 +13212,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -12293,7 +13313,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
@@ -12302,6 +13322,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -12392,6 +13413,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -12492,7 +13514,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -12501,6 +13523,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -12587,7 +13610,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -12596,6 +13619,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -12682,7 +13706,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -12691,6 +13715,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -12777,7 +13802,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -12786,6 +13811,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -12872,7 +13898,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -12881,6 +13907,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -12970,7 +13997,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -12979,6 +14006,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -13068,7 +14096,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -13077,6 +14105,7 @@
                     "climate_zone": "CZ3C",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -13163,7 +14192,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -13172,6 +14201,7 @@
                     "climate_zone": "CZ3C",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -13258,7 +14288,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -13267,6 +14297,7 @@
                     "climate_zone": "CZ6A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -13360,7 +14391,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -13369,6 +14400,7 @@
                     "climate_zone": "CZ6A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -13456,7 +14488,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -13465,6 +14497,7 @@
                     "climate_zone": "CZ6A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -13552,7 +14585,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -13561,6 +14594,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -13640,7 +14674,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -13649,6 +14683,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -13728,7 +14763,7 @@
             "rule_assertion": "=",
             "comparison_value": "User Model",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "user": {
@@ -13737,6 +14772,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -13807,6 +14843,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -13887,7 +14924,7 @@
             "rule_assertion": "=",
             "comparison_value": "User Model",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "user": {
@@ -13896,6 +14933,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -13966,6 +15004,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -14046,7 +15085,7 @@
             "rule_assertion": "=",
             "comparison_value": "User Model",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "user": {
@@ -14055,6 +15094,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -14125,6 +15165,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -14205,7 +15246,7 @@
             "rule_assertion": "=",
             "comparison_value": "User Model",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "user": {
@@ -14214,6 +15255,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -14284,6 +15326,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -14364,7 +15407,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -14373,6 +15416,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -14457,7 +15501,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -14466,6 +15510,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -14550,7 +15595,7 @@
             "rule_assertion": "=",
             "comparison_value": "User Model",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "user": {
@@ -14559,6 +15604,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -14629,6 +15675,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -14709,7 +15756,7 @@
             "rule_assertion": "=",
             "comparison_value": "User Model",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "user": {
@@ -14718,6 +15765,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -14788,6 +15836,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -14868,7 +15917,7 @@
             "rule_assertion": "=",
             "comparison_value": "User Model",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "user": {
@@ -14877,6 +15926,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -14947,6 +15997,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -15027,7 +16078,7 @@
             "rule_assertion": "=",
             "comparison_value": "User Model",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "user": {
@@ -15036,6 +16087,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -15106,6 +16158,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -15186,11 +16239,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "RPD 1",
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -15236,11 +16290,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "RPD 1",
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -15286,11 +16341,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "RPD 1",
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -15336,11 +16392,12 @@
             "rule_assertion": "=",
             "comparison_value": "Baseline Model",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "RPD 1",
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -15373,6 +16430,7 @@
             },
             "baseline": {
                 "id": "RPD 1",
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -15419,11 +16477,12 @@
             "rule_assertion": "=",
             "comparison_value": "Baseline Model",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "RPD 1",
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -15456,6 +16515,7 @@
             },
             "baseline": {
                 "id": "RPD 1",
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -15502,7 +16562,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -15511,6 +16571,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -15601,7 +16662,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -15610,6 +16671,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -15700,7 +16762,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -15709,6 +16771,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -15797,7 +16860,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -15806,6 +16869,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -15894,7 +16958,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -15903,6 +16967,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -16001,7 +17066,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -16010,6 +17075,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -16108,7 +17174,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -16117,6 +17183,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -16211,7 +17278,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -16220,6 +17287,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -16314,7 +17382,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
@@ -16323,6 +17391,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -16378,6 +17447,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -16443,7 +17513,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
@@ -16452,6 +17522,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -16507,6 +17578,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -16572,7 +17644,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
@@ -16581,6 +17653,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -16673,7 +17746,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
@@ -16682,6 +17755,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -16774,7 +17848,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
@@ -16783,6 +17857,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -16876,7 +17951,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
@@ -16885,6 +17960,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -16978,7 +18054,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -16987,6 +18063,7 @@
                     "climate_zone": "CZ6A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -17064,7 +18141,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -17074,6 +18151,7 @@
                     "data_source_type": "OTHER",
                     "ground_temperature_schedule": "Ground Temp Schedule 1"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -17151,7 +18229,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -17160,6 +18238,7 @@
                     "climate_zone": "CZ6A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -17237,7 +18316,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -17246,6 +18325,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -17333,7 +18413,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -17342,6 +18422,7 @@
                     "climate_zone": "CZ8",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -17435,7 +18516,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -17444,6 +18525,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -17531,7 +18613,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
@@ -17540,6 +18622,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -17627,7 +18710,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
@@ -17636,6 +18719,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -17692,6 +18776,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -17758,7 +18843,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
@@ -17767,6 +18852,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -17823,6 +18909,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -17889,7 +18976,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
@@ -17898,6 +18985,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -17953,6 +19041,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
