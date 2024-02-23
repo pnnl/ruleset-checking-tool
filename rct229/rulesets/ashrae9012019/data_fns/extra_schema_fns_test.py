@@ -3,6 +3,7 @@ from copy import deepcopy
 from rct229.rulesets.ashrae9012019.data_fns.extra_schema_fns import (
     compare_context_pair,
     EXTRA_SCHEMA,
+    proposed_equals_user,
 )
 
 TEST_RMI = {
@@ -175,6 +176,17 @@ def test__compare_context_pair__identical():
     )
 
 
+def test__proposed_equals_user__identical():
+    proposed = TEST_RMD_FULL
+    user = TEST_RMD_FULL
+    error_msg_list = []
+    assert proposed_equals_user(
+        index_context=proposed,
+        compare_context=user,
+        error_msg_list=error_msg_list,
+    )
+
+
 def test__compare_context_pair__different():
     proposed = TEST_RMD_FULL
     user = deepcopy(TEST_RMD_FULL)
@@ -190,6 +202,24 @@ def test__compare_context_pair__different():
         True,
         "AppG P_RMD Equals U_RMD",
         error_msg_list,
+    )
+    assert (
+        error_msg_list[0]
+        == "path: $.ruleset_model_descriptions[0].buildings[0].building_open_schedule: index context data: Required Building Schedule 1 does not equal to compare context data: always_1"
+    )
+
+
+def test__proposed_equals_user__different():
+    proposed = TEST_RMD_FULL
+    user = deepcopy(TEST_RMD_FULL)
+    user["ruleset_model_descriptions"][0]["buildings"][0][
+        "building_open_schedule"
+    ] = "always_1"
+    error_msg_list = []
+    assert not proposed_equals_user(
+        index_context=proposed,
+        compare_context=user,
+        error_msg_list=error_msg_list,
     )
     assert (
         error_msg_list[0]
