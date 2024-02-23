@@ -114,8 +114,8 @@
                     {
                       "id": "CORE_BOT_ZN_5_WALL_NORTH",
                       "classification": "WALL",
-                      "area": 22670.95,
-                      "tilt": 190.0,
+                      "area": 670.95,
+                      "tilt": 90.0,
                       "azimuth": 0.0,
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,

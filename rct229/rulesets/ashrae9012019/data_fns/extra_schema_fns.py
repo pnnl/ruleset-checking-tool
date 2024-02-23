@@ -4,76 +4,166 @@ from rct229.rulesets.ashrae9012019.data import data
 
 EXTRA_SCHEMA = data["ASHRAE229.9012019.extra.schema"]
 
-exception_list = ["Enumerations2019ASHRAE901", "EnumerationsRESNET", "Enumerations2019T24", "Output2019ASHRAE901"]
+exception_list = [
+    "Enumerations2019ASHRAE901",
+    "EnumerationsRESNET",
+    "Enumerations2019T24",
+    "Output2019ASHRAE901",
+]
 
 
 def if_required(required):
+    """
+    Convert required data from extra schema to a boolean
+    If the data is tring, then return false else return boolean
+
+    Parameters
+    ----------
+    required: boolean | str
+
+    Returns
+    -------
+    boolean
+
+    """
     if isinstance(required, str):
+        # unknown
         return False
     else:
+        # boolean true or false
         return required
 
 
 def get_extra_schema_by_data_type(data_type):
+    """
+    Map the referenced data_type to extra schema element
+
+    Parameters
+    ----------
+    data_type: string of data reference
+
+    Returns
+    -------
+    dict | str | None
+
+    """
     if data_type.startswith("[") or data_type.startswith("{"):
         # this is a data group
-        data_type = ''.join(re.findall(r'[\w\s]+', data_type))
+        data_type = "".join(re.findall(r"[\w\s]+", data_type))
         if EXTRA_SCHEMA.get(data_type):
             return EXTRA_SCHEMA[data_type]["Data Elements"]
     elif data_type.startswith("({"):
         # this is for a referenced external schema.
-        data_type = ''.join(re.findall(r'[\w\s]+', data_type))
+        data_type = "".join(re.findall(r"[\w\s]+", data_type))
         return data_type
     return None
 
 
-def compare_proposed_with_user(proposed, user, error_msg_list, element_path, extra_schema, required_equal):
+def compare_context_pair(
+    index_context,
+    compare_context,
+    element_json_path,
+    extra_schema,
+    required_equal,
+    search_key,
+    error_msg_list,
+):
+    """
+    Perform equality comparison between two RPD context
+    based on the value in the extra schema specification
+
+    Parameters
+    ----------
+    index_context: dict|list|str|None, the indexed context (RPD)
+    compare_context: dict|list|str|None, the compare context (RPD)
+    element_json_path: str, The json path of the compare context
+    extra_schema: dict|str, extra schema element
+    required_equal: boolean, flag indicates whether the comparison is equal or not required.
+    search_key: str, The key in the extra schema that contains the value needed for the comparison
+    error_msg_list: list[str] message list
+
+    Returns
+    -------
+    boolean - true if all comparison checked and confirmed, false otherwise
+
+    """
     matched = True
-    if isinstance(proposed, dict):
+    if isinstance(index_context, dict):
         # proposed and user object type shall be aligned.
-        if user and user.get("id") and required_equal and proposed["id"] != user["id"]:
-            error_msg_list.append(f'path: {element_path}: data object {proposed["id"]} does not match {user["id"]}')
+        if (
+            compare_context
+            and compare_context.get("id")
+            and required_equal
+            and index_context["id"] != compare_context["id"]
+        ):
+            error_msg_list.append(
+                f'path: {element_json_path}: data object {index_context["id"]} in index context does not match the one {compare_context["id"]} in compare context'
+            )
             matched = False
-        for key in proposed:
-            new_element_path = f'{element_path}.{key}'
+        for key in index_context:
             key_schema = extra_schema[key]
-            extra_schema_data_group = get_extra_schema_by_data_type(key_schema["Data Type"])
-            new_extra_schema = extra_schema_data_group if extra_schema_data_group else key_schema["Data Type"]
+            extra_schema_data_group = get_extra_schema_by_data_type(
+                key_schema["Data Type"]
+            )
+            new_extra_schema = (
+                extra_schema_data_group
+                if extra_schema_data_group
+                else key_schema["Data Type"]
+            )
             if isinstance(new_extra_schema, str) and new_extra_schema in exception_list:
                 # avoid processing data outside the master schema
                 continue
-            matched = compare_proposed_with_user(proposed[key], user.get(key), error_msg_list, new_element_path, new_extra_schema, if_required(key_schema.get("AppG P_RMD Equals U_RMD"))) and matched
+            matched = (
+                compare_context_pair(
+                    index_context[key],
+                    compare_context.get(key),
+                    f"{element_json_path}.{key}",
+                    new_extra_schema,
+                    if_required(key_schema.get(search_key)),
+                    search_key,
+                    error_msg_list,
+                )
+                and matched
+            )
 
-    elif isinstance(proposed, list):
-        if user and required_equal and len(user) != len(proposed):
-            error_msg_list.append(f'path: {element_path}: length of objects ({len(proposed)} in proposed model != length of objects {len(user)} in user model.')
+    elif isinstance(index_context, list):
+        if (
+            compare_context
+            and required_equal
+            and len(compare_context) != len(index_context)
+        ):
+            error_msg_list.append(
+                f"path: {element_json_path}: length of objects ({len(index_context)} in index context != length of objects {len(compare_context)} in compare context."
+            )
             matched = False
-        if all(isinstance(item, dict) for item in proposed):
+        if all(isinstance(item, dict) for item in index_context):
             # avoid processing any list of primitive data types
             # sort the proposed and user
-            sorted_proposed = sorted(proposed, key=lambda x: x["id"])
-            sorted_user = sorted(user, key=lambda x: x["id"])
-            for i in range(len(sorted_proposed)):
-                # in this case, we are still using the same extra_schema
-                new_element_path = f'{element_path}[{i}]'
-                matched = compare_proposed_with_user(sorted_proposed[i], sorted_user[i], error_msg_list, new_element_path, extra_schema, if_required(extra_schema.get("AppG P_RMD Equals U_RMD"))) and matched
+            sorted_index = sorted(index_context, key=lambda x: x["id"])
+            sorted_compare = sorted(compare_context, key=lambda x: x["id"])
+            for i in range(len(sorted_index)):
+                if i <= len(sorted_compare):
+                    # in this case, we are still using the same extra_schema
+                    matched = (
+                        compare_context_pair(
+                            sorted_index[i],
+                            sorted_compare[i],
+                            f"{element_json_path}[{i}]",
+                            extra_schema,
+                            if_required(extra_schema.get(search_key)),
+                            search_key,
+                            error_msg_list,
+                        )
+                        and matched
+                    )
 
     elif isinstance(extra_schema, str):
-        # print(proposed, user, required_equal)
         # in this case, it is either string, numerical, references or other simple data type
-        if required_equal:
-            if user is None:
-                error_msg_list.append(
-                    f'path: {element_path}: user is missing this data')
-                matched = False
-            if proposed is None:
-                error_msg_list.append(
-                    f'path: {element_path}: proposed is missing this data')
-                matched = False
-            elif user != proposed:
-                error_msg_list.append(
-                    f'path: {element_path}: proposed data: {proposed} does not equal to user data: {user}')
-                matched = False
+        if required_equal and index_context != compare_context:
+            # the != takes care of None data type. if both None, this will still pass.
+            error_msg_list.append(
+                f"path: {element_json_path}: index context data: {index_context} does not equal to compare context data: {compare_context}"
+            )
+            matched = False
 
     return matched
-
