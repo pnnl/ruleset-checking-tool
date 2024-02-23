@@ -1,4 +1,5 @@
 import re
+from functools import partial
 
 from rct229.rulesets.ashrae9012019.data import data
 
@@ -12,7 +13,7 @@ exception_list = [
 ]
 
 
-def if_required(required):
+def if_required(required) -> bool:
     """
     Convert required data from extra schema to a boolean
     If the data is tring, then return false else return boolean
@@ -67,7 +68,7 @@ def compare_context_pair(
     required_equal,
     search_key,
     error_msg_list,
-):
+) -> bool:
     """
     Perform equality comparison between two RPD context
     based on the value in the extra schema specification
@@ -167,3 +168,28 @@ def compare_context_pair(
             matched = False
 
     return matched
+
+
+proposed_equals_user = partial(
+    compare_context_pair,
+    element_json_path="$",
+    extra_schema=EXTRA_SCHEMA["RulesetProjectDescription"]["Data Elements"],
+    required_equal=True,
+    search_key="AppG P_RMD Equals U_RMD",
+)
+
+baseline_equals_proposed = partial(
+    compare_context_pair,
+    element_json_path="$",
+    extra_schema=EXTRA_SCHEMA["RulesetProjectDescription"]["Data Elements"],
+    required_equal=True,
+    search_key="AppG B_RMD Equals P_RMD",
+)
+
+baseline_equals_baseline = partial(
+    compare_context_pair,
+    element_json_path="$",
+    extra_schema=EXTRA_SCHEMA["RulesetProjectDescription"]["Data Elements"],
+    required_equal=True,
+    search_key="AppG B_RMDs Same",
+)
