@@ -3,7 +3,7 @@
         "Section": 19,
         "Rule": 17,
         "Test": "a",
-        "test_description": "System 1 with `SIMPLE` specification method for supply/return/exhaust/relief fans and each of the 5 fans has 59 W design electric power for a total of 295 W with 1000 cfm design supply airflow.",
+        "test_description": "The project has one building segment with one zone. System 1 with `SIMPLE` specification method for supply/return/exhaust/relief fans and each of the 5 fans has 59 W design electric power for a total of 295 W with 1000 cfm design supply airflow. Expected outcome: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-17",
@@ -13,11 +13,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -122,7 +123,7 @@
         "Section": 19,
         "Rule": 17,
         "Test": "a2",
-        "test_description": "In baseline system 7, the system fan electrical power for supply, return, exhaust, and relief equals the bhp/fan motor efficiency.  BHP = 13 HP (per Table G3.1.29), motor eff = 0.91 (per Table G3.9.1), CFM = 10,000. There is no MERV13 or ERV on this air loop.",
+        "test_description": "The project has one building segment with one zone. In baseline system 7, the system fan electrical power for supply, return, exhaust, and relief equals the bhp/fan motor efficiency.  Baseline fan electric power  = 13 HP (per Table G3.1.29), motor eff = 0.91 (per Table G3.9.1), CFM = 10,000. There is no MERV13 or ERV on this air loop. Expected outcome: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-17",
@@ -132,11 +133,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -241,7 +243,7 @@
         "Section": 19,
         "Rule": 17,
         "Test": "b",
-        "test_description": "In baseline system 3, the system fan electrical power for supply, return, exhaust, and relief equals the bhp/fan motor efficiency.  BHP = 0.94 HP (per Table G3.1.29), motor eff = 0.825 (per Table G3.9.1), CFM = 1,000. There is no MERV13 or ERV on this air loop.",
+        "test_description": "The project has one building segment with one zone. In baseline system 3, the system fan electrical power for supply, return, exhaust, and relief equals the bhp/fan motor efficiency.  Baseline electric fan power = 0.94 HP (per Table G3.1.29), motor eff = 0.825 (per Table G3.9.1), CFM = 1,000. There is no MERV13 or ERV on this air loop. Expected outcome: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-17",
@@ -251,11 +253,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",

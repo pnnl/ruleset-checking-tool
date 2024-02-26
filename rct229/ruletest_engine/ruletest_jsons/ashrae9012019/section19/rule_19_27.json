@@ -3,7 +3,7 @@
         "Section": 19,
         "Rule": 27,
         "Test": "a",
-        "test_description": "Project consists of a baseline System 7 serving a healthcare facility operating room with 100 CFM minimum OA requirement. Fan system is correctly set to CONTINUOUS operation during unoccupied hours.",
+        "test_description": "The project has one building segment with two zones. Project consists of a baseline System 7 serving a healthcare facility operating room with 100 CFM minimum outdoor air requirement. Fan system is correctly set to CONTINUOUS operation during unoccupied hours. Expected outcome: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-27",
@@ -13,11 +13,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -157,7 +158,7 @@
         "Section": 19,
         "Rule": 27,
         "Test": "b",
-        "test_description": "Project consists of a baseline System 11 serving an animal health facility room with 100 CFM minimum OA requirement. Fan system is incorrectly set to KEEP OFF during unoccupied hours.",
+        "test_description": "The project has one building segment with one zone. Project consists of a baseline System 11 serving an animal health facility room with 100 CFM minimum outdoor air requirement. Fan system is incorrectly set to KEEP OFF during unoccupied hours. Expected outcome: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-27",
@@ -167,11 +168,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",

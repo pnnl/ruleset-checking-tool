@@ -42,8 +42,10 @@ TEST_RMD_P_COOLING_SYSTEM = {
                     ],
                 }
             ],
+            "type": "BASELINE_0",
         }
     ],
+    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 TEST_RMD_U_COOLING_SYSTEM = {
@@ -83,8 +85,10 @@ TEST_RMD_U_COOLING_SYSTEM = {
                     ],
                 }
             ],
+            "type": "USER",
         }
     ],
+    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 TEST_RMI_P_COOLING_SYSTEM = quantify_rmr(TEST_RMD_P_COOLING_SYSTEM)[

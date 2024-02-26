@@ -3,7 +3,7 @@
         "Section": 22,
         "Rule": 8,
         "Test": "a",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 having more than 300 ton capacity and is correctly modeled with the secondary pump having a vfd.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 having more than 300 ton capacity and is correctly modeled with the secondary pump having a vfd.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-8",
@@ -13,11 +13,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -150,7 +151,7 @@
         "Section": 22,
         "Rule": 8,
         "Test": "b",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 having more than 300 ton capacity and is incorrectly modeled with the secondary pump operating without vfd.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 having more than 300 ton capacity and is incorrectly modeled with the secondary pump operating without vfd.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-8",
@@ -160,11 +161,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -297,7 +299,7 @@
         "Section": 22,
         "Rule": 8,
         "Test": "c",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 having less than 300 ton capacity.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 having less than 300 ton capacity.  Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-8",
@@ -307,11 +309,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -444,7 +447,7 @@
         "Section": 22,
         "Rule": 8,
         "Test": "d",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 having more than 300 ton capacity and is correctly modeled with the secondary pump having a vfd.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 7 having more than 300 ton capacity and is correctly modeled with the secondary pump having a vfd.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-8",
@@ -454,11 +457,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -574,7 +578,7 @@
         "Section": 22,
         "Rule": 8,
         "Test": "e",
-        "test_description": "Baseline building has two zones.  HVAC is system type 12 having more than 300 ton capacity and is incorrectly modeled with the secondary pump operating without vfd.  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 12 having more than 300 ton capacity and is incorrectly modeled with the secondary pump operating without vfd.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-8",
@@ -584,11 +588,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",

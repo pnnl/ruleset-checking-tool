@@ -3,7 +3,7 @@
         "Section": 23,
         "Rule": 15,
         "Test": "a",
-        "test_description": "Proposed building utilizes System 3 with humidistatic controls. The baseline building utilizes system 3 as well. EXPECTED: Undetermined",
+        "test_description": "The project has one building segment with one zone served by System 3. Proposed building utilizes System 3 with humidistatic controls. The baseline building utilizes system 3 as well.  The expected result is: undetermined",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "23-15",
@@ -19,6 +19,7 @@
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -83,6 +84,7 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -149,7 +151,7 @@
         "Section": 23,
         "Rule": 15,
         "Test": "b",
-        "test_description": "Proposed building utilizes System 3 without dehumidification. Baseline building also has system 3. EXPECTED: Not Applicable",
+        "test_description": "The project has one building segment with one zone served by System 3. Proposed building utilizes System 3 without dehumidification. Baseline building also has system 3.  The expected result is: not_applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "23-15",
@@ -165,6 +167,7 @@
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -227,6 +230,7 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
