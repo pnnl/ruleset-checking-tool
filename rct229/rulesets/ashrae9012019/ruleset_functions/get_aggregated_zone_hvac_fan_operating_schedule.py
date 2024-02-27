@@ -26,11 +26,10 @@ def get_aggregated_zone_hvac_fan_operating_schedule(rmi, zone_id):
 
     aggregated_zone_hvac_fan_operating_schedule = {}
     for HVAC_id in get_list_hvac_systems_associated_with_zone(rmi, zone_id):
-        for HVAC in find_all(
-            f'$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*][?(@.id = "{HVAC_id}")]',
+        for fan_sys in find_all(
+            f'$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*][?(@.id = "{HVAC_id}")].fan_system',
             rmi,
         ):
-            fan_sys = getattr_(HVAC, "HVAC", "fan_system")
             fan_sch = getattr_(
                 find_exactly_one_schedule(
                     rmi, getattr_(fan_sys, "fan_system", "operating_schedule")
