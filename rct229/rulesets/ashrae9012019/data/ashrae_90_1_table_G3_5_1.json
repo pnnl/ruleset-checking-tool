@@ -1,0 +1,39 @@
+{
+  "prm_air_conditioner_min_efficiency": [
+    {
+      "equipment_type": "air conditioners, air-cooled",
+      "inclusive_minimum_capacity": 0,
+      "exclusive_maximum_capacity": 65000,
+      "subcategory_rating_condition": "single-package",
+      "minimum_efficiency_copnf_cooling": 3.0
+    },
+    {
+      "equipment_type": "air conditioners, air-cooled",
+      "inclusive_minimum_capacity": 65000,
+      "exclusive_maximum_capacity": 135000,
+      "subcategory_rating_condition": "single-package",
+      "minimum_efficiency_copnf_cooling": 3.5
+    },
+    {
+      "equipment_type": "air conditioners, air-cooled",
+      "inclusive_minimum_capacity": 135000,
+      "exclusive_maximum_capacity": 240000,
+      "subcategory_rating_condition": "single-package",
+      "minimum_efficiency_copnf_cooling": 3.4
+    },
+    {
+      "equipment_type": "air conditioners, air-cooled",
+      "inclusive_minimum_capacity": 240000,
+      "exclusive_maximum_capacity": 760000,
+      "subcategory_rating_condition": "single-package",
+      "minimum_efficiency_copnf_cooling": 3.5
+    },
+    {
+      "equipment_type": "air conditioners, air-cooled",
+      "inclusive_minimum_capacity": 760000,
+      "exclusive_maximum_capacity": 999999999,
+      "subcategory_rating_condition": "single-package",
+      "minimum_efficiency_copnf_cooling": 3.6
+    }
+  ]
+}
