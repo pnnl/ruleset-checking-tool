@@ -45,7 +45,7 @@ def get_aggregated_zone_hvac_fan_operating_schedule(rmd, zone_id):
                 )
             )
 
-    assert_(schedules, "Please make sure if the provided `zone_id` argument exists.")
+    assert_(schedules, "Please make sure the provided `zone_id` argument exists.")
 
     # determine if all the schedules operate. If so, assign 1, else 0.
     schedules_df = pd.DataFrame(schedules)
