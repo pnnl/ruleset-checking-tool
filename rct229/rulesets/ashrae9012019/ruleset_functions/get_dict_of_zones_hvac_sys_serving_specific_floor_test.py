@@ -41,6 +41,10 @@ TEST_RMI = {
                                 },
                             ],
                         },
+                        {
+                            "id": "zone 3",
+                            "floor_name": "FL 3",
+                        },
                     ],
                 }
             ],
@@ -75,5 +79,11 @@ def test__get_dict_of_zones_hvac_sys_serving_specific_floor__FL2s_system():
     }
 
 
+def test__get_dict_of_zones_hvac_sys_serving_specific_floor__zone_not_connected_HVAC():
+    assert get_dict_of_zones_hvac_sys_serving_specific_floor(TEST_RMI, "FL 3") == {
+        "zone 3": []
+    }
+
+
 def test__get_dict_of_zones_hvac_sys_serving_specific_floor__no_floor():
-    assert get_dict_of_zones_hvac_sys_serving_specific_floor(TEST_RMI, "FL 3") == {}
+    assert get_dict_of_zones_hvac_sys_serving_specific_floor(TEST_RMI, "FL 4") == {}
