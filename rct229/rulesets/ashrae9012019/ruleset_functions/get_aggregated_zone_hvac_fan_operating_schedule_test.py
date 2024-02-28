@@ -19,13 +19,22 @@ TEST_RMI = {
                                     "id": "terminal_1",
                                     "served_by_heating_ventilating_air_conditioning_system": "System 1",
                                 },
+                            ],
+                        },
+                        {
+                            "id": "zone 2",
+                            "terminals": [
                                 {
-                                    "id": "terminal_2",
+                                    "id": "terminal_1",
                                     "served_by_heating_ventilating_air_conditioning_system": "System 2",
                                 },
                                 {
-                                    "id": "terminal_3",
+                                    "id": "terminal_2",
                                     "served_by_heating_ventilating_air_conditioning_system": "System 3",
+                                },
+                                {
+                                    "id": "terminal_3",
+                                    "served_by_heating_ventilating_air_conditioning_system": "System 4",
                                 },
                             ],
                         },
@@ -35,7 +44,7 @@ TEST_RMI = {
                             "id": "System 1",
                             "fan_system": {
                                 "id": "Fan System 1",
-                                "operating_schedule": "schedule 1",
+                                "operating_schedule": "no_exist_sch",
                             },
                         },
                         {
@@ -52,15 +61,22 @@ TEST_RMI = {
                                 "operating_schedule": "schedule 3",
                             },
                         },
+                        {
+                            "id": "System 4",
+                            "fan_system": {
+                                "id": "Fan System 4",
+                                "operating_schedule": "schedule 4",
+                            },
+                        },
                     ],
                 }
             ],
         }
     ],
     "schedules": [
-        {"id": "schedule 1", "hourly_values": [0] * 8760},
-        {"id": "schedule 2", "hourly_values": [1.0] * 8760},
-        {"id": "schedule 3", "hourly_values": [0.5] * 8760},
+        {"id": "schedule 2", "hourly_values": [0] * 8760},
+        {"id": "schedule 3", "hourly_values": [1.0] * 8760},
+        {"id": "schedule 4", "hourly_values": [0.5] * 8760},
     ],
     "type": "BASELINE_0",
 }
@@ -79,12 +95,18 @@ def test__TEST_RMD_FIXED_TYPE__is_valid():
     ], f"Schema error: {schema_validation_result['error']}"
 
 
+def test__get_aggregated_zone_hvac_fan_operating_schedule__no_exist_schedule():
+    assert (
+        get_aggregated_zone_hvac_fan_operating_schedule(TEST_RMI, "zone 1")
+        == [1] * 8760
+    )
+
+
 def test__get_aggregated_zone_hvac_fan_operating_schedule__correct_mapping():
-    assert get_aggregated_zone_hvac_fan_operating_schedule(TEST_RMI, "zone 1") == {
-        "Fan System 1": [0] * 8760,
-        "Fan System 2": [1] * 8760,
-        "Fan System 3": [0] * 8760,
-    }
+    assert (
+        get_aggregated_zone_hvac_fan_operating_schedule(TEST_RMI, "zone 2")
+        == [0] * 8760
+    )
 
 
 def test__get_aggregated_zone_hvac_fan_operating_schedule__zone_not_exist():
