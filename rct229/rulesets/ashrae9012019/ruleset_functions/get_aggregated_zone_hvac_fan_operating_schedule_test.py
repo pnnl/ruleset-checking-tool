@@ -107,7 +107,3 @@ def test__get_aggregated_zone_hvac_fan_operating_schedule__correct_mapping():
         get_aggregated_zone_hvac_fan_operating_schedule(TEST_RMI, "zone 2")
         == [0] * 8760
     )
-
-
-def test__get_aggregated_zone_hvac_fan_operating_schedule__zone_not_exist():
-    assert get_aggregated_zone_hvac_fan_operating_schedule(TEST_RMI, "zone 2") == {}

@@ -2,7 +2,7 @@ import pandas as pd
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_list_hvac_systems_associated_with_zone import (
     get_list_hvac_systems_associated_with_zone,
 )
-from rct229.utils.assertions import getattr_
+from rct229.utils.assertions import assert_, getattr_
 from rct229.utils.jsonpath_utils import find_one
 
 
@@ -44,6 +44,8 @@ def get_aggregated_zone_hvac_fan_operating_schedule(rmd, zone_id):
                     "hourly_values",
                 )
             )
+
+    assert_(schedules, "Please make sure if the provided `zone_id` argument exists.")
 
     # determine if all the schedules operate. If so, assign 1, else 0.
     schedules_df = pd.DataFrame(schedules)
