@@ -4,6 +4,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_list_hvac_systems_assoc
 )
 from rct229.utils.assertions import assert_, getattr_
 from rct229.utils.jsonpath_utils import find_one
+from rct229.utils.utility_functions import find_exactly_one_hvac_system
 
 
 def get_aggregated_zone_hvac_fan_operating_schedule(rmd, zone_id):
@@ -25,27 +26,26 @@ def get_aggregated_zone_hvac_fan_operating_schedule(rmd, zone_id):
 
     schedules = []
     for hvac_id in get_list_hvac_systems_associated_with_zone(rmd, zone_id):
-        fan_sys = find_one(
-            f'$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*][?(@.id = "{hvac_id}")].fan_system',
-            rmd,
-        )
-        fan_sys_operating_sch = getattr_(fan_sys, "fan_system", "operating_schedule")
-        fan_sys_sch = find_one(
-            f'$.schedules[*][?(@.id = "{fan_sys_operating_sch}")]', rmd
-        )
+        hvac = find_exactly_one_hvac_system(rmd, hvac_id)
+        fan_sys = getattr_(hvac, "hvac", "fan_system")
 
-        if fan_sys_sch is None:
-            schedules.append([1] * 8760)
-        else:
+        fan_sys_operating_sch = fan_sys.get("operating_schedule")
+        schedule = find_one(f'$.schedules[*][?(@.id = "{fan_sys_operating_sch}")]', rmd)
+        if fan_sys_operating_sch and schedule:
             schedules.append(
                 getattr_(
-                    fan_sys_sch,
+                    schedule,
                     "schedules",
                     "hourly_values",
                 )
             )
+        else:
+            schedules.append([1] * 8760)
 
-    assert_(schedules, "Please make sure the provided `zone_id` argument exists.")
+    assert_(
+        schedules,
+        "Please make sure the provided ZONE 'zone_id' is connected with at least one HVAC system",
+    )
 
     # determine if all the schedules operate. If so, assign 1, else 0.
     schedules_df = pd.DataFrame(schedules)
