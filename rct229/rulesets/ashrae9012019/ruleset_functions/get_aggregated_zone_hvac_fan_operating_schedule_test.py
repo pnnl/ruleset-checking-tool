@@ -1,7 +1,9 @@
+import pytest
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_aggregated_zone_hvac_fan_operating_schedule import (
     get_aggregated_zone_hvac_fan_operating_schedule,
 )
 from rct229.schema.validate import schema_validate_rmr
+from rct229.utils.assertions import RCTFailureException
 
 TEST_RMI = {
     "id": "test_rmi",
@@ -44,7 +46,6 @@ TEST_RMI = {
                             "id": "System 1",
                             "fan_system": {
                                 "id": "Fan System 1",
-                                "operating_schedule": "no_exist_sch",
                             },
                         },
                         {
@@ -95,7 +96,7 @@ def test__TEST_RMD_FIXED_TYPE__is_valid():
     ], f"Schema error: {schema_validation_result['error']}"
 
 
-def test__get_aggregated_zone_hvac_fan_operating_schedule__no_exist_schedule():
+def test__get_aggregated_zone_hvac_fan_operating_schedule__no_operating_schedule():
     assert (
         get_aggregated_zone_hvac_fan_operating_schedule(TEST_RMI, "zone 1")
         == [1] * 8760
@@ -107,3 +108,11 @@ def test__get_aggregated_zone_hvac_fan_operating_schedule__correct_mapping():
         get_aggregated_zone_hvac_fan_operating_schedule(TEST_RMI, "zone 2")
         == [0] * 8760
     )
+
+
+def test__get_aggregated_zone_hvac_fan_operating_schedule__assertion():
+    with pytest.raises(
+        RCTFailureException,
+        match="Please make sure the provided ZONE 'zone_id' is connected with at least one HVAC system",
+    ):
+        get_aggregated_zone_hvac_fan_operating_schedule(TEST_RMI, "zone_not_exist")

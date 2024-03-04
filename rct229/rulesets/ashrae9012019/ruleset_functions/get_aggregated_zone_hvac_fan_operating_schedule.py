@@ -30,11 +30,12 @@ def get_aggregated_zone_hvac_fan_operating_schedule(rmd, zone_id):
         fan_sys = getattr_(hvac, "hvac", "fan_system")
 
         fan_sys_operating_sch = fan_sys.get("operating_schedule")
-        schedule = find_one(f'$.schedules[*][?(@.id = "{fan_sys_operating_sch}")]', rmd)
-        if fan_sys_operating_sch and schedule:
+        if fan_sys_operating_sch:
             schedules.append(
                 getattr_(
-                    schedule,
+                    find_one(
+                        f'$.schedules[*][?(@.id = "{fan_sys_operating_sch}")]', rmd
+                    ),
                     "schedules",
                     "hourly_values",
                 )
