@@ -1,7 +1,6 @@
 import pydash
 from pint import Quantity
 
-from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
@@ -9,6 +8,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.is_cz_0_to_3a_bool import (
     is_cz_0_to_3a_bool,
 )
 from rct229.schema.config import ureg
+from rct229.schema.schema_enums import SchemaEnums
 
 PUBLIC_ASSEMBLY_BUILDING_AREA_THRESHOLD = 120_000 * ureg("ft2")
 RETAIL_FLOOR_NUMBER_THRESHOLD = 3

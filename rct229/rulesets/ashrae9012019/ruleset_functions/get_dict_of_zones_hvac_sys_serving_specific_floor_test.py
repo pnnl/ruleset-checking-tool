@@ -3,7 +3,6 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_dict_of_zones_hvac_sys_
 )
 from rct229.schema.validate import schema_validate_rmr
 
-
 TEST_RMI = {
     "id": "test_rmd",
     "buildings": [

@@ -2,11 +2,11 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rulesets.ashrae9012019 import USER
-from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.data_fns.table_8_4_4_fns import (
     table_8_4_4_in_range,
     table_8_4_4_lookup,
 )
+from rct229.schema.schema_enums import SchemaEnums
 
 _DRY_TYPE = SchemaEnums.schema_enums["TransformerOptions"].DRY_TYPE
 
