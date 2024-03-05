@@ -125,7 +125,7 @@ class Section4Rule1(RuleDefinitionListIndexedBase):
                         else ZERO.TEMPERATURE
                     )
 
-                    thermostat_cooling_stpt_houlry_values_b = (
+                    thermostat_cooling_stpt_hourly_values_b = (
                         getattr_(
                             find_one_with_field_value(
                                 "$[*]",
@@ -140,7 +140,7 @@ class Section4Rule1(RuleDefinitionListIndexedBase):
                         else None
                     )
 
-                    thermostat_cooling_stpt_houlry_values_p = (
+                    thermostat_cooling_stpt_hourly_values_p = (
                         getattr_(
                             find_one_with_field_value(
                                 "$[*]",
@@ -173,7 +173,7 @@ class Section4Rule1(RuleDefinitionListIndexedBase):
                         else ZERO.TEMPERATURE
                     )
 
-                    thermostat_heating_stpt_houlry_values_b = (
+                    thermostat_heating_stpt_hourly_values_b = (
                         getattr_(
                             find_one_with_field_value(
                                 "$[*]",
@@ -188,7 +188,7 @@ class Section4Rule1(RuleDefinitionListIndexedBase):
                         else None
                     )
 
-                    thermostat_heating_stpt_houlry_values_p = (
+                    thermostat_heating_stpt_hourly_values_p = (
                         getattr_(
                             find_one_with_field_value(
                                 "$[*]",
@@ -206,8 +206,8 @@ class Section4Rule1(RuleDefinitionListIndexedBase):
                     return {
                         "thermostat_cooling_stpt_sch_id_b": thermostat_cooling_stpt_sch_id_b,
                         "thermostat_cooling_stpt_sch_id_p": thermostat_cooling_stpt_sch_id_p,
-                        "thermostat_cooling_stpt_houlry_values_b": thermostat_cooling_stpt_houlry_values_b,
-                        "thermostat_cooling_stpt_houlry_values_p": thermostat_cooling_stpt_houlry_values_p,
+                        "thermostat_cooling_stpt_hourly_values_b": thermostat_cooling_stpt_hourly_values_b,
+                        "thermostat_cooling_stpt_hourly_values_p": thermostat_cooling_stpt_hourly_values_p,
                         "design_thermostat_cooling_stpt_b": CalcQ(
                             "temperature", design_thermostat_cooling_stpt_b
                         ),
@@ -216,8 +216,8 @@ class Section4Rule1(RuleDefinitionListIndexedBase):
                         ),
                         "thermostat_heating_stpt_sch_id_b": thermostat_heating_stpt_sch_id_b,
                         "thermostat_heating_stpt_sch_id_p": thermostat_heating_stpt_sch_id_p,
-                        "thermostat_heating_stpt_houlry_values_b": thermostat_heating_stpt_houlry_values_b,
-                        "thermostat_heating_stpt_houlry_values_p": thermostat_heating_stpt_houlry_values_p,
+                        "thermostat_heating_stpt_hourly_values_b": thermostat_heating_stpt_hourly_values_b,
+                        "thermostat_heating_stpt_hourly_values_p": thermostat_heating_stpt_hourly_values_p,
                         "design_thermostat_heating_stpt_b": CalcQ(
                             "temperature", design_thermostat_heating_stpt_b
                         ),
@@ -233,11 +233,11 @@ class Section4Rule1(RuleDefinitionListIndexedBase):
                     thermostat_cooling_stpt_sch_id_p = calc_vals[
                         "thermostat_cooling_stpt_sch_id_p"
                     ]
-                    thermostat_cooling_stpt_houlry_values_b = calc_vals[
-                        "thermostat_cooling_stpt_houlry_values_b"
+                    thermostat_cooling_stpt_hourly_values_b = calc_vals[
+                        "thermostat_cooling_stpt_hourly_values_b"
                     ]
-                    thermostat_cooling_stpt_houlry_values_p = calc_vals[
-                        "thermostat_cooling_stpt_houlry_values_p"
+                    thermostat_cooling_stpt_hourly_values_p = calc_vals[
+                        "thermostat_cooling_stpt_hourly_values_p"
                     ]
 
                     thermostat_heating_stpt_sch_id_b = calc_vals[
@@ -246,22 +246,22 @@ class Section4Rule1(RuleDefinitionListIndexedBase):
                     thermostat_heating_stpt_sch_id_p = calc_vals[
                         "thermostat_heating_stpt_sch_id_p"
                     ]
-                    thermostat_heating_stpt_houlry_values_b = calc_vals[
-                        "thermostat_heating_stpt_houlry_values_b"
+                    thermostat_heating_stpt_hourly_values_b = calc_vals[
+                        "thermostat_heating_stpt_hourly_values_b"
                     ]
-                    thermostat_heating_stpt_houlry_values_p = calc_vals[
-                        "thermostat_heating_stpt_houlry_values_p"
+                    thermostat_heating_stpt_hourly_values_p = calc_vals[
+                        "thermostat_heating_stpt_hourly_values_p"
                     ]
                     return (
                         thermostat_cooling_stpt_sch_id_b
                         and thermostat_cooling_stpt_sch_id_p
-                        and thermostat_cooling_stpt_houlry_values_b
-                        != thermostat_cooling_stpt_houlry_values_p
+                        and thermostat_cooling_stpt_hourly_values_b
+                        != thermostat_cooling_stpt_hourly_values_p
                     ) or (
                         thermostat_heating_stpt_sch_id_b
                         and thermostat_heating_stpt_sch_id_p
-                        and thermostat_heating_stpt_houlry_values_b
-                        != thermostat_heating_stpt_houlry_values_p
+                        and thermostat_heating_stpt_hourly_values_b
+                        != thermostat_heating_stpt_hourly_values_p
                     )
 
                 def rule_check(self, context, calc_vals=None, data=None):
@@ -271,11 +271,11 @@ class Section4Rule1(RuleDefinitionListIndexedBase):
                     thermostat_cooling_stpt_sch_id_p = calc_vals[
                         "thermostat_cooling_stpt_sch_id_p"
                     ]
-                    thermostat_cooling_stpt_houlry_values_b = calc_vals[
-                        "thermostat_cooling_stpt_houlry_values_b"
+                    thermostat_cooling_stpt_hourly_values_b = calc_vals[
+                        "thermostat_cooling_stpt_hourly_values_b"
                     ]
-                    thermostat_cooling_stpt_houlry_values_p = calc_vals[
-                        "thermostat_cooling_stpt_houlry_values_p"
+                    thermostat_cooling_stpt_hourly_values_p = calc_vals[
+                        "thermostat_cooling_stpt_hourly_values_p"
                     ]
                     design_thermostat_cooling_stpt_b = calc_vals[
                         "design_thermostat_cooling_stpt_b"
@@ -290,11 +290,11 @@ class Section4Rule1(RuleDefinitionListIndexedBase):
                     thermostat_heating_stpt_sch_id_p = calc_vals[
                         "thermostat_heating_stpt_sch_id_p"
                     ]
-                    thermostat_heating_stpt_houlry_values_b = calc_vals[
-                        "thermostat_heating_stpt_houlry_values_b"
+                    thermostat_heating_stpt_hourly_values_b = calc_vals[
+                        "thermostat_heating_stpt_hourly_values_b"
                     ]
-                    thermostat_heating_stpt_houlry_values_p = calc_vals[
-                        "thermostat_heating_stpt_houlry_values_p"
+                    thermostat_heating_stpt_hourly_values_p = calc_vals[
+                        "thermostat_heating_stpt_hourly_values_p"
                     ]
                     design_thermostat_heating_stpt_b = calc_vals[
                         "design_thermostat_heating_stpt_b"
@@ -306,8 +306,8 @@ class Section4Rule1(RuleDefinitionListIndexedBase):
                         (
                             thermostat_cooling_stpt_sch_id_b
                             and thermostat_cooling_stpt_sch_id_p
-                            and thermostat_cooling_stpt_houlry_values_b
-                            == thermostat_cooling_stpt_houlry_values_p
+                            and thermostat_cooling_stpt_hourly_values_b
+                            == thermostat_cooling_stpt_hourly_values_p
                         )
                         or (
                             not thermostat_cooling_stpt_sch_id_b
@@ -319,8 +319,8 @@ class Section4Rule1(RuleDefinitionListIndexedBase):
                         (
                             thermostat_heating_stpt_sch_id_b
                             and thermostat_heating_stpt_sch_id_p
-                            and thermostat_heating_stpt_houlry_values_b
-                            == thermostat_heating_stpt_houlry_values_p
+                            and thermostat_heating_stpt_hourly_values_b
+                            == thermostat_heating_stpt_hourly_values_p
                         )
                         or (
                             not thermostat_heating_stpt_sch_id_b
