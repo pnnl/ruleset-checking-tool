@@ -1,4 +1,6 @@
 import pandas as pd
+
+from rct229.rule_engine.rulesets import LeapYear
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_list_hvac_systems_associated_with_zone import (
     get_list_hvac_systems_associated_with_zone,
 )
@@ -7,7 +9,7 @@ from rct229.utils.jsonpath_utils import find_one
 from rct229.utils.utility_functions import find_exactly_one_hvac_system
 
 
-def get_aggregated_zone_hvac_fan_operating_schedule(rmd, zone_id):
+def get_aggregated_zone_hvac_fan_operating_schedule(rmd, zone_id, is_leap_year=False):
     """
      This function loops through all of the HVAC system fan operating schedules associated with a specific zone and
      creates an aggregated fan operating schedule for the zone. More specifically, if any of the fan operating schedules
@@ -18,11 +20,14 @@ def get_aggregated_zone_hvac_fan_operating_schedule(rmd, zone_id):
     ----------
     rmd: dict A zone id associated with the RMR for which to create the aggregated fan operating schedule as described above.
     zone_id: str A zone id associated with the RMR for which to create the aggregated fan operating schedule as described above.
+    is_leap_year: bool, indicate whether the comparison is in a leap year or not. True / False
+
 
     Returns
     ----------
     aggregated_zone_hvac_fan_operating_schedule: 8760 aggregated fan operating schedule for the zone.
     """
+    num_hours = LeapYear.LEAP_YEAR_HOURS if is_leap_year else LeapYear.REGULAR_YEAR_HOURS
 
     schedules = []
     for hvac_id in get_list_hvac_systems_associated_with_zone(rmd, zone_id):
@@ -41,7 +46,7 @@ def get_aggregated_zone_hvac_fan_operating_schedule(rmd, zone_id):
                 )
             )
         else:
-            schedules.append([1] * 8760)
+            schedules.append([1] * num_hours)
 
     assert_(
         schedules,
