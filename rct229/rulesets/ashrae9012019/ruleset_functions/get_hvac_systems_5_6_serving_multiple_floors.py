@@ -33,8 +33,9 @@ def get_hvac_systems_5_6_serving_multiple_floors(rmd):
 
     Returns
     -------
-    hvac_systems_5_6_serving_multiple_floors_list list
-        A list that saves all hvac system IDs that are types 5 or 6 and serve multiple floors.
+    hvac_systems_5_6_serving_multiple_floors_dict dict
+        A dict that stores all hvac system IDs that are types 5 or 6 and serve multiple floors as dict keys,
+        and the number of floors served as dict values.
     """
     baseline_hvac_system_types_dict = get_baseline_system_types(rmd)
     hvac_zone_list_w_area_dict = get_hvac_zone_list_w_area_by_rmi_dict(rmd)
