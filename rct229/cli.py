@@ -8,7 +8,6 @@ from rct229.rule_engine.engine import evaluate_all_rules
 from rct229.rule_engine.rulesets import RuleSet, RuleSetTest
 from rct229.ruletest_engine.run_ruletests import run_ashrae9012019_tests
 from rct229.schema.schema_store import SchemaStore
-from rct229.schema.validate import validate_rmr
 from rct229.utils.assertions import RCTException
 
 CONTEXT_SETTINGS = dict(help_option_names=["-h", "--help"])

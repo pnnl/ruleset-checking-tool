@@ -6,12 +6,8 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type imp
     get_opaque_surface_type,
 )
 from rct229.schema.config import ureg
-from rct229.utils.assertions import (
-    assert_,
-    get_first_attr_,
-    getattr_,
-)
-from rct229.utils.jsonpath_utils import find_all, find_one, find_exactly_required_fields
+from rct229.utils.assertions import assert_, get_first_attr_, getattr_
+from rct229.utils.jsonpath_utils import find_all, find_exactly_required_fields, find_one
 from rct229.utils.pint_utils import ZERO
 
 CAPACITY_THRESHOLD = 3.4 * ureg("Btu/(hr * ft2)")
