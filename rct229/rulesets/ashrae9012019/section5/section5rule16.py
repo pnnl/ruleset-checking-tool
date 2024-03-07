@@ -169,7 +169,8 @@ class Section5Rule16(RuleDefinitionListIndexedBase):
                 return (
                     total_fenestration_area_b == ZERO.AREA
                     and total_fenestration_area_p == ZERO.AREA
-                ) or std_equal(
-                    (total_fenestration_area_surface_b / total_fenestration_area_b),
-                    (total_fenestration_area_surface_p / total_fenestration_area_p),
+                ) or (
+                    total_fenestration_area_surface_b / total_fenestration_area_b
+                ) == (
+                    total_fenestration_area_surface_p / total_fenestration_area_p
                 )

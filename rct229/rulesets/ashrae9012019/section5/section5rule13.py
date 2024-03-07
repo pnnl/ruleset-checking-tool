@@ -157,19 +157,19 @@ class Section5Rule13(RuleDefinitionListIndexedBase):
                     return False
 
                 if baseline_surface_type in [OST.ABOVE_GRADE_WALL, OST.FLOOR, OST.ROOF]:
-                    return std_equal(
-                        calc_vals["baseline_surface_u_factor"],
-                        calc_vals["proposed_surface_u_factor"],
+                    return (
+                        calc_vals["baseline_surface_u_factor"]
+                        == calc_vals["proposed_surface_u_factor"],
                     )
                 elif baseline_surface_type in [OST.UNHEATED_SOG, OST.HEATED_SOG]:
-                    return std_equal(
-                        calc_vals["baseline_surface_f_factor"],
-                        calc_vals["proposed_surface_f_factor"],
+                    return (
+                        calc_vals["baseline_surface_f_factor"]
+                        == calc_vals["proposed_surface_f_factor"],
                     )
                 elif baseline_surface_type == OST.BELOW_GRADE_WALL:
-                    return std_equal(
-                        calc_vals["baseline_surface_c_factor"],
-                        calc_vals["proposed_surface_c_factor"],
+                    return (
+                        calc_vals["baseline_surface_c_factor"]
+                        == calc_vals["proposed_surface_c_factor"],
                     )
                 else:
                     return False

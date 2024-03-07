@@ -15,6 +15,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_ca
     get_surface_conditioning_category_dict,
 )
 from rct229.utils.jsonpath_utils import find_one
+from rct229.utils.std_comparisons import std_equal
 
 
 class Section5Rule40(RuleDefinitionListIndexedBase):

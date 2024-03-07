@@ -188,8 +188,6 @@ class Section5Rule26(RuleDefinitionListIndexedBase):
                         # product to ensure neither is 0 & short-circuit logic if either of them is 0.
                         total_skylight_area_b * total_skylight_area_p > 0
                         # both segments' skylight area ratios are the same
-                        and std_equal(
-                            total_skylight_area_surface_b / total_skylight_area_b,
-                            total_skylight_area_surface_p / total_skylight_area_p,
-                        )
+                        and total_skylight_area_surface_b / total_skylight_area_b
+                        == total_skylight_area_surface_p / total_skylight_area_p,
                     )

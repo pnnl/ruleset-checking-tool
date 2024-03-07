@@ -89,6 +89,12 @@ class Section5Rule29(RuleDefinitionListIndexedBase):
                 }
 
             def rule_check(self, context, calc_vals=None, data=None):
+                return (
+                    TARGET_ABSORPTANCE_THERMAL_EXTERIOR
+                    == calc_vals["absorptance_thermal_exterior"]
+                )
+
+            def is_tolerance_fail(self, context, calc_vals=None, data=None):
                 return std_equal(
                     TARGET_ABSORPTANCE_THERMAL_EXTERIOR,
                     calc_vals["absorptance_thermal_exterior"],

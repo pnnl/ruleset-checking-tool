@@ -158,4 +158,9 @@ class Section5Rule14(RuleDefinitionListIndexedBase):
             def rule_check(self, context, calc_vals=None, data=None):
                 area_type_wwr = calc_vals["area_type_wwr"]
                 area_type_target_wwr = calc_vals["area_type_target_wwr"]
+                return area_type_target_wwr == area_type_wwr
+
+            def is_tolerance_fail(self, context, calc_vals=None, data=None):
+                area_type_wwr = calc_vals["area_type_wwr"]
+                area_type_target_wwr = calc_vals["area_type_target_wwr"]
                 return std_equal(area_type_target_wwr, area_type_wwr)
