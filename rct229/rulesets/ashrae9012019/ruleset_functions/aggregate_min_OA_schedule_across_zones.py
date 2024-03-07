@@ -1,7 +1,8 @@
 from typing import List
 
-from rct229.utils.assertions import assert_
 import numpy as np
+
+from rct229.utils.assertions import assert_
 
 
 def aggregate_min_OA_schedule_across_zones(zone_OA_CFM_list_of_schedules: List[list]):

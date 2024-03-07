@@ -20,12 +20,12 @@ The RCT can be used for two different workflows within ASHRAE Standard 229P.  Th
 
 ### Project Testing Workflow
 
-A project RMR triplet is evaluated by running the *evaluate* command in the RCT.  The User, Baseline, and Proposed RMR file paths are provided as the input arguments to the *evaluate* command.  The output of this command is a JSON report defining the outcome of the rule evaluation on the provided RMR triplet.
+A project RPD is evaluated by running the *evaluate* command in the RCT.  The User, Baseline, and Proposed RPD file paths are provided as the input arguments to the *evaluate* command.  The output of this command is a JSON report defining the outcome of the rule evaluation on the provided RMR triplet.
 
-`rct229 evaluate user_rmr.json baseline_rmr.json proposed_rmr.json`  
+`rct229 evaluate -f user_rmr.json -f baseline_rmr.json -f proposed_rmr.json -rs ashrae9012019`
 
-#### RMR Schema
-The RCT data model used by the RCT is based on the [RMR schema](https://github.com/open229/ruleset-model-report-schema).  All RMRs must comply with the version of the RMR schema corresponding to the RCT.  The RMR schema files used by the RCT are located within the [rct229/schema](rct229/schema) directory.  
+#### RPD Schema
+The RCT data model used by the RCT is based on the [RPD schema](https://github.com/open229/ruleset-model-report-schema).  All RMRs must comply with the version of the RMR schema corresponding to the RCT.  The RMR schema files used by the RCT are located within the [rct229/schema](rct229/schema) directory.  
 
 #### Rule Definition Strategy
 
@@ -46,23 +46,20 @@ The test cases for the Software Testing Workflow are defined in the Rule Test JS
 ### Commands
 The following provides some useful commands as you get started developing the RCT package.
 
-This package is developed using Pipenv to manage packages during the build process.  First, make sure Pipenv is installed on your system using the following commands. Any new dependencies that are added to the package must be included in the Pipfile.  The package is currently being developed for Python 3.7.  This version of Python must be installed on your machine for Pipenv to work properly.
-
-Install `pipenv` using `pip`
-`pip install pipenv`
+This package is developed using Poetry to manage packages during the build process.  First, follow the instruction from [poetry](https://python-poetry.org/docs/) to install the package.
+Any new dependencies that are added to the package must be included in the pyproject.toml. The package is currently being developed for Python 3.10. This version of Python must be installed on your machine for Poetry to work properly.
 
 Now tests can be run by first installing dependencies and then running pytest.
-1. `pipenv install --dev`
-2. `pipenv run pytest`
-    - To see a coverage report, use `pipenv run pytest --cov`
-    - To have pytest watch for file changes, use `pipenv run ptw`
+1. `poetry install`
+2. `poetry run pytest`
+    - To see a coverage report, use `poetry run pytest --cov`
+    - To have pytest watch for file changes, use `poetry run ptw`
 
-You can also package with pipenv to test the CLI tool.
-1. `pipenv install '-e .'`
-2. `pipenv run rct229 -evaluate`
+You can also package with poetry to test the CLI tool.
+2. `poetry run rct229 test`
 
 Run with example ASHRAE 90.1 2019 RMDs.
-1. `pipenv run rct229 evaluate -rs ashrae9012019 examples\user_rmr.json examples\baseline_rmr.json examples\proposed_rmr.json`
+1. `poetry run rct229 evaluate -rs ashrae9012019 -f examples\chicago_demo\baseline_model.json -f examples\chicago_demo\proposed_model.json -f examples\chicago_demo\user_model.json -r ASHRAE9012019_DETAIL`
 
 
 ### Developer Notes
@@ -83,18 +80,18 @@ INIITIALS refers to the initials of the owner of the branch or PR.
 
 #### Commit procedure:
 Before committing changes you should run the following commands from the `ruleset-checking-tool` directory.
-1. `pipenv run isort .` to sort imports according to PEP8 https://www.python.org/dev/peps/pep-0008/
-2. `pipenv run black .` to otherwise format code according to PEP8
-3. `pipenv run pytest --cov` to run all unit tests for functions.
-4. `pipenv run rct229 test` to run rule definition tests.
+1. `poetry run isort .` to sort imports according to PEP8 https://www.python.org/dev/peps/pep-0008/
+2. `poetry run black .` to otherwise format code according to PEP8
+3. `poetry run pytest --cov` to run all unit tests for functions.
+4. `poetry run rct229 test` to run rule definition tests.
    1. use `-rs ashrae9012019` to run all 90.1 2019 rule definition tests.
 
 #### Mocking functions for pytests:
 - For an explanation of how to specify `<module>` in `patch("<module>.<imported_thing>")` see: https://medium.com/@durgaswaroop/writing-better-tests-in-python-with-pytest-mock-part-2-92b828e1453c
 
 #### Profiling:
-- To profile a file: `pipenv run pyinstrument --renderer=html path_to_file`
-- To profile the RCT command line: `pipenv run pyinstrument --renderer=html rct229/cli.py  evaluate examples/proposed_model.rmd examples/baseline_model.rmd examples/proposed_model.rmd`
+- To profile a file: `poetry run pyinstrument --renderer=html path_to_file`
+- To profile the RCT command line: `poetry run pyinstrument --renderer=html rct229/cli.py  evaluate examples/proposed_model.rmd examples/baseline_model.rmd examples/proposed_model.rmd`
 - Note: Aborting the run with Ctrl C will cause the profiler to output the profile up to the abort.
 - For detailed info on pyinstrument: https://pyinstrument.readthedocs.io/en/latest/home.html
 

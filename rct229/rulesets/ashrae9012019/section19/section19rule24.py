@@ -2,13 +2,13 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rulesets.ashrae9012019 import PROPOSED
-from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_proposed_hvac_modeled_with_virtual_cooling import (
     get_proposed_hvac_modeled_with_virtual_cooling,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_proposed_hvac_modeled_with_virtual_heating import (
     get_proposed_hvac_modeled_with_virtual_heating,
 )
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.pint_utils import ZERO
 
 FAN_SYSTEM_OPERATION = SchemaEnums.schema_enums["FanSystemOperationOptions"]
