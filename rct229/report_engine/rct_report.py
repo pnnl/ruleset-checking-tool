@@ -1,5 +1,6 @@
 import os
 from datetime import datetime
+
 from rct229 import __version__ as version
 
 # rule outcome evaluation logic

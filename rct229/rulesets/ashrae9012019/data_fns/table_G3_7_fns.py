@@ -1,7 +1,7 @@
 from rct229.rulesets.ashrae9012019.data import data
-from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.data_fns.table_utils import find_osstd_table_entry
 from rct229.schema.config import ureg
+from rct229.schema.schema_enums import SchemaEnums
 
 # This dictionary maps the LightingSpaceOptions2019ASHRAE901TG37 enumerations to
 # the corresponding lpd_space_type values in the OSSTD file
