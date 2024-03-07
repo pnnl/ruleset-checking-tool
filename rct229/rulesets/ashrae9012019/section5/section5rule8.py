@@ -3,7 +3,6 @@ from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedB
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_4_fns import table_G34_lookup
-from rct229.rulesets.ashrae9012019.ruleset_functions.compare_standard_val import std_le
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
     OpaqueSurfaceType as OST,
 )
@@ -137,4 +136,4 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
             def is_tolerance_fail(self, context, calc_vals=None, data=None):
                 above_grade_wall_u_factor = calc_vals["above_grade_wall_u_factor"]
                 target_u_factor = calc_vals["target_u_factor"]
-                return std_equal(above_grade_wall_u_factor, target_u_factor)
+                return std_equal(val=above_grade_wall_u_factor, std_val=target_u_factor)

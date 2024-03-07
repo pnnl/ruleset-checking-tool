@@ -22,6 +22,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_fan_system_object_suppl
 )
 from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_
+from rct229.utils.compare_standard_val import std_lt
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
 from rct229.utils.std_comparisons import std_equal
@@ -233,6 +234,28 @@ class Section19Rule15(RuleDefinitionListIndexedBase):
                 (
                     all_design_setpoints_105
                     and supply_fan_airflow_b > minimum_outdoor_airflow_b
+                )
+                or (
+                    not all_design_setpoints_105
+                    and minimum_outdoor_airflow_b == supply_fan_airflow_b
+                )
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            hvac_id_b = calc_vals["hvac_id_b"]
+            supply_fan_qty_b = calc_vals["supply_fan_qty_b"]
+            supply_fan_airflow_b = calc_vals["supply_fan_airflow_b"]
+            minimum_outdoor_airflow_b = calc_vals["minimum_outdoor_airflow_b"]
+            all_design_setpoints_105 = data["hvac_info_dict_b"][hvac_id_b][
+                "all_design_setpoints_105"
+            ]
+
+            return supply_fan_qty_b == 1 and (
+                (
+                    all_design_setpoints_105
+                    and std_lt(
+                        val=supply_fan_airflow_b, std_val=minimum_outdoor_airflow_b
+                    )
                 )
                 or (
                     not all_design_setpoints_105

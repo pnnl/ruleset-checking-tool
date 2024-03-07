@@ -154,4 +154,6 @@ class Section5Rule12(RuleDefinitionListIndexedBase):
             def is_tolerance_fail(self, context, calc_vals=None, data=None):
                 target_f_factor = calc_vals["target_f_factor"]
                 slab_on_grade_floor_f_factor = calc_vals["slab_on_grade_floor_f_factor"]
-                return std_equal(target_f_factor, slab_on_grade_floor_f_factor)
+                return std_equal(
+                    std_val=target_f_factor, val=slab_on_grade_floor_f_factor
+                )

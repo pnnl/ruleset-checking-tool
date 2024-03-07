@@ -2,7 +2,6 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rulesets.ashrae9012019 import BASELINE_0
-from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_system_type_compare import (
     baseline_system_type_compare,
 )
@@ -13,6 +12,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types i
     get_baseline_system_types,
 )
 from rct229.schema.config import ureg
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO, CalcQ
 from rct229.utils.std_comparisons import std_equal
@@ -167,8 +167,6 @@ class Section23Rule16(RuleDefinitionListIndexedBase):
             return (
                 heating_system_type_b == HEATING_SYSTEM.FLUID_LOOP
                 and hot_water_loop_type == FLUID_LOOP.HEATING
-                and std_equal(
-                    heating_coil_setpoint,
-                    hvac_max_zone_setpoint - REQUIRED_SET_POINT_REDUCTION,
-                )
+                and heating_coil_setpoint
+                == hvac_max_zone_setpoint - REQUIRED_SET_POINT_REDUCTION,
             )

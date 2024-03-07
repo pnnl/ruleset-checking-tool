@@ -3,7 +3,7 @@
         "Section": 21,
         "Rule": 9,
         "Test": "a",
-        "test_description": "The project consists of one building segment with two zones.  Baseline RMD utilizes system 7 with total pump power per flow rate correctly set to 19 W/gpm.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  Baseline ruleset project description utilizes system 7 with total pump power per flow rate correctly set to 19 W/gpm.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-9",
@@ -13,11 +13,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -150,7 +151,7 @@
         "Section": 21,
         "Rule": 9,
         "Test": "b",
-        "test_description": "The project consists of one building segment with two zones.  Baseline RMD utilizes system 7 with total pump power per flow rate incorrectly set to 21 W/gpm. Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  Baseline ruleset project description utilizes system 7 with total pump power per flow rate incorrectly set to 21 W/gpm. Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-9",
@@ -160,11 +161,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -297,7 +299,7 @@
         "Section": 21,
         "Rule": 9,
         "Test": "c",
-        "test_description": "The project consists of one building segment with one zone.  Baseline RMD utilizes system 1a with total pump power per flow rate correctly set to 19 W/gpm.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone.  Baseline ruleset project description utilizes system 1a with total pump power per flow rate correctly set to 19 W/gpm.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-9",
@@ -307,11 +309,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -392,7 +395,7 @@
         "Section": 21,
         "Rule": 9,
         "Test": "d",
-        "test_description": "The project consists of one building segment with one zone.  Baseline RMD utilizes system 1a with total pump power per flow rate incorrectly set to 21 W/gpm. Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone.  Baseline ruleset project description utilizes system 1a with total pump power per flow rate incorrectly set to 21 W/gpm. Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-9",
@@ -402,11 +405,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -487,7 +491,7 @@
         "Section": 21,
         "Rule": 9,
         "Test": "e",
-        "test_description": "The project consists of one building segment with one zone.  Baseline RMD utilizes system 1b. Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone.  Baseline ruleset project description utilizes system 1b. Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-9",
@@ -497,11 +501,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",

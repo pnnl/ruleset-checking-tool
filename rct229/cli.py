@@ -8,7 +8,7 @@ from rct229.rule_engine.engine import evaluate_all_rules
 from rct229.rule_engine.rulesets import RuleSet, RuleSetTest
 from rct229.ruletest_engine.run_ruletests import run_ashrae9012019_tests
 from rct229.schema.schema_store import SchemaStore
-from rct229.schema.validate import validate_rmr
+from rct229.utils.assertions import RCTException
 
 CONTEXT_SETTINGS = dict(help_option_names=["-h", "--help"])
 REPORT_MODULE = {
@@ -65,8 +65,8 @@ def run_test(ruleset, section=None):
 # Evaluate RMR Triplet
 short_help_text = """
     Run ruleset checking. arguments are \n
-    --rpds or -f: rpd file directory. accept multiple entries, example: -f ../example/user_model.rpd \n
     --ruleset or -rs: ruleset name. Default is ashrae9012019, available options include: ashrae9012019 \n
+    --rpds or -f: rpd file directory. accept multiple entries, example: -f ../example/user_model.rpd \n
     --reports or -r: reports. Default is RAW_OUTPUT, accept multiple entries, available options include: RAW_OUTPUT, RAW_SUMMARY, ASHRAE9012019_DETAIL, ASHRAE9012019_SUMMARY. \n
     --reports_directory or -rd: directory to save the output reports. \n
     """
@@ -86,7 +86,14 @@ def evaluate(rpds, ruleset, reports, reports_directory):
         SchemaStore.set_ruleset(RuleSet.ASHRAE9012019_RULESET)
         print("Test implementation of rule engine for ASHRAE Std 229 RCT.")
         print("")
-        report = evaluate_all_rules(rpds)
+
+    for report_type in reports:
+        if not REPORT_MODULE.get(report_type):
+            raise RCTException(
+                f"Cannot find matching report type for {report_type}. Available ones are RAW_OUTPUT, RAW_SUMMARY, ASHRAE9012019_DETAIL, ASHRAE9012019_SUMMARY."
+            )
+
+    report = evaluate_all_rules(rpds)
     # have report attached.
     print(f"Saving reports to: {reports_directory}......")
     for report_type in reports:

@@ -143,4 +143,4 @@ class Section5Rule6(RuleDefinitionListIndexedBase):
             def is_tolerance_fail(self, context, calc_vals=None, data=None):
                 below_grade_wall_c_factor = calc_vals["below_grade_wall_c_factor"]
                 target_c_factor = calc_vals["target_c_factor"]
-                return std_equal(below_grade_wall_c_factor, target_c_factor)
+                return std_equal(val=below_grade_wall_c_factor, std_val=target_c_factor)

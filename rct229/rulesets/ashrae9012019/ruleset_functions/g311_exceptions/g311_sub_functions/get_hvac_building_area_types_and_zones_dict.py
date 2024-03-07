@@ -2,7 +2,6 @@ import logging
 
 from pydash import curry, filter_, flatten_deep, flow, map_
 
-from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.data_fns.table_lighting_to_hvac_bat_map_fns import (
     building_lighting_to_hvac_bat,
     space_lighting_to_hvac_bat,
@@ -11,6 +10,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_categ
     ZoneConditioningCategory,
     get_zone_conditioning_category_rmi_dict,
 )
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO

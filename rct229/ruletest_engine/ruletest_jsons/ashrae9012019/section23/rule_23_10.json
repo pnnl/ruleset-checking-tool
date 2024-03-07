@@ -3,7 +3,7 @@
         "Section": 23,
         "Rule": 10,
         "Test": "a",
-        "test_description": "System 11 is set to minimum airflow at 50% load. EXPECTED: Pass",
+        "test_description": "The project has one building segment with one zone served by System 11 set to minimum airflow at 50% load.The expected result is: pass",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "23-10",
@@ -19,6 +19,7 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -118,7 +119,7 @@
         "Section": 23,
         "Rule": 10,
         "Test": "b",
-        "test_description": "System 11 is set to minimum airflow at 25% load. EXPECTED: Fail",
+        "test_description": "The project has one building segment with one zone served by System 11 set to minimum airflow set at 25% load. The expected result is: fail",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "23-10",
@@ -134,6 +135,7 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -233,7 +235,7 @@
         "Section": 23,
         "Rule": 10,
         "Test": "c",
-        "test_description": "System 7 is set to minimum airflow at 25% load. EXPECTED: Undetermined",
+        "test_description": "The project has one building segment with two zones served by System 7 set to minimum airflow at 25% load. The expected result is: not_applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "23-10",
@@ -249,6 +251,7 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",

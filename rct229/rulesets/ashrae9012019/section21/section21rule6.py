@@ -2,13 +2,13 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rulesets.ashrae9012019 import BASELINE_0
-from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types import (
     get_baseline_system_types,
 )
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO, CalcQ
@@ -120,6 +120,28 @@ class Section21Rule6(RuleDefinitionListIndexedBase):
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
+            boiler_1_operation_lower_limit = calc_vals["boiler_1_operation_lower_limit"]
+            boiler_1_operation_upper_limit = calc_vals["boiler_1_operation_upper_limit"]
+            boiler_1_rated_capacity = calc_vals["boiler_1_rated_capacity"]
+            boiler_2_operation_lower_limit = calc_vals["boiler_2_operation_lower_limit"]
+            boiler_2_operation_upper_limit = calc_vals["boiler_2_operation_upper_limit"]
+            boiler_2_rated_capacity = calc_vals["boiler_2_rated_capacity"]
+
+            return (
+                boiler_1_operation_lower_limit == ZERO.POWER
+                and boiler_1_operation_upper_limit == boiler_1_rated_capacity
+                and boiler_2_operation_lower_limit == boiler_1_rated_capacity
+                and boiler_2_operation_upper_limit
+                == boiler_1_rated_capacity + boiler_2_rated_capacity
+            ) or (
+                boiler_2_operation_lower_limit == ZERO.POWER
+                and boiler_2_operation_upper_limit == boiler_2_rated_capacity
+                and boiler_1_operation_lower_limit == boiler_2_rated_capacity
+                and boiler_1_operation_upper_limit
+                == boiler_2_rated_capacity + boiler_1_rated_capacity,
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
             boiler_1_operation_lower_limit = calc_vals["boiler_1_operation_lower_limit"]
             boiler_1_operation_upper_limit = calc_vals["boiler_1_operation_upper_limit"]
             boiler_1_rated_capacity = calc_vals["boiler_1_rated_capacity"]

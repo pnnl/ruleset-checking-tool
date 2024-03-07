@@ -3,7 +3,7 @@
         "Section": 21,
         "Rule": 10,
         "Test": "a",
-        "test_description": "The project consists of one building segment with two zones and two spaces.  Baseline RMD has HHW plant with the hot water pump that serves a total of 100,000 ft2 floor area. The pump's speed control value is correctly set to FIXED_SPEED.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones and two spaces.  Baseline ruleset project description has hot water plant with the hot water pump that serves a total of 100,000 ft2 floor area. The pump's speed control value is correctly set to FIXED_SPEED.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-10",
@@ -13,11 +13,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -161,7 +162,7 @@
         "Section": 21,
         "Rule": 10,
         "Test": "b",
-        "test_description": "The project consists of one building segment with two zones and two spaces.  Baseline RMD has HHW plant with the hot water pump that serves a total of 100,000 ft2 floor area. The pump's speed control value is incorrectly set to VARIABLE_SPEED.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones and two spaces.  Baseline ruleset project description has hot water plant with the hot water pump that serves a total of 100,000 ft2 floor area. The pump's speed control value is incorrectly set to VARIABLE_SPEED.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-10",
@@ -171,11 +172,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -319,7 +321,7 @@
         "Section": 21,
         "Rule": 10,
         "Test": "c",
-        "test_description": "The project consists of one building segment with one zone and one space.  Baseline RMD has HHW plant with the hot water pump that serves a total of 140,000 ft2 floor area. The pump's speed control value is correctly set to VARIABLE_SPEED.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone and one space.  Baseline ruleset project description has hot water plant with the hot water pump that serves a total of 140,000 ft2 floor area. The pump's speed control value is correctly set to VARIABLE_SPEED.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-10",
@@ -329,11 +331,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -444,7 +447,7 @@
         "Section": 21,
         "Rule": 10,
         "Test": "d",
-        "test_description": "The project consists of one building segment with one zone and one space.  Baseline RMD has HHW plant with the hot water pump that serves a total of 140,000 ft2 floor area. The pump's speed control value is incorrectly set to FIXED_SPEED.  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone and one space.  Baseline ruleset project description has hot water plant with the hot water pump that serves a total of 140,000 ft2 floor area. The pump's speed control value is incorrectly set to FIXED_SPEED.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-10",
@@ -454,11 +457,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -569,7 +573,7 @@
         "Section": 21,
         "Rule": 10,
         "Test": "e",
-        "test_description": "The project consists of one building segment with one zone and one space.  Baseline RMD system type 8  Expected result: Not Appicable",
+        "test_description": "The project has one building segment with two zones and one space.  Baseline ruleset project description system type 8  Expected result: Not Appicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-10",
@@ -579,11 +583,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",

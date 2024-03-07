@@ -3,7 +3,7 @@
         "Section": 22,
         "Rule": 17,
         "Test": "a",
-        "test_description": "The project includes a cooling tower.  We calculated the cooling tower efficiency to be 40 gpm/hp, which is greater than the required efficiency of 38.2 gpm / hp, resulting in a more stringent baseline. This results in an undetermined value.",
+        "test_description": "The project has one building segment with two zones. The project includes a cooling tower.  We calculated the cooling tower efficiency to be 40 gpm/hp, which is greater than the required efficiency of 38.2 gpm / hp, resulting in a more stringent baseline. Expected result: Undetermined",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "22-17",
@@ -13,11 +13,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "No",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -162,7 +163,7 @@
         "Section": 22,
         "Rule": 17,
         "Test": "b",
-        "test_description": "The project includes a cooling tower.  We calculated the cooling tower efficiency to be 38.2 gpm/hp, which is exactly equal to the required efficiency of 38.2 gpm / hp. ",
+        "test_description": "The project has one building segment with two zones. The project includes a cooling tower.  We calculated the cooling tower efficiency to be 38.2 gpm/hp, which is exactly equal to the required efficiency of 38.2 gpm / hp. Expected result: Undetermined",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "22-17",
@@ -172,11 +173,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "No",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -321,7 +323,7 @@
         "Section": 22,
         "Rule": 17,
         "Test": "c",
-        "test_description": "The project includes a cooling tower.  We calculated the cooling tower efficiency to be 20 gpm/hp, which is less than the required efficiency of 38.2 gpm / hp. This results in an undetermined value.",
+        "test_description": "The project has one building segment with two zones. The project includes a cooling tower.  We calculated the cooling tower efficiency to be 20 gpm/hp, which is less than the required efficiency of 38.2 gpm / hp. Expected result: Undetermined",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "22-17",
@@ -331,11 +333,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "No",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -480,7 +483,7 @@
         "Section": 22,
         "Rule": 17,
         "Test": "d",
-        "test_description": "Building does not include a cooling tower and is therefore not applicable",
+        "test_description": "The project has one building segment with one zone. Building does not include a cooling tower and is therefore not applicable. Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-17",
@@ -490,11 +493,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "No",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",

@@ -2,7 +2,6 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rulesets.ashrae9012019 import BASELINE_0
-from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_system_type_compare import (
     baseline_system_type_compare,
 )
@@ -25,6 +24,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_list_hvac_systems_assoc
     get_list_hvac_systems_associated_with_zone,
 )
 from rct229.schema.config import ureg
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_all, find_one
 from rct229.utils.pint_utils import ZERO
@@ -270,6 +270,21 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
             return UNDERMINED_MSG
 
         def rule_check(self, context, calc_vals=None, data=None):
+            zones_served_by_hvac_has_non_mech_cooling_bool_p = calc_vals[
+                "zones_served_by_hvac_has_non_mech_cooling_bool_p"
+            ]
+            zone_hvac_has_non_mech_cooling_p = calc_vals[
+                "zone_hvac_has_non_mech_cooling_p"
+            ]
+            fan_power_per_flow_b = calc_vals["fan_power_per_flow_b"]
+
+            return (
+                not zone_hvac_has_non_mech_cooling_p
+                and not zones_served_by_hvac_has_non_mech_cooling_bool_p
+                and REQ_FAN_POWER_FLOW_RATIO == fan_power_per_flow_b
+            ) or (fan_power_per_flow_b < REQ_FAN_POWER_FLOW_RATIO)
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
             zones_served_by_hvac_has_non_mech_cooling_bool_p = calc_vals[
                 "zones_served_by_hvac_has_non_mech_cooling_bool_p"
             ]

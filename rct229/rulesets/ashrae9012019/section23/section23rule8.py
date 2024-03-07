@@ -143,6 +143,21 @@ class Section23Rule8(RuleDefinitionListIndexedBase):
                     output_validation_points
                 ) == VALIDATION_POINTS_LENGTH and all(
                     [
+                        ovp[0] == tvp[0] and ovp[1] == tvp[1]
+                        for ovp, tvp in zip(
+                            output_validation_points, target_validation_points
+                        )
+                    ]
+                )
+
+            def is_tolerance_fail(self, context, calc_vals=None, data=None):
+                output_validation_points = calc_vals["output_validation_points"]
+                target_validation_points = calc_vals["target_validation_points"]
+
+                return len(
+                    output_validation_points
+                ) == VALIDATION_POINTS_LENGTH and all(
+                    [
                         std_equal(ovp[0], tvp[0]) and std_equal(ovp[1], tvp[1])
                         for ovp, tvp in zip(
                             output_validation_points, target_validation_points

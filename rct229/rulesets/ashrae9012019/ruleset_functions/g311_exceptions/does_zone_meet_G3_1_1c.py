@@ -1,5 +1,5 @@
-from pydash import drop, map_
 import numpy as np
+from pydash import map_
 
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_system_type_compare import (
     baseline_system_type_compare,

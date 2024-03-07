@@ -83,6 +83,7 @@ TEST_BUILDING_NO_EXT_FLUID_SOURCE = {
             "child_loops": [{"id": "HW1 Child Loop 1"}],
         },
     ],
+    "type": "BASELINE_0",
 }
 
 TEST_BUILDING_HEATING_SYS = {
@@ -212,6 +213,7 @@ TEST_BUILDING_HEATING_SYS = {
             "child_loops": [{"id": "HW1 Child Loop 1"}],
         },
     ],
+    "type": "BASELINE_0",
 }
 
 TEST_BUILDING_TERMINAL_SYS = {
@@ -314,20 +316,24 @@ TEST_BUILDING_TERMINAL_SYS = {
             "child_loops": [{"id": "HW1 Child Loop 1"}],
         },
     ],
+    "type": "BASELINE_0",
 }
 
 
 TEST_RMD_HEATING_SYS = {
     "id": "ASHRAE229",
     "ruleset_model_descriptions": [TEST_BUILDING_HEATING_SYS],
+    "data_timestamp": "2024-02-12T09:00Z",
 }
 TEST_RMD_TERMINAL_SYS = {
     "id": "ASHRAE229",
     "ruleset_model_descriptions": [TEST_BUILDING_TERMINAL_SYS],
+    "data_timestamp": "2024-02-12T09:00Z",
 }
 TEST_RMD_FALSE = {
     "id": "ASHRAE229",
     "ruleset_model_descriptions": [TEST_BUILDING_NO_EXT_FLUID_SOURCE],
+    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 

@@ -19,14 +19,17 @@ TEST_RMR = {
     "ruleset_model_descriptions": [
         {
             "id": "user_rmd",
+            "type": "Enumerations2019ASHRAE901.schema.json#/definitions/RulesetModelOptions2019ASHRAE901",
             "transformers": [
                 {
                     "id": "1",
                     "capacity": 500,
                 }
             ],
+            "type": "BASELINE_0",
         },
     ],
+    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 
@@ -52,6 +55,8 @@ def test__quantify_rmr():
                         "capacity": 500 * ureg("ampere * volt"),
                     }
                 ],
+                "type": "BASELINE_0",
             },
         ],
+        "data_timestamp": "2024-02-12T09:00Z",
     }

@@ -2,8 +2,8 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rulesets.ashrae9012019 import BASELINE_0
-from rct229.schema.schema_enums import SchemaEnums
 from rct229.schema.config import ureg
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import getattr_
 from rct229.utils.std_comparisons import std_equal
 
@@ -99,6 +99,16 @@ class Section19Rule12(RuleDefinitionListIndexedBase):
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
+            req_high_limit_temp = calc_vals["req_high_limit_temp"]
+            high_limit_temp_b = calc_vals["high_limit_temp_b"]
+            air_economizer_type_b = calc_vals["air_economizer_type_b"]
+
+            return (
+                req_high_limit_temp.to(ureg.kelvin) == high_limit_temp_b.to(ureg.kelvin)
+                and air_economizer_type_b == AIR_ECONOMIZER.TEMPERATURE
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
             req_high_limit_temp = calc_vals["req_high_limit_temp"]
             high_limit_temp_b = calc_vals["high_limit_temp_b"]
             air_economizer_type_b = calc_vals["air_economizer_type_b"]
