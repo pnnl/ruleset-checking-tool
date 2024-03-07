@@ -13,6 +13,7 @@ class RuleDefinitionListBase(RuleDefinitionBase):
         self,
         rmrs_used,
         each_rule,
+        rmrs_used_optional=None,
         id=None,
         description=None,
         ruleset_section_title=None,
@@ -30,6 +31,7 @@ class RuleDefinitionListBase(RuleDefinitionBase):
         self.data_items = data_items
         super(RuleDefinitionListBase, self).__init__(
             rmrs_used=rmrs_used,
+            rmrs_used_optional=rmrs_used_optional,
             id=id,
             description=description,
             rmr_context=rmr_context,

@@ -165,6 +165,20 @@ def run_hvac_general_tests():
     return run_test_helper(json_tests, RuleSet.ASHRAE9012019_RULESET)
 
 
+def run_sys_zone_assignment_tests():
+    """Runs all tests found in the system zone assignment tests JSON.
+    Returns
+    -------
+    None
+    Results of system zone assignments test are spit out to console
+    """
+
+    json_tests = _helper_get_all_test_file_by_section(
+        RuleSet.ASHRAE9012019_RULESET, "section18"
+    )
+    return run_test_helper(json_tests, RuleSet.ASHRAE9012019_RULESET)
+
+
 def run_test_helper(test_list, ruleset_doc):
     # sort the list in a human order
     test_list.sort(key=natural_keys)
@@ -192,6 +206,7 @@ def run_test_one_jsontest(test_json):
 # run_envelope_tests()
 # run_receptacle_tests()
 # run_airside_tests()
+# run_sys_zone_assignment_tests()
 # run_hvac_general_tests()
 
 # run_test_one_jsontest("ashrae9012019/section5/rule_5_30.json")

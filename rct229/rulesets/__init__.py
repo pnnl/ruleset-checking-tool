@@ -1,12 +1,12 @@
 import importlib
 import inspect
 
+import rct229.rule_engine.partial_rule_definition as base_partial_rule_classes
 import rct229.rule_engine.rule_base as base_classes
 import rct229.rule_engine.rule_list_base as base_list_classes
 import rct229.rule_engine.rule_list_indexed_base as base_list_indexed_classes
 import rct229.rulesets as rulesets
 from rct229.rule_engine.rule_base import RuleDefinitionBase
-import rct229.rule_engine.partial_rule_definition as base_partial_rule_classes
 from rct229.rule_engine.rulesets import RuleSet
 
 # All list for registering a ruleset.
@@ -23,7 +23,7 @@ def __getrules__():
     ruleset_list = inspect.getmembers(rulesets, inspect.ismodule)
     for ruleset in ruleset_list:
         if ruleset[0] == SchemaStore.SELECTED_RULESET:
-            __getrules_module__helper(rulesets, modules)
+            __getrules_module__helper(ruleset[1], modules)
     # Adding the module names that should be excluded from the available rules. Such as RuleDefinitionBase
     base_class_names = [f[0] for f in inspect.getmembers(base_classes, inspect.isclass)]
     base_class_names = base_class_names + [

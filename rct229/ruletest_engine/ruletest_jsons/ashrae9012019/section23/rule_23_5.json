@@ -19,6 +19,7 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -45,7 +46,7 @@
                                                             "id": "Fan 1"
                                                         },
                                                         "fan_configuration": "PARALLEL",
-                                                        "is_first_stage_heat_fan_powered_box": true
+                                                        "is_fan_first_stage_heat": true
                                                     }
                                                 ]
                                             },
@@ -64,7 +65,7 @@
                                                             "id": "Fan 2"
                                                         },
                                                         "fan_configuration": "PARALLEL",
-                                                        "is_first_stage_heat_fan_powered_box": true
+                                                        "is_fan_first_stage_heat": true
                                                     }
                                                 ]
                                             }
@@ -126,6 +127,7 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -152,7 +154,7 @@
                                                             "id": "VAV Air Terminal 1 Fan"
                                                         },
                                                         "fan_configuration": "PARALLEL",
-                                                        "is_first_stage_heat_fan_powered_box": true
+                                                        "is_fan_first_stage_heat": true
                                                     }
                                                 ]
                                             },
@@ -171,7 +173,7 @@
                                                             "id": "VAV Air Terminal 2 Fan"
                                                         },
                                                         "fan_configuration": "PARALLEL",
-                                                        "is_first_stage_heat_fan_powered_box": true
+                                                        "is_fan_first_stage_heat": true
                                                     }
                                                 ]
                                             }
@@ -264,6 +266,7 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -290,7 +293,7 @@
                                                             "id": "Fan 1"
                                                         },
                                                         "fan_configuration": "PARALLEL",
-                                                        "is_first_stage_heat_fan_powered_box": false
+                                                        "is_fan_first_stage_heat": false
                                                     }
                                                 ]
                                             },
@@ -309,7 +312,7 @@
                                                             "id": "Fan 2"
                                                         },
                                                         "fan_configuration": "PARALLEL",
-                                                        "is_first_stage_heat_fan_powered_box": false
+                                                        "is_fan_first_stage_heat": false
                                                     }
                                                 ]
                                             }
@@ -371,6 +374,7 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -397,7 +401,7 @@
                                                             "id": "VAV Air Terminal 1 Fan"
                                                         },
                                                         "fan_configuration": "PARALLEL",
-                                                        "is_first_stage_heat_fan_powered_box": false
+                                                        "is_fan_first_stage_heat": false
                                                     }
                                                 ]
                                             },
@@ -416,7 +420,7 @@
                                                             "id": "VAV Air Terminal 2 Fan"
                                                         },
                                                         "fan_configuration": "PARALLEL",
-                                                        "is_first_stage_heat_fan_powered_box": false
+                                                        "is_fan_first_stage_heat": false
                                                     }
                                                 ]
                                             }

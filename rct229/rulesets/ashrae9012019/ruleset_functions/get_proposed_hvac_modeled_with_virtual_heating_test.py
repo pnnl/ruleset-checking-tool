@@ -42,8 +42,10 @@ TEST_RMD_P_HEATING_SYSTEM = {
                     ],
                 }
             ],
+            "type": "PROPOSED",
         }
     ],
+    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 TEST_RMD_U_HEATING_SYSTEM = {
@@ -83,8 +85,10 @@ TEST_RMD_U_HEATING_SYSTEM = {
                     ],
                 }
             ],
+            "type": "USER",
         }
     ],
+    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 TEST_RMD_P_PREHEAT_SYSTEM = {
@@ -125,8 +129,10 @@ TEST_RMD_P_PREHEAT_SYSTEM = {
                     ],
                 }
             ],
+            "type": "PROPOSED",
         }
     ],
+    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 TEST_RMD_U_PREHEAT_SYSTEM = {
@@ -166,8 +172,10 @@ TEST_RMD_U_PREHEAT_SYSTEM = {
                     ],
                 }
             ],
+            "type": "USER",
         }
     ],
+    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 TEST_RMI_P_HEATING_SYSTEM = quantify_rmr(TEST_RMD_P_HEATING_SYSTEM)[
