@@ -9,7 +9,7 @@ from rct229.ruletest_engine.run_ruletests import run_ashrae9012019_tests
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.schema.schema_store import SchemaStore
 from rct229.utils.assertions import assert_
-
+import rct229.rulesets as rs
 
 def count_number_of_rules(ruleset_standard):
     """Returns the number of rules in a standard
@@ -28,10 +28,7 @@ def count_number_of_rules(ruleset_standard):
 
     """
 
-    if ruleset_standard == RuleSet.ASHRAE9012019_RULESET:
-        SchemaStore.set_ruleset(RuleSet.ASHRAE9012019_RULESET)
-        SchemaEnums.update_schema_enum()
-    else:
+    if not _setup_workflow(ruleset_standard):
         assert_(
             False,
             f"Provided ruleset, {ruleset_standard}, does not match the available ones in the RCT. Available: ashrae9012019 ",
@@ -71,8 +68,7 @@ def count_number_of_ruletest_cases(ruleset_standard):
         Also contains 'Total' as a key with the sum total rule tests
 
     """
-    if ruleset_standard != RuleSet.ASHRAE9012019_RULESET:
-        # TODO this will need to be rewrite once there are more than one ruleset.
+    if not _setup_workflow(ruleset_standard):
         assert_(
             False,
             f"Provided ruleset, {ruleset_standard}, does not match the available ones in the RCT. Available: ashrae9012019 ",
@@ -125,12 +121,7 @@ def run_project_evaluation(rpds, ruleset, reports=["RAW_OUTPUT"], saving_dir="./
         "Empty report list, please make sure to provide a list of reports",
     )
 
-    if ruleset == RuleSet.ASHRAE9012019_RULESET:
-        SchemaStore.set_ruleset(RuleSet.ASHRAE9012019_RULESET)
-        SchemaEnums.update_schema_enum()
-        print("Test implementation of rule engine for ASHRAE Std 229 RCT.")
-        print("")
-    else:
+    if not _setup_workflow(ruleset):
         assert_(False, f"Unrecognized ruleset: {ruleset}")
 
     available_report_modules = rct_report.__getreports__()
@@ -139,6 +130,8 @@ def run_project_evaluation(rpds, ruleset, reports=["RAW_OUTPUT"], saving_dir="./
     for report_type in reports:
         assert_(report_type in available_report_dict, f"Cannot find matching report type for {report_type}. Available ones are {available_report_str}.")
 
+    print("Test implementation of rule engine for ASHRAE Std 229 RCT.")
+    print("")
     report = evaluate_all_rules(rpds)
 
     print(f"Saving reports to: {saving_dir}......")
@@ -148,3 +141,22 @@ def run_project_evaluation(rpds, ruleset, reports=["RAW_OUTPUT"], saving_dir="./
 
     return saving_dir
 
+
+def get_available_reports_by_ruleset(ruleset):
+    if not _setup_workflow(ruleset):
+        assert_(False, f"Unrecognized ruleset: {ruleset}")
+    available_report_modules = rct_report.__getreports__()
+    return [key for key, value in available_report_modules]
+
+
+def get_available_rulesets():
+    return rs.__all__
+
+
+def _setup_workflow(ruleset: str):
+    setup_flag = False
+    if ruleset == RuleSet.ASHRAE9012019_RULESET:
+        SchemaStore.set_ruleset(RuleSet.ASHRAE9012019_RULESET)
+        SchemaEnums.update_schema_enum()
+        setup_flag = True
+    return setup_flag
