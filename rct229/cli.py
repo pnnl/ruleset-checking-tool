@@ -1,22 +1,14 @@
 import click
 
-from rct229.reports.ashrae901_2019_detail_report import ASHRAE9012019DetailReport
-from rct229.reports.ashrae901_2019_summary_report import ASHRAE9012019SummaryReport
-from rct229.reports.engine_raw_output import EngineRawOutput
-from rct229.reports.engine_raw_summary import EngineRawSummary
 from rct229.rule_engine.engine import evaluate_all_rules
 from rct229.rule_engine.rulesets import RuleSet, RuleSetTest
 from rct229.ruletest_engine.run_ruletests import run_ashrae9012019_tests
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.schema.schema_store import SchemaStore
 from rct229.utils.assertions import RCTException
+from rct229.reports import reports as rct_report
 
 CONTEXT_SETTINGS = dict(help_option_names=["-h", "--help"])
-REPORT_MODULE = {
-    "RAW_OUTPUT": EngineRawOutput,
-    "RAW_SUMMARY": EngineRawSummary,
-    "ASHRAE9012019_DETAIL": ASHRAE9012019DetailReport,
-    "ASHRAE9012019_SUMMARY": ASHRAE9012019SummaryReport,
-}
 
 
 def print_version():
@@ -84,20 +76,23 @@ def evaluate(rpds, ruleset, reports, reports_directory):
     # TODO need to switch this to a if-else for selecting rulesets
     if ruleset == RuleSet.ASHRAE9012019_RULESET:
         SchemaStore.set_ruleset(RuleSet.ASHRAE9012019_RULESET)
+        SchemaEnums.update_schema_enum()
         print("Test implementation of rule engine for ASHRAE Std 229 RCT.")
         print("")
 
+    available_report_modules = rct_report.__getreports__()
+    available_report_dict = {key: value for key, value in available_report_modules}
     for report_type in reports:
-        if not REPORT_MODULE.get(report_type):
+        if not report_type in available_report_dict:
             raise RCTException(
-                f"Cannot find matching report type for {report_type}. Available ones are RAW_OUTPUT, RAW_SUMMARY, ASHRAE9012019_DETAIL, ASHRAE9012019_SUMMARY."
+                f"Cannot find matching report type for {report_type}. Available ones are {available_reports}."
             )
 
     report = evaluate_all_rules(rpds)
     # have report attached.
     print(f"Saving reports to: {reports_directory}......")
     for report_type in reports:
-        report_module = REPORT_MODULE[report_type]()
+        report_module = available_report_dict[report_type]()
         report_module.generate(report, reports_directory)
 
 
