@@ -11,6 +11,7 @@ from rct229.schema.schema_store import SchemaStore
 from rct229.utils.assertions import assert_
 import rct229.rulesets as rs
 
+
 def count_number_of_rules(ruleset_standard):
     """Returns the number of rules in a standard
 
@@ -98,13 +99,15 @@ def run_software_test(ruleset, section=None, saving_dir="./"):
         if section is None:
             for idx, outcome in enumerate(outcome_list):
                 assert_(
-                    outcome
-                , f"{RuleSetTest.ASHRAE9012019_TEST_LIST[idx]} failed in the test")
+                    outcome,
+                    f"{RuleSetTest.ASHRAE9012019_TEST_LIST[idx]} failed in the test",
+                )
         else:
             assert_(all(outcome_list), f"{section} failed in the test")
     else:
-        assert_( False,
-            f"ruleset document {ruleset} is not currently supported by the RCT. Please select one from the following: ashrae9012019"
+        assert_(
+            False,
+            f"ruleset document {ruleset} is not currently supported by the RCT. Please select one from the following: ashrae9012019",
         )
     return saving_dir
 
@@ -128,7 +131,10 @@ def run_project_evaluation(rpds, ruleset, reports=["RAW_OUTPUT"], saving_dir="./
     available_report_dict = {key: value for key, value in available_report_modules}
     available_report_str = [key for key, value in available_report_modules]
     for report_type in reports:
-        assert_(report_type in available_report_dict, f"Cannot find matching report type for {report_type}. Available ones are {available_report_str}.")
+        assert_(
+            report_type in available_report_dict,
+            f"Cannot find matching report type for {report_type}. Available ones are {available_report_str}.",
+        )
 
     print("Test implementation of rule engine for ASHRAE Std 229 RCT.")
     print("")
