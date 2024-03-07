@@ -82,10 +82,11 @@ def evaluate(rpds, ruleset, reports, reports_directory):
 
     available_report_modules = rct_report.__getreports__()
     available_report_dict = {key: value for key, value in available_report_modules}
+    available_report_str = [key for key, value in available_report_modules]
     for report_type in reports:
         if not report_type in available_report_dict:
             raise RCTException(
-                f"Cannot find matching report type for {report_type}. Available ones are {available_reports}."
+                f"Cannot find matching report type for {report_type}. Available ones are {available_report_str}."
             )
 
     report = evaluate_all_rules(rpds)

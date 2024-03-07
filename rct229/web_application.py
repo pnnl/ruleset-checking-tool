@@ -1,7 +1,14 @@
 import rct229.rulesets as rulesets
+from rct229.rule_engine.engine import evaluate_all_rules
+from rct229.rule_engine.rulesets import RuleSet, RuleSetTest
+from rct229.reports import reports as rct_report
 from rct229.ruletest_engine.ruletest_jsons.scripts.excel_to_test_json_utilities import (
     generate_rule_test_dictionary,
 )
+from rct229.ruletest_engine.run_ruletests import run_ashrae9012019_tests
+from rct229.schema.schema_enums import SchemaEnums
+from rct229.schema.schema_store import SchemaStore
+from rct229.utils.assertions import assert_
 
 
 def count_number_of_rules(ruleset_standard):
@@ -20,6 +27,15 @@ def count_number_of_rules(ruleset_standard):
         Also contains 'Total' as a key with the sum total rules
 
     """
+
+    if ruleset_standard == RuleSet.ASHRAE9012019_RULESET:
+        SchemaStore.set_ruleset(RuleSet.ASHRAE9012019_RULESET)
+        SchemaEnums.update_schema_enum()
+    else:
+        assert_(
+            False,
+            f"Provided ruleset, {ruleset_standard}, does not match the available ones in the RCT. Available: ashrae9012019 ",
+        )
 
     # Collect rule modules as a list of tuples
     available_rule_definitions = rulesets.__getrules__()
@@ -55,6 +71,12 @@ def count_number_of_ruletest_cases(ruleset_standard):
         Also contains 'Total' as a key with the sum total rule tests
 
     """
+    if ruleset_standard != RuleSet.ASHRAE9012019_RULESET:
+        # TODO this will need to be rewrite once there are more than one ruleset.
+        assert_(
+            False,
+            f"Provided ruleset, {ruleset_standard}, does not match the available ones in the RCT. Available: ashrae9012019 ",
+        )
 
     # Aggregate rule test information into a dictionary
     master_ruletest_dict = generate_rule_test_dictionary(ruleset_standard)
@@ -70,3 +92,59 @@ def count_number_of_ruletest_cases(ruleset_standard):
     count_dict["total"] = sum(count_dict.values())
 
     return count_dict
+
+
+def run_software_test(ruleset, section=None, saving_dir="./"):
+    print(f"software test workflow for section {section}")
+    if ruleset == RuleSet.ASHRAE9012019_RULESET:
+        SchemaStore.set_ruleset(RuleSet.ASHRAE9012019_RULESET)
+        outcome_list = run_ashrae9012019_tests(section)
+        if section is None:
+            for idx, outcome in enumerate(outcome_list):
+                assert_(
+                    outcome
+                , f"{RuleSetTest.ASHRAE9012019_TEST_LIST[idx]} failed in the test")
+        else:
+            assert_(all(outcome_list), f"{section} failed in the test")
+    else:
+        assert_( False,
+            f"ruleset document {ruleset} is not currently supported by the RCT. Please select one from the following: ashrae9012019"
+        )
+    return saving_dir
+
+
+def run_project_evaluation(rpds, ruleset, reports=["RAW_OUTPUT"], saving_dir="./"):
+    assert_(
+        rpds and isinstance(rpds, list),
+        "Empty rpds list, please make sure to provide a list of RPDs",
+    )
+    for rpd in rpds:
+        assert_(isinstance(rpd, dict), "Invalid RPD data, must be loaded as JSON.")
+    assert_(
+        reports and isinstance(reports, list),
+        "Empty report list, please make sure to provide a list of reports",
+    )
+
+    if ruleset == RuleSet.ASHRAE9012019_RULESET:
+        SchemaStore.set_ruleset(RuleSet.ASHRAE9012019_RULESET)
+        SchemaEnums.update_schema_enum()
+        print("Test implementation of rule engine for ASHRAE Std 229 RCT.")
+        print("")
+    else:
+        assert_(False, f"Unrecognized ruleset: {ruleset}")
+
+    available_report_modules = rct_report.__getreports__()
+    available_report_dict = {key: value for key, value in available_report_modules}
+    available_report_str = [key for key, value in available_report_modules]
+    for report_type in reports:
+        assert_(report_type in available_report_dict, f"Cannot find matching report type for {report_type}. Available ones are {available_report_str}.")
+
+    report = evaluate_all_rules(rpds)
+
+    print(f"Saving reports to: {saving_dir}......")
+    for report_type in reports:
+        report_module = available_report_dict[report_type]()
+        report_module.generate(report, saving_dir)
+
+    return saving_dir
+
