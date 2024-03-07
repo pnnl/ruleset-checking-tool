@@ -27,7 +27,9 @@ def get_aggregated_zone_hvac_fan_operating_schedule(rmd, zone_id, is_leap_year=F
     ----------
     aggregated_zone_hvac_fan_operating_schedule: 8760 aggregated fan operating schedule for the zone.
     """
-    num_hours = LeapYear.LEAP_YEAR_HOURS if is_leap_year else LeapYear.REGULAR_YEAR_HOURS
+    num_hours = (
+        LeapYear.LEAP_YEAR_HOURS if is_leap_year else LeapYear.REGULAR_YEAR_HOURS
+    )
 
     schedules = []
     for hvac_id in get_list_hvac_systems_associated_with_zone(rmd, zone_id):
