@@ -115,6 +115,13 @@ class Section22Rule2(RuleDefinitionListIndexedBase):
         def rule_check(self, context, calc_vals=None, data=None):
             design_return_temperature = calc_vals["design_return_temperature"]
             required_return_temperature = calc_vals["required_return_temperature"]
+            return design_return_temperature.to(
+                ureg.kelvin
+            ) == required_return_temperature.to(ureg.kelvin)
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            design_return_temperature = calc_vals["design_return_temperature"]
+            required_return_temperature = calc_vals["required_return_temperature"]
             return std_equal(
                 design_return_temperature.to(ureg.kelvin),
                 required_return_temperature.to(ureg.kelvin),

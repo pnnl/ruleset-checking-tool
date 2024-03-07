@@ -124,6 +124,17 @@ class Section23Rule2(RuleDefinitionListIndexedBase):
 
             return (
                 temperature_control_b == FanSystemTemperatureControl.ZONE_RESET
+                and reset_differential_temperature_b == REQUIRED_RESET_DIFF_TEMP
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            temperature_control_b = calc_vals["temperature_control_b"]
+            reset_differential_temperature_b = calc_vals[
+                "reset_differential_temperature_b"
+            ]
+
+            return (
+                temperature_control_b == FanSystemTemperatureControl.ZONE_RESET
                 and std_equal(
                     reset_differential_temperature_b, REQUIRED_RESET_DIFF_TEMP
                 )

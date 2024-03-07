@@ -167,8 +167,6 @@ class Section23Rule16(RuleDefinitionListIndexedBase):
             return (
                 heating_system_type_b == HEATING_SYSTEM.FLUID_LOOP
                 and hot_water_loop_type == FLUID_LOOP.HEATING
-                and std_equal(
-                    heating_coil_setpoint,
-                    hvac_max_zone_setpoint - REQUIRED_SET_POINT_REDUCTION,
-                )
+                and heating_coil_setpoint
+                == hvac_max_zone_setpoint - REQUIRED_SET_POINT_REDUCTION,
             )
