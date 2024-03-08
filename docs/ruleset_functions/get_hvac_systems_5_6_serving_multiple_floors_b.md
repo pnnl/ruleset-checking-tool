@@ -22,8 +22,8 @@
         - Get the list of zone ids served by the hvac system from the hvac_zone_list_w_area_dict: `hvac_sys_zone_id_list = hvac_zone_list_w_area_dict[hvac_b["id"]]["zone_list"]`
         - Get the list of zones associated with the zone ids: `hvac_zones_list = find_exactly_one_zone(B_RMD, zone_id) for zone_id in hvac_sys_zone_id_list`
         - Create a set of the unique floor names of zones served by the system: `hvac_floors_served_set = {hvac_zone["floor_name"] for hvac_zone in hvac_zones_list}`
-            - Check if the number of unique values is greater than 1, if so then the system serves multiple floors and should be added to the dictionary of hvac systems serving multiple floors with the number of floors as a value: `if len(hvac_floors_served_set) > 1:` 
-                - Add to dict of hvac systems serving multiple floors: `hvac_systems_5_6_serving_multiple_floors_dict_b [hvac_b.id] = len(hvac_floors_served_set)`  
+        - Check if the number of unique floor names is greater than 1: `if len(hvac_floors_served_set) > 1:` 
+            - Add the system id to the dict of hvac systems serving multiple floors, with the number of floors served as the value: `hvac_systems_5_6_serving_multiple_floors_dict_b [hvac_b.id] = len(hvac_floors_served_set)`  
 
 **Returns** `return hvac_systems_5_6_serving_multiple_floors_dict_b`
 
