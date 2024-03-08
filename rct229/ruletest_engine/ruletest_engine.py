@@ -370,6 +370,7 @@ def generate_software_test_report(ruleset, section_list, output_json_path):
 
     # Generate
     report_dict.generate(rct_outcomes, output_json_path)
+    return os.path.join(output_json_path, report_dict.ruleset_report_file)
 
 
 def generate_rct_outcomes_list_from_section_list(section_list):

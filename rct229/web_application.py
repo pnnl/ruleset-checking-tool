@@ -1,3 +1,5 @@
+import os
+
 import rct229.rulesets as rulesets
 from rct229.rule_engine.engine import evaluate_all_rules
 from rct229.rule_engine.rulesets import RuleSet, RuleSetTest
@@ -5,7 +7,9 @@ from rct229.reports import reports as rct_report
 from rct229.ruletest_engine.ruletest_jsons.scripts.excel_to_test_json_utilities import (
     generate_rule_test_dictionary,
 )
-from rct229.ruletest_engine.run_ruletests import run_ashrae9012019_tests
+from rct229.ruletest_engine.run_ruletests import (
+    generate_ashrae9012019_software_test_report,
+)
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.schema.schema_store import SchemaStore
 from rct229.utils.assertions import assert_
@@ -92,27 +96,46 @@ def count_number_of_ruletest_cases(ruleset_standard):
 
 
 def run_software_test(ruleset, section=None, saving_dir="./"):
+    """
+    Run software test and return the saved report directory
+
+    Parameters
+    ----------
+    ruleset str ruleset key
+    section str section id
+    saving_dir str directory to save the report
+
+    Returns
+    -------
+    report_dir str | None the path to the generated report
+
+    """
+    if not _setup_workflow(ruleset):
+        assert_(False, f"Unrecognized ruleset: {ruleset}")
+    report_dir = None
     print(f"software test workflow for section {section}")
     if ruleset == RuleSet.ASHRAE9012019_RULESET:
-        SchemaStore.set_ruleset(RuleSet.ASHRAE9012019_RULESET)
-        outcome_list = run_ashrae9012019_tests(section)
-        if section is None:
-            for idx, outcome in enumerate(outcome_list):
-                assert_(
-                    outcome,
-                    f"{RuleSetTest.ASHRAE9012019_TEST_LIST[idx]} failed in the test",
-                )
-        else:
-            assert_(all(outcome_list), f"{section} failed in the test")
-    else:
-        assert_(
-            False,
-            f"ruleset document {ruleset} is not currently supported by the RCT. Please select one from the following: ashrae9012019",
+        report_dir = generate_ashrae9012019_software_test_report(
+            section, output_dir=saving_dir
         )
-    return saving_dir
+    return report_dir
 
 
 def run_project_evaluation(rpds, ruleset, reports=["RAW_OUTPUT"], saving_dir="./"):
+    """
+
+    Parameters
+    ----------
+    rpds: list[dict] list of dictionary
+    ruleset: str ruleset key
+    reports: list[str] list of strings and each string is the enum value of a report
+    saving_dir: directory to save report.
+
+    Returns
+    -------
+    report list: list of strings contain paths to the report
+
+    """
     assert_(
         rpds and isinstance(rpds, list),
         "Empty rpds list, please make sure to provide a list of RPDs",
@@ -141,14 +164,29 @@ def run_project_evaluation(rpds, ruleset, reports=["RAW_OUTPUT"], saving_dir="./
     report = evaluate_all_rules(rpds)
 
     print(f"Saving reports to: {saving_dir}......")
+    report_path_list = []
     for report_type in reports:
         report_module = available_report_dict[report_type]()
         report_module.generate(report, saving_dir)
+        report_path_list.append(
+            os.path.join(saving_dir, report_module.ruleset_report_file)
+        )
 
-    return saving_dir
+    return report_path_list
 
 
 def get_available_reports_by_ruleset(ruleset):
+    """
+    Get the available report types by ruleset
+    Parameters
+    ----------
+    ruleset str ruleset key
+
+    Returns
+    -------
+    list of strings
+
+    """
     if not _setup_workflow(ruleset):
         assert_(False, f"Unrecognized ruleset: {ruleset}")
     available_report_modules = rct_report.__getreports__()
@@ -156,10 +194,26 @@ def get_available_reports_by_ruleset(ruleset):
 
 
 def get_available_rulesets():
+    """
+    Get a list of available rulesets
+    Returns
+    -------
+
+    """
     return rs.__all__
 
 
 def _setup_workflow(ruleset: str):
+    """
+    Helper function
+    Parameters
+    ----------
+    ruleset
+
+    Returns
+    -------
+
+    """
     setup_flag = False
     if ruleset == RuleSet.ASHRAE9012019_RULESET:
         SchemaStore.set_ruleset(RuleSet.ASHRAE9012019_RULESET)
