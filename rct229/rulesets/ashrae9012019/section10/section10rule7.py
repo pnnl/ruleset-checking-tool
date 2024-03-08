@@ -68,3 +68,22 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
             for system_type, system_ids in baseline_system_types_dict.items()
             for applicable_sys_type in APPLICABLE_SYS_TYPES
         )
+
+    def create_data(self, context, data):
+        rmd_b = context.BASELINE_0
+        baseline_system_types_dict = get_baseline_system_types(rmd_b)
+        baseline_sys_serve_more_than_one_flr_list = (
+            get_hvac_systems_5_6_serving_multiple_floors(rmd_b).keys()
+        )
+
+        return {
+            "baseline_system_types_dict": {
+                system_type: [
+                    system_id
+                    for system_id in system_list
+                    if system_id not in baseline_sys_serve_more_than_one_flr_list
+                ]
+                for system_type, system_list in baseline_system_types_dict.items()
+                if system_type in APPLICABLE_SYS_TYPES and system_list
+            }
+        }
