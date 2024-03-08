@@ -22,7 +22,7 @@ def table_G3_5_2_lookup(equipment_type, subcategory_rating_condition, capacity):
     Returns
     -------
     dict
-        { minimum_efficiency_copnf_cooling: Quantity - the minimum COP for cooling
+        { minimum_efficiency: Quantity - the minimum COP for cooling
         }
     """
 
@@ -53,8 +53,8 @@ def table_G3_5_2_lookup(equipment_type, subcategory_rating_condition, capacity):
         ],
         osstd_table=data["ashrae_90_1_table_G3_5_2"],
     )
-    minimum_efficiency_copnf = osstd_entry["minimum_efficiency_copnf"]
 
     return {
-        "minimum_efficiency_copnf": minimum_efficiency_copnf,
+        "minimum_efficiency": osstd_entry["minimum_efficiency"],
+        "efficiency_metric": osstd_entry["efficiency_metric"],
     }
