@@ -55,14 +55,14 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
     def is_applicable(self, context, data=None):
         rmd_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmd_b)
-        baseline_sys_serve_more_than_one_flr_list = (
+        baseline_sys_5_6_serve_more_than_one_flr_list = (
             get_hvac_systems_5_6_serving_multiple_floors(rmd_b).keys()
         )
 
         return any(
             baseline_system_type_compare(system_type, applicable_sys_type, True)
             and any(
-                system_id not in baseline_sys_serve_more_than_one_flr_list
+                system_id not in baseline_sys_5_6_serve_more_than_one_flr_list
                 for system_id in system_ids
             )
             for system_type, system_ids in baseline_system_types_dict.items()
@@ -87,3 +87,28 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
                 if system_type in APPLICABLE_SYS_TYPES and system_list
             }
         }
+
+    class HVACRule(RuleDefinitionBase):
+        def __init__(self):
+            super(Section10Rule7.HVACRule, self).__init__(
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=False
+                ),
+                required_fields={
+                    "$": ["cooling_system"],
+                    "cooling_system": [
+                        "efficiency_metric_types",
+                        "efficiency_metric_values",
+                    ],
+                },
+            )
+
+        def is_applicable(self, context, data=None):
+            hvac_b = context.BASELINE_0
+            hvac_id_b = hvac_b["id"]
+            baseline_system_types_dict = data["baseline_system_types_dict"]
+
+            return any(
+                hvac_id_b in baseline_system_types_dict[system_type]
+                for system_type in baseline_system_types_dict
+            )
