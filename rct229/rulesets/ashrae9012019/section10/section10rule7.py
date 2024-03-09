@@ -167,10 +167,10 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
             expected_eff_metric_b = expected_baseline_eff_data["efficiency_metric"]
 
             modeled_efficiency_values = getattr_(
-                cooling_system_b, "CoolingSystem", "efficiency_values"
+                cooling_system_b, "CoolingSystem", "efficiency_metric_values"
             )
             modeled_efficiency_metrics = getattr_(
-                cooling_system_b, "CoolingSystem", "efficiency_metrics"
+                cooling_system_b, "CoolingSystem", "efficiency_metric_types"
             )
             modeled_efficiency_b = next(
                 (
@@ -192,6 +192,4 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
-            required_copnf_b = calc_vals["minimum_efficiency_copnf"]
-
             return
