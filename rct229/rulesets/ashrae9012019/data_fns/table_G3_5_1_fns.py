@@ -1,5 +1,8 @@
 from rct229.rulesets.ashrae9012019.data import data
-from rct229.rulesets.ashrae9012019.data_fns.table_utils import find_osstd_table_entry
+from rct229.rulesets.ashrae9012019.data_fns.table_utils import (
+    find_osstd_table_entry,
+    find_osstd_table_entries,
+)
 from rct229.schema.config import ureg
 
 
@@ -43,7 +46,15 @@ def table_G3_5_1_lookup(capacity):
         osstd_table=data["ashrae_90_1_table_G3_5_1"],
     )
 
+    osstd_entries = find_osstd_table_entries(
+        [],
+        osstd_table=data["ashrae_90_1_table_G3_5_1"],
+    )
+
     return {
         "minimum_efficiency": osstd_entry["minimum_efficiency"],
         "efficiency_metric": osstd_entry["efficiency_metric"],
+        "most_conservative_efficiency": max(
+            [entry["minimum_efficiency"] for entry in osstd_entries]
+        ),
     }

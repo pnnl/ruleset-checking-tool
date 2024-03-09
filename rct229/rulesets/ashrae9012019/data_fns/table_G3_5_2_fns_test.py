@@ -11,6 +11,7 @@ def test__table_3_5_2_cooling_60000():
     ) == {
         "minimum_efficiency": 3.0,
         "efficiency_metric": "FULL_LOAD_COEFFICIENT_OF_PERFORMANCE_NO_FAN",
+        "most_conservative_efficiency": 3.4,
     }
 
 
@@ -20,6 +21,7 @@ def test__table_3_5_2_cooling_90000():
     ) == {
         "minimum_efficiency": 3.4,
         "efficiency_metric": "FULL_LOAD_COEFFICIENT_OF_PERFORMANCE_NO_FAN",
+        "most_conservative_efficiency": 3.4,
     }
 
 
@@ -29,6 +31,7 @@ def test__table_3_5_2_cooling_180000():
     ) == {
         "minimum_efficiency": 3.2,
         "efficiency_metric": "FULL_LOAD_COEFFICIENT_OF_PERFORMANCE_NO_FAN",
+        "most_conservative_efficiency": 3.4,
     }
 
 
@@ -38,6 +41,7 @@ def test__table_3_5_2_cooling_360000():
     ) == {
         "minimum_efficiency": 3.1,
         "efficiency_metric": "FULL_LOAD_COEFFICIENT_OF_PERFORMANCE_NO_FAN",
+        "most_conservative_efficiency": 3.4,
     }
 
 
@@ -47,6 +51,7 @@ def test__table_3_5_2_heating_pkg_60000():
     ) == {
         "minimum_efficiency": 3.4,
         "efficiency_metric": "HEAT_PUMP_EFFICIENCY_HIGH_TEMPERATURE_NO_FAN",
+        "most_conservative_efficiency": 3.4,
     }
 
 
@@ -56,6 +61,7 @@ def test__table_3_5_2_heating_47_90000():
     ) == {
         "minimum_efficiency": 3.4,
         "efficiency_metric": "HEAT_PUMP_EFFICIENCY_HIGH_TEMPERATURE_NO_FAN",
+        "most_conservative_efficiency": 3.4,
     }
 
 
@@ -65,6 +71,7 @@ def test__table_3_5_2_heating_17_90000():
     ) == {
         "minimum_efficiency": 2.3,
         "efficiency_metric": "HEAT_PUMP_EFFICIENCY_LOW_TEMPERATURE_NO_FAN",
+        "most_conservative_efficiency": 2.3,
     }
 
 
@@ -74,6 +81,7 @@ def test__table_3_5_2_heating_47_180000():
     ) == {
         "minimum_efficiency": 3.4,
         "efficiency_metric": "HEAT_PUMP_EFFICIENCY_HIGH_TEMPERATURE_NO_FAN",
+        "most_conservative_efficiency": 3.4,
     }
 
 
@@ -83,4 +91,5 @@ def test__table_3_5_2_heating_17_180000():
     ) == {
         "minimum_efficiency": 2.1,
         "efficiency_metric": "HEAT_PUMP_EFFICIENCY_LOW_TEMPERATURE_NO_FAN",
+        "most_conservative_efficiency": 2.3,
     }
