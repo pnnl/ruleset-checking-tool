@@ -213,10 +213,27 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
             return {
                 "total_cool_capacity_b": total_cool_capacity_b,
                 "expected_baseline_eff_b": expected_eff_b,
-                "expected_eff_metric": expected_eff_metric_b,
                 "most_conservative_eff_b": most_conservative_eff_b,
                 "modeled_efficiency_b": modeled_efficiency_b,
             }
 
+        def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
+            total_cool_capacity_b = calc_vals["total_cool_capacity_b"]
+            most_conservative_eff_b = calc_vals["most_conservative_eff_b"]
+            modeled_efficiency_b = calc_vals["modeled_efficiency_b"]
+
+            undetermined_msg = ""
+            if (
+                total_cool_capacity_b is None
+                and modeled_efficiency_b == most_conservative_eff_b
+            ):
+                undetermined_msg = "Check if the modeled baseline DX cooling efficiency was established correctly based upon equipment capacity and type."
+            elif total_cool_capacity_b is None:
+                undetermined_msg = "Check if the modeled baseline DX cooling efficiency was established correctly based upon equipment capacity and type."
+            return undetermined_msg
+
         def rule_check(self, context, calc_vals=None, data=None):
-            return
+            expected_baseline_eff_b = calc_vals["expected_baseline_eff_b"]
+            modeled_efficiency_b = calc_vals["modeled_efficiency_b"]
+
+            return modeled_efficiency_b == expected_baseline_eff_b
