@@ -11,11 +11,17 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types i
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_system_type_compare import (
     baseline_system_type_compare,
 )
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_zone_list_w_area_dict import (
+    get_hvac_zone_list_w_area_dict,
+)
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_systems_5_6_serving_multiple_floors import (
     get_hvac_systems_5_6_serving_multiple_floors,
+)
+from rct229.utils.utility_functions import (
+    find_exactly_one_zone,
 )
 from rct229.utils.assertions import getattr_
 
@@ -77,6 +83,13 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
         baseline_sys_serve_more_than_one_flr_list = (
             get_hvac_systems_5_6_serving_multiple_floors(rmd_b).keys()
         )
+        baseline_system_zones_served_dict = {
+            hvac_id: [
+                find_exactly_one_zone(rmd_b, zone_id)
+                for zone_id in hvac_data["zone_list"]
+            ]
+            for hvac_id, hvac_data in get_hvac_zone_list_w_area_dict(rmd_b).items()
+        }
 
         return {
             "baseline_system_types_dict": {
@@ -87,7 +100,8 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
                 ]
                 for system_type, system_list in baseline_system_types_dict.items()
                 if system_type in APPLICABLE_SYS_TYPES and system_list
-            }
+            },
+            "baseline_system_zones_served_dict": baseline_system_zones_served_dict,
         }
 
     class HVACRule(RuleDefinitionBase):
@@ -118,11 +132,14 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
         def get_calc_vals(self, context, data=None):
             hvac_b = context.BASELINE_0
             cooling_system_b = hvac_b["cooling_system"]
-            baseline_system_types_dict = data["baseline_system_types_dict"]
+            baseline_system_types_dict_b = data["baseline_system_types_dict"]
+            hvac_zone_list_w_area_dict_b = data["baseline_system_zones_served_dict"]
+            zone_list_b = hvac_zone_list_w_area_dict_b[hvac_b.id]
+
             hvac_system_type_b = next(
                 (
                     system_type
-                    for system_type, hvac_b_ids in baseline_system_types_dict.items()
+                    for system_type, hvac_b_ids in baseline_system_types_dict_b.items()
                     if hvac_b["id"] in hvac_b_ids
                 ),
                 None,
@@ -133,6 +150,16 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
                 total_cool_capacity_b = cooling_system_b.get(
                     "design_total_cool_capacity"
                 )
+            if total_cool_capacity_b is not None and hvac_system_type_b in [
+                HVAC_SYS.SYS_3,
+                HVAC_SYS.SYS_3B,
+                HVAC_SYS.SYS_4,
+            ]:
+                hvac_zone_aggregation_factor = zone_list_b[0].get("aggregation_factor")
+                if hvac_zone_aggregation_factor is not None:
+                    total_cool_capacity_b = (
+                        total_cool_capacity_b / hvac_zone_aggregation_factor
+                    )
 
             if hvac_system_type_b in [HVAC_SYS.SYS_1, HVAC_SYS.SYS_1B, HVAC_SYS.SYS_2]:
                 expected_baseline_eff_data = table_G3_5_4_lookup(hvac_system_type_b)
