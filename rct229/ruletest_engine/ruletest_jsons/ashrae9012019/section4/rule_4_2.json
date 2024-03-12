@@ -40,7 +40,33 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space ID 1",
+                                                        "lighting_space_type": "OFFICE_ENCLOSED",
+                                                        "floor_area": 929.0303999999999
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
                                                 "minimum_humidity_setpoint_schedule": "Humidity Schedule 1"
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 1406800.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 375131.02222222224
+                                                }
                                             }
                                         ]
                                     }
@@ -8843,7 +8869,33 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space ID 1",
+                                                        "lighting_space_type": "OFFICE_ENCLOSED",
+                                                        "floor_area": 929.0303999999999
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
                                                 "minimum_humidity_setpoint_schedule": "Humidity Schedule 1"
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 1406800.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 375131.02222222224
+                                                }
                                             }
                                         ]
                                     }
@@ -17664,7 +17716,33 @@
                                             {
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1"
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space ID 1",
+                                                        "lighting_space_type": "OFFICE_ENCLOSED",
+                                                        "floor_area": 929.0303999999999
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 1406800.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 375131.02222222224
+                                                }
                                             }
                                         ]
                                     }
@@ -17698,7 +17776,33 @@
                                             {
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1"
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space ID 1",
+                                                        "lighting_space_type": "OFFICE_ENCLOSED",
+                                                        "floor_area": 929.0303999999999
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 1406800.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 375131.02222222224
+                                                }
                                             }
                                         ]
                                     }
@@ -17751,7 +17855,33 @@
                                             {
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1"
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space ID 1",
+                                                        "lighting_space_type": "OFFICE_ENCLOSED",
+                                                        "floor_area": 929.0303999999999
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 1406800.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 375131.02222222224
+                                                }
                                             }
                                         ]
                                     }
@@ -17785,7 +17915,33 @@
                                             {
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1"
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space ID 1",
+                                                        "lighting_space_type": "OFFICE_ENCLOSED",
+                                                        "floor_area": 929.0303999999999
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 1406800.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 375131.02222222224
+                                                }
                                             }
                                         ]
                                     }
@@ -17838,7 +17994,33 @@
                                             {
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1"
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space ID 1",
+                                                        "lighting_space_type": "OFFICE_ENCLOSED",
+                                                        "floor_area": 929.0303999999999
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 1406800.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 375131.02222222224
+                                                }
                                             }
                                         ]
                                     }
@@ -17873,7 +18055,33 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space ID 1",
+                                                        "lighting_space_type": "OFFICE_ENCLOSED",
+                                                        "floor_area": 929.0303999999999
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
                                                 "minimum_humidity_setpoint_schedule": "Humidity Schedule 1"
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 1406800.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 375131.02222222224
+                                                }
                                             }
                                         ]
                                     }
@@ -26695,7 +26903,33 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space ID 1",
+                                                        "lighting_space_type": "OFFICE_ENCLOSED",
+                                                        "floor_area": 929.0303999999999
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
                                                 "minimum_humidity_setpoint_schedule": "Humidity Schedule 1"
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 1406800.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 375131.02222222224
+                                                }
                                             }
                                         ]
                                     }
@@ -35497,7 +35731,33 @@
                                             {
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1"
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space ID 1",
+                                                        "lighting_space_type": "OFFICE_ENCLOSED",
+                                                        "floor_area": 929.0303999999999
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 1406800.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 375131.02222222224
+                                                }
                                             }
                                         ]
                                     }
