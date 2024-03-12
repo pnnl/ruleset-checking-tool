@@ -56,8 +56,10 @@ SYS_9_TEST_RMD = {
                     ],
                 }
             ],
+            "type": "BASELINE_0",
         }
     ],
+    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 SYS_9B_TEST_RMD = {
@@ -114,8 +116,10 @@ SYS_9B_TEST_RMD = {
                 }
             ],
             "fluid_loops": [{"id": "Purchased HW Loop 1", "type": "HEATING"}],
+            "type": "BASELINE_0",
         }
     ],
+    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 

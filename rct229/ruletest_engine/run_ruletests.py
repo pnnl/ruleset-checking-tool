@@ -54,7 +54,7 @@ def generate_ashrae9012019_software_test_report(
     if section_list is None:
         section_list = RuleSetTest.ASHRAE9012019_TEST_LIST
 
-    generate_software_test_report("ashrae9012019", section_list, output_dir)
+    return generate_software_test_report("ashrae9012019", section_list, output_dir)
 
 
 def _helper_get_all_test_file_by_section(ruleset: str, path: str):
@@ -206,6 +206,7 @@ def run_test_one_jsontest(test_json):
 # run_envelope_tests()
 # run_receptacle_tests()
 # run_airside_tests()
+# run_sys_zone_assignment_tests()
 # run_hvac_general_tests()
 
 # run_test_one_jsontest("ashrae9012019/section5/rule_5_30.json")

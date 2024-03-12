@@ -49,8 +49,10 @@ SYS_10_FIRST_LOGIC_TEST_RMD = {
                     ],
                 }
             ],
+            "type": "BASELINE_0",
         }
     ],
+    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 
@@ -104,8 +106,10 @@ SYS_10_SECOND_LOGIC_TEST_RMD = {
                     ],
                 }
             ],
+            "type": "BASELINE_0",
         }
     ],
+    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 

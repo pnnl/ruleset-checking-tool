@@ -3,7 +3,7 @@
         "Section": 19,
         "Rule": 30,
         "Test": "a",
-        "test_description": "Baseline HVAC system is System 6 and requires a manual check to see that the terminal-unit fan and reheat coil are being energized to meet the heating set point during occupied hours",
+        "test_description": "The project has one building segment with two zones. Baseline HVAC system is System 6 and requires a manual check to see that the terminal-unit fan and reheat coil are being energized to meet the heating set point during occupied hours Expected outcome: UNDETERMINED",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "19-30",
@@ -13,11 +13,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -107,7 +108,7 @@
         "Section": 19,
         "Rule": 30,
         "Test": "b",
-        "test_description": "Baseline HVAC system is System 8 and requires a manual check to see that the terminal-unit fan and reheat coil are being energized to meet the heating set point during occupied hours",
+        "test_description": "The project has one building segment with two zones. Baseline HVAC system is System 8 and requires a manual check to see that the terminal-unit fan and reheat coil are being energized to meet the heating set point during occupied hours Expected outcome: UNDETERMINED",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "19-30",
@@ -117,11 +118,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -260,7 +262,7 @@
         "Section": 19,
         "Rule": 30,
         "Test": "c",
-        "test_description": "Baseline HVAC system does not have an air loop and this rule does not apply",
+        "test_description": "The project has one building segment with one zone. Baseline HVAC system does not have an air loop and this rule does not apply Expected outcome: NOT_APPLICABLE",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "19-30",
@@ -270,11 +272,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",

@@ -3,7 +3,7 @@
         "Section": 23,
         "Rule": 9,
         "Test": "a",
-        "test_description": "System 11 minimum volume setpoint set to 50% of the maximum design airflow rate. EXPECTED: PASS",
+        "test_description": "The project has one building segment with one zone served by System 11 with minimum volume setpoint set to 50% of the maximum design airflow rate. The expected result is: pass",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "23-9",
@@ -19,6 +19,7 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -119,7 +120,7 @@
         "Section": 23,
         "Rule": 9,
         "Test": "b",
-        "test_description": "System 11 minimum volume setpoint set to greater than 50% of the maximum design airflow rate and minimum ventilation flow rate. EXPECTED: UNDETERMINED",
+        "test_description": "The project has one building segment with one zone served by System 11 with minimum volume setpoint set to greater than 50% of the maximum design airflow rate and minimum ventilation flow rate.  The expected result is: undetermined",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "23-9",
@@ -135,6 +136,7 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -235,7 +237,7 @@
         "Section": 23,
         "Rule": 9,
         "Test": "c",
-        "test_description": "System 11 minimum volume setpoint set to less than the minimum ventilation flow rate. EXPECTED: FAIL",
+        "test_description": "The project has one building segment with one zone served by System 11 with minimum volume setpoint set to less than the minimum ventilation flow rate. The expected result is: fail",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "23-9",
@@ -251,6 +253,7 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
