@@ -43,8 +43,8 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Computer Space 1",
-                                                        "floor_area": 92.90303999999999,
                                                         "lighting_space_type": "COMPUTER_ROOM",
+                                                        "floor_area": 92.90303999999999,
                                                         "miscellaneous_equipment": [
                                                             {
                                                                 "id": "Computer Equipment 1",
@@ -53,7 +53,26 @@
                                                             }
                                                         ]
                                                     }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                    }
                                                 ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 1406800.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 375131.02222222224
+                                                }
                                             }
                                         ]
                                     }
@@ -8878,8 +8897,8 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Computer Space 1",
-                                                        "floor_area": 92.90303999999999,
                                                         "lighting_space_type": "COMPUTER_ROOM",
+                                                        "floor_area": 92.90303999999999,
                                                         "miscellaneous_equipment": [
                                                             {
                                                                 "id": "Computer Equipment 1",
@@ -8888,7 +8907,26 @@
                                                             }
                                                         ]
                                                     }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                    }
                                                 ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 1406800.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 375131.02222222224
+                                                }
                                             }
                                         ]
                                     }
