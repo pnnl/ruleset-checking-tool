@@ -124,7 +124,7 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
                         "schedules",
                         "hourly_values",
                     )
-                    if minimum_humidity_stpt_sch_id_b
+                    if schedules_b and minimum_humidity_stpt_sch_id_b
                     else [] * number_of_hours
                 )
 
@@ -142,7 +142,7 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
                         "schedules",
                         "hourly_values",
                     )
-                    if minimum_humidity_stpt_sch_id_p
+                    if schedules_p and minimum_humidity_stpt_sch_id_p
                     else [] * number_of_hours
                 )
 
@@ -160,7 +160,7 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
                         "schedules",
                         "hourly_values",
                     )
-                    if maximum_humidity_stpt_sch_id_b
+                    if schedules_b and maximum_humidity_stpt_sch_id_b
                     else [] * number_of_hours
                 )
 
@@ -178,7 +178,7 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
                         "schedules",
                         "hourly_values",
                     )
-                    if maximum_humidity_stpt_sch_id_p
+                    if schedules_p and maximum_humidity_stpt_sch_id_p
                     else [] * number_of_hours
                 )
 
