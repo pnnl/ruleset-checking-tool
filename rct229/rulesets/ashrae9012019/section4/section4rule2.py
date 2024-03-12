@@ -39,7 +39,7 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
             },
             each_rule=Section4Rule2.RuleSetModelInstanceRule(),
             index_rmr=BASELINE_0,
-            id="4-1",
+            id="4-2",
             description="Humidity Control Setpoints shall be the same for proposed design and baseline building design.",
             ruleset_section_title="Airside System",
             standard_section="Section G3.1-4 Schedule Modeling Requirements for the Proposed design and Baseline building",
@@ -61,15 +61,14 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
                 each_rule=Section4Rule2.RuleSetModelInstanceRule.ZoneRule(),
                 index_rmr=BASELINE_0,
                 list_path="$.buildings[*].zones[*]",
-                required_fields={"$": ["schedules"]},
             )
 
         def create_data(self, context, data=None):
             rmi_b = context.BASELINE_0
             rmi_p = context.PROPOSED
             return {
-                "schedules_b": rmi_b["schedules"],
-                "schedules_p": rmi_p["schedules"],
+                "schedules_b": rmi_b.get("schedules"),
+                "schedules_p": rmi_p.get("schedules"),
                 "zcc_dict_b": get_zone_conditioning_category_rmi_dict(
                     data["climate_zone"], rmi_b
                 ),
@@ -238,7 +237,6 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
                 maximum_humidity_schedule_not_matched = calc_vals[
                     "maximum_humidity_schedule_not_matched"
                 ]
-                print(minimum_humidity_schedule_not_matched)
                 return (
                     minimum_humidity_schedule_not_matched
                     or maximum_humidity_schedule_not_matched
