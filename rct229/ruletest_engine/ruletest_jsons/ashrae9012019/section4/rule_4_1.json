@@ -18,6 +18,12 @@
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
                 "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
@@ -17580,6 +17586,12 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
                 "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
@@ -35161,6 +35173,12 @@
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
                 "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
@@ -52723,6 +52741,12 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
                 "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
