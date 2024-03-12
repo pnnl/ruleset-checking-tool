@@ -102,6 +102,8 @@ class Section4Rule1(RuleDefinitionListIndexedBase):
                 thermostat_cooling_stpt_sch_id_b = zone_b.get(
                     "thermostat_cooling_setpoint_schedule"
                 )
+
+                print(thermostat_cooling_stpt_sch_id_b)
                 thermostat_cooling_stpt_sch_id_p = zone_p.get(
                     "thermostat_cooling_setpoint_schedule"
                 )
