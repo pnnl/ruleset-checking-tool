@@ -24,6 +24,7 @@ from rct229.utils.utility_functions import (
     find_exactly_one_zone,
 )
 from rct229.utils.assertions import getattr_
+from rct229.schema.config import ureg
 
 
 APPLICABLE_SYS_TYPES = [
@@ -39,6 +40,8 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_6B,
 ]
 
+CAPACITY_LOW_THRESHOLD = 65000 * ureg("Btu/hr")
+
 
 class Section10Rule7(RuleDefinitionListIndexedBase):
     """Rule 7 of ASHRAE 90.1-2019 Appendix G Section 10 (HVAC General)"""
@@ -46,7 +49,7 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
     def __init__(self):
         super(Section10Rule7, self).__init__(
             rmrs_used=produce_ruleset_model_instance(
-                USER=True, BASELINE_0=True, PROPOSED=False
+                USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section10Rule7.HVACRule(),
             index_rmr=BASELINE_0,
@@ -217,19 +220,20 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
                 "modeled_efficiency_b": modeled_efficiency_b,
             }
 
-        def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
+        def manual_check_required(self, context, calc_vals=None, data=None):
             total_cool_capacity_b = calc_vals["total_cool_capacity_b"]
+
+            return total_cool_capacity_b is None
+
+        def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
             most_conservative_eff_b = calc_vals["most_conservative_eff_b"]
             modeled_efficiency_b = calc_vals["modeled_efficiency_b"]
 
-            undetermined_msg = ""
-            if (
-                total_cool_capacity_b is None
-                and modeled_efficiency_b == most_conservative_eff_b
-            ):
+            if modeled_efficiency_b == most_conservative_eff_b:
                 undetermined_msg = "Check if the modeled baseline DX cooling efficiency was established correctly based upon equipment capacity and type. The modeled efficiency matches the capacity bracket in Appendix G efficiency tables with the highest efficiency (i.e., most conservative efficiency has been modeled)."
-            elif total_cool_capacity_b is None:
+            else:
                 undetermined_msg = "Check if the modeled baseline DX cooling efficiency was established correctly based upon equipment capacity and type."
+
             return undetermined_msg
 
         def rule_check(self, context, calc_vals=None, data=None):
