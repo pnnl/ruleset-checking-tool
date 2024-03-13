@@ -9,7 +9,7 @@
 
 **Data Lookup:** Table 4.2.1.1 
 
-**Evaluation Context:** Baseline RMD
+**Evaluation Context:** RPD
 
 **Applicability Checks:** None
 
@@ -31,7 +31,7 @@ get_BPF_building_area_types_and_zones()
   - Add the product of expected BPF and area to the expected summed product of BPF and area: `expected_bpf_bat_sum_prod += (expected_bpf * bpf_building_area_type_dict[bpf_bat]["AREA"])`
 
 **Rule Assertion:**
-- If is_undetermined is TRUE; outcome=UNDETERMINED: `if is_undetermined: UNDETERMINED and raise_message "One or more building area types could not be determined for the project's building segments."`
+- If is_undetermined is TRUE; outcome=UNDETERMINED: `if is_undetermined: UNDETERMINED and raise_message "One or more building area types could not be determined for the project's building segments. Assigning a lighting building area type to all building segments will fix this issue."`
 - Else if the output BPF matches the expected BPF; outcome=PASS: `elif bpf_bat_sum_prod/total_area == output_bpf_set[0]: PASS`
 - Otherwise, outcome=FAIL: `else: FAIL`
 

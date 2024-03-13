@@ -5,7 +5,7 @@
 - The function looks at the space lighting type to guess a building area type for a BuildingSegment whose lighting_building_area_type is NONE. The schema note suggests that lighting building area type always be populated - even when the space-by-space lighting method is used. This function ideally would not be used but is included as a backup.
 
 **Inputs:**  
-- **B-RMD**: The baseline ruleset model instance
+- **RMD**: The ruleset model instance
 - **zone_id**: the id of the zone
 
 **Returns:**  
