@@ -2,10 +2,10 @@
 **Schema Version:** 0.0.36  
 **Mandatory Rule:** True  
 **Rule ID:** 1-2  
-**Rule Description:** The performance of the proposed design is calculated in accordance with Standard 90.1-2019 Appendix G, where Performance Cost Index = Proposed building performance (PBP) /Baseline building performance (BBP), where both the PBP and the BBP include all end-use load components associated with the building when calculating the Performance Cost Index (PCI).
-**Rule Assertion:** Options are Pass/Fail/NOT_APPLICABLE
-**Appendix G Section:** G1.2.2
-**90.1 Section Reference:** None
+**Rule Description:** The performance of the proposed design is calculated in accordance with Standard 90.1-2019 Appendix G, where Performance Cost Index = Proposed building performance (PBP) /Baseline building performance (BBP), where both the PBP and the BBP include all end-use load components associated with the building when calculating the Performance Cost Index (PCI).  
+**Rule Assertion:** Options are Pass/Fail/NOT_APPLICABLE  
+**Appendix G Section:** G1.2.2  
+**90.1 Section Reference:** None  
 
 **Data Lookup:** None
 
@@ -30,11 +30,13 @@
 - Get the proposed building performance (PBP): `output_pbp = pbp_set[0]`
 - Get the baseline building performance (BBP): `output_bbp = bbp_set[0]`
 - Get the proposed building performance without any credit for on-site renewable energy generation systems: `output_pbp_nre = pbp_nre_set[0]`  
-**Applicability Check 1:** 
+
+**Applicability Check 1:**  
+
 - If the proposed on site renewable energy production offsets more than 5% of the baseline building performance: NOT_APPLICABLE ` if (output_pbp_nre - output_pbp)/output_bbp > 0.05: NOT_APPLICABLE`
 - Else, continue to rule assertion: `else:`
 
-  **Rule Assertion:** 
+**Rule Assertion:**  
   - Case 1: If PCI = PBP / BBP: PASS `if output_pci == output_pbp / output_bbp: outcome = PASS`
   - Case 2: Else: FAIL `else: outcome = FAIL`
 
