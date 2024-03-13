@@ -1,11 +1,11 @@
 # Section 1 - Rule 1-4
 **Schema Version:** 0.0.36  
 **Mandatory Rule:** True  
-**Rule ID:** 1-4
-**Rule Description:** The PCI shall be less than or equal to the PCIt when calculated in accordance with Standard 90.1 2019, Section 4.2.1.1
+**Rule ID:** 1-4  
+**Rule Description:** The PCI shall be less than or equal to the PCIt when calculated in accordance with Standard 90.1 2019, Section 4.2.1.1  
 **Rule Assertion:** Options are Pass/Fail  
-**Appendix G Section:** None
-**90.1 Section Reference:** 4.2.1.1
+**Appendix G Section:** None  
+**90.1 Section Reference:** 4.2.1.1  
 
 **Data Lookup:** None  
 
@@ -24,7 +24,9 @@
 
 - Get the Performance Cost Index-Target from the output(s): `output_pci_target = pci_target_set[0]`
 - Get the Performance Cost Index from the output(s): `output_pci = pci_set[0]`
+
 **Rule Assertion**
+
 - Case 1: If the PCI is less than or equal to the PCI target, PASS: `if output_pci <= output_pci_target: outcome = PASS`
 - Case 2: Else, FAIL `else: outcome = FAIL`
 
