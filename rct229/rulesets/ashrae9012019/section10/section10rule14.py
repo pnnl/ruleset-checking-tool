@@ -2,9 +2,9 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rulesets.ashrae9012019 import BASELINE_0
-from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_1_fns import table_G3_5_1_lookup
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_2_fns import table_G3_5_2_lookup
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_4_fns import table_G3_5_4_lookup
+from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_5_fns import table_G3_5_5_lookup
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types import (
     get_baseline_system_types,
 )
@@ -17,9 +17,6 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_zone_list_w_area_d
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_systems_5_6_serving_multiple_floors import (
-    get_hvac_systems_5_6_serving_multiple_floors,
-)
 from rct229.utils.utility_functions import (
     find_exactly_one_zone,
 )
@@ -28,34 +25,29 @@ from rct229.schema.config import ureg
 
 
 APPLICABLE_SYS_TYPES = [
-    HVAC_SYS.SYS_1,
-    HVAC_SYS.SYS_1B,
     HVAC_SYS.SYS_2,
     HVAC_SYS.SYS_3,
-    HVAC_SYS.SYS_3B,
+    HVAC_SYS.SYS_3A,
     HVAC_SYS.SYS_4,
-    HVAC_SYS.SYS_5,
-    HVAC_SYS.SYS_5B,
-    HVAC_SYS.SYS_6,
-    HVAC_SYS.SYS_6B,
+    HVAC_SYS.SYS_9,
 ]
 
 CAPACITY_LOW_THRESHOLD = 65000 * ureg("Btu/hr")
 
 
-class Section10Rule7(RuleDefinitionListIndexedBase):
+class Section10Rule14(RuleDefinitionListIndexedBase):
     """Rule 7 of ASHRAE 90.1-2019 Appendix G Section 10 (HVAC General)"""
 
     def __init__(self):
-        super(Section10Rule7, self).__init__(
+        super(Section10Rule14, self).__init__(
             rmrs_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section10Rule7.HVACRule(),
+            each_rule=Section10Rule14.HVACRule(),
             index_rmr=BASELINE_0,
-            id="10-7",
+            id="10-14",
             description=(
-                "Baseline shall be modeled with the COPnfcooling HVAC system efficiency per Tables G3.5.1-G3.5.6.  Where multiple HVAC zones or residential spaces are combined into a single thermal block the cooling efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces."
+                "Baseline shall be modeled with the heating HVAC system efficiency per Tables G3.5.1-G3.5.6 (applies only to the heating efficiency of baseline furnaces and heat pumps). Where multiple HVAC zones or residential spaces are combined into a single thermal block the heating efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces."
             ),
             ruleset_section_title="HVAC General",
             standard_section="",
@@ -66,16 +58,9 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
     def is_applicable(self, context, data=None):
         rmd_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmd_b)
-        baseline_sys_5_6_serve_more_than_one_flr_list = (
-            get_hvac_systems_5_6_serving_multiple_floors(rmd_b).keys()
-        )
 
         return any(
             baseline_system_type_compare(system_type, applicable_sys_type, True)
-            and any(
-                system_id not in baseline_sys_5_6_serve_more_than_one_flr_list
-                for system_id in system_ids
-            )
             for system_type, system_ids in baseline_system_types_dict.items()
             for applicable_sys_type in APPLICABLE_SYS_TYPES
         )
@@ -83,9 +68,6 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
     def create_data(self, context, data):
         rmd_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmd_b)
-        baseline_sys_serve_more_than_one_flr_list = (
-            get_hvac_systems_5_6_serving_multiple_floors(rmd_b).keys()
-        )
         baseline_system_zones_served_dict = {
             hvac_id: [
                 find_exactly_one_zone(rmd_b, zone_id)
@@ -96,11 +78,7 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
 
         return {
             "baseline_system_types_dict": {
-                system_type: [
-                    system_id
-                    for system_id in system_list
-                    if system_id not in baseline_sys_serve_more_than_one_flr_list
-                ]
+                system_type: [system_id for system_id in system_list]
                 for system_type, system_list in baseline_system_types_dict.items()
                 if system_type in APPLICABLE_SYS_TYPES and system_list
             },
@@ -109,7 +87,7 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section10Rule7.HVACRule, self).__init__(
+            super(Section10Rule14.HVACRule, self).__init__(
                 rmrs_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
@@ -178,13 +156,13 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
                 HVAC_SYS.SYS_6,
                 HVAC_SYS.SYS_6B,
             ]:
-                expected_baseline_eff_data = table_G3_5_1_lookup(total_cool_capacity_b)
+                expected_baseline_eff_data = table_G3_5_4_lookup(total_cool_capacity_b)
                 most_conservative_eff_b = expected_baseline_eff_data[
                     "most_conservative_efficiency"
                 ]
 
             else:  # HVAC_SYS.SYS_4
-                expected_baseline_eff_data = table_G3_5_2_lookup(
+                expected_baseline_eff_data = table_G3_5_5_lookup(
                     hvac_system_type_b,
                     "heat pumps, air-cooled (cooling mode)",
                     total_cool_capacity_b,
