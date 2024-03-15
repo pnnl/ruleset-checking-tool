@@ -1,7 +1,5 @@
 from rct229.schema.schema_enums import SchemaEnums
-from rct229.utils.jsonpath_utils import (
-    find_exactly_one_with_field_value,
-)
+from rct229.utils.jsonpath_utils import find_exactly_one_with_field_value
 
 HEATING_SYSTEM = SchemaEnums.schema_enums["HeatingSystemOptions"]
 COOLING_SYSTEM = SchemaEnums.schema_enums["CoolingSystemOptions"]
