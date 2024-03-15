@@ -308,6 +308,38 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
             }
 
         def manual_check_required(self, context, calc_vals=None, data=None):
+            hvac_system_type_b = calc_vals["hvac_system_type_b"]
+            expected_eff_b = calc_vals["expected_eff_b"]
+            expected_high_temp_eff_b = calc_vals["expected_high_temp_eff_b"]
+            expected_low_temp_eff_b = calc_vals["expected_low_temp_eff_b"]
+            modeled_eff_b = calc_vals["modeled_eff_b"]
+            modeled_high_temp_eff_b = calc_vals["modeled_high_temp_eff_b"]
+            modeled_low_temp_eff_b = calc_vals["modeled_low_temp_eff_b"]
+            total_capacity_b = calc_vals["total_capacity_b"]
+
+            # Case 4
+            if (
+                modeled_eff_b is not None
+                and modeled_eff_b == expected_eff_b
+                and total_capacity_b is None
+            ):
+                return True
+
+            # Case 5
+            if (
+                hvac_system_type_b == HVAC_SYS.SYS_4
+                and modeled_high_temp_eff_b is not None
+                and modeled_high_temp_eff_b == expected_high_temp_eff_b
+                and modeled_low_temp_eff_b is not None
+                and modeled_low_temp_eff_b == expected_low_temp_eff_b
+                and total_capacity_b is None
+            ):
+                return True
+
+            # Case 7
+
+            # Case 8
+
             return
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
