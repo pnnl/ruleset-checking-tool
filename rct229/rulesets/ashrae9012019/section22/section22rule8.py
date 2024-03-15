@@ -2,7 +2,6 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rulesets.ashrae9012019 import BASELINE_0
-from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
@@ -13,6 +12,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_primary_secondary_loops
     get_primary_secondary_loops_dict,
 )
 from rct229.schema.config import ureg
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO

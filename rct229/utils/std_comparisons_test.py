@@ -1,10 +1,10 @@
 import operator
 
+from rct229.schema.config import ureg
 from rct229.utils.compare_standard_val import (
     compare_standard_val,
     compare_standard_val_strict,
 )
-from rct229.schema.config import ureg
 from rct229.utils.std_comparisons import std_equal
 
 _M2 = ureg("m2")

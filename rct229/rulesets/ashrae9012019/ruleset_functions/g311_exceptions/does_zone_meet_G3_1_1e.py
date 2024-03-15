@@ -1,10 +1,10 @@
-from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_functions.is_zone_likely_a_vestibule import (
     is_zone_likely_a_vestibule,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_functions.is_zone_mechanically_heated_and_not_cooled import (
     is_zone_mechanically_heated_and_not_cooled,
 )
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.utility_functions import find_exactly_one_zone
 
