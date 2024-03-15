@@ -31,8 +31,10 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_9,
 ]
 
+HEATPUMP_CAPACITY_LOW_RANGE_SAMPLE = 64999 * ureg("Btu/hr")
+FURNACE_CAPACITY_LOW_RANGE_SAMPLE = 224999 * ureg("Btu/hr")
 HEATPUMP_CAPACITY_LOW_THRESHOLD = 65000 * ureg("Btu/hr")
-FURNACE_CAPACITY_LOW_THRESHOLD = 225000 * ureg("Btu/hr")
+FURNACE_CAPACITY_LOW_THREHSOLD = 225000 * ureg("Btu/hr")
 
 
 class Section10Rule14(RuleDefinitionListIndexedBase):
@@ -117,6 +119,7 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
             baseline_system_types_dict_b = data["baseline_system_types_dict"]
             hvac_zone_list_w_area_dict_b = data["baseline_system_zones_served_dict"]
             zone_list_b = hvac_zone_list_w_area_dict_b[hvac_b.id]
+            is_zone_agg_factor_undefined_and_needed = False
 
             hvac_system_type_b = next(
                 (
@@ -134,10 +137,13 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
                 HVAC_SYS.SYS_9,
             ]:
                 total_capacity_b = heating_system_b.get("rated_capacity")
+
                 if total_capacity_b is None:
                     total_capacity_b = heating_system_b.get("design_capacity")
+
             else:  # HVAC_SYS.SYS_4
                 total_capacity_b = cooling_system_b.get("rated_total_cool_capacity")
+
                 if total_capacity_b is None:
                     total_capacity_b = cooling_system_b.get(
                         "design_total_cool_capacity"
@@ -152,33 +158,74 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
                 if hvac_zone_aggregation_factor is not None:
                     total_capacity_b = total_capacity_b / hvac_zone_aggregation_factor
 
+                elif (
+                    hvac_zone_aggregation_factor is None
+                    and hvac_system_type_b in [HVAC_SYS.SYS_3, HVAC_SYS.SYS_3A]
+                    and total_capacity_b > FURNACE_CAPACITY_LOW_THREHSOLD
+                ):
+                    is_zone_agg_factor_undefined_and_needed = True
+
+                elif (
+                    hvac_zone_aggregation_factor is None
+                    and hvac_system_type_b == HVAC_SYS.SYS_4
+                    and total_capacity_b > HEATPUMP_CAPACITY_LOW_THRESHOLD
+                ):
+                    is_zone_agg_factor_undefined_and_needed = True
+
             if hvac_system_type_b == HVAC_SYS.SYS_2:
                 expected_baseline_eff_data = table_G3_5_4_lookup(hvac_system_type_b)
 
             elif hvac_system_type_b in [HVAC_SYS.SYS_3, HVAC_SYS.SYS_3A]:
-                expected_baseline_eff_data = table_G3_5_5_lookup(
-                    "Warm-air furnace, gas-fired",
-                    total_capacity_b,
-                )
+                if total_capacity_b is None:
+                    expected_baseline_eff_data = table_G3_5_5_lookup(
+                        "Warm-air furnace, gas-fired",
+                        FURNACE_CAPACITY_LOW_RANGE_SAMPLE,
+                    )
+                else:
+                    expected_baseline_eff_data = table_G3_5_5_lookup(
+                        "Warm-air furnace, gas-fired",
+                        total_capacity_b,
+                    )
 
             elif hvac_system_type_b == HVAC_SYS.SYS_9:
-                expected_baseline_eff_data = table_G3_5_5_lookup(
-                    "Warm-air unit heaters, gas-fired", total_capacity_b
-                )
+                if total_capacity_b is None:
+                    expected_baseline_eff_data = table_G3_5_5_lookup(
+                        "Warm-air unit heaters, gas-fired",
+                        FURNACE_CAPACITY_LOW_RANGE_SAMPLE,
+                    )
+                else:
+                    expected_baseline_eff_data = table_G3_5_5_lookup(
+                        "Warm-air unit heaters, gas-fired", total_capacity_b
+                    )
 
             else:  # HVAC_SYS.SYS_4
-                expected_baseline_eff_data = [
-                    table_G3_5_2_lookup(
-                        "heat pumps, air-cooled (heating mode)",
-                        "47F db/43F wb",
-                        total_capacity_b,
-                    ),
-                    table_G3_5_2_lookup(
-                        "heat pumps, air-cooled (heating mode)",
-                        "17F db/15F wb",
-                        total_capacity_b,
-                    ),
-                ]
+                if total_capacity_b is None:
+                    expected_baseline_eff_data = [
+                        table_G3_5_2_lookup(
+                            "heat pumps, air-cooled (heating mode)",
+                            "47F db/43F wb",
+                            HEATPUMP_CAPACITY_LOW_RANGE_SAMPLE,
+                        ),
+                        table_G3_5_2_lookup(
+                            "heat pumps, air-cooled (heating mode)",
+                            "17F db/15F wb",
+                            HEATPUMP_CAPACITY_LOW_RANGE_SAMPLE,
+                        ),
+                    ]
+
+                else:
+                    expected_baseline_eff_data = [
+                        table_G3_5_2_lookup(
+                            "heat pumps, air-cooled (heating mode)",
+                            "47F db/43F wb",
+                            total_capacity_b,
+                        ),
+                        table_G3_5_2_lookup(
+                            "heat pumps, air-cooled (heating mode)",
+                            "17F db/15F wb",
+                            total_capacity_b,
+                        ),
+                    ]
 
             modeled_efficiency_values = getattr_(
                 heating_system_b, "HeatingSystem", "efficiency_metric_values"
@@ -187,7 +234,31 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
                 heating_system_b, "HeatingSystem", "efficiency_metric_types"
             )
 
-            if hvac_system_type_b == HVAC_SYS.SYS_4:
+            if hvac_system_type_b in [
+                HVAC_SYS.SYS_2,
+                HVAC_SYS.SYS_3,
+                HVAC_SYS.SYS_3A,
+                HVAC_SYS.SYS_9,
+            ]:
+                expected_high_temp_eff_b = None
+                expected_low_temp_eff_b = None
+                modeled_high_temp_eff_b = None
+                modeled_low_temp_eff_b = None
+                expected_eff_b = expected_baseline_eff_data["minimum_efficiency"]
+                expected_eff_metric_b = expected_baseline_eff_data["efficiency_metric"]
+
+                modeled_eff_b = next(
+                    (
+                        eff
+                        for eff, metric in zip(
+                            modeled_efficiency_values, modeled_efficiency_metrics
+                        )
+                        if metric == expected_eff_metric_b
+                    ),
+                    None,
+                )
+
+            else:
                 expected_eff_b = None
                 modeled_eff_b = None
                 expected_high_temp_eff_b = expected_baseline_eff_data[0][
@@ -224,27 +295,10 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
                     None,
                 )
 
-            else:
-                expected_high_temp_eff_b = None
-                expected_low_temp_eff_b = None
-                modeled_high_temp_eff_b = None
-                modeled_low_temp_eff_b = None
-                expected_eff_b = expected_baseline_eff_data["minimum_efficiency"]
-                expected_eff_metric_b = expected_baseline_eff_data["efficiency_metric"]
-
-                modeled_eff_b = next(
-                    (
-                        eff
-                        for eff, metric in zip(
-                            modeled_efficiency_values, modeled_efficiency_metrics
-                        )
-                        if metric == expected_eff_metric_b
-                    ),
-                    None,
-                )
-
             return {
+                "hvac_system_type_b": hvac_system_type_b,
                 "total_capacity_b": total_capacity_b,
+                "is_zone_agg_factor_undefined_and_needed": is_zone_agg_factor_undefined_and_needed,
                 "expected_eff_b": expected_eff_b,
                 "modeled_eff_b": modeled_eff_b,
                 "expected_high_temp_eff_b": expected_high_temp_eff_b,
