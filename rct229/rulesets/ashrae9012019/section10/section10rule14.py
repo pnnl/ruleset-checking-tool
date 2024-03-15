@@ -346,7 +346,76 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
             return
 
         def rule_check(self, context, calc_vals=None, data=None):
-            expected_eff_b = calc_vals["expected_eff_b"]
-            modeled_eff_b = calc_vals["modeled_eff_b"]
+            hvac_system_type_b = calc_vals["hvac_system_type_b"]
+            total_capacity_b = calc_vals["total_capacity_b"]
+            is_zone_agg_factor_undefined_and_needed = calc_vals[
+                "is_zone_agg_factor_undefined_and_needed"
+            ]
 
-            return modeled_eff_b == expected_eff_b
+            if hvac_system_type_b in [
+                HVAC_SYS.SYS_2,
+                HVAC_SYS.SYS_3,
+                HVAC_SYS.SYS_3A,
+                HVAC_SYS.SYS_9,
+            ]:
+                expected_eff_b = calc_vals["expected_eff_b"]
+                modeled_eff_b = calc_vals["modeled_eff_b"]
+
+                # Case 1
+                return (
+                    modeled_eff_b == expected_eff_b
+                    and total_capacity_b is not None
+                    and not is_zone_agg_factor_undefined_and_needed
+                )
+
+            else:  # HVAC_SYS.SYS_4
+                expected_high_temp_eff_b = calc_vals["expected_high_temp_eff_b"]
+                modeled_high_temp_eff_b = calc_vals["modeled_high_temp_eff_b"]
+                expected_low_temp_eff_b = calc_vals["expected_low_temp_eff_b"]
+                modeled_low_temp_eff_b = calc_vals["modeled_low_temp_eff_b"]
+
+                # Case 2
+                return (
+                    modeled_high_temp_eff_b == expected_high_temp_eff_b
+                    and modeled_low_temp_eff_b == expected_low_temp_eff_b
+                    and total_capacity_b is not None
+                    and not is_zone_agg_factor_undefined_and_needed
+                )
+
+        def get_fail_msg(self, context, calc_vals=None, data=None):
+            hvac_system_type_b = calc_vals["hvac_system_type_b"]
+            total_capacity_b = calc_vals["total_capacity_b"]
+            is_zone_agg_factor_undefined_and_needed = calc_vals[
+                "is_zone_agg_factor_undefined_and_needed"
+            ]
+            expected_high_temp_eff_b = calc_vals["expected_high_temp_eff_b"]
+            modeled_high_temp_eff_b = calc_vals["modeled_high_temp_eff_b"]
+            modeled_low_temp_eff_b = calc_vals["modeled_low_temp_eff_b"]
+
+            # Case 3
+            if (
+                hvac_system_type_b == HVAC_SYS.SYS_4
+                and modeled_high_temp_eff_b == expected_high_temp_eff_b
+                and modeled_low_temp_eff_b is None
+                and total_capacity_b is not None
+                and not is_zone_agg_factor_undefined_and_needed
+            ):
+                return "The efficiency at Tdb 47F was modeled correctly; however the outcome is fail because the modeled efficiency at Tdb 17F was not defined. It is often the case that the Tdb 17F efficiency is captured in the model via the performance curves as opposed to an explicit efficiency value entry. If there is no explicit option to enter an efficiency value at Tdb 17F check that appropriate performance curves were modeled."
+
+            # Case 6
+            elif (
+                hvac_system_type_b == HVAC_SYS.SYS_4
+                and modeled_high_temp_eff_b == expected_high_temp_eff_b
+                and modeled_low_temp_eff_b is None
+                and total_capacity_b is None
+            ):
+                return "Check if the modeled baseline heating efficiency was established correctly based upon equipment capacity and type. The modeled efficiency matches the capacity bracket in Appendix G efficiency tables with the highest efficiency (i.e., most conservative efficiency has been modeled)."
+
+            # Case 9
+            elif (
+                hvac_system_type_b == HVAC_SYS.SYS_4
+                and modeled_high_temp_eff_b == expected_high_temp_eff_b
+                and modeled_low_temp_eff_b is None
+                and is_zone_agg_factor_undefined_and_needed
+            ):
+                return "Check if the modeled baseline heating efficiency was established correctly based upon equipment capacity and type. The modeled efficiency at Tdb 47F was modeled with an efficiency per the capacity bracket in Appendix G efficiency tables with the highest efficiency (i.e., most conservative efficiency has been modeled) and the modeled efficiency at Tdb 17F was not defined. It is often the case that the Tdb 17F efficiency is captured in the model via the performance curves as opposed to an explicit efficiency value entry. If there is no explicit option to enter an efficiency value at Tdb 17F check that appropriate performance curves were modeled."
