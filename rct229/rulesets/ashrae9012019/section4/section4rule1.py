@@ -17,7 +17,10 @@ CONDITIONED_ZONE_TYPE = [
     ZCC.CONDITIONED_NON_RESIDENTIAL,
     ZCC.CONDITIONED_RESIDENTIAL,
 ]
-MANUAL_CHECK_MSG = "There is a temperature schedule mismatch between the baseline and proposed rmrs. Fail unless Table G3.1 #4 baseline column exception #s 1 and/or 2 are applicable"
+MANUAL_CHECK_MSG = (
+    "There is a temperature schedule mismatch between the baseline and proposed rmrs. Fail unless "
+    "Table G3.1 #4 baseline column exception #s 1 and/or 2 are applicable "
+)
 
 
 class Section4Rule1(RuleDefinitionListIndexedBase):
