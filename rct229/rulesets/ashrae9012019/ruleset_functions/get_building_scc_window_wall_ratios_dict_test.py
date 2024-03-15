@@ -123,6 +123,7 @@ TEST_RMR = {
             ],
         }
     ],
+    "type": "BASELINE_0",
 }
 
 TEST_SCC_DICT = {
@@ -134,7 +135,11 @@ TEST_SCC_DICT = {
     "surface_1_1_6": SCC.UNREGULATED,
 }
 
-TEST_RMR_12 = {"id": "229_01", "ruleset_model_descriptions": [TEST_RMR]}
+TEST_RMR_12 = {
+    "id": "229_01",
+    "ruleset_model_descriptions": [TEST_RMR],
+    "data_timestamp": "2024-02-12T09:00Z",
+}
 
 TEST_BUILDING = quantify_rmr(TEST_RMR_12)["ruleset_model_descriptions"][0]["buildings"][
     0

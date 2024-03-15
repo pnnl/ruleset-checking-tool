@@ -3,7 +3,7 @@
         "Section": 22,
         "Rule": 31,
         "Test": "a",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is correctly modeled with 1 chiller when the cooling peak load is 300 tons or less.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is correctly modeled with 1 chiller when the cooling peak load is 300 tons or less.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-31",
@@ -13,11 +13,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -161,7 +162,7 @@
         "Section": 22,
         "Rule": 31,
         "Test": "b",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is inccorrectly modeled with 2 chillers when the cooling peak load is 300 tons or less.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is inccorrectly modeled with 2 chillers when the cooling peak load is 300 tons or less.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-31",
@@ -171,11 +172,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -323,7 +325,7 @@
         "Section": 22,
         "Rule": 31,
         "Test": "c",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7b and is correctly modeled with 2 chillers when the cooling peak load is between 300 -> 600 tons.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7b and is correctly modeled with 2 chillers when the cooling peak load is between 300 -> 600 tons.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-31",
@@ -333,11 +335,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -485,7 +488,7 @@
         "Section": 22,
         "Rule": 31,
         "Test": "d",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is incorrectly modeled with 1 chiller when the cooling peak load is between 300 -> 600 tons.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is incorrectly modeled with 1 chiller when the cooling peak load is between 300 -> 600 tons.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-31",
@@ -495,11 +498,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -643,7 +647,7 @@
         "Section": 22,
         "Rule": 31,
         "Test": "e",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is correctly modeled with 3 chillers when the cooling peak load is 2400 tons.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is correctly modeled with 3 chillers when the cooling peak load is 2400 tons.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-31",
@@ -653,11 +657,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -809,7 +814,7 @@
         "Section": 22,
         "Rule": 31,
         "Test": "f",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is incorrectly modeled with 2 chillers when the cooling peak load is 2400 tons.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is incorrectly modeled with 2 chillers when the cooling peak load is 2400 tons.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-31",
@@ -819,11 +824,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -971,7 +977,7 @@
         "Section": 22,
         "Rule": 31,
         "Test": "g",
-        "test_description": "Baseline building has one zone.  HVAC is system type 5.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 5.  Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-31",
@@ -981,11 +987,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",

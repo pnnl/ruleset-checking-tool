@@ -3,7 +3,7 @@
         "Section": 22,
         "Rule": 27,
         "Test": "a",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is correctly modeled with the is_condenser_water_pump_interlocked key set to true.  Expected Result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is correctly modeled with the is_condenser_water_pump_interlocked key set to true.  Expected Result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-27",
@@ -13,11 +13,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -150,7 +151,7 @@
         "Section": 22,
         "Rule": 27,
         "Test": "b",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is incorrectly modeled with the is_condenser_water_pump_interlocked key set to false.  Expected Result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is incorrectly modeled with the is_condenser_water_pump_interlocked key set to false.  Expected Result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-27",
@@ -160,11 +161,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -297,7 +299,7 @@
         "Section": 22,
         "Rule": 27,
         "Test": "c",
-        "test_description": "Baseline building has one zone.  HVAC is system type 12b and is correctly modeled with the is_condenser_water_pump_interlocked key set to true.  Expected Result: PASS",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 12b and is correctly modeled with the is_condenser_water_pump_interlocked key set to true.  Expected Result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-27",
@@ -307,11 +309,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -427,7 +430,7 @@
         "Section": 22,
         "Rule": 27,
         "Test": "d",
-        "test_description": "Baseline building has one zone.  HVAC is system type 12b and is incorrectly modeled with the is_condenser_water_pump_interlocked key set to false.  Expected Result: FAIL",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 12b and is incorrectly modeled with the is_condenser_water_pump_interlocked key set to false.  Expected Result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-27",
@@ -437,11 +440,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -557,7 +561,7 @@
         "Section": 22,
         "Rule": 27,
         "Test": "e",
-        "test_description": "Baseline building has one zone.  HVAC is system type 4 and does not have a chilled water plant.  Expected Result: Not Applicable",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 4 and does not have a chilled water plant.  Expected Result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-27",
@@ -567,11 +571,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",

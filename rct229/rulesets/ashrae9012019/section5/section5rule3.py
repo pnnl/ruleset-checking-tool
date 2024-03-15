@@ -52,7 +52,7 @@ class Section5Rule3(RuleDefinitionListIndexedBase):
             )
 
         def create_data(self, context, data=None):
-            building_b = context.BASELINE_0_0
+            building_b = context.BASELINE_0
             return {
                 "surface_conditioning_category_dict": get_surface_conditioning_category_dict(
                     data["climate_zone"], building_b
@@ -60,7 +60,7 @@ class Section5Rule3(RuleDefinitionListIndexedBase):
             }
 
         def list_filter(self, context_item, data):
-            surface_b = context_item.BASELINE_0_0
+            surface_b = context_item.BASELINE_0
             return get_opaque_surface_type(surface_b) == OST.ROOF
 
         class SurfaceRule(PartialRuleDefinition):

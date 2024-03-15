@@ -83,3 +83,9 @@ class Section5Rule9(RuleDefinitionListIndexedBase):
             def applicability_check(self, context, calc_vals, data):
                 surface_category = calc_vals["surface_category"]
                 return surface_category != SCC.UNREGULATED
+
+            def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
+                surface_b = context.BASELINE_0
+                surface_id_b = surface_b["id"]
+
+                return f"{surface_id_b} is a regulated floor surface. Conduct a manual check to confirm that Baseline floor assemblies conform with assemblies detailed in Appendix A."

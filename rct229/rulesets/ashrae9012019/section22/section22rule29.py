@@ -9,6 +9,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types i
     get_baseline_system_types,
 )
 from rct229.schema.config import ureg
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import CalcQ
@@ -26,6 +27,7 @@ APPLICABLE_SYS_TYPES = [
 ]
 NOT_APPLICABLE_SYS_TYPES = [HVAC_SYS.SYS_11_1, HVAC_SYS.SYS_11_2, HVAC_SYS.SYS_11_1B]
 REQUIRED_PUMP_POWER = 19 * ureg("W/gpm")
+FluidLoopOptions = SchemaEnums.schema_enums["FluidLoopOptions"]
 
 
 class Section22Rule29(RuleDefinitionListIndexedBase):
@@ -80,7 +82,7 @@ class Section22Rule29(RuleDefinitionListIndexedBase):
 
     def list_filter(self, context_item, data):
         fluid_loops_b = context_item.BASELINE_0
-        return fluid_loops_b.get("pump_power_per_flow_rate")
+        return fluid_loops_b.get("type") == FluidLoopOptions.CONDENSER
 
     class CondensingFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
@@ -88,6 +90,9 @@ class Section22Rule29(RuleDefinitionListIndexedBase):
                 rmrs_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
+                required_fields={
+                    "$": ["pump_power_per_flow_rate"],
+                },
             )
 
         def get_calc_vals(self, context, data=None):

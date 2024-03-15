@@ -51,7 +51,7 @@ class Section5Rule7(RuleDefinitionListIndexedBase):
             )
 
         def create_data(self, context, data=None):
-            building_b = context.BASELINE_0_0
+            building_b = context.BASELINE_0
             return {
                 "surface_conditioning_category_dict": get_surface_conditioning_category_dict(
                     data["climate_zone"], building_b

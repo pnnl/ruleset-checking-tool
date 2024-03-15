@@ -1,10 +1,10 @@
-from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_zone_list_w_area_dict import (
     get_hvac_zone_list_w_area_by_rmi_dict,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_list_hvac_systems_associated_with_zone import (
     get_list_hvac_systems_associated_with_zone,
 )
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.jsonpath_utils import find_one
 from rct229.utils.utility_functions import find_exactly_one_hvac_system
 

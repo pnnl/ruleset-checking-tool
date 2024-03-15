@@ -122,6 +122,7 @@ TEST_RMD_B_G311B = {
             ],
         },
     ],
+    "type": "BASELINE_0",
 }
 
 TEST_RMD_B_G311C = {
@@ -307,6 +308,7 @@ TEST_RMD_B_G311C = {
             "hourly_cooling_design_day": [1.0] * 24,
         },
     ],
+    "type": "BASELINE_0",
 }
 
 TEST_RMD_P = {
@@ -377,8 +379,10 @@ TEST_RMD_P = {
                     ],
                 }
             ],
+            "type": "PROPOSED",
         }
     ],
+    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 TEST_RMD_B_G311D = {
@@ -480,6 +484,7 @@ TEST_RMD_B_G311D = {
             ],
         },
     ],
+    "type": "BASELINE_0",
 }
 
 TEST_RMD_B_G311E = {
@@ -546,6 +551,7 @@ TEST_RMD_B_G311E = {
             ],
         },
     ],
+    "type": "BASELINE_0",
 }
 
 TEST_RMD_B_G311F = {
@@ -612,6 +618,7 @@ TEST_RMD_B_G311F = {
             ],
         },
     ],
+    "type": "BASELINE_0",
 }
 
 TEST_RMD_B_G311G = {
@@ -707,35 +714,60 @@ TEST_RMD_B_G311G = {
         },
         {"id": "occupant_schedule_1", "hourly_cooling_design_day": [1] * 23 + [2] * 1},
     ],
+    "type": "BASELINE_0",
 }
 
 
-TEST_RMD_B_FULL_G311B = {"id": "229", "ruleset_model_descriptions": [TEST_RMD_B_G311B]}
+TEST_RMD_B_FULL_G311B = {
+    "id": "229",
+    "ruleset_model_descriptions": [TEST_RMD_B_G311B],
+    "data_timestamp": "2024-02-12T09:00Z",
+}
 TEST_RMD_B_UNIT_G311B = quantify_rmr(TEST_RMD_B_FULL_G311B)[
     "ruleset_model_descriptions"
 ][0]
 
-TEST_RMD_B_FULL_G311C = {"id": "229", "ruleset_model_descriptions": [TEST_RMD_B_G311C]}
+TEST_RMD_B_FULL_G311C = {
+    "id": "229",
+    "ruleset_model_descriptions": [TEST_RMD_B_G311C],
+    "data_timestamp": "2024-02-12T09:00Z",
+}
 TEST_RMD_B_UNIT_G311C = quantify_rmr(TEST_RMD_B_FULL_G311C)[
     "ruleset_model_descriptions"
 ][0]
 
-TEST_RMD_B_FULL_G311D = {"id": "229", "ruleset_model_descriptions": [TEST_RMD_B_G311D]}
+TEST_RMD_B_FULL_G311D = {
+    "id": "229",
+    "ruleset_model_descriptions": [TEST_RMD_B_G311D],
+    "data_timestamp": "2024-02-12T09:00Z",
+}
 TEST_RMD_B_UNIT_G311D = quantify_rmr(TEST_RMD_B_FULL_G311D)[
     "ruleset_model_descriptions"
 ][0]
 
-TEST_RMD_B_FULL_G311E = {"id": "229", "ruleset_model_descriptions": [TEST_RMD_B_G311E]}
+TEST_RMD_B_FULL_G311E = {
+    "id": "229",
+    "ruleset_model_descriptions": [TEST_RMD_B_G311E],
+    "data_timestamp": "2024-02-12T09:00Z",
+}
 TEST_RMD_B_UNIT_G311E = quantify_rmr(TEST_RMD_B_FULL_G311E)[
     "ruleset_model_descriptions"
 ][0]
 
-TEST_RMD_B_FULL_G311F = {"id": "229", "ruleset_model_descriptions": [TEST_RMD_B_G311F]}
+TEST_RMD_B_FULL_G311F = {
+    "id": "229",
+    "ruleset_model_descriptions": [TEST_RMD_B_G311F],
+    "data_timestamp": "2024-02-12T09:00Z",
+}
 TEST_RMD_B_UNIT_G311F = quantify_rmr(TEST_RMD_B_FULL_G311F)[
     "ruleset_model_descriptions"
 ][0]
 
-TEST_RMD_B_FULL_G311G = {"id": "229", "ruleset_model_descriptions": [TEST_RMD_B_G311G]}
+TEST_RMD_B_FULL_G311G = {
+    "id": "229",
+    "ruleset_model_descriptions": [TEST_RMD_B_G311G],
+    "data_timestamp": "2024-02-12T09:00Z",
+}
 TEST_RMD_B_UNIT_G311G = quantify_rmr(TEST_RMD_B_FULL_G311G)[
     "ruleset_model_descriptions"
 ][0]
@@ -813,8 +845,8 @@ def test__get_zone_target_baseline_system_G3_1_1_c__true():
         TEST_RMD_B_UNIT_G311C, TEST_RMD_UNIT_P, "CZ5A", False
     ) == {
         "Thermal Zone 1": {
-            "expected_system_type": HVAC_SYS.SYS_3,
-            "system_origin": SYSTEMORIGIN.G311C,
+            "expected_system_type": HVAC_SYS.SYS_7,
+            "system_origin": "OTHER_NON_RESIDENTIAL CZ_3b_3c_or_4_to_8 >150,000 ft2 or > 5 floors",
         }
     }
 
@@ -846,7 +878,7 @@ def test__get_zone_target_baseline_system_G3_1_1_f__true():
         TEST_RMD_B_UNIT_G311F, TEST_RMD_UNIT_P, "CZ4A", False
     ) == {
         "Thermal Zone 2": {
-            "expected_system_type": "",
+            "expected_system_type": HVAC_SYS.SYS_5,
             "system_origin": SYSTEMORIGIN.G311F,
         }
     }

@@ -1,12 +1,11 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import RMT
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_7_fns import table_G3_7_lookup
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_8_fns import table_G3_8_lookup
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO, CalcQ
-from rct229.rulesets.ashrae9012019 import RMT
-
 
 CASE3_WARNING = "Project passes based on space-by-space method. Verify if project sues space-by-space method."
 CASE4_WARNING = "Project fails based on space-by-space method. LIGHTING_BUILDING_AREA_TYPE is not known to determine building area method allowance."

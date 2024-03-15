@@ -1,7 +1,7 @@
-from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_zone_list_w_area_dict import (
     get_hvac_zone_list_w_area_by_rmi_dict,
 )
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
@@ -34,6 +34,10 @@ def get_hvac_systems_primarily_serving_comp_room(rmi):
         "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
         rmi,
     ):
+        assert_(
+            hvac_zone_list_w_area_dict.get(hvac["id"]),
+            f"HVAC system {hvac['id']} is missing in the  zone.terminals data group.",
+        )
         hvac_sys_total_floor_area = hvac_zone_list_w_area_dict[hvac["id"]]["total_area"]
         hvac_sys_zone_id_list = hvac_zone_list_w_area_dict[hvac["id"]]["zone_list"]
 

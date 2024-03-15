@@ -1,5 +1,6 @@
 import inspect
 
+from rct229.rule_engine.memoize import memoize
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.get_dict_with_terminal_units_and_zones import (
     get_dict_with_terminal_units_and_zones,
 )
@@ -55,6 +56,7 @@ from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_all
 
 
+@memoize
 def get_baseline_system_types(rmi_b):
     """
     Identify all the baseline system types modeled in a B-RMD.
@@ -104,6 +106,11 @@ def get_baseline_system_types(rmi_b):
         rmi_b,
     ):
         hvac_b_id = hvac_b["id"]
+        assert_(
+            dict_of_zones_and_terminal_units_served_by_hvac_sys.get(hvac_b_id),
+            f"HVAC system {hvac_b_id} is missing in the HeatingVentilatingAiConditioningSystems data group.",
+        )
+
         terminal_unit_id_list = dict_of_zones_and_terminal_units_served_by_hvac_sys[
             hvac_b_id
         ]["terminal_unit_list"]
