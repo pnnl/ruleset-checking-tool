@@ -23,7 +23,6 @@ from rct229.utils.utility_functions import (
 from rct229.utils.assertions import getattr_
 from rct229.schema.config import ureg
 
-
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_2,
     HVAC_SYS.SYS_3,
@@ -32,11 +31,12 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_9,
 ]
 
-CAPACITY_LOW_THRESHOLD = 65000 * ureg("Btu/hr")
+HEATPUMP_CAPACITY_LOW_THRESHOLD = 65000 * ureg("Btu/hr")
+FURNACE_CAPACITY_LOW_THRESHOLD = 225000 * ureg("Btu/hr")
 
 
 class Section10Rule14(RuleDefinitionListIndexedBase):
-    """Rule 7 of ASHRAE 90.1-2019 Appendix G Section 10 (HVAC General)"""
+    """Rule 14 of ASHRAE 90.1-2019 Appendix G Section 10 (HVAC General)"""
 
     def __init__(self):
         super(Section10Rule14, self).__init__(
@@ -61,7 +61,7 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
 
         return any(
             baseline_system_type_compare(system_type, applicable_sys_type, True)
-            for system_type, system_ids in baseline_system_types_dict.items()
+            for system_type in baseline_system_types_dict
             for applicable_sys_type in APPLICABLE_SYS_TYPES
         )
 
@@ -92,8 +92,8 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={
-                    "$": ["cooling_system"],
-                    "cooling_system": [
+                    "$": ["heating_system"],
+                    "heating_system": [
                         "efficiency_metric_types",
                         "efficiency_metric_values",
                     ],
@@ -112,7 +112,8 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
 
         def get_calc_vals(self, context, data=None):
             hvac_b = context.BASELINE_0
-            cooling_system_b = hvac_b["cooling_system"]
+            heating_system_b = data["heating_system"]
+            cooling_system_b = hvac_b.get("cooling_system")
             baseline_system_types_dict_b = data["baseline_system_types_dict"]
             hvac_zone_list_w_area_dict_b = data["baseline_system_zones_served_dict"]
             zone_list_b = hvac_zone_list_w_area_dict_b[hvac_b.id]
@@ -126,96 +127,140 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
                 None,
             )
 
-            total_cool_capacity_b = cooling_system_b.get("rated_total_cool_capacity")
-            if total_cool_capacity_b is None:
-                total_cool_capacity_b = cooling_system_b.get(
-                    "design_total_cool_capacity"
-                )
-            if total_cool_capacity_b is not None and hvac_system_type_b in [
+            if hvac_system_type_b in [
+                HVAC_SYS.SYS_2,
                 HVAC_SYS.SYS_3,
-                HVAC_SYS.SYS_3B,
+                HVAC_SYS.SYS_3A,
+                HVAC_SYS.SYS_9,
+            ]:
+                total_capacity_b = heating_system_b.get("rated_capacity")
+                if total_capacity_b is None:
+                    total_capacity_b = heating_system_b.get("design_capacity")
+            else:  # HVAC_SYS.SYS_4
+                total_capacity_b = cooling_system_b.get("rated_total_cool_capacity")
+                if total_capacity_b is None:
+                    total_capacity_b = cooling_system_b.get(
+                        "design_total_cool_capacity"
+                    )
+
+            if total_capacity_b is not None and hvac_system_type_b in [
+                HVAC_SYS.SYS_3,
+                HVAC_SYS.SYS_3A,
                 HVAC_SYS.SYS_4,
             ]:
                 hvac_zone_aggregation_factor = zone_list_b[0].get("aggregation_factor")
                 if hvac_zone_aggregation_factor is not None:
-                    total_cool_capacity_b = (
-                        total_cool_capacity_b / hvac_zone_aggregation_factor
-                    )
+                    total_capacity_b = total_capacity_b / hvac_zone_aggregation_factor
 
-            if hvac_system_type_b in [HVAC_SYS.SYS_1, HVAC_SYS.SYS_1B, HVAC_SYS.SYS_2]:
+            if hvac_system_type_b == HVAC_SYS.SYS_2:
                 expected_baseline_eff_data = table_G3_5_4_lookup(hvac_system_type_b)
-                most_conservative_eff_b = expected_baseline_eff_data[
-                    "minimum_efficiency"
-                ]
 
-            elif hvac_system_type_b in [
-                HVAC_SYS.SYS_3,
-                HVAC_SYS.SYS_3B,
-                HVAC_SYS.SYS_5,
-                HVAC_SYS.SYS_5B,
-                HVAC_SYS.SYS_6,
-                HVAC_SYS.SYS_6B,
-            ]:
-                expected_baseline_eff_data = table_G3_5_4_lookup(total_cool_capacity_b)
-                most_conservative_eff_b = expected_baseline_eff_data[
-                    "most_conservative_efficiency"
-                ]
+            elif hvac_system_type_b in [HVAC_SYS.SYS_3, HVAC_SYS.SYS_3A]:
+                expected_baseline_eff_data = table_G3_5_5_lookup(
+                    "Warm-air furnace, gas-fired",
+                    total_capacity_b,
+                )
+
+            elif hvac_system_type_b == HVAC_SYS.SYS_9:
+                expected_baseline_eff_data = table_G3_5_5_lookup(
+                    "Warm-air unit heaters, gas-fired", total_capacity_b
+                )
 
             else:  # HVAC_SYS.SYS_4
-                expected_baseline_eff_data = table_G3_5_5_lookup(
-                    hvac_system_type_b,
-                    "heat pumps, air-cooled (cooling mode)",
-                    total_cool_capacity_b,
-                )
-                most_conservative_eff_b = expected_baseline_eff_data[
-                    "most_conservative_efficiency"
+                expected_baseline_eff_data = [
+                    table_G3_5_2_lookup(
+                        "heat pumps, air-cooled (heating mode)",
+                        "47F db/43F wb",
+                        total_capacity_b,
+                    ),
+                    table_G3_5_2_lookup(
+                        "heat pumps, air-cooled (heating mode)",
+                        "17F db/15F wb",
+                        total_capacity_b,
+                    ),
                 ]
 
-            expected_eff_b = expected_baseline_eff_data["minimum_efficiency"]
-            expected_eff_metric_b = expected_baseline_eff_data["efficiency_metric"]
-
             modeled_efficiency_values = getattr_(
-                cooling_system_b, "CoolingSystem", "efficiency_metric_values"
+                heating_system_b, "HeatingSystem", "efficiency_metric_values"
             )
             modeled_efficiency_metrics = getattr_(
-                cooling_system_b, "CoolingSystem", "efficiency_metric_types"
-            )
-            modeled_efficiency_b = next(
-                (
-                    eff
-                    for eff, metric in zip(
-                        modeled_efficiency_values, modeled_efficiency_metrics
-                    )
-                    if metric == expected_eff_metric_b
-                ),
-                None,
+                heating_system_b, "HeatingSystem", "efficiency_metric_types"
             )
 
+            if hvac_system_type_b == HVAC_SYS.SYS_4:
+                expected_eff_b = None
+                modeled_eff_b = None
+                expected_high_temp_eff_b = expected_baseline_eff_data[0][
+                    "minimum_efficiency"
+                ]
+                expected_high_temp_eff_metric_b = expected_baseline_eff_data[0][
+                    "efficiency_metric"
+                ]
+                expected_low_temp_eff_b = expected_baseline_eff_data[1][
+                    "minimum_efficiency"
+                ]
+                expected_low_temp_eff_metric_b = expected_baseline_eff_data[1][
+                    "efficiency_metric"
+                ]
+
+                modeled_high_temp_eff_b = next(
+                    (
+                        eff
+                        for eff, metric in zip(
+                            modeled_efficiency_values, modeled_efficiency_metrics
+                        )
+                        if metric == expected_high_temp_eff_metric_b
+                    ),
+                    None,
+                )
+                modeled_low_temp_eff_b = next(
+                    (
+                        eff
+                        for eff, metric in zip(
+                            modeled_efficiency_values, modeled_efficiency_metrics
+                        )
+                        if metric == expected_low_temp_eff_metric_b
+                    ),
+                    None,
+                )
+
+            else:
+                expected_high_temp_eff_b = None
+                expected_low_temp_eff_b = None
+                modeled_high_temp_eff_b = None
+                modeled_low_temp_eff_b = None
+                expected_eff_b = expected_baseline_eff_data["minimum_efficiency"]
+                expected_eff_metric_b = expected_baseline_eff_data["efficiency_metric"]
+
+                modeled_eff_b = next(
+                    (
+                        eff
+                        for eff, metric in zip(
+                            modeled_efficiency_values, modeled_efficiency_metrics
+                        )
+                        if metric == expected_eff_metric_b
+                    ),
+                    None,
+                )
+
             return {
-                "total_cool_capacity_b": total_cool_capacity_b,
-                "expected_baseline_eff_b": expected_eff_b,
-                "most_conservative_eff_b": most_conservative_eff_b,
-                "modeled_efficiency_b": modeled_efficiency_b,
+                "total_capacity_b": total_capacity_b,
+                "expected_eff_b": expected_eff_b,
+                "modeled_eff_b": modeled_eff_b,
+                "expected_high_temp_eff_b": expected_high_temp_eff_b,
+                "modeled_high_temp_eff_b": modeled_high_temp_eff_b,
+                "expected_low_temp_eff_b": expected_low_temp_eff_b,
+                "modeled_low_temp_eff_b": modeled_low_temp_eff_b,
             }
 
         def manual_check_required(self, context, calc_vals=None, data=None):
-            total_cool_capacity_b = calc_vals["total_cool_capacity_b"]
-
-            return total_cool_capacity_b is None
+            return
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
-            most_conservative_eff_b = calc_vals["most_conservative_eff_b"]
-            modeled_efficiency_b = calc_vals["modeled_efficiency_b"]
-
-            if modeled_efficiency_b == most_conservative_eff_b:
-                undetermined_msg = "Check if the modeled baseline DX cooling efficiency was established correctly based upon equipment capacity and type. The modeled efficiency matches the capacity bracket in Appendix G efficiency tables with the highest efficiency (i.e., most conservative efficiency has been modeled)."
-            else:
-                undetermined_msg = "Check if the modeled baseline DX cooling efficiency was established correctly based upon equipment capacity and type."
-
-            return undetermined_msg
+            return
 
         def rule_check(self, context, calc_vals=None, data=None):
-            expected_baseline_eff_b = calc_vals["expected_baseline_eff_b"]
-            modeled_efficiency_b = calc_vals["modeled_efficiency_b"]
+            expected_eff_b = calc_vals["expected_eff_b"]
+            modeled_eff_b = calc_vals["modeled_eff_b"]
 
-            return modeled_efficiency_b == expected_baseline_eff_b
+            return modeled_eff_b == expected_eff_b
