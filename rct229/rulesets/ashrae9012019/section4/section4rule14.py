@@ -5,12 +5,12 @@ from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_insta
 from rct229.rulesets.ashrae9012019 import PROPOSED
 from rct229.schema.config import ureg
 from rct229.schema.schema_enums import SchemaEnums
-from rct229.utils.assertions import getattr_
-from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.assertions import getattr_, assert_
+from rct229.utils.jsonpath_utils import find_all, find_exactly_one
 from rct229.utils.pint_utils import ZERO, CalcQ
 
-LIGHTING_SPACE = SchemaEnums["LightingSpaceOptions2019ASHRAE901TG37"]
-ENERGY_SOURCE = SchemaEnums["EnergySourceOptions"]
+LIGHTING_SPACE = SchemaEnums.schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
+ENERGY_SOURCE = SchemaEnums.schema_enums["EnergySourceOptions"]
 
 REQ_EQUIP_POWER_DENSITY = 20 * ureg("W/ft2")
 
@@ -32,20 +32,26 @@ class Section4Rule14(RuleDefinitionListIndexedBase):
             is_primary_rule=True,
             rmr_context="ruleset_model_descriptions/0",
             list_path="$.buildings[*].building_segments[*].zones[*].spaces[*]",
+            required_fields={"$": ["schedules"]},
         )
 
-    def create_data(self, context, data):
-        rmd_p = context.proposed
-
-        sch_ids_p = find_all(
-            f'$.buildings[*].building_segments[*].zones[*].spaces[*].miscellaneous_equipment[*][?(@.energy_type="ELECTRICITY")].multiplier_schedule',
+    def is_applicable(self, context, data=None):
+        # not applicable if there are no spaces identified as computer room in the RMD
+        rmd_p = context.PROPOSED
+        spaces_p = find_all(
+            f'$.buildings[*].building_segments[*].zones[*].spaces[*][?(@.lighting_space_type="{LIGHTING_SPACE.COMPUTER_ROOM}")]',
             rmd_p,
         )
-        schedule_p = []
-        for scd_id_p in sch_ids_p:
-            schedule_p += find_all(f'$.schedules[*][?(@id = "{scd_id_p}")]', rmd_p)
+        return spaces_p
 
-        return {"schedule_p": schedule_p}
+    def create_data(self, context, data):
+        rmd_p = context.PROPOSED
+        return {"schedules_p": rmd_p["schedules"]}
+
+    def list_filter(self, context_item, data):
+        # filter out none computer rooms
+        space_p = context_item.PROPOSED
+        return space_p.get("lighting_space_type") == LIGHTING_SPACE.COMPUTER_ROOM
 
     class SpaceRule(RuleDefinitionBase):
         def __init__(self):
@@ -53,51 +59,58 @@ class Section4Rule14(RuleDefinitionListIndexedBase):
                 rmrs_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=False, PROPOSED=True
                 ),
-                required_fields={
-                    "$": [
-                        "lighting_space_type",
-                        "miscellaneous_equipment",
-                        "floor_area",
-                    ],
-                },
-                fail_msg="The space has been classed as a computer room in terms of the lighting space type but the electronic data equipment power density does not appear to exceed 20 w/sf.",
+                fail_msg="The space has been classed as a computer room in terms of the lighting space type but the "
+                         "electronic data equipment power density does not appear to exceed 20 w/sf.",
             )
 
         def get_calc_vals(self, context, data=None):
-            space_p = context.proposed
+            space_p = context.PROPOSED
+            total_space_misc_wattage_including_multiplier_p = ZERO.POWER
 
-            schedule_p = data["schedule_p"]
-            floor_area_p = space_p["floor_area"]
+            schedules_p = data["schedules_p"]
+            floor_area_p = getattr_(space_p, "space", "floor_area")
 
-            total_space_misc_Wattage_including_multiplier_p = ZERO.POWER
-            if space_p["lighting_space_type"] == LIGHTING_SPACE.COMPUTER_ROOM:
-                for misc_equip_p in space_p["miscellaneous_equipment"]:
-                    if misc_equip_p["energy_type"] == ENERGY_SOURCE.ELECTRICITY:
-                        misc_equip_power_p = getattr_(
-                            misc_equip_p, "miscellaneous_equipment", "power"
+            assert_(
+                floor_area_p > ZERO.AREA, f"Space floor area is smaller or equal to 0."
+            )
+            # skip undetermined outcome for no misc equipment, the reasoning behind it is assuming that the room is
+            # identified as a computer room but there is 0 EPD, will generate failed outcome in rule check.
+            for misc_equip_p in find_all(f"$.miscellaneous_equipment[*]", space_p):
+                if (
+                    getattr_(misc_equip_p, "miscellaneous equipment", "energy_type")
+                    == ENERGY_SOURCE.ELECTRICITY
+                ):
+                    misc_equip_power_p = getattr_(
+                        misc_equip_p, "miscellaneous_equipment", "power"
+                    )
+                    mis_multiplier_id_p = misc_equip_p.get("multiplier_schedule")
+
+                    # default value, used when no schedule is present in the misc equipment
+                    misc_multiplier_value_p = 1.0
+                    if mis_multiplier_id_p:
+                        multiplier_schedule_p = find_exactly_one(
+                            f'$.[*][?@(id="{mis_multiplier_id_p}")]', schedules_p
                         )
-                        mis_multiplier_id_p = getattr_(
-                            misc_equip_p,
-                            "miscellaneous_equipment",
-                            "multiplier_schedule",
-                        )
-
-                        total_space_misc_Wattage_including_multiplier_p += min(
-                            1,
+                        misc_multiplier_value_p = min(
+                            1.0,
                             max(
-                                misc_equip_power_p
-                                * find(
-                                    schedule_p,
-                                    lambda d: d.get("id") == mis_multiplier_id_p,
+                                getattr_(
+                                    multiplier_schedule_p, "schedule", "hourly_values"
                                 )
                             ),
                         )
 
-            EPD_p = total_space_misc_Wattage_including_multiplier_p / floor_area_p
+                    total_space_misc_wattage_including_multiplier_p += (
+                        misc_equip_power_p * misc_multiplier_value_p
+                    )
 
-            return {"EPD_p": CalcQ("power_density", EPD_p)}
+            return {
+                "epd_p": CalcQ(
+                    "power_density",
+                    total_space_misc_wattage_including_multiplier_p / floor_area_p,
+                )
+            }
 
         def rule_check(self, context, calc_vals=None, data=None):
-            EPD_p = calc_vals["EPD_p"]
-
-            return EPD_p > REQ_EQUIP_POWER_DENSITY
+            epd_p = calc_vals["epd_p"]
+            return epd_p > REQ_EQUIP_POWER_DENSITY
