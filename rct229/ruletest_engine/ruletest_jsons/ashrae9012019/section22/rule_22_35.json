@@ -3,7 +3,7 @@
         "Section": 22,
         "Rule": 35,
         "Test": "a",
-        "test_description": "Baseline building does not have purchase chilled water. This rule does not apply.",
+        "test_description": "The project has one building segment with two zones. This rule does not apply. Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-35",
@@ -13,11 +13,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "No",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -149,7 +150,7 @@
         "Section": 22,
         "Rule": 35,
         "Test": "b",
-        "test_description": "Baseline building is modeled with purchased chilled water and correctly does not have chilled water reset. Result is still undetermined",
+        "test_description": "The project has one building segment with two zones. Baseline building is modeled with purchased chilled water and correctly does not have chilled water reset. Expected result: Undetermined",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "22-35",
@@ -159,11 +160,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "No",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -285,7 +287,7 @@
         "Section": 22,
         "Rule": 35,
         "Test": "c",
-        "test_description": "Baseline building is modeled with purchased chilled water and incorrectly has chilled water reset. Result is still undetermined",
+        "test_description": "The project has one building segment with two zones. Baseline building is modeled with purchased chilled water and incorrectly has chilled water reset. Expected result: Undetermined",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "22-35",
@@ -295,11 +297,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "No",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",

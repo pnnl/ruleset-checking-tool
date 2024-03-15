@@ -1,4 +1,3 @@
-from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.are_all_terminal_cool_sources_none_or_null import (
     are_all_terminal_cool_sources_none_or_null,
 )
@@ -47,6 +46,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_h
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.utility_functions import has_heating_system, has_preheat_system
 
 HEATING_SYSTEM = SchemaEnums.schema_enums["HeatingSystemOptions"]

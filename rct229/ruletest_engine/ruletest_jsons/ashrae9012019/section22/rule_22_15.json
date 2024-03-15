@@ -3,7 +3,7 @@
         "Section": 22,
         "Rule": 15,
         "Test": "a",
-        "test_description": "Approach temperature on System 7's heat rejection component correctly follows 25.72- (0.24 * design wet bulb temperature) delta Fahrenheit for design wetbulb temperatures between 55 F and 90 F",
+        "test_description": "The project has one building segment with two zones. Approach temperature on System 7's heat rejection component correctly follows 25.72- (0.24 * design wet bulb temperature) delta Fahrenheit for design wetbulb temperatures between 55 F and 90 F. Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-15",
@@ -13,11 +13,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -162,7 +163,7 @@
         "Section": 22,
         "Rule": 15,
         "Test": "b",
-        "test_description": "Approach temperature on System 7's heat rejection component did not correctly follow 25.72- (0.24 * design wet bulb temperature) delta Fahrenheit for design wetbulb temperatures between 55 F and 90 F",
+        "test_description": "The project has one building segment with two zones. Approach temperature on System 7's heat rejection component did not correctly follow 25.72- (0.24 * design wet bulb temperature) delta Fahrenheit for design wetbulb temperatures between 55 F and 90 F. Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-15",
@@ -172,11 +173,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -321,7 +323,7 @@
         "Section": 22,
         "Rule": 15,
         "Test": "c",
-        "test_description": "Approach temperature on System 7's heat rejection component does not fall between 55 F and 90 F. Not applicable.",
+        "test_description": "The project has one building segment with two zones. Approach temperature on System 7's heat rejection component does not fall between 55 F and 90 F. Not applicable.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-15",
@@ -331,11 +333,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",

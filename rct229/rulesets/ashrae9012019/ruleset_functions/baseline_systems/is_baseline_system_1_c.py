@@ -1,4 +1,3 @@
-from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.are_all_terminal_chw_loops_purcahsed_cooling import (
     are_all_terminal_chw_loops_purchased_cooling,
 )
@@ -23,6 +22,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_h
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_cooling_type_none import (
     is_hvac_sys_cooling_type_none,
 )
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.utility_functions import (
     has_fan_system,
     has_heating_system,

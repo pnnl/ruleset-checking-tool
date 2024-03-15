@@ -138,6 +138,8 @@
                 "capacity": 150000.0,
                 "peak_load": 500.0
             }
-        ]
-    }]
+        ],
+        "type": "PROPOSED"
+    }],
+    "data_timestamp": "2024-02-12T09:00Z"
 }

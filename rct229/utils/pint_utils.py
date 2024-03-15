@@ -14,6 +14,34 @@ class UNIT_SYSTEM:
     SI = "SI"
 
 
+_UNIT_LIST = [
+    "V*A",
+    "W",
+    "m3",
+    "m2",
+    "W/m2",
+    "W/(m2*K)",
+    "W/(m*K)",
+    "m3/s",
+    "C",
+    "W/W",
+    "W-s/L",
+    "L/s",
+    "ft3",
+    "ft2",
+    "W/ft2",
+    "Btu/(hr*ft2*R)",
+    "Btu/(hr*ft*R)",
+    "ton",
+    "Btu/hr",
+    "cfm",
+    "F",
+    "kW/ton",
+    "W/gpm",
+    "W/gpm",
+    "cfm",
+]
+
 _UNIT_CONVENTIONS = {
     UNIT_SYSTEM.SI: {
         "transformer_capacity": "V*A",
@@ -27,8 +55,10 @@ _UNIT_CONVENTIONS = {
         "capacity": "W",
         "volumetric_flow_rate": "m3/s",
         "temperature": "C",
+        "temperature_difference": "K",
         "cooling_efficiency": "W/W",
         "power_per_volumetric_flow_rate": "W-s/L",
+        "volumetric_flow_rate_per_power": "s/(L*W)",
         "power_per_flow_rate": "W-s/L",
         "air_flow_rate": "L/s",
     },
@@ -44,8 +74,10 @@ _UNIT_CONVENTIONS = {
         "capacity": "Btu/hr",
         "volumetric_flow_rate": "cfm",
         "temperature": "F",
+        "temperature_difference": "R",
         "cooling_efficiency": "kW/ton",
         "power_per_volumetric_flow_rate": "W/gpm",
+        "volumetric_flow_rate_per_power": "gpm/hp",
         "power_per_flow_rate": "W/gpm",
         "air_flow_rate": "cfm",
     },

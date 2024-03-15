@@ -23,7 +23,7 @@ TEST_RMI = {
                                     "served_by_heating_ventilating_air_conditioning_system": "hvac_4",
                                     "fan": {
                                         "id": "Terminal Fan 1",
-                                        "is_airflow_autosized": True,
+                                        "is_airflow_sized_based_on_design_day": True,
                                     },
                                 },
                                 {
@@ -31,7 +31,7 @@ TEST_RMI = {
                                     "served_by_heating_ventilating_air_conditioning_system": "hvac_5",
                                     "fan": {
                                         "id": "Terminal Fan 2",
-                                        "is_airflow_autosized": True,
+                                        "is_airflow_sized_based_on_design_day": True,
                                     },
                                 },
                                 {
@@ -39,7 +39,7 @@ TEST_RMI = {
                                     "served_by_heating_ventilating_air_conditioning_system": "hvac_5",
                                     "fan": {
                                         "id": "Terminal Fan 3",
-                                        "is_airflow_autosized": False,
+                                        "is_airflow_sized_based_on_design_day": False,
                                     },
                                 },
                                 {
@@ -47,7 +47,7 @@ TEST_RMI = {
                                     "served_by_heating_ventilating_air_conditioning_system": "hvac_6",
                                     "fan": {
                                         "id": "Terminal Fan 4",
-                                        "is_airflow_autosized": True,
+                                        "is_airflow_sized_based_on_design_day": True,
                                     },
                                 },
                                 {
@@ -68,7 +68,7 @@ TEST_RMI = {
                                     "served_by_heating_ventilating_air_conditioning_system": "hvac_2",
                                     "fan": {
                                         "id": "Terminal Fan 6",
-                                        "is_airflow_autosized": True,
+                                        "is_airflow_sized_based_on_design_day": True,
                                     },
                                 }
                             ],
@@ -76,18 +76,21 @@ TEST_RMI = {
                     ],
                     "heating_ventilating_air_conditioning_systems": [
                         {
-                            # Success case - is_airflow_autosized => True
+                            # Success case - is_airflow_sized_based_on_design_day => True
                             "id": "hvac_1",
                             "fan_system": {
                                 "id": "VAV Fan System 1",
                                 "fan_control": "VARIABLE_SPEED_DRIVE",
                                 "supply_fans": [
-                                    {"id": "Supply Fan 1", "is_airflow_autosized": True}
+                                    {
+                                        "id": "Supply Fan 1",
+                                        "is_airflow_sized_based_on_design_day": True,
+                                    }
                                 ],
                             },
                         },
                         {
-                            # Failed case - is_airflow_autosized => False (at least one one)
+                            # Failed case - is_airflow_sized_based_on_design_day => False (at least one one)
                             "id": "hvac_2",
                             "fan_system": {
                                 "id": "VAV Fan System 2",
@@ -95,17 +98,17 @@ TEST_RMI = {
                                 "supply_fans": [
                                     {
                                         "id": "Supply Fan 2-1",
-                                        "is_airflow_autosized": True,
+                                        "is_airflow_sized_based_on_design_day": True,
                                     },
                                     {
                                         "id": "Supply Fan 2-2",
-                                        "is_airflow_autosized": False,
+                                        "is_airflow_sized_based_on_design_day": False,
                                     },
                                 ],
                             },
                         },
                         {
-                            # Raise exception case - is_airflow_autosized => Missing
+                            # Raise exception case - is_airflow_sized_based_on_design_day => Missing
                             "id": "hvac_3",
                             "fan_system": {
                                 "id": "VAV Fan System 3",
@@ -113,7 +116,7 @@ TEST_RMI = {
                                 "supply_fans": [
                                     {
                                         "id": "Supply Fan 3-1",
-                                        "is_airflow_autosized": True,
+                                        "is_airflow_sized_based_on_design_day": True,
                                     },
                                     {
                                         "id": "Supply Fan 3-2",
@@ -138,10 +141,15 @@ TEST_RMI = {
             ],
         }
     ],
+    "type": "BASELINE_0",
 }
 
 
-TEST_RMD = {"id": "ASHRAE229", "ruleset_model_descriptions": [TEST_RMI]}
+TEST_RMD = {
+    "id": "ASHRAE229",
+    "ruleset_model_descriptions": [TEST_RMI],
+    "data_timestamp": "2024-02-12T09:00Z",
+}
 
 
 def test__TEST_RMD__is_valid():
