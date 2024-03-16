@@ -316,6 +316,9 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
             modeled_high_temp_eff_b = calc_vals["modeled_high_temp_eff_b"]
             modeled_low_temp_eff_b = calc_vals["modeled_low_temp_eff_b"]
             total_capacity_b = calc_vals["total_capacity_b"]
+            is_zone_agg_factor_undefined_and_needed = calc_vals[
+                "is_zone_agg_factor_undefined_and_needed"
+            ]
 
             # Case 4
             if (
@@ -337,10 +340,23 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
                 return True
 
             # Case 7
+            if (
+                modeled_eff_b is not None
+                and modeled_eff_b == expected_eff_b
+                and is_zone_agg_factor_undefined_and_needed
+            ):
+                return True
 
             # Case 8
-
-            return
+            if (
+                hvac_system_type_b == HVAC_SYS.SYS_4
+                and modeled_high_temp_eff_b is not None
+                and modeled_high_temp_eff_b == expected_high_temp_eff_b
+                and modeled_low_temp_eff_b is not None
+                and modeled_low_temp_eff_b == expected_low_temp_eff_b
+                and is_zone_agg_factor_undefined_and_needed
+            ):
+                return True
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
             return
