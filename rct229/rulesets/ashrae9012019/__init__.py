@@ -8,6 +8,7 @@ from rct229.schema.schema_store import SchemaStore
 __all__ = [
     "section5",
     "section6",
+    "section10",
     "section18",
     "section19",
     "section21",

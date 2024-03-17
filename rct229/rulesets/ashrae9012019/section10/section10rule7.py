@@ -8,9 +8,6 @@ from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_4_fns import table_G3_5_4
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types import (
     get_baseline_system_types,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_system_type_compare import (
-    baseline_system_type_compare,
-)
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_zone_list_w_area_dict import (
     get_hvac_zone_list_w_area_dict,
 )
@@ -60,6 +57,7 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
             ruleset_section_title="HVAC General",
             standard_section="",
             is_primary_rule=True,
+            list_path="$.ruleset_model_descriptions[*].buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
             rmr_context="ruleset_model_descriptions/0",
         )
 
@@ -69,15 +67,21 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
         baseline_sys_5_6_serve_more_than_one_flr_list = (
             get_hvac_systems_5_6_serving_multiple_floors(rmd_b).keys()
         )
-
-        return any(
-            baseline_system_type_compare(system_type, applicable_sys_type, True)
-            and any(
+        # create a list containing all HVAC systems that are modeled in the rmi_b
+        available_types_list_excl_5_6_multifloor = [
+            system_type
+            for system_type, system_ids in baseline_system_types_dict.items()
+            if any(
                 system_id not in baseline_sys_5_6_serve_more_than_one_flr_list
                 for system_id in system_ids
             )
-            for system_type, system_ids in baseline_system_types_dict.items()
-            for applicable_sys_type in APPLICABLE_SYS_TYPES
+        ]
+
+        return any(
+            [
+                available_type in APPLICABLE_SYS_TYPES
+                for available_type in available_types_list_excl_5_6_multifloor
+            ]
         )
 
     def create_data(self, context, data):
