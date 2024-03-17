@@ -8,11 +8,8 @@ from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_5_fns import table_G3_5_5
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types import (
     get_baseline_system_types,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_system_type_compare import (
-    baseline_system_type_compare,
-)
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_zone_list_w_area_dict import (
-    get_hvac_zone_list_w_area_dict,
+    get_hvac_zone_list_w_area_by_rmi_dict,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
@@ -28,6 +25,13 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_3,
     HVAC_SYS.SYS_3A,
     HVAC_SYS.SYS_4,
+    HVAC_SYS.SYS_9,
+]
+
+SINGLE_EFF_SYS_TYPES = [
+    HVAC_SYS.SYS_2,
+    HVAC_SYS.SYS_3,
+    HVAC_SYS.SYS_3A,
     HVAC_SYS.SYS_9,
 ]
 
@@ -54,17 +58,24 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
             ruleset_section_title="HVAC General",
             standard_section="",
             is_primary_rule=True,
+            list_path="$.ruleset_model_descriptions[*].buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
             rmr_context="ruleset_model_descriptions/0",
         )
 
     def is_applicable(self, context, data=None):
         rmd_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmd_b)
-
+        # create a list containing all HVAC systems that are modeled in the rmi_b
+        available_types_list = [
+            hvac_type
+            for hvac_type in baseline_system_types_dict
+            if len(baseline_system_types_dict[hvac_type]) > 0
+        ]
         return any(
-            baseline_system_type_compare(system_type, applicable_sys_type, True)
-            for system_type in baseline_system_types_dict
-            for applicable_sys_type in APPLICABLE_SYS_TYPES
+            [
+                available_type in APPLICABLE_SYS_TYPES
+                for available_type in available_types_list
+            ]
         )
 
     def create_data(self, context, data):
@@ -75,7 +86,9 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
                 find_exactly_one_zone(rmd_b, zone_id)
                 for zone_id in hvac_data["zone_list"]
             ]
-            for hvac_id, hvac_data in get_hvac_zone_list_w_area_dict(rmd_b).items()
+            for hvac_id, hvac_data in get_hvac_zone_list_w_area_by_rmi_dict(
+                rmd_b
+            ).items()
         }
 
         return {
@@ -114,7 +127,7 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
 
         def get_calc_vals(self, context, data=None):
             hvac_b = context.BASELINE_0
-            heating_system_b = data["heating_system"]
+            heating_system_b = hvac_b["heating_system"]
             cooling_system_b = hvac_b.get("cooling_system")
             baseline_system_types_dict_b = data["baseline_system_types_dict"]
             hvac_zone_list_w_area_dict_b = data["baseline_system_zones_served_dict"]
@@ -130,12 +143,7 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
                 None,
             )
 
-            if hvac_system_type_b in [
-                HVAC_SYS.SYS_2,
-                HVAC_SYS.SYS_3,
-                HVAC_SYS.SYS_3A,
-                HVAC_SYS.SYS_9,
-            ]:
+            if hvac_system_type_b in SINGLE_EFF_SYS_TYPES:
                 total_capacity_b = heating_system_b.get("rated_capacity")
 
                 if total_capacity_b is None:
@@ -234,12 +242,7 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
                 heating_system_b, "HeatingSystem", "efficiency_metric_types"
             )
 
-            if hvac_system_type_b in [
-                HVAC_SYS.SYS_2,
-                HVAC_SYS.SYS_3,
-                HVAC_SYS.SYS_3A,
-                HVAC_SYS.SYS_9,
-            ]:
+            if hvac_system_type_b in SINGLE_EFF_SYS_TYPES:
                 expected_high_temp_eff_b = None
                 expected_low_temp_eff_b = None
                 modeled_high_temp_eff_b = None
@@ -368,12 +371,7 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
                 "is_zone_agg_factor_undefined_and_needed"
             ]
 
-            if hvac_system_type_b in [
-                HVAC_SYS.SYS_2,
-                HVAC_SYS.SYS_3,
-                HVAC_SYS.SYS_3A,
-                HVAC_SYS.SYS_9,
-            ]:
+            if hvac_system_type_b in SINGLE_EFF_SYS_TYPES:
                 expected_eff_b = calc_vals["expected_eff_b"]
                 modeled_eff_b = calc_vals["modeled_eff_b"]
 
