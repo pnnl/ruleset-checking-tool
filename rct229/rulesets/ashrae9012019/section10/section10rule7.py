@@ -87,7 +87,7 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
     def create_data(self, context, data):
         rmd_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmd_b)
-        baseline_sys_serve_more_than_one_flr_list = (
+        baseline_sys_5_6_serve_more_than_one_flr_list = (
             get_hvac_systems_5_6_serving_multiple_floors(rmd_b).keys()
         )
         baseline_system_zones_served_dict = {
@@ -103,7 +103,7 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
                 system_type: [
                     system_id
                     for system_id in system_list
-                    if system_id not in baseline_sys_serve_more_than_one_flr_list
+                    if system_id not in baseline_sys_5_6_serve_more_than_one_flr_list
                 ]
                 for system_type, system_list in baseline_system_types_dict.items()
                 if system_type in APPLICABLE_SYS_TYPES and system_list
@@ -142,6 +142,7 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
             baseline_system_types_dict_b = data["baseline_system_types_dict"]
             hvac_zone_list_w_area_dict_b = data["baseline_system_zones_served_dict"]
             zone_list_b = hvac_zone_list_w_area_dict_b[hvac_b.id]
+            is_zone_agg_factor_undefined_and_needed = False
 
             hvac_system_type_b = next(
                 (
@@ -167,6 +168,11 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
                     total_cool_capacity_b = (
                         total_cool_capacity_b / hvac_zone_aggregation_factor
                     )
+                elif (
+                    hvac_zone_aggregation_factor is None
+                    and total_cool_capacity_b >= CAPACITY_LOW_THRESHOLD
+                ):
+                    is_zone_agg_factor_undefined_and_needed = True
 
             if hvac_system_type_b in [HVAC_SYS.SYS_1, HVAC_SYS.SYS_1B, HVAC_SYS.SYS_2]:
                 expected_baseline_eff_data = table_G3_5_4_lookup(hvac_system_type_b)
@@ -219,6 +225,7 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
 
             return {
                 "total_cool_capacity_b": total_cool_capacity_b,
+                "is_zone_agg_factor_undefined_and_needed": is_zone_agg_factor_undefined_and_needed,
                 "expected_baseline_eff_b": expected_eff_b,
                 "most_conservative_eff_b": most_conservative_eff_b,
                 "modeled_efficiency_b": modeled_efficiency_b,
@@ -226,8 +233,14 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
 
         def manual_check_required(self, context, calc_vals=None, data=None):
             total_cool_capacity_b = calc_vals["total_cool_capacity_b"]
+            is_zone_agg_factor_undefined_and_needed = calc_vals[
+                "is_zone_agg_factor_undefined_and_needed"
+            ]
 
-            return total_cool_capacity_b is None
+            return (
+                total_cool_capacity_b is None
+                or is_zone_agg_factor_undefined_and_needed is None
+            )
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
             most_conservative_eff_b = calc_vals["most_conservative_eff_b"]
