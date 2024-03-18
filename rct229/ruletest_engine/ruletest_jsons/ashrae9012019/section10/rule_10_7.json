@@ -39,7 +39,7 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "floor_area": 1000
+                                                        "floor_area": 929.0303999999999
                                                     }
                                                 ],
                                                 "terminals": [
@@ -135,7 +135,7 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "floor_area": 1000
+                                                        "floor_area": 929.0303999999999
                                                     }
                                                 ],
                                                 "terminals": [
@@ -231,7 +231,7 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "floor_area": 1000
+                                                        "floor_area": 929.0303999999999
                                                     }
                                                 ],
                                                 "terminals": [
@@ -328,7 +328,7 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "floor_area": 1000
+                                                        "floor_area": 929.0303999999999
                                                     }
                                                 ],
                                                 "terminals": [
@@ -424,7 +424,7 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "floor_area": 1000
+                                                        "floor_area": 929.0303999999999
                                                     }
                                                 ],
                                                 "terminals": [
@@ -444,7 +444,7 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 2",
-                                                        "floor_area": 1000
+                                                        "floor_area": 929.0303999999999
                                                     }
                                                 ],
                                                 "terminals": [
