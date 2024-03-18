@@ -49,6 +49,8 @@
                                                             {
                                                                 "id": "Computer Equipment 1",
                                                                 "multiplier_schedule": "Equipment Schedule 1",
+                                                                "energy_type": "ELECTRICITY",
+                                                                "type": "INFORMATION_TECHNOLOGY_EQUIPMENT",
                                                                 "power": 25000
                                                             }
                                                         ]
@@ -8903,6 +8905,8 @@
                                                             {
                                                                 "id": "Computer Equipment 1",
                                                                 "multiplier_schedule": "Equipment Schedule 1",
+                                                                "energy_type": "ELECTRICITY",
+                                                                "type": "INFORMATION_TECHNOLOGY_EQUIPMENT",
                                                                 "power": 10000
                                                             }
                                                         ]
