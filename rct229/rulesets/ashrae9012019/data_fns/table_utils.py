@@ -77,7 +77,7 @@ def find_osstd_table_entries(match_field_name_value_pairs, osstd_table):
     assert type(osstd_table) is dict
 
     keys = list(osstd_table)
-    assert len(keys) is 1
+    assert len(keys) == 1
 
     data_list = osstd_table[keys[0]]
     assert type(data_list) is list

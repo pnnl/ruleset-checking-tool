@@ -20,7 +20,7 @@ def table_G3_5_4_lookup(equipment_type):
         [
             ("equipment_type", equipment_type),
         ],
-        osstd_table=data["ashrae_90_1_table_G3_5_4.json"],
+        osstd_table=data["ashrae_90_1_table_G3_5_4"],
     )
 
     return {
