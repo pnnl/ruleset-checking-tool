@@ -238,8 +238,7 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
             ]
 
             return (
-                total_cool_capacity_b is None
-                or is_zone_agg_factor_undefined_and_needed is None
+                total_cool_capacity_b is None or is_zone_agg_factor_undefined_and_needed
             )
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
