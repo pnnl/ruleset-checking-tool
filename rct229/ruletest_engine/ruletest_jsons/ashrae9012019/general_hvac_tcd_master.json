@@ -443,7 +443,8 @@
                                                 "floor_name": "Floor2",
                                                 "spaces": [
                                                     {
-                                                        "id": "Space 2"
+                                                        "id": "Space 2",
+                                                        "floor_area": 929.0303999999999
                                                     }
                                                 ],
                                                 "terminals": [
@@ -965,7 +966,8 @@
                                                 "floor_name": "Floor2",
                                                 "spaces": [
                                                     {
-                                                        "id": "Space 2"
+                                                        "id": "Space 2",
+                                                        "floor_area": 929.0303999999999
                                                     }
                                                 ],
                                                 "terminals": [
