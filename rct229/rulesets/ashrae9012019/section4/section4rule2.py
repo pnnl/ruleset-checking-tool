@@ -45,12 +45,14 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-4 Schedule Modeling Requirements for the Proposed design and Baseline building",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            data_items={"is_leap_year_b": (BASELINE_0, "calendar/is_leap_year")},
         )
 
     def create_data(self, context, data=None):
         rmr_b = context.BASELINE_0
-        return {"climate_zone": rmr_b["weather"]["climate_zone"]}
+        return {
+            "climate_zone": rmr_b["weather"]["climate_zone"],
+            "is_leap_year_b": rmr_b["calendar"]["is_leap_year"],
+        }
 
     class RuleSetModelInstanceRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -60,7 +62,7 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
                 ),
                 each_rule=Section4Rule2.RuleSetModelInstanceRule.ZoneRule(),
                 index_rmr=BASELINE_0,
-                list_path="$.buildings[*].zones[*]",
+                list_path="$.buildings[*].building_segments[*].zones[*]",
             )
 
         def create_data(self, context, data=None):
@@ -74,7 +76,7 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
                 ),
             }
 
-        def list_filter(self, context_item, data=None):
+        def list_filter(self, context_item, data):
             zcc_dict_b = data["zcc_dict_b"]
             zone_b = context_item.BASELINE_0
             return zcc_dict_b[zone_b["id"]] in CONDITIONED_ZONE_TYPE
@@ -128,11 +130,6 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
                     else [] * number_of_hours
                 )
 
-                assert_(
-                    len(minimum_humidity_stpt_hourly_values_b) == number_of_hours,
-                    f"Schedule id: {minimum_humidity_stpt_sch_id_b} has number of hours of {len(minimum_humidity_stpt_hourly_values_b)}, expecting {number_of_hours}",
-                )
-
                 minimum_humidity_stpt_hourly_values_p = (
                     getattr_(
                         find_exactly_one(
@@ -144,11 +141,6 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
                     )
                     if schedules_p and minimum_humidity_stpt_sch_id_p
                     else [] * number_of_hours
-                )
-
-                assert_(
-                    len(minimum_humidity_stpt_hourly_values_p) == number_of_hours,
-                    f"Schedule id: {minimum_humidity_stpt_sch_id_p} has number of hours of {len(minimum_humidity_stpt_hourly_values_p)}, expecting {number_of_hours}",
                 )
 
                 maximum_humidity_stpt_hourly_values_b = (
@@ -164,11 +156,6 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
                     else [] * number_of_hours
                 )
 
-                assert_(
-                    len(maximum_humidity_stpt_hourly_values_b) == number_of_hours,
-                    f"Schedule id: {maximum_humidity_stpt_sch_id_b} has number of hours of {len(maximum_humidity_stpt_hourly_values_b)}, expecting {number_of_hours}",
-                )
-
                 maximum_humidity_stpt_hourly_values_p = (
                     getattr_(
                         find_exactly_one(
@@ -182,21 +169,16 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
                     else [] * number_of_hours
                 )
 
-                assert_(
-                    len(maximum_humidity_stpt_hourly_values_p) == number_of_hours,
-                    f"Schedule id: {maximum_humidity_stpt_sch_id_p} has number of hours of {len(maximum_humidity_stpt_hourly_values_p)}, expecting {number_of_hours}",
-                )
-
                 minimum_humidity_schedule_not_matched = (
                     minimum_humidity_stpt_sch_id_b
                     and minimum_humidity_stpt_sch_id_p
-                    and minimum_humidity_stpt_hourly_values_p
+                    and minimum_humidity_stpt_hourly_values_b
                     != minimum_humidity_stpt_hourly_values_p
                 )
                 minimum_humidity_schedule_matched = (
                     minimum_humidity_stpt_sch_id_b
                     and minimum_humidity_stpt_sch_id_p
-                    and minimum_humidity_stpt_hourly_values_p
+                    and minimum_humidity_stpt_hourly_values_b
                     == minimum_humidity_stpt_hourly_values_p
                 ) or (
                     not minimum_humidity_stpt_sch_id_b
@@ -206,13 +188,13 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
                 maximum_humidity_schedule_not_matched = (
                     maximum_humidity_stpt_sch_id_b
                     and maximum_humidity_stpt_sch_id_p
-                    and maximum_humidity_stpt_hourly_values_p
+                    and maximum_humidity_stpt_hourly_values_b
                     != maximum_humidity_stpt_hourly_values_p
                 )
                 maximum_humidity_schedule_matched = (
                     maximum_humidity_stpt_sch_id_b
                     and maximum_humidity_stpt_sch_id_p
-                    and maximum_humidity_stpt_hourly_values_p
+                    and maximum_humidity_stpt_hourly_values_b
                     == maximum_humidity_stpt_hourly_values_p
                 ) or (
                     not maximum_humidity_stpt_sch_id_b
