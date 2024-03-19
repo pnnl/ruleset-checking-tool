@@ -179,15 +179,15 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
                                 ]
                             )
 
-            zone_info[hvac_id_b]["supply_flow_p"] = sum(
-                [
-                    terminal_p.get("primary_airflow", ZERO.FLOW)
-                    for terminal_p in find_all(
-                        f'$.buildings[*].building_segments[*].zones[*][?(@.id = "{zone_id_b}")].terminals[*]',
-                        rmi_p,
-                    )
-                ]
-            )
+                zone_info[hvac_id_b]["supply_flow_p"] += sum(
+                    [
+                        terminal_p.get("primary_airflow", ZERO.FLOW)
+                        for terminal_p in find_all(
+                            f'$.buildings[*].building_segments[*].zones[*][?(@.id = "{zone_id_b}")].terminals[*]',
+                            rmi_p,
+                        )
+                    ]
+                )
 
             zone_info[hvac_id_b]["design_thermostat_cooling_setpoint"] = min(
                 design_thermostat_cooling_setpoint
