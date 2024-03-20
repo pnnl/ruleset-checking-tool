@@ -127,7 +127,15 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
                         "hourly_values",
                     )
                     if schedules_b and minimum_humidity_stpt_sch_id_b
-                    else [] * number_of_hours
+                    else None
+                )
+                assert_(
+                    minimum_humidity_stpt_hourly_values_b is None
+                    or isinstance(minimum_humidity_stpt_hourly_values_b, list)
+                    and len(minimum_humidity_stpt_hourly_values_b) == number_of_hours,
+                    f"minimum humidity setpoint hourly schedule {minimum_humidity_stpt_sch_id_b} have unexpected number of hours. The hours should be {number_of_hours}, but got {len(minimum_humidity_stpt_hourly_values_b)} instead."
+                    if minimum_humidity_stpt_hourly_values_b
+                    else "minimum humidity setpoint hourly schedule does not exist in the baseline model.",
                 )
 
                 minimum_humidity_stpt_hourly_values_p = (
@@ -140,7 +148,15 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
                         "hourly_values",
                     )
                     if schedules_p and minimum_humidity_stpt_sch_id_p
-                    else [] * number_of_hours
+                    else None
+                )
+                assert_(
+                    minimum_humidity_stpt_hourly_values_p is None
+                    or isinstance(minimum_humidity_stpt_hourly_values_p, list)
+                    and len(minimum_humidity_stpt_hourly_values_p) == number_of_hours,
+                    f"minimum humidity setpoint hourly schedule {minimum_humidity_stpt_sch_id_p} have unexpected number of hours. The hours should be {number_of_hours}, but got {len(minimum_humidity_stpt_hourly_values_p)} instead."
+                    if minimum_humidity_stpt_hourly_values_p
+                    else "minimum humidity setpoint hourly schedule does not exist in the proposed model.",
                 )
 
                 maximum_humidity_stpt_hourly_values_b = (
@@ -153,7 +169,15 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
                         "hourly_values",
                     )
                     if schedules_b and maximum_humidity_stpt_sch_id_b
-                    else [] * number_of_hours
+                    else None
+                )
+                assert_(
+                    maximum_humidity_stpt_hourly_values_b is None
+                    or isinstance(maximum_humidity_stpt_hourly_values_b, list)
+                    and len(maximum_humidity_stpt_hourly_values_b) == number_of_hours,
+                    f"maximum humidity setpoint hourly schedule {maximum_humidity_stpt_sch_id_b} have unexpected number of hours. The hours should be {number_of_hours}, but got {len(maximum_humidity_stpt_hourly_values_b)} instead."
+                    if maximum_humidity_stpt_hourly_values_b
+                    else "maximum humidity setpoint hourly schedule does not exist in the baseline model.",
                 )
 
                 maximum_humidity_stpt_hourly_values_p = (
@@ -166,62 +190,72 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
                         "hourly_values",
                     )
                     if schedules_p and maximum_humidity_stpt_sch_id_p
-                    else [] * number_of_hours
+                    else None
+                )
+                assert_(
+                    maximum_humidity_stpt_hourly_values_p is None
+                    or isinstance(maximum_humidity_stpt_hourly_values_p, list)
+                    and len(maximum_humidity_stpt_hourly_values_p) == number_of_hours,
+                    f"maximum humidity setpoint hourly schedule {maximum_humidity_stpt_sch_id_p} have unexpected number of hours. The hours should be {number_of_hours}, but got {len(maximum_humidity_stpt_hourly_values_p)} instead."
+                    if maximum_humidity_stpt_hourly_values_p
+                    else "maximum humidity setpoint hourly schedule does not exist in the proposed model.",
                 )
 
-                minimum_humidity_schedule_not_matched = (
-                    minimum_humidity_stpt_sch_id_b
-                    and minimum_humidity_stpt_sch_id_p
-                    and minimum_humidity_stpt_hourly_values_b
-                    != minimum_humidity_stpt_hourly_values_p
-                )
                 minimum_humidity_schedule_matched = (
-                    minimum_humidity_stpt_sch_id_b
-                    and minimum_humidity_stpt_sch_id_p
-                    and minimum_humidity_stpt_hourly_values_b
+                    minimum_humidity_stpt_hourly_values_b
                     == minimum_humidity_stpt_hourly_values_p
+                )
+                minimum_humidity_schedule_type_matched = (
+                    minimum_humidity_stpt_hourly_values_b is None
+                    and minimum_humidity_stpt_hourly_values_p is None
                 ) or (
-                    not minimum_humidity_stpt_sch_id_b
-                    and not minimum_humidity_stpt_sch_id_p
+                    minimum_humidity_stpt_hourly_values_b is not None
+                    and minimum_humidity_stpt_hourly_values_p is not None
                 )
 
-                maximum_humidity_schedule_not_matched = (
-                    maximum_humidity_stpt_sch_id_b
-                    and maximum_humidity_stpt_sch_id_p
-                    and maximum_humidity_stpt_hourly_values_b
-                    != maximum_humidity_stpt_hourly_values_p
-                )
                 maximum_humidity_schedule_matched = (
-                    maximum_humidity_stpt_sch_id_b
-                    and maximum_humidity_stpt_sch_id_p
-                    and maximum_humidity_stpt_hourly_values_b
+                    maximum_humidity_stpt_hourly_values_b
                     == maximum_humidity_stpt_hourly_values_p
+                )
+                maximum_humidity_schedule_type_matched = (
+                    maximum_humidity_stpt_hourly_values_b is None
+                    and maximum_humidity_stpt_hourly_values_p is None
                 ) or (
-                    not maximum_humidity_stpt_sch_id_b
-                    and not maximum_humidity_stpt_sch_id_p
+                    maximum_humidity_stpt_hourly_values_b is not None
+                    and maximum_humidity_stpt_hourly_values_p is not None
                 )
 
                 return {
                     "minimum_humidity_stpt_sch_id_b": minimum_humidity_stpt_sch_id_b,
                     "minimum_humidity_stpt_sch_id_p": minimum_humidity_stpt_sch_id_p,
+                    "minimum_humidity_schedule_matched": minimum_humidity_schedule_matched,
+                    "minimum_humidity_schedule_type_matched": minimum_humidity_schedule_type_matched,
                     "maximum_humidity_stpt_sch_id_b": maximum_humidity_stpt_sch_id_b,
                     "maximum_humidity_stpt_sch_id_p": maximum_humidity_stpt_sch_id_p,
-                    "minimum_humidity_schedule_not_matched": minimum_humidity_schedule_not_matched,
-                    "maximum_humidity_schedule_not_matched": maximum_humidity_schedule_not_matched,
-                    "minimum_humidity_schedule_matched": minimum_humidity_schedule_matched,
                     "maximum_humidity_schedule_matched": maximum_humidity_schedule_matched,
+                    "maximum_humidity_schedule_type_matched": maximum_humidity_schedule_type_matched,
                 }
 
             def manual_check_required(self, context, calc_vals=None, data=None):
-                minimum_humidity_schedule_not_matched = calc_vals[
-                    "minimum_humidity_schedule_not_matched"
+                minimum_humidity_schedule_matched = calc_vals[
+                    "minimum_humidity_schedule_matched"
                 ]
-                maximum_humidity_schedule_not_matched = calc_vals[
-                    "maximum_humidity_schedule_not_matched"
+                minimum_humidity_schedule_type_matched = calc_vals[
+                    "minimum_humidity_schedule_type_matched"
                 ]
+                maximum_humidity_schedule_matched = calc_vals[
+                    "maximum_humidity_schedule_matched"
+                ]
+                maximum_humidity_schedule_type_matched = calc_vals[
+                    "maximum_humidity_schedule_type_matched"
+                ]
+
                 return (
-                    minimum_humidity_schedule_not_matched
-                    or maximum_humidity_schedule_not_matched
+                    minimum_humidity_schedule_matched
+                    and not minimum_humidity_schedule_type_matched
+                ) or (
+                    maximum_humidity_schedule_matched
+                    and not maximum_humidity_schedule_type_matched
                 )
 
             def rule_check(self, context, calc_vals=None, data=None):
@@ -231,6 +265,7 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
                 maximum_humidity_schedule_matched = calc_vals[
                     "maximum_humidity_schedule_matched"
                 ]
+
                 return (
                     minimum_humidity_schedule_matched
                     and maximum_humidity_schedule_matched
@@ -240,30 +275,11 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
                 minimum_humidity_stpt_sch_id_b = calc_vals[
                     "minimum_humidity_stpt_sch_id_b"
                 ]
-                minimum_humidity_stpt_sch_id_p = calc_vals[
-                    "minimum_humidity_stpt_sch_id_p"
-                ]
                 maximum_humidity_stpt_sch_id_b = calc_vals[
                     "maximum_humidity_stpt_sch_id_b"
                 ]
-                maximum_humidity_stpt_sch_id_p = calc_vals[
-                    "maximum_humidity_stpt_sch_id_p"
-                ]
-                if (
-                    minimum_humidity_stpt_sch_id_b
-                    and not minimum_humidity_stpt_sch_id_p
-                ) or (
-                    maximum_humidity_stpt_sch_id_b
-                    and not maximum_humidity_stpt_sch_id_p
-                ):
-                    return FAIL_MSG_B
-                elif (
-                    not minimum_humidity_stpt_sch_id_b
-                    and minimum_humidity_stpt_sch_id_p
-                ) or (
-                    not maximum_humidity_stpt_sch_id_b
-                    and maximum_humidity_stpt_sch_id_p
-                ):
-                    return FAIL_MSG_P
-                else:
-                    return ""
+                return (
+                    FAIL_MSG_B
+                    if minimum_humidity_stpt_sch_id_b or maximum_humidity_stpt_sch_id_b
+                    else FAIL_MSG_P
+                )
