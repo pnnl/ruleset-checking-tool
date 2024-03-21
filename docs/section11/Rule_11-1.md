@@ -23,8 +23,17 @@
 
 ## Rule Logic: 
 - create a boolean to keep track of whether everything matches: `all_match = TRUE`
-- all ServiceWaterHeatingDistributionSystems match in the proposed and user models: `if not P_RMI = U_RMI for ServiceWaterHeatingDistributionSystem: all_match = FALSE`
-- all ServiceWaterHeatingEquipment matches in the proposed and user models: `if not P_RMI = U_RMI for ServiceWaterHeatingEquipment: all_match = FALSE`
+- check if the ServiceWaterHeatingDistributionSystem matches between the propoesd and user models.  First check whether there are the same number of systems: `if len(P_RMD.service_water_heating_distribution_systems) == len(B_RMD.service_water_heating_distribution_systems):`
+    - look at each SHW system in the proposed model and see if there is one that is the same in the user model.  This check relies on the understanding that the RCT team has a method for comparing all elements within an object match: `for p_SHW_dist_system in P_RMD.service_water_heating_distribution_systems:`
+        - if this system is not in B_RMD.service_water_heating_distribution_systems, set all_match to FALSE: `if p_SHW_dist_system not in B_RMD.service_water_heating_distribution_systems: all_match = FALSE`
+- otherwise, all_match is false: `all_match = FALSE`
+- continue if all_match is still true: `if all_match:`
+    - do the same comparison for ServiceWaterHeatingEquipment in the proposed and user models: `if len(P_RMD.service_water_heating_distribution_systems) == len(B_RMD.service_water_heating_distribution_systems):`
+        - look at each SHW system in the proposed model and see if there is one that is the same in the user model.  This check relies on the understanding that the RCT team has a method for comparing all elements within an object match: `for p_SHW_equipment in P_RMD.service_water_heating_equipment:`
+            - if this system is not in B_RMD.service_water_heating_equipment, set all_match to FALSE: `if p_SHW_equipment not in B_RMD.service_water_heating_equipment: all_match = FALSE`
+    - otherwise, all_match is false: `all_match = FALSE`
+ 
+- 
 - all DHW tanks match in the proposed and user models **question:** in rare cases, there could be a tank connected to a solar hot water system that does not match in the two models.  Returning FAIL in this case will only trigger a manual review (& these tanks will likely be the same between user and proposed models anyway), so I don't think it's a major issue.  thoughts?: `if not P_RMI = U_RMI for Tank: all_match = FALSE`
 - all ServiceWaterPiping matches in the proposed and user models: `if not P_RMI = U_RMI for ServiceWaterPiping: all_match = FALSE`
 
