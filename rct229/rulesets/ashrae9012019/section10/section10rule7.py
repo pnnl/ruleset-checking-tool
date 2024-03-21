@@ -251,9 +251,9 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
             modeled_efficiency_b = calc_vals["modeled_efficiency_b"]
 
             if modeled_efficiency_b == most_conservative_eff_b:
-                undetermined_msg = "Check if the modeled baseline DX cooling efficiency was established correctly based upon equipment capacity and type. The modeled efficiency matches the capacity bracket in Appendix G efficiency tables with the highest efficiency (i.e., most conservative efficiency has been modeled)."
+                undetermined_msg = "The cooling capacity of the system could not be determined. Check if the modeled baseline DX cooling efficiency was established correctly based upon equipment capacity and type while accounting for the potential aggregation of zones. The modeled efficiency matches the capacity bracket in Appendix G efficiency tables with the highest efficiency (i.e., most conservative efficiency has been modeled)."
             else:
-                undetermined_msg = "Check if the modeled baseline DX cooling efficiency was established correctly based upon equipment capacity and type."
+                undetermined_msg = "The cooling capacity of the system could not be determined. Check if the modeled baseline DX cooling efficiency was established correctly based upon equipment capacity and type while accounting for the potential aggregation of zones."
 
             return undetermined_msg
 
