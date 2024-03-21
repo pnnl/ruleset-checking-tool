@@ -49,7 +49,7 @@ def table_g3_5_2_lookup(
     if equipment_type == EquipmentTypeEnum.HEAT_PUMP_AIR_COOLED_HEATING:  # heating mode
         capacity_threshold_list = heat_mode_capacity_threshold_list
     elif (
-        equipment_type == EquipmentTypeEnum.HEAT_PUMP_AIR_COOLED_HEATING
+        equipment_type == EquipmentTypeEnum.HEAT_PUMP_AIR_COOLED_COOLING
     ):  # cooling mode
         capacity_threshold_list = cool_mode_capacity_threshold_list
     else:
