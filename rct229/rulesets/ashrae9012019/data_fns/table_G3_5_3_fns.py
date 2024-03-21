@@ -1,17 +1,7 @@
 from rct229.rulesets.ashrae9012019.data import data
 from rct229.rulesets.ashrae9012019.data_fns.table_utils import find_osstd_table_entry
 from rct229.schema.config import ureg
-from typing import TypedDict
 from pint import Quantity
-
-
-G3_5_3_TableSearchInfo = TypedDict(
-    "G3_5_3_TableSearchInfo",
-    {
-        "minimum_full_load_efficiency": Quantity,
-        "minimum_integrated_part_load": Quantity,
-    },
-)
 
 # This dictionary maps the ChillerCompressorOptions enumerations to
 # the corresponding chiller types
@@ -33,9 +23,7 @@ water_chiller_compressor_type_map = {
 capacity_threshold_list = [0, 150, 300, 9999.99]
 
 
-def table_g3_5_3_lookup(
-    compressor_type: str, capacity: float
-) -> G3_5_3_TableSearchInfo:
+def table_g3_5_3_lookup(compressor_type: str, capacity: Quantity) -> dict:
     """Returns the chiller data based on compressor type and capacity
     required by ASHRAE 90.1 Table 3.2
     Parameters
@@ -53,20 +41,24 @@ def table_g3_5_3_lookup(
     """
     compressor_category = water_chiller_compressor_type_map[compressor_type]
 
-    minimum_capacity = min(capacity_threshold_list)
-    maximum_capacity = max(capacity_threshold_list)
-    for capacity_threshold in capacity_threshold_list:
-        if capacity >= capacity_threshold:
-            minimum_capacity = capacity_threshold
-        if capacity < capacity_threshold:
-            maximum_capacity = capacity_threshold
+    # this line converts the list to list of quantities.
+    capacity_threshold_list_ton = list(
+        map(lambda ct: ct * ureg("ton"), capacity_threshold_list)
+    )
+    minimum_capacity = min(capacity_threshold_list_ton)
+    maximum_capacity = max(capacity_threshold_list_ton)
+    for capacity_threshold_ton in capacity_threshold_list_ton:
+        if capacity >= capacity_threshold_ton:
+            minimum_capacity = capacity_threshold_ton
+        if capacity < capacity_threshold_ton:
+            maximum_capacity = capacity_threshold_ton
             break
 
     osstd_entry = find_osstd_table_entry(
         [
             ("equipment_type", compressor_category),
-            ("inclusive_minimum_capacity_tons", minimum_capacity),
-            ("exclusive_maximum_capacity_tons", maximum_capacity),
+            ("inclusive_minimum_capacity_tons", minimum_capacity.m),
+            ("exclusive_maximum_capacity_tons", maximum_capacity.m),
         ],
         osstd_table=data["ashrae_90_1_table_G3_5_3"],
     )
