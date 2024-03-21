@@ -1,0 +1,32 @@
+# Section 11 - SHW - Rule 11-3
+**Schema Version:** 0.0.36  
+**Mandatory Rule:** True  
+**Rule ID:** 11-3  
+**Rule Description:** Where no service water-heating system exists or has been designed and submitted with design documents but the building will have service water-heating loads, a service water-heating system shall be modeled that matches the system type in the baseline building design  
+**Rule Assertion:** Options are Pass/Fail/NOT_APPLICABLE  
+**Appendix G Section:** Table G3.1.11(c)  
+
+**Data Lookup:** None  
+
+**Evaluation Context:** RMD  
+
+**Applicability Checks:** Check that the User model doesn't have any ServiceWaterHeatingEquipment, and that the user model has at least one ServiceWaterHeatingUse
+
+**Function Calls:** None  
+  
+## Applicability:   
+- look for ServiceWaterHeatingEquipment in the user model: `if len(U_RMD.service_water_heating_equipment) > 0:`
+    - look for ServiceWaterHeatingUse in the spaces in the proposed model: `for space in U_RMD:`
+        - check for any service_water_heating_uses in the space: `if len(space.service_water_heating_uses) > 0: CONTINUE TO RULE LOGIC`
+- if the program reaches this line without going to the rule logic, the project is not applicable: `NOT_APPLICABLE`
+  
+## Rule Logic:   
+- create a variable that describes the type of SHW system found and initialize it by setting it to NONE: `shw_system_found = "NONE"`
+- now look for ServiceWaterHeatingEquipment in the P_RMD - we want to find exactly one system per building
+
+  **Rule Assertion:** 
+
+  - Case 1: 
+  - Case 2: 
+
+**[Back](../_toc.md)**
