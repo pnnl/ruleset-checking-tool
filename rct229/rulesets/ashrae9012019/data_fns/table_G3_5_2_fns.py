@@ -3,7 +3,20 @@ from rct229.rulesets.ashrae9012019.data_fns.table_utils import (
     find_osstd_table_entry,
     find_osstd_table_entries,
 )
-from rct229.schema.config import ureg
+from typing import TypedDict
+
+
+class AppGAirSysEffTableSearchInfo(TypedDict):
+    minimum_efficiency: float
+    efficiency_metric: str
+    most_conservative_efficiency: float | None
+
+
+class EquipmentTypeEnum:
+    """Enumeration class for equipment types in Table G3.5.2"""
+
+    HEAT_PUMP_AIR_COOLED_HEATING: str = "heat pumps, air-cooled (heating mode)"
+    HEAT_PUMP_AIR_COOLED_COOLING: str = "heat pumps, air-cooled (cooling mode)"
 
 
 # Make sure this line is a sorted (ascending order) list
@@ -11,7 +24,9 @@ cool_mode_capacity_threshold_list = [0, 65000, 135000, 240000, 999999999]
 heat_mode_capacity_threshold_list = [0, 65000, 135000, 999999999]
 
 
-def table_G3_5_2_lookup(equipment_type, subcategory_rating_condition, capacity):
+def table_g3_5_2_lookup(
+    equipment_type: str, subcategory_rating_condition: str, capacity: float
+) -> AppGAirSysEffTableSearchInfo:
     """Returns the air-cooled heat pump efficiency data based on subcategory/rating condition and capacity
     Parameters
     ----------
@@ -26,33 +41,35 @@ def table_G3_5_2_lookup(equipment_type, subcategory_rating_condition, capacity):
     -------
     dict
         { minimum_efficiency: Quantity - the minimum COP for cooling
+          efficiency_metric: str - the efficiency metric
+          most_conservative_efficiency: Quantity - the most conservative efficiency
         }
     """
 
-    if equipment_type == "heat pumps, air-cooled (heating mode)":  # heating mode
+    if equipment_type == EquipmentTypeEnum.HEAT_PUMP_AIR_COOLED_HEATING:  # heating mode
         capacity_threshold_list = heat_mode_capacity_threshold_list
-    else:  # cooling mode
+    elif (
+        equipment_type == EquipmentTypeEnum.HEAT_PUMP_AIR_COOLED_HEATING
+    ):  # cooling mode
         capacity_threshold_list = cool_mode_capacity_threshold_list
+    else:
+        raise ValueError(f"Invalid equipment type: {equipment_type}")
 
-    # this line converts the list to list of quantities.
-    capacity_threshold_list_btuh = list(
-        map(lambda ct: ct * ureg("btu_h"), capacity_threshold_list)
-    )
-    minimum_capacity = min(capacity_threshold_list_btuh)
-    maximum_capacity = max(capacity_threshold_list_btuh)
-    for capacity_threshold_btuh in capacity_threshold_list_btuh:
-        if capacity > capacity_threshold_btuh:
-            minimum_capacity = capacity_threshold_btuh
-        if capacity < capacity_threshold_btuh:
-            maximum_capacity = capacity_threshold_btuh
+    minimum_capacity = min(capacity_threshold_list)
+    maximum_capacity = max(capacity_threshold_list)
+    for capacity_threshold in capacity_threshold_list:
+        if capacity >= capacity_threshold:
+            minimum_capacity = capacity_threshold
+        if capacity < capacity_threshold:
+            maximum_capacity = capacity_threshold
             break
 
     osstd_entry = find_osstd_table_entry(
         [
             ("equipment_type", equipment_type),
             ("subcategory_rating_condition", subcategory_rating_condition),
-            ("inclusive_minimum_capacity", minimum_capacity.m),
-            ("exclusive_maximum_capacity", maximum_capacity.m),
+            ("inclusive_minimum_capacity", minimum_capacity),
+            ("exclusive_maximum_capacity", maximum_capacity),
         ],
         osstd_table=data["ashrae_90_1_table_G3_5_2"],
     )

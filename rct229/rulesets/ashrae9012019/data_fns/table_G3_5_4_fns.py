@@ -1,8 +1,15 @@
 from rct229.rulesets.ashrae9012019.data import data
 from rct229.rulesets.ashrae9012019.data_fns.table_utils import find_osstd_table_entry
+from typing import TypedDict
 
 
-def table_G3_5_4_lookup(equipment_type):
+class AppGAirSysEffTableSearchInfo(TypedDict):
+    minimum_efficiency: float
+    efficiency_metric: str
+    most_conservative_efficiency: float | None
+
+
+def table_g3_5_4_lookup(equipment_type: str) -> AppGAirSysEffTableSearchInfo:
     """Returns the packaged terminal system efficiency data based on equipment type
     Parameters
     ----------
@@ -14,6 +21,7 @@ def table_G3_5_4_lookup(equipment_type):
     dict
         { minimum_efficiency: Quantity - the minimum COP
           efficiency_metric: str - the efficiency metric
+          most_conservative_efficiency: None - only included for consistency with other minimum efficiency lookups
         }
     """
 
@@ -27,4 +35,5 @@ def table_G3_5_4_lookup(equipment_type):
     return {
         "minimum_efficiency": osstd_entry["minimum_efficiency"],
         "efficiency_metric": osstd_entry["efficiency_metric"],
+        "most_conservative_efficiency": None,
     }

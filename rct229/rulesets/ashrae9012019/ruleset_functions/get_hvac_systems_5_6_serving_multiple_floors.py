@@ -20,7 +20,7 @@ from rct229.utils.utility_functions import (
 APPLICABLE_SYS_TYPES = [HVAC_SYS.SYS_5, HVAC_SYS.SYS_6]
 
 
-def get_hvac_systems_5_6_serving_multiple_floors(rmd):
+def get_hvac_systems_5_6_serving_multiple_floors(rmd: dict) -> dict[str, int]:
     """
     Get the list of HVAC system IDs which are baseline system type 5 or 6 and are serving multiple floors.
 

@@ -56,7 +56,7 @@ def find_osstd_table_entry(match_field_name_value_pairs, osstd_table):
     return matching_entries[0]
 
 
-def find_osstd_table_entries(match_field_name_value_pairs, osstd_table):
+def find_osstd_table_entries(match_field_name_value_pairs, osstd_table: dict):
     """Find specific entries in an OSSTD table
 
     This takes advantage of the consistent structure accross all the OSSTD
@@ -80,7 +80,7 @@ def find_osstd_table_entries(match_field_name_value_pairs, osstd_table):
     assert type(osstd_table) is dict
 
     keys = list(osstd_table)
-    assert len(keys) is 1
+    assert len(keys) == 1
 
     data_list = osstd_table[keys[0]]
     assert type(data_list) is list
@@ -100,8 +100,10 @@ def find_osstd_table_entries(match_field_name_value_pairs, osstd_table):
         )
     )
 
-    matching_entry = matching_entries[0]
-    assert type(matching_entry) is dict
+    assert len(matching_entries) > 0, "No entries found in the table"
+
+    for matching_entry in matching_entries:
+        assert type(matching_entry) is dict
 
     return matching_entries
 

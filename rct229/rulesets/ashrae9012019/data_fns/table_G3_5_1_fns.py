@@ -3,14 +3,20 @@ from rct229.rulesets.ashrae9012019.data_fns.table_utils import (
     find_osstd_table_entry,
     find_osstd_table_entries,
 )
-from rct229.schema.config import ureg
+from typing import TypedDict
+
+
+class AppGAirSysEffTableSearchInfo(TypedDict):
+    minimum_efficiency: float
+    efficiency_metric: str
+    most_conservative_efficiency: float | None
 
 
 # Make sure this line is a sorted (ascending order) list
 capacity_threshold_list = [0, 65000, 135000, 240000, 760000, 999999999]
 
 
-def table_G3_5_1_lookup(capacity):
+def table_g3_5_1_lookup(capacity: float) -> AppGAirSysEffTableSearchInfo:
     """Returns the air conditioner efficiency data based on capacity
     Parameters
     ----------
@@ -22,26 +28,23 @@ def table_G3_5_1_lookup(capacity):
     dict
         { minimum_efficiency: Quantity - the minimum COP for cooling
           efficiency_metric: str - the efficiency metric
+          most_conservative_efficiency: Quantity - the most conservative efficiency
         }
     """
 
-    # this line converts the list to list of quantities.
-    capacity_threshold_list_btuh = list(
-        map(lambda ct: ct * ureg("btu_h"), capacity_threshold_list)
-    )
-    minimum_capacity = min(capacity_threshold_list_btuh)
-    maximum_capacity = max(capacity_threshold_list_btuh)
-    for capacity_threshold_btuh in capacity_threshold_list_btuh:
-        if capacity > capacity_threshold_btuh:
-            minimum_capacity = capacity_threshold_btuh
-        if capacity < capacity_threshold_btuh:
-            maximum_capacity = capacity_threshold_btuh
+    minimum_capacity = min(capacity_threshold_list)
+    maximum_capacity = max(capacity_threshold_list)
+    for capacity_threshold in capacity_threshold_list:
+        if capacity >= capacity_threshold:
+            minimum_capacity = capacity_threshold
+        if capacity < capacity_threshold:
+            maximum_capacity = capacity_threshold
             break
 
     osstd_entry = find_osstd_table_entry(
         [
-            ("inclusive_minimum_capacity", minimum_capacity.m),
-            ("exclusive_maximum_capacity", maximum_capacity.m),
+            ("inclusive_minimum_capacity", minimum_capacity),
+            ("exclusive_maximum_capacity", maximum_capacity),
         ],
         osstd_table=data["ashrae_90_1_table_G3_5_1"],
     )
@@ -50,6 +53,11 @@ def table_G3_5_1_lookup(capacity):
         [],
         osstd_table=data["ashrae_90_1_table_G3_5_1"],
     )
+
+    for entry in osstd_entries:
+        assert "minimum_efficiency" in entry and isinstance(
+            entry["minimum_efficiency"], (int, float)
+        )
 
     return {
         "minimum_efficiency": osstd_entry["minimum_efficiency"],
