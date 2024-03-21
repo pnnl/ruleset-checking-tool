@@ -3,7 +3,7 @@ from rct229.rulesets.ashrae9012019.data_fns.table_utils import (
     find_osstd_table_entry,
     find_osstd_table_entries,
 )
-from typing import TypedDict
+from typing import TypedDict, Union
 
 
 class AppGAirSysEffTableSearchInfo(TypedDict):
@@ -16,7 +16,7 @@ class AppGAirSysEffTableSearchInfo(TypedDict):
 capacity_threshold_list = [0, 65000, 135000, 240000, 760000, 999999999]
 
 
-def table_g3_5_1_lookup(capacity: float) -> AppGAirSysEffTableSearchInfo:
+def table_g3_5_1_lookup(capacity: Union[float, int]) -> AppGAirSysEffTableSearchInfo:
     """Returns the air conditioner efficiency data based on capacity
     Parameters
     ----------

@@ -1,6 +1,6 @@
 from rct229.rulesets.ashrae9012019.data import data
 from rct229.rulesets.ashrae9012019.data_fns.table_utils import find_osstd_table_entries
-from typing import TypedDict
+from typing import TypedDict, Union
 
 
 class AppGAirSysEffTableSearchInfo(TypedDict):
@@ -9,7 +9,7 @@ class AppGAirSysEffTableSearchInfo(TypedDict):
     most_conservative_efficiency: float | None
 
 
-class EquipmentTypeEnum:
+class EquipmentType:
     """Enumeration class for equipment types in Table G3.5.5"""
 
     WARM_AIR_FURNACE_GAS_FIRED: str = "Warm-air furnace, gas-fired"
@@ -21,7 +21,7 @@ uh_capacity_threshold_list = [0, 99999999]
 
 
 def table_g3_5_5_lookup(
-    equipment_type: str, capacity: float
+    equipment_type: str, capacity: Union[float, int]
 ) -> [AppGAirSysEffTableSearchInfo]:
     """Returns the packaged terminal system efficiency data based on equipment type
     Parameters
@@ -45,9 +45,9 @@ def table_g3_5_5_lookup(
             }
         ]
     """
-    if equipment_type == EquipmentTypeEnum.WARM_AIR_FURNACE_GAS_FIRED:
+    if equipment_type == EquipmentType.WARM_AIR_FURNACE_GAS_FIRED:
         capacity_threshold_list = furnace_capacity_threshold_list
-    elif equipment_type == EquipmentTypeEnum.WARM_AIR_UNIT_HEATER_GAS_FIRED:
+    elif equipment_type == EquipmentType.WARM_AIR_UNIT_HEATER_GAS_FIRED:
         capacity_threshold_list = uh_capacity_threshold_list
     else:
         raise ValueError(f"Invalid equipment type: {equipment_type}")

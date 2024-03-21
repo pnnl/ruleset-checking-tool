@@ -9,6 +9,14 @@ class AppGAirSysEffTableSearchInfo(TypedDict):
     most_conservative_efficiency: float | None
 
 
+class EquipmentType:
+    """Enumeration class for equipment types in Table G3.5.2"""
+
+    PTAC_COOLING: str = "PTAC (cooling mode)"
+    PTHP_COOLING: str = "PTHP (cooling mode)"
+    PTHP_HEATING: str = "PTHP (heating mode)"
+
+
 def table_g3_5_4_lookup(equipment_type: str) -> AppGAirSysEffTableSearchInfo:
     """Returns the packaged terminal system efficiency data based on equipment type
     Parameters

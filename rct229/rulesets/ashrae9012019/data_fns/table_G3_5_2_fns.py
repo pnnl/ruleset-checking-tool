@@ -3,7 +3,7 @@ from rct229.rulesets.ashrae9012019.data_fns.table_utils import (
     find_osstd_table_entry,
     find_osstd_table_entries,
 )
-from typing import TypedDict
+from typing import TypedDict, Union
 
 
 class AppGAirSysEffTableSearchInfo(TypedDict):
@@ -12,11 +12,19 @@ class AppGAirSysEffTableSearchInfo(TypedDict):
     most_conservative_efficiency: float | None
 
 
-class EquipmentTypeEnum:
+class EquipmentType:
     """Enumeration class for equipment types in Table G3.5.2"""
 
     HEAT_PUMP_AIR_COOLED_HEATING: str = "heat pumps, air-cooled (heating mode)"
     HEAT_PUMP_AIR_COOLED_COOLING: str = "heat pumps, air-cooled (cooling mode)"
+
+
+class RatingCondition:
+    """Enumeration class for rating conditions in Table G3.5.2"""
+
+    SINGLE_PACKAGE: str = "single-package"
+    HIGH_TEMP: str = "47F db/43F wb"
+    LOW_TEMP: str = "17F db/15F wb"
 
 
 # Make sure this line is a sorted (ascending order) list
@@ -25,7 +33,7 @@ heat_mode_capacity_threshold_list = [0, 65000, 135000, 999999999]
 
 
 def table_g3_5_2_lookup(
-    equipment_type: str, subcategory_rating_condition: str, capacity: float
+    equipment_type: str, subcategory_rating_condition: str, capacity: Union[float, int]
 ) -> AppGAirSysEffTableSearchInfo:
     """Returns the air-cooled heat pump efficiency data based on subcategory/rating condition and capacity
     Parameters
@@ -34,7 +42,7 @@ def table_g3_5_2_lookup(
         One of the equipment types of the heat pump from table G3.5.2
     subcategory_rating_condition : str
         One of the subcategories or rating conditions of the heat pump from table G3.5.2
-    capacity: quantity
+    capacity: Union[float, int]
         air conditioner rated capacity in Btu/hr
 
     Returns
@@ -46,9 +54,9 @@ def table_g3_5_2_lookup(
         }
     """
 
-    if equipment_type == EquipmentTypeEnum.HEAT_PUMP_AIR_COOLED_HEATING:
+    if equipment_type == EquipmentType.HEAT_PUMP_AIR_COOLED_HEATING:
         capacity_threshold_list = heat_mode_capacity_threshold_list
-    elif equipment_type == EquipmentTypeEnum.HEAT_PUMP_AIR_COOLED_COOLING:
+    elif equipment_type == EquipmentType.HEAT_PUMP_AIR_COOLED_COOLING:
         capacity_threshold_list = cool_mode_capacity_threshold_list
     else:
         raise ValueError(f"Invalid equipment type: {equipment_type}")
