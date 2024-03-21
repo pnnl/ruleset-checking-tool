@@ -2,7 +2,7 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rulesets.ashrae9012019 import BASELINE_0
-from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_3_fns import table_G3_5_3_lookup
+from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_3_fns import table_g3_5_3_lookup
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
@@ -87,7 +87,7 @@ class Section22Rule32(RuleDefinitionListIndexedBase):
                 chiller_b, "Chiller", "part_load_efficiency_metric"
             )
 
-            target_part_load_efficiency = table_G3_5_3_lookup(
+            target_part_load_efficiency = table_g3_5_3_lookup(
                 compressor_type_b, rated_capacity_b
             )["minimum_integrated_part_load"]
 
