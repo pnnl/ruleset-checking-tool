@@ -2,7 +2,7 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rulesets.ashrae9012019 import BASELINE_0
-from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_3_fns import table_G3_5_3_lookup
+from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_3_fns import table_g3_5_3_lookup
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
@@ -79,7 +79,7 @@ class Section22Rule22(RuleDefinitionListIndexedBase):
             compressor_type_b = chiller_b["compressor_type"]
             rated_capacity_b = chiller_b["rated_capacity"]
 
-            required_kw_ton_full_load_b = table_G3_5_3_lookup(
+            required_kw_ton_full_load_b = table_g3_5_3_lookup(
                 compressor_type_b, rated_capacity_b
             )["minimum_full_load_efficiency"]
 
