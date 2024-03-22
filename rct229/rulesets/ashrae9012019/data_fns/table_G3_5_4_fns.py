@@ -10,7 +10,7 @@ class AppGAirSysEffTableSearchInfo(TypedDict):
 
 
 class EquipmentType:
-    """Enumeration class for equipment types in Table G3.5.2"""
+    """Enumeration class for equipment types in Table G3.5.4"""
 
     PTAC_COOLING: str = "PTAC (cooling mode)"
     PTHP_COOLING: str = "PTHP (cooling mode)"
