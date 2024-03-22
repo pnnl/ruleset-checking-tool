@@ -75,10 +75,7 @@ class Section4Rule14(RuleDefinitionListIndexedBase):
             # skip undetermined outcome for no misc equipment, the reasoning behind it is assuming that the room is
             # identified as a computer room but there is 0 EPD, will generate failed outcome in rule check.
             for misc_equip_p in find_all(f"$.miscellaneous_equipment[*]", space_p):
-                if (
-                    getattr_(misc_equip_p, "miscellaneous equipment", "energy_type")
-                    == ENERGY_SOURCE.ELECTRICITY
-                ):
+                if misc_equip_p.get("energy_type") == ENERGY_SOURCE.ELECTRICITY:
                     misc_equip_power_p = getattr_(
                         misc_equip_p, "miscellaneous_equipment", "power"
                     )
