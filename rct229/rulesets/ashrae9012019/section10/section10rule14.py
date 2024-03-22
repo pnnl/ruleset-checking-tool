@@ -2,9 +2,9 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rulesets.ashrae9012019 import BASELINE_0
-from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_2_fns import table_G3_5_2_lookup
-from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_4_fns import table_G3_5_4_lookup
-from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_5_fns import table_G3_5_5_lookup
+from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_2_fns import table_g3_5_2_lookup
+from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_4_fns import table_g3_5_4_lookup
+from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_5_fns import table_g3_5_5_lookup
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types import (
     get_baseline_system_types,
 )
@@ -181,40 +181,40 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
                     is_zone_agg_factor_undefined_and_needed = True
 
             if hvac_system_type_b == HVAC_SYS.SYS_2:
-                expected_baseline_eff_data = table_G3_5_4_lookup(hvac_system_type_b)
+                expected_baseline_eff_data = table_g3_5_4_lookup(hvac_system_type_b)
 
             elif hvac_system_type_b in [HVAC_SYS.SYS_3, HVAC_SYS.SYS_3A]:
                 if total_capacity_b is None:
-                    expected_baseline_eff_data = table_G3_5_5_lookup(
+                    expected_baseline_eff_data = table_g3_5_5_lookup(
                         "Warm-air furnace, gas-fired",
                         FURNACE_CAPACITY_LOW_RANGE_SAMPLE,
                     )
                 else:
-                    expected_baseline_eff_data = table_G3_5_5_lookup(
+                    expected_baseline_eff_data = table_g3_5_5_lookup(
                         "Warm-air furnace, gas-fired",
                         total_capacity_b,
                     )
 
             elif hvac_system_type_b == HVAC_SYS.SYS_9:
                 if total_capacity_b is None:
-                    expected_baseline_eff_data = table_G3_5_5_lookup(
+                    expected_baseline_eff_data = table_g3_5_5_lookup(
                         "Warm-air unit heaters, gas-fired",
                         FURNACE_CAPACITY_LOW_RANGE_SAMPLE,
                     )
                 else:
-                    expected_baseline_eff_data = table_G3_5_5_lookup(
+                    expected_baseline_eff_data = table_g3_5_5_lookup(
                         "Warm-air unit heaters, gas-fired", total_capacity_b
                     )
 
             else:  # HVAC_SYS.SYS_4
                 if total_capacity_b is None:
                     expected_baseline_eff_data = [
-                        table_G3_5_2_lookup(
+                        table_g3_5_2_lookup(
                             "heat pumps, air-cooled (heating mode)",
                             "47F db/43F wb",
                             HEATPUMP_CAPACITY_LOW_RANGE_SAMPLE,
                         ),
-                        table_G3_5_2_lookup(
+                        table_g3_5_2_lookup(
                             "heat pumps, air-cooled (heating mode)",
                             "17F db/15F wb",
                             HEATPUMP_CAPACITY_LOW_RANGE_SAMPLE,
@@ -223,12 +223,12 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
 
                 else:
                     expected_baseline_eff_data = [
-                        table_G3_5_2_lookup(
+                        table_g3_5_2_lookup(
                             "heat pumps, air-cooled (heating mode)",
                             "47F db/43F wb",
                             total_capacity_b,
                         ),
-                        table_G3_5_2_lookup(
+                        table_g3_5_2_lookup(
                             "heat pumps, air-cooled (heating mode)",
                             "17F db/15F wb",
                             total_capacity_b,
