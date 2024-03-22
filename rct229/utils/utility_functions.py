@@ -91,13 +91,13 @@ def find_exactly_one_space(rmi, space_id):
 
 def find_exactly_one_schedule(rmi, schedule_id):
     """
-    Search for the schedule data group in a ruleset model instance by mathcing schedule_id
+    Search for the schedule data group in a ruleset model instance by matching schedule_id
     Raise exception if no matching schedule
 
     Parameters
     ----------
     rmi: json
-    scheduel_id: str
+    schedule_id: str
 
     Returns: json
     -------
