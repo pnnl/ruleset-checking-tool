@@ -1,4 +1,3 @@
-from pydash import find
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
@@ -60,7 +59,7 @@ class Section4Rule14(RuleDefinitionListIndexedBase):
                     USER=False, BASELINE_0=False, PROPOSED=True
                 ),
                 fail_msg="The space has been classed as a computer room in terms of the lighting space type but the "
-                         "electronic data equipment power density does not appear to exceed 20 w/sf.",
+                "electronic data equipment power density does not appear to exceed 20 w/sf.",
             )
 
         def get_calc_vals(self, context, data=None):
@@ -89,9 +88,9 @@ class Section4Rule14(RuleDefinitionListIndexedBase):
                     misc_multiplier_value_p = 1.0
                     if mis_multiplier_id_p:
                         multiplier_schedule_p = find_exactly_one(
-                            f'$.[*][?@(id="{mis_multiplier_id_p}")]', schedules_p
+                            f'$[*][?(@.id="{mis_multiplier_id_p}")]', schedules_p
                         )
-                        misc_multiplier_value_p = min(
+                        misc_multiplier_value_p = max(
                             1.0,
                             max(
                                 getattr_(
@@ -103,7 +102,6 @@ class Section4Rule14(RuleDefinitionListIndexedBase):
                     total_space_misc_wattage_including_multiplier_p += (
                         misc_equip_power_p * misc_multiplier_value_p
                     )
-
             return {
                 "epd_p": CalcQ(
                     "power_density",
