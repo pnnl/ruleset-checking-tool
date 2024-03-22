@@ -45,8 +45,10 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-4 Schedule Modeling Requirements for the Proposed design and Baseline building",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone"),
-                        "is_leap_year": (BASELINE_0, "calendar/is_leap_year")},
+            data_items={
+                "climate_zone": (BASELINE_0, "weather/climate_zone"),
+                "is_leap_year": (BASELINE_0, "calendar/is_leap_year"),
+            },
         )
 
     class RuleSetModelInstanceRule(RuleDefinitionListIndexedBase):
@@ -114,82 +116,78 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
 
                 minimum_humidity_stpt_hourly_values_b = None
                 if minimum_humidity_stpt_sch_id_b:
-                    assert_(schedules_b, f"schedules is missing in the RMD: {BASELINE_0}")
-                    minimum_humidity_stpt_hourly_values_b = (
-                        getattr_(
-                            find_exactly_one(
-                                f'$[*][?(@.id="{minimum_humidity_stpt_sch_id_b}")]',
-                                schedules_b,
-                            ),
-                            "schedules",
-                            "hourly_values",
-                        )
+                    assert_(
+                        schedules_b, f"schedules is missing in the RMD: {BASELINE_0}"
+                    )
+                    minimum_humidity_stpt_hourly_values_b = getattr_(
+                        find_exactly_one(
+                            f'$[*][?(@.id="{minimum_humidity_stpt_sch_id_b}")]',
+                            schedules_b,
+                        ),
+                        "schedules",
+                        "hourly_values",
                     )
                     assert_(
                         len(minimum_humidity_stpt_hourly_values_b) == number_of_hours,
                         f"minimum humidity setpoint hourly schedule {minimum_humidity_stpt_sch_id_b} have unexpected "
                         f"number of hours. The hours should be {number_of_hours}, but got "
-                        f"{len(minimum_humidity_stpt_hourly_values_b)} instead. "
+                        f"{len(minimum_humidity_stpt_hourly_values_b)} instead. ",
                     )
 
                 minimum_humidity_stpt_hourly_values_p = None
                 if minimum_humidity_stpt_sch_id_p:
                     assert_(schedules_p, f"schedules is missing in the RMD: {PROPOSED}")
-                    minimum_humidity_stpt_hourly_values_p = (
-                        getattr_(
-                            find_exactly_one(
-                                f'$[*][?(@.id="{minimum_humidity_stpt_sch_id_p}")]',
-                                schedules_p,
-                            ),
-                            "schedules",
-                            "hourly_values",
-                        )
+                    minimum_humidity_stpt_hourly_values_p = getattr_(
+                        find_exactly_one(
+                            f'$[*][?(@.id="{minimum_humidity_stpt_sch_id_p}")]',
+                            schedules_p,
+                        ),
+                        "schedules",
+                        "hourly_values",
                     )
                     assert_(
                         len(minimum_humidity_stpt_hourly_values_p) == number_of_hours,
                         f"minimum humidity setpoint hourly schedule {minimum_humidity_stpt_sch_id_p} have unexpected "
                         f"number of hours. The hours should be {number_of_hours}, but got "
-                        f"{len(minimum_humidity_stpt_hourly_values_p)} instead. "
+                        f"{len(minimum_humidity_stpt_hourly_values_p)} instead. ",
                     )
 
                 maximum_humidity_stpt_hourly_values_b = None
                 if maximum_humidity_stpt_sch_id_b:
-                    assert_(schedules_b, f"schedules is missing in the RMD: {BASELINE_0}")
-                    maximum_humidity_stpt_hourly_values_b = (
-                        getattr_(
-                            find_exactly_one(
-                                f'$[*][?(@.id="{maximum_humidity_stpt_sch_id_b}")]',
-                                schedules_b,
-                            ),
-                            "schedules",
-                            "hourly_values",
-                        )
+                    assert_(
+                        schedules_b, f"schedules is missing in the RMD: {BASELINE_0}"
+                    )
+                    maximum_humidity_stpt_hourly_values_b = getattr_(
+                        find_exactly_one(
+                            f'$[*][?(@.id="{maximum_humidity_stpt_sch_id_b}")]',
+                            schedules_b,
+                        ),
+                        "schedules",
+                        "hourly_values",
                     )
                     assert_(
                         len(maximum_humidity_stpt_hourly_values_b) == number_of_hours,
                         f"maximum humidity setpoint hourly schedule {maximum_humidity_stpt_sch_id_b} have unexpected "
                         f"number of hours. The hours should be {number_of_hours}, but got "
-                        f"{len(maximum_humidity_stpt_hourly_values_b)} instead. "
+                        f"{len(maximum_humidity_stpt_hourly_values_b)} instead. ",
                     )
 
                 maximum_humidity_stpt_hourly_values_p = None
                 if maximum_humidity_stpt_sch_id_p:
                     assert_(schedules_p, f"schedules is missing in the RMD: {PROPOSED}")
-                    maximum_humidity_stpt_hourly_values_p = (
-                        getattr_(
-                            find_exactly_one(
-                                f'$[*][?(@.id="{maximum_humidity_stpt_sch_id_p}")]',
-                                schedules_p,
-                            ),
-                            "schedules",
-                            "hourly_values",
-                        )
+                    maximum_humidity_stpt_hourly_values_p = getattr_(
+                        find_exactly_one(
+                            f'$[*][?(@.id="{maximum_humidity_stpt_sch_id_p}")]',
+                            schedules_p,
+                        ),
+                        "schedules",
+                        "hourly_values",
                     )
                     assert_(
                         len(maximum_humidity_stpt_hourly_values_p) == number_of_hours,
                         f"maximum humidity setpoint hourly schedule {maximum_humidity_stpt_sch_id_p} have unexpected "
                         f"number of hours. The hours should be {number_of_hours}, but got "
-                        f"{len(maximum_humidity_stpt_hourly_values_p)} instead. "
+                        f"{len(maximum_humidity_stpt_hourly_values_p)} instead. ",
                     )
 
                 # None matches None or hourly values matched exactly.
@@ -200,8 +198,10 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
 
                 # ^ comparison for data type.
                 minimum_humidity_schedule_type_matched = (
-                    minimum_humidity_stpt_hourly_values_b is None
-                    == minimum_humidity_stpt_hourly_values_p is None
+                    minimum_humidity_stpt_hourly_values_b
+                    is None
+                    == minimum_humidity_stpt_hourly_values_p
+                    is None
                 )
 
                 maximum_humidity_schedule_matched = (
@@ -209,8 +209,10 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
                     == maximum_humidity_stpt_hourly_values_p
                 )
                 maximum_humidity_schedule_type_matched = (
-                    maximum_humidity_stpt_hourly_values_b is None
-                    == maximum_humidity_stpt_hourly_values_p is None
+                    maximum_humidity_stpt_hourly_values_b
+                    is None
+                    == maximum_humidity_stpt_hourly_values_p
+                    is None
                 )
 
                 return {
@@ -239,8 +241,12 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
                 ]
 
                 return (
-                    minimum_humidity_schedule_type_matched and maximum_humidity_schedule_type_matched
-                    and not (minimum_humidity_schedule_matched and maximum_humidity_schedule_matched)
+                    minimum_humidity_schedule_type_matched
+                    and maximum_humidity_schedule_type_matched
+                    and not (
+                        minimum_humidity_schedule_matched
+                        and maximum_humidity_schedule_matched
+                    )
                 )
 
             def rule_check(self, context, calc_vals=None, data=None):
@@ -267,6 +273,9 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
                 # guaranteed that either b or p has Null
                 return (
                     FAIL_MSG_P
-                    if (minimum_humidity_stpt_sch_id_b and maximum_humidity_stpt_sch_id_b)
+                    if (
+                        minimum_humidity_stpt_sch_id_b
+                        and maximum_humidity_stpt_sch_id_b
+                    )
                     else FAIL_MSG_B
                 )
