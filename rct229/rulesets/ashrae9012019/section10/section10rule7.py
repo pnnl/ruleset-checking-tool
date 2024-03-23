@@ -3,7 +3,10 @@ from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedB
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_1_fns import table_g3_5_1_lookup
-from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_2_fns import table_g3_5_2_lookup
+from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_2_fns import (
+    table_g3_5_2_lookup,
+    HeatPumpEquipmentType,
+)
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_4_fns import table_g3_5_4_lookup
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types import (
     get_baseline_system_types,
@@ -198,7 +201,7 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
                 )
                 expected_baseline_eff_data = table_g3_5_2_lookup(
                     hvac_system_type_b,
-                    "heat pumps, air-cooled (cooling mode)",
+                    HeatPumpEquipmentType.HEAT_PUMP_AIR_COOLED_COOLING,
                     total_cool_capacity_b,
                 )
                 most_conservative_eff_b = expected_baseline_eff_data[

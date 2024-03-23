@@ -9,7 +9,7 @@ class AppGAirSysEffTableSearchInfo(TypedDict):
     most_conservative_efficiency: float | None
 
 
-class EquipmentType:
+class GasHeatingEquipmentType:
     """Enumeration class for equipment types in Table G3.5.5"""
 
     WARM_AIR_FURNACE_GAS_FIRED: str = "Warm-air furnace, gas-fired"
@@ -45,9 +45,9 @@ def table_g3_5_5_lookup(
             }
         ]
     """
-    if equipment_type == EquipmentType.WARM_AIR_FURNACE_GAS_FIRED:
+    if equipment_type == GasHeatingEquipmentType.WARM_AIR_FURNACE_GAS_FIRED:
         capacity_threshold_list = furnace_capacity_threshold_list
-    elif equipment_type == EquipmentType.WARM_AIR_UNIT_HEATER_GAS_FIRED:
+    elif equipment_type == GasHeatingEquipmentType.WARM_AIR_UNIT_HEATER_GAS_FIRED:
         capacity_threshold_list = uh_capacity_threshold_list
     else:
         raise ValueError(f"Invalid equipment type: {equipment_type}")
