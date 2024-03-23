@@ -209,11 +209,8 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
                     == maximum_humidity_stpt_hourly_values_p
                 )
                 maximum_humidity_schedule_type_matched = (
-                    maximum_humidity_stpt_hourly_values_b
-                    is None
-                    == maximum_humidity_stpt_hourly_values_p
-                    is None
-                )
+                    maximum_humidity_stpt_hourly_values_b is None
+                ) == (maximum_humidity_stpt_hourly_values_p is None)
 
                 return {
                     "minimum_humidity_stpt_sch_id_b": minimum_humidity_stpt_sch_id_b,
@@ -272,10 +269,10 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
 
                 # guaranteed that either b or p has Null
                 return (
-                    FAIL_MSG_P
+                    FAIL_MSG_B
                     if (
                         minimum_humidity_stpt_sch_id_b
                         and maximum_humidity_stpt_sch_id_b
                     )
-                    else FAIL_MSG_B
+                    else FAIL_MSG_P
                 )
