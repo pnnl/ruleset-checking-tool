@@ -244,11 +244,9 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
                         ),
                     ]
 
-            modeled_efficiency_values = getattr_(
-                heating_system_b, "HeatingSystem", "efficiency_metric_values"
-            )
-            modeled_efficiency_metrics = getattr_(
-                heating_system_b, "HeatingSystem", "efficiency_metric_types"
+            modeled_effs_b = zip(
+                heating_system_b["efficiency_metric_values"],
+                heating_system_b["efficiency_metric_types"],
             )
 
             if hvac_system_type_b in SINGLE_EFF_SYS_TYPES:
@@ -256,23 +254,40 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
                 expected_low_temp_eff_b = None
                 modeled_high_temp_eff_b = None
                 modeled_low_temp_eff_b = None
-                expected_eff_b = expected_baseline_eff_data["minimum_efficiency"]
-                expected_eff_metric_b = expected_baseline_eff_data["efficiency_metric"]
 
-                modeled_eff_b = next(
+                expected_effs_b = [
                     (
-                        eff
-                        for eff, metric in zip(
-                            modeled_efficiency_values, modeled_efficiency_metrics
-                        )
-                        if metric == expected_eff_metric_b
-                    ),
-                    None,
-                )
+                        expected_baseline_eff["minimum_efficiency"],
+                        expected_baseline_eff["efficiency_metric"],
+                    )
+                    for expected_baseline_eff in expected_baseline_eff_data
+                ]
+
+                # Filter modeled efficiencies to only include those with the expected efficiency metrics
+                modeled_effs_b = [
+                    modeled_eff_b
+                    for expected_eff_b in expected_effs_b
+                    for modeled_eff_b in modeled_effs_b
+                    if modeled_eff_b[1] == expected_eff_b[1]
+                ]
+
+                assert (
+                    len(modeled_effs_b) > 0
+                ), "No modeled efficiencies were found with the expected efficiency metrics"
+
+                # Filter expected efficiencies to only include those with the modeled efficiency metrics
+                expected_effs_b = [
+                    expected_eff_b
+                    for expected_eff_b in expected_effs_b
+                    if expected_eff_b[1] in [eff[1] for eff in modeled_effs_b]
+                ]
+                assert len(modeled_effs_b) == len(
+                    expected_effs_b
+                ), "The number of modeled efficiencies does not match the number of expected efficiencies. Check for duplicated efficiency metrics in the modeled efficiencies."
 
             else:
-                expected_eff_b = None
-                modeled_eff_b = None
+                expected_effs_b = []
+                modeled_effs_b = []
                 expected_high_temp_eff_b = expected_baseline_eff_data[0][
                     "minimum_efficiency"
                 ]
@@ -289,9 +304,7 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
                 modeled_high_temp_eff_b = next(
                     (
                         eff
-                        for eff, metric in zip(
-                            modeled_efficiency_values, modeled_efficiency_metrics
-                        )
+                        for eff, metric in modeled_effs_b
                         if metric == expected_high_temp_eff_metric_b
                     ),
                     None,
@@ -299,9 +312,7 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
                 modeled_low_temp_eff_b = next(
                     (
                         eff
-                        for eff, metric in zip(
-                            modeled_efficiency_values, modeled_efficiency_metrics
-                        )
+                        for eff, metric in modeled_effs_b
                         if metric == expected_low_temp_eff_metric_b
                     ),
                     None,
@@ -311,8 +322,8 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
                 "hvac_system_type_b": hvac_system_type_b,
                 "total_capacity_b": total_capacity_b,
                 "is_zone_agg_factor_undefined_and_needed": is_zone_agg_factor_undefined_and_needed,
-                "expected_eff_b": expected_eff_b,
-                "modeled_eff_b": modeled_eff_b,
+                "expected_effs_b": expected_effs_b,
+                "modeled_effs_b": modeled_effs_b,
                 "expected_high_temp_eff_b": expected_high_temp_eff_b,
                 "modeled_high_temp_eff_b": modeled_high_temp_eff_b,
                 "expected_low_temp_eff_b": expected_low_temp_eff_b,
@@ -321,10 +332,10 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
 
         def manual_check_required(self, context, calc_vals=None, data=None):
             hvac_system_type_b = calc_vals["hvac_system_type_b"]
-            expected_eff_b = calc_vals["expected_eff_b"]
+            expected_effs_b = calc_vals["expected_effs_b"]
             expected_high_temp_eff_b = calc_vals["expected_high_temp_eff_b"]
             expected_low_temp_eff_b = calc_vals["expected_low_temp_eff_b"]
-            modeled_eff_b = calc_vals["modeled_eff_b"]
+            modeled_effs_b = calc_vals["modeled_effs_b"]
             modeled_high_temp_eff_b = calc_vals["modeled_high_temp_eff_b"]
             modeled_low_temp_eff_b = calc_vals["modeled_low_temp_eff_b"]
             total_capacity_b = calc_vals["total_capacity_b"]
@@ -334,8 +345,13 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
 
             # Case 4
             if (
-                modeled_eff_b is not None
-                and modeled_eff_b == expected_eff_b
+                len(modeled_effs_b) > 0
+                and all(
+                    modeled_eff_b[0] == expected_eff_b[0]
+                    for modeled_eff_b, expected_eff_b in zip(
+                        modeled_effs_b, expected_effs_b
+                    )
+                )
                 and total_capacity_b is None
             ):
                 return True
@@ -353,8 +369,13 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
 
             # Case 7
             if (
-                modeled_eff_b is not None
-                and modeled_eff_b == expected_eff_b
+                len(modeled_effs_b) > 0
+                and all(
+                    modeled_eff_b[0] == expected_eff_b[0]
+                    for modeled_eff_b, expected_eff_b in zip(
+                        modeled_effs_b, expected_effs_b
+                    )
+                )
                 and is_zone_agg_factor_undefined_and_needed
             ):
                 return True
@@ -381,12 +402,17 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
             ]
 
             if hvac_system_type_b in SINGLE_EFF_SYS_TYPES:
-                expected_eff_b = calc_vals["expected_eff_b"]
-                modeled_eff_b = calc_vals["modeled_eff_b"]
+                expected_effs_b = calc_vals["expected_effs_b"]
+                modeled_effs_b = calc_vals["modeled_effs_b"]
 
                 # Case 1
                 return (
-                    modeled_eff_b == expected_eff_b
+                    all(
+                        modeled_eff_b == expected_eff_b
+                        for modeled_eff_b, expected_eff_b in zip(
+                            modeled_effs_b, expected_effs_b
+                        )
+                    )
                     and total_capacity_b is not None
                     and not is_zone_agg_factor_undefined_and_needed
                 )
