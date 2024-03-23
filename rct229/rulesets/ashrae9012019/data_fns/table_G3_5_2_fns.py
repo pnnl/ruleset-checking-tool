@@ -12,7 +12,7 @@ class AppGAirSysEffTableSearchInfo(TypedDict):
     most_conservative_efficiency: float | None
 
 
-class EquipmentType:
+class HeatPumpEquipmentType:
     """Enumeration class for equipment types in Table G3.5.2"""
 
     HEAT_PUMP_AIR_COOLED_HEATING: str = "heat pumps, air-cooled (heating mode)"
@@ -54,9 +54,9 @@ def table_g3_5_2_lookup(
         }
     """
 
-    if equipment_type == EquipmentType.HEAT_PUMP_AIR_COOLED_HEATING:
+    if equipment_type == HeatPumpEquipmentType.HEAT_PUMP_AIR_COOLED_HEATING:
         capacity_threshold_list = heat_mode_capacity_threshold_list
-    elif equipment_type == EquipmentType.HEAT_PUMP_AIR_COOLED_COOLING:
+    elif equipment_type == HeatPumpEquipmentType.HEAT_PUMP_AIR_COOLED_COOLING:
         capacity_threshold_list = cool_mode_capacity_threshold_list
     else:
         raise ValueError(f"Invalid equipment type: {equipment_type}")

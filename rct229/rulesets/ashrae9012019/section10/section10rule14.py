@@ -2,9 +2,16 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rulesets.ashrae9012019 import BASELINE_0
-from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_2_fns import table_g3_5_2_lookup
+from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_2_fns import (
+    table_g3_5_2_lookup,
+    HeatPumpEquipmentType,
+    RatingCondition,
+)
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_4_fns import table_g3_5_4_lookup
-from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_5_fns import table_g3_5_5_lookup
+from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_5_fns import (
+    table_g3_5_5_lookup,
+    GasHeatingEquipmentType,
+)
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types import (
     get_baseline_system_types,
 )
@@ -100,6 +107,17 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
             "baseline_system_zones_served_dict": baseline_system_zones_served_dict,
         }
 
+    def list_filter(self, context_item, data):
+        hvac_b = context_item.BASELINE_0
+        baseline_system_types_dict = data["baseline_system_types_dict"]
+        applicable_hvac_sys_ids = [
+            hvac_id
+            for sys_list in baseline_system_types_dict.values()
+            for hvac_id in sys_list
+        ]
+
+        return hvac_b["id"] in applicable_hvac_sys_ids
+
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
             super(Section10Rule14.HVACRule, self).__init__(
@@ -115,20 +133,9 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
                 },
             )
 
-        def is_applicable(self, context, data=None):
-            hvac_b = context.BASELINE_0
-            hvac_id_b = hvac_b["id"]
-            baseline_system_types_dict = data["baseline_system_types_dict"]
-
-            return any(
-                hvac_id_b in baseline_system_types_dict[system_type]
-                for system_type in baseline_system_types_dict
-            )
-
         def get_calc_vals(self, context, data=None):
             hvac_b = context.BASELINE_0
             heating_system_b = hvac_b["heating_system"]
-            cooling_system_b = hvac_b.get("cooling_system")
             baseline_system_types_dict_b = data["baseline_system_types_dict"]
             hvac_zone_list_w_area_dict_b = data["baseline_system_zones_served_dict"]
             zone_list_b = hvac_zone_list_w_area_dict_b[hvac_b.id]
@@ -149,7 +156,8 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
                 if total_capacity_b is None:
                     total_capacity_b = heating_system_b.get("design_capacity")
 
-            else:  # HVAC_SYS.SYS_4
+            else:  # HVAC_SYS.SYS_4, cooling system required per 'is_baseline_system_4.py'
+                cooling_system_b = hvac_b["cooling_system"]
                 total_capacity_b = cooling_system_b.get("rated_total_cool_capacity")
 
                 if total_capacity_b is None:
@@ -181,42 +189,43 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
                     is_zone_agg_factor_undefined_and_needed = True
 
             if hvac_system_type_b == HVAC_SYS.SYS_2:
-                expected_baseline_eff_data = table_g3_5_4_lookup(hvac_system_type_b)
+                expected_baseline_eff_data = [table_g3_5_4_lookup(hvac_system_type_b)]
 
             elif hvac_system_type_b in [HVAC_SYS.SYS_3, HVAC_SYS.SYS_3A]:
                 if total_capacity_b is None:
                     expected_baseline_eff_data = table_g3_5_5_lookup(
-                        "Warm-air furnace, gas-fired",
+                        GasHeatingEquipmentType.WARM_AIR_FURNACE_GAS_FIRED,
                         FURNACE_CAPACITY_LOW_RANGE_SAMPLE,
                     )
                 else:
                     expected_baseline_eff_data = table_g3_5_5_lookup(
-                        "Warm-air furnace, gas-fired",
+                        GasHeatingEquipmentType.WARM_AIR_FURNACE_GAS_FIRED,
                         total_capacity_b,
                     )
 
             elif hvac_system_type_b == HVAC_SYS.SYS_9:
                 if total_capacity_b is None:
                     expected_baseline_eff_data = table_g3_5_5_lookup(
-                        "Warm-air unit heaters, gas-fired",
+                        GasHeatingEquipmentType.WARM_AIR_UNIT_HEATER_GAS_FIRED,
                         FURNACE_CAPACITY_LOW_RANGE_SAMPLE,
                     )
                 else:
                     expected_baseline_eff_data = table_g3_5_5_lookup(
-                        "Warm-air unit heaters, gas-fired", total_capacity_b
+                        GasHeatingEquipmentType.WARM_AIR_UNIT_HEATER_GAS_FIRED,
+                        total_capacity_b,
                     )
 
             else:  # HVAC_SYS.SYS_4
                 if total_capacity_b is None:
                     expected_baseline_eff_data = [
                         table_g3_5_2_lookup(
-                            "heat pumps, air-cooled (heating mode)",
-                            "47F db/43F wb",
+                            HeatPumpEquipmentType.HEAT_PUMP_AIR_COOLED_HEATING,
+                            RatingCondition.HIGH_TEMP,
                             HEATPUMP_CAPACITY_LOW_RANGE_SAMPLE,
                         ),
                         table_g3_5_2_lookup(
-                            "heat pumps, air-cooled (heating mode)",
-                            "17F db/15F wb",
+                            HeatPumpEquipmentType.HEAT_PUMP_AIR_COOLED_HEATING,
+                            RatingCondition.LOW_TEMP,
                             HEATPUMP_CAPACITY_LOW_RANGE_SAMPLE,
                         ),
                     ]
@@ -224,13 +233,13 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
                 else:
                     expected_baseline_eff_data = [
                         table_g3_5_2_lookup(
-                            "heat pumps, air-cooled (heating mode)",
-                            "47F db/43F wb",
+                            HeatPumpEquipmentType.HEAT_PUMP_AIR_COOLED_HEATING,
+                            RatingCondition.HIGH_TEMP,
                             total_capacity_b,
                         ),
                         table_g3_5_2_lookup(
-                            "heat pumps, air-cooled (heating mode)",
-                            "17F db/15F wb",
+                            HeatPumpEquipmentType.HEAT_PUMP_AIR_COOLED_HEATING,
+                            RatingCondition.LOW_TEMP,
                             total_capacity_b,
                         ),
                     ]
