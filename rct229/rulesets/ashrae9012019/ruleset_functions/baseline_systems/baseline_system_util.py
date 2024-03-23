@@ -1,4 +1,7 @@
-class HVAC_SYS:
+import enum
+
+
+class HVAC_SYS(enum.StrEnum):
     """Class holding HVAC system type value"""
 
     SYS_1 = "Sys-1"

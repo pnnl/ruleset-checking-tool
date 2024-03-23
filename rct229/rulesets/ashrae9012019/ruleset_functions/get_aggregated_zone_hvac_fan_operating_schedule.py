@@ -1,3 +1,5 @@
+from typing import Optional
+
 import pandas as pd
 
 from rct229.rule_engine.rulesets import LeapYear
@@ -9,7 +11,7 @@ from rct229.utils.jsonpath_utils import find_one
 from rct229.utils.utility_functions import find_exactly_one_hvac_system
 
 
-def get_aggregated_zone_hvac_fan_operating_schedule(rmd, zone_id, is_leap_year=False):
+def get_aggregated_zone_hvac_fan_operating_schedule(rmd: dict, zone_id: str, is_leap_year: Optional[bool] = False) -> list:
     """
      This function loops through all of the HVAC system fan operating schedules associated with a specific zone and
      creates an aggregated fan operating schedule for the zone. More specifically, if any of the fan operating schedules

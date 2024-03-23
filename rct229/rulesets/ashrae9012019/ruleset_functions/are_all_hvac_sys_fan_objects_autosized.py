@@ -9,7 +9,7 @@ from rct229.utils.utility_functions import (
 )
 
 
-def are_all_hvac_sys_fan_objs_autosized(rmi, hvac_id):
+def are_all_hvac_sys_fan_objs_autosized(rmi: dict, hvac_id: str)-> bool:
     """
     The function returns true if all supply fan objects associated with an hvac system are autosized.
 

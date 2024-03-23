@@ -1,3 +1,5 @@
+from typing import TypedDict
+
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
     OpaqueSurfaceType as OST,
 )
@@ -17,8 +19,11 @@ from rct229.utils.pint_utils import ZERO
 
 DOOR = SchemaEnums.schema_enums["SubsurfaceClassificationOptions"].DOOR
 
+class SkylightRoofRatiosDict(TypedDict):
 
-def get_building_scc_skylight_roof_ratios_dict(climate_zone, building):
+
+
+def get_building_scc_skylight_roof_ratios_dict(climate_zone: str, building: dict):
     """Gets a dictionary mapping skylight and envelope roof ratios for a building for residential, non-residential,
     mixed and semi-heated surface conditioning categories
             Parameters
