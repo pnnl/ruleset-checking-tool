@@ -22,12 +22,12 @@ SCHEMA_OUTPUT_PATH = os.path.join(file_dir, SCHEMA_OUTPUT_KEY)
 
 def check_fluid_loop_association(rmd):
     """
-    Check the association between fluid loops or piping systems and the terminals and miscellaneous equipment served by them.
+    Check the association between fluid loops and the various objects which reference them.
     Parameters
     ----------
     rmd
 
-    Returns list of mismatched fluid loop or piping ids
+    Returns list of mismatched fluid loop ids
     -------
 
     """
