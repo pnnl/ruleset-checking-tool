@@ -38,9 +38,14 @@ def check_fluid_loop_or_piping_association(rmd):
 
     """
     mismatch_list = []
-    fluid_loop_or_piping_id_list = find_all(
-        "$.buildings[*].building_segments[*].fluid_loops_or_piping[*].id", rmd
+    fluid_loop_or_piping_id_list = find_all("$.fluid_loops[*].id", rmd)
+    fluid_loop_or_piping_id_list.extend(
+        find_all(
+            "$.service_water_heating_distribution_systems[*].service_water_piping[*].id",
+            rmd,
+        )
     )
+
     referenced_fluid_loop_or_piping_id_list = find_all(
         "$.pumps[*].loop_or_piping",
         rmd,
