@@ -19,7 +19,111 @@ SCHEMA_T24_ENUM_PATH = os.path.join(file_dir, SCHEMA_T24_ENUM_KEY)
 SCHEMA_RESNET_ENUM_PATH = os.path.join(file_dir, SCHEMA_RESNET_ENUM_KEY)
 SCHEMA_OUTPUT_PATH = os.path.join(file_dir, SCHEMA_OUTPUT_KEY)
 
-# def check_fluid_loop_association(rmd)
+
+def check_fluid_loop_association(rmd):
+    """
+    Check the association between fluid loops or piping systems and the terminals and miscellaneous equipment served by them.
+    Parameters
+    ----------
+    rmd
+
+    Returns list of mismatched fluid loop or piping ids
+    -------
+
+    """
+    mismatch_list = []
+
+    fluid_loop_id_list = find_all("$.fluid_loops[*].id", rmd)
+    fluid_loop_id_list.extend(find_all("$.fluid_loops[*].child_loops[*].id", rmd))
+
+    referenced_id_list = find_all("$.chillers[*].cooling_loop", rmd)
+    referenced_id_list.extend(find_all("$.chillers[*].condensing_loop", rmd))
+    referenced_id_list.extend(find_all("$.chillers[*].heat_recovery_loop", rmd))
+    referenced_id_list.extend(
+        find_all(
+            "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].heating_system.hot_water_loop",
+            rmd,
+        )
+    )
+    referenced_id_list.extend(
+        find_all(
+            "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].heating_system.water_source_heat_pump_loop",
+            rmd,
+        )
+    )
+    referenced_id_list.extend(
+        find_all(
+            "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].cooling_system.chilled_water_loop",
+            rmd,
+        )
+    )
+    referenced_id_list.extend(
+        find_all(
+            "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].cooling_system.condenser_water_loop",
+            rmd,
+        )
+    )
+    referenced_id_list.extend(
+        find_all(
+            "$.buildings[*].building_segments[*].zones[*].spaces[*].miscellaneous_equipment[*].energy_from_loop",
+            rmd,
+        )
+    )
+    referenced_id_list.extend(
+        find_all(
+            "$.buildings[*].building_segments[*].zones[*].spaces[*].miscellaneous_equipment[*].remaining_fraction_to_loop",
+            rmd,
+        )
+    )
+    referenced_id_list.extend(
+        find_all(
+            "$.buildings[*].building_segments[*].zones[*].terminals[*].cooling_from_loop",
+            rmd,
+        )
+    )
+    referenced_id_list.extend(
+        find_all(
+            "$.buildings[*].building_segments[*].zones[*].terminals[*].heating_from_loop",
+            rmd,
+        )
+    )
+    referenced_id_list.extend(
+        find_all(
+            "$.service_water_heating_equipment[*].hot_water_loop",
+            rmd,
+        )
+    )
+    referenced_id_list.extend(
+        find_all(
+            "$.heat_rejections[*].loop",
+            rmd,
+        )
+    )
+    referenced_id_list.extend(
+        find_all(
+            "$.boilers[*].loop",
+            rmd,
+        )
+    )
+    referenced_id_list.extend(
+        find_all(
+            "$.service_water_heating_equipment[*].hot_water_loop",
+            rmd,
+        )
+    )
+    referenced_id_list.extend(
+        find_all(
+            "$.external_fluid_sources[*].loop",
+            rmd,
+        )
+    )
+
+    for fluid_loop_id in referenced_id_list:
+        if fluid_loop_id not in fluid_loop_id_list:
+            mismatch_list.append(fluid_loop_id)
+
+    return mismatch_list
+
 
 # def check_zone_association(rmd)
 
