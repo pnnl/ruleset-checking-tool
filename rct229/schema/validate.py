@@ -28,7 +28,7 @@ SCHEMA_OUTPUT_PATH = os.path.join(file_dir, SCHEMA_OUTPUT_KEY)
 
 def check_fluid_loop_or_piping_association(rmd):
     """
-    Check the association between fluid loops or piping and the equipment served by the fluid loops or piping.
+    Check the association between fluid loops or piping and pumps that reference them.
     Parameters
     ----------
     rmd
