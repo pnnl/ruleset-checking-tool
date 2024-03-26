@@ -20,12 +20,12 @@ SCHEMA_RESNET_ENUM_PATH = os.path.join(file_dir, SCHEMA_RESNET_ENUM_KEY)
 SCHEMA_OUTPUT_PATH = os.path.join(file_dir, SCHEMA_OUTPUT_KEY)
 
 
-def check_fluid_loop_association(rmd):
+def check_fluid_loop_association(rpd):
     """
     Check the association between fluid loops and the various objects which reference them.
     Parameters
     ----------
-    rmd
+    rpd
 
     Returns list of mismatched fluid loop ids
     -------
@@ -33,88 +33,100 @@ def check_fluid_loop_association(rmd):
     """
     mismatch_list = []
 
-    fluid_loop_id_list = find_all("$.fluid_loops[*].id", rmd)
-    fluid_loop_id_list.extend(find_all("$.fluid_loops[*].child_loops[*].id", rmd))
+    fluid_loop_id_list = find_all(
+        "$.ruleset_model_descriptions[*].fluid_loops[*].id", rpd
+    )
+    fluid_loop_id_list.extend(
+        find_all(
+            "$.ruleset_model_descriptions[*].fluid_loops[*].child_loops[*].id", rpd
+        )
+    )
 
-    referenced_id_list = find_all("$.chillers[*].cooling_loop", rmd)
-    referenced_id_list.extend(find_all("$.chillers[*].condensing_loop", rmd))
-    referenced_id_list.extend(find_all("$.chillers[*].heat_recovery_loop", rmd))
+    referenced_id_list = find_all(
+        "$.ruleset_model_descriptions[*].chillers[*].cooling_loop", rpd
+    )
+    referenced_id_list.extend(
+        find_all("$.ruleset_model_descriptions[*].chillers[*].condensing_loop", rpd)
+    )
+    referenced_id_list.extend(
+        find_all("$.ruleset_model_descriptions[*].chillers[*].heat_recovery_loop", rpd)
+    )
     referenced_id_list.extend(
         find_all(
-            "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].heating_system.hot_water_loop",
-            rmd,
+            "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].heating_system.hot_water_loop",
+            rpd,
         )
     )
     referenced_id_list.extend(
         find_all(
-            "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].heating_system.water_source_heat_pump_loop",
-            rmd,
+            "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].heating_system.water_source_heat_pump_loop",
+            rpd,
         )
     )
     referenced_id_list.extend(
         find_all(
-            "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].cooling_system.chilled_water_loop",
-            rmd,
+            "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].cooling_system.chilled_water_loop",
+            rpd,
         )
     )
     referenced_id_list.extend(
         find_all(
-            "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].cooling_system.condenser_water_loop",
-            rmd,
+            "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].cooling_system.condenser_water_loop",
+            rpd,
         )
     )
     referenced_id_list.extend(
         find_all(
-            "$.buildings[*].building_segments[*].zones[*].spaces[*].miscellaneous_equipment[*].energy_from_loop",
-            rmd,
+            "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].spaces[*].miscellaneous_equipment[*].energy_from_loop",
+            rpd,
         )
     )
     referenced_id_list.extend(
         find_all(
-            "$.buildings[*].building_segments[*].zones[*].spaces[*].miscellaneous_equipment[*].remaining_fraction_to_loop",
-            rmd,
+            "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].spaces[*].miscellaneous_equipment[*].remaining_fraction_to_loop",
+            rpd,
         )
     )
     referenced_id_list.extend(
         find_all(
-            "$.buildings[*].building_segments[*].zones[*].terminals[*].cooling_from_loop",
-            rmd,
+            "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].terminals[*].cooling_from_loop",
+            rpd,
         )
     )
     referenced_id_list.extend(
         find_all(
-            "$.buildings[*].building_segments[*].zones[*].terminals[*].heating_from_loop",
-            rmd,
+            "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].terminals[*].heating_from_loop",
+            rpd,
         )
     )
     referenced_id_list.extend(
         find_all(
-            "$.service_water_heating_equipment[*].hot_water_loop",
-            rmd,
+            "$.ruleset_model_descriptions[*].service_water_heating_equipment[*].hot_water_loop",
+            rpd,
         )
     )
     referenced_id_list.extend(
         find_all(
-            "$.heat_rejections[*].loop",
-            rmd,
+            "$.ruleset_model_descriptions[*].heat_rejections[*].loop",
+            rpd,
         )
     )
     referenced_id_list.extend(
         find_all(
-            "$.boilers[*].loop",
-            rmd,
+            "$.ruleset_model_descriptions[*].boilers[*].loop",
+            rpd,
         )
     )
     referenced_id_list.extend(
         find_all(
-            "$.service_water_heating_equipment[*].hot_water_loop",
-            rmd,
+            "$.ruleset_model_descriptions[*].service_water_heating_equipment[*].hot_water_loop",
+            rpd,
         )
     )
     referenced_id_list.extend(
         find_all(
-            "$.external_fluid_sources[*].loop",
-            rmd,
+            "$.ruleset_model_descriptions[*].external_fluid_sources[*].loop",
+            rpd,
         )
     )
 
