@@ -23,7 +23,176 @@ SCHEMA_OUTPUT_PATH = os.path.join(file_dir, SCHEMA_OUTPUT_KEY)
 
 # def check_zone_association(rmd)
 
-# def check_schedule_association(rmd)
+
+def check_schedule_association(rpd):
+    """
+    Check the association between schedules and the various objects which reference them.
+    Parameters
+    ----------
+    rpd
+
+    Returns list of mismatched schedule ids
+    -------
+
+    """
+    mismatch_list = []
+
+    schedule_id_list = find_all("$.ruleset_model_descriptions[*].schedules[*].id", rpd)
+
+    referenced_id_list = find_all(
+        "$.ruleset_model_descriptions[*].buildings[*].elevators[*].cab_motor_multiplier_schedule",
+        rpd,
+    )
+    referenced_id_list.extend(
+        find_all(
+            "$.ruleset_model_descriptions[*].buildings[*].elevators[*].cab_ventilation_fan_multiplier_schedule",
+            rpd,
+        )
+    )
+    referenced_id_list.extend(
+        find_all(
+            "$.ruleset_model_descriptions[*].buildings[*].elevators[*].cab_lighting_multiplier_schedule",
+            rpd,
+        )
+    )
+    referenced_id_list.extend(
+        find_all(
+            "$.ruleset_model_descriptions[*].buildings[*].refrigerated_cases[*].power_multiplier_schedule",
+            rpd,
+        )
+    )
+    referenced_id_list.extend(
+        find_all(
+            "$.ruleset_model_descriptions[*].buildings[*].exterior_lighting[*].multiplier_schedule",
+            rpd,
+        )
+    )
+    referenced_id_list.extend(
+        find_all(
+            "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].infiltration.multiplier_schedule",
+            rpd,
+        )
+    )
+    referenced_id_list.extend(
+        find_all(
+            "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].thermostat_cooling_setpoint_schedule",
+            rpd,
+        )
+    )
+    referenced_id_list.extend(
+        find_all(
+            "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].thermostat_heating_setpoint_schedule",
+            rpd,
+        )
+    )
+    referenced_id_list.extend(
+        find_all(
+            "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].minimum_humidity_setpoint_schedule",
+            rpd,
+        )
+    )
+    referenced_id_list.extend(
+        find_all(
+            "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].maximum_humidity_setpoint_schedule",
+            rpd,
+        )
+    )
+    referenced_id_list.extend(
+        find_all(
+            "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].exhaust_airflow_rate_multiplier_schedule",
+            rpd,
+        )
+    )
+    referenced_id_list.extend(
+        find_all(
+            "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].spaces[*].occupant_multiplier_schedule",
+            rpd,
+        )
+    )
+    referenced_id_list.extend(
+        find_all(
+            "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].spaces[*].interior_lighting[*].lighting_multiplier_schedule",
+            rpd,
+        )
+    )
+    referenced_id_list.extend(
+        find_all(
+            "$.ruleset_model_descriptions[*].service_water_heating_distribution_systems[*].flow_multiplier_schedule",
+            rpd,
+        )
+    )
+    referenced_id_list.extend(
+        find_all(
+            "$.ruleset_model_descriptions[*].service_water_heating_distribution_systems[*].entering_water_mains_temperature_schedule",
+            rpd,
+        )
+    )
+    referenced_id_list.extend(
+        find_all(
+            "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].spaces[*].service_water_heating_uses[*].use_multiplier_schedule",
+            rpd,
+        )
+    )
+    referenced_id_list.extend(
+        find_all(
+            "$.ruleset_model_descriptions[*].buildings[*].building_open_schedule",
+            rpd,
+        )
+    )
+    referenced_id_list.extend(
+        find_all(
+            "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].terminals[*].minimum_outdoor_airflow_multiplier_schedule",
+            rpd,
+        )
+    )
+    referenced_id_list.extend(
+        find_all(
+            "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].spaces[*].miscellaneous_equipment[*].multiplier_schedule",
+            rpd,
+        )
+    )
+    referenced_id_list.extend(
+        find_all(
+            "$.ruleset_model_descriptions[*].fluid_loops[*].cooling_or_condensing_design_and_control.operation_schedule",
+            rpd,
+        )
+    )
+    referenced_id_list.extend(
+        find_all(
+            "$.ruleset_model_descriptions[*].fluid_loops[*].heating_design_and_control.operation_schedule",
+            rpd,
+        )
+    )
+    referenced_id_list.extend(
+        find_all(
+            "$.ruleset_model_descriptions[*].fluid_loops[*].child_loops[*].cooling_or_condensing_design_and_control.operation_schedule",
+            rpd,
+        )
+    )
+    referenced_id_list.extend(
+        find_all(
+            "$.ruleset_model_descriptions[*].fluid_loops[*].child_loops[*].heating_design_and_control.operation_schedule",
+            rpd,
+        )
+    )
+    referenced_id_list.extend(
+        find_all(
+            "$.ruleset_model_descriptions[*].heating_ventilation_air_conditioning_systems[*].fan_system.supply_air_temperature_reset_schedule",
+            rpd,
+        )
+    )
+    referenced_id_list.extend(
+        find_all(
+            "$.ruleset_model_descriptions[*].heating_ventilation_air_conditioning_systems[*].fan_system.operating_schedule",
+            rpd,
+        )
+    )
+
+    for schedule_id in referenced_id_list:
+        if schedule_id not in schedule_id_list:
+            mismatch_list.append(schedule_id)
+    return mismatch_list
+
 
 # def check_fluid_loop_or_piping_association(rmd)
 
