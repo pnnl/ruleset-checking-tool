@@ -4,7 +4,7 @@ import importlib
 __all__ = [
     "section4rule1",
     "section4rule2",
-    # "section4rule11",
+    "section4rule11",
     "section4rule14",
 ]
 

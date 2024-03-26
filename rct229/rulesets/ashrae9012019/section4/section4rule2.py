@@ -271,8 +271,7 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
                 return (
                     FAIL_MSG_B
                     if (
-                        minimum_humidity_stpt_sch_id_b
-                        or maximum_humidity_stpt_sch_id_b
+                        minimum_humidity_stpt_sch_id_b or maximum_humidity_stpt_sch_id_b
                     )
                     else FAIL_MSG_P
                 )
