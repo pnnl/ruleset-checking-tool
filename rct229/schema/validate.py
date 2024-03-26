@@ -27,7 +27,46 @@ SCHEMA_OUTPUT_PATH = os.path.join(file_dir, SCHEMA_OUTPUT_KEY)
 
 # def check_fluid_loop_or_piping_association(rmd)
 
-# def check_service_water_heating_association(rmd)
+
+def check_service_water_heating_association(rpd):
+    """
+    Check the association between service water heating distribution systems and the various objects that reference them.
+    Parameters
+    ----------
+    rpd
+
+    Returns list of mismatched service water heating distribution system ids
+    -------
+
+    """
+    mismatch_list = []
+    service_water_heating_id_list = find_all(
+        "$.ruleset_model_descriptions[*].service_water_heating_distribution_systems[*].id",
+        rpd,
+    )
+
+    referenced_service_water_heating_id_list = find_all(
+        "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].spaces[*].service_water_heating_uses[*].served_by_distribution_system",
+        rpd,
+    )
+    referenced_service_water_heating_id_list.extend(
+        find_all(
+            "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].served_by_service_water_heating_system",
+            rpd,
+        )
+    )
+    referenced_service_water_heating_id_list.extend(
+        find_all(
+            "$.ruleset_model_descriptions[*].service_water_heating_equipment[*].distribution_system",
+            rpd,
+        )
+    )
+
+    for service_water_heating_id in referenced_service_water_heating_id_list:
+        if service_water_heating_id not in service_water_heating_id_list:
+            mismatch_list.append(service_water_heating_id)
+    return mismatch_list
+
 
 # search schedule with key words: Constraint to use when implemented :
 
