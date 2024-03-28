@@ -1,8 +1,17 @@
+from typing import TypedDict
+
 from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_all
 
 
-def get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmi):
+def ZonesTerminalUnitsServedByHVACSys(TypedDict):
+    terminal_unit_list: list[str]
+    zone_list: list[str]
+
+
+def get_dict_of_zones_and_terminal_units_served_by_hvac_sys(
+    rmi: dict,
+) -> dict[str, ZonesTerminalUnitsServedByHVACSys]:
     """
     Returns a dictionary of zones and terminal unit IDs associated with each HVAC system in the RMD.
 

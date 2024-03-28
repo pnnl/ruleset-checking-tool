@@ -1,3 +1,6 @@
+from typing import TypedDict
+
+from pint import Quantity
 from pydash import map_
 
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_dict_of_zones_and_terminal_units_served_by_hvac_sys import (
@@ -9,9 +12,14 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_target_baseline_sy
 )
 
 
+class HVACZoneListArea(TypedDict):
+    total_area: Quantity
+    zone_list: list[str]
+
+
 def get_lab_zone_hvac_systems(
     rmd_b: str, rmd_p: str, climate_zone: str, is_leap_year: bool
-):
+) -> dict[str, HVACZoneListArea]:
     """
     returns a list of HVAC systems serving only lab zones
 

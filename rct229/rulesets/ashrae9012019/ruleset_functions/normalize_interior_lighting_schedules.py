@@ -1,3 +1,5 @@
+from typing import Union
+
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_7_fns import (
     MANUAL_ON,
     NONE,
@@ -23,8 +25,11 @@ GET_NORMALIZE_SPACE_SCHEDULE__REQUIRED_FIELDS = {
 
 
 def normalize_interior_lighting_schedules(
-    space, space_height, schedules, adjust_for_credit=True
-):
+    space: dict,
+    space_height: Union[float, int],
+    schedules: list[float | int],
+    adjust_for_credit: bool = True,
+) -> list[float, int]:
     """This function would determine a normalized schedule for a data element in space.
     NOTE: The function currently only works for interior lighting
     Parameters

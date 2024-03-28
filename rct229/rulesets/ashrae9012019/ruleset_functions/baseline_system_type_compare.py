@@ -1,12 +1,17 @@
 from typing import Optional, Type
 
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
-    HVAC_SYSTEM_TYPE_DICTIONARY, HVAC_SYS,
+    HVAC_SYS,
+    HVAC_SYSTEM_TYPE_DICTIONARY,
 )
 from rct229.utils.assertions import assert_
 
 
-def baseline_system_type_compare(system_type: Type[HVAC_SYS], target_system_type: Type[HVAC_SYS], exact_match: Optional[bool] = True) -> bool:
+def baseline_system_type_compare(
+    system_type: Type[HVAC_SYS],
+    target_system_type: Type[HVAC_SYS],
+    exact_match: Optional[bool] = True,
+) -> bool:
     """
     Parameters
     ----------
@@ -36,9 +41,15 @@ def baseline_system_type_compare(system_type: Type[HVAC_SYS], target_system_type
     ]
     available_system_types.extend(available_target_system_list)
 
-    assert_(system_type in available_system_types, f"{system_type} does not match any baseline HVAC system type")
-    assert_(target_system_type in available_target_system_list, f"{target_system_type} does not match any primary "
-                                                                f"baseline HVAC system type")
+    assert_(
+        system_type in available_system_types,
+        f"{system_type} does not match any baseline HVAC system type",
+    )
+    assert_(
+        target_system_type in available_target_system_list,
+        f"{target_system_type} does not match any primary "
+        f"baseline HVAC system type",
+    )
 
     return (
         system_type == target_system_type

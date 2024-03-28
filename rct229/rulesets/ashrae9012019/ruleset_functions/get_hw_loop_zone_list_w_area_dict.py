@@ -1,3 +1,7 @@
+from typing import TypedDict
+
+from pint import Quantity
+
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_heating_type_fluid_loop import (
     is_hvac_sys_heating_type_fluid_loop,
 )
@@ -13,7 +17,12 @@ from rct229.utils.utility_functions import find_exactly_one_hvac_system
 HEATING_SOURCE = SchemaEnums.schema_enums["HeatingSourceOptions"]
 
 
-def get_hw_loop_zone_list_w_area(rmi_b):
+class HVACZoneListArea(TypedDict):
+    total_area: Quantity
+    zone_list: list[str]
+
+
+def get_hw_loop_zone_list_w_area(rmi_b: dict) -> dict[str, HVACZoneListArea]:
     """
     Get the list of zones and their total floor area served by each HHW loop in a baseline ruleset model instance.
 

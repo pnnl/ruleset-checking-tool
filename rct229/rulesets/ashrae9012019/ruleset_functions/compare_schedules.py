@@ -10,7 +10,12 @@ class CompareSchedulesEFLHDifference(TypedDict):
     eflh_difference: float
 
 
-def compare_schedules(schedule_1: list[float], schedule_2: list[float], mask_schedule: list[float], is_leap_year: bool) -> CompareSchedulesEFLHDifference:
+def compare_schedules(
+    schedule_1: list[float],
+    schedule_2: list[float],
+    mask_schedule: list[float],
+    is_leap_year: bool,
+) -> CompareSchedulesEFLHDifference:
     """Compare two schedules and determine if they match with or without a comparison factor when applicable
     NOTE: The function only works with hourly schedule for now.
 
@@ -64,7 +69,7 @@ def compare_schedules(schedule_1: list[float], schedule_2: list[float], mask_sch
     eflh_difference = eflh_schedule_1 - eflh_schedule_2
 
     return {
-        'total_hours_compared': total_hours_compared,
-        'total_hours_matched': total_hours_matched,
-        'eflh_difference': eflh_difference,
+        "total_hours_compared": total_hours_compared,
+        "total_hours_matched": total_hours_matched,
+        "eflh_difference": eflh_difference,
     }
