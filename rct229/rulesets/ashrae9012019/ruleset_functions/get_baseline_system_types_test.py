@@ -1,5 +1,4 @@
 import inspect
-from typing import List
 
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
@@ -46,7 +45,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types i
 )
 
 
-def exclude_sys_types(exclude_type: List[str]) -> List[str]:
+def exclude_sys_types(exclude_type: list[str]) -> list[str]:
     return [
         getattr(HVAC_SYS, sys_type[0])
         for sys_type in inspect.getmembers(HVAC_SYS)
@@ -54,7 +53,7 @@ def exclude_sys_types(exclude_type: List[str]) -> List[str]:
     ]
 
 
-def available_type_lists(baseline_system_types_dict: dict) -> List:
+def available_type_lists(baseline_system_types_dict: dict) -> list:
     return [
         hvac_type
         for hvac_type in baseline_system_types_dict
