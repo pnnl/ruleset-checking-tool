@@ -25,7 +25,38 @@ SCHEMA_OUTPUT_PATH = os.path.join(file_dir, SCHEMA_OUTPUT_KEY)
 
 # def check_schedule_association(rmd)
 
-# def check_fluid_loop_or_piping_association(rmd)
+
+def check_fluid_loop_or_piping_association(rpd):
+    """
+    Check the association between fluid loops or piping and pumps that reference them.
+    Parameters
+    ----------
+    rpd
+
+    Returns list of mismatched fluid loop or piping ids
+    -------
+
+    """
+    mismatch_list = []
+    fluid_loop_or_piping_id_list = find_all(
+        "$.ruleset_model_descriptions[*].fluid_loops[*].id", rpd
+    )
+    fluid_loop_or_piping_id_list.extend(
+        find_all(
+            "$.ruleset_model_descriptions[*].service_water_heating_distribution_systems[*].service_water_piping[*].id",
+            rpd,
+        )
+    )
+
+    referenced_fluid_loop_or_piping_id_list = find_all(
+        "$.ruleset_model_descriptions[*].pumps[*].loop_or_piping",
+        rpd,
+    )
+    for fluid_loop_or_piping_id in referenced_fluid_loop_or_piping_id_list:
+        if fluid_loop_or_piping_id not in fluid_loop_or_piping_id_list:
+            mismatch_list.append(fluid_loop_or_piping_id)
+    return mismatch_list
+
 
 # def check_service_water_heating_association(rmd)
 
