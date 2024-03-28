@@ -27,7 +27,7 @@ GET_NORMALIZE_SPACE_SCHEDULE__REQUIRED_FIELDS = {
 def normalize_interior_lighting_schedules(
     space: dict,
     space_height: Union[float, int],
-    schedules: list[float | int],
+    schedules: list[float, int],
     adjust_for_credit: bool = True,
 ) -> list[float, int]:
     """This function would determine a normalized schedule for a data element in space.
