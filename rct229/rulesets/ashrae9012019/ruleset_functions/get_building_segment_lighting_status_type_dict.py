@@ -14,7 +14,9 @@ class LightingStatusType:
     AS_DESIGNED_OR_AS_EXISTING: str = "AS-DESIGNED OR AS-EXISTING"
 
 
-def get_building_segment_lighting_status_type_dict(building_segment):
+def get_building_segment_lighting_status_type_dict(
+    building_segment: dict,
+) -> dict[str, LightingStatusType]:
     """Returns a dictionary that maps building_segment id to a LightingStatusType
 
     Parameters

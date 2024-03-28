@@ -1,3 +1,5 @@
+from pint import Quantity
+
 from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_functions.get_zones_computer_rooms import (
     get_zone_computer_rooms,
 )
@@ -7,7 +9,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_peak_internal_load
 from rct229.utils.pint_utils import ZERO
 
 
-def get_computer_zones_peak_cooling_load(rmi):
+def get_computer_zones_peak_cooling_load(rmi: dict) -> Quantity:
     """
     Return peak load of computer zones in the building
 

@@ -1,3 +1,5 @@
+from typing import TypedDict
+
 from pydash import juxtapose
 
 from rct229.rule_engine.memoize import memoize
@@ -57,6 +59,11 @@ COMPUTER_ROOM_PEAK_COOLING_LOAD_600000_BTUH = 600000 * ureg("Btu/hr")
 COMPUTER_ROOM_PEAK_COOLING_LOAD_3000000_BTUH = 3000000 * ureg("Btu/hr")
 
 
+class ZoneandSystem(TypedDict):
+    expected_system_type: str
+    system_origin: str
+
+
 class SYSTEMORIGIN:
     G311B = "G3_1_1b"
     G311C = "G3_1_1c"
@@ -68,7 +75,7 @@ class SYSTEMORIGIN:
 @memoize
 def get_zone_target_baseline_system(
     rmd_b: dict, rmd_p: dict, climate_zone_b: str, is_leap_year: bool
-):
+) -> dict[str, ZoneandSystem]:
     """
     Following G3.1.1, determines the baseline system type for each zone in a building
 

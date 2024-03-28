@@ -11,7 +11,9 @@ APPLICABLE_COOLING_SYSTEM = [
 ]
 
 
-def get_proposed_hvac_modeled_with_virtual_cooling(rmi_u, rmi_p):
+def get_proposed_hvac_modeled_with_virtual_cooling(
+    rmi_u: dict, rmi_p: dict
+) -> list[str]:
     """
 
     Get the list of HeatingVentilatingAirconditioningSystem in which Appendix G Table G3.1 #10 d is applicable (i.e.

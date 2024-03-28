@@ -4,7 +4,9 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_list_hvac_systems_assoc
 from rct229.utils.jsonpath_utils import find_all
 
 
-def get_dict_of_zones_hvac_sys_serving_specific_floor(rmd, floor_name):
+def get_dict_of_zones_hvac_sys_serving_specific_floor(
+    rmd: dict, floor_name: str
+) -> dict[str, list]:
     """
     Returns a dictionary with zone ids as the keys and the associated HVAC system as the values for zones serving a specific floor the applicable RMR i.e. {zone_1.id: [hvac_1.id, hvac_2.id, hvac_3.id], zone_2.id: [hvac_1.id, hvac_2.id, hvac_3.id]}.
 

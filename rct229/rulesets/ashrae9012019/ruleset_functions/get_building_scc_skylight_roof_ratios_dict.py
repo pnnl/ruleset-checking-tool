@@ -1,3 +1,7 @@
+from typing import TypedDict
+
+from pint import Quantity
+
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
     OpaqueSurfaceType as OST,
 )
@@ -18,7 +22,16 @@ from rct229.utils.pint_utils import ZERO
 DOOR = SchemaEnums.schema_enums["SubsurfaceClassificationOptions"].DOOR
 
 
-def get_building_scc_skylight_roof_ratios_dict(climate_zone, building):
+class SkylightRoofRatiosDict(TypedDict):
+    SCC.EXTERIOR_RESIDENTIAL: float
+    SCC.EXTERIOR_NON_RESIDENTIAL: float
+    SCC.EXTERIOR_MIXED: float
+    SCC.SEMI_EXTERIOR: float
+
+
+def get_building_scc_skylight_roof_ratios_dict(
+    climate_zone: str, building: dict
+) -> SkylightRoofRatiosDict:
     """Gets a dictionary mapping skylight and envelope roof ratios for a building for residential, non-residential,
     mixed and semi-heated surface conditioning categories
             Parameters
@@ -86,7 +99,7 @@ def get_building_scc_skylight_roof_ratios_dict(climate_zone, building):
     }
 
 
-def _helper_calculate_skylight_area(surface):
+def _helper_calculate_skylight_area(surface: dict) -> Quantity:
     total_glazed_area = ZERO.AREA
     for subsurface in find_all("subsurfaces[*]", surface):
         glazed_area = getattr_(subsurface, "subsurface", "glazed_area")

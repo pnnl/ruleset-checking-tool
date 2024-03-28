@@ -1,5 +1,7 @@
 import logging
+from typing import TypedDict
 
+from pint import Quantity
 from pydash import curry, filter_, flatten_deep, flow, map_
 
 from rct229.rulesets.ashrae9012019.data_fns.table_lighting_to_hvac_bat_map_fns import (
@@ -43,7 +45,14 @@ get_bat_val_func_curry = curry(
 )
 
 
-def get_hvac_building_area_types_and_zones_dict(climate_zone, rmi):
+class BuildingAreaTypesWithTotalAreaZones(TypedDict):
+    floor_area: Quantity
+    zone_ids: list[str]
+
+
+def get_hvac_building_area_types_and_zones_dict(
+    climate_zone: str, rmi: dict
+) -> dict[str, BuildingAreaTypesWithTotalAreaZones]:
     """
 
     Parameters

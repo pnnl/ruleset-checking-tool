@@ -51,7 +51,9 @@ GET_ZONE_CONDITIONING_CATEGORY_DICT__REQUIRED_FIELDS = {
 }
 
 
-def get_zone_conditioning_category_rmi_dict(climate_zone, rmi):
+def get_zone_conditioning_category_rmi_dict(
+    climate_zone: str, rmi: dict
+) -> dict[str, ZoneConditioningCategory]:
     """
     Determines the zone conditioning category for every zone in an RMI.
 
@@ -77,7 +79,9 @@ def get_zone_conditioning_category_rmi_dict(climate_zone, rmi):
     return zone_conditioning_category_rmi_dict
 
 
-def get_zone_conditioning_category_dict(climate_zone, building):
+def get_zone_conditioning_category_dict(
+    climate_zone: str, building: dict
+) -> dict[str, ZoneConditioningCategory]:
     """Determines the zone conditioning category for every zone in a building
 
     Parameters

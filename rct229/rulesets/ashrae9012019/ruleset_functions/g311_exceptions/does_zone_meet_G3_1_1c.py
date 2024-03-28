@@ -1,3 +1,5 @@
+from typing import Literal, Type
+
 import numpy as np
 from pydash import map_
 
@@ -35,7 +37,12 @@ LOAD_THRESHOLD = 10 * ureg("Btu/hr/ft2")
 EFLH_THRESHOLD = 40
 
 
-def does_zone_meet_g3_1_1c(rmi, zone_id, is_leap_year, zones_and_systems):
+def does_zone_meet_g3_1_1c(
+    rmi: dict,
+    zone_id: str,
+    is_leap_year: bool,
+    zones_and_systems: dict[str, dict[Literal["expected_system_type"], Type[HVAC_SYS]]],
+) -> bool:
     """
     Determines whether a given zone meets the G3_1_1c exception "If the baseline HVAC system type is 5, 6, 7,
     8 use separate single-zone systems conforming with the requirements of system 3 or system 4 (depending on
@@ -62,7 +69,7 @@ def does_zone_meet_g3_1_1c(rmi, zone_id, is_leap_year, zones_and_systems):
     boolean, true or false
     """
 
-    def get_zone_weekly_eflh(z_id):
+    def get_zone_weekly_eflh(z_id: str) -> float:
         # function to get weekly zone eflh
         zone_eflh = get_zone_eflh(rmi, z_id, is_leap_year)
         return (

@@ -1,3 +1,7 @@
+from typing import TypedDict
+
+from pint import Quantity
+
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_dict_of_zones_and_terminal_units_served_by_hvac_sys import (
     get_dict_of_zones_and_terminal_units_served_by_hvac_sys,
 )
@@ -19,7 +23,17 @@ from rct229.utils.utility_functions import (
 )
 
 
-def get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(rmi):
+def FanPowerInfo(TypedDict):
+    supply_fans_power: Quantity
+    return_fans_power: Quantity
+    exhaust_fans_power: Quantity
+    relief_fans_power: Quantity
+    terminal_fans_power: Quantity
+
+
+def get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(
+    rmi: dict,
+) -> dict[str, FanPowerInfo]:
     """
     Get the supply, return, exhaust, relief, and terminal total fan power for each zone. The function returns a
     dictionary that saves each zone's supply, return, exhaust, relief and terminal unit fan power as a list {zone.id:

@@ -4,7 +4,7 @@ from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_insta
 from rct229.rulesets.ashrae9012019 import PROPOSED
 from rct229.schema.config import ureg
 from rct229.schema.schema_enums import SchemaEnums
-from rct229.utils.assertions import getattr_, assert_
+from rct229.utils.assertions import assert_, getattr_
 from rct229.utils.jsonpath_utils import find_all, find_exactly_one
 from rct229.utils.pint_utils import ZERO, CalcQ
 

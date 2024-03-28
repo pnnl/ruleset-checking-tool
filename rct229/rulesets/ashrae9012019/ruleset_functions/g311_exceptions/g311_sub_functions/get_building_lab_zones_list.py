@@ -4,7 +4,7 @@ from rct229.utils.jsonpath_utils import find_all
 SpaceFunctionOptions = SchemaEnums.schema_enums["SpaceFunctionOptions"]
 
 
-def get_building_lab_zones_list(rmi):
+def get_building_lab_zones_list(rmi: dict) -> list[str]:
     """
     returns a list of all of the zones in the building that include a laboratory space
 

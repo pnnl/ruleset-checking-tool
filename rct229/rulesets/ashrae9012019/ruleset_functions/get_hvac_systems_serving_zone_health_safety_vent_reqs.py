@@ -35,7 +35,7 @@ VENTILATION_SPACE_TYPES_MATCH_REQ = [
 ]
 
 
-def get_hvac_systems_serving_zone_health_safety_vent_reqs(rmi):
+def get_hvac_systems_serving_zone_health_safety_vent_reqs(rmi: dict) -> list[str]:
     """
     Get the list of HVAC systems that are likely to serve zones that have health and safety mandated minimum
     ventilation requirements during unoccupied hours.

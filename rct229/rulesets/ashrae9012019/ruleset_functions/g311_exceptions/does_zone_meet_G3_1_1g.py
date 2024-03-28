@@ -10,7 +10,7 @@ from rct229.utils.pint_utils import ZERO
 COMPUTER_ZONE_PEAK_COOLING_LOAD_THRESHOLD = 600_000 * ureg("Btu/hr")
 
 
-def does_zone_meet_g3_1_1g(rmi, zone_id):
+def does_zone_meet_g3_1_1g(rmi: dict, zone_id: str) -> bool:
     """
     Returns a boolean value indicating whether the zone meets G3_1_1g:
 

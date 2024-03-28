@@ -1,5 +1,6 @@
 import importlib
 import inspect
+
 import rct229.reports as reports
 
 __all__ = [
@@ -8,7 +9,6 @@ __all__ = [
 ]
 
 from rct229.report_engine.rct_report import RCTReport
-
 from rct229.schema.schema_store import SchemaStore
 
 

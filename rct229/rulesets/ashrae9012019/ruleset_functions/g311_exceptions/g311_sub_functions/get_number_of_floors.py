@@ -12,7 +12,7 @@ LightingSpaceOptions2019ASHRAE901TG37 = SchemaEnums.schema_enums[
 ]
 
 
-def get_number_of_floors(climate_zone, rmi):
+def get_number_of_floors(climate_zone: str, rmi: dict) -> int:
     """
     gets the number of floors in the building. Parking Garages are not counted
 

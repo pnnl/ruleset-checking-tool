@@ -17,7 +17,7 @@ LightingSpaceOptions2019ASHRAE901TG37 = SchemaEnums.schema_enums[
 EnergySourceOptions = SchemaEnums.schema_enums["EnergySourceOptions"]
 
 
-def is_space_a_computer_room(rmi, space_id):
+def is_space_a_computer_room(rmi: dict, space_id: str) -> bool:
     space = find_exactly_one_space(rmi, space_id)
     is_space_a_computer_room_flag = (
         space.get("lighting_space_type")

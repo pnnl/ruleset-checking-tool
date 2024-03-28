@@ -3,7 +3,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_fu
 )
 
 
-def get_predominant_hvac_building_area_type(climate_zone: str, rmi: dict):
+def get_predominant_hvac_building_area_type(climate_zone: str, rmi: dict) -> str:
     """
 
     Sort the building area type and zones and return the building type that has the largest floor area

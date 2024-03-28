@@ -7,7 +7,9 @@ LEAP_YEAR_HRS = 8784
 NON_LEAP_YEAR_HRS = 8760
 
 
-def get_min_oa_cfm_sch_zone(rmi, zone_id, is_leap_year: bool = False):
+def get_min_oa_cfm_sch_zone(
+    rmi: dict, zone_id: str, is_leap_year: bool = False
+) -> list[float | int]:
     """Each zone can have multiple terminal units sering it in the proposed RMR and each of these units could supply OA CFM. In order to obtain a zone level OA CFM schedule the OA CFM provided by each terminal unit needs to be aggregated for each hour of the year. This function receives an RMR (B, U, or P) and a zone ID and loops through each terminal unit associated with the zone to create an aggregated 8760 for OA CFM for the zone.
 
     Parameters

@@ -1,3 +1,5 @@
+from pint import Quantity
+
 from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_functions.get_building_lab_zones_list import (
     get_building_lab_zones_list,
 )
@@ -22,7 +24,7 @@ from rct229.utils.utility_functions import (
 BUILDING_TOTAL_LAB_EXHAUST_CFM_THRESHOLD = 15_000 * ureg("ft^3 / min")
 
 
-def does_zone_meet_g3_1_1d(rmi: dict, zone_id: str):
+def does_zone_meet_g3_1_1d(rmi: dict, zone_id: str) -> bool:
     """
     Determines whether a given zone meets the G3_1_1d exception "For laboratory spaces in a building having a total
     laboratory exhaust rate greater than 15,000 cfm, use a single system of type 5 or 7 serving only those spaces."
@@ -41,7 +43,7 @@ def does_zone_meet_g3_1_1d(rmi: dict, zone_id: str):
 
     """
 
-    def sum_total_primary_airflow_from_terminals_func(terminal_list: list):
+    def sum_total_primary_airflow_from_terminals_func(terminal_list: list) -> Quantity:
         """
         Return sum of the primary airflow from all terminals in the terminal list
         Return ZERO.FLOW if none is found.
@@ -56,7 +58,9 @@ def does_zone_meet_g3_1_1d(rmi: dict, zone_id: str):
             ZERO.FLOW,
         )
 
-    def sum_zone_primary_airflow_from_terminals_func(terminal_list: list, zone: dict):
+    def sum_zone_primary_airflow_from_terminals_func(
+        terminal_list: list, zone: dict
+    ) -> Quantity:
         """
         Return sum of the primary airflow from all terminals exist both in the terminal_list and zone
         Return ZERO.FLOW if none is found.
@@ -72,7 +76,7 @@ def does_zone_meet_g3_1_1d(rmi: dict, zone_id: str):
             ZERO.FLOW,
         )
 
-    def sum_hvac_total_exhaust_air_func(hvac_id: str):
+    def sum_hvac_total_exhaust_air_func(hvac_id: str) -> Quantity:
         """Return sum of the design airflow from all exhaust fans in the HVAC."""
         return sum(
             find_all(

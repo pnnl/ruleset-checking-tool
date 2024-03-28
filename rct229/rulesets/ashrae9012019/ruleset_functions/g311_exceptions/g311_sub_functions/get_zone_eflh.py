@@ -20,7 +20,7 @@ from rct229.utils.utility_functions import (
 ZONE_OCCUPANTS_RATIO_THRESHOLD = 0.05
 
 
-def get_zone_eflh(rmi: dict, zone_id: str, is_leap_year: bool):
+def get_zone_eflh(rmi: dict, zone_id: str, is_leap_year: bool) -> int:
     """
     provides the equivalent full load hours of the zone. Equivalent full load hours are defined as: any hour where
     the occupancy fraction is greater than 5% AND the HVAC system is in occupied mode. For this function,

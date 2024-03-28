@@ -1,9 +1,8 @@
-from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all, find_one
 from rct229.utils.utility_functions import find_exactly_one_zone
 
 
-def get_zones_on_same_floor_list(rmi, source_zone_id):
+def get_zones_on_same_floor_list(rmi: dict, source_zone_id: str) -> list[str]:
     """
     Provides a list of zone ids that are on the floor as the source zone (including the source zone id)
 

@@ -15,7 +15,7 @@ APPLICABLE_LIST = [
 ]
 
 
-def is_cz_0_to_3a_bool(climate_zone: str):
+def is_cz_0_to_3a_bool(climate_zone: str) -> bool:
     """
     Determines whether the building is in climate zone 0 to 3a - used for Appendix G Table G3.1.1-3
 
