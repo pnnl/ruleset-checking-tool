@@ -219,8 +219,7 @@ def check_service_water_heating_association(rpd):
     ]
 
     referenced_service_water_heating_id_list = find_all_by_jsonpaths(
-        service_water_heating_reference_jsonpaths,
-        rpd
+        service_water_heating_reference_jsonpaths, rpd
     )
 
     for service_water_heating_id in referenced_service_water_heating_id_list:
@@ -428,7 +427,9 @@ def non_schema_validate_rmr(rmr_obj):
             f"Cannot find piping {mismatch_schedule_errors} in the FluidLoop or ServiceWaterHeatingDistributionSystems data group."
         )
 
-    mismatch_service_water_heating_errors = check_service_water_heating_association(rmr_obj)
+    mismatch_service_water_heating_errors = check_service_water_heating_association(
+        rmr_obj
+    )
     passed = passed and not mismatch_service_water_heating_errors
     if mismatch_service_water_heating_errors:
         error.append(
