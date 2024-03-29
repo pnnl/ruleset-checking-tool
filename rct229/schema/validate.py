@@ -20,7 +20,7 @@ SCHEMA_RESNET_ENUM_PATH = os.path.join(file_dir, SCHEMA_RESNET_ENUM_KEY)
 SCHEMA_OUTPUT_PATH = os.path.join(file_dir, SCHEMA_OUTPUT_KEY)
 
 
-def check_fluid_loop_association(rpd):
+def check_fluid_loop_association(rpd: dict) -> list:
     """
     Check the association between fluid loops and the various objects which reference them.
     Parameters
@@ -33,101 +33,35 @@ def check_fluid_loop_association(rpd):
     """
     mismatch_list = []
 
-    fluid_loop_id_list = find_all(
-        "$.ruleset_model_descriptions[*].fluid_loops[*].id", rpd
-    )
-    fluid_loop_id_list.extend(
-        find_all(
-            "$.ruleset_model_descriptions[*].fluid_loops[*].child_loops[*].id", rpd
-        )
-    )
+    fluid_loop_id_jsonpaths = [
+        "$.ruleset_model_descriptions[*].fluid_loops[*].id",
+        "$.ruleset_model_descriptions[*].fluid_loops[*].child_loops[*].id",
+    ]
 
-    referenced_id_list = find_all(
-        "$.ruleset_model_descriptions[*].chillers[*].cooling_loop", rpd
-    )
-    referenced_id_list.extend(
-        find_all("$.ruleset_model_descriptions[*].chillers[*].condensing_loop", rpd)
-    )
-    referenced_id_list.extend(
-        find_all("$.ruleset_model_descriptions[*].chillers[*].heat_recovery_loop", rpd)
-    )
-    referenced_id_list.extend(
-        find_all(
-            "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].heating_system.hot_water_loop",
-            rpd,
-        )
-    )
-    referenced_id_list.extend(
-        find_all(
-            "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].heating_system.water_source_heat_pump_loop",
-            rpd,
-        )
-    )
-    referenced_id_list.extend(
-        find_all(
-            "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].cooling_system.chilled_water_loop",
-            rpd,
-        )
-    )
-    referenced_id_list.extend(
-        find_all(
-            "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].cooling_system.condenser_water_loop",
-            rpd,
-        )
-    )
-    referenced_id_list.extend(
-        find_all(
-            "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].spaces[*].miscellaneous_equipment[*].energy_from_loop",
-            rpd,
-        )
-    )
-    referenced_id_list.extend(
-        find_all(
-            "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].spaces[*].miscellaneous_equipment[*].remaining_fraction_to_loop",
-            rpd,
-        )
-    )
-    referenced_id_list.extend(
-        find_all(
-            "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].terminals[*].cooling_from_loop",
-            rpd,
-        )
-    )
-    referenced_id_list.extend(
-        find_all(
-            "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].terminals[*].heating_from_loop",
-            rpd,
-        )
-    )
-    referenced_id_list.extend(
-        find_all(
-            "$.ruleset_model_descriptions[*].service_water_heating_equipment[*].hot_water_loop",
-            rpd,
-        )
-    )
-    referenced_id_list.extend(
-        find_all(
-            "$.ruleset_model_descriptions[*].heat_rejections[*].loop",
-            rpd,
-        )
-    )
-    referenced_id_list.extend(
-        find_all(
-            "$.ruleset_model_descriptions[*].boilers[*].loop",
-            rpd,
-        )
-    )
-    referenced_id_list.extend(
-        find_all(
-            "$.ruleset_model_descriptions[*].service_water_heating_equipment[*].hot_water_loop",
-            rpd,
-        )
-    )
-    referenced_id_list.extend(
-        find_all(
-            "$.ruleset_model_descriptions[*].external_fluid_sources[*].loop",
-            rpd,
-        )
+    fluid_reference_jsonpaths = [
+        "$.ruleset_model_descriptions[*].chillers[*].cooling_loop",
+        "$.ruleset_model_descriptions[*].chillers[*].condensing_loop",
+        "$.ruleset_model_descriptions[*].chillers[*].heat_recovery_loop",
+        "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].heating_system.hot_water_loop",
+        "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].heating_system.water_source_heat_pump_loop",
+        "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].cooling_system.chilled_water_loop",
+        "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].cooling_system.condenser_water_loop",
+        "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].spaces[*].miscellaneous_equipment[*].energy_from_loop",
+        "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].spaces[*].miscellaneous_equipment[*].remaining_fraction_to_loop",
+        "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].terminals[*].cooling_from_loop",
+        "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].terminals[*].heating_from_loop",
+        "$.ruleset_model_descriptions[*].service_water_heating_equipment[*].hot_water_loop",
+        "$.ruleset_model_descriptions[*].heat_rejections[*].loop",
+        "$.ruleset_model_descriptions[*].boilers[*].loop",
+        "$.ruleset_model_descriptions[*].service_water_heating_equipment[*].hot_water_loop",
+        "$.ruleset_model_descriptions[*].external_fluid_sources[*].loop",
+    ]
+
+    fluid_loop_id_list = find_all_by_jsonpaths(fluid_loop_id_jsonpaths, rpd)
+
+    referenced_id_list = find_all_by_jsonpaths(
+        fluid_reference_jsonpaths,
+        rpd,
     )
 
     for fluid_loop_id in referenced_id_list:
@@ -137,8 +71,7 @@ def check_fluid_loop_association(rpd):
     return mismatch_list
 
 
-
-def check_zone_association(rpd):
+def check_zone_association(rpd: dict) -> list:
     """
     Check the association between zones and the various objects which reference them.
     Parameters
@@ -190,7 +123,7 @@ def check_zone_association(rpd):
 # search schedule with key words: Constraint to use when implemented :
 
 
-def check_hvac_association(rmd):
+def check_hvac_association(rpd: dict) -> list:
     """
     Check the association between hvac systems and the terminals served by HVAC systems.
     Parameters
@@ -203,12 +136,12 @@ def check_hvac_association(rmd):
     """
     mismatch_list = []
     hvac_id_list = find_all(
-        "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].id",
-        rmd,
+        "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].id",
+        rpd,
     )
     served_by_hvac_id_list = find_all(
-        "$.buildings[*].building_segments[*].zones[*].terminals[*].served_by_heating_ventilating_air_conditioning_system",
-        rmd,
+        "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].terminals[*].served_by_heating_ventilating_air_conditioning_system",
+        rpd,
     )
     for hvac_id in served_by_hvac_id_list:
         if hvac_id not in hvac_id_list:
@@ -356,6 +289,20 @@ def non_schema_validate_rmr(rmr_obj):
     if mismatch_hvac_errors:
         error.append(
             f"Cannot find HVAC systems {mismatch_hvac_errors} in the HeatingVentilationAirConditioningSystems data group."
+        )
+
+    mismatch_zone_errors = check_zone_association(rmr_obj)
+    passed = passed and not mismatch_zone_errors
+    if mismatch_zone_errors:
+        error.append(
+            f"Cannot find zones {mismatch_zone_errors} in the Zone data group."
+        )
+
+    mismatch_fluid_loop_errors = check_fluid_loop_association(rmr_obj)
+    passed = passed and not mismatch_fluid_loop_errors
+    if mismatch_fluid_loop_errors:
+        error.append(
+            f"Cannot find fluid loop {mismatch_fluid_loop_errors} in the FluidLoop data group."
         )
 
     return {"passed": passed, "error": error if error else None}
