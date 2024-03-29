@@ -121,6 +121,13 @@
                 ]
             }
         ],
+        "schedules": [
+            {"id":  "tcs_sched_1"},
+            {"id":  "ths_sched_1"},
+            {"id":  "om_sched_1"},
+            {"id":  "lm_sched_1"},
+            {"id":  "bo_sched_1"}
+        ],
         "transformers": [
             {
                 "id": "1",
