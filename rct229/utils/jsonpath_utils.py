@@ -1,3 +1,5 @@
+from itertools import chain
+
 from jsonpath2 import match
 
 from rct229.utils.assertions import assert_, getattr_
@@ -15,6 +17,10 @@ def ensure_root(jpath):
 
 def find_all(jpath, obj):
     return [m.current_value for m in match(ensure_root(jpath), obj)]
+
+
+def find_all_by_jsonpaths(jpaths: list[str], obj: dict) -> list:
+    return list(chain.from_iterable([find_all(jpath, obj) for jpath in jpaths]))
 
 
 def find_all_with_field_value(jpath, field, value, obj):

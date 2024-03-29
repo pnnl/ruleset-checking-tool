@@ -4,7 +4,7 @@ import os
 import jsonschema
 
 from rct229.schema.schema_store import SchemaStore
-from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.jsonpath_utils import find_all, find_all_by_jsonpaths
 
 file_dir = os.path.dirname(__file__)
 
@@ -34,110 +34,30 @@ def check_zone_association(rpd):
 
     """
     mismatch_list = []
+    zone_reference_jsonpaths = [
+        "$.ruleset_model_descriptions[*].buildings[*].elevators[*].motor_location_zone",
+        "$.ruleset_model_descriptions[*].buildings[*].elevators[*].cab_location_zone",
+        "$.ruleset_model_descriptions[*].buildings[*].refrigerated_cases[*].zone",
+        "$.ruleset_model_descriptions[*].service_water_heating_equipment[*].compressor_zone",
+        "$.ruleset_model_descriptions[*].service_water_heating_equipment[*].compressor_heat_rejection_zone",
+        "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].zonal_exhaust_fan.motor_location_zone",
+        "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].terminals[*].fan.motor_location_zone",
+        "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].fan_system.supply_fans[*].motor_location_zone",
+        "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].fan_system.return_fans[*].motor_location_zone",
+        "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].fan_system.relief_fans[*].motor_location_zone",
+        "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].fan_system.exhaust_fans[*].motor_location_zone",
+        "$.ruleset_model_descriptions[*].service_water_heating_equipment[*].tank.location_zone",
+        "$.ruleset_model_descriptions[*].service_water_heating_equipment[*].solar_thermal_systems[*].tank.location_zone",
+        "$.ruleset_model_descriptions[*].service_water_heating_distribution_systems[*].tanks[*].location_zone",
+        "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].surfaces[*].adjacent_zone",
+        "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].transfer_airflow_source_zone",
+        "$.ruleset_model_descriptions[*].service_water_heating_distribution_systems[*].service_water_piping[*].location_zone",
+    ]
     zone_id_list = find_all(
         "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].id",
         rpd,
     )
-    referenced_id_list = find_all(
-        "$.ruleset_model_descriptions[*].buildings[*].elevators[*].motor_location_zone",
-        rpd,
-    )
-    referenced_id_list.extend(
-        find_all(
-            "$.ruleset_model_descriptions[*].buildings[*].elevators[*].cab_location_zone",
-            rpd,
-        )
-    )
-    referenced_id_list.extend(
-        find_all(
-            "$.ruleset_model_descriptions[*].buildings[*].refrigerated_cases[*].zone",
-            rpd,
-        )
-    )
-    referenced_id_list.extend(
-        find_all(
-            "$.ruleset_model_descriptions[*].service_water_heating_equipment[*].compressor_zone",
-            rpd,
-        )
-    )
-    referenced_id_list.extend(
-        find_all(
-            "$.ruleset_model_descriptions[*].service_water_heating_equipment[*].compressor_heat_rejection_zone",
-            rpd,
-        )
-    )
-    referenced_id_list.extend(
-        find_all(
-            "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].zonal_exhaust_fan.motor_location_zone",
-            rpd,
-        )
-    )
-    referenced_id_list.extend(
-        find_all(
-            "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].terminals[*].fan.motor_location_zone",
-            rpd,
-        )
-    )
-    referenced_id_list.extend(
-        find_all(
-            "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].fan_system.supply_fans[*].motor_location_zone",
-            rpd,
-        )
-    )
-    referenced_id_list.extend(
-        find_all(
-            "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].fan_system.return_fans[*].motor_location_zone",
-            rpd,
-        )
-    )
-    referenced_id_list.extend(
-        find_all(
-            "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].fan_system.relief_fans[*].motor_location_zone",
-            rpd,
-        )
-    )
-    referenced_id_list.extend(
-        find_all(
-            "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].fan_system.exhaust_fans[*].motor_location_zone",
-            rpd,
-        )
-    )
-    referenced_id_list.extend(
-        find_all(
-            "$.ruleset_model_descriptions[*].service_water_heating_equipment[*].tank.location_zone",
-            rpd,
-        )
-    )
-    referenced_id_list.extend(
-        find_all(
-            "$.ruleset_model_descriptions[*].service_water_heating_equipment[*].solar_thermal_systems[*].tank.location_zone",
-            rpd,
-        )
-    )
-    referenced_id_list.extend(
-        find_all(
-            "$.ruleset_model_descriptions[*].service_water_heating_distribution_systems[*].tanks[*].location_zone",
-            rpd,
-        )
-    )
-    referenced_id_list.extend(
-        find_all(
-            "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].surfaces[*].adjacent_zone",
-            rpd,
-        )
-    )
-    referenced_id_list.extend(
-        find_all(
-            "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].transfer_airflow_source_zone",
-            rpd,
-        )
-    )
-    referenced_id_list.extend(
-        find_all(
-            "$.ruleset_model_descriptions[*].service_water_heating_distribution_systems[*].service_water_piping[*].location_zone",
-            rpd,
-        )
-    )
+    referenced_id_list = find_all_by_jsonpaths(zone_reference_jsonpaths, rpd)
 
     for zone_id in referenced_id_list:
         if zone_id not in zone_id_list:
