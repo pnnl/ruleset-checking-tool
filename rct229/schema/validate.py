@@ -164,8 +164,7 @@ def check_schedule_association(rpd: dict) -> list:
     return mismatch_list
 
 
-
-def check_fluid_loop_or_piping_association(rpd):
+def check_fluid_loop_or_piping_association(rpd: dict) -> list:
     """
     Check the association between fluid loops or piping and pumps that reference them.
     Parameters
@@ -177,14 +176,13 @@ def check_fluid_loop_or_piping_association(rpd):
 
     """
     mismatch_list = []
-    fluid_loop_or_piping_id_list = find_all(
-        "$.ruleset_model_descriptions[*].fluid_loops[*].id", rpd
-    )
-    fluid_loop_or_piping_id_list.extend(
-        find_all(
-            "$.ruleset_model_descriptions[*].service_water_heating_distribution_systems[*].service_water_piping[*].id",
-            rpd,
-        )
+    fluid_loop_or_piping_id_jsonpaths = [
+        "$.ruleset_model_descriptions[*].fluid_loops[*].id",
+        "$.ruleset_model_descriptions[*].service_water_heating_distribution_systems[*].service_water_piping[*].id",
+    ]
+
+    fluid_loop_or_piping_id_list = find_all_by_jsonpaths(
+        fluid_loop_or_piping_id_jsonpaths, rpd
     )
 
     referenced_fluid_loop_or_piping_id_list = find_all(
@@ -389,6 +387,13 @@ def non_schema_validate_rmr(rmr_obj):
     if mismatch_schedule_errors:
         error.append(
             f"Cannot find schedule {mismatch_schedule_errors} in the Schedule data group."
+        )
+
+    mismatch_fluid_loop_piping_errors = check_fluid_loop_or_piping_association(rmr_obj)
+    passed = passed and not mismatch_fluid_loop_piping_errors
+    if mismatch_fluid_loop_piping_errors:
+        error.append(
+            f"Cannot find piping {mismatch_schedule_errors} in the FluidLoop or ServiceWaterHeatingDistributionSystems data group."
         )
 
     return {"passed": passed, "error": error if error else None}
