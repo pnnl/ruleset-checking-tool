@@ -195,7 +195,38 @@ def check_fluid_loop_or_piping_association(rpd: dict) -> list:
     return mismatch_list
 
 
-# def check_service_water_heating_association(rmd)
+def check_service_water_heating_association(rpd):
+    """
+    Check the association between service water heating distribution systems and the various objects that reference them.
+    Parameters
+    ----------
+    rpd
+
+    Returns list of mismatched service water heating distribution system ids
+    -------
+
+    """
+    mismatch_list = []
+    service_water_heating_id_list = find_all(
+        "$.ruleset_model_descriptions[*].service_water_heating_distribution_systems[*].id",
+        rpd,
+    )
+
+    service_water_heating_reference_jsonpaths = [
+        "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].spaces[*].service_water_heating_uses[*].served_by_distribution_system",
+        "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].served_by_service_water_heating_system",
+        "$.ruleset_model_descriptions[*].service_water_heating_equipment[*].distribution_system",
+    ]
+
+    referenced_service_water_heating_id_list = find_all_by_jsonpaths(
+        service_water_heating_reference_jsonpaths, rpd
+    )
+
+    for service_water_heating_id in referenced_service_water_heating_id_list:
+        if service_water_heating_id not in service_water_heating_id_list:
+            mismatch_list.append(service_water_heating_id)
+    return mismatch_list
+
 
 # search schedule with key words: Constraint to use when implemented :
 
@@ -394,6 +425,15 @@ def non_schema_validate_rmr(rmr_obj):
     if mismatch_fluid_loop_piping_errors:
         error.append(
             f"Cannot find piping {mismatch_schedule_errors} in the FluidLoop or ServiceWaterHeatingDistributionSystems data group."
+        )
+
+    mismatch_service_water_heating_errors = check_service_water_heating_association(
+        rmr_obj
+    )
+    passed = passed and not mismatch_service_water_heating_errors
+    if mismatch_service_water_heating_errors:
+        error.append(
+            f"Cannot find service water heating {mismatch_service_water_heating_errors} in the ServiceWaterHeatingDistributionSystems data group."
         )
 
     return {"passed": passed, "error": error if error else None}
