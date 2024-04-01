@@ -2,9 +2,7 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rulesets.ashrae9012019 import BASELINE_0
-from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_4_fns import table_G34_lookup
-from rct229.rulesets.ashrae9012019.ruleset_functions.compare_standard_val import std_le
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_building_scc_window_wall_ratios_dict import (
     get_building_scc_window_wall_ratios_dict,
 )
@@ -20,8 +18,10 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_ca
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
+from rct229.utils.std_comparisons import std_equal
 
 DOOR = SchemaEnums.schema_enums["SubsurfaceClassificationOptions"].DOOR
 MANUAL_CHECK_REQUIRED_MSG = "Manual review is requested to verify vertical fenestration meets SHGC requirement as per Table G3.4. "
@@ -231,16 +231,6 @@ class Section5Rule20(RuleDefinitionListIndexedBase):
                     manual_check_required_msg=MANUAL_CHECK_REQUIRED_MSG,
                 )
 
-            def manual_check_required(self, context, calc_vals=None, data=None):
-                scc_dict_b = data["scc_dict_b"]
-                manual_check_required_flag = data["manual_check_required_flag"]
-                surface_b = context.BASELINE_0
-                # if exterior mixed and required manual check
-                return (
-                    scc_dict_b[surface_b["id"]] == SCC.EXTERIOR_MIXED
-                    and manual_check_required_flag
-                )
-
             def create_data(self, context, data=None):
                 surface_b = context.BASELINE_0
                 scc_dict_b = data["scc_dict_b"]
@@ -261,6 +251,13 @@ class Section5Rule20(RuleDefinitionListIndexedBase):
                         rmrs_used=produce_ruleset_model_instance(
                             USER=False, BASELINE_0=True, PROPOSED=False
                         ),
+                    )
+
+                def manual_check_required(self, context, calc_vals=None, data=None):
+                    manual_check_required_flag = data["manual_check_required_flag"]
+                    # if exterior mixed and required manual check
+                    return (
+                        data["scc"] == SCC.EXTERIOR_MIXED and manual_check_required_flag
                     )
 
                 def get_calc_vals(self, context, data=None):
@@ -285,6 +282,6 @@ class Section5Rule20(RuleDefinitionListIndexedBase):
                 def rule_check(self, context, calc_vals=None, data=None):
                     target_shgc = calc_vals["target_shgc"]
                     subsurface_shgc = calc_vals["subsurface_shgc"]
-                    return target_shgc is not None and std_le(
+                    return target_shgc is not None and std_equal(
                         std_val=target_shgc, val=subsurface_shgc
                     )

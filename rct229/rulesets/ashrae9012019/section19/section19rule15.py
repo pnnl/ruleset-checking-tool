@@ -117,7 +117,10 @@ class Section19Rule15(RuleDefinitionListIndexedBase):
 
         return any(
             [
-                baseline_system_type_compare(system_type, applicable_sys_type, False)
+                baseline_system_types_dict[system_type]
+                and baseline_system_type_compare(
+                    system_type, applicable_sys_type, False
+                )
                 for system_type in baseline_system_types_dict
                 for applicable_sys_type in APPLICABLE_SYS_TYPES
             ]

@@ -3,7 +3,7 @@
         "Section": 19,
         "Rule": 12,
         "Test": "a",
-        "test_description": "System 9 with TEMPERATURE based air economizer and 75F high limit shutoff temp.",
+        "test_description": "The project has one building segment with one zone. System 9 with TEMPERATURE based air economizer and 75F high limit shutoff temp. Expected outcome: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-12",
@@ -13,11 +13,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -89,7 +90,7 @@
         "Section": 19,
         "Rule": 12,
         "Test": "b",
-        "test_description": "System 9 with TEMPERATURE based air economizer and 100F high limit shutoff temp.",
+        "test_description": "The project has one building segment with one zone. System 9 with TEMPERATURE based air economizer and 100F high limit shutoff temp. Expected outcome: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-12",
@@ -99,11 +100,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -175,7 +177,7 @@
         "Section": 19,
         "Rule": 12,
         "Test": "c",
-        "test_description": "System 9 with ENTHALPY based air economizer and 75F high limit shutoff temp.",
+        "test_description": "The project has one building segment with one zone. System 9 with ENTHALPY based air economizer and 75F high limit shutoff temp. Expected outcome: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-12",
@@ -185,11 +187,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -261,7 +264,7 @@
         "Section": 19,
         "Rule": 12,
         "Test": "d",
-        "test_description": "System 9 without air economizer setup.",
+        "test_description": "The project has one building segment with one zone. System 9 without air economizer setup. Expected outcome: NOT APPLICABLE",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "19-12",
@@ -271,11 +274,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -342,7 +346,7 @@
         "Section": 19,
         "Rule": 12,
         "Test": "e",
-        "test_description": "System 9 with wrong climate zone setup.",
+        "test_description": "The project has one building segment with one zone. System 9 with wrong climate zone setup. Expected outcome: NOT APPLICABLE",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "19-12",
@@ -352,11 +356,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",

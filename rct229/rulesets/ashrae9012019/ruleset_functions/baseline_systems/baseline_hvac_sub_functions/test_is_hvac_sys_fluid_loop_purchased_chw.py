@@ -44,9 +44,14 @@ TEST_RMD = {
         {"id": "fluid_loop_2", "loop": "HW_Loop_1", "type": "HOT_WATER"},
         {"id": "fluid_loop_1", "loop": "CHW_Loop_1", "type": "CHILLED_WATER"},
     ],
+    "type": "BASELINE_0",
 }
 
-TEST_RMD_FULL = {"id": "229_01", "ruleset_model_descriptions": [TEST_RMD]}
+TEST_RMD_FULL = {
+    "id": "229_01",
+    "ruleset_model_descriptions": [TEST_RMD],
+    "data_timestamp": "2024-02-12T09:00Z",
+}
 
 
 def test__TEST_RMD__is_valid():

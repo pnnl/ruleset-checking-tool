@@ -3,7 +3,7 @@
         "Section": 22,
         "Rule": 19,
         "Test": "a",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and HeatRejection is correctly modeled with the temperature reset type CONSTANT. Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and HeatRejection is correctly modeled with the temperature reset type CONSTANT. Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-19",
@@ -13,11 +13,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -163,7 +164,7 @@
         "Section": 22,
         "Rule": 19,
         "Test": "b",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and HeatRejection is incorrectly modeled with the temperature reset type OUTSIDE_AIR_RESET.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and HeatRejection is incorrectly modeled with the temperature reset type OUTSIDE_AIR_RESET.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-19",
@@ -173,11 +174,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -323,7 +325,7 @@
         "Section": 22,
         "Rule": 19,
         "Test": "c",
-        "test_description": "Baseline building has two zones.  HVAC is system type 12b and HeatRejection is correctly modeled with the temperature reset type CONSTANT. Expected result: PASS",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 12b and HeatRejection is correctly modeled with the temperature reset type CONSTANT. Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-19",
@@ -333,11 +335,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -466,7 +469,7 @@
         "Section": 22,
         "Rule": 19,
         "Test": "d",
-        "test_description": "Baseline building has two zones.  HVAC is system type 12b and HeatRejection is incorrectly modeled with the temperature reset type OUTSIDE_AIR_RESET.  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 12b and HeatRejection is incorrectly modeled with the temperature reset type OUTSIDE_AIR_RESET.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-19",
@@ -476,11 +479,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -609,7 +613,7 @@
         "Section": 22,
         "Rule": 19,
         "Test": "e",
-        "test_description": "Baseline building has one zone.  HVAC is system type 11.2a.  Expected result: NOT APPLICABLE",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 11.2a.  Expected result: NOT APPLICABLE",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-19",
@@ -619,11 +623,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",

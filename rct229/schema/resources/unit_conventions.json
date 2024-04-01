@@ -21,7 +21,9 @@
         "design_sensible_cool_capacity": "W",
         "design_capacity": "W",
         "air_flow_rate": "L/s",
-        "motor_power": "W"
+        "motor_power": "W",
+        "heat": "W",
+        "length": "m"
     },
     "ip": {
         "transformer_capacity": "V-A",
@@ -45,6 +47,8 @@
         "design_sensible_cool_capacity": "ton",
         "design_capacity": "Btu/hr",
         "air_flow_rate": "cfm",
-        "motor_power": "hp"
+        "motor_power": "hp",
+        "heat": "Btu/hr",
+        "length": "ft"
     }
 }

@@ -11,6 +11,12 @@ TEST_BUILDING = {
             "building_segments": [
                 {
                     "id": "building_segment_1",
+                    "heating_ventilating_air_conditioning_systems": [
+                        {"id": "hvac_1"},
+                        {"id": "hvac_2"},
+                        {"id": "hvac_3"},
+                        {"id": "hvac_4"},
+                    ],
                     "zones": [
                         {
                             "id": "zone_1",
@@ -60,10 +66,15 @@ TEST_BUILDING = {
             ],
         }
     ],
+    "type": "BASELINE_0",
 }
 
 
-TEST_RMD = {"id": "ASHRAE229", "ruleset_model_descriptions": [TEST_BUILDING]}
+TEST_RMD = {
+    "id": "ASHRAE229",
+    "ruleset_model_descriptions": [TEST_BUILDING],
+    "data_timestamp": "2024-02-12T09:00Z",
+}
 
 
 def test__TEST_RMD__is_valid():

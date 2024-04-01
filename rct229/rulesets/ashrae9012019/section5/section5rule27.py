@@ -2,9 +2,7 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rulesets.ashrae9012019 import BASELINE_0
-from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_4_fns import table_G34_lookup
-from rct229.rulesets.ashrae9012019.ruleset_functions.compare_standard_val import std_le
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_building_scc_skylight_roof_ratios_dict import (
     get_building_scc_skylight_roof_ratios_dict,
 )
@@ -20,7 +18,9 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_ca
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.pint_utils import ZERO, CalcQ
+from rct229.utils.std_comparisons import std_equal
 
 MANUAL_CHECK_MSG = "Manual review is required to verify skylight meets U-factor requirement as per table G3.4."
 MANUAL_CHECK_APPLICABLE = (
@@ -267,4 +267,4 @@ class Section5Rule27(RuleDefinitionListIndexedBase):
                 def rule_check(self, context, calc_vals=None, data=None):
                     subsurface_b_u_factor = calc_vals["subsurface_b_u_factor"]
                     target_u_factor = calc_vals["target_u_factor"]
-                    return std_le(std_val=target_u_factor, val=subsurface_b_u_factor)
+                    return std_equal(std_val=target_u_factor, val=subsurface_b_u_factor)

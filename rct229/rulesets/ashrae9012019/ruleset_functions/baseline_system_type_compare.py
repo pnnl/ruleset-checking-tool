@@ -7,8 +7,10 @@ from rct229.utils.assertions import RCTException
 def baseline_system_type_compare(system_type, target_system_type, exact_match=True):
     """
 
-    Parameters ---------- system_type: String the enum indicating the hvac system type example: SYS_5 or SYS_8c.
+    Parameters ----------
+    system_type: String  | None the enum indicating the hvac system type example: SYS_5 or SYS_8c.
     This will usually be the value given by the function get_baseline_system_types
+    A None is acceptable and the function will raise RCTException which result in UNDETERMINED outcome.
 
     target_system_type: String the enum indicating the target system type, will usually be SYS_# (primary baseline
     system types) without a further number or letter modifier.

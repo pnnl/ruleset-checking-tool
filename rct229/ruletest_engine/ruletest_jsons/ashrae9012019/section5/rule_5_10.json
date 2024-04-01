@@ -13,18 +13,19 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
-                "id": "ASHRAE229",
+                "id": "RPD 1",
                 "weather": {
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -101,18 +102,19 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
-                "id": "ASHRAE229",
+                "id": "RPD 1",
                 "weather": {
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -189,18 +191,19 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
-                "id": "ASHRAE229",
+                "id": "RPD 1",
                 "weather": {
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -277,18 +280,19 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
-                "id": "ASHRAE229",
+                "id": "RPD 1",
                 "weather": {
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -365,18 +369,19 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
-                "id": "ASHRAE229",
+                "id": "RPD 1",
                 "weather": {
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -453,18 +458,19 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
-                "id": "ASHRAE229",
+                "id": "RPD 1",
                 "weather": {
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -542,18 +548,19 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
-                "id": "ASHRAE229",
+                "id": "RPD 1",
                 "weather": {
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -631,18 +638,19 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
-                "id": "ASHRAE229",
+                "id": "RPD 1",
                 "weather": {
                     "climate_zone": "CZ8",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -719,18 +727,19 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
-                "id": "ASHRAE229",
+                "id": "RPD 1",
                 "weather": {
                     "climate_zone": "CZ8",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",

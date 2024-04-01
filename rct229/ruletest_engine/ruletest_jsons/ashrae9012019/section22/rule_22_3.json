@@ -3,7 +3,7 @@
         "Section": 22,
         "Rule": 3,
         "Test": "a",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and CHW Loop is correctly modeled with a temperature reset setpoint.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and chilled water Loop is correctly modeled with a temperature reset setpoint.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-3",
@@ -13,11 +13,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -153,7 +154,7 @@
         "Section": 22,
         "Rule": 3,
         "Test": "b",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and CHW Loop is incorrectly modeled with a constant temperature setpoint.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and chilled water Loop is incorrectly modeled with a constant temperature setpoint.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-3",
@@ -163,11 +164,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -289,7 +291,7 @@
                                 ],
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
-                                    "temperature_reset_type": "CONSTANT"
+                                    "temperature_reset_type": "OTHER"
                                 }
                             }
                         ],
@@ -303,7 +305,7 @@
         "Section": 22,
         "Rule": 3,
         "Test": "c",
-        "test_description": "Baseline building has two zones.  HVAC is system type 8b and CHW Loop is correctly modeled with a temperature reset setpoint.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 8b and chilled water Loop is correctly modeled with a temperature reset setpoint.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-3",
@@ -313,11 +315,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -455,7 +458,7 @@
         "Section": 22,
         "Rule": 3,
         "Test": "d",
-        "test_description": "Baseline building has two zones.  HVAC is system type 8b and CHW Loop is incorrectly modeled with a constant temperature setpoint.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 8b and chilled water Loop is incorrectly modeled with a constant temperature setpoint.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-3",
@@ -465,11 +468,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -593,7 +597,7 @@
                                 ],
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
-                                    "temperature_reset_type": "CONSTANT"
+                                    "temperature_reset_type": "OTHER"
                                 }
                             }
                         ],
@@ -607,7 +611,7 @@
         "Section": 22,
         "Rule": 3,
         "Test": "e",
-        "test_description": "Baseline building has one zone.  HVAC is system type 11.2.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 11.2.  Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-3",
@@ -617,11 +621,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -726,7 +731,7 @@
                                 ],
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
-                                    "temperature_reset_type": "CONSTANT"
+                                    "temperature_reset_type": "OTHER"
                                 }
                             }
                         ],

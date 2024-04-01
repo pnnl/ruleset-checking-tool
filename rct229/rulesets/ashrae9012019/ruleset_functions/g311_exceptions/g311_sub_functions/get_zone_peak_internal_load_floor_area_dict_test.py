@@ -115,10 +115,15 @@ TEST_RMD = {
         },
         {"id": "occupant_schedule_1", "hourly_cooling_design_day": [1] * 23 + [2]},
     ],
+    "type": "BASELINE_0",
 }
 
 
-TEST_RMD_FULL = {"id": "229", "ruleset_model_descriptions": [TEST_RMD]}
+TEST_RMD_FULL = {
+    "id": "229",
+    "ruleset_model_descriptions": [TEST_RMD],
+    "data_timestamp": "2024-02-12T09:00Z",
+}
 
 TEST_RMI = quantify_rmr(TEST_RMD_FULL)["ruleset_model_descriptions"][0]
 

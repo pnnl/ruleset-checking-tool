@@ -3,7 +3,7 @@
         "Section": 22,
         "Rule": 32,
         "Test": "a",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is correctly modeled with the chiller part_load_efficiency correctly matching the value in Table G3.5.3 part_load_efficiency_metric set to INTEGRATED_PART_LOAD_VALUE.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is correctly modeled with the chiller part_load_efficiency correctly matching the value in Table G3.5.3 part_load_efficiency_metric set to INTEGRATED_PART_LOAD_VALUE.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-32",
@@ -13,11 +13,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -106,7 +107,7 @@
                                 "cooling_loop": "Chiller Loop 1",
                                 "compressor_type": "POSITIVE_DISPLACEMENT",
                                 "rated_capacity": 703400.0,
-                                "part_load_efficiency": 0.1788456070514643,
+                                "part_load_efficiency": 5.591,
                                 "part_load_efficiency_metric": "INTEGRATED_PART_LOAD_VALUE"
                             }
                         ],
@@ -153,7 +154,7 @@
         "Section": 22,
         "Rule": 32,
         "Test": "b",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is incorrectly modeled with the part_load_efficiency_metric set to NONSTANDARD_PART_LOAD_VALUE.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is incorrectly modeled with the part_load_efficiency_metric set to NONSTANDARD_PART_LOAD_VALUE.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-32",
@@ -163,11 +164,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -256,7 +258,7 @@
                                 "cooling_loop": "Chiller Loop 1",
                                 "compressor_type": "POSITIVE_DISPLACEMENT",
                                 "rated_capacity": 703400.0,
-                                "part_load_efficiency": 0.1788456070514643,
+                                "part_load_efficiency": 5.591,
                                 "part_load_efficiency_metric": "NONSTANDARD_PART_LOAD_VALUE"
                             }
                         ],
@@ -303,7 +305,7 @@
         "Section": 22,
         "Rule": 32,
         "Test": "c",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is modeled with the part_load_efficiency_metric correctly set to INTEGRATED_PART_LOAD_VALUE, but an incorrect part_load_efficiency.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is modeled with the part_load_efficiency_metric correctly set to INTEGRATED_PART_LOAD_VALUE, but an incorrect part_load_efficiency.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-32",
@@ -313,11 +315,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -406,7 +409,7 @@
                                 "cooling_loop": "Chiller Loop 1",
                                 "compressor_type": "POSITIVE_DISPLACEMENT",
                                 "rated_capacity": 703400.0,
-                                "part_load_efficiency": 0.17059994313335228,
+                                "part_load_efficiency": 5.862,
                                 "part_load_efficiency_metric": "INTEGRATED_PART_LOAD_VALUE"
                             }
                         ],
@@ -453,7 +456,7 @@
         "Section": 22,
         "Rule": 32,
         "Test": "d",
-        "test_description": "Baseline building has two zones.  HVAC is system type 8 and is correctly modeled with the chiller part_load_efficiency correctly matching the value in Table G3.5.3 part_load_efficiency_metric set to INTEGRATED_PART_LOAD_VALUE.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 8 and is correctly modeled with the chiller part_load_efficiency correctly matching the value in Table G3.5.3 part_load_efficiency_metric set to INTEGRATED_PART_LOAD_VALUE.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-32",
@@ -463,11 +466,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -563,7 +567,7 @@
                                 "cooling_loop": "Chiller Loop 1",
                                 "compressor_type": "POSITIVE_DISPLACEMENT",
                                 "rated_capacity": 1058617.0,
-                                "part_load_efficiency": 0.16263861245379582,
+                                "part_load_efficiency": 6.149,
                                 "part_load_efficiency_metric": "INTEGRATED_PART_LOAD_VALUE"
                             }
                         ],
@@ -610,7 +614,7 @@
         "Section": 22,
         "Rule": 32,
         "Test": "e",
-        "test_description": "Baseline building has two zones.  HVAC is system type 8 and is incorrectly modeled with the part_load_efficiency_metric set to NONSTANDARD_PART_LOAD_VALUE.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 8 and is incorrectly modeled with the part_load_efficiency_metric set to NONSTANDARD_PART_LOAD_VALUE.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-32",
@@ -620,11 +624,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -720,7 +725,7 @@
                                 "cooling_loop": "Chiller Loop 1",
                                 "compressor_type": "POSITIVE_DISPLACEMENT",
                                 "rated_capacity": 1058617.0,
-                                "part_load_efficiency": 0.16263861245379582,
+                                "part_load_efficiency": 6.149,
                                 "part_load_efficiency_metric": "NONSTANDARD_PART_LOAD_VALUE"
                             }
                         ],
@@ -767,7 +772,7 @@
         "Section": 22,
         "Rule": 32,
         "Test": "f",
-        "test_description": "Baseline building has two zones.  HVAC is system type 8 and is modeled with the part_load_efficiency_metric correctly set to INTEGRATED_PART_LOAD_VALUE, but an incorrect part_load_efficiency.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 8 and is modeled with the part_load_efficiency_metric correctly set to INTEGRATED_PART_LOAD_VALUE, but an incorrect part_load_efficiency.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-32",
@@ -777,11 +782,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -877,7 +883,7 @@
                                 "cooling_loop": "Chiller Loop 1",
                                 "compressor_type": "POSITIVE_DISPLACEMENT",
                                 "rated_capacity": 1058617.0,
-                                "part_load_efficiency": 0.17059994313335228,
+                                "part_load_efficiency": 5.862,
                                 "part_load_efficiency_metric": "INTEGRATED_PART_LOAD_VALUE"
                             }
                         ],
@@ -924,7 +930,7 @@
         "Section": 22,
         "Rule": 32,
         "Test": "g",
-        "test_description": "Baseline building has one zone.  HVAC is system type 6 and does not have a CHW plant.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 6 and does not have a chilled water plant.  Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-32",
@@ -934,11 +940,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",

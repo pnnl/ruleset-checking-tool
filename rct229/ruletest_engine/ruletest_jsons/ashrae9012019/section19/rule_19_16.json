@@ -3,7 +3,7 @@
         "Section": 19,
         "Rule": 16,
         "Test": "a",
-        "test_description": "Proposed system type 9 includes a fan to provide non-mechanical cooling. The baseline system design has a separate fan to provide nonmechanical cooling sized and controlled the same as proposed case. This results in an undetermined per 19-16",
+        "test_description": "The project has one building segment with one zone. Proposed system type 9 includes a fan to provide non-mechanical cooling. The baseline system design has a separate fan to provide nonmechanical cooling sized and controlled the same as proposed case. This results in an undetermined per 19-16 Expected outcome: UNDETERMINED",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "19-16",
@@ -13,11 +13,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -68,7 +69,7 @@
                                                 "cooling_system": {
                                                     "id": "NonMech_System",
                                                     "type": "NON_MECHANICAL",
-                                                    "is_autosized": true
+                                                    "is_sized_based_on_design_day": true
                                                 }
                                             }
                                         ]
@@ -82,6 +83,7 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -132,7 +134,7 @@
                                                 "cooling_system": {
                                                     "id": "NonMech_System",
                                                     "type": "NON_MECHANICAL",
-                                                    "is_autosized": true
+                                                    "is_sized_based_on_design_day": true
                                                 }
                                             }
                                         ]
@@ -150,7 +152,7 @@
         "Section": 19,
         "Rule": 16,
         "Test": "b",
-        "test_description": "Proposed system type 10 includes a fan to provide non-mechanical cooling. The baseline system design has a separate fan to provide nonmechanical cooling sized and controlled the same as proposed case. This results in an undetermined per 19-16",
+        "test_description": "The project has one building segment with one zone. Proposed system type 10 includes a fan to provide non-mechanical cooling. The baseline system design has a separate fan to provide nonmechanical cooling sized and controlled the same as proposed case. This results in an undetermined per 19-16 Expected outcome: UNDETERMINED",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "19-16",
@@ -160,11 +162,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -219,7 +222,7 @@
                                                 "cooling_system": {
                                                     "id": "NonMech_System",
                                                     "type": "NON_MECHANICAL",
-                                                    "is_autosized": true
+                                                    "is_sized_based_on_design_day": true
                                                 }
                                             }
                                         ]
@@ -233,6 +236,7 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -287,7 +291,7 @@
                                                 "cooling_system": {
                                                     "id": "NonMech_System",
                                                     "type": "NON_MECHANICAL",
-                                                    "is_autosized": true
+                                                    "is_sized_based_on_design_day": true
                                                 }
                                             }
                                         ]
@@ -305,7 +309,7 @@
         "Section": 19,
         "Rule": 16,
         "Test": "c",
-        "test_description": "Proposed system type 10 doesn't include non-mechanical cooling. The baseline system design doesn't have a separate fan to provide nonmechanical cooling. This results in a not applicable per 19-16",
+        "test_description": "The project has one building segment with one zone. Proposed system type 10 doesn't include non-mechanical cooling. The baseline system design doesn't have a separate fan to provide nonmechanical cooling. This results in a not applicable per 19-16 Expected outcome: NOT_APPLICABLE",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "19-16",
@@ -315,11 +319,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -391,6 +396,7 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
