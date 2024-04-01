@@ -95,21 +95,33 @@ class Section5Rule13(RuleDefinitionListIndexedBase):
                 if surface_b_type in [OST.ABOVE_GRADE_WALL, OST.FLOOR, OST.ROOF]:
                     return {
                         **calc_vals,
-                        "baseline_surface_u_factor": getattr_(
-                            surface_b_construction, "construction", "u_factor"
+                        "baseline_surface_u_factor": CalcQ(
+                            "thermal_transmittance",
+                            getattr_(
+                                surface_b_construction, "construction", "u_factor"
+                            ),
                         ),
-                        "proposed_surface_u_factor": getattr_(
-                            surface_p_construction, "construction", "u_factor"
+                        "proposed_surface_u_factor": CalcQ(
+                            "thermal_transmittance",
+                            getattr_(
+                                surface_p_construction, "construction", "u_factor"
+                            ),
                         ),
                     }
                 elif surface_b_type in [OST.UNHEATED_SOG, OST.HEATED_SOG]:
                     return {
                         **calc_vals,
-                        "baseline_surface_f_factor": getattr_(
-                            surface_b_construction, "construction", "f_factor"
+                        "baseline_surface_f_factor": CalcQ(
+                            "linear_thermal_transmittance",
+                            getattr_(
+                                surface_b_construction, "construction", "f_factor"
+                            ),
                         ),
-                        "proposed_surface_f_factor": getattr_(
-                            surface_p_construction, "construction", "f_factor"
+                        "proposed_surface_f_factor": CalcQ(
+                            "linear_thermal_transmittance",
+                            getattr_(
+                                surface_p_construction, "construction", "f_factor"
+                            ),
                         ),
                     }
                 elif surface_b_type == OST.BELOW_GRADE_WALL:

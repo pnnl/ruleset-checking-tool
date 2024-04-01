@@ -1,7 +1,6 @@
 from rct229.rule_engine.partial_rule_definition import PartialRuleDefinition
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_system_type_compare import (
     baseline_system_type_compare,
@@ -53,11 +52,16 @@ class Section19Rule30(RuleDefinitionListIndexedBase):
             hvac_b_id = hvac_b["id"]
             baseline_system_types_dict = data["baseline_system_types_dict"]
 
-            system_type_b = list(baseline_system_types_dict.keys())[
-                list(baseline_system_types_dict.values()).index([hvac_b_id])
-            ]
+            system_type_b = next(
+                (
+                    key
+                    for key, values in baseline_system_types_dict.items()
+                    if hvac_b_id in values
+                ),
+                None,
+            )
 
-            return not any(
+            return any(
                 [
                     baseline_system_type_compare(
                         system_type_b, applicable_sys_type, False

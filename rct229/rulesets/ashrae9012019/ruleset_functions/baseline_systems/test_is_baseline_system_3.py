@@ -171,8 +171,10 @@ SYS_3_TEST_RMD = {
                     "type": "CHILLED_WATER",
                 },
             ],
+            "type": "BASELINE_0",
         }
     ],
+    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 
@@ -239,8 +241,10 @@ SYS_3_TEST_UNMATCHED_RMD = {
                     "type": "CHILLED_WATER",
                 },
             ],
+            "type": "BASELINE_0",
         }
     ],
+    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 

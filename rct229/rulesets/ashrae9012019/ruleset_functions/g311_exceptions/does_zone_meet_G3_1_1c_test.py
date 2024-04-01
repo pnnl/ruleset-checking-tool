@@ -329,8 +329,10 @@ TEST_RPD_FULL = {
                     "hourly_cooling_design_day": [1.0] * 24,
                 },
             ],
+            "type": "BASELINE_0",
         }
     ],
+    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 

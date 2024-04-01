@@ -3,7 +3,7 @@
         "Section": 22,
         "Rule": 12,
         "Test": "a",
-        "test_description": "Baseline building utilizes HVAC system type 7 and correctly has exactly 1 heat rejection  and 1 heat rejection loop.",
+        "test_description": "The project has one building segment with two zones. HVAC system type 7 and correctly has exactly 1 heat rejection  and 1 heat rejection loop. Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-12",
@@ -13,11 +13,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -160,7 +161,7 @@
         "Section": 22,
         "Rule": 12,
         "Test": "b",
-        "test_description": "Baseline building utilizes HVAC system type 7 and incorrectly has 1 heat rejection and 2 heat rejection loops.",
+        "test_description": "The project has one building segment with two zones. HVAC system type 7 and incorrectly has 1 heat rejection and 2 heat rejection loops. Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-12",
@@ -170,11 +171,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -326,7 +328,7 @@
         "Section": 22,
         "Rule": 12,
         "Test": "c",
-        "test_description": "Baseline building utilizes HVAC system type 7 and incorrectly has 2 heat rejections and 1 heat rejection loop.",
+        "test_description": "The project has one building segment with two zones. HVAC system type 7 and incorrectly has 2 heat rejections and 1 heat rejection loop. Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-12",
@@ -336,11 +338,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -487,7 +490,7 @@
         "Section": 22,
         "Rule": 12,
         "Test": "d",
-        "test_description": "Baseline building utilizes HVAC system type 7 and incorrectly has 2 heat rejections and 2 heat rejection loops.",
+        "test_description": "The project has one building segment with two zones. HVAC system type 7 and incorrectly has 2 heat rejections and 2 heat rejection loops. Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-12",
@@ -497,11 +500,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -657,7 +661,7 @@
         "Section": 22,
         "Rule": 12,
         "Test": "e",
-        "test_description": "Baseline building utilizes System 7 but does not have a heat rejection loop",
+        "test_description": "The project has one building segment with two zones. System 7 but does not have a heat rejection loop. Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-12",
@@ -667,11 +671,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",

@@ -20,4 +20,4 @@ def slash_prefix_guarantee(str):
         The original string possibly prepended with a slash if it did not
         already start with one
     """
-    return str if len(str) is 0 or str[0] is "/" else "/" + str
+    return str if len(str) == 0 or str[0] == "/" else "/" + str

@@ -3,7 +3,7 @@
         "Section": 19,
         "Rule": 19,
         "Test": "a",
-        "test_description": "System 9 with `SIMPLE` specification method for supply/return/exhaust/relief fans and each of 5 fans have 59 W design electric power for a total of 295 W with 1000 cfm design supply airflow.",
+        "test_description": "The project has one building segment with one zone. System 9 with `SIMPLE` specification method for supply/return/exhaust/relief fans and each of 5 fans have 59 W design electric power for a total of 295 W with 1000 cfm design supply airflow. Expected outcome: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-19",
@@ -13,11 +13,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -77,6 +78,7 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -164,7 +166,7 @@
         "Section": 19,
         "Rule": 19,
         "Test": "b",
-        "test_description": "System 10 with `SIMPLE` specification method for supply/return/exhaust/relief fans and each fans have 80 W design electric power with 800 cfm design supply airflow.",
+        "test_description": "The project has one building segment with one zone. System 10 with `SIMPLE` specification method for supply/return/exhaust/relief fans and each fans have 80 W design electric power with 800 cfm design supply airflow. Expected outcome: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-19",
@@ -174,11 +176,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -242,6 +245,7 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -333,7 +337,7 @@
         "Section": 19,
         "Rule": 19,
         "Test": "c",
-        "test_description": "There is more than one supply fan in the baseline HVAC system",
+        "test_description": "The project has one building segment with one zone. There is more than one supply fan in the baseline HVAC system Expected outcome: UNDETERMINED",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "19-19",
@@ -343,11 +347,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -411,6 +416,7 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -508,7 +514,7 @@
         "Section": 19,
         "Rule": 19,
         "Test": "d",
-        "test_description": "There is non-mechanical cooling associated with the zone served by the baseline HVAC system in the proposed model",
+        "test_description": "The project has one building segment with one zone. There is non-mechanical cooling associated with the zone served by the baseline HVAC system in the proposed model Expected outcome: UNDETERMINED",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "19-19",
@@ -518,11 +524,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -587,6 +594,7 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",

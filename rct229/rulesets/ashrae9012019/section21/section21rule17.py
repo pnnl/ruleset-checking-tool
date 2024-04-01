@@ -2,7 +2,6 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rulesets.ashrae9012019 import BASELINE_0
-from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
@@ -10,6 +9,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types i
     get_baseline_system_types,
 )
 from rct229.schema.config import ureg
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.pint_utils import CalcQ
 
 APPLICABLE_SYS_TYPES = [
@@ -24,8 +24,8 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_12A,
 ]
 
-BOILER_RATED_CAPACITY_LOW_LIMIT = 300000 * ureg("Btu/hr")
-BOILER_RATED_CAPACITY_HIGH_LIMIT = 2500000 * ureg("Btu/hr")
+BOILER_RATED_CAPACITY_LOW_LIMIT = 300_000 * ureg("Btu/hr")
+BOILER_RATED_CAPACITY_HIGH_LIMIT = 2_500_000 * ureg("Btu/hr")
 BOILER_EFFICIENCY_80 = 0.8
 BOILER_EFFICIENCY_75 = 0.75
 BOILER_EFFICIENCY_METRIC = SchemaEnums.schema_enums["BoilerEfficiencyMetricOptions"]

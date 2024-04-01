@@ -171,6 +171,12 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
 
 ## Section 0 - General Requirements
 
+## Section 1 - General
+  *[1-1](section1/Rule1-1.md): Building performance factors shall be from Standard 90.1-2019, Table 4.2.1.1, based on the building area type and climate zone. For building area types not listed in Table 4.2.1.1  “All others.” shall be used to determine the BPF.
+  *[1-2](section1/Rule1-2.md): The performance of the proposed design is calculated in accordance with Standard 90.1-2019 Appendix G, where Performance Cost Index = Proposed building performance (PBP) /Baseline building performance (BBP), where both the PBP and the BBP include all end-use load components associated with the building when calculating the Performance Cost Index (PCI).
+  *[1-4](section1/Rule1-4.md): The PCI shall be less than or equal to the PCIt when calculated in accordance with Standard 90.1 2019, Section 4.2.1.1.
+  *[1-5](section1/Rule1-5.md): When on-site renewable energy generation exceeds the thresholds defined in Section 4.2.1.1, the methodology defined in this section shall be used to calculate the PCIt.
+
 ## Section 3 - Space Use Classification
   
 ## Section 4 - Schedules
@@ -191,6 +197,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [4-19](section4/4-19.md): Schedules for HVAC fans in the baseline design model that provide outdoor air for ventilation shall be cycled ON and OFF to meet heating and cooling loads during unoccupied hours excluding HVAC systems that meet Table G3.1-4 Schedules per the proposed column exceptions #s 2 and 3.  
 
 ## Section 5 - Building Envelope
+  * [5-1](section5/Rule5-1.md): There are four baseline rotations (i.e., four baseline models differing in azimuth by 90 degrees and four sets of baseline model results) if vertical fenestration area per each orientation differ by more than 5%.
   * [5-2](section5/Rule5-2.md): Baseline building must be modeled so that it doesn't shade itself  
   * [5-3](section5/Rule5-3.md): Baseline roof assemblies must conform with assemblies detailed in Appendix A ( Above-grade walls—Steel-framed A2.2) 
   * [5-4](section5/Rule5-4.md): Baseline roof assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8.  
@@ -205,8 +212,9 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [5-13](section5/Rule5-13.md): Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same in the baseline as in the proposed design.
   * [5-14](section5/Rule5-14.md): For building area types included in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table G3.1.1-1 based on the area of gross above-grade walls that separate conditioned spaces and semi-heated spaces from the exterior
   * [5-15](section5/Rule5-15.md): For building areas not shown in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in the proposed design or 40% of gross above-grade wall area, whichever is smaller. 
-  * [5-17](section5/Rule5-17.md): The vertical fenestration shall be distributed on each face of the building in the same proportion as in the proposed design.  
-  * [5-18](section5/Rule5-18.md): The baseline fenestration area for an existing building shall equal the existing fenestration area prior to the proposed work.
+  * [5-16](section5/Rule5-16.md): The vertical fenestration shall be distributed on each face of the building in the same proportion as in the proposed design.  
+  * [5-17](section5/Rule5-17.md): The baseline fenestration area for an existing building shall equal the existing fenestration area prior to the proposed work.
+  * [5-18](section5/Rule5-18.md): Automatically controlled dynamic glazing may be modeled. Manually controlled dynamic glazing shall use the average of the minimum and maximum SHGC and VT.
   * [5-19](section5/Rule5-19.md): Vertical fenestration U-factors for residential, non-residential and semi-heated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8 for the appropriate WWR in the baseline RMD.  
   * [5-20](section5/Rule5-20.md): Fenestration (window and skylight) SHGC in the proposed model must match the user model.  
   * [5-21](section5/Rule5-21.md): Subsurface that is not regulated (not part of building envelope) must be modeled with the same area, U-factor and SHGC in the baseline as in the proposed design.
@@ -217,18 +225,18 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [5-26](section5/Rule5-26.md): Skylight area must be allocated to surfaces in the same proportion in the baseline as in the proposed design; Skylight orientation and tilt shall be the same as in the proposed design.  
   * [5-27](section5/Rule5-27.md): Skylight U-factors for residential, non-residential and semi-heated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8.
   * [5-28](section5/Rule5-28.md): Skylight SHGC properties shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value and the applicable skylight percentage.
-  * [5-29](section5/Rule5-29.md): Automatically controlled dynamic glazing may be modeled. Manually controlled dynamic glazing shall use the average of the minimum and maximum SHGC and VT.  
-  * [5-30](section5/Rule5-30.md): The baseline roof surfaces shall be modeled using a thermal emittance of 0.9.
-  * [5-31](section5/Rule5-31.md): The proposed roof surfaces shall be modeled using the same thermal emittance as in the user model.  
-  * [5-32](section5/Rule5-32.md): The baseline roof surfaces shall be modeled using a solar reflectance of 0.30.  
-  * [5-33](section5/Rule5-33.md): The proposed roof surfaces shall be modeled using the same solar reflectance as in the user model.  
-  * [5-34](section5/Rule5-34.md): The infiltration modeling method in the baseline includes adjustment for weather and building operation.  
-  * [5-35](section5/Rule5-35.md): The infiltration shall be modeled using the same methodology and adjustments for weather and building operation in both the proposed design and the baseline building design.  
-  * [5-36](section5/Rule5-36.md): The baseline air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1 cfm/ft2.  The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section G3.1.1.4.
-  * [5-37](section5/Rule5-37.md): The air leakage rate in unconditioned and unenclosed spaces must be the same the baseline and proposed design.  
-  * [5-38](section5/Rule5-38.md): The proposed air leakage rate of the building envelope (I<sub>75Pa</sub>) at a fixed building pressure differential of 0.3 in. of water shall be 0.6 cfm/ft2 for buildings providing verification in accordance with Section 5.9.1.2. The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section G3.1.1.4. Exceptions: When whole-building air leakage testing, in accordance with Section 5.4.3.1.1, is specified during design and completed after construction, the proposed design air leakage rate of the building envelope shall be as measured. 
-  * [5-39](section5/Rule5-39.md): It is acceptable to use either an annual average ground temperature or monthly average ground temperatures for calculation of heat loss through basement floors.
-  * [5-40](section5/Rule5-40.md): U-factor of the baseline door is based on Tables G3.4-1 through G3.4-8 for the applicable door type (swinging or non-swinging) and envelope conditioning category.
+  * [5-29](section5/Rule5-29.md): The baseline roof surfaces shall be modeled using a thermal emittance of 0.9.
+  * [5-30](section5/Rule5-30.md): The proposed roof surfaces shall be modeled using the same thermal emittance as in the user model.  
+  * [5-31](section5/Rule5-31.md): The baseline roof surfaces shall be modeled using a solar reflectance of 0.30.  
+  * [5-32](section5/Rule5-32.md): The proposed roof surfaces shall be modeled using the same solar reflectance as in the user model.  
+  * [5-33](section5/Rule5-33.md): The infiltration modeling method in the baseline includes adjustment for weather and building operation.  
+  * [5-34](section5/Rule5-34.md): The infiltration shall be modeled using the same methodology and adjustments for weather and building operation in both the proposed design and the baseline building design.  
+  * [5-35](section5/Rule5-35.md): The baseline air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1 cfm/ft2.  The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section G3.1.1.4.
+  * [5-36](section5/Rule5-36.md): The air leakage rate in unconditioned and unenclosed spaces must be the same the baseline and proposed design.  
+  * [5-37](section5/Rule5-37.md): The proposed air leakage rate of the building envelope (I<sub>75Pa</sub>) at a fixed building pressure differential of 0.3 in. of water shall be 0.6 cfm/ft2 for buildings providing verification in accordance with Section 5.9.1.2. The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section G3.1.1.4. Exceptions: When whole-building air leakage testing, in accordance with Section 5.4.3.1.1, is specified during design and completed after construction, the proposed design air leakage rate of the building envelope shall be as measured. 
+  * [5-38](section5/Rule5-38.md): It is acceptable to use either an annual average ground temperature or monthly average ground temperatures for calculation of heat loss through basement floors.
+  * [5-39](section5/Rule5-39.md): U-factor of the baseline door is based on Tables G3.4-1 through G3.4-8 for the applicable door type (swinging or non-swinging) and envelope conditioning category.
+  * [5-40](section5/Rule5-40.md): Opaque roof surfaces that are not regulated (not part of opaque building envelope) must be modeled with the same thermal emittance and solar reflectance in the baseline as in the proposed design.
 
 ## Section 6 - Lighting
   * [6-1](section6/Rule6-1.md): Proposed building interior lighting power shall not exceel total interior lighting power allowance determined using either G3.7 or G3.8
@@ -278,6 +286,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
 ## Section 19 - Air Side Baseline HVAC System
   * [19-1](section19/Rule19-1.md): HVAC system coil capacities for the baseline building design shall be oversized by 15% for cooling and 25% for heating.
   * [19-2](section19/Rule19-2.md): Baseline building plant capacities shall be based on coincident loads.
+  * [19-3](section19/Rule19-3.md): Weather conditions used in sizing runs to determine baseline equipment capacities shall be based either on design days developed using 99.6% heating design temperatures and 1% dry-bulb and 1% wet-bulb cooling design temperatures.
   * [19-4](section19/Rule19-4.md): For baseline cooling sizing runs in residential dwelling units, the infiltration, occupants, lighting, gas and electricity using equipment hourly schedule shall be the same as the most used hourly weekday schedule from the annual simulation.
   * [19-5](section19/Rule19-5.md): Unmet load hours for the proposed design shall not exceed 300 (of the 8760 hours simulated).
   * [19-6](section19/Rule19-6.md): Unmet load hours for the baseline design shall not exceed 300 (of the 8760 hours simulated).
@@ -292,6 +301,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [19-15](section19/Rule19-15.md): For baseline system types 9 & 10, the system design supply airflow rates shall be based on the temperature difference between a supply air temperature set point of 105°F and the design space-heating temperature set point, the minimum outdoor airflow rate, or the airflow rate required to comply with applicable codes or accreditation standards, whichever is greater.
   * [19-16](section19/Rule19-16.md): For zones served by baseline system types 9 & 10, if the proposed design includes a fan or fans sized and controlled to provide non-mechanical cooling, the baseline building design shall include a separate fan to provide nonmechanical cooling, sized and controlled the same as the proposed design.
   * [19-17](section19/Rule19-17.md): For baseline system 1 and 2, the total fan electrical power (Pfan) for supply, return, exhaust, and relief shall be = CFMs × 0.3, where, CFMs = the baseline system maximum design supply fan airflow rate, cfm.
+  * [19-18](section19/Rule19-18.md): For baseline systems 3 through 8, and 11, 12, and 13, the system fan electrical power for supply, return, exhaust, and relief shall be Pfan = bhp × 746/fan motor efficiency. Where, bhp = brake horsepower of baseline fan motor from Table G3.1.2.9; fan motor efficiency = the efficiency from Table G3.9.1 for the next motor size greater than the bhp using a totally enclosed fan cooled motor at 1800 rpm.
   * [19-19](section19/Rule19-19.md): For baseline systems 9 and 10 the system fan electrical power (Pfan) for supply, return, exhaust, and relief shall be  CFMs × 0.3, where, CFMs = the baseline system maximum design supply fan airflow rate, cfm. If modeling a non-mechanical cooling fan is required by Section G3.1.2.8.2, there is a fan power allowance of Pfan = CFMnmc × 0.054, where, CFMnmc = the baseline non-mechanical cooling fan airflow, cfm for the non-mechanical cooling.
   * [19-20](section19/Rule19-20.md): The calculated system fan power shall be distributed to supply, return, exhaust, and relief fans in the same proportion as the proposed design.
   * [19-21](section19/Rule19-21.md): Baseline systems with >= 5,000 CFM supply air and >= 70 %OA shall have energy recovery modeled in the baseline design model (this RDS does not check the modeled value for the enthalpy recovery ratio).
@@ -319,6 +329,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [21-5](section21/Rule21-5.md): The baseline building design boiler plant shall be modeled as having a single boiler if the baseline building design plant serves a conditioned floor area of 15,000sq.ft. or less, and as having two equally sized boilers for plants serving more than 15,000sq.ft.
   * [21-6](section21/Rule21-6.md): When baseline building includes two boilers each shall stage as required by load.  
   * [21-7](section21/Rule21-7.md): When baseline building requires boilers, systems 1,5,7,11 and 12 - Model HWST = 180F and return design temp = 130F.
+  * [21-8](section21/Rule21-8.md): When the baseline building requires boilers, (for baseline system type = 1,5,7,11 and 12),  HWST for the baseline building shall be reset using an outdoor air dry-bulb reset schedule. 180F at 20F OAT, 150Fat 50F OAT, ramped linerarly between 150F and 180F.
   * [21-9](section21/Rule21-9.md): When baseline building includes boilers, Hot Water Pump Power = 19W/gpm.  
   * [21-10](section21/Rule21-10.md): When the building is modeled with HHW plant (served by either boiler(s) or purchased hot water/steam), the hot water pump shall be modeled as riding the pump curve if the hot water system serves less than 120,000 ft^2 otherwise it shall be modeled with a VFD.  
   * [21-11](section21/Rule21-11.md): When the system uses boilers the hot water system shall be modeled as primary only.  
@@ -358,6 +369,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [22-25](section22/Rule22-25.md): For chilled-water systems served by chiller(s) and does not serve baseline System-11, the baseline building constant-volume primary pump power shall be modeled as 9 W/gpm. 
   * [22-26](section22/Rule22-26.md): For chilled-water systems served by chiller(s) and serves baseline System-11, the baseline building constant-volume primary pump power shall be modeled as 12 W/gpm. 
   * [22-27](section22/Rule22-27.md): Each baseline chiller shall be modeled with separate condenser-water pump interlocked to operate with the associated chiller.
+  * [22-28](section22/Rule22-28.md): The baseline building design condenser-water pump shall be modeled as constant volume.
   * [22-29](section22/Rule22-29.md): For chilled-water systems served by chiller(s) and does not serve baseline System-11, condenser-water pump power shall be 19 W/gpm. 
   * [22-30](section22/Rule22-30.md): For chilled-water systems served by chiller(s) and serves baseline System-11, condenser-water pump power shall be 22 W/gpm. 
   * [22-31](section22/Rule22-31.md): The baseline building design’s chiller plant shall be modeled with chillers having the number as indicated in Table G3.1.3.7 as a function of building peak cooling load. 
@@ -373,9 +385,19 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [22-41](section22/Rule22-41.md): Purchased CHW systems must be modeled with only one external fluid loop in the baseline design.
 
 ## Section 23 - Chilled Water Systems and Condenser Water Systems
+  * [23-2](section23/Rule23-1.md): System 2 and 4 - Electric air-source heat pumps shall be modeled with electric auxiliary heat and an outdoor air thermostat. The systems shall be controlled to energize auxiliary heat only when the outdoor air temperature is less than 40°F. The air-source heat pump shall be modeled to continue to operate while auxiliary heat is energized.
   * [23-2](section23/Rule23-2.md): For baseline systems 5-8 and 11, the SAT is reset higher by 5F under minimum cooling load conditions.
   * [23-3](section23/Rule23-3.md): System 5, 6, 7 and 8 minimum volume setpoint shall be 30% of zone peak airflow, minimum outdoor airflow, or rate required to comply with minimum accreditation standards whichever is larger.
+  * [23-4](section23/Rule23-4.md): Baseline systems 5 & 7 serving lab spaces per G3.1.1c shall reduce lab exhaust and makeup air during unoccupied periods to 50% of zone peak airflow, the minimum outdoor airflow, or rate required to comply with minimum accreditation standards whichever is larger.
+  * [23-5](section23/Rule23-5.md): For baseline systems 6 and 8, Fans in parallel VAV fan-powered boxes shall run as the first stage of heating before the reheat coil is energized.
   * [23-6](section23/Rule23-6.md): For baseline systems 6 and 8, Fans in parallel VAV fan-powered boxes shall be sized for 50% of the peak design primary air (from the VAV air-handling unit) flow rate and shall be modeled with 0.35 W/cfm fan power.
   * [23-7](section23/Rule23-7.md): Systems 6&8: Supply air temperature setpoint shall be constant at the design condition.
   * [23-8](section23/Rule23-8.md): System 5-8 and 11 - part load VAV fan power shall be modeled using either method 1 or 2 in Table G3.1.3.15. This rule will only validate data points from Method-1 Part-load Fan Power Data. However, both methods are equivalent. When modeling inputs are based on Method 2, values should be converted to Method 1 when writing to RMD.
+  * [23-9](section23/Rule23-9.md): System 11 Minimum volume setpoint shall be the largest of 50% of the maximum design airflow rate, the minimum ventilation airflow rate or the airflow required to comply with codes or accredidation standards.
+  * [23-10](section23/Rule23-10.md): System 11 Fan volume shall be reset from 100% airflow at 100% load to minimum airflow at 50% load.
+  * [23-11](section23/Rule23-11.md): System 11 Supply air temperature shall be reset from minimum supply air temp at 50% cooling load to room temp at 0% cooling load.  OR the SAT is reset higher by 5F under minimum cooling load conditions.
+  * [23-12](section23/Rule23-12.md): System 11 in heating mode supply air temperature shall be modulated to maintain space temp and airflow shall be fixed at minimum airflow.
+  * [23-13](section23/Rule23-13.md): If proposed design includes humidistatic controls then the baseline shall use mechanical cooling for dehumidification and shall reheat to avoid overcooling.
+  * [23-14](section23/Rule23-14.md): If the baseline system does not comply with exceptions in Section 6.5.2.3 then only 25% of the system reheat energy shall be included in the baseline building performance.
+  * [23-15](section23/Rule23-15.md): Dehumidification reheat shall be the same as the system heating type.
   * [23-16](section23/Rule23-16.md): Systems 5 - 8, the baseline system shall be modeled with preheat coils controlled to a fixed set point 20F less than the design room heating temperature setpoint.

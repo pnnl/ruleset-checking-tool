@@ -2,7 +2,6 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rulesets.ashrae9012019 import BASELINE_0
-from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_system_type_compare import (
     baseline_system_type_compare,
 )
@@ -13,7 +12,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types i
     get_baseline_system_types,
 )
 from rct229.schema.config import ureg
-from rct229.utils.assertions import getattr_
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO, CalcQ
 from rct229.utils.std_comparisons import std_equal
@@ -56,7 +55,10 @@ class Section23Rule16(RuleDefinitionListIndexedBase):
 
         return any(
             [
-                baseline_system_type_compare(system_type, applicable_sys_type, False)
+                baseline_system_types_dict[system_type]
+                and baseline_system_type_compare(
+                    system_type, applicable_sys_type, False
+                )
                 for system_type in baseline_system_types_dict
                 for applicable_sys_type in APPLICABLE_SYS_TYPES
             ]
@@ -68,16 +70,12 @@ class Section23Rule16(RuleDefinitionListIndexedBase):
         # set hvac_id with highest zone_design_heating_setpoint
         hvac_max_zone_setpoint_dict = {}
         for zone in find_all("$.buildings[*].building_segments[*].zones[*]", rmi_b):
-            zone_design_heating_setpoint = getattr_(
-                zone, "zone", "design_thermostat_heating_setpoint"
+            # handle indirectly conditioned zones, which do not have terminals.
+            zone_design_heating_setpoint = zone.get(
+                "design_thermostat_heating_setpoint", ZERO.TEMPERATURE
             )
-            for terminal in find_all("$.terminals[*]", zone):
-                hvac_id = getattr_(
-                    terminal,
-                    "terminal",
-                    "served_by_heating_ventilating_air_conditioning_system",
-                )
-                hvac_max_zone_setpoint_dict = {
+            hvac_max_zone_setpoint_dict.update(
+                {
                     hvac_id: max(
                         zone_design_heating_setpoint,
                         hvac_max_zone_setpoint_dict.get(hvac_id, ZERO.TEMPERATURE),
@@ -87,6 +85,7 @@ class Section23Rule16(RuleDefinitionListIndexedBase):
                         zone,
                     )
                 }
+            )
 
         # find preheat_system's hot water loop type
         hot_water_loop_type_dict = {

@@ -54,7 +54,7 @@ def generate_ashrae9012019_software_test_report(
     if section_list is None:
         section_list = RuleSetTest.ASHRAE9012019_TEST_LIST
 
-    generate_software_test_report("ashrae9012019", section_list, output_dir)
+    return generate_software_test_report("ashrae9012019", section_list, output_dir)
 
 
 def _helper_get_all_test_file_by_section(ruleset: str, path: str):
@@ -165,6 +165,20 @@ def run_hvac_general_tests():
     return run_test_helper(json_tests, RuleSet.ASHRAE9012019_RULESET)
 
 
+def run_sys_zone_assignment_tests():
+    """Runs all tests found in the system zone assignment tests JSON.
+    Returns
+    -------
+    None
+    Results of system zone assignments test are spit out to console
+    """
+
+    json_tests = _helper_get_all_test_file_by_section(
+        RuleSet.ASHRAE9012019_RULESET, "section18"
+    )
+    return run_test_helper(json_tests, RuleSet.ASHRAE9012019_RULESET)
+
+
 def run_test_helper(test_list, ruleset_doc):
     # sort the list in a human order
     test_list.sort(key=natural_keys)
@@ -192,10 +206,11 @@ def run_test_one_jsontest(test_json):
 # run_envelope_tests()
 # run_receptacle_tests()
 # run_airside_tests()
+# run_sys_zone_assignment_tests()
 # run_hvac_general_tests()
 
-# run_test_one_jsontest("ashrae9012019/section22/rule_22_12.json")
+# run_test_one_jsontest("ashrae9012019/section4/rule_4_2.json")
 # run_ashrae9012019_tests()
 # output_dir = os.path.dirname(__file__)
 # generate_ashrae9012019_software_test_report(['tester'])
-# generate_ashrae9012019_software_test_report()
+# generate_ashrae9012019_software_test_report(None, output_dir)

@@ -65,7 +65,10 @@ class Section19Rule14(RuleDefinitionListIndexedBase):
 
         return any(
             [
-                baseline_system_type_compare(system_type, applicable_sys_type, False)
+                baseline_system_types_dict_b[system_type]
+                and baseline_system_type_compare(
+                    system_type, applicable_sys_type, False
+                )
                 for system_type in baseline_system_types_dict_b
                 for applicable_sys_type in APPLICABLE_SYS_TYPES
             ]
@@ -118,7 +121,7 @@ class Section19Rule14(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section19Rule14.HVACRule, self).__init__(
                 rmrs_used=produce_ruleset_model_instance(
-                    USER=False, BASELINE_0=True, PROPOSED=True
+                    USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={
                     "$": ["fan_system"],
