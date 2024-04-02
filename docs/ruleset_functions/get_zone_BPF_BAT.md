@@ -6,7 +6,7 @@
 
 **Inputs:**  
 - **RMD**: The ruleset model instance
-- **zone_id**: the id of the zone
+- **zone_id**: The id of the zone
 
 **Returns:**  
 - **zone_BPF_BAT_dict**: A dict for the zone that saves the BPF_BAT as keys and the areas as the values. Example: {SCHOOL: 50000, UNDETERMINED: 2000}
@@ -17,7 +17,7 @@
 ## Logic:  
 
 - create a dictionary to map lighting space types to BPF building area types: ```building_area_lookup = { 
-	ATRIUM_LOW_MEDIUM: UNDETERMINED,							
+	ATRIUM_LOW_MEDIUM: UNDETERMINED,						
 	ATRIUM_HIGH: UNDETERMINED,
 	AUDIENCE_SEATING_AREA_AUDITORIUM: UNDETERMINED,
 	AUDIENCE_SEATING_AREA_CONVENTION_CENTER: ALL_OTHER,
@@ -119,15 +119,15 @@
 	TRANSPORTATION_FACILITY_AIRPORT_CONCOURSE: ALL_OTHER,
 	TRANSPORTATION_FACILITY_TICKET_COUNTER: ALL_OTHER,
 	WAREHOUSE_STORAGE_AREA_MEDIUM_TO_BULKY_PALLETIZED_ITEMS: WAREHOUSE,
-	WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS: WAREHOUSE,
+	WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS: WAREHOUSE
 	}```
 
 - create dictionary to store the sum of space area assigned to each mapped BPF building area type `zone_BPF_BAT_dict`: `zone_BPF_BAT_dict = {}`
 - get the zone using the function get_object_by_id: `get_object_by_id(B_RMD, zone_id)`
 - iterate through each space in the zone: `for space in zone.spaces:`
   - map from the lighting space type to the BPF building area type: `space_BPF_BAT = building_area_lookup[space.lighting_space_type]`
-  - add this space type to the zone_BPF_BAT_dict if it doesn't exist yet: `if space_BPF_BAT not in zone_BPF_BAT_dict: zone_BPF_BAT_dict[space_BPF_BAT] = space.floor_area`
-  - otherwise just add the space area: `zone_BPF_BAT_dict[space_BPF_BAT] += space.floor_area`
+  - add the space area if it exists: `if space_BPF_BAT in zone_BPF_BAT_dict: zone_BPF_BAT_dict[space_BPF_BAT] += space.floor_area`
+  - otherwise just add this space type to the zone_BPF_BAT_dict if it doesn't exist yet: `zone_BPF_BAT_dict[space_BPF_BAT] = space.floor_area`
 
        **Returns** `return zone_BPF_BAT_dict`  
 
