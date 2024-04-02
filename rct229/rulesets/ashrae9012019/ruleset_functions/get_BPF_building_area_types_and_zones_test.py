@@ -6,7 +6,58 @@ from rct229.schema.schema_utils import quantify_rmr
 from rct229.schema.validate import schema_validate_rmr
 
 
-TEST_BUILDING = {
+TEST_BUILDING_WITH_LGT_BAT = {
+    "id": "test_rmd",
+    "buildings": [
+        {
+            "id": "building_1",
+            "building_segments": [
+                {
+                    "id": "building_segment_1",
+                    "lighting_building_area_type": "CONVENTION_CENTER",
+                    "heating_ventilating_air_conditioning_systems": [
+                        {"id": "hvac_1"},
+                    ],
+                    "zones": [
+                        {
+                            "id": "zone_1",
+                            "spaces": [
+                                {
+                                    "id": "Space 1_1",
+                                    "floor_area": 100,
+                                },
+                                {
+                                    "id": "Space 1_2",
+                                    "floor_area": 200,
+                                },
+                            ],
+                        },
+                        {
+                            "id": "zone_2",
+                            "spaces": [
+                                {
+                                    "id": "Space 2_1",
+                                    "floor_area": 300,
+                                },
+                                {
+                                    "id": "Space 2_2",
+                                    "floor_area": 400,
+                                },
+                                {
+                                    "id": "Space 2_3",
+                                    "floor_area": 100,
+                                },
+                            ],
+                        },
+                    ],
+                }
+            ],
+        }
+    ],
+    "type": "BASELINE_0",
+}
+
+TEST_BUILDING_WITHOUT_LGT_BAT = {
     "id": "test_rmd",
     "buildings": [
         {
@@ -64,27 +115,61 @@ TEST_BUILDING = {
 }
 
 
-TEST_RPD = {
+TEST_RPD_WITH_LGT_BAT = {
     "id": "ASHRAE229",
-    "ruleset_model_descriptions": [TEST_BUILDING],
+    "ruleset_model_descriptions": [TEST_BUILDING_WITH_LGT_BAT],
     "data_timestamp": "2024-02-12T09:00Z",
 }
 
-TEST_RMD = quantify_rmr(TEST_RPD)["ruleset_model_descriptions"][0]
+TEST_RPD_WITHOUT_LGT_BAT = {
+    "id": "ASHRAE229",
+    "ruleset_model_descriptions": [TEST_BUILDING_WITHOUT_LGT_BAT],
+    "data_timestamp": "2024-02-12T09:00Z",
+}
 
 
-def test__TEST_RMD__is_valid():
-    schema_validation_result = schema_validate_rmr(TEST_RPD)
+TEST_RMD_WITH_LGT_BAT = quantify_rmr(TEST_RPD_WITH_LGT_BAT)[
+    "ruleset_model_descriptions"
+][0]
+TEST_RMD_WITHOUT_LGT_BAT = quantify_rmr(TEST_RPD_WITHOUT_LGT_BAT)[
+    "ruleset_model_descriptions"
+][0]
+
+
+def test__TEST_WITH_LGT_BAT__is_valid():
+    schema_validation_result = schema_validate_rmr(TEST_RPD_WITH_LGT_BAT)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
 
 
-def test__get_BPF_building_area_types_and_zones__pass():
-    assert get_BPF_building_area_types_and_zones(TEST_RMD) == {
-        "HEALTHCARE_HOSPITAL": {
+def test__TEST_WITHOUT_LGT_BAT__is_valid():
+    schema_validation_result = schema_validate_rmr(TEST_RPD_WITHOUT_LGT_BAT)
+    assert schema_validation_result[
+        "passed"
+    ], f"Schema error: {schema_validation_result['error']}"
+
+
+def test__get_BPF_building_area_types_and_zones__With_lgt_bat():
+    assert get_BPF_building_area_types_and_zones(TEST_RMD_WITH_LGT_BAT) == {
+        "ALL_OTHER": {
             "zone_id": ["zone_1", "zone_2"],
             "area": 1100 * ureg("m2"),
-            "classification_source": "SPACE_LIGHTING",
+            "classification_source": "BUILDING_SEGMENT_LIGHTING",
         }
+    }
+
+
+def test__get_BPF_building_area_types_and_zones__Without_lgt_bat():
+    assert get_BPF_building_area_types_and_zones(TEST_RMD_WITHOUT_LGT_BAT) == {
+        "UNDETERMINED": {
+            "zone_id": ["zone_1"],
+            "area": 300 * ureg("m2"),
+            "classification_source": "SPACE_LIGHTING",
+        },
+        "HEALTHCARE_HOSPITAL": {
+            "zone_id": ["zone_2"],
+            "area": 800 * ureg("m2"),
+            "classification_source": "SPACE_LIGHTING",
+        },
     }

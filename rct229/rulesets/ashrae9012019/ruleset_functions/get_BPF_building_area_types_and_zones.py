@@ -73,8 +73,10 @@ def get_BPF_building_area_types_and_zones(rmd: dict) -> dict:
             classification_source = "BUILDING_SEGMENT_LIGHTING"
         else:
             building_segment_space_types_areas_dict = {}
+            building_segment_BPF_BAT = {}
             for zone in find_all("$.zones[*]", building_segment):
-                zone_BPF_BAT_dict = get_zone_BPF_BAT(rmd, zone["id"])
+                zone_id = zone["id"]
+                zone_BPF_BAT_dict = get_zone_BPF_BAT(rmd, zone_id)
 
                 # merge zone_BPF_BAT_dict and building_segment_space_types_areas_dict
                 # if the two dicts have the same keys, add the two values
@@ -87,40 +89,43 @@ def get_BPF_building_area_types_and_zones(rmd: dict) -> dict:
                     }
                 )
 
-            # find the key that has the greatest value
-            building_segment_BPF_BAT = max(
-                building_segment_space_types_areas_dict,
-                key=lambda k: building_segment_space_types_areas_dict[k],
-            )
+                # find the key that has the greatest value
+                building_segment_BPF_BAT[zone_id] = max(
+                    building_segment_space_types_areas_dict,
+                    key=lambda k: building_segment_space_types_areas_dict[k],
+                )
             classification_source = "SPACE_LIGHTING"
 
-        if (
-            building_segment_BPF_BAT
-            not in building_area_types_with_total_area_and_zones_dict
-        ):
-            building_area_types_with_total_area_and_zones_dict[
-                building_segment_BPF_BAT
-            ] = {
-                "zone_id": [],
-                "area": ZERO.AREA,
-                "classification_source": classification_source,
-            }
-        elif classification_source == "SPACE_LIGHTING":
-            building_area_types_with_total_area_and_zones_dict[
-                building_segment_BPF_BAT
-            ]["classification_source"] = "SPACE_LIGHTING"
-
         for zone in find_all("$.zones[*]", building_segment):
-            building_area_types_with_total_area_and_zones_dict[
-                building_segment_BPF_BAT
-            ]["zone_id"].append(zone["id"])
+            zone_id = zone["id"]
+            building_segment_BPF_BAT_zone = (
+                building_segment_BPF_BAT[zone_id]
+                if classification_source == "SPACE_LIGHTING"
+                else building_segment_BPF_BAT
+            )
+            if (
+                building_segment_BPF_BAT_zone
+                not in building_area_types_with_total_area_and_zones_dict
+            ):
+                building_area_types_with_total_area_and_zones_dict[
+                    building_segment_BPF_BAT_zone
+                ] = {
+                    "zone_id": [],
+                    "area": ZERO.AREA,
+                    "classification_source": classification_source,
+                }
 
             building_area_types_with_total_area_and_zones_dict[
-                building_segment_BPF_BAT
+                building_segment_BPF_BAT_zone
+            ]["zone_id"].append(zone_id)
+
+            building_area_types_with_total_area_and_zones_dict[
+                building_segment_BPF_BAT_zone
             ]["area"] += sum(
                 [
                     space.get("floor_area", ZERO.AREA)
                     for space in find_all("$.spaces[*]", zone)
                 ]
             )
+
     return building_area_types_with_total_area_and_zones_dict
