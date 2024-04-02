@@ -112,7 +112,7 @@ BUILDING_AREA_LOOKUP = {
 }
 
 
-def get_zone_BPF_BAT(rmd: dict, zone_id: str) -> dict:
+def get_zone_BPF_BAT(rmd: dict, zone_id: str) -> dict[str, str]:
     """
      Get a dictionary of the BPF_BAT and areas for a given zone.
 
