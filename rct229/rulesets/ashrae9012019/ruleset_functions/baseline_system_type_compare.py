@@ -8,8 +8,8 @@ from rct229.utils.assertions import assert_
 
 
 def baseline_system_type_compare(
-    system_type: Type[HVAC_SYS],
-    target_system_type: Type[HVAC_SYS],
+    system_type: HVAC_SYS,
+    target_system_type: HVAC_SYS,
     exact_match: Optional[bool] = True,
 ) -> bool:
     """

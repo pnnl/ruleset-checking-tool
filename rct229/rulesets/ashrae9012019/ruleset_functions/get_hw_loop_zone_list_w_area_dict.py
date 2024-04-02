@@ -38,7 +38,7 @@ def get_hw_loop_zone_list_w_area(rmi_b: dict) -> dict[str, HVACZoneListArea]:
     """
     hw_loop_zone_list_w_area_dict = dict()
     for zone in find_all("$.buildings[*].building_segments[*].zones[*]", rmi_b):
-        zone_area = sum(
+        zone_area: Quantity = sum(
             [
                 space.get("floor_area", ZERO.AREA)
                 for space in find_all("$.spaces[*]", zone)
@@ -79,9 +79,9 @@ def get_hw_loop_zone_list_w_area(rmi_b: dict) -> dict[str, HVACZoneListArea]:
                 hhw_loop_id is not None
                 and hhw_loop_id not in hw_loop_zone_list_w_area_dict
             ):
-                hw_loop_zone_list_w_area_dict[hhw_loop_id] = {
-                    "zone_list": [],
+                hw_loop_zone_list_w_area_dict[hhw_loop_id]: HVACZoneListArea = {
                     "total_area": ZERO.AREA,
+                    "zone_list": [],
                 }
             # prevent double counting
             if (
@@ -90,7 +90,7 @@ def get_hw_loop_zone_list_w_area(rmi_b: dict) -> dict[str, HVACZoneListArea]:
                 not in hw_loop_zone_list_w_area_dict[hhw_loop_id]["zone_list"]
             ):
                 hw_loop_zone_list_w_area_dict[hhw_loop_id]["zone_list"].append(
-                    zone["id"]
+                    str(zone["id"])
                 )
                 hw_loop_zone_list_w_area_dict[hhw_loop_id]["total_area"] += zone_area
     return hw_loop_zone_list_w_area_dict

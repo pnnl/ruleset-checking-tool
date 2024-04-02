@@ -4,7 +4,7 @@ from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_all
 
 
-def ZonesTerminalUnitsServedByHVACSys(TypedDict):
+class ZonesTerminalUnitsServedByHVACSys(TypedDict):
     terminal_unit_list: list[str]
     zone_list: list[str]
 

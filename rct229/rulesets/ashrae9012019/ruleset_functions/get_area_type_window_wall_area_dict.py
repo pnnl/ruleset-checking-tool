@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Dict
 
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
     OpaqueSurfaceType as OST,
@@ -28,7 +28,7 @@ class AreaTypeWindowWallAreaDict:
 
 def get_area_type_window_wall_area_dict(
     climate_zone: str, building: dict
-) -> dict[str | Any, AreaTypeWindowWallAreaDict | Any]:
+) -> dict[str | Any, dict[str, Any]]:
     """Gets a dictionary mapping building area type to a dictionary of (total area of
     above grade vertical surfaces) and (total area of fenestration)
 

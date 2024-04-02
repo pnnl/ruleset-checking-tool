@@ -6,6 +6,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type imp
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
     SurfaceConditioningCategory as SCC,
+    ZoneConditioningDataDict,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
@@ -27,7 +28,9 @@ GET_BUILDING_SCC_WINDOW_WALL_RATIO_DICT__REQUIRED_FIELDS = {
 }
 
 
-def get_building_scc_window_wall_ratios_dict(climate_zone, building):
+def get_building_scc_window_wall_ratios_dict(
+    climate_zone: str, building: dict
+) -> ZoneConditioningDataDict:
     """Determines the window to wall ratio for each surface conditioning category
     in a building
 
@@ -98,16 +101,18 @@ def get_building_scc_window_wall_ratios_dict(climate_zone, building):
                 assert scc == SCC.UNREGULATED
 
     return {
-        SCC.EXTERIOR_RESIDENTIAL: total_res_window_area / total_res_wall_area
+        getattr(SCC, "EXTERIOR_RESIDENTIAL"): total_res_window_area
+        / total_res_wall_area
         if total_res_wall_area > 0
         else 0,
-        SCC.EXTERIOR_NON_RESIDENTIAL: total_nonres_window_area / total_nonres_wall_area
+        getattr(SCC, "EXTERIOR_NON_RESIDENTIAL"): total_nonres_window_area
+        / total_nonres_wall_area
         if total_nonres_wall_area > 0
         else 0,
-        SCC.EXTERIOR_MIXED: total_mixed_window_area / total_mixed_wall_area
+        getattr(SCC, "EXTERIOR_MIXED"): total_mixed_window_area / total_mixed_wall_area
         if total_mixed_wall_area > 0
         else 0,
-        SCC.SEMI_EXTERIOR: total_semi_exterior_window_area
+        getattr(SCC, "SEMI_EXTERIOR"): total_semi_exterior_window_area
         / total_semi_exterior_wall_area
         if total_semi_exterior_wall_area > 0
         else 0,

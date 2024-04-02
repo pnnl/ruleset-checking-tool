@@ -14,7 +14,7 @@ from rct229.utils.utility_functions import (
 )
 
 
-def HVACSysAssocZonesLargestExhaustSource(TypedDict):
+class HVACSysAssocZonesLargestExhaustSource(TypedDict):
     hvac_fan_sys_exhaust_sum: Quantity
     maximum_zone_exhaust: Quantity
     num_hvac_exhaust_fans: int

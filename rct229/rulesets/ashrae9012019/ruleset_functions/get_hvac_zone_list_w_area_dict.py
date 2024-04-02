@@ -50,7 +50,7 @@ def get_hvac_zone_list_w_area_by_rmi_dict(rmi: dict) -> dict[str, HVACZoneListAr
     return hvac_zone_list_w_area_dict
 
 
-def get_hvac_zone_list_w_area_dict(building):
+def get_hvac_zone_list_w_area_dict(building: dict) -> dict[str, HVACZoneListArea]:
     """Gets the list of zones and their total floor area served by each HVAC system
     in a building
 

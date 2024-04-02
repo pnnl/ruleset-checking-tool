@@ -10,6 +10,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type imp
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
     SurfaceConditioningCategory as SCC,
+    ZoneConditioningDataDict,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
@@ -22,16 +23,9 @@ from rct229.utils.pint_utils import ZERO
 DOOR = SchemaEnums.schema_enums["SubsurfaceClassificationOptions"].DOOR
 
 
-class SkylightRoofRatiosDict(TypedDict):
-    SCC.EXTERIOR_RESIDENTIAL: float
-    SCC.EXTERIOR_NON_RESIDENTIAL: float
-    SCC.EXTERIOR_MIXED: float
-    SCC.SEMI_EXTERIOR: float
-
-
 def get_building_scc_skylight_roof_ratios_dict(
     climate_zone: str, building: dict
-) -> SkylightRoofRatiosDict:
+) -> ZoneConditioningDataDict:
     """Gets a dictionary mapping skylight and envelope roof ratios for a building for residential, non-residential,
     mixed and semi-heated surface conditioning categories
             Parameters
@@ -92,10 +86,10 @@ def get_building_scc_skylight_roof_ratios_dict(
         srr_semiheated = total_semiheated_skylight_area / total_semiheated_roof_area
 
     return {
-        SCC.EXTERIOR_RESIDENTIAL: srr_res,
-        SCC.EXTERIOR_NON_RESIDENTIAL: srr_nonres,
-        SCC.EXTERIOR_MIXED: srr_mixed,
-        SCC.SEMI_EXTERIOR: srr_semiheated,
+        getattr(SCC, "EXTERIOR_RESIDENTIAL"): srr_res,
+        getattr(SCC, "EXTERIOR_NON_RESIDENTIAL"): srr_nonres,
+        getattr(SCC, "EXTERIOR_MIXED"): srr_mixed,
+        getattr(SCC, "SEMI_EXTERIOR"): srr_semiheated,
     }
 
 

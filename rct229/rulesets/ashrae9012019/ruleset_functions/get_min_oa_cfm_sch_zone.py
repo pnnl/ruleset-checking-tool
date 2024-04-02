@@ -56,6 +56,9 @@ def get_min_oa_cfm_sch_zone(
                 "hourly_values",
             )
 
+            if not isinstance(minimum_outdoor_airflow_multiplier_schedule, list):
+                raise TypeError
+
             assert_(
                 year_hrs == len(minimum_outdoor_airflow_multiplier_schedule),
                 f"The length of schedule has to be {year_hrs}, but is {len(minimum_outdoor_airflow_multiplier_schedule)}.",
