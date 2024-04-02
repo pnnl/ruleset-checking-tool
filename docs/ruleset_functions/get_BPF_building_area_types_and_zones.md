@@ -9,7 +9,7 @@
 - **RMD**: The ruleset model description
 
 **Returns:**  
-- **building_area_types_with_total_area_and_zones_dict**: A dict that saves all the BPF building area types and includes a list of all the zone ids associated with area type as well as the total area of each building area type: {MULTIFAMILY: {"ZONE_IDS": ["zone_2", "zone_3", "zone_4"], "AREA": 34567, "CLASSIFICATION_SOURCE": "BUILDING_SEGMENT_LIGHTING"}, HEALTHCARE_HOSPITAL: {"ZONE_IDS": ["r1","r2","r3"], "AREA": 20381, "CLASSIFICATION_SOURCE": "SPACE_LIGHTING"}
+- **building_area_types_with_total_area_and_zones_dict**: A dict that saves all the BPF building area types and includes a list of all the zone ids associated with area type as well as the total area of each building area type: {MULTIFAMILY: {"zone_id": ["zone_2", "zone_3", "zone_4"], "area": 34567, "classification_source": "BUILDING_SEGMENT_LIGHTING"}, HEALTHCARE_HOSPITAL: {"zone_id": ["zone_1","zone_5","zone_6"], "area": 20381, "classification_source": "SPACE_LIGHTING"}
  
 **Function Call:**
 - **get_zone_BPF_BAT**
@@ -66,12 +66,12 @@
 				- Else: Add the area: `building_segment_space_types_areas_dict[space_BPF_BAT] += zone_BPF_BAT_dict[space_BPF_BAT]`
 		- Get the BPF_BAT with the largest floor area from building_segment_space_types_areas_dict: `building_segment_BPF_BAT = max(building_segment_space_types_areas_dict, key=lambda k: building_segment_space_types_areas_dict[k])`
 		- Assign "SPACE_LIGHTING" to classification_source: `classification_source = "SPACE_LIGHTING"`
-	- At this point, the building_segment_BPF_BAT has been defined by one of the two approaches. If the BPF_BAT doesn't exist already: add a nested dict for this BPF_BAT to the building_area_types_with_total_area_and_zones_dict : `if building_segment_BPF_BAT not in building_area_types_with_total_area_and_zones_dict: building_area_types_with_total_area_and_zones_dict[building_segment_BPF_BAT] = {"ZONE_IDS":[], "AREA":0, "CLASSIFICATION_SOURCE": classification_source}`
-	- If the BPF_BAT does exist already, and the classification_source is "SPACE_LIGHTING", update the dictionary item classification_source to "SPACE_LIGHTING" so that the recorded value is set to the weakest method used to determine any of the project's BPF_BATs: `elif classification_source == "SPACE_LIGHTING": building_area_types_with_total_area_and_zones_dict[building_segment_BPF_BAT]["CLASSIFICATION_SOURCE"] = "SPACE_LIGHTING"`
+	- At this point, the building_segment_BPF_BAT has been defined by one of the two approaches. If the BPF_BAT doesn't exist already: add a nested dict for this BPF_BAT to the building_area_types_with_total_area_and_zones_dict : `if building_segment_BPF_BAT not in building_area_types_with_total_area_and_zones_dict: building_area_types_with_total_area_and_zones_dict[building_segment_BPF_BAT] = {"zone_id":[], "area":0, "classification_source": classification_source}`
+	- If the BPF_BAT does exist already, and the classification_source is "SPACE_LIGHTING", update the dictionary item classification_source to "SPACE_LIGHTING" so that the recorded value is set to the weakest method used to determine any of the project's BPF_BATs: `elif classification_source == "SPACE_LIGHTING": building_area_types_with_total_area_and_zones_dict[building_segment_BPF_BAT]["classification_source"] = "SPACE_LIGHTING"`
     - For each zone in the building segment: `for zone in building_segment.zones:`
-        - Add the zone to the building_area_types_with_total_area_and_zones_dict: `building_area_types_with_total_area_and_zones_dict[building_segment_BPF_BAT]["ZONE_IDS"].append(zone.id)`
+        - Add the zone to the building_area_types_with_total_area_and_zones_dict: `building_area_types_with_total_area_and_zones_dict[building_segment_BPF_BAT]["zone_id"].append(zone.id)`
         - For each space in the zone: `for space in zone.spaces:`
-            - Add the space area to the building_area_types_with_total_area_and_zones_dict: `building_area_types_with_total_area_and_zones_dict[building_segment_BPF_BAT]["AREA"] += space.floor_area`
+            - Add the space area to the building_area_types_with_total_area_and_zones_dict: `building_area_types_with_total_area_and_zones_dict[building_segment_BPF_BAT]["area"] += space.floor_area`
 
 	 **Returns** `return building_area_types_with_total_area_and_zones_dict`  
 
