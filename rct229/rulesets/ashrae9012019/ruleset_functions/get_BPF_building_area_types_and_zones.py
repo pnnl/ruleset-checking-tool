@@ -1,3 +1,6 @@
+from typing import TypedDict
+
+from pint import Quantity
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_BPF_BAT import (
     get_zone_BPF_BAT,
 )
@@ -46,7 +49,15 @@ LIGHTING_BUILDING_AREA_LOOKUP = {
 }
 
 
-def get_BPF_building_area_types_and_zones(rmd: dict) -> dict:
+class BuildingAreaTypeWithTotalAreaAndZone(TypedDict):
+    zone_id: list
+    area: Quantity
+    classification_source: str
+
+
+def get_BPF_building_area_types_and_zones(
+    rmd: dict,
+) -> dict[str, BuildingAreaTypeWithTotalAreaAndZone]:
     """
     Get a dictionary of the zone_ids associated with each BPF building area type associated with U_RMD, P_RMD, or B_RMD. Also returns the total floor area of each building area type and the source of the information (BUILDING_AREA_LIGHTING or SPACE_LIGHTING)
 
