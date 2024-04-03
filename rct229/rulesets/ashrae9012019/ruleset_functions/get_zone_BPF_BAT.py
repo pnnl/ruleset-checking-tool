@@ -1,3 +1,4 @@
+from pint import Quantity
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
@@ -112,7 +113,7 @@ BUILDING_AREA_LOOKUP = {
 }
 
 
-def get_zone_BPF_BAT(rmd: dict, zone_id: str) -> dict[str, str]:
+def get_zone_BPF_BAT(rmd: dict, zone_id: str) -> dict[str, Quantity]:
     """
      Get a dictionary of the BPF_BAT and areas for a given zone.
 
@@ -133,7 +134,7 @@ def get_zone_BPF_BAT(rmd: dict, zone_id: str) -> dict[str, str]:
         f'$.buildings[*].building_segments[*].zones[*][?(@.id = "{zone_id}")].spaces[*]',
         rmd,
     ):
-        lighting_space_type = getattr_(space, "spaces", "lighting_space_type")
+        lighting_space_type = getattr_(space, "space", "lighting_space_type")
         space_BPF_BAT = BUILDING_AREA_LOOKUP[lighting_space_type]
 
         if space_BPF_BAT in zone_BPF_BAT_dict:
