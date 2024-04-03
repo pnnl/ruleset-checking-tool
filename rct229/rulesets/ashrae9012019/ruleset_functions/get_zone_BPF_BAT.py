@@ -1,6 +1,5 @@
 from pint import Quantity
 from rct229.schema.schema_enums import SchemaEnums
-from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
 
@@ -134,8 +133,12 @@ def get_zone_BPF_BAT(rmd: dict, zone_id: str) -> dict[str, Quantity]:
         f'$.buildings[*].building_segments[*].zones[*][?(@.id = "{zone_id}")].spaces[*]',
         rmd,
     ):
-        lighting_space_type = getattr_(space, "space", "lighting_space_type")
-        space_BPF_BAT = BUILDING_AREA_LOOKUP[lighting_space_type]
+        lighting_space_type = space.get("lighting_space_type", None)
+        space_BPF_BAT = (
+            "UNDETERMINED"
+            if lighting_space_type is None
+            else BUILDING_AREA_LOOKUP[lighting_space_type]
+        )
 
         if space_BPF_BAT in zone_BPF_BAT_dict:
             zone_BPF_BAT_dict[space_BPF_BAT] += space.get("floor_area", ZERO.AREA)

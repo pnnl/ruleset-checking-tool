@@ -90,17 +90,16 @@ def test__TEST_RMD__is_valid():
     ], f"Schema error: {schema_validation_result['error']}"
 
 
-def test__get_zone_BPF_BAT__all__undetermined__pass():
+def test__get_zone_BPF_BAT__all_undetermined():
     assert get_zone_BPF_BAT(TEST_RMD, "zone_1") == {"UNDETERMINED": 300 * ureg("m2")}
 
 
-def test__get_zone_BPF_BAT__all__diff_bldg_type__pass():
+def test__get_zone_BPF_BAT__all_diff_bldg_type():
     assert get_zone_BPF_BAT(TEST_RMD, "zone_2") == {
         "HEALTHCARE_HOSPITAL": 700 * ureg("m2"),
         "ALL_OTHER": 100 * ureg("m2"),
     }
 
 
-def test__get_zone_BPF_BAT__no_lgt_type__pass():
-    with pytest.raises(MissingKeyException):
-        get_zone_BPF_BAT(TEST_RMD, "zone_3")
+def test__get_zone_BPF_BAT__no_lgt_type():
+    assert get_zone_BPF_BAT(TEST_RMD, "zone_3") == {"UNDETERMINED": 0 * ureg("m2")}
