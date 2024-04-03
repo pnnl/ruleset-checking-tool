@@ -50,7 +50,7 @@ LIGHTING_BUILDING_AREA_LOOKUP = {
 
 
 class BuildingAreaTypeWithTotalAreaAndZone(TypedDict):
-    zone_id: list
+    zone_id: list[str]
     area: Quantity
     classification_source: str
 
