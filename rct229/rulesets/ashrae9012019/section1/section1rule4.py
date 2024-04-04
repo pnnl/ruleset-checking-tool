@@ -67,12 +67,9 @@ class Section1Rule4(RuleDefinitionBase):
                     )
                 )
 
-        pci_target_set = set(pci_target_set)
-        pci_set = set(pci_set)
-
         return {
-            "pci_target_set": pci_target_set,
-            "pci_set": pci_set,
+            "pci_target_set": set(pci_target_set),
+            "pci_set": set(pci_set),
         }
 
     def rule_check(self, context, calc_vals=None, data=None):
