@@ -16,15 +16,20 @@ class Section1Rule3(RuleDefinitionBase):
     def __init__(self):
         super(Section1Rule3, self).__init__(
             rmrs_used=produce_ruleset_model_instance(
-                USER=False,
+                USER=True,
                 BASELINE_0=True,
                 BASELINE_90=True,
                 BASELINE_180=True,
                 BASELINE_270=True,
-                PROPOSED=False,
+                PROPOSED=True,
             ),
             rmrs_used_optional=produce_ruleset_model_instance(
-                BASELINE_0=True, BASELINE_90=True, BASELINE_180=True, BASELINE_270=True
+                USER=True,
+                BASELINE_0=True,
+                BASELINE_90=True,
+                BASELINE_180=True,
+                BASELINE_270=True,
+                PROPOSED=True,
             ),
             id="1-3",
             description="The Performance Cost Index-Target (PCIt) shall be calculated using the procedures defined in Section 4.2.1.1. "
@@ -46,17 +51,19 @@ class Section1Rule3(RuleDefinitionBase):
         )
 
     def get_calc_vals(self, context, data=None):
+        rmd_u = context.USER
         rmd_b0 = context.BASELINE_0
         rmd_b90 = context.BASELINE_90
         rmd_b180 = context.BASELINE_180
         rmd_b270 = context.BASELINE_270
+        rmd_p = context.PROPOSED
 
         pci_target_set = []
         bpf_set = []
         bbp_set = []
         bbrec_set = []
         bbuec_set = []
-        for rmd in (rmd_b0, rmd_b90, rmd_b180, rmd_b270):
+        for rmd in (rmd_u, rmd_b0, rmd_b90, rmd_b180, rmd_b270, rmd_p):
             if rmd is not None:
                 pci_target_set.append(
                     find_one("$.output.performance_cost_index_target", rmd)
@@ -77,18 +84,12 @@ class Section1Rule3(RuleDefinitionBase):
                     find_one("$.output.baseline_building_unregulated_energy_cost", rmd)
                 )
 
-        pci_target_set = set(pci_target_set)
-        bpf_set = set(bpf_set)
-        bbp_set = set(bbp_set)
-        bbrec_set = set(bbrec_set)
-        bbuec_set = set(bbuec_set)
-
         return {
-            "pci_target_set": pci_target_set,
-            "bpf_set": bpf_set,
-            "bbp_set": bbp_set,
-            "bbrec_set": bbrec_set,
-            "bbuec_set": bbuec_set,
+            "pci_target_set": set(pci_target_set),
+            "bpf_set": set(bpf_set),
+            "bbp_set": set(bbp_set),
+            "bbrec_set": set(bbrec_set),
+            "bbuec_set": set(bbuec_set),
         }
 
     def rule_check(self, context, calc_vals=None, data=None):
