@@ -66,9 +66,9 @@ class Section1Rule2(RuleDefinitionBase):
                 )
 
         return {
-            "pci_set": set(pci_set),
-            "pbp_set": set(pbp_set),
-            "bbp_set": set(bbp_set),
+            "pci_set": list(set(pci_set)),
+            "pbp_set": list(set(pbp_set)),
+            "bbp_set": list(set(bbp_set)),
         }
 
     def rule_check(self, context, calc_vals=None, data=None):
