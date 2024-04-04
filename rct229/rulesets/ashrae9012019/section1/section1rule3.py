@@ -85,11 +85,11 @@ class Section1Rule3(RuleDefinitionBase):
                 )
 
         return {
-            "pci_target_set": set(pci_target_set),
-            "bpf_set": set(bpf_set),
-            "bbp_set": set(bbp_set),
-            "bbrec_set": set(bbrec_set),
-            "bbuec_set": set(bbuec_set),
+            "pci_target_set": list(set(pci_target_set)),
+            "bpf_set": list(set(bpf_set)),
+            "bbp_set": list(set(bbp_set)),
+            "bbrec_set": list(set(bbrec_set)),
+            "bbuec_set": list(set(bbuec_set)),
         }
 
     def rule_check(self, context, calc_vals=None, data=None):
