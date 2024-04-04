@@ -91,9 +91,9 @@ class Section1Rule2(RuleDefinitionBase):
 
         FAIL_MSG = ""
         if len(pci_set) != 1:
-            FAIL_MSG = "uleset expects exactly one PCI value to be used in the project"
+            FAIL_MSG = "Ruleset expects exactly one PCI value to be used in the project"
         elif len(pbp_set) != 1:
-            FAIL_MSG = "uleset expects exactly one PBP value to be used in the project"
+            FAIL_MSG = "Ruleset expects exactly one PBP value to be used in the project"
         elif len(bbp_set) != 1:
             FAIL_MSG = "Ruleset expects exactly one BBP value to be used in the project"
 
