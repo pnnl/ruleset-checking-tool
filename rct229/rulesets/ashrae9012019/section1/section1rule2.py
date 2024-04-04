@@ -65,14 +65,10 @@ class Section1Rule2(RuleDefinitionBase):
                     find_one("$.output.baseline_building_performance_energy_cost", rmd)
                 )
 
-        pci_set = set(pci_set)
-        pbp_set = set(pbp_set)
-        bbp_set = set(bbp_set)
-
         return {
-            "pci_set": pci_set,
-            "pbp_set": pbp_set,
-            "bbp_set": bbp_set,
+            "pci_set": set(pci_set),
+            "pbp_set": set(pbp_set),
+            "bbp_set": set(bbp_set),
         }
 
     def rule_check(self, context, calc_vals=None, data=None):
