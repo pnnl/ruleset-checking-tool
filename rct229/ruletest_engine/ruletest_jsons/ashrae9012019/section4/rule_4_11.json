@@ -8972,11 +8972,12 @@
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System 7",
+                                                "id": "HVAC 1",
                                                 "cooling_system": {
-                                                    "id": "CHW Coil 1",
+                                                    "id": "Cooling System 1",
                                                     "type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                    "chilled_water_loop": "Secondary CHW Loop 1",
+                                                    "design_sensible_cool_capacity": 12
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
@@ -8997,6 +8998,10 @@
                                                         }
                                                     ],
                                                     "operating_schedule": "Fan Schedule 1"
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 30000
                                                 }
                                             }
                                         ]
@@ -26715,14 +26720,16 @@
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System Type 3",
+                                                "id": "HVAC 1",
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1",
-                                                    "type": "DIRECT_EXPANSION"
+                                                    "id": "Cooling System 1",
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_sensible_cool_capacity": 12
                                                 },
                                                 "heating_system": {
-                                                    "id": "Furnace Coil 1",
-                                                    "type": "FURNACE"
+                                                    "id": "Heating System 1",
+                                                    "type": "FURNACE",
+                                                    "design_capacity": 30000
                                                 },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
@@ -44475,11 +44482,12 @@
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System 7",
+                                                "id": "HVAC 1",
                                                 "cooling_system": {
-                                                    "id": "CHW Coil 1",
+                                                    "id": "Cooling System 1",
                                                     "type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                    "chilled_water_loop": "Secondary CHW Loop 1",
+                                                    "design_sensible_cool_capacity": 12
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
@@ -44500,6 +44508,10 @@
                                                         }
                                                     ],
                                                     "operating_schedule": "Fan Schedule 1"
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 30000
                                                 }
                                             }
                                         ]
@@ -62218,14 +62230,16 @@
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System Type 3",
+                                                "id": "HVAC 1",
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1",
-                                                    "type": "DIRECT_EXPANSION"
+                                                    "id": "Cooling System 1",
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_sensible_cool_capacity": 12
                                                 },
                                                 "heating_system": {
-                                                    "id": "Furnace Coil 1",
-                                                    "type": "FURNACE"
+                                                    "id": "Heating System 1",
+                                                    "type": "FURNACE",
+                                                    "design_capacity": 30000
                                                 },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
