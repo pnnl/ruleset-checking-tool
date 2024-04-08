@@ -5,6 +5,8 @@ from rct229.rulesets.ashrae9012019 import (
     BASELINE_90,
     BASELINE_180,
     BASELINE_270,
+    PROPOSED,
+    USER,
 )
 from rct229.utils.jsonpath_utils import find_one
 from rct229.utils.std_comparisons import std_equal
