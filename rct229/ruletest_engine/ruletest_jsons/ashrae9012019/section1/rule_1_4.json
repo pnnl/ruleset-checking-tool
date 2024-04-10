@@ -270,8 +270,8 @@
                         ],
                         "output": {
                             "id": "Output 1",
-                            "performance_cost_index": 1,
-                            "performance_cost_index_target": 2
+                            "performance_cost_index": 2,
+                            "performance_cost_index_target": 1
                         },
                         "type": "PROPOSED"
                     }
@@ -314,8 +314,8 @@
                         ],
                         "output": {
                             "id": "Output 1",
-                            "performance_cost_index": 1,
-                            "performance_cost_index_target": 2
+                            "performance_cost_index": 2,
+                            "performance_cost_index_target": 1
                         },
                         "type": "BASELINE_0"
                     }
