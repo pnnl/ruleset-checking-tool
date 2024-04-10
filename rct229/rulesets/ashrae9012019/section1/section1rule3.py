@@ -1,3 +1,4 @@
+from pydash import filter_
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rulesets.ashrae9012019 import (
@@ -5,7 +6,10 @@ from rct229.rulesets.ashrae9012019 import (
     BASELINE_90,
     BASELINE_180,
     BASELINE_270,
+    PROPOSED,
+    USER,
 )
+from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_one
 from rct229.utils.std_comparisons import std_equal
 
@@ -38,16 +42,6 @@ class Section1Rule3(RuleDefinitionBase):
             standard_section="Section 4.2.1.1",
             is_primary_rule=True,
             rmr_context="ruleset_model_descriptions/0",
-            required_fields={
-                "$": ["output"],
-                "output": [
-                    "performance_cost_index_target",
-                    "total_area_weighted_building_performance_factor",
-                    "baseline_building_performance_energy_cost",
-                    "baseline_building_regulated_energy_cost",
-                    "baseline_building_unregulated_energy_cost",
-                ],
-            },
         )
 
     def get_calc_vals(self, context, data=None):
@@ -83,6 +77,21 @@ class Section1Rule3(RuleDefinitionBase):
                 bbuec_set.append(
                     find_one("$.output.baseline_building_unregulated_energy_cost", rmd)
                 )
+
+        pci_target_set = filter_(pci_target_set, lambda x: x is not None)
+        bpf_set = filter_(bpf_set, lambda x: x is not None)
+        bbp_set = filter_(bbp_set, lambda x: x is not None)
+        bbrec_set = filter_(bbrec_set, lambda x: x is not None)
+        bbuec_set = filter_(bbuec_set, lambda x: x is not None)
+
+        assert_(
+            len(pci_target_set) >= 1,
+            "At least one `performance_cost_index_target` value must exist.",
+        )
+        assert_(len(bpf_set) >= 1, "At least one `bpf_set` value must exist.")
+        assert_(len(bbp_set) >= 1, "At least one `bbp_set` value must exist.")
+        assert_(len(bbrec_set) >= 1, "At least one `bbrec_set` value must exist.")
+        assert_(len(bbuec_set) >= 1, "At least one `bbuec_set` value must exist.")
 
         return {
             "pci_target_set": list(set(pci_target_set)),
