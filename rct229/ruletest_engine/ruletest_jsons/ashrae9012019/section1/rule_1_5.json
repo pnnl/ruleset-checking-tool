@@ -11,7 +11,7 @@
             "rule_description": "When on-site renewable energy generation exceeds the thresholds defined in Section 4.2.1.1, the methodology defined in this section shall be used to calculate the PCIt. ",
             "applicable_rmr": "Proposed Model",
             "rule_assertion": "=",
-            "comparison_value": "Baseline Model",
+            "comparison_value": "Expected Value",
             "rule_dependency": 0,
             "mandatory_rule": "Yes",
             "schema_version": "0.0.34"
@@ -61,52 +61,6 @@
                             "performance_cost_index_target": 2.45
                         },
                         "type": "PROPOSED"
-                    }
-                ]
-            },
-            "baseline": {
-                "id": "ASHRAE229 1",
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
-                "ruleset_model_descriptions": [
-                    {
-                        "id": "RMD 1",
-                        "buildings": [
-                            {
-                                "id": "Building 1",
-                                "building_segments": [
-                                    {
-                                        "id": "Building Segment 1",
-                                        "zones": [
-                                            {
-                                                "id": "Thermal Zone 1",
-                                                "floor_name": "Floor 1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1",
-                                                        "floor_area": 1393.5456,
-                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ],
-                        "output": {
-                            "id": "Output 1",
-                            "performance_cost_index": 1.5,
-                            "total_proposed_building_energy_cost_including_renewable_energy": 3,
-                            "baseline_building_performance_energy_cost": 1,
-                            "performance_cost_index_target": 2.45
-                        },
-                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -124,7 +78,7 @@
             "rule_description": "When on-site renewable energy generation exceeds the thresholds defined in Section 4.2.1.1, the methodology defined in this section shall be used to calculate the PCIt. ",
             "applicable_rmr": "Proposed Model",
             "rule_assertion": "=",
-            "comparison_value": "Baseline Model",
+            "comparison_value": "Expected Value",
             "rule_dependency": 0,
             "mandatory_rule": "Yes",
             "schema_version": "0.0.34"
@@ -176,52 +130,6 @@
                         "type": "PROPOSED"
                     }
                 ]
-            },
-            "baseline": {
-                "id": "ASHRAE229 1",
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
-                "ruleset_model_descriptions": [
-                    {
-                        "id": "RMD 1",
-                        "buildings": [
-                            {
-                                "id": "Building 1",
-                                "building_segments": [
-                                    {
-                                        "id": "Building Segment 1",
-                                        "zones": [
-                                            {
-                                                "id": "Thermal Zone 1",
-                                                "floor_name": "Floor 1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1",
-                                                        "floor_area": 1393.5456,
-                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ],
-                        "output": {
-                            "id": "Output 1",
-                            "performance_cost_index": 1.5,
-                            "total_proposed_building_energy_cost_including_renewable_energy": 3,
-                            "baseline_building_performance_energy_cost": 1,
-                            "performance_cost_index_target": 2.7
-                        },
-                        "type": "BASELINE_0"
-                    }
-                ]
             }
         }
     },
@@ -237,7 +145,7 @@
             "rule_description": "When on-site renewable energy generation exceeds the thresholds defined in Section 4.2.1.1, the methodology defined in this section shall be used to calculate the PCIt. ",
             "applicable_rmr": "Proposed Model",
             "rule_assertion": "=",
-            "comparison_value": "Baseline Model",
+            "comparison_value": "Expected Value",
             "rule_dependency": 0,
             "mandatory_rule": "Yes",
             "schema_version": "0.0.34"
@@ -289,52 +197,6 @@
                         "type": "PROPOSED"
                     }
                 ]
-            },
-            "baseline": {
-                "id": "ASHRAE229 1",
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
-                "ruleset_model_descriptions": [
-                    {
-                        "id": "RMD 1",
-                        "buildings": [
-                            {
-                                "id": "Building 1",
-                                "building_segments": [
-                                    {
-                                        "id": "Building Segment 1",
-                                        "zones": [
-                                            {
-                                                "id": "Thermal Zone 1",
-                                                "floor_name": "Floor 1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1",
-                                                        "floor_area": 1393.5456,
-                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ],
-                        "output": {
-                            "id": "Output 1",
-                            "performance_cost_index": 1.5,
-                            "total_proposed_building_energy_cost_including_renewable_energy": 2.03,
-                            "baseline_building_performance_energy_cost": 1,
-                            "performance_cost_index_target": 1.4799999999999998
-                        },
-                        "type": "BASELINE_0"
-                    }
-                ]
             }
         }
     },
@@ -350,7 +212,7 @@
             "rule_description": "When on-site renewable energy generation exceeds the thresholds defined in Section 4.2.1.1, the methodology defined in this section shall be used to calculate the PCIt. ",
             "applicable_rmr": "Proposed Model",
             "rule_assertion": "=",
-            "comparison_value": "Baseline Model",
+            "comparison_value": "Expected Value",
             "rule_dependency": 0,
             "mandatory_rule": "Yes",
             "schema_version": "0.0.34"
@@ -399,52 +261,6 @@
                             "performance_cost_index_target": 4.45
                         },
                         "type": "PROPOSED"
-                    }
-                ]
-            },
-            "baseline": {
-                "id": "ASHRAE229 1",
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
-                "ruleset_model_descriptions": [
-                    {
-                        "id": "RMD 1",
-                        "buildings": [
-                            {
-                                "id": "Building 1",
-                                "building_segments": [
-                                    {
-                                        "id": "Building Segment 1",
-                                        "zones": [
-                                            {
-                                                "id": "Thermal Zone 1",
-                                                "floor_name": "Floor 1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1",
-                                                        "floor_area": 1393.5456,
-                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ],
-                        "output": {
-                            "id": "Output 1",
-                            "performance_cost_index": 1.5,
-                            "total_proposed_building_energy_cost_including_renewable_energy": 3,
-                            "baseline_building_performance_energy_cost": 1,
-                            "performance_cost_index_target": 4.45
-                        },
-                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -462,7 +278,7 @@
             "rule_description": "When on-site renewable energy generation exceeds the thresholds defined in Section 4.2.1.1, the methodology defined in this section shall be used to calculate the PCIt. ",
             "applicable_rmr": "Proposed Model",
             "rule_assertion": "=",
-            "comparison_value": "Baseline Model",
+            "comparison_value": "Expected Value",
             "rule_dependency": 0,
             "mandatory_rule": "Yes",
             "schema_version": "0.0.34"
@@ -511,51 +327,6 @@
                             "performance_cost_index_target": 2.5
                         },
                         "type": "PROPOSED"
-                    }
-                ]
-            },
-            "baseline": {
-                "id": "ASHRAE229 1",
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
-                "ruleset_model_descriptions": [
-                    {
-                        "id": "RMD 1",
-                        "buildings": [
-                            {
-                                "id": "Building 1",
-                                "building_segments": [
-                                    {
-                                        "id": "Building Segment 1",
-                                        "zones": [
-                                            {
-                                                "id": "Thermal Zone 1",
-                                                "floor_name": "Floor 1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1",
-                                                        "floor_area": 1393.5456,
-                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ],
-                        "output": {
-                            "id": "Output 1",
-                            "performance_cost_index": 1.5,
-                            "total_proposed_building_energy_cost_including_renewable_energy": 3,
-                            "performance_cost_index_target": 2.5
-                        },
-                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -573,7 +344,7 @@
             "rule_description": "When on-site renewable energy generation exceeds the thresholds defined in Section 4.2.1.1, the methodology defined in this section shall be used to calculate the PCIt. ",
             "applicable_rmr": "Proposed Model",
             "rule_assertion": "=",
-            "comparison_value": "Baseline Model",
+            "comparison_value": "Expected Value",
             "rule_dependency": 0,
             "mandatory_rule": "Yes",
             "schema_version": "0.0.34"
@@ -624,52 +395,6 @@
                         "type": "PROPOSED"
                     }
                 ]
-            },
-            "baseline": {
-                "id": "ASHRAE229 1",
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
-                "ruleset_model_descriptions": [
-                    {
-                        "id": "RMD 1",
-                        "buildings": [
-                            {
-                                "id": "Building 1",
-                                "building_segments": [
-                                    {
-                                        "id": "Building Segment 1",
-                                        "zones": [
-                                            {
-                                                "id": "Thermal Zone 1",
-                                                "floor_name": "Floor 1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1",
-                                                        "floor_area": 1393.5456,
-                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ],
-                        "output": {
-                            "id": "Output 1",
-                            "performance_cost_index": 1.5,
-                            "total_proposed_building_energy_cost_including_renewable_energy": 3,
-                            "baseline_building_performance_energy_cost": 1,
-                            "performance_cost_index_target": 4.45
-                        },
-                        "type": "BASELINE_0"
-                    }
-                ]
             }
         }
     },
@@ -685,7 +410,7 @@
             "rule_description": "When on-site renewable energy generation exceeds the thresholds defined in Section 4.2.1.1, the methodology defined in this section shall be used to calculate the PCIt. ",
             "applicable_rmr": "Proposed Model",
             "rule_assertion": "=",
-            "comparison_value": "Baseline Model",
+            "comparison_value": "Expected Value",
             "rule_dependency": 0,
             "mandatory_rule": "Yes",
             "schema_version": "0.0.34"
@@ -734,51 +459,6 @@
                             "baseline_building_performance_energy_cost": 1
                         },
                         "type": "PROPOSED"
-                    }
-                ]
-            },
-            "baseline": {
-                "id": "ASHRAE229 1",
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
-                "ruleset_model_descriptions": [
-                    {
-                        "id": "RMD 1",
-                        "buildings": [
-                            {
-                                "id": "Building 1",
-                                "building_segments": [
-                                    {
-                                        "id": "Building Segment 1",
-                                        "zones": [
-                                            {
-                                                "id": "Thermal Zone 1",
-                                                "floor_name": "Floor 1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1",
-                                                        "floor_area": 1393.5456,
-                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ],
-                        "output": {
-                            "id": "Output 1",
-                            "performance_cost_index": 1.5,
-                            "total_proposed_building_energy_cost_including_renewable_energy": 3,
-                            "baseline_building_performance_energy_cost": 1
-                        },
-                        "type": "BASELINE_0"
                     }
                 ]
             }
