@@ -1,3 +1,4 @@
+from pydash import filter_
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rulesets.ashrae9012019 import (
@@ -8,6 +9,7 @@ from rct229.rulesets.ashrae9012019 import (
     PROPOSED,
     USER,
 )
+from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_one
 from rct229.utils.std_comparisons import std_equal
 
@@ -35,14 +37,6 @@ class Section1Rule2(RuleDefinitionBase):
             standard_section="Section G1.2.2",
             is_primary_rule=True,
             rmr_context="ruleset_model_descriptions/0",
-            required_fields={
-                "$": ["output"],
-                "output": [
-                    "performance_cost_index",
-                    "total_proposed_building_energy_cost_including_renewable_energy",
-                    "baseline_building_performance_energy_cost",
-                ],
-            },
         )
 
     def get_calc_vals(self, context, data=None):
@@ -66,6 +60,22 @@ class Section1Rule2(RuleDefinitionBase):
                 bbp_set.append(
                     find_one("$.output.baseline_building_performance_energy_cost", rmd)
                 )
+
+        pci_set = filter_(pci_set, lambda x: x is not None)
+        pbp_set = filter_(pbp_set, lambda x: x is not None)
+        bbp_set = filter_(bbp_set, lambda x: x is not None)
+
+        assert_(
+            len(pci_set) >= 1, "At least one `performance_cost_index` value must exist."
+        )
+        assert_(
+            len(pbp_set) >= 1,
+            "At least one `total_proposed_building_energy_cost_including_renewable_energy` value must exist.",
+        )
+        assert_(
+            len(bbp_set) >= 1,
+            "At least one `baseline_building_performance_energy_cost` value must exist.",
+        )
 
         return {
             "pci_set": list(set(pci_set)),
