@@ -1,3 +1,4 @@
+from pydash import filter_
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rulesets.ashrae9012019 import (
@@ -5,7 +6,10 @@ from rct229.rulesets.ashrae9012019 import (
     BASELINE_90,
     BASELINE_180,
     BASELINE_270,
+    PROPOSED,
+    USER,
 )
+from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_one
 
 
@@ -36,13 +40,6 @@ class Section1Rule4(RuleDefinitionBase):
             standard_section="Section 4.2.1.1",
             is_primary_rule=True,
             rmr_context="ruleset_model_descriptions/0",
-            required_fields={
-                "$": ["output"],
-                "output": [
-                    "performance_cost_index_target",
-                    "performance_cost_index",
-                ],
-            },
         )
 
     def get_calc_vals(self, context, data=None):
@@ -66,6 +63,14 @@ class Section1Rule4(RuleDefinitionBase):
                         rmd,
                     )
                 )
+
+        pci_target_set = filter_(pci_target_set, lambda x: x is not None)
+        pci_set = filter_(pci_set, lambda x: x is not None)
+
+        assert_(
+            len(pci_target_set) >= 1, "At least one `pci_target_set` value must exist."
+        )
+        assert_(len(pci_set) >= 1, "At least one `pci_set` value must exist.")
 
         return {
             "pci_target_set": list(set(pci_target_set)),
