@@ -20,15 +20,20 @@ class Section1Rule2(RuleDefinitionBase):
     def __init__(self):
         super(Section1Rule2, self).__init__(
             rmrs_used=produce_ruleset_model_instance(
-                USER=False,
+                USER=True,
                 BASELINE_0=True,
                 BASELINE_90=True,
                 BASELINE_180=True,
                 BASELINE_270=True,
-                PROPOSED=False,
+                PROPOSED=True,
             ),
             rmrs_used_optional=produce_ruleset_model_instance(
-                BASELINE_0=True, BASELINE_90=True, BASELINE_180=True, BASELINE_270=True
+                USER=True,
+                BASELINE_0=True,
+                BASELINE_90=True,
+                BASELINE_180=True,
+                BASELINE_270=True,
+                PROPOSED=True,
             ),
             id="1-2",
             description="The performance of the proposed design is calculated in accordance with Standard 90.1-2019 Appendix G, where Performance Cost Index = Proposed building performance (PBP) /Baseline building performance (BBP), "
@@ -40,15 +45,17 @@ class Section1Rule2(RuleDefinitionBase):
         )
 
     def get_calc_vals(self, context, data=None):
+        rmd_u = context.USER
         rmd_b0 = context.BASELINE_0
         rmd_b90 = context.BASELINE_90
         rmd_b180 = context.BASELINE_180
         rmd_b270 = context.BASELINE_270
+        rmd_p = context.PROPOSED
 
         pci_set = []
         pbp_set = []
         bbp_set = []
-        for rmd in (rmd_b0, rmd_b90, rmd_b180, rmd_b270):
+        for rmd in (rmd_u, rmd_b0, rmd_b90, rmd_b180, rmd_b270, rmd_p):
             if rmd is not None:
                 pci_set.append(find_one("$.output.performance_cost_index", rmd))
                 pbp_set.append(
