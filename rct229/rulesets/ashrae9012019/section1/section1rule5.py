@@ -137,6 +137,13 @@ class Section1Rule5(RuleDefinitionBase):
         pbp_set = filter_(pbp_set, lambda x: x is not None)
         bbp_set = filter_(bbp_set, lambda x: x is not None)
         pbp_nre_set = filter_(pbp_nre_set, lambda x: x is not None)
+        pci_set = filter_(pci_set, lambda x: x is not None)
+        pci_target_set = filter_(pci_target_set, lambda x: x is not None)
+
+        assert_(len(pci_set) >= 1, "At least one `pci_set` value must exist.")
+        assert_(
+            len(pci_target_set) >= 1, "At least one `pci_target_set` value must exist."
+        )
 
         return {
             "pbp_set": list(set(pbp_set)),
