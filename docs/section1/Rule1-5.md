@@ -37,6 +37,8 @@
 - Get the Performance Cost Index (PCI) from the output(s): `output_pci = pci_set[0]`
 - Get the Performance Cost Index-Target (PCIt) from the output(s): `output_pci_target = pci_target_set[0]`  
 
+- If the output_bbp value is 0, raise a message and return FAIL: `if output_bbp == 0: outcome = FAIL and raise_message "Ruleset expects baseline_building_performance_energy_cost to be greater than 0."`
+
 **Applicability Check 1:**  
 
 - If the proposed on site renewable energy production offsets less than or equal to 5% of the baseline building performance: NOT_APPLICABLE ` if (output_pbp_nre - output_pbp)/output_bbp <= 0.05: NOT_APPLICABLE`
@@ -44,7 +46,7 @@
 
 **Rule Assertion:**  
 
-  - Case 1: If PCI + ((PBPnre - PBP)/BBP) - 0.05 <= PCIt, PASS `if output_pci + ((output_pbp_nre - output_pbp)/output_bbp) - 0.05 <= output_pci_target: outcome = PASS`
+  - Case 1: If output_bbp != 0 and PCI + ((PBPnre - PBP)/BBP) - 0.05 <= PCIt, PASS `if output_bbp != 0 and output_pci + ((output_pbp_nre - output_pbp)/output_bbp) - 0.05 <= output_pci_target: outcome = PASS`
   - Case 2: Else, FAIL `else: outcome = FAIL`
 
 
