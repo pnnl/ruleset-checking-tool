@@ -182,8 +182,8 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
                 fan_schedule_hourly_values_b = zone_b_fan_schedule_dict[zone_b["id"]]
                 fan_schedule_hourly_values_p = zone_p_fan_schedule_dict[zone_p["id"]]
 
-                schedule_match = (
-                    fan_schedule_hourly_values_b == fan_schedule_hourly_values_p
+                schedule_mismatch = (
+                    fan_schedule_hourly_values_b != fan_schedule_hourly_values_p
                 )
                 proposed_served_by_multizone = False
                 assert_(
@@ -241,7 +241,7 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
                             hvac_type_check = True
 
                 return {
-                    "schedule_match": schedule_match,
+                    "schedule_mismatch": schedule_mismatch,
                     "baseline_served_by_multizone": baseline_served_by_multizone,
                     "proposed_served_by_multizone": proposed_served_by_multizone,
                     "system_type_match_baseline_proposed": system_type_match_baseline_proposed,
@@ -249,25 +249,25 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
                 }
 
             def manual_check_required(self, context, calc_vals=None, data=None):
-                schedule_match = calc_vals["schedule_match"]
+                schedule_mismatch = calc_vals["schedule_mismatch"]
                 system_type_match_baseline_proposed = calc_vals[
                     "system_type_match_baseline_proposed"
                 ]
-                return not (schedule_match and system_type_match_baseline_proposed)
+                return schedule_mismatch or not system_type_match_baseline_proposed
 
             def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
-                schedule_match = calc_vals["schedule_match"]
+                schedule_mismatch = calc_vals["schedule_mismatch"]
                 baseline_served_by_multizone = calc_vals["baseline_served_by_multizone"]
                 proposed_served_by_multizone = calc_vals["proposed_served_by_multizone"]
                 hvac_type_check = calc_vals["hvac_type_check"]
                 if (
-                    not schedule_match
+                    schedule_mismatch
                     and not baseline_served_by_multizone
                     and hvac_type_check
                     and proposed_served_by_multizone
                 ):
                     return "There is a fan operating schedule mismatch between the baseline and proposed but section g3.1.1(c) appears applicable. Verify mismatch is appropriate per section G3.1.1(c) and that the fan operating schedule in the baseline is in alignment with the occupancy schedules."
-                elif not schedule_match:
+                elif schedule_mismatch:
                     return "There is a fan schedule mismatch between the baseline and proposed rmrs for the hvac system(s) serving this zone. Fail unless table G3.1 section 4 baseline column exceptions #1, #2 or #3 is applicable."
                 else:
                     return "Fan schedules match between the baseline and proposed rmrs for the hvac system(s) serving this zone. Verify that matching schedules are appropriate in that none of the section 4 baseline column exceptions #1, #2 or #3 are applicable."
