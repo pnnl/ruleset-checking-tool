@@ -427,7 +427,6 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
             hvac_system_type_b = calc_vals["hvac_system_type_b"]
             expected_effs_b = calc_vals["expected_effs_b"]
             expected_high_temp_eff_b = calc_vals["expected_high_temp_eff_b"]
-            expected_low_temp_eff_b = calc_vals["expected_low_temp_eff_b"]
             modeled_effs_b = calc_vals["modeled_effs_b"]
             modeled_high_temp_eff_b = calc_vals["modeled_high_temp_eff_b"]
             modeled_low_temp_eff_b = calc_vals["modeled_low_temp_eff_b"]
