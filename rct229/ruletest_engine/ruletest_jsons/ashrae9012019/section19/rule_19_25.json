@@ -173,6 +173,12 @@
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 92.90303999999999
+                                                    }
                                                 ]
                                             },
                                             {
@@ -187,6 +193,12 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 2",
+                                                        "floor_area": 1000
                                                     }
                                                 ]
                                             }
@@ -582,6 +594,12 @@
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 92.90303999999999
+                                                    }
                                                 ]
                                             },
                                             {
@@ -596,6 +614,12 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 2",
+                                                        "floor_area": 1000
                                                     }
                                                 ]
                                             }
@@ -924,6 +948,12 @@
                                                         "type": "CONSTANT_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System Type 3"
                                                     }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 92.90303999999999
+                                                    }
                                                 ]
                                             }
                                         ],
@@ -1137,6 +1167,12 @@
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System Type 3"
+                                                    }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 92.90303999999999
                                                     }
                                                 ]
                                             }
