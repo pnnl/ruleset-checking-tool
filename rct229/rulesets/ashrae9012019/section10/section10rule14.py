@@ -42,10 +42,10 @@ SINGLE_EFF_SYS_TYPES = [
     HVAC_SYS.SYS_9,
 ]
 
-HEATPUMP_CAPACITY_LOW_RANGE_SAMPLE = 64999 * ureg("Btu/hr")
-FURNACE_CAPACITY_LOW_RANGE_SAMPLE = 224999 * ureg("Btu/hr")
-HEATPUMP_CAPACITY_LOW_THRESHOLD = 65000 * ureg("Btu/hr")
-FURNACE_CAPACITY_LOW_THREHSOLD = 225000 * ureg("Btu/hr")
+HEATPUMP_CAPACITY_LOW_RANGE_SAMPLE = 64999
+FURNACE_CAPACITY_LOW_RANGE_SAMPLE = 224999
+HEATPUMP_CAPACITY_LOW_THRESHOLD = 65000
+FURNACE_CAPACITY_LOW_THREHSOLD = 225000
 
 MOST_CONSERVATIVE_MSG = "Check if the modeled baseline heating efficiency was established correctly based upon equipment capacity and type. The modeled efficiency matches the capacity bracket in Appendix G efficiency tables with the highest efficiency (i.e., most conservative efficiency has been modeled)."
 UNDEFINED_LOW_TEMP_MSG = "The efficiency at Tdb 47F was modeled correctly; however the outcome is undetermined because the modeled efficiency at Tdb 17F was not defined. It is often the case that the Tdb 17F efficiency is captured in the model via the performance curves as opposed to an explicit efficiency value entry. If there is no explicit option to enter an efficiency value at Tdb 17F check that appropriate performance curves were modeled."
@@ -69,7 +69,7 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
             ruleset_section_title="HVAC General",
             standard_section="",
             is_primary_rule=True,
-            list_path="$.ruleset_model_descriptions[*].buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
+            list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
             rmr_context="ruleset_model_descriptions/0",
         )
 
@@ -142,7 +142,7 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
             heating_system_b = hvac_b["heating_system"]
             baseline_system_types_dict_b = data["baseline_system_types_dict"]
             hvac_zone_list_w_area_dict_b = data["baseline_system_zones_served_dict"]
-            zone_list_b = hvac_zone_list_w_area_dict_b[hvac_b.id]
+            zone_list_b = hvac_zone_list_w_area_dict_b[hvac_b["id"]]
             is_zone_agg_factor_undefined_and_needed = False
 
             hvac_system_type_b = next(
