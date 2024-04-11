@@ -108,12 +108,12 @@ class Section1Rule2(RuleDefinitionBase):
 
         FAIL_MSG = ""
         if len(pci_set) != 1:
-            FAIL_MSG = "Ruleset expects exactly one PCI value to be used in the project"
+            FAIL_MSG = "Ruleset expects exactly one PCI value to be used in the project."
         elif len(pbp_set) != 1:
-            FAIL_MSG = "Ruleset expects exactly one PBP value to be used in the project"
+            FAIL_MSG = "Ruleset expects exactly one PBP value to be used in the project."
         elif len(bbp_set) != 1:
-            FAIL_MSG = "Ruleset expects exactly one BBP value to be used in the project"
+            FAIL_MSG = "Ruleset expects exactly one BBP value to be used in the project."
         elif bbp_set[0] == 0:
-            FAIL_MSG = "Ruleset expects baseline_building_performance_energy_cost to be greater than 0"
+            FAIL_MSG = "Ruleset expects baseline_building_performance_energy_cost to be greater than 0."
 
         return FAIL_MSG
