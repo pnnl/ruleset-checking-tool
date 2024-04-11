@@ -125,7 +125,7 @@
                             "total_proposed_building_energy_cost_including_renewable_energy": 2,
                             "total_proposed_building_energy_cost_excluding_renewable_energy": 3,
                             "baseline_building_performance_energy_cost": 1,
-                            "performance_cost_index_target": 2.7
+                            "performance_cost_index_target": 2.3
                         },
                         "type": "PROPOSED"
                     }
