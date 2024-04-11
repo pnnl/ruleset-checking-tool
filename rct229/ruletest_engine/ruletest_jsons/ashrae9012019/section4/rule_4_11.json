@@ -47,7 +47,22 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "heating_from_loop": "Boiler Loop 1",
+                                                        "heating_capacity": 3516.8533333333335
+                                                    }
+                                                ],
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 929.0303999999999
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "area": 9.290303999999999
                                                     }
                                                 ]
                                             },
@@ -62,7 +77,15 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "heating_from_loop": "Boiler Loop 1",
+                                                        "heating_capacity": 3516.8533333333335
+                                                    }
+                                                ],
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 2",
+                                                        "floor_area": 929.0303999999999
                                                     }
                                                 ]
                                             }
@@ -73,12 +96,14 @@
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
                                                     "type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                    "chilled_water_loop": "Secondary CHW Loop 1",
+                                                    "design_sensible_cool_capacity": 42204.0
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1"
+                                                    "hot_water_loop": "Boiler Loop 1",
+                                                    "design_capacity": 8792.133333333333
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -8950,7 +8975,22 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "heating_from_loop": "Boiler Loop 1",
+                                                        "heating_capacity": 3516.8533333333335
+                                                    }
+                                                ],
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 929.0303999999999
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "area": 9.290303999999999
                                                     }
                                                 ]
                                             },
@@ -8965,24 +9005,33 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "heating_from_loop": "Boiler Loop 1",
+                                                        "heating_capacity": 3516.8533333333335
+                                                    }
+                                                ],
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 2",
+                                                        "floor_area": 929.0303999999999
                                                     }
                                                 ]
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "HVAC 1",
+                                                "id": "System 7",
                                                 "cooling_system": {
-                                                    "id": "Cooling System 1",
+                                                    "id": "CHW Coil 1",
                                                     "type": "FLUID_LOOP",
                                                     "chilled_water_loop": "Secondary CHW Loop 1",
-                                                    "design_sensible_cool_capacity": 12
+                                                    "design_sensible_cool_capacity": 42204.0
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1"
+                                                    "hot_water_loop": "Boiler Loop 1",
+                                                    "design_capacity": 8792.133333333333
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -8998,10 +9047,6 @@
                                                         }
                                                     ],
                                                     "operating_schedule": "Fan Schedule 1"
-                                                },
-                                                "heating_system": {
-                                                    "id": "Heating System 1",
-                                                    "design_capacity": 30000
                                                 }
                                             }
                                         ]
@@ -17833,7 +17878,7 @@
         "Section": 4,
         "Rule": 11,
         "Test": "b",
-        "test_description": "Baseline and Proposed building have one building segment and two zones. Both utilize System 3. Both have identical fan schedules. Expected result: PASS",
+        "test_description": "Baseline and Proposed building have one building segment and one zone. Both utilize System 3. Both have identical fan schedules. Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "4-11",
@@ -17877,6 +17922,13 @@
                                                         "type": "CONSTANT_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System Type 3"
                                                     }
+                                                ],
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 929.0303999999999
+                                                    }
                                                 ]
                                             }
                                         ],
@@ -17885,11 +17937,13 @@
                                                 "id": "System Type 3",
                                                 "cooling_system": {
                                                     "id": "DX Coil 1",
-                                                    "type": "DIRECT_EXPANSION"
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_sensible_cool_capacity": 42204.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Furnace Coil 1",
-                                                    "type": "FURNACE"
+                                                    "type": "FURNACE",
+                                                    "design_capacity": 8792.133333333333
                                                 },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
@@ -26715,21 +26769,28 @@
                                                         "type": "CONSTANT_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System Type 3"
                                                     }
+                                                ],
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 929.0303999999999
+                                                    }
                                                 ]
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "HVAC 1",
+                                                "id": "System Type 3",
                                                 "cooling_system": {
-                                                    "id": "Cooling System 1",
+                                                    "id": "DX Coil 1",
                                                     "type": "DIRECT_EXPANSION",
-                                                    "design_sensible_cool_capacity": 12
+                                                    "design_sensible_cool_capacity": 42204.0
                                                 },
                                                 "heating_system": {
-                                                    "id": "Heating System 1",
+                                                    "id": "Furnace Coil 1",
                                                     "type": "FURNACE",
-                                                    "design_capacity": 30000
+                                                    "design_capacity": 8792.133333333333
                                                 },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
@@ -35576,10 +35637,24 @@
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
+                                                ],
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 929.0303999999999
+                                                    }
                                                 ]
                                             },
                                             {
                                                 "id": "Thermal Zone 2",
+                                                "floor_name": "Floo r 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 2",
+                                                        "floor_area": 929.0303999999999
+                                                    }
+                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 2",
@@ -35598,12 +35673,14 @@
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
                                                     "type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                    "chilled_water_loop": "Secondary CHW Loop 1",
+                                                    "design_sensible_cool_capacity": 42204.0
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1"
+                                                    "hot_water_loop": "Boiler Loop 1",
+                                                    "design_capacity": 8792.133333333333
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -44477,22 +44554,30 @@
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
+                                                ],
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 929.0303999999999
+                                                    }
                                                 ]
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "HVAC 1",
+                                                "id": "System 7",
                                                 "cooling_system": {
-                                                    "id": "Cooling System 1",
+                                                    "id": "CHW Coil 1",
                                                     "type": "FLUID_LOOP",
                                                     "chilled_water_loop": "Secondary CHW Loop 1",
-                                                    "design_sensible_cool_capacity": 12
+                                                    "design_sensible_cool_capacity": 42204.0
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1"
+                                                    "hot_water_loop": "Boiler Loop 1",
+                                                    "design_capacity": 8792.133333333333
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -44508,10 +44593,6 @@
                                                         }
                                                     ],
                                                     "operating_schedule": "Fan Schedule 1"
-                                                },
-                                                "heating_system": {
-                                                    "id": "Heating System 1",
-                                                    "design_capacity": 30000
                                                 }
                                             }
                                         ]
@@ -53387,6 +53468,13 @@
                                                         "type": "CONSTANT_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System Type 3"
                                                     }
+                                                ],
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 929.0303999999999
+                                                    }
                                                 ]
                                             }
                                         ],
@@ -53395,11 +53483,13 @@
                                                 "id": "System Type 3",
                                                 "cooling_system": {
                                                     "id": "DX Coil 1",
-                                                    "type": "DIRECT_EXPANSION"
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_sensible_cool_capacity": 42204.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Furnace Coil 1",
-                                                    "type": "FURNACE"
+                                                    "type": "FURNACE",
+                                                    "design_capacity": 8792.133333333333
                                                 },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
@@ -62225,21 +62315,28 @@
                                                         "type": "CONSTANT_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System Type 3"
                                                     }
+                                                ],
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 929.0303999999999
+                                                    }
                                                 ]
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "HVAC 1",
+                                                "id": "System Type 3",
                                                 "cooling_system": {
-                                                    "id": "Cooling System 1",
+                                                    "id": "DX Coil 1",
                                                     "type": "DIRECT_EXPANSION",
-                                                    "design_sensible_cool_capacity": 12
+                                                    "design_sensible_cool_capacity": 42204.0
                                                 },
                                                 "heating_system": {
-                                                    "id": "Heating System 1",
+                                                    "id": "Furnace Coil 1",
                                                     "type": "FURNACE",
-                                                    "design_capacity": 30000
+                                                    "design_capacity": 8792.133333333333
                                                 },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
