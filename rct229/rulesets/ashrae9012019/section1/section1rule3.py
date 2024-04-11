@@ -108,11 +108,19 @@ class Section1Rule3(RuleDefinitionBase):
         bbrec_set = calc_vals["bbrec_set"]
         bbuec_set = calc_vals["bbuec_set"]
 
-        return len(pci_target_set) == len(bpf_set) == len(bbp_set) == len(
-            bbrec_set
-        ) == len(bbuec_set) == 1 and std_equal(
-            (bbuec_set[0] + (bpf_set[0] * bbrec_set[0]) / bbp_set[0]), pci_target_set[0]
-        )  # TODO: what if  bbp_set[0] == 0?
+        return (
+            len(pci_target_set)
+            == len(bpf_set)
+            == len(bbp_set)
+            == len(bbrec_set)
+            == len(bbuec_set)
+            == 1
+            and bbp_set[0] != 0
+            and std_equal(
+                (bbuec_set[0] + (bpf_set[0] * bbrec_set[0]) / bbp_set[0]),
+                pci_target_set[0],
+            )
+        )
 
     def get_fail_msg(self, context, calc_vals=None, data=None):
         pci_target_set = calc_vals["pci_target_set"]
@@ -140,5 +148,7 @@ class Section1Rule3(RuleDefinitionBase):
             FAIL_MSG = (
                 "Ruleset expects exactly one BBUEC value to be used in the project."
             )
+        elif bbp_set[0] == 0:
+            FAIL_MSG = "Ruleset expects baseline_building_performance_energy_cost to be greater than 0."
 
         return FAIL_MSG
