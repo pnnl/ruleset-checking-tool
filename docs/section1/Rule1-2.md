@@ -34,10 +34,11 @@
 - Get the proposed building performance (PBP): `output_pbp = pbp_set[0]`
 - Get the baseline building performance (BBP): `output_bbp = bbp_set[0]`
 
+- If the output_bbp value is 0, raise a message and return FAIL: `if output_bbp == 0: outcome = FAIL and raise_message "Ruleset expects baseline_building_performance_energy_cost to be greater than 0"`
 
   **Rule Assertion:** 
 
-  - Case 1: If PCI = PBP / BBP: PASS `if output_pci == output_pbp / output_bbp: outcome = PASS`
+  - Case 1: If PCI = PBP / BBP: PASS `if output_bbp != 0 and output_pci == output_pbp / output_bbp: outcome = PASS`
   - Case 2: Else: FAIL `else: outcome = FAIL`
 
 **[Back](../_toc.md)**

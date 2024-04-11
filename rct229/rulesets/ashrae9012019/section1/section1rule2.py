@@ -95,9 +95,11 @@ class Section1Rule2(RuleDefinitionBase):
         pbp_set = calc_vals["pbp_set"]
         bbp_set = calc_vals["bbp_set"]
 
-        return len(pci_set) == len(pbp_set) == len(bbp_set) == 1 and std_equal(
-            pbp_set[0] / bbp_set[0], pci_set[0]
-        )  # TODO: what if  bbp_set[0] == 0?
+        return (
+            len(pci_set) == len(pbp_set) == len(bbp_set) == 1
+            and bbp_set[0] != 0
+            and std_equal(pbp_set[0] / bbp_set[0], pci_set[0])
+        )
 
     def get_fail_msg(self, context, calc_vals=None, data=None):
         pci_set = calc_vals["pci_set"]
@@ -111,5 +113,7 @@ class Section1Rule2(RuleDefinitionBase):
             FAIL_MSG = "Ruleset expects exactly one PBP value to be used in the project"
         elif len(bbp_set) != 1:
             FAIL_MSG = "Ruleset expects exactly one BBP value to be used in the project"
+        elif bbp_set[0] == 0:
+            FAIL_MSG = "Ruleset expects baseline_building_performance_energy_cost to be greater than 0"
 
         return FAIL_MSG
