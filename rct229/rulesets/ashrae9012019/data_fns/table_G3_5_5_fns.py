@@ -1,6 +1,6 @@
 from rct229.rulesets.ashrae9012019.data import data
 from rct229.rulesets.ashrae9012019.data_fns.table_utils import find_osstd_table_entries
-from typing import TypedDict, Union
+from typing import TypedDict, List
 
 
 class AppGAirSysEffTableSearchInfo(TypedDict):
@@ -21,8 +21,8 @@ uh_capacity_threshold_list = [0, 99999999]
 
 
 def table_g3_5_5_lookup(
-    equipment_type: str, capacity: Union[float, int]
-) -> [AppGAirSysEffTableSearchInfo]:
+    equipment_type: str, capacity: float
+) -> List[AppGAirSysEffTableSearchInfo]:
     """Returns the packaged terminal system efficiency data based on equipment type
     Parameters
     ----------
