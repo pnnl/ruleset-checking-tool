@@ -327,6 +327,114 @@
         "Section": 1,
         "Rule": 4,
         "Test": "d",
+        "test_description": "A one building segment, single zone building has a PCI that is less than the PCIt. However, RMDs have different values. RESULT: fail",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "1-4",
+            "ruleset_reference": "4.2.1.1",
+            "rule_description": "The PCI shall be less than or equal to the PCIt when calculated in accordance with Standard 90.1 2019, Section 4.2.1.1",
+            "applicable_rmr": "Proposed Model",
+            "rule_assertion": "=",
+            "comparison_value": "Baseline Model",
+            "rule_dependency": 0,
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.34"
+        },
+        "rmr_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "output": {
+                            "id": "Output 1",
+                            "performance_cost_index": 1,
+                            "performance_cost_index_target": 2
+                        },
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "output": {
+                            "id": "Output 1",
+                            "performance_cost_index": 1,
+                            "performance_cost_index_target": 3
+                        },
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-1-4-e": {
+        "Section": 1,
+        "Rule": 4,
+        "Test": "e",
         "test_description": "A one building segment, single zone building is missing a PCI RESULT: fail",
         "expected_rule_outcome": "fail",
         "standard": {
@@ -429,10 +537,10 @@
             }
         }
     },
-    "rule-1-4-e": {
+    "rule-1-4-f": {
         "Section": 1,
         "Rule": 4,
-        "Test": "e",
+        "Test": "f",
         "test_description": "A one building segment, single zone building is missing a PCIt RESULT: fail",
         "expected_rule_outcome": "fail",
         "standard": {
