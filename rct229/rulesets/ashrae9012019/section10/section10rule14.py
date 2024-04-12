@@ -169,6 +169,9 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
                         "design_total_cool_capacity"
                     )
 
+            if total_capacity_b is not None:
+                total_capacity_b = total_capacity_b.magnitude
+
             if total_capacity_b is not None and hvac_system_type_b in [
                 HVAC_SYS.SYS_3,
                 HVAC_SYS.SYS_3A,
@@ -224,12 +227,14 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
                     expected_baseline_eff_data = [
                         table_g3_5_2_lookup(
                             HeatPumpEquipmentType.HEAT_PUMP_AIR_COOLED_HEATING,
-                            RatingCondition.HIGH_TEMP,
+                            RatingCondition.SINGLE_PACKAGE,
                             HEATPUMP_CAPACITY_LOW_RANGE_SAMPLE,
                         ),
+                        # LOW-TEMP EFFICIENCY IS NOT USED FOR THE MOST CONSERVATIVE CASE FOR SYSTEM 4
+                        # IT IS ONLY NEEDED FOR CONSISTENT DATA FORMAT
                         table_g3_5_2_lookup(
                             HeatPumpEquipmentType.HEAT_PUMP_AIR_COOLED_HEATING,
-                            RatingCondition.LOW_TEMP,
+                            RatingCondition.SINGLE_PACKAGE,
                             HEATPUMP_CAPACITY_LOW_RANGE_SAMPLE,
                         ),
                     ]
@@ -248,9 +253,11 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
                         ),
                     ]
 
-            modeled_effs_b = zip(
-                heating_system_b["efficiency_metric_values"],
-                heating_system_b["efficiency_metric_types"],
+            modeled_effs_b = list(
+                zip(
+                    heating_system_b["efficiency_metric_values"],
+                    heating_system_b["efficiency_metric_types"],
+                )
             )
 
             if hvac_system_type_b in SINGLE_EFF_SYS_TYPES:

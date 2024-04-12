@@ -3,8 +3,8 @@
         "Section": 10,
         "Rule": 14,
         "Test": "a",
-        "test_description": "A one story building utilizes system 3. The capacity is undefined and the Ec of the system matches the most conservative heating value of Table G3.5.5(80% Ec). Expected: PASS",
-        "expected_rule_outcome": "pass",
+        "test_description": "A one story building utilizes system 3. The capacity is undefined and the Et of the system matches the most conservative heating value of Table G3.5.5(80% Et). Expected: UNDETERMINED",
+        "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "10-14",
             "ruleset_reference": "G3.1.2.1",
@@ -66,7 +66,7 @@
                                                         0.8
                                                     ],
                                                     "efficiency_metric_types": [
-                                                        "COMBUSTION_EFFICIENCY"
+                                                        "THERMAL_EFFICIENCY"
                                                     ]
                                                 },
                                                 "fan_system": {
@@ -99,8 +99,8 @@
         "Section": 10,
         "Rule": 14,
         "Test": "b",
-        "test_description": "A one story building utilizes system 4. The capacity is undefined and the COPh of the system matches the most conservative heating value of Table G3.5.2(COPh=3.4). Expected: PASS",
-        "expected_rule_outcome": "pass",
+        "test_description": "A one story building utilizes system 4. The capacity is undefined and the COPh of the system matches the most conservative heating value of Table G3.5.2(COPh=3.4). Expected: UNDETERMINED",
+        "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "10-14",
             "ruleset_reference": "G3.1.2.1",
@@ -254,6 +254,7 @@
                                                 "heating_system": {
                                                     "id": "Heating Sys - Thermal Zone 1",
                                                     "type": "FURNACE",
+                                                    "rated_capacity": 200000,
                                                     "efficiency_metric_values": [
                                                         0.78
                                                     ],
