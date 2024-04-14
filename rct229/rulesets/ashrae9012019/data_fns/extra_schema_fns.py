@@ -53,7 +53,10 @@ def get_extra_schema_by_data_type(data_type):
     if data_type.startswith("[") or data_type.startswith("{"):
         # this is a data group
         data_type = "".join(re.findall(r"[\w\s]+", data_type))
-        if EXTRA_SCHEMA.get(data_type) and EXTRA_SCHEMA[data_type]["Object Type"] =="Data Group":
+        if (
+            EXTRA_SCHEMA.get(data_type)
+            and EXTRA_SCHEMA[data_type]["Object Type"] == "Data Group"
+        ):
             return EXTRA_SCHEMA[data_type]["Data Elements"]
     elif data_type.startswith("({"):
         # this is for a referenced external schema.
@@ -164,7 +167,9 @@ def compare_context_pair(
         # in this case, it is either string, numerical, references or other simple data type
         index_value = index_context
         compare_value = compare_context
-        if type(index_context) == type(compare_context) and isinstance(index_context, Quantity):
+        if type(index_context) == type(compare_context) and isinstance(
+            index_context, Quantity
+        ):
             index_value = index_context.magnitude
             compare_value = compare_value.magnitude
 
