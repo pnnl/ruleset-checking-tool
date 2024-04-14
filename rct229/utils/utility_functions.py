@@ -1,7 +1,5 @@
 from rct229.schema.schema_enums import SchemaEnums
-from rct229.utils.jsonpath_utils import (
-    find_exactly_one_with_field_value,
-)
+from rct229.utils.jsonpath_utils import find_exactly_one_with_field_value
 
 HEATING_SYSTEM = SchemaEnums.schema_enums["HeatingSystemOptions"]
 COOLING_SYSTEM = SchemaEnums.schema_enums["CoolingSystemOptions"]
@@ -93,13 +91,13 @@ def find_exactly_one_space(rmi, space_id):
 
 def find_exactly_one_schedule(rmi, schedule_id):
     """
-    Search for the schedule data group in a ruleset model instance by mathcing schedule_id
+    Search for the schedule data group in a ruleset model instance by matching schedule_id
     Raise exception if no matching schedule
 
     Parameters
     ----------
     rmi: json
-    scheduel_id: str
+    schedule_id: str
 
     Returns: json
     -------

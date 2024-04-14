@@ -1,24 +1,19 @@
-import copy
 import glob
 import json
 
 # from jsonpointer import JsonPointer
 import os
-import pprint
 from copy import deepcopy
 
 from pint import Quantity
 
-from rct229.reports.ashrae901_2019_software_test_report import (
+from rct229.reports.ashrae9012019.ashrae901_2019_software_test_report import (
     ASHRAE9012019SoftwareTestReport,
 )
 from rct229.rule_engine.engine import evaluate_rule
 from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
 from rct229.rule_engine.rulesets import RuleSet, RuleSetTest
 from rct229.rulesets import rulesets
-from rct229.ruletest_engine.ruletest_jsons.scripts.json_generation_utilities import (
-    merge_nested_dictionary,
-)
 from rct229.ruletest_engine.ruletest_rmd_factory import get_ruletest_rmd_models
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.schema.schema_store import SchemaStore
@@ -375,6 +370,7 @@ def generate_software_test_report(ruleset, section_list, output_json_path):
 
     # Generate
     report_dict.generate(rct_outcomes, output_json_path)
+    return os.path.join(output_json_path, report_dict.ruleset_report_file)
 
 
 def generate_rct_outcomes_list_from_section_list(section_list):

@@ -2,8 +2,8 @@ import json
 from copy import deepcopy
 from datetime import datetime
 
-from rct229.report_engine.rct_report import RCTReport
 from rct229 import __version__ as version
+from rct229.report_engine.rct_report import RCTReport
 from rct229.reports.utils import test_evaluation_converter
 from rct229.schema import config
 

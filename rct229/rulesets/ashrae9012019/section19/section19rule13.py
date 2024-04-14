@@ -2,7 +2,6 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rulesets.ashrae9012019 import BASELINE_0
-from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.ruleset_functions.are_all_hvac_sys_fan_objects_autosized import (
     are_all_hvac_sys_fan_objs_autosized,
 )
@@ -22,6 +21,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_fan_system_object_suppl
     get_fan_system_object_supply_return_exhaust_relief_total_power_flow,
 )
 from rct229.schema.config import ureg
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all, find_one
 from rct229.utils.pint_utils import ZERO, CalcQ
@@ -179,15 +179,15 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
                                 ]
                             )
 
-            zone_info[hvac_id_b]["supply_flow_p"] = sum(
-                [
-                    terminal_p.get("primary_airflow", ZERO.FLOW)
-                    for terminal_p in find_all(
-                        f'$.buildings[*].building_segments[*].zones[*][?(@.id = "{zone_id_b}")].terminals[*]',
-                        rmi_p,
-                    )
-                ]
-            )
+                zone_info[hvac_id_b]["supply_flow_p"] += sum(
+                    [
+                        terminal_p.get("primary_airflow", ZERO.FLOW)
+                        for terminal_p in find_all(
+                            f'$.buildings[*].building_segments[*].zones[*][?(@.id = "{zone_id_b}")].terminals[*]',
+                            rmi_p,
+                        )
+                    ]
+                )
 
             zone_info[hvac_id_b]["design_thermostat_cooling_setpoint"] = min(
                 design_thermostat_cooling_setpoint
