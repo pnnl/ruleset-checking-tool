@@ -1,3 +1,5 @@
+from typing import Any, Dict
+
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
     OpaqueSurfaceType as OST,
 )
@@ -19,7 +21,14 @@ DOOR = SchemaEnums.schema_enums["SubsurfaceClassificationOptions"].DOOR
 NONE_AREA_TYPE = "NONE"
 
 
-def get_area_type_window_wall_area_dict(climate_zone, building):
+class AreaTypeWindowWallAreaDict:
+    total_wall_area: float | int
+    total_window_area: float | int
+
+
+def get_area_type_window_wall_area_dict(
+    climate_zone: str, building: dict
+) -> dict[str | Any, dict[str, Any]]:
     """Gets a dictionary mapping building area type to a dictionary of (total area of
     above grade vertical surfaces) and (total area of fenestration)
 
@@ -52,7 +61,7 @@ def get_area_type_window_wall_area_dict(climate_zone, building):
             area_type = "NONE"
 
         if area_type not in window_wall_areas_dictionary:
-            window_wall_areas_dictionary[area_type] = {
+            window_wall_areas_dictionary[area_type]: AreaTypeWindowWallAreaDict = {
                 "total_wall_area": ZERO.AREA,
                 "total_window_area": ZERO.AREA,
             }

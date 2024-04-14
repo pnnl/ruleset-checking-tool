@@ -11,7 +11,7 @@ from rct229.utils.utility_functions import find_exactly_one_hvac_system
 Air_Economizer = SchemaEnums.schema_enums["AirEconomizerOptions"]
 
 
-def is_economizer_modeled_in_proposed(rmi_b, rmi_p, hvac_id_b):
+def is_economizer_modeled_in_proposed(rmi_b: dict, rmi_p: dict, hvac_id_b: str) -> bool:
     """
     The function returns true if at least one zone served by the baseline HVAC system sent to the function is served by an hvac system with an economizer in the proposed design. The function returns false otherwise.
 

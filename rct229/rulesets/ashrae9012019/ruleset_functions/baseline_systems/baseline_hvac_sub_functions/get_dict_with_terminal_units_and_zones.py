@@ -1,7 +1,7 @@
 from rct229.utils.jsonpath_utils import find_all
 
 
-def get_dict_with_terminal_units_and_zones(rmi):
+def get_dict_with_terminal_units_and_zones(rmi: dict) -> dict:
     """
     Returns a dictionary of zone IDs associated with each terminal unit in the RMD.
 
