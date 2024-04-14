@@ -1,6 +1,8 @@
 import re
 from functools import partial
 
+from pint import Quantity
+
 from rct229.rulesets.ashrae9012019.data import data
 
 EXTRA_SCHEMA = data["ASHRAE229.9012019.extra.schema"]
@@ -51,7 +53,7 @@ def get_extra_schema_by_data_type(data_type):
     if data_type.startswith("[") or data_type.startswith("{"):
         # this is a data group
         data_type = "".join(re.findall(r"[\w\s]+", data_type))
-        if EXTRA_SCHEMA.get(data_type):
+        if EXTRA_SCHEMA.get(data_type) and EXTRA_SCHEMA[data_type]["Object Type"] =="Data Group":
             return EXTRA_SCHEMA[data_type]["Data Elements"]
     elif data_type.startswith("({"):
         # this is for a referenced external schema.
@@ -160,7 +162,13 @@ def compare_context_pair(
 
     elif isinstance(extra_schema, str):
         # in this case, it is either string, numerical, references or other simple data type
-        if required_equal and index_context != compare_context:
+        index_value = index_context
+        compare_value = compare_context
+        if type(index_context) == type(compare_context) and isinstance(index_context, Quantity):
+            index_value = index_context.magnitude
+            compare_value = compare_value.magnitude
+
+        if required_equal and index_value != compare_value:
             # the != takes care of None data type. if both None, this will still pass.
             error_msg_list.append(
                 f"path: {element_json_path}: index context data: {index_context} does not equal to compare context data: {compare_context}"

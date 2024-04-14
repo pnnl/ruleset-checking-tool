@@ -12,7 +12,7 @@ class Section1Rule6(RuleDefinitionBase):
             rmrs_used=produce_ruleset_model_instance(
                 USER=True, BASELINE_0=False, PROPOSED=True
             ),
-            id="15-1",
+            id="1-6",
             description="",
             ruleset_section_title="Performance Calculation",
             standard_section="",
