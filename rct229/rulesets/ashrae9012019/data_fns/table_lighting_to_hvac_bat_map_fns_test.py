@@ -8,4 +8,7 @@ def test__lighting_to_hvac_bat__ATRIUM_HIGH():
 
 
 def test__space_lighting_to_hvac_bat__AUDIENCE_SEATING_AREA_MOTION_PICTURE_THEATER():
-    assert building_lighting_to_hvac_bat("AUDIENCE_SEATING_AREA_MOTION_PICTURE_THEATER") == "ALL_OTHER"
+    assert (
+        building_lighting_to_hvac_bat("AUDIENCE_SEATING_AREA_MOTION_PICTURE_THEATER")
+        == "ALL_OTHER"
+    )
