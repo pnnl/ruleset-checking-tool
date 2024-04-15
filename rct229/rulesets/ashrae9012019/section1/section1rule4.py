@@ -26,12 +26,9 @@ class Section1Rule4(RuleDefinitionBase):
                 PROPOSED=True,
             ),
             rmrs_used_optional=produce_ruleset_model_instance(
-                USER=True,
-                BASELINE_0=True,
                 BASELINE_90=True,
                 BASELINE_180=True,
                 BASELINE_270=True,
-                PROPOSED=True,
             ),
             id="1-4",
             description="The PCI shall be less than or equal to the PCIt when calculated in accordance with Standard 90.1 2019, Section 4.2.1.1",
