@@ -1,3 +1,7 @@
+from typing import TypedDict
+
+from pint import Quantity
+
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
     OpaqueSurfaceType as OST,
 )
@@ -24,7 +28,14 @@ from rct229.utils.pint_utils import ZERO
 # called do have required fields
 
 
-def get_building_segment_skylight_roof_areas_dict(climate_zone, building):
+class BuildingSegmentRoofAreas(TypedDict):
+    total_envelope_roof_area: Quantity
+    total_skylight_area: Quantity
+
+
+def get_building_segment_skylight_roof_areas_dict(
+    climate_zone: str, building: dict
+) -> dict[str, BuildingSegmentRoofAreas]:
     """Gets a dictionary mapping building segment id to a dictionary of (total area of
     skylights) and (total area of envelope roofs) for the building_segment
 

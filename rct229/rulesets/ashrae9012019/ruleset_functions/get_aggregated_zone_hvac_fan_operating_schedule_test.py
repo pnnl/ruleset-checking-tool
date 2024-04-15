@@ -1,4 +1,5 @@
 import pytest
+
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_aggregated_zone_hvac_fan_operating_schedule import (
     get_aggregated_zone_hvac_fan_operating_schedule,
 )

@@ -12,7 +12,7 @@ LightingSpaceOptionsG37 = SchemaEnums.schema_enums[
 ]
 
 
-def get_hvac_systems_primarily_serving_comp_room(rmi):
+def get_hvac_systems_primarily_serving_comp_room(rmi: dict) -> list[str]:
     """
     Returns a list of HVAC systems in which greater than 50% of the area served by the HVAC system is computer room
     space.
