@@ -1,4 +1,3 @@
-from pydash import filter_
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rulesets.ashrae9012019 import (
@@ -76,17 +75,19 @@ class Section1Rule5(RuleDefinitionBase):
                     )
                 )
 
-        pbp_set = list(set(filter_(pbp_set, lambda x: x is not None)))
-        bbp_set = list(set(filter_(bbp_set, lambda x: x is not None)))
-        pbp_nre_set = list(set(filter_(pbp_nre_set, lambda x: x is not None)))
+        pbp_set = list(set(filter(lambda x: x is not None, pbp_set)))
+        bbp_set = list(set(filter(lambda x: x is not None, bbp_set)))
+        pbp_nre_set = list(set(filter(lambda x: x is not None, pbp_nre_set)))
 
         assert_(len(pbp_set) >= 1, "At least one `pbp_set` value must exist.")
         assert_(len(bbp_set) >= 1, "At least one `bbp_set` value must exist.")
         assert_(len(pbp_nre_set) >= 1, "At least one `pbp_nre_set` value must exist.")
 
-        return (list(set(pbp_nre_set))[0] - list(set(pbp_set))[0]) / list(set(bbp_set))[
-            0
-        ] > APPLICABLE_LIMIT
+        return (
+            len(pbp_set) == len(bbp_set) == len(pbp_nre_set) == 1
+            and bbp_set[0] != 0
+            and (pbp_nre_set[0] - pbp_set[0]) / bbp_set[0] > APPLICABLE_LIMIT
+        )
 
     def get_calc_vals(self, context, data=None):
         rmd_u = context.USER
@@ -134,11 +135,11 @@ class Section1Rule5(RuleDefinitionBase):
                     )
                 )
 
-        pbp_set = filter_(pbp_set, lambda x: x is not None)
-        bbp_set = filter_(bbp_set, lambda x: x is not None)
-        pbp_nre_set = filter_(pbp_nre_set, lambda x: x is not None)
-        pci_set = filter_(pci_set, lambda x: x is not None)
-        pci_target_set = filter_(pci_target_set, lambda x: x is not None)
+        pbp_set = list(set(filter(lambda x: x is not None, pbp_set)))
+        bbp_set = list(set(filter(lambda x: x is not None, bbp_set)))
+        pbp_nre_set = list(set(filter(lambda x: x is not None, pbp_nre_set)))
+        pci_set = list(set(filter(lambda x: x is not None, pci_set)))
+        pci_target_set = list(set(filter(lambda x: x is not None, pci_target_set)))
 
         assert_(len(pci_set) >= 1, "At least one `pci_set` value must exist.")
         assert_(
@@ -146,11 +147,11 @@ class Section1Rule5(RuleDefinitionBase):
         )
 
         return {
-            "pbp_set": list(set(pbp_set)),
-            "bbp_set": list(set(bbp_set)),
-            "pbp_nre_set": list(set(pbp_nre_set)),
-            "pci_set": list(set(pci_set)),
-            "pci_target_set": list(set(pci_target_set)),
+            "pbp_set": pbp_set,
+            "bbp_set": bbp_set,
+            "pbp_nre_set": pbp_nre_set,
+            "pci_set": pci_set,
+            "pci_target_set": pci_target_set,
         }
 
     def rule_check(self, context, calc_vals=None, data=None):
