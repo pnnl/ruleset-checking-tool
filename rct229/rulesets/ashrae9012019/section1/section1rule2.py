@@ -27,12 +27,9 @@ class Section1Rule2(RuleDefinitionBase):
                 PROPOSED=True,
             ),
             rmrs_used_optional=produce_ruleset_model_instance(
-                USER=True,
-                BASELINE_0=True,
                 BASELINE_90=True,
                 BASELINE_180=True,
                 BASELINE_270=True,
-                PROPOSED=True,
             ),
             id="1-2",
             description="The performance of the proposed design is calculated in accordance with Standard 90.1-2019 Appendix G, where Performance Cost Index = Proposed building performance (PBP) /Baseline building performance (BBP), "
@@ -67,9 +64,9 @@ class Section1Rule2(RuleDefinitionBase):
                     find_one("$.output.baseline_building_performance_energy_cost", rmd)
                 )
 
-        pci_set = list(filter(lambda x: x is not None, pci_set))
-        pbp_set = list(filter(lambda x: x is not None, pbp_set))
-        bbp_set = list(filter(lambda x: x is not None, bbp_set))
+        pci_set = list(set(filter(lambda x: x is not None, pci_set)))
+        pbp_set = list(set(filter(lambda x: x is not None, pbp_set)))
+        bbp_set = list(set(filter(lambda x: x is not None, bbp_set)))
 
         assert_(
             len(pci_set) >= 1, "At least one `performance_cost_index` value must exist."
@@ -84,9 +81,9 @@ class Section1Rule2(RuleDefinitionBase):
         )
 
         return {
-            "pci_set": list(set(pci_set)),
-            "pbp_set": list(set(pbp_set)),
-            "bbp_set": list(set(bbp_set)),
+            "pci_set": pci_set,
+            "pbp_set": pbp_set,
+            "bbp_set": bbp_set,
         }
 
     def rule_check(self, context, calc_vals=None, data=None):
