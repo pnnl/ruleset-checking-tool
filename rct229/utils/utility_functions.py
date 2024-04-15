@@ -5,17 +5,17 @@ HEATING_SYSTEM = SchemaEnums.schema_enums["HeatingSystemOptions"]
 COOLING_SYSTEM = SchemaEnums.schema_enums["CoolingSystemOptions"]
 
 
-def find_exactly_one_hvac_system(rmi, hvac_id):
+def find_exactly_one_hvac_system(rmi: dict, hvac_id: str) -> dict:
     """
     Search for the HVAC data group in a ruleset model instance by matching hvac_id
     Raise exception if no matching HVAC
 
     Parameters
     ----------
-    rmi: json
+    rmi: dict
     hvac_id: str
 
-    Returns json
+    Returns dict
     -------
 
     """
@@ -48,7 +48,7 @@ def find_exactly_one_terminal_unit(rmi, terminal_unit_id):
     )
 
 
-def find_exactly_one_zone(rmi, zone_id):
+def find_exactly_one_zone(rmi: dict, zone_id: str) -> dict:
     """
     Search for the zone data group in a ruleset model instance by matching zone_id
     Raise exception if no matching zone
@@ -127,13 +127,13 @@ def find_exactly_one_child_loop(rmi, child_loop_id):
     )
 
 
-def find_exactly_one_fluid_loop(rmi, loop_id):
+def find_exactly_one_fluid_loop(rmi: dict, loop_id: str):
     """
     Search for the loop data group in a ruleset model instance by matching loop_id
     Raise exception if no matching zone
     Parameters
     ----------
-    rmi: json
+    rmi: dict
     loop_id: str
 
     Returns: json

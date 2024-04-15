@@ -1,3 +1,5 @@
+from pint import Quantity
+
 from rct229.rulesets.ashrae9012019.data_fns.table_lighting_to_hvac_bat_map_fns import (
     space_lighting_to_hvac_bat,
 )
@@ -6,7 +8,7 @@ from rct229.utils.pint_utils import ZERO
 from rct229.utils.utility_functions import find_exactly_one_zone
 
 
-def get_zone_hvac_bat_dict(rmi, zone_id):
+def get_zone_hvac_bat_dict(rmi: dict, zone_id: str) -> dict[str, Quantity]:
     """
     Get a dictionary of the HVAC_BAT and areas for a given zone.
         - used to verify the correct type of HVAC baseline system (or systems)

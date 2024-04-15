@@ -87,20 +87,20 @@ _UNIT_CONVENTIONS = {
 class ZERO:
     """Class holding zero values for various pint quantities"""
 
-    LENGTH = 0 * ureg("ft")
-    AREA = LENGTH * LENGTH
-    VOLUME = AREA * LENGTH
+    LENGTH: Quantity = 0 * ureg("ft")
+    AREA: Quantity = LENGTH * LENGTH
+    VOLUME: Quantity = AREA * LENGTH
 
-    POWER = 0 * ureg("Btu/hr")
-    THERMAL_CAPACITY = POWER / ureg("ft2")
-    POWER_PER_AREA = THERMAL_CAPACITY
-    POWER_PER_FLOW = 0 * ureg("Btu/hr/cfm")
+    POWER: Quantity = 0 * ureg("Btu/hr")
+    THERMAL_CAPACITY: Quantity = POWER / ureg("ft2")
+    POWER_PER_AREA: Quantity = THERMAL_CAPACITY
+    POWER_PER_FLOW: Quantity = 0 * ureg("Btu/hr/cfm")
 
-    U_FACTOR = ureg("Btu/(hr*ft2*degR)")
-    UA = U_FACTOR * AREA
-    FLOW = VOLUME / ureg("minute")
+    U_FACTOR: Quantity = ureg("Btu/(hr*ft2*degR)")
+    UA: Quantity = U_FACTOR * AREA
+    FLOW: Quantity = VOLUME / ureg("minute")
 
-    TEMPERATURE = 0 * ureg("K")
+    TEMPERATURE: Quantity = 0 * ureg("K")
 
 
 @dataclass(frozen=True)
