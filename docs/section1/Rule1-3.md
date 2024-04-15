@@ -45,8 +45,10 @@
 - Get the baseline building regulated energy cost (BBREC) from the output(s): `output_bbrec = bbrec_set[0]`
 - Get the baseline building unregulated energy cost (BBUEC) from the output(s): `output_bbuec = bbuec_set[0]`
 
+- If the output_bbp value is 0, raise a message and return FAIL: `if output_bbp == 0: outcome = FAIL and raise_message "Ruleset expects baseline_building_performance_energy_cost to be greater than 0."`
+
   **Rule Assertion:** 
-  - If PCIt = (BBUEC + (BPF * BBREC)) / BBP: PASS `if output_pci_target == (output_bbuec + (output_bpf * output_bbrec))/output_bbp: outcome = PASS`
+  - If PCIt = (BBUEC + (BPF * BBREC)) / BBP: PASS `if output_bbp !=0 and output_pci_target == (output_bbuec + (output_bpf * output_bbrec))/output_bbp: outcome = PASS`
   - Else: FAIL `else: outcome = FAIL`
 
 **Notes/Questions:** None

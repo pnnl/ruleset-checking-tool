@@ -1,8 +1,8 @@
 # Section 1 - Rule 1-1
 **Schema Version:** 0.0.36  
 **Mandatory Rule:** True  
-**Rule ID:** 1-1
-**Rule Description:** Building performance factors shall be from Standard 90.1-2019, Table 4.2.1.1, based on the building area type and climate zone. For building area types not listed in Table 4.2.1.1  “All others.” shall be used to determine the BPF.
+**Rule ID:** 1-1  
+**Rule Description:** Building performance factors shall be from Standard 90.1-2019, Table 4.2.1.1, based on the building area type and climate zone. For building area types not listed in Table 4.2.1.1  “All others.” shall be used to determine the BPF.  
 **Rule Assertion:** Options are PASS/FAIL/UNDETERMINED     
 **Appendix G Section:** Section 4.2.1.1  
 **90.1 Section Reference:** None  

@@ -1,3 +1,7 @@
+from typing import TypedDict
+
+from pint import Quantity
+
 from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_all, find_exactly_required_fields
 from rct229.utils.pint_utils import ZERO
@@ -15,7 +19,12 @@ GET_HVAC_ZONE_LIST_W_AREA_DICT__REQUIRED_FIELDS = {
 }
 
 
-def get_hvac_zone_list_w_area_by_rmi_dict(rmi):
+class HVACZoneListArea(TypedDict):
+    total_area: Quantity
+    zone_list: list[str]
+
+
+def get_hvac_zone_list_w_area_by_rmi_dict(rmi: dict) -> dict[str, HVACZoneListArea]:
     """
     RMI version of the get_hvac_zone_list_w_area_dict function
 
@@ -41,7 +50,7 @@ def get_hvac_zone_list_w_area_by_rmi_dict(rmi):
     return hvac_zone_list_w_area_dict
 
 
-def get_hvac_zone_list_w_area_dict(building):
+def get_hvac_zone_list_w_area_dict(building: dict) -> dict[str, HVACZoneListArea]:
     """Gets the list of zones and their total floor area served by each HVAC system
     in a building
 

@@ -45,7 +45,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types i
 )
 
 
-def exclude_sys_types(exclude_type: list) -> list:
+def exclude_sys_types(exclude_type: list[str]) -> list[str]:
     return [
         getattr(HVAC_SYS, sys_type[0])
         for sys_type in inspect.getmembers(HVAC_SYS)
