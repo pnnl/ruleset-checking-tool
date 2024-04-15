@@ -1,3 +1,7 @@
+from typing import Literal
+
+from pint import Quantity
+
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
@@ -7,7 +11,9 @@ from rct229.utils.utility_functions import (
 )
 
 
-def get_zone_peak_internal_load_floor_area_dict(rmi, zone_id):
+def get_zone_peak_internal_load_floor_area_dict(
+    rmi: dict, zone_id: str
+) -> dict[Literal["peak", "area"], Quantity]:
     """
     Finds the peak coincident internal loads of a zone and returns the value in btu/h/ft2
     The function returns a dict giving 2 values: {"PEAK":total peak btu/h/ft2 in the zone, "AREA":total zone area} the

@@ -24,7 +24,7 @@ APPLICABLE_SYS_TYPES = [
 ]
 
 
-def get_primary_secondary_loops_dict(rmi_b):
+def get_primary_secondary_loops_dict(rmi_b: dict) -> dict[str, list[str]]:
     """
     Get the list of primary and secondary loops for CHW for a B-RMI.
 

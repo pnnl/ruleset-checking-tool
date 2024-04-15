@@ -1,3 +1,7 @@
+from typing import TypedDict
+
+from pint import Quantity
+
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_heating_type_fluid_loop import (
     is_hvac_sys_heating_type_fluid_loop,
 )
@@ -13,7 +17,12 @@ from rct229.utils.utility_functions import find_exactly_one_hvac_system
 HEATING_SOURCE = SchemaEnums.schema_enums["HeatingSourceOptions"]
 
 
-def get_hw_loop_zone_list_w_area(rmi_b):
+class HVACZoneListArea(TypedDict):
+    total_area: Quantity
+    zone_list: list[str]
+
+
+def get_hw_loop_zone_list_w_area(rmi_b: dict) -> dict[str, HVACZoneListArea]:
     """
     Get the list of zones and their total floor area served by each HHW loop in a baseline ruleset model instance.
 
@@ -29,7 +38,7 @@ def get_hw_loop_zone_list_w_area(rmi_b):
     """
     hw_loop_zone_list_w_area_dict = dict()
     for zone in find_all("$.buildings[*].building_segments[*].zones[*]", rmi_b):
-        zone_area = sum(
+        zone_area: Quantity = sum(
             [
                 space.get("floor_area", ZERO.AREA)
                 for space in find_all("$.spaces[*]", zone)
@@ -70,9 +79,9 @@ def get_hw_loop_zone_list_w_area(rmi_b):
                 hhw_loop_id is not None
                 and hhw_loop_id not in hw_loop_zone_list_w_area_dict
             ):
-                hw_loop_zone_list_w_area_dict[hhw_loop_id] = {
-                    "zone_list": [],
+                hw_loop_zone_list_w_area_dict[hhw_loop_id]: HVACZoneListArea = {
                     "total_area": ZERO.AREA,
+                    "zone_list": [],
                 }
             # prevent double counting
             if (
@@ -81,7 +90,7 @@ def get_hw_loop_zone_list_w_area(rmi_b):
                 not in hw_loop_zone_list_w_area_dict[hhw_loop_id]["zone_list"]
             ):
                 hw_loop_zone_list_w_area_dict[hhw_loop_id]["zone_list"].append(
-                    zone["id"]
+                    str(zone["id"])
                 )
                 hw_loop_zone_list_w_area_dict[hhw_loop_id]["total_area"] += zone_area
     return hw_loop_zone_list_w_area_dict
