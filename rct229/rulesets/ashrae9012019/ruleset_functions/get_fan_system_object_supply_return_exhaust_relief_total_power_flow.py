@@ -1,3 +1,7 @@
+from typing import TypedDict
+
+from pint import Quantity
+
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_fan_object_electric_power import (
     get_fan_object_electric_power,
 )
@@ -13,7 +17,28 @@ class FanPressureDropCompareCategory:
     DIFFERENT: str = "DIFFERENT"
 
 
-def get_fan_system_object_supply_return_exhaust_relief_total_power_flow(fan_system):
+class FanSystemInfoDict(TypedDict, total=False):
+    supply_fans_power: Quantity
+    supply_fans_airflow: Quantity
+    supply_fans_qty: int
+    supply_fans_pressure: FanPressureDropCompareCategory
+    return_fans_power: Quantity
+    return_fans_airflow: Quantity
+    return_fans_qty: int
+    return_fans_pressure: FanPressureDropCompareCategory
+    exhaust_fans_power: Quantity
+    exhaust_fans_airflow: Quantity
+    exhaust_fans_qty: int
+    exhaust_fans_pressure: FanPressureDropCompareCategory
+    relief_fans_power: Quantity
+    relief_fans_airflow: Quantity
+    relief_fans_qty: int
+    relief_fans_pressure: FanPressureDropCompareCategory
+
+
+def get_fan_system_object_supply_return_exhaust_relief_total_power_flow(
+    fan_system: dict,
+) -> FanSystemInfoDict:
     """
     Get the supply, return, exhaust, and relief total fan power, CFM, quantity, and information about whether the pressure drop is consistent across the fans if more than one for a fan system object.
 

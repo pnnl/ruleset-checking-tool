@@ -20,7 +20,7 @@ class HVAC_SYS:
     SYS_7B = "Sys-7b"
     SYS_7C = "Sys-7c"
     SYS_8 = "Sys-8"
-    SYS_8A = "Sys_8a"
+    SYS_8A = "Sys-8a"
     SYS_8B = "Sys-8b"
     SYS_8C = "Sys-8c"
     SYS_9 = "Sys-9"
