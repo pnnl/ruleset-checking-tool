@@ -1,4 +1,3 @@
-from pydash import filter_
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rulesets.ashrae9012019 import (
@@ -68,9 +67,9 @@ class Section1Rule2(RuleDefinitionBase):
                     find_one("$.output.baseline_building_performance_energy_cost", rmd)
                 )
 
-        pci_set = filter_(pci_set, lambda x: x is not None)
-        pbp_set = filter_(pbp_set, lambda x: x is not None)
-        bbp_set = filter_(bbp_set, lambda x: x is not None)
+        pci_set = list(filter(lambda x: x is not None, pci_set))
+        pbp_set = list(filter(lambda x: x is not None, pbp_set))
+        bbp_set = list(filter(lambda x: x is not None, bbp_set))
 
         assert_(
             len(pci_set) >= 1, "At least one `performance_cost_index` value must exist."
