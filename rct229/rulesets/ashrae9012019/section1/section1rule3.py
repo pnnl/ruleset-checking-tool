@@ -1,4 +1,3 @@
-from pydash import filter_
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rulesets.ashrae9012019 import (
@@ -78,11 +77,11 @@ class Section1Rule3(RuleDefinitionBase):
                     find_one("$.output.baseline_building_unregulated_energy_cost", rmd)
                 )
 
-        pci_target_set = filter_(pci_target_set, lambda x: x is not None)
-        bpf_set = filter_(bpf_set, lambda x: x is not None)
-        bbp_set = filter_(bbp_set, lambda x: x is not None)
-        bbrec_set = filter_(bbrec_set, lambda x: x is not None)
-        bbuec_set = filter_(bbuec_set, lambda x: x is not None)
+        pci_target_set = list(filter(lambda x: x is not None, pci_target_set))
+        bpf_set = list(filter(lambda x: x is not None, bpf_set))
+        bbp_set = list(filter(lambda x: x is not None, bbp_set))
+        bbrec_set = list(filter(lambda x: x is not None, bbrec_set))
+        bbuec_set = list(filter(lambda x: x is not None, bbuec_set))
 
         assert_(
             len(pci_target_set) >= 1,
