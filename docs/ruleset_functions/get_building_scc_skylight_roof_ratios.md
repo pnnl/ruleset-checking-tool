@@ -83,7 +83,7 @@ Logic:
 - Calculate skylight roof ratio for semi-heated type surface conditioning category: `if total_semiheated_roof_area > 0: srr_semiheated = total_semiheated_skylight_area / total_semiheated_roof_area; else: srr_semiheated = 0`
 
 - Save skylight-roof-ratio of different surface conditioning categories for building: `building_scc_skylight_roof_ratios_dictionary[building.id] = {"EXTERIOR RESIDENTIAL": srr_res, "EXTERIOR NON-RESIDENTIAL": srr_nonres, "EXTERIOR MIXED": srr_mixed, "SEMI-EXTERIOR": srr_semiheated}`
-
+[WX: I am not sure what is the usefulness of adding building.id in the dictionary as key]
 **Returns** `return building_scc_skylight_roof_ratios_dictionary`
 
 **[Back](../_toc.md)**

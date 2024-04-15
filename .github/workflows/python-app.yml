@@ -11,30 +11,34 @@ jobs:
     runs-on: 'ubuntu-latest'
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Setup Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         # This will halt the action if formatting fails
         # Note: This will also fail if there are syntax errors
-      - uses: psf/black@21.10b0
-  run-pytests:
-    name: Run pytests
+      - uses: psf/black@stable
+        with:
+          version: "22.6.0"
+  run-unit-tests:
+    name: Run unit tests
     runs-on: 'ubuntu-latest'
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Setup Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
-          python-version: '3.7'
-      - name: Install pipenv
-        # TODO: cache pipenv
-        run: pip install pipenv
-      - name: Install dependencies
-        # TODO: cache the dependencies; probably don't need the second command
-        run: |
-          pipenv install --dev --skip-lock
-          pipenv lock --pre
-      - name: Run tests
+          python-version: '3.10'
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+        with:
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+          installer-parallel: true
+      - name: Install venv
+        run: poetry install
+      - name: Run pytests
         # This will halt the action if any of the tests fail
-        run: pipenv run pytest -v
+        run: poetry run pytest -v
+      - name: Run rule tests
+        run: poetry run rct229 test -rs ashrae9012019

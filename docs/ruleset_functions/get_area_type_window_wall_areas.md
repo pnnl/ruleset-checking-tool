@@ -22,9 +22,9 @@ Logic:
 
 - For each building segment in RMR: `for building_segment in RMR.building.building_segments:`
 
-  - Check if building segment area type is in Table G3.1.1-1, get area type: `if building_segment.area_type_vertical_fenestration: area_type = building_segment.area_type_vertical_fenestration`
+  - [WX: Remove this check]`Check if building segment area type is in Table G3.1.1-1`, get area type: `if building_segment.area_type_vertical_fenestration: area_type = building_segment.area_type_vertical_fenestration`
 
-  - Else, set area type as NONE: `else: area_type = "NONE"`
+  - [WX: If area_type is Null,] set area type as NONE: `else: area_type = "NONE"` [WX: since there is 'OTHER' type, should we set it to this category? In Standard: OTHER shall be 40% WWR]
 
   - For each zone in building segment: `for zone in building_segment...zones:`
 

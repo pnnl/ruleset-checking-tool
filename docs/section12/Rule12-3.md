@@ -34,3 +34,5 @@
     - Add to the list of space IDs in the Proposed model: ```space_IDs_proposed_list.append(space_ID_proposed)```
 
 **Rule Assertion:** ```sorted(space_IDs_user_list) == sorted(space_IDs_proposed_list)```  
+
+**[Back](../_toc.md)**

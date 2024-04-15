@@ -18,11 +18,9 @@ Function Call: None
 
 Logic:  
 
-- Get lighting power density allowance for building segment: `allowable_LPD = data_lookup(table_9_5_1, building_segment.lighting_building_area_type)`  
+- Get lighting power density allowance for building segment: `allowable_LPD = data_lookup(table_9_5_1, building_segment.lighting_building_area_type)`   
 
-- For each thermal block in building segment: `thermal_block in building_segment.thermal_blocks:`  
-
-  - For each zone in thermal block: `zone in thermal_block.zones:`  
+  - For each zone in building segment: `zone in building_segment.zones:`  
 
     - For each space in zone: `space in zone.spaces:`  
 

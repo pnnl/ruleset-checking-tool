@@ -151,6 +151,11 @@ m2 = meter ** 2
 liter = decimeter ** 3 = l = L = litre
 cubic_centimeter = centimeter ** 3 = cc
 m3 = meter ** 3
+gallon = 3.785 * L
+
+# Volumetric Flow Rate
+cfm = ft ** 3 / min
+gpm = gallon / min
 
 # Frequency
 [frequency] = 1 / [time]
@@ -174,7 +179,10 @@ therm = 1e5 * Btu = thm = EC_therm
 # Power
 [power] = [energy] / [time]
 watt = joule / second = W
+british_thermal_unit_per_hour = Btu / hour = Btu_h = btu_h
 volt_ampere = volt * ampere = VA
+ton = 3517 * W
+hp = 745.7 * W
 
 # Momentum
 [momentum] = [length] * [mass] / [time]
@@ -189,6 +197,7 @@ bar = 1e5 * pascal
 technical_atmosphere = kilogram * g_0 / centimeter ** 2 = at
 torr = atm / 760
 pound_force_per_square_inch = force_pound / inch ** 2 = psi
+ft_WC = 2989.067 * Pa
 millimeter_Hg = millimeter * Hg * g_0 = mmHg = mm_Hg = millimeter_Hg_0C
 centimeter_Hg = centimeter * Hg * g_0 = cmHg = cm_Hg = centimeter_Hg_0C
 inch_Hg = inch * Hg * g_0 = inHg = in_Hg = inch_Hg_32F

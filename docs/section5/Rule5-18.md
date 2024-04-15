@@ -1,43 +1,35 @@
-
 # Envelope - Rule 5-18  
-
+**Schema Version** 0.0.23  
+**Primary Rule:** False
 **Rule ID:** 5-18  
-**Rule Description:** For building area types included in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table G3.1.1-1 based on the area of gross above-grade walls that separate conditioned spaces and semi-heated spaces from the exterior.  
-**Rule Assertion:** B-RMR total (subsurface.glazed_area+subsurface.opaque_area) = expected value  
-**Appendix G Section:** Section G3.1-5(c) Building Envelope Modeling Requirements for the Baseline building  
-**Appendix G Section Reference:**  
+**Rule Description:** Manually controlled dynamic glazing shall use the average of the minimum and maximum SHGC and VT.
+**Appendix G Section:** Section 5 Envelope  
+**Appendix G Section Reference:** Section G3.1-5(a)5 Building Envelope Modeling Requirements for the Proposed design   
 
-- Table G3.1-5. Building Envelope, Baseline Building Performance, c. Vertical Fenestration Areas  
-- Table G3.1.1-1  
+**Applicability:** All required data elements exist for P_RMR  
+**Applicability Checks:**
+  1. The proposed building uses manually controlled dynamic glazing
 
-**Applicability:** All required data elements exist for B_RMR  
-**Applicability Checks:** None  
+**Evaluation Context:** Each Data Element  
+**Data Lookup:** None  
+**Function Call:** None
 
-**Manual Checks:** None  
-**Evaluation Context:**  Each Data Element  
-**Data Lookup:** Table G3.1.1-1  
-**Function Call:**  
+## Rule Logic:
+- For each building segment in the Proposed model: ```for building_segment_p in P_RMR.building.building_segments:```
 
-  1. get_building_segment_window_wall_areas()
+  - For each zone in building segment: ```for zone_p in building_segment_p.zones:```
 
-## Rule Logic:  
+    - For each surface in zone: ```for surface_p in zone_p.surfaces:```
 
-- Get window wall areas dictionary for building: `window_wall_areas_dictionary_b = get_building_segment_window_wall_areas(B_RMR)`
-
-- For each building segment in the Baseline model: `for building_segment_b in B_RMR.building.building_segments:`
-
-  - Check if building segment area type is included in Table G3.1.1-1: `if data_lookup(table_G3_1_1_1, building_segment_b.area_type_vertical_fenestration):`
-
-    - Calculate building segment window wall ratio: `building_segment_wwr_b = window_wall_areas_dictionary_b[building_segment_b.id][0] / window_wall_areas_dictionary_b[building_segment_b.id][1]`
-
+      - For each subsurface in surface: ```for subsurface_p in surface_p.subsurfaces:```
+        
       **Rule Assertion:**
+      - Case 1: If subsurface has manual dynamic glazing, outcome is UNDETERMINED: ```if subsurface_p.dynamic_glazing_type == "MANUAL_DYNAMIC: outcome = UNDETERMINED and raise_message "SUBSURFACE ${subsurface_p} INCLUDES MANUALLY CONTROLLED DYNAMIC GLAZING IN THE PROPOSED DESIGN. VERIFY THAT SHGC AND VT WERE MODELED AS THE AVERAGE OF THE MINIMUM AND MAXIMUM SHGC AND VT."```
+      - Case 2: Else, outcome is NOT_APPLICABLE: ```else: outcome = NOT_APPLICABLE```
 
-      - Case 1: If building is all new and building segment window-wall-ratio matches Table G3.1.1-1 allowance: `if ( B_RMR.building.is_all_new ) AND ( building_segment_wwr_b == data_lookup(table_G3_1_1_1, building_segment_b.area_type_vertical_fenestration) ): PASS`
+**Notes:**
 
-      - Case 2: Else if building is all new and building segment window-wall-ratio does not match Table G3.1.1-1 allowance: `if ( B_RMR.building.is_all_new ) AND ( building_segment_wwr_b != data_lookup(table_G3_1_1_1, building_segment_b.area_type_vertical_fenestration) ): FAIL`
-
-      - Case 3: Else if building is not all new and building segment window-wall-ratio matches Table G3.1.1-1 allowance: `if ( NOT B_RMR.building.is_all_new ) AND ( building_segment_wwr_b == data_lookup(table_G3_1_1_1, building_segment_b.area_type_vertical_fenestration) ): CAUTION and raise_warning "BUILDING IS NOT ALL NEW AND BASELINE WWR MATCHES VALUES PRESCRIBED IN TABLE G3.1.1-1. HOWEVER, THE FENESTRATION AREA PRESCRIBED IN TABLE G3.1.1-1 DOES NOT APPLY TO THE EXISTING ENVELOPE PER TABLE G3.1 BASELINE COLUMN #5 (C). FOR EXISTING ENVELOPE, THE BASELINE FENESTRATION AREA MUST EQUAL THE EXISTING FENESTRATION AREA PRIOR TO THE PROPOSED WORK. A MANUAL CHECK IS REQUIRED TO VERIFY COMPLIANCE."`
-
-      - Case 4: Else, building is not all new and building segment window-wall-ratio does not match Table G3.1.1-1 allowance: `if ( NOT B_RMR.building.is_all_new ) AND ( building_segment_wwr_b != data_lookup(table_G3_1_1_1, building_segment_b.area_type_vertical_fenestration) ): CAUTION and raise_warning "BUILDING IS NOT ALL NEW AND BASELINE WWR DOES NOT MATCH VALUES PRESCRIBED IN TABLE G3.1.1-1. HOWEVER, THE FENESTRATION AREA PRESCRIBED IN TABLE G3.1.1-1 DOES NOT APPLY TO THE EXISTING ENVELOPE PER TABLE G3.1 BASELINE COLUMN #5(c). FOR EXISTING ENVELOPE, THE BASELINE FENESTRATION AREA MUST EQUAL THE EXISTING FENESTRATION AREA PRIOR TO THE PROPOSED WORK. A MANUAL CHECK IS REQUIRED TO VERIFY COMPLIANCE."`
+1. Update Rule ID from 5-39 to 5-29 on 10/26/2023
+2. Update Rule ID from 5-29 to 5-18 on 12/22/2023
 
 **[Back](../_toc.md)**
