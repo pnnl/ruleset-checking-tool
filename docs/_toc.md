@@ -261,6 +261,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [10-11](section10/10-11.md): Except for spaces with baseline system 9 or 10, if no cooling system exists or no cooling system has been submitted with design documents, the proposed building cooling system type shall be the same as modeled in the baseline building design and shall comply with the requirements of Section 6.
   * [10-13A](section10/10-13A.md): For HVAC systems designed, mechanical heating equipment efficiencies shall be adjusted to remove the supply fan energy from the efficiency rating.
   * [10-13B](section10/10-13B.md): For proposed HVAC systems designed, mechanical preheating equipment efficiencies shall be adjusted to remove the supply fan energy from the efficiency rating.
+  * [10-14](section10/10-14.md): Baseline shall be modeled with the heating HVAC system efficiency per Tables G3.5.1-G3.5.6 (applies only to the heating efficiency of baseline furnaces and heat pumps).  Where multiple HVAC zones or residential spaces are combined into a single thermal block the heating efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the  equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces.
 
 ## Section 12 - Receptacles and Other Loads
   * [12-1](section12/Rule12-1.md): Number of spaces modeled in User RMD and Baseline RMD are the same
