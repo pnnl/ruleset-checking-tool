@@ -28,12 +28,9 @@ class Section1Rule5(RuleDefinitionBase):
                 PROPOSED=True,
             ),
             rmrs_used_optional=produce_ruleset_model_instance(
-                USER=True,
-                BASELINE_0=True,
                 BASELINE_90=True,
                 BASELINE_180=True,
                 BASELINE_270=True,
-                PROPOSED=True,
             ),
             id="1-5",
             description="When on-site renewable energy generation exceeds the thresholds defined in Section 4.2.1.1, the methodology defined in this section shall be used to calculate the PCI.",
