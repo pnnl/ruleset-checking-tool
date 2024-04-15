@@ -63,8 +63,8 @@ class Section1Rule4(RuleDefinitionBase):
                     )
                 )
 
-        pci_target_set = list(filter(lambda x: x is not None, pci_target_set))
-        pci_set = list(filter(lambda x: x is not None, pci_set))
+        pci_target_set = list(set(filter(lambda x: x is not None, pci_target_set)))
+        pci_set = list(set(filter(lambda x: x is not None, pci_set)))
 
         assert_(
             len(pci_target_set) >= 1, "At least one `pci_target_set` value must exist."
@@ -72,8 +72,8 @@ class Section1Rule4(RuleDefinitionBase):
         assert_(len(pci_set) >= 1, "At least one `pci_set` value must exist.")
 
         return {
-            "pci_target_set": list(set(pci_target_set)),
-            "pci_set": list(set(pci_set)),
+            "pci_target_set": pci_target_set,
+            "pci_set": pci_set,
         }
 
     def rule_check(self, context, calc_vals=None, data=None):
