@@ -3,7 +3,7 @@
         "Section": 19,
         "Rule": 13,
         "Test": "a",
-        "test_description": "Baseline system type 7, supply-air-to-room temperature set-point difference of 20F, required ventilation or makeup air does not exceed. Airflow rate is correctly sized from temperature difference.",
+        "test_description": "The project has one building segment with two zones. Baseline system type 7, supply-air-to-room temperature set-point difference of 20F, required ventilation or makeup air does not exceed. Airflow rate is correctly sized from temperature difference. Expected outcome: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-13",
@@ -12,12 +12,13 @@
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -141,12 +142,14 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -180,7 +183,7 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "floor_area": 1000,
+                                                        "floor_area": 92.90303999999999,
                                                         "lighting_space_type": "OFFICE_ENCLOSED"
                                                     }
                                                 ]
@@ -197,7 +200,7 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-                                                        "primary_airflow": 2500,
+                                                        "primary_airflow": 1179.8686079999995,
                                                         "supply_design_cooling_setpoint_temperature": 15.5555555555556,
                                                         "supply_design_heating_setpoint_temperature": 32.222222222222285
                                                     }
@@ -234,7 +237,7 @@
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 3000,
                                                             "design_airflow": 2359.737215999999,
-                                                            "is_airflow_autosized": true
+                                                            "is_airflow_sized_based_on_design_day": true
                                                         }
                                                     ],
                                                     "return_fans": [
@@ -243,7 +246,7 @@
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 2250,
                                                             "design_airflow": 2123.763494399999,
-                                                            "is_airflow_autosized": true
+                                                            "is_airflow_sized_based_on_design_day": true
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 471.94744319999984
@@ -299,7 +302,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -309,7 +313,7 @@
         "Section": 19,
         "Rule": 13,
         "Test": "b",
-        "test_description": "Baseline system type 11, serving lab space, supply-air-to-room temperature set-point difference of 17F, required ventilation or makeup air does not exceed. Airflow rate is correctly sized from temperature difference.",
+        "test_description": "The project has one building segment with one zone. Baseline system type 11, serving lab space, supply-air-to-room temperature set-point difference of 17F, required ventilation or makeup air does not exceed. Airflow rate is correctly sized from temperature difference. Expected outcome: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-13",
@@ -318,12 +322,13 @@
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -412,12 +417,14 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -449,7 +456,7 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "floor_area": 1000,
+                                                        "floor_area": 92.90303999999999,
                                                         "lighting_space_type": "LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM"
                                                     }
                                                 ]
@@ -476,7 +483,7 @@
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 3000,
                                                             "design_airflow": 2359.737215999999,
-                                                            "is_airflow_autosized": true
+                                                            "is_airflow_sized_based_on_design_day": true
                                                         }
                                                     ],
                                                     "return_fans": [
@@ -485,7 +492,7 @@
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 2250,
                                                             "design_airflow": 2123.763494399999,
-                                                            "is_airflow_autosized": true
+                                                            "is_airflow_sized_based_on_design_day": true
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 2359.737215999999
@@ -525,7 +532,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -535,7 +543,7 @@
         "Section": 19,
         "Rule": 13,
         "Test": "c",
-        "test_description": "Baseline system type 7, supply-air-to-room temperature set-point difference of 20F, required ventilation exceeds sizing based on temperature difference. Airflow rate incorrectly based on temperature difference instead of required ventilation.",
+        "test_description": "The project has one building segment with two zones. Baseline system type 7, supply-air-to-room temperature set-point difference of 20F, required ventilation exceeds sizing based on temperature difference. Airflow rate incorrectly based on temperature difference instead of required ventilation. Expected outcome: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-13",
@@ -544,12 +552,13 @@
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -673,12 +682,14 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -712,7 +723,7 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "floor_area": 1000,
+                                                        "floor_area": 92.90303999999999,
                                                         "lighting_space_type": "OFFICE_ENCLOSED"
                                                     }
                                                 ]
@@ -729,7 +740,7 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-                                                        "primary_airflow": 2500,
+                                                        "primary_airflow": 1179.8686079999995,
                                                         "supply_design_cooling_setpoint_temperature": 12.777777777777828,
                                                         "supply_design_heating_setpoint_temperature": 32.222222222222285
                                                     }
@@ -766,7 +777,7 @@
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 3000,
                                                             "design_airflow": 2359.737215999999,
-                                                            "is_airflow_autosized": true
+                                                            "is_airflow_sized_based_on_design_day": true
                                                         }
                                                     ],
                                                     "return_fans": [
@@ -775,7 +786,7 @@
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 2250,
                                                             "design_airflow": 2123.763494399999,
-                                                            "is_airflow_autosized": true
+                                                            "is_airflow_sized_based_on_design_day": true
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 4719.474431999998
@@ -831,7 +842,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -841,7 +853,7 @@
         "Section": 19,
         "Rule": 13,
         "Test": "d",
-        "test_description": "Baseline system type 11, serving lab space, supply-air-to-room temperature set-point difference of 20F, required ventilation or makeup air does not exceed sizing. Airflow rate is sized from the incorrect temperature difference.",
+        "test_description": "The project has one building segment with one zone. Baseline system type 11, serving lab space, supply-air-to-room temperature set-point difference of 20F, required ventilation or makeup air does not exceed sizing. Airflow rate is sized from the incorrect temperature difference. Expected outcome: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-13",
@@ -850,12 +862,13 @@
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -944,12 +957,14 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -981,7 +996,7 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "floor_area": 1000,
+                                                        "floor_area": 92.90303999999999,
                                                         "lighting_space_type": "LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM"
                                                     }
                                                 ]
@@ -1008,7 +1023,7 @@
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 3000,
                                                             "design_airflow": 2359.737215999999,
-                                                            "is_airflow_autosized": true
+                                                            "is_airflow_sized_based_on_design_day": true
                                                         }
                                                     ],
                                                     "return_fans": [
@@ -1017,7 +1032,7 @@
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 2250,
                                                             "design_airflow": 2123.763494399999,
-                                                            "is_airflow_autosized": true
+                                                            "is_airflow_sized_based_on_design_day": true
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 471.94744319999984
@@ -1057,7 +1072,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -1067,7 +1083,7 @@
         "Section": 19,
         "Rule": 13,
         "Test": "e",
-        "test_description": "Baseline system type 7, supply-air-to-room temperature set-point difference of 15F. The sum of zone terminal primary airflow from zones served by the system is identical to the corresponding sum of terminal primary flow in the proposed model.",
+        "test_description": "The project has one building segment with two zones. Baseline system type 7, supply-air-to-room temperature set-point difference of 15F. The sum of zone terminal primary airflow from zones served by the system is identical to the corresponding sum of terminal primary flow in the proposed model. Expected outcome: UNDETERMINED",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "19-13",
@@ -1076,12 +1092,13 @@
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1105,7 +1122,7 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-                                                        "primary_airflow": 471.94744319999984
+                                                        "primary_airflow": 235.97372159999992
                                                     }
                                                 ]
                                             },
@@ -1121,7 +1138,7 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-                                                        "primary_airflow": 471.94744319999984
+                                                        "primary_airflow": 235.97372159999992
                                                     }
                                                 ]
                                             }
@@ -1152,7 +1169,7 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ],
-                                                    "minimum_outdoor_airflow": 471.94744319999984
+                                                    "minimum_outdoor_airflow": 117.98686079999996
                                                 }
                                             }
                                         ]
@@ -1205,12 +1222,14 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1244,7 +1263,7 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "floor_area": 1000,
+                                                        "floor_area": 92.90303999999999,
                                                         "lighting_space_type": "OFFICE_ENCLOSED"
                                                     }
                                                 ]
@@ -1261,7 +1280,7 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-                                                        "primary_airflow": 500,
+                                                        "primary_airflow": 235.97372159999992,
                                                         "supply_design_cooling_setpoint_temperature": 11.666666666666686,
                                                         "supply_design_heating_setpoint_temperature": 30.5555555555556
                                                     }
@@ -1298,7 +1317,7 @@
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 600,
                                                             "design_airflow": 471.94744319999984,
-                                                            "is_airflow_autosized": true
+                                                            "is_airflow_sized_based_on_design_day": true
                                                         }
                                                     ],
                                                     "return_fans": [
@@ -1307,10 +1326,10 @@
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 450,
                                                             "design_airflow": 424.75269887999985,
-                                                            "is_airflow_autosized": true
+                                                            "is_airflow_sized_based_on_design_day": true
                                                         }
                                                     ],
-                                                    "minimum_outdoor_airflow": 212.37634943999993
+                                                    "minimum_outdoor_airflow": 117.98686079999996
                                                 }
                                             }
                                         ]
@@ -1363,7 +1382,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

@@ -1,7 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_system_type_compare import (
     baseline_system_type_compare,
 )
@@ -12,7 +12,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types i
     get_baseline_system_types,
 )
 from rct229.schema.config import ureg
-from rct229.utils.assertions import getattr_
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO, CalcQ
 from rct229.utils.std_comparisons import std_equal
@@ -25,8 +25,8 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_8,
 ]
 
-HEATING_SYSTEM = schema_enums["HeatingSystemOptions"]
-FLUID_LOOP = schema_enums["FluidLoopOptions"]
+HEATING_SYSTEM = SchemaEnums.schema_enums["HeatingSystemOptions"]
+FLUID_LOOP = SchemaEnums.schema_enums["FluidLoopOptions"]
 REQUIRED_SET_POINT_REDUCTION = 20.0 * ureg("delta_degF")
 
 
@@ -35,9 +35,11 @@ class Section23Rule16(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section23Rule16, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=False
+            ),
             each_rule=Section23Rule16.HVACRule(),
-            index_rmr="baseline",
+            index_rmr=BASELINE_0,
             id="23-16",
             description="Systems 5 - 8, the baseline system shall be modeled with preheat coils controlled to a fixed set point 20F less than the design room heating temperature setpoint.",
             ruleset_section_title="HVAC - Airside",
@@ -48,33 +50,32 @@ class Section23Rule16(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
 
         return any(
             [
-                baseline_system_type_compare(system_type, applicable_sys_type, False)
+                baseline_system_types_dict[system_type]
+                and baseline_system_type_compare(
+                    system_type, applicable_sys_type, False
+                )
                 for system_type in baseline_system_types_dict
                 for applicable_sys_type in APPLICABLE_SYS_TYPES
             ]
         )
 
     def create_data(self, context, data):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
 
         # set hvac_id with highest zone_design_heating_setpoint
         hvac_max_zone_setpoint_dict = {}
         for zone in find_all("$.buildings[*].building_segments[*].zones[*]", rmi_b):
-            zone_design_heating_setpoint = getattr_(
-                zone, "zone", "design_thermostat_heating_setpoint"
+            # handle indirectly conditioned zones, which do not have terminals.
+            zone_design_heating_setpoint = zone.get(
+                "design_thermostat_heating_setpoint", ZERO.TEMPERATURE
             )
-            for terminal in find_all("$.terminals[*]", zone):
-                hvac_id = getattr_(
-                    terminal,
-                    "terminal",
-                    "served_by_heating_ventilating_air_conditioning_system",
-                )
-                hvac_max_zone_setpoint_dict = {
+            hvac_max_zone_setpoint_dict.update(
+                {
                     hvac_id: max(
                         zone_design_heating_setpoint,
                         hvac_max_zone_setpoint_dict.get(hvac_id, ZERO.TEMPERATURE),
@@ -84,6 +85,7 @@ class Section23Rule16(RuleDefinitionListIndexedBase):
                         zone,
                     )
                 }
+            )
 
         # find preheat_system's hot water loop type
         hot_water_loop_type_dict = {
@@ -113,7 +115,7 @@ class Section23Rule16(RuleDefinitionListIndexedBase):
         }
 
     def list_filter(self, context_item, data):
-        hvac_sys_b = context_item.baseline
+        hvac_sys_b = context_item.BASELINE_0
         applicable_hvac_sys_ids = data["applicable_hvac_sys_ids"]
 
         return hvac_sys_b["id"] in applicable_hvac_sys_ids
@@ -121,7 +123,9 @@ class Section23Rule16(RuleDefinitionListIndexedBase):
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
             super(Section23Rule16.HVACRule, self,).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, False),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=False
+                ),
                 required_fields={
                     "$": ["id", "preheat_system"],
                     "preheat_system": [
@@ -133,7 +137,7 @@ class Section23Rule16(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            heating_ventilating_air_conditioning_systems_b = context.baseline
+            heating_ventilating_air_conditioning_systems_b = context.BASELINE_0
 
             hvac_id = heating_ventilating_air_conditioning_systems_b["id"]
             preheat_system_b = heating_ventilating_air_conditioning_systems_b[

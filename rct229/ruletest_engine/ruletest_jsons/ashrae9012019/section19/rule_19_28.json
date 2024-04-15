@@ -3,7 +3,7 @@
         "Section": 19,
         "Rule": 28,
         "Test": "a",
-        "test_description": "Project does not have spaces with health and safety mandated minimum ventilation requirements. HVAC fans correctly cycle on and off to maintain temperature setpoint during unoccupied hours.",
+        "test_description": "The project has one building segment with one zone. Project does not have spaces with health and safety mandated minimum ventilation requirements. HVAC fans correctly cycle on and off to maintain temperature setpoint during unoccupied hours. Expected outcome: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-28",
@@ -12,12 +12,13 @@
             "applicable_rmr": "Proposed RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -44,7 +45,7 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "floor_area": 1000,
+                                                        "floor_area": 92.90303999999999,
                                                         "lighting_space_type": "AUDIENCE_SEATING_AREA_GYMNASIUM"
                                                     }
                                                 ]
@@ -77,7 +78,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             }
@@ -87,7 +89,7 @@
         "Section": 19,
         "Rule": 28,
         "Test": "b",
-        "test_description": "Project does not have spaces with health and safety mandated minimum ventilation requirements. HVAC fans incorrectly stay off during unoccupied hours.",
+        "test_description": "The project has one building segment with two zones. Project does not have spaces with health and safety mandated minimum ventilation requirements. HVAC fans incorrectly stay off during unoccupied hours. Expected outcome: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-28",
@@ -96,12 +98,13 @@
             "applicable_rmr": "Proposed RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -130,7 +133,7 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "floor_area": 1000,
+                                                        "floor_area": 92.90303999999999,
                                                         "lighting_space_type": "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_ALL_OTHER"
                                                     }
                                                 ]
@@ -231,7 +234,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             }

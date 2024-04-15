@@ -3,21 +3,22 @@
         "Section": 21,
         "Rule": 3,
         "Test": "a",
-        "test_description": "The project consists of one building segment with one zone.  Space conditioning is provided by system type 7 with boiler.  The baseline building's hot water system's sizing is based on coincident loads.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  Space conditioning is provided by system type 7 with boiler.  The baseline building's hot water system's sizing is based on coincident loads.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-3",
             "ruleset_reference": "G3.1.2.2",
             "rule_description": "When the baseline building is modeled with a hot water or chilled water plant the plant shall be sized based on coincident loads.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -142,7 +143,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -152,21 +154,22 @@
         "Section": 21,
         "Rule": 3,
         "Test": "b",
-        "test_description": "The project consists of one building segment with one zone.  Space conditioning is provided by system type 7 with boiler.  The baseline building's hot water system's sizing is NOT based on coincident loads.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  Space conditioning is provided by system type 7 with boiler.  The baseline building's hot water system's sizing is NOT based on coincident loads.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-3",
             "ruleset_reference": "G3.1.2.2",
             "rule_description": "When the baseline building is modeled with a hot water or chilled water plant the plant shall be sized based on coincident loads.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -291,7 +294,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -301,21 +305,22 @@
         "Section": 21,
         "Rule": 3,
         "Test": "c",
-        "test_description": "The project consists of one building segment with one zone.  Space conditioning is provided by system type 5 with boiler.  The baseline building's hot water system's sizing is based on coincident loads.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  Space conditioning is provided by system type 5 with boiler.  The baseline building's hot water system's sizing is based on coincident loads.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-3",
             "ruleset_reference": "G3.1.2.2",
             "rule_description": "When the baseline building is modeled with a hot water or chilled water plant the plant shall be sized based on coincident loads.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -413,7 +418,8 @@
                                     "is_sized_using_coincident_load": true
                                 }
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -423,21 +429,22 @@
         "Section": 21,
         "Rule": 3,
         "Test": "d",
-        "test_description": "The project consists of one building segment with one zone.  Space conditioning is provided by system type 5 with boiler.  The baseline building's hot water system's sizing is NOT based on coincident loads.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  Space conditioning is provided by system type 5 with boiler.  The baseline building's hot water system's sizing is NOT based on coincident loads.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-3",
             "ruleset_reference": "G3.1.2.2",
             "rule_description": "When the baseline building is modeled with a hot water or chilled water plant the plant shall be sized based on coincident loads.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -535,7 +542,8 @@
                                     "is_sized_using_coincident_load": false
                                 }
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -545,21 +553,22 @@
         "Section": 21,
         "Rule": 3,
         "Test": "e",
-        "test_description": "The project consists of one building segment with one zone.  Space conditioning is provided by system type 2.  Expected result: UNDETERMINED",
+        "test_description": "The project has one building segment with one zone.  Space conditioning is provided by system type 2.  Expected result: UNDETERMINED",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-3",
             "ruleset_reference": "G3.1.2.2",
             "rule_description": "When the baseline building is modeled with a hot water or chilled water plant the plant shall be sized based on coincident loads.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -610,7 +619,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

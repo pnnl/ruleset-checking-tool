@@ -1,12 +1,19 @@
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from typing import TypedDict
+
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all, find_one
 from rct229.utils.utility_functions import find_exactly_one_fluid_loop
 
-EXTERNAL_FLUID_SOURCE = schema_enums["ExternalFluidSourceOptions"]
+EXTERNAL_FLUID_SOURCE = SchemaEnums.schema_enums["ExternalFluidSourceOptions"]
 
 
-def check_purchased_chw_hhw_status_dict(rmi_b):
+class PurchasedSystemStatus(TypedDict):
+    purchased_cooling: bool
+    purchased_heating: bool
+
+
+def check_purchased_chw_hhw_status_dict(rmi_b: dict) -> PurchasedSystemStatus:
     """
     Check if RMI is modeled with purchased chilled water as space cooling source or purchased hot water/steam as space heating source.
     If any system in RMI uses purchased chilled water, function shall return True for purchased chilled water as space cooling source.
@@ -23,7 +30,7 @@ def check_purchased_chw_hhw_status_dict(rmi_b):
     i.e. {"purchased_cooling": True, "purchased_heating": False}.
 
     """
-    purchased_chw_hhw_status_dict = {
+    purchased_chw_hhw_status_dict: PurchasedSystemStatus = {
         "purchased_cooling": False,
         "purchased_heating": False,
     }

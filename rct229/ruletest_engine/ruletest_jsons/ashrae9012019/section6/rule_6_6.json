@@ -7,18 +7,19 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "6-6",
-            "ruleset_reference": "(Previously 6-11, then 6-8) Table G3.1(6) Baseline Building Performance",
+            "ruleset_reference": "Table G3.1(6) Baseline Building Performance",
             "rule_description": "Baseline building shall not be modeled with daylighting control",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Design",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "None",
-            "mandatory_rule": "Yes",
-            "schema_version": "0.0.29"
+            "rule_dependency": "-",
+            "mandatory_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -53,7 +54,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -67,18 +69,19 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "6-6",
-            "ruleset_reference": "(Previously 6-11, then 6-8) Table G3.1(6) Baseline Building Performance",
+            "ruleset_reference": "Table G3.1(6) Baseline Building Performance",
             "rule_description": "Baseline building shall not be modeled with daylighting control",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Design",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "None",
-            "mandatory_rule": "Yes",
-            "schema_version": "0.0.29"
+            "rule_dependency": "-",
+            "mandatory_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -113,7 +116,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

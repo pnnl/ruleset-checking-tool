@@ -1,16 +1,17 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import PROPOSED
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_proposed_hvac_modeled_with_virtual_cooling import (
     get_proposed_hvac_modeled_with_virtual_cooling,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_proposed_hvac_modeled_with_virtual_heating import (
     get_proposed_hvac_modeled_with_virtual_heating,
 )
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.pint_utils import ZERO
 
-FAN_SYSTEM_OPERATION = schema_enums["FanSystemOperationOptions"]
+FAN_SYSTEM_OPERATION = SchemaEnums.schema_enums["FanSystemOperationOptions"]
 
 
 class Section19Rule24(RuleDefinitionListIndexedBase):
@@ -18,9 +19,11 @@ class Section19Rule24(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section19Rule24, self).__init__(
-            rmrs_used=UserBaselineProposedVals(True, False, True),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=True, BASELINE_0=False, PROPOSED=True
+            ),
             each_rule=Section19Rule24.HVACRule(),
-            index_rmr="proposed",
+            index_rmr=PROPOSED,
             id="19-24",
             description="Schedules for HVAC fans that provide outdoor air for ventilation shall run continuously whenever spaces are occupied in the proposed design.",
             ruleset_section_title="HVAC - General",
@@ -31,8 +34,8 @@ class Section19Rule24(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        user_p = context.user
-        rmi_p = context.proposed
+        user_p = context.USER
+        rmi_p = context.PROPOSED
 
         inapplicable_hvac_sys_list_p = list(
             set(
@@ -46,7 +49,9 @@ class Section19Rule24(RuleDefinitionListIndexedBase):
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
             super(Section19Rule24.HVACRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(True, False, True),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=True, BASELINE_0=False, PROPOSED=True
+                ),
                 required_fields={
                     "$": ["fan_system"],
                     "fan_system": [
@@ -56,14 +61,14 @@ class Section19Rule24(RuleDefinitionListIndexedBase):
             )
 
         def is_applicable(self, context, data=None):
-            hvac_p = context.proposed
+            hvac_p = context.PROPOSED
             hvac_id_p = hvac_p["id"]
             inapplicable_hvac_sys_list_p = data["inapplicable_hvac_sys_list_p"]
 
             return hvac_id_p not in inapplicable_hvac_sys_list_p
 
         def get_calc_vals(self, context, data=None):
-            hvac_p = context.proposed
+            hvac_p = context.PROPOSED
 
             operation_during_occupied_p = hvac_p["fan_system"][
                 "operation_during_occupied"

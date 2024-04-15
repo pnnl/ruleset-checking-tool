@@ -3,7 +3,7 @@
         "Section": 19,
         "Rule": 15,
         "Test": "a",
-        "test_description": "Baseline system type 10, minimum ventilation does not exceed auto-sized airflow rates. Supply airflow rates are correctly based on the temperature difference between 105F and the design space-heating temperature set point.",
+        "test_description": "The project has one building segment with one zone. Baseline system type 10, minimum ventilation does not exceed auto-sized airflow rates. Supply airflow rates are correctly based on the temperature difference between 105F and the design space-heating temperature set point. Expected outcome: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-15",
@@ -12,12 +12,13 @@
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -79,12 +80,14 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -142,7 +145,7 @@
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 75,
                                                             "design_airflow": 117.98686079999996,
-                                                            "is_airflow_autosized": true
+                                                            "is_airflow_sized_based_on_design_day": true
                                                         }
                                                     ],
                                                     "return_fans": [
@@ -159,7 +162,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -169,7 +173,7 @@
         "Section": 19,
         "Rule": 15,
         "Test": "b",
-        "test_description": "Baseline system type 10, minimum ventilation does not exceed auto-sized airflow rates. Supply airflow rates are incorrectly based on a supply-air-to-room temperature set-point difference of 20F.",
+        "test_description": "The project has one building segment with one zone. Baseline system type 10, minimum ventilation does not exceed auto-sized airflow rates. Supply airflow rates are incorrectly based on a supply-air-to-room temperature set-point difference of 20F. Expected outcome: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-15",
@@ -178,12 +182,13 @@
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -245,12 +250,14 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -308,7 +315,7 @@
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 75,
                                                             "design_airflow": 117.98686079999996,
-                                                            "is_airflow_autosized": true
+                                                            "is_airflow_sized_based_on_design_day": true
                                                         }
                                                     ],
                                                     "return_fans": [
@@ -325,7 +332,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -335,7 +343,7 @@
         "Section": 19,
         "Rule": 15,
         "Test": "c",
-        "test_description": "Baseline system type 9, minimum ventilation exceeds the auto-sized airflow rates. Supply airflow rates are correctly based on the minimum ventilation airflow rates.",
+        "test_description": "The project has one building segment with one zone. Baseline system type 9, minimum ventilation exceeds the auto-sized airflow rates. Supply airflow rates are correctly based on the minimum ventilation airflow rates. Expected outcome: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-15",
@@ -344,12 +352,13 @@
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -407,12 +416,14 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -464,7 +475,7 @@
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 90,
                                                             "design_airflow": 141.58423295999995,
-                                                            "is_airflow_autosized": true
+                                                            "is_airflow_sized_based_on_design_day": true
                                                         }
                                                     ],
                                                     "return_fans": [
@@ -481,7 +492,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -491,7 +503,7 @@
         "Section": 19,
         "Rule": 15,
         "Test": "d",
-        "test_description": "Baseline system type 9, minimum ventilation exceeds the auto-sized airflow rates. Supply airflow rates are incorrectly based on the temperature difference between 105F and the design space-heating temperature set point.",
+        "test_description": "The project has one building segment with one zone. Baseline system type 9, minimum ventilation exceeds the auto-sized airflow rates. Supply airflow rates are incorrectly based on the temperature difference between 105F and the design space-heating temperature set point. Expected outcome: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-15",
@@ -500,12 +512,13 @@
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -563,12 +576,14 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -620,7 +635,7 @@
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 75,
                                                             "design_airflow": 117.98686079999996,
-                                                            "is_airflow_autosized": true
+                                                            "is_airflow_sized_based_on_design_day": true
                                                         }
                                                     ],
                                                     "return_fans": [
@@ -637,7 +652,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -647,7 +663,7 @@
         "Section": 19,
         "Rule": 15,
         "Test": "e",
-        "test_description": "Baseline system type 9 with more than one supply fan.",
+        "test_description": "The project has one building segment with one zone. Baseline system type 9 with more than one supply fan. Expected outcome: UNDETERMINED",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "19-15",
@@ -656,12 +672,13 @@
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -719,12 +736,14 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -776,7 +795,7 @@
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 75,
                                                             "design_airflow": 117.98686079999996,
-                                                            "is_airflow_autosized": true
+                                                            "is_airflow_sized_based_on_design_day": true
                                                         },
                                                         {
                                                             "id": "Supply Fan 2",
@@ -799,7 +818,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

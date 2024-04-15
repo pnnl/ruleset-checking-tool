@@ -3,21 +3,22 @@
         "Section": 21,
         "Rule": 16,
         "Test": "a",
-        "test_description": "The project consists of one building segment with two zones. Baseline RMR has system 7 correctly modeled with a single heating loop.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 7 correctly modeled with a single heating loop.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-16",
             "ruleset_reference": "G3.1.3.2",
             "rule_description": "Baseline shall have only one heating hot water plant.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -138,7 +139,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -148,21 +150,22 @@
         "Section": 21,
         "Rule": 16,
         "Test": "b",
-        "test_description": "The project consists of one building segment with two zones. Baseline RMR has system 7 incorrectly modeled with more than one heating loop.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 7 incorrectly modeled with more than one heating loop.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-16",
             "ruleset_reference": "G3.1.3.2",
             "rule_description": "Baseline shall have only one heating hot water plant.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -287,7 +290,8 @@
                                 "id": "Boiler Loop 2",
                                 "type": "HEATING"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -297,21 +301,22 @@
         "Section": 21,
         "Rule": 16,
         "Test": "c",
-        "test_description": "The project consists of one building segment with two zones. Baseline RMR has system 5b correctly modeled with a single heating loop.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 5b correctly modeled with a single heating loop.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-16",
             "ruleset_reference": "G3.1.3.2",
             "rule_description": "Baseline shall have only one heating hot water plant.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -405,7 +410,8 @@
                                 "id": "Purchased HW Loop 1",
                                 "type": "HEATING"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -415,21 +421,22 @@
         "Section": 21,
         "Rule": 16,
         "Test": "d",
-        "test_description": "The project consists of one building segment with two zones. Baseline RMR has system 5b incorrectly modeled with more than one heating loop.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 5b incorrectly modeled with more than one heating loop.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-16",
             "ruleset_reference": "G3.1.3.2",
             "rule_description": "Baseline shall have only one heating hot water plant.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -527,7 +534,8 @@
                                 "id": "Boiler Loop 2",
                                 "type": "HEATING"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -537,21 +545,22 @@
         "Section": 21,
         "Rule": 16,
         "Test": "e",
-        "test_description": "The project consists of one building segment with two zones. Baseline RMR has system 11.1.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone. Baseline ruleset project description has system 11.1.  Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-16",
             "ruleset_reference": "G3.1.3.2",
             "rule_description": "Baseline shall have only one heating hot water plant.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -638,7 +647,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

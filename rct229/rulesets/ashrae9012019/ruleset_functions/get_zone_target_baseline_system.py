@@ -1,4 +1,8 @@
+from typing import TypedDict
+
 from pydash import juxtapose
+
+from rct229.rule_engine.memoize import memoize
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
@@ -55,6 +59,11 @@ COMPUTER_ROOM_PEAK_COOLING_LOAD_600000_BTUH = 600000 * ureg("Btu/hr")
 COMPUTER_ROOM_PEAK_COOLING_LOAD_3000000_BTUH = 3000000 * ureg("Btu/hr")
 
 
+class ZoneandSystem(TypedDict):
+    expected_system_type: str
+    system_origin: str
+
+
 class SYSTEMORIGIN:
     G311B = "G3_1_1b"
     G311C = "G3_1_1c"
@@ -63,9 +72,10 @@ class SYSTEMORIGIN:
     G311F = "G3_1_1f"
 
 
+@memoize
 def get_zone_target_baseline_system(
     rmd_b: dict, rmd_p: dict, climate_zone_b: str, is_leap_year: bool
-):
+) -> dict[str, ZoneandSystem]:
     """
     Following G3.1.1, determines the baseline system type for each zone in a building
 
@@ -189,10 +199,12 @@ def get_zone_target_baseline_system(
             HVAC_SYS.SYS_9,
             HVAC_SYS.SYS_10,
         ):
+            zone_hvac_bat_dict_b = get_zone_hvac_bat_dict(rmd_b, zone_id_b)
+
             zones_and_systems_b[zone_id_b] = {
                 "system_origin": SYSTEMORIGIN.G311F,
                 "expected_system_type": expected_system_type_from_table_g3_1_1_dict(
-                    get_zone_hvac_bat_dict(rmd_b, zone_id_b),
+                    max(zone_hvac_bat_dict_b, key=zone_hvac_bat_dict_b.get),
                     climate_zone_b,
                     num_floors_b,
                     floor_area_b,
@@ -210,30 +222,23 @@ def get_zone_target_baseline_system(
             if (
                 total_computer_zones_peak_cooling_load_b
                 > COMPUTER_ROOM_PEAK_COOLING_LOAD_3000000_BTUH
+            ) or (
+                zones_and_systems_b[zone_id_b]["expected_system_type"]
+                in (
+                    HVAC_SYS.SYS_7,
+                    HVAC_SYS.SYS_8,
+                )
             ):
                 zones_and_systems_b[zone_id_b] = {
                     "expected_system_type": HVAC_SYS.SYS_11_1,
                     "system_origin": "G3_1_1g_part2",
                 }
-
-            elif zones_and_systems_b[zone_id_b]["expected_system_type"] in (
-                HVAC_SYS.SYS_7,
-                HVAC_SYS.SYS_8,
-            ):
-                if (
-                    total_computer_zones_peak_cooling_load_b
-                    > COMPUTER_ROOM_PEAK_COOLING_LOAD_600000_BTUH
-                ):
-                    zones_and_systems_b[zone_id_b] = {
-                        "expected_system_type": HVAC_SYS.SYS_11_1,
-                        "system_origin": "G3_1_1g_part1",
-                    }
-                else:
-                    zones_and_systems_b[zone_id_b] = {
-                        "expected_system_type": HVAC_SYS.SYS_4
-                        if is_cz_0_to_3a_result_bool
-                        else HVAC_SYS.SYS_3,
-                        "system_origin": "G3_1_1g_part3",
-                    }
+            else:
+                zones_and_systems_b[zone_id_b] = {
+                    "expected_system_type": HVAC_SYS.SYS_4
+                    if is_cz_0_to_3a_result_bool
+                    else HVAC_SYS.SYS_3,
+                    "system_origin": "G3_1_1g_part3",
+                }
 
     return zones_and_systems_b

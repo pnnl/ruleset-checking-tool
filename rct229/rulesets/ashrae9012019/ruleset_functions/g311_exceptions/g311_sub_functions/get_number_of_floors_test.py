@@ -13,6 +13,7 @@ TEST_RMI_HAS_NOF = {
             "number_of_floors_below_grade": 1,
         },
     ],
+    "type": "BASELINE_0",
 }
 
 TEST_RMI_FLOOR_NAMES = {
@@ -118,12 +119,18 @@ TEST_RMI_FLOOR_NAMES = {
                     ],
                 }
             ],
+            "type": "BASELINE_0",
         }
     ],
+    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 
-TEST_RPD_HAS_NOF = {"id": "229", "ruleset_model_descriptions": [TEST_RMI_HAS_NOF]}
+TEST_RPD_HAS_NOF = {
+    "id": "229",
+    "ruleset_model_descriptions": [TEST_RMI_HAS_NOF],
+    "data_timestamp": "2024-02-12T09:00Z",
+}
 
 TEST_RMD_HAS_NOF_UNIT = quantify_rmr(TEST_RPD_HAS_NOF)["ruleset_model_descriptions"][0]
 TEST_RMD_FLOOR_NAMES_UNIT = quantify_rmr(TEST_RMI_FLOOR_NAMES)[

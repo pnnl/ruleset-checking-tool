@@ -1,17 +1,22 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import PROPOSED
 from rct229.rulesets.ashrae9012019.data_fns.table_9_6_1_fns import table_9_6_1_lookup
 from rct229.schema.config import ureg
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO, CalcQ
 
-GUEST_ROOM = schema_enums["LightingSpaceOptions2019ASHRAE901TG37"].GUEST_ROOM
-DORMITORY_LIVING_QUARTERS = schema_enums[
+GUEST_ROOM = SchemaEnums.schema_enums[
+    "LightingSpaceOptions2019ASHRAE901TG37"
+].GUEST_ROOM
+DORMITORY_LIVING_QUARTERS = SchemaEnums.schema_enums[
     "LightingSpaceOptions2019ASHRAE901TG37"
 ].DORMITORY_LIVING_QUARTERS
-DWELLING_UNIT = schema_enums["LightingSpaceOptions2019ASHRAE901TG37"].DWELLING_UNIT
+DWELLING_UNIT = SchemaEnums.schema_enums[
+    "LightingSpaceOptions2019ASHRAE901TG37"
+].DWELLING_UNIT
 
 DWELLING_UNIT_MIN_LIGHTING_POWER_PER_AREA = 0.6 * ureg("W/ft2")
 
@@ -21,9 +26,11 @@ class Section6Rule2(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section6Rule2, self).__init__(
-            rmrs_used=UserBaselineProposedVals(True, False, True),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=True, BASELINE_0=False, PROPOSED=True
+            ),
             each_rule=Section6Rule2.SpaceRule(),
-            index_rmr="proposed",
+            index_rmr=PROPOSED,
             id="6-2",
             description="Spaces in proposed building with hardwired lighting, including Hotel/Motel Guest Rooms, Dormitory Living Quarters, Interior Lighting Power >= Table 9.6.1; For Dwelling Units, Interior Lighting Power >= 0.6W/sq.ft.",
             ruleset_section_title="Lighting",
@@ -33,7 +40,7 @@ class Section6Rule2(RuleDefinitionListIndexedBase):
         )
 
     def list_filter(self, context_item, data=None):
-        space_p = context_item.proposed
+        space_p = context_item.PROPOSED
         # skip spaces has no lighting_space_type
         lighting_space_type_p = space_p.get("lighting_space_type")
 
@@ -47,7 +54,9 @@ class Section6Rule2(RuleDefinitionListIndexedBase):
     class SpaceRule(RuleDefinitionBase):
         def __init__(self):
             super(Section6Rule2.SpaceRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(True, False, True),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=True, BASELINE_0=False, PROPOSED=True
+                ),
                 required_fields={
                     "$": ["interior_lighting"],
                     "interior_lighting[*]": ["power_per_area"],
@@ -56,12 +65,12 @@ class Section6Rule2(RuleDefinitionListIndexedBase):
 
         def is_applicable(self, context, data=None):
             # Set space not applicable if no lighting space type
-            space_p = context.proposed
+            space_p = context.PROPOSED
             return space_p.get("lighting_space_type") is not None
 
         def get_calc_vals(self, context, data=None):
-            space_p = context.proposed
-            space_u = context.user
+            space_p = context.PROPOSED
+            space_u = context.USER
 
             # get allowance
             if space_p["lighting_space_type"] in [

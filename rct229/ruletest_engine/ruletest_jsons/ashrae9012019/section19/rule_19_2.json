@@ -3,7 +3,7 @@
         "Section": 19,
         "Rule": 2,
         "Test": "a",
-        "test_description": "System 7a with is_sized_using_coincident_load set to true.",
+        "test_description": "The project has one building segment with two zones. System 7a with is_sized_using_coincident_load set to true. Expected outcome: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-2",
@@ -12,12 +12,13 @@
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -136,7 +137,8 @@
                                     "is_sized_using_coincident_load": true
                                 }
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -146,7 +148,7 @@
         "Section": 19,
         "Rule": 2,
         "Test": "b",
-        "test_description": "System 7a with is_sized_using_coincident_load set to false.",
+        "test_description": "The project has one building segment with two zones. System 7a with is_sized_using_coincident_load set to false. Expected outcome: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-2",
@@ -155,12 +157,13 @@
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -279,7 +282,8 @@
                                     "is_sized_using_coincident_load": false
                                 }
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

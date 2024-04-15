@@ -1,5 +1,7 @@
-from pydash import drop, map_
+from typing import Literal, Type
+
 import numpy as np
+from pydash import map_
 
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_system_type_compare import (
     baseline_system_type_compare,
@@ -35,7 +37,12 @@ LOAD_THRESHOLD = 10 * ureg("Btu/hr/ft2")
 EFLH_THRESHOLD = 40
 
 
-def does_zone_meet_g3_1_1c(rmi, zone_id, is_leap_year, zones_and_systems):
+def does_zone_meet_g3_1_1c(
+    rmi: dict,
+    zone_id: str,
+    is_leap_year: bool,
+    zones_and_systems: dict[str, dict[Literal["expected_system_type"], Type[HVAC_SYS]]],
+) -> bool:
     """
     Determines whether a given zone meets the G3_1_1c exception "If the baseline HVAC system type is 5, 6, 7,
     8 use separate single-zone systems conforming with the requirements of system 3 or system 4 (depending on
@@ -62,7 +69,7 @@ def does_zone_meet_g3_1_1c(rmi, zone_id, is_leap_year, zones_and_systems):
     boolean, true or false
     """
 
-    def get_zone_weekly_eflh(z_id):
+    def get_zone_weekly_eflh(z_id: str) -> float:
         # function to get weekly zone eflh
         zone_eflh = get_zone_eflh(rmi, z_id, is_leap_year)
         return (
@@ -86,7 +93,9 @@ def does_zone_meet_g3_1_1c(rmi, zone_id, is_leap_year, zones_and_systems):
     if system_matched:
         zones_on_same_floor_ids = get_zones_on_same_floor_list(rmi, zone_id)
         # drop zone_id in the list
-        zones_on_same_floor_ids.remove(zone_id)
+        if zone_id in zones_on_same_floor_ids:
+            # in case when floor name is not provided in the RPD.
+            zones_on_same_floor_ids.remove(zone_id)
         # keep only matched system type
         zones_same_floor_same_system_type = list(
             filter(
@@ -96,16 +105,28 @@ def does_zone_meet_g3_1_1c(rmi, zone_id, is_leap_year, zones_and_systems):
                 zones_on_same_floor_ids,
             )
         )
+
+        # calculate the zone internal loads and eflh
+        zone_internal_loads = get_zone_peak_internal_load_floor_area_dict(rmi, zone_id)
+        zone_eflh = get_zone_weekly_eflh(zone_id)
+
         # In here, the function assumes the zones_and_systems keys are
         # a list of conditioned or semi-conditioned zones only
-        zone_load_and_eflh_list = [
-            (
-                # tuple, 0 is peak load dict, 1 is weekly eflh
-                get_zone_peak_internal_load_floor_area_dict(rmi, other_match_zone_id),
-                get_zone_weekly_eflh(other_match_zone_id),
-            )
-            for other_match_zone_id in zones_same_floor_same_system_type
-        ]
+        if zones_same_floor_same_system_type:
+            zone_load_and_eflh_list = [
+                (
+                    # tuple, 0 is peak load dict, 1 is weekly eflh
+                    get_zone_peak_internal_load_floor_area_dict(
+                        rmi, other_match_zone_id
+                    ),
+                    get_zone_weekly_eflh(other_match_zone_id),
+                )
+                for other_match_zone_id in zones_same_floor_same_system_type
+            ]
+        else:
+            # if this is only zone on the same floor has the same system type
+            # calculate it using the zone itself.
+            zone_load_and_eflh_list = [(zone_internal_loads, zone_eflh)]
 
         system_total_area = sum(map_(zone_load_and_eflh_list, "0.area"), ZERO.AREA)
         system_total_load = sum(map_(zone_load_and_eflh_list, "0.peak"), ZERO.POWER)
@@ -127,9 +148,6 @@ def does_zone_meet_g3_1_1c(rmi, zone_id, is_leap_year, zones_and_systems):
             if system_total_area != ZERO.AREA
             else ZERO.POWER_PER_AREA
         )
-
-        zone_internal_loads = get_zone_peak_internal_load_floor_area_dict(rmi, zone_id)
-        zone_eflh = get_zone_weekly_eflh(zone_id)
 
         meet_g3_1_1c_flag = (
             abs(

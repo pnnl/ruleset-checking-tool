@@ -20,7 +20,7 @@ from rct229.utils.utility_functions import (
 ZONE_OCCUPANTS_RATIO_THRESHOLD = 0.05
 
 
-def get_zone_eflh(rmi: dict, zone_id: str, is_leap_year: bool):
+def get_zone_eflh(rmi: dict, zone_id: str, is_leap_year: bool) -> int:
     """
     provides the equivalent full load hours of the zone. Equivalent full load hours are defined as: any hour where
     the occupancy fraction is greater than 5% AND the HVAC system is in occupied mode. For this function,
@@ -63,16 +63,16 @@ def get_zone_eflh(rmi: dict, zone_id: str, is_leap_year: bool):
     # 3. Calculating values
     # list of list of HVAC annual operation schedule
     # [[0,0,0,1,1,1,...], [0,0,0,1,1,1,...]...]
-    hvac_operation_schedule_list = map_(
-        hvac_systems_list, lambda hvac_id: get_fan_operation_schedule_func(hvac_id)
+    hvac_operation_schedule_list = list(
+        map(lambda hvac_id: get_fan_operation_schedule_func(hvac_id), hvac_systems_list)
     )
 
     # make sure all operation schedule has the same hours and they are equal to num_hours
     assert_(
         all(
-            map_(
-                hvac_operation_schedule_list,
+            map(
                 lambda schedule: len(schedule) == num_hours,
+                hvac_operation_schedule_list,
             )
         ),
         f"Not all HVAC operation schedules have ${num_hours} hours",
@@ -80,47 +80,46 @@ def get_zone_eflh(rmi: dict, zone_id: str, is_leap_year: bool):
 
     # list of integers that contains the maximum number of occupants per space.
     # [10,12,22...]
-    num_of_occupant_per_space_list = map_(
-        find_all("$.spaces[*]", thermal_zone),
-        lambda space: max(
-            get_max_schedule_multiplier_hourly_value_or_default(
-                rmi, find_one("$.occupant_multiplier_schedule", space), 1.0
-            ),
-            get_max_schedule_multiplier_heating_design_hourly_value_or_default(
-                rmi, find_one("$.occupant_multiplier_schedule", space), 1.0
-            ),
-            get_max_schedule_multiplier_cooling_design_hourly_value_or_default(
-                rmi, find_one("$.occupant_multiplier_schedule", space), 1.0
-            ),
-            1.0,
+    num_of_occupant_per_space_list = list(
+        map(
+            lambda space: max(
+                get_max_schedule_multiplier_hourly_value_or_default(
+                    rmi, find_one("$.occupant_multiplier_schedule", space), 1.0
+                ),
+                get_max_schedule_multiplier_heating_design_hourly_value_or_default(
+                    rmi, find_one("$.occupant_multiplier_schedule", space), 1.0
+                ),
+                get_max_schedule_multiplier_cooling_design_hourly_value_or_default(
+                    rmi, find_one("$.occupant_multiplier_schedule", space), 1.0
+                ),
+                1.0,
+            )
+            * find_one("$.number_of_occupants", space, 0.0),
+            find_all("$.spaces[*]", thermal_zone),
         )
-        * find_one("$.number_of_occupants", space, 0.0),
     )
 
     # sum of the maximum number of occupants
     total_zone_occupants = sum(num_of_occupant_per_space_list)
 
-    assert_(
-        total_zone_occupants > 0,
-        f"The calculated total zone occupants is 0.0 in thermal zone {zone_id}, Check the model inputs",
-    )
-
     # list of list of annual hourly_values per space.
     # this shall guarantee the num_hours length per hourly_values list.
     # [[0,0,0.2,0.2...], [0,0,0.2,0.2...]...]
-    occupant_annual_hourly_value_per_space_list = map_(
-        find_all("$.spaces[*]", thermal_zone),
-        lambda space: get_schedule_multiplier_hourly_value_or_default(
-            rmi, space.get("occupant_multiplier_schedule"), [1.0] * num_hours
-        ),
+    occupant_annual_hourly_value_per_space_list = list(
+        map(
+            lambda space: get_schedule_multiplier_hourly_value_or_default(
+                rmi, space.get("occupant_multiplier_schedule"), [1.0] * num_hours
+            ),
+            find_all("$.spaces[*]", thermal_zone),
+        )
     )
 
     # make sure all operation schedule has the same hours and they are equal to num_hours
     assert_(
         all(
-            map_(
-                occupant_annual_hourly_value_per_space_list,
+            map(
                 lambda schedule: len(schedule) == num_hours,
+                occupant_annual_hourly_value_per_space_list,
             )
         ),
         f"Not all occupant schedules have {num_hours} hours",
@@ -141,11 +140,15 @@ def get_zone_eflh(rmi: dict, zone_id: str, is_leap_year: bool):
 
         # 0.0 is falsy, 1.0 is truthy
         hvac_systems_operational_this_hour = any(
-            map_(hvac_operation_schedule_list, lambda schedule: schedule[hour])
+            map(lambda schedule: schedule[hour], hvac_operation_schedule_list)
         )
 
+        # Allow plenum as indirectly conditioned zone but has 0.0 occupants.
+        # In such case, we do not add flh value
         if (
-            occupants_this_hour / total_zone_occupants > ZONE_OCCUPANTS_RATIO_THRESHOLD
+            total_zone_occupants > 0
+            and occupants_this_hour / total_zone_occupants
+            > ZONE_OCCUPANTS_RATIO_THRESHOLD
             and hvac_systems_operational_this_hour
         ):
             flh += 1

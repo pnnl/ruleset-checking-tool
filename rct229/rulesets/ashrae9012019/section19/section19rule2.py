@@ -1,7 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.are_all_terminal_heating_loops_attached_to_boiler import (
     are_all_terminal_heating_loops_attached_to_boiler,
 )
@@ -23,6 +23,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_h
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_preheating_type_fluid_loop import (
     is_hvac_sys_preheating_type_fluid_loop,
 )
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all, find_one_with_field_value
 from rct229.utils.utility_functions import (
@@ -30,8 +31,8 @@ from rct229.utils.utility_functions import (
     find_exactly_one_hvac_system,
 )
 
-HEATING_SOURCE = schema_enums["HeatingSourceOptions"]
-FLUID_LOOP = schema_enums["FluidLoopOptions"]
+HEATING_SOURCE = SchemaEnums.schema_enums["HeatingSourceOptions"]
+FLUID_LOOP = SchemaEnums.schema_enums["FluidLoopOptions"]
 
 
 class Section19Rule2(RuleDefinitionListIndexedBase):
@@ -39,9 +40,11 @@ class Section19Rule2(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section19Rule2, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=False
+            ),
             each_rule=Section19Rule2.FluidLoopRule(),
-            index_rmr="baseline",
+            index_rmr=BASELINE_0,
             id="19-2",
             description="Baseline building plant capacities shall be based on coincident loads.",
             ruleset_section_title="HVAC - General",
@@ -52,7 +55,7 @@ class Section19Rule2(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
 
         HW_fluid_loop_list = []
         CW_fluid_loop_list = []
@@ -165,14 +168,16 @@ class Section19Rule2(RuleDefinitionListIndexedBase):
     class FluidLoopRule(RuleDefinitionBase):
         def __init__(self):
             super(Section19Rule2.FluidLoopRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, False),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=False
+                ),
                 required_fields={
                     "$": ["type"],
                 },
             )
 
         def is_applicable(self, context, data=None):
-            fluid_loop_b = context.baseline
+            fluid_loop_b = context.BASELINE_0
             fluid_loop_id_b = fluid_loop_b["id"]
 
             HW_fluid_loop_list = data["HW_fluid_loop_list"]
@@ -184,7 +189,7 @@ class Section19Rule2(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            fluid_loop_b = context.baseline
+            fluid_loop_b = context.BASELINE_0
             HW_fluid_loop_list = data["HW_fluid_loop_list"]
             CHW_fluid_loop_list = data["CHW_fluid_loop_list"]
             CW_fluid_loop_list = data["CW_fluid_loop_list"]

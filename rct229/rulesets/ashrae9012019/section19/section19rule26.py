@@ -1,13 +1,14 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import PROPOSED
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_systems_serving_zone_health_safety_vent_reqs import (
     get_hvac_systems_serving_zone_health_safety_vent_reqs,
 )
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.pint_utils import ZERO
 
-FAN_SYSTEM_OPERATION = schema_enums["FanSystemOperationOptions"]
+FAN_SYSTEM_OPERATION = SchemaEnums.schema_enums["FanSystemOperationOptions"]
 
 
 class Section19Rule26(RuleDefinitionListIndexedBase):
@@ -15,9 +16,11 @@ class Section19Rule26(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section19Rule26, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, False, True),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=False, PROPOSED=True
+            ),
             each_rule=Section19Rule26.HVACRule(),
-            index_rmr="proposed",
+            index_rmr=PROPOSED,
             id="19-26",
             description="HVAC fans shall remain on during unoccupied hours in spaces that have health and safety mandated minimum ventilation requirements during unoccupied hours in the proposed design.",
             ruleset_section_title="HVAC - General",
@@ -28,7 +31,7 @@ class Section19Rule26(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_p = context.proposed
+        rmi_p = context.PROPOSED
         applicable_hvac_systems_list_p = (
             get_hvac_systems_serving_zone_health_safety_vent_reqs(rmi_p)
         )
@@ -38,7 +41,9 @@ class Section19Rule26(RuleDefinitionListIndexedBase):
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
             super(Section19Rule26.HVACRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, False, True),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=False, PROPOSED=True
+                ),
                 required_fields={
                     "$": ["fan_system"],
                     "fan_system": [
@@ -49,14 +54,14 @@ class Section19Rule26(RuleDefinitionListIndexedBase):
             )
 
         def is_applicable(self, context, data=None):
-            hvac_p = context.proposed
+            hvac_p = context.PROPOSED
             hvac_id_p = hvac_p["id"]
             applicable_hvac_systems_list_p = data["applicable_hvac_systems_list_p"]
 
             return hvac_id_p in applicable_hvac_systems_list_p
 
         def get_calc_vals(self, context, data=None):
-            hvac_p = context.proposed
+            hvac_p = context.PROPOSED
 
             operation_during_unoccupied_p = hvac_p["fan_system"][
                 "operation_during_unoccupied"
@@ -78,7 +83,7 @@ class Section19Rule26(RuleDefinitionListIndexedBase):
             )
 
         def get_fail_msg(self, context, calc_vals=None, data=None):
-            hvac_p = context.proposed
+            hvac_p = context.PROPOSED
             hvac_id_p = hvac_p["id"]
 
             return f"{hvac_id_p} SERVES ZONE(S) THAT APPEAR LIKELY TO HAVE HEALTH AND SAFETY MANDATED MINIMUM VENTILATION REQUIREMENTS DURING UNOCCUPIED HOURS AND THEREFORE (IF THE HVAC SYSTEM SUPPLIES OA CFM) MAY WARRANT CONTINUOUS OPERATION DURING UNOCCUPIED HOURS PER SECTION G3.1-4 SCHEDULES EXCEPTION #2 FOR THE PROPOSED BUILDING AND PER SECTION G3.1.2.4."

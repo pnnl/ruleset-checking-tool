@@ -2,58 +2,50 @@
 # Envelope - Rule 5-15  
 
 **Rule ID:** 5-15  
-**Rule Description:** Baseline slab-on-grade floor assemblies must match the appropriate assembly maximum F-factors in Tables G3.4-1 through G3.4-9.  
-**Rule Assertion:** Baseline RMR slab-on-grade floor: F_factor = expected value  
-**Appendix G Section:** Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building  
-**Appendix G Section Reference:** Tables G3.4-1 to G3.4-8  
+**Rule Description:** For building areas not shown in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in the proposed design or 40% of gross above-grade wall area, whichever is smaller.  
+**Rule Assertion:** Baseline RMR = expected value  
+**Appendix G Section:** Section G3.1-5(c) Building Envelope Modeling Requirements for the Baseline building  
+**Appendix G Section Reference:**  
+
+- Table G3.1-5. Building Envelope, Baseline Building Performance, c. Vertical Fenestration Areas  
+- Table G3.1.1-1  
 
 **Applicability:** All required data elements exist for B_RMR  
 **Applicability Checks:** None  
 
-**Manual Check:** Yes  
-**Evaluation Context:** Each Data Element  
-**Data Lookup:** Tables G3.4-1 to G3.4-8  
+**Manual Checks:** None  
+**Evaluation Context:**  Each Data Element  
+**Data Lookup:** Table G3.1.1-1
 **Function Call:**  
 
-  1. get_surface_conditioning_category()  
-  2. get_opaque_surface_type()  
+  1. get_area_type_window_wall_areas()  
+  2. data_lookup()  
+  3. match_data_element()
 
 ## Rule Logic:  
 
-- Get building climate zone: `climate_zone = B_RMR.weather.climate_zone`  
+- Get window wall areas dictionary for B_RMR: `window_wall_areas_dictionary_b = get_area_type_window_wall_areas(B_RMR)`
 
-- Get surface conditioning category dictionary for B_RMR: `scc_dictionary_b = get_surface_conditioning_category(B_RMR)`  
+- Get window wall areas dictionary for P_RMR: `window_wall_areas_dictionary_p = get_area_type_window_wall_areas(P_RMR)`
 
-- For each building segment in the Baseline model: `for building_segment_b in B_RMR.building.building_segments:`  
+- For each building segment in B_RMR: `for building_segment_b in B_RMR...building_segments:`
 
-  - For each thermal_block in building segment: `for thermal_block_b in building_segment_b.thermal_blocks:`  
+  - Check if building segment area type is not included in Table G3.1.1-1: `if ( NOT building_segment_b.area_type_vertical_fenestration in table_G_3_1_1_1 ):`
 
-    - For each zone in thermal block: `for zone_b in thermal_block_b.zones:`  
+    - Check if building segment is not all new, set manual_check_flag: `if NOT building_segment_b.is_all_new: manual_check_flag = TRUE`
 
-      - For each surface in zone: `for surface_b in zone_b.surfaces:`  
+**Rule Assertion:**
 
-        - Check if surface is unheated slab-on-grade: `if get_opaque_surface_type(surface_b) == "UNHEATED SLAB-ON-GRADE":`  
+- Case 1: If all building segments with building areas not shown in Table G3.1.1-1 are new, and the total window-wall-ratio is equal to that in P_RMR or 40%, whichever is smaller: `if ( NOT manual_check_flag ) AND ( window_wall_areas_dictionary_b["OTHER"]["total_window_area"]/window_wall_areas_dictionary_b["OTHER"]["total_wall_area"] == min(window_wall_areas_dictionary_p["OTHER"]["total_window_area"]/window_wall_areas_dictionary_p["OTHER"]["total_wall_area"], 0.4) ): PASS`
 
-          - Get surface construction: `surface_construction_b = surface_b.construction`  
+- Case 2: Else if all building segments with building areas not shown in Table G3.1.1-1 are new, and the total window-wall-ratio is not equal to that in P_RMR or 40%, whichever is smaller: `if ( NOT manual_check_flag ) AND ( window_wall_areas_dictionary_b["OTHER"]["total_window_area"]/window_wall_areas_dictionary_b["OTHER"]["total_wall_area"] != min(window_wall_areas_dictionary_p["OTHER"]["total_window_area"]/window_wall_areas_dictionary_p["OTHER"]["total_wall_area"], 0.4) ): FAIL`
 
-          - Get surface conditioning category: `scc_b = scc_dictionary_b[surface_b.id]`  
+- Case 3: Else if any building segments with building areas not shown in Table G3.1.1-1 is not new, and the total window-wall-ratio is equal to that in P_RMR or 40%, whichever is smaller: `if ( manual_check_flag ) AND ( window_wall_areas_dictionary_b["OTHER"]["total_window_area"]/window_wall_areas_dictionary_b["OTHER"]["total_wall_area"] == min(window_wall_areas_dictionary_p["OTHER"]["total_window_area"]/window_wall_areas_dictionary_p["OTHER"]["total_wall_area"], 0.4) ): UNDETERMINED and raise_message "BUILDING IS NOT ALL NEW AND BASELINE WWR MATCHES THE SMALLER OF PROPOSED DESIGN WWR OR 40%. HOWEVER, THIS RULE DOES NOT APPLY TO THE EXISTING ENVELOPE PER TABLE G3.1 BASELINE COLUMN #5 (C). FOR EXISTING ENVELOPE, THE BASELINE FENESTRATION AREA MUST EQUAL THE EXISTING FENESTRATION AREA PRIOR TO THE PROPOSED WORK. A MANUAL CHECK IS REQUIRED TO VERIFY COMPLIANCE."`
 
-            - If surface is exterior residential, exterior non-residential, or semi-exterior, get baseline construction from Table G3.4-1 to G3.4-8 based on climate zone, surface conditioning category and surface type: `if ( ( scc_b == "EXTERIOR RESIDENTIAL" ) OR ( scc_b == "EXTERIOR NON-RESIDENTIAL" ) OR ( scc_b == "SEMI-EXTERIOR" ) ): target_f_factor = data_lookup(table_G3_4, climate_zone, scc_b, "SLAB-ON-GRADE FLOOR")`  
+- Case 4: Else, some building segments with building areas not shown in Table G3.1.1-1 is not new, and the total window-wall-ratio is not equal to that in P_RMR or 40%, whichever is smaller: `if ( manual_check_flag ) AND ( window_wall_areas_dictionary_b["OTHER"]["total_window_area"]/window_wall_areas_dictionary_b["OTHER"]["total_wall_area"] != min(window_wall_areas_dictionary_p["OTHER"]["total_window_area"]/window_wall_areas_dictionary_p["OTHER"]["total_wall_area"], 0.4) ): UNDETERMINED and raise_message "BUILDING IS NOT ALL NEW AND BASELINE WWR DOES NOT MATCH THE SMALLER OF PROPOSED DESIGN WWR OR 40%. HOWEVER, THIS RULE DOES NOT APPLY TO THE EXISTING ENVELOPE PER TABLE G3.1 BASELINE COLUMN #5 (C). FOR EXISTING ENVELOPE, THE BASELINE FENESTRATION AREA MUST EQUAL THE EXISTING FENESTRATION AREA PRIOR TO THE PROPOSED WORK. A MANUAL CHECK IS REQUIRED TO VERIFY COMPLIANCE."`
 
-            - Else if surface is exterior mixed, get baseline construction for both residential and non-residential type slab-on-grade floor: `else if ( scc_b == "EXTERIOR MIXED" ): target_f_factor_res = data_lookup(table_G3_4, climate_zone, "EXTERIOR RESIDENTIAL", "SLAB-ON-GRADE FLOOR"), target_f_factor_nonres = data_lookup(table_G3_4, climate_zone, "EXTERIOR NON-RESIDENTIAL", "SLAB-ON-GRADE FLOOR")`  
+**Notes:**
 
-              - If residential and non-residential type slab-on-grade floor construction requirements are the same, save as baseline construction: `if target_f_factor_res == target_f_factor_nonres: target_f_factor = target_f_factor_res`  
-
-              - Else: `manual_review_flag = TRUE`  
-
-          **Rule Assertion:**  
-
-          Case 1: If zone has both residential and non-residential spaces and the construction requirements for slab-on-grade floor are different, request manual review: `if manual_review_flag == TRUE: CAUTION and raise_warning "ZONE HAS BOTH RESIDENTIAL AND NON-RESIDENTIAL SPACES AND THE CONSTRUCTION REQUIREMENTS FOR SLAB-ON-GRADE FLOOR ARE DIFFERENT. VERIFY CONSTRUCTION IS MODELED CORRECTLY."`  
-
-          Case 2: Else if slab-on-grade floor F-factor matches Table G3.4: `else if surface_construction_b.f_factor == target_f_factor: PASS`  
-          
-              - Conservative comparison less equal: ```if AHJ_RA_compare == True and surface_construction_b.f_factor <= target_f_factor: PASS```
-
-          Case 3: Else: `else: FAIL and raise_warning: "BASELINE SLAB F-FACTOR IS NOT AS EXPECTED FOR SLABS THAT ARE LESS THAN 24" BELOW GRADE. VERIFY THAT THE SLAB IS MORE THAN 24" BELOW GRADE AND IS UNREGULATED."`  
+1. Update Rule ID from 5-19 to 5-15 on 10/26/2023
 
 **[Back](../_toc.md)**

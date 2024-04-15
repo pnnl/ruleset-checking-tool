@@ -1,16 +1,17 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_most_used_weekday_hourly_schedule import (
     get_most_used_weekday_hourly_schedule,
 )
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all, find_exactly_one_with_field_value
 
-LIGHTING_SPACE = schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
-VENTILATION_SPACE = schema_enums["VentilationSpaceOptions2019ASHRAE901"]
-LIGHTING_BUILDING_AREA = schema_enums[
+LIGHTING_SPACE = SchemaEnums.schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
+VENTILATION_SPACE = SchemaEnums.schema_enums["VentilationSpaceOptions2019ASHRAE901"]
+LIGHTING_BUILDING_AREA = SchemaEnums.schema_enums[
     "LightingBuildingAreaOptions2019ASHRAE901T951TG38"
 ]
 
@@ -20,9 +21,11 @@ class Section19Rule4(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section19Rule4, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=False
+            ),
             each_rule=Section19Rule4.RuleSetModelInstanceRule(),
-            index_rmr="baseline",
+            index_rmr=BASELINE_0,
             id="19-4",
             description="For baseline cooling sizing runs in residential dwelling units, the infiltration, occupants, lighting, gas and electricity using equipment hourly schedule shall be the same as the most used hourly weekday schedule from the annual simulation.",
             ruleset_section_title="HVAC - General",
@@ -35,7 +38,7 @@ class Section19Rule4(RuleDefinitionListIndexedBase):
             },
             data_items={
                 "day_of_week_for_january_1": (
-                    "baseline",
+                    BASELINE_0,
                     "calendar/day_of_week_for_january_1",
                 ),
             },
@@ -44,14 +47,16 @@ class Section19Rule4(RuleDefinitionListIndexedBase):
     class RuleSetModelInstanceRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section19Rule4.RuleSetModelInstanceRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, False),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=False
+                ),
                 each_rule=Section19Rule4.RuleSetModelInstanceRule.BuildingSegmentRule(),
-                index_rmr="baseline",
+                index_rmr=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*]",
             )
 
         def create_data(self, context, data):
-            rmi_b = context.baseline
+            rmi_b = context.BASELINE_0
 
             return {"schedule_b": getattr_(rmi_b, "RMI", "schedules")}
 
@@ -60,14 +65,16 @@ class Section19Rule4(RuleDefinitionListIndexedBase):
                 super(
                     Section19Rule4.RuleSetModelInstanceRule.BuildingSegmentRule, self
                 ).__init__(
-                    rmrs_used=UserBaselineProposedVals(False, True, False),
+                    rmrs_used=produce_ruleset_model_instance(
+                        USER=False, BASELINE_0=True, PROPOSED=False
+                    ),
                     each_rule=Section19Rule4.RuleSetModelInstanceRule.BuildingSegmentRule.ZoneRule(),
-                    index_rmr="baseline",
+                    index_rmr=BASELINE_0,
                     list_path="$.zones[*]",
                 )
 
             def create_data(self, context, data):
-                building_segment_b = context.baseline
+                building_segment_b = context.BASELINE_0
 
                 is_lighting_bldg_area_defined_b = False
                 is_building_area_MF_dormitory_or_hotel_b = False
@@ -94,16 +101,18 @@ class Section19Rule4(RuleDefinitionListIndexedBase):
                         Section19Rule4.RuleSetModelInstanceRule.BuildingSegmentRule.ZoneRule,
                         self,
                     ).__init__(
-                        rmrs_used=UserBaselineProposedVals(False, True, False),
+                        rmrs_used=produce_ruleset_model_instance(
+                            USER=False, BASELINE_0=True, PROPOSED=False
+                        ),
                         each_rule=Section19Rule4.RuleSetModelInstanceRule.BuildingSegmentRule.ZoneRule.SpaceRule(),
-                        index_rmr="baseline",
+                        index_rmr=BASELINE_0,
                         list_path="$.spaces[*]",
                     )
 
                 def create_data(self, context, data):
                     day_of_week_for_january_1 = data["day_of_week_for_january_1"]
                     schedule_b = data["schedule_b"]
-                    zone_b = context.baseline
+                    zone_b = context.BASELINE_0
 
                     # check infiltration
                     inf_pass_cooling_b = True
@@ -152,11 +161,13 @@ class Section19Rule4(RuleDefinitionListIndexedBase):
                             Section19Rule4.RuleSetModelInstanceRule.BuildingSegmentRule.ZoneRule.SpaceRule,
                             self,
                         ).__init__(
-                            rmrs_used=UserBaselineProposedVals(False, True, False),
+                            rmrs_used=produce_ruleset_model_instance(
+                                USER=False, BASELINE_0=True, PROPOSED=False
+                            ),
                         )
 
                     def is_applicable(self, context, data=None):
-                        space_b = context.baseline
+                        space_b = context.BASELINE_0
                         lighting_space_type_b = space_b.get("lighting_space_type")
                         ventilation_space_type_b = space_b.get("ventilation_space_type")
 
@@ -170,7 +181,7 @@ class Section19Rule4(RuleDefinitionListIndexedBase):
                         inf_pass_cooling_b = data["inf_pass_cooling_b"]
                         day_of_week_for_january_1 = data["day_of_week_for_january_1"]
                         schedule_b = data["schedule_b"]
-                        space_b = context.baseline
+                        space_b = context.BASELINE_0
 
                         # check occupancy schedule
                         occ_pass_cooling_b = False
@@ -306,7 +317,7 @@ class Section19Rule4(RuleDefinitionListIndexedBase):
                         }
 
                     def manual_check_required(self, context, calc_vals=None, data=None):
-                        space_b = context.baseline
+                        space_b = context.BASELINE_0
 
                         is_lighting_bldg_area_defined_b = data[
                             "is_lighting_bldg_area_defined_b"
@@ -327,7 +338,7 @@ class Section19Rule4(RuleDefinitionListIndexedBase):
                     def get_manual_check_required_msg(
                         self, context, calc_vals=None, data=None
                     ):
-                        space_b = context.baseline
+                        space_b = context.BASELINE_0
                         space_id_b = space_b["id"]
 
                         inf_pass_cooling_b = calc_vals["inf_pass_cooling_b"]
@@ -365,7 +376,7 @@ class Section19Rule4(RuleDefinitionListIndexedBase):
                         )
 
                     def get_fail_msg(self, context, calc_vals=None, data=None):
-                        space_b = context.baseline
+                        space_b = context.BASELINE_0
                         space_id_b = space_b["id"]
 
                         inf_pass_cooling_b = calc_vals["inf_pass_cooling_b"]

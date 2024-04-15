@@ -1,7 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
@@ -12,6 +12,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_hw_loop_zone_list_w_are
     get_hw_loop_zone_list_w_area,
 )
 from rct229.schema.config import ureg
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import getattr_
 
 APPLICABLE_SYS_TYPES = [
@@ -39,7 +40,7 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_11_1C,
 ]
 
-PUMP_SPEED_CONTROL = schema_enums["PumpSpeedControlOptions"]
+PUMP_SPEED_CONTROL = SchemaEnums.schema_enums["PumpSpeedControlOptions"]
 PUMP_CONFIGURATION_THRESHOLD = 120_000 * ureg("ft2")
 
 
@@ -48,9 +49,11 @@ class Section21Rule10(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section21Rule10, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=False
+            ),
             each_rule=Section21Rule10.PumpRule(),
-            index_rmr="baseline",
+            index_rmr=BASELINE_0,
             id="21-10",
             description="When the building is modeled with HHW plant (served by either boiler(s) or purchased hot "
             "water/steam), the hot water pump shall be modeled as riding the pump curve if the hot water "
@@ -63,7 +66,7 @@ class Section21Rule10(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
         # create a list containing all HVAC systems that are modeled in the rmi_b
         available_types_list = [
@@ -79,14 +82,14 @@ class Section21Rule10(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         # to avoid pumps in service water heating system
         loop_zone_list_w_area_dict = get_hw_loop_zone_list_w_area(rmi_b)
 
         return {"loop_zone_list_w_area_dict": loop_zone_list_w_area_dict}
 
     def list_filter(self, context_item, data):
-        pump = context_item.baseline
+        pump = context_item.BASELINE_0
         loop_zone_list_w_area_dict = data["loop_zone_list_w_area_dict"]
         # filter and select pumps with heating loops (loop_zone_list_w_area_dict keys are heating loops)
         return pump["loop_or_piping"] in loop_zone_list_w_area_dict
@@ -94,11 +97,13 @@ class Section21Rule10(RuleDefinitionListIndexedBase):
     class PumpRule(RuleDefinitionBase):
         def __init__(self):
             super(Section21Rule10.PumpRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, False)
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=False
+                ),
             )
 
         def get_calc_vals(self, context, data=None):
-            pump_b = context.baseline
+            pump_b = context.BASELINE_0
             pump_loop_or_piping_id = pump_b["loop_or_piping"]
             loop_zone_list_w_area_dict = data["loop_zone_list_w_area_dict"]
             total_area = loop_zone_list_w_area_dict[pump_loop_or_piping_id][

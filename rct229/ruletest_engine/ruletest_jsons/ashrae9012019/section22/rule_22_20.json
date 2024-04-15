@@ -3,21 +3,22 @@
         "Section": 22,
         "Rule": 20,
         "Test": "a",
-        "test_description": "Baseline building has two zones and is in climate zone 4A.  HVAC is system type 7 and is correctly modeled with cooling tower leaving water setpoint temperature of 75F.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones. climate zone 4A.  HVAC is system type 7 and is correctly modeled with cooling tower leaving water setpoint temperature of 75F.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-20",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline condenser loop minimum condenser leaving water temperature shall be modeled as specified in Table G3.1.3.11.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -137,15 +138,20 @@
                                         "type": "COOLING"
                                     }
                                 ]
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
                             {
                                 "id": "Heat Rejection 1",
-                                "loop": "Chiller Loop 1",
+                                "loop": "Condenser Loop 1",
                                 "leaving_water_setpoint_temperature": 23.888888888888914
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ],
                 "weather": {
@@ -158,21 +164,22 @@
         "Section": 22,
         "Rule": 20,
         "Test": "b",
-        "test_description": "Baseline building has two zones and is in climate zone 4A.  HVAC is system type 7 and is incorrectly modeled with cooling tower leaving water setpoint temperature of 80F.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones. climate zone 4A.  HVAC is system type 7 and is incorrectly modeled with cooling tower leaving water setpoint temperature of 80F.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-20",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline condenser loop minimum condenser leaving water temperature shall be modeled as specified in Table G3.1.3.11.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -292,15 +299,20 @@
                                         "type": "COOLING"
                                     }
                                 ]
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
                             {
                                 "id": "Heat Rejection 1",
-                                "loop": "Chiller Loop 1",
+                                "loop": "Condenser Loop 1",
                                 "leaving_water_setpoint_temperature": 26.666666666666686
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ],
                 "weather": {
@@ -313,21 +325,22 @@
         "Section": 22,
         "Rule": 20,
         "Test": "c",
-        "test_description": "Baseline building has two zones and is in climate zone 6B.  HVAC is system type 8 and is correctly modeled with cooling tower leaving water setpoint temperature of 75F.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones. climate zone 6B.  HVAC is system type 8 and is correctly modeled with cooling tower leaving water setpoint temperature of 75F.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-20",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline condenser loop minimum condenser leaving water temperature shall be modeled as specified in Table G3.1.3.11.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -454,15 +467,20 @@
                                         "type": "COOLING"
                                     }
                                 ]
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
                             {
                                 "id": "Heat Rejection 1",
-                                "loop": "Chiller Loop 1",
+                                "loop": "Condenser Loop 1",
                                 "leaving_water_setpoint_temperature": 18.33333333333337
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ],
                 "weather": {
@@ -475,21 +493,22 @@
         "Section": 22,
         "Rule": 20,
         "Test": "d",
-        "test_description": "Baseline building has two zones and is in climate zone 6B.  HVAC is system type 8 and is incorrectly modeled with cooling tower leaving water setpoint temperature of 70F.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones. climate zone 6B.  HVAC is system type 8 and is incorrectly modeled with cooling tower leaving water setpoint temperature of 70F.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-20",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline condenser loop minimum condenser leaving water temperature shall be modeled as specified in Table G3.1.3.11.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -616,15 +635,20 @@
                                         "type": "COOLING"
                                     }
                                 ]
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
                             {
                                 "id": "Heat Rejection 1",
-                                "loop": "Chiller Loop 1",
+                                "loop": "Condenser Loop 1",
                                 "leaving_water_setpoint_temperature": 21.111111111111143
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ],
                 "weather": {
@@ -637,21 +661,22 @@
         "Section": 22,
         "Rule": 20,
         "Test": "e",
-        "test_description": "Baseline building has one zone and is in climate zone 6B.  HVAC is system type 12a and does not have a chiller plant..  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 12a and does not have a chiller plant..  Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-20",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline condenser loop minimum condenser leaving water temperature shall be modeled as specified in Table G3.1.3.11.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -744,15 +769,20 @@
                             {
                                 "id": "Chilled Water Loop 1",
                                 "type": "COOLING"
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
                             {
                                 "id": "Heat Rejection 1",
-                                "loop": "Chiller Loop 1",
+                                "loop": "Condenser Loop 1",
                                 "leaving_water_setpoint_temperature": 21.111111111111143
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ],
                 "weather": {

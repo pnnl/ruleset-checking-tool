@@ -1,11 +1,11 @@
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.jsonpath_utils import find_one
 from rct229.utils.utility_functions import find_exactly_one_hvac_system
 
-HEATING_SYSTEM = schema_enums["HeatingSystemOptions"]
+HEATING_SYSTEM = SchemaEnums.schema_enums["HeatingSystemOptions"]
 
 
-def is_hvac_sys_heating_type_fluid_loop(rmi_b, hvac_b_id):
+def is_hvac_sys_heating_type_fluid_loop(rmi_b: dict, hvac_b_id: str) -> bool:
     """Returns TRUE if the HVAC system heating system heating type is fluid loop. Returns FALSE if the HVAC system
     heating system has anything other than fluid loop or if it has more than 1 heating system.
 

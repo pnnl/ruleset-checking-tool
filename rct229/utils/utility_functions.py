@@ -1,21 +1,21 @@
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
-from rct229.utils.jsonpath_utils import find_exactly_one_with_field_value, find_one
+from rct229.schema.schema_enums import SchemaEnums
+from rct229.utils.jsonpath_utils import find_exactly_one_with_field_value
 
-HEATING_SYSTEM = schema_enums["HeatingSystemOptions"]
-COOLING_SYSTEM = schema_enums["CoolingSystemOptions"]
+HEATING_SYSTEM = SchemaEnums.schema_enums["HeatingSystemOptions"]
+COOLING_SYSTEM = SchemaEnums.schema_enums["CoolingSystemOptions"]
 
 
-def find_exactly_one_hvac_system(rmi, hvac_id):
+def find_exactly_one_hvac_system(rmi: dict, hvac_id: str) -> dict:
     """
     Search for the HVAC data group in a ruleset model instance by matching hvac_id
     Raise exception if no matching HVAC
 
     Parameters
     ----------
-    rmi: json
+    rmi: dict
     hvac_id: str
 
-    Returns json
+    Returns dict
     -------
 
     """
@@ -48,7 +48,7 @@ def find_exactly_one_terminal_unit(rmi, terminal_unit_id):
     )
 
 
-def find_exactly_one_zone(rmi, zone_id):
+def find_exactly_one_zone(rmi: dict, zone_id: str) -> dict:
     """
     Search for the zone data group in a ruleset model instance by matching zone_id
     Raise exception if no matching zone
@@ -82,19 +82,22 @@ def find_exactly_one_space(rmi, space_id):
 
     """
     return find_exactly_one_with_field_value(
-        "$.buildings[*].building_segments[*].zones[*].spaces[*]", "id", space_id, rmi
+        "$.buildings[*].building_segments[*].zones[*].spaces[*]",
+        "id",
+        space_id,
+        rmi,
     )
 
 
 def find_exactly_one_schedule(rmi, schedule_id):
     """
-    Search for the schedule data group in a ruleset model instance by mathcing schedule_id
+    Search for the schedule data group in a ruleset model instance by matching schedule_id
     Raise exception if no matching schedule
 
     Parameters
     ----------
     rmi: json
-    scheduel_id: str
+    schedule_id: str
 
     Returns: json
     -------
@@ -124,13 +127,13 @@ def find_exactly_one_child_loop(rmi, child_loop_id):
     )
 
 
-def find_exactly_one_fluid_loop(rmi, loop_id):
+def find_exactly_one_fluid_loop(rmi: dict, loop_id: str):
     """
     Search for the loop data group in a ruleset model instance by matching loop_id
     Raise exception if no matching zone
     Parameters
     ----------
-    rmi: json
+    rmi: dict
     loop_id: str
 
     Returns: json

@@ -1,17 +1,18 @@
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
-    get_zone_conditioning_category_rmi_dict,
     ZoneConditioningCategory as ZCC,
 )
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
+    get_zone_conditioning_category_rmi_dict,
+)
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.jsonpath_utils import find_all
 
-
-LightingSpaceOptions2019ASHRAE901TG37 = schema_enums[
+LightingSpaceOptions2019ASHRAE901TG37 = SchemaEnums.schema_enums[
     "LightingSpaceOptions2019ASHRAE901TG37"
 ]
 
 
-def get_number_of_floors(climate_zone, rmi):
+def get_number_of_floors(climate_zone: str, rmi: dict) -> int:
     """
     gets the number of floors in the building. Parking Garages are not counted
 

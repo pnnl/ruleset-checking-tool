@@ -1,7 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
@@ -12,6 +12,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_primary_secondary_loops
     get_primary_secondary_loops_dict,
 )
 from rct229.schema.config import ureg
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
@@ -28,7 +29,7 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_11_1B,
     HVAC_SYS.SYS_12B,
 ]
-PUMP_SPEED_CONTROL = schema_enums["PumpSpeedControlOptions"]
+PUMP_SPEED_CONTROL = SchemaEnums.schema_enums["PumpSpeedControlOptions"]
 MAX_FIXED_SPEED_CHW_LOOP_COOLING_CAPACITY = 300.0 * ureg("ton")
 
 
@@ -37,9 +38,11 @@ class Section22Rule10(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section22Rule10, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=False
+            ),
             each_rule=Section22Rule10.PrimaryFluidLoopRule(),
-            index_rmr="baseline",
+            index_rmr=BASELINE_0,
             id="22-10",
             description="For Baseline chilled water system with cooling capacity less than 300ton, the secondary pump shall be modeled as riding the pump curve. For Baseline chilled water system with cooling capacity of 300 tons or more, the secondary pump shall be modeled with variable-speed drives.",
             ruleset_section_title="HVAC - Chiller",
@@ -50,7 +53,7 @@ class Section22Rule10(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
         # create a list containing all HVAC systems that are modeled in the rmi_b
         available_type_list = [
@@ -72,7 +75,7 @@ class Section22Rule10(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
 
         loop_pump_dict = {}
         for pump in find_all("$.pumps[*]", rmi_b):
@@ -97,7 +100,7 @@ class Section22Rule10(RuleDefinitionListIndexedBase):
         }
 
     def list_filter(self, context_item, data):
-        fluid_loop_b = context_item.baseline
+        fluid_loop_b = context_item.BASELINE_0
         primary_secondary_loop_dict = data["primary_secondary_loop_dict"]
 
         return fluid_loop_b["id"] in primary_secondary_loop_dict
@@ -105,14 +108,16 @@ class Section22Rule10(RuleDefinitionListIndexedBase):
     class PrimaryFluidLoopRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section22Rule10.PrimaryFluidLoopRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, False),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=False
+                ),
                 each_rule=Section22Rule10.PrimaryFluidLoopRule.SecondaryChildLoopRule(),
-                index_rmr="baseline",
+                index_rmr=BASELINE_0,
                 list_path="$.child_loops[*]",
             )
 
         def create_data(self, context, data):
-            fluid_loop_b = context.baseline
+            fluid_loop_b = context.BASELINE_0
             chw_loop_capacity_dict = data["chw_loop_capacity_dict"]
 
             if (
@@ -126,7 +131,7 @@ class Section22Rule10(RuleDefinitionListIndexedBase):
             return {"target_secondary_pump_type": target_secondary_pump_type}
 
         def list_filter(self, context_item, data):
-            child_loop_b = context_item.baseline
+            child_loop_b = context_item.BASELINE_0
             loop_pump_dict = data["loop_pump_dict"]
 
             return child_loop_b["id"] in loop_pump_dict
@@ -136,17 +141,21 @@ class Section22Rule10(RuleDefinitionListIndexedBase):
                 super(
                     Section22Rule10.PrimaryFluidLoopRule.SecondaryChildLoopRule, self
                 ).__init__(
-                    rmrs_used=UserBaselineProposedVals(False, True, False),
-                    index_rmr="baseline",
+                    rmrs_used=produce_ruleset_model_instance(
+                        USER=False, BASELINE_0=True, PROPOSED=False
+                    ),
+                    index_rmr=BASELINE_0,
                     each_rule=Section22Rule10.PrimaryFluidLoopRule.SecondaryChildLoopRule.PumpTypeRule(),
                 )
 
             def create_context_list(self, context, data=None):
-                child_loop_b = context.baseline
+                child_loop_b = context.BASELINE_0
                 loop_pump_dict = data["loop_pump_dict"]
 
                 return [
-                    UserBaselineProposedVals(None, pump_type, None)
+                    produce_ruleset_model_instance(
+                        USER=None, BASELINE_0=pump_type, PROPOSED=None
+                    )
                     for pump_type in loop_pump_dict[child_loop_b["id"]]
                 ]
 
@@ -156,11 +165,13 @@ class Section22Rule10(RuleDefinitionListIndexedBase):
                         Section22Rule10.PrimaryFluidLoopRule.SecondaryChildLoopRule.PumpTypeRule,
                         self,
                     ).__init__(
-                        rmrs_used=UserBaselineProposedVals(False, True, False),
+                        rmrs_used=produce_ruleset_model_instance(
+                            USER=False, BASELINE_0=True, PROPOSED=False
+                        ),
                     )
 
                 def get_calc_vals(self, context, data=None):
-                    pump_type_b = context.baseline
+                    pump_type_b = context.BASELINE_0
                     secondary_pump_speed_control = pump_type_b["speed_control"]
                     target_secondary_pump_type = data["target_secondary_pump_type"]
 

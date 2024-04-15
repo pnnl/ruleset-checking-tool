@@ -3,21 +3,22 @@
         "Section": 22,
         "Rule": 30,
         "Test": "a",
-        "test_description": "Baseline building has two zones.  HVAC is system type 11.1 and is correctly modeled with the condenser pump value of 22 W/gpm.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 11.1 and is correctly modeled with the condenser pump value of 22 W/gpm.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-30",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "For chilled-water systems served by chiller(s) and serves baseline System-11, condenser-water pump power shall be 22 W/gpm.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -109,7 +110,8 @@
                                 "id": "Condensing Loop 1",
                                 "pump_power_per_flow_rate": 348.7450462351387
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -119,21 +121,22 @@
         "Section": 22,
         "Rule": 30,
         "Test": "b",
-        "test_description": "Baseline building has one zone.  HVAC is system type 11.1 and is incorrectly modeled with the condenser pump value of 25 W/gpm.  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 11.1 and is incorrectly modeled with the condenser pump value of 25 W/gpm.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-30",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "For chilled-water systems served by chiller(s) and serves baseline System-11, condenser-water pump power shall be 22 W/gpm.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -225,7 +228,8 @@
                                 "id": "Condensing Loop 1",
                                 "pump_power_per_flow_rate": 396.3011889035667
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -235,21 +239,22 @@
         "Section": 22,
         "Rule": 30,
         "Test": "c",
-        "test_description": "Baseline building has two zones.  HVAC is system type 11.2 and is correctly modeled with the condenser pump value of 22 W/gpm.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 11.2 and is correctly modeled with the condenser pump value of 22 W/gpm.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-30",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "For chilled-water systems served by chiller(s) and serves baseline System-11, condenser-water pump power shall be 22 W/gpm.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -358,7 +363,8 @@
                                 "id": "Condensing Loop 1",
                                 "pump_power_per_flow_rate": 348.7450462351387
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -368,21 +374,22 @@
         "Section": 22,
         "Rule": 30,
         "Test": "d",
-        "test_description": "Baseline building has one zone.  HVAC is system type 11.2 and is incorrectly modeled with the condenser pump value of 25 W/gpm.  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone.  HVAC is system type 11.2 and is incorrectly modeled with the condenser pump value of 25 W/gpm.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-30",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "For chilled-water systems served by chiller(s) and serves baseline System-11, condenser-water pump power shall be 22 W/gpm.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -491,7 +498,8 @@
                                 "id": "Condensing Loop 1",
                                 "pump_power_per_flow_rate": 396.3011889035667
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -501,21 +509,22 @@
         "Section": 22,
         "Rule": 30,
         "Test": "e",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with two zones.  HVAC is system type 7.  Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-30",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "For chilled-water systems served by chiller(s) and serves baseline System-11, condenser-water pump power shall be 22 W/gpm.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -636,7 +645,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

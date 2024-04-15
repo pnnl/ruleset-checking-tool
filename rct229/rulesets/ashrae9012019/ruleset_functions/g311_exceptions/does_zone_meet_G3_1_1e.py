@@ -1,14 +1,14 @@
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
 from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_functions.is_zone_likely_a_vestibule import (
     is_zone_likely_a_vestibule,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_functions.is_zone_mechanically_heated_and_not_cooled import (
     is_zone_mechanically_heated_and_not_cooled,
 )
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.utility_functions import find_exactly_one_zone
 
-LightingSpaceOptions2019ASHRAE901TG37 = schema_enums[
+LightingSpaceOptions2019ASHRAE901TG37 = SchemaEnums.schema_enums[
     "LightingSpaceOptions2019ASHRAE901TG37"
 ]
 
@@ -25,7 +25,7 @@ ELIGIBLE_SPACE_TYPES = [
 ]
 
 
-def does_zone_meet_g3_1_1e(rmi_b, rmi_p, zone_id):
+def does_zone_meet_g3_1_1e(rmi_b: dict, rmi_p: dict, zone_id: str) -> bool:
     """
     determines whether a given zone meets the G3_1_1e exception "Thermal zones designed with heating-only systems in
     the proposed design serving storage rooms, stairwells, vestibules, electrical/mechanical rooms, and restrooms not

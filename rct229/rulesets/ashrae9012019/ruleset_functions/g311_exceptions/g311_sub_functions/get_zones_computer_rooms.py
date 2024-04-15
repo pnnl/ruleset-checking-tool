@@ -1,16 +1,25 @@
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from typing import Literal
+
+from pint import Quantity
+
 from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_functions.is_space_a_computer_room import (
     is_space_a_computer_room,
 )
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
 
-LightingSpaceOptions2019ASHRAE901TG37 = schema_enums[
+LightingSpaceOptions2019ASHRAE901TG37 = SchemaEnums.schema_enums[
     "LightingSpaceOptions2019ASHRAE901TG37"
 ]
 
 
-def get_zone_computer_rooms(rmi):
+def get_zone_computer_rooms(
+    rmi: dict,
+) -> dict[
+    str,
+    dict[Literal["total_zone_floor_area", "zone_computer_room_floor_area"], Quantity],
+]:
     """
     Returns a dictionary with the zones that have at least one computer room space associated with them in the RMR as the keys.
     The values associated with each key are in a dict form. The dict associated with each key contains the computer room

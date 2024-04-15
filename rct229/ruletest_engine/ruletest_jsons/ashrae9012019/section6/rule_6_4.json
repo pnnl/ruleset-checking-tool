@@ -3,22 +3,23 @@
         "Section": 6,
         "Rule": 4,
         "Test": "a",
-        "test_description": "Project has one building segment with one zone and one space. The lighting system is as-designed or as-existing but the lighting space type has not been specified in the baseline RMD. The lighting power density in the baseline RMD cannot be verified. Expected result: FAIL",
+        "test_description": "Project has one building segment with one zone and one space. The lighting system is as-designed or as-existing but the lighting space type has not been specified in the baseline ruleset project description. The lighting power density in the baseline ruleset project description cannot be verified. Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "6-4",
-            "ruleset_reference": "(Previously 6-7, then 6-5) Table G3.1(6) Baseline Building Performance",
+            "ruleset_reference": "Table G3.1(6) Baseline Building Performance",
             "rule_description": "Where a complete lighting system exists and where a lighting system has been designed and submitted with design documents, the baseline LPD is equal to expected value in Standard 90.1-2019 Table G3.7. Where lighting neither exists nor is submitted with design documents, baseline LPD shall be determined in accordance with Table G3-7 for \"Office-Open Plan\" space type.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Design",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "None",
-            "mandatory_rule": "Yes",
-            "schema_version": "0.0.29"
+            "rule_dependency": "-",
+            "mandatory_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -57,12 +58,14 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -100,7 +103,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -110,22 +114,23 @@
         "Section": 6,
         "Rule": 4,
         "Test": "b",
-        "test_description": "Project has one building segment with one zone and one space. The lighting system is as-designed or as-existing and the lighting space type has been specified in the baseline RMD. The lighting power density in the baseline RMD is equal to the value specified in Standard 90.1-2019 Table G3.7 for the specified lighting space type. Expected result: PASS",
+        "test_description": "Project has one building segment with one zone and one space. The lighting system is as-designed or as-existing and the lighting space type has been specified in the baseline ruleset project description. The lighting power density in the baseline ruleset project description is equal to the value specified in Standard 90.1-2019 Table G3.7 for the specified lighting space type. Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "6-4",
-            "ruleset_reference": "(Previously 6-7, then 6-5) Table G3.1(6) Baseline Building Performance",
+            "ruleset_reference": "Table G3.1(6) Baseline Building Performance",
             "rule_description": "Where a complete lighting system exists and where a lighting system has been designed and submitted with design documents, the baseline LPD is equal to expected value in Standard 90.1-2019 Table G3.7. Where lighting neither exists nor is submitted with design documents, baseline LPD shall be determined in accordance with Table G3-7 for \"Office-Open Plan\" space type.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Design",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "None",
-            "mandatory_rule": "Yes",
-            "schema_version": "0.0.29"
+            "rule_dependency": "-",
+            "mandatory_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -164,12 +169,14 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -208,7 +215,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -218,22 +226,23 @@
         "Section": 6,
         "Rule": 4,
         "Test": "c",
-        "test_description": "Project has one building segment with one zone and one space. The lighting system is as-designed or as-existing and the lighting space type has been specified in the baseline RMD. The lighting power density in the baseline RMD is not equal to the value specified in Standard 90.1-2019 Table G3.7 for the specified lighting space type. Expected result: FAIL",
+        "test_description": "Project has one building segment with one zone and one space. The lighting system is as-designed or as-existing and the lighting space type has been specified in the baseline ruleset project description. The lighting power density in the baseline ruleset project description is not equal to the value specified in Standard 90.1-2019 Table G3.7 for the specified lighting space type. Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "6-4",
-            "ruleset_reference": "(Previously 6-7, then 6-5) Table G3.1(6) Baseline Building Performance",
+            "ruleset_reference": "Table G3.1(6) Baseline Building Performance",
             "rule_description": "Where a complete lighting system exists and where a lighting system has been designed and submitted with design documents, the baseline LPD is equal to expected value in Standard 90.1-2019 Table G3.7. Where lighting neither exists nor is submitted with design documents, baseline LPD shall be determined in accordance with Table G3-7 for \"Office-Open Plan\" space type.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Design",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "None",
-            "mandatory_rule": "Yes",
-            "schema_version": "0.0.29"
+            "rule_dependency": "-",
+            "mandatory_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -272,12 +281,14 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -316,7 +327,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -326,22 +338,23 @@
         "Section": 6,
         "Rule": 4,
         "Test": "d",
-        "test_description": "Project has one building segment with one zone and one space. The lighting system is not-yet-designed and the lighting space type has not been specified in the baseline RMD. The lighting power density in the baseline RMD is equal to the value specified in Standard 90.1-2019 Table G3.7 for the lighting systems not-yet-designed. Expected result: PASS",
+        "test_description": "Project has one building segment with one zone and one space. The lighting system is not-yet-designed and the lighting space type has not been specified in the baseline ruleset project description. The lighting power density in the baseline ruleset project description is equal to the value specified in Standard 90.1-2019 Table G3.7 for the lighting systems not-yet-designed. Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "6-4",
-            "ruleset_reference": "(Previously 6-7, then 6-5) Table G3.1(6) Baseline Building Performance",
+            "ruleset_reference": "Table G3.1(6) Baseline Building Performance",
             "rule_description": "Where a complete lighting system exists and where a lighting system has been designed and submitted with design documents, the baseline LPD is equal to expected value in Standard 90.1-2019 Table G3.7. Where lighting neither exists nor is submitted with design documents, baseline LPD shall be determined in accordance with Table G3-7 for \"Office-Open Plan\" space type.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Design",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "None",
-            "mandatory_rule": "Yes",
-            "schema_version": "0.0.29"
+            "rule_dependency": "-",
+            "mandatory_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -379,12 +392,14 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -422,7 +437,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -432,22 +448,23 @@
         "Section": 6,
         "Rule": 4,
         "Test": "e",
-        "test_description": "Project has one building segment with one zone and one space. The lighting system is not-yet-designed and the lighting space type has not been specified in the baseline RMD. The lighting power density in the baseline RMD is not equal to the value specified in Standard 90.1-2019 Table G3.7 for the lighting systems not-yet-designed.  Expected result: FAIL",
+        "test_description": "Project has one building segment with one zone and one space. The lighting system is not-yet-designed and the lighting space type has not been specified in the baseline ruleset project description. The lighting power density in the baseline ruleset project description is not equal to the value specified in Standard 90.1-2019 Table G3.7 for the lighting systems not-yet-designed.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "6-4",
-            "ruleset_reference": "(Previously 6-7, then 6-5) Table G3.1(6) Baseline Building Performance",
+            "ruleset_reference": "Table G3.1(6) Baseline Building Performance",
             "rule_description": "Where a complete lighting system exists and where a lighting system has been designed and submitted with design documents, the baseline LPD is equal to expected value in Standard 90.1-2019 Table G3.7. Where lighting neither exists nor is submitted with design documents, baseline LPD shall be determined in accordance with Table G3-7 for \"Office-Open Plan\" space type.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Design",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "None",
-            "mandatory_rule": "Yes",
-            "schema_version": "0.0.29"
+            "rule_dependency": "-",
+            "mandatory_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -485,12 +502,14 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -528,7 +547,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

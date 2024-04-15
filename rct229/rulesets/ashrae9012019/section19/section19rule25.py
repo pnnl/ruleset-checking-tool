@@ -2,10 +2,10 @@ import itertools
 
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_zone_list_w_area_dict import (
-    get_hvac_zone_list_w_area_dict,
+    get_hvac_zone_list_w_area_by_rmi_dict,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_list_hvac_systems_associated_with_zone import (
     get_list_hvac_systems_associated_with_zone,
@@ -16,9 +16,10 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_proposed_hvac_modeled_w
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_proposed_hvac_modeled_with_virtual_heating import (
     get_proposed_hvac_modeled_with_virtual_heating,
 )
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.pint_utils import ZERO
 
-FAN_SYSTEM_OPERATION = schema_enums["FanSystemOperationOptions"]
+FAN_SYSTEM_OPERATION = SchemaEnums.schema_enums["FanSystemOperationOptions"]
 
 
 class Section19Rule25(RuleDefinitionListIndexedBase):
@@ -26,9 +27,11 @@ class Section19Rule25(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section19Rule25, self).__init__(
-            rmrs_used=UserBaselineProposedVals(True, True, True),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=True, BASELINE_0=True, PROPOSED=True
+            ),
             each_rule=Section19Rule25.HVACRule(),
-            index_rmr="baseline",
+            index_rmr=BASELINE_0,
             id="19-25",
             description="Schedules for HVAC fans that provide outdoor air for ventilation shall run continuously whenever spaces are occupied in the baseline design.",
             ruleset_section_title="HVAC - General",
@@ -39,9 +42,9 @@ class Section19Rule25(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_u = context.user
-        rmi_b = context.baseline
-        rmi_p = context.proposed
+        rmi_u = context.USER
+        rmi_b = context.BASELINE_0
+        rmi_p = context.PROPOSED
 
         HVAC_systems_virtual_list_p = list(
             set(
@@ -50,7 +53,7 @@ class Section19Rule25(RuleDefinitionListIndexedBase):
             )
         )
 
-        hvac_zone_list_w_area_dict_p = get_hvac_zone_list_w_area_dict(rmi_p)
+        hvac_zone_list_w_area_dict_p = get_hvac_zone_list_w_area_by_rmi_dict(rmi_p)
 
         zones_virtual_heating_cooling_list_p = list(
             set(
@@ -82,7 +85,9 @@ class Section19Rule25(RuleDefinitionListIndexedBase):
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
             super(Section19Rule25.HVACRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, False),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=False
+                ),
                 required_fields={
                     "$": ["fan_system"],
                     "fan_system": [
@@ -93,7 +98,7 @@ class Section19Rule25(RuleDefinitionListIndexedBase):
             )
 
         def is_applicable(self, context, data=None):
-            hvac_b = context.baseline
+            hvac_b = context.BASELINE_0
             hvac_id_b = hvac_b["id"]
             inapplicable_hvac_with_virtual_heating_cooling_list_b = data[
                 "inapplicable_hvac_with_virtual_heating_cooling_list_b"
@@ -104,7 +109,7 @@ class Section19Rule25(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            hvac_b = context.baseline
+            hvac_b = context.BASELINE_0
 
             operation_during_occupied_b = hvac_b["fan_system"][
                 "operation_during_occupied"

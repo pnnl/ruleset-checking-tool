@@ -3,21 +3,22 @@
         "Section": 21,
         "Rule": 17,
         "Test": "a",
-        "test_description": "The project consists of one building segment with two zones. Baseline RMR has system 7 with < 300 kBtu/hr, has AFUE equal to 80% as per Tables G3.5.6.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 7 with < 300 kBtu/hr, has AFUE equal to 80% as per Tables G3.5.6.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-17",
             "ruleset_reference": "G3.1.2.1",
             "rule_description": "All boilers in the baseline building design shall be modeled at the minimum efficiency levels, both part load and full load, in accordance with Tables G3.5.6.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -141,7 +142,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -151,21 +153,22 @@
         "Section": 21,
         "Rule": 17,
         "Test": "b",
-        "test_description": "The project consists of one building segment with two zones. Baseline RMR has system 7 with < 300 kBtu/hr, has AFUE equal to 80% as per Tables G3.5.6, BUT efficiency_metric is incorrect.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 7 with < 300 kBtu/hr, has AFUE equal to 80% as per Tables G3.5.6, BUT efficiency_metric is incorrect.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-17",
             "ruleset_reference": "G3.1.2.1",
             "rule_description": "All boilers in the baseline building design shall be modeled at the minimum efficiency levels, both part load and full load, in accordance with Tables G3.5.6.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -289,7 +292,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -299,21 +303,22 @@
         "Section": 21,
         "Rule": 17,
         "Test": "c",
-        "test_description": "The project consists of one building segment with two zones. Baseline RMR has system 7 with < 300 kBtu/hr, AFUE does not equal 80% as per Tables G3.5.6.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 7 with < 300 kBtu/hr, AFUE does not equal 80% as per Tables G3.5.6.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-17",
             "ruleset_reference": "G3.1.2.1",
             "rule_description": "All boilers in the baseline building design shall be modeled at the minimum efficiency levels, both part load and full load, in accordance with Tables G3.5.6.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -437,7 +442,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -447,21 +453,22 @@
         "Section": 21,
         "Rule": 17,
         "Test": "d",
-        "test_description": "The project consists of one building segment with two zones. Baseline RMR has system 7 with greater than 300 kBtu/hr but less than 2,500 kBtu/hr, has thermal efficiency equal to 75% as per Tables G3.5.6.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 7 with greater than 300 kBtu/hr but less than 2,500 kBtu/hr, has thermal efficiency equal to 75% as per Tables G3.5.6.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-17",
             "ruleset_reference": "G3.1.2.1",
             "rule_description": "All boilers in the baseline building design shall be modeled at the minimum efficiency levels, both part load and full load, in accordance with Tables G3.5.6.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -585,7 +592,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -595,21 +603,22 @@
         "Section": 21,
         "Rule": 17,
         "Test": "e",
-        "test_description": "The project consists of one building segment with two zones. Baseline RMR has system 7 with greater than 300 kBtu/hr but less than 2,500 kBtu/hr, has thermal efficiency equal to 75% as per Tables G3.5.6, BUT efficiency_metric incorrect.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 7 with greater than 300 kBtu/hr but less than 2,500 kBtu/hr, has thermal efficiency equal to 75% as per Tables G3.5.6, BUT efficiency_metric incorrect.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-17",
             "ruleset_reference": "G3.1.2.1",
             "rule_description": "All boilers in the baseline building design shall be modeled at the minimum efficiency levels, both part load and full load, in accordance with Tables G3.5.6.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -733,7 +742,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -743,21 +753,22 @@
         "Section": 21,
         "Rule": 17,
         "Test": "f",
-        "test_description": "The project consists of one building segment with two zones. Baseline RMR has system 7 with greater than 300 kBtu/hr but less than 2,500 kBtu/hr, thermal efficiency does not equal 75% as per Tables G3.5.6.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 7 with greater than 300 kBtu/hr but less than 2,500 kBtu/hr, thermal efficiency does not equal 75% as per Tables G3.5.6.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-17",
             "ruleset_reference": "G3.1.2.1",
             "rule_description": "All boilers in the baseline building design shall be modeled at the minimum efficiency levels, both part load and full load, in accordance with Tables G3.5.6.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -881,7 +892,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -891,21 +903,22 @@
         "Section": 21,
         "Rule": 17,
         "Test": "g",
-        "test_description": "The project consists of one building segment with one zone. Baseline RMR has system 12a with greater than 2,500 kBtu/hr, has combustion efficiency equal to 80% as per Tables G3.5.6. Expected result: PASS",
+        "test_description": "The project has one building segment with one zone. Baseline ruleset project description has system 12a with greater than 2,500 kBtu/hr, has combustion efficiency equal to 80% as per Tables G3.5.6. Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-17",
             "ruleset_reference": "G3.1.2.1",
             "rule_description": "All boilers in the baseline building design shall be modeled at the minimum efficiency levels, both part load and full load, in accordance with Tables G3.5.6.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1002,7 +1015,8 @@
                                 "id": "Chilled Water Loop 1",
                                 "type": "COOLING"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -1012,21 +1026,22 @@
         "Section": 21,
         "Rule": 17,
         "Test": "h",
-        "test_description": "The project consists of one building segment with one zone. Baseline RMR has system 12a with greater than 2,500 kBtu/hr, has combustion efficiency equal to 80% as per Tables G3.5.6, BUT efficiency_metric incorrect. Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone. Baseline ruleset project description has system 12a with greater than 2,500 kBtu/hr, has combustion efficiency equal to 80% as per Tables G3.5.6, BUT efficiency_metric incorrect. Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-17",
             "ruleset_reference": "G3.1.2.1",
             "rule_description": "All boilers in the baseline building design shall be modeled at the minimum efficiency levels, both part load and full load, in accordance with Tables G3.5.6.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1123,7 +1138,8 @@
                                 "id": "Chilled Water Loop 1",
                                 "type": "COOLING"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -1133,21 +1149,22 @@
         "Section": 21,
         "Rule": 17,
         "Test": "i",
-        "test_description": "The project consists of one building segment with one zone. Baseline RMR has system 12b. Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone. Baseline ruleset project description has system 12b. Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-17",
             "ruleset_reference": "G3.1.2.1",
             "rule_description": "All boilers in the baseline building design shall be modeled at the minimum efficiency levels, both part load and full load, in accordance with Tables G3.5.6.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1241,7 +1258,8 @@
                                 "id": "Chilled Water Loop 1",
                                 "type": "COOLING"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

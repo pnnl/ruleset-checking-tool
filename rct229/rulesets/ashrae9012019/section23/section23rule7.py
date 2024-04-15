@@ -1,7 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_system_type_compare import (
     baseline_system_type_compare,
 )
@@ -11,6 +11,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_s
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types import (
     get_baseline_system_types,
 )
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.pint_utils import CalcQ
 
 APPLICABLE_SYS_TYPES = [
@@ -18,7 +19,9 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_8,
 ]
 
-TERMINAL_TEMPERATURE_CONTROL = schema_enums["TerminalTemperatureControlOptions"]
+TERMINAL_TEMPERATURE_CONTROL = SchemaEnums.schema_enums[
+    "TerminalTemperatureControlOptions"
+]
 
 
 class Section23Rule7(RuleDefinitionListIndexedBase):
@@ -26,9 +29,11 @@ class Section23Rule7(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section23Rule7, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=False
+            ),
             each_rule=Section23Rule7.HVACRule(),
-            index_rmr="baseline",
+            index_rmr=BASELINE_0,
             id="23-7",
             description="Systems 6&8: Supply air temperature setpoint shall be constant at the design condition.",
             ruleset_section_title="HVAC - Airside",
@@ -39,19 +44,22 @@ class Section23Rule7(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
 
         return any(
             [
-                baseline_system_type_compare(system_type, applicable_sys_type, False)
+                baseline_system_types_dict[system_type]
+                and baseline_system_type_compare(
+                    system_type, applicable_sys_type, False
+                )
                 for system_type in baseline_system_types_dict
                 for applicable_sys_type in APPLICABLE_SYS_TYPES
             ]
         )
 
     def create_data(self, context, data):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
         applicable_hvac_sys_ids = [
             hvac_id
@@ -66,12 +74,14 @@ class Section23Rule7(RuleDefinitionListIndexedBase):
     def list_filter(self, context_item, data):
         applicable_hvac_sys_ids = data["applicable_hvac_sys_ids"]
 
-        return context_item.baseline["id"] in applicable_hvac_sys_ids
+        return context_item.BASELINE_0["id"] in applicable_hvac_sys_ids
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
             super(Section23Rule7.HVACRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, False),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=False
+                ),
                 required_fields={
                     "$": ["fan_system"],
                     "fan_system": [
@@ -81,7 +91,7 @@ class Section23Rule7(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            hvac_b = context.baseline
+            hvac_b = context.BASELINE_0
 
             fan_system_b = hvac_b["fan_system"]
             temperature_control_b = fan_system_b["temperature_control"]

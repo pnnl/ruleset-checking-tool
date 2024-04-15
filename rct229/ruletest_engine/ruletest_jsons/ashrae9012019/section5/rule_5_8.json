@@ -3,28 +3,29 @@
         "Section": 5,
         "Rule": 8,
         "Test": "a",
-        "test_description": "Project has one building segment with a below-grade wall surface. Building is located in climate zone 4A and includes a space that has residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline below-grade wall C-factor for the zone is established correctly.",
+        "test_description": "Project has one building segment with an above-grade wall surface. Building is located in climate zone 4A and includes a space that has residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline above-grade wall U-factor for the zone is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-8",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b) ",
-            "rule_description": "Baseline below-grade walls shall match the appropriate assembly maximum C-factors in Tables G3.4-1 through G3.4-8",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "Baseline above-grade wall assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
-                "id": "ASHRAE229",
+                "id": "RPD 1",
                 "weather": {
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -54,11 +55,11 @@
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
-                                                        "adjacent_to": "GROUND",
+                                                        "adjacent_to": "EXTERIOR",
                                                         "tilt": 90,
                                                         "construction": {
                                                             "id": "Construction 1",
-                                                            "c_factor": 6.473221113108893
+                                                            "u_factor": 0.363408904595587
                                                         }
                                                     }
                                                 ]
@@ -73,14 +74,15 @@
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "design_capacity": 10257.488888888889
+                                                    "design_capacity": 9378.275555555556
                                                 }
                                             }
                                         ]
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -90,28 +92,29 @@
         "Section": 5,
         "Rule": 8,
         "Test": "b",
-        "test_description": "Project has one building segment with a below-grade wall surface. Building is located in climate zone 4A and includes a space that has residential occupancy type and is conditioned based on cooling capacity of the HVAC system that serves the parent zone. The baseline below-grade wall C-factor for the space is established correctly.",
+        "test_description": "Project has one building segment with an above-grade wall surface. Building is located in climate zone 4A and includes a space that has residential occupancy type and is conditioned based on cooling capacity of the HVAC system that serves the parent zone. The baseline above-grade wall U-factor for the zone is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-8",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b) ",
-            "rule_description": "Baseline below-grade walls shall match the appropriate assembly maximum C-factors in Tables G3.4-1 through G3.4-8",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "Baseline above-grade wall assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
-                "id": "ASHRAE229",
+                "id": "RPD 1",
                 "weather": {
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -141,11 +144,11 @@
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
-                                                        "adjacent_to": "GROUND",
+                                                        "adjacent_to": "EXTERIOR",
                                                         "tilt": 90,
                                                         "construction": {
                                                             "id": "Construction 1",
-                                                            "c_factor": 6.473221113108893
+                                                            "u_factor": 0.363408904595587
                                                         }
                                                     }
                                                 ]
@@ -156,18 +159,19 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "design_sensible_cool_capacity": 17585.0
+                                                    "design_sensible_cool_capacity": 42204.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "design_capacity": 3516.8533333333335
+                                                    "design_capacity": 8792.133333333333
                                                 }
                                             }
                                         ]
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -177,28 +181,29 @@
         "Section": 5,
         "Rule": 8,
         "Test": "c",
-        "test_description": "Project has one building segment with a below-grade wall surface. Building is located in climate zone 4A and includes a space that has residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline below-grade wall C-factor for the zone is not established correctly.",
+        "test_description": "Project has one building segment with an above-grade wall surface. Building is located in climate zone 4A and includes a space that has residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline above-grade wall U-factor for the zone is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-8",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b) ",
-            "rule_description": "Baseline below-grade walls shall match the appropriate assembly maximum C-factors in Tables G3.4-1 through G3.4-8",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "Baseline above-grade wall assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
-                "id": "ASHRAE229",
+                "id": "RPD 1",
                 "weather": {
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -228,11 +233,11 @@
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
-                                                        "adjacent_to": "GROUND",
+                                                        "adjacent_to": "EXTERIOR",
                                                         "tilt": 90,
                                                         "construction": {
                                                             "id": "Construction 1",
-                                                            "c_factor": 0.363408904595587
+                                                            "u_factor": 1.2378615812787181
                                                         }
                                                     }
                                                 ]
@@ -247,14 +252,15 @@
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "design_capacity": 10257.488888888889
+                                                    "design_capacity": 9378.275555555556
                                                 }
                                             }
                                         ]
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -264,28 +270,29 @@
         "Section": 5,
         "Rule": 8,
         "Test": "d",
-        "test_description": "Project has one building segment with a below-grade wall surface. Building is located in climate zone 4A and includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves it. The baseline below-grade wall C-factor for the zone is established correctly.",
+        "test_description": "Project has one building segment with an above-grade wall surface. Building is located in climate zone 4A and includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline above-grade wall U-factor for the zone is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-8",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b) ",
-            "rule_description": "Baseline below-grade walls shall match the appropriate assembly maximum C-factors in Tables G3.4-1 through G3.4-8",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "Baseline above-grade wall assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
-                "id": "ASHRAE229",
+                "id": "RPD 1",
                 "weather": {
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -302,7 +309,7 @@
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "CORRIDOR_ALL_OTHERS",
+                                                        "lighting_space_type": "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_ALL_OTHER",
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
@@ -315,11 +322,11 @@
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
-                                                        "adjacent_to": "GROUND",
+                                                        "adjacent_to": "EXTERIOR",
                                                         "tilt": 90,
                                                         "construction": {
                                                             "id": "Construction 1",
-                                                            "c_factor": 6.473221113108893
+                                                            "u_factor": 0.7041047526539498
                                                         }
                                                     }
                                                 ]
@@ -334,14 +341,15 @@
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "design_capacity": 10257.488888888889
+                                                    "design_capacity": 9378.275555555556
                                                 }
                                             }
                                         ]
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -351,28 +359,29 @@
         "Section": 5,
         "Rule": 8,
         "Test": "e",
-        "test_description": "Project has one building segment with a below-grade wall surface. Building is located in climate zone 4A and includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves it. The baseline below-grade wall C-factor for the zone is not established correctly.",
+        "test_description": "Project has one building segment with an above-grade wall surface. Building is located in climate zone 4A and includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline above-grade wall U-factor for the zone is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-8",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b) ",
-            "rule_description": "Baseline below-grade walls shall match the appropriate assembly maximum C-factors in Tables G3.4-1 through G3.4-8",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "Baseline above-grade wall assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
-                "id": "ASHRAE229",
+                "id": "RPD 1",
                 "weather": {
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -389,7 +398,7 @@
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "CORRIDOR_ALL_OTHERS",
+                                                        "lighting_space_type": "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_ALL_OTHER",
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
@@ -402,11 +411,11 @@
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
-                                                        "adjacent_to": "GROUND",
+                                                        "adjacent_to": "EXTERIOR",
                                                         "tilt": 90,
                                                         "construction": {
                                                             "id": "Construction 1",
-                                                            "c_factor": 0.6757134319824195
+                                                            "u_factor": 1.2378615812787181
                                                         }
                                                     }
                                                 ]
@@ -421,14 +430,15 @@
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "design_capacity": 10257.488888888889
+                                                    "design_capacity": 9378.275555555556
                                                 }
                                             }
                                         ]
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -438,28 +448,29 @@
         "Section": 5,
         "Rule": 8,
         "Test": "f",
-        "test_description": "Project has one building segment with a below-grade wall surface. Building is located in climate zone 4A, includes a space that has residential occupancy type and is semiheated based on heating and cooling capacity of the HVAC system that serves the parent zone. The baseline below-grade wall C-factor for the zone is established correctly.",
+        "test_description": "Project has one building segment with an above-grade wall surface. A zone is semiheated based on heating and cooling capacity of the HVAC system that serves the parent zone. Building is located in climate zone 4A. The baseline above-grade wall U-factor for the zone is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-8",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b) ",
-            "rule_description": "Baseline below-grade walls shall match the appropriate assembly maximum C-factors in Tables G3.4-1 through G3.4-8",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "Baseline above-grade wall assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
-                "id": "ASHRAE229",
+                "id": "RPD 1",
                 "weather": {
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -476,7 +487,7 @@
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "DWELLING_UNIT",
+                                                        "lighting_space_type": "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS",
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
@@ -489,12 +500,12 @@
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
-                                                        "adjacent_to": "GROUND",
+                                                        "adjacent_to": "EXTERIOR",
                                                         "tilt": 90,
                                                         "area": 9.290303999999999,
                                                         "construction": {
                                                             "id": "Construction 1",
-                                                            "c_factor": 6.473221113108893
+                                                            "u_factor": 0.7041047526539498
                                                         }
                                                     }
                                                 ]
@@ -516,7 +527,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -526,28 +538,29 @@
         "Section": 5,
         "Rule": 8,
         "Test": "g",
-        "test_description": "Project has one building segment with a below-grade wall surface. Building is located in climate zone 4A, includes a space that has residential occupancy type and is semiheated based on heating and cooling capacity of the HVAC system that serves the parent zone. The baseline below-grade wall C-factor for the zone is not established correctly.",
+        "test_description": "Project has one building segment with an above-grade wall surface. A zone is semiheated based on heating and cooling capacity of the HVAC system that serves the parent zone. Building is located in climate zone 4A. The baseline above-grade wall U-factor for the zone is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-8",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b) ",
-            "rule_description": "Baseline below-grade walls shall match the appropriate assembly maximum C-factors in Tables G3.4-1 through G3.4-8",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "Baseline above-grade wall assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
-                "id": "ASHRAE229",
+                "id": "RPD 1",
                 "weather": {
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -564,7 +577,7 @@
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "DWELLING_UNIT",
+                                                        "lighting_space_type": "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS",
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
@@ -577,12 +590,12 @@
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
-                                                        "adjacent_to": "GROUND",
+                                                        "adjacent_to": "EXTERIOR",
                                                         "tilt": 90,
                                                         "area": 9.290303999999999,
                                                         "construction": {
                                                             "id": "Construction 1",
-                                                            "c_factor": 0.363408904595587
+                                                            "u_factor": 0.35773064046128095
                                                         }
                                                     }
                                                 ]
@@ -604,7 +617,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -614,28 +628,29 @@
         "Section": 5,
         "Rule": 8,
         "Test": "h",
-        "test_description": "Project has one building segment with a below-grade wall surface. Building is located in climate zone 8 and includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves it. The baseline below-grade wall C-factor for the zone is established correctly.",
+        "test_description": "Project has one building segment with an above-grade wall surface. Building is located in climate zone 8 and includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline above-grade wall U-factor for the zone is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-8",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b) ",
-            "rule_description": "Baseline below-grade walls shall match the appropriate assembly maximum C-factors in Tables G3.4-1 through G3.4-8",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "Baseline above-grade wall assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
-                "id": "ASHRAE229",
+                "id": "RPD 1",
                 "weather": {
                     "climate_zone": "CZ8",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -652,7 +667,7 @@
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "CORRIDOR_ALL_OTHERS",
+                                                        "lighting_space_type": "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_ALL_OTHER",
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
@@ -665,11 +680,12 @@
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
-                                                        "adjacent_to": "GROUND",
+                                                        "adjacent_to": "EXTERIOR",
                                                         "tilt": 90,
+                                                        "area": 9.290303999999999,
                                                         "construction": {
                                                             "id": "Construction 1",
-                                                            "c_factor": 0.6757134319824195
+                                                            "u_factor": 0.363408904595587
                                                         }
                                                     }
                                                 ]
@@ -684,14 +700,15 @@
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "design_capacity": 10257.488888888889
+                                                    "design_capacity": 9378.275555555556
                                                 }
                                             }
                                         ]
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -701,28 +718,29 @@
         "Section": 5,
         "Rule": 8,
         "Test": "i",
-        "test_description": "Project has one building segment with a below-grade wall surface. Building is located in climate zone 8 and includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves it. The baseline below-grade wall C-factor for the zone is not established correctly.",
+        "test_description": "Project has one building segment with an above-grade wall surface. Building is located in climate zone 8 and includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline above-grade wall U-factor for the zone is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-8",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b) ",
-            "rule_description": "Baseline below-grade walls shall match the appropriate assembly maximum C-factors in Tables G3.4-1 through G3.4-8",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "Baseline above-grade wall assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "baseline": {
-                "id": "ASHRAE229",
+                "id": "RPD 1",
                 "weather": {
                     "climate_zone": "CZ8",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -739,7 +757,7 @@
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "CORRIDOR_ALL_OTHERS",
+                                                        "lighting_space_type": "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_ALL_OTHER",
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
@@ -752,11 +770,12 @@
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
-                                                        "adjacent_to": "GROUND",
+                                                        "adjacent_to": "EXTERIOR",
                                                         "tilt": 90,
+                                                        "area": 9.290303999999999,
                                                         "construction": {
                                                             "id": "Construction 1",
-                                                            "c_factor": 6.473221113108893
+                                                            "u_factor": 0.31230452738683256
                                                         }
                                                     }
                                                 ]
@@ -771,14 +790,15 @@
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "design_capacity": 10257.488888888889
+                                                    "design_capacity": 9378.275555555556
                                                 }
                                             }
                                         ]
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

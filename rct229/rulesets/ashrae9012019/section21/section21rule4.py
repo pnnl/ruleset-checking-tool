@@ -1,13 +1,14 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types import (
     get_baseline_system_types,
 )
+from rct229.schema.schema_enums import SchemaEnums
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_1,
@@ -20,7 +21,7 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_12,
     HVAC_SYS.SYS_12A,
 ]
-BOILER_COMBUSTION_OPTION = schema_enums["BoilerCombustionOptions"]
+BOILER_COMBUSTION_OPTION = SchemaEnums.schema_enums["BoilerCombustionOptions"]
 
 
 class Section21Rule4(RuleDefinitionListIndexedBase):
@@ -28,9 +29,11 @@ class Section21Rule4(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section21Rule4, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=False
+            ),
             each_rule=Section21Rule4.BoilerRule(),
-            index_rmr="baseline",
+            index_rmr=BASELINE_0,
             id="21-4",
             description="When baseline building does not use purchased heat, baseline systems 1,5,7,11,12 shall be modeled with natural draft boilers.",
             ruleset_section_title="HVAC - Water Side",
@@ -41,7 +44,7 @@ class Section21Rule4(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
         # create a list containing all HVAC systems that are modeled in the rmi_b
         available_type_list = [
@@ -59,14 +62,16 @@ class Section21Rule4(RuleDefinitionListIndexedBase):
     class BoilerRule(RuleDefinitionBase):
         def __init__(self):
             super(Section21Rule4.BoilerRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, False),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=False
+                ),
                 required_fields={
                     "$": ["draft_type"],
                 },
             )
 
         def get_calc_vals(self, context, data=None):
-            boiler_b = context.baseline
+            boiler_b = context.BASELINE_0
             boiler_draft_type_b = boiler_b["draft_type"]
             return {"boiler_draft_type_b": boiler_draft_type_b}
 

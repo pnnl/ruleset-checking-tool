@@ -1,6 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_dict_of_zones_and_terminal_units_served_by_hvac_sys import (
     get_dict_of_zones_and_terminal_units_served_by_hvac_sys,
 )
@@ -19,9 +20,11 @@ class Section19Rule20(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section19Rule20, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, True),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=True
+            ),
             each_rule=Section19Rule20.HVACRule(),
-            index_rmr="baseline",
+            index_rmr=BASELINE_0,
             id="19-20",
             description="The calculated system fan power shall be distributed to supply, return, exhaust, and relief fans in the same proportion as the proposed design.",
             ruleset_section_title="HVAC - General",
@@ -32,8 +35,8 @@ class Section19Rule20(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.baseline
-        rmi_p = context.proposed
+        rmi_b = context.BASELINE_0
+        rmi_p = context.PROPOSED
 
         return {
             "zone_supply_return_exhaust_relief_terminal_fan_power_dict_p": get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(
@@ -47,14 +50,16 @@ class Section19Rule20(RuleDefinitionListIndexedBase):
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
             super(Section19Rule20.HVACRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, True),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=False
+                ),
                 required_fields={
                     "$": ["fan_system"],
                 },
             )
 
         def get_calc_vals(self, context, data=None):
-            hvac_b = context.baseline
+            hvac_b = context.BASELINE_0
             hvac_id_b = hvac_b["id"]
             zone_supply_return_exhaust_relief_terminal_fan_power_dict_p = data[
                 "zone_supply_return_exhaust_relief_terminal_fan_power_dict_p"
@@ -123,18 +128,25 @@ class Section19Rule20(RuleDefinitionListIndexedBase):
                 + proposed_total_exhaust_fan_power
                 + proposed_total_relief_fan_power
             )
-            fraction_of_total_supply_p = (
-                proposed_total_supply_fan_power / total_modeled_fan_power_p
-            )
-            fraction_of_total_return_p = (
-                proposed_total_return_fan_power / total_modeled_fan_power_p
-            )
-            fraction_of_total_exhaust_p = (
-                proposed_total_exhaust_fan_power / total_modeled_fan_power_p
-            )
-            fraction_of_total_relief_p = (
-                proposed_total_relief_fan_power / total_modeled_fan_power_p
-            )
+
+            fraction_of_total_supply_p = 0.0
+            fraction_of_total_return_p = 0.0
+            fraction_of_total_exhaust_p = 0.0
+            fraction_of_total_relief_p = 0.0
+
+            if total_modeled_fan_power_p > ZERO.POWER:
+                fraction_of_total_supply_p = (
+                    proposed_total_supply_fan_power / total_modeled_fan_power_p
+                )
+                fraction_of_total_return_p = (
+                    proposed_total_return_fan_power / total_modeled_fan_power_p
+                )
+                fraction_of_total_exhaust_p = (
+                    proposed_total_exhaust_fan_power / total_modeled_fan_power_p
+                )
+                fraction_of_total_relief_p = (
+                    proposed_total_relief_fan_power / total_modeled_fan_power_p
+                )
             return {
                 "hvac_sys_total_supply_fan_power_b": hvac_sys_total_supply_fan_power_b,
                 "hvac_sys_total_return_fan_power_b": hvac_sys_total_return_fan_power_b,
@@ -195,7 +207,7 @@ class Section19Rule20(RuleDefinitionListIndexedBase):
             )
 
         def get_fail_msg(self, context, calc_vals=None, data=None):
-            hvac_b = context.baseline
+            hvac_b = context.BASELINE_0
             hvac_id_b = hvac_b["id"]
             expected_baseline_fan_power_supply = calc_vals[
                 "expected_baseline_fan_power_supply"

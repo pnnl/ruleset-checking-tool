@@ -1,7 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
@@ -18,6 +18,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_categ
     get_zone_conditioning_category_dict,
 )
 from rct229.schema.config import ureg
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all, find_exactly_one_with_field_value
 from rct229.utils.pint_utils import ZERO, CalcQ
@@ -34,7 +35,7 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_12A,
 ]
 
-FLUID_LOOP = schema_enums["FluidLoopOptions"]
+FLUID_LOOP = SchemaEnums.schema_enums["FluidLoopOptions"]
 HEATING_LOOP_CONDITIONED_AREA_THRESHOLD = 15_000 * ureg("ft2")
 
 
@@ -43,26 +44,30 @@ class Section21Rule5(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section21Rule5, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=False
+            ),
             each_rule=Section21Rule5.RulesetModelInstanceRule(),
-            index_rmr="baseline",
+            index_rmr=BASELINE_0,
             id="21-5",
             description="The baseline building design boiler plant shall be modeled as having a single boiler if the baseline building design plant serves a conditioned floor area of 15,000sq.ft. or less, and as having two equally sized boilers for plants serving more than 15,000sq.ft.",
             ruleset_section_title="HVAC - Water Side",
             standard_section="Section G3.1.3.2 Building System-Specific Modeling Requirements for the Baseline model",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            data_items={"climate_zone": ("baseline", "weather/climate_zone")},
+            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
         )
 
     class RulesetModelInstanceRule(RuleDefinitionBase):
         def __init__(self):
             super(Section21Rule5.RulesetModelInstanceRule, self,).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, False),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=False
+                ),
             )
 
         def is_applicable(self, context, data=None):
-            rmi_b = context.baseline
+            rmi_b = context.BASELINE_0
             baseline_system_types_dict = get_baseline_system_types(rmi_b)
             # create a list containing all HVAC systems that are modeled in the rmi_b
             available_types_list = [
@@ -78,7 +83,7 @@ class Section21Rule5(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            rmi_b = context.baseline
+            rmi_b = context.BASELINE_0
             climate_zone = data["climate_zone"]
 
             # get zone conditions from buildings

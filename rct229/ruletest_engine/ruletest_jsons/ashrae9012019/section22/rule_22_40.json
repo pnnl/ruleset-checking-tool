@@ -3,21 +3,22 @@
         "Section": 22,
         "Rule": 40,
         "Test": "a",
-        "test_description": "Building has two zones.  Purchased chilled water is modeled in both the proposed and baseline systems for building utilizing system 7c.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones.  Purchased chilled water is modeled in both the proposed and baseline systems for building utilizing system 7c.  Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-40",
             "ruleset_reference": "Section G3.1.1.1 & G3.1.1.3.1",
             "rule_description": "For systems using purchased chilled water, the cooling source shall be modeled based on G3.1.1.3 as purchased chilled water in both the proposed design and baseline building design. On-site chillers and direct expansion equipment shall not be modeled in the baseline building design.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -126,12 +127,14 @@
                                 "id": "Chilled Water Loop 1",
                                 "type": "COOLING"
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -240,7 +243,8 @@
                                 "id": "Chilled Water Loop 1",
                                 "type": "COOLING"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -250,21 +254,22 @@
         "Section": 22,
         "Rule": 40,
         "Test": "b",
-        "test_description": "Building has two zones.  Purchased chilled water is modeled in the proposed model, but baseline uses a CHW plant (system 7).  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones.  Purchased chilled water is modeled in the proposed model, but baseline uses a chilled water plant (system 7).  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-40",
             "ruleset_reference": "Section G3.1.1.1 & G3.1.1.3.1",
             "rule_description": "For systems using purchased chilled water, the cooling source shall be modeled based on G3.1.1.3 as purchased chilled water in both the proposed design and baseline building design. On-site chillers and direct expansion equipment shall not be modeled in the baseline building design.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -392,12 +397,14 @@
                                 "loop": "Chilled Water Loop 1",
                                 "type": "CHILLED_WATER"
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -518,7 +525,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -528,21 +536,22 @@
         "Section": 22,
         "Rule": 40,
         "Test": "c",
-        "test_description": "Building has one zone.  Purchased chilled water is modeled in the proposed model, but baseline uses DX cooling (system 1).  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone.  Purchased chilled water is modeled in the proposed model, but baseline uses DX cooling (system 1).  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-40",
             "ruleset_reference": "Section G3.1.1.1 & G3.1.1.3.1",
             "rule_description": "For systems using purchased chilled water, the cooling source shall be modeled based on G3.1.1.3 as purchased chilled water in both the proposed design and baseline building design. On-site chillers and direct expansion equipment shall not be modeled in the baseline building design.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -619,12 +628,14 @@
                                 "loop": "Chilled Water Loop 1",
                                 "type": "CHILLED_WATER"
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -689,7 +700,8 @@
                                 "id": "Boiler Loop 1",
                                 "type": "HEATING"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -699,21 +711,22 @@
         "Section": 22,
         "Rule": 40,
         "Test": "d",
-        "test_description": "Building has one zone.  Purchased chilled water is not modeled in the proposed model.  Both proposed and beaseline are modeled with system type 2.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone.  Purchased chilled water is not modeled in the proposed model.  Both proposed and beaseline are modeled with system type 2.  Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-40",
             "ruleset_reference": "Section G3.1.1.1 & G3.1.1.3.1",
             "rule_description": "For systems using purchased chilled water, the cooling source shall be modeled based on G3.1.1.3 as purchased chilled water in both the proposed design and baseline building design. On-site chillers and direct expansion equipment shall not be modeled in the baseline building design.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -764,12 +777,14 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -820,7 +835,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

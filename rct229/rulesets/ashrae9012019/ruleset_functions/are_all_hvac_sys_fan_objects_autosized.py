@@ -9,7 +9,7 @@ from rct229.utils.utility_functions import (
 )
 
 
-def are_all_hvac_sys_fan_objs_autosized(rmi, hvac_id):
+def are_all_hvac_sys_fan_objs_autosized(rmi: dict, hvac_id: str) -> bool:
     """
     The function returns true if all supply fan objects associated with an hvac system are autosized.
 
@@ -19,7 +19,7 @@ def are_all_hvac_sys_fan_objs_autosized(rmi, hvac_id):
     hvac_id: str HVAC id string
 
     Returns: bool True if all supply fan objects associate with an HVAC system are autosized, False otherwise,
-    MissingKey Exception if missing critcal keys
+    MissingKey Exception if missing critical keys
     -------
 
     """
@@ -31,7 +31,9 @@ def are_all_hvac_sys_fan_objs_autosized(rmi, hvac_id):
     return (
         all(
             [
-                getattr_(supply_fan, "supply_fan", "is_airflow_autosized")
+                getattr_(
+                    supply_fan, "supply_fan", "is_airflow_sized_based_on_design_day"
+                )
                 for supply_fan in find_all("$.fan_system.supply_fans[*]", hvac)
             ]
         )
@@ -42,7 +44,7 @@ def are_all_hvac_sys_fan_objs_autosized(rmi, hvac_id):
                     find_exactly_one_terminal_unit(rmi, terminal_id),
                     "terminal",
                     "fan",
-                    "is_airflow_autosized",
+                    "is_airflow_sized_based_on_design_day",
                 )
                 for terminal_id in dict_of_zones_and_terminal_units_served_by_hvac_sys[
                     hvac_id
