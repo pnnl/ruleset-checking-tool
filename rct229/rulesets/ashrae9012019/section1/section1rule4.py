@@ -1,4 +1,3 @@
-from pydash import filter_
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rulesets.ashrae9012019 import (
@@ -64,8 +63,8 @@ class Section1Rule4(RuleDefinitionBase):
                     )
                 )
 
-        pci_target_set = filter_(pci_target_set, lambda x: x is not None)
-        pci_set = filter_(pci_set, lambda x: x is not None)
+        pci_target_set = list(filter(lambda x: x is not None, pci_target_set))
+        pci_set = list(filter(lambda x: x is not None, pci_set))
 
         assert_(
             len(pci_target_set) >= 1, "At least one `pci_target_set` value must exist."
