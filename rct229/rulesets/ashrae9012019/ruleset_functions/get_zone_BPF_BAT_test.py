@@ -5,7 +5,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_BPF_BAT import (
 from rct229.schema.config import ureg
 from rct229.schema.schema_utils import quantify_rmr
 from rct229.schema.validate import schema_validate_rmr
-from rct229.utils.assertions import MissingKeyException
+from rct229.utils.assertions import RCTFailureException
 
 TEST_BUILDING = {
     "id": "test_rmd",
@@ -59,11 +59,14 @@ TEST_BUILDING = {
                         {
                             "id": "zone_3",
                             "spaces": [
-                                # to test missing lighting_space_type key
+                                # to test missing `lighting_space_type` key
                                 {
                                     "id": "Space 3_1",
                                 }
                             ],
+                        },
+                        {
+                            "id": "zone_4",
                         },
                     ],
                 }
@@ -103,3 +106,11 @@ def test__get_zone_BPF_BAT__all_diff_bldg_type():
 
 def test__get_zone_BPF_BAT__no_lgt_type():
     assert get_zone_BPF_BAT(TEST_RMD, "zone_3") == {"UNDETERMINED": 0 * ureg("m2")}
+
+
+def test__get_zone_BPF_BAT__no_spaces():
+    with pytest.raises(
+        RCTFailureException,
+        match="No spaces have been found in zone `zone_4`. Check the RPD inputs.",
+    ):
+        get_zone_BPF_BAT(TEST_RMD, "zone_4")
