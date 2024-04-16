@@ -125,7 +125,8 @@
 - create dictionary to store the sum of space area assigned to each mapped BPF building area type `zone_BPF_BAT_dict`: `zone_BPF_BAT_dict = {}`
 - get the zone using the function get_object_by_id: `get_object_by_id(B_RMD, zone_id)`
 - iterate through each space in the zone: `for space in zone.spaces:`
-  - map from the lighting space type to the BPF building area type: `space_BPF_BAT = building_area_lookup[space.lighting_space_type]`
+  - get the lighting space type: `lighting_space_type = space.get(lighting_space_type, None)`
+  - map from the lighting space type to the BPF building area type: `space_BPF_BAT = "UNDETERMINED" if lighting_space_type is None else BUILDING_AREA_LOOKUP[lighting_space_type]`
   - add the space area if it exists: `if space_BPF_BAT in zone_BPF_BAT_dict: zone_BPF_BAT_dict[space_BPF_BAT] += space.floor_area`
   - otherwise just add this space type to the zone_BPF_BAT_dict if it doesn't exist yet: `zone_BPF_BAT_dict[space_BPF_BAT] = space.floor_area`
 
