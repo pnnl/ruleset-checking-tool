@@ -22,4 +22,4 @@ def test__lighting_to_BPF_area_type__HEALTH_CARE_CLINIC():
 
 
 def test__lighting_to_BPF_area_type__NONE():
-    assert lighting_space_type_to_BPF_area_type("NONE") == None
+    assert lighting_space_type_to_BPF_area_type("NONE") == "NONE"
