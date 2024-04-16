@@ -80,7 +80,10 @@ class Section1Rule5(RuleDefinitionBase):
         assert_(len(bbp_set) >= 1, "At least one `bbp_set` value must exist.")
         assert_(len(pbp_nre_set) >= 1, "At least one `pbp_nre_set` value must exist.")
 
-        assert_(bbp_set[0] != 0, "The `bbp_set` value must not be 0.")
+        assert_(
+            bbp_set[0] > 0,
+            "The `baseline_building_performance_energy_cost` value must be greater than 0.",
+        )
 
         return (pbp_nre_set[0] - pbp_set[0]) / bbp_set[0] > APPLICABLE_LIMIT
 
@@ -194,7 +197,5 @@ class Section1Rule5(RuleDefinitionBase):
             )
         elif len(pci_target_set) != 1:
             FAIL_MSG = "Ruleset expects exactly one PCI Target value to be used in the project."
-        elif bbp_set[0] == 0:
-            FAIL_MSG = "Ruleset expects baseline_building_performance_energy_cost to be greater than 0."
 
         return FAIL_MSG
