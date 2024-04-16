@@ -80,11 +80,9 @@ class Section1Rule5(RuleDefinitionBase):
         assert_(len(bbp_set) >= 1, "At least one `bbp_set` value must exist.")
         assert_(len(pbp_nre_set) >= 1, "At least one `pbp_nre_set` value must exist.")
 
-        return (
-            len(pbp_set) == len(bbp_set) == len(pbp_nre_set) == 1
-            and bbp_set[0] != 0
-            and (pbp_nre_set[0] - pbp_set[0]) / bbp_set[0] > APPLICABLE_LIMIT
-        )
+        assert_(bbp_set[0] != 0, "The `bbp_set` value must not be 0.")
+
+        return (pbp_nre_set[0] - pbp_set[0]) / bbp_set[0] > APPLICABLE_LIMIT
 
     def get_calc_vals(self, context, data=None):
         rmd_u = context.USER
@@ -165,7 +163,6 @@ class Section1Rule5(RuleDefinitionBase):
             == len(pci_set)
             == len(pci_target_set)
             == 1
-            and bbp_set[0] != 0
             and (pci_set[0] + ((pbp_nre_set[0] - pbp_set[0]) / bbp_set[0]))
             - APPLICABLE_LIMIT
             <= pci_target_set[0]
