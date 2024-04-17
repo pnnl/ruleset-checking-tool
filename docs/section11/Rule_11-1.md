@@ -18,9 +18,12 @@
 - **compare_context_pair** - there is no RDS for this function, but it is a function developed for Rule 1-6 that compares two elements
 
 **Applicability Checks:**
-- no logic here, applies to all P-RMDs
+- check that U_RMD has SHW loads
 
-
+## Applicability Checks:
+- only projects with SHW in the user model are expected to have a SHW system in the user model.  If there is no SHW in the user model, we assume there is no SHW system designed, and instead rule 11-3 Applies and P_RMD matches B_RMD.
+- look for ServiceWaterHeatingUse in each space: `for u_space in U_RMD...spaces:`
+    - check to see if the space has a ServiceWaterHeatingUse.  If even one space has a ServiceWaterHeatingUse, continue to rule logic: `if len(u.space.service_water_heating_uses) > 0: CONTINUE TO RULE LOGIC`
 
 ## Rule Logic: 
 - create a boolean to keep track of whether everything matches: `all_match = TRUE`
@@ -55,7 +58,9 @@
 
     - otherwise, the pump exists in only one of the two models, set all_match to false: `all_match = FALSE`
 
-
+## Rule Assertion: 
+- Case1: all elements are equal: PASS: `if all_match: PASS`
+- Case2: all elements don't match, FAIL: if !all_match: FAIL`
 
 
 
