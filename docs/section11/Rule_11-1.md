@@ -24,6 +24,7 @@
 - only projects with SHW in the user model are expected to have a SHW system in the user model.  If there is no SHW in the user model, we assume there is no SHW system designed, and instead rule 11-3 Applies and P_RMD matches B_RMD.
 - look for ServiceWaterHeatingUse in each space: `for u_space in U_RMD...spaces:`
     - check to see if the space has a ServiceWaterHeatingUse.  If even one space has a ServiceWaterHeatingUse, continue to rule logic: `if len(u.space.service_water_heating_uses) > 0: CONTINUE TO RULE LOGIC`
+- if the program reaches this line without going to the rule logic, the project is not applicable: `NOT_APPLICABLE`
 
 ## Rule Logic: 
 - create a boolean to keep track of whether everything matches: `all_match = TRUE`
