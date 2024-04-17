@@ -15,6 +15,7 @@
 **Data Lookup:**   
 **Function Call:** 
 - **get_component_by_id**
+- **compare_context_pair** - there is no RDS for this function, but it is a function developed for Rule 1-6 that compares two elements
 
 **Applicability Checks:**
 - no logic here, applies to all P-RMDs
@@ -24,19 +25,18 @@
 ## Rule Logic: 
 - create a boolean to keep track of whether everything matches: `all_match = TRUE`
 - check if the ServiceWaterHeatingDistributionSystem matches between the propoesd and user models.  First check whether there are the same number of systems: `if len(P_RMD.service_water_heating_distribution_systems) == len(B_RMD.service_water_heating_distribution_systems):`
-    - look at each SHW system in the proposed model and see if there is one that is the same in the user model.  This check relies on the understanding that the RCT team has a method for comparing all elements within an object match: `for p_SHW_dist_system in P_RMD.service_water_heating_distribution_systems:`
-        - if this system is not in B_RMD.service_water_heating_distribution_systems, set all_match to FALSE: `if p_SHW_dist_system not in B_RMD.service_water_heating_distribution_systems: all_match = FALSE`
+    - look at each SHW distribution system in the proposed model and see if there is one that is the same in the user model.  This check relies on the understanding that the RCT team has a method for comparing all elements within an object match (compare_context_pair): `for p_SHW_dist_system in P_RMD.service_water_heating_distribution_systems:`
+        - if this system is in B_RMD.service_water_heating_distribution_systems, compare the systems: `if p_SHW_dist_system in B_RMD.service_water_heating_distribution_systems:`
+            - use compare_context_pair to compare systems and set all_match to FALSE if the systems don't compare: `if !compare_context_pair(p_SHW_dist_system, B_RMD.get_component_by_id(p_SHW_dist_system.id)): all_match = FALSE`
+        - otherwise, set all_match to false: `else: all_match = FALSE`
 - otherwise, all_match is false: `all_match = FALSE`
 - continue if all_match is still true: `if all_match:`
     - do the same comparison for ServiceWaterHeatingEquipment in the proposed and user models: `if len(P_RMD.service_water_heating_distribution_systems) == len(B_RMD.service_water_heating_distribution_systems):`
-        - look at each SHW system in the proposed model and see if there is one that is the same in the user model.  This check relies on the understanding that the RCT team has a method for comparing all elements within an object match: `for p_SHW_equipment in P_RMD.service_water_heating_equipment:`
-            - if this system is not in B_RMD.service_water_heating_equipment, set all_match to FALSE: `if p_SHW_equipment not in B_RMD.service_water_heating_equipment: all_match = FALSE`
+        - look at each SHW system in the proposed model and see if there is one that is the same in the user model.  This check relies on the understanding that the RCT team has a method for comparing all elements within an object match (compare_context_pair): `for p_SHW_equipment in P_RMD.service_water_heating_equipment:`
+              - use compare_context_pair to compare systems and set all_match to FALSE if the systems don't compare: `if !compare_context_pair(p_SHW_equipment, B_RMD.get_component_by_id(p_SHW_equipment.id)): all_match = FALSE`
+        - otherwise, set all_match to false: `else: all_match = FALSE`
     - otherwise, all_match is false: `all_match = FALSE`
  
-- 
-- all DHW tanks match in the proposed and user models **question:** in rare cases, there could be a tank connected to a solar hot water system that does not match in the two models.  Returning FAIL in this case will only trigger a manual review (& these tanks will likely be the same between user and proposed models anyway), so I don't think it's a major issue.  thoughts?: `if not P_RMI = U_RMI for Tank: all_match = FALSE`
-- all ServiceWaterPiping matches in the proposed and user models: `if not P_RMI = U_RMI for ServiceWaterPiping: all_match = FALSE`
-
 - we also need to compare the pumps connected to the DHW system, but not all pumps in the models are DHW pumps.  Create a list of the SHW pumps `shw_pumps_list = []`
 - Iterate through the pumps in the proposed model: `for pump_p in P_RMI.pumps:`
     - check that the pump is connected to a ServiceWaterPiping object: `if type(pump_p.loop_or_piping) == ServiceWaterPiping:`
@@ -66,5 +66,7 @@
   
   
   **Notes:**
+  1.  using compare_context_pair might not be the correct approach - this function requires data elements in the extra schema to have a tag "AppG P_RMD Equals U_RMD" - is it possible to pass in a custom json created for this rule which identifies which elements need to be equal?
+  2.  using compare_context_pair - how are sub-components like [{Tank}] (in ServiceWaterHeatingDistributionSystem) and {Tank} (in SolarThermal and ServiceWaterHeatingEquipment) evaluated? - also {Pump} and {ServiceWaterPiping}
 
 **[Back](../_toc.md)**
