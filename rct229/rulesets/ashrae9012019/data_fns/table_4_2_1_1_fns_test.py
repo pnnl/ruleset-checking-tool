@@ -42,7 +42,7 @@ def test__table_4_2_1_1_RESTAURANT_CZ2A():
 
 def test__table_4_2_1_1_RETAIL_CZ5C():
     assert table_4_2_1_1_lookup("RETAIL", "CZ5C") == {
-        "building_performance_factor": 0.68
+        "building_performance_factor": 0.55
     }
 
 
