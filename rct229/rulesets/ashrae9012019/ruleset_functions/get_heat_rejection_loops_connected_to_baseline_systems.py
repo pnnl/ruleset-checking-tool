@@ -4,7 +4,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_primary_secondary_loops
 from rct229.utils.jsonpath_utils import find_all, find_one
 
 
-def get_heat_rejection_loops_connected_to_baseline_systems(rmi):
+def get_heat_rejection_loops_connected_to_baseline_systems(rmi: dict) -> list:
     """
     Get a list of all heat rejection loops in an RMI that are connected to a baseline HVAC System (Type-7, 8, 11.1,
     11.2, 12, 13, 7b, 8b, 11.1b, 12b)

@@ -1,3 +1,6 @@
+from typing import TypedDict
+
+from pint import Quantity
 from pydash import map_
 
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_dict_of_zones_and_terminal_units_served_by_hvac_sys import (
@@ -9,9 +12,14 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_target_baseline_sy
 )
 
 
+class HVACServeLabZoneDict(TypedDict):
+    lab_zones_only: list[str]
+    lab_and_other: list[str]
+
+
 def get_lab_zone_hvac_systems(
-    rmd_b: str, rmd_p: str, climate_zone: str, is_leap_year: bool
-):
+    rmd_b: dict, rmd_p: dict, climate_zone: str, is_leap_year: bool
+) -> HVACServeLabZoneDict:
     """
     returns a list of HVAC systems serving only lab zones
 
@@ -44,7 +52,10 @@ def get_lab_zone_hvac_systems(
         if target_baseline_systems[zone_id_b]["system_origin"] == SYSTEMORIGIN.G311D
     ]
 
-    hvac_systems_serving_lab_zones = {"lab_zones_only": [], "lab_and_other": []}
+    hvac_systems_serving_lab_zones: HVACServeLabZoneDict = {
+        "lab_zones_only": [],
+        "lab_and_other": [],
+    }
     if building_lab_zones:
         dict_of_zones_and_hvac_systems_b = (
             get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmd_b)

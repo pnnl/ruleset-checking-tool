@@ -11,7 +11,9 @@ APPLICABLE_HEATING_SYSTEM = [
 ]
 
 
-def get_proposed_hvac_modeled_with_virtual_heating(rmi_u, rmi_p):
+def get_proposed_hvac_modeled_with_virtual_heating(
+    rmi_u: dict, rmi_p: dict
+) -> list[str]:
     """
     Get the list of HeatingVentilationAirAconditioningSystem in which Appendix G Table G3.1 #10 c is applicable (i.e.
     space heating is modeled in the P_RMR but not the U_RMR). Table G3.1 #10 c states that "where no heating system
