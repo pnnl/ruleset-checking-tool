@@ -1,4 +1,5 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
+from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rulesets.ashrae9012019 import (
     BASELINE_0,
@@ -8,13 +9,20 @@ from rct229.rulesets.ashrae9012019 import (
     PROPOSED,
     USER,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_BPF_building_area_types_and_zones import \
-    get_BPF_building_area_types_and_zones
+from rct229.rulesets.ashrae9012019.data_fns.table_4_2_1_1_fns import (
+    table_4_2_1_1_lookup,
+)
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_BPF_building_area_types_and_zones import (
+    get_BPF_building_area_types_and_zones,
+)
 from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_one
-from rct229.utils.std_comparisons import std_equal
+from rct229.utils.pint_utils import ZERO
 
-class Section1Rule1(RuleDefinitionBase):
+MANUAL_CHECK_REQUIRED_MSG = "One or more building area types could not be determined for the project's building segments. Assigning a lighting building area type to all building segments will fix this issue."
+
+
+class Section1Rule1(RuleDefinitionListIndexedBase):
     """Rule 1 of ASHRAE 90.1-2019 Appendix G Section 1 (Performance Calculations)"""
 
     def __init__(self):
@@ -36,63 +44,99 @@ class Section1Rule1(RuleDefinitionBase):
                 PROPOSED=True,
             ),
             required_fields={
-                "$": ["weather", "calendar"]},
+                "$": ["weather", "ruleset_model_descriptions"],
+                "weather": ["climate_zone"],
+            },
+            index_rmr=BASELINE_0,
+            each_rule=Section1Rule1.RMDRule(),
             id="1-1",
             description="Building performance factors shall be from Standard 90.1-2019, Table 4.2.1.1, based on the building area type and climate zone. For building area types not listed in Table 4.2.1.1 “All others.” shall be used to determine the BPF.",
             ruleset_section_title="Performance Calculations",
             standard_section="Section G4.2.1.1",
             is_primary_rule=True,
-            rmr_context="ruleset_model_descriptions/0",
+            list_path="ruleset_model_descriptions[0]",
+            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
         )
 
-    def get_calc_vals(self, context, data=None):
-        rmd_u = context.USER
-        rmd_b0 = context.BASELINE_0
-        rmd_b90 = context.BASELINE_90
-        rmd_b180 = context.BASELINE_180
-        rmd_b270 = context.BASELINE_270
-        rmd_p = context.PROPOSED
-        output_bpf_set = []
+    class RMDRule(RuleDefinitionBase):
+        def __init__(self):
+            super(Section1Rule1.RMDRule, self).__init__(
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=True,
+                    BASELINE_0=True,
+                    BASELINE_90=True,
+                    BASELINE_180=True,
+                    BASELINE_270=True,
+                    PROPOSED=True,
+                ),
+                rmrs_used_optional=produce_ruleset_model_instance(
+                    USER=True,
+                    BASELINE_0=True,
+                    BASELINE_90=True,
+                    BASELINE_180=True,
+                    BASELINE_270=True,
+                    PROPOSED=True,
+                ),
+                manual_check_required_msg=MANUAL_CHECK_REQUIRED_MSG,
+            )
 
-        for rmd in (rmd_u, rmd_b0, rmd_b90, rmd_b180, rmd_b270, rmd_p):
-            if rmd is not None:
-                output_bpf_set.append(
-                    find_one(
-                        "$.output.total_area_weighted_building_performance_factor",
-                        rmd,
+        def get_calc_vals(self, context, data=None):
+            rmd_u = context.USER
+            rmd_b0 = context.BASELINE_0
+            rmd_b90 = context.BASELINE_90
+            rmd_b180 = context.BASELINE_180
+            rmd_b270 = context.BASELINE_270
+            rmd_p = context.PROPOSED
+
+            output_bpf_set = []
+
+            for rmd in (rmd_u, rmd_b0, rmd_b90, rmd_b180, rmd_b270, rmd_p):
+                if rmd is not None:
+                    output_bpf_set.append(
+                        find_one(
+                            "$.output.total_area_weighted_building_performance_factor",
+                            rmd,
+                        )
                     )
+
+            output_bpf_set = list(filter(lambda x: x is not None, output_bpf_set))
+            assert_(
+                len(output_bpf_set) >= 1,
+                "At least one `output_bpf_set` value must exist.",
+            )
+            bpf_building_area_type_dict = get_BPF_building_area_types_and_zones(rmd_b0)
+            is_undetermined = "UNDETERMINED" in bpf_building_area_type_dict.keys()
+            bpf_bat_sum_prod = 0
+            total_area = ZERO.AREA
+            climate_zone = data["climate_zone"]
+            for bpf_bat in bpf_building_area_type_dict.keys():
+                if is_undetermined:
+                    continue
+                expected_bpf = table_4_2_1_1_lookup(bpf_bat, climate_zone)[
+                    "building_performance_factor"
+                ]
+                total_area += bpf_building_area_type_dict[bpf_bat]["area"]
+                bpf_bat_sum_prod += (
+                    expected_bpf * bpf_building_area_type_dict[bpf_bat]["area"]
                 )
+            return {
+                "output_bpf_set": list(set(output_bpf_set)),
+                "bpf_bat_sum_prod": bpf_bat_sum_prod,
+                "total_area": total_area,
+                "is_undetermined": is_undetermined,
+            }
 
-        output_bpf_set = list(filter(lambda x: x is not None, output_bpf_set))
-        assert_(len(output_bpf_set) >= 1, "At least one `output_bpf_set` value must exist.")
-        bpf_building_area_type_dict = get_BPF_building_area_types_and_zones(rmd_b0)
-        is_undetermined = "UNDETERMINED" in bpf_building_area_type_dict.keys()
-        bpf_bat_sum_prod = 0
-        total_area = 0
+        def manual_check_required(self, context, calc_vals=None, data=None):
+            is_undetermined = calc_vals["is_undetermined"]
+            return is_undetermined
 
-        for bpf_bat in bpf_building_area_type_dict.keys():
-            # expected_bpf = data_lookup(Table_4_2_1_1, bpf_bat, climate_zone) ## need to implement this function
-            total_area += bpf_building_area_type_dict[bpf_bat]["area"] ## quntity
-            bpf_bat_sum_prod += (expected_bpf * bpf_building_area_type_dict[bpf_bat]["area"]) ## quntity
-        return {
-            "output_bpf_set": list(set(output_bpf_set)),
-            "bpf_bat_sum_prod": bpf_bat_sum_prod,
-            "total_area": total_area,
-            "is_undetermined": is_undetermined,
-        }
+        def rule_check(self, context, calc_vals=None, data=None):
+            output_bpf_set = calc_vals["output_bpf_set"]
+            bpf_bat_sum_prod = calc_vals["bpf_bat_sum_prod"]
+            total_area = calc_vals["total_area"]
 
-    def manual_check_required(self, context, calc_vals=None, data=None):
-        is_undetermined = calc_vals["is_undetermined"]
-        return is_undetermined
-
-    def rule_check(self, context, calc_vals=None, data=None):
-        output_bpf_set = calc_vals["output_bpf_set"]
-        bpf_bat_sum_prod = calc_vals["bpf_bat_sum_prod"]
-        total_area = calc_vals["total_area"]
-
-        return (
-            len(output_bpf_set) == 1
-            and output_bpf_set[0] != 0
-            and bpf_bat_sum_prod/total_area == output_bpf_set[0]
-        )
-
+            return (
+                len(output_bpf_set) == 1
+                and output_bpf_set[0] != 0
+                and bpf_bat_sum_prod / total_area == output_bpf_set[0]
+            )
