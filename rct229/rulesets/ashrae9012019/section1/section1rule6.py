@@ -1,7 +1,8 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
-from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
-from rct229.rulesets.ashrae9012019.data_fns.extra_schema_fns import proposed_equals_user
+from rct229.rulesets.ashrae9012019.data_fns.extra_schema_fns import (
+    baseline_equals_proposed,
+)
 
 
 class Section1Rule6(RuleDefinitionBase):
@@ -10,7 +11,7 @@ class Section1Rule6(RuleDefinitionBase):
     def __init__(self):
         super(Section1Rule6, self).__init__(
             rmrs_used=produce_ruleset_model_instance(
-                USER=True, BASELINE_0=False, PROPOSED=True
+                USER=False, BASELINE_0=True, PROPOSED=True
             ),
             id="1-6",
             description="",
@@ -22,17 +23,17 @@ class Section1Rule6(RuleDefinitionBase):
 
     def is_applicable(self, context, data=None):
         proposed = context.PROPOSED
-        user = context.USER
-        return proposed and user
+        baseline = context.BASELINE_0
+        return proposed and baseline
 
     def get_calc_vals(self, context, data=None):
         proposed = context.PROPOSED
-        user = context.USER
+        baseline = context.BASELINE_0
         error_msg_list = []
 
-        comparison_result = proposed_equals_user(
-            index_context=proposed,
-            compare_context=user,
+        comparison_result = baseline_equals_proposed(
+            index_context=baseline,
+            compare_context=proposed,
             error_msg_list=error_msg_list,
         )
 
