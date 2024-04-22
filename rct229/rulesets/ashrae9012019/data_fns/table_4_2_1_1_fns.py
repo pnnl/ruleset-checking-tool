@@ -30,27 +30,19 @@ table_4_2_1_1_climate_zone_enumeration_to_climate_zone_map = {
 # This dictionary maps the BuildingAreaTypeOptions2019ASHRAE901 enumerations to
 # the corresponding climate zone values in the OSSTD file
 # ashrae_90_1_table_4_2_1_1.json
+
 table_4_2_1_1_building_area_type_enumeration_to_building_area_type_map = {
     "MULTIFAMILY": "Multifamily",
     "HEALTHCARE_HOSPITAL": "Healthcare/hospital",
-    "CZ1A": "0A and 1A",
-    "CZ1B": "0B and 1B",
-    "CZ2A": "2A",
-    "CZ2B": "2B",
-    "CZ3A": "3A",
-    "CZ3B": "3B",
-    "CZ3C": "3C",
-    "CZ4A": "4A",
-    "CZ4B": "4B",
-    "CZ4C": "4C",
-    "CZ5A": "5A",
-    "CZ5B": "5B",
-    "CZ5C": "5C",
-    "CZ6A": "6A",
-    "CZ6B": "6B",
-    "CZ7": "7",
-    "CZ8": "8",
+    "HOTEL_MOTEL": "Hotel/motel",
+    "OFFICE": "Office",
+    "RESTAURANT": "Restaurant",
+    "RETAIL": "Retail",
+    "SCHOOL": "School",
+    "WAREHOUSE": "Warehouse",
+    "ALL_OTHER": "All others",
 }
+
 
 def table_4_2_1_1_lookup(building_area_type_enum_val, climate_zone_enum_val):
     """Returns the building performance factor
@@ -64,9 +56,11 @@ def table_4_2_1_1_lookup(building_area_type_enum_val, climate_zone_enum_val):
     dict
         { leaving_water_temperature: Quantity – the leaving water temperature defined by Table 3.1.3.7 [degree-F]}
     """
-    building_area_type = table_4_2_1_1_building_area_type_enumeration_to_building_area_type_map[
-        building_area_type_enum_val
-    ]
+    building_area_type = (
+        table_4_2_1_1_building_area_type_enumeration_to_building_area_type_map[
+            building_area_type_enum_val
+        ]
+    )
 
     climate_zone = table_4_2_1_1_climate_zone_enumeration_to_climate_zone_map[
         climate_zone_enum_val
