@@ -65,12 +65,9 @@ class Section1Rule1(RuleDefinitionListIndexedBase):
                     BASELINE_270=True,
                 ),
                 rmrs_used_optional=produce_ruleset_model_instance(
-                    USER=True,
-                    BASELINE_0=True,
                     BASELINE_90=True,
                     BASELINE_180=True,
                     BASELINE_270=True,
-                    PROPOSED=True,
                 ),
                 manual_check_required_msg=MANUAL_CHECK_REQUIRED_MSG,
             )

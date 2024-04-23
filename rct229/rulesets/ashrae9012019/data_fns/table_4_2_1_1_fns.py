@@ -46,7 +46,7 @@ table_4_2_1_1_building_area_type_enumeration_to_building_area_type_map = {
 
 def table_4_2_1_1_lookup(
     building_area_type_enum_val: str, climate_zone_enum_val: str
-) -> dict:
+) -> dict[str, float]:
     """Returns the building performance factor
     required by ASHRAE 90.1 Table 4.2.1.1
     Parameters
@@ -58,7 +58,7 @@ def table_4_2_1_1_lookup(
     Returns
     -------
     dict
-        { leaving_water_temperature: Quantity – the leaving water temperature defined by Table 3.1.3.7 [degree-F]}
+        { building_performance_factor: float number – the building performance factor defined by Table 4.2.1.1}
     """
     building_area_type = (
         table_4_2_1_1_building_area_type_enumeration_to_building_area_type_map[
