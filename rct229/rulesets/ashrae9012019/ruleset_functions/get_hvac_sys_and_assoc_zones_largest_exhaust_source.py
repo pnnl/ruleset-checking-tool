@@ -1,3 +1,7 @@
+from typing import TypedDict
+
+from pint import Quantity
+
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_dict_of_zones_and_terminal_units_served_by_hvac_sys import (
     get_dict_of_zones_and_terminal_units_served_by_hvac_sys,
 )
@@ -10,7 +14,16 @@ from rct229.utils.utility_functions import (
 )
 
 
-def get_hvac_sys_and_assoc_zones_largest_exhaust_source(rmi, hvac_sys_id):
+class HVACSysAssocZonesLargestExhaustSource(TypedDict):
+    hvac_fan_sys_exhaust_sum: Quantity
+    maximum_zone_exhaust: Quantity
+    num_hvac_exhaust_fans: int
+    maximum_hvac_exhaust: Quantity
+
+
+def get_hvac_sys_and_assoc_zones_largest_exhaust_source(
+    rmi: dict, hvac_sys_id: str
+) -> HVACSysAssocZonesLargestExhaustSource:
     """
     Returns a list with the sum of the hvac fan system exhaust fan cfm values, the maximum zone level exhaust source
     across the zones associated with the HVAC system, the number of exhaust fans associated with the hvac fan system,

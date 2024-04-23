@@ -200,7 +200,7 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-                                                        "primary_airflow": 2500,
+                                                        "primary_airflow": 1179.8686079999995,
                                                         "supply_design_cooling_setpoint_temperature": 15.5555555555556,
                                                         "supply_design_heating_setpoint_temperature": 32.222222222222285
                                                     }
@@ -740,7 +740,7 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-                                                        "primary_airflow": 2500,
+                                                        "primary_airflow": 1179.8686079999995,
                                                         "supply_design_cooling_setpoint_temperature": 12.777777777777828,
                                                         "supply_design_heating_setpoint_temperature": 32.222222222222285
                                                     }
@@ -1122,7 +1122,7 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-                                                        "primary_airflow": 471.94744319999984
+                                                        "primary_airflow": 235.97372159999992
                                                     }
                                                 ]
                                             },
@@ -1138,7 +1138,7 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-                                                        "primary_airflow": 471.94744319999984
+                                                        "primary_airflow": 235.97372159999992
                                                     }
                                                 ]
                                             }
@@ -1169,7 +1169,7 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ],
-                                                    "minimum_outdoor_airflow": 471.94744319999984
+                                                    "minimum_outdoor_airflow": 117.98686079999996
                                                 }
                                             }
                                         ]
@@ -1280,7 +1280,7 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-                                                        "primary_airflow": 500,
+                                                        "primary_airflow": 235.97372159999992,
                                                         "supply_design_cooling_setpoint_temperature": 11.666666666666686,
                                                         "supply_design_heating_setpoint_temperature": 30.5555555555556
                                                     }
@@ -1329,7 +1329,7 @@
                                                             "is_airflow_sized_based_on_design_day": true
                                                         }
                                                     ],
-                                                    "minimum_outdoor_airflow": 212.37634943999993
+                                                    "minimum_outdoor_airflow": 117.98686079999996
                                                 }
                                             }
                                         ]
