@@ -11,26 +11,30 @@
 
 **Appendix G Section Reference:** Table G3.1 #11, proposed column, a & b
 
-**Evaluation Context:** P-RMD
+**Evaluation Context:** P-RMD each SHW type
 **Data Lookup:**   
 **Function Call:** 
 - **get_component_by_id**
 - **compare_context_pair** - there is no RDS for this function, but it is a function developed for Rule 1-6 that compares two elements
+- **get_SHW_types_and_spaces**
 
 **Applicability Checks:**
-- check that U_RMD has SHW loads
+- check that the SHW type in the U_RMD has SHW loads
 
 ## Applicability Checks:
-- only projects with SHW in the user model are expected to have a SHW system in the user model.  If there is no SHW in the user model, we assume there is no SHW system designed, and instead rule 11-3 Applies and P_RMD matches B_RMD.
-- look for ServiceWaterHeatingUse in each space: `for u_space in U_RMD...spaces:`
-    - check to see if the space has a ServiceWaterHeatingUse.  If even one space has a ServiceWaterHeatingUse, continue to rule logic: `if len(u.space.service_water_heating_uses) > 0: CONTINUE TO RULE LOGIC`
-- if the program reaches this line without going to the rule logic, the project is not applicable: `NOT_APPLICABLE`
+- only projects with SHW for the SHW space type in the user model are expected to have a SHW system in the user model.  If there is no SHW in the user model, we assume there is no SHW system designed, and instead rule 11-3 Applies and P_RMD matches B_RMD.
+- use the function get_SHW_types_and_spaces to get a list of spaces for each SHW type: `shw_and_spaces_dict = get_SHW_types_and_spaces(U_RMD)`
+- look at each SHW space type: `for shw_space_type in shw_and_spaces_dict:`
+  - look at each space: `for space_id in shw_and_spaces_dict[shw_space_type]:`
+    - get the space using get_component_by_id: `space = get_component_by_id(U_RMD, space_id)`
+    - look for the ServiceWaterHeatingUse in the space.  If even one space has a ServiceWaterHeatingUse, continue to rule logic: `if len(u.space.service_water_heating_uses) > 0: CONTINUE TO RULE LOGIC`
+  - if the program reaches this line without going to the rule logic, the project is not applicable for this SHW heating use: `NOT_APPLICABLE`
 
 ## Rule Logic: 
 - create a boolean to keep track of whether everything matches: `all_match = TRUE`
 - create an error string: `error_str = ""`
 - create the compare context string: `compare_context_str = "AppG 11-1 P_RMD Equals U_RMD"`
-- check if the ServiceWaterHeatingDistributionSystem matches between the propoesd and user models.  First check whether there are the same number of systems: `if len(P_RMD.service_water_heating_distribution_systems) == len(U_RMD.service_water_heating_distribution_systems):`
+- check if the ServiceWaterHeatingDistributionSystem matches between the proposed and user models.  First check whether there are the same number of systems: `if len(P_RMD.service_water_heating_distribution_systems) == len(U_RMD.service_water_heating_distribution_systems):`
     - look at each SHW distribution system in the proposed model and see if there is one that is the same in the user model.  This check relies on the understanding that the RCT team has a method for comparing all elements within an object match (compare_context_pair): `for p_SHW_dist_system in P_RMD.service_water_heating_distribution_systems:`
         - if this system is in U_RMD.service_water_heating_distribution_systems, compare the systems: `if p_SHW_dist_system in U_RMD.service_water_heating_distribution_systems:`
             - use compare_context_pair to compare systems and set all_match to FALSE if the systems don't compare: `if !compare_context_pair(p_SHW_dist_system, U_RMD.get_component_by_id(p_SHW_dist_system.id),$,extra_schema_for_SHW_comparison.json,true,compare_context_str,error_str): all_match = FALSE`
