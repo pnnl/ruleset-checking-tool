@@ -148,7 +148,7 @@ def compare_context_pair(
             sorted_index = sorted(index_context, key=lambda x: x["id"])
             sorted_compare = sorted(compare_context, key=lambda x: x["id"])
             for i in range(len(sorted_index)):
-                if i <= len(sorted_compare):
+                if i < len(sorted_compare):
                     # in this case, we are still using the same extra_schema
                     matched = (
                         compare_context_pair(
