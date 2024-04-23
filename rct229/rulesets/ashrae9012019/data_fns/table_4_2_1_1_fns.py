@@ -44,11 +44,15 @@ table_4_2_1_1_building_area_type_enumeration_to_building_area_type_map = {
 }
 
 
-def table_4_2_1_1_lookup(building_area_type_enum_val, climate_zone_enum_val):
+def table_4_2_1_1_lookup(
+    building_area_type_enum_val: str, climate_zone_enum_val: str
+) -> dict:
     """Returns the building performance factor
     required by ASHRAE 90.1 Table 4.2.1.1
     Parameters
     ----------
+    building_area_type_enum_val : str
+        One of the building area type enumeration values
     climate_zone_enum_val : str
         One of the ClimateZoneOptions2019ASHRAE901 enumeration values
     Returns
