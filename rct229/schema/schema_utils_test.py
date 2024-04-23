@@ -16,17 +16,20 @@ def test__clean_schema_units__with_dash_in_denominator():
 
 TEST_RMR = {
     "id": "229-01",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "user_rmd",
+            "type": "Enumerations2019ASHRAE901.schema.json#/definitions/RulesetModelOptions2019ASHRAE901",
             "transformers": [
                 {
                     "id": "1",
                     "capacity": 500,
                 }
             ],
+            "type": "BASELINE_0",
         },
     ],
+    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 
@@ -43,7 +46,7 @@ def test__quantify_rmr():
     ureg = get_pint_unit_registry()
     assert quantify_rmr(TEST_RMR) == {
         "id": "229-01",
-        "ruleset_model_instances": [
+        "ruleset_model_descriptions": [
             {
                 "id": "user_rmd",
                 "transformers": [
@@ -52,6 +55,8 @@ def test__quantify_rmr():
                         "capacity": 500 * ureg("ampere * volt"),
                     }
                 ],
+                "type": "BASELINE_0",
             },
         ],
+        "data_timestamp": "2024-02-12T09:00Z",
     }
