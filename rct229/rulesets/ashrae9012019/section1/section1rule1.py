@@ -37,12 +37,9 @@ class Section1Rule1(RuleDefinitionListIndexedBase):
                 PROPOSED=True,
             ),
             rmrs_used_optional=produce_ruleset_model_instance(
-                USER=True,
-                BASELINE_0=True,
                 BASELINE_90=True,
                 BASELINE_180=True,
                 BASELINE_270=True,
-                PROPOSED=True,
             ),
             required_fields={
                 "$": ["weather", "ruleset_model_descriptions"],
@@ -63,12 +60,9 @@ class Section1Rule1(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section1Rule1.RMDRule, self).__init__(
                 rmrs_used=produce_ruleset_model_instance(
-                    USER=True,
-                    BASELINE_0=True,
                     BASELINE_90=True,
                     BASELINE_180=True,
                     BASELINE_270=True,
-                    PROPOSED=True,
                 ),
                 rmrs_used_optional=produce_ruleset_model_instance(
                     USER=True,
