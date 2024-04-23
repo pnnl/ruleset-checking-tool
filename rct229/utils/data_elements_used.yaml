@@ -1,0 +1,719 @@
+RulesetProjectDescription: used 
+  id:  True
+  reporting_name:  False
+  notes:  False
+  data_timestamp:  False
+  data_version:  False
+  ruleset_model_descriptions:  True
+  calendar:  True
+  weather:  True
+  compliance_path:  True
+  output_format_type:  False
+
+RulesetModelDescription: used 
+  id:  True
+  reporting_name:  False
+  notes:  False
+  type:  True
+  transformers:  True
+  buildings:  True
+  schedules:  True
+  measured_infiltration_pressure_difference:  True
+  is_measured_infiltration_based_on_test:  False
+  fluid_loops:  True
+  service_water_heating_distribution_systems:  False
+  service_water_heating_equipment:  False
+  pumps:  True
+  boilers:  True
+  chillers:  True
+  heat_rejections:  True
+  external_fluid_sources:  True
+  site_zone_type:  False
+  output:  True
+
+Building: used 
+  id:  True
+  reporting_name:  False
+  notes:  False
+  building_segments:  True
+  elevators:  False
+  exterior_lighting:  False
+  refrigerated_cases:  False
+  building_open_schedule:  True
+  has_site_shading:  False
+  number_of_floors_above_grade:  False
+  number_of_floors_below_grade:  False
+
+BuildingSegment: used 
+  id:  True
+  reporting_name:  False
+  notes:  False
+  number_of_floors_above_grade:  False
+  number_of_floors_below_grade:  False
+  is_all_new:  True
+  zones:  True
+  heating_ventilating_air_conditioning_systems:  True
+  area_type_vertical_fenestration:  True
+  lighting_building_area_type:  True
+  area_type_heating_ventilating_air_conditioning_system:  True
+
+Zone: used 
+  id:  True
+  reporting_name:  False
+  notes:  False
+  spaces:  True
+  floor_name:  True
+  volume:  True
+  surfaces:  True
+  conditioning_type:  False
+  infiltration:  True
+  design_thermostat_cooling_setpoint:  True
+  thermostat_cooling_setpoint_schedule:  True
+  design_thermostat_heating_setpoint:  True
+  thermostat_heating_setpoint_schedule:  True
+  minimum_humidity_setpoint_schedule:  False
+  maximum_humidity_setpoint_schedule:  True
+  terminals:  True
+  served_by_service_water_heating_system:  False
+  transfer_airflow_rate:  False
+  transfer_airflow_source_zone:  False
+  zonal_exhaust_fan:  True
+  exhaust_airflow_rate_multiplier_schedule:  False
+  makeup_airflow_rate:  False
+  non_mechanical_cooling_fan_power:  False
+  non_mechanical_cooling_fan_airflow:  True
+  air_distribution_effectiveness:  True
+  aggregation_factor:  False
+
+Space: used 
+  id:  True
+  reporting_name:  False
+  notes:  False
+  interior_lighting:  True
+  miscellaneous_equipment:  True
+  floor_area:  True
+  number_of_occupants:  True
+  occupant_multiplier_schedule:  True
+  occupant_sensible_heat_gain:  True
+  occupant_latent_heat_gain:  True
+  status_type:  True
+  function:  True
+  envelope_space_type:  False
+  lighting_space_type:  True
+  ventilation_space_type:  True
+  service_water_heating_space_type:  False
+  service_water_heating_uses:  False
+
+Infiltration: used 
+  id:  True
+  reporting_name:  False
+  notes:  False
+  modeling_method:  True
+  algorithm_name:  True
+  measured_air_leakage_rate:  True
+  flow_rate:  True
+  multiplier_schedule:  True
+
+Surface: used 
+  id:  True
+  reporting_name:  False
+  notes:  False
+  subsurfaces:  True
+  classification:  False
+  area:  True
+  tilt:  True
+  azimuth:  True
+  adjacent_to:  True
+  adjacent_zone:  True
+  does_cast_shade:  True
+  construction:  True
+  optical_properties:  True
+  status_type:  False
+
+Construction: used 
+  id:  True
+  reporting_name:  False
+  notes:  False
+  classification:  False
+  surface_construction_input_option:  False
+  fraction_framing:  False
+  primary_layers:  False
+  framing_layers:  False
+  insulation_locations:  False
+  u_factor:  True
+  c_factor:  True
+  f_factor:  True
+  r_values:  False
+  has_radiant_heating:  False
+  has_radiant_cooling:  False
+
+Material: unused 
+  id:  False
+  reporting_name:  False
+  notes:  False
+  thickness:  False
+  thermal_conductivity:  False
+  density:  False
+  specific_heat:  False
+  r_value:  False
+
+SurfaceOpticalProperties: used 
+  id:  True
+  reporting_name:  False
+  notes:  False
+  absorptance_thermal_exterior:  True
+  absorptance_solar_exterior:  True
+  absorptance_visible_exterior:  False
+  absorptance_thermal_interior:  False
+  absorptance_solar_interior:  False
+  absorptance_visible_interior:  False
+
+Subsurface: used 
+  id:  True
+  reporting_name:  False
+  notes:  False
+  classification:  True
+  subclassification:  True
+  is_operable:  False
+  has_open_sensor:  False
+  framing_type:  False
+  glazed_area:  True
+  opaque_area:  True
+  u_factor:  True
+  dynamic_glazing_type:  True
+  solar_heat_gain_coefficient:  True
+  maximum_solar_heat_gain_coefficient:  False
+  visible_transmittance:  False
+  minimum_visible_transmittance:  False
+  depth_of_overhang:  False
+  has_shading_overhang:  True
+  has_shading_sidefins:  True
+  has_manual_interior_shades:  True
+  solar_transmittance_multiplier_summer:  False
+  solar_transmittance_multiplier_winter:  False
+  has_automatic_shades:  False
+  status_type:  False
+
+InteriorLighting: used 
+  id:  True
+  reporting_name:  False
+  notes:  False
+  purpose_type:  False
+  power_per_area:  True
+  lighting_multiplier_schedule:  True
+  occupancy_control_type:  True
+  daylighting_control_type:  True
+  are_schedules_used_for_modeling_occupancy_control:  True
+  are_schedules_used_for_modeling_daylighting_control:  True
+
+MiscellaneousEquipment: used 
+  id:  True
+  reporting_name:  False
+  notes:  False
+  energy_type:  False
+  power:  True
+  multiplier_schedule:  True
+  sensible_fraction:  False
+  latent_fraction:  False
+  remaining_fraction_to_loop:  False
+  energy_from_loop:  False
+  type:  True
+  has_automatic_control:  False
+
+Transformer: used 
+  id:  True
+  reporting_name:  False
+  notes:  False
+  type:  True
+  phase:  True
+  efficiency:  True
+  capacity:  True
+  peak_load:  False
+
+Schedule: used 
+  id:  True
+  reporting_name:  False
+  notes:  False
+  purpose:  False
+  sequence_type:  False
+  hourly_values:  True
+  hourly_heating_design_day:  True
+  hourly_cooling_design_day:  True
+  event_times:  False
+  event_values:  False
+  event_times_heating_design_day:  False
+  event_values_heating_design_day:  False
+  event_times_cooling_design_day:  False
+  event_values_cooling_design_day:  False
+  type:  True
+  prescribed_type:  False
+  is_modified_for_workaround:  False
+
+Calendar: used 
+  notes:  False
+  day_of_week_for_january_1:  True
+  is_leap_year:  True
+  has_daylight_saving_time:  False
+
+Weather: used 
+  notes:  False
+  ground_temperature_schedule:  True
+  file_name:  False
+  data_source_type:  True
+  climate_zone:  True
+  cooling_design_day_type:  True
+  heating_design_day_type:  True
+
+Elevator: unused 
+  id:  False
+  reporting_name:  False
+  notes:  False
+  type:  False
+  motor_location_zone:  False
+  motor_heat_fraction:  False
+  cab_location_zone:  False
+  cab_heat_fraction:  False
+  is_variable_speed_motor:  False
+  motor_power:  False
+  cab_counterweight:  False
+  cab_weight:  False
+  design_load:  False
+  speed:  False
+  cab_area:  False
+  cab_lighting_power:  False
+  cab_ventilation_fan_power:  False
+  cab_ventilation_fan_flow:  False
+  cab_motor_multiplier_schedule:  False
+  cab_ventilation_fan_multiplier_schedule:  False
+  cab_lighting_multiplier_schedule:  False
+
+HeatingVentilatingAirConditioningSystem: used 
+  id:  True
+  reporting_name:  False
+  notes:  False
+  fan_system:  True
+  heating_system:  True
+  cooling_system:  True
+  preheat_system:  True
+  status_type:  False
+
+HeatingSystem: used 
+  id:  True
+  reporting_name:  False
+  notes:  False
+  type:  True
+  energy_source_type:  True
+  hot_water_loop:  True
+  water_source_heat_pump_loop:  False
+  design_capacity:  True
+  rated_capacity:  False
+  oversizing_factor:  True
+  is_sized_based_on_design_day:  False
+  heating_coil_setpoint:  True
+  efficiency_metric_values:  False
+  efficiency_metric_types:  False
+  heatpump_auxilliary_heat_type:  False
+  heatpump_auxilliary_heat_high_shutoff_temperature:  False
+  heatpump_low_shutoff_temperature:  True
+  humidification_type:  False
+
+CoolingSystem: used 
+  id:  True
+  reporting_name:  False
+  notes:  False
+  type:  True
+  design_total_cool_capacity:  False
+  design_sensible_cool_capacity:  True
+  rated_total_cool_capacity:  False
+  rated_sensible_cool_capacity:  False
+  oversizing_factor:  True
+  is_sized_based_on_design_day:  False
+  chilled_water_loop:  True
+  condenser_water_loop:  False
+  efficiency_metric_values:  False
+  efficiency_metric_types:  False
+  dehumidification_type:  True
+  cooling_turndown_ratio:  False
+
+FanSystem: used 
+  id:  True
+  reporting_name:  False
+  notes:  False
+  supply_fans:  True
+  return_fans:  True
+  exhaust_fans:  True
+  relief_fans:  True
+  air_economizer:  True
+  air_energy_recovery:  True
+  temperature_control:  True
+  operation_during_occupied:  True
+  operation_during_unoccupied:  True
+  has_lock_out_central_heat_during_unoccupied:  False
+  fan_control:  True
+  reset_differential_temperature:  True
+  supply_air_temperature_reset_load_fraction:  True
+  supply_air_temperature_reset_schedule:  False
+  fan_volume_reset_type:  True
+  fan_volume_reset_fraction:  True
+  operating_schedule:  False
+  minimum_airflow:  True
+  minimum_outdoor_airflow:  True
+  maximum_outdoor_airflow:  True
+  air_filter_merv_rating:  False
+  has_fully_ducted_return:  False
+  demand_control_ventilation_control:  True
+
+AirEconomizer: used 
+  id:  True
+  reporting_name:  False
+  notes:  False
+  type:  True
+  high_limit_shutoff_temperature:  True
+  is_integrated:  False
+
+AirEnergyRecovery: used 
+  id:  True
+  reporting_name:  False
+  notes:  False
+  type:  False
+  enthalpy_recovery_ratio:  True
+  energy_recovery_operation:  True
+  energy_recovery_supply_air_temperature_control:  False
+  design_sensible_effectiveness:  True
+  design_latent_effectiveness:  True
+  outdoor_airflow:  True
+  exhaust_airflow:  True
+
+Fan: used 
+  id:  True
+  reporting_name:  False
+  notes:  False
+  design_airflow:  True
+  is_airflow_sized_based_on_design_day:  False
+  specification_method:  True
+  design_electric_power:  True
+  design_pressure_rise:  False
+  motor_nameplate_power:  False
+  shaft_power:  False
+  total_efficiency:  False
+  motor_efficiency:  False
+  motor_heat_to_airflow_fraction:  False
+  motor_heat_to_zone_fraction:  False
+  motor_location_zone:  False
+  status_type:  False
+  output_validation_points:  True
+
+FanOutputValidationPoint: used 
+  airflow:  True
+  result:  True
+
+Terminal: used 
+  id:  True
+  reporting_name:  False
+  notes:  False
+  type:  True
+  served_by_heating_ventilating_air_conditioning_system:  True
+  heating_source:  True
+  heating_from_loop:  True
+  cooling_source:  True
+  cooling_from_loop:  True
+  fan:  True
+  fan_configuration:  True
+  primary_airflow:  True
+  secondary_airflow:  False
+  max_heating_airflow:  False
+  supply_design_heating_setpoint_temperature:  True
+  supply_design_cooling_setpoint_temperature:  True
+  temperature_control:  False
+  minimum_airflow:  True
+  minimum_outdoor_airflow:  True
+  minimum_outdoor_airflow_multiplier_schedule:  True
+  heating_capacity:  False
+  cooling_capacity:  False
+  is_supply_ducted:  True
+  has_demand_control_ventilation:  True
+  is_fan_first_stage_heat:  False
+
+FluidLoop: used 
+  id:  True
+  reporting_name:  False
+  notes:  False
+  type:  True
+  pump_power_per_flow_rate:  True
+  child_loops:  True
+  cooling_or_condensing_design_and_control:  True
+  heating_design_and_control:  True
+
+FluidLoopDesignAndControl: used 
+  id:  True
+  reporting_name:  False
+  notes:  False
+  design_supply_temperature:  True
+  design_return_temperature:  True
+  is_sized_using_coincident_load:  True
+  minimum_flow_fraction:  True
+  operation:  True
+  operation_schedule:  False
+  flow_control:  True
+  temperature_reset_type:  True
+  outdoor_high_for_loop_supply_reset_temperature:  True
+  outdoor_low_for_loop_supply_reset_temperature:  True
+  loop_supply_temperature_at_outdoor_high:  True
+  loop_supply_temperature_at_outdoor_low:  True
+  loop_supply_temperature_at_low_load:  True
+  has_integrated_waterside_economizer:  True
+
+Pump: used 
+  id:  True
+  reporting_name:  False
+  notes:  False
+  loop_or_piping:  True
+  specification_method:  False
+  design_electric_power:  False
+  motor_nameplate_power:  False
+  design_head:  False
+  impeller_efficiency:  False
+  motor_efficiency:  False
+  speed_control:  True
+  design_flow:  False
+  is_flow_sized_based_on_design_day:  False
+  output_validation_points:  False
+
+PumpOutputValidationPoint: unused 
+  flow:  False
+  result:  False
+
+Boiler: used 
+  id:  True
+  reporting_name:  False
+  notes:  False
+  loop:  True
+  design_capacity:  False
+  rated_capacity:  True
+  minimum_load_ratio:  False
+  draft_type:  True
+  energy_source_type:  True
+  efficiency_metric:  True
+  efficiency:  True
+  output_validation_points:  False
+  auxiliary_power:  False
+  operation_lower_limit:  True
+  operation_upper_limit:  True
+
+BoilerOutputValidationPoint: unused 
+  load:  False
+  entering_water_temperature:  False
+  result:  False
+
+Chiller: used 
+  id:  True
+  reporting_name:  False
+  notes:  False
+  cooling_loop:  True
+  condensing_loop:  True
+  compressor_type:  True
+  energy_source_type:  False
+  design_capacity:  False
+  rated_capacity:  True
+  rated_entering_condenser_temperature:  False
+  rated_leaving_evaporator_temperature:  False
+  minimum_load_ratio:  False
+  design_flow_evaporator:  False
+  design_flow_condenser:  False
+  design_entering_condenser_temperature:  False
+  design_leaving_evaporator_temperature:  False
+  full_load_efficiency:  True
+  part_load_efficiency:  True
+  part_load_efficiency_metric:  True
+  capacity_validation_points:  False
+  power_validation_points:  False
+  is_chilled_water_pump_interlocked:  True
+  is_condenser_water_pump_interlocked:  True
+  heat_recovery_loop:  False
+  heat_recovery_fraction:  False
+
+ChillerCapacityValidationPoint: unused 
+  chilled_water_supply_temperature:  False
+  condenser_temperature:  False
+  result:  False
+
+ChillerPowerValidationPoint: unused 
+  chilled_water_supply_temperature:  False
+  condenser_temperature:  False
+  load:  False
+  is_at_full_capacity:  False
+  result:  False
+
+HeatRejection: used 
+  id:  True
+  reporting_name:  False
+  notes:  False
+  loop:  True
+  type:  True
+  fan_type:  True
+  fluid:  False
+  range:  True
+  approach:  True
+  fan_shaft_power:  True
+  fan_motor_efficiency:  False
+  fan_motor_nameplate_power:  False
+  fan_speed_control:  True
+  design_wetbulb_temperature:  True
+  design_water_flowrate:  False
+  rated_water_flowrate:  True
+  leaving_water_setpoint_temperature:  True
+
+ExternalFluidSource: used 
+  id:  True
+  reporting_name:  False
+  notes:  False
+  loop:  True
+  type:  True
+  energy_source_type:  False
+
+ServiceWaterHeatingDistributionSystem: unused 
+  id:  False
+  reporting_name:  False
+  notes:  False
+  design_supply_temperature:  False
+  design_supply_temperature_difference:  False
+  tanks:  False
+  is_central_system:  False
+  service_water_piping:  False
+  distribution_compactness:  False
+  control_type:  False
+  configuration_type:  False
+  is_recovered_heat_from_drain_used_by_water_heater:  False
+  drain_heat_recovery_efficiency:  False
+  drain_heat_recovery_type:  False
+  flow_multiplier_schedule:  False
+  entering_water_mains_temperature_schedule:  False
+  is_ground_temperature_used_for_entering_water:  False
+
+ServiceWaterPiping: unused 
+  id:  False
+  reporting_name:  False
+  notes:  False
+  is_recirculation_loop:  False
+  insulation_thickness:  False
+  loop_pipe_location:  False
+  location_zone:  False
+  length:  False
+  diameter:  False
+  child:  False
+
+SolarThermal: unused 
+  id:  False
+  reporting_name:  False
+  notes:  False
+  angle_from_true_north:  False
+  solar_savings_fraction:  False
+  collector_area:  False
+  collector_type_description:  False
+  collector_slope:  False
+  tank:  False
+
+ServiceWaterHeatingEquipment: unused 
+  id:  False
+  reporting_name:  False
+  notes:  False
+  heater_fuel_type:  False
+  distribution_system:  False
+  energy_factor:  False
+  thermal_efficiency:  False
+  standby_loss_fraction:  False
+  uniform_energy_factor:  False
+  first_hour_rating:  False
+  output_validation_points:  False
+  input_power:  False
+  rated_capacity:  False
+  minimum_capacity:  False
+  recovery_efficiency:  False
+  setpoint_temperature:  False
+  compressor_location:  False
+  compressor_zone:  False
+  compressor_heat_rejection_source:  False
+  compressor_heat_rejection_zone:  False
+  compressor_capacity_validation_points:  False
+  compressor_power_validation_points:  False
+  draft_fan_power:  False
+  has_electrical_ignition:  False
+  heater_type:  False
+  tank:  False
+  status_type:  False
+  solar_thermal_systems:  False
+  hot_water_loop:  False
+
+ServiceWaterHeaterValidationPoint: unused 
+  load:  False
+  result:  False
+
+HeatPumpWaterHeaterCapacityValidationPoint: unused 
+  evaporator_air_temperature:  False
+  condenser_water_temperature:  False
+  evaporator_air_flow:  False
+  condenser_water_flow:  False
+  result:  False
+
+HeatPumpWaterHeaterPowerValidationPoint: unused 
+  evaporator_air_temperature:  False
+  condenser_water_temperature:  False
+  evaporator_air_flow:  False
+  condenser_water_flow:  False
+  load:  False
+  result:  False
+
+Tank: unused 
+  id:  False
+  reporting_name:  False
+  notes:  False
+  storage_capacity:  False
+  type:  False
+  height:  False
+  interior_insulation:  False
+  exterior_insulation:  False
+  location:  False
+  location_zone:  False
+
+ServiceWaterHeatingUse: unused 
+  id:  False
+  reporting_name:  False
+  notes:  False
+  area_type:  False
+  water_serves_type:  False
+  served_by_distribution_system:  False
+  use:  False
+  use_units:  False
+  use_multiplier_schedule:  False
+  temperature_at_fixture:  False
+  is_heat_recovered_by_drain:  False
+  is_recovered_heat_used_by_cold_side_feed:  False
+
+ExteriorLighting: unused 
+  id:  False
+  reporting_name:  False
+  notes:  False
+  type:  False
+  area:  False
+  length:  False
+  power:  False
+  fixture_height:  False
+  is_exempt:  False
+  multiplier_schedule:  False
+
+RefrigeratedCase: unused 
+  id:  False
+  reporting_name:  False
+  notes:  False
+  type:  False
+  equipment_category:  False
+  is_self_contained:  False
+  application_temperature:  False
+  power:  False
+  power_multiplier_schedule:  False
+  sensible_fraction:  False
+  heat_gain_fraction:  False
+  volume:  False
+  total_display_area:  False
+  zone:  False
+
