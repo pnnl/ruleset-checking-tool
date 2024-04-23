@@ -28,7 +28,7 @@ get_BPF_building_area_types_and_zones()
 - Iterate through the building area type(s) in the BPF building area type dictionary: `for bpf_bat in bpf_building_area_type_dict:`
   - Get the expected BPF value from Table 4.2.1.1 based on building area and climate zone: `expected_bpf = data_lookup(Table_4_2_1_1, bpf_bat, climate_zone)`
   - Add the area to the total: `total_area += bpf_building_area_type_dict[bpf_bat]["AREA"]`
-  - Add the product of expected BPF and area to the expected summed product of BPF and area: `expected_bpf_bat_sum_prod += (expected_bpf * bpf_building_area_type_dict[bpf_bat]["AREA"])`
+  - Add the product of expected BPF and area to the expected summed product of BPF and area: `bpf_bat_sum_prod += (expected_bpf * bpf_building_area_type_dict[bpf_bat]["AREA"])`
 
 **Rule Assertion:**
 - If is_undetermined is TRUE; outcome=UNDETERMINED: `if is_undetermined: UNDETERMINED and raise_message "One or more building area types could not be determined for the project's building segments. Assigning a lighting building area type to all building segments will fix this issue."`
