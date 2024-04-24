@@ -23,7 +23,9 @@ N/A
   - Get the number of floors above grade in the building: `floors_above_grade_b = building.number_of_floors_above_grade`
   - Get the number of floors below grade in the building: `floors_below_grade_b = building.number_of_floors_above_grade`
   - If both floors above grade and floors below grade are null: `if floors_above_grade_b == Null and floors_below_grade_b == Null: is_undetermined = true`
-  - Calculate the total number of floors in the building: `total_floors_b = floors_above_grade + floors_below_grade`
+  - Elif floors above grade is null: `elif floors_above_grade_b == Null: total_floors_b = floors_below_grade_b`
+  - Elif floors below grade is null: `elif floors_below_grade_b == Null: total_floors_b = floors_above_grade_b`
+  - Else, calculate the total number of floors in the building: `else: total_floors_b = floors_above_grade_b + floors_below_grade_b`
   - For each elevator in the building: `for elevator in B_RMD...elevators`
     - Get the elevator motor power: `elevator_motor_power_b = elevator.motor_power`
     - Get the elevator cab weight: `elevator_cab_weight_b = elevator.cab_weight`
