@@ -13,15 +13,15 @@
   1. The proposed building has an elevator.  
 
 **Function Call:**  
-N/A
+match_data_element, compare_schedules
 
 **Applicability Check 1:**
 - Rule is applicable if any building in the proposed RMD has an elevator: `if any(len(building.elevators) > 0 for building in P_RMD...buildings:`
 
 ## Rule Logic:
-- For each elevator in the baseline RMD: `for elevator in B_RMD...elevators`
-  - Get the associated elevator object in the proposed RMD: `elevator_p = match_data_element(P_RMD, Elevator, elevator.id)` 
-  - Get the modeled schedule for the elevator motor use in the baseline: `motor_use_schedule_b = elevator.cab_motor_multiplier_schedule`
+- For each elevator in the baseline RMD: `for elevator_b in B_RMD...elevators`
+  - Get the associated elevator object in the proposed RMD: `elevator_p = match_data_element(P_RMD, Elevator, elevator_b.id)` 
+  - Get the modeled schedule for the elevator motor use in the baseline: `motor_use_schedule_b = elevator_b.cab_motor_multiplier_schedule`
   - Get the modeled schedule for the elevator motor use in the proposed: `motor_use_schedule_p = elevator_p.cab_motor_multiplier_schedule`
   - Compare the schedules: `comparison_data = compare_schedules(motor_use_schedule_b, motor_use_schedule_p):`  
   
