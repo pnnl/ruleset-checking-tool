@@ -6,7 +6,7 @@
 **Rule Assertion:** B-RMR = expected value                                           
 **Appendix G Section:** G3.1  
 **Appendix G Section Reference:** Table G3.1-16  
-**Data Lookup:** None  
+**Data Lookup:** Table G3.9.2, Table G3.9.3  
 **Evaluation Context:** Each elevator  
 
 **Applicability Checks:**  
