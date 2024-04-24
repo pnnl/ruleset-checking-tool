@@ -51,7 +51,7 @@ Exceptions included in this RDS:
         - Set counter equal to 0: `counter = 0`  
         - For each zone associated with the HVAC system: `for zone in zones_list_hvac_sys_b:`  
             - Add each zone's OA CFM schedule to the list of zone OA CFM schedules for the baseline: `zone_OA_CFM_list_of_schedules_b[counter] = get_min_OA_CFM_sch_zone(B_RMI, zone.id)`  
-            - Get the analogous zone object from the proposed RMI (if this is not strictly the correct syntax please advise Weili): `zone_p = get_component_by_id(P_RMI,match_data_element(P_RMI,Zone,zone.id))`    
+            - Get the analogous zone object from the proposed RMD (if this is not strictly the correct syntax please advise Weili): `zone_p = get_component_by_id(P_RMI,match_data_element(P_RMI,Zone,zone.id))`    
             - Add each zone's OA CFM schedule to the list of zone OA CFM schedules for the proposed: `zone_OA_CFM_list_of_schedules_p[counter] = get_min_OA_CFM_sch_zone(P_RMI, zone_p.id)`  
 
             - For each terminal unit serving the zone, check if DCV was modeled: `for terminal in zone.terminals:`  
