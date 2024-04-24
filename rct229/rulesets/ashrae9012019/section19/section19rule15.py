@@ -55,29 +55,29 @@ class Section19Rule15(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.BASELINE_0
-        rmi_p = context.PROPOSED
-        baseline_system_types_dict = get_baseline_system_types(rmi_b)
+        rmd_b = context.BASELINE_0
+        rmd_p = context.PROPOSED
+        baseline_system_types_dict = get_baseline_system_types(rmd_b)
 
         zones_and_terminal_units_served_by_hvac_sys_dict = (
-            get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmi_b)
+            get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmd_b)
         )
 
         hvac_info_dict_b = {}
         for hvac_id_b in find_all(
             "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].id",
-            rmi_b,
+            rmd_b,
         ):
             hvac_info_dict_b[hvac_id_b] = {
                 "are_all_hvac_sys_fan_objs_autosized": are_all_hvac_sys_fan_objs_autosized(
-                    rmi_b, hvac_id_b
+                    rmd_b, hvac_id_b
                 ),
                 "all_design_setpoints_105": all(
                     [
                         std_equal(
                             REQ_DESIGN_SUPPLY_AIR_TEMP_SETPOINT.to(ureg.kelvin),
                             getattr_(
-                                find_exactly_one_terminal_unit(rmi_b, terminal_id_b),
+                                find_exactly_one_terminal_unit(rmd_b, terminal_id_b),
                                 "Terminal",
                                 "supply_design_heating_setpoint_temperature",
                             ).to(ureg.kelvin),
@@ -99,7 +99,7 @@ class Section19Rule15(RuleDefinitionListIndexedBase):
                         ]
                         for terminal_p in find_all(
                             f'$.buildings[*].building_segments[*].zones[*][?(@.id = "{zone_id_b}")].terminals[*]',
-                            rmi_p,
+                            rmd_p,
                         )
                     ],
                     ZERO.FLOW,
@@ -112,8 +112,8 @@ class Section19Rule15(RuleDefinitionListIndexedBase):
         }
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.BASELINE_0
-        baseline_system_types_dict = get_baseline_system_types(rmi_b)
+        rmd_b = context.BASELINE_0
+        baseline_system_types_dict = get_baseline_system_types(rmd_b)
 
         return any(
             [

@@ -17,7 +17,7 @@ class Section12Rule1(RuleDefinitionListIndexedBase):
             index_rmr=USER,
             id="12-1",
             description=(
-                "Number of spaces modeled in User RMR and Baseline RMR are the same"
+                "Number of spaces modeled in User RMD and Baseline RMD are the same"
             ),
             ruleset_section_title="Receptacle",
             standard_section="Section Table G3.1-12 Modeling Requirements for the Proposed design",

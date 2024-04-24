@@ -39,8 +39,8 @@ class Section19Rule9(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.BASELINE_0
-        baseline_system_types_dict = get_baseline_system_types(rmi_b)
+        rmd_b = context.BASELINE_0
+        baseline_system_types_dict = get_baseline_system_types(rmd_b)
 
         return any(
             [
@@ -51,8 +51,8 @@ class Section19Rule9(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.BASELINE_0
-        baseline_system_types_dict = get_baseline_system_types(rmi_b)
+        rmd_b = context.BASELINE_0
+        baseline_system_types_dict = get_baseline_system_types(rmd_b)
 
         return {
             "baseline_system_types_dict": {

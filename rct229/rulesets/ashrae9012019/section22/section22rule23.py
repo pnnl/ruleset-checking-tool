@@ -39,9 +39,9 @@ class Section22Rule23(RuleDefinitionBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.BASELINE_0
-        baseline_system_types_dict = get_baseline_system_types(rmi_b)
-        # create a list containing all HVAC systems that are modeled in the rmi_b
+        rmd_b = context.BASELINE_0
+        baseline_system_types_dict = get_baseline_system_types(rmd_b)
+        # create a list containing all HVAC systems that are modeled in the rmd_b
         available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict
@@ -55,17 +55,17 @@ class Section22Rule23(RuleDefinitionBase):
         )
 
     def get_calc_vals(self, context, data=None):
-        rmi_b = context.BASELINE_0
-        num_of_chillers_b = len(find_all("$.chillers[*]", rmi_b))
-        primary_chw_loop_id_array = find_all("$.chillers[*].cooling_loop", rmi_b)
+        rmd_b = context.BASELINE_0
+        num_of_chillers_b = len(find_all("$.chillers[*]", rmd_b))
+        primary_chw_loop_id_array = find_all("$.chillers[*].cooling_loop", rmd_b)
         interlock_flag = all(
-            find_all("$.chillers[*].is_chilled_water_pump_interlocked", rmi_b)
+            find_all("$.chillers[*].is_chilled_water_pump_interlocked", rmd_b)
         )
 
         primary_chw_loop_pump_num = len(
             [
                 pump_b
-                for pump_b in find_all("$.pumps[*]", rmi_b)
+                for pump_b in find_all("$.pumps[*]", rmd_b)
                 if pump_b["loop_or_piping"] in primary_chw_loop_id_array
             ]
         )

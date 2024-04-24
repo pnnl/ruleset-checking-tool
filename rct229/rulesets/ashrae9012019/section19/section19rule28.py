@@ -35,12 +35,12 @@ class Section19Rule28(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_p = context.PROPOSED
+        rmd_p = context.PROPOSED
 
         inapplicable_hvac_sys_list_p = list(
             set(
-                get_hvac_systems_primarily_serving_comp_room(rmi_p)
-                + get_hvac_systems_serving_zone_health_safety_vent_reqs(rmi_p)
+                get_hvac_systems_primarily_serving_comp_room(rmd_p)
+                + get_hvac_systems_serving_zone_health_safety_vent_reqs(rmd_p)
             )
         )
 

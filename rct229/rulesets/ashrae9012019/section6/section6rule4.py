@@ -19,7 +19,7 @@ from rct229.utils.std_comparisons import std_equal
 OFFICE_OPEN_PLAN = SchemaEnums.schema_enums[
     "LightingSpaceOptions2019ASHRAE901TG37"
 ].OFFICE_OPEN_PLAN
-FAIL_MSG = "P_RMR lighting status type is as-designed or as-existing. But lighting space type in B_RMR is not specified."
+FAIL_MSG = "P_RMD lighting status type is as-designed or as-existing. But lighting space type in B_RMD is not specified."
 
 
 class Section6Rule4(RuleDefinitionListIndexedBase):
@@ -155,7 +155,7 @@ class Section6Rule4(RuleDefinitionListIndexedBase):
                     ]
 
                     return (
-                        "P_RMR lighting status type is as-designed or as-existing. But lighting space type in B_RMR is not specified."
+                        "P_RMD lighting status type is as-designed or as-existing. But lighting space type in B_RMD is not specified."
                         if space_lighting_status_type_p
                         == LightingStatusType.AS_DESIGNED_OR_AS_EXISTING
                         and not lighting_space_type_b

@@ -55,22 +55,22 @@ class Section19Rule2(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.BASELINE_0
+        rmd_b = context.BASELINE_0
 
         HW_fluid_loop_list = []
         CW_fluid_loop_list = []
         CHW_fluid_loop_list = []
         for hvac_b in find_all(
             "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
-            rmi_b,
+            rmd_b,
         ):
             hvac_id_b = hvac_b["id"]
             if is_hvac_sys_heating_type_fluid_loop(
-                rmi_b, hvac_id_b
-            ) and is_hvac_sys_fluid_loop_attached_to_boiler(rmi_b, hvac_id_b):
+                rmd_b, hvac_id_b
+            ) and is_hvac_sys_fluid_loop_attached_to_boiler(rmd_b, hvac_id_b):
                 HW_fluid_loop_list.append(
                     getattr_(
-                        find_exactly_one_hvac_system(rmi_b, hvac_id_b),
+                        find_exactly_one_hvac_system(rmd_b, hvac_id_b),
                         "HVAC",
                         "heating_system",
                         "hot_water_loop",
@@ -78,11 +78,11 @@ class Section19Rule2(RuleDefinitionListIndexedBase):
                 )
 
             if is_hvac_sys_preheating_type_fluid_loop(
-                rmi_b, hvac_id_b
-            ) and is_hvac_sys_preheat_fluid_loop_attached_to_boiler(rmi_b, hvac_id_b):
+                rmd_b, hvac_id_b
+            ) and is_hvac_sys_preheat_fluid_loop_attached_to_boiler(rmd_b, hvac_id_b):
                 HW_fluid_loop_list.append(
                     getattr_(
-                        find_exactly_one_hvac_system(rmi_b, hvac_id_b),
+                        find_exactly_one_hvac_system(rmd_b, hvac_id_b),
                         "HVAC",
                         "preheat_system",
                         "hot_water_loop",
@@ -90,10 +90,10 @@ class Section19Rule2(RuleDefinitionListIndexedBase):
                 )
 
             if is_hvac_sys_cooling_type_fluid_loop(
-                rmi_b, hvac_id_b
-            ) and is_hvac_sys_fluid_loop_attached_to_chiller(rmi_b, hvac_id_b):
+                rmd_b, hvac_id_b
+            ) and is_hvac_sys_fluid_loop_attached_to_chiller(rmd_b, hvac_id_b):
                 chilled_water_loop_b = getattr_(
-                    find_exactly_one_hvac_system(rmi_b, hvac_id_b),
+                    find_exactly_one_hvac_system(rmd_b, hvac_id_b),
                     "HVAC",
                     "cooling_system",
                     "chilled_water_loop",
@@ -102,7 +102,7 @@ class Section19Rule2(RuleDefinitionListIndexedBase):
 
                 if chilled_water_loop_b in find_all(
                     f'$.fluid_loops[*][?(@.cooling_loop = "{FLUID_LOOP.COOLING}")]',
-                    rmi_b,
+                    rmd_b,
                 ):
                     chiller_b = find_one_with_field_value(
                         "$.chillers[*]",
@@ -110,20 +110,20 @@ class Section19Rule2(RuleDefinitionListIndexedBase):
                         getattr_(
                             hvac_b, "HVAC", "cooling_system", "chilled_water_loop"
                         ),
-                        rmi_b,
+                        rmd_b,
                     )
 
                 else:
                     # when the fluid loop is the secondary loop, find the primary loop and add its id to the CHW_fluid_loop_list
                     # find out the primary loop from the secondary loop
                     child_loop_id_b = find_exactly_one_child_loop(
-                        rmi_b, chilled_water_loop_b
+                        rmd_b, chilled_water_loop_b
                     )["id"]
                     primary_loop_id_b = find_one_with_field_value(
                         "$.fluid_loops[*]",
                         "child_loops[*].id",
                         child_loop_id_b,
-                        rmi_b,
+                        rmd_b,
                     )["id"]
                     CHW_fluid_loop_list.append(primary_loop_id_b)
 
@@ -131,7 +131,7 @@ class Section19Rule2(RuleDefinitionListIndexedBase):
                         "$.chillers[*]",
                         "cooling_loop",
                         primary_loop_id_b,
-                        rmi_b,
+                        rmd_b,
                     )
 
                 if chiller_b.get("condensing_loop"):
@@ -139,7 +139,7 @@ class Section19Rule2(RuleDefinitionListIndexedBase):
 
         for CHW_child_loop in find_all(
             "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].cooling_system.chilled_water_loop",
-            rmi_b,
+            rmd_b,
         ):
             CHW_fluid_loop_list.append(CHW_child_loop)
 
@@ -148,12 +148,12 @@ class Section19Rule2(RuleDefinitionListIndexedBase):
             [
                 terminal["heating_from_loop"]
                 for terminal in find_all(
-                    "$.buildings[*].building_segments[*].zones[*].terminals[*]", rmi_b
+                    "$.buildings[*].building_segments[*].zones[*].terminals[*]", rmd_b
                 )
                 if (
                     terminal.get("heating_source") == HEATING_SOURCE.HOT_WATER
                     and are_all_terminal_heating_loops_attached_to_boiler(
-                        rmi_b, [terminal["id"]]
+                        rmd_b, [terminal["id"]]
                     )
                 )
             ]

@@ -51,9 +51,9 @@ class Section22Rule21(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.BASELINE_0
-        baseline_system_types_dict = get_baseline_system_types(rmi_b)
-        # create a list containing all HVAC systems that are modeled in the rmi_b
+        rmd_b = context.BASELINE_0
+        baseline_system_types_dict = get_baseline_system_types(rmd_b)
+        # create a list containing all HVAC systems that are modeled in the rmd_b
         available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict
@@ -67,9 +67,9 @@ class Section22Rule21(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.BASELINE_0
+        rmd_b = context.BASELINE_0
 
-        output_b = rmi_b["output"]
+        output_b = rmd_b["output"]
         building_cooling_peak_load = getattr_(
             output_b,
             "building_peak_cooling_load",

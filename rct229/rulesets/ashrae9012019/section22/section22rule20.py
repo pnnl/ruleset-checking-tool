@@ -58,9 +58,9 @@ class Section22Rule20(RuleDefinitionListIndexedBase):
             rmd_b,
             "ruleset_model_instance list is empty",
         )
-        rmi_b = rmd_b["ruleset_model_descriptions"][0]
-        baseline_system_types_dict = get_baseline_system_types(rmi_b)
-        # create a list containing all HVAC systems that are modeled in the rmi_b
+        rmd_b = rmd_b["ruleset_model_descriptions"][0]
+        baseline_system_types_dict = get_baseline_system_types(rmd_b)
+        # create a list containing all HVAC systems that are modeled in the rmd_b
         available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict.keys()

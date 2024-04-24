@@ -22,7 +22,7 @@ class Section15Rule5(RuleDefinitionListIndexedBase):
             each_rule=Section15Rule5.TransformerRule(),
             index_rmr=USER,
             id="15-5",
-            description="Transformer efficiency reported in Baseline RMR equals Table 8.4.4",
+            description="Transformer efficiency reported in Baseline RMD equals Table 8.4.4",
             ruleset_section_title="Transformer",
             standard_section="Transformers",
             is_primary_rule=False,

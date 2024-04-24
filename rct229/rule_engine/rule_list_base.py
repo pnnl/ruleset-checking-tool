@@ -48,7 +48,7 @@ class RuleDefinitionListBase(RuleDefinitionBase):
 
         For a list-type rule, we need to create a list of contexts to pass on
         to the sub-rule. Often, we need to match up the entries in the
-        RMR lists by name or id and then apply the sub-rule to each trio of entries.
+        RMD lists by name or id and then apply the sub-rule to each trio of entries.
         This method is responsible for creating the list of trios.
 
         This method must be overridden.
@@ -56,7 +56,7 @@ class RuleDefinitionListBase(RuleDefinitionBase):
         Parameters
         ----------
         context : RuleSetModels
-            Object containing the contexts for RMRs required by model type schema
+            Object containing the contexts for RMDs required by model type schema
         data : An optional data object.
 
         Returns
@@ -144,7 +144,7 @@ class RuleDefinitionListBase(RuleDefinitionBase):
         Parameters
         ----------
         context : RuleSetModels
-            Object containing the contexts for the user, baseline, and proposed RMRs
+            Object containing the contexts for the user, baseline, and proposed RMDs
         data : dict
             An optional dictionary. New data, based on data_pointers, data_paths, or
             create_data() will be merged into this data dictionary and passed to each

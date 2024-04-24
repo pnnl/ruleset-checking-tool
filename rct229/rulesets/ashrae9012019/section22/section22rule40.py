@@ -57,14 +57,14 @@ class Section22Rule40(RuleDefinitionBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_p = context.PROPOSED
-        purchased_chw_hhw_status_dict_p = check_purchased_chw_hhw_status_dict(rmi_p)
+        rmd_p = context.PROPOSED
+        purchased_chw_hhw_status_dict_p = check_purchased_chw_hhw_status_dict(rmd_p)
 
         return purchased_chw_hhw_status_dict_p["purchased_cooling"]
 
     def get_calc_vals(self, context, data=None):
-        rmi_b = context.BASELINE_0
-        baseline_system_types_dict = get_baseline_system_types(rmi_b)
+        rmd_b = context.BASELINE_0
+        baseline_system_types_dict = get_baseline_system_types(rmd_b)
 
         return {"baseline_system_types_dict": baseline_system_types_dict}
 

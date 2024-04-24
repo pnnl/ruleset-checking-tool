@@ -16,7 +16,7 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
             each_rule=Section6Rule1.BuildingRule(),
             index_rmr=PROPOSED,
             id="6-1",
-            description="For the proposed building, each space has the same lighting power as the corresponding space in the U-RMR",
+            description="For the proposed building, each space has the same lighting power as the corresponding space in the U-RMD",
             rmr_context="ruleset_model_descriptions/0/buildings",
         )
 

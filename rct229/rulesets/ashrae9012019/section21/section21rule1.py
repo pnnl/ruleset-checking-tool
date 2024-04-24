@@ -43,6 +43,6 @@ class Section21Rule1(RuleDefinitionListIndexedBase):
             )
 
         def applicability_check(self, context, calc_vals, data):
-            rmi_p = context.PROPOSED
-            purchased_chw_hhw_status_dict_p = check_purchased_chw_hhw_status_dict(rmi_p)
+            rmd_p = context.PROPOSED
+            purchased_chw_hhw_status_dict_p = check_purchased_chw_hhw_status_dict(rmd_p)
             return purchased_chw_hhw_status_dict_p["purchased_heating"]

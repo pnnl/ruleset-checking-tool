@@ -35,12 +35,12 @@ class Section19Rule24(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data):
         user_p = context.USER
-        rmi_p = context.PROPOSED
+        rmd_p = context.PROPOSED
 
         inapplicable_hvac_sys_list_p = list(
             set(
-                get_proposed_hvac_modeled_with_virtual_cooling(user_p, rmi_p)
-                + get_proposed_hvac_modeled_with_virtual_heating(user_p, rmi_p)
+                get_proposed_hvac_modeled_with_virtual_cooling(user_p, rmd_p)
+                + get_proposed_hvac_modeled_with_virtual_heating(user_p, rmd_p)
             )
         )
 

@@ -67,9 +67,9 @@ class Section21Rule5(RuleDefinitionListIndexedBase):
             )
 
         def is_applicable(self, context, data=None):
-            rmi_b = context.BASELINE_0
-            baseline_system_types_dict = get_baseline_system_types(rmi_b)
-            # create a list containing all HVAC systems that are modeled in the rmi_b
+            rmd_b = context.BASELINE_0
+            baseline_system_types_dict = get_baseline_system_types(rmd_b)
+            # create a list containing all HVAC systems that are modeled in the rmd_b
             available_types_list = [
                 hvac_type
                 for hvac_type in baseline_system_types_dict
@@ -83,23 +83,23 @@ class Section21Rule5(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            rmi_b = context.BASELINE_0
+            rmd_b = context.BASELINE_0
             climate_zone = data["climate_zone"]
 
             # get zone conditions from buildings
             zone_conditioning_category_dict = {}
-            for bldg in find_all("$.buildings[*]", rmi_b):
+            for bldg in find_all("$.buildings[*]", rmd_b):
                 zone_conditioning_category_dict = {
                     **zone_conditioning_category_dict,
                     **get_zone_conditioning_category_dict(climate_zone, bldg),
                 }
 
-            loop_zone_list_w_area_dict = get_hw_loop_zone_list_w_area(rmi_b)
+            loop_zone_list_w_area_dict = get_hw_loop_zone_list_w_area(rmd_b)
 
             # loop to boiler dict
             boiler_loop_ids = [
                 getattr_(boiler, "boiler", "loop")
-                for boiler in find_all("$.boilers[*]", rmi_b)
+                for boiler in find_all("$.boilers[*]", rmd_b)
             ]
 
             # Initialize the variables
@@ -108,7 +108,7 @@ class Section21Rule5(RuleDefinitionListIndexedBase):
             # The connected zones list, zones in this list can be residential, nonresidential, mixed or semi-heated
             loop_zone_list = []
 
-            for fluid_loop in find_all("$.fluid_loops[*]", rmi_b):
+            for fluid_loop in find_all("$.fluid_loops[*]", rmd_b):
                 # Make sure heating loop, and its heating is supplied by a boiler(s)
                 if (
                     getattr_(fluid_loop, "fluid_loops", "type") == FLUID_LOOP.HEATING
@@ -137,16 +137,16 @@ class Section21Rule5(RuleDefinitionListIndexedBase):
                         find_all(
                             "$..floor_area",
                             find_exactly_one_with_field_value(
-                                "$..zones[*]", "id", zone_id, rmi_b
+                                "$..zones[*]", "id", zone_id, rmd_b
                             ),
                         ),
                         ZERO.AREA,
                     )
 
-            num_boilers = len(find_all(".boilers[*]", rmi_b))
+            num_boilers = len(find_all(".boilers[*]", rmd_b))
             boiler_capacity_list = [
                 CalcQ("capacity", getattr_(boiler, "boiler", "rated_capacity"))
-                for boiler in find_all("$.boilers[*]", rmi_b)
+                for boiler in find_all("$.boilers[*]", rmd_b)
             ]
 
             return {

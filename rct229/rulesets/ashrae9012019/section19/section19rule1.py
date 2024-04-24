@@ -38,23 +38,23 @@ class Section19Rule1(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.BASELINE_0
+        rmd_b = context.BASELINE_0
 
         hvac_id_to_flags = {
             hvac_id: {
                 "is_hvac_sys_heating_type_furnace_flag": is_hvac_sys_heating_type_furnace(
-                    rmi_b, hvac_id
+                    rmd_b, hvac_id
                 ),
                 "is_hvac_sys_heating_type_heat_pump_flag": is_hvac_sys_heating_type_heat_pump(
-                    rmi_b, hvac_id
+                    rmd_b, hvac_id
                 ),
                 "is_hvac_sys_cooling_type_dx_flag": is_hvac_sys_cooling_type_dx(
-                    rmi_b, hvac_id
+                    rmd_b, hvac_id
                 ),
             }
             for hvac_id in find_all(
                 "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].id",
-                rmi_b,
+                rmd_b,
             )
         }
 

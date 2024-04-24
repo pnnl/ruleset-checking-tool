@@ -21,7 +21,7 @@ class Section5Rule45(RuleDefinitionListIndexedBase):
             each_rule=Section5Rule45.RuleSetModelInstanceRule(),
             index_rmr=BASELINE_0,
             id="5-45",
-            description="The infiltration schedules are the same in the proposed RMR as in the baseline RMR.",
+            description="The infiltration schedules are the same in the proposed RMD as in the baseline RMD.",
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(b) Building Envelope Modeling Requirements for the Proposed design and Baseline",
             is_primary_rule=True,

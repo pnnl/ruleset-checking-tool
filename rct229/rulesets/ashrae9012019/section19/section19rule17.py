@@ -50,8 +50,8 @@ class Section19Rule17(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.BASELINE_0
-        baseline_system_types_dict = get_baseline_system_types(rmi_b)
+        rmd_b = context.BASELINE_0
+        baseline_system_types_dict = get_baseline_system_types(rmd_b)
 
         return any(
             [
@@ -65,13 +65,13 @@ class Section19Rule17(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.BASELINE_0
-        baseline_system_types_dict = get_baseline_system_types(rmi_b)
+        rmd_b = context.BASELINE_0
+        baseline_system_types_dict = get_baseline_system_types(rmd_b)
 
         return {
             "baseline_system_types_dict": baseline_system_types_dict,
             "dict_of_zones_and_terminal_units_served_by_hvac_sys": (
-                get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmi_b)
+                get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmd_b)
             ),
             "zone_exhaust_fan_power_dict_b": {
                 zone["id"]: sum(
@@ -81,7 +81,7 @@ class Section19Rule17(RuleDefinitionListIndexedBase):
                     ]
                 )
                 for zone in find_all(
-                    "$.buildings[*].building_segments[*].zones[*]", rmi_b
+                    "$.buildings[*].building_segments[*].zones[*]", rmd_b
                 )
             },
         }

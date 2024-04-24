@@ -50,8 +50,8 @@ class Section23Rule16(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.BASELINE_0
-        baseline_system_types_dict = get_baseline_system_types(rmi_b)
+        rmd_b = context.BASELINE_0
+        baseline_system_types_dict = get_baseline_system_types(rmd_b)
 
         return any(
             [
@@ -65,11 +65,11 @@ class Section23Rule16(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.BASELINE_0
+        rmd_b = context.BASELINE_0
 
         # set hvac_id with highest zone_design_heating_setpoint
         hvac_max_zone_setpoint_dict = {}
-        for zone in find_all("$.buildings[*].building_segments[*].zones[*]", rmi_b):
+        for zone in find_all("$.buildings[*].building_segments[*].zones[*]", rmd_b):
             # handle indirectly conditioned zones, which do not have terminals.
             zone_design_heating_setpoint = zone.get(
                 "design_thermostat_heating_setpoint", ZERO.TEMPERATURE
@@ -90,16 +90,16 @@ class Section23Rule16(RuleDefinitionListIndexedBase):
         # find preheat_system's hot water loop type
         hot_water_loop_type_dict = {
             preheat_system["hot_water_loop"]: find_exactly_one_fluid_loop(
-                rmi_b, preheat_system["hot_water_loop"]
+                rmd_b, preheat_system["hot_water_loop"]
             )["type"]
             for preheat_system in find_all(
                 "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].preheat_system",
-                rmi_b,
+                rmd_b,
             )
         }
 
         # find applicable hvac sys ids
-        baseline_system_types_dict = get_baseline_system_types(rmi_b)
+        baseline_system_types_dict = get_baseline_system_types(rmd_b)
         applicable_hvac_sys_ids = [
             hvac_id
             for sys_type in baseline_system_types_dict

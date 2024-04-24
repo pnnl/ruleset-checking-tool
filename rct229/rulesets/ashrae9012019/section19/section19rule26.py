@@ -31,9 +31,9 @@ class Section19Rule26(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_p = context.PROPOSED
+        rmd_p = context.PROPOSED
         applicable_hvac_systems_list_p = (
-            get_hvac_systems_serving_zone_health_safety_vent_reqs(rmi_p)
+            get_hvac_systems_serving_zone_health_safety_vent_reqs(rmd_p)
         )
 
         return {"applicable_hvac_systems_list_p": applicable_hvac_systems_list_p}

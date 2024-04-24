@@ -60,8 +60,8 @@ class Section19Rule14(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.BASELINE_0
-        baseline_system_types_dict_b = get_baseline_system_types(rmi_b)
+        rmd_b = context.BASELINE_0
+        baseline_system_types_dict_b = get_baseline_system_types(rmd_b)
 
         return any(
             [
@@ -75,17 +75,17 @@ class Section19Rule14(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.BASELINE_0
-        rmi_p = context.PROPOSED
+        rmd_b = context.BASELINE_0
+        rmd_p = context.PROPOSED
 
         zone_supply_return_exhaust_relief_terminal_fan_power_dict = (
-            get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(rmi_p)
+            get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(rmd_p)
         )
 
         hvac_info_b = {}
         for hvac_b in find_all(
             "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
-            rmi_b,
+            rmd_b,
         ):
             hvac_id_b = hvac_b["id"]
             hvac_info_b[hvac_id_b] = {}
@@ -98,21 +98,21 @@ class Section19Rule14(RuleDefinitionListIndexedBase):
 
         zone_fan_power_dict_b = {}
         for zone_id_b in find_all(
-            "$.buildings[*].building_segments[*].zones[*].id", rmi_b
+            "$.buildings[*].building_segments[*].zones[*].id", rmd_b
         ):
             modeled_fan_power_list_p = zone_supply_return_exhaust_relief_terminal_fan_power_dict[
                 find_one(
                     f'$.buildings[*].building_segments[*].zones[*][?(@.id = "{zone_id_b}")]',
-                    rmi_p,
+                    rmd_p,
                 )["id"]
             ]
             zone_fan_power_dict_b[zone_id_b] = modeled_fan_power_list_p
 
         return {
             "dict_of_zones_and_terminal_units_served_by_hvac_sys_b": get_dict_of_zones_and_terminal_units_served_by_hvac_sys(
-                rmi_b
+                rmd_b
             ),
-            "baseline_system_types_dict_b": get_baseline_system_types(rmi_b),
+            "baseline_system_types_dict_b": get_baseline_system_types(rmd_b),
             "hvac_info_b": hvac_info_b,
             "zone_fan_power_dict_b": zone_fan_power_dict_b,
         }

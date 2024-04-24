@@ -42,18 +42,18 @@ class Section19Rule25(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_u = context.USER
-        rmi_b = context.BASELINE_0
-        rmi_p = context.PROPOSED
+        rmd_u = context.USER
+        rmd_b = context.BASELINE_0
+        rmd_p = context.PROPOSED
 
         HVAC_systems_virtual_list_p = list(
             set(
-                get_proposed_hvac_modeled_with_virtual_cooling(rmi_u, rmi_p)
-                + get_proposed_hvac_modeled_with_virtual_heating(rmi_u, rmi_p)
+                get_proposed_hvac_modeled_with_virtual_cooling(rmd_u, rmd_p)
+                + get_proposed_hvac_modeled_with_virtual_heating(rmd_u, rmd_p)
             )
         )
 
-        hvac_zone_list_w_area_dict_p = get_hvac_zone_list_w_area_by_rmi_dict(rmi_p)
+        hvac_zone_list_w_area_dict_p = get_hvac_zone_list_w_area_by_rmi_dict(rmd_p)
 
         zones_virtual_heating_cooling_list_p = list(
             set(
@@ -71,7 +71,7 @@ class Section19Rule25(RuleDefinitionListIndexedBase):
             set(
                 itertools.chain(
                     *[
-                        get_list_hvac_systems_associated_with_zone(rmi_b, zone_id_p)
+                        get_list_hvac_systems_associated_with_zone(rmd_b, zone_id_p)
                         for zone_id_p in zones_virtual_heating_cooling_list_p
                     ]
                 )

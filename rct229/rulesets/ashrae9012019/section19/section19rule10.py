@@ -90,9 +90,9 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
 
         def is_applicable(self, context, data=None):
             climate_zone = data["climate_zone"]
-            rmi_b = context.BASELINE_0
+            rmd_b = context.BASELINE_0
 
-            baseline_system_types_dict_b = get_baseline_system_types(rmi_b)
+            baseline_system_types_dict_b = get_baseline_system_types(rmd_b)
 
             return climate_zone not in NOT_APPLICABLE_CLIMATE_ZONE and any(
                 [
@@ -106,26 +106,26 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
             )
 
         def create_data(self, context, data):
-            rmi_b = context.BASELINE_0
-            rmi_p = context.PROPOSED
+            rmd_b = context.BASELINE_0
+            rmd_p = context.PROPOSED
 
             hvac_system_exception_2_list = []
-            if find_all("$.buildings[*].refrigerated_cases", rmi_b):
+            if find_all("$.buildings[*].refrigerated_cases", rmd_b):
                 hvac_system_exception_2_list = [
                     hvac_id_b
                     for hvac_id_b in find_all(
                         f'$.buildings[*].building_segments[*][?(@.lighting_building_area_type = "{LIGHTING_BUILDING_AREA.RETAIL}")].heating_ventilating_air_conditioning_systems[*].id',
-                        rmi_b,
+                        rmd_b,
                     )
-                    if not is_economizer_modeled_in_proposed(rmi_b, rmi_p, hvac_id_b)
+                    if not is_economizer_modeled_in_proposed(rmd_b, rmd_p, hvac_id_b)
                 ]
 
             return {
                 "hvac_system_exception_2_list": hvac_system_exception_2_list,
                 "HVAC_systems_primarily_serving_comp_rooms_list": get_hvac_systems_primarily_serving_comp_room(
-                    rmi_b
+                    rmd_b
                 ),
-                "baseline_system_types_dict": get_baseline_system_types(rmi_b),
+                "baseline_system_types_dict": get_baseline_system_types(rmd_b),
             }
 
         class HVACRule(RuleDefinitionBase):

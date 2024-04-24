@@ -2,7 +2,7 @@ from rct229.rule_engine.partial_rule_definition import PartialRuleDefinition
 
 from .rule_base_test import (
     BASE_RULE_ARGS,
-    RMRS_WITH_MATCHING_USER_AND_BASELINE,
+    RMDS_WITH_MATCHING_USER_AND_BASELINE,
     DERIVED_RULE_outcome_base,
 )
 
@@ -23,7 +23,7 @@ PARTIAL_RULE = _PartilaRule()
 
 def test__rule_definition_base__evaluate__with_true_secondary_rule_check():
     assert PARTIAL_RULE.evaluate(
-        RMRS_WITH_MATCHING_USER_AND_BASELINE,
+        RMDS_WITH_MATCHING_USER_AND_BASELINE,
         data={"outcome": True},
     ) == {
         **DERIVED_RULE_outcome_base,
@@ -35,7 +35,7 @@ def test__rule_definition_base__evaluate__with_true_secondary_rule_check():
 
 def test__rule_definition_base__evaluate__with_false_secondary_rule_check():
     assert PARTIAL_RULE.evaluate(
-        RMRS_WITH_MATCHING_USER_AND_BASELINE,
+        RMDS_WITH_MATCHING_USER_AND_BASELINE,
         data={"outcome": False},
     ) == {
         **DERIVED_RULE_outcome_base,

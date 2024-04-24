@@ -35,15 +35,15 @@ class Section19Rule20(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.BASELINE_0
-        rmi_p = context.PROPOSED
+        rmd_b = context.BASELINE_0
+        rmd_p = context.PROPOSED
 
         return {
             "zone_supply_return_exhaust_relief_terminal_fan_power_dict_p": get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(
-                rmi_p
+                rmd_p
             ),
             "dict_of_zones_and_terminal_units_served_by_hvac_sys_b": get_dict_of_zones_and_terminal_units_served_by_hvac_sys(
-                rmi_b
+                rmd_b
             ),
         }
 

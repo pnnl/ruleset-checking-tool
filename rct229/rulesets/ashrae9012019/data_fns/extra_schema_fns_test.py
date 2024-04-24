@@ -1,8 +1,8 @@
 from copy import deepcopy
 
 from rct229.rulesets.ashrae9012019.data_fns.extra_schema_fns import (
-    compare_context_pair,
     EXTRA_SCHEMA,
+    compare_context_pair,
     proposed_equals_user,
 )
 

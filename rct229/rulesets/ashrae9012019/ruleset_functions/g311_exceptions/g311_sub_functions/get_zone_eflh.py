@@ -20,7 +20,7 @@ from rct229.utils.utility_functions import (
 ZONE_OCCUPANTS_RATIO_THRESHOLD = 0.05
 
 
-def get_zone_eflh(rmi: dict, zone_id: str, is_leap_year: bool) -> int:
+def get_zone_eflh(rmd: dict, zone_id: str, is_leap_year: bool) -> int:
     """
     provides the equivalent full load hours of the zone. Equivalent full load hours are defined as: any hour where
     the occupancy fraction is greater than 5% AND the HVAC system is in occupied mode. For this function,
@@ -32,7 +32,7 @@ def get_zone_eflh(rmi: dict, zone_id: str, is_leap_year: bool) -> int:
 
     Parameters
     ----------
-    rmi dict
+    rmd dict
         A dictionary representing a ruleset model instance as defined by the ASHRAE229 schema
     zone_id str
         zone id
@@ -45,17 +45,17 @@ def get_zone_eflh(rmi: dict, zone_id: str, is_leap_year: bool) -> int:
     num_hours = (
         LeapYear.LEAP_YEAR_HOURS if is_leap_year else LeapYear.REGULAR_YEAR_HOURS
     )
-    thermal_zone = find_exactly_one_zone(rmi, zone_id)
-    hvac_systems_list = get_list_hvac_systems_associated_with_zone(rmi, zone_id)
+    thermal_zone = find_exactly_one_zone(rmd, zone_id)
+    hvac_systems_list = get_list_hvac_systems_associated_with_zone(rmd, zone_id)
 
     # 2. functions
     # get fan operation schedule from an HVAC,
     # missing data (fan) is handled and return as [1.0] * num_hours
     get_fan_operation_schedule_func = flow(
-        lambda hvac_id: find_exactly_one_hvac_system(rmi, hvac_id),
+        lambda hvac_id: find_exactly_one_hvac_system(rmd, hvac_id),
         lambda hvac: find_one("$.fan_system.operating_schedule", hvac),
         lambda operation_schedule_id: find_one(
-            f'$.schedules[*][?(@.id="{operation_schedule_id}")].hourly_values', rmi
+            f'$.schedules[*][?(@.id="{operation_schedule_id}")].hourly_values', rmd
         ),
         lambda hourly_values: hourly_values if hourly_values else [1.0] * num_hours,
     )
@@ -84,13 +84,13 @@ def get_zone_eflh(rmi: dict, zone_id: str, is_leap_year: bool) -> int:
         map(
             lambda space: max(
                 get_max_schedule_multiplier_hourly_value_or_default(
-                    rmi, find_one("$.occupant_multiplier_schedule", space), 1.0
+                    rmd, find_one("$.occupant_multiplier_schedule", space), 1.0
                 ),
                 get_max_schedule_multiplier_heating_design_hourly_value_or_default(
-                    rmi, find_one("$.occupant_multiplier_schedule", space), 1.0
+                    rmd, find_one("$.occupant_multiplier_schedule", space), 1.0
                 ),
                 get_max_schedule_multiplier_cooling_design_hourly_value_or_default(
-                    rmi, find_one("$.occupant_multiplier_schedule", space), 1.0
+                    rmd, find_one("$.occupant_multiplier_schedule", space), 1.0
                 ),
                 1.0,
             )
@@ -108,7 +108,7 @@ def get_zone_eflh(rmi: dict, zone_id: str, is_leap_year: bool) -> int:
     occupant_annual_hourly_value_per_space_list = list(
         map(
             lambda space: get_schedule_multiplier_hourly_value_or_default(
-                rmi, space.get("occupant_multiplier_schedule"), [1.0] * num_hours
+                rmd, space.get("occupant_multiplier_schedule"), [1.0] * num_hours
             ),
             find_all("$.spaces[*]", thermal_zone),
         )

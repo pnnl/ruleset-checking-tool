@@ -48,8 +48,8 @@ class Section21Rule6(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.BASELINE_0
-        boilers = find_all("$.boilers[*]", rmi_b)
+        rmd_b = context.BASELINE_0
+        boilers = find_all("$.boilers[*]", rmd_b)
         loop_boiler_dict = {}
         for boiler_b in boilers:
             loop_id = getattr_(boiler_b, "boiler", "loop")
@@ -59,9 +59,9 @@ class Section21Rule6(RuleDefinitionListIndexedBase):
         return {"loop_boiler_dict": loop_boiler_dict}
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.BASELINE_0
-        baseline_system_types_dict = get_baseline_system_types(rmi_b)
-        # create a list containing all HVAC systems that are modeled in the rmi_b
+        rmd_b = context.BASELINE_0
+        baseline_system_types_dict = get_baseline_system_types(rmd_b)
+        # create a list containing all HVAC systems that are modeled in the rmd_b
         available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict

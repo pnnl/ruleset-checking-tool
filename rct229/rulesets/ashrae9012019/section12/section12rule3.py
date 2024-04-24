@@ -16,7 +16,7 @@ class Section12Rule3(RuleDefinitionListIndexedBase):
             each_rule=Section12Rule3.BuildingRule(),
             index_rmr=USER,
             id="12-3",
-            description="User RMR Space ID in Proposed RMR",
+            description="User RMD Space ID in Proposed RMD",
             ruleset_section_title="Receptacle",
             standard_section="Section Table G3.1-12 Receptacles: Modeling Requirements for the Proposed design",
             is_primary_rule=True,
@@ -41,7 +41,7 @@ class Section12Rule3(RuleDefinitionListIndexedBase):
         class SpaceRule(RuleDefinitionBase):
             def __init__(self):
                 super(Section12Rule3.BuildingRule.SpaceRule, self).__init__(
-                    # No longer need the proposed RMR
+                    # No longer need the proposed RMD
                     rmrs_used=produce_ruleset_model_instance(
                         USER=True, BASELINE_0=False, PROPOSED=False
                     ),

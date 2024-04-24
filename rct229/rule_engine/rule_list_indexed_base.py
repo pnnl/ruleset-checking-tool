@@ -7,21 +7,21 @@ from rct229.utils.match_lists import match_lists
 
 class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
     """
-    Baseclass for List-type Rule Definitions that use one of the RMR lists as an index list
+    Baseclass for List-type Rule Definitions that use one of the RMD lists as an index list
 
-    Applicable rules typically have the form "for each ___ in the ??? RMR, ...".
+    Applicable rules typically have the form "for each ___ in the ??? RMD, ...".
 
     Parameters
     ----------
     rmrs_used : RuleSetModels
-        A list of boolean values indicating which RMRs are required by the
+        A list of boolean values indicating which RMDs are required by the
         rule
     rmrs_used_optional: RulesetModels
         A boolean values indicating which RMDs are optional by the rule (True optional, False not optional).
     each_rule : RuleDefinitionBase | RuleDefinitionListBase
         The rule to be applied to each element in the list
     index_rmr : "user" | "baseline" | "proposed"
-        Indicates the RMR to be indexed over
+        Indicates the RMD to be indexed over
     id : string
         Unique id for the rule
         Usually unspecified for nested rules
@@ -29,16 +29,16 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
         Rule description
         Usually unspecified for nested rules
     rmr_context : string
-        A json pointer into each RMR, or RMR fragment, provided to the rule.
-        For better human readability, the leading "/" may be ommitted.
+        A json pointer into each RMD, or RMD fragment, provided to the rule.
+        For better human readability, the leading "/" may be omitted.
     list_path : string
-        A json path string into each RMR fragment that was produced by applying
-        rmr_context. The resulting sub-RMR fragments should be the lists to be
+        A json path string into each RMD fragment that was produced by applying
+        rmr_context. The resulting sub-RMD fragments should be the lists to be
         looped over. The default is "[*]" which assumes that the rmr_context is
         the list to be looped over.
         Note: the create_context_list() method can be overridden and
         ignore list_context.
-        For better human readability, the leading "/" may be ommitted.
+        For better human readability, the leading "/" may be omitted.
         function (preceding _) inside the enclosing rule definition.
     data_items: dict
         An object that specifies one or more context items to be added to the data
@@ -50,7 +50,7 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
     match_by : string
         A json pointer into each element of the list, generally to a field
         of the list element. The default is "/id" since the id is assumed to
-        be unique to the entire RMR.
+        be unique to the entire RMD.
     """
 
     def __init__(
@@ -95,18 +95,18 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
         """Generates a list of context trios
 
         Overrides the base implementation to create a list that has an entry
-        for each item in the index_rmr RMR, the other RMR entries are padded with
+        for each item in the index_rmr RMD, the other RMD entries are padded with
         None for non-matches.
 
         The resulting list can also be filtered using the list_filter field.
 
         This may be overridden to produce lists that do not directly appear in
-        the RMR.
+        the RMD.
 
         Parameters
         ----------
         context : RuleSetModels
-            Object containing the contexts for RMRs required by the ruleset.
+            Object containing the contexts for RMDs required by the ruleset.
             The base implementation here takes the list context from the rmr context
             and assumes each part is a list.
         data : An optional data object. It is ignored by this base implementation.

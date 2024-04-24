@@ -9,32 +9,32 @@ from rct229.schema.validate import (
     json_paths_to_lists,
     json_paths_to_lists_from_dict,
     json_paths_to_lists_from_list,
-    non_schema_validate_rmr,
-    validate_rmr,
+    non_schema_validate_rmd,
+    validate_rmd,
 )
 
 EXAMPLES_PATH = "examples"
 
-# Testing validate_rmr; intended to make sure the referenced schemas are connected
-# properly and that the example rmr files are schema valid
+# Testing validate_rmd; intended to make sure the referenced schemas are connected
+# properly and that the example rmd files are schema valid
 
 
-def test__validate_rmr__with_baseline_rmr():
-    with open(os.path.join(EXAMPLES_PATH, "baseline_rmr.json")) as rmr_file:
-        rmr_obj = json.load(rmr_file)
-    assert validate_rmr(rmr_obj) == {"passed": True, "error": None}
+def test__validate_rmd__with_baseline_rmd():
+    with open(os.path.join(EXAMPLES_PATH, "baseline_rmd.json")) as rmd_file:
+        rmd_obj = json.load(rmd_file)
+    assert validate_rmd(rmd_obj) == {"passed": True, "error": None}
 
 
-def test__validate_rmr__with_proposed_rmr():
-    with open(os.path.join(EXAMPLES_PATH, "proposed_rmr.json")) as rmr_file:
-        rmr_obj = json.load(rmr_file)
-    assert validate_rmr(rmr_obj) == {"passed": True, "error": None}
+def test__validate_rmd__with_proposed_rmd():
+    with open(os.path.join(EXAMPLES_PATH, "proposed_rmd.json")) as rmd_file:
+        rmd_obj = json.load(rmd_file)
+    assert validate_rmd(rmd_obj) == {"passed": True, "error": None}
 
 
-def test__validate_rmr__with_user_rmr():
-    with open(os.path.join(EXAMPLES_PATH, "user_rmr.json")) as rmr_file:
-        rmr_obj = json.load(rmr_file)
-    assert validate_rmr(rmr_obj) == {"passed": True, "error": None}
+def test__validate_rmd__with_user_rmd():
+    with open(os.path.join(EXAMPLES_PATH, "user_rmd.json")) as rmd_file:
+        rmd_obj = json.load(rmd_file)
+    assert validate_rmd(rmd_obj) == {"passed": True, "error": None}
 
 
 ## Testing the three companion functions that find json paths to list
@@ -113,8 +113,8 @@ def test__check_unique_ids_in_ruleset_model_descriptions__unique():
 # -----------------------------------------------
 
 
-def test__non_schema_validate_rmr__not_unique():
-    assert non_schema_validate_rmr(TEST_IDS_RMD) == {
+def test__non_schema_validate_rmd__not_unique():
+    assert non_schema_validate_rmd(TEST_IDS_RMD) == {
         "passed": False,
         "error": [
             "Non-unique ids for paths: ruleset_model_descriptions[0].buildings[*].building_segments",
@@ -122,8 +122,8 @@ def test__non_schema_validate_rmr__not_unique():
     }
 
 
-def test__non_schema_validate_rmr__unique():
-    assert non_schema_validate_rmr(TEST_UNIQUE_IDS_RMD) == {
+def test__non_schema_validate_rmd__unique():
+    assert non_schema_validate_rmd(TEST_UNIQUE_IDS_RMD) == {
         "passed": True,
         "error": None,
     }

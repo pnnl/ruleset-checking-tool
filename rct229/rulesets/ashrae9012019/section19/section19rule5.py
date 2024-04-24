@@ -34,8 +34,8 @@ class Section19Rule5(RuleDefinitionBase):
         )
 
     def get_calc_vals(self, context, data=None):
-        rmi_p = context.PROPOSED
-        output_instance_p = rmi_p["output"]["output_instance"]
+        rmd_p = context.PROPOSED
+        output_instance_p = rmd_p["output"]["output_instance"]
 
         unmet_load_hours_heating_p = output_instance_p["unmet_load_hours_heating"]
         unmet_load_hours_cooling_p = output_instance_p["unmet_load_hours_cooling"]

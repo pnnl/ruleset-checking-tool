@@ -31,10 +31,10 @@ class Section19Rule31(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_p = context.PROPOSED
+        rmd_p = context.PROPOSED
 
         hvac_systems_primarily_serving_comp_room_p = (
-            get_hvac_systems_primarily_serving_comp_room(rmi_p)
+            get_hvac_systems_primarily_serving_comp_room(rmd_p)
         )
 
         return {

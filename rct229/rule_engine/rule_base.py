@@ -51,7 +51,7 @@ class RuleDefinitionBase:
         is_primary_rule: boolean
             Indicate whether this rule is primary rule (True) or secondary rule (False)
         rmr_context : string
-            A json pointer into each RMR, or RMR fragment, provided to the rule.
+            A json pointer into each RMD, or RMD fragment, provided to the rule.
             For better human readability, the leading "/" may be ommitted.
         required_fields : dict
             A dictionary of the form
@@ -79,7 +79,7 @@ class RuleDefinitionBase:
         # rmr_context is a jsonpointer string
         # As a convenience, any leading '/' should not be included and will
         # be inserted when the pointer is used in _get_context().
-        # Default rm_context is the root of the RMR
+        # Default rm_context is the root of the RMD
         self.rmr_context = slash_prefix_guarantee(rmr_context)
         self.required_fields = required_fields
         self.manual_check_required_msg = manual_check_required_msg
@@ -92,7 +92,7 @@ class RuleDefinitionBase:
 
         This method also orchestrates the high-level workflow for any rule.
         Namely:
-            - Call get_context(rmrs); check for any missing RMR contexts
+            - Call get_context(rmrs); check for any missing RMD contexts
             - Call is_applicable(context)
             - Call manual_check_required()
             - Call rule_check()
@@ -116,7 +116,7 @@ class RuleDefinitionBase:
             {
                 id: string - A unique identifier for the rule; ommitted if None
                 description: string - The rule description; ommitted if None
-                rmr_context: string - a JSON pointer into the RMR; omitted if empty
+                rmr_context: string - a JSON pointer into the RMD; omitted if empty
                 result: string or list - One of the strings "PASS", "FAIL", "UNDETERMINED", "NOT_APPLICABLE"
                     or a list of outcomes for
                     a list-type rule
@@ -229,7 +229,7 @@ class RuleDefinitionBase:
         return outcome
 
     def _get_context(self, rmds, rmr_context=None):
-        """Get the context for each RMR
+        """Get the context for each RMD
 
         Private method, not to be overridden
 
@@ -244,7 +244,7 @@ class RuleDefinitionBase:
         Returns
         -------
         RuleSetModels
-            Object containing the contexts for RMRs; an RMR's context is set to None if the corresponding flag
+            Object containing the contexts for RMDs; an RMR's context is set to None if the corresponding flag
             in self.rmrs_used is not set
         """
         rmr_context = self.rmr_context if rmr_context is None else rmr_context

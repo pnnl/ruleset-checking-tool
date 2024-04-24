@@ -41,9 +41,9 @@ class Section22Rule7(RuleDefinitionBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.BASELINE_0
-        baseline_system_types_dict = get_baseline_system_types(rmi_b)
-        # create a list containing all HVAC systems that are modeled in the rmi_b
+        rmd_b = context.BASELINE_0
+        baseline_system_types_dict = get_baseline_system_types(rmd_b)
+        # create a list containing all HVAC systems that are modeled in the rmd_b
         available_types_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict
@@ -57,8 +57,8 @@ class Section22Rule7(RuleDefinitionBase):
         )
 
     def get_calc_vals(self, context, data=None):
-        rmi_b = context.BASELINE_0
-        num_primary_loops = len(get_primary_secondary_loops_dict(rmi_b))
+        rmd_b = context.BASELINE_0
+        num_primary_loops = len(get_primary_secondary_loops_dict(rmd_b))
 
         return {"num_primary_loops": num_primary_loops}
 

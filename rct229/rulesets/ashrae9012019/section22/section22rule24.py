@@ -49,15 +49,15 @@ class Section22Rule24(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.BASELINE_0
-        baseline_system_types_dict = get_baseline_system_types(rmi_b)
-        # create a list contains all HVAC systems that are modeled in the rmi_b
+        rmd_b = context.BASELINE_0
+        baseline_system_types_dict = get_baseline_system_types(rmd_b)
+        # create a list contains all HVAC systems that are modeled in the rmd_b
         available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict
             if len(baseline_system_types_dict[hvac_type]) > 0
         ]
-        primary_secondary_loop_dict = get_primary_secondary_loops_dict(rmi_b)
+        primary_secondary_loop_dict = get_primary_secondary_loops_dict(rmd_b)
 
         return (
             any(
@@ -70,8 +70,8 @@ class Section22Rule24(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.BASELINE_0
-        primary_secondary_loops_dict = get_primary_secondary_loops_dict(rmi_b)
+        rmd_b = context.BASELINE_0
+        primary_secondary_loops_dict = get_primary_secondary_loops_dict(rmd_b)
         return {"primary_secondary_loops_dict": primary_secondary_loops_dict}
 
     # filter to only keep loops that have secondary loop(s)

@@ -4,7 +4,7 @@ from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_insta
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.utils.jsonpath_utils import find_all
 
-MANUAL_CHECK_MSG = "Surface in P-RMR has subsurfaces modeled with different manual shade status. Verify if subsurfaces manual shade status in B-RMR are modeled the same as in P-RMR"
+MANUAL_CHECK_MSG = "Surface in P-RMD has subsurfaces modeled with different manual shade status. Verify if subsurfaces manual shade status in B-RMD are modeled the same as in P-RMD"
 
 # Json path for subsurfaces with has_manual_interior_shades set to True
 MANUALLY_SHADED_SUBSURFACES_JSON = (

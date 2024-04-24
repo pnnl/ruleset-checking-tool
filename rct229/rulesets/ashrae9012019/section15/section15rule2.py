@@ -11,7 +11,7 @@ class Section15Rule2(RuleDefinitionBase):
                 USER=True, BASELINE_0=False, PROPOSED=True
             ),
             id="15-2",
-            description="Number of transformers modeled in User RMR and Proposed RMR are the same",
+            description="Number of transformers modeled in User RMD and Proposed RMD are the same",
             ruleset_section_title="Transformer",
             standard_section="Transformers",
             is_primary_rule=False,

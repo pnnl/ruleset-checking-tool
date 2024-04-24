@@ -34,8 +34,8 @@ class Section19Rule6(RuleDefinitionBase):
         )
 
     def get_calc_vals(self, context, data=None):
-        rmi_b = context.BASELINE_0
-        output_instance_b = rmi_b["output"]["output_instance"]
+        rmd_b = context.BASELINE_0
+        output_instance_b = rmd_b["output"]["output_instance"]
 
         unmet_load_hours_heating_b = output_instance_b["unmet_load_hours_heating"]
         unmet_load_hours_cooling_b = output_instance_b["unmet_load_hours_cooling"]

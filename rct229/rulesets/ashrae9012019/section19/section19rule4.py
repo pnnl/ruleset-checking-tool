@@ -56,9 +56,9 @@ class Section19Rule4(RuleDefinitionListIndexedBase):
             )
 
         def create_data(self, context, data):
-            rmi_b = context.BASELINE_0
+            rmd_b = context.BASELINE_0
 
-            return {"schedule_b": getattr_(rmi_b, "RMI", "schedules")}
+            return {"schedule_b": getattr_(rmd_b, "RMI", "schedules")}
 
         class BuildingSegmentRule(RuleDefinitionListIndexedBase):
             def __init__(self):

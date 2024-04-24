@@ -22,7 +22,7 @@ class Section19Rule32(RuleDefinitionListIndexedBase):
             each_rule=Section19Rule32.HVACRule(),
             index_rmr=BASELINE_0,
             id="19-32",
-            description="HVAC fans in the baseline design model shall remain on during unoccupied hours in systems primarily serving computer rooms in the B_RMR.",
+            description="HVAC fans in the baseline design model shall remain on during unoccupied hours in systems primarily serving computer rooms in the B_RMD.",
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1-4 Schedules exception #3 in the proposed column",
             is_primary_rule=True,
@@ -31,10 +31,10 @@ class Section19Rule32(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.BASELINE_0
+        rmd_b = context.BASELINE_0
 
         hvac_systems_primarily_serving_comp_room_b = (
-            get_hvac_systems_primarily_serving_comp_room(rmi_b)
+            get_hvac_systems_primarily_serving_comp_room(rmd_b)
         )
 
         return {

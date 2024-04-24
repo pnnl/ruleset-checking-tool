@@ -42,9 +42,9 @@ class Section22Rule5(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.BASELINE_0
-        baseline_system_types_dict = get_baseline_system_types(rmi_b)
-        # create a list containing all HVAC systems that are modeled in the rmi_b
+        rmd_b = context.BASELINE_0
+        baseline_system_types_dict = get_baseline_system_types(rmd_b)
+        # create a list containing all HVAC systems that are modeled in the rmd_b
         available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict
@@ -58,8 +58,8 @@ class Section22Rule5(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.BASELINE_0
-        chiller_loop_ids_list = find_all("$.chillers[*].cooling_loop", rmi_b)
+        rmd_b = context.BASELINE_0
+        chiller_loop_ids_list = find_all("$.chillers[*].cooling_loop", rmd_b)
         return {"chiller_loop_ids_list": chiller_loop_ids_list}
 
     def list_filter(self, context_item, data):

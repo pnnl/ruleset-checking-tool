@@ -16,7 +16,7 @@ class Section15Rule4(RuleDefinitionListIndexedBase):
             each_rule=Section15Rule4.TransformerRule(),
             index_rmr=USER,
             id="15-4",
-            description="User RMR transformer id in Baseline RMR",
+            description="User RMD transformer id in Baseline RMD",
             ruleset_section_title="Transformer",
             standard_section="Transformers",
             is_primary_rule=False,

@@ -38,9 +38,9 @@ class Section22Rule30(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.BASELINE_0
-        baseline_system_types_dict = get_baseline_system_types(rmi_b)
-        # create a list containing all HVAC systems that are modeled in the rmi_b
+        rmd_b = context.BASELINE_0
+        baseline_system_types_dict = get_baseline_system_types(rmd_b)
+        # create a list containing all HVAC systems that are modeled in the rmd_b
         available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict
@@ -54,12 +54,12 @@ class Section22Rule30(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.BASELINE_0
+        rmd_b = context.BASELINE_0
         condenser_loop_pump_power_dict = {
             chiller["condensing_loop"]: find_exactly_one_fluid_loop(
-                rmi_b, chiller["condensing_loop"]
+                rmd_b, chiller["condensing_loop"]
             ).get("pump_power_per_flow_rate")
-            for chiller in find_all("chillers[*]", rmi_b)
+            for chiller in find_all("chillers[*]", rmd_b)
         }
         return {"condenser_loop_pump_power_dict": condenser_loop_pump_power_dict}
 

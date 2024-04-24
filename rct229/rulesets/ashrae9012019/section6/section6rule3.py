@@ -14,8 +14,8 @@ from rct229.utils.std_comparisons import std_equal
 OFFICE_OPEN_PLAN = SchemaEnums.schema_enums[
     "LightingSpaceOptions2019ASHRAE901TG37"
 ].OFFICE_OPEN_PLAN
-FAIL_MSG = "Lighting exists or is submitted with design documents. Lighting power density in P_RMR does not match U_RMR."
-MANUAL_CHECK_REQUIRED_MSG = "Lighting is not yet designed, or lighting is as-designed or as-existing but matches Table 9.5.1. Lighting power density in P_RMR does not match U_RMR."
+FAIL_MSG = "Lighting exists or is submitted with design documents. Lighting power density in P_RMD does not match U_RMD."
+MANUAL_CHECK_REQUIRED_MSG = "Lighting is not yet designed, or lighting is as-designed or as-existing but matches Table 9.5.1. Lighting power density in P_RMD does not match U_RMD."
 
 
 class Section6Rule3(RuleDefinitionListIndexedBase):

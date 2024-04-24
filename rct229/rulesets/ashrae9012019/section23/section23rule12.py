@@ -33,8 +33,8 @@ class Section23Rule12(PartialRuleDefinition):
         )
 
     def applicability_check(self, context, calc_vals, data):
-        rmi_b = context.BASELINE_0
-        baseline_system_types_dict_b = get_baseline_system_types(rmi_b)
+        rmd_b = context.BASELINE_0
+        baseline_system_types_dict_b = get_baseline_system_types(rmd_b)
 
         return any(
             [

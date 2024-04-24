@@ -94,55 +94,55 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
 
         def create_data(self, context, data=None):
 
-            rmi_b = context.BASELINE_0
-            rmi_p = context.PROPOSED
+            rmd_b = context.BASELINE_0
+            rmd_p = context.PROPOSED
             is_leap_year = data["is_leap_year"]
 
             zone_p_hvac_list_dict = {
-                zone_id: get_list_hvac_systems_associated_with_zone(rmi_p, zone_id)
+                zone_id: get_list_hvac_systems_associated_with_zone(rmd_p, zone_id)
                 for zone_id in find_all(
-                    "$.buildings[*].building_segments[*].zones[*].id", rmi_p
+                    "$.buildings[*].building_segments[*].zones[*].id", rmd_p
                 )
             }
 
             zone_p_fan_schedule_dict = {
                 zone_id: get_aggregated_zone_hvac_fan_operating_schedule(
-                    rmi_p, zone_id, is_leap_year
+                    rmd_p, zone_id, is_leap_year
                 )
                 for zone_id in find_all(
-                    "$.buildings[*].building_segments[*].zones[*].id", rmi_p
+                    "$.buildings[*].building_segments[*].zones[*].id", rmd_p
                 )
             }
 
             zone_b_fan_schedule_dict = {
                 zone_id: get_aggregated_zone_hvac_fan_operating_schedule(
-                    rmi_b, zone_id, is_leap_year
+                    rmd_b, zone_id, is_leap_year
                 )
                 for zone_id in find_all(
-                    "$.buildings[*].building_segments[*].zones[*].id", rmi_b
+                    "$.buildings[*].building_segments[*].zones[*].id", rmd_b
                 )
             }
 
             floor_b_hvac_list_dict = {
                 floor_name: get_dict_of_zones_hvac_sys_serving_specific_floor(
-                    rmi_b, floor_name
+                    rmd_b, floor_name
                 )
                 for floor_name in find_all(
-                    "$.buildings[*].building_segments[*].zones[*].floor_name", rmi_b
+                    "$.buildings[*].building_segments[*].zones[*].floor_name", rmd_b
                 )
             }
 
             return {
-                "baseline_hvac_sys_type_ids_dict_b": get_baseline_system_types(rmi_b),
+                "baseline_hvac_sys_type_ids_dict_b": get_baseline_system_types(rmd_b),
                 "zone_p_hvac_list_dict": zone_p_hvac_list_dict,
                 "zone_p_fan_schedule_dict": zone_p_fan_schedule_dict,
                 "zone_b_fan_schedule_dict": zone_b_fan_schedule_dict,
                 "floor_b_hvac_list_dict": floor_b_hvac_list_dict,
                 "dict_hvac_sys_zones_served_p": get_hvac_zone_list_w_area_by_rmi_dict(
-                    rmi_p
+                    rmd_p
                 ),
                 "zcc_dict_b": get_zone_conditioning_category_rmi_dict(
-                    data["climate_zone"], rmi_b
+                    data["climate_zone"], rmd_b
                 ),
             }
 

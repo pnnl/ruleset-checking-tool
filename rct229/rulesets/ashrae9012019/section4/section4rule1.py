@@ -64,13 +64,13 @@ class Section4Rule1(RuleDefinitionListIndexedBase):
             )
 
         def create_data(self, context, data=None):
-            rmi_b = context.BASELINE_0
-            rmi_p = context.PROPOSED
+            rmd_b = context.BASELINE_0
+            rmd_p = context.PROPOSED
             return {
-                "schedules_b": rmi_b["schedules"],
-                "schedules_p": rmi_p["schedules"],
+                "schedules_b": rmd_b["schedules"],
+                "schedules_p": rmd_p["schedules"],
                 "zcc_dict_b": get_zone_conditioning_category_rmi_dict(
-                    data["climate_zone"], rmi_b
+                    data["climate_zone"], rmd_b
                 ),
             }
 

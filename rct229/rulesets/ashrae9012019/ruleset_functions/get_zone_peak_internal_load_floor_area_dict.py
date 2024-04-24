@@ -12,7 +12,7 @@ from rct229.utils.utility_functions import (
 
 
 def get_zone_peak_internal_load_floor_area_dict(
-    rmi: dict, zone_id: str
+    rmd: dict, zone_id: str
 ) -> dict[Literal["peak", "area"], Quantity]:
     """
     Finds the peak coincident internal loads of a zone and returns the value in btu/h/ft2
@@ -23,7 +23,7 @@ def get_zone_peak_internal_load_floor_area_dict(
 
     Parameters
     ----------
-    rmi: dict
+    rmd: dict
     A dictionary representing a RuleModelInstance object as defined by the ASHRAE229 schema
     zone_id: string
         zone id
@@ -33,7 +33,7 @@ def get_zone_peak_internal_load_floor_area_dict(
     result: dict
     a dictionary that contains two keys, peak, and area.
     """
-    zone = find_exactly_one_zone(rmi, zone_id)
+    zone = find_exactly_one_zone(rmd, zone_id)
     zone_area = ZERO.AREA
     zone_load = ZERO.POWER
 
@@ -42,7 +42,7 @@ def get_zone_peak_internal_load_floor_area_dict(
         zone_area += space_area
         for light in find_all("$.interior_lighting[*]", space):
             lighting_design_schedule = find_exactly_one_schedule(
-                rmi,
+                rmd,
                 getattr_(light, "interior_lighting", "lighting_multiplier_schedule"),
             )
             lighting_max_schedule_fraction = max(
@@ -60,7 +60,7 @@ def get_zone_peak_internal_load_floor_area_dict(
 
         for equipment in find_all("$.miscellaneous_equipment[*]", space):
             equipment_design_schedule = find_exactly_one_schedule(
-                rmi,
+                rmd,
                 getattr_(equipment, "miscellaneous_equipment", "multiplier_schedule"),
             )
             equipment_max_schedule_fraction = max(
@@ -78,7 +78,7 @@ def get_zone_peak_internal_load_floor_area_dict(
         occupant_max_schedule_fraction = 0.0
         if space.get("occupant_multiplier_schedule"):
             occupant_design_schedule = find_exactly_one_schedule(
-                rmi, space["occupant_multiplier_schedule"]
+                rmd, space["occupant_multiplier_schedule"]
             )
             occupant_max_schedule_fraction = max(
                 getattr_(

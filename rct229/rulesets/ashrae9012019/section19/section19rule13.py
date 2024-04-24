@@ -67,8 +67,8 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.BASELINE_0
-        baseline_system_types_dict = get_baseline_system_types(rmi_b)
+        rmd_b = context.BASELINE_0
+        baseline_system_types_dict = get_baseline_system_types(rmd_b)
 
         return any(
             [
@@ -82,11 +82,11 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.BASELINE_0
-        rmi_p = context.PROPOSED
+        rmd_b = context.BASELINE_0
+        rmd_p = context.PROPOSED
 
         dict_of_zones_and_terminal_units_served_by_hvac_sys_b = (
-            get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmi_b)
+            get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmd_b)
         )
 
         zone_info = {}
@@ -95,7 +95,7 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
         for hvac_id_b in dict_of_zones_and_terminal_units_served_by_hvac_sys_b:
             zone_info[hvac_id_b] = {
                 "are_all_hvac_sys_fan_objs_autosized": are_all_hvac_sys_fan_objs_autosized(
-                    rmi_b, hvac_id_b
+                    rmd_b, hvac_id_b
                 ),
                 "zone_has_lab_space": False,
                 "all_design_setpoints_delta_Ts_are_per_reqs": False,
@@ -107,7 +107,7 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
             ]["zone_list"]:
                 zone_b = find_one(
                     f'$.buildings[*].building_segments[*].zones[*][?(@.id = "{zone_id_b}")]',
-                    rmi_b,
+                    rmd_b,
                 )
                 design_thermostat_cooling_setpoint.append(
                     getattr_(zone_b, "zones", "design_thermostat_cooling_setpoint")
@@ -184,7 +184,7 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
                         terminal_p.get("primary_airflow", ZERO.FLOW)
                         for terminal_p in find_all(
                             f'$.buildings[*].building_segments[*].zones[*][?(@.id = "{zone_id_b}")].terminals[*]',
-                            rmi_p,
+                            rmd_p,
                         )
                     ]
                 )

@@ -66,9 +66,9 @@ class Section21Rule10(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.BASELINE_0
-        baseline_system_types_dict = get_baseline_system_types(rmi_b)
-        # create a list containing all HVAC systems that are modeled in the rmi_b
+        rmd_b = context.BASELINE_0
+        baseline_system_types_dict = get_baseline_system_types(rmd_b)
+        # create a list containing all HVAC systems that are modeled in the rmd_b
         available_types_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict
@@ -82,9 +82,9 @@ class Section21Rule10(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.BASELINE_0
+        rmd_b = context.BASELINE_0
         # to avoid pumps in service water heating system
-        loop_zone_list_w_area_dict = get_hw_loop_zone_list_w_area(rmi_b)
+        loop_zone_list_w_area_dict = get_hw_loop_zone_list_w_area(rmd_b)
 
         return {"loop_zone_list_w_area_dict": loop_zone_list_w_area_dict}
 

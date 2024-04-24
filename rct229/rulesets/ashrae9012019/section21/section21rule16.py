@@ -53,9 +53,9 @@ class Section21Rule16(RuleDefinitionBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.BASELINE_0
-        baseline_system_types_dict = get_baseline_system_types(rmi_b)
-        # create a list containing all HVAC systems that are modeled in the rmi_b
+        rmd_b = context.BASELINE_0
+        baseline_system_types_dict = get_baseline_system_types(rmd_b)
+        # create a list containing all HVAC systems that are modeled in the rmd_b
         available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict
@@ -69,9 +69,9 @@ class Section21Rule16(RuleDefinitionBase):
         )
 
     def get_calc_vals(self, context, data=None):
-        rmi_b = context.BASELINE_0
+        rmd_b = context.BASELINE_0
         hhw_loop_count = len(
-            find_all('$..fluid_loops[*][?(@.type = "HEATING")]', rmi_b)
+            find_all('$..fluid_loops[*][?(@.type = "HEATING")]', rmd_b)
         )
         return {"hhw_loop_count": hhw_loop_count}
 
