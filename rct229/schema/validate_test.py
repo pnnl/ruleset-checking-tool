@@ -2,8 +2,6 @@ import json
 import os
 from copy import deepcopy
 
-import pytest
-
 from rct229.schema.validate import (
     check_unique_ids_in_ruleset_model_descriptions,
     json_paths_to_lists,
@@ -13,7 +11,7 @@ from rct229.schema.validate import (
     validate_rmd,
 )
 
-EXAMPLES_PATH = "examples"
+EXAMPLES_PATH = "../../examples"
 
 # Testing validate_rmd; intended to make sure the referenced schemas are connected
 # properly and that the example rmd files are schema valid
