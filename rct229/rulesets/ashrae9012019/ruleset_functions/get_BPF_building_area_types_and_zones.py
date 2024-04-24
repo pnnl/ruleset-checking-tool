@@ -35,7 +35,7 @@ def get_BPF_building_area_types_and_zones(
     Returns
     -------
     building_area_types_with_total_area_and_zones_dict: A dict that saves all the BPF building area types and includes a list of all the zone ids associated with area type as well as
-                                                       the total area of each building area type: {MULTIFAMILY: {"zone_id": ["zone_2", "zone_3", "zone_4"], "area": 34567, "classification_source": "BUILDING_SEGMENT_LIGHTING"}, HEALTHCARE_HOSPITAL: {"zone_id": ["zone_1","zone_5","zone_6"], "area": 20381, "classification_source": "SPACE_LIGHTING"}
+                                                        the total area of each building area type: {MULTIFAMILY: {"zone_id": ["zone_2", "zone_3", "zone_4"], "area": 34567, "classification_source": "BUILDING_SEGMENT_LIGHTING"}, HEALTHCARE_HOSPITAL: {"zone_id": ["zone_1","zone_5","zone_6"], "area": 20381, "classification_source": "SPACE_LIGHTING"}
     """
 
     building_area_types_with_total_area_and_zones_dict = {}
@@ -50,10 +50,8 @@ def get_BPF_building_area_types_and_zones(
             building_segment_BPF_BAT = lighting_space_type_to_BPF_area_type(
                 building_segment["lighting_building_area_type"]
             )
-            classification_source = ClassificationType.BUILDING_SEGMENT_LIGHTING
         else:
             building_segment_BPF_BAT = None
-            classification_source = ClassificationType.SPACE_LIGHTING
 
         # when `lighting_building_area_type` key does NOT exist
         if building_segment_BPF_BAT is None:
@@ -75,7 +73,7 @@ def get_BPF_building_area_types_and_zones(
                     ] = {
                         "zone_id": [],
                         "area": ZERO.AREA,
-                        "classification_source": classification_source,
+                        "classification_source": ClassificationType.SPACE_LIGHTING,
                     }
 
                 building_area_types_with_total_area_and_zones_dict[
@@ -84,6 +82,9 @@ def get_BPF_building_area_types_and_zones(
                 building_area_types_with_total_area_and_zones_dict[
                     building_segment_BPF_BAT
                 ]["area"] += sum(area for area in zone_BPF_BAT_dict.values())
+                building_area_types_with_total_area_and_zones_dict[
+                    building_segment_BPF_BAT
+                ]["classification_source"] = ClassificationType.SPACE_LIGHTING
 
         # when `lighting_building_area_type` key exists
         else:
@@ -96,7 +97,7 @@ def get_BPF_building_area_types_and_zones(
                 ] = {
                     "zone_id": [],
                     "area": ZERO.AREA,
-                    "classification_source": classification_source,
+                    "classification_source": ClassificationType.BUILDING_SEGMENT_LIGHTING,
                 }
 
             for zone in find_all("$.zones[*]", building_segment):
