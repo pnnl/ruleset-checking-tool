@@ -6,7 +6,7 @@
 **Rule Assertion:** B-RMR = expected value                                           
 **Appendix G Section:** G3.1  
 **Appendix G Section Reference:** Table G3.1-16  
-**Data Lookup:** Table G3.9.2, Table G3.9.3  
+**Data Lookup:** Table G3.9.1, Table G3.9.2, Table G3.9.3  
 **Evaluation Context:** Each elevator  
 
 **Applicability Checks:**  
@@ -33,7 +33,10 @@ N/A
     - If any detailed elevator data parameters are not defined: `if any(param == Null for param in [elevator_motor_power_b, elevator_cab_weight_b, elevator_cab_counterweight_b, elevator_design_load_b, elevator_speed_b]): is_undetermined = true`
     - Get the elevator mechanical efficiency: `elevator_mechanical_efficiency_b = data_lookup('table_g3.9.2', total_floors_b)['mechanical_efficiency']`
     - Calculate the motor brake horsepower: `motor_brake_horsepower_b = (elevator_cab_weight_b + elevator_design_load_b - elevator_cab_counterweight_b) * elevator_speed_b / 33000 / elevator_mechanical_efficiency_b`
-    - Get the elevator motor efficiency associated with the next shaft input power greater than the bhp: `elevator_motor_efficiency_b = data_lookup('table_g3.9.3', motor_brake_horsepower_b)['motor_efficiency']`
+    - If the total number of floors is greater than 4: `if total_floors_b > 4:`
+      - Get the elevator motor efficiency associated with the next shaft input power greater than the bhp from Table G3.9.1: `elevator_motor_efficiency_b = data_lookup('table_g3.9.1', motor_brake_horsepower_b)['motor_efficiency']`
+    - Else:
+      - Get the elevator motor efficiency associated with the next shaft input power greater than the bhp from Table G3.9.3: `elevator_motor_efficiency_b = data_lookup('table_g3.9.3', motor_brake_horsepower_b)['motor_efficiency']`
     - Calculate the expected peak motor power: `expected_peak_motor_power = motor_brake_horsepower_b * 746 / elevator_motor_efficiency_b`
     
     **Rule Assertion:**  
