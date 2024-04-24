@@ -10,27 +10,27 @@ class Section12Rule3(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section12Rule3, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=True, BASELINE_0=False, PROPOSED=True
             ),
             each_rule=Section12Rule3.BuildingRule(),
-            index_rmr=USER,
+            index_rmd=USER,
             id="12-3",
             description="User RMD Space ID in Proposed RMD",
             ruleset_section_title="Receptacle",
             standard_section="Section Table G3.1-12 Receptacles: Modeling Requirements for the Proposed design",
             is_primary_rule=True,
-            rmr_context="ruleset_model_descriptions/0/buildings",
+            rmd_context="ruleset_model_descriptions/0/buildings",
         )
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section12Rule3.BuildingRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=True, BASELINE_0=False, PROPOSED=True
                 ),
                 each_rule=Section12Rule3.BuildingRule.SpaceRule(),
-                index_rmr=USER,
+                index_rmd=USER,
                 list_path="$..spaces[*]",  # All spaces in the buliding
             )
 
@@ -42,7 +42,7 @@ class Section12Rule3(RuleDefinitionListIndexedBase):
             def __init__(self):
                 super(Section12Rule3.BuildingRule.SpaceRule, self).__init__(
                     # No longer need the proposed RMD
-                    rmrs_used=produce_ruleset_model_instance(
+                    rmds_used=produce_ruleset_model_instance(
                         USER=True, BASELINE_0=False, PROPOSED=False
                     ),
                 )

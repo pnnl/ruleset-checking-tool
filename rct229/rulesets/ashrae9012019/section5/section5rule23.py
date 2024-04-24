@@ -17,11 +17,11 @@ class Section5Rule23(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule23, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             each_rule=Section5Rule23.BuildingRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="5-23",
             description="Manual fenestration shading devices, such as blinds or shades, shall be modeled or not modeled the same as in the baseline building design.",
             ruleset_section_title="Envelope",
@@ -33,23 +33,23 @@ class Section5Rule23(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule23.BuildingRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
                 # Make sure surfaces are matched in SurfaceRule
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
                 each_rule=Section5Rule23.BuildingRule.SurfaceRule(),
-                index_rmr=BASELINE_0,
+                index_rmd=BASELINE_0,
             )
 
         class SurfaceRule(RuleDefinitionListIndexedBase):
             def __init__(self):
                 super(Section5Rule23.BuildingRule.SurfaceRule, self).__init__(
-                    rmrs_used=produce_ruleset_model_instance(
+                    rmds_used=produce_ruleset_model_instance(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
                     each_rule=Section5Rule23.BuildingRule.SurfaceRule.SubsurfaceRule(),
-                    index_rmr=BASELINE_0,
+                    index_rmd=BASELINE_0,
                     # Make sure subsurfaces are matched
                     # List_path will be evaluated after manual check
                     list_path="subsurfaces[*]",
@@ -88,7 +88,7 @@ class Section5Rule23(RuleDefinitionListIndexedBase):
                     super(
                         Section5Rule23.BuildingRule.SurfaceRule.SubsurfaceRule, self
                     ).__init__(
-                        rmrs_used=produce_ruleset_model_instance(
+                        rmds_used=produce_ruleset_model_instance(
                             USER=False, BASELINE_0=True, PROPOSED=True
                         ),
                         required_fields={"$": ["has_manual_interior_shades"]},

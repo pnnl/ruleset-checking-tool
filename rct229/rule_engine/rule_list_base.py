@@ -11,15 +11,15 @@ class RuleDefinitionListBase(RuleDefinitionBase):
 
     def __init__(
         self,
-        rmrs_used,
+        rmds_used,
         each_rule,
-        rmrs_used_optional=None,
+        rmds_used_optional=None,
         id=None,
         description=None,
         ruleset_section_title=None,
         standard_section=None,
         is_primary_rule=None,
-        rmr_context="",
+        rmd_context="",
         required_fields=None,
         manual_check_required_msg="Manual Check Required",
         not_applicable_msg="Not Applicable",
@@ -30,11 +30,11 @@ class RuleDefinitionListBase(RuleDefinitionBase):
         self.each_rule = each_rule
         self.data_items = data_items
         super(RuleDefinitionListBase, self).__init__(
-            rmrs_used=rmrs_used,
-            rmrs_used_optional=rmrs_used_optional,
+            rmds_used=rmds_used,
+            rmds_used_optional=rmds_used_optional,
             id=id,
             description=description,
-            rmr_context=rmr_context,
+            rmd_context=rmd_context,
             required_fields=required_fields,
             manual_check_required_msg=manual_check_required_msg,
             not_applicable_msg=not_applicable_msg,

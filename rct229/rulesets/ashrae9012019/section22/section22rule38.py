@@ -12,11 +12,11 @@ class Section22Rule38(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section22Rule38, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section22Rule38.RulesetModelInstanceRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="22-38",
             description="Baseline systems served by purchased chilled water loop shall have a "
             "minimum flow setpoint of 25%",
@@ -33,7 +33,7 @@ class Section22Rule38(RuleDefinitionListIndexedBase):
     class RulesetModelInstanceRule(PartialRuleDefinition):
         def __init__(self):
             super(Section22Rule38.RulesetModelInstanceRule, self,).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
             )

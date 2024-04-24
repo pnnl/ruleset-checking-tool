@@ -35,11 +35,11 @@ class Section22Rule20(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section22Rule20, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section22Rule20.HeatRejectionRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="22-20",
             description="The baseline minimum condenser water reset temperature is per Table G3.1.3.11.",
             ruleset_section_title="HVAC - Chiller",
@@ -76,7 +76,7 @@ class Section22Rule20(RuleDefinitionListIndexedBase):
     class HeatRejectionRule(RuleDefinitionBase):
         def __init__(self):
             super(Section22Rule20.HeatRejectionRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={

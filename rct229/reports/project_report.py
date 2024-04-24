@@ -15,8 +15,8 @@ def print_rule_report(report):
         print(f"Rule: {str(outcome['id'])}")
         print(f"Description: {str(outcome['description'])}")
         print(
-            f"RMD context: {str(outcome['rmr_context'])}"
-        ) if "rmr_context" in outcome else print("RMD context: full scope")
+            f"RMD context: {str(outcome['rmd_context'])}"
+        ) if "rmd_context" in outcome else print("RMD context: full scope")
         # print(f"Element context: {str(outcome['element_context'])}")
         # print(f"Applicable: {str(outcome['applicable'])}")
         # print(f"Manual check required: {str(outcome['manual_check_required'])}")

@@ -29,7 +29,7 @@ class Section22Rule33(RuleDefinitionBase):
 
     def __init__(self):
         super(Section22Rule33, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             id="22-33",
@@ -37,7 +37,7 @@ class Section22Rule33(RuleDefinitionBase):
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.2 Building System-Specific Modeling Requirements for the Baseline model",
             is_primary_rule=True,
-            rmr_context="ruleset_model_descriptions/0",
+            rmd_context="ruleset_model_descriptions/0",
         )
 
     def is_applicable(self, context, data=None):

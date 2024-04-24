@@ -32,17 +32,17 @@ class Section21Rule9(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section21Rule9, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section21Rule9.HeatingFluidLoopRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="21-9",
             description="When baseline building includes boilers, Hot Water Pump Power = 19W/gpm.",
             ruleset_section_title="HVAC - Water Side",
             standard_section="Section G3.1.3.5 Building System-Specific Modeling Requirements for the Baseline model",
             is_primary_rule=True,
-            rmr_context="ruleset_model_descriptions/0",
+            rmd_context="ruleset_model_descriptions/0",
             list_path="$.fluid_loops[*]",
         )
 
@@ -75,7 +75,7 @@ class Section21Rule9(RuleDefinitionListIndexedBase):
     class HeatingFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
             super(Section21Rule9.HeatingFluidLoopRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={

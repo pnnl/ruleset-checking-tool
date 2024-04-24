@@ -12,11 +12,11 @@ class Section21Rule15(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section21Rule15, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section21Rule15.RulesetModelInstanceRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="21-15",
             description="When the baseline building is modeled with a hot water plant, served by purchased HW "
             "system, the hot water pump power shall be 14 W/gpm.",
@@ -34,7 +34,7 @@ class Section21Rule15(RuleDefinitionListIndexedBase):
     class RulesetModelInstanceRule(PartialRuleDefinition):
         def __init__(self):
             super(Section21Rule15.RulesetModelInstanceRule, self,).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
             )

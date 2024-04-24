@@ -32,17 +32,17 @@ class Section22Rule19(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section22Rule19, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section22Rule19.HeatRejectionRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="22-19",
             description="The tower shall be controlled to maintain a leaving water temperature, where weather permits.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.11 Heat Rejection (System 7, 8, 11, 12 and 13)",
             is_primary_rule=True,
-            rmr_context="ruleset_model_descriptions/0",
+            rmd_context="ruleset_model_descriptions/0",
             list_path="heat_rejections[*]",
         )
 
@@ -75,7 +75,7 @@ class Section22Rule19(RuleDefinitionListIndexedBase):
     class HeatRejectionRule(RuleDefinitionBase):
         def __init__(self):
             super(Section22Rule19.HeatRejectionRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
             )

@@ -30,17 +30,17 @@ class Section21Rule18(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section21Rule18, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section21Rule18.BoilerRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="21-18",
             description="For baseline building, fossil fuel systems shall be modeled using natural gas as their fuel source. Exception: For fossil fuel systems where natural gas is not available for the proposed building site as determined by the rating authority, the baseline HVAC systems shall be modeled using propane as their fuel.",
             ruleset_section_title="HVAC - Water Side",
             standard_section="Section G3.1.2.1 General Baseline HVAC System Requirements - Equipment Efficiencies",
             is_primary_rule=True,
-            rmr_context="ruleset_model_descriptions/0",
+            rmd_context="ruleset_model_descriptions/0",
             list_path="boilers[*]",
         )
 
@@ -63,7 +63,7 @@ class Section21Rule18(RuleDefinitionListIndexedBase):
     class BoilerRule(RuleDefinitionBase):
         def __init__(self):
             super(Section21Rule18.BoilerRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={

@@ -21,11 +21,11 @@ class Section19Rule4(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section19Rule4, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section19Rule4.RuleSetModelInstanceRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="19-4",
             description="For baseline cooling sizing runs in residential dwelling units, the infiltration, occupants, lighting, gas and electricity using equipment hourly schedule shall be the same as the most used hourly weekday schedule from the annual simulation.",
             ruleset_section_title="HVAC - General",
@@ -47,11 +47,11 @@ class Section19Rule4(RuleDefinitionListIndexedBase):
     class RuleSetModelInstanceRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section19Rule4.RuleSetModelInstanceRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 each_rule=Section19Rule4.RuleSetModelInstanceRule.BuildingSegmentRule(),
-                index_rmr=BASELINE_0,
+                index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*]",
             )
 
@@ -65,11 +65,11 @@ class Section19Rule4(RuleDefinitionListIndexedBase):
                 super(
                     Section19Rule4.RuleSetModelInstanceRule.BuildingSegmentRule, self
                 ).__init__(
-                    rmrs_used=produce_ruleset_model_instance(
+                    rmds_used=produce_ruleset_model_instance(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
                     each_rule=Section19Rule4.RuleSetModelInstanceRule.BuildingSegmentRule.ZoneRule(),
-                    index_rmr=BASELINE_0,
+                    index_rmd=BASELINE_0,
                     list_path="$.zones[*]",
                 )
 
@@ -101,11 +101,11 @@ class Section19Rule4(RuleDefinitionListIndexedBase):
                         Section19Rule4.RuleSetModelInstanceRule.BuildingSegmentRule.ZoneRule,
                         self,
                     ).__init__(
-                        rmrs_used=produce_ruleset_model_instance(
+                        rmds_used=produce_ruleset_model_instance(
                             USER=False, BASELINE_0=True, PROPOSED=False
                         ),
                         each_rule=Section19Rule4.RuleSetModelInstanceRule.BuildingSegmentRule.ZoneRule.SpaceRule(),
-                        index_rmr=BASELINE_0,
+                        index_rmd=BASELINE_0,
                         list_path="$.spaces[*]",
                     )
 
@@ -161,7 +161,7 @@ class Section19Rule4(RuleDefinitionListIndexedBase):
                             Section19Rule4.RuleSetModelInstanceRule.BuildingSegmentRule.ZoneRule.SpaceRule,
                             self,
                         ).__init__(
-                            rmrs_used=produce_ruleset_model_instance(
+                            rmds_used=produce_ruleset_model_instance(
                                 USER=False, BASELINE_0=True, PROPOSED=False
                             ),
                         )

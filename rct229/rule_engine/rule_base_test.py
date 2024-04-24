@@ -67,7 +67,7 @@ RMDS_WITH_MATCHING_USER_AND_BASELINE = produce_ruleset_model_instance(
 BASE_RULE_1_OUTCOME_BASE = {
     "id": "1",
     "description": "Basic Rule",
-    "rmr_context": "/transformers",
+    "rmd_context": "/transformers",
 }
 
 
@@ -75,7 +75,7 @@ BASE_RULE_ARGS = {
     **BASE_RULE_1_OUTCOME_BASE,
     "not_applicable_msg": "Not applicable message",
     "manual_check_required_msg": "Manual check required message",
-    "rmrs_used": produce_ruleset_model_instance(
+    "rmds_used": produce_ruleset_model_instance(
         USER=True, BASELINE_0=True, PROPOSED=False
     ),
 }

@@ -33,17 +33,17 @@ class Section22Rule21(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section22Rule21, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section22Rule21.ChillerRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="22-21",
             description="The baseline building design’s chiller plant shall be modeled with chillers having the type as indicated in Table G3.1.3.7 as a function of building peak cooling load.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.1 Type and Number of Chillers (System 7, 8, 11, 12 and 13)",
             is_primary_rule=True,
-            rmr_context="ruleset_model_descriptions/0",
+            rmd_context="ruleset_model_descriptions/0",
             list_path="$.chillers[*]",
             required_fields={
                 "$": ["output"],
@@ -82,7 +82,7 @@ class Section22Rule21(RuleDefinitionListIndexedBase):
     class ChillerRule(RuleDefinitionBase):
         def __init__(self):
             super(Section22Rule21.ChillerRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={

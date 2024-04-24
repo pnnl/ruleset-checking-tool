@@ -45,17 +45,17 @@ class Section22Rule2(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section22Rule2, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section22Rule2.ChillerFluidLoopRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="22-2",
             description="Baseline chilled water design return temperature shall be modeled at 56F.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.8 Chilled-water design supply temperature (System 7, 8, 11, 12 and 13)",
             is_primary_rule=True,
-            rmr_context="ruleset_model_descriptions/0",
+            rmd_context="ruleset_model_descriptions/0",
             list_path="$.fluid_loops[*]",
         )
 
@@ -88,7 +88,7 @@ class Section22Rule2(RuleDefinitionListIndexedBase):
     class ChillerFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
             super(Section22Rule2.ChillerFluidLoopRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={

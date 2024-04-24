@@ -124,7 +124,7 @@ def evaluate_rule(rule, rmrs, test=False):
                 {
                     id: string - A unique identifier for the rule
                     description: string
-                    rmr_context: string - a JSON pointer into the RMD
+                    rmd_context: string - a JSON pointer into the RMD
                     result: string or list - One of the strings "PASS", "FAIL", "NA", or "REQUIRES_MANUAL_CHECK" or a list
                         of outcomes for a list-type rule
                 }
@@ -160,7 +160,7 @@ def evaluate_rules(
                 {
                     id: string - A unique identifier for the rule
                     description: string
-                    rmr_context: string - a JSON pointer into the RMD
+                    rmd_context: string - a JSON pointer into the RMD
                     result: string or list - One of the strings "PASS", "FAIL", "NA", or "REQUIRES_MANUAL_CHECK" or a list
                         of outcomes for a list-type rule
                 }
@@ -173,8 +173,8 @@ def evaluate_rules(
     rmds_used = get_rmd_instance()
     for rule in rules_list:
         for ruleset_model in rmds.get_ruleset_model_types():
-            if rule.rmrs_used[ruleset_model] and not (
-                rule.rmrs_used_optional and rule.rmrs_used_optional[ruleset_model]
+            if rule.rmds_used[ruleset_model] and not (
+                rule.rmds_used_optional and rule.rmds_used_optional[ruleset_model]
             ):
                 rmds_used[ruleset_model] = True
 

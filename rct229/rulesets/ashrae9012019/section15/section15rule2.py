@@ -7,7 +7,7 @@ class Section15Rule2(RuleDefinitionBase):
 
     def __init__(self):
         super(Section15Rule2, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=True, BASELINE_0=False, PROPOSED=True
             ),
             id="15-2",
@@ -15,7 +15,7 @@ class Section15Rule2(RuleDefinitionBase):
             ruleset_section_title="Transformer",
             standard_section="Transformers",
             is_primary_rule=False,
-            rmr_context="ruleset_model_descriptions/0/transformers",
+            rmd_context="ruleset_model_descriptions/0/transformers",
         )
 
     def is_applicable(self, context, data=None):

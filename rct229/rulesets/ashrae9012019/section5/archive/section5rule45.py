@@ -15,11 +15,11 @@ class Section5Rule45(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule45, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             each_rule=Section5Rule45.RuleSetModelInstanceRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="5-45",
             description="The infiltration schedules are the same in the proposed RMD as in the baseline RMD.",
             ruleset_section_title="Envelope",
@@ -33,11 +33,11 @@ class Section5Rule45(RuleDefinitionListIndexedBase):
     class RuleSetModelInstanceRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule45.RuleSetModelInstanceRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
                 each_rule=Section5Rule45.RuleSetModelInstanceRule.ZoneRule(),
-                index_rmr=BASELINE_0,
+                index_rmd=BASELINE_0,
                 list_path="buildings[*].building_segments[*].zones[*]",
                 required_fields={"$": ["schedules"]},
             )
@@ -55,7 +55,7 @@ class Section5Rule45(RuleDefinitionListIndexedBase):
         class ZoneRule(RuleDefinitionBase):
             def __init__(self):
                 super(Section5Rule45.RuleSetModelInstanceRule.ZoneRule, self).__init__(
-                    rmrs_used=produce_ruleset_model_instance(
+                    rmds_used=produce_ruleset_model_instance(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
                     required_fields={

@@ -41,7 +41,7 @@ class Section21Rule16(RuleDefinitionBase):
 
     def __init__(self):
         super(Section21Rule16, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             id="21-16",
@@ -49,7 +49,7 @@ class Section21Rule16(RuleDefinitionBase):
             ruleset_section_title="HVAC - Water Side",
             standard_section="Section G3.1.3.2 Building System-Specific Modeling Requirements for the Baseline model",
             is_primary_rule=True,
-            rmr_context="ruleset_model_descriptions/0",
+            rmd_context="ruleset_model_descriptions/0",
         )
 
     def is_applicable(self, context, data=None):

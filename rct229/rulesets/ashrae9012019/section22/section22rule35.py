@@ -12,11 +12,11 @@ class Section22Rule35(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section22Rule35, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section22Rule35.RulesetModelInstanceRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="22-35",
             description="Baseline systems served by purchased chilled water shall not be modeled with"
             " chilled water reset",
@@ -32,7 +32,7 @@ class Section22Rule35(RuleDefinitionListIndexedBase):
     class RulesetModelInstanceRule(PartialRuleDefinition):
         def __init__(self):
             super(Section22Rule35.RulesetModelInstanceRule, self,).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
             )

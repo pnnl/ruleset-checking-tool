@@ -27,11 +27,11 @@ class Section6Rule4(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section6Rule4, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             each_rule=Section6Rule4.BuildingSegmentRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="6-4",
             description='Where a complete lighting system exists and where a lighting system has been designed and submitted with design documents, the baseline LPD is equal to expected value in Table G3.7. Where lighting neither exists nor is submitted with design documents, baseline LPD shall be determined in accordance with Table G3-7 for "Office-Open Plan" space type.',
             ruleset_section_title="Lighting",
@@ -43,11 +43,11 @@ class Section6Rule4(RuleDefinitionListIndexedBase):
     class BuildingSegmentRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section6Rule4.BuildingSegmentRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
                 each_rule=Section6Rule4.BuildingSegmentRule.ZoneRule(),
-                index_rmr=BASELINE_0,
+                index_rmd=BASELINE_0,
                 list_path="zones[*]",
             )
 
@@ -63,11 +63,11 @@ class Section6Rule4(RuleDefinitionListIndexedBase):
         class ZoneRule(RuleDefinitionListIndexedBase):
             def __init__(self):
                 super(Section6Rule4.BuildingSegmentRule.ZoneRule, self,).__init__(
-                    rmrs_used=produce_ruleset_model_instance(
+                    rmds_used=produce_ruleset_model_instance(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
                     each_rule=Section6Rule4.BuildingSegmentRule.ZoneRule.SpaceRule(),
-                    index_rmr=BASELINE_0,
+                    index_rmd=BASELINE_0,
                     list_path="spaces[*]",
                 )
 
@@ -84,7 +84,7 @@ class Section6Rule4(RuleDefinitionListIndexedBase):
                         self,
                     ).__init__(
                         fail_msg=FAIL_MSG,
-                        rmrs_used=produce_ruleset_model_instance(
+                        rmds_used=produce_ruleset_model_instance(
                             USER=False, BASELINE_0=True, PROPOSED=True
                         ),
                     )

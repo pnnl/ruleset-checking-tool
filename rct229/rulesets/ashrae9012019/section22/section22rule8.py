@@ -39,11 +39,11 @@ class Section22Rule8(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section22Rule8, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section22Rule8.PrimaryFluidLoopRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="22-8",
             description="For Baseline chilled water system with cooling capacity of 300 tons or more, the secondary pump shall be modeled with variable-speed drives.",
             ruleset_section_title="HVAC - Chiller",
@@ -117,11 +117,11 @@ class Section22Rule8(RuleDefinitionListIndexedBase):
     class PrimaryFluidLoopRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section22Rule8.PrimaryFluidLoopRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 each_rule=Section22Rule8.PrimaryFluidLoopRule.SecondaryChildLoopRule(),
-                index_rmr=BASELINE_0,
+                index_rmd=BASELINE_0,
                 list_path="$.child_loops[*]",
             )
 
@@ -130,10 +130,10 @@ class Section22Rule8(RuleDefinitionListIndexedBase):
                 super(
                     Section22Rule8.PrimaryFluidLoopRule.SecondaryChildLoopRule, self
                 ).__init__(
-                    rmrs_used=produce_ruleset_model_instance(
+                    rmds_used=produce_ruleset_model_instance(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
-                    index_rmr=BASELINE_0,
+                    index_rmd=BASELINE_0,
                     each_rule=Section22Rule8.PrimaryFluidLoopRule.SecondaryChildLoopRule.PumpTypeRule(),
                 )
 
@@ -154,7 +154,7 @@ class Section22Rule8(RuleDefinitionListIndexedBase):
                         Section22Rule8.PrimaryFluidLoopRule.SecondaryChildLoopRule.PumpTypeRule,
                         self,
                     ).__init__(
-                        rmrs_used=produce_ruleset_model_instance(
+                        rmds_used=produce_ruleset_model_instance(
                             USER=False, BASELINE_0=True, PROPOSED=False
                         ),
                     )

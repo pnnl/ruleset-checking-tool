@@ -44,11 +44,11 @@ class Section21Rule5(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section21Rule5, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section21Rule5.RulesetModelInstanceRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="21-5",
             description="The baseline building design boiler plant shall be modeled as having a single boiler if the baseline building design plant serves a conditioned floor area of 15,000sq.ft. or less, and as having two equally sized boilers for plants serving more than 15,000sq.ft.",
             ruleset_section_title="HVAC - Water Side",
@@ -61,7 +61,7 @@ class Section21Rule5(RuleDefinitionListIndexedBase):
     class RulesetModelInstanceRule(RuleDefinitionBase):
         def __init__(self):
             super(Section21Rule5.RulesetModelInstanceRule, self,).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
             )

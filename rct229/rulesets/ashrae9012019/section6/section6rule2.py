@@ -26,11 +26,11 @@ class Section6Rule2(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section6Rule2, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=True, BASELINE_0=False, PROPOSED=True
             ),
             each_rule=Section6Rule2.SpaceRule(),
-            index_rmr=PROPOSED,
+            index_rmd=PROPOSED,
             id="6-2",
             description="Spaces in proposed building with hardwired lighting, including Hotel/Motel Guest Rooms, Dormitory Living Quarters, Interior Lighting Power >= Table 9.6.1; For Dwelling Units, Interior Lighting Power >= 0.6W/sq.ft.",
             ruleset_section_title="Lighting",
@@ -54,7 +54,7 @@ class Section6Rule2(RuleDefinitionListIndexedBase):
     class SpaceRule(RuleDefinitionBase):
         def __init__(self):
             super(Section6Rule2.SpaceRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=True, BASELINE_0=False, PROPOSED=True
                 ),
                 required_fields={

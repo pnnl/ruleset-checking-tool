@@ -26,17 +26,17 @@ class Section23Rule6(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section23Rule6, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section23Rule6.TerminalRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="23-6",
             description="For baseline systems 6 and 8, Fans in parallel VAV fan-powered boxes shall be sized for 50% of the peak design primary air (from the VAV air-handling unit) flow rate and shall be modeled with 0.35 W/cfm fan power.",
             ruleset_section_title="HVAC - Airside",
             standard_section="Section G3.1.3.14 Fan Power and Control (Systems 6 and 8)",
             is_primary_rule=True,
-            rmr_context="ruleset_model_descriptions/0",
+            rmd_context="ruleset_model_descriptions/0",
             list_path="$.buildings[*].building_segments[*].zones[*].terminals[*]",
         )
 
@@ -81,7 +81,7 @@ class Section23Rule6(RuleDefinitionListIndexedBase):
     class TerminalRule(RuleDefinitionBase):
         def __init__(self):
             super(Section23Rule6.TerminalRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={

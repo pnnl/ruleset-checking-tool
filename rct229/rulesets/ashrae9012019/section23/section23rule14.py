@@ -40,17 +40,17 @@ class Section23Rule14(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section23Rule14, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             each_rule=Section23Rule14.HVACRule(),
-            index_rmr=PROPOSED,
+            index_rmd=PROPOSED,
             id="23-14",
             description="If the baseline system does not comply with exceptions in Section 6.5.2.3 then only 25% of the system reheat energy shall be included in the baseline building performance.",
             ruleset_section_title="HVAC - Airside",
             standard_section="G3.1.3.18 Dehumidification (Systems 3 through 8 and 11, 12, and 13)",
             is_primary_rule=False,
-            rmr_context="ruleset_model_descriptions/0",
+            rmd_context="ruleset_model_descriptions/0",
             list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
         )
 
@@ -93,7 +93,7 @@ class Section23Rule14(RuleDefinitionListIndexedBase):
     class HVACRule(PartialRuleDefinition):
         def __init__(self):
             super(Section23Rule14.HVACRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=False, PROPOSED=True
                 ),
                 required_fields={"$": ["cooling_system"]},

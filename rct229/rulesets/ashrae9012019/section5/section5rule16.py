@@ -32,7 +32,7 @@ class Section5Rule16(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule16, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             required_fields={
@@ -40,7 +40,7 @@ class Section5Rule16(RuleDefinitionListIndexedBase):
                 "weather": ["climate_zone"],
             },
             each_rule=Section5Rule16.BuildingRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="5-16",
             description="The vertical fenestration shall be distributed on each face of the building in the same proportion as in the proposed design.",
             ruleset_section_title="Envelope",
@@ -53,12 +53,12 @@ class Section5Rule16(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule16.BuildingRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
                 required_fields={},
                 each_rule=Section5Rule16.BuildingRule.AboveGradeWallRule(),
-                index_rmr=BASELINE_0,
+                index_rmd=BASELINE_0,
                 # list_path and list_filter together determine the list of
                 # above grade walls to be passed to AboveGradeWallRule
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
@@ -102,7 +102,7 @@ class Section5Rule16(RuleDefinitionListIndexedBase):
         class AboveGradeWallRule(RuleDefinitionBase):
             def __init__(self):
                 super(Section5Rule16.BuildingRule.AboveGradeWallRule, self).__init__(
-                    rmrs_used=produce_ruleset_model_instance(
+                    rmds_used=produce_ruleset_model_instance(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
                     required_fields={

@@ -37,17 +37,17 @@ class Section22Rule9(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section22Rule9, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section22Rule9.ChillerFluidLoopRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="22-9",
             description="For Baseline chilled water system with cooling capacity of 300 tons or more, the secondary loop shall be modeled with a minimum flow of 25% of the design flow rate.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.10 Chilled-water pumps (System 7, 8, 11, 12 and 13)",
             is_primary_rule=True,
-            rmr_context="ruleset_model_descriptions/0",
+            rmd_context="ruleset_model_descriptions/0",
             list_path="$.fluid_loops[*]",
         )
 
@@ -106,11 +106,11 @@ class Section22Rule9(RuleDefinitionListIndexedBase):
     class ChillerFluidLoopRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section22Rule9.ChillerFluidLoopRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 each_rule=Section22Rule9.ChillerFluidLoopRule.SecondaryChildLoopRule(),
-                index_rmr=BASELINE_0,
+                index_rmd=BASELINE_0,
                 list_path="$.child_loops[*]",
             )
 
@@ -119,7 +119,7 @@ class Section22Rule9(RuleDefinitionListIndexedBase):
                 super(
                     Section22Rule9.ChillerFluidLoopRule.SecondaryChildLoopRule, self
                 ).__init__(
-                    rmrs_used=produce_ruleset_model_instance(
+                    rmds_used=produce_ruleset_model_instance(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
                     required_fields={

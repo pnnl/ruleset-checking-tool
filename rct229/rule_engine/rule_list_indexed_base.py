@@ -13,14 +13,14 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
 
     Parameters
     ----------
-    rmrs_used : RuleSetModels
+    rmds_used : RuleSetModels
         A list of boolean values indicating which RMDs are required by the
         rule
-    rmrs_used_optional: RulesetModels
+    rmds_used_optional: RulesetModels
         A boolean values indicating which RMDs are optional by the rule (True optional, False not optional).
     each_rule : RuleDefinitionBase | RuleDefinitionListBase
         The rule to be applied to each element in the list
-    index_rmr : "user" | "baseline" | "proposed"
+    index_rmd : "user" | "baseline" | "proposed"
         Indicates the RMD to be indexed over
     id : string
         Unique id for the rule
@@ -28,13 +28,13 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
     description : string
         Rule description
         Usually unspecified for nested rules
-    rmr_context : string
+    rmd_context : string
         A json pointer into each RMD, or RMD fragment, provided to the rule.
         For better human readability, the leading "/" may be omitted.
     list_path : string
         A json path string into each RMD fragment that was produced by applying
-        rmr_context. The resulting sub-RMD fragments should be the lists to be
-        looped over. The default is "[*]" which assumes that the rmr_context is
+        rmd_context. The resulting sub-RMD fragments should be the lists to be
+        looped over. The default is "[*]" which assumes that the rmd_context is
         the list to be looped over.
         Note: the create_context_list() method can be overridden and
         ignore list_context.
@@ -55,16 +55,16 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
 
     def __init__(
         self,
-        rmrs_used,
+        rmds_used,
         each_rule,
-        index_rmr,
+        index_rmd,
         id=None,
-        rmrs_used_optional=None,
+        rmds_used_optional=None,
         description=None,
         ruleset_section_title=None,
         standard_section=None,
         is_primary_rule=None,
-        rmr_context="",
+        rmd_context="",
         list_path="$[*]",
         match_by="id",
         required_fields=None,
@@ -72,16 +72,16 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
         not_applicable_msg="Not Applicable",
         data_items=None,
     ):
-        self.index_rmr = index_rmr
+        self.index_rmd = index_rmd
         self.list_path = list_path
         self.match_by = slash_prefix_guarantee(match_by)
         super(RuleDefinitionListIndexedBase, self).__init__(
-            rmrs_used=rmrs_used,
-            rmrs_used_optional=rmrs_used_optional,
+            rmds_used=rmds_used,
+            rmds_used_optional=rmds_used_optional,
             each_rule=each_rule,
             id=id,
             description=description,
-            rmr_context=rmr_context,
+            rmd_context=rmd_context,
             required_fields=required_fields,
             manual_check_required_msg=manual_check_required_msg,
             not_applicable_msg=not_applicable_msg,
@@ -95,7 +95,7 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
         """Generates a list of context trios
 
         Overrides the base implementation to create a list that has an entry
-        for each item in the index_rmr RMD, the other RMD entries are padded with
+        for each item in the index_rmd RMD, the other RMD entries are padded with
         None for non-matches.
 
         The resulting list can also be filtered using the list_filter field.
@@ -116,19 +116,19 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
         list of RuleSetModels
             A list of context
         """
-        UNKNOWN_INDEX_RMR = "Unknown index_rmr"
+        UNKNOWN_INDEX_RMR = "Unknown index_rmd"
         CONTEXT_NOT_LIST = "The list contexts must be lists"
 
         match_by = self.match_by
 
         # The index RMR must be either user, baseline, or proposed
-        if self.index_rmr not in context.get_ruleset_model_types():
+        if self.index_rmd not in context.get_ruleset_model_types():
             raise ValueError(UNKNOWN_INDEX_RMR)
 
         # The index RMR must be used
         context_on_list = any(
             map(
-                lambda ruleset_model: self.index_rmr == ruleset_model
+                lambda ruleset_model: self.index_rmd == ruleset_model
                 and context[ruleset_model],
                 context.get_ruleset_model_types(),
             )
@@ -139,7 +139,7 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
         # Get the list contexts
         list_context = get_rmd_instance()
         for ruleset_model in list_context.get_ruleset_model_types():
-            if self.rmrs_used[ruleset_model]:
+            if self.rmds_used[ruleset_model]:
                 list_context.__setitem__(
                     ruleset_model, find_all(self.list_path, context[ruleset_model])
                 )
@@ -148,16 +148,16 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
 
         # # This implementation assumes the used lists contexts are in fact lists
         # if (
-        #     (rmrs_used.user and not isinstance(list_context_trio.user, list))
-        #     or (rmrs_used.baseline and not isinstance(list_context_trio.baseline, list))
-        #     or (rmrs_used.proposed and not isinstance(list_context_trio.proposed, list))
+        #     (rmds_used.user and not isinstance(list_context_trio.user, list))
+        #     or (rmds_used.baseline and not isinstance(list_context_trio.baseline, list))
+        #     or (rmds_used.proposed and not isinstance(list_context_trio.proposed, list))
         # ):
         #     raise ValueError(CONTEXT_NOT_LIST)
 
-        index_rmd_list = list_context[self.index_rmr]
+        index_rmd_list = list_context[self.index_rmd]
         context_list_len = len(index_rmd_list)
         for ruleset_model in list_context.get_ruleset_model_types():
-            if self.rmrs_used[ruleset_model] and ruleset_model != self.index_rmr:
+            if self.rmds_used[ruleset_model] and ruleset_model != self.index_rmd:
                 rmd_list = match_lists(
                     index_rmd_list, list_context[ruleset_model], match_by
                 )

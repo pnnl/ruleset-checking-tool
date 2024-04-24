@@ -10,24 +10,24 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section6Rule1, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=True, BASELINE_0=False, PROPOSED=True
             ),
             each_rule=Section6Rule1.BuildingRule(),
-            index_rmr=PROPOSED,
+            index_rmd=PROPOSED,
             id="6-1",
             description="For the proposed building, each space has the same lighting power as the corresponding space in the U-RMD",
-            rmr_context="ruleset_model_descriptions/0/buildings",
+            rmd_context="ruleset_model_descriptions/0/buildings",
         )
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section6Rule1.BuildingRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=True, BASELINE_0=False, PROPOSED=True
                 ),
                 each_rule=Section6Rule1.BuildingRule.SpaceRule(),
-                index_rmr=PROPOSED,
+                index_rmd=PROPOSED,
                 list_path="$..spaces[*]",  # All spaces inside the building
             )
 
@@ -38,7 +38,7 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
                         "$": ["interior_lighting", "floor_area"],
                         "interior_lighting[*]": ["power_per_area"],
                     },
-                    rmrs_used=produce_ruleset_model_instance(
+                    rmds_used=produce_ruleset_model_instance(
                         USER=True, BASELINE_0=False, PROPOSED=True
                     ),
                 )

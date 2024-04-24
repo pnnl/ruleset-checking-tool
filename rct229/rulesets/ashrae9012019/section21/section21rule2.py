@@ -12,11 +12,11 @@ class Section21Rule2(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section21Rule2, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=False, PROPOSED=True
             ),
             each_rule=Section21Rule2.RulesetModelInstanceRule(),
-            index_rmr=PROPOSED,
+            index_rmd=PROPOSED,
             id="21-2",
             description="For purchased HW/steam in the proposed model, the baseline shall have the same number of "
             "pumps as proposed.",
@@ -34,7 +34,7 @@ class Section21Rule2(RuleDefinitionListIndexedBase):
     class RulesetModelInstanceRule(PartialRuleDefinition):
         def __init__(self):
             super(Section21Rule2.RulesetModelInstanceRule, self,).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=False, PROPOSED=True
                 ),
             )

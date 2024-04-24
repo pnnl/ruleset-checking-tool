@@ -33,7 +33,7 @@ class Section22Rule31(RuleDefinitionBase):
 
     def __init__(self):
         super(Section22Rule31, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             id="22-31",
@@ -41,7 +41,7 @@ class Section22Rule31(RuleDefinitionBase):
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.1 Type and Number of Chillers (System 7, 8, 11, 12 and 13)",
             is_primary_rule=True,
-            rmr_context="ruleset_model_descriptions/0",
+            rmd_context="ruleset_model_descriptions/0",
             required_fields={
                 "$": ["output"],
             },
