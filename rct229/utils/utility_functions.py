@@ -12,7 +12,7 @@ def find_exactly_one_hvac_system(rmd: dict, hvac_id: str) -> dict:
 
     Parameters
     ----------
-    rmi: dict
+    rmd: dict
     hvac_id: str
 
     Returns dict
