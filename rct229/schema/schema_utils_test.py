@@ -1,5 +1,3 @@
-import pytest
-
 from rct229.schema.config_functions import get_pint_unit_registry
 from rct229.schema.schema_utils import clean_schema_units, quantify_rmd
 from rct229.schema.validate import schema_validate_rmd
