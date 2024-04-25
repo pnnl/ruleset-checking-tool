@@ -25,7 +25,7 @@ ELIGIBLE_SPACE_TYPES = [
 ]
 
 
-def does_zone_meet_g3_1_1e(rmi_b, rmi_p, zone_id):
+def does_zone_meet_g3_1_1e(rmi_b: dict, rmi_p: dict, zone_id: str) -> bool:
     """
     determines whether a given zone meets the G3_1_1e exception "Thermal zones designed with heating-only systems in
     the proposed design serving storage rooms, stairwells, vestibules, electrical/mechanical rooms, and restrooms not

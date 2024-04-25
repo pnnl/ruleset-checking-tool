@@ -5,7 +5,7 @@ from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedB
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_zone_list_w_area_dict import (
-    get_hvac_zone_list_w_area_dict,
+    get_hvac_zone_list_w_area_by_rmi_dict,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_list_hvac_systems_associated_with_zone import (
     get_list_hvac_systems_associated_with_zone,
@@ -53,7 +53,7 @@ class Section19Rule25(RuleDefinitionListIndexedBase):
             )
         )
 
-        hvac_zone_list_w_area_dict_p = get_hvac_zone_list_w_area_dict(rmi_p)
+        hvac_zone_list_w_area_dict_p = get_hvac_zone_list_w_area_by_rmi_dict(rmi_p)
 
         zones_virtual_heating_cooling_list_p = list(
             set(

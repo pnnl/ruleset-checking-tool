@@ -5,7 +5,7 @@ from rct229.utils.utility_functions import find_exactly_one_hvac_system
 HEATING_SYSTEM = SchemaEnums.schema_enums["HeatingSystemOptions"]
 
 
-def is_hvac_sys_preheating_type_fluid_loop(rmi_b, hvac_b_id):
+def is_hvac_sys_preheating_type_fluid_loop(rmi_b: dict, hvac_b_id: str) -> bool:
     """Returns TRUE if the HVAC system preheating system heating type is fluid loop. Returns FALSE if the HVAC system
     preheating system has anything other than fluid loop.
 

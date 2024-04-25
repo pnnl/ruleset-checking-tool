@@ -229,7 +229,7 @@ def create_dictionary_from_excel(spreadsheet_name, sheet_name, rule_set):
     invalid_first_keys = ["Notes", "template_lookup"]
 
     # Iterate column by column through values_df
-    for test_id, columnData in tests_df.iteritems():
+    for test_id, columnData in tests_df.items():
         # List of this rule's column data
         rule_value_list = columnData.values
 
