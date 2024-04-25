@@ -25,7 +25,7 @@ N/A
   - Compare the schedules: `comparison_data = compare_schedules(cab_lighting_schedule_b, cab_ventilation_schedule_b):`  
 
   **Rule Assertion:**  
-    - Case 1: If the schedules match for all hours: `if comparison_data['SCHEDULE_1_EFLH'] == len(cab_lighting_schedule_b) == len(cab_ventilation_schedule_b): PASS`
+    - Case 1: If the schedules for lighting and ventilation are identical and continuous for all hours: `if comparison_data['SCHEDULE_1_EFLH'] == len(cab_lighting_schedule_b) == len(cab_ventilation_schedule_b): PASS`
     - Case 2: Else: `FAIL`
 
 **Notes/Questions:**
