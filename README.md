@@ -1,8 +1,39 @@
+<table>
+   <tr>
+      <td>Latest Release</td>
+      <td>
+         <a href="https://pypi.org/project/ruleset-checking-tool/"/>
+         <img src="https://badge.fury.io/py/ruleset-checking-tool.svg"/>
+      </td>
+   </tr>
+   <tr>
+      <td>License</td>
+      <td>
+         <a href="https://github.com/pnnl/ruleset-checking-tool/blob/master/LICENSE"/>
+         <img src="https://img.shields.io/badge/License-MIT-yellow.svg"/>
+      </td>
+   </tr>
+</table>
+
 # Ruleset Checking Tool
 
 Ruleset Checking Tool for ANSI/ASHRAE/IES Standard 90.1-2019 Appendix G
 
 This package provides a reference implementation of a Ruleset Checking Tool (RCT) in support of ASHRAE Standard 229P.  The RCT is not intended to be a normative part of the proposed standard, so use with Std 229P is optional.  This RCT implementation is specific to ANSI/ASHRAE/IES Standard 90.1-2019 Appendix G and does not support any other rulesets.  Final release of this package is dependent upon acceptance and publication of ASHRAE Standard 229P.
+
+## Install it from PyPI
+
+```bash
+pip install ruleset-checking-tool
+```
+
+## Usage
+
+```py
+from rct229.ruletest_engine.run_ruletests import run_ashrae9012019_tests as run
+print(run())
+```
+
 
 ## About ASHRAE 229P
 
@@ -11,9 +42,12 @@ ASHRAE Standard 229P is a proposed standard entitled, "Protocols for Evaluating 
 ## Introduction
 The Ruleset Checking Tool (RCT) is a Python package providing a command line tool for evaluating whether baseline and proposed Building Energy Models (BEM) meet the requirements of ANSI/ASHRAE/IES Standard 90.1-2019 Appendix G.  The tool accepts Ruleset Model Report (RMR) files representing the User, Baseline, and Proposed models as inputs, and generates an output report describing the RMR evalaution.
 
-**This is an early alpha version and is highly unstable!**
+**This is an early beta version and is highly unstable!**
 
-**This package will change significantly during the next several versions.**
+**This package could change significantly during the next several versions.**
+
+## Use of this package
+
 
 ## ASHRAE Standard 229P Workflows
 The RCT can be used for two different workflows within ASHRAE Standard 229P.  The first workflow is the *Project Testing Workflow*.  This workflow is used to evaluate RMR triplets for a design project to determine whether a ruleset is applied correctly in a building energy model.  The second workflow is the *Software Testing Workflow*.  This workflow consists of validation and verification software tests that ensure the ruleset is correctly evaluated by a RCT.
