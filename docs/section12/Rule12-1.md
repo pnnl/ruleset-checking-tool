@@ -1,4 +1,4 @@
-# Elevators – Rule 12-1   
+# Receptacles – Rule 12-1   
 **Schema Version:** 0.0.36        
 **Mandatory Rule:** True          
 **Rule ID:** 12-1  
