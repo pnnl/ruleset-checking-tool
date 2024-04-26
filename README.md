@@ -13,6 +13,12 @@
          <img src="https://img.shields.io/badge/License-MIT-yellow.svg"/>
       </td>
    </tr>
+   <tr>
+      <td>Test</td>
+      <td>
+         <img href="https://github.com/pnnl/ruleset-check-tool/actions/workflows/python-app.yml/badge.svg">
+      </td>
+   </tr>
 </table>
 
 # Ruleset Checking Tool
