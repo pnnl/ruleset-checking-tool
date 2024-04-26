@@ -5,7 +5,7 @@
 **Rule Description:** When included in the proposed design, the baseline elevator cab ventilation fan power shall be 0.33 W/cfm  
 **Rule Assertion:** B-RMD = Expected Value                                           
 **Appendix G Section:** G3.1  
-**Appendix G Section Reference:** Table G3.1-16  
+**Appendix G Section Reference:** Table G3.1-16 Baseline Building Performance   
 **Data Lookup:** None  
 **Evaluation Context:** Each elevator  
 
@@ -24,7 +24,7 @@ N/A
   - Get the elevator cab ventilation fan airflow: `elevator_cab_ventilation_fan_flow_b = elevator.cab_ventilation_fan_flow`
 
   **Rule Assertion:**  
-    - Case 1: Elevator cab ventilation fan power is equal to 0.33 W/cfm: PASS `if elevator_cab_ventilation_fan_power_b / elevator_cab_ventilation_fan_flow_b == 0.33 : PASS`
+    - Case 1: Elevator cab ventilation fan power is equal to 0.33 W/cfm: PASS `if elevator_cab_ventilation_fan_power_b / elevator_cab_ventilation_fan_flow_b == 0.33 W/CFM: PASS`
     - Case 2: Else: FAIL `Else: FAIL`
 
 **Notes/Questions:**
