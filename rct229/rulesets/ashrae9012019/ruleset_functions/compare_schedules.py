@@ -13,8 +13,8 @@ class CompareSchedulesEFLHDifference(TypedDict):
 def compare_schedules(
     schedule_1: list[float],
     schedule_2: list[float],
-    mask_schedule: list[float],
     is_leap_year: bool,
+    mask_schedule: list[float] = None,
 ) -> CompareSchedulesEFLHDifference:
     """Compare two schedules and determine if they match with or without a comparison factor when applicable
     NOTE: The function only works with hourly schedule for now.
@@ -23,11 +23,11 @@ def compare_schedules(
     ----------
     schedule_1: List[float], example: [0.187, 0.187, 0.187, ... ]
     schedule_2: List[float], example: [0.1, 0.1, 0.1, ... ]
-    mask_schedule: List[float], The schedule that defines comparison mode for all hours (8760 or 8784) in a year, i.e.
+    mask_schedule: Optional[List[float]], The schedule that defines comparison mode for all hours (8760 or 8784) in a year, i.e.
         if hourly value is 1, schedule_1 is evaluated to be equal to schedule_2;
         if hourly value is 2, schedule_1 is evaluated to be equal to schedule_2 times the comparison factor;
         if hourly value is 0, comparison was skipped for that particular hour
-        (example when evaluating shut off controls, only he building closed hrs are evaluated) exmaple: [1,1,1,1,1...]
+        (example when evaluating shut off controls, only the building closed hrs are evaluated) exmaple: [1,1,1,1,1...]
     is_leap_year: bool, indicate whether the comparison is in a leap year or not. True / False
 
     Returns
@@ -44,6 +44,9 @@ def compare_schedules(
     num_hours = (
         LeapYear.LEAP_YEAR_HOURS if is_leap_year else LeapYear.REGULAR_YEAR_HOURS
     )
+
+    if mask_schedule is None:
+        mask_schedule = [1] * num_hours
 
     assert_(
         (
