@@ -26,7 +26,7 @@ data_lookup
   - Get the elevator cab counterweight: `elevator_cab_counterweight_b = elevator.cab_counterweight`
   - Get the elevator design load: `elevator_design_load_b = elevator.design_load`
   - Get the elevator speed: `elevator_speed_b = elevator.speed`
-  - If any detailed elevator data parameters are not defined: `if any(param == Null for param in [elevator_motor_power_b, elevator_cab_weight_b, elevator_cab_counterweight_b, elevator_design_load_b, elevator_speed_b]): is_undetermined = true`
+  - If any detailed elevator data parameters are not defined: `if any(param == Null for param in [total_floors_served_b, elevator_motor_power_b, elevator_cab_weight_b, elevator_cab_counterweight_b, elevator_design_load_b, elevator_speed_b]): is_undetermined = true`
   - Get the elevator mechanical efficiency: `elevator_mechanical_efficiency_b = data_lookup('table_g3.9.2', total_floors_served_b)['mechanical_efficiency']`
   - Calculate the motor brake horsepower: `motor_brake_horsepower_b = (elevator_cab_weight_b + elevator_design_load_b - elevator_cab_counterweight_b) * elevator_speed_b / 33000 / elevator_mechanical_efficiency_b`
   - If the total number of floors is greater than 4: `if total_floors_served_b > 4:`
