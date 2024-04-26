@@ -37,7 +37,7 @@ Case 5: Elif the proposed miscellaneous equipment schedule has fewer equivalent 
 
 Case 6: Elif the proposed miscellaneous equipment schedule has fewer equivalent full load hours than the baseline miscellaneous equipment schedule, the proposed does not have automatic receptacle control : FAIL `elif comparison_data["eflh_difference"] > 0 and not auto_receptacle_controls_p: FAIL`  
 
-Case 7: Elif the proposed miscellaneous equipment schedule has more equivalent full load hours than the baseline miscellaneous equipment schedule: FAIL `elif comparison_data["eflh_difference"] < 0: FAIL`  
+Case 7: Elif the proposed miscellaneous equipment schedule has more equivalent full load hours than the baseline miscellaneous equipment schedule: FAIL `elif comparison_data["eflh_difference"] < 0: FAIL and raise_msg = "Rule evaluation fails with a conservative outcome."`  
 
 Case 8: Else: FAIL `else: FAIL`  
 
