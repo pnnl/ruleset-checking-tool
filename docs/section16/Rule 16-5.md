@@ -28,6 +28,6 @@ N/A
     - Case 2: Else: `FAIL`
 
 **Notes/Questions:**
-1. Can we create additional keys in the return dictionary of the compare_schedules ruleset function to also include the schedule 1 EFLH and schedule 2 EFLH? Is there a more preferred way to do this?
+None
 
  **[Back](../_toc.md)**
