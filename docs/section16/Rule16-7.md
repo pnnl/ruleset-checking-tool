@@ -5,7 +5,7 @@
 **Rule Description:** When included in the proposed design, the baseline elevator cab lighting power density shall be 3.14 W/ft2  
 **Rule Assertion:** B-RMD = Expected Value                                           
 **Appendix G Section:** G3.1  
-**Appendix G Section Reference:** Table G3.1-16  
+**Appendix G Section Reference:** Table G3.1-16 Baseline Building Performance  
 **Data Lookup:** None  
 **Evaluation Context:** Each elevator  
 
@@ -24,7 +24,7 @@ N/A
   - Get the elevator cab area: `cab_area_b = elevator.cab_area`
 
   **Rule Assertion:**  
-    - Case 1: Elevator cab lighting power is equal to 3.14 W/ft2: PASS `if cab_lighting_power_b / cab_area_b == 3.14 : PASS`
+    - Case 1: Elevator cab lighting power is equal to 3.14 W/ft2: PASS `if cab_lighting_power_b / cab_area_b == 3.14 W/ft2: PASS`
     - Case 2: Else: FAIL `Else: FAIL`
 
 **Notes/Questions:**
