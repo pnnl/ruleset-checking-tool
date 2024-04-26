@@ -5,7 +5,7 @@
 **Rule Description:** When included in the proposed design, the baseline elevator cab ventilation fan and lights shall operate continuously  
 **Rule Assertion:** B-RMD = Expected Value                                           
 **Appendix G Section:** G3.1  
-**Appendix G Section Reference:** Table G3.1-16  
+**Appendix G Section Reference:** Table G3.1-16 Baseline Building Performance  
 **Data Lookup:** None  
 **Evaluation Context:** Each elevator  
 
@@ -22,10 +22,9 @@ N/A
 - For each elevator in the baseline RMD: `for elevator in B_RMD...elevators`
   - Get the modeled schedule for the baseline elevator cab ventilation fan: `cab_ventilation_schedule_b = elevator.cab_ventilation_fan_multiplier_schedule`
   - Get the modeled schedule for the baseline elevator cab lighting: `cab_lighting_schedule_b = elevator.cab_lighting_multiplier_schedule`
-  - Compare the schedules: `comparison_data = compare_schedules(cab_lighting_schedule_b, cab_ventilation_schedule_b):`  
 
   **Rule Assertion:**  
-    - Case 1: If the schedules for lighting and ventilation are identical and continuous for all hours: `if comparison_data['SCHEDULE_1_EFLH'] == len(cab_lighting_schedule_b) == len(cab_ventilation_schedule_b): PASS`
+    - Case 1: If the schedules for lighting and ventilation are identical and continuous for all hours: `if sum(cab_ventilation_schedule_b) == sum(cab_lighting_schedule_b) == len(cab_lighting_schedule_b) == len(cab_ventilation_schedule_b): PASS`
     - Case 2: Else: `FAIL`
 
 **Notes/Questions:**
