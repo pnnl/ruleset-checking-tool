@@ -21,7 +21,7 @@ compare_schedules
 ## Rule Logic:
 - Determine if the project schedule uses a leap year: `is_leap_year = RPD.schedule.is_leap_year`
 - If the project schedule uses a leap year, set total hours to 8784, else 8760: `total_hours = 8784 if is_leap_year else 8760`
-- Create a continuous schedule to compare against, and also to use as the mask schedule for the function: `continuous_schedule = [1 for i in range(total_hours)]`
+- Create a continuous schedule to compare against, and also to use as the mask schedule for the function: `continuous_schedule = [1]*total_hours`
 - For each elevator in the baseline RMD: `for elevator in B_RMD...elevators`
   - Get the modeled schedule for the baseline elevator cab ventilation fan: `cab_ventilation_schedule_b = elevator.cab_ventilation_fan_multiplier_schedule`
   - Get the modeled schedule for the baseline elevator cab lighting: `cab_lighting_schedule_b = elevator.cab_lighting_multiplier_schedule`
