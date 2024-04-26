@@ -21,7 +21,7 @@ class Section23Rule12(PartialRuleDefinition):
 
     def __init__(self):
         super(Section23Rule12, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             id="23-12",
@@ -29,12 +29,12 @@ class Section23Rule12(PartialRuleDefinition):
             ruleset_section_title="HVAC - Airside",
             standard_section="G3.1.3.17 System 11 Supply Air Temperature and Fan Control",
             is_primary_rule=False,
-            rmr_context="ruleset_model_descriptions/0",
+            rmd_context="ruleset_model_descriptions/0",
         )
 
     def applicability_check(self, context, calc_vals, data):
-        rmi_b = context.BASELINE_0
-        baseline_system_types_dict_b = get_baseline_system_types(rmi_b)
+        rmd_b = context.BASELINE_0
+        baseline_system_types_dict_b = get_baseline_system_types(rmd_b)
 
         return any(
             [

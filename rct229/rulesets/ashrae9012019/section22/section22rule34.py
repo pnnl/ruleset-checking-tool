@@ -31,24 +31,24 @@ class Section22Rule34(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section22Rule34, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section22Rule34.CoolingFluidLoopRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="22-34",
             description="For baseline cooling chilled water plant that is served by chiller(s), the capacity shall be based on coincident loads.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.2.2 Building System-Specific Modeling Requirements for the Baseline model",
             is_primary_rule=True,
-            rmr_context="ruleset_model_descriptions/0",
+            rmd_context="ruleset_model_descriptions/0",
             list_path="$.fluid_loops[*]",
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.BASELINE_0
-        baseline_system_types_dict = get_baseline_system_types(rmi_b)
-        # create a list containing all HVAC systems that are modeled in the rmi_b
+        rmd_b = context.BASELINE_0
+        baseline_system_types_dict = get_baseline_system_types(rmd_b)
+        # create a list containing all HVAC systems that are modeled in the rmd_b
         available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict
@@ -62,8 +62,8 @@ class Section22Rule34(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.BASELINE_0
-        primary_secondary_loop_dict = get_primary_secondary_loops_dict(rmi_b)
+        rmd_b = context.BASELINE_0
+        primary_secondary_loop_dict = get_primary_secondary_loops_dict(rmd_b)
 
         return {"primary_secondary_loop_dict": primary_secondary_loop_dict}
 
@@ -76,7 +76,7 @@ class Section22Rule34(RuleDefinitionListIndexedBase):
     class CoolingFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
             super(Section22Rule34.CoolingFluidLoopRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={

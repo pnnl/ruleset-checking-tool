@@ -11,7 +11,7 @@ class Section19Rule3(PartialRuleDefinition):
 
     def __init__(self):
         super(Section19Rule3, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             id="19-3",

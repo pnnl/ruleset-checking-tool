@@ -49,10 +49,9 @@ The Ruleset Checking Tool (RCT) is a Python package providing a command line too
 
 
 ## ASHRAE Standard 229P Workflows
-The RCT can be used for two different workflows within ASHRAE Standard 229P.  The first workflow is the *Project Testing Workflow*.  This workflow is used to evaluate RMR triplets for a design project to determine whether a ruleset is applied correctly in a building energy model.  The second workflow is the *Software Testing Workflow*.  This workflow consists of validation and verification software tests that ensure the ruleset is correctly evaluated by a RCT.
+The RCT can be used for two different workflows within ASHRAE Standard 229P.  The first workflow is the *Project Testing Workflow*.  This workflow is used to evaluate RMD triplets for a design project to determine whether a ruleset is applied correctly in a building energy model.  The second workflow is the *Software Testing Workflow*.  This workflow consists of validation and verification software tests that ensure the ruleset is correctly evaluated by a RCT.
 
 ### Project Testing Workflow
-
 A project RPD is evaluated by running the *evaluate* command in the RCT.  RPD file paths are provided as the input arguments to the *evaluate* command.  The output of this command is a JSON report defining the outcome of the rule evaluation.
 
 `rct229 evaluate -f user_rmr.json -f baseline_rmr.json -f proposed_rmr.json -rs ashrae9012019`
@@ -65,6 +64,7 @@ The RCT data model used by the RCT is based on the [RPD schema](https://github.c
 The definition of each of the individual rules contained with the RCT are documented in [Rule Definition Strategy](docs/_toc.md) (RDS) documents.  The purpose of the RDS is to act as a bridge between the narrative form of the ruleset document and the logical form of a programming language, allowing non-programmers to evaluate how the rules are implemented in the Python programming language.  The RDS documents provide a description of the specific interpretation of a rule coded into the RCT.  In addition to the description of each rule, the RDS describes how data from ruleset tables are handled and defines frequently used functions.  
 
 #### Rule Definition
+
 The core functionality of the RCT is the evaluation of logic defining each rule within a ruleset.  The rules are defined within the RCT by a Rule Definition.  The Rule Definition is a Python class that contains the logic necessary to evaluate the rule within the context of the RES.  The Rule Definition files are located in the [rct229/rules](rct229/rules) directory.
 
 ### Software Testing Workflow
