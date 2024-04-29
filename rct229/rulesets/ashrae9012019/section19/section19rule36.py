@@ -19,11 +19,11 @@ class Section19Rule36(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section19Rule36, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section19Rule36.HVACRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="19-36",
             description="Baseline systems required to model energy recovery per G3.1.2.10 shall be modeled with a 50% enthalpy recovery ratio.",
             ruleset_section_title="HVAC - General",
@@ -35,7 +35,7 @@ class Section19Rule36(RuleDefinitionListIndexedBase):
     class HVACRule(PartialRuleDefinition):
         def __init__(self):
             super(Section19Rule36.HVACRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={"$": ["fan_system"]},

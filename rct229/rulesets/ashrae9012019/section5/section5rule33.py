@@ -13,23 +13,23 @@ class Section5Rule33(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule33, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section5Rule33.BuildingRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="5-33",
             description="The infiltration modeling method in the baseline includes adjustment for weather and building operation.",
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(b) Building Envelope Modeling Requirements for the Proposed design and Baseline",
             is_primary_rule=True,
-            rmr_context="ruleset_model_descriptions/0/buildings",
+            rmd_context="ruleset_model_descriptions/0/buildings",
         )
 
     class BuildingRule(RuleDefinitionBase):
         def __init__(self):
             super(Section5Rule33.BuildingRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={
