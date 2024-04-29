@@ -278,7 +278,8 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   
 ## Section 16 - Elevators
   * [16-1](section16/Rule16-1.md): The elevator peak motor power shall be calculated according to the equation in Table G3.1-16
-  
+  * [16-2](section16/Rule16-2.md): The baseline elevator motor use shall be modeled with the same schedule as the proposed design.   
+
 ## Section 17 - Refrigeration
 
 ## Section 18 - Air Side
