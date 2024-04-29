@@ -19,28 +19,28 @@ class Section19Rule24(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section19Rule24, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=True, BASELINE_0=False, PROPOSED=True
             ),
             each_rule=Section19Rule24.HVACRule(),
-            index_rmr=PROPOSED,
+            index_rmd=PROPOSED,
             id="19-24",
             description="Schedules for HVAC fans that provide outdoor air for ventilation shall run continuously whenever spaces are occupied in the proposed design.",
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1-4 Schedules for the proposed building excluding exception #1 and Section G3.1.2.4.",
             is_primary_rule=True,
-            rmr_context="ruleset_model_descriptions/0",
+            rmd_context="ruleset_model_descriptions/0",
             list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
         )
 
     def create_data(self, context, data):
         user_p = context.USER
-        rmi_p = context.PROPOSED
+        rmd_p = context.PROPOSED
 
         inapplicable_hvac_sys_list_p = list(
             set(
-                get_proposed_hvac_modeled_with_virtual_cooling(user_p, rmi_p)
-                + get_proposed_hvac_modeled_with_virtual_heating(user_p, rmi_p)
+                get_proposed_hvac_modeled_with_virtual_cooling(user_p, rmd_p)
+                + get_proposed_hvac_modeled_with_virtual_heating(user_p, rmd_p)
             )
         )
 
@@ -49,7 +49,7 @@ class Section19Rule24(RuleDefinitionListIndexedBase):
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
             super(Section19Rule24.HVACRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=True, BASELINE_0=False, PROPOSED=True
                 ),
                 required_fields={

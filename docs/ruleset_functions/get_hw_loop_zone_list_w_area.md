@@ -6,7 +6,7 @@
 Description: Get the list of zones and their total floor area served by each HHW loop in a baseline ruleset model instance.  
 
 Inputs:  
-- **B-RMI**: The baseline ruleset model instance that needs to get the list of zones with their total floor area served by each HHW loop.
+- **B-RMD**: The baseline ruleset model instance that needs to get the list of zones with their total floor area served by each HHW loop.
 
 Returns: 
 - **hw_loop_zone_list_w_area_dictionary**: A dictionary that saves the list of zones and the total floor area served by each HHW loop, i.e. {loop_1.id: {"ZONE_LIST": [zone_1.id, zone_2.id, zone_3.id], "TOTAL_AREA": 10000}, loop_2.id: {"ZONE_LIST": [zone_10.id], "TOTAL_AREA": 500}}
@@ -18,7 +18,7 @@ Functions:
 
 **Logic:**   
 
-- For each zone in baseline ruleset model instance: `for zone in B-RMI...Zone:`
+- For each zone in baseline ruleset model instance: `for zone in B-RMD...Zone:`
   - Reset zone hot water loop found boolean variable: `zone_HHW_loop_found = FALSE`  
   - Check if zone is connected to any terminal: `if zone.terminals != Null or len(zone.terminals) != 0:`
     - Get zone total floor area: `zone_area = SUM(space.floor_area for space in zone.spaces)`

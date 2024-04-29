@@ -40,7 +40,7 @@ class Section22Rule40(RuleDefinitionBase):
 
     def __init__(self):
         super(Section22Rule40, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             id="22-40",
@@ -53,18 +53,18 @@ class Section22Rule40(RuleDefinitionBase):
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.1.1 & G3.1.1.3.1 Building System-Specific Modeling Requirements for the Baseline model",
             is_primary_rule=True,
-            rmr_context="ruleset_model_descriptions/0",
+            rmd_context="ruleset_model_descriptions/0",
         )
 
     def is_applicable(self, context, data=None):
-        rmi_p = context.PROPOSED
-        purchased_chw_hhw_status_dict_p = check_purchased_chw_hhw_status_dict(rmi_p)
+        rmd_p = context.PROPOSED
+        purchased_chw_hhw_status_dict_p = check_purchased_chw_hhw_status_dict(rmd_p)
 
         return purchased_chw_hhw_status_dict_p["purchased_cooling"]
 
     def get_calc_vals(self, context, data=None):
-        rmi_b = context.BASELINE_0
-        baseline_system_types_dict = get_baseline_system_types(rmi_b)
+        rmd_b = context.BASELINE_0
+        baseline_system_types_dict = get_baseline_system_types(rmd_b)
 
         return {"baseline_system_types_dict": baseline_system_types_dict}
 

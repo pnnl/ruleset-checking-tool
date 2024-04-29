@@ -9,13 +9,13 @@ from rct229.utils.utility_functions import (
 )
 
 
-def are_all_hvac_sys_fan_objs_autosized(rmi: dict, hvac_id: str) -> bool:
+def are_all_hvac_sys_fan_objs_autosized(rmd: dict, hvac_id: str) -> bool:
     """
     The function returns true if all supply fan objects associated with an hvac system are autosized.
 
     Parameters
     ----------
-    rmi: dict RMI at RuleSetModelInstance level
+    rmd: dict RMD at RuleSetModelDescription level
     hvac_id: str HVAC id string
 
     Returns: bool True if all supply fan objects associate with an HVAC system are autosized, False otherwise,
@@ -23,9 +23,9 @@ def are_all_hvac_sys_fan_objs_autosized(rmi: dict, hvac_id: str) -> bool:
     -------
 
     """
-    hvac = find_exactly_one_hvac_system(rmi, hvac_id)
+    hvac = find_exactly_one_hvac_system(rmd, hvac_id)
     dict_of_zones_and_terminal_units_served_by_hvac_sys = (
-        get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmi)
+        get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmd)
     )
 
     return (
@@ -41,7 +41,7 @@ def are_all_hvac_sys_fan_objs_autosized(rmi: dict, hvac_id: str) -> bool:
         else all(
             [
                 getattr_(
-                    find_exactly_one_terminal_unit(rmi, terminal_id),
+                    find_exactly_one_terminal_unit(rmd, terminal_id),
                     "terminal",
                     "fan",
                     "is_airflow_sized_based_on_design_day",

@@ -12,11 +12,11 @@ class Section22Rule38(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section22Rule38, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section22Rule38.RulesetModelInstanceRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="22-38",
             description="Baseline systems served by purchased chilled water loop shall have a "
             "minimum flow setpoint of 25%",
@@ -33,12 +33,12 @@ class Section22Rule38(RuleDefinitionListIndexedBase):
     class RulesetModelInstanceRule(PartialRuleDefinition):
         def __init__(self):
             super(Section22Rule38.RulesetModelInstanceRule, self,).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
             )
 
         def applicability_check(self, context, calc_vals, data):
-            rmi_b = context.BASELINE_0
-            purchased_chw_hhw_status_dict_p = check_purchased_chw_hhw_status_dict(rmi_b)
+            rmd_b = context.BASELINE_0
+            purchased_chw_hhw_status_dict_p = check_purchased_chw_hhw_status_dict(rmd_b)
             return purchased_chw_hhw_status_dict_p["purchased_cooling"]

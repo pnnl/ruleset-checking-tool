@@ -10,7 +10,7 @@ from rct229.rule_engine.rulesets import RuleSet
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.schema.schema_store import SchemaStore
 
-RMR_1 = {
+RMD_1 = {
     "transformers": [
         {
             "id": 1,
@@ -34,7 +34,7 @@ RMR_1 = {
 }
 
 
-RMR_2 = {
+RMD_2 = {
     "transformers": [
         {
             "id": 1,
@@ -49,25 +49,25 @@ RMR_2 = {
 }
 
 
-RMR_EMPTY = {}
+RMD_EMPTY = {}
 
 SchemaStore.set_ruleset(RuleSet.ASHRAE9012019_RULESET)
 SchemaEnums.update_schema_enum()
 
 DERIVED_RULE_OUTCOME_BASE = produce_ruleset_model_instance(
-    USER=RMR_1, BASELINE_0=RMR_EMPTY, PROPOSED=RMR_2
+    USER=RMD_1, BASELINE_0=RMD_EMPTY, PROPOSED=RMD_2
 )
 
 
-RMRS_WITH_MATCHING_USER_AND_BASELINE = produce_ruleset_model_instance(
-    USER=RMR_1, BASELINE_0=RMR_1, PROPOSED=RMR_EMPTY
+RMDS_WITH_MATCHING_USER_AND_BASELINE = produce_ruleset_model_instance(
+    USER=RMD_1, BASELINE_0=RMD_1, PROPOSED=RMD_EMPTY
 )
 
 
 BASE_RULE_1_OUTCOME_BASE = {
     "id": "1",
     "description": "Basic Rule",
-    "rmr_context": "/transformers",
+    "rmd_context": "/transformers",
 }
 
 
@@ -75,7 +75,7 @@ BASE_RULE_ARGS = {
     **BASE_RULE_1_OUTCOME_BASE,
     "not_applicable_msg": "Not applicable message",
     "manual_check_required_msg": "Manual check required message",
-    "rmrs_used": produce_ruleset_model_instance(
+    "rmds_used": produce_ruleset_model_instance(
         USER=True, BASELINE_0=True, PROPOSED=False
     ),
 }
@@ -120,7 +120,7 @@ def test__rule_definition_base__evaluate__with_missing_baseline():
 
 
 def test__rule_definition_base__evaluate__with_false_is_applicable():
-    assert DERIVED_RULE.evaluate(RMRS_WITH_MATCHING_USER_AND_BASELINE, data="NA") == {
+    assert DERIVED_RULE.evaluate(RMDS_WITH_MATCHING_USER_AND_BASELINE, data="NA") == {
         **BASE_RULE_1_OUTCOME_BASE,
         "result": "NOT_APPLICABLE",
         "message": "Not applicable message",
@@ -129,7 +129,7 @@ def test__rule_definition_base__evaluate__with_false_is_applicable():
 
 def test__rule_definition_base__evaluate__with_true_manual_check_required():
     assert DERIVED_RULE.evaluate(
-        RMRS_WITH_MATCHING_USER_AND_BASELINE, data="MANUAL_CHECK_REQUIRED"
+        RMDS_WITH_MATCHING_USER_AND_BASELINE, data="MANUAL_CHECK_REQUIRED"
     ) == {
         **DERIVED_RULE_outcome_base,
         "result": "UNDETERMINED",
@@ -138,14 +138,14 @@ def test__rule_definition_base__evaluate__with_true_manual_check_required():
 
 
 def test__rule_definition_base__evaluate__with_true_rule_check():
-    assert DERIVED_RULE.evaluate(RMRS_WITH_MATCHING_USER_AND_BASELINE, data=True) == {
+    assert DERIVED_RULE.evaluate(RMDS_WITH_MATCHING_USER_AND_BASELINE, data=True) == {
         **DERIVED_RULE_outcome_base,
         "result": "PASSED",
     }
 
 
 def test__rule_definition_base__evaluate__with_true_rule_check():
-    assert DERIVED_RULE.evaluate(RMRS_WITH_MATCHING_USER_AND_BASELINE, data=False) == {
+    assert DERIVED_RULE.evaluate(RMDS_WITH_MATCHING_USER_AND_BASELINE, data=False) == {
         **DERIVED_RULE_outcome_base,
         "result": "FAILED",
     }
@@ -156,7 +156,7 @@ def test__rule_definition_base__get_context__with_missing_rmrs():
     assert (
         BASE_RULE_1.get_context(
             produce_ruleset_model_instance(
-                USER=RMR_1, BASELINE_0=RMR_EMPTY, PROPOSED=RMR_2
+                USER=RMD_1, BASELINE_0=RMD_EMPTY, PROPOSED=RMD_2
             )
         )
         == "MISSING_BASELINE_0"
@@ -164,7 +164,7 @@ def test__rule_definition_base__get_context__with_missing_rmrs():
     assert (
         BASE_RULE_1.get_context(
             produce_ruleset_model_instance(
-                USER=RMR_EMPTY, BASELINE_0=RMR_1, PROPOSED=RMR_2
+                USER=RMD_EMPTY, BASELINE_0=RMD_1, PROPOSED=RMD_2
             )
         )
         == "MISSING_USER"
@@ -172,7 +172,7 @@ def test__rule_definition_base__get_context__with_missing_rmrs():
     assert (
         BASE_RULE_1.get_context(
             produce_ruleset_model_instance(
-                USER=RMR_EMPTY, BASELINE_0=RMR_EMPTY, PROPOSED=RMR_2
+                USER=RMD_EMPTY, BASELINE_0=RMD_EMPTY, PROPOSED=RMD_2
             )
         )
         == "MISSING_USER_BASELINE_0"
@@ -181,11 +181,11 @@ def test__rule_definition_base__get_context__with_missing_rmrs():
 
 def test__rule_definition_base__get_context__with_rmrs_present():
     context = BASE_RULE_1.get_context(
-        produce_ruleset_model_instance(USER=RMR_1, BASELINE_0=RMR_2, PROPOSED=RMR_EMPTY)
+        produce_ruleset_model_instance(USER=RMD_1, BASELINE_0=RMD_2, PROPOSED=RMD_EMPTY)
     )
     assert (
-        context.USER == RMR_1["transformers"]
-        and context.BASELINE_0 == RMR_2["transformers"]
+        context.USER == RMD_1["transformers"]
+        and context.BASELINE_0 == RMD_2["transformers"]
         and context.PROPOSED == None
     )
 

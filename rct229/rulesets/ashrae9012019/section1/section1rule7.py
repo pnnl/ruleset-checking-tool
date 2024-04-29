@@ -9,7 +9,7 @@ class Section1Rule7(RuleDefinitionBase):
 
     def __init__(self):
         super(Section1Rule7, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=True, BASELINE_0=False, PROPOSED=True
             ),
             id="1-7",
@@ -17,7 +17,7 @@ class Section1Rule7(RuleDefinitionBase):
             ruleset_section_title="Performance Calculation",
             standard_section="",
             is_primary_rule=True,
-            rmr_context="",
+            rmd_context="",
         )
 
     def is_applicable(self, context, data=None):
