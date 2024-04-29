@@ -12,27 +12,27 @@ The following is an example of a JSON output file produced by the RCT.
   "rpd_files": [
     {
       "ruleset_model_type": "USER",
-      "file_name": "user_rmr.json"
+      "file_name": "user_rmd.json"
     },
     {
       "ruleset_model_type": "PROPOSED",
-      "file_name": "proposed_rmr.json"
+      "file_name": "proposed_rmd.json"
     },
     {
       "ruleset_model_type": "BASELINE_0",
-      "file_name": "baseline_rmr.json"
+      "file_name": "baseline_rmd.json"
     },
     {
       "ruleset_model_type": "BASELINE_90",
-      "file_name": "baseline_rmr.json"
+      "file_name": "baseline_rmd.json"
     },
     {
       "ruleset_model_type": "BASELINE_180",
-      "file_name": "baseline_rmr.json"
+      "file_name": "baseline_rmd.json"
     },
     {
       "ruleset_model_type": "BASELINE_270",
-      "file_name": "baseline_rmr.json"
+      "file_name": "baseline_rmd.json"
     }
   ],
   "rules": [

@@ -16,23 +16,23 @@ class Section15Rule6(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section15Rule6, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=True, BASELINE_0=False, PROPOSED=False
             ),
             each_rule=Section15Rule6.TransformerRule(),
-            index_rmr=USER,
+            index_rmd=USER,
             id="15-6",
-            description="Transformer efficiency reported in User RMR equals Table 8.4.4",
+            description="Transformer efficiency reported in User RMD equals Table 8.4.4",
             ruleset_section_title="Transformer",
             standard_section="Transformers",
             is_primary_rule=False,
-            rmr_context="ruleset_model_descriptions/0/transformers",
+            rmd_context="ruleset_model_descriptions/0/transformers",
         )
 
     class TransformerRule(RuleDefinitionBase):
         def __init__(self):
             super(Section15Rule6.TransformerRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=True, BASELINE_0=False, PROPOSED=False
                 ),
                 required_fields={

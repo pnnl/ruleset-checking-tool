@@ -32,11 +32,11 @@ class Section5Rule39(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule39, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section5Rule39.BuildingRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="5-39",
             description="U-factor of the baseline door is based on Tables G3.4-1 through G3.4-8 for the applicable door "
             "type (swinging or non-swinging) and envelope conditioning category.",
@@ -50,11 +50,11 @@ class Section5Rule39(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule39.BuildingRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 each_rule=Section5Rule39.BuildingRule.SurfaceRule(),
-                index_rmr=BASELINE_0,
+                index_rmd=BASELINE_0,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
 
@@ -73,12 +73,12 @@ class Section5Rule39(RuleDefinitionListIndexedBase):
         class SurfaceRule(RuleDefinitionListIndexedBase):
             def __init__(self):
                 super(Section5Rule39.BuildingRule.SurfaceRule, self).__init__(
-                    rmrs_used=produce_ruleset_model_instance(
+                    rmds_used=produce_ruleset_model_instance(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
                     list_path="$.subsurfaces[*]",
                     each_rule=Section5Rule39.BuildingRule.SurfaceRule.SubSurfaceRule(),
-                    index_rmr=BASELINE_0,
+                    index_rmd=BASELINE_0,
                     required_fields={
                         "$.subsurfaces[*]": [
                             "classification",
@@ -104,7 +104,7 @@ class Section5Rule39(RuleDefinitionListIndexedBase):
                     super(
                         Section5Rule39.BuildingRule.SurfaceRule.SubSurfaceRule, self
                     ).__init__(
-                        rmrs_used=produce_ruleset_model_instance(
+                        rmds_used=produce_ruleset_model_instance(
                             USER=False, BASELINE_0=True, PROPOSED=False
                         ),
                         required_fields={

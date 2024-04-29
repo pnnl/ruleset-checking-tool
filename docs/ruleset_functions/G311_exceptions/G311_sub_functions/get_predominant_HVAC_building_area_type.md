@@ -15,7 +15,7 @@
 
 ## Logic:  
 
-- call get_HVAC_building_area_types_and_zones `building_area_types_and_zones_dict = get_HVAC_building_area_types_and_zones(climate_zone, rmi)`
+- call get_HVAC_building_area_types_and_zones `building_area_types_and_zones_dict = get_HVAC_building_area_types_and_zones(climate_zone, rmd)`
 - sort the dict based on floor area size: `sorted_list = sorted(building_area_types_and_zones_dict.items(), key=lambda x: x[1]["AREA"], reverse = True)`
 - the first item in the list will be the building area type with the largest area: `predominant_HVAC_building_area_type = sorted_list[0][0]`
 	

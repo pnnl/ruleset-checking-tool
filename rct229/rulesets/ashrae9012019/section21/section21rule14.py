@@ -12,11 +12,11 @@ class Section21Rule14(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section21Rule14, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section21Rule14.RulesetModelInstanceRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="21-14",
             description="When the baseline building is modeled with a hot water plant, served by purchased HW "
             "system, hot water supply temperature reset is not modeled.",
@@ -34,12 +34,12 @@ class Section21Rule14(RuleDefinitionListIndexedBase):
     class RulesetModelInstanceRule(PartialRuleDefinition):
         def __init__(self):
             super(Section21Rule14.RulesetModelInstanceRule, self,).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
             )
 
         def applicability_check(self, context, calc_vals, data):
-            rmi_b = context.BASELINE_0
-            purchased_chw_hhw_status_dict_p = check_purchased_chw_hhw_status_dict(rmi_b)
+            rmd_b = context.BASELINE_0
+            purchased_chw_hhw_status_dict_p = check_purchased_chw_hhw_status_dict(rmd_b)
             return purchased_chw_hhw_status_dict_p["purchased_heating"]

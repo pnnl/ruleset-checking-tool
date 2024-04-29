@@ -3,11 +3,11 @@
 
 **Rule ID:** 5-21  
 **Rule Description:** Subsurface that is not regulated (not part of building envelope) must be modeled with the same area, U-factor and SHGC in the baseline as in the proposed design.  
-**Rule Assertion:** B-RMR Fenestration: U-Factor, SHGC, glazed_area, fenestration.opaque_area = P-RMR SFenestration: U-Factor, SHGC, glazed_area, fenestration.opaque_area  
+**Rule Assertion:** B-RMD Fenestration: U-Factor, SHGC, glazed_area, fenestration.opaque_area = P-RMD SFenestration: U-Factor, SHGC, glazed_area, fenestration.opaque_area  
 **Appendix G Section:** Section G3.1-1(a) Building Modeling Requirements for the Baseline building  
 **Appendix G Section Reference:**  None  
 
-**Applicability:** All required data elements exist for B_RMR  
+**Applicability:** All required data elements exist for B_RMD  
 **Applicability Checks:** None  
 
 **Manual Checks:** None  
@@ -20,9 +20,9 @@
 
 ## Rule Logic:
 
-- Get surface conditioning category dictionary for B_RMR: `scc_dictionary_b = get_surface_conditioning_category(B_RMR)`
+- Get surface conditioning category dictionary for B_RMD: `scc_dictionary_b = get_surface_conditioning_category(B_RMD)`
 
-- For each building segment in the Baseline model: `for building_segment_b in B_RMR.building.building_segments:`
+- For each building segment in the Baseline model: `for building_segment_b in B_RMD.building.building_segments:`
 
   - For each zone in thermal block: `for zone_b in building_segment_b.zones:`
 
@@ -32,7 +32,7 @@
 
         - For each subsurface in surface: `for subsurface_b in surface_b:`
 
-          - Get matching subsurface in P_RMR: `subsurface_p = match_data_element(P_RMR, Subsurfaces, subsurface_b.id)`
+          - Get matching subsurface in P_RMD: `subsurface_p = match_data_element(P_RMD, Subsurfaces, subsurface_b.id)`
 
             **Rule Assertion:**
 
