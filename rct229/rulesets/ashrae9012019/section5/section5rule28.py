@@ -31,11 +31,11 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule28, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section5Rule28.BuildingRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="5-28",
             description="Skylight SHGC properties shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value and the applicable skylight percentage.",
             ruleset_section_title="Envelope",
@@ -52,12 +52,12 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule28.BuildingRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
                 each_rule=Section5Rule28.BuildingRule.RoofRule(),
-                index_rmr=BASELINE_0,
+                index_rmd=BASELINE_0,
                 manual_check_required_msg=MANUAL_CHECK_MSG,
             )
 
@@ -165,11 +165,11 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
         class RoofRule(RuleDefinitionListIndexedBase):
             def __init__(self):
                 super(Section5Rule28.BuildingRule.RoofRule, self).__init__(
-                    rmrs_used=produce_ruleset_model_instance(
+                    rmds_used=produce_ruleset_model_instance(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
                     each_rule=Section5Rule28.BuildingRule.RoofRule.SubsurfaceRule(),
-                    index_rmr=BASELINE_0,
+                    index_rmd=BASELINE_0,
                     list_path="subsurfaces[*]",
                     manual_check_required_msg=MANUAL_CHECK_MSG,
                 )
@@ -190,7 +190,7 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
                     super(
                         Section5Rule28.BuildingRule.RoofRule.SubsurfaceRule, self
                     ).__init__(
-                        rmrs_used=produce_ruleset_model_instance(
+                        rmds_used=produce_ruleset_model_instance(
                             USER=False, BASELINE_0=True, PROPOSED=False
                         ),
                         required_fields={

@@ -24,13 +24,13 @@ class HVACZoneListArea(TypedDict):
     zone_list: list[str]
 
 
-def get_hvac_zone_list_w_area_by_rmi_dict(rmi: dict) -> dict[str, HVACZoneListArea]:
+def get_hvac_zone_list_w_area_by_rmi_dict(rmd: dict) -> dict[str, HVACZoneListArea]:
     """
     RMI version of the get_hvac_zone_list_w_area_dict function
 
     Parameters
     ----------
-    rmi dict
+    rmd dict
         A dictionary representing a ruleset model instance as defined by the ASHRAE229 schema
 
     Returns
@@ -45,7 +45,7 @@ def get_hvac_zone_list_w_area_by_rmi_dict(rmi: dict) -> dict[str, HVACZoneListAr
         }
     """
     hvac_zone_list_w_area_dict = {}
-    for building in find_all("$.buildings[*]", rmi):
+    for building in find_all("$.buildings[*]", rmd):
         hvac_zone_list_w_area_dict.update(get_hvac_zone_list_w_area_dict(building))
     return hvac_zone_list_w_area_dict
 

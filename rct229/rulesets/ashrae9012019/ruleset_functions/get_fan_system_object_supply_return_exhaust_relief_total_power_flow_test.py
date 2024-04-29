@@ -3,8 +3,8 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_fan_system_object_suppl
     get_fan_system_object_supply_return_exhaust_relief_total_power_flow,
 )
 from rct229.schema.config import ureg
-from rct229.schema.schema_utils import quantify_rmr
-from rct229.schema.validate import schema_validate_rmr
+from rct229.schema.schema_utils import quantify_rmd
+from rct229.schema.validate import schema_validate_rmd
 from rct229.utils.std_comparisons import std_equal
 
 TEST_RMD = {
@@ -139,7 +139,7 @@ TEST_RMD_FULL = {
     "data_timestamp": "2024-02-12T09:00Z",
 }
 
-TEST_FAN_SYSTEM = quantify_rmr(TEST_RMD_FULL)["ruleset_model_descriptions"][0][
+TEST_FAN_SYSTEM = quantify_rmd(TEST_RMD_FULL)["ruleset_model_descriptions"][0][
     "buildings"
 ][0]["building_segments"][0]["heating_ventilating_air_conditioning_systems"][0][
     "fan_system"
@@ -147,7 +147,7 @@ TEST_FAN_SYSTEM = quantify_rmr(TEST_RMD_FULL)["ruleset_model_descriptions"][0][
 
 
 def test__TEST_RMD__is_valid():
-    schema_validation_result = schema_validate_rmr(TEST_RMD_FULL)
+    schema_validation_result = schema_validate_rmd(TEST_RMD_FULL)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"

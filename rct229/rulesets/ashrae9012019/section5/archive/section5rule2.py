@@ -11,23 +11,23 @@ class Section5Rule2(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule2, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=True, BASELINE_0=False, PROPOSED=True
             ),
             each_rule=Section5Rule2.BuildingRule(),
-            index_rmr=PROPOSED,
+            index_rmd=PROPOSED,
             id="5-2",
             description="Orientation is the same in user model and proposed model",
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(a) Building Envelope Modeling Requirements for the Proposed building",
             is_primary_rule=False,
-            rmr_context="ruleset_model_descriptions/0/buildings",
+            rmd_context="ruleset_model_descriptions/0/buildings",
         )
 
     class BuildingRule(RuleDefinitionBase):
         def __init__(self):
             super(Section5Rule2.BuildingRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=True, BASELINE_0=False, PROPOSED=True
                 ),
                 required_fields={

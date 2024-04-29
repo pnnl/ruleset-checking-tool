@@ -12,7 +12,7 @@ class Section19Rule5(RuleDefinitionBase):
 
     def __init__(self):
         super(Section19Rule5, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=False, PROPOSED=True
             ),
             id="19-5",
@@ -20,7 +20,7 @@ class Section19Rule5(RuleDefinitionBase):
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1.2.3",
             is_primary_rule=True,
-            rmr_context="ruleset_model_descriptions/0",
+            rmd_context="ruleset_model_descriptions/0",
             required_fields={
                 "$": ["output"],
                 "output": ["output_instance"],
@@ -34,8 +34,8 @@ class Section19Rule5(RuleDefinitionBase):
         )
 
     def get_calc_vals(self, context, data=None):
-        rmi_p = context.PROPOSED
-        output_instance_p = rmi_p["output"]["output_instance"]
+        rmd_p = context.PROPOSED
+        output_instance_p = rmd_p["output"]["output_instance"]
 
         unmet_load_hours_heating_p = output_instance_p["unmet_load_hours_heating"]
         unmet_load_hours_cooling_p = output_instance_p["unmet_load_hours_cooling"]

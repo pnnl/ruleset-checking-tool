@@ -3,7 +3,7 @@
 
 **Rule ID:** 5-20  
 **Rule Description:** Vertical fenestration SHGC shall match the appropriate requirements in Tables G3.4-1 through G3.4-8.  
-**Rule Assertion:** Baseline RMR = expected value  
+**Rule Assertion:** Baseline RMD = expected value  
 **Appendix G Section:** Section G3.1-5(d) Building Envelope Modeling Requirements for the Baseline building  
 **Appendix G Section Reference:** Tables G3.4-1 to G3.4-8  
 

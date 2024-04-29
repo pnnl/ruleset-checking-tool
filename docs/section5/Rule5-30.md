@@ -6,7 +6,7 @@
 **Appendix G Section:** Section G3.1-1(a) Building Envelope Modeling Requirements for the Proposed design  
 **Appendix G Section Reference:** None  
 
-**Applicability:** All required data elements exist for P_RMR  
+**Applicability:** All required data elements exist for P_RMD  
 **Applicability Checks:**  
   1. The proposed building has a roof surface
 

@@ -10,17 +10,17 @@ class Section15Rule3(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section15Rule3, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=True, BASELINE_0=False, PROPOSED=True
             ),
             each_rule=Section15Rule3.TransformerRule(),
-            index_rmr=USER,
+            index_rmd=USER,
             id="15-3",
-            description="User RMR transformer id in Proposed RMR",
+            description="User RMD transformer id in Proposed RMD",
             ruleset_section_title="Transformer",
             standard_section="Transformers",
             is_primary_rule=False,
-            rmr_context="ruleset_model_descriptions/0/transformers",
+            rmd_context="ruleset_model_descriptions/0/transformers",
         )
 
     def create_data(self, context, data):
@@ -30,7 +30,7 @@ class Section15Rule3(RuleDefinitionListIndexedBase):
     class TransformerRule(RuleDefinitionBase):
         def __init__(self):
             super(Section15Rule3.TransformerRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=True, BASELINE_0=False, PROPOSED=False
                 ),
             )

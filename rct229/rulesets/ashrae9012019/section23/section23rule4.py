@@ -26,11 +26,11 @@ class Section23Rule4(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section23Rule4, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             each_rule=Section23Rule4.RuleSetModelInstanceRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="23-4",
             description="Baseline systems 5 & 7 serving lab spaces per G3.1.1c shall reduce lab exhaust and makeup air during unoccupied periods to 50% of zone peak airflow, the minimum outdoor airflow, or rate required to comply with minimum accreditation standards whichever is larger.",
             ruleset_section_title="HVAC - Airside",
@@ -51,7 +51,7 @@ class Section23Rule4(RuleDefinitionListIndexedBase):
     class RuleSetModelInstanceRule(PartialRuleDefinition):
         def __init__(self):
             super(Section23Rule4.RuleSetModelInstanceRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
             )
