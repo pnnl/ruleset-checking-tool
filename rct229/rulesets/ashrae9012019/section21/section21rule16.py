@@ -41,7 +41,7 @@ class Section21Rule16(RuleDefinitionBase):
 
     def __init__(self):
         super(Section21Rule16, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             id="21-16",
@@ -49,13 +49,13 @@ class Section21Rule16(RuleDefinitionBase):
             ruleset_section_title="HVAC - Water Side",
             standard_section="Section G3.1.3.2 Building System-Specific Modeling Requirements for the Baseline model",
             is_primary_rule=True,
-            rmr_context="ruleset_model_descriptions/0",
+            rmd_context="ruleset_model_descriptions/0",
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.BASELINE_0
-        baseline_system_types_dict = get_baseline_system_types(rmi_b)
-        # create a list containing all HVAC systems that are modeled in the rmi_b
+        rmd_b = context.BASELINE_0
+        baseline_system_types_dict = get_baseline_system_types(rmd_b)
+        # create a list containing all HVAC systems that are modeled in the rmd_b
         available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict
@@ -69,9 +69,9 @@ class Section21Rule16(RuleDefinitionBase):
         )
 
     def get_calc_vals(self, context, data=None):
-        rmi_b = context.BASELINE_0
+        rmd_b = context.BASELINE_0
         hhw_loop_count = len(
-            find_all('$..fluid_loops[*][?(@.type = "HEATING")]', rmi_b)
+            find_all('$..fluid_loops[*][?(@.type = "HEATING")]', rmd_b)
         )
         return {"hhw_loop_count": hhw_loop_count}
 

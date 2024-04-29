@@ -123,48 +123,48 @@ def get_secondary_schema_root_dictionary(secondary_json_string):
     return schema_dictionary
 
 
-def quantify_rmr(rmr):
-    """Replaces RMR items with pint quantities based on schema units
+def quantify_rmd(rmd):
+    """Replaces rmd items with pint quantities based on schema units
 
     Parameters
     ----------
-    rmr : dict
-        An RMR dictionary
+    rmd : dict
+        An rmd dictionary
 
     Returns
     -------
     dict
-        A copy of the original RMR dictionary with all numbers that have units
+        A copy of the original rmd dictionary with all numbers that have units
         in the schema replaced with their corresponding pint quantities
     """
-    rmr = deepcopy(rmr)
+    rmd = deepcopy(rmd)
 
-    # Match all rmr field items
+    # Match all rmd field items
     # Note, this does not match array items, but will pass through an array to get to a field item
-    all_rmr_field_item_matches = parse_jsonpath("$..*").find(rmr)
+    all_rmd_field_item_matches = parse_jsonpath("$..*").find(rmd)
 
     # Pick out the number fields and fields that hold an array of numbers
-    number_rmr_item_matches = list(
+    number_rmd_item_matches = list(
         filter(
-            lambda rmr_item_match: (type(rmr_item_match.value) in [int, float])
+            lambda rmd_item_match: (type(rmd_item_match.value) in [int, float])
             or (
-                type(rmr_item_match.value) is list
+                type(rmd_item_match.value) is list
                 and all(
                     [
                         type(list_item) in [int, float]
-                        for list_item in rmr_item_match.value
+                        for list_item in rmd_item_match.value
                     ]
                 )
             ),
-            all_rmr_field_item_matches,
+            all_rmd_field_item_matches,
         )
     )
 
     # Replace all number items that have associated units in the schema
     # with the appropriate pint quantity
-    for number_rmr_item_match in number_rmr_item_matches:
+    for number_rmd_item_match in number_rmd_item_matches:
         # Get the full path to the item
-        full_path = str(number_rmr_item_match.full_path)
+        full_path = str(number_rmd_item_match.full_path)
 
         # Split the full path at dots and list indexing
         key_list = re.split(r"\.\[\d+\]\.|\.", full_path)
@@ -177,12 +177,12 @@ def quantify_rmr(rmr):
             pint_unit_str = clean_schema_units(schema_unit_str)
 
             # Create the pint quantity to replace the number
-            pint_qty = number_rmr_item_match.value * config.ureg(pint_unit_str)
+            pint_qty = number_rmd_item_match.value * config.ureg(pint_unit_str)
 
             # Replace the number with the appropriate pint quantity
-            set_(rmr, full_path, pint_qty)
+            set_(rmd, full_path, pint_qty)
 
-    return rmr
+    return rmd
 
 
 def return_json_schema_reference(object_dict, key):

@@ -17,17 +17,17 @@ class Section22Rule13(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section22Rule13, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section22Rule13.HeatRejectionRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="22-13",
             description="The baseline heat rejection loop shall be an axial-fan open circuit cooling tower.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section 22 CHW&CW Loop",
             is_primary_rule=True,
-            rmr_context="ruleset_model_descriptions/0",
+            rmd_context="ruleset_model_descriptions/0",
             list_path="$.heat_rejections[*]",
         )
 
@@ -42,7 +42,7 @@ class Section22Rule13(RuleDefinitionListIndexedBase):
     class HeatRejectionRule(RuleDefinitionBase):
         def __init__(self):
             super(Section22Rule13.HeatRejectionRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={

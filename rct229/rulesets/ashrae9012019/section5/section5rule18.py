@@ -13,11 +13,11 @@ class Section5Rule18(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule18, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=False, PROPOSED=True
             ),
             each_rule=Section5Rule18.SubsurfaceRule(),
-            index_rmr=PROPOSED,
+            index_rmd=PROPOSED,
             id="5-18",
             description="Manually controlled dynamic glazing shall use the average of the minimum and maximum SHGC and VT.",
             ruleset_section_title="Envelope",
@@ -29,7 +29,7 @@ class Section5Rule18(RuleDefinitionListIndexedBase):
     class SubsurfaceRule(PartialRuleDefinition):
         def __init__(self):
             super(Section5Rule18.SubsurfaceRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=False, PROPOSED=True
                 ),
                 required_fields={"$": ["dynamic_glazing_type"]},

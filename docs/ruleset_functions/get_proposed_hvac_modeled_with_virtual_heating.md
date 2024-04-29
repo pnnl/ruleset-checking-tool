@@ -3,8 +3,8 @@
 **Description:** Get the list of HeatingVentilationAirAconditioningSystem in which Appendix G Table G3.1 #10 c is applicable (i.e. space heating is modeled in the P_RMI but not the U_RMI).  Table G3.1 #10 c states that "where no heating system exists or no heating system has been submitted with design documents, the system type shall be the same system as modeled in the baseline building design and shall comply with but not exceed the requirements of Section 6."   
 
 **Inputs:**  
-- **U-RMI**: The U-RMI to determine if an HVAC system has been designed or is existing with heating.  
-- **P-RMI**: To determine if the same HVAC system has been modeled with heating in the P-RMI.  
+- **U-RMD**: The U-RMD to determine if an HVAC system has been designed or is existing with heating.  
+- **P-RMD**: To determine if the same HVAC system has been modeled with heating in the P-RMD.  
 
 **Returns:**  
 - **proposed_hvac_modeled_with_virtual_heating_list_p**: A list that saves all the HVAC systems in which Appendix G Table G3.1 #10 c are applicable (i.e. modeled with virtual heating in the proposed).  

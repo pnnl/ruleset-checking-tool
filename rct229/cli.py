@@ -54,7 +54,7 @@ def run_test(ruleset, section=None):
         )
 
 
-# Evaluate RMR Triplet
+# Evaluate RMD Triplet
 short_help_text = """
     Run ruleset checking. arguments are \n
     --ruleset or -rs: ruleset name. Default is ashrae9012019, available options include: ashrae9012019 \n

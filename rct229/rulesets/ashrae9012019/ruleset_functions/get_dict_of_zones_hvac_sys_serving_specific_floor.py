@@ -8,15 +8,15 @@ def get_dict_of_zones_hvac_sys_serving_specific_floor(
     rmd: dict, floor_name: str
 ) -> dict[str, list]:
     """
-    Returns a dictionary with zone ids as the keys and the associated HVAC system as the values for zones serving a specific floor the applicable RMR i.e. {zone_1.id: [hvac_1.id, hvac_2.id, hvac_3.id], zone_2.id: [hvac_1.id, hvac_2.id, hvac_3.id]}.
+    Returns a dictionary with zone ids as the keys and the associated HVAC system as the values for zones serving a specific floor the applicable rmd i.e. {zone_1.id: [hvac_1.id, hvac_2.id, hvac_3.id], zone_2.id: [hvac_1.id, hvac_2.id, hvac_3.id]}.
 
     Parameters
     ----------
     rmd: dict rmd at RuleSetModelDescription level.
-    floor_name: A floor name (string) associated with the RMR to determine the zone ids and hvac systems that are associated with the specific floor.
+    floor_name: A floor name (string) associated with the rmd to determine the zone ids and hvac systems that are associated with the specific floor.
 
     Returns:
-    dict_of_zones_hvac_sys_serving_specific_floor: a dictionary with zone ids as the keys and the associated HVAC system as the values for zones serving a specific floor the applicable RMR i.e. {zone_1.id: [hvac_1.id, hvac_2.id, hvac_3.id], zone_2.id: [hvac_1.id, hvac_2.id, hvac_3.id]}.
+    dict_of_zones_hvac_sys_serving_specific_floor: a dictionary with zone ids as the keys and the associated HVAC system as the values for zones serving a specific floor the applicable rmd i.e. {zone_1.id: [hvac_1.id, hvac_2.id, hvac_3.id], zone_2.id: [hvac_1.id, hvac_2.id, hvac_3.id]}.
                                                    this could return an empty dictionary if no zones found in the specific floor.
 
     """

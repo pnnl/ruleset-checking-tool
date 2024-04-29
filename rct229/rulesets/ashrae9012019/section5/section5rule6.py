@@ -24,11 +24,11 @@ class Section5Rule6(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule6, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section5Rule6.BuildingRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             list_path="ruleset_model_descriptions[0].buildings[*]",
             id="5-6",
             description="Baseline below-grade walls shall match the appropriate assembly maximum C-factors in Table G3.4-1 through G3.4-8.",
@@ -45,12 +45,12 @@ class Section5Rule6(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule6.BuildingRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={},
                 each_rule=Section5Rule6.BuildingRule.BelowGradeWallRule(),
-                index_rmr=BASELINE_0,
+                index_rmd=BASELINE_0,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
 
@@ -73,7 +73,7 @@ class Section5Rule6(RuleDefinitionListIndexedBase):
         class BelowGradeWallRule(RuleDefinitionBase):
             def __init__(self):
                 super(Section5Rule6.BuildingRule.BelowGradeWallRule, self).__init__(
-                    rmrs_used=produce_ruleset_model_instance(
+                    rmds_used=produce_ruleset_model_instance(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
                     required_fields={

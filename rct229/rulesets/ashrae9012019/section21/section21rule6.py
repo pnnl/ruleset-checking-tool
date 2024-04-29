@@ -33,23 +33,23 @@ class Section21Rule6(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section21Rule6, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section21Rule6.HeatingFluidLoopRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="21-6",
             description="When baseline building includes two boilers each shall stage as required by load.",
             ruleset_section_title="HVAC - Water Side",
             standard_section="Section G3.1.3.2 Building System-Specific Modeling Requirements for the Baseline model",
             is_primary_rule=True,
-            rmr_context="ruleset_model_descriptions/0",
+            rmd_context="ruleset_model_descriptions/0",
             list_path="$.fluid_loops[*]",
         )
 
     def create_data(self, context, data):
-        rmi_b = context.BASELINE_0
-        boilers = find_all("$.boilers[*]", rmi_b)
+        rmd_b = context.BASELINE_0
+        boilers = find_all("$.boilers[*]", rmd_b)
         loop_boiler_dict = {}
         for boiler_b in boilers:
             loop_id = getattr_(boiler_b, "boiler", "loop")
@@ -59,9 +59,9 @@ class Section21Rule6(RuleDefinitionListIndexedBase):
         return {"loop_boiler_dict": loop_boiler_dict}
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.BASELINE_0
-        baseline_system_types_dict = get_baseline_system_types(rmi_b)
-        # create a list containing all HVAC systems that are modeled in the rmi_b
+        rmd_b = context.BASELINE_0
+        baseline_system_types_dict = get_baseline_system_types(rmd_b)
+        # create a list containing all HVAC systems that are modeled in the rmd_b
         available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict
@@ -81,7 +81,7 @@ class Section21Rule6(RuleDefinitionListIndexedBase):
     class HeatingFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
             super(Section21Rule6.HeatingFluidLoopRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
             )
