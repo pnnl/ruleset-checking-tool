@@ -20,7 +20,7 @@
 1. get_hw_loop_zone_list_w_area
 
 **Applicability Checks:**
-- use the function get_hw_loop_zone_list_w_area to see if there are zone terminal units connected to hot water loops: `hw_loop_zone_list_w_area_dictionary = get_hw_loop_zone_list_w_area(B-RMI)`
+- use the function get_hw_loop_zone_list_w_area to see if there are zone terminal units connected to hot water loops: `hw_loop_zone_list_w_area_dictionary = get_hw_loop_zone_list_w_area(B-RMD)`
 - Get all the heating loops connected to boilers in the baseline by creating heat_fluid_loops_set: `boiler_fluid_loops_set = set()`
 - iterate through all the boilers the building looking for heating fluid loops: `for boiler in B_RMI.boilers:`
   - check if the boiler loop is in the hw_loop_zone_list_w_area_dictionary: `if boiler.loop.id in hw_loop_zone_list_w_area_dictionary:`

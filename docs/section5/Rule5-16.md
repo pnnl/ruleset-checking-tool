@@ -3,11 +3,11 @@
 
 **Rule ID:** 5-16  
 **Rule Description:** The vertical fenestration shall be distributed on each face of the building in the same proportion as in the proposed design.  
-**Rule Assertion:** B-RMR total (subsurface.glazed_area+subsurface.opaque_area) = expected value for each surface  
+**Rule Assertion:** B-RMD total (subsurface.glazed_area+subsurface.opaque_area) = expected value for each surface  
 **Appendix G Section:** Section 5 Envelope  
 **Appendix G Section Reference:**  Section G3.1-5(c) Building Envelope Modeling Requirements for the Baseline building
 
-**Applicability:** All required data elements exist for B_RMR  
+**Applicability:** All required data elements exist for B_RMD  
 **Applicability Checks:** None  
 
 **Manual Checks:** None  
@@ -22,19 +22,19 @@
 
 ## Rule Logic:
 
-- Get area type window wall areas dictionary for B_RMR: `window_wall_areas_dictionary_b = get_area_type_window_wall_areas(B_RMR)`
+- Get area type window wall areas dictionary for B_RMD: `window_wall_areas_dictionary_b = get_area_type_window_wall_areas(B_RMD)`
 
   - For each area type in window wall areas dictionary: `for area_type_b in window_wall_areas_dictionary_b.keys():`
   
-    - Calculate total fenestration area for B_RMR: `total_fenestration_area_b += window_wall_areas_dictionary_b[area_type_b]["TOTAL_WINDOW_AREA"]`
+    - Calculate total fenestration area for B_RMD: `total_fenestration_area_b += window_wall_areas_dictionary_b[area_type_b]["TOTAL_WINDOW_AREA"]`
 
-- Get area type window wall areas dictionary for P_RMR: `window_wall_areas_dictionary_p = get_area_type_window_wall_areas(P_RMR)`
+- Get area type window wall areas dictionary for P_RMD: `window_wall_areas_dictionary_p = get_area_type_window_wall_areas(P_RMD)`
 
   - For each area type in window wall areas dictionary: `for area_type_p in window_wall_areas_dictionary_p.keys():`
   
-    - Calculate total fenestration area for B_RMR: `total_fenestration_area_p += window_wall_areas_dictionary_p[area_type_p]["TOTAL_WINDOW_AREA"]`
+    - Calculate total fenestration area for B_RMD: `total_fenestration_area_p += window_wall_areas_dictionary_p[area_type_p]["TOTAL_WINDOW_AREA"]`
 
-- Get surface conditioning category dictionary for B_RMR: `scc_dictionary_b = get_surface_conditioning_category(B_RMR)`
+- Get surface conditioning category dictionary for B_RMD: `scc_dictionary_b = get_surface_conditioning_category(B_RMR)`
 
 - For each building segment in the Baseline model: `For building_segment_b in B_RMR.building.building_segments:`
 

@@ -16,8 +16,8 @@ class EngineRawSummary(RCTReport):
         string_list.append(f"Rule: {str(rule_outcome['id'])}\n")
         string_list.append(f"Description: {str(rule_outcome['description'])}\n")
         string_list.append(
-            f"RMD context: {str(rule_outcome['rmr_context'])}\n"
-        ) if "rmr_context" in rule_outcome else string_list.append(
+            f"RMD context: {str(rule_outcome['rmd_context'])}\n"
+        ) if "rmd_context" in rule_outcome else string_list.append(
             "RMD context: full scope\n"
         )
         string_list.append(f"Rule result: {str(rule_outcome['result'])}\n")

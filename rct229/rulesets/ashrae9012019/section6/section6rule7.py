@@ -19,11 +19,11 @@ class Section6Rule7(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section6Rule7, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=False, PROPOSED=True
             ),
             each_rule=Section6Rule7.ZoneRule(),
-            index_rmr=PROPOSED,
+            index_rmd=PROPOSED,
             id="6-7",
             description="Proposed building is modeled with daylighting controls directly or through schedule adjustments.",
             ruleset_section_title="Lighting",
@@ -36,7 +36,7 @@ class Section6Rule7(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section6Rule7.ZoneRule, self,).__init__(
                 required_fields={"$": ["spaces", "surfaces"]},
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=False, PROPOSED=True
                 ),
             )

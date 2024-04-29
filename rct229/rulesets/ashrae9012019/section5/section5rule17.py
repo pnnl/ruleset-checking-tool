@@ -18,7 +18,7 @@ class Section5Rule17(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule17, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             id="5-17",
@@ -28,14 +28,14 @@ class Section5Rule17(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-5(c) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=False,
             each_rule=Section5Rule17.ZoneRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             list_path="$.buildings[*].building_segments[*].zones[*]",
         )
 
     class ZoneRule(PartialRuleDefinition):
         def __init__(self):
             super(Section5Rule17.ZoneRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
             )

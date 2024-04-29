@@ -1,7 +1,7 @@
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_dict_of_zones_hvac_sys_serving_specific_floor import (
     get_dict_of_zones_hvac_sys_serving_specific_floor,
 )
-from rct229.schema.validate import schema_validate_rmr
+from rct229.schema.validate import schema_validate_rmd
 
 TEST_RMI = {
     "id": "test_rmd",
@@ -60,7 +60,7 @@ TEST_RMD = {
 
 
 def test__TEST_RMD_FIXED_TYPE__is_valid():
-    schema_validation_result = schema_validate_rmr(TEST_RMD)
+    schema_validation_result = schema_validate_rmd(TEST_RMD)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"

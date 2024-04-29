@@ -3,11 +3,11 @@
 
 **Rule ID:** 5-28  
 **Rule Description:** Skylight SHGC properties shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value and the applicable skylight percentage.  
-**Rule Assertion:** B-RMR subsurface: SHGC = expected value  
+**Rule Assertion:** B-RMD subsurface: SHGC = expected value  
 **Appendix G Section:** Section 5 Envelope  
 **Appendix G Section Reference:** Section G3.1-5(e) Building Envelope Modeling Requirements for the Baseline building
 
-**Applicability:** All required data elements exist for B_RMR  
+**Applicability:** All required data elements exist for B_RMD  
 **Applicability Checks:** None  
 
 **Manual Check:** Yes  
@@ -22,11 +22,11 @@
 
 ## Rule Logic:  
 
-- Get RMR climate zone: `climate_zone = ASHRAE229.weather.climate_zone`  
+- Get RMD climate zone: `climate_zone = ASHRAE229.weather.climate_zone`  
 
-- Get surface conditioning category dictionary for B_RMR: `scc_dictionary_b = get_surface_conditioning_category(B_RMR)`  
+- Get surface conditioning category dictionary for B_RMD: `scc_dictionary_b = get_surface_conditioning_category(B_RMD)`  
 
-- Get B_RMR skylight roof ratios dictionary: `rmr_scc_skylight_roof_ratios_dictionary = get_rmr_scc_skylight_roof_ratios(B_RMR)`
+- Get B_RMD skylight roof ratios dictionary: `rmr_scc_skylight_roof_ratios_dictionary = get_rmr_scc_skylight_roof_ratios(B_RMD)`
 
 - Check if B_RMR has exterior mixed type skylight: `if rmr_scc_skylight_roof_ratios_dictionary["EXTERIOR MIXED"] > 0:`
 

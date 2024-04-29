@@ -4,13 +4,13 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 class PartialRuleDefinition(RuleDefinitionBase):
     def __init__(
         self,
-        rmrs_used,
+        rmds_used,
         id=None,
         description=None,
         ruleset_section_title=None,
         standard_section=None,
         is_primary_rule=False,
-        rmr_context="",
+        rmd_context="",
         required_fields=None,
         manual_check_required_msg="",
         not_applicable_msg="",
@@ -19,7 +19,7 @@ class PartialRuleDefinition(RuleDefinitionBase):
 
         Parameters
         ----------
-        rmrs_used : RuleSetModels
+        rmds_used : RuleSetModels
             A trio of boolean values indicating which RMDs are required by the rule
         id : string
             Unique id for the rule
@@ -48,10 +48,10 @@ class PartialRuleDefinition(RuleDefinitionBase):
             default message for NOT_APPLICABLE outcome
         """
         super(PartialRuleDefinition, self).__init__(
-            rmrs_used=rmrs_used,
+            rmds_used=rmds_used,
             id=id,
             description=description,
-            rmr_context=rmr_context,
+            rmd_context=rmd_context,
             required_fields=required_fields,
             manual_check_required_msg=manual_check_required_msg,
             not_applicable_msg=not_applicable_msg,

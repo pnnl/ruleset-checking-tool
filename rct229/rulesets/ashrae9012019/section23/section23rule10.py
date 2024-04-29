@@ -30,24 +30,24 @@ class Section23Rule10(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section23Rule10, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section23Rule10.HVACRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="23-10",
             description="System 11 Fan volume shall be reset from 100% airflow at 100% cooling load to minimum "
             "airflow at 50% cooling load. ",
             ruleset_section_title="HVAC - Airside",
             standard_section="G3.1.3.17 System 11 Supply Air Temperature and Fan Control",
             is_primary_rule=True,
-            rmr_context="ruleset_model_descriptions/0",
+            rmd_context="ruleset_model_descriptions/0",
             list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.BASELINE_0
-        baseline_system_types_dict = get_baseline_system_types(rmi_b)
+        rmd_b = context.BASELINE_0
+        baseline_system_types_dict = get_baseline_system_types(rmd_b)
         # if baseline does not have system 3-8 or 11, 12, 13, then this rule is not applicable
         return any(
             [
@@ -61,8 +61,8 @@ class Section23Rule10(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.BASELINE_0
-        baseline_system_types_dict = get_baseline_system_types(rmi_b)
+        rmd_b = context.BASELINE_0
+        baseline_system_types_dict = get_baseline_system_types(rmd_b)
         applicable_hvac_sys_ids = [
             hvac_id
             for sys_type in baseline_system_types_dict
@@ -76,7 +76,7 @@ class Section23Rule10(RuleDefinitionListIndexedBase):
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
             super(Section23Rule10.HVACRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={
