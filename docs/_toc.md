@@ -277,7 +277,8 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [15-6](section15/Rule15-6.md): Transformer efficiency reported in User RMD equals Table 8.4.4.
   
 ## Section 16 - Elevators
-
+  * [16-1](section16/Rule16-1.md): The elevator peak motor power shall be calculated according to the equation in Table G3.1-16
+  
 ## Section 17 - Refrigeration
 
 ## Section 18 - Air Side
