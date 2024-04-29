@@ -282,6 +282,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [16-3](section16/Rule16-3.md): The elevator cab ventilation fan shall be modeled with the same schedule as the elevator motor.
   * [16-4](section16/Rule16-4.md): The elevator cab lights shall be modeled with the same schedule as the elevator motor.
   * [16-6](section16/Rule16-6.md): When included in the proposed design, the baseline elevator cab ventilation fan power shall be 0.33 W/cfm
+  * [16-7](section16/Rule16-7.md): When included in the proposed design, the baseline elevator cab lighting power density shall be 3.14 W/ft2
 
 ## Section 17 - Refrigeration
 
