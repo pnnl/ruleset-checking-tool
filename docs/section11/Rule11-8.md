@@ -5,11 +5,11 @@
 
 **Rule ID:** 11-8
 
-**Rule Description:** "One system per building area type shall be be modeled in the baseline."
+**Rule Description:** "One system per building area type shall be modeled in the baseline."
 
 **Rule Assertion:** Options are PASS/FAIL
 
-**Appendix G Section Reference:** Table G3.1 #11, proposed column, c
+**Appendix G Section Reference:** Table G3.1 #11, baseline column, a + b
 
 **Evaluation Context:** B-RMD each SHW type
 **Data Lookup:**   
