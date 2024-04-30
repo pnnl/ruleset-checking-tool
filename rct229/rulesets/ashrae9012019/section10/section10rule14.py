@@ -57,11 +57,11 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section10Rule14, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section10Rule14.HVACRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="10-14",
             description=(
                 "Baseline shall be modeled with the heating HVAC system efficiency per Tables G3.5.1-G3.5.6 (applies only to the heating efficiency of baseline furnaces and heat pumps). Where multiple HVAC zones or residential spaces are combined into a single thermal block the heating efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces."
@@ -70,7 +70,7 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
             standard_section="",
             is_primary_rule=True,
             list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
-            rmr_context="ruleset_model_descriptions/0",
+            rmd_context="ruleset_model_descriptions/0",
         )
 
     def is_applicable(self, context, data=None):
@@ -125,7 +125,7 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
             super(Section10Rule14.HVACRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={
@@ -170,7 +170,7 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
                     )
 
             if total_capacity_b is not None:
-                total_capacity_b = total_capacity_b.magnitude
+                total_capacity_b = total_capacity_b.to("Btu/h").magnitude
 
             if total_capacity_b is not None and hvac_system_type_b in [
                 HVAC_SYS.SYS_3,
@@ -184,14 +184,14 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
                 elif (
                     hvac_zone_aggregation_factor is None
                     and hvac_system_type_b in [HVAC_SYS.SYS_3, HVAC_SYS.SYS_3A]
-                    and total_capacity_b > FURNACE_CAPACITY_LOW_THREHSOLD
+                    and total_capacity_b >= FURNACE_CAPACITY_LOW_THREHSOLD
                 ):
                     is_zone_agg_factor_undefined_and_needed = True
 
                 elif (
                     hvac_zone_aggregation_factor is None
                     and hvac_system_type_b == HVAC_SYS.SYS_4
-                    and total_capacity_b > HEATPUMP_CAPACITY_LOW_THRESHOLD
+                    and total_capacity_b >= HEATPUMP_CAPACITY_LOW_THRESHOLD
                 ):
                     is_zone_agg_factor_undefined_and_needed = True
 
@@ -223,7 +223,10 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
                     )
 
             else:  # HVAC_SYS.SYS_4
-                if total_capacity_b is None:
+                if (
+                    total_capacity_b is None
+                    or total_capacity_b < HEATPUMP_CAPACITY_LOW_THRESHOLD
+                ):
                     expected_baseline_eff_data = [
                         table_g3_5_2_lookup(
                             HeatPumpEquipmentType.HEAT_PUMP_AIR_COOLED_HEATING,
@@ -298,7 +301,6 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
 
             else:
                 expected_effs_b = []
-                modeled_effs_b = []
                 expected_high_temp_eff_b = expected_baseline_eff_data[0][
                     "minimum_efficiency"
                 ]
