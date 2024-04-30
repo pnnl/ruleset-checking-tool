@@ -120,7 +120,7 @@ def compare_context_pair(
             if isinstance(new_extra_schema, str) and new_extra_schema in exception_list:
                 # avoid processing data outside the master schema
                 continue
-            print(f"compare_context: {compare_context}")
+
             matched = (
                 compare_context_pair(
                     index_context[key],
