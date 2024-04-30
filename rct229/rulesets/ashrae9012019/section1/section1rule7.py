@@ -5,7 +5,7 @@ from rct229.rulesets.ashrae9012019.data_fns.extra_schema_fns import proposed_equ
 
 
 class Section1Rule7(RuleDefinitionBase):
-    """Rule 1 of ASHRAE 90.1-2019 Appendix G Section 1 (Performance Calculation)"""
+    """Rule 7 of ASHRAE 90.1-2019 Appendix G Section 1 (Performance Calculation)"""
 
     def __init__(self):
         super(Section1Rule7, self).__init__(

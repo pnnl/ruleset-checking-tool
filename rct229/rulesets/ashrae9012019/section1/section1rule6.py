@@ -6,7 +6,7 @@ from rct229.rulesets.ashrae9012019.data_fns.extra_schema_fns import (
 
 
 class Section1Rule6(RuleDefinitionBase):
-    """Rule 1 of ASHRAE 90.1-2019 Appendix G Section 1 (Performance Calculation)"""
+    """Rule 6 of ASHRAE 90.1-2019 Appendix G Section 1 (Performance Calculation)"""
 
     def __init__(self):
         super(Section1Rule6, self).__init__(
