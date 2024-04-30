@@ -24,7 +24,7 @@ class Section5Rule22(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule22, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             required_fields={
@@ -32,7 +32,7 @@ class Section5Rule22(RuleDefinitionListIndexedBase):
                 "weather": ["climate_zone"],
             },
             each_rule=Section5Rule22.BuildingRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="5-22",
             description="Baseline fenestration shall be assumed to be flush with the exterior wall, and no shading "
             "projections shall be modeled.",
@@ -46,11 +46,11 @@ class Section5Rule22(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule22.BuildingRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 each_rule=Section5Rule22.BuildingRule.AboveGradeWallRule(),
-                index_rmr=BASELINE_0,
+                index_rmd=BASELINE_0,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
 
@@ -72,12 +72,12 @@ class Section5Rule22(RuleDefinitionListIndexedBase):
         class AboveGradeWallRule(RuleDefinitionListIndexedBase):
             def __init__(self):
                 super(Section5Rule22.BuildingRule.AboveGradeWallRule, self).__init__(
-                    rmrs_used=produce_ruleset_model_instance(
+                    rmds_used=produce_ruleset_model_instance(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
                     list_path="subsurfaces[*]",
                     each_rule=Section5Rule22.BuildingRule.AboveGradeWallRule.SubsurfaceRule(),
-                    index_rmr=BASELINE_0,
+                    index_rmd=BASELINE_0,
                 )
 
             class SubsurfaceRule(RuleDefinitionBase):
@@ -86,7 +86,7 @@ class Section5Rule22(RuleDefinitionListIndexedBase):
                         Section5Rule22.BuildingRule.AboveGradeWallRule.SubsurfaceRule,
                         self,
                     ).__init__(
-                        rmrs_used=produce_ruleset_model_instance(
+                        rmds_used=produce_ruleset_model_instance(
                             USER=False, BASELINE_0=True, PROPOSED=False
                         ),
                         fail_msg=FAIL_MSG,

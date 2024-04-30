@@ -10,11 +10,11 @@ EXTERNAL_FLUID_SOURCE = SchemaEnums.schema_enums["ExternalFluidSourceOptions"]
 FLUID_LOOP_TYPE = SchemaEnums.schema_enums["FluidLoopOptions"]
 
 
-def are_all_terminal_heating_loops_purchased_heating(rmi_b, terminal_unit_id_list):
+def are_all_terminal_heating_loops_purchased_heating(rmd_b, terminal_unit_id_list):
     """Returns TRUE if the fluid loop associated with the heating_from_loop associated with each terminal unit is purchased heating. Returns FALSE if this is not the case.
     ----------
-    rmi_b : json
-        RMD at RuleSetModelInstance level
+    rmd_b : json
+        RMD at RuleSetModelDescription level
     terminal_unit_id_list : list
         List of terminal units IDs
     Returns
@@ -29,18 +29,18 @@ def are_all_terminal_heating_loops_purchased_heating(rmi_b, terminal_unit_id_lis
     purchased_heating_loop_id_list_b = [
         *find_all(
             f'external_fluid_sources[*][?(@.type="{EXTERNAL_FLUID_SOURCE.HOT_WATER}"), ?(@.type="{EXTERNAL_FLUID_SOURCE.STEAM}")].loop',
-            rmi_b,
+            rmd_b,
         )
     ]
 
     for terminal_b_id in terminal_unit_id_list:
-        terminal_b = find_exactly_one_terminal_unit(rmi_b, terminal_b_id)
+        terminal_b = find_exactly_one_terminal_unit(rmd_b, terminal_b_id)
         heating_from_loop_id = terminal_b.get("heating_from_loop")
         if (
             are_all_terminal_heating_loops_purchased_heating_flag
             and heating_from_loop_id
         ):
-            fluid_loop = find_exactly_one_fluid_loop(rmi_b, heating_from_loop_id)
+            fluid_loop = find_exactly_one_fluid_loop(rmd_b, heating_from_loop_id)
             if (
                 getattr_(fluid_loop, "fluid loop", "type") != FLUID_LOOP_TYPE.HEATING
                 or heating_from_loop_id not in purchased_heating_loop_id_list_b

@@ -12,11 +12,11 @@ class Section21Rule1(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section21Rule1, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=False, PROPOSED=True
             ),
             each_rule=Section21Rule1.RulesetModelInstanceRule(),
-            index_rmr=PROPOSED,
+            index_rmd=PROPOSED,
             id="21-1",
             description="For systems using purchased hot water or steam, the heating source shall be "
             "modeled as purchased hot water or steam in both the proposed design and "
@@ -37,12 +37,12 @@ class Section21Rule1(RuleDefinitionListIndexedBase):
     class RulesetModelInstanceRule(PartialRuleDefinition):
         def __init__(self):
             super(Section21Rule1.RulesetModelInstanceRule, self,).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=False, PROPOSED=True
                 ),
             )
 
         def applicability_check(self, context, calc_vals, data):
-            rmi_p = context.PROPOSED
-            purchased_chw_hhw_status_dict_p = check_purchased_chw_hhw_status_dict(rmi_p)
+            rmd_p = context.PROPOSED
+            purchased_chw_hhw_status_dict_p = check_purchased_chw_hhw_status_dict(rmd_p)
             return purchased_chw_hhw_status_dict_p["purchased_heating"]

@@ -2,8 +2,8 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_supply_return_exha
     get_zone_supply_return_exhaust_relief_terminal_fan_power_dict,
 )
 from rct229.schema.config import ureg
-from rct229.schema.schema_utils import quantify_rmr
-from rct229.schema.validate import schema_validate_rmr
+from rct229.schema.schema_utils import quantify_rmd
+from rct229.schema.validate import schema_validate_rmd
 
 TEST_RMD = {
     "id": "test_rmd",
@@ -225,11 +225,11 @@ TEST_RMD_FULL = {
     "data_timestamp": "2024-02-12T09:00Z",
 }
 
-TEST_RMI = quantify_rmr(TEST_RMD_FULL)["ruleset_model_descriptions"][0]
+TEST_RMI = quantify_rmd(TEST_RMD_FULL)["ruleset_model_descriptions"][0]
 
 
 def test__TEST_RMD__is_valid():
-    schema_validation_result = schema_validate_rmr(TEST_RMD_FULL)
+    schema_validation_result = schema_validate_rmd(TEST_RMD_FULL)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"

@@ -17,8 +17,8 @@ LightingSpaceOptions2019ASHRAE901TG37 = SchemaEnums.schema_enums[
 EnergySourceOptions = SchemaEnums.schema_enums["EnergySourceOptions"]
 
 
-def is_space_a_computer_room(rmi: dict, space_id: str) -> bool:
-    space = find_exactly_one_space(rmi, space_id)
+def is_space_a_computer_room(rmd: dict, space_id: str) -> bool:
+    space = find_exactly_one_space(rmd, space_id)
     is_space_a_computer_room_flag = (
         space.get("lighting_space_type")
         == LightingSpaceOptions2019ASHRAE901TG37.COMPUTER_ROOM
@@ -31,7 +31,7 @@ def is_space_a_computer_room(rmi: dict, space_id: str) -> bool:
                 * max(
                     1.0,
                     get_max_schedule_multiplier_hourly_value_or_default(
-                        rmi, misc_equip.get("multiplier_schedule"), 1.0
+                        rmd, misc_equip.get("multiplier_schedule"), 1.0
                     ),
                 )
                 for misc_equip in find_all("$.miscellaneous_equipment[*]", space)

@@ -10,25 +10,25 @@ class Section12Rule1(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section12Rule1, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=True, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section12Rule1.BuildingRule(),
-            index_rmr=USER,
+            index_rmd=USER,
             id="12-1",
             description=(
-                "Number of spaces modeled in User RMR and Baseline RMR are the same"
+                "Number of spaces modeled in User RMD and Baseline RMD are the same"
             ),
             ruleset_section_title="Receptacle",
             standard_section="Section Table G3.1-12 Modeling Requirements for the Proposed design",
             is_primary_rule=True,
-            rmr_context="ruleset_model_descriptions/0/buildings",
+            rmd_context="ruleset_model_descriptions/0/buildings",
         )
 
     class BuildingRule(RuleDefinitionBase):
         def __init__(self):
             super(Section12Rule1.BuildingRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=True, BASELINE_0=True, PROPOSED=False
                 ),
             )

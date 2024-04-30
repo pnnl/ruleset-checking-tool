@@ -29,7 +29,7 @@ class Section5Rule14(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule14, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             required_fields={
@@ -37,7 +37,7 @@ class Section5Rule14(RuleDefinitionListIndexedBase):
                 "weather": ["climate_zone"],
             },
             each_rule=Section5Rule14.BuildingRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="5-14",
             description="For building area types included in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table G3.1.1-1 based on the area of gross above-grade walls that separate conditioned spaces and semi-heated spaces from the exterior.",
             ruleset_section_title="Envelope",
@@ -50,7 +50,7 @@ class Section5Rule14(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule14.BuildingRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={
@@ -60,7 +60,7 @@ class Section5Rule14(RuleDefinitionListIndexedBase):
                         "area_type_vertical_fenestration",
                     ],
                 },
-                index_rmr=BASELINE_0,
+                index_rmd=BASELINE_0,
                 each_rule=Section5Rule14.BuildingRule.AreaTypeRule(),
             )
 
@@ -107,7 +107,7 @@ class Section5Rule14(RuleDefinitionListIndexedBase):
         class AreaTypeRule(RuleDefinitionBase):
             def __init__(self):
                 super(Section5Rule14.BuildingRule.AreaTypeRule, self).__init__(
-                    rmrs_used=produce_ruleset_model_instance(
+                    rmds_used=produce_ruleset_model_instance(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
                 )
