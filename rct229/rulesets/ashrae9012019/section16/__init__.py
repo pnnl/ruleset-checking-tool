@@ -4,8 +4,8 @@ import importlib
 __all__ = [
     # "section16rule1",
     "section16rule2",
-    # "section16rule3",
-    # "section16rule4",
+    "section16rule3",
+    "section16rule4",
     # "section16rule5",
     # "section16rule6",
     # "section16rule7",
