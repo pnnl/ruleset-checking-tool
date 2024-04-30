@@ -32,8 +32,8 @@ def calc_vals_converter(calc_vals):
 
     """
     calc_vals_dict = []
-    for key in calc_vals.keys():
-        calc_val = dict()
+    for key in calc_vals:
+        calc_val = {}
         calc_val["variable"] = key
         value = calc_vals[key]
         if isinstance(value, str):
@@ -41,6 +41,9 @@ def calc_vals_converter(calc_vals):
             if len(numerical_value) > 1 and numerical_value[1] in _UNIT_LIST:
                 calc_val["value"] = numerical_value[0]
                 calc_val["unit"] = numerical_value[1]
+            elif len(numerical_value) > 1 and numerical_value[1] == 'R':
+                calc_val["value"] = numerical_value[0]
+                calc_val["unit"] = "delta F"
             else:
                 calc_val["value"] = value
         else:
@@ -71,7 +74,7 @@ def aggregate_outcomes(outcomes):
             elif type(result) is dict and any(
                 [
                     key.startswith("INVALID_") and key.endswith("_CONTEXT")
-                    for key in result.keys()
+                    for key in result
                 ]
             ):
                 summary_dict["number_invalid_context"] += 1

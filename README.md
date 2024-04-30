@@ -37,7 +37,7 @@ print(run())
 You can also call evaluation functions from its command line tool. Example is given below:
 
 ```bash
-rct229 evaluate -rs ashrae9012019 -f examples\chicago_demo\baseline_model.json -f examples\chicago_demo\proposed_model.json -f examples\chicago_demo\user_model.json -r ASHRAE9012019_DETAIL`
+rct229 evaluate -rs ashrae9012019 -f examples\chicago_demo\baseline_model.json -f examples\chicago_demo\proposed_model.json -f examples\chicago_demo\user_model.json -r ASHRAE9012019DetailReport`
 ```
 
 ## About ASHRAE 229P

@@ -70,8 +70,8 @@ class Section22Rule15(RuleDefinitionListIndexedBase):
             )
 
             return {
-                "approach_b": CalcQ("temperature", approach_b),
-                "target_approach_b": CalcQ("temperature", target_approach_b),
+                "approach_b": CalcQ("temperature_difference", approach_b),
+                "target_approach_b": CalcQ("temperature_difference", target_approach_b),
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
