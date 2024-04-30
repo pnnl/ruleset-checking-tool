@@ -38,7 +38,7 @@ EFLH_THRESHOLD = 40
 
 
 def does_zone_meet_g3_1_1c(
-    rmi: dict,
+    rmd: dict,
     zone_id: str,
     is_leap_year: bool,
     zones_and_systems: dict[str, dict[Literal["expected_system_type"], Type[HVAC_SYS]]],
@@ -55,7 +55,7 @@ def does_zone_meet_g3_1_1c(
 
     Parameters
     ----------
-    rmi dict
+    rmd dict
         A dictionary representing a ruleset model instance as defined by the ASHRAE229 schema
     zone_id str
         zone id
@@ -71,7 +71,7 @@ def does_zone_meet_g3_1_1c(
 
     def get_zone_weekly_eflh(z_id: str) -> float:
         # function to get weekly zone eflh
-        zone_eflh = get_zone_eflh(rmi, z_id, is_leap_year)
+        zone_eflh = get_zone_eflh(rmd, z_id, is_leap_year)
         return (
             zone_eflh / NUMBER_OF_WEEKS_IN_LEAP_YEAR
             if is_leap_year
@@ -91,7 +91,7 @@ def does_zone_meet_g3_1_1c(
     )
     meet_g3_1_1c_flag = False
     if system_matched:
-        zones_on_same_floor_ids = get_zones_on_same_floor_list(rmi, zone_id)
+        zones_on_same_floor_ids = get_zones_on_same_floor_list(rmd, zone_id)
         # drop zone_id in the list
         if zone_id in zones_on_same_floor_ids:
             # in case when floor name is not provided in the RPD.
@@ -107,7 +107,7 @@ def does_zone_meet_g3_1_1c(
         )
 
         # calculate the zone internal loads and eflh
-        zone_internal_loads = get_zone_peak_internal_load_floor_area_dict(rmi, zone_id)
+        zone_internal_loads = get_zone_peak_internal_load_floor_area_dict(rmd, zone_id)
         zone_eflh = get_zone_weekly_eflh(zone_id)
 
         # In here, the function assumes the zones_and_systems keys are
@@ -117,7 +117,7 @@ def does_zone_meet_g3_1_1c(
                 (
                     # tuple, 0 is peak load dict, 1 is weekly eflh
                     get_zone_peak_internal_load_floor_area_dict(
-                        rmi, other_match_zone_id
+                        rmd, other_match_zone_id
                     ),
                     get_zone_weekly_eflh(other_match_zone_id),
                 )
@@ -159,6 +159,6 @@ def does_zone_meet_g3_1_1c(
         )
 
         if meet_g3_1_1c_flag:
-            meet_g3_1_1c_flag = zone_id not in get_zone_computer_rooms(rmi)
+            meet_g3_1_1c_flag = zone_id not in get_zone_computer_rooms(rmd)
 
     return meet_g3_1_1c_flag

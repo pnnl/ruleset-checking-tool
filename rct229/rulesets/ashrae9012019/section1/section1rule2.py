@@ -18,7 +18,7 @@ class Section1Rule2(RuleDefinitionBase):
 
     def __init__(self):
         super(Section1Rule2, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=True,
                 BASELINE_0=True,
                 BASELINE_90=True,
@@ -26,7 +26,7 @@ class Section1Rule2(RuleDefinitionBase):
                 BASELINE_270=True,
                 PROPOSED=True,
             ),
-            rmrs_used_optional=produce_ruleset_model_instance(
+            rmds_used_optional=produce_ruleset_model_instance(
                 USER=True,
                 BASELINE_0=True,
                 BASELINE_90=True,
@@ -40,7 +40,7 @@ class Section1Rule2(RuleDefinitionBase):
             ruleset_section_title="Performance Calculations",
             standard_section="Section G1.2.2",
             is_primary_rule=True,
-            rmr_context="ruleset_model_descriptions/0",
+            rmd_context="ruleset_model_descriptions/0",
         )
 
     def get_calc_vals(self, context, data=None):

@@ -3,7 +3,7 @@
 **Description:** Get the most used weekday hourly schedule from an annual 8760 schedule as list of hourly values for a 24 hour period.
 
 **Inputs:**  
-- **B-RMI,P-RMI**: To calculate the the most used weekday hourly schedule from an annual 8760 schedule.   
+- **B-RMD,P-RMI**: To calculate the the most used weekday hourly schedule from an annual 8760 schedule.   
 - **RMD**: To obtain the data elements associated with the Calendar object (day of week for Jan 1st, is leap year, and has daylight savings time). 
 - **schedule_obj**: The schedule object sent to this function.  
 

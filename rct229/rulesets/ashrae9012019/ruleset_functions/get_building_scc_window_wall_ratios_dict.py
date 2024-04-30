@@ -6,9 +6,9 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type imp
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
     SurfaceConditioningCategory as SCC,
-    ZoneConditioningDataDict,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
+    ZoneConditioningDataDict,
     get_surface_conditioning_category_dict,
 )
 from rct229.schema.schema_enums import SchemaEnums

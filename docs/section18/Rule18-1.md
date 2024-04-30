@@ -34,9 +34,9 @@
   target_baseline_system_dict: `expected_system_type = target_baseline_system_dict[zone]["EXPECTED_SYSTEM_TYPE"]`
 - set the system_type_origin to the SYSTEM_ORIGIN given by the target_baseline_system_dict: `system_type_origin =
   target_baseline_system_type_dict[zone]["SYSTEM_ORIGIN"]
-- get the baseline system types in the building: `baseline_hvac_system_dict = get_baseline_system_types(B-RMI)`
+- get the baseline system types in the building: `baseline_hvac_system_dict = get_baseline_system_types(B-RMD)`
 - now check whether the system(s) serving this zone match the expected system. Start by getting the list of HVAC systems
-  that serve the zone: `hvac_systems_serving_zone = get_list_hvac_systems_associated_with_zone(B-RMI)`
+  that serve the zone: `hvac_systems_serving_zone = get_list_hvac_systems_associated_with_zone(B-RMD)`
 - get a list of all of the HVAC systems that are of the same type as the expected system type for the
   zone: `systems_of_expected_type_list = baseline_hvac_system_dict[expected_system_type]`
 - set enum result to FAIL this will be set to PASS once we start looking at systems: `result = FAIL`

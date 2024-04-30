@@ -24,7 +24,7 @@ from rct229.utils.utility_functions import (
 BUILDING_TOTAL_LAB_EXHAUST_CFM_THRESHOLD = 15_000 * ureg("ft^3 / min")
 
 
-def does_zone_meet_g3_1_1d(rmi: dict, zone_id: str) -> bool:
+def does_zone_meet_g3_1_1d(rmd: dict, zone_id: str) -> bool:
     """
     Determines whether a given zone meets the G3_1_1d exception "For laboratory spaces in a building having a total
     laboratory exhaust rate greater than 15,000 cfm, use a single system of type 5 or 7 serving only those spaces."
@@ -32,7 +32,7 @@ def does_zone_meet_g3_1_1d(rmi: dict, zone_id: str) -> bool:
 
     Parameters
     ----------
-    rmi dict
+    rmd dict
         A dictionary representing a ruleset model instance as defined by the ASHRAE229 schema
     zone_id str
         zone id
@@ -50,7 +50,7 @@ def does_zone_meet_g3_1_1d(rmi: dict, zone_id: str) -> bool:
         """
         return sum(
             [
-                find_exactly_one_terminal_unit(rmi, terminal_id).get(
+                find_exactly_one_terminal_unit(rmd, terminal_id).get(
                     "primary_airflow", ZERO.FLOW
                 )
                 for terminal_id in terminal_list
@@ -67,7 +67,7 @@ def does_zone_meet_g3_1_1d(rmi: dict, zone_id: str) -> bool:
         """
         return sum(
             [
-                find_exactly_one_terminal_unit(rmi, terminal_id).get(
+                find_exactly_one_terminal_unit(rmd, terminal_id).get(
                     "primary_airflow", ZERO.FLOW
                 )
                 for terminal_id in terminal_list
@@ -81,25 +81,25 @@ def does_zone_meet_g3_1_1d(rmi: dict, zone_id: str) -> bool:
         return sum(
             find_all(
                 "$.fan_system.exhaust_fans[*].design_airflow",
-                find_exactly_one_hvac_system(rmi, hvac_id),
+                find_exactly_one_hvac_system(rmd, hvac_id),
             ),
             ZERO.FLOW,
         )
 
-    laboratory_zones_list = get_building_lab_zones_list(rmi)
+    laboratory_zones_list = get_building_lab_zones_list(rmd)
     building_total_lab_exhaust = get_building_total_lab_exhaust_from_zone_exhaust_fans(
-        rmi
+        rmd
     )
 
     dict_of_zones_and_terminal_units_served_by_hvac_sys = (
-        get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmi)
+        get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmd)
     )
 
     if building_total_lab_exhaust <= BUILDING_TOTAL_LAB_EXHAUST_CFM_THRESHOLD:
         for lab_zone_id in laboratory_zones_list:
-            lab_zone = find_exactly_one_zone(rmi, lab_zone_id)
+            lab_zone = find_exactly_one_zone(rmd, lab_zone_id)
             hvac_sys_list_serving_zone = get_list_hvac_systems_associated_with_zone(
-                rmi, lab_zone_id
+                rmd, lab_zone_id
             )
 
             zone_total_exhaust = ZERO.FLOW
