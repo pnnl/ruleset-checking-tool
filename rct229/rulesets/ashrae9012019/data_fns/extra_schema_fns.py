@@ -106,7 +106,7 @@ def compare_context_pair(
                 f'path: {element_json_path}: data object {index_context["id"]} in index context does not match the one {compare_context["id"]} in compare context'
             )
             matched = False
-        print(f"index_context:\n{index_context}")
+
         for key in index_context:
             key_schema = extra_schema[key]
             extra_schema_data_group = get_extra_schema_by_data_type(
@@ -120,7 +120,6 @@ def compare_context_pair(
             if isinstance(new_extra_schema, str) and new_extra_schema in exception_list:
                 # avoid processing data outside the master schema
                 continue
-
             matched = (
                 compare_context_pair(
                     index_context[key],
