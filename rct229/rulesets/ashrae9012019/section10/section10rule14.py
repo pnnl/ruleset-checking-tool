@@ -295,9 +295,6 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
                     for expected_eff_b in expected_effs_b
                     if expected_eff_b[1] in [eff[1] for eff in modeled_effs_b]
                 ]
-                assert len(modeled_effs_b) == len(
-                    expected_effs_b
-                ), "The number of modeled efficiencies does not match the number of expected efficiencies. Check for duplicated efficiency metrics in the modeled efficiencies."
 
             else:
                 expected_effs_b = []
@@ -356,7 +353,7 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
                 "is_zone_agg_factor_undefined_and_needed"
             ]
 
-            # Case 3 and 7 both satisfied here
+            # Case 3, 4, 7 and 10 all satisfied here
             if (
                 len(modeled_effs_b) > 0
                 and all(
@@ -366,10 +363,11 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
                     )
                 )
                 and total_capacity_b is None
+                or is_zone_agg_factor_undefined_and_needed
             ):
                 return True
 
-            # Case 8
+            # Case 8 and 11 satisfied here
             if (
                 hvac_system_type_b == HVAC_SYS.SYS_4
                 and modeled_high_temp_eff_b is not None
@@ -377,30 +375,7 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
                 and modeled_low_temp_eff_b is not None
                 and modeled_low_temp_eff_b == expected_low_temp_eff_b
                 and total_capacity_b is None
-            ):
-                return True
-
-            # Case 4 and 10 both satisfied here
-            if (
-                len(modeled_effs_b) > 0
-                and all(
-                    modeled_eff_b[0] == expected_eff_b[0]
-                    for modeled_eff_b, expected_eff_b in zip(
-                        modeled_effs_b, expected_effs_b
-                    )
-                )
-                and is_zone_agg_factor_undefined_and_needed
-            ):
-                return True
-
-            # Case 11
-            if (
-                hvac_system_type_b == HVAC_SYS.SYS_4
-                and modeled_high_temp_eff_b is not None
-                and modeled_high_temp_eff_b == expected_high_temp_eff_b
-                and modeled_low_temp_eff_b is not None
-                and modeled_low_temp_eff_b == expected_low_temp_eff_b
-                and is_zone_agg_factor_undefined_and_needed
+                or is_zone_agg_factor_undefined_and_needed
             ):
                 return True
 
@@ -414,21 +389,13 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
             ):
                 return True
 
-            # Case 9
+            # Case 9 and 12 satisfied here
             if (
                 hvac_system_type_b == HVAC_SYS.SYS_4
                 and modeled_high_temp_eff_b == expected_high_temp_eff_b
                 and modeled_low_temp_eff_b is None
                 and total_capacity_b is None
-            ):
-                return True
-
-            # Case 12
-            if (
-                hvac_system_type_b == HVAC_SYS.SYS_4
-                and modeled_high_temp_eff_b == expected_high_temp_eff_b
-                and modeled_low_temp_eff_b is None
-                and is_zone_agg_factor_undefined_and_needed
+                or is_zone_agg_factor_undefined_and_needed
             ):
                 return True
 
