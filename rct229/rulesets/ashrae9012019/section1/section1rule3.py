@@ -77,11 +77,11 @@ class Section1Rule3(RuleDefinitionBase):
                     find_one("$.output.baseline_building_unregulated_energy_cost", rmd)
                 )
 
-        pci_target_set = list(filter(lambda x: x is not None, pci_target_set))
-        bpf_set = list(filter(lambda x: x is not None, bpf_set))
-        bbp_set = list(filter(lambda x: x is not None, bbp_set))
-        bbrec_set = list(filter(lambda x: x is not None, bbrec_set))
-        bbuec_set = list(filter(lambda x: x is not None, bbuec_set))
+        pci_target_set = list(set(filter(lambda x: x is not None, pci_target_set)))
+        bpf_set = list(set(filter(lambda x: x is not None, bpf_set)))
+        bbp_set = list(set(filter(lambda x: x is not None, bbp_set)))
+        bbrec_set = list(set(filter(lambda x: x is not None, bbrec_set)))
+        bbuec_set = list(set(filter(lambda x: x is not None, bbuec_set)))
 
         assert_(
             len(pci_target_set) >= 1,
@@ -93,11 +93,11 @@ class Section1Rule3(RuleDefinitionBase):
         assert_(len(bbuec_set) >= 1, "At least one `bbuec_set` value must exist.")
 
         return {
-            "pci_target_set": list(set(pci_target_set)),
-            "bpf_set": list(set(bpf_set)),
-            "bbp_set": list(set(bbp_set)),
-            "bbrec_set": list(set(bbrec_set)),
-            "bbuec_set": list(set(bbuec_set)),
+            "pci_target_set": pci_target_set,
+            "bpf_set": bpf_set,
+            "bbp_set": bbp_set,
+            "bbrec_set": bbrec_set,
+            "bbuec_set": bbuec_set,
         }
 
     def rule_check(self, context, calc_vals=None, data=None):
