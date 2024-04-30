@@ -25,7 +25,7 @@ Logic:
     - look at SHW use: `for use_id in shw_types_and_uses_dict[shw_use_type]:`
         - get the shw_use using get_obj_by_id: `shw_use = get_obj_by_id(RMD, use_id)`
         - get the distribution id: `distribution_id = shw_use.served_by_distribution_system`
-        - add the distribution id to the list: shw_and_equip_dict[shw_use_type]["SHWDistribution"].append(distribution_id)
+        - add the distribution id to the list: `shw_and_equip_dict[shw_use_type]["SHWDistribution"].append(distribution_id)`
         - get the distribution using get_obj_by_id: `distribution = get_obj_by_id(RMD, distribution_id)`
         - now we need to get all of the equipment connected to this distribution system.
         - get the tanks: `tanks = distribution.tanks`
