@@ -22,13 +22,13 @@ class MissingKeyException(RCTException):
         super().__init__(message)
 
 
-def assert_(bool, err_msg):
-    if not bool:
+def assert_(flag: bool, err_msg: str) -> bool:
+    if not flag:
         raise RCTFailureException(err_msg)
-    return bool
+    return flag
 
 
-def getattr_(obj, obj_name: str, first_key, *remaining_keys):
+def getattr_(obj: dict, obj_name: str, first_key: str, *remaining_keys: str) -> any:
     """Gets the value inside a dictionary described by a key path or raises an expection
 
     Parameters
@@ -46,7 +46,7 @@ def getattr_(obj, obj_name: str, first_key, *remaining_keys):
     Returns
     -------
     any
-        The value stored the the given key path
+        The value stored the given key path
 
     Raises
     ------

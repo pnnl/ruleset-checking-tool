@@ -5,7 +5,7 @@ class MyRuleDefinition(RuleDefinitionBase):
     def __init__(self, user_rmr, baseline_rmr, proposed_rmr):
         self.id = "15-1"
         self.description = "My description"
-        self.rmr_context = "transformers"
+        self.rmd_context = "transformers"
         super(MyRuleDefinition, self).__init__(user_rmr, baseline_rmr, proposed_rmr)
 
     def check_applicability(self):

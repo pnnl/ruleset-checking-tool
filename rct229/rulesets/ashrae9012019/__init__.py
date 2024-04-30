@@ -6,6 +6,7 @@ from rct229.schema.schema_store import SchemaStore
 
 # Add all available rule modules in __all__
 __all__ = [
+    "section1",
     "section4",
     "section5",
     "section6",

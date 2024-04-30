@@ -12,7 +12,7 @@ LightingSpaceOptions2019ASHRAE901TG37 = SchemaEnums.schema_enums[
 ]
 
 
-def get_number_of_floors(climate_zone, rmi):
+def get_number_of_floors(climate_zone: str, rmd: dict) -> int:
     """
     gets the number of floors in the building. Parking Garages are not counted
 
@@ -20,7 +20,7 @@ def get_number_of_floors(climate_zone, rmi):
     ----------
     climate_zone: str
         One of the ClimateZoneOptions2019ASHRAE901 enumerated values
-    rmi dict
+    rmd dict
         A dictionary representing a ruleset model instance as defined by the ASHRAE229 schema
 
     Returns
@@ -33,13 +33,13 @@ def get_number_of_floors(climate_zone, rmi):
         [
             building.get("number_of_floors_above_grade", 0)
             + building.get("number_of_floors_below_grade", 0)
-            for building in find_all("$.buildings[*]", rmi)
+            for building in find_all("$.buildings[*]", rmd)
         ]
     )
 
     if number_of_floors <= 0:
         zone_conditioning_category_dict = get_zone_conditioning_category_rmi_dict(
-            climate_zone, rmi
+            climate_zone, rmd
         )
 
         def is_zone_conditioned(zone):
@@ -65,7 +65,7 @@ def get_number_of_floors(climate_zone, rmi):
                 ]
             )
 
-        zone_list = find_all("$.buildings[*].building_segments[*].zones[*]", rmi)
+        zone_list = find_all("$.buildings[*].building_segments[*].zones[*]", rmd)
         conditioned_zone_list = filter(is_zone_conditioned, zone_list)
         no_parking_conditioned_zone_list = filter(
             any_space_in_zone_parking_garage, conditioned_zone_list

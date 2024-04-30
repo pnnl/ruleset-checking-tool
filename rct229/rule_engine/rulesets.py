@@ -5,6 +5,7 @@ class RuleSet:
 
 class RuleSetTest:
     ASHRAE9012019_TEST_LIST = [
+        "section1",
         "section4",
         "section5",
         "section6",

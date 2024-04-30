@@ -4,7 +4,7 @@ from rct229.schema.schema_enums import SchemaEnums
 def find_osstd_table_entry(match_field_name_value_pairs, osstd_table):
     """Find a specific entry in an OSSTD table
 
-    This takes advantage of the consistent structure accross all the OSSTD
+    This takes advantage of the consistent structure across all the OSSTD
     JSON files. Each file contains a dictionary with a single key. The value
     associated with that key is a list of dictionaries. This function searches
     through those inner dictionaries to find one that matches all the

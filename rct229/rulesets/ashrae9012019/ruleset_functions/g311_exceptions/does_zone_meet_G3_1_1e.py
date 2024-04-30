@@ -25,7 +25,7 @@ ELIGIBLE_SPACE_TYPES = [
 ]
 
 
-def does_zone_meet_g3_1_1e(rmi_b, rmi_p, zone_id):
+def does_zone_meet_g3_1_1e(rmd_b: dict, rmd_p: dict, zone_id: str) -> bool:
     """
     determines whether a given zone meets the G3_1_1e exception "Thermal zones designed with heating-only systems in
     the proposed design serving storage rooms, stairwells, vestibules, electrical/mechanical rooms, and restrooms not
@@ -34,9 +34,9 @@ def does_zone_meet_g3_1_1e(rmi_b, rmi_p, zone_id):
 
     Parameters
     ----------
-    rmi_b dict
+    rmd_b dict
         A dictionary representing a ruleset model instance as defined by the ASHRAE229 schema, baseline model
-    rmi_p dict
+    rmd_p dict
         A dictionary representing a ruleset model instance as defined by the ASHRAE229 schema, baseline model
     zone_id str
         zone id
@@ -45,7 +45,7 @@ def does_zone_meet_g3_1_1e(rmi_b, rmi_p, zone_id):
     -------
 
     """
-    zone_b = find_exactly_one_zone(rmi_b, zone_id)
+    zone_b = find_exactly_one_zone(rmd_b, zone_id)
 
     zone_meet_g_3_1_1e = all(
         [
@@ -55,9 +55,9 @@ def does_zone_meet_g3_1_1e(rmi_b, rmi_p, zone_id):
     )
 
     if not zone_meet_g_3_1_1e:
-        zone_meet_g_3_1_1e = is_zone_likely_a_vestibule(rmi_b, zone_id)
+        zone_meet_g_3_1_1e = is_zone_likely_a_vestibule(rmd_b, zone_id)
 
     if zone_meet_g_3_1_1e:
-        zone_meet_g_3_1_1e = is_zone_mechanically_heated_and_not_cooled(rmi_p, zone_id)
+        zone_meet_g_3_1_1e = is_zone_mechanically_heated_and_not_cooled(rmd_p, zone_id)
 
     return zone_meet_g_3_1_1e

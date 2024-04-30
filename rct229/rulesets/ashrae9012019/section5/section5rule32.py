@@ -26,11 +26,11 @@ class Section5Rule32(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule32, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=True, BASELINE_0=False, PROPOSED=True
             ),
             each_rule=Section5Rule32.BuildingRule(),
-            index_rmr=PROPOSED,
+            index_rmd=PROPOSED,
             id="5-32",
             description="The proposed roof surfaces shall be modeled using the same solar reflectance as in the user "
             "model if the aged test data are available, or equal to 0.7 default reflectance",
@@ -44,11 +44,11 @@ class Section5Rule32(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule32.BuildingRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=True, BASELINE_0=False, PROPOSED=True
                 ),
                 each_rule=Section5Rule32.BuildingRule.RoofRule(),
-                index_rmr=PROPOSED,
+                index_rmd=PROPOSED,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
 
@@ -71,7 +71,7 @@ class Section5Rule32(RuleDefinitionListIndexedBase):
         class RoofRule(RuleDefinitionBase):
             def __init__(self):
                 super(Section5Rule32.BuildingRule.RoofRule, self).__init__(
-                    rmrs_used=produce_ruleset_model_instance(
+                    rmds_used=produce_ruleset_model_instance(
                         USER=True, BASELINE_0=False, PROPOSED=True
                     ),
                     required_fields={

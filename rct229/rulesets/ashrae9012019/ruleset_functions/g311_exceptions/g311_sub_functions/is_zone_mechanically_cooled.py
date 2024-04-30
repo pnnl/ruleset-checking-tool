@@ -16,13 +16,13 @@ CoolingSystemOptions = SchemaEnums.schema_enums["CoolingSystemOptions"]
 CoolingSourceOptions = SchemaEnums.schema_enums["CoolingSourceOptions"]
 
 
-def is_zone_mechanically_cooled(rmi, zone_id):
+def is_zone_mechanically_cooled(rmd: dict, zone_id: str) -> bool:
     """
     Function determines whether a zone is cooled. Checks for transfer air
 
     Parameters
     ----------
-    rmi dict
+    rmd dict
         A dictionary representing a ruleset model instance as defined by the ASHRAE229 schema
     zone_id str
         zone id
@@ -31,15 +31,15 @@ def is_zone_mechanically_cooled(rmi, zone_id):
     -------
     Boolean True if it is determined to be cooled, False otherwise.
     """
-    list_hvac_system_ids = get_list_hvac_systems_associated_with_zone(rmi, zone_id)
+    list_hvac_system_ids = get_list_hvac_systems_associated_with_zone(rmd, zone_id)
 
-    def does_hvac_has_cooling_sys(hvac_system_id):
-        hvac = find_exactly_one_hvac_system(rmi, hvac_system_id)
+    def does_hvac_has_cooling_sys(hvac_system_id: str) -> bool:
+        hvac = find_exactly_one_hvac_system(rmd, hvac_system_id)
         cooling_type = find_one("$.cooling_system.type", hvac)
         return cooling_type not in [None, CoolingSourceOptions.NONE]
 
-    def does_zone_terminals_have_cooling_type(thermal_zone_id):
-        thermal_zone = find_exactly_one_zone(rmi, thermal_zone_id)
+    def does_zone_terminals_have_cooling_type(thermal_zone_id: str) -> bool:
+        thermal_zone = find_exactly_one_zone(rmd, thermal_zone_id)
         terminal_list = find_all("$.terminals[*]", thermal_zone)
         return any(
             [
@@ -57,7 +57,7 @@ def is_zone_mechanically_cooled(rmi, zone_id):
     ) or does_zone_terminals_have_cooling_type(zone_id)
 
     if not has_cooling_system:
-        zone = find_exactly_one_zone(rmi, zone_id)
+        zone = find_exactly_one_zone(rmd, zone_id)
         if zone.get("transfer_airflow_rate", ZERO.FLOW) > ZERO.FLOW:
             # in this case, we are checking the source zone
             transfer_source_zone_id = getattr_(
@@ -65,7 +65,7 @@ def is_zone_mechanically_cooled(rmi, zone_id):
             )
             # get the HVAC system list from the source zone
             list_hvac_system_ids = get_list_hvac_systems_associated_with_zone(
-                rmi, transfer_source_zone_id
+                rmd, transfer_source_zone_id
             )
             has_cooling_system = any(
                 flat_map(

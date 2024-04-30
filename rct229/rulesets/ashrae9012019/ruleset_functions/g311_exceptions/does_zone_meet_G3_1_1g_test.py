@@ -1,8 +1,8 @@
 from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.does_zone_meet_G3_1_1g import (
     does_zone_meet_g3_1_1g,
 )
-from rct229.schema.schema_utils import quantify_rmr
-from rct229.schema.validate import schema_validate_rmr
+from rct229.schema.schema_utils import quantify_rmd
+from rct229.schema.validate import schema_validate_rmd
 
 TEST_RMI = {
     "id": "test_rmd",
@@ -90,11 +90,11 @@ TEST_RPD_FULL = {
     "data_timestamp": "2024-02-12T09:00Z",
 }
 
-TEST_RMD_UNIT = quantify_rmr(TEST_RPD_FULL)["ruleset_model_descriptions"][0]
+TEST_RMD_UNIT = quantify_rmd(TEST_RPD_FULL)["ruleset_model_descriptions"][0]
 
 
 def test__TEST_RMD__is_valid():
-    schema_validation_result = schema_validate_rmr(TEST_RPD_FULL)
+    schema_validation_result = schema_validate_rmd(TEST_RPD_FULL)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"

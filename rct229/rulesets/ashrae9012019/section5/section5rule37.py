@@ -31,7 +31,7 @@ class Section5Rule37(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule37, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=False, PROPOSED=True
             ),
             required_fields={
@@ -39,7 +39,7 @@ class Section5Rule37(RuleDefinitionListIndexedBase):
                 "weather": ["climate_zone"],
             },
             each_rule=Section5Rule37.BuildingRule(),
-            index_rmr=PROPOSED,
+            index_rmd=PROPOSED,
             id="5-37",
             description="The proposed air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 0.6 cfm/ft2 for buildings providing verification in accordance with Section 5.9.1.2. The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section G3.1.1.4. Exceptions: When whole-building air leakage testing, in accordance with Section 5.4.3.1.1, is specified during design and completed after construction, the proposed design air leakage rate of the building envelope shall be as measured.",
             ruleset_section_title="Envelope",
@@ -53,7 +53,7 @@ class Section5Rule37(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionBase):
         def __init__(self):
             super(Section5Rule37.BuildingRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=False, PROPOSED=True
                 ),
                 required_fields={"$..zones[*]": ["surfaces"]},

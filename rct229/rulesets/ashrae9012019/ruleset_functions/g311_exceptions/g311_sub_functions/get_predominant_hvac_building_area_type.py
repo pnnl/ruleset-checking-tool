@@ -3,7 +3,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_fu
 )
 
 
-def get_predominant_hvac_building_area_type(climate_zone: str, rmi: dict):
+def get_predominant_hvac_building_area_type(climate_zone: str, rmd: dict) -> str:
     """
 
     Sort the building area type and zones and return the building type that has the largest floor area
@@ -13,7 +13,7 @@ def get_predominant_hvac_building_area_type(climate_zone: str, rmi: dict):
     ----------
     climate_zone str
         One of the ClimateZoneOptions2019ASHRAE901 enumerated values
-    rmi dict
+    rmd dict
         A dictionary representing a ruleset model instance as defined by the ASHRAE229 schema
 
     Returns
@@ -22,7 +22,7 @@ def get_predominant_hvac_building_area_type(climate_zone: str, rmi: dict):
     """
     # building_area_types_and_zones_dict is guaranteed non-empty dict.
     building_area_types_and_zones_dict = get_hvac_building_area_types_and_zones_dict(
-        climate_zone, rmi
+        climate_zone, rmd
     )
     # the sorted_hvac_building_area_type is a list of tuples that consist of two elements,
     # 0 index is the key in the original dict

@@ -1,12 +1,12 @@
 import click
 
+from rct229.reports import reports as rct_report
 from rct229.rule_engine.engine import evaluate_all_rules
 from rct229.rule_engine.rulesets import RuleSet, RuleSetTest
 from rct229.ruletest_engine.run_ruletests import run_ashrae9012019_tests
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.schema.schema_store import SchemaStore
 from rct229.utils.assertions import RCTException
-from rct229.reports import reports as rct_report
 
 CONTEXT_SETTINGS = dict(help_option_names=["-h", "--help"])
 
@@ -28,7 +28,7 @@ test_short_help_text = """
     Software test workflow, add sections to do test. \n
     --ruleset or -rs: default is ashrae9012019, available: ashrae9012019\n
     argument (optional): section string, \n
-    currently available: section4, section5, section6, section 10, section18, section19, section21, section22 and section23"""
+    currently available: section1, section4, section5, section6, section18, section19, section21, section22 and section23"""
 
 
 @cli.command(
@@ -54,7 +54,7 @@ def run_test(ruleset, section=None):
         )
 
 
-# Evaluate RMR Triplet
+# Evaluate RMD Triplet
 short_help_text = """
     Run ruleset checking. arguments are \n
     --ruleset or -rs: ruleset name. Default is ashrae9012019, available options include: ashrae9012019 \n
