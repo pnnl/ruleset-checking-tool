@@ -30,11 +30,11 @@ def get_9012019_rmd_models(test_dict: dict):
     baseline_270_rmr = None
     proposed_rmr = None
 
-    # Read in transformations dictionary. This will perturb a template or fully define an RMR (if no template defined)
+    # Read in transformations dictionary. This will perturb a template or fully define an RMD (if no template defined)
     rmr_transformations_dict = test_dict["rmr_transformations"]
 
-    # If user/baseline/proposed RMR transformations exist, either update their existing template or set them directly
-    # from RMR transformations
+    # If user/baseline/proposed RMD transformations exist, either update their existing template or set them directly
+    # from RMD transformations
     if "user" in rmr_transformations_dict:
         user_rmr = rmr_transformations_dict["user"]
 

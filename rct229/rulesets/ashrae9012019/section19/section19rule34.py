@@ -24,18 +24,18 @@ class Section19Rule34(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section19Rule34, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=True, BASELINE_0=True, PROPOSED=True
             ),
             each_rule=Section19Rule34.HVACRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="19-34",
             description="Where no heating and/or cooling system is to be installed, and a heating or cooling system is being simulated only to meet the requirements described in this table, "
             "heating and/or cooling system fans shall not be simulated as running continuously during occupied hours but shall be cycled ON and OFF to meet heating and cooling loads during all hours in the baseline design.",
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1-4 Schedules Exception #1.",
             is_primary_rule=False,
-            rmr_context="ruleset_model_descriptions/0",
+            rmd_context="ruleset_model_descriptions/0",
             list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
         )
 
@@ -89,7 +89,7 @@ class Section19Rule34(RuleDefinitionListIndexedBase):
     class HVACRule(PartialRuleDefinition):
         def __init__(self):
             super(Section19Rule34.HVACRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
             )

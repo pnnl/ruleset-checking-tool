@@ -21,11 +21,11 @@ class Section19Rule8(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section19Rule8, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section19Rule8.BuildingRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="19-8",
             description="Demand control ventilation is modeled in the baseline design in systems with outdoor air capacity greater than 3000 cfm serving areas with an average occupant design capacity greater than 100 people per 1000 ft^2.",
             ruleset_section_title="HVAC - General",
@@ -37,11 +37,11 @@ class Section19Rule8(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section19Rule8.BuildingRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 each_rule=Section19Rule8.BuildingRule.HVACRule(),
-                index_rmr=BASELINE_0,
+                index_rmd=BASELINE_0,
                 list_path="$.building_segments[*].heating_ventilating_air_conditioning_systems[*]",
             )
 
@@ -72,7 +72,7 @@ class Section19Rule8(RuleDefinitionListIndexedBase):
         class HVACRule(RuleDefinitionBase):
             def __init__(self):
                 super(Section19Rule8.BuildingRule.HVACRule, self).__init__(
-                    rmrs_used=produce_ruleset_model_instance(
+                    rmds_used=produce_ruleset_model_instance(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
                     required_fields={

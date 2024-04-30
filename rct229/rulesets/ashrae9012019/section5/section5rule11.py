@@ -21,7 +21,7 @@ class Section5Rule11(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule11, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             required_fields={
@@ -29,7 +29,7 @@ class Section5Rule11(RuleDefinitionListIndexedBase):
                 "weather": ["climate_zone"],
             },
             each_rule=Section5Rule11.BuildingRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="5-11",
             description=" Baseline slab-on-grade assemblies must conform with assemblies detailed in Appendix A (Unheated Slabs A6).",
             ruleset_section_title="Envelope",
@@ -42,11 +42,11 @@ class Section5Rule11(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule11.BuildingRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 each_rule=Section5Rule11.BuildingRule.SurfaceRule(),
-                index_rmr=BASELINE_0,
+                index_rmd=BASELINE_0,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
 
@@ -68,7 +68,7 @@ class Section5Rule11(RuleDefinitionListIndexedBase):
         class SurfaceRule(PartialRuleDefinition):
             def __init__(self):
                 super(Section5Rule11.BuildingRule.SurfaceRule, self).__init__(
-                    rmrs_used=produce_ruleset_model_instance(
+                    rmds_used=produce_ruleset_model_instance(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
                 )

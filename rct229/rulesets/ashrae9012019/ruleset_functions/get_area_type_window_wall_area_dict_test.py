@@ -9,8 +9,8 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_categ
     CRAWLSPACE_HEIGHT_THRESHOLD as CRAWLSPACE_HEIGHT_THRESHOLD_QUANTITY,
 )
 from rct229.schema.config import ureg
-from rct229.schema.schema_utils import quantify_rmr
-from rct229.schema.validate import schema_validate_rmr
+from rct229.schema.schema_utils import quantify_rmd
+from rct229.schema.validate import schema_validate_rmd
 
 CLIMATE_ZONE = "CZ0A"
 POWER_DELTA = 1
@@ -26,9 +26,9 @@ POWER_THRESHOLD_100 = (CAPACITY_THRESHOLD_QUANTITY * 100 * ureg("m2")).to("W").m
 CRAWLSPACE_HEIGHT_THRESHOLD = CRAWLSPACE_HEIGHT_THRESHOLD_QUANTITY.to("m").magnitude
 
 
-# This single RMR is intended to exercise all the get_zone_conditioning_category_dict() code
-TEST_RMR = {
-    "id": "test_rmr",
+# This single rmd is intended to exercise all the get_zone_conditioning_category_dict() code
+TEST_rmd = {
+    "id": "test_rmd",
     "buildings": [
         {
             "id": "bldg_1",
@@ -510,19 +510,19 @@ TEST_RMR = {
     "type": "BASELINE_0",
 }
 
-TEST_RMR_12 = {
+TEST_rmd_12 = {
     "id": "229_01",
-    "ruleset_model_descriptions": [TEST_RMR],
+    "ruleset_model_descriptions": [TEST_rmd],
     "data_timestamp": "2024-02-12T09:00Z",
 }
 
-TEST_BUILDING = quantify_rmr(TEST_RMR_12)["ruleset_model_descriptions"][0]["buildings"][
+TEST_BUILDING = quantify_rmd(TEST_rmd_12)["ruleset_model_descriptions"][0]["buildings"][
     0
 ]
 
 
 def test__TEST_RMD__is_valid():
-    schema_validation_result = schema_validate_rmr(TEST_RMR_12)
+    schema_validation_result = schema_validate_rmd(TEST_rmd_12)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"

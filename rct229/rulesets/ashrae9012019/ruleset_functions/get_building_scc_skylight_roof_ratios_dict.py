@@ -10,9 +10,9 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type imp
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
     SurfaceConditioningCategory as SCC,
-    ZoneConditioningDataDict,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
+    ZoneConditioningDataDict,
     get_surface_conditioning_category_dict,
 )
 from rct229.schema.schema_enums import SchemaEnums
@@ -38,7 +38,7 @@ def get_building_scc_skylight_roof_ratios_dict(
             -------
             dict
                 A dictionary that saves each surface conditioning category (residential, non-residential, mixed and semi-heated)
-                with its skylight-roof-ratios for each building in RMR.
+                with its skylight-roof-ratios for each building in rmd.
                 {
                     "building_id": {"EXTERIOR RESIDENTIAL": srr_res, "EXTERIOR NON-RESIDENTIAL": srr_nonres,
                     "EXTERIOR MIXED": srr_mixed, "SEMI-EXTERIOR": srr_semiheated},

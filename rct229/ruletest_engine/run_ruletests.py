@@ -197,7 +197,7 @@ def run_test_one_jsontest(test_json):
 
 
 # if __name__ == "__main__":
-#     outcome = run_ashrae9012019_tests(section="section19")
+#     outcome = run_ashrae9012019_tests(section="section5")
 
 # run_transformer_tests()
 # run_lighting_tests()

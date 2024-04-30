@@ -32,7 +32,7 @@ def FanPowerInfo(TypedDict):
 
 
 def get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(
-    rmi: dict,
+    rmd: dict,
 ) -> dict[str, FanPowerInfo]:
     """
     Get the supply, return, exhaust, relief, and terminal total fan power for each zone. The function returns a
@@ -46,7 +46,7 @@ def get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(
 
     Parameters
     ----------
-    rmi: dict
+    rmd: dict
     A dictionary representing a RuleModelInstance object as defined by the ASHRAE229 schema
 
 
@@ -59,9 +59,9 @@ def get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(
     """
     zone_supply_return_exhaust_relief_terminal_fan_power_dict = {}
     dict_of_zones_and_terminal_units_served_by_hvac_sys = (
-        get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmi)
+        get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmd)
     )
-    for zone in find_all("$.buildings[*].building_segments[*].zones[*]", rmi):
+    for zone in find_all("$.buildings[*].building_segments[*].zones[*]", rmd):
         # Initialize parameters in a zone
         zone_total_supply_fan_power = ZERO.POWER
         zone_total_return_fan_power = ZERO.POWER
@@ -74,10 +74,10 @@ def get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(
         zone_total_terminal_fan_power = ZERO.POWER
 
         hvac_sys_list_serving_zone = get_list_hvac_systems_associated_with_zone(
-            rmi, zone["id"]
+            rmd, zone["id"]
         )
         for hvac_id in hvac_sys_list_serving_zone:
-            hvac = find_exactly_one_hvac_system(rmi, hvac_id)
+            hvac = find_exactly_one_hvac_system(rmd, hvac_id)
             hvac_system_zone_ids_list = (
                 dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_id][
                     "zone_list"
@@ -108,7 +108,7 @@ def get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(
             )
             # Convert terminal id list to terminal data list
             zone_hvac_intersection_terminals = [
-                find_exactly_one_terminal_unit(rmi, zone_terminal_id)
+                find_exactly_one_terminal_unit(rmd, zone_terminal_id)
                 for zone_terminal_id in zone_hvac_terminal_intersection_list
             ]
             # calculate the total terminal fan power from an intersection list of zone
@@ -125,7 +125,7 @@ def get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(
             # if hvac has fan system, calculate the central fan power portion for the zone
             if hvac.get("fan_system"):
                 hvac_system_terminal_list = [
-                    find_exactly_one_terminal_unit(rmi, terminal_id)
+                    find_exactly_one_terminal_unit(rmd, terminal_id)
                     for terminal_id in hvac_system_terminal_id_list
                 ]
                 hvac_total_terminal_air_flow = sum(
