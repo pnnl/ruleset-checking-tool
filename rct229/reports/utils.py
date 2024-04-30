@@ -41,7 +41,7 @@ def calc_vals_converter(calc_vals):
             if len(numerical_value) > 1 and numerical_value[1] in _UNIT_LIST:
                 calc_val["value"] = numerical_value[0]
                 calc_val["unit"] = numerical_value[1]
-            elif len(numerical_value) > 1 and numerical_value[1] == 'R':
+            elif len(numerical_value) > 1 and numerical_value[1] == "R":
                 calc_val["value"] = numerical_value[0]
                 calc_val["unit"] = "delta F"
             else:
