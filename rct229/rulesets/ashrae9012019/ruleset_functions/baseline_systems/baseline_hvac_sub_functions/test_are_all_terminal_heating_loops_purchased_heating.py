@@ -1,10 +1,10 @@
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.are_all_terminal_heating_loops_purchased_heating import (
     are_all_terminal_heating_loops_purchased_heating,
 )
-from rct229.schema.validate import schema_validate_rmr
+from rct229.schema.validate import schema_validate_rmd
 
 TEST_RMI = {
-    "id": "test_rmi",
+    "id": "test_rmd",
     "buildings": [
         {
             "id": "building_1",
@@ -53,7 +53,7 @@ TEST_RMD = {
 
 
 def test__TEST_RMD__is_valid():
-    schema_validation_result = schema_validate_rmr(TEST_RMD)
+    schema_validation_result = schema_validate_rmd(TEST_RMD)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"

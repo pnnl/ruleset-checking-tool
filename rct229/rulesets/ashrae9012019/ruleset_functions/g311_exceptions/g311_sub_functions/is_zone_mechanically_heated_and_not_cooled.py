@@ -17,13 +17,13 @@ HeatingSystemOptions = SchemaEnums.schema_enums["HeatingSystemOptions"]
 HeatingSourceOptions = SchemaEnums.schema_enums["HeatingSourceOptions"]
 
 
-def is_zone_mechanically_heated_and_not_cooled(rmi: dict, zone_id: str) -> bool:
+def is_zone_mechanically_heated_and_not_cooled(rmd: dict, zone_id: str) -> bool:
     """
     Determines whether a zone is mechanically heated, but not cooled. Checks for transfer air
 
     Parameters
     ----------
-    rmi dict
+    rmd dict
         A dictionary representing a ruleset model instance as defined by the ASHRAE229 schema
     zone_id str
         zone id
@@ -32,15 +32,15 @@ def is_zone_mechanically_heated_and_not_cooled(rmi: dict, zone_id: str) -> bool:
     -------
     Boolean True if it is determined to be heated, but not cooled, False otherwise.
     """
-    list_hvac_system_ids = get_list_hvac_systems_associated_with_zone(rmi, zone_id)
+    list_hvac_system_ids = get_list_hvac_systems_associated_with_zone(rmd, zone_id)
 
     def does_hvac_has_heating_sys(hvac_system_id: str) -> bool:
-        hvac = find_exactly_one_hvac_system(rmi, hvac_system_id)
+        hvac = find_exactly_one_hvac_system(rmd, hvac_system_id)
         heating_type = find_one("$.heating_system.type", hvac)
         return heating_type not in [None, HeatingSourceOptions.NONE]
 
     def does_zone_terminals_have_heating_type(thermal_zone_id: str) -> bool:
-        thermal_zone = find_exactly_one_zone(rmi, thermal_zone_id)
+        thermal_zone = find_exactly_one_zone(rmd, thermal_zone_id)
         terminal_list = find_all("$.terminals[*]", thermal_zone)
         return any(
             [
@@ -58,6 +58,6 @@ def is_zone_mechanically_heated_and_not_cooled(rmi: dict, zone_id: str) -> bool:
     ) or does_zone_terminals_have_heating_type(zone_id)
 
     # Check if a zone is mechanically cooled
-    is_cooled = is_zone_mechanically_cooled(rmi, zone_id)
+    is_cooled = is_zone_mechanically_cooled(rmd, zone_id)
 
     return is_heated and not is_cooled

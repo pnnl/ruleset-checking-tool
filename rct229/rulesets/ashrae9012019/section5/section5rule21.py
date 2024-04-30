@@ -19,7 +19,7 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule21, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             required_fields={
@@ -27,7 +27,7 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
                 "weather": ["climate_zone"],
             },
             each_rule=Section5Rule21.BuildingRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="5-21",
             description="Subsurface that is not regulated (not part of building envelope) must be modeled with the same area, U-factor and SHGC in the baseline as in the proposed design.",
             ruleset_section_title="Envelope",
@@ -40,11 +40,11 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule21.BuildingRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
                 each_rule=Section5Rule21.BuildingRule.UnregulatedSurfaceRule(),
-                index_rmr=BASELINE_0,
+                index_rmd=BASELINE_0,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
 
@@ -66,12 +66,12 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
                 super(
                     Section5Rule21.BuildingRule.UnregulatedSurfaceRule, self
                 ).__init__(
-                    rmrs_used=produce_ruleset_model_instance(
+                    rmds_used=produce_ruleset_model_instance(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
                     list_path="subsurfaces[*]",
                     each_rule=Section5Rule21.BuildingRule.UnregulatedSurfaceRule.UnregulatedSubsurfaceRule(),
-                    index_rmr=BASELINE_0,
+                    index_rmd=BASELINE_0,
                 )
 
             class UnregulatedSubsurfaceRule(RuleDefinitionBase):
@@ -80,7 +80,7 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
                         Section5Rule21.BuildingRule.UnregulatedSurfaceRule.UnregulatedSubsurfaceRule,
                         self,
                     ).__init__(
-                        rmrs_used=produce_ruleset_model_instance(
+                        rmds_used=produce_ruleset_model_instance(
                             USER=False, BASELINE_0=True, PROPOSED=True
                         ),
                         fail_msg=FAIL_MSG,

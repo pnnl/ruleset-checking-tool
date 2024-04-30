@@ -22,8 +22,8 @@ def get_aggregated_zone_hvac_fan_operating_schedule(
 
     Parameters
     ----------
-    rmd: dict A zone id associated with the RMR for which to create the aggregated fan operating schedule as described above.
-    zone_id: str A zone id associated with the RMR for which to create the aggregated fan operating schedule as described above.
+    rmd: dict A zone id associated with the rmd for which to create the aggregated fan operating schedule as described above.
+    zone_id: str A zone id associated with the rmd for which to create the aggregated fan operating schedule as described above.
     is_leap_year: bool, indicate whether the comparison is in a leap year or not. True / False
 
 

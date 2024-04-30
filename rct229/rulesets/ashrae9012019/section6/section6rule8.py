@@ -28,11 +28,11 @@ class Section6Rule8(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section6Rule8, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             each_rule=Section6Rule8.RulesetModelInstanceRule(),
-            index_rmr=PROPOSED,
+            index_rmd=PROPOSED,
             id="6-8",
             description="Additional occupancy sensor controls in the proposed building are modeled through schedule "
             "adjustments based on factors defined in Table G3.7.",
@@ -47,11 +47,11 @@ class Section6Rule8(RuleDefinitionListIndexedBase):
     class RulesetModelInstanceRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section6Rule8.RulesetModelInstanceRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
                 each_rule=Section6Rule8.RulesetModelInstanceRule.BuildingRule(),
-                index_rmr=PROPOSED,
+                index_rmd=PROPOSED,
                 list_path="buildings[*]",
                 required_fields={"$": ["schedules"]},
                 data_items={
@@ -65,11 +65,11 @@ class Section6Rule8(RuleDefinitionListIndexedBase):
                 super(
                     Section6Rule8.RulesetModelInstanceRule.BuildingRule, self
                 ).__init__(
-                    rmrs_used=produce_ruleset_model_instance(
+                    rmds_used=produce_ruleset_model_instance(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
                     each_rule=Section6Rule8.RulesetModelInstanceRule.BuildingRule.ZoneRule(),
-                    index_rmr=PROPOSED,
+                    index_rmd=PROPOSED,
                     list_path="$..zones[*]",
                 )
 
@@ -95,11 +95,11 @@ class Section6Rule8(RuleDefinitionListIndexedBase):
                         Section6Rule8.RulesetModelInstanceRule.BuildingRule.ZoneRule,
                         self,
                     ).__init__(
-                        rmrs_used=produce_ruleset_model_instance(
+                        rmds_used=produce_ruleset_model_instance(
                             USER=False, BASELINE_0=True, PROPOSED=True
                         ),
                         each_rule=Section6Rule8.RulesetModelInstanceRule.BuildingRule.ZoneRule.SpaceRule(),
-                        index_rmr=PROPOSED,
+                        index_rmd=PROPOSED,
                         list_path="spaces[*]",
                         required_fields={"$": ["volume"]},
                     )
@@ -117,7 +117,7 @@ class Section6Rule8(RuleDefinitionListIndexedBase):
                             Section6Rule8.RulesetModelInstanceRule.BuildingRule.ZoneRule.SpaceRule,
                             self,
                         ).__init__(
-                            rmrs_used=produce_ruleset_model_instance(
+                            rmds_used=produce_ruleset_model_instance(
                                 USER=False, BASELINE_0=True, PROPOSED=True
                             ),
                             manual_check_required_msg=MANUAL_CHECK_MSG,

@@ -29,30 +29,30 @@ class Section22Rule26(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section22Rule26, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section22Rule26.PrimaryCoolingFluidLoop(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="22-26",
             description="For chilled-water systems served by chiller(s) and serves baseline System-11, the baseline building constant-volume primary pump power shall be modeled as 12 W/gpm.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.10 Chilled-water pumps (Systems 7, 8, 11, 12, and 13)",
             is_primary_rule=True,
-            rmr_context="ruleset_model_descriptions/0",
+            rmd_context="ruleset_model_descriptions/0",
             list_path="$.fluid_loops[*]",
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.BASELINE_0
-        baseline_system_types_dict = get_baseline_system_types(rmi_b)
-        # create a list contains all HVAC systems that are modeled in the rmi_b
+        rmd_b = context.BASELINE_0
+        baseline_system_types_dict = get_baseline_system_types(rmd_b)
+        # create a list contains all HVAC systems that are modeled in the rmd_b
         available_sys_types = [
             hvac_type
             for hvac_type in baseline_system_types_dict
             if len(baseline_system_types_dict[hvac_type]) > 0
         ]
-        primary_secondary_loop_dict = get_primary_secondary_loops_dict(rmi_b)
+        primary_secondary_loop_dict = get_primary_secondary_loops_dict(rmd_b)
 
         return (
             any(
@@ -65,8 +65,8 @@ class Section22Rule26(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.BASELINE_0
-        primary_secondary_loops_dict = get_primary_secondary_loops_dict(rmi_b)
+        rmd_b = context.BASELINE_0
+        primary_secondary_loops_dict = get_primary_secondary_loops_dict(rmd_b)
         return {"primary_secondary_loops_dict": primary_secondary_loops_dict}
 
     def list_filter(self, context_item, data):
@@ -77,7 +77,7 @@ class Section22Rule26(RuleDefinitionListIndexedBase):
     class PrimaryCoolingFluidLoop(RuleDefinitionBase):
         def __init__(self):
             super(Section22Rule26.PrimaryCoolingFluidLoop, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={

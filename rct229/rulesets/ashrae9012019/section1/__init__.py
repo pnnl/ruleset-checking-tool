@@ -1,6 +1,6 @@
-# Add all available rule modules in __all__
 import importlib
 
+# Add all available rule modules in __all__
 __all__ = [
     # "section1rule1",
     "section1rule2",
