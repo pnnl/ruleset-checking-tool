@@ -19,7 +19,7 @@ class Section1Rule5(RuleDefinitionBase):
 
     def __init__(self):
         super(Section1Rule5, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=True,
                 BASELINE_0=True,
                 BASELINE_90=True,
@@ -27,7 +27,7 @@ class Section1Rule5(RuleDefinitionBase):
                 BASELINE_270=True,
                 PROPOSED=True,
             ),
-            rmrs_used_optional=produce_ruleset_model_instance(
+            rmds_used_optional=produce_ruleset_model_instance(
                 BASELINE_90=True,
                 BASELINE_180=True,
                 BASELINE_270=True,
@@ -37,7 +37,7 @@ class Section1Rule5(RuleDefinitionBase):
             ruleset_section_title="Performance Calculations",
             standard_section="Section 4.2.1.1",
             is_primary_rule=True,
-            rmr_context="ruleset_model_descriptions/0",
+            rmd_context="ruleset_model_descriptions/0",
         )
 
     def is_applicable(self, context, data=None):
