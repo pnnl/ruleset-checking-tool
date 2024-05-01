@@ -27,12 +27,9 @@ class Section1Rule2(RuleDefinitionBase):
                 PROPOSED=True,
             ),
             rmds_used_optional=produce_ruleset_model_instance(
-                USER=True,
-                BASELINE_0=True,
                 BASELINE_90=True,
                 BASELINE_180=True,
                 BASELINE_270=True,
-                PROPOSED=True,
             ),
             id="1-2",
             description="The performance of the proposed design is calculated in accordance with Standard 90.1-2019 Appendix G, where Performance Cost Index = Proposed building performance (PBP) /Baseline building performance (BBP), "
@@ -83,6 +80,11 @@ class Section1Rule2(RuleDefinitionBase):
             "At least one `baseline_building_performance_energy_cost` value must exist.",
         )
 
+        assert_(
+            bbp_set[0] > 0,
+            "The `baseline_building_performance_energy_cost` value must be greater than 0.",
+        )
+
         return {
             "pci_set": pci_set,
             "pbp_set": pbp_set,
@@ -94,10 +96,8 @@ class Section1Rule2(RuleDefinitionBase):
         pbp_set = calc_vals["pbp_set"]
         bbp_set = calc_vals["bbp_set"]
 
-        return (
-            len(pci_set) == len(pbp_set) == len(bbp_set) == 1
-            and bbp_set[0] != 0
-            and std_equal(pbp_set[0] / bbp_set[0], pci_set[0])
+        return len(pci_set) == len(pbp_set) == len(bbp_set) == 1 and std_equal(
+            pbp_set[0] / bbp_set[0], pci_set[0]
         )
 
     def get_fail_msg(self, context, calc_vals=None, data=None):
@@ -118,7 +118,5 @@ class Section1Rule2(RuleDefinitionBase):
             FAIL_MSG = (
                 "Ruleset expects exactly one BBP value to be used in the project."
             )
-        elif bbp_set[0] == 0:
-            FAIL_MSG = "Ruleset expects baseline_building_performance_energy_cost to be greater than 0."
 
         return FAIL_MSG
