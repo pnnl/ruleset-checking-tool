@@ -54,6 +54,7 @@
   
   **Notes:**
   1.  using compare_context_pair might not be the correct approach - this function requires data elements in the extra schema to have a tag "AppG P_RMD Equals U_RMD" - is it possible to pass in a custom json created for this rule which identifies which elements need to be equal?
-  2.  is there a situation where some of the equipment shouldn't be equal?  Solar hot water, for example? 
+  2.  is there a situation where some of the equipment shouldn't be equal?  Solar hot water, for example?
+  3.  extra_schema_for_SHW_comparison.json is the json file created from SHW comparison fields.yaml
 
 **[Back](../_toc.md)**
