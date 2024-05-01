@@ -6,7 +6,7 @@ Inputs:
 - **RMD**
 
 Returns:
-- **shw_and_equip_dict**: A dictionary containing where the keys are the ServiceWaterHeatingSpaceOptions2019ASHRAE901 in the RMD and values are lists of space ids.  Example:  
+- **shw_and_equip_dict**: A dictionary containing where the keys are the ServiceWaterHeatingSpaceOptions2019ASHRAE901 in the RMD and values are dictionaries where keys are the type of SWH equipment and values are the ids of the connected equipment.  Example:  
 {"DORMITORY":{"SHWDistribution":["shwd1","shwd2"], "SHWHeatingEq":["shw_eq1","shw_eq2"], "Pumps":["p1"], "Tanks":["t1"], "Piping":["piping1"], "SolarThermal":[]}}
 
 Function Call:
