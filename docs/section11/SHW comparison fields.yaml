@@ -4,11 +4,11 @@ ServiceWaterHeatingDistributionSystem:
       AppG 11-1 P_RMD Equals U_RMD: true
       AppG 11-3 P_RMD Equals B_RMD: true
     reporting_name:
-      AppG 11-1 P_RMD Equals U_RMD: "unknown"
-      AppG 11-3 P_RMD Equals B_RMD: "unknown"
+      AppG 11-1 P_RMD Equals U_RMD: false
+      AppG 11-3 P_RMD Equals B_RMD: false
     notes:
-      AppG 11-1 P_RMD Equals U_RMD: "unknown"
-      AppG 11-3 P_RMD Equals B_RMD: "unknown"
+      AppG 11-1 P_RMD Equals U_RMD: false
+      AppG 11-3 P_RMD Equals B_RMD: false
     design_supply_temperature:
       AppG 11-1 P_RMD Equals U_RMD: true
       AppG 11-3 P_RMD Equals B_RMD: true
@@ -25,26 +25,26 @@ ServiceWaterHeatingDistributionSystem:
       AppG 11-1 P_RMD Equals U_RMD: true
       AppG 11-3 P_RMD Equals B_RMD: true
     distribution_compactness:
-      AppG 11-1 P_RMD Equals U_RMD: "unknown"
-      AppG 11-3 P_RMD Equals B_RMD: "unknown"
+      AppG 11-1 P_RMD Equals U_RMD: false
+      AppG 11-3 P_RMD Equals B_RMD: false
     control_type:
-      AppG 11-1 P_RMD Equals U_RMD: "unknown"
-      AppG 11-3 P_RMD Equals B_RMD: "unknown"
+      AppG 11-1 P_RMD Equals U_RMD: false
+      AppG 11-3 P_RMD Equals B_RMD: false
     configuration_type:
       AppG 11-1 P_RMD Equals U_RMD: true
       AppG 11-3 P_RMD Equals B_RMD: true
     is_recovered_heat_from_drain_used_by_water_heater:
       AppG 11-1 P_RMD Equals U_RMD: true
-      AppG 11-3 P_RMD Equals B_RMD: "unknown"
+      AppG 11-3 P_RMD Equals B_RMD: false
     drain_heat_recovery_efficiency:
       AppG 11-1 P_RMD Equals U_RMD: true
-      AppG 11-3 P_RMD Equals B_RMD: "unknown"
+      AppG 11-3 P_RMD Equals B_RMD: false
     drain_heat_recovery_type:
       AppG 11-1 P_RMD Equals U_RMD: true
-      AppG 11-3 P_RMD Equals B_RMD: "unknown"
+      AppG 11-3 P_RMD Equals B_RMD: false
     flow_multiplier_schedule:
       AppG 11-1 P_RMD Equals U_RMD: true
-      AppG 11-3 P_RMD Equals B_RMD: "unknown"
+      AppG 11-3 P_RMD Equals B_RMD: false
     entering_water_mains_temperature_schedule:
       AppG 11-1 P_RMD Equals U_RMD: true
       AppG 11-3 P_RMD Equals B_RMD: true
@@ -59,16 +59,16 @@ ServiceWaterPiping:
       AppG 11-1 P_RMD Equals U_RMD: true
       AppG 11-3 P_RMD Equals B_RMD: true
     reporting_name:
-      AppG 11-1 P_RMD Equals U_RMD: "unknown"
-      AppG 11-3 P_RMD Equals B_RMD: "unknown"
+      AppG 11-1 P_RMD Equals U_RMD: false
+      AppG 11-3 P_RMD Equals B_RMD: false
     notes:
-      AppG 11-1 P_RMD Equals U_RMD: "unknown"
-      AppG 11-3 P_RMD Equals B_RMD: "unknown"
+      AppG 11-1 P_RMD Equals U_RMD: false
+      AppG 11-3 P_RMD Equals B_RMD: false
     is_recirculation_loop:
       AppG 11-1 P_RMD Equals U_RMD: true
       AppG 11-3 P_RMD Equals B_RMD: true
     insulation_thickness:
-      AppG 11-1 P_RMD Equals U_RMD: true
+      AppG 11-1 P_RMD Equals U_RMD: false
       AppG 11-3 P_RMD Equals B_RMD: true
     loop_pipe_location:
       AppG 11-1 P_RMD Equals U_RMD: true
@@ -85,37 +85,40 @@ ServiceWaterPiping:
     child:
       AppG 11-1 P_RMD Equals U_RMD: true
       AppG 11-3 P_RMD Equals B_RMD: true
+    piping_losses:
+      AppG 11-1 P_RMD Equals U_RMD: false
+      AppG 11-3 P_RMD Equals B_RMD: true
 
 SolarThermal:
   Object Type: "Data Group"
   Data Elements:
     id:
       AppG 11-1 P_RMD Equals U_RMD: true
-      AppG 11-3 P_RMD Equals B_RMD: "unknown"
+      AppG 11-3 P_RMD Equals B_RMD: false
     reporting_name:
       AppG 11-1 P_RMD Equals U_RMD: true
-      AppG 11-3 P_RMD Equals B_RMD: "unknown"
+      AppG 11-3 P_RMD Equals B_RMD: false
     notes:
-      AppG 11-1 P_RMD Equals U_RMD: "unknown"
-      AppG 11-3 P_RMD Equals B_RMD: "unknown"
+      AppG 11-1 P_RMD Equals U_RMD: false
+      AppG 11-3 P_RMD Equals B_RMD: false
     angle_from_true_north:
       AppG 11-1 P_RMD Equals U_RMD: true
-      AppG 11-3 P_RMD Equals B_RMD: "unknown"
+      AppG 11-3 P_RMD Equals B_RMD: false
     solar_savings_fraction:
       AppG 11-1 P_RMD Equals U_RMD: true
-      AppG 11-3 P_RMD Equals B_RMD: "unknown"
+      AppG 11-3 P_RMD Equals B_RMD: false
     collector_area:
       AppG 11-1 P_RMD Equals U_RMD: true
-      AppG 11-3 P_RMD Equals B_RMD: "unknown"
+      AppG 11-3 P_RMD Equals B_RMD: false
     collector_type_description:
       AppG 11-1 P_RMD Equals U_RMD: true
-      AppG 11-3 P_RMD Equals B_RMD: "unknown"
+      AppG 11-3 P_RMD Equals B_RMD: false
     collector_slope:
       AppG 11-1 P_RMD Equals U_RMD: true
-      AppG 11-3 P_RMD Equals B_RMD: "unknown"
+      AppG 11-3 P_RMD Equals B_RMD: false
     tank:
       AppG 11-1 P_RMD Equals U_RMD: true
-      AppG 11-3 P_RMD Equals B_RMD: "unknown"
+      AppG 11-3 P_RMD Equals B_RMD: false
 
 ServiceWaterHeatingEquipment:
   Object Type: "Data Group"
@@ -124,11 +127,11 @@ ServiceWaterHeatingEquipment:
       AppG 11-1 P_RMD Equals U_RMD: true
       AppG 11-3 P_RMD Equals B_RMD: true
     reporting_name:
-      AppG 11-1 P_RMD Equals U_RMD: "unknown"
-      AppG 11-3 P_RMD Equals B_RMD: "unknown"
+      AppG 11-1 P_RMD Equals U_RMD: false
+      AppG 11-3 P_RMD Equals B_RMD: false
     notes:
-      AppG 11-1 P_RMD Equals U_RMD: "unknown"
-      AppG 11-3 P_RMD Equals B_RMD: "unknown"
+      AppG 11-1 P_RMD Equals U_RMD: false
+      AppG 11-3 P_RMD Equals B_RMD: false
     heater_fuel_type:
       AppG 11-1 P_RMD Equals U_RMD: true
       AppG 11-3 P_RMD Equals B_RMD: true
@@ -203,10 +206,13 @@ ServiceWaterHeatingEquipment:
       AppG 11-3 P_RMD Equals B_RMD: true
     solar_thermal_systems:
       AppG 11-1 P_RMD Equals U_RMD: true
-      AppG 11-3 P_RMD Equals B_RMD: "unknown"
+      AppG 11-3 P_RMD Equals B_RMD: false
     hot_water_loop:
       AppG 11-1 P_RMD Equals U_RMD: true
       AppG 11-3 P_RMD Equals B_RMD: true
+    draw_pattern:
+      AppG 11-1 P_RMD Equals U_RMD: false
+      AppG 11-3 P_RMD Equals B_RMD: false
 
 Pump:
   Object Type: "Data Group"
@@ -215,11 +221,11 @@ Pump:
       AppG 11-1 P_RMD Equals U_RMD: true
       AppG 11-3 P_RMD Equals B_RMD: true
     reporting_name:
-      AppG 11-1 P_RMD Equals U_RMD: "unknown"
-      AppG 11-3 P_RMD Equals B_RMD: "unknown"
+      AppG 11-1 P_RMD Equals U_RMD: false
+      AppG 11-3 P_RMD Equals B_RMD: false
     notes:
-      AppG 11-1 P_RMD Equals U_RMD: "unknown"
-      AppG 11-3 P_RMD Equals B_RMD: "unknown"
+      AppG 11-1 P_RMD Equals U_RMD: false
+      AppG 11-3 P_RMD Equals B_RMD: false
     loop_or_piping:
       AppG 11-1 P_RMD Equals U_RMD: true
       AppG 11-3 P_RMD Equals B_RMD: true
@@ -228,13 +234,13 @@ Pump:
       AppG 11-3 P_RMD Equals B_RMD: true
     design_electric_power:
       AppG 11-1 P_RMD Equals U_RMD: true
-      AppG 11-3 P_RMD Equals B_RMD: "unknown"
+      AppG 11-3 P_RMD Equals B_RMD: false
     motor_nameplate_power:
       AppG 11-1 P_RMD Equals U_RMD: true
       AppG 11-3 P_RMD Equals B_RMD: true
     design_head:
       AppG 11-1 P_RMD Equals U_RMD: true
-      AppG 11-3 P_RMD Equals B_RMD: "unknown"
+      AppG 11-3 P_RMD Equals B_RMD: false
     impeller_efficiency:
       AppG 11-1 P_RMD Equals U_RMD: true
       AppG 11-3 P_RMD Equals B_RMD: true
@@ -246,7 +252,7 @@ Pump:
       AppG 11-3 P_RMD Equals B_RMD: true
     design_flow:
       AppG 11-1 P_RMD Equals U_RMD: true
-      AppG 11-3 P_RMD Equals B_RMD: "unknown"
+      AppG 11-3 P_RMD Equals B_RMD: false
     is_flow_sized_based_on_design_day:
       AppG 11-1 P_RMD Equals U_RMD: true
       AppG 11-3 P_RMD Equals B_RMD: true
@@ -259,20 +265,20 @@ PumpOutputValidationPoint:
   Data Elements:
     flow:
       AppG 11-1 P_RMD Equals U_RMD: true
-      AppG 11-3 P_RMD Equals B_RMD: "unknown"
+      AppG 11-3 P_RMD Equals B_RMD: false
     result:
       AppG 11-1 P_RMD Equals U_RMD: true
-      AppG 11-3 P_RMD Equals B_RMD: "unknown"
+      AppG 11-3 P_RMD Equals B_RMD: false
 
 ServiceWaterHeaterValidationPoint:
   Object Type: "Data Group"
   Data Elements:
     load:
       AppG 11-1 P_RMD Equals U_RMD: true
-      AppG 11-3 P_RMD Equals B_RMD: "unknown"
+      AppG 11-3 P_RMD Equals B_RMD: false
     result:
       AppG 11-1 P_RMD Equals U_RMD: true
-      AppG 11-3 P_RMD Equals B_RMD: "unknown"
+      AppG 11-3 P_RMD Equals B_RMD: false
 
 HeatPumpWaterHeaterCapacityValidationPoint:
   Object Type: "Data Group"
@@ -285,13 +291,13 @@ HeatPumpWaterHeaterCapacityValidationPoint:
       AppG 11-3 P_RMD Equals B_RMD: true
     evaporator_air_flow:
       AppG 11-1 P_RMD Equals U_RMD: true
-      AppG 11-3 P_RMD Equals B_RMD: "unknown"
+      AppG 11-3 P_RMD Equals B_RMD: false
     condenser_water_flow:
       AppG 11-1 P_RMD Equals U_RMD: true
-      AppG 11-3 P_RMD Equals B_RMD: "unknown"
+      AppG 11-3 P_RMD Equals B_RMD: false
     result:
       AppG 11-1 P_RMD Equals U_RMD: true
-      AppG 11-3 P_RMD Equals B_RMD: "unknown"
+      AppG 11-3 P_RMD Equals B_RMD: false
 
 HeatPumpWaterHeaterPowerValidationPoint:
   Object Type: "Data Group"
@@ -304,16 +310,16 @@ HeatPumpWaterHeaterPowerValidationPoint:
       AppG 11-3 P_RMD Equals B_RMD: true
     evaporator_air_flow:
       AppG 11-1 P_RMD Equals U_RMD: true
-      AppG 11-3 P_RMD Equals B_RMD: "unknown"
+      AppG 11-3 P_RMD Equals B_RMD: false
     condenser_water_flow:
       AppG 11-1 P_RMD Equals U_RMD: true
-      AppG 11-3 P_RMD Equals B_RMD: "unknown"
+      AppG 11-3 P_RMD Equals B_RMD: false
     load:
       AppG 11-1 P_RMD Equals U_RMD: true
-      AppG 11-3 P_RMD Equals B_RMD: "unknown"
+      AppG 11-3 P_RMD Equals B_RMD: false
     result:
       AppG 11-1 P_RMD Equals U_RMD: true
-      AppG 11-3 P_RMD Equals B_RMD: "unknown"
+      AppG 11-3 P_RMD Equals B_RMD: false
 
 Tank:
   Object Type: "Data Group"
@@ -322,11 +328,11 @@ Tank:
       AppG 11-1 P_RMD Equals U_RMD: true
       AppG 11-3 P_RMD Equals B_RMD: true
     reporting_name:
-      AppG 11-1 P_RMD Equals U_RMD: "unknown"
-      AppG 11-3 P_RMD Equals B_RMD: "unknown"
+      AppG 11-1 P_RMD Equals U_RMD: false
+      AppG 11-3 P_RMD Equals B_RMD: false
     notes:
-      AppG 11-1 P_RMD Equals U_RMD: "unknown"
-      AppG 11-3 P_RMD Equals B_RMD: "unknown"
+      AppG 11-1 P_RMD Equals U_RMD: false
+      AppG 11-3 P_RMD Equals B_RMD: false
     storage_capacity:
       AppG 11-1 P_RMD Equals U_RMD: true
       AppG 11-3 P_RMD Equals B_RMD: true
@@ -356,11 +362,11 @@ ServiceWaterHeatingUse:
       AppG 11-1 P_RMD Equals U_RMD: true
       AppG 11-3 P_RMD Equals B_RMD: true
     reporting_name:
-      AppG 11-1 P_RMD Equals U_RMD: "unknown"
-      AppG 11-3 P_RMD Equals B_RMD: "unknown"
+      AppG 11-1 P_RMD Equals U_RMD: false
+      AppG 11-3 P_RMD Equals B_RMD: false
     notes:
-      AppG 11-1 P_RMD Equals U_RMD: "unknown"
-      AppG 11-3 P_RMD Equals B_RMD: "unknown"
+      AppG 11-1 P_RMD Equals U_RMD: false
+      AppG 11-3 P_RMD Equals B_RMD: false
     area_type:
       AppG 11-1 P_RMD Equals U_RMD: true
       AppG 11-3 P_RMD Equals B_RMD: true
@@ -372,19 +378,19 @@ ServiceWaterHeatingUse:
       AppG 11-3 P_RMD Equals B_RMD: true
     use:
       AppG 11-1 P_RMD Equals U_RMD: true
-      AppG 11-3 P_RMD Equals B_RMD: "unknown"
+      AppG 11-3 P_RMD Equals B_RMD: false
     use_units:
       AppG 11-1 P_RMD Equals U_RMD: true
-      AppG 11-3 P_RMD Equals B_RMD: "unknown"
+      AppG 11-3 P_RMD Equals B_RMD: false
     use_multiplier_schedule:
       AppG 11-1 P_RMD Equals U_RMD: true
-      AppG 11-3 P_RMD Equals B_RMD: "unknown"
+      AppG 11-3 P_RMD Equals B_RMD: false
     temperature_at_fixture:
       AppG 11-1 P_RMD Equals U_RMD: true
       AppG 11-3 P_RMD Equals B_RMD: true
     is_heat_recovered_by_drain:
       AppG 11-1 P_RMD Equals U_RMD: true
-      AppG 11-3 P_RMD Equals B_RMD: "unknown"
+      AppG 11-3 P_RMD Equals B_RMD: false
     is_recovered_heat_used_by_cold_side_feed:
       AppG 11-1 P_RMD Equals U_RMD: true
-      AppG 11-3 P_RMD Equals B_RMD: "unknown"
+      AppG 11-3 P_RMD Equals B_RMD: false
