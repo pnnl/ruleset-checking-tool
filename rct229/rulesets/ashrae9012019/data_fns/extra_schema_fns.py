@@ -18,7 +18,7 @@ exception_list = [
 def if_required(required) -> bool:
     """
     Convert required data from extra schema to a boolean
-    If the data is tring, then return false else return boolean
+    If the data is string, then return false else return boolean
 
     Parameters
     ----------
@@ -106,6 +106,7 @@ def compare_context_pair(
                 f'path: {element_json_path}: data object {index_context["id"]} in index context does not match the one {compare_context["id"]} in compare context'
             )
             matched = False
+
         for key in index_context:
             key_schema = extra_schema[key]
             extra_schema_data_group = get_extra_schema_by_data_type(
