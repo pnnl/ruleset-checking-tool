@@ -113,7 +113,7 @@ class Section1Rule1(RuleDefinitionListIndexedBase):
             total_area = ZERO.AREA
             climate_zone = data["climate_zone"]
             for bpf_bat in bpf_building_area_type_dict:
-                if bpf_bat is "UNDETERMINED":
+                if bpf_bat == "UNDETERMINED":
                     continue
                 expected_bpf = table_4_2_1_1_lookup(bpf_bat, climate_zone)[
                     "building_performance_factor"
@@ -133,14 +133,14 @@ class Section1Rule1(RuleDefinitionListIndexedBase):
             }
 
         def manual_check_required(self, context, calc_vals=None, data=None):
-            is_undetermined = calc_vals["is_undetermined"]
-            return is_undetermined
+            has_undetermined = calc_vals["has_undetermined"]
+            return has_undetermined
 
         def rule_check(self, context, calc_vals=None, data=None):
-            output_bpf_set = calc_vals["output_bpf_set"]
+            output_bpf_list = calc_vals["output_bpf_list"]
             bpf_bat_sum_prod = calc_vals["bpf_bat_sum_prod"]
             total_area = calc_vals["total_area"]
 
-            return len(output_bpf_set) == 1 and std_equal(
-                bpf_bat_sum_prod / total_area, output_bpf_set[0]
+            return len(output_bpf_list) == 1 and std_equal(
+                bpf_bat_sum_prod / total_area, output_bpf_list[0]
             )
