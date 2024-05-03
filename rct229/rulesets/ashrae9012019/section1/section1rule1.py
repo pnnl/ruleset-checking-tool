@@ -2,12 +2,7 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rulesets.ashrae9012019 import (
-    BASELINE_0,
-    BASELINE_90,
-    BASELINE_180,
-    BASELINE_270,
-    PROPOSED,
-    USER,
+    BASELINE_0
 )
 from rct229.rulesets.ashrae9012019.data_fns.table_4_2_1_1_fns import (
     table_4_2_1_1_lookup,
@@ -20,7 +15,9 @@ from rct229.utils.jsonpath_utils import find_one
 from rct229.utils.pint_utils import ZERO
 from rct229.utils.std_comparisons import std_equal
 
-MANUAL_CHECK_REQUIRED_MSG = "One or more building area types could not be determined for the project's building segments. Assigning a lighting building area type to all building segments will fix this issue."
+MANUAL_CHECK_REQUIRED_MSG = "One or more building area types could not be determined for the project's building " \
+                            "segments. Assigning a lighting building area type to all building segments will fix this" \
+                            " issue. "
 
 
 class Section1Rule1(RuleDefinitionListIndexedBase):
@@ -48,7 +45,9 @@ class Section1Rule1(RuleDefinitionListIndexedBase):
             index_rmd=BASELINE_0,
             each_rule=Section1Rule1.RMDRule(),
             id="1-1",
-            description="Building performance factors shall be from Standard 90.1-2019, Table 4.2.1.1, based on the building area type and climate zone. For building area types not listed in Table 4.2.1.1 “All others.” shall be used to determine the BPF.",
+            description="Building performance factors shall be from Standard 90.1-2019, Table 4.2.1.1, based on the "
+                        "building area type and climate zone. For building area types not listed in Table 4.2.1.1 "
+                        "“All others.” shall be used to determine the BPF.",
             ruleset_section_title="Performance Calculations",
             standard_section="Section G4.2.1.1",
             is_primary_rule=True,
@@ -60,9 +59,12 @@ class Section1Rule1(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section1Rule1.RMDRule, self).__init__(
                 rmds_used=produce_ruleset_model_instance(
+                    USER=True,
+                    BASELINE_0=True,
                     BASELINE_90=True,
                     BASELINE_180=True,
                     BASELINE_270=True,
+                    PROPOSED=True
                 ),
                 rmds_used_optional=produce_ruleset_model_instance(
                     BASELINE_90=True,
