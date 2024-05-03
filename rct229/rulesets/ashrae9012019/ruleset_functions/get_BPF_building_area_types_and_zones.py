@@ -112,7 +112,10 @@ def get_BPF_building_area_types_and_zones(
                     for space in find_all("$.spaces[*]", zone)
                 )
 
-    assert_(building_area_types_with_total_area_and_zones_dict, "Cannot find/identify building area type in the "
-                                                                "project, Require at least one but got None. Check "
-                                                                "your inputs.")
+    assert_(
+        building_area_types_with_total_area_and_zones_dict,
+        "Cannot find/identify building area type in the "
+        "project, Require at least one but got None. Check "
+        "your inputs.",
+    )
     return building_area_types_with_total_area_and_zones_dict
