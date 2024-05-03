@@ -108,8 +108,8 @@ def table_G34_lookup(
     skylit_wwr=None,
     classification=None,
 ):
-    """Returns the assembly maxiumum values for a given climate zone, surface conditoning category
-     and opaque sruface type as required by ASHRAE 90.1 Table G3.4-1 through G3.4-8
+    """Returns the assembly maximum values for a given climate zone, surface conditioning category
+     and opaque surface type as required by ASHRAE 90.1 Table G3.4-1 through G3.4-8
 
     Parameters
     ----------

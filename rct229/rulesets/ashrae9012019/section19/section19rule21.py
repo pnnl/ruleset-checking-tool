@@ -60,7 +60,7 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section19Rule21, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             required_fields={
@@ -68,7 +68,7 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                 "weather": ["climate_zone"],
             },
             each_rule=Section19Rule21.RMDRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="19-21",
             description="Baseline systems with >= 5,000 CFM supply air and >= 70 %OA shall have energy recovery modeled in the baseline design model. The following exceptions apply:"
             "1. Systems serving spaces that are not cooled and that are heated to less than 60°F."
@@ -88,11 +88,11 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
     class RMDRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section19Rule21.RMDRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
                 each_rule=Section19Rule21.RMDRule.HVACRule(),
-                index_rmr=BASELINE_0,
+                index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
             )
 
@@ -236,7 +236,7 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
         class HVACRule(RuleDefinitionBase):
             def __init__(self):
                 super(Section19Rule21.RMDRule.HVACRule, self).__init__(
-                    rmrs_used=produce_ruleset_model_instance(
+                    rmds_used=produce_ruleset_model_instance(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
                     required_fields={

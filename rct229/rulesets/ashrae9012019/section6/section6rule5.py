@@ -26,11 +26,11 @@ class Section6Rule5(RuleDefinitionListIndexedBase):
     def __init__(self):
         super(Section6Rule5, self).__init__(
             id="6-5",
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             each_rule=Section6Rule5.RulesetModelInstanceRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             description="Baseline building is modeled with automatic shutoff controls in buildings >5000 sq.ft.",
             required_fields={
                 "$": ["calendar"],
@@ -46,11 +46,11 @@ class Section6Rule5(RuleDefinitionListIndexedBase):
     class RulesetModelInstanceRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section6Rule5.RulesetModelInstanceRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
                 each_rule=Section6Rule5.RulesetModelInstanceRule.BuildingRule(),
-                index_rmr=BASELINE_0,
+                index_rmd=BASELINE_0,
                 list_path="buildings[*]",
                 required_fields={"$": ["schedules"]},
                 data_items={
@@ -64,11 +64,11 @@ class Section6Rule5(RuleDefinitionListIndexedBase):
                 super(
                     Section6Rule5.RulesetModelInstanceRule.BuildingRule, self
                 ).__init__(
-                    rmrs_used=produce_ruleset_model_instance(
+                    rmds_used=produce_ruleset_model_instance(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
                     each_rule=Section6Rule5.RulesetModelInstanceRule.BuildingRule.ZoneRule(),
-                    index_rmr=BASELINE_0,
+                    index_rmd=BASELINE_0,
                     list_path="$.building_segments[*].zones[*]",
                     required_fields={"$": ["building_open_schedule"]},
                     data_items={
@@ -97,11 +97,11 @@ class Section6Rule5(RuleDefinitionListIndexedBase):
                         Section6Rule5.RulesetModelInstanceRule.BuildingRule.ZoneRule,
                         self,
                     ).__init__(
-                        rmrs_used=produce_ruleset_model_instance(
+                        rmds_used=produce_ruleset_model_instance(
                             USER=False, BASELINE_0=True, PROPOSED=True
                         ),
                         each_rule=Section6Rule5.RulesetModelInstanceRule.BuildingRule.ZoneRule.SpaceRule(),
-                        index_rmr=BASELINE_0,
+                        index_rmd=BASELINE_0,
                         list_path="spaces[*]",
                     )
 
@@ -119,7 +119,7 @@ class Section6Rule5(RuleDefinitionListIndexedBase):
                             Section6Rule5.RulesetModelInstanceRule.BuildingRule.ZoneRule.SpaceRule,
                             self,
                         ).__init__(
-                            rmrs_used=produce_ruleset_model_instance(
+                            rmds_used=produce_ruleset_model_instance(
                                 USER=False, BASELINE_0=True, PROPOSED=True
                             ),
                         )

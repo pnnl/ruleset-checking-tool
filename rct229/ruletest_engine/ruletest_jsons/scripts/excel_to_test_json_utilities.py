@@ -33,7 +33,7 @@ def get_rmr_key_list_from_tcd_key_list(tcd_key_list):
 
     """
 
-    # Get index for the beginning of the RMR JSON.
+    # Get index for the beginning of the RMD JSON.
     # Order is always 'rmr_transformations' or 'rmr_template', <RMR_TYPE>, <RMR_JSON>, therefore add 2 index to
     # either 'rmr_transformation' or 'rmr_template' indices. If neither 'rmr_transformations' or 'rmr_template' is
     # included, assume it begins at index 1 (typically what you see in the Templates tab)
