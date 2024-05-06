@@ -6,6 +6,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.compare_schedules import (
     compare_schedules,
 )
 from rct229.utils.assertions import getattr_
+from rct229.utils.jsonpath_utils import find_all
 
 
 class Section16Rule4(RuleDefinitionListIndexedBase):
@@ -25,9 +26,22 @@ class Section16Rule4(RuleDefinitionListIndexedBase):
             ruleset_section_title="Elevators",
             standard_section="Section G3.1",
             is_primary_rule=True,
-            list_path="ruleset_model_descriptions[0].buildings[*]",
+            rmd_context="ruleset_model_descriptions/0",
+            list_path="ruleset_model_descriptions[0].buildings[*].elevators[*]",
             required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
             data_items={"is_leap_year_b": (BASELINE_0, "calendar/is_leap_year")},
+        )
+
+    def is_applicable(self, context, data=None):
+        rmd_p = context.PROPOSED
+
+        return (
+            len(
+                find_all(
+                    "$.ruleset_model_descriptions[0].buildings[*].elevators", rmd_p
+                )
+            )
+            > 0
         )
 
     class BuildingRule(RuleDefinitionBase):
@@ -39,12 +53,6 @@ class Section16Rule4(RuleDefinitionListIndexedBase):
                     PROPOSED=True,
                 ),
             )
-
-        def is_applicable(self, context, data=None):
-            building_p = context.PROPOSED
-            elevators_p = building_p.get("elevators", [])
-
-            return len(elevators_p) > 0
 
         def get_calc_vals(self, context, data=None):
             building_b = context.BASELINE_0

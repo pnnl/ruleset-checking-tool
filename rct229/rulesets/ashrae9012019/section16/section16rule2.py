@@ -6,6 +6,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.compare_schedules import (
     compare_schedules,
 )
 from rct229.utils.assertions import getattr_
+from rct229.utils.jsonpath_utils import find_all
 
 
 class Section16Rule2(RuleDefinitionListIndexedBase):
@@ -18,33 +19,40 @@ class Section16Rule2(RuleDefinitionListIndexedBase):
                 BASELINE_0=True,
                 PROPOSED=True,
             ),
-            each_rule=Section16Rule2.BuildingRule(),
+            each_rule=Section16Rule2.ElevatorRule(),
             index_rmd="baseline",
             id="16-2",
             description="The baseline elevator motor use shall be modeled with the same schedule as the proposed design. Rule Assertion: B-RMD = P-RMD",
             ruleset_section_title="Elevators",
             standard_section="Section G3.1",
             is_primary_rule=True,
-            list_path="ruleset_model_descriptions[0].buildings[*]",
+            rmd_context="ruleset_model_descriptions/0",
+            list_path="ruleset_model_descriptions[0].buildings[*].elevators[*]",
             required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
             data_items={"is_leap_year_b": (BASELINE_0, "calendar/is_leap_year")},
         )
 
-    class BuildingRule(RuleDefinitionBase):
+    def is_applicable(self, context, data=None):
+        rmd_p = context.PROPOSED
+
+        return (
+            len(
+                find_all(
+                    "$.ruleset_model_descriptions[0].buildings[*].elevators", rmd_p
+                )
+            )
+            > 0
+        )
+
+    class ElevatorRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section16Rule2.BuildingRule, self).__init__(
+            super(Section16Rule2.ElevatorRule, self).__init__(
                 rmds_used=produce_ruleset_model_instance(
                     USER=False,
                     BASELINE_0=True,
                     PROPOSED=True,
                 ),
             )
-
-        def is_applicable(self, context, data=None):
-            building_p = context.PROPOSED
-            elevators_p = building_p.get("elevators", [])
-
-            return len(elevators_p) > 0
 
         def get_calc_vals(self, context, data=None):
             building_b = context.BASELINE_0
