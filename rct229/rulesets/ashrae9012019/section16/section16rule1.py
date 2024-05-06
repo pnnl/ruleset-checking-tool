@@ -77,7 +77,9 @@ class Section16Rule1(RuleDefinitionListIndexedBase):
                 ]
             )
 
-            elevator_mechanical_efficiency_b = 1
+            elevator_mechanical_efficiency_b = table_G3_9_2_lookup(
+                total_floors_served_b
+            )["mechanical_efficiency"]
             motor_brake_horsepower_b = (
                 (
                     elevator_cab_weight_b
@@ -88,13 +90,11 @@ class Section16Rule1(RuleDefinitionListIndexedBase):
                 / 33000
                 / elevator_mechanical_efficiency_b
             )
-
             elevator_motor_efficiency_b = (
                 table_G3_9_1_lookup(motor_brake_horsepower_b)["motor_efficiency"]
                 if total_floors_served_b > 4
                 else table_G3_9_3_lookup(motor_brake_horsepower_b)["motor_efficiency"]
             )
-
             expected_peak_motor_power_b = (
                 motor_brake_horsepower_b * 746 / elevator_motor_efficiency_b
             )
