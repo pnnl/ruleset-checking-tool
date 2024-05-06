@@ -582,7 +582,7 @@
         "Section": 10,
         "Rule": 14,
         "Test": "g",
-        "test_description": "A one story building utilizes system 4. The capacity is greater than 65,000 Btu/hr and less than 135,000 Btu/hr the COPh of the system matches the heating value of Table G3.5.2(COPnf47=3.4) and the cooling value (COPnf17 = 2.3). Expected: PASS",
+        "test_description": "A one story building utilizes system 4. The capacity is greater than 65,000 Btu/hr and less than 135,000 Btu/hr the COPh of the system matches the heating value of Table G3.5.2(COPnf47=3.4) and the cooling value (COPnf17 = 2.3). The zone aggregation factor is defined. Expected: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "10-14",
@@ -686,7 +686,7 @@
         "Section": 10,
         "Rule": 14,
         "Test": "h",
-        "test_description": "A one story building utilizes system 4. The capacity is greater than 65,000 Btu/hr and less than 135,000 Btu/hr the COPh of the system does not match the heating value of Table G3.5.2(COPnf47=3.4) and but does match the cooling value (COPnf17 = 2.3). Expected: FAIL",
+        "test_description": "A one story building utilizes system 4. The capacity is greater than 65,000 Btu/hr and less than 135,000 Btu/hr the COPh of the system does not match the heating value of Table G3.5.2(COPnf47=3.4) and but does match the cooling value (COPnf17 = 2.3). The zone aggregation factor is defined Expected: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "10-14",
@@ -790,7 +790,7 @@
         "Section": 10,
         "Rule": 14,
         "Test": "i",
-        "test_description": "A one story building utilizes system 4. The capacity is greater than 65,000 Btu/hr and less than 135,000 Btu/hr the COPh of the system matches the heating value of Table G3.5.2(COPnf47=3.4) and but not the cooling value (COPnf17 = 2.3). Expected: FAIL",
+        "test_description": "A one story building utilizes system 4. The capacity is greater than 65,000 Btu/hr and less than 135,000 Btu/hr the COPh of the system matches the heating value of Table G3.5.2(COPnf47=3.4) and but not the cooling value (COPnf17 = 2.3). The zone aggregation factor is defined. Expected: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "10-14",
@@ -894,7 +894,7 @@
         "Section": 10,
         "Rule": 14,
         "Test": "j",
-        "test_description": "A one story building utilizes system 4. The capacity is greater than 65,000 Btu/hr and less than 135,000 Btu/hr the COPh of the system matches the heating value of Table G3.5.2(COPnf47=3.4) and the cooling value (COPnf17 = 2.3). However the efficiency metric is incorrect. Expected: FAIL",
+        "test_description": "A one story building utilizes system 4. The capacity is greater than 65,000 Btu/hr and less than 135,000 Btu/hr the COPh of the system matches the heating value of Table G3.5.2(COPnf47=3.4) and the cooling value (COPnf17 = 2.3). However the efficiency metric is incorrect. The zone aggregation factor is defined. Expected: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "10-14",
@@ -998,7 +998,7 @@
         "Section": 10,
         "Rule": 14,
         "Test": "k",
-        "test_description": "A one story building utilizes system 4. The capacity is greater than 135,000 Btu/hr the COPh of the system matches the heating value of Table G3.5.2(COPnf47=3.4) and the cooling value (COPnf17 = 2.3). Expected: PASS",
+        "test_description": "A one story building utilizes system 4. The capacity is greater than 135,000 Btu/hr the COPh of the system matches the heating value of Table G3.5.2(COPnf47=3.4) and the cooling value (COPnf17 = 2.3). The zone aggregation factor is defined. Expected: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "10-14",
@@ -1493,6 +1493,109 @@
                                                     ],
                                                     "efficiency_metric_types": [
                                                         "ANNUAL_FUEL_UTILIZATION_EFFICIENCY"
+                                                    ]
+                                                },
+                                                "fan_system": {
+                                                    "id": "Fan System - Thermal Zone 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan - Thermal Zone 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan - Thermal Zone 1"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-10-14-p": {
+        "Section": 10,
+        "Rule": 14,
+        "Test": "p",
+        "test_description": "A one story building utilizes system 4. The capacity is greater than 65,000 Btu/hr and less than 135,000 Btu/hr the COPh of the system matches the heating value of Table G3.5.2(COPnf47=3.4) and the cooling value (COPnf17 = 2.3). The zone aggregation factor is undefined. Expected: UNDETERMINED",
+        "expected_rule_outcome": "undetermined",
+        "standard": {
+            "rule_id": "10-14",
+            "ruleset_reference": "G3.1.2.1",
+            "rule_description": "Baseline shall be modeled with the heating HVAC system efficiency per Tables G3.5.1-G3.5.6 (applies only to the heating efficiency of baseline furnaces and heat pumps).  Where multiple HVAC zones or residential spaces are combined into a single thermal block the heating efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the  equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces. ",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.34"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 929.0303999999999
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "System_4_PSZ_HP - Terminal for Thermal Zone 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP Thermal Zone 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System_4_PSZ_HP Thermal Zone 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling Sys - Thermal Zone 1",
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_total_cool_capacity": 23445.68888888889,
+                                                    "efficiency_metric_values": [
+                                                        2.3
+                                                    ],
+                                                    "efficiency_metric_types": [
+                                                        "FULL_LOAD_COEFFICIENT_OF_PERFORMANCE_NO_FAN"
+                                                    ]
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating Sys - Thermal Zone 1",
+                                                    "type": "HEAT_PUMP",
+                                                    "efficiency_metric_values": [
+                                                        3.4
+                                                    ],
+                                                    "efficiency_metric_types": [
+                                                        "HEAT_PUMP_COEFFICIENT_OF_PERFORMANCE_HIGH_TEMPERATURE_NO_FAN"
                                                     ]
                                                 },
                                                 "fan_system": {
