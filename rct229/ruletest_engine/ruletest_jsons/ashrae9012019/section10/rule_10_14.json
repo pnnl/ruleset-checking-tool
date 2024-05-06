@@ -628,7 +628,8 @@
                                                         "type": "CONSTANT_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP Thermal Zone 1"
                                                     }
-                                                ]
+                                                ],
+                                                "aggregation_factor ": 1
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
@@ -731,7 +732,8 @@
                                                         "type": "CONSTANT_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP Thermal Zone 1"
                                                     }
-                                                ]
+                                                ],
+                                                "aggregation_factor ": 1
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
@@ -834,7 +836,8 @@
                                                         "type": "CONSTANT_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP Thermal Zone 1"
                                                     }
-                                                ]
+                                                ],
+                                                "aggregation_factor ": 1
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
@@ -937,7 +940,8 @@
                                                         "type": "CONSTANT_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP Thermal Zone 1"
                                                     }
-                                                ]
+                                                ],
+                                                "aggregation_factor ": 1
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
@@ -1040,7 +1044,8 @@
                                                         "type": "CONSTANT_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP Thermal Zone 1"
                                                     }
-                                                ]
+                                                ],
+                                                "aggregation_factor ": 1
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
