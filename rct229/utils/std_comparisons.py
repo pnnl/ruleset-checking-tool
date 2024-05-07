@@ -58,7 +58,9 @@ def std_equal_with_precision(
     units = precision.units
     val = val.to(units)
     std_val = std_val.to(units)
-    return math.isclose(val.magnitude, std_val.magnitude, abs_tol=precision.magnitude)
+    return math.isclose(
+        val.magnitude, std_val.magnitude, abs_tol=precision.magnitude / 2
+    )
 
 
 def std_conservative_outcome(
