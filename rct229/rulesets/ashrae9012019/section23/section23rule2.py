@@ -112,7 +112,7 @@ class Section23Rule2(RuleDefinitionListIndexedBase):
                 "fan_system_id": fan_system_id_b,
                 "temperature_control_b": temperature_control_b,
                 "reset_differential_temperature_b": CalcQ(
-                    "temperature", reset_differential_temperature_b
+                    "temperature_difference", reset_differential_temperature_b
                 ),
             }
 

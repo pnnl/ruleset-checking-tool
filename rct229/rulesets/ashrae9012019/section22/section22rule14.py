@@ -77,9 +77,11 @@ class Section22Rule14(RuleDefinitionListIndexedBase):
             heat_rejection_b = context.BASELINE_0
             heat_rejection_range = heat_rejection_b["range"]
             return {
-                "heat_rejection_range": CalcQ("temperature", heat_rejection_range),
+                "heat_rejection_range": CalcQ(
+                    "temperature_difference", heat_rejection_range
+                ),
                 "required_heat_rejection_range": CalcQ(
-                    "temperature", REQUIRED_TEMP_RANGE
+                    "temperature_difference", REQUIRED_TEMP_RANGE
                 ),
             }
 
