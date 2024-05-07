@@ -104,10 +104,6 @@ class Section1Rule1(RuleDefinitionListIndexedBase):
                 "At least one `output_bpf_set` value must exist.",
             )
             bpf_building_area_type_dict = get_BPF_building_area_types_and_zones(rmd_b0)
-            assert_(
-                len(bpf_building_area_type_dict) >= 1,
-                "At least one building area type must exist.",
-            )
             has_undetermined = "UNDETERMINED" in bpf_building_area_type_dict
             bpf_bat_sum_prod = ZERO.AREA
             total_area = ZERO.AREA
