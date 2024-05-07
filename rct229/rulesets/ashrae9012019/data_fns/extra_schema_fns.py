@@ -135,10 +135,7 @@ def compare_context_pair(
             )
 
     elif isinstance(index_context, list) and isinstance(compare_context, list):
-        if (
-            required_equal
-            and len(compare_context) != len(index_context)
-        ):
+        if required_equal and len(compare_context) != len(index_context):
             error_msg_list.append(
                 f"path: {element_json_path}: length of objects ({len(index_context)} in index context != length of objects {len(compare_context)} in compare context."
             )
