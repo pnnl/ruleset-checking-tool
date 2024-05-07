@@ -115,11 +115,11 @@ class Section22Rule11(RuleDefinitionListIndexedBase):
 
                 return {
                     "secondary_loop_pump_power_per_flow_rate": CalcQ(
-                        "power_per_volumetric_flow_rate",
+                        "power_per_liquid_flow_rate",
                         secondary_loop_pump_power_per_flow_rate,
                     ),
                     "req_pump_flow_rate": CalcQ(
-                        "power_per_volumetric_flow_rate", req_pump_flow_rate
+                        "power_per_liquid_flow_rate", req_pump_flow_rate
                     ),
                 }
 
