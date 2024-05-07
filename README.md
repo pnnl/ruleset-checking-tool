@@ -36,8 +36,33 @@ pip install ruleset-checking-tool
 ## Usage
 
 ```py
-from rct229.ruletest_engine.run_ruletests import run_ashrae9012019_tests as run
-print(run())
+from rct229.web_application import run_project_evaluation as run
+from rct229.utils.file import deserialize_rpd_file
+
+user_rpd_path = "/examples/chicago_demo/user_model.json"
+proposed_rpd_path = "/examples/chicago_demo/proposed_model.json"
+baseline_rpd_path = "/examples/chicago_demo/baseline_model.json"
+
+user_rpd = None
+proposed_rpd = None
+baseline_rpd = None
+try:
+    user_rpd = deserialize_rpd_file(user_rpd_path)
+except:
+    print(f"{user_rpd_path} is not a valid JSON file")
+
+try:
+    proposed_rpd = deserialize_rpd_file(proposed_rpd_path)
+except:
+    print(f"{proposed_rpd_path} is not a valid JSON file")
+    
+try:
+    baseline_rpd = deserialize_rpd_file(baseline_rpd_path)
+except:
+    print(f"{baseline_rpd_path} is not a valid JSON file")
+
+
+run([user_rpd, proposed_rpd, baseline_rpd], "ashrae9012019", ["ASHRAE9012019DetailReport"], saving_dir="./")
 ```
 
 You can also call evaluation functions from its command line tool. Example is given below:
