@@ -1,12 +1,14 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.rulesets import LeapYear
 from rct229.rulesets.ashrae9012019 import BASELINE_0, PROPOSED, USER
 from rct229.rulesets.ashrae9012019.ruleset_functions.compare_schedules import (
     compare_schedules,
 )
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.utility_functions import find_exactly_one_schedule
 
 
 class Section16Rule2(RuleDefinitionListIndexedBase):
@@ -35,14 +37,23 @@ class Section16Rule2(RuleDefinitionListIndexedBase):
     def is_applicable(self, context, data=None):
         rmd_p = context.PROPOSED
 
-        return (
-            len(
-                find_all(
-                    "$.ruleset_model_descriptions[0].buildings[*].elevators", rmd_p
-                )
-            )
-            > 0
+        return find_all("$.ruleset_model_descriptions[0].buildings[*].elevators", rmd_p)
+
+    def create_data(self, context, data):
+        rmd_b = context.BASELINE_0
+        rmd_p = context.PROPOSED
+
+        motor_use_schedule_b = find_exactly_one_schedule(
+            rmd_b, getattr_(rmd_b, "rmd", "elevators", "cab_motor_multiplier_schedule")
         )
+        motor_use_schedule_p = find_exactly_one_schedule(
+            rmd_p, getattr_(rmd_p, "rmd", "elevators", "cab_motor_multiplier_schedule")
+        )
+
+        return {
+            "motor_use_schedule_b": motor_use_schedule_b,
+            "motor_use_schedule_p": motor_use_schedule_p,
+        }
 
     class ElevatorRule(RuleDefinitionBase):
         def __init__(self):
@@ -55,17 +66,14 @@ class Section16Rule2(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            building_b = context.BASELINE_0
-            building_p = context.PROPOSED
-
             is_leap_year_b = data["is_leap_year_b"]
-            mask_schedule = [1] * 8784 if is_leap_year_b else [1] * 8760
+            motor_use_schedule_b = data["motor_use_schedule_b"]
+            motor_use_schedule_p = data["motor_use_schedule_p"]
 
-            motor_use_schedule_b = getattr_(
-                building_b, "building", "elevators", "cab_motor_multiplier_schedule"
-            )
-            motor_use_schedule_p = getattr_(
-                building_p, "building", "elevators", "cab_motor_multiplier_schedule"
+            mask_schedule = (
+                [1] * LeapYear.LEAP_YEAR_HOURS
+                if is_leap_year_b
+                else [1] * LeapYear.REGULAR_YEAR_HOURS
             )
 
             compare_schedules = compare_schedules(
@@ -76,18 +84,18 @@ class Section16Rule2(RuleDefinitionListIndexedBase):
             )
 
             return {
-                "motor_use_schedule_b": motor_use_schedule_b,
-                "motor_use_schedule_p": motor_use_schedule_p,
+                "motor_use_schedule_len_b": len(motor_use_schedule_b),
+                "motor_use_schedule_len_p": len(motor_use_schedule_p),
                 "compare_schedules": compare_schedules,
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
             compare_schedules = calc_vals["compare_schedules"]
-            motor_use_schedule_b = calc_vals["motor_use_schedule_b"]
-            motor_use_schedule_p = calc_vals["motor_use_schedule_p"]
+            motor_use_schedule_len_b = calc_vals["motor_use_schedule_len_b"]
+            motor_use_schedule_len_p = calc_vals["motor_use_schedule_len_p"]
 
             return (
                 compare_schedules["total_hours_matched"]
-                == len(motor_use_schedule_b)
-                == len(motor_use_schedule_p)
+                == motor_use_schedule_len_b
+                == motor_use_schedule_len_p
             )
