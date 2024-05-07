@@ -56,7 +56,7 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
                 "Baseline shall be modeled with the COPnfcooling HVAC system efficiency per Tables G3.5.1-G3.5.6.  Where multiple HVAC zones or residential spaces are combined into a single thermal block the cooling efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces."
             ),
             ruleset_section_title="HVAC General",
-            standard_section="",
+            standard_section="Section Table G3.5.1-G3.5.6 Performance Rating Method Minimum Efficiency Requirements",
             is_primary_rule=True,
             list_path="$.ruleset_model_descriptions[*].buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
             rmd_context="ruleset_model_descriptions/0",

@@ -94,11 +94,10 @@ def compare_context_pair(
 
     """
     matched = True
-    if isinstance(index_context, dict):
-        # proposed and user object type shall be aligned.
+    if isinstance(index_context, dict) and isinstance(compare_context, dict):
+        # context shall be aligned and have the same data type.
         if (
-            compare_context
-            and compare_context.get("id")
+            compare_context.get("id")
             and required_equal
             and index_context["id"] != compare_context["id"]
         ):
@@ -120,6 +119,8 @@ def compare_context_pair(
             if isinstance(new_extra_schema, str) and new_extra_schema in exception_list:
                 # avoid processing data outside the master schema
                 continue
+            if compare_context is None:
+                print(index_context)
             matched = (
                 compare_context_pair(
                     index_context[key],
@@ -133,10 +134,9 @@ def compare_context_pair(
                 and matched
             )
 
-    elif isinstance(index_context, list):
+    elif isinstance(index_context, list) and isinstance(compare_context, list):
         if (
-            compare_context
-            and required_equal
+            required_equal
             and len(compare_context) != len(index_context)
         ):
             error_msg_list.append(
@@ -181,6 +181,8 @@ def compare_context_pair(
             )
             matched = False
 
+    else:
+        matched = False
     return matched
 
 
