@@ -39,9 +39,9 @@ pip install ruleset-checking-tool
 from rct229.web_application import run_project_evaluation as run
 from rct229.utils.file import deserialize_rpd_file
 
-user_rpd_path = "/examples/chicago_demo/user_model.json"
-proposed_rpd_path = "/examples/chicago_demo/proposed_model.json"
-baseline_rpd_path = "/examples/chicago_demo/baseline_model.json"
+user_rpd_path = "../examples/chicago_demo/user_model.json"
+proposed_rpd_path = "../examples/chicago_demo/proposed_model.json"
+baseline_rpd_path = "../examples/chicago_demo/baseline_model.json"
 
 user_rpd = None
 proposed_rpd = None
@@ -68,7 +68,7 @@ run([user_rpd, proposed_rpd, baseline_rpd], "ashrae9012019", ["ASHRAE9012019Deta
 You can also call evaluation functions from its command line tool. Example is given below:
 
 ```bash
-rct229 evaluate -rs ashrae9012019 -f examples\chicago_demo\baseline_model.json -f examples\chicago_demo\proposed_model.json -f examples\chicago_demo\user_model.json -r ASHRAE9012019DetailReport`
+rct229 evaluate -rs ashrae9012019 -f examples\chicago_demo\baseline_model.json -f examples\chicago_demo\proposed_model.json -f examples\chicago_demo\user_model.json -r ASHRAE9012019DetailReport
 ```
 
 ## About ASHRAE 229P
