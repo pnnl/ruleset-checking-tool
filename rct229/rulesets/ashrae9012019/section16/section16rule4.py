@@ -82,12 +82,12 @@ class Section16Rule4(RuleDefinitionListIndexedBase):
                 else [1] * LeapYear.REGULAR_YEAR_HOURS
             )
 
-            compare_schedules = compare_schedules(
+            sch_total_hours_matched = compare_schedules(
                 cab_lighting_multiplier_schedule_b,
                 cab_lighting_multiplier_schedule_p,
                 mask_schedule,
                 is_leap_year_b,
-            )
+            )["total_hours_matched"]
 
             return {
                 "cab_lighting_multiplier_schedule_len_b": len(
@@ -96,11 +96,11 @@ class Section16Rule4(RuleDefinitionListIndexedBase):
                 "cab_lighting_multiplier_schedule_len_p": len(
                     cab_lighting_multiplier_schedule_p
                 ),
-                "compare_schedules": compare_schedules,
+                "sch_total_hours_matched": sch_total_hours_matched,
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
-            compare_schedules = calc_vals["compare_schedules"]
+            sch_total_hours_matched = calc_vals["sch_total_hours_matched"]
             cab_lighting_multiplier_schedule_len_b = calc_vals[
                 "cab_lighting_multiplier_schedule_len_b"
             ]
@@ -109,7 +109,7 @@ class Section16Rule4(RuleDefinitionListIndexedBase):
             ]
 
             return (
-                compare_schedules["total_hours_matched"]
+                sch_total_hours_matched
                 == cab_lighting_multiplier_schedule_len_b
                 == cab_lighting_multiplier_schedule_len_p
             )
