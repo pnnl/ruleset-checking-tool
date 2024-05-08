@@ -26,6 +26,7 @@ class Section16Rule7(RuleDefinitionListIndexedBase):
             ruleset_section_title="Elevators",
             standard_section="Table G3.1-16 Baseline Building Performance",
             is_primary_rule=True,
+            rmd_context="ruleset_model_descriptions/0",
             list_path="ruleset_model_descriptions[0].buildings[*].elevators[*]",
         )
 
