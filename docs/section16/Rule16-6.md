@@ -16,7 +16,7 @@
 N/A
 
 **Applicability Check 1:**
-- Rule is applicable if any building in the proposed RMD has an elevator: `if any(len(building.elevators) > 0 for building in P_RMD...buildings:`
+- Rule is applicable if any building in the proposed RMD has an elevator: `if len(building.elevators > 0 for building in P_RMD...buildings:`
 
 ## Rule Logic:
 - For each elevator in the baseline RMD: `for elevator in B_RMD...elevators`
