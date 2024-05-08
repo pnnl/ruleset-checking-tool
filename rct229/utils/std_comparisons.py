@@ -1,6 +1,6 @@
-import math
 import operator
 from pint import Quantity
+from decimal import Decimal, ROUND_HALF_UP
 
 
 """
@@ -37,7 +37,7 @@ def std_equal(
 
 
 def std_equal_with_precision(
-    val: Quantity, std_val: Quantity, precision: Quantity
+    val: "Quantity", std_val: "Quantity", precision: "Quantity"
 ) -> bool:
     """Determines whether the model value and standard value are equal with the specified precision.
 
@@ -48,19 +48,50 @@ def std_equal_with_precision(
     std_val : Quantity
         standard value from code
     precision: Quantity
-        number of decimal places to round to, and intended units of the comparison
+        number of decimal places or significant value to round to, and intended units of the comparison
 
     Returns
     -------
     bool
         True if the modeled value is equal to the standard value within the specified precision
     """
-    units = precision.units
-    val = val.to(units)
-    std_val = std_val.to(units)
-    return math.isclose(
-        val.magnitude, std_val.magnitude, abs_tol=precision.magnitude / 2
+
+    # Determine if the values are pint Quantities and handle accordingly
+    if (
+        isinstance(val, Quantity)
+        and isinstance(std_val, Quantity)
+        and isinstance(precision, Quantity)
+    ):
+        units = precision.units
+        val = val.to(units)
+        std_val = std_val.to(units)
+        val_magnitude = Decimal(str(val.magnitude))
+        std_val_magnitude = Decimal(str(std_val.magnitude))
+        precision_magnitude = Decimal(str(precision.magnitude))
+    else:
+        val_magnitude = Decimal(str(val))
+        std_val_magnitude = Decimal(str(std_val))
+        precision_magnitude = Decimal(str(precision))
+
+    # Determine rounding precision based on whether precision is a whole number or a decimal
+    if precision_magnitude.as_tuple().exponent < 0:
+        # Decimal places (e.g., 0.01)
+        precision_decimal_places = abs(precision_magnitude.as_tuple().exponent)
+        rounding_precision = "1E-" + str(precision_decimal_places)
+    else:
+        # Whole number (e.g., 10, 100)
+        rounding_precision = "1E+" + str(int(precision_magnitude.log10()))
+
+    # Round both values to the specified precision
+    val_rounded = val_magnitude.quantize(
+        Decimal(rounding_precision), rounding=ROUND_HALF_UP
     )
+    std_val_rounded = std_val_magnitude.quantize(
+        Decimal(rounding_precision), rounding=ROUND_HALF_UP
+    )
+
+    # Compare the rounded values
+    return val_rounded == std_val_rounded
 
 
 def std_conservative_outcome(

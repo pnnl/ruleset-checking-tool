@@ -5,7 +5,7 @@ from rct229.utils.compare_standard_val import (
     compare_standard_val,
     compare_standard_val_strict,
 )
-from rct229.utils.std_comparisons import std_equal
+from rct229.utils.std_comparisons import std_equal, std_equal_with_precision
 
 _M2 = ureg("m2")
 
@@ -150,3 +150,35 @@ def test__compare_standard_val_strict_gt__false_with_units():
         std_val=1.0101 * _M2,
         operator=operator.gt,
     )
+
+
+def test__std_equal_with_precision__true_with_units():
+    assert std_equal_with_precision(1.05 * _M2, 1.1 * _M2, 0.1 * _M2)
+
+
+def test__std_equal_with_precision__true_without_units():
+    assert std_equal_with_precision(1.05, 1.1, 0.1)
+
+
+def test__std_equal_with_precision__false_with_units():
+    assert not std_equal_with_precision(1.15 * _M2, 1.1 * _M2, 0.1 * _M2)
+
+
+def test__std_equal_with_precision__false_without_units():
+    assert not std_equal_with_precision(1.15, 1.1, 0.1)
+
+
+def test__std_equal_with_precision__10_true_with_units():
+    assert std_equal_with_precision(145 * _M2, 150 * _M2, 10 * _M2)
+
+
+def test__std_equal_with_precision__10_true_without_units():
+    assert std_equal_with_precision(145, 150, 10)
+
+
+def test__std_equal_with_precision__10_false_with_units():
+    assert not std_equal_with_precision(155 * _M2, 150 * _M2, 10 * _M2)
+
+
+def test__std_equal_with_precision__10_false_without_units():
+    assert not std_equal_with_precision(155, 150, 10)
