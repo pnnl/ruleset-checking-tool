@@ -12,7 +12,7 @@ REQ_ELEVATOR_CAB_VENTILATION_FAN_POWER = 0.33 * ureg("W/cfm")
 
 
 class Section16Rule6(RuleDefinitionListIndexedBase):
-    """Rule 4 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
+    """Rule 6 of ASHRAE 90.1-2019 Appendix G Section 16 (Elevators)"""
 
     def __init__(self):
         super(Section16Rule6, self).__init__(
@@ -30,15 +30,8 @@ class Section16Rule6(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmd_u = context.USER
-        return (
-            len(
-                find_all(
-                    "$.ruleset_model_descriptions[0].buildings[*].elevators", rmd_u
-                )
-            )
-            > 0
-        )
+        rmd_p = context.PROPOSED
+        return find_all("$.ruleset_model_descriptions[0].buildings[*].elevators", rmd_p)
 
     class ElevatorRule(RuleDefinitionBase):
         def __init__(self):
@@ -57,7 +50,7 @@ class Section16Rule6(RuleDefinitionListIndexedBase):
                 "cab_ventilation_fan_power"
             ]
             elevator_cab_ventilation_fan_flow_b = elevator_b["cab_ventilation_fan_flow"]
-            return {  ## default W/cfm or W/(l.s)
+            return {
                 "elevator_cab_ventilation_fan_power_b": CalcQ(
                     "electric_power", elevator_cab_ventilation_fan_power_b
                 ),
