@@ -1,10 +1,18 @@
+import math
+from typing import TypedDict
+
 from pint import Quantity
 from rct229.rulesets.ashrae9012019.data import data
 from rct229.rulesets.ashrae9012019.data_fns.table_utils import find_osstd_table_entry
 from rct229.schema.config import ureg
+from rct229.utils.assertions import assert_
 
 
-def table_G3_9_3_lookup(shaft_input_power: Quantity) -> dict[str, float]:
+class FullLoadMotorEfficiency(TypedDict):
+    full_load_motor_efficiency_for_modeling: float
+
+
+def table_G3_9_3_lookup(shaft_input_power: Quantity) -> FullLoadMotorEfficiency:
     """Returns the full-load motor efficiency for motors as required by ASHRAE 90.1 Table G3.9.2
     Parameters
     ----------
@@ -18,15 +26,23 @@ def table_G3_9_3_lookup(shaft_input_power: Quantity) -> dict[str, float]:
 
     """
 
-    if 0 * ureg("hp") <= shaft_input_power <= 10.0 * ureg("hp"):
+    shaft_input_power_mag = shaft_input_power * ureg("hp")
+    shaft_input_power_mag = shaft_input_power_mag.magnitude
+    assert_(
+        shaft_input_power_mag >= 0,
+        "shaft input power is negative value, incorrect data.",
+    )
+    shaft_input_power = math.ceil(shaft_input_power_mag / 10) * 10
+
+    if 0 <= shaft_input_power <= 10.0:
         shaft_input_power = 10
-    elif 10 * ureg("hp") < shaft_input_power <= 20.0 * ureg("hp"):
+    elif 10 < shaft_input_power <= 20.0:
         shaft_input_power = 20
-    elif 20 * ureg("hp") < shaft_input_power <= 30.0 * ureg("hp"):
+    elif 20 < shaft_input_power <= 30.0:
         shaft_input_power = 30
-    elif 30 * ureg("hp") < shaft_input_power <= 40.0 * ureg("hp"):
+    elif 30 < shaft_input_power <= 40.0:
         shaft_input_power = 40
-    elif 40 * ureg("hp") < shaft_input_power:
+    elif 40 < shaft_input_power:
         shaft_input_power = 100
 
     full_load_motor_efficiency_for_modeling = find_osstd_table_entry(

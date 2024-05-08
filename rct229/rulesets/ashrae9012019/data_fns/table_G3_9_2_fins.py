@@ -1,8 +1,14 @@
+from typing import TypedDict
+
 from rct229.rulesets.ashrae9012019.data import data
 from rct229.rulesets.ashrae9012019.data_fns.table_utils import find_osstd_table_entry
 
 
-def table_G3_9_2_lookup(number_of_stories: int) -> dict[str, float]:
+class MechanicalEfficiency(TypedDict):
+    mechanical_efficiency: float
+
+
+def table_G3_9_2_lookup(number_of_stories: int) -> MechanicalEfficiency:
     """Returns the full-load motor efficiency for motors as required by ASHRAE 90.1 Table G3.9.2
     Parameters
     ----------

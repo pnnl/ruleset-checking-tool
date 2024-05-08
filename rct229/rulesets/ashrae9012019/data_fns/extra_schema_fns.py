@@ -2,7 +2,6 @@ import re
 from functools import partial
 
 from pint import Quantity
-
 from rct229.rulesets.ashrae9012019.data import data
 
 EXTRA_SCHEMA = data["ASHRAE229.9012019.extra.schema"]

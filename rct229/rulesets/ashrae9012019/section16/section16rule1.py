@@ -5,9 +5,11 @@ from rct229.rulesets.ashrae9012019 import BASELINE_0, PROPOSED, USER
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_9_1_fins import table_G3_9_1_lookup
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_9_2_fins import table_G3_9_2_lookup
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_9_3_fins import table_G3_9_3_lookup
+from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
+from rct229.schema.config import ureg
 
 
 class Section16Rule1(RuleDefinitionListIndexedBase):
@@ -17,8 +19,8 @@ class Section16Rule1(RuleDefinitionListIndexedBase):
         super(Section16Rule1, self).__init__(
             rmds_used=produce_ruleset_model_instance(
                 USER=False,
-                BASELINE_0=True,
-                PROPOSED=False,
+                BASELINE_0=False,
+                PROPOSED=True,
             ),
             each_rule=Section16Rule1.ElevatorRule(),
             index_rmd="baseline",
@@ -34,14 +36,7 @@ class Section16Rule1(RuleDefinitionListIndexedBase):
     def is_applicable(self, context, data=None):
         rmd_p = context.PROPOSED
 
-        return (
-            len(
-                find_all(
-                    "$.ruleset_model_descriptions[0].buildings[*].elevators", rmd_p
-                )
-            )
-            > 0
-        )
+        return find_all("$.ruleset_model_descriptions[0].buildings[*].elevators", rmd_p)
 
     class ElevatorRule(RuleDefinitionBase):
         def __init__(self):
@@ -56,39 +51,41 @@ class Section16Rule1(RuleDefinitionListIndexedBase):
         def get_calc_vals(self, context, data=None):
             elevator_b = context.BASELINE_0
 
-            total_floors_served_b = elevator_b.get("number_of_floors_served")
-            elevator_motor_power_b = elevator_b.get("motor_power")
-            elevator_cab_weight_b = elevator_b.get("cab_weight")
-            elevator_cab_counterweight_b = elevator_b.get("cab_counterweight")
-            elevator_design_load_b = elevator_b.get("design_load")
-            elevator_speed_b = elevator_b.get("speed")
-
-            has_undetermined = any(
-                [
-                    param is None
-                    for param in (
-                        total_floors_served_b,
-                        elevator_motor_power_b,
-                        elevator_cab_weight_b,
-                        elevator_cab_counterweight_b,
-                        elevator_design_load_b,
-                        elevator_speed_b,
-                    )
-                ]
+            total_floors_served_b = getattr_(
+                elevator_b, "elevator", "number_of_floors_served"
             )
+            elevator_motor_power_b = getattr_(elevator_b, "elevator", "motor_power")
+            elevator_cab_weight_b = getattr_(elevator_b, "elevator", "cab_weight")
+            elevator_cab_counterweight_b = getattr_(
+                elevator_b, "elevator", "cab_counterweight"
+            )
+            elevator_design_load_b = getattr_(elevator_b, "elevator", "design_load")
+            elevator_speed_b = getattr_(elevator_b, "elevator", "speed")
 
             elevator_mechanical_efficiency_b = table_G3_9_2_lookup(
                 total_floors_served_b
             )["mechanical_efficiency"]
+
+            # From Table G3.1 16 Elevators
+            # bhp = (Weight of Car + Rated Load – Counterweight) × Speed of Car / (33, 000 × h_mechanical)
+            # P_m = bhp x 746 / h_motor
+            # Where,
+            #       Weight of Car:  the proposed design elevator car weight, lb
+            #       Rated Load: the proposed design elevator load at which to operate, lb
+            #       Counterweight of Car: the elevator car counterweight, from Table G3.9.2, lb
+            #       Speed of Car: the speed of the proposed elevator, ft/min
+            #       h_mechanical: the mechanical efficiency of the elevator from Table G3.9.2
+            #       h_motor: the motor efficiency from Table G3.9.2
+            #       Pm: peak elevator motor power, W
             motor_brake_horsepower_b = (
                 (
-                    elevator_cab_weight_b
-                    + elevator_design_load_b
-                    - elevator_cab_counterweight_b
+                    elevator_cab_weight_b * ureg("lb")
+                    + elevator_design_load_b * ureg("lb")
+                    - elevator_cab_counterweight_b * ureg("lb")
                 )
                 * elevator_speed_b
-                / 33000
-                / elevator_mechanical_efficiency_b
+                * ureg("ft/min")
+                / (33000 * elevator_mechanical_efficiency_b)
             )
             elevator_motor_efficiency_b = (
                 table_G3_9_1_lookup(motor_brake_horsepower_b)["motor_efficiency"]
@@ -96,7 +93,10 @@ class Section16Rule1(RuleDefinitionListIndexedBase):
                 else table_G3_9_3_lookup(motor_brake_horsepower_b)["motor_efficiency"]
             )
             expected_peak_motor_power_b = (
-                motor_brake_horsepower_b * 746 / elevator_motor_efficiency_b
+                motor_brake_horsepower_b.m
+                * ureg("hp")
+                * 746
+                / elevator_motor_efficiency_b
             )
 
             return {
@@ -106,13 +106,7 @@ class Section16Rule1(RuleDefinitionListIndexedBase):
                 "elevator_motor_power_b": CalcQ(
                     "electric_power", elevator_motor_power_b
                 ),
-                "has_undetermined": has_undetermined,
             }
-
-        def manual_check_required(self, context, calc_vals=None, data=None):
-            has_undetermined = calc_vals["has_undetermined"]
-
-            return has_undetermined
 
         def rule_check(self, context, calc_vals=None, data=None):
             expected_peak_motor_power_b = calc_vals["expected_peak_motor_power_b"]

@@ -1,6 +1,6 @@
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_4_fns import (
-    table_g3_5_4_lookup,
     EquipmentType,
+    table_g3_5_4_lookup,
 )
 
 
