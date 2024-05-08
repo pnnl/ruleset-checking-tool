@@ -31,13 +31,13 @@ def std_equal(
     Returns
     -------
     bool
-        True if the val is within percent_tolerance of std_val
+        True iff the val is within percent_tolerance of std_val
     """
     return abs(std_val - val) <= (percent_tolerance / 100) * abs(std_val)
 
 
 def std_equal_with_precision(
-    val: "Quantity", std_val: "Quantity", precision: "Quantity"
+    val: Quantity, std_val: Quantity, precision: Quantity
 ) -> bool:
     """Determines whether the model value and standard value are equal with the specified precision.
 

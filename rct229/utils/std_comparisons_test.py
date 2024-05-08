@@ -5,7 +5,11 @@ from rct229.utils.compare_standard_val import (
     compare_standard_val,
     compare_standard_val_strict,
 )
-from rct229.utils.std_comparisons import std_equal, std_equal_with_precision
+from rct229.utils.std_comparisons import (
+    std_equal,
+    std_equal_with_precision,
+    std_conservative_outcome,
+)
 
 _M2 = ureg("m2")
 
@@ -182,3 +186,35 @@ def test__std_equal_with_precision__10_false_with_units():
 
 def test__std_equal_with_precision__10_false_without_units():
     assert not std_equal_with_precision(155, 150, 10)
+
+
+def test__std_conservative_outcome__true_with_units_gt():
+    assert std_conservative_outcome(1.1 * _M2, 1.05 * _M2, operator.gt)
+
+
+def test__std_conservative_outcome__true_with_units_lt():
+    assert std_conservative_outcome(1.05 * _M2, 1.1 * _M2, operator.lt)
+
+
+def test__std_conservative_outcome__false_with_units_gt():
+    assert not std_conservative_outcome(1.09999 * _M2, 1.1 * _M2, operator.gt)
+
+
+def test__std_conservative_outcome__false_with_units_lt():
+    assert not std_conservative_outcome(1.05001 * _M2, 1.05 * _M2, operator.lt)
+
+
+def test__std_conservative_outcome__true_without_units_gt():
+    assert std_conservative_outcome(1.1, 1.05, operator.gt)
+
+
+def test__std_conservative_outcome__true_without_units_lt():
+    assert std_conservative_outcome(1.05, 1.1, operator.lt)
+
+
+def test__std_conservative_outcome__false_without_units_gt():
+    assert not std_conservative_outcome(1.09999, 1.1, operator.gt)
+
+
+def test__std_conservative_outcome__false_without_units_lt():
+    assert not std_conservative_outcome(1.05001, 1.05, operator.lt)
