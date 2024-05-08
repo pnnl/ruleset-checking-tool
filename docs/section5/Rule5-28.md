@@ -17,7 +17,7 @@
 
   1. get_surface_conditioning_category()
   2. get_opaque_surface_type()
-  3. get_rmr_scc_skylight_roof_ratios()
+  3. get_building_scc_skylight_roof_ratios_dict()
   4. data_lookup()
 
 ## Rule Logic:  
@@ -26,35 +26,35 @@
 
 - Get surface conditioning category dictionary for B_RMD: `scc_dictionary_b = get_surface_conditioning_category(B_RMD)`  
 
-- Get B_RMD skylight roof ratios dictionary: `rmr_scc_skylight_roof_ratios_dictionary = get_rmr_scc_skylight_roof_ratios(B_RMD)`
+- Get B_RMD skylight roof ratios dictionary: `get_building_scc_skylight_roof_ratios_dict = get_building_scc_skylight_roof_ratios_dict(B_RMD)`
 
-- Check if B_RMR has exterior mixed type skylight: `if rmr_scc_skylight_roof_ratios_dictionary["EXTERIOR MIXED"] > 0:`
+- Check if B_RMD has exterior mixed type skylight: `if rmd_scc_skylight_roof_ratios_dictionary["EXTERIOR MIXED"] > 0:`
 
   - Check if residential and non-residential type skylight SHGC requirements for different skylight-roof-ratio are the same, get skylight SHGC requirements: `if ( data_lookup(table_G3_4, climate_zone, "RESIDENTIAL, "SKYLIGHT", "0%-2.0%", "ASSEMBLY MAX. SHGC") == data_lookup(table_G3_4, climate_zone, "RESIDENTIAL, "SKYLIGHT", "2.1%+", "ASSEMBLY MAX. SHGC") ) AND ( data_lookup(table_G3_4, climate_zone, "NON-RESIDENTIAL, "SKYLIGHT", "0%-2.0%", "ASSEMBLY MAX. SHGC") == data_lookup(table_G3_4, climate_zone, "NON-RESIDENTIAL, "SKYLIGHT", "2.1%+", "ASSEMBLY MAX. SHGC") ) AND ( data_lookup(table_G3_4, climate_zone, "RESIDENTIAL, "SKYLIGHT", "0%-2.0%", "ASSEMBLY MAX. SHGC") == data_lookup(table_G3_4, climate_zone, "NON-RESIDENTIAL, "SKYLIGHT", "0%-2.0%", "ASSEMBLY MAX. SHGC") ): target_shgc_mixed = data_lookup(table_G3_4, climate_zone, "RESIDENTIAL, "SKYLIGHT", "0%-2.0%", "ASSEMBLY MAX. SHGC")`
 
   - Else, request manual review: `else: manual_review_flag = TRUE`
 
-- Else, B_RMR does not have exterior mixed type roof surface: `else:`
+- Else, B_RMD does not have exterior mixed type roof surface: `else:`
 
-  - Get skylight-roof-ratio for residential type roofs: `srr_res = rmr_scc_skylight_roof_ratios_dictionary["EXTERIOR RESIDENTIAL"]`
+  - Get skylight-roof-ratio for residential type roofs: `srr_res = get_building_scc_skylight_roof_ratios_dict["EXTERIOR RESIDENTIAL"]`
 
     - If skylight-roof-ratio is greater than 2.0%, get baseline skylight construction requirement: `if srr_res > 0.02: target_shgc_res = data_lookup(table_G3_4, climate_zone, "RESIDENTIAL", "SKYLIGHT", "2.1%+", "ASSEMBLY MAX. SHGC")`
 
     - Else, skylight-roof-ratio is 0% to 2.0%, get baseline skylight construction requirement: `else: target_shgc_res = data_lookup(table_G3_4, climate_zone, "RESIDENTIAL", "SKYLIGHT", "0%-2.0%", "ASSEMBLY MAX. SHGC")`
 
-  - Get skylight-roof-ratio for non-residential type roofs: `srr_nonres = rmr_scc_skylight_roof_ratios_dictionary["NON-RESIDENTIAL"]`
+  - Get skylight-roof-ratio for non-residential type roofs: `srr_nonres = get_building_scc_skylight_roof_ratios_dict["NON-RESIDENTIAL"]`
 
     - If skylight-roof-ratio is greater than 2.0%, get baseline skylight construction requirement: `if srr_nonres > 0.02: target_shgc_nonres = data_lookup(table_G3_4, climate_zone, "NON-RESIDENTIAL", "SKYLIGHT", "2.1%+", "ASSEMBLY MAX. SHGC")`
 
     - Else, skylight-roof-ratio is 0% to 2.0%, get baseline skylight construction requirement: `else: target_shgc_nonres = data_lookup(table_G3_4, climate_zone, "NON-RESIDENTIAL", "SKYLIGHT", "0%-2.0%", "ASSEMBLY MAX. SHGC")`
 
-- Get skylight-roof-ratio for semi-exterior type roofs: `srr_semi_exterior = rmr_scc_skylight_roof_ratios_dictionary["SEMI-EXTERIOR"]`
+- Get skylight-roof-ratio for semi-exterior type roofs: `srr_semi_exterior = get_building_scc_skylight_roof_ratios_dict["SEMI-EXTERIOR"]`
 
   - If skylight-roof-ratio is greater than 2.0%, get baseline skylight construction requirement: `if srr_semi_exterior > 0.02: target_shgc_semiheated = data_lookup(table_G3_4, climate_zone, "SEMIHEATED, "SKYLIGHT", "2.1%+", "ASSEMBLY MAX. SHGC")`
 
   - Else, skylight-roof-ratio is 0% to 2.0%, get baseline skylight construction requirement: `else: target_shgc_semiheated = data_lookup(table_G3_4, climate_zone, "SEMIHEATED", "SKYLIGHT", "0%-2.0%", "ASSEMBLY MAX. SHGC")`
 
-- For each zone in B_RMR: `for zone_b in B_RMR...zones:`
+- For each zone in B_RMD: `for zone_b in B_RMD...zones:`
 
   - For each surface in zone: `for surface_b in zone_b.surfaces:`
 
@@ -78,11 +78,11 @@
 
           - Case 6: Else: `else: FAIL and NUMBER_OF_FAIL_COMPONENTS++`
 
-**Rule Assertion - RMR:**
+**Rule Assertion - RMD:**
 
-- Case 1: If any subsurface in B-RMR is ruled as "UNDETERMINED": `UNDETERMINED and raise_message "MANUAL REVIEW IS REQUESTED TO VERIFY SKYLIGHT MEETS SHGC REQUIREMENT AS PER TABLE G3.4."`
+- Case 1: If any subsurface in B-RMD is ruled as "UNDETERMINED": `UNDETERMINED and raise_message "MANUAL REVIEW IS REQUESTED TO VERIFY SKYLIGHT MEETS SHGC REQUIREMENT AS PER TABLE G3.4."`
 
-- Case 2: Else if all subsurface in B-RMR is rules as "PASS": `PASS`
+- Case 2: Else if all subsurface in B-RMD is rules as "PASS": `PASS`
 
 - Case 3: Else: `FAIL and raise_message "${NUMBER_OF_FAIL_COMPONENTS} of subsurfaces have failed the test.`
 
