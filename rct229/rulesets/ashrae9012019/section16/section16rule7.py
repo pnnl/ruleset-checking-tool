@@ -12,7 +12,7 @@ REQ_ELEVATOR_CAB_LIGHTING_POWER_DENSITY = 3.14 * ureg("W/ft2")
 
 
 class Section16Rule7(RuleDefinitionListIndexedBase):
-    """Rule 4 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
+    """Rule 7 of ASHRAE 90.1-2019 Appendix G Section 16 (Elevators)"""
 
     def __init__(self):
         super(Section16Rule7, self).__init__(
@@ -30,15 +30,8 @@ class Section16Rule7(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmd_u = context.USER
-        return (
-            len(
-                find_all(
-                    "$.ruleset_model_descriptions[0].buildings[*].elevators", rmd_u
-                )
-            )
-            > 0
-        )
+        rmd_p = context.PROPOSED
+        return find_all("$.ruleset_model_descriptions[0].buildings[*].elevators", rmd_p)
 
     class ElevatorRule(RuleDefinitionBase):
         def __init__(self):
