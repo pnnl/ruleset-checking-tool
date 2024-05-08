@@ -30,9 +30,9 @@ Logic:
         - now we need to get all of the equipment connected to this distribution system.
         - get the tanks: `tanks = distribution.tanks`
         - append the tank ids to the dictionary: `for t in tanks:  shw_and_equip_dict[shw_use_type]["Tanks"].append(t.id)`
-        - get the id of the SHW piping: `piping_id = distribution.service_water_piping`
-        - get all the ids of all of the children of the piping: `piping_ids = get_all_child_SHW_piping_ids(RMD, piping_id)`
-        - append all of the piping ids to the list: `shw_and_equip_dict[shw_use_type]["Piping"].extend(piping_ids)`
+        - get the id of the SHW pipings: `for piping_id in distribution.service_water_piping`
+            - get all the ids of all of the children of the piping: `piping_ids = get_all_child_SHW_piping_ids(RMD, piping_id)`
+            - append all of the piping ids to the list: `shw_and_equip_dict[shw_use_type]["Piping"].extend(piping_ids)`
     - to figure out which pumps are connected, go through each pump in the rmd: `for pump in RMD.pumps:`
         - check if the pump.loop_or_piping is in the piping list: `if pump.loop_or_piping in shw_and_equip_dict[shw_use_type]["Piping"]:`
             - this pump is connected to the SHW that serves this space type, append it to the list: `shw_and_equip_dict[shw_use_type]["Pumps"].append(pump.id)`
