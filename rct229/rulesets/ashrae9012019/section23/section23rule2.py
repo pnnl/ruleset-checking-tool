@@ -36,23 +36,23 @@ class Section23Rule2(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section23Rule2, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section23Rule2.HVACRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="23-2",
             description="For baseline systems 5-8 and 11, the SAT is reset higher by 5F under minimum cooling load conditions.",
             ruleset_section_title="HVAC - Airside",
             standard_section="Section G3.1.3.12 Supply Air Temperature Reset (Systems 5 through 8 and 11)",
             is_primary_rule=True,
-            rmr_context="ruleset_model_descriptions/0",
+            rmd_context="ruleset_model_descriptions/0",
             list_path="$..heating_ventilating_air_conditioning_systems[*]",
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.BASELINE_0
-        baseline_system_types_dict = get_baseline_system_types(rmi_b)
+        rmd_b = context.BASELINE_0
+        baseline_system_types_dict = get_baseline_system_types(rmd_b)
 
         return any(
             [
@@ -66,8 +66,8 @@ class Section23Rule2(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.BASELINE_0
-        baseline_system_types_dict = get_baseline_system_types(rmi_b)
+        rmd_b = context.BASELINE_0
+        baseline_system_types_dict = get_baseline_system_types(rmd_b)
         applicable_hvac_sys_ids = [
             hvac_id
             for sys_type in baseline_system_types_dict
@@ -86,7 +86,7 @@ class Section23Rule2(RuleDefinitionListIndexedBase):
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
             super(Section23Rule2.HVACRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={
@@ -112,7 +112,7 @@ class Section23Rule2(RuleDefinitionListIndexedBase):
                 "fan_system_id": fan_system_id_b,
                 "temperature_control_b": temperature_control_b,
                 "reset_differential_temperature_b": CalcQ(
-                    "temperature", reset_differential_temperature_b
+                    "temperature_difference", reset_differential_temperature_b
                 ),
             }
 

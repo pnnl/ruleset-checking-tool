@@ -179,6 +179,7 @@ def check_fluid_loop_or_piping_association(rpd: dict) -> list:
     fluid_loop_or_piping_id_jsonpaths = [
         "$.ruleset_model_descriptions[*].fluid_loops[*].id",
         "$.ruleset_model_descriptions[*].service_water_heating_distribution_systems[*].service_water_piping[*].id",
+        "$.ruleset_model_descriptions[*].fluid_loops[*].child_loops[*].id",
     ]
 
     fluid_loop_or_piping_id_list = find_all_by_jsonpaths(
@@ -228,7 +229,7 @@ def check_service_water_heating_association(rpd):
     return mismatch_list
 
 
-# search schedule with key words: Constraint to use when implemented :
+# search schedule with keywords: Constraint to use when implemented :
 
 
 def check_hvac_association(rpd: dict) -> list:
@@ -384,43 +385,43 @@ def json_paths_to_lists_from_list(rmd_list, path):
     return paths
 
 
-def non_schema_validate_rmr(rmr_obj):
-    """Provides non-schema validation for an RMR"""
+def non_schema_validate_rmd(rmd_obj):
+    """Provides non-schema validation for an RMD"""
     error = []
-    unique_id_error = check_unique_ids_in_ruleset_model_descriptions(rmr_obj)
+    unique_id_error = check_unique_ids_in_ruleset_model_descriptions(rmd_obj)
     passed = not unique_id_error
     if not passed:
         error.append(unique_id_error)
 
-    mismatch_hvac_errors = check_hvac_association(rmr_obj)
+    mismatch_hvac_errors = check_hvac_association(rmd_obj)
     passed = passed and not mismatch_hvac_errors
     if mismatch_hvac_errors:
         error.append(
             f"Cannot find HVAC systems {mismatch_hvac_errors} in the HeatingVentilationAirConditioningSystems data group."
         )
 
-    mismatch_zone_errors = check_zone_association(rmr_obj)
+    mismatch_zone_errors = check_zone_association(rmd_obj)
     passed = passed and not mismatch_zone_errors
     if mismatch_zone_errors:
         error.append(
             f"Cannot find zones {mismatch_zone_errors} in the Zone data group."
         )
 
-    mismatch_fluid_loop_errors = check_fluid_loop_association(rmr_obj)
+    mismatch_fluid_loop_errors = check_fluid_loop_association(rmd_obj)
     passed = passed and not mismatch_fluid_loop_errors
     if mismatch_fluid_loop_errors:
         error.append(
             f"Cannot find fluid loop {mismatch_fluid_loop_errors} in the FluidLoop data group."
         )
 
-    mismatch_schedule_errors = check_schedule_association(rmr_obj)
+    mismatch_schedule_errors = check_schedule_association(rmd_obj)
     passed = passed and not mismatch_schedule_errors
     if mismatch_schedule_errors:
         error.append(
             f"Cannot find schedule {mismatch_schedule_errors} in the Schedule data group."
         )
 
-    mismatch_fluid_loop_piping_errors = check_fluid_loop_or_piping_association(rmr_obj)
+    mismatch_fluid_loop_piping_errors = check_fluid_loop_or_piping_association(rmd_obj)
     passed = passed and not mismatch_fluid_loop_piping_errors
     if mismatch_fluid_loop_piping_errors:
         error.append(
@@ -428,7 +429,7 @@ def non_schema_validate_rmr(rmr_obj):
         )
 
     mismatch_service_water_heating_errors = check_service_water_heating_association(
-        rmr_obj
+        rmd_obj
     )
     passed = passed and not mismatch_service_water_heating_errors
     if mismatch_service_water_heating_errors:
@@ -439,8 +440,8 @@ def non_schema_validate_rmr(rmr_obj):
     return {"passed": passed, "error": error if error else None}
 
 
-def schema_validate_rmr(rmr_obj):
-    """Validates an RMR against the schema
+def schema_validate_rmd(rmd_obj):
+    """Validates an RMD against the schema
 
     This code follows the outline given in
     https://stackoverflow.com/questions/53968770/how-to-set-up-local-file-references-in-python-jsonschema-document
@@ -474,20 +475,20 @@ def schema_validate_rmr(rmr_obj):
 
     try:
         # Throws ValidationError on failure
-        validator.validate(rmr_obj)
+        validator.validate(rmd_obj)
         return {"passed": True, "error": None}
     except jsonschema.exceptions.ValidationError as err:
         return {"passed": False, "error": "schema invalid: " + err.message}
 
 
-def validate_rmr(rmr_obj, test=False):
-    """Validate an RMR against the schema and other high-level checks"""
+def validate_rmd(rmd_obj, test=False):
+    """Validate an RMD against the schema and other high-level checks"""
     # Validate against the schema
-    result = schema_validate_rmr(rmr_obj)
+    result = schema_validate_rmd(rmd_obj)
 
     if result["passed"] and not test:
         # Only check if it is not software test workflow.
         # Provide non-schema validation
-        result = non_schema_validate_rmr(rmr_obj)
+        result = non_schema_validate_rmd(rmd_obj)
 
     return result

@@ -52,7 +52,7 @@ GET_ZONE_CONDITIONING_CATEGORY_DICT__REQUIRED_FIELDS = {
 
 
 def get_zone_conditioning_category_rmi_dict(
-    climate_zone: str, rmi: dict
+    climate_zone: str, rmd: dict
 ) -> dict[str, ZoneConditioningCategory]:
     """
     Determines the zone conditioning category for every zone in an RMI.
@@ -61,7 +61,7 @@ def get_zone_conditioning_category_rmi_dict(
     ----------
     climate_zone: str
         One of the ClimateZoneOptions2019ASHRAE901 enumerated values
-    rmi: dict
+    rmd: dict
         A dictionary representing a ruleset model instance as defined by the ASHRAE229 schema
     Returns
     -------
@@ -71,7 +71,7 @@ def get_zone_conditioning_category_rmi_dict(
         SEMI_HEATED, UNCONDITIONED, UNENCOLOSED
     """
     zone_conditioning_category_rmi_dict = {}
-    for building in find_all("$.buildings[*]", rmi):
+    for building in find_all("$.buildings[*]", rmd):
         zone_conditioning_category_dict = get_zone_conditioning_category_dict(
             climate_zone, building
         )

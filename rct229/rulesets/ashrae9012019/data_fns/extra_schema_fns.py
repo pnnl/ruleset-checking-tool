@@ -18,7 +18,7 @@ exception_list = [
 def if_required(required) -> bool:
     """
     Convert required data from extra schema to a boolean
-    If the data is tring, then return false else return boolean
+    If the data is string, then return false else return boolean
 
     Parameters
     ----------
@@ -94,11 +94,10 @@ def compare_context_pair(
 
     """
     matched = True
-    if isinstance(index_context, dict):
-        # proposed and user object type shall be aligned.
+    if isinstance(index_context, dict) and isinstance(compare_context, dict):
+        # context shall be aligned and have the same data type.
         if (
-            compare_context
-            and compare_context.get("id")
+            compare_context.get("id")
             and required_equal
             and index_context["id"] != compare_context["id"]
         ):
@@ -106,6 +105,7 @@ def compare_context_pair(
                 f'path: {element_json_path}: data object {index_context["id"]} in index context does not match the one {compare_context["id"]} in compare context'
             )
             matched = False
+
         for key in index_context:
             key_schema = extra_schema[key]
             extra_schema_data_group = get_extra_schema_by_data_type(
@@ -119,6 +119,8 @@ def compare_context_pair(
             if isinstance(new_extra_schema, str) and new_extra_schema in exception_list:
                 # avoid processing data outside the master schema
                 continue
+            if compare_context is None:
+                print(index_context)
             matched = (
                 compare_context_pair(
                     index_context[key],
@@ -132,12 +134,8 @@ def compare_context_pair(
                 and matched
             )
 
-    elif isinstance(index_context, list):
-        if (
-            compare_context
-            and required_equal
-            and len(compare_context) != len(index_context)
-        ):
+    elif isinstance(index_context, list) and isinstance(compare_context, list):
+        if required_equal and len(compare_context) != len(index_context):
             error_msg_list.append(
                 f"path: {element_json_path}: length of objects ({len(index_context)} in index context != length of objects {len(compare_context)} in compare context."
             )
@@ -180,6 +178,8 @@ def compare_context_pair(
             )
             matched = False
 
+    else:
+        matched = False
     return matched
 
 

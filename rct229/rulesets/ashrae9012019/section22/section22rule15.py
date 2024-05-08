@@ -18,17 +18,17 @@ class Section22Rule15(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section22Rule15, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section22Rule15.HeatRejectionRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="22-15",
             description="Heat Rejection Device Approach calculated correctly (T/F), Approach = 25.72-(0.24*WB)",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section 22 CHW&CW Loop",
             is_primary_rule=True,
-            rmr_context="ruleset_model_descriptions/0",
+            rmd_context="ruleset_model_descriptions/0",
             list_path="$.heat_rejections[*]",
         )
 
@@ -43,7 +43,7 @@ class Section22Rule15(RuleDefinitionListIndexedBase):
     class HeatRejectionRule(RuleDefinitionBase):
         def __init__(self):
             super(Section22Rule15.HeatRejectionRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={
@@ -70,8 +70,8 @@ class Section22Rule15(RuleDefinitionListIndexedBase):
             )
 
             return {
-                "approach_b": CalcQ("temperature", approach_b),
-                "target_approach_b": CalcQ("temperature", target_approach_b),
+                "approach_b": CalcQ("temperature_difference", approach_b),
+                "target_approach_b": CalcQ("temperature_difference", target_approach_b),
             }
 
         def rule_check(self, context, calc_vals=None, data=None):

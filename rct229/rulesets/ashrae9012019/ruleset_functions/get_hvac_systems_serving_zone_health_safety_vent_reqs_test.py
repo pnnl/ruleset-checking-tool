@@ -1,11 +1,11 @@
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_systems_serving_zone_health_safety_vent_reqs import (
     get_hvac_systems_serving_zone_health_safety_vent_reqs,
 )
-from rct229.schema.schema_utils import quantify_rmr
-from rct229.schema.validate import schema_validate_rmr
+from rct229.schema.schema_utils import quantify_rmd
+from rct229.schema.validate import schema_validate_rmd
 
 TEST_RMI = {
-    "id": "test_rmi",
+    "id": "test_rmd",
     "buildings": [
         {
             "id": "building_1",
@@ -82,7 +82,7 @@ TEST_RMI = {
     "type": "BASELINE_0",
 }
 
-TEST_RMD = quantify_rmr(
+TEST_RMD = quantify_rmd(
     {
         "id": "229_01",
         "ruleset_model_descriptions": [TEST_RMI],
@@ -93,7 +93,7 @@ TEST_RMI_UNIT = TEST_RMD["ruleset_model_descriptions"][0]
 
 
 def test__TEST_RMD__is_valid():
-    schema_validation_result = schema_validate_rmr(TEST_RMD)
+    schema_validation_result = schema_validate_rmd(TEST_RMD)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"

@@ -22,11 +22,11 @@ class Section19Rule35(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section19Rule35, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             each_rule=Section19Rule35.RMDRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="19-35",
             description="For baseline systems serving only laboratory spaces that are prohibited from recirculating return air by code or accreditation standards, "
             "the baseline system shall be modeled as 100% outdoor air. Rule only applies when baseline outdoor air CFM is modeled as greater than proposed design outdoor air CFM.",
@@ -47,11 +47,11 @@ class Section19Rule35(RuleDefinitionListIndexedBase):
     class RMDRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section19Rule35.RMDRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
                 each_rule=Section19Rule35.RMDRule.HVACRule(),
-                index_rmr=BASELINE_0,
+                index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
             )
 
@@ -132,7 +132,7 @@ class Section19Rule35(RuleDefinitionListIndexedBase):
         class HVACRule(PartialRuleDefinition):
             def __init__(self):
                 super(Section19Rule35.RMDRule.HVACRule, self).__init__(
-                    rmrs_used=produce_ruleset_model_instance(
+                    rmds_used=produce_ruleset_model_instance(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
                 )

@@ -7,6 +7,7 @@ from rct229.ruletest_engine.run_ruletests import run_ashrae9012019_tests
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.schema.schema_store import SchemaStore
 from rct229.utils.assertions import RCTException
+from rct229.web_application import count_number_of_rules, count_number_of_ruletest_cases
 
 CONTEXT_SETTINGS = dict(help_option_names=["-h", "--help"])
 
@@ -54,7 +55,7 @@ def run_test(ruleset, section=None):
         )
 
 
-# Evaluate RMR Triplet
+# Evaluate RMD Triplet
 short_help_text = """
     Run ruleset checking. arguments are \n
     --ruleset or -rs: ruleset name. Default is ashrae9012019, available options include: ashrae9012019 \n
@@ -95,6 +96,49 @@ def evaluate(rpds, ruleset, reports, reports_directory):
     for report_type in reports:
         report_module = available_report_dict[report_type]()
         report_module.generate(report, reports_directory)
+
+
+# Evaluate number of rules in a given standard
+short_help_text = """
+   The count_number_of_rules command counts the number of rules that exist in the specified ruleset standard. Use
+   the -rs flag to specify a standard. If unspecified, the command defaults to 'ashrae9012019'
+    """
+help_text = short_help_text
+
+
+# Define the count_test_cases command within the group
+@cli.command(
+    "count_number_of_rules", short_help=short_help_text, help=help_text, hidden=True
+)
+@click.option("--ruleset_standard", "-rs", multiple=False, default="ashrae9012019")
+def count_rules(ruleset_standard):
+    """Count the number of ruletest cases in a ruleset standard."""
+    count_dict = count_number_of_rules(ruleset_standard)
+    click.echo(f"Number of rules in '#{ruleset_standard}': {count_dict['total']}")
+
+
+# Evaluate number of rules in a given standard
+short_help_text = """
+   The count_number_of_ruletest_cases command counts the number of rule test cases that exist in the specified ruleset standard. Use
+   the -rs flag to specify a standard. If unspecified, the command defaults to 'ashrae9012019'
+    """
+help_text = short_help_text
+
+
+# Define the count_test_cases command within the group
+@cli.command(
+    "count_number_of_ruletest_cases",
+    short_help=short_help_text,
+    help=help_text,
+    hidden=True,
+)
+@click.option("--ruleset_standard", "-rs", multiple=False, default="ashrae9012019")
+def count_test_cases(ruleset_standard):
+    """Count the number of ruletest cases in a ruleset standard."""
+    count_dict = count_number_of_ruletest_cases(ruleset_standard)
+    click.echo(
+        f"Number of rule test cases in '#{ruleset_standard}': {count_dict['total']}"
+    )
 
 
 if __name__ == "__main__":

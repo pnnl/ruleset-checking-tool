@@ -13,11 +13,11 @@ class Section18Rule3(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section18Rule3, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             each_rule=Section18Rule3.RuleModelDescriptionRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="18-3",
             description="The lab exhaust fan shall be modeled as constant horsepower (kilowatts) reflecting constant-volume stack discharge with outdoor air bypass in the baseline",
             ruleset_section_title="HVAC",
@@ -38,7 +38,7 @@ class Section18Rule3(RuleDefinitionListIndexedBase):
     class RuleModelDescriptionRule(PartialRuleDefinition):
         def __init__(self):
             super(Section18Rule3.RuleModelDescriptionRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 )
             )
