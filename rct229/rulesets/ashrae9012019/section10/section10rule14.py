@@ -24,8 +24,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_s
 from rct229.utils.utility_functions import (
     find_exactly_one_zone,
 )
-from rct229.utils.assertions import getattr_
-from rct229.schema.config import ureg
+from rct229.utils.pint_utils import CalcQ
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_2,
@@ -170,7 +169,7 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
                     )
 
             if total_capacity_b is not None:
-                total_capacity_b = total_capacity_b.to("Btu/h").magnitude
+                total_capacity_mag_b = total_capacity_b.to("Btu/h").magnitude
 
             if total_capacity_b is not None and hvac_system_type_b in [
                 HVAC_SYS.SYS_3,
@@ -184,14 +183,14 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
                 elif (
                     hvac_zone_aggregation_factor is None
                     and hvac_system_type_b in [HVAC_SYS.SYS_3, HVAC_SYS.SYS_3A]
-                    and total_capacity_b >= FURNACE_CAPACITY_LOW_THREHSOLD
+                    and total_capacity_mag_b >= FURNACE_CAPACITY_LOW_THREHSOLD
                 ):
                     is_zone_agg_factor_undefined_and_needed = True
 
                 elif (
                     hvac_zone_aggregation_factor is None
                     and hvac_system_type_b == HVAC_SYS.SYS_4
-                    and total_capacity_b >= HEATPUMP_CAPACITY_LOW_THRESHOLD
+                    and total_capacity_mag_b >= HEATPUMP_CAPACITY_LOW_THRESHOLD
                 ):
                     is_zone_agg_factor_undefined_and_needed = True
 
@@ -207,7 +206,7 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
                 else:
                     expected_baseline_eff_data = table_g3_5_5_lookup(
                         GasHeatingEquipmentType.WARM_AIR_FURNACE_GAS_FIRED,
-                        total_capacity_b,
+                        total_capacity_mag_b,
                     )
 
             elif hvac_system_type_b == HVAC_SYS.SYS_9:
@@ -219,13 +218,13 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
                 else:
                     expected_baseline_eff_data = table_g3_5_5_lookup(
                         GasHeatingEquipmentType.WARM_AIR_UNIT_HEATER_GAS_FIRED,
-                        total_capacity_b,
+                        total_capacity_mag_b,
                     )
 
             else:  # HVAC_SYS.SYS_4
                 if (
                     total_capacity_b is None
-                    or total_capacity_b < HEATPUMP_CAPACITY_LOW_THRESHOLD
+                    or total_capacity_mag_b < HEATPUMP_CAPACITY_LOW_THRESHOLD
                 ):
                     expected_baseline_eff_data = [
                         table_g3_5_2_lookup(
@@ -330,7 +329,7 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
 
             return {
                 "hvac_system_type_b": hvac_system_type_b,
-                "total_capacity_b": total_capacity_b,
+                "total_capacity_b": CalcQ("capacity", total_capacity_b),
                 "is_zone_agg_factor_undefined_and_needed": is_zone_agg_factor_undefined_and_needed,
                 "expected_effs_b": expected_effs_b,
                 "modeled_effs_b": modeled_effs_b,
