@@ -37,8 +37,8 @@ Logic:
         - check if the pump.loop_or_piping is in the piping list: `if pump.loop_or_piping in shw_and_equip_dict[shw_use_type]["Piping"]:`
             - this pump is connected to the SHW that serves this space type, append it to the list: `shw_and_equip_dict[shw_use_type]["Pumps"].append(pump.id)`
     - to figure out which shw_equipment is connected, go through each service_water_heating_equipment in the rmd: `for shw_equip in RMD.service_water_heating_equipment:`
-        - check if the id of the tank connected to the shw_equip is in the list of tanks: `if shw_equip.tank.id in shw_and_equip_dict[shw_use_type]["Tanks"]:`
-            - this shw equipment is connected, append it to the list: `shw_and_equip_dict[shw_use_type]["SHWHeatingEq"].append(shw_equip.tank.id)`
+        - check if the id of the ServiceWaterHeatingDistributionSystem connected to the shw_equip is in the list of SHWDistribution: `if shw_equip.distribution_system in shw_and_equip_dict[shw_use_type]["SHWDistribution"]:`
+            - this shw equipment is connected, append it to the list: `shw_and_equip_dict[shw_use_type]["SHWHeatingEq"].append(shw_equip.id)`
             - this also means that any solarthermal attached to this shw_equip is connected, append the SolarThermal ids: `for solar_t in shw_equip.solar_thermal_systems: shw_and_equip_dict[shw_use_type]["SolarThermal"].append(solar_t.id)`
 
 
