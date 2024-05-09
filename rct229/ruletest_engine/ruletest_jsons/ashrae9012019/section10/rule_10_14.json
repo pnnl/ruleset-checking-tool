@@ -629,7 +629,7 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP Thermal Zone 1"
                                                     }
                                                 ],
-                                                "aggregation_factor ": 1
+                                                "aggregation_factor": 1
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
@@ -638,22 +638,18 @@
                                                 "cooling_system": {
                                                     "id": "Cooling Sys - Thermal Zone 1",
                                                     "type": "DIRECT_EXPANSION",
-                                                    "design_total_cool_capacity": 23445.68888888889,
-                                                    "efficiency_metric_values": [
-                                                        2.3
-                                                    ],
-                                                    "efficiency_metric_types": [
-                                                        "FULL_LOAD_COEFFICIENT_OF_PERFORMANCE_NO_FAN"
-                                                    ]
+                                                    "design_total_cool_capacity": 23445.68888888889
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating Sys - Thermal Zone 1",
                                                     "type": "HEAT_PUMP",
                                                     "efficiency_metric_values": [
-                                                        3.4
+                                                        3.4,
+                                                        2.3
                                                     ],
                                                     "efficiency_metric_types": [
-                                                        "HEAT_PUMP_COEFFICIENT_OF_PERFORMANCE_HIGH_TEMPERATURE_NO_FAN"
+                                                        "HEAT_PUMP_COEFFICIENT_OF_PERFORMANCE_HIGH_TEMPERATURE_NO_FAN",
+                                                        "HEAT_PUMP_COEFFICIENT_OF_PERFORMANCE_LOW_TEMPERATURE_NO_FAN"
                                                     ]
                                                 },
                                                 "fan_system": {
@@ -733,7 +729,7 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP Thermal Zone 1"
                                                     }
                                                 ],
-                                                "aggregation_factor ": 1
+                                                "aggregation_factor": 1
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
@@ -742,22 +738,18 @@
                                                 "cooling_system": {
                                                     "id": "Cooling Sys - Thermal Zone 1",
                                                     "type": "DIRECT_EXPANSION",
-                                                    "design_total_cool_capacity": 23445.68888888889,
-                                                    "efficiency_metric_values": [
-                                                        2.3
-                                                    ],
-                                                    "efficiency_metric_types": [
-                                                        "FULL_LOAD_COEFFICIENT_OF_PERFORMANCE_NO_FAN"
-                                                    ]
+                                                    "design_total_cool_capacity": 23445.68888888889
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating Sys - Thermal Zone 1",
                                                     "type": "HEAT_PUMP",
                                                     "efficiency_metric_values": [
-                                                        3.1
+                                                        3.1,
+                                                        2.3
                                                     ],
                                                     "efficiency_metric_types": [
-                                                        "HEAT_PUMP_COEFFICIENT_OF_PERFORMANCE_HIGH_TEMPERATURE_NO_FAN"
+                                                        "HEAT_PUMP_COEFFICIENT_OF_PERFORMANCE_HIGH_TEMPERATURE_NO_FAN",
+                                                        "HEAT_PUMP_COEFFICIENT_OF_PERFORMANCE_LOW_TEMPERATURE_NO_FAN"
                                                     ]
                                                 },
                                                 "fan_system": {
@@ -837,7 +829,7 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP Thermal Zone 1"
                                                     }
                                                 ],
-                                                "aggregation_factor ": 1
+                                                "aggregation_factor": 1
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
@@ -846,22 +838,18 @@
                                                 "cooling_system": {
                                                     "id": "Cooling Sys - Thermal Zone 1",
                                                     "type": "DIRECT_EXPANSION",
-                                                    "design_total_cool_capacity": 23445.68888888889,
-                                                    "efficiency_metric_values": [
-                                                        2.1
-                                                    ],
-                                                    "efficiency_metric_types": [
-                                                        "FULL_LOAD_COEFFICIENT_OF_PERFORMANCE_NO_FAN"
-                                                    ]
+                                                    "design_total_cool_capacity": 23445.68888888889
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating Sys - Thermal Zone 1",
                                                     "type": "HEAT_PUMP",
                                                     "efficiency_metric_values": [
-                                                        3.4
+                                                        3.4,
+                                                        2.1
                                                     ],
                                                     "efficiency_metric_types": [
-                                                        "HEAT_PUMP_COEFFICIENT_OF_PERFORMANCE_HIGH_TEMPERATURE_NO_FAN"
+                                                        "HEAT_PUMP_COEFFICIENT_OF_PERFORMANCE_HIGH_TEMPERATURE_NO_FAN",
+                                                        "HEAT_PUMP_COEFFICIENT_OF_PERFORMANCE_LOW_TEMPERATURE_NO_FAN"
                                                     ]
                                                 },
                                                 "fan_system": {
@@ -941,7 +929,7 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP Thermal Zone 1"
                                                     }
                                                 ],
-                                                "aggregation_factor ": 1
+                                                "aggregation_factor": 1
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
@@ -950,22 +938,18 @@
                                                 "cooling_system": {
                                                     "id": "Cooling Sys - Thermal Zone 1",
                                                     "type": "DIRECT_EXPANSION",
-                                                    "design_total_cool_capacity": 23445.68888888889,
-                                                    "efficiency_metric_values": [
-                                                        2.3
-                                                    ],
-                                                    "efficiency_metric_types": [
-                                                        "ENERGY_EFFICIENCY_RATIO"
-                                                    ]
+                                                    "design_total_cool_capacity": 23445.68888888889
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating Sys - Thermal Zone 1",
                                                     "type": "HEAT_PUMP",
                                                     "efficiency_metric_values": [
-                                                        3.4
+                                                        3.4,
+                                                        2.3
                                                     ],
                                                     "efficiency_metric_types": [
-                                                        "HEATING_SEASONAL_PERFORMANCE_FACTOR"
+                                                        "HEATING_SEASONAL_PERFORMANCE_FACTOR",
+                                                        "HEAT_PUMP_COEFFICIENT_OF_PERFORMANCE_LOW_TEMPERATURE_NO_FAN"
                                                     ]
                                                 },
                                                 "fan_system": {
@@ -1045,7 +1029,7 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP Thermal Zone 1"
                                                     }
                                                 ],
-                                                "aggregation_factor ": 1
+                                                "aggregation_factor": 1
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
@@ -1054,22 +1038,18 @@
                                                 "cooling_system": {
                                                     "id": "Cooling Sys - Thermal Zone 1",
                                                     "type": "DIRECT_EXPANSION",
-                                                    "design_total_cool_capacity": 43960.666666666664,
-                                                    "efficiency_metric_values": [
-                                                        2.1
-                                                    ],
-                                                    "efficiency_metric_types": [
-                                                        "FULL_LOAD_COEFFICIENT_OF_PERFORMANCE_NO_FAN"
-                                                    ]
+                                                    "design_total_cool_capacity": 43960.666666666664
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating Sys - Thermal Zone 1",
                                                     "type": "HEAT_PUMP",
                                                     "efficiency_metric_values": [
-                                                        3.4
+                                                        3.4,
+                                                        2.1
                                                     ],
                                                     "efficiency_metric_types": [
-                                                        "HEAT_PUMP_COEFFICIENT_OF_PERFORMANCE_HIGH_TEMPERATURE_NO_FAN"
+                                                        "HEAT_PUMP_COEFFICIENT_OF_PERFORMANCE_HIGH_TEMPERATURE_NO_FAN",
+                                                        "HEAT_PUMP_COEFFICIENT_OF_PERFORMANCE_LOW_TEMPERATURE_NO_FAN"
                                                     ]
                                                 },
                                                 "fan_system": {
@@ -1178,13 +1158,7 @@
                                                 "id": "System_5_PVAV_HW_Reheat",
                                                 "cooling_system": {
                                                     "id": "DX Coil 1",
-                                                    "type": "DIRECT_EXPANSION",
-                                                    "efficiency_metric_values": [
-                                                        3.6
-                                                    ],
-                                                    "efficiency_metric_types": [
-                                                        "FULL_LOAD_COEFFICIENT_OF_PERFORMANCE_NO_FAN"
-                                                    ]
+                                                    "type": "DIRECT_EXPANSION"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
@@ -1241,8 +1215,8 @@
         "Section": 10,
         "Rule": 14,
         "Test": "m",
-        "test_description": "A one story building utilizes system 9. The capacity is undefined and the COPh of the system matches the heating value of Table G3.5.2(Ec=80%). Expected: PASS",
-        "expected_rule_outcome": "pass",
+        "test_description": "A one story building utilizes system 9. The capacity is undefined and the COPh of the system matches the heating value of Table G3.5.2(Ec=80%). Expected: UNDETERMINED",
+        "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "10-14",
             "ruleset_reference": "G3.1.2.1",
@@ -1474,7 +1448,7 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System_3_PSZ_AC_Gas_Furnace Thermal Zone 1"
                                                     }
                                                 ],
-                                                "aggregation_factor ": 5
+                                                "aggregation_factor": 5
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
@@ -1580,22 +1554,18 @@
                                                 "cooling_system": {
                                                     "id": "Cooling Sys - Thermal Zone 1",
                                                     "type": "DIRECT_EXPANSION",
-                                                    "design_total_cool_capacity": 23445.68888888889,
-                                                    "efficiency_metric_values": [
-                                                        2.3
-                                                    ],
-                                                    "efficiency_metric_types": [
-                                                        "FULL_LOAD_COEFFICIENT_OF_PERFORMANCE_NO_FAN"
-                                                    ]
+                                                    "design_total_cool_capacity": 23445.68888888889
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating Sys - Thermal Zone 1",
                                                     "type": "HEAT_PUMP",
                                                     "efficiency_metric_values": [
-                                                        3.4
+                                                        3.4,
+                                                        2.3
                                                     ],
                                                     "efficiency_metric_types": [
-                                                        "HEAT_PUMP_COEFFICIENT_OF_PERFORMANCE_HIGH_TEMPERATURE_NO_FAN"
+                                                        "HEAT_PUMP_COEFFICIENT_OF_PERFORMANCE_HIGH_TEMPERATURE_NO_FAN",
+                                                        "HEAT_PUMP_COEFFICIENT_OF_PERFORMANCE_LOW_TEMPERATURE_NO_FAN"
                                                     ]
                                                 },
                                                 "fan_system": {
