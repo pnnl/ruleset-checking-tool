@@ -291,8 +291,9 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
                 ]
 
                 assert_(
-                    len(modeled_effs_b) > 0
-                ), "No modeled efficiencies were found with the expected efficiency metrics"
+                    len(modeled_effs_b) > 0,
+                    "No modeled efficiencies were found with the expected efficiency metrics",
+                )
 
                 # Filter expected efficiencies to only include those with the modeled efficiency metrics
                 expected_effs_b = [
