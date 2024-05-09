@@ -179,6 +179,7 @@ def check_fluid_loop_or_piping_association(rpd: dict) -> list:
     fluid_loop_or_piping_id_jsonpaths = [
         "$.ruleset_model_descriptions[*].fluid_loops[*].id",
         "$.ruleset_model_descriptions[*].service_water_heating_distribution_systems[*].service_water_piping[*].id",
+        "$.ruleset_model_descriptions[*].fluid_loops[*].child_loops[*].id",
     ]
 
     fluid_loop_or_piping_id_list = find_all_by_jsonpaths(
@@ -228,7 +229,7 @@ def check_service_water_heating_association(rpd):
     return mismatch_list
 
 
-# search schedule with key words: Constraint to use when implemented :
+# search schedule with keywords: Constraint to use when implemented :
 
 
 def check_hvac_association(rpd: dict) -> list:

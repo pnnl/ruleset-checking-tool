@@ -56,19 +56,22 @@ def find_osstd_table_entry(match_field_name_value_pairs, osstd_table):
     return matching_entries[0]
 
 
-def find_osstd_table_entries(match_field_name_value_pairs, osstd_table):
+def find_osstd_table_entries(match_field_name_value_pairs, osstd_table: dict):
     """Find specific entries in an OSSTD table
+
     This takes advantage of the consistent structure accross all the OSSTD
     JSON files. Each file contains a dictionary with a single key. The value
     associated with that key is a list of dictionaries. This function searches
     through those inner dictionaries to find all entries that match all the
     provided match_field_name_value_pairs
+
     Parameters
     ----------
     match_field_name_value_pairs : list of 2-tuples
         List of (match_field_name, match_field_value) tuples
     osstd_table : dict
         The OSSTD table data as loaded from its JSON file
+
     Returns
     -------
     list
@@ -97,8 +100,10 @@ def find_osstd_table_entries(match_field_name_value_pairs, osstd_table):
         )
     )
 
-    matching_entry = matching_entries[0]
-    assert type(matching_entry) is dict
+    assert len(matching_entries) > 0, "No entries found in the table"
+
+    for matching_entry in matching_entries:
+        assert type(matching_entry) is dict
 
     return matching_entries
 
