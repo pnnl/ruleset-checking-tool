@@ -25,6 +25,7 @@ from rct229.utils.utility_functions import (
     find_exactly_one_zone,
 )
 from rct229.utils.pint_utils import CalcQ
+from rct229.utils.assertions import assert_
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_2,
@@ -289,7 +290,7 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
                     if modeled_eff_b[1] == expected_eff_b[1]
                 ]
 
-                assert (
+                assert_(
                     len(modeled_effs_b) > 0
                 ), "No modeled efficiencies were found with the expected efficiency metrics"
 
