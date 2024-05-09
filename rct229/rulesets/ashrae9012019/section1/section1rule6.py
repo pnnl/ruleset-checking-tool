@@ -14,9 +14,9 @@ class Section1Rule6(RuleDefinitionBase):
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             id="1-6",
-            description="temp",
+            description="The proposed design shall be the same as the baseline design for all data elements identified in the schema hosted at data.standards.ashrae",
             ruleset_section_title="Performance Calculation",
-            standard_section="a",
+            standard_section="N/A",
             is_primary_rule=True,
             rmd_context="",
         )
