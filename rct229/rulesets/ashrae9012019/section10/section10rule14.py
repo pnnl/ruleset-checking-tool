@@ -170,6 +170,8 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
 
             if total_capacity_b is not None:
                 total_capacity_mag_b = total_capacity_b.to("Btu/h").magnitude
+            else:
+                total_capacity_mag_b = None
 
             if total_capacity_b is not None and hvac_system_type_b in [
                 HVAC_SYS.SYS_3,
@@ -179,6 +181,9 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
                 hvac_zone_aggregation_factor = zone_list_b[0].get("aggregation_factor")
                 if hvac_zone_aggregation_factor is not None:
                     total_capacity_b = total_capacity_b / hvac_zone_aggregation_factor
+                    total_capacity_mag_b = (
+                        total_capacity_mag_b / hvac_zone_aggregation_factor
+                    )
 
                 elif (
                     hvac_zone_aggregation_factor is None
@@ -246,12 +251,12 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
                         table_g3_5_2_lookup(
                             HeatPumpEquipmentType.HEAT_PUMP_AIR_COOLED_HEATING,
                             RatingCondition.HIGH_TEMP,
-                            total_capacity_b,
+                            total_capacity_mag_b,
                         ),
                         table_g3_5_2_lookup(
                             HeatPumpEquipmentType.HEAT_PUMP_AIR_COOLED_HEATING,
                             RatingCondition.LOW_TEMP,
-                            total_capacity_b,
+                            total_capacity_mag_b,
                         ),
                     ]
 
