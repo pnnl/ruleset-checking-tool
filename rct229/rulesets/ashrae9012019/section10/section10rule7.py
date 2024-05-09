@@ -20,9 +20,8 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_s
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_systems_5_6_serving_multiple_floors import (
     get_hvac_systems_5_6_serving_multiple_floors,
 )
-from rct229.utils.utility_functions import (
-    find_exactly_one_zone,
-)
+from rct229.utils.utility_functions import find_exactly_one_zone
+from rct229.utils.pint_utils import CalcQ
 
 
 APPLICABLE_SYS_TYPES = [
@@ -232,7 +231,7 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
             )
 
             return {
-                "total_cool_capacity_b": total_cool_capacity_b,
+                "total_cool_capacity_b": CalcQ("capacity", total_cool_capacity_b),
                 "is_zone_agg_factor_undefined_and_needed": is_zone_agg_factor_undefined_and_needed,
                 "expected_baseline_eff_b": expected_eff_b,
                 "most_conservative_eff_b": most_conservative_eff_b,
