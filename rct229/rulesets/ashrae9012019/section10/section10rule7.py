@@ -22,6 +22,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_systems_5_6_servin
 )
 from rct229.utils.utility_functions import find_exactly_one_zone
 from rct229.utils.pint_utils import CalcQ
+from rct229.utils.assertions import assert_
 
 
 APPLICABLE_SYS_TYPES = [
@@ -194,7 +195,7 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
                 ]
 
             elif total_cool_capacity_b is not None:  # HVAC_SYS.SYS_4
-                assert (
+                assert_(
                     hvac_system_type_b == HVAC_SYS.SYS_4,
                     f"System type {hvac_system_type_b} does not match any of the applicable system types: 1, 1B, 2, 3, 3B, 4, 5, 5B, 6, 6B",
                 )
