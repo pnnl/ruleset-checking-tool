@@ -33,7 +33,7 @@ def get_rmr_key_list_from_tcd_key_list(tcd_key_list):
 
     """
 
-    # Get index for the beginning of the RMD JSON.
+    # Get index for the beginning of the RMR JSON.
     # Order is always 'rmr_transformations' or 'rmr_template', <RMR_TYPE>, <RMR_JSON>, therefore add 2 index to
     # either 'rmr_transformation' or 'rmr_template' indices. If neither 'rmr_transformations' or 'rmr_template' is
     # included, assume it begins at index 1 (typically what you see in the Templates tab)
@@ -324,6 +324,27 @@ def create_dictionary_from_excel(spreadsheet_name, sheet_name, rule_set):
                                     rmr_triplet,
                                 ] + key_list[3:]
                                 set_nested_dict(json_dict, triplet_key_list, row_value)
+
+                    elif "json_file_lookup" in key_list:
+
+                        for rmr_triplet in triplet_strs:
+
+                            if (
+                                rmr_triplet
+                                in rmr_template_dict[test_id]["rmr_template"]
+                            ):
+
+                                # Create new keylist with respect to this triplet and set value
+                                triplet_key_list = [
+                                    test_id,
+                                    "rmr_transformations",
+                                    rmr_triplet,
+                                ]
+
+                                set_dict_from_json_file_template(
+                                    json_dict, triplet_key_list, rule_set, row_value
+                                )
+
 
                     elif "system_zone_assignment" in key_list:
                         # Remove irrelevant keys and set the rest of the keys into system_to_zone_dict
@@ -1129,3 +1150,17 @@ def determine_system_classification(system_rmd):
     # If not air loop, it's zone equipment
     else:
         return "ZoneEquipment"
+
+def set_dict_from_json_file_template(json_dict, key_list, rule_set, json_template_name):
+
+    file_dir = os.path.dirname(__file__)
+
+    json_template_path = os.path.join(
+        file_dir, "..", rule_set, "templates", f"{json_template_name}.json"
+    )
+
+    # Get system RMD
+    with open(json_template_path) as f:
+        json_template_dict = json.load(f)
+
+    set_nested_dict(json_dict, key_list, json_template_dict)
