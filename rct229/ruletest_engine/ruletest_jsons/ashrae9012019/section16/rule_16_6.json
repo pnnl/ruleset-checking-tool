@@ -248,6 +248,12 @@
                                             }
                                         ]
                                     }
+                                ],
+                                "elevators": [
+                                    {
+                                        "id": "Elevator 1",
+                                        "number_of_floors_served": 4
+                                    }
                                 ]
                             }
                         ],
