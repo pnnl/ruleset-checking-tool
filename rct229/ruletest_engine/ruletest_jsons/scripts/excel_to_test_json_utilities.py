@@ -375,6 +375,10 @@ def create_dictionary_from_excel(spreadsheet_name, sheet_name, rule_set):
                     # Set nested dictionary
                     set_nested_dict(json_dict, key_list, row_value)
 
+    # If system zone assignment has not been set yet, do that before returning final json dictionary
+    if not zones_have_been_mapped and system_to_zone_dict:
+        set_systems_to_zones(json_dict, system_to_zone_dict, rule_set)
+
     return json_dict
 
 
