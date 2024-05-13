@@ -23,7 +23,9 @@
         "air_flow_rate": "L/s",
         "motor_power": "W",
         "heat": "W",
-        "length": "m"
+        "length": "m",
+        "weight": "kg",
+        "elevator_speed": "m/s"
     },
     "ip": {
         "transformer_capacity": "V-A",
@@ -49,6 +51,8 @@
         "air_flow_rate": "cfm",
         "motor_power": "hp",
         "heat": "Btu/hr",
-        "length": "ft"
+        "length": "ft",
+        "weight": "lb",
+        "elevator_speed": "ft/min"
     }
 }
