@@ -14,9 +14,9 @@ class Section1Rule6(RuleDefinitionBase):
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             id="1-6",
-            description="",
+            description="temp",
             ruleset_section_title="Performance Calculation",
-            standard_section="",
+            standard_section="a",
             is_primary_rule=True,
             rmd_context="",
         )
