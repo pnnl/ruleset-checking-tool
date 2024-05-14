@@ -20,9 +20,9 @@
 
 ## Rule Logic:  
 
-- Get surface conditioning category dictionary for B_RMD: ```scc_dictionary_b = get_surface_conditioning_category(B_RMR)```  
+- Get surface conditioning category dictionary for B_RMD: ```scc_dictionary_b = get_surface_conditioning_category(B_RMD)```  
 
-- For each building segment in the Baseline model: `for building_segment_b in B_RMR.building.building_segments:`
+- For each building segment in the Baseline model: `for building_segment_b in B_RMD.building.building_segments:`
 
   - For each zone_b in building_segment_b: `for zone_b in building_segments.zones:`
 

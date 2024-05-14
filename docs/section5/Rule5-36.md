@@ -3,7 +3,7 @@
 
 **Rule ID:** 5-36  
 **Rule Description:** The air leakage rate in unconditioned and unenclosed spaces must be the same the baseline and proposed design.  
-**Rule Assertion:** B-RMR infiltration:air_leakage_rate = P-RMR infiltration:air_leakage_rate  
+**Rule Assertion:** B-RMD infiltration:air_leakage_rate = P-RMR infiltration:air_leakage_rate  
 **Appendix G Section:** Section 5 Envelope  
 **Appendix G Section Reference:** Section G3.1-1 Building Envelope Modeling Requirements for the Proposed design and Baseline building  
 
