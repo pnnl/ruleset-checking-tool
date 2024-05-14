@@ -4,7 +4,7 @@
 **Schema Version:** 0.0.23
 **Rule ID:** 5-17  
 **Rule Description:** The baseline fenestration area for an existing building shall equal the existing fenestration area prior to the proposed work.  
-**Rule Assertion:** B-RMR total (subsurface.glazed_area+subsurface.opaque_area) = expected value  
+**Rule Assertion:** B-RMD total (subsurface.glazed_area+subsurface.opaque_area) = expected value  
 **Appendix G Section:** Section 5 Envelope  
 **Appendix G Section Reference:** Section G3.1-5(c) Building Envelope Modeling Requirements for the Baseline building  
 

@@ -21,7 +21,7 @@
 **Applicability Checks:**
 
 - call the function
-  get_zone_target_baseline_system(): `target_baseline_system_dict = get_zone_target_baseline_system(P_RMI, B_RMI)`
+  get_zone_target_baseline_system(): `target_baseline_system_dict = get_zone_target_baseline_system(P_RMD, B_RMD)`
 - if the zone is conditioned or semiheated and not dedicated to parking, the rule is applicable - the zone will only be
   in the dictionary provided by get_zone_target_baseline_system() if it is a zone which requires an HVAC
   system: `if zone in target_baseline_system_dict: continue to rule logic`
@@ -56,7 +56,7 @@
     - complete logic to determine whether we can give a hard PASS / FAIL or simply UNDETERMINED
 
 - get a list of laboratory zones by calling the function
-  get_building_lab_zones(): `laboratory_zones = get_building_lab_zones(P_RMI)`
+  get_building_lab_zones(): `laboratory_zones = get_building_lab_zones(P_RMD)`
 - Now find the laboratory exhaust for each zone in the laboratory_zones list. Loop through each
   zone: `for z in laboratory_zones:`
     - Add zonal exhaust fan airflow to zone_total_exhaust: `if zone.zone_exhaust_fans ?:`
@@ -79,7 +79,7 @@
   fail: `elsif system_type_origin == "G3_1_1e":`
     - complete logic to determine whether we can give a hard PASS / FAIL or simply undetermined
     - use the function `is_zone_a_vestibule` to determine whether the zone is a
-      vestibule: `if is_zone_a_vestibule(zone, B_RMI) == MAYBE:`
+      vestibule: `if is_zone_a_vestibule(zone, B_RMD) == MAYBE:`
         - if the zone is MAYBE a vestibule, we need to change the result to UNDETERMINED: `result = UNDETERMINED`
         - AND we need to change the advisory_note to let the user know that the system type selection was based on the
           zone being a

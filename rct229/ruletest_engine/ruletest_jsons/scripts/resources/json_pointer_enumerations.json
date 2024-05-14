@@ -7,6 +7,7 @@
 	"climate_zone": "weather/climate_zone",
 	"construction": "ruleset_model_descriptions[0]/buildings[0]/building_segments[0]/zones[0]/surfaces[0]/construction",
 	"cooling_system": "ruleset_model_descriptions[0]/buildings[0]/building_segments[0]/heating_ventilating_air_conditioning_systems[0]/cooling_system",
+	"elevators": "ruleset_model_descriptions[0]/buildings[0]/elevators",
 	"external_fluid_sources": "ruleset_model_descriptions[0]/external_fluid_sources",
 	"fan_system": "ruleset_model_descriptions[0]/buildings[0]/building_segments[0]/heating_ventilating_air_conditioning_systems[0]/fan_system",
 	"fenestration_subsurfaces": "ruleset_model_descriptions[0]/buildings[0]/building_segments[0]/zones[0]/surfaces[0]/fenestration_subsurfaces",

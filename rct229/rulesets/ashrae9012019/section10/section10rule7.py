@@ -20,9 +20,9 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_s
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_systems_5_6_serving_multiple_floors import (
     get_hvac_systems_5_6_serving_multiple_floors,
 )
-from rct229.utils.utility_functions import (
-    find_exactly_one_zone,
-)
+from rct229.utils.utility_functions import find_exactly_one_zone
+from rct229.utils.pint_utils import CalcQ
+from rct229.utils.assertions import assert_
 
 
 APPLICABLE_SYS_TYPES = [
@@ -46,20 +46,20 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section10Rule7, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section10Rule7.HVACRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="10-7",
             description=(
                 "Baseline shall be modeled with the COPnfcooling HVAC system efficiency per Tables G3.5.1-G3.5.6.  Where multiple HVAC zones or residential spaces are combined into a single thermal block the cooling efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces."
             ),
             ruleset_section_title="HVAC General",
-            standard_section="",
+            standard_section="Section Table G3.5.1-G3.5.6 Performance Rating Method Minimum Efficiency Requirements",
             is_primary_rule=True,
             list_path="$.ruleset_model_descriptions[*].buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
-            rmr_context="ruleset_model_descriptions/0",
+            rmd_context="ruleset_model_descriptions/0",
         )
 
     def is_applicable(self, context, data=None):
@@ -126,7 +126,7 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
             super(Section10Rule7.HVACRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={
@@ -195,7 +195,7 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
                 ]
 
             elif total_cool_capacity_b is not None:  # HVAC_SYS.SYS_4
-                assert (
+                assert_(
                     hvac_system_type_b == HVAC_SYS.SYS_4,
                     f"System type {hvac_system_type_b} does not match any of the applicable system types: 1, 1B, 2, 3, 3B, 4, 5, 5B, 6, 6B",
                 )
@@ -232,7 +232,7 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
             )
 
             return {
-                "total_cool_capacity_b": total_cool_capacity_b,
+                "total_cool_capacity_b": CalcQ("capacity", total_cool_capacity_b),
                 "is_zone_agg_factor_undefined_and_needed": is_zone_agg_factor_undefined_and_needed,
                 "expected_baseline_eff_b": expected_eff_b,
                 "most_conservative_eff_b": most_conservative_eff_b,
