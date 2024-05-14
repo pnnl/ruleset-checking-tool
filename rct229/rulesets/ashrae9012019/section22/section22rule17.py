@@ -88,7 +88,7 @@ class Section22Rule17(RuleDefinitionListIndexedBase):
                     "volumetric_flow_rate", rated_water_flowrate_b
                 ),
                 "heat_rejection_efficiency_b": CalcQ(
-                    "volumetric_flow_rate_per_power", heat_rejection_efficiency_b
+                    "liquid_flow_rate_per_power", heat_rejection_efficiency_b
                 ),
             }
 
