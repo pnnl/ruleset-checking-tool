@@ -2,11 +2,10 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rule_engine.rulesets import LeapYear
-from rct229.rulesets.ashrae9012019 import BASELINE_0, PROPOSED, USER
+from rct229.rulesets.ashrae9012019 import PROPOSED
 from rct229.rulesets.ashrae9012019.ruleset_functions.compare_schedules import (
     compare_schedules,
 )
-from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.utility_functions import find_exactly_one_schedule
 
@@ -18,98 +17,116 @@ class Section16Rule4(RuleDefinitionListIndexedBase):
         super(Section16Rule4, self).__init__(
             rmds_used=produce_ruleset_model_instance(
                 USER=False,
-                BASELINE_0=True,
+                BASELINE_0=False,
                 PROPOSED=True,
             ),
-            each_rule=Section16Rule4.BuildingRule(),
-            index_rmd="baseline",
+            each_rule=Section16Rule4.RuleSetModelDescriptionRule(),
+            index_rmd=PROPOSED,
             id="16-4",
             description="The elevator cab lights shall be modeled with the same schedule as the elevator motor.",
             ruleset_section_title="Elevators",
             standard_section="Section G3.1",
             is_primary_rule=True,
-            rmd_context="ruleset_model_descriptions/0",
-            list_path="ruleset_model_descriptions[0].buildings[*].elevators[*]",
+            list_path="ruleset_model_descriptions[0]",
             required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
-            data_items={"is_leap_year_b": (BASELINE_0, "calendar/is_leap_year")},
+            data_items={"is_leap_year_p": (PROPOSED, "calendar/is_leap_year")},
         )
 
-    def is_applicable(self, context, data=None):
-        rmd_p = context.PROPOSED
-
-        return find_all("$.ruleset_model_descriptions[0].buildings[*].elevators", rmd_p)
-
-    def create_data(self, context, data):
-        rmd_b = context.BASELINE_0
-        rmd_p = context.PROPOSED
-
-        cab_lighting_multiplier_schedule_b = find_exactly_one_schedule(
-            rmd_b,
-            getattr_(rmd_b, "rmd", "elevators", "cab_lighting_multiplier_schedule"),
-        )
-        cab_lighting_multiplier_schedule_p = find_exactly_one_schedule(
-            rmd_p,
-            getattr_(rmd_p, "rmd", "elevators", "cab_lighting_multiplier_schedule"),
-        )
-
-        return {
-            "cab_lighting_multiplier_schedule_b": cab_lighting_multiplier_schedule_b,
-            "cab_lighting_multiplier_schedule_p": cab_lighting_multiplier_schedule_p,
-        }
-
-    class BuildingRule(RuleDefinitionBase):
+    class RuleSetModelDescriptionRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section16Rule4.BuildingRule, self).__init__(
+            super(Section16Rule4.RuleSetModelDescriptionRule, self).__init__(
                 rmds_used=produce_ruleset_model_instance(
-                    USER=False,
-                    BASELINE_0=True,
-                    PROPOSED=True,
+                    USER=False, BASELINE_0=False, PROPOSED=True
                 ),
+                each_rule=Section16Rule4.RuleSetModelDescriptionRule.ElevatorRule(),
+                index_rmd=PROPOSED,
+                list_path="buildings[*].elevators[*]",
             )
 
-        def get_calc_vals(self, context, data=None):
-            is_leap_year_b = data["is_leap_year_b"]
-            cab_lighting_multiplier_schedule_b = data[
-                "cab_lighting_multiplier_schedule_b"
-            ]
-            cab_lighting_multiplier_schedule_p = data[
-                "cab_lighting_multiplier_schedule_p"
-            ]
+        def is_applicable(self, context, data=None):
+            rmd_p = context.PROPOSED
 
-            mask_schedule = (
-                [1] * LeapYear.LEAP_YEAR_HOURS
-                if is_leap_year_b
-                else [1] * LeapYear.REGULAR_YEAR_HOURS
-            )
+            return find_all("$.buildings[*].elevators", rmd_p)
 
-            sch_total_hours_matched = compare_schedules(
-                cab_lighting_multiplier_schedule_b,
-                cab_lighting_multiplier_schedule_p,
-                mask_schedule,
-                is_leap_year_b,
-            )["total_hours_matched"]
+        def create_data(self, context, data):
+            rmd_p = context.PROPOSED
 
-            return {
-                "cab_lighting_multiplier_schedule_len_b": len(
-                    cab_lighting_multiplier_schedule_b
-                ),
-                "cab_lighting_multiplier_schedule_len_p": len(
-                    cab_lighting_multiplier_schedule_p
-                ),
-                "sch_total_hours_matched": sch_total_hours_matched,
+            cab_lighting_schedule_p = {
+                sch_id: find_exactly_one_schedule(rmd_p, sch_id)["hourly_values"]
+                for sch_id in find_all(
+                    "buildings[*].elevators[*].cab_lighting_multiplier_schedule",
+                    rmd_p,
+                )
+            }
+            motor_use_schedule_p = {
+                sch_id: find_exactly_one_schedule(rmd_p, sch_id)["hourly_values"]
+                for sch_id in find_all(
+                    "buildings[*].elevators[*].cab_motor_multiplier_schedule",
+                    rmd_p,
+                )
             }
 
-        def rule_check(self, context, calc_vals=None, data=None):
-            sch_total_hours_matched = calc_vals["sch_total_hours_matched"]
-            cab_lighting_multiplier_schedule_len_b = calc_vals[
-                "cab_lighting_multiplier_schedule_len_b"
-            ]
-            cab_lighting_multiplier_schedule_len_p = calc_vals[
-                "cab_lighting_multiplier_schedule_len_p"
-            ]
+            return {
+                "cab_lighting_schedule_p": cab_lighting_schedule_p,
+                "motor_use_schedule_p": motor_use_schedule_p,
+            }
 
-            return (
-                sch_total_hours_matched
-                == cab_lighting_multiplier_schedule_len_b
-                == cab_lighting_multiplier_schedule_len_p
-            )
+        class ElevatorRule(RuleDefinitionBase):
+            def __init__(self):
+                super(
+                    Section16Rule4.RuleSetModelDescriptionRule.ElevatorRule, self
+                ).__init__(
+                    rmds_used=produce_ruleset_model_instance(
+                        USER=False,
+                        BASELINE_0=False,
+                        PROPOSED=True,
+                    ),
+                )
+
+            def get_calc_vals(self, context, data=None):
+                elevator_p = context.PROPOSED
+                is_leap_year_p = data["is_leap_year_p"]
+
+                cab_ventilation_fan_multiplier_schedule_p = elevator_p[
+                    "cab_lighting_multiplier_schedule"
+                ]
+                cab_lighting_schedule_p = data["cab_lighting_schedule_p"][
+                    cab_ventilation_fan_multiplier_schedule_p
+                ]
+
+                cab_motor_multiplier_schedule_p = elevator_p[
+                    "cab_lighting_multiplier_schedule"
+                ]
+                motor_use_schedule_p = data["motor_use_schedule_p"][
+                    cab_motor_multiplier_schedule_p
+                ]
+
+                mask_schedule = (
+                    [1] * LeapYear.LEAP_YEAR_HOURS
+                    if is_leap_year_p
+                    else [1] * LeapYear.REGULAR_YEAR_HOURS
+                )
+
+                sch_total_hours_matched = compare_schedules(
+                    cab_lighting_schedule_p,
+                    motor_use_schedule_p,
+                    mask_schedule,
+                    is_leap_year_p,
+                )["total_hours_matched"]
+
+                return {
+                    "sch_total_hours_matched": sch_total_hours_matched,
+                    "cab_lighting_schedule_len_p": len(cab_lighting_schedule_p),
+                    "motor_use_schedule_len_p": len(motor_use_schedule_p),
+                }
+
+            def rule_check(self, context, calc_vals=None, data=None):
+                sch_total_hours_matched = calc_vals["sch_total_hours_matched"]
+                cab_lighting_schedule_len_p = calc_vals["cab_lighting_schedule_len_p"]
+                motor_use_schedule_len_p = calc_vals["motor_use_schedule_len_p"]
+
+                return (
+                    sch_total_hours_matched
+                    == cab_lighting_schedule_len_p
+                    == motor_use_schedule_len_p
+                )
