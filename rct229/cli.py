@@ -29,7 +29,7 @@ test_short_help_text = """
     Software test workflow, add sections to do test. \n
     --ruleset or -rs: default is ashrae9012019, available: ashrae9012019\n
     argument (optional): section string, \n
-    currently available: section1, section4, section5, section6, section16, section18, section19, section21, section22 and section23"""
+    currently available: section1, section4, section5, section6, section10, section18, section19, section21, section22 and section23"""
 
 
 @cli.command(
