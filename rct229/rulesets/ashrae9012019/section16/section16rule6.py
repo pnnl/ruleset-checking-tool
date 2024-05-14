@@ -2,7 +2,7 @@ from rct229.schema.config import ureg
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
-from rct229.rulesets.ashrae9012019 import BASELINE_0
+from rct229.rulesets.ashrae9012019 import BASELINE_0, PROPOSED
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.std_comparisons import std_equal
 from rct229.utils.pint_utils import ZERO
@@ -26,7 +26,6 @@ class Section16Rule6(RuleDefinitionListIndexedBase):
             ruleset_section_title="Elevators",
             standard_section="Table G3.1-16 Baseline Building Performance",
             is_primary_rule=True,
-            rmd_context="ruleset_model_descriptions/0",
             list_path="ruleset_model_descriptions[0].buildings[*].elevators[*]",
         )
 
