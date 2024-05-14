@@ -19,24 +19,24 @@ class Section16Rule1(RuleDefinitionListIndexedBase):
         super(Section16Rule1, self).__init__(
             rmds_used=produce_ruleset_model_instance(
                 USER=False,
-                BASELINE_0=False,
+                BASELINE_0=True,
                 PROPOSED=True,
             ),
             each_rule=Section16Rule1.ElevatorRule(),
-            index_rmd="baseline",
+            index_rmd=BASELINE_0,
             id="16-1",
             description="The elevator peak motor power shall be calculated according to the equation in Table G3.1-16.",
             ruleset_section_title="Elevators",
             standard_section="Section G3.1",
             is_primary_rule=True,
             rmd_context="ruleset_model_descriptions/0",
-            list_path="ruleset_model_descriptions[0].buildings[*].elevators[*]",
+            list_path="$.buildings[*].elevators[*]",
         )
 
     def is_applicable(self, context, data=None):
         rmd_p = context.PROPOSED
 
-        return find_all("$.ruleset_model_descriptions[0].buildings[*].elevators", rmd_p)
+        return find_all("$.buildings[*].elevators", rmd_p)
 
     class ElevatorRule(RuleDefinitionBase):
         def __init__(self):
