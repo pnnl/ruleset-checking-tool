@@ -92,10 +92,10 @@ class Section22Rule26(RuleDefinitionListIndexedBase):
             ]
             return {
                 "primary_pump_power_per_flow_rate": CalcQ(
-                    "power_per_flow_rate", primary_pump_power_per_flow_rate
+                    "power_per_liquid_flow_rate", primary_pump_power_per_flow_rate
                 ),
                 "required_pump_power_per_flow_rate": CalcQ(
-                    "power_per_flow_rate", REQUIRED_PUMP_POWER_PER_FLOW_RATE
+                    "power_per_liquid_flow_rate", REQUIRED_PUMP_POWER_PER_FLOW_RATE
                 ),
             }
 
