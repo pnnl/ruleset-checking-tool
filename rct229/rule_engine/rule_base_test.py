@@ -1,5 +1,4 @@
 import pytest
-
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rule_engine.rulesets import RuleSet
@@ -181,7 +180,9 @@ def test__rule_definition_base__get_context__with_missing_rmrs():
 
 def test__rule_definition_base__get_context__with_rmrs_present():
     context = BASE_RULE_1.get_context(
-        produce_ruleset_model_description(USER=RMD_1, BASELINE_0=RMD_2, PROPOSED=RMD_EMPTY)
+        produce_ruleset_model_description(
+            USER=RMD_1, BASELINE_0=RMD_2, PROPOSED=RMD_EMPTY
+        )
     )
     assert (
         context.USER == RMD_1["transformers"]
