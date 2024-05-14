@@ -141,6 +141,5 @@ def count_test_cases(ruleset_standard):
     )
 
 
-
 if __name__ == "__main__":
     cli()
