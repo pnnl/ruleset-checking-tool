@@ -38,7 +38,7 @@
       "exclusive_maximum_capacity": 65000,
       "subcategory_rating_condition": "single-package",
       "minimum_efficiency": 3.4,
-      "efficiency_metric": "HEAT_PUMP_EFFICIENCY_HIGH_TEMPERATURE_NO_FAN"
+      "efficiency_metric": "HEAT_PUMP_COEFFICIENT_OF_PERFORMANCE_HIGH_TEMPERATURE_NO_FAN"
     },
     {
       "equipment_type": "heat pumps, air-cooled (heating mode)",
@@ -46,7 +46,7 @@
       "exclusive_maximum_capacity": 135000,
       "subcategory_rating_condition": "47F db/43F wb",
       "minimum_efficiency": 3.4,
-      "efficiency_metric": "HEAT_PUMP_EFFICIENCY_HIGH_TEMPERATURE_NO_FAN"
+      "efficiency_metric": "HEAT_PUMP_COEFFICIENT_OF_PERFORMANCE_HIGH_TEMPERATURE_NO_FAN"
     },
     {
       "equipment_type": "heat pumps, air-cooled (heating mode)",
@@ -54,7 +54,7 @@
       "exclusive_maximum_capacity": 135000,
       "subcategory_rating_condition": "17F db/15F wb",
       "minimum_efficiency": 2.3,
-      "efficiency_metric": "HEAT_PUMP_EFFICIENCY_LOW_TEMPERATURE_NO_FAN"
+      "efficiency_metric": "HEAT_PUMP_COEFFICIENT_OF_PERFORMANCE_LOW_TEMPERATURE_NO_FAN"
     },
     {
       "equipment_type": "heat pumps, air-cooled (heating mode)",
@@ -62,7 +62,7 @@
       "exclusive_maximum_capacity": 999999999,
       "subcategory_rating_condition": "47F db/43F wb",
       "minimum_efficiency": 3.4,
-      "efficiency_metric": "HEAT_PUMP_EFFICIENCY_HIGH_TEMPERATURE_NO_FAN"
+      "efficiency_metric": "HEAT_PUMP_COEFFICIENT_OF_PERFORMANCE_HIGH_TEMPERATURE_NO_FAN"
     },
     {
       "equipment_type": "heat pumps, air-cooled (heating mode)",
@@ -70,7 +70,7 @@
       "exclusive_maximum_capacity": 999999999,
       "subcategory_rating_condition": "17F db/15F wb",
       "minimum_efficiency": 2.1,
-      "efficiency_metric": "HEAT_PUMP_EFFICIENCY_LOW_TEMPERATURE_NO_FAN"
+      "efficiency_metric": "HEAT_PUMP_COEFFICIENT_OF_PERFORMANCE_LOW_TEMPERATURE_NO_FAN"
     }
   ]
 }

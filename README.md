@@ -13,6 +13,12 @@
          <img src="https://img.shields.io/badge/License-MIT-yellow.svg"/>
       </td>
    </tr>
+   <tr>
+      <td>Test</td>
+      <td>
+         <img src="https://github.com/pnnl/ruleset-checking-tool/actions/workflows/python-app.yml/badge.svg">
+      </td>
+   </tr>
 </table>
 
 # Ruleset Checking Tool
@@ -30,14 +36,39 @@ pip install ruleset-checking-tool
 ## Usage
 
 ```py
-from rct229.ruletest_engine.run_ruletests import run_ashrae9012019_tests as run
-print(run())
+from rct229.web_application import run_project_evaluation as run
+from rct229.utils.file import deserialize_rpd_file
+
+user_rpd_path = "../examples/chicago_demo/user_model.json"
+proposed_rpd_path = "../examples/chicago_demo/proposed_model.json"
+baseline_rpd_path = "../examples/chicago_demo/baseline_model.json"
+
+user_rpd = None
+proposed_rpd = None
+baseline_rpd = None
+try:
+    user_rpd = deserialize_rpd_file(user_rpd_path)
+except:
+    print(f"{user_rpd_path} is not a valid JSON file")
+
+try:
+    proposed_rpd = deserialize_rpd_file(proposed_rpd_path)
+except:
+    print(f"{proposed_rpd_path} is not a valid JSON file")
+    
+try:
+    baseline_rpd = deserialize_rpd_file(baseline_rpd_path)
+except:
+    print(f"{baseline_rpd_path} is not a valid JSON file")
+
+
+run([user_rpd, proposed_rpd, baseline_rpd], "ashrae9012019", ["ASHRAE9012019DetailReport"], saving_dir="./")
 ```
 
 You can also call evaluation functions from its command line tool. Example is given below:
 
 ```bash
-rct229 evaluate -rs ashrae9012019 -f examples\chicago_demo\baseline_model.json -f examples\chicago_demo\proposed_model.json -f examples\chicago_demo\user_model.json -r ASHRAE9012019DetailReport`
+rct229 evaluate -rs ashrae9012019 -f examples\chicago_demo\baseline_model.json -f examples\chicago_demo\proposed_model.json -f examples\chicago_demo\user_model.json -r ASHRAE9012019DetailReport
 ```
 
 ## About ASHRAE 229P

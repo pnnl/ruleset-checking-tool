@@ -3,11 +3,11 @@
 
 **Rule ID:** 5-33  
 **Rule Description:** The infiltration modeling method in the baseline includes adjustment for weather and building operation.  
-**Rule Assertion:** B-RMR infiltration:modeling_method = NOT "CONSTANT" for all zones  
+**Rule Assertion:** B-RMD infiltration:modeling_method = NOT "CONSTANT" for all zones  
 **Appendix G Section:** Section G3.1-5(b) Building Envelope Modeling Requirements for the Proposed design and Baseline  
 **Appendix G Section Reference:** None  
 
-**Applicability:** All required data elements exist for B_RMR  
+**Applicability:** All required data elements exist for B_RMD  
 **Applicability Checks:**  None  
 
 **Manual Check:** None  
@@ -17,7 +17,7 @@
 
 ## Rule Logic:  
 
-- For each building segment in the Baseline model: `for building_segment_b in B_RMR.building.building_segments:`  
+- For each building segment in the Baseline model: `for building_segment_b in B_RMD.building.building_segments:`  
 
     - For each zone in building segment, get zone infiltration: `for zone_b in building_segment_b.zones: infiltration_b = zone_b.infiltration`  
 
