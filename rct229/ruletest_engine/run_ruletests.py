@@ -196,8 +196,8 @@ def run_test_one_jsontest(test_json):
     return run_section_tests(test_json, RuleSet.ASHRAE9012019_RULESET)
 
 
-# if __name__ == "__main__":
-#     outcome = run_ashrae9012019_tests(section="section5")
+if __name__ == "__main__":
+    outcome = run_ashrae9012019_tests(section="section22")
 
 # run_transformer_tests()
 # run_lighting_tests()

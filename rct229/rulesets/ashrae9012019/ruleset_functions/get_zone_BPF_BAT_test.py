@@ -1,5 +1,4 @@
 import pytest
-
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_BPF_BAT import (
     get_zone_BPF_BAT,
 )

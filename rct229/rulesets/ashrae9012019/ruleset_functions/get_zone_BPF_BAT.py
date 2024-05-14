@@ -1,5 +1,4 @@
 from pint import Quantity
-
 from rct229.rulesets.ashrae9012019.data_fns.table_lighting_space_type_to_bpf_bat import (
     lighting_space_type_to_bpf_bat,
 )

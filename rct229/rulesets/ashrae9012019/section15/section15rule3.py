@@ -1,6 +1,6 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import USER
 from rct229.utils.jsonpath_utils import find_all
 
@@ -10,7 +10,7 @@ class Section15Rule3(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section15Rule3, self).__init__(
-            rmds_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=True, BASELINE_0=False, PROPOSED=True
             ),
             each_rule=Section15Rule3.TransformerRule(),
@@ -30,7 +30,7 @@ class Section15Rule3(RuleDefinitionListIndexedBase):
     class TransformerRule(RuleDefinitionBase):
         def __init__(self):
             super(Section15Rule3.TransformerRule, self).__init__(
-                rmds_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_description(
                     USER=True, BASELINE_0=False, PROPOSED=False
                 ),
             )

@@ -1,6 +1,6 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import PROPOSED
 from rct229.schema.config import ureg
 from rct229.schema.schema_enums import SchemaEnums
@@ -19,7 +19,7 @@ class Section4Rule14(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section4Rule14, self).__init__(
-            rmds_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=False, PROPOSED=True
             ),
             each_rule=Section4Rule14.SpaceRule(),
@@ -55,7 +55,7 @@ class Section4Rule14(RuleDefinitionListIndexedBase):
     class SpaceRule(RuleDefinitionBase):
         def __init__(self):
             super(Section4Rule14.SpaceRule, self).__init__(
-                rmds_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=False, PROPOSED=True
                 ),
                 fail_msg="The space has been classed as a computer room in terms of the lighting space type but the "
