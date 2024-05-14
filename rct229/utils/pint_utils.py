@@ -57,7 +57,7 @@ _UNIT_CONVENTIONS = {
         "temperature": "C",
         "temperature_difference": "K",
         "cooling_efficiency": "W/W",
-        "liquid_flow_rate_per_power": "s/(L*W)",
+        "liquid_flow_rate_per_power": "L/(s*W)",
         "power_per_air_flow_rate": "W-s/L",
         "power_per_liquid_flow_rate": "W-s/L",
         "air_flow_rate": "L/s",
