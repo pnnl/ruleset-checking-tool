@@ -3,11 +3,11 @@
 
 **Rule ID:** 5-2  
 **Rule Description:** The building shall be modeled so that it does not shade itself.  
-**Rule Assertion:** Baseline RMR Building: surface.does_cast_shade = expected value  
+**Rule Assertion:** Baseline RMD Building: surface.does_cast_shade = expected value  
 **Appendix G Section:** Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building  
 **Appendix G Section Reference:** Table G3.1 Section 5a  
 
-**Applicability:** All required data elements exist for B_RMR  
+**Applicability:** All required data elements exist for B_RMD  
 **Applicability Checks:**  None  
 
 **Manual Check:** None  
@@ -16,7 +16,7 @@
 
 ## Rule Logic:  
 
-- For each building segment in the Baseline model: ```for building_segment_b in B_RMR.building.building_segments:```  
+- For each building segment in the Baseline model: ```for building_segment_b in B_RMD.building.building_segments:```  
  
   - For each zone in building segment: ```zone_b in building_segment_b.zones:```  
 
