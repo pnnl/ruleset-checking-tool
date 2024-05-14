@@ -13,9 +13,9 @@ class Section1Rule7(RuleDefinitionBase):
                 USER=True, BASELINE_0=False, PROPOSED=True
             ),
             id="1-7",
-            description="The proposed design shall be the same as the user design for all data elements identified in the schema hosted at data.standards.ashrae",
+            description="The proposed design shall be the same as the user design for all data elements identified in the schema hosted at data.standards.ashrae {{https://github.com/open229/ruleset-model-description-schema/blob/main/docs229/ASHRAE229_extra.schema.json}}",
             ruleset_section_title="Performance Calculation",
-            standard_section="N/A",
+            standard_section="Table G3.1(1) Proposed Building Performance (a)",
             is_primary_rule=True,
             rmd_context="",
         )
