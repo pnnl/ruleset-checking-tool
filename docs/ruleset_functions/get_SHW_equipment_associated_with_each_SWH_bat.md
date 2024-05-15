@@ -1,4 +1,4 @@
-## get_SHW_equipment_connected_to_use_type
+## get_SHW_equipment_associated_with_each_SWH_bat
 
 Description: This function gets all the SHW equipment connected to a particular SHW use type.  The information is stored in a dictionary where the keys are the ServiceWaterHeatingSpaceOptions2019ASHRAE901 and values are a dictionary giving the ServiceWaterHeatingDistributionSystem, ServiceWaterHeatingEquipment, and Pumps connected to the particular use type  
 
