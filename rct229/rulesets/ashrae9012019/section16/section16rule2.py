@@ -2,7 +2,7 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rule_engine.rulesets import LeapYear
-from rct229.rulesets.ashrae9012019 import BASELINE_0, PROPOSED, USER
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.compare_schedules import (
     compare_schedules,
 )
@@ -53,7 +53,7 @@ class Section16Rule2(RuleDefinitionListIndexedBase):
             rmd_p = context.PROPOSED
 
             motor_use_schedule_b = {
-                sch_id: find_exactly_one_schedule(rmd_p, sch_id)["hourly_values"]
+                sch_id: find_exactly_one_schedule(rmd_b, sch_id)["hourly_values"]
                 for sch_id in find_all(
                     "buildings[*].elevators[*].cab_motor_multiplier_schedule", rmd_b
                 )
