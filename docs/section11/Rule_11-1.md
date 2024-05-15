@@ -24,8 +24,8 @@
 
 ## Applicability Checks:
 - only projects with SWH in the user model are expected to have a SWH system in the proposed model.  If there is no SWH in the user model, we assume there is no SWH system designed, and instead rule 11-3 Applies and P_RMD matches B_RMD.
-- use the function get_SWH_equipment_associated_with_each_swh_distribution_system to get a dictionary of SWH equipment associated with each Distribution System for the Proposed model: `p_swh_system_and_equip_dict = get_SWH_equipment_associated_with_each_swh_distribution_system(P_RMD)`
-- use the function get_SWH_equipment_associated_with_each_swh_distribution_system to get a dictionary of SWH equipment associated with each Distribution System for the User model: `u_swh_system_and_equip_dict = get_SWH_equipment_associated_with_each_swh_distribution_system(U_RMD)`
+- use the function get_SWH_equipment_associated_with_each_swh_distribution_system to get a dictionary of SWH equipment associated with each Distribution System for the Proposed model (pumps, tanks, SWH use, distribution system, etc): `p_swh_system_and_equip_dict = get_SWH_equipment_associated_with_each_swh_distribution_system(P_RMD)`
+- use the function get_SWH_equipment_associated_with_each_swh_distribution_system to get a dictionary of SWH equipment associated with each Distribution System for the User model (pumps, tanks, SWH use, distribution system, etc): `u_swh_system_and_equip_dict = get_SWH_equipment_associated_with_each_swh_distribution_system(U_RMD)`
 - for each distribution system: `for distribution_id in p_swh_system_and_equip_dict:`
     - get the distribution system: `p_distribution = get_component_by_id(P_RMD, distribution_id)`
     - for each swh use in the dictionary, check to see that the swh use exists in the user model: `for swh_use_id in p_swh_system_and_equip_dict[distribution_id]["SPACE_USES"]:`
