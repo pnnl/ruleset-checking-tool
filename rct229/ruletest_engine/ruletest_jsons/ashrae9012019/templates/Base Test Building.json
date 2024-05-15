@@ -1,0 +1,1132 @@
+{
+  "id": "TEST RPD",
+  "output_format_type": "OUTPUT_SCHEMA_ASHRAE901_2019",
+  "ruleset_model_descriptions": [
+    {
+      "id": "TEST RMD",
+      "buildings": [
+        {
+          "id": "TEST Building",
+          "building_open_schedule": "ALWAYS ON",
+          "building_segments": [
+            {
+              "id": "Building Segment 1",
+              "heating_ventilating_air_conditioning_systems": [],
+              "zones": [
+                {
+                  "id": "Core Zone 1",
+                  "volume": 2698.04,
+                  "thermostat_cooling_setpoint_schedule": "Core Zone 1 COOLING SETPOINT SCH",
+                  "thermostat_heating_setpoint_schedule": "Core Zone 1 HEATING SETPOINT SCH",
+                  "surfaces": [
+                    {
+                      "id": "Core Zone 1 Ceiling",
+                      "classification": "CEILING",
+                      "area": 983.754,
+                      "tilt": 0.0,
+                      "azimuth": 180.0,
+                      "adjacent_to": "EXTERIOR",
+                      "construction": {
+                        "id": "Exterior Roof",
+                        "surface_construction_input_option": "LAYERS",
+                        "primary_layers": [
+                          {
+                            "id": "Roof Continuous Insulation",
+                            "thickness": 0.1545340896,
+                            "thermal_conductivity": 0.0288,
+                            "density": 32,
+                            "specific_heat": 1465
+                          },
+                          {
+                            "id": "Metal Decking",
+                            "thickness": 0.0015,
+                            "thermal_conductivity": 45,
+                            "density": 7689,
+                            "specific_heat": 418
+                          },
+                          {
+                            "id": "Roof Membrane",
+                            "thickness": 0.0095,
+                            "thermal_conductivity": 0.16,
+                            "density": 1121.29,
+                            "specific_heat": 1460
+                          }
+                        ],
+                        "u_factor": 0.18
+                      }
+                    },
+                    {
+                      "id": "Core Zone 1 Floor",
+                      "classification": "FLOOR",
+                      "area": 983.754,
+                      "tilt": 180.0,
+                      "azimuth": 0.0,
+                      "adjacent_to": "EXTERIOR",
+                      "construction": {
+                        "id": "Exterior Slab",
+                        "surface_construction_input_option": "LAYERS",
+                        "primary_layers": [
+                          {
+                            "id": "Carpet",
+                            "thickness": 0.01905,
+                            "thermal_conductivity": 0.0455183217255675,
+                            "density": 288.332340731283,
+                            "specific_heat": 1381.644
+                          },
+                          {
+                            "id": "Concrete HW Solid 6in",
+                            "thickness": 0.1524,
+                            "thermal_conductivity": 1.311,
+                            "density": 2240,
+                            "specific_heat": 836.8
+                          }
+                        ],
+                        "u_factor": 1.435
+                      }
+                    },
+                    {
+                      "id": "Core Zone 1 East Wall",
+                      "classification": "WALL",
+                      "area": 95.653,
+                      "tilt": 90.0,
+                      "azimuth": 90.0,
+                      "adjacent_to": "INTERIOR",
+                      "construction": {
+                        "id": "Interior Wall",
+                        "surface_construction_input_option": "LAYERS",
+                        "primary_layers": [
+                          {
+                            "id": "Gypsum 5/8in",
+                            "thickness": 0.016,
+                            "thermal_conductivity": 0.1622,
+                            "density": 800,
+                            "specific_heat": 1090
+                          },
+                          {
+                            "id": "Gypsum 5/8in 01",
+                            "thickness": 0.016,
+                            "thermal_conductivity": 0.1622,
+                            "density": 800,
+                            "specific_heat": 1090
+                          }
+                        ],
+                        "u_factor": 1.676
+                      }
+                    },
+                    {
+                      "id": "Core Zone 1 North Wall",
+                      "classification": "WALL",
+                      "area": 161.475,
+                      "tilt": 90.0,
+                      "azimuth": 0.0,
+                      "adjacent_to": "INTERIOR",
+                      "construction": {
+                        "id": "Interior Wall 02",
+                        "surface_construction_input_option": "LAYERS",
+                        "primary_layers": [
+                          {
+                            "id": "Gypsum 5/8in 03",
+                            "thickness": 0.016,
+                            "thermal_conductivity": 0.1622,
+                            "density": 800,
+                            "specific_heat": 1090
+                          },
+                          {
+                            "id": "Gypsum 5/8in 04",
+                            "thickness": 0.016,
+                            "thermal_conductivity": 0.1622,
+                            "density": 800,
+                            "specific_heat": 1090
+                          }
+                        ],
+                        "u_factor": 1.676
+                      }
+                    },
+                    {
+                      "id": "Core Zone 1 South Wall",
+                      "classification": "WALL",
+                      "area": 161.475,
+                      "tilt": 90.0,
+                      "azimuth": 180.0,
+                      "adjacent_to": "INTERIOR",
+                      "construction": {
+                        "id": "Interior Wall 05",
+                        "surface_construction_input_option": "LAYERS",
+                        "primary_layers": [
+                          {
+                            "id": "Gypsum 5/8in 06",
+                            "thickness": 0.016,
+                            "thermal_conductivity": 0.1622,
+                            "density": 800,
+                            "specific_heat": 1090
+                          },
+                          {
+                            "id": "Gypsum 5/8in 07",
+                            "thickness": 0.016,
+                            "thermal_conductivity": 0.1622,
+                            "density": 800,
+                            "specific_heat": 1090
+                          }
+                        ],
+                        "u_factor": 1.676
+                      }
+                    },
+                    {
+                      "id": "Core Zone 1 West Wall",
+                      "classification": "WALL",
+                      "area": 95.653,
+                      "tilt": 90.0,
+                      "azimuth": 270.0,
+                      "adjacent_to": "INTERIOR",
+                      "construction": {
+                        "id": "Interior Wall 08",
+                        "surface_construction_input_option": "LAYERS",
+                        "primary_layers": [
+                          {
+                            "id": "Gypsum 5/8in 09",
+                            "thickness": 0.016,
+                            "thermal_conductivity": 0.1622,
+                            "density": 800,
+                            "specific_heat": 1090
+                          },
+                          {
+                            "id": "Gypsum 5/8in 10",
+                            "thickness": 0.016,
+                            "thermal_conductivity": 0.1622,
+                            "density": 800,
+                            "specific_heat": 1090
+                          }
+                        ],
+                        "u_factor": 1.676
+                      }
+                    }
+                  ],
+                  "infiltration": {
+                    "id": "Core Zone 1 INFILTRATION",
+                    "modeling_method": "WEATHER_DRIVEN",
+                    "flow_rate": 0.0,
+                    "multiplier_schedule": "Core Zone 1 INFILTRATION SCH"
+                  },
+                  "terminals": [
+                    {
+                      "id": "Core Zone 1 terminal",
+                      "served_by_heating_ventilating_air_conditioning_system": "MZ-VAV-G",
+                      "heating_capacity": 66757.566
+                    }
+                  ],
+                  "spaces": [
+                    {
+                      "id": "Core Zone 1 SPACE",
+                      "floor_area": 983.754,
+                      "number_of_occupants": 52.94,
+                      "occupant_multiplier_schedule": "Core Zone 1 OCCUPANT SCH",
+                      "interior_lighting": [
+                        {
+                          "id": "Core Zone 1 LIGHTING",
+                          "power_per_area": 6.8889,
+                          "lighting_multiplier_schedule": "Core Zone 1 LIGHTING SCH",
+                          "daylighting_control_type": "NONE",
+                          "are_schedules_used_for_modeling_occupancy_control": false,
+                          "are_schedules_used_for_modeling_daylighting_control": false
+                        }
+                      ],
+                      "lighting_space_type": "OFFICE_OPEN_PLAN",
+                      "miscellaneous_equipment": [
+                        {
+                          "id": "Core Zone 1 ELEC EQUIP",
+                          "energy_type": "ELECTRICITY",
+                          "multiplier_schedule": "Core Zone 1 ELEC EQUIP SCH",
+                          "sensible_fraction": 1.0,
+                          "latent_fraction": 0.0,
+                          "power": 7940.11842
+                        }
+                      ],
+                      "ventilation_space_type": "OFFICE_BUILDINGS_OFFICE_SPACE",
+                      "service_water_heating_space_type": "OFFICE"
+                    }
+                  ]
+                },
+                {
+                  "id": "Prm Zone 1",
+                  "volume": 568.77,
+                  "thermostat_cooling_setpoint_schedule": "Prm Zone 1 COOLING SETPOINT SCH",
+                  "thermostat_heating_setpoint_schedule": "Prm Zone 1 HEATING SETPOINT SCH",
+                  "surfaces": [
+                    {
+                      "id": "Prm Zone 1 Ceiling",
+                      "classification": "CEILING",
+                      "area": 207.29,
+                      "tilt": 0.0,
+                      "azimuth": 180.0,
+                      "adjacent_to": "EXTERIOR",
+                      "construction": {
+                        "id": "Exterior Roof 11",
+                        "surface_construction_input_option": "LAYERS",
+                        "primary_layers": [
+                          {
+                            "id": "Roof Continuous Insulation 12",
+                            "thickness": 0.1545340896,
+                            "thermal_conductivity": 0.0288,
+                            "density": 32,
+                            "specific_heat": 1465
+                          },
+                          {
+                            "id": "Metal Decking 13",
+                            "thickness": 0.0015,
+                            "thermal_conductivity": 45,
+                            "density": 7689,
+                            "specific_heat": 418
+                          },
+                          {
+                            "id": "Roof Membrane 14",
+                            "thickness": 0.0095,
+                            "thermal_conductivity": 0.16,
+                            "density": 1121.29,
+                            "specific_heat": 1460
+                          }
+                        ],
+                        "u_factor": 0.18
+                      }
+                    },
+                    {
+                      "id": "Prm Zone 1 Floor",
+                      "classification": "FLOOR",
+                      "area": 207.290,
+                      "tilt": 180.0,
+                      "azimuth": 135.0,
+                      "adjacent_to": "EXTERIOR",
+                      "construction": {
+                        "id": "Exterior Slab 15",
+                        "surface_construction_input_option": "LAYERS",
+                        "primary_layers": [
+                          {
+                            "id": "Carpet 16",
+                            "thickness": 0.01905,
+                            "thermal_conductivity": 0.0455183217255675,
+                            "density": 288.332340731283,
+                            "specific_heat": 1381.644
+                          },
+                          {
+                            "id": "Concrete HW Solid 6in 17",
+                            "thickness": 0.1524,
+                            "thermal_conductivity": 1.311,
+                            "density": 2240,
+                            "specific_heat": 836.8
+                          }
+                        ],
+                        "u_factor": 1.435
+                      }
+                    },
+                    {
+                      "id": "Prm Zone 1 East Wall",
+                      "classification": "WALL",
+                      "area": 25.62,
+                      "tilt": 90.0,
+                      "azimuth": 45.0,
+                      "adjacent_to": "INTERIOR",
+                      "construction": {
+                        "id": "Interior Wall 18",
+                        "surface_construction_input_option": "LAYERS",
+                        "primary_layers": [
+                          {
+                            "id": "Gypsum 5/8in 19",
+                            "thickness": 0.016,
+                            "thermal_conductivity": 0.1622,
+                            "density": 800,
+                            "specific_heat": 1090
+                          },
+                          {
+                            "id": "Gypsum 5/8in 20",
+                            "thickness": 0.016,
+                            "thermal_conductivity": 0.1622,
+                            "density": 800,
+                            "specific_heat": 1090
+                          }
+                        ],
+                        "u_factor": 1.676
+                      }
+                    },
+                    {
+                      "id": "Prm Zone 1 South Wall",
+                      "classification": "WALL",
+                      "area": 197.828,
+                      "tilt": 90.0,
+                      "azimuth": 180.0,
+                      "adjacent_to": "EXTERIOR",
+                      "subsurfaces": [
+                        {
+                          "id": "Prm Zone 1 South Wall Window 1",
+                          "classification": "WINDOW",
+                          "glazed_area": 21.456,
+                          "opaque_area": 0.0,
+                          "u_factor": 2.045,
+                          "solar_heat_gain_coefficient": 0.381,
+                          "visible_transmittance": 0.42
+                        },
+                        {
+                          "id": "Prm Zone 1 South Wall Window 2",
+                          "classification": "WINDOW",
+                          "glazed_area": 21.456,
+                          "opaque_area": 0.0,
+                          "u_factor": 2.045,
+                          "solar_heat_gain_coefficient": 0.381,
+                          "visible_transmittance": 0.42
+                        },
+                        {
+                          "id": "Prm Zone 1 South Wall Window 3",
+                          "classification": "WINDOW",
+                          "glazed_area": 21.456,
+                          "opaque_area": 0.0,
+                          "u_factor": 2.045,
+                          "solar_heat_gain_coefficient": 0.381,
+                          "visible_transmittance": 0.42
+                        },
+                        {
+                          "id": "Prm Zone 1 South Wall Door 1",
+                          "classification": "DOOR",
+                          "glazed_area": 0,
+                          "opaque_area": 1.951,
+                          "u_factor": 2.045,
+                          "solar_heat_gain_coefficient": 0.381,
+                          "visible_transmittance": 0.42
+                        },
+                        {
+                          "id": "Prm Zone 1 South Wall Door 2",
+                          "classification": "DOOR",
+                          "glazed_area": 0,
+                          "opaque_area": 1.951,
+                          "u_factor": 2.045,
+                          "solar_heat_gain_coefficient": 0.381,
+                          "visible_transmittance": 0.42
+                        }
+                      ],
+                      "construction": {
+                        "id": "Exterior Wall",
+                        "surface_construction_input_option": "LAYERS",
+                        "primary_layers": [
+                          {
+                            "id": "Wall Continuous Insulation",
+                            "thickness": 0.09188790268235296,
+                            "thermal_conductivity": 0.0288,
+                            "density": 32,
+                            "specific_heat": 1465
+                          },
+                          {
+                            "id": "Gypsum 5/8in 21",
+                            "thickness": 0.016,
+                            "thermal_conductivity": 0.1622,
+                            "density": 800,
+                            "specific_heat": 1090
+                          },
+                          {
+                            "id": "Stucco",
+                            "thickness": 0.01015,
+                            "thermal_conductivity": 0.72,
+                            "density": 1856,
+                            "specific_heat": 840
+                          }
+                        ],
+                        "u_factor": 0.29
+                      }
+                    }
+                  ],
+                  "infiltration": {
+                    "id": "Prm Zone 1 INFILTRATION",
+                    "modeling_method": "WEATHER_DRIVEN",
+                    "flow_rate": 0.113,
+                    "multiplier_schedule": "Prm Zone 1 INFILTRATION SCH"
+                  },
+                  "terminals": [
+                    {
+                      "id": "Prm Zone 1-terminal",
+                      "served_by_heating_ventilating_air_conditioning_system": "MZ-VAV-G",
+                      "heating_capacity": 29506.053
+                    }
+                  ],
+                  "spaces": [
+                    {
+                      "id": "Prm Zone 1 SPACE",
+                      "floor_area": 207.290,
+                      "number_of_occupants": 11.16,
+                      "occupant_multiplier_schedule": "Prm Zone 1 OCCUPANT SCH",
+                      "interior_lighting": [
+                        {
+                          "id": "Prm Zone 1 LIGHTING",
+                          "power_per_area": 6.8889,
+                          "lighting_multiplier_schedule": "Prm Zone 1 LIGHTING SCH",
+                          "daylighting_control_type": "NONE",
+                          "are_schedules_used_for_modeling_occupancy_control": false,
+                          "are_schedules_used_for_modeling_daylighting_control": false
+                        }
+                      ],
+                      "lighting_space_type": "OFFICE_OPEN_PLAN",
+                      "miscellaneous_equipment": [
+                        {
+                          "id": "Prm Zone 1 ELEC EQUIP",
+                          "energy_type": "ELECTRICITY",
+                          "multiplier_schedule": "Prm Zone 1 ELEC EQUIP SCH",
+                          "sensible_fraction": 1.0,
+                          "latent_fraction": 0.0,
+                          "power": 1673.8558200000002
+                        }
+                      ],
+                      "ventilation_space_type": "OFFICE_BUILDINGS_OFFICE_SPACE",
+                      "service_water_heating_space_type": "OFFICE"
+                    }
+                  ]
+                },
+                {
+                  "id": "Prm Zone 2",
+                  "volume": 360.08,
+                  "thermostat_cooling_setpoint_schedule": "Prm Zone 2 COOLING SETPOINT SCH",
+                  "thermostat_heating_setpoint_schedule": "Prm Zone 2 HEATING SETPOINT SCH",
+                  "surfaces": [
+                    {
+                      "id": "Prm Zone 2 Ceiling",
+                      "classification": "CEILING",
+                      "area": 131.272,
+                      "tilt": 0.0,
+                      "azimuth": 225.0,
+                      "adjacent_to": "EXTERIOR",
+                      "construction": {
+                        "id": "Exterior Roof 22",
+                        "surface_construction_input_option": "LAYERS",
+                        "primary_layers": [
+                          {
+                            "id": "Roof Continuous Insulation 23",
+                            "thickness": 0.1545340896,
+                            "thermal_conductivity": 0.0288,
+                            "density": 32,
+                            "specific_heat": 1465
+                          },
+                          {
+                            "id": "Metal Decking 24",
+                            "thickness": 0.0015,
+                            "thermal_conductivity": 45,
+                            "density": 7689,
+                            "specific_heat": 418
+                          },
+                          {
+                            "id": "Roof Membrane 25",
+                            "thickness": 0.0095,
+                            "thermal_conductivity": 0.16,
+                            "density": 1121.29,
+                            "specific_heat": 1460
+                          }
+                        ],
+                        "u_factor": 0.18
+                      }
+                    },
+                    {
+                      "id": "Prm Zone 2 Floor",
+                      "classification": "FLOOR",
+                      "area": 131.272,
+                      "tilt": 180.0,
+                      "azimuth": 45.0,
+                      "adjacent_to": "EXTERIOR",
+                      "construction": {
+                        "id": "Exterior Slab 26",
+                        "surface_construction_input_option": "LAYERS",
+                        "primary_layers": [
+                          {
+                            "id": "Carpet 27",
+                            "thickness": 0.01905,
+                            "thermal_conductivity": 0.0455183217255675,
+                            "density": 288.332340731283,
+                            "specific_heat": 1381.644
+                          },
+                          {
+                            "id": "Concrete HW Solid 6in 28",
+                            "thickness": 0.1524,
+                            "thermal_conductivity": 1.311,
+                            "density": 2240,
+                            "specific_heat": 836.8
+                          }
+                        ],
+                        "u_factor": 1.435
+                      }
+                    },
+                    {
+                      "id": "Prm Zone 2 East Wall",
+                      "classification": "WALL",
+                      "area": 131.885,
+                      "tilt": 90.0,
+                      "azimuth": 90.0,
+                      "adjacent_to": "EXTERIOR",
+                      "subsurfaces": [
+                        {
+                          "id": "Prm Zone 2 East Wall Window 1",
+                          "classification": "WINDOW",
+                          "glazed_area": 41.838,
+                          "opaque_area": 0.0,
+                          "u_factor": 2.045,
+                          "solar_heat_gain_coefficient": 0.381,
+                          "visible_transmittance": 0.42
+                        },
+                        {
+                          "id": "Prm Zone 2 East Wall Door 1",
+                          "classification": "DOOR",
+                          "glazed_area": 0,
+                          "opaque_area": 1.951,
+                          "u_factor": 2.045,
+                          "solar_heat_gain_coefficient": 0.381,
+                          "visible_transmittance": 0.42
+                        }
+                      ],
+                      "construction": {
+                        "id": "Exterior Wall 29",
+                        "surface_construction_input_option": "LAYERS",
+                        "primary_layers": [
+                          {
+                            "id": "Wall Continuous Insulation 30",
+                            "thickness": 0.09188790268235296,
+                            "thermal_conductivity": 0.0288,
+                            "density": 32,
+                            "specific_heat": 1465
+                          },
+                          {
+                            "id": "Gypsum 5/8in 31",
+                            "thickness": 0.016,
+                            "thermal_conductivity": 0.1622,
+                            "density": 800,
+                            "specific_heat": 1090
+                          },
+                          {
+                            "id": "Stucco 32",
+                            "thickness": 0.01015,
+                            "thermal_conductivity": 0.72,
+                            "density": 1856,
+                            "specific_heat": 840
+                          }
+                        ],
+                        "u_factor": 0.29
+                      }
+                    },
+                    {
+                      "id": "Prm Zone 2 North Wall",
+                      "classification": "WALL",
+                      "area": 25.62,
+                      "tilt": 90.0,
+                      "azimuth": 315.0,
+                      "adjacent_to": "INTERIOR",
+                      "construction": {
+                        "id": "Interior Wall 33",
+                        "surface_construction_input_option": "LAYERS",
+                        "primary_layers": [
+                          {
+                            "id": "Gypsum 5/8in 34",
+                            "thickness": 0.016,
+                            "thermal_conductivity": 0.1622,
+                            "density": 800,
+                            "specific_heat": 1090
+                          },
+                          {
+                            "id": "Gypsum 5/8in 35",
+                            "thickness": 0.016,
+                            "thermal_conductivity": 0.1622,
+                            "density": 800,
+                            "specific_heat": 1090
+                          }
+                        ],
+                        "u_factor": 1.676
+                      }
+                    }
+                  ],
+                  "infiltration": {
+                    "id": "Prm Zone 2 INFILTRATION",
+                    "modeling_method": "WEATHER_DRIVEN",
+                    "flow_rate": 0.07501,
+                    "multiplier_schedule": "Prm Zone 2 INFILTRATION SCH"
+                  },
+                  "terminals": [
+                    {
+                      "id": "Prm Zone 2-terminal",
+                      "served_by_heating_ventilating_air_conditioning_system": "MZ-VAV-G",
+                      "heating_capacity": 19262.001
+                    }
+                  ],
+                  "spaces": [
+                    {
+                      "id": "Prm Zone 2 SPACE",
+                      "floor_area": 131.272,
+                      "number_of_occupants": 7.06,
+                      "occupant_multiplier_schedule": "Prm Zone 2 OCCUPANT SCH",
+                      "interior_lighting": [
+                        {
+                          "id": "Prm Zone 2 LIGHTING",
+                          "power_per_area": 6.8889,
+                          "lighting_multiplier_schedule": "Prm Zone 2 LIGHTING SCH",
+                          "daylighting_control_type": "NONE",
+                          "are_schedules_used_for_modeling_occupancy_control": false,
+                          "are_schedules_used_for_modeling_daylighting_control": false
+                        }
+                      ],
+                      "lighting_space_type": "OFFICE_OPEN_PLAN",
+                      "miscellaneous_equipment": [
+                        {
+                          "id": "Prm Zone 2 ELEC EQUIP",
+                          "energy_type": "ELECTRICITY",
+                          "multiplier_schedule": "Prm Zone 2 ELEC EQUIP SCH",
+                          "sensible_fraction": 1.0,
+                          "latent_fraction": 0.0,
+                          "power": 1059.66198
+                        }
+                      ],
+                      "ventilation_space_type": "OFFICE_BUILDINGS_OFFICE_SPACE",
+                      "service_water_heating_space_type": "OFFICE"
+                    }
+                  ]
+                },
+                {
+                  "id": "Prm Zone 3",
+                  "volume": 568.77,
+                  "thermostat_cooling_setpoint_schedule": "Prm Zone 3 COOLING SETPOINT SCH",
+                  "thermostat_heating_setpoint_schedule": "Prm Zone 3 HEATING SETPOINT SCH",
+                  "surfaces": [
+                    {
+                      "id": "Prm Zone 3 Ceiling",
+                      "classification": "CEILING",
+                      "area": 207.290,
+                      "tilt": 0.0,
+                      "azimuth": 180.0,
+                      "adjacent_to": "EXTERIOR",
+                      "construction": {
+                        "id": "Exterior Roof 36",
+                        "surface_construction_input_option": "LAYERS",
+                        "primary_layers": [
+                          {
+                            "id": "Roof Continuous Insulation 37",
+                            "thickness": 0.1545340896,
+                            "thermal_conductivity": 0.0288,
+                            "density": 32,
+                            "specific_heat": 1465
+                          },
+                          {
+                            "id": "Metal Decking 38",
+                            "thickness": 0.0015,
+                            "thermal_conductivity": 45,
+                            "density": 7689,
+                            "specific_heat": 418
+                          },
+                          {
+                            "id": "Roof Membrane 39",
+                            "thickness": 0.0095,
+                            "thermal_conductivity": 0.16,
+                            "density": 1121.29,
+                            "specific_heat": 1460
+                          }
+                        ],
+                        "u_factor": 0.18
+                      }
+                    },
+                    {
+                      "id": "Prm Zone 3 Floor",
+                      "classification": "FLOOR",
+                      "area": 207.290,
+                      "tilt": 180.0,
+                      "azimuth": 0.0,
+                      "adjacent_to": "EXTERIOR",
+                      "construction": {
+                        "id": "Exterior Slab 40",
+                        "surface_construction_input_option": "LAYERS",
+                        "primary_layers": [
+                          {
+                            "id": "Carpet 41",
+                            "thickness": 0.01905,
+                            "thermal_conductivity": 0.0455183217255675,
+                            "density": 288.332340731283,
+                            "specific_heat": 1381.644
+                          },
+                          {
+                            "id": "Concrete HW Solid 6in 42",
+                            "thickness": 0.1524,
+                            "thermal_conductivity": 1.311,
+                            "density": 2240,
+                            "specific_heat": 836.8
+                          }
+                        ],
+                        "u_factor": 1.435
+                      }
+                    },
+                    {
+                      "id": "Prm Zone 3 North Wall",
+                      "classification": "WALL",
+                      "area": 197.828,
+                      "tilt": 90.0,
+                      "azimuth": 0.0,
+                      "adjacent_to": "EXTERIOR",
+                      "subsurfaces": [
+                        {
+                          "id": "Prm Zone 3 North Wall Window 1",
+                          "classification": "WINDOW",
+                          "glazed_area": 21.456,
+                          "opaque_area": 0.0,
+                          "u_factor": 2.045,
+                          "solar_heat_gain_coefficient": 0.381,
+                          "visible_transmittance": 0.42
+                        },
+                        {
+                          "id": "Prm Zone 3 North Wall Window 2",
+                          "classification": "WINDOW",
+                          "glazed_area": 21.456,
+                          "opaque_area": 0.0,
+                          "u_factor": 2.045,
+                          "solar_heat_gain_coefficient": 0.381,
+                          "visible_transmittance": 0.42
+                        },
+                        {
+                          "id": "Prm Zone 3 North Wall Window 3",
+                          "classification": "WINDOW",
+                          "glazed_area": 21.456,
+                          "opaque_area": 0.0,
+                          "u_factor": 2.045,
+                          "solar_heat_gain_coefficient": 0.381,
+                          "visible_transmittance": 0.42
+                        },
+                        {
+                          "id": "Prm Zone 3 North Wall Door 1",
+                          "classification": "DOOR",
+                          "glazed_area": 0,
+                          "opaque_area": 1.951,
+                          "u_factor": 2.045,
+                          "solar_heat_gain_coefficient": 0.381,
+                          "visible_transmittance": 0.42
+                        },
+                        {
+                          "id": "Prm Zone 3 North Wall Door 2",
+                          "classification": "DOOR",
+                          "glazed_area": 0,
+                          "opaque_area": 1.951,
+                          "u_factor": 2.045,
+                          "solar_heat_gain_coefficient": 0.381,
+                          "visible_transmittance": 0.42
+                        }
+                      ],
+                      "construction": {
+                        "id": "Exterior Wall 43",
+                        "surface_construction_input_option": "LAYERS",
+                        "primary_layers": [
+                          {
+                            "id": "Wall Continuous Insulation 44",
+                            "thickness": 0.09188790268235296,
+                            "thermal_conductivity": 0.0288,
+                            "density": 32,
+                            "specific_heat": 1465
+                          },
+                          {
+                            "id": "Gypsum 5/8in 45",
+                            "thickness": 0.016,
+                            "thermal_conductivity": 0.1622,
+                            "density": 800,
+                            "specific_heat": 1090
+                          },
+                          {
+                            "id": "Stucco 46",
+                            "thickness": 0.01015,
+                            "thermal_conductivity": 0.72,
+                            "density": 1856,
+                            "specific_heat": 840
+                          }
+                        ],
+                        "u_factor": 0.29
+                      }
+                    },
+                    {
+                      "id": "Prm Zone 3 West Wall",
+                      "classification": "WALL",
+                      "area": 25.62,
+                      "tilt": 90.0,
+                      "azimuth": 225.0,
+                      "adjacent_to": "INTERIOR",
+                      "construction": {
+                        "id": "Interior Wall 47",
+                        "surface_construction_input_option": "LAYERS",
+                        "primary_layers": [
+                          {
+                            "id": "Gypsum 5/8in 48",
+                            "thickness": 0.016,
+                            "thermal_conductivity": 0.1622,
+                            "density": 800,
+                            "specific_heat": 1090
+                          },
+                          {
+                            "id": "Gypsum 5/8in 49",
+                            "thickness": 0.016,
+                            "thermal_conductivity": 0.1622,
+                            "density": 800,
+                            "specific_heat": 1090
+                          }
+                        ],
+                        "u_factor": 1.676
+                      }
+                    }
+                  ],
+                  "infiltration": {
+                    "id": "Prm Zone 3 INFILTRATION",
+                    "modeling_method": "WEATHER_DRIVEN",
+                    "flow_rate": 0.113,
+                    "multiplier_schedule": "Prm Zone 3 INFILTRATION SCH"
+                  },
+                  "terminals": [
+                    {
+                      "id": "Prm Zone 3-terminal",
+                      "served_by_heating_ventilating_air_conditioning_system": "MZ-VAV-G",
+                      "heating_capacity": 29506.059
+                    }
+                  ],
+                  "spaces": [
+                    {
+                      "id": "Prm Zone 3 SPACE",
+                      "floor_area": 207.290,
+                      "number_of_occupants": 11.16,
+                      "occupant_multiplier_schedule": "Prm Zone 3 OCCUPANT SCH",
+                      "interior_lighting": [
+                        {
+                          "id": "Prm Zone 3 LIGHTING",
+                          "power_per_area": 6.8889,
+                          "lighting_multiplier_schedule": "Prm Zone 3 LIGHTING SCH",
+                          "daylighting_control_type": "NONE",
+                          "are_schedules_used_for_modeling_occupancy_control": false,
+                          "are_schedules_used_for_modeling_daylighting_control": false
+                        }
+                      ],
+                      "lighting_space_type": "OFFICE_OPEN_PLAN",
+                      "miscellaneous_equipment": [
+                        {
+                          "id": "Prm Zone 3 ELEC EQUIP",
+                          "energy_type": "ELECTRICITY",
+                          "multiplier_schedule": "Prm Zone 3 ELEC EQUIP SCH",
+                          "sensible_fraction": 1.0,
+                          "latent_fraction": 0.0,
+                          "power": 1673.8558200000002
+                        }
+                      ],
+                      "ventilation_space_type": "OFFICE_BUILDINGS_OFFICE_SPACE",
+                      "service_water_heating_space_type": "OFFICE"
+                    }
+                  ]
+                },
+                {
+                  "id": "Prm Zone 4",
+                  "volume": 360.05,
+                  "thermostat_cooling_setpoint_schedule": "Prm Zone 4 COOLING SETPOINT SCH",
+                  "thermostat_heating_setpoint_schedule": "Prm Zone 4 HEATING SETPOINT SCH",
+                  "surfaces": [
+                    {
+                      "id": "Prm Zone 4 Ceiling",
+                      "classification": "CEILING",
+                      "area": 131.272,
+                      "tilt": 0.0,
+                      "azimuth": 135.0,
+                      "adjacent_to": "EXTERIOR",
+                      "construction": {
+                        "id": "Exterior Roof 50",
+                        "surface_construction_input_option": "LAYERS",
+                        "primary_layers": [
+                          {
+                            "id": "Roof Continuous Insulation 51",
+                            "thickness": 0.1545340896,
+                            "thermal_conductivity": 0.0288,
+                            "density": 32,
+                            "specific_heat": 1465
+                          },
+                          {
+                            "id": "Metal Decking 52",
+                            "thickness": 0.0015,
+                            "thermal_conductivity": 45,
+                            "density": 7689,
+                            "specific_heat": 418
+                          },
+                          {
+                            "id": "Roof Membrane 53",
+                            "thickness": 0.0095,
+                            "thermal_conductivity": 0.16,
+                            "density": 1121.29,
+                            "specific_heat": 1460
+                          }
+                        ],
+                        "u_factor": 0.18
+                      }
+                    },
+                    {
+                      "id": "Prm Zone 4 Floor",
+                      "classification": "FLOOR",
+                      "area": 131.272,
+                      "tilt": 180.0,
+                      "azimuth": 315.0,
+                      "adjacent_to": "EXTERIOR",
+                      "construction": {
+                        "id": "Exterior Slab 54",
+                        "surface_construction_input_option": "LAYERS",
+                        "primary_layers": [
+                          {
+                            "id": "Carpet 55",
+                            "thickness": 0.01905,
+                            "thermal_conductivity": 0.0455183217255675,
+                            "density": 288.332340731283,
+                            "specific_heat": 1381.644
+                          },
+                          {
+                            "id": "Concrete HW Solid 6in 56",
+                            "thickness": 0.1524,
+                            "thermal_conductivity": 1.311,
+                            "density": 2240,
+                            "specific_heat": 836.8
+                          }
+                        ],
+                        "u_factor": 1.435
+                      }
+                    },
+                    {
+                      "id": "Prm Zone 4 South Wall",
+                      "classification": "WALL",
+                      "area": 25.62,
+                      "tilt": 90.0,
+                      "azimuth": 135.0,
+                      "adjacent_to": "INTERIOR",
+                      "construction": {
+                        "id": "Interior Wall 57",
+                        "surface_construction_input_option": "LAYERS",
+                        "primary_layers": [
+                          {
+                            "id": "Gypsum 5/8in 58",
+                            "thickness": 0.016,
+                            "thermal_conductivity": 0.1622,
+                            "density": 800,
+                            "specific_heat": 1090
+                          },
+                          {
+                            "id": "Gypsum 5/8in 59",
+                            "thickness": 0.016,
+                            "thermal_conductivity": 0.1622,
+                            "density": 800,
+                            "specific_heat": 1090
+                          }
+                        ],
+                        "u_factor": 1.676
+                      }
+                    },
+                    {
+                      "id": "Prm Zone 4 West Wall",
+                      "classification": "WALL",
+                      "area": 131.885,
+                      "tilt": 90.0,
+                      "azimuth": 270.0,
+                      "adjacent_to": "EXTERIOR",
+                      "subsurfaces": [
+                        {
+                          "id": "Prm Zone 4 West Wall Window 1",
+                          "classification": "WINDOW",
+                          "glazed_area": 41.838,
+                          "opaque_area": 0.0,
+                          "u_factor": 2.045,
+                          "solar_heat_gain_coefficient": 0.381,
+                          "visible_transmittance": 0.42
+                        },
+                        {
+                          "id": "Prm Zone 4 West Wall Door 1",
+                          "classification": "DOOR",
+                          "glazed_area": 0,
+                          "opaque_area": 1.951,
+                          "u_factor": 2.045,
+                          "solar_heat_gain_coefficient": 0.381,
+                          "visible_transmittance": 0.42
+                        }
+                      ],
+                      "construction": {
+                        "id": "Exterior Wall 60",
+                        "surface_construction_input_option": "LAYERS",
+                        "primary_layers": [
+                          {
+                            "id": "Wall Continuous Insulation 61",
+                            "thickness": 0.09188790268235296,
+                            "thermal_conductivity": 0.0288,
+                            "density": 32,
+                            "specific_heat": 1465
+                          },
+                          {
+                            "id": "Gypsum 5/8in 62",
+                            "thickness": 0.016,
+                            "thermal_conductivity": 0.1622,
+                            "density": 800,
+                            "specific_heat": 1090
+                          },
+                          {
+                            "id": "Stucco 63",
+                            "thickness": 0.01015,
+                            "thermal_conductivity": 0.72,
+                            "density": 1856,
+                            "specific_heat": 840
+                          }
+                        ],
+                        "u_factor": 0.29
+                      }
+                    }
+                  ],
+                  "infiltration": {
+                    "id": "Prm Zone 4 INFILTRATION",
+                    "modeling_method": "WEATHER_DRIVEN",
+                    "flow_rate": 0.07501,
+                    "multiplier_schedule": "Prm Zone 4 INFILTRATION SCH"
+                  },
+                  "terminals": [
+                    {
+                      "id": "Prm Zone 4-terminal",
+                      "served_by_heating_ventilating_air_conditioning_system": "MZ-VAV-G",
+                      "heating_capacity": 14428.761
+                    }
+                  ],
+                  "spaces": [
+                    {
+                      "id": "Prm Zone 4 SPACE",
+                      "floor_area": 131.272,
+                      "number_of_occupants": 7.06,
+                      "occupant_multiplier_schedule": "Prm Zone 4 OCCUPANT SCH",
+                      "interior_lighting": [
+                        {
+                          "id": "Prm Zone 4 LIGHTING",
+                          "power_per_area": 6.8889,
+                          "lighting_multiplier_schedule": "Prm Zone 4 LIGHTING SCH",
+                          "daylighting_control_type": "NONE",
+                          "are_schedules_used_for_modeling_occupancy_control": false,
+                          "are_schedules_used_for_modeling_daylighting_control": false
+                        }
+                      ],
+                      "lighting_space_type": "OFFICE_OPEN_PLAN",
+                      "miscellaneous_equipment": [
+                        {
+                          "id": "Prm Zone 4 ELEC EQUIP",
+                          "energy_type": "ELECTRICITY",
+                          "multiplier_schedule": "Prm Zone 4 ELEC EQUIP SCH",
+                          "sensible_fraction": 1.0,
+                          "latent_fraction": 0.0,
+                          "power": 1059.58125
+                        }
+                      ],
+                      "ventilation_space_type": "OFFICE_BUILDINGS_OFFICE_SPACE",
+                      "service_water_heating_space_type": "OFFICE"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "exterior_lighting": []
+        }
+      ],
+      "schedules": []
+    }
+  ],
+  "weather": {
+    "data_source_type": "OTHER",
+    "climate_zone": "CZ5B",
+    "ground_temperature_schedule": "Ground Temp Schedule",
+    "cooling_design_day_type": "COOLING_0_4",
+    "heating_design_day_type": "HEATING_99_6"
+  },
+  "calendar": {
+    "day_of_week_for_january_1": "FRIDAY",
+    "is_leap_year": false,
+    "has_daylight_saving_time": false
+  }
+}
