@@ -6,19 +6,19 @@ from rct229.rulesets.ashrae9012019.data_fns.extra_schema_fns import (
 
 
 class Section1Rule6(RuleDefinitionBase):
-    """Rule 1 of ASHRAE 90.1-2019 Appendix G Section 1 (Performance Calculation)"""
+    """Rule 6 of ASHRAE 90.1-2019 Appendix G Section 1 (Performance Calculation)"""
 
     def __init__(self):
         super(Section1Rule6, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             id="1-6",
-            description="",
+            description="temp",
             ruleset_section_title="Performance Calculation",
-            standard_section="",
+            standard_section="a",
             is_primary_rule=True,
-            rmr_context="",
+            rmd_context="",
         )
 
     def is_applicable(self, context, data=None):

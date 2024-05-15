@@ -9,7 +9,7 @@ def get_dict_with_terminal_units_and_zones(rmi: dict) -> dict:
     ----------
     rmi: json
 
-    Returns ------- dict a dictionary of zones associated with each terminal unit in the RMR, {terminal_unit_1.id: [
+    Returns ------- dict a dictionary of zones associated with each terminal unit in the rmd, {terminal_unit_1.id: [
     zone_1.id, zone_2.id, zone_3.id], terminal_unit_2.id: [zone_4.id, zone_9.id, zone_30.id]}
 
     """

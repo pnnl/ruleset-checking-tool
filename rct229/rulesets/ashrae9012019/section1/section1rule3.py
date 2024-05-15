@@ -18,7 +18,7 @@ class Section1Rule3(RuleDefinitionBase):
 
     def __init__(self):
         super(Section1Rule3, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=True,
                 BASELINE_0=True,
                 BASELINE_90=True,
@@ -26,13 +26,10 @@ class Section1Rule3(RuleDefinitionBase):
                 BASELINE_270=True,
                 PROPOSED=True,
             ),
-            rmrs_used_optional=produce_ruleset_model_instance(
-                USER=True,
-                BASELINE_0=True,
+            rmds_used_optional=produce_ruleset_model_instance(
                 BASELINE_90=True,
                 BASELINE_180=True,
                 BASELINE_270=True,
-                PROPOSED=True,
             ),
             id="1-3",
             description="The Performance Cost Index-Target (PCIt) shall be calculated using the procedures defined in Section 4.2.1.1. "
@@ -40,7 +37,7 @@ class Section1Rule3(RuleDefinitionBase):
             ruleset_section_title="Performance Calculations",
             standard_section="Section 4.2.1.1",
             is_primary_rule=True,
-            rmr_context="ruleset_model_descriptions/0",
+            rmd_context="ruleset_model_descriptions/0",
         )
 
     def get_calc_vals(self, context, data=None):
@@ -77,11 +74,11 @@ class Section1Rule3(RuleDefinitionBase):
                     find_one("$.output.baseline_building_unregulated_energy_cost", rmd)
                 )
 
-        pci_target_set = list(filter(lambda x: x is not None, pci_target_set))
-        bpf_set = list(filter(lambda x: x is not None, bpf_set))
-        bbp_set = list(filter(lambda x: x is not None, bbp_set))
-        bbrec_set = list(filter(lambda x: x is not None, bbrec_set))
-        bbuec_set = list(filter(lambda x: x is not None, bbuec_set))
+        pci_target_set = list(set(filter(lambda x: x is not None, pci_target_set)))
+        bpf_set = list(set(filter(lambda x: x is not None, bpf_set)))
+        bbp_set = list(set(filter(lambda x: x is not None, bbp_set)))
+        bbrec_set = list(set(filter(lambda x: x is not None, bbrec_set)))
+        bbuec_set = list(set(filter(lambda x: x is not None, bbuec_set)))
 
         assert_(
             len(pci_target_set) >= 1,
@@ -92,12 +89,17 @@ class Section1Rule3(RuleDefinitionBase):
         assert_(len(bbrec_set) >= 1, "At least one `bbrec_set` value must exist.")
         assert_(len(bbuec_set) >= 1, "At least one `bbuec_set` value must exist.")
 
+        assert_(
+            bbp_set[0] > 0,
+            "The `baseline_building_performance_energy_cost` value must be greater than 0.",
+        )
+
         return {
-            "pci_target_set": list(set(pci_target_set)),
-            "bpf_set": list(set(bpf_set)),
-            "bbp_set": list(set(bbp_set)),
-            "bbrec_set": list(set(bbrec_set)),
-            "bbuec_set": list(set(bbuec_set)),
+            "pci_target_set": pci_target_set,
+            "bpf_set": bpf_set,
+            "bbp_set": bbp_set,
+            "bbrec_set": bbrec_set,
+            "bbuec_set": bbuec_set,
         }
 
     def rule_check(self, context, calc_vals=None, data=None):
@@ -107,18 +109,11 @@ class Section1Rule3(RuleDefinitionBase):
         bbrec_set = calc_vals["bbrec_set"]
         bbuec_set = calc_vals["bbuec_set"]
 
-        return (
-            len(pci_target_set)
-            == len(bpf_set)
-            == len(bbp_set)
-            == len(bbrec_set)
-            == len(bbuec_set)
-            == 1
-            and bbp_set[0] != 0
-            and std_equal(
-                (bbuec_set[0] + (bpf_set[0] * bbrec_set[0]) / bbp_set[0]),
-                pci_target_set[0],
-            )
+        return len(pci_target_set) == len(bpf_set) == len(bbp_set) == len(
+            bbrec_set
+        ) == len(bbuec_set) == 1 and std_equal(
+            (bbuec_set[0] + (bpf_set[0] * bbrec_set[0]) / bbp_set[0]),
+            pci_target_set[0],
         )
 
     def get_fail_msg(self, context, calc_vals=None, data=None):
@@ -147,7 +142,5 @@ class Section1Rule3(RuleDefinitionBase):
             FAIL_MSG = (
                 "Ruleset expects exactly one BBUEC value to be used in the project."
             )
-        elif bbp_set[0] == 0:
-            FAIL_MSG = "Ruleset expects baseline_building_performance_energy_cost to be greater than 0."
 
         return FAIL_MSG

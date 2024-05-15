@@ -52,23 +52,23 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section19Rule13, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             each_rule=Section19Rule13.HVACRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="19-13",
             description="For baseline system types 1-8 and 11-13, system design supply airflow rates shall be based on a supply-air-to-room temperature set-point difference of 20°F or the minimum outdoor airflow rate, or the airflow rate required to comply with applicable codes or accreditation standards, whichever is greater. For systems with multiple zone thermostat setpoints, use the design set point that will result in the lowest supply air cooling set point or highest supply air heating set point.",
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1.2.8.1 and Exception 1",
             is_primary_rule=True,
-            rmr_context="ruleset_model_descriptions/0",
+            rmd_context="ruleset_model_descriptions/0",
             list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.BASELINE_0
-        baseline_system_types_dict = get_baseline_system_types(rmi_b)
+        rmd_b = context.BASELINE_0
+        baseline_system_types_dict = get_baseline_system_types(rmd_b)
 
         return any(
             [
@@ -82,11 +82,11 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.BASELINE_0
-        rmi_p = context.PROPOSED
+        rmd_b = context.BASELINE_0
+        rmd_p = context.PROPOSED
 
         dict_of_zones_and_terminal_units_served_by_hvac_sys_b = (
-            get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmi_b)
+            get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmd_b)
         )
 
         zone_info = {}
@@ -95,7 +95,7 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
         for hvac_id_b in dict_of_zones_and_terminal_units_served_by_hvac_sys_b:
             zone_info[hvac_id_b] = {
                 "are_all_hvac_sys_fan_objs_autosized": are_all_hvac_sys_fan_objs_autosized(
-                    rmi_b, hvac_id_b
+                    rmd_b, hvac_id_b
                 ),
                 "zone_has_lab_space": False,
                 "all_design_setpoints_delta_Ts_are_per_reqs": False,
@@ -107,7 +107,7 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
             ]["zone_list"]:
                 zone_b = find_one(
                     f'$.buildings[*].building_segments[*].zones[*][?(@.id = "{zone_id_b}")]',
-                    rmi_b,
+                    rmd_b,
                 )
                 design_thermostat_cooling_setpoint.append(
                     getattr_(zone_b, "zones", "design_thermostat_cooling_setpoint")
@@ -184,7 +184,7 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
                         terminal_p.get("primary_airflow", ZERO.FLOW)
                         for terminal_p in find_all(
                             f'$.buildings[*].building_segments[*].zones[*][?(@.id = "{zone_id_b}")].terminals[*]',
-                            rmi_p,
+                            rmd_p,
                         )
                     ]
                 )
@@ -203,7 +203,7 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
             super(Section19Rule13.HVACRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={

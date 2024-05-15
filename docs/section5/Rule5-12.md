@@ -3,11 +3,11 @@
 
 **Rule ID:** 5-12  
 **Rule Description:** Baseline slab-on-grade floor assemblies must match the appropriate assembly maximum F-factors in Tables G3.4-1 through G3.4-9.  
-**Rule Assertion:** Baseline RMR slab-on-grade floor: F_factor = expected value  
+**Rule Assertion:** Baseline RMD slab-on-grade floor: F_factor = expected value  
 **Appendix G Section:** Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building  
 **Appendix G Section Reference:** Tables G3.4-1 to G3.4-8  
 
-**Applicability:** All required data elements exist for B_RMR  
+**Applicability:** All required data elements exist for B_RMD  
 **Applicability Checks:** None  
 
 **Manual Check:** Yes  
@@ -20,11 +20,11 @@
 
 ## Rule Logic:  
 
-- Get building climate zone: `climate_zone = B_RMR.weather.climate_zone`  
+- Get building climate zone: `climate_zone = B_RMD.weather.climate_zone`  
 
-- Get surface conditioning category dictionary for B_RMR: `scc_dictionary_b = get_surface_conditioning_category(B_RMR)`  
+- Get surface conditioning category dictionary for B_RMD: `scc_dictionary_b = get_surface_conditioning_category(B_RMD)`  
 
-- For each building segment in the Baseline model: `for building_segment_b in B_RMR.building.building_segments:`  
+- For each building segment in the Baseline model: `for building_segment_b in B_RMD.building.building_segments:`  
 
   - For each thermal_block in building segment: `for thermal_block_b in building_segment_b.thermal_blocks:`  
 

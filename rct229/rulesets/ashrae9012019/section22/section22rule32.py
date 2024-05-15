@@ -2,7 +2,7 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rulesets.ashrae9012019 import BASELINE_0
-from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_3_fns import table_G3_5_3_lookup
+from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_3_fns import table_g3_5_3_lookup
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
@@ -37,25 +37,25 @@ class Section22Rule32(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section22Rule32, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section22Rule32.ChillerRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="22-32",
             description="The baseline chiller efficiencies shall be modeled at the "
             "minimum efficiency levels for part load, in accordance with Tables G3.5.3.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.2.1 Equipment Efficiencies",
             is_primary_rule=True,
-            rmr_context="ruleset_model_descriptions/0",
+            rmd_context="ruleset_model_descriptions/0",
             list_path="chillers[*]",
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.BASELINE_0
-        baseline_system_types_dict = get_baseline_system_types(rmi_b)
-        # create a list containing all HVAC systems that are modeled in the rmi_b
+        rmd_b = context.BASELINE_0
+        baseline_system_types_dict = get_baseline_system_types(rmd_b)
+        # create a list containing all HVAC systems that are modeled in the rmd_b
         available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict
@@ -71,7 +71,7 @@ class Section22Rule32(RuleDefinitionListIndexedBase):
     class ChillerRule(RuleDefinitionBase):
         def __init__(self):
             super(Section22Rule32.ChillerRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
             )
@@ -87,7 +87,7 @@ class Section22Rule32(RuleDefinitionListIndexedBase):
                 chiller_b, "Chiller", "part_load_efficiency_metric"
             )
 
-            target_part_load_efficiency = table_G3_5_3_lookup(
+            target_part_load_efficiency = table_g3_5_3_lookup(
                 compressor_type_b, rated_capacity_b
             )["minimum_integrated_part_load"]
 

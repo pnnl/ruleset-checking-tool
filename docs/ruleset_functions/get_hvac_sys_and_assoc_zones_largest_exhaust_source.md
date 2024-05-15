@@ -3,7 +3,7 @@
 **Description:** Returns a list with the sum of the hvac fan system exhaust fan flow values, the maximum zone level exhaust source across the zones associated with the HVAC system, the number of exhaust fans associated with the hvac fan system, and the maximum flow of all of the exhaust fans associated with the hvac system fan system [hvac_sys_exhaust_flow_sum, maximum_zone_exhaust, num_hvac_exhaust_fans, maximum_hvac_exhaust]. This is for evaluating G3.1.2.10 exception 6 which states "Where the largest exhaust source is less than 75% of the design outdoor airflow. This exception shall only be used if exhaust air energy recovery is not used in the proposed design. "
 
 **Inputs:**  
-- **U,P,or B-RMI**: The RMI in which the largest exhaust source flow is to be returned.  
+- **U,P,or B-RMD**: The RMD in which the largest exhaust source flow is to be returned.  
 - **hvac_sys**: The hvac system object for which the largest exhaust source is being determined.
 
 **Returns:**  

@@ -5,8 +5,8 @@
 been submitted with design documents, the cooling system type shall be the same in the proposed as modeled in the baseline building design and shall comply with the requirements of Section 6."   
 
 **Inputs:**  
-- **U-RMI**: The U-RMI to determine if an HVAC system has been designed or modeled as existing and with cooling.  
-- **P-RMI**: To determine if the same HVAC system has been modeled with cooling in the P-RMI.  
+- **U-RMD**: The U-RMD to determine if an HVAC system has been designed or modeled as existing and with cooling.  
+- **P-RMD**: To determine if the same HVAC system has been modeled with cooling in the P-RMD.  
 
 **Returns:**  
 - **proposed_hvac_modeled_with_virtual_cooling_list_p**: A list that saves all the HVAC systems in which Appendix G Table G3.1 #10 d are applicable (i.e. modeled with virtual cooling in the proposed).  

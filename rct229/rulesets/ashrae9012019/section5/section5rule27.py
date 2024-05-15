@@ -34,7 +34,7 @@ class Section5Rule27(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule27, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             required_fields={
@@ -42,7 +42,7 @@ class Section5Rule27(RuleDefinitionListIndexedBase):
                 "weather": ["climate_zone"],
             },
             each_rule=Section5Rule27.BuildingRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="5-27",
             description="Skylight U-factors for residential, non-residential and semi-heated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8.",
             ruleset_section_title="Envelope",
@@ -55,11 +55,11 @@ class Section5Rule27(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule27.BuildingRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 each_rule=Section5Rule27.BuildingRule.RoofRule(),
-                index_rmr=BASELINE_0,
+                index_rmd=BASELINE_0,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
                 manual_check_required_msg=MANUAL_CHECK_MSG,
             )
@@ -196,11 +196,11 @@ class Section5Rule27(RuleDefinitionListIndexedBase):
         class RoofRule(RuleDefinitionListIndexedBase):
             def __init__(self):
                 super(Section5Rule27.BuildingRule.RoofRule, self).__init__(
-                    rmrs_used=produce_ruleset_model_instance(
+                    rmds_used=produce_ruleset_model_instance(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
                     each_rule=Section5Rule27.BuildingRule.RoofRule.SubsurfaceRule(),
-                    index_rmr=BASELINE_0,
+                    index_rmd=BASELINE_0,
                     list_path="subsurfaces[*]",
                 )
 
@@ -215,7 +215,7 @@ class Section5Rule27(RuleDefinitionListIndexedBase):
                         Section5Rule27.BuildingRule.RoofRule.SubsurfaceRule,
                         self,
                     ).__init__(
-                        rmrs_used=produce_ruleset_model_instance(
+                        rmds_used=produce_ruleset_model_instance(
                             USER=False, BASELINE_0=True, PROPOSED=False
                         ),
                         manual_check_required_msg=MANUAL_CHECK_APPLICABLE,

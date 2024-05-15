@@ -33,24 +33,24 @@ class Section19Rule16((RuleDefinitionListIndexedBase)):
 
     def __init__(self):
         super(Section19Rule16, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             each_rule=Section19Rule16.ZoneRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="19-16",
             description="For zones served by baseline system types 9 & 10, if the proposed design includes a fan or fans sized and controlled to provide non-mechanical cooling, the baseline building design shall include a separate fan to provide nonmechanical cooling, sized and controlled the same as the proposed design.",
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1.2.8.2",
             is_primary_rule=False,
-            rmr_context="ruleset_model_descriptions/0",
+            rmd_context="ruleset_model_descriptions/0",
             list_path="$.buildings[*].building_segments[*].zones[*]",
         )
 
     def is_applicable(self, context, data=None):
         rmd_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmd_b)
-        # create a list containing all HVAC systems that are modeled in the rmi_b
+        # create a list containing all HVAC systems that are modeled in the rmd_b
         available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict
@@ -100,7 +100,7 @@ class Section19Rule16((RuleDefinitionListIndexedBase)):
     class ZoneRule(PartialRuleDefinition):
         def __init__(self):
             super(Section19Rule16.ZoneRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
             )

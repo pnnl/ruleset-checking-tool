@@ -18,17 +18,17 @@ class Section22Rule17(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section22Rule17, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_instance(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section22Rule17.HeatRejectionRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="22-17",
             description="The baseline heat rejection device shall have an efficiency of 38.2 gpm/hp.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section 22 CHW&CW Loop",
             is_primary_rule=False,
-            rmr_context="ruleset_model_descriptions/0",
+            rmd_context="ruleset_model_descriptions/0",
             list_path="$.heat_rejections[*]",
         )
 
@@ -43,7 +43,7 @@ class Section22Rule17(RuleDefinitionListIndexedBase):
     class HeatRejectionRule(PartialRuleDefinition):
         def __init__(self):
             super(Section22Rule17.HeatRejectionRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_instance(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={
@@ -88,7 +88,7 @@ class Section22Rule17(RuleDefinitionListIndexedBase):
                     "volumetric_flow_rate", rated_water_flowrate_b
                 ),
                 "heat_rejection_efficiency_b": CalcQ(
-                    "volumetric_flow_rate_per_power", heat_rejection_efficiency_b
+                    "liquid_flow_rate_per_power", heat_rejection_efficiency_b
                 ),
             }
 
