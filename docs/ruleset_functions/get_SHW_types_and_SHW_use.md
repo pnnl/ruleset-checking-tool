@@ -12,13 +12,13 @@ Returns:
 
 Function Call:
 
-- get_SHW_types_and_spaces
+- get_spaces_associated_with_each_SWH_bat
 - get_obj_by_id
 
 Data Lookup: None
 
 Logic:
-- get the dictionary of SHW types and space ids from the function get_SHW_types_and_spaces: `shw_types_and_spaces_dict = get_SHW_types_and_spaces(RMD)`
+- get the dictionary of SHW types and space ids from the function get_spaces_associated_with_each_SWH_bat: `shw_types_and_spaces_dict = get_spaces_associated_with_each_SWH_bat(RMD)`
 - create a blank dictionary: `shw_and_SHW_use_dict = {}`
 - look at space type in shw_types_and_spaces_dict: `for shw_use_type in shw_types_and_spaces_dict:`
     - create the blank list for the shw_use_type: `shw_types_and_spaces_dict[shw_use_type] = []`
