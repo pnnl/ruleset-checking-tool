@@ -27,8 +27,8 @@ match_data_element
   - If the miscellaneous equipment power in the baseline RMD is less than the miscellaneous equipment power in the proposed RMD: `elif misc_equipment_power_b < misc_equipment_power_p:`
     - Append the miscellaneous equipment info for reporting: `unexpected_misc_equipment_power.append({"id": misc_equipment_b.id, "baseline_power": misc_equipment_power_b, "proposed_power": misc_equipment_power_p})`
 **Rule Assertion:**  
-  - Case 1: If the length of reduced and unexpected equipment power is 0: PASS `if len(unexpected_misc_equipment_power) == 0 and len(reduced_misc_equipment_power) == 0: PASS`
-  - Case 2: Else if the length of unexpected equipment power is 0: UNDETERMINED: `elif len(unexpected_misc_equipment_power) == 0: UNDETERMINED and raise_message="The proposed building miscellaneous equipment load is less than the baseline, which is only permitted when the model is being used to quantify performance that exceeds the requirements of Standard 90.1."`
+  - Case 1: If all equipment power was modeled identically: PASS `if len(unexpected_misc_equipment_power) == 0 and len(reduced_misc_equipment_power) == 0: PASS`
+  - Case 2: Else if any equipment power is reduced in the proposed: UNDETERMINED: `elif len(unexpected_misc_equipment_power) == 0: UNDETERMINED and raise_message="The proposed building miscellaneous equipment load is less than the baseline, which is only permitted when the model is being used to quantify performance that exceeds the requirements of Standard 90.1."`
   - Case 2: Else: `FAIL`
 
 **Notes/Questions:**
