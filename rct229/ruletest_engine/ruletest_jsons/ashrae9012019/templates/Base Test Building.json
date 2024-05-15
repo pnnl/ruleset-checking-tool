@@ -1,16 +1,14 @@
 {
   "id": "TEST RPD",
-  "output_format_type": "OUTPUT_SCHEMA_ASHRAE901_2019",
   "ruleset_model_descriptions": [
     {
       "id": "TEST RMD",
       "buildings": [
         {
           "id": "TEST Building",
-          "building_open_schedule": "ALWAYS ON",
           "building_segments": [
             {
-              "id": "Building Segment 1",
+              "id": "TEST Building Segment 1",
               "heating_ventilating_air_conditioning_systems": [],
               "zones": [
                 {
@@ -20,7 +18,7 @@
                   "thermostat_heating_setpoint_schedule": "Core Zone 1 HEATING SETPOINT SCH",
                   "surfaces": [
                     {
-                      "id": "Core Zone 1 Ceiling",
+                      "id": "Core Zone 1 Roof",
                       "classification": "CEILING",
                       "area": 983.754,
                       "tilt": 0.0,
@@ -31,24 +29,25 @@
                         "surface_construction_input_option": "LAYERS",
                         "primary_layers": [
                           {
-                            "id": "Roof Continuous Insulation",
-                            "thickness": 0.1545340896,
-                            "thermal_conductivity": 0.0288,
+                            "id": "Metal Deck",
+                            "thickness": 0.0008,
+                            "thermal_conductivity": 45.28,
+                            "density": 7824,
+                            "specific_heat": 500
+                          },
+                          {
+                            "id": "Continuous Insulation",
+                            "thickness": 0.0527304,
+                            "thermal_conductivity": 0.020,
                             "density": 32,
-                            "specific_heat": 1465
+                            "specific_heat": 922.308
                           },
+
                           {
-                            "id": "Metal Decking",
-                            "thickness": 0.0015,
-                            "thermal_conductivity": 45,
-                            "density": 7689,
-                            "specific_heat": 418
-                          },
-                          {
-                            "id": "Roof Membrane",
+                            "id": "Built-up roofing",
                             "thickness": 0.0095,
                             "thermal_conductivity": 0.16,
-                            "density": 1121.29,
+                            "density": 1120,
                             "specific_heat": 1460
                           }
                         ],
@@ -61,7 +60,7 @@
                       "area": 983.754,
                       "tilt": 180.0,
                       "azimuth": 0.0,
-                      "adjacent_to": "EXTERIOR",
+                      "adjacent_to": "GROUND",
                       "construction": {
                         "id": "Exterior Slab",
                         "surface_construction_input_option": "LAYERS",
@@ -207,13 +206,7 @@
                     "flow_rate": 0.0,
                     "multiplier_schedule": "Core Zone 1 INFILTRATION SCH"
                   },
-                  "terminals": [
-                    {
-                      "id": "Core Zone 1 terminal",
-                      "served_by_heating_ventilating_air_conditioning_system": "MZ-VAV-G",
-                      "heating_capacity": 66757.566
-                    }
-                  ],
+                  "terminals": [],
                   "spaces": [
                     {
                       "id": "Core Zone 1 SPACE",
@@ -253,7 +246,7 @@
                   "thermostat_heating_setpoint_schedule": "Prm Zone 1 HEATING SETPOINT SCH",
                   "surfaces": [
                     {
-                      "id": "Prm Zone 1 Ceiling",
+                      "id": "Prm Zone 1 Roof",
                       "classification": "CEILING",
                       "area": 207.29,
                       "tilt": 0.0,
@@ -264,24 +257,24 @@
                         "surface_construction_input_option": "LAYERS",
                         "primary_layers": [
                           {
-                            "id": "Roof Continuous Insulation 12",
-                            "thickness": 0.1545340896,
-                            "thermal_conductivity": 0.0288,
+                            "id": "Metal Deck",
+                            "thickness": 0.0008,
+                            "thermal_conductivity": 45.28,
+                            "density": 7824,
+                            "specific_heat": 500
+                          },
+                          {
+                            "id": "Continuous Insulation",
+                            "thickness": 0.0527304,
+                            "thermal_conductivity": 0.020,
                             "density": 32,
-                            "specific_heat": 1465
+                            "specific_heat": 922.308
                           },
                           {
-                            "id": "Metal Decking 13",
-                            "thickness": 0.0015,
-                            "thermal_conductivity": 45,
-                            "density": 7689,
-                            "specific_heat": 418
-                          },
-                          {
-                            "id": "Roof Membrane 14",
+                            "id": "Built-up roofing",
                             "thickness": 0.0095,
                             "thermal_conductivity": 0.16,
-                            "density": 1121.29,
+                            "density": 1120,
                             "specific_heat": 1460
                           }
                         ],
@@ -294,7 +287,7 @@
                       "area": 207.290,
                       "tilt": 180.0,
                       "azimuth": 135.0,
-                      "adjacent_to": "EXTERIOR",
+                      "adjacent_to": "GROUND",
                       "construction": {
                         "id": "Exterior Slab 15",
                         "surface_construction_input_option": "LAYERS",
@@ -436,13 +429,7 @@
                     "flow_rate": 0.113,
                     "multiplier_schedule": "Prm Zone 1 INFILTRATION SCH"
                   },
-                  "terminals": [
-                    {
-                      "id": "Prm Zone 1-terminal",
-                      "served_by_heating_ventilating_air_conditioning_system": "MZ-VAV-G",
-                      "heating_capacity": 29506.053
-                    }
-                  ],
+                  "terminals": [],
                   "spaces": [
                     {
                       "id": "Prm Zone 1 SPACE",
@@ -482,7 +469,7 @@
                   "thermostat_heating_setpoint_schedule": "Prm Zone 2 HEATING SETPOINT SCH",
                   "surfaces": [
                     {
-                      "id": "Prm Zone 2 Ceiling",
+                      "id": "Prm Zone 2 Roof",
                       "classification": "CEILING",
                       "area": 131.272,
                       "tilt": 0.0,
@@ -493,24 +480,25 @@
                         "surface_construction_input_option": "LAYERS",
                         "primary_layers": [
                           {
-                            "id": "Roof Continuous Insulation 23",
-                            "thickness": 0.1545340896,
-                            "thermal_conductivity": 0.0288,
+                            "id": "Metal Deck",
+                            "thickness": 0.0008,
+                            "thermal_conductivity": 45.28,
+                            "density": 7824,
+                            "specific_heat": 500
+                          },
+                          {
+                            "id": "Continuous Insulation",
+                            "thickness": 0.0527304,
+                            "thermal_conductivity": 0.020,
                             "density": 32,
-                            "specific_heat": 1465
+                            "specific_heat": 922.308
                           },
+
                           {
-                            "id": "Metal Decking 24",
-                            "thickness": 0.0015,
-                            "thermal_conductivity": 45,
-                            "density": 7689,
-                            "specific_heat": 418
-                          },
-                          {
-                            "id": "Roof Membrane 25",
+                            "id": "Built-up roofing",
                             "thickness": 0.0095,
                             "thermal_conductivity": 0.16,
-                            "density": 1121.29,
+                            "density": 1120,
                             "specific_heat": 1460
                           }
                         ],
@@ -523,7 +511,7 @@
                       "area": 131.272,
                       "tilt": 180.0,
                       "azimuth": 45.0,
-                      "adjacent_to": "EXTERIOR",
+                      "adjacent_to": "GROUND",
                       "construction": {
                         "id": "Exterior Slab 26",
                         "surface_construction_input_option": "LAYERS",
@@ -638,13 +626,7 @@
                     "flow_rate": 0.07501,
                     "multiplier_schedule": "Prm Zone 2 INFILTRATION SCH"
                   },
-                  "terminals": [
-                    {
-                      "id": "Prm Zone 2-terminal",
-                      "served_by_heating_ventilating_air_conditioning_system": "MZ-VAV-G",
-                      "heating_capacity": 19262.001
-                    }
-                  ],
+                  "terminals": [],
                   "spaces": [
                     {
                       "id": "Prm Zone 2 SPACE",
@@ -684,7 +666,7 @@
                   "thermostat_heating_setpoint_schedule": "Prm Zone 3 HEATING SETPOINT SCH",
                   "surfaces": [
                     {
-                      "id": "Prm Zone 3 Ceiling",
+                      "id": "Prm Zone 3 Roof",
                       "classification": "CEILING",
                       "area": 207.290,
                       "tilt": 0.0,
@@ -695,8 +677,8 @@
                         "surface_construction_input_option": "LAYERS",
                         "primary_layers": [
                           {
-                            "id": "Roof Continuous Insulation 37",
-                            "thickness": 0.1545340896,
+                            "id": "Continuous Insulation",
+                            "thickness": 0.1054608,
                             "thermal_conductivity": 0.0288,
                             "density": 32,
                             "specific_heat": 1465
@@ -725,7 +707,7 @@
                       "area": 207.290,
                       "tilt": 180.0,
                       "azimuth": 0.0,
-                      "adjacent_to": "EXTERIOR",
+                      "adjacent_to": "GROUND",
                       "construction": {
                         "id": "Exterior Slab 40",
                         "surface_construction_input_option": "LAYERS",
@@ -867,13 +849,7 @@
                     "flow_rate": 0.113,
                     "multiplier_schedule": "Prm Zone 3 INFILTRATION SCH"
                   },
-                  "terminals": [
-                    {
-                      "id": "Prm Zone 3-terminal",
-                      "served_by_heating_ventilating_air_conditioning_system": "MZ-VAV-G",
-                      "heating_capacity": 29506.059
-                    }
-                  ],
+                  "terminals": [],
                   "spaces": [
                     {
                       "id": "Prm Zone 3 SPACE",
@@ -913,7 +889,7 @@
                   "thermostat_heating_setpoint_schedule": "Prm Zone 4 HEATING SETPOINT SCH",
                   "surfaces": [
                     {
-                      "id": "Prm Zone 4 Ceiling",
+                      "id": "Prm Zone 4 Roof",
                       "classification": "CEILING",
                       "area": 131.272,
                       "tilt": 0.0,
@@ -954,7 +930,7 @@
                       "area": 131.272,
                       "tilt": 180.0,
                       "azimuth": 315.0,
-                      "adjacent_to": "EXTERIOR",
+                      "adjacent_to": "GROUND",
                       "construction": {
                         "id": "Exterior Slab 54",
                         "surface_construction_input_option": "LAYERS",
@@ -1069,13 +1045,7 @@
                     "flow_rate": 0.07501,
                     "multiplier_schedule": "Prm Zone 4 INFILTRATION SCH"
                   },
-                  "terminals": [
-                    {
-                      "id": "Prm Zone 4-terminal",
-                      "served_by_heating_ventilating_air_conditioning_system": "MZ-VAV-G",
-                      "heating_capacity": 14428.761
-                    }
-                  ],
+                  "terminals": [],
                   "spaces": [
                     {
                       "id": "Prm Zone 4 SPACE",
