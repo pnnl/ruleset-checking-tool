@@ -24,7 +24,7 @@ Logic:
     - create the blank list for the shw_use_type: `shw_types_and_spaces_dict[shw_use_type] = []`
     - look at each space: `for sp_id in shw_types_and_spaces_dict[shw_use_type]:`
         - get the space using get_obj_by_id: `space = get_obj_by_id(RMD, sp_id)`
-        - get the service_water_heating_uses from the space and append them to the list using extend: `shw_and_SHW_use_dict[shw_use_type].extend space.service_water_heating_uses`
+        - get the service_water_heating_uses from the space and append them to the list using extend: `shw_and_SHW_use_dict[shw_use_type].extend(space.service_water_heating_uses`)
 
 **Returns** shw_and_SHW_use_dict
 
