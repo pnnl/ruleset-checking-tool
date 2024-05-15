@@ -1,5 +1,5 @@
 
-## get_SHW_types_and_spaces
+## get_spaces_associated_with_each_SWH_bat
 
 Description: This function gets all the spaces and the SHW space types and sorts them into a dictionary where the keys are the ServiceWaterHeatingSpaceOptions2019ASHRAE901 and values are a list if space.ids  
 
