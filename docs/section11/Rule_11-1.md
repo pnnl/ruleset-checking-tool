@@ -1,5 +1,5 @@
 # Service_Water_Heating - Rule 11-1
-**Schema Version:** 0.0.38  
+**Schema Version:** 0.0.36  
 
 **Mandatory Rule:** TRUE
 
