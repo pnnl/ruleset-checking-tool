@@ -5,11 +5,11 @@ from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_9_1_fins import table_G3_9_1_lookup
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_9_2_fins import table_G3_9_2_lookup
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_9_3_fins import table_G3_9_3_lookup
+from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
-from rct229.schema.config import ureg
 
 
 class Section16Rule1(RuleDefinitionListIndexedBase):
