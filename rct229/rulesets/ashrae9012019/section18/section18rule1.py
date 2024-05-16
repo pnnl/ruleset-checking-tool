@@ -1,6 +1,6 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_functions.get_building_lab_zones_list import (
     get_building_lab_zones_list,
@@ -32,7 +32,7 @@ class Section18Rule1(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section18Rule1, self).__init__(
-            rmds_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             each_rule=Section18Rule1.RMDRule(),
@@ -57,7 +57,7 @@ class Section18Rule1(RuleDefinitionListIndexedBase):
     class RMDRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section18Rule1.RMDRule, self).__init__(
-                rmds_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
                 each_rule=Section18Rule1.RMDRule.ZoneRule(),
@@ -125,7 +125,7 @@ class Section18Rule1(RuleDefinitionListIndexedBase):
         class ZoneRule(RuleDefinitionBase):
             def __init__(self):
                 super(Section18Rule1.RMDRule.ZoneRule, self).__init__(
-                    rmds_used=produce_ruleset_model_instance(
+                    rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
                 )

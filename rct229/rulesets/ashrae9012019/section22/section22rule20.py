@@ -1,6 +1,6 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.data_fns.table_3_1_3_11_fns import (
     table_3_1_3_11_lookup,
@@ -35,7 +35,7 @@ class Section22Rule20(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section22Rule20, self).__init__(
-            rmds_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section22Rule20.HeatRejectionRule(),
@@ -76,7 +76,7 @@ class Section22Rule20(RuleDefinitionListIndexedBase):
     class HeatRejectionRule(RuleDefinitionBase):
         def __init__(self):
             super(Section22Rule20.HeatRejectionRule, self).__init__(
-                rmds_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={

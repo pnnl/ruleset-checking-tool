@@ -1,7 +1,6 @@
 from typing import TypedDict
 
 from pint import Quantity
-
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_dict_of_zones_and_terminal_units_served_by_hvac_sys import (
     get_dict_of_zones_and_terminal_units_served_by_hvac_sys,
 )
@@ -36,7 +35,7 @@ def get_hvac_sys_and_assoc_zones_largest_exhaust_source(
     Parameters
     ----------
     rmd dict
-    Dictionary of a rule model instance object in which the largest exhaust source CFM is to be returned.
+    Dictionary of a rule model description object in which the largest exhaust source CFM is to be returned.
 
     hvac_sys_id str
     The hvac system object id for which the largest exhaust source is being determined.

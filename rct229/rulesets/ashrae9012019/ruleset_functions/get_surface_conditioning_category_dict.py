@@ -1,7 +1,6 @@
 from typing import TypedDict
 
 import pandas as pd
-
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
     ZoneConditioningCategory as ZCC,
 )

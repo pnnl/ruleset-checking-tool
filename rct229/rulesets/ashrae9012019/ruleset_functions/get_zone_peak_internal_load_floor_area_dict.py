@@ -1,7 +1,6 @@
 from typing import Literal
 
 from pint import Quantity
-
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO

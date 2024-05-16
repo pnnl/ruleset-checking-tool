@@ -1,7 +1,6 @@
 from typing import TypedDict
 
 from pydash import juxtapose
-
 from rct229.rule_engine.memoize import memoize
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,

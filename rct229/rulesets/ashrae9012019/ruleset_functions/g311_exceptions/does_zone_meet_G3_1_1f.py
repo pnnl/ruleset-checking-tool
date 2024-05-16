@@ -12,7 +12,7 @@ def does_zone_meet_g_3_1_1f(rmd, zone_id):
     Parameters
     ----------
     rmd dict
-        A dictionary representing a ruleset model instance as defined by the ASHRAE229 schema
+        A dictionary representing a ruleset model description as defined by the ASHRAE229 schema
     zone_id str
         zone id
 

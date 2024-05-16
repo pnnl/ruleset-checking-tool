@@ -1,6 +1,6 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
@@ -39,7 +39,7 @@ class Section22Rule8(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section22Rule8, self).__init__(
-            rmds_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section22Rule8.PrimaryFluidLoopRule(),
@@ -117,7 +117,7 @@ class Section22Rule8(RuleDefinitionListIndexedBase):
     class PrimaryFluidLoopRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section22Rule8.PrimaryFluidLoopRule, self).__init__(
-                rmds_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 each_rule=Section22Rule8.PrimaryFluidLoopRule.SecondaryChildLoopRule(),
@@ -130,7 +130,7 @@ class Section22Rule8(RuleDefinitionListIndexedBase):
                 super(
                     Section22Rule8.PrimaryFluidLoopRule.SecondaryChildLoopRule, self
                 ).__init__(
-                    rmds_used=produce_ruleset_model_instance(
+                    rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
                     index_rmd=BASELINE_0,
@@ -142,7 +142,7 @@ class Section22Rule8(RuleDefinitionListIndexedBase):
                 loop_pump_dict = data["loop_pump_dict"]
 
                 return [
-                    produce_ruleset_model_instance(
+                    produce_ruleset_model_description(
                         USER=None, BASELINE_0=pump_type, PROPOSED=None
                     )
                     for pump_type in loop_pump_dict[child_loop_b["id"]]
@@ -154,7 +154,7 @@ class Section22Rule8(RuleDefinitionListIndexedBase):
                         Section22Rule8.PrimaryFluidLoopRule.SecondaryChildLoopRule.PumpTypeRule,
                         self,
                     ).__init__(
-                        rmds_used=produce_ruleset_model_instance(
+                        rmds_used=produce_ruleset_model_description(
                             USER=False, BASELINE_0=True, PROPOSED=False
                         ),
                     )

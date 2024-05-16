@@ -1,6 +1,6 @@
 import copy
 
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rule_engine.rulesets import RuleSet
 from rct229.rulesets.ashrae9012019 import (
     BASELINE_0,
@@ -74,7 +74,7 @@ def get_9012019_rmd_models(test_dict: dict):
     if "proposed" in rmr_transformations_dict:
         proposed_rmr = rmr_transformations_dict["proposed"]
 
-    return produce_ruleset_model_instance(
+    return produce_ruleset_model_description(
         USER=user_rmr,
         BASELINE_0=baseline_0_rmr,
         BASELINE_90=baseline_90_rmr,

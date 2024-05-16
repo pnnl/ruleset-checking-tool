@@ -5,7 +5,6 @@ from rct229.schema.config import ureg
 from rct229.schema.schema_utils import quantify_rmd
 from rct229.schema.validate import schema_validate_rmd
 
-
 TEST_BUILDING_WITH_LGT_BAT = {
     "id": "test_rmd",
     "buildings": [
