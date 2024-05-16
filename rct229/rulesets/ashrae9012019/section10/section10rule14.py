@@ -65,7 +65,7 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
                 "Baseline shall be modeled with the heating HVAC system efficiency per Tables G3.5.1-G3.5.6 (applies only to the heating efficiency of baseline furnaces and heat pumps). Where multiple HVAC zones or residential spaces are combined into a single thermal block the heating efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces."
             ),
             ruleset_section_title="HVAC General",
-            standard_section="",
+            standard_section="Section G3.1.2.1 Equipment Efficiencies",
             is_primary_rule=True,
             list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
             rmd_context="ruleset_model_descriptions/0",

@@ -54,7 +54,7 @@ APPLICABLE_SYS_TYPES = [
 
 
 class Section4Rule11(RuleDefinitionListIndexedBase):
-    """Rule 11 of ASHRAE 90.1-2019 Appendix G Section 4 (Airside System)"""
+    """Rule 11 of ASHRAE 90.1-2019 Appendix G Section 4 (Schedules Setpoints)"""
 
     def __init__(self):
         super(Section4Rule11, self).__init__(
@@ -70,10 +70,10 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
             index_rmd=BASELINE_0,
             id="4-11",
             description="Fan schedules shall be modeled identically in the baseline and proposed unless Table G3.1 Section 4 baseline exceptions are applicable. Fan Schedules may be allowed to differ when Section 4 Baseline Column Exceptions #1, #2 Or #3 are applicable.",
-            ruleset_section_title="Airside System",
+            ruleset_section_title="Schedules Setpoints",
             standard_section="Section G3.1-4 Schedule Modeling Requirements for the Proposed design and Baseline building",
             is_primary_rule=True,
-            list_path="ruleset_model_descriptions[0]",
+            list_path="$.ruleset_model_descriptions[0]",
             data_items={
                 "climate_zone": (BASELINE_0, "weather/climate_zone"),
                 "is_leap_year": (BASELINE_0, "calendar/is_leap_year"),
@@ -92,7 +92,6 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
             )
 
         def create_data(self, context, data=None):
-
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
             is_leap_year = data["is_leap_year"]

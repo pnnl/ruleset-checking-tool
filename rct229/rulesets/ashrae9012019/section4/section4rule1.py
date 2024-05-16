@@ -24,7 +24,7 @@ MANUAL_CHECK_MSG = (
 
 
 class Section4Rule1(RuleDefinitionListIndexedBase):
-    """Rule 1 of ASHRAE 90.1-2019 Appendix G Section 4 (Airside System)"""
+    """Rule 1 of ASHRAE 90.1-2019 Appendix G Section 4 (Schedules Setpoints)"""
 
     def __init__(self):
         super(Section4Rule1, self).__init__(
@@ -40,16 +40,15 @@ class Section4Rule1(RuleDefinitionListIndexedBase):
             index_rmd=BASELINE_0,
             id="4-1",
             description="Temperature Control Setpoints shall be the same for proposed design and baseline building design.",
-            ruleset_section_title="Airside System",
+            ruleset_section_title="Schedules Setpoints",
             standard_section="Section G3.1-4 Schedule Modeling Requirements for the Proposed design and Baseline building",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            data_items={"is_leap_year_b": (BASELINE_0, "calendar/is_leap_year")},
+            data_items={
+                "climate_zone_b": (BASELINE_0, "weather/climate_zone"),
+                "is_leap_year_b": (BASELINE_0, "calendar/is_leap_year"),
+            },
         )
-
-    def create_data(self, context, data=None):
-        rmr_b = context.BASELINE_0
-        return {"climate_zone": rmr_b["weather"]["climate_zone"]}
 
     class RuleSetModelInstanceRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -59,7 +58,7 @@ class Section4Rule1(RuleDefinitionListIndexedBase):
                 ),
                 each_rule=Section4Rule1.RuleSetModelInstanceRule.ZoneRule(),
                 index_rmd=BASELINE_0,
-                list_path="$.buildings[*].zones[*]",
+                list_path="$.buildings[*].building_segments[*].zones[*]",
                 required_fields={"$": ["schedules"]},
             )
 
@@ -70,7 +69,7 @@ class Section4Rule1(RuleDefinitionListIndexedBase):
                 "schedules_b": rmd_b["schedules"],
                 "schedules_p": rmd_p["schedules"],
                 "zcc_dict_b": get_zone_conditioning_category_rmi_dict(
-                    data["climate_zone"], rmd_b
+                    data["climate_zone_b"], rmd_b
                 ),
             }
 
@@ -127,8 +126,8 @@ class Section4Rule1(RuleDefinitionListIndexedBase):
                     )
                     if thermostat_cooling_stpt_sch_id_b
                     else [
-                        zone_b.getattr_(
-                            zone_b, "design_thermostat_cooling_setpoint"
+                        getattr_(
+                            zone_b, "zones", "design_thermostat_cooling_setpoint"
                         ).magnitude
                     ]
                     * number_of_hours

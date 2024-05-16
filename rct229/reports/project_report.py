@@ -1,5 +1,4 @@
 import json
-import os
 
 from rct229.reports.utils import aggregate_outcomes
 

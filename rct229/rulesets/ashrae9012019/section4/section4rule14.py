@@ -15,7 +15,7 @@ REQ_EQUIP_POWER_DENSITY = 20 * ureg("W/ft2")
 
 
 class Section4Rule14(RuleDefinitionListIndexedBase):
-    """Rule 14 of ASHRAE 90.1-2019 Appendix G Section 4 (Schedule-Setpoints)"""
+    """Rule 14 of ASHRAE 90.1-2019 Appendix G Section 4 (Schedules Setpoints)"""
 
     def __init__(self):
         super(Section4Rule14, self).__init__(
@@ -26,7 +26,7 @@ class Section4Rule14(RuleDefinitionListIndexedBase):
             index_rmd=PROPOSED,
             id="4-14",
             description="A computer room is defined as a room whose primary function is to house equipment for the processing and storage of electronic data and that has a design electronic data equipment power density exceeding 20 W/ft2 of conditioned floor area.",
-            ruleset_section_title="Schedule - Setpoints",
+            ruleset_section_title="Schedules Setpoints",
             standard_section="Section 3 Definitions",
             is_primary_rule=True,
             rmd_context="ruleset_model_descriptions/0",
