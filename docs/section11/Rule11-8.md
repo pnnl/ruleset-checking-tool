@@ -30,13 +30,11 @@
   - if the program reaches this line without going to the rule logic, the project is not applicable for this SHW heating use: `NOT_APPLICABLE`
 
     ## Rule Logic: 
-  - create a boolean to keep track of whether everything matches: `all_match = TRUE`
-  - create an error string: `error_str = ""`
   - get a dictionary of all SHW equipment connected to the SHW space type in the baseline model: `b_shw_equipment_dict = get_SHW_equipment_connected_to_use_type(B_RMD)[shw_space_type]`
-  - create a variable num_shw_systems = `len(b_shw_equip_dict)["SHWDistribution"]`
+  - create a variable num_swh_systems: `num_swh_systems = len(b_shw_equip_dict)["SHWDistribution"]`
 
     ## Rule Assertion: 
-    - Case1: there is exactly one system: PASS: `if num_shw_systems == 1: PASS`
+    - Case1: there is exactly one system: PASS: `if num_swh_systems == 1: PASS`
     - Case2: all else, FAIL: `else: FAIL`
 
   
