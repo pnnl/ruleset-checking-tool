@@ -25,7 +25,7 @@ FAIL_MSG_P = "Fail because a humidity schedule is undefined in the B_RMR but is 
 
 
 class Section4Rule2(RuleDefinitionListIndexedBase):
-    """Rule 2 of ASHRAE 90.1-2019 Appendix G Section 4 (Airside System)"""
+    """Rule 2 of ASHRAE 90.1-2019 Appendix G Section 4 (Schedules Setpoints)"""
 
     def __init__(self):
         super(Section4Rule2, self).__init__(
@@ -41,7 +41,7 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
             index_rmd=BASELINE_0,
             id="4-2",
             description="Humidity Control Setpoints shall be the same for proposed design and baseline building design.",
-            ruleset_section_title="Airside System",
+            ruleset_section_title="Schedules Setpoints",
             standard_section="Section G3.1-4 Schedule Modeling Requirements for the Proposed design and Baseline building",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
