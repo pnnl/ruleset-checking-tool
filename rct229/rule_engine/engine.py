@@ -212,8 +212,18 @@ def evaluate_rules(
         if rmds[rule_model]:
             copied_rmds[rule_model] = quantify_rmd(rmds.__getitem__(rule_model))
 
+    total_num_rules = len(rules_list)
+    print(f"Total number of rules: {total_num_rules}")
+    counting_steps = list(range(0, total_num_rules, round(total_num_rules * 0.05)))
+
+    rule_counter = 0
     # Evaluate the rules
     for rule in rules_list:
+        rule_counter += 1
+        if rule_counter in counting_steps:
+            print(
+                f"Compliance evaluation progress: {round(rule_counter / total_num_rules * 100)}%"
+            )
         print(f"Processing Rule {rule.id}")
         outcome = rule.evaluate(copied_rmds)
         outcomes.append(outcome)
