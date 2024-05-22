@@ -1,6 +1,6 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
@@ -35,7 +35,7 @@ class Section22Rule29(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section22Rule29, self).__init__(
-            rmds_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section22Rule29.CondensingFluidLoopRule(),
@@ -87,7 +87,7 @@ class Section22Rule29(RuleDefinitionListIndexedBase):
     class CondensingFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
             super(Section22Rule29.CondensingFluidLoopRule, self).__init__(
-                rmds_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={
@@ -102,10 +102,10 @@ class Section22Rule29(RuleDefinitionListIndexedBase):
 
             return {
                 "pump_power_per_flow_rate": CalcQ(
-                    "power_per_flow_rate", pump_power_per_flow_rate
+                    "power_per_liquid_flow_rate", pump_power_per_flow_rate
                 ),
                 "required_pump_power": CalcQ(
-                    "power_per_flow_rate", required_pump_power
+                    "power_per_liquid_flow_rate", required_pump_power
                 ),
             }
 

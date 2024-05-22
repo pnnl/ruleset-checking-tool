@@ -1,6 +1,6 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import RMT
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_7_fns import table_G3_7_lookup
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_8_fns import table_G3_8_lookup
@@ -19,7 +19,7 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section6Rule1, self).__init__(
-            rmds_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=False, PROPOSED=True
             ),
             each_rule=Section6Rule1.BuildingSegmentRule(),
@@ -36,7 +36,7 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
     class BuildingSegmentRule(RuleDefinitionBase):
         def __init__(self):
             super(Section6Rule1.BuildingSegmentRule, self).__init__(
-                rmds_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=False, PROPOSED=True
                 ),
                 required_fields={"$.zones[*]": ["volume"]},

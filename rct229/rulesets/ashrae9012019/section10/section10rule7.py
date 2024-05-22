@@ -1,29 +1,28 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_1_fns import table_g3_5_1_lookup
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_2_fns import (
-    table_g3_5_2_lookup,
     HeatPumpEquipmentType,
+    table_g3_5_2_lookup,
 )
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_4_fns import table_g3_5_4_lookup
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types import (
-    get_baseline_system_types,
-)
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_zone_list_w_area_dict import (
-    get_hvac_zone_list_w_area_dict,
-)
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
+)
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types import (
+    get_baseline_system_types,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_systems_5_6_serving_multiple_floors import (
     get_hvac_systems_5_6_serving_multiple_floors,
 )
-from rct229.utils.utility_functions import (
-    find_exactly_one_zone,
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_zone_list_w_area_dict import (
+    get_hvac_zone_list_w_area_dict,
 )
-
+from rct229.utils.assertions import assert_
+from rct229.utils.pint_utils import CalcQ
+from rct229.utils.utility_functions import find_exactly_one_zone
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_1,
@@ -46,7 +45,7 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section10Rule7, self).__init__(
-            rmds_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section10Rule7.HVACRule(),
@@ -126,7 +125,7 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
             super(Section10Rule7.HVACRule, self).__init__(
-                rmds_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={
@@ -195,7 +194,7 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
                 ]
 
             elif total_cool_capacity_b is not None:  # HVAC_SYS.SYS_4
-                assert (
+                assert_(
                     hvac_system_type_b == HVAC_SYS.SYS_4,
                     f"System type {hvac_system_type_b} does not match any of the applicable system types: 1, 1B, 2, 3, 3B, 4, 5, 5B, 6, 6B",
                 )
@@ -232,7 +231,7 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
             )
 
             return {
-                "total_cool_capacity_b": total_cool_capacity_b,
+                "total_cool_capacity_b": CalcQ("capacity", total_cool_capacity_b),
                 "is_zone_agg_factor_undefined_and_needed": is_zone_agg_factor_undefined_and_needed,
                 "expected_baseline_eff_b": expected_eff_b,
                 "most_conservative_eff_b": most_conservative_eff_b,

@@ -1,5 +1,4 @@
 from jsonpointer import resolve_pointer
-
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.utils.json_utils import slash_prefix_guarantee
 

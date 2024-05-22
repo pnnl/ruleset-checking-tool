@@ -21,7 +21,7 @@ def get_number_of_floors(climate_zone: str, rmd: dict) -> int:
     climate_zone: str
         One of the ClimateZoneOptions2019ASHRAE901 enumerated values
     rmd dict
-        A dictionary representing a ruleset model instance as defined by the ASHRAE229 schema
+        A dictionary representing a ruleset model description as defined by the ASHRAE229 schema
 
     Returns
     -------

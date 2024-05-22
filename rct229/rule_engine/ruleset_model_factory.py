@@ -59,7 +59,7 @@ def get_rmd_instance():
     return rmd
 
 
-def produce_ruleset_model_instance(**kwargs):
+def produce_ruleset_model_description(**kwargs):
     """
     Factory function to manufacture a RuleSetModels instances based
     on user specifications

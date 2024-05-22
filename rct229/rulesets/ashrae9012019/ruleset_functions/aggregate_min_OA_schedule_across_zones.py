@@ -1,6 +1,5 @@
 import numpy as np
 from pint import Quantity
-
 from rct229.utils.assertions import assert_
 
 

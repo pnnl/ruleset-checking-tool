@@ -5,7 +5,7 @@ from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
 class EngineRawSummary(RCTReport):
     def __init__(self):
         super(EngineRawSummary, self).__init__()
-        self.ruleset_report_file = "raw_summary.txt"
+        self.ruleset_report_file = f"{self.__class__.__name__}.txt"
         self.num_evaluation = 0
 
     def generate_rule_report(self, rule_outcome, outcome_dict):
