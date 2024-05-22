@@ -37,8 +37,8 @@
   - create a boolean to keep track of whether everything matches: `all_match = TRUE`
   - create an error string: `error_str = ""`
   - create the compare context string: `compare_context_str = "AppG 11-1 P_RMD Equals U_RMD"`
-  - get a dictionary of all SWH equipment in the proposed model: `p_shw_equipment_dict = p_swh_system_and_equip_dict[distribution_id]`
-  - get a dictionary of all SWH equipment in the user model: `u_shw_equipment_dict = u_swh_system_and_equip_dict[distribution_id]`
+  - get a dictionary of all SWH equipment in the proposed model (pumps, distribution, tanks, SWH use, etc): `p_shw_equipment_dict = p_swh_system_and_equip_dict[distribution_id]`
+  - get a dictionary of all SWH equipment in the user model (pumps, distribution, tanks, SWH use, etc): `u_shw_equipment_dict = u_swh_system_and_equip_dict[distribution_id]`
   - check if the u_shw_equipment exists: `if(u_swh_equipment_dict):`
     - Compare the distribution in the proposed and user models.  This check relies on the understanding that the RCT team has a method for comparing all elements within an object match (compare_context_pair): `if !compare_context_pair(distribution_id, distribution_id, $, extra_schema_for_SWH_comparison.json, true, compare_context_str, error_str): all_match = FALSE`
   - otherwise, the distribution equipment doesn't exist in the user model, set all_match to false: `all_match = FALSE; error_str += distribution_id + " not found in the user model"`
