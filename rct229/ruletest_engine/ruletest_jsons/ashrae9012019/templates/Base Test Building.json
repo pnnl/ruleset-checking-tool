@@ -344,8 +344,8 @@
                           "glazed_area": 21.456,
                           "opaque_area": 0.0,
                           "u_factor": 3.29,
-                          "solar_heat_gain_coefficient": 0.381,
-                          "visible_transmittance": 0.42
+                          "solar_heat_gain_coefficient": 0.387,
+                          "visible_transmittance": 0.417
                         },
                         {
                           "id": "Prm Zone 1 South Wall Window 2",
@@ -353,8 +353,8 @@
                           "glazed_area": 21.456,
                           "opaque_area": 0.0,
                           "u_factor": 3.29,
-                          "solar_heat_gain_coefficient": 0.381,
-                          "visible_transmittance": 0.42
+                          "solar_heat_gain_coefficient": 0.387,
+                          "visible_transmittance": 0.417
                         },
                         {
                           "id": "Prm Zone 1 South Wall Window 3",
@@ -362,8 +362,8 @@
                           "glazed_area": 21.456,
                           "opaque_area": 0.0,
                           "u_factor": 3.29,
-                          "solar_heat_gain_coefficient": 0.381,
-                          "visible_transmittance": 0.42
+                          "solar_heat_gain_coefficient": 0.387,
+                          "visible_transmittance": 0.417
                         },
                         {
                           "id": "Prm Zone 1 South Wall Door 1",
@@ -549,8 +549,8 @@
                           "glazed_area": 41.838,
                           "opaque_area": 0.0,
                           "u_factor": 3.29,
-                          "solar_heat_gain_coefficient": 0.381,
-                          "visible_transmittance": 0.42
+                          "solar_heat_gain_coefficient": 0.387,
+                          "visible_transmittance": 0.417
                         },
                         {
                           "id": "Prm Zone 2 East Wall Door 1",
@@ -753,8 +753,8 @@
                           "glazed_area": 21.456,
                           "opaque_area": 0.0,
                           "u_factor": 3.29,
-                          "solar_heat_gain_coefficient": 0.381,
-                          "visible_transmittance": 0.42
+                          "solar_heat_gain_coefficient": 0.387,
+                          "visible_transmittance": 0.417
                         },
                         {
                           "id": "Prm Zone 3 North Wall Window 2",
@@ -762,8 +762,8 @@
                           "glazed_area": 21.456,
                           "opaque_area": 0.0,
                           "u_factor": 3.29,
-                          "solar_heat_gain_coefficient": 0.381,
-                          "visible_transmittance": 0.42
+                          "solar_heat_gain_coefficient": 0.387,
+                          "visible_transmittance": 0.417
                         },
                         {
                           "id": "Prm Zone 3 North Wall Window 3",
@@ -771,8 +771,8 @@
                           "glazed_area": 21.456,
                           "opaque_area": 0.0,
                           "u_factor": 3.29,
-                          "solar_heat_gain_coefficient": 0.381,
-                          "visible_transmittance": 0.42
+                          "solar_heat_gain_coefficient": 0.387,
+                          "visible_transmittance": 0.417
                         },
                         {
                           "id": "Prm Zone 3 North Wall Door 1",
@@ -1005,8 +1005,8 @@
                           "glazed_area": 41.838,
                           "opaque_area": 0.0,
                           "u_factor": 3.29,
-                          "solar_heat_gain_coefficient": 0.381,
-                          "visible_transmittance": 0.42
+                          "solar_heat_gain_coefficient": 0.387,
+                          "visible_transmittance": 0.417
                         },
                         {
                           "id": "Prm Zone 4 West Wall Door 1",
