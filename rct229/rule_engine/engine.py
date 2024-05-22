@@ -213,8 +213,13 @@ def evaluate_rules(
             copied_rmds[rule_model] = quantify_rmd(rmds.__getitem__(rule_model))
 
     total_num_rules = len(rules_list)
-    print(f"Total number of rules: {total_num_rules}")
-    counting_steps = list(range(0, total_num_rules, round(total_num_rules * 0.05)))
+    if total_num_rules < 10:
+        step = 1
+    elif total_num_rules < 20:
+        step = total_num_rules // 10 + 1
+    else:
+        step = round(total_num_rules * 0.05)
+    counting_steps = list(range(0, total_num_rules, step))
 
     rule_counter = 0
     # Evaluate the rules
