@@ -419,7 +419,7 @@
                   "infiltration": {
                     "id": "Prm Zone 1 INFILTRATION",
                     "modeling_method": "WEATHER_DRIVEN",
-                    "flow_rate": 0.113,
+                    "flow_rate": 1227.9313,
                     "multiplier_schedule": "Prm Zone 1 INFILTRATION SCH"
                   },
                   "terminals": [],
@@ -623,9 +623,8 @@
                   ],
                   "infiltration": {
                     "id": "Prm Zone 2 INFILTRATION",
-                    "modeling_method": "WEATHER_DRIVEN",
-                    "flow_rate": 0.07501,
-                    "multiplier_schedule": "Prm Zone 2 INFILTRATION SCH"
+                    "modeling_method": "CONSTANT",
+                    "flow_rate": 832.2149
                   },
                   "terminals": [],
                   "spaces": [
@@ -851,8 +850,8 @@
                   ],
                   "infiltration": {
                     "id": "Prm Zone 3 INFILTRATION",
-                    "modeling_method": "WEATHER_DRIVEN",
-                    "flow_rate": 0.113,
+                    "modeling_method": "CONSTANT_SCHEDULED",
+                    "flow_rate": 866.6550,
                     "multiplier_schedule": "Prm Zone 3 INFILTRATION SCH"
                   },
                   "terminals": [],
@@ -1055,8 +1054,8 @@
                   ],
                   "infiltration": {
                     "id": "Prm Zone 4 INFILTRATION",
-                    "modeling_method": "WEATHER_DRIVEN",
-                    "flow_rate": 0.07501,
+                    "modeling_method": "CONSTANT_SCHEDULED",
+                    "flow_rate": 578.0476,
                     "multiplier_schedule": "Prm Zone 4 INFILTRATION SCH"
                   },
                   "terminals": [],
