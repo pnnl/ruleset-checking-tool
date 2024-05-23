@@ -1,0 +1,81 @@
+{
+    "id": "ASHRAE229 1",
+    "ruleset_model_descriptions": [
+        {
+            "id": "RMD 1",
+            "buildings": [
+                {
+                    "id": "Building 1",
+                    "building_open_schedule": "Required Building Schedule 1",
+                    "building_segments": [
+                        {
+                            "id": "Building Segment 1",
+                            "zones": [
+                                {
+                                    "id": "Thermal Zone 1",
+                                    "design_thermostat_cooling_setpoint": 24,
+                                    "design_thermostat_heating_setpoint": 21,
+                                    "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                    "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                    "air_distribution_effectiveness": 0.8,
+                                    "terminals": [
+                                        {
+                                            "id": "PTHP Terminal 1",
+                                            "is_supply_ducted": false,
+                                            "type": "CONSTANT_AIR_VOLUME",
+                                            "served_by_heating_ventilating_air_conditioning_system": "PTHP 1",
+                                            "primary_airflow": 943.9,
+                                            "supply_design_heating_setpoint_temperature": 32.2,
+                                            "supply_design_cooling_setpoint_temperature": 12.8,
+                                            "terminal_minimum_outdoor_airflow": 94.4
+                                        }
+                                    ]
+                                }
+                            ],
+                            "heating_ventilating_air_conditioning_systems": [
+                                {
+                                    "id": "PTHP 1",
+                                    "cooling_system": {
+                                        "id": "HP Cooling Coil 1",
+                                        "type": "DIRECT_EXPANSION",
+                                        "design_sensible_cool_capacity": 11723,
+                                        "rated_total_cool_capacity": 17584,
+                                        "is_sized_based_on_design_day": false,
+                                        "efficiency_metric_values": [12.3],
+                                        "efficiency_metric_types": ["INTEGRATED_ENERGY_EFFICIENCY_RATIO"]
+                                    },
+                                    "heating_system": {
+                                        "id": "HP Heating Coil 1",
+                                        "type": "HEAT_PUMP",
+                                        "heatpump_auxilliary_heat_type": "FURNACE",
+                                        "design_capacity": 17500,
+                                        "rated_capacity": 17584,
+                                        "efficiency_metric_values": [8.0],
+                                        "efficiency_metric_types": ["HEATING_SEASONAL_PERFORMANCE_FACTOR"]
+                                    },
+                                    "fan_system": {
+                                        "id": "CAV Fan System 1",
+                                        "fan_control": "CONSTANT",
+                                        "operation_during_occupied": "CONTINUOUS",
+                                        "operation_during_unoccupied": "CONTINUOUS",
+                                        "minimum_outdoor_airflow": 472.0,
+                                        "maximum_outdoor_airflow": 943.9,
+                                        "supply_fans": [
+                                            {
+                                                "id": "Supply Fan 1",
+                                                "design_airflow": 943.9,
+                                                "is_airflow_sized_based_on_design_day": false,
+                                                "specification_method": "SIMPLE",
+                                                "design_electric_power": 600
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
