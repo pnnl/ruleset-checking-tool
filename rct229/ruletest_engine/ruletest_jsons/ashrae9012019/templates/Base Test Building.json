@@ -14,6 +14,7 @@
                 {
                   "id": "Core Zone 1",
                   "volume": 2698.04,
+                  "conditioning_type": "HEATED_AND_COOLED",
                   "thermostat_cooling_setpoint_schedule": "Core Zone 1 COOLING SETPOINT SCH",
                   "thermostat_heating_setpoint_schedule": "Core Zone 1 HEATING SETPOINT SCH",
                   "surfaces": [
@@ -232,6 +233,7 @@
                 {
                   "id": "Prm Zone 1",
                   "volume": 568.77,
+                  "conditioning_type": "HEATED_AND_COOLED",
                   "thermostat_cooling_setpoint_schedule": "Prm Zone 1 COOLING SETPOINT SCH",
                   "thermostat_heating_setpoint_schedule": "Prm Zone 1 HEATING SETPOINT SCH",
                   "surfaces": [
@@ -462,6 +464,7 @@
                 {
                   "id": "Prm Zone 2",
                   "volume": 360.08,
+                  "conditioning_type": "HEATED_AND_COOLED",
                   "thermostat_cooling_setpoint_schedule": "Prm Zone 2 COOLING SETPOINT SCH",
                   "thermostat_heating_setpoint_schedule": "Prm Zone 2 HEATING SETPOINT SCH",
                   "surfaces": [
@@ -668,6 +671,7 @@
                 {
                   "id": "Prm Zone 3",
                   "volume": 568.77,
+                  "conditioning_type": "HEATED_AND_COOLED",
                   "thermostat_cooling_setpoint_schedule": "Prm Zone 3 COOLING SETPOINT SCH",
                   "thermostat_heating_setpoint_schedule": "Prm Zone 3 HEATING SETPOINT SCH",
                   "surfaces": [
@@ -898,6 +902,7 @@
                 {
                   "id": "Prm Zone 4",
                   "volume": 360.05,
+                  "conditioning_type": "HEATED_AND_COOLED",
                   "thermostat_cooling_setpoint_schedule": "Prm Zone 4 COOLING SETPOINT SCH",
                   "thermostat_heating_setpoint_schedule": "Prm Zone 4 HEATING SETPOINT SCH",
                   "surfaces": [
