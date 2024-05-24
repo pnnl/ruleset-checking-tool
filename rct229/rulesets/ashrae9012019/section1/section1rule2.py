@@ -1,5 +1,5 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import (
     BASELINE_0,
     BASELINE_90,
@@ -18,7 +18,7 @@ class Section1Rule2(RuleDefinitionBase):
 
     def __init__(self):
         super(Section1Rule2, self).__init__(
-            rmds_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=True,
                 BASELINE_0=True,
                 BASELINE_90=True,
@@ -26,13 +26,10 @@ class Section1Rule2(RuleDefinitionBase):
                 BASELINE_270=True,
                 PROPOSED=True,
             ),
-            rmds_used_optional=produce_ruleset_model_instance(
-                USER=True,
-                BASELINE_0=True,
+            rmds_used_optional=produce_ruleset_model_description(
                 BASELINE_90=True,
                 BASELINE_180=True,
                 BASELINE_270=True,
-                PROPOSED=True,
             ),
             id="1-2",
             description="The performance of the proposed design is calculated in accordance with Standard 90.1-2019 Appendix G, where Performance Cost Index = Proposed building performance (PBP) /Baseline building performance (BBP), "
@@ -67,9 +64,9 @@ class Section1Rule2(RuleDefinitionBase):
                     find_one("$.output.baseline_building_performance_energy_cost", rmd)
                 )
 
-        pci_set = list(filter(lambda x: x is not None, pci_set))
-        pbp_set = list(filter(lambda x: x is not None, pbp_set))
-        bbp_set = list(filter(lambda x: x is not None, bbp_set))
+        pci_set = list(set(filter(lambda x: x is not None, pci_set)))
+        pbp_set = list(set(filter(lambda x: x is not None, pbp_set)))
+        bbp_set = list(set(filter(lambda x: x is not None, bbp_set)))
 
         assert_(
             len(pci_set) >= 1, "At least one `performance_cost_index` value must exist."
@@ -83,10 +80,15 @@ class Section1Rule2(RuleDefinitionBase):
             "At least one `baseline_building_performance_energy_cost` value must exist.",
         )
 
+        assert_(
+            bbp_set[0] > 0,
+            "The `baseline_building_performance_energy_cost` value must be greater than 0.",
+        )
+
         return {
-            "pci_set": list(set(pci_set)),
-            "pbp_set": list(set(pbp_set)),
-            "bbp_set": list(set(bbp_set)),
+            "pci_set": pci_set,
+            "pbp_set": pbp_set,
+            "bbp_set": bbp_set,
         }
 
     def rule_check(self, context, calc_vals=None, data=None):
@@ -94,10 +96,8 @@ class Section1Rule2(RuleDefinitionBase):
         pbp_set = calc_vals["pbp_set"]
         bbp_set = calc_vals["bbp_set"]
 
-        return (
-            len(pci_set) == len(pbp_set) == len(bbp_set) == 1
-            and bbp_set[0] != 0
-            and std_equal(pbp_set[0] / bbp_set[0], pci_set[0])
+        return len(pci_set) == len(pbp_set) == len(bbp_set) == 1 and std_equal(
+            pbp_set[0] / bbp_set[0], pci_set[0]
         )
 
     def get_fail_msg(self, context, calc_vals=None, data=None):
@@ -118,7 +118,5 @@ class Section1Rule2(RuleDefinitionBase):
             FAIL_MSG = (
                 "Ruleset expects exactly one BBP value to be used in the project."
             )
-        elif bbp_set[0] == 0:
-            FAIL_MSG = "Ruleset expects baseline_building_performance_energy_cost to be greater than 0."
 
         return FAIL_MSG

@@ -1,5 +1,4 @@
 import pydash
-
 from rct229.schema.schema_enums import SchemaEnums
 
 HOURS_IN_DAY = 24

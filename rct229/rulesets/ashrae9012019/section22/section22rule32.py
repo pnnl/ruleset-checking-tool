@@ -1,8 +1,8 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
-from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_3_fns import table_G3_5_3_lookup
+from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_3_fns import table_g3_5_3_lookup
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
@@ -37,7 +37,7 @@ class Section22Rule32(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section22Rule32, self).__init__(
-            rmds_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section22Rule32.ChillerRule(),
@@ -71,7 +71,7 @@ class Section22Rule32(RuleDefinitionListIndexedBase):
     class ChillerRule(RuleDefinitionBase):
         def __init__(self):
             super(Section22Rule32.ChillerRule, self).__init__(
-                rmds_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
             )
@@ -87,7 +87,7 @@ class Section22Rule32(RuleDefinitionListIndexedBase):
                 chiller_b, "Chiller", "part_load_efficiency_metric"
             )
 
-            target_part_load_efficiency = table_G3_5_3_lookup(
+            target_part_load_efficiency = table_g3_5_3_lookup(
                 compressor_type_b, rated_capacity_b
             )["minimum_integrated_part_load"]
 

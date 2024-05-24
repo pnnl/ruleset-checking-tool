@@ -1,6 +1,6 @@
 from rct229.rule_engine.partial_rule_definition import PartialRuleDefinition
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
     OpaqueSurfaceType as OST,
@@ -21,7 +21,7 @@ class Section5Rule3(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule3, self).__init__(
-            rmds_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             required_fields={
@@ -42,7 +42,7 @@ class Section5Rule3(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule3.BuildingRule, self).__init__(
-                rmds_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={},
@@ -66,7 +66,7 @@ class Section5Rule3(RuleDefinitionListIndexedBase):
         class SurfaceRule(PartialRuleDefinition):
             def __init__(self):
                 super(Section5Rule3.BuildingRule.SurfaceRule, self).__init__(
-                    rmds_used=produce_ruleset_model_instance(
+                    rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
                     required_fields={},

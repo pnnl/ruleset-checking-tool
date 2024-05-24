@@ -1,6 +1,6 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
     SurfaceConditioningCategory as SCC,
@@ -19,7 +19,7 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule21, self).__init__(
-            rmds_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             required_fields={
@@ -40,7 +40,7 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule21.BuildingRule, self).__init__(
-                rmds_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
                 each_rule=Section5Rule21.BuildingRule.UnregulatedSurfaceRule(),
@@ -66,7 +66,7 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
                 super(
                     Section5Rule21.BuildingRule.UnregulatedSurfaceRule, self
                 ).__init__(
-                    rmds_used=produce_ruleset_model_instance(
+                    rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
                     list_path="subsurfaces[*]",
@@ -80,7 +80,7 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
                         Section5Rule21.BuildingRule.UnregulatedSurfaceRule.UnregulatedSubsurfaceRule,
                         self,
                     ).__init__(
-                        rmds_used=produce_ruleset_model_instance(
+                        rmds_used=produce_ruleset_model_description(
                             USER=False, BASELINE_0=True, PROPOSED=True
                         ),
                         fail_msg=FAIL_MSG,

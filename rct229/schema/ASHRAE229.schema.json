@@ -1919,7 +1919,12 @@
                     "description": "Elevator lighting multiplier schedule name",
                     "type": "string",
                     "notes": "If the schedule is not present, the multiplier is always one. Constraint to use when implemented :Schedule:"
-                }
+                },
+				"number_of_floors_served": {
+					"description": "Number of floors served by the elevator",
+                    "type": "number",
+					"notes": "ADDED MANUALLY TO MEET SCHEMA REQUIREMENT FOR TESTING"
+				}
             },
             "required": [
                 "id"

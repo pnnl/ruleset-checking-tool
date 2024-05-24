@@ -1,21 +1,21 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019.data_fns.extra_schema_fns import proposed_equals_user
 
 
 class Section1Rule7(RuleDefinitionBase):
-    """Rule 1 of ASHRAE 90.1-2019 Appendix G Section 1 (Performance Calculation)"""
+    """Rule 7 of ASHRAE 90.1-2019 Appendix G Section 1 (Performance Calculation)"""
 
     def __init__(self):
         super(Section1Rule7, self).__init__(
-            rmds_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=True, BASELINE_0=False, PROPOSED=True
             ),
             id="1-7",
-            description="",
+            description="temp",
             ruleset_section_title="Performance Calculation",
-            standard_section="",
+            standard_section="a",
             is_primary_rule=True,
             rmd_context="",
         )

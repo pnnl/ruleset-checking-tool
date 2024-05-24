@@ -1,6 +1,6 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_area_type_window_wall_area_dict import (
     get_area_type_window_wall_area_dict,
@@ -22,7 +22,7 @@ class Section5Rule15(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule15, self).__init__(
-            rmds_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             required_fields={
@@ -43,7 +43,7 @@ class Section5Rule15(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionBase):
         def __init__(self):
             super(Section5Rule15.BuildingRule, self).__init__(
-                rmds_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
                 required_fields={
