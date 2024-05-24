@@ -37,9 +37,11 @@ def std_equal(
 
 
 def std_equal_with_precision(
-    val: Quantity, std_val: Quantity, precision: Quantity
+    val: Quantity | float | int,
+    std_val: Quantity | float | int,
+    precision: Quantity | float | int,
 ) -> bool:
-    """Determines whether the model value and standard value are equal with the specified precision.
+    """Determines whether the model value and standard value are equal with the specified precision. If any of the function inputs are a Quantity type, then all function inputs must be Quantity.
 
     Parameters
     ----------
@@ -55,6 +57,12 @@ def std_equal_with_precision(
     bool
         True if the modeled value is equal to the standard value within the specified precision
     """
+    # Check if all or none of the arguments are Quantity types
+    are_quantities = [isinstance(arg, Quantity) for arg in [val, std_val, precision]]
+    if not (all(are_quantities) or not any(are_quantities)):
+        raise TypeError(
+            "Arguments must be consistent in type: all Quantity or all non-Quantity."
+        )
 
     # Determine if the values are pint Quantities and handle accordingly
     if (
@@ -77,10 +85,10 @@ def std_equal_with_precision(
     if precision_magnitude.as_tuple().exponent < 0:
         # Decimal places (e.g., 0.01)
         precision_decimal_places = abs(precision_magnitude.as_tuple().exponent)
-        rounding_precision = "1E-" + str(precision_decimal_places)
+        rounding_precision = f"1E-{str(precision_decimal_places)}"
     else:
         # Whole number (e.g., 10, 100)
-        rounding_precision = "1E+" + str(int(precision_magnitude.log10()))
+        rounding_precision = f"1E+{str(int(precision_magnitude.log10()))}"
 
     # Round both values to the specified precision
     val_rounded = val_magnitude.quantize(
