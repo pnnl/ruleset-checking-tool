@@ -1,4 +1,5 @@
 import operator
+import pytest
 
 from rct229.schema.config import ureg
 from rct229.utils.compare_standard_val import (
@@ -154,6 +155,11 @@ def test__compare_standard_val_strict_gt__false_with_units():
         std_val=1.0101 * _M2,
         operator=operator.gt,
     )
+
+
+def test__std_equal_with_precision__false_types_vary():
+    with pytest.raises(TypeError):
+        std_equal_with_precision(1.05 * _M2, 1.1, 0.1)
 
 
 def test__std_equal_with_precision__true_with_units():
