@@ -14,9 +14,9 @@ class Section1Rule6(RuleDefinitionBase):
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             id="1-6",
-            description="temp",
+            description="The proposed design shall be the same as the baseline design for all data elements identified in the schema hosted at data.standards.ashrae {{https://github.com/open229/ruleset-model-description-schema/blob/main/docs229/ASHRAE229_extra.schema.json}}",
             ruleset_section_title="Performance Calculation",
-            standard_section="a",
+            standard_section="Table G3.1(1) Baseline Building Performance (a)",
             is_primary_rule=True,
             rmd_context="",
         )
