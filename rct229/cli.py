@@ -30,8 +30,6 @@ test_short_help_text = """
     --ruleset or -rs: default is ashrae9012019, available: ashrae9012019\n
     argument (optional): section string, \n
     currently available: section1, section4, section5, section6, section16, section18, section19, section21, section22 and section23"""
-
-
 @cli.command(
     "test", short_help=test_short_help_text, help=test_short_help_text, hidden=True
 )
@@ -60,7 +58,7 @@ short_help_text = """
     Run ruleset checking. arguments are \n
     --ruleset or -rs: ruleset name. Default is ashrae9012019, available options include: ashrae9012019 \n
     --rpds or -f: rpd file directory. accept multiple entries, example: -f ../example/user_model.rpd \n
-    --reports or -r: reports. Default is RAW_OUTPUT, accept multiple entries, available options include: RAW_OUTPUT, RAW_SUMMARY, ASHRAE9012019_DETAIL, ASHRAE9012019_SUMMARY. \n
+    --reports or -r: reports. Default is RAW_OUTPUT, accept multiple entries, available options include: EngineRawOutput, EngineRawSummary, ASHRAE9012019SummaryReport, ASHRAE9012019DetailReport. \n
     --reports_directory or -rd: directory to save the output reports. \n
     """
 help_text = short_help_text

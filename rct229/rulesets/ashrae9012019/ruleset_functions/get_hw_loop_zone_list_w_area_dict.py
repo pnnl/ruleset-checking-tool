@@ -1,7 +1,6 @@
 from typing import TypedDict
 
 from pint import Quantity
-
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_heating_type_fluid_loop import (
     is_hvac_sys_heating_type_fluid_loop,
 )
@@ -24,11 +23,11 @@ class HVACZoneListArea(TypedDict):
 
 def get_hw_loop_zone_list_w_area(rmd_b: dict) -> dict[str, HVACZoneListArea]:
     """
-    Get the list of zones and their total floor area served by each HHW loop in a baseline ruleset model instance.
+    Get the list of zones and their total floor area served by each HHW loop in a baseline ruleset model description.
 
     Parameters
     ----------
-    rmd_b: The baseline ruleset model instance that needs to get the list of zones with their total floor area served by each HHW loop.
+    rmd_b: The baseline ruleset model description that needs to get the list of zones with their total floor area served by each HHW loop.
 
     Returns hw_loop_zone_list_w_area_dictionary A dictionary that saves the list of zones and the total floor area
     served by each HHW loop, i.e. {loop_1.id: {"ZONE_LIST": [zone_1.id, zone_2.id, zone_3.id], "TOTAL_AREA": 10000},
