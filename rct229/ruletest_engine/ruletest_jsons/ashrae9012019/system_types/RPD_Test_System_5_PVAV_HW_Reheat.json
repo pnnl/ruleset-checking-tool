@@ -1,0 +1,144 @@
+{
+    "id": "ASHRAE229 1",
+    "ruleset_model_descriptions": [
+        {
+            "id": "RMD 1",
+            "buildings": [
+                {
+                    "id": "Building 1",
+                    "building_open_schedule": "Required Building Schedule 1",
+                    "building_segments": [
+                        {
+                            "id": "Building Segment 1",
+                            "zones": [
+                                {
+                                    "id": "Thermal Zone 1",
+                                    "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                    "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                    "terminals": [
+                                        {
+                                            "id": "VAV Air Terminal 1",
+                                            "is_supply_ducted": true,
+                                            "type": "VARIABLE_AIR_VOLUME",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System 5",
+                                            "heating_source": "HOT_WATER",
+                                            "heating_from_loop": "Boiler Loop 1",
+                                            "primary_airflow": 943.9,
+                                            "supply_design_heating_setpoint_temperature": 32.2,
+                                            "supply_design_cooling_setpoint_temperature": 12.8,
+                                            "minimum_airflow": 141.6,
+                                            "minimum_outdoor_airflow": 94.4,
+                                            "heating_capacity": 8792.1321
+                                        }
+                                    ]
+                                }
+                            ],
+                            "heating_ventilating_air_conditioning_systems": [
+                                {
+                                    "id": "System 5",
+                                    "cooling_system": {
+                                        "id": "DX Coil 1",
+                                        "type": "DIRECT_EXPANSION",
+                                        "design_sensible_cool_capacity": 85000,
+                                        "rated_total_cool_capacity": 87921.321,
+                                        "is_sized_based_on_design_day": false,
+                                        "efficiency_metric_types": ["ENERGY_EFFICIENCY_RATIO"],
+                                        "efficiency_metric_values": [10.0]
+                                    },
+                                    "preheat_system": {
+                                        "id": "Preheat Coil 1",
+                                        "type": "FLUID_LOOP",
+                                        "hot_water_loop": "Boiler Loop 1",
+                                        "rated_capacity": 43960.6605,
+                                        "heating_coil_setpoint": 12.778
+                                    },
+                                    "fan_system": {
+                                        "id": "VAV Fan System 1",
+                                        "fan_control": "VARIABLE_SPEED_DRIVE",
+                                        "temperature_control": "SCHEDULED",
+                                        "operation_during_occupied": "CONTINUOUS",
+                                        "operation_during_unoccupied": "KEEP_OFF",
+                                        "supply_fans": [
+                                            {
+                                                "id": "Supply Fan 1",
+                                                "design_airflow": 4719.474432,
+                                                "is_airflow_sized_based_on_design_day": false,
+                                                "specification_method": "SIMPLE",
+                                                "design_electric_power": 10000,
+                                                "output_validation_points": [
+                                                    {
+                                                        "airflow": 4719.474432,
+                                                        "result": 10000
+                                                    },
+                                                    {
+                                                        "airflow": 0,
+                                                        "result": 0
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "boilers": [
+                {
+                    "id": "Boiler 1",
+                    "loop": "Boiler Loop 1",
+                    "draft_type": "NATURAL",
+                    "energy_source_type": "NATURAL_GAS",
+                    "rated_capacity": 87921,
+                    "efficiency_metric": "ANNUAL_FUEL_UTILIZATION_EFFICIENCY",
+                    "efficiency": 0.84,
+                    "output_validation_points": [
+                        {
+                            "load": 0,
+                            "entering_water_temperature": 54.4,
+                            "result": 0
+                        },
+                        {
+                            "load": 87921,
+                            "entering_water_temperature": 54.4,
+                            "result": 104668
+                        }
+                    ]
+                }
+            ],
+            "pumps": [
+                {
+                    "id": "HW Pump 1",
+                    "loop_or_piping": "Boiler Loop 1",
+                    "specification_method": "SIMPLE",
+                    "design_electric_power": 380,
+                    "speed_control": "VARIABLE_SPEED",
+                    "design_flow": 1.26,
+                    "is_flow_sized_based_on_design_day": false
+                }
+            ],
+            "fluid_loops": [
+                {
+                    "id": "Boiler Loop 1",
+                    "type": "HEATING",
+                    "pump_power_per_flow_rate": 301,
+                    "heating_design_and_control": {
+                        "id": "Heating Design and Control",
+                        "design_supply_temperature": 82.2,
+                        "design_return_temperature": 54.4,
+                        "is_sized_using_coincident_load": true,
+                        "operation": "CONTINUOUS",
+                        "flow_control": "VARIABLE_FLOW",
+                        "minimum_flow_fraction": 0.25,
+                        "temperature_reset_type": "OUDOOR_AIR_RESET",
+                        "outdoor_high_for_loop_supply_reset_temperature": 10,
+                        "outdoor_low_for_loop_supply_reset_temperature": -6.7,
+                        "loop_supply_temperature_at_outdoor_high": 65.6,
+                        "loop_supply_temperature_at_outdoor_low": 82.2
+                    }
+                }
+            ]
+        }
+    ]
+}
