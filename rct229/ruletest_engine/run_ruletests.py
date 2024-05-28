@@ -258,7 +258,7 @@ def run_test_one_jsontest(test_json):
 # run_hvac_general_tests()
 
 # run_test_one_jsontest("ashrae9012019/section4/rule_4_2.json")
-run_ashrae9012019_tests(eval_proc_print=True)
+run_ashrae9012019_tests(eval_proc_print=False)
 # output_dir = os.path.dirname(__file__)
 # generate_ashrae9012019_software_test_report(['tester'])
 # generate_ashrae9012019_software_test_report(None, output_dir)
