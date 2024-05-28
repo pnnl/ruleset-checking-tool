@@ -8,7 +8,7 @@ TEST_PATH = "ruletest_jsons"
 
 
 def run_ashrae9012019_tests(
-    section: str = None, ten_percent_print: bool = False
+    section: str = None, eval_proc_print: bool = False
 ) -> list[bool]:
     """
     Run ruleset by section or all
@@ -17,7 +17,7 @@ def run_ashrae9012019_tests(
     Parameters
     ----------
     section: str - it should be the same string in the ASHRAE9012019_TEST_PATH_LIST
-    ten_percent_print: bool - if True, evaluation process will be printed with 10% increments and "Processing Rule" won't be printed.
+    eval_proc_print: bool - if True, evaluation process will be printed with 10% increments and "Processing Rule" won't be printed.
                           if False, evaluation process will NOT be printed and "Processing Rule" will be printed.
 
     Returns
@@ -25,7 +25,7 @@ def run_ashrae9012019_tests(
 
     """
 
-    if ten_percent_print:
+    if eval_proc_print:
         # get all the list of rpd file names
         rpd_by_section_list = [
             _helper_get_all_test_file_by_section(
@@ -53,7 +53,7 @@ def run_ashrae9012019_tests(
 
             # test each ruleset and save the bool result
             outcome_by_section[section].append(
-                run_test_helper([rpd], RuleSet.ASHRAE9012019_RULESET, ten_percent_print)
+                run_test_helper([rpd], RuleSet.ASHRAE9012019_RULESET, eval_proc_print)
             )
 
             # check if the progress has reached or exceeded the next progress update
@@ -226,12 +226,12 @@ def run_sys_zone_assignment_tests():
     return run_test_helper(json_tests, RuleSet.ASHRAE9012019_RULESET)
 
 
-def run_test_helper(test_list, ruleset_doc, ten_percent_print=False):
+def run_test_helper(test_list, ruleset_doc, eval_proc_print=False):
     # sort the list in a human order
     test_list.sort(key=natural_keys)
     # all will short-circuit the tests - to avoid it, split the code into two lines.
     test_results = [
-        run_section_tests(test_json, ruleset_doc, ten_percent_print)
+        run_section_tests(test_json, ruleset_doc, eval_proc_print)
         for test_json in test_list
     ]
     return all(test_results)
@@ -258,7 +258,7 @@ def run_test_one_jsontest(test_json):
 # run_hvac_general_tests()
 
 # run_test_one_jsontest("ashrae9012019/section4/rule_4_2.json")
-# run_ashrae9012019_tests(ten_percent_print=False)
+run_ashrae9012019_tests(eval_proc_print=True)
 # output_dir = os.path.dirname(__file__)
 # generate_ashrae9012019_software_test_report(['tester'])
 # generate_ashrae9012019_software_test_report(None, output_dir)

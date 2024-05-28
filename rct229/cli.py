@@ -7,10 +7,7 @@ from rct229.ruletest_engine.run_ruletests import run_ashrae9012019_tests
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.schema.schema_store import SchemaStore
 from rct229.utils.assertions import RCTException
-from rct229.ruleset_functions import (
-    count_number_of_rules,
-    count_number_of_ruletest_cases,
-)
+from rct229.web_application import count_number_of_rules, count_number_of_ruletest_cases
 
 CONTEXT_SETTINGS = dict(help_option_names=["-h", "--help"])
 
