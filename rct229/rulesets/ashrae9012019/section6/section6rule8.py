@@ -1,6 +1,6 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0, PROPOSED
 from rct229.rulesets.ashrae9012019.ruleset_functions.compare_schedules import (
     compare_schedules,
@@ -28,7 +28,7 @@ class Section6Rule8(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section6Rule8, self).__init__(
-            rmds_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             each_rule=Section6Rule8.RulesetModelInstanceRule(),
@@ -47,7 +47,7 @@ class Section6Rule8(RuleDefinitionListIndexedBase):
     class RulesetModelInstanceRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section6Rule8.RulesetModelInstanceRule, self).__init__(
-                rmds_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
                 each_rule=Section6Rule8.RulesetModelInstanceRule.BuildingRule(),
@@ -65,7 +65,7 @@ class Section6Rule8(RuleDefinitionListIndexedBase):
                 super(
                     Section6Rule8.RulesetModelInstanceRule.BuildingRule, self
                 ).__init__(
-                    rmds_used=produce_ruleset_model_instance(
+                    rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
                     each_rule=Section6Rule8.RulesetModelInstanceRule.BuildingRule.ZoneRule(),
@@ -95,7 +95,7 @@ class Section6Rule8(RuleDefinitionListIndexedBase):
                         Section6Rule8.RulesetModelInstanceRule.BuildingRule.ZoneRule,
                         self,
                     ).__init__(
-                        rmds_used=produce_ruleset_model_instance(
+                        rmds_used=produce_ruleset_model_description(
                             USER=False, BASELINE_0=True, PROPOSED=True
                         ),
                         each_rule=Section6Rule8.RulesetModelInstanceRule.BuildingRule.ZoneRule.SpaceRule(),
@@ -117,7 +117,7 @@ class Section6Rule8(RuleDefinitionListIndexedBase):
                             Section6Rule8.RulesetModelInstanceRule.BuildingRule.ZoneRule.SpaceRule,
                             self,
                         ).__init__(
-                            rmds_used=produce_ruleset_model_instance(
+                            rmds_used=produce_ruleset_model_description(
                                 USER=False, BASELINE_0=True, PROPOSED=True
                             ),
                             manual_check_required_msg=MANUAL_CHECK_MSG,

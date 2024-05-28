@@ -1,7 +1,6 @@
 from typing import Literal
 
 from pint import Quantity
-
 from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_functions.is_space_a_computer_room import (
     is_space_a_computer_room,
 )

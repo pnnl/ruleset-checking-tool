@@ -12,10 +12,10 @@ class ASHRAE9012019DetailReport(RCTReport):
         self.title = "ASHRAE STD 229P RULESET CHECKING TOOL"
         self.purpose = "Project Testing Report"
         self.ruleset = "ASHRAE 90.1-2019 Performance Rating Method (Appendix G)"
-        self.ruleset_report_file = "ashrae901_2019_detail_report.json"
+        self.ruleset_report_file = f"{self.__class__.__name__}.json"
 
     def initialize_ruleset_report(self, rule_outcome=None):
-        report_json = dict()
+        report_json = {}
         report_json["title"] = self.title
         report_json["purpose"] = self.purpose
         report_json["tool_name"] = self.tool
@@ -28,9 +28,9 @@ class ASHRAE9012019DetailReport(RCTReport):
         return report_json
 
     def generate_rule_report(self, rule_outcome, outcome_dict):
-        # set up the rule meta data
+        # set up the rule metadata
         rule_id = rule_outcome["id"]
-        rule_report = dict()
+        rule_report = {}
         rule_report["rule_id"] = rule_id
         rule_report["description"] = rule_outcome["description"]
         rule_report["evaluation_type"] = (
@@ -54,7 +54,7 @@ class ASHRAE9012019DetailReport(RCTReport):
     def _rule_outcome_helper(self, results, eval_list, outcome_dict):
         def output_node(output_result, output_eval_list, output_outcome_dict):
             # in this case, it is the rule checking component
-            evaluation_outcome = dict()
+            evaluation_outcome = {}
             if any(
                 [
                     key.startswith("INVALID_") and key.endswith("_CONTEXT")

@@ -7,7 +7,7 @@ COOLING_SYSTEM = SchemaEnums.schema_enums["CoolingSystemOptions"]
 
 def find_exactly_one_hvac_system(rmd: dict, hvac_id: str) -> dict:
     """
-    Search for the HVAC data group in a ruleset model instance by matching hvac_id
+    Search for the HVAC data group in a ruleset model description by matching hvac_id
     Raise exception if no matching HVAC
 
     Parameters
@@ -29,7 +29,7 @@ def find_exactly_one_hvac_system(rmd: dict, hvac_id: str) -> dict:
 
 def find_exactly_one_terminal_unit(rmd: dict, terminal_unit_id: str) -> dict:
     """
-    Search for the terminal unit data group in a ruleset model instance by matching terminal_unit_id
+    Search for the terminal unit data group in a ruleset model description by matching terminal_unit_id
     Raise exception if no matching terminal unit
     Parameters
     ----------
@@ -50,7 +50,7 @@ def find_exactly_one_terminal_unit(rmd: dict, terminal_unit_id: str) -> dict:
 
 def find_exactly_one_zone(rmd: dict, zone_id: str) -> dict:
     """
-    Search for the zone data group in a ruleset model instance by matching zone_id
+    Search for the zone data group in a ruleset model description by matching zone_id
     Raise exception if no matching zone
 
     Parameters
@@ -69,7 +69,7 @@ def find_exactly_one_zone(rmd: dict, zone_id: str) -> dict:
 
 def find_exactly_one_space(rmd: dict, space_id: str) -> dict:
     """
-    Search for the zone data group in a ruleset model instance by matching zone_id
+    Search for the zone data group in a ruleset model description by matching zone_id
     Raise exception if no matching zone
 
     Parameters
@@ -91,7 +91,7 @@ def find_exactly_one_space(rmd: dict, space_id: str) -> dict:
 
 def find_exactly_one_schedule(rmd: dict, schedule_id: str) -> dict:
     """
-    Search for the schedule data group in a ruleset model instance by matching schedule_id
+    Search for the schedule data group in a ruleset model description by matching schedule_id
     Raise exception if no matching schedule
 
     Parameters
@@ -108,7 +108,7 @@ def find_exactly_one_schedule(rmd: dict, schedule_id: str) -> dict:
 
 def find_exactly_one_child_loop(rmd, child_loop_id):
     """
-    Search for a child loop data group (secondary loop) in a ruleset model instance by matching child_loop_id
+    Search for a child loop data group (secondary loop) in a ruleset model description by matching child_loop_id
     Raise exception if no matching zone
     Parameters
     ----------
@@ -129,7 +129,7 @@ def find_exactly_one_child_loop(rmd, child_loop_id):
 
 def find_exactly_one_fluid_loop(rmd: dict, loop_id: str) -> dict:
     """
-    Search for the loop data group in a ruleset model instance by matching loop_id
+    Search for the loop data group in a ruleset model description by matching loop_id
     Raise exception if no matching zone
     Parameters
     ----------
@@ -155,7 +155,7 @@ def has_heating_system(rmd: dict, hvac_id: str) -> bool:
     Parameters
     ----------
     rmd json
-        A ruleset model instance for a RMD.
+        A ruleset model description for a RMD.
 
     hvac_id str
         The id of the hvac system to evaluate.
@@ -180,7 +180,7 @@ def has_cooling_system(rmd: dict, hvac_id: str) -> bool:
     Parameters
     ----------
     rmd json
-        A ruleset model instance for a RMD.
+        A ruleset model description for a RMD.
 
     hvac_id str
         The id of the hvac system to evaluate.
@@ -205,7 +205,7 @@ def has_preheat_system(rmd: dict, hvac_id: str) -> bool:
     Parameters
     ----------
     rmd json
-        A ruleset model instance for a RMD.
+        A ruleset model description for a RMD.
 
     hvac_id str
         The id of the hvac system to evaluate.
@@ -230,7 +230,7 @@ def has_fan_system(rmd: dict, hvac_id: str) -> bool:
     Parameters
     ----------
     rmd json
-        A ruleset model instance for a RMD.
+        A ruleset model description for a RMD.
 
     hvac_id str
         The id of the hvac system to evaluate.

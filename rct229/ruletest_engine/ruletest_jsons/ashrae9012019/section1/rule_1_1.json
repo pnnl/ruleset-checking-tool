@@ -1,0 +1,846 @@
+{
+    "rule-1-1-a": {
+        "Section": 1,
+        "Rule": 1,
+        "Test": "a",
+        "test_description": "A one building segment, single zone office building in CZ 4A  has a total area weighted building performance factor equal to the BPF specified in Table 4.2.1.1. EXPECTED = pass",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "1-1",
+            "ruleset_reference": "4.2.1.1",
+            "rule_description": "Building performance factors shall be from Standard 90.1-2019, Table 4.2.1.1, based on the building area type and climate zone. For building area types not listed in Table 4.2.1.1 \u201cAll others\u201d shall be used to determine the BPF. Where a building has multiple building area types, the required BPF shall be equal to the area-weighted average of the building area types.",
+            "applicable_rmr": "Proposed Model",
+            "rule_assertion": "=",
+            "comparison_value": "Baseline Model",
+            "rule_dependency": 0,
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.34"
+        },
+        "rmr_transformations": {
+            "user": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "output": {
+                            "id": "Output 1",
+                            "total_area_weighted_building_performance_factor": 0.51
+                        },
+                        "type": "USER"
+                    }
+                ]
+            },
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "output": {
+                            "id": "Output 1",
+                            "total_area_weighted_building_performance_factor": 0.51
+                        },
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "output": {
+                            "id": "Output 1",
+                            "total_area_weighted_building_performance_factor": 0.51
+                        },
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-1-1-b": {
+        "Section": 1,
+        "Rule": 1,
+        "Test": "b",
+        "test_description": "A one building segment, two zone building in CZ 4A  has both office and hotel spaces. The total area weighted building performance factor is equal to the BPF specified in Table 4.2.1.1. EXPECTED = pass",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "1-1",
+            "ruleset_reference": "4.2.1.1",
+            "rule_description": "Building performance factors shall be from Standard 90.1-2019, Table 4.2.1.1, based on the building area type and climate zone. For building area types not listed in Table 4.2.1.1 \u201cAll others\u201d shall be used to determine the BPF. Where a building has multiple building area types, the required BPF shall be equal to the area-weighted average of the building area types.",
+            "applicable_rmr": "Proposed Model",
+            "rule_assertion": "=",
+            "comparison_value": "Baseline Model",
+            "rule_dependency": 0,
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.34"
+        },
+        "rmr_transformations": {
+            "user": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "floor_name": "Floor2",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 2",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "GUEST_ROOM"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "output": {
+                            "id": "Output 1",
+                            "total_area_weighted_building_performance_factor": 0.52
+                        },
+                        "type": "USER"
+                    }
+                ]
+            },
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "floor_name": "Floor2",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 2",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "GUEST_ROOM"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "output": {
+                            "id": "Output 1",
+                            "total_area_weighted_building_performance_factor": 0.52
+                        },
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "floor_name": "Floor2",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 2",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "GUEST_ROOM"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "output": {
+                            "id": "Output 1",
+                            "total_area_weighted_building_performance_factor": 0.52
+                        },
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-1-1-c": {
+        "Section": 1,
+        "Rule": 1,
+        "Test": "c",
+        "test_description": "A one building segment, single zone office building in CZ 4A  has a total area weighted building performance factor does not equal the BPF specified in Table 4.2.1.1. EXPECTED = fail",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "1-1",
+            "ruleset_reference": "4.2.1.1",
+            "rule_description": "Building performance factors shall be from Standard 90.1-2019, Table 4.2.1.1, based on the building area type and climate zone. For building area types not listed in Table 4.2.1.1 \u201cAll others\u201d shall be used to determine the BPF. Where a building has multiple building area types, the required BPF shall be equal to the area-weighted average of the building area types.",
+            "applicable_rmr": "Proposed Model",
+            "rule_assertion": "=",
+            "comparison_value": "Baseline Model",
+            "rule_dependency": 0,
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.34"
+        },
+        "rmr_transformations": {
+            "user": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "output": {
+                            "id": "Output 1",
+                            "total_area_weighted_building_performance_factor": 0.4
+                        },
+                        "type": "USER"
+                    }
+                ]
+            },
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "output": {
+                            "id": "Output 1",
+                            "total_area_weighted_building_performance_factor": 0.4
+                        },
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "output": {
+                            "id": "Output 1",
+                            "total_area_weighted_building_performance_factor": 0.4
+                        },
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-1-1-d": {
+        "Section": 1,
+        "Rule": 1,
+        "Test": "d",
+        "test_description": "A one building segment, two zone building in CZ 4A  has both office and hotel spaces. The total area weighted building performance factor does not equal the BPF specified in Table 4.2.1.1. EXPECTED = fail",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "1-1",
+            "ruleset_reference": "4.2.1.1",
+            "rule_description": "Building performance factors shall be from Standard 90.1-2019, Table 4.2.1.1, based on the building area type and climate zone. For building area types not listed in Table 4.2.1.1 \u201cAll others\u201d shall be used to determine the BPF. Where a building has multiple building area types, the required BPF shall be equal to the area-weighted average of the building area types.",
+            "applicable_rmr": "Proposed Model",
+            "rule_assertion": "=",
+            "comparison_value": "Baseline Model",
+            "rule_dependency": 0,
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.34"
+        },
+        "rmr_transformations": {
+            "user": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "floor_name": "Floor2",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 2",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "GUEST_ROOM"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "output": {
+                            "id": "Output 1",
+                            "total_area_weighted_building_performance_factor": 0.4
+                        },
+                        "type": "USER"
+                    }
+                ]
+            },
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "floor_name": "Floor2",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 2",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "GUEST_ROOM"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "output": {
+                            "id": "Output 1",
+                            "total_area_weighted_building_performance_factor": 0.4
+                        },
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "floor_name": "Floor2",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 2",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "GUEST_ROOM"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "output": {
+                            "id": "Output 1",
+                            "total_area_weighted_building_performance_factor": 0.4
+                        },
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-1-1-f": {
+        "Section": 1,
+        "Rule": 1,
+        "Test": "f",
+        "test_description": "A one building segment, two zone building in CZ 4A  has both office and restroom spaces. The total area weighted building performance factor cannot be calculated. EXPECTED = undetermined",
+        "expected_rule_outcome": "undetermined",
+        "standard": {
+            "rule_id": "1-1",
+            "ruleset_reference": "4.2.1.1",
+            "rule_description": "Building performance factors shall be from Standard 90.1-2019, Table 4.2.1.1, based on the building area type and climate zone. For building area types not listed in Table 4.2.1.1 \u201cAll others\u201d shall be used to determine the BPF. Where a building has multiple building area types, the required BPF shall be equal to the area-weighted average of the building area types.",
+            "applicable_rmr": "Proposed Model",
+            "rule_assertion": "=",
+            "comparison_value": "Baseline Model",
+            "rule_dependency": 0,
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.34"
+        },
+        "rmr_transformations": {
+            "user": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "floor_name": "Floor2",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 2",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "GUEST_ROOM"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "output": {
+                            "id": "Output 1",
+                            "total_area_weighted_building_performance_factor": 0.4
+                        },
+                        "type": "USER"
+                    }
+                ]
+            },
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "floor_name": "Floor2",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 2",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "GUEST_ROOM"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "output": {
+                            "id": "Output 1",
+                            "total_area_weighted_building_performance_factor": 0.4
+                        },
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "RESTROOM_ALL_OTHERS"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "floor_name": "Floor2",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 2",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "GUEST_ROOM"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "output": {
+                            "id": "Output 1",
+                            "total_area_weighted_building_performance_factor": 0.4
+                        },
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    }
+}

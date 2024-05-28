@@ -1,5 +1,4 @@
 from pint import Quantity
-
 from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_functions.get_zones_computer_rooms import (
     get_zone_computer_rooms,
 )
@@ -16,7 +15,7 @@ def get_computer_zones_peak_cooling_load(rmd: dict) -> Quantity:
     Parameters
     ----------
     rmd dict
-        A dictionary representing a ruleset model instance as defined by the ASHRAE229 schema
+        A dictionary representing a ruleset model description as defined by the ASHRAE229 schema
 
     Returns
     -------

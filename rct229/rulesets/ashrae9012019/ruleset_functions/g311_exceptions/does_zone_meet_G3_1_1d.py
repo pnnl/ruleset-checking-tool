@@ -1,5 +1,4 @@
 from pint import Quantity
-
 from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_functions.get_building_lab_zones_list import (
     get_building_lab_zones_list,
 )
@@ -33,7 +32,7 @@ def does_zone_meet_g3_1_1d(rmd: dict, zone_id: str) -> bool:
     Parameters
     ----------
     rmd dict
-        A dictionary representing a ruleset model instance as defined by the ASHRAE229 schema
+        A dictionary representing a ruleset model description as defined by the ASHRAE229 schema
     zone_id str
         zone id
 

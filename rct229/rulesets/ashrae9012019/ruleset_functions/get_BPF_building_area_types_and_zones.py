@@ -7,6 +7,7 @@ from rct229.rulesets.ashrae9012019.data_fns.table_lighting_space_type_BPF_area_t
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_BPF_BAT import (
     get_zone_BPF_BAT,
 )
+from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
 
@@ -111,4 +112,10 @@ def get_BPF_building_area_types_and_zones(
                     for space in find_all("$.spaces[*]", zone)
                 )
 
+    assert_(
+        building_area_types_with_total_area_and_zones_dict,
+        "Cannot find/identify building area type in the "
+        "project, Require at least one but got None. Check "
+        "your inputs.",
+    )
     return building_area_types_with_total_area_and_zones_dict
