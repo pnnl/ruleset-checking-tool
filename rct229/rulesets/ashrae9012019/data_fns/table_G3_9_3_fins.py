@@ -34,15 +34,7 @@ def table_G3_9_3_lookup(shaft_input_power: Quantity) -> FullLoadMotorEfficiency:
     )
     shaft_input_power = math.ceil(shaft_input_power_mag / 10) * 10
 
-    if 0 <= shaft_input_power <= 10.0:
-        shaft_input_power = 10
-    elif 10 < shaft_input_power <= 20.0:
-        shaft_input_power = 20
-    elif 20 < shaft_input_power <= 30.0:
-        shaft_input_power = 30
-    elif 30 < shaft_input_power <= 40.0:
-        shaft_input_power = 40
-    elif 40 < shaft_input_power:
+    if shaft_input_power > 40:
         shaft_input_power = 100
 
     full_load_motor_efficiency_for_modeling = find_osstd_table_entry(
