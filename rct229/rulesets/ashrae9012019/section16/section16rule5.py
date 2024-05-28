@@ -1,11 +1,12 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rule_engine.rulesets import LeapYear
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.compare_schedules import (
     compare_schedules,
 )
+from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.utility_functions import find_exactly_one_schedule
 
@@ -15,7 +16,7 @@ class Section16Rule5(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section16Rule5, self).__init__(
-            rmds_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=False,
                 BASELINE_0=True,
                 PROPOSED=True,
@@ -35,7 +36,7 @@ class Section16Rule5(RuleDefinitionListIndexedBase):
     class RuleSetModelDescriptionRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section16Rule5.RuleSetModelDescriptionRule, self).__init__(
-                rmds_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
                 each_rule=Section16Rule5.RuleSetModelDescriptionRule.ElevatorRule(),
@@ -46,7 +47,7 @@ class Section16Rule5(RuleDefinitionListIndexedBase):
         def is_applicable(self, context, data=None):
             rmd_p = context.PROPOSED
 
-            return find_all("$.buildings[*].elevators", rmd_p)
+            return find_all("$.buildings[*].elevators[*]", rmd_p)
 
         def create_data(self, context, data):
             rmd_b = context.BASELINE_0
@@ -75,7 +76,7 @@ class Section16Rule5(RuleDefinitionListIndexedBase):
                 super(
                     Section16Rule5.RuleSetModelDescriptionRule.ElevatorRule, self
                 ).__init__(
-                    rmds_used=produce_ruleset_model_instance(
+                    rmds_used=produce_ruleset_model_description(
                         USER=False,
                         BASELINE_0=True,
                         PROPOSED=False,
@@ -86,18 +87,18 @@ class Section16Rule5(RuleDefinitionListIndexedBase):
                 elevator_b = context.BASELINE_0
                 is_leap_year_b = data["is_leap_year_b"]
 
-                cab_ventilation_fan_multiplier_schedule_b = elevator_b[
-                    "cab_ventilation_fan_multiplier_schedule"
+                cab_vent_fan_multi_sch_b = getattr_(
+                    elevator_b, "elevators", "cab_ventilation_fan_multiplier_schedule"
+                )
+                cab_vent_sch_b = data["cab_ventilation_fan_multiplier_schedule_b"][
+                    cab_vent_fan_multi_sch_b
                 ]
-                cab_ventilation_schedule_b = data[
-                    "cab_ventilation_fan_multiplier_schedule_b"
-                ][cab_ventilation_fan_multiplier_schedule_b]
 
-                cab_lighting_multiplier_schedule_b = elevator_b[
-                    "cab_lighting_multiplier_schedule"
-                ]
-                cab_lighting_schedule_b = data["cab_lighting_multiplier_schedule_b"][
-                    cab_lighting_multiplier_schedule_b
+                cab_lgt_multi_sch_b = getattr_(
+                    elevator_b, "elevators", "cab_lighting_multiplier_schedule"
+                )
+                cab_lgt_sch_b = data["cab_lighting_multiplier_schedule_b"][
+                    cab_lgt_multi_sch_b
                 ]
 
                 total_hours = (
@@ -109,14 +110,14 @@ class Section16Rule5(RuleDefinitionListIndexedBase):
                 continuous_schedule = [1] * total_hours
 
                 vent_sched_compare_data = compare_schedules(
-                    cab_ventilation_schedule_b,
+                    cab_vent_sch_b,
                     continuous_schedule,
                     continuous_schedule,
                     is_leap_year_b,
                 )["total_hours_matched"]
 
                 light_sched_compare_data = compare_schedules(
-                    cab_lighting_schedule_b,
+                    cab_lgt_sch_b,
                     continuous_schedule,
                     continuous_schedule,
                     is_leap_year_b,
