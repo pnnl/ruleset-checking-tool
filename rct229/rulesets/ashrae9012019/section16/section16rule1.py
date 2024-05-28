@@ -1,6 +1,6 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_9_1_fins import table_G3_9_1_lookup
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_9_2_fins import table_G3_9_2_lookup
@@ -17,7 +17,7 @@ class Section16Rule1(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section16Rule1, self).__init__(
-            rmds_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=False,
                 BASELINE_0=True,
                 PROPOSED=True,
@@ -36,12 +36,12 @@ class Section16Rule1(RuleDefinitionListIndexedBase):
     def is_applicable(self, context, data=None):
         rmd_p = context.PROPOSED
 
-        return find_all("$.buildings[*].elevators", rmd_p)
+        return find_all("$.buildings[*].elevators[*]", rmd_p)
 
     class ElevatorRule(RuleDefinitionBase):
         def __init__(self):
             super(Section16Rule1.ElevatorRule, self).__init__(
-                rmds_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_description(
                     USER=False,
                     BASELINE_0=True,
                     PROPOSED=False,
@@ -52,15 +52,15 @@ class Section16Rule1(RuleDefinitionListIndexedBase):
             elevator_b = context.BASELINE_0
 
             total_floors_served_b = getattr_(
-                elevator_b, "elevator", "number_of_floors_served"
+                elevator_b, "elevators", "number_of_floors_served"
             )
-            elevator_motor_power_b = getattr_(elevator_b, "elevator", "motor_power")
-            elevator_cab_weight_b = getattr_(elevator_b, "elevator", "cab_weight")
+            elevator_motor_power_b = getattr_(elevator_b, "elevators", "motor_power")
+            elevator_cab_weight_b = getattr_(elevator_b, "elevators", "cab_weight")
             elevator_cab_counterweight_b = getattr_(
-                elevator_b, "elevator", "cab_counterweight"
+                elevator_b, "elevators", "cab_counterweight"
             )
-            elevator_design_load_b = getattr_(elevator_b, "elevator", "design_load")
-            elevator_speed_b = getattr_(elevator_b, "elevator", "speed")
+            elevator_design_load_b = getattr_(elevator_b, "elevators", "design_load")
+            elevator_speed_b = getattr_(elevator_b, "elevators", "speed")
 
             elevator_mechanical_efficiency_b = table_G3_9_2_lookup(
                 total_floors_served_b
