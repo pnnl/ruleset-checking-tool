@@ -7,7 +7,10 @@ from rct229.ruletest_engine.run_ruletests import run_ashrae9012019_tests
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.schema.schema_store import SchemaStore
 from rct229.utils.assertions import RCTException
-from rct229.web_application import count_number_of_rules, count_number_of_ruletest_cases
+from rct229.ruleset_functions import (
+    count_number_of_rules,
+    count_number_of_ruletest_cases,
+)
 
 CONTEXT_SETTINGS = dict(help_option_names=["-h", "--help"])
 
@@ -38,10 +41,11 @@ test_short_help_text = """
 @click.option("--ruleset", "-rs", multiple=False, default="ashrae9012019")
 @click.argument("section", type=click.STRING, required=False)
 def run_test(ruleset, section=None):
-    print(f"software test workflow for section {section}")
+    if section is not None:
+        print(f"software test workflow for section {section}")
     if ruleset == RuleSet.ASHRAE9012019_RULESET:
         SchemaStore.set_ruleset(RuleSet.ASHRAE9012019_RULESET)
-        outcome_list = run_ashrae9012019_tests(section)
+        outcome_list = run_ashrae9012019_tests(section, True)
         if section is None:
             for idx, outcome in enumerate(outcome_list):
                 assert (

@@ -1,11 +1,15 @@
-from rct229.rule_engine.rulesets import RuleSet, RuleSetTest
+from functools import reduce
+from pathlib import PurePath
+
 from rct229.ruletest_engine.ruletest_engine import *
 from rct229.utils.natural_sort import natural_keys
 
 TEST_PATH = "ruletest_jsons"
 
 
-def run_ashrae9012019_tests(section=None):
+def run_ashrae9012019_tests(
+    section: str = None, ten_percent_print: bool = False
+) -> list[bool]:
     """
     Run ruleset by section or all
     If section is None, then this function runs all the rule sections
@@ -13,21 +17,64 @@ def run_ashrae9012019_tests(section=None):
     Parameters
     ----------
     section: str - it should be the same string in the ASHRAE9012019_TEST_PATH_LIST
+    ten_percent_print: bool - if True, evaluation process will be printed with 10% increments and "Processing Rule" won't be printed.
+                          if False, evaluation process will NOT be printed and "Processing Rule" will be printed.
 
     Returns
     -------
 
     """
-    return [
-        run_test_helper(
+
+    if ten_percent_print:
+        # get all the list of rpd file names
+        rpd_by_section_list = [
             _helper_get_all_test_file_by_section(
                 RuleSet.ASHRAE9012019_RULESET, test_section
-            ),
-            RuleSet.ASHRAE9012019_RULESET,
-        )
-        for test_section in RuleSetTest.ASHRAE9012019_TEST_LIST
-        if section is None or test_section == section
-    ]
+            )
+            for test_section in RuleSetTest.ASHRAE9012019_TEST_LIST
+            if section is None or test_section == section
+        ]
+        # flatten the 2D list
+        list_of_rpds = reduce(lambda x, y: x + y, rpd_by_section_list)
+        list_of_rpds_len = len(list_of_rpds)
+
+        # initialize a variable to track the next progress update
+        next_progress = 10
+
+        outcome_by_section = {}
+        for idx, rpd in enumerate(list_of_rpds):
+            # calculate the percentage of progress
+            progress = (idx + 1) / list_of_rpds_len * 100
+
+            # get the section name (e.g., "section5")
+            section = PurePath(rpd).parts[1]
+            if section not in outcome_by_section:
+                outcome_by_section[section] = []
+
+            # test each ruleset and save the bool result
+            outcome_by_section[section].append(
+                run_test_helper([rpd], RuleSet.ASHRAE9012019_RULESET, ten_percent_print)
+            )
+
+            # check if the progress has reached or exceeded the next progress update
+            while progress >= next_progress:
+                print(f"Evaluation completion: {next_progress}%")
+                next_progress += 10
+
+        return [
+            all(outcome_by_section[section_name]) for section_name in outcome_by_section
+        ]
+    else:
+        return [
+            run_test_helper(
+                _helper_get_all_test_file_by_section(
+                    RuleSet.ASHRAE9012019_RULESET, test_section
+                ),
+                RuleSet.ASHRAE9012019_RULESET,
+            )
+            for test_section in RuleSetTest.ASHRAE9012019_TEST_LIST
+            if section is None or test_section == section
+        ]
 
 
 def generate_ashrae9012019_software_test_report(
@@ -179,12 +226,13 @@ def run_sys_zone_assignment_tests():
     return run_test_helper(json_tests, RuleSet.ASHRAE9012019_RULESET)
 
 
-def run_test_helper(test_list, ruleset_doc):
+def run_test_helper(test_list, ruleset_doc, ten_percent_print=False):
     # sort the list in a human order
     test_list.sort(key=natural_keys)
     # all will short-circuit the tests - to avoid it, split the code into two lines.
     test_results = [
-        run_section_tests(test_json, ruleset_doc) for test_json in test_list
+        run_section_tests(test_json, ruleset_doc, ten_percent_print)
+        for test_json in test_list
     ]
     return all(test_results)
 
@@ -210,7 +258,7 @@ def run_test_one_jsontest(test_json):
 # run_hvac_general_tests()
 
 # run_test_one_jsontest("ashrae9012019/section4/rule_4_2.json")
-# run_ashrae9012019_tests()
+# run_ashrae9012019_tests(ten_percent_print=False)
 # output_dir = os.path.dirname(__file__)
 # generate_ashrae9012019_software_test_report(['tester'])
 # generate_ashrae9012019_software_test_report(None, output_dir)

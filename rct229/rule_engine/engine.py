@@ -102,7 +102,7 @@ def evaluate_all_rules(ruleset_model_path_list):
     return report
 
 
-def evaluate_rule(rule, rmrs, test=False):
+def evaluate_rule(rule, rmrs, test=False, ten_percent_print=False):
     """Evaluates a single rule against an RMD trio
 
     Parameters
@@ -111,6 +111,8 @@ def evaluate_rule(rule, rmrs, test=False):
         Object containing the RMDs required by enum schema
     test: Boolean
         A flag to indicate whether the evaluate rule is a software test workflow or not.
+    ten_percent_print: Boolean
+        whether to print out the evaluation process print: True: print out, False: NOT print out
 
     Returns
     -------
@@ -131,11 +133,15 @@ def evaluate_rule(rule, rmrs, test=False):
         }
     """
 
-    return evaluate_rules([rule], rmrs, test=test)
+    return evaluate_rules([rule], rmrs, test=test, ten_percent_print=ten_percent_print)
 
 
 def evaluate_rules(
-    rules_list: list, rmds: RuleSetModels, unit_system=UNIT_SYSTEM.IP, test=False
+    rules_list: list,
+    rmds: RuleSetModels,
+    unit_system=UNIT_SYSTEM.IP,
+    test=False,
+    ten_percent_print=False,
 ):
     """Evaluates a list of rules against an RMDs
 
@@ -146,7 +152,9 @@ def evaluate_rules(
     rmds : RuleSetModels
         Object containing RPDs for ruleset evaluation
     test: Boolean
-        Flag to indicate whether this run is for software testing workflow or not.
+        Flag to indicate whether this run is for software testing workflow or not
+    ten_percent_print: Boolean
+        whether to print out the evaluation process print: True: print out, False: NOT print out
 
     Returns
     -------
@@ -229,7 +237,8 @@ def evaluate_rules(
             print(
                 f"Compliance evaluation progress: {round(rule_counter / total_num_rules * 100)}%"
             )
-        print(f"Processing Rule {rule.id}")
+        if not ten_percent_print:
+            print(f"Processing Rule {rule.id}")
         outcome = rule.evaluate(copied_rmds)
         outcomes.append(outcome)
 

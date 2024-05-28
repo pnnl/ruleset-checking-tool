@@ -174,7 +174,9 @@ def process_test_result(test_result, test_dict, test_id):
     return outcome_text, received_expected_outcome
 
 
-def run_section_tests(test_json_name: str, ruleset_doc: RuleSet):
+def run_section_tests(
+    test_json_name: str, ruleset_doc: RuleSet, ten_percent_print=False
+):
     """Runs all tests found in a given test JSON and prints results to console. Returns true/false describing whether
     or not all tests in the JSON result in the expected outcome.
 
@@ -187,6 +189,10 @@ def run_section_tests(test_json_name: str, ruleset_doc: RuleSet):
     ruleset_doc: string
 
         Name of the ruleset
+
+    ten_percent_print: bool
+
+        whether to print out the evaluation process print: True: print out, False: NOT print out
 
     Returns
     -------
@@ -265,7 +271,9 @@ def run_section_tests(test_json_name: str, ruleset_doc: RuleSet):
             continue
 
         # Evaluate rule and check for invalid RMRs
-        evaluation_dict = evaluate_rule(rule, rmr_trio, True)
+        evaluation_dict = evaluate_rule(
+            rule, rmr_trio, True, ten_percent_print=ten_percent_print
+        )
         # pprint.pprint(evaluation_dict)
         invalid_rmrs_dict = evaluation_dict["invalid_rmrs"]
 
@@ -317,10 +325,8 @@ def run_section_tests(test_json_name: str, ruleset_doc: RuleSet):
                     print(test_result_string)
 
     # Print results to console
-    if all_tests_pass:
-        print("All tests passed!")
-
-    print("")  # Buffer line
+    if all_tests_pass and not ten_percent_print:
+        print("All tests passed!\n")
 
     # Return whether or not all tests in this test JSON received their expected outcome as a boolean
     all_tests_successful = all(test_result_dict["results"])
