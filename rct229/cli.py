@@ -42,7 +42,7 @@ def run_test(ruleset, section=None):
         print(f"software test workflow for section {section}")
     if ruleset == RuleSet.ASHRAE9012019_RULESET:
         SchemaStore.set_ruleset(RuleSet.ASHRAE9012019_RULESET)
-        outcome_list = run_ashrae9012019_tests(section, True)
+        outcome_list = run_ashrae9012019_tests(section, eval_proc_print=True)
         if section is None:
             for idx, outcome in enumerate(outcome_list):
                 assert (
