@@ -1,11 +1,12 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rule_engine.rulesets import LeapYear
 from rct229.rulesets.ashrae9012019 import PROPOSED
 from rct229.rulesets.ashrae9012019.ruleset_functions.compare_schedules import (
     compare_schedules,
 )
+from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.utility_functions import find_exactly_one_schedule
 
@@ -15,7 +16,7 @@ class Section16Rule4(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section16Rule4, self).__init__(
-            rmds_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=False,
                 BASELINE_0=False,
                 PROPOSED=True,
@@ -35,7 +36,7 @@ class Section16Rule4(RuleDefinitionListIndexedBase):
     class RuleSetModelDescriptionRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section16Rule4.RuleSetModelDescriptionRule, self).__init__(
-                rmds_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=False, PROPOSED=True
                 ),
                 each_rule=Section16Rule4.RuleSetModelDescriptionRule.ElevatorRule(),
@@ -46,7 +47,7 @@ class Section16Rule4(RuleDefinitionListIndexedBase):
         def is_applicable(self, context, data=None):
             rmd_p = context.PROPOSED
 
-            return find_all("$.buildings[*].elevators", rmd_p)
+            return find_all("$.buildings[*].elevators[*]", rmd_p)
 
         def create_data(self, context, data):
             rmd_p = context.PROPOSED
@@ -76,7 +77,7 @@ class Section16Rule4(RuleDefinitionListIndexedBase):
                 super(
                     Section16Rule4.RuleSetModelDescriptionRule.ElevatorRule, self
                 ).__init__(
-                    rmds_used=produce_ruleset_model_instance(
+                    rmds_used=produce_ruleset_model_description(
                         USER=False,
                         BASELINE_0=False,
                         PROPOSED=True,
@@ -87,18 +88,18 @@ class Section16Rule4(RuleDefinitionListIndexedBase):
                 elevator_p = context.PROPOSED
                 is_leap_year_p = data["is_leap_year_p"]
 
-                cab_ventilation_fan_multiplier_schedule_p = elevator_p[
-                    "cab_lighting_multiplier_schedule"
-                ]
+                cab_lgt_multi_sch_p = getattr_(
+                    elevator_p, "elevators", "cab_lighting_multiplier_schedule"
+                )
                 cab_lighting_schedule_p = data["cab_lighting_schedule_p"][
-                    cab_ventilation_fan_multiplier_schedule_p
+                    cab_lgt_multi_sch_p
                 ]
 
-                cab_motor_multiplier_schedule_p = elevator_p[
-                    "cab_lighting_multiplier_schedule"
-                ]
+                cab_motor_multi_sch_p = getattr_(
+                    elevator_p, "elevators", "cab_motor_multiplier_schedule"
+                )
                 motor_use_schedule_p = data["motor_use_schedule_p"][
-                    cab_motor_multiplier_schedule_p
+                    cab_motor_multi_sch_p
                 ]
 
                 mask_schedule = (
