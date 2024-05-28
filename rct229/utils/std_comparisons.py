@@ -45,11 +45,11 @@ def std_equal_with_precision(
 
     Parameters
     ----------
-    val: Quantity
+    val: Quantity | float | int
         value extracted from model
-    std_val : Quantity
+    std_val : Quantity | float | int
         standard value from code
-    precision: Quantity
+    precision: Quantity | float | int
         number of decimal places or significant value to round to, and intended units of the comparison
 
     Returns
