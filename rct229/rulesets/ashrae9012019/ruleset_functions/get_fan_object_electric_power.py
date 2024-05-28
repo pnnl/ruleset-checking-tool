@@ -1,5 +1,4 @@
 from pint import Quantity
-
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import assert_, getattr_
 from rct229.utils.pint_utils import ZERO

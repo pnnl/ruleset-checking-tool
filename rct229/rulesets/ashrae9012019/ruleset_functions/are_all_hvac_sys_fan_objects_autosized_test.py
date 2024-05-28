@@ -1,5 +1,4 @@
 import pytest
-
 from rct229.rulesets.ashrae9012019.ruleset_functions.are_all_hvac_sys_fan_objects_autosized import (
     are_all_hvac_sys_fan_objs_autosized,
 )

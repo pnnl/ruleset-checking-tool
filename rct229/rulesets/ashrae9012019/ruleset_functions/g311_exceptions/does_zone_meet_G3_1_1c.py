@@ -2,7 +2,6 @@ from typing import Literal, Type
 
 import numpy as np
 from pydash import map_
-
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_system_type_compare import (
     baseline_system_type_compare,
 )
@@ -56,7 +55,7 @@ def does_zone_meet_g3_1_1c(
     Parameters
     ----------
     rmd dict
-        A dictionary representing a ruleset model instance as defined by the ASHRAE229 schema
+        A dictionary representing a ruleset model description as defined by the ASHRAE229 schema
     zone_id str
         zone id
     is_leap_year boolean

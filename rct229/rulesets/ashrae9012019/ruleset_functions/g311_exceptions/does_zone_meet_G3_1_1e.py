@@ -35,9 +35,9 @@ def does_zone_meet_g3_1_1e(rmd_b: dict, rmd_p: dict, zone_id: str) -> bool:
     Parameters
     ----------
     rmd_b dict
-        A dictionary representing a ruleset model instance as defined by the ASHRAE229 schema, baseline model
+        A dictionary representing a ruleset model description as defined by the ASHRAE229 schema, baseline model
     rmd_p dict
-        A dictionary representing a ruleset model instance as defined by the ASHRAE229 schema, baseline model
+        A dictionary representing a ruleset model description as defined by the ASHRAE229 schema, baseline model
     zone_id str
         zone id
 

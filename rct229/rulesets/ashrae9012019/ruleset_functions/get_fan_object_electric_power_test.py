@@ -1,5 +1,4 @@
 import pytest
-
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_fan_object_electric_power import (
     get_fan_object_electric_power,
 )

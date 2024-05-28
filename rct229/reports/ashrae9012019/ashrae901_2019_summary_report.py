@@ -1,7 +1,6 @@
 import re
 
 from pydash import find
-
 from rct229.report_engine.rct_report import RCTReport
 from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
 
@@ -12,13 +11,16 @@ class ASHRAE9012019SummaryReport(RCTReport):
         self.title = "ASHRAE STD 229P RULESET CHECKING TOOL"
         self.purpose = "Summary Report"
         self.ruleset = "ASHRAE 90.1-2019 Performance Rating Method (Appendix G)"
-        self.ruleset_report_file = "ashrae901_2019_summary_report.md"
+        self.ruleset_report_file = f"{self.__class__.__name__}.md"
 
     def initialize_ruleset_report(self, rule_outcome=None):
         self.section_list = [
             "All",
+            "Performance Calculations",
+            "Schedules Setpoints",
             "Envelope",
             "Lighting",
+            "HVAC General",
             "Receptacles",
             "Transformers",
             "HVAC-Baseline",
@@ -26,10 +28,13 @@ class ASHRAE9012019SummaryReport(RCTReport):
             "HVAC-HotWaterSide",
             "HVAC-ChilledWaterSide",
             "HVAC-AirSide",
-        ]
+        ]  # TODO: need to expand as more sections are developed
         self.section_dict = {
+            "1": "Performance Calculations",
+            "4": "Schedules Setpoints",
             "5": "Envelope",
             "6": "Lighting",
+            "10": "HVAC General",
             "12": "Receptacles",
             "15": "Transformers",
             "18": "HVAC-Baseline",
@@ -73,16 +78,16 @@ class ASHRAE9012019SummaryReport(RCTReport):
 ##### Date: {self.date_run}
 
 ### RMD Files
-- user: {user_match["file_name"] if user_match else ""}
-- proposed: {proposed_match["file_name"] if proposed_match else ""}
-- baseline_0: {baseline_0_match["file_name"] if baseline_0_match else ""}
+- user: {user_match["file_name"] if user_match else "N/A"}
+- proposed: {proposed_match["file_name"] if proposed_match else "N/A"}
+- baseline_0: {baseline_0_match["file_name"] if baseline_0_match else "N/A"}
 - baseline_90: {baseline_90_match["file_name"] if baseline_90_match else ""}
-- baseline_180: {baseline_180_match["file_name"] if baseline_180_match else ""}
-- baseline_270: {baseline_270_match["file_name"] if baseline_270_match else ""}
+- baseline_180: {baseline_180_match["file_name"] if baseline_180_match else "N/A"}
+- baseline_270: {baseline_270_match["file_name"] if baseline_270_match else "N/A"}
 
 ### Summary: All Primary Rules
-|                              | All | Envelope | Lighting | Receptacles | Transformers | HVAC-HotWaterSide | HVAC - ChilledWaterSide | HVAC-AirSide | HVAC-General| HVAC-Baseline
-|:----------------------------:|:---:|:--------:|:--------:|:-----------:|:------------:|:--------------:|:--------------:|:--------------:|:--------------:|:-----------:|
+|                              | All | Performance Calculations | Schedules Setpoints | Envelope | Lighting | HVAC General |  Receptacles | Transformers | HVAC-HotWaterSide | HVAC - ChilledWaterSide | HVAC-AirSide | HVAC-General| HVAC-Baseline
+|:----------------------------:|:---:|:--------:|:--------:|:--------:|:--------:|:-----------:|:------------:|:------------:|:--------------:|:--------------:|:--------------:|:--------------:|:-----------:|
 Replace-Rules
 Replace-Pass
 Replace-Fail
@@ -155,7 +160,7 @@ Replace-Undetermined
     def save_ruleset_report(self, ruleset_report, report_dir):
         overall_rules_count = {name: 0 for name in self.section_list}
 
-        for key in self.ruleset_outcome.keys():
+        for key in self.ruleset_outcome:
             for outcome in [
                 RCTOutcomeLabel.PASS,
                 RCTOutcomeLabel.FAILED,
@@ -164,11 +169,13 @@ Replace-Undetermined
             ]:
                 overall_rules_count[key] += self.ruleset_outcome[key][outcome]
 
-        rules_line = f"|Rules|{overall_rules_count['All']}|{overall_rules_count['Envelope']}|{overall_rules_count['Lighting']}|{overall_rules_count['Receptacles']}|{overall_rules_count['Transformers']}|{overall_rules_count['HVAC-HotWaterSide']}|{overall_rules_count['HVAC-ChilledWaterSide']}|{overall_rules_count['HVAC-AirSide']}|{overall_rules_count['HVAC-General']}|{overall_rules_count['HVAC-Baseline']}|"
-        pass_line = f"|Pass|{self.ruleset_outcome['All'][RCTOutcomeLabel.PASS]}|{self.ruleset_outcome['Envelope'][RCTOutcomeLabel.PASS]}|{self.ruleset_outcome['Lighting'][RCTOutcomeLabel.PASS]}|{self.ruleset_outcome['Receptacles'][RCTOutcomeLabel.PASS]}|{self.ruleset_outcome['Transformers'][RCTOutcomeLabel.PASS]}|{self.ruleset_outcome['HVAC-HotWaterSide'][RCTOutcomeLabel.PASS]}|{self.ruleset_outcome['HVAC-ChilledWaterSide'][RCTOutcomeLabel.PASS]}|{self.ruleset_outcome['HVAC-AirSide'][RCTOutcomeLabel.PASS]}|{self.ruleset_outcome['HVAC-General'][RCTOutcomeLabel.PASS]}|{self.ruleset_outcome['HVAC-Baseline'][RCTOutcomeLabel.PASS]}|"
-        fail_line = f"|Fail|{self.ruleset_outcome['All'][RCTOutcomeLabel.FAILED]}|{self.ruleset_outcome['Envelope'][RCTOutcomeLabel.FAILED]}|{self.ruleset_outcome['Lighting'][RCTOutcomeLabel.FAILED]}|{self.ruleset_outcome['Receptacles'][RCTOutcomeLabel.FAILED]}|{self.ruleset_outcome['Transformers'][RCTOutcomeLabel.FAILED]}|{self.ruleset_outcome['HVAC-HotWaterSide'][RCTOutcomeLabel.FAILED]}|{self.ruleset_outcome['HVAC-ChilledWaterSide'][RCTOutcomeLabel.FAILED]}|{self.ruleset_outcome['HVAC-AirSide'][RCTOutcomeLabel.FAILED]}|{self.ruleset_outcome['HVAC-General'][RCTOutcomeLabel.FAILED]}|{self.ruleset_outcome['HVAC-Baseline'][RCTOutcomeLabel.FAILED]}|"
-        not_applicable_line = f"|Not Applicable|{self.ruleset_outcome['All'][RCTOutcomeLabel.NOT_APPLICABLE]}|{self.ruleset_outcome['Envelope'][RCTOutcomeLabel.NOT_APPLICABLE]}|{self.ruleset_outcome['Lighting'][RCTOutcomeLabel.NOT_APPLICABLE]}|{self.ruleset_outcome['Receptacles'][RCTOutcomeLabel.NOT_APPLICABLE]}|{self.ruleset_outcome['Transformers'][RCTOutcomeLabel.NOT_APPLICABLE]}|{self.ruleset_outcome['HVAC-HotWaterSide'][RCTOutcomeLabel.NOT_APPLICABLE]}|{self.ruleset_outcome['HVAC-ChilledWaterSide'][RCTOutcomeLabel.NOT_APPLICABLE]}|{self.ruleset_outcome['HVAC-AirSide'][RCTOutcomeLabel.NOT_APPLICABLE]}|{self.ruleset_outcome['HVAC-General'][RCTOutcomeLabel.NOT_APPLICABLE]}|{self.ruleset_outcome['HVAC-Baseline'][RCTOutcomeLabel.NOT_APPLICABLE]}|"
-        undetermined_line = f"|Undetermined (manual review)|{self.ruleset_outcome['All'][RCTOutcomeLabel.UNDETERMINED]}|{self.ruleset_outcome['Envelope'][RCTOutcomeLabel.UNDETERMINED]}|{self.ruleset_outcome['Lighting'][RCTOutcomeLabel.UNDETERMINED]}|{self.ruleset_outcome['Receptacles'][RCTOutcomeLabel.UNDETERMINED]}|{self.ruleset_outcome['Transformers'][RCTOutcomeLabel.UNDETERMINED]}|{self.ruleset_outcome['HVAC-HotWaterSide'][RCTOutcomeLabel.UNDETERMINED]}|{self.ruleset_outcome['HVAC-ChilledWaterSide'][RCTOutcomeLabel.UNDETERMINED]}|{self.ruleset_outcome['HVAC-AirSide'][RCTOutcomeLabel.UNDETERMINED]}|{self.ruleset_outcome['HVAC-General'][RCTOutcomeLabel.UNDETERMINED]}|{self.ruleset_outcome['HVAC-Baseline'][RCTOutcomeLabel.UNDETERMINED]}|"
+        (
+            rules_line,
+            pass_line,
+            fail_line,
+            not_applicable_line,
+            undetermined_line,
+        ) = self._generate_line(self.ruleset_outcome, overall_rules_count)
 
         self.summary_report = re.sub("Replace-Rules", rules_line, self.summary_report)
         self.summary_report = re.sub("Replace-Pass", pass_line, self.summary_report)
@@ -191,3 +198,25 @@ Replace-Undetermined
             """
         else:
             return None
+
+    def _generate_line(self, outcome_data, overall_rules_count):
+        rule_line = "|Rules|"
+        pass_line = "|Pass|"
+        fail_line = "|fail|"
+        not_applicable_line = f"|Not Applicable|"
+        undetermined_line = f"|Undetermined (manual review)|"
+
+        for section_name, count in overall_rules_count.items():
+            rule_line += f"{overall_rules_count[section_name]}|"
+
+        for section in self.section_list:
+            pass_line += f"{outcome_data[section][RCTOutcomeLabel.PASS]}|"
+            fail_line += f"{outcome_data[section][RCTOutcomeLabel.FAILED]}|"
+            not_applicable_line += (
+                f"{outcome_data[section][RCTOutcomeLabel.NOT_APPLICABLE]}|"
+            )
+            undetermined_line += (
+                f"{outcome_data[section][RCTOutcomeLabel.UNDETERMINED]}|"
+            )
+
+        return rule_line, pass_line, fail_line, not_applicable_line, undetermined_line

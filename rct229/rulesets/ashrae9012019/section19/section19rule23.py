@@ -1,8 +1,7 @@
 from pydash import curry, every
-
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_most_used_weekday_hourly_schedule import (
     get_most_used_weekday_hourly_schedule,
@@ -31,7 +30,7 @@ class Section19Rule23(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section19Rule23, self).__init__(
-            rmds_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section19Rule23.RMDRule(),
@@ -54,7 +53,7 @@ class Section19Rule23(RuleDefinitionListIndexedBase):
     class RMDRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section19Rule23.RMDRule, self).__init__(
-                rmds_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 each_rule=Section19Rule23.RMDRule.BuildingSegmentRule(),
@@ -71,7 +70,7 @@ class Section19Rule23(RuleDefinitionListIndexedBase):
         class BuildingSegmentRule(RuleDefinitionListIndexedBase):
             def __init__(self):
                 super(Section19Rule23.RMDRule.BuildingSegmentRule, self).__init__(
-                    rmds_used=produce_ruleset_model_instance(
+                    rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
                     each_rule=Section19Rule23.RMDRule.BuildingSegmentRule.ZoneRule(),
@@ -108,7 +107,7 @@ class Section19Rule23(RuleDefinitionListIndexedBase):
                         Section19Rule23.RMDRule.BuildingSegmentRule.ZoneRule,
                         self,
                     ).__init__(
-                        rmds_used=produce_ruleset_model_instance(
+                        rmds_used=produce_ruleset_model_description(
                             USER=False, BASELINE_0=True, PROPOSED=False
                         ),
                         each_rule=Section19Rule23.RMDRule.BuildingSegmentRule.ZoneRule.SpaceRule(),
@@ -165,7 +164,7 @@ class Section19Rule23(RuleDefinitionListIndexedBase):
                             Section19Rule23.RMDRule.BuildingSegmentRule.ZoneRule.SpaceRule,
                             self,
                         ).__init__(
-                            rmds_used=produce_ruleset_model_instance(
+                            rmds_used=produce_ruleset_model_description(
                                 USER=False, BASELINE_0=True, PROPOSED=False
                             ),
                         )
