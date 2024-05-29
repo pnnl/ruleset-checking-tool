@@ -121,7 +121,9 @@ def run_software_test(ruleset, section=None, saving_dir="./"):
     return report_dir
 
 
-def run_project_evaluation(rpds, ruleset, reports=["RAW_OUTPUT"], saving_dir="./", session_id=""):
+def run_project_evaluation(
+    rpds, ruleset, reports=["RAW_OUTPUT"], saving_dir="./", session_id=""
+):
     """
 
     Parameters

@@ -135,7 +135,11 @@ def evaluate_rule(rule, rmrs, test=False):
 
 
 def evaluate_rules(
-    rules_list: list, rmds: RuleSetModels, unit_system=UNIT_SYSTEM.IP, test=False, session_id=""
+    rules_list: list,
+    rmds: RuleSetModels,
+    unit_system=UNIT_SYSTEM.IP,
+    test=False,
+    session_id="",
 ):
     """Evaluates a list of rules against an RMDs
 
