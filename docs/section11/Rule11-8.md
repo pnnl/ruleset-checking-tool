@@ -33,6 +33,7 @@
   - get a dictionary of all SHW equipment connected to the all SHW space bats in the baseline model: `b_shw_equipment_dict = get_SHW_equipment_connected_to_use_type(B_RMD)[shw_bat]`
   - get a dictionary of all SHW equipment connected to the current SHW space bats in the baseline model: `b_shw_equipment_dict_this_use = b_shw_equipment_dict[shw_bat]
   - create a variable num_swh_systems_this_use: `num_swh_systems = len(b_shw_equipment_dict_this_use["SHWDistribution"])`
+  - create a variable num_swh_equipment_this_use: `num_swh_equipment_this_use = len(b_shw_equipment_dict_this_use["SHWHeatingEq"])`
   - create a boolean is_referenced_in_other_bats and set it to false: `is_referenced_in_other_bats = false`
   
   - if there is exactly one system, check that the system is not used in any of the other BATs: `if num_swh_systems == 1:`
@@ -43,7 +44,7 @@
           - set the boolean is_referenced_in_other_bats to true: `is_referenced_in_other_bats = true`
 
     ## Rule Assertion: 
-    - Case1: there is exactly one system AND the system is not referenced by any other shw_bats: PASS: `if num_swh_systems == 1 && is_referenced_in_other_bats = false: PASS`
+    - Case1: there is exactly one system AND the system is not referenced by any other shw_bats: PASS: `if num_swh_systems == 1 && is_referenced_in_other_bats == false && num_swh_equipment_this_use == 1: PASS`
     - Case2: all else, FAIL: `else: FAIL`
 
   
