@@ -1,210 +1,47 @@
-# HVAC_SystemZoneAssignment - Rule 11-7
+# Service_Water_Heating - Rule 11-7  
+**Schema Version:** 0.0.36  
 
-**Schema Version:** 0.0.28  
-**Mandatory Rule:** True  
+**Mandatory Rule:** TRUE
+
 **Rule ID:** 11-7  
+
 **Rule Description:** Except in buildings that will have no service water heating loads,  the service water heating systems type in the baseline building design shall be as specified in Table G3.1.1-2 for each building area type in the proposed design. 
-**Rule Assertion:** Options are PASS/FAIL/NOT_APPLICABLE/UNDETERMINED  
-**Appendix G Section Reference:** Table G3.1 #11, baseline column, a + b
 
-**Evaluation Context:** Each SWH space type  
+**Rule Assertion:** Options are PASS/FAIL
+
+**Appendix G Section Reference:** Table G3.1 #11, baseline column, a & b
+
+**Evaluation Context:** B-RMD each SWH Equipment
 **Data Lookup:**   
-**Function Call:**
-
-1. get_SHW_equipment_connected_to_use_type()
-2. get_SHW_types_and_SHW_use()
+- **Table G3.1.1-2(shw_bat)**
+**Function Call:** 
+- **get_component_by_id**
+- **get_SHW_equipment_associated_with_each_SWH_bat**  
+- **get_SHW_types_and_SHW_use**
+- **get_SHW_equipment_type**  
 
 **Applicability Checks:**
 - Each SHW use type is applicable if there are SHW loads
-- call the function get_SHW_equipment_connected_to_use_type: `shw_equip_dict = get_SHW_equipment_connected_to_use_type(B_RMD)`
-- also use get_SHW_types_and_SHW_use to get the SHW use types and SHW use in the building: `shw_types_and_use_dict = get_SHW_types_and_SHW_use(B_RMD)`
-- look through each of the SHW types in the building: `for shw_use_type in shw_types_and_use_dict:`
-  - check if there are SHW loads in this use type, continue to rule logic: `if len(shw_types_and_use_dict[shw_use_type]) > 0: RULE_APPLICABLE`
-  - otherwise, rule is not applicable for this shw_use_type: `else: NOT_APPLICABLE`
+- use get_SHW_equipment_associated_with_each_SWH_bat to get the SHW use types and SHW use in the building: `shw_bats_and_equip_dict = get_SHW_equipment_associated_with_each_SWH_bat(B_RMD)`
+
+- call the function get_SHW_types_and_SHW_use for the proposed: `shw_bat_and_use_dict_p = get_SHW_types_and_SHW_use(P_RMD)`
+- look through each of the SHW bats in the building: `for shw_bat in shw_bat_and_use_dict_p:`
+  - check if there are SHW loads in this use type, continue to rule logic: `if len(shw_bat_and_use_dict_p[shw_bat]) > 0: CONTINUE TO RULE LOGIC`
+  - otherwise, rule is not applicable for this shw_bat: `else: NOT_APPLICABLE`
+
+  ## Rule Logic: 
+  - look at each SWH Equipment in the shw_bat - there should only be one, but this is checked in rule 11-8: `for swh_equip_id in shw_bats_and_equip_dict[shw_bat]["SHWHeatingEq"]:`
+    - get the SHW equipment type using the function get_SHW_equipment_type: `shw_equip_type = get_SHW_equipment_type(B_RMD, swh_equip_id)`
+    - get the expected SHW equipment type by looking it up in the table G3.1.1-2: `expected_shw_equip_type = data_lookup(Table G3.1.1-2, shw_bat)`
 
 
-    ## Rule Logic:
-  - create a value to track the rule status: `rule_status = "FAIL"`
-  - create a variable to track any notes: `rule_note = """`
-  - there should be one SHW Equipment for this space type: `if len(shw_types_and_use_dict[shw_use_type]["SHWHeatingEq"]) != 1:`
-    - set rule_note to "more than one ServiceWaterHeatingEquipment" `rule_note = "more than one ServiceWaterHeatingEquipment"`
-  - otherwise, do the calculations to figure out of the SWH equipment meets the requirements of the rule: `else:`
-    - get the service water heating equipment id: `service_water_heating_equipment_id = shw_equip_dict[shw_use_type]["SHWHeatingEq"]`
-    - we need to find the following information about the SWH:
-      - tank_type - (ELECTRIC_RESISTANCE_INSTANTANEOUS, ELECTRIC_RESISTANCE_STORAGE, GAS_STORAGE, OTHER)
-      - input_capacity (btu/hr)
-      - storage_volume (gallons)
-      - draw_pattern (VERY_SMALL, LOW, MEDIUM, or HIGH)
-      - capacity_per_volume (btu/hr/gallon)
-    - get the service water heating system: `swh_eq = get_object_by_id(service_water_heating_equipment_id,RMD)`
-    - get the type of service water heating system: `shw_type = swh_eq.type`
-    - the type will be one of the ServiceWaterHeaterTankOptions, which are more detailed than the four types we need.  Determine our type based on the detailed type.
-    - set the type to OTHER.  If the shw_type is an identifiable type, type will be overwritten to that type: `type = "OTHER"`
-    - if the shw_type is CONSUMER_INSTANTANEOUS, COMMERCIAL_INSTANTANEOUS, or RESIDENTIAL_DUTY_COMMERCIAL_INSTANTANEOUS, set the type to INSTANTANEOUS: `if shw_type in ["CONSUMER_INSTANTANEOUS", "COMMERCIAL_INSTANTANEOUS", "RESIDENTIAL_DUTY_COMMERCIAL_INSTANTANEOUS"]: type = "INSTANTANEOUS"`
-    - if the shw_type is CONSUMER_STORAGE or COMMERCIAL_STORAGE, set the type to STORAGE: `if shw_type in ["CONSUMER_STORAGE", "COMMERCIAL_STORAGE"]: type = "STORAGE"`
-    - get the fuel type of the equipment: `fuel_type = shw_eq.heater_fuel_type`
-    - set the type based on shw_type and fuel type: `if fuel_type == "ELECTRICITY":`
-      - `if shw_type == "INSTANTANEOUS": type = "ELECTRIC_RESISTANCE_INSTANTANEOUS"`
-      - `elsif shw_type == "STORAGE": type = "ELECTRIC_RESISTANCE_STORAGE"`
-    - `elsif fule_type == "NATURAL_GAS":`
-      - `if shw_type == "INSTANTANEOUS": type = "GAS_INSTANTANEOUS"`
-      - `elsif shw_type == "STORAGE": type = "GAS_STORAGE"`
-    - `elsif fule_type == "FUEL_OIL":`
-      - `if shw_type == "INSTANTANEOUS": type = "OIL_INSTANTANEOUS"`
-      - `elsif shw_type == "STORAGE": type = "OIL_STORAGE"`
-    - if the draw_pattern is given, get the draw pattern: `if shw_eq.draw_pattern != nil: draw_pattern = shw_eq.draw_pattern`
-    - otherwise, determine the draw pattern based off the first_hour_rating of the shw_eq: `else:`
-      - First get the first hour rating (gallons): `first_hour_rating = shw_eq.first_hour_rating`
-      - if the first_hour_rating is less than 18 gallons, draw_pattern is "VERY SMALL": `if first_hour_rating < 18: draw_pattern = "VERY_SMALL"`
-      - otherwise if the first_hour_rating is less than 51 gallons, draw pattern is LOW: `elsif first_hour_rating < 51: draw_pattern = "LOW"`
-      - otherwise if the first_hour_rating is less than 75 gallons, draw pattern is MEDIUM: `elsif first_hour_rating < 75: draw_pattern = "MEDIUM"`
-      - otherwise draw pattern is HIGH: `else: draw_pattern = "HIGH"`
-    - get the capacity of the SHW system (make sure to convert to btu/hr): `input_capacity = swh_eq.input_power`
-    - get the volume of the tank (make sure to convert to gallons): `storage_volume = swh_eq.distribution_system.tank.storage_capacity`
-    - calculate the capacity_per_volume based on the input_capacity and the storage_volume: `capacity_per_volume = shw_eq.rated_capacity / storage_volume`
-    - get the standby loss (see note 1 for calculation source): `standby_loss = swh_eq.standby_loss_fraction * 8.25 * volume * 70`
-    - what follows is logic that implements Table 7.8 - this table has multiple criteria, so I think it's simpler to implement with if / else logic than a table lookup
-    - if the type is OTHER, set rule_note to "Water heater type is not a recognized type": `if type == "OTHER": rule_note = "Water heater type is not a recognized type"`
-    - otherwise, continue with rule logic: `else:`
-      - create a boolean has_fault and set it to false: `has_fault = false`
-      - if the water heater is electric resistance, or storage and the capacity is <= 12kW (40945 btu/hr), then the standard doesn't cover it: `if type in ["ELECTRIC_RESISTANCE_INSTANTANEOUS", "ELECTRIC_RESISTANCE_STORAGE"] && input_capacity <= 40945.7:`
-        - set rule_note to: `rule_note = "Water heaters or gas pool heaters in this category or subcategory are regulated as consumer products by the USDOE as defined in 10 CFR 430."`
-        - set rule_status to UNDETERMINED: `rule_status = "UNDETERMINED"`
-      - otherwise, continue with rule logic: `else:`
-        - check electric storage water heaters with capacity greater than 12 kW: `if type == "ELECTRIC_RESISTANCE_STORAGE" && input_capacity > 40945.7:`
-          - check that the capacity_per_volume < 4000 btu/hr/gallon: `if capacity_per_volume < 4000:`
-            - calculate the standby loss target: `standby_loss_target = 0.3 + (27/swh_eq.distribution_system.tank.storage_volume)` 
-            
-            - if the standby_loss is less than or equal to the target, set the rule_status to PASS: `if standby_loss <= standby_loss_target: rule_status: "PASS"`
-            - otherwise: `else:`
-              - set the note to indicate that the standby_loss is higher than the maximum allowed: `rule_note = "Standby Loss is higher than required by Table 7.8"`
-          - otherwise: `else:`
-            - set the note to indicate that the capacity per volume exceeds the limit: `rule_note = "Capacity per volume exceeds the limit of 4000 btu/hr/gallon for Electric Storage Water Heaters` 
-        - check if the water heater is an instantaneous electric resistance: `if type == "ELECTRIC_RESISTANCE_INSTANTANEOUS"`
-          - check the capacity.  If it's less than or equal to 58.6 kW (199951.5 btu/hr), check the other parameters.  We don't need to check if the capacity is > 12 kW, because all systems less than 12 kW have already been checked: `if input_capacity <= 199951.5:`
-            - the storage capacity should be less than or equal to 2 gallons: `if storage_volume > 2:`
-              - set the note to read "For instantaneous Electric Water heaters, storage volume should be <= 2 gallons.  ": `rule_note = "For instantaneous Electric heaters, storage volume should be <= 2 gallons.  "`
-              - set has_fault to true: `has_fault = true`
-            - the setpoint temperature should be less than or equal to 180F: `if shw_eq.setpoint_temperature > 180:`
-              - add the following text to the note: "For instantaneous Electric Water heaters, the supply water temperature must be <= 180F": `rule_note += "For instantaneous Electric Water heaters, the supply water temperature must be <= 180F"`
-              - set has_fault to true: `has_fault = true`
-            - the capacity per volume should be >= 4000 btu/hr/gallon: `if capacity_per_volume < 4000:`
-              - add the following text to the note: "For instantaneous Electric Water heaters, the capacity per volume should be greater than 4000 btu/hr/gallon": `rule_note += "For instantaneous Electric Water heaters, the capacity per volume should be greater than 4000 btu/hr/gallon"`
-              - set has_fault to true: `has_fault = true`
-            - set the expected thermal efficiency to 0.8: `expected_thermal_efficiency = 0.8`
-            - check if the actual uniform_energy_factor is >= to the expected: `if shw_eq.thermal_efficiency >= expected_thermal_efficiency && !has_faults:`
-              - set rule_status to "PASS": `rule_status = "PASS"`
-          - otherwise: `else:`
-            - create a note indicating that electric resistance water heaters greater than 58.6kW are not covered in table 7.8: `rule_note: "electric resistance water heaters greater than 58.6kW are not covered in table 7.8.  "`
-            - change rule_status to UNDETERMINED: `rule_status = "UNDETERMINED"`
-        - check if the water heater is gas storage: `if type == "GAS_STORAGE":`
-          - check if the capacity is <= 75,000 btu/hr: `if input_capacity <= 75000:`
-            - create a note indicating that gas storage water heaters with a capacity less than 75,000 btu/hr are not covered in table 7.8: `rule_note: "gas storage water heaters with a capacity less than 75,000 btu/hr are not covered in table 7.8.  "`
-            - change rule_status to UNDETERMINED: `rule_status = "UNDETERMINED"`
-          - check if the capacity <= 105,000 btu/hr: `elsif input_capacity <= 105000:`
-            - the capacity per volume should be < 4000 btu/hr/gallon: `if capacity_per_volume > 4000:`
-              - add the following text to the note: "For Gas Storage Water heaters, the capacity per volume should be less than 4000 btu/hr/gallon": `rule_note += "For Gas Storage Water heaters, the capacity per volume should be less than 4000 btu/hr/gallon.  "`
-              - set has_fault to true: `has_fault = true`
-            - the volume should be <= 120 gallons: `if storage_volume > 120:`
-              - add the following text to the note: "For Gas Storage Water heaters with capacity less than 105,000 btu/hr, the storage capacity is expected to be less than 120 gallons": `rule_note += "For Gas Storage Water heaters with capacity less than 105,000 btu/hr, the storage capacity is expected to be less than 120 gallons.  "`
-              - set has_fault to true: `has_fault = true`
-            - the supply water temperature should be <= 180F: `if shw_eq.setpoint_temperature > 180:`
-              - add the following text to the note: "For Gas Storage Water heaters with capacity less than 105,000 btu/hr, the supply water temperature is expected to be <= 180F": `rule_note += "For Gas Storage Water heaters with capacity less than 105,000 btu/hr, the supply water temperature is expected to be <= 180F.  "`
-              - set has_fault to true: `has_fault = true`
-            - calculate the expected efficiency for VERY_SMALL draw pattern: `if draw_pattern == "VERY_SMALL": expected_UEF = 0.2674 – (0.0009 * volume)`
-            - calculate the expected efficiency for LOW draw pattern: `if draw_pattern == "LOW": expected_UEF = 0.5362 – (0.0012 * volume)`
-            - calculate the expected efficiency for MEDIUM draw pattern: `if draw_pattern == "MEDIUM": expected_UEF = 0.6002 – (0.0011 * volume)`
-            - calculate the expected efficiency for HIGH draw pattern: `if draw_pattern == "HIGH": expected_UEF = 0.6597 – (0.0009 * volume)`
-            - check if the actual uniform_energy_factor is >= to the expected: `if shw_eq.uniform_energy_factor > expected_UEF && !has_faults:`
-              - set rule_status to "PASS": `rule_status = "PASS"`
-          - otherwise the capacity is > 105,000 btu/hr: `else:`
-            - the capacity per volume should be < 4000 btu/hr/gallon: `if capacity_per_volume > 4000:`
-              - add the following text to the note: "For Gas Storage Water heaters, the capacity per volume should be less than 4000 btu/hr/gallon": `rule_note += "For Gas Storage Water heaters, the capacity per volume should be less than 4000 btu/hr/gallon.  "`
-              - set has_fault to true: `has_fault = true`
-            - calculate the expected_thermal_efficiency : `expected_thermal_efficiency = 0.8`
-            - calculate max_standby_loss (btu/hr): `max_standby_loss = (input_capacity/800 + 110 * sqrt(volume))`
-            - check if the actual uniform_energy_factor is >= to the expected: `if shw_eq.thermal_efficiency >= expected_thermal_efficiency && standby_loss <= max_standby_loss && !has_faults:`
-              - set rule_status to "PASS": `rule_status = "PASS"`
-        - check if the water heater is GAS_INSTANTANEOUS: `if type == "GAS_INSTANTANEOUS"`
-          - if the input capacity <= 200,000 btu/hr, this equipment isn't covered by ASHRAE: `if input_capacity <= 200000:`
-            - add the following text to the note: "Gas Instantaneous Water heaters with capacity < 200,000 btu/hr are not covered by table 7.8": `rule_note += "Gas Instantaneous Water heaters with capacity < 200,000 btu/hr are not covered by table 7.8.  "`
-            - set rule_status to "UNDETERMINED": `rule_status = "UNDETERMINED"`
-          - otherwise, if the storage volume is less than 10 gallons: `if volume < 10:`
-            - set expected thermal efficiency to 80%: `expected_thermal_efficiency = 0.8`
-            - the capacity per volume should be >= 4000 btu/hr/gallon: `if capacity_per_volume < 4000:`
-              - add the following text to the note: "For Gas Instantaneous heaters, the capacity per volume should be greater than 4000 btu/hr/gallon": `rule_note += "For Gas Instantaneous Water heaters, the capacity per volume should be greater than 4000 btu/hr/gallon.  "`
-              - set has_fault to true: `has_fault = true`
-            - if the thermal efficiency is greater than or equal to the expected: `if shw_eq.thermal_efficiency >= expected_thermal_efficiency && !has_faults:`
-              - set rule_status to "PASS": `rule_status = "PASS"`
-          - otherwise, the storage volume is greater than 10 gallons: `else:`
-            - set expected thermal efficiency to 80%: `expected_thermal_efficiency = 0.8`
-            - calculate the max_standby_loss: `max_standby_loss = (input_capacity/800 + 110 * sqrt(volume))`
-            - the capacity per volume should be >= 4000 btu/hr/gallon: `if capacity_per_volume < 4000:`
-              - add the following text to the note: "For Gas Instantaneous heaters, the capacity per volume should be greater than 4000 btu/hr/gallon": `rule_note += "For Gas Instantaneous Water heaters, the capacity per volume should be greater than 4000 btu/hr/gallon.  "`
-              - set has_fault to true: `has_fault = true`
-            - if the thermal efficiency is greater than or equal to the expected: `if shw_eq.thermal_efficiency >= expected_thermal_efficiency && standby_loss <= max_standby_loss && !has_faults:`
-              - set rule_status to "PASS": `rule_status = "PASS"`
-        - check if the water heater is OIL_STORAGE: `elsif type == "OIL_STORAGE`
-          - if the input capacity < 105,000 btu/hr, this equipment isn't covered by ASHRAE: `if input_capacity < 105000:`
-            - add the following text to the note: "Oil Storage Water heaters with capacity < 105,000 btu/hr are not covered by table 7.8": `rule_note += "Oil Storage Water heaters with capacity < 105,000 btu/hr are not covered by table 7.8.  "`
-            - set rule_status to "UNDETERMINED": `rule_status = "UNDETERMINED"`
-          - else if the input capacity is < 140,000 btu/hr: `elif input_capacity < 140000:`
-            - calculate the expected efficiency for VERY_SMALL draw pattern: `if draw_pattern == "VERY_SMALL": expected_UEF = 0.2932 – (0.0015 * volume)`
-            - calculate the expected efficiency for LOW draw pattern: `if draw_pattern == "LOW": expected_UEF = 0.5596 – (0.0018 * volume)`
-            - calculate the expected efficiency for MEDIUM draw pattern: `if draw_pattern == "MEDIUM": expected_UEF = 0.6194 – (0.0016 * volume)`
-            - calculate the expected efficiency for HIGH draw pattern: `if draw_pattern == "HIGH": expected_UEF = 0.6740 – (0.0013 * volume)`
-            - check that the storage volume is <= 120 gallons: `if volume > 120 gallons:`
-              - add the following text to the note: "For Oil Storage heaters, with capacity < 140,000 btu/hr, the storage volume should be <= 120 gallons.": `rule_note += "For Oil Storage heaters, with capacity < 140,000 btu/hr, the storage volume should be <= 120 gallons.  "`
-              - set has_fault to true: `has_fault = true`
-            - the capacity per volume should be < 4000 btu/hr/gallon: `if capacity_per_volume >= 4000:`
-              - add the following text to the note: "For Oil Storage heaters, with capacity < 140,000 btu/hr, the capacity per volume should be < 4000 btu/hr/gallon.": `rule_note += "For Oil Storage heaters, with capacity < 140,000 btu/hr, the capacity per volume should be < 4000 btu/hr/gallon.  "`
-              - set has_fault to true: `has_fault = true`
-            - the setpoint temperature should be less than or equal to 180F: `if shw_eq.setpoint_temperature > 180:`
-              - add the following text to the note: "For Oil Storage Water heaters, the supply water temperature must be <= 180F": `rule_note += "For Oil Storage Water heaters, the supply water temperature must be <= 180F"`
-              - set has_fault to true: `has_fault = true`
-            - check if the actual uniform_energy_factor is >= to the expected: `if shw_eq.uniform_energy_factor > expected_UEF && !has_faults:`
-              - set rule_status to "PASS": `rule_status = "PASS"`
-          - else the input capacity is >= 140,000 btu/hr: `else:`
-            - the capacity per volume should be < 4000 btu/hr/gallon: `if capacity_per_volume >= 4000:`
-              - add the following text to the note: "For Oil Storage heaters, with capacity > 140,000 btu/hr, the capacity per volume should be < 4000 btu/hr/gallon.": `rule_note += "For Oil Storage heaters, with capacity < 140,000 btu/hr, the capacity per volume should be < 4000 btu/hr/gallon.  "`
-              - set has_fault to true: `has_fault = true`
-            - set the expected thermal efficiency to 0.8: `expected_thermal_efficiency = 0.8`
-            - check if the actual uniform_energy_factor is >= to the expected: `if shw_eq.thermal_efficiency >= expected_thermal_efficiency && !has_faults:`
-              - set rule_status to "PASS": `rule_status = "PASS"`
-        - check if the water heater is OIL_INSTANTANEOUS: `elsif type == "OIL_INSTANTANEOUS`
-          - the capacity per volume should be >= 4000 btu/hr/gallon: `if capacity_per_volume < 4000:`
-            - add the following text to the note: "For Oil Instantaneous water heaters the capacity per volume should be > 4000 btu/hr/gallon.": `rule_note += "For Oil Instantaneous water heaters the capacity per volume should be > 4000 btu/hr/gallon.  "`
-            - set has_fault to true: `has_fault = true`
-          - if the input capacity <= 210,000 btu/hr: `if input_capacity <= 210000:`
-            - check that the storage volume is < 2 gallons: `if volume >= 2 gallons:`
-              - add the following text to the note: "For Oil Instantaneous Water heaters, with capacity <= 210,000 btu/hr, the storage volume should be < 2 gallons.": `rule_note += "For Oil Instantaneous Water heaters, with capacity <= 210,000 btu/hr, the storage volume should be < 2 gallons.  "`
-              - set has_fault to true: `has_fault = true`
-            - set the expected thermal efficiency to 0.8: `expected_thermal_efficiency = 0.8`
-            - calculate the Energy Factor: `expected_energy_factor = 0.59 – 0.0005 * volume`
-            - check if the actual uniform_energy_factor is >= to the expected: `if shw_eq.thermal_efficiency >= expected_thermal_efficiency && shw_eq.energy_factor >= expected_energy_factor && !has_faults:`
-              - set rule_status to "PASS": `rule_status = "PASS"`
-          - else the input capacity is > 210,000 btu/hr: `else:`
-            - if the storage volume is < 10 gallons: `if volume < 10:`
-              - set the expected thermal efficiency to 0.8: `expected_thermal_efficiency = 0.8`
-              - check if the actual uniform_energy_factor is >= to the expected: `if shw_eq.thermal_efficiency >= expected_thermal_efficiency && !has_faults:`
-                - set rule_status to "PASS": `rule_status = "PASS"`
-            - else the storage volume is >= 10 gallons: `else:`
-              - set the expected thermal efficiency to 0.8: `expected_thermal_efficiency = 0.78`
-              - calculate max_standby_loss (btu/hr): `max_standby_loss = (input_capacity/800 + 110 * sqrt(volume))`
-              - check if the actual uniform_energy_factor is >= to the expected: `if shw_eq.thermal_efficiency >= expected_thermal_efficiency && standby_loss <= max_standby_loss && !has_faults:`
-                - set rule_status to "PASS": `rule_status = "PASS"`
 
-     **Rule Assertion - Zone:**
-    - Case1: rule_status is PASS: `if rule_status == "PASS": PASS`.
-    - Case2: rule_status is UNDETERMINED, UNDETERMINED & return rule_note: `elsif rule_status == "UNDETERMINED": UNDETERMINED; rule_note`
-    - Case3: rule_status is FAIL, FAIL & return rule_note: `elsif rule_status == "FAIL": FAIL; rule_note`
+## Rule Assertion: 
+- Case1: the expected_shw_equip_type matches shw_equip_type: PASS: `if expected_shw_equip_type == shw_equip_type: PASS`
+- Case2: the expected_shw_equip_type doesn't match shw_equip_type, `FAIL: else: FAIL`
 
-
-**Notes:**
-
-1. standby loss calculated based on https://www.energy.ca.gov/sites/default/files/2021-11/CBECC-Res_UserManual_2019.2.0_ada.pdf 9.6.4.8
-2. what category to use of fuel type is Propane? Gas or Oil?
-3. how to calculate the subcategory or rating condition (btu/hr/gallon) to confirm that this requirement is met?
-4. draw_pattern - not currently included in the schema, but could be inferred from first_hour_rating based on Table I on page 9: https://www.govinfo.gov/content/pkg/CFR-2016-title10-vol3/pdf/CFR-2016-title10-vol3-part430-subpartB-appE.pdf
+  
+  **Notes:**
+  1.  The rule states bats for the proposed, but this is complex to check - can we add that SHW uses need to have the same use type to the section 1 general checks?
 
 **[Back](../_toc.md)**
