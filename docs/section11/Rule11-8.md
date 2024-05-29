@@ -23,22 +23,31 @@
 ## Applicability Checks:
 - only projects with SHW for the SHW space type in the proposed model are expected to have a SHW system in the baseline model.  If there is no SHW in the proposed model, we assume no SHW system is needed.
 - use the function get_SHW_types_and_spaces to get a list of spaces for each SHW type: `shw_and_spaces_dict = get_SHW_types_and_spaces(P_RMD)`
-- look at each SHW space type: `for shw_space_type in shw_and_spaces_dict:`
-  - look at each space: `for space_id in shw_and_spaces_dict[shw_space_type]:`
+- look at each SHW bat: `for shw_bat in shw_and_spaces_dict:`
+  - look at each space: `for space_id in shw_and_spaces_dict[shw_bat]:`
     - get the space using get_component_by_id: `space = get_component_by_id(P_RMD, space_id)`
     - look for the ServiceWaterHeatingUse in the space.  If even one space has a ServiceWaterHeatingUse, continue to rule logic: `if len(space.service_water_heating_uses) > 0: CONTINUE TO RULE LOGIC`
   - if the program reaches this line without going to the rule logic, the project is not applicable for this SHW heating use: `NOT_APPLICABLE`
 
     ## Rule Logic: 
-  - get a dictionary of all SHW equipment connected to the SHW space type in the baseline model: `b_shw_equipment_dict = get_SHW_equipment_connected_to_use_type(B_RMD)[shw_space_type]`
-  - create a variable num_swh_systems: `num_swh_systems = len(b_shw_equip_dict)["SHWDistribution"]`
+  - get a dictionary of all SHW equipment connected to the all SHW space bats in the baseline model: `b_shw_equipment_dict = get_SHW_equipment_connected_to_use_type(B_RMD)[shw_bat]`
+  - get a dictionary of all SHW equipment connected to the current SHW space bats in the baseline model: `b_shw_equipment_dict_this_use = b_shw_equipment_dict[shw_bat]
+  - create a variable num_swh_systems_this_use: `num_swh_systems = len(b_shw_equipment_dict_this_use["SHWDistribution"])`
+  - create a boolean is_referenced_in_other_bats and set it to false: `is_referenced_in_other_bats = false`
+  
+  - if there is exactly one system, check that the system is not used in any of the other BATs: `if num_swh_systems == 1:`
+    - create a variable shw_dist_id and set it to the id of the shw distribution equipment for this bat: `shw_dist_id = b_shw_equipment_dict_this_use["SHWDistribution"][0]`
+    - loop through each bat: `for other_shw_bat in b_shw_equipment_dict:`
+      - if other_shw_bat is not equal to the current shw_bat: `if other_shw_bat != shw_bat:`
+        - check whether the shw_dist_id is in the list of SHW Distribution equipment for the other SHW_bat: `if shw_dist_id in? b_shw_equipment_dict[other_shw_bat]["SHWDistribution"]:`
+          - set the boolean is_referenced_in_other_bats to true: `is_referenced_in_other_bats = true`
 
     ## Rule Assertion: 
-    - Case1: there is exactly one system: PASS: `if num_swh_systems == 1: PASS`
+    - Case1: there is exactly one system AND the system is not referenced by any other shw_bats: PASS: `if num_swh_systems == 1 && is_referenced_in_other_bats = false: PASS`
     - Case2: all else, FAIL: `else: FAIL`
 
   
   **Notes:**
-  1.  Are there configurations in which a complete SHW system could exist without SHWDistribution?
+  1.  Are there configurations in which a complete SHW system could exist without SHWDistribution? - ANSWER: distrbution_system is a required data element, so no.
 
 **[Back](../_toc.md)**
