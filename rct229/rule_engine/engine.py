@@ -142,7 +142,7 @@ def evaluate_rules(
     unit_system=UNIT_SYSTEM.IP,
     test=False,
     session_id="",
-    eval_proc_print=False
+    eval_proc_print=False,
 ):
     """Evaluates a list of rules against an RMDs
 
