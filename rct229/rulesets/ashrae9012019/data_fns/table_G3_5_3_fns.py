@@ -1,7 +1,7 @@
+from pint import Quantity
 from rct229.rulesets.ashrae9012019.data import data
 from rct229.rulesets.ashrae9012019.data_fns.table_utils import find_osstd_table_entry
 from rct229.schema.config import ureg
-from pint import Quantity
 
 # This dictionary maps the ChillerCompressorOptions enumerations to
 # the corresponding chiller types

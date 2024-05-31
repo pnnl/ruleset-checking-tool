@@ -27,7 +27,7 @@ def get_available_rules():
     return available_rules
 
 
-def evaluate_all_rules_rpd(ruleset_project_descriptions):
+def evaluate_all_rules_rpd(ruleset_project_descriptions, session_id=""):
     # Get reference to rule functions in rules model
     available_rule_definitions = rulesets.__getrules__()
     ruleset_models = get_rmd_instance()
@@ -49,7 +49,7 @@ def evaluate_all_rules_rpd(ruleset_project_descriptions):
 
     print("Processing rules...")
     rules_list = [rule_def[1]() for rule_def in available_rule_definitions]
-    report = evaluate_rules(rules_list, ruleset_models)
+    report = evaluate_rules(rules_list, ruleset_models, session_id=session_id)
     report["rpd_files"] = rpd_rmd_map_list
 
     return report
@@ -135,7 +135,11 @@ def evaluate_rule(rule, rmrs, test=False):
 
 
 def evaluate_rules(
-    rules_list: list, rmds: RuleSetModels, unit_system=UNIT_SYSTEM.IP, test=False
+    rules_list: list,
+    rmds: RuleSetModels,
+    unit_system=UNIT_SYSTEM.IP,
+    test=False,
+    session_id="",
 ):
     """Evaluates a list of rules against an RMDs
 
@@ -147,6 +151,7 @@ def evaluate_rules(
         Object containing RPDs for ruleset evaluation
     test: Boolean
         Flag to indicate whether this run is for software testing workflow or not.
+    session_id: string
 
     Returns
     -------
@@ -212,8 +217,23 @@ def evaluate_rules(
         if rmds[rule_model]:
             copied_rmds[rule_model] = quantify_rmd(rmds.__getitem__(rule_model))
 
+    total_num_rules = len(rules_list)
+    if total_num_rules < 10:
+        step = 1
+    elif total_num_rules < 20:
+        step = total_num_rules // 10 + 1
+    else:
+        step = round(total_num_rules * 0.05)
+    counting_steps = list(range(0, total_num_rules, step))
+
+    rule_counter = 0
     # Evaluate the rules
     for rule in rules_list:
+        rule_counter += 1
+        if rule_counter in counting_steps:
+            print(
+                f"Project Evaluation Session ID: #{session_id}# => Compliance evaluation progress: {round(rule_counter / total_num_rules * 100)}%"
+            )
         print(f"Processing Rule {rule.id}")
         outcome = rule.evaluate(copied_rmds)
         outcomes.append(outcome)

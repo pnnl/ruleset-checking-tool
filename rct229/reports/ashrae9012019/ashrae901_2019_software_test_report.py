@@ -1,11 +1,9 @@
 import json
 from copy import deepcopy
-from datetime import datetime
 
 from rct229 import __version__ as version
 from rct229.report_engine.rct_report import RCTReport
 from rct229.reports.utils import test_evaluation_converter
-from rct229.schema import config
 
 
 class ASHRAE9012019SoftwareTestReport(RCTReport):
@@ -14,10 +12,10 @@ class ASHRAE9012019SoftwareTestReport(RCTReport):
         self.title = "ASHRAE STD 229P RULESET CHECKING TOOL"
         self.purpose = "RCT Ruleset Software Testing Report"
         self.ruleset = "ASHRAE 90.1-2019 Performance Rating Method (Appendix G)"
-        self.ruleset_report_file = "ashrae901_2019_software_testing_report.json"
+        self.ruleset_report_file = f"{self.__class__.__name__}.json"
 
     def initialize_ruleset_report(self, rule_outcome=None):
-        report_json = dict()
+        report_json = {}
         report_json["title"] = self.title
         report_json["purpose"] = self.purpose
         report_json["tool_name"] = self.tool

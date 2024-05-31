@@ -1,8 +1,7 @@
 from pydash import flatten
-
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
@@ -55,11 +54,11 @@ APPLICABLE_SYS_TYPES = [
 
 
 class Section4Rule11(RuleDefinitionListIndexedBase):
-    """Rule 11 of ASHRAE 90.1-2019 Appendix G Section 4 (Airside System)"""
+    """Rule 11 of ASHRAE 90.1-2019 Appendix G Section 4 (Schedules Setpoints)"""
 
     def __init__(self):
         super(Section4Rule11, self).__init__(
-            rmds_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             required_fields={
@@ -71,10 +70,10 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
             index_rmd=BASELINE_0,
             id="4-11",
             description="Fan schedules shall be modeled identically in the baseline and proposed unless Table G3.1 Section 4 baseline exceptions are applicable. Fan Schedules may be allowed to differ when Section 4 Baseline Column Exceptions #1, #2 Or #3 are applicable.",
-            ruleset_section_title="Airside System",
+            ruleset_section_title="Schedules Setpoints",
             standard_section="Section G3.1-4 Schedule Modeling Requirements for the Proposed design and Baseline building",
             is_primary_rule=True,
-            list_path="ruleset_model_descriptions[0]",
+            list_path="$.ruleset_model_descriptions[0]",
             data_items={
                 "climate_zone": (BASELINE_0, "weather/climate_zone"),
                 "is_leap_year": (BASELINE_0, "calendar/is_leap_year"),
@@ -84,7 +83,7 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
     class RuleSetModelInstanceRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section4Rule11.RuleSetModelInstanceRule, self).__init__(
-                rmds_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
                 each_rule=Section4Rule11.RuleSetModelInstanceRule.ZoneRule(),
@@ -93,7 +92,6 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
             )
 
         def create_data(self, context, data=None):
-
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
             is_leap_year = data["is_leap_year"]
@@ -154,7 +152,7 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
         class ZoneRule(RuleDefinitionBase):
             def __init__(self):
                 super(Section4Rule11.RuleSetModelInstanceRule.ZoneRule, self,).__init__(
-                    rmds_used=produce_ruleset_model_instance(
+                    rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
                     required_fields={

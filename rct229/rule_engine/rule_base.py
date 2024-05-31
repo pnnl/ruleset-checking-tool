@@ -1,5 +1,4 @@
 from jsonpointer import resolve_pointer
-
 from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
 from rct229.rule_engine.ruleset_model_factory import RuleSetModels, get_rmd_instance
 from rct229.utils.assertions import MissingKeyException, RCTFailureException

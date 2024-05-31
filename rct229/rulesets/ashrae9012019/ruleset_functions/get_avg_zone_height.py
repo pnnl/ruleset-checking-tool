@@ -1,5 +1,4 @@
 from pint import Quantity
-
 from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_all, find_exactly_required_fields
 from rct229.utils.pint_utils import ZERO

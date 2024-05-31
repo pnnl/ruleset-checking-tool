@@ -12,7 +12,7 @@ def get_heat_rejection_loops_connected_to_baseline_systems(rmd: dict) -> list:
     Parameters
     ----------
     rmd dict
-        A dictionary representing a ruleset model instance as defined by the ASHRAE229 schema
+        A dictionary representing a ruleset model description as defined by the ASHRAE229 schema
 
     Returns -------
     heat_reject_loop_list list
