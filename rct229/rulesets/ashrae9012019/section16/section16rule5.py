@@ -7,7 +7,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.compare_schedules import (
     compare_schedules,
 )
 from rct229.utils.assertions import getattr_
-from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.jsonpath_utils import find_all, find_one
 from rct229.utils.utility_functions import find_exactly_one_schedule
 
 
@@ -45,9 +45,16 @@ class Section16Rule5(RuleDefinitionListIndexedBase):
             )
 
         def is_applicable(self, context, data=None):
+            rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
 
-            return find_all("$.buildings[*].elevators[*]", rmd_p)
+            elevators_list_b = find_all("$.buildings[*].elevators[*]", rmd_b)
+            elevators_list_p = find_all("$.buildings[*].elevators[*]", rmd_p)
+            elevators_dict_b = find_one("$.buildings[*].elevators[*]", rmd_b)
+
+            return elevators_list_p and (
+                elevators_dict_b is not None and elevators_list_b
+            )
 
         def create_data(self, context, data):
             rmd_b = context.BASELINE_0
