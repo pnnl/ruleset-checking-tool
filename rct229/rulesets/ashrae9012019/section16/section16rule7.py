@@ -1,8 +1,8 @@
 from rct229.schema.config import ureg
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
-from rct229.rulesets.ashrae9012019 import BASELINE_0, PROPOSED
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.std_comparisons import std_equal
 from rct229.utils.pint_utils import ZERO
@@ -16,7 +16,7 @@ class Section16Rule7(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section16Rule7, self).__init__(
-            rmds_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             each_rule=Section16Rule7.ElevatorRule(),
@@ -31,12 +31,14 @@ class Section16Rule7(RuleDefinitionListIndexedBase):
 
     def is_applicable(self, context, data=None):
         rmd_p = context.PROPOSED
-        return find_all("$.ruleset_model_descriptions[0].buildings[*].elevators", rmd_p)
+        return find_all(
+            "$.ruleset_model_descriptions[0].buildings[*].elevators[*]", rmd_p
+        )
 
     class ElevatorRule(RuleDefinitionBase):
         def __init__(self):
             super(Section16Rule7.ElevatorRule, self).__init__(
-                rmds_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={"$": ["cab_lighting_power", "cab_area"]},
