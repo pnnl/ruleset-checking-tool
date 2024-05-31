@@ -1,7 +1,6 @@
 from typing import TypedDict
 
 from pint import Quantity
-
 from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_all, find_exactly_required_fields
 from rct229.utils.pint_utils import ZERO
@@ -31,7 +30,7 @@ def get_hvac_zone_list_w_area_by_rmi_dict(rmd: dict) -> dict[str, HVACZoneListAr
     Parameters
     ----------
     rmd dict
-        A dictionary representing a ruleset model instance as defined by the ASHRAE229 schema
+        A dictionary representing a ruleset model description as defined by the ASHRAE229 schema
 
     Returns
     -------

@@ -1,7 +1,6 @@
 import pytest
-
 from rct229.rule_engine.rule_base import RuleDefinitionBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rule_engine.rulesets import RuleSet
 
 # Constants ###############################################
@@ -54,12 +53,12 @@ RMD_EMPTY = {}
 SchemaStore.set_ruleset(RuleSet.ASHRAE9012019_RULESET)
 SchemaEnums.update_schema_enum()
 
-DERIVED_RULE_OUTCOME_BASE = produce_ruleset_model_instance(
+DERIVED_RULE_OUTCOME_BASE = produce_ruleset_model_description(
     USER=RMD_1, BASELINE_0=RMD_EMPTY, PROPOSED=RMD_2
 )
 
 
-RMDS_WITH_MATCHING_USER_AND_BASELINE = produce_ruleset_model_instance(
+RMDS_WITH_MATCHING_USER_AND_BASELINE = produce_ruleset_model_description(
     USER=RMD_1, BASELINE_0=RMD_1, PROPOSED=RMD_EMPTY
 )
 
@@ -75,7 +74,7 @@ BASE_RULE_ARGS = {
     **BASE_RULE_1_OUTCOME_BASE,
     "not_applicable_msg": "Not applicable message",
     "manual_check_required_msg": "Manual check required message",
-    "rmds_used": produce_ruleset_model_instance(
+    "rmds_used": produce_ruleset_model_description(
         USER=True, BASELINE_0=True, PROPOSED=False
     ),
 }
@@ -155,7 +154,7 @@ def test__rule_definition_base__evaluate__with_true_rule_check():
 def test__rule_definition_base__get_context__with_missing_rmrs():
     assert (
         BASE_RULE_1.get_context(
-            produce_ruleset_model_instance(
+            produce_ruleset_model_description(
                 USER=RMD_1, BASELINE_0=RMD_EMPTY, PROPOSED=RMD_2
             )
         )
@@ -163,7 +162,7 @@ def test__rule_definition_base__get_context__with_missing_rmrs():
     )
     assert (
         BASE_RULE_1.get_context(
-            produce_ruleset_model_instance(
+            produce_ruleset_model_description(
                 USER=RMD_EMPTY, BASELINE_0=RMD_1, PROPOSED=RMD_2
             )
         )
@@ -171,7 +170,7 @@ def test__rule_definition_base__get_context__with_missing_rmrs():
     )
     assert (
         BASE_RULE_1.get_context(
-            produce_ruleset_model_instance(
+            produce_ruleset_model_description(
                 USER=RMD_EMPTY, BASELINE_0=RMD_EMPTY, PROPOSED=RMD_2
             )
         )
@@ -181,7 +180,9 @@ def test__rule_definition_base__get_context__with_missing_rmrs():
 
 def test__rule_definition_base__get_context__with_rmrs_present():
     context = BASE_RULE_1.get_context(
-        produce_ruleset_model_instance(USER=RMD_1, BASELINE_0=RMD_2, PROPOSED=RMD_EMPTY)
+        produce_ruleset_model_description(
+            USER=RMD_1, BASELINE_0=RMD_2, PROPOSED=RMD_EMPTY
+        )
     )
     assert (
         context.USER == RMD_1["transformers"]

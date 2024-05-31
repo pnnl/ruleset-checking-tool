@@ -2,7 +2,7 @@ import io
 import os
 
 from rct229.rule_engine.engine import evaluate_rule
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.utils.file import deserialize_rpd_file
 
 SCRIPT_DIR = os.path.dirname(__file__)  # <-- absolute dir the script is in
@@ -42,7 +42,7 @@ def evaluate_single_rule(user_rmd_dir, baseline_rmd_dir, proposed_rmd_dir, rule)
     if not rmd_are_valid_json:
         return {"error": "Json file is invalid"}
     else:
-        rmds = produce_ruleset_model_instance(
+        rmds = produce_ruleset_model_description(
             USER=user_rmd_obj, BASELINE_0=baseline_rmd_obj, PROPOSED=proposed_rmd_obj
         )
         report = evaluate_rule(rule, rmds)

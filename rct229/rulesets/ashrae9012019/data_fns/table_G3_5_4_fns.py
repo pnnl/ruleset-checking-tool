@@ -1,6 +1,7 @@
+from typing import TypedDict
+
 from rct229.rulesets.ashrae9012019.data import data
 from rct229.rulesets.ashrae9012019.data_fns.table_utils import find_osstd_table_entry
-from typing import TypedDict
 
 
 class AppGAirSysEffTableSearchInfo(TypedDict):

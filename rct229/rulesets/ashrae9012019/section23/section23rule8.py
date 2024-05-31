@@ -1,6 +1,6 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_system_type_compare import (
     baseline_system_type_compare,
@@ -32,7 +32,7 @@ class Section23Rule8(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section23Rule8, self).__init__(
-            rmds_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section23Rule8.HVACRule(),
@@ -83,7 +83,7 @@ class Section23Rule8(RuleDefinitionListIndexedBase):
     class HVACRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section23Rule8.HVACRule, self).__init__(
-                rmds_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 each_rule=Section23Rule8.HVACRule.SupplyFanRule(),
@@ -94,7 +94,7 @@ class Section23Rule8(RuleDefinitionListIndexedBase):
         class SupplyFanRule(RuleDefinitionBase):
             def __init__(self):
                 super(Section23Rule8.HVACRule.SupplyFanRule, self).__init__(
-                    rmds_used=produce_ruleset_model_instance(
+                    rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
                     required_fields={
