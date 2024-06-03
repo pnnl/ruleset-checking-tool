@@ -22,9 +22,9 @@ Logic:
 - get the temperature at fixture: `temp_at_fixture = shw_use.temperature_at_fixture`
 - get the distribution system: `distribution_system = shw_use.served_by_distribution_system`
 - get the water used: `swh_use_value = swh_use.use`
-- get the inlet water temperature: `inlet_T_sched = distribution.entering_water_mains_temperature_schedule`
+- get the inlet water temperature: `inlet_T_sched = distribution_system.entering_water_mains_temperature_schedule`
 - set the drain heat recovery efficiency to 0: `drain_heat_recovery_efficiency = 0`
-- get the drain heat recovery efficiency if heat is recovered by drain: `if(swh_use.is_heat_recovered_by_drain): drain_heat_recovery_efficiency = distribution.drain_heat_recovery_efficiency`
+- get the drain heat recovery efficiency if heat is recovered by drain: `if(swh_use.is_heat_recovered_by_drain): drain_heat_recovery_efficiency = distribution_system.drain_heat_recovery_efficiency`
 - get the use_units: `use_units = swh_use.use_units`
 - convert the shw_water_used from whatever units it's currently in to volume (assumed to be gallons)
 - if the use_units is POWER_PER_PERSON: `if use_units == "POWER_PER_PERSON":`
