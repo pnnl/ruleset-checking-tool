@@ -26,7 +26,7 @@ Logic:
 - set the drain heat recovery efficiency to 0: `drain_heat_recovery_efficiency = 0`
 - get the drain heat recovery efficiency if heat is recovered by drain: `if(swh_use.is_heat_recovered_by_drain): drain_heat_recovery_efficiency = distribution_system.drain_heat_recovery_efficiency`
 - get the use_units: `use_units = swh_use.use_units`
-- convert the shw_water_used from whatever units it's currently in to volume (assumed to be gallons)
+- convert the shw_water_used from whatever units it's currently in to volume (assumed to be gallons) OR, if the use units are one of the power types, calculate the energy required directly
 - if the use_units is POWER_PER_PERSON: `if use_units == "POWER_PER_PERSON":`
   - set power equal to the swh_use_value * space.number_of_occupants: `power = swh_use_value * space.number_of_occupants`
   - in this case, swh_use_value is assumed to have units of btu/hr/person, so calculate energy_required by multiplying power (btu/hr) by the sum of the hourly_schedule: `energy_required = power * sum(hourly_schedule)`
@@ -53,7 +53,7 @@ Logic:
   - set volume_this_hour equal to volume_flow_rate * hourly_value: `volume_this_hour = volume_flow_rate * hourly_value`
   - reduce volume_this hour by the recovery efficiency: `volume_this_hour = volume_this_hour * (1-drain_heat_recovery_efficiency)`
   - calculate the dT for the hour: `dT = temp_at_fixture - inlet_T_sched[index]`
-  - now calculate the energy use to heat volume (gallons) of water - 8.3452 is lbs / gallon of water: `energy_to_heat_water = volume * 8.3452 * dT`
+  - now calculate the energy use to heat volume (gallons) of water - 1 Btu/lb/°F and 8.34 lb/gal of water: `energy_to_heat_water = volume_this_hour * 8.3452 * dT`
   - add the energy_to_heat_water to energy_required: `energy_required += energy_to_heat_water`
 
 **Returns** energy_required
