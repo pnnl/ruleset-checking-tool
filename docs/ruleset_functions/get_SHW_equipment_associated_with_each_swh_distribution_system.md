@@ -19,7 +19,7 @@ Data Lookup: None
 Logic:
 - create a blank dictionary: `swh_and_equip_dict = {}`
 - for each swh distribution system in the RMD: `for distribution in RMD.service_water_heating_distribution_systems:`
-    - add the blank dictionary for the distribution system id: `swh_and_equip_dict.set_default(distribution.id, {"SWHHeatingEq":[],"Pumps":[],"Tanks":[], "Piping":[], "SolarThermal":[], "SPACE_USES":[]})`
+    - add the blank dictionary for the distribution system id: `swh_and_equip_dict.set_default(distribution.id, {"SWHHeatingEq":[],"Pumps":[],"Tanks":[], "Piping":[], "SolarThermal":[], "SPACE_USES":[], "SPACES_SERVED":[]})`
     - now we need to get all of the equipment connected to this distribution system.
     - get the tanks: `tanks = distribution.tanks`
     - append the tank ids to the dictionary: `for t in tanks:  swh_and_equip_dict[distribution.id]["Tanks"].append(t.id)`
