@@ -18,7 +18,7 @@ Function Call:
 Data Lookup: None
 
 Logic:
-- get the dictionary of SHW types and space ids from the function get_spaces_associated_with_each_SWH_bat: `shw_types_and_uses_dict = shw_and_SHW_use_dict(RMD)`
+- get the dictionary of SHW types and space ids from the function get_spaces_associated_with_each_SWH_bat: `shw_types_and_uses_dict = get_spaces_associated_with_each_SWH_bat(RMD)`
 - create a blank dictionary: `shw_and_equip_dict = {}`
 - look at space type in shw_types_and_uses_dict: `for shw_use_type in shw_types_and_uses_dict:`
     - create the blank list for the shw_use_type: `shw_and_equip_dict[shw_use_type] = {"SHWDistribution":[],"SHWHeatingEq":[],"Pumps":[],"Tanks":[], "Piping":[], "SolarThermal":[]}`
