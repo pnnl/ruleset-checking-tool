@@ -16,7 +16,6 @@
 **Function Call:** 
 - **get_component_by_id**
 - **compare_context_pair** - there is no RDS for this function, but it is a function developed for Rule 1-6 that compares two elements
-- **get_SWH_types_and_spaces**
 - **get_SWH_equipment_associated_with_each_swh_distribution_system**  
 
 **Applicability Checks:**
