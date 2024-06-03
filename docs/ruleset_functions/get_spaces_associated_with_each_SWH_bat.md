@@ -30,16 +30,16 @@ Logic:
             - check to see if the space has service_water_heating_area_type: `if space.service_water_heating_area_type:`
                 - add the SWH building area type to the shw_use_dict and set the value to 0: `swh_use_dict.set_default(space.service_water_heating_area_type, 0)`
                 - look at each swh use for the space: `for swh_use in space.service_water_heating_uses:`
-                    - calculate the total hot water used using the function get_energy_required_to_heat_swh_use and add it to the shw_use_dict: `swh_use_dict[space.service_water_heating_area_type] += get_energy_required_to_heat_swh_use(swh_use)`
+                    - calculate the total hot water used using the function get_energy_required_to_heat_swh_use and add it to the shw_use_dict: `swh_use_dict[space.service_water_heating_area_type] += get_energy_required_to_heat_swh_use(swh_use, space)`
             - otherwise, need to look at the individual swh uses: `else:`
                 - look at each swh use for the sapce: `for swh_use in space.service_water_heating_uses:`
-                    - calculate the total hot water used using the function get_energy_required_to_heat_swh_use: `total_energy_used = get_energy_required_to_heat_swh_use(swh_use)`
+                    - calculate the total hot water used using the function get_energy_required_to_heat_swh_use: `total_energy_used = get_energy_required_to_heat_swh_use(swh_use, space)`
                     - if the shw_use has an area type, add it to the swh_use_dict: `if swh_use.area_type:`
                         - add the shw_use area type to the swh_use_dict, if it doesn't exist yet: `swh_use_dict.set_default(swh_use.area_type, 0)`
-                        - add the total energy used to the dict: `swg_use_dict[swh_use.area_type] += get_energy_required_to_heat_swh_use(swh_use)`
+                        - add the total energy used to the dict: `swg_use_dict[swh_use.area_type] += get_energy_required_to_heat_swh_use(swh_use, space)`
                     - otherwise: `else:`
                         - add the energy use to type "UNDETERMINED": `swh_use_dict.set_default("UNDETERMINED", 0)`
-                        - add the total energy used to the dict: `swh_use_dict["UNDETERMINED"] += get_energy_required_to_heat_swh_use(swh_use)`
+                        - add the total energy used to the dict: `swh_use_dict["UNDETERMINED"] += get_energy_required_to_heat_swh_use(swh_use, space)`
         - now we need to determine the building_segment swh_use_type based on the following rules:
         -     1. At least 50% of the SWH uses needs to be assigned a use type
         -     2. All SWH needs to be assigned to the same use type
