@@ -403,14 +403,18 @@ def generate_rct_outcomes_list_from_section_list(section_list):
 
     # Maps section lists to their titles
     section_dict = {
+        "1": "Performance Calculations",
+        "4": "Schedules Setpoints",
         "5": "Envelope",
         "6": "Lighting",
+        "10": "HVAC General",
         "12": "Receptacles",
         "15": "Transformers",
-        "19": "HVAC-Airside",
-        "21": "HVAC-WaterSide",
-        "22": "HVAC-Chiller",
-        "23": "HVAC-SystemSpecificRequirements",
+        "18": "HVAC-Baseline",
+        "19": "HVAC-General",
+        "21": "HVAC-HotWaterSide",
+        "22": "HVAC-ChilledWaterSide",
+        "23": "HVAC-AirSide"
     }
 
     # Maps excel enumerations for pass/fail etc. to RCTOutcomeLabel. Unfortunately there's a disconnect.
