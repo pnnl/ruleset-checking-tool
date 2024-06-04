@@ -7,7 +7,7 @@ from rct229.rulesets.ashrae9012019.data_fns.table_G3_9_2_fins import table_G3_9_
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_9_3_fins import table_G3_9_3_lookup
 from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_
-from rct229.utils.jsonpath_utils import find_all, find_one
+from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
 
@@ -39,9 +39,11 @@ class Section16Rule1(RuleDefinitionListIndexedBase):
 
         elevators_list_b = find_all("$.buildings[*].elevators[*]", rmd_b)
         elevators_list_p = find_all("$.buildings[*].elevators[*]", rmd_p)
-        elevators_dict_b = find_one("$.buildings[*].elevators[*]", rmd_b)
 
-        return elevators_list_p and (elevators_dict_b is not None and elevators_list_b)
+        return not (
+            bool(elevators_list_p) is False
+            or (bool(elevators_list_p) is True and bool(elevators_list_b) is False)
+        )
 
     class ElevatorRule(RuleDefinitionBase):
         def __init__(self):
