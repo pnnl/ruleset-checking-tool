@@ -11,18 +11,18 @@
 
 **Appendix G Section Reference:** Table G3.1 #11, baseline column, a + b
 
-**Evaluation Context:** B-RMD each SHW type
+**Evaluation Context:** B-RMD each SHW BAT
 **Data Lookup:**   
 **Function Call:** 
-- **get_SHW_types_and_spaces**
-- **get_SHW_equipment_connected_to_use_type**  
+- **get_spaces_associated_with_each_SWH_bat**
+- **get_SHW_equipment_associated_with_each_SWH_bat**  
 
 **Applicability Checks:**
 - check that the SHW type in the P_RMD has SHW loads - **is P_RMD appropriate for the applicability check, or should it be B_RMD?**  
 
 ## Applicability Checks:
 - only projects with SHW for the SHW space type in the proposed model are expected to have a SHW system in the baseline model.  If there is no SHW in the proposed model, we assume no SHW system is needed.
-- use the function get_SHW_types_and_spaces to get a list of spaces for each SHW type: `shw_and_spaces_dict = get_SHW_types_and_spaces(P_RMD)`
+- use the function get_spaces_associated_with_each_SWH_bat to get a list of spaces for each SHW type: `shw_and_spaces_dict = get_spaces_associated_with_each_SWH_bat(P_RMD)`
 - look at each SHW bat: `for shw_bat in shw_and_spaces_dict:`
   - look at each space: `for space_id in shw_and_spaces_dict[shw_bat]:`
     - get the space using get_component_by_id: `space = get_component_by_id(P_RMD, space_id)`
@@ -30,7 +30,7 @@
   - if the program reaches this line without going to the rule logic, the project is not applicable for this SHW heating use: `NOT_APPLICABLE`
 
     ## Rule Logic: 
-  - get a dictionary of all SHW equipment connected to the all SHW space bats in the baseline model: `b_shw_equipment_dict = get_SHW_equipment_connected_to_use_type(B_RMD)[shw_bat]`
+  - get a dictionary of all SHW equipment connected to the all SHW space bats in the baseline model: `b_shw_equipment_dict = get_SHW_equipment_associated_with_each_SWH_bat(B_RMD)[shw_bat]`
   - get a dictionary of all SHW equipment connected to the current SHW space bats in the baseline model: `b_shw_equipment_dict_this_use = b_shw_equipment_dict[shw_bat]
   - create a variable num_swh_systems_this_use: `num_swh_systems = len(b_shw_equipment_dict_this_use["SHWDistribution"])`
   - create a variable num_swh_equipment_this_use: `num_swh_equipment_this_use = len(b_shw_equipment_dict_this_use["SHWHeatingEq"])`
