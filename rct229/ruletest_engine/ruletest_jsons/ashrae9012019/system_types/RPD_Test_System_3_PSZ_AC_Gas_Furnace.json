@@ -68,7 +68,7 @@
                                         ],
                                         "air_energy_recovery": {
                                             "id": "Air Energy Recovery 1",
-                                            "type": "SENSIBLE_HEAT_EXHANGE",
+                                            "type": "SENSIBLE_HEAT_EXCHANGE",
                                             "design_sensible_effectiveness": 0.8,
                                             "energy_recovery_operation": "WHEN_FANS_ON",
                                             "energy_recovery_supply_air_temperature_control": "FIXED_SETPOINT"

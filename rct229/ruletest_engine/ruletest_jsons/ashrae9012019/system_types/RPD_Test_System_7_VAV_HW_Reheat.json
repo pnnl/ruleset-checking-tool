@@ -62,7 +62,7 @@
                                     "cooling_system": {
                                         "id": "CHW Coil 1",
                                         "type": "FLUID_LOOP",
-                                        "chilled_water_loop": "Secondary CHW Loop 1",
+                                        "chilled_water_loop": "Secondary CHW Loop",
                                         "design_sensible_cool_capacity": 85000,
                                         "rated_total_cool_capacity": 87921,
                                         "is_sized_based_on_design_day": false,
@@ -101,21 +101,21 @@
                                                 "total_efficiency": 0.60,
                                                 "design_airflow": 4247.52705
                                             }
-                                        ]
-                                    },
-                                    "air_economizer": {
-                                        "id": "Air Economizer 1",
-                                        "type": "FIXED_DRY_BULB",
-                                        "high_limit_shutoff_temperature": 21.1111,
-                                        "is_integrated": false
-                                    },
-                                    "air_energy_recovery": {
-                                        "id": "Air Energy Recovery 1",
-                                        "type": "ENTHALPY_HEAT_WHEEL",
-                                        "energy_recovery_operation": "WHEN_FANS_ON",
-                                        "energy_recovery_supply_air_temperature_control": "MIXED_AIR_RESET",
-                                        "design_sensible_effectiveness": 0.5,
-                                        "design_latent_effectiveness": 0.5
+                                        ],
+                                        "air_economizer": {
+                                            "id": "Air Economizer 1",
+                                            "type": "TEMPERATURE",
+                                            "high_limit_shutoff_temperature": 21.1111,
+                                            "is_integrated": false
+                                        },
+                                        "air_energy_recovery": {
+                                            "id": "Air Energy Recovery 1",
+                                            "type": "ENTHALPY_HEAT_WHEEL",
+                                            "energy_recovery_operation": "WHEN_FANS_ON",
+                                            "energy_recovery_supply_air_temperature_control": "MIXED_AIR_RESET",
+                                            "design_sensible_effectiveness": 0.5,
+                                            "design_latent_effectiveness": 0.5
+                                        }
                                     }
                                 }
                             ]
@@ -132,7 +132,7 @@
                     "rated_capacity": 30000,
                     "minimum_load_ratio": 0.33,
                     "operation_lower_limit": 0,
-                    "efficiency_metric": "COMBUSTION_EFFICIENCY",
+                    "efficiency_metric": "COMBUSTION",
                     "efficiency": 0.90,
                     "output_validation_points": [
                         {
@@ -156,7 +156,7 @@
                     "minimum_load_ratio": 0.33,
                     "operation_lower_limit": 30000,
                     "operation_upper_limit": 60000,
-                    "efficiency_metric": "COMBUSTION_EFFICIENCY",
+                    "efficiency_metric": "COMBUSTION",
                     "efficiency": 0.90,
                     "output_validation_points": [
                         {
@@ -280,7 +280,7 @@
                 },
                 {
                     "id": "Secondary CHW Pump",
-                    "loop_or_piping": "Secondary CHW Loop 1",
+                    "loop_or_piping": "Secondary CHW Loop",
                     "specification_method": "SIMPLE",
                     "design_electric_power": 1096,
                     "speed_control": "VARIABLE_SPEED",
@@ -309,7 +309,7 @@
                         "is_sized_using_coincident_load": true,
                         "operation": "INTERMITTENT",
                         "flow_control": "VARIABLE_FLOW",
-                        "temperature_reset_type": "NONE"
+                        "temperature_reset_type": "NO_RESET"
                     }
                 },
                 {
@@ -322,8 +322,8 @@
                         "design_return_temperature": 12.8,
                         "is_sized_using_coincident_load": true,
                         "operation": "CONTINUOUS",
-                        "flow_control": "CONSTANT_FLOW",
-                        "temperature_reset_type": "NONE"
+                        "flow_control": "FIXED_FLOW",
+                        "temperature_reset_type": "NO_RESET"
                     },
                     "child_loops": [
                         {
@@ -336,7 +336,7 @@
                                 "is_sized_using_coincident_load": true,
                                 "operation": "CONTINUOUS",
                                 "flow_control": "VARIABLE_FLOW",
-                                "temperature_reset_type": "NONE"
+                                "temperature_reset_type": "NO_RESET"
                             }
                         }
                     ]
@@ -349,7 +349,7 @@
                         "id": "CW Loop Design and Control",
                         "is_sized_using_coincident_load": true,
                         "operation": "CONTINUOUS",
-                        "flow_control": "CONSTANT_FLOW",
+                        "flow_control": "FIXED_FLOW",
                         "design_supply_temperature": 21.1111
                     }
                 }
