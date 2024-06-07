@@ -91,7 +91,7 @@
                     "draft_type": "NATURAL",
                     "energy_source_type": "NATURAL_GAS",
                     "rated_capacity": 87921,
-                    "efficiency_metric": "ANNUAL_FUEL_UTILIZATION_EFFICIENCY",
+                    "efficiency_metric": "ANNUAL_FUEL_UTILIZATION",
                     "efficiency": 0.84,
                     "output_validation_points": [
                         {
@@ -131,7 +131,7 @@
                         "operation": "CONTINUOUS",
                         "flow_control": "VARIABLE_FLOW",
                         "minimum_flow_fraction": 0.25,
-                        "temperature_reset_type": "OUDOOR_AIR_RESET",
+                        "temperature_reset_type": "OUTSIDE_AIR_RESET",
                         "outdoor_high_for_loop_supply_reset_temperature": 10,
                         "outdoor_low_for_loop_supply_reset_temperature": -6.7,
                         "loop_supply_temperature_at_outdoor_high": 65.6,

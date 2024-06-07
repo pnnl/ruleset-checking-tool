@@ -1,5 +1,6 @@
 {
   "id": "TEST RPD",
+  "data_timestamp": "2016-06-29T14:35Z",
   "ruleset_model_descriptions": [
     {
       "id": "TEST RMD",
@@ -312,9 +313,9 @@
                             "density": 2240,
                             "specific_heat": 836.8
                           }
-                        ]
-                      },
-                      "f_factor": 0.73
+                        ],
+                        "f_factor": 0.73
+                      }
                     },
                     {
                       "id": "Prm Zone 1 East Wall",
