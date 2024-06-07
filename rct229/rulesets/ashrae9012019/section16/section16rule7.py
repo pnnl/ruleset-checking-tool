@@ -30,10 +30,13 @@ class Section16Rule7(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
+        rmd_b = context.BASELINE_0
         rmd_p = context.PROPOSED
-        return find_all(
-            "$.ruleset_model_descriptions[0].buildings[*].elevators[*]", rmd_p
-        )
+
+        elevators_list_b = find_all("$.buildings[*].elevators[*]", rmd_b)
+        elevators_list_p = find_all("$.buildings[*].elevators[*]", rmd_p)
+
+        return elevators_list_p and elevators_list_b
 
     class ElevatorRule(RuleDefinitionBase):
         def __init__(self):
