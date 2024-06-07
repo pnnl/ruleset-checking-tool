@@ -55,6 +55,7 @@
                         "u_factor": 0.365543914
                       },
                       "optical_properties": {
+                        "id": "Core Zone 1 Roof Optical Properties",
                         "absorptance_thermal_exterior": 0.9,
                         "absorptance_solar_exterior": 0.7,
                         "absorptance_visible_exterior": 0.7,
@@ -111,6 +112,7 @@
                         "u_factor": 1.695003982
                       },
                       "optical_properties": {
+                        "id": "Core Zone 1 East Wall Optical Properties",
                         "absorptance_thermal_interior": 0.9,
                         "absorptance_solar_interior": 0.7,
                         "absorptance_visible_interior": 0.7
@@ -135,6 +137,7 @@
                         "u_factor": 1.695003982
                       },
                       "optical_properties": {
+                        "id": "Core Zone 1 North Wall Optical Properties",
                         "absorptance_thermal_interior": 0.9,
                         "absorptance_solar_interior": 0.7,
                         "absorptance_visible_interior": 0.7
@@ -159,6 +162,7 @@
                         "u_factor": 1.695003982
                       },
                       "optical_properties": {
+                        "id": "Core Zone 1 South Wall Optical Properties",
                         "absorptance_thermal_interior": 0.9,
                         "absorptance_solar_interior": 0.7,
                         "absorptance_visible_interior": 0.7
@@ -183,6 +187,7 @@
                         "u_factor": 1.695003982
                       },
                       "optical_properties": {
+                        "id": "Core Zone 1 West Wall Optical Properties",
                         "absorptance_thermal_interior": 0.9,
                         "absorptance_solar_interior": 0.7,
                         "absorptance_visible_interior": 0.7
@@ -273,6 +278,7 @@
                         "u_factor": 0.365543914
                       },
                       "optical_properties": {
+                        "id": "Prm Zone 1 Roof Optical Properties",
                         "absorptance_thermal_exterior": 0.9,
                         "absorptance_solar_exterior": 0.7,
                         "absorptance_visible_exterior": 0.7,
@@ -329,6 +335,7 @@
                         "u_factor": 1.695003982
                       },
                       "optical_properties": {
+                        "id": "Prm Zone 1 East Wall Optical Properties",
                         "absorptance_thermal_interior": 0.9,
                         "absorptance_solar_interior": 0.7,
                         "absorptance_visible_interior": 0.7
@@ -411,6 +418,7 @@
                         "u_factor": 0.477396073
                       },
                       "optical_properties": {
+                        "id": "Prm Zone 1 South Wall Optical Properties",
                         "absorptance_thermal_exterior": 0.9,
                         "absorptance_solar_exterior": 0.7,
                         "absorptance_visible_exterior": 0.7,
@@ -505,6 +513,7 @@
                         "u_factor": 0.365543914
                       },
                       "optical_properties": {
+                        "id": "Prm Zone 2 Roof Optical Properties",
                         "absorptance_thermal_exterior": 0.9,
                         "absorptance_solar_exterior": 0.7,
                         "absorptance_visible_exterior": 0.7,
@@ -595,6 +604,7 @@
                         "u_factor": 0.477396073
                       },
                       "optical_properties": {
+                        "id": "Prm Zone 2 East Wall Optical Properties",
                         "absorptance_thermal_exterior": 0.9,
                         "absorptance_solar_exterior": 0.7,
                         "absorptance_visible_exterior": 0.7,
@@ -622,6 +632,7 @@
                         "u_factor": 1.695003982
                       },
                       "optical_properties": {
+                        "id": "Prm Zone 2 North Wall Optical Properties",
                         "absorptance_thermal_interior": 0.9,
                         "absorptance_solar_interior": 0.7,
                         "absorptance_visible_interior": 0.7
@@ -711,6 +722,7 @@
                         "u_factor": 0.189588594
                       },
                       "optical_properties": {
+                        "id": "Prm Zone 3 Roof Optical Properties",
                         "absorptance_thermal_exterior": 0.9,
                         "absorptance_solar_exterior": 0.7,
                         "absorptance_visible_exterior": 0.7,
@@ -825,6 +837,7 @@
                         "u_factor": 0.188149563
                       },
                       "optical_properties": {
+                        "id": "Prm Zone 3 North Wall Optical Properties",
                         "absorptance_thermal_exterior": 0.9,
                         "absorptance_solar_exterior": 0.7,
                         "absorptance_visible_exterior": 0.7,
@@ -852,6 +865,7 @@
                         "u_factor": 1.695003982
                       },
                       "optical_properties": {
+                        "id": "Prm Zone 3 West Wall Optical Properties",
                         "absorptance_thermal_interior": 0.9,
                         "absorptance_solar_interior": 0.7,
                         "absorptance_visible_interior": 0.7
@@ -942,6 +956,7 @@
                         "u_factor": 0.357798572
                       },
                       "optical_properties": {
+                        "id": "Prm Zone 4 Roof Optical Properties",
                         "absorptance_thermal_exterior": 0.9,
                         "absorptance_solar_exterior": 0.7,
                         "absorptance_visible_exterior": 0.7,
@@ -998,6 +1013,7 @@
                         "u_factor": 1.695003982
                       },
                       "optical_properties": {
+                        "id": "Prm Zone 4 South Wall Optical Properties",
                         "absorptance_thermal_interior": 0.9,
                         "absorptance_solar_interior": 0.7,
                         "absorptance_visible_interior": 0.7
@@ -1056,6 +1072,7 @@
                         "u_factor": 0.477164987
                       },
                       "optical_properties": {
+                        "id": "Prm Zone 4 West Wall Optical Properties",
                         "absorptance_thermal_exterior": 0.9,
                         "absorptance_solar_exterior": 0.7,
                         "absorptance_visible_exterior": 0.7,
