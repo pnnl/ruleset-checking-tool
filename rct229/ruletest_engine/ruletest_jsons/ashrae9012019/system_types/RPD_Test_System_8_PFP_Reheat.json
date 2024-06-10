@@ -15,6 +15,7 @@
                                     "id": "Thermal Zone 1",
                                     "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                     "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                    "air_distribution_effectiveness": 0.8,
                                     "terminals": [
                                         {
                                             "id": "VAV Air Terminal 1",
