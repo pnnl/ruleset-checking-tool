@@ -49,8 +49,7 @@
                                         "id": "Preheat Coil 1",
                                         "type": "FLUID_LOOP",
                                         "hot_water_loop": "Boiler Loop 1",
-                                        "rated_capacity": 43960.6605,
-                                        "heating_coil_setpoint": 10
+                                        "rated_capacity": 43960.6605
                                     },
                                     "fan_system": {
                                         "id": "VAV Fan System 1",

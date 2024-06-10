@@ -183,8 +183,8 @@
                     "energy_source_type": "ELECTRICITY",
                     "rated_capacity": 85000,
                     "design_capacity": 85000,
-                    "rated_entering_condenser_temperature": 13.3333,
-                    "rated_leaving_evaporator_temperature": 6.7,
+                    "rated_entering_condenser_temperature": 29.4,
+                    "rated_leaving_evaporator_temperature": 10,
                     "capacity_validation_points": [
                         {
                             "chilled_water_supply_temperature": 10,
@@ -193,7 +193,7 @@
                         },
                         {
                             "chilled_water_supply_temperature": 10,
-                            "condenser_temperature": 18,
+                            "condenser_temperature": 29.4,
                             "result": 85000
                         }
                     ],
@@ -222,8 +222,37 @@
                     "energy_source_type": "ELECTRICITY",
                     "rated_capacity": 85000,
                     "design_capacity": 85000,
+                    "minimum_load_ratio": 0.25,
                     "rated_entering_condenser_temperature": 13.3333,
-                    "rated_leaving_evaporator_temperature": 6.7
+                    "rated_leaving_evaporator_temperature": 6.7,
+                    "part_load_efficiency": 0.5,
+                    "part_load_efficiency_metric": "IPLV",
+                    "capacity_validation_points": [
+                        {
+                            "chilled_water_supply_temperature": 10,
+                            "condenser_temperature": 24,
+                            "result": 80000
+                        },
+                        {
+                            "chilled_water_supply_temperature": 10,
+                            "condenser_temperature": 18,
+                            "result": 85000
+                        }
+                    ],
+                    "power_validation_points": [
+                        {
+                            "chilled_water_supply_temperature": 0,
+                            "condenser_temperature": 13.3333,
+                            "load": 0,
+                            "result": 0
+                        },
+                        {
+                            "chilled_water_supply_temperature": 0,
+                            "condenser_temperature": 13.3333,
+                            "load": 85000,
+                            "result": 85000
+                        }
+                    ]
                 }
             ],
             "heat_rejections": [
@@ -320,10 +349,14 @@
                         "id": "Primary CHW Design and Control",
                         "design_supply_temperature": 6.7,
                         "design_return_temperature": 12.8,
+                        "outdoor_high_for_loop_supply_reset_temperature": 26.7,
+                        "outdoor_low_for_loop_supply_reset_temperature": 15.6,
+                        "loop_supply_temperature_at_outdoor_high": 6.7,
+                        "loop_supply_temperature_at_outdoor_low": 12.2,
                         "is_sized_using_coincident_load": true,
                         "operation": "CONTINUOUS",
                         "flow_control": "FIXED_FLOW",
-                        "temperature_reset_type": "NO_RESET"
+                        "temperature_reset_type": "OUTDOOR_AIR_RESET"
                     },
                     "child_loops": [
                         {
