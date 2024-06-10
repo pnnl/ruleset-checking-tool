@@ -2318,7 +2318,7 @@
         "DehumidificationOptions": {
             "type": "string",
             "enum": [
-                "MECHANCIAL_COOLING",
+                "MECHANICAL_COOLING",
                 "DESICCANT",
                 "SERIES_HEAT_RECOVERY",
                 "NONE",
@@ -2719,8 +2719,8 @@
         "EnergyRecoveryOptions": {
             "type": "string",
             "enum": [
-                "SENSIBLE_HEAT_EXHANGE",
-                "ENTHALPY_HEAT_EXHANGE",
+                "SENSIBLE_HEAT_EXCHANGE",
+                "ENTHALPY_HEAT_EXCHANGE",
                 "SENSIBLE_HEAT_WHEEL",
                 "ENTHALPY_HEAT_WHEEL",
                 "HEAT_PIPE",
