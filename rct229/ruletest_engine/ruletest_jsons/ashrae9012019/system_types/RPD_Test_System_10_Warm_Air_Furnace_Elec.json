@@ -1,0 +1,71 @@
+{
+    "id": "ASHRAE229 1",
+    "ruleset_model_descriptions": [
+        {
+            "id": "RMD 1",
+            "buildings": [
+                {
+                    "id": "Building 1",
+                    "building_open_schedule": "Required Building Schedule 1",
+                    "building_segments": [
+                        {
+                            "id": "Building Segment 1",
+                            "zones": [
+                                {
+                                    "id": "Thermal Zone 1",
+                                    "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                    "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                    "air_distribution_effectiveness": 0.8,
+                                    "terminals": [
+                                        {
+                                            "id": "Air Terminal",
+                                            "is_supply_ducted": true,
+                                            "type": "CONSTANT_AIR_VOLUME",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System 10",
+                                            "primary_airflow": 943.9,
+                                            "supply_design_heating_setpoint_temperature": 32.2,
+                                            "minimum_outdoor_airflow": 94.4
+                                        }
+                                    ]
+                                }
+                            ],
+                            "heating_ventilating_air_conditioning_systems": [
+                                {
+                                    "id": "System 10",
+                                    "heating_system": {
+                                        "id": "Furnace Coil 1",
+                                        "type": "FURNACE",
+                                        "energy_source_type": "ELECTRICITY",
+                                        "design_capacity": 17500,
+                                        "rated_capacity": 17584,
+                                        "efficiency_metric_values": [
+                                            1
+                                        ],
+                                        "efficiency_metric_types": [
+                                            "THERMAL_EFFICIENCY"
+                                        ]
+                                    },
+                                    "fan_system": {
+                                        "id": "CAV Fan System 1",
+                                        "fan_control": "CONSTANT",
+                                        "operation_during_occupied": "CONTINUOUS",
+                                        "operation_during_unoccupied": "KEEP_OFF",
+                                        "supply_fans": [
+                                            {
+                                                "id": "Supply Fan 1",
+                                                "design_airflow": 943.9,
+                                                "is_airflow_sized_based_on_design_day": false,
+                                                "specification_method": "SIMPLE",
+                                                "design_electric_power": 600
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
