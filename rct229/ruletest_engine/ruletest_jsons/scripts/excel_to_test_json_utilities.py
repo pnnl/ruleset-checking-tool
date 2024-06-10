@@ -326,14 +326,11 @@ def create_dictionary_from_excel(spreadsheet_name, sheet_name, rule_set):
                                 set_nested_dict(json_dict, triplet_key_list, row_value)
 
                     elif "json_file_lookup" in key_list:
-
                         for rmr_triplet in triplet_strs:
-
                             if (
                                 rmr_triplet
                                 in rmr_template_dict[test_id]["rmr_template"]
                             ):
-
                                 # Create new keylist with respect to this triplet and set value
                                 triplet_key_list = [
                                     test_id,
@@ -344,7 +341,6 @@ def create_dictionary_from_excel(spreadsheet_name, sheet_name, rule_set):
                                 set_dict_from_json_file_template(
                                     json_dict, triplet_key_list, rule_set, row_value
                                 )
-
 
                     elif "system_zone_assignment" in key_list:
                         # Remove irrelevant keys and set the rest of the keys into system_to_zone_dict
@@ -378,7 +374,6 @@ def create_dictionary_from_excel(spreadsheet_name, sheet_name, rule_set):
         # If system zone assignment has not been set yet, do that before returning final json dictionary
         if not zones_have_been_mapped and system_to_zone_dict:
             set_systems_to_zones(json_dict, system_to_zone_dict, rule_set)
-
 
     return json_dict
 
@@ -815,7 +810,6 @@ def clean_system_name_for_multizone_airloop(rmr_dict, system_name):
 
     # If rmr_dict has HVAC systems added, check if this system name is already taken. If so, update it.
     if element_exists_at_key_address_in_dictionary(rmr_dict, hvac_keys):
-
         hvac_systems = get_nested_dic_from_key_list(rmr_dict, hvac_keys)
 
         for hvac_system in hvac_systems:
@@ -965,7 +959,6 @@ def add_hvac_systems(
                     for hvac_system in building_segment[
                         "heating_ventilating_air_conditioning_systems"
                     ]:
-
                         # Iterate IDs to avoid duplicate IDs if this system type already exists in the building
                         if system_name in hvac_system["id"]:
                             hvac_copy = deepcopy(hvac_system)
@@ -1156,8 +1149,8 @@ def determine_system_classification(system_rmd):
     else:
         return "ZoneEquipment"
 
-def set_dict_from_json_file_template(json_dict, key_list, rule_set, json_template_name):
 
+def set_dict_from_json_file_template(json_dict, key_list, rule_set, json_template_name):
     file_dir = os.path.dirname(__file__)
 
     json_template_path = os.path.join(
