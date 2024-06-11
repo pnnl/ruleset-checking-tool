@@ -1,10 +1,14 @@
+from functools import partial
+
 from jsonpointer import resolve_pointer
 from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
 from rct229.rule_engine.ruleset_model_factory import RuleSetModels, get_rmd_instance
+from rct229.schema.config import ureg
 from rct229.utils.assertions import MissingKeyException, RCTFailureException
 from rct229.utils.json_utils import slash_prefix_guarantee
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import calcq_to_q
+from rct229.utils.std_comparisons import std_equal_with_precision
 
 
 class RuleDefinitionBase:
@@ -25,6 +29,8 @@ class RuleDefinitionBase:
         fail_msg="",
         pass_msg="",
         not_applicable_msg="",
+        precision=None,
+        precision_unit="",
     ):
         """Base class for all Rule definitions
 
@@ -67,6 +73,10 @@ class RuleDefinitionBase:
             default message for PASS outcome
         not_applicable_msg: string
             default message for NOT_APPLICABLE outcome
+        precision: float | int
+            precision values (0.1, 0.01 etc.)
+        precision_unit: string
+            string unit of the precision quantity
         """
         self.rmds_used = rmds_used
         self.rmds_used_optional = rmds_used_optional
@@ -85,6 +95,14 @@ class RuleDefinitionBase:
         self.not_applicable_msg = not_applicable_msg
         self.fail_msg = fail_msg
         self.pass_msg = pass_msg
+        if precision:
+            # precision is present, use precision comparison function
+            if precision_unit:
+                precision = precision * ureg(precision_unit)
+            self.precision_comparison = partial(std_equal_with_precision, precision=precision)
+        else:
+            # default comparison to be strict equality comparison
+            self.precision_comparison = lambda val, std_val: val == std_val
 
     def evaluate(self, rmds, data={}):
         """Generates the outcome dictionary for the rule
