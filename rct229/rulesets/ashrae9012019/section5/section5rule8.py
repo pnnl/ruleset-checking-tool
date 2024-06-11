@@ -17,7 +17,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_ca
     get_surface_conditioning_category_dict,
 )
 from rct229.utils.pint_utils import CalcQ
-from rct229.utils.std_comparisons import std_equal
+from rct229.utils.std_comparisons import std_equal, std_equal_with_precision
 
 
 class Section5Rule8(RuleDefinitionListIndexedBase):
@@ -78,6 +78,8 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
                     required_fields={},
+                    precision=0.001,
+                    precision_unit="Btu/(hr*ft2*R)"
                 )
 
             def get_calc_vals(self, context, data=None):
@@ -132,7 +134,7 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
             def rule_check(self, context, calc_vals=None, data=None):
                 above_grade_wall_u_factor = calc_vals["above_grade_wall_u_factor"]
                 target_u_factor = calc_vals["target_u_factor"]
-                return above_grade_wall_u_factor == target_u_factor
+                return self.precision_comparison(above_grade_wall_u_factor, target_u_factor)
 
             def is_tolerance_fail(self, context, calc_vals=None, data=None):
                 above_grade_wall_u_factor = calc_vals["above_grade_wall_u_factor"]
