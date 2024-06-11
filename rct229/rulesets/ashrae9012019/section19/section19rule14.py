@@ -1,6 +1,6 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_system_type_compare import (
     baseline_system_type_compare,
@@ -45,23 +45,23 @@ class Section19Rule14(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section19Rule14, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             each_rule=Section19Rule14.HVACRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="19-14",
             description="For baseline system types 1-8 and 11-13, if return or relief fans are specified in the proposed design, the baseline building design shall also be modeled with fans serving the same functions and sized for the baseline system supply fan air quantity less the minimum outdoor air, or 90% of the supply fan air quantity, whichever is larger.",
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1.2.8.1 Excluding Exceptions 1 and 2",
             is_primary_rule=True,
-            rmr_context="ruleset_model_descriptions/0",
+            rmd_context="ruleset_model_descriptions/0",
             list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.BASELINE_0
-        baseline_system_types_dict_b = get_baseline_system_types(rmi_b)
+        rmd_b = context.BASELINE_0
+        baseline_system_types_dict_b = get_baseline_system_types(rmd_b)
 
         return any(
             [
@@ -75,17 +75,17 @@ class Section19Rule14(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.BASELINE_0
-        rmi_p = context.PROPOSED
+        rmd_b = context.BASELINE_0
+        rmd_p = context.PROPOSED
 
         zone_supply_return_exhaust_relief_terminal_fan_power_dict = (
-            get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(rmi_p)
+            get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(rmd_p)
         )
 
         hvac_info_b = {}
         for hvac_b in find_all(
             "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
-            rmi_b,
+            rmd_b,
         ):
             hvac_id_b = hvac_b["id"]
             hvac_info_b[hvac_id_b] = {}
@@ -98,21 +98,21 @@ class Section19Rule14(RuleDefinitionListIndexedBase):
 
         zone_fan_power_dict_b = {}
         for zone_id_b in find_all(
-            "$.buildings[*].building_segments[*].zones[*].id", rmi_b
+            "$.buildings[*].building_segments[*].zones[*].id", rmd_b
         ):
             modeled_fan_power_list_p = zone_supply_return_exhaust_relief_terminal_fan_power_dict[
                 find_one(
                     f'$.buildings[*].building_segments[*].zones[*][?(@.id = "{zone_id_b}")]',
-                    rmi_p,
+                    rmd_p,
                 )["id"]
             ]
             zone_fan_power_dict_b[zone_id_b] = modeled_fan_power_list_p
 
         return {
             "dict_of_zones_and_terminal_units_served_by_hvac_sys_b": get_dict_of_zones_and_terminal_units_served_by_hvac_sys(
-                rmi_b
+                rmd_b
             ),
-            "baseline_system_types_dict_b": get_baseline_system_types(rmi_b),
+            "baseline_system_types_dict_b": get_baseline_system_types(rmd_b),
             "hvac_info_b": hvac_info_b,
             "zone_fan_power_dict_b": zone_fan_power_dict_b,
         }
@@ -120,7 +120,7 @@ class Section19Rule14(RuleDefinitionListIndexedBase):
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
             super(Section19Rule14.HVACRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={

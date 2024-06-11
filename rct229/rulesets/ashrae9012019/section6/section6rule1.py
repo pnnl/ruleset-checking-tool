@@ -1,6 +1,6 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import RMT
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_7_fns import table_G3_7_lookup
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_8_fns import table_G3_8_lookup
@@ -19,24 +19,24 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section6Rule1, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=False, PROPOSED=True
             ),
             each_rule=Section6Rule1.BuildingSegmentRule(),
-            index_rmr=RMT.PROPOSED,
+            index_rmd=RMT.PROPOSED,
             id="6-1",
             description="The total building interior lighting power shall not exceed the interior lighting power "
             "allowance determined using either Table G3.7 or G3.8",
             ruleset_section_title="Lighting",
             standard_section="Section G1.2.1(b) Mandatory Provisions related to interior lighting power",
             is_primary_rule=True,
-            rmr_context="ruleset_model_descriptions/0/buildings/0/building_segments",
+            rmd_context="ruleset_model_descriptions/0/buildings/0/building_segments",
         )
 
     class BuildingSegmentRule(RuleDefinitionBase):
         def __init__(self):
             super(Section6Rule1.BuildingSegmentRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=False, PROPOSED=True
                 ),
                 required_fields={"$.zones[*]": ["volume"]},

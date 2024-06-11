@@ -1,0 +1,769 @@
+{
+    "building_performance_factor": [
+        {
+            "building_area_type": "Multifamily",
+            "climate_zone": "0A and 1A",
+            "building_performance_factor": 0.68
+        },
+        {
+            "building_area_type": "Multifamily",
+            "climate_zone": "0B and 1B",
+            "building_performance_factor": 0.70
+        },
+        {
+            "building_area_type": "Multifamily",
+            "climate_zone": "2A",
+            "building_performance_factor": 0.66
+        },
+        {
+            "building_area_type": "Multifamily",
+            "climate_zone": "2B",
+            "building_performance_factor": 0.66
+        },
+        {
+            "building_area_type": "Multifamily",
+            "climate_zone": "3A",
+            "building_performance_factor": 0.69
+        },
+        {
+            "building_area_type": "Multifamily",
+            "climate_zone": "3B",
+            "building_performance_factor": 0.68
+        },
+        {
+            "building_area_type": "Multifamily",
+            "climate_zone": "3C",
+            "building_performance_factor": 0.59
+        },
+        {
+            "building_area_type": "Multifamily",
+            "climate_zone": "4A",
+            "building_performance_factor": 0.74
+        },
+        {
+            "building_area_type": "Multifamily",
+            "climate_zone": "4B",
+            "building_performance_factor": 0.76
+        },
+        {
+            "building_area_type": "Multifamily",
+            "climate_zone": "4C",
+            "building_performance_factor": 0.74
+        },
+        {
+            "building_area_type": "Multifamily",
+            "climate_zone": "5A",
+            "building_performance_factor": 0.70
+        },
+        {
+            "building_area_type": "Multifamily",
+            "climate_zone": "5B",
+            "building_performance_factor": 0.73
+        },
+        {
+            "building_area_type": "Multifamily",
+            "climate_zone": "5C",
+            "building_performance_factor": 0.75
+        },
+        {
+            "building_area_type": "Multifamily",
+            "climate_zone": "6A",
+            "building_performance_factor": 0.68
+        },
+        {
+            "building_area_type": "Multifamily",
+            "climate_zone": "6B",
+            "building_performance_factor": 0.71
+        },
+        {
+            "building_area_type": "Multifamily",
+            "climate_zone": "7",
+            "building_performance_factor": 0.68
+        },
+        {
+            "building_area_type": "Multifamily",
+            "climate_zone": "8",
+            "building_performance_factor": 0.72
+        },
+        {
+            "building_area_type": "Healthcare/hospital",
+            "climate_zone": "0A and 1A",
+            "building_performance_factor": 0.60
+        },
+        {
+            "building_area_type": "Healthcare/hospital",
+            "climate_zone": "0B and 1B",
+            "building_performance_factor": 0.60
+        },
+        {
+            "building_area_type": "Healthcare/hospital",
+            "climate_zone": "2A",
+            "building_performance_factor": 0.58
+        },
+        {
+            "building_area_type": "Healthcare/hospital",
+            "climate_zone": "2B",
+            "building_performance_factor": 0.54
+        },
+        {
+            "building_area_type": "Healthcare/hospital",
+            "climate_zone": "3A",
+            "building_performance_factor": 0.56
+        },
+        {
+            "building_area_type": "Healthcare/hospital",
+            "climate_zone": "3B",
+            "building_performance_factor": 0.55
+        },
+        {
+            "building_area_type": "Healthcare/hospital",
+            "climate_zone": "3C",
+            "building_performance_factor": 0.55
+        },
+        {
+            "building_area_type": "Healthcare/hospital",
+            "climate_zone": "4A",
+            "building_performance_factor": 0.55
+        },
+        {
+            "building_area_type": "Healthcare/hospital",
+            "climate_zone": "4B",
+            "building_performance_factor": 0.54
+        },
+        {
+            "building_area_type": "Healthcare/hospital",
+            "climate_zone": "4C",
+            "building_performance_factor": 0.54
+        },
+        {
+            "building_area_type": "Healthcare/hospital",
+            "climate_zone": "5A",
+            "building_performance_factor": 0.57
+        },
+        {
+            "building_area_type": "Healthcare/hospital",
+            "climate_zone": "5B",
+            "building_performance_factor": 0.52
+        },
+        {
+            "building_area_type": "Healthcare/hospital",
+            "climate_zone": "5C",
+            "building_performance_factor": 0.54
+        },
+        {
+            "building_area_type": "Healthcare/hospital",
+            "climate_zone": "6A",
+            "building_performance_factor": 0.57
+        },
+        {
+            "building_area_type": "Healthcare/hospital",
+            "climate_zone": "6B",
+            "building_performance_factor": 0.52
+        },
+        {
+            "building_area_type": "Healthcare/hospital",
+            "climate_zone": "7",
+            "building_performance_factor": 0.57
+        },
+        {
+            "building_area_type": "Healthcare/hospital",
+            "climate_zone": "8",
+            "building_performance_factor": 0.57
+        },
+        {
+            "building_area_type": "Hotel/motel",
+            "climate_zone": "0A and 1A",
+            "building_performance_factor": 0.55
+        },
+        {
+            "building_area_type": "Hotel/motel",
+            "climate_zone": "0B and 1B",
+            "building_performance_factor": 0.53
+        },
+        {
+            "building_area_type": "Hotel/motel",
+            "climate_zone": "2A",
+            "building_performance_factor": 0.53
+        },
+        {
+            "building_area_type": "Hotel/motel",
+            "climate_zone": "2B",
+            "building_performance_factor": 0.52
+        },
+        {
+            "building_area_type": "Hotel/motel",
+            "climate_zone": "3A",
+            "building_performance_factor": 0.53
+        },
+        {
+            "building_area_type": "Hotel/motel",
+            "climate_zone": "3B",
+            "building_performance_factor": 0.54
+        },
+        {
+            "building_area_type": "Hotel/motel",
+            "climate_zone": "3C",
+            "building_performance_factor": 0.54
+        },
+        {
+            "building_area_type": "Hotel/motel",
+            "climate_zone": "4A",
+            "building_performance_factor": 0.53
+        },
+        {
+            "building_area_type": "Hotel/motel",
+            "climate_zone": "4B",
+            "building_performance_factor": 0.53
+        },
+        {
+            "building_area_type": "Hotel/motel",
+            "climate_zone": "4C",
+            "building_performance_factor": 0.52
+        },
+        {
+            "building_area_type": "Hotel/motel",
+            "climate_zone": "5A",
+            "building_performance_factor": 0.50
+        },
+        {
+            "building_area_type": "Hotel/motel",
+            "climate_zone": "5B",
+            "building_performance_factor": 0.51
+        },
+        {
+            "building_area_type": "Hotel/motel",
+            "climate_zone": "5C",
+            "building_performance_factor": 0.51
+        },
+        {
+            "building_area_type": "Hotel/motel",
+            "climate_zone": "6A",
+            "building_performance_factor": 0.50
+        },
+        {
+            "building_area_type": "Hotel/motel",
+            "climate_zone": "6B",
+            "building_performance_factor": 0.51
+        },
+        {
+            "building_area_type": "Hotel/motel",
+            "climate_zone": "7",
+            "building_performance_factor": 0.50
+        },
+        {
+            "building_area_type": "Hotel/motel",
+            "climate_zone": "8",
+            "building_performance_factor": 0.50
+        },
+        {
+            "building_area_type": "Office",
+            "climate_zone": "0A and 1A",
+            "building_performance_factor": 0.52
+        },
+        {
+            "building_area_type": "Office",
+            "climate_zone": "0B and 1B",
+            "building_performance_factor": 0.57
+        },
+        {
+            "building_area_type": "Office",
+            "climate_zone": "2A",
+            "building_performance_factor": 0.50
+        },
+        {
+            "building_area_type": "Office",
+            "climate_zone": "2B",
+            "building_performance_factor": 0.56
+        },
+        {
+            "building_area_type": "Office",
+            "climate_zone": "3A",
+            "building_performance_factor": 0.53
+        },
+        {
+            "building_area_type": "Office",
+            "climate_zone": "3B",
+            "building_performance_factor": 0.56
+        },
+        {
+            "building_area_type": "Office",
+            "climate_zone": "3C",
+            "building_performance_factor": 0.48
+        },
+        {
+            "building_area_type": "Office",
+            "climate_zone": "4A",
+            "building_performance_factor": 0.51
+        },
+        {
+            "building_area_type": "Office",
+            "climate_zone": "4B",
+            "building_performance_factor": 0.52
+        },
+        {
+            "building_area_type": "Office",
+            "climate_zone": "4C",
+            "building_performance_factor": 0.49
+        },
+        {
+            "building_area_type": "Office",
+            "climate_zone": "5A",
+            "building_performance_factor": 0.51
+        },
+        {
+            "building_area_type": "Office",
+            "climate_zone": "5B",
+            "building_performance_factor": 0.51
+        },
+        {
+            "building_area_type": "Office",
+            "climate_zone": "5C",
+            "building_performance_factor": 0.49
+        },
+        {
+            "building_area_type": "Office",
+            "climate_zone": "6A",
+            "building_performance_factor": 0.52
+        },
+        {
+            "building_area_type": "Office",
+            "climate_zone": "6B",
+            "building_performance_factor": 0.51
+        },
+        {
+            "building_area_type": "Office",
+            "climate_zone": "7",
+            "building_performance_factor": 0.49
+        },
+        {
+            "building_area_type": "Office",
+            "climate_zone": "8",
+            "building_performance_factor": 0.51
+        },
+        {
+            "building_area_type": "Restaurant",
+            "climate_zone": "0A and 1A",
+            "building_performance_factor": 0.63
+        },
+        {
+            "building_area_type": "Restaurant",
+            "climate_zone": "0B and 1B",
+            "building_performance_factor": 0.64
+        },
+        {
+            "building_area_type": "Restaurant",
+            "climate_zone": "2A",
+            "building_performance_factor": 0.60
+        },
+        {
+            "building_area_type": "Restaurant",
+            "climate_zone": "2B",
+            "building_performance_factor": 0.60
+        },
+        {
+            "building_area_type": "Restaurant",
+            "climate_zone": "3A",
+            "building_performance_factor": 0.60
+        },
+        {
+            "building_area_type": "Restaurant",
+            "climate_zone": "3B",
+            "building_performance_factor": 0.61
+        },
+        {
+            "building_area_type": "Restaurant",
+            "climate_zone": "3C",
+            "building_performance_factor": 0.58
+        },
+        {
+            "building_area_type": "Restaurant",
+            "climate_zone": "4A",
+            "building_performance_factor": 0.62
+        },
+        {
+            "building_area_type": "Restaurant",
+            "climate_zone": "4B",
+            "building_performance_factor": 0.57
+        },
+        {
+            "building_area_type": "Restaurant",
+            "climate_zone": "4C",
+            "building_performance_factor": 0.61
+        },
+        {
+            "building_area_type": "Restaurant",
+            "climate_zone": "5A",
+            "building_performance_factor": 0.63
+        },
+        {
+            "building_area_type": "Restaurant",
+            "climate_zone": "5B",
+            "building_performance_factor": 0.60
+        },
+        {
+            "building_area_type": "Restaurant",
+            "climate_zone": "5C",
+            "building_performance_factor": 0.64
+        },
+        {
+            "building_area_type": "Restaurant",
+            "climate_zone": "6A",
+            "building_performance_factor": 0.65
+        },
+        {
+            "building_area_type": "Restaurant",
+            "climate_zone": "6B",
+            "building_performance_factor": 0.62
+        },
+        {
+            "building_area_type": "Restaurant",
+            "climate_zone": "7",
+            "building_performance_factor": 0.67
+        },
+        {
+            "building_area_type": "Restaurant",
+            "climate_zone": "8",
+            "building_performance_factor": 0.70
+        },
+        {
+            "building_area_type": "Retail",
+            "climate_zone": "0A and 1A",
+            "building_performance_factor": 0.51
+        },
+        {
+            "building_area_type": "Retail",
+            "climate_zone": "0B and 1B",
+            "building_performance_factor": 0.54
+        },
+        {
+            "building_area_type": "Retail",
+            "climate_zone": "2A",
+            "building_performance_factor": 0.49
+        },
+        {
+            "building_area_type": "Retail",
+            "climate_zone": "2B",
+            "building_performance_factor": 0.55
+        },
+        {
+            "building_area_type": "Retail",
+            "climate_zone": "3A",
+            "building_performance_factor": 0.51
+        },
+        {
+            "building_area_type": "Retail",
+            "climate_zone": "3B",
+            "building_performance_factor": 0.55
+        },
+        {
+            "building_area_type": "Retail",
+            "climate_zone": "3C",
+            "building_performance_factor": 0.53
+        },
+        {
+            "building_area_type": "Retail",
+            "climate_zone": "4A",
+            "building_performance_factor": 0.51
+        },
+        {
+            "building_area_type": "Retail",
+            "climate_zone": "4B",
+            "building_performance_factor": 0.55
+        },
+        {
+            "building_area_type": "Retail",
+            "climate_zone": "4C",
+            "building_performance_factor": 0.54
+        },
+        {
+            "building_area_type": "Retail",
+            "climate_zone": "5A",
+            "building_performance_factor": 0.50
+        },
+        {
+            "building_area_type": "Retail",
+            "climate_zone": "5B",
+            "building_performance_factor": 0.54
+        },
+        {
+            "building_area_type": "Retail",
+            "climate_zone": "5C",
+            "building_performance_factor": 0.55
+        },
+        {
+            "building_area_type": "Retail",
+            "climate_zone": "6A",
+            "building_performance_factor": 0.50
+        },
+        {
+            "building_area_type": "Retail",
+            "climate_zone": "6B",
+            "building_performance_factor": 0.51
+        },
+        {
+            "building_area_type": "Retail",
+            "climate_zone": "7",
+            "building_performance_factor": 0.48
+        },
+        {
+            "building_area_type": "Retail",
+            "climate_zone": "8",
+            "building_performance_factor": 0.50
+        },
+        {
+            "building_area_type": "School",
+            "climate_zone": "0A and 1A",
+            "building_performance_factor": 0.39
+        },
+        {
+            "building_area_type": "School",
+            "climate_zone": "0B and 1B",
+            "building_performance_factor": 0.47
+        },
+        {
+            "building_area_type": "School",
+            "climate_zone": "2A",
+            "building_performance_factor": 0.38
+        },
+        {
+            "building_area_type": "School",
+            "climate_zone": "2B",
+            "building_performance_factor": 0.43
+        },
+        {
+            "building_area_type": "School",
+            "climate_zone": "3A",
+            "building_performance_factor": 0.38
+        },
+        {
+            "building_area_type": "School",
+            "climate_zone": "3B",
+            "building_performance_factor": 0.42
+        },
+        {
+            "building_area_type": "School",
+            "climate_zone": "3C",
+            "building_performance_factor": 0.40
+        },
+        {
+            "building_area_type": "School",
+            "climate_zone": "4A",
+            "building_performance_factor": 0.37
+        },
+        {
+            "building_area_type": "School",
+            "climate_zone": "4B",
+            "building_performance_factor": 0.40
+        },
+        {
+            "building_area_type": "School",
+            "climate_zone": "4C",
+            "building_performance_factor": 0.38
+        },
+        {
+            "building_area_type": "School",
+            "climate_zone": "5A",
+            "building_performance_factor": 0.36
+        },
+        {
+            "building_area_type": "School",
+            "climate_zone": "5B",
+            "building_performance_factor": 0.40
+        },
+        {
+            "building_area_type": "School",
+            "climate_zone": "5C",
+            "building_performance_factor": 0.36
+        },
+        {
+            "building_area_type": "School",
+            "climate_zone": "6A",
+            "building_performance_factor": 0.36
+        },
+        {
+            "building_area_type": "School",
+            "climate_zone": "6B",
+            "building_performance_factor": 0.37
+        },
+        {
+            "building_area_type": "School",
+            "climate_zone": "7",
+            "building_performance_factor": 0.36
+        },
+        {
+            "building_area_type": "School",
+            "climate_zone": "8",
+            "building_performance_factor": 0.37
+        },
+        {
+            "building_area_type": "Warehouse",
+            "climate_zone": "0A and 1A",
+            "building_performance_factor": 0.38
+        },
+        {
+            "building_area_type": "Warehouse",
+            "climate_zone": "0B and 1B",
+            "building_performance_factor": 0.42
+        },
+        {
+            "building_area_type": "Warehouse",
+            "climate_zone": "2A",
+            "building_performance_factor": 0.40
+        },
+        {
+            "building_area_type": "Warehouse",
+            "climate_zone": "2B",
+            "building_performance_factor": 0.42
+        },
+        {
+            "building_area_type": "Warehouse",
+            "climate_zone": "3A",
+            "building_performance_factor": 0.43
+        },
+        {
+            "building_area_type": "Warehouse",
+            "climate_zone": "3B",
+            "building_performance_factor": 0.44
+        },
+        {
+            "building_area_type": "Warehouse",
+            "climate_zone": "3C",
+            "building_performance_factor": 0.43
+        },
+        {
+            "building_area_type": "Warehouse",
+            "climate_zone": "4A",
+            "building_performance_factor": 0.44
+        },
+        {
+            "building_area_type": "Warehouse",
+            "climate_zone": "4B",
+            "building_performance_factor": 0.43
+        },
+        {
+            "building_area_type": "Warehouse",
+            "climate_zone": "4C",
+            "building_performance_factor": 0.46
+        },
+        {
+            "building_area_type": "Warehouse",
+            "climate_zone": "5A",
+            "building_performance_factor": 0.49
+        },
+        {
+            "building_area_type": "Warehouse",
+            "climate_zone": "5B",
+            "building_performance_factor": 0.47
+        },
+        {
+            "building_area_type": "Warehouse",
+            "climate_zone": "5C",
+            "building_performance_factor": 0.48
+        },
+        {
+            "building_area_type": "Warehouse",
+            "climate_zone": "6A",
+            "building_performance_factor": 0.54
+        },
+        {
+            "building_area_type": "Warehouse",
+            "climate_zone": "6B",
+            "building_performance_factor": 0.51
+        },
+        {
+            "building_area_type": "Warehouse",
+            "climate_zone": "7",
+            "building_performance_factor": 0.57
+        },
+        {
+            "building_area_type": "Warehouse",
+            "climate_zone": "8",
+            "building_performance_factor": 0.57
+        },
+        {
+            "building_area_type": "All others",
+            "climate_zone": "0A and 1A",
+            "building_performance_factor": 0.56
+        },
+        {
+            "building_area_type": "All others",
+            "climate_zone": "0B and 1B",
+            "building_performance_factor": 0.57
+        },
+        {
+            "building_area_type": "All others",
+            "climate_zone": "2A",
+            "building_performance_factor": 0.50
+        },
+        {
+            "building_area_type": "All others",
+            "climate_zone": "2B",
+            "building_performance_factor": 0.52
+        },
+        {
+            "building_area_type": "All others",
+            "climate_zone": "3A",
+            "building_performance_factor": 0.50
+        },
+        {
+            "building_area_type": "All others",
+            "climate_zone": "3B",
+            "building_performance_factor": 0.54
+        },
+        {
+            "building_area_type": "All others",
+            "climate_zone": "3C",
+            "building_performance_factor": 0.53
+        },
+        {
+            "building_area_type": "All others",
+            "climate_zone": "4A",
+            "building_performance_factor": 0.53
+        },
+        {
+            "building_area_type": "All others",
+            "climate_zone": "4B",
+            "building_performance_factor": 0.52
+        },
+        {
+            "building_area_type": "All others",
+            "climate_zone": "4C",
+            "building_performance_factor": 0.54
+        },
+        {
+            "building_area_type": "All others",
+            "climate_zone": "5A",
+            "building_performance_factor": 0.51
+        },
+        {
+            "building_area_type": "All others",
+            "climate_zone": "5B",
+            "building_performance_factor": 0.51
+        },
+        {
+            "building_area_type": "All others",
+            "climate_zone": "5C",
+            "building_performance_factor": 0.50
+        },
+        {
+            "building_area_type": "All others",
+            "climate_zone": "6A",
+            "building_performance_factor": 0.50
+        },
+        {
+            "building_area_type": "All others",
+            "climate_zone": "6B",
+            "building_performance_factor": 0.50
+        },
+        {
+            "building_area_type": "All others",
+            "climate_zone": "7",
+            "building_performance_factor": 0.50
+        },
+        {
+            "building_area_type": "All others",
+            "climate_zone": "8",
+            "building_performance_factor": 0.46
+        }
+    ]
+}

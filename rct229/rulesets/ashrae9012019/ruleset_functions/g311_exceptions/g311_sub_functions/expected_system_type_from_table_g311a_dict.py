@@ -1,6 +1,7 @@
+from typing import Literal, Type
+
 import pydash
 from pint import Quantity
-
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
@@ -33,7 +34,7 @@ def expected_system_type_from_table_g3_1_1_dict(
     climate_zone: str,
     number_of_floors: int,
     building_area: Quantity,
-):
+) -> dict[Literal["expected_system_type", "system_origin"], [str, Type[HVAC_SYS]]]:
     """
 
     Parameters

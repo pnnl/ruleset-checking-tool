@@ -1,6 +1,6 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_hw_loop_zone_list_w_area_dict import (
     get_hw_loop_zone_list_w_area,
@@ -23,24 +23,24 @@ class Section21Rule8(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section21Rule8, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section21Rule8.HeatingFluidLoopRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="21-8",
             description="When the baseline building requires boilers, (for baseline system type = 1,5,7,11 and 12), HWST for the baseline building shall be reset using an outdoor air dry-bulb reset schedule. 180F at 20F OAT, 150Fat 50F OAT, ramped linerarly between 150F and 180F.",
             ruleset_section_title="HVAC - Water Side",
             standard_section="Section G3.1.3.3 Building System-Specific Modeling Requirements for the Baseline model",
             is_primary_rule=True,
-            rmr_context="ruleset_model_descriptions/0",
+            rmd_context="ruleset_model_descriptions/0",
             list_path="$.fluid_loops[*]",
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.BASELINE_0
-        hw_loop_zone_list_w_area_dict_b = get_hw_loop_zone_list_w_area(rmi_b)
-        boiler_loop_ids_b = find_all("$.boilers[*].loop", rmi_b)
+        rmd_b = context.BASELINE_0
+        hw_loop_zone_list_w_area_dict_b = get_hw_loop_zone_list_w_area(rmd_b)
+        boiler_loop_ids_b = find_all("$.boilers[*].loop", rmd_b)
         boiler_fluid_loops_set_b = set(
             boiler_loop_id
             for boiler_loop_id in boiler_loop_ids_b
@@ -49,9 +49,9 @@ class Section21Rule8(RuleDefinitionListIndexedBase):
         return len(boiler_fluid_loops_set_b) > 0
 
     def create_data(self, context, data):
-        rmi_b = context.BASELINE_0
-        hw_loop_zone_list_w_area_dict_b = get_hw_loop_zone_list_w_area(rmi_b)
-        boiler_loop_ids_b = find_all("$.boilers[*].loop", rmi_b)
+        rmd_b = context.BASELINE_0
+        hw_loop_zone_list_w_area_dict_b = get_hw_loop_zone_list_w_area(rmd_b)
+        boiler_loop_ids_b = find_all("$.boilers[*].loop", rmd_b)
         boiler_fluid_loops_set_b = set(
             boiler_loop_id
             for boiler_loop_id in boiler_loop_ids_b
@@ -67,7 +67,7 @@ class Section21Rule8(RuleDefinitionListIndexedBase):
     class HeatingFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
             super(Section21Rule8.HeatingFluidLoopRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={

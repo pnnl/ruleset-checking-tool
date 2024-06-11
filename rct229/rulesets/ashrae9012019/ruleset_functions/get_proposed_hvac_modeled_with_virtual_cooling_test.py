@@ -1,14 +1,14 @@
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_proposed_hvac_modeled_with_virtual_cooling import (
     get_proposed_hvac_modeled_with_virtual_cooling,
 )
-from rct229.schema.schema_utils import quantify_rmr
-from rct229.schema.validate import schema_validate_rmr
+from rct229.schema.schema_utils import quantify_rmd
+from rct229.schema.validate import schema_validate_rmd
 
 TEST_RMD_P_COOLING_SYSTEM = {
     "id": "ashrae229",
     "ruleset_model_descriptions": [
         {
-            "id": "test_rmi",
+            "id": "test_rmd",
             "buildings": [
                 {
                     "id": "building_1",
@@ -52,7 +52,7 @@ TEST_RMD_U_COOLING_SYSTEM = {
     "id": "ashrae229",
     "ruleset_model_descriptions": [
         {
-            "id": "test_rmi",
+            "id": "test_rmd",
             "buildings": [
                 {
                     "id": "building_1",
@@ -91,20 +91,20 @@ TEST_RMD_U_COOLING_SYSTEM = {
     "data_timestamp": "2024-02-12T09:00Z",
 }
 
-TEST_RMI_P_COOLING_SYSTEM = quantify_rmr(TEST_RMD_P_COOLING_SYSTEM)[
+TEST_RMI_P_COOLING_SYSTEM = quantify_rmd(TEST_RMD_P_COOLING_SYSTEM)[
     "ruleset_model_descriptions"
 ][0]
-TEST_RMI_U_COOLING_SYSTEM = quantify_rmr(TEST_RMD_U_COOLING_SYSTEM)[
+TEST_RMI_U_COOLING_SYSTEM = quantify_rmd(TEST_RMD_U_COOLING_SYSTEM)[
     "ruleset_model_descriptions"
 ][0]
 
 
 def test__TEST_RMD__is_valid():
-    schema_validation_result = schema_validate_rmr(TEST_RMD_P_COOLING_SYSTEM)
+    schema_validation_result = schema_validate_rmd(TEST_RMD_P_COOLING_SYSTEM)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
-    schema_validation_result = schema_validate_rmr(TEST_RMD_U_COOLING_SYSTEM)
+    schema_validation_result = schema_validate_rmd(TEST_RMD_U_COOLING_SYSTEM)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"

@@ -26,7 +26,7 @@
 - set the result variable to NO - only a positive test can give it a different value: `result = NO`
 - get the list of zones with computer rooms using the function get_zones_computer_rooms to get a list of zones including computer rooms: `computer_room_zones_dict = get_zones_computer_rooms(B_RMI)`
 - if the zone_id is in the computer_room_zones_dict, then this is a computer room zone and it is eligible: `if zone_id in computer_room_zones_dict:`
-  - add the zone_peak_internal_load to the total_computer_peak_cooling_load: `total_computer_peak_cooling_load = get_computer_zones_peak_cooling_load(rmi, zone_id)`
+  - add the zone_peak_internal_load to the total_computer_peak_cooling_load: `total_computer_peak_cooling_load = get_computer_zones_peak_cooling_load(rmd, zone_id)`
   - check if the peak load is higher than 600,000 btu/hr `if total_computer_peak_cooling_load > 600,000 btu/hr: result = True`
   
     ```

@@ -1,5 +1,6 @@
-import pandas as pd
+from typing import TypedDict
 
+import pandas as pd
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
     ZoneConditioningCategory as ZCC,
 )
@@ -25,6 +26,13 @@ class SurfaceConditioningCategory:
     EXTERIOR_RESIDENTIAL: str = "EXTERIOR RESIDENTIAL"
     SEMI_EXTERIOR: str = "SEMI-EXTERIOR"
     UNREGULATED: str = "UNREGULATED"
+
+
+class ZoneConditioningDataDict(TypedDict):
+    EXTERIOR_RESIDENTIAL: float
+    EXTERIOR_NON_RESIDENTIAL: float
+    EXTERIOR_MIXED: float
+    SEMI_EXTERIOR: float
 
 
 SCC_DATA_FRAME = pd.DataFrame(

@@ -1,8 +1,7 @@
 from pydash import curry, every
-
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_most_used_weekday_hourly_schedule import (
     get_most_used_weekday_hourly_schedule,
@@ -31,11 +30,11 @@ class Section19Rule23(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section19Rule23, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section19Rule23.RMDRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="19-23",
             description="For cooling sizing runs, schedules for internal loads, including those used for "
             "infiltration, occupants, lighting, gas and electricity using equipment, shall be equal to "
@@ -54,11 +53,11 @@ class Section19Rule23(RuleDefinitionListIndexedBase):
     class RMDRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section19Rule23.RMDRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 each_rule=Section19Rule23.RMDRule.BuildingSegmentRule(),
-                index_rmr=BASELINE_0,
+                index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*]",
             )
 
@@ -71,11 +70,11 @@ class Section19Rule23(RuleDefinitionListIndexedBase):
         class BuildingSegmentRule(RuleDefinitionListIndexedBase):
             def __init__(self):
                 super(Section19Rule23.RMDRule.BuildingSegmentRule, self).__init__(
-                    rmrs_used=produce_ruleset_model_instance(
+                    rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
                     each_rule=Section19Rule23.RMDRule.BuildingSegmentRule.ZoneRule(),
-                    index_rmr=BASELINE_0,
+                    index_rmd=BASELINE_0,
                     list_path="$.zones[*]",
                 )
 
@@ -108,11 +107,11 @@ class Section19Rule23(RuleDefinitionListIndexedBase):
                         Section19Rule23.RMDRule.BuildingSegmentRule.ZoneRule,
                         self,
                     ).__init__(
-                        rmrs_used=produce_ruleset_model_instance(
+                        rmds_used=produce_ruleset_model_description(
                             USER=False, BASELINE_0=True, PROPOSED=False
                         ),
                         each_rule=Section19Rule23.RMDRule.BuildingSegmentRule.ZoneRule.SpaceRule(),
-                        index_rmr=BASELINE_0,
+                        index_rmd=BASELINE_0,
                         list_path="$.spaces[*]",
                     )
 
@@ -165,7 +164,7 @@ class Section19Rule23(RuleDefinitionListIndexedBase):
                             Section19Rule23.RMDRule.BuildingSegmentRule.ZoneRule.SpaceRule,
                             self,
                         ).__init__(
-                            rmrs_used=produce_ruleset_model_instance(
+                            rmds_used=produce_ruleset_model_description(
                                 USER=False, BASELINE_0=True, PROPOSED=False
                             ),
                         )

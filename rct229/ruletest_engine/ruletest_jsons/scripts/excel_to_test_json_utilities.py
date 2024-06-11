@@ -33,7 +33,7 @@ def get_rmr_key_list_from_tcd_key_list(tcd_key_list):
 
     """
 
-    # Get index for the beginning of the RMR JSON.
+    # Get index for the beginning of the RMD JSON.
     # Order is always 'rmr_transformations' or 'rmr_template', <RMR_TYPE>, <RMR_JSON>, therefore add 2 index to
     # either 'rmr_transformation' or 'rmr_template' indices. If neither 'rmr_transformations' or 'rmr_template' is
     # included, assume it begins at index 1 (typically what you see in the Templates tab)
@@ -229,7 +229,7 @@ def create_dictionary_from_excel(spreadsheet_name, sheet_name, rule_set):
     invalid_first_keys = ["Notes", "template_lookup"]
 
     # Iterate column by column through values_df
-    for test_id, columnData in tests_df.iteritems():
+    for test_id, columnData in tests_df.items():
         # List of this rule's column data
         rule_value_list = columnData.values
 

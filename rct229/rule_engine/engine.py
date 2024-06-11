@@ -3,8 +3,8 @@ import inspect
 
 import rct229.rulesets as rulesets
 from rct229.rule_engine.ruleset_model_factory import RuleSetModels, get_rmd_instance
-from rct229.schema.schema_utils import quantify_rmr
-from rct229.schema.validate import validate_rmr
+from rct229.schema.schema_utils import quantify_rmd
+from rct229.schema.validate import validate_rmd
 from rct229.utils.assertions import RCTException, assert_
 from rct229.utils.file import deserialize_rpd_file
 from rct229.utils.jsonpath_utils import find_all, find_exactly_one
@@ -27,7 +27,7 @@ def get_available_rules():
     return available_rules
 
 
-def evaluate_all_rules_rpd(ruleset_project_descriptions):
+def evaluate_all_rules_rpd(ruleset_project_descriptions, session_id=""):
     # Get reference to rule functions in rules model
     available_rule_definitions = rulesets.__getrules__()
     ruleset_models = get_rmd_instance()
@@ -49,7 +49,7 @@ def evaluate_all_rules_rpd(ruleset_project_descriptions):
 
     print("Processing rules...")
     rules_list = [rule_def[1]() for rule_def in available_rule_definitions]
-    report = evaluate_rules(rules_list, ruleset_models)
+    report = evaluate_rules(rules_list, ruleset_models, session_id=session_id)
     report["rpd_files"] = rpd_rmd_map_list
 
     return report
@@ -103,12 +103,12 @@ def evaluate_all_rules(ruleset_model_path_list):
 
 
 def evaluate_rule(rule, rmrs, test=False):
-    """Evaluates a single rule against an RMR trio
+    """Evaluates a single rule against an RMD trio
 
     Parameters
     ----------
     rmrs : RuleSetModels
-        Object containing the RMRs required by enum schema
+        Object containing the RMDs required by enum schema
     test: Boolean
         A flag to indicate whether the evaluate rule is a software test workflow or not.
 
@@ -117,14 +117,14 @@ def evaluate_rule(rule, rmrs, test=False):
     dict
         A dictionary of the form:
         {
-            invalid_rmrs: dict - The keys are the names of the invalid RMRs.
+            invalid_rmrs: dict - The keys are the names of the invalid RMDs.
                 The values are the corresponding schema validation errors.
             outcomes: [dict] - A list containing a single rule outcome as
                 a dictionary of the form:
                 {
                     id: string - A unique identifier for the rule
                     description: string
-                    rmr_context: string - a JSON pointer into the RMR
+                    rmd_context: string - a JSON pointer into the RMD
                     result: string or list - One of the strings "PASS", "FAIL", "NA", or "REQUIRES_MANUAL_CHECK" or a list
                         of outcomes for a list-type rule
                 }
@@ -135,7 +135,11 @@ def evaluate_rule(rule, rmrs, test=False):
 
 
 def evaluate_rules(
-    rules_list: list, rmds: RuleSetModels, unit_system=UNIT_SYSTEM.IP, test=False
+    rules_list: list,
+    rmds: RuleSetModels,
+    unit_system=UNIT_SYSTEM.IP,
+    test=False,
+    session_id="",
 ):
     """Evaluates a list of rules against an RMDs
 
@@ -147,6 +151,7 @@ def evaluate_rules(
         Object containing RPDs for ruleset evaluation
     test: Boolean
         Flag to indicate whether this run is for software testing workflow or not.
+    session_id: string
 
     Returns
     -------
@@ -160,7 +165,7 @@ def evaluate_rules(
                 {
                     id: string - A unique identifier for the rule
                     description: string
-                    rmr_context: string - a JSON pointer into the RMR
+                    rmd_context: string - a JSON pointer into the RMD
                     result: string or list - One of the strings "PASS", "FAIL", "NA", or "REQUIRES_MANUAL_CHECK" or a list
                         of outcomes for a list-type rule
                 }
@@ -173,14 +178,14 @@ def evaluate_rules(
     rmds_used = get_rmd_instance()
     for rule in rules_list:
         for ruleset_model in rmds.get_ruleset_model_types():
-            if rule.rmrs_used[ruleset_model] and not (
-                rule.rmrs_used_optional and rule.rmrs_used_optional[ruleset_model]
+            if rule.rmds_used[ruleset_model] and not (
+                rule.rmds_used_optional and rule.rmds_used_optional[ruleset_model]
             ):
                 rmds_used[ruleset_model] = True
 
     for ruleset_model in rmds.get_ruleset_model_types():
         if rmds_used[ruleset_model]:
-            rmd_validation = validate_rmr(rmds[ruleset_model], test)
+            rmd_validation = validate_rmd(rmds[ruleset_model], test)
             if rmd_validation["passed"] is not True:
                 invalid_rmds[ruleset_model] = rmd_validation["error"]
 
@@ -194,7 +199,7 @@ def evaluate_rules(
     for ruleset_model in rmds.get_ruleset_model_types():
         # used is None but rmds contain this ruleset model
         if not rmds_used[ruleset_model] and rmds.__getitem__(ruleset_model):
-            rmd_validation = validate_rmr(rmds[ruleset_model], test)
+            rmd_validation = validate_rmd(rmds[ruleset_model], test)
             if rmd_validation["passed"] is not True:
                 invalid_rmds[ruleset_model] = rmd_validation["error"]
 
@@ -203,20 +208,39 @@ def evaluate_rules(
         f"Optional RPDs provided are invalid. See error messages in terminal.",
     )
     # Evaluate the rules if all the used rmrs are valid
-    # Replace the numbers that have schema units in the RMRs with the
+    # Replace the numbers that have schema units in the RMDs with the
     # appropriate pint quantities
     # TODO: quantitization should happen right after schema validation and
     # before other validations
     copied_rmds = get_rmd_instance()
     for rule_model in copied_rmds.get_ruleset_model_types():
         if rmds[rule_model]:
-            copied_rmds[rule_model] = quantify_rmr(rmds.__getitem__(rule_model))
+            copied_rmds[rule_model] = quantify_rmd(rmds.__getitem__(rule_model))
 
+    total_num_rules = len(rules_list)
+    if total_num_rules < 10:
+        step = 1
+    elif total_num_rules < 20:
+        step = total_num_rules // 10 + 1
+    else:
+        step = round(total_num_rules * 0.05)
+    counting_steps = list(range(0, total_num_rules, step))
+    if counting_steps[-1] < total_num_rules:
+        # ensure to add the 100% report
+        counting_steps.append(total_num_rules)
+
+    # counter starts at 1
+    rule_counter = 0
     # Evaluate the rules
     for rule in rules_list:
         print(f"Processing Rule {rule.id}")
         outcome = rule.evaluate(copied_rmds)
         outcomes.append(outcome)
+        rule_counter += 1
+        if rule_counter in counting_steps:
+            print(
+                f"Project Evaluation Session ID: #{session_id}# => Compliance evaluation progress: {round(rule_counter / total_num_rules * 100)}%"
+            )
 
     return {
         "invalid_rmrs": invalid_rmds,
