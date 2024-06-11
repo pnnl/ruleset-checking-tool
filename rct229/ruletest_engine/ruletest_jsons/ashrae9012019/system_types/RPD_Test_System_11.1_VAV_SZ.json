@@ -1,0 +1,168 @@
+{
+    "id": "ASHRAE229 1",
+    "ruleset_model_descriptions": [
+        {
+            "id": "RMD 1",
+            "buildings": [
+                {
+                    "id": "Building 1",
+                    "building_open_schedule": "Required Building Schedule 1",
+                    "building_segments": [
+                        {
+                            "id": "Building Segment 1",
+                            "zones": [
+                                {
+                                    "id": "Thermal Zone 1",
+                                    "design_thermostat_cooling_setpoint": 24,
+                                    "design_thermostat_heating_setpoint": 21,
+                                    "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                    "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                    "air_distribution_effectiveness": 0.8,
+                                    "terminals": [
+                                        {
+                                            "id": "VAV Air Terminal 1",
+                                            "is_supply_ducted": true,
+                                            "type": "VARIABLE_AIR_VOLUME",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System 11",
+                                            "primary_airflow": 943.9,
+                                            "supply_design_heating_setpoint_temperature": 32.2,
+                                            "supply_design_cooling_setpoint_temperature": 12.8,
+                                            "minimum_airflow": 141.6,
+                                            "minimum_outdoor_airflow": 94.4
+                                        }
+                                    ]
+                                }
+                            ],
+                            "heating_ventilating_air_conditioning_systems": [
+                                {
+                                    "id": "System 11",
+                                    "cooling_system": {
+                                        "id": "CHW Coil 1",
+                                        "type": "FLUID_LOOP",
+                                        "chilled_water_loop": "Secondary CHW Loop 1",
+                                        "design_sensible_cool_capacity": 11723,
+                                        "rated_total_cool_capacity": 17584,
+                                        "is_sized_based_on_design_day": false
+                                    },
+                                    "heating_system": {
+                                        "id": "Heating Coil 1",
+                                        "type": "ELECTRIC_RESISTANCE",
+                                        "design_capacity": 17500,
+                                        "rated_capacity": 17584,
+                                        "efficiency_metric_values": [1],
+                                        "efficiency_metric_types": ["THERMAL_EFFICIENCY"]
+                                    },
+                                    "fan_system": {
+                                        "id": "VAV Fan System 1",
+                                        "fan_control": "VARIABLE_SPEED_DRIVE",
+                                        "operation_during_occupied": "CONTINUOUS",
+                                        "operation_during_unoccupied": "KEEP_OFF",
+                                        "supply_fans": [
+                                            {
+                                                "id": "Supply Fan 1",
+                                                "design_airflow": 943.9,
+                                                "is_airflow_sized_based_on_design_day": false,
+                                                "specification_method": "SIMPLE",
+                                                "design_electric_power": 600,
+                                                "output_validation_points": [
+                                                    {
+                                                        "airflow": 0,
+                                                        "result": 0
+                                                    },
+                                                    {
+                                                        "airflow": 943.9,
+                                                        "result": 600
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "chillers": [
+                {
+                    "id": "Chiller 1",
+                    "cooling_loop": "Chiller Loop 1",
+                    "is_chilled_water_pump_interlocked": false,
+                    "compressor_type": "SCREW",
+                    "energy_source_type": "ELECTRICITY",
+                    "rated_capacity": 85000,
+                    "design_capacity": 85000,
+                    "minimum_load_ratio": 0.25,
+                    "rated_entering_condenser_temperature": 29.4,
+                    "rated_leaving_evaporator_temperature": 10,
+                    "part_load_efficiency": 0.5,
+                    "part_load_efficiency_metric": "NONSTANDARD_PART_LOAD_VALUE",
+                    "capacity_validation_points": [
+                        {
+                            "chilled_water_supply_temperature": 10,
+                            "condenser_temperature": 24,
+                            "result": 80000
+                        },
+                        {
+                            "chilled_water_supply_temperature": 10,
+                            "condenser_temperature": 29.4,
+                            "result": 85000
+                        }
+                    ],
+                    "power_validation_points": [
+                        {
+                            "chilled_water_supply_temperature": 10,
+                            "condenser_temperature": 29.4,
+                            "load": 0,
+                            "result": 0
+                        },
+                        {
+                            "chilled_water_supply_temperature": 10,
+                            "condenser_temperature": 29.4,
+                            "load": 85000,
+                            "result": 85000
+                        }
+                    ]
+                }
+            ],
+            "heat_rejections": [
+                {
+                    "id": "Air Cooled Condenser 1",
+                    "type": "AIR_COOLED_CONDENSER",
+                    "fan_speed_control": "TWO_SPEED"
+                }
+            ],
+            "pumps": [
+                {
+                    "id": "Chiller Pump 1",
+                    "loop_or_piping": "Chiller Loop 1",
+                    "speed_control": "FIXED_SPEED",
+                    "specification_method": "SIMPLE",
+                    "design_electric_power": 1320,
+                    "design_flow": 3.79,
+                    "is_flow_sized_based_on_design_day": false
+                }
+            ],
+            "fluid_loops": [
+                {
+                    "id": "Chiller Loop 1",
+                    "type": "COOLING",
+                    "pump_power_per_flow_rate": 349,
+                    "cooling_or_condensing_design_and_control": {
+                        "id": "Primary CHW Design and Control",
+                        "design_supply_temperature": 6.7,
+                        "design_return_temperature": 12.8,
+                        "outdoor_high_for_loop_supply_reset_temperature": 26.7,
+                        "outdoor_low_for_loop_supply_reset_temperature": 15.6,
+                        "loop_supply_temperature_at_outdoor_high": 6.7,
+                        "loop_supply_temperature_at_outdoor_low": 12.2,
+                        "is_sized_using_coincident_load": true,
+                        "operation": "CONTINUOUS",
+                        "flow_control": "FIXED_FLOW",
+                        "temperature_reset_type": "OUTSIDE_AIR_RESET"
+                    }
+                }
+            ]
+        }
+    ]
+}
