@@ -3,11 +3,11 @@
 
 **Rule ID:** 5-29  
 **Rule Description:** The  baseline roof surfaces shall be modeled using a thermal emittance of 0.9.  
-**Rule Assertion:** B-RMR SurfaceOpticalProperties:thermal_emittance = 0.9  
+**Rule Assertion:** B-RMD SurfaceOpticalProperties:thermal_emittance = 0.9  
 **Appendix G Section:** Section G3.1-5(f) Building Envelope Modeling Requirements for the Baseline building  
 **Appendix G Section Reference:** None  
 
-**Applicability:** All required data elements exist for B_RMR  
+**Applicability:** All required data elements exist for B_RMD  
 **Applicability Checks:**  None  
 
 **Manual Check:** None  
@@ -20,9 +20,9 @@
 
 ## Rule Logic:  
 
-- Get surface conditioning category dictionary for B_RMR: ```scc_dictionary_b = get_surface_conditioning_category(B_RMR)```  
+- Get surface conditioning category dictionary for B_RMD: ```scc_dictionary_b = get_surface_conditioning_category(B_RMD)```  
 
-- For each building segment in the Baseline model: `for building_segment_b in B_RMR.building.building_segments:`
+- For each building segment in the Baseline model: `for building_segment_b in B_RMD.building.building_segments:`
 
   - For each zone_b in building_segment_b: `for zone_b in building_segments.zones:`
 

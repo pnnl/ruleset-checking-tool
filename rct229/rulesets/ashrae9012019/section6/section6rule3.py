@@ -1,6 +1,6 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import PROPOSED
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_building_segment_lighting_status_type_dict import (
     LightingStatusType,
@@ -14,8 +14,8 @@ from rct229.utils.std_comparisons import std_equal
 OFFICE_OPEN_PLAN = SchemaEnums.schema_enums[
     "LightingSpaceOptions2019ASHRAE901TG37"
 ].OFFICE_OPEN_PLAN
-FAIL_MSG = "Lighting exists or is submitted with design documents. Lighting power density in P_RMR does not match U_RMR."
-MANUAL_CHECK_REQUIRED_MSG = "Lighting is not yet designed, or lighting is as-designed or as-existing but matches Table 9.5.1. Lighting power density in P_RMR does not match U_RMR."
+FAIL_MSG = "Lighting exists or is submitted with design documents. Lighting power density in P_RMD does not match U_RMD."
+MANUAL_CHECK_REQUIRED_MSG = "Lighting is not yet designed, or lighting is as-designed or as-existing but matches Table 9.5.1. Lighting power density in P_RMD does not match U_RMD."
 
 
 class Section6Rule3(RuleDefinitionListIndexedBase):
@@ -23,11 +23,11 @@ class Section6Rule3(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section6Rule3, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=True, BASELINE_0=False, PROPOSED=True
             ),
             each_rule=Section6Rule3.BuildingSegmentRule(),
-            index_rmr=PROPOSED,
+            index_rmd=PROPOSED,
             id="6-3",
             description="Where a complete lighting system exists, the actual lighting power for each building_segment shall be used in the model. Where a lighting system has been designed and submitted with design documents, lighting power shall be determined in accordance with Sections 9.1.3 and 9.1.4. Where lighting neither exists nor is submitted with design documents, lighting shall comply with but not exceed the requirements of Section 9. Lighting power shall be determined in accordance with the Building Area Method (Section 9.5.1).",
             ruleset_section_title="Lighting",
@@ -39,11 +39,11 @@ class Section6Rule3(RuleDefinitionListIndexedBase):
     class BuildingSegmentRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section6Rule3.BuildingSegmentRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_description(
                     USER=True, BASELINE_0=False, PROPOSED=True
                 ),
                 each_rule=Section6Rule3.BuildingSegmentRule.SpaceRule(),
-                index_rmr=PROPOSED,
+                index_rmd=PROPOSED,
                 list_path="zones[*].spaces[*]",
             )
 
@@ -60,7 +60,7 @@ class Section6Rule3(RuleDefinitionListIndexedBase):
                 super(Section6Rule3.BuildingSegmentRule.SpaceRule, self,).__init__(
                     fail_msg=FAIL_MSG,
                     manual_check_required_msg=MANUAL_CHECK_REQUIRED_MSG,
-                    rmrs_used=produce_ruleset_model_instance(
+                    rmds_used=produce_ruleset_model_description(
                         USER=True, BASELINE_0=False, PROPOSED=True
                     ),
                 )

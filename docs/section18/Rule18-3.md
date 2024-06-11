@@ -23,7 +23,7 @@
 
 **Applicability Check:** 
 - check if any of the target baseline system types from the function `get_zone_target_baseline_system` have a SYSTEM_ORIGIN of "G3_1_1d" - this indicates that there is greater than 15,000 cfm of laboratory exhaust in the building, and that some of it comes from air handlers
-- get the target baseline systems: `target_baseline_systems = get_zone_target_baseline_system(P_RMI,B_RMI)`
+- get the target baseline systems: `target_baseline_systems = get_zone_target_baseline_system(P_RMD,B_RMD)`
 - look through all of the target baseline systems, and determine if any has a SYSTEM_ORIGIN of "G3_1_1d": `if any(zone["SYSTEM_ORIGIN"] == "G3_1_1d" for zone in target_baseline_systems):`
       - in this case, the building might have greater than 15,000cfm lab exhaust, set result to APPLICABLE: `result = APPLICABLE`
 - otherwise, it's not applicable: `result = NOT_APPLICABLE`

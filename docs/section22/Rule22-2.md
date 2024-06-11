@@ -30,7 +30,7 @@
 
 ## Rule Logic:  
 
-- For each boiler in B_RMI, save boiler to loop boiler dictionary: `loop_boiler_dict = find_all(B-RMI)`
+- For each boiler in B_RMI, save boiler to loop boiler dictionary: `loop_boiler_dict = find_all(B-RMD)`
 
 - For each fluid loop in B_RMR: `for fluid_loop_b in B_RMR.ASHRAE229.fluid_loops:`
 

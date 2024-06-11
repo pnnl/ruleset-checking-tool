@@ -1,6 +1,6 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import PROPOSED
 from rct229.utils.jsonpath_utils import find_all
 
@@ -10,24 +10,24 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section6Rule1, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=True, BASELINE_0=False, PROPOSED=True
             ),
             each_rule=Section6Rule1.BuildingRule(),
-            index_rmr=PROPOSED,
+            index_rmd=PROPOSED,
             id="6-1",
-            description="For the proposed building, each space has the same lighting power as the corresponding space in the U-RMR",
-            rmr_context="ruleset_model_descriptions/0/buildings",
+            description="For the proposed building, each space has the same lighting power as the corresponding space in the U-RMD",
+            rmd_context="ruleset_model_descriptions/0/buildings",
         )
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section6Rule1.BuildingRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_description(
                     USER=True, BASELINE_0=False, PROPOSED=True
                 ),
                 each_rule=Section6Rule1.BuildingRule.SpaceRule(),
-                index_rmr=PROPOSED,
+                index_rmd=PROPOSED,
                 list_path="$..spaces[*]",  # All spaces inside the building
             )
 
@@ -38,7 +38,7 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
                         "$": ["interior_lighting", "floor_area"],
                         "interior_lighting[*]": ["power_per_area"],
                     },
-                    rmrs_used=produce_ruleset_model_instance(
+                    rmds_used=produce_ruleset_model_description(
                         USER=True, BASELINE_0=False, PROPOSED=True
                     ),
                 )

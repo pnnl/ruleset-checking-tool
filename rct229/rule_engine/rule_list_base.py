@@ -1,5 +1,4 @@
 from jsonpointer import resolve_pointer
-
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.utils.json_utils import slash_prefix_guarantee
 
@@ -11,15 +10,15 @@ class RuleDefinitionListBase(RuleDefinitionBase):
 
     def __init__(
         self,
-        rmrs_used,
+        rmds_used,
         each_rule,
-        rmrs_used_optional=None,
+        rmds_used_optional=None,
         id=None,
         description=None,
         ruleset_section_title=None,
         standard_section=None,
         is_primary_rule=None,
-        rmr_context="",
+        rmd_context="",
         required_fields=None,
         manual_check_required_msg="Manual Check Required",
         not_applicable_msg="Not Applicable",
@@ -30,11 +29,11 @@ class RuleDefinitionListBase(RuleDefinitionBase):
         self.each_rule = each_rule
         self.data_items = data_items
         super(RuleDefinitionListBase, self).__init__(
-            rmrs_used=rmrs_used,
-            rmrs_used_optional=rmrs_used_optional,
+            rmds_used=rmds_used,
+            rmds_used_optional=rmds_used_optional,
             id=id,
             description=description,
-            rmr_context=rmr_context,
+            rmd_context=rmd_context,
             required_fields=required_fields,
             manual_check_required_msg=manual_check_required_msg,
             not_applicable_msg=not_applicable_msg,
@@ -48,7 +47,7 @@ class RuleDefinitionListBase(RuleDefinitionBase):
 
         For a list-type rule, we need to create a list of contexts to pass on
         to the sub-rule. Often, we need to match up the entries in the
-        RMR lists by name or id and then apply the sub-rule to each trio of entries.
+        RMD lists by name or id and then apply the sub-rule to each trio of entries.
         This method is responsible for creating the list of trios.
 
         This method must be overridden.
@@ -56,7 +55,7 @@ class RuleDefinitionListBase(RuleDefinitionBase):
         Parameters
         ----------
         context : RuleSetModels
-            Object containing the contexts for RMRs required by model type schema
+            Object containing the contexts for RMDs required by model type schema
         data : An optional data object.
 
         Returns
@@ -144,7 +143,7 @@ class RuleDefinitionListBase(RuleDefinitionBase):
         Parameters
         ----------
         context : RuleSetModels
-            Object containing the contexts for the user, baseline, and proposed RMRs
+            Object containing the contexts for the user, baseline, and proposed RMDs
         data : dict
             An optional dictionary. New data, based on data_pointers, data_paths, or
             create_data() will be merged into this data dictionary and passed to each

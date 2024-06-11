@@ -1,6 +1,6 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import PROPOSED
 from rct229.rulesets.ashrae9012019.data_fns.table_9_6_1_fns import table_9_6_1_lookup
 from rct229.schema.config import ureg
@@ -27,11 +27,11 @@ class Section6Rule2(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section6Rule2, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=True, BASELINE_0=False, PROPOSED=True
             ),
             each_rule=Section6Rule2.SpaceRule(),
-            index_rmr=PROPOSED,
+            index_rmd=PROPOSED,
             id="6-2",
             description="Spaces in proposed building with hardwired lighting, including Hotel/Motel Guest Rooms, Dormitory Living Quarters, Interior Lighting Power >= Table 9.6.1; For Dwelling Units, Interior Lighting Power >= 0.6W/sq.ft.",
             ruleset_section_title="Lighting",
@@ -55,7 +55,7 @@ class Section6Rule2(RuleDefinitionListIndexedBase):
     class SpaceRule(RuleDefinitionBase):
         def __init__(self):
             super(Section6Rule2.SpaceRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_description(
                     USER=True, BASELINE_0=False, PROPOSED=True
                 ),
                 required_fields={

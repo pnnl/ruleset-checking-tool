@@ -1,6 +1,6 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_building_segment_skylight_roof_areas_dict import (
     get_building_segment_skylight_roof_areas_dict,
@@ -16,7 +16,7 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule24, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             required_fields={
@@ -24,7 +24,7 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
                 "weather": ["climate_zone"],
             },
             each_rule=Section5Rule24.BuildingRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="5-24",
             description="If skylight area in the proposed design is 3% or less of the roof surface, the skylight area in baseline shall be equal to that in the proposed design.",
             ruleset_section_title="Envelope",
@@ -37,11 +37,11 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule24.BuildingRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
                 each_rule=Section5Rule24.BuildingRule.BuildingSegmentRule(),
-                index_rmr=BASELINE_0,
+                index_rmd=BASELINE_0,
                 list_path="building_segments[*]",
             )
 
@@ -60,7 +60,7 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
         class BuildingSegmentRule(RuleDefinitionBase):
             def __init__(self):
                 super(Section5Rule24.BuildingRule.BuildingSegmentRule, self).__init__(
-                    rmrs_used=produce_ruleset_model_instance(
+                    rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
                 )

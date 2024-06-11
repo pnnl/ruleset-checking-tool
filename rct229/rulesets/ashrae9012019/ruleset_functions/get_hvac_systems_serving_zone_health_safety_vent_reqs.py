@@ -35,15 +35,15 @@ VENTILATION_SPACE_TYPES_MATCH_REQ = [
 ]
 
 
-def get_hvac_systems_serving_zone_health_safety_vent_reqs(rmi):
+def get_hvac_systems_serving_zone_health_safety_vent_reqs(rmd: dict) -> list[str]:
     """
     Get the list of HVAC systems that are likely to serve zones that have health and safety mandated minimum
     ventilation requirements during unoccupied hours.
 
     Parameters
     ----------
-    rmi dict
-        A dictionary representing a ruleset model instance as defined by the ASHRAE229 schema.
+    rmd dict
+        A dictionary representing a ruleset model description as defined by the ASHRAE229 schema.
 
         To determine if any of the zones have spaces with lighting spaces types that are likely to have health and
         safety mandated minimum ventilation requirements during unoccupied hours and to create a list of the hvac
@@ -57,7 +57,7 @@ def get_hvac_systems_serving_zone_health_safety_vent_reqs(rmi):
     """
     applicable_zone_ids_list = [
         zone["id"]
-        for zone in find_all("$.buildings[*].building_segments[*].zones[*]", rmi)
+        for zone in find_all("$.buildings[*].building_segments[*].zones[*]", rmd)
         if any(
             [
                 space.get("lighting_space_type") in LIGHTING_SPACE_TYPES_MATCH_REQ
@@ -69,7 +69,7 @@ def get_hvac_systems_serving_zone_health_safety_vent_reqs(rmi):
     ]
 
     hvac_lists = [
-        get_list_hvac_systems_associated_with_zone(rmi, zone_id)
+        get_list_hvac_systems_associated_with_zone(rmd, zone_id)
         for zone_id in applicable_zone_ids_list
     ]
     # len(hvac_lists) > 0 This does not guarantee the result won't be an empty list

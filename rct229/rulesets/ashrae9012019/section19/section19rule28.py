@@ -1,6 +1,6 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import PROPOSED
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_systems_primarily_serving_comp_room import (
     get_hvac_systems_primarily_serving_comp_room,
@@ -18,11 +18,11 @@ class Section19Rule28(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section19Rule28, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=False, PROPOSED=True
             ),
             each_rule=Section19Rule28.HVACRule(),
-            index_rmr=PROPOSED,
+            index_rmd=PROPOSED,
             id="19-28",
             description="chedules for HVAC fans that provide outdoor air for ventilation in the proposed design shall be cycled ON and OFF to meet heating and cooling loads during unoccupied hours excluding HVAC systems that meet Table G3.1-4 Schedules for the proposed building exceptions #2 and #3."
             "#2 HVAC fans shall remain on during occupied and unoccupied hours in spaces that have health- and safety mandated minimum ventilation requirements during unoccupied hours."
@@ -30,17 +30,17 @@ class Section19Rule28(RuleDefinitionListIndexedBase):
             ruleset_section_title="HVAC - General",
             standard_section="Table G3.1-4 Schedules for the proposed building excluding exceptions #s 2 and 3 and Section G3.1.2.4.",
             is_primary_rule=True,
-            rmr_context="ruleset_model_descriptions/0",
+            rmd_context="ruleset_model_descriptions/0",
             list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
         )
 
     def create_data(self, context, data):
-        rmi_p = context.PROPOSED
+        rmd_p = context.PROPOSED
 
         inapplicable_hvac_sys_list_p = list(
             set(
-                get_hvac_systems_primarily_serving_comp_room(rmi_p)
-                + get_hvac_systems_serving_zone_health_safety_vent_reqs(rmi_p)
+                get_hvac_systems_primarily_serving_comp_room(rmd_p)
+                + get_hvac_systems_serving_zone_health_safety_vent_reqs(rmd_p)
             )
         )
 
@@ -49,7 +49,7 @@ class Section19Rule28(RuleDefinitionListIndexedBase):
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
             super(Section19Rule28.HVACRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=False, PROPOSED=True
                 ),
                 required_fields={

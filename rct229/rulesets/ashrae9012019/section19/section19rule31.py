@@ -1,6 +1,6 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import PROPOSED
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_systems_primarily_serving_comp_room import (
     get_hvac_systems_primarily_serving_comp_room,
@@ -16,25 +16,25 @@ class Section19Rule31(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section19Rule31, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=False, PROPOSED=True
             ),
             each_rule=Section19Rule31.HVACRule(),
-            index_rmr=PROPOSED,
+            index_rmd=PROPOSED,
             id="19-31",
             description="HVAC fans in the proposed design model shall remain on during unoccupied hours in systems primarily serving computer rooms.",
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1-4 Schedules exception #3 for the proposed building",
             is_primary_rule=True,
-            rmr_context="ruleset_model_descriptions/0",
+            rmd_context="ruleset_model_descriptions/0",
             list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
         )
 
     def create_data(self, context, data):
-        rmi_p = context.PROPOSED
+        rmd_p = context.PROPOSED
 
         hvac_systems_primarily_serving_comp_room_p = (
-            get_hvac_systems_primarily_serving_comp_room(rmi_p)
+            get_hvac_systems_primarily_serving_comp_room(rmd_p)
         )
 
         return {
@@ -44,7 +44,7 @@ class Section19Rule31(RuleDefinitionListIndexedBase):
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
             super(Section19Rule31.HVACRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=False, PROPOSED=True
                 ),
                 required_fields={

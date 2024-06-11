@@ -57,9 +57,9 @@ _UNIT_CONVENTIONS = {
         "temperature": "C",
         "temperature_difference": "K",
         "cooling_efficiency": "W/W",
-        "power_per_volumetric_flow_rate": "W-s/L",
-        "volumetric_flow_rate_per_power": "s/(L*W)",
-        "power_per_flow_rate": "W-s/L",
+        "liquid_flow_rate_per_power": "L/(s*W)",
+        "power_per_air_flow_rate": "W-s/L",
+        "power_per_liquid_flow_rate": "W-s/L",
         "air_flow_rate": "L/s",
     },
     UNIT_SYSTEM.IP: {
@@ -76,9 +76,9 @@ _UNIT_CONVENTIONS = {
         "temperature": "F",
         "temperature_difference": "R",
         "cooling_efficiency": "kW/ton",
-        "power_per_volumetric_flow_rate": "W/gpm",
-        "volumetric_flow_rate_per_power": "gpm/hp",
-        "power_per_flow_rate": "W/gpm",
+        "liquid_flow_rate_per_power": "gpm/hp",
+        "power_per_air_flow_rate": "W/cfm",
+        "power_per_liquid_flow_rate": "W/gpm",
         "air_flow_rate": "cfm",
     },
 }
@@ -87,20 +87,20 @@ _UNIT_CONVENTIONS = {
 class ZERO:
     """Class holding zero values for various pint quantities"""
 
-    LENGTH = 0 * ureg("ft")
-    AREA = LENGTH * LENGTH
-    VOLUME = AREA * LENGTH
+    LENGTH: Quantity = 0 * ureg("ft")
+    AREA: Quantity = LENGTH * LENGTH
+    VOLUME: Quantity = AREA * LENGTH
 
-    POWER = 0 * ureg("Btu/hr")
-    THERMAL_CAPACITY = POWER / ureg("ft2")
-    POWER_PER_AREA = THERMAL_CAPACITY
-    POWER_PER_FLOW = 0 * ureg("Btu/hr/cfm")
+    POWER: Quantity = 0 * ureg("Btu/hr")
+    THERMAL_CAPACITY: Quantity = POWER / ureg("ft2")
+    POWER_PER_AREA: Quantity = THERMAL_CAPACITY
+    POWER_PER_FLOW: Quantity = 0 * ureg("Btu/hr/cfm")
 
-    U_FACTOR = ureg("Btu/(hr*ft2*degR)")
-    UA = U_FACTOR * AREA
-    FLOW = VOLUME / ureg("minute")
+    U_FACTOR: Quantity = ureg("Btu/(hr*ft2*degR)")
+    UA: Quantity = U_FACTOR * AREA
+    FLOW: Quantity = VOLUME / ureg("minute")
 
-    TEMPERATURE = 0 * ureg("K")
+    TEMPERATURE: Quantity = 0 * ureg("K")
 
 
 @dataclass(frozen=True)

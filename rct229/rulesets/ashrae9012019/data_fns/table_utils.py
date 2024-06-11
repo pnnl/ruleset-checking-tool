@@ -4,7 +4,7 @@ from rct229.schema.schema_enums import SchemaEnums
 def find_osstd_table_entry(match_field_name_value_pairs, osstd_table):
     """Find a specific entry in an OSSTD table
 
-    This takes advantage of the consistent structure accross all the OSSTD
+    This takes advantage of the consistent structure across all the OSSTD
     JSON files. Each file contains a dictionary with a single key. The value
     associated with that key is a list of dictionaries. This function searches
     through those inner dictionaries to find one that matches all the
@@ -54,6 +54,58 @@ def find_osstd_table_entry(match_field_name_value_pairs, osstd_table):
     assert type(matching_entry) is dict
 
     return matching_entries[0]
+
+
+def find_osstd_table_entries(match_field_name_value_pairs, osstd_table: dict):
+    """Find specific entries in an OSSTD table
+
+    This takes advantage of the consistent structure accross all the OSSTD
+    JSON files. Each file contains a dictionary with a single key. The value
+    associated with that key is a list of dictionaries. This function searches
+    through those inner dictionaries to find all entries that match all the
+    provided match_field_name_value_pairs
+
+    Parameters
+    ----------
+    match_field_name_value_pairs : list of 2-tuples
+        List of (match_field_name, match_field_value) tuples
+    osstd_table : dict
+        The OSSTD table data as loaded from its JSON file
+
+    Returns
+    -------
+    list
+        The matching table entries
+    """
+    assert type(osstd_table) is dict
+
+    keys = list(osstd_table)
+    assert len(keys) == 1
+
+    data_list = osstd_table[keys[0]]
+    assert type(data_list) is list
+
+    matching_entries = list(
+        filter(
+            lambda entry: all(
+                [
+                    entry[match_field_name] == match_field_value
+                    for (
+                        match_field_name,
+                        match_field_value,
+                    ) in match_field_name_value_pairs
+                ]
+            ),
+            data_list,
+        )
+    )
+
+    assert len(matching_entries) > 0, "No entries found in the table"
+
+    for matching_entry in matching_entries:
+        assert type(matching_entry) is dict
+
+    return matching_entries
 
 
 def check_enumeration_to_osstd_match_field_value_map(

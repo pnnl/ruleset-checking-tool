@@ -1,5 +1,5 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_heat_rejection_loops_connected_to_baseline_systems import (
     get_heat_rejection_loops_connected_to_baseline_systems,
 )
@@ -12,7 +12,7 @@ class Section22Rule12(RuleDefinitionBase):
 
     def __init__(self):
         super(Section22Rule12, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             id="22-12",
@@ -20,7 +20,7 @@ class Section22Rule12(RuleDefinitionBase):
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section 22 CHW&CW Loop",
             is_primary_rule=True,
-            rmr_context="ruleset_model_descriptions/0",
+            rmd_context="ruleset_model_descriptions/0",
         )
 
     def is_applicable(self, context, data=None):

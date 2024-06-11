@@ -1,5 +1,4 @@
 from pydash import filter_, flat_map
-
 from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_functions.get_zones_on_same_floor_list import (
     get_zones_on_same_floor_list,
 )
@@ -35,13 +34,13 @@ VESTIBULE_AREA_THRESHOLD = 50 * ureg("ft^2")
 VESTIBULE_AREA_MULTIPLIER_THRESHOLD = 0.2
 
 
-def is_zone_likely_a_vestibule(rmi, zone_id):
+def is_zone_likely_a_vestibule(rmd: dict, zone_id: str) -> bool:
     """
     following the guidelines in ASHRAE that a vestibule is defined as a sapce with at least one exterior door and with a surface area of no more than the greater of 50ft2 or 2% of the total area of the floor.  There is no 100% check for a vestibule, so a space that meets these requirements and also has only 6 surfaces (floor, ceiling and 4 walls) will return False
 
     Parameters
     ----------
-    rmi: dict
+    rmd: dict
     A dictionary representing a RuleModelInstance object as defined by the ASHRAE229 schema
     zone_id: string
     zone id
@@ -51,7 +50,7 @@ def is_zone_likely_a_vestibule(rmi, zone_id):
     boolean, False means NO, True means MAYBE
 
     """
-    zone = find_exactly_one_zone(rmi, zone_id)
+    zone = find_exactly_one_zone(rmd, zone_id)
 
     # The RDS interpretation is:
     # The flag is True when all spaces has either no lighting_space_type data or space.get("lighting_space_type") is in
@@ -85,11 +84,11 @@ def is_zone_likely_a_vestibule(rmi, zone_id):
             ZERO.AREA,
         )
 
-        zone_ids_on_same_floor = get_zones_on_same_floor_list(rmi, zone_id)
+        zone_ids_on_same_floor = get_zones_on_same_floor_list(rmd, zone_id)
         spaces_on_same_floor = flat_map(
             zone_ids_on_same_floor,
             lambda zone_id: find_all(
-                "$.spaces[*]", find_exactly_one_zone(rmi, zone_id)
+                "$.spaces[*]", find_exactly_one_zone(rmd, zone_id)
             ),
         )
 

@@ -1,11 +1,10 @@
 import pytest
-
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_fan_object_electric_power import (
     get_fan_object_electric_power,
 )
 from rct229.schema.config import ureg
-from rct229.schema.schema_utils import quantify_rmr
-from rct229.schema.validate import schema_validate_rmr
+from rct229.schema.schema_utils import quantify_rmd
+from rct229.schema.validate import schema_validate_rmd
 from rct229.utils.assertions import RCTFailureException
 from rct229.utils.jsonpath_utils import find_exactly_one_with_field_value
 
@@ -140,11 +139,11 @@ TEST_RMD = {
 }
 
 
-TEST_RMI = quantify_rmr(TEST_RMD)["ruleset_model_descriptions"][0]
+TEST_RMI = quantify_rmd(TEST_RMD)["ruleset_model_descriptions"][0]
 
 
 def test__TEST_RMD__is_valid():
-    schema_validation_result = schema_validate_rmr(TEST_RMD)
+    schema_validation_result = schema_validate_rmd(TEST_RMD)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"

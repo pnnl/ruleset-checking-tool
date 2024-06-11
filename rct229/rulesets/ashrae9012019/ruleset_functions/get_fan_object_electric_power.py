@@ -1,3 +1,4 @@
+from pint import Quantity
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import assert_, getattr_
 from rct229.utils.pint_utils import ZERO
@@ -5,7 +6,7 @@ from rct229.utils.pint_utils import ZERO
 FAN_SPECIFICATION_METHOD = SchemaEnums.schema_enums["FanSpecificationMethodOptions"]
 
 
-def get_fan_object_electric_power(fan):
+def get_fan_object_electric_power(fan: dict) -> Quantity:
     """
     Get the fan power associated with a fan object.
 
