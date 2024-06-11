@@ -39,7 +39,7 @@
                                     "cooling_system": {
                                         "id": "CHW Coil 1",
                                         "type": "FLUID_LOOP",
-                                        "chilled_water_loop": "Secondary CHW Loop 1",
+                                        "chilled_water_loop": "CHW Loop 1",
                                         "design_sensible_cool_capacity": 11723,
                                         "rated_total_cool_capacity": 17584,
                                         "is_sized_based_on_design_day": false
@@ -50,7 +50,8 @@
                                         "design_capacity": 17500,
                                         "rated_capacity": 17584,
                                         "efficiency_metric_values": [1],
-                                        "efficiency_metric_types": ["THERMAL_EFFICIENCY"]
+                                        "efficiency_metric_types": ["THERMAL_EFFICIENCY"],
+                                        "is_sized_based_on_design_day": false
                                     },
                                     "fan_system": {
                                         "id": "VAV Fan System 1",
@@ -127,8 +128,7 @@
             "heat_rejections": [
                 {
                     "id": "Air Cooled Condenser 1",
-                    "type": "AIR_COOLED_CONDENSER",
-                    "fan_speed_control": "TWO_SPEED"
+                    "type": "AIR_COOLED_CONDENSER"
                 }
             ],
             "pumps": [
