@@ -16,6 +16,8 @@
                                     "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                     "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                     "air_distribution_effectiveness": 0.8,
+                                    "non_mechanical_cooling_fan_airflow": 118,
+                                    "non_mechanical_cooling_fan_power": 90,
                                     "terminals": [
                                         {
                                             "id": "Air Terminal",
@@ -24,9 +26,7 @@
                                             "served_by_heating_ventilating_air_conditioning_system": "System 9",
                                             "primary_airflow": 943.9,
                                             "supply_design_heating_setpoint_temperature": 32.2,
-                                            "minimum_outdoor_airflow": 94.4,
-                                            "non_mechanical_cooling_fan_airflow": 118,
-                                            "non_mechanical_cooling_fan_power": 90
+                                            "minimum_outdoor_airflow": 94.4
                                         }
                                     ],
                                     "zonal_exhaust_fan": {

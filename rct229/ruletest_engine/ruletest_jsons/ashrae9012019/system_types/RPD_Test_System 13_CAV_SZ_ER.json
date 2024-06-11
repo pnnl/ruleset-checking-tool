@@ -112,12 +112,6 @@
                     ]
                 }
             ],
-            "heat_rejections": [
-                {
-                    "id": "Air Cooled Condenser 1",
-                    "type": "AIR_COOLED_CONDENSER"
-                }
-            ],
             "pumps": [
                 {
                     "id": "Chiller Pump 1",

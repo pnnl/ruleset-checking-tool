@@ -226,7 +226,7 @@
                     "rated_entering_condenser_temperature": 13.3333,
                     "rated_leaving_evaporator_temperature": 6.7,
                     "part_load_efficiency": 0.5,
-                    "part_load_efficiency_metric": "IPLV",
+                    "part_load_efficiency_metric": "INTEGRATED_PART_LOAD_VALUE",
                     "capacity_validation_points": [
                         {
                             "chilled_water_supply_temperature": 10,
@@ -356,7 +356,7 @@
                         "is_sized_using_coincident_load": true,
                         "operation": "CONTINUOUS",
                         "flow_control": "FIXED_FLOW",
-                        "temperature_reset_type": "OUTDOOR_AIR_RESET"
+                        "temperature_reset_type": "OUTSIDE_AIR_RESET"
                     },
                     "child_loops": [
                         {

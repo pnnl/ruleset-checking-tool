@@ -36,7 +36,7 @@
                                     "cooling_system": {
                                         "id": "CHW Coil 1",
                                         "type": "FLUID_LOOP",
-                                        "chilled_water_loop": "Secondary CHW Loop 1",
+                                        "chilled_water_loop": "CHW Loop 1",
                                         "design_sensible_cool_capacity": 11723,
                                         "rated_total_cool_capacity": 17584,
                                         "is_sized_based_on_design_day": false
@@ -152,7 +152,7 @@
                     "design_wetbulb_temperature": 25,
                     "leaving_water_setpoint_temperature": 21.1,
                     "rated_water_flowrate": 4.73,
-                    "fan_speed_control": "TWO-SPEED"
+                    "fan_speed_control": "TWO_SPEED"
                 }
             ],
             "pumps": [
