@@ -45,9 +45,13 @@ class Section16Rule2(RuleDefinitionListIndexedBase):
             )
 
         def is_applicable(self, context, data=None):
+            rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
 
-            return find_all("$.buildings[*].elevators[*]", rmd_p)
+            elevators_list_b = find_all("$.buildings[*].elevators[*]", rmd_b)
+            elevators_list_p = find_all("$.buildings[*].elevators[*]", rmd_p)
+
+            return elevators_list_p and elevators_list_b
 
         def create_data(self, context, data):
             rmd_b = context.BASELINE_0
