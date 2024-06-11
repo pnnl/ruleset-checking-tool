@@ -136,7 +136,7 @@
             "pumps": [
                 {
                     "id": "Chiller Pump 1",
-                    "loop_or_piping": "Chiller Loop 1",
+                    "loop_or_piping": "CHW Loop 1",
                     "specification_method": "SIMPLE",
                     "design_electric_power": 1320,
                     "speed_control": "FIXED_SPEED",
