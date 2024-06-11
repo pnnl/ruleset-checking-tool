@@ -104,6 +104,16 @@ class Section19Rule12(RuleDefinitionListIndexedBase):
             air_economizer_type_b = calc_vals["air_economizer_type_b"]
 
             return (
+                req_high_limit_temp.to(ureg.kelvin) == high_limit_temp_b.to(ureg.kelvin)
+                and air_economizer_type_b == AIR_ECONOMIZER.TEMPERATURE
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            req_high_limit_temp = calc_vals["req_high_limit_temp"]
+            high_limit_temp_b = calc_vals["high_limit_temp_b"]
+            air_economizer_type_b = calc_vals["air_economizer_type_b"]
+
+            return (
                 std_equal(
                     req_high_limit_temp.to(ureg.kelvin),
                     high_limit_temp_b.to(ureg.kelvin),

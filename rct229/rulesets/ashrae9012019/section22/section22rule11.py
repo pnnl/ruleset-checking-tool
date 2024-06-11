@@ -129,6 +129,14 @@ class Section22Rule11(RuleDefinitionListIndexedBase):
                 ]
                 req_pump_flow_rate = calc_vals["req_pump_flow_rate"]
 
+                return secondary_loop_pump_power_per_flow_rate == req_pump_flow_rate
+
+            def is_tolerance_fail(self, context, calc_vals=None, data=None):
+                secondary_loop_pump_power_per_flow_rate = calc_vals[
+                    "secondary_loop_pump_power_per_flow_rate"
+                ]
+                req_pump_flow_rate = calc_vals["req_pump_flow_rate"]
+
                 return std_equal(
                     secondary_loop_pump_power_per_flow_rate, req_pump_flow_rate
                 )

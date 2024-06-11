@@ -112,6 +112,16 @@ class Section23Rule6(RuleDefinitionListIndexedBase):
             primary_airflow_b = calc_vals["primary_airflow_b"]
             design_electric_power_b = calc_vals["design_electric_power_b"]
 
+            return (
+                design_airflow_b == 0.5 * primary_airflow_b
+                and design_electric_power_b / design_airflow_b == 0.35 * ureg("W/cfm")
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            design_airflow_b = calc_vals["design_airflow_b"]
+            primary_airflow_b = calc_vals["primary_airflow_b"]
+            design_electric_power_b = calc_vals["design_electric_power_b"]
+
             return std_equal(design_airflow_b, 0.5 * primary_airflow_b) and std_equal(
                 design_electric_power_b / design_airflow_b, 0.35 * ureg("W/cfm")
             )

@@ -281,6 +281,21 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
             return (
                 not zone_hvac_has_non_mech_cooling_p
                 and not zones_served_by_hvac_has_non_mech_cooling_bool_p
+                and REQ_FAN_POWER_FLOW_RATIO == fan_power_per_flow_b
+            ) or (fan_power_per_flow_b < REQ_FAN_POWER_FLOW_RATIO)
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            zones_served_by_hvac_has_non_mech_cooling_bool_p = calc_vals[
+                "zones_served_by_hvac_has_non_mech_cooling_bool_p"
+            ]
+            zone_hvac_has_non_mech_cooling_p = calc_vals[
+                "zone_hvac_has_non_mech_cooling_p"
+            ]
+            fan_power_per_flow_b = calc_vals["fan_power_per_flow_b"]
+
+            return (
+                not zone_hvac_has_non_mech_cooling_p
+                and not zones_served_by_hvac_has_non_mech_cooling_bool_p
                 and std_equal(REQ_FAN_POWER_FLOW_RATIO, fan_power_per_flow_b)
             ) or (fan_power_per_flow_b < REQ_FAN_POWER_FLOW_RATIO)
 

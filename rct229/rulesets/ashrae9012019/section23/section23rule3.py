@@ -113,6 +113,15 @@ class Section23Rule3(RuleDefinitionListIndexedBase):
             primary_airflow_b = calc_vals["primary_airflow_b"]
             minimum_outdoor_airflow_b = calc_vals["minimum_outdoor_airflow_b"]
 
+            return minimum_airflow_b == max(
+                primary_airflow_b * 0.3, minimum_outdoor_airflow_b
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            minimum_airflow_b = calc_vals["minimum_airflow_b"]
+            primary_airflow_b = calc_vals["primary_airflow_b"]
+            minimum_outdoor_airflow_b = calc_vals["minimum_outdoor_airflow_b"]
+
             return std_equal(
                 minimum_airflow_b,
                 max(primary_airflow_b * 0.3, minimum_outdoor_airflow_b),

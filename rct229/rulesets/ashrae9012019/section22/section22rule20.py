@@ -108,6 +108,15 @@ class Section22Rule20(RuleDefinitionListIndexedBase):
             leaving_water_setpoint_temperature_b = calc_vals[
                 "leaving_water_setpoint_temperature_b"
             ]
+            return tower_leaving_temperature_b.to(
+                ureg.kelvin
+            ) == leaving_water_setpoint_temperature_b.to(ureg.kelvin)
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            tower_leaving_temperature_b = calc_vals["tower_leaving_temperature_b"]
+            leaving_water_setpoint_temperature_b = calc_vals[
+                "leaving_water_setpoint_temperature_b"
+            ]
             return std_equal(
                 tower_leaving_temperature_b.to(ureg.kelvin),
                 leaving_water_setpoint_temperature_b.to(ureg.kelvin),
