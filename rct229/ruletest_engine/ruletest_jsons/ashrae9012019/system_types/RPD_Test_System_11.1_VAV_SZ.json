@@ -90,8 +90,7 @@
                     "is_chilled_water_pump_interlocked": false,
                     "compressor_type": "SCREW",
                     "energy_source_type": "ELECTRICITY",
-                    "rated_capacity": 85000,
-                    "design_capacity": 85000,
+                    "design_capacity": 87921,
                     "minimum_load_ratio": 0.25,
                     "rated_entering_condenser_temperature": 29.4,
                     "rated_leaving_evaporator_temperature": 10,
@@ -136,7 +135,7 @@
                 {
                     "id": "Chiller Pump 1",
                     "loop_or_piping": "Chiller Loop 1",
-                    "speed_control": "FIXED_SPEED",
+                    "speed_control": "VARIABLE_SPEED",
                     "specification_method": "SIMPLE",
                     "design_electric_power": 1320,
                     "design_flow": 3.79,
@@ -158,7 +157,7 @@
                         "loop_supply_temperature_at_outdoor_low": 12.2,
                         "is_sized_using_coincident_load": true,
                         "operation": "CONTINUOUS",
-                        "flow_control": "FIXED_FLOW",
+                        "flow_control": "VARIABLE_FLOW",
                         "temperature_reset_type": "OUTSIDE_AIR_RESET"
                     }
                 }
