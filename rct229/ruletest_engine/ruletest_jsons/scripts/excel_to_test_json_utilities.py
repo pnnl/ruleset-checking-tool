@@ -1064,6 +1064,7 @@ def add_plant_loop_equipment(json_dict, system_rmd):
         "pumps",
         "fluid_loops",
         "heat_rejections",
+        "external_fluid_sources",
     ]
 
     sys_ruleset_model_instance = system_rmd["ruleset_model_descriptions"][0]
