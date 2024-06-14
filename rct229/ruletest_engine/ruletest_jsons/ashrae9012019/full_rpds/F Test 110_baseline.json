@@ -44,7 +44,7 @@
                                         "fan_control": "CONSTANT",
                                         "operation_during_occupied": "CONTINUOUS",
                                         "operation_during_unoccupied": "CONTINUOUS",
-                                        "minimum_outdoor_airflow": 472.0,
+                                        "minimum_outdoor_airflow": 283.2,
                                         "maximum_outdoor_airflow": 943.9,
                                         "supply_fans": [
                                             {
@@ -90,7 +90,7 @@
                                         "fan_control": "CONSTANT",
                                         "operation_during_occupied": "CONTINUOUS",
                                         "operation_during_unoccupied": "CONTINUOUS",
-                                        "minimum_outdoor_airflow": 472.0,
+                                        "minimum_outdoor_airflow": 283.2,
                                         "maximum_outdoor_airflow": 943.9,
                                         "supply_fans": [
                                             {
@@ -136,7 +136,7 @@
                                         "fan_control": "CONSTANT",
                                         "operation_during_occupied": "CONTINUOUS",
                                         "operation_during_unoccupied": "CONTINUOUS",
-                                        "minimum_outdoor_airflow": 472.0,
+                                        "minimum_outdoor_airflow": 283.2,
                                         "maximum_outdoor_airflow": 943.9,
                                         "supply_fans": [
                                             {
@@ -182,7 +182,7 @@
                                         "fan_control": "CONSTANT",
                                         "operation_during_occupied": "CONTINUOUS",
                                         "operation_during_unoccupied": "CONTINUOUS",
-                                        "minimum_outdoor_airflow": 472.0,
+                                        "minimum_outdoor_airflow": 283.2,
                                         "maximum_outdoor_airflow": 943.9,
                                         "supply_fans": [
                                             {
@@ -228,7 +228,7 @@
                                         "fan_control": "CONSTANT",
                                         "operation_during_occupied": "CONTINUOUS",
                                         "operation_during_unoccupied": "CONTINUOUS",
-                                        "minimum_outdoor_airflow": 472.0,
+                                        "minimum_outdoor_airflow": 283.2,
                                         "maximum_outdoor_airflow": 943.9,
                                         "supply_fans": [
                                             {
@@ -440,7 +440,7 @@
                                             "primary_airflow": 943.9,
                                             "supply_design_heating_setpoint_temperature": 32.2,
                                             "supply_design_cooling_setpoint_temperature": 12.8,
-                                            "minimum_outdoor_airflow": 94.4
+                                            "minimum_outdoor_airflow": 283.2
                                         }
                                     ],
                                     "spaces": [
@@ -685,7 +685,7 @@
                                             "primary_airflow": 943.9,
                                             "supply_design_heating_setpoint_temperature": 32.2,
                                             "supply_design_cooling_setpoint_temperature": 12.8,
-                                            "minimum_outdoor_airflow": 94.4
+                                            "minimum_outdoor_airflow": 283.2
                                         }
                                     ],
                                     "spaces": [
@@ -905,7 +905,7 @@
                                             "primary_airflow": 943.9,
                                             "supply_design_heating_setpoint_temperature": 32.2,
                                             "supply_design_cooling_setpoint_temperature": 12.8,
-                                            "minimum_outdoor_airflow": 94.4
+                                            "minimum_outdoor_airflow": 283.2
                                         }
                                     ],
                                     "spaces": [
@@ -1150,7 +1150,7 @@
                                             "primary_airflow": 943.9,
                                             "supply_design_heating_setpoint_temperature": 32.2,
                                             "supply_design_cooling_setpoint_temperature": 12.8,
-                                            "minimum_outdoor_airflow": 94.4
+                                            "minimum_outdoor_airflow": 283.2
                                         }
                                     ],
                                     "spaces": [
@@ -1371,7 +1371,7 @@
                                             "primary_airflow": 943.9,
                                             "supply_design_heating_setpoint_temperature": 32.2,
                                             "supply_design_cooling_setpoint_temperature": 12.8,
-                                            "minimum_outdoor_airflow": 94.4
+                                            "minimum_outdoor_airflow": 283.2
                                         }
                                     ],
                                     "spaces": [
