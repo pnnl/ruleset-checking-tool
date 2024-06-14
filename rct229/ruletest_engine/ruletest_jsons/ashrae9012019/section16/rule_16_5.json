@@ -70475,8 +70475,8 @@
         "Section": 16,
         "Rule": 5,
         "Test": "c",
-        "test_description": "A proposed building has an elevator. Neither the proposed or baseline of that building has an elevator cab ventilation schedule. Expected result: FAIL",
-        "expected_rule_outcome": "fail",
+        "test_description": "A proposed building has an elevator. Neither the proposed or baseline of that building has an elevator cab ventilation schedule. Expected result: NOT APPLICABLE",
+        "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "16-5",
             "ruleset_reference": 0,
