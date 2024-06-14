@@ -1,5 +1,5 @@
 {
-    "id": "ASHRAE229 1",
+    "id": "System 6",
     "ruleset_model_descriptions": [
         {
             "id": "RMD 1",
@@ -19,6 +19,31 @@
                                     "terminals": [
                                         {
                                             "id": "VAV Air Terminal 1",
+                                            "is_supply_ducted": true,
+                                            "type": "VARIABLE_AIR_VOLUME",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System 6",
+                                            "heating_source": "ELECTRIC",
+                                            "fan": {
+                                                "id": "Fan 1"
+                                            },
+                                            "fan_configuration": "PARALLEL",
+                                            "primary_airflow": 943.9,
+                                            "supply_design_heating_setpoint_temperature": 32.2,
+                                            "supply_design_cooling_setpoint_temperature": 12.8,
+                                            "minimum_airflow": 141.6,
+                                            "minimum_outdoor_airflow": 94.4,
+                                            "heating_capacity": 8792.1321
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "Thermal Zone 2",
+                                    "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                    "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                    "air_distribution_effectiveness": 0.8,
+                                    "terminals": [
+                                        {
+                                            "id": "TZ2 VAV Air Terminal 1",
                                             "is_supply_ducted": true,
                                             "type": "VARIABLE_AIR_VOLUME",
                                             "served_by_heating_ventilating_air_conditioning_system": "System 6",

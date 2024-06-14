@@ -12,9 +12,9 @@
                             "id": "TEST Building Segment 1",
                             "heating_ventilating_air_conditioning_systems": [
                                 {
-                                    "id": "RPD_Test_System_6_PVAV_Elec_Reheat Core Zone 1",
+                                    "id": "RPD_Test_System_6_PVAV_Elec_Reheat",
                                     "cooling_system": {
-                                        "id": "Cooling Sys - Core Zone 1",
+                                        "id": "DX Coil 1",
                                         "type": "DIRECT_EXPANSION",
                                         "design_sensible_cool_capacity": 85000,
                                         "rated_total_cool_capacity": 87921,
@@ -27,212 +27,20 @@
                                         ]
                                     },
                                     "preheat_system": {
-                                        "id": "Preheat Sys - Core Zone 1",
+                                        "id": "Preheat Coil 1",
                                         "type": "ELECTRIC_RESISTANCE",
                                         "rated_capacity": 43960.6605,
                                         "heating_coil_setpoint": 10
                                     },
                                     "fan_system": {
-                                        "id": "Fan System - Core Zone 1",
+                                        "id": "VAV Fan System 1",
                                         "fan_control": "VARIABLE_SPEED_DRIVE",
                                         "temperature_control": "SCHEDULED",
                                         "operation_during_occupied": "CONTINUOUS",
                                         "operation_during_unoccupied": "KEEP_OFF",
                                         "supply_fans": [
                                             {
-                                                "id": "Supply Fan - Core Zone 1",
-                                                "design_airflow": 4719.474432,
-                                                "is_airflow_sized_based_on_design_day": false,
-                                                "specification_method": "SIMPLE",
-                                                "design_electric_power": 10000,
-                                                "output_validation_points": [
-                                                    {
-                                                        "airflow": 4719.474432,
-                                                        "result": 10000
-                                                    },
-                                                    {
-                                                        "airflow": 0,
-                                                        "result": 0
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    }
-                                },
-                                {
-                                    "id": "RPD_Test_System_6_PVAV_Elec_Reheat Prm Zone 1",
-                                    "cooling_system": {
-                                        "id": "Cooling Sys - Prm Zone 1",
-                                        "type": "DIRECT_EXPANSION",
-                                        "design_sensible_cool_capacity": 85000,
-                                        "rated_total_cool_capacity": 87921,
-                                        "is_sized_based_on_design_day": false,
-                                        "efficiency_metric_types": [
-                                            "COMBINED_ENERGY_EFFICIENCY_RATIO"
-                                        ],
-                                        "efficiency_metric_values": [
-                                            11.0
-                                        ]
-                                    },
-                                    "preheat_system": {
-                                        "id": "Preheat Sys - Prm Zone 1",
-                                        "type": "ELECTRIC_RESISTANCE",
-                                        "rated_capacity": 43960.6605,
-                                        "heating_coil_setpoint": 10
-                                    },
-                                    "fan_system": {
-                                        "id": "Fan System - Prm Zone 1",
-                                        "fan_control": "VARIABLE_SPEED_DRIVE",
-                                        "temperature_control": "SCHEDULED",
-                                        "operation_during_occupied": "CONTINUOUS",
-                                        "operation_during_unoccupied": "KEEP_OFF",
-                                        "supply_fans": [
-                                            {
-                                                "id": "Supply Fan - Prm Zone 1",
-                                                "design_airflow": 4719.474432,
-                                                "is_airflow_sized_based_on_design_day": false,
-                                                "specification_method": "SIMPLE",
-                                                "design_electric_power": 10000,
-                                                "output_validation_points": [
-                                                    {
-                                                        "airflow": 4719.474432,
-                                                        "result": 10000
-                                                    },
-                                                    {
-                                                        "airflow": 0,
-                                                        "result": 0
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    }
-                                },
-                                {
-                                    "id": "RPD_Test_System_6_PVAV_Elec_Reheat Prm Zone 2",
-                                    "cooling_system": {
-                                        "id": "Cooling Sys - Prm Zone 2",
-                                        "type": "DIRECT_EXPANSION",
-                                        "design_sensible_cool_capacity": 85000,
-                                        "rated_total_cool_capacity": 87921,
-                                        "is_sized_based_on_design_day": false,
-                                        "efficiency_metric_types": [
-                                            "COMBINED_ENERGY_EFFICIENCY_RATIO"
-                                        ],
-                                        "efficiency_metric_values": [
-                                            11.0
-                                        ]
-                                    },
-                                    "preheat_system": {
-                                        "id": "Preheat Sys - Prm Zone 2",
-                                        "type": "ELECTRIC_RESISTANCE",
-                                        "rated_capacity": 43960.6605,
-                                        "heating_coil_setpoint": 10
-                                    },
-                                    "fan_system": {
-                                        "id": "Fan System - Prm Zone 2",
-                                        "fan_control": "VARIABLE_SPEED_DRIVE",
-                                        "temperature_control": "SCHEDULED",
-                                        "operation_during_occupied": "CONTINUOUS",
-                                        "operation_during_unoccupied": "KEEP_OFF",
-                                        "supply_fans": [
-                                            {
-                                                "id": "Supply Fan - Prm Zone 2",
-                                                "design_airflow": 4719.474432,
-                                                "is_airflow_sized_based_on_design_day": false,
-                                                "specification_method": "SIMPLE",
-                                                "design_electric_power": 10000,
-                                                "output_validation_points": [
-                                                    {
-                                                        "airflow": 4719.474432,
-                                                        "result": 10000
-                                                    },
-                                                    {
-                                                        "airflow": 0,
-                                                        "result": 0
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    }
-                                },
-                                {
-                                    "id": "RPD_Test_System_6_PVAV_Elec_Reheat Prm Zone 3",
-                                    "cooling_system": {
-                                        "id": "Cooling Sys - Prm Zone 3",
-                                        "type": "DIRECT_EXPANSION",
-                                        "design_sensible_cool_capacity": 85000,
-                                        "rated_total_cool_capacity": 87921,
-                                        "is_sized_based_on_design_day": false,
-                                        "efficiency_metric_types": [
-                                            "COMBINED_ENERGY_EFFICIENCY_RATIO"
-                                        ],
-                                        "efficiency_metric_values": [
-                                            11.0
-                                        ]
-                                    },
-                                    "preheat_system": {
-                                        "id": "Preheat Sys - Prm Zone 3",
-                                        "type": "ELECTRIC_RESISTANCE",
-                                        "rated_capacity": 43960.6605,
-                                        "heating_coil_setpoint": 10
-                                    },
-                                    "fan_system": {
-                                        "id": "Fan System - Prm Zone 3",
-                                        "fan_control": "VARIABLE_SPEED_DRIVE",
-                                        "temperature_control": "SCHEDULED",
-                                        "operation_during_occupied": "CONTINUOUS",
-                                        "operation_during_unoccupied": "KEEP_OFF",
-                                        "supply_fans": [
-                                            {
-                                                "id": "Supply Fan - Prm Zone 3",
-                                                "design_airflow": 4719.474432,
-                                                "is_airflow_sized_based_on_design_day": false,
-                                                "specification_method": "SIMPLE",
-                                                "design_electric_power": 10000,
-                                                "output_validation_points": [
-                                                    {
-                                                        "airflow": 4719.474432,
-                                                        "result": 10000
-                                                    },
-                                                    {
-                                                        "airflow": 0,
-                                                        "result": 0
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    }
-                                },
-                                {
-                                    "id": "RPD_Test_System_6_PVAV_Elec_Reheat Prm Zone 4",
-                                    "cooling_system": {
-                                        "id": "Cooling Sys - Prm Zone 4",
-                                        "type": "DIRECT_EXPANSION",
-                                        "design_sensible_cool_capacity": 85000,
-                                        "rated_total_cool_capacity": 87921,
-                                        "is_sized_based_on_design_day": false,
-                                        "efficiency_metric_types": [
-                                            "COMBINED_ENERGY_EFFICIENCY_RATIO"
-                                        ],
-                                        "efficiency_metric_values": [
-                                            11.0
-                                        ]
-                                    },
-                                    "preheat_system": {
-                                        "id": "Preheat Sys - Prm Zone 4",
-                                        "type": "ELECTRIC_RESISTANCE",
-                                        "rated_capacity": 43960.6605,
-                                        "heating_coil_setpoint": 10
-                                    },
-                                    "fan_system": {
-                                        "id": "Fan System - Prm Zone 4",
-                                        "fan_control": "VARIABLE_SPEED_DRIVE",
-                                        "temperature_control": "SCHEDULED",
-                                        "operation_during_occupied": "CONTINUOUS",
-                                        "operation_during_unoccupied": "KEEP_OFF",
-                                        "supply_fans": [
-                                            {
-                                                "id": "Supply Fan - Prm Zone 4",
+                                                "id": "RPD_Test_System_6_PVAV_Elec_Reheat Supply Fan",
                                                 "design_airflow": 4719.474432,
                                                 "is_airflow_sized_based_on_design_day": false,
                                                 "specification_method": "SIMPLE",
@@ -446,7 +254,7 @@
                                             "id": "RPD_Test_System_6_PVAV_Elec_Reheat - Terminal for Core Zone 1",
                                             "is_supply_ducted": true,
                                             "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilating_air_conditioning_system": "RPD_Test_System_6_PVAV_Elec_Reheat Core Zone 1",
+                                            "served_by_heating_ventilating_air_conditioning_system": "RPD_Test_System_6_PVAV_Elec_Reheat",
                                             "heating_source": "ELECTRIC",
                                             "fan": {
                                                 "id": "Fan 1"
@@ -698,7 +506,7 @@
                                             "id": "RPD_Test_System_6_PVAV_Elec_Reheat - Terminal for Prm Zone 1",
                                             "is_supply_ducted": true,
                                             "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilating_air_conditioning_system": "RPD_Test_System_6_PVAV_Elec_Reheat Prm Zone 1",
+                                            "served_by_heating_ventilating_air_conditioning_system": "RPD_Test_System_6_PVAV_Elec_Reheat",
                                             "heating_source": "ELECTRIC",
                                             "fan": {
                                                 "id": "Fan 1"
@@ -925,7 +733,7 @@
                                             "id": "RPD_Test_System_6_PVAV_Elec_Reheat - Terminal for Prm Zone 2",
                                             "is_supply_ducted": true,
                                             "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilating_air_conditioning_system": "RPD_Test_System_6_PVAV_Elec_Reheat Prm Zone 2",
+                                            "served_by_heating_ventilating_air_conditioning_system": "RPD_Test_System_6_PVAV_Elec_Reheat",
                                             "heating_source": "ELECTRIC",
                                             "fan": {
                                                 "id": "Fan 1"
@@ -1177,7 +985,7 @@
                                             "id": "RPD_Test_System_6_PVAV_Elec_Reheat - Terminal for Prm Zone 3",
                                             "is_supply_ducted": true,
                                             "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilating_air_conditioning_system": "RPD_Test_System_6_PVAV_Elec_Reheat Prm Zone 3",
+                                            "served_by_heating_ventilating_air_conditioning_system": "RPD_Test_System_6_PVAV_Elec_Reheat",
                                             "heating_source": "ELECTRIC",
                                             "fan": {
                                                 "id": "Fan 1"
@@ -1405,7 +1213,7 @@
                                             "id": "RPD_Test_System_6_PVAV_Elec_Reheat - Terminal for Prm Zone 4",
                                             "is_supply_ducted": true,
                                             "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilating_air_conditioning_system": "RPD_Test_System_6_PVAV_Elec_Reheat Prm Zone 4",
+                                            "served_by_heating_ventilating_air_conditioning_system": "RPD_Test_System_6_PVAV_Elec_Reheat",
                                             "heating_source": "ELECTRIC",
                                             "fan": {
                                                 "id": "Fan 1"
