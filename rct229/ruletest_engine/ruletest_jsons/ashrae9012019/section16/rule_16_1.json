@@ -17,6 +17,80 @@
             "schema_version": "0.0.34"
         },
         "rmr_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1"
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "floor_name": "Floor 2",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 2"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 3",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 3"
+                                                    }
+                                                ],
+                                                "floor_name": "Floor 3"
+                                            },
+                                            {
+                                                "id": "Thermal Zone 4",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 4"
+                                                    }
+                                                ],
+                                                "floor_name": "Floor 4"
+                                            },
+                                            {
+                                                "id": "Thermal Zone 5",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 5"
+                                                    }
+                                                ],
+                                                "floor_name": "Floor 5"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "elevators": [
+                                    {
+                                        "id": "Elevator 1",
+                                        "number_of_floors_served": 4
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
             "baseline": {
                 "id": "ASHRAE229 1",
                 "weather": {
@@ -82,6 +156,7 @@
                                 "elevators": [
                                     {
                                         "id": "Elevator 1",
+                                        "number_of_floors_served": 4,
                                         "motor_power": 15000,
                                         "cab_counterweight": 1814.4000000000003,
                                         "cab_weight": 680.4000000000001,
@@ -115,6 +190,80 @@
             "schema_version": "0.0.34"
         },
         "rmr_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1"
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "floor_name": "Floor 2",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 2"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 3",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 3"
+                                                    }
+                                                ],
+                                                "floor_name": "Floor 3"
+                                            },
+                                            {
+                                                "id": "Thermal Zone 4",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 4"
+                                                    }
+                                                ],
+                                                "floor_name": "Floor 4"
+                                            },
+                                            {
+                                                "id": "Thermal Zone 5",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 5"
+                                                    }
+                                                ],
+                                                "floor_name": "Floor 5"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "elevators": [
+                                    {
+                                        "id": "Elevator 1",
+                                        "number_of_floors_served": 4
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
             "baseline": {
                 "id": "ASHRAE229 1",
                 "weather": {
@@ -209,6 +358,80 @@
             "schema_version": "0.0.34"
         },
         "rmr_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1"
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "floor_name": "Floor 2",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 2"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 3",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 3"
+                                                    }
+                                                ],
+                                                "floor_name": "Floor 3"
+                                            },
+                                            {
+                                                "id": "Thermal Zone 4",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 4"
+                                                    }
+                                                ],
+                                                "floor_name": "Floor 4"
+                                            },
+                                            {
+                                                "id": "Thermal Zone 5",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 5"
+                                                    }
+                                                ],
+                                                "floor_name": "Floor 5"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "elevators": [
+                                    {
+                                        "id": "Elevator 1",
+                                        "number_of_floors_served": 4
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
             "baseline": {
                 "id": "ASHRAE229 1",
                 "weather": {
@@ -308,6 +531,80 @@
             "schema_version": "0.0.34"
         },
         "rmr_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1"
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "floor_name": "Floor 2",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 2"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 3",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 3"
+                                                    }
+                                                ],
+                                                "floor_name": "Floor 3"
+                                            },
+                                            {
+                                                "id": "Thermal Zone 4",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 4"
+                                                    }
+                                                ],
+                                                "floor_name": "Floor 4"
+                                            },
+                                            {
+                                                "id": "Thermal Zone 5",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 5"
+                                                    }
+                                                ],
+                                                "floor_name": "Floor 5"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "elevators": [
+                                    {
+                                        "id": "Elevator 1",
+                                        "number_of_floors_served": 4
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
             "baseline": {
                 "id": "ASHRAE229 1",
                 "weather": {
@@ -379,6 +676,335 @@
                                         "cab_weight": 680.4000000000001,
                                         "design_load": 1814.4000000000003,
                                         "speed": 0.5079999999999999
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-16-1-e": {
+        "Section": 16,
+        "Rule": 1,
+        "Test": "e",
+        "test_description": "A baseline building with 4 floors and an elevator exists but has no proposed equivalent. Expected result: NOT APPLICABLE",
+        "expected_rule_outcome": "not_applicable",
+        "standard": {
+            "rule_id": "16-1",
+            "ruleset_reference": 0,
+            "rule_description": "The elevator peak motor power shall be calculated according to the equation in Table G3.1-16",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": 0,
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.34"
+        },
+        "rmr_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1"
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "floor_name": "Floor 2",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 2"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 3",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 3"
+                                                    }
+                                                ],
+                                                "floor_name": "Floor 3"
+                                            },
+                                            {
+                                                "id": "Thermal Zone 4",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 4"
+                                                    }
+                                                ],
+                                                "floor_name": "Floor 4"
+                                            },
+                                            {
+                                                "id": "Thermal Zone 5",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 5"
+                                                    }
+                                                ],
+                                                "floor_name": "Floor 5"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1"
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "floor_name": "Floor 2",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 2"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 3",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 3"
+                                                    }
+                                                ],
+                                                "floor_name": "Floor 3"
+                                            },
+                                            {
+                                                "id": "Thermal Zone 4",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 4"
+                                                    }
+                                                ],
+                                                "floor_name": "Floor 4"
+                                            },
+                                            {
+                                                "id": "Thermal Zone 5",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 5"
+                                                    }
+                                                ],
+                                                "floor_name": "Floor 5"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "elevators": [
+                                    {
+                                        "id": "Elevator 1",
+                                        "number_of_floors_served": 4,
+                                        "motor_power": 20000,
+                                        "cab_counterweight": 226.80000000000004,
+                                        "cab_weight": 680.4000000000001,
+                                        "design_load": 1814.4000000000003,
+                                        "speed": 0.5079999999999999
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-16-1-f": {
+        "Section": 16,
+        "Rule": 1,
+        "Test": "f",
+        "test_description": "A propsed building with 4 floors and an elevator exists but has no baseline elevator equivalent. Expected result: NOT APPLICABLE",
+        "expected_rule_outcome": "not_applicable",
+        "standard": {
+            "rule_id": "16-1",
+            "ruleset_reference": 0,
+            "rule_description": "The elevator peak motor power shall be calculated according to the equation in Table G3.1-16",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": 0,
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.34"
+        },
+        "rmr_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1"
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "floor_name": "Floor 2",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 2"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 3",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 3"
+                                                    }
+                                                ],
+                                                "floor_name": "Floor 3"
+                                            },
+                                            {
+                                                "id": "Thermal Zone 4",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 4"
+                                                    }
+                                                ],
+                                                "floor_name": "Floor 4"
+                                            },
+                                            {
+                                                "id": "Thermal Zone 5",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 5"
+                                                    }
+                                                ],
+                                                "floor_name": "Floor 5"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "elevators": [
+                                    {
+                                        "id": "Elevator 1",
+                                        "number_of_floors_served": 4
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1"
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "floor_name": "Floor 2",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 2"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 3",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 3"
+                                                    }
+                                                ],
+                                                "floor_name": "Floor 3"
+                                            },
+                                            {
+                                                "id": "Thermal Zone 4",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 4"
+                                                    }
+                                                ],
+                                                "floor_name": "Floor 4"
+                                            },
+                                            {
+                                                "id": "Thermal Zone 5",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 5"
+                                                    }
+                                                ],
+                                                "floor_name": "Floor 5"
+                                            }
+                                        ]
                                     }
                                 ]
                             }
