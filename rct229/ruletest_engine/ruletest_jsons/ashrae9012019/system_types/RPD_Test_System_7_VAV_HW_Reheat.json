@@ -97,7 +97,7 @@
                                         "return_fans": [
                                             {
                                                 "id": "Return Fan 1",
-                                                "design_pressure_rise": 871.811179166655,
+                                                "design_pressure_rise": 498.17781666666,
                                                 "total_efficiency": 0.60,
                                                 "design_airflow": 4247.52705
                                             }
