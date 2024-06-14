@@ -1,6 +1,6 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rule_engine.rulesets import LeapYear
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
@@ -24,11 +24,11 @@ MANUAL_CHECK_MSG = (
 
 
 class Section4Rule1(RuleDefinitionListIndexedBase):
-    """Rule 1 of ASHRAE 90.1-2019 Appendix G Section 4 (Airside System)"""
+    """Rule 1 of ASHRAE 90.1-2019 Appendix G Section 4 (Schedules Setpoints)"""
 
     def __init__(self):
         super(Section4Rule1, self).__init__(
-            rmds_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             required_fields={
@@ -40,26 +40,25 @@ class Section4Rule1(RuleDefinitionListIndexedBase):
             index_rmd=BASELINE_0,
             id="4-1",
             description="Temperature Control Setpoints shall be the same for proposed design and baseline building design.",
-            ruleset_section_title="Airside System",
+            ruleset_section_title="Schedules Setpoints",
             standard_section="Section G3.1-4 Schedule Modeling Requirements for the Proposed design and Baseline building",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            data_items={"is_leap_year_b": (BASELINE_0, "calendar/is_leap_year")},
+            data_items={
+                "climate_zone_b": (BASELINE_0, "weather/climate_zone"),
+                "is_leap_year_b": (BASELINE_0, "calendar/is_leap_year"),
+            },
         )
-
-    def create_data(self, context, data=None):
-        rmr_b = context.BASELINE_0
-        return {"climate_zone": rmr_b["weather"]["climate_zone"]}
 
     class RuleSetModelInstanceRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section4Rule1.RuleSetModelInstanceRule, self).__init__(
-                rmds_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
                 each_rule=Section4Rule1.RuleSetModelInstanceRule.ZoneRule(),
                 index_rmd=BASELINE_0,
-                list_path="$.buildings[*].zones[*]",
+                list_path="$.buildings[*].building_segments[*].zones[*]",
                 required_fields={"$": ["schedules"]},
             )
 
@@ -70,7 +69,7 @@ class Section4Rule1(RuleDefinitionListIndexedBase):
                 "schedules_b": rmd_b["schedules"],
                 "schedules_p": rmd_p["schedules"],
                 "zcc_dict_b": get_zone_conditioning_category_rmi_dict(
-                    data["climate_zone"], rmd_b
+                    data["climate_zone_b"], rmd_b
                 ),
             }
 
@@ -82,7 +81,7 @@ class Section4Rule1(RuleDefinitionListIndexedBase):
         class ZoneRule(RuleDefinitionBase):
             def __init__(self):
                 super(Section4Rule1.RuleSetModelInstanceRule.ZoneRule, self,).__init__(
-                    rmds_used=produce_ruleset_model_instance(
+                    rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
                     manual_check_required_msg=MANUAL_CHECK_MSG,
@@ -127,8 +126,8 @@ class Section4Rule1(RuleDefinitionListIndexedBase):
                     )
                     if thermostat_cooling_stpt_sch_id_b
                     else [
-                        zone_b.getattr_(
-                            zone_b, "design_thermostat_cooling_setpoint"
+                        getattr_(
+                            zone_b, "zones", "design_thermostat_cooling_setpoint"
                         ).magnitude
                     ]
                     * number_of_hours

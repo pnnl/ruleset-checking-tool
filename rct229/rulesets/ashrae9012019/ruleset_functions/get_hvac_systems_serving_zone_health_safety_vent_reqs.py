@@ -43,7 +43,7 @@ def get_hvac_systems_serving_zone_health_safety_vent_reqs(rmd: dict) -> list[str
     Parameters
     ----------
     rmd dict
-        A dictionary representing a ruleset model instance as defined by the ASHRAE229 schema.
+        A dictionary representing a ruleset model description as defined by the ASHRAE229 schema.
 
         To determine if any of the zones have spaces with lighting spaces types that are likely to have health and
         safety mandated minimum ventilation requirements during unoccupied hours and to create a list of the hvac

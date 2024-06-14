@@ -1,6 +1,6 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.utils.jsonpath_utils import find_all
 
@@ -17,7 +17,7 @@ class Section5Rule23(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule23, self).__init__(
-            rmds_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             each_rule=Section5Rule23.BuildingRule(),
@@ -33,7 +33,7 @@ class Section5Rule23(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule23.BuildingRule, self).__init__(
-                rmds_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
                 # Make sure surfaces are matched in SurfaceRule
@@ -45,7 +45,7 @@ class Section5Rule23(RuleDefinitionListIndexedBase):
         class SurfaceRule(RuleDefinitionListIndexedBase):
             def __init__(self):
                 super(Section5Rule23.BuildingRule.SurfaceRule, self).__init__(
-                    rmds_used=produce_ruleset_model_instance(
+                    rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
                     each_rule=Section5Rule23.BuildingRule.SurfaceRule.SubsurfaceRule(),
@@ -88,7 +88,7 @@ class Section5Rule23(RuleDefinitionListIndexedBase):
                     super(
                         Section5Rule23.BuildingRule.SurfaceRule.SubsurfaceRule, self
                     ).__init__(
-                        rmds_used=produce_ruleset_model_instance(
+                        rmds_used=produce_ruleset_model_description(
                             USER=False, BASELINE_0=True, PROPOSED=True
                         ),
                         required_fields={"$": ["has_manual_interior_shades"]},

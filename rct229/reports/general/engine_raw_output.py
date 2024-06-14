@@ -8,7 +8,7 @@ from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
 class EngineRawOutput(RCTReport):
     def __init__(self):
         super(EngineRawOutput, self).__init__()
-        self.ruleset_report_file = "raw_output.json"
+        self.ruleset_report_file = f"{self.__class__.__name__}.json"
 
     def generate_rule_report(self, rule_outcome, outcome_dict):
         def rule_report_helper(rule_outcomes, outcomes_dict):
@@ -28,7 +28,7 @@ class EngineRawOutput(RCTReport):
                         outcomes_dict[RCTOutcomeLabel.UNDETERMINED] += 1
                     else:
                         outcomes_dict[rule_outcome_str] += 1
-                    if "calc_vals" in rule_outcomes.keys():
+                    if "calc_vals" in rule_outcomes:
                         rule_outcomes["calc_vals"] = calc_vals_converter(
                             rule_outcomes["calc_vals"]
                         )

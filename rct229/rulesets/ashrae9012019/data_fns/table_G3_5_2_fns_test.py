@@ -1,7 +1,7 @@
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_2_fns import (
-    table_g3_5_2_lookup,
     HeatPumpEquipmentType,
     RatingCondition,
+    table_g3_5_2_lookup,
 )
 
 
@@ -73,7 +73,7 @@ def test__table_3_5_2_heating_pkg_0():
         0,
     ) == {
         "minimum_efficiency": 3.4,
-        "efficiency_metric": "HEAT_PUMP_EFFICIENCY_HIGH_TEMPERATURE_NO_FAN",
+        "efficiency_metric": "HEAT_PUMP_COEFFICIENT_OF_PERFORMANCE_HIGH_TEMPERATURE_NO_FAN",
         "most_conservative_efficiency": 3.4,
     }
 
@@ -85,7 +85,7 @@ def test__table_3_5_2_heating_pkg_64999():
         64999,
     ) == {
         "minimum_efficiency": 3.4,
-        "efficiency_metric": "HEAT_PUMP_EFFICIENCY_HIGH_TEMPERATURE_NO_FAN",
+        "efficiency_metric": "HEAT_PUMP_COEFFICIENT_OF_PERFORMANCE_HIGH_TEMPERATURE_NO_FAN",
         "most_conservative_efficiency": 3.4,
     }
 
@@ -97,7 +97,7 @@ def test__table_3_5_2_heating_47_65000():
         65000,
     ) == {
         "minimum_efficiency": 3.4,
-        "efficiency_metric": "HEAT_PUMP_EFFICIENCY_HIGH_TEMPERATURE_NO_FAN",
+        "efficiency_metric": "HEAT_PUMP_COEFFICIENT_OF_PERFORMANCE_HIGH_TEMPERATURE_NO_FAN",
         "most_conservative_efficiency": 3.4,
     }
 
@@ -109,7 +109,7 @@ def test__table_3_5_2_heating_17_65000():
         65000,
     ) == {
         "minimum_efficiency": 2.3,
-        "efficiency_metric": "HEAT_PUMP_EFFICIENCY_LOW_TEMPERATURE_NO_FAN",
+        "efficiency_metric": "HEAT_PUMP_COEFFICIENT_OF_PERFORMANCE_LOW_TEMPERATURE_NO_FAN",
         "most_conservative_efficiency": 2.3,
     }
 
@@ -121,7 +121,7 @@ def test__table_3_5_2_heating_47_135000():
         135000,
     ) == {
         "minimum_efficiency": 3.4,
-        "efficiency_metric": "HEAT_PUMP_EFFICIENCY_HIGH_TEMPERATURE_NO_FAN",
+        "efficiency_metric": "HEAT_PUMP_COEFFICIENT_OF_PERFORMANCE_HIGH_TEMPERATURE_NO_FAN",
         "most_conservative_efficiency": 3.4,
     }
 
@@ -133,6 +133,6 @@ def test__table_3_5_2_heating_17_135000():
         135000,
     ) == {
         "minimum_efficiency": 2.1,
-        "efficiency_metric": "HEAT_PUMP_EFFICIENCY_LOW_TEMPERATURE_NO_FAN",
+        "efficiency_metric": "HEAT_PUMP_COEFFICIENT_OF_PERFORMANCE_LOW_TEMPERATURE_NO_FAN",
         "most_conservative_efficiency": 2.3,
     }

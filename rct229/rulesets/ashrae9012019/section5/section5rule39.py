@@ -1,6 +1,6 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_4_fns import table_G34_lookup
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
@@ -32,7 +32,7 @@ class Section5Rule39(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule39, self).__init__(
-            rmds_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section5Rule39.BuildingRule(),
@@ -50,7 +50,7 @@ class Section5Rule39(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule39.BuildingRule, self).__init__(
-                rmds_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 each_rule=Section5Rule39.BuildingRule.SurfaceRule(),
@@ -73,7 +73,7 @@ class Section5Rule39(RuleDefinitionListIndexedBase):
         class SurfaceRule(RuleDefinitionListIndexedBase):
             def __init__(self):
                 super(Section5Rule39.BuildingRule.SurfaceRule, self).__init__(
-                    rmds_used=produce_ruleset_model_instance(
+                    rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
                     list_path="$.subsurfaces[*]",
@@ -104,7 +104,7 @@ class Section5Rule39(RuleDefinitionListIndexedBase):
                     super(
                         Section5Rule39.BuildingRule.SurfaceRule.SubSurfaceRule, self
                     ).__init__(
-                        rmds_used=produce_ruleset_model_instance(
+                        rmds_used=produce_ruleset_model_description(
                             USER=False, BASELINE_0=True, PROPOSED=False
                         ),
                         required_fields={

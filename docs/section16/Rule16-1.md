@@ -5,7 +5,7 @@
 **Rule Description:** The elevator peak motor power shall be calculated according to the equation in Table G3.1-16  
 **Rule Assertion:** B-RMR = expected value                                           
 **Appendix G Section:** G3.1  
-**Appendix G Section Reference:** Table G3.1-16 Baseline Building Performance
+**Appendix G Section Reference:** Table G3.1-16 Baseline Building Performance  
 **Data Lookup:** Table G3.9.1, Table G3.9.2, Table G3.9.3  
 **Evaluation Context:** Each elevator  
 
@@ -26,7 +26,7 @@ data_lookup
   - Get the elevator cab counterweight: `elevator_cab_counterweight_b = elevator.cab_counterweight`
   - Get the elevator design load: `elevator_design_load_b = elevator.design_load`
   - Get the elevator speed: `elevator_speed_b = elevator.speed`
-  - If any detailed elevator data parameters are not defined: `if any(param == Null for param in [total_floors_served_b, elevator_motor_power_b, elevator_cab_weight_b, elevator_cab_counterweight_b, elevator_design_load_b, elevator_speed_b]): is_undetermined = true`
+  - If any detailed elevator data parameters are not defined: `if any(param == Null for param in [total_floors_served_b, elevator_motor_power_b, elevator_cab_weight_b, elevator_cab_counterweight_b, elevator_design_load_b, elevator_speed_b]): has_undetermined = true`
   - Get the elevator mechanical efficiency: `elevator_mechanical_efficiency_b = data_lookup('table_g3.9.2', total_floors_served_b)['mechanical_efficiency']`
   - Calculate the motor brake horsepower: `motor_brake_horsepower_b = (elevator_cab_weight_b + elevator_design_load_b - elevator_cab_counterweight_b) * elevator_speed_b / 33000 / elevator_mechanical_efficiency_b`
   - If the total number of floors is greater than 4: `if total_floors_served_b > 4:`
@@ -36,7 +36,7 @@ data_lookup
   - Calculate the expected peak motor power: `expected_peak_motor_power = motor_brake_horsepower_b * 746 / elevator_motor_efficiency_b`
     
   **Rule Assertion:**  
-  - Case 1: If the number of floors in the building could not be determined or any detailed elevator data parameters are not defined, outcome = UNDETERMINED: `if is_undetermined: UNDETERMINED`
+  - Case 1: If the number of floors in the building could not be determined or any detailed elevator data parameters are not defined, outcome = UNDETERMINED: `if has_undetermined: UNDETERMINED`
   - Case 2: If the calculated peak motor power is equal to the expected value: `if elevator_motor_power_b == expected_peak_motor_power: PASS`
   - Case 3: Else: `else: FAIL`
 

@@ -20,7 +20,7 @@ def get_hvac_systems_primarily_serving_comp_room(rmd: dict) -> list[str]:
     Parameters
     ----------
     rmd dict
-        A dictionary representing a ruleset model instance as defined by the ASHRAE229 schema
+        A dictionary representing a ruleset model description as defined by the ASHRAE229 schema
 
     Returns
     -------
