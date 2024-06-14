@@ -761,12 +761,16 @@ def add_baseline_terminals(
                 zone_id = zone["id"]
 
                 # Inject new terminals
-                zone["terminals"] = []
+                if "terminals" not in zone:
+                    zone["terminals"] = []
                 zone["terminals"].append(deepcopy(terminal_copy))
-                zone["terminals"][0]["id"] = f"{system_name} - Terminal for {zone_id}"
+                terminal_i = len(zone["terminals"]) - 1
+                zone["terminals"][terminal_i][
+                    "id"
+                ] = f"{system_name} - Terminal for {zone_id}"
 
                 if system_classification != "MultiZoneAirLoop":
-                    zone["terminals"][0][
+                    zone["terminals"][terminal_i][
                         "served_by_heating_ventilating_air_conditioning_system"
                     ] = f"{system_name} {zone_id}"
 
@@ -774,7 +778,7 @@ def add_baseline_terminals(
                     system_name = clean_system_name_for_multizone_airloop(
                         rmr_instance_dict, system_name
                     )
-                    zone["terminals"][0][
+                    zone["terminals"][terminal_i][
                         "served_by_heating_ventilating_air_conditioning_system"
                     ] = f"{system_name}"
 
