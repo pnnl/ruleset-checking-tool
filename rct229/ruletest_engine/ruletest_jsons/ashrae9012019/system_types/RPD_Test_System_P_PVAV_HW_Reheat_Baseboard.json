@@ -1,0 +1,201 @@
+{
+    "id": "ASHRAE229 1",
+    "ruleset_model_descriptions": [
+        {
+            "id": "RMD 1",
+            "buildings": [
+                {
+                    "id": "Building 1",
+                    "building_open_schedule": "Required Building Schedule 1",
+                    "building_segments": [
+                        {
+                            "id": "Building Segment 1",
+                            "zones": [
+                                {
+                                    "id": "Thermal Zone 1",
+                                    "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                    "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                    "air_distribution_effectiveness": 1.2,
+                                    "terminals": [
+                                        {
+                                            "id": "VAV Terminal 1",
+                                            "is_supply_ducted": true,
+                                            "type": "VARIABLE_AIR_VOLUME",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System 5",
+                                            "heating_source": "HOT_WATER",
+                                            "heating_from_loop": "Primary HW Loop",
+                                            "primary_airflow": 943.9,
+                                            "supply_design_heating_setpoint_temperature": 32.2,
+                                            "supply_design_cooling_setpoint_temperature": 12.8,
+                                            "minimum_airflow": 141.6,
+                                            "minimum_outdoor_airflow": 94.4,
+                                            "heating_capacity": 7033.70568
+                                        },
+                                        {
+                                            "id": "Baseboard Terminal 2",
+                                            "is_supply_ducted": false,
+                                            "type": "BASEBOARD",
+                                            "heating_source": "HOT_WATER",
+                                            "heating_from_loop": "Primary HW Loop",
+                                            "supply_design_heating_setpoint_temperature": 32.2,
+                                            "heating_capacity": 1758.42642
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "Thermal Zone 2",
+                                    "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                    "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                    "air_distribution_effectiveness": 1.2,
+                                    "terminals": [
+                                        {
+                                            "id": "TZ 2 VAV Terminal 1",
+                                            "is_supply_ducted": true,
+                                            "type": "VARIABLE_AIR_VOLUME",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System 5",
+                                            "heating_source": "HOT_WATER",
+                                            "heating_from_loop": "Primary HW Loop",
+                                            "primary_airflow": 943.9,
+                                            "supply_design_heating_setpoint_temperature": 32.2,
+                                            "supply_design_cooling_setpoint_temperature": 12.8,
+                                            "minimum_airflow": 141.6,
+                                            "minimum_outdoor_airflow": 94.4,
+                                            "heating_capacity": 7033.70568
+                                        },
+                                        {
+                                            "id": "TZ 2 Baseboard Terminal 2",
+                                            "is_supply_ducted": false,
+                                            "type": "BASEBOARD",
+                                            "heating_source": "HOT_WATER",
+                                            "heating_from_loop": "Primary HW Loop",
+                                            "supply_design_heating_setpoint_temperature": 32.2,
+                                            "heating_capacity": 1758.42642
+                                        }
+                                    ]
+                                }
+                            ],
+                            "heating_ventilating_air_conditioning_systems": [
+                                {
+                                    "id": "System 5",
+                                    "cooling_system": {
+                                        "id": "DX Coil 1",
+                                        "type": "DIRECT_EXPANSION",
+                                        "rated_total_cool_capacity": 87921.321,
+                                        "design_sensible_cool_capacity": 60000,
+                                        "is_sized_based_on_design_day": false,
+                                        "efficiency_metric_types": ["FULL_LOAD_COEFFICIENT_OF_PERFORMANCE"],
+                                        "efficiency_metric_values": [3.0],
+                                        "dehumidification_type": "DESICCANT"
+                                    },
+                                    "preheat_system": {
+                                        "id": "Preheat Coil 1",
+                                        "type": "FLUID_LOOP",
+                                        "hot_water_loop": "Primary HW Loop",
+                                        "rated_capacity": 43960.6605,
+                                        "design_capacity": 40000,
+                                        "heating_coil_setpoint": 10,
+                                        "humidification_type": "ADIABATIC"
+                                    },
+                                    "fan_system": {
+                                        "id": "VAV Fan System 1",
+                                        "fan_control": "VARIABLE_SPEED_DRIVE",
+                                        "temperature_control": "ZONE_RESET",
+                                        "operation_during_occupied": "CONTINUOUS",
+                                        "operation_during_unoccupied": "KEEP_OFF",
+                                        "supply_fans": [
+                                            {
+                                                "id": "Supply Fan 1",
+                                                "design_airflow": 4719.474432,
+                                                "is_airflow_sized_based_on_design_day": false,
+                                                "specification_method": "DETAILED",
+                                                "shaft_power": 7457,
+                                                "motor_efficiency": 0.9,
+                                                "output_validation_points": [
+                                                    {
+                                                        "airflow": 4719.474432,
+                                                        "result": 10000
+                                                    },
+                                                    {
+                                                        "airflow": 0,
+                                                        "result": 0
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "air_economizer": {
+                                            "id": "Air Economizer 1",
+                                            "type": "DIFFERENTIAL_ENTHALPY",
+                                            "is_integrated": true
+                                        },
+                                        "air_energy_recovery": {
+                                            "id": "Air Energy Recovery 1",
+                                            "type": "SENSIBLE_HEAT_WHEEL",
+                                            "energy_recovery_operation": "SCHEDULED",
+                                            "energy_recovery_supply_air_temperature_control": "FIXED_SETPOINT",
+                                            "design_sensible_effectiveness": 0.8,
+                                            "outdoor_airflow": 471.94720,
+                                            "exhaust_airflow": 424.75248
+                                        },
+                                        "has_fully_ducted_return": true,
+                                        "air_filter_merv_rating": 13
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "boilers": [
+                {
+                    "id": "Boiler 1",
+                    "loop": "Primary HW Loop",
+                    "draft_type": "FORCED",
+                    "energy_source_type": "NATURAL_GAS",
+                    "rated_capacity": 87921,
+                    "efficiency_metric": "THERMAL",
+                    "efficiency": 0.90,
+                    "output_validation_points": [
+                        {
+                            "load": 0,
+                            "entering_water_temperature": 54.4,
+                            "result": 0
+                        },
+                        {
+                            "load": 87921,
+                            "entering_water_temperature": 54.4,
+                            "result": 104668
+                        }
+                    ]
+                }
+            ],
+            "pumps": [
+                {
+                    "id": "HW Pump 1",
+                    "loop_or_piping": "Primary HW Loop",
+                    "specification_method": "SIMPLE",
+                    "design_electric_power": 380,
+                    "speed_control": "FIXED_SPEED",
+                    "design_flow": 1.26,
+                    "is_flow_sized_based_on_design_day": false
+                }
+            ],
+            "fluid_loops": [
+                {
+                    "id": "Primary HW Loop",
+                    "type": "HEATING",
+                    "pump_power_per_flow_rate": 301,
+                    "heating_design_and_control": {
+                        "id": "Heating Design and Control",
+                        "design_supply_temperature": 82.2,
+                        "design_return_temperature": 54.4,
+                        "is_sized_using_coincident_load": true,
+                        "operation": "CONTINUOUS",
+                        "flow_control": "FIXED_FLOW",
+                        "temperature_reset_type": "LOAD_RESET",
+                        "loop_supply_temperature_at_low_load": 71.1
+                    }
+                }
+            ]
+        }
+    ]
+}
