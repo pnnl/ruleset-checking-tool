@@ -1,7 +1,5 @@
 from rct229.ruletest_engine.ruletest_jsons.scripts.json_generation_utilities import (
-    disaggregate_master_rmd_json,
-    disaggregate_master_ruletest_json,
-)
+    disaggregate_master_rmd_json, disaggregate_master_ruletest_json)
 
 # Name of master spreadsheet in rct229.ruletest_engine.ruletest_jsons
 json_name = "chiller_tcd_master_temp.json"

@@ -1,5 +1,11 @@
-from rct229.rule_engine.rulesets import RuleSet, RuleSetTest
-from rct229.ruletest_engine.ruletest_engine import *
+import os
+
+from rct229.ruletest_engine.ruletest_engine import (
+    RuleSet,
+    RuleSetTest,
+    generate_software_test_report,
+    run_section_tests,
+)
 from rct229.utils.natural_sort import natural_keys
 
 TEST_PATH = "ruletest_jsons"
@@ -65,7 +71,7 @@ def _helper_get_all_test_file_by_section(ruleset: str, path: str):
     ruleset: str
     path: str
 
-    Returns list of strings contains the pathes to each of the test json file
+    Returns list of strings contains the paths to each of the test json file
     -------
 
     """
@@ -213,4 +219,4 @@ def run_test_one_jsontest(test_json):
 # run_ashrae9012019_tests()
 # output_dir = os.path.dirname(__file__)
 # generate_ashrae9012019_software_test_report(['tester'])
-# generate_ashrae9012019_software_test_report(None, output_dir)
+generate_ashrae9012019_software_test_report(None)

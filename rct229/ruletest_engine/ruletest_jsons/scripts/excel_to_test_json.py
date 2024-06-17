@@ -2,9 +2,7 @@ import os
 
 from rct229.ruletest_engine.ruletest_engine import validate_test_json_schema
 from rct229.ruletest_engine.ruletest_jsons.scripts.excel_to_test_json_utilities import (
-    create_test_json_from_excel,
-    update_unit_convention_record,
-)
+    create_test_json_from_excel, update_unit_convention_record)
 
 # ---------------------------------------USER INPUTS---------------------------------------
 
