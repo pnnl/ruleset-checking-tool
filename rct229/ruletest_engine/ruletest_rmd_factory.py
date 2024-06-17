@@ -1,10 +1,13 @@
 import copy
 
-from rct229.rule_engine.ruleset_model_factory import \
-    produce_ruleset_model_description
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rule_engine.rulesets import RuleSet
-from rct229.rulesets.ashrae9012019 import (BASELINE_0, BASELINE_90,
-                                           BASELINE_180, BASELINE_270)
+from rct229.rulesets.ashrae9012019 import (
+    BASELINE_0,
+    BASELINE_90,
+    BASELINE_180,
+    BASELINE_270,
+)
 from rct229.schema.schema_store import SchemaStore
 from rct229.utils.assertions import getattr_
 
