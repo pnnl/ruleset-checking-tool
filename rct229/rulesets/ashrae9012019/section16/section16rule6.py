@@ -33,8 +33,12 @@ class Section16Rule6(RuleDefinitionListIndexedBase):
         rmd_b = context.BASELINE_0
         rmd_p = context.PROPOSED
 
-        elevators_list_b = find_all("$.ruleset_model_descriptions[0].buildings[*].elevators[*]", rmd_b)
-        elevators_list_p = find_all("$.ruleset_model_descriptions[0].buildings[*].elevators[*]", rmd_p)
+        elevators_list_b = find_all(
+            "$.ruleset_model_descriptions[0].buildings[*].elevators[*]", rmd_b
+        )
+        elevators_list_p = find_all(
+            "$.ruleset_model_descriptions[0].buildings[*].elevators[*]", rmd_p
+        )
 
         return elevators_list_p and elevators_list_b
 
