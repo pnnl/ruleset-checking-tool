@@ -84,6 +84,23 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
                             USER=False, BASELINE_0=True, PROPOSED=True
                         ),
                         fail_msg=FAIL_MSG,
+                        precision={
+                            "subsurface_u_factor_b": {
+                                "precision": 0.000000001,
+                                "unit": "Btu/(hr*ft2*R)"
+                            },
+                            "subsurface_shgc_b": {
+                                "precision": 0.000000000001
+                            },
+                            "subsurface_glazed_area_b": {
+                                "precision": 0.000000000001,
+                                "unit": "ft2"
+                            },
+                            "subsurface_opaque_area_b": {
+                                "precision": 0.000000000001,
+                                "unit": "ft2"
+                            }
+                        }
                     )
 
                 def get_calc_vals(self, context, data=None):
@@ -119,19 +136,19 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
 
                 def rule_check(self, context, calc_vals=None, data=None):
                     return (
-                        std_equal(
+                        self.precision_comparison["subsurface_u_factor_b"](
                             calc_vals["subsurface_u_factor_b"],
                             calc_vals["subsurface_u_factor_p"],
                         )
-                        and std_equal(
+                        and self.precision_comparison["subsurface_shgc_b"](
                             calc_vals["subsurface_shgc_b"],
                             calc_vals["subsurface_shgc_p"],
                         )
-                        and std_equal(
+                        and self.precision_comparison["subsurface_glazed_area_b"](
                             calc_vals["subsurface_glazed_area_b"],
                             calc_vals["subsurface_glazed_area_p"],
                         )
-                        and std_equal(
+                        and self.precision_comparison["subsurface_opaque_area_b"](
                             calc_vals["subsurface_opaque_area_b"],
                             calc_vals["subsurface_opaque_area_p"],
                         )
