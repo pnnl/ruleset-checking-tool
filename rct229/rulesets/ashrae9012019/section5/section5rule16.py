@@ -109,6 +109,7 @@ class Section5Rule16(RuleDefinitionListIndexedBase):
                         "$": ["construction"],
                         "construction": ["u_factor"],
                     },
+                    precision=0.01,
                     fail_msg=FAIL_MSG,
                 )
 
@@ -170,7 +171,8 @@ class Section5Rule16(RuleDefinitionListIndexedBase):
                     total_fenestration_area_b == ZERO.AREA
                     and total_fenestration_area_p == ZERO.AREA
                 ) or (
-                    total_fenestration_area_surface_b / total_fenestration_area_b
-                ) == (
-                    total_fenestration_area_surface_p / total_fenestration_area_p
+                    self.precision_comparison(
+                        total_fenestration_area_surface_b / total_fenestration_area_b,
+                        total_fenestration_area_surface_p / total_fenestration_area_p,
+                    )
                 )
