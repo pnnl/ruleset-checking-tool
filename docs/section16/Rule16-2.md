@@ -16,7 +16,7 @@
 match_data_element, compare_schedules
 
 **Applicability Check 1:**
-- Rule is applicable if any building in the proposed RMD has an elevator: `if any(len(building.elevators) > 0 for building in P_RMD...buildings:`
+- Rule is applicable if any building in the proposed RMD has an elevator: `if len(building.elevators_p > 0 for building in P_RMD...buildings:`
 
 ## Rule Logic:
 - Determine if the project schedule uses a leap year: `is_leap_year = RPD.calendar.is_leap_year`
