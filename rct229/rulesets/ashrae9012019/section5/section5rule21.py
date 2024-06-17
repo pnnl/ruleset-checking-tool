@@ -87,20 +87,18 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
                         precision={
                             "subsurface_u_factor_b": {
                                 "precision": 0.000000001,
-                                "unit": "Btu/(hr*ft2*R)"
+                                "unit": "Btu/(hr*ft2*R)",
                             },
-                            "subsurface_shgc_b": {
-                                "precision": 0.000000000001
-                            },
+                            "subsurface_shgc_b": {"precision": 0.000000000001},
                             "subsurface_glazed_area_b": {
                                 "precision": 0.000000000001,
-                                "unit": "ft2"
+                                "unit": "ft2",
                             },
                             "subsurface_opaque_area_b": {
                                 "precision": 0.000000000001,
-                                "unit": "ft2"
-                            }
-                        }
+                                "unit": "ft2",
+                            },
+                        },
                     )
 
                 def get_calc_vals(self, context, data=None):

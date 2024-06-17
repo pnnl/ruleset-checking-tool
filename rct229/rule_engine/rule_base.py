@@ -24,18 +24,18 @@ class RuleDefinitionBase:
         self,
         rmds_used,
         rmds_used_optional=None,
-        id: str=None,
-        description: str=None,
-        ruleset_section_title: str=None,
-        standard_section: str=None,
-        is_primary_rule: bool=None,
-        rmd_context: str="",
+        id: str = None,
+        description: str = None,
+        ruleset_section_title: str = None,
+        standard_section: str = None,
+        is_primary_rule: bool = None,
+        rmd_context: str = "",
         required_fields=None,
-        manual_check_required_msg: str="",
-        fail_msg: str="",
-        pass_msg: str="",
-        not_applicable_msg: str="",
-        precision: Mapping[str, RCTPrecision]=None,
+        manual_check_required_msg: str = "",
+        fail_msg: str = "",
+        pass_msg: str = "",
+        not_applicable_msg: str = "",
+        precision: Mapping[str, RCTPrecision] = None,
     ):
         """Base class for all Rule definitions
 
@@ -110,7 +110,12 @@ class RuleDefinitionBase:
         if precision:
             self.precision_comparison = {
                 # if no unit, handle it as a dimensionless value.
-                key: partial(std_equal_with_precision, precision=val["precision"] * ureg(val["unit"]) if val.get("unit") else val["precision"])
+                key: partial(
+                    std_equal_with_precision,
+                    precision=val["precision"] * ureg(val["unit"])
+                    if val.get("unit")
+                    else val["precision"],
+                )
                 for key, val in precision.items()
             }
         else:
