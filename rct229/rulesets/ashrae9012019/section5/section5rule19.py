@@ -264,6 +264,8 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
                         rmrs_used=produce_ruleset_model_instance(
                             USER=False, BASELINE_0=True, PROPOSED=False
                         ),
+                        precision=0.01,
+                        precision_unit="Btu/(hr*ft2*R)",
                     )
 
                 def get_calc_vals(self, context, data=None):
@@ -295,7 +297,9 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
                 def rule_check(self, context, calc_vals=None, data=None):
                     target_u_factor = calc_vals["target_u_factor"]
                     subsurface_u_factor = calc_vals["subsurface_u_factor"]
-                    return target_u_factor == subsurface_u_factor
+                    return self.precision_comparison(
+                        subsurface_u_factor, target_u_factor
+                    )
 
                 def is_tolerance_fail(self, context, calc_vals=None, data=None):
                     target_u_factor = calc_vals["target_u_factor"]

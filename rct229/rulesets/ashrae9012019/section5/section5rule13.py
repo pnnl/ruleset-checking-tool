@@ -16,7 +16,6 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_ca
 )
 from rct229.utils.assertions import getattr_
 from rct229.utils.pint_utils import CalcQ
-from rct229.utils.std_comparisons import std_equal
 
 
 class Section5Rule13(RuleDefinitionListIndexedBase):
@@ -76,6 +75,8 @@ class Section5Rule13(RuleDefinitionListIndexedBase):
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
                     required_fields={"$": ["construction"]},
+                    precision=0.001,
+                    precision_unit="Btu/(hr*ft2*R)",
                 )
 
             def get_calc_vals(self, context, data=None):
@@ -157,19 +158,21 @@ class Section5Rule13(RuleDefinitionListIndexedBase):
                     return False
 
                 if baseline_surface_type in [OST.ABOVE_GRADE_WALL, OST.FLOOR, OST.ROOF]:
-                    return (
-                        calc_vals["baseline_surface_u_factor"]
-                        == calc_vals["proposed_surface_u_factor"],
+                    return self.precision_comparison(
+                        calc_vals["baseline_surface_u_factor"],
+                        calc_vals["proposed_surface_u_factor"],
                     )
+
                 elif baseline_surface_type in [OST.UNHEATED_SOG, OST.HEATED_SOG]:
-                    return (
-                        calc_vals["baseline_surface_f_factor"]
-                        == calc_vals["proposed_surface_f_factor"],
+                    return self.precision_comparison(
+                        calc_vals["baseline_surface_f_factor"],
+                        calc_vals["proposed_surface_f_factor"],
                     )
+
                 elif baseline_surface_type == OST.BELOW_GRADE_WALL:
-                    return (
-                        calc_vals["baseline_surface_c_factor"]
-                        == calc_vals["proposed_surface_c_factor"],
+                    return self.precision_comparison(
+                        calc_vals["baseline_surface_c_factor"],
+                        calc_vals["proposed_surface_c_factor"],
                     )
                 else:
                     return False

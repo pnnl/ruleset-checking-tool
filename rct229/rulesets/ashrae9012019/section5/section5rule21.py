@@ -9,7 +9,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_ca
     get_surface_conditioning_category_dict,
 )
 from rct229.utils.pint_utils import CalcQ
-from rct229.utils.std_comparisons import std_equal
+
 
 FAIL_MSG = "Subsurface that is not regulated (Not part of building envelope) is not modeled with the same area, U-factor and SHGC in the baseline as in the propsoed design."
 
@@ -83,6 +83,8 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
                         rmrs_used=produce_ruleset_model_instance(
                             USER=False, BASELINE_0=True, PROPOSED=True
                         ),
+                        precision=0.01,
+                        precision_unit="Btu/(hr*ft2*R)",
                         fail_msg=FAIL_MSG,
                     )
 
