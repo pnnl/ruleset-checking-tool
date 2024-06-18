@@ -71,7 +71,7 @@ class Section16Rule1(RuleDefinitionListIndexedBase):
             )["mechanical_efficiency"]
 
             # From Table G3.1 16 Elevators
-            # bhp = (Weight of Car + Rated Load – Counterweight) × Speed of Car / (33, 000 × h_mechanical)
+            # bhp = (Weight of Car + Rated Load – Counterweight) × Speed of Car / (33,000 × h_mechanical)
             # P_m = bhp x 746 / h_motor
             # Where,
             #       Weight of Car:  the proposed design elevator car weight, lb
@@ -90,17 +90,18 @@ class Section16Rule1(RuleDefinitionListIndexedBase):
                 * elevator_speed_b
                 * ureg("ft/min")
                 / (33000 * elevator_mechanical_efficiency_b)
-            )
+            ).m * ureg("hp")
             elevator_motor_efficiency_b = (
-                table_G3_9_1_lookup(motor_brake_horsepower_b)["motor_efficiency"]
+                table_G3_9_1_lookup(motor_brake_horsepower_b)[
+                    "nominal_full_load_efficiency"
+                ]
                 if total_floors_served_b > 4
-                else table_G3_9_3_lookup(motor_brake_horsepower_b)["motor_efficiency"]
+                else table_G3_9_3_lookup(motor_brake_horsepower_b)[
+                    "full_load_motor_efficiency_for_modeling"
+                ]
             )
             expected_peak_motor_power_b = (
-                motor_brake_horsepower_b.m
-                * ureg("hp")
-                * 746
-                / elevator_motor_efficiency_b
+                motor_brake_horsepower_b * 746 / elevator_motor_efficiency_b
             )
 
             return {
