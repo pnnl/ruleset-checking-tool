@@ -14,7 +14,7 @@ from rct229.utils.std_comparisons import std_equal_with_precision
 
 class RCTPrecision(TypedDict):
     precision: float
-    unit: str
+    unit: str | None
 
 
 class RuleDefinitionBase:
