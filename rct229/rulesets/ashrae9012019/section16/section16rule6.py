@@ -3,6 +3,7 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
+from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.std_comparisons import std_equal
 from rct229.utils.pint_utils import ZERO
@@ -58,7 +59,18 @@ class Section16Rule6(RuleDefinitionListIndexedBase):
             elevator_cab_ventilation_fan_power_b = elevator_b[
                 "cab_ventilation_fan_power"
             ]
+            assert_(
+                elevator_cab_ventilation_fan_power_b > ZERO.POWER,
+                "Elevator cab ventilation fan power should be " "greater than 0 W.",
+            )
+
             elevator_cab_ventilation_fan_flow_b = elevator_b["cab_ventilation_fan_flow"]
+            assert_(
+                elevator_cab_ventilation_fan_flow_b > ZERO.FLOW,
+                "Elevator cab ventilation fan flow rate should "
+                "be greater than 0 cfm.",
+            )
+
             return {
                 "elevator_cab_ventilation_fan_power_b": CalcQ(
                     "electric_power", elevator_cab_ventilation_fan_power_b
@@ -75,7 +87,7 @@ class Section16Rule6(RuleDefinitionListIndexedBase):
             elevator_cab_ventilation_fan_flow_b = calc_vals[
                 "elevator_cab_ventilation_fan_flow_b"
             ]
-            return elevator_cab_ventilation_fan_flow_b != ZERO.FLOW and std_equal(
+            return std_equal(
                 elevator_cab_ventilation_fan_power_b
                 / elevator_cab_ventilation_fan_flow_b,
                 REQ_ELEVATOR_CAB_VENTILATION_FAN_POWER,
