@@ -3,6 +3,7 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
+from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.std_comparisons import std_equal
 from rct229.utils.pint_utils import ZERO
@@ -54,7 +55,17 @@ class Section16Rule7(RuleDefinitionListIndexedBase):
         def get_calc_vals(self, context, data=None):
             elevator_b = context.BASELINE_0
             elevator_cab_lighting_power_b = elevator_b["cab_lighting_power"]
+            assert_(
+                elevator_cab_lighting_power_b > ZERO.POWER,
+                "Elevator cab lighting power shall be greater than 0 W",
+            )
+
             elevator_cab_area_b = elevator_b["cab_area"]
+            assert_(
+                elevator_cab_area_b > ZERO.AREA,
+                "Elevator cab FLOOR AREA shall be greater than 0 ft2",
+            )
+
             return {
                 "elevator_cab_lighting_power_b": CalcQ(
                     "electric_power", elevator_cab_lighting_power_b
