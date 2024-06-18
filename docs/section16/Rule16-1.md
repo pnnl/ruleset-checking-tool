@@ -10,13 +10,13 @@
 **Evaluation Context:** Each elevator  
 
 **Applicability Checks:**  
-  1. The proposed building has an elevator.  
+  1. The proposed and baseline buildings have an elevator.  
 
 **Function Call:**  
 data_lookup
 
 **Applicability Check 1:**
-- Rule is applicable if any building in the proposed RMD has an elevator: `if any(len(building.elevators) > 0 for building in P_RMD...buildings:`
+- Rule is applicable if the proposed and baseline RMD contain at least 1 elevator: `if find_all("$.buildings[*].elevators[*]", rmd_b) and find_all("$.buildings[*].elevators[*]", rmd_p):`
 
 ## Rule Logic:
 - For each elevator in the building: `for elevator in B_RMD...elevators`
