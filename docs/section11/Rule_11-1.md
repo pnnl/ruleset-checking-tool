@@ -27,7 +27,7 @@
 - use the function get_SWH_equipment_associated_with_each_swh_distribution_system to get a dictionary of SWH equipment associated with each Distribution System for the User model (pumps, tanks, SWH use, distribution system, etc): `u_swh_system_and_equip_dict = get_SWH_equipment_associated_with_each_swh_distribution_system(U_RMD)`
 - for each distribution system: `for distribution_id in p_swh_system_and_equip_dict:`
     - get the distribution system: `p_distribution = get_component_by_id(P_RMD, distribution_id)`
-    - for each swh use in the dictionary, check to see that the swh use exists in the user model: `for swh_use_id in p_swh_system_and_equip_dict[distribution_id]["SPACE_USES"]:`
+    - for each swh use in the dictionary, check to see that the swh use exists in the user model: `for swh_use_id in p_swh_system_and_equip_dict[distribution_id]["USES"]:`
         - get the user swh_use: `u_swh_use = get_component_by_id(U_RMD, swh_use_id)`
         - if the u_swh_use exists, continue to rule logic as we only need one SWH use to have this rule be applicable: `if(u_swh_use): CONTINUE TO RULE LOGIC`
     - if the program reaches this line without going to the rule logic, the project is not applicable for this SWH heating distribution system: `NOT_APPLICABLE`
