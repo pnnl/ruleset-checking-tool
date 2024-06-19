@@ -7,7 +7,7 @@ Inputs:
 
 Returns:
 - **swh_and_equip_dict**: A dictionary containing where the keys are the SWH Distribution System and values are dictionaries where keys are the type of SWH equipment and values are the ids of the connected equipment.  Example:  
-{"SWH_Distribution1":{"SWHHeatingEq":["swh_eq1","swh_eq2"], "Pumps":["p1"], "Tanks":["t1"], "Piping":["piping1"], "SolarThermal":[], "SPACE_USES":["sp1_use","sp2_use"], "SPACES_SERVED":[sp1,sp2]}}
+{"SWH_Distribution1":{"SWHHeatingEq":["swh_eq1","swh_eq2"], "Pumps":["p1"], "Tanks":["t1"], "Piping":["piping1"], "SolarThermal":[], "USES":["sp1_use","sp2_use"], "SPACES_SERVED":[sp1,sp2]}}
 
 Function Call:
 
@@ -19,7 +19,7 @@ Data Lookup: None
 Logic:
 - create a blank dictionary: `swh_and_equip_dict = {}`
 - for each swh distribution system in the RMD: `for distribution in RMD.service_water_heating_distribution_systems:`
-    - add the blank dictionary for the distribution system id: `swh_and_equip_dict.set_default(distribution.id, {"SWHHeatingEq":[],"Pumps":[],"Tanks":[], "Piping":[], "SolarThermal":[], "SPACE_USES":[], "SPACES_SERVED":[]})`
+    - add the blank dictionary for the distribution system id: `swh_and_equip_dict.set_default(distribution.id, {"SWHHeatingEq":[],"Pumps":[],"Tanks":[], "Piping":[], "SolarThermal":[], "USES":[], "SPACES_SERVED":[]})`
     - now we need to get all of the equipment connected to this distribution system.
     - get the tanks: `tanks = distribution.tanks`
     - append the tank ids to the dictionary: `for t in tanks:  swh_and_equip_dict[distribution.id]["Tanks"].append(t.id)`
@@ -33,11 +33,15 @@ Logic:
         - check if the distribution system referenced is the same as the distribution system we're currently looking at: `if swh_equip.distribution_system == distribution:`
             - this swh equipment is connected, append it to the list: `swh_and_equip_dict[distribution.id]["SWHHeatingEq"].append(swh_equip.id)`
             - this also means that any solarthermal attached to this swh_equip is connected, append the SolarThermal ids: `for solar_t in swh_equip.solar_thermal_systems: swh_and_equip_dict[distribution.id]["SolarThermal"].append(solar_t.id)`
-- now go through each space in the RMD: `for space in RMD...spaces:`
-    - go through each swh space use: `for swh_use in space.service_water_heating_uses:`
-        - find the distribution system: `distribution = swh_use.served_by_distribution_system`
-        - add the swh_use id to the dictionary for the distribution: `swh_and_equip_dict[distribution.id]["SPACE_USES"].append(swh_use.id)`
-        - add the space id to the dictionary for the distribution: `swh_and_equip_dict[distribution.id]["SPACES_SERVED"].append(space.id)`
+- now go through each SWH Use in the RMD: `for swh_use in RMD...service_water_heating_uses:`
+    - find the distribution system: `distribution = swh_use.served_by_distribution_system`
+    - add the swh_use id to the dictionary for the distribution: `swh_and_equip_dict[distribution.id]["USES"].append(swh_use.id)`
+    
+- now go through each SWH Use in the RMD: `for space in RMD...spaces:`
+    - look at each of the service water heating uses in the space: `for swh_use_id in space.service_water_heating_uses:`
+        - get the actual service water heating use: `swh_use = get_component_by_id(swh_use_id)`
+        - get the distribution system served by the swh_use: `distribution = swh_use.served_by_distribution_system`
+        - add the space id to the SPACES_SERVED list: ``swh_and_equip_dict[distribution.id]["SPACES_SERVED"].append(space.id)`
 
 **Returns** swh_and_equip_dict
 
