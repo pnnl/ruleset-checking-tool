@@ -24,13 +24,15 @@ def table_G3_9_3_lookup(shaft_input_power: Quantity) -> FullLoadMotorEfficiency:
     dict
         {full_load_motor_efficiency_for_modeling - The full load motor efficiency for modeling by Table G3.9.3}
 
+    Raises:
+    -------
+        TypeError: when the shaft_input_power_mag is less or equal to 0, the function will raise this error
     """
 
-    shaft_input_power_mag = shaft_input_power * ureg("hp")
-    shaft_input_power_mag = shaft_input_power_mag.magnitude
+    shaft_input_power_mag = shaft_input_power.to("hp").magnitude
     assert_(
-        shaft_input_power_mag >= 0,
-        "shaft input power is negative value, incorrect data.",
+        shaft_input_power_mag > 0,
+        "shaft input power is a negative value, incorrect data.",
     )
     shaft_input_power = math.ceil(shaft_input_power_mag / 10) * 10
 
