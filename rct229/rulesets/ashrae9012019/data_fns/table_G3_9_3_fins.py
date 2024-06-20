@@ -4,7 +4,6 @@ from typing import TypedDict
 from pint import Quantity
 from rct229.rulesets.ashrae9012019.data import data
 from rct229.rulesets.ashrae9012019.data_fns.table_utils import find_osstd_table_entry
-from rct229.schema.config import ureg
 from rct229.utils.assertions import assert_
 
 
