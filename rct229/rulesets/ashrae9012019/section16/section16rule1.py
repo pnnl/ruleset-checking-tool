@@ -98,7 +98,7 @@ class Section16Rule1(RuleDefinitionListIndexedBase):
             ).m * ureg("hp")
             elevator_motor_efficiency_b = (
                 table_G3_9_1_lookup(motor_brake_horsepower_b)[
-                    "nominal_full_load_efficiency"
+                    "full_load_motor_efficiency_for_modeling"
                 ]
                 if total_floors_served_b > 4
                 else table_G3_9_3_lookup(motor_brake_horsepower_b)[

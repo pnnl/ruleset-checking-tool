@@ -1,6 +1,7 @@
 from rct229.rulesets.ashrae9012019.data import data
 from rct229.rulesets.ashrae9012019.data_fns.table_utils import find_osstd_table_entry
 from rct229.schema.config import ureg
+from rct229.utils.assertions import assert_
 
 
 def table_G3_9_1_lookup(shaft_input_power):
@@ -17,9 +18,12 @@ def table_G3_9_1_lookup(shaft_input_power):
 
     """
 
-    if 0 * ureg("hp") <= shaft_input_power < 1.0 * ureg("hp"):
-        minimum_shaft_input_power = 0.0
-    elif 1.0 * ureg("hp") <= shaft_input_power < 1.5 * ureg("hp"):
+    assert_(
+        shaft_input_power >= 1.0 * ureg("hp"),
+        "The `shaft_input_power` must be greater or equal to 1.0 hp.",
+    )
+
+    if 1.0 * ureg("hp") <= shaft_input_power < 1.5 * ureg("hp"):
         minimum_shaft_input_power = 1.0
     elif 1.5 * ureg("hp") <= shaft_input_power < 2.0 * ureg("hp"):
         minimum_shaft_input_power = 1.5
@@ -58,9 +62,11 @@ def table_G3_9_1_lookup(shaft_input_power):
     elif 200.0 * ureg("hp") <= shaft_input_power:
         minimum_shaft_input_power = 200.0
 
-    nominal_full_load_efficiency = find_osstd_table_entry(
-        [("minimum_capacity", minimum_shaft_input_power)],
-        osstd_table=data["ashrae_90_1_prm_2019.motors"],
-    )["nominal_full_load_efficiency"]
+    full_load_motor_efficiency_for_modeling = find_osstd_table_entry(
+        [("shaft_input_power", minimum_shaft_input_power)],
+        osstd_table=data["ashrae_90_1_table_G3_9_1"],
+    )["full_load_motor_efficiency_for_modeling"]
 
-    return {"nominal_full_load_efficiency": nominal_full_load_efficiency}
+    return {
+        "full_load_motor_efficiency_for_modeling": full_load_motor_efficiency_for_modeling
+    }
