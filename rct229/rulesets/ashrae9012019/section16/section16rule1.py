@@ -64,20 +64,29 @@ class Section16Rule1(RuleDefinitionListIndexedBase):
             )
 
             elevator_motor_power_b = getattr_(elevator_b, "elevators", "motor_power")
+
             elevator_cab_weight_b = getattr_(elevator_b, "elevators", "cab_weight")
             elevator_cab_counterweight_b = getattr_(
                 elevator_b, "elevators", "cab_counterweight"
             )
             elevator_design_load_b = getattr_(elevator_b, "elevators", "design_load")
-            elevator_speed_b = getattr_(elevator_b, "elevators", "speed")
+            assert_(
+                elevator_cab_weight_b
+                + elevator_design_load_b
+                - elevator_cab_counterweight_b
+                > ZERO.WEIGHT,
+                "Elevator cab counter weight shall be smaller than the sum of cab weight and design load. A "
+                "typical cab counter weight is the sum of cab weight and 40% of design load.",
+            )
 
+            elevator_speed_b = getattr_(elevator_b, "elevators", "speed")
             elevator_mechanical_efficiency_b = table_G3_9_2_lookup(
                 total_floors_served_b
             )["mechanical_efficiency"]
 
             # From Table G3.1 16 Elevators
-            # bhp = (Weight of Car + Rated Load – Counterweight) × Speed of Car / (33,000 × h_mechanical)
-            # P_m = bhp x 746 / h_motor
+            # bhp (hp) = (Weight of Car + Rated Load – Counterweight) × Speed of Car / (33,000 × h_mechanical)
+            # P_m (W) = bhp x 746 / h_motor
             # Where,
             #       Weight of Car:  the proposed design elevator car weight, lb
             #       Rated Load: the proposed design elevator load at which to operate, lb
@@ -95,15 +104,6 @@ class Section16Rule1(RuleDefinitionListIndexedBase):
                 * elevator_speed_b.to("ft/min")
                 / (33000 * elevator_mechanical_efficiency_b)
             ).m * ureg("hp")
-
-            assert_(
-                elevator_cab_weight_b
-                + elevator_design_load_b
-                - elevator_cab_counterweight_b
-                > ZERO.WEIGHT,
-                "Elevator cab counter weight shall be smaller than the sum of cab weight and design load. A "
-                "typical cab counter weight is the sum of cab weight and 40% of design load.",
-            )
 
             elevator_motor_efficiency_b = (
                 table_G3_9_1_lookup(motor_brake_horsepower_b)[
