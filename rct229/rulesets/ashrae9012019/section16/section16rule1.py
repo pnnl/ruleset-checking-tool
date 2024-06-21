@@ -115,7 +115,7 @@ class Section16Rule1(RuleDefinitionListIndexedBase):
                 ]
             )
             expected_peak_motor_power_b = (
-                motor_brake_horsepower_b * 746 / elevator_motor_efficiency_b
+                motor_brake_horsepower_b / elevator_motor_efficiency_b
             )
 
             return {
