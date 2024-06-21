@@ -233,6 +233,7 @@ def run_section_tests(test_json_name: str, ruleset_doc: RuleSet):
 
     # Cycle through tests in test JSON and run each individually
     for test_id in test_list_dictionary:
+        print(f"Processing Test: {test_id}")
         # Load next test dictionary from test list
         test_dict = test_list_dictionary[test_id]
 

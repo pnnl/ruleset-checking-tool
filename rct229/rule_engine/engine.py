@@ -232,15 +232,19 @@ def evaluate_rules(
     # counter starts at 1
     rule_counter = 0
     # Evaluate the rules
-    for rule in rules_list:
-        print(f"Processing Rule {rule.id}")
-        outcome = rule.evaluate(copied_rmds)
+    if len(rules_list) == 1:
+        outcome = rules_list[0].evaluate(copied_rmds)
         outcomes.append(outcome)
-        rule_counter += 1
-        if rule_counter in counting_steps:
-            print(
-                f"Project Evaluation Session ID: #{session_id}# => Compliance evaluation progress: {round(rule_counter / total_num_rules * 100)}%"
-            )
+    else:
+        for rule in rules_list:
+            print(f"Processing Rule {rule.id}")
+            outcome = rule.evaluate(copied_rmds)
+            outcomes.append(outcome)
+            rule_counter += 1
+            if rule_counter in counting_steps:
+                print(
+                    f"Project Evaluation Session ID: #{session_id}# => Compliance evaluation progress: {round(rule_counter / total_num_rules * 100)}%"
+                )
 
     return {
         "invalid_rmrs": invalid_rmds,
