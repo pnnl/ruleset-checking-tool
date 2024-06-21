@@ -5,7 +5,7 @@ from rct229.schema.config import ureg
 def test__table_G3_9_lookup__1_2_shaft_input_power():
     assert table_G3_9_1_lookup(
         shaft_input_power=1.2 * ureg("hp"),
-    ) == {"full_load_motor_efficiency_for_modeling": 0.825}
+    ) == {"full_load_motor_efficiency_for_modeling": 0.840}
 
 
 def test__table_G3_9_lookup__7_5_shaft_input_power():

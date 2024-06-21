@@ -16,7 +16,7 @@
         {"shaft_input_power": 60.0, "full_load_motor_efficiency_for_modeling": 0.936},
         {"shaft_input_power": 75.0, "full_load_motor_efficiency_for_modeling": 0.941},
         {"shaft_input_power": 100.0, "full_load_motor_efficiency_for_modeling": 0.945},
-        {"shaft_input_power": 1250, "full_load_motor_efficiency_for_modeling": 0.945},
+        {"shaft_input_power": 125.0, "full_load_motor_efficiency_for_modeling": 0.945},
         {"shaft_input_power": 150.0, "full_load_motor_efficiency_for_modeling": 0.950},
         {"shaft_input_power": 200.0, "full_load_motor_efficiency_for_modeling": 0.950}
     ]

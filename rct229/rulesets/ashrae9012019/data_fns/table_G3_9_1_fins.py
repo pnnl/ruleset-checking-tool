@@ -23,52 +23,53 @@ def table_G3_9_1_lookup(
     Returns
     -------
     dict
-        {nominal_full_load_efficiency - The full load motor efficiency by Table G3.9.1}
+        {full_load_motor_efficiency_for_modeling - The full load motor efficiency by Table G3.9.1}
 
     """
 
     assert_(
-        shaft_input_power >= 1.0 * ureg("hp"),
-        "The `shaft_input_power` must be greater or equal to 1.0 hp.",
+        shaft_input_power > 0.0 * ureg("hp"),
+        "The `shaft_input_power` must be greater than 0.0 hp.",
     )
+    shaft_input_power_mag = shaft_input_power.magnitude
 
-    if 1.0 * ureg("hp") <= shaft_input_power < 1.5 * ureg("hp"):
+    if shaft_input_power_mag <= 1.0:
         minimum_shaft_input_power = 1.0
-    elif 1.5 * ureg("hp") <= shaft_input_power < 2.0 * ureg("hp"):
+    elif shaft_input_power_mag <= 1.5:
         minimum_shaft_input_power = 1.5
-    elif 2.0 * ureg("hp") <= shaft_input_power < 5.0 * ureg("hp"):
+    elif shaft_input_power_mag <= 2.0:
         minimum_shaft_input_power = 2.0
-    elif 3.0 * ureg("hp") <= shaft_input_power < 7.5 * ureg("hp"):
+    elif shaft_input_power_mag <= 3.0:
         minimum_shaft_input_power = 3.0
-    elif 5.0 * ureg("hp") <= shaft_input_power < 7.5 * ureg("hp"):
+    elif shaft_input_power_mag <= 5.0:
         minimum_shaft_input_power = 5.0
-    elif 7.5 * ureg("hp") <= shaft_input_power < 10.0 * ureg("hp"):
+    elif shaft_input_power_mag <= 7.5:
         minimum_shaft_input_power = 7.5
-    elif 10.0 * ureg("hp") <= shaft_input_power < 15.0 * ureg("hp"):
+    elif shaft_input_power_mag <= 10.0:
         minimum_shaft_input_power = 10.0
-    elif 15.0 * ureg("hp") <= shaft_input_power < 20.0 * ureg("hp"):
+    elif shaft_input_power_mag <= 15.0:
         minimum_shaft_input_power = 15.0
-    elif 20.0 * ureg("hp") <= shaft_input_power < 25.0 * ureg("hp"):
+    elif shaft_input_power_mag <= 20.0:
         minimum_shaft_input_power = 20.0
-    elif 25.0 * ureg("hp") <= shaft_input_power < 30.0 * ureg("hp"):
+    elif shaft_input_power_mag <= 25.0:
         minimum_shaft_input_power = 25.0
-    elif 30.0 * ureg("hp") <= shaft_input_power < 40.0 * ureg("hp"):
+    elif shaft_input_power_mag <= 30.0:
         minimum_shaft_input_power = 30.0
-    elif 40.0 * ureg("hp") <= shaft_input_power < 50.0 * ureg("hp"):
+    elif shaft_input_power_mag <= 40.0:
         minimum_shaft_input_power = 40.0
-    elif 50.0 * ureg("hp") <= shaft_input_power < 60.0 * ureg("hp"):
+    elif shaft_input_power_mag <= 50.0:
         minimum_shaft_input_power = 50.0
-    elif 60.0 * ureg("hp") <= shaft_input_power < 75.0 * ureg("hp"):
+    elif shaft_input_power_mag <= 60.0:
         minimum_shaft_input_power = 60.0
-    elif 75.0 * ureg("hp") <= shaft_input_power < 100.0 * ureg("hp"):
+    elif shaft_input_power_mag <= 75.0:
         minimum_shaft_input_power = 75.0
-    elif 100.0 * ureg("hp") <= shaft_input_power < 125.0 * ureg("hp"):
+    elif shaft_input_power_mag <= 100.0:
         minimum_shaft_input_power = 100.0
-    elif 125.0 * ureg("hp") <= shaft_input_power < 150.0 * ureg("hp"):
+    elif shaft_input_power_mag <= 125.0:
         minimum_shaft_input_power = 125.0
-    elif 150.0 * ureg("hp") <= shaft_input_power < 200.0 * ureg("hp"):
+    elif shaft_input_power_mag <= 150.0:
         minimum_shaft_input_power = 150.0
-    elif 200.0 * ureg("hp") <= shaft_input_power:
+    else:
         minimum_shaft_input_power = 200.0
 
     full_load_motor_efficiency_for_modeling = find_osstd_table_entry(
