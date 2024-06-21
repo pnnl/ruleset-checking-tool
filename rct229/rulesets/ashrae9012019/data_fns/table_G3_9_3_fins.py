@@ -1,14 +1,10 @@
 import math
-from typing import TypedDict
 
 from pint import Quantity
 from rct229.rulesets.ashrae9012019.data import data
+from rct229.rulesets.ashrae9012019.data_fns.table_G3_9_1_fins import FullLoadMotorEfficiency
 from rct229.rulesets.ashrae9012019.data_fns.table_utils import find_osstd_table_entry
 from rct229.utils.assertions import assert_
-
-
-class FullLoadMotorEfficiency(TypedDict):
-    full_load_motor_efficiency_for_modeling: float
 
 
 def table_G3_9_3_lookup(shaft_input_power: Quantity) -> FullLoadMotorEfficiency:
