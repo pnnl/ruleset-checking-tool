@@ -2,7 +2,9 @@ import math
 
 from pint import Quantity
 from rct229.rulesets.ashrae9012019.data import data
-from rct229.rulesets.ashrae9012019.data_fns.table_G3_9_1_fins import FullLoadMotorEfficiency
+from rct229.rulesets.ashrae9012019.data_fns.table_G3_9_1_fins import (
+    FullLoadMotorEfficiency,
+)
 from rct229.rulesets.ashrae9012019.data_fns.table_utils import find_osstd_table_entry
 from rct229.utils.assertions import assert_
 
