@@ -8,7 +8,7 @@ from rct229.rulesets.ashrae9012019.data_fns.table_G3_9_3_fins import table_G3_9_
 from rct229.schema.config import ureg
 from rct229.utils.assertions import assert_, getattr_
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.pint_utils import CalcQ
+from rct229.utils.pint_utils import ZERO, CalcQ
 from rct229.utils.std_comparisons import std_equal
 
 
@@ -88,14 +88,23 @@ class Section16Rule1(RuleDefinitionListIndexedBase):
             #       Pm: peak elevator motor power, W
             motor_brake_horsepower_b = (
                 (
-                    elevator_cab_weight_b * ureg("lb")
-                    + elevator_design_load_b * ureg("lb")
-                    - elevator_cab_counterweight_b * ureg("lb")
+                    elevator_cab_weight_b.to("lb")
+                    + elevator_design_load_b.to("lb")
+                    - elevator_cab_counterweight_b.to("lb")
                 )
-                * elevator_speed_b
-                * ureg("ft/min")
+                * elevator_speed_b.to("ft/min")
                 / (33000 * elevator_mechanical_efficiency_b)
             ).m * ureg("hp")
+
+            assert_(
+                elevator_cab_weight_b
+                + elevator_design_load_b
+                - elevator_cab_counterweight_b
+                > ZERO.WEIGHT,
+                "Elevator cab counter weight shall be smaller than the sum of cab weight and design load. A "
+                "typical cab counter weight is the sum of cab weight and 40% of design load.",
+            )
+
             elevator_motor_efficiency_b = (
                 table_G3_9_1_lookup(motor_brake_horsepower_b)[
                     "full_load_motor_efficiency_for_modeling"
@@ -106,7 +115,7 @@ class Section16Rule1(RuleDefinitionListIndexedBase):
                 ]
             )
             expected_peak_motor_power_b = (
-                motor_brake_horsepower_b * 746 / elevator_motor_efficiency_b
+                motor_brake_horsepower_b / elevator_motor_efficiency_b
             )
 
             return {
