@@ -7,13 +7,13 @@ from rct229.schema.config import ureg
 from rct229.utils.assertions import assert_
 
 
-class FullLoadMotorEfficiencyForModeling(TypedDict):
+class FullLoadMotorEfficiency(TypedDict):
     full_load_motor_efficiency_for_modeling: float
 
 
 def table_G3_9_1_lookup(
     shaft_input_power: Quantity,
-) -> FullLoadMotorEfficiencyForModeling:
+) -> FullLoadMotorEfficiency:
     """Returns the full-load motor efficiency for motors as required by ASHRAE 90.1 Table G3.9.1
     Parameters
     ----------
