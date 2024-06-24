@@ -95,6 +95,7 @@ class Section16Rule1(RuleDefinitionListIndexedBase):
             #       h_mechanical: the mechanical efficiency of the elevator from Table G3.9.2
             #       h_motor: the motor efficiency from Table G3.9.2
             #       Pm: peak elevator motor power, W
+            # Note: In the P_m equation
             motor_brake_horsepower_b = (
                 (
                     elevator_cab_weight_b.to("lb")
@@ -116,7 +117,7 @@ class Section16Rule1(RuleDefinitionListIndexedBase):
             )
             expected_peak_motor_power_b = (
                 motor_brake_horsepower_b / elevator_motor_efficiency_b
-            )
+            )  # We didn't include 746 because it's a conversion factor (e.g., 745.7 W = 1 hp)
 
             return {
                 "expected_peak_motor_power_b": CalcQ(
