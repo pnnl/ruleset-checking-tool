@@ -95,7 +95,6 @@ class Section16Rule1(RuleDefinitionListIndexedBase):
             #       h_mechanical: the mechanical efficiency of the elevator from Table G3.9.2
             #       h_motor: the motor efficiency from Table G3.9.2
             #       Pm: peak elevator motor power, W
-            # Note: In the P_m equation
             motor_brake_horsepower_b = (
                 (
                     elevator_cab_weight_b.to("lb")
