@@ -81,6 +81,12 @@ class Section5Rule4(RuleDefinitionListIndexedBase):
                         "$": ["construction"],
                         "construction": ["u_factor"],
                     },
+                    precision={
+                        "roof_u_factor_b": {
+                            "precision": 0.001,
+                            "unit": "Btu/(hr*ft2*R)",
+                        }
+                    },
                 )
 
             def get_calc_vals(self, context, data=None):
@@ -133,9 +139,9 @@ class Section5Rule4(RuleDefinitionListIndexedBase):
                 )
 
             def rule_check(self, context=None, calc_vals=None, data=None):
-                roof_u_factor = calc_vals["roof_u_factor"]
-                target_u_factor = calc_vals["target_u_factor"]
-                return roof_u_factor == target_u_factor
+                return self.precision_comparison["roof_u_factor_b"](
+                    calc_vals["roof_u_factor"], calc_vals["target_u_factor"]
+                )
 
             def is_tolerance_fail(self, context, calc_vals=None, data=None):
                 roof_u_factor = calc_vals["roof_u_factor"]

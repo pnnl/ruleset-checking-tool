@@ -251,8 +251,12 @@ class Section5Rule20(RuleDefinitionListIndexedBase):
                         rmds_used=produce_ruleset_model_description(
                             USER=False, BASELINE_0=True, PROPOSED=False
                         ),
-                        precision=0.01,
-                        precision_unit="Btu/(hr*ft2*R)",
+                        precision={
+                            "subsurface_shgc_b": {
+                                "precision": 0.01,
+                                "unit": "",
+                            }
+                        },
                     )
 
                 def manual_check_required(self, context, calc_vals=None, data=None):
@@ -284,9 +288,9 @@ class Section5Rule20(RuleDefinitionListIndexedBase):
                 def rule_check(self, context, calc_vals=None, data=None):
                     target_shgc = calc_vals["target_shgc"]
                     subsurface_shgc = calc_vals["subsurface_shgc"]
-                    return target_shgc is not None and self.precision_comparison(
-                        subsurface_shgc, target_shgc
-                    )
+                    return target_shgc is not None and self.precision_comparison[
+                        "subsurface_shgc_b"
+                    ](subsurface_shgc, target_shgc)
 
                 def is_tolerance_fail(self, context, calc_vals=None, data=None):
                     target_shgc = calc_vals["target_shgc"]

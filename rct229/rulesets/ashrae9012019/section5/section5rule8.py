@@ -78,8 +78,12 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
                     required_fields={},
-                    precision=0.001,
-                    precision_unit="Btu/(hr*ft2*R)",
+                    precision={
+                        "ag_wall_u_factor_b": {
+                            "precision": 0.001,
+                            "unit": "Btu/(hr*ft2*R)",
+                        }
+                    },
                 )
 
             def get_calc_vals(self, context, data=None):
@@ -132,10 +136,8 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
                 return target_u_factor_res != target_u_factor_nonres
 
             def rule_check(self, context, calc_vals=None, data=None):
-                above_grade_wall_u_factor = calc_vals["above_grade_wall_u_factor"]
-                target_u_factor = calc_vals["target_u_factor"]
-                return self.precision_comparison(
-                    above_grade_wall_u_factor, target_u_factor
+                return self.precision_comparison["ag_wall_u_factor_b"](
+                    calc_vals["above_grade_wall_u_factor"], calc_vals["target_u_factor"]
                 )
 
             def is_tolerance_fail(self, context, calc_vals=None, data=None):
