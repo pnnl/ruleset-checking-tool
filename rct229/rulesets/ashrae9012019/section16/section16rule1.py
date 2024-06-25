@@ -116,7 +116,7 @@ class Section16Rule1(RuleDefinitionListIndexedBase):
             )
             expected_peak_motor_power_b = (
                 motor_brake_horsepower_b / elevator_motor_efficiency_b
-            )
+            )  # We didn't include 746 because it's a conversion factor (e.g., 745.7 W = 1 hp)
 
             return {
                 "expected_peak_motor_power_b": CalcQ(
