@@ -1,3 +1,16 @@
+BuildingSegment:
+  Data Elements:
+    id:
+      AppG 11-1 P_RMD Equals U_RMD: true
+      AppG 11-3 P_RMD Equals B_RMD: true
+    service_water_heating_uses:
+      AppG 11-1 P_RMD Equals U_RMD: true
+      AppG 11-3 P_RMD Equals B_RMD: true
+    service_water_heating_building_area_type:
+      AppG 11-1 P_RMD Equals U_RMD: true
+      AppG 11-3 P_RMD Equals B_RMD: true
+    
+
 ServiceWaterHeatingDistributionSystem:
   Data Elements:
     id:
