@@ -1,13 +1,5 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
-from rct229.rulesets.ashrae9012019 import (
-    BASELINE_0,
-    BASELINE_90,
-    BASELINE_180,
-    BASELINE_270,
-    PROPOSED,
-    USER,
-)
 from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_one
 
