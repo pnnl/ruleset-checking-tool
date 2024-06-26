@@ -6,7 +6,6 @@ import re
 import pandas as pd
 from openpyxl import utils
 from openpyxl.styles import Alignment, Font, PatternFill
-
 from rct229.utils.natural_sort import natural_keys
 
 

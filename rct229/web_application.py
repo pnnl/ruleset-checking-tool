@@ -1,98 +1,14 @@
 import os
 
-import rct229.rulesets as rulesets
 import rct229.rulesets as rs
 from rct229.reports import reports as rct_report
-from rct229.rule_engine.engine import evaluate_all_rules, evaluate_all_rules_rpd
-from rct229.rule_engine.rulesets import RuleSet, RuleSetTest
-from rct229.ruletest_engine.ruletest_jsons.scripts.excel_to_test_json_utilities import (
-    generate_rule_test_dictionary,
-)
+from rct229.rule_engine.engine import evaluate_all_rules_rpd
+from rct229.rule_engine.rulesets import RuleSet
+from rct229.ruleset_functions import _setup_workflow
 from rct229.ruletest_engine.run_ruletests import (
     generate_ashrae9012019_software_test_report,
 )
-from rct229.schema.schema_enums import SchemaEnums
-from rct229.schema.schema_store import SchemaStore
 from rct229.utils.assertions import assert_
-
-
-def count_number_of_rules(ruleset_standard):
-    """Returns the number of rules in a standard
-
-     Parameters
-     ----------
-     ruleset_standard : str
-         Name of the code standard you're interested in counting under the rct229/rulesets directory.
-         Ex: 'ashrae9012019'
-
-     Returns
-    -------
-    count_dict: dict
-        Python dict with keys for each section in a given standard and their respective count.
-        Also contains 'Total' as a key with the sum total rules
-
-    """
-
-    if not _setup_workflow(ruleset_standard):
-        assert_(
-            False,
-            f"Provided ruleset, {ruleset_standard}, does not match the available ones in the RCT. Available: ashrae9012019 ",
-        )
-
-    # Collect rule modules as a list of tuples
-    available_rule_definitions = rulesets.__getrules__()
-
-    # Dictionary with rule counts
-    count_dict = {}
-
-    for rule_definition_tuple in available_rule_definitions:
-
-        # Parse section name from Section{N}Rule{N}, then add it to the dictionary count
-        section_name = rule_definition_tuple[0].split("Rule")[0].lower()
-        count_dict[section_name] = count_dict.get(section_name, 0) + 1
-
-    # Get total number of rules
-    count_dict["total"] = sum(count_dict.values())
-
-    return count_dict
-
-
-def count_number_of_ruletest_cases(ruleset_standard):
-    """Returns the number of rule test cases in a standard
-
-     Parameters
-     ----------
-     ruleset_standard : str
-         Name of the code standard you're interested in counting under the rct229/rulesets directory.
-         Ex: 'ashrae9012019'
-
-     Returns
-    -------
-    count_dict: dict
-        Python dict with keys for each section in a given standard and their respective count.
-        Also contains 'Total' as a key with the sum total rule tests
-
-    """
-    if not _setup_workflow(ruleset_standard):
-        assert_(
-            False,
-            f"Provided ruleset, {ruleset_standard}, does not match the available ones in the RCT. Available: ashrae9012019 ",
-        )
-
-    # Aggregate rule test information into a dictionary
-    master_ruletest_dict = generate_rule_test_dictionary(ruleset_standard)
-
-    # Dictionary with ruletest counts
-    count_dict = {}
-
-    # Iterate through each section and get the number of rule unit tests
-    for section_name, section_dict in master_ruletest_dict.items():
-        count_dict[section_name] = len(section_dict["Rule_Unit_Test"])
-
-    # Get total rule unit tests
-    count_dict["total"] = sum(count_dict.values())
-
-    return count_dict
 
 
 def run_software_test(ruleset, section=None, saving_dir="./"):
@@ -204,22 +120,3 @@ def get_available_rulesets():
 
     """
     return rs.__all__
-
-
-def _setup_workflow(ruleset: str):
-    """
-    Helper function
-    Parameters
-    ----------
-    ruleset
-
-    Returns
-    -------
-
-    """
-    setup_flag = False
-    if ruleset == RuleSet.ASHRAE9012019_RULESET:
-        SchemaStore.set_ruleset(RuleSet.ASHRAE9012019_RULESET)
-        SchemaEnums.update_schema_enum()
-        setup_flag = True
-    return setup_flag

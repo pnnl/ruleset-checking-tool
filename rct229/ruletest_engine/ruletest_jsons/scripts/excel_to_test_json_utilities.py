@@ -5,7 +5,6 @@ import os
 
 import pandas as pd
 import pint
-
 from rct229.rule_engine.rulesets import RuleSet
 from rct229.ruletest_engine.ruletest_jsons.scripts.excel_generation_utilities import (
     generate_rule_test_dictionary,

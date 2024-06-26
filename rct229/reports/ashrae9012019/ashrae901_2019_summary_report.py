@@ -3,6 +3,7 @@ import re
 from pydash import find
 from rct229.report_engine.rct_report import RCTReport
 from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
+from rct229.rule_engine.rulesets import SectionTitle
 
 
 class ASHRAE9012019SummaryReport(RCTReport):
@@ -14,35 +15,8 @@ class ASHRAE9012019SummaryReport(RCTReport):
         self.ruleset_report_file = f"{self.__class__.__name__}.md"
 
     def initialize_ruleset_report(self, rule_outcome=None):
-        self.section_list = [
-            "All",
-            "Performance Calculations",
-            "Schedules Setpoints",
-            "Envelope",
-            "Lighting",
-            "HVAC General",
-            "Receptacles",
-            "Transformers",
-            "HVAC-Baseline",
-            "HVAC-General",
-            "HVAC-HotWaterSide",
-            "HVAC-ChilledWaterSide",
-            "HVAC-AirSide",
-        ]  # TODO: need to expand as more sections are developed
-        self.section_dict = {
-            "1": "Performance Calculations",
-            "4": "Schedules Setpoints",
-            "5": "Envelope",
-            "6": "Lighting",
-            "10": "HVAC General",
-            "12": "Receptacles",
-            "15": "Transformers",
-            "18": "HVAC-Baseline",
-            "19": "HVAC-General",
-            "21": "HVAC-HotWaterSide",
-            "22": "HVAC-ChilledWaterSide",
-            "23": "HVAC-AirSide",
-        }
+        self.section_list = SectionTitle.ASHRAE9012019_SECTION_LIST
+        self.section_dict = SectionTitle.ASHRAE9012019_SECTION_DICT
         self.ruleset_outcome = {
             name: {
                 RCTOutcomeLabel.PASS: 0,
