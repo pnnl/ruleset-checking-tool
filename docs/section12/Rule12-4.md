@@ -20,7 +20,7 @@
 
 ## Applicability Checks:  
 - Iterate through the spaces in the baseline RMD: `for space_b in find_all("$.buildings[*].building_segments[*].zones[*].spaces[*]", B_RMD):`
-  - Check if the space is a computer room: `if is_space_a_computer_room(space):`
+  - Check if the space is a computer room: `if is_space_a_computer_room(space_b):`
     - Iterate through the miscelleneous equipment loads: `for misc_equip_b in space_b.miscellaneous_equipment:`
       - Check if the equipment is IT equipment: `if misc_equip_b.type == "INFORMATION_TECHNOLOGY_EQUIPMENT" and misc_equip_b.power > 0:`
         - Rule is applicable: `return True`
