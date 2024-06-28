@@ -18,7 +18,7 @@
 2) compare_schedules
 
 ## Applicability Checks:  
-- Create a list of the lighting space types that correspond to space types that may have receptacle control requirements in Section 8.4.1: `EXPECTED_RECEPTACLE_CONTROL_SPACE_TYPES = ["OFFICE_ENCLOSED", "CONFERENCE_MEETING_MULTIPURPOSE_ROOM", "COPY_PRINT_ROOM", "LOUNGE_BREAKROOM_HEALTH_CARE_FACILITY", "LOUNGE_BREAKROOM_ALL_OTHERS", "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_PENITENTIARY", "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_SCHOOL", "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_ALL_OTHER", "OFFICE_OPEN_PLAN"]`  
+- Create a list of the lighting space types that correspond to space types that may have receptacle control requirements in Section 8.4.2: `EXPECTED_RECEPTACLE_CONTROL_SPACE_TYPES = ["OFFICE_ENCLOSED", "CONFERENCE_MEETING_MULTIPURPOSE_ROOM", "COPY_PRINT_ROOM", "LOUNGE_BREAKROOM_HEALTH_CARE_FACILITY", "LOUNGE_BREAKROOM_ALL_OTHERS", "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_PENITENTIARY", "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_SCHOOL", "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_ALL_OTHER", "OFFICE_OPEN_PLAN"]`  
 - Create a list to store the spaces that have receptacle controls installed where not required by Standard 90.1 2019, Section 8.4.2: `spaces_with_receptacle_controls_beyond_req = []`  
 - Iterate through the spaces in the proposed model: `for space_p in P_RMD...spaces`  
   - Get the lighting space type: `space_type_p = space_p.lighting_space_type`  
