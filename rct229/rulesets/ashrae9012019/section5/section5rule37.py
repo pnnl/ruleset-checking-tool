@@ -57,6 +57,12 @@ class Section5Rule37(RuleDefinitionListIndexedBase):
                     USER=False, BASELINE_0=False, PROPOSED=True
                 ),
                 required_fields={"$..zones[*]": ["surfaces"]},
+                precision={
+                    "building_total_air_leakage_rate_b": {
+                        "precision": 1,
+                        "unit": "cfm",
+                    }
+                },
             )
 
         def get_calc_vals(self, context, data=None):
@@ -156,9 +162,11 @@ class Section5Rule37(RuleDefinitionListIndexedBase):
                     building_total_air_leakage_rate
                     != TOTAL_AIR_LEAKAGE_COEFF * target_air_leakage_rate_75pa_p
                     and empty_measured_air_leakage_rate_flow_flag == False
-                    and building_total_air_leakage_rate
-                    == TOTAL_AIR_LEAKAGE_COEFF
-                    * building_total_measured_air_leakage_rate,
+                    and self.precision_comparison["building_total_air_leakage_rate_b"](
+                        building_total_air_leakage_rate,
+                        TOTAL_AIR_LEAKAGE_COEFF
+                        * building_total_measured_air_leakage_rate,
+                    )
                 )
             )
 

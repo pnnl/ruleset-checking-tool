@@ -176,8 +176,16 @@ class Section5Rule16(RuleDefinitionListIndexedBase):
                     total_fenestration_area_b == ZERO.AREA
                     and total_fenestration_area_p == ZERO.AREA
                 ) or (
-                    self.precision_comparison(
-                        total_fenestration_area_surface_b / total_fenestration_area_b,
-                        total_fenestration_area_surface_p / total_fenestration_area_p,
+                    self.precision_comparison[
+                        "total_fenestration_area_surface_b / total_fenstration_area_b"
+                    ](
+                        (
+                            total_fenestration_area_surface_b
+                            / total_fenestration_area_b
+                        ).magnitude,
+                        (
+                            total_fenestration_area_surface_p
+                            / total_fenestration_area_p
+                        ).magnitude,
                     )
                 )

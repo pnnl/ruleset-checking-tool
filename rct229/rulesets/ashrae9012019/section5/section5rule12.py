@@ -91,8 +91,12 @@ class Section5Rule12(RuleDefinitionListIndexedBase):
                     },
                     manual_check_required_msg=MANUAL_CHECK_REQUIRED_MSG,
                     fail_msg=FAIL_MSG,
-                    precision=0.001,
-                    precision_unit="Btu/(hr*ft2*R)",
+                    precision={
+                        "floor_f_factor_b": {
+                            "precision": 0.001,
+                            "unit": "Btu/(hr*ft*R)",
+                        }
+                    },
                 )
 
             def get_calc_vals(self, context, data=None):

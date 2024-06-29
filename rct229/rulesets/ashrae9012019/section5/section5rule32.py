@@ -79,6 +79,12 @@ class Section5Rule32(RuleDefinitionListIndexedBase):
                         "$": ["optical_properties"],
                         "optical_properties": ["absorptance_solar_exterior"],
                     },
+                    precision={
+                        "absorptance_solar_exterior_p": {
+                            "precision": 0.01,
+                            "unit": "",
+                        }
+                    },
                 )
 
             def get_calc_vals(self, context, data=None):
@@ -111,9 +117,9 @@ class Section5Rule32(RuleDefinitionListIndexedBase):
                 )
 
             def rule_check(self, context, calc_vals=None, data=None):
-                return (
-                    calc_vals["absorptance_solar_exterior_p"]
-                    == ABSORPTANCE_SOLAR_EXTERIOR
+                return self.precision_comparison["absorptance_solar_exterior_p"](
+                    calc_vals["absorptance_solar_exterior_p"],
+                    ABSORPTANCE_SOLAR_EXTERIOR,
                 )
 
             def is_tolerance_fail(self, context, calc_vals=None, data=None):

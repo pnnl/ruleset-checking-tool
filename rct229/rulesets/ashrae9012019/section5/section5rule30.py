@@ -84,6 +84,12 @@ class Section5Rule30(RuleDefinitionListIndexedBase):
                         "$": ["optical_properties"],
                         "optical_properties": ["absorptance_thermal_exterior"],
                     },
+                    precision={
+                        "absorptance_thermal_exterior_p": {
+                            "precision": 0.01,
+                            "unit": "",
+                        }
+                    },
                 )
 
             def get_calc_vals(self, context, data=None):
@@ -120,9 +126,9 @@ class Section5Rule30(RuleDefinitionListIndexedBase):
                 )
 
             def rule_check(self, context, calc_vals=None, data=None):
-                return (
-                    calc_vals["absorptance_thermal_exterior_p"]
-                    == ABSORPTION_THERMAL_EXTERIOR
+                return self.precision_comparison["absorptance_thermal_exterior_p"](
+                    calc_vals["absorptance_thermal_exterior_p"],
+                    ABSORPTION_THERMAL_EXTERIOR,
                 )
 
             def get_pass_msg(self, context, calc_vals=None, data=None):

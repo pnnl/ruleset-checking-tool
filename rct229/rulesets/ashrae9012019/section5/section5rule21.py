@@ -83,8 +83,24 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
                         rmds_used=produce_ruleset_model_description(
                             USER=False, BASELINE_0=True, PROPOSED=True
                         ),
-                        precision=0.01,
-                        precision_unit="Btu/(hr*ft2*R)",
+                        precision={
+                            "subsurface_u_factor_b": {
+                                "precision": 0.01,
+                                "unit": "Btu/(hr*ft2*R)",
+                            },
+                            "subsurface_shgc_b": {
+                                "precision": 0.01,
+                                "unit": "",
+                            },
+                            "subsurface_glazed_area_b": {
+                                "precision": 1,
+                                "unit": "ft2",
+                            },
+                            "subsurface_opaque_area_b": {
+                                "precision": 1,
+                                "unit": "ft2",
+                            },
+                        },
                         fail_msg=FAIL_MSG,
                     )
 
@@ -121,12 +137,20 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
 
                 def rule_check(self, context, calc_vals=None, data=None):
                     return (
-                        calc_vals["subsurface_u_factor_b"]
-                        == calc_vals["subsurface_u_factor_p"]
-                        and calc_vals["subsurface_shgc_b"]
-                        == calc_vals["subsurface_shgc_p"]
-                        and calc_vals["subsurface_glazed_area_b"]
-                        == calc_vals["subsurface_glazed_area_p"]
-                        and calc_vals["subsurface_opaque_area_b"]
-                        == calc_vals["subsurface_opaque_area_p"],
+                        self.precision_comparison["subsurface_u_factor_b"](
+                            calc_vals["subsurface_u_factor_b"],
+                            calc_vals["subsurface_u_factor_p"],
+                        )
+                        and self.precision_comparison["subsurface_shgc_b"](
+                            calc_vals["subsurface_shgc_b"],
+                            calc_vals["subsurface_shgc_p"],
+                        )
+                        and self.precision_comparison["subsurface_glazed_area_b"](
+                            calc_vals["subsurface_glazed_area_b"],
+                            calc_vals["subsurface_glazed_area_p"],
+                        )
+                        and self.precision_comparison["subsurface_opaque_area_b"](
+                            calc_vals["subsurface_opaque_area_b"],
+                            calc_vals["subsurface_opaque_area_p"],
+                        )
                     )

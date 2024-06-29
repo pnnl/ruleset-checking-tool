@@ -62,6 +62,12 @@ class Section6Rule2(RuleDefinitionListIndexedBase):
                     "$": ["interior_lighting"],
                     "interior_lighting[*]": ["power_per_area"],
                 },
+                precision={
+                    "space_lighting_power_per_area_p": {
+                        "precision": 0.01,
+                        "unit": "W/ft2",
+                    }
+                },
             )
 
         def is_applicable(self, context, data=None):
@@ -114,8 +120,9 @@ class Section6Rule2(RuleDefinitionListIndexedBase):
                 "space_lighting_power_per_area_u"
             ]
 
-            return space_lighting_power_per_area_p == max(
-                lighting_power_allowance_p, space_lighting_power_per_area_u
+            return self.precision_comparison["space_lighting_power_per_area_p"](
+                space_lighting_power_per_area_p,
+                max(lighting_power_allowance_p, space_lighting_power_per_area_u),
             )
 
         def is_tolerance_fail(self, context, calc_vals=None, data=None):

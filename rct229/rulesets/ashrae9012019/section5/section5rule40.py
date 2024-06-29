@@ -72,6 +72,16 @@ class Section5Rule40(RuleDefinitionListIndexedBase):
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
+                    precision={
+                        "absorptance_thermal_exterior_b": {
+                            "precision": 0.01,
+                            "unit": "",
+                        },
+                        "absorptance_solar_exterior_b": {
+                            "precision": 0.01,
+                            "unit": "",
+                        },
+                    },
                 )
 
             def get_calc_vals(self, context, data=None):
@@ -120,7 +130,8 @@ class Section5Rule40(RuleDefinitionListIndexedBase):
                 absorptance_thermal_exterior_p = calc_vals[
                     "absorptance_thermal_exterior_p"
                 ]
-                return (
-                    absorptance_solar_exterior_b == absorptance_solar_exterior_p
-                    and absorptance_thermal_exterior_b == absorptance_thermal_exterior_p
+                return self.precision_comparison["absorptance_solar_exterior_b"](
+                    absorptance_solar_exterior_b, absorptance_solar_exterior_p
+                ) and self.precision_comparison["absorptance_thermal_exterior_b"](
+                    absorptance_thermal_exterior_b, absorptance_thermal_exterior_p
                 )

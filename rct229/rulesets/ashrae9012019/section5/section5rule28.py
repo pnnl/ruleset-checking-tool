@@ -196,6 +196,12 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
                         required_fields={
                             "$": ["classification", "glazed_area", "opaque_area"]
                         },
+                        precision={
+                            "subsurface_shgc_b": {
+                                "precision": 0.01,
+                                "unit": "",
+                            }
+                        },
                     )
 
                 def is_applicable(self, context, data=None):
@@ -240,9 +246,9 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
                     }
 
                 def rule_check(self, context, calc_vals=None, data=None):
-                    target_shgc = calc_vals["target_shgc"]
-                    subsurface_shgc_b = calc_vals["subsurface_shgc_b"]
-                    return target_shgc == subsurface_shgc_b
+                    return self.precision_comparison["subsurface_shgc_b"](
+                        calc_vals["subsurface_shgc_b"], calc_vals["target_shgc"]
+                    )
 
                 def is_tolerance_fail(self, context, calc_vals=None, data=None):
                     target_shgc = calc_vals["target_shgc"]
