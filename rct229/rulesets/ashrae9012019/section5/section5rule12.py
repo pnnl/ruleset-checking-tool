@@ -1,6 +1,6 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_4_fns import table_G34_lookup
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
@@ -33,7 +33,7 @@ class Section5Rule12(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule12, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             required_fields={
@@ -41,7 +41,7 @@ class Section5Rule12(RuleDefinitionListIndexedBase):
                 "weather": ["climate_zone"],
             },
             each_rule=Section5Rule12.BuildingRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="5-12",
             description="Baseline slab-on-grade floor assemblies must match the appropriate assembly maximum F-factors in Tables G3.4-1 through G3.4-9.",
             ruleset_section_title="Envelope",
@@ -54,12 +54,12 @@ class Section5Rule12(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule12.BuildingRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={},
                 each_rule=Section5Rule12.BuildingRule.SlabOnGradeFloorRule(),
-                index_rmr=BASELINE_0,
+                index_rmd=BASELINE_0,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
 
@@ -82,7 +82,7 @@ class Section5Rule12(RuleDefinitionListIndexedBase):
         class SlabOnGradeFloorRule(RuleDefinitionBase):
             def __init__(self):
                 super(Section5Rule12.BuildingRule.SlabOnGradeFloorRule, self).__init__(
-                    rmrs_used=produce_ruleset_model_instance(
+                    rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
                     required_fields={
