@@ -170,19 +170,20 @@ class Section5Rule13(RuleDefinitionListIndexedBase):
                     return False
 
                 if baseline_surface_type in [OST.ABOVE_GRADE_WALL, OST.FLOOR, OST.ROOF]:
-                    return self.precision_comparison["surface_u_factor_b"](
+                    return self.precision_comparison(
                         calc_vals["baseline_surface_u_factor"],
                         calc_vals["proposed_surface_u_factor"],
                     )
 
                 elif baseline_surface_type in [OST.UNHEATED_SOG, OST.HEATED_SOG]:
-                    return self.precision_comparison["surface_f_factor_b"](
+                    return self.precision_comparison(
                         calc_vals["baseline_surface_f_factor"],
                         calc_vals["proposed_surface_f_factor"],
                     )
 
                 elif baseline_surface_type == OST.BELOW_GRADE_WALL:
-                    return self.precision_comparison["surface_c_factor_b"](
+
+                    return self.precision_comparison(
                         calc_vals["baseline_surface_c_factor"],
                         calc_vals["proposed_surface_c_factor"],
                     )
