@@ -115,6 +115,8 @@ class Section5Rule15(RuleDefinitionListIndexedBase):
             return manual_check_msg
 
         def rule_check(self, context, calc_vals=None, data=None):
+            print(calc_vals["wwr_b"])
+            print(calc_vals["wwr_p"].magnitude, WWR_THRESHOLD)
             return self.precision_comparison["wwr_b"](
                 calc_vals["wwr_b"].magnitude,
                 min(calc_vals["wwr_p"].magnitude, WWR_THRESHOLD),
