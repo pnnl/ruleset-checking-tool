@@ -55,7 +55,7 @@ class Section5Rule35(RuleDefinitionListIndexedBase):
                 ),
                 required_fields={"$.building_segments[*].zones[*]": ["surfaces"]},
                 precision={
-                    "target_air_leakage_rate_75pa_b * total_air_leakage_factor": {
+                    "building_total_air_leakage_rate": {
                         "precision": 1,
                         "unit": "cfm",
                     }
@@ -110,11 +110,9 @@ class Section5Rule35(RuleDefinitionListIndexedBase):
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
-            return self.precision_comparison[
-                "target_air_leakage_rate_75pa_b * total_air_leakage_factor"
-            ](
+            return self.precision_comparison["building_total_air_leakage_rate"](
                 calc_vals["building_total_air_leakage_rate"],
-                calc_vals["target_air_leakage_rate_75pa_b"],
+                calc_vals["target_air_leakage_rate_75pa_b"] * TOTAL_AIR_LEAKAGE_FACTOR,
             )
 
         def is_tolerance_fail(self, context, calc_vals=None, data=None):
