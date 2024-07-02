@@ -120,7 +120,6 @@ class Section5Rule35(RuleDefinitionListIndexedBase):
                 "building_total_air_leakage_rate"
             ]
             target_air_leakage_rate_75pa_b = calc_vals["target_air_leakage_rate_75pa_b"]
-            print(building_total_air_leakage_rate, target_air_leakage_rate_75pa_b)
             return std_equal(
                 target_air_leakage_rate_75pa_b * TOTAL_AIR_LEAKAGE_FACTOR,
                 building_total_air_leakage_rate,

@@ -136,7 +136,7 @@ class Section5Rule37(RuleDefinitionListIndexedBase):
             ]
 
             return (
-                not std_equal(
+                not self.precision_comparison["building_total_air_leakage_rate_b"](
                     building_total_air_leakage_rate,
                     TOTAL_AIR_LEAKAGE_COEFF * target_air_leakage_rate_75pa_p,
                 )
@@ -155,18 +155,14 @@ class Section5Rule37(RuleDefinitionListIndexedBase):
                 "empty_measured_air_leakage_rate_flow_flag"
             ]
 
-            return (
-                building_total_air_leakage_rate
-                == TOTAL_AIR_LEAKAGE_COEFF * target_air_leakage_rate_75pa_p
-                or (
-                    building_total_air_leakage_rate
-                    != TOTAL_AIR_LEAKAGE_COEFF * target_air_leakage_rate_75pa_p
-                    and empty_measured_air_leakage_rate_flow_flag == False
-                    and self.precision_comparison["building_total_air_leakage_rate_b"](
-                        building_total_air_leakage_rate,
-                        TOTAL_AIR_LEAKAGE_COEFF
-                        * building_total_measured_air_leakage_rate,
-                    )
+            return self.precision_comparison["building_total_air_leakage_rate_b"](
+                building_total_air_leakage_rate,
+                TOTAL_AIR_LEAKAGE_COEFF * target_air_leakage_rate_75pa_p,
+            ) or (
+                empty_measured_air_leakage_rate_flow_flag == False
+                and self.precision_comparison["building_total_air_leakage_rate_b"](
+                    building_total_air_leakage_rate,
+                    TOTAL_AIR_LEAKAGE_COEFF * building_total_measured_air_leakage_rate,
                 )
             )
 
