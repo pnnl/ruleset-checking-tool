@@ -113,7 +113,7 @@ class Section5Rule39(RuleDefinitionListIndexedBase):
                         precision={
                             "subsurface_u_factor_b": {
                                 "precision": 0.01,
-                                "unit": "Btu/(hr*ft*R)",
+                                "unit": "Btu/(hr*ft2*R)",
                             }
                         },
                     )
