@@ -88,10 +88,10 @@ class Section5Rule36(RuleDefinitionListIndexedBase):
 
                 return {
                     "baseline_infiltration": CalcQ(
-                        "volumetric_flow_rate", zone_infiltration_flow_rate_b
+                        "air_flow_rate", zone_infiltration_flow_rate_b
                     ),
                     "proposed_infiltration": CalcQ(
-                        "volumetric_flow_rate", zone_infiltration_flow_rate_p
+                        "air_flow_rate", zone_infiltration_flow_rate_p
                     ),
                 }
 

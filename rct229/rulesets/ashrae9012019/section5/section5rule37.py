@@ -115,13 +115,13 @@ class Section5Rule37(RuleDefinitionListIndexedBase):
 
             return {
                 "building_total_air_leakage_rate": CalcQ(
-                    "volumetric_flow_rate", building_total_air_leakage_rate
+                    "air_flow_rate", building_total_air_leakage_rate
                 ),
                 "building_total_measured_air_leakage_rate": CalcQ(
-                    "volumetric_flow_rate", building_total_measured_air_leakage_rate
+                    "air_flow_rate", building_total_measured_air_leakage_rate
                 ),
                 "target_air_leakage_rate_75pa_p": CalcQ(
-                    "volumetric_flow_rate", target_air_leakage_rate_75pa_p
+                    "air_flow_rate", target_air_leakage_rate_75pa_p
                 ),
                 "empty_measured_air_leakage_rate_flow_flag": empty_measured_air_leakage_rate_flow_flag,
             }
