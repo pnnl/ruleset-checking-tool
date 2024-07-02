@@ -122,12 +122,6 @@ class Section6Rule5(RuleDefinitionListIndexedBase):
                             rmds_used=produce_ruleset_model_description(
                                 USER=False, BASELINE_0=True, PROPOSED=True
                             ),
-                            precision={
-                                "building_total_area_b": {
-                                    "precision": 1,
-                                    "unit": "ft2",
-                                }
-                            },
                         )
 
                     def is_applicable(self, context, data=None):

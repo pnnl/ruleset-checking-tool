@@ -102,10 +102,10 @@ class Section5Rule35(RuleDefinitionListIndexedBase):
 
             return {
                 "building_total_air_leakage_rate": CalcQ(
-                    "volumetric_flow_rate", building_total_air_leakage_rate
+                    "air_flow_rate", building_total_air_leakage_rate
                 ),
                 "target_air_leakage_rate_75pa_b": CalcQ(
-                    "volumetric_flow_rate", target_air_leakage_rate_75pa_b
+                    "air_flow_rate", target_air_leakage_rate_75pa_b
                 ),
             }
 
@@ -122,6 +122,7 @@ class Section5Rule35(RuleDefinitionListIndexedBase):
                 "building_total_air_leakage_rate"
             ]
             target_air_leakage_rate_75pa_b = calc_vals["target_air_leakage_rate_75pa_b"]
+            print(building_total_air_leakage_rate, target_air_leakage_rate_75pa_b)
             return std_equal(
                 target_air_leakage_rate_75pa_b * TOTAL_AIR_LEAKAGE_FACTOR,
                 building_total_air_leakage_rate,
