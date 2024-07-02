@@ -15,6 +15,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_ca
     get_surface_conditioning_category_dict,
 )
 from rct229.utils.jsonpath_utils import find_one
+from rct229.utils.std_comparisons import std_equal
 
 
 class Section5Rule40(RuleDefinitionListIndexedBase):
@@ -71,6 +72,16 @@ class Section5Rule40(RuleDefinitionListIndexedBase):
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
+                    precision={
+                        "absorptance_thermal_exterior_b": {
+                            "precision": 0.01,
+                            "unit": "",
+                        },
+                        "absorptance_solar_exterior_b": {
+                            "precision": 0.01,
+                            "unit": "",
+                        },
+                    },
                 )
 
             def get_calc_vals(self, context, data=None):
@@ -119,7 +130,8 @@ class Section5Rule40(RuleDefinitionListIndexedBase):
                 absorptance_thermal_exterior_p = calc_vals[
                     "absorptance_thermal_exterior_p"
                 ]
-                return (
-                    absorptance_solar_exterior_b == absorptance_solar_exterior_p
-                    and absorptance_thermal_exterior_b == absorptance_thermal_exterior_p
+                return self.precision_comparison["absorptance_solar_exterior_b"](
+                    absorptance_solar_exterior_b, absorptance_solar_exterior_p
+                ) and self.precision_comparison["absorptance_thermal_exterior_b"](
+                    absorptance_thermal_exterior_b, absorptance_thermal_exterior_p
                 )

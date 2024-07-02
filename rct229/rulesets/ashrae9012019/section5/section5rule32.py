@@ -14,6 +14,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_ca
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
+from rct229.utils.std_comparisons import std_equal
 
 ABSORPTANCE_SOLAR_EXTERIOR = 0.7
 
@@ -78,6 +79,12 @@ class Section5Rule32(RuleDefinitionListIndexedBase):
                         "$": ["optical_properties"],
                         "optical_properties": ["absorptance_solar_exterior"],
                     },
+                    precision={
+                        "absorptance_solar_exterior_p": {
+                            "precision": 0.01,
+                            "unit": "",
+                        }
+                    },
                 )
 
             def get_calc_vals(self, context, data=None):
@@ -110,9 +117,15 @@ class Section5Rule32(RuleDefinitionListIndexedBase):
                 )
 
             def rule_check(self, context, calc_vals=None, data=None):
-                return (
-                    calc_vals["absorptance_solar_exterior_p"]
-                    == ABSORPTANCE_SOLAR_EXTERIOR
+                return self.precision_comparison["absorptance_solar_exterior_p"](
+                    calc_vals["absorptance_solar_exterior_p"],
+                    ABSORPTANCE_SOLAR_EXTERIOR,
+                )
+
+            def is_tolerance_fail(self, context, calc_vals=None, data=None):
+                return std_equal(
+                    calc_vals["absorptance_solar_exterior_p"],
+                    ABSORPTANCE_SOLAR_EXTERIOR,
                 )
 
             def get_pass_msg(self, context, calc_vals=None, data=None):

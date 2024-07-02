@@ -80,6 +80,12 @@ class Section5Rule10(RuleDefinitionListIndexedBase):
                         "$": ["construction"],
                         "construction": ["u_factor"],
                     },
+                    precision={
+                        "floor_u_factor_b": {
+                            "precision": 0.001,
+                            "unit": "Btu/(hr*ft2*R)",
+                        }
+                    },
                 )
 
             def get_calc_vals(self, context, data=None):
@@ -132,7 +138,11 @@ class Section5Rule10(RuleDefinitionListIndexedBase):
                 )
 
             def rule_check(self, context, calc_vals=None, data=None):
+                return self.precision_comparison["floor_u_factor_b"](
+                    calc_vals["floor_u_factor"], calc_vals["target_u_factor"]
+                )
+
+            def is_tolerance_fail(self, context, calc_vals=None, data=None):
                 floor_u_factor = calc_vals["floor_u_factor"]
                 target_u_factor = calc_vals["target_u_factor"]
-
-                return std_equal(val=floor_u_factor, std_val=target_u_factor)
+                return std_equal(floor_u_factor, target_u_factor)

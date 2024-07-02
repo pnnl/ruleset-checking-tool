@@ -63,6 +63,12 @@ class Section6Rule3(RuleDefinitionListIndexedBase):
                     rmds_used=produce_ruleset_model_description(
                         USER=True, BASELINE_0=False, PROPOSED=True
                     ),
+                    precision={
+                        "total_space_lpd_p": {
+                            "precision": 0.01,
+                            "unit": "W/ft2",
+                        }
+                    },
                 )
 
             def get_calc_vals(self, context, data=None):
@@ -96,6 +102,6 @@ class Section6Rule3(RuleDefinitionListIndexedBase):
                 )
 
             def rule_check(self, context, calc_vals=None, data=None):
-                total_space_lpd_u = calc_vals["total_space_lpd_u"]
-                total_space_lpd_p = calc_vals["total_space_lpd_p"]
-                return std_equal(total_space_lpd_u, total_space_lpd_p)
+                return self.precision_comparison["total_space_lpd_p"](
+                    calc_vals["total_space_lpd_p"], calc_vals["total_space_lpd_u"]
+                )

@@ -40,6 +40,16 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
                     USER=False, BASELINE_0=False, PROPOSED=True
                 ),
                 required_fields={"$.zones[*]": ["volume"]},
+                precision={
+                    "absorptance_thermal_exterior_b": {
+                        "precision": 0.01,
+                        "unit": "",
+                    },
+                    "absorptance_thermal_exterior_b": {
+                        "precision": 0.01,
+                        "unit": "",
+                    },
+                },
             )
 
         def get_calc_vals(self, context, data=None):

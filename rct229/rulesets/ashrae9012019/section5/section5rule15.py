@@ -53,6 +53,12 @@ class Section5Rule15(RuleDefinitionListIndexedBase):
                         "area_type_vertical_fenestration",
                     ],
                 },
+                precision={
+                    "wwr_b": {
+                        "precision": 0.01,
+                        "unit": "",
+                    }
+                },
             )
 
         def is_applicable(self, context, data=None):
@@ -109,6 +115,10 @@ class Section5Rule15(RuleDefinitionListIndexedBase):
             return manual_check_msg
 
         def rule_check(self, context, calc_vals=None, data=None):
-            return not calc_vals["manual_check_flag"] and std_equal(
-                calc_vals["wwr_b"], min(calc_vals["wwr_p"], WWR_THRESHOLD)
+            return self.precision_comparison["wwr_b"](
+                calc_vals["wwr_b"].magnitude,
+                min(calc_vals["wwr_p"].magnitude, WWR_THRESHOLD),
             )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            return std_equal(calc_vals["wwr_b"], min(calc_vals["wwr_p"], WWR_THRESHOLD))

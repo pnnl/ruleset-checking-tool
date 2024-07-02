@@ -71,6 +71,12 @@ class Section5Rule36(RuleDefinitionListIndexedBase):
                         "$": ["infiltration"],
                         "infiltration": ["flow_rate"],
                     },
+                    precision={
+                        "total_infiltration_rate_b": {
+                            "precision": 0.1,
+                            "unit": "cfm",
+                        }
+                    },
                 )
 
             def get_calc_vals(self, context, data=None):
@@ -90,7 +96,7 @@ class Section5Rule36(RuleDefinitionListIndexedBase):
                 }
 
             def rule_check(self, context, calc_vals=None, data=None):
-                return (
-                    calc_vals["baseline_infiltration"]
-                    == calc_vals["proposed_infiltration"]
+                return self.precision_comparison["total_infiltration_rate_b"](
+                    calc_vals["baseline_infiltration"],
+                    calc_vals["proposed_infiltration"],
                 )
