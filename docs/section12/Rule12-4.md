@@ -22,7 +22,9 @@
 - Iterate through the spaces in the baseline RMD: `for space_b in find_all("$.buildings[*].building_segments[*].zones[*].spaces[*]", B_RMD):`
   - Check if the space is a computer room: `if is_space_a_computer_room(B_RMD, space_b.id):`
     - Iterate through the miscelleneous equipment loads: `for misc_equip_b in space_b.miscellaneous_equipment:`
-      - Check if the equipment is IT equipment: `if misc_equip_b.type == "INFORMATION_TECHNOLOGY_EQUIPMENT" and misc_equip_b.power > 0:`
+      - Check if the equipment is specified as anything other than IT equipment: `if misc_equip_b.type and misc_equip_b.type != "INFORMATION_TECHNOLOGY_EQUIPMENT":` 
+        - Rule is not applicable: `return False`
+      - Else, the equipment is IT equipment or the type was not specified so we assume that all miscellaneous equipment in the computer room is computer room equipment: `else:`
         - Rule is applicable: `return True`
 
 ## Rule Logic:
@@ -44,6 +46,7 @@
 
 
 **Notes:**  
-1. None
+1. It was noted that the is_space_a_computer_room function needs to be updated to better align with the definition of a computer room in the standard. Applicability will depend on the correct implementation so that computer rooms are only recognized if design electronic data equipment power density
+exceeds 20 W/ft2 of conditioned floor area
 
 - **[Back](../_toc.md)**
