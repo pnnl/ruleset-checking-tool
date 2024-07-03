@@ -38,7 +38,7 @@
   - Append the hourly fraction to the list: `expected_hourly_values.extend([fraction] * days * 24)`
 - Create the mask schedule to be used for comparison: `mask_schedule = [1] * 8784 if is_leap_year else [1] * 8760`
 - Get the multiplier schedule that was modeled for the equipment: `multiplier_schedule_b = misc_equip_b.multiplier_schedule.hourly_values`
-- Compare the modeled schedule with the expected schedule: `comparison_data = compare_schedules(multiplier_schedule_b, expected_hourly_values, mask_schedule, is_leap_year)`
+- Compare the modeled schedule with the expected schedule: `comparison_data = compare_schedules(multiplier_schedule_b, expected_hourly_values, mask_schedule)`
 
 **Rule Assertion:**  
   - Case 1: If the modeled schedule matches the expected schedule for all hours, PASS:`if comparison_data["total_hours_matched"] == 8784 if is_leap_year else 8760: PASS`
