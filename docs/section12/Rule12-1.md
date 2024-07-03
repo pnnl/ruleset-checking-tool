@@ -1,5 +1,5 @@
 # Receptacles – Rule 12-1   
-**Schema Version:** 0.0.36        
+**Schema Version:** 0.0.37        
 **Mandatory Rule:** True          
 **Rule ID:** 12-1  
 **Rule Description:** Receptacle and process power shall be modeled as identical to the proposed design  
