@@ -2,8 +2,8 @@
 **Schema Version** 0.0.37  
 **Primary Rule:** True  
 **Rule ID:** 12-3  
-**Rule Description:** When receptacle controls installed in spaces where not required by Standard 90.1 2019, Section 8.4.2 are included in the proposed building design, the hourly receptacle shall be reduced as specified in Standard 90.1-2019, Table G3.1 Section 12, Proposed Building Performance.   
-**Appendix G Section:** Table G3.1 Section 12 Baseline Building Performance  
+**Rule Description:** When receptacle controls are specified in the proposed building design for spaces where not required by Standard 90.1 2019 Section 8.4.2, the hourly receptacle schedule shall be reduced as specified in Standard 90.1-2019 Table G3.1 Section 12 Proposed Building Performance column.   
+**Appendix G Section:** Table G3.1-12 Proposed Building Performance column  
 **Appendix G Section Reference:** None  
 
 **Applicability:** All required data elements exist for B_RMR and P_RMR  
@@ -45,11 +45,10 @@
       - Compare the expected miscellaneous equipment load schedule to the proposed miscellaneous equipment load schedule: `credit_comparison_data = compare_schedules(expected_hourly_values, hourly_multiplier_schedule_p, mask_schedule)`
       - Compare the baseline miscellaneous equipment load schedule to the proposed miscellaneous equipment load schedule: `no_credit_comparison_data = compare_schedules(hourly_multiplier_schedule_b, hourly_multiplier_schedule_p, mask_schedule)`
 
-
-**Rule Assertion:**  
-- Case 1: If the expected receptacle power credit was applied as expected for all hours: PASS `if credit_comparison_data['total_hours_matched'] == len(hourly_multiplier_schedule_p.hourly_values == len(expected_hourly_values): PASS` 
-- Case 2: If the expected receptacle power credit was expected, but baseline and proposed are identical: UNDETERMINED `if no_credit_comparison_data['total_hours_matched'] == len(hourly_multiplier_schedule_b.hourly_values == len(hourly_multiplier_schedule_p.hourly_values): UNDETERMINED`  
-- Case 3: Else, a credit or penalty was applied incorrectly: FAIL `else: outcome = FAIL`  
+       **Rule Assertion:**  
+      - Case 1: If the expected receptacle power credit was applied as expected for all hours: PASS `if credit_comparison_data['total_hours_matched'] == len(hourly_multiplier_schedule_p.hourly_values == len(expected_hourly_values): PASS` 
+      - Case 2: If a receptacle power credit was expected, but baseline and proposed are identical: UNDETERMINED and raise_message `if no_credit_comparison_data['total_hours_matched'] == len(hourly_multiplier_schedule_b.hourly_values == len(hourly_multiplier_schedule_p.hourly_values): UNDETERMINED and raise_message('Credit for automatic receptacle controls was expected, but baseline and proposed miscellaneous equipment schedules are identical')`  
+      - Case 3: Else, a credit or penalty was applied incorrectly: FAIL `else: outcome = FAIL`  
 
 
 **Notes:**  
