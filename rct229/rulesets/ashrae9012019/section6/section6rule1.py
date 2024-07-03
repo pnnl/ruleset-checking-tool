@@ -43,11 +43,11 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
                 precision={
                     "building_segment_design_lighting_wattage_area": {
                         "precision": 0.01,
-                        "unit": "W/ft2",
+                        "unit": "W",
                     },
                     "building_segment_design_lighting_wattage_space": {
                         "precision": 0.01,
-                        "unit": "W/ft2",
+                        "unit": "W",
                     },
                 },
             )
