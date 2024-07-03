@@ -16,6 +16,7 @@ N/A
 match_data_element
 
 ## Rule Logic:
+- Determine the project's compliance path, if available: `compliance_path = RPD.get("compliance_path")`
 - Store a list of any miscellaneous equipment power where proposed is greater than baseline: `unexpected_misc_equipment_power = []`
 - Store a list of any miscellaneous equipment power where proposed is less than baseline: `reduced_misc_equipment_power = []`
 - For each miscellaneous equipment load in the baseline RMD: `for misc_equipment_b in B_RMD...miscellaneous_equipment:`
@@ -28,8 +29,8 @@ match_data_element
     - Append the miscellaneous equipment info for reporting: `unexpected_misc_equipment_power.append({"id": misc_equipment_b.id, "baseline_power": misc_equipment_power_b, "proposed_power": misc_equipment_power_p})`
 **Rule Assertion:**  
   - Case 1: If all equipment power was modeled identically: PASS `if len(unexpected_misc_equipment_power) == 0 and len(reduced_misc_equipment_power) == 0: PASS`
-  - Case 2: Else if any equipment power is reduced in the proposed: UNDETERMINED: `elif len(unexpected_misc_equipment_power) == 0: UNDETERMINED and raise_message="The proposed building miscellaneous equipment load is less than the baseline, which is only permitted when the model is being used to quantify performance that exceeds the requirements of Standard 90.1."`
-  - Case 2: Else: `FAIL`
+  - Case 2: Else if any equipment power is reduced in the proposed and the compliance path is not "CODE_COMPLIANT" (includes when compliance path is not specified): UNDETERMINED: `elif len(unexpected_misc_equipment_power) == 0 and compliance_path != "CODE_COMPLIANT": UNDETERMINED and raise_message="The proposed building miscellaneous equipment load is less than the baseline, which is only permitted when the model is being used to quantify performance that exceeds the requirements of Standard 90.1."`
+  - Case 3: Else, proposed equipment power is greater than the baseline, or the compliance path is code-compliant and proposed equipment power is less than the baseline: `else: FAIL`
 
 **Notes/Questions:**
 None
