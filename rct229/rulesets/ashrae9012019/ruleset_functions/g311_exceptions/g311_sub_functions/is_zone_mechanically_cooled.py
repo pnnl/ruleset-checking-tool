@@ -1,5 +1,4 @@
 from pydash import flat_map
-
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_list_hvac_systems_associated_with_zone import (
     get_list_hvac_systems_associated_with_zone,
 )
@@ -23,7 +22,7 @@ def is_zone_mechanically_cooled(rmd: dict, zone_id: str) -> bool:
     Parameters
     ----------
     rmd dict
-        A dictionary representing a ruleset model instance as defined by the ASHRAE229 schema
+        A dictionary representing a ruleset model description as defined by the ASHRAE229 schema
     zone_id str
         zone id
 

@@ -1,6 +1,6 @@
 from rct229.rule_engine.partial_rule_definition import PartialRuleDefinition
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_system_type_compare import (
     baseline_system_type_compare,
@@ -20,7 +20,7 @@ class Section19Rule30(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section19Rule30, self).__init__(
-            rmds_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section19Rule30.HVACRule(),
@@ -42,7 +42,7 @@ class Section19Rule30(RuleDefinitionListIndexedBase):
     class HVACRule(PartialRuleDefinition):
         def __init__(self):
             super(Section19Rule30.HVACRule, self).__init__(
-                rmds_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
             )

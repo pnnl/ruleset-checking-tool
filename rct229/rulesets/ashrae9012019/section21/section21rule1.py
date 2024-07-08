@@ -1,6 +1,6 @@
 from rct229.rule_engine.partial_rule_definition import PartialRuleDefinition
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import PROPOSED
 from rct229.rulesets.ashrae9012019.ruleset_functions.check_purchased_chw_hhw_status_dict import (
     check_purchased_chw_hhw_status_dict,
@@ -12,7 +12,7 @@ class Section21Rule1(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section21Rule1, self).__init__(
-            rmds_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=False, PROPOSED=True
             ),
             each_rule=Section21Rule1.RulesetModelInstanceRule(),
@@ -37,7 +37,7 @@ class Section21Rule1(RuleDefinitionListIndexedBase):
     class RulesetModelInstanceRule(PartialRuleDefinition):
         def __init__(self):
             super(Section21Rule1.RulesetModelInstanceRule, self,).__init__(
-                rmds_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=False, PROPOSED=True
                 ),
             )

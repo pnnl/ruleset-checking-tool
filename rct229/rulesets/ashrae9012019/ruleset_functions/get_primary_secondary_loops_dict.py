@@ -30,7 +30,7 @@ def get_primary_secondary_loops_dict(rmd_b: dict) -> dict[str, list[str]]:
 
     Parameters
     ----------
-    rmd_b: A baseline ruleset model instance
+    rmd_b: A baseline ruleset model description
 
     Returns: primary_secondary_loops_dict
     A dictionary that saves pairs of primary and secondary loops for

@@ -1,5 +1,4 @@
 from pint import Quantity
-
 from rct229.rulesets.ashrae9012019.data_fns.table_lighting_to_hvac_bat_map_fns import (
     space_lighting_to_hvac_bat,
 )
@@ -17,7 +16,7 @@ def get_zone_hvac_bat_dict(rmd: dict, zone_id: str) -> dict[str, Quantity]:
     Parameters
     ----------
     rmd dict
-        A dictionary representing a ruleset model instance as defined by the ASHRAE229 schema
+        A dictionary representing a ruleset model description as defined by the ASHRAE229 schema
     zone_id str
         zone id
 

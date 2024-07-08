@@ -1,16 +1,19 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_2_fns import (
-    table_g3_5_2_lookup,
     HeatPumpEquipmentType,
     RatingCondition,
+    table_g3_5_2_lookup,
 )
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_4_fns import table_g3_5_4_lookup
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_5_fns import (
-    table_g3_5_5_lookup,
     GasHeatingEquipmentType,
+    table_g3_5_5_lookup,
+)
+from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
+    HVAC_SYS,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types import (
     get_baseline_system_types,
@@ -18,14 +21,9 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types i
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_zone_list_w_area_dict import (
     get_hvac_zone_list_w_area_by_rmi_dict,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
-    HVAC_SYS,
-)
-from rct229.utils.utility_functions import (
-    find_exactly_one_zone,
-)
-from rct229.utils.pint_utils import CalcQ
 from rct229.utils.assertions import assert_
+from rct229.utils.pint_utils import CalcQ
+from rct229.utils.utility_functions import find_exactly_one_zone
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_2,
@@ -57,7 +55,7 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section10Rule14, self).__init__(
-            rmds_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section10Rule14.HVACRule(),
@@ -67,7 +65,7 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
                 "Baseline shall be modeled with the heating HVAC system efficiency per Tables G3.5.1-G3.5.6 (applies only to the heating efficiency of baseline furnaces and heat pumps). Where multiple HVAC zones or residential spaces are combined into a single thermal block the heating efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces."
             ),
             ruleset_section_title="HVAC General",
-            standard_section="",
+            standard_section="Section G3.1.2.1 Equipment Efficiencies",
             is_primary_rule=True,
             list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
             rmd_context="ruleset_model_descriptions/0",
@@ -125,7 +123,7 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
             super(Section10Rule14.HVACRule, self).__init__(
-                rmds_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={

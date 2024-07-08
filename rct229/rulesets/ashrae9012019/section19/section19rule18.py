@@ -1,6 +1,6 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_9_1_fins import table_G3_9_1_lookup
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_system_type_compare import (
@@ -57,7 +57,7 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section19Rule18, self).__init__(
-            rmds_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section19Rule18.HVACRule(),
@@ -131,7 +131,7 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
             super(Section19Rule18.HVACRule, self).__init__(
-                rmds_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={
@@ -247,10 +247,10 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
                 min_BHP_b = (0.00062 * supply_flow_b).m * ureg("hp")
 
             expected_motor_efficiency_b = table_G3_9_1_lookup(expected_BHP_b)[
-                "nominal_full_load_efficiency"
+                "full_load_motor_efficiency_for_modeling"
             ]
             min_motor_efficiency_b = table_G3_9_1_lookup(min_BHP_b)[
-                "nominal_full_load_efficiency"
+                "full_load_motor_efficiency_for_modeling"
             ]
 
             expected_fan_wattage_b = expected_BHP_b / expected_motor_efficiency_b

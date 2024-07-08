@@ -1,5 +1,4 @@
 from pydash import flow, map_
-
 from rct229.rule_engine.rulesets import LeapYear
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_list_hvac_systems_associated_with_zone import (
     get_list_hvac_systems_associated_with_zone,
@@ -33,7 +32,7 @@ def get_zone_eflh(rmd: dict, zone_id: str, is_leap_year: bool) -> int:
     Parameters
     ----------
     rmd dict
-        A dictionary representing a ruleset model instance as defined by the ASHRAE229 schema
+        A dictionary representing a ruleset model description as defined by the ASHRAE229 schema
     zone_id str
         zone id
 

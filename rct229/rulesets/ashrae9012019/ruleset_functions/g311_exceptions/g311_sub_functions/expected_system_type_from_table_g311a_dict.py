@@ -2,7 +2,6 @@ from typing import Literal, Type
 
 import pydash
 from pint import Quantity
-
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )

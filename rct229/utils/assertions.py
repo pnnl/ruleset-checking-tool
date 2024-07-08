@@ -29,7 +29,7 @@ def assert_(flag: bool, err_msg: str) -> bool:
 
 
 def getattr_(obj: dict, obj_name: str, first_key: str, *remaining_keys: str) -> any:
-    """Gets the value inside a dictionary described by a key path or raises an expection
+    """Gets the value inside a dictionary described by a key path or raises an exception
 
     Parameters
     ----------
@@ -70,7 +70,7 @@ def getattr_(obj: dict, obj_name: str, first_key: str, *remaining_keys: str) -> 
 
 
 def get_first_attr_(obj, obj_name: str, key_list):
-    """Gets first value inside a dictionary described by a list of keys or raises an expection
+    """Gets first value inside a dictionary described by a list of keys or raises an exception
 
     Parameters
     ----------

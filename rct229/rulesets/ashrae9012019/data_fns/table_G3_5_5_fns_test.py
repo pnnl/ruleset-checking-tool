@@ -1,6 +1,6 @@
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_5_fns import (
-    table_g3_5_5_lookup,
     GasHeatingEquipmentType,
+    table_g3_5_5_lookup,
 )
 
 

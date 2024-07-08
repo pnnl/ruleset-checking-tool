@@ -1,0 +1,307 @@
+openapi: 3.0.3
+info:
+  title: Ruleset Checking Tool Web Service API
+  description: |-
+  
+
+  termsOfService: NA
+  contact:
+    email: weili.xu@pnnl.gov
+  license:
+    name: MIT
+    url: https://github.com/pnnl/ruleset-checking-tool/blob/master/LICENSE
+  version: 1.0.11
+externalDocs:
+  description: Find out more about Ruleset Checking Tool
+  url: http://github.com/pnnl/ruleset-checking-tool
+servers:
+  - url: https://qe5fccavsl.execute-api.us-west-2.amazonaws.com/prod
+tags:
+  - name: project evaluation
+    description: project evaluation workflow
+    externalDocs:
+      description: Find out more
+      url: https://github.com/pnnl/ruleset-checking-tool/wiki/Standard229#project-testing-workflow
+  - name: misc
+    description: Miscellaneous API calls
+paths:
+  /evaluate:
+    post:
+      tags:
+        - project evaluation
+      summary: Run project evaluation on a set of RPDs
+      description: This function runs the ruleset evaluation. Parameters required include a string for ruleset, a string for desired reports written in a comma separate format and a zip file that contains all the required RPDs for evaluation.
+      parameters:
+        - name: ruleset
+          in: query
+          description: ruleset tag, for example ashrae9012019.
+          required: true
+          schema:
+            type: string
+        - name: reports
+          in: query
+          description: list of reports string in a command separated format, for example ASHRAE9012019DetailReport,RawSummary.
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Evaluation'
+        '400':
+          description: Invalid request, missing data.
+          content:
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/GeneralDataError'
+        '500':
+          description: Internal Error.
+          content:
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/InternalError'
+  /evaluate/{id}:
+    get:
+      tags:
+        - project evaluation
+      summary: Get project evaluation status message
+      description: Returns summary of a project evaluation run based on the session ID
+      parameters:
+        - name: id
+          in: path
+          description: project evaluation session id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessMessage'
+        '400':
+          description: Invalid request, missing data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralDataError'
+        '404':
+          description: Failed to find the data.
+          content:
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/GeneralDataError'
+        '500':
+          description: Internal Error.
+          content:
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/InternalError'
+    post:
+      tags:
+       - project evaluation
+      summary: Get project evaluation report
+      description: API function to retrieve reports of an evaluation. Must be used when evaluation is completed successfully.
+      parameters:
+       - name: id
+         in: path
+         description: project evalution session id
+         required: true
+         schema:
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileDownloadURL'
+        '400':
+          description: Invalid request, missing data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralDataError'
+        '404':
+          description: Failed to find the data.
+          content:
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/GeneralDataError'
+        '500':
+          description: Internal Error.
+          content:
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/InternalError'
+  /rulesets:
+    get:
+      tags:
+        - misc
+      summary: Get a list of available ruleset tags
+      description: Get a list of available ruleset tags
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleSetsCount'
+        '500':
+          description: Internal error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+  /rules:
+    get:
+      tags:
+        - misc
+      summary: Get number of rules implemented for a ruleset.
+      description: Get the number of rules for a specified ruleset.
+      parameters:
+        - name: ruleset
+          in: query
+          description: ruleset tag, for example ashrae9012019.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RulesCount'
+        '400':
+          description: Invalid request, missing ruleset.
+          content:
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/GeneralDataError'
+        '500':
+          description: Internal error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+  /reports:
+    get:
+      tags:
+        - misc
+      summary: Get a list of available reports for a specified ruleset.
+      description: Get a list of available reports for a specified ruleset.
+      parameters:
+        - name: ruleset
+          in: query
+          description: ruleset tag, for example ashrae9012019.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleSetReports'
+        '400':
+          description: Invalid request, missing ruleset.
+          content:
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/GeneralDataError'
+        '500':
+          description: Internal error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+components:
+  schemas:
+    Evaluation:
+      type: object
+      properties:
+        sessionId:
+          type: string
+          example: "abc-def-efg"
+    EvaluationStatus:
+      type: object
+      properties:
+        status:
+          type: string
+          description: evalution status
+          example: SUCCESS
+          enum:
+            - EVALUATING
+            - SUCCESS
+            - FAILURE
+        message:
+          type: string
+          description: status message
+          example: "Evaluation completed."
+    RuleSetsCount:
+      type: object
+      properties:
+        num_rulesets:
+          type: integer
+          format: int64
+          example: 10
+        rulesets:
+          type: array
+          items:
+            type: string
+          example: ["ashrae9012019"]
+    RulesCount:
+      type: object
+      properties:
+        num_rules:
+          type: integer
+          format: int64
+          example: 10
+    RuleSetReports:
+      type: object
+      properties:
+        num_reports:
+          type: integer
+          format: int64
+          example: 10
+        reports:
+          type: array
+          items:
+            type: string
+          example: ["ASHRAE9012019DetailReport"]
+    SuccessMessage:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Success"
+    GeneralDataError:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Invalid request, missing rulesets."
+    InternalError:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Internal Error."
+    FileDownloadURL:
+      type: object
+      properties:
+        url:
+          type: string
+          example: "https://rct-web/download/01"

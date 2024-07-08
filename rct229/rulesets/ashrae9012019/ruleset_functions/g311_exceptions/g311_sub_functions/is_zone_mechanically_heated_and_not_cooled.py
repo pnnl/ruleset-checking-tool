@@ -1,5 +1,4 @@
 from pydash import flat_map
-
 from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_functions.is_zone_mechanically_cooled import (
     is_zone_mechanically_cooled,
 )
@@ -24,7 +23,7 @@ def is_zone_mechanically_heated_and_not_cooled(rmd: dict, zone_id: str) -> bool:
     Parameters
     ----------
     rmd dict
-        A dictionary representing a ruleset model instance as defined by the ASHRAE229 schema
+        A dictionary representing a ruleset model description as defined by the ASHRAE229 schema
     zone_id str
         zone id
 

@@ -1,13 +1,5 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
-from rct229.rulesets.ashrae9012019 import (
-    BASELINE_0,
-    BASELINE_90,
-    BASELINE_180,
-    BASELINE_270,
-    PROPOSED,
-    USER,
-)
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_one
 from rct229.utils.std_comparisons import std_equal
@@ -18,7 +10,7 @@ class Section1Rule2(RuleDefinitionBase):
 
     def __init__(self):
         super(Section1Rule2, self).__init__(
-            rmds_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=True,
                 BASELINE_0=True,
                 BASELINE_90=True,
@@ -26,7 +18,7 @@ class Section1Rule2(RuleDefinitionBase):
                 BASELINE_270=True,
                 PROPOSED=True,
             ),
-            rmds_used_optional=produce_ruleset_model_instance(
+            rmds_used_optional=produce_ruleset_model_description(
                 BASELINE_90=True,
                 BASELINE_180=True,
                 BASELINE_270=True,

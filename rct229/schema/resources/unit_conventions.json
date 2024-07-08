@@ -24,7 +24,9 @@
         "liquid_flow_rate_per_power": "s/(L*W)",
         "motor_power": "W",
         "heat": "W",
-        "length": "m"
+        "length": "m",
+        "weight": "kg",
+        "elevator_speed": "m/s"
     },
     "ip": {
         "transformer_capacity": "V-A",
@@ -51,6 +53,8 @@
         "liquid_flow_rate_per_power": "gpm/W",
         "motor_power": "hp",
         "heat": "Btu/hr",
-        "length": "ft"
+        "length": "ft",
+        "weight": "lb",
+        "elevator_speed": "ft/min"
     }
 }
