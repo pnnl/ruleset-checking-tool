@@ -3,7 +3,7 @@
         "Section": 1,
         "Rule": 4,
         "Test": "a",
-        "test_description": "A one building segment, single zone building has a PCI that is less than the PCIt RESULT: pass",
+        "test_description": "A one building segment, single zone building has a performance cost index that is less than the performance cost index target.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "1-4",
@@ -54,8 +54,8 @@
                         ],
                         "output": {
                             "id": "Output 1",
-                            "performance_cost_index": 1,
-                            "performance_cost_index_target": 2
+                            "performance_cost_index": 0.4,
+                            "performance_cost_index_target": 0.5
                         },
                         "type": "USER"
                     }
@@ -98,8 +98,8 @@
                         ],
                         "output": {
                             "id": "Output 1",
-                            "performance_cost_index": 1,
-                            "performance_cost_index_target": 2
+                            "performance_cost_index": 0.4,
+                            "performance_cost_index_target": 0.5
                         },
                         "type": "PROPOSED"
                     }
@@ -142,8 +142,8 @@
                         ],
                         "output": {
                             "id": "Output 1",
-                            "performance_cost_index": 1,
-                            "performance_cost_index_target": 2
+                            "performance_cost_index": 0.4,
+                            "performance_cost_index_target": 0.5
                         },
                         "type": "BASELINE_0"
                     }
@@ -155,7 +155,7 @@
         "Section": 1,
         "Rule": 4,
         "Test": "b",
-        "test_description": "A one building segment, single zone building has a PCI that is equal to the PCIt RESULT: pass",
+        "test_description": "A one building segment, single zone building has a performance cost index that is equal to the performance cost index target.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "1-4",
@@ -206,8 +206,8 @@
                         ],
                         "output": {
                             "id": "Output 1",
-                            "performance_cost_index": 2,
-                            "performance_cost_index_target": 2
+                            "performance_cost_index": 0.5,
+                            "performance_cost_index_target": 0.5
                         },
                         "type": "USER"
                     }
@@ -250,8 +250,8 @@
                         ],
                         "output": {
                             "id": "Output 1",
-                            "performance_cost_index": 2,
-                            "performance_cost_index_target": 2
+                            "performance_cost_index": 0.5,
+                            "performance_cost_index_target": 0.5
                         },
                         "type": "PROPOSED"
                     }
@@ -294,8 +294,8 @@
                         ],
                         "output": {
                             "id": "Output 1",
-                            "performance_cost_index": 2,
-                            "performance_cost_index_target": 2
+                            "performance_cost_index": 0.5,
+                            "performance_cost_index_target": 0.5
                         },
                         "type": "BASELINE_0"
                     }
@@ -307,7 +307,7 @@
         "Section": 1,
         "Rule": 4,
         "Test": "c",
-        "test_description": "A one building segment, single zone building has a PCI that is greater than the PCIt RESULT: fail",
+        "test_description": "A one building segment, single zone building has a performance cost index that is greater than the performance cost index target.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "1-4",
@@ -358,8 +358,8 @@
                         ],
                         "output": {
                             "id": "Output 1",
-                            "performance_cost_index": 2,
-                            "performance_cost_index_target": 1
+                            "performance_cost_index": 0.51,
+                            "performance_cost_index_target": 0.5
                         },
                         "type": "USER"
                     }
@@ -402,8 +402,8 @@
                         ],
                         "output": {
                             "id": "Output 1",
-                            "performance_cost_index": 2,
-                            "performance_cost_index_target": 1
+                            "performance_cost_index": 0.51,
+                            "performance_cost_index_target": 0.5
                         },
                         "type": "PROPOSED"
                     }
@@ -446,8 +446,8 @@
                         ],
                         "output": {
                             "id": "Output 1",
-                            "performance_cost_index": 2,
-                            "performance_cost_index_target": 1
+                            "performance_cost_index": 0.51,
+                            "performance_cost_index_target": 0.5
                         },
                         "type": "BASELINE_0"
                     }
@@ -459,8 +459,9 @@
         "Section": 1,
         "Rule": 4,
         "Test": "d",
-        "test_description": "A one building segment, single zone building has a PCI that is less than the PCIt. However, RMDs have different values. RESULT: fail",
+        "test_description": "A one building segment, single zone building has a performance cost index that is less than the performance cost index target, but the performance cost index is not specified uniformly in any/all ruleset model descriptions.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "Ruleset expects exactly one PCI value to be used in the project.",
         "standard": {
             "rule_id": "1-4",
             "ruleset_reference": "4.2.1.1",
@@ -510,8 +511,8 @@
                         ],
                         "output": {
                             "id": "Output 1",
-                            "performance_cost_index": 1,
-                            "performance_cost_index_target": 2
+                            "performance_cost_index": 0.5,
+                            "performance_cost_index_target": 0.65
                         },
                         "type": "USER"
                     }
@@ -554,8 +555,8 @@
                         ],
                         "output": {
                             "id": "Output 1",
-                            "performance_cost_index": 1,
-                            "performance_cost_index_target": 2
+                            "performance_cost_index": 0.5,
+                            "performance_cost_index_target": 0.75
                         },
                         "type": "PROPOSED"
                     }
@@ -598,8 +599,8 @@
                         ],
                         "output": {
                             "id": "Output 1",
-                            "performance_cost_index": 1,
-                            "performance_cost_index_target": 3
+                            "performance_cost_index": 0.5,
+                            "performance_cost_index_target": 0.6
                         },
                         "type": "BASELINE_0"
                     }
@@ -611,8 +612,9 @@
         "Section": 1,
         "Rule": 4,
         "Test": "e",
-        "test_description": "A one building segment, single zone building is missing a PCI RESULT: fail",
+        "test_description": "A one building segment, single zone building does not have performance cost index specified in any ruleset model descriptions.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "At least one `pci_set` value must exist.",
         "standard": {
             "rule_id": "1-4",
             "ruleset_reference": "4.2.1.1",
@@ -662,7 +664,7 @@
                         ],
                         "output": {
                             "id": "Output 1",
-                            "performance_cost_index_target": 2
+                            "performance_cost_index_target": 0.5
                         },
                         "type": "USER"
                     }
@@ -705,7 +707,7 @@
                         ],
                         "output": {
                             "id": "Output 1",
-                            "performance_cost_index_target": 2
+                            "performance_cost_index_target": 0.5
                         },
                         "type": "PROPOSED"
                     }
@@ -748,7 +750,7 @@
                         ],
                         "output": {
                             "id": "Output 1",
-                            "performance_cost_index_target": 2
+                            "performance_cost_index_target": 0.5
                         },
                         "type": "BASELINE_0"
                     }
@@ -760,8 +762,9 @@
         "Section": 1,
         "Rule": 4,
         "Test": "f",
-        "test_description": "A one building segment, single zone building is missing a PCIt RESULT: fail",
+        "test_description": "A one building segment, single zone building does not have performance cost index target specified in any ruleset model descriptions.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "At least one `pci_target_set` value must exist.",
         "standard": {
             "rule_id": "1-4",
             "ruleset_reference": "4.2.1.1",
@@ -811,7 +814,7 @@
                         ],
                         "output": {
                             "id": "Output 1",
-                            "performance_cost_index": 1
+                            "performance_cost_index": 0.5
                         },
                         "type": "USER"
                     }
@@ -854,7 +857,7 @@
                         ],
                         "output": {
                             "id": "Output 1",
-                            "performance_cost_index": 1
+                            "performance_cost_index": 0.5
                         },
                         "type": "PROPOSED"
                     }
@@ -897,7 +900,7 @@
                         ],
                         "output": {
                             "id": "Output 1",
-                            "performance_cost_index": 1
+                            "performance_cost_index": 0.5
                         },
                         "type": "BASELINE_0"
                     }

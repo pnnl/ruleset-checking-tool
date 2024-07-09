@@ -327,6 +327,7 @@
         "Test": "c",
         "test_description": "A one building segment, single zone building has specified the performance cost index target correctly according to the equation in Section 4.2.1.1, however the building performance factor was not specified uniformly in any/all ruleset model descriptions.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "Ruleset expects exactly one BPF value to be used in the project.",
         "standard": {
             "rule_id": "1-3",
             "ruleset_reference": "4.2.1.1",
@@ -472,7 +473,7 @@
                             "id": "Output 1",
                             "total_area_weighted_building_performance_factor": 0.8,
                             "baseline_building_performance_energy_cost": 300000,
-                            "performance_cost_index_target": 0.8333333333333334,
+                            "performance_cost_index_target": 0.5,
                             "baseline_building_regulated_energy_cost": 250000,
                             "baseline_building_unregulated_energy_cost": 50000
                         },
@@ -488,6 +489,7 @@
         "Test": "d",
         "test_description": "A one building segment, single zone building does not have the performance cost index target specified in any ruleset model descriptions.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "At least one `performance_cost_index_target` value must exist.",
         "standard": {
             "rule_id": "1-3",
             "ruleset_reference": "4.2.1.1",
@@ -646,6 +648,7 @@
         "Test": "e",
         "test_description": "A one building segment, single zone building does not have the building performance factor specified in any ruleset model descriptions.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "At least one `bpf_set` value must exist.",
         "standard": {
             "rule_id": "1-3",
             "ruleset_reference": "4.2.1.1",
@@ -804,6 +807,7 @@
         "Test": "f",
         "test_description": "A one building segment, single zone building does not have the baseline building regulated energy cost specified in any ruleset model descriptions.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "At least one `bbrec_set` value must exist.",
         "standard": {
             "rule_id": "1-3",
             "ruleset_reference": "4.2.1.1",
@@ -962,6 +966,7 @@
         "Test": "g",
         "test_description": "A one building segment, single zone building does not have the baseline building unregulated energy cost specified in any ruleset model descriptions.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "At least one `bbuec_set` value must exist.",
         "standard": {
             "rule_id": "1-3",
             "ruleset_reference": "4.2.1.1",
@@ -1120,6 +1125,7 @@
         "Test": "h",
         "test_description": "A one building segment, single zone building does not have the baseline building performance specified in any ruleset model descriptions.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "At least one `bbp_set` value must exist.",
         "standard": {
             "rule_id": "1-3",
             "ruleset_reference": "4.2.1.1",

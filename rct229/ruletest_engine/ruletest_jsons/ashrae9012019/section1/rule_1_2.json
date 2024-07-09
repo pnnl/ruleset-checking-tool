@@ -3,7 +3,7 @@
         "Section": 1,
         "Rule": 2,
         "Test": "a",
-        "test_description": "A one building segment, single zone office space type building in CZ 4A has the expected PCI based on the baseline and proposed building models. RESULT: pass",
+        "test_description": "A one building segment, single zone office space type building has the performance cost index correctly set as the ratio of proposed and baseline building energy cost as described in G1.2.2. ",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "1-2",
@@ -54,8 +54,8 @@
                         ],
                         "output": {
                             "id": "Output 1",
-                            "performance_cost_index": 1,
-                            "total_proposed_building_energy_cost_including_renewable_energy": 1.5
+                            "performance_cost_index": 0.5,
+                            "total_proposed_building_energy_cost_including_renewable_energy": 150000
                         },
                         "type": "USER"
                     }
@@ -98,8 +98,8 @@
                         ],
                         "output": {
                             "id": "Output 1",
-                            "performance_cost_index": 1,
-                            "total_proposed_building_energy_cost_including_renewable_energy": 1.5
+                            "performance_cost_index": 0.5,
+                            "total_proposed_building_energy_cost_including_renewable_energy": 150000
                         },
                         "type": "PROPOSED"
                     }
@@ -142,8 +142,8 @@
                         ],
                         "output": {
                             "id": "Output 1",
-                            "performance_cost_index": 1,
-                            "baseline_building_performance_energy_cost": 1.5
+                            "performance_cost_index": 0.5,
+                            "baseline_building_performance_energy_cost": 300000
                         },
                         "type": "BASELINE_0"
                     }
@@ -155,7 +155,7 @@
         "Section": 1,
         "Rule": 2,
         "Test": "b",
-        "test_description": "A one building segment, single zone office space type building in CZ 4A does not have the expected PCI based on the baseline and proposed building models. RESULT: fail",
+        "test_description": "A one building segment, single zone office building does not have the performance cost index correctly set as the ratio of proposed and baseline building energy cost as described in G1.2.2. ",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "1-2",
@@ -207,7 +207,7 @@
                         "output": {
                             "id": "Output 1",
                             "performance_cost_index": 2,
-                            "total_proposed_building_energy_cost_including_renewable_energy": 1.5
+                            "total_proposed_building_energy_cost_including_renewable_energy": 150000
                         },
                         "type": "USER"
                     }
@@ -251,7 +251,7 @@
                         "output": {
                             "id": "Output 1",
                             "performance_cost_index": 2,
-                            "total_proposed_building_energy_cost_including_renewable_energy": 1.5
+                            "total_proposed_building_energy_cost_including_renewable_energy": 150000
                         },
                         "type": "PROPOSED"
                     }
@@ -295,7 +295,7 @@
                         "output": {
                             "id": "Output 1",
                             "performance_cost_index": 2,
-                            "baseline_building_performance_energy_cost": 1.5
+                            "baseline_building_performance_energy_cost": 300000
                         },
                         "type": "BASELINE_0"
                     }
@@ -307,8 +307,9 @@
         "Section": 1,
         "Rule": 2,
         "Test": "c",
-        "test_description": "A one building segment, single zone office space type building in CZ 4A. The proposed building's PCI does not equal the baseline's PCI. RESULT: fail",
+        "test_description": "A one building segment, single zone office building does not have the performance cost index specified uniformly in any/all ruleset model descriptions.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "Ruleset expects exactly one PCI value to be used in the project.",
         "standard": {
             "rule_id": "1-2",
             "ruleset_reference": "G1.2.2",
@@ -358,8 +359,8 @@
                         ],
                         "output": {
                             "id": "Output 1",
-                            "performance_cost_index": 2,
-                            "total_proposed_building_energy_cost_including_renewable_energy": 1.5
+                            "performance_cost_index": 0.5,
+                            "total_proposed_building_energy_cost_including_renewable_energy": 150000
                         },
                         "type": "USER"
                     }
@@ -402,8 +403,8 @@
                         ],
                         "output": {
                             "id": "Output 1",
-                            "performance_cost_index": 2,
-                            "total_proposed_building_energy_cost_including_renewable_energy": 1.5
+                            "performance_cost_index": 0.5,
+                            "total_proposed_building_energy_cost_including_renewable_energy": 150000
                         },
                         "type": "PROPOSED"
                     }
@@ -447,7 +448,7 @@
                         "output": {
                             "id": "Output 1",
                             "performance_cost_index": 3,
-                            "baseline_building_performance_energy_cost": 1.5
+                            "baseline_building_performance_energy_cost": 300000
                         },
                         "type": "BASELINE_0"
                     }
@@ -459,8 +460,9 @@
         "Section": 1,
         "Rule": 2,
         "Test": "d",
-        "test_description": "A one building segment, single zone office space type building in CZ 4A does not have a PCI defined. RESULT: fail",
+        "test_description": "A one building segment, single zone office space type building does not have a performance cost index defined.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "At least one `performance_cost_index` value must exist.",
         "standard": {
             "rule_id": "1-2",
             "ruleset_reference": "G1.2.2",
@@ -510,7 +512,7 @@
                         ],
                         "output": {
                             "id": "Output 1",
-                            "total_proposed_building_energy_cost_including_renewable_energy": 1.5
+                            "total_proposed_building_energy_cost_including_renewable_energy": 150000
                         },
                         "type": "USER"
                     }
@@ -553,7 +555,7 @@
                         ],
                         "output": {
                             "id": "Output 1",
-                            "total_proposed_building_energy_cost_including_renewable_energy": 1.5
+                            "total_proposed_building_energy_cost_including_renewable_energy": 150000
                         },
                         "type": "PROPOSED"
                     }
@@ -596,7 +598,7 @@
                         ],
                         "output": {
                             "id": "Output 1",
-                            "baseline_building_performance_energy_cost": 1.5
+                            "baseline_building_performance_energy_cost": 300000
                         },
                         "type": "BASELINE_0"
                     }
@@ -608,8 +610,9 @@
         "Section": 1,
         "Rule": 2,
         "Test": "e",
-        "test_description": "A one building segment, single zone office space type building in CZ 4A does not have a PBP defined. RESULT: fail",
+        "test_description": "A one building segment, single zone office building does not have proposed building performance defined.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "At least one `total_proposed_building_energy_cost_including_renewable_energy` value must exist.",
         "standard": {
             "rule_id": "1-2",
             "ruleset_reference": "G1.2.2",
@@ -746,7 +749,7 @@
                         "output": {
                             "id": "Output 1",
                             "performance_cost_index": 1,
-                            "baseline_building_performance_energy_cost": 1.5
+                            "baseline_building_performance_energy_cost": 300000
                         },
                         "type": "BASELINE_0"
                     }
@@ -758,8 +761,9 @@
         "Section": 1,
         "Rule": 2,
         "Test": "f",
-        "test_description": "A one building segment, single zone office space type building in CZ 4A does not have a BBP defined. RESULT: fail",
+        "test_description": "A one building segment, single zone office building does not have a baseline building performance defined.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "At least one `baseline_building_performance_energy_cost` value must exist.",
         "standard": {
             "rule_id": "1-2",
             "ruleset_reference": "G1.2.2",
@@ -810,7 +814,7 @@
                         "output": {
                             "id": "Output 1",
                             "performance_cost_index": 1,
-                            "total_proposed_building_energy_cost_including_renewable_energy": 1.5
+                            "total_proposed_building_energy_cost_including_renewable_energy": 150000
                         },
                         "type": "USER"
                     }
@@ -854,7 +858,7 @@
                         "output": {
                             "id": "Output 1",
                             "performance_cost_index": 1,
-                            "total_proposed_building_energy_cost_including_renewable_energy": 1.5
+                            "total_proposed_building_energy_cost_including_renewable_energy": 150000
                         },
                         "type": "PROPOSED"
                     }
