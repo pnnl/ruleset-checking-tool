@@ -3,7 +3,7 @@
         "Section": 1,
         "Rule": 1,
         "Test": "a",
-        "test_description": "A one building segment, single zone office building has the building performance factor is equal to the expected building performance factor from Table 4.2.1.1.",
+        "test_description": "A one building segment, single zone office building has the building performance factor defined and it is equal to the expected building performance factor from Table 4.2.1.1.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "1-1",
@@ -334,7 +334,7 @@
         "Section": 1,
         "Rule": 1,
         "Test": "c",
-        "test_description": "A one building segment, single zone office building has the building performance factor is not equal to the expected building performance factor from Table 4.2.1.1.",
+        "test_description": "A one building segment, single zone office building has the building performance factor defined but it is not equal to the expected building performance factor from Table 4.2.1.1.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "1-1",
