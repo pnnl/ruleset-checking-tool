@@ -1,13 +1,13 @@
 # is_space_a_computer_room
 
-**Description:** Returns true or false as to whether space is a computer room. The criteria is such that it is considered a computer room if the total the total misc INFORMATION_TECHNOLOGY_EQUIPMENT Power density in W/sf exceeds 20 W/sf per the definition of a computer room in 90.1 Section 3.  
+**Description:** Returns true or false as to whether space is a computer room. The criteria is such that it is considered a computer room if the total of misc INFORMATION_TECHNOLOGY_EQUIPMENT Power density in W/sf exceeds 20 W/sf per the definition of a computer room in 90.1 Section 3.  
 
 **Inputs:**  
 - **B-RMI,P-RMI**: The applicable ruleset model instance.   
 - **Space_obj**: The space to assess whether or not it is a computer room.
 
 **Returns:**  
-- **is_space_a_computer_room**: The function returns true or false as to whether space is a computer room. The criteria is such that it is considered a computer room if the total the total misc INFORMATION_TECHNOLOGY_EQUIPMENT Power density in W/sf exceeds 20 W/sf per the definition of a computer room in 90.1 Section 3. 
+- **is_space_a_computer_room**: The function returns true or false as to whether space is a computer room. The criteria is such that it is considered a computer room if the total of misc INFORMATION_TECHNOLOGY_EQUIPMENT Power density in W/sf exceeds 20 W/sf per the definition of a computer room in 90.1 Section 3. 
  
 
 **Function Call:**  None  
