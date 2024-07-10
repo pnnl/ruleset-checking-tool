@@ -1,5 +1,5 @@
 # Service_Water_Heating - Rule 11-1
-**Schema Version:** 0.0.36  
+**Schema Version:** 0.0.37  
 
 **Mandatory Rule:** TRUE
 
@@ -54,7 +54,7 @@
 
 ## Rule Assertion: 
 - Case1: all elements are equal: PASS: `if all_match: PASS`
-- Case2: all elements don't match, FAIL: if !all_match: FAIL`
+- Case2: all elements don't match, FAIL: `if !all_match: FAIL`
 
   
   **Notes:**
