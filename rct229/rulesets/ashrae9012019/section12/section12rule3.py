@@ -58,18 +58,15 @@ class Section12Rule3(RuleDefinitionListIndexedBase):
 
         spaces_with_receptacle_controls_beyond_req = []
         for misc_equip_p in find_all(
-            "$.buildings[*].building_segments[*].zones[*].spaces[*]",
+            "$.buildings[*].building_segments[*].zones[*].spaces[*].miscellaneous_equipment[*]",
             rmd_p,
         ):
-            for misc_equip_p in find_all("$.miscellaneous_equipment[*]", misc_equip_p):
-                if misc_equip_p.get(
-                    "lighting_space_type"
-                ) not in EXPECTED_RECEPTACLE_CONTROL_SPACE_TYPES and misc_equip_p.get(
-                    "has_automatic_control"
-                ):
-                    spaces_with_receptacle_controls_beyond_req.append(
-                        misc_equip_p["id"]
-                    )
+            if misc_equip_p.get(
+                "lighting_space_type"
+            ) not in EXPECTED_RECEPTACLE_CONTROL_SPACE_TYPES and misc_equip_p.get(
+                "has_automatic_control"
+            ):
+                spaces_with_receptacle_controls_beyond_req.append(misc_equip_p["id"])
 
         return spaces_with_receptacle_controls_beyond_req
 
