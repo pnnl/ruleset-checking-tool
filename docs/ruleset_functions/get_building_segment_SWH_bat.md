@@ -11,7 +11,10 @@ Returns:
 
 Function Call:
 
-- get_energy_required_to_heat_swh_use
+- get_energy_required_to_heat_swh_use  
+- get_SWH_uses_associated_with_each_building_segment  
+- get_SWH_uses_associated_with_each_building_segment  
+- get_component_by_ID  
 
 Data Lookup: None
 
@@ -22,7 +25,9 @@ Logic:
     - set the building_segment_swh_bat to the building_segment.service_water_heating_building_area_type: `building_segment_swh_bat = building_segment.service_water_heating_building_area_type`
 - otherwise, if the building segment doesnt have service_water_heating_building_area_type, we need to determine the building segment SWH type by looking at individual SWH uses: `else:`
     - create a dictionary that will hold the different types of swh_use_bat_types and the total service water used for the year: `swh_use_dict = {}`
-    - look at each SWHUse in the building segment: `for swh_use in building_segment.service_water_heating_uses:`
+    - get the service water heating uses in the building segment `service_water_heating_use_ids = get_SWH_uses_associated_with_each_building_segment(RMD, building_segment.id)`
+    - look at each service water heating use id: `for swh_use_id in service_water_heating_use_ids:`
+        - get the swh_use using get_component_by_ID: `swh_use = get_component_by_ID(RMD, swh_use_id)`
         - if any swh_use has use_units equal to "OTHER", the total energy required to heat the use cannot be determined, and we return "UNDETERMINED": `if swh_use.use_units == "OTHER": return "UNDETERMINED"`
         - calculate the total hot water used using the function get_energy_required_to_heat_swh_use and add it to the swh_use_dict: `swh_use_dict[swh_use.area_type] += get_energy_required_to_heat_swh_use(swh_use, RMD)`
         - check to see if the swh_use has service_water_heating_area_type: `if swh_use.area_type:`
