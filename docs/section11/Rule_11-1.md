@@ -18,8 +18,6 @@
 - **compare_context_pair** - there is no RDS for this function, but it is a function developed for Rule 1-6 that compares two elements  
 - **get_SWH_equipment_associated_with_each_swh_distribution_system**  
 
-{"SWH_Distribution1":{"SWHHeatingEq":["swh_eq1","swh_eq2"], "Pumps":["p1"], "Tanks":["t1"], "Piping":["piping1"], "SolarThermal":[], "USES":["sp1_use","sp2_use"], "SPACES_SERVED":[sp1,sp2]}}
-
 
 **Applicability Checks:**
 - check that the U_RMD has SWH Uses with loads
