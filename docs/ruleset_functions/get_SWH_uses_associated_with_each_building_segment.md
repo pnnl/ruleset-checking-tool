@@ -11,11 +11,6 @@ Returns:
 
 Function Call:
 - get_component_by_ID  
-- get_spaces_associated_with_each_SWH_bat
-- get_obj_by_id
-- get_all_child_SWH_piping_ids
-- get_building_segment_swh_bat
-- get_energy_required_to_heat_swh_use
 
 Data Lookup: None
 
