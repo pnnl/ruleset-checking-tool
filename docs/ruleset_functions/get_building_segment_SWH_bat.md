@@ -1,0 +1,53 @@
+## get_building_segment_SWH_bat
+
+Description: This function determines the SWH BAT for the given building segment.
+
+Inputs:
+- **RMD**
+- **building_segment**
+
+Returns:
+- **building_segment_swh_bat**: one of the ServiceWaterHeatingSpaceOptions2019ASHRAE901 options
+
+Function Call:
+
+- get_energy_required_to_heat_swh_use
+
+Data Lookup: None
+
+Logic:
+
+- set the building_segment_swh_bat to nil: `building_segment_swh_bat = "UNDETERMINED"`
+- if the building_segment.service_water_heating_building_area_type exists set the swh_bat to the one given: `if building_segment.service_water_heating_building_area_type:`
+    - set the building_segment_swh_bat to the building_segment.service_water_heating_building_area_type: `building_segment_swh_bat = building_segment.service_water_heating_building_area_type`
+- otherwise, if the building segment doesnt have service_water_heating_building_area_type, we need to determine the building segment SWH type by looking at individual SWH uses: `else:`
+    - create a dictionary that will hold the different types of swh_use_bat_types and the total service water used for the year: `swh_use_dict = {}`
+    - look at each SWHUse in the building segment: `for swh_use in building_segment.service_water_heating_uses:`
+        - if any swh_use has use_units equal to "OTHER", the total energy required to heat the use cannot be determined, and we return "UNDETERMINED": `if swh_use.use_units == "OTHER": return "UNDETERMINED"`
+        - calculate the total hot water used using the function get_energy_required_to_heat_swh_use and add it to the swh_use_dict: `swh_use_dict[swh_use.area_type] += get_energy_required_to_heat_swh_use(swh_use, RMD)`
+        - check to see if the swh_use has service_water_heating_area_type: `if swh_use.area_type:`
+            - add the SWH building area type to the swh_use_dict and set the value to 0: `swh_use_dict.set_default(swh_use.area_type, 0)`
+        - otherwise: `else:`
+            - add the energy use to type "UNDETERMINED": `swh_use_dict.set_default("UNDETERMINED", 0)`
+            - add the total energy used to the dict: `swh_use_dict["UNDETERMINED"] += get_energy_required_to_heat_swh_use(swh_use, RMD)`
+    - now we need to determine the building_segment swh_use_type based on the following rules:
+    -     1. At least 50% of the SWH uses needs to be assigned a use type
+    -     2. All SWH needs to be assigned to the same use type
+    - if there is only one element in swh_use_dict, the building_segment_swh_bat is the only key in swh_use_dict: `if(len(swh_use_dict)==1): building_segment_swh_bat = list(swh_use_dict.keys())[0]`
+    - otherwise, if swh_use_dict has two elements: `elsif(len(swh_use_dict)) == 2:`
+        - in order to meet the requirement that all SWH needs to be assigned to the same use type - ie any SWH that doesn't have a use-type is covered by "UNDETERMINED", we expect the dict to have keys "UNDETERMINED" and one other area use type: `if "UNDETERMINED" in swh_use_dict:`
+            - get the other key.  First get a list of all keys: `all_keys = list(swh_use_dict.keys())`
+            - remove "UNDETERMINED": `all_keys.remove("UNDETERMINED")`
+            - set other_key to the remaining item in the list: `other_key = all_keys[0]`
+            - now check whether the water use for UNDETERMINED is < the water use for the other key: `if swh_use_dict["UNDETERMINED"] < swh_use_dict[other_key]:`
+                - set the building_segment_swh_bat equal to other_key: `building_segment_swh_bat = other_key`
+
+- return result: `return: building_segment_swh_bat`
+
+
+**Returns** swh_and_spaces_dict
+
+**[Back](../_toc.md)**
+
+**Notes:**
+1. relies on re-structuring of SWH as in: https://github.com/open229/ruleset-model-description-schema/issues/264
