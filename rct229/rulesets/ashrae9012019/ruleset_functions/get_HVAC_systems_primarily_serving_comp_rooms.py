@@ -53,8 +53,9 @@ def get_HVAC_systems_primarily_serving_comp_rooms(rmd: dict) -> list[str]:
                         == LightingSpaceOptions2019ASHRAE901TG37.COMPUTER_ROOM
                     ):
                         hvac_system_serves_computer_room_space = True
-                        space_floor_area = space.get("floor_area", ZERO.AREA)
-                        hvac_sys_computer_room_floor_area += space_floor_area
+                        hvac_sys_computer_room_floor_area += space.get(
+                            "floor_area", ZERO.AREA
+                        )
 
             if (
                 hvac_system_serves_computer_room_space
