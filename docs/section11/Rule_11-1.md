@@ -11,12 +11,15 @@
 
 **Appendix G Section Reference:** Table G3.1 #11, proposed column, a & b
 
-**Evaluation Context:** P-RMD each SWH Distribution
+**Evaluation Context:** P-RMD each SWH Distribution  
 **Data Lookup:**   
-**Function Call:** 
-- **get_component_by_id**
-- **compare_context_pair** - there is no RDS for this function, but it is a function developed for Rule 1-6 that compares two elements
+**Function Call:**  
+- **get_component_by_id**  
+- **compare_context_pair** - there is no RDS for this function, but it is a function developed for Rule 1-6 that compares two elements  
 - **get_SWH_equipment_associated_with_each_swh_distribution_system**  
+
+{"SWH_Distribution1":{"SWHHeatingEq":["swh_eq1","swh_eq2"], "Pumps":["p1"], "Tanks":["t1"], "Piping":["piping1"], "SolarThermal":[], "USES":["sp1_use","sp2_use"], "SPACES_SERVED":[sp1,sp2]}}
+
 
 **Applicability Checks:**
 - check that the U_RMD has SWH Uses with loads
@@ -33,24 +36,19 @@
     - if the program reaches this line without going to the rule logic, the project is not applicable for this SWH heating distribution system: `NOT_APPLICABLE`
 
     ## Rule Logic: 
-  - create a boolean to keep track of whether everything matches: `all_match = TRUE`
-  - create an error string: `error_str = ""`
+  - create a list that the compare_context_pair function will use to send errors back tot he rule: `errors = []`
   - create the compare context string: `compare_context_str = "AppG 11-1 P_RMD Equals U_RMD"`
-  - get a dictionary of all SWH equipment in the proposed model (pumps, distribution, tanks, SWH use, etc): `p_shw_equipment_dict = p_swh_system_and_equip_dict[distribution_id]`
-  - get a dictionary of all SWH equipment in the user model (pumps, distribution, tanks, SWH use, etc): `u_shw_equipment_dict = u_swh_system_and_equip_dict[distribution_id]`
-  - check if the u_shw_equipment exists: `if(u_swh_equipment_dict):`
-    - Compare the distribution in the proposed and user models.  This check relies on the understanding that the RCT team has a method for comparing all elements within an object match (compare_context_pair): `if !compare_context_pair(distribution_id, distribution_id, $, extra_schema_for_SWH_comparison.json, true, compare_context_str, error_str): all_match = FALSE`
-  - otherwise, the distribution equipment doesn't exist in the user model, set all_match to false: `all_match = FALSE; error_str += distribution_id + " not found in the user model"`
-  - continue if all_match is still true: `if all_match`
-    - create a list of all of the SWH equipment types that exist in both the proposed and user models: `shw_equipment_types = set(p_shw_equipment_dict.keys()) | set(u_shw_equipment_dict.keys())`
-    - loop through each of the equipment types: `for shw_equipment_type in shw_equipment_types:`
-      - continue if all_match is still true: `if all_match:`
-        - check if this equipment type matches between the proposed and user models.  First check whether there are the same number equipment: `if len(p_shw_equipment_dict[shw_equipment_type]) == len(u_shw_equipment_dict[shw_equipment_type]):`
-            - look at each equipment type system in the proposed model and see if there is one that is the same in the user model.  This check relies on the understanding that the RCT team has a method for comparing all elements within an object match (compare_context_pair): `for p_SWH_equip_id in p_shw_equipment_dict[shw_equipment_type]:`
-                - if this system is in U_RMD.service_water_heating_distribution_systems, compare the systems: `if p_SWH_equip_id in u_shw_equipment_dict[shw_equipment_type]:`
-                    - use compare_context_pair to compare systems and set all_match to FALSE if the systems don't compare: `if !compare_context_pair(p_SWH_equip_id, p_SWH_equip_id, $, extra_schema_for_SWH_comparison.json, true, compare_context_str, error_str): all_match = FALSE`
-                - otherwise, set all_match to false: `else: all_match = FALSE`
-        - otherwise, all_match is false: `all_match = FALSE`
+  - get a dictionary of all SWH equipment in the proposed model (pumps, distribution, tanks, SWH use, etc): `p_swh_equipment_dict = p_swh_system_and_equip_dict[distribution_id]`
+  - get a dictionary of all SWH equipment in the user model (pumps, distribution, tanks, SWH use, etc): `u_swh_equipment_dict = u_swh_system_and_equip_dict[distribution_id]`
+  - Compare the distribution in the proposed and user models using the function compare_context_pair.  compare_context_pair is recursive, so by sending the function the distribution systems, it is also checking the tanks and piping that are child objects of the distribution systems.  The boolean all_match is created and set to the result of the function: `all_match = compare_context_pair(distribution_id, distribution_id, $, extra_schema_for_SWH_comparison.json, true, compare_context_str, error_str)`
+  - there's equipment that's part of the service water heating distribution system that are not direct child objects of teh distribution system.  We need to check these objects.
+  - first, check ServiceWaterHeatingEquipment - when we execute compare_context_pair, this will also check any child objects that exist (SolarThermal and SWH validation point).  Start by checking if there are the same number of objects in the proposed and user models.  We need to do the length check here because it's not checked implicitly as part of compare_context_pair.  For example, if there are more pieces of equipment in the user model than the proposed, comparing each item found in the proposed model could return a false positive: `if len(p_swh_equipment_dict["SWHHeatingEq"]) == len(u_swh_equipment_dict["SWHHeatingEq"]):`
+    - look at each SWHEquipment in the proposed model: `for swh_eq_id in p_swh_equipment_dict["SWHHeatingEq"]:`
+      - compare the two SWH equipment using compare_context_pair, if the result is false, set all_match equal to false.  We won't exit early if all_match is false as we allow the function to keep running so errors is fully populated and available to the user: `if !compare_context_pair(swh_eq_id, swh_eq_id, $, extra_schema_for_SWH_comparison.json, true, compare_context_str, error_str): all_match = false`
+  - next, check Pumps - this will also recursively check PumpOutputValidationPointPumpOutputValidationPoint: `if len(p_swh_equipment_dict["Pumps"]) == len(u_swh_equipment_dict["Pumps"]):`
+    - look at each SWHEquipment in the proposed model: `for pump_id in p_swh_equipment_dict["Pumps"]:`
+      - compare the two pumps using compare_context_pair, if the result is false, set all_match equal to false.  We won't exit early if all_match is false as we allow the function to keep running so errors is fully populated and available to the user: `if !compare_context_pair(pump_id, pump_id, $, extra_schema_for_SWH_comparison.json, true, compare_context_str, error_str): all_match = false`
+    
 
 ## Rule Assertion: 
 - Case1: all elements are equal: PASS: `if all_match: PASS`
@@ -58,7 +56,6 @@
 
   
   **Notes:**
-  1.  using compare_context_pair might not be the correct approach - this function requires data elements in the extra schema to have a tag "AppG P_RMD Equals U_RMD" - is it possible to pass in a custom json created for this rule which identifies which elements need to be equal?
-  2.  is there a situation where some of the equipment shouldn't be equal?  Solar hot water, for example? 
+  1.  is there a situation where some of the equipment shouldn't be equal?  Solar hot water, for example? 
 
 **[Back](../_toc.md)**
