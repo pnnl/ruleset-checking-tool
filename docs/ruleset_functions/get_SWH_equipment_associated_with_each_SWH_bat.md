@@ -11,10 +11,10 @@ Returns:
 
 Function Call:
 
-- get_spaces_associated_with_each_SWH_bat
-- get_component_by_ID
-- get_all_child_SWH_piping_ids
-- get_building_segment_swh_bat
+- get_spaces_associated_with_each_SWH_bat  
+- get_component_by_ID  
+- get_all_child_SWH_piping_ids  
+- get_building_segment_swh_bat  
 - get_energy_required_to_heat_swh_use  
 - get_SWH_uses_associated_with_each_building_segment  
 
