@@ -1,32 +1,29 @@
-# HVAC_SystemZoneAssignment - Rule 11-6
+# Service Water Heating - Rule 11-6
 
-**Schema Version:** 0.0.36  
+**Schema Version:** 0.0.37  
 **Mandatory Rule:** True  
 **Rule ID:** 11-6  
 **Rule Description:** Piping losses shall not be modeled. 
 **Rule Assertion:** Options are PASS/FAIL/NOT_APPLICABLE/UNDETERMINED  
 **Appendix G Section Reference:** Table G3.1 #11, baseline column, i
 
-**Evaluation Context:** Each SWH BAT  
+**Evaluation Context:** Each SWH Distribution System  
 **Data Lookup:**   
 **Function Call:**
 
-1. get_SHW_equipment_associated_with_each_SWH_bat()
+1. get_SWH_equipment_associated_with_each_swh_distribution_system()
 
 **Applicability Checks:**
-- Each SHW use type is applicable if there are SHW loads
-- also use get_SHW_equipment_associated_with_each_SWH_bat to get the SHW BATs and SHW use in the building: `shw_bats_and_use_dict = get_SHW_equipment_associated_with_each_SWH_bat(P_RMD)`
-- look through each of the SHW BATs in the building: `for shw_bat in shw_bats_and_use_dict:`
-  - check if there are SHW loads in this use type, continue to rule logic: `if len(shw_bats_and_use_dict[shw_bat]) > 0: RULE_APPLICABLE`
-  - otherwise, rule is not applicable for this shw_bat: `else: NOT_APPLICABLE`
+- Every Baseline distribution system is applicable
 
 
     ## Rule Logic:
+- use get_SWH_equipment_associated_with_each_swh_distribution_system to get the SWH BATs and SWH equipment in the building: `swh_distribution_and_eq_dict = get_SWH_equipment_associated_with_each_swh_distribution_system(B_RMD)`
     - create a value indicating whether piping losses were modeled: `piping_losses_modeled = false`
-    - look at every ServiceWaterPiping connected to the shw_bat: `for piping_id in shw_bats_and_use_dict[shw_bat]["Piping"]`
-      - get the piping: `piping = get_component_by_id(piping_id, B_RMD, ServiceWaterPiping) `
-      - check if the piping has piping_losses_modeled: `if piping.piping_losses_modeled:`
-        - set the piping_losses_modeled to true: `piping_losses_modeled = true`
+    - look at every ServiceWaterPiping connected to the distribution: `for piping_id in swh_distribution_and_eq_dict[distribution_id]["Piping"]`
+        - get the piping: `piping = get_component_by_id(piping_id, B_RMD, ServiceWaterPiping) `
+        - check if the piping has piping_losses_modeled: `if piping.piping_losses_modeled:`
+            - set the piping_losses_modeled to true and go directly to rule assertion: `piping_losses_modeled = true: GO TO RULE_ASSERTION`
 
     - **Rule Assertion - Zone:**
     - Case1: piping losses are not modeled, PASS: `if !piping_losses_modeled: PASS`
