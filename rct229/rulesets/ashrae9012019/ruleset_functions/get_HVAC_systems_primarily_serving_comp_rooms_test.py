@@ -17,6 +17,7 @@ TEST_RMD = {
                         {
                             "id": "zone_1",
                             "spaces": [
+                                # The overall area ratio of the computer room < 0.5
                                 {
                                     "id": "space_1_1",
                                     "floor_area": 1000,
@@ -38,6 +39,7 @@ TEST_RMD = {
                         {
                             "id": "zone_2",
                             "spaces": [
+                                # The overall area ratio of the computer room > 0.5
                                 {
                                     "id": "space_2_1",
                                     "floor_area": 1500,
@@ -59,8 +61,8 @@ TEST_RMD = {
                         {
                             "id": "zone_3",
                             "spaces": [
+                                # The overall area ratio of the computer room < 0.5
                                 {
-                                    # The overall area ratio of the computer room < 0.5
                                     "id": "space_3_1",
                                     "floor_area": 250,
                                     "lighting_space_type": "COMPUTER_ROOM",
