@@ -112,7 +112,7 @@ def test__TEST_RMD__is_valid():
     ], f"Schema error: {schema_validation_result['error']}"
 
 
-def test__get_hvac_systems_primarily_serving_comp_room__hvac_1():
+def test__get_HVAC_systems_primarily_serving_comp_rooms__success():
     assert get_HVAC_systems_primarily_serving_comp_rooms(TEST_RMD_UNIT) == [
         "hvac_1",
         "hvac_2",
