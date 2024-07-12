@@ -17,11 +17,9 @@ CONDITIONED_ZONE_TYPE = [
     ZCC.CONDITIONED_NON_RESIDENTIAL,
     ZCC.CONDITIONED_RESIDENTIAL,
 ]
-MANUAL_CHECK_MSG = "There is a humidity schedule mismatch between the baseline and proposed rmrs. Fail unless Table G3.1 #4 baseline column exception #s 1 and/or 2 are applicable"
-FAIL_MSG_B = (
-    "Fail because a humidity schedule is defined in the B_RMR but not in the P_RMR."
-)
-FAIL_MSG_P = "Fail because a humidity schedule is undefined in the B_RMR but is defined in the P_RMR."
+MANUAL_CHECK_MSG = "There is a humidity schedule mismatch between the baseline and proposed. Fail unless Table G3.1 #4 baseline column exception #s 1 and/or 2 are applicable"
+FAIL_MSG_B = "Fail because a humidity schedule is defined in the baseline but not in the proposed."
+FAIL_MSG_P = "Fail because a humidity schedule is defined in the proposed but not in the baseline."
 
 
 class Section4Rule2(RuleDefinitionListIndexedBase):
@@ -80,7 +78,10 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
 
         class ZoneRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section4Rule2.RuleSetModelInstanceRule.ZoneRule, self,).__init__(
+                super(
+                    Section4Rule2.RuleSetModelInstanceRule.ZoneRule,
+                    self,
+                ).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),

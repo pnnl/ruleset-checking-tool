@@ -151,7 +151,10 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
 
         class ZoneRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section4Rule11.RuleSetModelInstanceRule.ZoneRule, self,).__init__(
+                super(
+                    Section4Rule11.RuleSetModelInstanceRule.ZoneRule,
+                    self,
+                ).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
@@ -266,9 +269,9 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
                 ):
                     return "There is a fan operating schedule mismatch between the baseline and proposed but section g3.1.1(c) appears applicable. Verify mismatch is appropriate per section G3.1.1(c) and that the fan operating schedule in the baseline is in alignment with the occupancy schedules."
                 elif schedule_mismatch:
-                    return "There is a fan schedule mismatch between the baseline and proposed rmrs for the hvac system(s) serving this zone. Fail unless table G3.1 section 4 baseline column exceptions #1, #2 or #3 is applicable."
+                    return "There is a fan schedule mismatch between the baseline and proposed for the hvac system(s) serving this zone. Fail unless table G3.1 section 4 baseline column exceptions #1, #2 or #3 is applicable."
                 else:
-                    return "Fan schedules match between the baseline and proposed rmrs for the hvac system(s) serving this zone. Verify that matching schedules are appropriate in that none of the section 4 baseline column exceptions #1, #2 or #3 are applicable."
+                    return "Fan schedules match between the baseline and proposed for the hvac system(s) serving this zone. Verify that matching schedules are appropriate in that none of the section 4 baseline column exceptions #1, #2 or #3 are applicable."
 
             def rule_check(self, context, calc_vals=None, data=None):
                 return True

@@ -44,7 +44,7 @@ class RCTReport:
         -------
 
         """
-        invalid_msg = rct_outcome["invalid_rmrs"]
+        invalid_msg = rct_outcome["invalid_rmds"]
         # Sort the outcomes by id or rule_id
         if "id" in rct_outcome["outcomes"][0]:
             id_key = "id"
