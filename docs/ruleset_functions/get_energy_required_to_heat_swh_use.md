@@ -19,8 +19,8 @@ Data Lookup: None
 Logic:
 
 - get the schedule: `hourly_schedule = swh_use.use_multiplier_schedule`
-- get the temperature at fixture: `supply_temperature = swh_use.distribution_system.design_supply_temperature`
 - get the distribution system: `distribution_system = swh_use.served_by_distribution_system`
+- get the temperature at fixture: `supply_temperature = distribution_system.design_supply_temperature`
 - get the water used: `swh_use_value = swh_use.use`
 - get the inlet water temperature: `inlet_T_sched = distribution_system.entering_water_mains_temperature_schedule`
 - set the drain heat recovery efficiency to 0: `drain_heat_recovery_efficiency = 0`
