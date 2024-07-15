@@ -14,16 +14,6 @@ Function Call:
 - **get_building_segment_SWH_bat**  
 - **get_component_by_id**  
 
-Logic: 
-- look at each building in the RMD: `for building in B_RMD:`
-    - create a boolean is_applicable and set it to false: `is_applicable = false`
-    - look at each building segment in the building: `for building_segment in building.building_segments:`
-    - get the service water heating uses in the building segment `service_water_heating_use_ids = get_SWH_uses_associated_with_each_building_segment(P_RMD, building_segment.id)`
-    - look at each service water heating use id: `for swh_use_id in service_water_heating_use_ids:`
-        - get the swh_use using get_component_by_ID: `swh_use = get_component_by_ID(P_RMD, swh_use_id)`
-        - check to see if the use has SWH loads: `if swh_use.use > 0:`
-            - the rule is applicable: `is_applicable = true`
-
 Logic:
 - create a blank dictionary: `swh_and_SWH_use_dict = {}`
 - look at each building segment: `for building_segment in RMD.building_segments:`
