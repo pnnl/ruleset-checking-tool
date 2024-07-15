@@ -31,7 +31,7 @@ TEST_RMI = {
                             "id": "zone_2",
                             "terminals": [
                                 {
-                                    "id": "terminal_6",
+                                    "id": "terminal_4",
                                     "type": "VARIABLE_AIR_VOLUME",
                                 }
                             ],
@@ -65,11 +65,14 @@ def test__TEST_RMD__is_valid():
 
 
 def test__hvac_fan_all_VAV__success():
-    assert are_all_terminal_types_VAV(TEST_RMI, ["terminal_1"]) is True
+    assert are_all_terminal_types_VAV(TEST_RMI, ["terminal_1", "terminal_4"]) is True
 
 
 def test__hvac_fan_not_all_VAV__success():
-    assert are_all_terminal_types_VAV(TEST_RMI, ["terminal_1", "terminal_2"]) is False
+    assert (
+        are_all_terminal_types_VAV(TEST_RMI, ["terminal_1", "terminal_2", "terminal_4"])
+        is False
+    )
 
 
 def test__hvac_fan_include_no_type__success():
