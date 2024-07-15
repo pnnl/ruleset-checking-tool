@@ -12,8 +12,7 @@ Returns:
 Function Call:
 
 - get_energy_required_to_heat_swh_use  
-- get_SWH_uses_associated_with_each_building_segment  
-- get_SWH_uses_associated_with_each_building_segment  
+- get_SWH_uses_associated_with_each_building_segment    
 - get_component_by_ID  
 
 Data Lookup: None
@@ -50,7 +49,7 @@ Logic:
 - return result: `return: building_segment_swh_bat`
 
 
-**Returns** swh_and_spaces_dict
+**Returns** building_segment_swh_bat
 
 **[Back](../_toc.md)**
 
