@@ -37,10 +37,10 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [get_dict_of_zones_and_terminal_units_served_by_hvac_sys](ruleset_functions/get_dict_of_zones_and_terminal_units_served_by_hvac_sys.md): Returns a dictionary of zones and terminal unit IDs associated with each HVAC system in the RMD.
   * [get_baseline_system_type](ruleset_functions/get_baseline_system_types.md): Identify all the baseline system types modeled in a B-RMD.
   * [get_hvac_zone_list_w_area](ruleset_functions/get_hvac_zone_list_w_area.md): Get the list of zones and their total floor area served by each HVAC system in a RMD.
-  * [check_purchased_chw_hhw_status_dict](ruleset_functions/check_purchased_chw_hhw_status_dict.md): Check if RMI is modeled with purchased chilled water as space cooling source or purchased hot water/steam as space heating source. If any system in RMI uses purchased chilled water, function shall return True for purchased chilled water as space cooling source. Similarly, if any system in RMI uses purchased hot water or steam, function shall return True for purchased hot water/steam as space heating source.
+  * [check_purchased_chw_hhw_status_dict](ruleset_functions/check_purchased_chw_hhw_status_dict.md): Check if RMD is modeled with purchased chilled water as space cooling source or purchased hot water/steam as space heating source. If any system in RMD uses purchased chilled water, function shall return True for purchased chilled water as space cooling source. Similarly, if any system in RMD uses purchased hot water or steam, function shall return True for purchased hot water/steam as space heating source.
   * [get_proposed_hvac_modeled_with_virtual_heating](ruleset_functions/get_proposed_hvac_modeled_with_virtual_heating.md): Get the list of HeatingVentilationAirAconditioningSystem in which Appendix G Table G3.1 #10 c is applicable (i.e. space heating is modeled in the P_RMR but not the U_RMR).  Table G3.1 #10 c states that "where no heating system exists or no heating system has been submitted with design documents, the system type shall be the same system as modeled in the baseline building design and shall comply with but not exceed the requirements of Section 6."
   * [get_fan_object_electric_power](ruleset_functions/get_fan_object_electric_power.md): Get the fan power associated with a fan object.
-  * [get_heat_rejection_loops_connected_to_baseline_systems](ruleset_functions/get_heat_rejection_loops_connected_to_baseline_systems.md): Get a list of all heat rejection loops in an RMI that are connected to a baseline HVAC System (Type-7, 8, 11.1, 11.2, 12, 13, 7b, 8b, 11.1b, 12b)
+  * [get_heat_rejection_loops_connected_to_baseline_systems](ruleset_functions/get_heat_rejection_loops_connected_to_baseline_systems.md): Get a list of all heat rejection loops in an RMD that are connected to a baseline HVAC System (Type-7, 8, 11.1, 11.2, 12, 13, 7b, 8b, 11.1b, 12b)
   * [get_fan_system_object_supply_return_exhaust_relief_total_kW_CFM](ruleset_functions/get_fan_system_object_supply_return_exhaust_relief_total_kW_CFM.md): Get the supply, return, exhaust, and relief total fan power, CFM, quantity, and information about whether the pressure drop is consistent across the fans if more than one for a fan system object.   The function returns a dictionary that saves the supply, return, exhaust, and relief fan power as a list, saves the supply, return, exhaust, and relief cfm as a list, saves the supply, return, exhaust, and relief quantity as a list, and saves for each fan whether the pressure drop is undefined, identical, or different across fans (if only one it will return undefined or identical) but returns the quantity and information about the pressure drop across fans to help assess whether series or parallel.
   * [are_all_hvac_sys_fan_objs_autosized](ruleset_functions/are_all_hvac_sys_fan_objs_autosized.md): Returns true or false. The function returns true if all supply fan objects associated with an hvac system are autosized.
   * [is_economizer_modeled_in_proposed](ruleset_functions/is_economizer_modeled_in_proposed.md): Returns true or false. The function returns true if at least one zone served by the baseline HVAC system sent to the function is served by an hvac system with an economizer in the proposed design. The function returns false otherwise.
@@ -265,8 +265,9 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
 
 ## Section 12 - Receptacles and Other Loads
   * [12-1](section12/Rule12-1.md): Number of spaces modeled in User RMD and Baseline RMD are the same
-  * [12-2](section12/Rule12-2.md): Number of spaces modeled in User RMD and Proposed RMD are the same
-  * [12-3](section12/Rule12-3.md): User RMD Space Name in Proposed RMD? 
+  * [12-2](section12/Rule12-2.md): Number of spaces modeled in User RMR and Proposed RMR are the same
+  * [12-3](section12/Rule12-3.md): When receptacle controls are specified in the proposed building design for spaces where not required by Standard 90.1 2019 Section 8.4.2, the hourly receptacle schedule shall be reduced as specified in Standard 90.1-2019 Table G3.1 Section 12 Proposed Building Performance column.
+  * [12-4](section12/Rule12-4.md): Computer room equipment schedules shall be modeled as a constant fraction of the peak design load per the following monthly schedule: Months 1, 5, 9 — 25%; Months 2, 6, 10 — 50%; Months 3, 7, 11 — 75%; Months 4, 8, 12 — 100%.
 
 ## Section 15 - Distribution Transformers
   * [15-1](section15/Rule15-1.md): Number of transformers modeled in User RMD and Baseline RMD are the same
@@ -277,6 +278,13 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [15-6](section15/Rule15-6.md): Transformer efficiency reported in User RMD equals Table 8.4.4.
   
 ## Section 16 - Elevators
+  * [16-1](section16/Rule16-1.md): The elevator peak motor power shall be calculated according to the equation in Table G3.1-16
+  * [16-2](section16/Rule16-2.md): The baseline elevator motor use shall be modeled with the same schedule as the proposed design.   
+  * [16-3](section16/Rule16-3.md): The elevator cab ventilation fan shall be modeled with the same schedule as the elevator motor.
+  * [16-4](section16/Rule16-4.md): The elevator cab lights shall be modeled with the same schedule as the elevator motor.
+  * [16-5](section16/Rule16-5.md): When included in the proposed design, the baseline elevator cab ventilation fan and lights shall operate continuously.
+  * [16-6](section16/Rule16-6.md): When included in the proposed design, the baseline elevator cab ventilation fan power shall be 0.33 W/cfm
+  * [16-7](section16/Rule16-7.md): When included in the proposed design, the baseline elevator cab lighting power density shall be 3.14 W/ft2
 
 ## Section 17 - Refrigeration
 

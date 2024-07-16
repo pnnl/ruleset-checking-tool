@@ -3,7 +3,7 @@ import os
 import rct229.rulesets as rulesets
 import rct229.rulesets as rs
 from rct229.reports import reports as rct_report
-from rct229.rule_engine.engine import evaluate_all_rules
+from rct229.rule_engine.engine import evaluate_all_rules, evaluate_all_rules_rpd
 from rct229.rule_engine.rulesets import RuleSet, RuleSetTest
 from rct229.ruletest_engine.ruletest_jsons.scripts.excel_to_test_json_utilities import (
     generate_rule_test_dictionary,
@@ -121,7 +121,9 @@ def run_software_test(ruleset, section=None, saving_dir="./"):
     return report_dir
 
 
-def run_project_evaluation(rpds, ruleset, reports=["RAW_OUTPUT"], saving_dir="./"):
+def run_project_evaluation(
+    rpds, ruleset, reports=["RAW_OUTPUT"], saving_dir="./", session_id=""
+):
     """
 
     Parameters
@@ -130,6 +132,7 @@ def run_project_evaluation(rpds, ruleset, reports=["RAW_OUTPUT"], saving_dir="./
     ruleset: str ruleset key
     reports: list[str] list of strings and each string is the enum value of a report
     saving_dir: directory to save report.
+    session_id: a string representing a calculation session
 
     Returns
     -------
@@ -161,7 +164,7 @@ def run_project_evaluation(rpds, ruleset, reports=["RAW_OUTPUT"], saving_dir="./
 
     print("Test implementation of rule engine for ASHRAE Std 229 RCT.")
     print("")
-    report = evaluate_all_rules(rpds)
+    report = evaluate_all_rules_rpd(rpds, session_id)
 
     print(f"Saving reports to: {saving_dir}......")
     report_path_list = []

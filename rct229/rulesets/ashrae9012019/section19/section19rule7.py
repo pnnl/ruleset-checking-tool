@@ -1,6 +1,6 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.aggregate_min_OA_schedule_across_zones import (
     aggregate_min_OA_schedule_across_zones,
@@ -31,11 +31,11 @@ class Section19Rule7(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section19Rule7, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             each_rule=Section19Rule7.HVACRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="19-7",
             description="Minimum ventilation system outdoor air intake flow shall be the same for the proposed design and baseline building design except when any of the 4 exceptions defined in Section G3.1.2.5 are met."
             "Exceptions included in this RDS: 2. When designing systems in accordance with Standard 62.1, Section 6.2, `Ventilation Rate Procedure,`"
@@ -45,16 +45,16 @@ class Section19Rule7(RuleDefinitionListIndexedBase):
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1.2.5 and Exception 2",
             is_primary_rule=True,
-            rmr_context="ruleset_model_descriptions/0",
+            rmd_context="ruleset_model_descriptions/0",
             list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
         )
 
     def create_data(self, context, data):
-        rmi_b = context.BASELINE_0
-        rmi_p = context.PROPOSED
+        rmd_b = context.BASELINE_0
+        rmd_p = context.PROPOSED
 
         dict_of_zones_and_terminal_units_served_by_hvac_sys_b = (
-            get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmi_b)
+            get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmd_b)
         )
 
         hvac_system_serves_only_labs = True
@@ -62,7 +62,7 @@ class Section19Rule7(RuleDefinitionListIndexedBase):
         all_lighting_space_types_defined = True
         for space_b in find_all(
             "$.buildings[*].building_segments[*].zones[*].spaces[*]",
-            rmi_b,
+            rmd_b,
         ):
             if hvac_system_serves_only_labs:
                 lighting_space_type_b = space_b.get("lighting_space_type")
@@ -81,7 +81,7 @@ class Section19Rule7(RuleDefinitionListIndexedBase):
         zone_data = {}
         for hvac_id_b in find_all(
             "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].id",
-            rmi_b,
+            rmd_b,
         ):
             zone_data[hvac_id_b] = {
                 "zone_OA_CFM_list_of_schedules_b": [],
@@ -94,10 +94,10 @@ class Section19Rule7(RuleDefinitionListIndexedBase):
                 hvac_id_b
             ]["zone_list"]:
                 zone_data[hvac_id_b]["zone_OA_CFM_list_of_schedules_b"].append(
-                    get_min_oa_cfm_sch_zone(rmi_b, zone_id_b)
+                    get_min_oa_cfm_sch_zone(rmd_b, zone_id_b)
                 )
                 zone_data[hvac_id_b]["zone_OA_CFM_list_of_schedules_p"].append(
-                    get_min_oa_cfm_sch_zone(rmi_p, zone_id_b)
+                    get_min_oa_cfm_sch_zone(rmd_p, zone_id_b)
                 )
 
                 # find if DCV was modeled in baseline
@@ -106,13 +106,13 @@ class Section19Rule7(RuleDefinitionListIndexedBase):
                         terminal_b.get("has_demand_control_ventilation", False)
                         for terminal_b in find_all(
                             "$.terminals[*]",
-                            find_exactly_one_zone(rmi_b, zone_id_b),
+                            find_exactly_one_zone(rmd_b, zone_id_b),
                         )
                     ]
                 )
 
                 # find proposed zone
-                zone_p = find_exactly_one_zone(rmi_p, zone_id_b)
+                zone_p = find_exactly_one_zone(rmd_p, zone_id_b)
 
                 # find if DCV was modeled in proposed
                 zone_data[hvac_id_b]["was_DCV_modeled_proposed"] = any(
@@ -122,7 +122,7 @@ class Section19Rule7(RuleDefinitionListIndexedBase):
                             "$.fan_system.demand_control_ventilation_control",
                             (
                                 find_exactly_one_hvac_system(
-                                    rmi_p,
+                                    rmd_p,
                                     getattr_(
                                         terminal_p,
                                         "terminals",
@@ -169,7 +169,7 @@ class Section19Rule7(RuleDefinitionListIndexedBase):
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
             super(Section19Rule7.HVACRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
             )

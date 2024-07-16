@@ -1,6 +1,6 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import PROPOSED
 from rct229.schema.config import ureg
 from rct229.schema.schema_enums import SchemaEnums
@@ -15,21 +15,21 @@ REQ_EQUIP_POWER_DENSITY = 20 * ureg("W/ft2")
 
 
 class Section4Rule14(RuleDefinitionListIndexedBase):
-    """Rule 14 of ASHRAE 90.1-2019 Appendix G Section 4 (Schedule-Setpoints)"""
+    """Rule 14 of ASHRAE 90.1-2019 Appendix G Section 4 (Schedules Setpoints)"""
 
     def __init__(self):
         super(Section4Rule14, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=False, PROPOSED=True
             ),
             each_rule=Section4Rule14.SpaceRule(),
-            index_rmr=PROPOSED,
+            index_rmd=PROPOSED,
             id="4-14",
             description="A computer room is defined as a room whose primary function is to house equipment for the processing and storage of electronic data and that has a design electronic data equipment power density exceeding 20 W/ft2 of conditioned floor area.",
-            ruleset_section_title="Schedule - Setpoints",
+            ruleset_section_title="Schedules Setpoints",
             standard_section="Section 3 Definitions",
             is_primary_rule=True,
-            rmr_context="ruleset_model_descriptions/0",
+            rmd_context="ruleset_model_descriptions/0",
             list_path="$.buildings[*].building_segments[*].zones[*].spaces[*]",
             required_fields={"$": ["schedules"]},
         )
@@ -55,7 +55,7 @@ class Section4Rule14(RuleDefinitionListIndexedBase):
     class SpaceRule(RuleDefinitionBase):
         def __init__(self):
             super(Section4Rule14.SpaceRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=False, PROPOSED=True
                 ),
                 fail_msg="The space has been classed as a computer room in terms of the lighting space type but the "

@@ -1,8 +1,7 @@
 from pydash import flatten
-
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
@@ -55,11 +54,11 @@ APPLICABLE_SYS_TYPES = [
 
 
 class Section4Rule11(RuleDefinitionListIndexedBase):
-    """Rule 11 of ASHRAE 90.1-2019 Appendix G Section 4 (Airside System)"""
+    """Rule 11 of ASHRAE 90.1-2019 Appendix G Section 4 (Schedules Setpoints)"""
 
     def __init__(self):
         super(Section4Rule11, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             required_fields={
@@ -68,13 +67,13 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
                 "calendar": ["is_leap_year"],
             },
             each_rule=Section4Rule11.RuleSetModelInstanceRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="4-11",
             description="Fan schedules shall be modeled identically in the baseline and proposed unless Table G3.1 Section 4 baseline exceptions are applicable. Fan Schedules may be allowed to differ when Section 4 Baseline Column Exceptions #1, #2 Or #3 are applicable.",
-            ruleset_section_title="Airside System",
+            ruleset_section_title="Schedules Setpoints",
             standard_section="Section G3.1-4 Schedule Modeling Requirements for the Proposed design and Baseline building",
             is_primary_rule=True,
-            list_path="ruleset_model_descriptions[0]",
+            list_path="$.ruleset_model_descriptions[0]",
             data_items={
                 "climate_zone": (BASELINE_0, "weather/climate_zone"),
                 "is_leap_year": (BASELINE_0, "calendar/is_leap_year"),
@@ -84,65 +83,64 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
     class RuleSetModelInstanceRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section4Rule11.RuleSetModelInstanceRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
                 each_rule=Section4Rule11.RuleSetModelInstanceRule.ZoneRule(),
-                index_rmr=BASELINE_0,
+                index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].zones[*]",
             )
 
         def create_data(self, context, data=None):
-
-            rmi_b = context.BASELINE_0
-            rmi_p = context.PROPOSED
+            rmd_b = context.BASELINE_0
+            rmd_p = context.PROPOSED
             is_leap_year = data["is_leap_year"]
 
             zone_p_hvac_list_dict = {
-                zone_id: get_list_hvac_systems_associated_with_zone(rmi_p, zone_id)
+                zone_id: get_list_hvac_systems_associated_with_zone(rmd_p, zone_id)
                 for zone_id in find_all(
-                    "$.buildings[*].building_segments[*].zones[*].id", rmi_p
+                    "$.buildings[*].building_segments[*].zones[*].id", rmd_p
                 )
             }
 
             zone_p_fan_schedule_dict = {
                 zone_id: get_aggregated_zone_hvac_fan_operating_schedule(
-                    rmi_p, zone_id, is_leap_year
+                    rmd_p, zone_id, is_leap_year
                 )
                 for zone_id in find_all(
-                    "$.buildings[*].building_segments[*].zones[*].id", rmi_p
+                    "$.buildings[*].building_segments[*].zones[*].id", rmd_p
                 )
             }
 
             zone_b_fan_schedule_dict = {
                 zone_id: get_aggregated_zone_hvac_fan_operating_schedule(
-                    rmi_b, zone_id, is_leap_year
+                    rmd_b, zone_id, is_leap_year
                 )
                 for zone_id in find_all(
-                    "$.buildings[*].building_segments[*].zones[*].id", rmi_b
+                    "$.buildings[*].building_segments[*].zones[*].id", rmd_b
                 )
             }
 
             floor_b_hvac_list_dict = {
                 floor_name: get_dict_of_zones_hvac_sys_serving_specific_floor(
-                    rmi_b, floor_name
+                    rmd_b, floor_name
                 )
                 for floor_name in find_all(
-                    "$.buildings[*].building_segments[*].zones[*].floor_name", rmi_b
+                    "$.buildings[*].building_segments[*].zones[*].floor_name", rmd_b
                 )
             }
 
             return {
-                "baseline_hvac_sys_type_ids_dict_b": get_baseline_system_types(rmi_b),
+                "baseline_hvac_sys_type_ids_dict_b": get_baseline_system_types(rmd_b),
                 "zone_p_hvac_list_dict": zone_p_hvac_list_dict,
                 "zone_p_fan_schedule_dict": zone_p_fan_schedule_dict,
                 "zone_b_fan_schedule_dict": zone_b_fan_schedule_dict,
                 "floor_b_hvac_list_dict": floor_b_hvac_list_dict,
                 "dict_hvac_sys_zones_served_p": get_hvac_zone_list_w_area_by_rmi_dict(
-                    rmi_p
+                    rmd_p
                 ),
                 "zcc_dict_b": get_zone_conditioning_category_rmi_dict(
-                    data["climate_zone"], rmi_b
+                    data["climate_zone"], rmd_b
                 ),
             }
 
@@ -154,7 +152,7 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
         class ZoneRule(RuleDefinitionBase):
             def __init__(self):
                 super(Section4Rule11.RuleSetModelInstanceRule.ZoneRule, self,).__init__(
-                    rmrs_used=produce_ruleset_model_instance(
+                    rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
                     required_fields={

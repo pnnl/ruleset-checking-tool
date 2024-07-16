@@ -5,7 +5,7 @@ from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
 class EngineRawSummary(RCTReport):
     def __init__(self):
         super(EngineRawSummary, self).__init__()
-        self.ruleset_report_file = "raw_summary.txt"
+        self.ruleset_report_file = f"{self.__class__.__name__}.txt"
         self.num_evaluation = 0
 
     def generate_rule_report(self, rule_outcome, outcome_dict):
@@ -16,8 +16,8 @@ class EngineRawSummary(RCTReport):
         string_list.append(f"Rule: {str(rule_outcome['id'])}\n")
         string_list.append(f"Description: {str(rule_outcome['description'])}\n")
         string_list.append(
-            f"RMD context: {str(rule_outcome['rmr_context'])}\n"
-        ) if "rmr_context" in rule_outcome else string_list.append(
+            f"RMD context: {str(rule_outcome['rmd_context'])}\n"
+        ) if "rmd_context" in rule_outcome else string_list.append(
             "RMD context: full scope\n"
         )
         string_list.append(f"Rule result: {str(rule_outcome['result'])}\n")

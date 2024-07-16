@@ -197,7 +197,7 @@ def run_test_one_jsontest(test_json):
 
 
 # if __name__ == "__main__":
-#     outcome = run_ashrae9012019_tests(section="section19")
+#     outcome = run_ashrae9012019_tests(section="section5")
 
 # run_transformer_tests()
 # run_lighting_tests()
@@ -209,7 +209,7 @@ def run_test_one_jsontest(test_json):
 # run_sys_zone_assignment_tests()
 # run_hvac_general_tests()
 
-# run_test_one_jsontest("ashrae9012019/section4/rule_4_2.json")
+# run_test_one_jsontest("ashrae9012019/section16/rule_16_7.json")
 # run_ashrae9012019_tests()
 # output_dir = os.path.dirname(__file__)
 # generate_ashrae9012019_software_test_report(['tester'])

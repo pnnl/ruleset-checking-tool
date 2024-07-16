@@ -1,6 +1,6 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rule_engine.rulesets import LeapYear
 from rct229.rulesets.ashrae9012019 import BASELINE_0, PROPOSED
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
@@ -25,11 +25,11 @@ FAIL_MSG_P = "Fail because a humidity schedule is undefined in the B_RMR but is 
 
 
 class Section4Rule2(RuleDefinitionListIndexedBase):
-    """Rule 2 of ASHRAE 90.1-2019 Appendix G Section 4 (Airside System)"""
+    """Rule 2 of ASHRAE 90.1-2019 Appendix G Section 4 (Schedules Setpoints)"""
 
     def __init__(self):
         super(Section4Rule2, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             required_fields={
@@ -38,10 +38,10 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
                 "calendar": ["is_leap_year"],
             },
             each_rule=Section4Rule2.RuleSetModelInstanceRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="4-2",
             description="Humidity Control Setpoints shall be the same for proposed design and baseline building design.",
-            ruleset_section_title="Airside System",
+            ruleset_section_title="Schedules Setpoints",
             standard_section="Section G3.1-4 Schedule Modeling Requirements for the Proposed design and Baseline building",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
@@ -54,22 +54,22 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
     class RuleSetModelInstanceRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section4Rule2.RuleSetModelInstanceRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
                 each_rule=Section4Rule2.RuleSetModelInstanceRule.ZoneRule(),
-                index_rmr=BASELINE_0,
+                index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].zones[*]",
             )
 
         def create_data(self, context, data=None):
-            rmi_b = context.BASELINE_0
-            rmi_p = context.PROPOSED
+            rmd_b = context.BASELINE_0
+            rmd_p = context.PROPOSED
             return {
-                "schedules_b": rmi_b.get("schedules"),
-                "schedules_p": rmi_p.get("schedules"),
+                "schedules_b": rmd_b.get("schedules"),
+                "schedules_p": rmd_p.get("schedules"),
                 "zcc_dict_b": get_zone_conditioning_category_rmi_dict(
-                    data["climate_zone"], rmi_b
+                    data["climate_zone"], rmd_b
                 ),
             }
 
@@ -81,7 +81,7 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
         class ZoneRule(RuleDefinitionBase):
             def __init__(self):
                 super(Section4Rule2.RuleSetModelInstanceRule.ZoneRule, self,).__init__(
-                    rmrs_used=produce_ruleset_model_instance(
+                    rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
                     manual_check_required_msg=MANUAL_CHECK_MSG,

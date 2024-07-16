@@ -12,27 +12,27 @@ LightingSpaceOptionsG37 = SchemaEnums.schema_enums[
 ]
 
 
-def get_hvac_systems_primarily_serving_comp_room(rmi: dict) -> list[str]:
+def get_hvac_systems_primarily_serving_comp_room(rmd: dict) -> list[str]:
     """
     Returns a list of HVAC systems in which greater than 50% of the area served by the HVAC system is computer room
     space.
 
     Parameters
     ----------
-    rmi dict
-        A dictionary representing a ruleset model instance as defined by the ASHRAE229 schema
+    rmd dict
+        A dictionary representing a ruleset model description as defined by the ASHRAE229 schema
 
     Returns
     -------
     hvac_systems_primarily_serving_comp_rooms_list list
         A list of hvac systems in which greater than 50% of the area served by the HVAC system is computer room space.
     """
-    hvac_zone_list_w_area_dict = get_hvac_zone_list_w_area_by_rmi_dict(rmi)
+    hvac_zone_list_w_area_dict = get_hvac_zone_list_w_area_by_rmi_dict(rmd)
     hvac_systems_primarily_serving_comp_rooms_list = []
 
     for hvac in find_all(
         "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
-        rmi,
+        rmd,
     ):
         assert_(
             hvac_zone_list_w_area_dict.get(hvac["id"]),
@@ -42,7 +42,7 @@ def get_hvac_systems_primarily_serving_comp_room(rmi: dict) -> list[str]:
         hvac_sys_zone_id_list = hvac_zone_list_w_area_dict[hvac["id"]]["zone_list"]
 
         hvac_zones_list = [
-            find_exactly_one_zone(rmi, zone_id) for zone_id in hvac_sys_zone_id_list
+            find_exactly_one_zone(rmd, zone_id) for zone_id in hvac_sys_zone_id_list
         ]
         hvac_spaces_list = [
             space for zone in hvac_zones_list for space in find_all("$.spaces[*]", zone)
