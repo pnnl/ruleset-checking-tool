@@ -3,7 +3,6 @@ from typing import TypedDict
 
 from pint import Quantity
 from pydash import curry, filter_, flatten_deep, flow, map_
-
 from rct229.rulesets.ashrae9012019.data_fns.table_lighting_to_hvac_bat_map_fns import (
     building_lighting_to_hvac_bat,
     space_lighting_to_hvac_bat,
@@ -51,7 +50,7 @@ class BuildingAreaTypesWithTotalAreaZones(TypedDict):
 
 
 def get_hvac_building_area_types_and_zones_dict(
-    climate_zone: str, rmi: dict
+    climate_zone: str, rmd: dict
 ) -> dict[str, BuildingAreaTypesWithTotalAreaZones]:
     """
 
@@ -59,15 +58,15 @@ def get_hvac_building_area_types_and_zones_dict(
     ----------
     climate_zone str
         One of the ClimateZoneOptions2019ASHRAE901 enumerated values
-    rmi dict
-        A dictionary representing a ruleset model instance as defined by the ASHRAE229 schema
+    rmd dict
+        A dictionary representing a ruleset model description as defined by the ASHRAE229 schema
 
     Returns
     -------
 
     """
     zone_conditioning_category_dict = get_zone_conditioning_category_rmi_dict(
-        climate_zone, rmi
+        climate_zone, rmd
     )
 
     building_area_types_with_total_area_and_zones_dict = {}
@@ -76,7 +75,7 @@ def get_hvac_building_area_types_and_zones_dict(
         building_area_types_with_total_area_and_zones_dict
     )
 
-    for building_segment in find_all("$.buildings[*].building_segments[*]", rmi):
+    for building_segment in find_all("$.buildings[*].building_segments[*]", rmd):
         if building_segment.get(
             "area_type_heating_ventilating_air_conditioning_system"
         ):

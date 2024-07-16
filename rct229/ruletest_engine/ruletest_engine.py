@@ -17,13 +17,13 @@ from rct229.rulesets import rulesets
 from rct229.ruletest_engine.ruletest_rmd_factory import get_ruletest_rmd_models
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.schema.schema_store import SchemaStore
-from rct229.schema.validate import validate_rmr
+from rct229.schema.validate import validate_rmd
 
 
-# Generates the RMR triplet dictionaries from a test_dictionary's "rmr_transformation" element.
+# Generates the RMD triplet dictionaries from a test_dictionary's "rmr_transformation" element.
 # -test_dict = Dictionary with elements 'rmr_transformations' and 'rmr_transformations/user,baseline,proposed'
 def generate_test_rmrs(test_dict):
-    """Generates the RMR triplet dictionaries from a test_dictionary's "rmr_transformation" element.
+    """Generates the RMD triplet dictionaries from a test_dictionary's "rmr_transformation" element.
 
     Parameters
     ----------
@@ -33,17 +33,17 @@ def generate_test_rmrs(test_dict):
 
         The rmr_transformations field has optional user, baseline,
         and proposed fields. If any of these fields is present, its
-        corresponding RMR will be referenced. If the user, baseline,
-        or proposed fields are missing, then its correponding RMR is
+        corresponding RMD will be referenced. If the user, baseline,
+        or proposed fields are missing, then its correponding RMD is
         set to None.
 
 
     Returns
     -------
     tuple : a triplet containing:
-        - user_rmr (dictionary): User RMR dictionary built from RMR Transformation definition
-        - baseline_rmr (dictionary): Baseline RMR dictionary built from RMR Transformation definition
-        - proposed_rmr (dictionary): Proposed RMR dictionary built from RMR Transformation definition
+        - user_rmr (dictionary): User RMD dictionary built from RMD Transformation definition
+        - baseline_rmr (dictionary): Baseline RMD dictionary built from RMD Transformation definition
+        - proposed_rmr (dictionary): Proposed RMD dictionary built from RMD Transformation definition
     """
 
     # Each of these will remain None unless it is specified in
@@ -233,6 +233,7 @@ def run_section_tests(test_json_name: str, ruleset_doc: RuleSet):
 
     # Cycle through tests in test JSON and run each individually
     for test_id in test_list_dictionary:
+        print(f"Processing Test: {test_id}")
         # Load next test dictionary from test list
         test_dict = test_list_dictionary[test_id]
 
@@ -551,9 +552,9 @@ def validate_test_json_schema(test_json_path):
         user_rmr, baseline_rmr, proposed_rmr = generate_test_rmrs(test_dict)
 
         # Evaluate RMRs against the schema
-        user_result = validate_rmr(user_rmr) if user_rmr != None else None
-        baseline_result = validate_rmr(baseline_rmr) if baseline_rmr != None else None
-        proposed_result = validate_rmr(proposed_rmr) if proposed_rmr != None else None
+        user_result = validate_rmd(user_rmr) if user_rmr != None else None
+        baseline_result = validate_rmd(baseline_rmr) if baseline_rmr != None else None
+        proposed_result = validate_rmd(proposed_rmr) if proposed_rmr != None else None
 
         results_list = [user_result, baseline_result, proposed_result]
         rmr_type_list = ["User", "Baseline", "Proposed"]
@@ -755,7 +756,7 @@ def validate_229_rmd(rmd_name, rmd_path):
     with open(rmd_path) as f:
         rmd = json.load(f)
 
-    result = validate_rmr(rmd)
+    result = validate_rmd(rmd)
 
     # If result contains a dictionary with failure information, append failure to failure list
     if isinstance(result, dict):

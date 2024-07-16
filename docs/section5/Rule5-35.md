@@ -3,11 +3,11 @@
 
 **Rule ID:** 5-35  
 **Rule Description:** The baseline air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1 cfm/ft2.  The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section G3.1.1.4.  
-**Rule Assertion:** Sum of B-RMR infiltration.infiltration.air_leakage_rate = expected value.  
+**Rule Assertion:** Sum of B-RMD infiltration.infiltration.air_leakage_rate = expected value.  
 **Appendix G Section:** Section 5 Envelope  
 **Appendix G Section Reference:** Section G3.1-5(h) Building Envelope Modeling Requirements for the Baseline building  
 
-**Applicability:** All required data elements exist for B_RMR  
+**Applicability:** All required data elements exist for B_RMD  
 **Applicability Checks:**  None  
 
 **Manual Check:** None  
@@ -20,11 +20,11 @@
 
 ## Rule Logic:  
 
-- Get surface conditioning category dictionary for B_RMR: `scc_dict_b = get_surface_conditioning_category(B_RMR)`
+- Get surface conditioning category dictionary for B_RMD: `scc_dict_b = get_surface_conditioning_category(B_RMD)`
 
-- Get zone conditioning category dictionary for B_RMR: `zone_conditioning_category_dict_b = get_zone_conditioning_category(B_RMR)`
+- Get zone conditioning category dictionary for B_RMD: `zone_conditioning_category_dict_b = get_zone_conditioning_category(B_RMD)`
 
-- For each zone in the Baseline model: `for zone_b in B_RMR...zones:`
+- For each zone in the Baseline model: `for zone_b in B_RMD...zones:`
 
   - For each surface in zone: `for surface_b in zone_b.surfaces:`
 
@@ -36,7 +36,7 @@
 
 **Rule Assertion:**  
 
-- Case 1: For B_RMR, if the total zone infiltration rate for conditioned and semi-heated zones is equal to the required baseline infiltration rate at 75Pa with a conversion factor of 0.112 as per Section G3.1.1.4: `if building_total_air_leakage_rate_b == target_air_leakage_rate_75pa_b * 0.112: PASS`
+- Case 1: For B_RMD, if the total zone infiltration rate for conditioned and semi-heated zones is equal to the required baseline infiltration rate at 75Pa with a conversion factor of 0.112 as per Section G3.1.1.4: `if building_total_air_leakage_rate_b == target_air_leakage_rate_75pa_b * 0.112: PASS`
 
 - Case 2: Else: `else: FAIL`
 

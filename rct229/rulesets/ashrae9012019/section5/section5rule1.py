@@ -1,8 +1,7 @@
 from pydash import compact
-
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import (
     BASELINE_0,
     BASELINE_90,
@@ -31,7 +30,7 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule1, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=True,
                 BASELINE_0=True,
                 BASELINE_90=True,
@@ -39,11 +38,11 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
                 BASELINE_270=True,
                 PROPOSED=True,
             ),
-            rmrs_used_optional=produce_ruleset_model_instance(
+            rmds_used_optional=produce_ruleset_model_description(
                 BASELINE_90=True, BASELINE_180=True, BASELINE_270=True
             ),
             each_rule=Section5Rule1.RMDRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="5-1",
             description="There are four baseline rotations (i.e., four baseline models differing in azimuth by 90 degrees and four sets of baseline model results) if vertical fenestration area per each orientation differ by more than 5%.",
             ruleset_section_title="Envelope",
@@ -55,7 +54,7 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
     class RMDRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule1.RMDRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_description(
                     USER=True,
                     BASELINE_0=True,
                     BASELINE_90=True,
@@ -63,11 +62,11 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
                     BASELINE_270=True,
                     PROPOSED=True,
                 ),
-                rmrs_used_optional=produce_ruleset_model_instance(
+                rmds_used_optional=produce_ruleset_model_description(
                     BASELINE_90=True, BASELINE_180=True, BASELINE_270=True
                 ),
                 each_rule=Section5Rule1.RMDRule.BuildingRule(),
-                index_rmr=BASELINE_0,
+                index_rmd=BASELINE_0,
                 list_path="$.buildings[*]",
             )
 
@@ -141,7 +140,7 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
         class BuildingRule(RuleDefinitionBase):
             def __init__(self):
                 super(Section5Rule1.RMDRule.BuildingRule, self).__init__(
-                    rmrs_used=produce_ruleset_model_instance(
+                    rmds_used=produce_ruleset_model_description(
                         BASELINE_0=True,
                     ),
                     required_fields={

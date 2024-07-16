@@ -1,6 +1,6 @@
 from rct229.rule_engine.partial_rule_definition import PartialRuleDefinition
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import PROPOSED
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_proposed_hvac_modeled_with_virtual_cooling import (
     get_proposed_hvac_modeled_with_virtual_cooling,
@@ -16,18 +16,18 @@ class Section19Rule33(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section19Rule33, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=True, BASELINE_0=False, PROPOSED=True
             ),
             each_rule=Section19Rule33.HVACRule(),
-            index_rmr=PROPOSED,
+            index_rmd=PROPOSED,
             id="19-33",
             description="Where no heating and/or cooling system is to be installed, and a heating or cooling system is being simulated only to meet the requirements described in Section G3.1-10 HVAC Systems proposed column c and d, "
             "heating and/or cooling system fans shall simulated to be cycled ON and OFF to meet heating and cooling loads during occupied hours in the proposed design.",
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1-10 HVAC Systems proposed column c and d",
             is_primary_rule=False,
-            rmr_context="ruleset_model_descriptions/0",
+            rmd_context="ruleset_model_descriptions/0",
             list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
         )
 
@@ -55,7 +55,7 @@ class Section19Rule33(RuleDefinitionListIndexedBase):
     class HVACRule(PartialRuleDefinition):
         def __init__(self):
             super(Section19Rule33.HVACRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=False, PROPOSED=True
                 ),
             )

@@ -1,6 +1,6 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import USER
 from rct229.rulesets.ashrae9012019.data_fns.table_8_4_4_fns import (
     table_8_4_4_in_range,
@@ -16,23 +16,23 @@ class Section15Rule5(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section15Rule5, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=True, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section15Rule5.TransformerRule(),
-            index_rmr=USER,
+            index_rmd=USER,
             id="15-5",
-            description="Transformer efficiency reported in Baseline RMR equals Table 8.4.4",
+            description="Transformer efficiency reported in Baseline RMD equals Table 8.4.4",
             ruleset_section_title="Transformer",
             standard_section="Transformers",
             is_primary_rule=False,
-            rmr_context="ruleset_model_descriptions/0/transformers",
+            rmd_context="ruleset_model_descriptions/0/transformers",
         )
 
     class TransformerRule(RuleDefinitionBase):
         def __init__(self):
             super(Section15Rule5.TransformerRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_description(
                     USER=True, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={

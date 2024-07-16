@@ -1,5 +1,4 @@
 from pint import Quantity
-
 from rct229.rulesets.ashrae9012019.data_fns.table_lighting_to_hvac_bat_map_fns import (
     space_lighting_to_hvac_bat,
 )
@@ -8,7 +7,7 @@ from rct229.utils.pint_utils import ZERO
 from rct229.utils.utility_functions import find_exactly_one_zone
 
 
-def get_zone_hvac_bat_dict(rmi: dict, zone_id: str) -> dict[str, Quantity]:
+def get_zone_hvac_bat_dict(rmd: dict, zone_id: str) -> dict[str, Quantity]:
     """
     Get a dictionary of the HVAC_BAT and areas for a given zone.
         - used to verify the correct type of HVAC baseline system (or systems)
@@ -16,8 +15,8 @@ def get_zone_hvac_bat_dict(rmi: dict, zone_id: str) -> dict[str, Quantity]:
 
     Parameters
     ----------
-    rmi dict
-        A dictionary representing a ruleset model instance as defined by the ASHRAE229 schema
+    rmd dict
+        A dictionary representing a ruleset model description as defined by the ASHRAE229 schema
     zone_id str
         zone id
 
@@ -28,7 +27,7 @@ def get_zone_hvac_bat_dict(rmi: dict, zone_id: str) -> dict[str, Quantity]:
 
     """
     zone_hvac_bat_dict = dict()
-    zone = find_exactly_one_zone(rmi, zone_id)
+    zone = find_exactly_one_zone(rmd, zone_id)
     for space in find_all("$.spaces[*]", zone):
         # set default to None to not fail the data retrieving (space could have no lighting space type)
         space_hvac_bat = space_lighting_to_hvac_bat(

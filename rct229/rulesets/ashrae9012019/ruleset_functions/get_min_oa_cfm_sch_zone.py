@@ -1,5 +1,4 @@
 import numpy as np
-
 from rct229.utils.assertions import assert_, getattr_
 from rct229.utils.jsonpath_utils import find_all, find_exactly_one_with_field_value
 
@@ -8,14 +7,14 @@ NON_LEAP_YEAR_HRS = 8760
 
 
 def get_min_oa_cfm_sch_zone(
-    rmi: dict, zone_id: str, is_leap_year: bool = False
+    rmd: dict, zone_id: str, is_leap_year: bool = False
 ) -> list[float | int]:
-    """Each zone can have multiple terminal units sering it in the proposed RMR and each of these units could supply OA CFM. In order to obtain a zone level OA CFM schedule the OA CFM provided by each terminal unit needs to be aggregated for each hour of the year. This function receives an RMR (B, U, or P) and a zone ID and loops through each terminal unit associated with the zone to create an aggregated 8760 for OA CFM for the zone.
+    """Each zone can have multiple terminal units sering it in the proposed RMD and each of these units could supply OA CFM. In order to obtain a zone level OA CFM schedule the OA CFM provided by each terminal unit needs to be aggregated for each hour of the year. This function receives an RMD (B, U, or P) and a zone ID and loops through each terminal unit associated with the zone to create an aggregated 8760 for OA CFM for the zone.
 
     Parameters
     ----------
-    rmi: json
-        The RMR in which the OA CFM schedule will be determined for the specific Zone ID.
+    rmd: json
+        The RMD in which the OA CFM schedule will be determined for the specific Zone ID.
     zone_id:
         The Zone ID in which the aggregated (across the terminal units serving the zone) hourly OA CFM schedule will be determined.
     is_leap_year: bool, default: False
@@ -34,7 +33,7 @@ def get_min_oa_cfm_sch_zone(
     min_oa_cfm_sch_zone_array_list = []
     for terminal in find_all(
         f'$.buildings[*].building_segments[*].zones[*][?(@.id = "{zone_id}")].terminals[*]',
-        rmi,
+        rmd,
     ):
         minimum_outdoor_airflow = getattr_(
             terminal, "terminal", "minimum_outdoor_airflow"
@@ -50,7 +49,7 @@ def get_min_oa_cfm_sch_zone(
                     "$.schedules[*]",
                     "id",
                     minimum_outdoor_airflow_multiplier_schedule_id,
-                    rmi,
+                    rmd,
                 ),
                 "Schedule",
                 "hourly_values",

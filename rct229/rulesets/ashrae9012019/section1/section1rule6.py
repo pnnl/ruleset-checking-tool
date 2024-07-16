@@ -1,24 +1,24 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019.data_fns.extra_schema_fns import (
     baseline_equals_proposed,
 )
 
 
 class Section1Rule6(RuleDefinitionBase):
-    """Rule 1 of ASHRAE 90.1-2019 Appendix G Section 1 (Performance Calculation)"""
+    """Rule 6 of ASHRAE 90.1-2019 Appendix G Section 1 (Performance Calculation)"""
 
     def __init__(self):
         super(Section1Rule6, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             id="1-6",
-            description="",
+            description="The proposed design shall be the same as the baseline design for all data elements identified in the schema hosted at data.standards.ashrae {{https://github.com/open229/ruleset-model-description-schema/blob/main/docs229/ASHRAE229_extra.schema.json}}",
             ruleset_section_title="Performance Calculation",
-            standard_section="",
+            standard_section="Table G3.1(1) Baseline Building Performance (a)",
             is_primary_rule=True,
-            rmr_context="",
+            rmd_context="",
         )
 
     def is_applicable(self, context, data=None):

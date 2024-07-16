@@ -1,6 +1,6 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_system_type_compare import (
     baseline_system_type_compare,
@@ -54,11 +54,11 @@ class Section18Rule2(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section18Rule2, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             each_rule=Section18Rule2.RMDRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="18-2",
             description="Does the modeled system serve the appropriate zones (one system per zone for system types 1, 2, 3, 4, 9, 10, 11, 12, and 13 and "
             "one system per floor for system types 5, 6, 7, and 8, with the exception of system types 5 or 7 serving laboratory spaces - these systems should serve ALL laboratory zones in the buidling).",
@@ -80,11 +80,11 @@ class Section18Rule2(RuleDefinitionListIndexedBase):
     class RMDRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section18Rule2.RMDRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
                 each_rule=Section18Rule2.RMDRule.HVACRule(),
-                index_rmr=BASELINE_0,
+                index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
             )
 
@@ -224,7 +224,7 @@ class Section18Rule2(RuleDefinitionListIndexedBase):
         class HVACRule(RuleDefinitionBase):
             def __init__(self):
                 super(Section18Rule2.RMDRule.HVACRule, self).__init__(
-                    rmrs_used=produce_ruleset_model_instance(
+                    rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
                 )

@@ -1,5 +1,5 @@
 from rct229.rule_engine.partial_rule_definition import PartialRuleDefinition
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.schema.schema_enums import SchemaEnums
 
 HEATING_DESIGN_DAY = SchemaEnums.schema_enums["HeatingDesignDayOptions"]
@@ -11,7 +11,7 @@ class Section19Rule3(PartialRuleDefinition):
 
     def __init__(self):
         super(Section19Rule3, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             id="19-3",

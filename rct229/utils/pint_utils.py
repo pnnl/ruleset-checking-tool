@@ -57,9 +57,9 @@ _UNIT_CONVENTIONS = {
         "temperature": "C",
         "temperature_difference": "K",
         "cooling_efficiency": "W/W",
-        "power_per_volumetric_flow_rate": "W-s/L",
-        "volumetric_flow_rate_per_power": "s/(L*W)",
-        "power_per_flow_rate": "W-s/L",
+        "liquid_flow_rate_per_power": "L/(s*W)",
+        "power_per_air_flow_rate": "W-s/L",
+        "power_per_liquid_flow_rate": "W-s/L",
         "air_flow_rate": "L/s",
     },
     UNIT_SYSTEM.IP: {
@@ -76,9 +76,9 @@ _UNIT_CONVENTIONS = {
         "temperature": "F",
         "temperature_difference": "R",
         "cooling_efficiency": "kW/ton",
-        "power_per_volumetric_flow_rate": "W/gpm",
-        "volumetric_flow_rate_per_power": "gpm/hp",
-        "power_per_flow_rate": "W/gpm",
+        "liquid_flow_rate_per_power": "gpm/hp",
+        "power_per_air_flow_rate": "W/cfm",
+        "power_per_liquid_flow_rate": "W/gpm",
         "air_flow_rate": "cfm",
     },
 }
@@ -88,6 +88,7 @@ class ZERO:
     """Class holding zero values for various pint quantities"""
 
     LENGTH: Quantity = 0 * ureg("ft")
+    WEIGHT: Quantity = 0 * ureg("lb")
     AREA: Quantity = LENGTH * LENGTH
     VOLUME: Quantity = AREA * LENGTH
 

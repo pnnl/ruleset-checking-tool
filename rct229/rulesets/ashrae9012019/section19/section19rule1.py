@@ -1,6 +1,6 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_cooling_type_DX import (
     is_hvac_sys_cooling_type_dx,
@@ -23,38 +23,38 @@ class Section19Rule1(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section19Rule1, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section19Rule1.HVACRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="19-1",
             description="HVAC system coil capacities for the baseline building design shall be oversized by 15% for cooling and 25% for heating.",
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1.2.2",
             is_primary_rule=True,
-            rmr_context="ruleset_model_descriptions/0",
+            rmd_context="ruleset_model_descriptions/0",
             list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
         )
 
     def create_data(self, context, data):
-        rmi_b = context.BASELINE_0
+        rmd_b = context.BASELINE_0
 
         hvac_id_to_flags = {
             hvac_id: {
                 "is_hvac_sys_heating_type_furnace_flag": is_hvac_sys_heating_type_furnace(
-                    rmi_b, hvac_id
+                    rmd_b, hvac_id
                 ),
                 "is_hvac_sys_heating_type_heat_pump_flag": is_hvac_sys_heating_type_heat_pump(
-                    rmi_b, hvac_id
+                    rmd_b, hvac_id
                 ),
                 "is_hvac_sys_cooling_type_dx_flag": is_hvac_sys_cooling_type_dx(
-                    rmi_b, hvac_id
+                    rmd_b, hvac_id
                 ),
             }
             for hvac_id in find_all(
                 "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].id",
-                rmi_b,
+                rmd_b,
             )
         }
 
@@ -63,7 +63,7 @@ class Section19Rule1(RuleDefinitionListIndexedBase):
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
             super(Section19Rule1.HVACRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
             )

@@ -1,0 +1,1065 @@
+{
+    "rule-1-5-a": {
+        "Section": 1,
+        "Rule": 5,
+        "Test": "a",
+        "test_description": "A one building segment, single zone building has proposed on site renewable energy production. The relationship between PCI, PBPnre, PBP, and BBP agrees with PCI + ((PBPnre - PBP)/BBP)-0.05 <= PCIt. RESULT: pass",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "1-5",
+            "ruleset_reference": "4.2.1.2",
+            "rule_description": "When on-site renewable energy generation exceeds the thresholds defined in Section 4.2.1.1, the methodology defined in this section shall be used to calculate the PCIt. ",
+            "applicable_rmr": "Proposed Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": 0,
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.34"
+        },
+        "rmr_transformations": {
+            "user": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "output": {
+                            "id": "Output 1",
+                            "performance_cost_index": 1.5,
+                            "total_proposed_building_energy_cost_including_renewable_energy": 2,
+                            "total_proposed_building_energy_cost_excluding_renewable_energy": 3,
+                            "baseline_building_performance_energy_cost": 1,
+                            "performance_cost_index_target": 2.45
+                        },
+                        "type": "USER"
+                    }
+                ]
+            },
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "output": {
+                            "id": "Output 1",
+                            "performance_cost_index": 1.5,
+                            "total_proposed_building_energy_cost_including_renewable_energy": 2,
+                            "total_proposed_building_energy_cost_excluding_renewable_energy": 3,
+                            "baseline_building_performance_energy_cost": 1,
+                            "performance_cost_index_target": 2.45
+                        },
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-1-5-b": {
+        "Section": 1,
+        "Rule": 5,
+        "Test": "b",
+        "test_description": "A one building segment, single zone building has proposed on site renewable energy production. The relationship between PCI, PBPnre, PBP, and BBP does not agree with PCI + ((PBPnre - PBP)/BBP)-0.05 <= PCIt. RESULT: fail",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "1-5",
+            "ruleset_reference": "4.2.1.2",
+            "rule_description": "When on-site renewable energy generation exceeds the thresholds defined in Section 4.2.1.1, the methodology defined in this section shall be used to calculate the PCIt. ",
+            "applicable_rmr": "Proposed Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": 0,
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.34"
+        },
+        "rmr_transformations": {
+            "user": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "output": {
+                            "id": "Output 1",
+                            "performance_cost_index": 1.5,
+                            "total_proposed_building_energy_cost_including_renewable_energy": 2,
+                            "total_proposed_building_energy_cost_excluding_renewable_energy": 3,
+                            "baseline_building_performance_energy_cost": 1,
+                            "performance_cost_index_target": 2.3
+                        },
+                        "type": "USER"
+                    }
+                ]
+            },
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "output": {
+                            "id": "Output 1",
+                            "performance_cost_index": 1.5,
+                            "total_proposed_building_energy_cost_including_renewable_energy": 2,
+                            "total_proposed_building_energy_cost_excluding_renewable_energy": 3,
+                            "baseline_building_performance_energy_cost": 1,
+                            "performance_cost_index_target": 2.3
+                        },
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-1-5-c": {
+        "Section": 1,
+        "Rule": 5,
+        "Test": "c",
+        "test_description": "A one building segment, single zone building has proposed on site renewable energy production. The PBPnre, PBP, and BBP result in a value that does not agree with ((PBPnre - PBP)/BBP)< = 0.05 RESULT: not_applicable",
+        "expected_rule_outcome": "not_applicable",
+        "standard": {
+            "rule_id": "1-5",
+            "ruleset_reference": "4.2.1.2",
+            "rule_description": "When on-site renewable energy generation exceeds the thresholds defined in Section 4.2.1.1, the methodology defined in this section shall be used to calculate the PCIt. ",
+            "applicable_rmr": "Proposed Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": 0,
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.34"
+        },
+        "rmr_transformations": {
+            "user": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "output": {
+                            "id": "Output 1",
+                            "performance_cost_index": 1.5,
+                            "total_proposed_building_energy_cost_including_renewable_energy": 2,
+                            "total_proposed_building_energy_cost_excluding_renewable_energy": 2.03,
+                            "baseline_building_performance_energy_cost": 1,
+                            "performance_cost_index_target": 1.4799999999999998
+                        },
+                        "type": "USER"
+                    }
+                ]
+            },
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "output": {
+                            "id": "Output 1",
+                            "performance_cost_index": 1.5,
+                            "total_proposed_building_energy_cost_including_renewable_energy": 2,
+                            "total_proposed_building_energy_cost_excluding_renewable_energy": 2.03,
+                            "baseline_building_performance_energy_cost": 1,
+                            "performance_cost_index_target": 1.4799999999999998
+                        },
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-1-5-d": {
+        "Section": 1,
+        "Rule": 5,
+        "Test": "d",
+        "test_description": "A one building segment, single zone building has proposed on site renewable energy production. PBP is missing RESULT: fail",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "1-5",
+            "ruleset_reference": "4.2.1.2",
+            "rule_description": "When on-site renewable energy generation exceeds the thresholds defined in Section 4.2.1.1, the methodology defined in this section shall be used to calculate the PCIt. ",
+            "applicable_rmr": "Proposed Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": 0,
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.34"
+        },
+        "rmr_transformations": {
+            "user": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "output": {
+                            "id": "Output 1",
+                            "performance_cost_index": 1.5,
+                            "total_proposed_building_energy_cost_excluding_renewable_energy": 3,
+                            "baseline_building_performance_energy_cost": 1,
+                            "performance_cost_index_target": 4.45
+                        },
+                        "type": "USER"
+                    }
+                ]
+            },
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "output": {
+                            "id": "Output 1",
+                            "performance_cost_index": 1.5,
+                            "total_proposed_building_energy_cost_excluding_renewable_energy": 3,
+                            "baseline_building_performance_energy_cost": 1,
+                            "performance_cost_index_target": 4.45
+                        },
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-1-5-e": {
+        "Section": 1,
+        "Rule": 5,
+        "Test": "e",
+        "test_description": "A one building segment, single zone building has proposed on site renewable energy production. BBP is missing RESULT: fail",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "1-5",
+            "ruleset_reference": "4.2.1.2",
+            "rule_description": "When on-site renewable energy generation exceeds the thresholds defined in Section 4.2.1.1, the methodology defined in this section shall be used to calculate the PCIt. ",
+            "applicable_rmr": "Proposed Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": 0,
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.34"
+        },
+        "rmr_transformations": {
+            "user": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "output": {
+                            "id": "Output 1",
+                            "performance_cost_index": 1.5,
+                            "total_proposed_building_energy_cost_including_renewable_energy": 2,
+                            "total_proposed_building_energy_cost_excluding_renewable_energy": 3,
+                            "performance_cost_index_target": 2.5
+                        },
+                        "type": "USER"
+                    }
+                ]
+            },
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "output": {
+                            "id": "Output 1",
+                            "performance_cost_index": 1.5,
+                            "total_proposed_building_energy_cost_including_renewable_energy": 2,
+                            "total_proposed_building_energy_cost_excluding_renewable_energy": 3,
+                            "performance_cost_index_target": 2.5
+                        },
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-1-5-f": {
+        "Section": 1,
+        "Rule": 5,
+        "Test": "f",
+        "test_description": "A one building segment, single zone building has proposed on site renewable energy production. PCI is missing RESULT: fail",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "1-5",
+            "ruleset_reference": "4.2.1.2",
+            "rule_description": "When on-site renewable energy generation exceeds the thresholds defined in Section 4.2.1.1, the methodology defined in this section shall be used to calculate the PCIt. ",
+            "applicable_rmr": "Proposed Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": 0,
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.34"
+        },
+        "rmr_transformations": {
+            "user": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "output": {
+                            "id": "Output 1",
+                            "performance_cost_index": 1.5,
+                            "total_proposed_building_energy_cost_excluding_renewable_energy": 3,
+                            "baseline_building_performance_energy_cost": 1,
+                            "performance_cost_index_target": 4.45
+                        },
+                        "type": "USER"
+                    }
+                ]
+            },
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "output": {
+                            "id": "Output 1",
+                            "performance_cost_index": 1.5,
+                            "total_proposed_building_energy_cost_excluding_renewable_energy": 3,
+                            "baseline_building_performance_energy_cost": 1,
+                            "performance_cost_index_target": 4.45
+                        },
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-1-5-g": {
+        "Section": 1,
+        "Rule": 5,
+        "Test": "g",
+        "test_description": "A one building segment, single zone building has proposed on site renewable energy production. PCIt is missing RESULT: fail",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "1-5",
+            "ruleset_reference": "4.2.1.2",
+            "rule_description": "When on-site renewable energy generation exceeds the thresholds defined in Section 4.2.1.1, the methodology defined in this section shall be used to calculate the PCIt. ",
+            "applicable_rmr": "Proposed Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": 0,
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.34"
+        },
+        "rmr_transformations": {
+            "user": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "output": {
+                            "id": "Output 1",
+                            "performance_cost_index": 1.5,
+                            "total_proposed_building_energy_cost_including_renewable_energy": 2,
+                            "total_proposed_building_energy_cost_excluding_renewable_energy": 3,
+                            "baseline_building_performance_energy_cost": 1
+                        },
+                        "type": "USER"
+                    }
+                ]
+            },
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "output": {
+                            "id": "Output 1",
+                            "performance_cost_index": 1.5,
+                            "total_proposed_building_energy_cost_including_renewable_energy": 2,
+                            "total_proposed_building_energy_cost_excluding_renewable_energy": 3,
+                            "baseline_building_performance_energy_cost": 1
+                        },
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    }
+}

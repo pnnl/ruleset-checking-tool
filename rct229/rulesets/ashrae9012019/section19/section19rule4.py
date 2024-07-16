@@ -1,6 +1,6 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_most_used_weekday_hourly_schedule import (
     get_most_used_weekday_hourly_schedule,
@@ -21,11 +21,11 @@ class Section19Rule4(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section19Rule4, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section19Rule4.RuleSetModelInstanceRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="19-4",
             description="For baseline cooling sizing runs in residential dwelling units, the infiltration, occupants, lighting, gas and electricity using equipment hourly schedule shall be the same as the most used hourly weekday schedule from the annual simulation.",
             ruleset_section_title="HVAC - General",
@@ -47,29 +47,29 @@ class Section19Rule4(RuleDefinitionListIndexedBase):
     class RuleSetModelInstanceRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section19Rule4.RuleSetModelInstanceRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 each_rule=Section19Rule4.RuleSetModelInstanceRule.BuildingSegmentRule(),
-                index_rmr=BASELINE_0,
+                index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*]",
             )
 
         def create_data(self, context, data):
-            rmi_b = context.BASELINE_0
+            rmd_b = context.BASELINE_0
 
-            return {"schedule_b": getattr_(rmi_b, "RMI", "schedules")}
+            return {"schedule_b": getattr_(rmd_b, "RMI", "schedules")}
 
         class BuildingSegmentRule(RuleDefinitionListIndexedBase):
             def __init__(self):
                 super(
                     Section19Rule4.RuleSetModelInstanceRule.BuildingSegmentRule, self
                 ).__init__(
-                    rmrs_used=produce_ruleset_model_instance(
+                    rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
                     each_rule=Section19Rule4.RuleSetModelInstanceRule.BuildingSegmentRule.ZoneRule(),
-                    index_rmr=BASELINE_0,
+                    index_rmd=BASELINE_0,
                     list_path="$.zones[*]",
                 )
 
@@ -101,11 +101,11 @@ class Section19Rule4(RuleDefinitionListIndexedBase):
                         Section19Rule4.RuleSetModelInstanceRule.BuildingSegmentRule.ZoneRule,
                         self,
                     ).__init__(
-                        rmrs_used=produce_ruleset_model_instance(
+                        rmds_used=produce_ruleset_model_description(
                             USER=False, BASELINE_0=True, PROPOSED=False
                         ),
                         each_rule=Section19Rule4.RuleSetModelInstanceRule.BuildingSegmentRule.ZoneRule.SpaceRule(),
-                        index_rmr=BASELINE_0,
+                        index_rmd=BASELINE_0,
                         list_path="$.spaces[*]",
                     )
 
@@ -161,7 +161,7 @@ class Section19Rule4(RuleDefinitionListIndexedBase):
                             Section19Rule4.RuleSetModelInstanceRule.BuildingSegmentRule.ZoneRule.SpaceRule,
                             self,
                         ).__init__(
-                            rmrs_used=produce_ruleset_model_instance(
+                            rmds_used=produce_ruleset_model_description(
                                 USER=False, BASELINE_0=True, PROPOSED=False
                             ),
                         )

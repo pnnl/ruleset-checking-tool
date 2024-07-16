@@ -1,6 +1,6 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_7_fns import table_G3_7_lookup
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_avg_zone_height import (
@@ -19,7 +19,7 @@ from rct229.utils.std_comparisons import std_equal
 OFFICE_OPEN_PLAN = SchemaEnums.schema_enums[
     "LightingSpaceOptions2019ASHRAE901TG37"
 ].OFFICE_OPEN_PLAN
-FAIL_MSG = "P_RMR lighting status type is as-designed or as-existing. But lighting space type in B_RMR is not specified."
+FAIL_MSG = "P_RMD lighting status type is as-designed or as-existing. But lighting space type in B_RMD is not specified."
 
 
 class Section6Rule4(RuleDefinitionListIndexedBase):
@@ -27,11 +27,11 @@ class Section6Rule4(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section6Rule4, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(
+            rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             each_rule=Section6Rule4.BuildingSegmentRule(),
-            index_rmr=BASELINE_0,
+            index_rmd=BASELINE_0,
             id="6-4",
             description='Where a complete lighting system exists and where a lighting system has been designed and submitted with design documents, the baseline LPD is equal to expected value in Table G3.7. Where lighting neither exists nor is submitted with design documents, baseline LPD shall be determined in accordance with Table G3-7 for "Office-Open Plan" space type.',
             ruleset_section_title="Lighting",
@@ -43,11 +43,11 @@ class Section6Rule4(RuleDefinitionListIndexedBase):
     class BuildingSegmentRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section6Rule4.BuildingSegmentRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(
+                rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
                 each_rule=Section6Rule4.BuildingSegmentRule.ZoneRule(),
-                index_rmr=BASELINE_0,
+                index_rmd=BASELINE_0,
                 list_path="zones[*]",
             )
 
@@ -63,11 +63,11 @@ class Section6Rule4(RuleDefinitionListIndexedBase):
         class ZoneRule(RuleDefinitionListIndexedBase):
             def __init__(self):
                 super(Section6Rule4.BuildingSegmentRule.ZoneRule, self,).__init__(
-                    rmrs_used=produce_ruleset_model_instance(
+                    rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
                     each_rule=Section6Rule4.BuildingSegmentRule.ZoneRule.SpaceRule(),
-                    index_rmr=BASELINE_0,
+                    index_rmd=BASELINE_0,
                     list_path="spaces[*]",
                 )
 
@@ -84,7 +84,7 @@ class Section6Rule4(RuleDefinitionListIndexedBase):
                         self,
                     ).__init__(
                         fail_msg=FAIL_MSG,
-                        rmrs_used=produce_ruleset_model_instance(
+                        rmds_used=produce_ruleset_model_description(
                             USER=False, BASELINE_0=True, PROPOSED=True
                         ),
                     )
@@ -155,7 +155,7 @@ class Section6Rule4(RuleDefinitionListIndexedBase):
                     ]
 
                     return (
-                        "P_RMR lighting status type is as-designed or as-existing. But lighting space type in B_RMR is not specified."
+                        "P_RMD lighting status type is as-designed or as-existing. But lighting space type in B_RMD is not specified."
                         if space_lighting_status_type_p
                         == LightingStatusType.AS_DESIGNED_OR_AS_EXISTING
                         and not lighting_space_type_b

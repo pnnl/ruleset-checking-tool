@@ -2,11 +2,11 @@ import importlib
 
 # Add all available rule modules in __all__
 __all__ = [
-    # "section1rule1",
+    "section1rule1",
     "section1rule2",
     "section1rule3",
-    # "section1rule4",
-    # "section1rule5",
+    "section1rule4",
+    "section1rule5",
     "section1rule6",
     "section1rule7",
 ]

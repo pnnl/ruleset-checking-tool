@@ -1,5 +1,4 @@
 from jsonpointer import resolve_pointer
-
 from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
 from rct229.rule_engine.ruleset_model_factory import RuleSetModels, get_rmd_instance
 from rct229.utils.assertions import MissingKeyException, RCTFailureException
@@ -13,14 +12,14 @@ class RuleDefinitionBase:
 
     def __init__(
         self,
-        rmrs_used,
-        rmrs_used_optional=None,
+        rmds_used,
+        rmds_used_optional=None,
         id=None,
         description=None,
         ruleset_section_title=None,
         standard_section=None,
         is_primary_rule=None,
-        rmr_context="",
+        rmd_context="",
         required_fields=None,
         manual_check_required_msg="",
         fail_msg="",
@@ -31,10 +30,10 @@ class RuleDefinitionBase:
 
         Parameters
         ----------
-        rmrs_used : RulesetModels
+        rmds_used : RulesetModels
             A boolean values indicating which RMDs are required by the
             rule
-        rmrs_used_optional: RulesetModels
+        rmds_used_optional: RulesetModels
             A boolean values indicating which RMDs are optional by the rule (True optional, False not optional).
         id : string
             Unique id for the rule
@@ -50,8 +49,8 @@ class RuleDefinitionBase:
             e.g., Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building
         is_primary_rule: boolean
             Indicate whether this rule is primary rule (True) or secondary rule (False)
-        rmr_context : string
-            A json pointer into each RMR, or RMR fragment, provided to the rule.
+        rmd_context : string
+            A json pointer into each RMD, or RMD fragment, provided to the rule.
             For better human readability, the leading "/" may be ommitted.
         required_fields : dict
             A dictionary of the form
@@ -69,18 +68,18 @@ class RuleDefinitionBase:
         not_applicable_msg: string
             default message for NOT_APPLICABLE outcome
         """
-        self.rmrs_used = rmrs_used
-        self.rmrs_used_optional = rmrs_used_optional
+        self.rmds_used = rmds_used
+        self.rmds_used_optional = rmds_used_optional
         self.id = id
         self.description = description
         self.ruleset_section_title = ruleset_section_title
         self.standard_section = standard_section
         self.is_primary_rule = is_primary_rule
-        # rmr_context is a jsonpointer string
+        # rmd_context is a jsonpointer string
         # As a convenience, any leading '/' should not be included and will
         # be inserted when the pointer is used in _get_context().
-        # Default rm_context is the root of the RMR
-        self.rmr_context = slash_prefix_guarantee(rmr_context)
+        # Default rm_context is the root of the RMD
+        self.rmd_context = slash_prefix_guarantee(rmd_context)
         self.required_fields = required_fields
         self.manual_check_required_msg = manual_check_required_msg
         self.not_applicable_msg = not_applicable_msg
@@ -92,7 +91,7 @@ class RuleDefinitionBase:
 
         This method also orchestrates the high-level workflow for any rule.
         Namely:
-            - Call get_context(rmrs); check for any missing RMR contexts
+            - Call get_context(rmrs); check for any missing RMD contexts
             - Call is_applicable(context)
             - Call manual_check_required()
             - Call rule_check()
@@ -116,7 +115,7 @@ class RuleDefinitionBase:
             {
                 id: string - A unique identifier for the rule; ommitted if None
                 description: string - The rule description; ommitted if None
-                rmr_context: string - a JSON pointer into the RMR; omitted if empty
+                rmd_context: string - a JSON pointer into the RMD; omitted if empty
                 result: string or list - One of the strings "PASS", "FAIL", "UNDETERMINED", "NOT_APPLICABLE"
                     or a list of outcomes for
                     a list-type rule
@@ -134,8 +133,8 @@ class RuleDefinitionBase:
             outcome["standard_section"] = self.standard_section
         if self.is_primary_rule is not None:
             outcome["primary_rule"] = True if self.is_primary_rule else False
-        if self.rmr_context:
-            outcome["rmr_context"] = self.rmr_context
+        if self.rmd_context:
+            outcome["rmd_context"] = self.rmd_context
 
         # context will be a string if the context does not exist for any of the RMD used
         context_or_string = self.get_context(rmds, data)
@@ -228,8 +227,8 @@ class RuleDefinitionBase:
 
         return outcome
 
-    def _get_context(self, rmds, rmr_context=None):
-        """Get the context for each RMR
+    def _get_context(self, rmds, rmd_context=None):
+        """Get the context for each RMD
 
         Private method, not to be overridden
 
@@ -237,24 +236,24 @@ class RuleDefinitionBase:
         ----------
         rmds : RuleSetModels
             Object containing the RMDs for each required ruleset model type
-        rmr_context : string|None
-            Optional jsonpointer for rmr_context to override self.rmr_context.
-            If None, then self.rmr_context is used.
+        rmd_context : string|None
+            Optional jsonpointer for rmd_context to override self.rmd_context.
+            If None, then self.rmd_context is used.
 
         Returns
         -------
         RuleSetModels
-            Object containing the contexts for RMRs; an RMR's context is set to None if the corresponding flag
-            in self.rmrs_used is not set
+            Object containing the contexts for RMDs; an RMR's context is set to None if the corresponding flag
+            in self.rmds_used is not set
         """
-        rmr_context = self.rmr_context if rmr_context is None else rmr_context
-        # Prepend the leading '/' as needed. It is optional in rmr_context for
+        rmd_context = self.rmd_context if rmd_context is None else rmd_context
+        # Prepend the leading '/' as needed. It is optional in rmd_context for
         # improved readability
-        pointer = rmr_context
+        pointer = rmd_context
 
         ruleset_models = get_rmd_instance()
         for ruleset_model_type in ruleset_models.get_ruleset_model_types():
-            if self.rmrs_used[ruleset_model_type]:
+            if self.rmds_used[ruleset_model_type]:
                 ruleset_models.__setitem__(
                     ruleset_model_type,
                     resolve_pointer(rmds[ruleset_model_type], pointer, None),
@@ -280,7 +279,7 @@ class RuleDefinitionBase:
         -------
         RulesetModelTypes or str
             The return value from self._get_context() when the context exists
-            in each RMR for which the correponding self.rmrs_used flag is set;
+            in each RMR for which the correponding self.rmds_used flag is set;
             otherwise retrns a string such as "MISSING_BASELINE" that indicates all
             the RMRs that are missing.
         """
@@ -291,11 +290,11 @@ class RuleDefinitionBase:
         for ruleset_model in ruleset_model_types:
             if (
                 # rmr used
-                self.rmrs_used[ruleset_model]
+                self.rmds_used[ruleset_model]
                 and not (
                     # and rmr is not optional
-                    self.rmrs_used_optional
-                    and self.rmrs_used_optional[ruleset_model]
+                    self.rmds_used_optional
+                    and self.rmds_used_optional[ruleset_model]
                 )
                 # and rmds[ruleset_model] is None or empty
                 and (rmds[ruleset_model] is None or not rmds[ruleset_model])
@@ -314,7 +313,7 @@ class RuleDefinitionBase:
 
         It collects the validity error strings from the
         check_user_context_validity, check_baseline_context_validity,
-        check_proposed_context_validity methods for the parts in self.rmrs_used.
+        check_proposed_context_validity methods for the parts in self.rmds_used.
 
         This should not be overridden. Override the other check validity methods
         as needed instead.

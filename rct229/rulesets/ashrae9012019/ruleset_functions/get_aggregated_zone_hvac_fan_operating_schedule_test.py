@@ -1,13 +1,12 @@
 import pytest
-
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_aggregated_zone_hvac_fan_operating_schedule import (
     get_aggregated_zone_hvac_fan_operating_schedule,
 )
-from rct229.schema.validate import schema_validate_rmr
+from rct229.schema.validate import schema_validate_rmd
 from rct229.utils.assertions import RCTFailureException
 
 TEST_RMI = {
-    "id": "test_rmi",
+    "id": "test_rmd",
     "buildings": [
         {
             "id": "building_1",
@@ -91,7 +90,7 @@ TEST_RMD = {
 
 
 def test__TEST_RMD_FIXED_TYPE__is_valid():
-    schema_validation_result = schema_validate_rmr(TEST_RMD)
+    schema_validation_result = schema_validate_rmd(TEST_RMD)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"

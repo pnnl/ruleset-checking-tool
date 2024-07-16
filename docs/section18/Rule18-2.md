@@ -27,8 +27,8 @@
 **Applicability Checks:**
 
 ## Rule Logic:  
-- use the function get_baseline_system_types to get a dictionary of baseline system types and systems: `baseline_system_types_dict = get_baseline_system_types(B-RMI)`
-- use the function get_dict_of_zones_and_terminal_units_served_by_hvac_sys to determine which zones are served by each system system: `zones_and_terminal_unit_list_dict = get_dict_of_zones_and_terminal_units_served_by_hvac_sys(B_RMI)`
+- use the function get_baseline_system_types to get a dictionary of baseline system types and systems: `baseline_system_types_dict = get_baseline_system_types(B-RMD)`
+- use the function get_dict_of_zones_and_terminal_units_served_by_hvac_sys to determine which zones are served by each system system: `zones_and_terminal_unit_list_dict = get_dict_of_zones_and_terminal_units_served_by_hvac_sys(B_RMD)`
 - use the function get_zone_target_baseline_system to get the target baseline system types for each zone.  This will be used when checking for laboratory systems: `target_baseline_systems = get_zone_target_baseline_system(P_RMI, B_RMI)`
 - use the function get_lab_zone_hvac_systems to get the list of hvac_ids for the systems that serve only lab zones: `lab_zone_hvac_systems = get_lab_zone_hvac_systems(B_RMI,P_RMI)`
 - create a list of laboratory zones meeting G3_1_1d: `laboratory_zones_meeting_G3_1_1d = [x for x in target_baseline_systems if target_baseline_systems[x]["SYSTEM_ORIGIN"] == G3_1_1d`

@@ -10,6 +10,8 @@ __all__ = [
     "section4",
     "section5",
     "section6",
+    "section10",
+    "section16",
     "section18",
     "section19",
     "section21",

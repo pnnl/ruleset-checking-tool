@@ -13,7 +13,7 @@ class PurchasedSystemStatus(TypedDict):
     purchased_heating: bool
 
 
-def check_purchased_chw_hhw_status_dict(rmi_b: dict) -> PurchasedSystemStatus:
+def check_purchased_chw_hhw_status_dict(rmd_b: dict) -> PurchasedSystemStatus:
     """
     Check if RMI is modeled with purchased chilled water as space cooling source or purchased hot water/steam as space heating source.
     If any system in RMI uses purchased chilled water, function shall return True for purchased chilled water as space cooling source.
@@ -21,8 +21,8 @@ def check_purchased_chw_hhw_status_dict(rmi_b: dict) -> PurchasedSystemStatus:
 
     Parameters
     ----------
-    rmi_b: json
-        RMI at RuleSetModelInstance level
+    rmd_b: json
+        RMI at RuleSetModelDescription level
 
     Returns
     -------
@@ -35,16 +35,16 @@ def check_purchased_chw_hhw_status_dict(rmi_b: dict) -> PurchasedSystemStatus:
         "purchased_heating": False,
     }
 
-    external_fluid_sources = find_all("$.external_fluid_sources[*]", rmi_b)
+    external_fluid_sources = find_all("$.external_fluid_sources[*]", rmd_b)
     if not external_fluid_sources:
         return purchased_chw_hhw_status_dict
 
     hvac_systems = find_all(
         "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
-        rmi_b,
+        rmd_b,
     )
     terminals = find_all(
-        "$.buildings[*].building_segments[*].zones[*].terminals[*]", rmi_b
+        "$.buildings[*].building_segments[*].zones[*].terminals[*]", rmd_b
     )
     for external_fluid_source in external_fluid_sources:
         if (
@@ -52,7 +52,7 @@ def check_purchased_chw_hhw_status_dict(rmi_b: dict) -> PurchasedSystemStatus:
             == EXTERNAL_FLUID_SOURCE.CHILLED_WATER
         ):
             cooling_loop = find_exactly_one_fluid_loop(
-                rmi_b, external_fluid_source["loop"]
+                rmd_b, external_fluid_source["loop"]
             )
 
             purchased_chw_loop_array = find_all("$.child_loops[*].id", cooling_loop) + [
@@ -81,7 +81,7 @@ def check_purchased_chw_hhw_status_dict(rmi_b: dict) -> PurchasedSystemStatus:
             ]  # needs to add more heating types if new types are added in the schema
 
             heating_loop = find_exactly_one_fluid_loop(
-                rmi_b, external_fluid_source["loop"]
+                rmd_b, external_fluid_source["loop"]
             )
 
             purchased_hhw_loop_array = find_all("$.child_loops[*].id", heating_loop) + [
