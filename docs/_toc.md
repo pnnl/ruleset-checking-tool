@@ -264,9 +264,10 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [10-14](section10/10-14.md): Baseline shall be modeled with the heating HVAC system efficiency per Tables G3.5.1-G3.5.6 (applies only to the heating efficiency of baseline furnaces and heat pumps).  Where multiple HVAC zones or residential spaces are combined into a single thermal block the heating efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the  equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces.
 
 ## Section 12 - Receptacles and Other Loads
-  * [12-1](section12/Rule12-1.md): Number of spaces modeled in User RMD and Baseline RMD are the same
-  * [12-2](section12/Rule12-2.md): Number of spaces modeled in User RMD and Proposed RMD are the same
-  * [12-3](section12/Rule12-3.md): User RMD Space Name in Proposed RMD? 
+  * [12-1](section12/Rule12-1.md): Receptacle and process power shall be modeled as identical to the proposed design
+  * [12-2](section12/Rule12-2.md): Depending on the space type, receptacle controls may be required by 90.1 Section 8.4.2. Receptacle schedules shall be modeled identically to the proposed design except when receptacle controls are specified in the proposed design for spaces where not required by Section 8.4.2.
+  * [12-3](section12/Rule12-3.md): When receptacle controls are specified in the proposed building design for spaces where not required by Standard 90.1 2019 Section 8.4.2, the hourly receptacle schedule shall be reduced as specified in Standard 90.1-2019 Table G3.1 Section 12 Proposed Building Performance column.
+  * [12-4](section12/Rule12-4.md): Computer room equipment schedules shall be modeled as a constant fraction of the peak design load per the following monthly schedule: Months 1, 5, 9 — 25%; Months 2, 6, 10 — 50%; Months 3, 7, 11 — 75%; Months 4, 8, 12 — 100%.
 
 ## Section 15 - Distribution Transformers
   * [15-1](section15/Rule15-1.md): Number of transformers modeled in User RMD and Baseline RMD are the same
