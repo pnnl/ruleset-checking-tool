@@ -7,7 +7,7 @@
 
 **Rule Description:** "One system per building area type shall be modeled in the baseline."
 
-**Rule Assertion:** Options are PASS/FAIL
+**Rule Assertion:** Options are PASS/FAIL/NOT_APPLICABLE
 
 **Appendix G Section Reference:** Table G3.1 #11, baseline column, a + b
 
@@ -40,7 +40,7 @@
         - create a variable swh_dist_id and set it to the id of the swh distribution system for this bat: `swh_dist_id = swh_bats_and_equip_dict_this_use["SWHDistribution"][0]`
         - loop through each bat: `for other_swh_bat in swh_bats_and_equip_dict:`
         - if other_swh_bat is not equal to the current swh_bat: `if other_swh_bat != swh_bat:`
-            - check whether the swh_dist_id is in the list of SWH Distribution system for the other SWH_bat: `if swh_dist_id in? swh_bats_and_equip_dict[other_swh_bat]["SWHDistribution"]:`
+            - check whether the swh_dist_id is in the list of SWH Distribution system for the other SWH_bat: `if swh_dist_id in swh_bats_and_equip_dict[other_swh_bat]["SWHDistribution"]:`
             - set the boolean is_referenced_in_other_bats to true: `is_referenced_in_other_bats = true`
     - create a boolean called multiple_segments_with_bat_other and set it to false.  This boolean will tell us if the a) the swh_bat is "OTHER"; b) there are multiple building segments with swh_bat equal to "OTHER": `multiple_segments_with_bat_other = false` 
     - check whether the swh_bat is "OTHER": `if swh_bat == "OTHER":`
@@ -53,7 +53,7 @@
     - Case1: there is more than one swh system in the building segment: FAIL: `if num_swh_systems > 1: FAIL`
     - Case2: The SWH BAT is "UNDETERMINED", there is only one building segment in the model: PASS: `elif shw_bat == "UNDETERMINED" && len(B_RMD.building.building_segments) == 1: PASS`
     - Case3: The SWH BAT is "UNDETERMINED" and there is more than one building segment: UNDETERMINED & provide a note: `elif swh_bat == "UNDETERMINED": UNDETERMINED note = "The Service Water Heating Building Area type for this building segment is undetermined, and there are multiple building segments in the project.  Therefore it cannot be determined whether this building segment shares a service water heating building area type with one of the other building segments."`
-    - Case4: the swh_bat is "OTHER" and is applied to more than one building segment - there could be multiple types of "OTHER" SWH BAT's - return UNDETERMINED: `elif multiple_segments_with_bat_other: UNDETERMINED; note = "The Service Water Heating Building Area Type is 'OTHER' and is applied to multiple building segments.  'OTHER' can cover multiple undetermined Service Water Heating Building Area Types.  Confirm that Service Water Heating Building Area Type is provided with one and only one service water heating system.`
+    - Case4: the swh_bat is "OTHER" and is applied to more than one building segment - there could be multiple types of "OTHER" SWH BAT's - return UNDETERMINED: `elif multiple_segments_with_bat_other: UNDETERMINED; note = "The Service Water Heating Building Area Type is 'OTHER' and is applied to multiple building segments.  'OTHER' can describe multiple Service Water Heating Building Area Types.  Confirm that Service Water Heating Building Area Type is provided with one and only one service water heating system.`
     - Case5: the system is not referenced by any other swh_bats: PASS: `elif is_referenced_in_other_bats == false: PASS`
     - Case6: all else, FAIL: `else: FAIL`
 
