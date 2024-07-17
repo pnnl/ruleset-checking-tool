@@ -7,7 +7,7 @@
 
 **Rule Description:** Except in buildings that will have no service water heating loads, the service water heating system type in the baseline building design shall be as specified in Table G3.1.1-2 for each building area type in the proposed design. 
 
-**Rule Assertion:** Options are PASS/FAIL
+**Rule Assertion:** Options are PASS/FAIL/NOT_APPLICABLE
 
 **Appendix G Section Reference:** Table G3.1 #11, baseline column, a & b
 
