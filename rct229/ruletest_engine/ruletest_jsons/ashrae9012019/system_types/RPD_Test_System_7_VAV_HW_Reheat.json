@@ -6,15 +6,14 @@
             "buildings": [
                 {
                     "id": "Building 1",
-                    "building_open_schedule": "Required Building Schedule 1",
                     "building_segments": [
                         {
                             "id": "Building Segment 1",
                             "zones": [
                                 {
                                     "id": "Thermal Zone 1",
-                                    "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                    "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                    "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule",
+                                    "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule",
                                     "design_thermostat_cooling_setpoint": 23.9,
                                     "design_thermostat_heating_setpoint": 21.1,
                                     "air_distribution_effectiveness": 1.2,
@@ -36,8 +35,8 @@
                                 },
                                 {
                                     "id": "Thermal Zone 2",
-                                    "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                    "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                    "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule",
+                                    "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule",
                                     "terminals": [
                                         {
                                             "id": "VAV Air Terminal 2",
@@ -72,6 +71,8 @@
                                         "id": "Preheat Coil 1",
                                         "type": "FLUID_LOOP",
                                         "hot_water_loop": "Boiler Loop 1",
+                                        "rated_capacity": 87921,
+                                        "design_capacity": 87921,
                                         "heating_coil_setpoint": 10,
                                         "humidification_type": "OTHER"
                                     },
@@ -183,8 +184,11 @@
                     "energy_source_type": "ELECTRICITY",
                     "rated_capacity": 85000,
                     "design_capacity": 85000,
+                    "minimum_load_ratio": 0.25,
                     "rated_entering_condenser_temperature": 29.4,
                     "rated_leaving_evaporator_temperature": 10,
+                    "part_load_efficiency": 0.5,
+                    "part_load_efficiency_metric": "INTEGRATED_PART_LOAD_VALUE",
                     "capacity_validation_points": [
                         {
                             "chilled_water_supply_temperature": 10,
@@ -349,7 +353,7 @@
                     "cooling_or_condensing_design_and_control": {
                         "id": "Primary CHW Design and Control",
                         "design_supply_temperature": 6.7,
-                        "design_return_temperature": 12.8,
+                        "design_return_temperature": 13.3,
                         "outdoor_high_for_loop_supply_reset_temperature": 26.7,
                         "outdoor_low_for_loop_supply_reset_temperature": 15.6,
                         "loop_supply_temperature_at_outdoor_high": 6.7,
@@ -365,12 +369,17 @@
                             "type": "COOLING",
                             "cooling_or_condensing_design_and_control": {
                                 "id": "Secondary CHW Design and Control",
-                                "design_supply_temperature": 12.8,
-                                "design_return_temperature": 17.2,
+                                "design_supply_temperature": 6.7,
+                                "design_return_temperature": 13.3,
+                                "outdoor_high_for_loop_supply_reset_temperature": 26.7,
+                                "outdoor_low_for_loop_supply_reset_temperature": 15.6,
+                                "loop_supply_temperature_at_outdoor_high": 6.7,
+                                "loop_supply_temperature_at_outdoor_low": 12.2,
                                 "is_sized_using_coincident_load": true,
                                 "operation": "CONTINUOUS",
                                 "flow_control": "VARIABLE_FLOW",
-                                "temperature_reset_type": "NO_RESET"
+                                "minimum_flow_fraction": 0.25,
+                                "temperature_reset_type": "OUTSIDE_AIR_RESET"
                             }
                         }
                     ]

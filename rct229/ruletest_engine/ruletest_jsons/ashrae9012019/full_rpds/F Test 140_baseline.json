@@ -7,6 +7,7 @@
             "buildings": [
                 {
                     "id": "TEST Building",
+                    "building_open_schedule": "Building Open Schedule",
                     "building_segments": [
                         {
                             "id": "TEST Building Segment 1",
@@ -300,7 +301,10 @@
                                             "ventilation_space_type": "OFFICE_BUILDINGS_OFFICE_SPACE",
                                             "service_water_heating_space_type": "OFFICE"
                                         }
-                                    ]
+                                    ],
+                                    "design_thermostat_cooling_setpoint": 23.9,
+                                    "design_thermostat_heating_setpoint": 21.1,
+                                    "air_distribution_effectiveness": 0.8
                                 },
                                 {
                                     "id": "Prm Zone 1",
@@ -552,7 +556,10 @@
                                             "ventilation_space_type": "OFFICE_BUILDINGS_OFFICE_SPACE",
                                             "service_water_heating_space_type": "OFFICE"
                                         }
-                                    ]
+                                    ],
+                                    "design_thermostat_cooling_setpoint": 23.9,
+                                    "design_thermostat_heating_setpoint": 21.1,
+                                    "air_distribution_effectiveness": 0.8
                                 },
                                 {
                                     "id": "Prm Zone 2",
@@ -779,7 +786,10 @@
                                             "ventilation_space_type": "OFFICE_BUILDINGS_OFFICE_SPACE",
                                             "service_water_heating_space_type": "OFFICE"
                                         }
-                                    ]
+                                    ],
+                                    "design_thermostat_cooling_setpoint": 23.9,
+                                    "design_thermostat_heating_setpoint": 21.1,
+                                    "air_distribution_effectiveness": 0.8
                                 },
                                 {
                                     "id": "Prm Zone 3",
@@ -1031,7 +1041,10 @@
                                             "ventilation_space_type": "OFFICE_BUILDINGS_OFFICE_SPACE",
                                             "service_water_heating_space_type": "OFFICE"
                                         }
-                                    ]
+                                    ],
+                                    "design_thermostat_cooling_setpoint": 23.9,
+                                    "design_thermostat_heating_setpoint": 21.1,
+                                    "air_distribution_effectiveness": 0.8
                                 },
                                 {
                                     "id": "Prm Zone 4",
@@ -1259,7 +1272,10 @@
                                             "ventilation_space_type": "OFFICE_BUILDINGS_OFFICE_SPACE",
                                             "service_water_heating_space_type": "OFFICE"
                                         }
-                                    ]
+                                    ],
+                                    "design_thermostat_cooling_setpoint": 23.9,
+                                    "design_thermostat_heating_setpoint": 21.1,
+                                    "air_distribution_effectiveness": 0.8
                                 }
                             ]
                         }

@@ -7,6 +7,7 @@
       "buildings": [
         {
           "id": "TEST Building",
+          "building_open_schedule": "Building Open Schedule",
           "building_segments": [
             {
               "id": "TEST Building Segment 1",

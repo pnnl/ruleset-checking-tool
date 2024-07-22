@@ -6,15 +6,16 @@
             "buildings": [
                 {
                     "id": "Building 1",
-                    "building_open_schedule": "Required Building Schedule 1",
                     "building_segments": [
                         {
                             "id": "Building Segment 1",
                             "zones": [
                                 {
                                     "id": "Thermal Zone 1",
-                                    "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                    "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                    "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule",
+                                    "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule",
+                                    "design_thermostat_cooling_setpoint": 23.9,
+                                    "design_thermostat_heating_setpoint": 21.1,
                                     "air_distribution_effectiveness": 0.8,
                                     "terminals": [
                                         {

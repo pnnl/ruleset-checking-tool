@@ -7,6 +7,7 @@
             "buildings": [
                 {
                     "id": "TEST Building",
+                    "building_open_schedule": "Building Open Schedule",
                     "building_segments": [
                         {
                             "id": "TEST Building Segment 1",
@@ -419,7 +420,20 @@
                                             "ventilation_space_type": "OFFICE_BUILDINGS_OFFICE_SPACE",
                                             "service_water_heating_space_type": "OFFICE"
                                         }
-                                    ]
+                                    ],
+                                    "design_thermostat_heating_setpoint": 21.1,
+                                    "air_distribution_effectiveness": 0.8,
+                                    "non_mechanical_cooling_fan_airflow": 118,
+                                    "non_mechanical_cooling_fan_power": 90,
+                                    "zonal_exhaust_fan": {
+                                        "id": "Zonal Exhaust Fan 1",
+                                        "specification_method": "SIMPLE",
+                                        "is_airflow_sized_based_on_design_day": false,
+                                        "design_airflow": 23.6,
+                                        "design_electric_power": 30,
+                                        "motor_heat_to_airflow_fraction": 1,
+                                        "motor_heat_to_zone_fraction": 0
+                                    }
                                 },
                                 {
                                     "id": "Prm Zone 1",
@@ -663,7 +677,20 @@
                                             "ventilation_space_type": "OFFICE_BUILDINGS_OFFICE_SPACE",
                                             "service_water_heating_space_type": "OFFICE"
                                         }
-                                    ]
+                                    ],
+                                    "design_thermostat_heating_setpoint": 21.1,
+                                    "air_distribution_effectiveness": 0.8,
+                                    "non_mechanical_cooling_fan_airflow": 118,
+                                    "non_mechanical_cooling_fan_power": 90,
+                                    "zonal_exhaust_fan": {
+                                        "id": "Zonal Exhaust Fan 1",
+                                        "specification_method": "SIMPLE",
+                                        "is_airflow_sized_based_on_design_day": false,
+                                        "design_airflow": 23.6,
+                                        "design_electric_power": 30,
+                                        "motor_heat_to_airflow_fraction": 1,
+                                        "motor_heat_to_zone_fraction": 0
+                                    }
                                 },
                                 {
                                     "id": "Prm Zone 2",
@@ -882,7 +909,20 @@
                                             "ventilation_space_type": "OFFICE_BUILDINGS_OFFICE_SPACE",
                                             "service_water_heating_space_type": "OFFICE"
                                         }
-                                    ]
+                                    ],
+                                    "design_thermostat_heating_setpoint": 21.1,
+                                    "air_distribution_effectiveness": 0.8,
+                                    "non_mechanical_cooling_fan_airflow": 118,
+                                    "non_mechanical_cooling_fan_power": 90,
+                                    "zonal_exhaust_fan": {
+                                        "id": "Zonal Exhaust Fan 1",
+                                        "specification_method": "SIMPLE",
+                                        "is_airflow_sized_based_on_design_day": false,
+                                        "design_airflow": 23.6,
+                                        "design_electric_power": 30,
+                                        "motor_heat_to_airflow_fraction": 1,
+                                        "motor_heat_to_zone_fraction": 0
+                                    }
                                 },
                                 {
                                     "id": "Prm Zone 3",
@@ -1126,7 +1166,20 @@
                                             "ventilation_space_type": "OFFICE_BUILDINGS_OFFICE_SPACE",
                                             "service_water_heating_space_type": "OFFICE"
                                         }
-                                    ]
+                                    ],
+                                    "design_thermostat_heating_setpoint": 21.1,
+                                    "air_distribution_effectiveness": 0.8,
+                                    "non_mechanical_cooling_fan_airflow": 118,
+                                    "non_mechanical_cooling_fan_power": 90,
+                                    "zonal_exhaust_fan": {
+                                        "id": "Zonal Exhaust Fan 1",
+                                        "specification_method": "SIMPLE",
+                                        "is_airflow_sized_based_on_design_day": false,
+                                        "design_airflow": 23.6,
+                                        "design_electric_power": 30,
+                                        "motor_heat_to_airflow_fraction": 1,
+                                        "motor_heat_to_zone_fraction": 0
+                                    }
                                 },
                                 {
                                     "id": "Prm Zone 4",
@@ -1346,7 +1399,20 @@
                                             "ventilation_space_type": "OFFICE_BUILDINGS_OFFICE_SPACE",
                                             "service_water_heating_space_type": "OFFICE"
                                         }
-                                    ]
+                                    ],
+                                    "design_thermostat_heating_setpoint": 21.1,
+                                    "air_distribution_effectiveness": 0.8,
+                                    "non_mechanical_cooling_fan_airflow": 118,
+                                    "non_mechanical_cooling_fan_power": 90,
+                                    "zonal_exhaust_fan": {
+                                        "id": "Zonal Exhaust Fan 1",
+                                        "specification_method": "SIMPLE",
+                                        "is_airflow_sized_based_on_design_day": false,
+                                        "design_airflow": 23.6,
+                                        "design_electric_power": 30,
+                                        "motor_heat_to_airflow_fraction": 1,
+                                        "motor_heat_to_zone_fraction": 0
+                                    }
                                 }
                             ]
                         }

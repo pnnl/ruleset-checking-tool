@@ -6,15 +6,16 @@
             "buildings": [
                 {
                     "id": "Building 1",
-                    "building_open_schedule": "Required Building Schedule 1",
                     "building_segments": [
                         {
                             "id": "Building Segment 1",
                             "zones": [
                                 {
                                     "id": "Thermal Zone 1",
-                                    "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                    "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                    "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule",
+                                    "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule",
+                                    "design_thermostat_cooling_setpoint": 23.9,
+                                    "design_thermostat_heating_setpoint": 21.1,
                                     "air_distribution_effectiveness": 0.8,
                                     "terminals": [
                                         {
@@ -38,8 +39,8 @@
                                 },
                                 {
                                     "id": "Thermal Zone 2",
-                                    "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                    "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                    "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule",
+                                    "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule",
                                     "air_distribution_effectiveness": 0.8,
                                     "terminals": [
                                         {
@@ -164,8 +165,8 @@
                     "loop_or_piping": "CHW Loop 1",
                     "specification_method": "SIMPLE",
                     "design_electric_power": 1320,
-                    "speed_control": "FIXED_SPEED",
-                    "design_flow": 3.79,
+                    "speed_control": "VARIABLE_SPEED",
+                    "design_flow": 3.785412,
                     "is_flow_sized_based_on_design_day": false
                 }
             ],
@@ -177,7 +178,7 @@
                     "cooling_or_condensing_design_and_control": {
                         "id": "Primary CHW Design and Control",
                         "design_supply_temperature": 6.7,
-                        "design_return_temperature": 12.8,
+                        "design_return_temperature": 13.3,
                         "outdoor_high_for_loop_supply_reset_temperature": 26.7,
                         "outdoor_low_for_loop_supply_reset_temperature": 15.6,
                         "loop_supply_temperature_at_outdoor_high": 6.7,
@@ -185,6 +186,7 @@
                         "is_sized_using_coincident_load": true,
                         "operation": "CONTINUOUS",
                         "flow_control": "VARIABLE_FLOW",
+                        "minimum_flow_fraction": 0.25,
                         "temperature_reset_type": "OUTSIDE_AIR_RESET"
                     }
                 }

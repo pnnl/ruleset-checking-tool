@@ -6,17 +6,16 @@
             "buildings": [
                 {
                     "id": "Building 1",
-                    "building_open_schedule": "Required Building Schedule 1",
                     "building_segments": [
                         {
                             "id": "Building Segment 1",
                             "zones": [
                                 {
                                     "id": "Thermal Zone 1",
-                                    "design_thermostat_cooling_setpoint": 24,
-                                    "design_thermostat_heating_setpoint": 21,
-                                    "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                    "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                    "design_thermostat_cooling_setpoint": 23.9,
+                                    "design_thermostat_heating_setpoint": 21.1,
+                                    "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule",
+                                    "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule",
                                     "air_distribution_effectiveness": 0.8,
                                     "terminals": [
                                         {
@@ -35,8 +34,8 @@
                                     "id": "Thermal Zone 2",
                                     "design_thermostat_cooling_setpoint": 24,
                                     "design_thermostat_heating_setpoint": 21,
-                                    "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                    "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                    "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule",
+                                    "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule",
                                     "air_distribution_effectiveness": 0.8,
                                     "terminals": [
                                         {
@@ -101,7 +100,7 @@
             "boilers": [
                 {
                     "id": "Boiler 1",
-                    "loop": "HW Loop 1",
+                    "loop": "CW Loop 1",
                     "energy_source_type": "NATURAL_GAS",
                     "draft_type": "NATURAL",
                     "rated_capacity": 87921,
@@ -123,15 +122,6 @@
             ],
             "pumps": [
                 {
-                    "id": "HW Pump 1",
-                    "loop_or_piping": "HW Loop 1",
-                    "speed_control": "VARIABLE_SPEED",
-                    "specification_method": "SIMPLE",
-                    "design_electric_power": 380,
-                    "design_flow": 1.26,
-                    "is_flow_sized_based_on_design_day": false
-                },
-                {
                     "id": "Condenser Pump 1",
                     "loop_or_piping": "CW Loop 1",
                     "speed_control": "VARIABLE_SPEED",
@@ -142,23 +132,6 @@
                 }
             ],
             "fluid_loops": [
-                {
-                    "id": "HW Loop 1",
-                    "type": "HEATING",
-                    "pump_power_per_flow_rate": 301,
-                    "heating_design_and_control": {
-                        "id": "HW Design and Control",
-                        "design_supply_temperature": 82.2,
-                        "design_return_temperature": 54.4,
-                        "outdoor_high_for_loop_supply_reset_temperature": 10,
-                        "outdoor_low_for_loop_supply_reset_temperature": -6.7,
-                        "loop_supply_temperature_at_outdoor_high": 65.6,
-                        "loop_supply_temperature_at_outdoor_low": 82.2,
-                        "is_sized_using_coincident_load": true,
-                        "operation": "CONTINUOUS",
-                        "flow_control": "VARIABLE_FLOW"
-                    }
-                },
                 {
                     "id": "CW Loop 1",
                     "type": "CONDENSER",

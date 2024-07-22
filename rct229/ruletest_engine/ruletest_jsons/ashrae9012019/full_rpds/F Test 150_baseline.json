@@ -7,6 +7,7 @@
             "buildings": [
                 {
                     "id": "TEST Building",
+                    "building_open_schedule": "Building Open Schedule",
                     "building_segments": [
                         {
                             "id": "TEST Building Segment 1",
@@ -301,7 +302,10 @@
                                             "ventilation_space_type": "OFFICE_BUILDINGS_OFFICE_SPACE",
                                             "service_water_heating_space_type": "OFFICE"
                                         }
-                                    ]
+                                    ],
+                                    "design_thermostat_cooling_setpoint": 23.9,
+                                    "design_thermostat_heating_setpoint": 21.1,
+                                    "air_distribution_effectiveness": 0.8
                                 },
                                 {
                                     "id": "Prm Zone 1",
@@ -553,7 +557,10 @@
                                             "ventilation_space_type": "OFFICE_BUILDINGS_OFFICE_SPACE",
                                             "service_water_heating_space_type": "OFFICE"
                                         }
-                                    ]
+                                    ],
+                                    "design_thermostat_cooling_setpoint": 23.9,
+                                    "design_thermostat_heating_setpoint": 21.1,
+                                    "air_distribution_effectiveness": 0.8
                                 },
                                 {
                                     "id": "Prm Zone 2",
@@ -780,7 +787,10 @@
                                             "ventilation_space_type": "OFFICE_BUILDINGS_OFFICE_SPACE",
                                             "service_water_heating_space_type": "OFFICE"
                                         }
-                                    ]
+                                    ],
+                                    "design_thermostat_cooling_setpoint": 23.9,
+                                    "design_thermostat_heating_setpoint": 21.1,
+                                    "air_distribution_effectiveness": 0.8
                                 },
                                 {
                                     "id": "Prm Zone 3",
@@ -1032,7 +1042,10 @@
                                             "ventilation_space_type": "OFFICE_BUILDINGS_OFFICE_SPACE",
                                             "service_water_heating_space_type": "OFFICE"
                                         }
-                                    ]
+                                    ],
+                                    "design_thermostat_cooling_setpoint": 23.9,
+                                    "design_thermostat_heating_setpoint": 21.1,
+                                    "air_distribution_effectiveness": 0.8
                                 },
                                 {
                                     "id": "Prm Zone 4",
@@ -1260,7 +1273,10 @@
                                             "ventilation_space_type": "OFFICE_BUILDINGS_OFFICE_SPACE",
                                             "service_water_heating_space_type": "OFFICE"
                                         }
-                                    ]
+                                    ],
+                                    "design_thermostat_cooling_setpoint": 23.9,
+                                    "design_thermostat_heating_setpoint": 21.1,
+                                    "air_distribution_effectiveness": 0.8
                                 }
                             ]
                         }
@@ -45142,8 +45158,8 @@
                     "loop_or_piping": "CHW Loop 1",
                     "specification_method": "SIMPLE",
                     "design_electric_power": 1320,
-                    "speed_control": "FIXED_SPEED",
-                    "design_flow": 3.79,
+                    "speed_control": "VARIABLE_SPEED",
+                    "design_flow": 3.785412,
                     "is_flow_sized_based_on_design_day": false
                 }
             ],
@@ -45155,7 +45171,7 @@
                     "cooling_or_condensing_design_and_control": {
                         "id": "Primary CHW Design and Control",
                         "design_supply_temperature": 6.7,
-                        "design_return_temperature": 12.8,
+                        "design_return_temperature": 13.3,
                         "outdoor_high_for_loop_supply_reset_temperature": 26.7,
                         "outdoor_low_for_loop_supply_reset_temperature": 15.6,
                         "loop_supply_temperature_at_outdoor_high": 6.7,
@@ -45163,6 +45179,7 @@
                         "is_sized_using_coincident_load": true,
                         "operation": "CONTINUOUS",
                         "flow_control": "VARIABLE_FLOW",
+                        "minimum_flow_fraction": 0.25,
                         "temperature_reset_type": "OUTSIDE_AIR_RESET"
                     }
                 }
