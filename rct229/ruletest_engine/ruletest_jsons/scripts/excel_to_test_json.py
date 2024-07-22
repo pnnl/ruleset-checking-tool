@@ -22,7 +22,9 @@ rule_set = "ashrae9012019"
 # --------------------------------------SCRIPT STARTS--------------------------------------
 
 # Create a test JSON for a given ruletest spreadsheet
-create_test_json_from_excel(spreadsheet_name, sheet_name, test_json_name)
+create_test_json_from_excel(
+    spreadsheet_name, sheet_name, test_json_name, use_sys_template_zone_data=True
+)
 
 # Parse ruletest spreadsheet for unit types and update the unit conventions in unit_convention.json for:
 # -RMD (typically SI)
