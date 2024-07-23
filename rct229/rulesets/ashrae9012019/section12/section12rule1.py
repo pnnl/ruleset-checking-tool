@@ -1,8 +1,11 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
-from rct229.rulesets.ashrae9012019 import USER
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.match_lists import match_lists_by_id
+
+MANUAL_CHECK_REQUIRED_MSG = "The proposed building miscellaneous equipment load is less than the baseline, which is only permitted when the model is being used to quantify performance that exceeds the requirements of Standard 90.1."
 
 
 class Section12Rule1(RuleDefinitionListIndexedBase):
@@ -11,35 +14,84 @@ class Section12Rule1(RuleDefinitionListIndexedBase):
     def __init__(self):
         super(Section12Rule1, self).__init__(
             rmds_used=produce_ruleset_model_description(
-                USER=True, BASELINE_0=True, PROPOSED=False
+                USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section12Rule1.BuildingRule(),
-            index_rmd=USER,
+            each_rule=Section12Rule1.RMDRule(),
+            index_rmd=BASELINE_0,
             id="12-1",
             description=(
-                "Number of spaces modeled in User RMD and Baseline RMD are the same"
+                "Receptacle and process power shall be modeled as identical to the proposed design"
             ),
             ruleset_section_title="Receptacle",
             standard_section="Section Table G3.1-12 Modeling Requirements for the Proposed design",
             is_primary_rule=True,
-            rmd_context="ruleset_model_descriptions/0/buildings",
+            list_path="ruleset_model_descriptions[0]",
+            data_items={"compliance_path": (BASELINE_0, "compliance_path")},
         )
 
-    class BuildingRule(RuleDefinitionBase):
+    class RMDRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section12Rule1.BuildingRule, self).__init__(
+            super(Section12Rule1.RMDRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
-                    USER=True, BASELINE_0=True, PROPOSED=False
+                    USER=False, BASELINE_0=True, PROPOSED=True
                 ),
+                required_fields={
+                    "$.buildings[*].building_segments[*].zones[*].spaces[*].miscellaneous_equipment[*]": ["power"],
+                },
+                manual_check_required_msg=MANUAL_CHECK_REQUIRED_MSG,
             )
 
         def get_calc_vals(self, context, data=None):
-            user_spaces = find_all("$..spaces[*]", context.USER)
-            baseline_spaces = find_all("$..spaces[*]", context.BASELINE_0)
+            rmd_b = context.BASELINE_0
+            rmd_p = context.PROPOSED
+            unexpected_misc_equipment_power = []
+            reduced_misc_equipment_power = []
+            misc_equipment_list_b = find_all(
+                "$.buildings[*].building_segments[*].zones[*].spaces[*].miscellaneous_equipment[*]", rmd_b
+            )
+            misc_equipment_list_p = find_all(
+                "$.buildings[*].building_segments[*].zones[*].spaces[*].miscellaneous_equipment[*]", rmd_p
+            )
+            # This assumes that the miscellaneous_equipment all match
+            matched_misc_equipment_list_p = match_lists_by_id(
+                misc_equipment_list_b, misc_equipment_list_p
+            )
+            proposed_baseline_misc_equipment_pairs = zip(
+                misc_equipment_list_b, matched_misc_equipment_list_p
+            )
+
+            for (
+                misc_equipment_b,
+                misc_equipment_p,
+            ) in proposed_baseline_misc_equipment_pairs:
+                misc_equipment_power_b = misc_equipment_b["power"]
+                misc_equipment_power_p = misc_equipment_p["power"]
+                if misc_equipment_power_b > misc_equipment_power_p:
+                    reduced_misc_equipment_power.append(misc_equipment_power_b)
+                elif misc_equipment_power_b < misc_equipment_power_p:
+                    unexpected_misc_equipment_power.append(misc_equipment_power_b)
+
             return {
-                "num_user_spaces": len(user_spaces),
-                "num_baseline_spaces": len(baseline_spaces),
+                "reduced_misc_equipment_power": reduced_misc_equipment_power,
+                "unexpected_misc_equipment_power": unexpected_misc_equipment_power,
+                "compliance_path": data["compliance_path"],
             }
 
+        def manual_check_required(self, context, calc_vals=None, data=None):
+            unexpected_misc_equipment_power = calc_vals[
+                "unexpected_misc_equipment_power"
+            ]
+            compliance_path = calc_vals["compliance_path"]
+            return len(unexpected_misc_equipment_power) == 0 and (
+                compliance_path is None or compliance_path != "CODE_COMPLIANT"
+            )
+
         def rule_check(self, context, calc_vals=None, data=None):
-            return calc_vals["num_user_spaces"] == calc_vals["num_baseline_spaces"]
+            reduced_misc_equipment_power = calc_vals["reduced_misc_equipment_power"]
+            unexpected_misc_equipment_power = calc_vals[
+                "unexpected_misc_equipment_power"
+            ]
+            return (
+                len(reduced_misc_equipment_power) == 0
+                and len(unexpected_misc_equipment_power) == 0
+            )
