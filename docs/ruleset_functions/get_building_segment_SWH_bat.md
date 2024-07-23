@@ -28,12 +28,19 @@ Logic:
     - look at each service water heating use id: `for swh_use_id in service_water_heating_use_ids:`
         - get the swh_use using get_component_by_ID: `swh_use = get_component_by_ID(RMD, swh_use_id)`
         - if any swh_use has use_units equal to "OTHER", the total energy required to heat the use cannot be determined, and we return "UNDETERMINED": `if swh_use.use_units == "OTHER": return "UNDETERMINED"`
-        - calculate the total hot water used using the function get_energy_required_to_heat_swh_use and add it to the swh_use_dict: `swh_use_dict[swh_use.area_type] += get_energy_required_to_heat_swh_use(swh_use, RMD)`
+        - calculate the total energy required to heat the swh_use using the function get_energy_required_to_heat_swh_use: `swh_use_energy_by_space = get_energy_required_to_heat_swh_use(swh_use, RMD)`
         - check to see if the swh_use has service_water_heating_area_type: `if swh_use.area_type:`
-            - add the SWH building area type to the swh_use_dict and set the value to 0: `swh_use_dict.set_default(swh_use.area_type, 0)`
+            - add the SWH building area type to the swh_use_dict and set the default value to 0: `swh_use_dict.set_default(swh_use.area_type, 0)`
+            - add the energy used by this swh_use: `swh_use_dict[swh_use.area_type] += sum(swh_use_energy_by_space.values())`
         - otherwise: `else:`
-            - add the energy use to type "UNDETERMINED": `swh_use_dict.set_default("UNDETERMINED", 0)`
-            - add the total energy used to the dict: `swh_use_dict["UNDETERMINED"] += get_energy_required_to_heat_swh_use(swh_use, RMD)`
+            - go through each space served by the swh_use and see if it has a service_water_heating_bat: `for space_id in swh_use_energy_by_space:`
+                - get the space: `space = get_component_by_ID(RMD, space_id)`
+                - check if the space has a swh_use_bat: `if space.service_water_heating_bat:`
+                    - First add the BAT and set the default: `swh_use_dict.set_default("space.service_water_heating_bat", 0)`
+                    - add the energy used to the dict: `swh_use_dict["space.service_water_heating_bat"] += swh_use_energy_by_space[space_id]`
+                - otherwise, we'll add this use to UNDETERMINED.`else:`
+                    - First add UNDETERMINED and set the default: `swh_use_dict.set_default("UNDETERMINED", 0)`
+                    - add the energy used to the dict: `swh_use_dict["UNDETERMINED"] += swh_use_energy_by_space[space_id]`
     - now we need to determine the building_segment swh_use_type based on the following rules:
     -     1. At least 50% of the SWH uses needs to be assigned a use type
     -     2. All SWH needs to be assigned to the same use type
