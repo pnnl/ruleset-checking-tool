@@ -7,7 +7,7 @@ Inputs:
 - **RMD**
 
 Returns:
-- **energy_required**: A fixnum indicating the total btu required to heat the water indicated by the swh_use
+- **energy_required_by_space**: A dict where they keys are space_ids and values are the total energy required to heat the swh_use for that space.  If a swh_use is not assigned to any spaces, the key will be "NO_SPACES_ASSIGNED"
 
 Function Call:
 
@@ -30,41 +30,55 @@ Logic:
 - now we need to get all of the spaces that the swh_use is applied to.  The rule is that if spaces reference the swh_use, then the use applies to only those spaces.  If the use references no spaces, it applies to all spaces in the building segment.
 - get the ids of spaces served by this swh_use: `space_ids = get_spaces_served_by_SWH_use(RMD, swh_use)`
 - convert the space ids to spaces: `spaces = [get_obj_by_id(space_id, RMD) for space_id in space_ids]`
-- convert the swh_water_used from whatever units it's currently in to volume (assumed to be gallons) OR, if the use units are one of the power types, calculate the energy required directly
-- if the use_units is POWER_PER_PERSON: `if use_units == "POWER_PER_PERSON":`
-  - set power equal to the swh_use_value * sum of the occupants in all of the spaces: `power = swh_use_value * sum(space.number_of_occupants for space in spaces)`
-  - in this case, swh_use_value is assumed to have units of btu/hr/person, so calculate energy_required by multiplying power (btu/hr) by the sum of the hourly_schedule: `energy_required = power * sum(hourly_schedule)`
-  - return energy_required: `return energy_required`
-- otherwise if use_units is POWER_PER_AREA: `elsif use_units == "POWER_PER_AREA":`
-  - set power equal to the swh_use_value * the sum of the floor area in all of the spaces: `power = swh_use_value * sum(space.floor_area for space in spaces)`
-  - in this case, swh_use_value is assumed to have units of btu/hr/ft2, so calculate energy_required by multiplying power (btu/hr) by the sum of the hourly_schedule: `energy_required = power * sum(hourly_schedule)`
-  - return energy_required: `return energy_required`
-- otherwise if use_units is POWER: `elsif use_units == "POWER":`
-  - if the swh_use is assigned to spaces explicitly, we count it for each space.  If it's assigned to no spaces, we count it once (for the building segment).  So set a variable num_instances equal to 1: `num_instances = 1`
-  - if there is more than one space, we set num_instances equal to the number of spaces: `if len(spaces) > 1: num_instances = len(spaces)`
-  - in this case, swh_use_value is assumed to have units of btu/hr, so calculate energy_required by multiplying swh_use_value by the sum of the hourly_schedule and the number of instances: `energy_required = num_instances * swh_use_value * sum(hourly_schedule)`
-  - return energy_required: `return energy_required`
-- otherwise if use_units is VOLUME_PER_PERSON: `elsif use_units == "VOLUME_PER_PERSON":`
-  - in this case swh_use_value is assumed to have the units of gallons/hr/person:
-  - set volume_flow_rate equal to swh_use_value * the sum of the occupants in all of the spaces: `volume_flow_rate = swh_use_value * sum(space.number_of_occupants for space in spaces)`
-- otherwise if use_units is VOLUME_PER_AREA: `elsif use_units == "VOLUME_PER_AREA":`
-  - in this case swh_use_value is assumed to have the units of gallons/hr/ft2:
-  - set volume_flow_rate equal to swh_use_value * the sum of the floor area in all of the spaces: `volume_flow_rate = swh_use_value * sum(space.floor_area for space in spaces)`
-- otherwise if use_units is VOLUME: `elsif use_units == "VOLUME":`
-  - if the swh_use is assigned to spaces explicitly, we count it for each space.  If it's assigned to no spaces, we count it once (for the building segment).  So set a variable num_instances equal to 1: `num_instances = 1`
-  - if there is more than one space, we set num_instances equal to the number of spaces: `if len(spaces) > 1: num_instances = len(spaces)`
-  - in this case swh_use_value is assumed to have the units gallons/hr
-  - set volume_flow_rate equal to swh_use_value: `volume_flow_rate = swh_use_value * num_instances`
+- create the dictionary: `energy_required_by_space = {}`
+- calculate the energy for each space: `for space in spaces:`
+  - convert the swh_water_used from whatever units it's currently in to volume (assumed to be gallons) OR, if the use units are one of the power types, calculate the energy required directly
+  - if the use_units is POWER_PER_PERSON: `if use_units == "POWER_PER_PERSON":`
+    - set power equal to the swh_use_value * number of occupants in the space: `power = swh_use_value * space.number_of_occupants`
+    - in this case, swh_use_value is assumed to have units of btu/hr/person, so calculate energy_required by multiplying power (btu/hr) by the sum of the hourly_schedule: `energy_required = power * sum(hourly_schedule) * (1-drain_heat_recovery_efficiency)`
+    - add this space to the dictionary: `energy_required_by_space[space.id] = energy_required`
+  - otherwise if use_units is POWER_PER_AREA: `elsif use_units == "POWER_PER_AREA":`
+    - set power equal to the swh_use_value * the floor area in the space: `power = swh_use_value * space.floor_area`
+    - in this case, swh_use_value is assumed to have units of btu/hr/ft2, so calculate energy_required by multiplying power (btu/hr) by the sum of the hourly_schedule: `energy_required = power * sum(hourly_schedule) * (1-drain_heat_recovery_efficiency)`
+    - add this space to the dictionary: `energy_required_by_space[space.id] = energy_required`
+  - otherwise if use_units is POWER: `elsif use_units == "POWER":`
+    - add this space to the dictionary - for power, the energy_required is equal to the swh_use_value times the hourly schedule: `energy_required_by_space[space.id] = swh_use_value * sum(hourly_schedule) * (1-drain_heat_recovery_efficiency)`
+  - otherwise if use_units is VOLUME_PER_PERSON: `elsif use_units == "VOLUME_PER_PERSON":`
+    - in this case swh_use_value is assumed to have the units of gallons/hr/person:
+    - set volume_flow_rate equal to swh_use_value * the number occupants in the space: `volume_flow_rate = swh_use_value * space.number_of_occupants`
+  - otherwise if use_units is VOLUME_PER_AREA: `elsif use_units == "VOLUME_PER_AREA":`
+    - in this case swh_use_value is assumed to have the units of gallons/hr/ft2:
+    - set volume_flow_rate equal to swh_use_value * the floor area of the space: `volume_flow_rate = swh_use_value * space.floor_area`
+  - otherwise if use_units is VOLUME: `elsif use_units == "VOLUME":`
+    - in this case swh_use_value is assumed to have the units gallons/hr
+    - set volume_flow_rate equal to swh_use_value: `volume_flow_rate = swh_use_value`
+  - if use_units is OTHER, set the result to UNDETERMINED: `if swh_use.use_units == "OTHER": energy_required_by_space[space.id] = "UNDETERMINED"`
+  
+  - at this point, either energy_required has been calculated or volume_flow_rate has been calculated.  If it's not energy_required, we need to calculate the energy required from volume_flow_rate: `if energy_required_by_space[space.id] == NULL:`
+  - set energy_required to 0: `energy_required = 0`
+  - iterate through each hourly value of the hourly_schedule: `for index, hourly_value in enumerate(hourly_schedule):`
+    - set volume_this_hour equal to volume_flow_rate * hourly_value: `volume_this_hour = volume_flow_rate * hourly_value`
+    - reduce volume_this hour by the recovery efficiency: `volume_this_hour = volume_this_hour * (1-drain_heat_recovery_efficiency)`
+    - calculate the dT for the hour: `dT = supply_temperature - inlet_T_sched[index]`
+    - now calculate the energy use to heat volume (gallons) of water - 1 Btu/lb/°F and 8.34 lb/gal of water: `energy_to_heat_water = volume_this_hour * 8.3452 * dT`
+    - add the energy_to_heat_water to energy_required: `energy_required += energy_to_heat_water`
+  - set the add this energy_required to energy_required_by_space: `energy_required_by_space[space.id] = energy_required`
 
-- set energy_required to 0: `energy_required = 0`
-- iterate through each hourly value of the hourly_schedule: `for index, hourly_value in enumerate(hourly_schedule):`
-  - set volume_this_hour equal to volume_flow_rate * hourly_value: `volume_this_hour = volume_flow_rate * hourly_value`
-  - reduce volume_this hour by the recovery efficiency: `volume_this_hour = volume_this_hour * (1-drain_heat_recovery_efficiency)`
-  - calculate the dT for the hour: `dT = supply_temperature - inlet_T_sched[index]`
-  - now calculate the energy use to heat volume (gallons) of water - 1 Btu/lb/°F and 8.34 lb/gal of water: `energy_to_heat_water = volume_this_hour * 8.3452 * dT`
-  - add the energy_to_heat_water to energy_required: `energy_required += energy_to_heat_water`
 
-**Returns** energy_required
+- we still have a case where swh_use with VOLUME or POWER and not assigned to any spaces needs to be calculated.  Check if there are no spaces: `if len(spaces) == 0:`
+  - check if swh_use.use_units is OTHER, if so, set value to UNDETERMINED: `if swh_use.use_units == "OTHER": energy_required_by_space["NO_SPACES_ASSIGNED"] = "UNDETERMINED"`
+  - else, check if swh_use.use_units is POWER, if so, set value to POWER: `if swh_use.use_units == "POWER": energy_required_by_space["NO_SPACES_ASSIGNED"] = swh_use_value`
+  - else, check if swh_use.use_units is VOLUME, if so, we need to do the volume calculation: `if swh_use.use_units == "VOLUME":`
+    - set energy_required to 0: `energy_required = 0`
+    - iterate through each hourly value of the hourly_schedule: `for index, hourly_value in enumerate(hourly_schedule):`
+      - set volume_this_hour equal to volume_flow_rate * hourly_value: `volume_this_hour = volume_flow_rate * hourly_value`
+      - reduce volume_this hour by the recovery efficiency: `volume_this_hour = volume_this_hour * (1-drain_heat_recovery_efficiency)`
+      - calculate the dT for the hour: `dT = supply_temperature - inlet_T_sched[index]`
+      - now calculate the energy use to heat volume (gallons) of water - 1 Btu/lb/°F and 8.34 lb/gal of water: `energy_to_heat_water = volume_this_hour * 8.3452 * dT`
+      - add the energy_to_heat_water to energy_required: `energy_required += energy_to_heat_water`
+    - set the add this energy_required to energy_required_by_space: `energy_required_by_space["NO_SPACES_ASSIGNED"] = energy_required`
+
+**Returns** energy_required_by_space
 
 **[Back](../_toc.md)**
 
