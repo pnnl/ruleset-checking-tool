@@ -36,7 +36,9 @@ class Section12Rule1(RuleDefinitionListIndexedBase):
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
                 required_fields={
-                    "$.buildings[*].building_segments[*].zones[*].spaces[*].miscellaneous_equipment[*]": ["power"],
+                    "$.buildings[*].building_segments[*].zones[*].spaces[*].miscellaneous_equipment[*]": [
+                        "power"
+                    ],
                 },
                 manual_check_required_msg=MANUAL_CHECK_REQUIRED_MSG,
             )
@@ -47,10 +49,12 @@ class Section12Rule1(RuleDefinitionListIndexedBase):
             unexpected_misc_equipment_power = []
             reduced_misc_equipment_power = []
             misc_equipment_list_b = find_all(
-                "$.buildings[*].building_segments[*].zones[*].spaces[*].miscellaneous_equipment[*]", rmd_b
+                "$.buildings[*].building_segments[*].zones[*].spaces[*].miscellaneous_equipment[*]",
+                rmd_b,
             )
             misc_equipment_list_p = find_all(
-                "$.buildings[*].building_segments[*].zones[*].spaces[*].miscellaneous_equipment[*]", rmd_p
+                "$.buildings[*].building_segments[*].zones[*].spaces[*].miscellaneous_equipment[*]",
+                rmd_p,
             )
             # This assumes that the miscellaneous_equipment all match
             matched_misc_equipment_list_p = match_lists_by_id(
