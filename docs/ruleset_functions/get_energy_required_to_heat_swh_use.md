@@ -40,7 +40,9 @@ Logic:
   - in this case, swh_use_value is assumed to have units of btu/hr/ft2, so calculate energy_required by multiplying power (btu/hr) by the sum of the hourly_schedule: `energy_required = power * sum(hourly_schedule)`
   - return energy_required: `return energy_required`
 - otherwise if use_units is POWER: `elsif use_units == "POWER":`
-  - in this case, swh_use_value is assumed to have units of btu/hr, so calculate energy_required by multiplying swh_use_value by the sum of the hourly_schedule: `energy_required = swh_use_value * sum(hourly_schedule)`
+  - if the swh_use is assigned to spaces explicitly, we count it for each space.  If it's assigned to no spaces, we count it once (for the building segment).  So set a variable num_instances equal to 1: `num_instances = 1`
+  - if there is more than one space, we set num_instances equal to the number of spaces: `if len(spaces) > 1: num_instances = len(spaces)`
+  - in this case, swh_use_value is assumed to have units of btu/hr, so calculate energy_required by multiplying swh_use_value by the sum of the hourly_schedule and the number of instances: `energy_required = num_instances * swh_use_value * sum(hourly_schedule)`
   - return energy_required: `return energy_required`
 - otherwise if use_units is VOLUME_PER_PERSON: `elsif use_units == "VOLUME_PER_PERSON":`
   - in this case swh_use_value is assumed to have the units of gallons/hr/person:
@@ -49,8 +51,10 @@ Logic:
   - in this case swh_use_value is assumed to have the units of gallons/hr/ft2:
   - set volume_flow_rate equal to swh_use_value * the sum of the floor area in all of the spaces: `volume_flow_rate = swh_use_value * sum(space.floor_area for space in spaces)`
 - otherwise if use_units is VOLUME: `elsif use_units == "VOLUME":`
+  - if the swh_use is assigned to spaces explicitly, we count it for each space.  If it's assigned to no spaces, we count it once (for the building segment).  So set a variable num_instances equal to 1: `num_instances = 1`
+  - if there is more than one space, we set num_instances equal to the number of spaces: `if len(spaces) > 1: num_instances = len(spaces)`
   - in this case swh_use_value is assumed to have the units gallons/hr
-  - set volume_flow_rate equal to swh_use_value: `volume_flow_rate = swh_use_value`
+  - set volume_flow_rate equal to swh_use_value: `volume_flow_rate = swh_use_value * num_instances`
 
 - set energy_required to 0: `energy_required = 0`
 - iterate through each hourly value of the hourly_schedule: `for index, hourly_value in enumerate(hourly_schedule):`
