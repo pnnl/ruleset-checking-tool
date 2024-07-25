@@ -33,7 +33,7 @@ def get_rmr_key_list_from_tcd_key_list(tcd_key_list):
 
     """
 
-    # Get index for the beginning of the RMD JSON.
+    # Get index for the beginning of the RMR JSON.
     # Order is always 'rmr_transformations' or 'rmr_template', <RMR_TYPE>, <RMR_JSON>, therefore add 2 index to
     # either 'rmr_transformation' or 'rmr_template' indices. If neither 'rmr_transformations' or 'rmr_template' is
     # included, assume it begins at index 1 (typically what you see in the Templates tab)
@@ -150,7 +150,9 @@ def get_schema_units_from_tcd_json_path(tcd_key_list):
     return pint_units
 
 
-def create_dictionary_from_excel(spreadsheet_name, sheet_name, rule_set):
+def create_dictionary_from_excel(
+    spreadsheet_name, sheet_name, rule_set, use_sys_template_zone_data
+):
     """Converts a ruletest JSON spreadsheet into a python dictionary. This dictionary can easily be converted
     to JSON by other scripts
 
@@ -169,6 +171,9 @@ def create_dictionary_from_excel(spreadsheet_name, sheet_name, rule_set):
 
         The rule set being evaluated (e.g., 'ashrae902019'). Should correspond to a directory name in ruletests_jsons
 
+    use_sys_template_zone_data : bool
+
+        Flag to determine if zone data should be transferred from the system template
 
     Returns
     -------
@@ -325,6 +330,23 @@ def create_dictionary_from_excel(spreadsheet_name, sheet_name, rule_set):
                                 ] + key_list[3:]
                                 set_nested_dict(json_dict, triplet_key_list, row_value)
 
+                    elif "json_file_lookup" in key_list:
+                        for rmr_triplet in triplet_strs:
+                            if (
+                                rmr_triplet
+                                in rmr_template_dict[test_id]["rmr_template"]
+                            ):
+                                # Create new keylist with respect to this triplet and set value
+                                triplet_key_list = [
+                                    test_id,
+                                    "rmr_transformations",
+                                    rmr_triplet,
+                                ]
+
+                                set_dict_from_json_file_template(
+                                    json_dict, triplet_key_list, rule_set, row_value
+                                )
+
                     elif "system_zone_assignment" in key_list:
                         # Remove irrelevant keys and set the rest of the keys into system_to_zone_dict
                         keys_to_ignore = [test_id, "rmr_template"]
@@ -345,7 +367,12 @@ def create_dictionary_from_excel(spreadsheet_name, sheet_name, rule_set):
                         zones_have_been_mapped = (
                             True  # Set to true to avoid setting them again
                         )
-                        set_systems_to_zones(json_dict, system_to_zone_dict, rule_set)
+                        set_systems_to_zones(
+                            json_dict,
+                            system_to_zone_dict,
+                            rule_set,
+                            use_sys_template_zone_data,
+                        )
 
                     # Skip irrelevant rows (e.g., "Notes")
                     if key_list[1] in invalid_first_keys:
@@ -354,11 +381,21 @@ def create_dictionary_from_excel(spreadsheet_name, sheet_name, rule_set):
                     # Set nested dictionary
                     set_nested_dict(json_dict, key_list, row_value)
 
+        # If system zone assignment has not been set yet, do that before returning final json dictionary
+        if not zones_have_been_mapped and system_to_zone_dict:
+            set_systems_to_zones(
+                json_dict, system_to_zone_dict, rule_set, use_sys_template_zone_data
+            )
+
     return json_dict
 
 
 def create_test_json_from_excel(
-    spreadsheet_name, sheet_name, json_name, rule_set="ashrae9012019"
+    spreadsheet_name,
+    sheet_name,
+    json_name,
+    rule_set="ashrae9012019",
+    use_sys_template_zone_data=False,
 ):
     """Converts a ruletest JSON spreadsheet into a ruletest JSON. The generated JSON is output to
     ./rct229/ruletest_engine/ruletest_jsons directory
@@ -382,6 +419,10 @@ def create_test_json_from_excel(
 
         The rule set being evaluated (e.g., 'ashrae902019'). Should correspond to a directory name in ruletests_jsons
 
+    use_sys_template_zone_data : bool
+
+        Flag to determine if zone data should be transferred from the system template
+
     """
 
     file_dir = os.path.dirname(__file__)
@@ -394,7 +435,9 @@ def create_test_json_from_excel(
         SchemaStore.set_ruleset(RuleSet.ASHRAE9012019_RULESET)
         SchemaEnums.update_schema_enum()
 
-    json_dict = create_dictionary_from_excel(spreadsheet_name, sheet_name, rule_set)
+    json_dict = create_dictionary_from_excel(
+        spreadsheet_name, sheet_name, rule_set, use_sys_template_zone_data
+    )
 
     json_dict = add_ruleset_model_types(json_dict)
 
@@ -589,7 +632,7 @@ def update_unit_convention_record(
         print("No changes necessary for: " + json_name)
 
 
-def set_systems_to_zones(json_dict, system_to_zone_dict, rule_set):
+def set_systems_to_zones(json_dict, system_to_zone_dict, rule_set, add_zone_data):
     """Takes the JSON structure generated by the system_zone_assignment section of the ruletest JSON spreadsheet
     and assigns the pre-set HVAC system type RMD examples to those zones
 
@@ -614,6 +657,10 @@ def set_systems_to_zones(json_dict, system_to_zone_dict, rule_set):
 
         The rule set being evaluated (e.g., 'ashrae902019'). Should correspond to a directory name in ruletests_jsons
 
+    add_zone_data : bool
+
+        Flag to establish if zone data should be transferred from the system template
+
     """
 
     file_dir = os.path.dirname(__file__)
@@ -632,6 +679,10 @@ def set_systems_to_zones(json_dict, system_to_zone_dict, rule_set):
 
         # Get system classification (e.g., MultiZoneAirLoop, SingleZoneAirLoop, ZoneEquipment)
         system_classification = determine_system_classification(system_rmd)
+
+        # Optionally, add zone data from the system template
+        if add_zone_data:
+            add_zone_data_from_template(json_dict, system_rmd, zone_list)
 
         # Add relevant terminals to zones in zone_list
         add_baseline_terminals(
@@ -680,6 +731,50 @@ def get_rmr_triplet_from_ruletest_json_dict(ruletest_json_test_dict):
             )
 
     return rmr_triplet_dict_list
+
+
+def add_zone_data_from_template(json_dict, system_rmd, zone_list):
+    """Takes a template RMD and injects zone data found in an HVAC system example RMD for a list of zones
+
+    Parameters
+    ----------
+
+    json_dict : dict
+
+        The ruletest json dictionary with the last test ID containing an RMD with the thermal zones that require
+        assignment
+
+    system_rmd : dict
+
+        The bare bone dictionary example of an HVAC system type. Zone data is pulled from this dictionary
+
+    zone_list: list
+
+        List of strings representing zones found in template_rmd
+
+    """
+
+    # Get latest test ID to which we're adding zone data
+    test_id = list(json_dict)[-1]
+
+    # Get this test_id's zones for each RMR that exist in the template (e.g., user, baseline, proposed)
+    rmr_triplet_dict_list = get_rmr_triplet_from_ruletest_json_dict(json_dict[test_id])
+
+    for rmr_instance_dict in rmr_triplet_dict_list:
+        zone_keys = get_json_path_key_list_from_enumeration(
+            json_path_enumeration="zones"
+        )
+
+        zones = get_nested_dic_from_key_list(rmr_instance_dict, zone_keys)
+
+        for zone in zones:
+            if zone["id"] in zone_list:
+                zone_data = deepcopy(
+                    get_nested_dic_from_key_list(system_rmd, zone_keys)
+                )[0]
+                for key, value in zone_data.items():
+                    if key not in ["id", "terminals", "spaces", "surfaces"]:
+                        zone[key] = value
 
 
 def add_baseline_terminals(
@@ -740,12 +835,16 @@ def add_baseline_terminals(
                 zone_id = zone["id"]
 
                 # Inject new terminals
-                zone["terminals"] = []
+                if "terminals" not in zone:
+                    zone["terminals"] = []
                 zone["terminals"].append(deepcopy(terminal_copy))
-                zone["terminals"][0]["id"] = f"{system_name} - Terminal for {zone_id}"
+                terminal_i = len(zone["terminals"]) - 1
+                zone["terminals"][terminal_i][
+                    "id"
+                ] = f"{system_name} - Terminal for {zone_id}"
 
                 if system_classification != "MultiZoneAirLoop":
-                    zone["terminals"][0][
+                    zone["terminals"][terminal_i][
                         "served_by_heating_ventilating_air_conditioning_system"
                     ] = f"{system_name} {zone_id}"
 
@@ -753,7 +852,7 @@ def add_baseline_terminals(
                     system_name = clean_system_name_for_multizone_airloop(
                         rmr_instance_dict, system_name
                     )
-                    zone["terminals"][0][
+                    zone["terminals"][terminal_i][
                         "served_by_heating_ventilating_air_conditioning_system"
                     ] = f"{system_name}"
 
@@ -789,7 +888,6 @@ def clean_system_name_for_multizone_airloop(rmr_dict, system_name):
 
     # If rmr_dict has HVAC systems added, check if this system name is already taken. If so, update it.
     if element_exists_at_key_address_in_dictionary(rmr_dict, hvac_keys):
-
         hvac_systems = get_nested_dic_from_key_list(rmr_dict, hvac_keys)
 
         for hvac_system in hvac_systems:
@@ -939,7 +1037,6 @@ def add_hvac_systems(
                     for hvac_system in building_segment[
                         "heating_ventilating_air_conditioning_systems"
                     ]:
-
                         # Iterate IDs to avoid duplicate IDs if this system type already exists in the building
                         if system_name in hvac_system["id"]:
                             hvac_copy = deepcopy(hvac_system)
@@ -1045,6 +1142,7 @@ def add_plant_loop_equipment(json_dict, system_rmd):
         "pumps",
         "fluid_loops",
         "heat_rejections",
+        "external_fluid_sources",
     ]
 
     sys_ruleset_model_instance = system_rmd["ruleset_model_descriptions"][0]
@@ -1129,3 +1227,17 @@ def determine_system_classification(system_rmd):
     # If not air loop, it's zone equipment
     else:
         return "ZoneEquipment"
+
+
+def set_dict_from_json_file_template(json_dict, key_list, rule_set, json_template_name):
+    file_dir = os.path.dirname(__file__)
+
+    json_template_path = os.path.join(
+        file_dir, "..", rule_set, "templates", f"{json_template_name}.json"
+    )
+
+    # Get system RMD
+    with open(json_template_path) as f:
+        json_template_dict = json.load(f)
+
+    set_nested_dict(json_dict, key_list, json_template_dict)

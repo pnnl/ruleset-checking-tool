@@ -9,8 +9,8 @@ from rct229.ruletest_engine.ruletest_jsons.scripts.excel_to_test_json_utilities 
 # ---------------------------------------USER INPUTS---------------------------------------
 
 # Excel to master test JSON inputs
-spreadsheet_name = "chiller_tcd_master.xlsx"
-test_json_name = "chiller_tcd_master_temp.json"
+spreadsheet_name = "full_rpd_test_master.xlsx"
+test_json_name = "full_rpd_test_master.json"
 sheet_name = "TCDs"
 
 # Flag to determine if you should check the test JSON
@@ -22,7 +22,9 @@ rule_set = "ashrae9012019"
 # --------------------------------------SCRIPT STARTS--------------------------------------
 
 # Create a test JSON for a given ruletest spreadsheet
-create_test_json_from_excel(spreadsheet_name, sheet_name, test_json_name)
+create_test_json_from_excel(
+    spreadsheet_name, sheet_name, test_json_name, use_sys_template_zone_data=True
+)
 
 # Parse ruletest spreadsheet for unit types and update the unit conventions in unit_convention.json for:
 # -RMD (typically SI)

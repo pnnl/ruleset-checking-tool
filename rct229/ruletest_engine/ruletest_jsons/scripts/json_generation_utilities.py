@@ -556,9 +556,16 @@ def disaggregate_master_rmd_json(master_json_name, output_dir, ruleset_doc):
         # Initialize json name and pathing
         json_name = os.path.join(f"{output_dir}", f"{json_name}")
         json_file_path = os.path.join(file_dir, "..", ruleset_doc, json_name)
+        output_dir_path = os.path.join(file_dir, "..", ruleset_doc, output_dir)
 
         # Dump JSON to string for writing
         json_string = json.dumps(rmd_dict, indent=4)
+
+        # Check if the output directory exists
+        if not os.path.exists(output_dir_path):
+            # Create the directory if it doesn't exist
+            os.makedirs(output_dir_path)
+            print(f"Directory '{output_dir_path}' created.")
 
         # Write JSON string to file
         with open(json_file_path, "w") as json_file:
@@ -572,7 +579,16 @@ def disaggregate_master_rmd_json(master_json_name, output_dir, ruleset_doc):
     for rmd_name in master_dict:
         # Initialize this RMD's dictionary and JSON name
         rmd_dict = master_dict[rmd_name]
-        json_name = f"{rmd_name}.json"
 
-        # New section + rule. Write out last rule test dictionary before creating a new one
-        write_ruletest_json(rmd_dict, json_name, output_dir)
+        # If RMR transformations is in the dictionary, strip down to the individual triplets and create the RMD JSONs
+        if "rmr_transformations" in rmd_dict:
+            for triplet in rmd_dict["rmr_transformations"].keys():
+                triplet_dict = rmd_dict["rmr_transformations"][triplet]
+                json_name = f"{rmd_name}_{triplet}.json"
+
+                write_ruletest_json(triplet_dict, json_name, output_dir)
+        else:
+            json_name = f"{rmd_name}.json"
+
+            # New section + rule. Write out last rule test dictionary before creating a new one
+            write_ruletest_json(rmd_dict, json_name, output_dir)
