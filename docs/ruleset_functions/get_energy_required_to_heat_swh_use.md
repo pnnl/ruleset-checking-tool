@@ -7,7 +7,7 @@ Inputs:
 - **RMD**
 
 Returns:
-- **energy_required_by_space**: A dict where they keys are space_ids and values are the total energy required to heat the swh_use for that space.  If a swh_use is not assigned to any spaces, the key will be "NO_SPACES_ASSIGNED"
+- **energy_required_by_space**: A dict where the keys are space_ids and values are the total energy required to heat the swh_use for that space.  If a swh_use is not assigned to any spaces, the key will be "NO_SPACES_ASSIGNED"
 
 Function Call:
 
@@ -27,7 +27,7 @@ Logic:
 - get the drain heat recovery efficiency if heat is recovered by drain: `if(swh_use.is_heat_recovered_by_drain): drain_heat_recovery_efficiency = distribution_system.drain_heat_recovery_efficiency`
 - get the use_units: `use_units = swh_use.use_units`
 
-- now we need to get all of the spaces that the swh_use is applied to.  The rule is that if spaces reference the swh_use, then the use applies to only those spaces.  If the use references no spaces, it applies to all spaces in the building segment.
+- now we need to get all of the spaces that the swh_use is applied to.  The convention is that if any spaces reference the swh_use, then the service water heating use applies to only those spaces. If no spaces reference the service water heating use, it applies to all spaces in the building segment.
 - get the ids of spaces served by this swh_use: `space_ids = get_spaces_served_by_SWH_use(RMD, swh_use)`
 - convert the space ids to spaces: `spaces = [get_obj_by_id(space_id, RMD) for space_id in space_ids]`
 - create the dictionary: `energy_required_by_space = {}`
