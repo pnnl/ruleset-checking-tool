@@ -11,8 +11,7 @@ Returns:
 
 Function Call:
 
-- get_spaces_associated_with_each_SWH_bat  
-- get_component_by_ID  
+- get_obj_by_id   
 - get_all_child_SWH_piping_ids  
 - get_building_segment_swh_bat  
 - get_energy_required_to_heat_swh_use  
@@ -28,14 +27,14 @@ Logic:
     - create the blank list for the swh_bat, if it doesn't exist yet: `swh_and_equip_dict[swh_bat].set_default({"SWHDistribution":[],"SWHHeatingEq":[],"Pumps":[],"Tanks":[], "Piping":[], "SolarThermal":[], "SWH_Uses":[], "EnergyRequired":0})`
     - get the service water heating uses in the building segment `service_water_heating_use_ids = get_SWH_uses_associated_with_each_building_segment(RMD, building_segment.id)`
     - look at each service water heating use id: `for swh_use_id in service_water_heating_use_ids:`
-        - get the swh_use using get_component_by_ID: `swh_use = get_component_by_ID(RMD, swh_use_id)`
+        - get the swh_use using get_obj_by_id : `swh_use = get_obj_by_id (RMD, swh_use_id)`
         - get the energy required to heat the water using the function get_energy_required_to_heat_swh_use: `energy_required = get_energy_required_to_heat_swh_use(swh_use, RMD)`
         - add the energy required to heat the swh use, to "EnergyRequired" for this bat: `swh_and_equip_dict[swh_bat]["EnergyRequired"] += energy_required`
         - add the id for the swh_use to the "SWH_Uses" list: `swh_and_equip_dict[swh_bat]["SWH_Uses"].append(swh_use.id)`
         - get the distribution id: `distribution_id = swh_use.served_by_distribution_system`
         - check if the distribution system is already in the list.  If it is not we'll add it and all associated equipment: `if !distribution_id in swh_and_equip_dict[swh_bat]["SWHDistribution"]:`
             - add the distribution id to the list: `swh_and_equip_dict[swh_bat]["SWHDistribution"].append(distribution_id)`
-            - get the distribution using get_component_by_ID: `distribution = get_component_by_ID(RMD, distribution_id)`
+            - get the distribution using get_obj_by_id : `distribution = get_obj_by_id (RMD, distribution_id)`
             - now we need to get all of the equipment connected to this distribution system.
             - get the tanks: `tanks = distribution.tanks`
             - append the tank ids to the dictionary: `for t in tanks:  swh_and_equip_dict[swh_bat]["Tanks"].append(t.id)`
