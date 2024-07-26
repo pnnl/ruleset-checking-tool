@@ -1,12 +1,12 @@
 ## get_SWH_equipment_associated_with_each_swh_distribution_system
 
-Description: This function gets all the SWH equipment connected to a SWH distribution system.  The information is stored in a dictionary where the keys are the SWH Distribution System Ids and values are a dictionary giving the ServiceWaterHeatingEquipment, and Pumps connected to the particular use type  
+Description: This function gets all the SWH equipment connected to a SWH distribution system.  The information is stored in a dictionary where the keys are the SWH Distribution System Ids and values are a dictionary giving the ServiceWaterHeatingEquipment, and Pumps connected to the particular SWH distribution system  
 
 Inputs:
 - **RMD**
 
 Returns:
-- **swh_and_equip_dict**: A dictionary containing where the keys are the SWH Distribution System and values are dictionaries where keys are the type of SWH equipment and values are the ids of the connected equipment.  Example:  
+- **swh_and_equip_dict**: A dictionary containing where the keys are the SWH Distribution System IDs and values are dictionaries where keys are the type of SWH equipment and values are the ids of the connected equipment.  Example:  
 {"SWH_Distribution1":{"SWHHeatingEq":["swh_eq1","swh_eq2"], "Pumps":["p1"], "Tanks":["t1"], "Piping":["piping1"], "SolarThermal":[], "USES":["sp1_use","sp2_use"], "SPACES_SERVED":[sp1,sp2]}}
 
 Function Call:
