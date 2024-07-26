@@ -37,7 +37,7 @@ Logic:
 - now go through each SWH Use in the RMD: `for swh_use in RMD...service_water_heating_uses:`
     - find the distribution system: `distribution = swh_use.served_by_distribution_system`
     - add the swh_use id to the dictionary for the distribution: `swh_and_equip_dict[distribution.id]["USES"].append(swh_use.id)`
-    - now get the ids of spaces served by this SWH Use by using the function get_spaces_served_by_SWH_use, and add all of them to the list: `swh_and_equip_dict[distribution.id]["SPACES_SERVED"].append(get_spaces_served_by_SWH_use(RMD,swh_use))
+    - now get the ids of spaces served by this SWH Use by using the function get_spaces_served_by_SWH_use, and add all of them to the list: `swh_and_equip_dict[distribution.id]["SPACES_SERVED"].append(space.id for space in get_spaces_served_by_SWH_use(RMD,swh_use))
 
 **Returns** swh_and_equip_dict
 
