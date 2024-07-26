@@ -42,13 +42,13 @@ class Section12Rule3(RuleDefinitionListIndexedBase):
             data_items={"is_leap_year": (PROPOSED, "calendar/is_leap_year")},
         )
 
-    class RulesetModelInstanceRule(RuleDefinitionListIndexedBase):
+    class RuleSetModelDescriptionRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section12Rule3.RulesetModelInstanceRule, self).__init__(
+            super(Section12Rule3.RuleSetModelDescriptionRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
-                each_rule=Section12Rule3.RulesetModelInstanceRule.SpaceRule(),
+                each_rule=Section12Rule3.RuleSetModelDescriptionRule.SpaceRule(),
                 index_rmd=PROPOSED,
                 list_path="$.buildings[*].building_segments[*].zones[*].spaces[*]",
             )
@@ -76,7 +76,7 @@ class Section12Rule3(RuleDefinitionListIndexedBase):
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=False, PROPOSED=True
                 ),
-                each_rule=Section12Rule3.RulesetModelInstanceRule.SpaceRule(),
+                each_rule=Section12Rule3.RuleSetModelDescriptionRule.SpaceRule(),
                 index_rmd=PROPOSED,
                 list_path="$.buildings[*].building_segments[*].zones[*].spaces[*]",
             )
