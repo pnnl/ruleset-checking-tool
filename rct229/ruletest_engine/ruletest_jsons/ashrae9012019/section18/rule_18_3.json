@@ -3,7 +3,7 @@
         "Section": 18,
         "Rule": 3,
         "Test": "a",
-        "test_description": "The project has one building segment with one floor and four zones with HVAC building area type = OTHER NON RESIDENTIAL.  Building area is 160,000 sf.  Thermal Zones 1 and 2 are type Laboratory with total 16,000 cfm of zone exhaust.  Expected result: undetermined",
+        "test_description": "The project located in climate zone 1A has one 160,000 ft2 building segment with four zones on one floor. It is an \"Other nonresidential\" building area type and Thermal Zone 1 and 2 are laboratory spaces with a total zonal exhaust rate greater than 15,000 cfm.",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "18-3",
@@ -15,7 +15,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -28,7 +28,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -223,7 +222,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -427,7 +425,7 @@
         "Section": 18,
         "Rule": 3,
         "Test": "b",
-        "test_description": "The project has one building segment with one floor and four zones with HVAC building area type = OTHER NON RESIDENTIAL.  Building area is 160,000 sf.  Thermal Zones 1 and 2 are type Laboratory with total 8,000 cfm of zone exhaust.  Expected result: not applicable",
+        "test_description": "The project located in climate zone 1A has one 160,000 ft2 building segment with four zones on one floor. It is an \"Other nonresidential\" building area type and Thermal Zone 1 and 2 are laboratory spaces with a total zonal exhaust rate less than 15,000 cfm and no central system exhaust could possibly contribute to this total.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "18-3",
@@ -439,7 +437,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -452,7 +450,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -647,7 +644,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -851,7 +847,7 @@
         "Section": 18,
         "Rule": 3,
         "Test": "c",
-        "test_description": "The project has one building segment with one floor and four zones with HVAC building area type = OTHER NON RESIDENTIAL.  Building area is 160,000 sf.  Thermal Zones 1 and 2 are NOT type Laboratory with total 16,000 cfm of zone exhaust.  Expected result: not applicable",
+        "test_description": "The project located in climate zone 1A has one 160,000 ft2 building segment with four zones on one floor. It is an \"Other nonresidential\" building area type. Thermal Zone 1 and 2 have a total zonal exhaust rate greater than 15,000 cfm but have no laboratory spaces.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "18-3",
@@ -863,7 +859,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -876,7 +872,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -1071,7 +1066,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",

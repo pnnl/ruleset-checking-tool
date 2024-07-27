@@ -3,8 +3,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "a",
-        "test_description": "The project has one building segment with one zone and one floor with HVAC building area type = public assembly.  It is 60,000 ft2 and has HVAC system type 4 and is in climate zone 3A",
+        "test_description": "The project located in climate zone 3A has one 60,000 ft2 building segment with one zone on one floor. It is a public assembly building area type served by baseline system type 4.",
         "expected_rule_outcome": "pass",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -15,7 +16,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -28,7 +29,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -103,7 +103,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -175,8 +174,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "b",
-        "test_description": "The project has one building segment with one zone and one floor with HVAC building area type = public assembly.  It is 60,000 ft2 and has HVAC system type 5 and is in climate zone 3A",
+        "test_description": "The project located in climate zone 3A has one 60,000 ft2 building segment with one zone on one floor. It is a public assembly building area type served by baseline system type 5.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -187,7 +187,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -200,7 +200,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -302,7 +301,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -401,8 +399,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "c",
-        "test_description": "The project has one building segment with one zone and one floor with HVAC building area type = public assembly.  It is 130,000 ft2 and has HVAC system type 13 and is in climate zone 3A",
+        "test_description": "The project located in climate zone 3A has one 130,000 ft2 building segment with one zone on one floor. It is a public assembly building area type served by baseline system type 13.",
         "expected_rule_outcome": "pass",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -413,7 +412,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -426,7 +425,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -532,7 +530,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -635,8 +632,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "d",
-        "test_description": "The project has one building segment with one zone and one floor with HVAC building area type = public assembly.  It is 130,000 ft2 and has HVAC system type 5 and is in climate zone 3A",
+        "test_description": "The project located in climate zone 3A has one 130,000 ft2 building segment with one zone on one floor. It is a public assembly building area type served by baseline system type 5.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -647,7 +645,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -660,7 +658,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -762,7 +759,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -861,8 +857,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "e",
-        "test_description": "The project has one building segment with one zone and one floor with HVAC building area type = public assembly.  It is 60,000 ft2 and has HVAC system type 3 and is in climate zone 5B",
+        "test_description": "The project located in climate zone 5B has one 60,000 ft2 building segment with one zone on one floor. It is a public assembly building area type served by baseline system type 3.",
         "expected_rule_outcome": "pass",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -873,7 +870,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -886,7 +883,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -961,7 +957,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -1033,8 +1028,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "f",
-        "test_description": "The project has one building segment with one zone and one floor with HVAC building area type = public assembly.  It is 60,000 ft2 and has HVAC system type 5 and is in climate zone 5B",
+        "test_description": "The project located in climate zone 5B has one 60,000 ft2 building segment with one zone on one floor. It is a public assembly building area type served by baseline system type 5.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -1045,7 +1041,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -1058,7 +1054,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -1160,7 +1155,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -1259,8 +1253,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "g",
-        "test_description": "The project has one building segment with one zone and one floor with HVAC building area type = public assembly.  It is 130,000 ft2 and has HVAC system type 12 and is in climate zone 5B",
+        "test_description": "The project located in climate zone 5B has one 130,000 ft2 building segment with one zone on one floor. It is a public assembly building area type served by baseline system type 12.",
         "expected_rule_outcome": "pass",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -1271,7 +1266,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -1284,7 +1279,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -1407,7 +1401,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -1527,8 +1520,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "h",
-        "test_description": "The project has one building segment with one zone and one floor with HVAC building area type = public assembly.  It is 130,000 ft2 and has HVAC system type 5 and is in climate zone 5B",
+        "test_description": "The project located in climate zone 5B has one 130,000 ft2 building segment with one zone on one floor. It is a public assembly building area type served by baseline system type 5.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -1539,7 +1533,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -1552,7 +1546,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -1654,7 +1647,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -1753,8 +1745,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "i",
-        "test_description": "The project has one building segment with one zone and one floor with HVAC building area type = Hospital.  It is 120,000 ft2 and has HVAC system type 5.",
+        "test_description": "The project located in climate zone 5B has one 120,000 ft2 building segment with one zone on one floor. It is a hospital building area type served by baseline system type 5.",
         "expected_rule_outcome": "pass",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -1765,7 +1758,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -1778,7 +1771,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -1880,7 +1872,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -1979,8 +1970,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "j",
-        "test_description": "The project has one building segment with one zone and one floor with HVAC building area type = Hospital.  It is 120,000 ft2 and has HVAC system type 13.",
+        "test_description": "The project located in climate zone 5B has one 120,000 ft2 building segment with one zone on one floor. It is a hospital building area type served by baseline system type 13.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -1991,7 +1983,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -2004,7 +1996,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -2110,7 +2101,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -2213,8 +2203,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "k",
-        "test_description": "The project has one building segment with one zone and one floor with HVAC building area type = Hospital.  It is 160,000 ft2 and has HVAC system type 7.",
+        "test_description": "The project located in climate zone 5B has one 160,000 ft2 building segment with one zone on one floor. It is a laboratory space type with a total exhaust rate greater than 15,000 cfm modeled in the proposed, but less than 15,000 cfm modeled in the baseline and is served by baseline system type 7.",
         "expected_rule_outcome": "pass",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -2225,7 +2216,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -2238,7 +2229,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -2372,7 +2362,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -2504,8 +2493,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "l",
-        "test_description": "The project has one building segment with six zones and six floors with HVAC building area type = Hospital.  It is 120,000 ft2 and has HVAC system type 7",
+        "test_description": "The project located in climate zone 5B has one 120,000 ft2 building segment with six zones on six floors. All zones are laboratories with a total exhaust rate greater than 15,000 cfm and are served by baseline system type 7.",
         "expected_rule_outcome": "pass",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -2516,7 +2506,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -2529,7 +2519,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -2869,7 +2858,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -3230,8 +3218,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "m",
-        "test_description": "The project has one building segment with six zones and six floors with HVAC building area type = Hospital.  It is 120,000 ft2 and has HVAC system type 5",
+        "test_description": "The project located in climate zone 5B has one 120,000 ft2 building segment with six zones on six floors. It is a hospital building area type and is served by baseline system type 5.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -3242,7 +3231,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -3255,7 +3244,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -3549,7 +3537,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -3848,8 +3835,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "n",
-        "test_description": "The project has one building segment with one zone and one floor with HVAC building area type = Retail.  It is 160,000 ft2 and has HVAC system type 4.  It is in climate zone 3A",
+        "test_description": "The project located in climate zone 3A has one 160,000 ft2 building segment with one zone on one floor. It is a retail building area type served by baseline system type 4.",
         "expected_rule_outcome": "pass",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -3860,7 +3848,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -3873,7 +3861,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -3948,7 +3935,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -4020,8 +4006,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "o",
-        "test_description": "The project has one building segment with one zone and one floor with HVAC building area type = Retail.  It is 160,000 ft2 and has HVAC system type 5.  It is in climate zone 3A",
+        "test_description": "The project located in climate zone 3A has one 160,000 ft2 building segment with one zone on one floor. It is a retail building area type served by baseline system type 5.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -4032,7 +4019,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -4045,7 +4032,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -4147,7 +4133,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -4246,8 +4231,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "p",
-        "test_description": "The project has one building segment with one zone and one floor with HVAC building area type = Retail.  It is 160,000 ft2 and has HVAC system type 3.  It is in climate zone 5A",
+        "test_description": "The project located in climate zone 5A has one 160,000 ft2 building segment with one zone on one floor. It is a retail building area type served by baseline system type 3.",
         "expected_rule_outcome": "pass",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -4258,7 +4244,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -4271,7 +4257,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -4346,7 +4331,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -4418,8 +4402,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "q",
-        "test_description": "The project has one building segment with one zone and one floor with HVAC building area type = Retail.  It is 160,000 ft2 and has HVAC system type 5.  It is in climate zone 5A",
+        "test_description": "The project located in climate zone 5A has one 160,000 ft2 building segment with one zone on one floor. It is a retail building area type served by baseline system type 5.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -4430,7 +4415,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -4443,7 +4428,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -4545,7 +4529,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -4644,8 +4627,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "r",
-        "test_description": "The project has one building segment with one zone and one floor with HVAC building area type = Other Non-Residential.  It is 20,000 ft2 and has HVAC system type 4.  It is in climate zone 3A",
+        "test_description": "The project located in climate zone 3A has one 20,000 ft2 building segment with one zone on one floor. It is an \"Other nonresidential\" building area type and is served by baseline system type 4.",
         "expected_rule_outcome": "pass",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -4656,7 +4640,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -4669,7 +4653,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -4744,7 +4727,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -4816,8 +4798,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "s",
-        "test_description": "The project has one building segment with one zone and one floor with HVAC building area type = Other Non-Residential.  It is 20,000 ft2 and has HVAC system type 5.  It is in climate zone 3A",
+        "test_description": "The project located in climate zone 3A has one 20,000 ft2 building segment with one zone on one floor. It is an \"Other nonresidential\" building area type and is served by baseline system type 5.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -4828,7 +4811,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -4841,7 +4824,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -4943,7 +4925,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -5042,8 +5023,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "t",
-        "test_description": "The project has one building segment with one zone and one floor with HVAC building area type = Other Non-Residential.  It is 20,000 ft2 and has HVAC system type 3.  It is in climate zone 6A",
+        "test_description": "The project located in climate zone 6A has one 20,000 ft2 building segment with one zone on one floor. It is an \"Other nonresidential\" building area type and is served by baseline system type 3.",
         "expected_rule_outcome": "pass",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -5054,7 +5036,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -5067,7 +5049,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -5142,7 +5123,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -5214,8 +5194,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "u",
-        "test_description": "The project has one building segment with one zone and one floor with HVAC building area type = Other Non-Residential.  It is 20,000 ft2 and has HVAC system type 5.  It is in climate zone 6A",
+        "test_description": "The project located in climate zone 6A has one 20,000 ft2 building segment with one zone on one floor. It is an \"Other nonresidential\" building area type and is served by baseline system type 5.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -5226,7 +5207,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -5239,7 +5220,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -5341,7 +5321,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -5440,8 +5419,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "v",
-        "test_description": "The project has one building segment with four zones and one floor with HVAC building area type = Other Non-Residential.  It is 20,000 ft2 and has HVAC system type 6.  It is in climate zone 3A",
+        "test_description": "The project located in climate zone 3A has one building segment with four zones on four floors. It is an \"Other nonresidential\" building area type and is served by baseline system type 6.",
         "expected_rule_outcome": "pass",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -5452,7 +5432,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -5465,7 +5445,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -5674,7 +5653,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -5886,8 +5864,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "w",
-        "test_description": "The project has one building segment with one zone and one floor with HVAC building area type = Other Non-Residential.  It is 20,000 ft2 and has HVAC system type 5.  It is in climate zone 3A",
+        "test_description": "The project located in climate zone 3A has one 20,000 ft2 building segment with one zone on one floor. It is an \"Other nonresidential\" building area type and is served by baseline system type 5.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -5898,7 +5877,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -5911,7 +5890,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -6013,7 +5991,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -6112,8 +6089,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "x",
-        "test_description": "The project has one building segment with four zones and one floor with HVAC building area type = Other Non-Residential.  It is 20,000 ft2 and has HVAC system type 5.  It is in climate zone 6A",
+        "test_description": "The project located in climate zone 6A has one 20,000 ft2 building segment with four zones on four floors. It is an \"Other nonresidential\" building area type and is served by baseline system type 5.",
         "expected_rule_outcome": "pass",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -6124,7 +6102,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -6137,7 +6115,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -6357,7 +6334,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -6580,8 +6556,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "y",
-        "test_description": "The project has one building segment with four zones and one floor with HVAC building area type = Other Non-Residential.  It is 20,000 ft2 and has HVAC system type 6.  It is in climate zone 6A",
+        "test_description": "The project located in climate zone 6A has one 20,000 ft2 building segment with four zones on four floors. It is an \"Other nonresidential\" building area type and is served by baseline system type 6.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -6592,7 +6569,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -6605,7 +6582,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -6814,7 +6790,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -7026,8 +7001,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "z",
-        "test_description": "The project has one building segment with four zones and one floor with HVAC building area type = Other Non-Residential.  It is 40,000 ft2 and has HVAC system type 4.  It is in climate zone 3A",
+        "test_description": "The project located in climate zone 3A has one 40,000 ft2 building segment with four zones on four floors. It is an \"Other nonresidential\" building area type and is served by baseline system type 4.",
         "expected_rule_outcome": "pass",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -7038,7 +7014,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -7051,7 +7027,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -7255,7 +7230,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -7562,8 +7536,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "aa",
-        "test_description": "The project has one building segment with one zone and one floor with HVAC building area type = Other Non-Residential.  It is 40,000 ft2 and has HVAC system type 5.  It is in climate zone 3A",
+        "test_description": "The project located in climate zone 3A has one 40,000 ft2 building segment with one zone on one floor. It is an \"Other nonresidential\" building area type and is served by baseline system type 5.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -7574,7 +7549,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -7587,7 +7562,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -7689,7 +7663,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -7788,8 +7761,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "ab",
-        "test_description": "The project has one building segment with four zones and one floor with HVAC building area type = Other Non-Residential.  It is 40,000 ft2 and has HVAC system type 5.  It is in climate zone 6A",
+        "test_description": "The project located in climate zone 6A has one 40,000 ft2 building segment with four zones on four floors. It is an \"Other nonresidential\" building area type and is served by baseline system type 5.",
         "expected_rule_outcome": "pass",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -7800,7 +7774,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -7813,7 +7787,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -7969,7 +7942,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -8128,8 +8100,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "ac",
-        "test_description": "The project has one building segment with four zones and one floor with HVAC building area type = Other Non-Residential.  It is 40,000 ft2 and has HVAC system type 6.  It is in climate zone 6A",
+        "test_description": "The project located in climate zone 6A has one 40,000 ft2 building segment with four zones on four floors. It is an \"Other nonresidential\" building area type and is served by baseline system type 6.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -8140,7 +8113,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -8153,7 +8126,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -8362,7 +8334,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -8574,8 +8545,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "ad",
-        "test_description": "The project has one building segment with six zones and six floors with HVAC building area type = Other Non-Residential.  It is 60,000 ft2 and has HVAC system type 8.  It is in climate zone 3A",
+        "test_description": "The project located in climate zone 3A has one 60,000 ft2 building segment with six zones on six floors. It is an \"Other nonresidential\" building area type and is served by baseline system type 8.",
         "expected_rule_outcome": "pass",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -8586,7 +8558,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -8599,7 +8571,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -8943,7 +8914,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -9288,8 +9258,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "ae",
-        "test_description": "The project has one building segment with six zones and six floors with HVAC building area type = Other Non-Residential.  It is 60,000 ft2 and has HVAC system type 5.  It is in climate zone 3A",
+        "test_description": "The project located in climate zone 3A has one 60,000 ft2 building segment with six zones on six floors. It is an \"Other nonresidential\" building area type and is served by baseline system type 5.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -9300,7 +9271,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -9313,7 +9284,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -9607,7 +9577,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -9902,8 +9871,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "af",
-        "test_description": "The project has one building segment with four zones and one floor with HVAC building area type = Other Non-Residential.  It is 160,000 ft2 and has HVAC system type 8.  It is in climate zone 3A",
+        "test_description": "The project located in climate zone 3A has one 160,000 ft2 building segment with four zones on four floors. It is an \"Other nonresidential\" building area type and is served by baseline system type 8.",
         "expected_rule_outcome": "pass",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -9914,7 +9884,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -9927,7 +9897,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -10189,7 +10158,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -10454,8 +10422,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "ag",
-        "test_description": "The project has one building segment with six zones and six floors with HVAC building area type = Other Non-Residential.  It is 60,000 ft2 and has HVAC system type 7.  It is in climate zone 5A",
+        "test_description": "The project located in climate zone 5A has one 60,000 ft2 building segment with six zones on six floors. All zones are laboratories with a total exhaust rate greater than 15,000 cfm and are served by baseline system type 7.",
         "expected_rule_outcome": "pass",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -10466,7 +10435,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -10479,7 +10448,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -10819,7 +10787,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -11180,8 +11147,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "ah",
-        "test_description": "The project has one building segment with six zones and six floors with HVAC building area type = Other Non-Residential.  It is 60,000 ft2 and has HVAC system type 5.  It is in climate zone 5A",
+        "test_description": "The project located in climate zone 5A has one 60,000 ft2 building segment with six zones on six floors. It is an \"Other nonresidential\" building area type and is served by baseline system type 5.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -11192,7 +11160,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -11205,7 +11173,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -11479,7 +11446,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -11754,8 +11720,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "ai",
-        "test_description": "The project has one building segment with four zones and one floor with HVAC building area type = Other Non-Residential.  It is 160,000 ft2 and has HVAC system type 7.  It is in climate zone 5A",
+        "test_description": "The project located in climate zone 5A has one 160,000 ft2 building segment with four zones on four floors. All zones are laboratories with a total exhaust rate greater than 15,000 cfm and are served by baseline system type 7.",
         "expected_rule_outcome": "pass",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -11766,7 +11733,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -11779,7 +11746,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -12042,7 +12008,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -12320,8 +12285,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "aj",
-        "test_description": "The project has one building segment with six zones and six floors with HVAC building area type = Other Non-Residential for Thermal Zone 1 and HVAC building area type = HOSPITAL for the other five zones.  Thermal Zone 1 is 25,000 ft2 and the other zones are 20,000 sf each.  It is in climate zone 3A.  Thermal zone 1 is correctly conditioned with HVAC system type 8",
+        "test_description": "The project located in climate zone 3A has one building segment with six zones on six floors. Thermal Zone 1 is a 25,000 ft2 office space and all other zones are 20,000 ft2 each laboratories with a total exhaust rate greater than 15,000 cfm. Thermal zone 1 is served by baseline system type 8 and the laboratories are served by baseline system type 7.",
         "expected_rule_outcome": "pass",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -12332,7 +12298,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -12345,7 +12311,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -12687,7 +12652,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -13049,8 +13013,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "ak",
-        "test_description": "The project has one building segment with six zones and six floors with HVAC building area type = Other Non-Residential for Thermal Zone 1 and HVAC building area type = HOSPITAL for the other five zones.  Thermal Zone 1 is 25,000 ft2 and the other zones are 20,000 sf each.  It is in climate zone 3A.  Thermal zone 1 is incorrectly conditioned with HVAC system type 6",
+        "test_description": "The project located in climate zone 3A has one building segment with six zones and six floors. Thermal Zone 1 is a 25,000 ft2 office space and all other zones are 20,000 ft2 each healthcare spaces. Thermal zone 1 is served by baseline system type 6 and the healthcare spaces are served by baseline system type 7.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -13061,7 +13026,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -13074,7 +13039,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -13401,7 +13365,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -13734,8 +13697,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "al",
-        "test_description": "The project has one building segment with one zone and one floor with HVAC building area type = RESIDENTIAL.  It is in climate zone 3A and is correctly modeled with HVAC system type 2",
+        "test_description": "The project located in climate zone 3A has one building segment with one zone on one floor. It is a residential building area type and is served by baseline system type 2.",
         "expected_rule_outcome": "pass",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -13746,7 +13710,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -13759,7 +13723,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -13829,7 +13792,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -13896,8 +13858,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "am",
-        "test_description": "The project has one building segment with one zone and one floor with HVAC building area type = RESIDENTIAL.  It is in climate zone 3A and is incorrectly modeled with HVAC system type 3",
+        "test_description": "The project located in climate zone 3A has one building segment with one zone on one floor. It is a residential building area type and is served by baseline system type 3.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -13908,7 +13871,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -13921,7 +13884,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -13996,7 +13958,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -14068,8 +14029,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "an",
-        "test_description": "The project has one building segment with one zone and one floor with HVAC building area type = RESIDENTIAL.  It is in climate zone 4A and is correctly modeled with HVAC system type 1",
+        "test_description": "The project located in climate zone 4A has one building segment with one zone on one floor. It is a residential building area type and is served by baseline system type 1.",
         "expected_rule_outcome": "pass",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -14080,7 +14042,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -14093,7 +14055,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -14177,7 +14138,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -14258,8 +14218,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "ao",
-        "test_description": "The project has one building segment with one zone and one floor with HVAC building area type = RESIDENTIAL.  It is in climate zone 4A and is incorrectly modeled with HVAC system type 3",
+        "test_description": "The project located in climate zone 4A has one building segment with one zone on one floor. It is a residential building area type and is served by baseline system type 3.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -14270,7 +14231,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -14283,7 +14244,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -14358,7 +14318,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -14430,8 +14389,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "ap",
-        "test_description": "The project has one building segment with one floor and four zones with HVAC building area type = OTHER NON RESIDENTIAL.  Building area is 50,000 sf, so the baseline system type is system 5.  Thermal Zone 1 has peak internal gains that differ by more than 10 Btu/h.ft2.  It is in climate zone 4A",
-        "expected_rule_outcome": "pass",
+        "test_description": "The project located in climate zone 4A has one building segment with four zones on one floor. It is an \"Other nonresidential\" building area type and Thermal Zone 1 has peak internal gains that differ by more than 10 Btu/h\u22c5ft2 but all zones are served by baseline system 5.",
+        "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -14442,7 +14402,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -14455,7 +14415,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -14611,7 +14570,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -14818,8 +14776,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "aq",
-        "test_description": "The project has one building segment with one floor and four zones with HVAC building area type = OTHER NON RESIDENTIAL.  Building area is 50,000 sf, so the baseline system type is system 5.  Thermal Zone 1 has peak internal gains that differ by more than 10 Btu/h.ft2 and is incorrectly modeled with System type 8.  It is in climate zone 4A",
+        "test_description": "The project located in climate zone 4A has one building segment with four zones on one floor. It is an \"Other nonresidential\" building area type and Thermal Zone 1 has peak internal gains that differ by more than 10 Btu/h\u22c5ft2. Thermal Zone 1 is served by baseline system type 8 and all other zones are served by baseline system type 5.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -14830,7 +14789,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -14843,7 +14802,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -15061,7 +15019,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -15330,8 +15287,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "ar",
-        "test_description": "The project has one building segment with one floor and four zones with HVAC building area type = OTHER NON RESIDENTIAL.  Building area is 50,000 sf, so the baseline system type is system 6.  Thermal Zone 1 has peak internal gains that differ by more than 10 Btu/h.ft2.  It is in climate zone 1A",
-        "expected_rule_outcome": "pass",
+        "test_description": "The project located in climate zone 1A has one building segment with four zones on one floor. It is an \"Other nonresidential\" building area type and Thermal Zone 1 has peak internal gains that differ by more than 10 Btu/h\u22c5ft2 but all zones are served by baseline system 6.",
+        "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -15342,7 +15300,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -15355,7 +15313,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -15502,7 +15459,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -15700,8 +15656,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "as",
-        "test_description": "The project has one building segment with one floor and four zones with HVAC building area type = OTHER NON RESIDENTIAL.  Building area is 50,000 sf, so the baseline system type is system 6.  Thermal Zone 1 has peak internal gains that differ by more than 10 Btu/h.ft2 and is incorrectly modeled with System type 5.  It is in climate zone 1A",
+        "test_description": "The project located in climate zone 1A has one building segment with four zones on one floor. It is an \"Other nonresidential\" building area type and Thermal Zone 1 has peak internal gains that differ by more than 10 Btu/h\u22c5ft2. Thermal Zone 1 is served by baseline system type 4 and all other zones are served by baseline system type 6.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -15712,7 +15669,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -15725,7 +15682,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -15894,7 +15850,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -16114,8 +16069,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "at",
-        "test_description": "The project has one building segment with one floor and four zones with HVAC building area type = OTHER NON RESIDENTIAL.  Building area is 40,000 sf.  Thermal Zone 1 is type Laboratory with 16,000 cfm of zone exhaust and HVAC system type 5.  Expected result: pass",
+        "test_description": "The project located in climate zone 1A has one building segment with four zones on one floor. It is an \"Other nonresidential\" building area type and Thermal Zone 1 is type Laboratory with 16,000 cfm of zone exhaust. Thermal Zone 1 is served by baseline system type 5 and all other zones are served by baseline system type 6.",
         "expected_rule_outcome": "pass",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -16126,7 +16082,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -16139,7 +16095,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -16340,7 +16295,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -16544,8 +16498,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "au",
-        "test_description": "The project has one building segment with one floor and four zones with HVAC building area type = OTHER NON RESIDENTIAL.  Building area is 160,000 sf.  Thermal Zone 1 is type Laboratory with 16,000 cfm of zone exhaust and HVAC system type 7.  Expected result: pass",
+        "test_description": "The project located in climate zone 1A has one building segment with four zones on one floor. It is an \"Other nonresidential\" building area type and Thermal Zone 1 is a laboratory space with 16,000 cfm of zone exhaust in the proposed but no zone exhaust defined in the baseline. All zones are served by baseline system type 6.",
         "expected_rule_outcome": "pass",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -16556,7 +16511,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -16569,7 +16524,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -16721,7 +16675,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -16872,8 +16825,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "av",
-        "test_description": "The project has one building segment with one floor and four zones with HVAC building area type = OTHER NON RESIDENTIAL.  Building area is 640,000 sf.  Thermal Zones 1 and 2 are type Laboratory with total 16,000 cfm of zone exhaust and HVAC system type 5.  Expected result: pass",
+        "test_description": "The project located in climate zone 1A has one 640,000 ft2 building segment with four zones on one floor. All zones in the building are laboratory spaces with a total zonal exhaust rate of 16,000 cfm and are served by baseline system type 7.",
         "expected_rule_outcome": "pass",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -16884,7 +16838,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -16897,7 +16851,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -17085,7 +17038,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -17279,8 +17231,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "aw",
-        "test_description": "The project has one building segment with one floor and four zones with HVAC building area type = OTHER NON RESIDENTIAL.  Building area is 20,000 sf.  Thermal Zone 1 is type Laboratory with 16,000 cfm of zone exhaust and incorrectly modeled as being on the same System 6 as the rest of the zones.  Expected result: fail",
+        "test_description": "The project located in climate zone 1A has one 20,000 ft2 building segment with four zones on one floor. It is an \"Other nonresidential\" building area type and Thermal Zone 1 is a laboratory space with a total zonal exhaust rate of 16,000 cfm. All zones are served by baseline system type 6.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -17291,7 +17244,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -17304,7 +17257,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -17456,7 +17408,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -17611,8 +17562,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "ax",
-        "test_description": "The project has one building segment with one floor and four zones with HVAC building area type = OTHER NON RESIDENTIAL.  Building area is 160,000 sf.  Thermal Zone 1 is type Laboratory with 12,000 cfm of zone exhaust and is incorrectly modeled with a dedicated HVAC system type 7.  Expected result: fail",
+        "test_description": "The project located in climate zone 1A has one 160,000 ft2 building segment with four zones on one floor. It is an \"Other nonresidential\" building area type and Thermal Zone 1 is a laboratory space with a total zonal exhaust rate of 12,000 cfm. Thermal Zone 1 is served by baseline system type 7 and all other zones are served by baseline system type 6.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -17623,7 +17575,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -17636,7 +17588,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -17859,7 +17810,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -18090,8 +18040,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "ay",
-        "test_description": "The project has one building segment with one floor and four zones with HVAC building area type = OTHER NON RESIDENTIAL.  Building area is 160,000 sf.  Thermal Zones 1 and 2 are type Laboratory.  They are served by one System 7 with total exhaust rate of 16,000cfm.  Expected result: undetermiend",
+        "test_description": "The project located in climate zone 1A has one 160,000 ft2 building segment with four zones on one floor. It is an \"Other nonresidential\" building area type and Thermal Zones 1 and 2 are laboratory space types with a total zonal exhaust rate of 16,000 cfm and central system exhaust rate of 16,000 cfm. Thermal Zones 1 and 2 are served by baseline system type 7 and Thermal Zones 3 and 4 are served by baseline system type 6.",
         "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "was selected for this zone based on ASHRAE 90.1 Appendix G3.1.1.d",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -18102,7 +18053,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -18115,7 +18066,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -18341,7 +18291,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -18576,8 +18525,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "az",
-        "test_description": "The project has one building segment with one floor and one zone with HVAC building area type = OTHER NON RESIDENTIAL.  Building area is 500 sf.  Thermal Zones 1 is a stairwell with a heating-only system.  Expected result: pass",
+        "test_description": "The project located in climate zone 1A has one 500 ft2 building segment with one zone on one floor. The zone is a heated-only stairwell matching the description of G3.1.1.e. The zone is served by baseline system type 10.",
         "expected_rule_outcome": "pass",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -18588,7 +18538,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -18601,7 +18551,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -18662,7 +18611,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -18721,8 +18669,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "ba",
-        "test_description": "The project has one building segment with one floor and one zone with HVAC building area type = OTHER NON RESIDENTIAL.  Building area is 500 sf.  Thermal Zones 1 is a stairwell with a heating-only system.  There is a cooling system in the proposed model.  Expected result: fail",
+        "test_description": "The project located in climate zone 1A has one 500 ft2 building segment with one zone on one floor. The zone is a stairwell with heating and cooling so it does not match the description of G3.1.1.e. The zone is served by baseline system type 10.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -18733,7 +18682,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -18746,7 +18695,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -18811,7 +18759,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -18870,8 +18817,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "bb",
-        "test_description": "The project has one building segment with one floor and four zones with HVAC building area type = HEATED_ONLY_STORAGE.  Building area is 20,000 sf.  Thermal Zone 1 is a warehouse with a heating-only system.  Thermal Zones 2,3&4 are office with HVAC Sys-4  Expected result: pass",
+        "test_description": "The project located in climate zone 1A has one 20,000 ft2 building segment with four zones on one floor. It is a heated-only storage building area type where Thermal Zone 1 is a warehouse space type and all other zones are office space types. Thermal Zone 1 is served by baseline system type 10 and all other zones are served by baseline system type 4.",
         "expected_rule_outcome": "pass",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -18882,7 +18830,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -18895,7 +18843,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -19085,7 +19032,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -19279,8 +19225,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "bc",
-        "test_description": "The project has one building segment with one floor and four zones with HVAC building area type = HEATED_ONLY_STORAGE.  Building area is 20,000 sf.  Thermal Zone 1 is a warehouse with a heating-only system.  Thermal Zones 2,3&4 are office.  Only thermal zones 3&4 have HVAC Sys-3.  Thermal Zone 2 is incorrectly modeled with Sys-9 in the baseline despite having a DX coil in the proposed model  Expected result: fail",
+        "test_description": "The project located in climate zone 1A has one 20,000 ft2 building segment with four zones on one floor. It is a heated-only storage building area type where Thermal Zone 1 is a warehouse space type and all other zones are office space types. Thermal Zone 1 is incorrectly modeled with baseline system type 10 in the baseline despite having a DX coil in the proposed model and all other zones are served by baseline system type 3.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -19291,7 +19238,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -19304,7 +19251,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -19498,7 +19444,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -19692,8 +19637,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "bd",
-        "test_description": "The project has one building segment with one floor and four zones with HVAC building area type = OTHER NON RESIDENTIAL.  Predominant HVAC type is System 7.  Building area is 160,000 sf.  Thermal Zone 1 has a lighting space type COMPUTER_ROOM with a peak cooling load greater than 650,000btu/hr and has HVAC system type 11.  Expected result: pass",
+        "test_description": "The project located in climate zone 4A has one 160,000 ft2 building segment with four zones on one floor. It is an \"Other nonresidential\" building area type and Thermal Zone 1 is a computer room with a peak cooling load greater than 600,000btu/hr. Thermal Zone 1 is served by a baseline system type 11 and all other zones are served by baseline system type 7.",
         "expected_rule_outcome": "pass",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -19704,7 +19650,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -19717,7 +19663,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -19926,7 +19871,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -20181,8 +20125,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "be",
-        "test_description": "The project has one building segment with one floor and four zones with HVAC building area type = OTHER NON RESIDENTIAL.  Predominant HVAC type is System 7.  Building area is 160,000 sf.  Thermal Zone 1 has a lighting space type COMPUTER_ROOM,peak cooling load of 650,000btu/hr and is on the System 7.  Expected result: fail",
+        "test_description": "The project located in climate zone 4A has one 160,000 ft2 building segment with four zones on one floor. It is an \"Other nonresidential\" building area type and Thermal Zone 1 is a computer room with a peak cooling load greater than 600,000btu/hr. All zones are served by baseline system type 7.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -20193,7 +20138,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -20206,7 +20151,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -20389,7 +20333,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -20570,6 +20513,37 @@
                                 ]
                             }
                         ],
+                        "schedules": [
+                            {
+                                "id": "Misc Equip Mul Sch",
+                                "hourly_cooling_design_day": [
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0
+                                ]
+                            }
+                        ],
                         "type": "BASELINE_0"
                     }
                 ],
@@ -20583,8 +20557,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "bf",
-        "test_description": "The project has one building segment with one floor and four zones with HVAC building area type = OTHER NON RESIDENTIAL.  Predominant HVAC type is System 5.  Building area is 120,000 sf.  Thermal Zone 1 has a lighting space type COMPUTER_ROOM with a peak cooling load greater than 3,000,000btu/hr and has HVAC system type 11.  Expected result: pass",
+        "test_description": "The project located in climate zone 4A has one 120,000 ft2 building segment with four zones on one floor. It is an \"Other nonresidential\" building area type and Thermal Zone 1 is a computer room with a peak cooling load greater than 3,000,000 Btu/hr. Thermal Zone 1 is served by baseline system type 11 and all other zones are served by baseline system type 5.",
         "expected_rule_outcome": "pass",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -20595,7 +20570,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -20608,7 +20583,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -20816,7 +20790,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -21070,8 +21043,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "bg",
-        "test_description": "The project has one building segment with one floor and four zones with HVAC building area type = OTHER NON RESIDENTIAL.  Predominant HVAC type is System 5.  Building area is 120,000 sf.  Thermal Zone 1 has a lighting space type COMPUTER_ROOM with a peak cooling load greater than 3,000,000btu/hr and is incorrectly  modeled as being on the predominant hvac system 5.  Expected result: fail",
+        "test_description": "The project located in climate zone 4A has one 120,000 ft2 building segment with four zones on one floor. It is an \"Other nonresidential\" building area type and Thermal Zone 1 is a computer room with a peak cooling load greater than 3,000,000 Btu/hr. All zones are served by baseline system type 5.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -21082,7 +21056,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -21095,7 +21069,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -21251,7 +21224,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -21453,8 +21425,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "bh",
-        "test_description": "The project has one building segment with one floor and four zones with HVAC building area type = OTHER NON RESIDENTIAL.  Predominant HVAC type is System 5.  Building area is 120,000 sf.  Thermal Zone 1 has a lighting space type COMPUTER_ROOM with a peak cooling load less than 3,000,000btu/hr and is modeled as being on the predominant hvac system 5.  Expected result: pass",
+        "test_description": "The project located in climate zone 4A has one 120,000 ft2 building segment with four zones on one floor. It is an \"Other nonresidential\" building area type and Thermal Zone 1 is a computer room with a peak cooling load less than 3,000,000 Btu/hr. All zones are served by baseline system type 5.",
         "expected_rule_outcome": "pass",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -21465,7 +21438,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -21478,7 +21451,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -21634,7 +21606,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -21836,8 +21807,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "bi",
-        "test_description": "The project has one building segment with one floor and four zones in climate zone 4A with HVAC building area type = OTHER NON RESIDENTIAL.  Predominant HVAC type is System 7.  Building area is 160,000 sf.  Thermal Zone 1 has a lighting space type COMPUTER_ROOM,peak cooling load of less than 650,000btu/hr and has HVAC system type 3.  Expected result: pass",
+        "test_description": "The project located in climate zone 4A has one 160,000 ft2 building segment with four zones on one floor. It is an \"Other nonresidential\" building area type and Thermal Zone 1 is a computer room with a peak cooling load less than 600,000 Btu/hr. Thermal Zone 1 is served by baseline system type 3 and all other zones are served by baseline system type 7.",
         "expected_rule_outcome": "pass",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -21848,7 +21820,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -21861,7 +21833,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -22044,7 +22015,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -22273,8 +22243,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "bj",
-        "test_description": "The project has one building segment with one floor and four zones in climate zone 1A with HVAC building area type = OTHER NON RESIDENTIAL.  Predominant HVAC type is System 7.  Building area is 160,000 sf.  Thermal Zone 1 has a lighting space type COMPUTER_ROOM,peak cooling load of less than 650,000btu/hr and has HVAC system type 4.  Expected result: pass",
+        "test_description": "The project located in climate zone 1A has one 160,000 ft2 building segment with four zones on one floor. It is an \"Other nonresidential\" building area type and Thermal Zone 1 is a computer room with a peak cooling load less than 600,000 Btu/hr. All zones are served by baseline system type 8.",
         "expected_rule_outcome": "pass",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -22285,7 +22256,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -22298,7 +22269,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -22496,7 +22466,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -22736,8 +22705,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "bk",
-        "test_description": "The project has one building segment with one floor and four zones in climate zone 4A with HVAC building area type = OTHER NON RESIDENTIAL.  Predominant HVAC type is System 7.  Building area is 160,000 sf.  Thermal Zone 1 has a lighting space type COMPUTER_ROOM,peak cooling load of less than 650,000btu/hr and has HVAC system type 3.  Expected result: fail",
+        "test_description": "The project located in climate zone 4A has one 160,000 ft2 building segment with four zones on one floor. It is an \"Other nonresidential\" building area type and Thermal Zone 1 is a computer room with a peak cooling load less than 600,000 Btu/hr. Thermal Zone 1 is served by baseline system type 4 and all other zones are served by baseline system type 7.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -22748,7 +22718,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -22761,7 +22731,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -22969,7 +22938,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -23175,6 +23143,37 @@
                                 ]
                             }
                         ],
+                        "schedules": [
+                            {
+                                "id": "Misc Equip Mul Sch",
+                                "hourly_cooling_design_day": [
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0
+                                ]
+                            }
+                        ],
                         "type": "BASELINE_0"
                     }
                 ],
@@ -23188,8 +23187,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "bl",
-        "test_description": "The project has one building segment with one floor and four zones in climate zone 4A with HVAC building area type = OTHER NON RESIDENTIAL.  Building area is 20,000 sf.  The buidling is modeled with each zone having its own HVAC system type 3.  Expected result: pass",
+        "test_description": "The project located in climate zone 4A has one 20,000 ft2 building segment with four zones on one floor. It is an \"Other nonresidential\" building area type and all zones are served by baseline system type 3.",
         "expected_rule_outcome": "pass",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -23200,7 +23200,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -23213,7 +23213,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -23417,7 +23416,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -23625,8 +23623,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "bm",
-        "test_description": "The project has one building segment with one floor and four zones in climate zone 4A with HVAC building area type = OTHER NON RESIDENTIAL.  Building area is 20,000 sf.  The buidling is modeled incorrectly with all zones being served by one HVAC system type 3.  Expected result: pass",
+        "test_description": "The project located in climate zone 4A has one 20,000 ft2 building segment with four zones on one floor. It is an \"Other nonresidential\" building area type and all zones are served by baseline system type 3.",
         "expected_rule_outcome": "pass",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -23637,7 +23636,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -23650,7 +23649,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -23854,7 +23852,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -24062,8 +24059,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "bn",
-        "test_description": "The project has one building segment with one floor and four zones in climate zone 4A with HVAC building area type = OTHER NON RESIDENTIAL.  Building area is 160,000 sf.  The buidling is modeled with each floor having its own HVAC system type 7.  Expected result: pass",
+        "test_description": "The project located in climate zone 4A has one 160,000 ft2 building segment with four zones on one floor. It is an \"Other nonresidential\" building area type and all zones are served by baseline system type 7.",
         "expected_rule_outcome": "pass",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -24074,7 +24072,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -24087,7 +24085,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -24303,7 +24300,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -24527,8 +24523,9 @@
         "Section": 18,
         "Rule": 1,
         "Test": "bo",
-        "test_description": "The project has one building segment with one floor and four zones in climate zone 4A with HVAC building area type = OTHER NON RESIDENTIAL.  Building area is 160,000 sf.  The buidling is modeled incorrectly with one HVAC System 9 serving all zones.  Expected result: fail",
+        "test_description": "The project located in climate zone 4A has one 160,000 ft2 building segment with four zones on one floor. It is an \"Other nonresidential\" building area type and all zones are served by baseline system type 9.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "was selected based on",
         "standard": {
             "rule_id": "18-1",
             "ruleset_reference": 0,
@@ -24539,7 +24536,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -24552,7 +24549,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -24752,7 +24748,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -24956,7 +24951,7 @@
         "Section": 18,
         "Rule": 2,
         "Test": "a",
-        "test_description": "The project has one building segment with one floor and four zones in climate zone 4A with HVAC building area type = RESIDENTIAL.  The building is correctly modeled with Separate HVAC System 1 serving each zone.  Expected result: pass",
+        "test_description": "The project located in climate zone 4A has one 160,000 ft2 building segment with four zones on one floor. It is a residential building area type and each zone is served by a dedicated baseline system type 1.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-2",
@@ -24968,7 +24963,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -24981,7 +24976,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -25182,7 +25176,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -25386,7 +25379,7 @@
         "Section": 18,
         "Rule": 2,
         "Test": "b",
-        "test_description": "The project has one building segment with one floor and four zones in climate zone 4A with HVAC building area type = RESIDENTIAL.  The building is incorrectly modeled with multiple zones served by HVAC System 1a.  Expected result: fail",
+        "test_description": "The project located in climate zone 4A has one 160,000 ft2 building segment with four zones on one floor. It is a residential building area type and Thermal Zone 1 unexpectedly shares a baseline system with Thermal Zone 4.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "18-2",
@@ -25398,7 +25391,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -25411,7 +25404,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -25596,7 +25588,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -25784,7 +25775,7 @@
         "Section": 18,
         "Rule": 2,
         "Test": "c",
-        "test_description": "The project has one building segment with one floor and four zones in climate zone 1A with HVAC building area type = RETAIL.  The building is correctly modeled with one HVAC system 4 serving each zone.  Expected result: pass",
+        "test_description": "The project located in climate zone 1A has one 160,000 ft2 building segment with two zones on each of two floors. It is a retail building area type and each zone is served by a dedicated baseline system type 4.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-2",
@@ -25796,7 +25787,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -25809,7 +25800,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -26013,7 +26003,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -26070,7 +26059,7 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP Thermal Zone 3"
                                                     }
                                                 ],
-                                                "floor_name": "flr2"
+                                                "floor_name": "flr 2"
                                             },
                                             {
                                                 "id": "Thermal Zone 4",
@@ -26220,7 +26209,7 @@
         "Section": 18,
         "Rule": 2,
         "Test": "d",
-        "test_description": "The project has one building segment with one floor and four zones in climate zone 1A with HVAC building area type = RETAIL.  The building is incorrectly modeled with one HVAC system 5b per floor.  Expected result: fail",
+        "test_description": "The project located in climate zone 1A has one 160,000 ft2 building segment with two zones on each of two floors. It is a retail building area type and the zones are served by a basline system per floor, rather than dedicated systems per zone.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "18-2",
@@ -26232,7 +26221,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -26245,7 +26234,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -26424,7 +26412,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -26487,7 +26474,7 @@
                                                         "heating_from_loop": "Purchased HW Loop 1"
                                                     }
                                                 ],
-                                                "floor_name": "flr2"
+                                                "floor_name": "flr 2"
                                             },
                                             {
                                                 "id": "Thermal Zone 4",
@@ -26606,7 +26593,7 @@
         "Section": 18,
         "Rule": 2,
         "Test": "e",
-        "test_description": "The project has one building segment with one floor and four zones in climate zone 4A with HVAC building area type = OTHER_NON_RESIDENTIAL.  The building area is 50,000 sf.  The building is correctly modeled with one HVAC system 5 per floor.  Expected result: pass",
+        "test_description": "The project located in climate zone 4A has one 50,000 ft2 building segment with two zones on each of two floors. It is an \"Other nonresidential\" building area type and zones are served by a baseline system type 5 per floor.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-2",
@@ -26618,7 +26605,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -26631,7 +26618,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -26819,7 +26805,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -26882,7 +26867,7 @@
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
                                                 ],
-                                                "floor_name": "flr2"
+                                                "floor_name": "flr 2"
                                             },
                                             {
                                                 "id": "Thermal Zone 4",
@@ -27010,7 +26995,7 @@
         "Section": 18,
         "Rule": 2,
         "Test": "f",
-        "test_description": "The project has one building segment with one floor and four zones in climate zone 4A with HVAC building area type = OTHER_NON_RESIDENTIAL.  The building area is 50,000 sf.  The building is incorrectly modeled with one HVAC system for the whole building.  Expected result: fail",
+        "test_description": "The project located in climate zone 4A has one 50,000 ft2 building segment with two zones on each of two floors. It is an \"Other nonresidential\" building area type and zones are served by a single baseline system.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "18-2",
@@ -27022,7 +27007,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -27035,7 +27020,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -27183,7 +27167,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -27246,7 +27229,7 @@
                                                         "heating_from_loop": "Purchased HW Loop 1"
                                                     }
                                                 ],
-                                                "floor_name": "flr2"
+                                                "floor_name": "flr 2"
                                             },
                                             {
                                                 "id": "Thermal Zone 4",
@@ -27334,7 +27317,7 @@
         "Section": 18,
         "Rule": 2,
         "Test": "g",
-        "test_description": "The project has one building segment with one floor and four zones in climate zone 4A with HVAC building area type = OTHER_NON_RESIDENTIAL.  The building area is 50,000 sf.  The building has two laboratory zones with a total lab exhaust rate of 16,000 cfm.  The two exhaust zones are correctly served by one System 5 HVAC system.  The other two zones are each served by a System 5 HVAC system (one per floor).  Expected result: pass",
+        "test_description": "The project located in climate zone 4A has one 50,000 ft2 building segment with two zones on each of two floors. It is an \"Other nonresidential\" building area type and Thermal Zone 1 and 2 are laboratory spaces with a total zonal exhaust rate greater than 15,000 cfm. The two laboratory zones are served by a single baseline system type 5 and the other two zones are each served by a baseline system type 5 (one per floor). ",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-2",
@@ -27346,7 +27329,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -27359,7 +27342,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -27579,7 +27561,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -27628,7 +27609,7 @@
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
                                                 ],
-                                                "floor_name": "flr2"
+                                                "floor_name": "flr 2"
                                             },
                                             {
                                                 "id": "Thermal Zone 3",
@@ -27808,7 +27789,7 @@
         "Section": 18,
         "Rule": 2,
         "Test": "h",
-        "test_description": "The project has one building segment with one floor and four zones with HVAC building area type = OTHER NON RESIDENTIAL.  Building area is 160,000 sf.  Thermal Zones 1 and 2 are type Laboratory with total 16,000 cfm of zone exhaust.  Each zone is incorrectly modeled with its own dedicated HVAC system type 7.  Expected result: fail",
+        "test_description": "The project located in climate zone 1A has one 160,000 ft2 building segment with four zones on one floor. It is an \"Other nonresidential\" building area type and Thermal Zone 1 and 2 are laboratory spaces with a total zonal exhaust rate greater than 15,000 cfm. Each zone is served by a dedicated baseline system type 7.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "18-2",
@@ -27820,7 +27801,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -27833,7 +27814,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -28115,7 +28095,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -28402,11 +28381,11 @@
             }
         }
     },
-    "rule-18-2-h.1": {
+    "rule-18-2-i": {
         "Section": 18,
         "Rule": 2,
-        "Test": "h",
-        "test_description": "The project has one building segment with one floor and four zones in climate zone 4A with HVAC building area type = OTHER_NON_RESIDENTIAL.  The building area is 50,000 sf.  The building has two laboratory zones with a total lab exhaust rate of 12,000 cfm.  The two exhaust zones are served by one System 5 HVAC system.  The other two zones are each served by a System 5 HVAC system (one per floor).  We expect an undetermined result because with a lab exhaust rate of 12,000 cfm, and 4,000cfm of system exhaust, it is not possible to tell if there is more than 15,000cfm of lab exhaust.  Expected result: undetermined",
+        "Test": "i",
+        "test_description": "The project located in climate zone 4A has one 50,000 ft2 building segment with two zones on each of two floors. It is an \"Other nonresidential\" building area type and Thermal Zone 1 and 2 are laboratory spaces with a total zonal exhaust rate less than 15,000 cfm but 4,000 cfm of central system exhaust. It cannot be determined if the building has a total laboratory exhaust rate greater than 15,000 cfm.",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "18-2",
@@ -28418,7 +28397,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -28431,7 +28410,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -28651,7 +28629,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -28882,11 +28859,11 @@
             }
         }
     },
-    "rule-18-2-i": {
+    "rule-18-2-j": {
         "Section": 18,
         "Rule": 2,
-        "Test": "i",
-        "test_description": "The project has one building segment with one floor and four zones with HVAC building area type = OTHER NON RESIDENTIAL.  Building area is 160,000 sf.  Thermal Zones 1 and 2 are type Laboratory with total 12,000 cfm of zone exhaust.  The building is modeled with one HVAC system 7b per floor and incorrectly with one HVAC system 7 for the Laboratory zones.  Expected result: fail",
+        "Test": "j",
+        "test_description": "The project located in climate zone 1A has one 160,000 ft2 building segment with two zones on each of two floors. It is an \"Other nonresidential\" building area type and Thermal Zone 1 and 2 are laboratory spaces with a total zonal exhaust rate less than 15,000 cfm. The two laboratory zones are served by a single baseline system type 7 and the other zones are each served by a baseline system type 7 (one per floor).",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "18-2",
@@ -28898,7 +28875,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -28911,7 +28888,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -29150,7 +29126,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -29398,7 +29373,7 @@
         "Section": 18,
         "Rule": 3,
         "Test": "a",
-        "test_description": "The project has one building segment with one floor and four zones with HVAC building area type = OTHER NON RESIDENTIAL.  Building area is 160,000 sf.  Thermal Zones 1 and 2 are type Laboratory with total 16,000 cfm of zone exhaust.  Expected result: undetermined",
+        "test_description": "The project located in climate zone 1A has one 160,000 ft2 building segment with four zones on one floor. It is an \"Other nonresidential\" building area type and Thermal Zone 1 and 2 are laboratory spaces with a total zonal exhaust rate greater than 15,000 cfm.",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "18-3",
@@ -29410,7 +29385,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -29423,7 +29398,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -29618,7 +29592,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -29822,7 +29795,7 @@
         "Section": 18,
         "Rule": 3,
         "Test": "b",
-        "test_description": "The project has one building segment with one floor and four zones with HVAC building area type = OTHER NON RESIDENTIAL.  Building area is 160,000 sf.  Thermal Zones 1 and 2 are type Laboratory with total 8,000 cfm of zone exhaust.  Expected result: not applicable",
+        "test_description": "The project located in climate zone 1A has one 160,000 ft2 building segment with four zones on one floor. It is an \"Other nonresidential\" building area type and Thermal Zone 1 and 2 are laboratory spaces with a total zonal exhaust rate less than 15,000 cfm and no central system exhaust could possibly contribute to this total.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "18-3",
@@ -29834,7 +29807,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -29847,7 +29820,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -30042,7 +30014,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -30246,7 +30217,7 @@
         "Section": 18,
         "Rule": 3,
         "Test": "c",
-        "test_description": "The project has one building segment with one floor and four zones with HVAC building area type = OTHER NON RESIDENTIAL.  Building area is 160,000 sf.  Thermal Zones 1 and 2 are NOT type Laboratory with total 16,000 cfm of zone exhaust.  Expected result: not applicable",
+        "test_description": "The project located in climate zone 1A has one 160,000 ft2 building segment with four zones on one floor. It is an \"Other nonresidential\" building area type. Thermal Zone 1 and 2 have a total zonal exhaust rate greater than 15,000 cfm but have no laboratory spaces.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "18-3",
@@ -30258,7 +30229,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -30271,7 +30242,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -30466,7 +30436,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
