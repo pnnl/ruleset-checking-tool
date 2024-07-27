@@ -5,6 +5,7 @@
         "Test": "a",
         "test_description": "Project has one building segment and includes a space with a roof surface and a skylight. The building is located in climate zone 4A, the space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. The skylight uses manually controlled dynamic shading, and the average SHGC and VT cannot be determined.",
         "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "SUBSURFACE INCLUDES MANUALLY CONTROLLED DYNAMIC GLAZING IN THE PROPOSED DESIGN. VERIFY THAT SHGC AND VT WERE MODELED AS THE AVERAGE OF THE MINIMUM AND MAXIMUM SHGC AND VT.",
         "standard": {
             "rule_id": "5-18",
             "ruleset_reference": "Table G3.1(5) Proposed Building Performance (a)",
@@ -15,7 +16,7 @@
             "primary_rule": "Applicability",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "RPD 1",
                 "weather": {
@@ -113,7 +114,7 @@
             "primary_rule": "Applicability",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "RPD 1",
                 "weather": {
