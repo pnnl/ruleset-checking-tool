@@ -3,7 +3,7 @@
         "Section": 10,
         "Rule": 7,
         "Test": "a",
-        "test_description": "A one story building utilizes system 3. The capacity is undefined and the COP of the system matches the most conservative cooling value of Table G3.5.1 (COP = 3.6). Expected: PASS",
+        "test_description": "A one story building includes a baseline system 3. The capacity is undefined and the cooling efficiency of the system matches the most conservative cooling efficiency from Table G3.5.1.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "10-7",
@@ -15,7 +15,7 @@
             "mandatory_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "calendar": {
@@ -99,7 +99,7 @@
         "Section": 10,
         "Rule": 7,
         "Test": "b",
-        "test_description": "A one story building utilizes system 4. The capacity is undefined and the COP of the system matches the most conservative cooling value of Table G3.5.2 (COP = 3.6). Expected: PASS",
+        "test_description": "A one story building includes a baseline system 4. The capacity is undefined and the cooling efficiency of the system matches the most conservative cooling efficiency from Table G3.5.2.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "10-7",
@@ -111,7 +111,7 @@
             "mandatory_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "calendar": {
@@ -195,7 +195,7 @@
         "Section": 10,
         "Rule": 7,
         "Test": "c",
-        "test_description": "A one story building utilizes system 4. The cooling capacity is 150 kBtu/hr and the cooling COP of the system matches the capacity range for Table G3.5.2 (COP = 3.2). Expected: PASS",
+        "test_description": "A one story building includes a baseline system 4. The cooling capacity is 150 kBtu/hr and the cooling efficiency of the system matches the expected efficiency based on the capacity range from Table G3.5.2.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "10-7",
@@ -207,7 +207,7 @@
             "mandatory_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "calendar": {
@@ -250,7 +250,7 @@
                                                 "cooling_system": {
                                                     "id": "Cooling Sys - Thermal Zone 1",
                                                     "type": "DIRECT_EXPANSION",
-                                                    "rated_total_cool_capacity": 43960.666666666664,
+                                                    "design_total_cool_capacity": 43960.666666666664,
                                                     "efficiency_metric_values": [
                                                         3.2
                                                     ],
@@ -292,8 +292,9 @@
         "Section": 10,
         "Rule": 7,
         "Test": "d",
-        "test_description": "A one story building utilizes system 4. The capacity is undefined and the COP of the system does not match the most conservative cooling value of Table G3.5.2 (COP = 3.4). Expected: UNDETERMINED",
-        "expected_rule_outcome": "undetermined",
+        "test_description": "A one story building includes a baseline system 4. The cooling capacity is undefined and the cooling efficiency of the system does not match the most conservative cooling efficiency from Table G3.5.2.",
+        "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "The cooling capacity of the system could not be determined. Check if the modeled baseline DX cooling efficiency was established correctly based upon equipment capacity and type while accounting for the potential aggregation of zones.",
         "standard": {
             "rule_id": "10-7",
             "ruleset_reference": "G3.1.2.1",
@@ -304,7 +305,7 @@
             "mandatory_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "calendar": {
@@ -388,7 +389,7 @@
         "Section": 10,
         "Rule": 7,
         "Test": "e",
-        "test_description": "A two story building utilizes system 5. The system serves more than 1 floor and is therefore not applicable Expected: NOT APPLICABLE",
+        "test_description": "A two story building includes a baseline system 5. The system serves more than 1 floor.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "10-7",
@@ -400,7 +401,7 @@
             "mandatory_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "calendar": {
