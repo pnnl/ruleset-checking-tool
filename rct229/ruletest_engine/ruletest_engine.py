@@ -166,13 +166,9 @@ def process_test_result(test_result, test_dict, test_id):
         elif test_result == "fail":
             outcome_text = f"FAILURE: Test {test_id} failed unexpectedly. Expected '{expected_result}'. The following condition was not identified: {description}"
         elif test_result == "undetermined":
-            outcome_text = (
-                f"FAILURE: Test {test_id} returned 'undetermined' unexpectedly. Expected '{expected_result}'."
-            )
+            outcome_text = f"FAILURE: Test {test_id} returned 'undetermined' unexpectedly. Expected '{expected_result}'."
         elif test_result == "not_applicable":
-            outcome_text = (
-                f"FAILURE: Test {test_id} returned 'not_applicable' unexpectedly.  Expected '{expected_result}'."
-            )
+            outcome_text = f"FAILURE: Test {test_id} returned 'not_applicable' unexpectedly.  Expected '{expected_result}'."
         else:
             outcome_text = (
                 f"FAILURE: Test {test_id} returned '{test_result}' unexpectedly"
@@ -325,8 +321,10 @@ def run_section_tests(test_json_name: str, ruleset_doc: RuleSet):
                 case _:
                     rule_outcome = test_dict["expected_rule_outcome"]
                     # Print message communicating that a rule cannot be found
-                    print(f"RULE OUTCOME NOT FOUND: {rule_outcome} is not a valid rule outcome. Expected 'pass', 'fail',"
-                          f"'undetermined' or 'not_applicable'.")
+                    print(
+                        f"RULE OUTCOME NOT FOUND: {rule_outcome} is not a valid rule outcome. Expected 'pass', 'fail',"
+                        f"'undetermined' or 'not_applicable'."
+                    )
                     test_error_found = True
 
             # If errors were found, communicate the error logs
