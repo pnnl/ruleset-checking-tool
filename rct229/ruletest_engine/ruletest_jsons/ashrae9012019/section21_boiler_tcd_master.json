@@ -3,8 +3,9 @@
         "Section": 21,
         "Rule": 1,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones. A baseline system 7 with purchased hot water in both the proposed and baseline model. This requires a manual check. EXPECTED: Undetermined",
+        "test_description": "The project has one building segment with two zones. The zones are served by a baseline system type 7 with purchased hot water in both the proposed and baseline model.",
         "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "Manual Check Required - Proposed is modeled with purchased hot water or steam.  Make sure the heating source in the baseline building is also purchased hot water or steam.",
         "standard": {
             "rule_id": "21-1",
             "ruleset_reference": "G3.1.1.3",
@@ -15,7 +16,7 @@
             "primary_rule": "Applicability",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -278,8 +279,9 @@
         "Section": 21,
         "Rule": 1,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones. A baseline system 7 with a conventional boiler and not purchased hot water in both the proposed and baseline model. This does not apply. EXPECTED: not_applicable",
+        "test_description": "The project has one building segment with two zones. The zones are served by a baseline system type 7 with a conventional boiler (not purchased hot water) in both the proposed and baseline model.",
         "expected_rule_outcome": "not_applicable",
+        "expected_raised_message_includes": "Rule 21-1 Not Applicable - the proposed is not modeled with Purchased Hot Water or Steam",
         "standard": {
             "rule_id": "21-1",
             "ruleset_reference": "G3.1.1.3",
@@ -290,7 +292,7 @@
             "primary_rule": "Applicability",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -553,8 +555,9 @@
         "Section": 21,
         "Rule": 2,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones. A baseline system 7 with purchased hot water in both the proposed and baseline model. This requires a manual check. EXPECTED: Undetermined",
+        "test_description": "The project has one building segment with two zones. The zones are served by a baseline system type 7 with purchased hot water in both the proposed and baseline model.",
         "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "Manual Check Required - Proposed is modeled with purchased hot water or steam.  Make sure the baseline model uses the same number of pumps for the heating loop.",
         "standard": {
             "rule_id": "21-2",
             "ruleset_reference": "G3.1.1.3.4",
@@ -565,7 +568,7 @@
             "primary_rule": "Applicability",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -828,8 +831,9 @@
         "Section": 21,
         "Rule": 2,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones. A baseline system 7 with a conventional boiler and not purchased hot water in both the proposed and baseline model. This does not apply. EXPECTED: not_applicable",
+        "test_description": "The project has one building segment with two zones. The zones are served by a baseline system type 7 with a conventional boiler (not purchased hot water) in both the proposed and baseline model.",
         "expected_rule_outcome": "not_applicable",
+        "expected_raised_message_includes": "Rule 21-2 Not Applicable - the proposed is not modeled with Purchased Hot Water or Steam",
         "standard": {
             "rule_id": "21-2",
             "ruleset_reference": "G3.1.1.3.4",
@@ -840,7 +844,7 @@
             "primary_rule": "Applicability",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -1103,7 +1107,7 @@
         "Section": 21,
         "Rule": 3,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones.  Space conditioning is provided by system type 7 with boiler.  The baseline building's hot water system's sizing is based on coincident loads.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a boiler. The baseline building's hot water system sizing is based on coincident loads.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-3",
@@ -1115,7 +1119,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -1254,7 +1258,7 @@
         "Section": 21,
         "Rule": 3,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones.  Space conditioning is provided by system type 7 with boiler.  The baseline building's hot water system's sizing is NOT based on coincident loads.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a boiler. The baseline building's hot water system sizing is not based on coincident loads.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-3",
@@ -1266,7 +1270,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -1405,7 +1409,7 @@
         "Section": 21,
         "Rule": 3,
         "Test": "c",
-        "test_description": "The project has one building segment with two zones.  Space conditioning is provided by system type 5 with boiler.  The baseline building's hot water system's sizing is based on coincident loads.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 5 with a boiler. The baseline building's hot water system sizing is based on coincident loads.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-3",
@@ -1417,7 +1421,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -1529,7 +1533,7 @@
         "Section": 21,
         "Rule": 3,
         "Test": "d",
-        "test_description": "The project has one building segment with two zones.  Space conditioning is provided by system type 5 with boiler.  The baseline building's hot water system's sizing is NOT based on coincident loads.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 5 with a boiler. The baseline building's hot water system sizing is not based on coincident loads.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-3",
@@ -1541,7 +1545,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -1653,7 +1657,7 @@
         "Section": 21,
         "Rule": 3,
         "Test": "e",
-        "test_description": "The project has one building segment with one zone.  Space conditioning is provided by system type 2.  Expected result: UNDETERMINED",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 2. There are no plant systems.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-3",
@@ -1665,7 +1669,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -1730,7 +1734,7 @@
         "Section": 21,
         "Rule": 4,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones.  Space conditioning is provided by system type 7 with boiler and is correctly modeled with a natural draft boiler.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a natural draft boiler.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-4",
@@ -1742,7 +1746,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -1878,7 +1882,7 @@
         "Section": 21,
         "Rule": 4,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones.  Space conditioning is provided by system type 7 with boiler and is incorrectly modeled with a forced draft boiler.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a forced boiler.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-4",
@@ -1890,7 +1894,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -2026,7 +2030,7 @@
         "Section": 21,
         "Rule": 4,
         "Test": "c",
-        "test_description": "The project has one building segment with one zone.  Space conditioning is provided by system type 11.2 with boiler and is correctly modeled with a natural draft boiler.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 11 with a natural draft boiler.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-4",
@@ -2038,7 +2042,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -2157,7 +2161,7 @@
         "Section": 21,
         "Rule": 4,
         "Test": "d",
-        "test_description": "The project has one building segment with one zone.  Space conditioning is provided by system type 11.2 with boiler and is incorrectly modeled with a forced draft boiler.  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 11 with a forced draft boiler.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-4",
@@ -2169,7 +2173,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -2288,7 +2292,7 @@
         "Section": 21,
         "Rule": 4,
         "Test": "e",
-        "test_description": "The project has one building segment with one zone.  Space conditioning is provided by system type 3 with no hot water loops.  Expected result: NOT APPLICABLE",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 3. There are no boilers.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-4",
@@ -2300,7 +2304,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -2370,7 +2374,7 @@
         "Section": 21,
         "Rule": 5,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones and two spaces.  Building is 12,000 ft2, has baseline system type 7 and is correctly modeled with a hot water Loop with a single boiler. Expected result: PASS",
+        "test_description": "The project has one 12,000 ft2 building segment with two zones and two spaces. The zones are served by a baseline system type 7 with a single boiler.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-5",
@@ -2382,7 +2386,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -2535,7 +2539,7 @@
         "Section": 21,
         "Rule": 5,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones and two spaces.  Building is 12,000 ft2, has baseline system type 7 and is incorrectly modeled with a hot water Loop with two boilers. Expected result: FAIL",
+        "test_description": "The project has one 12,000 ft2 building segment with two zones and two spaces. The zones are served by a baseline system type 7 with two boilers.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-5",
@@ -2547,7 +2551,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -2705,7 +2709,7 @@
         "Section": 21,
         "Rule": 5,
         "Test": "c",
-        "test_description": "The project has one building segment with one zone and one space.  Building is  24,000 ft2, has baseline system type 12 and is correctly modeled with a hot water Loop with two equally sized boiler(s). Expected result: PASS",
+        "test_description": "The project has one 24,000 ft2 building segment with one zone and one space. The zone is served by a baseline system type 12 with two equally sized boilers.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-5",
@@ -2717,7 +2721,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -2852,7 +2856,7 @@
         "Section": 21,
         "Rule": 5,
         "Test": "d",
-        "test_description": "The project has one building segment with one zone and one space.  Building is  24,000 ft2, has baseline system type 12 and is incorrectly modeled with a hot water Loop with two unequally sized boiler(s). Expected result: FAIL",
+        "test_description": "The project has one 24,000 ft2 building segment with one zone and one space. The zone is served by a baseline system type 12 with two unequally sized boilers.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-5",
@@ -2864,7 +2868,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -2999,7 +3003,7 @@
         "Section": 21,
         "Rule": 5,
         "Test": "e",
-        "test_description": "The project has one building segment with one zone and one space.  Building is 24,000 ft2, has baseline system type 12 and is incorrectly modeled with a hot water Loop with one boiler. Expected result: FAIL",
+        "test_description": "The project has one 24,000 ft2 building segment with one zone and one space. The zone is served by a baseline system type 12 with one boiler.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-5",
@@ -3011,7 +3015,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -3141,7 +3145,7 @@
         "Section": 21,
         "Rule": 5,
         "Test": "f",
-        "test_description": "The project has one building segment with one zone and one space.  Building is 24,000 ft2, has baseline system type 4.  Expected result: Not Applicable",
+        "test_description": "The project has one 24,000 ft2 building segment with one zone and one space. The zone is served by a baseline system type 4. There are no boilers.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-5",
@@ -3153,7 +3157,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -3232,7 +3236,7 @@
         "Section": 21,
         "Rule": 6,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones and two spaces.  Baseline ruleset project description has utilizes system 7 with two boilers staged based on load. Boiler 1 is staged before Boiler 2.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with two boilers which are staged based on load. Boiler 1 is staged before Boiler 2.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-6",
@@ -3244,7 +3248,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -3401,7 +3405,7 @@
         "Section": 21,
         "Rule": 6,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones and two spaces.  Baseline ruleset project description has utilizes system 7 with two boilers staged based on load. Boiler 2 is staged before Boiler 1.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with two boilers which are staged based on load. Boiler 2 is staged before Boiler 1.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-6",
@@ -3413,7 +3417,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -3570,7 +3574,7 @@
         "Section": 21,
         "Rule": 6,
         "Test": "c",
-        "test_description": "The project has one building segment with two zones.  Baseline ruleset project description has utilizes system 7 with two boilers is not staged based on load. Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with two boilers which are not staged based on load.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-6",
@@ -3582,7 +3586,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -3727,7 +3731,7 @@
         "Section": 21,
         "Rule": 6,
         "Test": "d",
-        "test_description": "The project has one building segment with one zone and two spaces.  Baseline ruleset project description has utilizes system 1 with two boilers staged based on load. Boiler 1 is staged before Boiler 2.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 1 with two boilers which are staged based on load. Boiler 1 is staged before Boiler 2.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-6",
@@ -3739,7 +3743,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -3843,7 +3847,7 @@
         "Section": 21,
         "Rule": 6,
         "Test": "e",
-        "test_description": "The project has one building segment with one zone and two spaces.  Baseline ruleset project description has utilizes system 1 with two boilers staged based on load. Boiler 2 is staged before Boiler 1.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 1 with two boilers which are staged based on load. Boiler 2 is staged before Boiler 1.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-6",
@@ -3855,7 +3859,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -3959,7 +3963,7 @@
         "Section": 21,
         "Rule": 6,
         "Test": "f",
-        "test_description": "The project has one building segment with one zone.  Baseline ruleset project description has utilizes system 1 with two boilers is not staged based on load. Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 1 with two boilers which are not staged based on load.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-6",
@@ -3971,7 +3975,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -4060,7 +4064,7 @@
         "Section": 21,
         "Rule": 6,
         "Test": "g",
-        "test_description": "The project has one building segment with two zones.  Baseline ruleset project description has utilizes system 6. Expected result: NOT APPLICABLE",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 6. There are no boilers.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-6",
@@ -4072,7 +4076,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -4165,7 +4169,7 @@
         "Section": 21,
         "Rule": 7,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones.  Baseline ruleset project description utilizes system 7 with supply and return temperatures correctly set to 180 F and 130 F respectively. Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The hot water supply temperature is 180 F and the hot water return temperature is 130 F.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-7",
@@ -4177,7 +4181,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -4317,7 +4321,7 @@
         "Section": 21,
         "Rule": 7,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones.  Baseline ruleset project description has utilizes system 7 with supply and return temperatures incorrectly set to 200 F and correctly set to 130 F respectively. Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The hot water supply temperature is 200 F and the hot water return temperature is 130 F.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-7",
@@ -4329,7 +4333,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -4469,7 +4473,7 @@
         "Section": 21,
         "Rule": 7,
         "Test": "c",
-        "test_description": "The project has one building segment with two zones.  Baseline ruleset project description has utilizes system 7 with supply and return temperatures correctly set to 180 F and inccorectly to 150 F respectively.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The hot water supply temperature is 180 F and the hot water return temperature is 150 F.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-7",
@@ -4481,7 +4485,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -4621,7 +4625,7 @@
         "Section": 21,
         "Rule": 7,
         "Test": "d",
-        "test_description": "The project has one building segment with two zones.  Baseline ruleset project description utilizes system 5 with supply and return temperatures correctly set to 180 F and 130 F respectively. Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 5 with a hot water loop. The hot water supply temperature is 180 F and the hot water return temperature is 130 F.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-7",
@@ -4633,7 +4637,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -4746,7 +4750,7 @@
         "Section": 21,
         "Rule": 7,
         "Test": "e",
-        "test_description": "The project has one building segment with two zones.  Baseline ruleset project description has utilizes system 5 with supply and return temperatures incorrectly set to 200 F and correctly set to 130 F respectively. Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 5 with a hot water loop. The hot water supply temperature is 200 F and the hot water return temperature is 130 F.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-7",
@@ -4758,7 +4762,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -4871,7 +4875,7 @@
         "Section": 21,
         "Rule": 7,
         "Test": "f",
-        "test_description": "The project has one building segment with two zones.  Baseline ruleset project description has utilizes system 5 with supply and return temperatures correctly set to 180 F and inccorectly to 150 F respectively.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 5 with a hot water loop. The hot water supply temperature is 180 F and the hot water return temperature is 150 F.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-7",
@@ -4883,7 +4887,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -4996,7 +5000,7 @@
         "Section": 21,
         "Rule": 7,
         "Test": "g",
-        "test_description": "The project has one building segment with two zones.  Baseline ruleset project description has utilizes system 5b.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 5 with a purchased hot water loop. The prescibed hot water supply and return temperatures are not applicable.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-7",
@@ -5008,7 +5012,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -5116,7 +5120,7 @@
         "Section": 21,
         "Rule": 8,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones. Baseline System 7's boiler has outdoor air temperature based supply temperature reset. Hot water temperatures are at 150 F when temperature are high, and 180 F when they are low. High outdoor air temperature set to 50F and low outdoor air temperature set to 20 F. Expected Result: Pass",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The hot water loop supply temperature is reset based on the prescribed outdoor air dry-bulb temperature reset schedule.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-8",
@@ -5128,7 +5132,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -5271,7 +5275,7 @@
         "Section": 21,
         "Rule": 8,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones. Baseline System 5's boiler has outdoor air temperature based supply temperature reset. Hot water temperatures are at 150 F when temperature are high, and 180 F when they are low. High outdoor air temperature set to 50F and low outdoor air temperature set to 20 F. Expected Result: Pass",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 5 with a hot water loop. The hot water loop supply temperature is reset based on the prescribed outdoor air dry-bulb temperature reset schedule.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-8",
@@ -5283,7 +5287,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -5399,7 +5403,7 @@
         "Section": 21,
         "Rule": 8,
         "Test": "c",
-        "test_description": "The project has one building segment with two zones. Baseline System 7's boiler has outdoor air temperature based supply temperature reset. Hot water temperatures are at 160 F when temperature are high, and 190 F when they are low. High outdoor air temperature set to 50F and low outdoor air temperature set to 20 F. Expected Result: Fail",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The hot water loop supply temperature is reset based on the incorrect outdoor air dry-bulb temperature reset schedule.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-8",
@@ -5411,7 +5415,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -5554,7 +5558,7 @@
         "Section": 21,
         "Rule": 8,
         "Test": "d",
-        "test_description": "The project has one building segment with two zones. Baseline System 5's boiler has outdoor air temperature based supply temperature reset. Hot water temperatures are at 160 F when temperature are high, and 190 F when they are low. High outdoor air temperature set to 50F and low outdoor air temperature set to 20 F. Expected Result: Fail",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 5 with a hot water loop. The hot water loop supply temperature is reset based on the incorrect outdoor air dry-bulb temperature reset schedule.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-8",
@@ -5566,7 +5570,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -5682,7 +5686,7 @@
         "Section": 21,
         "Rule": 9,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones.  Baseline ruleset project description utilizes system 7 with total pump power per flow rate correctly set to 19 W/gpm.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The hot water loop pump power is 19 W/gpm.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-9",
@@ -5694,7 +5698,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -5830,7 +5834,7 @@
         "Section": 21,
         "Rule": 9,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones.  Baseline ruleset project description utilizes system 7 with total pump power per flow rate incorrectly set to 21 W/gpm. Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The hot water loop pump power is 21 W/gpm.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-9",
@@ -5842,7 +5846,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -5978,7 +5982,7 @@
         "Section": 21,
         "Rule": 9,
         "Test": "c",
-        "test_description": "The project has one building segment with one zone.  Baseline ruleset project description utilizes system 1a with total pump power per flow rate correctly set to 19 W/gpm.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 1 with a hot water loop. The hot water loop pump power is 19 W/gpm.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-9",
@@ -5990,7 +5994,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -6074,7 +6078,7 @@
         "Section": 21,
         "Rule": 9,
         "Test": "d",
-        "test_description": "The project has one building segment with one zone.  Baseline ruleset project description utilizes system 1a with total pump power per flow rate incorrectly set to 21 W/gpm. Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 1 with a hot water loop. The hot water loop pump power is 21 W/gpm.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-9",
@@ -6086,7 +6090,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -6170,7 +6174,7 @@
         "Section": 21,
         "Rule": 9,
         "Test": "e",
-        "test_description": "The project has one building segment with one zone.  Baseline ruleset project description utilizes system 1b. Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 1 with a purchased hot water loop.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-9",
@@ -6182,7 +6186,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -6261,7 +6265,7 @@
         "Section": 21,
         "Rule": 10,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones and two spaces.  Baseline ruleset project description has hot water plant with the hot water pump that serves a total of 100,000 ft2 floor area. The pump's speed control value is correctly set to FIXED_SPEED.  Expected result: PASS",
+        "test_description": "The project has one 100,000 ft2 building segment with two zones served by a baseline system type 7 with a hot water loop. The hot water pump speed control is fixed-speed (riding the pump curve).",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-10",
@@ -6273,7 +6277,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -6420,7 +6424,7 @@
         "Section": 21,
         "Rule": 10,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones and two spaces.  Baseline ruleset project description has hot water plant with the hot water pump that serves a total of 100,000 ft2 floor area. The pump's speed control value is incorrectly set to VARIABLE_SPEED.  Expected result: FAIL",
+        "test_description": "The project has one 100,000 ft2 building segment with two zones served by a baseline system type 7 with a hot water loop. The hot water pump speed control is variable-speed.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-10",
@@ -6432,7 +6436,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -6579,7 +6583,7 @@
         "Section": 21,
         "Rule": 10,
         "Test": "c",
-        "test_description": "The project has one building segment with one zone and one space.  Baseline ruleset project description has hot water plant with the hot water pump that serves a total of 140,000 ft2 floor area. The pump's speed control value is correctly set to VARIABLE_SPEED.  Expected result: PASS",
+        "test_description": "The project has one 140,000 ft2 building segment with one zone served by a baseline system type 11 with a hot water loop. The hot water pump speed control is variable-speed.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-10",
@@ -6591,7 +6595,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -6705,7 +6709,7 @@
         "Section": 21,
         "Rule": 10,
         "Test": "d",
-        "test_description": "The project has one building segment with one zone and one space.  Baseline ruleset project description has hot water plant with the hot water pump that serves a total of 140,000 ft2 floor area. The pump's speed control value is incorrectly set to FIXED_SPEED.  Expected result: FAIL",
+        "test_description": "The project has one 140,000 ft2 building segment with one zone served by a baseline system type 11 with a hot water loop. The hot water pump speed control is fixed-speed.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-10",
@@ -6717,7 +6721,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -6831,7 +6835,7 @@
         "Section": 21,
         "Rule": 10,
         "Test": "e",
-        "test_description": "The project has one building segment with two zones and one space.  Baseline ruleset project description system type 8  Expected result: Not Appicable",
+        "test_description": "The project has one 140,000 ft2 building segment with two zones served by a baseline system type 8. There is no hot water loop.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-10",
@@ -6843,7 +6847,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -6867,7 +6871,6 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "heating_source": "ELECTRIC",
-                                                        "heating_from_loop": "Boiler Loop 1",
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
                                                         "fan": {
@@ -6894,7 +6897,6 @@
                                                         "heating_source": "ELECTRIC",
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
-                                                        "heating_from_loop": "Boiler Loop 1",
                                                         "fan": {
                                                             "id": "Fan 2"
                                                         },
@@ -6935,13 +6937,6 @@
                                 ]
                             }
                         ],
-                        "boilers": [
-                            {
-                                "id": "Boiler 1",
-                                "loop": "Boiler Loop 1",
-                                "energy_source_type": "NATURAL_GAS"
-                            }
-                        ],
                         "chillers": [
                             {
                                 "id": "Chiller 1",
@@ -6949,11 +6944,6 @@
                             }
                         ],
                         "pumps": [
-                            {
-                                "id": "Boiler Pump 1",
-                                "loop_or_piping": "Boiler Loop 1",
-                                "speed_control": "FIXED_SPEED"
-                            },
                             {
                                 "id": "Chiller Pump 1",
                                 "loop_or_piping": "Chiller Loop 1",
@@ -6966,10 +6956,6 @@
                             }
                         ],
                         "fluid_loops": [
-                            {
-                                "id": "Boiler Loop 1",
-                                "type": "HEATING"
-                            },
                             {
                                 "id": "Chiller Loop 1",
                                 "type": "COOLING",
@@ -6991,19 +6977,19 @@
         "Section": 21,
         "Rule": 11,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 7 with child loop value correctly set to null.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The hot water loop configuration is primary-only.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-11",
             "ruleset_reference": "G3.1.3.5",
-            "rule_description": "When the baseline building users boiler(s) or purchased hot water, the HW loop shall be modeled as primary only",
+            "rule_description": "When the baseline building uses boiler(s) or purchased hot water, the HW loop shall be modeled as primary only",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -7138,19 +7124,19 @@
         "Section": 21,
         "Rule": 11,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 7 with child loop incorrectly referencing to  FluidLoop 2. Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The hot water loop configuration is primary-secondary.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-11",
             "ruleset_reference": "G3.1.3.5",
-            "rule_description": "When the baseline building users boiler(s) or purchased hot water, the HW loop shall be modeled as primary only",
+            "rule_description": "When the baseline building uses boiler(s) or purchased hot water, the HW loop shall be modeled as primary only",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -7291,19 +7277,19 @@
         "Section": 21,
         "Rule": 11,
         "Test": "c",
-        "test_description": "The project has one building segment with one zone. Baseline ruleset project description has system 12a with child loop value correctly set to null.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 12 with a hot water loop. The hot water loop configuration is primary-only.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-11",
             "ruleset_reference": "G3.1.3.5",
-            "rule_description": "When the baseline building users boiler(s) or purchased hot water, the HW loop shall be modeled as primary only",
+            "rule_description": "When the baseline building uses boiler(s) or purchased hot water, the HW loop shall be modeled as primary only",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -7411,19 +7397,19 @@
         "Section": 21,
         "Rule": 11,
         "Test": "d",
-        "test_description": "The project has one building segment with one zone. Baseline ruleset project description has system 12a with child loop incorrectly referencing to  FluidLoop 2. Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 12 with a hot water loop. The hot water loop configuration is primary-secondary.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-11",
             "ruleset_reference": "G3.1.3.5",
-            "rule_description": "When the baseline building users boiler(s) or purchased hot water, the HW loop shall be modeled as primary only",
+            "rule_description": "When the baseline building uses boiler(s) or purchased hot water, the HW loop shall be modeled as primary only",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -7537,19 +7523,19 @@
         "Section": 21,
         "Rule": 11,
         "Test": "e",
-        "test_description": "The project has one building segment with one zone. Baseline ruleset project description has system 10. Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 10. There is no hot water loop.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-11",
             "ruleset_reference": "G3.1.3.5",
-            "rule_description": "When the baseline building users boiler(s) or purchased hot water, the HW loop shall be modeled as primary only",
+            "rule_description": "When the baseline building uses boiler(s) or purchased hot water, the HW loop shall be modeled as primary only",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -7606,7 +7592,7 @@
         "Section": 21,
         "Rule": 12,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 7 with flow control and operation correctly. Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The loop has continuous operation with variable flow control.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-12",
@@ -7618,7 +7604,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -7758,7 +7744,7 @@
         "Section": 21,
         "Rule": 12,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 7 with flow control specified correctly, and operation incorrectly.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The loop has intermittent operation with variable flow control.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-12",
@@ -7770,7 +7756,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -7910,7 +7896,7 @@
         "Section": 21,
         "Rule": 12,
         "Test": "c",
-        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 7 with flow control specified incorrectly, and operation correctly.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The loop has continuous operation with fixed flow control.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-12",
@@ -7922,7 +7908,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -8062,7 +8048,7 @@
         "Section": 21,
         "Rule": 12,
         "Test": "d",
-        "test_description": "The project has one building segment with one zone. Baseline ruleset project description has system 1b with flow control and operation correctly. Expected result: PASS",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 1 with a hot water loop. The loop has continuous operation with variable flow control.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-12",
@@ -8074,7 +8060,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -8158,7 +8144,7 @@
         "Section": 21,
         "Rule": 12,
         "Test": "e",
-        "test_description": "The project has one building segment with one zone. Baseline ruleset project description has system 1b with flow control specified correctly, and operation incorrectly.  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 1 with a hot water loop. The loop has intermittent operation with variable flow control.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-12",
@@ -8170,7 +8156,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -8254,7 +8240,7 @@
         "Section": 21,
         "Rule": 12,
         "Test": "f",
-        "test_description": "The project has one building segment with one zone. Baseline ruleset project description has system 1b with flow control specified incorrectly, and operation correctly.  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 1 with a hot water loop. The loop has continuous operation with fixed flow control.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-12",
@@ -8266,7 +8252,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -8350,7 +8336,7 @@
         "Section": 21,
         "Rule": 12,
         "Test": "g",
-        "test_description": "The project has one building segment with one zone. Baseline ruleset project description has system 9.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 9. There is no hot water loop.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-12",
@@ -8362,7 +8348,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -8429,7 +8415,7 @@
         "Section": 21,
         "Rule": 13,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 7 with heating design and control's minimum flow fraction correctly set to 0.25.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The hot water loop minimum turndown ratio is 0.25.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-13",
@@ -8441,7 +8427,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -8580,7 +8566,7 @@
         "Section": 21,
         "Rule": 13,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 7 with heating design and control's minimum flow fraction incorrectly set to 0.30. Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The hot water loop minimum turndown ratio is 0.30.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-13",
@@ -8592,7 +8578,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -8731,7 +8717,7 @@
         "Section": 21,
         "Rule": 13,
         "Test": "c",
-        "test_description": "The project has one building segment with one zone. Baseline ruleset project description has system 3b with heating design and control's minimum flow fraction correctly set to 0.25.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 3 with a purchased hot water loop. The purchased hot water loop minimum turndown ratio is 0.25.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-13",
@@ -8743,7 +8729,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -8831,7 +8817,7 @@
         "Section": 21,
         "Rule": 13,
         "Test": "d",
-        "test_description": "The project has one building segment with one zone. Baseline ruleset project description has system 3b with heating design and control's minimum flow fraction incorrectly set to 0.30. Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 3 with a purchased hot water loop. The purchased hot water loop minimum turndown ratio is 0.30.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-13",
@@ -8843,7 +8829,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -8931,7 +8917,7 @@
         "Section": 21,
         "Rule": 13,
         "Test": "e",
-        "test_description": "The project has one building segment with one zone. Baseline ruleset project description has system 11.1a. Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 11 with electric reisistance heating. There is no hot water loop.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-13",
@@ -8943,7 +8929,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -9034,7 +9020,7 @@
         "Section": 21,
         "Rule": 16,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 7 correctly modeled with a single heating loop.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7. The project has a single heating hot water plant.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-16",
@@ -9046,7 +9032,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -9181,7 +9167,7 @@
         "Section": 21,
         "Rule": 16,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 7 incorrectly modeled with more than one heating loop.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7. The project has more than one heating hot water plant.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-16",
@@ -9193,7 +9179,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -9332,7 +9318,7 @@
         "Section": 21,
         "Rule": 16,
         "Test": "c",
-        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 5b correctly modeled with a single heating loop.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 5 with purchased hot water. The project has a single heating hot water loop.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-16",
@@ -9344,7 +9330,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -9452,7 +9438,7 @@
         "Section": 21,
         "Rule": 16,
         "Test": "d",
-        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 5b incorrectly modeled with more than one heating loop.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 5 with purchased hot water. The project has more than one heating hot water loop.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-16",
@@ -9464,7 +9450,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -9576,7 +9562,7 @@
         "Section": 21,
         "Rule": 16,
         "Test": "e",
-        "test_description": "The project has one building segment with one zone. Baseline ruleset project description has system 11.1.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 11 with electric resistance heating. There is no hot water loop.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-16",
@@ -9588,7 +9574,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -9689,7 +9675,7 @@
         "Section": 21,
         "Rule": 17,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 7 with < 300 kBtu/hr, has AFUE equal to 80% as per Tables G3.5.6.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The baseline boiler efficiency matches the prescibed efficiency based on the capacity range in table G3.5.6.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-17",
@@ -9701,7 +9687,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -9839,7 +9825,7 @@
         "Section": 21,
         "Rule": 17,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 7 with < 300 kBtu/hr, has AFUE equal to 80% as per Tables G3.5.6, BUT efficiency_metric is incorrect.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The baseline boiler efficiency metric does not match the prescibed efficiency based on the capacity range in table G3.5.6.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-17",
@@ -9851,7 +9837,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -9989,7 +9975,7 @@
         "Section": 21,
         "Rule": 17,
         "Test": "c",
-        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 7 with < 300 kBtu/hr, AFUE does not equal 80% as per Tables G3.5.6.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The baseline boiler efficiency does not match the prescibed efficiency based on the capacity range in table G3.5.6.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-17",
@@ -10001,7 +9987,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -10139,7 +10125,7 @@
         "Section": 21,
         "Rule": 17,
         "Test": "d",
-        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 7 with greater than 300 kBtu/hr but less than 2,500 kBtu/hr, has thermal efficiency equal to 75% as per Tables G3.5.6.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The baseline boiler efficiency matches the prescibed efficiency based on the capacity range in table G3.5.6.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-17",
@@ -10151,7 +10137,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -10289,7 +10275,7 @@
         "Section": 21,
         "Rule": 17,
         "Test": "e",
-        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 7 with greater than 300 kBtu/hr but less than 2,500 kBtu/hr, has thermal efficiency equal to 75% as per Tables G3.5.6, BUT efficiency_metric incorrect.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The baseline boiler efficiency metric does not match the prescibed efficiency based on the capacity range in table G3.5.6.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-17",
@@ -10301,7 +10287,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -10439,7 +10425,7 @@
         "Section": 21,
         "Rule": 17,
         "Test": "f",
-        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 7 with greater than 300 kBtu/hr but less than 2,500 kBtu/hr, thermal efficiency does not equal 75% as per Tables G3.5.6.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The baseline boiler efficiency does not match the prescibed efficiency based on the capacity range in table G3.5.6.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-17",
@@ -10451,7 +10437,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -10589,7 +10575,7 @@
         "Section": 21,
         "Rule": 17,
         "Test": "g",
-        "test_description": "The project has one building segment with one zone. Baseline ruleset project description has system 12a with greater than 2,500 kBtu/hr, has combustion efficiency equal to 80% as per Tables G3.5.6. Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 12 with a hot water loop. The baseline boiler efficiency matches the prescibed efficiency based on the capacity range in table G3.5.6.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-17",
@@ -10601,7 +10587,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -10712,7 +10698,7 @@
         "Section": 21,
         "Rule": 17,
         "Test": "h",
-        "test_description": "The project has one building segment with one zone. Baseline ruleset project description has system 12a with greater than 2,500 kBtu/hr, has combustion efficiency equal to 80% as per Tables G3.5.6, BUT efficiency_metric incorrect. Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 12 with a hot water loop. The baseline boiler efficiency metric does not match the prescibed efficiency based on the capacity range in table G3.5.6.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-17",
@@ -10724,7 +10710,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -10835,7 +10821,7 @@
         "Section": 21,
         "Rule": 17,
         "Test": "i",
-        "test_description": "The project has one building segment with one zone. Baseline ruleset project description has system 12a with greater than 2,500 kBtu/hr, combustion efficiency does not equal 80% as per Tables G3.5.6. Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 12 with a hot water loop. The baseline boiler efficiency does not match the prescibed efficiency based on the capacity range in table G3.5.6.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-17",
@@ -10847,7 +10833,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -10954,11 +10940,11 @@
             }
         }
     },
-    "rule-21-17-i.1": {
+    "rule-21-17-j": {
         "Section": 21,
         "Rule": 17,
-        "Test": "i",
-        "test_description": "The project has one building segment with one zone. Baseline ruleset project description has system 12b. Expected result: Not Applicable",
+        "Test": "j",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 12 with a purchased hot water loop. There are no boilers",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-17",
@@ -10970,7 +10956,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -11003,9 +10989,9 @@
                                             {
                                                 "id": "System 12",
                                                 "heating_system": {
-                                                    "id": "Boiler Coil 1",
+                                                    "id": "HHW Coil 1",
                                                     "type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1"
+                                                    "hot_water_loop": "Purchased HW Loop 1"
                                                 },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
@@ -11024,7 +11010,7 @@
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
                                                     "type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chilled Water Loop 1"
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
                                                 }
                                             }
                                         ]
@@ -11032,40 +11018,50 @@
                                 ]
                             }
                         ],
-                        "boilers": [
+                        "chillers": [
                             {
-                                "id": "Boiler 1",
-                                "loop": "Boiler Loop 1",
-                                "energy_source_type": "NATURAL_GAS"
+                                "id": "Chiller 1",
+                                "cooling_loop": "Chiller Loop 1"
                             }
                         ],
                         "external_fluid_sources": [
                             {
-                                "id": "Purchased CW 1",
-                                "loop": "Chilled Water Loop 1",
-                                "type": "CHILLED_WATER"
+                                "id": "Purchased HW 1",
+                                "loop": "Purchased HW Loop 1",
+                                "type": "HOT_WATER"
                             }
                         ],
                         "pumps": [
                             {
-                                "id": "Boiler Pump 1",
-                                "loop_or_piping": "Boiler Loop 1",
+                                "id": "HW Pump 1",
+                                "loop_or_piping": "Purchased HW Loop 1",
                                 "speed_control": "FIXED_SPEED"
                             },
                             {
-                                "id": "CHW Pump 1",
-                                "loop_or_piping": "Chilled Water Loop 1",
+                                "id": "Chiller Pump 1",
+                                "loop_or_piping": "Chiller Loop 1",
                                 "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
                             }
                         ],
                         "fluid_loops": [
                             {
-                                "id": "Boiler Loop 1",
+                                "id": "Purchased HW Loop 1",
                                 "type": "HEATING"
                             },
                             {
-                                "id": "Chilled Water Loop 1",
-                                "type": "COOLING"
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
+                                    }
+                                ]
                             }
                         ],
                         "type": "BASELINE_0"
@@ -11078,7 +11074,7 @@
         "Section": 21,
         "Rule": 18,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones. System 7 is correctly modeled with a natural gas boiler.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The hot water boiler uses natural gas as the fuel source.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-18",
@@ -11090,7 +11086,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -11225,7 +11221,7 @@
         "Section": 21,
         "Rule": 18,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones. System 7 is incorrectly modeld an electric boiler.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The hot water boiler uses electricity as the fuel source.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-18",
@@ -11237,7 +11233,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -11372,7 +11368,7 @@
         "Section": 21,
         "Rule": 18,
         "Test": "c",
-        "test_description": "The project has one building segment with two zones. A purchased hot water system does not have an applicable fuel type.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a purchased hot water loop. There are no boilers.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-18",
@@ -11384,7 +11380,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -11405,9 +11401,12 @@
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
-                                                        "id": "Terminal 1",
-                                                        "is_supply_ducted": false,
-                                                        "served_by_heating_ventilating_air_conditioning_system": "AHU_HW_System1"
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Purchased HW Loop 1",
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             },
@@ -11417,25 +11416,53 @@
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
-                                                        "id": "Terminal 2",
-                                                        "is_supply_ducted": false,
-                                                        "served_by_heating_ventilating_air_conditioning_system": "AHU_HW_System1"
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "heating_source": "HOT_WATER",
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "heating_from_loop": "Purchased HW Loop 1"
                                                     }
                                                 ]
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "AHU_HW_System1",
-                                                "heating_system": {
-                                                    "id": "HHW Coil 1",
+                                                "id": "System 7",
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
                                                     "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Purchased HW Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                },
+                                                "cooling_system": {
+                                                    "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
                                                 }
                                             }
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "chillers": [
+                            {
+                                "id": "Chiller 1",
+                                "cooling_loop": "Chiller Loop 1"
                             }
                         ],
                         "external_fluid_sources": [
@@ -11445,13 +11472,37 @@
                                 "type": "HOT_WATER"
                             }
                         ],
+                        "pumps": [
+                            {
+                                "id": "HW Pump 1",
+                                "loop_or_piping": "Purchased HW Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Chiller Pump 1",
+                                "loop_or_piping": "Chiller Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
+                            }
+                        ],
                         "fluid_loops": [
                             {
                                 "id": "Purchased HW Loop 1",
-                                "type": "HEATING",
-                                "heating_design_and_control": {
-                                    "id": "DAC 1"
-                                }
+                                "type": "HEATING"
+                            },
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
+                                    }
+                                ]
                             }
                         ],
                         "type": "BASELINE_0"
@@ -11464,8 +11515,9 @@
         "Section": 21,
         "Rule": 18,
         "Test": "d",
-        "test_description": "The project has one building segment with two zones. System 7 is modeld a propane boiler.  Expected result: Undetermined",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The hot water boiler uses propane as the fuel source.",
         "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "Basline boiler fuel source is modeled as propane. Verify if natural gas is not available for the proposed building site as determined by the rating authority.",
         "standard": {
             "rule_id": "21-18",
             "ruleset_reference": "G3.1.2.1",
@@ -11476,7 +11528,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -11611,7 +11663,7 @@
         "Section": 21,
         "Rule": 18,
         "Test": "e",
-        "test_description": "The project has one building segment with one zone. System 1 is correctly modeled with a natural gas boiler.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 1 with a hot water loop. The hot water boiler uses natural gas as the fuel source.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-18",
@@ -11623,7 +11675,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -11702,7 +11754,7 @@
         "Section": 21,
         "Rule": 18,
         "Test": "f",
-        "test_description": "The project has one building segment with one zone. System 1 is incorrectly modeld an electric boiler.  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 1 with a hot water loop. The hot water boiler uses electricity as the fuel source.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-18",
@@ -11714,7 +11766,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -11793,7 +11845,7 @@
         "Section": 21,
         "Rule": 18,
         "Test": "g",
-        "test_description": "The project has one building segment with one zone. System 1c Expected Result: Not Applicable",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 1 with a purchased hot water loop. There are no boilers.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-18",
@@ -11805,7 +11857,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
