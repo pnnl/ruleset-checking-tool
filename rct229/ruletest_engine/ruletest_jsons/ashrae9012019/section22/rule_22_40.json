@@ -8,14 +8,14 @@
         "standard": {
             "rule_id": "22-40",
             "ruleset_reference": "Section G3.1.1.1 & G3.1.1.3.1",
-            "rule_description": "For systems using purchased chilled water, the cooling source shall be modeled based on G3.1.1.3 as purchased chilled water in both the proposed design and baseline building design. On-site chillers and direct expansion equipment shall not be modeled in the baseline building design.",
+            "rule_description": "Chilled water loops that use purchased chilled water in the proposed design shall also use purchased chilled water in the baseline. On-site chillers and direct expansion equipment shall not be modeled in the baseline.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -259,14 +259,14 @@
         "standard": {
             "rule_id": "22-40",
             "ruleset_reference": "Section G3.1.1.1 & G3.1.1.3.1",
-            "rule_description": "For systems using purchased chilled water, the cooling source shall be modeled based on G3.1.1.3 as purchased chilled water in both the proposed design and baseline building design. On-site chillers and direct expansion equipment shall not be modeled in the baseline building design.",
+            "rule_description": "Chilled water loops that use purchased chilled water in the proposed design shall also use purchased chilled water in the baseline. On-site chillers and direct expansion equipment shall not be modeled in the baseline.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -318,7 +318,7 @@
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
                                                     "type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chilled Water Loop 1"
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
@@ -352,12 +352,6 @@
                                 "energy_source_type": "NATURAL_GAS"
                             }
                         ],
-                        "chillers": [
-                            {
-                                "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1"
-                            }
-                        ],
                         "pumps": [
                             {
                                 "id": "Boiler Pump 1",
@@ -365,8 +359,8 @@
                                 "speed_control": "FIXED_SPEED"
                             },
                             {
-                                "id": "Chiller Pump 1",
-                                "loop_or_piping": "Chiller Loop 1",
+                                "id": "Chilled Water Pump",
+                                "loop_or_piping": "Chilled Water Loop 1",
                                 "speed_control": "FIXED_SPEED"
                             },
                             {
@@ -487,12 +481,6 @@
                                 "energy_source_type": "NATURAL_GAS"
                             }
                         ],
-                        "chillers": [
-                            {
-                                "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1"
-                            }
-                        ],
                         "pumps": [
                             {
                                 "id": "Boiler Pump 1",
@@ -526,6 +514,12 @@
                                 ]
                             }
                         ],
+                        "chillers": [
+                            {
+                                "id": "Chiller 1",
+                                "cooling_loop": "Chiller Loop 1"
+                            }
+                        ],
                         "type": "BASELINE_0"
                     }
                 ]
@@ -541,14 +535,14 @@
         "standard": {
             "rule_id": "22-40",
             "ruleset_reference": "Section G3.1.1.1 & G3.1.1.3.1",
-            "rule_description": "For systems using purchased chilled water, the cooling source shall be modeled based on G3.1.1.3 as purchased chilled water in both the proposed design and baseline building design. On-site chillers and direct expansion equipment shall not be modeled in the baseline building design.",
+            "rule_description": "Chilled water loops that use purchased chilled water in the proposed design shall also use purchased chilled water in the baseline. On-site chillers and direct expansion equipment shall not be modeled in the baseline.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -627,6 +621,12 @@
                                 "id": "Purchased CW 1",
                                 "loop": "Chilled Water Loop 1",
                                 "type": "CHILLED_WATER"
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Chilled Water Pump",
+                                "loop_or_piping": "Chilled Water Loop 1"
                             }
                         ],
                         "type": "PROPOSED"
@@ -716,14 +716,14 @@
         "standard": {
             "rule_id": "22-40",
             "ruleset_reference": "Section G3.1.1.1 & G3.1.1.3.1",
-            "rule_description": "For systems using purchased chilled water, the cooling source shall be modeled based on G3.1.1.3 as purchased chilled water in both the proposed design and baseline building design. On-site chillers and direct expansion equipment shall not be modeled in the baseline building design.",
+            "rule_description": "Chilled water loops that use purchased chilled water in the proposed design shall also use purchased chilled water in the baseline. On-site chillers and direct expansion equipment shall not be modeled in the baseline.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",

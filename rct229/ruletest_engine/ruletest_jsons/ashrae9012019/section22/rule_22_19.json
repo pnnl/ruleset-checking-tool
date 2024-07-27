@@ -3,19 +3,19 @@
         "Section": 22,
         "Rule": 19,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and HeatRejection is correctly modeled with the temperature reset type CONSTANT. Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a cooling tower.  The cooling tower is controlled to maintain a constant leaving water temperature.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-19",
             "ruleset_reference": "G3.1.3.11",
-            "rule_description": "The baseline cooling tower shall be controlled to maintain a leaving water temperature, where weather permits, as specified in Table G3.1.3.11",
+            "rule_description": "The baseline cooling tower shall be controlled to maintain a constant leaving water temperature.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -164,19 +164,19 @@
         "Section": 22,
         "Rule": 19,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and HeatRejection is incorrectly modeled with the temperature reset type OUTSIDE_AIR_RESET.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a cooling tower.  The cooling tower is controlled to maintain a leaving water temperature that is reset based on outdoor air dry-bulb temperature.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-19",
             "ruleset_reference": "G3.1.3.11",
-            "rule_description": "The baseline cooling tower shall be controlled to maintain a leaving water temperature, where weather permits, as specified in Table G3.1.3.11",
+            "rule_description": "The baseline cooling tower shall be controlled to maintain a constant leaving water temperature.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -325,19 +325,19 @@
         "Section": 22,
         "Rule": 19,
         "Test": "c",
-        "test_description": "The project has one building segment with one zone.  HVAC is system type 12b and HeatRejection is correctly modeled with the temperature reset type CONSTANT. Expected result: PASS",
+        "test_description": "The project has one building segment with one zones served by a baseline system type 12 with a cooling tower.  The cooling tower is controlled to maintain a constant leaving water temperature.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-19",
             "ruleset_reference": "G3.1.3.11",
-            "rule_description": "The baseline cooling tower shall be controlled to maintain a leaving water temperature, where weather permits, as specified in Table G3.1.3.11",
+            "rule_description": "The baseline cooling tower shall be controlled to maintain a constant leaving water temperature.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -469,19 +469,19 @@
         "Section": 22,
         "Rule": 19,
         "Test": "d",
-        "test_description": "The project has one building segment with one zone.  HVAC is system type 12b and HeatRejection is incorrectly modeled with the temperature reset type OUTSIDE_AIR_RESET.  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 12 with a cooling tower.  The cooling tower is controlled to maintain a leaving water temperature that is reset based on outdoor air dry-bulb temperature.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-19",
             "ruleset_reference": "G3.1.3.11",
-            "rule_description": "The baseline cooling tower shall be controlled to maintain a leaving water temperature, where weather permits, as specified in Table G3.1.3.11",
+            "rule_description": "The baseline cooling tower shall be controlled to maintain a constant leaving water temperature.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -613,19 +613,19 @@
         "Section": 22,
         "Rule": 19,
         "Test": "e",
-        "test_description": "The project has one building segment with one zone.  HVAC is system type 11.2a.  Expected result: NOT APPLICABLE",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 11. There is no cooling tower.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-19",
             "ruleset_reference": "G3.1.3.11",
-            "rule_description": "The baseline cooling tower shall be controlled to maintain a leaving water temperature, where weather permits, as specified in Table G3.1.3.11",
+            "rule_description": "The baseline cooling tower shall be controlled to maintain a constant leaving water temperature.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",

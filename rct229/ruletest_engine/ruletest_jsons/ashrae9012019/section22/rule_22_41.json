@@ -8,14 +8,14 @@
         "standard": {
             "rule_id": "22-41",
             "ruleset_reference": "Section G3.1.3 System-Specific Baseline HVAC System Requirements",
-            "rule_description": "Purchased CHW systems must be modeled with only one external fluid loop in the baseline design.  ",
+            "rule_description": "Baseline chilled water systems that use purchased chilled water shall be modeled with a single chilled water loop.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "No",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -145,14 +145,14 @@
         "standard": {
             "rule_id": "22-41",
             "ruleset_reference": "Section G3.1.3 System-Specific Baseline HVAC System Requirements",
-            "rule_description": "Purchased CHW systems must be modeled with only one external fluid loop in the baseline design.  ",
+            "rule_description": "Baseline chilled water systems that use purchased chilled water shall be modeled with a single chilled water loop.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "No",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -287,14 +287,14 @@
         "standard": {
             "rule_id": "22-41",
             "ruleset_reference": "Section G3.1.3 System-Specific Baseline HVAC System Requirements",
-            "rule_description": "Purchased CHW systems must be modeled with only one external fluid loop in the baseline design.  ",
+            "rule_description": "Baseline chilled water systems that use purchased chilled water shall be modeled with a single chilled water loop.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "No",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",

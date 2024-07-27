@@ -8,14 +8,14 @@
         "standard": {
             "rule_id": "22-34",
             "ruleset_reference": "Section G3.1.2.2",
-            "rule_description": "For baseline cooling chilled water plant that is served by chiller(s), the capacity shall be based on coincident loads.",
+            "rule_description": "Baseline chilled water loops that do not use purchased chilled water shall have the plant equipment capacity sized based on coincident loads.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -159,14 +159,14 @@
         "standard": {
             "rule_id": "22-34",
             "ruleset_reference": "Section G3.1.2.2",
-            "rule_description": "For baseline cooling chilled water plant that is served by chiller(s), the capacity shall be based on coincident loads.",
+            "rule_description": "Baseline chilled water loops that do not use purchased chilled water shall have the plant equipment capacity sized based on coincident loads.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -310,14 +310,14 @@
         "standard": {
             "rule_id": "22-34",
             "ruleset_reference": "Section G3.1.2.2",
-            "rule_description": "For baseline cooling chilled water plant that is served by chiller(s), the capacity shall be based on coincident loads.",
+            "rule_description": "Baseline chilled water loops that do not use purchased chilled water shall have the plant equipment capacity sized based on coincident loads.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -463,14 +463,14 @@
         "standard": {
             "rule_id": "22-34",
             "ruleset_reference": "Section G3.1.2.2",
-            "rule_description": "For baseline cooling chilled water plant that is served by chiller(s), the capacity shall be based on coincident loads.",
+            "rule_description": "Baseline chilled water loops that do not use purchased chilled water shall have the plant equipment capacity sized based on coincident loads.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -616,14 +616,14 @@
         "standard": {
             "rule_id": "22-34",
             "ruleset_reference": "Section G3.1.2.2",
-            "rule_description": "For baseline cooling chilled water plant that is served by chiller(s), the capacity shall be based on coincident loads.",
+            "rule_description": "Baseline chilled water loops that do not use purchased chilled water shall have the plant equipment capacity sized based on coincident loads.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",

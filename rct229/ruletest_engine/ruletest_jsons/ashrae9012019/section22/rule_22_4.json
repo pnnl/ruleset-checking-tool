@@ -3,19 +3,19 @@
         "Section": 22,
         "Rule": 4,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is correctly modeled with outdoor air reset for chilled water loop supply temperature control.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water loop. The chilled water supply temperature is reset according to the prescribed outdoor air dry-bulb temperature reset schedule.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-4",
             "ruleset_reference": "G3.1.3.9",
-            "rule_description": "For baseline chilled water loop that is not purchased chilled water and does not serve any computer room HVAC systems, chilled-water supply temperature shall be reset using the following schedule: 44F at outdoor dry-bulb temperature of 80F and above, 54F at 60F and below, and ramped linearly between 44F and 54F at temperature between 80F and 60F.",
+            "rule_description": "Baseline chilled water loops that do not use purchased cooling and do not serve any computer rooms (baseline system type 11) shall have the chilled-water supply temperature reset using the following schedule: 44F at outdoor dry-bulb temperature of 80F and above, 54F at 60F and below, and ramped linearly between 44F and 54F at temperature between 80F and 60F.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -157,19 +157,19 @@
         "Section": 22,
         "Rule": 4,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is incorrectly modeled with incorrect value for outdoor_high_for_loop_supply_reset_temperature for chilled water loop supply temperature control.  Expected Result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water loop. The chilled water supply temperature is not reset according to the prescribed outdoor air dry-bulb temperature reset schedule.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-4",
             "ruleset_reference": "G3.1.3.9",
-            "rule_description": "For baseline chilled water loop that is not purchased chilled water and does not serve any computer room HVAC systems, chilled-water supply temperature shall be reset using the following schedule: 44F at outdoor dry-bulb temperature of 80F and above, 54F at 60F and below, and ramped linearly between 44F and 54F at temperature between 80F and 60F.",
+            "rule_description": "Baseline chilled water loops that do not use purchased cooling and do not serve any computer rooms (baseline system type 11) shall have the chilled-water supply temperature reset using the following schedule: 44F at outdoor dry-bulb temperature of 80F and above, 54F at 60F and below, and ramped linearly between 44F and 54F at temperature between 80F and 60F.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -311,19 +311,19 @@
         "Section": 22,
         "Rule": 4,
         "Test": "c",
-        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is incorrectly modeled with incorrect value for outdoor_low_for_loop_supply_reset_temperature for chilled water loop supply temperature control.  Expected Result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water loop. The chilled water supply temperature is not reset according to the prescribed outdoor air dry-bulb temperature reset schedule.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-4",
             "ruleset_reference": "G3.1.3.9",
-            "rule_description": "For baseline chilled water loop that is not purchased chilled water and does not serve any computer room HVAC systems, chilled-water supply temperature shall be reset using the following schedule: 44F at outdoor dry-bulb temperature of 80F and above, 54F at 60F and below, and ramped linearly between 44F and 54F at temperature between 80F and 60F.",
+            "rule_description": "Baseline chilled water loops that do not use purchased cooling and do not serve any computer rooms (baseline system type 11) shall have the chilled-water supply temperature reset using the following schedule: 44F at outdoor dry-bulb temperature of 80F and above, 54F at 60F and below, and ramped linearly between 44F and 54F at temperature between 80F and 60F.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -465,19 +465,19 @@
         "Section": 22,
         "Rule": 4,
         "Test": "d",
-        "test_description": "The project has one building segment with one zone.  HVAC is system type 12 and is correctly modeled with outdoor air reset for chilled water loop supply temperature control.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 12 with a chilled water loop. The chilled water supply temperature is reset according to the prescribed outdoor air dry-bulb temperature reset schedule.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-4",
             "ruleset_reference": "G3.1.3.9",
-            "rule_description": "For baseline chilled water loop that is not purchased chilled water and does not serve any computer room HVAC systems, chilled-water supply temperature shall be reset using the following schedule: 44F at outdoor dry-bulb temperature of 80F and above, 54F at 60F and below, and ramped linearly between 44F and 54F at temperature between 80F and 60F.",
+            "rule_description": "Baseline chilled water loops that do not use purchased cooling and do not serve any computer rooms (baseline system type 11) shall have the chilled-water supply temperature reset using the following schedule: 44F at outdoor dry-bulb temperature of 80F and above, 54F at 60F and below, and ramped linearly between 44F and 54F at temperature between 80F and 60F.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -602,19 +602,19 @@
         "Section": 22,
         "Rule": 4,
         "Test": "e",
-        "test_description": "The project has one building segment with one zone.  HVAC is system type 12 and is incorrectly modeled with incorrect value for loop_supply_temperature_at_outdoor_high for chilled water loop supply temperature control.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 12 with a chilled water loop. The chilled water supply temperature is not reset according to the prescribed outdoor air dry-bulb temperature reset schedule.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-4",
             "ruleset_reference": "G3.1.3.9",
-            "rule_description": "For baseline chilled water loop that is not purchased chilled water and does not serve any computer room HVAC systems, chilled-water supply temperature shall be reset using the following schedule: 44F at outdoor dry-bulb temperature of 80F and above, 54F at 60F and below, and ramped linearly between 44F and 54F at temperature between 80F and 60F.",
+            "rule_description": "Baseline chilled water loops that do not use purchased cooling and do not serve any computer rooms (baseline system type 11) shall have the chilled-water supply temperature reset using the following schedule: 44F at outdoor dry-bulb temperature of 80F and above, 54F at 60F and below, and ramped linearly between 44F and 54F at temperature between 80F and 60F.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -739,19 +739,19 @@
         "Section": 22,
         "Rule": 4,
         "Test": "f",
-        "test_description": "The project has one building segment with one zone.  HVAC is system type 12 and is incorrectly modeled with incorrect value for loop_supply_temperature_at_outdoor_low for chilled water loop supply temperature control.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 12 with a chilled water loop. The chilled water supply temperature is not reset according to the prescribed outdoor air dry-bulb temperature reset schedule.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-4",
             "ruleset_reference": "G3.1.3.9",
-            "rule_description": "For baseline chilled water loop that is not purchased chilled water and does not serve any computer room HVAC systems, chilled-water supply temperature shall be reset using the following schedule: 44F at outdoor dry-bulb temperature of 80F and above, 54F at 60F and below, and ramped linearly between 44F and 54F at temperature between 80F and 60F.",
+            "rule_description": "Baseline chilled water loops that do not use purchased cooling and do not serve any computer rooms (baseline system type 11) shall have the chilled-water supply temperature reset using the following schedule: 44F at outdoor dry-bulb temperature of 80F and above, 54F at 60F and below, and ramped linearly between 44F and 54F at temperature between 80F and 60F.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -876,19 +876,19 @@
         "Section": 22,
         "Rule": 4,
         "Test": "g",
-        "test_description": "The project has one building segment with one zone.  HVAC is system type 11.1a and does not have a chiller.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 11 with a chilled water loop. Baseline system type 11 causes the loop to be exempt from this requirement.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-4",
             "ruleset_reference": "G3.1.3.9",
-            "rule_description": "For baseline chilled water loop that is not purchased chilled water and does not serve any computer room HVAC systems, chilled-water supply temperature shall be reset using the following schedule: 44F at outdoor dry-bulb temperature of 80F and above, 54F at 60F and below, and ramped linearly between 44F and 54F at temperature between 80F and 60F.",
+            "rule_description": "Baseline chilled water loops that do not use purchased cooling and do not serve any computer rooms (baseline system type 11) shall have the chilled-water supply temperature reset using the following schedule: 44F at outdoor dry-bulb temperature of 80F and above, 54F at 60F and below, and ramped linearly between 44F and 54F at temperature between 80F and 60F.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -923,7 +923,7 @@
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
                                                     "type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chiller Loop 1"
+                                                    "chilled_water_loop": "Chilled Water Loop 1"
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating Coil 1",

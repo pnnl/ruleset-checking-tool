@@ -3,7 +3,7 @@
         "Section": 22,
         "Rule": 21,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 with < 600 ton chiller and is correctly modeled with a screw chiller.  Expected output: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7. The building peak cooling load is less than 600 tons and the chiller plant is modeled with a screw chiller.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-21",
@@ -15,7 +15,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -163,7 +163,7 @@
         "Section": 22,
         "Rule": 21,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 with < 600 ton chiller and is not correctly modeled with a positive displacement chiller.  Expected output: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7. The building peak cooling load is less than 600 tons and the chiller plant is modeled with a positive displacement chiller.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-21",
@@ -175,7 +175,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -323,7 +323,7 @@
         "Section": 22,
         "Rule": 21,
         "Test": "c",
-        "test_description": "The project has one building segment with two zones.  HVAC is system type 8b with > 600 ton chiller and is correctly modeled with a centrifugal chiller.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 8. The building peak cooling load is greater than 600 tons and the chiller plant is modeled with a centrifugal chiller.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-21",
@@ -335,7 +335,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -485,7 +485,7 @@
         "Section": 22,
         "Rule": 21,
         "Test": "d",
-        "test_description": "The project has one building segment with two zones.  HVAC is system type 8b with > 600 ton chiller and is incorrectly modeled with a Screw chiller.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 8. The building peak cooling load is greater than 600 tons and the chiller plant is modeled with a screw chiller.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-21",
@@ -497,7 +497,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -647,7 +647,7 @@
         "Section": 22,
         "Rule": 21,
         "Test": "e",
-        "test_description": "The project has one building segment with one zone.  HVAC is system type 1 with no chilled water.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 1. There is no chiller.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-21",
@@ -659,7 +659,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
