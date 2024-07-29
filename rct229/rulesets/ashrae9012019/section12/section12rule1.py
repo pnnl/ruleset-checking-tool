@@ -2,9 +2,11 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.match_lists import match_lists_by_id
 
+COMPLIANCE_PATH_TYPE = SchemaEnums.schema_enums["CompliancePathOptions2019ASHRAE901"]
 MANUAL_CHECK_REQUIRED_MSG = "The proposed building miscellaneous equipment load is less than the baseline, which is only permitted when the model is being used to quantify performance that exceeds the requirements of Standard 90.1."
 
 
@@ -35,11 +37,6 @@ class Section12Rule1(RuleDefinitionListIndexedBase):
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
-                required_fields={
-                    "$.buildings[*].building_segments[*].zones[*].spaces[*].miscellaneous_equipment[*]": [
-                        "power"
-                    ],
-                },
                 manual_check_required_msg=MANUAL_CHECK_REQUIRED_MSG,
             )
 
@@ -71,9 +68,21 @@ class Section12Rule1(RuleDefinitionListIndexedBase):
                 misc_equipment_power_b = misc_equipment_b["power"]
                 misc_equipment_power_p = misc_equipment_p["power"]
                 if misc_equipment_power_b > misc_equipment_power_p:
-                    reduced_misc_equipment_power.append(misc_equipment_power_b)
+                    reduced_misc_equipment_power.append(
+                        {
+                            "id": misc_equipment_b.id,
+                            "baseline_power": misc_equipment_power_b,
+                            "proposed_power": misc_equipment_power_p,
+                        }
+                    )
                 elif misc_equipment_power_b < misc_equipment_power_p:
-                    unexpected_misc_equipment_power.append(misc_equipment_power_b)
+                    unexpected_misc_equipment_power.append(
+                        {
+                            "id": misc_equipment_b.id,
+                            "baseline_power": misc_equipment_power_b,
+                            "proposed_power": misc_equipment_power_p,
+                        }
+                    )
 
             return {
                 "reduced_misc_equipment_power": reduced_misc_equipment_power,
@@ -87,7 +96,7 @@ class Section12Rule1(RuleDefinitionListIndexedBase):
             ]
             compliance_path = calc_vals["compliance_path"]
             return len(unexpected_misc_equipment_power) == 0 and (
-                compliance_path is None or compliance_path != "CODE_COMPLIANT"
+                compliance_path != COMPLIANCE_PATH_TYPE.CODE_COMPLIANCE
             )
 
         def rule_check(self, context, calc_vals=None, data=None):
