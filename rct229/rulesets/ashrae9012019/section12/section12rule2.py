@@ -5,17 +5,22 @@ from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.compare_schedules import (
     compare_schedules,
 )
+from rct229.schema.schema_enums import SchemaEnums
+
+LIGHTING_SPACE_OPTIONS = SchemaEnums.schema_enums[
+    "LightingSpaceOptions2019ASHRAE901TG37"
+]
 
 EXPECTED_RECEPTACLE_CONTROL_SPACE_TYPES = [
-    "OFFICE_ENCLOSED",
-    "CONFERENCE_MEETING_MULTIPURPOSE_ROOM",
-    "COPY_PRINT_ROOM",
-    "LOUNGE_BREAKROOM_HEALTH_CARE_FACILITY",
-    "LOUNGE_BREAKROOM_ALL_OTHERS",
-    "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_PENITENTIARY",
-    "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_SCHOOL",
-    "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_ALL_OTHER",
-    "OFFICE_OPEN_PLAN",
+    LIGHTING_SPACE_OPTIONS.OFFICE_ENCLOSED,
+    LIGHTING_SPACE_OPTIONS.CONFERENCE_MEETING_MULTIPURPOSE_ROOM,
+    LIGHTING_SPACE_OPTIONS.COPY_PRINT_ROOM,
+    LIGHTING_SPACE_OPTIONS.LOUNGE_BREAKROOM_HEALTH_CARE_FACILITY,
+    LIGHTING_SPACE_OPTIONS.LOUNGE_BREAKROOM_ALL_OTHERS,
+    LIGHTING_SPACE_OPTIONS.CLASSROOM_LECTURE_HALL_TRAINING_ROOM_PENITENTIARY,
+    LIGHTING_SPACE_OPTIONS.CLASSROOM_LECTURE_HALL_TRAINING_ROOM_SCHOOL,
+    LIGHTING_SPACE_OPTIONS.CLASSROOM_LECTURE_HALL_TRAINING_ROOM_ALL_OTHER,
+    LIGHTING_SPACE_OPTIONS.OFFICE_OPEN_PLAN,
 ]
 MANUAL_CHECK_REQUIRED_MSG = "A reduced schedule and automatic receptacle controls are present in the proposed design. The space type may have receptacle control requirements in Section 8.4.2. If that is the case, there should be no reduced schedule modeled."
 
@@ -50,7 +55,7 @@ class Section12Rule2(RuleDefinitionListIndexedBase):
                 ),
                 each_rule=Section12Rule2.SpaceRule(),
                 index_rmd=BASELINE_0,
-                list_path="$.miscellaneous_equipments[*]",
+                list_path="$.miscellaneous_equipment[*]",
             )
 
         def create_data(self, context, data):
