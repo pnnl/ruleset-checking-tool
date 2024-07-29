@@ -178,7 +178,9 @@ def process_test_result(test_result, test_dict, test_id):
     return outcome_text, received_expected_outcome
 
 
-def run_section_tests(test_json_name: str, ruleset_doc: RuleSet, test_json_path: Optional[str] = None):
+def run_section_tests(
+    test_json_name: str, ruleset_doc: RuleSet, test_json_path: Optional[str] = None
+):
     """Runs all tests found in a given test JSON and prints results to console. Returns true/false describing whether
     or not all tests in the JSON result in the expected outcome.
 
