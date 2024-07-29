@@ -196,8 +196,8 @@ TEST_RMD = {
                         # More strongly thermally connected to directly conditioned zones
                         #   => indirectly_conditioned_zone
                         # building_segment_is_residential
-                        # zone has no spaces with with specified lighting_space_type
-                        #   AND buliding_segment_is_residential
+                        # zone has no spaces with specified lighting_space_type
+                        #   AND building_segment_is_residential
                         #   => zone_has_residential_spaces
                         # NOT zone_has_nonresidential_spaces
                         #   AND zone_has_residential_spaces
