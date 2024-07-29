@@ -1,5 +1,6 @@
 import glob
 import json
+from typing import Optional
 
 # from jsonpointer import JsonPointer
 import os
@@ -177,7 +178,7 @@ def process_test_result(test_result, test_dict, test_id):
     return outcome_text, received_expected_outcome
 
 
-def run_section_tests(test_json_name: str, ruleset_doc: RuleSet):
+def run_section_tests(test_json_name: str, ruleset_doc: RuleSet, test_json_path: Optional[str] = None):
     """Runs all tests found in a given test JSON and prints results to console. Returns true/false describing whether
     or not all tests in the JSON result in the expected outcome.
 
@@ -185,11 +186,16 @@ def run_section_tests(test_json_name: str, ruleset_doc: RuleSet):
     ----------
     test_json_name : string
 
-        Name of test JSON in 'test_jsons' directory. (e.g., transformer_tests.json)
+        Name of test JSON in 'test_json_path' directory. (e.g., transformer_tests.json)
 
     ruleset_doc: string
 
         Name of the ruleset
+
+    test_json_path: str
+
+        Path to test JSON's directory. This parameter is optional and will default to
+        os.path.dirname(__file__)/ruletest_jsons if left undefined.
 
     Returns
     -------
@@ -199,9 +205,12 @@ def run_section_tests(test_json_name: str, ruleset_doc: RuleSet):
     """
 
     # Create path to test JSON (e.g. 'transformer_tests.json')
-    test_json_path = os.path.join(
-        os.path.dirname(__file__), "ruletest_jsons", test_json_name
-    )
+    if test_json_path is None:
+        test_json_path = os.path.join(
+            os.path.dirname(__file__), "ruletest_jsons", test_json_name
+        )
+    else:
+        test_json_path = os.path.join(test_json_path, test_json_name)
 
     # hash for capturing test results. Keys include: "results, log"
     test_result_dict = {}
@@ -209,18 +218,6 @@ def run_section_tests(test_json_name: str, ruleset_doc: RuleSet):
 
     # Flag checking if all tests succeed. Ensures a message gets printed if so.
     all_tests_pass = True
-
-    # Print banner messages
-    banner_text = f"TESTS RESULTS FOR: {test_json_name}".center(50)
-    #    banner = [
-    #        "-----------------------------------------------------------------------------------------",
-    #        f"--------------------{banner_text}-------------------",
-    #        "-----------------------------------------------------------------------------------------",
-    #        "",
-    #    ]
-
-    #    for line in banner:
-    #        print(line)
 
     # Open
     with open(test_json_path) as f:
