@@ -3,7 +3,7 @@
         "Section": 4,
         "Rule": 14,
         "Test": "a",
-        "test_description": "Proposed building has one building segment and one zone.Computer room equipment power density exceeds 20 W/ft2. Expected result: PASS",
+        "test_description": "A building has one building segment and one zone. The space in the zone has its lighting space type defined as a computer room and the proposed room equipment power density exceeds 20 W/ft2.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "4-14",
@@ -15,7 +15,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "weather": {
@@ -8859,8 +8859,9 @@
         "Section": 4,
         "Rule": 14,
         "Test": "b",
-        "test_description": "Proposed building has one building segment and one zone.Computer room equipment power density does not exceed 20 W/ft2. Expected result: FAIL",
+        "test_description": "A building has one building segment and one zone. The space in the zone has its lighting space type defined as a computer room and the proposed room equipment power density does not exceed 20 W/ft2.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "The space has been classed as a computer room in terms of the lighting space type but the electronic data equipment power density does not appear to exceed 20 w/sf.",
         "standard": {
             "rule_id": "4-14",
             "ruleset_reference": "Section 3 Definitions",
@@ -8871,7 +8872,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "weather": {

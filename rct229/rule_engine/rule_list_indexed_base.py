@@ -107,7 +107,7 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
         ----------
         context : RuleSetModels
             Object containing the contexts for RMDs required by the ruleset.
-            The base implementation here takes the list context from the rmr context
+            The base implementation here takes the list context from the rmd context
             and assumes each part is a list.
         data : An optional data object. It is ignored by this base implementation.
 
@@ -116,16 +116,16 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
         list of RuleSetModels
             A list of context
         """
-        UNKNOWN_INDEX_RMR = "Unknown index_rmd"
+        UNKNOWN_INDEX_RMD = "Unknown index_rmd"
         CONTEXT_NOT_LIST = "The list contexts must be lists"
 
         match_by = self.match_by
 
-        # The index RMR must be either user, baseline, or proposed
+        # The index RMD must be either user, baseline, or proposed
         if self.index_rmd not in context.get_ruleset_model_types():
-            raise ValueError(UNKNOWN_INDEX_RMR)
+            raise ValueError(UNKNOWN_INDEX_RMD)
 
-        # The index RMR must be used
+        # The index RMD must be used
         context_on_list = any(
             map(
                 lambda ruleset_model: self.index_rmd == ruleset_model

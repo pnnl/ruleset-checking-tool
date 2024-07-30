@@ -3,19 +3,19 @@
         "Section": 22,
         "Rule": 13,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones. System 7 cooling tower utilizes an axial fan type. Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7. The heat rejection device is an open-circuit cooling tower with an axial fan.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-13",
             "ruleset_reference": "G3.1.3.11",
-            "rule_description": "The baseline heat rejection loop shall be an axial-fan open circuit cooling tower.",
+            "rule_description": "The baseline heat rejection device shall be an axial-fan open circuit cooling tower.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -163,19 +163,19 @@
         "Section": 22,
         "Rule": 13,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones. System 7 cooling tower does not utilize an axial fan type. Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7. The heat rejection device is an open-circuit cooling tower with a centrifugal fan.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-13",
             "ruleset_reference": "G3.1.3.11",
-            "rule_description": "The baseline heat rejection loop shall be an axial-fan open circuit cooling tower.",
+            "rule_description": "The baseline heat rejection device shall be an axial-fan open circuit cooling tower.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -323,19 +323,19 @@
         "Section": 22,
         "Rule": 13,
         "Test": "c",
-        "test_description": "The project has one building segment with two zones. System 7 cooling tower is not connected to a valid condensing loop. Expected result: Not Applicable",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7. System 7 cooling tower is not connected to a valid condensing loop.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-13",
             "ruleset_reference": "G3.1.3.11",
-            "rule_description": "The baseline heat rejection loop shall be an axial-fan open circuit cooling tower.",
+            "rule_description": "The baseline heat rejection device shall be an axial-fan open circuit cooling tower.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",

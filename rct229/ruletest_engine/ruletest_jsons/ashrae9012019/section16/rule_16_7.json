@@ -3,7 +3,7 @@
         "Section": 16,
         "Rule": 7,
         "Test": "a",
-        "test_description": "A proposed building design has an elevator. The baseline's equivalent has the appropriate lighting power density of 3.14 W/ft2. Expected result: PASS",
+        "test_description": "A building has an elevator with a baseline cab lighting power density which matches the expected cab lighting power.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "16-7",
@@ -16,7 +16,7 @@
             "mandatory_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "weather": {
@@ -173,7 +173,7 @@
         "Section": 16,
         "Rule": 7,
         "Test": "b",
-        "test_description": "A proposed building design has an elevator. The baseline's equivalent does not have the appropriate lighting power density of 3.14 W/ft2. Expected result: FAIL",
+        "test_description": "A building has an elevator with a baseline cab lighting power density which does not match the expected cab lighting power.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "16-7",
@@ -186,7 +186,7 @@
             "mandatory_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "weather": {
@@ -356,7 +356,7 @@
             "mandatory_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "weather": {
@@ -518,7 +518,7 @@
             "mandatory_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "weather": {

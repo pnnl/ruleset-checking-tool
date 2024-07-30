@@ -3,19 +3,19 @@
         "Section": 22,
         "Rule": 15,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones. Approach temperature on System 7's heat rejection component correctly follows 25.72- (0.24 * design wet bulb temperature) delta Fahrenheit for design wetbulb temperatures between 55 F and 90 F. Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7. The heat rejection approach matches the expected value according to the equation in section G3.1.3.11.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-15",
             "ruleset_reference": "G3.1.3.11",
-            "rule_description": "Heat Rejection Device Approach calaculated correctly (T/F), Approach = 25.72-(0.24*WB)",
+            "rule_description": "The baseline heat rejection device shall have the approach calculated according to the equation 25.72 - (0.24*WB), valid for evaporation design wet-bulb temperatures from 55\u00b0F to 90\u00b0F.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -163,19 +163,19 @@
         "Section": 22,
         "Rule": 15,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones. Approach temperature on System 7's heat rejection component did not correctly follow 25.72- (0.24 * design wet bulb temperature) delta Fahrenheit for design wetbulb temperatures between 55 F and 90 F. Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7. The heat rejection approach does not match the expected value according to the equation in section G3.1.3.11.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-15",
             "ruleset_reference": "G3.1.3.11",
-            "rule_description": "Heat Rejection Device Approach calaculated correctly (T/F), Approach = 25.72-(0.24*WB)",
+            "rule_description": "The baseline heat rejection device shall have the approach calculated according to the equation 25.72 - (0.24*WB), valid for evaporation design wet-bulb temperatures from 55\u00b0F to 90\u00b0F.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -323,19 +323,19 @@
         "Section": 22,
         "Rule": 15,
         "Test": "c",
-        "test_description": "The project has one building segment with two zones. Approach temperature on System 7's heat rejection component does not fall between 55 F and 90 F. Not applicable.",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7. The 0.4% evaporation design wet-bulb temperature falls outside the range where this rule is applicable.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-15",
             "ruleset_reference": "G3.1.3.11",
-            "rule_description": "Heat Rejection Device Approach calaculated correctly (T/F), Approach = 25.72-(0.24*WB)",
+            "rule_description": "The baseline heat rejection device shall have the approach calculated according to the equation 25.72 - (0.24*WB), valid for evaporation design wet-bulb temperatures from 55\u00b0F to 90\u00b0F.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
