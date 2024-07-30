@@ -14,7 +14,7 @@
 **Evaluation Context:** B-RMD each SWH BAT  
 **Data Lookup:**   
 **Function Call:**  
-- **get_SWH_equipment_associated_with_each_SWH_bat**  
+- **get_SWH_components_associated_with_each_SWH_bat**  
 - **get_building_segment_SWH_bat**  
 - **get_SWH_bats_and_SWH_use**  
 
@@ -30,7 +30,7 @@
     - otherwise, rule is not applicable for this swh_bat: `else: NOT_APPLICABLE`
 
         ## Rule Logic: 
-    - use get_SWH_equipment_associated_with_each_SWH_bat to get the SWH use types and SWH use in the building: `swh_bats_and_equip_dict = get_SWH_equipment_associated_with_each_SWH_bat(B_RMD)`
+    - use get_SWH_components_associated_with_each_SWH_bat to get the SWH use types and SWH use in the building: `swh_bats_and_equip_dict = get_SWH_components_associated_with_each_SWH_bat(B_RMD)`
     - get a dictionary of all SWH equipment connected to the current SWH bat in the baseline model: `swh_bats_and_equip_dict_this_use = swh_bats_and_equip_dict[swh_bat]`
     - get the quantity of service water heating distribution systems serving this building area type: `num_swh_systems = len(swh_bats_and_equip_dict_this_use["SWHDistribution"])`
     - get the quantity of service water heating equipment serving this building area type: `num_swh_equipment_this_use = len(swh_bats_and_equip_dict_this_use["SWHHeatingEq"])`
