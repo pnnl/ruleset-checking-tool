@@ -225,7 +225,7 @@ TEST_RMD_FULL = {
     "data_timestamp": "2024-02-12T09:00Z",
 }
 
-TEST_RMI = quantify_rmd(TEST_RMD_FULL)["ruleset_model_descriptions"][0]
+TEST_RMD = quantify_rmd(TEST_RMD_FULL)["ruleset_model_descriptions"][0]
 
 
 def test__TEST_RMD__is_valid():
@@ -237,7 +237,7 @@ def test__TEST_RMD__is_valid():
 
 def test__get_zone_supply_return_exhaust_relief_terminal_fan_power_dict_one_zone_one_terminal_success():
     zone_supply_return_exhaust_relief_terminal_fan_power_dict = (
-        get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(TEST_RMI)
+        get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(TEST_RMD)
     )
     # check supply fans
     assert (
@@ -278,7 +278,7 @@ def test__get_zone_supply_return_exhaust_relief_terminal_fan_power_dict_one_zone
 
 def test__get_zone_supply_return_exhaust_relief_terminal_fan_power_dict_two_zone_one_terminal_success():
     zone_supply_return_exhaust_relief_terminal_fan_power_dict = (
-        get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(TEST_RMI)
+        get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(TEST_RMD)
     )
     # check supply fans
     assert (
@@ -353,7 +353,7 @@ def test__get_zone_supply_return_exhaust_relief_terminal_fan_power_dict_two_zone
 
 def test__get_zone_supply_return_exhaust_relief_terminal_fan_power_dict_no_central_fan_success():
     zone_supply_return_exhaust_relief_terminal_fan_power_dict = (
-        get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(TEST_RMI)
+        get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(TEST_RMD)
     )
     assert (
         zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 4"][

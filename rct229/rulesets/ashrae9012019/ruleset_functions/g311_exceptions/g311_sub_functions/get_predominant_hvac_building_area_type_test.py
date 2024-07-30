@@ -13,7 +13,7 @@ from rct229.schema.validate import schema_validate_rmd
 POWER_DELTA = 1
 POWER_THRESHOLD_100 = (CAPACITY_THRESHOLD_QUANTITY * 100 * ureg("m2")).to("W").magnitude
 
-TEST_RMI = {
+TEST_RMD = {
     "id": "test_rmd",
     "buildings": [
         {
@@ -123,11 +123,11 @@ TEST_RMI = {
 
 TEST_RMD_FULL = {
     "id": "229",
-    "ruleset_model_descriptions": [TEST_RMI],
+    "ruleset_model_descriptions": [TEST_RMD],
     "data_timestamp": "2024-02-12T09:00Z",
 }
 
-TEST_RMI_UNIT = quantify_rmd(TEST_RMD_FULL)["ruleset_model_descriptions"][0]
+TEST_RMD_UNIT = quantify_rmd(TEST_RMD_FULL)["ruleset_model_descriptions"][0]
 
 
 def test__TEST_RMD__is_valid():
@@ -138,7 +138,7 @@ def test__TEST_RMD__is_valid():
 
 
 def test__get_predominant_hvac_building_area_type__residential():
-    test_rmd_unit_residential = deepcopy(TEST_RMI_UNIT)
+    test_rmd_unit_residential = deepcopy(TEST_RMD_UNIT)
     test_rmd_unit_residential["buildings"][0]["building_segments"][1][
         "lighting_building_area_type"
     ] = "MULTIFAMILY"

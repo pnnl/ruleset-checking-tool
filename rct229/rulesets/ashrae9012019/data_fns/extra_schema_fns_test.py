@@ -6,7 +6,7 @@ from rct229.rulesets.ashrae9012019.data_fns.extra_schema_fns import (
     proposed_equals_user,
 )
 
-TEST_RMI = {
+TEST_RMD = {
     "id": "test_rmd",
     "buildings": [
         {
@@ -156,7 +156,7 @@ TEST_RMI = {
 
 TEST_RMD_FULL = {
     "id": "229",
-    "ruleset_model_descriptions": [TEST_RMI],
+    "ruleset_model_descriptions": [TEST_RMD],
     "data_timestamp": "2024-02-12T09:00Z",
 }
 

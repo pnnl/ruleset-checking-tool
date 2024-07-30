@@ -12,7 +12,7 @@ TEST_RMD = {
     "id": "ASHRAE229 1",
     "ruleset_model_descriptions": [
         {
-            "id": "RMI 1",
+            "id": "RMD 1",
             "buildings": [
                 {
                     "id": "Building 1",
@@ -139,7 +139,7 @@ TEST_RMD = {
 }
 
 
-TEST_RMI = quantify_rmd(TEST_RMD)["ruleset_model_descriptions"][0]
+TEST_RMD = quantify_rmd(TEST_RMD)["ruleset_model_descriptions"][0]
 
 
 def test__TEST_RMD__is_valid():
@@ -156,7 +156,7 @@ def test__FAN_SIMPLE__success():
         "0].fan_system.supply_fans[*]",
         "id",
         "Supply Fan 1",
-        TEST_RMI,
+        TEST_RMD,
     )
     assert get_fan_object_electric_power(fan) == 100 * ureg("watt")
 
@@ -168,7 +168,7 @@ def test__FAN_DETAIL_motor_efficiency__success():
         "0].fan_system.supply_fans[*]",
         "id",
         "Supply Fan 2",
-        TEST_RMI,
+        TEST_RMD,
     )
     assert get_fan_object_electric_power(fan) == 200 * ureg("watt")
 
@@ -180,7 +180,7 @@ def test__FAN_DETAIL_total_efficiency__success():
         "0].fan_system.supply_fans[*]",
         "id",
         "Supply Fan 3",
-        TEST_RMI,
+        TEST_RMD,
     )
     assert abs(
         get_fan_object_electric_power(fan) - 3737.3 * ureg("watt")
@@ -199,6 +199,6 @@ def test_FAN_MISSING_DATA_FAILED():
             "0].fan_system.supply_fans[*]",
             "id",
             "Supply Fan 4",
-            TEST_RMI,
+            TEST_RMD,
         )
         get_fan_object_electric_power(fan)

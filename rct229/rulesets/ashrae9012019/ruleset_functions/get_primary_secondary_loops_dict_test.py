@@ -8,7 +8,7 @@ TEST_RMD = {
     "id": "ASHRAE229 1",
     "ruleset_model_descriptions": [
         {
-            "id": "RMI 1",
+            "id": "RMD 1",
             "buildings": [
                 {
                     "id": "Building 1",
@@ -108,7 +108,7 @@ TEST_RMD = {
 }
 
 
-TEST_RMI = quantify_rmd(TEST_RMD)["ruleset_model_descriptions"][0]
+TEST_RMD = quantify_rmd(TEST_RMD)["ruleset_model_descriptions"][0]
 
 
 def test__TEST_RMD__is_valid():
@@ -119,6 +119,6 @@ def test__TEST_RMD__is_valid():
 
 
 def test__get_primary_secondary_loops_dict():
-    assert get_primary_secondary_loops_dict(TEST_RMI) == {
+    assert get_primary_secondary_loops_dict(TEST_RMD) == {
         "Chiller Loop 1": ["Chilled Water Loop 1"]
     }

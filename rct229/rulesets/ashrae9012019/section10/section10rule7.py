@@ -19,7 +19,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_systems_5_6_servin
     get_hvac_systems_5_6_serving_multiple_floors,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_zone_list_w_area_dict import (
-    get_hvac_zone_list_w_area_by_rmi_dict,
+    get_hvac_zone_list_w_area_by_rmd_dict,
 )
 from rct229.utils.assertions import assert_
 from rct229.utils.pint_utils import CalcQ
@@ -68,7 +68,7 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
         baseline_sys_5_6_serve_more_than_one_flr_list = (
             get_hvac_systems_5_6_serving_multiple_floors(rmd_b).keys()
         )
-        # create a list containing all HVAC systems that are modeled in the rmi_b
+        # create a list containing all HVAC systems that are modeled in the rmd_b
         available_types_list_excl_5_6_multifloor = [
             system_type
             for system_type, system_ids in baseline_system_types_dict.items()
@@ -96,7 +96,7 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
                 find_exactly_one_zone(rmd_b, zone_id)
                 for zone_id in hvac_data["zone_list"]
             ]
-            for hvac_id, hvac_data in get_hvac_zone_list_w_area_by_rmi_dict(
+            for hvac_id, hvac_data in get_hvac_zone_list_w_area_by_rmd_dict(
                 rmd_b
             ).items()
         }

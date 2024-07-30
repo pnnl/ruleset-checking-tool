@@ -5,7 +5,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.are_all_hvac_sys_fan_object
 from rct229.schema.validate import schema_validate_rmd
 from rct229.utils.assertions import MissingKeyException
 
-TEST_RMI = {
+TEST_RMD = {
     "id": "test_rmd",
     "buildings": [
         {
@@ -146,7 +146,7 @@ TEST_RMI = {
 
 TEST_RMD = {
     "id": "ASHRAE229",
-    "ruleset_model_descriptions": [TEST_RMI],
+    "ruleset_model_descriptions": [TEST_RMD],
     "data_timestamp": "2024-02-12T09:00Z",
 }
 
@@ -159,26 +159,26 @@ def test__TEST_RMD__is_valid():
 
 
 def test__hvac_fan_all_autosized__success():
-    assert are_all_hvac_sys_fan_objs_autosized(TEST_RMI, "hvac_1") is True
+    assert are_all_hvac_sys_fan_objs_autosized(TEST_RMD, "hvac_1") is True
 
 
 def test__hvac_fan_partial_autosized__failed():
-    assert are_all_hvac_sys_fan_objs_autosized(TEST_RMI, "hvac_2") is False
+    assert are_all_hvac_sys_fan_objs_autosized(TEST_RMD, "hvac_2") is False
 
 
 def test__hvac_fan_missing_autosized__exception():
     with pytest.raises(MissingKeyException):
-        are_all_hvac_sys_fan_objs_autosized(TEST_RMI, "hvac_3")
+        are_all_hvac_sys_fan_objs_autosized(TEST_RMD, "hvac_3")
 
 
 def test_hvac_fan_all_terminal_autosized__success():
-    assert are_all_hvac_sys_fan_objs_autosized(TEST_RMI, "hvac_4") is True
+    assert are_all_hvac_sys_fan_objs_autosized(TEST_RMD, "hvac_4") is True
 
 
 def test_hvac_fan_all_terminal_fan_partial_autosized__failed():
-    assert are_all_hvac_sys_fan_objs_autosized(TEST_RMI, "hvac_5") is False
+    assert are_all_hvac_sys_fan_objs_autosized(TEST_RMD, "hvac_5") is False
 
 
 def test__hvac_terminal_fan_missing_autosized__exception():
     with pytest.raises(MissingKeyException):
-        are_all_hvac_sys_fan_objs_autosized(TEST_RMI, "hvac_6")
+        are_all_hvac_sys_fan_objs_autosized(TEST_RMD, "hvac_6")

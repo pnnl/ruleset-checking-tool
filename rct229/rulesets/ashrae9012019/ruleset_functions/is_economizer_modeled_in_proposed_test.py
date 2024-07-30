@@ -4,7 +4,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.is_economizer_modeled_in_pr
 from rct229.schema.schema_utils import quantify_rmd
 from rct229.schema.validate import schema_validate_rmd
 
-TEST_RMI_FIXED_TYPE = {
+TEST_RMD_FIXED_TYPE = {
     "id": "test_rmd",
     "buildings": [
         {
@@ -61,7 +61,7 @@ TEST_RMI_FIXED_TYPE = {
     "type": "BASELINE_0",
 }
 
-TEST_RMI_ENTHALPY_TYPE = {
+TEST_RMD_ENTHALPY_TYPE = {
     "id": "test_rmd",
     "buildings": [
         {
@@ -118,7 +118,7 @@ TEST_RMI_ENTHALPY_TYPE = {
     "type": "BASELINE_0",
 }
 
-TEST_RMI_NO_ECONOMIZER_TYPE = {
+TEST_RMD_NO_ECONOMIZER_TYPE = {
     "id": "test_rmd",
     "buildings": [
         {
@@ -177,31 +177,31 @@ TEST_RMI_NO_ECONOMIZER_TYPE = {
 
 TEST_RMD_FIXED_TYPE = {
     "id": "229_01",
-    "ruleset_model_descriptions": [TEST_RMI_FIXED_TYPE],
+    "ruleset_model_descriptions": [TEST_RMD_FIXED_TYPE],
     "data_timestamp": "2024-02-12T09:00Z",
 }
 
 TEST_RMD_ENTHALPY_TYPE = {
     "id": "229_01",
-    "ruleset_model_descriptions": [TEST_RMI_ENTHALPY_TYPE],
+    "ruleset_model_descriptions": [TEST_RMD_ENTHALPY_TYPE],
     "data_timestamp": "2024-02-12T09:00Z",
 }
 
 TEST_RMD_NO_ECONOMIZER_TYPE = {
     "id": "229_01",
-    "ruleset_model_descriptions": [TEST_RMI_NO_ECONOMIZER_TYPE],
+    "ruleset_model_descriptions": [TEST_RMD_NO_ECONOMIZER_TYPE],
     "data_timestamp": "2024-02-12T09:00Z",
 }
 
-TEST_RMI_FIXED_TYPE_UNIT = quantify_rmd(TEST_RMD_FIXED_TYPE)[
+TEST_RMD_FIXED_TYPE_UNIT = quantify_rmd(TEST_RMD_FIXED_TYPE)[
     "ruleset_model_descriptions"
 ][0]
 
-TEST_RMI_ENTHALPY_TYPE_UNIT = quantify_rmd(TEST_RMD_ENTHALPY_TYPE)[
+TEST_RMD_ENTHALPY_TYPE_UNIT = quantify_rmd(TEST_RMD_ENTHALPY_TYPE)[
     "ruleset_model_descriptions"
 ][0]
 
-TEST_RMI_NO_ECONOMIZER_TYPE_UNIT = quantify_rmd(TEST_RMD_NO_ECONOMIZER_TYPE)[
+TEST_RMD_NO_ECONOMIZER_TYPE_UNIT = quantify_rmd(TEST_RMD_NO_ECONOMIZER_TYPE)[
     "ruleset_model_descriptions"
 ][0]
 
@@ -229,17 +229,17 @@ def test__PROPOSED_TEST_RMD_NO_ECONOMIZER_TYPE__is_valid():
 
 def test__is_economizer_modeled_in_proposed_fixed_fraction_economizer_type():
     assert not is_economizer_modeled_in_proposed(
-        TEST_RMI_FIXED_TYPE_UNIT, TEST_RMI_FIXED_TYPE_UNIT, "System 9"
+        TEST_RMD_FIXED_TYPE_UNIT, TEST_RMD_FIXED_TYPE_UNIT, "System 9"
     )
 
 
 def test__is_economizer_modeled_in_proposed__enthalpy_economizer_type():
     assert is_economizer_modeled_in_proposed(
-        TEST_RMI_FIXED_TYPE_UNIT, TEST_RMI_ENTHALPY_TYPE_UNIT, "System 9"
+        TEST_RMD_FIXED_TYPE_UNIT, TEST_RMD_ENTHALPY_TYPE_UNIT, "System 9"
     )
 
 
 def test__is_economizer_modeled_in_proposed__no_economizer_type():
     assert not is_economizer_modeled_in_proposed(
-        TEST_RMI_FIXED_TYPE_UNIT, TEST_RMI_NO_ECONOMIZER_TYPE_UNIT, "System 9"
+        TEST_RMD_FIXED_TYPE_UNIT, TEST_RMD_NO_ECONOMIZER_TYPE_UNIT, "System 9"
     )

@@ -4,7 +4,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_systems_serving_zo
 from rct229.schema.schema_utils import quantify_rmd
 from rct229.schema.validate import schema_validate_rmd
 
-TEST_RMI = {
+TEST_RMD = {
     "id": "test_rmd",
     "buildings": [
         {
@@ -85,11 +85,11 @@ TEST_RMI = {
 TEST_RMD = quantify_rmd(
     {
         "id": "229_01",
-        "ruleset_model_descriptions": [TEST_RMI],
+        "ruleset_model_descriptions": [TEST_RMD],
         "data_timestamp": "2024-02-12T09:00Z",
     }
 )
-TEST_RMI_UNIT = TEST_RMD["ruleset_model_descriptions"][0]
+TEST_RMD_UNIT = TEST_RMD["ruleset_model_descriptions"][0]
 
 
 def test__TEST_RMD__is_valid():
@@ -101,5 +101,5 @@ def test__TEST_RMD__is_valid():
 
 def test__get_hvac_systems_serving_zone_health_safety_vent_reqs__success():
     assert sorted(
-        get_hvac_systems_serving_zone_health_safety_vent_reqs(TEST_RMI_UNIT)
+        get_hvac_systems_serving_zone_health_safety_vent_reqs(TEST_RMD_UNIT)
     ) == ["System 1", "System 2", "System 3"]

@@ -76,7 +76,7 @@ class Section19Rule33(RuleDefinitionListIndexedBase):
             )
 
             return (
-                f"It appears that {hvac_id_p} is only being simulated in the P_RMI to meet the requirements described in Section G3.1-10 HVAC Systems proposed column c and d for heating and/or cooling. "
+                f"It appears that {hvac_id_p} is only being simulated in the proposed model to meet the requirements described in Section G3.1-10 HVAC Systems proposed column c and d for heating and/or cooling. "
                 f"Check that the heating and/or cooling system fans are simulated to be cycled ON and OFF to meet heating and/or cooling loads during occupied hours as applicable. "
                 f"Note that per the RMD the fan associated with {hvac_p} is operating as {operation_during_occupied_p} during occupied hours. "
                 f"This may require further investigation if only heating or cooling is being simulated to meet Section G3.1-10 HVAC Systems proposed column c or d because different fan operation will be required depending on whether the system is operating in heating or cooling mode. "

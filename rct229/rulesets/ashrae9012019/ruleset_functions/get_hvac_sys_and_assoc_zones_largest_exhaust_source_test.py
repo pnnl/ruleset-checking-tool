@@ -5,7 +5,7 @@ from rct229.schema.config import ureg
 from rct229.schema.schema_utils import quantify_rmd
 from rct229.schema.validate import schema_validate_rmd
 
-TEST_RMI = {
+TEST_RMD = {
     "id": "test_rmd",
     "buildings": [
         {
@@ -155,11 +155,11 @@ TEST_RMI = {
 
 TEST_RMD_FULL = {
     "id": "229",
-    "ruleset_model_descriptions": [TEST_RMI],
+    "ruleset_model_descriptions": [TEST_RMD],
     "data_timestamp": "2024-02-12T09:00Z",
 }
 
-TEST_RMI_UNIT = quantify_rmd(TEST_RMD_FULL)["ruleset_model_descriptions"][0]
+TEST_RMD_UNIT = quantify_rmd(TEST_RMD_FULL)["ruleset_model_descriptions"][0]
 
 
 def test__TEST_RMD__is_valid():
@@ -171,7 +171,7 @@ def test__TEST_RMD__is_valid():
 
 def test_get_hvac_sys_and_assoc_zones_largest_exhaust_source_hvac_and_zone_success():
     hvac_sys_and_assoc_zones_largest_exhaust_source_dict = (
-        get_hvac_sys_and_assoc_zones_largest_exhaust_source(TEST_RMI_UNIT, "PTAC 1")
+        get_hvac_sys_and_assoc_zones_largest_exhaust_source(TEST_RMD_UNIT, "PTAC 1")
     )
     assert (
         hvac_sys_and_assoc_zones_largest_exhaust_source_dict["hvac_fan_sys_exhaust_sum"]
@@ -199,7 +199,7 @@ def test_get_hvac_sys_and_assoc_zones_largest_exhaust_source_hvac_and_zone_succe
 
 def test_get_hvac_sys_and_assoc_zones_largest_exhaust_source_hvac_only_success():
     hvac_sys_and_assoc_zones_largest_exhaust_source_dict = (
-        get_hvac_sys_and_assoc_zones_largest_exhaust_source(TEST_RMI_UNIT, "PTAC 2")
+        get_hvac_sys_and_assoc_zones_largest_exhaust_source(TEST_RMD_UNIT, "PTAC 2")
     )
     assert (
         hvac_sys_and_assoc_zones_largest_exhaust_source_dict["hvac_fan_sys_exhaust_sum"]
@@ -225,7 +225,7 @@ def test_get_hvac_sys_and_assoc_zones_largest_exhaust_source_hvac_only_success()
 
 def test_get_hvac_sys_and_assoc_zones_largest_exhaust_source_zone_only_success():
     hvac_sys_and_assoc_zones_largest_exhaust_source_dict = (
-        get_hvac_sys_and_assoc_zones_largest_exhaust_source(TEST_RMI_UNIT, "PTAC 3")
+        get_hvac_sys_and_assoc_zones_largest_exhaust_source(TEST_RMD_UNIT, "PTAC 3")
     )
     assert hvac_sys_and_assoc_zones_largest_exhaust_source_dict[
         "hvac_fan_sys_exhaust_sum"

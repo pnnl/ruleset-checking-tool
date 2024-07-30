@@ -3,7 +3,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_h
 )
 from rct229.schema.validate import schema_validate_rmd
 
-TEST_RMI = {
+TEST_RMD = {
     "id": "test_rmd",
     "buildings": [
         {
@@ -47,7 +47,7 @@ TEST_RMI = {
 
 TEST_RMD = {
     "id": "229_01",
-    "ruleset_model_descriptions": [TEST_RMI],
+    "ruleset_model_descriptions": [TEST_RMD],
     "data_timestamp": "2024-02-12T09:00Z",
 }
 
@@ -61,7 +61,7 @@ def test__TEST_RMD__is_valid():
 
 def test__are_all_terminal_heating_loops_purchased_heating__all_terminal_heating_loops_purchased_heating():
     assert (
-        are_all_terminal_heating_loops_purchased_heating(TEST_RMI, ["terminal_1"])
+        are_all_terminal_heating_loops_purchased_heating(TEST_RMD, ["terminal_1"])
         == True
     )
 
@@ -69,7 +69,7 @@ def test__are_all_terminal_heating_loops_purchased_heating__all_terminal_heating
 def test__are_all_terminal_heating_loops_purchased_heating__all_terminal_heating_source_not_purchased_heating():
     assert (
         are_all_terminal_heating_loops_purchased_heating(
-            TEST_RMI, ["terminal_2", "terminal_3"]
+            TEST_RMD, ["terminal_2", "terminal_3"]
         )
         == False
     )
@@ -78,7 +78,7 @@ def test__are_all_terminal_heating_loops_purchased_heating__all_terminal_heating
 def test__are_all_terminal_heating_loops_purchased_heating__not_all_terminal_heating_source_purchased_heating():
     assert (
         are_all_terminal_heating_loops_purchased_heating(
-            TEST_RMI, ["terminal_1", "terminal_2"]
+            TEST_RMD, ["terminal_1", "terminal_2"]
         )
         == False
     )

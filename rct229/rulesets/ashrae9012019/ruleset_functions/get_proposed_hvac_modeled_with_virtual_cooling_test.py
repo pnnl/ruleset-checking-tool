@@ -91,10 +91,10 @@ TEST_RMD_U_COOLING_SYSTEM = {
     "data_timestamp": "2024-02-12T09:00Z",
 }
 
-TEST_RMI_P_COOLING_SYSTEM = quantify_rmd(TEST_RMD_P_COOLING_SYSTEM)[
+TEST_RMD_P_COOLING_SYSTEM = quantify_rmd(TEST_RMD_P_COOLING_SYSTEM)[
     "ruleset_model_descriptions"
 ][0]
-TEST_RMI_U_COOLING_SYSTEM = quantify_rmd(TEST_RMD_U_COOLING_SYSTEM)[
+TEST_RMD_U_COOLING_SYSTEM = quantify_rmd(TEST_RMD_U_COOLING_SYSTEM)[
     "ruleset_model_descriptions"
 ][0]
 
@@ -112,5 +112,5 @@ def test__TEST_RMD__is_valid():
 
 def test__get_proposed_hvac_modeled_with_virtual_cooling__cooling_system_success():
     assert get_proposed_hvac_modeled_with_virtual_cooling(
-        TEST_RMI_U_COOLING_SYSTEM, TEST_RMI_P_COOLING_SYSTEM
+        TEST_RMD_U_COOLING_SYSTEM, TEST_RMD_P_COOLING_SYSTEM
     ) == ["hvac_1", "hvac_2"]

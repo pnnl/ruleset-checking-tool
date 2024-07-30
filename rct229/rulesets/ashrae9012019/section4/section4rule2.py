@@ -7,7 +7,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_categ
     ZoneConditioningCategory as ZCC,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
-    get_zone_conditioning_category_rmi_dict,
+    get_zone_conditioning_category_rmd_dict,
 )
 from rct229.utils.assertions import assert_, getattr_
 from rct229.utils.jsonpath_utils import find_exactly_one
@@ -66,7 +66,7 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
             return {
                 "schedules_b": rmd_b.get("schedules"),
                 "schedules_p": rmd_p.get("schedules"),
-                "zcc_dict_b": get_zone_conditioning_category_rmi_dict(
+                "zcc_dict_b": get_zone_conditioning_category_rmd_dict(
                     data["climate_zone"], rmd_b
                 ),
             }

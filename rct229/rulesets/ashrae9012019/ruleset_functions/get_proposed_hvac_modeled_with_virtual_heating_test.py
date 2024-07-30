@@ -178,16 +178,16 @@ TEST_RMD_U_PREHEAT_SYSTEM = {
     "data_timestamp": "2024-02-12T09:00Z",
 }
 
-TEST_RMI_P_HEATING_SYSTEM = quantify_rmd(TEST_RMD_P_HEATING_SYSTEM)[
+TEST_RMD_P_HEATING_SYSTEM = quantify_rmd(TEST_RMD_P_HEATING_SYSTEM)[
     "ruleset_model_descriptions"
 ][0]
-TEST_RMI_U_HEATING_SYSTEM = quantify_rmd(TEST_RMD_U_HEATING_SYSTEM)[
+TEST_RMD_U_HEATING_SYSTEM = quantify_rmd(TEST_RMD_U_HEATING_SYSTEM)[
     "ruleset_model_descriptions"
 ][0]
-TEST_RMI_P_PREHEAT_SYSTEM = quantify_rmd(TEST_RMD_P_PREHEAT_SYSTEM)[
+TEST_RMD_P_PREHEAT_SYSTEM = quantify_rmd(TEST_RMD_P_PREHEAT_SYSTEM)[
     "ruleset_model_descriptions"
 ][0]
-TEST_RMI_U_PREHEAT_SYSTEM = quantify_rmd(TEST_RMD_U_PREHEAT_SYSTEM)[
+TEST_RMD_U_PREHEAT_SYSTEM = quantify_rmd(TEST_RMD_U_PREHEAT_SYSTEM)[
     "ruleset_model_descriptions"
 ][0]
 
@@ -213,11 +213,11 @@ def test__TEST_RMD__is_valid():
 
 def test__get_proposed_hvac_modeled_with_virtual_heating__heating_system_success():
     assert get_proposed_hvac_modeled_with_virtual_heating(
-        TEST_RMI_U_HEATING_SYSTEM, TEST_RMI_P_HEATING_SYSTEM
+        TEST_RMD_U_HEATING_SYSTEM, TEST_RMD_P_HEATING_SYSTEM
     ) == ["hvac_1", "hvac_2"]
 
 
 def test__get_proposed_hvac_modeled_with_virtual_heating__preheat_system_success():
     assert get_proposed_hvac_modeled_with_virtual_heating(
-        TEST_RMI_U_PREHEAT_SYSTEM, TEST_RMI_P_PREHEAT_SYSTEM
+        TEST_RMD_U_PREHEAT_SYSTEM, TEST_RMD_P_PREHEAT_SYSTEM
     ) == ["hvac_1", "hvac_2"]

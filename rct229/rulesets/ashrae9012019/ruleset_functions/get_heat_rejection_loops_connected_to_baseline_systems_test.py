@@ -8,7 +8,7 @@ TEST_RMD = {
     "id": "ASHRAE229 1",
     "ruleset_model_descriptions": [
         {
-            "id": "RMI 1",
+            "id": "RMD 1",
             "buildings": [
                 {
                     "id": "Building 1",
@@ -144,7 +144,7 @@ TEST_RMD = {
 }
 
 
-TEST_RMI = quantify_rmd(TEST_RMD)["ruleset_model_descriptions"][0]
+TEST_RMD = quantify_rmd(TEST_RMD)["ruleset_model_descriptions"][0]
 
 
 def test__TEST_RMD__is_valid():
@@ -155,6 +155,6 @@ def test__TEST_RMD__is_valid():
 
 
 def test__get_heat_rejection_loops_connected_to_baseline_systems_success():
-    assert get_heat_rejection_loops_connected_to_baseline_systems(TEST_RMI) == [
+    assert get_heat_rejection_loops_connected_to_baseline_systems(TEST_RMD) == [
         "Condensing Loop 1"
     ]

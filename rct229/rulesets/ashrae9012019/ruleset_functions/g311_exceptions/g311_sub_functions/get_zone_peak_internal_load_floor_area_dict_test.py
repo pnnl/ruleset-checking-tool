@@ -125,7 +125,7 @@ TEST_RMD_FULL = {
     "data_timestamp": "2024-02-12T09:00Z",
 }
 
-TEST_RMI = quantify_rmd(TEST_RMD_FULL)["ruleset_model_descriptions"][0]
+TEST_RMD = quantify_rmd(TEST_RMD_FULL)["ruleset_model_descriptions"][0]
 
 
 def test__TEST_RMD__is_valid():
@@ -136,24 +136,24 @@ def test__TEST_RMD__is_valid():
 
 
 def test__get_zone_peak_internal_load_floor_area_dict__all_three_component():
-    zone_info = get_zone_peak_internal_load_floor_area_dict(TEST_RMI, "Thermal Zone 1")
+    zone_info = get_zone_peak_internal_load_floor_area_dict(TEST_RMD, "Thermal Zone 1")
     assert abs(zone_info["peak"] - 1500 * ureg("watt")) < 0.00001 * ureg("watt")
     assert abs(zone_info["area"] - 500 * ureg("m2")) < 0.00001 * ureg("m2")
 
 
 def test__get_zone_peak_internal_load_floor_area_dict__no_lighting_component():
-    zone_info = get_zone_peak_internal_load_floor_area_dict(TEST_RMI, "Thermal Zone 2")
+    zone_info = get_zone_peak_internal_load_floor_area_dict(TEST_RMD, "Thermal Zone 2")
     assert abs(zone_info["peak"] - 1000 * ureg("watt")) < 0.00001 * ureg("watt")
     assert abs(zone_info["area"] - 500 * ureg("m2")) < 0.00001 * ureg("m2")
 
 
 def test__get_zone_peak_internal_load_floor_area_dict__no_occupants_component():
-    zone_info = get_zone_peak_internal_load_floor_area_dict(TEST_RMI, "Thermal Zone 3")
+    zone_info = get_zone_peak_internal_load_floor_area_dict(TEST_RMD, "Thermal Zone 3")
     assert abs(zone_info["peak"] - 1000 * ureg("watt")) < 0.00001 * ureg("watt")
     assert abs(zone_info["area"] - 500 * ureg("m2")) < 0.00001 * ureg("m2")
 
 
 def test__get_zone_peak_internal_load_floor_area_dict__no_space_component():
-    zone_info = get_zone_peak_internal_load_floor_area_dict(TEST_RMI, "Thermal Zone 4")
+    zone_info = get_zone_peak_internal_load_floor_area_dict(TEST_RMD, "Thermal Zone 4")
     assert abs(zone_info["peak"] - 0 * ureg("watt")) < 0.00001 * ureg("watt")
     assert abs(zone_info["area"] - 0 * ureg("m2")) < 0.00001 * ureg("m2")
