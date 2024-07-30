@@ -1,4 +1,4 @@
-## get_SWH_equipment_associated_with_each_swh_distribution_system
+## get_swh_components_associated_with_each_swh_distribution_system
 
 Description: This function gets all the SWH equipment connected to a SWH distribution system.  The information is stored in a dictionary where the keys are the SWH Distribution System Ids and values are a dictionary giving the ServiceWaterHeatingEquipment, and Pumps connected to the particular SWH distribution system  
 
