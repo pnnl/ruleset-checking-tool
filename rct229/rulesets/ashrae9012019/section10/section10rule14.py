@@ -247,7 +247,7 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
                             RatingCondition.SINGLE_PACKAGE,
                             total_capacity_mag_b,
                         ),
-                        # LOW-TEMP EFFICIENCY IS NOT USED FOR THE MOST CONSERVATIVE CASE FOR SYSTEM 4
+                        # LOW-TEMP EFFICIENCY IS NOT USED FOR THE LOWEST CAPACITY RANGE FOR SYSTEM 4
                         # IT IS ONLY NEEDED FOR CONSISTENT DATA FORMAT
                         table_g3_5_2_lookup(
                             HeatPumpEquipmentType.HEAT_PUMP_AIR_COOLED_HEATING,
