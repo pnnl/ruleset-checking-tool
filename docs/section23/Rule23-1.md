@@ -36,15 +36,17 @@
 - get the hvac system from the hvac_system_id: `hvac_system = get_component_by_id(hvac_system_id)`
 - get the heating system: `heating_system = hvac_system.heating_system`
 - get the heatpump_low_shutoff_temperature = `heatpump_low_shutoff = heating_system.heatpump_low_shutoff_temperature`
+- get the auxiliary heat high temperature shutoff = 'aux_heat_high_temp_shutoff = heating_system.heatpump_auxilliary_heat_high_shutoff_temperature`
+- get the auxiliary heat energy source: `aux_heat_energy_source = heatpump_auxilliary_heat_type`
 
 **Rule Assertion:**
-- Case 1: The system type is 2 and the heatpump_low_shutoff is <= 17F, PASS: `if system_type == HVAC_SYS.2: if heatpump_low_shutoff <= 17: PASS`
-- Case 2: The system type is 2 and the heatpump_low_shutoff is >25F, FAIL, provide a message: `elif system_type == HVAC_SYS.2:`
-    - `if heatpump_low_shutoff > 25: FAIL; note = "Fail because low temperature heat pump shutoff is above 25F for system 2. The modeled low temperature heat pump shutoff value is " + heatpump_low_shutoff 
-+ "."`
-- Case 3: the system type is 2 and the heatpump_low_shutoff is between 17F and 25: UNDETERMINED; provide a message: `else: UNDETERMINED; note = "Undetermined because the low temperature shutoff is between 17F and 25F for System Type 2.  Check with the rating authority to ensure correct shutoff temperature.  Low shutoff temperature is currently modeled at: " heatpump_low_shutoff = "."`
-- Case 4: the system type is 4 (we already know it's 4, because we've checked the 3 SYS 2 cases above), and the low shutoff temperature is <=10F: PASS: `if heatpump_low_shutoff <= 10F: PASS`
-- Case 5: anything else, FAIL: `ELSE: Fail`
+- Case 1: The auxiliary heat high temperature shutoff is greater than 40F, or the auxiliary heat energy source is anything other than electricity - FAIL: `if (aux_heat_high_temp_shutoff > 40) or (aux_heat_energy_source != "ELECTRIC_RESISTANCE"): FAIL`
+- Case 2: The system type is 2 and the heatpump_low_shutoff is <= 17F, PASS: `if system_type == HVAC_SYS.2: if heatpump_low_shutoff <= 17: PASS`
+- Case 3: The system type is 2 and the heatpump_low_shutoff is >25F, FAIL, provide a message: `elif system_type == HVAC_SYS.2 && heatpump_low_shutoff > 25:`
+    - `FAIL; note = "Fail because low temperature heat pump shutoff is above 25F for system 2. The modeled low temperature heat pump shutoff value is " + heatpump_low_shutoff + "."`
+- Case 4: the system type is 2 and the heatpump_low_shutoff is between 17F and 25: UNDETERMINED; provide a message: `else: UNDETERMINED; note = "Undetermined because the low temperature shutoff is between 17F and 25F for System Type 2.  Check with the rating authority to ensure correct shutoff temperature.  Low shutoff temperature is currently modeled at: " heatpump_low_shutoff = "."`
+- Case 5: the system type is 4 (we already know it's 4, because we've checked the 3 SYS 2 cases above), and the low shutoff temperature is <=10F: PASS: `if heatpump_low_shutoff <= 10F: PASS`
+- Case 6: anything else, FAIL: `ELSE: Fail`
 
 **Notes:**
 
