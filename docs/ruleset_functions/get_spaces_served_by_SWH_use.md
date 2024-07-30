@@ -22,8 +22,6 @@ Logic:
         - create a list of spaces: `spaces_served = []`
           - look at each space in the building segment to see which of them reference the swh_use: `for space in building_segment...spaces:`
             - if the swh_use ID is in the list of space ServiceWaterHeatingUses, then the space is one of the spaces and we add it to the list: `if swh_use.id in space.service_water_heating_uses: spaces_served.append(space)`
-        - check whether any spaces reference the service water heating use. If the service water heating use is not referenced by any spaces, and the service water heating use units are not POWER or VOLUME, then this use applies to all spaces in the building_segment: `if len(spaces) == 0:`
-            - check if the swh use use_units are not POWER or VOLUME.  Service water heating uses with use units power or volume are only counted once, unless they are expicitly assigned to multiple spaces: `if swh_use.use_units not in ["POWER","VOLUME"]: spaces = building_segment.spaces`
         - return space_ids: `return spaces_served`
 
 
