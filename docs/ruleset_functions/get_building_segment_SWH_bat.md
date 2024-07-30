@@ -28,7 +28,7 @@ Logic:
     - look at each service water heating use id: `for swh_use_id in service_water_heating_use_ids:`
         - get the swh_use using get_component_by_ID: `swh_use = get_component_by_ID(RMD, swh_use_id)`
         - if any swh_use has use_units equal to "OTHER", the total energy required to heat the use cannot be determined, and we return "UNDETERMINED": `if swh_use.use_units == "OTHER": return "UNDETERMINED"`
-        - calculate the total energy required to heat the swh_use using the function get_energy_required_to_heat_swh_use: `swh_use_energy_by_space = get_energy_required_to_heat_swh_use(swh_use, RMD)`
+        - calculate the total energy required to heat the swh_use using the function get_energy_required_to_heat_swh_use: `swh_use_energy_by_space = get_energy_required_to_heat_swh_use(swh_use, RMD, building_segment)`
         - check to see if the swh_use has service_water_heating_area_type: `if swh_use.area_type:`
             - add the SWH building area type to the swh_use_dict and set the default value to 0: `swh_use_dict.set_default(swh_use.area_type, 0)`
             - add the energy used by this swh_use: `swh_use_dict[swh_use.area_type] += sum(swh_use_energy_by_space.values())`
