@@ -51,4 +51,8 @@ def test__not_all_terminal_type_VAV():
 
 
 def test__none_terminal_type_VAV():
-    assert are_all_terminal_types_VAV(TEST_RMD, ["terminal_3"]) == False
+    assert are_all_terminal_types_VAV(TEST_RMD, ["terminal_3"]) == True
+
+
+def test__empty_terminal_type_VAV():
+    assert are_all_terminal_types_VAV(TEST_RMD, []) == False
