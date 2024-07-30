@@ -298,7 +298,7 @@ def clean_value(value):
                 return value.lower() == "true"
 
             # If the value references a schedule, parse string to create the list
-            if "SCHEDULE" in value:
+            if "SCHEDULE:" in value:
                 return create_schedule_list(value)
 
             try:

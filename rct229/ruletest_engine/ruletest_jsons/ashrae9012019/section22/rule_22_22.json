@@ -3,19 +3,19 @@
         "Section": 22,
         "Rule": 22,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is correctly modeled with the chiller rated capacity and full load efficiency in accordance with Table G3.5.3.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7.  The chiller full load efficiency matches the expected value from Table G3.5.3 based on capacity.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-22",
             "ruleset_reference": "Table G3.5.3",
-            "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for full load, in accordance with Tables G3.5.3.  ",
+            "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for full load, in accordance with Tables G3.5.3.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -153,19 +153,19 @@
         "Section": 22,
         "Rule": 22,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is incorrectly modeled with the chiller rated capacity and full load efficiency not in accordance with Table G3.5.3.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7.  The chiller full load efficiency does not match the expected value from Table G3.5.3 based on capacity.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-22",
             "ruleset_reference": "Table G3.5.3",
-            "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for full load, in accordance with Tables G3.5.3.  ",
+            "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for full load, in accordance with Tables G3.5.3.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -303,19 +303,19 @@
         "Section": 22,
         "Rule": 22,
         "Test": "c",
-        "test_description": "The project has one building segment with one zone.  HVAC is system type 13 and is correctly modeled with the chiller rated capacity and full load efficiency in accordance with Table G3.5.3.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 13.  The chiller full load efficiency matches the expected value from Table G3.5.3 based on capacity.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-22",
             "ruleset_reference": "Table G3.5.3",
-            "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for full load, in accordance with Tables G3.5.3.  ",
+            "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for full load, in accordance with Tables G3.5.3.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -419,19 +419,19 @@
         "Section": 22,
         "Rule": 22,
         "Test": "d",
-        "test_description": "The project has one building segment with one zone.  HVAC is system type 13 and is incorrectly modeled with the chiller rated capacity and full load efficiency not in accordance with Table G3.5.3.  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 13. The chiller full load efficiency does not match the expected value from Table G3.5.3 based on capacity.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-22",
             "ruleset_reference": "Table G3.5.3",
-            "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for full load, in accordance with Tables G3.5.3.  ",
+            "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for full load, in accordance with Tables G3.5.3.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -535,19 +535,19 @@
         "Section": 22,
         "Rule": 22,
         "Test": "e",
-        "test_description": "The project has one building segment with one zone.  HVAC is system type 2 and does not have a chilled water system.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 2. There is no chiller.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-22",
             "ruleset_reference": "Table G3.5.3",
-            "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for full load, in accordance with Tables G3.5.3.  ",
+            "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for full load, in accordance with Tables G3.5.3.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",

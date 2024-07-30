@@ -3,19 +3,19 @@
         "Section": 22,
         "Rule": 24,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is correctly modeled with primary pump set to constant volume.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The primary chilled water pump is modeled as constant volume.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-24",
             "ruleset_reference": "G3.1.3.10",
-            "rule_description": "For baseline chilled-water systems served by chiller(s), the primary pump shall be modeled as constant volume.  ",
+            "rule_description": "Baseline chilled water loops that do not use purchased chilled water shall have the primary pump modeled as constant volume.  ",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -150,19 +150,19 @@
         "Section": 22,
         "Rule": 24,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is incorrectly modeled with primary pump set to variable volume.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The primary chilled water pump is modeled as variable speed.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-24",
             "ruleset_reference": "G3.1.3.10",
-            "rule_description": "For baseline chilled-water systems served by chiller(s), the primary pump shall be modeled as constant volume.  ",
+            "rule_description": "Baseline chilled water loops that do not use purchased chilled water shall have the primary pump modeled as constant volume.  ",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -297,19 +297,19 @@
         "Section": 22,
         "Rule": 24,
         "Test": "c",
-        "test_description": "The project has one building segment with two zones.  HVAC is system type 8b and is correctly modeled with primary pump set to constant volume.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 8 with a chilled water system. The primary chilled water pump is modeled as constant volume.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-24",
             "ruleset_reference": "G3.1.3.10",
-            "rule_description": "For baseline chilled-water systems served by chiller(s), the primary pump shall be modeled as constant volume.  ",
+            "rule_description": "Baseline chilled water loops that do not use purchased chilled water shall have the primary pump modeled as constant volume.  ",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -446,19 +446,19 @@
         "Section": 22,
         "Rule": 24,
         "Test": "d",
-        "test_description": "The project has one building segment with two zones.  HVAC is system type 8b and is incorrectly modeled with primary pump set to variable volume.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 8 with a chilled water system. The primary chilled water pump is modeled as variable speed.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-24",
             "ruleset_reference": "G3.1.3.10",
-            "rule_description": "For baseline chilled-water systems served by chiller(s), the primary pump shall be modeled as constant volume.  ",
+            "rule_description": "Baseline chilled water loops that do not use purchased chilled water shall have the primary pump modeled as constant volume.  ",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -595,19 +595,19 @@
         "Section": 22,
         "Rule": 24,
         "Test": "e",
-        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is incorrectly modeled withlut a secondary loop.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The chilled water system configuration is not primary-secondary.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-24",
             "ruleset_reference": "G3.1.3.10",
-            "rule_description": "For baseline chilled-water systems served by chiller(s), the primary pump shall be modeled as constant volume.  ",
+            "rule_description": "Baseline chilled water loops that do not use purchased chilled water shall have the primary pump modeled as constant volume.  ",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -658,8 +658,7 @@
                                                 "id": "System 7",
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
-                                                    "type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                    "type": "FLUID_LOOP"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",

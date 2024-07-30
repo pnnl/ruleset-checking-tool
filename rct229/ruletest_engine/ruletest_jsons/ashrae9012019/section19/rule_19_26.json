@@ -3,19 +3,19 @@
         "Section": 19,
         "Rule": 26,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones. Project consists of a hot water/chilled water VAV HVAC system serving a healthcare facility operating room with 100 CFM minimum outdoor air requirement. Fan system is correctly set to CONTINUOUS operation during unoccupied hours. Expected outcome: PASS",
+        "test_description": "The project has one building segment with two zones including a healthcare facility operating room. The two zones are served by a hot water/chilled water VAV HVAC system with 100 CFM minimum outdoor air requirement. The HVAC fan correctly operates continuously during unoccupied hours.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-26",
             "ruleset_reference": "Table G3.1 Section 4 & G3.1.2.4",
-            "rule_description": "HVAC fans shall remain on during  unoccupied hours in spaces that have health and safety mandated minimum ventilation requirements during unoccupied hours in the proposed design. \n",
-            "applicable_rmr": "Proposed RMR",
+            "rule_description": "HVAC fans shall remain on during unoccupied hours in spaces that have health and safety mandated minimum ventilation requirements during unoccupied hours in the proposed design. \n",
+            "applicable_rmd": "Proposed RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -158,19 +158,20 @@
         "Section": 19,
         "Rule": 26,
         "Test": "b",
-        "test_description": "The project has one building segment with one zone. Project consists of a single-zone hot water/chilled water VAV HVAC system serving an animal health facility room with 100 CFM minimum outdoor air requirement. Fan system is incorrectly set to KEEP OFF during unoccupied hours. Expected outcome: FAIL",
+        "test_description": "The project has one building segment with one zone including an animal health facility room. The zone is served by a single-zone hot water/chilled water VAV HVAC system with 100 CFM minimum outdoor air requirement. The HVAC fan is incorrectly set to keep off during unoccupied hours.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "SERVES ZONE(S) THAT APPEAR LIKELY TO HAVE HEALTH AND SAFETY MANDATED MINIMUM VENTILATION REQUIREMENTS DURING UNOCCUPIED HOURS AND THEREFORE (IF THE HVAC SYSTEM SUPPLIES OA CFM) MAY WARRANT CONTINUOUS OPERATION DURING UNOCCUPIED HOURS PER SECTION G3.1-4 SCHEDULES EXCEPTION #2 FOR THE PROPOSED BUILDING AND PER SECTION G3.1.2.4.",
         "standard": {
             "rule_id": "19-26",
             "ruleset_reference": "Table G3.1 Section 4 & G3.1.2.4",
-            "rule_description": "HVAC fans shall remain on during  unoccupied hours in spaces that have health and safety mandated minimum ventilation requirements during unoccupied hours in the proposed design. \n",
-            "applicable_rmr": "Proposed RMR",
+            "rule_description": "HVAC fans shall remain on during unoccupied hours in spaces that have health and safety mandated minimum ventilation requirements during unoccupied hours in the proposed design. \n",
+            "applicable_rmd": "Proposed RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",

@@ -15,18 +15,18 @@ class PurchasedSystemStatus(TypedDict):
 
 def check_purchased_chw_hhw_status_dict(rmd_b: dict) -> PurchasedSystemStatus:
     """
-    Check if RMI is modeled with purchased chilled water as space cooling source or purchased hot water/steam as space heating source.
-    If any system in RMI uses purchased chilled water, function shall return True for purchased chilled water as space cooling source.
-    Similarly, if any system in RMI uses purchased hot water or steam, function shall return True for purchased hot water/steam as space heating source.
+    Check if RMD is modeled with purchased chilled water as space cooling source or purchased hot water/steam as space heating source.
+    If any system in RMD uses purchased chilled water, function shall return True for purchased chilled water as space cooling source.
+    Similarly, if any system in RMD uses purchased hot water or steam, function shall return True for purchased hot water/steam as space heating source.
 
     Parameters
     ----------
     rmd_b: json
-        RMI at RuleSetModelDescription level
+        RMD at RuleSetModelDescription level
 
     Returns
     -------
-    purchased_chw_hhw_status_dictionary: A dictionary that saves whether RMI is modeled with purchased chilled water as space cooling source or purchased hot water/steam as space heating source,
+    purchased_chw_hhw_status_dictionary: A dictionary that saves whether RMD is modeled with purchased chilled water as space cooling source or purchased hot water/steam as space heating source,
     i.e. {"purchased_cooling": True, "purchased_heating": False}.
 
     """

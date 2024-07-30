@@ -5,6 +5,7 @@ from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_1_fns import table_g3_5_1_lookup
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_2_fns import (
     HeatPumpEquipmentType,
+    RatingCondition,
     table_g3_5_2_lookup,
 )
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_4_fns import table_g3_5_4_lookup
@@ -18,7 +19,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_systems_5_6_servin
     get_hvac_systems_5_6_serving_multiple_floors,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_zone_list_w_area_dict import (
-    get_hvac_zone_list_w_area_dict,
+    get_hvac_zone_list_w_area_by_rmd_dict,
 )
 from rct229.utils.assertions import assert_
 from rct229.utils.pint_utils import CalcQ
@@ -57,7 +58,7 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
             ruleset_section_title="HVAC General",
             standard_section="Section Table G3.5.1-G3.5.6 Performance Rating Method Minimum Efficiency Requirements",
             is_primary_rule=True,
-            list_path="$.ruleset_model_descriptions[*].buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
+            list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
             rmd_context="ruleset_model_descriptions/0",
         )
 
@@ -67,7 +68,7 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
         baseline_sys_5_6_serve_more_than_one_flr_list = (
             get_hvac_systems_5_6_serving_multiple_floors(rmd_b).keys()
         )
-        # create a list containing all HVAC systems that are modeled in the rmi_b
+        # create a list containing all HVAC systems that are modeled in the rmd_b
         available_types_list_excl_5_6_multifloor = [
             system_type
             for system_type, system_ids in baseline_system_types_dict.items()
@@ -95,9 +96,10 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
                 find_exactly_one_zone(rmd_b, zone_id)
                 for zone_id in hvac_data["zone_list"]
             ]
-            for hvac_id, hvac_data in get_hvac_zone_list_w_area_dict(rmd_b).items()
+            for hvac_id, hvac_data in get_hvac_zone_list_w_area_by_rmd_dict(
+                rmd_b
+            ).items()
         }
-
         return {
             "baseline_system_types_dict": {
                 system_type: [
@@ -142,7 +144,7 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
             cooling_system_b = hvac_b["cooling_system"]
             baseline_system_types_dict_b = data["baseline_system_types_dict"]
             hvac_zone_list_w_area_dict_b = data["baseline_system_zones_served_dict"]
-            zone_list_b = hvac_zone_list_w_area_dict_b[hvac_b.id]
+            zone_list_b = hvac_zone_list_w_area_dict_b[hvac_b["id"]]
             is_zone_agg_factor_undefined_and_needed = False
 
             hvac_system_type_b = next(
@@ -160,6 +162,11 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
                     "design_total_cool_capacity"
                 )
 
+            if total_cool_capacity_b is not None:
+                total_cool_capacity_mag_b = total_cool_capacity_b.to("Btu/h").magnitude
+            else:
+                total_cool_capacity_mag_b = None
+
             if total_cool_capacity_b is not None and hvac_system_type_b in [
                 HVAC_SYS.SYS_3,
                 HVAC_SYS.SYS_3B,
@@ -168,10 +175,10 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
                 assert len(zone_list_b) == 1
                 hvac_zone_aggregation_factor = zone_list_b[0].get("aggregation_factor")
                 if hvac_zone_aggregation_factor is not None:
-                    total_cool_capacity_b = (
-                        total_cool_capacity_b / hvac_zone_aggregation_factor
+                    total_cool_capacity_mag_b = (
+                        total_cool_capacity_mag_b / hvac_zone_aggregation_factor
                     )
-                elif total_cool_capacity_b >= CAPACITY_LOW_THRESHOLD:
+                elif total_cool_capacity_mag_b >= CAPACITY_LOW_THRESHOLD:
                     is_zone_agg_factor_undefined_and_needed = True
 
             if hvac_system_type_b in [HVAC_SYS.SYS_1, HVAC_SYS.SYS_1B, HVAC_SYS.SYS_2]:
@@ -188,7 +195,9 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
                 HVAC_SYS.SYS_6,
                 HVAC_SYS.SYS_6B,
             ]:
-                expected_baseline_eff_data = table_g3_5_1_lookup(total_cool_capacity_b)
+                expected_baseline_eff_data = table_g3_5_1_lookup(
+                    total_cool_capacity_mag_b
+                )
                 most_conservative_eff_b = expected_baseline_eff_data[
                     "most_conservative_efficiency"
                 ]
@@ -199,9 +208,9 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
                     f"System type {hvac_system_type_b} does not match any of the applicable system types: 1, 1B, 2, 3, 3B, 4, 5, 5B, 6, 6B",
                 )
                 expected_baseline_eff_data = table_g3_5_2_lookup(
-                    hvac_system_type_b,
                     HeatPumpEquipmentType.HEAT_PUMP_AIR_COOLED_COOLING,
-                    total_cool_capacity_b,
+                    RatingCondition.SINGLE_PACKAGE,
+                    total_cool_capacity_mag_b,
                 )
                 most_conservative_eff_b = expected_baseline_eff_data[
                     "most_conservative_efficiency"
