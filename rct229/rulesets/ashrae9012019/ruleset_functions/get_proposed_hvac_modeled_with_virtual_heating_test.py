@@ -193,19 +193,19 @@ TEST_RMD_U_PREHEAT_SYSTEM = quantify_rmd(TEST_RPD_U_PREHEAT_SYSTEM)[
 
 
 def test__TEST_RPD__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RMD_P_HEATING_SYSTEM)
+    schema_validation_result = schema_validate_rmd(TEST_RPD_P_HEATING_SYSTEM)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
-    schema_validation_result = schema_validate_rmd(TEST_RMD_U_HEATING_SYSTEM)
+    schema_validation_result = schema_validate_rmd(TEST_RPD_U_HEATING_SYSTEM)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
-    schema_validation_result = schema_validate_rmd(TEST_RMD_P_PREHEAT_SYSTEM)
+    schema_validation_result = schema_validate_rmd(TEST_RPD_P_PREHEAT_SYSTEM)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
-    schema_validation_result = schema_validate_rmd(TEST_RMD_U_PREHEAT_SYSTEM)
+    schema_validation_result = schema_validate_rmd(TEST_RPD_U_PREHEAT_SYSTEM)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"

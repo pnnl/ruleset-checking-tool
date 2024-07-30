@@ -100,11 +100,11 @@ TEST_RMD_U_COOLING_SYSTEM = quantify_rmd(TEST_RPD_U_COOLING_SYSTEM)[
 
 
 def test__TEST_RPD__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RMD_P_COOLING_SYSTEM)
+    schema_validation_result = schema_validate_rmd(TEST_RPD_P_COOLING_SYSTEM)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
-    schema_validation_result = schema_validate_rmd(TEST_RMD_U_COOLING_SYSTEM)
+    schema_validation_result = schema_validate_rmd(TEST_RPD_U_COOLING_SYSTEM)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
