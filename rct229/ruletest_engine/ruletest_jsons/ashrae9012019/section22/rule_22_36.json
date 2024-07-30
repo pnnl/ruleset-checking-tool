@@ -3,19 +3,19 @@
         "Section": 22,
         "Rule": 36,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is correctly modeled with constant  primary/ variable secondary flow_control keys.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The chilled water system is modeled with a constant flow primary loop and variable flow secondary loop.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-36",
             "ruleset_reference": "G3.1.1.3.4 and G3.1.3.10",
-            "rule_description": "Baseline systems served by purchased chilled water shall be modeled with a chilled water distribution pump",
+            "rule_description": "Baseline chilled water systems that do not use purchased chilled water shall be modeled with constant flow primary loop and variable flow secondary loop.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "No",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -158,19 +158,19 @@
         "Section": 22,
         "Rule": 36,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is incorrectly modeled with variable flow primary loop.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The chilled water system is modeled with a variable flow primary loop.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-36",
             "ruleset_reference": "G3.1.1.3.4 and G3.1.3.10",
-            "rule_description": "Baseline systems served by purchased chilled water shall be modeled with a chilled water distribution pump",
+            "rule_description": "Baseline chilled water systems that do not use purchased chilled water shall be modeled with constant flow primary loop and variable flow secondary loop.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "No",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -313,19 +313,19 @@
         "Section": 22,
         "Rule": 36,
         "Test": "c",
-        "test_description": "The project has one building segment with one zone.  HVAC is system type 13 and is correctly modeled with constant  primary/ variable secondary flow_control keys.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 13 with a chilled water system. The chilled water system is modeled with a constant flow primary loop and variable flow secondary loop.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-36",
             "ruleset_reference": "G3.1.1.3.4 and G3.1.3.10",
-            "rule_description": "Baseline systems served by purchased chilled water shall be modeled with a chilled water distribution pump",
+            "rule_description": "Baseline chilled water systems that do not use purchased chilled water shall be modeled with constant flow primary loop and variable flow secondary loop.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "No",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -434,19 +434,19 @@
         "Section": 22,
         "Rule": 36,
         "Test": "d",
-        "test_description": "The project has one building segment with one zone.  HVAC is system type 13 and is incorrectly modeled with constant flow secondary loop.  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 13 with a chilled water system. The chilled water system is modeled with a constant flow secondary loop.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-36",
             "ruleset_reference": "G3.1.1.3.4 and G3.1.3.10",
-            "rule_description": "Baseline systems served by purchased chilled water shall be modeled with a chilled water distribution pump",
+            "rule_description": "Baseline chilled water systems that do not use purchased chilled water shall be modeled with constant flow primary loop and variable flow secondary loop.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "No",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -555,19 +555,19 @@
         "Section": 22,
         "Rule": 36,
         "Test": "e",
-        "test_description": "The project has one building segment with one zone.  HVAC is system type 10 and does not have a chilled water plant.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 10. There is no chilled water system.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-36",
             "ruleset_reference": "G3.1.1.3.4 and G3.1.3.10",
-            "rule_description": "Baseline systems served by purchased chilled water shall be modeled with a chilled water distribution pump",
+            "rule_description": "Baseline chilled water systems that do not use purchased chilled water shall be modeled with constant flow primary loop and variable flow secondary loop.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "No",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",

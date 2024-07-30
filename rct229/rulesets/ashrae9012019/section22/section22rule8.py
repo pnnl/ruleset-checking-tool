@@ -53,8 +53,8 @@ class Section22Rule8(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmr_baseline = context.BASELINE_0
-        rmd_b = rmr_baseline["ruleset_model_descriptions"][0]
+        rmd_baseline = context.BASELINE_0
+        rmd_b = rmd_baseline["ruleset_model_descriptions"][0]
         baseline_system_types_dict = get_baseline_system_types(rmd_b)
         # create a list containing all HVAC systems that are modeled in the rmd_b
         available_type_list = [
@@ -76,8 +76,8 @@ class Section22Rule8(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmr_baseline = context.BASELINE_0
-        rmd_b = rmr_baseline["ruleset_model_descriptions"][0]
+        rmd_baseline = context.BASELINE_0
+        rmd_b = rmd_baseline["ruleset_model_descriptions"][0]
 
         loop_pump_dict = {}
         for pump in find_all("$.pumps[*]", rmd_b):

@@ -3,19 +3,19 @@
         "Section": 19,
         "Rule": 29,
         "Test": "a",
-        "test_description": "The project has one building segment with one zone. Project does not have spaces with health and safety mandated minimum ventilation requirements. HVAC fans correctly cycle on and off to maintain temperature setpoint during unoccupied hours. Expected outcome: PASS",
+        "test_description": "The project has one building segment with one zone. Project does not have spaces with health and safety mandated minimum ventilation requirements. HVAC fans correctly cycle on and off to maintain temperature setpoint during unoccupied hours.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-29",
             "ruleset_reference": "Table G3.1 Section 4 & G3.1.2.4",
             "rule_description": "Schedules for HVAC fans that provide outdoor air for ventilation excluding unoccupied hours in spaces that have health and safety mandated minimum ventilation requirements shall be cycled ON and OFF to meet heating and cooling loads during unoccupied hours in the baseline design. ",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -89,19 +89,19 @@
         "Section": 19,
         "Rule": 29,
         "Test": "b",
-        "test_description": "Project does not have spaces with health and safety mandated minimum ventilation requirements. HVAC fans incorrectly stay off during unoccupied hours. Expected outcome: FAIL",
+        "test_description": "Project does not have spaces with health and safety mandated minimum ventilation requirements. HVAC fans incorrectly stay off during unoccupied hours.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-29",
             "ruleset_reference": "Table G3.1 Section 4 & G3.1.2.4",
             "rule_description": "Schedules for HVAC fans that provide outdoor air for ventilation excluding unoccupied hours in spaces that have health and safety mandated minimum ventilation requirements shall be cycled ON and OFF to meet heating and cooling loads during unoccupied hours in the baseline design. ",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
