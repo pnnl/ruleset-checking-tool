@@ -24,7 +24,7 @@ class Section22Rule15(RuleDefinitionListIndexedBase):
             each_rule=Section22Rule15.HeatRejectionRule(),
             index_rmd=BASELINE_0,
             id="22-15",
-            description="Heat Rejection Device Approach calculated correctly (T/F), Approach = 25.72-(0.24*WB)",
+            description="The baseline heat rejection device shall have the approach calculated according to the equation 25.72 - (0.24*WB), valid for evaporation design wet-bulb temperatures from 55°F to 90°F.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section 22 CHW&CW Loop",
             is_primary_rule=True,
