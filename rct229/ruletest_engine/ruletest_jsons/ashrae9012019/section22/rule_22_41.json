@@ -3,8 +3,9 @@
         "Section": 22,
         "Rule": 41,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones. Purchased chilled water systems modeled with only one external fluid loop in the baseline design. Expected result: Undetermined",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The chilled water system uses purchased chilled water and is modeled with a single chilled water loop.",
         "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "B-RMD SHOULD BE MODELED WITH PURCHASED CHILLED WATER. VERIFY THAT THERE IS ONLY ONE PURCHASED CHILLED WATER LOOP IN THE BASELINE MODEL.",
         "standard": {
             "rule_id": "22-41",
             "ruleset_reference": "Section G3.1.3 System-Specific Baseline HVAC System Requirements",
@@ -140,8 +141,9 @@
         "Section": 22,
         "Rule": 41,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones. Purchased chilled water systems modeled with two external fluid loops in the baseline design. Expected result: Undetermined",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The chilled water system uses purchased chilled water and is modeled with two chilled water loops.",
         "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "B-RMD SHOULD BE MODELED WITH PURCHASED CHILLED WATER. VERIFY THAT THERE IS ONLY ONE PURCHASED CHILLED WATER LOOP IN THE BASELINE MODEL.",
         "standard": {
             "rule_id": "22-41",
             "ruleset_reference": "Section G3.1.3 System-Specific Baseline HVAC System Requirements",
@@ -282,7 +284,7 @@
         "Section": 22,
         "Rule": 41,
         "Test": "c",
-        "test_description": "The project has one building segment with two zones. Baseline building does not utilize purchased chilled water and does not apply to rule 22-41. Expected result: Undetermined",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The chilled water system does not use purchased chilled water.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-41",

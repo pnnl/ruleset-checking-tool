@@ -8,7 +8,7 @@
         "standard": {
             "rule_id": "22-21",
             "ruleset_reference": "G3.1.3.7",
-            "rule_description": "The baseline building design\u2019s chiller plant shall be modeled with chillers having the type as indicated in Table G3.1.3.7 as a function of building peak cooling load.",
+            "rule_description": "The baseline chiller plant shall be modeled with chiller(s) having the type as indicated in Table G3.1.3.7 as a function of building peak cooling load.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -168,7 +168,7 @@
         "standard": {
             "rule_id": "22-21",
             "ruleset_reference": "G3.1.3.7",
-            "rule_description": "The baseline building design\u2019s chiller plant shall be modeled with chillers having the type as indicated in Table G3.1.3.7 as a function of building peak cooling load.",
+            "rule_description": "The baseline chiller plant shall be modeled with chiller(s) having the type as indicated in Table G3.1.3.7 as a function of building peak cooling load.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -328,7 +328,7 @@
         "standard": {
             "rule_id": "22-21",
             "ruleset_reference": "G3.1.3.7",
-            "rule_description": "The baseline building design\u2019s chiller plant shall be modeled with chillers having the type as indicated in Table G3.1.3.7 as a function of building peak cooling load.",
+            "rule_description": "The baseline chiller plant shall be modeled with chiller(s) having the type as indicated in Table G3.1.3.7 as a function of building peak cooling load.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -490,7 +490,7 @@
         "standard": {
             "rule_id": "22-21",
             "ruleset_reference": "G3.1.3.7",
-            "rule_description": "The baseline building design\u2019s chiller plant shall be modeled with chillers having the type as indicated in Table G3.1.3.7 as a function of building peak cooling load.",
+            "rule_description": "The baseline chiller plant shall be modeled with chiller(s) having the type as indicated in Table G3.1.3.7 as a function of building peak cooling load.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -652,7 +652,7 @@
         "standard": {
             "rule_id": "22-21",
             "ruleset_reference": "G3.1.3.7",
-            "rule_description": "The baseline building design\u2019s chiller plant shall be modeled with chillers having the type as indicated in Table G3.1.3.7 as a function of building peak cooling load.",
+            "rule_description": "The baseline chiller plant shall be modeled with chiller(s) having the type as indicated in Table G3.1.3.7 as a function of building peak cooling load.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",

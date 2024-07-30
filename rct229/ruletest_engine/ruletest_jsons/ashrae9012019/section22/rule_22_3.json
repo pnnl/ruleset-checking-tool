@@ -8,7 +8,7 @@
         "standard": {
             "rule_id": "22-3",
             "ruleset_reference": "G3.1.3.9",
-            "rule_description": "Baseline chilled water loops that do not use purchased cooling and do not serve any computer rooms (baseline system type 11) shall have the chilled-water supply temperature reset based on outdoor dry-bulb temperature.",
+            "rule_description": "Baseline chilled water loops that do not use purchased cooling and do not serve any computer rooms (baseline system type 11) shall have the chilled water supply temperature reset based on outdoor dry-bulb temperature.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -159,7 +159,7 @@
         "standard": {
             "rule_id": "22-3",
             "ruleset_reference": "G3.1.3.9",
-            "rule_description": "Baseline chilled water loops that do not use purchased cooling and do not serve any computer rooms (baseline system type 11) shall have the chilled-water supply temperature reset based on outdoor dry-bulb temperature.",
+            "rule_description": "Baseline chilled water loops that do not use purchased cooling and do not serve any computer rooms (baseline system type 11) shall have the chilled water supply temperature reset based on outdoor dry-bulb temperature.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -310,7 +310,7 @@
         "standard": {
             "rule_id": "22-3",
             "ruleset_reference": "G3.1.3.9",
-            "rule_description": "Baseline chilled water loops that do not use purchased cooling and do not serve any computer rooms (baseline system type 11) shall have the chilled-water supply temperature reset based on outdoor dry-bulb temperature.",
+            "rule_description": "Baseline chilled water loops that do not use purchased cooling and do not serve any computer rooms (baseline system type 11) shall have the chilled water supply temperature reset based on outdoor dry-bulb temperature.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -463,7 +463,7 @@
         "standard": {
             "rule_id": "22-3",
             "ruleset_reference": "G3.1.3.9",
-            "rule_description": "Baseline chilled water loops that do not use purchased cooling and do not serve any computer rooms (baseline system type 11) shall have the chilled-water supply temperature reset based on outdoor dry-bulb temperature.",
+            "rule_description": "Baseline chilled water loops that do not use purchased cooling and do not serve any computer rooms (baseline system type 11) shall have the chilled water supply temperature reset based on outdoor dry-bulb temperature.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -616,7 +616,7 @@
         "standard": {
             "rule_id": "22-3",
             "ruleset_reference": "G3.1.3.9",
-            "rule_description": "Baseline chilled water loops that do not use purchased cooling and do not serve any computer rooms (baseline system type 11) shall have the chilled-water supply temperature reset based on outdoor dry-bulb temperature.",
+            "rule_description": "Baseline chilled water loops that do not use purchased cooling and do not serve any computer rooms (baseline system type 11) shall have the chilled water supply temperature reset based on outdoor dry-bulb temperature.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",

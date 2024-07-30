@@ -3,7 +3,7 @@
         "Section": 22,
         "Rule": 32,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is correctly modeled with the chiller part_load_efficiency correctly matching the value in Table G3.5.3 part_load_efficiency_metric set to INTEGRATED_PART_LOAD_VALUE.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The baseline chiller efficiency matches the prescibed efficiency based on the capacity range in table G3.5.3.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-32",
@@ -154,7 +154,7 @@
         "Section": 22,
         "Rule": 32,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is incorrectly modeled with the part_load_efficiency_metric set to NONSTANDARD_PART_LOAD_VALUE.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The baseline chiller efficiency metric does not match the prescibed efficiency based on the capacity range in table G3.5.3.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-32",
@@ -305,7 +305,7 @@
         "Section": 22,
         "Rule": 32,
         "Test": "c",
-        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is modeled with the part_load_efficiency_metric correctly set to INTEGRATED_PART_LOAD_VALUE, but an incorrect part_load_efficiency.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The baseline chiller efficiency does not match the prescibed efficiency based on the capacity range in table G3.5.3.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-32",
@@ -456,7 +456,7 @@
         "Section": 22,
         "Rule": 32,
         "Test": "d",
-        "test_description": "The project has one building segment with two zones.  HVAC is system type 8 and is correctly modeled with the chiller part_load_efficiency correctly matching the value in Table G3.5.3 part_load_efficiency_metric set to INTEGRATED_PART_LOAD_VALUE.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 8 with a chilled water system. The baseline chiller efficiency matches the prescibed efficiency based on the capacity range in table G3.5.3.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-32",
@@ -596,7 +596,7 @@
         "Section": 22,
         "Rule": 32,
         "Test": "e",
-        "test_description": "The project has one building segment with two zones.  HVAC is system type 8 and is incorrectly modeled with the part_load_efficiency_metric set to NONSTANDARD_PART_LOAD_VALUE.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 8 with a chilled water system. The baseline chiller efficiency metric does not match the prescibed efficiency based on the capacity range in table G3.5.3.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-32",
@@ -736,7 +736,7 @@
         "Section": 22,
         "Rule": 32,
         "Test": "f",
-        "test_description": "The project has one building segment with two zones.  HVAC is system type 8 and is modeled with the part_load_efficiency_metric correctly set to INTEGRATED_PART_LOAD_VALUE, but an incorrect part_load_efficiency.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 8 with a chilled water system. The baseline chiller efficiency does not match the prescibed efficiency based on the capacity range in table G3.5.3.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-32",
@@ -876,7 +876,7 @@
         "Section": 22,
         "Rule": 32,
         "Test": "g",
-        "test_description": "The project has one building segment with two zones.  HVAC is system type 6 and does not have a chilled water plant.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 6. There are no chillers.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-32",

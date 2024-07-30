@@ -5,6 +5,7 @@
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a cooling tower. The cooling tower fan is more efficient than the requirement.",
         "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "which is greater than the required efficiency of 38.2 gpm/hp, resulting in a more stringent baseline. However, it was not possible to verify that the modeling inputs correspond to the rating conditions in Table 6.8.1-7.",
         "standard": {
             "rule_id": "22-17",
             "ruleset_reference": "G3.1.3.11",
@@ -165,6 +166,7 @@
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a cooling tower. The cooling tower fan efficiency is equal to the requirement.",
         "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "The project includes a cooling tower. We calculated the cooling tower efficiency to be correct at 38.2 gpm/hp. However, it was not possible to verify that the modeling inputs correspond to the rating conditions in Table 6.8.1-7.",
         "standard": {
             "rule_id": "22-17",
             "ruleset_reference": "G3.1.3.11",
@@ -325,6 +327,7 @@
         "Test": "c",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a cooling tower. The cooling tower fan is less efficient than the requirement.",
         "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "which is less than the required efficiency of 38.2 gpm / hp.  However, it was not possible to verify that the modeling inputs correspond to the rating conditions in Table 6.8.1-7. Please review the efficiency and ensure that it is correct at the rating conditions as specified in the Table 6.8.1-7.",
         "standard": {
             "rule_id": "22-17",
             "ruleset_reference": "G3.1.3.11",

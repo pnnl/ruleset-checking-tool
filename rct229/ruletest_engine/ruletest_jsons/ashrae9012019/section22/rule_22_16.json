@@ -8,7 +8,7 @@
         "standard": {
             "rule_id": "22-16",
             "ruleset_reference": "G3.1.3.11",
-            "rule_description": "The baseline condenser-water design supply temperature shall be calculated using the cooling tower approach to the 0.4% evaporation design wet-bulb temperature, valid for evaporation design wet-bulb temperatures from 55\u00b0F to 90\u00b0F.",
+            "rule_description": "The baseline condenser water design supply temperature shall be calculated using the cooling tower approach to the 0.4% evaporation design wet-bulb temperature, valid for evaporation design wet-bulb temperatures from 55\u00b0F to 90\u00b0F.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -172,7 +172,7 @@
         "standard": {
             "rule_id": "22-16",
             "ruleset_reference": "G3.1.3.11",
-            "rule_description": "The baseline condenser-water design supply temperature shall be calculated using the cooling tower approach to the 0.4% evaporation design wet-bulb temperature, valid for evaporation design wet-bulb temperatures from 55\u00b0F to 90\u00b0F.",
+            "rule_description": "The baseline condenser water design supply temperature shall be calculated using the cooling tower approach to the 0.4% evaporation design wet-bulb temperature, valid for evaporation design wet-bulb temperatures from 55\u00b0F to 90\u00b0F.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -336,7 +336,7 @@
         "standard": {
             "rule_id": "22-16",
             "ruleset_reference": "G3.1.3.11",
-            "rule_description": "The baseline condenser-water design supply temperature shall be calculated using the cooling tower approach to the 0.4% evaporation design wet-bulb temperature, valid for evaporation design wet-bulb temperatures from 55\u00b0F to 90\u00b0F.",
+            "rule_description": "The baseline condenser water design supply temperature shall be calculated using the cooling tower approach to the 0.4% evaporation design wet-bulb temperature, valid for evaporation design wet-bulb temperatures from 55\u00b0F to 90\u00b0F.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -500,7 +500,7 @@
         "standard": {
             "rule_id": "22-16",
             "ruleset_reference": "G3.1.3.11",
-            "rule_description": "The baseline condenser-water design supply temperature shall be calculated using the cooling tower approach to the 0.4% evaporation design wet-bulb temperature, valid for evaporation design wet-bulb temperatures from 55\u00b0F to 90\u00b0F.",
+            "rule_description": "The baseline condenser water design supply temperature shall be calculated using the cooling tower approach to the 0.4% evaporation design wet-bulb temperature, valid for evaporation design wet-bulb temperatures from 55\u00b0F to 90\u00b0F.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -647,7 +647,7 @@
         "standard": {
             "rule_id": "22-16",
             "ruleset_reference": "G3.1.3.11",
-            "rule_description": "The baseline condenser-water design supply temperature shall be calculated using the cooling tower approach to the 0.4% evaporation design wet-bulb temperature, valid for evaporation design wet-bulb temperatures from 55\u00b0F to 90\u00b0F.",
+            "rule_description": "The baseline condenser water design supply temperature shall be calculated using the cooling tower approach to the 0.4% evaporation design wet-bulb temperature, valid for evaporation design wet-bulb temperatures from 55\u00b0F to 90\u00b0F.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -794,7 +794,7 @@
         "standard": {
             "rule_id": "22-16",
             "ruleset_reference": "G3.1.3.11",
-            "rule_description": "The baseline condenser-water design supply temperature shall be calculated using the cooling tower approach to the 0.4% evaporation design wet-bulb temperature, valid for evaporation design wet-bulb temperatures from 55\u00b0F to 90\u00b0F.",
+            "rule_description": "The baseline condenser water design supply temperature shall be calculated using the cooling tower approach to the 0.4% evaporation design wet-bulb temperature, valid for evaporation design wet-bulb temperatures from 55\u00b0F to 90\u00b0F.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",

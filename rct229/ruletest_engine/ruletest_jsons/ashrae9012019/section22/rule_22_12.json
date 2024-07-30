@@ -163,6 +163,7 @@
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7. The heat rejection system has two condenser water loops with a single cooling tower.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "There is more than one condenser loop for this project. There should only be one condenser loop attached to all chillers in the baseline chiller plant.",
         "standard": {
             "rule_id": "22-12",
             "ruleset_reference": "G3.1.3.11",
@@ -330,6 +331,7 @@
         "Test": "c",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7. The heat rejection system has a single condenser water loop with two cooling towers.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "There is more than one cooling tower for the baseline chiller plant. There should only be one cooling tower attached to the condenser loop.",
         "standard": {
             "rule_id": "22-12",
             "ruleset_reference": "G3.1.3.11",
@@ -492,6 +494,7 @@
         "Test": "d",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7. The heat rejection system has two condenser water loops and two cooling towers.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "There is more than one cooling tower on this loop and there is more than one condenser loop for the chiller plant. For the baseline chiller plant, there should be only one condenser loop with only one cooling tower.",
         "standard": {
             "rule_id": "22-12",
             "ruleset_reference": "G3.1.3.11",

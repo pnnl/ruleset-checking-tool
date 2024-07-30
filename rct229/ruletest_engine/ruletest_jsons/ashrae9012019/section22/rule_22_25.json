@@ -3,7 +3,7 @@
         "Section": 22,
         "Rule": 25,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is correctly modeled with the primary chilled water pump having 9 w/gpm.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The primary chilled water pump power is 9 W/gpm at design conditions.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-25",
@@ -151,7 +151,7 @@
         "Section": 22,
         "Rule": 25,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is incorrectly modeled with the primary chilled water pump having 11 w/gpm.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The primary chilled water pump power is 12 W/gpm at design conditions.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-25",
@@ -299,7 +299,7 @@
         "Section": 22,
         "Rule": 25,
         "Test": "c",
-        "test_description": "The project has one building segment with one zone.  HVAC is system type 12 and is correctly modeled with the primary chilled water pump having 9 w/gpm.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 12 with a chilled water system. The primary chilled water pump power is 9 W/gpm at design conditions.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-25",
@@ -430,7 +430,7 @@
         "Section": 22,
         "Rule": 25,
         "Test": "d",
-        "test_description": "The project has one building segment with one zone.  HVAC is system type 12 and is incorrectly modeled with the primary chilled water pump having 11 w/gpm.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 12 with a chilled water system. The primary chilled water pump power is 12 W/gpm at design conditions.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-25",
@@ -561,7 +561,7 @@
         "Section": 22,
         "Rule": 25,
         "Test": "e",
-        "test_description": "The project has one building segment with one zone.  HVAC is system type 11.2  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 11 with a chilled water system. The chilled water system serves a computer room.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-25",

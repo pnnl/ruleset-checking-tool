@@ -3,8 +3,9 @@
         "Section": 22,
         "Rule": 39,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones. Baseline building does not have purchase chilled water. Expected result: Not Applicable",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The chilled water system does not use purchased chilled water.",
         "expected_rule_outcome": "not_applicable",
+        "expected_raised_message_includes": "Rule 22-39 Not Applicable - the baseline is not modeled with Purchased Chilled Water",
         "standard": {
             "rule_id": "22-39",
             "ruleset_reference": "G3.1.3.10",
@@ -150,8 +151,9 @@
         "Section": 22,
         "Rule": 39,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones. Baseline building is modeled with purchased chilled water and correctly has a has a pump power of 16 W/gpm. Expected result: Undetermined",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The chilled water system uses purchased chilled water and has a chilled water pump power of 16 W/gpm at design conditions.",
         "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "Manual Check Required - Baseline is modeled with purchased chilled water. Make sure baseline systems served by purchased chilled water are modeled with a distribution pump whose pump power is 16 W/gpm.",
         "standard": {
             "rule_id": "22-39",
             "ruleset_reference": "G3.1.3.10",
@@ -288,8 +290,9 @@
         "Section": 22,
         "Rule": 39,
         "Test": "c",
-        "test_description": "The project has one building segment with two zones. Baseline building is modeled with purchased chilled water and incorrectly has a has a pump power of 20 W/gpm. Expected result: Undetermined",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The chilled water system uses purchased chilled water and has a chilled water pump power of 20 W/gpm at design conditions.",
         "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "Manual Check Required - Baseline is modeled with purchased chilled water. Make sure baseline systems served by purchased chilled water are modeled with a distribution pump whose pump power is 16 W/gpm.",
         "standard": {
             "rule_id": "22-39",
             "ruleset_reference": "G3.1.3.10",
