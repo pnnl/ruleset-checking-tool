@@ -16,7 +16,7 @@
 - **Table G3.1.1-2(swh_bat)**  
 **Function Call:**  
 - **get_component_by_id**  
-- **get_SWH_jcomponents_associated_with_each_SWH_bat**  
+- **get_SWH_components_associated_with_each_SWH_bat**  
 - **get_SWH_bats_and_SWH_use**  
 - **get_SWH_equipment_type**  
 
@@ -32,7 +32,7 @@
     - otherwise, rule is not applicable for this swh_bat: `else: NOT_APPLICABLE`
 
   ## Rule Logic: 
-  - use get_SWH_jcomponents_associated_with_each_SWH_bat to get the SWH use types and SWH use in the building: `swh_bats_and_uses_b = get_SWH_jcomponents_associated_with_each_SWH_bat(B_RMD)`
+  - use get_SWH_components_associated_with_each_SWH_bat to get the SWH use types and SWH use in the building: `swh_bats_and_uses_b = get_SWH_components_associated_with_each_SWH_bat(B_RMD)`
   - look at each SWH Equipment in the swh_bat.  Appendix G requires only one system per bat, but this is covered in rule 11-8, so here we will allow multiple SWH equipment: `for swh_equip_id in swh_bats_and_uses_b[swh_bat]["SWHHeatingEq"]:`
     - get the SWH equipment type using the function get_SWH_equipment_type: `swh_equip_type = get_SWH_equipment_type(B_RMD, swh_equip_id)`
     - get the expected SWH equipment type by looking it up in the table G3.1.1-2: `expected_swh_equip_type = data_lookup(Table G3.1.1-2, swh_bat)`
