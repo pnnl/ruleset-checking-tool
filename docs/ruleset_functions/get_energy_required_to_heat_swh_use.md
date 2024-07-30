@@ -5,6 +5,7 @@ Description: This function calculates the total energy required to heat the SWH 
 Inputs:
 - **swh_use**
 - **RMD**
+- **building_segment**
 
 Returns:
 - **energy_required_by_space**: A dict where the keys are space_ids and values are the total energy required to heat the swh_use for that space.  If a swh_use is not assigned to any spaces, the key will be "NO_SPACES_ASSIGNED"
@@ -30,6 +31,7 @@ Logic:
 - now we need to get all of the spaces that the swh_use is applied to.  The convention is that if any spaces reference the swh_use, then the service water heating use applies to only those spaces. If no spaces reference the service water heating use, it applies to all spaces in the building segment.
 - get the ids of spaces served by this swh_use: `space_ids = get_spaces_served_by_SWH_use(RMD, swh_use)`
 - convert the space ids to spaces: `spaces = [get_obj_by_id(space_id, RMD) for space_id in space_ids]`
+- if there are no spaces, and the use_units are anything other than POWER and VOLUME, the spaces list should include all spaces in the building segment: `if len(spaces) == 0 and use_units not in ["POWER","VOLUME"]: spaces = building_segment.spaces`
 - create the dictionary: `energy_required_by_space = {}`
 - calculate the energy for each space: `for space in spaces:`
   - convert the swh_water_used from whatever units it's currently in to volume (assumed to be gallons) OR, if the use units are one of the power types, calculate the energy required directly
