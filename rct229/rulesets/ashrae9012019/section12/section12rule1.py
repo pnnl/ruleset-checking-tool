@@ -5,6 +5,7 @@ from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.match_lists import match_lists_by_id
+from rct229.utils.pint_utils import ZERO
 
 COMPLIANCE_PATH_TYPE = SchemaEnums.schema_enums["CompliancePathOptions2019ASHRAE901"]
 MANUAL_CHECK_REQUIRED_MSG = "The proposed building miscellaneous equipment load is less than the baseline, which is only permitted when the model is being used to quantify performance that exceeds the requirements of Standard 90.1."
@@ -65,8 +66,8 @@ class Section12Rule1(RuleDefinitionListIndexedBase):
                 misc_equipment_b,
                 misc_equipment_p,
             ) in proposed_baseline_misc_equipment_pairs:
-                misc_equipment_power_b = misc_equipment_b["power"]
-                misc_equipment_power_p = misc_equipment_p["power"]
+                misc_equipment_power_b = misc_equipment_b.get("power", ZERO.POWER)
+                misc_equipment_power_p = misc_equipment_p.get("power", ZERO.POWER)
                 if misc_equipment_power_b > misc_equipment_power_p:
                     reduced_misc_equipment_power.append(
                         {
