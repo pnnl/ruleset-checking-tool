@@ -31,10 +31,7 @@ class Section22Rule38(RuleDefinitionListIndexedBase):
 
     class RulesetModelInstanceRule(PartialRuleDefinition):
         def __init__(self):
-            super(
-                Section22Rule38.RulesetModelInstanceRule,
-                self,
-            ).__init__(
+            super(Section22Rule38.RulesetModelInstanceRule, self,).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
