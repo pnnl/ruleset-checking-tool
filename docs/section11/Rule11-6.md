@@ -11,14 +11,14 @@
 **Data Lookup:**   
 **Function Call:**
 
-1. get_SWH_equipment_associated_with_each_swh_distribution_system()
+1. get_swh_components_associated_with_each_swh_distribution_system()
 
 **Applicability Checks:**
 - Every Baseline distribution system is applicable
 
 
     ## Rule Logic:
-- use get_SWH_equipment_associated_with_each_swh_distribution_system to get the SWH BATs and SWH equipment in the building: `swh_distribution_and_eq_dict = get_SWH_equipment_associated_with_each_swh_distribution_system(B_RMD)`
+- use get_swh_components_associated_with_each_swh_distribution_system to get the SWH BATs and SWH equipment in the building: `swh_distribution_and_eq_dict = get_swh_components_associated_with_each_swh_distribution_system(B_RMD)`
     - create a value indicating whether piping losses were modeled: `piping_losses_modeled = false`
     - look at every ServiceWaterPiping connected to the distribution: `for piping_id in swh_distribution_and_eq_dict[distribution_id]["Piping"]`
         - get the piping: `piping = get_component_by_id(piping_id, B_RMD, ServiceWaterPiping) `
