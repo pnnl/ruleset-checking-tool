@@ -28,7 +28,7 @@ Logic:
     - get the service water heating uses in the building segment `service_water_heating_use_ids = get_SWH_uses_associated_with_each_building_segment(RMD, building_segment.id)`
     - look at each service water heating use id: `for swh_use_id in service_water_heating_use_ids:`
         - get the swh_use using get_obj_by_id : `swh_use = get_obj_by_id (RMD, swh_use_id)`
-        - get the energy required to heat the water using the function get_energy_required_to_heat_swh_use: `energy_required = get_energy_required_to_heat_swh_use(swh_use, RMD)`
+        - get the energy required to heat the water using the function get_energy_required_to_heat_swh_use: `energy_required = get_energy_required_to_heat_swh_use(swh_use, RMD, building_segment)`
         - add the energy required to heat the swh use, to "EnergyRequired" for this bat: `swh_and_equip_dict[swh_bat]["EnergyRequired"] += energy_required`
         - add the id for the swh_use to the "SWH_Uses" list: `swh_and_equip_dict[swh_bat]["SWH_Uses"].append(swh_use.id)`
         - get the distribution id: `distribution_id = swh_use.served_by_distribution_system`
