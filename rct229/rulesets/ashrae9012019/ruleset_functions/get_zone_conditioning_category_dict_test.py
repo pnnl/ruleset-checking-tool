@@ -712,18 +712,18 @@ TEST_RMD = {
     "type": "BASELINE_0",
 }
 
-TEST_RMD_12 = {
+TEST_RPD_12 = {
     "id": "229_01",
     "ruleset_model_descriptions": [TEST_RMD],
     "data_timestamp": "2024-02-12T09:00Z",
 }
-TEST_BUILDING = quantify_rmd(TEST_RMD_12)["ruleset_model_descriptions"][0]["buildings"][
+TEST_BUILDING = quantify_rmd(TEST_RPD_12)["ruleset_model_descriptions"][0]["buildings"][
     0
 ]
 
 
-def test__TEST_RMD__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RMD_12)
+def test__TEST_RPD__is_valid():
+    schema_validation_result = schema_validate_rmd(TEST_RPD_12)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"

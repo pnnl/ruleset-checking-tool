@@ -36,7 +36,7 @@ TEST_RMD = {
     "type": "BASELINE_0",
 }
 
-TEST_RMD_FULL = {
+TEST_RPD_FULL = {
     "id": "229_01",
     "ruleset_model_descriptions": [TEST_RMD],
     "data_timestamp": "2024-02-12T09:00Z",

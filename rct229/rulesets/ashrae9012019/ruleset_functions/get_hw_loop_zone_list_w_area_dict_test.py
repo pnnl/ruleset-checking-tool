@@ -185,7 +185,7 @@ TEST_RMD = quantify_rmd(GET_HW_LOOP_ZONE_LIST_W_AREA_RMD)["ruleset_model_descrip
 ]
 
 
-def test__TEST_RMD__is_valid():
+def test__TEST_RPD__is_valid():
     schema_validation_result = schema_validate_rmd(GET_HW_LOOP_ZONE_LIST_W_AREA_RMD)
     assert schema_validation_result[
         "passed"

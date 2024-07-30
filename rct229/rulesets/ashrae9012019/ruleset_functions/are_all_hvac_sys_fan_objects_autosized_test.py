@@ -144,15 +144,15 @@ TEST_RMD = {
 }
 
 
-TEST_RMD = {
+TEST_RPD = {
     "id": "ASHRAE229",
     "ruleset_model_descriptions": [TEST_RMD],
     "data_timestamp": "2024-02-12T09:00Z",
 }
 
 
-def test__TEST_RMD__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RMD)
+def test__TEST_RPD__is_valid():
+    schema_validation_result = schema_validate_rmd(TEST_RPD)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"

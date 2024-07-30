@@ -138,7 +138,7 @@ TEST_RMD_FLOOR_NAMES_UNIT = quantify_rmd(TEST_RMD_FLOOR_NAMES)[
 ][0]
 
 
-def test__TEST_RMD__is_valid():
+def test__TEST_RPD__is_valid():
     schema_validation_result = schema_validate_rmd(TEST_RMD_FLOOR_NAMES)
     assert schema_validation_result[
         "passed"

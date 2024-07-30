@@ -154,7 +154,7 @@ TEST_RMD = {
 }
 
 
-TEST_RMD_FULL = {
+TEST_RPD_FULL = {
     "id": "229",
     "ruleset_model_descriptions": [TEST_RMD],
     "data_timestamp": "2024-02-12T09:00Z",
@@ -162,8 +162,8 @@ TEST_RMD_FULL = {
 
 
 def test__compare_context_pair__identical():
-    proposed = TEST_RMD_FULL
-    user = TEST_RMD_FULL
+    proposed = TEST_RPD_FULL
+    user = TEST_RPD_FULL
     error_msg_list = []
     assert compare_context_pair(
         proposed,
@@ -177,8 +177,8 @@ def test__compare_context_pair__identical():
 
 
 def test__proposed_equals_user__identical():
-    proposed = TEST_RMD_FULL
-    user = TEST_RMD_FULL
+    proposed = TEST_RPD_FULL
+    user = TEST_RPD_FULL
     error_msg_list = []
     assert proposed_equals_user(
         index_context=proposed,
@@ -188,8 +188,8 @@ def test__proposed_equals_user__identical():
 
 
 def test__compare_context_pair__different():
-    proposed = TEST_RMD_FULL
-    user = deepcopy(TEST_RMD_FULL)
+    proposed = TEST_RPD_FULL
+    user = deepcopy(TEST_RPD_FULL)
     user["ruleset_model_descriptions"][0]["buildings"][0][
         "building_open_schedule"
     ] = "always_1"
@@ -210,8 +210,8 @@ def test__compare_context_pair__different():
 
 
 def test__proposed_equals_user__different():
-    proposed = TEST_RMD_FULL
-    user = deepcopy(TEST_RMD_FULL)
+    proposed = TEST_RPD_FULL
+    user = deepcopy(TEST_RPD_FULL)
     user["ruleset_model_descriptions"][0]["buildings"][0][
         "building_open_schedule"
     ] = "always_1"

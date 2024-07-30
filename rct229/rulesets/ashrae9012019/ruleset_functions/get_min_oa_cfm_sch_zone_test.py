@@ -76,12 +76,12 @@ def create_flexible_schedule_length(schedule_length):
 TEST_RMD_CORRECT_LENGTH = create_flexible_schedule_length(8760)
 TEST_RMD_WRONG_LENGTH = create_flexible_schedule_length(8700)
 
-TEST_RMD_FULL_CORRECT_LENGTH = {
+TEST_RPD_FULL_CORRECT_LENGTH = {
     "id": "229_01",
     "ruleset_model_descriptions": [TEST_RMD_CORRECT_LENGTH],
     "data_timestamp": "2024-02-12T09:00Z",
 }
-TEST_RMD_FULL_WRONG_LENGTH = {
+TEST_RPD_FULL_WRONG_LENGTH = {
     "id": "229_01",
     "ruleset_model_descriptions": [TEST_RMD_WRONG_LENGTH],
     "data_timestamp": "2024-02-12T09:00Z",
@@ -89,14 +89,14 @@ TEST_RMD_FULL_WRONG_LENGTH = {
 
 
 def test__TEST_RMD_CORRECT_LENGTH__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RMD_FULL_CORRECT_LENGTH)
+    schema_validation_result = schema_validate_rmd(TEST_RPD_FULL_CORRECT_LENGTH)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
 
 
 def test__TEST_RMD_WRONG_LENGTH__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RMD_FULL_WRONG_LENGTH)
+    schema_validation_result = schema_validate_rmd(TEST_RPD_FULL_WRONG_LENGTH)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
