@@ -330,6 +330,11 @@ def run_section_tests(
             if test_error_found:
                 all_tests_pass = False
 
+                if len(test_result_dict["log"]) == 0:
+                    rule_outcome = test_dict["expected_rule_outcome"]
+                    print(
+                        f"FAILURE: {test_id} failed but produced no log errors. Expected '{rule_outcome}'."
+                    )
                 # Print log of all errors
                 for test_result_string in test_result_dict["log"]:
                     print(test_result_string)
@@ -629,12 +634,21 @@ def evaluate_outcome_object(outcome_dict, test_result_dict, test_dict, test_id):
     # If the result key is a list of results (i.e. many elements get tested), keep drilling down until you get single
     # dictionary
     if isinstance(outcome_dict["result"], list):
-        # Iterate through each outcome in outcome results recursively until you get down to individual results
-        for nested_outcome in outcome_dict["result"]:
-            # Check outcome of each in list recursively until "result" key is not a list, but a dictionary
-            evaluate_outcome_object(
-                nested_outcome, test_result_dict, test_dict, test_id
-            )  # , outcome_result_list)
+
+        # If the outcome result is an empty list, flag this as a blanket error
+        if len(outcome_dict["result"]) == 0:
+
+            expected_outcome = test_dict["expected_rule_outcome"]
+            outcome_test = f"FAILURE: Running test {test_id} returned an empty set of results without any reference to 'pass', 'fail', 'undetermined', or 'not_applicable'. Expected '{expected_outcome}'."
+            test_result_dict["log"].append(outcome_test)
+
+        else:
+            # Iterate through each outcome in outcome results recursively until you get down to individual results
+            for nested_outcome in outcome_dict["result"]:
+                # Check outcome of each in list recursively until "result" key is not a list, but a dictionary
+                evaluate_outcome_object(
+                    nested_outcome, test_result_dict, test_dict, test_id
+                )  # , outcome_result_list)
 
     else:
         # Process this tests results
