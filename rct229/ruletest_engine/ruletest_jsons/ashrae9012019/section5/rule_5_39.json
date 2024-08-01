@@ -100,7 +100,7 @@
         "Section": 5,
         "Rule": 39,
         "Test": "b",
-        "test_description": "Project has one building segment with 1 zones containing 2 spaces and a wall surface with a metal coiling door. The building is located in climate zone 8, the surface is EXTERIOR MIXED based on space types in the zone and the adjacency to exterior. All available options for baseline U-factor are the same, but baseline door u-factor does not align and is more conservative.",
+        "test_description": "Project located in climate zone 8 has one building segment with 1 zones containing 2 spaces and a wall surface with a metal coiling door. The zone has mixed residential and nonresidential space types. All available options for baseline U-factor are the same, but baseline door u-factor does not align and is more conservative.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "Rule evaluation fails with a conservative outcome.",
         "standard": {

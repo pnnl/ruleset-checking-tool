@@ -562,7 +562,7 @@
             "baseline": {
                 "id": "RPD 1",
                 "weather": {
-                    "climate_zone": "CZ4A",
+                    "climate_zone": "CZ7",
                     "data_source_type": "OTHER"
                 },
                 "data_timestamp": "2024-02-12T12:00Z",
@@ -585,7 +585,7 @@
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "OFFICE_ENCLOSED",
+                                                        "lighting_space_type": "PARKING_AREA_INTERIOR",
                                                         "floor_area": 23.225759999999998
                                                     },
                                                     {
@@ -620,11 +620,11 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "design_sensible_cool_capacity": 0.0
+                                                    "design_sensible_cool_capacity": 17585.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "design_capacity": 699.8538133333334
+                                                    "design_capacity": 9378.275555555556
                                                 }
                                             }
                                         ]
