@@ -71,7 +71,7 @@ class Section12Rule1(RuleDefinitionListIndexedBase):
                 if misc_equipment_power_b > misc_equipment_power_p:
                     reduced_misc_equipment_power.append(
                         {
-                            "id": misc_equipment_b.id,
+                            "id": misc_equipment_b.get("id"),
                             "baseline_power": misc_equipment_power_b,
                             "proposed_power": misc_equipment_power_p,
                         }
@@ -79,7 +79,7 @@ class Section12Rule1(RuleDefinitionListIndexedBase):
                 elif misc_equipment_power_b < misc_equipment_power_p:
                     unexpected_misc_equipment_power.append(
                         {
-                            "id": misc_equipment_b.id,
+                            "id": misc_equipment_b.get("id"),
                             "baseline_power": misc_equipment_power_b,
                             "proposed_power": misc_equipment_power_p,
                         }
@@ -97,7 +97,7 @@ class Section12Rule1(RuleDefinitionListIndexedBase):
             ]
             compliance_path = calc_vals["compliance_path"]
             return len(unexpected_misc_equipment_power) == 0 and (
-                compliance_path != COMPLIANCE_PATH_TYPE.CODE_COMPLIANCE
+                compliance_path != COMPLIANCE_PATH_TYPE.CODE_COMPLIANT
             )
 
         def rule_check(self, context, calc_vals=None, data=None):
