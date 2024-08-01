@@ -2,7 +2,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_categ
     ZoneConditioningCategory as ZCC,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
-    get_zone_conditioning_category_rmi_dict,
+    get_zone_conditioning_category_rmd_dict,
 )
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.jsonpath_utils import find_all
@@ -38,7 +38,7 @@ def get_number_of_floors(climate_zone: str, rmd: dict) -> int:
     )
 
     if number_of_floors <= 0:
-        zone_conditioning_category_dict = get_zone_conditioning_category_rmi_dict(
+        zone_conditioning_category_dict = get_zone_conditioning_category_rmd_dict(
             climate_zone, rmd
         )
 

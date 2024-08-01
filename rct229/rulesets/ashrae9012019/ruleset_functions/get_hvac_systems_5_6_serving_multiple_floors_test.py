@@ -4,7 +4,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_systems_5_6_servin
 from rct229.schema.schema_utils import quantify_rmd
 from rct229.schema.validate import schema_validate_rmd
 
-TEST_RMI = {
+TEST_RMD = {
     "id": "Test RMD",
     "buildings": [
         {
@@ -93,17 +93,17 @@ TEST_RMI = {
 }
 
 
-TEST_RMD_FULL = {
+TEST_RPD_FULL = {
     "id": "229",
-    "ruleset_model_descriptions": [TEST_RMI],
+    "ruleset_model_descriptions": [TEST_RMD],
     "data_timestamp": "2024-03-08T09:00Z",
 }
 
-TEST_RMI_UNIT = quantify_rmd(TEST_RMD_FULL)["ruleset_model_descriptions"][0]
+TEST_RMD_UNIT = quantify_rmd(TEST_RPD_FULL)["ruleset_model_descriptions"][0]
 
 
-def test__TEST_RMD__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RMD_FULL)
+def test__TEST_RPD__is_valid():
+    schema_validation_result = schema_validate_rmd(TEST_RPD_FULL)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
@@ -111,7 +111,7 @@ def test__TEST_RMD__is_valid():
 
 def test__get_hvac_systems_5_6_serving_multiple_floors():
     hvac_systems_5_6_serving_multiple_floors = (
-        get_hvac_systems_5_6_serving_multiple_floors(TEST_RMI_UNIT)
+        get_hvac_systems_5_6_serving_multiple_floors(TEST_RMD_UNIT)
     )
     assert hvac_systems_5_6_serving_multiple_floors == {
         "System 5": 2

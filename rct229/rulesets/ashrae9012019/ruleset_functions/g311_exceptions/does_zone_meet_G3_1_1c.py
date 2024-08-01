@@ -24,10 +24,10 @@ from rct229.schema.config import ureg
 from rct229.utils.pint_utils import ZERO
 
 ELIGIBLE_PRIMARY_SYSTEM_TYPES = [
-    # HVAC_SYS.SYS_5,
-    # HVAC_SYS.SYS_6,
+    HVAC_SYS.SYS_5,
+    HVAC_SYS.SYS_6,
     HVAC_SYS.SYS_7,
-    # HVAC_SYS.SYS_8,
+    HVAC_SYS.SYS_8,
 ]
 
 NUMBER_OF_WEEKS_IN_YEAR = 52.1429
