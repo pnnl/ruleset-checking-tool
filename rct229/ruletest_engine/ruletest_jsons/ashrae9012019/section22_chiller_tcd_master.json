@@ -4437,7 +4437,8 @@
                                                 "id": "System 7",
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
-                                                    "type": "FLUID_LOOP"
+                                                    "type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Chiller Loop 1"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
@@ -7032,7 +7033,8 @@
                                                 "id": "System 7",
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
-                                                    "type": "FLUID_LOOP"
+                                                    "type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Chiller Loop 1"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
@@ -7665,6 +7667,7 @@
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 10",
+                                                        "heating_source": "ELECTRIC",
                                                         "fan": {
                                                             "id": "Terminal Fan 1"
                                                         }
@@ -7674,12 +7677,7 @@
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System 10",
-                                                "heating_system": {
-                                                    "id": "Furnace Coil 1",
-                                                    "type": "FURNACE",
-                                                    "energy_source_type": "ELECTRICITY"
-                                                }
+                                                "id": "System 10"
                                             }
                                         ]
                                     }
@@ -14372,6 +14370,18 @@
                                 "type": "HEATING"
                             }
                         ],
+                        "output": {
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1",
+                                "unmet_load_hours": 0,
+                                "unmet_load_hours_heating": 0,
+                                "unmet_occupied_load_hours_heating": 0,
+                                "unmet_load_hours_cooling": 0,
+                                "unmet_occupied_load_hours_cooling": 0,
+                                "building_peak_cooling_load": 2813600.0
+                            }
+                        },
                         "type": "BASELINE_0"
                     }
                 ]
@@ -16470,7 +16480,8 @@
                                                 "id": "System 7",
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
-                                                    "type": "FLUID_LOOP"
+                                                    "type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Chiller Loop 1"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
@@ -21318,6 +21329,18 @@
                                 "type": "HEATING"
                             }
                         ],
+                        "output": {
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1",
+                                "unmet_load_hours": 0,
+                                "unmet_load_hours_heating": 0,
+                                "unmet_occupied_load_hours_heating": 0,
+                                "unmet_load_hours_cooling": 0,
+                                "unmet_occupied_load_hours_cooling": 0,
+                                "building_peak_cooling_load": 8440800.0
+                            }
+                        },
                         "type": "BASELINE_0"
                     }
                 ]
@@ -22201,7 +22224,7 @@
         "Section": 22,
         "Rule": 32,
         "Test": "g",
-        "test_description": "The project has one building segment with two zones served by a baseline system type 6. There are no chillers.",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 2. There are no chillers.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-32",
@@ -22234,53 +22257,31 @@
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
-                                                        "id": "VAV Air Terminal 1",
-                                                        "is_supply_ducted": true,
-                                                        "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 6",
-                                                        "heating_source": "ELECTRIC",
-                                                        "fan_configuration": "PARALLEL"
-                                                    }
-                                                ]
-                                            },
-                                            {
-                                                "id": "Thermal Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "terminals": [
-                                                    {
-                                                        "id": "VAV Air Terminal 2",
-                                                        "is_supply_ducted": true,
-                                                        "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 6",
-                                                        "heating_source": "ELECTRIC",
-                                                        "fan_configuration": "PARALLEL"
+                                                        "id": "PTHP Terminal 1",
+                                                        "is_supply_ducted": false,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "PTHP 1"
                                                     }
                                                 ]
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System 6",
+                                                "id": "PTHP 1",
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1",
+                                                    "id": "HP Cooling Coil 1",
                                                     "type": "DIRECT_EXPANSION"
                                                 },
-                                                "preheat_system": {
-                                                    "id": "Preheat Coil 1",
-                                                    "type": "ELECTRIC_RESISTANCE"
+                                                "heating_system": {
+                                                    "id": "HP Heating Coil 1",
+                                                    "type": "HEAT_PUMP"
                                                 },
                                                 "fan_system": {
-                                                    "id": "VAV Fan System 1",
-                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1"
-                                                        }
-                                                    ],
-                                                    "return_fans": [
-                                                        {
-                                                            "id": "Return Fan 1"
                                                         }
                                                     ]
                                                 }
@@ -22856,7 +22857,8 @@
                                                 "id": "System 7",
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
-                                                    "type": "FLUID_LOOP"
+                                                    "type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Chiller Loop 1"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
@@ -24913,6 +24915,7 @@
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 10",
+                                                        "heating_source": "ELECTRIC",
                                                         "fan": {
                                                             "id": "Terminal Fan 1"
                                                         }
@@ -24922,12 +24925,7 @@
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System 10",
-                                                "heating_system": {
-                                                    "id": "Furnace Coil 1",
-                                                    "type": "FURNACE",
-                                                    "energy_source_type": "ELECTRICITY"
-                                                }
+                                                "id": "System 10"
                                             }
                                         ]
                                     }

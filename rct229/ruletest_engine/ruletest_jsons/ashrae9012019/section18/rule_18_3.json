@@ -546,13 +546,15 @@
                                             {
                                                 "id": "System_1_PTAC Thermal Zone 2",
                                                 "cooling_system": {
-                                                    "id": "Cooling Sys - Thermal Zone 2",
-                                                    "type": "DIRECT_EXPANSION"
+                                                    "id": "CS1",
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_sensible_cool_capacity": 2813600000.0
                                                 },
                                                 "heating_system": {
-                                                    "id": "Heating Sys - Thermal Zone 2",
+                                                    "id": "HS1",
                                                     "type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1"
+                                                    "hot_water_loop": "Boiler Loop 1",
+                                                    "design_capacity": 937827.5555555556
                                                 },
                                                 "fan_system": {
                                                     "id": "Fan System - Thermal Zone 2",
@@ -567,13 +569,15 @@
                                             {
                                                 "id": "System_1_PTAC Thermal Zone 3",
                                                 "cooling_system": {
-                                                    "id": "Cooling Sys - Thermal Zone 3",
-                                                    "type": "DIRECT_EXPANSION"
+                                                    "id": "CS1",
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_sensible_cool_capacity": 2813600000.0
                                                 },
                                                 "heating_system": {
-                                                    "id": "Heating Sys - Thermal Zone 3",
+                                                    "id": "HS1",
                                                     "type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1"
+                                                    "hot_water_loop": "Boiler Loop 1",
+                                                    "design_capacity": 937827.5555555556
                                                 },
                                                 "fan_system": {
                                                     "id": "Fan System - Thermal Zone 3",
@@ -588,13 +592,15 @@
                                             {
                                                 "id": "System_1_PTAC Thermal Zone 4",
                                                 "cooling_system": {
-                                                    "id": "Cooling Sys - Thermal Zone 4",
-                                                    "type": "DIRECT_EXPANSION"
+                                                    "id": "CS1",
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_sensible_cool_capacity": 2813600000.0
                                                 },
                                                 "heating_system": {
-                                                    "id": "Heating Sys - Thermal Zone 4",
+                                                    "id": "HS1",
                                                     "type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1"
+                                                    "hot_water_loop": "Boiler Loop 1",
+                                                    "design_capacity": 937827.5555555556
                                                 },
                                                 "fan_system": {
                                                     "id": "Fan System - Thermal Zone 4",
@@ -754,13 +760,15 @@
                                             {
                                                 "id": "System_1_PTAC Thermal Zone 2",
                                                 "cooling_system": {
-                                                    "id": "Cooling Sys - Thermal Zone 2",
-                                                    "type": "DIRECT_EXPANSION"
+                                                    "id": "CS1",
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_sensible_cool_capacity": 2813600000.0
                                                 },
                                                 "heating_system": {
-                                                    "id": "Heating Sys - Thermal Zone 2",
+                                                    "id": "HS1",
                                                     "type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1"
+                                                    "hot_water_loop": "Boiler Loop 1",
+                                                    "design_capacity": 937827.5555555556
                                                 },
                                                 "fan_system": {
                                                     "id": "Fan System - Thermal Zone 2",
@@ -775,13 +783,15 @@
                                             {
                                                 "id": "System_1_PTAC Thermal Zone 3",
                                                 "cooling_system": {
-                                                    "id": "Cooling Sys - Thermal Zone 3",
-                                                    "type": "DIRECT_EXPANSION"
+                                                    "id": "CS1",
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_sensible_cool_capacity": 2813600000.0
                                                 },
                                                 "heating_system": {
-                                                    "id": "Heating Sys - Thermal Zone 3",
+                                                    "id": "HS1",
                                                     "type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1"
+                                                    "hot_water_loop": "Boiler Loop 1",
+                                                    "design_capacity": 937827.5555555556
                                                 },
                                                 "fan_system": {
                                                     "id": "Fan System - Thermal Zone 3",
@@ -796,13 +806,15 @@
                                             {
                                                 "id": "System_1_PTAC Thermal Zone 4",
                                                 "cooling_system": {
-                                                    "id": "Cooling Sys - Thermal Zone 4",
-                                                    "type": "DIRECT_EXPANSION"
+                                                    "id": "CS1",
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_sensible_cool_capacity": 2813600000.0
                                                 },
                                                 "heating_system": {
-                                                    "id": "Heating Sys - Thermal Zone 4",
+                                                    "id": "HS1",
                                                     "type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1"
+                                                    "hot_water_loop": "Boiler Loop 1",
+                                                    "design_capacity": 937827.5555555556
                                                 },
                                                 "fan_system": {
                                                     "id": "Fan System - Thermal Zone 4",
@@ -968,13 +980,15 @@
                                             {
                                                 "id": "System_1_PTAC Thermal Zone 2",
                                                 "cooling_system": {
-                                                    "id": "Cooling Sys - Thermal Zone 2",
-                                                    "type": "DIRECT_EXPANSION"
+                                                    "id": "CS1",
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_sensible_cool_capacity": 2813600000.0
                                                 },
                                                 "heating_system": {
-                                                    "id": "Heating Sys - Thermal Zone 2",
+                                                    "id": "HS1",
                                                     "type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1"
+                                                    "hot_water_loop": "Boiler Loop 1",
+                                                    "design_capacity": 937827.5555555556
                                                 },
                                                 "fan_system": {
                                                     "id": "Fan System - Thermal Zone 2",
@@ -989,13 +1003,15 @@
                                             {
                                                 "id": "System_1_PTAC Thermal Zone 3",
                                                 "cooling_system": {
-                                                    "id": "Cooling Sys - Thermal Zone 3",
-                                                    "type": "DIRECT_EXPANSION"
+                                                    "id": "CS1",
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_sensible_cool_capacity": 2813600000.0
                                                 },
                                                 "heating_system": {
-                                                    "id": "Heating Sys - Thermal Zone 3",
+                                                    "id": "HS1",
                                                     "type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1"
+                                                    "hot_water_loop": "Boiler Loop 1",
+                                                    "design_capacity": 937827.5555555556
                                                 },
                                                 "fan_system": {
                                                     "id": "Fan System - Thermal Zone 3",
@@ -1010,13 +1026,15 @@
                                             {
                                                 "id": "System_1_PTAC Thermal Zone 4",
                                                 "cooling_system": {
-                                                    "id": "Cooling Sys - Thermal Zone 4",
-                                                    "type": "DIRECT_EXPANSION"
+                                                    "id": "CS1",
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_sensible_cool_capacity": 2813600000.0
                                                 },
                                                 "heating_system": {
-                                                    "id": "Heating Sys - Thermal Zone 4",
+                                                    "id": "HS1",
                                                     "type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1"
+                                                    "hot_water_loop": "Boiler Loop 1",
+                                                    "design_capacity": 937827.5555555556
                                                 },
                                                 "fan_system": {
                                                     "id": "Fan System - Thermal Zone 4",
@@ -1174,13 +1192,15 @@
                                             {
                                                 "id": "System_1_PTAC Thermal Zone 2",
                                                 "cooling_system": {
-                                                    "id": "Cooling Sys - Thermal Zone 2",
-                                                    "type": "DIRECT_EXPANSION"
+                                                    "id": "CS1",
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_sensible_cool_capacity": 2813600000.0
                                                 },
                                                 "heating_system": {
-                                                    "id": "Heating Sys - Thermal Zone 2",
+                                                    "id": "HS1",
                                                     "type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1"
+                                                    "hot_water_loop": "Boiler Loop 1",
+                                                    "design_capacity": 937827.5555555556
                                                 },
                                                 "fan_system": {
                                                     "id": "Fan System - Thermal Zone 2",
@@ -1195,13 +1215,15 @@
                                             {
                                                 "id": "System_1_PTAC Thermal Zone 3",
                                                 "cooling_system": {
-                                                    "id": "Cooling Sys - Thermal Zone 3",
-                                                    "type": "DIRECT_EXPANSION"
+                                                    "id": "CS1",
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_sensible_cool_capacity": 2813600000.0
                                                 },
                                                 "heating_system": {
-                                                    "id": "Heating Sys - Thermal Zone 3",
+                                                    "id": "HS1",
                                                     "type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1"
+                                                    "hot_water_loop": "Boiler Loop 1",
+                                                    "design_capacity": 937827.5555555556
                                                 },
                                                 "fan_system": {
                                                     "id": "Fan System - Thermal Zone 3",
@@ -1216,13 +1238,15 @@
                                             {
                                                 "id": "System_1_PTAC Thermal Zone 4",
                                                 "cooling_system": {
-                                                    "id": "Cooling Sys - Thermal Zone 4",
-                                                    "type": "DIRECT_EXPANSION"
+                                                    "id": "CS1",
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_sensible_cool_capacity": 2813600000.0
                                                 },
                                                 "heating_system": {
-                                                    "id": "Heating Sys - Thermal Zone 4",
+                                                    "id": "HS1",
                                                     "type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1"
+                                                    "hot_water_loop": "Boiler Loop 1",
+                                                    "design_capacity": 937827.5555555556
                                                 },
                                                 "fan_system": {
                                                     "id": "Fan System - Thermal Zone 4",
