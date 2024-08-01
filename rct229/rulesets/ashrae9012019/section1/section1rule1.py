@@ -110,6 +110,8 @@ class Section1Rule1(RuleDefinitionListIndexedBase):
             climate_zone = data["climate_zone"]
             for bpf_bat in bpf_building_area_type_dict:
                 if bpf_bat == "UNDETERMINED":
+                    bpf_bat_dict_area = bpf_building_area_type_dict[bpf_bat]["area"]
+                    total_area += bpf_bat_dict_area
                     continue
                 expected_bpf = table_4_2_1_1_lookup(bpf_bat, climate_zone)[
                     "building_performance_factor"
