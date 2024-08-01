@@ -3,7 +3,7 @@
         "Section": 5,
         "Rule": 28,
         "Test": "a",
-        "test_description": "Project has one building segment with 1 zones containing 2 spaces and a roof surface with a skylight. The building is located in climate zone 6A, the surface is EXTERIOR MIXED based on space types in the zone and the adjacency to exterior. Rule cannot be evaluated because the baseline requirements for residential and nonresidential differ.",
+        "test_description": "Project located in climate zone 6A has one building segment with 1 zones containing 2 spaces and a roof surface with a skylight. The zone has mixed residential and nonresidential space types. Rule cannot be evaluated because the baseline requirements for residential and nonresidential differ.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "MANUAL REVIEW IS REQUESTED TO VERIFY SKYLIGHT MEETS SHGC REQUIREMENT AS PER TABLE G3.4.",
         "standard": {
