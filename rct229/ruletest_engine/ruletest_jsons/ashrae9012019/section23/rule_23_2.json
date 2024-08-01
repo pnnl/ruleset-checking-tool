@@ -8,7 +8,7 @@
         "standard": {
             "rule_id": "23-2",
             "ruleset_reference": "G3.1.3.12",
-            "rule_description": "For baseline systems 5-8 and 11, the the supply air temperature shall be reset higher by 5\u00b0F under minimum cooling load conditions.",
+            "rule_description": "For baseline systems 5-8 and 11, the supply air temperature shall be reset higher by 5\u00b0F under minimum cooling load conditions.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -158,7 +158,7 @@
         "standard": {
             "rule_id": "23-2",
             "ruleset_reference": "G3.1.3.12",
-            "rule_description": "For baseline systems 5-8 and 11, the the supply air temperature shall be reset higher by 5\u00b0F under minimum cooling load conditions.",
+            "rule_description": "For baseline systems 5-8 and 11, the supply air temperature shall be reset higher by 5\u00b0F under minimum cooling load conditions.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -308,7 +308,7 @@
         "standard": {
             "rule_id": "23-2",
             "ruleset_reference": "G3.1.3.12",
-            "rule_description": "For baseline systems 5-8 and 11, the the supply air temperature shall be reset higher by 5\u00b0F under minimum cooling load conditions.",
+            "rule_description": "For baseline systems 5-8 and 11, the supply air temperature shall be reset higher by 5\u00b0F under minimum cooling load conditions.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",

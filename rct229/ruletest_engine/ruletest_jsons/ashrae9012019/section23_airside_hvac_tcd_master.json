@@ -3,7 +3,7 @@
         "Section": 23,
         "Rule": 1,
         "Test": "a",
-        "test_description": "The project has one building segment with one zone served by baseline system 2 with a heatpump low shut off of less than 17 F. The expected result is: pass",
+        "test_description": "The project has one building segment with one zone served by baseline system 2.  with a heat pump low shut off of less than 17 F.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "23-1",
@@ -82,7 +82,7 @@
         "Section": 23,
         "Rule": 1,
         "Test": "b",
-        "test_description": "The project has one building segment with one zone served by baseline system 2 with a heatpump low shut off greater than 25 F. The expected result is: fail",
+        "test_description": "The project has one building segment with one zone served by baseline system 2 with a heat pump low shut off greater than 25 F. The expected result is: fail",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "23-1",
@@ -161,7 +161,7 @@
         "Section": 23,
         "Rule": 1,
         "Test": "c",
-        "test_description": "The project has one building segment with one zone served by baseline system 2 with a heatpump low shut off between 17 F and 25 F. The expected result is: undetermined",
+        "test_description": "The project has one building segment with one zone served by baseline system 2 with a heat pump low shut off between 17 F and 25 F. The expected result is: undetermined",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "23-1",
@@ -413,7 +413,7 @@
         "standard": {
             "rule_id": "23-2",
             "ruleset_reference": "G3.1.3.12",
-            "rule_description": "For baseline systems 5-8 and 11, the the supply air temperature shall be reset higher by 5\u00b0F under minimum cooling load conditions.",
+            "rule_description": "For baseline systems 5-8 and 11, the supply air temperature shall be reset higher by 5\u00b0F under minimum cooling load conditions.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -563,7 +563,7 @@
         "standard": {
             "rule_id": "23-2",
             "ruleset_reference": "G3.1.3.12",
-            "rule_description": "For baseline systems 5-8 and 11, the the supply air temperature shall be reset higher by 5\u00b0F under minimum cooling load conditions.",
+            "rule_description": "For baseline systems 5-8 and 11, the supply air temperature shall be reset higher by 5\u00b0F under minimum cooling load conditions.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -713,7 +713,7 @@
         "standard": {
             "rule_id": "23-2",
             "ruleset_reference": "G3.1.3.12",
-            "rule_description": "For baseline systems 5-8 and 11, the the supply air temperature shall be reset higher by 5\u00b0F under minimum cooling load conditions.",
+            "rule_description": "For baseline systems 5-8 and 11, the supply air temperature shall be reset higher by 5\u00b0F under minimum cooling load conditions.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -863,7 +863,7 @@
         "standard": {
             "rule_id": "23-3",
             "ruleset_reference": "G3.1.3.13 and G3.1.3.14",
-            "rule_description": "For baseline systems 5-8, the minimum volume setpoint shall be 30% of zone peak airflow, minimum outdoor airflow, or rate required to comply with minium accrediidation standards whichever is larger.",
+            "rule_description": "For baseline systems 5-8, the minimum volume setpoint shall be 30% of zone peak airflow, minimum outdoor airflow, or rate required to comply with minium accrediidation standards, whichever is larger.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -1017,7 +1017,7 @@
         "standard": {
             "rule_id": "23-3",
             "ruleset_reference": "G3.1.3.13 and G3.1.3.14",
-            "rule_description": "For baseline systems 5-8, the minimum volume setpoint shall be 30% of zone peak airflow, minimum outdoor airflow, or rate required to comply with minium accrediidation standards whichever is larger.",
+            "rule_description": "For baseline systems 5-8, the minimum volume setpoint shall be 30% of zone peak airflow, minimum outdoor airflow, or rate required to comply with minium accrediidation standards, whichever is larger.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -1171,7 +1171,7 @@
         "standard": {
             "rule_id": "23-3",
             "ruleset_reference": "G3.1.3.13 and G3.1.3.14",
-            "rule_description": "For baseline systems 5-8, the minimum volume setpoint shall be 30% of zone peak airflow, minimum outdoor airflow, or rate required to comply with minium accrediidation standards whichever is larger.",
+            "rule_description": "For baseline systems 5-8, the minimum volume setpoint shall be 30% of zone peak airflow, minimum outdoor airflow, or rate required to comply with minium accrediidation standards, whichever is larger.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -1325,7 +1325,7 @@
         "standard": {
             "rule_id": "23-4",
             "ruleset_reference": "G3.1.3.13",
-            "rule_description": "Baseline systems 5 and 7 serving lab spaces per Standard 90.1-2019 G3.1.1(c), shall reduce lab exhaust and makeup air during unoccupied periods to 50% of zone peak airflow, the minimum outdoor airflow, or rate required to comply with minimum accreditation standards whichever is larger.",
+            "rule_description": "For baseline systems 5 and 7 serving lab spaces per Standard 90.1-2019 G3.1.1(c), lab exhaust and makeup air during unoccupied periods shall be reduced to 50% of zone peak airflow, the minimum outdoor airflow, or rate required to comply with minimum accreditation standards, whichever is larger.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -1352,6 +1352,11 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1"
+                                                    }
+                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 1",
@@ -1367,6 +1372,11 @@
                                                 "id": "Thermal Zone 2",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 2"
+                                                    }
+                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 2",
@@ -1433,7 +1443,13 @@
                         ],
                         "type": "PROPOSED"
                     }
-                ]
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                }
             },
             "baseline": {
                 "id": "ASHRAE229 1",
@@ -1453,6 +1469,14 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM",
+                                                        "function": "LABORATORY",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 1",
@@ -1463,17 +1487,23 @@
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
                                                 ],
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1",
-                                                        "lighting_space_type": "LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM"
-                                                    }
-                                                ]
+                                                "zonal_exhaust_fan": {
+                                                    "id": "Lab Exhaust 1",
+                                                    "design_airflow": 7079.211647999998
+                                                }
                                             },
                                             {
                                                 "id": "Thermal Zone 2",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 2",
+                                                        "lighting_space_type": "LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM",
+                                                        "function": "LABORATORY",
+                                                        "floor_area": 250
+                                                    }
+                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 2",
@@ -1491,12 +1521,14 @@
                                                 "id": "System 5",
                                                 "cooling_system": {
                                                     "id": "DX Coil 1",
-                                                    "type": "DIRECT_EXPANSION"
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_sensible_cool_capacity": 17584.266666666666
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1"
+                                                    "hot_water_loop": "Boiler Loop 1",
+                                                    "design_capacity": 17584.266666666666
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -1559,7 +1591,7 @@
         "standard": {
             "rule_id": "23-4",
             "ruleset_reference": "G3.1.3.13",
-            "rule_description": "Baseline systems 5 and 7 serving lab spaces per Standard 90.1-2019 G3.1.1(c), shall reduce lab exhaust and makeup air during unoccupied periods to 50% of zone peak airflow, the minimum outdoor airflow, or rate required to comply with minimum accreditation standards whichever is larger.",
+            "rule_description": "For baseline systems 5 and 7 serving lab spaces per Standard 90.1-2019 G3.1.1(c), lab exhaust and makeup air during unoccupied periods shall be reduced to 50% of zone peak airflow, the minimum outdoor airflow, or rate required to comply with minimum accreditation standards, whichever is larger.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -1586,6 +1618,11 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1"
+                                                    }
+                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -1629,7 +1666,13 @@
                         ],
                         "type": "PROPOSED"
                     }
-                ]
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                }
             },
             "baseline": {
                 "id": "ASHRAE229 1",
@@ -1649,6 +1692,14 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM",
+                                                        "function": "LABORATORY",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -1657,12 +1708,10 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System Type 3"
                                                     }
                                                 ],
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1",
-                                                        "lighting_space_type": "LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM"
-                                                    }
-                                                ]
+                                                "zonal_exhaust_fan": {
+                                                    "id": "Lab Exhaust 1",
+                                                    "design_airflow": 7079.211647999998
+                                                }
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
@@ -1670,11 +1719,13 @@
                                                 "id": "System Type 3",
                                                 "cooling_system": {
                                                     "id": "DX Coil 1",
-                                                    "type": "DIRECT_EXPANSION"
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_sensible_cool_capacity": 17584.266666666666
                                                 },
                                                 "heating_system": {
                                                     "id": "Furnace Coil 1",
-                                                    "type": "FURNACE"
+                                                    "type": "FURNACE",
+                                                    "design_capacity": 17584.266666666666
                                                 },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
@@ -2649,7 +2700,7 @@
         "standard": {
             "rule_id": "23-8",
             "ruleset_reference": "G3.1.3.15",
-            "rule_description": "For baseline systems 5-8 and 11 - part load vav fan power shall be modeled using either method 1 or 2 in Standard 90.1-2019 Table G3.1.3.15.",
+            "rule_description": "For baseline systems 5-8 and 11, part load VAV fan power shall be modeled using either method 1 or 2 in Standard 90.1-2019 Table G3.1.3.15.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -2845,7 +2896,7 @@
         "standard": {
             "rule_id": "23-8",
             "ruleset_reference": "G3.1.3.15",
-            "rule_description": "For baseline systems 5-8 and 11 - part load vav fan power shall be modeled using either method 1 or 2 in Standard 90.1-2019 Table G3.1.3.15.",
+            "rule_description": "For baseline systems 5-8 and 11, part load VAV fan power shall be modeled using either method 1 or 2 in Standard 90.1-2019 Table G3.1.3.15.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -4411,6 +4462,11 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1"
+                                                    }
+                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -4476,6 +4532,11 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1"
+                                                    }
+                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -4559,6 +4620,11 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1"
+                                                    }
+                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -4622,6 +4688,11 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1"
+                                                    }
+                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -4705,6 +4776,11 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1"
+                                                    }
+                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -4770,6 +4846,11 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1"
+                                                    }
+                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -4853,6 +4934,11 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1"
+                                                    }
+                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -4916,6 +5002,11 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1"
+                                                    }
+                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -4999,6 +5090,11 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1"
+                                                    }
+                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -5064,6 +5160,11 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1"
+                                                    }
+                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -5147,6 +5248,11 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1"
+                                                    }
+                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -5210,6 +5316,11 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1"
+                                                    }
+                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -5266,7 +5377,7 @@
         "standard": {
             "rule_id": "23-16",
             "ruleset_reference": "G3.1.3.19",
-            "rule_description": "Systrems 5 - 8, the baseline system shall be modeled with preheat coils controlled to a fixed set point 20\u00b0F less than the design room heating temperature setpoint.",
+            "rule_description": "For baseline systems 5-8, the baseline system shall be modeled with preheat coils controlled to a fixed set point 20\u00b0F less than the design room heating temperature setpoint.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -5417,7 +5528,7 @@
         "standard": {
             "rule_id": "23-16",
             "ruleset_reference": "G3.1.3.19",
-            "rule_description": "Systrems 5 - 8, the baseline system shall be modeled with preheat coils controlled to a fixed set point 20\u00b0F less than the design room heating temperature setpoint.",
+            "rule_description": "For baseline systems 5-8, the baseline system shall be modeled with preheat coils controlled to a fixed set point 20\u00b0F less than the design room heating temperature setpoint.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",

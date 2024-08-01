@@ -35,6 +35,11 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1"
+                                                    }
+                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -100,6 +105,11 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1"
+                                                    }
+                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -183,6 +193,11 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1"
+                                                    }
+                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -246,6 +261,11 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1"
+                                                    }
+                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",

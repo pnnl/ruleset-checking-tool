@@ -301,7 +301,7 @@
         "Section": 5,
         "Rule": 39,
         "Test": "d",
-        "test_description": "Project has one building segment with one space that includes a wall surface with a metal coiling door. The space is nonresidential and conditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. The baseline door u-factor aligns with one of the available options per Tables G3.4-1 through G3.4-8, but cannot be determined if it is correct.",
+        "test_description": "Project has one building segment with 1 zones containing 2 spaces and a wall surface with a metal coiling door. The zone has mixed residential and nonresidential space types and is conditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. The baseline door u-factor aligns with one of the available options per Tables G3.4-1 through G3.4-8, but cannot be determined if it is correct.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "Prescribed u-factor requirement could not be determined. Verify the baseline door u-factor",
         "standard": {
@@ -343,6 +343,12 @@
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
                                                         "lighting_space_type": "OFFICE_ENCLOSED",
+                                                        "floor_area": 23.225759999999998
+                                                    },
+                                                    {
+                                                        "id": "Space 2",
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "lighting_space_type": "DWELLING_UNIT",
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
