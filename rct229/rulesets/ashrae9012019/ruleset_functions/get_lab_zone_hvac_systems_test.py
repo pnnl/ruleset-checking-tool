@@ -415,7 +415,7 @@ TEST_RMD_P = {
     "id": "ASHRAE229 1",
     "ruleset_model_descriptions": [
         {
-            "id": "RMI 1",
+            "id": "RMD 1",
             "buildings": [
                 {
                     "id": "Building 1",

@@ -15,7 +15,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "weather": {
@@ -102,6 +102,7 @@
         "Test": "b",
         "test_description": "Project has one building segment with 1 zones containing 2 spaces and a wall surface with a metal coiling door. The building is located in climate zone 8, the surface is EXTERIOR MIXED based on space types in the zone and the adjacency to exterior. All available options for baseline U-factor are the same, but baseline door u-factor does not align and is more conservative.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "Rule evaluation fails with a conservative outcome.",
         "standard": {
             "rule_id": "5-39",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
@@ -112,7 +113,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "weather": {
@@ -215,7 +216,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "weather": {
@@ -302,6 +303,7 @@
         "Test": "d",
         "test_description": "Project has one building segment with one space that includes a wall surface with a metal coiling door. The space is nonresidential and conditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. The baseline door u-factor aligns with one of the available options per Tables G3.4-1 through G3.4-8, but cannot be determined if it is correct.",
         "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "Prescribed u-factor requirement could not be determined. Verify the baseline door u-factor",
         "standard": {
             "rule_id": "5-39",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
@@ -312,7 +314,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "weather": {

@@ -3,7 +3,7 @@
         "Section": 4,
         "Rule": 11,
         "Test": "a",
-        "test_description": "Baseline and Proposed building have one building segment and two zones. Both utilize System 7. Both have identical fan schedules. Expected result: PASS",
+        "test_description": "A building has one building segment and two zones served by a multi-zone HVAC system. The HVAC system fan schedules match between the baseline and proposed ruleset model descriptions.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "4-11",
@@ -15,7 +15,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "weather": {
@@ -17878,7 +17878,7 @@
         "Section": 4,
         "Rule": 11,
         "Test": "b",
-        "test_description": "Baseline and Proposed building have one building segment and one zone. Both utilize System 3. Both have identical fan schedules. Expected result: PASS",
+        "test_description": "A building has one building segment and one zone served by a single-zone HVAC system. The HVAC system fan schedules match between the baseline and proposed ruleset model descriptions.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "4-11",
@@ -17890,7 +17890,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "weather": {
@@ -35591,8 +35591,9 @@
         "Section": 4,
         "Rule": 11,
         "Test": "c",
-        "test_description": "Baseline and Proposed building have one building segment. Baseline has one zone. Proposed has two zones. Baseline uses a single zone system 7, proposed multizone system 7. Fan schedules do not match. Expected result: UNDETERMINED",
+        "test_description": "A building has one building segment. Baseline has one zone, and proposed has two zones. Baseline uses a single zone system 7, proposed multizone system 7. Fan schedules do not match.",
         "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "There is a fan operating schedule mismatch between the baseline and proposed but section g3.1.1(c) appears applicable. Verify mismatch is appropriate per section G3.1.1(c) and that the fan operating schedule in the baseline is in alignment with the occupancy schedules.",
         "standard": {
             "rule_id": "4-11",
             "ruleset_reference": "Table G3.1 Section 4 Exception 3",
@@ -35603,7 +35604,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "weather": {
@@ -35648,7 +35649,7 @@
                                             },
                                             {
                                                 "id": "Thermal Zone 2",
-                                                "floor_name": "Floo r 1",
+                                                "floor_name": "Floor 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space 2",
@@ -53424,8 +53425,9 @@
         "Section": 4,
         "Rule": 11,
         "Test": "d",
-        "test_description": "Baseline and Proposed building have one building segment and two zones. Both utilize System 3. Fan schedules do not overlap. Expected result: UNDETERMINED",
+        "test_description": "A building has one building segment and two zones. Zones are served by single-zone HVAC systems in both the baseline and proposed ruleset model descriptions but fan schedules do not match between the baseline and proposed ruleset model descriptions.",
         "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "There is a fan schedule mismatch between the baseline and proposed for the hvac system(s) serving this zone. Fail unless table G3.1 section 4 baseline column exceptions #1, #2 or #3 is applicable.",
         "standard": {
             "rule_id": "4-11",
             "ruleset_reference": "Table G3.1 Section 4 Exception 3",
@@ -53436,7 +53438,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "weather": {

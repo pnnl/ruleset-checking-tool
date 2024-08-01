@@ -29,10 +29,10 @@ class Section19Rule3(PartialRuleDefinition):
         rpd_b = context.BASELINE_0
         weather_b = rpd_b["weather"]
 
-        return not (
-            weather_b.get("cooling_design_day_type") != COOLING_DESIGN_DAY.COOLING_1_0
-            or weather_b.get("heating_design_day_type")
-            != HEATING_DESIGN_DAY.HEATING_99_6
+        return (
+            weather_b.get("cooling_design_day_type") == COOLING_DESIGN_DAY.COOLING_1_0
+            and weather_b.get("heating_design_day_type")
+            == HEATING_DESIGN_DAY.HEATING_99_6
         )
 
     def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
@@ -44,7 +44,7 @@ class Section19Rule3(PartialRuleDefinition):
             or weather_b.get("heating_design_day_type") is None
         ):
             undetermined_msg = (
-                "Check that the weather conditions used in sizing runs to determine baseline equipment capacities is based on design days developed using 99.6% heating design temperatures "
+                "The Heating & Cooling Design Day types were not defined. Check that the weather conditions used in sizing runs to determine baseline equipment capacities is based on design days developed using 99.6% heating design temperatures "
                 "and 1% dry-bulb and 1% wet-bulb cooling design temperatures."
             )
         else:

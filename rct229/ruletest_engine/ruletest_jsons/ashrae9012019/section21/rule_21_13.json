@@ -3,7 +3,7 @@
         "Section": 21,
         "Rule": 13,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 7 with heating design and control's minimum flow fraction correctly set to 0.25.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The hot water loop minimum turndown ratio is 0.25.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-13",
@@ -15,7 +15,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -154,7 +154,7 @@
         "Section": 21,
         "Rule": 13,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 7 with heating design and control's minimum flow fraction incorrectly set to 0.30. Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The hot water loop minimum turndown ratio is 0.30.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-13",
@@ -166,7 +166,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -305,7 +305,7 @@
         "Section": 21,
         "Rule": 13,
         "Test": "c",
-        "test_description": "The project has one building segment with one zone. Baseline ruleset project description has system 3b with heating design and control's minimum flow fraction correctly set to 0.25.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 3 with a purchased hot water loop. The purchased hot water loop minimum turndown ratio is 0.25.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-13",
@@ -317,7 +317,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -405,7 +405,7 @@
         "Section": 21,
         "Rule": 13,
         "Test": "d",
-        "test_description": "The project has one building segment with one zone. Baseline ruleset project description has system 3b with heating design and control's minimum flow fraction incorrectly set to 0.30. Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 3 with a purchased hot water loop. The purchased hot water loop minimum turndown ratio is 0.30.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-13",
@@ -417,7 +417,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -505,7 +505,7 @@
         "Section": 21,
         "Rule": 13,
         "Test": "e",
-        "test_description": "The project has one building segment with one zone. Baseline ruleset project description has system 11.1a. Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 11 with electric reisistance heating. There is no hot water loop.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-13",
@@ -517,7 +517,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
