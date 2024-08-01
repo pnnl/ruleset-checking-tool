@@ -16,7 +16,7 @@
             "mandatory_rule": "Applicability",
             "schema_version": "0.0.29"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -95,7 +95,7 @@
             "mandatory_rule": "Applicability",
             "schema_version": "0.0.29"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -174,7 +174,7 @@
             "mandatory_rule": "Applicability",
             "schema_version": "0.0.29"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -253,7 +253,7 @@
             "mandatory_rule": "Applicability",
             "schema_version": "0.0.29"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -337,7 +337,7 @@
             "mandatory_rule": "Applicability",
             "schema_version": "0.0.29"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",

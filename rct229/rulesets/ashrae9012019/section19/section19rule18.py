@@ -247,10 +247,10 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
                 min_BHP_b = (0.00062 * supply_flow_b).m * ureg("hp")
 
             expected_motor_efficiency_b = table_G3_9_1_lookup(expected_BHP_b)[
-                "nominal_full_load_efficiency"
+                "full_load_motor_efficiency_for_modeling"
             ]
             min_motor_efficiency_b = table_G3_9_1_lookup(min_BHP_b)[
-                "nominal_full_load_efficiency"
+                "full_load_motor_efficiency_for_modeling"
             ]
 
             expected_fan_wattage_b = expected_BHP_b / expected_motor_efficiency_b
