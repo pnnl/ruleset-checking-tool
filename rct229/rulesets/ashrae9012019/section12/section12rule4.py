@@ -11,6 +11,35 @@ from rct229.utils.jsonpath_utils import find_all
 
 MISCELLANEOUS_EQUIPMENT = SchemaEnums.schema_enums["MiscellaneousEquipmentOptions"]
 
+MONTH_FRACTIONS = {
+    1: 0.25,
+    2: 0.5,
+    3: 0.75,
+    4: 1,
+    5: 0.25,
+    6: 0.5,
+    7: 0.75,
+    8: 1,
+    9: 0.25,
+    10: 0.5,
+    11: 0.75,
+    12: 1,
+}
+DAYS_IN_MONTH = {
+    1: 31,
+    2: 28,  # If leap year, this will be replaced with 29
+    3: 31,
+    4: 30,
+    5: 31,
+    6: 30,
+    7: 31,
+    8: 31,
+    9: 30,
+    10: 31,
+    11: 30,
+    12: 31,
+}
+
 
 class Section12Rule4(RuleDefinitionListIndexedBase):
     """Rule 4 of ASHRAE 90.1-2019 Appendix G Section 12 (Receptacle)"""
@@ -77,34 +106,9 @@ class Section12Rule4(RuleDefinitionListIndexedBase):
                 misc_equip_b = context.BASELINE_0
 
                 is_leap_year = data["is_leap_year"]
-                MONTH_FRACTIONS = {
-                    1: 0.25,
-                    2: 0.5,
-                    3: 0.75,
-                    4: 1,
-                    5: 0.25,
-                    6: 0.5,
-                    7: 0.75,
-                    8: 1,
-                    9: 0.25,
-                    10: 0.5,
-                    11: 0.75,
-                    12: 1,
-                }
-                DAYS_IN_MONTH = {
-                    1: 31,
-                    2: 29 if is_leap_year else 28,
-                    3: 31,
-                    4: 30,
-                    5: 31,
-                    6: 30,
-                    7: 31,
-                    8: 31,
-                    9: 30,
-                    10: 31,
-                    11: 30,
-                    12: 31,
-                }
+
+                if is_leap_year:
+                    DAYS_IN_MONTH[2] = 29
 
                 multiplier_schedule_b = getattr_(
                     misc_equip_b, "misc_equip", "multiplier_schedule", "hourly_values"
