@@ -1,5 +1,6 @@
 from rct229.rule_engine.rule_list_base import RuleDefinitionListBase
 from rct229.rule_engine.ruleset_model_factory import get_rmd_instance
+from rct229.utils.assertions import assert_
 from rct229.utils.json_utils import slash_prefix_guarantee
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.match_lists import match_lists
@@ -140,8 +141,13 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
         list_context = get_rmd_instance()
         for ruleset_model in list_context.get_ruleset_model_types():
             if self.rmds_used[ruleset_model]:
+                tmp_context_list = find_all(self.list_path, context[ruleset_model])
+                # handles a case when there is no element available to the target list path.
+                # This is set to an internal error handling since list_path is defined as part of rule logic.
+                assert_(tmp_context_list, f"List path {self.list_path} in rule {self.id} is either incorrect or has no data.")
+
                 list_context.__setitem__(
-                    ruleset_model, find_all(self.list_path, context[ruleset_model])
+                    ruleset_model, tmp_context_list
                 )
             else:
                 list_context.__setitem__(ruleset_model, None)
