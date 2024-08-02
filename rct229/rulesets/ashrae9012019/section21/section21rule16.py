@@ -31,6 +31,7 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_1C,
     HVAC_SYS.SYS_3C,
     HVAC_SYS.SYS_7C,
+    HVAC_SYS.SYS_8C,
     HVAC_SYS.SYS_11_1C,
 ]
 HEATING = SchemaEnums.schema_enums["FluidLoopOptions"].HEATING
