@@ -25,7 +25,10 @@ EXPECTED_RECEPTACLE_CONTROL_SPACE_TYPES = [
     LIGHTING_SPACE_OPTIONS.CLASSROOM_LECTURE_HALL_TRAINING_ROOM_ALL_OTHER,
     LIGHTING_SPACE_OPTIONS.OFFICE_OPEN_PLAN,
 ]
-MANUAL_CHECK_REQUIRED_MSG = "A reduced schedule and automatic receptacle controls are present in the proposed design. The space type may have receptacle control requirements in Section 8.4.2. If that is the case, there should be no reduced schedule modeled."
+MANUAL_CHECK_REQUIRED_MSG_CASE_4 = "A reduced schedule and automatic receptacle controls are present in the proposed design. The space type may have receptacle control requirements in Section 8.4.2. If that is the case, there should be no reduced schedule modeled."
+MANUAL_CHECK_REQUIRED_MSG_CASE_7 = "The proposed miscellaneous equipment schedule has reduced equivalent full load hours compared the baseline but it could not be determined if automatic receptacle controls are present in the proposed design to justify the credit."
+FAIL_MSG_CASE_2 = "The baseline miscellaneous equipment schedule has automatic receptacle controls indicating that there is an applicable requirement for automatic controls for the space in Section 8.4.2. Miscellaneous equipment schedules may only differ when the proposed design has automatic receptacle controls and there are no applicable requirements in Section 8.4.2 for the space."
+FAIL_MSG_CASE_6 = "Rule evaluation fails with a conservative outcome. The proposed schedule equivalent full load hours is greater than the baseline."
 
 
 class Section12Rule2(RuleDefinitionListIndexedBase):
@@ -151,6 +154,16 @@ class Section12Rule2(RuleDefinitionListIndexedBase):
                         or space_type_b is None
                     )
 
+                def get_manual_check_required_msg(
+                    self, context, calc_vals=None, data=None
+                ):
+                    space_type_b = calc_vals["space_type_b"]
+                    return (
+                        MANUAL_CHECK_REQUIRED_MSG_CASE_7
+                        if space_type_b is None
+                        else MANUAL_CHECK_REQUIRED_MSG_CASE_4
+                    )
+
                 def rule_check(self, context, calc_vals=None, data=None):
                     hours_misc_equip_schedule_b = calc_vals["misc_equip_schedule_b"]
                     hours_misc_equip_schedule_p = calc_vals["misc_equip_schedule_p"]
@@ -167,3 +180,24 @@ class Section12Rule2(RuleDefinitionListIndexedBase):
                         and auto_receptacle_controls_p
                         and space_type_b not in EXPECTED_RECEPTACLE_CONTROL_SPACE_TYPES
                     )
+
+                def get_fail_msg(self, context, calc_vals=None, data=None):
+                    auto_receptacle_controls_b = calc_vals["auto_receptacle_controls_b"]
+                    auto_receptacle_controls_p = calc_vals["auto_receptacle_controls_p"]
+                    hours_misc_equip_schedule_b = calc_vals["misc_equip_schedule_b"]
+                    hours_misc_equip_schedule_p = calc_vals["misc_equip_schedule_p"]
+                    schedules_comparison_output = calc_vals[
+                        "schedules_comparison_output"
+                    ]
+                    space_type_b = data["space_type_b"]
+                    auto_receptacle_controls_p = calc_vals["auto_receptacle_controls_p"]
+                    if (
+                        auto_receptacle_controls_p
+                        and auto_receptacle_controls_b
+                        and schedules_comparison_output["eflh_difference"] != 0
+                    ):
+                        return FAIL_MSG_CASE_2
+                    elif schedules_comparison_output["eflh_difference"] < 0:
+                        return FAIL_MSG_CASE_6
+                    else:
+                        return ""
