@@ -3,7 +3,7 @@
         "Section": 23,
         "Rule": 5,
         "Test": "a",
-        "test_description": "Baseline system 6 with a terminal fan set to run at the first stage of heating before the reheat coil is turned on. Expected: PASS",
+        "test_description": "The project has one building segment with two zones served by baseline system type 6 with a terminal fan set to run as the first stage of heating before the reheat coil is turned on.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "23-5",
@@ -14,7 +14,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "System 6, 8 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
@@ -111,7 +111,7 @@
         "Section": 23,
         "Rule": 5,
         "Test": "b",
-        "test_description": "Baseline system 8 with a terminal fan set to run at the first stage of heating before the reheat coil is turned on. Expected: PASS",
+        "test_description": "The project has one building segment with two zones served by baseline system type 8 with a terminal fan set to run as the first stage of heating before the reheat coil is turned on.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "23-5",
@@ -122,7 +122,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "System 6, 8 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
@@ -250,7 +250,7 @@
         "Section": 23,
         "Rule": 5,
         "Test": "c",
-        "test_description": "Baseline system 6 with a terminal fan NOT set to run at the first stage of heating before the reheat coil is turned on. Expected: FAIL",
+        "test_description": "The project has one building segment with two zones served by baseline system type 6 with a terminal fan NOT set to run as the first stage of heating before the reheat coil is turned on.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "23-5",
@@ -261,7 +261,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "System 6, 8 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
@@ -358,7 +358,7 @@
         "Section": 23,
         "Rule": 5,
         "Test": "d",
-        "test_description": "Baseline system 8 with a terminal fan NOT set to run at the first stage of heating before the reheat coil is turned on. Expected: FAIL",
+        "test_description": "The project has one building segment with two zones served by baseline system type 8 with a terminal fan NOT set to run at the first stage of heating before the reheat coil is turned on.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "23-5",
@@ -369,7 +369,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "System 6, 8 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
