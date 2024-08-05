@@ -15,7 +15,7 @@
             "primary_rule": "Applicability",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "weather": {
@@ -92,6 +92,7 @@
         "Test": "b",
         "test_description": "Project has one building segment with one space that includes floor surfaces adjacent to ground. The ruleset project description specifies a ground temperature schedule, but cannot be determined if it is representative of the project climate or if it was used in the calculation of heat loss.",
         "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "It cannot be determined if the ground temperature schedule for the project is representative of the project climate.",
         "standard": {
             "rule_id": "5-38",
             "ruleset_reference": "Table G3.1(14) Proposed Building Performance (b)",
@@ -102,7 +103,7 @@
             "primary_rule": "Applicability",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "weather": {
@@ -180,6 +181,7 @@
         "Test": "c",
         "test_description": "Project has one building segment with one space that includes floor surfaces adjacent to ground. The ruleset project description does not specify a ground temperature schedule.",
         "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "A ground temperature schedule was not found for the project.",
         "standard": {
             "rule_id": "5-38",
             "ruleset_reference": "Table G3.1(14) Proposed Building Performance (b)",
@@ -190,7 +192,7 @@
             "primary_rule": "Applicability",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "weather": {

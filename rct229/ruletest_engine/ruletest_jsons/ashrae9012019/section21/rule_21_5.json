@@ -3,7 +3,7 @@
         "Section": 21,
         "Rule": 5,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones and two spaces.  Building is 12,000 ft2, has baseline system type 7 and is correctly modeled with a hot water Loop with a single boiler. Expected result: PASS",
+        "test_description": "The project has one 12,000 ft2 building segment with two zones and two spaces. The zones are served by a baseline system type 7 with a single boiler.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-5",
@@ -15,7 +15,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -168,7 +168,7 @@
         "Section": 21,
         "Rule": 5,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones and two spaces.  Building is 12,000 ft2, has baseline system type 7 and is incorrectly modeled with a hot water Loop with two boilers. Expected result: FAIL",
+        "test_description": "The project has one 12,000 ft2 building segment with two zones and two spaces. The zones are served by a baseline system type 7 with two boilers.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-5",
@@ -180,7 +180,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -338,7 +338,7 @@
         "Section": 21,
         "Rule": 5,
         "Test": "c",
-        "test_description": "The project has one building segment with one zone and one space.  Building is  24,000 ft2, has baseline system type 12 and is correctly modeled with a hot water Loop with two equally sized boiler(s). Expected result: PASS",
+        "test_description": "The project has one 24,000 ft2 building segment with one zone and one space. The zone is served by a baseline system type 12 with two equally sized boilers.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-5",
@@ -350,7 +350,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -485,7 +485,7 @@
         "Section": 21,
         "Rule": 5,
         "Test": "d",
-        "test_description": "The project has one building segment with one zone and one space.  Building is  24,000 ft2, has baseline system type 12 and is incorrectly modeled with a hot water Loop with two unequally sized boiler(s). Expected result: FAIL",
+        "test_description": "The project has one 24,000 ft2 building segment with one zone and one space. The zone is served by a baseline system type 12 with two unequally sized boilers.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-5",
@@ -497,7 +497,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -632,7 +632,7 @@
         "Section": 21,
         "Rule": 5,
         "Test": "e",
-        "test_description": "The project has one building segment with one zone and one space.  Building is 24,000 ft2, has baseline system type 12 and is incorrectly modeled with a hot water Loop with one boiler. Expected result: FAIL",
+        "test_description": "The project has one 24,000 ft2 building segment with one zone and one space. The zone is served by a baseline system type 12 with one boiler.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-5",
@@ -644,7 +644,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -774,7 +774,7 @@
         "Section": 21,
         "Rule": 5,
         "Test": "f",
-        "test_description": "The project has one building segment with one zone and one space.  Building is 24,000 ft2, has baseline system type 4.  Expected result: Not Applicable",
+        "test_description": "The project has one 24,000 ft2 building segment with one zone and one space. The zone is served by a baseline system type 4. There are no boilers.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-5",
@@ -786,7 +786,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",

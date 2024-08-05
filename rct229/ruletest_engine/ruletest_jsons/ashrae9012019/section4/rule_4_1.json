@@ -3,7 +3,7 @@
         "Section": 4,
         "Rule": 1,
         "Test": "a",
-        "test_description": "Baseline and Proposed building have one building segment and  one zone with matching thermostat schedules. Expected result: PASS",
+        "test_description": "A building has one building segment and one zone with an HVAC system that provides heating and cooling. The zone heating and cooling thermostat schedules match between the baseline and proposed ruleset model descriptions.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "4-1",
@@ -15,7 +15,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "weather": {
@@ -35210,8 +35210,9 @@
         "Section": 4,
         "Rule": 1,
         "Test": "b",
-        "test_description": "Baseline and Proposed building have one building segment and  one zone with non-matching thermostat schedules. Expected result: UNDETERMINED",
+        "test_description": "A building has one building segment and one zone with an HVAC system that provides heating and cooling. The zone heating and cooling thermostat schedules do not match between the baseline and proposed ruleset model descriptions.",
         "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "There is a temperature schedule mismatch between the baseline and proposed. Fail unless Table G3.1 #4 baseline column exception #s 1 and/or 2 are applicable",
         "standard": {
             "rule_id": "4-1",
             "ruleset_reference": "Table G3.1 Section 4",
@@ -35222,7 +35223,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "weather": {

@@ -40,7 +40,7 @@ def test__validate_rmd__with_user_rmd():
 TEST_IDS_RMD = {
     "ruleset_model_descriptions": [
         {
-            "id": "rmi_1",
+            "id": "rmd_1",
             "buildings": [
                 {
                     "id": "bldg_1_1",

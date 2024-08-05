@@ -55,7 +55,7 @@ def is_baseline_system_11_1(rmd_b, hvac_b_id, terminal_unit_id_list, zone_id_lis
 
     Parameters ----------
     rmd_b json To evaluate if the hvac system is modeled as either Sys-11.1, Sys-11.1a,
-    Sys-11b, Sys-11c, or Not_Sys_11.1 in the B_RMI.
+    Sys-11b, Sys-11c, or Not_Sys_11.1 in the B_RMD.
 
     hvac_b_id list The id of the hvac system to evaluate.
 

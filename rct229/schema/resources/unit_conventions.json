@@ -26,7 +26,9 @@
         "heat": "W",
         "length": "m",
         "weight": "kg",
-        "elevator_speed": "m/s"
+        "elevator_speed": "m/s",
+        "power_per_volumetric_flow_rate": "W-s/L",
+        "power_per_flow_rate": "W-s/L"
     },
     "ip": {
         "transformer_capacity": "V-A",
@@ -55,6 +57,8 @@
         "heat": "Btu/hr",
         "length": "ft",
         "weight": "lb",
-        "elevator_speed": "ft/min"
+        "elevator_speed": "ft/min",
+        "power_per_volumetric_flow_rate": "W/gpm",
+        "power_per_flow_rate": "W/gpm"
     }
 }

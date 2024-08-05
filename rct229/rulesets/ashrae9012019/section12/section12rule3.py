@@ -31,7 +31,7 @@ class Section12Rule3(RuleDefinitionListIndexedBase):
                 ),
                 each_rule=Section12Rule3.BuildingRule.SpaceRule(),
                 index_rmd=USER,
-                list_path="$..spaces[*]",  # All spaces in the buliding
+                list_path="$..spaces[*]",  # All spaces in the building
             )
 
         def create_data(self, context, data):

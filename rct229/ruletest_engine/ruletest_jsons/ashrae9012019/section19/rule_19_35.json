@@ -3,19 +3,20 @@
         "Section": 19,
         "Rule": 35,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones. Project is in climate zone 5A and contains system 7 with 2 zones. All spaces served by the system are defined as lab. 5,000 cfm of aggregated minimum outdoor air flow for the baseline system, and 4,000 cfm in the proposed. Expected outcome: UNDETERMINED",
+        "test_description": "The project located in climate zone 5A has one building segment with two zones served by a baseline system type 7. All spaces served by the system are defined as lab. The baseline model has 5,000 CFM of aggregated minimum outdoor air flow, and the proposed model has 4,000 CFM.",
         "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "serves only lab spaces and the modeled baseline outdoor air flow was modeled as greater than the proposed outdoor air flow.",
         "standard": {
             "rule_id": "19-35",
             "ruleset_reference": "G3.1.2.5 Exception #4",
             "rule_description": "For baseline systems serving only laboratory spaces that are prohibited from recirculating return air by code or accreditation standards, the baseline system shall be modeled as 100% outdoor air. Rule only applies when baseline outdoor air CFM is modeled as greater than proposed design outdoor air CFM. ",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -17858,19 +17859,20 @@
         "Section": 19,
         "Rule": 35,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones. Project is in climate zone 4A and contains system 7 with 2 zones. The only defined space type for spaces served by the system is lab, but not all space types are defined. 5,000 cfm of aggregated minimum outdoor air flow for the baseline system, and 4,000 cfm in the proposed. Expected outcome: UNDETERMINED",
+        "test_description": "The project located in climate zone 4A has one building segment with two zones served by a baseline system type 7. The only defined space type for spaces served by the system is lab, but not all space types are defined. The baseline model has 5,000 CFM of aggregated minimum outdoor air flow, and the proposed model has 4,000 CFM.",
         "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "serves some lab spaces (not all space types were defined in the RMD so all space types associated with this hvac system could not be checked) and the modeled baseline outdoor air flow was modeled as greater than the proposed outdoor air flow.",
         "standard": {
             "rule_id": "19-35",
             "ruleset_reference": "G3.1.2.5 Exception #4",
             "rule_description": "For baseline systems serving only laboratory spaces that are prohibited from recirculating return air by code or accreditation standards, the baseline system shall be modeled as 100% outdoor air. Rule only applies when baseline outdoor air CFM is modeled as greater than proposed design outdoor air CFM. ",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -35708,19 +35710,20 @@
         "Section": 19,
         "Rule": 35,
         "Test": "c",
-        "test_description": "The project has one building segment with two zones. Project is in climate zone 5A and contains system 5 with 2 zones. None of the spaces served by the system have space types defined. 5,000 cfm of aggregated minimum outdoor air flow for the baseline system, and 4,000 cfm in the proposed. Expected outcome: UNDETERMINED",
+        "test_description": "The project located in climate zone 5A has one building segment with two zones served by a baseline system type 5. None of the spaces served by the system have space types defined. The baseline model has 5,000 CFM of aggregated minimum outdoor air flow, and the proposed model has 4,000 CFM.",
         "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "and the modeled baseline outdoor air flow was modeled as greater than the proposed outdoor air flow. Conduct a manual check to determine if these spaces meet G3.1.2.5 Exception 4 and that they are prohibited from recirculating return air by code or accreditation standards and, if so, confirm that the hvac system was modeled as a 100% outdoor air system.",
         "standard": {
             "rule_id": "19-35",
             "ruleset_reference": "G3.1.2.5 Exception #4",
             "rule_description": "For baseline systems serving only laboratory spaces that are prohibited from recirculating return air by code or accreditation standards, the baseline system shall be modeled as 100% outdoor air. Rule only applies when baseline outdoor air CFM is modeled as greater than proposed design outdoor air CFM. ",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -53502,19 +53505,19 @@
         "Section": 19,
         "Rule": 35,
         "Test": "d",
-        "test_description": "The project has one building segment with two zones. Project is in climate zone 4A and contains system 5 with 2 zones. There are spaces served by the system with non-lab space types defined. 5,000 cfm of aggregated minimum outdoor air flow for the baseline system, and 4,000 cfm in the proposed. Expected outcome: NOT_APPLICABLE",
+        "test_description": "The project located in climate zone 4A has one building segment with two zones served by a baseline system type 5. There are spaces served by the system with non-lab space types defined. The baseline model has 5,000 CFM of aggregated minimum outdoor air flow, and the proposed model has 4,000 CFM.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "19-35",
             "ruleset_reference": "G3.1.2.5 Exception #4",
             "rule_description": "For baseline systems serving only laboratory spaces that are prohibited from recirculating return air by code or accreditation standards, the baseline system shall be modeled as 100% outdoor air. Rule only applies when baseline outdoor air CFM is modeled as greater than proposed design outdoor air CFM. ",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
