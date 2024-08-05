@@ -172,8 +172,17 @@ class RuleDefinitionBase:
                             # Evaluate the actual rule check
                             result = self.rule_check(context, calc_vals, data)
                             if isinstance(result, list):
-                                # The result is a list of outcomes
-                                outcome["result"] = result
+                                if len(result) == 0:
+                                    # empty list:
+                                    outcome["result"] = RCTOutcomeLabel.NOT_APPLICABLE
+                                    not_applicable_msg = self.get_not_applicable_msg(
+                                        context, data
+                                    )
+                                    if not_applicable_msg:
+                                        outcome["message"] = not_applicable_msg
+                                    # The result is a list of outcomes
+                                else:
+                                    outcome["result"] = result
                             # using is False to include the None case.
                             elif self.is_primary_rule is False:
                                 # secondary rule applicability check true-> undetermined, false -> not_applicable
