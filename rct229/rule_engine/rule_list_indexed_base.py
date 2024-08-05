@@ -145,7 +145,11 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
                 # handles a case when there is no element available to the target list path.
                 # This is set to an internal error handling since list_path is defined as part of rule logic.
                 assert_(
-                    len(tmp_context_list) > 0 or (self.rmds_used_optional and self.rmds_used_optional[ruleset_model]),
+                    len(tmp_context_list) > 0
+                    or (
+                        self.rmds_used_optional
+                        and self.rmds_used_optional[ruleset_model]
+                    ),
                     f"List path {self.list_path} in rule {self.id} is either incorrect or has no data.",
                 )
 
