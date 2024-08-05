@@ -223,7 +223,7 @@ class RuleDefinitionBase:
                     outcome["result"] = RCTOutcomeLabel.UNDETERMINED
                     outcome["message"] = str(ke)
                 except RCTFailureException as fe:
-                    outcome["result"] = RCTOutcomeLabel.FAILED
+                    outcome["result"] = RCTOutcomeLabel.UNDETERMINED
                     outcome["message"] = str(fe)
             else:
                 outcome["result"] = RCTOutcomeLabel.UNDETERMINED
