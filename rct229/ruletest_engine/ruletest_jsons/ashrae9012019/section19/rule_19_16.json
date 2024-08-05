@@ -3,7 +3,7 @@
         "Section": 19,
         "Rule": 16,
         "Test": "a",
-        "test_description": "The project has one building segment with one zone served by a baseline system type 9. The corresponding proposed system includes a fan to provide non-mechanical cooling. The baseline system design has a separate fan to provide nonmechanical cooling, sized and controlled the same as the proposed design.",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 9. The corresponding proposed system includes a fan to provide non-mechanical cooling. The baseline system design has a separate fan to provide nonmechanical cooling.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "has non-mechanical cooling in the proposed design and the zone is served by either system 9 or 10 in the baseline, conduct a manual check that the baseline building design includes a separate fan to provide nonmechanical cooling, sized and controlled the same as the proposed design.",
         "standard": {
@@ -155,7 +155,7 @@
         "Section": 19,
         "Rule": 16,
         "Test": "b",
-        "test_description": "The project has one building segment with one zone served by a baseline system type 10. The corresponding proposed system includes a fan to provide non-mechanical cooling. The baseline system design has a separate fan to provide nonmechanical cooling, sized and controlled the same as the proposed design.",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 10. The corresponding proposed system includes a fan to provide non-mechanical cooling. The baseline system design has a separate fan to provide nonmechanical cooling.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "has non-mechanical cooling in the proposed design and the zone is served by either system 9 or 10 in the baseline, conduct a manual check that the baseline building design includes a separate fan to provide nonmechanical cooling, sized and controlled the same as the proposed design.",
         "standard": {

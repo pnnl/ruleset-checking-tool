@@ -3,7 +3,7 @@
         "Section": 23,
         "Rule": 2,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones served by baseline System 7 with a supply air temperature reset correctly set to 5 delta F. The expected result is: pass",
+        "test_description": "The project has one building segment with two zones served by baseline system type 7 with a supply air temperature reset higher by 5\u00b0F under minimum cooling load conditions.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "23-2",
@@ -14,7 +14,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "System 5,6,7,8,11 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
@@ -153,7 +153,7 @@
         "Section": 23,
         "Rule": 2,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones served by baseline System 7  with supply air temperature reset but not correctly set to 5 delta F. The expected result is: fail",
+        "test_description": "The project has one building segment with two zones served by baseline system type 7 with a supply air temperature reset higher by 10\u00b0F under minimum cooling load conditions",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "23-2",
@@ -164,7 +164,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "System 5,6,7,8,11 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
@@ -303,7 +303,7 @@
         "Section": 23,
         "Rule": 2,
         "Test": "c",
-        "test_description": "The project has one building segment with two zones served by baseline System 7  with a does not have supply air temperature reset. The expected result is: fail",
+        "test_description": "The project has one building segment with two zones served by baseline system type 7 without supply air temperature reset controls.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "23-2",
@@ -314,7 +314,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "System 5,6,7,8,11 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {

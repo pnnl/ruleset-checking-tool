@@ -14,7 +14,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "none",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
@@ -93,7 +93,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "none",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
@@ -172,7 +172,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "none",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
@@ -251,7 +251,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "none",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
@@ -335,7 +335,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "none",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {

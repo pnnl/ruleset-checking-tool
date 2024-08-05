@@ -3,7 +3,7 @@
         "Section": 23,
         "Rule": 16,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones served by System 7. The preheat coil is correctly controlled to 20 F less than the design room heating temperature setpoint. The expected result is: pass",
+        "test_description": "The project has one building segment with two zones served by baseline system type 7. The preheat coil is correctly controlled to 20 F less than the design room heating temperature setpoint.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "23-16",
@@ -14,7 +14,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "Rule 13 is true",
             "mandatory_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
@@ -154,7 +154,7 @@
         "Section": 23,
         "Rule": 16,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones served by System 7. The preheat coil is incorrectly controled to only 13 F less than the design room heating temperature setpoint. Should be 20 F. The expected result is: fail",
+        "test_description": "The project has one building segment with two zones served by baseline system type 7. The preheat coil is incorrectly controled to only 13 F less than the design room heating temperature setpoint.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "23-16",
@@ -165,7 +165,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "Rule 13 is true",
             "mandatory_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {

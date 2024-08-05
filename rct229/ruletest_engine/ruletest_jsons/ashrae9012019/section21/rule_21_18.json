@@ -774,7 +774,7 @@
         "Section": 21,
         "Rule": 18,
         "Test": "g",
-        "test_description": "The project has one building segment with one zone served by a baseline system type 1 with a purchased hot water loop. There are no boilers.",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 2. There are no boilers.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-18",

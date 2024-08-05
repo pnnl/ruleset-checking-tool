@@ -3,7 +3,7 @@
         "Section": 23,
         "Rule": 4,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones and one  laboratory space served by  baseline System 7. Per G3.1.1c, these systems must adjust lab exhaust and makeup air.  The expected result is: undetermined",
+        "test_description": "The project has one building segment with two zones and one laboratory space served by baseline system type 7. Per G3.1.1c, these systems must adjust lab exhaust and makeup air.",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "23-4",
@@ -14,7 +14,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "System 5, 7 (Rule18-a, to be confirmed), lab space",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "proposed": {
@@ -35,11 +35,6 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1"
-                                                    }
-                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 1",
@@ -55,11 +50,6 @@
                                                 "id": "Thermal Zone 2",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 2"
-                                                    }
-                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 2",
@@ -152,14 +142,6 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1",
-                                                        "lighting_space_type": "LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM",
-                                                        "function": "LABORATORY",
-                                                        "floor_area": 23.225759999999998
-                                                    }
-                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 1",
@@ -170,23 +152,17 @@
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
                                                 ],
-                                                "zonal_exhaust_fan": {
-                                                    "id": "Lab Exhaust 1",
-                                                    "design_airflow": 7079.211647999998
-                                                }
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM"
+                                                    }
+                                                ]
                                             },
                                             {
                                                 "id": "Thermal Zone 2",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 2",
-                                                        "lighting_space_type": "LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM",
-                                                        "function": "LABORATORY",
-                                                        "floor_area": 250
-                                                    }
-                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 2",
@@ -205,13 +181,12 @@
                                                 "cooling_system": {
                                                     "id": "DX Coil 1",
                                                     "type": "DIRECT_EXPANSION",
-                                                    "design_sensible_cool_capacity": 17584.266666666666
+                                                    "design_sensible_cool_capacity": 17585.0
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1",
-                                                    "design_capacity": 17584.266666666666
+                                                    "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -226,6 +201,9 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ]
+                                                },
+                                                "heating_system": {
+                                                    "design_capacity": 17584.266666666666
                                                 }
                                             }
                                         ]
@@ -269,7 +247,7 @@
         "Section": 23,
         "Rule": 4,
         "Test": "b",
-        "test_description": "The project has one building segment with one zone and one laboratory space served by baseline System 3. Per G3.1.1c, this only applies to system 5 and 7. The expected result is: not_applicable",
+        "test_description": "The project has one building segment with one zone and one laboratory space served by baseline System 3.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "23-4",
@@ -280,7 +258,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "System 5, 7 (Rule18-a, to be confirmed), lab space",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "proposed": {
@@ -301,11 +279,6 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1"
-                                                    }
-                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -375,14 +348,6 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1",
-                                                        "lighting_space_type": "LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM",
-                                                        "function": "LABORATORY",
-                                                        "floor_area": 23.225759999999998
-                                                    }
-                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -391,10 +356,12 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System Type 3"
                                                     }
                                                 ],
-                                                "zonal_exhaust_fan": {
-                                                    "id": "Lab Exhaust 1",
-                                                    "design_airflow": 7079.211647999998
-                                                }
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM"
+                                                    }
+                                                ]
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
@@ -403,7 +370,7 @@
                                                 "cooling_system": {
                                                     "id": "DX Coil 1",
                                                     "type": "DIRECT_EXPANSION",
-                                                    "design_sensible_cool_capacity": 17584.266666666666
+                                                    "design_sensible_cool_capacity": 17585.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Furnace Coil 1",

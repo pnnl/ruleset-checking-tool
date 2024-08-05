@@ -14,7 +14,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "none",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
@@ -93,7 +93,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "none",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
@@ -172,7 +172,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "none",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
@@ -251,7 +251,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "none",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
@@ -335,7 +335,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "none",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
@@ -408,7 +408,7 @@
         "Section": 23,
         "Rule": 2,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones served by baseline System 7 with a supply air temperature reset correctly set to 5 delta F. The expected result is: pass",
+        "test_description": "The project has one building segment with two zones served by baseline system type 7 with a supply air temperature reset higher by 5\u00b0F under minimum cooling load conditions.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "23-2",
@@ -419,7 +419,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "System 5,6,7,8,11 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
@@ -558,7 +558,7 @@
         "Section": 23,
         "Rule": 2,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones served by baseline System 7  with supply air temperature reset but not correctly set to 5 delta F. The expected result is: fail",
+        "test_description": "The project has one building segment with two zones served by baseline system type 7 with a supply air temperature reset higher by 10\u00b0F under minimum cooling load conditions",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "23-2",
@@ -569,7 +569,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "System 5,6,7,8,11 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
@@ -708,7 +708,7 @@
         "Section": 23,
         "Rule": 2,
         "Test": "c",
-        "test_description": "The project has one building segment with two zones served by baseline System 7  with a does not have supply air temperature reset. The expected result is: fail",
+        "test_description": "The project has one building segment with two zones served by baseline system type 7 without supply air temperature reset controls.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "23-2",
@@ -719,7 +719,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "System 5,6,7,8,11 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
@@ -858,7 +858,7 @@
         "Section": 23,
         "Rule": 3,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones served by System 7. The minimum outdoor airflow in System 7 is acceptably exactly 30% of primary airflow in both terminals. The expected result is: pass",
+        "test_description": "The project has one building segment with two zones served by baseline system type 7. The minimum airflow is 30% of the zone peak primary airflow in both zones.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "23-3",
@@ -869,7 +869,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "System 5, 7 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
@@ -1012,7 +1012,7 @@
         "Section": 23,
         "Rule": 3,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones served by System 7. The minimum outdoor airflow in System 7 is acceptably greater than 30% of primary airflow in both terminals. The expected result is: pass",
+        "test_description": "The project has one building segment with two zones served by baseline system type 5. The minimum outdoor airflow exceeds 30% of the zone peak airflow and the minimum airflow is equal to the minimum outdoor airflow in both zones.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "23-3",
@@ -1023,7 +1023,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "System 5, 7 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
@@ -1049,7 +1049,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 5",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
                                                         "primary_airflow": 471.94744319999984,
@@ -1067,7 +1067,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 5",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
                                                         "primary_airflow": 707.9211647999997,
@@ -1079,11 +1079,10 @@
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System 7",
+                                                "id": "System 5",
                                                 "cooling_system": {
-                                                    "id": "CHW Coil 1",
-                                                    "type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
@@ -1117,43 +1116,17 @@
                                 "energy_source_type": "NATURAL_GAS"
                             }
                         ],
-                        "chillers": [
-                            {
-                                "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1"
-                            }
-                        ],
                         "pumps": [
                             {
                                 "id": "Boiler Pump 1",
                                 "loop_or_piping": "Boiler Loop 1",
                                 "speed_control": "FIXED_SPEED"
-                            },
-                            {
-                                "id": "Chiller Pump 1",
-                                "loop_or_piping": "Chiller Loop 1",
-                                "speed_control": "FIXED_SPEED"
-                            },
-                            {
-                                "id": "Secondary CHW Pump",
-                                "loop_or_piping": "Secondary CHW Loop 1",
-                                "speed_control": "VARIABLE_SPEED"
                             }
                         ],
                         "fluid_loops": [
                             {
                                 "id": "Boiler Loop 1",
                                 "type": "HEATING"
-                            },
-                            {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING",
-                                "child_loops": [
-                                    {
-                                        "id": "Secondary CHW Loop 1",
-                                        "type": "COOLING"
-                                    }
-                                ]
                             }
                         ],
                         "type": "BASELINE_0"
@@ -1166,7 +1139,7 @@
         "Section": 23,
         "Rule": 3,
         "Test": "c",
-        "test_description": "The project has one building segment with two zones served by System 7. The minimum outdoor airflow in System 7 is incorrectly less than 30% of primary airflow in both terminals. The expected result is: fail",
+        "test_description": "The project has one building segment with two zones served by baseline system type 7. The minimum airflow is less than 30% of the zone peak primary airflow in both zones.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "23-3",
@@ -1177,7 +1150,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "System 5, 7 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
@@ -1205,7 +1178,7 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
-                                                        "heating_from_loop": "Boiler Loop 1",
+                                                        "heating_from_loop": "Purchased HW Loop 1",
                                                         "primary_airflow": 471.94744319999984,
                                                         "minimum_outdoor_airflow": 47.194744319999984,
                                                         "minimum_airflow": 94.38948863999997
@@ -1223,7 +1196,7 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
-                                                        "heating_from_loop": "Boiler Loop 1",
+                                                        "heating_from_loop": "Purchased HW Loop 1",
                                                         "primary_airflow": 707.9211647999997,
                                                         "minimum_outdoor_airflow": 70.79211647999998,
                                                         "minimum_airflow": 47.194744319999984
@@ -1237,12 +1210,12 @@
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
                                                     "type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                    "chilled_water_loop": "Chilled Water Loop 1"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1"
+                                                    "hot_water_loop": "Purchased HW Loop 1"
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -1264,48 +1237,116 @@
                                 ]
                             }
                         ],
-                        "boilers": [
+                        "external_fluid_sources": [
                             {
-                                "id": "Boiler 1",
-                                "loop": "Boiler Loop 1",
-                                "energy_source_type": "NATURAL_GAS"
-                            }
-                        ],
-                        "chillers": [
+                                "id": "Purchased HW 1",
+                                "loop": "Purchased HW Loop 1",
+                                "type": "HOT_WATER"
+                            },
                             {
-                                "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1"
+                                "id": "Purchased CW 1",
+                                "loop": "Chilled Water Loop 1",
+                                "type": "CHILLED_WATER"
                             }
                         ],
                         "pumps": [
                             {
-                                "id": "Boiler Pump 1",
-                                "loop_or_piping": "Boiler Loop 1",
+                                "id": "HW Pump 1",
+                                "loop_or_piping": "Purchased HW Loop 1",
                                 "speed_control": "FIXED_SPEED"
                             },
                             {
-                                "id": "Chiller Pump 1",
-                                "loop_or_piping": "Chiller Loop 1",
+                                "id": "CHW Pump 1",
+                                "loop_or_piping": "Chilled Water Loop 1",
                                 "speed_control": "FIXED_SPEED"
-                            },
-                            {
-                                "id": "Secondary CHW Pump",
-                                "loop_or_piping": "Secondary CHW Loop 1",
-                                "speed_control": "VARIABLE_SPEED"
                             }
                         ],
                         "fluid_loops": [
                             {
-                                "id": "Boiler Loop 1",
+                                "id": "Purchased HW Loop 1",
                                 "type": "HEATING"
                             },
                             {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING",
-                                "child_loops": [
+                                "id": "Chilled Water Loop 1",
+                                "type": "COOLING"
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-23-3-d": {
+        "Section": 23,
+        "Rule": 3,
+        "Test": "d",
+        "test_description": "The project has one building segment with one zone served by baseline system type 9.",
+        "expected_rule_outcome": "not_applicable",
+        "standard": {
+            "rule_id": "23-3",
+            "ruleset_reference": "G3.1.3.13 and G3.1.3.14",
+            "rule_description": "For baseline systems 5-8, the minimum volume setpoint shall be 30% of zone peak airflow, minimum outdoor airflow, or rate required to comply with minium accrediidation standards, whichever is larger.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "System 5, 7 (Rule18-a, to be confirmed)",
+            "mandatory_rule": "Full",
+            "schema_version": "0.0.37"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
                                     {
-                                        "id": "Secondary CHW Loop 1",
-                                        "type": "COOLING"
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "Air Terminal",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 9"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 9",
+                                                "heating_system": {
+                                                    "id": "Furnace Coil 1",
+                                                    "type": "FURNACE",
+                                                    "energy_source_type": "NATURAL_GAS"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
                                     }
                                 ]
                             }
@@ -1320,7 +1361,7 @@
         "Section": 23,
         "Rule": 4,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones and one  laboratory space served by  baseline System 7. Per G3.1.1c, these systems must adjust lab exhaust and makeup air.  The expected result is: undetermined",
+        "test_description": "The project has one building segment with two zones and one laboratory space served by baseline system type 7. Per G3.1.1c, these systems must adjust lab exhaust and makeup air.",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "23-4",
@@ -1331,7 +1372,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "System 5, 7 (Rule18-a, to be confirmed), lab space",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "proposed": {
@@ -1352,11 +1393,6 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1"
-                                                    }
-                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 1",
@@ -1372,11 +1408,6 @@
                                                 "id": "Thermal Zone 2",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 2"
-                                                    }
-                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 2",
@@ -1469,14 +1500,6 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1",
-                                                        "lighting_space_type": "LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM",
-                                                        "function": "LABORATORY",
-                                                        "floor_area": 23.225759999999998
-                                                    }
-                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 1",
@@ -1487,23 +1510,17 @@
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
                                                 ],
-                                                "zonal_exhaust_fan": {
-                                                    "id": "Lab Exhaust 1",
-                                                    "design_airflow": 7079.211647999998
-                                                }
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM"
+                                                    }
+                                                ]
                                             },
                                             {
                                                 "id": "Thermal Zone 2",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 2",
-                                                        "lighting_space_type": "LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM",
-                                                        "function": "LABORATORY",
-                                                        "floor_area": 250
-                                                    }
-                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 2",
@@ -1522,13 +1539,12 @@
                                                 "cooling_system": {
                                                     "id": "DX Coil 1",
                                                     "type": "DIRECT_EXPANSION",
-                                                    "design_sensible_cool_capacity": 17584.266666666666
+                                                    "design_sensible_cool_capacity": 17585.0
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1",
-                                                    "design_capacity": 17584.266666666666
+                                                    "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -1543,6 +1559,9 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ]
+                                                },
+                                                "heating_system": {
+                                                    "design_capacity": 17584.266666666666
                                                 }
                                             }
                                         ]
@@ -1586,7 +1605,7 @@
         "Section": 23,
         "Rule": 4,
         "Test": "b",
-        "test_description": "The project has one building segment with one zone and one laboratory space served by baseline System 3. Per G3.1.1c, this only applies to system 5 and 7. The expected result is: not_applicable",
+        "test_description": "The project has one building segment with one zone and one laboratory space served by baseline System 3.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "23-4",
@@ -1597,7 +1616,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "System 5, 7 (Rule18-a, to be confirmed), lab space",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "proposed": {
@@ -1618,11 +1637,6 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1"
-                                                    }
-                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -1692,14 +1706,6 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1",
-                                                        "lighting_space_type": "LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM",
-                                                        "function": "LABORATORY",
-                                                        "floor_area": 23.225759999999998
-                                                    }
-                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -1708,10 +1714,12 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System Type 3"
                                                     }
                                                 ],
-                                                "zonal_exhaust_fan": {
-                                                    "id": "Lab Exhaust 1",
-                                                    "design_airflow": 7079.211647999998
-                                                }
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM"
+                                                    }
+                                                ]
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
@@ -1720,7 +1728,7 @@
                                                 "cooling_system": {
                                                     "id": "DX Coil 1",
                                                     "type": "DIRECT_EXPANSION",
-                                                    "design_sensible_cool_capacity": 17584.266666666666
+                                                    "design_sensible_cool_capacity": 17585.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Furnace Coil 1",
@@ -1763,7 +1771,7 @@
         "Section": 23,
         "Rule": 5,
         "Test": "a",
-        "test_description": "Baseline system 6 with a terminal fan set to run at the first stage of heating before the reheat coil is turned on. Expected: PASS",
+        "test_description": "The project has one building segment with two zones served by baseline system type 6 with a terminal fan set to run as the first stage of heating before the reheat coil is turned on.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "23-5",
@@ -1774,7 +1782,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "System 6, 8 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
@@ -1871,7 +1879,7 @@
         "Section": 23,
         "Rule": 5,
         "Test": "b",
-        "test_description": "Baseline system 8 with a terminal fan set to run at the first stage of heating before the reheat coil is turned on. Expected: PASS",
+        "test_description": "The project has one building segment with two zones served by baseline system type 8 with a terminal fan set to run as the first stage of heating before the reheat coil is turned on.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "23-5",
@@ -1882,7 +1890,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "System 6, 8 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
@@ -2010,7 +2018,7 @@
         "Section": 23,
         "Rule": 5,
         "Test": "c",
-        "test_description": "Baseline system 6 with a terminal fan NOT set to run at the first stage of heating before the reheat coil is turned on. Expected: FAIL",
+        "test_description": "The project has one building segment with two zones served by baseline system type 6 with a terminal fan NOT set to run as the first stage of heating before the reheat coil is turned on.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "23-5",
@@ -2021,7 +2029,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "System 6, 8 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
@@ -2118,7 +2126,7 @@
         "Section": 23,
         "Rule": 5,
         "Test": "d",
-        "test_description": "Baseline system 8 with a terminal fan NOT set to run at the first stage of heating before the reheat coil is turned on. Expected: FAIL",
+        "test_description": "The project has one building segment with two zones served by baseline system type 8 with a terminal fan NOT set to run at the first stage of heating before the reheat coil is turned on.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "23-5",
@@ -2129,7 +2137,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "System 6, 8 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
@@ -2257,7 +2265,7 @@
         "Section": 23,
         "Rule": 6,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones served by system 6. VAV fans in system 6 are correctly sized to 50% of peak design load  with a performance efficiency of 0.35 W/cfm. The expected result is: pass",
+        "test_description": "The project has one building segment with two zones served by baseline system type 6. Parallel fans are correctly sized to 50% of the peak design primary airflow with 0.35 W/cfm of terminal supply fan power.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "23-6",
@@ -2268,7 +2276,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "System 6, 8 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
@@ -2369,7 +2377,7 @@
         "Section": 23,
         "Rule": 6,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones served by system 6. VAV fans in system 6 are neither sized to 50% of peak design load  nor and have performance efficiency of greater than 0.35 W/cfm. The expected result is: fail",
+        "test_description": "The project has one building segment with two zones served by baseline system type 6. Parallel fans are not sized to 50% of the peak design primary airflow and do not have 0.35 W/cfm of terminal supply fan power.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "23-6",
@@ -2380,7 +2388,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "System 6, 8 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
@@ -2477,22 +2485,308 @@
             }
         }
     },
-    "rule-23-7-a": {
+    "rule-23-6-c": {
         "Section": 23,
-        "Rule": 7,
-        "Test": "a",
-        "test_description": "The project has one building segment with two zones served by system 6. System 6's fan system correctly specified temperature control as constant. The expected result is: pass",
+        "Rule": 6,
+        "Test": "c",
+        "test_description": "The project has one building segment with two zones served by baseline system type 8. Parallel fans are sized to 50% of the peak design primary airflow and have 0.35 W/cfm of terminal supply fan power.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "23-7",
+            "rule_id": "23-6",
             "ruleset_reference": "G3.1.3.14",
-            "rule_description": "For baseline systems 6 and 8,  supply air temperature setpoint shall be constant at the design condition",
+            "rule_description": "For baseline systems 6 and 8, fans in parallel VAV fan-powered boxes shall be sized for 50% of the peak design primary air (from the VAV air-handling unit) flow rate and shall be modeled with 0.35 W/cfm fan power.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "System 6, 8 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 8",
+                                                        "heating_source": "ELECTRIC",
+                                                        "fan": {
+                                                            "id": "Terminal Fan 1",
+                                                            "design_airflow": 188.77897727999994,
+                                                            "design_electric_power": 140
+                                                        },
+                                                        "fan_configuration": "PARALLEL",
+                                                        "primary_airflow": 283.1684659199999
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 8",
+                                                        "heating_source": "ELECTRIC",
+                                                        "fan": {
+                                                            "id": "Terminal Fan 2",
+                                                            "design_airflow": 141.58423295999995,
+                                                            "design_electric_power": 105
+                                                        },
+                                                        "fan_configuration": "PARALLEL",
+                                                        "primary_airflow": 188.77897727999994
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 8",
+                                                "cooling_system": {
+                                                    "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "type": "ELECTRIC_RESISTANCE"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "chillers": [
+                            {
+                                "id": "Chiller 1",
+                                "cooling_loop": "Chiller Loop 1"
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Chiller Pump 1",
+                                "loop_or_piping": "Chiller Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-23-6-d": {
+        "Section": 23,
+        "Rule": 6,
+        "Test": "d",
+        "test_description": "The project has one building segment with two zones served by baseline system type 8. Parallel fans are sized to 50% of the peak design primary airflow but do not have 0.35 W/cfm of terminal supply fan power.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "23-6",
+            "ruleset_reference": "G3.1.3.14",
+            "rule_description": "For baseline systems 6 and 8, fans in parallel VAV fan-powered boxes shall be sized for 50% of the peak design primary air (from the VAV air-handling unit) flow rate and shall be modeled with 0.35 W/cfm fan power.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "System 6, 8 (Rule18-a, to be confirmed)",
+            "mandatory_rule": "Full",
+            "schema_version": "0.0.37"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 8",
+                                                        "heating_source": "ELECTRIC",
+                                                        "fan": {
+                                                            "id": "Terminal Fan 1",
+                                                            "design_airflow": 141.58423295999995,
+                                                            "design_electric_power": 150
+                                                        },
+                                                        "fan_configuration": "PARALLEL",
+                                                        "primary_airflow": 283.1684659199999
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 8",
+                                                        "heating_source": "ELECTRIC",
+                                                        "fan": {
+                                                            "id": "Terminal Fan 2",
+                                                            "design_airflow": 94.38948863999997,
+                                                            "design_electric_power": 100
+                                                        },
+                                                        "fan_configuration": "PARALLEL",
+                                                        "primary_airflow": 188.77897727999994
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 8",
+                                                "cooling_system": {
+                                                    "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "type": "ELECTRIC_RESISTANCE"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "chillers": [
+                            {
+                                "id": "Chiller 1",
+                                "cooling_loop": "Chiller Loop 1"
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Chiller Pump 1",
+                                "loop_or_piping": "Chiller Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-23-7-a": {
+        "Section": 23,
+        "Rule": 7,
+        "Test": "a",
+        "test_description": "The project has one building segment with two zones served by baseline system type 6. The baseline system supply air temperature is constant at the design conditions.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "23-7",
+            "ruleset_reference": "G3.1.3.14",
+            "rule_description": "For baseline systems 6 and 8, supply air temperature setpoint shall be constant at the design condition.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "System 6, 8 (Rule18-a, to be confirmed)",
+            "mandatory_rule": "Full",
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
@@ -2588,18 +2882,18 @@
         "Section": 23,
         "Rule": 7,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones served by system 6. System 6's fan system incorrectly specified temperature control as outside air reset. The expected result is: fail",
+        "test_description": "The project has one building segment with two zones served by baseline system type 6. The baseline system supply air temperature has outdoor air reset controls.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "23-7",
             "ruleset_reference": "G3.1.3.14",
-            "rule_description": "For baseline systems 6 and 8,  supply air temperature setpoint shall be constant at the design condition",
+            "rule_description": "For baseline systems 6 and 8, supply air temperature setpoint shall be constant at the design condition.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "System 6, 8 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
@@ -2695,7 +2989,7 @@
         "Section": 23,
         "Rule": 8,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones served by System 7. VAV fan follows the part load vav fan power as defined by method 1 in Table G3.1.3.15. The expected result is: pass",
+        "test_description": "The project has one building segment with two zones served by baseline system type 7. The part load VAV fan power is modeled as defined by method 1 in Table G3.1.3.15.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "23-8",
@@ -2706,7 +3000,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "System 5,8,11 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
@@ -2734,7 +3028,7 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "heating_from_loop": "Purchased HW Loop 1"
                                                     }
                                                 ]
                                             },
@@ -2749,7 +3043,7 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "heating_from_loop": "Purchased HW Loop 1"
                                                     }
                                                 ]
                                             }
@@ -2760,12 +3054,12 @@
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
                                                     "type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                    "chilled_water_loop": "Chilled Water Loop 1"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1"
+                                                    "hot_water_loop": "Purchased HW Loop 1"
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -2835,50 +3129,38 @@
                                 ]
                             }
                         ],
-                        "boilers": [
+                        "external_fluid_sources": [
                             {
-                                "id": "Boiler 1",
-                                "loop": "Boiler Loop 1",
-                                "energy_source_type": "NATURAL_GAS"
-                            }
-                        ],
-                        "chillers": [
+                                "id": "Purchased HW 1",
+                                "loop": "Purchased HW Loop 1",
+                                "type": "HOT_WATER"
+                            },
                             {
-                                "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1"
+                                "id": "Purchased CW 1",
+                                "loop": "Chilled Water Loop 1",
+                                "type": "CHILLED_WATER"
                             }
                         ],
                         "pumps": [
                             {
-                                "id": "Boiler Pump 1",
-                                "loop_or_piping": "Boiler Loop 1",
+                                "id": "HW Pump 1",
+                                "loop_or_piping": "Purchased HW Loop 1",
                                 "speed_control": "FIXED_SPEED"
                             },
                             {
-                                "id": "Chiller Pump 1",
-                                "loop_or_piping": "Chiller Loop 1",
+                                "id": "CHW Pump 1",
+                                "loop_or_piping": "Chilled Water Loop 1",
                                 "speed_control": "FIXED_SPEED"
-                            },
-                            {
-                                "id": "Secondary CHW Pump",
-                                "loop_or_piping": "Secondary CHW Loop 1",
-                                "speed_control": "VARIABLE_SPEED"
                             }
                         ],
                         "fluid_loops": [
                             {
-                                "id": "Boiler Loop 1",
+                                "id": "Purchased HW Loop 1",
                                 "type": "HEATING"
                             },
                             {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING",
-                                "child_loops": [
-                                    {
-                                        "id": "Secondary CHW Loop 1",
-                                        "type": "COOLING"
-                                    }
-                                ]
+                                "id": "Chilled Water Loop 1",
+                                "type": "COOLING"
                             }
                         ],
                         "type": "BASELINE_0"
@@ -2891,7 +3173,7 @@
         "Section": 23,
         "Rule": 8,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones served by System 7. VAV fan does not follow the part load vav fan power defined by method 1 in Table G3.1.3.15. The expected result is: fail",
+        "test_description": "The project has one building segment with two zones served by baseline system type 7. The part load VAV fan power is not modeled as defined by method 1 or 2 in Table G3.1.3.15.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "23-8",
@@ -2902,7 +3184,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "System 5,8,11 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
@@ -3087,18 +3369,18 @@
         "Section": 23,
         "Rule": 9,
         "Test": "a",
-        "test_description": "The project has one building segment with one zone served by System 11 with minimum volume setpoint set to 50% of the maximum design airflow rate. The expected result is: pass",
+        "test_description": "The project has one building segment with one zone served by baseline system type 11 with minimum volume setpoint set to 50% of the maximum design airflow rate.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "23-9",
             "ruleset_reference": "G3.1.3.17",
-            "rule_description": "For baseline system 11, minimum volume setpoint shall be the largest of 50% of the maximum design airflow rate, the minimum ventilation airflow rate or the airflow required to comply with codes or accredidation standards.",
+            "rule_description": "For baseline system 11, minimum volume setpoint shall be the largest of 50% of the maximum design airflow rate, the minimum ventilation airflow rate or the airflow required to comply with codes or accreditation standards.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "System 11 (Rule18-a, to be confirmed)",
-            "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "mandatory_rule": "Full",
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
@@ -3135,11 +3417,12 @@
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
                                                     "type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                    "chilled_water_loop": "Chilled Water Loop 1"
                                                 },
                                                 "heating_system": {
-                                                    "id": "Heating Coil 1",
-                                                    "type": "ELECTRIC_RESISTANCE"
+                                                    "id": "HHW Coil 1",
+                                                    "type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Purchased HW Loop 1"
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -3164,34 +3447,38 @@
                                 ]
                             }
                         ],
-                        "chillers": [
+                        "external_fluid_sources": [
                             {
-                                "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1"
+                                "id": "Purchased HW 1",
+                                "loop": "Purchased HW Loop 1",
+                                "type": "HOT_WATER"
+                            },
+                            {
+                                "id": "Purchased CW 1",
+                                "loop": "Chilled Water Loop 1",
+                                "type": "CHILLED_WATER"
                             }
                         ],
                         "pumps": [
                             {
-                                "id": "Chiller Pump 1",
-                                "loop_or_piping": "Chiller Loop 1",
+                                "id": "HW Pump 1",
+                                "loop_or_piping": "Purchased HW Loop 1",
                                 "speed_control": "FIXED_SPEED"
                             },
                             {
-                                "id": "Secondary CHW Pump",
-                                "loop_or_piping": "Secondary CHW Loop 1",
-                                "speed_control": "VARIABLE_SPEED"
+                                "id": "CHW Pump 1",
+                                "loop_or_piping": "Chilled Water Loop 1",
+                                "speed_control": "FIXED_SPEED"
                             }
                         ],
                         "fluid_loops": [
                             {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING",
-                                "child_loops": [
-                                    {
-                                        "id": "Secondary CHW Loop 1",
-                                        "type": "COOLING"
-                                    }
-                                ]
+                                "id": "Purchased HW Loop 1",
+                                "type": "HEATING"
+                            },
+                            {
+                                "id": "Chilled Water Loop 1",
+                                "type": "COOLING"
                             }
                         ],
                         "type": "BASELINE_0"
@@ -3204,18 +3491,18 @@
         "Section": 23,
         "Rule": 9,
         "Test": "b",
-        "test_description": "The project has one building segment with one zone served by System 11 with minimum volume setpoint set to greater than 50% of the maximum design airflow rate and minimum ventilation flow rate.  The expected result is: undetermined",
+        "test_description": "The project has one building segment with one zone served by baseline system type 11 with minimum volume setpoint set to greater than 50% of the maximum design airflow rate and greater than the minimum ventilation flow rate.",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "23-9",
             "ruleset_reference": "G3.1.3.17",
-            "rule_description": "For baseline system 11, minimum volume setpoint shall be the largest of 50% of the maximum design airflow rate, the minimum ventilation airflow rate or the airflow required to comply with codes or accredidation standards.",
+            "rule_description": "For baseline system 11, minimum volume setpoint shall be the largest of 50% of the maximum design airflow rate, the minimum ventilation airflow rate or the airflow required to comply with codes or accreditation standards.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "System 11 (Rule18-a, to be confirmed)",
-            "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "mandatory_rule": "Full",
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
@@ -3321,18 +3608,18 @@
         "Section": 23,
         "Rule": 9,
         "Test": "c",
-        "test_description": "The project has one building segment with one zone served by System 11 with minimum volume setpoint set to less than the minimum ventilation flow rate. The expected result is: fail",
+        "test_description": "The project has one building segment with one zone served by baseline system 11 with minimum volume setpoint set to less than the minimum ventilation flow rate.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "23-9",
             "ruleset_reference": "G3.1.3.17",
-            "rule_description": "For baseline system 11, minimum volume setpoint shall be the largest of 50% of the maximum design airflow rate, the minimum ventilation airflow rate or the airflow required to comply with codes or accredidation standards.",
+            "rule_description": "For baseline system 11, minimum volume setpoint shall be the largest of 50% of the maximum design airflow rate, the minimum ventilation airflow rate or the airflow required to comply with codes or accreditation standards.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "System 11 (Rule18-a, to be confirmed)",
-            "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "mandatory_rule": "Full",
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
@@ -3438,7 +3725,7 @@
         "Section": 23,
         "Rule": 10,
         "Test": "a",
-        "test_description": "The project has one building segment with one zone served by System 11 set to minimum airflow at 50% load.The expected result is: pass",
+        "test_description": "The project has one building segment with one zone served by baseline system type 11 set to minimum airflow at 50% load.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "23-10",
@@ -3449,7 +3736,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "System 11 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
@@ -3554,7 +3841,7 @@
         "Section": 23,
         "Rule": 10,
         "Test": "b",
-        "test_description": "The project has one building segment with one zone served by System 11 set to minimum airflow set at 25% load. The expected result is: fail",
+        "test_description": "The project has one building segment with one zone served by baseline system type 11 set to minimum airflow at 25% load.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "23-10",
@@ -3565,7 +3852,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "System 11 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
@@ -3670,7 +3957,7 @@
         "Section": 23,
         "Rule": 10,
         "Test": "c",
-        "test_description": "The project has one building segment with two zones served by System 7 set to minimum airflow at 25% load. The expected result is: not_applicable",
+        "test_description": "The project has one building segment with two zones served by baseline system type 7 set to minimum airflow at 25% load.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "23-10",
@@ -3681,7 +3968,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "System 11 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
@@ -3820,18 +4107,18 @@
         "Section": 23,
         "Rule": 11,
         "Test": "a",
-        "test_description": "The project has one building segment with one zone served by System 11 with supply air temperature reset set to LOAD_RESET_TO_SPACE_TEMPERATURE and has a reset load fraction of 50%. The expected result is: pass",
+        "test_description": "The project has one building segment with one zone served by baseline system type 11 with supply air temperature reset from minimum supply air temperature at 50% cooling load to room temperature at 0% cooling load.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "23-11",
             "ruleset_reference": "G3.1.3.17",
-            "rule_description": "For baseline system 11, supply air temperature shall be reset from minimum supply air temp at 50% cooling load to room temp at 0% cooling load.",
+            "rule_description": "For baseline system 11, supply air temperature shall either 1) be reset from minimum supply air temperature at 50% cooling load to room temperature at 0% cooling load, or 2) be reset higher by 5F under minimum cooling load conditions.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "System 11 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
@@ -3936,18 +4223,18 @@
         "Section": 23,
         "Rule": 11,
         "Test": "b",
-        "test_description": "The project has one building segment with one zone served by System 11 with supply air temperature reset set to ZONE_RESET and has a reset temperature differential of 5 F. The expected result is: pass",
+        "test_description": "The project has one building segment with one zone served by baseline system type 11 with supply air temperature reset higher by 5F under minimum cooling load conditions.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "23-11",
             "ruleset_reference": "G3.1.3.17",
-            "rule_description": "For baseline system 11, supply air temperature shall be reset from minimum supply air temp at 50% cooling load to room temp at 0% cooling load.",
+            "rule_description": "For baseline system 11, supply air temperature shall either 1) be reset from minimum supply air temperature at 50% cooling load to room temperature at 0% cooling load, or 2) be reset higher by 5F under minimum cooling load conditions.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "System 11 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
@@ -4052,18 +4339,18 @@
         "Section": 23,
         "Rule": 11,
         "Test": "c",
-        "test_description": "The project has one building segment with one zone served by System 11 with supply air temperature reset set to ZONE_RESET and has a reset temperature differential of 10 F.  The expected result is: fail",
+        "test_description": "The project has one building segment with one zone served by baseline system type 11 with supply air temperature reset higher by 10F under minimum cooling load conditions.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "23-11",
             "ruleset_reference": "G3.1.3.17",
-            "rule_description": "For baseline system 11, supply air temperature shall be reset from minimum supply air temp at 50% cooling load to room temp at 0% cooling load.",
+            "rule_description": "For baseline system 11, supply air temperature shall either 1) be reset from minimum supply air temperature at 50% cooling load to room temperature at 0% cooling load, or 2) be reset higher by 5F under minimum cooling load conditions.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "System 11 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
@@ -4168,7 +4455,7 @@
         "Section": 23,
         "Rule": 12,
         "Test": "a",
-        "test_description": "The project has one building segment with one zone served by System 11.1 and therefore is applicable to this rule. The expected result is: undetermined",
+        "test_description": "The project has one building segment with one zone served by baseline system type 11.",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "23-12",
@@ -4179,7 +4466,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "System 11 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
@@ -4282,7 +4569,7 @@
         "Section": 23,
         "Rule": 12,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones served by System 7. Therefore, this rule no longer applies. The expected result is: not_applicable",
+        "test_description": "The project has one building segment with two zones served by baseline system type 7.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "23-12",
@@ -4293,7 +4580,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "System 11 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
@@ -4430,7 +4717,7 @@
         "Section": 23,
         "Rule": 13,
         "Test": "a",
-        "test_description": "The project has one building segment with one zone served by System 3. Proposed building utilizes System 3 with humidistatic controls. The baseline system 3 uses mechanical cooling for dehumidication to avoid overcooling. The expected result is: undetermined",
+        "test_description": "The project has one building segment with one zone served by baseline system type 3. The proposed building includes humidistatic controls. The baseline system uses mechanical cooling for dehumidication with reheat to avoid overcooling.",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "23-13",
@@ -4441,7 +4728,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "none",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "proposed": {
@@ -4462,11 +4749,6 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1"
-                                                    }
-                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -4532,11 +4814,6 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1"
-                                                    }
-                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -4588,7 +4865,7 @@
         "Section": 23,
         "Rule": 13,
         "Test": "b",
-        "test_description": "The project has one building segment with one zone served by System 3. Proposed building utilizes System 3 without dehumidification. Baseline building also has system 3. The expected result is: not_applicable",
+        "test_description": "The project has one building segment with one zone served by baseline system type 3. The proposed building does not include humidistatic controls.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "23-13",
@@ -4599,7 +4876,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "none",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "proposed": {
@@ -4620,11 +4897,6 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1"
-                                                    }
-                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -4688,11 +4960,6 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1"
-                                                    }
-                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -4744,7 +5011,7 @@
         "Section": 23,
         "Rule": 14,
         "Test": "a",
-        "test_description": "The project has one building segment with one zone served by System 3. Proposed building utilizes System 3 with humidistatic controls. The baseline building utilizes system 3 as well. The expected result is: undetermined",
+        "test_description": "The project has one building segment with one zone served by baseline system type 3. The proposed building includes dehumidification.",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "23-14",
@@ -4755,7 +5022,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "Rule 13 is true",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "proposed": {
@@ -4776,11 +5043,6 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1"
-                                                    }
-                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -4846,11 +5108,6 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1"
-                                                    }
-                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -4902,7 +5159,7 @@
         "Section": 23,
         "Rule": 14,
         "Test": "b",
-        "test_description": "The project has one building segment with one zone served by System 3. Proposed building utilizes System 3 without dehumidification. Baseline building also has system 3.  The expected result is: not_applicable",
+        "test_description": "The project has one building segment with one zone served by baseline system type 3. The proposed building does not include dehumidification.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "23-14",
@@ -4913,7 +5170,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "Rule 13 is true",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "proposed": {
@@ -4934,11 +5191,6 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1"
-                                                    }
-                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -5002,11 +5254,6 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1"
-                                                    }
-                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -5058,18 +5305,18 @@
         "Section": 23,
         "Rule": 15,
         "Test": "a",
-        "test_description": "The project has one building segment with one zone served by System 3. Proposed building utilizes System 3 with humidistatic controls. The baseline building utilizes system 3 as well.  The expected result is: undetermined",
+        "test_description": "The project has one building segment with one zone served by base system type 3. The proposed building includes dehumidifcation.",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "23-15",
             "ruleset_reference": "G3.1.3.18",
-            "rule_description": "The dehumidification reheat type in the baseline building  shall be the same as the baseline system heating type.",
+            "rule_description": "The dehumidification reheat type in the baseline building shall be the same as the baseline system heating type.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "Rule 13 is true",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "proposed": {
@@ -5090,11 +5337,6 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1"
-                                                    }
-                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -5160,11 +5402,6 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1"
-                                                    }
-                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -5216,18 +5453,18 @@
         "Section": 23,
         "Rule": 15,
         "Test": "b",
-        "test_description": "The project has one building segment with one zone served by System 3. Proposed building utilizes System 3 without dehumidification. Baseline building also has system 3.  The expected result is: not_applicable",
+        "test_description": "The project has one building segment with one zone served by baseline system type 3. The proposed building does not include dehumidifcation. ",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "23-15",
             "ruleset_reference": "G3.1.3.18",
-            "rule_description": "The dehumidification reheat type in the baseline building  shall be the same as the baseline system heating type.",
+            "rule_description": "The dehumidification reheat type in the baseline building shall be the same as the baseline system heating type.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "Rule 13 is true",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "proposed": {
@@ -5248,11 +5485,6 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1"
-                                                    }
-                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -5316,11 +5548,6 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1"
-                                                    }
-                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -5372,7 +5599,7 @@
         "Section": 23,
         "Rule": 16,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones served by System 7. The preheat coil is correctly controlled to 20 F less than the design room heating temperature setpoint. The expected result is: pass",
+        "test_description": "The project has one building segment with two zones served by baseline system type 7. The preheat coil is correctly controlled to 20 F less than the design room heating temperature setpoint.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "23-16",
@@ -5383,7 +5610,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "Rule 13 is true",
             "mandatory_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
@@ -5523,7 +5750,7 @@
         "Section": 23,
         "Rule": 16,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones served by System 7. The preheat coil is incorrectly controled to only 13 F less than the design room heating temperature setpoint. Should be 20 F. The expected result is: fail",
+        "test_description": "The project has one building segment with two zones served by baseline system type 7. The preheat coil is incorrectly controled to only 13 F less than the design room heating temperature setpoint.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "23-16",
@@ -5534,7 +5761,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "Rule 13 is true",
             "mandatory_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
