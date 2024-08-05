@@ -144,11 +144,12 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
                 tmp_context_list = find_all(self.list_path, context[ruleset_model])
                 # handles a case when there is no element available to the target list path.
                 # This is set to an internal error handling since list_path is defined as part of rule logic.
-                assert_(tmp_context_list, f"List path {self.list_path} in rule {self.id} is either incorrect or has no data.")
-
-                list_context.__setitem__(
-                    ruleset_model, tmp_context_list
+                assert_(
+                    tmp_context_list,
+                    f"List path {self.list_path} in rule {self.id} is either incorrect or has no data.",
                 )
+
+                list_context.__setitem__(ruleset_model, tmp_context_list)
             else:
                 list_context.__setitem__(ruleset_model, None)
 
