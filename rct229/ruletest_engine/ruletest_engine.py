@@ -306,7 +306,7 @@ def run_section_tests(
             match test_dict["expected_rule_outcome"]:
 
                 case "pass":
-                    # For an expected pass, ALL tested elements in the RMD triplet must pass
+                    # For an expected pass, ALL tested elements in the RMR triplet must pass
                     if not all(test_result_dict[f"{test_id}"]):
                         test_error_found = True
 

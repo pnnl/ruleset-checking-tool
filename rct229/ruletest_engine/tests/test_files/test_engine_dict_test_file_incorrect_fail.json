@@ -9,14 +9,14 @@
             "rule_id": "16-1",
             "ruleset_reference": 0,
             "rule_description": "The elevator peak motor power shall be calculated according to the equation in Table G3.1-16",
-            "applicable_rmr": "Baseline Model",
+            "applicable_rmd": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": 0,
             "mandatory_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "weather": {
@@ -181,14 +181,14 @@
             "rule_id": "16-1",
             "ruleset_reference": 0,
             "rule_description": "The elevator peak motor power shall be calculated according to the equation in Table G3.1-16",
-            "applicable_rmr": "Baseline Model",
+            "applicable_rmd": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": 0,
             "mandatory_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "weather": {
@@ -349,14 +349,14 @@
             "rule_id": "16-1",
             "ruleset_reference": 0,
             "rule_description": "The elevator peak motor power shall be calculated according to the equation in Table G3.1-16",
-            "applicable_rmr": "Baseline Model",
+            "applicable_rmd": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": 0,
             "mandatory_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "weather": {
@@ -522,14 +522,14 @@
             "rule_id": "16-1",
             "ruleset_reference": 0,
             "rule_description": "The elevator peak motor power shall be calculated according to the equation in Table G3.1-16",
-            "applicable_rmr": "Baseline Model",
+            "applicable_rmd": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": 0,
             "mandatory_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "weather": {
@@ -695,14 +695,14 @@
             "rule_id": "16-1",
             "ruleset_reference": 0,
             "rule_description": "The elevator peak motor power shall be calculated according to the equation in Table G3.1-16",
-            "applicable_rmr": "Baseline Model",
+            "applicable_rmd": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": 0,
             "mandatory_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "weather": {
@@ -862,14 +862,14 @@
             "rule_id": "16-1",
             "ruleset_reference": 0,
             "rule_description": "The elevator peak motor power shall be calculated according to the equation in Table G3.1-16",
-            "applicable_rmr": "Baseline Model",
+            "applicable_rmd": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": 0,
             "mandatory_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "weather": {
