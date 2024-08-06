@@ -191,7 +191,7 @@ def evaluate_rules(
 
     assert_(
         len(invalid_rmds) == 0,
-        f"Required RPDs provided are invalid. See error messages in terminal.",
+        f"Required RPDs provided are invalid. See error messages: {invalid_rmds}",
     )
 
     ## Now check the optional RMDs
