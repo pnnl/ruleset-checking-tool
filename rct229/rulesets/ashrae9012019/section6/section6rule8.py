@@ -163,7 +163,9 @@ class Section6Rule8(RuleDefinitionListIndexedBase):
                             "total_hours_matched": schedule_comparison_result[
                                 "total_hours_matched"
                             ],
-                            "eflh_difference": schedule_comparison_result["eflh_difference"]
+                            "eflh_difference": schedule_comparison_result[
+                                "eflh_difference"
+                            ],
                         }
 
                     def manual_check_required(self, context, calc_vals=None, data=None):
