@@ -6,6 +6,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_heat_rejection_loops_co
     get_heat_rejection_loops_connected_to_baseline_systems,
 )
 from rct229.schema.schema_enums import SchemaEnums
+from rct229.utils.jsonpath_utils import find_all
 
 HEATREJECTIONFANSPEEDCONTROL = SchemaEnums.schema_enums[
     "HeatRejectionFanSpeedControlOptions"
@@ -39,6 +40,10 @@ class Section22Rule18(RuleDefinitionListIndexedBase):
                 rmd_b
             )
         }
+
+    def is_applicable(self, context, data=None):
+        rmd_b = context.BASELINE_0
+        return find_all("$.heat_rejections[*]", rmd_b)
 
     class HeatRejectionRule(RuleDefinitionBase):
         def __init__(self):
