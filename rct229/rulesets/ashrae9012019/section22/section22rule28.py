@@ -50,6 +50,10 @@ class Section22Rule28(RuleDefinitionListIndexedBase):
             "fluid_loop_b": fluid_loop_b,
         }
 
+    def is_applicable(self, context, data=None):
+        rmd_b = context.BASELINE_0
+        return find_all("$.heat_rejections[*]", rmd_b)
+
     class HeatRejectionRule(RuleDefinitionBase):
         def __init__(self):
             super(Section22Rule28.HeatRejectionRule, self).__init__(
