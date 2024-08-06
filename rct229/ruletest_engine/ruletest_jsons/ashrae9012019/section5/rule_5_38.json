@@ -58,7 +58,11 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 120,
-                                                        "area": 929.0303999999999
+                                                        "area": 929.0303999999999,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "u_factor": 0.27
+                                                        }
                                                     }
                                                 ]
                                             }
@@ -147,7 +151,11 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 120,
-                                                        "area": 929.0303999999999
+                                                        "area": 929.0303999999999,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "u_factor": 0.27
+                                                        }
                                                     }
                                                 ]
                                             }
@@ -180,7 +188,7 @@
         "Rule": 38,
         "Test": "c",
         "test_description": "Project has one building segment with one space that includes floor surfaces adjacent to ground. The ruleset project description does not specify a ground temperature schedule.",
-        "expected_rule_outcome": "undetermined",
+        "expected_rule_outcome": "not_applicable",
         "expected_raised_message_includes": "A ground temperature schedule was not found for the project.",
         "standard": {
             "rule_id": "5-38",
@@ -235,7 +243,11 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 120,
-                                                        "area": 929.0303999999999
+                                                        "area": 929.0303999999999,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "u_factor": 0.27
+                                                        }
                                                     }
                                                 ]
                                             }
