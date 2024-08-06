@@ -17246,7 +17246,11 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 120,
-                                                        "area": 929.0303999999999
+                                                        "area": 929.0303999999999,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "u_factor": 1.5331313162626328
+                                                        }
                                                     }
                                                 ]
                                             }
@@ -17335,7 +17339,11 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 120,
-                                                        "area": 929.0303999999999
+                                                        "area": 929.0303999999999,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "u_factor": 1.5331313162626328
+                                                        }
                                                     }
                                                 ]
                                             }
@@ -17423,7 +17431,11 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 120,
-                                                        "area": 929.0303999999999
+                                                        "area": 929.0303999999999,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "u_factor": 1.5331313162626328
+                                                        }
                                                     }
                                                 ]
                                             }
