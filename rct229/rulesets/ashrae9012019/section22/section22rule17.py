@@ -8,6 +8,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_heat_rejection_loops_co
 from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_
 from rct229.utils.pint_utils import ZERO, CalcQ
+from rct229.utils.jsonpath_utils import find_all
 
 FAN_SHAFT_POWER_FACTOR = 0.9
 HEAT_REJ_EFF_LIMIT = 38.2 * ureg("gpm/hp")
@@ -39,6 +40,10 @@ class Section22Rule17(RuleDefinitionListIndexedBase):
         )
 
         return {"heat_rejection_loop_ids_b": heat_rejection_loop_ids_b}
+
+    def is_applicable(self, context, data=None):
+        rmd_b = context.BASELINE_0
+        return find_all("$.heat_rejections[*]", rmd_b)
 
     class HeatRejectionRule(PartialRuleDefinition):
         def __init__(self):
