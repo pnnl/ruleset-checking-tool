@@ -30,7 +30,7 @@ class Section19Rule3(PartialRuleDefinition):
         weather_b = rpd_b["weather"]
         return {
             "cooling_design_day_type": weather_b.get("cooling_design_day_type"),
-            "heating_design_day_type": weather_b.get("heating_design_day_type")
+            "heating_design_day_type": weather_b.get("heating_design_day_type"),
         }
 
     def applicability_check(self, context, calc_vals, data):
@@ -39,8 +39,7 @@ class Section19Rule3(PartialRuleDefinition):
 
         return (
             cooling_design_day_type == COOLING_DESIGN_DAY.COOLING_1_0
-            and heating_design_day_type
-            == HEATING_DESIGN_DAY.HEATING_99_6
+            and heating_design_day_type == HEATING_DESIGN_DAY.HEATING_99_6
         )
 
     def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
