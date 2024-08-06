@@ -488,7 +488,7 @@
         "Rule": 3,
         "Test": "d",
         "test_description": "A one building segment, single zone building does not have the performance cost index target specified in any ruleset model descriptions.",
-        "expected_rule_outcome": "fail",
+        "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "At least one `performance_cost_index_target` value must exist.",
         "standard": {
             "rule_id": "1-3",
@@ -647,7 +647,7 @@
         "Rule": 3,
         "Test": "e",
         "test_description": "A one building segment, single zone building does not have the building performance factor specified in any ruleset model descriptions.",
-        "expected_rule_outcome": "fail",
+        "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "At least one `bpf_set` value must exist.",
         "standard": {
             "rule_id": "1-3",
@@ -806,7 +806,7 @@
         "Rule": 3,
         "Test": "f",
         "test_description": "A one building segment, single zone building does not have the baseline building regulated energy cost specified in any ruleset model descriptions.",
-        "expected_rule_outcome": "fail",
+        "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "At least one `bbrec_set` value must exist.",
         "standard": {
             "rule_id": "1-3",
@@ -965,7 +965,7 @@
         "Rule": 3,
         "Test": "g",
         "test_description": "A one building segment, single zone building does not have the baseline building unregulated energy cost specified in any ruleset model descriptions.",
-        "expected_rule_outcome": "fail",
+        "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "At least one `bbuec_set` value must exist.",
         "standard": {
             "rule_id": "1-3",
@@ -1124,7 +1124,7 @@
         "Rule": 3,
         "Test": "h",
         "test_description": "A one building segment, single zone building does not have the baseline building performance specified in any ruleset model descriptions.",
-        "expected_rule_outcome": "fail",
+        "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "At least one `bbp_set` value must exist.",
         "standard": {
             "rule_id": "1-3",

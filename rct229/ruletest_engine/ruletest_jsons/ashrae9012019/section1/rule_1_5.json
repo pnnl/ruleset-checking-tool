@@ -463,7 +463,7 @@
         "Rule": 5,
         "Test": "d",
         "test_description": "A one building segment, single zone building has proposed on site renewable energy production and the proposed building performance is not specified in any ruleset model descriptions.",
-        "expected_rule_outcome": "fail",
+        "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "Ruleset expects exactly one PBP value to be used in the project.",
         "standard": {
             "rule_id": "1-5",
@@ -615,7 +615,7 @@
         "Rule": 5,
         "Test": "e",
         "test_description": "A one building segment, single zone building has proposed on site renewable energy production and baseline building performance is not specified in any ruleset model descriptions.",
-        "expected_rule_outcome": "fail",
+        "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "Ruleset expects exactly one BBP value to be used in the project.",
         "standard": {
             "rule_id": "1-5",
@@ -767,7 +767,7 @@
         "Rule": 5,
         "Test": "f",
         "test_description": "A one building segment, single zone building has proposed on site renewable energy production and performance cost index is not specified in any ruleset model descriptions.",
-        "expected_rule_outcome": "fail",
+        "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "Ruleset expects exactly one PCI value to be used in the project.",
         "standard": {
             "rule_id": "1-5",
@@ -919,7 +919,7 @@
         "Rule": 5,
         "Test": "g",
         "test_description": "A one building segment, single zone building has proposed on site renewable energy production and performance cost index target is not specified in any ruleset model descriptions.",
-        "expected_rule_outcome": "fail",
+        "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "Ruleset expects exactly one PCI Target value to be used in the project.",
         "standard": {
             "rule_id": "1-5",
