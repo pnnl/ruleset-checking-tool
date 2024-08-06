@@ -449,7 +449,6 @@
                                     }
                                 ]
                             },
-                            {},
                             {
                                 "id": "Condenser Loop 1",
                                 "type": "CONDENSER"
@@ -599,7 +598,6 @@
                                     }
                                 ]
                             },
-                            {},
                             {
                                 "id": "Condenser Loop 1",
                                 "type": "CONDENSER"
