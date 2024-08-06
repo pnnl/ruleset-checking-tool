@@ -9,7 +9,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type imp
 from rct229.utils.jsonpath_utils import find_all
 
 UNDETERMINED_MSG = "It cannot be determined if the ground temperature schedule for the project is representative of the project climate."
-NOT_APPLICABLE_MSG = "A ground temperature schedule was not found for the project."
+NOT_DEFINED_MSG = "A ground temperature schedule was not found for the project."
 
 
 class Section5Rule38(PartialRuleDefinition):
@@ -30,7 +30,12 @@ class Section5Rule38(PartialRuleDefinition):
             },
         )
 
-    def is_applicable(self, context, data=None):
+    def get_calc_vals(self, context, data=None):
+        rpd = context.BASELINE_0
+        ground_temperature_schedule = rpd["weather"].get("ground_temperature_schedule")
+        return {"ground_temperature_schedule": ground_temperature_schedule}
+
+    def applicability_check(self, context, calc_vals, data):
         rpd = context.BASELINE_0
         return any(
             [
@@ -44,17 +49,7 @@ class Section5Rule38(PartialRuleDefinition):
             ]
         )
 
-    def get_calc_vals(self, context, data=None):
-        rpd = context.BASELINE_0
-        ground_temperature_schedule = rpd["weather"].get("ground_temperature_schedule")
-        return {"ground_temperature_schedule": ground_temperature_schedule}
-
-    def applicability_check(self, context, calc_vals, data):
-        ground_temperature_schedule = calc_vals["ground_temperature_schedule"]
-        return ground_temperature_schedule
-
     def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
+        if calc_vals["ground_temperature_schedule"] is None:
+            return NOT_DEFINED_MSG
         return UNDETERMINED_MSG
-
-    def get_not_applicable_msg(self, context, data=None):
-        return NOT_APPLICABLE_MSG
