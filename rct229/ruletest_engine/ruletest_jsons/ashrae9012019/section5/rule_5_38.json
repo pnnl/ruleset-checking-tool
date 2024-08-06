@@ -29,20 +29,16 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "volume": 42.47526988799999,
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
                                                         "lighting_space_type": "OFFICE_ENCLOSED",
                                                         "floor_area": 23.225759999999998
                                                     }
@@ -58,7 +54,11 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 120,
-                                                        "area": 929.0303999999999
+                                                        "area": 929.0303999999999,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "u_factor": 1.5331313162626328
+                                                        }
                                                     }
                                                 ]
                                             }
@@ -118,20 +118,16 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "volume": 42.47526988799999,
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
                                                         "lighting_space_type": "OFFICE_ENCLOSED",
                                                         "floor_area": 23.225759999999998
                                                     }
@@ -147,7 +143,11 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 120,
-                                                        "area": 929.0303999999999
+                                                        "area": 929.0303999999999,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "u_factor": 1.5331313162626328
+                                                        }
                                                     }
                                                 ]
                                             }
@@ -206,20 +206,16 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "volume": 42.47526988799999,
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
                                                         "lighting_space_type": "OFFICE_ENCLOSED",
                                                         "floor_area": 23.225759999999998
                                                     }
@@ -235,7 +231,11 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 120,
-                                                        "area": 929.0303999999999
+                                                        "area": 929.0303999999999,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "u_factor": 1.5331313162626328
+                                                        }
                                                     }
                                                 ]
                                             }
