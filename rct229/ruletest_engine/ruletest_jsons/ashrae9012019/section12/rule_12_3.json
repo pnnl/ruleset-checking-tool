@@ -3,7 +3,7 @@
         "Section": 12,
         "Rule": 3,
         "Test": "a",
-        "test_description": "A one building segment, single zone office building's proposed and baseline models expected receptacle power credit was applied as expected for all hours",
+        "test_description": "A one building segment, single zone courtroom building's proposed and baseline models expected receptacle power credit was applied as expected for all hours",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "12-3",
@@ -43,11 +43,12 @@
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 1393.5456,
-                                                        "lighting_space_type": "OFFICE_OPEN_PLAN",
+                                                        "lighting_space_type": "COURT_ROOM",
                                                         "miscellaneous_equipment": [
                                                             {
                                                                 "id": "Plug Load 1",
                                                                 "multiplier_schedule": "Plug Load Schedule",
+                                                                "has_automatic_control": true,
                                                                 "automatic_controlled_percentage": 1
                                                             }
                                                         ]
@@ -8857,11 +8858,12 @@
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 1393.5456,
-                                                        "lighting_space_type": "OFFICE_OPEN_PLAN",
+                                                        "lighting_space_type": "COURT_ROOM",
                                                         "miscellaneous_equipment": [
                                                             {
                                                                 "id": "Plug Load 1",
-                                                                "multiplier_schedule": "Plug Load Schedule"
+                                                                "multiplier_schedule": "Plug Load Schedule",
+                                                                "has_automatic_control": true
                                                             }
                                                         ]
                                                     }
@@ -17650,7 +17652,7 @@
         "Section": 12,
         "Rule": 3,
         "Test": "b",
-        "test_description": "A one building segment, single zone office building's expected receptacle power credit, but baseline and proposed are identical",
+        "test_description": "A one building segment, single zone courtroom building's expected receptacle power credit, but baseline and proposed are identical",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "Credit for automatic receptacle controls was expected, but baseline and proposed miscellaneous equipment schedules are identical",
         "standard": {
@@ -17691,11 +17693,12 @@
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 1393.5456,
-                                                        "lighting_space_type": "OFFICE_OPEN_PLAN",
+                                                        "lighting_space_type": "COURT_ROOM",
                                                         "miscellaneous_equipment": [
                                                             {
                                                                 "id": "Plug Load 1",
                                                                 "multiplier_schedule": "Plug Load Schedule",
+                                                                "has_automatic_control": true,
                                                                 "automatic_controlled_percentage": 1
                                                             }
                                                         ]
@@ -26505,11 +26508,12 @@
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 1393.5456,
-                                                        "lighting_space_type": "OFFICE_OPEN_PLAN",
+                                                        "lighting_space_type": "COURT_ROOM",
                                                         "miscellaneous_equipment": [
                                                             {
                                                                 "id": "Plug Load 1",
-                                                                "multiplier_schedule": "Plug Load Schedule"
+                                                                "multiplier_schedule": "Plug Load Schedule",
+                                                                "has_automatic_control": true
                                                             }
                                                         ]
                                                     }
@@ -35298,7 +35302,7 @@
         "Section": 12,
         "Rule": 3,
         "Test": "c",
-        "test_description": "A one building segment, single zone office building's expected receptacle power credit, but the credit was applied incorrectly",
+        "test_description": "A one building segment, single zone courtroom building's expected receptacle power credit, but the credit was applied incorrectly",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "12-3",
@@ -35338,11 +35342,12 @@
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 1393.5456,
-                                                        "lighting_space_type": "OFFICE_OPEN_PLAN",
+                                                        "lighting_space_type": "COURT_ROOM",
                                                         "miscellaneous_equipment": [
                                                             {
                                                                 "id": "Plug Load 1",
                                                                 "multiplier_schedule": "Plug Load Schedule",
+                                                                "has_automatic_control": true,
                                                                 "automatic_controlled_percentage": 1
                                                             }
                                                         ]
@@ -44152,11 +44157,12 @@
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 1393.5456,
-                                                        "lighting_space_type": "OFFICE_OPEN_PLAN",
+                                                        "lighting_space_type": "COURT_ROOM",
                                                         "miscellaneous_equipment": [
                                                             {
                                                                 "id": "Plug Load 1",
-                                                                "multiplier_schedule": "Plug Load Schedule"
+                                                                "multiplier_schedule": "Plug Load Schedule",
+                                                                "has_automatic_control": true
                                                             }
                                                         ]
                                                     }
