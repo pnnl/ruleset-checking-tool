@@ -22625,6 +22625,12 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 9.290303999999999
+                                                    }
+                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "System_8_PFP_Reheat - Terminal for Thermal Zone 1",
@@ -22644,6 +22650,12 @@
                                                 "id": "Thermal Zone 2",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 2",
+                                                        "floor_area": 9.290303999999999
+                                                    }
+                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "System_8_PFP_Reheat - Terminal for Thermal Zone 2",
@@ -22662,37 +22674,11 @@
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System 8",
-                                                "cooling_system": {
-                                                    "id": "CHW Coil 1",
-                                                    "type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Secondary CHW Loop 1"
-                                                },
-                                                "preheat_system": {
-                                                    "id": "Preheat Coil 1",
-                                                    "type": "ELECTRIC_RESISTANCE"
-                                                },
-                                                "fan_system": {
-                                                    "id": "VAV Fan System 1",
-                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
-                                                    "supply_fans": [
-                                                        {
-                                                            "id": "Supply Fan 1"
-                                                        }
-                                                    ],
-                                                    "return_fans": [
-                                                        {
-                                                            "id": "Return Fan 1"
-                                                        }
-                                                    ]
-                                                }
-                                            },
-                                            {
                                                 "id": "System_8_PFP_Reheat",
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
                                                     "type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Cooling Child Loop 2"
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
@@ -22718,7 +22704,7 @@
                                                 "cooling_system": {
                                                     "id": "CHW Coil 2",
                                                     "type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                    "chilled_water_loop": "Secondary CHW Loop 2"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 2",
@@ -22744,6 +22730,13 @@
                                 ]
                             }
                         ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
                         "chillers": [
                             {
                                 "id": "Chiller 1",
@@ -22751,6 +22744,11 @@
                             }
                         ],
                         "pumps": [
+                            {
+                                "id": "Boiler Pump 1",
+                                "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
                             {
                                 "id": "Chiller Pump 1",
                                 "loop_or_piping": "Chiller Loop 1",
@@ -22760,14 +22758,13 @@
                                 "id": "Secondary CHW Pump",
                                 "loop_or_piping": "Secondary CHW Loop 1",
                                 "speed_control": "VARIABLE_SPEED"
-                            },
-                            {
-                                "id": "Boiler Pump 1",
-                                "loop_or_piping": "Boiler Loop 1",
-                                "speed_control": "FIXED_SPEED"
                             }
                         ],
                         "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            },
                             {
                                 "id": "Chiller Loop 1",
                                 "type": "COOLING",
@@ -22777,21 +22774,10 @@
                                         "type": "COOLING"
                                     },
                                     {
-                                        "id": "Cooling Child Loop 2",
+                                        "id": "Secondary CHW Loop 2",
                                         "type": "COOLING"
                                     }
                                 ]
-                            },
-                            {
-                                "id": "Boiler Loop 1",
-                                "type": "HEATING"
-                            }
-                        ],
-                        "boilers": [
-                            {
-                                "id": "Boiler 1",
-                                "loop": "Boiler Loop 1",
-                                "energy_source_type": "NATURAL_GAS"
                             }
                         ],
                         "type": "BASELINE_0"
@@ -23118,6 +23104,12 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 9.290303999999999
+                                                    }
+                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "System_7_VAV_HW_Reheat - Terminal for Thermal Zone 1",
@@ -23180,11 +23172,30 @@
                                                 }
                                             },
                                             {
-                                                "id": "System 7_2",
+                                                "id": "System_7_VAV_HW_Reheat 1",
                                                 "cooling_system": {
                                                     "id": "CHW Coil 2",
                                                     "type": "FLUID_LOOP",
                                                     "chilled_water_loop": "Chiller Loop 2"
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 2",
+                                                    "type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 2",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "System_7_VAV_HW_Reheat Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "System_7_VAV_HW_Reheat Return Fan 1"
+                                                        }
+                                                    ]
                                                 }
                                             }
                                         ]
@@ -23203,6 +23214,10 @@
                             {
                                 "id": "Chiller 1",
                                 "cooling_loop": "Chiller Loop 1"
+                            },
+                            {
+                                "id": "Chiller 2",
+                                "cooling_loop": "Chiller Loop 2"
                             }
                         ],
                         "pumps": [
