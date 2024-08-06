@@ -613,7 +613,7 @@
         "Rule": 4,
         "Test": "e",
         "test_description": "A one building segment, single zone building does not have performance cost index specified in any ruleset model descriptions.",
-        "expected_rule_outcome": "fail",
+        "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "At least one `pci_set` value must exist.",
         "standard": {
             "rule_id": "1-4",
@@ -763,7 +763,7 @@
         "Rule": 4,
         "Test": "f",
         "test_description": "A one building segment, single zone building does not have performance cost index target specified in any ruleset model descriptions.",
-        "expected_rule_outcome": "fail",
+        "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "At least one `pci_target_set` value must exist.",
         "standard": {
             "rule_id": "1-4",

@@ -461,7 +461,7 @@
         "Rule": 2,
         "Test": "d",
         "test_description": "A one building segment, single zone office space type building does not have a performance cost index defined.",
-        "expected_rule_outcome": "fail",
+        "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "At least one `performance_cost_index` value must exist.",
         "standard": {
             "rule_id": "1-2",
@@ -611,7 +611,7 @@
         "Rule": 2,
         "Test": "e",
         "test_description": "A one building segment, single zone office building does not have proposed building performance defined.",
-        "expected_rule_outcome": "fail",
+        "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "At least one `total_proposed_building_energy_cost_including_renewable_energy` value must exist.",
         "standard": {
             "rule_id": "1-2",
@@ -762,7 +762,7 @@
         "Rule": 2,
         "Test": "f",
         "test_description": "A one building segment, single zone office building does not have a baseline building performance defined.",
-        "expected_rule_outcome": "fail",
+        "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "At least one `baseline_building_performance_energy_cost` value must exist.",
         "standard": {
             "rule_id": "1-2",
