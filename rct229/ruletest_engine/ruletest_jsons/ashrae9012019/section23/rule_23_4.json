@@ -155,7 +155,8 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "lighting_space_type": "LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM"
+                                                        "lighting_space_type": "LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM",
+                                                        "floor_area": 100
                                                     }
                                                 ]
                                             },
@@ -186,7 +187,8 @@
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1"
+                                                    "hot_water_loop": "Boiler Loop 1",
+                                                    "design_capacity": 17584.266666666666
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -359,7 +361,8 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "lighting_space_type": "LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM"
+                                                        "lighting_space_type": "LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM",
+                                                        "floor_area": 100
                                                     }
                                                 ]
                                             }
