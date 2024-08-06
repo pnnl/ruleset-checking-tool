@@ -203,6 +203,7 @@
                                                     ]
                                                 },
                                                 "heating_system": {
+                                                    "id": "need to give an id",
                                                     "design_capacity": 17584.266666666666
                                                 }
                                             }
