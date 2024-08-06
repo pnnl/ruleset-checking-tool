@@ -34,7 +34,7 @@ class Section5Rule38(PartialRuleDefinition):
         rpd = context.BASELINE_0
         return any(
             [
-                get_opaque_surface_type(surface_b) in [OST.BELOW_GRADE_WALL, OST.HEATED_SOG, OST.UNHEATED_SOG]
+                get_opaque_surface_type(surface_b) == OST.BELOW_GRADE_WALL
                 for surface_b in find_all(
                     "$.ruleset_model_descriptions[0].buildings[*].building_segments[*].zones["
                     "*].surfaces[*]",
@@ -53,7 +53,5 @@ class Section5Rule38(PartialRuleDefinition):
         return ground_temperature_schedule
 
     def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
-        return UNDETERMINED_MSG
-
-    def get_not_applicable_msg(self, context, data=None):
-        return NOT_APPLICABLE_MSG
+        ground_temperature_schedule = calc_vals["ground_temperature_schedule"]
+        return UNDETERMINED_MSG if ground_temperature_schedule else NOT_APPLICABLE_MSG
