@@ -26,15 +26,12 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 1",
@@ -54,8 +51,6 @@
                                             },
                                             {
                                                 "id": "Thermal Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 2",
@@ -138,15 +133,12 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 1",
@@ -166,8 +158,6 @@
                                             },
                                             {
                                                 "id": "Thermal Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 2",
@@ -250,15 +240,12 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 1",
@@ -268,8 +255,8 @@
                                                         "heating_source": "ELECTRIC",
                                                         "fan": {
                                                             "id": "Terminal Fan 1",
-                                                            "design_airflow": 188.77897727999994,
-                                                            "design_electric_power": 140
+                                                            "design_airflow": 141.58423295999995,
+                                                            "design_electric_power": 105
                                                         },
                                                         "fan_configuration": "PARALLEL",
                                                         "primary_airflow": 283.1684659199999
@@ -278,8 +265,6 @@
                                             },
                                             {
                                                 "id": "Thermal Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 2",
@@ -289,8 +274,8 @@
                                                         "heating_source": "ELECTRIC",
                                                         "fan": {
                                                             "id": "Terminal Fan 2",
-                                                            "design_airflow": 141.58423295999995,
-                                                            "design_electric_power": 105
+                                                            "design_airflow": 94.38948863999997,
+                                                            "design_electric_power": 70
                                                         },
                                                         "fan_configuration": "PARALLEL",
                                                         "primary_airflow": 188.77897727999994
@@ -393,15 +378,12 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 1",
@@ -421,8 +403,6 @@
                                             },
                                             {
                                                 "id": "Thermal Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 2",
