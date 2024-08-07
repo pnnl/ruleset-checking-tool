@@ -54,13 +54,11 @@ class Section22Rule33(RuleDefinitionBase):
         # modeled as a primary only loop
         # primary_secondary_loop_dict = get_primary_secondary_loops_dict(rmd_b)
 
-        return (
-            any(
-                [
-                    available_type in APPLICABLE_SYS_TYPES
-                    for available_type in available_type_list
-                ]
-            )
+        return any(
+            [
+                available_type in APPLICABLE_SYS_TYPES
+                for available_type in available_type_list
+            ]
         )
 
     def get_calc_vals(self, context, data=None):
