@@ -69,17 +69,18 @@
                       
                    		 - check do_multi_zone_evaluation to determine if this is a multi_zone system.  Continue checking whether all the zones it serves are on the same floor: `if do_multi_zone_evaluation:`
                       			- get the list of zones on the same floor by using the function get_zones_on_same_floor: `zones_on_floor = get_zones_on_same_floor(B_RMI,zones_served_by_system[0])`
-				- check if all the zones served by the system are on the same floor: `if all(zone in zones_on_floor for zone in zones_served_by_system):`
-					- now check if there are any other systems of the same system type that serve zones on this floor.  First loop through baseline_system_types_dict again: `for hvac_system_type2 in baseline_system_types_dict:`
-						- check if the hvac_system_type2 is the same type: `if baseline_system_type_compare(hvac_system_type2,system_type,FALSE):`
-							- look through all of the hvacs of this system type: `for hvac_system2_id in baseline_system_types_dict[hvac_system_type2]:`
-								- make sure that hvac_system2_id is not the same as hvac_system_id: `if hvac_system2_id != hvac_system_id:`
-									- now check if hvac_system2 serves any of the zones on the same floor as hvac_system.  Get the zones served by hvac_system2: `zones_served_by_system2 = zones_and_terminal_unit_list_dict[hvac_system2_id]["ZONE_LIST"]`
-									- use set.intersection to see if any of these zones are on the same floor: `if(len(set(zones_served_by_system2).intersection(zones_on_floor))) > 0:`
-										- the system fails: `result = FAIL`
-          									- UNLESS system_type is SYS_5 or SYS_7 AND all of the zones in hvac_system2 are lab zones: `if hvac_system2_id in? lab_zone_hvac_systems["LAB_ZONES_ONLY"] && len(lab_zone_hvac_systems["LAB_ZONES_ONLY"]) == 1 && lab_zone_exhaust > 15000: result = PASS`
-                   								- otherwise then if it's the only lab zone system, but we aren't sure about the exhaust air volume, result = UNDETERMINED: `if hvac_system2_id in? lab_zone_hvac_systems["LAB_ZONES_ONLY"] && len(lab_zone_hvac_systems["LAB_ZONES_ONLY"]) == 1: result = UNDETERMINED; note = "This HVAC system is on the same floor as " + hvac_system2_id + ", which servese lab zones in the building.  If the building has greater than 15,000 cfm of lab exhaust and " + hvac_system2_id + " is System type 5 or 7 serving only lab zones, this system passes, otherwise it fails"`
-                           							- otherwise the system isn't a lab system, set result to fail: `result = FAIL`
+					- check if all the zones served by the system are on the same floor: `if all(zone in zones_on_floor for zone in zones_served_by_system):`
+						- set the result to PASS.  There are checks on the following lines that will set the result to fail a zone is also served by another system, or if the system serves lab zones: `result = PASS`
+        					- now check if there are any other systems of the same system type that serve zones on this floor.  First loop through baseline_system_types_dict again: `for hvac_system_type2 in baseline_system_types_dict:`
+							- check if the hvac_system_type2 is the same type: `if baseline_system_type_compare(hvac_system_type2,system_type,FALSE):`
+								- look through all of the hvacs of this system type: `for hvac_system2_id in baseline_system_types_dict[hvac_system_type2]:`
+									- make sure that hvac_system2_id is not the same as hvac_system_id: `if hvac_system2_id != hvac_system_id:`
+										- now check if hvac_system2 serves any of the zones on the same floor as hvac_system.  Get the zones served by hvac_system2: `zones_served_by_system2 = zones_and_terminal_unit_list_dict[hvac_system2_id]["ZONE_LIST"]`
+										- use set.intersection to see if any of these zones are on the same floor: `if(len(set(zones_served_by_system2).intersection(zones_on_floor))) > 0:`
+											- the system fails: `result = FAIL`
+	          									- UNLESS system_type is SYS_5 or SYS_7 AND all of the zones in hvac_system2 are lab zones: `if hvac_system2_id in? lab_zone_hvac_systems["LAB_ZONES_ONLY"] && len(lab_zone_hvac_systems["LAB_ZONES_ONLY"]) == 1 && lab_zone_exhaust > 15000: result = PASS`
+	                   								- otherwise then if it's the only lab zone system, but we aren't sure about the exhaust air volume, result = UNDETERMINED: `if hvac_system2_id in? lab_zone_hvac_systems["LAB_ZONES_ONLY"] && len(lab_zone_hvac_systems["LAB_ZONES_ONLY"]) == 1: result = UNDETERMINED; note = "This HVAC system is on the same floor as " + hvac_system2_id + ", which serves lab zones in the building.  If the building has greater than 15,000 cfm of lab exhaust and " + hvac_system2_id + " is System type 5 or 7 serving only lab zones, this system passes, otherwise it fails"`
+	                           							- otherwise the other system isn't a lab system, set result to fail: `result = FAIL`
 
 					
   **Rule Assertion - Zone:**
