@@ -5,7 +5,6 @@ import os
 
 import pandas as pd
 import pint
-
 from rct229.rule_engine.rulesets import RuleSet
 from rct229.ruletest_engine.ruletest_jsons.scripts.excel_generation_utilities import (
     generate_rule_test_dictionary,
@@ -342,9 +341,8 @@ def create_dictionary_from_excel(spreadsheet_name, sheet_name, rule_set):
                     # Once you've worked down to the final rmd_transformation sections of the spreadsheet, check
                     # to see if zones have been mapped to systems
                     if not zones_have_been_mapped and system_to_zone_dict:
-                        zones_have_been_mapped = (
-                            True  # Set to true to avoid setting them again
-                        )
+                        # Set to true to avoid setting them again
+                        zones_have_been_mapped = True
                         set_systems_to_zones(json_dict, system_to_zone_dict, rule_set)
 
                     # Skip irrelevant rows (e.g., "Notes")
@@ -630,18 +628,11 @@ def set_systems_to_zones(json_dict, system_to_zone_dict, rule_set):
         with open(system_type_path) as f:
             system_rmd = json.load(f)
 
-        # Get system classification (e.g., MultiZoneAirLoop, SingleZoneAirLoop, ZoneEquipment)
-        system_classification = determine_system_classification(system_rmd)
-
         # Add relevant terminals to zones in zone_list
-        add_baseline_terminals(
-            json_dict, system_rmd, system_classification, system_name, zone_list
-        )
+        add_baseline_terminals(json_dict, system_rmd, system_name, zone_list)
 
         # Adjust building segment HVACs
-        add_hvac_systems(
-            json_dict, system_rmd, system_classification, system_name, zone_list
-        )
+        add_hvac_systems(json_dict, system_rmd, system_name, zone_list)
 
         # Add plant loop equipment
         add_plant_loop_equipment(json_dict, system_rmd)
@@ -682,9 +673,7 @@ def get_rmd_triplet_from_ruletest_json_dict(ruletest_json_test_dict):
     return rmd_triplet_dict_list
 
 
-def add_baseline_terminals(
-    json_dict, system_rmd, system_classification, system_name, zone_list
-):
+def add_baseline_terminals(json_dict, system_rmd, system_name, zone_list):
     """Takes a template RMD and injects terminals found in an HVAC system example RMD for a list of zones
 
     Parameters
@@ -698,11 +687,6 @@ def add_baseline_terminals(
     system_rmd : dict
 
         The bare bone dictionary example of an HVAC system type. Terminals are pulled from this dictionary
-
-    system_classification: str
-        A string representing the system type classification. Options are MultiZoneAirLoop,
-        SingleZoneAirLoop, ZoneEquipment
-
 
     system_name : str
         The name of the RMD json referenced by system_rmd. Should match a file name from
@@ -734,6 +718,11 @@ def add_baseline_terminals(
 
         zones = get_nested_dic_from_key_list(rmd_instance_dict, zone_keys)
 
+        # If another duplicate of this system exists, iterate the name to ensure unique IDs between systems
+        system_name = iterate_system_id_if_duplicate_exists(
+            rmd_instance_dict, system_name
+        )
+
         for zone in zones:
             # Only add terminals for zones assigned to this system
             if zone["id"] in zone_list:
@@ -744,21 +733,12 @@ def add_baseline_terminals(
                 zone["terminals"].append(deepcopy(terminal_copy))
                 zone["terminals"][0]["id"] = f"{system_name} - Terminal for {zone_id}"
 
-                if system_classification != "MultiZoneAirLoop":
-                    zone["terminals"][0][
-                        "served_by_heating_ventilating_air_conditioning_system"
-                    ] = f"{system_name} {zone_id}"
-
-                else:
-                    system_name = clean_system_name_for_multizone_airloop(
-                        rmd_instance_dict, system_name
-                    )
-                    zone["terminals"][0][
-                        "served_by_heating_ventilating_air_conditioning_system"
-                    ] = f"{system_name}"
+                zone["terminals"][0][
+                    "served_by_heating_ventilating_air_conditioning_system"
+                ] = f"{system_name}"
 
 
-def clean_system_name_for_multizone_airloop(rmd_dict, system_name):
+def iterate_system_id_if_duplicate_exists(rmd_dict, system_name):
     """Checks the RMD dictionary for a particular system name in the list of HVAC systems. Iterates the name of this
     system to ensure IDs aren't duplicated.
 
@@ -792,14 +772,20 @@ def clean_system_name_for_multizone_airloop(rmd_dict, system_name):
         hvac_systems = get_nested_dic_from_key_list(rmd_dict, hvac_keys)
 
         for hvac_system in hvac_systems:
-            if system_name == hvac_system["id"]:
-                # Check if last character is a numeric. If so, return that system name iterated by 1
-                if system_name[-1].isdigit():
-                    final_index = int(system_name[-1])
-                    return system_name[:-1] + str(final_index + 1)
 
-                else:
-                    return system_name + " 1"
+            # If this system ID/name has already been taken, iterate it by one
+            if system_name == hvac_system["id"]:
+
+                # Start index at one and go up until no matches are found
+                index = 1
+
+                # Continue iterating index until no matches are found
+                while any(
+                    hvac["id"] == f"{system_name} {index}" for hvac in hvac_systems
+                ):
+                    index += 1
+
+                return f"{system_name} {index}"
 
     # No change needed
     return system_name
@@ -852,9 +838,7 @@ def iterate_ids_in_dict(iterable_object):
                 iterate_ids_in_dict(value)
 
 
-def add_hvac_systems(
-    json_dict, system_rmd, system_classification, system_name, zone_list
-):
+def add_hvac_systems(json_dict, system_rmd, system_name, zone_list):
     """Adds HVAC system from system_rmd to template RMD for zones in zone list
 
     Parameters
@@ -867,10 +851,6 @@ def add_hvac_systems(
     system_rmd : dict
 
         The bare bone dictionary example of an HVAC system type. HVAC systems are pulled from this dictionary
-
-    system_classification: str
-        A string representing the system type classification. Options are MultiZoneAirLoop,
-        SingleZoneAirLoop, ZoneEquipment
 
 
     system_name : str
@@ -929,94 +909,43 @@ def add_hvac_systems(
                         "heating_ventilating_air_conditioning_systems"
                     ] = []
 
-                # If MZ, only require one HVAC system and assign total capacities
-                if system_classification == "MultiZoneAirLoop":
-                    mz_hvac_ids_standardized = False
+                # Flag used to determine if any 'system_name' HVAC types have been already been established already in
+                # the RMD
+                base_hvac_initialized = False
 
-                    # Check for duplicate multizone air loop. If it already exists, create a duplicate of it and
-                    # update IDs to avoid duplicates.
-                    for hvac_system in building_segment[
+                # Check for duplicate system. If this system type already exists, create a copy of it and
+                # update IDs to avoid duplicates.
+                for hvac_system in building_segment[
+                    "heating_ventilating_air_conditioning_systems"
+                ]:
+                    # Iterate IDs to avoid duplicate IDs if this system type already exists in the building
+                    if system_name in hvac_system["id"]:
+                        hvac_copy = deepcopy(hvac_system)
+                        iterate_ids_in_dict(hvac_copy)
+                        base_hvac_initialized = True
+
+                building_segment["heating_ventilating_air_conditioning_systems"].append(
+                    hvac_copy
+                )
+
+                # This ensures the system ID is unique and matches the system type name for first copy. This ensures
+                # consistency that HVAC system names are fully described and helps avoid duplicates
+                if not base_hvac_initialized:
+                    # Adjust HVAC system ID to match system type
+                    hvac_system = building_segment[
                         "heating_ventilating_air_conditioning_systems"
-                    ]:
-                        # Iterate IDs to avoid duplicate IDs if this system type already exists in the building
-                        if system_name in hvac_system["id"]:
-                            hvac_copy = deepcopy(hvac_system)
-                            iterate_ids_in_dict(hvac_copy)
-                            mz_hvac_ids_standardized = True
+                    ][-1]
+                    hvac_system["id"] = f"{system_name}"
 
-                    building_segment[
-                        "heating_ventilating_air_conditioning_systems"
-                    ].append(hvac_copy)
-
-                    # This ensures the system ID is unique and matches the system type name for first copy. This ensures
-                    # consistency that HVAC system names are fully described and helps avoid duplicates
-                    if not mz_hvac_ids_standardized:
-                        # Adjust HVAC system ID to match system type
-                        hvac_system = building_segment[
-                            "heating_ventilating_air_conditioning_systems"
-                        ][-1]
-                        hvac_system["id"] = f"{system_name}"
-
-                        # Ensure unique fan names based on system type
-                        if "fan_system" in hvac_system:
-                            fan_system = hvac_system["fan_system"]
-                            if "supply_fans" in fan_system:
-                                for supply_fan in fan_system["supply_fans"]:
-                                    supply_fan["id"] = f"{system_name} Supply Fan"
-                            if "return_fans" in fan_system:
-                                for return_fan in fan_system["return_fans"]:
-                                    return_fan["id"] = f"{system_name} Return Fan"
-
-                # If SZ, add an HVAC system for each zone
-                else:
-                    for zone in zones:
-                        zone_id = zone["id"]
-
-                        # Get zone ID
-                        if zone_id in zone_list:
-                            # Append another HVAC system to building segment for this zone
-                            building_segment[
-                                "heating_ventilating_air_conditioning_systems"
-                            ].append(deepcopy(hvac_copy))
-
-                            # Update HVAC ID
-                            hvac_system = building_segment[
-                                "heating_ventilating_air_conditioning_systems"
-                            ][-1]
-                            hvac_system["id"] = f"{system_name} {zone_id}"
-
-                            # Update fan system names
-                            if "fan_system" in hvac_system:
-                                hvac_system["fan_system"][
-                                    "id"
-                                ] = f"Fan System - {zone_id}"
-
-                                # Assumes only one supply fan
-                                if "supply_fans" in hvac_system["fan_system"]:
-                                    hvac_system["fan_system"]["supply_fans"][0][
-                                        "id"
-                                    ] = f"Supply Fan - {zone_id}"
-
-                                # Assumes only one supply fan
-                                if "return_fans" in hvac_system["fan_system"]:
-                                    hvac_system["fan_system"]["return_fans"][0][
-                                        "id"
-                                    ] = f"Return Fan - {zone_id}"
-
-                            # Set capacities and update heating/cooling system Ids
-                            if "cooling_system" in hvac_system:
-                                hvac_system["cooling_system"][
-                                    "id"
-                                ] = f"Cooling Sys - {zone_id}"
-
-                            if "heating_system" in hvac_system:
-                                hvac_system["heating_system"][
-                                    "id"
-                                ] = f"Heating Sys - {zone_id}"
-                            elif "preheat_system" in hvac_system:
-                                hvac_system["preheat_system"][
-                                    "id"
-                                ] = f"Preheat Sys - {zone_id}"
+                    # Ensure unique fan names based on system type
+                    if "fan_system" in hvac_system:
+                        fan_system = hvac_system["fan_system"]
+                        if "supply_fans" in fan_system:
+                            for supply_fan in fan_system["supply_fans"]:
+                                supply_fan["id"] = f"{system_name} Supply Fan"
+                        if "return_fans" in fan_system:
+                            for return_fan in fan_system["return_fans"]:
+                                return_fan["id"] = f"{system_name} Return Fan"
 
 
 # Adds plant equipment at ruleset model instance level
@@ -1093,37 +1022,3 @@ def add_plant_loop_equipment(json_dict, system_rmd):
                     template_ruleset_model_instance[
                         equipment
                     ] = sys_ruleset_model_instance[equipment]
-
-
-# Returns if a baseline system type is zone equipment, single zone air loop, or multizone air loop
-def determine_system_classification(system_rmd):
-    """Determines if a baseline system RMD reperesents a zone equipment, single zone air loop, or multizone air loop
-
-    Parameters
-    ----------
-
-    system_rmd : dict
-
-        RMD with HVAC system you're interesteed in exploring. A dictionary
-
-    Returns
-    -------
-    system_classification: str
-        Returns a string representing the system type classifications. Options are MultiZoneAirLoop,
-        SingleZoneAirLoop, ZoneEquipment
-
-    """
-
-    zones = system_rmd["ruleset_model_descriptions"][0]["buildings"][0][
-        "building_segments"
-    ][0]["zones"]
-
-    if zones[0]["terminals"][0]["is_supply_ducted"]:
-        if len(zones) > 1:
-            return "MultiZoneAirLoop"
-        else:
-            return "SingleZoneAirLoop"
-
-    # If not air loop, it's zone equipment
-    else:
-        return "ZoneEquipment"
