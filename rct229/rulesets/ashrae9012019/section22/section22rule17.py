@@ -33,6 +33,10 @@ class Section22Rule17(RuleDefinitionListIndexedBase):
             list_path="$.heat_rejections[*]",
         )
 
+    def is_applicable(self, context, data=None):
+        rmd_b = context.BASELINE_0
+        return bool(find_all("$.heat_rejections[*]", rmd_b))
+
     def create_data(self, context, data):
         rmd_b = context.BASELINE_0
         heat_rejection_loop_ids_b = (
@@ -40,10 +44,6 @@ class Section22Rule17(RuleDefinitionListIndexedBase):
         )
 
         return {"heat_rejection_loop_ids_b": heat_rejection_loop_ids_b}
-
-    def is_applicable(self, context, data=None):
-        rmd_b = context.BASELINE_0
-        return bool(find_all("$.heat_rejections[*]", rmd_b))
 
     class HeatRejectionRule(PartialRuleDefinition):
         def __init__(self):
