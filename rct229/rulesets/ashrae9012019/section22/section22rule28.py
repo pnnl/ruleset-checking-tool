@@ -52,7 +52,7 @@ class Section22Rule28(RuleDefinitionListIndexedBase):
 
     def is_applicable(self, context, data=None):
         rmd_b = context.BASELINE_0
-        return find_all("$.heat_rejections[*]", rmd_b)
+        return bool(find_all("$.heat_rejections[*]", rmd_b))
 
     class HeatRejectionRule(RuleDefinitionBase):
         def __init__(self):
