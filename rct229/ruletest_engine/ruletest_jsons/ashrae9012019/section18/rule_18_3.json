@@ -44,7 +44,7 @@
                                                         "id": "System_1_PTAC - Terminal for Thermal Zone 1",
                                                         "is_supply_ducted": false,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC Thermal Zone 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC"
                                                     }
                                                 ]
                                             },
@@ -57,10 +57,10 @@
                                                 ],
                                                 "terminals": [
                                                     {
-                                                        "id": "System_1_PTAC - Terminal for Thermal Zone 2",
+                                                        "id": "System_1_PTAC 1 - Terminal for Thermal Zone 2",
                                                         "is_supply_ducted": false,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC Thermal Zone 2"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC 1"
                                                     }
                                                 ]
                                             },
@@ -73,10 +73,10 @@
                                                 ],
                                                 "terminals": [
                                                     {
-                                                        "id": "System_1_PTAC - Terminal for Thermal Zone 3",
+                                                        "id": "System_1_PTAC 2 - Terminal for Thermal Zone 3",
                                                         "is_supply_ducted": false,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC Thermal Zone 3"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC 2"
                                                     }
                                                 ]
                                             },
@@ -89,17 +89,17 @@
                                                 ],
                                                 "terminals": [
                                                     {
-                                                        "id": "System_1_PTAC - Terminal for Thermal Zone 4",
+                                                        "id": "System_1_PTAC 3 - Terminal for Thermal Zone 4",
                                                         "is_supply_ducted": false,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC Thermal Zone 4"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC 3"
                                                     }
                                                 ]
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System_1_PTAC Thermal Zone 1",
+                                                "id": "System_1_PTAC",
                                                 "cooling_system": {
                                                     "id": "CS1",
                                                     "type": "DIRECT_EXPANSION",
@@ -112,74 +112,74 @@
                                                     "design_capacity": 937827.5555555556
                                                 },
                                                 "fan_system": {
-                                                    "id": "Fan System - Thermal Zone 1",
+                                                    "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan - Thermal Zone 1"
+                                                            "id": "System_1_PTAC Supply Fan"
                                                         }
                                                     ]
                                                 }
                                             },
                                             {
-                                                "id": "System_1_PTAC Thermal Zone 2",
+                                                "id": "System_1_PTAC 1",
                                                 "cooling_system": {
-                                                    "id": "Cooling Sys - Thermal Zone 2",
+                                                    "id": "DX Coil 2",
                                                     "type": "DIRECT_EXPANSION"
                                                 },
                                                 "heating_system": {
-                                                    "id": "Heating Sys - Thermal Zone 2",
+                                                    "id": "HHW Coil 2",
                                                     "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
-                                                    "id": "Fan System - Thermal Zone 2",
+                                                    "id": "CAV Fan System 2",
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan - Thermal Zone 2"
+                                                            "id": "System_1_PTAC Supply Fan 1"
                                                         }
                                                     ]
                                                 }
                                             },
                                             {
-                                                "id": "System_1_PTAC Thermal Zone 3",
+                                                "id": "System_1_PTAC 2",
                                                 "cooling_system": {
-                                                    "id": "Cooling Sys - Thermal Zone 3",
+                                                    "id": "DX Coil 3",
                                                     "type": "DIRECT_EXPANSION"
                                                 },
                                                 "heating_system": {
-                                                    "id": "Heating Sys - Thermal Zone 3",
+                                                    "id": "HHW Coil 3",
                                                     "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
-                                                    "id": "Fan System - Thermal Zone 3",
+                                                    "id": "CAV Fan System 3",
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan - Thermal Zone 3"
+                                                            "id": "System_1_PTAC Supply Fan 2"
                                                         }
                                                     ]
                                                 }
                                             },
                                             {
-                                                "id": "System_1_PTAC Thermal Zone 4",
+                                                "id": "System_1_PTAC 3",
                                                 "cooling_system": {
-                                                    "id": "Cooling Sys - Thermal Zone 4",
+                                                    "id": "DX Coil 4",
                                                     "type": "DIRECT_EXPANSION"
                                                 },
                                                 "heating_system": {
-                                                    "id": "Heating Sys - Thermal Zone 4",
+                                                    "id": "HHW Coil 4",
                                                     "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
-                                                    "id": "Fan System - Thermal Zone 4",
+                                                    "id": "CAV Fan System 4",
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan - Thermal Zone 4"
+                                                            "id": "System_1_PTAC Supply Fan 3"
                                                         }
                                                     ]
                                                 }
@@ -240,7 +240,7 @@
                                                         "id": "System_1_PTAC - Terminal for Thermal Zone 1",
                                                         "is_supply_ducted": false,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC Thermal Zone 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC"
                                                     }
                                                 ],
                                                 "zonal_exhaust_fan": {
@@ -260,10 +260,10 @@
                                                 ],
                                                 "terminals": [
                                                     {
-                                                        "id": "System_1_PTAC - Terminal for Thermal Zone 2",
+                                                        "id": "System_1_PTAC 1 - Terminal for Thermal Zone 2",
                                                         "is_supply_ducted": false,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC Thermal Zone 2"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC 1"
                                                     }
                                                 ],
                                                 "floor_name": "flr 1"
@@ -278,10 +278,10 @@
                                                 ],
                                                 "terminals": [
                                                     {
-                                                        "id": "System_1_PTAC - Terminal for Thermal Zone 3",
+                                                        "id": "System_1_PTAC 2 - Terminal for Thermal Zone 3",
                                                         "is_supply_ducted": false,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC Thermal Zone 3"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC 2"
                                                     }
                                                 ],
                                                 "floor_name": "flr 1"
@@ -296,10 +296,10 @@
                                                 ],
                                                 "terminals": [
                                                     {
-                                                        "id": "System_1_PTAC - Terminal for Thermal Zone 4",
+                                                        "id": "System_1_PTAC 3 - Terminal for Thermal Zone 4",
                                                         "is_supply_ducted": false,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC Thermal Zone 4"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC 3"
                                                     }
                                                 ],
                                                 "floor_name": "flr 1"
@@ -307,7 +307,7 @@
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System_1_PTAC Thermal Zone 1",
+                                                "id": "System_1_PTAC",
                                                 "cooling_system": {
                                                     "id": "CS1",
                                                     "type": "DIRECT_EXPANSION",
@@ -320,74 +320,74 @@
                                                     "design_capacity": 937827.5555555556
                                                 },
                                                 "fan_system": {
-                                                    "id": "Fan System - Thermal Zone 1",
+                                                    "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan - Thermal Zone 1"
+                                                            "id": "System_1_PTAC Supply Fan"
                                                         }
                                                     ]
                                                 }
                                             },
                                             {
-                                                "id": "System_1_PTAC Thermal Zone 2",
+                                                "id": "System_1_PTAC 1",
                                                 "cooling_system": {
-                                                    "id": "Cooling Sys - Thermal Zone 2",
+                                                    "id": "DX Coil 2",
                                                     "type": "DIRECT_EXPANSION"
                                                 },
                                                 "heating_system": {
-                                                    "id": "Heating Sys - Thermal Zone 2",
+                                                    "id": "HHW Coil 2",
                                                     "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
-                                                    "id": "Fan System - Thermal Zone 2",
+                                                    "id": "CAV Fan System 2",
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan - Thermal Zone 2"
+                                                            "id": "System_1_PTAC Supply Fan 1"
                                                         }
                                                     ]
                                                 }
                                             },
                                             {
-                                                "id": "System_1_PTAC Thermal Zone 3",
+                                                "id": "System_1_PTAC 2",
                                                 "cooling_system": {
-                                                    "id": "Cooling Sys - Thermal Zone 3",
+                                                    "id": "DX Coil 3",
                                                     "type": "DIRECT_EXPANSION"
                                                 },
                                                 "heating_system": {
-                                                    "id": "Heating Sys - Thermal Zone 3",
+                                                    "id": "HHW Coil 3",
                                                     "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
-                                                    "id": "Fan System - Thermal Zone 3",
+                                                    "id": "CAV Fan System 3",
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan - Thermal Zone 3"
+                                                            "id": "System_1_PTAC Supply Fan 2"
                                                         }
                                                     ]
                                                 }
                                             },
                                             {
-                                                "id": "System_1_PTAC Thermal Zone 4",
+                                                "id": "System_1_PTAC 3",
                                                 "cooling_system": {
-                                                    "id": "Cooling Sys - Thermal Zone 4",
+                                                    "id": "DX Coil 4",
                                                     "type": "DIRECT_EXPANSION"
                                                 },
                                                 "heating_system": {
-                                                    "id": "Heating Sys - Thermal Zone 4",
+                                                    "id": "HHW Coil 4",
                                                     "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
-                                                    "id": "Fan System - Thermal Zone 4",
+                                                    "id": "CAV Fan System 4",
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan - Thermal Zone 4"
+                                                            "id": "System_1_PTAC Supply Fan 3"
                                                         }
                                                     ]
                                                 }
@@ -466,7 +466,7 @@
                                                         "id": "System_1_PTAC - Terminal for Thermal Zone 1",
                                                         "is_supply_ducted": false,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC Thermal Zone 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC"
                                                     }
                                                 ]
                                             },
@@ -479,10 +479,10 @@
                                                 ],
                                                 "terminals": [
                                                     {
-                                                        "id": "System_1_PTAC - Terminal for Thermal Zone 2",
+                                                        "id": "System_1_PTAC 1 - Terminal for Thermal Zone 2",
                                                         "is_supply_ducted": false,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC Thermal Zone 2"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC 1"
                                                     }
                                                 ]
                                             },
@@ -495,10 +495,10 @@
                                                 ],
                                                 "terminals": [
                                                     {
-                                                        "id": "System_1_PTAC - Terminal for Thermal Zone 3",
+                                                        "id": "System_1_PTAC 2 - Terminal for Thermal Zone 3",
                                                         "is_supply_ducted": false,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC Thermal Zone 3"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC 2"
                                                     }
                                                 ]
                                             },
@@ -511,17 +511,17 @@
                                                 ],
                                                 "terminals": [
                                                     {
-                                                        "id": "System_1_PTAC - Terminal for Thermal Zone 4",
+                                                        "id": "System_1_PTAC 3 - Terminal for Thermal Zone 4",
                                                         "is_supply_ducted": false,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC Thermal Zone 4"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC 3"
                                                     }
                                                 ]
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System_1_PTAC Thermal Zone 1",
+                                                "id": "System_1_PTAC",
                                                 "cooling_system": {
                                                     "id": "CS1",
                                                     "type": "DIRECT_EXPANSION",
@@ -534,17 +534,17 @@
                                                     "design_capacity": 937827.5555555556
                                                 },
                                                 "fan_system": {
-                                                    "id": "Fan System - Thermal Zone 1",
+                                                    "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan - Thermal Zone 1"
+                                                            "id": "System_1_PTAC Supply Fan"
                                                         }
                                                     ]
                                                 }
                                             },
                                             {
-                                                "id": "System_1_PTAC Thermal Zone 2",
+                                                "id": "System_1_PTAC 1",
                                                 "cooling_system": {
                                                     "id": "CS1",
                                                     "type": "DIRECT_EXPANSION",
@@ -557,17 +557,17 @@
                                                     "design_capacity": 937827.5555555556
                                                 },
                                                 "fan_system": {
-                                                    "id": "Fan System - Thermal Zone 2",
+                                                    "id": "CAV Fan System 2",
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan - Thermal Zone 2"
+                                                            "id": "System_1_PTAC Supply Fan 1"
                                                         }
                                                     ]
                                                 }
                                             },
                                             {
-                                                "id": "System_1_PTAC Thermal Zone 3",
+                                                "id": "System_1_PTAC 2",
                                                 "cooling_system": {
                                                     "id": "CS1",
                                                     "type": "DIRECT_EXPANSION",
@@ -580,17 +580,17 @@
                                                     "design_capacity": 937827.5555555556
                                                 },
                                                 "fan_system": {
-                                                    "id": "Fan System - Thermal Zone 3",
+                                                    "id": "CAV Fan System 3",
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan - Thermal Zone 3"
+                                                            "id": "System_1_PTAC Supply Fan 2"
                                                         }
                                                     ]
                                                 }
                                             },
                                             {
-                                                "id": "System_1_PTAC Thermal Zone 4",
+                                                "id": "System_1_PTAC 3",
                                                 "cooling_system": {
                                                     "id": "CS1",
                                                     "type": "DIRECT_EXPANSION",
@@ -603,11 +603,11 @@
                                                     "design_capacity": 937827.5555555556
                                                 },
                                                 "fan_system": {
-                                                    "id": "Fan System - Thermal Zone 4",
+                                                    "id": "CAV Fan System 4",
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan - Thermal Zone 4"
+                                                            "id": "System_1_PTAC Supply Fan 3"
                                                         }
                                                     ]
                                                 }
@@ -668,7 +668,7 @@
                                                         "id": "System_1_PTAC - Terminal for Thermal Zone 1",
                                                         "is_supply_ducted": false,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC Thermal Zone 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC"
                                                     }
                                                 ],
                                                 "zonal_exhaust_fan": {
@@ -688,10 +688,10 @@
                                                 ],
                                                 "terminals": [
                                                     {
-                                                        "id": "System_1_PTAC - Terminal for Thermal Zone 2",
+                                                        "id": "System_1_PTAC 1 - Terminal for Thermal Zone 2",
                                                         "is_supply_ducted": false,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC Thermal Zone 2"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC 1"
                                                     }
                                                 ],
                                                 "floor_name": "flr 1"
@@ -706,10 +706,10 @@
                                                 ],
                                                 "terminals": [
                                                     {
-                                                        "id": "System_1_PTAC - Terminal for Thermal Zone 3",
+                                                        "id": "System_1_PTAC 2 - Terminal for Thermal Zone 3",
                                                         "is_supply_ducted": false,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC Thermal Zone 3"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC 2"
                                                     }
                                                 ],
                                                 "floor_name": "flr 1"
@@ -724,10 +724,10 @@
                                                 ],
                                                 "terminals": [
                                                     {
-                                                        "id": "System_1_PTAC - Terminal for Thermal Zone 4",
+                                                        "id": "System_1_PTAC 3 - Terminal for Thermal Zone 4",
                                                         "is_supply_ducted": false,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC Thermal Zone 4"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC 3"
                                                     }
                                                 ],
                                                 "floor_name": "flr 1"
@@ -735,7 +735,7 @@
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System_1_PTAC Thermal Zone 1",
+                                                "id": "System_1_PTAC",
                                                 "cooling_system": {
                                                     "id": "CS1",
                                                     "type": "DIRECT_EXPANSION",
@@ -748,17 +748,17 @@
                                                     "design_capacity": 937827.5555555556
                                                 },
                                                 "fan_system": {
-                                                    "id": "Fan System - Thermal Zone 1",
+                                                    "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan - Thermal Zone 1"
+                                                            "id": "System_1_PTAC Supply Fan"
                                                         }
                                                     ]
                                                 }
                                             },
                                             {
-                                                "id": "System_1_PTAC Thermal Zone 2",
+                                                "id": "System_1_PTAC 1",
                                                 "cooling_system": {
                                                     "id": "CS1",
                                                     "type": "DIRECT_EXPANSION",
@@ -771,17 +771,17 @@
                                                     "design_capacity": 937827.5555555556
                                                 },
                                                 "fan_system": {
-                                                    "id": "Fan System - Thermal Zone 2",
+                                                    "id": "CAV Fan System 2",
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan - Thermal Zone 2"
+                                                            "id": "System_1_PTAC Supply Fan 1"
                                                         }
                                                     ]
                                                 }
                                             },
                                             {
-                                                "id": "System_1_PTAC Thermal Zone 3",
+                                                "id": "System_1_PTAC 2",
                                                 "cooling_system": {
                                                     "id": "CS1",
                                                     "type": "DIRECT_EXPANSION",
@@ -794,17 +794,17 @@
                                                     "design_capacity": 937827.5555555556
                                                 },
                                                 "fan_system": {
-                                                    "id": "Fan System - Thermal Zone 3",
+                                                    "id": "CAV Fan System 3",
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan - Thermal Zone 3"
+                                                            "id": "System_1_PTAC Supply Fan 2"
                                                         }
                                                     ]
                                                 }
                                             },
                                             {
-                                                "id": "System_1_PTAC Thermal Zone 4",
+                                                "id": "System_1_PTAC 3",
                                                 "cooling_system": {
                                                     "id": "CS1",
                                                     "type": "DIRECT_EXPANSION",
@@ -817,11 +817,11 @@
                                                     "design_capacity": 937827.5555555556
                                                 },
                                                 "fan_system": {
-                                                    "id": "Fan System - Thermal Zone 4",
+                                                    "id": "CAV Fan System 4",
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan - Thermal Zone 4"
+                                                            "id": "System_1_PTAC Supply Fan 3"
                                                         }
                                                     ]
                                                 }
@@ -900,7 +900,7 @@
                                                         "id": "System_1_PTAC - Terminal for Thermal Zone 1",
                                                         "is_supply_ducted": false,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC Thermal Zone 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC"
                                                     }
                                                 ]
                                             },
@@ -913,10 +913,10 @@
                                                 ],
                                                 "terminals": [
                                                     {
-                                                        "id": "System_1_PTAC - Terminal for Thermal Zone 2",
+                                                        "id": "System_1_PTAC 1 - Terminal for Thermal Zone 2",
                                                         "is_supply_ducted": false,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC Thermal Zone 2"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC 1"
                                                     }
                                                 ]
                                             },
@@ -929,10 +929,10 @@
                                                 ],
                                                 "terminals": [
                                                     {
-                                                        "id": "System_1_PTAC - Terminal for Thermal Zone 3",
+                                                        "id": "System_1_PTAC 2 - Terminal for Thermal Zone 3",
                                                         "is_supply_ducted": false,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC Thermal Zone 3"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC 2"
                                                     }
                                                 ]
                                             },
@@ -945,17 +945,17 @@
                                                 ],
                                                 "terminals": [
                                                     {
-                                                        "id": "System_1_PTAC - Terminal for Thermal Zone 4",
+                                                        "id": "System_1_PTAC 3 - Terminal for Thermal Zone 4",
                                                         "is_supply_ducted": false,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC Thermal Zone 4"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC 3"
                                                     }
                                                 ]
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System_1_PTAC Thermal Zone 1",
+                                                "id": "System_1_PTAC",
                                                 "cooling_system": {
                                                     "id": "CS1",
                                                     "type": "DIRECT_EXPANSION",
@@ -968,17 +968,17 @@
                                                     "design_capacity": 937827.5555555556
                                                 },
                                                 "fan_system": {
-                                                    "id": "Fan System - Thermal Zone 1",
+                                                    "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan - Thermal Zone 1"
+                                                            "id": "System_1_PTAC Supply Fan"
                                                         }
                                                     ]
                                                 }
                                             },
                                             {
-                                                "id": "System_1_PTAC Thermal Zone 2",
+                                                "id": "System_1_PTAC 1",
                                                 "cooling_system": {
                                                     "id": "CS1",
                                                     "type": "DIRECT_EXPANSION",
@@ -991,17 +991,17 @@
                                                     "design_capacity": 937827.5555555556
                                                 },
                                                 "fan_system": {
-                                                    "id": "Fan System - Thermal Zone 2",
+                                                    "id": "CAV Fan System 2",
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan - Thermal Zone 2"
+                                                            "id": "System_1_PTAC Supply Fan 1"
                                                         }
                                                     ]
                                                 }
                                             },
                                             {
-                                                "id": "System_1_PTAC Thermal Zone 3",
+                                                "id": "System_1_PTAC 2",
                                                 "cooling_system": {
                                                     "id": "CS1",
                                                     "type": "DIRECT_EXPANSION",
@@ -1014,17 +1014,17 @@
                                                     "design_capacity": 937827.5555555556
                                                 },
                                                 "fan_system": {
-                                                    "id": "Fan System - Thermal Zone 3",
+                                                    "id": "CAV Fan System 3",
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan - Thermal Zone 3"
+                                                            "id": "System_1_PTAC Supply Fan 2"
                                                         }
                                                     ]
                                                 }
                                             },
                                             {
-                                                "id": "System_1_PTAC Thermal Zone 4",
+                                                "id": "System_1_PTAC 3",
                                                 "cooling_system": {
                                                     "id": "CS1",
                                                     "type": "DIRECT_EXPANSION",
@@ -1037,11 +1037,11 @@
                                                     "design_capacity": 937827.5555555556
                                                 },
                                                 "fan_system": {
-                                                    "id": "Fan System - Thermal Zone 4",
+                                                    "id": "CAV Fan System 4",
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan - Thermal Zone 4"
+                                                            "id": "System_1_PTAC Supply Fan 3"
                                                         }
                                                     ]
                                                 }
@@ -1101,7 +1101,7 @@
                                                         "id": "System_1_PTAC - Terminal for Thermal Zone 1",
                                                         "is_supply_ducted": false,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC Thermal Zone 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC"
                                                     }
                                                 ],
                                                 "zonal_exhaust_fan": {
@@ -1120,10 +1120,10 @@
                                                 ],
                                                 "terminals": [
                                                     {
-                                                        "id": "System_1_PTAC - Terminal for Thermal Zone 2",
+                                                        "id": "System_1_PTAC 1 - Terminal for Thermal Zone 2",
                                                         "is_supply_ducted": false,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC Thermal Zone 2"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC 1"
                                                     }
                                                 ],
                                                 "floor_name": "flr 1"
@@ -1138,10 +1138,10 @@
                                                 ],
                                                 "terminals": [
                                                     {
-                                                        "id": "System_1_PTAC - Terminal for Thermal Zone 3",
+                                                        "id": "System_1_PTAC 2 - Terminal for Thermal Zone 3",
                                                         "is_supply_ducted": false,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC Thermal Zone 3"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC 2"
                                                     }
                                                 ],
                                                 "floor_name": "flr 1"
@@ -1156,10 +1156,10 @@
                                                 ],
                                                 "terminals": [
                                                     {
-                                                        "id": "System_1_PTAC - Terminal for Thermal Zone 4",
+                                                        "id": "System_1_PTAC 3 - Terminal for Thermal Zone 4",
                                                         "is_supply_ducted": false,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC Thermal Zone 4"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC 3"
                                                     }
                                                 ],
                                                 "floor_name": "flr 1"
@@ -1167,7 +1167,7 @@
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System_1_PTAC Thermal Zone 1",
+                                                "id": "System_1_PTAC",
                                                 "cooling_system": {
                                                     "id": "CS1",
                                                     "type": "DIRECT_EXPANSION",
@@ -1180,17 +1180,17 @@
                                                     "design_capacity": 937827.5555555556
                                                 },
                                                 "fan_system": {
-                                                    "id": "Fan System - Thermal Zone 1",
+                                                    "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan - Thermal Zone 1"
+                                                            "id": "System_1_PTAC Supply Fan"
                                                         }
                                                     ]
                                                 }
                                             },
                                             {
-                                                "id": "System_1_PTAC Thermal Zone 2",
+                                                "id": "System_1_PTAC 1",
                                                 "cooling_system": {
                                                     "id": "CS1",
                                                     "type": "DIRECT_EXPANSION",
@@ -1203,17 +1203,17 @@
                                                     "design_capacity": 937827.5555555556
                                                 },
                                                 "fan_system": {
-                                                    "id": "Fan System - Thermal Zone 2",
+                                                    "id": "CAV Fan System 2",
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan - Thermal Zone 2"
+                                                            "id": "System_1_PTAC Supply Fan 1"
                                                         }
                                                     ]
                                                 }
                                             },
                                             {
-                                                "id": "System_1_PTAC Thermal Zone 3",
+                                                "id": "System_1_PTAC 2",
                                                 "cooling_system": {
                                                     "id": "CS1",
                                                     "type": "DIRECT_EXPANSION",
@@ -1226,17 +1226,17 @@
                                                     "design_capacity": 937827.5555555556
                                                 },
                                                 "fan_system": {
-                                                    "id": "Fan System - Thermal Zone 3",
+                                                    "id": "CAV Fan System 3",
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan - Thermal Zone 3"
+                                                            "id": "System_1_PTAC Supply Fan 2"
                                                         }
                                                     ]
                                                 }
                                             },
                                             {
-                                                "id": "System_1_PTAC Thermal Zone 4",
+                                                "id": "System_1_PTAC 3",
                                                 "cooling_system": {
                                                     "id": "CS1",
                                                     "type": "DIRECT_EXPANSION",
@@ -1249,11 +1249,11 @@
                                                     "design_capacity": 937827.5555555556
                                                 },
                                                 "fan_system": {
-                                                    "id": "Fan System - Thermal Zone 4",
+                                                    "id": "CAV Fan System 4",
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan - Thermal Zone 4"
+                                                            "id": "System_1_PTAC Supply Fan 3"
                                                         }
                                                     ]
                                                 }
