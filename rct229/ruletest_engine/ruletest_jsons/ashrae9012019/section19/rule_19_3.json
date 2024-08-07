@@ -4,7 +4,7 @@
         "Rule": 3,
         "Test": "a",
         "test_description": "The project has one building segment with one zone. Weather conditions used in sizing runs are specified to be based on design days developed using 99.6% heating design temperatures and 1% dry-bulb and wetbulb cooling design temperatures.",
-        "expected_rule_outcome": "not_applicable",
+        "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "19-3",
             "ruleset_reference": "G3.1.2.2.1",
@@ -90,7 +90,7 @@
         "Rule": 3,
         "Test": "b",
         "test_description": "The project has one building segment with one zone. Weather conditions used in sizing runs are specified to be based on design days developed using 99.0% heating design temperatures and 0.4% dry-bulb and wetbulb cooling design temperatures.",
-        "expected_rule_outcome": "undetermined",
+        "expected_rule_outcome": "not_applicable",
         "expected_raised_message_includes": "Check that the weather conditions used in sizing runs to determine baseline equipment capacities is based on design days developed using 99.6% heating design temperatures and 1% dry-bulb and 1% wet-bulb cooling design temperatures.",
         "standard": {
             "rule_id": "19-3",
