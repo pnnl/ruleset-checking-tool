@@ -160,7 +160,8 @@ class Section18Rule2(RuleDefinitionListIndexedBase):
                         ),
                         "does_two_sys_exist_on_same_fl_b": "false",
                         "hvac_sys2_id_b": None,
-                        "does_sys_serve_one_floor": False
+                        "does_sys_serve_one_floor": False,
+                        "do_multi_zone_evaluation": False
                     }
 
                     hvac_data_by_id_b = hvac_data_b[hvac_id_b]
@@ -169,7 +170,7 @@ class Section18Rule2(RuleDefinitionListIndexedBase):
                     # or the system is one of the HVAC syss serving lab zones -> FAIL
                     # or the system serves lab and other zones -> FAIL
                     # All above scenario lands on a decision which allows to skip the multi-zone evaluation
-                    do_multi_zone_evaluation = not any(
+                    hvac_data_by_id_b["do_multi_zone_evaluation"] = not any(
                         [
                             hvac_data_by_id_b["is_sys_single_zone_sys_b"],
                             hvac_data_by_id_b["does_sys_only_serve_lab_b"],
@@ -189,14 +190,14 @@ class Section18Rule2(RuleDefinitionListIndexedBase):
                             zones_served_by_system[0],
                         )
                     )
-                    # check if all the zones served by the system are on the same floor and the system is Sys 5 or Sys 7
-                    hvac_data_by_id_b["does_sys_serve_one_floor"] = set(zones_on_floor) == set(zones_served_by_system) and any(
+                    # check if subset of the same floor zones served by the system and the system is Sys 5 or Sys 7
+                    hvac_data_by_id_b["does_sys_serve_one_floor"] = set(zones_served_by_system).issubset(set(zones_on_floor)) and any(
                         [
                             baseline_system_type_compare(hvac_data_by_id_b["sys_type"], target_sys_type, False)
                             for target_sys_type in EXCEPTION_SYS_TYPES
                         ]
                     )
-                    if do_multi_zone_evaluation and hvac_data_by_id_b["does_sys_serve_one_floor"]:
+                    if hvac_data_by_id_b["do_multi_zone_evaluation"] and hvac_data_by_id_b["does_sys_serve_one_floor"]:
                         # check if there are any other systems of the same system type that serve zones on this floor
                         same_sys_type_list = next((hvac_id_list for hvac_id_list in baseline_system_types_dict_b.values() if hvac_id_b in hvac_id_list), None)
                         for hvac_sys2_id_b in same_sys_type_list:
@@ -237,6 +238,8 @@ class Section18Rule2(RuleDefinitionListIndexedBase):
                                     hvac_data_b[hvac_id_b][
                                         "hvac_sys2_id_b"
                                     ] = hvac_sys2_id_b
+                                    # stop processing to prevent overriding the outcome
+                                    break
                                 else:
                                     # The two system are indeed serving the same floor
                                     # But it could cause a list of systems on the same floor in this condition
@@ -244,7 +247,7 @@ class Section18Rule2(RuleDefinitionListIndexedBase):
                                     # there is no logic that requires checking the second system.
                                     hvac_data_b[hvac_id_b][
                                         "does_two_sys_exist_on_same_fl_b"
-                                    ] = "false"
+                                    ] = "true"
 
             return {
                 "hvac_data_b": hvac_data_b,
@@ -266,6 +269,7 @@ class Section18Rule2(RuleDefinitionListIndexedBase):
 
                 return {
                     "hvac_id": hvac_id_b,
+                    "sys_type": hvac_data_b["sys_type"],
                     "is_sys_single_zone_sys_b": hvac_data_b[
                         "is_sys_single_zone_sys_b"
                     ],
@@ -282,6 +286,7 @@ class Section18Rule2(RuleDefinitionListIndexedBase):
                     "does_sys_serve_one_floor": hvac_data_b[
                         "does_sys_serve_one_floor"
                     ],
+                    "do_multi_zone_evaluation": hvac_data_b["do_multi_zone_evaluation"],
                     "hvac_sys2_id_b": hvac_data_b["hvac_sys2_id_b"],
                     "building_total_lab_zone_exhaust_b": data["building_total_lab_zone_exhaust_b"],
                 }
@@ -343,19 +348,20 @@ class Section18Rule2(RuleDefinitionListIndexedBase):
                 does_two_sys_exist_on_same_fl_b = calc_vals[
                     "does_two_sys_exist_on_same_fl_b"
                 ]
+                hvac_sys2_id_b = calc_vals["hvac_sys2_id_b"]
 
                 return (
                     is_sys_single_zone_sys_b
-                    # does_sys_serve_one_floor verifies one floor and sys 5 or sys 7
-                    or does_sys_serve_one_floor and (
-                        # system 5 or 7 serves only lab zone, in here:
-                        #  1. no need to check exhaust because it will be captured by manual check required function
-                        #  2. does_sys_only_serve_lab_b, does_sys_part_of_serve_lab_b,does_sys_serve_lab_and_other_b are
-                        #     mutually exclusive means one is true, the other two are false, so no need to repeat here.
-                        does_sys_only_serve_lab_b
-                        # does_two_sys_exist_on_same_fl_b verifies system2 are sys5 or sys 7 and it conditions only lab zones and the building exhaust is over 15,000 cfm
-                        or does_two_sys_exist_on_same_fl_b == "true"
-                    )
+                    # system 5 or 7 serves only lab zone, in here:
+                    #  1. no need to check exhaust because it will be captured by manual check required function
+                    #  2. does_sys_only_serve_lab_b, does_sys_part_of_serve_lab_b,does_sys_serve_lab_and_other_b are
+                    #     mutually exclusive means one is true, the other two are false, so no need to repeat here.
+                    or does_sys_only_serve_lab_b
+                    # does_two_sys_exist_on_same_fl_b = "true" means there are two systems on the same floor
+                    # hvac_sys2_id_b existence combine with does_two_sys_exist_on_same_fl_b
+                    # means system2 are sys5 or sys 7 and it conditions only lab zones and the building exhaust is over 15,000 cfm
+                    or (does_two_sys_exist_on_same_fl_b == "true" and hvac_sys2_id_b)
+                    or (does_sys_serve_one_floor and does_two_sys_exist_on_same_fl_b == "false")
                 )
 
             def get_fail_msg(self, context, calc_vals=None, data=None):
