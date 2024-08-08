@@ -1,5 +1,8 @@
-from rct229.utils.assertions import assert_, assert_required_fields
-from rct229.utils.jsonpath_utils import find_all
+from typing import TypedDict
+
+from pint import Quantity
+from rct229.utils.assertions import assert_
+from rct229.utils.jsonpath_utils import find_all, find_exactly_required_fields
 from rct229.utils.pint_utils import ZERO
 
 # Intended for export and internal use
@@ -15,14 +18,19 @@ GET_HVAC_ZONE_LIST_W_AREA_DICT__REQUIRED_FIELDS = {
 }
 
 
-def get_hvac_zone_list_w_area_by_rmi_dict(rmi):
+class HVACZoneListArea(TypedDict):
+    total_area: Quantity
+    zone_list: list[str]
+
+
+def get_hvac_zone_list_w_area_by_rmd_dict(rmd: dict) -> dict[str, HVACZoneListArea]:
     """
-    RMI version of the get_hvac_zone_list_w_area_dict function
+    RMD version of the get_hvac_zone_list_w_area_dict function
 
     Parameters
     ----------
-    rmi dict
-        A dictionary representing a ruleset model instance as defined by the ASHRAE229 schema
+    rmd dict
+        A dictionary representing a ruleset model description as defined by the ASHRAE229 schema
 
     Returns
     -------
@@ -36,12 +44,12 @@ def get_hvac_zone_list_w_area_by_rmi_dict(rmi):
         }
     """
     hvac_zone_list_w_area_dict = {}
-    for building in find_all("$.buildings[*]", rmi):
+    for building in find_all("$.buildings[*]", rmd):
         hvac_zone_list_w_area_dict.update(get_hvac_zone_list_w_area_dict(building))
     return hvac_zone_list_w_area_dict
 
 
-def get_hvac_zone_list_w_area_dict(building):
+def get_hvac_zone_list_w_area_dict(building: dict) -> dict[str, HVACZoneListArea]:
     """Gets the list of zones and their total floor area served by each HVAC system
     in a building
 
@@ -61,7 +69,7 @@ def get_hvac_zone_list_w_area_dict(building):
             }
         }
     """
-    assert_required_fields(
+    find_exactly_required_fields(
         GET_HVAC_ZONE_LIST_W_AREA_DICT__REQUIRED_FIELDS["building"], building
     )
 

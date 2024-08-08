@@ -3,21 +3,22 @@
         "Section": 22,
         "Rule": 19,
         "Test": "a",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and HeatRejection is correctly modeled with the temperature reset type CONSTANT. Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a cooling tower.  The cooling tower is controlled to maintain a constant leaving water temperature.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-19",
             "ruleset_reference": "G3.1.3.11",
-            "rule_description": "The baseline cooling tower shall be controlled to maintain a leaving water temperature, where weather permits, as specified in Table G3.1.3.11",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "The baseline heat rejection device shall be controlled to maintain a constant leaving water temperature.",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -136,7 +137,11 @@
                                         "id": "Secondary CHW Loop 1",
                                         "type": "COOLING"
                                     }
-                                ],
+                                ]
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER",
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
                                     "temperature_reset_type": "CONSTANT"
@@ -146,9 +151,10 @@
                         "heat_rejections": [
                             {
                                 "id": "Heat Rejection 1",
-                                "loop": "Chiller Loop 1"
+                                "loop": "Condenser Loop 1"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -158,21 +164,22 @@
         "Section": 22,
         "Rule": 19,
         "Test": "b",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and HeatRejection is incorrectly modeled with the temperature reset type OUTSIDE_AIR_RESET.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a cooling tower.  The cooling tower is controlled to maintain a leaving water temperature that is reset based on outdoor air dry-bulb temperature.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-19",
             "ruleset_reference": "G3.1.3.11",
-            "rule_description": "The baseline cooling tower shall be controlled to maintain a leaving water temperature, where weather permits, as specified in Table G3.1.3.11",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "The baseline heat rejection device shall be controlled to maintain a constant leaving water temperature.",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -291,7 +298,11 @@
                                         "id": "Secondary CHW Loop 1",
                                         "type": "COOLING"
                                     }
-                                ],
+                                ]
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER",
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
                                     "temperature_reset_type": "OUTSIDE_AIR_RESET"
@@ -301,9 +312,10 @@
                         "heat_rejections": [
                             {
                                 "id": "Heat Rejection 1",
-                                "loop": "Chiller Loop 1"
+                                "loop": "Condenser Loop 1"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -313,21 +325,22 @@
         "Section": 22,
         "Rule": 19,
         "Test": "c",
-        "test_description": "Baseline building has two zones.  HVAC is system type 12b and HeatRejection is correctly modeled with the temperature reset type CONSTANT. Expected result: PASS",
+        "test_description": "The project has one building segment with one zones served by a baseline system type 12 with a cooling tower.  The cooling tower is controlled to maintain a constant leaving water temperature.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-19",
             "ruleset_reference": "G3.1.3.11",
-            "rule_description": "The baseline cooling tower shall be controlled to maintain a leaving water temperature, where weather permits, as specified in Table G3.1.3.11",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "The baseline heat rejection device shall be controlled to maintain a constant leaving water temperature.",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -429,7 +442,11 @@
                                         "id": "Secondary CHW Loop 1",
                                         "type": "COOLING"
                                     }
-                                ],
+                                ]
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER",
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
                                     "temperature_reset_type": "CONSTANT"
@@ -439,9 +456,10 @@
                         "heat_rejections": [
                             {
                                 "id": "Heat Rejection 1",
-                                "loop": "Chiller Loop 1"
+                                "loop": "Condenser Loop 1"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -451,21 +469,22 @@
         "Section": 22,
         "Rule": 19,
         "Test": "d",
-        "test_description": "Baseline building has two zones.  HVAC is system type 12b and HeatRejection is incorrectly modeled with the temperature reset type OUTSIDE_AIR_RESET.  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 12 with a cooling tower.  The cooling tower is controlled to maintain a leaving water temperature that is reset based on outdoor air dry-bulb temperature.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-19",
             "ruleset_reference": "G3.1.3.11",
-            "rule_description": "The baseline cooling tower shall be controlled to maintain a leaving water temperature, where weather permits, as specified in Table G3.1.3.11",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "The baseline heat rejection device shall be controlled to maintain a constant leaving water temperature.",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -567,7 +586,11 @@
                                         "id": "Secondary CHW Loop 1",
                                         "type": "COOLING"
                                     }
-                                ],
+                                ]
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER",
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
                                     "temperature_reset_type": "OUTSIDE_AIR_RESET"
@@ -577,9 +600,10 @@
                         "heat_rejections": [
                             {
                                 "id": "Heat Rejection 1",
-                                "loop": "Chiller Loop 1"
+                                "loop": "Condenser Loop 1"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -589,21 +613,22 @@
         "Section": 22,
         "Rule": 19,
         "Test": "e",
-        "test_description": "Baseline building has one zone.  HVAC is system type 11.2a.  Expected result: NOT APPLICABLE",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 11. There is no cooling tower.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-19",
             "ruleset_reference": "G3.1.3.11",
-            "rule_description": "The baseline cooling tower shall be controlled to maintain a leaving water temperature, where weather permits, as specified in Table G3.1.3.11",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "The baseline heat rejection device shall be controlled to maintain a constant leaving water temperature.",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -695,7 +720,11 @@
                             },
                             {
                                 "id": "Chilled Water Loop 1",
-                                "type": "COOLING",
+                                "type": "COOLING"
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER",
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
                                     "temperature_reset_type": "OUTSIDE_AIR_RESET"
@@ -705,9 +734,10 @@
                         "heat_rejections": [
                             {
                                 "id": "Heat Rejection 1",
-                                "loop": "Chiller Loop 1"
+                                "loop": "Condenser Loop 1"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

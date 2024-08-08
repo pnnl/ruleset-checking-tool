@@ -1,6 +1,8 @@
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.schema.schema_enums import SchemaEnums
 
-CLIMATE_ZONE_ASHRAE901_2019 = schema_enums["ClimateZoneOptions2019ASHRAE901"]
+CLIMATE_ZONE_ASHRAE901_2019 = SchemaEnums.schema_enums[
+    "ClimateZoneOptions2019ASHRAE901"
+]
 
 APPLICABLE_LIST = [
     CLIMATE_ZONE_ASHRAE901_2019.CZ0A,
@@ -13,7 +15,7 @@ APPLICABLE_LIST = [
 ]
 
 
-def is_cz_0_to_3a_bool(climate_zone: str):
+def is_cz_0_to_3a_bool(climate_zone: str) -> bool:
     """
     Determines whether the building is in climate zone 0 to 3a - used for Appendix G Table G3.1.1-3
 

@@ -3,21 +3,22 @@
         "Section": 19,
         "Rule": 8,
         "Test": "a",
-        "test_description": "System 3 with CO2_ZONE ventilation control type, 3500 minimum outdoor airflows, and 150 occupants in the 1000 ft2 zone",
+        "test_description": "The project has one building segment with one 1,000 ft2 zone served by a baseline system type 3. The system has a minimum outdoor airflow of 3,500 cfm and 150 occupants. The baseline system is modeled with demand-controlled ventilation controls.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-8",
             "ruleset_reference": "G3.1.2.5 Exception #1",
-            "rule_description": "Demand control ventilation is modeled in the baseline design in systems with outdoor air capacity greater than 3000 cfm serving areas with an average occupant design capacity greater than 100 people per 1000 ft^2.  ",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "Demand control ventilation is modeled in the baseline design in systems with outdoor air capacity greater than 3000 cfm serving areas with an average occupant design capacity greater than 100 people per 1000 ft^2. ",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": 0,
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -82,7 +83,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -92,21 +94,22 @@
         "Section": 19,
         "Rule": 8,
         "Test": "b",
-        "test_description": "System 3 with NONE ventilation control type, 2800 minimum outdoor airflows, and 20 occupants in the 1000 ft2 zone",
+        "test_description": "The project has one building segment with one 1,000 ft2 zone served by a baseline system type 3. The system has a minimum outdoor airflow of 2,800 cfm and 20 occupants. The baseline system is not modeled with demand control ventilation.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-8",
             "ruleset_reference": "G3.1.2.5 Exception #1",
-            "rule_description": "Demand control ventilation is modeled in the baseline design in systems with outdoor air capacity greater than 3000 cfm serving areas with an average occupant design capacity greater than 100 people per 1000 ft^2.  ",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "Demand control ventilation is modeled in the baseline design in systems with outdoor air capacity greater than 3000 cfm serving areas with an average occupant design capacity greater than 100 people per 1000 ft^2. ",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": 0,
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -171,7 +174,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

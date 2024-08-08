@@ -3,21 +3,22 @@
         "Section": 22,
         "Rule": 34,
         "Test": "a",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is correctly modeled with chilled water plant sized using coincident loads.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The chilled water plant equipment capacity is sized based on coincident loads.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-34",
             "ruleset_reference": "Section G3.1.2.2",
-            "rule_description": "For baseline cooling chilled water plant that is served by chiller(s), the capacity shall be based on coincident loads.",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "Baseline chilled water loops that do not use purchased chilled water shall have the plant equipment capacity sized based on coincident loads.",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -142,7 +143,8 @@
                                     "is_sized_using_coincident_load": true
                                 }
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -152,21 +154,22 @@
         "Section": 22,
         "Rule": 34,
         "Test": "b",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is modeled with chilled water plant incorrectly sized not using coincident loads.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The chilled water plant equipment capacity is not sized based on coincident loads.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-34",
             "ruleset_reference": "Section G3.1.2.2",
-            "rule_description": "For baseline cooling chilled water plant that is served by chiller(s), the capacity shall be based on coincident loads.",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "Baseline chilled water loops that do not use purchased chilled water shall have the plant equipment capacity sized based on coincident loads.",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -291,7 +294,8 @@
                                     "is_sized_using_coincident_load": false
                                 }
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -301,21 +305,22 @@
         "Section": 22,
         "Rule": 34,
         "Test": "c",
-        "test_description": "Baseline building has two zones.  HVAC is system type 8b and is correctly modeled with chilled water plant sized using coincident loads.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 8 with a chilled water system. The chilled water plant equipment capacity is sized based on coincident loads.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-34",
             "ruleset_reference": "Section G3.1.2.2",
-            "rule_description": "For baseline cooling chilled water plant that is served by chiller(s), the capacity shall be based on coincident loads.",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "Baseline chilled water loops that do not use purchased chilled water shall have the plant equipment capacity sized based on coincident loads.",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -442,7 +447,8 @@
                                     "is_sized_using_coincident_load": true
                                 }
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -452,21 +458,22 @@
         "Section": 22,
         "Rule": 34,
         "Test": "d",
-        "test_description": "Baseline building has two zones.  HVAC is system type 8b and is modeled with chilled water plant incorrectly sized not using coincident loads.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 8 with a chilled water system. The chilled water plant equipment capacity is not sized based on coincident loads.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-34",
             "ruleset_reference": "Section G3.1.2.2",
-            "rule_description": "For baseline cooling chilled water plant that is served by chiller(s), the capacity shall be based on coincident loads.",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "Baseline chilled water loops that do not use purchased chilled water shall have the plant equipment capacity sized based on coincident loads.",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -593,7 +600,8 @@
                                     "is_sized_using_coincident_load": false
                                 }
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -603,21 +611,22 @@
         "Section": 22,
         "Rule": 34,
         "Test": "e",
-        "test_description": "Baseline building has one zone.  HVAC is system type 9 and does not have a CHW plant.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 9. There is no chilled water system.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-34",
             "ruleset_reference": "Section G3.1.2.2",
-            "rule_description": "For baseline cooling chilled water plant that is served by chiller(s), the capacity shall be based on coincident loads.",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "Baseline chilled water loops that do not use purchased chilled water shall have the plant equipment capacity sized based on coincident loads.",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -670,7 +679,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

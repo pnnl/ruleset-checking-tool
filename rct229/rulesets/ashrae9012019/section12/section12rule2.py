@@ -1,6 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
+from rct229.rulesets.ashrae9012019 import USER
 from rct229.utils.jsonpath_utils import find_all
 
 
@@ -9,28 +10,32 @@ class Section12Rule2(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section12Rule2, self).__init__(
-            rmrs_used=UserBaselineProposedVals(True, False, True),
+            rmds_used=produce_ruleset_model_description(
+                USER=True, BASELINE_0=False, PROPOSED=True
+            ),
             each_rule=Section12Rule2.BuildingRule(),
-            index_rmr="user",
+            index_rmd=USER,
             id="12-2",
             description=(
-                "Number of spaces modeled in User RMR and Proposed RMR are the same"
+                "Number of spaces modeled in User RMD and Proposed RMD are the same"
             ),
             ruleset_section_title="Receptacle",
             standard_section="Section Table G3.1-12 Modeling Requirements for the Proposed design",
             is_primary_rule=True,
-            rmr_context="ruleset_model_descriptions/0/buildings",
+            rmd_context="ruleset_model_descriptions/0/buildings",
         )
 
     class BuildingRule(RuleDefinitionBase):
         def __init__(self):
             super(Section12Rule2.BuildingRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(True, False, True),
+                rmds_used=produce_ruleset_model_description(
+                    USER=True, BASELINE_0=False, PROPOSED=True
+                ),
             )
 
         def get_calc_vals(self, context, data=None):
-            user_spaces = find_all("$..spaces[*]", context.user)
-            proposed_spaces = find_all("$..spaces[*]", context.proposed)
+            user_spaces = find_all("$..spaces[*]", context.USER)
+            proposed_spaces = find_all("$..spaces[*]", context.PROPOSED)
             return {
                 "num_user_spaces": len(user_spaces),
                 "num_proposed_spaces": len(proposed_spaces),

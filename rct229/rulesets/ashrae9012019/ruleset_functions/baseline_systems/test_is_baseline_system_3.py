@@ -7,7 +7,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_s
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.is_baseline_system_3 import (
     is_baseline_system_3,
 )
-from rct229.schema.validate import schema_validate_rmr
+from rct229.schema.validate import schema_validate_rmd
 
 SYS_3_TEST_RMD = {
     "id": "ASHRAE229 1",
@@ -171,8 +171,10 @@ SYS_3_TEST_RMD = {
                     "type": "CHILLED_WATER",
                 },
             ],
+            "type": "BASELINE_0",
         }
     ],
+    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 
@@ -239,20 +241,22 @@ SYS_3_TEST_UNMATCHED_RMD = {
                     "type": "CHILLED_WATER",
                 },
             ],
+            "type": "BASELINE_0",
         }
     ],
+    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 
 def test__TEST_RMD_baseline_system_3__is_valid():
-    schema_validation_result = schema_validate_rmr(SYS_3_TEST_RMD)
+    schema_validation_result = schema_validate_rmd(SYS_3_TEST_RMD)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
 
 
 def test__TEST_RMD_baseline_system_3__is_unmatched_valid():
-    schema_validation_result = schema_validate_rmr(SYS_3_TEST_UNMATCHED_RMD)
+    schema_validation_result = schema_validate_rmd(SYS_3_TEST_UNMATCHED_RMD)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"

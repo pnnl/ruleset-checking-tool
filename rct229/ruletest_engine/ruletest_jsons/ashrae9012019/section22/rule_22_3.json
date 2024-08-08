@@ -3,21 +3,22 @@
         "Section": 22,
         "Rule": 3,
         "Test": "a",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and CHW Loop is correctly modeled with a temperature reset setpoint.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water loop. The chilled water supply temperature is reset based on outdoor dry-bulb temperature.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-3",
             "ruleset_reference": "G3.1.3.9",
-            "rule_description": "For Baseline chilled water loop that is not purchased cooling, chilled-water supply temperature shall be reset based on outdoor dry-bulb temperature if loop does not serve any Baseline System Type-11.",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "Baseline chilled water loops that do not use purchased cooling and do not serve any computer rooms (baseline system type 11) shall have the chilled water supply temperature reset based on outdoor dry-bulb temperature.",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -142,7 +143,8 @@
                                     "temperature_reset_type": "OUTSIDE_AIR_RESET"
                                 }
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -152,21 +154,22 @@
         "Section": 22,
         "Rule": 3,
         "Test": "b",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and CHW Loop is incorrectly modeled with a constant temperature setpoint.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water loop. The chilled water supply temperature is reset based on \"other\" controls.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-3",
             "ruleset_reference": "G3.1.3.9",
-            "rule_description": "For Baseline chilled water loop that is not purchased cooling, chilled-water supply temperature shall be reset based on outdoor dry-bulb temperature if loop does not serve any Baseline System Type-11.",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "Baseline chilled water loops that do not use purchased cooling and do not serve any computer rooms (baseline system type 11) shall have the chilled water supply temperature reset based on outdoor dry-bulb temperature.",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -288,10 +291,11 @@
                                 ],
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
-                                    "temperature_reset_type": "CONSTANT"
+                                    "temperature_reset_type": "OTHER"
                                 }
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -301,21 +305,22 @@
         "Section": 22,
         "Rule": 3,
         "Test": "c",
-        "test_description": "Baseline building has two zones.  HVAC is system type 8b and CHW Loop is correctly modeled with a temperature reset setpoint.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 8 with a chilled water loop. The chilled water supply temperature is reset based on outdoor dry-bulb temperature.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-3",
             "ruleset_reference": "G3.1.3.9",
-            "rule_description": "For Baseline chilled water loop that is not purchased cooling, chilled-water supply temperature shall be reset based on outdoor dry-bulb temperature if loop does not serve any Baseline System Type-11.",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "Baseline chilled water loops that do not use purchased cooling and do not serve any computer rooms (baseline system type 11) shall have the chilled water supply temperature reset based on outdoor dry-bulb temperature.",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -442,7 +447,8 @@
                                     "temperature_reset_type": "OUTSIDE_AIR_RESET"
                                 }
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -452,21 +458,22 @@
         "Section": 22,
         "Rule": 3,
         "Test": "d",
-        "test_description": "Baseline building has two zones.  HVAC is system type 8b and CHW Loop is incorrectly modeled with a constant temperature setpoint.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 8 with a chilled water loop. The chilled water supply temperature is reset based on \"other\" controls.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-3",
             "ruleset_reference": "G3.1.3.9",
-            "rule_description": "For Baseline chilled water loop that is not purchased cooling, chilled-water supply temperature shall be reset based on outdoor dry-bulb temperature if loop does not serve any Baseline System Type-11.",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "Baseline chilled water loops that do not use purchased cooling and do not serve any computer rooms (baseline system type 11) shall have the chilled water supply temperature reset based on outdoor dry-bulb temperature.",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -590,10 +597,11 @@
                                 ],
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
-                                    "temperature_reset_type": "CONSTANT"
+                                    "temperature_reset_type": "OTHER"
                                 }
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -603,21 +611,22 @@
         "Section": 22,
         "Rule": 3,
         "Test": "e",
-        "test_description": "Baseline building has one zone.  HVAC is system type 11.2.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 11 with a chilled water loop. Baseline system type 11 causes the loop to be exempt from this requirement.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-3",
             "ruleset_reference": "G3.1.3.9",
-            "rule_description": "For Baseline chilled water loop that is not purchased cooling, chilled-water supply temperature shall be reset based on outdoor dry-bulb temperature if loop does not serve any Baseline System Type-11.",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "Baseline chilled water loops that do not use purchased cooling and do not serve any computer rooms (baseline system type 11) shall have the chilled water supply temperature reset based on outdoor dry-bulb temperature.",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -722,10 +731,11 @@
                                 ],
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
-                                    "temperature_reset_type": "CONSTANT"
+                                    "temperature_reset_type": "OTHER"
                                 }
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

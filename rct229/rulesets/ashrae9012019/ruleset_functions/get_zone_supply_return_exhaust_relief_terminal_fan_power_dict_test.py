@@ -2,8 +2,8 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_supply_return_exha
     get_zone_supply_return_exhaust_relief_terminal_fan_power_dict,
 )
 from rct229.schema.config import ureg
-from rct229.schema.schema_utils import quantify_rmr
-from rct229.schema.validate import schema_validate_rmr
+from rct229.schema.schema_utils import quantify_rmd
+from rct229.schema.validate import schema_validate_rmd
 
 TEST_RMD = {
     "id": "test_rmd",
@@ -216,15 +216,20 @@ TEST_RMD = {
         {"id": "Boiler 1", "loop": "Boiler Loop 1", "energy_source_type": "NATURAL_GAS"}
     ],
     "fluid_loops": [{"id": "Boiler Loop 1", "type": "HEATING"}],
+    "type": "BASELINE_0",
 }
 
-TEST_RMD_FULL = {"id": "229", "ruleset_model_descriptions": [TEST_RMD]}
+TEST_RPD_FULL = {
+    "id": "229",
+    "ruleset_model_descriptions": [TEST_RMD],
+    "data_timestamp": "2024-02-12T09:00Z",
+}
 
-TEST_RMI = quantify_rmr(TEST_RMD_FULL)["ruleset_model_descriptions"][0]
+TEST_RMD = quantify_rmd(TEST_RPD_FULL)["ruleset_model_descriptions"][0]
 
 
-def test__TEST_RMD__is_valid():
-    schema_validation_result = schema_validate_rmr(TEST_RMD_FULL)
+def test__TEST_RPD__is_valid():
+    schema_validation_result = schema_validate_rmd(TEST_RPD_FULL)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
@@ -232,7 +237,7 @@ def test__TEST_RMD__is_valid():
 
 def test__get_zone_supply_return_exhaust_relief_terminal_fan_power_dict_one_zone_one_terminal_success():
     zone_supply_return_exhaust_relief_terminal_fan_power_dict = (
-        get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(TEST_RMI)
+        get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(TEST_RMD)
     )
     # check supply fans
     assert (
@@ -273,7 +278,7 @@ def test__get_zone_supply_return_exhaust_relief_terminal_fan_power_dict_one_zone
 
 def test__get_zone_supply_return_exhaust_relief_terminal_fan_power_dict_two_zone_one_terminal_success():
     zone_supply_return_exhaust_relief_terminal_fan_power_dict = (
-        get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(TEST_RMI)
+        get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(TEST_RMD)
     )
     # check supply fans
     assert (
@@ -348,7 +353,7 @@ def test__get_zone_supply_return_exhaust_relief_terminal_fan_power_dict_two_zone
 
 def test__get_zone_supply_return_exhaust_relief_terminal_fan_power_dict_no_central_fan_success():
     zone_supply_return_exhaust_relief_terminal_fan_power_dict = (
-        get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(TEST_RMI)
+        get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(TEST_RMD)
     )
     assert (
         zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 4"][

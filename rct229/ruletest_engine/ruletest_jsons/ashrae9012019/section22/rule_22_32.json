@@ -3,21 +3,22 @@
         "Section": 22,
         "Rule": 32,
         "Test": "a",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is correctly modeled with the chiller part_load_efficiency correctly matching the value in Table G3.5.3 part_load_efficiency_metric set to INTEGRATED_PART_LOAD_VALUE.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The baseline chiller efficiency matches the prescibed efficiency based on the capacity range in table G3.5.3.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-32",
             "ruleset_reference": "Section G3.1.2.1",
             "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for part load, in accordance with Tables G3.5.3.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -106,7 +107,7 @@
                                 "cooling_loop": "Chiller Loop 1",
                                 "compressor_type": "POSITIVE_DISPLACEMENT",
                                 "rated_capacity": 703400.0,
-                                "part_load_efficiency": 0.1788456070514643,
+                                "part_load_efficiency": 5.591,
                                 "part_load_efficiency_metric": "INTEGRATED_PART_LOAD_VALUE"
                             }
                         ],
@@ -142,7 +143,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -152,21 +154,22 @@
         "Section": 22,
         "Rule": 32,
         "Test": "b",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is incorrectly modeled with the part_load_efficiency_metric set to NONSTANDARD_PART_LOAD_VALUE.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The baseline chiller efficiency metric does not match the prescibed efficiency based on the capacity range in table G3.5.3.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-32",
             "ruleset_reference": "Section G3.1.2.1",
             "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for part load, in accordance with Tables G3.5.3.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -255,7 +258,7 @@
                                 "cooling_loop": "Chiller Loop 1",
                                 "compressor_type": "POSITIVE_DISPLACEMENT",
                                 "rated_capacity": 703400.0,
-                                "part_load_efficiency": 0.1788456070514643,
+                                "part_load_efficiency": 5.591,
                                 "part_load_efficiency_metric": "NONSTANDARD_PART_LOAD_VALUE"
                             }
                         ],
@@ -291,7 +294,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -301,21 +305,22 @@
         "Section": 22,
         "Rule": 32,
         "Test": "c",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and is modeled with the part_load_efficiency_metric correctly set to INTEGRATED_PART_LOAD_VALUE, but an incorrect part_load_efficiency.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The baseline chiller efficiency does not match the prescibed efficiency based on the capacity range in table G3.5.3.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-32",
             "ruleset_reference": "Section G3.1.2.1",
             "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for part load, in accordance with Tables G3.5.3.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -404,7 +409,7 @@
                                 "cooling_loop": "Chiller Loop 1",
                                 "compressor_type": "POSITIVE_DISPLACEMENT",
                                 "rated_capacity": 703400.0,
-                                "part_load_efficiency": 0.17059994313335228,
+                                "part_load_efficiency": 5.862,
                                 "part_load_efficiency_metric": "INTEGRATED_PART_LOAD_VALUE"
                             }
                         ],
@@ -440,7 +445,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -450,21 +456,22 @@
         "Section": 22,
         "Rule": 32,
         "Test": "d",
-        "test_description": "Baseline building has two zones.  HVAC is system type 8 and is correctly modeled with the chiller part_load_efficiency correctly matching the value in Table G3.5.3 part_load_efficiency_metric set to INTEGRATED_PART_LOAD_VALUE.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 8 with a chilled water system. The baseline chiller efficiency matches the prescibed efficiency based on the capacity range in table G3.5.3.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-32",
             "ruleset_reference": "Section G3.1.2.1",
             "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for part load, in accordance with Tables G3.5.3.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -487,7 +494,6 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
                                                         "heating_source": "ELECTRIC",
-                                                        "heating_from_loop": "Boiler Loop 1",
                                                         "fan": {
                                                             "id": "Fan 1"
                                                         },
@@ -506,7 +512,6 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
                                                         "heating_source": "ELECTRIC",
-                                                        "heating_from_loop": "Boiler Loop 1",
                                                         "fan": {
                                                             "id": "Fan 2"
                                                         },
@@ -547,29 +552,17 @@
                                 ]
                             }
                         ],
-                        "boilers": [
-                            {
-                                "id": "Boiler 1",
-                                "loop": "Boiler Loop 1",
-                                "energy_source_type": "NATURAL_GAS"
-                            }
-                        ],
                         "chillers": [
                             {
                                 "id": "Chiller 1",
                                 "cooling_loop": "Chiller Loop 1",
                                 "compressor_type": "POSITIVE_DISPLACEMENT",
                                 "rated_capacity": 1058617.0,
-                                "part_load_efficiency": 0.16263861245379582,
+                                "part_load_efficiency": 6.149,
                                 "part_load_efficiency_metric": "INTEGRATED_PART_LOAD_VALUE"
                             }
                         ],
                         "pumps": [
-                            {
-                                "id": "Boiler Pump 1",
-                                "loop_or_piping": "Boiler Loop 1",
-                                "speed_control": "FIXED_SPEED"
-                            },
                             {
                                 "id": "Chiller Pump 1",
                                 "loop_or_piping": "Chiller Loop 1",
@@ -583,10 +576,6 @@
                         ],
                         "fluid_loops": [
                             {
-                                "id": "Boiler Loop 1",
-                                "type": "HEATING"
-                            },
-                            {
                                 "id": "Chiller Loop 1",
                                 "type": "COOLING",
                                 "child_loops": [
@@ -596,7 +585,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -606,21 +596,22 @@
         "Section": 22,
         "Rule": 32,
         "Test": "e",
-        "test_description": "Baseline building has two zones.  HVAC is system type 8 and is incorrectly modeled with the part_load_efficiency_metric set to NONSTANDARD_PART_LOAD_VALUE.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 8 with a chilled water system. The baseline chiller efficiency metric does not match the prescibed efficiency based on the capacity range in table G3.5.3.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-32",
             "ruleset_reference": "Section G3.1.2.1",
             "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for part load, in accordance with Tables G3.5.3.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -643,7 +634,6 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
                                                         "heating_source": "ELECTRIC",
-                                                        "heating_from_loop": "Boiler Loop 1",
                                                         "fan": {
                                                             "id": "Fan 1"
                                                         },
@@ -662,7 +652,6 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
                                                         "heating_source": "ELECTRIC",
-                                                        "heating_from_loop": "Boiler Loop 1",
                                                         "fan": {
                                                             "id": "Fan 2"
                                                         },
@@ -703,29 +692,17 @@
                                 ]
                             }
                         ],
-                        "boilers": [
-                            {
-                                "id": "Boiler 1",
-                                "loop": "Boiler Loop 1",
-                                "energy_source_type": "NATURAL_GAS"
-                            }
-                        ],
                         "chillers": [
                             {
                                 "id": "Chiller 1",
                                 "cooling_loop": "Chiller Loop 1",
                                 "compressor_type": "POSITIVE_DISPLACEMENT",
                                 "rated_capacity": 1058617.0,
-                                "part_load_efficiency": 0.16263861245379582,
+                                "part_load_efficiency": 6.149,
                                 "part_load_efficiency_metric": "NONSTANDARD_PART_LOAD_VALUE"
                             }
                         ],
                         "pumps": [
-                            {
-                                "id": "Boiler Pump 1",
-                                "loop_or_piping": "Boiler Loop 1",
-                                "speed_control": "FIXED_SPEED"
-                            },
                             {
                                 "id": "Chiller Pump 1",
                                 "loop_or_piping": "Chiller Loop 1",
@@ -739,10 +716,6 @@
                         ],
                         "fluid_loops": [
                             {
-                                "id": "Boiler Loop 1",
-                                "type": "HEATING"
-                            },
-                            {
                                 "id": "Chiller Loop 1",
                                 "type": "COOLING",
                                 "child_loops": [
@@ -752,7 +725,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -762,21 +736,22 @@
         "Section": 22,
         "Rule": 32,
         "Test": "f",
-        "test_description": "Baseline building has two zones.  HVAC is system type 8 and is modeled with the part_load_efficiency_metric correctly set to INTEGRATED_PART_LOAD_VALUE, but an incorrect part_load_efficiency.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 8 with a chilled water system. The baseline chiller efficiency does not match the prescibed efficiency based on the capacity range in table G3.5.3.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-32",
             "ruleset_reference": "Section G3.1.2.1",
             "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for part load, in accordance with Tables G3.5.3.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -799,7 +774,6 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
                                                         "heating_source": "ELECTRIC",
-                                                        "heating_from_loop": "Boiler Loop 1",
                                                         "fan": {
                                                             "id": "Fan 1"
                                                         },
@@ -818,7 +792,6 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
                                                         "heating_source": "ELECTRIC",
-                                                        "heating_from_loop": "Boiler Loop 1",
                                                         "fan": {
                                                             "id": "Fan 2"
                                                         },
@@ -859,29 +832,17 @@
                                 ]
                             }
                         ],
-                        "boilers": [
-                            {
-                                "id": "Boiler 1",
-                                "loop": "Boiler Loop 1",
-                                "energy_source_type": "NATURAL_GAS"
-                            }
-                        ],
                         "chillers": [
                             {
                                 "id": "Chiller 1",
                                 "cooling_loop": "Chiller Loop 1",
                                 "compressor_type": "POSITIVE_DISPLACEMENT",
                                 "rated_capacity": 1058617.0,
-                                "part_load_efficiency": 0.17059994313335228,
+                                "part_load_efficiency": 5.862,
                                 "part_load_efficiency_metric": "INTEGRATED_PART_LOAD_VALUE"
                             }
                         ],
                         "pumps": [
-                            {
-                                "id": "Boiler Pump 1",
-                                "loop_or_piping": "Boiler Loop 1",
-                                "speed_control": "FIXED_SPEED"
-                            },
                             {
                                 "id": "Chiller Pump 1",
                                 "loop_or_piping": "Chiller Loop 1",
@@ -895,10 +856,6 @@
                         ],
                         "fluid_loops": [
                             {
-                                "id": "Boiler Loop 1",
-                                "type": "HEATING"
-                            },
-                            {
                                 "id": "Chiller Loop 1",
                                 "type": "COOLING",
                                 "child_loops": [
@@ -908,7 +865,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -918,21 +876,22 @@
         "Section": 22,
         "Rule": 32,
         "Test": "g",
-        "test_description": "Baseline building has one zone.  HVAC is system type 6 and does not have a CHW plant.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 6. There are no chillers.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-32",
             "ruleset_reference": "Section G3.1.2.1",
             "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for part load, in accordance with Tables G3.5.3.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1005,7 +964,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

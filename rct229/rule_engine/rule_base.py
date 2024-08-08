@@ -1,7 +1,6 @@
 from jsonpointer import resolve_pointer
-
 from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import RuleSetModels, get_rmd_instance
 from rct229.utils.assertions import MissingKeyException, RCTFailureException
 from rct229.utils.json_utils import slash_prefix_guarantee
 from rct229.utils.jsonpath_utils import find_all
@@ -13,13 +12,14 @@ class RuleDefinitionBase:
 
     def __init__(
         self,
-        rmrs_used,
+        rmds_used,
+        rmds_used_optional=None,
         id=None,
         description=None,
         ruleset_section_title=None,
         standard_section=None,
         is_primary_rule=None,
-        rmr_context="",
+        rmd_context="",
         required_fields=None,
         manual_check_required_msg="",
         fail_msg="",
@@ -30,9 +30,11 @@ class RuleDefinitionBase:
 
         Parameters
         ----------
-        rmrs_used : UserBaselineProposedVals
-            A trio of boolen values indicating which RMRs are required by the
+        rmds_used : RulesetModels
+            A boolean values indicating which RMDs are required by the
             rule
+        rmds_used_optional: RulesetModels
+            A boolean values indicating which RMDs are optional by the rule (True optional, False not optional).
         id : string
             Unique id for the rule
             Usually unspecified for nested rules
@@ -47,8 +49,8 @@ class RuleDefinitionBase:
             e.g., Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building
         is_primary_rule: boolean
             Indicate whether this rule is primary rule (True) or secondary rule (False)
-        rmr_context : string
-            A json pointer into each RMR, or RMR fragment, provided to the rule.
+        rmd_context : string
+            A json pointer into each RMD, or RMD fragment, provided to the rule.
             For better human readability, the leading "/" may be ommitted.
         required_fields : dict
             A dictionary of the form
@@ -66,29 +68,30 @@ class RuleDefinitionBase:
         not_applicable_msg: string
             default message for NOT_APPLICABLE outcome
         """
-        self.rmrs_used = rmrs_used
+        self.rmds_used = rmds_used
+        self.rmds_used_optional = rmds_used_optional
         self.id = id
         self.description = description
         self.ruleset_section_title = ruleset_section_title
         self.standard_section = standard_section
         self.is_primary_rule = is_primary_rule
-        # rmr_context is a jsonpointer string
+        # rmd_context is a jsonpointer string
         # As a convenience, any leading '/' should not be included and will
         # be inserted when the pointer is used in _get_context().
-        # Default rm_context is the root of the RMR
-        self.rmr_context = slash_prefix_guarantee(rmr_context)
+        # Default rm_context is the root of the RMD
+        self.rmd_context = slash_prefix_guarantee(rmd_context)
         self.required_fields = required_fields
         self.manual_check_required_msg = manual_check_required_msg
         self.not_applicable_msg = not_applicable_msg
         self.fail_msg = fail_msg
         self.pass_msg = pass_msg
 
-    def evaluate(self, rmrs, data={}):
+    def evaluate(self, rmds, data={}):
         """Generates the outcome dictionary for the rule
 
         This method also orchestrates the high-level workflow for any rule.
         Namely:
-            - Call get_context(rmrs); check for any missing RMR contexts
+            - Call get_context(rmds); check for any missing RMD contexts
             - Call is_applicable(context)
             - Call manual_check_required()
             - Call rule_check()
@@ -99,7 +102,7 @@ class RuleDefinitionBase:
 
         Parameters
         ----------
-        rmrs : RMR trio or a context trio
+        rmds : RuleSetModels RMD models or a context list
         data : Any data object (optional). This is designed as a way to pass in data
             to nested rules. This data passed on to the workflow methods
             get_context(), is_applicable(), manual_check_required(), and
@@ -112,7 +115,7 @@ class RuleDefinitionBase:
             {
                 id: string - A unique identifier for the rule; ommitted if None
                 description: string - The rule description; ommitted if None
-                rmr_context: string - a JSON pointer into the RMR; omitted if empty
+                rmd_context: string - a JSON pointer into the RMD; omitted if empty
                 result: string or list - One of the strings "PASS", "FAIL", "UNDETERMINED", "NOT_APPLICABLE"
                     or a list of outcomes for
                     a list-type rule
@@ -130,12 +133,12 @@ class RuleDefinitionBase:
             outcome["standard_section"] = self.standard_section
         if self.is_primary_rule is not None:
             outcome["primary_rule"] = True if self.is_primary_rule else False
-        if self.rmr_context:
-            outcome["rmr_context"] = self.rmr_context
+        if self.rmd_context:
+            outcome["rmd_context"] = self.rmd_context
 
         # context will be a string if the context does not exist for any of the RMD used
-        context_or_string = self.get_context(rmrs, data)
-        if isinstance(context_or_string, UserBaselineProposedVals):
+        context_or_string = self.get_context(rmds, data)
+        if isinstance(context_or_string, RuleSetModels):
             context = context_or_string
 
             # Check the context for general validity
@@ -198,6 +201,8 @@ class RuleDefinitionBase:
                             else:
                                 outcome["result"] = RCTOutcomeLabel.FAILED
                                 fail_msg = self.get_fail_msg(context, calc_vals, data)
+                                if self.is_tolerance_fail(context, calc_vals, data):
+                                    fail_msg = fail_msg + " ::TOLERANCE::"
                                 if fail_msg:
                                     outcome["message"] = fail_msg
                     else:
@@ -212,84 +217,89 @@ class RuleDefinitionBase:
                     outcome["result"] = RCTOutcomeLabel.FAILED
                     outcome["message"] = str(fe)
             else:
-                outcome["result"] = "UNDETERMINED"
+                outcome["result"] = RCTOutcomeLabel.UNDETERMINED
                 outcome["message"] = context_validity_dict
         else:
             # context should be a string indicating the RMDs that are missing
             # such as "MISSING_BASELINE"
-            outcome["result"] = "UNDETERMINED"
+            outcome["result"] = RCTOutcomeLabel.UNDETERMINED
             outcome["message"] = context_or_string
 
         return outcome
 
-    def _get_context(self, rmrs, rmr_context=None):
-        """Get the context for each RMR
+    def _get_context(self, rmds, rmd_context=None):
+        """Get the context for each RMD
 
         Private method, not to be overridden
 
         Parameters
         ----------
-        rmrs : UserBaselineProposedVals
-            Object containing the user, baseline, and proposed RMRs
-        rmr_context : string|None
-            Optional jsonpointer for rmr_context to override self.rmr_context.
-            If None, then self.rmr_context is used.
+        rmds : RuleSetModels
+            Object containing the RMDs for each required ruleset model type
+        rmd_context : string|None
+            Optional jsonpointer for rmd_context to override self.rmd_context.
+            If None, then self.rmd_context is used.
 
         Returns
         -------
-        UserBaselineProposedVals
-            Object containing the contexts for the user, baseline, and proposed
-            RMRs; an RMR's context is set to None if the corresponding flag
-            in self.rmrs_used is not set
+        RuleSetModels
+            Object containing the contexts for RMDs; an RMD's context is set to None if the corresponding flag
+            in self.rmds_used is not set
         """
-        rmr_context = self.rmr_context if rmr_context is None else rmr_context
-        # Prepend the leading '/' as needed. It is optional in rmr_context for
+        rmd_context = self.rmd_context if rmd_context is None else rmd_context
+        # Prepend the leading '/' as needed. It is optional in rmd_context for
         # improved readability
-        pointer = rmr_context
+        pointer = rmd_context
+
+        ruleset_models = get_rmd_instance()
+        for ruleset_model_type in ruleset_models.get_ruleset_model_types():
+            if self.rmds_used[ruleset_model_type]:
+                ruleset_models.__setitem__(
+                    ruleset_model_type,
+                    resolve_pointer(rmds[ruleset_model_type], pointer, None),
+                )
 
         # Note: if there is no match for pointer, resolve_pointer returns None
-        return UserBaselineProposedVals(
-            user=resolve_pointer(rmrs.user, pointer, None)
-            if self.rmrs_used.user
-            else None,
-            baseline=resolve_pointer(rmrs.baseline, pointer, None)
-            if self.rmrs_used.baseline
-            else None,
-            proposed=resolve_pointer(rmrs.proposed, pointer, None)
-            if self.rmrs_used.proposed
-            else None,
-        )
+        return ruleset_models
 
-    def get_context(self, rmrs, data=None):
-        """Gets the context for each RMR
+    def get_context(self, rmds, data=None):
+        """Gets the context for each RMD
 
         May be be overridden for different behavior
 
         Parameters
         ----------
-        rmrs : UserBaselineProposedVals
-            Object containing the user, baseline, and proposed RMRs
+        rmds : RuleSetModels
+            Object containing the RMDs for each required ruleset model types
             A return value of None indicates that the context
-            does not exist in one or more of the RMRs used.
+            does not exist in one or more of the RMDs used.
         data : An optional data object. It is ignored by this base implementation.
 
         Returns
         -------
-        UserBaselineProposedVals or str
+        RulesetModelTypes or str
             The return value from self._get_context() when the context exists
-            in each RMR for which the correponding self.rmrs_used flag is set;
+            in each RMD for which the correponding self.rmds_used flag is set;
             otherwise retrns a string such as "MISSING_BASELINE" that indicates all
-            the RMRs that are missing.
+            the RMDs that are missing.
         """
 
-        context = self._get_context(rmrs)
+        context = self._get_context(rmds)
         missing_contexts = []
-        if self.rmrs_used.user and context.user is None:
-            missing_contexts.append("USER")
-        if self.rmrs_used.baseline and context.baseline is None:
-            missing_contexts.append("BASELINE")
-        if self.rmrs_used.proposed and context.proposed is None:
-            missing_contexts.append("PROPOSED")
+        ruleset_model_types = rmds.get_ruleset_model_types()
+        for ruleset_model in ruleset_model_types:
+            if (
+                # rmd used
+                self.rmds_used[ruleset_model]
+                and not (
+                    # and rmd is not optional
+                    self.rmds_used_optional
+                    and self.rmds_used_optional[ruleset_model]
+                )
+                # and rmds[ruleset_model] is None or empty
+                and (rmds[ruleset_model] is None or not rmds[ruleset_model])
+            ):
+                missing_contexts.append(ruleset_model)
 
         if len(missing_contexts) > 0:
             retval = "MISSING_" + "_".join(missing_contexts)
@@ -303,15 +313,15 @@ class RuleDefinitionBase:
 
         It collects the validity error strings from the
         check_user_context_validity, check_baseline_context_validity,
-        check_proposed_context_validity methods for the parts in self.rmrs_used.
+        check_proposed_context_validity methods for the parts in self.rmds_used.
 
         This should not be overridden. Override the other check validity methods
         as needed instead.
 
         Parameters
         ----------
-        context : UserBaselineProposedVals
-            Object containing the contexts for the user, baseline, and proposed RMRs
+        context : RuleSetModels
+            Object containing the contexts for RMDs of required ruleset model type
         data : An optional data object of any form.
 
         Returns
@@ -328,30 +338,15 @@ class RuleDefinitionBase:
             the empty dict, {}, is returned.
         """
         retval = {}
-
-        user_invalid_str = (
-            self.check_user_context_validity(context.user, data)
-            if self.rmrs_used.user
-            else ""
-        )
-        if user_invalid_str:
-            retval["INVALID_USER_CONTEXT"] = user_invalid_str
-
-        baseline_invalid_str = (
-            self.check_baseline_context_validity(context.baseline, data)
-            if self.rmrs_used.baseline
-            else ""
-        )
-        if baseline_invalid_str:
-            retval["INVALID_BASELINE_CONTEXT"] = baseline_invalid_str
-
-        proposed_invalid_str = (
-            self.check_proposed_context_validity(context.proposed, data)
-            if self.rmrs_used.proposed
-            else ""
-        )
-        if proposed_invalid_str:
-            retval["INVALID_PROPOSED_CONTEXT"] = proposed_invalid_str
+        ruleset_models = context.get_ruleset_model_types()
+        for ruleset_model in ruleset_models:
+            invalid_str = (
+                self.check_single_context_validity(context[ruleset_model], data)
+                if context[ruleset_model]
+                else ""
+            )
+            if invalid_str:
+                retval[f"{ruleset_model}_MISSING_DATA"] = invalid_str
 
         return retval
 
@@ -385,78 +380,6 @@ class RuleDefinitionBase:
                     invalid_list.append(invalid_str)
 
         return "; ".join(invalid_list) if len(invalid_list) > 0 else ""
-
-    def check_user_context_validity(self, user_context, data=None):
-        """Check the validity of the USER part of the context trio
-
-        This may be overridden to provide alternate validation for the USER part
-        of the context trio.
-
-        This implementation simply calls the check_single_context_validity
-        method with the user_context.
-
-        Parameters
-        ----------
-        user_context : object
-            The USER part of the context trio
-        data : object
-            An optional data object of any form
-
-        Returns
-        -------
-        string
-            A validation error message. The empty string indicates a valid
-            user_context.
-        """
-        return self.check_single_context_validity(user_context, data)
-
-    def check_baseline_context_validity(self, baseline_context, data=None):
-        """Check the validity of the BASELINE part of the context trio
-
-        This may be overridden to provide alternate validation for the BASELINE
-        part of the context trio.
-
-        This implementation simply calls the check_single_context_validity
-        method with the baseline_context.
-
-        Parameters
-        ----------
-        baseline_context : object
-            The BASELINE part of the context trio
-        data : object
-            An optional data object of any form
-
-        Returns
-        -------
-        string
-            A validation error message. The empty string indicates a valid
-            baseline_context.
-        """
-        return self.check_single_context_validity(baseline_context, data)
-
-    def check_proposed_context_validity(self, proposed_context, data=None):
-        """Check the validity of the PROPOSED part of the context trio
-
-        This may be overridden to provide alternate validation for the PROPOSED
-        part of the context trio.
-
-        This implementation simply calls the check_single_context_validity
-        method with the proposed_context.
-
-        Parameters
-        ----------
-        proposed_context : object
-            The PROPOSED part of the context trio
-        data : object
-            An optional data object of any form
-
-        Returns
-        -------
-        string
-            A validation error message. The empty string indicates a valid
-            proposed_context.
-        """
-        return self.check_single_context_validity(proposed_context, data)
 
     def _missing_fields_str(self, jpath, required_fields, single_context):
         """Untility method for listing missing required fields in a single
@@ -506,8 +429,8 @@ class RuleDefinitionBase:
 
         Parameters
         ----------
-        context : UserBaselineProposedVals
-            Object containing the contexts for the user, baseline, and proposed RMRs
+        context : RuleSetModels
+            Object containing the contexts for RMDs
         data : An optional data object. It is ignored by this base implementation.
 
         Returns
@@ -530,8 +453,8 @@ class RuleDefinitionBase:
 
         Parameters
         ----------
-        context : UserBaselineProposedVals
-            Object containing the contexts for the user, baseline, and proposed RMRs
+        context : RuleSetModels
+            Object containing the contexts for RMDs
         calc_vals : dict | None
         data : dict | None
             An optional data dictionary
@@ -553,8 +476,8 @@ class RuleDefinitionBase:
 
         Parameters
         ----------
-        context : UserBaselineProposedVals
-            Object containing the contexts for the user, baseline, and proposed RMRs
+        context : RuleSetModels
+            Object containing the contexts for RMDs
         data : An optional data object. It is ignored by this base implementation.
 
         Returns
@@ -576,8 +499,8 @@ class RuleDefinitionBase:
 
         Parameters
         ----------
-        context : UserBaselineProposedVals
-            Object containing the contexts for the user, baseline, and proposed RMRs
+        context : RuleSetModels
+            Object containing the contexts for RMDs
         calc_vals : dict or None
 
         data : An optional data object. It is ignored by this base implementation.
@@ -602,8 +525,8 @@ class RuleDefinitionBase:
 
         Parameters
         ----------
-        context : UserBaselineProposedVals
-            Object containing the contexts for the user, baseline, and proposed RMRs
+        context : RuleSetModels
+            Object containing the contexts for RMDs
         calc_vals : dict or None
 
         data : An optional data object. It is ignored by this base implementation.
@@ -624,8 +547,8 @@ class RuleDefinitionBase:
 
         Parameters
         ----------
-        context : UserBaselineProposedVals
-            Object containing the contexts for the user, baseline, and proposed RMRs
+        context : RuleSetModels
+            Object containing the contexts for RMDs
         calc_vals: dictionary
             Dictionary contains calculated values for rule check and reporting.
         data : An optional data object. It is ignored by this base implementation.
@@ -637,6 +560,27 @@ class RuleDefinitionBase:
         """
 
         raise NotImplementedError
+
+    def is_tolerance_fail(self, context, calc_vals=None, data=None):
+        """Check if the failure is because of tolerance
+
+        This method should only be overridden if the rule check is comparing
+        a number with another number.
+
+        Parameters
+        ----------
+        context : RuleSetModels
+            Object containing the contexts for RMDs
+        calc_vals : dict or None
+
+        data : An optional data object. It is ignored by this base implementation.
+
+        Returns
+        -------
+        bool
+            True fail because of tolerance, False otherwise.
+        """
+        return False
 
     def get_fail_msg(self, context, calc_vals=None, data=None):
         """Gets the message to include in the outcome for the FAIL case.
@@ -650,8 +594,8 @@ class RuleDefinitionBase:
 
         Parameters
         ----------
-        context : UserBaselineProposedVals
-            Object containing the contexts for the user, baseline, and proposed RMRs
+        context : RuleSetModels
+            Object containing the contexts for RMDs
         calc_vals : dict or None
 
         data : An optional data object. It is ignored by this base implementation.
@@ -676,8 +620,8 @@ class RuleDefinitionBase:
 
         Parameters
         ----------
-        context : UserBaselineProposedVals
-            Object containing the contexts for the user, baseline, and proposed RMRs
+        context : RuleSetModels
+            Object containing the contexts for RMDs
         calc_vals : dict or None
 
         data : An optional data object. It is ignored by this base implementation.

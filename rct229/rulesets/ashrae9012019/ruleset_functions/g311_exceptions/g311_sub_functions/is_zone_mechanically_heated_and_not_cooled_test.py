@@ -1,10 +1,10 @@
 from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_functions.is_zone_mechanically_heated_and_not_cooled import (
     is_zone_mechanically_heated_and_not_cooled,
 )
-from rct229.schema.schema_utils import quantify_rmr
+from rct229.schema.schema_utils import quantify_rmd
 
-TEST_RMI = {
-    "id": "test_rmi",
+TEST_RMD = {
+    "id": "test_rmd",
     "buildings": [
         {
             "id": "building_1",
@@ -108,11 +108,16 @@ TEST_RMI = {
             ],
         }
     ],
+    "type": "BASELINE_0",
 }
 
-TEST_RPD_FULL = {"id": "229", "ruleset_model_descriptions": [TEST_RMI]}
+TEST_RPD_FULL = {
+    "id": "229",
+    "ruleset_model_descriptions": [TEST_RMD],
+    "data_timestamp": "2024-02-12T09:00Z",
+}
 
-TEST_RMD_UNIT = quantify_rmr(TEST_RPD_FULL)["ruleset_model_descriptions"][0]
+TEST_RMD_UNIT = quantify_rmd(TEST_RPD_FULL)["ruleset_model_descriptions"][0]
 
 
 def test_is_zone_mechanically_heated_and_not_cooled_zone_1__false():

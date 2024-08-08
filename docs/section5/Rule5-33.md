@@ -2,39 +2,34 @@
 # Envelope - Rule 5-33  
 
 **Rule ID:** 5-33  
-**Rule Description:** Automatically controlled fenestration shading devices must be modeled in the proposed design the same as in user model.  
-**Rule Assertion:** P-RMR subsurface:has_automatic_shades = U-RMR subsurface:has_automatic_shades  
-**Appendix G Section:** Section G3.1-5(a)(4) Building Modeling Requirements for the Proposed design  
-**Appendix G Section Reference:**  None
+**Rule Description:** The infiltration modeling method in the baseline includes adjustment for weather and building operation.  
+**Rule Assertion:** B-RMD infiltration:modeling_method = NOT "CONSTANT" for all zones  
+**Appendix G Section:** Section G3.1-5(b) Building Envelope Modeling Requirements for the Proposed design and Baseline  
+**Appendix G Section Reference:** None  
 
-**Applicability:** All required data elements exist for P_RMR  
-**Applicability Checks:** None  
+**Applicability:** All required data elements exist for B_RMD  
+**Applicability Checks:**  None  
 
-**Manual Checks:** None  
-**Evaluation Context:**  Each Data Element  
+**Manual Check:** None  
+**Evaluation Context:** Each Data Element  
 **Data Lookup:** None  
-**Function Call:**  
+**Function Call:** None  
 
-  1. match_data_element()
+## Rule Logic:  
 
-## Rule Logic:
+- For each building segment in the Baseline model: `for building_segment_b in B_RMD.building.building_segments:`  
 
-- For each building segment in the Proposed model: `for building_segment_p in P_RMR.building.building_segments:`
+    - For each zone in building segment, get zone infiltration: `for zone_b in building_segment_b.zones: infiltration_b = zone_b.infiltration`  
 
-  - For each thermal block in building segment: `for thermal_block_p in building_segment_p.thermal_blocks:`
+      **Rule Assertion:**  
 
-    - For each zone in thermal block: `for zone_p in thermal_block_p.zones:`
+      - Case 1: If zone infiltration is not modeled as constant: `if infiltration_b.modeling_method != "CONSTANT": PASS`  
 
-      - For each surface in zone: `for surface_p in zone_p.surfaces:`
+      - Case 2: Else: `Else: FAIL`
 
-        - For each subsurface in surface: `for subsurface_p in surface_p.subsurfaces:`
+**Notes:**
 
-          - Get matching subsurface in U_RMR: `subsurface_u = match_data_element(U_RMR, Subsurfaces, subsurface_p.id)`
-
-            **Rule Assertion:**
-
-            - Case 1: For each subsurface in P_RMR, if automatically controlled shading devices are modeled the same as in U_RMR: `if subsurface_p.has_automatic_shades == subsurface_u.has_automatic_shades: PASS`
-
-            - Case 2: Else: `else: FAIL`
+1. Update Rule ID from 5-44 to 5-34 on 10/26/2023
+2. Update Rule ID from 5-34 to 5-33 on 12/22/2023
 
 **[Back](../_toc.md)**

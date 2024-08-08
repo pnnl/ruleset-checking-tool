@@ -1,7 +1,7 @@
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.are_all_terminal_heating_loops_attached_to_boiler import (
     are_all_terminal_heating_loops_attached_to_boiler,
 )
-from rct229.schema.validate import schema_validate_rmr
+from rct229.schema.validate import schema_validate_rmd
 
 TEST_RMD = {
     "id": "test_rmd",
@@ -34,13 +34,18 @@ TEST_RMD = {
     "external_fluid_sources": [
         {"id": "fluid_loop_1", "loop": "HW_Loop_2", "type": "HOT_WATER"},
     ],
+    "type": "BASELINE_0",
 }
 
-TEST_RMD_FULL = {"id": "229_01", "ruleset_model_descriptions": [TEST_RMD]}
+TEST_RPD_FULL = {
+    "id": "229_01",
+    "ruleset_model_descriptions": [TEST_RMD],
+    "data_timestamp": "2024-02-12T09:00Z",
+}
 
 
-def test__TEST_RMD__is_valid():
-    schema_validation_result = schema_validate_rmr(TEST_RMD_FULL)
+def test__TEST_RPD__is_valid():
+    schema_validation_result = schema_validate_rmd(TEST_RPD_FULL)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"

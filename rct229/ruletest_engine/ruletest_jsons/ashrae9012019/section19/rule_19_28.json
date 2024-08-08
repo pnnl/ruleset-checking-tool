@@ -3,21 +3,22 @@
         "Section": 19,
         "Rule": 28,
         "Test": "a",
-        "test_description": "Project does not have spaces with health and safety mandated minimum ventilation requirements. HVAC fans correctly cycle on and off to maintain temperature setpoint during unoccupied hours.",
+        "test_description": "The project has one building segment with one zone. Project does not have spaces with health and safety mandated minimum ventilation requirements. HVAC fans correctly cycle on and off to maintain temperature setpoint during unoccupied hours.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-28",
             "ruleset_reference": "Table G3.1 Section 4 & G3.1.2.4",
             "rule_description": "Schedules for HVAC fans that provide outdoor air for ventilation excluding unoccupied hours in spaces that have health and safety mandated minimum ventilation requirements shall be cycled ON and OFF to meet heating and cooling loads during unoccupied hours in the proposed design. ",
-            "applicable_rmr": "Proposed RMR",
+            "applicable_rmd": "Proposed RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -44,7 +45,7 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "floor_area": 1000,
+                                                        "floor_area": 92.90303999999999,
                                                         "lighting_space_type": "AUDIENCE_SEATING_AREA_GYMNASIUM"
                                                     }
                                                 ]
@@ -77,7 +78,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             }
@@ -87,21 +89,22 @@
         "Section": 19,
         "Rule": 28,
         "Test": "b",
-        "test_description": "Project does not have spaces with health and safety mandated minimum ventilation requirements. HVAC fans incorrectly stay off during unoccupied hours.",
+        "test_description": "The project has one building segment with two zones. Project does not have spaces with health and safety mandated minimum ventilation requirements. HVAC fans incorrectly stay off during unoccupied hours.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-28",
             "ruleset_reference": "Table G3.1 Section 4 & G3.1.2.4",
             "rule_description": "Schedules for HVAC fans that provide outdoor air for ventilation excluding unoccupied hours in spaces that have health and safety mandated minimum ventilation requirements shall be cycled ON and OFF to meet heating and cooling loads during unoccupied hours in the proposed design. ",
-            "applicable_rmr": "Proposed RMR",
+            "applicable_rmd": "Proposed RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -130,7 +133,7 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "floor_area": 1000,
+                                                        "floor_area": 92.90303999999999,
                                                         "lighting_space_type": "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_ALL_OTHER"
                                                     }
                                                 ]
@@ -231,7 +234,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             }

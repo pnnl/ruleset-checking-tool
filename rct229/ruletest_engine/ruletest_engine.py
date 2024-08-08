@@ -1,75 +1,72 @@
-import copy
 import glob
 import json
 
 # from jsonpointer import JsonPointer
 import os
-import pprint
 from copy import deepcopy
 
 from pint import Quantity
 
-from rct229.reports.ashrae901_2019_software_test_report import (
+from rct229.reports.ashrae9012019.ashrae901_2019_software_test_report import (
     ASHRAE9012019SoftwareTestReport,
 )
 from rct229.rule_engine.engine import evaluate_rule
 from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
 from rct229.rule_engine.rulesets import RuleSet, RuleSetTest
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.rulesets import rulesets
-from rct229.ruletest_engine.ruletest_jsons.scripts.json_generation_utilities import (
-    merge_nested_dictionary,
-)
-from rct229.schema.validate import validate_rmr
+from rct229.ruletest_engine.ruletest_rmd_factory import get_ruletest_rmd_models
+from rct229.schema.schema_enums import SchemaEnums
+from rct229.schema.schema_store import SchemaStore
+from rct229.schema.validate import validate_rmd
 
 
-# Generates the RMR triplet dictionaries from a test_dictionary's "rmr_transformation" element.
-# -test_dict = Dictionary with elements 'rmr_transformations' and 'rmr_transformations/user,baseline,proposed'
-def generate_test_rmrs(test_dict):
-    """Generates the RMR triplet dictionaries from a test_dictionary's "rmr_transformation" element.
+# Generates the RMD triplet dictionaries from a test_dictionary's "rmd_transformation" element.
+# -test_dict = Dictionary with elements 'rmd_transformations' and 'rmd_transformations/user,baseline,proposed'
+def generate_test_rmds(test_dict):
+    """Generates the RMD triplet dictionaries from a test_dictionary's "rmd_transformation" element.
 
     Parameters
     ----------
     test_dict : dict
-        A dictionary including an optional rmr_template field and a
-        required rmr_transformations field.
+        A dictionary including an optional rmd_template field and a
+        required rmd_transformations field.
 
-        The rmr_transformations field has optional user, baseline,
+        The rmd_transformations field has optional user, baseline,
         and proposed fields. If any of these fields is present, its
-        corresponding RMR will be referenced. If the user, baseline,
-        or proposed fields are missing, then its correponding RMR is
+        corresponding RMD will be referenced. If the user, baseline,
+        or proposed fields are missing, then its correponding RMD is
         set to None.
 
 
     Returns
     -------
     tuple : a triplet containing:
-        - user_rmr (dictionary): User RMR dictionary built from RMR Transformation definition
-        - baseline_rmr (dictionary): Baseline RMR dictionary built from RMR Transformation definition
-        - proposed_rmr (dictionary): Proposed RMR dictionary built from RMR Transformation definition
+        - user_rmd (dictionary): User RMD dictionary built from RMD Transformation definition
+        - baseline_rmd (dictionary): Baseline RMD dictionary built from RMD Transformation definition
+        - proposed_rmd (dictionary): Proposed RMD dictionary built from RMD Transformation definition
     """
 
     # Each of these will remain None unless it is specified in
-    # rmr_transformations.
-    user_rmr = None
-    baseline_rmr = None
-    proposed_rmr = None
+    # rmd_transformations.
+    user_rmd = None
+    baseline_rmd = None
+    proposed_rmd = None
 
-    # Read in transformations dictionary. This will perturb a template or fully define an RMR (if no template defined)
-    rmr_transformations_dict = test_dict["rmr_transformations"]
+    # Read in transformations dictionary. This will perturb a template or fully define an RMD (if no template defined)
+    rmd_transformations_dict = test_dict["rmd_transformations"]
 
-    # If user/baseline/proposed RMR transformations exist, either update their existing template or set them directly
-    # from RMR transformations
-    if "user" in rmr_transformations_dict:
-        user_rmr = rmr_transformations_dict["user"]
+    # If user/baseline/proposed RMD transformations exist, either update their existing template or set them directly
+    # from RMD transformations
+    if "user" in rmd_transformations_dict:
+        user_rmd = rmd_transformations_dict["user"]
 
-    if "baseline" in rmr_transformations_dict:
-        baseline_rmr = rmr_transformations_dict["baseline"]
+    if "baseline" in rmd_transformations_dict:
+        baseline_rmd = rmd_transformations_dict["baseline"]
 
-    if "proposed" in rmr_transformations_dict:
-        proposed_rmr = rmr_transformations_dict["proposed"]
+    if "proposed" in rmd_transformations_dict:
+        proposed_rmd = rmd_transformations_dict["proposed"]
 
-    return user_rmr, baseline_rmr, proposed_rmr
+    return user_rmd, baseline_rmd, proposed_rmd
 
 
 def evaluate_outcome_enumeration_str(outcome_enumeration_str):
@@ -177,7 +174,7 @@ def process_test_result(test_result, test_dict, test_id):
     return outcome_text, received_expected_outcome
 
 
-def run_section_tests(test_json_name: str, ruleset_doc: str):
+def run_section_tests(test_json_name: str, ruleset_doc: RuleSet):
     """Runs all tests found in a given test JSON and prints results to console. Returns true/false describing whether
     or not all tests in the JSON result in the expected outcome.
 
@@ -227,19 +224,21 @@ def run_section_tests(test_json_name: str, ruleset_doc: str):
         test_list_dictionary = json.load(f)
 
     # get all rules in the ruleset.
-    available_rule_definitions = rulesets.__getrules__(ruleset_doc)
+    SchemaStore.set_ruleset(ruleset_doc)
+    SchemaEnums.update_schema_enum()
+    available_rule_definitions = rulesets.__getrules__()
     available_rule_definitions_dict = {
         rule_class[0]: rule_class[1] for rule_class in available_rule_definitions
     }
 
     # Cycle through tests in test JSON and run each individually
     for test_id in test_list_dictionary:
+        print(f"Processing Test: {test_id}")
         # Load next test dictionary from test list
         test_dict = test_list_dictionary[test_id]
 
-        # Generate RMR dictionaries for testing
-        user_rmr, baseline_rmr, proposed_rmr = generate_test_rmrs(test_dict)
-        rmr_trio = UserBaselineProposedVals(user_rmr, baseline_rmr, proposed_rmr)
+        # Generate RMD dictionaries for testing
+        rmd_trio = get_ruletest_rmd_models(test_dict)
 
         # Identify Section and rule
         section = test_dict["Section"]
@@ -266,25 +265,25 @@ def run_section_tests(test_json_name: str, ruleset_doc: str):
             all_tests_pass = False
             continue
 
-        # Evaluate rule and check for invalid RMRs
-        evaluation_dict = evaluate_rule(rule, rmr_trio)
+        # Evaluate rule and check for invalid RMDs
+        evaluation_dict = evaluate_rule(rule, rmd_trio, True)
         # pprint.pprint(evaluation_dict)
-        invalid_rmrs_dict = evaluation_dict["invalid_rmrs"]
+        invalid_rmds_dict = evaluation_dict["invalid_rmds"]
 
-        # If invalid RMRs exist, fail this rule and append failed message
-        if len(invalid_rmrs_dict) != 0:
-            # Find which RMRs were invalid
-            for invalid_rmr, invalid_rmr_message in invalid_rmrs_dict.items():
+        # If invalid RMDs exist, fail this rule and append failed message
+        if len(invalid_rmds_dict) != 0:
+            # Find which RMDs were invalid
+            for invalid_rmd, invalid_rmd_message in invalid_rmds_dict.items():
                 # Print message communicating that the schema is invalid
                 print(
-                    f"INVALID SCHEMA: Test {test_id}: {invalid_rmr} RMR: {invalid_rmr_message}"
+                    f"INVALID SCHEMA: Test {test_id}: {invalid_rmd} RMD: {invalid_rmd_message}"
                 )
 
             # Append failed message to rule
             test_result_dict["results"].append(False)
             all_tests_pass = False
 
-        # If RMRs are valid, check their outcomes
+        # If RMDs are valid, check their outcomes
         else:
             # Check the evaluation dictionary "outcomes" element
             # NOTE: The outcome structure can either be a string for a single result or a list of dictionaries with
@@ -301,7 +300,7 @@ def run_section_tests(test_json_name: str, ruleset_doc: str):
 
             # Check set of results for this test ID against expected outcome
             if test_dict["expected_rule_outcome"] == "pass":
-                # For an expected pass, ALL tested elements in the RMR triplet must pass
+                # For an expected pass, ALL tested elements in the RMD triplet must pass
                 if not all(test_result_dict[f"{test_id}"]):
                     print_errors = True
 
@@ -351,14 +350,16 @@ def generate_software_test_report(ruleset, section_list, output_json_path):
     """
 
     # Initialize report dictionary from which to continue testing. TODO- Future rulesets can be added here
-    if ruleset == "ashrae9012019":
+    if ruleset == RuleSet.ASHRAE9012019_RULESET:
+        SchemaStore.set_ruleset(RuleSet.ASHRAE9012019_RULESET)
+        SchemaEnums.update_schema_enum()
         report_dict = ASHRAE9012019SoftwareTestReport()
         report_dict.initialize_ruleset_report()
     else:
         raise Exception(f"Ruleset '{ruleset}' has no default software test report.")
 
     if section_list is None:
-        if ruleset == "ashrae902019":
+        if ruleset == RuleSet.ASHRAE9012019_RULESET:
             section_list = RuleSetTest.ASHRAE9012019_TEST_LIST
         else:
             raise Exception(
@@ -366,13 +367,14 @@ def generate_software_test_report(ruleset, section_list, output_json_path):
             )
 
     # Master list of RCT engine outcomes, used to populate report.
-    rct_outcomes = generate_rct_outcomes_list_from_section_list(section_list, ruleset)
+    rct_outcomes = generate_rct_outcomes_list_from_section_list(section_list)
 
     # Generate
     report_dict.generate(rct_outcomes, output_json_path)
+    return os.path.join(output_json_path, report_dict.ruleset_report_file)
 
 
-def generate_rct_outcomes_list_from_section_list(section_list, ruleset):
+def generate_rct_outcomes_list_from_section_list(section_list):
     """Runs all the ruletest JSONs for every section in section_list for a given ruleset. Returns the aggregated
     results as a dictionary that can be used in the generate function for ashrae901_2019_software_test_report
 
@@ -381,10 +383,6 @@ def generate_rct_outcomes_list_from_section_list(section_list, ruleset):
     section_list : list
 
         List of test JSON directorys in 'test_jsons/[MY_STANDARD]' directory. (e.g., ['section5', 'section6'])
-
-    ruleset: string
-
-        Name of the ruleset (e.g., 'ashrae9012019')
 
     Returns
     ----------
@@ -395,10 +393,10 @@ def generate_rct_outcomes_list_from_section_list(section_list, ruleset):
 
     """
 
-    # Master list of RCT engine outcomes and invalid RMR messages used to populate starting point for an RCTReport.
+    # Master list of RCT engine outcomes and invalid RMD messages used to populate starting point for an RCTReport.
     # Initialize them here
     rct_outcomes_list = []
-    invalid_rmr_messages = []
+    invalid_rmd_messages = []
 
     # Maps section lists to their titles
     section_dict = {
@@ -422,7 +420,7 @@ def generate_rct_outcomes_list_from_section_list(section_list, ruleset):
     }
 
     # get all rules in the ruleset.
-    available_rule_definitions = rulesets.__getrules__(ruleset)
+    available_rule_definitions = rulesets.__getrules__()
     available_rule_definitions_dict = {
         rule_class[0]: rule_class[1] for rule_class in available_rule_definitions
     }
@@ -433,7 +431,11 @@ def generate_rct_outcomes_list_from_section_list(section_list, ruleset):
     for section in section_list:
         # Get list of rule JSONs in section
         master_json_path = os.path.join(
-            os.path.dirname(__file__), "ruletest_jsons", ruleset, section, "rule*.json"
+            os.path.dirname(__file__),
+            "ruletest_jsons",
+            SchemaStore.SELECTED_RULESET,
+            section,
+            "rule*.json",
         )
         json_list = glob.glob(master_json_path)
 
@@ -449,11 +451,7 @@ def generate_rct_outcomes_list_from_section_list(section_list, ruleset):
                     # Load next test dictionary from test list
                     test_dict = test_list_dictionary[test_id]
 
-                    # Generate RMR dictionaries for testing
-                    user_rmr, baseline_rmr, proposed_rmr = generate_test_rmrs(test_dict)
-                    rmr_trio = UserBaselineProposedVals(
-                        user_rmr, baseline_rmr, proposed_rmr
-                    )
+                    rmd_trio = get_ruletest_rmd_models(test_dict)
 
                     # Identify Section and rule
                     section = test_dict["Section"]
@@ -470,24 +468,24 @@ def generate_rct_outcomes_list_from_section_list(section_list, ruleset):
                         print(f"RULE NOT FOUND: {function_name}. Cannot test {test_id}")
                         continue
 
-                    # Evaluate rule and check for invalid RMRs
-                    evaluation_dict = evaluate_rule(rule, rmr_trio)
+                    # Evaluate rule and check for invalid RMDs
+                    evaluation_dict = evaluate_rule(rule, rmd_trio, True)
 
-                    invalid_rmrs_dict = evaluation_dict["invalid_rmrs"]
+                    invalid_rmds_dict = evaluation_dict["invalid_rmds"]
 
-                    # If invalid RMRs exist, append failed message
-                    if len(invalid_rmrs_dict) != 0:
-                        # Find which RMRs were invalid
+                    # If invalid RMDs exist, append failed message
+                    if len(invalid_rmds_dict) != 0:
+                        # Find which RMDs were invalid
                         for (
-                            invalid_rmr,
-                            invalid_rmr_message,
-                        ) in invalid_rmrs_dict.items():
+                            invalid_rmd,
+                            invalid_rmd_message,
+                        ) in invalid_rmds_dict.items():
                             # Record message communicating that the schema is invalid
-                            invalid_rmr_messages.append(
-                                f"INVALID SCHEMA: Test {test_id}: {invalid_rmr} RMR: {invalid_rmr_message}"
+                            invalid_rmd_messages.append(
+                                f"INVALID SCHEMA: Test {test_id}: {invalid_rmd} RMD: {invalid_rmd_message}"
                             )
 
-                    # If RMRs are valid, check their outcomes
+                    # If RMDs are valid, check their outcomes
                     else:
                         # Get standard information
                         standard_dict = test_dict["standard"]
@@ -503,9 +501,9 @@ def generate_rct_outcomes_list_from_section_list(section_list, ruleset):
                         rule_test_outcome_dict["ruleset_section_title"] = section_dict[
                             str(test_dict["Section"])
                         ]
-                        rule_test_outcome_dict[
-                            "evaluation_type"
-                        ] = "FULL"  # TODO primary rule = FULL, else = APPLICABILITY
+                        rule_test_outcome_dict["evaluation_type"] = (
+                            "FULL" if rule.is_primary_rule else "APPLICABILITY"
+                        )
                         rule_test_outcome_dict[
                             "expected_rule_unit_test_evaluation_outcome"
                         ] = ruletest_outcome_dict[test_dict["expected_rule_outcome"]]
@@ -521,7 +519,7 @@ def generate_rct_outcomes_list_from_section_list(section_list, ruleset):
     # Aggregate results from section tests for report
     rct_outcomes_dict = dict()
     rct_outcomes_dict["outcomes"] = rct_outcomes_list
-    rct_outcomes_dict["invalid_rmrs"] = invalid_rmr_messages
+    rct_outcomes_dict["invalid_rmds"] = invalid_rmd_messages
 
     return rct_outcomes_dict
 
@@ -538,7 +536,7 @@ def validate_test_json_schema(test_json_path):
 
     """
 
-    # List capturing messages describing failed RMR schemas
+    # List capturing messages describing failed RMD schemas
     failure_list = []
 
     # Open
@@ -550,23 +548,23 @@ def validate_test_json_schema(test_json_path):
         # Load next test dictionary from test list
         test_dict = test_list_dictionary[test_id]
 
-        # Generate RMR dictionaries for testing
-        user_rmr, baseline_rmr, proposed_rmr = generate_test_rmrs(test_dict)
+        # Generate RMD dictionaries for testing
+        user_rmd, baseline_rmd, proposed_rmd = generate_test_rmds(test_dict)
 
-        # Evaluate RMRs against the schema
-        user_result = validate_rmr(user_rmr) if user_rmr != None else None
-        baseline_result = validate_rmr(baseline_rmr) if baseline_rmr != None else None
-        proposed_result = validate_rmr(proposed_rmr) if proposed_rmr != None else None
+        # Evaluate RMDs against the schema
+        user_result = validate_rmd(user_rmd) if user_rmd != None else None
+        baseline_result = validate_rmd(baseline_rmd) if baseline_rmd != None else None
+        proposed_result = validate_rmd(proposed_rmd) if proposed_rmd != None else None
 
         results_list = [user_result, baseline_result, proposed_result]
-        rmr_type_list = ["User", "Baseline", "Proposed"]
+        rmd_type_list = ["User", "Baseline", "Proposed"]
 
-        for result, rmr_type in zip(results_list, rmr_type_list):
+        for result, rmd_type in zip(results_list, rmd_type_list):
             # If result contains a dictionary with failure information, append failure to failure list
             if isinstance(result, dict):
                 if result["passed"] is not True:
                     error_message = result["error"]
-                    failure_message = f"Schema validation in {test_id} for the {rmr_type} RMR: {error_message}"
+                    failure_message = f"Schema validation in {test_id} for the {rmd_type} RMD: {error_message}"
                     failure_list.append(failure_message)
 
     if len(failure_list) == 0:
@@ -602,7 +600,7 @@ def evaluate_outcome_object(outcome_dict, test_result_dict, test_dict, test_id):
 
     test_dict: dict
 
-       Dictionary containing the rule test RMR triplets, expected outcome, and description information for the ruletest
+       Dictionary containing the rule test RMD triplets, expected outcome, and description information for the ruletest
        being tested against
 
     test_id: str
@@ -758,7 +756,7 @@ def validate_229_rmd(rmd_name, rmd_path):
     with open(rmd_path) as f:
         rmd = json.load(f)
 
-    result = validate_rmr(rmd)
+    result = validate_rmd(rmd)
 
     # If result contains a dictionary with failure information, append failure to failure list
     if isinstance(result, dict):

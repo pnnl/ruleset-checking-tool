@@ -1,6 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
@@ -44,22 +45,24 @@ class Section22Rule1(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section22Rule1, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
+            rmds_used=produce_ruleset_model_description(
+                USER=False, BASELINE_0=True, PROPOSED=False
+            ),
             each_rule=Section22Rule1.ChillerFluidLoopRule(),
-            index_rmr="baseline",
+            index_rmd=BASELINE_0,
             id="22-1",
             description="Baseline chilled water design supply temperature shall be modeled at 44F.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.8 Chilled-water design supply temperature (System 7, 8, 11, 12 and 13)",
             is_primary_rule=True,
-            rmr_context="ruleset_model_descriptions/0",
+            rmd_context="ruleset_model_descriptions/0",
             list_path="$.fluid_loops[*]",
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
-        baseline_system_types_dict = get_baseline_system_types(rmi_b)
-        # create a list containing all HVAC systems that are modeled in the rmi_b
+        rmd_b = context.BASELINE_0
+        baseline_system_types_dict = get_baseline_system_types(rmd_b)
+        # create a list containing all HVAC systems that are modeled in the rmd_b
         available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict
@@ -73,19 +76,21 @@ class Section22Rule1(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.baseline
-        chiller_loop_ids = find_all("chillers[*].cooling_loop", rmi_b)
+        rmd_b = context.BASELINE_0
+        chiller_loop_ids = find_all("chillers[*].cooling_loop", rmd_b)
         return {"loop_chiller_dict": chiller_loop_ids}
 
     def list_filter(self, context_item, data):
-        fluid_loop_b = context_item.baseline
+        fluid_loop_b = context_item.BASELINE_0
         loop_chiller_dict = data["loop_chiller_dict"]
         return fluid_loop_b["id"] in loop_chiller_dict
 
     class ChillerFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
             super(Section22Rule1.ChillerFluidLoopRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, False),
+                rmds_used=produce_ruleset_model_description(
+                    USER=False, BASELINE_0=True, PROPOSED=False
+                ),
                 required_fields={
                     "$": ["cooling_or_condensing_design_and_control"],
                     "cooling_or_condensing_design_and_control": [
@@ -95,7 +100,7 @@ class Section22Rule1(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            fluid_loop_b = context.baseline
+            fluid_loop_b = context.BASELINE_0
             design_supply_temperature = fluid_loop_b[
                 "cooling_or_condensing_design_and_control"
             ]["design_supply_temperature"]

@@ -1,3 +1,6 @@
+from typing import TypedDict
+
+from pint import Quantity
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_dict_of_zones_and_terminal_units_served_by_hvac_sys import (
     get_dict_of_zones_and_terminal_units_served_by_hvac_sys,
 )
@@ -10,7 +13,16 @@ from rct229.utils.utility_functions import (
 )
 
 
-def get_hvac_sys_and_assoc_zones_largest_exhaust_source(rmi, hvac_sys_id):
+class HVACSysAssocZonesLargestExhaustSource(TypedDict):
+    hvac_fan_sys_exhaust_sum: Quantity
+    maximum_zone_exhaust: Quantity
+    num_hvac_exhaust_fans: int
+    maximum_hvac_exhaust: Quantity
+
+
+def get_hvac_sys_and_assoc_zones_largest_exhaust_source(
+    rmd: dict, hvac_sys_id: str
+) -> HVACSysAssocZonesLargestExhaustSource:
     """
     Returns a list with the sum of the hvac fan system exhaust fan cfm values, the maximum zone level exhaust source
     across the zones associated with the HVAC system, the number of exhaust fans associated with the hvac fan system,
@@ -22,8 +34,8 @@ def get_hvac_sys_and_assoc_zones_largest_exhaust_source(rmi, hvac_sys_id):
 
     Parameters
     ----------
-    rmi dict
-    Dictionary of a rule model instance object in which the largest exhaust source CFM is to be returned.
+    rmd dict
+    Dictionary of a rule model description object in which the largest exhaust source CFM is to be returned.
 
     hvac_sys_id str
     The hvac system object id for which the largest exhaust source is being determined.
@@ -45,7 +57,7 @@ def get_hvac_sys_and_assoc_zones_largest_exhaust_source(rmi, hvac_sys_id):
     design.
     """
     zones_and_terminal_units_served_by_hvac_sys_dict = (
-        get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmi)
+        get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmd)
     )
     assert_(
         hvac_sys_id in zones_and_terminal_units_served_by_hvac_sys_dict,
@@ -55,7 +67,7 @@ def get_hvac_sys_and_assoc_zones_largest_exhaust_source(rmi, hvac_sys_id):
     )
 
     # HVAC level exhaust fan
-    hvac = find_exactly_one_hvac_system(rmi, hvac_sys_id)
+    hvac = find_exactly_one_hvac_system(rmd, hvac_sys_id)
     hvac_fan_sys_exhaust_list = find_all("$.fan_system.exhaust_fans[*]", hvac)
     hvac_fan_sys_exhaust_flow_list = [
         exhaust_fan.get("design_airflow", ZERO.FLOW)
@@ -72,7 +84,7 @@ def get_hvac_sys_and_assoc_zones_largest_exhaust_source(rmi, hvac_sys_id):
             [
                 find_one(
                     "$.zonal_exhaust_fan.design_airflow",
-                    find_exactly_one_zone(rmi, zone_id),
+                    find_exactly_one_zone(rmd, zone_id),
                 )
                 for zone_id in zone_id_list
             ],

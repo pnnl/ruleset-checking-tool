@@ -1,6 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.are_all_hvac_sys_fan_objects_autosized import (
     are_all_hvac_sys_fan_objs_autosized,
 )
@@ -39,42 +40,44 @@ class Section19Rule15(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section19Rule15, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, True),
+            rmds_used=produce_ruleset_model_description(
+                USER=False, BASELINE_0=True, PROPOSED=True
+            ),
             each_rule=Section19Rule15.HVACRule(),
-            index_rmr="baseline",
+            index_rmd=BASELINE_0,
             id="19-15",
             description="For baseline system types 9 & 10, the system design supply airflow rates shall be based on the temperature difference between a supply air temperature set point of 105°F and the design space-heating temperature set point, the minimum outdoor airflow rate, or the airflow rate required to comply with applicable codes or accreditation standards, whichever is greater.",
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1.2.8.2",
             is_primary_rule=True,
-            rmr_context="ruleset_model_descriptions/0",
+            rmd_context="ruleset_model_descriptions/0",
             list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
         )
 
     def create_data(self, context, data):
-        rmi_b = context.baseline
-        rmi_p = context.proposed
-        baseline_system_types_dict = get_baseline_system_types(rmi_b)
+        rmd_b = context.BASELINE_0
+        rmd_p = context.PROPOSED
+        baseline_system_types_dict = get_baseline_system_types(rmd_b)
 
         zones_and_terminal_units_served_by_hvac_sys_dict = (
-            get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmi_b)
+            get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmd_b)
         )
 
         hvac_info_dict_b = {}
         for hvac_id_b in find_all(
             "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].id",
-            rmi_b,
+            rmd_b,
         ):
             hvac_info_dict_b[hvac_id_b] = {
                 "are_all_hvac_sys_fan_objs_autosized": are_all_hvac_sys_fan_objs_autosized(
-                    rmi_b, hvac_id_b
+                    rmd_b, hvac_id_b
                 ),
                 "all_design_setpoints_105": all(
                     [
                         std_equal(
                             REQ_DESIGN_SUPPLY_AIR_TEMP_SETPOINT.to(ureg.kelvin),
                             getattr_(
-                                find_exactly_one_terminal_unit(rmi_b, terminal_id_b),
+                                find_exactly_one_terminal_unit(rmd_b, terminal_id_b),
                                 "Terminal",
                                 "supply_design_heating_setpoint_temperature",
                             ).to(ureg.kelvin),
@@ -96,7 +99,7 @@ class Section19Rule15(RuleDefinitionListIndexedBase):
                         ]
                         for terminal_p in find_all(
                             f'$.buildings[*].building_segments[*].zones[*][?(@.id = "{zone_id_b}")].terminals[*]',
-                            rmi_p,
+                            rmd_p,
                         )
                     ],
                     ZERO.FLOW,
@@ -109,12 +112,15 @@ class Section19Rule15(RuleDefinitionListIndexedBase):
         }
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
-        baseline_system_types_dict = get_baseline_system_types(rmi_b)
+        rmd_b = context.BASELINE_0
+        baseline_system_types_dict = get_baseline_system_types(rmd_b)
 
         return any(
             [
-                baseline_system_type_compare(system_type, applicable_sys_type, False)
+                baseline_system_types_dict[system_type]
+                and baseline_system_type_compare(
+                    system_type, applicable_sys_type, False
+                )
                 for system_type in baseline_system_types_dict
                 for applicable_sys_type in APPLICABLE_SYS_TYPES
             ]
@@ -123,7 +129,9 @@ class Section19Rule15(RuleDefinitionListIndexedBase):
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
             super(Section19Rule15.HVACRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, True),
+                rmds_used=produce_ruleset_model_description(
+                    USER=False, BASELINE_0=True, PROPOSED=True
+                ),
                 required_fields={
                     "$": ["fan_system"],
                     "fan_system": ["minimum_outdoor_airflow"],
@@ -131,7 +139,7 @@ class Section19Rule15(RuleDefinitionListIndexedBase):
             )
 
         def is_applicable(self, context, data=None):
-            hvac_b = context.baseline
+            hvac_b = context.BASELINE_0
             hvac_id_b = hvac_b["id"]
             baseline_system_types_dict = data["baseline_system_types_dict"]
 
@@ -141,7 +149,7 @@ class Section19Rule15(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            hvac_b = context.baseline
+            hvac_b = context.BASELINE_0
             hvac_id_b = hvac_b["id"]
 
             fan_system_b = hvac_b["fan_system"]

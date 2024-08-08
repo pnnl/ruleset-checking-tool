@@ -1,7 +1,7 @@
+from typing import Literal, Type
+
 import pydash
 from pint import Quantity
-
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
@@ -9,6 +9,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.is_cz_0_to_3a_bool import (
     is_cz_0_to_3a_bool,
 )
 from rct229.schema.config import ureg
+from rct229.schema.schema_enums import SchemaEnums
 
 PUBLIC_ASSEMBLY_BUILDING_AREA_THRESHOLD = 120_000 * ureg("ft2")
 RETAIL_FLOOR_NUMBER_THRESHOLD = 3
@@ -18,7 +19,7 @@ OTHER_NON_RESIDENTIAL_BUILDING_AREA_LOWER_THRESHOLD = 25_000 * ureg("ft2")
 OTHER_NON_RESIDENTIAL_BUILDING_AREA_HIGHER_THRESHOLD = 150_000 * ureg("ft2")
 OTHER_NON_RESIDENTIAL_FLOOR_NUMBER_LOWER_THRESHOLD = 4
 OTHER_NON_RESIDENTIAL_FLOOR_NUMBER_HIGHER_THRESHOLD = 5
-HVAC_BUILDING_AREA_TYPE_OPTIONS = schema_enums[
+HVAC_BUILDING_AREA_TYPE_OPTIONS = SchemaEnums.schema_enums[
     "HeatingVentilatingAirConditioningBuildingAreaOptions2019ASHRAE901"
 ]
 
@@ -33,7 +34,7 @@ def expected_system_type_from_table_g3_1_1_dict(
     climate_zone: str,
     number_of_floors: int,
     building_area: Quantity,
-):
+) -> dict[Literal["expected_system_type", "system_origin"], [str, Type[HVAC_SYS]]]:
     """
 
     Parameters

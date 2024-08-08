@@ -1,6 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
+from rct229.rulesets.ashrae9012019 import USER
 from rct229.utils.jsonpath_utils import find_all
 
 
@@ -9,40 +10,46 @@ class Section12Rule3(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section12Rule3, self).__init__(
-            rmrs_used=UserBaselineProposedVals(True, False, True),
+            rmds_used=produce_ruleset_model_description(
+                USER=True, BASELINE_0=False, PROPOSED=True
+            ),
             each_rule=Section12Rule3.BuildingRule(),
-            index_rmr="user",
+            index_rmd=USER,
             id="12-3",
-            description="User RMR Space ID in Proposed RMR",
+            description="User RMD Space ID in Proposed RMD",
             ruleset_section_title="Receptacle",
             standard_section="Section Table G3.1-12 Receptacles: Modeling Requirements for the Proposed design",
             is_primary_rule=True,
-            rmr_context="ruleset_model_descriptions/0/buildings",
+            rmd_context="ruleset_model_descriptions/0/buildings",
         )
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section12Rule3.BuildingRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(True, False, True),
+                rmds_used=produce_ruleset_model_description(
+                    USER=True, BASELINE_0=False, PROPOSED=True
+                ),
                 each_rule=Section12Rule3.BuildingRule.SpaceRule(),
-                index_rmr="user",
-                list_path="$..spaces[*]",  # All spaces in the buliding
+                index_rmd=USER,
+                list_path="$..spaces[*]",  # All spaces in the building
             )
 
         def create_data(self, context, data):
             # Get the Proposed space id values
-            return {"proposed_space_ids": find_all("$..spaces[*].id", context.proposed)}
+            return {"proposed_space_ids": find_all("$..spaces[*].id", context.PROPOSED)}
 
         class SpaceRule(RuleDefinitionBase):
             def __init__(self):
                 super(Section12Rule3.BuildingRule.SpaceRule, self).__init__(
-                    # No longer need the proposed RMR
-                    rmrs_used=UserBaselineProposedVals(True, False, False)
+                    # No longer need the proposed RMD
+                    rmds_used=produce_ruleset_model_description(
+                        USER=True, BASELINE_0=False, PROPOSED=False
+                    ),
                 )
 
             def get_calc_vals(self, context, data=None):
                 return {
-                    "user_space_id": context.user["id"],
+                    "user_space_id": context.USER["id"],
                 }
 
             def rule_check(self, context, calc_vals, data):

@@ -1,9 +1,8 @@
 import pytest
-
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_min_oa_cfm_sch_zone import (
     get_min_oa_cfm_sch_zone,
 )
-from rct229.schema.validate import schema_validate_rmr
+from rct229.schema.validate import schema_validate_rmd
 from rct229.utils.assertions import RCTFailureException
 
 
@@ -69,6 +68,7 @@ def create_flexible_schedule_length(schedule_length):
                 "type": "HEATING",
             }
         ],
+        "type": "BASELINE_0",
     }
     return TEST_RMD
 
@@ -76,25 +76,27 @@ def create_flexible_schedule_length(schedule_length):
 TEST_RMD_CORRECT_LENGTH = create_flexible_schedule_length(8760)
 TEST_RMD_WRONG_LENGTH = create_flexible_schedule_length(8700)
 
-TEST_RMD_FULL_CORRECT_LENGTH = {
+TEST_RPD_FULL_CORRECT_LENGTH = {
     "id": "229_01",
     "ruleset_model_descriptions": [TEST_RMD_CORRECT_LENGTH],
+    "data_timestamp": "2024-02-12T09:00Z",
 }
-TEST_RMD_FULL_WRONG_LENGTH = {
+TEST_RPD_FULL_WRONG_LENGTH = {
     "id": "229_01",
     "ruleset_model_descriptions": [TEST_RMD_WRONG_LENGTH],
+    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 
 def test__TEST_RMD_CORRECT_LENGTH__is_valid():
-    schema_validation_result = schema_validate_rmr(TEST_RMD_FULL_CORRECT_LENGTH)
+    schema_validation_result = schema_validate_rmd(TEST_RPD_FULL_CORRECT_LENGTH)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
 
 
 def test__TEST_RMD_WRONG_LENGTH__is_valid():
-    schema_validation_result = schema_validate_rmr(TEST_RMD_FULL_WRONG_LENGTH)
+    schema_validation_result = schema_validate_rmd(TEST_RPD_FULL_WRONG_LENGTH)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
@@ -107,6 +109,6 @@ def test__get_min_oa_cfm_sch_zone__pass():
 def test__get_min_oa_cfm_sch_zone__wrong_length():
     with pytest.raises(
         RCTFailureException,
-        match="The length of schedule has to be either 8760 or 8784, but is 8700.",
+        match="The length of schedule has to be 8760, but is 8700.",
     ):
         get_min_oa_cfm_sch_zone(TEST_RMD_WRONG_LENGTH, "Zone 1")

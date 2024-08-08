@@ -1,6 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.data_fns.table_3_1_3_11_fns import (
     table_3_1_3_11_lookup,
 )
@@ -34,9 +35,11 @@ class Section22Rule20(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section22Rule20, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
+            rmds_used=produce_ruleset_model_description(
+                USER=False, BASELINE_0=True, PROPOSED=False
+            ),
             each_rule=Section22Rule20.HeatRejectionRule(),
-            index_rmr="baseline",
+            index_rmd=BASELINE_0,
             id="22-20",
             description="The baseline minimum condenser water reset temperature is per Table G3.1.3.11.",
             ruleset_section_title="HVAC - Chiller",
@@ -46,18 +49,18 @@ class Section22Rule20(RuleDefinitionListIndexedBase):
             required_fields={
                 "$": ["ruleset_model_descriptions", "weather"],
             },
-            data_items={"climate_zone": ("baseline", "weather/climate_zone")},
+            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
         )
 
     def is_applicable(self, context, data=None):
-        rmd_b = context.baseline
+        rmd_b = context.BASELINE_0
         assert_(
             rmd_b,
             "ruleset_model_instance list is empty",
         )
-        rmi_b = rmd_b["ruleset_model_descriptions"][0]
-        baseline_system_types_dict = get_baseline_system_types(rmi_b)
-        # create a list containing all HVAC systems that are modeled in the rmi_b
+        rmd_b = rmd_b["ruleset_model_descriptions"][0]
+        baseline_system_types_dict = get_baseline_system_types(rmd_b)
+        # create a list containing all HVAC systems that are modeled in the rmd_b
         available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict.keys()
@@ -73,14 +76,16 @@ class Section22Rule20(RuleDefinitionListIndexedBase):
     class HeatRejectionRule(RuleDefinitionBase):
         def __init__(self):
             super(Section22Rule20.HeatRejectionRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, False),
+                rmds_used=produce_ruleset_model_description(
+                    USER=False, BASELINE_0=True, PROPOSED=False
+                ),
                 required_fields={
                     "$": ["leaving_water_setpoint_temperature"],
                 },
             )
 
         def get_calc_vals(self, context, data=None):
-            heat_rejection_b = context.baseline
+            heat_rejection_b = context.BASELINE_0
 
             tower_leaving_temperature_b = table_3_1_3_11_lookup(data["climate_zone"])[
                 "leaving_water_temperature"

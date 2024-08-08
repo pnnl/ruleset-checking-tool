@@ -2,56 +2,51 @@
 # Envelope - Rule 5-13  
 
 **Rule ID:** 5-13  
-**Rule Description:** Baseline floor assemblies must  match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-9.  
-**Rule Assertion:** Baseline RMR floor: U_factor = expected value  
-**Appendix G Section:** Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building  
-**Appendix G Section Reference:** Tables G3.4-1 to G3.4-8  
+**Rule Description:** Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same in the baseline as in the proposed design.  
+**Appendix G Section:** Section G3.1-5 Building Envelope Modeling Requirements for the Baseline building  
+**Appendix G Section Reference:** None  
 
-**Applicability:** All required data elements exist for B_RMR  
+**Applicability:** All required data elements exist for B_RMD  
 **Applicability Checks:** None  
 
-**Manual Check:** Yes  
+**Manual Check:** None  
 **Evaluation Context:** Each Data Element  
-**Data Lookup:** Tables G3.4-1 to G3.4-8  
-**Function Call:**  
+**Data Lookup:** None  
+**Function Call:**
 
-  1. get_surface_conditioning_category()  
-  2. get_opaque_surface_type()  
+  - get_surface_conditioning_category()
+  - get_opaque_surface_type()
+  - match_data_element()
 
 ## Rule Logic:  
 
-- Get building climate zone: ```climate_zone = B_RMR.weather.climate_zone```  
+- Get surface conditioning category dictionary for B_RMD: `scc_dictionary_b = get_surface_conditioning_category(B_RMD)`  
 
-- Get surface conditioning category dictionary for B_RMR: ```scc_dictionary_b = get_surface_conditioning_category(B_RMR)```  
+- For each building segment in the Proposed model: `for building_segment_b in B_RMD.building.building_segments:`  
 
-- For each building segment in the Baseline model: ```for building_segment_b in B_RMR.building.building_segments:```  
+  - For each zone in thermal block: `for zone_b in building_segment_b.zones:`  
 
-  - For each zone in thermal block: ```for zone_b in building_segment_b.zones:```  
+    - For each surface in zone: `for surface_b in zone_b.surfaces:`  
 
-    - For each surface in zone: ```for surface_b in zone_b.surfaces:```  
+      - Check if surface is unregulated: `if ( scc_dictionary_b[surface_b.id] == UNREGULATED ):`  
 
-      - Check if surface is floor: ```if get_opaque_surface_type(surface_b) == "FLOOR":```  
+        - Get surface type: `surface_type_b = get_opaque_surface_type(surface_b)`
 
-        - Get surface construction: ```surface_construction_b = surface_b.construction```  
+        - Get matching surface from P_RMD: `surface_p = match_data_element(P_RMD, surfaces, surface_b.id)`  
 
-        - Get surface conditioning category: ```scc_b = scc_dictionary_b[surface_b.id]```  
+          **Rule Assertion:**  
 
-          - If surface is exterior residential, exterior non-residential, or semi-exterior, get baseline construction from Table G3.4-1 to G3.4-8 based on climate zone, surface conditioning category and surface type: ```if ( ( scc_b == "EXTERIOR RESIDENTIAL" ) OR ( scc_b == "EXTERIOR NON-RESIDENTIAL" ) OR ( scc_b == "SEMI-EXTERIOR" ) ): target_u_factor = data_lookup(table_G3_4, climate_zone, scc_b, "FLOOR")```  
+          - Case 1: If surface type is roof, floor or above-grade wall, and surface construction U-factor in B_RMD matches P_RMD: `if ( surface_type_b in ["ROOF", "FLOOR", "ABOVE-GRADE WALL"] ) AND ( surface_b.construction.u_factor == surface_p.construction.u_factor ): PASS`
 
-          - Else if surface is exterior mixed, get baseline construction for both residential and non-residential type floor: ```else if ( scc_b == "EXTERIOR MIXED" ): target_u_factor_res = data_lookup(table_G3_4, climate_zone, "EXTERIOR RESIDENTIAL", "FLOOR"), target_u_factor_nonres = data_lookup(table_G3_4, climate_zone, "EXTERIOR NON-RESIDENTIAL", "FLOOR")```  
+          - Case 2: Else if surface type is heated slab-on-grade or unheated slab-on-grade, and surface construction F-factor in B_RMD matches P_RMD: `if ( surface_type_b in ["HEATED SLAB-ON-GRADE", "UNHEATED SLAB-ON-GRADE"] ) AND ( surface_b.construction.f_factor == surface_p.construction.f_factor ): PASS`
 
-            - If residential and non-residential type floor construction requirements are the same, save as baseline construction: ```if target_u_factor_res == target_u_factor_nonres: target_u_factor = target_u_factor_res```  
+          - Case 3: Else if surface type is below-grade wall, and surface construction C-factor in B_RMD matches P_RMD: `if ( surface_type_b =="BELOW-GRADE WALL" ) AND ( surface_b.construction.c_factor == surface_p.construction.c_factor ): PASS`
 
-            - Else: ```manual_review_flag = TRUE```  
+          - Case 4: Else: `else: FAIL`
 
-        **Rule Assertion:**  
+**Notes:**
 
-        Case 1: If zone has both residential and non-residential spaces and the construction requirements for floor are different, request manual review: ```if manual_review_flag == TRUE: outcome == "UNDETERMINED```  
+1. Update Rule ID from 5-17 to 5-13 on 10/26/2023
 
-        Case 2: Else if floor U-factor matches Table G3.4: ```else if surface_construction_b.u_factor == target_u_factor: outcome == PASS```  
-        
-            - Conservative comparison less equal: ```if AHJ_RA_compare == True and surface_construction_b.u_factor <= target_u_factor: PASS```
 
-        Case 3: Else: ```else: outcome == "FAIL"```  
-
-**[Back](../_toc.md)**
+**[Back](../_toc.md)

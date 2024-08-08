@@ -1,6 +1,7 @@
 from rct229.rule_engine.partial_rule_definition import PartialRuleDefinition
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
+from rct229.rulesets.ashrae9012019 import PROPOSED
 from rct229.rulesets.ashrae9012019.ruleset_functions.check_purchased_chw_hhw_status_dict import (
     check_purchased_chw_hhw_status_dict,
 )
@@ -11,9 +12,11 @@ class Section21Rule1(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section21Rule1, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, False, True),
+            rmds_used=produce_ruleset_model_description(
+                USER=False, BASELINE_0=False, PROPOSED=True
+            ),
             each_rule=Section21Rule1.RulesetModelInstanceRule(),
-            index_rmr="proposed",
+            index_rmd=PROPOSED,
             id="21-1",
             description="For systems using purchased hot water or steam, the heating source shall be "
             "modeled as purchased hot water or steam in both the proposed design and "
@@ -34,10 +37,12 @@ class Section21Rule1(RuleDefinitionListIndexedBase):
     class RulesetModelInstanceRule(PartialRuleDefinition):
         def __init__(self):
             super(Section21Rule1.RulesetModelInstanceRule, self,).__init__(
-                rmrs_used=UserBaselineProposedVals(False, False, True),
+                rmds_used=produce_ruleset_model_description(
+                    USER=False, BASELINE_0=False, PROPOSED=True
+                ),
             )
 
         def applicability_check(self, context, calc_vals, data):
-            rmi_p = context.proposed
-            purchased_chw_hhw_status_dict_p = check_purchased_chw_hhw_status_dict(rmi_p)
+            rmd_p = context.PROPOSED
+            purchased_chw_hhw_status_dict_p = check_purchased_chw_hhw_status_dict(rmd_p)
             return purchased_chw_hhw_status_dict_p["purchased_heating"]

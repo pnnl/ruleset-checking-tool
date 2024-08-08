@@ -3,21 +3,22 @@
         "Section": 22,
         "Rule": 26,
         "Test": "a",
-        "test_description": "Baseline building has one zone.  HVAC is system type 11.1 and is correctly modeled with a 12 W/gpm primary pump.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 11 with a chilled water system. The primary chilled water pump power is 12 W/gpm at design conditions.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-26",
             "ruleset_reference": "G3.1.3.10",
-            "rule_description": "For chilled-water systems served by chiller(s) and serves baseline System-11, the baseline building constant-volume primary pump power shall be modeled as 12 W/gpm.",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "Baseline chilled water loops that do not use purchased chilled water and do serve computer rooms (baseline system type 11) shall have a constant-flow primary pump power of 12 W/gpm at design conditions.",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -105,7 +106,8 @@
                                 ],
                                 "pump_power_per_flow_rate": 190.22457067371204
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -115,21 +117,22 @@
         "Section": 22,
         "Rule": 26,
         "Test": "b",
-        "test_description": "Baseline building has one zone.  HVAC is system type 11.1 and is incorrectly modeled with a 15 W/gpm primary pump.  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 11 with a chilled water system. The primary chilled water pump power is 15 W/gpm at design conditions.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-26",
             "ruleset_reference": "G3.1.3.10",
-            "rule_description": "For chilled-water systems served by chiller(s) and serves baseline System-11, the baseline building constant-volume primary pump power shall be modeled as 12 W/gpm.",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "Baseline chilled water loops that do not use purchased chilled water and do serve computer rooms (baseline system type 11) shall have a constant-flow primary pump power of 12 W/gpm at design conditions.",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -217,7 +220,8 @@
                                 ],
                                 "pump_power_per_flow_rate": 237.78071334214002
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -227,21 +231,22 @@
         "Section": 22,
         "Rule": 26,
         "Test": "c",
-        "test_description": "Baseline building has one zone.  HVAC is system type 11.2 and is correctly modeled with a 12 W/gpm primary pump.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 11 with a chilled water system. The primary chilled water pump power is 12 W/gpm at design conditions.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-26",
             "ruleset_reference": "G3.1.3.10",
-            "rule_description": "For chilled-water systems served by chiller(s) and serves baseline System-11, the baseline building constant-volume primary pump power shall be modeled as 12 W/gpm.",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "Baseline chilled water loops that do not use purchased chilled water and do serve computer rooms (baseline system type 11) shall have a constant-flow primary pump power of 12 W/gpm at design conditions.",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -346,7 +351,8 @@
                                 ],
                                 "pump_power_per_flow_rate": 190.22457067371204
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -356,21 +362,22 @@
         "Section": 22,
         "Rule": 26,
         "Test": "d",
-        "test_description": "Baseline building has one zone.  HVAC is system type 11.2 and is incorrectly modeled with a 15 W/gpm primary pump.  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 11 with a chilled water system. The primary chilled water pump power is 15 W/gpm at design conditions.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-26",
             "ruleset_reference": "G3.1.3.10",
-            "rule_description": "For chilled-water systems served by chiller(s) and serves baseline System-11, the baseline building constant-volume primary pump power shall be modeled as 12 W/gpm.",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "Baseline chilled water loops that do not use purchased chilled water and do serve computer rooms (baseline system type 11) shall have a constant-flow primary pump power of 12 W/gpm at design conditions.",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -475,7 +482,8 @@
                                 ],
                                 "pump_power_per_flow_rate": 237.78071334214002
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -485,21 +493,22 @@
         "Section": 22,
         "Rule": 26,
         "Test": "e",
-        "test_description": "Baseline building has one zone.  HVAC is system type 12.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 12 with a chilled water system. The chilled water system does not serve a computer room.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-26",
             "ruleset_reference": "G3.1.3.10",
-            "rule_description": "For chilled-water systems served by chiller(s) and serves baseline System-11, the baseline building constant-volume primary pump power shall be modeled as 12 W/gpm.",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "Baseline chilled water loops that do not use purchased chilled water and do serve computer rooms (baseline system type 11) shall have a constant-flow primary pump power of 12 W/gpm at design conditions.",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -603,7 +612,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

@@ -1,7 +1,7 @@
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.jsonpath_utils import find_all, find_one
 
-CoolingSystemOptions = schema_enums["CoolingSystemOptions"]
+CoolingSystemOptions = SchemaEnums.schema_enums["CoolingSystemOptions"]
 
 APPLICABLE_COOLING_SYSTEM = [
     CoolingSystemOptions.DIRECT_EXPANSION,
@@ -11,22 +11,24 @@ APPLICABLE_COOLING_SYSTEM = [
 ]
 
 
-def get_proposed_hvac_modeled_with_virtual_cooling(rmi_u, rmi_p):
+def get_proposed_hvac_modeled_with_virtual_cooling(
+    rmd_u: dict, rmd_p: dict
+) -> list[str]:
     """
 
-    Get the list of HeatingVentilationAirAconditioningSystem in which Appendix G Table G3.1 #10 d is applicable (i.e.
-    space cooling is modeled in the P_RMR but not the U_RMR). Table G3.1 #10 d states that "where no cooling system
+    Get the list of HeatingVentilatingAirconditioningSystem in which Appendix G Table G3.1 #10 d is applicable (i.e.
+    space cooling is modeled in the P_RMD but not the U_RMD). Table G3.1 #10 d states that "where no cooling system
     exists or no cooling system has been submitted with design documents, the cooling system type shall be the same in
     the proposed as modeled in the baseline building design and shall comply with the requirements of Section 6."
 
     Parameters
     ----------
-    rmi_u dict
-        A dictionary representing a building as defined by the ASHRAE229 schema. The user RMI to determine if an
+    rmd_u dict
+        A dictionary representing a building as defined by the ASHRAE229 schema. The user RMD to determine if an
         HVAC system has been designed or is existing with cooling.
-    rmi_p dict
-        A dictionary representing a building as defined by the ASHRAE229 schema. The proposed RMI to determine if the
-        same HVAC system has been modeled with cooling in the P-RMR.
+    rmd_p dict
+        A dictionary representing a building as defined by the ASHRAE229 schema. The proposed RMD to determine if the
+        same HVAC system has been modeled with cooling in the P-RMD.
     Returns
     -------
     proposed_hvac_modeled_with_virtual_cooling_list list
@@ -37,7 +39,7 @@ def get_proposed_hvac_modeled_with_virtual_cooling(rmi_u, rmi_p):
     proposed_hvac_modeled_with_virtual_cooling_list = []
     for hvac_p in find_all(
         "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
-        rmi_p,
+        rmd_p,
     ):
         cooling_system_type_p = find_one("$.cooling_system.type", hvac_p)
         if cooling_system_type_p in APPLICABLE_COOLING_SYSTEM:
@@ -46,7 +48,7 @@ def get_proposed_hvac_modeled_with_virtual_cooling(rmi_u, rmi_p):
             cooling_system_type_u = find_one(
                 f"$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*][?("
                 f'@.cooling_system.id="{cooling_system_id}")].cooling_system.type',
-                rmi_u,
+                rmd_u,
             )
             if (
                 cooling_system_type_u is None

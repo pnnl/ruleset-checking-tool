@@ -1,12 +1,13 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.schema.config import ureg
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import getattr_
 from rct229.utils.std_comparisons import std_equal
 
-AIR_ECONOMIZER = schema_enums["AirEconomizerOptions"]
+AIR_ECONOMIZER = SchemaEnums.schema_enums["AirEconomizerOptions"]
 CLIMATE_ZONE_70F = ["CZ5A", "CZ6A"]
 CLIMATE_ZONE_75F = [
     "CZ2B",
@@ -27,9 +28,11 @@ class Section19Rule12(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section19Rule12, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
+            rmds_used=produce_ruleset_model_description(
+                USER=False, BASELINE_0=True, PROPOSED=False
+            ),
             each_rule=Section19Rule12.HVACRule(),
-            index_rmr="baseline",
+            index_rmd=BASELINE_0,
             id="19-12",
             description="The baseline system economizer high-limit shutoff shall be a dry-bulb fixed switch with set-point temperatures in accordance with the values in Table G3.1.2.7.",
             ruleset_section_title="HVAC - General",
@@ -40,20 +43,22 @@ class Section19Rule12(RuleDefinitionListIndexedBase):
                 "$": ["weather"],
                 "weather": ["climate_zone"],
             },
-            data_items={"climate_zone": ("baseline", "weather/climate_zone")},
+            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
         )
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
             super(Section19Rule12.HVACRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, False),
+                rmds_used=produce_ruleset_model_description(
+                    USER=False, BASELINE_0=True, PROPOSED=False
+                ),
                 required_fields={
                     "$": ["fan_system"],
                 },
             )
 
         def is_applicable(self, context, data=None):
-            hvac_b = context.baseline
+            hvac_b = context.BASELINE_0
             climate_zone_b = data["climate_zone"]
             fan_system_b = hvac_b["fan_system"]
 
@@ -64,7 +69,7 @@ class Section19Rule12(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            hvac_b = context.baseline
+            hvac_b = context.BASELINE_0
             climate_zone_b = data["climate_zone"]
             fan_system_b = hvac_b["fan_system"]
 
@@ -83,9 +88,9 @@ class Section19Rule12(RuleDefinitionListIndexedBase):
             )
 
             if climate_zone_b in CLIMATE_ZONE_70F:
-                req_high_limit_temp = 70 * ureg("degR")
+                req_high_limit_temp = 70 * ureg("degF")
             elif climate_zone_b in CLIMATE_ZONE_75F:
-                req_high_limit_temp = 75 * ureg("degR")
+                req_high_limit_temp = 75 * ureg("degF")
 
             return {
                 "high_limit_temp_b": high_limit_temp_b,
@@ -99,6 +104,9 @@ class Section19Rule12(RuleDefinitionListIndexedBase):
             air_economizer_type_b = calc_vals["air_economizer_type_b"]
 
             return (
-                std_equal(req_high_limit_temp, high_limit_temp_b)
+                std_equal(
+                    req_high_limit_temp.to(ureg.kelvin),
+                    high_limit_temp_b.to(ureg.kelvin),
+                )
                 and air_economizer_type_b == AIR_ECONOMIZER.TEMPERATURE
             )

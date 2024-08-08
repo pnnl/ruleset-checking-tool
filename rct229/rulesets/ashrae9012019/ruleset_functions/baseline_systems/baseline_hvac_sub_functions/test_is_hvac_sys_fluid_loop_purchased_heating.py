@@ -1,7 +1,7 @@
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_fluid_loop_purchased_heating import (
     is_hvac_sys_fluid_loop_purchased_heating,
 )
-from rct229.schema.validate import schema_validate_rmr
+from rct229.schema.validate import schema_validate_rmd
 
 TEST_RMD = {
     "id": "test_rmd",
@@ -54,13 +54,18 @@ TEST_RMD = {
         {"id": "fluid_loop_2", "loop": "ST_Loop_1", "type": "STEAM"},
         {"id": "fluid_loop_3", "loop": "CHW_Loop_1", "type": "CHILLED_WATER"},
     ],
+    "type": "BASELINE_0",
 }
 
-TEST_RMD_FULL = {"id": "229_01", "ruleset_model_descriptions": [TEST_RMD]}
+TEST_RPD_FULL = {
+    "id": "229_01",
+    "ruleset_model_descriptions": [TEST_RMD],
+    "data_timestamp": "2024-02-12T09:00Z",
+}
 
 
-def test__TEST_RMD__is_valid():
-    schema_validation_result = schema_validate_rmr(TEST_RMD_FULL)
+def test__TEST_RPD__is_valid():
+    schema_validation_result = schema_validate_rmd(TEST_RPD_FULL)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"

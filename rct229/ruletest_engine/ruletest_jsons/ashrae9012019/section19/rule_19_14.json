@@ -3,21 +3,22 @@
         "Section": 19,
         "Rule": 14,
         "Test": "a",
-        "test_description": "System 11, no return or relief in the proposed, no return or relief cfm in the baseline - PASS",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 11. There is no return or relief fan in the proposed system, and no return or relief fan in the baseline.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-14",
             "ruleset_reference": "G3.1.2.8.1",
             "rule_description": "For baseline system types 1-8 and 11-13, if return or relief fans are specified in the proposed design, the baseline building design shall also be modeled with fans serving the same functions and sized for the baseline system supply fan air quantity less the minimum outdoor air, or 90% of the supply fan air quantity, whichever is larger.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -103,12 +104,14 @@
                                 "id": "Chilled Water Loop 1",
                                 "type": "COOLING"
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -194,7 +197,8 @@
                                 "id": "Chilled Water Loop 1",
                                 "type": "COOLING"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -204,21 +208,22 @@
         "Section": 19,
         "Rule": 14,
         "Test": "b",
-        "test_description": "System 11, no return or relief in the proposed,  return fan cfm modeled in the baseline - FAIL",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 11. There is no return or relief fan in the proposed system, but a return fan has been modeled in the baseline system.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-14",
             "ruleset_reference": "G3.1.2.8.1",
             "rule_description": "For baseline system types 1-8 and 11-13, if return or relief fans are specified in the proposed design, the baseline building design shall also be modeled with fans serving the same functions and sized for the baseline system supply fan air quantity less the minimum outdoor air, or 90% of the supply fan air quantity, whichever is larger.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -304,12 +309,14 @@
                                 "id": "Chilled Water Loop 1",
                                 "type": "COOLING"
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -395,7 +402,8 @@
                                 "id": "Chilled Water Loop 1",
                                 "type": "COOLING"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -405,21 +413,22 @@
         "Section": 19,
         "Rule": 14,
         "Test": "c",
-        "test_description": "System 5, return fan in the proposed, baseline supply 1000 cfm, minimum OA 200 cfm, return sized correctly at 900 cfm - PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 5. The proposed system includes a return fan. The baseline supply airflow is 1,000 cfm and the minimum outdoor airflow is 200 cfm. The baseline return fan is sized for 900 cfm.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-14",
             "ruleset_reference": "G3.1.2.8.1",
             "rule_description": "For baseline system types 1-8 and 11-13, if return or relief fans are specified in the proposed design, the baseline building design shall also be modeled with fans serving the same functions and sized for the baseline system supply fan air quantity less the minimum outdoor air, or 90% of the supply fan air quantity, whichever is larger.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -524,12 +533,14 @@
                                 "id": "Boiler Loop 1",
                                 "type": "HEATING"
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -632,7 +643,8 @@
                                 "id": "Boiler Loop 1",
                                 "type": "HEATING"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -642,21 +654,22 @@
         "Section": 19,
         "Rule": 14,
         "Test": "d",
-        "test_description": "System 5, return fan in the proposed, baseline supply 1000 cfm, minimum OA 50 cfm, return sized correctly at 950 cfm - PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 5. The proposed system includes a return fan. The baseline supply airflow is 1,000 cfm and the minimum outdoor airflow is 50 cfm. The baseline return fan is sized for 950 cfm.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-14",
             "ruleset_reference": "G3.1.2.8.1",
             "rule_description": "For baseline system types 1-8 and 11-13, if return or relief fans are specified in the proposed design, the baseline building design shall also be modeled with fans serving the same functions and sized for the baseline system supply fan air quantity less the minimum outdoor air, or 90% of the supply fan air quantity, whichever is larger.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -761,12 +774,14 @@
                                 "id": "Boiler Loop 1",
                                 "type": "HEATING"
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -869,7 +884,8 @@
                                 "id": "Boiler Loop 1",
                                 "type": "HEATING"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -879,21 +895,22 @@
         "Section": 19,
         "Rule": 14,
         "Test": "e",
-        "test_description": "System 5, return fan in the proposed, baseline supply 1000 cfm, minimum OA 200 cfm, return sized incorrectly at 800 cfm - FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 5. The proposed system inlcudes a return fan. The baseline supply airflow is 1,000 cfm and the minimum outdoor airflow is 200 cfm. The baseline return fan is sized at 800 cfm.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-14",
             "ruleset_reference": "G3.1.2.8.1",
             "rule_description": "For baseline system types 1-8 and 11-13, if return or relief fans are specified in the proposed design, the baseline building design shall also be modeled with fans serving the same functions and sized for the baseline system supply fan air quantity less the minimum outdoor air, or 90% of the supply fan air quantity, whichever is larger.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -998,12 +1015,14 @@
                                 "id": "Boiler Loop 1",
                                 "type": "HEATING"
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1106,7 +1125,8 @@
                                 "id": "Boiler Loop 1",
                                 "type": "HEATING"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -1116,21 +1136,23 @@
         "Section": 19,
         "Rule": 14,
         "Test": "f",
-        "test_description": "System 5, multiple return fans modeled - UNDETERMINED",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 5. The proposed system does not include a return fan. The baseline system includes more than one return fan.",
         "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "has more than one supply or return fan associated with the HVAC system in the baseline and therefore this check could not be conducted for this HVAC system. Conduct manual check for compliance with G3.1.2.8.1.",
         "standard": {
             "rule_id": "19-14",
             "ruleset_reference": "G3.1.2.8.1",
             "rule_description": "For baseline system types 1-8 and 11-13, if return or relief fans are specified in the proposed design, the baseline building design shall also be modeled with fans serving the same functions and sized for the baseline system supply fan air quantity less the minimum outdoor air, or 90% of the supply fan air quantity, whichever is larger.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1229,12 +1251,14 @@
                                 "id": "Boiler Loop 1",
                                 "type": "HEATING"
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1343,7 +1367,8 @@
                                 "id": "Boiler Loop 1",
                                 "type": "HEATING"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

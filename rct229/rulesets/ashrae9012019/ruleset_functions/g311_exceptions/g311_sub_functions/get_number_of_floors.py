@@ -1,17 +1,18 @@
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
-    get_zone_conditioning_category_rmi_dict,
     ZoneConditioningCategory as ZCC,
 )
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
+    get_zone_conditioning_category_rmd_dict,
+)
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.jsonpath_utils import find_all
 
-
-LightingSpaceOptions2019ASHRAE901TG37 = schema_enums[
+LightingSpaceOptions2019ASHRAE901TG37 = SchemaEnums.schema_enums[
     "LightingSpaceOptions2019ASHRAE901TG37"
 ]
 
 
-def get_number_of_floors(climate_zone, rmi):
+def get_number_of_floors(climate_zone: str, rmd: dict) -> int:
     """
     gets the number of floors in the building. Parking Garages are not counted
 
@@ -19,8 +20,8 @@ def get_number_of_floors(climate_zone, rmi):
     ----------
     climate_zone: str
         One of the ClimateZoneOptions2019ASHRAE901 enumerated values
-    rmi dict
-        A dictionary representing a ruleset model instance as defined by the ASHRAE229 schema
+    rmd dict
+        A dictionary representing a ruleset model description as defined by the ASHRAE229 schema
 
     Returns
     -------
@@ -32,13 +33,13 @@ def get_number_of_floors(climate_zone, rmi):
         [
             building.get("number_of_floors_above_grade", 0)
             + building.get("number_of_floors_below_grade", 0)
-            for building in find_all("$.buildings[*]", rmi)
+            for building in find_all("$.buildings[*]", rmd)
         ]
     )
 
     if number_of_floors <= 0:
-        zone_conditioning_category_dict = get_zone_conditioning_category_rmi_dict(
-            climate_zone, rmi
+        zone_conditioning_category_dict = get_zone_conditioning_category_rmd_dict(
+            climate_zone, rmd
         )
 
         def is_zone_conditioned(zone):
@@ -64,7 +65,7 @@ def get_number_of_floors(climate_zone, rmi):
                 ]
             )
 
-        zone_list = find_all("$.buildings[*].building_segments[*].zones[*]", rmi)
+        zone_list = find_all("$.buildings[*].building_segments[*].zones[*]", rmd)
         conditioned_zone_list = filter(is_zone_conditioned, zone_list)
         no_parking_conditioned_zone_list = filter(
             any_space_in_zone_parking_garage, conditioned_zone_list

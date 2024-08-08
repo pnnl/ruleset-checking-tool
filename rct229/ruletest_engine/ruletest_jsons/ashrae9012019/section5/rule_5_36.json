@@ -3,28 +3,29 @@
         "Section": 5,
         "Rule": 36,
         "Test": "a",
-        "test_description": " Project has one building segment and includes a conditioned zone that has two roof surfaces both of which have skylights. Each baseline subsurface's proportion of the building's total glazed area is equal to the proposed.",
+        "test_description": "Project has one building segment with one space that includes an exterior wall surface. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. Air leakage rate at wind pressure in unenclosed and unconditioned spaces is the same in the proposed design as in the user model",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-36",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (e)",
-            "rule_description": "Skylight area must be allocated to surfaces in the same proportion in the baseline as in the proposed design; Skylight orientation and tilt shall be the same as in the proposed design.",
-            "applicable_rmr": "Baseline RMR",
+            "ruleset_reference": "Table G3.1(5) Proposed Building Performance (b)",
+            "rule_description": "The air leakage rate in unconditioned and unenclosed spaces must be the same in the baseline and proposed design",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
-            "comparison_value": "Proposed RMR",
-            "primary_rule": "Y",
-            "schema_version": "0.0.29"
+            "comparison_value": "Proposed Model",
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
-                "id": "ASHRAE229",
+                "id": "RPD 1",
                 "weather": {
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -45,75 +46,42 @@
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
-                                                "terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
-                                                    }
-                                                ],
+                                                "infiltration": {
+                                                    "id": "Infiltration 1",
+                                                    "flow_rate": 4.009193529983999
+                                                },
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
-                                                        "tilt": 30,
-                                                        "area": 92.90303999999999,
-                                                        "subsurfaces": [
-                                                            {
-                                                                "id": "Subsurface 1",
-                                                                "classification": "SKYLIGHT",
-                                                                "glazed_area": 9.290303999999999,
-                                                                "opaque_area": 4.6451519999999995,
-                                                                "u_factor": 3.406958480583628
-                                                            }
-                                                        ]
-                                                    },
-                                                    {
-                                                        "id": "Surface 2",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 50,
-                                                        "area": 185.80607999999998,
-                                                        "subsurfaces": [
-                                                            {
-                                                                "id": "Subsurface 2",
-                                                                "classification": "SKYLIGHT",
-                                                                "glazed_area": 83.612736,
-                                                                "opaque_area": 9.290303999999999,
-                                                                "u_factor": 3.406958480583628
-                                                            }
-                                                        ]
+                                                        "tilt": 90,
+                                                        "area": 929.0303999999999,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "u_factor": 3.2366105565544463
+                                                        }
                                                     }
                                                 ]
-                                            }
-                                        ],
-                                        "heating_ventilating_air_conditioning_systems": [
-                                            {
-                                                "id": "HVAC 1",
-                                                "cooling_system": {
-                                                    "id": "Cooling System 1",
-                                                    "design_sensible_cool_capacity": 35170.0
-                                                },
-                                                "heating_system": {
-                                                    "id": "Heating System 1",
-                                                    "design_capacity": 8792.133333333333
-                                                }
                                             }
                                         ]
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             },
             "baseline": {
-                "id": "ASHRAE229",
+                "id": "RPD 1",
                 "weather": {
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -134,63 +102,29 @@
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
-                                                "terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
-                                                    }
-                                                ],
+                                                "infiltration": {
+                                                    "id": "Infiltration 1",
+                                                    "flow_rate": 4.009193529983999
+                                                },
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
-                                                        "tilt": 30,
-                                                        "area": 92.90303999999999,
-                                                        "subsurfaces": [
-                                                            {
-                                                                "id": "Subsurface 1",
-                                                                "classification": "SKYLIGHT",
-                                                                "glazed_area": 4.6451519999999995,
-                                                                "opaque_area": 2.3225759999999998,
-                                                                "u_factor": 3.406958480583628
-                                                            }
-                                                        ]
-                                                    },
-                                                    {
-                                                        "id": "Surface 2",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 50,
-                                                        "area": 185.80607999999998,
-                                                        "subsurfaces": [
-                                                            {
-                                                                "id": "Subsurface 2",
-                                                                "classification": "SKYLIGHT",
-                                                                "glazed_area": 41.806368,
-                                                                "opaque_area": 4.6451519999999995,
-                                                                "u_factor": 3.406958480583628
-                                                            }
-                                                        ]
+                                                        "tilt": 90,
+                                                        "area": 929.0303999999999,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "u_factor": 3.2366105565544463
+                                                        }
                                                     }
                                                 ]
-                                            }
-                                        ],
-                                        "heating_ventilating_air_conditioning_systems": [
-                                            {
-                                                "id": "HVAC 1",
-                                                "cooling_system": {
-                                                    "id": "Cooling System 1",
-                                                    "design_sensible_cool_capacity": 35170.0
-                                                },
-                                                "heating_system": {
-                                                    "id": "Heating System 1",
-                                                    "design_capacity": 8792.133333333333
-                                                }
                                             }
                                         ]
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -200,28 +134,29 @@
         "Section": 5,
         "Rule": 36,
         "Test": "b",
-        "test_description": " Project has one building segment and includes a conditioned zone that has two roof surfaces both of which have skylights. Each baseline subsurface's proportion of the building's total glazed area is not equal to the proposed.",
+        "test_description": "Project has one building segment with one space that includes an exterior wall surface. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. Air leakage rate at wind pressure in unenclosed and unconditioned spaces is not the same in the proposed design as in the user model",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-36",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (e)",
-            "rule_description": "Skylight area must be allocated to surfaces in the same proportion in the baseline as in the proposed design; Skylight orientation and tilt shall be the same as in the proposed design.",
-            "applicable_rmr": "Baseline RMR",
+            "ruleset_reference": "Table G3.1(5) Proposed Building Performance (b)",
+            "rule_description": "The air leakage rate in unconditioned and unenclosed spaces must be the same in the baseline and proposed design",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
-            "comparison_value": "Proposed RMR",
-            "primary_rule": "Y",
-            "schema_version": "0.0.29"
+            "comparison_value": "Proposed Model",
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
-                "id": "ASHRAE229",
+                "id": "RPD 1",
                 "weather": {
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -242,75 +177,42 @@
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
-                                                "terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
-                                                    }
-                                                ],
+                                                "infiltration": {
+                                                    "id": "Infiltration 1",
+                                                    "flow_rate": 7.282620996019198
+                                                },
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
-                                                        "tilt": 30,
-                                                        "area": 92.90303999999999,
-                                                        "subsurfaces": [
-                                                            {
-                                                                "id": "Subsurface 1",
-                                                                "classification": "SKYLIGHT",
-                                                                "glazed_area": 9.290303999999999,
-                                                                "opaque_area": 4.6451519999999995,
-                                                                "u_factor": 3.406958480583628
-                                                            }
-                                                        ]
-                                                    },
-                                                    {
-                                                        "id": "Surface 2",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 50,
-                                                        "area": 185.80607999999998,
-                                                        "subsurfaces": [
-                                                            {
-                                                                "id": "Subsurface 2",
-                                                                "classification": "SKYLIGHT",
-                                                                "glazed_area": 83.612736,
-                                                                "opaque_area": 9.290303999999999,
-                                                                "u_factor": 3.406958480583628
-                                                            }
-                                                        ]
+                                                        "tilt": 90,
+                                                        "area": 929.0303999999999,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "u_factor": 3.2366105565544463
+                                                        }
                                                     }
                                                 ]
-                                            }
-                                        ],
-                                        "heating_ventilating_air_conditioning_systems": [
-                                            {
-                                                "id": "HVAC 1",
-                                                "cooling_system": {
-                                                    "id": "Cooling System 1",
-                                                    "design_sensible_cool_capacity": 35170.0
-                                                },
-                                                "heating_system": {
-                                                    "id": "Heating System 1",
-                                                    "design_capacity": 8792.133333333333
-                                                }
                                             }
                                         ]
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             },
             "baseline": {
-                "id": "ASHRAE229",
+                "id": "RPD 1",
                 "weather": {
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
+                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -331,63 +233,29 @@
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
-                                                "terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
-                                                    }
-                                                ],
+                                                "infiltration": {
+                                                    "id": "Infiltration 1",
+                                                    "flow_rate": 4.009193529983999
+                                                },
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
-                                                        "tilt": 30,
-                                                        "area": 92.90303999999999,
-                                                        "subsurfaces": [
-                                                            {
-                                                                "id": "Subsurface 1",
-                                                                "classification": "SKYLIGHT",
-                                                                "glazed_area": 4.6451519999999995,
-                                                                "opaque_area": 2.3225759999999998,
-                                                                "u_factor": 3.406958480583628
-                                                            }
-                                                        ]
-                                                    },
-                                                    {
-                                                        "id": "Surface 2",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 50,
-                                                        "area": 185.80607999999998,
-                                                        "subsurfaces": [
-                                                            {
-                                                                "id": "Subsurface 2",
-                                                                "classification": "SKYLIGHT",
-                                                                "glazed_area": 83.612736,
-                                                                "opaque_area": 9.290303999999999,
-                                                                "u_factor": 3.406958480583628
-                                                            }
-                                                        ]
+                                                        "tilt": 90,
+                                                        "area": 929.0303999999999,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "u_factor": 3.2366105565544463
+                                                        }
                                                     }
                                                 ]
-                                            }
-                                        ],
-                                        "heating_ventilating_air_conditioning_systems": [
-                                            {
-                                                "id": "HVAC 1",
-                                                "cooling_system": {
-                                                    "id": "Cooling System 1",
-                                                    "design_sensible_cool_capacity": 35170.0
-                                                },
-                                                "heating_system": {
-                                                    "id": "Heating System 1",
-                                                    "design_capacity": 8792.133333333333
-                                                }
                                             }
                                         ]
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

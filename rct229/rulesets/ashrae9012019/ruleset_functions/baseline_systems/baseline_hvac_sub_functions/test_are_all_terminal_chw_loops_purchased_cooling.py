@@ -33,9 +33,14 @@ TEST_RMD = {
         {"id": "fluid_loop_2", "loop": "ST_Loop_1", "type": "STEAM"},
         {"id": "fluid_loop_3", "loop": "CHW_Loop_1", "type": "CHILLED_WATER"},
     ],
+    "type": "BASELINE_0",
 }
 
-TEST_RMD_FULL = {"id": "229_01", "ruleset_model_descriptions": [TEST_RMD]}
+TEST_RPD_FULL = {
+    "id": "229_01",
+    "ruleset_model_descriptions": [TEST_RMD],
+    "data_timestamp": "2024-02-12T09:00Z",
+}
 
 
 def test__all_terminal_cooling_loops_purchased_cooling_all_are_cooling():

@@ -1,7 +1,8 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_3_fns import table_G3_5_3_lookup
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
+from rct229.rulesets.ashrae9012019 import BASELINE_0
+from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_3_fns import table_g3_5_3_lookup
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
@@ -30,22 +31,24 @@ class Section22Rule22(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section22Rule22, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
+            rmds_used=produce_ruleset_model_description(
+                USER=False, BASELINE_0=True, PROPOSED=False
+            ),
             each_rule=Section22Rule22.ChillerRule(),
-            index_rmr="baseline",
+            index_rmd=BASELINE_0,
             id="22-22",
             description="The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for full load, in accordance with Tables G3.5.3.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.2.1 Equipment Efficiencies",
             is_primary_rule=True,
-            rmr_context="ruleset_model_descriptions/0",
+            rmd_context="ruleset_model_descriptions/0",
             list_path="chillers[*]",
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
-        baseline_system_types_dict = get_baseline_system_types(rmi_b)
-        # create a list containing all HVAC systems that are modeled in the rmi_b
+        rmd_b = context.BASELINE_0
+        baseline_system_types_dict = get_baseline_system_types(rmd_b)
+        # create a list containing all HVAC systems that are modeled in the rmd_b
         available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict
@@ -61,20 +64,22 @@ class Section22Rule22(RuleDefinitionListIndexedBase):
     class ChillerRule(RuleDefinitionBase):
         def __init__(self):
             super(Section22Rule22.ChillerRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, False),
+                rmds_used=produce_ruleset_model_description(
+                    USER=False, BASELINE_0=True, PROPOSED=False
+                ),
                 required_fields={
                     "$": ["compressor_type", "rated_capacity", "full_load_efficiency"],
                 },
             )
 
         def get_calc_vals(self, context, data=None):
-            chiller_b = context.baseline
+            chiller_b = context.BASELINE_0
             full_load_efficiency_b = chiller_b["full_load_efficiency"]
 
             compressor_type_b = chiller_b["compressor_type"]
             rated_capacity_b = chiller_b["rated_capacity"]
 
-            required_kw_ton_full_load_b = table_G3_5_3_lookup(
+            required_kw_ton_full_load_b = table_g3_5_3_lookup(
                 compressor_type_b, rated_capacity_b
             )["minimum_full_load_efficiency"]
 
@@ -90,5 +95,8 @@ class Section22Rule22(RuleDefinitionListIndexedBase):
         def rule_check(self, context, calc_vals=None, data=None):
             full_load_efficiency_b = calc_vals["full_load_efficiency_b"]
             required_kw_ton_full_load_b = calc_vals["required_kw_ton_full_load_b"]
+            required_cop_full_load_b = 1.0 / required_kw_ton_full_load_b.to(
+                "kilowatt / kilowatt"
+            )
 
-            return std_equal(full_load_efficiency_b, required_kw_ton_full_load_b)
+            return std_equal(full_load_efficiency_b, required_cop_full_load_b)

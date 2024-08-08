@@ -7,7 +7,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_s
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.is_baseline_system_5 import (
     is_baseline_system_5,
 )
-from rct229.schema.validate import schema_validate_rmr
+from rct229.schema.validate import schema_validate_rmd
 
 SYS_5_TEST_RMD = {
     "id": "ASHRAE229 1",
@@ -120,8 +120,10 @@ SYS_5_TEST_RMD = {
                     "type": "HOT_WATER",
                 }
             ],
+            "type": "BASELINE_0",
         }
     ],
+    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 SYS_5_TEST_UNMATCHED_RMD = {
@@ -196,20 +198,22 @@ SYS_5_TEST_UNMATCHED_RMD = {
                 {"id": "Purchased HW Loop 1", "type": "HEATING"},
                 {"id": "Preheat Loop 1", "type": "HEATING"},
             ],
+            "type": "BASELINE_0",
         }
     ],
+    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 
 def test__TEST_RMD_baseline_system_5__is_valid():
-    schema_validation_result = schema_validate_rmr(SYS_5_TEST_RMD)
+    schema_validation_result = schema_validate_rmd(SYS_5_TEST_RMD)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
 
 
 def test__TEST_RMD_baseline_system_5__is_unmatched_valid():
-    schema_validation_result = schema_validate_rmr(SYS_5_TEST_UNMATCHED_RMD)
+    schema_validation_result = schema_validate_rmd(SYS_5_TEST_UNMATCHED_RMD)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"

@@ -1,7 +1,7 @@
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.jsonpath_utils import find_all, find_one
 
-HeatingSystemOptions = schema_enums["HeatingSystemOptions"]
+HeatingSystemOptions = SchemaEnums.schema_enums["HeatingSystemOptions"]
 
 APPLICABLE_HEATING_SYSTEM = [
     HeatingSystemOptions.HEAT_PUMP,
@@ -11,21 +11,23 @@ APPLICABLE_HEATING_SYSTEM = [
 ]
 
 
-def get_proposed_hvac_modeled_with_virtual_heating(rmi_u, rmi_p):
+def get_proposed_hvac_modeled_with_virtual_heating(
+    rmd_u: dict, rmd_p: dict
+) -> list[str]:
     """
     Get the list of HeatingVentilationAirAconditioningSystem in which Appendix G Table G3.1 #10 c is applicable (i.e.
-    space heating is modeled in the P_RMR but not the U_RMR). Table G3.1 #10 c states that "where no heating system
+    space heating is modeled in the P_RMD but not the U_RMD). Table G3.1 #10 c states that "where no heating system
     exists or no heating system has been submitted with design documents, the system type shall be the same system as
     modeled in the baseline building design and shall comply with but not exceed the requirements of Section 6."
 
     Parameters
     ----------
-    rmi_u dict
-        A dictionary representing a building as defined by the ASHRAE229 schema. The user RMI to determine if an
+    rmd_u dict
+        A dictionary representing a building as defined by the ASHRAE229 schema. The user RMD to determine if an
         HVAC system has been designed or is existing with heating.
-    rmi_p dict
-        A dictionary representing a building as defined by the ASHRAE229 schema. The proposed RMI to determine if the
-        same HVAC system has been modeled with heating in the P-RMR.
+    rmd_p dict
+        A dictionary representing a building as defined by the ASHRAE229 schema. The proposed RMD to determine if the
+        same HVAC system has been modeled with heating in the P-RMD.
 
 
     Returns
@@ -38,7 +40,7 @@ def get_proposed_hvac_modeled_with_virtual_heating(rmi_u, rmi_p):
     proposed_hvac_modeled_with_virtual_heating_list = []
     for hvac_p in find_all(
         "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
-        rmi_p,
+        rmd_p,
     ):
         has_virtual_heating_p = False
         heating_system_type_p = find_one("$.heating_system.type", hvac_p)
@@ -48,7 +50,7 @@ def get_proposed_hvac_modeled_with_virtual_heating(rmi_u, rmi_p):
             heating_system_type_u = find_one(
                 f"$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*][?("
                 f'@.heating_system.id="{heating_system_id}")].heating_system.type',
-                rmi_u,
+                rmd_u,
             )
             has_virtual_heating_p = (
                 heating_system_type_u is None
@@ -62,7 +64,7 @@ def get_proposed_hvac_modeled_with_virtual_heating(rmi_u, rmi_p):
             preheat_system_type_u = find_one(
                 f"$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*][?("
                 f'@.preheat_system.id="{preheat_system_id}")].preheat_system.type',
-                rmi_u,
+                rmd_u,
             )
             has_virtual_heating_p = (
                 has_virtual_heating_p

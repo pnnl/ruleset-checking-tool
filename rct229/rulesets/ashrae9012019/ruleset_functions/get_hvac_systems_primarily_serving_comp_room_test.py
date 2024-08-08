@@ -1,11 +1,11 @@
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_systems_primarily_serving_comp_room import (
     get_hvac_systems_primarily_serving_comp_room,
 )
-from rct229.schema.schema_utils import quantify_rmr
-from rct229.schema.validate import schema_validate_rmr
+from rct229.schema.schema_utils import quantify_rmd
+from rct229.schema.validate import schema_validate_rmd
 
-TEST_RMI = {
-    "id": "test_rmi",
+TEST_RMD = {
+    "id": "test_rmd",
     "buildings": [
         {
             "id": "bldg_1",
@@ -78,14 +78,19 @@ TEST_RMI = {
             ],
         }
     ],
+    "type": "BASELINE_0",
 }
-TEST_RMD = {"id": "229_01", "ruleset_model_descriptions": [TEST_RMI]}
+TEST_RPD = {
+    "id": "229_01",
+    "ruleset_model_descriptions": [TEST_RMD],
+    "data_timestamp": "2024-02-12T09:00Z",
+}
 
-TEST_RMI_UNIT = quantify_rmr(TEST_RMD)["ruleset_model_descriptions"][0]
+TEST_RMD_UNIT = quantify_rmd(TEST_RPD)["ruleset_model_descriptions"][0]
 
 
-def test__TEST_RMD__is_valid():
-    schema_validation_result = schema_validate_rmr(TEST_RMD)
+def test__TEST_RPD__is_valid():
+    schema_validation_result = schema_validate_rmd(TEST_RPD)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
@@ -93,4 +98,4 @@ def test__TEST_RMD__is_valid():
 
 def test__get_hvac_systems_primarily_serving_comp_room__hvac_1():
     # hvac_1 true, hvac_2 false
-    assert get_hvac_systems_primarily_serving_comp_room(TEST_RMI_UNIT) == ["hvac_1"]
+    assert get_hvac_systems_primarily_serving_comp_room(TEST_RMD_UNIT) == ["hvac_1"]

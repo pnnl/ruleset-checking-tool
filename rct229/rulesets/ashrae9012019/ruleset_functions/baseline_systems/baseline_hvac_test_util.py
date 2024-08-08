@@ -2,8 +2,8 @@ import json
 import os
 from pathlib import Path
 
-from rct229.schema.schema_utils import quantify_rmr
-from rct229.schema.validate import schema_validate_rmr
+from rct229.schema.schema_utils import quantify_rmd
+from rct229.schema.validate import schema_validate_rmd
 from rct229.utils.utility_functions import (
     has_cooling_system,
     has_fan_system,
@@ -25,7 +25,7 @@ def load_system_test_file(file_name: str):
         system_test_json = json.load(f)
 
     assert system_test_json, f"Error loading system testing json file: #{file_name}"
-    return quantify_rmr(system_test_json)
+    return quantify_rmd(system_test_json)
 
 
 TEST_RMD_PASS = {
@@ -126,8 +126,8 @@ TEST_RMD_FAIL = {
 }
 
 
-def test__TEST_RMD__is_valid():
-    schema_validation_result = schema_validate_rmr(TEST_RMD_PASS)
+def test__TEST_RPD__is_valid():
+    schema_validation_result = schema_validate_rmd(TEST_RMD_PASS)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"

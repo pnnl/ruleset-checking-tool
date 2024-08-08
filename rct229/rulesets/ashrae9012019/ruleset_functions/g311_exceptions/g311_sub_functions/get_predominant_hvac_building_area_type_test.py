@@ -7,13 +7,13 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_categ
     CAPACITY_THRESHOLD as CAPACITY_THRESHOLD_QUANTITY,
 )
 from rct229.schema.config import ureg
-from rct229.schema.schema_utils import quantify_rmr
-from rct229.schema.validate import schema_validate_rmr
+from rct229.schema.schema_utils import quantify_rmd
+from rct229.schema.validate import schema_validate_rmd
 
 POWER_DELTA = 1
 POWER_THRESHOLD_100 = (CAPACITY_THRESHOLD_QUANTITY * 100 * ureg("m2")).to("W").magnitude
 
-TEST_RMI = {
+TEST_RMD = {
     "id": "test_rmd",
     "buildings": [
         {
@@ -117,27 +117,32 @@ TEST_RMI = {
             ],
         },
     ],
+    "type": "BASELINE_0",
 }
 
 
-TEST_RMD_FULL = {"id": "229", "ruleset_model_descriptions": [TEST_RMI]}
+TEST_RPD_FULL = {
+    "id": "229",
+    "ruleset_model_descriptions": [TEST_RMD],
+    "data_timestamp": "2024-02-12T09:00Z",
+}
 
-TEST_RMI_UNIT = quantify_rmr(TEST_RMD_FULL)["ruleset_model_descriptions"][0]
+TEST_RMD_UNIT = quantify_rmd(TEST_RPD_FULL)["ruleset_model_descriptions"][0]
 
 
-def test__TEST_RMD__is_valid():
-    schema_validation_result = schema_validate_rmr(TEST_RMD_FULL)
+def test__TEST_RPD__is_valid():
+    schema_validation_result = schema_validate_rmd(TEST_RPD_FULL)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
 
 
 def test__get_predominant_hvac_building_area_type__residential():
-    test_rmi_unit_residential = deepcopy(TEST_RMI_UNIT)
-    test_rmi_unit_residential["buildings"][0]["building_segments"][1][
+    test_rmd_unit_residential = deepcopy(TEST_RMD_UNIT)
+    test_rmd_unit_residential["buildings"][0]["building_segments"][1][
         "lighting_building_area_type"
     ] = "MULTIFAMILY"
     assert (
-        get_predominant_hvac_building_area_type("CZ4A", test_rmi_unit_residential)
+        get_predominant_hvac_building_area_type("CZ4A", test_rmd_unit_residential)
         == "RESIDENTIAL"
     )

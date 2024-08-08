@@ -2,42 +2,93 @@
 # Envelope - Rule 5-28  
 
 **Rule ID:** 5-28  
-**Rule Description:** Subsurface that is not regulated (not part of building envelope) must be modeled with the same area, U-factor and SHGC in the baseline as in the proposed design.  
-**Rule Assertion:** B-RMR Fenestration: U-Factor, SHGC, glazed_area, fenestration.opaque_area = P-RMR SFenestration: U-Factor, SHGC, glazed_area, fenestration.opaque_area  
-**Appendix G Section:** Section G3.1-1(a) Building Modeling Requirements for the Baseline building  
-**Appendix G Section Reference:**  None  
+**Rule Description:** Skylight SHGC properties shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value and the applicable skylight percentage.  
+**Rule Assertion:** B-RMD subsurface: SHGC = expected value  
+**Appendix G Section:** Section 5 Envelope  
+**Appendix G Section Reference:** Section G3.1-5(e) Building Envelope Modeling Requirements for the Baseline building
 
-**Applicability:** All required data elements exist for B_RMR  
+**Applicability:** All required data elements exist for B_RMD  
 **Applicability Checks:** None  
 
-**Manual Checks:** None  
-**Evaluation Context:**  Each Data Element  
-**Data Lookup:** None  
-**Function Call:**  
+**Manual Check:** Yes  
+**Evaluation Context:** Each Data Element  
+**Data Lookup:** Tables G3.4-1 to G3.4-8  
+**Function Call:**
 
-  1. match_data_element()
-  2. get_surface_conditioning_category()
+  1. get_surface_conditioning_category()
+  2. get_opaque_surface_type()
+  3. get_building_scc_skylight_roof_ratios_dict()
+  4. data_lookup()
 
-## Rule Logic:
+## Rule Logic:  
 
-- Get surface conditioning category dictionary for B_RMR: `scc_dictionary_b = get_surface_conditioning_category(B_RMR)`
+- Get RMD climate zone: `climate_zone = ASHRAE229.weather.climate_zone`  
 
-- For each building segment in the Baseline model: `for building_segment_b in B_RMR.building.building_segments:`
+- Get surface conditioning category dictionary for B_RMD: `scc_dictionary_b = get_surface_conditioning_category(B_RMD)`  
 
-  - For each zone in thermal block: `for zone_b in building_segment_b.zones:`
+- Get B_RMD skylight roof ratios dictionary: `get_building_scc_skylight_roof_ratios_dict = get_building_scc_skylight_roof_ratios_dict(B_RMD)`
 
-    - For each surface in zone: `for surface_b in zone_b.surfaces:`
+- Check if B_RMD has exterior mixed type skylight: `if rmd_scc_skylight_roof_ratios_dictionary["EXTERIOR MIXED"] > 0:`
 
-      - Check if surface is unregulated: `if scc_dictionary_b[surface_b.id] == "UNREGULATED":`
+  - Check if residential and non-residential type skylight SHGC requirements for different skylight-roof-ratio are the same, get skylight SHGC requirements: `if ( data_lookup(table_G3_4, climate_zone, "RESIDENTIAL, "SKYLIGHT", "0%-2.0%", "ASSEMBLY MAX. SHGC") == data_lookup(table_G3_4, climate_zone, "RESIDENTIAL, "SKYLIGHT", "2.1%+", "ASSEMBLY MAX. SHGC") ) AND ( data_lookup(table_G3_4, climate_zone, "NON-RESIDENTIAL, "SKYLIGHT", "0%-2.0%", "ASSEMBLY MAX. SHGC") == data_lookup(table_G3_4, climate_zone, "NON-RESIDENTIAL, "SKYLIGHT", "2.1%+", "ASSEMBLY MAX. SHGC") ) AND ( data_lookup(table_G3_4, climate_zone, "RESIDENTIAL, "SKYLIGHT", "0%-2.0%", "ASSEMBLY MAX. SHGC") == data_lookup(table_G3_4, climate_zone, "NON-RESIDENTIAL, "SKYLIGHT", "0%-2.0%", "ASSEMBLY MAX. SHGC") ): target_shgc_mixed = data_lookup(table_G3_4, climate_zone, "RESIDENTIAL, "SKYLIGHT", "0%-2.0%", "ASSEMBLY MAX. SHGC")`
 
-        - For each subsurface in surface: `for subsurface_b in surface_b:`
+  - Else, request manual review: `else: manual_review_flag = TRUE`
 
-          - Get matching subsurface in P_RMR: `subsurface_p = match_data_element(P_RMR, Subsurfaces, subsurface_b.id)`
+- Else, B_RMD does not have exterior mixed type roof surface: `else:`
 
-            **Rule Assertion:**
+  - Get skylight-roof-ratio for residential type roofs: `srr_res = get_building_scc_skylight_roof_ratios_dict["EXTERIOR RESIDENTIAL"]`
 
-            - Case 1: For each subsurface in B_RMR, if subsurface U-factor, SHGC, glazed area and opaque area is equal to that in P_RMR: `if ( subsurface_b.u_factor == subsurface_p.u_factor ) AND ( subsurface_b.solar_heat_gain_coefficient == subsurface_p.solar_heat_gain_coefficient ) AND ( subsurface_b.glazed_area == subsurface_p.glazed_area ) AND ( surface_b.opaque_area == surface_p.opaque_area ): PASS`
+    - If skylight-roof-ratio is greater than 2.0%, get baseline skylight construction requirement: `if srr_res > 0.02: target_shgc_res = data_lookup(table_G3_4, climate_zone, "RESIDENTIAL", "SKYLIGHT", "2.1%+", "ASSEMBLY MAX. SHGC")`
 
-            - Case 2: Else: `else: FAIL and raise_warning "SUBSURFACE THAT IS NOT REGULATED (NOT PART OF BUILDING ENVELOPE) IS NOT MODELED WITH THE SAME AREA, U-FACTOR AND SHGC IN THE BASELINE AS IN THE PROPOSED DESIGN."`
+    - Else, skylight-roof-ratio is 0% to 2.0%, get baseline skylight construction requirement: `else: target_shgc_res = data_lookup(table_G3_4, climate_zone, "RESIDENTIAL", "SKYLIGHT", "0%-2.0%", "ASSEMBLY MAX. SHGC")`
+
+  - Get skylight-roof-ratio for non-residential type roofs: `srr_nonres = get_building_scc_skylight_roof_ratios_dict["NON-RESIDENTIAL"]`
+
+    - If skylight-roof-ratio is greater than 2.0%, get baseline skylight construction requirement: `if srr_nonres > 0.02: target_shgc_nonres = data_lookup(table_G3_4, climate_zone, "NON-RESIDENTIAL", "SKYLIGHT", "2.1%+", "ASSEMBLY MAX. SHGC")`
+
+    - Else, skylight-roof-ratio is 0% to 2.0%, get baseline skylight construction requirement: `else: target_shgc_nonres = data_lookup(table_G3_4, climate_zone, "NON-RESIDENTIAL", "SKYLIGHT", "0%-2.0%", "ASSEMBLY MAX. SHGC")`
+
+- Get skylight-roof-ratio for semi-exterior type roofs: `srr_semi_exterior = get_building_scc_skylight_roof_ratios_dict["SEMI-EXTERIOR"]`
+
+  - If skylight-roof-ratio is greater than 2.0%, get baseline skylight construction requirement: `if srr_semi_exterior > 0.02: target_shgc_semiheated = data_lookup(table_G3_4, climate_zone, "SEMIHEATED, "SKYLIGHT", "2.1%+", "ASSEMBLY MAX. SHGC")`
+
+  - Else, skylight-roof-ratio is 0% to 2.0%, get baseline skylight construction requirement: `else: target_shgc_semiheated = data_lookup(table_G3_4, climate_zone, "SEMIHEATED", "SKYLIGHT", "0%-2.0%", "ASSEMBLY MAX. SHGC")`
+
+- For each zone in B_RMD: `for zone_b in B_RMD...zones:`
+
+  - For each surface in zone: `for surface_b in zone_b.surfaces:`
+
+    - Check if surface is roof with subsurface and is regulated: `if ( get_opaque_surface_type(surface_b) == "ROOF"  ) AND ( surface_b.subsurfaces ) AND ( scc_dictionary_b[surface_b.id] != "UNREGULATED" ):`
+
+      - For each subsurface in roof: `for subsurface_b in surface_b.subsurfaces:`
+
+        - Check if subsurface is door and glazed area is more than 50% of the total door area, or subsurface is not door: `if (( subsurface_b.classification == "DOOR" ) AND ( subsurface_b.glazed_area > subsurface_b.opaque_area )) OR ( subsurface_b.classification != "DOOR" ):`
+
+          **Rule Assertion - Component:**
+
+          - Case 1； For each subsurface, if roof is exterior mixed type and the baseline requirements for residential and non-residential type SHGC for different skylight-roof-ratio are different: `if manual_review_flag AND ( scc_dictionary_b[surface_b] == "EXTERIOR MIXED" ): UNDETERMINED`
+
+          - Case 2: Else if roof is exterior mixed type and skylight SHGC matches Table G3.4 requirement: `else if ( scc_dictionary_b[surface_b] == "EXTERIOR MIXED" ) AND ( subsurface_b.solar_heat_gain_coefficient == target_shgc_mixed ): PASS`
+
+          - Case 3: Else if roof is exterior residential type and skylight SHGC matches Table G3.4 requirement: `else if ( scc_dictionary_b[surface_b] == "EXTERIOR RESIDENTIAL" ) AND ( subsurface_b.solar_heat_gain_coefficient == target_shgc_res ): PASS`
+
+          - Case 4: Else if roof is exterior non-residential type and skylight SHGC matches Table G3.4 requirement: `else if ( scc_dictionary_b[surface_b] == "EXTERIOR NON-RESIDENTIAL" ) AND ( subsurface_b.solar_heat_gain_coefficient == target_shgc_nonres ): PASS`
+
+          - Case 5: Else if roof is semi-exterior type and skylight SHGC matches Table G3.4 requirement: `else if ( scc_dictionary_b[surface_b] == "SEMI-EXTERIOR" ) AND ( subsurface_b.solar_heat_gain_coefficient == target_shgc_semiheated ): PASS`
+
+          - Case 6: Else: `else: FAIL and NUMBER_OF_FAIL_COMPONENTS++`
+
+**Rule Assertion - RMD:**
+
+- Case 1: If any subsurface in B-RMD is ruled as "UNDETERMINED": `UNDETERMINED and raise_message "MANUAL REVIEW IS REQUESTED TO VERIFY SKYLIGHT MEETS SHGC REQUIREMENT AS PER TABLE G3.4."`
+
+- Case 2: Else if all subsurface in B-RMD is rules as "PASS": `PASS`
+
+- Case 3: Else: `FAIL and raise_message "${NUMBER_OF_FAIL_COMPONENTS} of subsurfaces have failed the test.`
+
+
+****Notes:**
+
+1. Update Rule ID from 5-38 to 5-28 on 10/26/2023**
 
 **[Back](../_toc.md)**

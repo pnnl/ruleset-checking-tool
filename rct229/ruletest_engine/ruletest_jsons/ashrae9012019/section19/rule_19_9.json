@@ -3,21 +3,22 @@
         "Section": 19,
         "Rule": 9,
         "Test": "a",
-        "test_description": "System 9 without air economizer.",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 9. The system does not include an air economizer.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-9",
             "ruleset_reference": "G3.1.2.6",
             "rule_description": "Air economizers shall not be included in baseline HVAC Systems 1, 2, 9, and 10.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -70,7 +71,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -80,21 +82,22 @@
         "Section": 19,
         "Rule": 9,
         "Test": "b",
-        "test_description": "System 9 with FIXED_FRACTION air economizer.",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 9. The system includes an air economizer but operates as fixed-fraction (does not operate as an air economizer).",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-9",
             "ruleset_reference": "G3.1.2.6",
             "rule_description": "Air economizers shall not be included in baseline HVAC Systems 1, 2, 9, and 10.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -151,7 +154,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -161,21 +165,22 @@
         "Section": 19,
         "Rule": 9,
         "Test": "c",
-        "test_description": "System 9 with ENTHALPY air economizer.",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 9. The system includes an air economizer which operates based on an enthalpy setpoint.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-9",
             "ruleset_reference": "G3.1.2.6",
             "rule_description": "Air economizers shall not be included in baseline HVAC Systems 1, 2, 9, and 10.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.29"
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -232,7 +237,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

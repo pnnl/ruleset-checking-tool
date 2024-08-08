@@ -1,7 +1,7 @@
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_dict_of_zones_and_terminal_units_served_by_hvac_sys import (
     get_dict_of_zones_and_terminal_units_served_by_hvac_sys,
 )
-from rct229.schema.validate import schema_validate_rmr
+from rct229.schema.validate import schema_validate_rmd
 
 TEST_BUILDING = {
     "id": "test_rmd",
@@ -11,6 +11,12 @@ TEST_BUILDING = {
             "building_segments": [
                 {
                     "id": "building_segment_1",
+                    "heating_ventilating_air_conditioning_systems": [
+                        {"id": "hvac_1"},
+                        {"id": "hvac_2"},
+                        {"id": "hvac_3"},
+                        {"id": "hvac_4"},
+                    ],
                     "zones": [
                         {
                             "id": "zone_1",
@@ -60,14 +66,19 @@ TEST_BUILDING = {
             ],
         }
     ],
+    "type": "BASELINE_0",
 }
 
 
-TEST_RMD = {"id": "ASHRAE229", "ruleset_model_descriptions": [TEST_BUILDING]}
+TEST_RMD = {
+    "id": "ASHRAE229",
+    "ruleset_model_descriptions": [TEST_BUILDING],
+    "data_timestamp": "2024-02-12T09:00Z",
+}
 
 
-def test__TEST_RMD__is_valid():
-    schema_validation_result = schema_validate_rmr(TEST_RMD)
+def test__TEST_RPD__is_valid():
+    schema_validation_result = schema_validate_rmd(TEST_RMD)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"

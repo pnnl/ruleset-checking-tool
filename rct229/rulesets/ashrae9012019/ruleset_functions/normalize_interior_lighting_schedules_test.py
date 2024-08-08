@@ -1,10 +1,10 @@
 from rct229.rulesets.ashrae9012019.ruleset_functions.normalize_interior_lighting_schedules import (
     normalize_interior_lighting_schedules,
 )
-from rct229.schema.schema_utils import quantify_rmr
-from rct229.schema.validate import schema_validate_rmr
+from rct229.schema.schema_utils import quantify_rmd
+from rct229.schema.validate import schema_validate_rmd
 
-TEST_RMR = {
+TEST_RMD = {
     "id": "building_1",
     "buildings": [
         {
@@ -63,22 +63,27 @@ TEST_RMR = {
             ],
         }
     ],
+    "type": "BASELINE_0",
 }
 
-TEST_SPACE_RMR = {"id": "229_01", "ruleset_model_descriptions": [TEST_RMR]}
+TEST_SPACE_RMD = {
+    "id": "229_01",
+    "ruleset_model_descriptions": [TEST_RMD],
+    "data_timestamp": "2024-02-12T09:00Z",
+}
 
 TEST_SCHEDULES = {
     "schedules": [{"id": "light_multiplier_sched_1", "hourly_values": [0.8] * 8760}]
 }
 
 ZONE_HEIGHT = 10.0
-TEST_SPACES = quantify_rmr(TEST_SPACE_RMR)["ruleset_model_descriptions"][0][
+TEST_SPACES = quantify_rmd(TEST_SPACE_RMD)["ruleset_model_descriptions"][0][
     "buildings"
 ][0]["building_segments"][0]["zones"][0]["spaces"][0]
 
 
-def test__TEST_RMD__is_valid():
-    schema_validation_result = schema_validate_rmr(TEST_SPACE_RMR)
+def test__TEST_RPD__is_valid():
+    schema_validation_result = schema_validate_rmd(TEST_SPACE_RMD)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"

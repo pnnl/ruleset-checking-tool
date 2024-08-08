@@ -1,8 +1,6 @@
 import inspect
 
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.get_dict_with_terminal_units_and_zones import (
-    get_dict_with_terminal_units_and_zones,
-)
+from rct229.rule_engine.memoize import memoize
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
@@ -55,13 +53,14 @@ from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_all
 
 
-def get_baseline_system_types(rmi_b):
+@memoize
+def get_baseline_system_types(rmd_b: dict) -> dict[HVAC_SYS, list[str]]:
     """
     Identify all the baseline system types modeled in a B-RMD.
 
     Parameters
     ----------
-    rmi_b json The B-RMD that needs to get the list of all HVAC system types.
+    rmd_b json The B-RMD that needs to get the list of all HVAC system types.
 
     Returns dictionary saves all baseline HVAC system types in B-RMD with their IDs
     i.e. {"SYS-3": ["hvac_id_1", "hvac_id_10"], "SYS-7A": ["hvac_id_3", "hvac_id_17", "hvac_id_6], "SYS-9": ["hvac_id_2"]}
@@ -95,15 +94,19 @@ def get_baseline_system_types(rmi_b):
     baseline_hvac_system_dict = {sys_type: [] for sys_type in hvac_sys_list}
 
     dict_of_zones_and_terminal_units_served_by_hvac_sys = (
-        get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmi_b)
+        get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmd_b)
     )
-    dict_with_terminal_units_and_zones = get_dict_with_terminal_units_and_zones(rmi_b)
 
     for hvac_b in find_all(
         "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
-        rmi_b,
+        rmd_b,
     ):
         hvac_b_id = hvac_b["id"]
+        assert_(
+            dict_of_zones_and_terminal_units_served_by_hvac_sys.get(hvac_b_id),
+            f"HVAC system {hvac_b_id} is missing in the HeatingVentilatingAiConditioningSystems data group.",
+        )
+
         terminal_unit_id_list = dict_of_zones_and_terminal_units_served_by_hvac_sys[
             hvac_b_id
         ]["terminal_unit_list"]
@@ -113,7 +116,7 @@ def get_baseline_system_types(rmi_b):
 
         sys_found = False
         for sys_check in baseline_system_type_checks:
-            hvac_sys = sys_check(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list)
+            hvac_sys = sys_check(rmd_b, hvac_b_id, terminal_unit_id_list, zone_id_list)
 
             if hvac_sys != HVAC_SYS.UNMATCHED:
                 baseline_hvac_system_dict[hvac_sys].append(hvac_b_id)

@@ -1,22 +1,23 @@
 import logging
+from typing import TypedDict
 
+from pint import Quantity
 from pydash import curry, filter_, flatten_deep, flow, map_
-
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
 from rct229.rulesets.ashrae9012019.data_fns.table_lighting_to_hvac_bat_map_fns import (
     building_lighting_to_hvac_bat,
     space_lighting_to_hvac_bat,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
     ZoneConditioningCategory,
-    get_zone_conditioning_category_rmi_dict,
+    get_zone_conditioning_category_rmd_dict,
 )
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
 
 OTHER_UNDETERMINED = "OTHER_UNDETERMINED"
-HVAC_BUILDING_AREA_TYPE_OPTIONS = schema_enums[
+HVAC_BUILDING_AREA_TYPE_OPTIONS = SchemaEnums.schema_enums[
     "HeatingVentilatingAirConditioningBuildingAreaOptions2019ASHRAE901"
 ]
 
@@ -43,22 +44,29 @@ get_bat_val_func_curry = curry(
 )
 
 
-def get_hvac_building_area_types_and_zones_dict(climate_zone, rmi):
+class BuildingAreaTypesWithTotalAreaZones(TypedDict):
+    floor_area: Quantity
+    zone_ids: list[str]
+
+
+def get_hvac_building_area_types_and_zones_dict(
+    climate_zone: str, rmd: dict
+) -> dict[str, BuildingAreaTypesWithTotalAreaZones]:
     """
 
     Parameters
     ----------
     climate_zone str
         One of the ClimateZoneOptions2019ASHRAE901 enumerated values
-    rmi dict
-        A dictionary representing a ruleset model instance as defined by the ASHRAE229 schema
+    rmd dict
+        A dictionary representing a ruleset model description as defined by the ASHRAE229 schema
 
     Returns
     -------
 
     """
-    zone_conditioning_category_dict = get_zone_conditioning_category_rmi_dict(
-        climate_zone, rmi
+    zone_conditioning_category_dict = get_zone_conditioning_category_rmd_dict(
+        climate_zone, rmd
     )
 
     building_area_types_with_total_area_and_zones_dict = {}
@@ -67,7 +75,7 @@ def get_hvac_building_area_types_and_zones_dict(climate_zone, rmi):
         building_area_types_with_total_area_and_zones_dict
     )
 
-    for building_segment in find_all("$.buildings[*].building_segments[*]", rmi):
+    for building_segment in find_all("$.buildings[*].building_segments[*]", rmd):
         if building_segment.get(
             "area_type_heating_ventilating_air_conditioning_system"
         ):

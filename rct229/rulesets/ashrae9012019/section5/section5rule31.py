@@ -1,14 +1,22 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.utils.jsonpath_utils import find_all
-
-MANUAL_CHECK_MSG = "Surface in P-RMR has subsurfaces modeled with different manual shade status. Verify if subsurfaces manual shade status in B-RMR are modeled the same as in P-RMR"
-
-# Json path for subsurfaces with has_manual_interior_shades set to True
-MANUALLY_SHADED_SUBSURFACES_JSON = (
-    "$.subsurfaces[*][?(@.has_manual_interior_shades=true)]"
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
+from rct229.rulesets.ashrae9012019 import BASELINE_0
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
+    OpaqueSurfaceType as OST,
 )
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
+    get_opaque_surface_type,
+)
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
+    SurfaceConditioningCategory as SCC,
+)
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
+    get_surface_conditioning_category_dict,
+)
+from rct229.utils.std_comparisons import std_equal
+
+TARGET_ABSORPTANCE_SOLAR_EXTERIOR = 0.7
 
 
 class Section5Rule31(RuleDefinitionListIndexedBase):
@@ -16,88 +24,72 @@ class Section5Rule31(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule31, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, True),
+            rmds_used=produce_ruleset_model_description(
+                USER=False, BASELINE_0=True, PROPOSED=False
+            ),
+            required_fields={
+                "$": ["weather"],
+                "weather": ["climate_zone"],
+            },
             each_rule=Section5Rule31.BuildingRule(),
-            index_rmr="baseline",
+            index_rmd=BASELINE_0,
             id="5-31",
-            description="Manual fenestration shading devices, such as blinds or shades, shall be modeled or not modeled the same as in the baseline building design.",
+            description=" The baseline roof surfaces shall be modeled using a solar reflectance of 0.30",
             ruleset_section_title="Envelope",
-            standard_section="Section G3.1-5(a)(4) Building Modeling Requirements for the Proposed design and G3.1-5(d) Building Modeling Requirements for Baseline building",
+            standard_section="Section G3.1-5(g) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].buildings[*]",
+            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
         )
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule31.BuildingRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, True),
-                # Make sure surfaces are matched in SurfaceRule
+                rmds_used=produce_ruleset_model_description(
+                    USER=False, BASELINE_0=True, PROPOSED=False
+                ),
+                each_rule=Section5Rule31.BuildingRule.RoofRule(),
+                index_rmd=BASELINE_0,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
-                each_rule=Section5Rule31.BuildingRule.SurfaceRule(),
-                index_rmr="baseline",
             )
 
-        class SurfaceRule(RuleDefinitionListIndexedBase):
+        def create_data(self, context, data=None):
+            building_b = context.BASELINE_0
+            return {
+                "scc_dict_b": get_surface_conditioning_category_dict(
+                    data["climate_zone"], building_b
+                ),
+            }
+
+        def list_filter(self, context_item, data=None):
+            surface_b = context_item.BASELINE_0
+            return (
+                get_opaque_surface_type(surface_b) == OST.ROOF
+                and data["scc_dict_b"][surface_b["id"]] != SCC.UNREGULATED
+            )
+
+        class RoofRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section5Rule31.BuildingRule.SurfaceRule, self).__init__(
-                    rmrs_used=UserBaselineProposedVals(False, True, True),
-                    each_rule=Section5Rule31.BuildingRule.SurfaceRule.SubsurfaceRule(),
-                    index_rmr="baseline",
-                    # Make sure subsurfaces are matched
-                    # List_path will be evaluated after manual check
-                    list_path="subsurfaces[*]",
-                    manual_check_required_msg=MANUAL_CHECK_MSG,
+                super(Section5Rule31.BuildingRule.RoofRule, self).__init__(
+                    rmds_used=produce_ruleset_model_description(
+                        USER=False, BASELINE_0=True, PROPOSED=False
+                    ),
+                    required_fields={
+                        "$": ["optical_properties"],
+                        "optical_properties": ["absorptance_solar_exterior"],
+                    },
                 )
 
-            def manual_check_required(self, context, calc_vals=None, data=None):
-                surface_p = context.proposed
-                subsurfaces_p = find_all("$.subsurfaces[*]", surface_p)
-                subsurfaces_with_manual_interior_shades_p = find_all(
-                    MANUALLY_SHADED_SUBSURFACES_JSON, surface_p
-                )
-
-                return len(subsurfaces_with_manual_interior_shades_p) != 0 and len(
-                    subsurfaces_with_manual_interior_shades_p
-                ) != len(subsurfaces_p)
-
-            def create_data(self, context, data=None):
-                surface_p = context.proposed
-                subsurfaces_with_manual_interior_shades_p = find_all(
-                    MANUALLY_SHADED_SUBSURFACES_JSON, surface_p
-                )
-                # None - if no subsurfaces, then the code wont evaluate the subsurface rule
+            def get_calc_vals(self, context, data=None):
+                roof_b = context.BASELINE_0
                 return {
-                    "proposed_subsurface_manual_shade": subsurfaces_with_manual_interior_shades_p[
-                        0
-                    ][
-                        "has_manual_interior_shades"
+                    "absorptance_solar_exterior": roof_b["optical_properties"][
+                        "absorptance_solar_exterior"
                     ]
-                    if subsurfaces_with_manual_interior_shades_p
-                    else None,
                 }
 
-            class SubsurfaceRule(RuleDefinitionBase):
-                def __init__(self):
-                    super(
-                        Section5Rule31.BuildingRule.SurfaceRule.SubsurfaceRule, self
-                    ).__init__(
-                        rmrs_used=UserBaselineProposedVals(False, True, False),
-                        required_fields={"$": ["has_manual_interior_shades"]},
-                    )
-
-                def get_calc_vals(self, context, data=None):
-                    subsurface_b = context.baseline
-                    return {
-                        "subsurface_p_manual_shade": data[
-                            "proposed_subsurface_manual_shade"
-                        ],
-                        "subsurface_b_manual_shade": subsurface_b[
-                            "has_manual_interior_shades"
-                        ],
-                    }
-
-                def rule_check(self, context, calc_vals=None, data=None):
-                    return (
-                        calc_vals["subsurface_p_manual_shade"]
-                        == calc_vals["subsurface_b_manual_shade"]
-                    )
+            def rule_check(self, context, calc_vals=None, data=None):
+                return std_equal(
+                    TARGET_ABSORPTANCE_SOLAR_EXTERIOR,
+                    calc_vals["absorptance_solar_exterior"],
+                )

@@ -6,15 +6,20 @@ import os
 import pandas as pd
 import pint
 
+from rct229.rule_engine.rulesets import RuleSet
+from rct229.ruletest_engine.ruletest_jsons.scripts.excel_generation_utilities import (
+    generate_rule_test_dictionary,
+)
 from rct229.ruletest_engine.ruletest_jsons.scripts.json_generation_utilities import *
 from rct229.schema.config import ureg
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.schema.schema_utils import *
 
 
-def get_rmr_key_list_from_tcd_key_list(tcd_key_list):
+def get_rmd_key_list_from_tcd_key_list(tcd_key_list):
     """Ingests a python list of 'keys' from the test JSON spreadsheet and returns the relevant ASHRAE229 key list
     Without the extra specifications used in TCD spreadsheet.
-    For example ['rmr_transformations', 'user', 'schedules[0]', 'hourly_values'] -> ['schedules', 'hourly_values'].
+    For example ['rmd_transformations', 'user', 'schedules[0]', 'hourly_values'] -> ['schedules', 'hourly_values'].
 
      Parameters
      ----------
@@ -23,35 +28,37 @@ def get_rmr_key_list_from_tcd_key_list(tcd_key_list):
 
      Returns
     -------
-    rmr_schema_key_list: list
+    rmd_schema_key_list: list
         JSON path string (as understood by this script) representing the key_list's ASHRAE229 JSON path.
 
     """
 
-    # Get index for the beginning of the RMR JSON.
-    # Order is always 'rmr_transformations' or 'rmr_template', <RMR_TYPE>, <RMR_JSON>, therefore add 2 index to
-    # either 'rmr_transformation' or 'rmr_template' indices. If neither 'rmr_transformations' or 'rmr_template' is
+    # Get index for the beginning of the RMD JSON.
+    # Order is always 'rmd_transformations' or 'rmd_template', <RMD_TYPE>, <RMD_JSON>, therefore add 2 index to
+    # either 'rmd_transformation' or 'rmd_template' indices. If neither 'rmd_transformations' or 'rmd_template' is
     # included, assume it begins at index 1 (typically what you see in the Templates tab)
-    if "rmr_transformations" in tcd_key_list:
-        begin_rmr_index = tcd_key_list.index("rmr_transformations") + 2
-    elif "rmr_template" in tcd_key_list:
-        begin_rmr_index = tcd_key_list.index("rmr_template") + 2
+    if "rmd_transformations" in tcd_key_list:
+        begin_rmd_index = tcd_key_list.index("rmd_transformations") + 2
+    elif "rmd_template" in tcd_key_list:
+        begin_rmd_index = tcd_key_list.index("rmd_template") + 2
     else:
-        begin_rmr_index = 0
+        begin_rmd_index = 0
 
     final_index = len(tcd_key_list)
 
-    # put together all RMR keys together to form a JSON path
-    rmr_schema_key_list = tcd_key_list[begin_rmr_index:final_index]
+    # put together all RMD keys together to form a JSON path
+    rmd_schema_key_list = tcd_key_list[begin_rmd_index:final_index]
 
     # Remove index references
-    for index, unclean_key in enumerate(rmr_schema_key_list):
-        rmr_schema_key_list[index] = remove_index_references_from_key(unclean_key)
+    for index, unclean_key in enumerate(rmd_schema_key_list):
+        rmd_schema_key_list[index] = remove_index_references_from_key(unclean_key)
 
-    return rmr_schema_key_list
+    rmd_schema_key_list = [item for item in rmd_schema_key_list if item != "\xa0"]
+
+    return rmd_schema_key_list
 
 
-def convert_units_from_tcd_to_rmr_schema(tcd_value, tcd_units, key_list):
+def convert_units_from_tcd_to_rmd_schema(tcd_value, tcd_units, key_list):
     """Converts a quantity defined in the test case description's (TCD) to units compatible with the ASHRAE229 value.
 
     Parameters
@@ -71,7 +78,7 @@ def convert_units_from_tcd_to_rmr_schema(tcd_value, tcd_units, key_list):
 
     Returns
     -------
-    rmr_value: float
+    rmd_value: float
         The converted TCD value into the units required by the ASHRAE229 schema
 
     """
@@ -82,9 +89,9 @@ def convert_units_from_tcd_to_rmr_schema(tcd_value, tcd_units, key_list):
     # Clean TCD units to something pint can understand
     tcd_units = clean_schema_units(tcd_units)
 
-    # Take the TCD's list of keys and return RMR JSON schema's unit definition for the given JSON path
+    # Take the TCD's list of keys and return RMD JSON schema's unit definition for the given JSON path
     # Example: 'transformers[0]/capacity' => 'V*A'
-    rmr_pint_units = get_schema_units_from_tcd_json_path(key_list)
+    rmd_pint_units = get_schema_units_from_tcd_json_path(key_list)
 
     # Define TCD quantity with units in pint (convert to float if necessary)
     if isinstance(tcd_value, str):
@@ -97,15 +104,15 @@ def convert_units_from_tcd_to_rmr_schema(tcd_value, tcd_units, key_list):
         tcd_quantity = ureg.Quantity(tcd_value, tcd_units)
 
     # Convert TCD quantity to units required by schema
-    rmr_quantity = tcd_quantity.to(rmr_pint_units)
+    rmd_quantity = tcd_quantity.to(rmd_pint_units)
 
-    rmr_value = rmr_quantity.magnitude
+    rmd_value = rmd_quantity.magnitude
 
-    return rmr_value
+    return rmd_value
 
 
 def get_schema_units_from_tcd_json_path(tcd_key_list):
-    """Ingests a key_list that follows the TCD spreadsheet convention and returns the RMR schema units for it.
+    """Ingests a key_list that follows the TCD spreadsheet convention and returns the RMD schema units for it.
 
     Parameters
     ----------
@@ -124,21 +131,21 @@ def get_schema_units_from_tcd_json_path(tcd_key_list):
     """
 
     # Build JSON path from key list and remove list indices
-    # Example: ['rmr_transformations', 'user', 'schedules[0]', 'hourly_values'] => '['schedules', 'hourly_values']
-    rmr_schema_key_list = get_rmr_key_list_from_tcd_key_list(tcd_key_list)
+    # Example: ['rmd_transformations', 'user', 'schedules[0]', 'hourly_values'] => '['schedules', 'hourly_values']
+    rmd_schema_key_list = get_rmd_key_list_from_tcd_key_list(tcd_key_list)
 
     # Extract the schema's required units for this given JSON path
-    rmr_schema_units = find_schema_unit_for_json_path(rmr_schema_key_list)
+    rmd_schema_units = find_schema_unit_for_json_path(rmd_schema_key_list)
 
     # If no units are returned, raise an error
-    if rmr_schema_units == None:
+    if rmd_schema_units == None:
         raise ValueError(
             f"OUTCOME: Could not find associated units for JSON path: {tcd_key_list}"
         )
 
-    # Take the schema unit's string from the RMR JSON schema and convert it to something Pint will understand
+    # Take the schema unit's string from the RMD JSON schema and convert it to something Pint will understand
     # Example: W/K-m2 --> W/(K*m2)
-    pint_units = clean_schema_units(rmr_schema_units)
+    pint_units = clean_schema_units(rmd_schema_units)
 
     return pint_units
 
@@ -222,15 +229,15 @@ def create_dictionary_from_excel(spreadsheet_name, sheet_name, rule_set):
     invalid_first_keys = ["Notes", "template_lookup"]
 
     # Iterate column by column through values_df
-    for test_id, columnData in tests_df.iteritems():
+    for test_id, columnData in tests_df.items():
         # List of this rule's column data
         rule_value_list = columnData.values
 
-        # Initialize a dictionary to flag whether or not an RMR triplet uses a JSON template
-        rmr_template_dict = {}
+        # Initialize a dictionary to flag whether or not an RMD triplet uses a JSON template
+        rmd_template_dict = {}
 
         # Initialize a dictionary that maps system types to a list of zones. Utilized when using the
-        # rmr_template/system_zone_assignment/system[0]/baseline_system type system
+        # rmd_template/system_zone_assignment/system[0]/baseline_system type system
         # FORMAT:
         # -system_to_zone_dict["systems"][N]["baseline_system"] = [SYSTEM_NAME]
         # -system_to_zone_dict["systems"][N]["zones"] = [ZONE_1, ZONE_2,...ZONE_N]
@@ -252,16 +259,24 @@ def create_dictionary_from_excel(spreadsheet_name, sheet_name, rule_set):
                 # row_value = what will be set to the dictionary's key/value pair
                 row_value = rule_value_list[row_i]
 
+                # Ignore values that somehow return a blank ASCII string = '\xa0'
+                if row_value == "\xa0":
+                    continue
+
                 # Skip empty rows
                 if not isinstance(row_value, str):
                     if math.isnan(row_value):
                         continue
 
-                # Initialize this row's list of keys (e.g. ['rule-15-1a', 'rmr_transformations', 'user', 'transformer'])
+                # Initialize this row's list of keys (e.g. ['rule-15-1a', 'rmd_transformations', 'user', 'transformer'])
                 key_list = [test_id]
 
                 for key in keys:
                     key_value = keys_df[key][row_i]
+                    # Ignore values that somehow return a blank ASCII string = '\xa0'
+                    if key_value == "\xa0":
+                        continue
+
                     if isinstance(key_value, str):
                         # If the key includes a JSON_PATH, parse for the short hand enumeration name and adjust the key list
                         if "JSON_PATH" in key_value:
@@ -274,29 +289,29 @@ def create_dictionary_from_excel(spreadsheet_name, sheet_name, rule_set):
 
                 # If this row's value has units, convert to the schema's units first
                 if isinstance(units_list[row_i], str):
-                    # get the json_path from key list ( e.g. simplify ['rule-15-1a', 'rmr_transformations', 'user', 'transformer'])
+                    # get the json_path from key list ( e.g. simplify ['rule-15-1a', 'rmd_transformations', 'user', 'transformer'])
                     tcd_units = units_list[row_i]
 
                     # Convert row_value to match the units found in the ASHRAE 229 schema
-                    row_value = convert_units_from_tcd_to_rmr_schema(
+                    row_value = convert_units_from_tcd_to_rmd_schema(
                         row_value, tcd_units, key_list[1:]
                     )
 
-                # If this is a template definition, store the template for the RMR transformations
-                if "rmr_template" in key_list:
-                    # If a JSON template, set the values for flagged RMR triplets
+                # If this is a template definition, store the template for the RMD transformations
+                if "rmd_template" in key_list:
+                    # If a JSON template, set the values for flagged RMD triplets
                     if "json_template" in key_list:
                         # Iterate through triplets and set values from template if flagged for it
-                        for rmr_triplet in triplet_strs:
-                            # Only copy the template for RMR triplets flagged as being included
+                        for rmd_triplet in triplet_strs:
+                            # Only copy the template for RMD triplets flagged as being included
                             if (
-                                rmr_triplet
-                                in rmr_template_dict[test_id]["rmr_template"]
+                                rmd_triplet
+                                in rmd_template_dict[test_id]["rmd_template"]
                             ):
                                 # If anything other than True used to flag the triplet (e.g., False), skip it
                                 if (
-                                    rmr_template_dict[test_id]["rmr_template"][
-                                        rmr_triplet
+                                    rmd_template_dict[test_id]["rmd_template"][
+                                        rmd_triplet
                                     ]
                                     != True
                                 ):
@@ -305,14 +320,14 @@ def create_dictionary_from_excel(spreadsheet_name, sheet_name, rule_set):
                                 # Create new keylist with respect to this triplet and set value
                                 triplet_key_list = [
                                     test_id,
-                                    "rmr_transformations",
-                                    rmr_triplet,
+                                    "rmd_transformations",
+                                    rmd_triplet,
                                 ] + key_list[3:]
                                 set_nested_dict(json_dict, triplet_key_list, row_value)
 
                     elif "system_zone_assignment" in key_list:
                         # Remove irrelevant keys and set the rest of the keys into system_to_zone_dict
-                        keys_to_ignore = [test_id, "rmr_template"]
+                        keys_to_ignore = [test_id, "rmd_template"]
                         key_list = [
                             item for item in key_list if item not in keys_to_ignore
                         ]
@@ -321,10 +336,10 @@ def create_dictionary_from_excel(spreadsheet_name, sheet_name, rule_set):
                     # If not a JSON template or system to zone assignment, this implies it's setting a true/false
                     # flag for triplets
                     else:
-                        set_nested_dict(rmr_template_dict, key_list, row_value)
+                        set_nested_dict(rmd_template_dict, key_list, row_value)
 
                 else:
-                    # Once you've worked down to the final rmr_transformation sections of the spreadsheet, check
+                    # Once you've worked down to the final rmd_transformation sections of the spreadsheet, check
                     # to see if zones have been mapped to systems
                     if not zones_have_been_mapped and system_to_zone_dict:
                         zones_have_been_mapped = (
@@ -374,7 +389,14 @@ def create_test_json_from_excel(
     # Define output json file path
     json_file_path = os.path.join(file_dir, "..", rule_set, json_name)
 
+    # Load Schemas
+    if rule_set == RuleSet.ASHRAE9012019_RULESET:
+        SchemaStore.set_ruleset(RuleSet.ASHRAE9012019_RULESET)
+        SchemaEnums.update_schema_enum()
+
     json_dict = create_dictionary_from_excel(spreadsheet_name, sheet_name, rule_set)
+
+    json_dict = add_ruleset_model_types(json_dict)
 
     # Dump JSON to string for writing
     json_string = json.dumps(json_dict, indent=4)
@@ -385,13 +407,33 @@ def create_test_json_from_excel(
         print("JSON complete and written to file: " + json_name)
 
 
+def add_ruleset_model_types(json_dict: dict):
+    # dirty code to check if this works.
+    for test_context in json_dict.values():
+        if test_context.get("rmd_transformations"):
+            rmd_transformation_context = test_context["rmd_transformations"]
+            if rmd_transformation_context.get("baseline"):
+                rmd_transformation_context["baseline"]["ruleset_model_descriptions"][0][
+                    "type"
+                ] = "BASELINE_0"
+            if rmd_transformation_context.get("proposed"):
+                rmd_transformation_context["proposed"]["ruleset_model_descriptions"][0][
+                    "type"
+                ] = "PROPOSED"
+            if rmd_transformation_context.get("user"):
+                rmd_transformation_context["user"]["ruleset_model_descriptions"][0][
+                    "type"
+                ] = "USER"
+    return json_dict
+
+
 def update_unit_convention_record(
     spreadsheet_name, sheet_name, rule_set="ashrae9012019"
 ):
     """Parses a ruletest JSON spreadsheet for units and unit types to compare against existing unit_conventions.json
     records. This JSON keeps record of existing display names for various unit types throughout the ASHRAE229 JSON
     schema.
-    Example: For a unit_type == area, the TCDs might use 'ft2' while the RMR schema uses 'm2'. This would get recorded
+    Example: For a unit_type == area, the TCDs might use 'ft2' while the RMD schema uses 'm2'. This would get recorded
     in unit_conventions.json for other scripts to use when displaying reports.
 
     Parameters
@@ -436,7 +478,7 @@ def update_unit_convention_record(
     keys = []
 
     # If header has substring 'unit' or 'key', append it to list of important columns. These columns have information
-    # necessary for mapping units from the TCD and RMR to the unit convention JSON
+    # necessary for mapping units from the TCD and RMD to the unit convention JSON
     for header in headers:
         if "unit" in header:
             relevant_columns.append(header)
@@ -467,7 +509,7 @@ def update_unit_convention_record(
                 continue
 
         tcd_key = "ip"
-        rmr_key = "si"
+        rmd_key = "si"
 
         tcd_key_list = []
 
@@ -485,14 +527,14 @@ def update_unit_convention_record(
                     tcd_key_list.append(key_value)
 
         # Build JSON path from key list and remove list indices
-        # Example: ['rmr_transformations', 'user', 'schedules[0]', 'hourly_values'] => '['schedules', 'hourly_values']
-        rmr_schema_key_list = get_rmr_key_list_from_tcd_key_list(tcd_key_list)
+        # Example: ['rmd_transformations', 'user', 'schedules[0]', 'hourly_values'] => '['schedules', 'hourly_values']
+        rmd_schema_key_list = get_rmd_key_list_from_tcd_key_list(tcd_key_list)
 
         # Extract the schema's required units for this given JSON path
-        rmr_schema_units = find_schema_unit_for_json_path(rmr_schema_key_list)
+        rmd_schema_units = find_schema_unit_for_json_path(rmd_schema_key_list)
 
         # If no units are returned, raise an error
-        if rmr_schema_units == None:
+        if rmd_schema_units == None:
             raise ValueError(
                 f"OUTCOME: Could not find associated units for JSON path: {tcd_key_list}"
             )
@@ -517,22 +559,22 @@ def update_unit_convention_record(
             unit_def_dict[tcd_key][unit_type] = tcd_unit
             requires_update = True
 
-        # Update RMR units too
-        if unit_type in unit_def_dict[rmr_key]:
+        # Update RMD units too
+        if unit_type in unit_def_dict[rmd_key]:
             # Get existing definition
-            existing_unit = unit_def_dict[rmr_key][unit_type]
+            existing_unit = unit_def_dict[rmd_key][unit_type]
 
             # Compare against TCD spreadsheet's units
-            if rmr_schema_units != existing_unit:
+            if rmd_schema_units != existing_unit:
                 raise ValueError(
-                    f"Existing {rmr_key} unit definition for unit type '{unit_type}' is '{existing_unit}' but new TCD"
-                    f" spreadsheet is trying to set it to '{rmr_schema_units}'. Please pick a more specific name"
+                    f"Existing {rmd_key} unit definition for unit type '{unit_type}' is '{existing_unit}' but new TCD"
+                    f" spreadsheet is trying to set it to '{rmd_schema_units}'. Please pick a more specific name"
                     f" for this unit definition"
                 )
 
         # If no record of unit_type in unit definition dictionary, add it
         else:
-            unit_def_dict[rmr_key][unit_type] = rmr_schema_units
+            unit_def_dict[rmd_key][unit_type] = rmd_schema_units
             requires_update = True
 
     if requires_update:
@@ -605,8 +647,8 @@ def set_systems_to_zones(json_dict, system_to_zone_dict, rule_set):
         add_plant_loop_equipment(json_dict, system_rmd)
 
 
-def get_rmr_triplet_from_ruletest_json_dict(ruletest_json_test_dict):
-    """Reads in a ruletest JSON dictionary and returns list of RMRs for any triplet flagged in the ruletest JSON
+def get_rmd_triplet_from_ruletest_json_dict(ruletest_json_test_dict):
+    """Reads in a ruletest JSON dictionary and returns list of RMDs for any triplet flagged in the ruletest JSON
 
     Parameters
     ----------
@@ -615,11 +657,11 @@ def get_rmr_triplet_from_ruletest_json_dict(ruletest_json_test_dict):
 
         Dictionary corresponding to the JSON structure dictated by a ruletest spreadsheet test instance. This
         is currently the top level instance and has keys such as Section, Rule, Test, standard (a dictionary)
-        and rmr transformations (the most relevant element for this function)
+        and rmd transformations (the most relevant element for this function)
 
     Returns
     -------
-    rmr_triplet_dict_list: list
+    rmd_triplet_dict_list: list
         Returns a list of dictionaries, each representing an instance of an RMD
 
     """
@@ -627,17 +669,17 @@ def get_rmr_triplet_from_ruletest_json_dict(ruletest_json_test_dict):
     # Strings used by triplets
     triplet_strs = ["user", "proposed", "baseline"]
 
-    # List of RMR instances that live in the ruletest JSON dictionary
-    rmr_triplet_dict_list = []
+    # List of RMD instances that live in the ruletest JSON dictionary
+    rmd_triplet_dict_list = []
 
     # Check ruletest_json_dict for instances of triplets. Append any that are found to a list and return it
     for triplet in triplet_strs:
-        if triplet in ruletest_json_test_dict["rmr_transformations"]:
-            rmr_triplet_dict_list.append(
-                ruletest_json_test_dict["rmr_transformations"][triplet]
+        if triplet in ruletest_json_test_dict["rmd_transformations"]:
+            rmd_triplet_dict_list.append(
+                ruletest_json_test_dict["rmd_transformations"][triplet]
             )
 
-    return rmr_triplet_dict_list
+    return rmd_triplet_dict_list
 
 
 def add_baseline_terminals(
@@ -682,15 +724,15 @@ def add_baseline_terminals(
     # Get latest test ID to which we're adding terminals
     test_id = list(json_dict)[-1]
 
-    # Get this test_id's zones for each RMR that exist in the template (e.g., user, baseline, proposed)
-    rmr_triplet_dict_list = get_rmr_triplet_from_ruletest_json_dict(json_dict[test_id])
+    # Get this test_id's zones for each RMD that exist in the template (e.g., user, baseline, proposed)
+    rmd_triplet_dict_list = get_rmd_triplet_from_ruletest_json_dict(json_dict[test_id])
 
-    for rmr_instance_dict in rmr_triplet_dict_list:
+    for rmd_instance_dict in rmd_triplet_dict_list:
         zone_keys = get_json_path_key_list_from_enumeration(
             json_path_enumeration="zones"
         )
 
-        zones = get_nested_dic_from_key_list(rmr_instance_dict, zone_keys)
+        zones = get_nested_dic_from_key_list(rmd_instance_dict, zone_keys)
 
         for zone in zones:
             # Only add terminals for zones assigned to this system
@@ -709,26 +751,26 @@ def add_baseline_terminals(
 
                 else:
                     system_name = clean_system_name_for_multizone_airloop(
-                        rmr_instance_dict, system_name
+                        rmd_instance_dict, system_name
                     )
                     zone["terminals"][0][
                         "served_by_heating_ventilating_air_conditioning_system"
                     ] = f"{system_name}"
 
 
-def clean_system_name_for_multizone_airloop(rmr_dict, system_name):
-    """Checks the RMR dictionary for a particularly system name in the list of HVAC systems. Iterates the name of this
-    system to ensure IDs arent duplicated.
+def clean_system_name_for_multizone_airloop(rmd_dict, system_name):
+    """Checks the RMD dictionary for a particular system name in the list of HVAC systems. Iterates the name of this
+    system to ensure IDs aren't duplicated.
 
          Parameters
          ----------
 
-         rmr_dict : dict
+         rmd_dict : dict
 
              Dictionary with all HVAC systems
 
          system_name: str
-             String representing the system name to check for in the HVAC systems in rmr_dict
+             String representing the system name to check for in the HVAC systems in rmd_dict
 
          Returns
          -------
@@ -745,10 +787,9 @@ def clean_system_name_for_multizone_airloop(rmr_dict, system_name):
         json_path_enumeration="heating_ventilating_air_conditioning_systems"
     )
 
-    # If rmr_dict has HVAC systems added, check if this system name is already taken. If so, update it.
-    if element_exists_at_key_address_in_dictionary(rmr_dict, hvac_keys):
-
-        hvac_systems = get_nested_dic_from_key_list(rmr_dict, hvac_keys)
+    # If rmd_dict has HVAC systems added, check if this system name is already taken. If so, update it.
+    if element_exists_at_key_address_in_dictionary(rmd_dict, hvac_keys):
+        hvac_systems = get_nested_dic_from_key_list(rmd_dict, hvac_keys)
 
         for hvac_system in hvac_systems:
             if system_name == hvac_system["id"]:
@@ -765,7 +806,7 @@ def clean_system_name_for_multizone_airloop(rmr_dict, system_name):
 
 
 def iterate_ids_in_dict(iterable_object):
-    """Takes an RMR dictionary (at any level) and checks every element for an ID. If an ID is found, the ID is
+    """Takes an RMD dictionary (at any level) and checks every element for an ID. If an ID is found, the ID is
     updated to ensure no duplicates. This happens recursively to ensure every element is drilled down.
 
          Parameters
@@ -853,16 +894,16 @@ def add_hvac_systems(
     # Get latest test ID to which we're adding an HVAC system
     test_id = list(json_dict)[-1]
 
-    # Get this test_id's zones for each RMR that exist in the template (e.g., user, baseline, proposed)
-    rmr_triplet_dict_list = get_rmr_triplet_from_ruletest_json_dict(json_dict[test_id])
+    # Get this test_id's zones for each RMD that exist in the template (e.g., user, baseline, proposed)
+    rmd_triplet_dict_list = get_rmd_triplet_from_ruletest_json_dict(json_dict[test_id])
 
-    for rmr_instance_dict in rmr_triplet_dict_list:
-        # Get building segments in the RMR instance
+    for rmd_instance_dict in rmd_triplet_dict_list:
+        # Get building segments in the RMD instance
         building_segment_keys = get_json_path_key_list_from_enumeration(
             json_path_enumeration="building_segments"
         )
         building_segments = get_nested_dic_from_key_list(
-            rmr_instance_dict, building_segment_keys
+            rmd_instance_dict, building_segment_keys
         )
 
         # Iterate through building segments and add HVAC systems
@@ -897,7 +938,6 @@ def add_hvac_systems(
                     for hvac_system in building_segment[
                         "heating_ventilating_air_conditioning_systems"
                     ]:
-
                         # Iterate IDs to avoid duplicate IDs if this system type already exists in the building
                         if system_name in hvac_system["id"]:
                             hvac_copy = deepcopy(hvac_system)
@@ -964,15 +1004,16 @@ def add_hvac_systems(
                                     ] = f"Return Fan - {zone_id}"
 
                             # Set capacities and update heating/cooling system Ids
-                            hvac_system["cooling_system"][
-                                "id"
-                            ] = f"Cooling Sys - {zone_id}"
+                            if "cooling_system" in hvac_system:
+                                hvac_system["cooling_system"][
+                                    "id"
+                                ] = f"Cooling Sys - {zone_id}"
 
                             if "heating_system" in hvac_system:
                                 hvac_system["heating_system"][
                                     "id"
                                 ] = f"Heating Sys - {zone_id}"
-                            else:
+                            elif "preheat_system" in hvac_system:
                                 hvac_system["preheat_system"][
                                     "id"
                                 ] = f"Preheat Sys - {zone_id}"
@@ -1009,12 +1050,12 @@ def add_plant_loop_equipment(json_dict, system_rmd):
     # Get latest test ID to which we're adding plant loops
     test_id = list(json_dict)[-1]
 
-    # Get this test_id's zones for each RMR that exist in the template (e.g., user, baseline, proposed)
-    rmr_triplet_dict_list = get_rmr_triplet_from_ruletest_json_dict(json_dict[test_id])
+    # Get this test_id's zones for each RMD that exist in the template (e.g., user, baseline, proposed)
+    rmd_triplet_dict_list = get_rmd_triplet_from_ruletest_json_dict(json_dict[test_id])
 
-    # Iterate through each RMR triplet dictionary
-    for rmr_instance_dict in rmr_triplet_dict_list:
-        template_ruleset_model_instance = rmr_instance_dict[
+    # Iterate through each RMD triplet dictionary
+    for rmd_instance_dict in rmd_triplet_dict_list:
+        template_ruleset_model_instance = rmd_instance_dict[
             "ruleset_model_descriptions"
         ][0]
 

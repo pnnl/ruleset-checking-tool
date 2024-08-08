@@ -1,6 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_system_type_compare import (
     baseline_system_type_compare,
 )
@@ -26,33 +27,38 @@ class Section23Rule3(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section23Rule3, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
+            rmds_used=produce_ruleset_model_description(
+                USER=False, BASELINE_0=True, PROPOSED=False
+            ),
             each_rule=Section23Rule3.TerminalRule(),
-            index_rmr="baseline",
+            index_rmd=BASELINE_0,
             id="23-3",
             description="System 5, 6, 7 and 8 minimum volume setpoint shall be 30% of zone peak airflow, minimum outdoor airflow, or rate required to comply with minium accreditation standards whichever is larger.",
             ruleset_section_title="HVAC - Airside",
             standard_section="Section G3.1.3.13 VAV Minimum Flow Set Points (Systems 5 and 7) and Section G3.1.3.14 Fan Power and Control (Systems 6 and 8)",
             is_primary_rule=True,
-            rmr_context="ruleset_model_descriptions/0",
+            rmd_context="ruleset_model_descriptions/0",
             list_path="$.buildings[*].building_segments[*].zones[*].terminals[*]",
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
-        baseline_system_types_dict = get_baseline_system_types(rmi_b)
+        rmd_b = context.BASELINE_0
+        baseline_system_types_dict = get_baseline_system_types(rmd_b)
 
         return any(
             [
-                baseline_system_type_compare(system_type, applicable_sys_type, False)
+                baseline_system_types_dict[system_type]
+                and baseline_system_type_compare(
+                    system_type, applicable_sys_type, False
+                )
                 for system_type in baseline_system_types_dict
                 for applicable_sys_type in APPLICABLE_SYS_TYPES
             ]
         )
 
     def create_data(self, context, data):
-        rmi_b = context.baseline
-        baseline_system_types_dict = get_baseline_system_types(rmi_b)
+        rmd_b = context.BASELINE_0
+        baseline_system_types_dict = get_baseline_system_types(rmd_b)
         applicable_hvac_sys_ids = [
             hvac_id
             for sys_type in baseline_system_types_dict
@@ -67,7 +73,7 @@ class Section23Rule3(RuleDefinitionListIndexedBase):
         applicable_hvac_sys_ids = data["applicable_hvac_sys_ids"]
 
         return (
-            context_item.baseline[
+            context_item.BASELINE_0[
                 "served_by_heating_ventilating_air_conditioning_system"
             ]
             in applicable_hvac_sys_ids
@@ -76,7 +82,9 @@ class Section23Rule3(RuleDefinitionListIndexedBase):
     class TerminalRule(RuleDefinitionBase):
         def __init__(self):
             super(Section23Rule3.TerminalRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, False),
+                rmds_used=produce_ruleset_model_description(
+                    USER=False, BASELINE_0=True, PROPOSED=False
+                ),
                 required_fields={
                     "$": [
                         "minimum_airflow",
@@ -87,7 +95,7 @@ class Section23Rule3(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            terminal_b = context.baseline
+            terminal_b = context.BASELINE_0
             minimum_airflow_b = terminal_b["minimum_airflow"]
             primary_airflow_b = terminal_b["primary_airflow"]
             minimum_outdoor_airflow_b = terminal_b["minimum_outdoor_airflow"]

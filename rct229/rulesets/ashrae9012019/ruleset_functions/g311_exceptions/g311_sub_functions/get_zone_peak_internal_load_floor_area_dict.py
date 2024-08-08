@@ -1,3 +1,6 @@
+from typing import Literal
+
+from pint import Quantity
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
@@ -7,7 +10,9 @@ from rct229.utils.utility_functions import (
 )
 
 
-def get_zone_peak_internal_load_floor_area_dict(rmi, zone_id):
+def get_zone_peak_internal_load_floor_area_dict(
+    rmd: dict, zone_id: str
+) -> dict[Literal["peak", "area"], Quantity]:
     """
     Finds the peak coincident internal loads of a zone and returns the value with a load unit.
     The function returns a dict giving 2 values: {"peak":total peak (load unit) in the zone, "area":total zone area} the
@@ -17,7 +22,7 @@ def get_zone_peak_internal_load_floor_area_dict(rmi, zone_id):
 
     Parameters
     ----------
-    rmi: dict
+    rmd: dict
     A dictionary representing a RuleModelInstance object as defined by the ASHRAE229 schema
     zone_id: string
     zone id
@@ -27,7 +32,7 @@ def get_zone_peak_internal_load_floor_area_dict(rmi, zone_id):
     result: dict
     a dictionary that contains two keys, peak, and area.
     """
-    zone = find_exactly_one_zone(rmi, zone_id)
+    zone = find_exactly_one_zone(rmd, zone_id)
     zone_area = ZERO.AREA
     zone_load = ZERO.POWER
 
@@ -41,7 +46,7 @@ def get_zone_peak_internal_load_floor_area_dict(rmi, zone_id):
                 lighting_max_schedule_fraction = max(
                     getattr_(
                         find_exactly_one_schedule(
-                            rmi,
+                            rmd,
                             light["lighting_multiplier_schedule"],
                         ),
                         "Schedule",
@@ -62,7 +67,7 @@ def get_zone_peak_internal_load_floor_area_dict(rmi, zone_id):
                 equipment_max_schedule_fraction = max(
                     getattr_(
                         find_exactly_one_schedule(
-                            rmi,
+                            rmd,
                             equipment["multiplier_schedule"],
                         ),
                         "Schedule",
@@ -80,7 +85,7 @@ def get_zone_peak_internal_load_floor_area_dict(rmi, zone_id):
             occupant_max_schedule_fraction = max(
                 getattr_(
                     find_exactly_one_schedule(
-                        rmi, space["occupant_multiplier_schedule"]
+                        rmd, space["occupant_multiplier_schedule"]
                     ),
                     "Schedule",
                     "hourly_cooling_design_day",

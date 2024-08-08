@@ -2,8 +2,8 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_fu
     get_zone_peak_internal_load_floor_area_dict,
 )
 from rct229.schema.config import ureg
-from rct229.schema.schema_utils import quantify_rmr
-from rct229.schema.validate import schema_validate_rmr
+from rct229.schema.schema_utils import quantify_rmd
+from rct229.schema.validate import schema_validate_rmd
 
 TEST_RMD = {
     "id": "test_rmd",
@@ -115,40 +115,45 @@ TEST_RMD = {
         },
         {"id": "occupant_schedule_1", "hourly_cooling_design_day": [1] * 23 + [2]},
     ],
+    "type": "BASELINE_0",
 }
 
 
-TEST_RMD_FULL = {"id": "229", "ruleset_model_descriptions": [TEST_RMD]}
+TEST_RPD_FULL = {
+    "id": "229",
+    "ruleset_model_descriptions": [TEST_RMD],
+    "data_timestamp": "2024-02-12T09:00Z",
+}
 
-TEST_RMI = quantify_rmr(TEST_RMD_FULL)["ruleset_model_descriptions"][0]
+TEST_RMD = quantify_rmd(TEST_RPD_FULL)["ruleset_model_descriptions"][0]
 
 
-def test__TEST_RMD__is_valid():
-    schema_validation_result = schema_validate_rmr(TEST_RMD_FULL)
+def test__TEST_RPD__is_valid():
+    schema_validation_result = schema_validate_rmd(TEST_RPD_FULL)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
 
 
 def test__get_zone_peak_internal_load_floor_area_dict__all_three_component():
-    zone_info = get_zone_peak_internal_load_floor_area_dict(TEST_RMI, "Thermal Zone 1")
+    zone_info = get_zone_peak_internal_load_floor_area_dict(TEST_RMD, "Thermal Zone 1")
     assert abs(zone_info["peak"] - 1500 * ureg("watt")) < 0.00001 * ureg("watt")
     assert abs(zone_info["area"] - 500 * ureg("m2")) < 0.00001 * ureg("m2")
 
 
 def test__get_zone_peak_internal_load_floor_area_dict__no_lighting_component():
-    zone_info = get_zone_peak_internal_load_floor_area_dict(TEST_RMI, "Thermal Zone 2")
+    zone_info = get_zone_peak_internal_load_floor_area_dict(TEST_RMD, "Thermal Zone 2")
     assert abs(zone_info["peak"] - 1000 * ureg("watt")) < 0.00001 * ureg("watt")
     assert abs(zone_info["area"] - 500 * ureg("m2")) < 0.00001 * ureg("m2")
 
 
 def test__get_zone_peak_internal_load_floor_area_dict__no_occupants_component():
-    zone_info = get_zone_peak_internal_load_floor_area_dict(TEST_RMI, "Thermal Zone 3")
+    zone_info = get_zone_peak_internal_load_floor_area_dict(TEST_RMD, "Thermal Zone 3")
     assert abs(zone_info["peak"] - 1000 * ureg("watt")) < 0.00001 * ureg("watt")
     assert abs(zone_info["area"] - 500 * ureg("m2")) < 0.00001 * ureg("m2")
 
 
 def test__get_zone_peak_internal_load_floor_area_dict__no_space_component():
-    zone_info = get_zone_peak_internal_load_floor_area_dict(TEST_RMI, "Thermal Zone 4")
+    zone_info = get_zone_peak_internal_load_floor_area_dict(TEST_RMD, "Thermal Zone 4")
     assert abs(zone_info["peak"] - 0 * ureg("watt")) < 0.00001 * ureg("watt")
     assert abs(zone_info["area"] - 0 * ureg("m2")) < 0.00001 * ureg("m2")
