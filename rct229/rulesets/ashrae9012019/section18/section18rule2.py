@@ -25,6 +25,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_lab_zone_hvac_systems i
 )
 from rct229.schema.config import ureg
 from rct229.schema.schema_enums import SchemaEnums
+from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_all
 
 FAN_SYSTEM_OPERATION = SchemaEnums.schema_enums["FanSystemOperationOptions"]
@@ -39,6 +40,23 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_6,
     HVAC_SYS.SYS_7,
     HVAC_SYS.SYS_8,
+    HVAC_SYS.SYS_9,
+    HVAC_SYS.SYS_10,
+    HVAC_SYS.SYS_11_1,
+    HVAC_SYS.SYS_12,
+    HVAC_SYS.SYS_13,
+]
+
+EXCEPTION_SYS_TYPES = [
+    HVAC_SYS.SYS_5,
+    HVAC_SYS.SYS_7
+]
+
+SINGLE_ZONE_APPLICABLE_SYS_TYPES = [
+    HVAC_SYS.SYS_1,
+    HVAC_SYS.SYS_2,
+    HVAC_SYS.SYS_3,
+    HVAC_SYS.SYS_4,
     HVAC_SYS.SYS_9,
     HVAC_SYS.SYS_10,
     HVAC_SYS.SYS_11_1,
@@ -125,7 +143,9 @@ class Section18Rule2(RuleDefinitionListIndexedBase):
                         "is_zone_single_zone_sys_b": any(
                             [
                                 hvac_id_b in baseline_system_types_dict_b[sys_type]
-                                for sys_type in APPLICABLE_SYS_TYPES
+                                for sys_type in baseline_system_types_dict_b
+                                for target_sys_type in SINGLE_ZONE_APPLICABLE_SYS_TYPES
+                                if baseline_system_type_compare(sys_type, target_sys_type, False)
                             ]
                         ),
                         "does_sys_only_serve_lab_b": (
@@ -154,67 +174,72 @@ class Section18Rule2(RuleDefinitionListIndexedBase):
                         hvac_id_b
                     ]["zone_list"]
 
+                    assert_(len(zones_served_by_system) > 0, f"No zone is served by {hvac_id_b}, check your inputs.")
                     zones_on_floor = (
                         get_zones_on_same_floor_list(
                             rmd_b,
-                            zones_and_terminal_unit_list_dict_b[hvac_id_b]["zone_list"],
+                            zones_served_by_system[0],
                         )
                         if do_multi_zone_evaluation
                         else []
                     )
 
                     # check if all the zones served by the system are on the same floor
-                    if all([zone in zones_on_floor for zone in zones_served_by_system]):
+                    # this comparison is equivalent to do_multi_zone_evaluation = false
+                    if set(zones_on_floor) == set(zones_served_by_system):
                         # check if there are any other systems of the same system type that serve zones on this floor
-                        for hvac_sys_type2 in applicable_hvac_sys_ids_b:
-                            for hvac_sys2_id_b in baseline_system_types_dict_b[
-                                hvac_sys_type2
-                            ]:
-                                # check if hvac_id_b and hvac_sys2_id_b are the same system
-                                if hvac_sys2_id_b != hvac_id_b:
-                                    zones_served_by_system2 = (
-                                        zones_and_terminal_unit_list_dict_b[
-                                            hvac_sys2_id_b
-                                        ]["zone_list"]
-                                    )
-                                    if len(
-                                        set(zones_served_by_system2).intersection(
-                                            set(zones_on_floor)
-                                        )
-                                        == 0
-                                    ):
-                                        hvac_data_b[hvac_id_b][
-                                            "does_two_sys_exist_on_same_fl_b"
-                                        ] = "false"
-                                    elif (
+                        same_sys_type_list = next((hvac_id_list for hvac_id_list in baseline_system_types_dict_b.values() if hvac_id_b in hvac_id_list), None)
+                        for hvac_sys2_id_b in same_sys_type_list:
+                            # check if hvac_id_b and hvac_sys2_id_b are the same system
+                            if hvac_sys2_id_b != hvac_id_b:
+                                zones_served_by_system2 = (
+                                    zones_and_terminal_unit_list_dict_b[
                                         hvac_sys2_id_b
-                                        in lab_zone_hvac_systems["lab_zones_only"]
-                                        and len(lab_zone_hvac_systems["lab_zones_only"])
-                                        == 1
-                                        and building_total_lab_zone_exhaust_b
-                                        > AIRFLOW_15000_CFM
-                                    ):
-                                        hvac_data_b[hvac_id_b][
-                                            "does_two_sys_exist_on_same_fl_b"
-                                        ] = "true"
-
-                                    elif (
-                                        hvac_sys2_id_b in lab_zones_only_b
-                                        and len(lab_zones_only_b) == 1
-                                        and building_total_lab_zone_exhaust_b
-                                        <= AIRFLOW_15000_CFM
-                                    ):
-                                        hvac_data_b[hvac_id_b][
-                                            "does_two_sys_exist_on_same_fl_b"
-                                        ] = "undetermined"
-
-                                    else:
-                                        hvac_data_b[hvac_id_b][
-                                            "does_two_sys_exist_on_same_fl_b"
-                                        ] = "false"
+                                    ]["zone_list"]
+                                )
+                                if len(
+                                    set(zones_served_by_system2).intersection(
+                                        set(zones_on_floor)
+                                    )) == 0:
+                                    hvac_data_b[hvac_id_b][
+                                        "does_two_sys_exist_on_same_fl_b"
+                                    ] = "false"
+                                elif (
+                                    hvac_sys2_id_b
+                                    in lab_zone_hvac_systems["lab_zones_only"]
+                                    and len(lab_zone_hvac_systems["lab_zones_only"])
+                                    == 1
+                                    and building_total_lab_zone_exhaust_b
+                                    > AIRFLOW_15000_CFM
+                                ):
+                                    hvac_data_b[hvac_id_b][
+                                        "does_two_sys_exist_on_same_fl_b"
+                                    ] = "true"
                                     hvac_data_b[hvac_id_b][
                                         "hvac_sys2_id_b"
                                     ] = hvac_sys2_id_b
+
+                                elif (
+                                    hvac_sys2_id_b in lab_zones_only_b
+                                    and len(lab_zones_only_b) == 1
+                                    and building_total_lab_zone_exhaust_b
+                                    <= AIRFLOW_15000_CFM
+                                ):
+                                    hvac_data_b[hvac_id_b][
+                                        "does_two_sys_exist_on_same_fl_b"
+                                    ] = "undetermined"
+                                    hvac_data_b[hvac_id_b][
+                                        "hvac_sys2_id_b"
+                                    ] = hvac_sys2_id_b
+
+                                else:
+                                    # The two system are indeed serving the same floor
+                                    # But it could cause a list of systems on the same floor in this condition
+                                    # So we do not add another system on the same floor since when `does_two_sys_exist_on_same_fl` is false,
+                                    # there is no logic that requires checking the second system.
+                                    hvac_data_b[hvac_id_b][
+                                        "does_two_sys_exist_on_same_fl_b"
+                                    ] = "false"
 
             return {
                 "hvac_data_b": hvac_data_b,
@@ -235,6 +260,7 @@ class Section18Rule2(RuleDefinitionListIndexedBase):
                 hvac_data_b = data["hvac_data_b"][hvac_id_b]
 
                 return {
+                    "hvac_id": hvac_id_b,
                     "is_zone_single_zone_sys_b": hvac_data_b[
                         "is_zone_single_zone_sys_b"
                     ],
@@ -331,8 +357,8 @@ class Section18Rule2(RuleDefinitionListIndexedBase):
                 )
 
             def get_fail_msg(self, context, calc_vals=None, data=None):
-                does_sys_serve_lab_b = context["does_sys_serve_lab_b"]
-                does_sys_serve_lab_and_other_b = context[
+                does_sys_serve_lab_b = calc_vals["does_sys_serve_lab_b"]
+                does_sys_serve_lab_and_other_b = calc_vals[
                     "does_sys_serve_lab_and_other_b"
                 ]
                 building_total_lab_zone_exhaust_b = data[
