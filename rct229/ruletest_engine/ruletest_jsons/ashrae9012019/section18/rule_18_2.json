@@ -792,6 +792,13 @@
                                 "type": "COOLING"
                             }
                         ],
+                        "external_fluid_sources": [
+                            {
+                                "id": "Purchased CHW 1",
+                                "loop": "Purchased CHW Loop 1",
+                                "type": "CHILLED_WATER"
+                            }
+                        ],
                         "type": "BASELINE_0"
                     }
                 ],
@@ -1538,7 +1545,8 @@
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Purchased HW Loop 1"
+                                                    "hot_water_loop": "Purchased HW Loop 1",
+                                                    "design_capacity": 468913.7777777778
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -1553,10 +1561,6 @@
                                                             "id": "System_5b_PVAV_HW_Reheat Return Fan"
                                                         }
                                                     ]
-                                                },
-                                                "heating_system": {
-                                                    "id": "HS1",
-                                                    "design_capacity": 468913.7777777778
                                                 }
                                             },
                                             {
@@ -1569,7 +1573,8 @@
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 2",
                                                     "type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Purchased HW Loop 1"
+                                                    "hot_water_loop": "Purchased HW Loop 1",
+                                                    "design_capacity": 468913.7777777778
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 2",
@@ -1584,10 +1589,6 @@
                                                             "id": "System_5b_PVAV_HW_Reheat Return Fan 1"
                                                         }
                                                     ]
-                                                },
-                                                "heating_system": {
-                                                    "id": "HS2",
-                                                    "design_capacity": 468913.7777777778
                                                 }
                                             }
                                         ],
@@ -1608,6 +1609,13 @@
                             {
                                 "id": "Purchased HW Loop 1",
                                 "type": "HEATING"
+                            }
+                        ],
+                        "external_fluid_sources": [
+                            {
+                                "id": "Purchased HW 1",
+                                "loop": "Purchased HW Loop 1",
+                                "type": "HOT_WATER"
                             }
                         ],
                         "type": "BASELINE_0"
@@ -2293,7 +2301,8 @@
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Purchased HW Loop 1"
+                                                    "hot_water_loop": "Purchased HW Loop 1",
+                                                    "design_capacity": 293071.1111111111
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -2308,10 +2317,6 @@
                                                             "id": "System_5b_PVAV_HW_Reheat Return Fan"
                                                         }
                                                     ]
-                                                },
-                                                "heating_system": {
-                                                    "id": "HS1",
-                                                    "design_capacity": 293071.1111111111
                                                 }
                                             }
                                         ],
@@ -2332,6 +2337,13 @@
                             {
                                 "id": "Purchased HW Loop 1",
                                 "type": "HEATING"
+                            }
+                        ],
+                        "external_fluid_sources": [
+                            {
+                                "id": "Purchased HW 1",
+                                "loop": "Purchased HW Loop 1",
+                                "type": "HOT_WATER"
                             }
                         ],
                         "type": "BASELINE_0"
@@ -4137,6 +4149,7 @@
                                 ]
                             }
                         ],
+
                         "type": "PROPOSED"
                     }
                 ],
@@ -4259,7 +4272,8 @@
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Purchased HW Loop 1"
+                                                    "hot_water_loop": "Purchased HW Loop 1",
+                                                    "design_capacity": 468913.7777777778
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -4274,10 +4288,6 @@
                                                             "id": "System_7b_VAV_HW_Reheat Return Fan"
                                                         }
                                                     ]
-                                                },
-                                                "heating_system": {
-                                                    "id": "HS1",
-                                                    "design_capacity": 468913.7777777778
                                                 }
                                             },
                                             {
@@ -4291,7 +4301,8 @@
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 2",
                                                     "type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Purchased HW Loop 1"
+                                                    "hot_water_loop": "Purchased HW Loop 1",
+                                                    "design_capacity": 234456.8888888889
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 2",
@@ -4306,10 +4317,6 @@
                                                             "id": "System_7b_VAV_HW_Reheat Return Fan 1"
                                                         }
                                                     ]
-                                                },
-                                                "heating_system": {
-                                                    "id": "HS2",
-                                                    "design_capacity": 234456.8888888889
                                                 }
                                             },
                                             {
@@ -4323,7 +4330,8 @@
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 3",
                                                     "type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Purchased HW Loop 1"
+                                                    "hot_water_loop": "Purchased HW Loop 1",
+                                                    "design_capacity": 234456.8888888889
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 3",
@@ -4338,10 +4346,6 @@
                                                             "id": "System_7b_VAV_HW_Reheat Return Fan 2"
                                                         }
                                                     ]
-                                                },
-                                                "heating_system": {
-                                                    "id": "HS3",
-                                                    "design_capacity": 234456.8888888889
                                                 }
                                             }
                                         ],
@@ -4388,6 +4392,13 @@
                                         "type": "COOLING"
                                     }
                                 ]
+                            }
+                        ],
+                        "external_fluid_sources": [
+                            {
+                                "id": "Purchased HW 1",
+                                "loop": "Purchased HW Loop 1",
+                                "type": "HOT_WATER"
                             }
                         ],
                         "type": "BASELINE_0"
