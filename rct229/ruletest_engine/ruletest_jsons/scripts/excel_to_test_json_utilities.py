@@ -637,6 +637,16 @@ def set_systems_to_zones(json_dict, system_to_zone_dict, rule_set):
         # Add plant loop equipment
         add_plant_loop_equipment(json_dict, system_rmd)
 
+    # Get latest test ID
+    test_id = list(json_dict)[-1]
+
+    # Cycle through each rmd triplet and ensure there are no shallow copies between elements.
+    for rmd_triplet, rmd_dict in json_dict[test_id]["rmd_transformations"].items():
+
+        json_dict[test_id]["rmd_transformations"][rmd_triplet] = deepcopy(
+            json_dict[test_id]["rmd_transformations"][rmd_triplet]
+        )
+
 
 def get_rmd_triplet_from_ruletest_json_dict(ruletest_json_test_dict):
     """Reads in a ruletest JSON dictionary and returns list of RMDs for any triplet flagged in the ruletest JSON
