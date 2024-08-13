@@ -5,9 +5,12 @@ from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.compare_schedules import (
     compare_schedules,
 )
+from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_functions.is_space_a_computer_room import (
+    is_space_a_computer_room,
+)
 from rct229.schema.schema_enums import SchemaEnums
-from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.utility_functions import find_exactly_one_schedule
 
 MISCELLANEOUS_EQUIPMENT = SchemaEnums.schema_enums["MiscellaneousEquipmentOptions"]
 
@@ -47,7 +50,7 @@ class Section12Rule4(RuleDefinitionListIndexedBase):
     def __init__(self):
         super(Section12Rule4, self).__init__(
             rmds_used=produce_ruleset_model_description(
-                USER=False, BASELINE_0=False, PROPOSED=True
+                USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=Section12Rule4.RuleSetModelDescriptionRule(),
             index_rmd=BASELINE_0,
@@ -57,7 +60,7 @@ class Section12Rule4(RuleDefinitionListIndexedBase):
             ruleset_section_title="Receptacle",
             standard_section="Section G3.1.3.16",
             is_primary_rule=True,
-            list_path="$.ruleset_model_descriptions[0]",
+            list_path="ruleset_model_descriptions[0]",
             required_fields={"$": ["calendar"], "calendar": ["is_leap_year"]},
             data_items={"is_leap_year": (BASELINE_0, "calendar/is_leap_year")},
         )
@@ -66,7 +69,7 @@ class Section12Rule4(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section12Rule4.RuleSetModelDescriptionRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
-                    USER=True, BASELINE_0=False, PROPOSED=True
+                    USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 each_rule=Section12Rule4.RuleSetModelDescriptionRule.MiscEquipRule(),
                 index_rmd=BASELINE_0,
@@ -79,9 +82,7 @@ class Section12Rule4(RuleDefinitionListIndexedBase):
             for space_b in find_all(
                 "$.buildings[*].building_segments[*].zones[*].spaces[*]", rmd_b
             ):
-                if is_space_a_computer_room(
-                    rmd_b, space_b["id"]
-                ):  # this function need to be developed
+                if is_space_a_computer_room(rmd_b, space_b["id"]):
                     for misc_equip_b in space_b["miscellaneous_equipment"]:
                         if (
                             misc_equip_b.get("type")
@@ -90,6 +91,21 @@ class Section12Rule4(RuleDefinitionListIndexedBase):
                             return False
                         else:
                             return True
+
+        def create_data(self, context, data):
+            rmd_b = context.BASELINE_0
+
+            schedule_b = {
+                mult_sch_b: find_exactly_one_schedule(rmd_b, mult_sch_b)[
+                    "hourly_values"
+                ]
+                for mult_sch_b in find_all(
+                    "$.buildings[*].building_segments[*].zones[*].spaces[*].miscellaneous_equipment[*].multiplier_schedule",
+                    rmd_b,
+                )
+            }
+
+            return {"schedule_b": schedule_b}
 
         class MiscEquipRule(RuleDefinitionBase):
             def __init__(self):
@@ -100,27 +116,38 @@ class Section12Rule4(RuleDefinitionListIndexedBase):
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
+                    required_fields={
+                        "$": [
+                            "multiplier_schedule",
+                        ]
+                    },
                 )
 
             def get_calc_vals(self, context, data=None):
                 misc_equip_b = context.BASELINE_0
 
                 is_leap_year = data["is_leap_year"]
+                schedule_b = data["schedule_b"]
 
                 if is_leap_year:
                     DAYS_IN_MONTH[2] = 29
 
-                multiplier_schedule_b = getattr_(
-                    misc_equip_b, "misc_equip", "multiplier_schedule", "hourly_values"
-                )
-                expected_hourly_values = [
-                    MONTH_FRACTIONS[month] * DAYS_IN_MONTH[month] * 24
-                    for month in range(1, 13)
-                ]
+                hourly_multiplier_schedule_b = misc_equip_b["multiplier_schedule"]
+
+                multiplier_schedule_b = schedule_b[hourly_multiplier_schedule_b]
+                expected_hourly_values = []
+                for month in range(1, 13):
+                    expected_hourly_values.extend(
+                        [MONTH_FRACTIONS[month]] * DAYS_IN_MONTH[month] * 24
+                    )
+
                 mask_schedule = [1] * 8784 if is_leap_year else [1] * 8760
 
                 comparison_data = compare_schedules(
-                    multiplier_schedule_b, expected_hourly_values, mask_schedule
+                    multiplier_schedule_b,
+                    expected_hourly_values,
+                    mask_schedule,
+                    is_leap_year,
                 )["total_hours_matched"]
 
                 return {"comparison_data": comparison_data}
@@ -129,4 +156,4 @@ class Section12Rule4(RuleDefinitionListIndexedBase):
                 comparison_data = calc_vals["comparison_data"]
                 is_leap_year = data["is_leap_year"]
 
-                return comparison_data == 8784 if is_leap_year else 8760
+                return comparison_data == (8784 if is_leap_year else 8760)
