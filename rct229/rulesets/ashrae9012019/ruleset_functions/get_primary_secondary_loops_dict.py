@@ -72,8 +72,9 @@ def get_primary_secondary_loops_dict(rmd_b: dict) -> dict[str, list[str]]:
     ):
         cfl_id = chilled_fluid_loop["id"]
         if cfl_id in chiller_loop_ids and cfl_id in non_process_chw_coil_loop_ids:
-            # No loop in baseline shall be
+            # No loop in baseline shall be primary only
             tmp_primary_secondary_loops_dict = dict()
+            primary_loops = []
             break
         elif cfl_id in chiller_loop_ids:
             if all(
