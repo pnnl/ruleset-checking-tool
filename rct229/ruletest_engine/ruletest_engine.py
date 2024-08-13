@@ -1,5 +1,6 @@
 import glob
 import json
+from typing import Optional
 
 # from jsonpointer import JsonPointer
 import os
@@ -158,14 +159,17 @@ def process_test_result(test_result, test_dict, test_id):
             outcome_text = "NOT_APPLICABLE"
 
     else:
+
+        expected_result = test_dict["expected_rule_outcome"]
+
         if test_result == "pass":
-            outcome_text = f"FAILURE: Test {test_id} passed unexpectedly. The following condition was not identified: {description}"
+            outcome_text = f"FAILURE: Test {test_id} passed unexpectedly. Expected '{expected_result}'. The following condition was not identified: {description}"
         elif test_result == "fail":
-            outcome_text = f"FAILURE: Test {test_id} failed unexpectedly. The following condition was not identified: {description}"
+            outcome_text = f"FAILURE: Test {test_id} failed unexpectedly. Expected '{expected_result}'. The following condition was not identified: {description}"
         elif test_result == "undetermined":
-            outcome_text = (
-                f"FAILURE: Test {test_id} returned 'undetermined' unexpectedly."
-            )
+            outcome_text = f"FAILURE: Test {test_id} returned 'undetermined' unexpectedly. Expected '{expected_result}'."
+        elif test_result == "not_applicable":
+            outcome_text = f"FAILURE: Test {test_id} returned 'not_applicable' unexpectedly.  Expected '{expected_result}'."
         else:
             outcome_text = (
                 f"FAILURE: Test {test_id} returned '{test_result}' unexpectedly"
@@ -174,7 +178,9 @@ def process_test_result(test_result, test_dict, test_id):
     return outcome_text, received_expected_outcome
 
 
-def run_section_tests(test_json_name: str, ruleset_doc: RuleSet):
+def run_section_tests(
+    test_json_name: str, ruleset_doc: RuleSet, test_json_path: Optional[str] = None
+):
     """Runs all tests found in a given test JSON and prints results to console. Returns true/false describing whether
     or not all tests in the JSON result in the expected outcome.
 
@@ -182,11 +188,16 @@ def run_section_tests(test_json_name: str, ruleset_doc: RuleSet):
     ----------
     test_json_name : string
 
-        Name of test JSON in 'test_jsons' directory. (e.g., transformer_tests.json)
+        Name of test JSON in 'test_json_path' directory. (e.g., transformer_tests.json)
 
     ruleset_doc: string
 
         Name of the ruleset
+
+    test_json_path: str
+
+        Path to test JSON's directory. This parameter is optional and will default to
+        os.path.dirname(__file__)/ruletest_jsons if left undefined.
 
     Returns
     -------
@@ -196,9 +207,12 @@ def run_section_tests(test_json_name: str, ruleset_doc: RuleSet):
     """
 
     # Create path to test JSON (e.g. 'transformer_tests.json')
-    test_json_path = os.path.join(
-        os.path.dirname(__file__), "ruletest_jsons", test_json_name
-    )
+    if test_json_path is None:
+        test_json_path = os.path.join(
+            os.path.dirname(__file__), "ruletest_jsons", test_json_name
+        )
+    else:
+        test_json_path = os.path.join(test_json_path, test_json_name)
 
     # hash for capturing test results. Keys include: "results, log"
     test_result_dict = {}
@@ -206,18 +220,6 @@ def run_section_tests(test_json_name: str, ruleset_doc: RuleSet):
 
     # Flag checking if all tests succeed. Ensures a message gets printed if so.
     all_tests_pass = True
-
-    # Print banner messages
-    banner_text = f"TESTS RESULTS FOR: {test_json_name}".center(50)
-    #    banner = [
-    #        "-----------------------------------------------------------------------------------------",
-    #        f"--------------------{banner_text}-------------------",
-    #        "-----------------------------------------------------------------------------------------",
-    #        "",
-    #    ]
-
-    #    for line in banner:
-    #        print(line)
 
     # Open
     with open(test_json_path) as f:
@@ -252,7 +254,10 @@ def run_section_tests(test_json_name: str, ruleset_doc: RuleSet):
         test_result_dict[
             f"{test_id}"
         ] = []  # Initialize log of this tests multiple results
-        print_errors = False
+
+        # Flag determining if an error was found when running this specific rule test
+        test_error_found = False
+
         # Pull in rule, if written. If not found, fail the test and log which Section and Rule could not be found.
         try:
             rule = available_rule_definitions_dict[function_name]()
@@ -298,21 +303,38 @@ def run_section_tests(test_json_name: str, ruleset_doc: RuleSet):
                 outcome_structure, test_result_dict, test_dict, test_id
             )
 
-            # Check set of results for this test ID against expected outcome
-            if test_dict["expected_rule_outcome"] == "pass":
-                # For an expected pass, ALL tested elements in the RMD triplet must pass
-                if not all(test_result_dict[f"{test_id}"]):
-                    print_errors = True
+            match test_dict["expected_rule_outcome"]:
 
-            elif test_dict["expected_rule_outcome"] == "fail":
-                # If all elements don't meet the expected outcome, flag this as an error
-                if not any(test_result_dict[f"{test_id}"]):
-                    print_errors = True
+                case "pass":
+                    # For an expected pass, ALL tested elements in the RMR triplet must pass
+                    if not all(test_result_dict[f"{test_id}"]):
+                        test_error_found = True
+
+                case "fail" | "undetermined" | "not_applicable":
+                    # If all elements don't meet the expected outcome, flag this as an error
+                    # (e.g., every test_result_dict element is false with 'fail' as the expected outcome. At least
+                    #  one element must equal 'fail' for this to be a successful test)
+                    if not any(test_result_dict[f"{test_id}"]):
+                        test_error_found = True
+
+                case _:
+                    rule_outcome = test_dict["expected_rule_outcome"]
+                    # Print message communicating that a rule cannot be found
+                    print(
+                        f"RULE OUTCOME NOT FOUND: {rule_outcome} is not a valid rule outcome. Expected 'pass', 'fail',"
+                        f"'undetermined' or 'not_applicable'."
+                    )
+                    test_error_found = True
 
             # If errors were found, communicate the error logs
-            if print_errors:
+            if test_error_found:
                 all_tests_pass = False
 
+                if len(test_result_dict["log"]) == 0:
+                    rule_outcome = test_dict["expected_rule_outcome"]
+                    print(
+                        f"FAILURE: {test_id} failed but produced no log errors. Expected '{rule_outcome}'."
+                    )
                 # Print log of all errors
                 for test_result_string in test_result_dict["log"]:
                     print(test_result_string)
@@ -612,12 +634,21 @@ def evaluate_outcome_object(outcome_dict, test_result_dict, test_dict, test_id):
     # If the result key is a list of results (i.e. many elements get tested), keep drilling down until you get single
     # dictionary
     if isinstance(outcome_dict["result"], list):
-        # Iterate through each outcome in outcome results recursively until you get down to individual results
-        for nested_outcome in outcome_dict["result"]:
-            # Check outcome of each in list recursively until "result" key is not a list, but a dictionary
-            evaluate_outcome_object(
-                nested_outcome, test_result_dict, test_dict, test_id
-            )  # , outcome_result_list)
+
+        # If the outcome result is an empty list, flag this as a blanket error
+        if len(outcome_dict["result"]) == 0:
+
+            expected_outcome = test_dict["expected_rule_outcome"]
+            outcome_test = f"FAILURE: Running test {test_id} returned an empty set of results without any reference to 'pass', 'fail', 'undetermined', or 'not_applicable'. Expected '{expected_outcome}'."
+            test_result_dict["log"].append(outcome_test)
+
+        else:
+            # Iterate through each outcome in outcome results recursively until you get down to individual results
+            for nested_outcome in outcome_dict["result"]:
+                # Check outcome of each in list recursively until "result" key is not a list, but a dictionary
+                evaluate_outcome_object(
+                    nested_outcome, test_result_dict, test_dict, test_id
+                )  # , outcome_result_list)
 
     else:
         # Process this tests results

@@ -196,11 +196,8 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
 
                 # ^ comparison for data type.
                 minimum_humidity_schedule_type_matched = (
-                    minimum_humidity_stpt_hourly_values_b
-                    is None
-                    == minimum_humidity_stpt_hourly_values_p
-                    is None
-                )
+                    minimum_humidity_stpt_hourly_values_b is None
+                ) == (minimum_humidity_stpt_hourly_values_p is None)
 
                 maximum_humidity_schedule_matched = (
                     maximum_humidity_stpt_hourly_values_b
