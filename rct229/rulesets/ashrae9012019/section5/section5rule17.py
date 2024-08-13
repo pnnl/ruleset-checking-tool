@@ -29,7 +29,7 @@ class Section5Rule17(RuleDefinitionListIndexedBase):
             is_primary_rule=False,
             each_rule=Section5Rule17.ZoneRule(),
             index_rmd=BASELINE_0,
-            list_path="$.buildings[*].building_segments[*].zones[*]",
+            list_path="ruleset_model_descriptions[0].buildings[*].building_segments[*].zones[*]",
         )
 
     class ZoneRule(PartialRuleDefinition):

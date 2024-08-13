@@ -308,7 +308,7 @@
         "Rule": 9,
         "Test": "c",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water loop.  The chilled water system has a 299 ton cooling capacity.",
-        "expected_rule_outcome": "undetermined",
+        "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-9",
             "ruleset_reference": "G3.1.3.10",

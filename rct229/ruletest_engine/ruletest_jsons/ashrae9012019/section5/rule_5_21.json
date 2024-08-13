@@ -3,7 +3,7 @@
         "Section": 5,
         "Rule": 21,
         "Test": "a",
-        "test_description": "Project has one building segment and includes a space with an above-grade wall surface and window. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. Fenestration is correctly modeled with the same area, U-factor and SHGC in the baseline as in the proposed design",
+        "test_description": "Project has one building segment and includes a space with an unregulated above-grade wall surface and window. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. Fenestration is correctly modeled with the same area, U-factor and SHGC in the baseline as in the proposed design",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-21",
@@ -184,7 +184,7 @@
         "Section": 5,
         "Rule": 21,
         "Test": "b",
-        "test_description": "Project has one building segment and includes a space with an above-grade wall surface and window. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. Fenestration is incorrectly modeled with a different area in the baseline than in the proposed design",
+        "test_description": "Project has one building segment and includes a space with an unregulated above-grade wall surface and window. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. Fenestration is incorrectly modeled with a different area in the baseline than in the proposed design",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "Subsurface that is not regulated (Not part of building envelope) is not modeled with the same area, U-factor and SHGC in the baseline as in the propsoed design.",
         "standard": {
@@ -366,7 +366,7 @@
         "Section": 5,
         "Rule": 21,
         "Test": "c",
-        "test_description": "Project has one building segment and includes a space with an above-grade wall surface and window. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. Fenestration is modeled with a different u-factor in the baseline than in the proposed design",
+        "test_description": "Project has one building segment and includes a space with an unregulated  above-grade wall surface and window. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. Fenestration is modeled with a different u-factor in the baseline than in the proposed design",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "Subsurface that is not regulated (Not part of building envelope) is not modeled with the same area, U-factor and SHGC in the baseline as in the propsoed design.",
         "standard": {
@@ -548,7 +548,7 @@
         "Section": 5,
         "Rule": 21,
         "Test": "d",
-        "test_description": "Project has one building segment and includes a space with an above-grade wall surface and window. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. Fenestration is modeled with a different SHGC in the baseline than in the proposed design",
+        "test_description": "Project has one building segment and includes a space with an unregulated above-grade wall surface and window. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. Fenestration is modeled with a different SHGC in the baseline than in the proposed design",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "Subsurface that is not regulated (Not part of building envelope) is not modeled with the same area, U-factor and SHGC in the baseline as in the propsoed design.",
         "standard": {
