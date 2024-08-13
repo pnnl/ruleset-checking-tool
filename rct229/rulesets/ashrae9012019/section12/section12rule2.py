@@ -183,13 +183,9 @@ class Section12Rule2(RuleDefinitionListIndexedBase):
 
                 def get_fail_msg(self, context, calc_vals=None, data=None):
                     auto_receptacle_controls_b = calc_vals["auto_receptacle_controls_b"]
-                    auto_receptacle_controls_p = calc_vals["auto_receptacle_controls_p"]
-                    hours_misc_equip_schedule_b = calc_vals["misc_equip_schedule_b"]
-                    hours_misc_equip_schedule_p = calc_vals["misc_equip_schedule_p"]
                     schedules_comparison_output = calc_vals[
                         "schedules_comparison_output"
                     ]
-                    space_type_b = data["space_type_b"]
                     auto_receptacle_controls_p = calc_vals["auto_receptacle_controls_p"]
                     if (
                         auto_receptacle_controls_p
