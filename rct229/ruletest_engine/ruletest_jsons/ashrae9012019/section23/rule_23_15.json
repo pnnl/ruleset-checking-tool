@@ -3,18 +3,18 @@
         "Section": 23,
         "Rule": 15,
         "Test": "a",
-        "test_description": "The project has one building segment with one zone served by System 3. Proposed building utilizes System 3 with humidistatic controls. The baseline building utilizes system 3 as well.  The expected result is: undetermined",
+        "test_description": "The project has one building segment with one zone served by base system type 3. The proposed building includes dehumidifcation.",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "23-15",
             "ruleset_reference": "G3.1.3.18",
-            "rule_description": "The dehumidification reheat type in the baseline building  shall be the same as the baseline system heating type.",
+            "rule_description": "The dehumidification reheat type in the baseline building shall be the same as the baseline system heating type.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "Rule 13 is true",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "proposed": {
@@ -151,18 +151,18 @@
         "Section": 23,
         "Rule": 15,
         "Test": "b",
-        "test_description": "The project has one building segment with one zone served by System 3. Proposed building utilizes System 3 without dehumidification. Baseline building also has system 3.  The expected result is: not_applicable",
+        "test_description": "The project has one building segment with one zone served by baseline system type 3. The proposed building does not include dehumidifcation. ",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "23-15",
             "ruleset_reference": "G3.1.3.18",
-            "rule_description": "The dehumidification reheat type in the baseline building  shall be the same as the baseline system heating type.",
+            "rule_description": "The dehumidification reheat type in the baseline building shall be the same as the baseline system heating type.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "Rule 13 is true",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "proposed": {

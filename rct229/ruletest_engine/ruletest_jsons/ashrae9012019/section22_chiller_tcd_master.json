@@ -4437,7 +4437,8 @@
                                                 "id": "System 7",
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
-                                                    "type": "FLUID_LOOP"
+                                                    "type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Chiller Loop 1"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
@@ -4716,7 +4717,8 @@
                                                 "id": "System 8",
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
-                                                    "type": "FLUID_LOOP"
+                                                    "type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Chiller Loop 1"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
@@ -7032,7 +7034,8 @@
                                                 "id": "System 7",
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
-                                                    "type": "FLUID_LOOP"
+                                                    "type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Chiller Loop 1"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
@@ -7665,6 +7668,7 @@
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 10",
+                                                        "heating_source": "ELECTRIC",
                                                         "fan": {
                                                             "id": "Terminal Fan 1"
                                                         }
@@ -7674,12 +7678,7 @@
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System 10",
-                                                "heating_system": {
-                                                    "id": "Furnace Coil 1",
-                                                    "type": "FURNACE",
-                                                    "energy_source_type": "ELECTRICITY"
-                                                }
+                                                "id": "System 10"
                                             }
                                         ]
                                     }
@@ -8824,8 +8823,8 @@
         "Section": 22,
         "Rule": 13,
         "Test": "c",
-        "test_description": "The project has one building segment with two zones served by a baseline system type 7. System 7 cooling tower is not connected to a valid condensing loop.",
-        "expected_rule_outcome": "not_applicable",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 8. The heat rejection device is an open-circuit cooling tower with an axial fan.",
+        "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-13",
             "ruleset_reference": "G3.1.3.11",
@@ -8860,9 +8859,12 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
-                                                        "heating_source": "HOT_WATER",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 8",
+                                                        "heating_source": "ELECTRIC",
+                                                        "fan": {
+                                                            "id": "Fan 1"
+                                                        },
+                                                        "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
                                             },
@@ -8875,16 +8877,19 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
-                                                        "heating_source": "HOT_WATER",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 8",
+                                                        "heating_source": "ELECTRIC",
+                                                        "fan": {
+                                                            "id": "Fan 2"
+                                                        },
+                                                        "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System 7",
+                                                "id": "System 8",
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
                                                     "type": "FLUID_LOOP",
@@ -8892,8 +8897,7 @@
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
-                                                    "type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1"
+                                                    "type": "ELECTRIC_RESISTANCE"
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -8915,13 +8919,6 @@
                                 ]
                             }
                         ],
-                        "boilers": [
-                            {
-                                "id": "Boiler 1",
-                                "loop": "Boiler Loop 1",
-                                "energy_source_type": "NATURAL_GAS"
-                            }
-                        ],
                         "chillers": [
                             {
                                 "id": "Chiller 1",
@@ -8930,11 +8927,6 @@
                             }
                         ],
                         "pumps": [
-                            {
-                                "id": "Boiler Pump 1",
-                                "loop_or_piping": "Boiler Loop 1",
-                                "speed_control": "FIXED_SPEED"
-                            },
                             {
                                 "id": "Chiller Pump 1",
                                 "loop_or_piping": "Chiller Loop 1",
@@ -8948,9 +8940,155 @@
                         ],
                         "fluid_loops": [
                             {
-                                "id": "Boiler Loop 1",
-                                "type": "HEATING"
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
+                                    }
+                                ]
                             },
+                            {},
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
+                            }
+                        ],
+                        "heat_rejections": [
+                            {
+                                "id": "Heat Rejection 1",
+                                "loop": "Condenser Loop 1",
+                                "type": "OPEN_CIRCUIT_COOLING_TOWER",
+                                "fan_type": "AXIAL"
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-13-d": {
+        "Section": 22,
+        "Rule": 13,
+        "Test": "d",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 8. The heat rejection device is an open-circuit cooling tower with a centrifugal fan.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "22-13",
+            "ruleset_reference": "G3.1.3.11",
+            "rule_description": "The baseline heat rejection device shall be an axial-fan open circuit cooling tower.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.0.36"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 8",
+                                                        "heating_source": "ELECTRIC",
+                                                        "fan": {
+                                                            "id": "Fan 1"
+                                                        },
+                                                        "fan_configuration": "PARALLEL"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 8",
+                                                        "heating_source": "ELECTRIC",
+                                                        "fan": {
+                                                            "id": "Fan 2"
+                                                        },
+                                                        "fan_configuration": "PARALLEL"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 8",
+                                                "cooling_system": {
+                                                    "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "type": "ELECTRIC_RESISTANCE"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "chillers": [
+                            {
+                                "id": "Chiller 1",
+                                "cooling_loop": "Chiller Loop 1",
+                                "condensing_loop": "Condenser Loop 1"
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Chiller Pump 1",
+                                "loop_or_piping": "Chiller Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
                             {
                                 "id": "Chiller Loop 1",
                                 "type": "COOLING",
@@ -8961,6 +9099,7 @@
                                     }
                                 ]
                             },
+                            {},
                             {
                                 "id": "Condenser Loop 1",
                                 "type": "CONDENSER"
@@ -8969,9 +9108,9 @@
                         "heat_rejections": [
                             {
                                 "id": "Heat Rejection 1",
-                                "loop": "Unknown Condenser Loop 1",
+                                "loop": "Condenser Loop 1",
                                 "type": "OPEN_CIRCUIT_COOLING_TOWER",
-                                "fan_type": "AXIAL"
+                                "fan_type": "CENTRIFUGAL"
                             }
                         ],
                         "type": "BASELINE_0"
@@ -14372,6 +14511,18 @@
                                 "type": "HEATING"
                             }
                         ],
+                        "output": {
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1",
+                                "unmet_load_hours": 0,
+                                "unmet_load_hours_heating": 0,
+                                "unmet_occupied_load_hours_heating": 0,
+                                "unmet_load_hours_cooling": 0,
+                                "unmet_occupied_load_hours_cooling": 0,
+                                "building_peak_cooling_load": 2813600.0
+                            }
+                        },
                         "type": "BASELINE_0"
                     }
                 ]
@@ -16470,7 +16621,8 @@
                                                 "id": "System 7",
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
-                                                    "type": "FLUID_LOOP"
+                                                    "type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Chiller Loop 1"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
@@ -21318,6 +21470,18 @@
                                 "type": "HEATING"
                             }
                         ],
+                        "output": {
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1",
+                                "unmet_load_hours": 0,
+                                "unmet_load_hours_heating": 0,
+                                "unmet_occupied_load_hours_heating": 0,
+                                "unmet_load_hours_cooling": 0,
+                                "unmet_occupied_load_hours_cooling": 0,
+                                "building_peak_cooling_load": 8440800.0
+                            }
+                        },
                         "type": "BASELINE_0"
                     }
                 ]
@@ -22201,7 +22365,7 @@
         "Section": 22,
         "Rule": 32,
         "Test": "g",
-        "test_description": "The project has one building segment with two zones served by a baseline system type 6. There are no chillers.",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 2. There are no chillers.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-32",
@@ -22234,53 +22398,31 @@
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
-                                                        "id": "VAV Air Terminal 1",
-                                                        "is_supply_ducted": true,
-                                                        "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 6",
-                                                        "heating_source": "ELECTRIC",
-                                                        "fan_configuration": "PARALLEL"
-                                                    }
-                                                ]
-                                            },
-                                            {
-                                                "id": "Thermal Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "terminals": [
-                                                    {
-                                                        "id": "VAV Air Terminal 2",
-                                                        "is_supply_ducted": true,
-                                                        "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 6",
-                                                        "heating_source": "ELECTRIC",
-                                                        "fan_configuration": "PARALLEL"
+                                                        "id": "PTHP Terminal 1",
+                                                        "is_supply_ducted": false,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "PTHP 1"
                                                     }
                                                 ]
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System 6",
+                                                "id": "PTHP 1",
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1",
+                                                    "id": "HP Cooling Coil 1",
                                                     "type": "DIRECT_EXPANSION"
                                                 },
-                                                "preheat_system": {
-                                                    "id": "Preheat Coil 1",
-                                                    "type": "ELECTRIC_RESISTANCE"
+                                                "heating_system": {
+                                                    "id": "HP Heating Coil 1",
+                                                    "type": "HEAT_PUMP"
                                                 },
                                                 "fan_system": {
-                                                    "id": "VAV Fan System 1",
-                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1"
-                                                        }
-                                                    ],
-                                                    "return_fans": [
-                                                        {
-                                                            "id": "Return Fan 1"
                                                         }
                                                     ]
                                                 }
@@ -22396,6 +22538,13 @@
                                 ]
                             }
                         ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
                         "chillers": [
                             {
                                 "id": "Chiller 1",
@@ -22403,6 +22552,11 @@
                             }
                         ],
                         "pumps": [
+                            {
+                                "id": "Boiler Pump 1",
+                                "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
                             {
                                 "id": "Chiller Pump 1",
                                 "loop_or_piping": "Chiller Loop 1",
@@ -22415,6 +22569,10 @@
                             }
                         ],
                         "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            },
                             {
                                 "id": "Chiller Loop 1",
                                 "type": "COOLING",
@@ -22467,6 +22625,12 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 9.290303999999999
+                                                    }
+                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "System_8_PFP_Reheat - Terminal for Thermal Zone 1",
@@ -22486,6 +22650,12 @@
                                                 "id": "Thermal Zone 2",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 2",
+                                                        "floor_area": 9.290303999999999
+                                                    }
+                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "System_8_PFP_Reheat - Terminal for Thermal Zone 2",
@@ -22504,37 +22674,11 @@
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System 8",
-                                                "cooling_system": {
-                                                    "id": "CHW Coil 1",
-                                                    "type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Secondary CHW Loop 1"
-                                                },
-                                                "preheat_system": {
-                                                    "id": "Preheat Coil 1",
-                                                    "type": "ELECTRIC_RESISTANCE"
-                                                },
-                                                "fan_system": {
-                                                    "id": "VAV Fan System 1",
-                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
-                                                    "supply_fans": [
-                                                        {
-                                                            "id": "Supply Fan 1"
-                                                        }
-                                                    ],
-                                                    "return_fans": [
-                                                        {
-                                                            "id": "Return Fan 1"
-                                                        }
-                                                    ]
-                                                }
-                                            },
-                                            {
                                                 "id": "System_8_PFP_Reheat",
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
                                                     "type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Cooling Child Loop 2"
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
@@ -22560,7 +22704,7 @@
                                                 "cooling_system": {
                                                     "id": "CHW Coil 2",
                                                     "type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                    "chilled_water_loop": "Secondary CHW Loop 2"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 2",
@@ -22586,6 +22730,13 @@
                                 ]
                             }
                         ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
                         "chillers": [
                             {
                                 "id": "Chiller 1",
@@ -22593,6 +22744,11 @@
                             }
                         ],
                         "pumps": [
+                            {
+                                "id": "Boiler Pump 1",
+                                "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
                             {
                                 "id": "Chiller Pump 1",
                                 "loop_or_piping": "Chiller Loop 1",
@@ -22602,14 +22758,13 @@
                                 "id": "Secondary CHW Pump",
                                 "loop_or_piping": "Secondary CHW Loop 1",
                                 "speed_control": "VARIABLE_SPEED"
-                            },
-                            {
-                                "id": "Boiler Pump 1",
-                                "loop_or_piping": "Boiler Loop 1",
-                                "speed_control": "FIXED_SPEED"
                             }
                         ],
                         "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            },
                             {
                                 "id": "Chiller Loop 1",
                                 "type": "COOLING",
@@ -22619,21 +22774,10 @@
                                         "type": "COOLING"
                                     },
                                     {
-                                        "id": "Cooling Child Loop 2",
+                                        "id": "Secondary CHW Loop 2",
                                         "type": "COOLING"
                                     }
                                 ]
-                            },
-                            {
-                                "id": "Boiler Loop 1",
-                                "type": "HEATING"
-                            }
-                        ],
-                        "boilers": [
-                            {
-                                "id": "Boiler 1",
-                                "loop": "Boiler Loop 1",
-                                "energy_source_type": "NATURAL_GAS"
                             }
                         ],
                         "type": "BASELINE_0"
@@ -22856,7 +23000,8 @@
                                                 "id": "System 7",
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
-                                                    "type": "FLUID_LOOP"
+                                                    "type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Chiller Loop 1"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
@@ -22959,12 +23104,39 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 9.290303999999999
+                                                    }
+                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "System_7_VAV_HW_Reheat - Terminal for Thermal Zone 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System_7_VAV_HW_Reheat",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 2",
+                                                        "floor_area": 9.290303999999999
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "System_7_VAV_HW_Reheat - Terminal for Thermal Zone 2",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_7_VAV_HW_Reheat 1",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -23000,11 +23172,30 @@
                                                 }
                                             },
                                             {
-                                                "id": "System 7_2",
+                                                "id": "System_7_VAV_HW_Reheat 1",
                                                 "cooling_system": {
                                                     "id": "CHW Coil 2",
                                                     "type": "FLUID_LOOP",
                                                     "chilled_water_loop": "Chiller Loop 2"
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 2",
+                                                    "type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 2",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "System_7_VAV_HW_Reheat Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "System_7_VAV_HW_Reheat Return Fan 1"
+                                                        }
+                                                    ]
                                                 }
                                             }
                                         ]
@@ -23023,6 +23214,10 @@
                             {
                                 "id": "Chiller 1",
                                 "cooling_loop": "Chiller Loop 1"
+                            },
+                            {
+                                "id": "Chiller 2",
+                                "cooling_loop": "Chiller Loop 2"
                             }
                         ],
                         "pumps": [
@@ -23462,6 +23657,10 @@
                             {
                                 "id": "Chiller 1",
                                 "cooling_loop": "Chiller Loop 1"
+                            },
+                            {
+                                "id": "Chiller 2",
+                                "cooling_loop": "Chiller Loop 2"
                             }
                         ],
                         "pumps": [
@@ -24913,6 +25112,7 @@
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 10",
+                                                        "heating_source": "ELECTRIC",
                                                         "fan": {
                                                             "id": "Terminal Fan 1"
                                                         }
@@ -24922,12 +25122,7 @@
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System 10",
-                                                "heating_system": {
-                                                    "id": "Furnace Coil 1",
-                                                    "type": "FURNACE",
-                                                    "energy_source_type": "ELECTRICITY"
-                                                }
+                                                "id": "System 10"
                                             }
                                         ]
                                     }

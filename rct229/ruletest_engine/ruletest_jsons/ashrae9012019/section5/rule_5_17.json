@@ -3,7 +3,7 @@
         "Section": 5,
         "Rule": 17,
         "Test": "a",
-        "test_description": "Project has one building segment and includes a space whose status type is EXISTING. Existing fenestration area cannot be determined.",
+        "test_description": "Project has one building segment and includes an existing space. Existing fenestration area cannot be determined.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "Part or all of spaces listed below is existing or altered. The baseline vertical fenestration area for a existing zone must equal to the fenestration area prior to the proposed scope of work. The baseline fenestration area in zone must be checked manually.",
         "standard": {
@@ -81,7 +81,7 @@
         "Section": 5,
         "Rule": 17,
         "Test": "b",
-        "test_description": "Project has one building segment and includes a space whose status type is ALTERED. Existing fenestration area prior to proposed work cannot be determined.",
+        "test_description": "Project has one building segment and includes an altered space. Existing fenestration area prior to proposed work cannot be determined.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "Part or all of spaces listed below is existing or altered. The baseline vertical fenestration area for a existing zone must equal to the fenestration area prior to the proposed scope of work. The baseline fenestration area in zone must be checked manually.",
         "standard": {
@@ -159,7 +159,7 @@
         "Section": 5,
         "Rule": 17,
         "Test": "c",
-        "test_description": "Project has one building segment and includes a space whose status type is NEW. There is no existing fenestration.",
+        "test_description": "Project has one building segment and includes a space that is new construction. There is no existing fenestration.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "5-17",
