@@ -592,6 +592,7 @@
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 10",
+                                                        "heating_source": "ELECTRIC",
                                                         "fan": {
                                                             "id": "Terminal Fan 1"
                                                         }
@@ -601,12 +602,7 @@
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System 10",
-                                                "heating_system": {
-                                                    "id": "Furnace Coil 1",
-                                                    "type": "FURNACE",
-                                                    "energy_source_type": "ELECTRICITY"
-                                                }
+                                                "id": "System 10"
                                             }
                                         ]
                                     }
