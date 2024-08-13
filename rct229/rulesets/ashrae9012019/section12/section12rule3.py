@@ -86,7 +86,7 @@ class Section12Rule3(RuleDefinitionListIndexedBase):
             rmd_p = context.PROPOSED
 
             schedule_b = {
-                mult_sch_b: find_exactly_one_schedule(rmd_p, mult_sch_b)[
+                mult_sch_b: find_exactly_one_schedule(rmd_b, mult_sch_b)[
                     "hourly_values"
                 ]
                 for mult_sch_b in find_all(
@@ -230,7 +230,7 @@ class Section12Rule3(RuleDefinitionListIndexedBase):
                     ]
 
                     return (
-                        credit_comparison_data["total_hours_matched"]
+                        credit_comparison_data
                         == hourly_multiplier_schedule_len_p
                         == expected_hourly_values_len
                     )
