@@ -60,7 +60,8 @@ class Section18Rule3(RuleDefinitionListIndexedBase):
 
             return any(
                 [
-                    target_baseline_systems_b[zone_id_b] == SYSTEMORIGIN.G311D
+                    target_baseline_systems_b[zone_id_b]["system_origin"]
+                    == SYSTEMORIGIN.G311D
                     for zone_id_b in target_baseline_systems_b
                 ]
             )
