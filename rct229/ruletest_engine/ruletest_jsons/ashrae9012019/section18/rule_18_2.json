@@ -3221,7 +3221,7 @@
                                                     "id": "Preheat Coil 2",
                                                     "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1",
-                                                    "design_capacity": 5861.422222222222
+                                                    "design_capacity": 23445.68888888889
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 2",
@@ -3253,7 +3253,7 @@
                                                     "id": "Preheat Coil 3",
                                                     "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1",
-                                                    "design_capacity": 5861.422222222222
+                                                    "design_capacity": 23445.68888888889
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 3",
@@ -3436,6 +3436,12 @@
                                                         {
                                                             "id": "System_5_PVAV_HW_Reheat Return Fan"
                                                         }
+                                                    ],
+                                                    "exhaust_fans": [
+                                                        {
+                                                            "id": "lab_sy_exhaust",
+                                                            "design_airflow": 1887.7897727999994
+                                                        }
                                                     ]
                                                 },
                                                 "heating_system": {
@@ -3454,7 +3460,7 @@
                                                     "id": "Preheat Coil 2",
                                                     "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1",
-                                                    "design_capacity": 5861.422222222222
+                                                    "design_capacity": 23445.68888888889
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 2",
@@ -3467,12 +3473,6 @@
                                                     "return_fans": [
                                                         {
                                                             "id": "System_5_PVAV_HW_Reheat Return Fan 1"
-                                                        }
-                                                    ],
-                                                    "exhaust_fans": [
-                                                        {
-                                                            "id": "lab_sy_exhaust",
-                                                            "design_airflow": 1887.7897727999994
                                                         }
                                                     ]
                                                 },
@@ -3492,7 +3492,7 @@
                                                     "id": "Preheat Coil 3",
                                                     "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1",
-                                                    "design_capacity": 5861.422222222222
+                                                    "design_capacity": 23445.68888888889
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 3",
