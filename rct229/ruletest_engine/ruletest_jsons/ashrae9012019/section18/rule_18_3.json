@@ -124,13 +124,15 @@
                                             {
                                                 "id": "System_1_PTAC 1",
                                                 "cooling_system": {
-                                                    "id": "DX Coil 2",
-                                                    "type": "DIRECT_EXPANSION"
+                                                    "id": "CS2",
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_sensible_cool_capacity": 2813600000.0
                                                 },
                                                 "heating_system": {
-                                                    "id": "HHW Coil 2",
+                                                    "id": "HS2",
                                                     "type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1"
+                                                    "hot_water_loop": "Boiler Loop 1",
+                                                    "design_capacity": 937827.5555555556
                                                 },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 2",
@@ -145,13 +147,15 @@
                                             {
                                                 "id": "System_1_PTAC 2",
                                                 "cooling_system": {
-                                                    "id": "DX Coil 3",
-                                                    "type": "DIRECT_EXPANSION"
+                                                    "id": "CS3",
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_sensible_cool_capacity": 2813600000.0
                                                 },
                                                 "heating_system": {
-                                                    "id": "HHW Coil 3",
+                                                    "id": "HS3",
                                                     "type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1"
+                                                    "hot_water_loop": "Boiler Loop 1",
+                                                    "design_capacity": 937827.5555555556
                                                 },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 3",
@@ -166,13 +170,15 @@
                                             {
                                                 "id": "System_1_PTAC 3",
                                                 "cooling_system": {
-                                                    "id": "DX Coil 4",
-                                                    "type": "DIRECT_EXPANSION"
+                                                    "id": "CS4",
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_sensible_cool_capacity": 2813600000.0
                                                 },
                                                 "heating_system": {
-                                                    "id": "HHW Coil 4",
+                                                    "id": "HS4",
                                                     "type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1"
+                                                    "hot_water_loop": "Boiler Loop 1",
+                                                    "design_capacity": 937827.5555555556
                                                 },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 4",
@@ -332,13 +338,15 @@
                                             {
                                                 "id": "System_1_PTAC 1",
                                                 "cooling_system": {
-                                                    "id": "DX Coil 2",
-                                                    "type": "DIRECT_EXPANSION"
+                                                    "id": "CS2",
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_sensible_cool_capacity": 2813600000.0
                                                 },
                                                 "heating_system": {
-                                                    "id": "HHW Coil 2",
+                                                    "id": "HS2",
                                                     "type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1"
+                                                    "hot_water_loop": "Boiler Loop 1",
+                                                    "design_capacity": 937827.5555555556
                                                 },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 2",
@@ -353,13 +361,15 @@
                                             {
                                                 "id": "System_1_PTAC 2",
                                                 "cooling_system": {
-                                                    "id": "DX Coil 3",
-                                                    "type": "DIRECT_EXPANSION"
+                                                    "id": "CS3",
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_sensible_cool_capacity": 2813600000.0
                                                 },
                                                 "heating_system": {
-                                                    "id": "HHW Coil 3",
+                                                    "id": "HS3",
                                                     "type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1"
+                                                    "hot_water_loop": "Boiler Loop 1",
+                                                    "design_capacity": 937827.5555555556
                                                 },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 3",
@@ -374,13 +384,15 @@
                                             {
                                                 "id": "System_1_PTAC 3",
                                                 "cooling_system": {
-                                                    "id": "DX Coil 4",
-                                                    "type": "DIRECT_EXPANSION"
+                                                    "id": "CS4",
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_sensible_cool_capacity": 2813600000.0
                                                 },
                                                 "heating_system": {
-                                                    "id": "HHW Coil 4",
+                                                    "id": "HS4",
                                                     "type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1"
+                                                    "hot_water_loop": "Boiler Loop 1",
+                                                    "design_capacity": 937827.5555555556
                                                 },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 4",
@@ -546,12 +558,12 @@
                                             {
                                                 "id": "System_1_PTAC 1",
                                                 "cooling_system": {
-                                                    "id": "CS1",
+                                                    "id": "CS2",
                                                     "type": "DIRECT_EXPANSION",
                                                     "design_sensible_cool_capacity": 2813600000.0
                                                 },
                                                 "heating_system": {
-                                                    "id": "HS1",
+                                                    "id": "HS2",
                                                     "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1",
                                                     "design_capacity": 937827.5555555556
@@ -569,12 +581,12 @@
                                             {
                                                 "id": "System_1_PTAC 2",
                                                 "cooling_system": {
-                                                    "id": "CS1",
+                                                    "id": "CS3",
                                                     "type": "DIRECT_EXPANSION",
                                                     "design_sensible_cool_capacity": 2813600000.0
                                                 },
                                                 "heating_system": {
-                                                    "id": "HS1",
+                                                    "id": "HS3",
                                                     "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1",
                                                     "design_capacity": 937827.5555555556
@@ -592,12 +604,12 @@
                                             {
                                                 "id": "System_1_PTAC 3",
                                                 "cooling_system": {
-                                                    "id": "CS1",
+                                                    "id": "CS4",
                                                     "type": "DIRECT_EXPANSION",
                                                     "design_sensible_cool_capacity": 2813600000.0
                                                 },
                                                 "heating_system": {
-                                                    "id": "HS1",
+                                                    "id": "HS4",
                                                     "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1",
                                                     "design_capacity": 937827.5555555556
@@ -673,7 +685,7 @@
                                                 ],
                                                 "zonal_exhaust_fan": {
                                                     "id": "Zone Exhaust Fan 1",
-                                                    "design_airflow": 7551.159091199997
+                                                    "design_airflow": 471.94744319999984
                                                 },
                                                 "floor_name": "flr 1"
                                             },
@@ -760,12 +772,12 @@
                                             {
                                                 "id": "System_1_PTAC 1",
                                                 "cooling_system": {
-                                                    "id": "CS1",
+                                                    "id": "CS2",
                                                     "type": "DIRECT_EXPANSION",
                                                     "design_sensible_cool_capacity": 2813600000.0
                                                 },
                                                 "heating_system": {
-                                                    "id": "HS1",
+                                                    "id": "HS2",
                                                     "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1",
                                                     "design_capacity": 937827.5555555556
@@ -783,12 +795,12 @@
                                             {
                                                 "id": "System_1_PTAC 2",
                                                 "cooling_system": {
-                                                    "id": "CS1",
+                                                    "id": "CS3",
                                                     "type": "DIRECT_EXPANSION",
                                                     "design_sensible_cool_capacity": 2813600000.0
                                                 },
                                                 "heating_system": {
-                                                    "id": "HS1",
+                                                    "id": "HS3",
                                                     "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1",
                                                     "design_capacity": 937827.5555555556
@@ -806,12 +818,12 @@
                                             {
                                                 "id": "System_1_PTAC 3",
                                                 "cooling_system": {
-                                                    "id": "CS1",
+                                                    "id": "CS4",
                                                     "type": "DIRECT_EXPANSION",
                                                     "design_sensible_cool_capacity": 2813600000.0
                                                 },
                                                 "heating_system": {
-                                                    "id": "HS1",
+                                                    "id": "HS4",
                                                     "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1",
                                                     "design_capacity": 937827.5555555556
@@ -980,12 +992,12 @@
                                             {
                                                 "id": "System_1_PTAC 1",
                                                 "cooling_system": {
-                                                    "id": "CS1",
+                                                    "id": "CS2",
                                                     "type": "DIRECT_EXPANSION",
                                                     "design_sensible_cool_capacity": 2813600000.0
                                                 },
                                                 "heating_system": {
-                                                    "id": "HS1",
+                                                    "id": "HS2",
                                                     "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1",
                                                     "design_capacity": 937827.5555555556
@@ -1003,12 +1015,12 @@
                                             {
                                                 "id": "System_1_PTAC 2",
                                                 "cooling_system": {
-                                                    "id": "CS1",
+                                                    "id": "CS3",
                                                     "type": "DIRECT_EXPANSION",
                                                     "design_sensible_cool_capacity": 2813600000.0
                                                 },
                                                 "heating_system": {
-                                                    "id": "HS1",
+                                                    "id": "HS3",
                                                     "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1",
                                                     "design_capacity": 937827.5555555556
@@ -1026,12 +1038,12 @@
                                             {
                                                 "id": "System_1_PTAC 3",
                                                 "cooling_system": {
-                                                    "id": "CS1",
+                                                    "id": "CS4",
                                                     "type": "DIRECT_EXPANSION",
                                                     "design_sensible_cool_capacity": 2813600000.0
                                                 },
                                                 "heating_system": {
-                                                    "id": "HS1",
+                                                    "id": "HS4",
                                                     "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1",
                                                     "design_capacity": 937827.5555555556
@@ -1192,12 +1204,12 @@
                                             {
                                                 "id": "System_1_PTAC 1",
                                                 "cooling_system": {
-                                                    "id": "CS1",
+                                                    "id": "CS2",
                                                     "type": "DIRECT_EXPANSION",
                                                     "design_sensible_cool_capacity": 2813600000.0
                                                 },
                                                 "heating_system": {
-                                                    "id": "HS1",
+                                                    "id": "HS2",
                                                     "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1",
                                                     "design_capacity": 937827.5555555556
@@ -1215,12 +1227,12 @@
                                             {
                                                 "id": "System_1_PTAC 2",
                                                 "cooling_system": {
-                                                    "id": "CS1",
+                                                    "id": "CS3",
                                                     "type": "DIRECT_EXPANSION",
                                                     "design_sensible_cool_capacity": 2813600000.0
                                                 },
                                                 "heating_system": {
-                                                    "id": "HS1",
+                                                    "id": "HS3",
                                                     "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1",
                                                     "design_capacity": 937827.5555555556
@@ -1238,12 +1250,12 @@
                                             {
                                                 "id": "System_1_PTAC 3",
                                                 "cooling_system": {
-                                                    "id": "CS1",
+                                                    "id": "CS4",
                                                     "type": "DIRECT_EXPANSION",
                                                     "design_sensible_cool_capacity": 2813600000.0
                                                 },
                                                 "heating_system": {
-                                                    "id": "HS1",
+                                                    "id": "HS4",
                                                     "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1",
                                                     "design_capacity": 937827.5555555556
