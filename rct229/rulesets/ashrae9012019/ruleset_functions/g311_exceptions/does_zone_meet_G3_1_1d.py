@@ -136,9 +136,7 @@ def does_zone_meet_g3_1_1d(rmd: dict, zone_id: str) -> bool:
                 else:
                     zone_total_exhaust += hvac_system_total_exhaust_airflow
 
-            building_total_lab_exhaust += (
-                building_total_lab_exhaust + zone_total_exhaust
-            )
+            building_total_lab_exhaust += zone_total_exhaust
 
     return (
         zone_id in laboratory_zones_list
