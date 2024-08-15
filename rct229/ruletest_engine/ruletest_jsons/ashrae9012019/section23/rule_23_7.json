@@ -3,18 +3,18 @@
         "Section": 23,
         "Rule": 7,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones served by system 6. System 6's fan system correctly specified temperature control as constant. The expected result is: pass",
+        "test_description": "The project has one building segment with two zones served by baseline system type 6. The baseline system supply air temperature is constant at the design conditions.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "23-7",
             "ruleset_reference": "G3.1.3.14",
-            "rule_description": "For baseline systems 6 and 8,  supply air temperature setpoint shall be constant at the design condition",
+            "rule_description": "For baseline systems 6 and 8, supply air temperature setpoint shall be constant at the design condition.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "System 6, 8 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
@@ -110,18 +110,18 @@
         "Section": 23,
         "Rule": 7,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones served by system 6. System 6's fan system incorrectly specified temperature control as outside air reset. The expected result is: fail",
+        "test_description": "The project has one building segment with two zones served by baseline system type 6. The baseline system supply air temperature has outdoor air reset controls.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "23-7",
             "ruleset_reference": "G3.1.3.14",
-            "rule_description": "For baseline systems 6 and 8,  supply air temperature setpoint shall be constant at the design condition",
+            "rule_description": "For baseline systems 6 and 8, supply air temperature setpoint shall be constant at the design condition.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "System 6, 8 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Full",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {

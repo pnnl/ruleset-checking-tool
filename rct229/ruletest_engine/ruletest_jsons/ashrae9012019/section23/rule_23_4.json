@@ -3,18 +3,18 @@
         "Section": 23,
         "Rule": 4,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones and one  laboratory space served by  baseline System 7. Per G3.1.1c, these systems must adjust lab exhaust and makeup air.  The expected result is: undetermined",
+        "test_description": "The project has one building segment with two zones and one laboratory space served by baseline system type 7. Per G3.1.1c, these systems must adjust lab exhaust and makeup air.",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "23-4",
             "ruleset_reference": "G3.1.3.13",
-            "rule_description": "Baseline systems 5 and 7 serving lab spaces per Standard 90.1-2019 G3.1.1(c), shall reduce lab exhaust and makeup air during unoccupied periods to 50% of zone peak airflow, the minimum outdoor airflow, or rate required to comply with minimum accreditation standards whichever is larger.",
+            "rule_description": "For baseline systems 5 and 7 serving lab spaces per Standard 90.1-2019 G3.1.1(c), lab exhaust and makeup air during unoccupied periods shall be reduced to 50% of zone peak airflow, the minimum outdoor airflow, or rate required to comply with minimum accreditation standards, whichever is larger.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "System 5, 7 (Rule18-a, to be confirmed), lab space",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "proposed": {
@@ -116,7 +116,13 @@
                         ],
                         "type": "PROPOSED"
                     }
-                ]
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                }
             },
             "baseline": {
                 "id": "ASHRAE229 1",
@@ -149,7 +155,8 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "lighting_space_type": "LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM"
+                                                        "lighting_space_type": "LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM",
+                                                        "floor_area": 100
                                                     }
                                                 ]
                                             },
@@ -174,12 +181,14 @@
                                                 "id": "System 5",
                                                 "cooling_system": {
                                                     "id": "DX Coil 1",
-                                                    "type": "DIRECT_EXPANSION"
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_sensible_cool_capacity": 17585.0
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1"
+                                                    "hot_water_loop": "Boiler Loop 1",
+                                                    "design_capacity": 17584.266666666666
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -237,18 +246,18 @@
         "Section": 23,
         "Rule": 4,
         "Test": "b",
-        "test_description": "The project has one building segment with one zone and one laboratory space served by baseline System 3. Per G3.1.1c, this only applies to system 5 and 7. The expected result is: not_applicable",
+        "test_description": "The project has one building segment with one zone and one laboratory space served by baseline System 3.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "23-4",
             "ruleset_reference": "G3.1.3.13",
-            "rule_description": "Baseline systems 5 and 7 serving lab spaces per Standard 90.1-2019 G3.1.1(c), shall reduce lab exhaust and makeup air during unoccupied periods to 50% of zone peak airflow, the minimum outdoor airflow, or rate required to comply with minimum accreditation standards whichever is larger.",
+            "rule_description": "For baseline systems 5 and 7 serving lab spaces per Standard 90.1-2019 G3.1.1(c), lab exhaust and makeup air during unoccupied periods shall be reduced to 50% of zone peak airflow, the minimum outdoor airflow, or rate required to comply with minimum accreditation standards, whichever is larger.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "System 5, 7 (Rule18-a, to be confirmed), lab space",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "proposed": {
@@ -312,7 +321,13 @@
                         ],
                         "type": "PROPOSED"
                     }
-                ]
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "calendar": {
+                    "is_leap_year": false
+                }
             },
             "baseline": {
                 "id": "ASHRAE229 1",
@@ -343,7 +358,8 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "lighting_space_type": "LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM"
+                                                        "lighting_space_type": "LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM",
+                                                        "floor_area": 100
                                                     }
                                                 ]
                                             }
@@ -353,11 +369,13 @@
                                                 "id": "System Type 3",
                                                 "cooling_system": {
                                                     "id": "DX Coil 1",
-                                                    "type": "DIRECT_EXPANSION"
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_sensible_cool_capacity": 17585.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Furnace Coil 1",
-                                                    "type": "FURNACE"
+                                                    "type": "FURNACE",
+                                                    "design_capacity": 17584.266666666666
                                                 },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",

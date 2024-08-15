@@ -215,11 +215,6 @@
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "System 10",
-                                                "heating_system": {
-                                                    "id": "Heating Coil 1",
-                                                    "type": "FURNACE",
-                                                    "energy_source_type": "ELECTRICITY"
-                                                },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
@@ -284,11 +279,6 @@
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "System 10",
-                                                "heating_system": {
-                                                    "id": "Heating Coil 1",
-                                                    "type": "FURNACE",
-                                                    "energy_source_type": "ELECTRICITY"
-                                                },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
@@ -387,11 +377,6 @@
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "System 10",
-                                                "heating_system": {
-                                                    "id": "Heating Coil 1",
-                                                    "type": "FURNACE",
-                                                    "energy_source_type": "ELECTRICITY"
-                                                },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
@@ -456,11 +441,6 @@
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "System 10",
-                                                "heating_system": {
-                                                    "id": "Heating Coil 1",
-                                                    "type": "FURNACE",
-                                                    "energy_source_type": "ELECTRICITY"
-                                                },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
@@ -566,11 +546,6 @@
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "System 10",
-                                                "heating_system": {
-                                                    "id": "Heating Coil 1",
-                                                    "type": "FURNACE",
-                                                    "energy_source_type": "ELECTRICITY"
-                                                },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
@@ -635,11 +610,6 @@
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "System 10",
-                                                "heating_system": {
-                                                    "id": "Heating Coil 1",
-                                                    "type": "FURNACE",
-                                                    "energy_source_type": "ELECTRICITY"
-                                                },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",

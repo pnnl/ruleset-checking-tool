@@ -54,7 +54,7 @@
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
-                                                        "adjacent_to": "INTERIOR",
+                                                        "adjacent_to": "EXTERIOR",
                                                         "tilt": 90,
                                                         "construction": {
                                                             "id": "Construction 1"
