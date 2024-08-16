@@ -3,18 +3,18 @@
         "Section": 23,
         "Rule": 11,
         "Test": "a",
-        "test_description": "The project has one building segment with one zone served by System 11 with supply air temperature reset set to LOAD_RESET_TO_SPACE_TEMPERATURE and has a reset load fraction of 50%. The expected result is: pass",
+        "test_description": "The project has one building segment with one zone served by baseline system type 11 with supply air temperature reset from minimum supply air temperature at 50% cooling load to room temperature at 0% cooling load.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "23-11",
             "ruleset_reference": "G3.1.3.17",
-            "rule_description": "For baseline system 11, supply air temperature shall be reset from minimum supply air temp at 50% cooling load to room temp at 0% cooling load.",
+            "rule_description": "For baseline system 11, supply air temperature shall either 1) be reset from minimum supply air temperature at 50% cooling load to room temperature at 0% cooling load, or 2) be reset higher by 5F under minimum cooling load conditions.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "System 11 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
@@ -119,18 +119,18 @@
         "Section": 23,
         "Rule": 11,
         "Test": "b",
-        "test_description": "The project has one building segment with one zone served by System 11 with supply air temperature reset set to ZONE_RESET and has a reset temperature differential of 5 F. The expected result is: pass",
+        "test_description": "The project has one building segment with one zone served by baseline system type 11 with supply air temperature reset higher by 5F under minimum cooling load conditions.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "23-11",
             "ruleset_reference": "G3.1.3.17",
-            "rule_description": "For baseline system 11, supply air temperature shall be reset from minimum supply air temp at 50% cooling load to room temp at 0% cooling load.",
+            "rule_description": "For baseline system 11, supply air temperature shall either 1) be reset from minimum supply air temperature at 50% cooling load to room temperature at 0% cooling load, or 2) be reset higher by 5F under minimum cooling load conditions.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "System 11 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
@@ -235,18 +235,18 @@
         "Section": 23,
         "Rule": 11,
         "Test": "c",
-        "test_description": "The project has one building segment with one zone served by System 11 with supply air temperature reset set to ZONE_RESET and has a reset temperature differential of 10 F.  The expected result is: fail",
+        "test_description": "The project has one building segment with one zone served by baseline system type 11 with supply air temperature reset higher by 10F under minimum cooling load conditions.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "23-11",
             "ruleset_reference": "G3.1.3.17",
-            "rule_description": "For baseline system 11, supply air temperature shall be reset from minimum supply air temp at 50% cooling load to room temp at 0% cooling load.",
+            "rule_description": "For baseline system 11, supply air temperature shall either 1) be reset from minimum supply air temperature at 50% cooling load to room temperature at 0% cooling load, or 2) be reset higher by 5F under minimum cooling load conditions.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "System 11 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {

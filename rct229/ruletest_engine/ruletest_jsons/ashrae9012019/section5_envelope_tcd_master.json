@@ -214,7 +214,7 @@
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
-                                                        "adjacent_to": "INTERIOR",
+                                                        "adjacent_to": "EXTERIOR",
                                                         "tilt": 90,
                                                         "construction": {
                                                             "id": "Construction 1"
@@ -337,7 +337,7 @@
         "Section": 5,
         "Rule": 4,
         "Test": "a",
-        "test_description": "Project has one building segment with an exterior roof surface. Building is located in climate zone 4A, includes a space that has residential occupancy type, and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline roof U-factor for the space is established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment with an exterior roof surface. The project includes a space that has residential occupancy type, and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline roof U-factor for the space is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-4",
@@ -426,7 +426,7 @@
         "Section": 5,
         "Rule": 4,
         "Test": "b",
-        "test_description": "Project has one building segment with an exterior roof surface. Building is located in climate zone 4A, includes a space that has residential occupancy type, and is conditioned based on  cooling capacity of the HVAC system that serves the parent zone. The baseline roof U-factor for the space is established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment with an exterior roof surface.The project includes a space that has residential occupancy type, and is conditioned based on  cooling capacity of the HVAC system that serves the parent zone. The baseline roof U-factor for the space is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-4",
@@ -515,7 +515,7 @@
         "Section": 5,
         "Rule": 4,
         "Test": "c",
-        "test_description": "Project has one building segment with an exterior roof surface. Building is located in climate zone 4A, includes a space that has residential occupancy type, and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline roof U-factor for the space is not established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment with an exterior roof surface. The project includes a space that has residential occupancy type, and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline roof U-factor for the space is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-4",
@@ -604,7 +604,7 @@
         "Section": 5,
         "Rule": 4,
         "Test": "d",
-        "test_description": "Project has one building segment with an exterior roof surface. Building is located in climate zone 4A and includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline roof U-factor for the space is established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment with an exterior roof surface. The project includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline roof U-factor for the space is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-4",
@@ -693,7 +693,7 @@
         "Section": 5,
         "Rule": 4,
         "Test": "e",
-        "test_description": "Project has one building segment with an exterior roof surface. Building is located in climate zone 4A and includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline roof U-factor for the space is not established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment with an exterior roof surface. The project includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline roof U-factor for the space is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-4",
@@ -782,7 +782,7 @@
         "Section": 5,
         "Rule": 4,
         "Test": "f",
-        "test_description": "Project has one building segment with an exterior roof surface. Building is located in climate zone 4A and includes a space that has non-residential occupancy type and is semiheated based on heating and cooling capacity of the HVAC system that serves the the parent zone. The baseline roof U-factor for the space is established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment with an exterior roof surface. The project includes a space that has non-residential occupancy type and is semiheated based on heating and cooling capacity of the HVAC system that serves the the parent zone. The baseline roof U-factor for the space is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-4",
@@ -872,7 +872,7 @@
         "Section": 5,
         "Rule": 4,
         "Test": "g",
-        "test_description": "Project has one building segment with an exterior roof surface. Building is located in climate zone 4A and includes a space that has non-residential occupancy type and is semiheated based on heating and cooling capacity of the HVAC system that serves the the parent zone. The baseline roof U-factor for the space is not established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment with an exterior roof surface. The project includes a space that has non-residential occupancy type and is semiheated based on heating and cooling capacity of the HVAC system that serves the the parent zone. The baseline roof U-factor for the space is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-4",
@@ -962,7 +962,7 @@
         "Section": 5,
         "Rule": 4,
         "Test": "h",
-        "test_description": "Project has one building segment with an exterior roof surface. Building is located in climate zone 8 and includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline roof U-factor for the space is established correctly.",
+        "test_description": "Project located in climate zone 8 has one building segment with an exterior roof surface. The project includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline roof U-factor for the space is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-4",
@@ -1051,7 +1051,7 @@
         "Section": 5,
         "Rule": 4,
         "Test": "i",
-        "test_description": "Project has one building segment with an exterior roof surface. Building is located in climate zone 8 and includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline roof U-factor for the space is not established correctly.",
+        "test_description": "Project located in climate zone 8 has one building segment with an exterior roof surface. The project includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline roof U-factor for the space is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-4",
@@ -1316,7 +1316,7 @@
         "Section": 5,
         "Rule": 6,
         "Test": "a",
-        "test_description": "Project has one building segment with a below-grade wall surface. Building is located in climate zone 4A and includes a space that has residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline below-grade wall C-factor for the zone is established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment with a below-grade wall surface. The project includes a space that has residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline below-grade wall C-factor for the zone is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-6",
@@ -1405,7 +1405,7 @@
         "Section": 5,
         "Rule": 6,
         "Test": "b",
-        "test_description": "Project has one building segment with a below-grade wall surface. Building is located in climate zone 4A and includes a space that has residential occupancy type and is conditioned based on cooling capacity of the HVAC system that serves the parent zone. The baseline below-grade wall C-factor for the space is established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment with a below-grade wall surface. The project includes a space that has residential occupancy type and is conditioned based on cooling capacity of the HVAC system that serves the parent zone. The baseline below-grade wall C-factor for the space is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-6",
@@ -1494,7 +1494,7 @@
         "Section": 5,
         "Rule": 6,
         "Test": "c",
-        "test_description": "Project has one building segment with a below-grade wall surface. Building is located in climate zone 4A and includes a space that has residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline below-grade wall C-factor for the zone is not established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment with a below-grade wall surface. The project includes a space that has residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline below-grade wall C-factor for the zone is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-6",
@@ -1583,7 +1583,7 @@
         "Section": 5,
         "Rule": 6,
         "Test": "d",
-        "test_description": "Project has one building segment with a below-grade wall surface. Building is located in climate zone 4A and includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves it. The baseline below-grade wall C-factor for the zone is established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment with a below-grade wall surface. The project includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves it. The baseline below-grade wall C-factor for the zone is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-6",
@@ -1672,7 +1672,7 @@
         "Section": 5,
         "Rule": 6,
         "Test": "e",
-        "test_description": "Project has one building segment with a below-grade wall surface. Building is located in climate zone 4A and includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves it. The baseline below-grade wall C-factor for the zone is not established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment with a below-grade wall surface. The project includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves it. The baseline below-grade wall C-factor for the zone is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-6",
@@ -1761,7 +1761,7 @@
         "Section": 5,
         "Rule": 6,
         "Test": "f",
-        "test_description": "Project has one building segment with a below-grade wall surface. Building is located in climate zone 4A, includes a space that has residential occupancy type and is semiheated based on heating and cooling capacity of the HVAC system that serves the parent zone. The baseline below-grade wall C-factor for the zone is established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment with a below-grade wall surface. The project includes a space that has residential occupancy type and is semiheated based on heating and cooling capacity of the HVAC system that serves the parent zone. The baseline below-grade wall C-factor for the zone is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-6",
@@ -1851,7 +1851,7 @@
         "Section": 5,
         "Rule": 6,
         "Test": "g",
-        "test_description": "Project has one building segment with a below-grade wall surface. Building is located in climate zone 4A, includes a space that has residential occupancy type and is semiheated based on heating and cooling capacity of the HVAC system that serves the parent zone. The baseline below-grade wall C-factor for the zone is not established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment with a below-grade wall surface. The project includes a space that has residential occupancy type and is semiheated based on heating and cooling capacity of the HVAC system that serves the parent zone. The baseline below-grade wall C-factor for the zone is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-6",
@@ -1941,7 +1941,7 @@
         "Section": 5,
         "Rule": 6,
         "Test": "h",
-        "test_description": "Project has one building segment with a below-grade wall surface. Building is located in climate zone 8 and includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves it. The baseline below-grade wall C-factor for the zone is established correctly.",
+        "test_description": "Project located in climate zone 8 has one building segment with a below-grade wall surface. The project includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves it. The baseline below-grade wall C-factor for the zone is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-6",
@@ -2030,7 +2030,7 @@
         "Section": 5,
         "Rule": 6,
         "Test": "i",
-        "test_description": "Project has one building segment with a below-grade wall surface. Building is located in climate zone 8 and includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves it. The baseline below-grade wall C-factor for the zone is not established correctly.",
+        "test_description": "Project located in climate zone 8 has one building segment with a below-grade wall surface. The project includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves it. The baseline below-grade wall C-factor for the zone is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-6",
@@ -2295,7 +2295,7 @@
         "Section": 5,
         "Rule": 8,
         "Test": "a",
-        "test_description": "Project has one building segment with an above-grade wall surface. Building is located in climate zone 4A and includes a space that has residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline above-grade wall U-factor for the zone is established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment with an above-grade wall surface. The project includes a space that has residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline above-grade wall U-factor for the zone is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-8",
@@ -2384,7 +2384,7 @@
         "Section": 5,
         "Rule": 8,
         "Test": "b",
-        "test_description": "Project has one building segment with an above-grade wall surface. Building is located in climate zone 4A and includes a space that has residential occupancy type and is conditioned based on cooling capacity of the HVAC system that serves the parent zone. The baseline above-grade wall U-factor for the zone is established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment with an above-grade wall surface. The project includes a space that has residential occupancy type and is conditioned based on cooling capacity of the HVAC system that serves the parent zone. The baseline above-grade wall U-factor for the zone is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-8",
@@ -2473,7 +2473,7 @@
         "Section": 5,
         "Rule": 8,
         "Test": "c",
-        "test_description": "Project has one building segment with an above-grade wall surface. Building is located in climate zone 4A and includes a space that has residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline above-grade wall U-factor for the zone is not established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment with an above-grade wall surface. The project includes a space that has residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline above-grade wall U-factor for the zone is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-8",
@@ -2562,7 +2562,7 @@
         "Section": 5,
         "Rule": 8,
         "Test": "d",
-        "test_description": "Project has one building segment with an above-grade wall surface. Building is located in climate zone 4A and includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline above-grade wall U-factor for the zone is established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment with an above-grade wall surface. The project includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline above-grade wall U-factor for the zone is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-8",
@@ -2651,7 +2651,7 @@
         "Section": 5,
         "Rule": 8,
         "Test": "e",
-        "test_description": "Project has one building segment with an above-grade wall surface. Building is located in climate zone 4A and includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline above-grade wall U-factor for the zone is not established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment with an above-grade wall surface. The project includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline above-grade wall U-factor for the zone is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-8",
@@ -2740,7 +2740,7 @@
         "Section": 5,
         "Rule": 8,
         "Test": "f",
-        "test_description": "Project has one building segment with an above-grade wall surface. A zone is semiheated based on heating and cooling capacity of the HVAC system that serves the parent zone. Building is located in climate zone 4A. The baseline above-grade wall U-factor for the zone is established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment with an above-grade wall surface. The project includes a space that is semiheated based on heating and cooling capacity of the HVAC system that serves the parent zone. The baseline above-grade wall U-factor for the zone is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-8",
@@ -2830,7 +2830,7 @@
         "Section": 5,
         "Rule": 8,
         "Test": "g",
-        "test_description": "Project has one building segment with an above-grade wall surface. A zone is semiheated based on heating and cooling capacity of the HVAC system that serves the parent zone. Building is located in climate zone 4A. The baseline above-grade wall U-factor for the zone is not established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment with an above-grade wall surface. The project includes a space that is semiheated based on heating and cooling capacity of the HVAC system that serves the parent zone. The baseline above-grade wall U-factor for the zone is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-8",
@@ -2920,7 +2920,7 @@
         "Section": 5,
         "Rule": 8,
         "Test": "h",
-        "test_description": "Project has one building segment with an above-grade wall surface. Building is located in climate zone 8 and includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline above-grade wall U-factor for the zone is established correctly.",
+        "test_description": "Project located in climate zone 8 has one building segment with an above-grade wall surface. The project includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline above-grade wall U-factor for the zone is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-8",
@@ -3010,7 +3010,7 @@
         "Section": 5,
         "Rule": 8,
         "Test": "i",
-        "test_description": "Project has one building segment with an above-grade wall surface. Building is located in climate zone 8 and includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline above-grade wall U-factor for the zone is not established correctly.",
+        "test_description": "Project located in climate zone 8 has one building segment with an above-grade wall surface. The project includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline above-grade wall U-factor for the zone is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-8",
@@ -3277,7 +3277,7 @@
         "Section": 5,
         "Rule": 10,
         "Test": "a",
-        "test_description": "Project has one building segment with an exterior floor surface. Building is located in climate zone 4A and includes a space that has residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline floor U-factor for the zone is established correctly.\n\n",
+        "test_description": "Project located in climate zone 4A has one building segment with an exterior floor surface. The project includes a space that has residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline floor U-factor for the zone is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-10",
@@ -3366,7 +3366,7 @@
         "Section": 5,
         "Rule": 10,
         "Test": "b",
-        "test_description": "Project has one building segment with an exterior floor surface. Building is located in climate zone 4A and includes a space that has residential occupancy type and is conditioned based on cooling capacity of the HVAC system that serves the parent zone. The baseline floor U-factor for the zone is established correctly.\n\n",
+        "test_description": "Project located in climate zone 4A has one building segment with an exterior floor surface. The project includes a space that has residential occupancy type and is conditioned based on cooling capacity of the HVAC system that serves the parent zone. The baseline floor U-factor for the zone is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-10",
@@ -3455,7 +3455,7 @@
         "Section": 5,
         "Rule": 10,
         "Test": "c",
-        "test_description": "Project has one building segment with an exterior floor surface. Building is located in climate zone 4A and includes a space that has residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline floor U-factor for the zone is not established correctly.\n\n",
+        "test_description": "Project located in climate zone 4A has one building segment with an exterior floor surface. The project includes a space that has residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline floor U-factor for the zone is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-10",
@@ -3544,7 +3544,7 @@
         "Section": 5,
         "Rule": 10,
         "Test": "d",
-        "test_description": "Project has one building segment with an exterior floor surface. Building is located in climate zone 4A and includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline floor U-factor for the zone is established correctly.\n\n",
+        "test_description": "Project located in climate zone 4A has one building segment with an exterior floor surface. The project includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline floor U-factor for the zone is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-10",
@@ -3633,7 +3633,7 @@
         "Section": 5,
         "Rule": 10,
         "Test": "e",
-        "test_description": "Project has one building segment with an exterior floor surface. Building is located in climate zone 4A and includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline floor U-factor for the zone is not established correctly.\n\n",
+        "test_description": "Project located in climate zone 4A has one building segment with an exterior floor surface. The project includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline floor U-factor for the zone is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-10",
@@ -3722,7 +3722,7 @@
         "Section": 5,
         "Rule": 10,
         "Test": "f",
-        "test_description": "Project has one building segment with an exterior floor surface. Building is located in climate zone 4A and includes a space that has non-residential occupancy type and is semiheated based on heating and cooling capacity of the HVAC system that serves the parent zone. The baseline floor U-factor for the zone is established correctly.\n\n",
+        "test_description": "Project located in climate zone 4A has one building segment with an exterior floor surface. The project includes a space that has non-residential occupancy type and is semiheated based on heating and cooling capacity of the HVAC system that serves the parent zone. The baseline floor U-factor for the zone is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-10",
@@ -3812,7 +3812,7 @@
         "Section": 5,
         "Rule": 10,
         "Test": "g",
-        "test_description": "Project has one building segment with an exterior floor surface. Building is located in climate zone 4A and includes a space that has non-residential occupancy type and is semiheated based on heating and cooling capacity of the HVAC system that serves the parent zone. The baseline floor U-factor for the zone is not established correctly.\n\n",
+        "test_description": "Project located in climate zone 4A has one building segment with an exterior floor surface. The project includes a space that has non-residential occupancy type and is semiheated based on heating and cooling capacity of the HVAC system that serves the parent zone. The baseline floor U-factor for the zone is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-10",
@@ -3902,7 +3902,7 @@
         "Section": 5,
         "Rule": 10,
         "Test": "h",
-        "test_description": "Project has one building segment with an exterior floor surface. Building is located in climate zone 8 and includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline floor U-factor for the zone is established correctly.\n\n",
+        "test_description": "Project located in climate zone 8 has one building segment with an exterior floor surface. The project includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline floor U-factor for the zone is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-10",
@@ -3991,7 +3991,7 @@
         "Section": 5,
         "Rule": 10,
         "Test": "i",
-        "test_description": "Project has one building segment with an exterior floor surface. Building is located in climate zone 8 and includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline floor U-factor for the zone is not established correctly.\n\n",
+        "test_description": "Project located in climate zone 8 has one building segment with an exterior floor surface. The project includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline floor U-factor for the zone is not established correctly.\n\n",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-10",
@@ -4256,7 +4256,7 @@
         "Section": 5,
         "Rule": 12,
         "Test": "a",
-        "test_description": "Project has one building segment with a slab-on-grade floor surface. Building is located in climate zone 4A and includes a space that has residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline slab-on-grade floor F-factor for the zone is established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment with a slab-on-grade floor surface. The project includes a space that has residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline slab-on-grade floor F-factor for the zone is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-12",
@@ -4346,7 +4346,7 @@
         "Section": 5,
         "Rule": 12,
         "Test": "b",
-        "test_description": "Project has one building segment with a slab-on-grade floor surface. Building is located in climate zone 4A and includes a space that has residential occupancy type and is conditioned based on cooling capacity of the HVAC system that serves it. The baseline slab-on-grade floor F-factor for the space is established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment with a slab-on-grade floor surface. The project includes a space that has residential occupancy type and is conditioned based on cooling capacity of the HVAC system that serves it. The baseline slab-on-grade floor F-factor for the space is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-12",
@@ -4436,7 +4436,7 @@
         "Section": 5,
         "Rule": 12,
         "Test": "c",
-        "test_description": "Project has one building segment with a slab-on-grade floor surface. Building is located in climate zone 4A and includes a space that has residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves it. The baseline slab-on-grade floor F-factor for the space is not established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment with a slab-on-grade floor surface. The project includes a space that has residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves it. The baseline slab-on-grade floor F-factor for the space is not established correctly.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "Baseline slab F-factor is not as expected for slabs that are less than 24\" below grade. verify that the slab is more than 24\" below grade and is unregulated.",
         "standard": {
@@ -4527,7 +4527,7 @@
         "Section": 5,
         "Rule": 12,
         "Test": "d",
-        "test_description": "Project has one building segment with a slab-on-grade floor surface. Building is located in climate zone 4A and includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves it. The baseline slab-on-grade floor F-factor for the space is established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment with a slab-on-grade floor surface. The project includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves it. The baseline slab-on-grade floor F-factor for the space is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-12",
@@ -4617,9 +4617,9 @@
         "Section": 5,
         "Rule": 12,
         "Test": "e",
-        "test_description": "Project has one building segment with a slab-on-grade floor surface. Building is located in climate zone 4A and includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves it. The baseline slab-on-grade floor F-factor for the space is not established correctly.",
-        "expected_rule_outcome": "undetermined",
-        "expected_raised_message_includes": "Zone has both residential and non-residential spaces and the construction requirements for slab-on-grade floor are different. Verify construction is modeled correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment with a slab-on-grade floor surface. The project includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves it. The baseline slab-on-grade floor F-factor for the space is not established correctly.",
+        "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "Baseline slab F-factor is not as expected for slabs that are less than 24\" below grade. verify that the slab is more than 24\" below grade and is unregulated.",
         "standard": {
             "rule_id": "5-12",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
@@ -4708,7 +4708,7 @@
         "Section": 5,
         "Rule": 12,
         "Test": "f",
-        "test_description": "Project has one building segment with a slab-on-grade floor surface. A space is semiheated based on heating and cooling capacity of the HVAC system that serves the parent zone. Building is located in climate zone 4A. The baseline slab-on-grade floor F-factor for the zone is established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment with a slab-on-grade floor surface. A space is semiheated based on heating and cooling capacity of the HVAC system that serves the parent zone. The baseline slab-on-grade floor F-factor for the zone is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-12",
@@ -4798,7 +4798,7 @@
         "Section": 5,
         "Rule": 12,
         "Test": "g",
-        "test_description": "Project has one building segment with a slab-on-grade floor surface. Building is located in climate zone 4A and includes a space that has non-residential occupancy type and is semiheated based on heating and cooling capacity of the HVAC system that serves the parent zone. The baseline slab-on-grade floor F-factor for the zone is not established correctly.",
+        "test_description": "Project located in climate zone 7 has one building segment with 1 zones containing 2 spaces and a slab on grade surface. The zone has mixed residential and nonresidential space types. Rule cannot be evaluated because the baseline requirements for residential and nonresidential differ.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "Zone has both residential and non-residential spaces and the construction requirements for slab-on-grade floor are different. Verify construction is modeled correctly.",
         "standard": {
@@ -4815,7 +4815,7 @@
             "baseline": {
                 "id": "RPD 1",
                 "weather": {
-                    "climate_zone": "CZ4A",
+                    "climate_zone": "CZ7",
                     "data_source_type": "OTHER"
                 },
                 "data_timestamp": "2024-02-12T12:00Z",
@@ -4838,7 +4838,13 @@
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS",
+                                                        "lighting_space_type": "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_ALL_OTHER",
+                                                        "floor_area": 23.225759999999998
+                                                    },
+                                                    {
+                                                        "id": "Space 2",
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "lighting_space_type": "DWELLING_UNIT",
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
@@ -4867,11 +4873,11 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "design_sensible_cool_capacity": 0.0
+                                                    "design_sensible_cool_capacity": 17585.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "design_capacity": 699.8538133333334
+                                                    "design_capacity": 9378.275555555556
                                                 }
                                             }
                                         ]
@@ -4889,7 +4895,7 @@
         "Section": 5,
         "Rule": 12,
         "Test": "h",
-        "test_description": "Project has one building segment with a slab-on-grade floor surface. Building is located in climate zone 4A and includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline slab-on-grade floor F-factor for the space is established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment with a slab-on-grade floor surface. The project includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline slab-on-grade floor F-factor for the space is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-12",
@@ -4979,7 +4985,7 @@
         "Section": 5,
         "Rule": 12,
         "Test": "i",
-        "test_description": "Project has one building segment and includes one space with a slab-on-grade floor surface. Building is located in climate zone 4A, the space has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline slab-on-grade floor F-factor for the space is not established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment and includes one space with a slab-on-grade floor surface. The project includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline slab-on-grade floor F-factor for the space is not established correctly.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "Baseline slab F-factor is not as expected for slabs that are less than 24\" below grade. verify that the slab is more than 24\" below grade and is unregulated.",
         "standard": {
@@ -5070,7 +5076,7 @@
         "Section": 5,
         "Rule": 13,
         "Test": "a",
-        "test_description": "Project has one building segment and includes one space with an exterior wall surface. The space is unconditioned based on heating and cooling capacity of the HVAC system that serves the parent zone. The baseline exterior envelope U-factor for the surface correctly matches the proposed.",
+        "test_description": "Project has one building segment and includes one space with an unregulated exterior wall surface. The space is unconditioned based on heating and cooling capacity of the HVAC system that serves the parent zone. The baseline exterior envelope U-factor for the surface correctly matches the proposed.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-13",
@@ -5193,7 +5199,7 @@
         "Section": 5,
         "Rule": 13,
         "Test": "b",
-        "test_description": "Project has one building segment and includes one space with an exterior wall surface. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. The baseline exterior envelope U-factor for the surface does not match the proposed.",
+        "test_description": "Project has one building segment and includes one space with an unregulated exterior wall surface. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. The baseline exterior envelope U-factor for the surface does not match the proposed.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-13",
@@ -5316,7 +5322,7 @@
         "Section": 5,
         "Rule": 13,
         "Test": "c",
-        "test_description": "Project has one building segment and includes a space with an exterior wall surface. The space is semiheated based on heating capacity of the HVAC system that serves the parent zone. The baseline exterior envelope U-factor for the surface correctly matches the proposed.",
+        "test_description": "Project has one building segment and includes a space with an unregulated exterior wall surface. The space is semiheated based on heating capacity of the HVAC system that serves the parent zone. The baseline exterior envelope U-factor for the surface correctly matches the proposed.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-13",
@@ -5467,7 +5473,7 @@
         "Section": 5,
         "Rule": 13,
         "Test": "d",
-        "test_description": "Project has one building segment and includes a space with an exterior wall surface. The space is semiheated based on heating capacity of the HVAC system that serves the parent zone. The baseline exterior envelope U-factor for the surface does not match the proposed.",
+        "test_description": "Project has one building segment and includes a space with an unregulated exterior wall surface. The space is semiheated based on heating capacity of the HVAC system that serves the parent zone. The baseline exterior envelope U-factor for the surface does not match the proposed.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-13",
@@ -5618,7 +5624,7 @@
         "Section": 5,
         "Rule": 13,
         "Test": "e",
-        "test_description": "Project has one building segment and includes a space with a below-grade wall surface. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. The baseline below-grade wall C-factor correctly matches the proposed.",
+        "test_description": "Project has one building segment and includes a space with an unregulated below-grade wall surface. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. The baseline below-grade wall C-factor correctly matches the proposed.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-13",
@@ -5741,7 +5747,7 @@
         "Section": 5,
         "Rule": 13,
         "Test": "f",
-        "test_description": "Project has one building segment and includes a space with a below-grade wall surface. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. The baseline below-grade wall C-factor does not match the proposed.",
+        "test_description": "Project has one building segment and includes a space with an unregulated below-grade wall surface. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. The baseline below-grade wall C-factor does not match the proposed.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-13",
@@ -5864,7 +5870,7 @@
         "Section": 5,
         "Rule": 13,
         "Test": "g",
-        "test_description": "Project has one building segment and includes a space with a below-grade wall surface. The space is semiheated based on the heating capacity of the HVAC system that serves the parent zone. The baseline below-grade wall C-factor correctly matches the proposed.",
+        "test_description": "Project has one building segment and includes a space with an unregulated below-grade wall surface. The space is semiheated based on the heating capacity of the HVAC system that serves the parent zone. The baseline below-grade wall C-factor correctly matches the proposed.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-13",
@@ -6015,7 +6021,7 @@
         "Section": 5,
         "Rule": 13,
         "Test": "h",
-        "test_description": "Project has one building segment and includes a space with a below-grade wall surface. The space is semiheated based on the heating capacity of the HVAC system that serves the parent zone. The baseline below-grade wall C-factor does not match the proposed.",
+        "test_description": "Project has one building segment and includes a space with an unregulated below-grade wall surface. The space is semiheated based on the heating capacity of the HVAC system that serves the parent zone. The baseline below-grade wall C-factor does not match the proposed.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-13",
@@ -6166,7 +6172,7 @@
         "Section": 5,
         "Rule": 13,
         "Test": "i",
-        "test_description": "Project has one building segment and includes a space with a slab-on-grade floor surface. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. The baseline slab-on-grade F-factor correctly matches the proposed.",
+        "test_description": "Project has one building segment and includes a space with an unregulated slab-on-grade floor surface. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. The baseline slab-on-grade F-factor correctly matches the proposed.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-13",
@@ -6289,7 +6295,7 @@
         "Section": 5,
         "Rule": 13,
         "Test": "j",
-        "test_description": "Project has one building segment and includes a space with a slab-on-grade floor surface. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. The baseline slab-on-grade F-factor does not match the proposed.",
+        "test_description": "Project has one building segment and includes a space with an unregulated slab-on-grade floor surface. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. The baseline slab-on-grade F-factor does not match the proposed.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-13",
@@ -6412,7 +6418,7 @@
         "Section": 5,
         "Rule": 13,
         "Test": "k",
-        "test_description": "Project has one building segment and includes a space with a slab-on-grade floor surface. The space is semiheated based on the heating capacity of the HVAC system that serves the parent zone. The baseline slab-on-grade F-factor correctly matches the proposed.",
+        "test_description": "Project has one building segment and includes a space with an unregulated slab-on-grade floor surface. The space is semiheated based on the heating capacity of the HVAC system that serves the parent zone. The baseline slab-on-grade F-factor correctly matches the proposed.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-13",
@@ -6537,7 +6543,7 @@
         "Section": 5,
         "Rule": 13,
         "Test": "l",
-        "test_description": "Project has one building segment and includes a space with a slab-on-grade floor surface. The space is semiheated based on the heating capacity of the HVAC system that serves the parent zone. The baseline slab-on-grade F-factor does not match the proposed.",
+        "test_description": "Project has one building segment and includes a space with an unregulated slab-on-grade floor surface. The space is semiheated based on the heating capacity of the HVAC system that serves the parent zone. The baseline slab-on-grade F-factor does not match the proposed.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-13",
@@ -8243,7 +8249,7 @@
         "Section": 5,
         "Rule": 17,
         "Test": "a",
-        "test_description": "Project has one building segment and includes a space whose status type is EXISTING. Existing fenestration area cannot be determined.",
+        "test_description": "Project has one building segment and includes an existing space. Existing fenestration area cannot be determined.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "Part or all of spaces listed below is existing or altered. The baseline vertical fenestration area for a existing zone must equal to the fenestration area prior to the proposed scope of work. The baseline fenestration area in zone must be checked manually.",
         "standard": {
@@ -8321,7 +8327,7 @@
         "Section": 5,
         "Rule": 17,
         "Test": "b",
-        "test_description": "Project has one building segment and includes a space whose status type is ALTERED. Existing fenestration area prior to proposed work cannot be determined.",
+        "test_description": "Project has one building segment and includes an altered space. Existing fenestration area prior to proposed work cannot be determined.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "Part or all of spaces listed below is existing or altered. The baseline vertical fenestration area for a existing zone must equal to the fenestration area prior to the proposed scope of work. The baseline fenestration area in zone must be checked manually.",
         "standard": {
@@ -8399,7 +8405,7 @@
         "Section": 5,
         "Rule": 17,
         "Test": "c",
-        "test_description": "Project has one building segment and includes a space whose status type is NEW. There is no existing fenestration.",
+        "test_description": "Project has one building segment and includes a space that is new construction. There is no existing fenestration.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "5-17",
@@ -8476,7 +8482,7 @@
         "Section": 5,
         "Rule": 18,
         "Test": "a",
-        "test_description": "Project has one building segment and includes a space with a roof surface and a skylight. The building is located in climate zone 4A, the space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. The skylight uses manually controlled dynamic shading, and the average SHGC and VT cannot be determined.",
+        "test_description": "Project located in climate zone 4A has one building segment and includes a space with a roof surface and a skylight. The space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. The skylight uses manually controlled dynamic shading, and the average SHGC and VT cannot be determined.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "SUBSURFACE INCLUDES MANUALLY CONTROLLED DYNAMIC GLAZING IN THE PROPOSED DESIGN. VERIFY THAT SHGC AND VT WERE MODELED AS THE AVERAGE OF THE MINIMUM AND MAXIMUM SHGC AND VT.",
         "standard": {
@@ -8575,7 +8581,7 @@
         "Section": 5,
         "Rule": 18,
         "Test": "b",
-        "test_description": "Project has one building segment and includes a space with a roof surface and a skylight. The building is located in climate zone 4A, the space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. The skylight does not use manually controlled dynamic shading, so this rule does not apply.",
+        "test_description": "Project located in climate zone 4A has one building segment and includes a space with a roof surface and a skylight. The space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. The skylight does not use manually controlled dynamic shading, so this rule does not apply.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "5-18",
@@ -8673,7 +8679,7 @@
         "Section": 5,
         "Rule": 19,
         "Test": "a",
-        "test_description": "Project has one building segment and includes a space with an above-grade wall surface and window. The building is located in climate zone 4A, the space has residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. The vertical fenestration area is less than 10% of the gross exterior wall area.  The baseline vertical fenestration U-factor is established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment and includes a space with an above-grade wall surface and window. The space has residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. The vertical fenestration area is less than 10% of the gross exterior wall area.  The baseline vertical fenestration U-factor is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-19",
@@ -8769,7 +8775,7 @@
         "Section": 5,
         "Rule": 19,
         "Test": "b",
-        "test_description": "Project has one building segment and includes a space with an above-grade wall surface and window. The building is located in climate zone 4A, the space has residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. The vertical fenestration area is less than 10% of the gross exterior wall area. The baseline vertical fenestration U-factor is established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment and includes a space with an above-grade wall surface and window. The space has residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. The vertical fenestration area is less than 10% of the gross exterior wall area. The baseline vertical fenestration U-factor is established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-19",
@@ -8865,7 +8871,7 @@
         "Section": 5,
         "Rule": 19,
         "Test": "c",
-        "test_description": "Project has one building segment and includes a space with an above-grade wall surface and window. The building is located in climate zone 4A, the space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it.  The vertical fenestration area is less than 10% of the gross exterior wall area. The baseline vertical fenestration U-factor is established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment and includes a space with an above-grade wall surface and window. The space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it.  The vertical fenestration area is less than 10% of the gross exterior wall area. The baseline vertical fenestration U-factor is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-19",
@@ -8961,7 +8967,7 @@
         "Section": 5,
         "Rule": 19,
         "Test": "d",
-        "test_description": " Project has one building segment and includes a space with an above-grade wall surface and window. The building is located in climate zone 4A, the space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. The vertical fenestration area is less than 10% of the gross exterior wall area. The baseline vertical fenestration U-factor is not established correctly.",
+        "test_description": " Project located in climate zone 4A has one building segment and includes a space with an above-grade wall surface and window. The space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. The vertical fenestration area is less than 10% of the gross exterior wall area. The baseline vertical fenestration U-factor is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-19",
@@ -9057,7 +9063,7 @@
         "Section": 5,
         "Rule": 19,
         "Test": "e",
-        "test_description": "Project has one building segment and includes a space with an above-grade wall surface and window. The building is located in climate zone 4A, the space is semiheated based on heating and cooling capacity of the HVAC system that serves it.  The vertical fenestration area is less than 10% of the gross exterior wall area. The baseline vertical fenestration U-factor is established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment and includes a space with an above-grade wall surface and window. The space is semiheated based on heating and cooling capacity of the HVAC system that serves it.  The vertical fenestration area is less than 10% of the gross exterior wall area. The baseline vertical fenestration U-factor is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-19",
@@ -9157,7 +9163,7 @@
         "Section": 5,
         "Rule": 19,
         "Test": "f",
-        "test_description": "Project has one building segment and includes a space with an above-grade wall surface and window. The building is located in climate zone 4A, the space is semiheated based on heating and cooling capacity of the HVAC system that serves it. The vertical fenestration area is less than 10% of the gross exterior wall area. The baseline vertical fenestration U-factor is established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment and includes a space with an above-grade wall surface and window. The space is semiheated based on heating and cooling capacity of the HVAC system that serves it. The vertical fenestration area is less than 10% of the gross exterior wall area. The baseline vertical fenestration U-factor is established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-19",
@@ -9257,7 +9263,7 @@
         "Section": 5,
         "Rule": 19,
         "Test": "g",
-        "test_description": "Project has one building segment and includes a space with an above-grade wall surface and window. The building is located in climate zone 3C, the space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. The baseline vertical fenestration U-factor is established correctly.",
+        "test_description": "Project located in climate zone 3C has one building segment and includes a space with an above-grade wall surface and window. The space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. The baseline vertical fenestration U-factor is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-19",
@@ -9357,7 +9363,7 @@
         "Section": 5,
         "Rule": 19,
         "Test": "h",
-        "test_description": "Project has one building segment and includes a space with an above-grade wall surface and window. The building is located in climate zone 3C, the space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. The baseline vertical fenestration U-factor is not established correctly.",
+        "test_description": "Project located in climate zone 3C has one building segment and includes a space with an above-grade wall surface and window. The space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. The baseline vertical fenestration U-factor is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-19",
@@ -9457,7 +9463,7 @@
         "Section": 5,
         "Rule": 20,
         "Test": "a",
-        "test_description": "Project has one building segment and includes a space with an above-grade wall surface and window. The building is located in climate zone 4A, the space has residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it.  The WWR is less than 10% of the gross wall area. The baseline vertical fenestration SHGC is established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment and includes a space with an above-grade wall surface and window. The space has residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it.  The WWR is less than 10% of the gross wall area. The baseline vertical fenestration SHGC is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-20",
@@ -9558,7 +9564,7 @@
         "Section": 5,
         "Rule": 20,
         "Test": "b",
-        "test_description": "Project has one building segment and includes a space with an above-grade wall surface and window. The building is located in climate zone 4A, the space has residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it.  The WWR is less than 10% of the gross wall area. The baseline vertical fenestration SHGC is not established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment and includes a space with an above-grade wall surface and window. The space has residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it.  The WWR is less than 10% of the gross wall area. The baseline vertical fenestration SHGC is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-20",
@@ -9659,7 +9665,7 @@
         "Section": 5,
         "Rule": 20,
         "Test": "c",
-        "test_description": "Project has one building segment and includes a space with an above-grade wall surface and window. The building is located in climate zone 4A, the space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it.  The WWR is less than 10% of the gross wall area. The baseline vertical fenestration SHGC is established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment and includes a space with an above-grade wall surface and window. The space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it.  The WWR is less than 10% of the gross wall area. The baseline vertical fenestration SHGC is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-20",
@@ -9760,7 +9766,7 @@
         "Section": 5,
         "Rule": 20,
         "Test": "d",
-        "test_description": "Project has one building segment and includes a space with an above-grade wall surface and window. The building is located in climate zone 4A, the space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it.  The WWR is less than 10% of the gross wall area. The baseline vertical fenestration SHGC is not established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment and includes a space with an above-grade wall surface and window. The space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it.  The WWR is less than 10% of the gross wall area. The baseline vertical fenestration SHGC is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-20",
@@ -9861,7 +9867,7 @@
         "Section": 5,
         "Rule": 20,
         "Test": "e",
-        "test_description": "Project has one building segment and includes a space with an above-grade wall surface and window. The building is located in climate zone 4A, the space is semiheated based on heating capacity of the HVAC system that serves it.  The WWR is less than 10% of the gross wall area.  The baseline vertical fenestration SHGC is established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment and includes a space with an above-grade wall surface and window. The space is semiheated based on heating capacity of the HVAC system that serves it.  The WWR is less than 10% of the gross wall area.  The baseline vertical fenestration SHGC is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-20",
@@ -9962,7 +9968,7 @@
         "Section": 5,
         "Rule": 20,
         "Test": "f",
-        "test_description": "Project has one building segment and includes a space with an above-grade wall surface and window. The building is located in climate zone 4A, the space is semiheated based on heating capacity of the HVAC system that serves it.  The WWR is less than 10% of the gross wall area.  The baseline vertical fenestration SHGC is not established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment and includes a space with an above-grade wall surface and window. The space is semiheated based on heating capacity of the HVAC system that serves it.  The WWR is less than 10% of the gross wall area.  The baseline vertical fenestration SHGC is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-20",
@@ -10063,7 +10069,7 @@
         "Section": 5,
         "Rule": 20,
         "Test": "g",
-        "test_description": "Project has one building segment and includes a space with an above-grade wall surface and window. The building is located in climate zone 3C, the space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it.  The WWR is 20-30% of the gross wall area. The baseline vertical fenestration SHGC is established correctly.",
+        "test_description": "Project located in climate zone 3C has one building segment and includes a space with an above-grade wall surface and window. The space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it.  The WWR is 20-30% of the gross wall area. The baseline vertical fenestration SHGC is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-20",
@@ -10164,7 +10170,7 @@
         "Section": 5,
         "Rule": 20,
         "Test": "h",
-        "test_description": "Project has one building segment and includes a space with an above-grade wall surface and window. The building is located in climate zone 3C, the space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it.  The WWR is 20-30% of the gross wall area. The baseline vertical fenestration SHGC is not established correctly.",
+        "test_description": "Project located in climate zone 3C has one building segment and includes a space with an above-grade wall surface and window. The space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it.  The WWR is 20-30% of the gross wall area. The baseline vertical fenestration SHGC is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-20",
@@ -10265,7 +10271,7 @@
         "Section": 5,
         "Rule": 21,
         "Test": "a",
-        "test_description": "Project has one building segment and includes a space with an above-grade wall surface and window. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. Fenestration is correctly modeled with the same area, U-factor and SHGC in the baseline as in the proposed design",
+        "test_description": "Project has one building segment and includes a space with an unregulated above-grade wall surface and window. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. Fenestration is correctly modeled with the same area, U-factor and SHGC in the baseline as in the proposed design",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-21",
@@ -10446,7 +10452,7 @@
         "Section": 5,
         "Rule": 21,
         "Test": "b",
-        "test_description": "Project has one building segment and includes a space with an above-grade wall surface and window. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. Fenestration is incorrectly modeled with a different area in the baseline than in the proposed design",
+        "test_description": "Project has one building segment and includes a space with an unregulated above-grade wall surface and window. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. Fenestration is incorrectly modeled with a different area in the baseline than in the proposed design",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "Subsurface that is not regulated (Not part of building envelope) is not modeled with the same area, U-factor and SHGC in the baseline as in the propsoed design.",
         "standard": {
@@ -10628,7 +10634,7 @@
         "Section": 5,
         "Rule": 21,
         "Test": "c",
-        "test_description": "Project has one building segment and includes a space with an above-grade wall surface and window. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. Fenestration is modeled with a different u-factor in the baseline than in the proposed design",
+        "test_description": "Project has one building segment and includes a space with an unregulated  above-grade wall surface and window. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. Fenestration is modeled with a different u-factor in the baseline than in the proposed design",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "Subsurface that is not regulated (Not part of building envelope) is not modeled with the same area, U-factor and SHGC in the baseline as in the propsoed design.",
         "standard": {
@@ -10810,7 +10816,7 @@
         "Section": 5,
         "Rule": 21,
         "Test": "d",
-        "test_description": "Project has one building segment and includes a space with an above-grade wall surface and window. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. Fenestration is modeled with a different SHGC in the baseline than in the proposed design",
+        "test_description": "Project has one building segment and includes a space with an unregulated above-grade wall surface and window. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. Fenestration is modeled with a different SHGC in the baseline than in the proposed design",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "Subsurface that is not regulated (Not part of building envelope) is not modeled with the same area, U-factor and SHGC in the baseline as in the propsoed design.",
         "standard": {
@@ -12639,7 +12645,7 @@
         "Section": 5,
         "Rule": 27,
         "Test": "a",
-        "test_description": "Project has one building segment and includes a space with a roof surface and a skylight. The building is located in climate zone 4A, the space has residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. Skylight area in the building is 0%-2.0%. The baseline skylight U-factor is established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment and includes a space with a roof surface and a skylight. The space has residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. Skylight area in the building is 0%-2.0%. The baseline skylight U-factor is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-27",
@@ -12735,7 +12741,7 @@
         "Section": 5,
         "Rule": 27,
         "Test": "b",
-        "test_description": "Project has one building segment and includes a space with a roof surface and a skylight. The building is located in climate zone 4A, the space has residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. Skylight area in the building is 0%-2.0%. The baseline skylight U-factor is not established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment and includes a space with a roof surface and a skylight. The space has residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. Skylight area in the building is 0%-2.0%. The baseline skylight U-factor is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-27",
@@ -12831,7 +12837,7 @@
         "Section": 5,
         "Rule": 27,
         "Test": "c",
-        "test_description": "Project has one building segment and includes a space with a roof surface and a skylight. The building is located in climate zone 4A, the space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. Skylight area in the building is 0%-2.0%. The baseline skylight U-factor is established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment and includes a space with a roof surface and a skylight. The space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. Skylight area in the building is 0%-2.0%. The baseline skylight U-factor is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-27",
@@ -12927,7 +12933,7 @@
         "Section": 5,
         "Rule": 27,
         "Test": "d",
-        "test_description": "Project has one building segment and includes a space with a roof surface and a skylight. The building is located in climate zone 4A, the space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. Skylight area in the building is 0%-2.0%. The baseline skylight U-factor is not established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment and includes a space with a roof surface and a skylight. The space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. Skylight area in the building is 0%-2.0%. The baseline skylight U-factor is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-27",
@@ -13023,7 +13029,7 @@
         "Section": 5,
         "Rule": 27,
         "Test": "e",
-        "test_description": "Project has one building segment and includes a space with a roof surface and a skylight. The building is located in climate zone 4A, the space is semiheated based on heating capacity of the HVAC system that serves it. Skylight area in the building is 0%-2.0%. The baseline skylight U-factor is established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment and includes a space with a roof surface and a skylight. The space is semiheated based on heating capacity of the HVAC system that serves it. Skylight area in the building is 0%-2.0%. The baseline skylight U-factor is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-27",
@@ -13122,7 +13128,7 @@
         "Section": 5,
         "Rule": 27,
         "Test": "f",
-        "test_description": "Project has one building segment and includes a space with a roof surface and a skylight. The building is located in climate zone 4A, the space is semiheated based on heating capacity of the HVAC system that serves it. Skylight area in the building is 0%-2.0%. The baseline skylight U-factor is not established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment and includes a space with a roof surface and a skylight. The space is semiheated based on heating capacity of the HVAC system that serves it. Skylight area in the building is 0%-2.0%. The baseline skylight U-factor is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-27",
@@ -13221,7 +13227,7 @@
         "Section": 5,
         "Rule": 27,
         "Test": "g",
-        "test_description": "Project has one building segment and includes a space with a roof surface and a skylight. The building is located in climate zone 3C, the space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. Skylight area in the building is greater than 2.0%. The baseline skylight U-factor is established correctly.",
+        "test_description": "Project located in climate zone 3C has one building segment and includes a space with a roof surface and a skylight. The space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. Skylight area in the building is greater than 2.0%. The baseline skylight U-factor is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-27",
@@ -13317,7 +13323,7 @@
         "Section": 5,
         "Rule": 27,
         "Test": "h",
-        "test_description": "Project has one building segment and includes a space with a roof surface and a skylight. The building is located in climate zone 3C, the space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. Skylight area in the building is greater than 2.0%. The baseline skylight U-factor is not established correctly.",
+        "test_description": "Project located in climate zone 3C has one building segment and includes a space with a roof surface and a skylight. The space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. Skylight area in the building is greater than 2.0%. The baseline skylight U-factor is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-27",
@@ -13413,7 +13419,7 @@
         "Section": 5,
         "Rule": 28,
         "Test": "a",
-        "test_description": "Project has one building segment with 1 zones containing 2 spaces and a roof surface with a skylight. The building is located in climate zone 6A, the surface is EXTERIOR MIXED based on space types in the zone and the adjacency to exterior. Rule cannot be evaluated because the baseline requirements for residential and nonresidential differ.",
+        "test_description": "Project located in climate zone 6A has one building segment with 1 zones containing 2 spaces and a roof surface with a skylight. The zone has mixed residential and nonresidential space types. Rule cannot be evaluated because the baseline requirements for residential and nonresidential differ.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "MANUAL REVIEW IS REQUESTED TO VERIFY SKYLIGHT MEETS SHGC REQUIREMENT AS PER TABLE G3.4.",
         "standard": {
@@ -13517,7 +13523,7 @@
         "Section": 5,
         "Rule": 28,
         "Test": "b",
-        "test_description": "Project has one building segment and includes a space with a roof surface and a skylight. The building is located in climate zone 6A, the space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. Skylight area in the building is greater than 2.0%. The baseline skylight SHGC-factor is established correctly.",
+        "test_description": "Project located in climate zone 6A has one building segment and includes a space with a roof surface and a skylight. The space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. Skylight area in the building is greater than 2.0%. The baseline skylight SHGC-factor is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-28",
@@ -13614,7 +13620,7 @@
         "Section": 5,
         "Rule": 28,
         "Test": "c",
-        "test_description": "Project has one building segment and includes a space with a roof surface and a skylight. The building is located in climate zone 6A, the space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. Skylight area in the building is greater than 2.0%. The baseline skylight SHGC-factor is not established correctly.",
+        "test_description": "Project located in climate zone 6A has one building segment and includes a space with a roof surface and a skylight. The space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. Skylight area in the building is greater than 2.0%. The baseline skylight SHGC-factor is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-28",
@@ -17240,7 +17246,11 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 120,
-                                                        "area": 929.0303999999999
+                                                        "area": 929.0303999999999,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "u_factor": 1.5331313162626328
+                                                        }
                                                     }
                                                 ]
                                             }
@@ -17329,7 +17339,11 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 120,
-                                                        "area": 929.0303999999999
+                                                        "area": 929.0303999999999,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "u_factor": 1.5331313162626328
+                                                        }
                                                     }
                                                 ]
                                             }
@@ -17417,7 +17431,11 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 120,
-                                                        "area": 929.0303999999999
+                                                        "area": 929.0303999999999,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "u_factor": 1.5331313162626328
+                                                        }
                                                     }
                                                 ]
                                             }
@@ -17546,7 +17564,7 @@
         "Section": 5,
         "Rule": 39,
         "Test": "b",
-        "test_description": "Project has one building segment with 1 zones containing 2 spaces and a wall surface with a metal coiling door. The building is located in climate zone 8, the surface is EXTERIOR MIXED based on space types in the zone and the adjacency to exterior. All available options for baseline U-factor are the same, but baseline door u-factor does not align and is more conservative.",
+        "test_description": "Project located in climate zone 8 has one building segment with 1 zones containing 2 spaces and a wall surface with a metal coiling door. The zone has mixed residential and nonresidential space types. All available options for baseline U-factor are the same, but baseline door u-factor does not align and is more conservative.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "Rule evaluation fails with a conservative outcome.",
         "standard": {
@@ -17747,7 +17765,7 @@
         "Section": 5,
         "Rule": 39,
         "Test": "d",
-        "test_description": "Project has one building segment with one space that includes a wall surface with a metal coiling door. The space is nonresidential and conditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. The baseline door u-factor aligns with one of the available options per Tables G3.4-1 through G3.4-8, but cannot be determined if it is correct.",
+        "test_description": "Project has one building segment with 1 zones containing 2 spaces and a wall surface with a metal coiling door. The zone has mixed residential and nonresidential space types and is conditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. The baseline door u-factor aligns with one of the available options per Tables G3.4-1 through G3.4-8, but cannot be determined if it is correct.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "Prescribed u-factor requirement could not be determined. Verify the baseline door u-factor",
         "standard": {
@@ -17789,6 +17807,12 @@
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
                                                         "lighting_space_type": "OFFICE_ENCLOSED",
+                                                        "floor_area": 23.225759999999998
+                                                    },
+                                                    {
+                                                        "id": "Space 2",
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "lighting_space_type": "DWELLING_UNIT",
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],

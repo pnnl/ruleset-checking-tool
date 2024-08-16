@@ -326,11 +326,12 @@ class Section19Rule4(RuleDefinitionListIndexedBase):
                             "is_building_area_MF_dormitory_or_hotel_b"
                         ]
 
-                        space_lighting_or_vent_space_type_is_defined = space_b.get(
-                            "lighting_space_type"
-                        ) or space_b.get("ventilation_space_type")
+                        space_lighting_or_vent_space_type_not_defined = (
+                            space_b.get("lighting_space_type") is None
+                            or space_b.get("ventilation_space_type") is None
+                        )
 
-                        return not space_lighting_or_vent_space_type_is_defined and (
+                        return space_lighting_or_vent_space_type_not_defined and (
                             not is_lighting_bldg_area_defined_b
                             or is_building_area_MF_dormitory_or_hotel_b
                         )

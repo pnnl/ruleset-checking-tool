@@ -3,7 +3,7 @@
         "Section": 10,
         "Rule": 7,
         "Test": "a",
-        "test_description": "A one story building includes a baseline system 3. The capacity is undefined and the cooling efficiency of the system matches the most conservative cooling efficiency from Table G3.5.1.",
+        "test_description": "A one story building includes a baseline system 3. The capacity is 70 kBtu/hr and the cooling efficiency of the system matches the expected efficiency based on the capacity range from Table G3.5.1.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "10-7",
@@ -49,7 +49,8 @@
                                                         "type": "CONSTANT_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System_3_PSZ_AC_Gas_Furnace Thermal Zone 1"
                                                     }
-                                                ]
+                                                ],
+                                                "aggregation_factor": 1
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
@@ -58,8 +59,9 @@
                                                 "cooling_system": {
                                                     "id": "Cooling Sys - Thermal Zone 1",
                                                     "type": "DIRECT_EXPANSION",
+                                                    "design_total_cool_capacity": 20514.977777777778,
                                                     "efficiency_metric_values": [
-                                                        3.6
+                                                        3.5
                                                     ],
                                                     "efficiency_metric_types": [
                                                         "FULL_LOAD_COEFFICIENT_OF_PERFORMANCE_NO_FAN"
@@ -99,7 +101,7 @@
         "Section": 10,
         "Rule": 7,
         "Test": "b",
-        "test_description": "A one story building includes a baseline system 4. The capacity is undefined and the cooling efficiency of the system matches the most conservative cooling efficiency from Table G3.5.2.",
+        "test_description": "A one story building includes a baseline system 4. The capacity is 70 kBtu/hr and the cooling efficiency of the system matches the expected efficiency based on the capacity range from Table G3.5.2.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "10-7",
@@ -145,7 +147,8 @@
                                                         "type": "CONSTANT_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP Thermal Zone 1"
                                                     }
-                                                ]
+                                                ],
+                                                "aggregation_factor": 1
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
@@ -154,8 +157,9 @@
                                                 "cooling_system": {
                                                     "id": "Cooling Sys - Thermal Zone 1",
                                                     "type": "DIRECT_EXPANSION",
+                                                    "design_total_cool_capacity": 20514.977777777778,
                                                     "efficiency_metric_values": [
-                                                        3.6
+                                                        3.4
                                                     ],
                                                     "efficiency_metric_types": [
                                                         "FULL_LOAD_COEFFICIENT_OF_PERFORMANCE_NO_FAN"
@@ -241,7 +245,8 @@
                                                         "type": "CONSTANT_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP Thermal Zone 1"
                                                     }
-                                                ]
+                                                ],
+                                                "aggregation_factor": 1
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
@@ -348,6 +353,7 @@
                                                 "cooling_system": {
                                                     "id": "Cooling Sys - Thermal Zone 1",
                                                     "type": "DIRECT_EXPANSION",
+                                                    "design_total_cool_capacity": 19049.329151111113,
                                                     "efficiency_metric_values": [
                                                         2.8
                                                     ],

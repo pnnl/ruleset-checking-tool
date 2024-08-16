@@ -51,11 +51,11 @@ GET_ZONE_CONDITIONING_CATEGORY_DICT__REQUIRED_FIELDS = {
 }
 
 
-def get_zone_conditioning_category_rmi_dict(
+def get_zone_conditioning_category_rmd_dict(
     climate_zone: str, rmd: dict
 ) -> dict[str, ZoneConditioningCategory]:
     """
-    Determines the zone conditioning category for every zone in an RMI.
+    Determines the zone conditioning category for every zone in an RMD.
 
     Parameters
     ----------
@@ -70,13 +70,13 @@ def get_zone_conditioning_category_rmi_dict(
         CONDITIONED_MIXED, CONDITIONED_NON_RESIDENTIAL, CONDITIONED_RESIDENTIAL,
         SEMI_HEATED, UNCONDITIONED, UNENCOLOSED
     """
-    zone_conditioning_category_rmi_dict = {}
+    zone_conditioning_category_rmd_dict = {}
     for building in find_all("$.buildings[*]", rmd):
         zone_conditioning_category_dict = get_zone_conditioning_category_dict(
             climate_zone, building
         )
-        zone_conditioning_category_rmi_dict.update(zone_conditioning_category_dict)
-    return zone_conditioning_category_rmi_dict
+        zone_conditioning_category_rmd_dict.update(zone_conditioning_category_dict)
+    return zone_conditioning_category_rmd_dict
 
 
 def get_zone_conditioning_category_dict(

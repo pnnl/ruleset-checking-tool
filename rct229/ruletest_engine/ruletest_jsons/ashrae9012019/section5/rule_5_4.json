@@ -3,7 +3,7 @@
         "Section": 5,
         "Rule": 4,
         "Test": "a",
-        "test_description": "Project has one building segment with an exterior roof surface. Building is located in climate zone 4A, includes a space that has residential occupancy type, and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline roof U-factor for the space is established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment with an exterior roof surface. The project includes a space that has residential occupancy type, and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline roof U-factor for the space is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-4",
@@ -92,7 +92,7 @@
         "Section": 5,
         "Rule": 4,
         "Test": "b",
-        "test_description": "Project has one building segment with an exterior roof surface. Building is located in climate zone 4A, includes a space that has residential occupancy type, and is conditioned based on  cooling capacity of the HVAC system that serves the parent zone. The baseline roof U-factor for the space is established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment with an exterior roof surface.The project includes a space that has residential occupancy type, and is conditioned based on  cooling capacity of the HVAC system that serves the parent zone. The baseline roof U-factor for the space is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-4",
@@ -181,7 +181,7 @@
         "Section": 5,
         "Rule": 4,
         "Test": "c",
-        "test_description": "Project has one building segment with an exterior roof surface. Building is located in climate zone 4A, includes a space that has residential occupancy type, and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline roof U-factor for the space is not established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment with an exterior roof surface. The project includes a space that has residential occupancy type, and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline roof U-factor for the space is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-4",
@@ -270,7 +270,7 @@
         "Section": 5,
         "Rule": 4,
         "Test": "d",
-        "test_description": "Project has one building segment with an exterior roof surface. Building is located in climate zone 4A and includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline roof U-factor for the space is established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment with an exterior roof surface. The project includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline roof U-factor for the space is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-4",
@@ -359,7 +359,7 @@
         "Section": 5,
         "Rule": 4,
         "Test": "e",
-        "test_description": "Project has one building segment with an exterior roof surface. Building is located in climate zone 4A and includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline roof U-factor for the space is not established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment with an exterior roof surface. The project includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline roof U-factor for the space is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-4",
@@ -448,7 +448,7 @@
         "Section": 5,
         "Rule": 4,
         "Test": "f",
-        "test_description": "Project has one building segment with an exterior roof surface. Building is located in climate zone 4A and includes a space that has non-residential occupancy type and is semiheated based on heating and cooling capacity of the HVAC system that serves the the parent zone. The baseline roof U-factor for the space is established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment with an exterior roof surface. The project includes a space that has non-residential occupancy type and is semiheated based on heating and cooling capacity of the HVAC system that serves the the parent zone. The baseline roof U-factor for the space is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-4",
@@ -538,7 +538,7 @@
         "Section": 5,
         "Rule": 4,
         "Test": "g",
-        "test_description": "Project has one building segment with an exterior roof surface. Building is located in climate zone 4A and includes a space that has non-residential occupancy type and is semiheated based on heating and cooling capacity of the HVAC system that serves the the parent zone. The baseline roof U-factor for the space is not established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment with an exterior roof surface. The project includes a space that has non-residential occupancy type and is semiheated based on heating and cooling capacity of the HVAC system that serves the the parent zone. The baseline roof U-factor for the space is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-4",
@@ -628,7 +628,7 @@
         "Section": 5,
         "Rule": 4,
         "Test": "h",
-        "test_description": "Project has one building segment with an exterior roof surface. Building is located in climate zone 8 and includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline roof U-factor for the space is established correctly.",
+        "test_description": "Project located in climate zone 8 has one building segment with an exterior roof surface. The project includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline roof U-factor for the space is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-4",
@@ -717,7 +717,7 @@
         "Section": 5,
         "Rule": 4,
         "Test": "i",
-        "test_description": "Project has one building segment with an exterior roof surface. Building is located in climate zone 8 and includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline roof U-factor for the space is not established correctly.",
+        "test_description": "Project located in climate zone 8 has one building segment with an exterior roof surface. The project includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline roof U-factor for the space is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-4",
