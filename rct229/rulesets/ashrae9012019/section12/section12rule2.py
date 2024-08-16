@@ -66,6 +66,7 @@ class Section12Rule2(RuleDefinitionListIndexedBase):
 
         def create_data(self, context, data):
             rmd_b = context.BASELINE_0
+            rmd_p = context.PROPOSED
             mis_equip_schedule_b_dict = {
                 sch_id: find_exactly_one_schedule(rmd_b, sch_id)["hourly_values"]
                 for sch_id in find_all(
@@ -73,7 +74,18 @@ class Section12Rule2(RuleDefinitionListIndexedBase):
                     rmd_b,
                 )
             }
-            return {"mis_equip_schedule_b_dict": mis_equip_schedule_b_dict}
+
+            mis_equip_schedule_p_dict = {
+                sch_id: find_exactly_one_schedule(rmd_p, sch_id)["hourly_values"]
+                for sch_id in find_all(
+                    "buildings[*].building_segments[*].zones[*].spaces[*].miscellaneous_equipment[*].multiplier_schedule",
+                    rmd_p,
+                )
+            }
+            return {
+                "mis_equip_schedule_b_dict": mis_equip_schedule_b_dict,
+                "mis_equip_schedule_p_dict": mis_equip_schedule_p_dict,
+            }
 
         class SpaceRule(RuleDefinitionListIndexedBase):
             def __init__(self):
@@ -111,9 +123,17 @@ class Section12Rule2(RuleDefinitionListIndexedBase):
 
                     space_type_b = data["space_type_b"]
                     mis_equip_schedule_b_dict = data["mis_equip_schedule_b_dict"]
+                    mis_equip_schedule_p_dict = data["mis_equip_schedule_p_dict"]
+                    misc_equip_schedule_id_b = misc_equip_b.get("multiplier_schedule")
+                    misc_equip_schedule_id_p = misc_equip_p.get("multiplier_schedule")
 
-                    misc_equip_schedule_b = misc_equip_b.get("multiplier_schedule")
-                    misc_equip_schedule_p = misc_equip_p.get("multiplier_schedule")
+                    misc_equip_schedule_b = mis_equip_schedule_b_dict.get(
+                        misc_equip_schedule_id_b
+                    )
+                    misc_equip_schedule_p = mis_equip_schedule_p_dict.get(
+                        misc_equip_schedule_id_p
+                    )
+
                     auto_receptacle_control_b = misc_equip_b.get(
                         "has_automatic_control"
                     )
@@ -146,50 +166,58 @@ class Section12Rule2(RuleDefinitionListIndexedBase):
                     schedules_comparison_output = calc_vals[
                         "schedules_comparison_output"
                     ]
-                    auto_receptacle_controls_p = calc_vals["auto_receptacle_controls_p"]
+                    auto_receptacle_control_p = calc_vals["auto_receptacle_control_p"]
                     space_type_b = calc_vals["space_type_b"]
-                    return schedules_comparison_output["eflh_difference"] > 0 and (
-                        auto_receptacle_controls_p
-                        and space_type_b in EXPECTED_RECEPTACLE_CONTROL_SPACE_TYPES
+                    return (
+                        schedules_comparison_output["eflh_difference"] > 0
+                        and (
+                            auto_receptacle_control_p
+                            and space_type_b in EXPECTED_RECEPTACLE_CONTROL_SPACE_TYPES
+                        )
                         or space_type_b is None
+                        or auto_receptacle_control_p is None
                     )
 
                 def get_manual_check_required_msg(
                     self, context, calc_vals=None, data=None
                 ):
-                    space_type_b = calc_vals["space_type_b"]
+                    auto_receptacle_control_p = calc_vals["auto_receptacle_control_p"]
                     return (
                         MANUAL_CHECK_REQUIRED_MSG_CASE_7
-                        if space_type_b is None
+                        if auto_receptacle_control_p is None
                         else MANUAL_CHECK_REQUIRED_MSG_CASE_4
                     )
 
                 def rule_check(self, context, calc_vals=None, data=None):
-                    hours_misc_equip_schedule_b = calc_vals["misc_equip_schedule_b"]
-                    hours_misc_equip_schedule_p = calc_vals["misc_equip_schedule_p"]
+                    hours_misc_equip_schedule_b = calc_vals[
+                        "hours_misc_equip_schedule_b"
+                    ]
+                    hours_misc_equip_schedule_p = calc_vals[
+                        "hours_misc_equip_schedule_p"
+                    ]
                     schedules_comparison_output = calc_vals[
                         "schedules_comparison_output"
                     ]
                     space_type_b = data["space_type_b"]
-                    auto_receptacle_controls_p = calc_vals["auto_receptacle_controls_p"]
+                    auto_receptacle_control_p = calc_vals["auto_receptacle_control_p"]
                     return (
                         schedules_comparison_output["total_hours_matched"]
                         == hours_misc_equip_schedule_b
                         == hours_misc_equip_schedule_p
                         or schedules_comparison_output["eflh_difference"] > 0
-                        and auto_receptacle_controls_p
+                        and auto_receptacle_control_p
                         and space_type_b not in EXPECTED_RECEPTACLE_CONTROL_SPACE_TYPES
                     )
 
                 def get_fail_msg(self, context, calc_vals=None, data=None):
-                    auto_receptacle_controls_b = calc_vals["auto_receptacle_controls_b"]
+                    auto_receptacle_control_b = calc_vals["auto_receptacle_control_b"]
                     schedules_comparison_output = calc_vals[
                         "schedules_comparison_output"
                     ]
-                    auto_receptacle_controls_p = calc_vals["auto_receptacle_controls_p"]
+                    auto_receptacle_control_p = calc_vals["auto_receptacle_control_p"]
                     if (
-                        auto_receptacle_controls_p
-                        and auto_receptacle_controls_b
+                        auto_receptacle_control_p
+                        and auto_receptacle_control_b
                         and schedules_comparison_output["eflh_difference"] != 0
                     ):
                         return FAIL_MSG_CASE_2
