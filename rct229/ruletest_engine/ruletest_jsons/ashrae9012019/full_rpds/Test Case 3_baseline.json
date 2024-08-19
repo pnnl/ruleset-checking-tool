@@ -171,6 +171,7 @@
                                             "tilt": 90.0,
                                             "azimuth": 90.0,
                                             "adjacent_to": "INTERIOR",
+                                            "adjacent_zone": "Prm Zone 2",
                                             "construction": {
                                                 "id": "Interior Wall",
                                                 "surface_construction_input_option": "LAYERS",
@@ -196,6 +197,7 @@
                                             "tilt": 90.0,
                                             "azimuth": 0.0,
                                             "adjacent_to": "INTERIOR",
+                                            "adjacent_zone": "Prm Zone 3",
                                             "construction": {
                                                 "id": "Interior Wall 01",
                                                 "surface_construction_input_option": "LAYERS",
@@ -221,6 +223,7 @@
                                             "tilt": 90.0,
                                             "azimuth": 180.0,
                                             "adjacent_to": "INTERIOR",
+                                            "adjacent_zone": "Prm Zone 1",
                                             "construction": {
                                                 "id": "Interior Wall 02",
                                                 "surface_construction_input_option": "LAYERS",
@@ -246,6 +249,7 @@
                                             "tilt": 90.0,
                                             "azimuth": 270.0,
                                             "adjacent_to": "INTERIOR",
+                                            "adjacent_zone": "Prm Zone 4",
                                             "construction": {
                                                 "id": "Interior Wall 03",
                                                 "surface_construction_input_option": "LAYERS",
@@ -412,6 +416,7 @@
                                             "tilt": 90.0,
                                             "azimuth": 45.0,
                                             "adjacent_to": "INTERIOR",
+                                            "adjacent_zone": "Prm Zone 2",
                                             "construction": {
                                                 "id": "Interior Wall 04",
                                                 "surface_construction_input_option": "LAYERS",
@@ -726,6 +731,7 @@
                                             "tilt": 90.0,
                                             "azimuth": 315.0,
                                             "adjacent_to": "INTERIOR",
+                                            "adjacent_zone": "Prm Zone 3",
                                             "construction": {
                                                 "id": "Interior Wall 05",
                                                 "surface_construction_input_option": "LAYERS",
@@ -977,6 +983,7 @@
                                             "tilt": 90.0,
                                             "azimuth": 225.0,
                                             "adjacent_to": "INTERIOR",
+                                            "adjacent_zone": "Prm Zone 4",
                                             "construction": {
                                                 "id": "Interior Wall 06",
                                                 "surface_construction_input_option": "LAYERS",
@@ -1143,6 +1150,7 @@
                                             "tilt": 90.0,
                                             "azimuth": 135.0,
                                             "adjacent_to": "INTERIOR",
+                                            "adjacent_zone": "Prm Zone 1",
                                             "construction": {
                                                 "id": "Interior Wall 07",
                                                 "surface_construction_input_option": "LAYERS",
