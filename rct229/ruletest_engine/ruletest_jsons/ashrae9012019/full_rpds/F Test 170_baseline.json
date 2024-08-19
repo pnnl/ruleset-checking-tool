@@ -171,7 +171,7 @@
                             "zones": [
                                 {
                                     "id": "Core Zone 1",
-                                    "volume": 2698.04,
+                                    "volume": 3900.94,
                                     "conditioning_type": "HEATED_AND_COOLED",
                                     "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule",
                                     "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule",
@@ -410,7 +410,7 @@
                                 },
                                 {
                                     "id": "Prm Zone 1",
-                                    "volume": 568.77,
+                                    "volume": 821.64,
                                     "conditioning_type": "HEATED_AND_COOLED",
                                     "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule",
                                     "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule",
@@ -657,7 +657,7 @@
                                 },
                                 {
                                     "id": "Prm Zone 2",
-                                    "volume": 360.08,
+                                    "volume": 520.15,
                                     "conditioning_type": "HEATED_AND_COOLED",
                                     "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule",
                                     "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule",
@@ -879,7 +879,7 @@
                                 },
                                 {
                                     "id": "Prm Zone 3",
-                                    "volume": 568.77,
+                                    "volume": 821.64,
                                     "conditioning_type": "HEATED_AND_COOLED",
                                     "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule",
                                     "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule",
@@ -1126,7 +1126,7 @@
                                 },
                                 {
                                     "id": "Prm Zone 4",
-                                    "volume": 360.05,
+                                    "volume": 520.15,
                                     "conditioning_type": "HEATED_AND_COOLED",
                                     "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule",
                                     "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule",
