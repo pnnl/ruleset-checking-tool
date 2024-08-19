@@ -1,6 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
+from rct229.rule_engine.rulesets import LeapYear
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.compare_schedules import (
     compare_schedules,
@@ -79,21 +80,18 @@ class Section12Rule4(RuleDefinitionListIndexedBase):
         def is_applicable(self, context, data=None):
             rmd_b = context.BASELINE_0
 
-            for space_b in find_all(
-                "$.buildings[*].building_segments[*].zones[*].spaces[*]", rmd_b
-            ):
-                if is_space_a_computer_room(rmd_b, space_b["id"]):
-                    for misc_equip_b in space_b["miscellaneous_equipment"]:
-                        if (
-                            misc_equip_b.get("type")
-                            != MISCELLANEOUS_EQUIPMENT.INFORMATION_TECHNOLOGY_EQUIPMENT
-                        ):
-                            return False
-                        else:
-                            return True
+            return any(
+                [
+                    is_space_a_computer_room(rmd_b, space_b["id"])
+                    for space_b in find_all(
+                        "$.buildings[*].building_segments[*].zones[*].spaces[*]", rmd_b
+                    )
+                ]
+            )
 
         def create_data(self, context, data):
             rmd_b = context.BASELINE_0
+            is_leap_year = data["is_leap_year"]
 
             schedule_b = {
                 mult_sch_b: find_exactly_one_schedule(rmd_b, mult_sch_b)[
@@ -104,8 +102,13 @@ class Section12Rule4(RuleDefinitionListIndexedBase):
                     rmd_b,
                 )
             }
+            hours_in_a_year = (
+                LeapYear.LEAP_YEAR_HOURS
+                if is_leap_year
+                else LeapYear.REGULAR_YEAR_HOURS
+            )
 
-            return {"schedule_b": schedule_b}
+            return {"schedule_b": schedule_b, "hours_in_a_year": hours_in_a_year}
 
         class MiscEquipRule(RuleDefinitionBase):
             def __init__(self):
@@ -126,8 +129,8 @@ class Section12Rule4(RuleDefinitionListIndexedBase):
             def get_calc_vals(self, context, data=None):
                 misc_equip_b = context.BASELINE_0
 
-                is_leap_year = data["is_leap_year"]
                 schedule_b = data["schedule_b"]
+                is_leap_year = data["is_leap_year"]
 
                 if is_leap_year:
                     DAYS_IN_MONTH[2] = 29
@@ -141,7 +144,11 @@ class Section12Rule4(RuleDefinitionListIndexedBase):
                         [MONTH_FRACTIONS[month]] * DAYS_IN_MONTH[month] * 24
                     )
 
-                mask_schedule = [1] * 8784 if is_leap_year else [1] * 8760
+                mask_schedule = (
+                    [1] * LeapYear.LEAP_YEAR_HOURS
+                    if is_leap_year
+                    else [1] * LeapYear.REGULAR_YEAR_HOURS
+                )
 
                 comparison_data = compare_schedules(
                     multiplier_schedule_b,
@@ -154,6 +161,6 @@ class Section12Rule4(RuleDefinitionListIndexedBase):
 
             def rule_check(self, context, calc_vals=None, data=None):
                 comparison_data = calc_vals["comparison_data"]
-                is_leap_year = data["is_leap_year"]
+                hours_in_a_year = data["hours_in_a_year"]
 
-                return comparison_data == (8784 if is_leap_year else 8760)
+                return comparison_data == hours_in_a_year
