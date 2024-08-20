@@ -60,7 +60,10 @@ def get_SWH_equipment_associated_with_each_swh_distribution_system(
                     solar_t["id"]
                 )
 
-    for swh_use in find_all("$.service_water_heating_uses[*]", rmd):
+    for swh_use in find_all(
+        "$.buildings[*].building_segments[*].zones[*].spaces[*].service_water_heating_uses[*]",
+        rmd,
+    ):
         distribution = swh_use.get("served_by_distribution_system")
         swh_and_equip_dict[distribution["id"]]["USES"].append(swh_use["id"])
         swh_and_equip_dict[distribution.id]["SPACES_SERVED"].append(
