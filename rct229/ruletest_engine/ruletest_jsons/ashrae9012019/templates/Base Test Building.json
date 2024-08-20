@@ -23,7 +23,7 @@
                     {
                       "id": "Core Zone 1 Roof",
                       "classification": "CEILING",
-                      "area": 983.754,
+                      "area": 984.490,
                       "tilt": 0.0,
                       "azimuth": 180.0,
                       "adjacent_to": "EXTERIOR",
@@ -69,7 +69,7 @@
                     {
                       "id": "Core Zone 1 Floor",
                       "classification": "FLOOR",
-                      "area": 983.754,
+                      "area": 984.490,
                       "tilt": 180.0,
                       "azimuth": 0.0,
                       "adjacent_to": "GROUND",
@@ -124,7 +124,7 @@
                     {
                       "id": "Core Zone 1 North Wall",
                       "classification": "WALL",
-                      "area": 161.475,
+                      "area": 161.596,
                       "tilt": 90.0,
                       "azimuth": 0.0,
                       "adjacent_to": "INTERIOR",
@@ -150,7 +150,7 @@
                     {
                       "id": "Core Zone 1 South Wall",
                       "classification": "WALL",
-                      "area": 161.475,
+                      "area": 161.596,
                       "tilt": 90.0,
                       "azimuth": 180.0,
                       "adjacent_to": "INTERIOR",
@@ -210,7 +210,7 @@
                   "spaces": [
                     {
                       "id": "Core Zone 1 SPACE",
-                      "floor_area": 983.754,
+                      "floor_area": 984.490,
                       "number_of_occupants": 52.9452,
                       "occupant_sensible_heat_gain": 3494.3832,
                       "occupant_latent_heat_gain": 2859.0408,
@@ -251,7 +251,7 @@
                     {
                       "id": "Prm Zone 1 Roof",
                       "classification": "CEILING",
-                      "area": 207.29,
+                      "area": 207.360,
                       "tilt": 0.0,
                       "azimuth": 180.0,
                       "adjacent_to": "EXTERIOR",
@@ -296,7 +296,7 @@
                     {
                       "id": "Prm Zone 1 Floor",
                       "classification": "FLOOR",
-                      "area": 207.290,
+                      "area": 207.360,
                       "tilt": 180.0,
                       "azimuth": 135.0,
                       "adjacent_to": "GROUND",
@@ -325,7 +325,7 @@
                     {
                       "id": "Prm Zone 1 East Wall",
                       "classification": "WALL",
-                      "area": 25.62,
+                      "area": 25.620,
                       "tilt": 90.0,
                       "azimuth": 45.0,
                       "adjacent_to": "INTERIOR",
@@ -445,7 +445,7 @@
                   "spaces": [
                     {
                       "id": "Prm Zone 1 SPACE",
-                      "floor_area": 207.290,
+                      "floor_area": 207.360,
                       "number_of_occupants": 11.15625,
                       "occupant_sensible_heat_gain": 736.3125,
                       "occupant_latent_heat_gain": 602.4375,
@@ -623,7 +623,7 @@
                     {
                       "id": "Prm Zone 2 North Wall",
                       "classification": "WALL",
-                      "area": 25.62,
+                      "area": 25.620,
                       "tilt": 90.0,
                       "azimuth": 315.0,
                       "adjacent_to": "INTERIOR",
@@ -697,7 +697,7 @@
                     {
                       "id": "Prm Zone 3 Roof",
                       "classification": "CEILING",
-                      "area": 207.290,
+                      "area": 207.360,
                       "tilt": 0.0,
                       "azimuth": 180.0,
                       "adjacent_to": "EXTERIOR",
@@ -742,7 +742,7 @@
                     {
                       "id": "Prm Zone 3 Floor",
                       "classification": "FLOOR",
-                      "area": 207.290,
+                      "area": 207.360,
                       "tilt": 180.0,
                       "azimuth": 0.0,
                       "adjacent_to": "GROUND",
@@ -857,7 +857,7 @@
                     {
                       "id": "Prm Zone 3 West Wall",
                       "classification": "WALL",
-                      "area": 25.62,
+                      "area": 25.620,
                       "tilt": 90.0,
                       "azimuth": 225.0,
                       "adjacent_to": "INTERIOR",
@@ -891,7 +891,7 @@
                   "spaces": [
                     {
                       "id": "Prm Zone 3 SPACE",
-                      "floor_area": 207.290,
+                      "floor_area": 207.360,
                       "number_of_occupants": 11.15625,
                       "occupant_sensible_heat_gain": 736.3125,
                       "occupant_latent_heat_gain": 602.4375,
@@ -1006,7 +1006,7 @@
                     {
                       "id": "Prm Zone 4 South Wall",
                       "classification": "WALL",
-                      "area": 25.62,
+                      "area": 25.620,
                       "tilt": 90.0,
                       "azimuth": 135.0,
                       "adjacent_to": "INTERIOR",

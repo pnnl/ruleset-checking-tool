@@ -302,7 +302,7 @@
                                         {
                                             "id": "Core Zone 1 Roof",
                                             "classification": "CEILING",
-                                            "area": 983.754,
+                                            "area": 984.49,
                                             "tilt": 0.0,
                                             "azimuth": 180.0,
                                             "adjacent_to": "EXTERIOR",
@@ -347,7 +347,7 @@
                                         {
                                             "id": "Core Zone 1 Floor",
                                             "classification": "FLOOR",
-                                            "area": 983.754,
+                                            "area": 984.49,
                                             "tilt": 180.0,
                                             "azimuth": 0.0,
                                             "adjacent_to": "GROUND",
@@ -402,7 +402,7 @@
                                         {
                                             "id": "Core Zone 1 North Wall",
                                             "classification": "WALL",
-                                            "area": 161.475,
+                                            "area": 161.596,
                                             "tilt": 90.0,
                                             "azimuth": 0.0,
                                             "adjacent_to": "INTERIOR",
@@ -428,7 +428,7 @@
                                         {
                                             "id": "Core Zone 1 South Wall",
                                             "classification": "WALL",
-                                            "area": 161.475,
+                                            "area": 161.596,
                                             "tilt": 90.0,
                                             "azimuth": 180.0,
                                             "adjacent_to": "INTERIOR",
@@ -508,7 +508,7 @@
                                     "spaces": [
                                         {
                                             "id": "Core Zone 1 SPACE",
-                                            "floor_area": 983.754,
+                                            "floor_area": 984.49,
                                             "number_of_occupants": 52.9452,
                                             "occupant_sensible_heat_gain": 3494.3832,
                                             "occupant_latent_heat_gain": 2859.0408,
@@ -552,7 +552,7 @@
                                         {
                                             "id": "Prm Zone 1 Roof",
                                             "classification": "CEILING",
-                                            "area": 207.29,
+                                            "area": 207.36,
                                             "tilt": 0.0,
                                             "azimuth": 180.0,
                                             "adjacent_to": "EXTERIOR",
@@ -597,7 +597,7 @@
                                         {
                                             "id": "Prm Zone 1 Floor",
                                             "classification": "FLOOR",
-                                            "area": 207.29,
+                                            "area": 207.36,
                                             "tilt": 180.0,
                                             "azimuth": 135.0,
                                             "adjacent_to": "GROUND",
@@ -766,7 +766,7 @@
                                     "spaces": [
                                         {
                                             "id": "Prm Zone 1 SPACE",
-                                            "floor_area": 207.29,
+                                            "floor_area": 207.36,
                                             "number_of_occupants": 11.15625,
                                             "occupant_sensible_heat_gain": 736.3125,
                                             "occupant_latent_heat_gain": 602.4375,
@@ -1043,7 +1043,7 @@
                                         {
                                             "id": "Prm Zone 3 Roof",
                                             "classification": "CEILING",
-                                            "area": 207.29,
+                                            "area": 207.36,
                                             "tilt": 0.0,
                                             "azimuth": 180.0,
                                             "adjacent_to": "EXTERIOR",
@@ -1088,7 +1088,7 @@
                                         {
                                             "id": "Prm Zone 3 Floor",
                                             "classification": "FLOOR",
-                                            "area": 207.29,
+                                            "area": 207.36,
                                             "tilt": 180.0,
                                             "azimuth": 0.0,
                                             "adjacent_to": "GROUND",
@@ -1257,7 +1257,7 @@
                                     "spaces": [
                                         {
                                             "id": "Prm Zone 3 SPACE",
-                                            "floor_area": 207.29,
+                                            "floor_area": 207.36,
                                             "number_of_occupants": 11.15625,
                                             "occupant_sensible_heat_gain": 736.3125,
                                             "occupant_latent_heat_gain": 602.4375,
