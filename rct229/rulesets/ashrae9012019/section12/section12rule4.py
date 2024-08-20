@@ -130,6 +130,7 @@ class Section12Rule4(RuleDefinitionListIndexedBase):
                 misc_equip_b = context.BASELINE_0
 
                 schedule_b = data["schedule_b"]
+                hours_in_a_year = data["hours_in_a_year"]
                 is_leap_year = data["is_leap_year"]
 
                 if is_leap_year:
@@ -157,10 +158,13 @@ class Section12Rule4(RuleDefinitionListIndexedBase):
                     is_leap_year,
                 )["total_hours_matched"]
 
-                return {"comparison_data": comparison_data}
+                return {
+                    "comparison_data": comparison_data,
+                    "hours_in_a_year": hours_in_a_year,
+                }
 
             def rule_check(self, context, calc_vals=None, data=None):
                 comparison_data = calc_vals["comparison_data"]
-                hours_in_a_year = data["hours_in_a_year"]
+                hours_in_a_year = calc_vals["hours_in_a_year"]
 
                 return comparison_data == hours_in_a_year
