@@ -151,7 +151,7 @@ class Section12Rule4(RuleDefinitionListIndexedBase):
                     else [1] * LeapYear.REGULAR_YEAR_HOURS
                 )
 
-                comparison_data = compare_schedules(
+                total_hours_matched = compare_schedules(
                     multiplier_schedule_b,
                     expected_hourly_values,
                     mask_schedule,
@@ -159,12 +159,12 @@ class Section12Rule4(RuleDefinitionListIndexedBase):
                 )["total_hours_matched"]
 
                 return {
-                    "comparison_data": comparison_data,
+                    "total_hours_matched": total_hours_matched,
                     "hours_in_a_year": hours_in_a_year,
                 }
 
             def rule_check(self, context, calc_vals=None, data=None):
-                comparison_data = calc_vals["comparison_data"]
+                comparison_data = calc_vals["total_hours_matched"]
                 hours_in_a_year = calc_vals["hours_in_a_year"]
 
                 return comparison_data == hours_in_a_year
