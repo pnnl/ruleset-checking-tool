@@ -108,9 +108,7 @@ class Section12Rule3(RuleDefinitionListIndexedBase):
 
         def list_filter(self, context_item, data):
             space_p = context_item.PROPOSED
-            lighting_space_type_p = getattr_(
-                space_p, "spaces", "lighting_space_type"
-            )
+            lighting_space_type_p = getattr_(space_p, "spaces", "lighting_space_type")
             return lighting_space_type_p not in EXPECTED_RECEPTACLE_CONTROL_SPACE_TYPES
 
         class SpaceRule(RuleDefinitionListIndexedBase):
@@ -129,9 +127,7 @@ class Section12Rule3(RuleDefinitionListIndexedBase):
             def create_data(self, context, data):
                 space_p = context.PROPOSED
 
-                return {
-                    "space_type_p": space_p["lighting_space_type"]
-                }
+                return {"space_type_p": space_p["lighting_space_type"]}
 
             class MiscEquipRule(RuleDefinitionBase):
                 def __init__(self):
@@ -175,12 +171,8 @@ class Section12Rule3(RuleDefinitionListIndexedBase):
                         "automatic_controlled_percentage",
                     )
 
-                    hourly_multiplier_schedule_b = misc_equip_b[
-                        "multiplier_schedule"
-                    ]
-                    hourly_multiplier_schedule_p = misc_equip_p[
-                        "multiplier_schedule"
-                    ]
+                    hourly_multiplier_schedule_b = misc_equip_b["multiplier_schedule"]
+                    hourly_multiplier_schedule_p = misc_equip_p["multiplier_schedule"]
 
                     expected_hourly_values = [
                         hour_value * (1 - expected_receptacle_power_credit)
@@ -220,7 +212,9 @@ class Section12Rule3(RuleDefinitionListIndexedBase):
                     }
 
                 def manual_check_required(self, context, calc_vals=None, data=None):
-                    no_credit_comparison_total_hours_matched = calc_vals["no_credit_comparison_total_hours_matched"]
+                    no_credit_comparison_total_hours_matched = calc_vals[
+                        "no_credit_comparison_total_hours_matched"
+                    ]
                     hourly_multiplier_schedule_len_b = calc_vals[
                         "hourly_multiplier_schedule_len_b"
                     ]
@@ -236,7 +230,9 @@ class Section12Rule3(RuleDefinitionListIndexedBase):
 
                 def rule_check(self, context, calc_vals=None, data=None):
                     expected_hourly_values_len = calc_vals["expected_hourly_values_len"]
-                    credit_comparison_total_hours_matched = calc_vals["credit_comparison_total_hours_matched"]
+                    credit_comparison_total_hours_matched = calc_vals[
+                        "credit_comparison_total_hours_matched"
+                    ]
                     hourly_multiplier_schedule_len_p = calc_vals[
                         "hourly_multiplier_schedule_len_p"
                     ]
