@@ -166,6 +166,7 @@ class Section12Rule2(RuleDefinitionListIndexedBase):
                     schedules_comparison_output = calc_vals[
                         "schedules_comparison_output"
                     ]
+                    auto_receptacle_control_b = calc_vals["auto_receptacle_control_b"]
                     auto_receptacle_control_p = calc_vals["auto_receptacle_control_p"]
                     space_type_b = calc_vals["space_type_b"]
                     return (
@@ -173,6 +174,7 @@ class Section12Rule2(RuleDefinitionListIndexedBase):
                         and (
                             auto_receptacle_control_p
                             and space_type_b in EXPECTED_RECEPTACLE_CONTROL_SPACE_TYPES
+                            and not auto_receptacle_control_b
                         )
                         or space_type_b is None
                         or auto_receptacle_control_p is None
