@@ -160,15 +160,17 @@ def get_surface_conditioning_category_dict(climate_zone, building):
                 else surface_adjacent_to
             )
 
-            if zcc in SCC_DATA_FRAME.index and adjacency in SCC_DATA_FRAME.columns:
+            if adjacency in [SurfaceAdjacency.IDENTICAL, SurfaceAdjacency.UNDEFINED]:
+                surface_conditioning_category_dict[
+                    surface["id"]
+                ] = SurfaceConditioningCategory.UNREGULATED
+
+            elif zcc in SCC_DATA_FRAME.index and adjacency in SCC_DATA_FRAME.columns:
                 surface_conditioning_category_dict[surface["id"]] = SCC_DATA_FRAME.at[
                     zcc,  # row index
                     adjacency,  # column index
                 ]
-            elif adjacency in [SurfaceAdjacency.IDENTICAL, SurfaceAdjacency.UNDEFINED]:
-                surface_conditioning_category_dict[
-                    surface["id"]
-                ] = SurfaceConditioningCategory.UNREGULATED
+
             else:
                 raise ValueError(
                     f"Combination of zone conditioning category '{zcc}' and surface adjacency '{adjacency}' has no mapping to a surface conditioning category"
