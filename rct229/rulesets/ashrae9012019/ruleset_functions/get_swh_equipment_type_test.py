@@ -1,9 +1,11 @@
+import pytest
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_equipment_type import (
+    GetSWHEquipmentType,
     get_swh_equipment_type,
 )
 from rct229.schema.schema_utils import quantify_rmd
 from rct229.schema.validate import schema_validate_rmd
-
+from rct229.utils.assertions import RCTFailureException
 
 TEST_RMD = {
     "id": "test_rmd",
@@ -22,13 +24,73 @@ TEST_RMD = {
         {
             "id": "swh equipment 1",
             "distribution_system": "distribution system 1",
-            "tank": [
-                {"id": "Tank 1", "type": "CONSUMER_INSTANTANEOUS"},
-                {"id": "Tank 2", "type": "CONSUMER_STORAGE"},
-            ],
-            "heater_type": "HEAT_FROM_HOT_WATER_LOOP",
+            "tank": {"id": "Tank 1", "type": "CONSUMER_INSTANTANEOUS"},
+            "heater_type": "CONVENTIONAL",
             "heater_fuel_type": "ELECTRICITY",
-        }
+        },
+        {
+            "id": "swh equipment 2",
+            "distribution_system": "distribution system 2",
+            "tank": {"id": "Tank 2", "type": "CONSUMER_INSTANTANEOUS"},
+            "heater_type": "CONVENTIONAL",
+            "heater_fuel_type": "NATURAL_GAS",
+        },
+        {
+            "id": "swh equipment 3",
+            "distribution_system": "distribution system 3",
+            "tank": {"id": "Tank 3", "type": "COMMERCIAL_INSTANTANEOUS"},
+            "heater_type": "CONVENTIONAL",
+            "heater_fuel_type": "FUEL_OIL",
+        },
+        {
+            "id": "swh equipment 4",
+            "distribution_system": "distribution system 4",
+            "tank": {"id": "Tank 4", "type": "CONSUMER_STORAGE"},
+            "heater_type": "CONVENTIONAL",
+            "heater_fuel_type": "ELECTRICITY",
+        },
+        {
+            "id": "swh equipment 5",
+            "distribution_system": "distribution system 5",
+            "tank": {"id": "Tank 5", "type": "CONSUMER_STORAGE"},
+            "heater_type": "CONVENTIONAL",
+            "heater_fuel_type": "NATURAL_GAS",
+        },
+        {
+            "id": "swh equipment 6",
+            "distribution_system": "distribution system 6",
+            "tank": {"id": "Tank 6", "type": "COMMERCIAL_STORAGE"},
+            "heater_type": "CONVENTIONAL",
+            "heater_fuel_type": "FUEL_OIL",
+        },
+        {
+            "id": "swh equipment 7",
+            "distribution_system": "distribution system 7",
+            "tank": {"id": "Tank 7", "type": "OTHER"},
+            "heater_type": "OTHER",
+            "heater_fuel_type": "ELECTRICITY",
+        },
+        {
+            "id": "swh equipment 8",
+            "distribution_system": "distribution system 8",
+            "tank": {"id": "Tank 8", "type": "OTHER"},
+            "heater_type": "OTHER",
+            "heater_fuel_type": "NATURAL_GAS",
+        },
+        {
+            "id": "swh equipment 9",
+            "distribution_system": "distribution system 9",
+            "tank": {"id": "Tank 9", "type": "OTHER"},
+            "heater_type": "OTHER",
+            "heater_fuel_type": "FUEL_OIL",
+        },
+        {
+            "id": "swh equipment 10",
+            "distribution_system": "distribution system 9",
+            "tank": {"id": "Tank 10", "type": "OTHER"},
+            "heater_type": "OTHER",
+            "heater_fuel_type": "PROPANE",
+        },
     ],
     "type": "BASELINE_0",
 }
@@ -55,5 +117,96 @@ def test__get_swh_equipment_type__electric_instantaneous():
             TEST_RMD,
             "swh equipment 1",
         )
-        == "ELECTRIC_RESISTANCE_INSTANTANEOUS"
+        == GetSWHEquipmentType.ELECTRIC_RESISTANCE_INSTANTANEOUS
     )
+
+
+def test__get_swh_equipment_type__gas_instantaneous():
+    assert (
+        get_swh_equipment_type(
+            TEST_RMD,
+            "swh equipment 2",
+        )
+        == GetSWHEquipmentType.GAS_INSTANTANEOUS
+    )
+
+
+def test__get_swh_equipment_type__oil_instantaneous():
+    assert (
+        get_swh_equipment_type(
+            TEST_RMD,
+            "swh equipment 3",
+        )
+        == GetSWHEquipmentType.OIL_INSTANTANEOUS
+    )
+
+
+def test__get_swh_equipment_type__electric_storage():
+    assert (
+        get_swh_equipment_type(
+            TEST_RMD,
+            "swh equipment 4",
+        )
+        == GetSWHEquipmentType.ELECTRIC_RESISTANCE_STORAGE
+    )
+
+
+def test__get_swh_equipment_type__gas_storage():
+    assert (
+        get_swh_equipment_type(
+            TEST_RMD,
+            "swh equipment 5",
+        )
+        == GetSWHEquipmentType.GAS_STORAGE
+    )
+
+
+def test__get_swh_equipment_type__oil_storage():
+    assert (
+        get_swh_equipment_type(
+            TEST_RMD,
+            "swh equipment 6",
+        )
+        == GetSWHEquipmentType.OIL_STORAGE
+    )
+
+
+def test__get_swh_equipment_type__electric_other():
+    assert (
+        get_swh_equipment_type(
+            TEST_RMD,
+            "swh equipment 7",
+        )
+        == GetSWHEquipmentType.ELECTRIC_RESISTANCE_OTHER
+    )
+
+
+def test__get_swh_equipment_type__gas_other():
+    assert (
+        get_swh_equipment_type(
+            TEST_RMD,
+            "swh equipment 8",
+        )
+        == GetSWHEquipmentType.GAS_OTHER
+    )
+
+
+def test__get_swh_equipment_type__oil_other():
+    assert (
+        get_swh_equipment_type(
+            TEST_RMD,
+            "swh equipment 9",
+        )
+        == GetSWHEquipmentType.OIL_OTHER
+    )
+
+
+def test__get_swh_equipment_type__wrong_fuel_type():
+    with pytest.raises(
+        RCTFailureException,
+        match="Fuel type must be one of `ELECTRICITY`, `NATURAL_GAS`, `FUEL_OIL`.",
+    ):
+        get_swh_equipment_type(
+            TEST_RMD,
+            "swh equipment 10",
+        )

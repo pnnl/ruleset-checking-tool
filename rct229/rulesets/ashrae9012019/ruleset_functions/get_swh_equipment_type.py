@@ -17,6 +17,18 @@ STORAGE_TYPE = [
 ]
 
 
+class GetSWHEquipmentType:
+    ELECTRIC_RESISTANCE_INSTANTANEOUS = "ELECTRIC_RESISTANCE_INSTANTANEOUS"
+    ELECTRIC_RESISTANCE_STORAGE = "ELECTRIC_RESISTANCE_STORAGE"
+    ELECTRIC_RESISTANCE_OTHER = "ELECTRIC_RESISTANCE_OTHER"
+    GAS_INSTANTANEOUS = "GAS_INSTANTANEOUS"
+    GAS_STORAGE = "GAS_STORAGE"
+    GAS_OTHER = "GAS_OTHER"
+    OIL_INSTANTANEOUS = "OIL_INSTANTANEOUS"
+    OIL_STORAGE = "OIL_STORAGE"
+    OIL_OTHER = "OIL_OTHER"
+
+
 def get_swh_equipment_type(rmd: dict, service_water_heating_equipment_id: str) -> str:
     """
     This function determines whether the swh equipment type is one of: (ELECTRIC_RESISTANCE_INSTANTANEOUS, ELECTRIC_RESISTANCE_STORAGE, GAS_STORAGE, OTHER)
@@ -30,7 +42,7 @@ def get_swh_equipment_type(rmd: dict, service_water_heating_equipment_id: str) -
 
     Returns
     -------
-    type: A string
+    type: string
         ex: type = "ELECTRIC_RESISTANCE_INSTANTANEOUS"
     """
 
@@ -46,7 +58,7 @@ def get_swh_equipment_type(rmd: dict, service_water_heating_equipment_id: str) -
         "service_water_heating_equipment",
         "tank",
         "type",
-    )  # this part needs to be corrected.
+    )
     swh_type = getattr_(
         service_water_heating_equipment,
         "service_water_heating_equipment",
@@ -65,21 +77,31 @@ def get_swh_equipment_type(rmd: dict, service_water_heating_equipment_id: str) -
             ENERGY_SOURCE.NATURAL_GAS,
             ENERGY_SOURCE.FUEL_OIL,
         ],
-        "fuel type must be one of ``ELECTRICITY`, `NATURAL_GAS`, `FUEL_OIL`",
+        "Fuel type must be one of `ELECTRICITY`, `NATURAL_GAS`, `FUEL_OIL`.",
     )
 
-    type = "OTHER"
     if swh_type == SERVICE_WATER_HEATER.CONVENTIONAL:
         if swh_tank_type in INSTANTANEOUS_TYPE:
-            type = "INSTANTANEOUS"
-        elif swh_tank_type in STORAGE_TYPE:
-            type = "STORAGE"
+            if fuel_type == ENERGY_SOURCE.ELECTRICITY:
+                type = GetSWHEquipmentType.ELECTRIC_RESISTANCE_INSTANTANEOUS
+            elif fuel_type == ENERGY_SOURCE.NATURAL_GAS:
+                type = GetSWHEquipmentType.GAS_INSTANTANEOUS
+            elif fuel_type == ENERGY_SOURCE.FUEL_OIL:
+                type = GetSWHEquipmentType.OIL_INSTANTANEOUS
 
-    if fuel_type == ENERGY_SOURCE.ELECTRICITY:
-        type = f"ELECTRIC_RESISTANCE_{swh_tank_type}"
-    elif fuel_type == ENERGY_SOURCE.NATURAL_GAS:
-        type = f"GAS_{swh_tank_type}"
-    elif fuel_type == ENERGY_SOURCE.FUEL_OIL:
-        type = f"OIL_{swh_tank_type}"
+        elif swh_tank_type in STORAGE_TYPE:
+            if fuel_type == ENERGY_SOURCE.ELECTRICITY:
+                type = GetSWHEquipmentType.ELECTRIC_RESISTANCE_STORAGE
+            elif fuel_type == ENERGY_SOURCE.NATURAL_GAS:
+                type = GetSWHEquipmentType.GAS_STORAGE
+            elif fuel_type == ENERGY_SOURCE.FUEL_OIL:
+                type = GetSWHEquipmentType.OIL_STORAGE
+    else:
+        if fuel_type == ENERGY_SOURCE.ELECTRICITY:
+            type = GetSWHEquipmentType.ELECTRIC_RESISTANCE_OTHER
+        elif fuel_type == ENERGY_SOURCE.NATURAL_GAS:
+            type = GetSWHEquipmentType.GAS_OTHER
+        elif fuel_type == ENERGY_SOURCE.FUEL_OIL:
+            type = GetSWHEquipmentType.OIL_OTHER
 
     return type
