@@ -157,20 +157,23 @@ class Section12Rule2(RuleDefinitionListIndexedBase):
                         "space_type_b": space_type_b,
                         "auto_receptacle_control_b": auto_receptacle_control_b,
                         "auto_receptacle_control_p": auto_receptacle_control_p,
-                        "schedules_comparison_output": schedules_comparison_output,
+                        "total_hours_matched": schedules_comparison_output[
+                            "total_hours_matched"
+                        ],
+                        "eflh_difference": schedules_comparison_output[
+                            "eflh_difference"
+                        ],
                         "hours_misc_equip_schedule_b": len(misc_equip_schedule_b),
                         "hours_misc_equip_schedule_p": len(misc_equip_schedule_p),
                     }
 
                 def manual_check_required(self, context, calc_vals=None, data=None):
-                    schedules_comparison_output = calc_vals[
-                        "schedules_comparison_output"
-                    ]
+                    eflh_difference = calc_vals["eflh_difference"]
                     auto_receptacle_control_b = calc_vals["auto_receptacle_control_b"]
                     auto_receptacle_control_p = calc_vals["auto_receptacle_control_p"]
                     space_type_b = calc_vals["space_type_b"]
                     return (
-                        schedules_comparison_output["eflh_difference"] > 0
+                        eflh_difference > 0
                         and (
                             auto_receptacle_control_p
                             and space_type_b in EXPECTED_RECEPTACLE_CONTROL_SPACE_TYPES
@@ -197,33 +200,30 @@ class Section12Rule2(RuleDefinitionListIndexedBase):
                     hours_misc_equip_schedule_p = calc_vals[
                         "hours_misc_equip_schedule_p"
                     ]
-                    schedules_comparison_output = calc_vals[
-                        "schedules_comparison_output"
-                    ]
+                    eflh_difference = calc_vals["eflh_difference"]
+                    total_hours_matched = calc_vals["total_hours_matched"]
                     space_type_b = data["space_type_b"]
                     auto_receptacle_control_p = calc_vals["auto_receptacle_control_p"]
                     return (
-                        schedules_comparison_output["total_hours_matched"]
+                        total_hours_matched
                         == hours_misc_equip_schedule_b
                         == hours_misc_equip_schedule_p
-                        or schedules_comparison_output["eflh_difference"] > 0
+                        or eflh_difference > 0
                         and auto_receptacle_control_p
                         and space_type_b not in EXPECTED_RECEPTACLE_CONTROL_SPACE_TYPES
                     )
 
                 def get_fail_msg(self, context, calc_vals=None, data=None):
                     auto_receptacle_control_b = calc_vals["auto_receptacle_control_b"]
-                    schedules_comparison_output = calc_vals[
-                        "schedules_comparison_output"
-                    ]
+                    eflh_difference = calc_vals["eflh_difference"]
                     auto_receptacle_control_p = calc_vals["auto_receptacle_control_p"]
                     if (
                         auto_receptacle_control_p
                         and auto_receptacle_control_b
-                        and schedules_comparison_output["eflh_difference"] != 0
+                        and eflh_difference != 0
                     ):
                         return FAIL_MSG_CASE_2
-                    elif schedules_comparison_output["eflh_difference"] < 0:
+                    elif eflh_difference < 0:
                         return FAIL_MSG_CASE_6
                     else:
                         return ""
