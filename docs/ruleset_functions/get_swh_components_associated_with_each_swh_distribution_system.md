@@ -35,8 +35,8 @@ Logic:
             - this swh equipment is connected, append it to the list: `swh_and_equip_dict[distribution.id]["swh_heating_eq"].append(swh_equip.id)`
             - this also means that any solarthermal attached to this swh_equip is connected, append the SolarThermal ids: `for solar_t in swh_equip.solar_thermal_systems: swh_and_equip_dict[distribution.id]["solar_thermal"].append(solar_t.id)`
 - now go through each SWH Use in the RMD: `for swh_use in RMD...service_water_heating_uses:`
-    - find the distribution system: `distribution = swh_use.served_by_distribution_system`
-    - add the swh_use id to the dictionary for the distribution: `swh_and_equip_dict[distribution.id]["uses"].append(swh_use.id)`
+    - find the distribution system: `distribution_id = swh_use.served_by_distribution_system`
+    - add the swh_use id to the dictionary for the distribution: `swh_and_equip_dict[distribution_id]["uses"].append(swh_use.id)`
     - now get the ids of spaces served by this SWH Use by using the function get_spaces_served_by_swh_use, and add all of them to the list: `swh_and_equip_dict[distribution.id]["spaces_served"].append(space.id for space in get_spaces_served_by_swh_use(RMD,swh_use))
 
 **Returns** swh_and_equip_dict
