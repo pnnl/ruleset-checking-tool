@@ -20,8 +20,7 @@ TEST_RMD = {
                                 {
                                     "id": "Space 1",
                                     "service_water_heating_uses": [
-                                        {"id": "service water heating uses 1"},
-                                        {"id": "service water heating uses 2"},
+                                        {"id": "service water heating uses 1"}
                                     ],
                                 },
                             ],
