@@ -67,18 +67,19 @@ def get_swh_equipment_associated_with_each_swh_distribution_system(
                 swh_and_equip_dict[distribution["id"]].swh_heating_eq.append(
                     swh_equip["id"]
                 )
-            for solar_t in swh_equip.get("solar_thermal_systems", []):
-                swh_and_equip_dict[distribution["id"]].solar_thermal.append(
-                    solar_t["id"]
-                )
+                for solar_t in swh_equip.get("solar_thermal_systems", []):
+                    swh_and_equip_dict[distribution["id"]].solar_thermal.append(
+                        solar_t["id"]
+                    )
 
     for swh_use in find_all(
         "$.buildings[*].building_segments[*].zones[*].spaces[*].service_water_heating_uses[*]",
         rmd,
     ):
         distribution_id = swh_use.get("served_by_distribution_system")
-        swh_and_equip_dict[distribution_id].uses.append(swh_use["id"])
-        swh_and_equip_dict[distribution_id].spaces_served.append(
-            space["id"] for space in get_spaces_served_by_swh_use(rmd, swh_use["id"])
-        )
+        if distribution_id:
+            swh_and_equip_dict[distribution_id].uses.append(swh_use["id"])
+            swh_and_equip_dict[distribution_id].spaces_served.extend(
+                get_spaces_served_by_swh_use(rmd, swh_use["id"])
+            )
     return swh_and_equip_dict
