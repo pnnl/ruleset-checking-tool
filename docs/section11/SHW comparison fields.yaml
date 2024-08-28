@@ -98,7 +98,7 @@ ServiceWaterPiping:
     child:
       AppG 11-1 P_RMD Equals U_RMD: true
       AppG 11-3 P_RMD Equals B_RMD: true
-    piping_losses_modeled:
+    are_thermal_losses_modeled:
       AppG 11-1 P_RMD Equals U_RMD: true
       AppG 11-3 P_RMD Equals B_RMD: true
 
