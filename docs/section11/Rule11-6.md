@@ -22,7 +22,7 @@
     - create a value indicating whether piping losses were modeled: `piping_losses_modeled = false`
     - look at every ServiceWaterPiping connected to the distribution: `for piping_id in swh_distribution_and_eq_dict[distribution_id]["Piping"]`
         - get the piping: `piping = get_component_by_id(piping_id, B_RMD, ServiceWaterPiping) `
-        - check if the piping has piping_losses_modeled: `if piping.piping_losses_modeled:`
+        - check if the piping has piping_losses_modeled: `if piping.are_thermal_losses_modeled:`
             - set the piping_losses_modeled to true and go directly to rule assertion: `piping_losses_modeled = true: GO TO RULE_ASSERTION`
 
     - **Rule Assertion - Zone:**
