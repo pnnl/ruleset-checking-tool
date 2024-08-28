@@ -26,9 +26,11 @@
 
 - call the function get_SWH_bats_and_SWH_use for the proposed: `swh_bats_and_uses_p = get_SWH_bats_and_SWH_use(P_RMD)`
 - look through each of the SWH bats in the building: `for swh_bat in swh_bats_and_uses_p:`
+    - set a boolean has_swh to false: `has_swh = false`
     - look at each service water heating use in the BAT: `for swh_use_id in swh_bats_and_uses_p[swh_bat]:`
       - get the swh use from the swh_use_id: `swh_use = get_component_by_id(P_RMD, swh_use_id)`
-      - check if there are SWH loads in this use, continue to rule logic.  In this case, we are not worried about the use_units, we just want to know that there is a use that is greater than 0: `if swh_use.use > 0: CONTINUE TO RULE LOGIC`
+      - check if there are SWH loads in this use, continue to rule logic and set has_swh to true.  In this case, we are not worried about the use_units, we just want to know that there is a use that is greater than 0: `if swh_use.use > 0: has_swh = true; CONTINUE TO RULE LOGIC`
+    - otherwise, if the shw_bat is NOT PARKING_GARAGE, continue to rule logic: `elif swh_bat != "PARKING_GARAGE": CONTINUE TO RULE LOGIC`
     - otherwise, rule is not applicable for this swh_bat: `else: NOT_APPLICABLE`
 
   ## Rule Logic: 
@@ -40,8 +42,9 @@
 
 
 ## Rule Assertion: 
-- Case1: the expected_swh_equip_type matches swh_equip_type: PASS: `if expected_swh_equip_type == swh_equip_type: PASS`
-- Case2: the expected_swh_equip_type doesn't match swh_equip_type, `FAIL: else: FAIL`
+- Case1: the swh_bat has zero SWH use, return UNDETERMINED with a not to check that service water heating has been included as appropriate: `if has_swh == false: UNDETERMIEND; rule_note = "Building area type " + swh_bat + " has no service water heating use.  Confirm that this is correct for this building area type."`
+- Case2: the expected_swh_equip_type matches swh_equip_type: PASS: `elif expected_swh_equip_type == swh_equip_type: PASS`
+- Case3: the expected_swh_equip_type doesn't match swh_equip_type, `FAIL: else: FAIL`
 
   
   **Notes:**
