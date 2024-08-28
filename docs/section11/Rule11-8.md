@@ -23,7 +23,7 @@
 - Each SWH bat is applicable if there are SWH loads in the BAT in the proposed model
 
 - call the function get_SWH_bats_and_SWH_use for the proposed: `swh_bats_and_uses_p = get_SWH_bats_and_SWH_use(P_RMD)`
-- look through each of the SWH bats in the building: `for swh_bat in swh_bats_and_uses_p:`
+- look through each of the SWH BATs in the building: `for swh_bat in swh_bats_and_uses_p:`
     - look at each service water heating use in the BAT: `for swh_use_id in swh_bats_and_uses_p[swh_bat]:`
       - get the swh use from the swh_use_id: `swh_use = get_component_by_id(P_RMD, swh_use_id)`
       - check if there are SWH loads in this use, continue to rule logic.  In this case, we are not worried about the use_units, we just want to know that there is a use that is greater than 0: `if swh_use.use > 0: CONTINUE TO RULE LOGIC`
@@ -31,14 +31,14 @@
 
         ## Rule Logic: 
     - use get_SWH_components_associated_with_each_SWH_bat to get the SWH use types and SWH use in the building: `swh_bats_and_equip_dict = get_SWH_components_associated_with_each_SWH_bat(B_RMD)`
-    - get a dictionary of all SWH equipment connected to the current SWH bat in the baseline model: `swh_bats_and_equip_dict_this_use = swh_bats_and_equip_dict[swh_bat]`
+    - get a dictionary of all SWH equipment connected to the current SWH BAT in the baseline model: `swh_bats_and_equip_dict_this_use = swh_bats_and_equip_dict[swh_bat]`
     - get the quantity of service water heating distribution systems serving this building area type: `num_swh_systems = len(swh_bats_and_equip_dict_this_use["SWHDistribution"])`
     - get the quantity of service water heating equipment serving this building area type: `num_swh_equipment_this_use = len(swh_bats_and_equip_dict_this_use["SWHHeatingEq"])`
     - create a boolean is_referenced_in_other_bats and set it to false: `is_referenced_in_other_bats = false`
     
     - if there is exactly one system, check that the system is not used in any of the other BATs: `if num_swh_systems == 1:`
         - create a variable swh_dist_id and set it to the id of the swh distribution system for this bat: `swh_dist_id = swh_bats_and_equip_dict_this_use["SWHDistribution"][0]`
-        - loop through each bat: `for other_swh_bat in swh_bats_and_equip_dict:`
+        - loop through each BAT: `for other_swh_bat in swh_bats_and_equip_dict:`
         - if other_swh_bat is not equal to the current swh_bat: `if other_swh_bat != swh_bat:`
             - check whether the swh_dist_id is in the list of SWH Distribution system for the other SWH_bat: `if swh_dist_id in swh_bats_and_equip_dict[other_swh_bat]["SWHDistribution"]:`
             - set the boolean is_referenced_in_other_bats to true: `is_referenced_in_other_bats = true`
