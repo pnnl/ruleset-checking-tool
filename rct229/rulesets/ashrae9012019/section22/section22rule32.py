@@ -43,8 +43,7 @@ class Section22Rule32(RuleDefinitionListIndexedBase):
             each_rule=Section22Rule32.ChillerRule(),
             index_rmd=BASELINE_0,
             id="22-32",
-            description="The baseline chiller efficiencies shall be modeled at the "
-            "minimum efficiency levels for part load, in accordance with Tables G3.5.3.",
+            description="The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for part load, in accordance with Tables G3.5.3.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.2.1 Equipment Efficiencies",
             is_primary_rule=True,
