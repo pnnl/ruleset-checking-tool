@@ -622,7 +622,7 @@
                                     "infiltration": {
                                         "id": "Prm Zone 1 INFILTRATION",
                                         "modeling_method": "WEATHER_DRIVEN",
-                                        "flow_rate": 1227.9313,
+                                        "flow_rate": 0.114117,
                                         "multiplier_schedule": "Prm Zone 1 INFILTRATION SCH"
                                     },
                                     "terminals": [
@@ -847,7 +847,7 @@
                                     "infiltration": {
                                         "id": "Prm Zone 2 INFILTRATION",
                                         "modeling_method": "CONSTANT",
-                                        "flow_rate": 832.2149
+                                        "flow_rate": 0.077315
                                     },
                                     "terminals": [
                                         {
@@ -1095,7 +1095,7 @@
                                     "infiltration": {
                                         "id": "Prm Zone 3 INFILTRATION",
                                         "modeling_method": "CONSTANT_SCHEDULED",
-                                        "flow_rate": 866.655,
+                                        "flow_rate": 0.080542,
                                         "multiplier_schedule": "Prm Zone 3 INFILTRATION SCH"
                                     },
                                     "terminals": [
@@ -1320,7 +1320,7 @@
                                     "infiltration": {
                                         "id": "Prm Zone 4 INFILTRATION",
                                         "modeling_method": "CONSTANT_SCHEDULED",
-                                        "flow_rate": 578.0476,
+                                        "flow_rate": 0.053702,
                                         "multiplier_schedule": "Prm Zone 4 INFILTRATION SCH"
                                     },
                                     "terminals": [
