@@ -45,6 +45,142 @@
                                             }
                                         ]
                                     }
+                                },
+                                {
+                                    "id": "RPD_Test_System_P_FCU_purchased Prm Zone 1 (South)",
+                                    "cooling_system": {
+                                        "id": "Cooling Sys - Prm Zone 1 (South)",
+                                        "type": "FLUID_LOOP",
+                                        "chilled_water_loop": "CHW Loop 1",
+                                        "design_sensible_cool_capacity": 11723,
+                                        "rated_total_cool_capacity": 17584,
+                                        "is_sized_based_on_design_day": false
+                                    },
+                                    "heating_system": {
+                                        "id": "Heating Sys - Prm Zone 1 (South)",
+                                        "type": "FLUID_LOOP",
+                                        "hot_water_loop": "HHW Loop 1",
+                                        "design_capacity": 11723,
+                                        "rated_capacity": 17584,
+                                        "is_sized_based_on_design_day": false
+                                    },
+                                    "fan_system": {
+                                        "id": "Fan System - Prm Zone 1 (South)",
+                                        "fan_control": "CONSTANT",
+                                        "operation_during_occupied": "CONTINUOUS",
+                                        "operation_during_unoccupied": "KEEP_OFF",
+                                        "supply_fans": [
+                                            {
+                                                "id": "Supply Fan - Prm Zone 1 (South)",
+                                                "design_airflow": 943.9,
+                                                "is_airflow_sized_based_on_design_day": false,
+                                                "specification_method": "SIMPLE",
+                                                "design_electric_power": 600
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "id": "RPD_Test_System_P_FCU_purchased Prm Zone 2 (East)",
+                                    "cooling_system": {
+                                        "id": "Cooling Sys - Prm Zone 2 (East)",
+                                        "type": "FLUID_LOOP",
+                                        "chilled_water_loop": "CHW Loop 1",
+                                        "design_sensible_cool_capacity": 11723,
+                                        "rated_total_cool_capacity": 17584,
+                                        "is_sized_based_on_design_day": false
+                                    },
+                                    "heating_system": {
+                                        "id": "Heating Sys - Prm Zone 2 (East)",
+                                        "type": "FLUID_LOOP",
+                                        "hot_water_loop": "HHW Loop 1",
+                                        "design_capacity": 11723,
+                                        "rated_capacity": 17584,
+                                        "is_sized_based_on_design_day": false
+                                    },
+                                    "fan_system": {
+                                        "id": "Fan System - Prm Zone 2 (East)",
+                                        "fan_control": "CONSTANT",
+                                        "operation_during_occupied": "CONTINUOUS",
+                                        "operation_during_unoccupied": "KEEP_OFF",
+                                        "supply_fans": [
+                                            {
+                                                "id": "Supply Fan - Prm Zone 2 (East)",
+                                                "design_airflow": 943.9,
+                                                "is_airflow_sized_based_on_design_day": false,
+                                                "specification_method": "SIMPLE",
+                                                "design_electric_power": 600
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "id": "RPD_Test_System_P_FCU_purchased Prm Zone 3 (North)",
+                                    "cooling_system": {
+                                        "id": "Cooling Sys - Prm Zone 3 (North)",
+                                        "type": "FLUID_LOOP",
+                                        "chilled_water_loop": "CHW Loop 1",
+                                        "design_sensible_cool_capacity": 11723,
+                                        "rated_total_cool_capacity": 17584,
+                                        "is_sized_based_on_design_day": false
+                                    },
+                                    "heating_system": {
+                                        "id": "Heating Sys - Prm Zone 3 (North)",
+                                        "type": "FLUID_LOOP",
+                                        "hot_water_loop": "HHW Loop 1",
+                                        "design_capacity": 11723,
+                                        "rated_capacity": 17584,
+                                        "is_sized_based_on_design_day": false
+                                    },
+                                    "fan_system": {
+                                        "id": "Fan System - Prm Zone 3 (North)",
+                                        "fan_control": "CONSTANT",
+                                        "operation_during_occupied": "CONTINUOUS",
+                                        "operation_during_unoccupied": "KEEP_OFF",
+                                        "supply_fans": [
+                                            {
+                                                "id": "Supply Fan - Prm Zone 3 (North)",
+                                                "design_airflow": 943.9,
+                                                "is_airflow_sized_based_on_design_day": false,
+                                                "specification_method": "SIMPLE",
+                                                "design_electric_power": 600
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "id": "RPD_Test_System_P_FCU_purchased Prm Zone 4 (West)",
+                                    "cooling_system": {
+                                        "id": "Cooling Sys - Prm Zone 4 (West)",
+                                        "type": "FLUID_LOOP",
+                                        "chilled_water_loop": "CHW Loop 1",
+                                        "design_sensible_cool_capacity": 11723,
+                                        "rated_total_cool_capacity": 17584,
+                                        "is_sized_based_on_design_day": false
+                                    },
+                                    "heating_system": {
+                                        "id": "Heating Sys - Prm Zone 4 (West)",
+                                        "type": "FLUID_LOOP",
+                                        "hot_water_loop": "HHW Loop 1",
+                                        "design_capacity": 11723,
+                                        "rated_capacity": 17584,
+                                        "is_sized_based_on_design_day": false
+                                    },
+                                    "fan_system": {
+                                        "id": "Fan System - Prm Zone 4 (West)",
+                                        "fan_control": "CONSTANT",
+                                        "operation_during_occupied": "CONTINUOUS",
+                                        "operation_during_unoccupied": "KEEP_OFF",
+                                        "supply_fans": [
+                                            {
+                                                "id": "Supply Fan - Prm Zone 4 (West)",
+                                                "design_airflow": 943.9,
+                                                "is_airflow_sized_based_on_design_day": false,
+                                                "specification_method": "SIMPLE",
+                                                "design_electric_power": 600
+                                            }
+                                        ]
+                                    }
                                 }
                             ],
                             "zones": [
@@ -489,7 +625,18 @@
                                         "flow_rate": 0.114117,
                                         "multiplier_schedule": "Prm Zone 1 INFILTRATION SCH"
                                     },
-                                    "terminals": [],
+                                    "terminals": [
+                                        {
+                                            "id": "RPD_Test_System_P_FCU_purchased - Terminal for Prm Zone 1 (South)",
+                                            "is_supply_ducted": false,
+                                            "type": "CONSTANT_AIR_VOLUME",
+                                            "served_by_heating_ventilating_air_conditioning_system": "RPD_Test_System_P_FCU_purchased Prm Zone 1 (South)",
+                                            "primary_airflow": 943.9,
+                                            "supply_design_heating_setpoint_temperature": 32.2,
+                                            "supply_design_cooling_setpoint_temperature": 12.8,
+                                            "minimum_outdoor_airflow": 94.4
+                                        }
+                                    ],
                                     "spaces": [
                                         {
                                             "id": "Prm Zone 1 SPACE",
@@ -522,7 +669,10 @@
                                             "ventilation_space_type": "OFFICE_BUILDINGS_OFFICE_SPACE",
                                             "service_water_heating_space_type": "OFFICE"
                                         }
-                                    ]
+                                    ],
+                                    "design_thermostat_cooling_setpoint": 23.9,
+                                    "design_thermostat_heating_setpoint": 21.1,
+                                    "air_distribution_effectiveness": 0.8
                                 },
                                 {
                                     "id": "Prm Zone 2 (East)",
@@ -699,7 +849,18 @@
                                         "modeling_method": "CONSTANT",
                                         "flow_rate": 0.077315
                                     },
-                                    "terminals": [],
+                                    "terminals": [
+                                        {
+                                            "id": "RPD_Test_System_P_FCU_purchased - Terminal for Prm Zone 2 (East)",
+                                            "is_supply_ducted": false,
+                                            "type": "CONSTANT_AIR_VOLUME",
+                                            "served_by_heating_ventilating_air_conditioning_system": "RPD_Test_System_P_FCU_purchased Prm Zone 2 (East)",
+                                            "primary_airflow": 943.9,
+                                            "supply_design_heating_setpoint_temperature": 32.2,
+                                            "supply_design_cooling_setpoint_temperature": 12.8,
+                                            "minimum_outdoor_airflow": 94.4
+                                        }
+                                    ],
                                     "spaces": [
                                         {
                                             "id": "Prm Zone 2 SPACE",
@@ -732,7 +893,10 @@
                                             "ventilation_space_type": "OFFICE_BUILDINGS_OFFICE_SPACE",
                                             "service_water_heating_space_type": "OFFICE"
                                         }
-                                    ]
+                                    ],
+                                    "design_thermostat_cooling_setpoint": 23.9,
+                                    "design_thermostat_heating_setpoint": 21.1,
+                                    "air_distribution_effectiveness": 0.8
                                 },
                                 {
                                     "id": "Prm Zone 3 (North)",
@@ -917,7 +1081,18 @@
                                         "flow_rate": 0.080542,
                                         "multiplier_schedule": "Prm Zone 3 INFILTRATION SCH"
                                     },
-                                    "terminals": [],
+                                    "terminals": [
+                                        {
+                                            "id": "RPD_Test_System_P_FCU_purchased - Terminal for Prm Zone 3 (North)",
+                                            "is_supply_ducted": false,
+                                            "type": "CONSTANT_AIR_VOLUME",
+                                            "served_by_heating_ventilating_air_conditioning_system": "RPD_Test_System_P_FCU_purchased Prm Zone 3 (North)",
+                                            "primary_airflow": 943.9,
+                                            "supply_design_heating_setpoint_temperature": 32.2,
+                                            "supply_design_cooling_setpoint_temperature": 12.8,
+                                            "minimum_outdoor_airflow": 94.4
+                                        }
+                                    ],
                                     "spaces": [
                                         {
                                             "id": "Prm Zone 3 SPACE",
@@ -950,7 +1125,10 @@
                                             "ventilation_space_type": "OFFICE_BUILDINGS_OFFICE_SPACE",
                                             "service_water_heating_space_type": "OFFICE"
                                         }
-                                    ]
+                                    ],
+                                    "design_thermostat_cooling_setpoint": 23.9,
+                                    "design_thermostat_heating_setpoint": 21.1,
+                                    "air_distribution_effectiveness": 0.8
                                 },
                                 {
                                     "id": "Prm Zone 4 (West)",
@@ -1094,7 +1272,18 @@
                                         "flow_rate": 0.053702,
                                         "multiplier_schedule": "Prm Zone 4 INFILTRATION SCH"
                                     },
-                                    "terminals": [],
+                                    "terminals": [
+                                        {
+                                            "id": "RPD_Test_System_P_FCU_purchased - Terminal for Prm Zone 4 (West)",
+                                            "is_supply_ducted": false,
+                                            "type": "CONSTANT_AIR_VOLUME",
+                                            "served_by_heating_ventilating_air_conditioning_system": "RPD_Test_System_P_FCU_purchased Prm Zone 4 (West)",
+                                            "primary_airflow": 943.9,
+                                            "supply_design_heating_setpoint_temperature": 32.2,
+                                            "supply_design_cooling_setpoint_temperature": 12.8,
+                                            "minimum_outdoor_airflow": 94.4
+                                        }
+                                    ],
                                     "spaces": [
                                         {
                                             "id": "Prm Zone 4 SPACE",
@@ -1127,7 +1316,10 @@
                                             "ventilation_space_type": "OFFICE_BUILDINGS_OFFICE_SPACE",
                                             "service_water_heating_space_type": "OFFICE"
                                         }
-                                    ]
+                                    ],
+                                    "design_thermostat_cooling_setpoint": 23.9,
+                                    "design_thermostat_heating_setpoint": 21.1,
+                                    "air_distribution_effectiveness": 0.8
                                 }
                             ]
                         }

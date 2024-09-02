@@ -510,7 +510,25 @@
                                         "flow_rate": 0.114117,
                                         "multiplier_schedule": "Prm Zone 1 INFILTRATION SCH"
                                     },
-                                    "terminals": [],
+                                    "terminals": [
+                                        {
+                                            "id": "RPD_Test_System_6_PVAV_Elec_Reheat - Terminal for Prm Zone 1 (South)",
+                                            "is_supply_ducted": true,
+                                            "type": "VARIABLE_AIR_VOLUME",
+                                            "served_by_heating_ventilating_air_conditioning_system": "RPD_Test_System_6_PVAV_Elec_Reheat",
+                                            "heating_source": "ELECTRIC",
+                                            "fan": {
+                                                "id": "Fan 1"
+                                            },
+                                            "fan_configuration": "PARALLEL",
+                                            "primary_airflow": 943.9,
+                                            "supply_design_heating_setpoint_temperature": 32.2,
+                                            "supply_design_cooling_setpoint_temperature": 12.8,
+                                            "minimum_airflow": 141.6,
+                                            "minimum_outdoor_airflow": 94.4,
+                                            "heating_capacity": 8792.1321
+                                        }
+                                    ],
                                     "spaces": [
                                         {
                                             "id": "Prm Zone 1 SPACE",
@@ -543,7 +561,10 @@
                                             "ventilation_space_type": "OFFICE_BUILDINGS_OFFICE_SPACE",
                                             "service_water_heating_space_type": "OFFICE"
                                         }
-                                    ]
+                                    ],
+                                    "design_thermostat_cooling_setpoint": 23.9,
+                                    "design_thermostat_heating_setpoint": 21.1,
+                                    "air_distribution_effectiveness": 0.8
                                 },
                                 {
                                     "id": "Prm Zone 2 (East)",
@@ -720,7 +741,25 @@
                                         "modeling_method": "CONSTANT",
                                         "flow_rate": 0.077315
                                     },
-                                    "terminals": [],
+                                    "terminals": [
+                                        {
+                                            "id": "RPD_Test_System_6_PVAV_Elec_Reheat - Terminal for Prm Zone 2 (East)",
+                                            "is_supply_ducted": true,
+                                            "type": "VARIABLE_AIR_VOLUME",
+                                            "served_by_heating_ventilating_air_conditioning_system": "RPD_Test_System_6_PVAV_Elec_Reheat",
+                                            "heating_source": "ELECTRIC",
+                                            "fan": {
+                                                "id": "Fan 1"
+                                            },
+                                            "fan_configuration": "PARALLEL",
+                                            "primary_airflow": 943.9,
+                                            "supply_design_heating_setpoint_temperature": 32.2,
+                                            "supply_design_cooling_setpoint_temperature": 12.8,
+                                            "minimum_airflow": 141.6,
+                                            "minimum_outdoor_airflow": 94.4,
+                                            "heating_capacity": 8792.1321
+                                        }
+                                    ],
                                     "spaces": [
                                         {
                                             "id": "Prm Zone 2 SPACE",
@@ -753,7 +792,10 @@
                                             "ventilation_space_type": "OFFICE_BUILDINGS_OFFICE_SPACE",
                                             "service_water_heating_space_type": "OFFICE"
                                         }
-                                    ]
+                                    ],
+                                    "design_thermostat_cooling_setpoint": 23.9,
+                                    "design_thermostat_heating_setpoint": 21.1,
+                                    "air_distribution_effectiveness": 0.8
                                 },
                                 {
                                     "id": "Prm Zone 3 (North)",
@@ -938,7 +980,25 @@
                                         "flow_rate": 0.080542,
                                         "multiplier_schedule": "Prm Zone 3 INFILTRATION SCH"
                                     },
-                                    "terminals": [],
+                                    "terminals": [
+                                        {
+                                            "id": "RPD_Test_System_6_PVAV_Elec_Reheat - Terminal for Prm Zone 3 (North)",
+                                            "is_supply_ducted": true,
+                                            "type": "VARIABLE_AIR_VOLUME",
+                                            "served_by_heating_ventilating_air_conditioning_system": "RPD_Test_System_6_PVAV_Elec_Reheat",
+                                            "heating_source": "ELECTRIC",
+                                            "fan": {
+                                                "id": "Fan 1"
+                                            },
+                                            "fan_configuration": "PARALLEL",
+                                            "primary_airflow": 943.9,
+                                            "supply_design_heating_setpoint_temperature": 32.2,
+                                            "supply_design_cooling_setpoint_temperature": 12.8,
+                                            "minimum_airflow": 141.6,
+                                            "minimum_outdoor_airflow": 94.4,
+                                            "heating_capacity": 8792.1321
+                                        }
+                                    ],
                                     "spaces": [
                                         {
                                             "id": "Prm Zone 3 SPACE",
@@ -971,7 +1031,10 @@
                                             "ventilation_space_type": "OFFICE_BUILDINGS_OFFICE_SPACE",
                                             "service_water_heating_space_type": "OFFICE"
                                         }
-                                    ]
+                                    ],
+                                    "design_thermostat_cooling_setpoint": 23.9,
+                                    "design_thermostat_heating_setpoint": 21.1,
+                                    "air_distribution_effectiveness": 0.8
                                 },
                                 {
                                     "id": "Prm Zone 4 (West)",
@@ -1115,7 +1178,25 @@
                                         "flow_rate": 0.053702,
                                         "multiplier_schedule": "Prm Zone 4 INFILTRATION SCH"
                                     },
-                                    "terminals": [],
+                                    "terminals": [
+                                        {
+                                            "id": "RPD_Test_System_6_PVAV_Elec_Reheat - Terminal for Prm Zone 4 (West)",
+                                            "is_supply_ducted": true,
+                                            "type": "VARIABLE_AIR_VOLUME",
+                                            "served_by_heating_ventilating_air_conditioning_system": "RPD_Test_System_6_PVAV_Elec_Reheat",
+                                            "heating_source": "ELECTRIC",
+                                            "fan": {
+                                                "id": "Fan 1"
+                                            },
+                                            "fan_configuration": "PARALLEL",
+                                            "primary_airflow": 943.9,
+                                            "supply_design_heating_setpoint_temperature": 32.2,
+                                            "supply_design_cooling_setpoint_temperature": 12.8,
+                                            "minimum_airflow": 141.6,
+                                            "minimum_outdoor_airflow": 94.4,
+                                            "heating_capacity": 8792.1321
+                                        }
+                                    ],
                                     "spaces": [
                                         {
                                             "id": "Prm Zone 4 SPACE",
@@ -1148,7 +1229,10 @@
                                             "ventilation_space_type": "OFFICE_BUILDINGS_OFFICE_SPACE",
                                             "service_water_heating_space_type": "OFFICE"
                                         }
-                                    ]
+                                    ],
+                                    "design_thermostat_cooling_setpoint": 23.9,
+                                    "design_thermostat_heating_setpoint": 21.1,
+                                    "air_distribution_effectiveness": 0.8
                                 }
                             ]
                         }

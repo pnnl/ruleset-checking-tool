@@ -13,44 +13,39 @@
                             "id": "TEST Building Segment 1",
                             "heating_ventilating_air_conditioning_systems": [
                                 {
-                                    "id": "RPD_Test_System_P_PVAV_HW_Reheat_Baseboard",
+                                    "id": "RPD_Test_System_5_PVAV_HW_Reheat",
                                     "cooling_system": {
                                         "id": "DX Coil 1",
                                         "type": "DIRECT_EXPANSION",
+                                        "design_sensible_cool_capacity": 85000,
                                         "rated_total_cool_capacity": 87921.321,
-                                        "design_sensible_cool_capacity": 60000,
                                         "is_sized_based_on_design_day": false,
                                         "efficiency_metric_types": [
-                                            "FULL_LOAD_COEFFICIENT_OF_PERFORMANCE"
+                                            "ENERGY_EFFICIENCY_RATIO"
                                         ],
                                         "efficiency_metric_values": [
-                                            3.0
-                                        ],
-                                        "dehumidification_type": "DESICCANT"
+                                            10.0
+                                        ]
                                     },
                                     "preheat_system": {
                                         "id": "Preheat Coil 1",
                                         "type": "FLUID_LOOP",
-                                        "hot_water_loop": "Primary HW Loop",
-                                        "rated_capacity": 43960.6605,
-                                        "design_capacity": 40000,
-                                        "heating_coil_setpoint": 10,
-                                        "humidification_type": "ADIABATIC"
+                                        "hot_water_loop": "Boiler Loop 1",
+                                        "rated_capacity": 43960.6605
                                     },
                                     "fan_system": {
                                         "id": "VAV Fan System 1",
                                         "fan_control": "VARIABLE_SPEED_DRIVE",
-                                        "temperature_control": "ZONE_RESET",
+                                        "temperature_control": "SCHEDULED",
                                         "operation_during_occupied": "CONTINUOUS",
                                         "operation_during_unoccupied": "KEEP_OFF",
                                         "supply_fans": [
                                             {
-                                                "id": "RPD_Test_System_P_PVAV_HW_Reheat_Baseboard Supply Fan",
+                                                "id": "RPD_Test_System_5_PVAV_HW_Reheat Supply Fan",
                                                 "design_airflow": 4719.474432,
                                                 "is_airflow_sized_based_on_design_day": false,
-                                                "specification_method": "DETAILED",
-                                                "shaft_power": 7457,
-                                                "motor_efficiency": 0.9,
+                                                "specification_method": "SIMPLE",
+                                                "design_electric_power": 10000,
                                                 "output_validation_points": [
                                                     {
                                                         "airflow": 4719.474432,
@@ -62,23 +57,7 @@
                                                     }
                                                 ]
                                             }
-                                        ],
-                                        "air_economizer": {
-                                            "id": "Air Economizer 1",
-                                            "type": "DIFFERENTIAL_ENTHALPY",
-                                            "is_integrated": true
-                                        },
-                                        "air_energy_recovery": {
-                                            "id": "Air Energy Recovery 1",
-                                            "type": "SENSIBLE_HEAT_WHEEL",
-                                            "energy_recovery_operation": "SCHEDULED",
-                                            "energy_recovery_supply_air_temperature_control": "FIXED_SETPOINT",
-                                            "design_sensible_effectiveness": 0.8,
-                                            "outdoor_airflow": 471.9472,
-                                            "exhaust_airflow": 424.75248
-                                        },
-                                        "has_fully_ducted_return": true,
-                                        "air_filter_merv_rating": 13
+                                        ]
                                     }
                                 }
                             ],
@@ -277,18 +256,18 @@
                                     },
                                     "terminals": [
                                         {
-                                            "id": "RPD_Test_System_P_PVAV_HW_Reheat_Baseboard - Terminal for Core Zone 1",
+                                            "id": "RPD_Test_System_5_PVAV_HW_Reheat - Terminal for Core Zone 1",
                                             "is_supply_ducted": true,
                                             "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilating_air_conditioning_system": "RPD_Test_System_P_PVAV_HW_Reheat_Baseboard",
+                                            "served_by_heating_ventilating_air_conditioning_system": "RPD_Test_System_5_PVAV_HW_Reheat",
                                             "heating_source": "HOT_WATER",
-                                            "heating_from_loop": "Primary HW Loop",
+                                            "heating_from_loop": "Boiler Loop 1",
                                             "primary_airflow": 943.9,
                                             "supply_design_heating_setpoint_temperature": 32.2,
                                             "supply_design_cooling_setpoint_temperature": 12.8,
                                             "minimum_airflow": 141.6,
                                             "minimum_outdoor_airflow": 94.4,
-                                            "heating_capacity": 7033.70568
+                                            "heating_capacity": 8792.1321
                                         }
                                     ],
                                     "spaces": [
@@ -528,7 +507,22 @@
                                         "flow_rate": 0.114117,
                                         "multiplier_schedule": "Prm Zone 1 INFILTRATION SCH"
                                     },
-                                    "terminals": [],
+                                    "terminals": [
+                                        {
+                                            "id": "RPD_Test_System_5_PVAV_HW_Reheat - Terminal for Prm Zone 1 (South)",
+                                            "is_supply_ducted": true,
+                                            "type": "VARIABLE_AIR_VOLUME",
+                                            "served_by_heating_ventilating_air_conditioning_system": "RPD_Test_System_5_PVAV_HW_Reheat",
+                                            "heating_source": "HOT_WATER",
+                                            "heating_from_loop": "Boiler Loop 1",
+                                            "primary_airflow": 943.9,
+                                            "supply_design_heating_setpoint_temperature": 32.2,
+                                            "supply_design_cooling_setpoint_temperature": 12.8,
+                                            "minimum_airflow": 141.6,
+                                            "minimum_outdoor_airflow": 94.4,
+                                            "heating_capacity": 8792.1321
+                                        }
+                                    ],
                                     "spaces": [
                                         {
                                             "id": "Prm Zone 1 SPACE",
@@ -561,7 +555,10 @@
                                             "ventilation_space_type": "OFFICE_BUILDINGS_OFFICE_SPACE",
                                             "service_water_heating_space_type": "OFFICE"
                                         }
-                                    ]
+                                    ],
+                                    "design_thermostat_cooling_setpoint": 23.9,
+                                    "design_thermostat_heating_setpoint": 21.1,
+                                    "air_distribution_effectiveness": 0.8
                                 },
                                 {
                                     "id": "Prm Zone 2 (East)",
@@ -738,7 +735,22 @@
                                         "modeling_method": "CONSTANT",
                                         "flow_rate": 0.077315
                                     },
-                                    "terminals": [],
+                                    "terminals": [
+                                        {
+                                            "id": "RPD_Test_System_5_PVAV_HW_Reheat - Terminal for Prm Zone 2 (East)",
+                                            "is_supply_ducted": true,
+                                            "type": "VARIABLE_AIR_VOLUME",
+                                            "served_by_heating_ventilating_air_conditioning_system": "RPD_Test_System_5_PVAV_HW_Reheat",
+                                            "heating_source": "HOT_WATER",
+                                            "heating_from_loop": "Boiler Loop 1",
+                                            "primary_airflow": 943.9,
+                                            "supply_design_heating_setpoint_temperature": 32.2,
+                                            "supply_design_cooling_setpoint_temperature": 12.8,
+                                            "minimum_airflow": 141.6,
+                                            "minimum_outdoor_airflow": 94.4,
+                                            "heating_capacity": 8792.1321
+                                        }
+                                    ],
                                     "spaces": [
                                         {
                                             "id": "Prm Zone 2 SPACE",
@@ -771,7 +783,10 @@
                                             "ventilation_space_type": "OFFICE_BUILDINGS_OFFICE_SPACE",
                                             "service_water_heating_space_type": "OFFICE"
                                         }
-                                    ]
+                                    ],
+                                    "design_thermostat_cooling_setpoint": 23.9,
+                                    "design_thermostat_heating_setpoint": 21.1,
+                                    "air_distribution_effectiveness": 0.8
                                 },
                                 {
                                     "id": "Prm Zone 3 (North)",
@@ -956,7 +971,22 @@
                                         "flow_rate": 0.080542,
                                         "multiplier_schedule": "Prm Zone 3 INFILTRATION SCH"
                                     },
-                                    "terminals": [],
+                                    "terminals": [
+                                        {
+                                            "id": "RPD_Test_System_5_PVAV_HW_Reheat - Terminal for Prm Zone 3 (North)",
+                                            "is_supply_ducted": true,
+                                            "type": "VARIABLE_AIR_VOLUME",
+                                            "served_by_heating_ventilating_air_conditioning_system": "RPD_Test_System_5_PVAV_HW_Reheat",
+                                            "heating_source": "HOT_WATER",
+                                            "heating_from_loop": "Boiler Loop 1",
+                                            "primary_airflow": 943.9,
+                                            "supply_design_heating_setpoint_temperature": 32.2,
+                                            "supply_design_cooling_setpoint_temperature": 12.8,
+                                            "minimum_airflow": 141.6,
+                                            "minimum_outdoor_airflow": 94.4,
+                                            "heating_capacity": 8792.1321
+                                        }
+                                    ],
                                     "spaces": [
                                         {
                                             "id": "Prm Zone 3 SPACE",
@@ -989,7 +1019,10 @@
                                             "ventilation_space_type": "OFFICE_BUILDINGS_OFFICE_SPACE",
                                             "service_water_heating_space_type": "OFFICE"
                                         }
-                                    ]
+                                    ],
+                                    "design_thermostat_cooling_setpoint": 23.9,
+                                    "design_thermostat_heating_setpoint": 21.1,
+                                    "air_distribution_effectiveness": 0.8
                                 },
                                 {
                                     "id": "Prm Zone 4 (West)",
@@ -1133,7 +1166,22 @@
                                         "flow_rate": 0.053702,
                                         "multiplier_schedule": "Prm Zone 4 INFILTRATION SCH"
                                     },
-                                    "terminals": [],
+                                    "terminals": [
+                                        {
+                                            "id": "RPD_Test_System_5_PVAV_HW_Reheat - Terminal for Prm Zone 4 (West)",
+                                            "is_supply_ducted": true,
+                                            "type": "VARIABLE_AIR_VOLUME",
+                                            "served_by_heating_ventilating_air_conditioning_system": "RPD_Test_System_5_PVAV_HW_Reheat",
+                                            "heating_source": "HOT_WATER",
+                                            "heating_from_loop": "Boiler Loop 1",
+                                            "primary_airflow": 943.9,
+                                            "supply_design_heating_setpoint_temperature": 32.2,
+                                            "supply_design_cooling_setpoint_temperature": 12.8,
+                                            "minimum_airflow": 141.6,
+                                            "minimum_outdoor_airflow": 94.4,
+                                            "heating_capacity": 8792.1321
+                                        }
+                                    ],
                                     "spaces": [
                                         {
                                             "id": "Prm Zone 4 SPACE",
@@ -1166,7 +1214,10 @@
                                             "ventilation_space_type": "OFFICE_BUILDINGS_OFFICE_SPACE",
                                             "service_water_heating_space_type": "OFFICE"
                                         }
-                                    ]
+                                    ],
+                                    "design_thermostat_cooling_setpoint": 23.9,
+                                    "design_thermostat_heating_setpoint": 21.1,
+                                    "air_distribution_effectiveness": 0.8
                                 }
                             ]
                         }
@@ -45004,12 +45055,12 @@
             "boilers": [
                 {
                     "id": "Boiler 1",
-                    "loop": "Primary HW Loop",
-                    "draft_type": "FORCED",
+                    "loop": "Boiler Loop 1",
+                    "draft_type": "NATURAL",
                     "energy_source_type": "NATURAL_GAS",
                     "rated_capacity": 87921,
-                    "efficiency_metric": "THERMAL",
-                    "efficiency": 0.9,
+                    "efficiency_metric": "ANNUAL_FUEL_UTILIZATION",
+                    "efficiency": 0.84,
                     "output_validation_points": [
                         {
                             "load": 0,
@@ -45027,17 +45078,17 @@
             "pumps": [
                 {
                     "id": "HW Pump 1",
-                    "loop_or_piping": "Primary HW Loop",
+                    "loop_or_piping": "Boiler Loop 1",
                     "specification_method": "SIMPLE",
                     "design_electric_power": 380,
-                    "speed_control": "FIXED_SPEED",
+                    "speed_control": "VARIABLE_SPEED",
                     "design_flow": 1.26,
                     "is_flow_sized_based_on_design_day": false
                 }
             ],
             "fluid_loops": [
                 {
-                    "id": "Primary HW Loop",
+                    "id": "Boiler Loop 1",
                     "type": "HEATING",
                     "pump_power_per_flow_rate": 301,
                     "heating_design_and_control": {
@@ -45046,9 +45097,13 @@
                         "design_return_temperature": 54.4,
                         "is_sized_using_coincident_load": true,
                         "operation": "CONTINUOUS",
-                        "flow_control": "FIXED_FLOW",
-                        "temperature_reset_type": "LOAD_RESET",
-                        "loop_supply_temperature_at_low_load": 71.1
+                        "flow_control": "VARIABLE_FLOW",
+                        "minimum_flow_fraction": 0.25,
+                        "temperature_reset_type": "OUTSIDE_AIR_RESET",
+                        "outdoor_high_for_loop_supply_reset_temperature": 10,
+                        "outdoor_low_for_loop_supply_reset_temperature": -6.7,
+                        "loop_supply_temperature_at_outdoor_high": 65.6,
+                        "loop_supply_temperature_at_outdoor_low": 82.2
                     }
                 }
             ],
