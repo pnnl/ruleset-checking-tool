@@ -75,20 +75,6 @@ TEST_RMD = {
             "distribution_system": "distribution system 8",
             "tank": {"id": "Tank 8", "type": "OTHER"},
             "heater_type": "OTHER",
-            "heater_fuel_type": "NATURAL_GAS",
-        },
-        {
-            "id": "swh equipment 9",
-            "distribution_system": "distribution system 9",
-            "tank": {"id": "Tank 9", "type": "OTHER"},
-            "heater_type": "OTHER",
-            "heater_fuel_type": "FUEL_OIL",
-        },
-        {
-            "id": "swh equipment 10",
-            "distribution_system": "distribution system 9",
-            "tank": {"id": "Tank 10", "type": "OTHER"},
-            "heater_type": "OTHER",
             "heater_fuel_type": "PROPANE",
         },
     ],
@@ -171,33 +157,13 @@ def test__get_swh_equipment_type__oil_storage():
     )
 
 
-def test__get_swh_equipment_type__electric_other():
+def test__get_swh_equipment_type__other():
     assert (
         get_swh_equipment_type(
             TEST_RMD,
             "swh equipment 7",
         )
-        == GetSWHEquipmentType.ELECTRIC_RESISTANCE_OTHER
-    )
-
-
-def test__get_swh_equipment_type__gas_other():
-    assert (
-        get_swh_equipment_type(
-            TEST_RMD,
-            "swh equipment 8",
-        )
-        == GetSWHEquipmentType.GAS_OTHER
-    )
-
-
-def test__get_swh_equipment_type__oil_other():
-    assert (
-        get_swh_equipment_type(
-            TEST_RMD,
-            "swh equipment 9",
-        )
-        == GetSWHEquipmentType.OIL_OTHER
+        == GetSWHEquipmentType.OTHER
     )
 
 
@@ -208,5 +174,5 @@ def test__get_swh_equipment_type__wrong_fuel_type():
     ):
         get_swh_equipment_type(
             TEST_RMD,
-            "swh equipment 10",
+            "swh equipment 8",
         )

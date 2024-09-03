@@ -20,13 +20,11 @@ STORAGE_TYPE = [
 class GetSWHEquipmentType:
     ELECTRIC_RESISTANCE_INSTANTANEOUS = "ELECTRIC_RESISTANCE_INSTANTANEOUS"
     ELECTRIC_RESISTANCE_STORAGE = "ELECTRIC_RESISTANCE_STORAGE"
-    ELECTRIC_RESISTANCE_OTHER = "ELECTRIC_RESISTANCE_OTHER"
     GAS_INSTANTANEOUS = "GAS_INSTANTANEOUS"
     GAS_STORAGE = "GAS_STORAGE"
-    GAS_OTHER = "GAS_OTHER"
     OIL_INSTANTANEOUS = "OIL_INSTANTANEOUS"
     OIL_STORAGE = "OIL_STORAGE"
-    OIL_OTHER = "OIL_OTHER"
+    OTHER = "OTHER"
 
 
 def get_swh_equipment_type(rmd: dict, service_water_heating_equipment_id: str) -> str:
@@ -97,11 +95,6 @@ def get_swh_equipment_type(rmd: dict, service_water_heating_equipment_id: str) -
             elif fuel_type == ENERGY_SOURCE.FUEL_OIL:
                 type = GetSWHEquipmentType.OIL_STORAGE
     else:
-        if fuel_type == ENERGY_SOURCE.ELECTRICITY:
-            type = GetSWHEquipmentType.ELECTRIC_RESISTANCE_OTHER
-        elif fuel_type == ENERGY_SOURCE.NATURAL_GAS:
-            type = GetSWHEquipmentType.GAS_OTHER
-        elif fuel_type == ENERGY_SOURCE.FUEL_OIL:
-            type = GetSWHEquipmentType.OIL_OTHER
+        type = GetSWHEquipmentType.OTHER
 
     return type
