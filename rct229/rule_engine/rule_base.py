@@ -127,7 +127,7 @@ class RuleDefinitionBase:
 
         This method also orchestrates the high-level workflow for any rule.
         Namely:
-            - Call get_context(rmrs); check for any missing RMD contexts
+            - Call get_context(rmds); check for any missing RMD contexts
             - Call is_applicable(context)
             - Call manual_check_required()
             - Call rule_check()
@@ -208,8 +208,17 @@ class RuleDefinitionBase:
                             # Evaluate the actual rule check
                             result = self.rule_check(context, calc_vals, data)
                             if isinstance(result, list):
-                                # The result is a list of outcomes
-                                outcome["result"] = result
+                                if len(result) == 0:
+                                    # empty list:
+                                    outcome["result"] = RCTOutcomeLabel.NOT_APPLICABLE
+                                    not_applicable_msg = self.get_not_applicable_msg(
+                                        context, data
+                                    )
+                                    if not_applicable_msg:
+                                        outcome["message"] = not_applicable_msg
+                                    # The result is a list of outcomes
+                                else:
+                                    outcome["result"] = result
                             # using is False to include the None case.
                             elif self.is_primary_rule is False:
                                 # secondary rule applicability check true-> undetermined, false -> not_applicable
@@ -250,7 +259,7 @@ class RuleDefinitionBase:
                     outcome["result"] = RCTOutcomeLabel.UNDETERMINED
                     outcome["message"] = str(ke)
                 except RCTFailureException as fe:
-                    outcome["result"] = RCTOutcomeLabel.FAILED
+                    outcome["result"] = RCTOutcomeLabel.UNDETERMINED
                     outcome["message"] = str(fe)
             else:
                 outcome["result"] = RCTOutcomeLabel.UNDETERMINED
@@ -279,7 +288,7 @@ class RuleDefinitionBase:
         Returns
         -------
         RuleSetModels
-            Object containing the contexts for RMDs; an RMR's context is set to None if the corresponding flag
+            Object containing the contexts for RMDs; an RMD's context is set to None if the corresponding flag
             in self.rmds_used is not set
         """
         rmd_context = self.rmd_context if rmd_context is None else rmd_context
@@ -299,7 +308,7 @@ class RuleDefinitionBase:
         return ruleset_models
 
     def get_context(self, rmds, data=None):
-        """Gets the context for each RMR
+        """Gets the context for each RMD
 
         May be be overridden for different behavior
 
@@ -308,16 +317,16 @@ class RuleDefinitionBase:
         rmds : RuleSetModels
             Object containing the RMDs for each required ruleset model types
             A return value of None indicates that the context
-            does not exist in one or more of the RMRs used.
+            does not exist in one or more of the RMDs used.
         data : An optional data object. It is ignored by this base implementation.
 
         Returns
         -------
         RulesetModelTypes or str
             The return value from self._get_context() when the context exists
-            in each RMR for which the correponding self.rmds_used flag is set;
+            in each RMD for which the correponding self.rmds_used flag is set;
             otherwise retrns a string such as "MISSING_BASELINE" that indicates all
-            the RMRs that are missing.
+            the RMDs that are missing.
         """
 
         context = self._get_context(rmds)
@@ -325,10 +334,10 @@ class RuleDefinitionBase:
         ruleset_model_types = rmds.get_ruleset_model_types()
         for ruleset_model in ruleset_model_types:
             if (
-                # rmr used
+                # rmd used
                 self.rmds_used[ruleset_model]
                 and not (
-                    # and rmr is not optional
+                    # and rmd is not optional
                     self.rmds_used_optional
                     and self.rmds_used_optional[ruleset_model]
                 )
@@ -466,7 +475,7 @@ class RuleDefinitionBase:
         Parameters
         ----------
         context : RuleSetModels
-            Object containing the contexts for RMRs
+            Object containing the contexts for RMDs
         data : An optional data object. It is ignored by this base implementation.
 
         Returns
@@ -490,7 +499,7 @@ class RuleDefinitionBase:
         Parameters
         ----------
         context : RuleSetModels
-            Object containing the contexts for RMRs
+            Object containing the contexts for RMDs
         calc_vals : dict | None
         data : dict | None
             An optional data dictionary
@@ -513,7 +522,7 @@ class RuleDefinitionBase:
         Parameters
         ----------
         context : RuleSetModels
-            Object containing the contexts for RMRs
+            Object containing the contexts for RMDs
         data : An optional data object. It is ignored by this base implementation.
 
         Returns
@@ -536,7 +545,7 @@ class RuleDefinitionBase:
         Parameters
         ----------
         context : RuleSetModels
-            Object containing the contexts for RMRs
+            Object containing the contexts for RMDs
         calc_vals : dict or None
 
         data : An optional data object. It is ignored by this base implementation.
@@ -562,7 +571,7 @@ class RuleDefinitionBase:
         Parameters
         ----------
         context : RuleSetModels
-            Object containing the contexts for RMRs
+            Object containing the contexts for RMDs
         calc_vals : dict or None
 
         data : An optional data object. It is ignored by this base implementation.
@@ -584,7 +593,7 @@ class RuleDefinitionBase:
         Parameters
         ----------
         context : RuleSetModels
-            Object containing the contexts for RMRs
+            Object containing the contexts for RMDs
         calc_vals: dictionary
             Dictionary contains calculated values for rule check and reporting.
         data : An optional data object. It is ignored by this base implementation.
@@ -606,7 +615,7 @@ class RuleDefinitionBase:
         Parameters
         ----------
         context : RuleSetModels
-            Object containing the contexts for RMRs
+            Object containing the contexts for RMDs
         calc_vals : dict or None
 
         data : An optional data object. It is ignored by this base implementation.
@@ -631,7 +640,7 @@ class RuleDefinitionBase:
         Parameters
         ----------
         context : RuleSetModels
-            Object containing the contexts for RMRs
+            Object containing the contexts for RMDs
         calc_vals : dict or None
 
         data : An optional data object. It is ignored by this base implementation.
@@ -657,7 +666,7 @@ class RuleDefinitionBase:
         Parameters
         ----------
         context : RuleSetModels
-            Object containing the contexts for RMRs
+            Object containing the contexts for RMDs
         calc_vals : dict or None
 
         data : An optional data object. It is ignored by this base implementation.

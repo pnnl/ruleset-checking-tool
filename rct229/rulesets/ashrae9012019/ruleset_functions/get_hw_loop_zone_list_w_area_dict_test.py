@@ -180,12 +180,12 @@ GET_HW_LOOP_ZONE_LIST_W_AREA_RMD = {
     "data_timestamp": "2024-02-12T09:00Z",
 }
 
-TEST_RMI = quantify_rmd(GET_HW_LOOP_ZONE_LIST_W_AREA_RMD)["ruleset_model_descriptions"][
+TEST_RMD = quantify_rmd(GET_HW_LOOP_ZONE_LIST_W_AREA_RMD)["ruleset_model_descriptions"][
     0
 ]
 
 
-def test__TEST_RMD__is_valid():
+def test__TEST_RPD__is_valid():
     schema_validation_result = schema_validate_rmd(GET_HW_LOOP_ZONE_LIST_W_AREA_RMD)
     assert schema_validation_result[
         "passed"
@@ -193,7 +193,7 @@ def test__TEST_RMD__is_valid():
 
 
 def test__get_hw_loop_zone_list_w_area__true():
-    assert get_hw_loop_zone_list_w_area(TEST_RMI) == {
+    assert get_hw_loop_zone_list_w_area(TEST_RMD) == {
         "Boiler Loop 1": {
             "zone_list": ["Thermal Zone 1", "Thermal Zone 2", "Thermal Zone 3"],
             "total_area": 60 * ureg.m2,

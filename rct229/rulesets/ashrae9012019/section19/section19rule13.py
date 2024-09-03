@@ -44,8 +44,8 @@ APPLICABLE_SYS_TYPES = [
 ]
 
 LIGHTING_SPACE = SchemaEnums.schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
-LABORATORY_TEMP_DELTA = 17.0 * ureg("degF")
-GENERAL_TEMP_DELTA = 20.0 * ureg("degF")
+LABORATORY_TEMP_DELTA = 17.0 * ureg("delta_degF")
+GENERAL_TEMP_DELTA = 20.0 * ureg("delta_degF")
 
 
 class Section19Rule13(RuleDefinitionListIndexedBase):

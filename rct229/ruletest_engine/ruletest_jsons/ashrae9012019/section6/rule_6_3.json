@@ -3,7 +3,7 @@
         "Section": 6,
         "Rule": 3,
         "Test": "a",
-        "test_description": "Project has one building segment with one zone with two spaces. The lighting power density in the proposed ruleset project description is the same as the lighting power density in the user ruleset project description for all spaces in the building. Expected result: PASS",
+        "test_description": "Project has one building segment with one zone with two spaces. The lighting power density in the proposed ruleset project description is the same as the lighting power density in the user ruleset project description for all spaces in the building.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "6-3",
@@ -16,7 +16,7 @@
             "mandatory_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "user": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -139,8 +139,9 @@
         "Section": 6,
         "Rule": 3,
         "Test": "b",
-        "test_description": "Project has one building segment with one zone with two spaces. The lighting power density in the proposed ruleset project description is not the same as the lighting power density in the user ruleset project description for all spaces in the building. Expected result: FAIL",
+        "test_description": "Project has one building segment with one zone with two spaces. The lighting power density in the proposed ruleset project description is not the same as the lighting power density in the user ruleset project description for all spaces in the building.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "Lighting exists or is submitted with design documents. Lighting power density in P_RMD does not match U_RMD.",
         "standard": {
             "rule_id": "6-3",
             "ruleset_reference": "Table G3.1 Proposed Building Performance (a)(b)(c)",
@@ -152,7 +153,7 @@
             "mandatory_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "user": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -275,8 +276,9 @@
         "Section": 6,
         "Rule": 3,
         "Test": "c",
-        "test_description": "Project has one building segment with one zone with two spaces. The lighting power density in the proposed ruleset project description is not the same as the lighting power density in the user ruleset project description for all spaces in the building. P ruleset project description LPD matches Standard 90.1-2019 Table 9.5.1. Expected result: undetermined",
+        "test_description": "Project has one building segment with one zone with two spaces. The lighting power density in the proposed ruleset project description is not the same as the lighting power density in the user ruleset project description for all spaces in the building. P ruleset project description LPD matches Standard 90.1-2019 Table 9.5.1.",
         "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "Lighting is not yet designed, or lighting is as-designed or as-existing but matches Table 9.5.1. Lighting power density in P_RMD does not match U_RMD.",
         "standard": {
             "rule_id": "6-3",
             "ruleset_reference": "Table G3.1 Proposed Building Performance (a)(b)(c)",
@@ -288,7 +290,7 @@
             "mandatory_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "user": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",

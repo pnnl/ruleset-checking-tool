@@ -109,7 +109,7 @@ TEST_BUILDING = quantify_rmd(TEST_RMD)["ruleset_model_descriptions"][0]["buildin
 test_building_segments = TEST_BUILDING["building_segments"]
 
 
-def test__TEST_RMD__is_valid():
+def test__TEST_RPD__is_valid():
     schema_validation_result = schema_validate_rmd(TEST_RMD)
     assert schema_validation_result[
         "passed"

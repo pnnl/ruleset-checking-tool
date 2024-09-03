@@ -16,10 +16,7 @@ from rct229.utils.std_comparisons import std_equal
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_11_1,
     HVAC_SYS.SYS_11_2,
-    HVAC_SYS.SYS_11_1A,
-    HVAC_SYS.SYS_11_2A,
     HVAC_SYS.SYS_11_1B,
-    HVAC_SYS.SYS_11_1C,
 ]
 REQUIRED_LOOP_SUPPLY_TEMP_AT_LOW_LOAD = ureg("54 degF")
 
