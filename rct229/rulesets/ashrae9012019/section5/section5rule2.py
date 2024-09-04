@@ -1,4 +1,4 @@
-from rct229.rule_engine.partial_rule_definition import PartialRuleDefinition
+from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
@@ -29,7 +29,7 @@ class Section5Rule2(RuleDefinitionListIndexedBase):
             rmd_context="ruleset_model_descriptions/0/buildings",
         )
 
-    class BuildingRule(PartialRuleDefinition):
+    class BuildingRule(RuleDefinitionBase):
         def __init__(self):
             super(Section5Rule2.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
@@ -51,7 +51,7 @@ class Section5Rule2(RuleDefinitionListIndexedBase):
                 "baseline_surfaces_casting_shade_ids": baseline_surfaces_casting_shade_ids
             }
 
-        def applicability_check(self, context, calc_vals, data):
+        def rule_check(self, context, calc_vals=None, data=None):
             # if there are surfaces casting shade, set to undetermined
             # if there are no surfaces casting shade, set to not applicable.
             return not len(calc_vals["baseline_surfaces_casting_shade_ids"]) == 0
