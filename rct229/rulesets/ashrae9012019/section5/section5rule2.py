@@ -54,4 +54,4 @@ class Section5Rule2(RuleDefinitionListIndexedBase):
         def rule_check(self, context, calc_vals=None, data=None):
             # if there are surfaces casting shade, set to undetermined
             # if there are no surfaces casting shade, set to not applicable.
-            return not len(calc_vals["baseline_surfaces_casting_shade_ids"]) == 0
+            return len(calc_vals["baseline_surfaces_casting_shade_ids"]) == 0
