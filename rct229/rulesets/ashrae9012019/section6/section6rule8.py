@@ -108,7 +108,7 @@ class Section6Rule8(RuleDefinitionListIndexedBase):
                     zone_p = context.PROPOSED
                     return {
                         "avg_space_height": zone_p.get("volume", ZERO.VOLUME)
-                        / sum(find_all("spaces[*].floor_area", zone_p), ZERO.AREA),
+                        / sum(find_all("$.spaces[*].floor_area", zone_p), ZERO.AREA),
                     }
 
                 class SpaceRule(RuleDefinitionBase):
