@@ -37,7 +37,7 @@ def get_nested_dict(dic, keys):
         # If this is the first key, set the reference dictionary to the highest level dictionary and work down from
         # there.
         if key == first_key:
-            # If first key isn'tinitialized, set it as a dictionary
+            # If first key isn't initialized, set it as a dictionary
             if key not in dic:
                 if first_index == None:
                     dic[key] = {}
