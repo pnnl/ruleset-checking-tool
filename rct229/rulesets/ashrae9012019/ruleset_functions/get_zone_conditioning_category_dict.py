@@ -243,7 +243,7 @@ def get_zone_conditioning_category_dict(
                     find_all("surfaces[*]", zone), f"zone:{zone_id} has no surfaces"
                 )
                 for surface in zone["surfaces"]:
-                    subsurfaces = find_all("subsurfaces[*]", surface)
+                    subsurfaces = find_all("$.subsurfaces[*]", surface)
                     # Calculate the total area of all subsurfaces
                     subsurfaces_area = sum(
                         [
