@@ -266,7 +266,7 @@ def get_zone_conditioning_category_dict(
                         ],
                         ZERO.UA,  # value used if there are no subsurfaces
                     )
-                    # Calculate the are of the surface that is not part of a subsurface
+                    # Calculate the area of the surface that is not part of a subsurface
                     non_subsurfaces_area = (
                         getattr_(surface, "surface", "area") - subsurfaces_area
                     )

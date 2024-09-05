@@ -272,7 +272,7 @@ class Section19Rule4(RuleDefinitionListIndexedBase):
                             if not misc_pass_cooling_b:
                                 multiplier_sch_light_b = getattr_(
                                     misc_equip_b,
-                                    "Mmiscellaneous Equipment",
+                                    "miscellaneous_equipment",
                                     "multiplier_schedule",
                                 )
 
