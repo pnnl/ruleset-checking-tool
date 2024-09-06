@@ -3,7 +3,7 @@
         "Section": 21,
         "Rule": 7,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones.  Baseline ruleset project description utilizes system 7 with supply and return temperatures correctly set to 180 F and 130 F respectively. Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The hot water supply temperature is 180 F and the hot water return temperature is 130 F.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-7",
@@ -15,7 +15,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -155,7 +155,7 @@
         "Section": 21,
         "Rule": 7,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones.  Baseline ruleset project description has utilizes system 7 with supply and return temperatures incorrectly set to 200 F and correctly set to 130 F respectively. Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The hot water supply temperature is 200 F and the hot water return temperature is 130 F.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-7",
@@ -167,7 +167,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -307,7 +307,7 @@
         "Section": 21,
         "Rule": 7,
         "Test": "c",
-        "test_description": "The project has one building segment with two zones.  Baseline ruleset project description has utilizes system 7 with supply and return temperatures correctly set to 180 F and inccorectly to 150 F respectively.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The hot water supply temperature is 180 F and the hot water return temperature is 150 F.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-7",
@@ -319,7 +319,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -459,7 +459,7 @@
         "Section": 21,
         "Rule": 7,
         "Test": "d",
-        "test_description": "The project has one building segment with two zones.  Baseline ruleset project description utilizes system 5 with supply and return temperatures correctly set to 180 F and 130 F respectively. Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 5 with a hot water loop. The hot water supply temperature is 180 F and the hot water return temperature is 130 F.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-7",
@@ -471,7 +471,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -584,7 +584,7 @@
         "Section": 21,
         "Rule": 7,
         "Test": "e",
-        "test_description": "The project has one building segment with two zones.  Baseline ruleset project description has utilizes system 5 with supply and return temperatures incorrectly set to 200 F and correctly set to 130 F respectively. Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 5 with a hot water loop. The hot water supply temperature is 200 F and the hot water return temperature is 130 F.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-7",
@@ -596,7 +596,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -709,7 +709,7 @@
         "Section": 21,
         "Rule": 7,
         "Test": "f",
-        "test_description": "The project has one building segment with two zones.  Baseline ruleset project description has utilizes system 5 with supply and return temperatures correctly set to 180 F and inccorectly to 150 F respectively.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 5 with a hot water loop. The hot water supply temperature is 180 F and the hot water return temperature is 150 F.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-7",
@@ -721,7 +721,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -834,7 +834,7 @@
         "Section": 21,
         "Rule": 7,
         "Test": "g",
-        "test_description": "The project has one building segment with two zones.  Baseline ruleset project description has utilizes system 5b.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 5 with a purchased hot water loop. The prescibed hot water supply and return temperatures are not applicable.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-7",
@@ -846,7 +846,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
