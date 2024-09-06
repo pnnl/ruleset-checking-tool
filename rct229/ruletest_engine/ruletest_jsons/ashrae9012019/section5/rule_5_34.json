@@ -3,7 +3,7 @@
         "Section": 5,
         "Rule": 34,
         "Test": "a",
-        "test_description": "Project has one building segment. The proposed infiltration modeling method is the same as the baseline infiltration modeling method",
+        "test_description": "Project has one building segment with one zone. Infiltration has been specified for the zone. The proposed infiltration modeling method is the same as the baseline infiltration modeling method",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-34",
@@ -15,7 +15,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "RPD 1",
                 "data_timestamp": "2024-02-12T12:00Z",
@@ -88,7 +88,7 @@
         "Section": 5,
         "Rule": 34,
         "Test": "b",
-        "test_description": "Project has one building segment. The proposed infiltration modeling method is the same as the baseline infiltration modeling method",
+        "test_description": "Project has one building segment with one zone. Infiltration has been specified for the zone. The proposed infiltration modeling method is the same as the baseline infiltration modeling method",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-34",
@@ -100,7 +100,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "RPD 1",
                 "data_timestamp": "2024-02-12T12:00Z",
