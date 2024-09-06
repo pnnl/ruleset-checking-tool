@@ -102,12 +102,12 @@ def evaluate_all_rules(ruleset_model_path_list):
     return report
 
 
-def evaluate_rule(rule, rmrs, test=False):
+def evaluate_rule(rule, rmds, test=False):
     """Evaluates a single rule against an RMD trio
 
     Parameters
     ----------
-    rmrs : RuleSetModels
+    rmds : RuleSetModels
         Object containing the RMDs required by enum schema
     test: Boolean
         A flag to indicate whether the evaluate rule is a software test workflow or not.
@@ -117,7 +117,7 @@ def evaluate_rule(rule, rmrs, test=False):
     dict
         A dictionary of the form:
         {
-            invalid_rmrs: dict - The keys are the names of the invalid RMDs.
+            invalid_rmds: dict - The keys are the names of the invalid RMDs.
                 The values are the corresponding schema validation errors.
             outcomes: [dict] - A list containing a single rule outcome as
                 a dictionary of the form:
@@ -131,7 +131,7 @@ def evaluate_rule(rule, rmrs, test=False):
         }
     """
 
-    return evaluate_rules([rule], rmrs, test=test)
+    return evaluate_rules([rule], rmds, test=test)
 
 
 def evaluate_rules(
@@ -172,7 +172,7 @@ def evaluate_rules(
         }
     """
 
-    # Validate the rmrs against the schema and other high-level checks
+    # Validate the rmds against the schema and other high-level checks
     outcomes = []
     invalid_rmds = {}
     rmds_used = get_rmd_instance()
@@ -191,7 +191,7 @@ def evaluate_rules(
 
     assert_(
         len(invalid_rmds) == 0,
-        f"Required RPDs provided are invalid. See error messages in terminal.",
+        f"Required RPDs provided are invalid. See error messages: {invalid_rmds}",
     )
 
     ## Now check the optional RMDs
@@ -207,7 +207,7 @@ def evaluate_rules(
         len(invalid_rmds) == 0,
         f"Optional RPDs provided are invalid. See error messages in terminal.",
     )
-    # Evaluate the rules if all the used rmrs are valid
+    # Evaluate the rules if all the used rmds are valid
     # Replace the numbers that have schema units in the RMDs with the
     # appropriate pint quantities
     # TODO: quantitization should happen right after schema validation and
@@ -225,20 +225,28 @@ def evaluate_rules(
     else:
         step = round(total_num_rules * 0.05)
     counting_steps = list(range(0, total_num_rules, step))
+    if counting_steps[-1] < total_num_rules:
+        # ensure to add the 100% report
+        counting_steps.append(total_num_rules)
 
+    # counter starts at 1
     rule_counter = 0
     # Evaluate the rules
-    for rule in rules_list:
-        rule_counter += 1
-        if rule_counter in counting_steps:
-            print(
-                f"Project Evaluation Session ID: #{session_id}# => Compliance evaluation progress: {round(rule_counter / total_num_rules * 100)}%"
-            )
-        print(f"Processing Rule {rule.id}")
-        outcome = rule.evaluate(copied_rmds)
+    if len(rules_list) == 1:
+        outcome = rules_list[0].evaluate(copied_rmds)
         outcomes.append(outcome)
+    else:
+        for rule in rules_list:
+            print(f"Processing Rule {rule.id}")
+            outcome = rule.evaluate(copied_rmds)
+            outcomes.append(outcome)
+            rule_counter += 1
+            if rule_counter in counting_steps:
+                print(
+                    f"Project Evaluation Session ID: #{session_id}# => Compliance evaluation progress: {round(rule_counter / total_num_rules * 100)}%"
+                )
 
     return {
-        "invalid_rmrs": invalid_rmds,
+        "invalid_rmds": invalid_rmds,
         "outcomes": calcq_to_str(unit_system, outcomes),
     }

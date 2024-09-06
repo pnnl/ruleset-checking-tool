@@ -3,19 +3,19 @@
         "Section": 19,
         "Rule": 12,
         "Test": "a",
-        "test_description": "The project has one building segment with one zone. System 9 with TEMPERATURE based air economizer and 75F high limit shutoff temp. Expected outcome: PASS",
+        "test_description": "The project located in climate zone 3C has one building segment with one zone. The baseline system air economizer high-limit shutoff is 75F dry-bulb.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-12",
             "ruleset_reference": "G3.1.2.7",
             "rule_description": "The baseline system economizer high-limit shutoff shall be a dry-bulb fixed switch with set-point temperatures in accordance with the values in Table G3.1.2.7.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -90,19 +90,19 @@
         "Section": 19,
         "Rule": 12,
         "Test": "b",
-        "test_description": "The project has one building segment with one zone. System 9 with TEMPERATURE based air economizer and 100F high limit shutoff temp. Expected outcome: FAIL",
+        "test_description": "The project located in climate zone 3C has one building segment with one zone. The baseline system air economizer high-limit shutoff is 100F dry-bulb.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-12",
             "ruleset_reference": "G3.1.2.7",
             "rule_description": "The baseline system economizer high-limit shutoff shall be a dry-bulb fixed switch with set-point temperatures in accordance with the values in Table G3.1.2.7.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -177,19 +177,19 @@
         "Section": 19,
         "Rule": 12,
         "Test": "c",
-        "test_description": "The project has one building segment with one zone. System 9 with ENTHALPY based air economizer and 75F high limit shutoff temp. Expected outcome: FAIL",
+        "test_description": "The project located in climate zone 3C has one building segment with one zone. The baseline system air economizer high-limit shutoff is based on enthalpy rather than dry-bulb temperature.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-12",
             "ruleset_reference": "G3.1.2.7",
             "rule_description": "The baseline system economizer high-limit shutoff shall be a dry-bulb fixed switch with set-point temperatures in accordance with the values in Table G3.1.2.7.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -264,19 +264,19 @@
         "Section": 19,
         "Rule": 12,
         "Test": "d",
-        "test_description": "The project has one building segment with one zone. System 9 without air economizer setup. Expected outcome: NOT APPLICABLE",
+        "test_description": "The project located in climate zone 3C has one building segment with one zone. The baseline system does not include an air economizer.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "19-12",
             "ruleset_reference": "G3.1.2.7",
             "rule_description": "The baseline system economizer high-limit shutoff shall be a dry-bulb fixed switch with set-point temperatures in accordance with the values in Table G3.1.2.7.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -346,19 +346,19 @@
         "Section": 19,
         "Rule": 12,
         "Test": "e",
-        "test_description": "The project has one building segment with one zone. System 9 with wrong climate zone setup. Expected outcome: NOT APPLICABLE",
+        "test_description": "The project located in climate zone 0A has one building segment with one zone. The climate zone has no requirements for air economizers.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "19-12",
             "ruleset_reference": "G3.1.2.7",
             "rule_description": "The baseline system economizer high-limit shutoff shall be a dry-bulb fixed switch with set-point temperatures in accordance with the values in Table G3.1.2.7.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",

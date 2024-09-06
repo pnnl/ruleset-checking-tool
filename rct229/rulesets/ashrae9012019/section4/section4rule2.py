@@ -7,7 +7,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_categ
     ZoneConditioningCategory as ZCC,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
-    get_zone_conditioning_category_rmi_dict,
+    get_zone_conditioning_category_rmd_dict,
 )
 from rct229.utils.assertions import assert_, getattr_
 from rct229.utils.jsonpath_utils import find_exactly_one
@@ -17,11 +17,9 @@ CONDITIONED_ZONE_TYPE = [
     ZCC.CONDITIONED_NON_RESIDENTIAL,
     ZCC.CONDITIONED_RESIDENTIAL,
 ]
-MANUAL_CHECK_MSG = "There is a humidity schedule mismatch between the baseline and proposed rmrs. Fail unless Table G3.1 #4 baseline column exception #s 1 and/or 2 are applicable"
-FAIL_MSG_B = (
-    "Fail because a humidity schedule is defined in the B_RMR but not in the P_RMR."
-)
-FAIL_MSG_P = "Fail because a humidity schedule is undefined in the B_RMR but is defined in the P_RMR."
+MANUAL_CHECK_MSG = "There is a humidity schedule mismatch between the baseline and proposed. Fail unless Table G3.1 #4 baseline column exception #s 1 and/or 2 are applicable"
+FAIL_MSG_B = "Fail because a humidity schedule is defined in the baseline but not in the proposed."
+FAIL_MSG_P = "Fail because a humidity schedule is defined in the proposed but not in the baseline."
 
 
 class Section4Rule2(RuleDefinitionListIndexedBase):
@@ -68,7 +66,7 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
             return {
                 "schedules_b": rmd_b.get("schedules"),
                 "schedules_p": rmd_p.get("schedules"),
-                "zcc_dict_b": get_zone_conditioning_category_rmi_dict(
+                "zcc_dict_b": get_zone_conditioning_category_rmd_dict(
                     data["climate_zone"], rmd_b
                 ),
             }
@@ -198,11 +196,8 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
 
                 # ^ comparison for data type.
                 minimum_humidity_schedule_type_matched = (
-                    minimum_humidity_stpt_hourly_values_b
-                    is None
-                    == minimum_humidity_stpt_hourly_values_p
-                    is None
-                )
+                    minimum_humidity_stpt_hourly_values_b is None
+                ) == (minimum_humidity_stpt_hourly_values_p is None)
 
                 maximum_humidity_schedule_matched = (
                     maximum_humidity_stpt_hourly_values_b
