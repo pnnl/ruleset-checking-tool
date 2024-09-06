@@ -19,7 +19,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types i
     get_baseline_system_types,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_zone_list_w_area_dict import (
-    get_hvac_zone_list_w_area_by_rmi_dict,
+    get_hvac_zone_list_w_area_by_rmd_dict,
 )
 from rct229.utils.assertions import assert_
 from rct229.utils.pint_utils import CalcQ
@@ -40,8 +40,8 @@ SINGLE_EFF_SYS_TYPES = [
     HVAC_SYS.SYS_9,
 ]
 
-HEATPUMP_CAPACITY_LOW_RANGE_SAMPLE = 64999
-FURNACE_CAPACITY_LOW_RANGE_SAMPLE = 224999
+MOST_CONSERVATIVE_HEATPUMP_SAMPLE = 134999
+MOST_CONSERVATIVE_FURNACE_SAMPLE = 224999
 HEATPUMP_CAPACITY_LOW_THRESHOLD = 65000
 FURNACE_CAPACITY_LOW_THREHSOLD = 225000
 
@@ -74,7 +74,7 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
     def is_applicable(self, context, data=None):
         rmd_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmd_b)
-        # create a list containing all HVAC systems that are modeled in the rmi_b
+        # create a list containing all HVAC systems that are modeled in the rmd_b
         available_types_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict
@@ -95,7 +95,7 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
                 find_exactly_one_zone(rmd_b, zone_id)
                 for zone_id in hvac_data["zone_list"]
             ]
-            for hvac_id, hvac_data in get_hvac_zone_list_w_area_by_rmi_dict(
+            for hvac_id, hvac_data in get_hvac_zone_list_w_area_by_rmd_dict(
                 rmd_b
             ).items()
         }
@@ -205,7 +205,7 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
                 if total_capacity_b is None:
                     expected_baseline_eff_data = table_g3_5_5_lookup(
                         GasHeatingEquipmentType.WARM_AIR_FURNACE_GAS_FIRED,
-                        FURNACE_CAPACITY_LOW_RANGE_SAMPLE,
+                        MOST_CONSERVATIVE_FURNACE_SAMPLE,
                     )
                 else:
                     expected_baseline_eff_data = table_g3_5_5_lookup(
@@ -217,7 +217,7 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
                 if total_capacity_b is None:
                     expected_baseline_eff_data = table_g3_5_5_lookup(
                         GasHeatingEquipmentType.WARM_AIR_UNIT_HEATER_GAS_FIRED,
-                        FURNACE_CAPACITY_LOW_RANGE_SAMPLE,
+                        MOST_CONSERVATIVE_FURNACE_SAMPLE,
                     )
                 else:
                     expected_baseline_eff_data = table_g3_5_5_lookup(
@@ -226,22 +226,33 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
                     )
 
             else:  # HVAC_SYS.SYS_4
-                if (
-                    total_capacity_b is None
-                    or total_capacity_mag_b < HEATPUMP_CAPACITY_LOW_THRESHOLD
-                ):
+                if total_capacity_b is None:
+                    expected_baseline_eff_data = [
+                        table_g3_5_2_lookup(
+                            HeatPumpEquipmentType.HEAT_PUMP_AIR_COOLED_HEATING,
+                            RatingCondition.HIGH_TEMP,
+                            MOST_CONSERVATIVE_HEATPUMP_SAMPLE,
+                        ),
+                        table_g3_5_2_lookup(
+                            HeatPumpEquipmentType.HEAT_PUMP_AIR_COOLED_HEATING,
+                            RatingCondition.LOW_TEMP,
+                            MOST_CONSERVATIVE_HEATPUMP_SAMPLE,
+                        ),
+                    ]
+
+                elif total_capacity_mag_b < HEATPUMP_CAPACITY_LOW_THRESHOLD:
                     expected_baseline_eff_data = [
                         table_g3_5_2_lookup(
                             HeatPumpEquipmentType.HEAT_PUMP_AIR_COOLED_HEATING,
                             RatingCondition.SINGLE_PACKAGE,
-                            HEATPUMP_CAPACITY_LOW_RANGE_SAMPLE,
+                            total_capacity_mag_b,
                         ),
-                        # LOW-TEMP EFFICIENCY IS NOT USED FOR THE MOST CONSERVATIVE CASE FOR SYSTEM 4
+                        # LOW-TEMP EFFICIENCY IS NOT USED FOR THE LOWEST CAPACITY RANGE FOR SYSTEM 4
                         # IT IS ONLY NEEDED FOR CONSISTENT DATA FORMAT
                         table_g3_5_2_lookup(
                             HeatPumpEquipmentType.HEAT_PUMP_AIR_COOLED_HEATING,
                             RatingCondition.SINGLE_PACKAGE,
-                            HEATPUMP_CAPACITY_LOW_RANGE_SAMPLE,
+                            total_capacity_mag_b,
                         ),
                     ]
 
@@ -360,6 +371,7 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
             # Case 3, 4, 7 and 10 all satisfied here
             if (
                 len(modeled_effs_b) > 0
+                and len(expected_effs_b) > 0
                 and all(
                     modeled_eff_b[0] == expected_eff_b[0]
                     for modeled_eff_b, expected_eff_b in zip(
@@ -417,10 +429,14 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
 
             # IF OUTCOME IS UNDETERMINED AND THESE CONDITIONS ARE TRUE, THE MOST CONSERVATIVE EFFICIENCY WAS MODELED
             # Cases 3, 4, 7, 10
-            if len(modeled_effs_b) > 0 and all(
-                modeled_eff_b[0] == expected_eff_b[0]
-                for modeled_eff_b, expected_eff_b in zip(
-                    modeled_effs_b, expected_effs_b
+            if (
+                len(modeled_effs_b) > 0
+                and len(expected_effs_b) > 0
+                and all(
+                    modeled_eff_b[0] == expected_eff_b[0]
+                    for modeled_eff_b, expected_eff_b in zip(
+                        modeled_effs_b, expected_effs_b
+                    )
                 )
             ):
                 return MOST_CONSERVATIVE_MSG

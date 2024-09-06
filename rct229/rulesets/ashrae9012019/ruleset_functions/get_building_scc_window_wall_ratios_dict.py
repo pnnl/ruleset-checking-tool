@@ -74,7 +74,7 @@ def get_building_scc_window_wall_ratios_dict(
         if get_opaque_surface_type(surface) == OST.ABOVE_GRADE_WALL:
             surface_area = surface["area"]
             surface_window_area = ZERO.AREA
-            for subsurface in find_all("subsurfaces[*]", surface):
+            for subsurface in find_all("$.subsurfaces[*]", surface):
                 glazed_area = subsurface.get("glazed_area", ZERO.AREA)
                 opaque_area = subsurface.get("opaque_area", ZERO.AREA)
                 surface_window_area += (

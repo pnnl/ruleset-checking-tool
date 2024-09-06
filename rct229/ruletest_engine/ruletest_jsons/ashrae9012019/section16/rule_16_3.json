@@ -3,7 +3,7 @@
         "Section": 16,
         "Rule": 3,
         "Test": "a",
-        "test_description": "A proposed building with an elevator has matching motor and ventilation schedules. Expected result: PASS",
+        "test_description": "A building with an elevator has the proposed elevator cab ventilation fan modeled with the same schedule as the proposed elevator motor.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "16-3",
@@ -16,7 +16,7 @@
             "mandatory_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "weather": {
@@ -8866,7 +8866,7 @@
         "Section": 16,
         "Rule": 3,
         "Test": "b",
-        "test_description": "A proposed building with an elevator does not have matching motor and ventilation schedules. Expected result: FAIL",
+        "test_description": "A building with an elevator has the proposed elevator cab ventilation fan modeled with a different schedule than the proposed elevator motor.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "16-3",
@@ -8879,7 +8879,7 @@
             "mandatory_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "weather": {

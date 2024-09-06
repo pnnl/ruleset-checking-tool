@@ -16,7 +16,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_dict_of_zones_hvac_sys_
     get_dict_of_zones_hvac_sys_serving_specific_floor,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_zone_list_w_area_dict import (
-    get_hvac_zone_list_w_area_by_rmi_dict,
+    get_hvac_zone_list_w_area_by_rmd_dict,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_list_hvac_systems_associated_with_zone import (
     get_list_hvac_systems_associated_with_zone,
@@ -25,7 +25,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_categ
     ZoneConditioningCategory as ZCC,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
-    get_zone_conditioning_category_rmi_dict,
+    get_zone_conditioning_category_rmd_dict,
 )
 from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_all
@@ -136,10 +136,10 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
                 "zone_p_fan_schedule_dict": zone_p_fan_schedule_dict,
                 "zone_b_fan_schedule_dict": zone_b_fan_schedule_dict,
                 "floor_b_hvac_list_dict": floor_b_hvac_list_dict,
-                "dict_hvac_sys_zones_served_p": get_hvac_zone_list_w_area_by_rmi_dict(
+                "dict_hvac_sys_zones_served_p": get_hvac_zone_list_w_area_by_rmd_dict(
                     rmd_p
                 ),
-                "zcc_dict_b": get_zone_conditioning_category_rmi_dict(
+                "zcc_dict_b": get_zone_conditioning_category_rmd_dict(
                     data["climate_zone"], rmd_b
                 ),
             }
@@ -266,9 +266,9 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
                 ):
                     return "There is a fan operating schedule mismatch between the baseline and proposed but section g3.1.1(c) appears applicable. Verify mismatch is appropriate per section G3.1.1(c) and that the fan operating schedule in the baseline is in alignment with the occupancy schedules."
                 elif schedule_mismatch:
-                    return "There is a fan schedule mismatch between the baseline and proposed rmrs for the hvac system(s) serving this zone. Fail unless table G3.1 section 4 baseline column exceptions #1, #2 or #3 is applicable."
+                    return "There is a fan schedule mismatch between the baseline and proposed for the hvac system(s) serving this zone. Fail unless table G3.1 section 4 baseline column exceptions #1, #2 or #3 is applicable."
                 else:
-                    return "Fan schedules match between the baseline and proposed rmrs for the hvac system(s) serving this zone. Verify that matching schedules are appropriate in that none of the section 4 baseline column exceptions #1, #2 or #3 are applicable."
+                    return "Fan schedules match between the baseline and proposed for the hvac system(s) serving this zone. Verify that matching schedules are appropriate in that none of the section 4 baseline column exceptions #1, #2 or #3 are applicable."
 
             def rule_check(self, context, calc_vals=None, data=None):
                 return True
