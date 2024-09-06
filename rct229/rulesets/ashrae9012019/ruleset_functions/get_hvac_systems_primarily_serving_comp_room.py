@@ -1,5 +1,5 @@
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_zone_list_w_area_dict import (
-    get_hvac_zone_list_w_area_by_rmi_dict,
+    get_hvac_zone_list_w_area_by_rmd_dict,
 )
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import assert_
@@ -27,7 +27,7 @@ def get_hvac_systems_primarily_serving_comp_room(rmd: dict) -> list[str]:
     hvac_systems_primarily_serving_comp_rooms_list list
         A list of hvac systems in which greater than 50% of the area served by the HVAC system is computer room space.
     """
-    hvac_zone_list_w_area_dict = get_hvac_zone_list_w_area_by_rmi_dict(rmd)
+    hvac_zone_list_w_area_dict = get_hvac_zone_list_w_area_by_rmd_dict(rmd)
     hvac_systems_primarily_serving_comp_rooms_list = []
 
     for hvac in find_all(

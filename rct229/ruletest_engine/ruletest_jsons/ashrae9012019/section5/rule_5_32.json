@@ -15,7 +15,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "user": {
                 "id": "RPD 1",
                 "weather": {
@@ -166,6 +166,7 @@
         "Test": "b",
         "test_description": "Project has one building segment and includes a space with a roof surface. The roof surface solar reflectance in the proposed and user models is equal to 0.7",
         "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "matches that in the user model but is not equal to the prescribed default value of 0.3. Verify that reflectance was established using aged test data as required in section 5.5.3.1(a).",
         "standard": {
             "rule_id": "5-32",
             "ruleset_reference": "Table G3.1(5) Proposed Building Performance  (a)(3)",
@@ -176,7 +177,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "user": {
                 "id": "RPD 1",
                 "weather": {
@@ -327,6 +328,7 @@
         "Test": "c",
         "test_description": "Project has one building segment and includes a space with a roof surface. The roof surface solar reflectance in the proposed model is equal to 0.3, but the roof surface thermal emittance in the user model is equal to 0.7.",
         "expected_rule_outcome": "pass",
+        "expected_raised_message_includes": "Roof surface solar reflectance is equal to the prescribed default value of 0.3 but differs from the solar reflectance in the user model",
         "standard": {
             "rule_id": "5-32",
             "ruleset_reference": "Table G3.1(5) Proposed Building Performance  (a)(3)",
@@ -337,7 +339,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "user": {
                 "id": "RPD 1",
                 "weather": {
@@ -498,7 +500,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "user": {
                 "id": "RPD 1",
                 "weather": {

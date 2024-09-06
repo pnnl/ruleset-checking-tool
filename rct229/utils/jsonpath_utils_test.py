@@ -27,18 +27,18 @@ def test__create_jsonpath_value_dict():
 
 
 def test__find_all__names():
-    assert find_all("transformers[*].name", test_obj2) == ["tr1", "tr2", "tr3"]
+    assert find_all("$.transformers[*].name", test_obj2) == ["tr1", "tr2", "tr3"]
 
 
 def test__find_all_by_jsonpaths_names_ids():
     assert find_all_by_jsonpaths(
-        ["transformers[*].name", "transformers[*].id"], test_obj2
+        ["$.transformers[*].name", "transformers[*].id"], test_obj2
     ) == ["tr1", "tr2", "tr3", "id1", "id2", "id3"]
 
 
 def test__find_all_by_jsonpaths_names_empty():
     assert find_all_by_jsonpaths(
-        ["transformers[*].name", "transformers[*].description"], test_obj2
+        ["$.transformers[*].name", "transformers[*].description"], test_obj2
     ) == ["tr1", "tr2", "tr3"]
 
 
@@ -47,9 +47,9 @@ def test__find_all__empty():
 
 
 def test__find_all_with_field_value():
-    assert find_all_with_field_value("transformers[*]", "name", "tr2", test_obj1) == [
+    assert find_all_with_field_value("$.transformers[*]", "name", "tr2", test_obj1) == [
         {"name": "tr2"}
     ]
-    assert find_one_with_field_value("transformers[*]", "name", "tr2", test_obj1) == {
+    assert find_one_with_field_value("$.transformers[*]", "name", "tr2", test_obj1) == {
         "name": "tr2"
     }

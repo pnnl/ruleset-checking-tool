@@ -3,7 +3,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_h
 )
 from rct229.schema.validate import schema_validate_rmd
 
-rmd_model = {
+rpd_model = {
     "id": "ASHRAE229 1",
     "ruleset_model_descriptions": [
         {
@@ -226,8 +226,8 @@ rmd_model = {
 }
 
 
-def test__TEST_RMD__is_valid():
-    schema_validation_result = schema_validate_rmd(rmd_model)
+def test__TEST_RPD__is_valid():
+    schema_validation_result = schema_validate_rmd(rpd_model)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
@@ -235,7 +235,7 @@ def test__TEST_RMD__is_valid():
 
 def test_get_dict_with_terminal_units_and_zones():
     assert get_dict_with_terminal_units_and_zones(
-        rmd_model["ruleset_model_descriptions"][0]
+        rpd_model["ruleset_model_descriptions"][0]
     ) == {
         "VAV Air Terminal 1": ["Thermal Zone 1"],
         "VAV Air Terminal 2": ["Thermal Zone 2"],

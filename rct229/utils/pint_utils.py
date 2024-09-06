@@ -88,6 +88,7 @@ class ZERO:
     """Class holding zero values for various pint quantities"""
 
     LENGTH: Quantity = 0 * ureg("ft")
+    WEIGHT: Quantity = 0 * ureg("lb")
     AREA: Quantity = LENGTH * LENGTH
     VOLUME: Quantity = AREA * LENGTH
 

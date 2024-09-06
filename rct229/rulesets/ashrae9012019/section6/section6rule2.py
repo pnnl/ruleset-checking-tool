@@ -84,11 +84,11 @@ class Section6Rule2(RuleDefinitionListIndexedBase):
                 lighting_power_allowance_p = DWELLING_UNIT_MIN_LIGHTING_POWER_PER_AREA
 
             space_lighting_power_per_area_p = sum(
-                find_all("interior_lighting[*].power_per_area", space_p),
+                find_all("$.interior_lighting[*].power_per_area", space_p),
                 ZERO.POWER_PER_AREA,
             )
             space_lighting_power_per_area_u = sum(
-                find_all("interior_lighting[*].power_per_area", space_u),
+                find_all("$.interior_lighting[*].power_per_area", space_u),
                 ZERO.POWER_PER_AREA,
             )
 

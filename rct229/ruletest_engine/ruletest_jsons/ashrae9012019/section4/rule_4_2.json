@@ -3,7 +3,7 @@
         "Section": 4,
         "Rule": 2,
         "Test": "a",
-        "test_description": "Baseline and Proposed building have one building segment and  one zone with matching minimum humidity schedules. Expected result: PASS",
+        "test_description": "A building has one building segment and one zone with an HVAC system that provides heating and cooling. The zone minimum humidity schedules match between the baseline and proposed ruleset model descriptions.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "4-2",
@@ -15,7 +15,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "weather": {
@@ -17680,8 +17680,9 @@
         "Section": 4,
         "Rule": 2,
         "Test": "b",
-        "test_description": "Baseline and Proposed building have one building segment and  one zone with non-matching minimum humidity  schedules. Expected result: UNDETERMINED",
+        "test_description": "A building has one building segment and one zone with an HVAC system that provides heating and cooling. The zone minimum humidity schedules do not match between the baseline and proposed ruleset model descriptions.",
         "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "There is a humidity schedule mismatch between the baseline and proposed. Fail unless Table G3.1 #4 baseline column exception #s 1 and/or 2 are applicable",
         "standard": {
             "rule_id": "4-2",
             "ruleset_reference": "Table G3.1 Section 4",
@@ -17692,7 +17693,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "weather": {
@@ -35357,7 +35358,7 @@
         "Section": 4,
         "Rule": 2,
         "Test": "c",
-        "test_description": "Baseline and Proposed building have one building segment and  one zone. Neither have minimum humidity schedules. Expected result: PASS",
+        "test_description": "A building has one building segment and one zone with an HVAC system that provides heating and cooling. The zone minimum humidity schedules do not exist in the baseline or proposed ruleset model descriptions.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "4-2",
@@ -35369,7 +35370,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "weather": {
@@ -35496,8 +35497,9 @@
         "Section": 4,
         "Rule": 2,
         "Test": "d",
-        "test_description": "Baseline and Proposed building have one building segment and  one zone. Only the baseline has a minimum humidity schedule. Expected result: FAIL",
+        "test_description": "A building has one building segment and one zone with an HVAC system that provides heating and cooling. The zone minimum humidity schedules exists in the baseline ruleset model description but not the proposed.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "Fail because a humidity schedule is defined in the baseline but not in the proposed.",
         "standard": {
             "rule_id": "4-2",
             "ruleset_reference": "Table G3.1 Section 4",
@@ -35508,7 +35510,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "weather": {
@@ -44404,8 +44406,9 @@
         "Section": 4,
         "Rule": 2,
         "Test": "e",
-        "test_description": "Baseline and Proposed building have one building segment and  one zone. Only the proposed has a minimum humidity schedule. Expected result: FAIL",
+        "test_description": "A building has one building segment and one zone with an HVAC system that provides heating and cooling. The zone minimum humidity schedules exists in the proposed ruleset model description but not the baseline.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "Fail because a humidity schedule is defined in the proposed but not in the baseline.",
         "standard": {
             "rule_id": "4-2",
             "ruleset_reference": "Table G3.1 Section 4",
@@ -44416,7 +44419,7 @@
             "primary_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "weather": {
