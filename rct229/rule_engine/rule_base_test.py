@@ -151,7 +151,7 @@ def test__rule_definition_base__evaluate__with_true_rule_check():
 
 
 # Testing RuleDefinitionBase get_context method ------------------
-def test__rule_definition_base__get_context__with_missing_rmrs():
+def test__rule_definition_base__get_context__with_missing_rmds():
     assert (
         BASE_RULE_1.get_context(
             produce_ruleset_model_description(
@@ -178,7 +178,7 @@ def test__rule_definition_base__get_context__with_missing_rmrs():
     )
 
 
-def test__rule_definition_base__get_context__with_rmrs_present():
+def test__rule_definition_base__get_context__with_rmds_present():
     context = BASE_RULE_1.get_context(
         produce_ruleset_model_description(
             USER=RMD_1, BASELINE_0=RMD_2, PROPOSED=RMD_EMPTY

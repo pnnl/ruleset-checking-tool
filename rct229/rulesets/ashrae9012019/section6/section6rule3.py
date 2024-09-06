@@ -69,10 +69,10 @@ class Section6Rule3(RuleDefinitionListIndexedBase):
                 space_u = context.USER
                 space_p = context.PROPOSED
                 total_space_lpd_u = sum(
-                    find_all("interior_lighting[*].power_per_area", space_u)
+                    find_all("$.interior_lighting[*].power_per_area", space_u)
                 )
                 total_space_lpd_p = sum(
-                    find_all("interior_lighting[*].power_per_area", space_p)
+                    find_all("$.interior_lighting[*].power_per_area", space_p)
                 )
 
                 space_lighting_status_type_p = data[

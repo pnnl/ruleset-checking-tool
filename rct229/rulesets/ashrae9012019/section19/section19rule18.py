@@ -22,11 +22,13 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_fan_system_object_suppl
     get_fan_system_object_supply_return_exhaust_relief_total_power_flow,
 )
 from rct229.schema.config import ureg
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all, find_one
 from rct229.utils.pint_utils import ZERO
 from rct229.utils.std_comparisons import std_equal
 
+ENERGY_RECOVERY = SchemaEnums.schema_enums["EnergyRecoveryOptions"]
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_3,
     HVAC_SYS.SYS_4,
@@ -172,9 +174,7 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
             )
             supply_flow_b = fan_sys_info_b["supply_fans_airflow"].to(ureg.cfm)
 
-            more_than_one_supply_fan_b = (
-                fan_sys_info_b["supply_fans_qty"] != 1
-            )  # the reason why > 1 isn't used is to prevent an error when no supply fan exists
+            exactly_one_supply_fan = fan_sys_info_b["supply_fans_qty"] == 1
             total_fan_power_b = (
                 (
                     fan_sys_info_b["supply_fans_power"]
@@ -183,7 +183,7 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
                     + fan_sys_info_b["relief_fans_power"]
                     + zonal_exhaust_fan_elec_power_b
                 )
-                if not more_than_one_supply_fan_b
+                if exactly_one_supply_fan
                 else ZERO.POWER
             ).to(ureg.hp)
 
@@ -191,7 +191,8 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
             more_than_one_exhaust_fan_and_energy_rec_is_relevant_b = False
             if (
                 fan_sys_b.get("air_energy_recovery")
-                and fan_sys_info_b["exhaust_fans_qty"] == 1
+                and fan_sys_b["air_energy_recovery"].get("type") != ENERGY_RECOVERY.NONE
+                and fan_sys_info_b["exhaust_fans_qty"] > 1
             ):
                 more_than_one_exhaust_fan_and_energy_rec_is_relevant_b = True
                 enthalpy_reco_ratio_b = getattr_(
@@ -257,7 +258,7 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
             min_fan_wattage_b = min_BHP_b / min_motor_efficiency_b
 
             return {
-                "more_than_one_supply_fan_b": more_than_one_supply_fan_b,
+                "exactly_one_supply_fan": exactly_one_supply_fan,
                 "more_than_one_exhaust_fan_and_energy_rec_is_relevant_b": more_than_one_exhaust_fan_and_energy_rec_is_relevant_b,
                 "total_fan_power_b": total_fan_power_b,
                 "expected_fan_wattage_b": expected_fan_wattage_b,
@@ -265,7 +266,7 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
             }
 
         def manual_check_required(self, context, calc_vals=None, data=None):
-            more_than_one_supply_fan_b = calc_vals["more_than_one_supply_fan_b"]
+            exactly_one_supply_fan = calc_vals["exactly_one_supply_fan"]
             more_than_one_exhaust_fan_and_energy_rec_is_relevant_b = calc_vals[
                 "more_than_one_exhaust_fan_and_energy_rec_is_relevant_b"
             ]
@@ -273,7 +274,7 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
             expected_fan_wattage_b = calc_vals["expected_fan_wattage_b"]
 
             return (
-                more_than_one_supply_fan_b
+                not exactly_one_supply_fan
                 or more_than_one_exhaust_fan_and_energy_rec_is_relevant_b
                 or (
                     not std_equal(total_fan_power_b, expected_fan_wattage_b)
@@ -288,7 +289,7 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
             more_than_one_exhaust_fan_and_energy_rec_is_relevant_b = calc_vals[
                 "more_than_one_exhaust_fan_and_energy_rec_is_relevant_b"
             ]
-            more_than_one_supply_fan_b = calc_vals["more_than_one_supply_fan_b"]
+            exactly_one_supply_fan = calc_vals["exactly_one_supply_fan"]
             expected_fan_wattage_b = calc_vals["expected_fan_wattage_b"]
 
             black_word = (
@@ -299,7 +300,7 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
 
             undetermined_msg = ""
             if (
-                more_than_one_supply_fan_b
+                not exactly_one_supply_fan
                 or more_than_one_exhaust_fan_and_energy_rec_is_relevant_b
             ):
                 undetermined_msg = (

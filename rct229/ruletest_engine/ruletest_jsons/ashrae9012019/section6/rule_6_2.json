@@ -3,7 +3,7 @@
         "Section": 6,
         "Rule": 2,
         "Test": "a",
-        "test_description": "Project has one building segment with two spaces. Both lighting power per area and lighting power allowance have been specified. The proposed building lighting power per area equals the maximum value of the proposed building's lighting power allowance and user building's lighting power per area. Expected result: PASS",
+        "test_description": "Project has one building segment with two spaces. Both lighting power per area and lighting power allowance have been specified. The proposed building lighting power per area equals the maximum value of the proposed building's lighting power allowance and user building's lighting power per area.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "6-2",
@@ -16,7 +16,7 @@
             "mandatory_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "user": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -135,7 +135,7 @@
         "Section": 6,
         "Rule": 2,
         "Test": "b",
-        "test_description": "Project has one building segment with two spaces. Both lighting power per area and lighting power allowance have been specified. The proposed building lighting power per area doesn't equal the maximum value of the proposed building's lighting power allowance and user building's lighting power per area. Expected result: FAIL",
+        "test_description": "Project has one building segment with two spaces. Both lighting power per area and lighting power allowance have been specified. The proposed building lighting power per area doesn't equal the maximum value of the proposed building's lighting power allowance and user building's lighting power per area.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "6-2",
@@ -148,7 +148,7 @@
             "mandatory_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "user": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -267,7 +267,7 @@
         "Section": 6,
         "Rule": 2,
         "Test": "c",
-        "test_description": "Project has one building segment with two spaces. Both lighting power per area and lighting power allowance have been specified. The proposed building lighting power per area equals the maximum value of the proposed building's lighting power allowance and user building's lighting power per area.  The space type is \"Dwelling Unit\".  Expected result: PASS",
+        "test_description": "Project has one building segment with two spaces. Both lighting power per area and lighting power allowance have been specified. The proposed building lighting power per area equals the maximum value of the proposed building's lighting power allowance and user building's lighting power per area.  The space type is \"Dwelling Unit\".",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "6-2",
@@ -280,7 +280,7 @@
             "mandatory_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "user": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -399,7 +399,7 @@
         "Section": 6,
         "Rule": 2,
         "Test": "d",
-        "test_description": "Project has one building segment with two spaces. Both lighting power per area and lighting power allowance have been specified. The proposed building lighting power per area equals the maximum value of the proposed building's lighting power allowance and user building's lighting power per area.  The space type is \"LIBRARY_READING_AREA\".   Expected result:  not-applicable",
+        "test_description": "Project has one building segment with two spaces. Both spaces have the lighting space type defined as library reading area. None of the applicable space types are in the project.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "6-2",
@@ -412,7 +412,7 @@
             "mandatory_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "user": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",

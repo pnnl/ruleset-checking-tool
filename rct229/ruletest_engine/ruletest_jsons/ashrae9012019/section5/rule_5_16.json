@@ -15,7 +15,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "RPD 1",
                 "weather": {
@@ -234,6 +234,7 @@
         "Test": "b",
         "test_description": " Project has one building segment and includes a zone that has two exterior walls with windows. Vertical fenestration area in the baseline model is not distributed on each face in the same proportion as in the proposed design. ",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "The vertical fenestration is not distributed across baseline opaque surfaces in the same proportion as in the proposed design. Verify if envelope is existing or altered and can be excluded from this check.",
         "standard": {
             "rule_id": "5-16",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (c)",
@@ -244,7 +245,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "RPD 1",
                 "weather": {

@@ -3,7 +3,7 @@
         "Section": 5,
         "Rule": 27,
         "Test": "a",
-        "test_description": "Project has one building segment and includes a space with a roof surface and a skylight. The building is located in climate zone 4A, the space has residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. Skylight area in the building is 0%-2.0%. The baseline skylight U-factor is established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment and includes a space with a roof surface and a skylight. The space has residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. Skylight area in the building is 0%-2.0%. The baseline skylight U-factor is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-27",
@@ -15,7 +15,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "weather": {
@@ -99,7 +99,7 @@
         "Section": 5,
         "Rule": 27,
         "Test": "b",
-        "test_description": "Project has one building segment and includes a space with a roof surface and a skylight. The building is located in climate zone 4A, the space has residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. Skylight area in the building is 0%-2.0%. The baseline skylight U-factor is not established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment and includes a space with a roof surface and a skylight. The space has residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. Skylight area in the building is 0%-2.0%. The baseline skylight U-factor is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-27",
@@ -111,7 +111,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "weather": {
@@ -195,7 +195,7 @@
         "Section": 5,
         "Rule": 27,
         "Test": "c",
-        "test_description": "Project has one building segment and includes a space with a roof surface and a skylight. The building is located in climate zone 4A, the space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. Skylight area in the building is 0%-2.0%. The baseline skylight U-factor is established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment and includes a space with a roof surface and a skylight. The space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. Skylight area in the building is 0%-2.0%. The baseline skylight U-factor is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-27",
@@ -207,7 +207,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "weather": {
@@ -291,7 +291,7 @@
         "Section": 5,
         "Rule": 27,
         "Test": "d",
-        "test_description": "Project has one building segment and includes a space with a roof surface and a skylight. The building is located in climate zone 4A, the space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. Skylight area in the building is 0%-2.0%. The baseline skylight U-factor is not established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment and includes a space with a roof surface and a skylight. The space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. Skylight area in the building is 0%-2.0%. The baseline skylight U-factor is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-27",
@@ -303,7 +303,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "weather": {
@@ -387,7 +387,7 @@
         "Section": 5,
         "Rule": 27,
         "Test": "e",
-        "test_description": "Project has one building segment and includes a space with a roof surface and a skylight. The building is located in climate zone 4A, the space is semiheated based on heating capacity of the HVAC system that serves it. Skylight area in the building is 0%-2.0%. The baseline skylight U-factor is established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment and includes a space with a roof surface and a skylight. The space is semiheated based on heating capacity of the HVAC system that serves it. Skylight area in the building is 0%-2.0%. The baseline skylight U-factor is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-27",
@@ -399,7 +399,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "weather": {
@@ -486,7 +486,7 @@
         "Section": 5,
         "Rule": 27,
         "Test": "f",
-        "test_description": "Project has one building segment and includes a space with a roof surface and a skylight. The building is located in climate zone 4A, the space is semiheated based on heating capacity of the HVAC system that serves it. Skylight area in the building is 0%-2.0%. The baseline skylight U-factor is not established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment and includes a space with a roof surface and a skylight. The space is semiheated based on heating capacity of the HVAC system that serves it. Skylight area in the building is 0%-2.0%. The baseline skylight U-factor is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-27",
@@ -498,7 +498,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "weather": {
@@ -585,7 +585,7 @@
         "Section": 5,
         "Rule": 27,
         "Test": "g",
-        "test_description": "Project has one building segment and includes a space with a roof surface and a skylight. The building is located in climate zone 3C, the space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. Skylight area in the building is greater than 2.0%. The baseline skylight U-factor is established correctly.",
+        "test_description": "Project located in climate zone 3C has one building segment and includes a space with a roof surface and a skylight. The space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. Skylight area in the building is greater than 2.0%. The baseline skylight U-factor is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-27",
@@ -597,7 +597,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "weather": {
@@ -681,7 +681,7 @@
         "Section": 5,
         "Rule": 27,
         "Test": "h",
-        "test_description": "Project has one building segment and includes a space with a roof surface and a skylight. The building is located in climate zone 3C, the space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. Skylight area in the building is greater than 2.0%. The baseline skylight U-factor is not established correctly.",
+        "test_description": "Project located in climate zone 3C has one building segment and includes a space with a roof surface and a skylight. The space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. Skylight area in the building is greater than 2.0%. The baseline skylight U-factor is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-27",
@@ -693,7 +693,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "weather": {
