@@ -96,6 +96,12 @@ class Section23Rule2(RuleDefinitionListIndexedBase):
                         "reset_differential_temperature",
                     ],
                 },
+                precision={
+                    "reset_differential_temperature_b": {
+                        "precision": 1,
+                        "unit": "K",
+                    },
+                },
             )
 
         def get_calc_vals(self, context, data=None):
@@ -124,7 +130,10 @@ class Section23Rule2(RuleDefinitionListIndexedBase):
 
             return (
                 temperature_control_b == FanSystemTemperatureControl.ZONE_RESET
-                and reset_differential_temperature_b == REQUIRED_RESET_DIFF_TEMP
+                and self.precision_comparison["reset_differential_temperature_b"](
+                    reset_differential_temperature_b,
+                    REQUIRED_RESET_DIFF_TEMP,
+                )
             )
 
         def is_tolerance_fail(self, context, calc_vals=None, data=None):

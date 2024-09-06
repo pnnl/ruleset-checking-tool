@@ -90,6 +90,12 @@ class Section23Rule1(RuleDefinitionListIndexedBase):
                 required_fields={
                     "$": ["heating_system"],
                 },
+                precision={
+                    "heatpump_low_shutoff_b": {
+                        "precision": 1,
+                        "unit": "K",
+                    },
+                },
             )
 
         def get_calc_vals(self, context, data=None):
@@ -119,6 +125,7 @@ class Section23Rule1(RuleDefinitionListIndexedBase):
         def manual_check_required(self, context, calc_vals=None, data=None):
             heatpump_low_shutoff_b = calc_vals["heatpump_low_shutoff_temperature"]
             hvac_type_b = calc_vals["hvac_type"]
+
             return (
                 hvac_type_b == HVAC_SYS.SYS_2
                 and HEATPUMP_LOW_SHUTOFF_LOWER
@@ -128,21 +135,35 @@ class Section23Rule1(RuleDefinitionListIndexedBase):
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
             heatpump_low_shutoff_b = calc_vals["heatpump_low_shutoff_temperature"]
+
             return (
                 f"Undetermined because the low temperature shutoff is between 17F and 25F for System Type 2.  "
-                f"Check with the rating authority to ensure correct shutoff temperature.  Low shutoff temperature "
+                f"Check with the rating authority to ensure correct shutoff temperature. Low shutoff temperature "
                 f"is currently modeled at: {heatpump_low_shutoff_b}."
             )
 
         def rule_check(self, context, calc_vals=None, data=None):
-            heatpump_low_shutoff_b = calc_vals["heatpump_low_shutoff_temperature"]
+            heatpump_low_shutoff_b = calc_vals["heatpump_low_shutoff_temperature"].to(ureg.kelvin)
             hvac_type_b = calc_vals["hvac_type"]
+
             return (
                 hvac_type_b == HVAC_SYS.SYS_2
-                and heatpump_low_shutoff_b <= HEATPUMP_LOW_SHUTOFF_LOWER
+                and (
+                    heatpump_low_shutoff_b < HEATPUMP_LOW_SHUTOFF_LOWER
+                    or self.precision_comparison["heatpump_low_shutoff_b"](
+                        heatpump_low_shutoff_b,
+                        HEATPUMP_LOW_SHUTOFF_LOWER.to(ureg.kelvin),
+                    )
+                )
             ) or (
                 hvac_type_b == HVAC_SYS.SYS_4
-                and heatpump_low_shutoff_b <= HEATPUMP_LOW_SHUTOFF_LOWER_SYS4
+                and (
+                    heatpump_low_shutoff_b < HEATPUMP_LOW_SHUTOFF_LOWER_SYS4
+                    or self.precision_comparison["heatpump_low_shutoff_b"](
+                        heatpump_low_shutoff_b,
+                        HEATPUMP_LOW_SHUTOFF_LOWER_SYS4.to(ureg.kelvin),
+                    )
+                )
             )
 
         def get_fail_msg(self, context, calc_vals=None, data=None):
