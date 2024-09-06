@@ -83,19 +83,19 @@ class Section21Rule8(RuleDefinitionListIndexedBase):
                 precision={
                     "design_outdoor_high_for_loop_supply_reset_temperature_b": {
                         "precision": 1,
-                        "unit": "F",
+                        "unit": "K",
                     },
                     "design_outdoor_low_for_loop_supply_reset_temperature_b": {
                         "precision": 1,
-                        "unit": "F",
+                        "unit": "K",
                     },
                     "design_supply_temperature_at_outdoor_high_b": {
                         "precision": 1,
-                        "unit": "F",
+                        "unit": "K",
                     },
                     "design_supply_temperature_at_outdoor_low_b": {
                         "precision": 1,
-                        "unit": "F",
+                        "unit": "K",
                     },
                 },
             )

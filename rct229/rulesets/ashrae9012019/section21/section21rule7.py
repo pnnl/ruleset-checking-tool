@@ -89,11 +89,11 @@ class Section21Rule7(RuleDefinitionListIndexedBase):
                 precision={
                     "design_supply_temperature": {
                         "precision": 1,
-                        "unit": "F",
+                        "unit": "K",
                     },
                     "design_return_temperature": {
                         "precision": 1,
-                        "unit": "F",
+                        "unit": "K",
                     },
                 },
             )
