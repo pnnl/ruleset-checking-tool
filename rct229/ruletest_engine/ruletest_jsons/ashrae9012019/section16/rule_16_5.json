@@ -3,7 +3,7 @@
         "Section": 16,
         "Rule": 5,
         "Test": "a",
-        "test_description": "A proposed building has an elevator. The baseline of that building has an elevator with cab ventilation and lights running continuously as expected. Expected result: PASS",
+        "test_description": "A building with an elevator has the baseline elevator cab ventilation fan and lights running continuously, as expected. ",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "16-5",
@@ -16,7 +16,7 @@
             "mandatory_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "weather": {
@@ -35239,7 +35239,7 @@
         "Section": 16,
         "Rule": 5,
         "Test": "b",
-        "test_description": "A proposed building has an elevator. The baseline of that building has an elevator with cab ventilation that does not run continuously. Expected result: FAIL",
+        "test_description": "A building with an elevator has baseline elevator cab ventilation fan and lighting which do not run continuously.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "16-5",
@@ -35252,7 +35252,7 @@
             "mandatory_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "weather": {
@@ -70475,7 +70475,7 @@
         "Section": 16,
         "Rule": 5,
         "Test": "c",
-        "test_description": "A proposed building design has an elevator. The baseline does not have an elevator. Expected result: NOT APPLICABLE",
+        "test_description": "A proposed building design has an elevator. The baseline does not have an elevator. The failing outcome is bypassed here because it is captured in another rule.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "16-5",
@@ -70488,7 +70488,7 @@
             "mandatory_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "weather": {
@@ -79405,7 +79405,7 @@
         "Section": 16,
         "Rule": 5,
         "Test": "d",
-        "test_description": "A baseline building design has an elevator. The proposed does not have an elevator. Expected result: NOT APPLICABLE",
+        "test_description": "A baseline building design has an elevator. The proposed does not have an elevator. The failing outcome is bypassed here because it is captured in another rule.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "16-5",
@@ -79418,7 +79418,7 @@
             "mandatory_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "weather": {

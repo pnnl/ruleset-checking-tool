@@ -69,7 +69,7 @@ class Section21Rule18(RuleDefinitionListIndexedBase):
                 required_fields={
                     "$": ["energy_source_type"],
                 },
-                manual_check_required_msg="Basline boiler fuel source is modeled as propane. Verify if natural gas is not available for the proposed building site as determined by the rating authority.",
+                manual_check_required_msg="Baseline boiler fuel source is modeled as propane. Verify if natural gas is not available for the proposed building site as determined by the rating authority.",
             )
 
         def get_calc_vals(self, context, data=None):

@@ -3,7 +3,7 @@
         "Section": 5,
         "Rule": 10,
         "Test": "a",
-        "test_description": "Project has one building segment with an exterior floor surface. Building is located in climate zone 4A and includes a space that has residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline floor U-factor for the zone is established correctly.\n\n",
+        "test_description": "Project located in climate zone 4A has one building segment with an exterior floor surface. The project includes a space that has residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline floor U-factor for the zone is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-10",
@@ -15,7 +15,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "weather": {
@@ -92,7 +92,7 @@
         "Section": 5,
         "Rule": 10,
         "Test": "b",
-        "test_description": "Project has one building segment with an exterior floor surface. Building is located in climate zone 4A and includes a space that has residential occupancy type and is conditioned based on cooling capacity of the HVAC system that serves the parent zone. The baseline floor U-factor for the zone is established correctly.\n\n",
+        "test_description": "Project located in climate zone 4A has one building segment with an exterior floor surface. The project includes a space that has residential occupancy type and is conditioned based on cooling capacity of the HVAC system that serves the parent zone. The baseline floor U-factor for the zone is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-10",
@@ -104,7 +104,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "weather": {
@@ -181,7 +181,7 @@
         "Section": 5,
         "Rule": 10,
         "Test": "c",
-        "test_description": "Project has one building segment with an exterior floor surface. Building is located in climate zone 4A and includes a space that has residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline floor U-factor for the zone is not established correctly.\n\n",
+        "test_description": "Project located in climate zone 4A has one building segment with an exterior floor surface. The project includes a space that has residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline floor U-factor for the zone is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-10",
@@ -193,7 +193,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "weather": {
@@ -270,7 +270,7 @@
         "Section": 5,
         "Rule": 10,
         "Test": "d",
-        "test_description": "Project has one building segment with an exterior floor surface. Building is located in climate zone 4A and includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline floor U-factor for the zone is established correctly.\n\n",
+        "test_description": "Project located in climate zone 4A has one building segment with an exterior floor surface. The project includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline floor U-factor for the zone is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-10",
@@ -282,7 +282,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "weather": {
@@ -359,7 +359,7 @@
         "Section": 5,
         "Rule": 10,
         "Test": "e",
-        "test_description": "Project has one building segment with an exterior floor surface. Building is located in climate zone 4A and includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline floor U-factor for the zone is not established correctly.\n\n",
+        "test_description": "Project located in climate zone 4A has one building segment with an exterior floor surface. The project includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline floor U-factor for the zone is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-10",
@@ -371,7 +371,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "weather": {
@@ -448,7 +448,7 @@
         "Section": 5,
         "Rule": 10,
         "Test": "f",
-        "test_description": "Project has one building segment with an exterior floor surface. Building is located in climate zone 4A and includes a space that has non-residential occupancy type and is semiheated based on heating and cooling capacity of the HVAC system that serves the parent zone. The baseline floor U-factor for the zone is established correctly.\n\n",
+        "test_description": "Project located in climate zone 4A has one building segment with an exterior floor surface. The project includes a space that has non-residential occupancy type and is semiheated based on heating and cooling capacity of the HVAC system that serves the parent zone. The baseline floor U-factor for the zone is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-10",
@@ -460,7 +460,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "weather": {
@@ -538,7 +538,7 @@
         "Section": 5,
         "Rule": 10,
         "Test": "g",
-        "test_description": "Project has one building segment with an exterior floor surface. Building is located in climate zone 4A and includes a space that has non-residential occupancy type and is semiheated based on heating and cooling capacity of the HVAC system that serves the parent zone. The baseline floor U-factor for the zone is not established correctly.\n\n",
+        "test_description": "Project located in climate zone 4A has one building segment with an exterior floor surface. The project includes a space that has non-residential occupancy type and is semiheated based on heating and cooling capacity of the HVAC system that serves the parent zone. The baseline floor U-factor for the zone is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-10",
@@ -550,7 +550,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "weather": {
@@ -628,7 +628,7 @@
         "Section": 5,
         "Rule": 10,
         "Test": "h",
-        "test_description": "Project has one building segment with an exterior floor surface. Building is located in climate zone 8 and includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline floor U-factor for the zone is established correctly.\n\n",
+        "test_description": "Project located in climate zone 8 has one building segment with an exterior floor surface. The project includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline floor U-factor for the zone is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-10",
@@ -640,7 +640,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "weather": {
@@ -717,7 +717,7 @@
         "Section": 5,
         "Rule": 10,
         "Test": "i",
-        "test_description": "Project has one building segment with an exterior floor surface. Building is located in climate zone 8 and includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline floor U-factor for the zone is not established correctly.\n\n",
+        "test_description": "Project located in climate zone 8 has one building segment with an exterior floor surface. The project includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline floor U-factor for the zone is not established correctly.\n\n",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-10",
@@ -729,7 +729,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "weather": {
