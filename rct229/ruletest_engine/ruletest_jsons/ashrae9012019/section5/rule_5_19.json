@@ -3,7 +3,7 @@
         "Section": 5,
         "Rule": 19,
         "Test": "a",
-        "test_description": "Project has one building segment and includes a space with an above-grade wall surface and window. The building is located in climate zone 4A, the space has residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. The vertical fenestration area is less than 10% of the gross exterior wall area.  The baseline vertical fenestration U-factor is established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment and includes a space with an above-grade wall surface and window. The space has residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. The vertical fenestration area is less than 10% of the gross exterior wall area.  The baseline vertical fenestration U-factor is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-19",
@@ -15,7 +15,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "weather": {
@@ -99,7 +99,7 @@
         "Section": 5,
         "Rule": 19,
         "Test": "b",
-        "test_description": "Project has one building segment and includes a space with an above-grade wall surface and window. The building is located in climate zone 4A, the space has residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. The vertical fenestration area is less than 10% of the gross exterior wall area. The baseline vertical fenestration U-factor is established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment and includes a space with an above-grade wall surface and window. The space has residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. The vertical fenestration area is less than 10% of the gross exterior wall area. The baseline vertical fenestration U-factor is established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-19",
@@ -111,7 +111,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "weather": {
@@ -195,7 +195,7 @@
         "Section": 5,
         "Rule": 19,
         "Test": "c",
-        "test_description": "Project has one building segment and includes a space with an above-grade wall surface and window. The building is located in climate zone 4A, the space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it.  The vertical fenestration area is less than 10% of the gross exterior wall area. The baseline vertical fenestration U-factor is established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment and includes a space with an above-grade wall surface and window. The space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it.  The vertical fenestration area is less than 10% of the gross exterior wall area. The baseline vertical fenestration U-factor is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-19",
@@ -207,7 +207,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "weather": {
@@ -291,7 +291,7 @@
         "Section": 5,
         "Rule": 19,
         "Test": "d",
-        "test_description": " Project has one building segment and includes a space with an above-grade wall surface and window. The building is located in climate zone 4A, the space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. The vertical fenestration area is less than 10% of the gross exterior wall area. The baseline vertical fenestration U-factor is not established correctly.",
+        "test_description": " Project located in climate zone 4A has one building segment and includes a space with an above-grade wall surface and window. The space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. The vertical fenestration area is less than 10% of the gross exterior wall area. The baseline vertical fenestration U-factor is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-19",
@@ -303,7 +303,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "weather": {
@@ -387,7 +387,7 @@
         "Section": 5,
         "Rule": 19,
         "Test": "e",
-        "test_description": "Project has one building segment and includes a space with an above-grade wall surface and window. The building is located in climate zone 4A, the space is semiheated based on heating and cooling capacity of the HVAC system that serves it.  The vertical fenestration area is less than 10% of the gross exterior wall area. The baseline vertical fenestration U-factor is established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment and includes a space with an above-grade wall surface and window. The space is semiheated based on heating and cooling capacity of the HVAC system that serves it.  The vertical fenestration area is less than 10% of the gross exterior wall area. The baseline vertical fenestration U-factor is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-19",
@@ -399,7 +399,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "weather": {
@@ -487,7 +487,7 @@
         "Section": 5,
         "Rule": 19,
         "Test": "f",
-        "test_description": "Project has one building segment and includes a space with an above-grade wall surface and window. The building is located in climate zone 4A, the space is semiheated based on heating and cooling capacity of the HVAC system that serves it. The vertical fenestration area is less than 10% of the gross exterior wall area. The baseline vertical fenestration U-factor is established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment and includes a space with an above-grade wall surface and window. The space is semiheated based on heating and cooling capacity of the HVAC system that serves it. The vertical fenestration area is less than 10% of the gross exterior wall area. The baseline vertical fenestration U-factor is established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-19",
@@ -499,7 +499,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "weather": {
@@ -587,7 +587,7 @@
         "Section": 5,
         "Rule": 19,
         "Test": "g",
-        "test_description": "Project has one building segment and includes a space with an above-grade wall surface and window. The building is located in climate zone 3C, the space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. The baseline vertical fenestration U-factor is established correctly.",
+        "test_description": "Project located in climate zone 3C has one building segment and includes a space with an above-grade wall surface and window. The space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. The baseline vertical fenestration U-factor is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-19",
@@ -599,7 +599,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "weather": {
@@ -687,7 +687,7 @@
         "Section": 5,
         "Rule": 19,
         "Test": "h",
-        "test_description": "Project has one building segment and includes a space with an above-grade wall surface and window. The building is located in climate zone 3C, the space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. The baseline vertical fenestration U-factor is not established correctly.",
+        "test_description": "Project located in climate zone 3C has one building segment and includes a space with an above-grade wall surface and window. The space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. The baseline vertical fenestration U-factor is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-19",
@@ -699,7 +699,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "weather": {

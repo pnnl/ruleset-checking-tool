@@ -3,7 +3,7 @@
         "Section": 6,
         "Rule": 6,
         "Test": "a",
-        "test_description": "The baseline building has NONE daylighting control type. Expected result: PASS",
+        "test_description": "Project has one building segment with one zone and one space. The space has interior lighting. The baseline building is not modeled with daylighting controls.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "6-6",
@@ -16,7 +16,7 @@
             "mandatory_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -65,7 +65,7 @@
         "Section": 6,
         "Rule": 6,
         "Test": "b",
-        "test_description": "The baseline building has STEPPED daylighting control type.  Expected result: FAIL",
+        "test_description": "Project has one building segment with one zone and one space. The space has interior lighting. The baseline building is modeled with daylighting controls.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "6-6",
@@ -78,7 +78,7 @@
             "mandatory_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",

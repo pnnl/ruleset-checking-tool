@@ -210,7 +210,7 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
                     fan_air_economizer_b is None
                     or fan_air_economizer_type_b
                     in [None, AIR_ECONOMIZER.FIXED_FRACTION]
-                ) and baseline_system_types_b in hvac_system_exception_2_list:
+                ) and hvac_id_b in hvac_system_exception_2_list:
                     # Case 2 msg
                     undetermined_msg = f"Undetermined unless any of the zones served by the baseline system {hvac_id_b} in the proposed design include supermarket open refrigerated case-work systems that will be affected by using outdoor air for cooling (G3.1.2.6 exception #2)."
                 elif (
