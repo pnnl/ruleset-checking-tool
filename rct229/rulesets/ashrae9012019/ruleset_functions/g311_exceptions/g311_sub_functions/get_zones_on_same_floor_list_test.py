@@ -3,7 +3,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_fu
 )
 from rct229.schema.validate import schema_validate_rmd
 
-TEST_RMI = {
+TEST_RMD = {
     "id": "test_rmd",
     "buildings": [
         {
@@ -29,22 +29,22 @@ TEST_RMI = {
     "type": "BASELINE_0",
 }
 
-TEST_RMD = {
+TEST_RPD = {
     "id": "229_01",
-    "ruleset_model_descriptions": [TEST_RMI],
+    "ruleset_model_descriptions": [TEST_RMD],
     "data_timestamp": "2024-02-12T09:00Z",
 }
 
 
-def test__TEST_RMD_FIXED_TYPE__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RMD)
+def test__TEST_RPD_FIXED_TYPE__is_valid():
+    schema_validation_result = schema_validate_rmd(TEST_RPD)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
 
 
 def test__get_zones_on_floor_1__success():
-    assert get_zones_on_same_floor_list(TEST_RMI, "zone 1") == [
+    assert get_zones_on_same_floor_list(TEST_RMD, "zone 1") == [
         "zone 1",
         "zone 2-1",
         "zone 2-2",
@@ -52,4 +52,4 @@ def test__get_zones_on_floor_1__success():
 
 
 def test__get_zones_on_floor_2__success():
-    assert get_zones_on_same_floor_list(TEST_RMI, "zone 2") == ["zone 2"]
+    assert get_zones_on_same_floor_list(TEST_RMD, "zone 2") == ["zone 2"]

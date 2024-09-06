@@ -23,10 +23,10 @@ def get_proposed_hvac_modeled_with_virtual_heating(
     Parameters
     ----------
     rmd_u dict
-        A dictionary representing a building as defined by the ASHRAE229 schema. The user RMI to determine if an
+        A dictionary representing a building as defined by the ASHRAE229 schema. The user RMD to determine if an
         HVAC system has been designed or is existing with heating.
     rmd_p dict
-        A dictionary representing a building as defined by the ASHRAE229 schema. The proposed RMI to determine if the
+        A dictionary representing a building as defined by the ASHRAE229 schema. The proposed RMD to determine if the
         same HVAC system has been modeled with heating in the P-RMD.
 
 

@@ -23,9 +23,9 @@ class HVACZoneListArea(TypedDict):
     zone_list: list[str]
 
 
-def get_hvac_zone_list_w_area_by_rmi_dict(rmd: dict) -> dict[str, HVACZoneListArea]:
+def get_hvac_zone_list_w_area_by_rmd_dict(rmd: dict) -> dict[str, HVACZoneListArea]:
     """
-    RMI version of the get_hvac_zone_list_w_area_dict function
+    RMD version of the get_hvac_zone_list_w_area_dict function
 
     Parameters
     ----------

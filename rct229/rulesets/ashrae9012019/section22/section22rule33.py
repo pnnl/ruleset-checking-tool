@@ -49,16 +49,16 @@ class Section22Rule33(RuleDefinitionBase):
             for hvac_type in baseline_system_types_dict
             if len(baseline_system_types_dict[hvac_type]) > 0
         ]
-        primary_secondary_loop_dict = get_primary_secondary_loops_dict(rmd_b)
+        # There is no point to check primary secondary loop in the applicable function
+        # because the get_primary_secondary_loops_dict returns nothing if any cooling loop is
+        # modeled as a primary only loop
+        # primary_secondary_loop_dict = get_primary_secondary_loops_dict(rmd_b)
 
-        return (
-            any(
-                [
-                    available_type in APPLICABLE_SYS_TYPES
-                    for available_type in available_type_list
-                ]
-            )
-            and primary_secondary_loop_dict
+        return any(
+            [
+                available_type in APPLICABLE_SYS_TYPES
+                for available_type in available_type_list
+            ]
         )
 
     def get_calc_vals(self, context, data=None):

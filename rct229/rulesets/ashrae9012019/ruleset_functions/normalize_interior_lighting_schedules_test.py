@@ -82,7 +82,7 @@ TEST_SPACES = quantify_rmd(TEST_SPACE_RMD)["ruleset_model_descriptions"][0][
 ][0]["building_segments"][0]["zones"][0]["spaces"][0]
 
 
-def test__TEST_RMD__is_valid():
+def test__TEST_RPD__is_valid():
     schema_validation_result = schema_validate_rmd(TEST_SPACE_RMD)
     assert schema_validation_result[
         "passed"

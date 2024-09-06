@@ -3,7 +3,7 @@
         "Section": 21,
         "Rule": 3,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones.  Space conditioning is provided by system type 7 with boiler.  The baseline building's hot water system's sizing is based on coincident loads.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a boiler. The baseline building's hot water system sizing is based on coincident loads.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-3",
@@ -15,7 +15,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -154,7 +154,7 @@
         "Section": 21,
         "Rule": 3,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones.  Space conditioning is provided by system type 7 with boiler.  The baseline building's hot water system's sizing is NOT based on coincident loads.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a boiler. The baseline building's hot water system sizing is not based on coincident loads.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-3",
@@ -166,7 +166,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -305,7 +305,7 @@
         "Section": 21,
         "Rule": 3,
         "Test": "c",
-        "test_description": "The project has one building segment with two zones.  Space conditioning is provided by system type 5 with boiler.  The baseline building's hot water system's sizing is based on coincident loads.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 5 with a boiler. The baseline building's hot water system sizing is based on coincident loads.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-3",
@@ -317,7 +317,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -429,7 +429,7 @@
         "Section": 21,
         "Rule": 3,
         "Test": "d",
-        "test_description": "The project has one building segment with two zones.  Space conditioning is provided by system type 5 with boiler.  The baseline building's hot water system's sizing is NOT based on coincident loads.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 5 with a boiler. The baseline building's hot water system sizing is not based on coincident loads.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-3",
@@ -441,7 +441,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -553,7 +553,7 @@
         "Section": 21,
         "Rule": 3,
         "Test": "e",
-        "test_description": "The project has one building segment with one zone.  Space conditioning is provided by system type 2.  Expected result: UNDETERMINED",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 2. There are no plant systems.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-3",
@@ -565,7 +565,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",

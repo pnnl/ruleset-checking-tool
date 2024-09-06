@@ -8,7 +8,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types i
     get_baseline_system_types,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_zone_list_w_area_dict import (
-    get_hvac_zone_list_w_area_by_rmi_dict,
+    get_hvac_zone_list_w_area_by_rmd_dict,
 )
 from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_all
@@ -35,7 +35,7 @@ def get_hvac_systems_5_6_serving_multiple_floors(rmd: dict) -> dict[str, int]:
         and the number of floors served as dict values.
     """
     baseline_hvac_system_types_dict = get_baseline_system_types(rmd)
-    hvac_zone_list_w_area_dict = get_hvac_zone_list_w_area_by_rmi_dict(rmd)
+    hvac_zone_list_w_area_dict = get_hvac_zone_list_w_area_by_rmd_dict(rmd)
     hvac_systems_5_6_serving_multiple_floors_dict = {}
 
     for hvac_b in find_all(

@@ -9,7 +9,7 @@ from rct229.rulesets.ashrae9012019.data_fns.table_lighting_to_hvac_bat_map_fns i
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
     ZoneConditioningCategory,
-    get_zone_conditioning_category_rmi_dict,
+    get_zone_conditioning_category_rmd_dict,
 )
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import assert_
@@ -65,7 +65,7 @@ def get_hvac_building_area_types_and_zones_dict(
     -------
 
     """
-    zone_conditioning_category_dict = get_zone_conditioning_category_rmi_dict(
+    zone_conditioning_category_dict = get_zone_conditioning_category_rmd_dict(
         climate_zone, rmd
     )
 

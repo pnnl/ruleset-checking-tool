@@ -81,7 +81,7 @@ def get_area_type_window_wall_area_dict(
                 )
 
                 # add sub-surfaces
-                for subsurface in find_all("subsurfaces[*]", surface):
+                for subsurface in find_all("$.subsurfaces[*]", surface):
                     glazed_area = getattr_(subsurface, "subsurface", "glazed_area")
                     opaque_area = getattr_(subsurface, "subsurface", "opaque_area")
                     if (
