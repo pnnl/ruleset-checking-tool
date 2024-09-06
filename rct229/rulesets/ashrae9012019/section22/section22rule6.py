@@ -58,7 +58,7 @@ class Section22Rule6(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data):
         rmd_b = context.BASELINE_0
-        chiller_loop_ids_list = find_all("chillers[*].cooling_loop", rmd_b)
+        chiller_loop_ids_list = find_all("$.chillers[*].cooling_loop", rmd_b)
         return {"chiller_loop_ids_list": chiller_loop_ids_list}
 
     def list_filter(self, context_item, data):
