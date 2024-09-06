@@ -87,7 +87,7 @@ def generate_rule_test_dictionary(ruleset_standard):
                 )
 
     # Reorder sections to be in numerical order (i.e., avoid section1, section11, section12, section5, section6)
-    sections_list = list(ruletest_dict.keys())
+    sections_list = list(ruletest_dict)
     sorted_sections = sorted(sections_list, key=lambda x: natural_keys(x))
     ruletest_dict = {key: ruletest_dict[key] for key in sorted_sections}
 

@@ -15,7 +15,7 @@
             "primary_rule": "Applicability",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "weather": {
@@ -93,6 +93,7 @@
         "Test": "b",
         "test_description": "Project has one building segment with one zone and a single surface. The surface is a regulated floor for which this rule cannot be fully evaluated.",
         "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "is a regulated floor surface. Conduct a manual check to confirm that Baseline floor assemblies conform with assemblies detailed in Appendix A.",
         "standard": {
             "rule_id": "5-9",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
@@ -103,7 +104,7 @@
             "primary_rule": "Applicability",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "weather": {

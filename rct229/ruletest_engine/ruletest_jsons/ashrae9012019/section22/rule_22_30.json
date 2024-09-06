@@ -3,19 +3,19 @@
         "Section": 22,
         "Rule": 30,
         "Test": "a",
-        "test_description": "The project has one building segment with one zone.  HVAC is system type 11.1 and is correctly modeled with the condenser pump value of 22 W/gpm.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 11 with a condenser water loop. The condenser water pump power is 22 W/gpm at design conditions.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-30",
             "ruleset_reference": "G3.1.3.11",
-            "rule_description": "For chilled-water systems served by chiller(s) and serves baseline System-11, condenser-water pump power shall be 22 W/gpm.",
+            "rule_description": "Baseline chilled water loops that do not use purchased chilled water and do serve computer rooms (baseline system type 11) shall have a condenser water pump power of 22 W/gpm at design conditions.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -121,19 +121,19 @@
         "Section": 22,
         "Rule": 30,
         "Test": "b",
-        "test_description": "The project has one building segment with one zone.  HVAC is system type 11.1 and is incorrectly modeled with the condenser pump value of 25 W/gpm.  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 11 with a condenser water loop. The condenser water pump power is 25 W/gpm at design conditions.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-30",
             "ruleset_reference": "G3.1.3.11",
-            "rule_description": "For chilled-water systems served by chiller(s) and serves baseline System-11, condenser-water pump power shall be 22 W/gpm.",
+            "rule_description": "Baseline chilled water loops that do not use purchased chilled water and do serve computer rooms (baseline system type 11) shall have a condenser water pump power of 22 W/gpm at design conditions.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -239,19 +239,19 @@
         "Section": 22,
         "Rule": 30,
         "Test": "c",
-        "test_description": "The project has one building segment with one zone.  HVAC is system type 11.2 and is correctly modeled with the condenser pump value of 22 W/gpm.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 11 with a condenser water loop. The condenser water pump power is 22 W/gpm at design conditions.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-30",
             "ruleset_reference": "G3.1.3.11",
-            "rule_description": "For chilled-water systems served by chiller(s) and serves baseline System-11, condenser-water pump power shall be 22 W/gpm.",
+            "rule_description": "Baseline chilled water loops that do not use purchased chilled water and do serve computer rooms (baseline system type 11) shall have a condenser water pump power of 22 W/gpm at design conditions.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -374,19 +374,19 @@
         "Section": 22,
         "Rule": 30,
         "Test": "d",
-        "test_description": "The project has one building segment with one zone.  HVAC is system type 11.2 and is incorrectly modeled with the condenser pump value of 25 W/gpm.  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 11 with a condenser water loop. The condenser water pump power is 25 W/gpm at design conditions.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-30",
             "ruleset_reference": "G3.1.3.11",
-            "rule_description": "For chilled-water systems served by chiller(s) and serves baseline System-11, condenser-water pump power shall be 22 W/gpm.",
+            "rule_description": "Baseline chilled water loops that do not use purchased chilled water and do serve computer rooms (baseline system type 11) shall have a condenser water pump power of 22 W/gpm at design conditions.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -509,19 +509,19 @@
         "Section": 22,
         "Rule": 30,
         "Test": "e",
-        "test_description": "The project has one building segment with two zones.  HVAC is system type 7.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water loop. The chilled water loop does not serve any computer room.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-30",
             "ruleset_reference": "G3.1.3.11",
-            "rule_description": "For chilled-water systems served by chiller(s) and serves baseline System-11, condenser-water pump power shall be 22 W/gpm.",
+            "rule_description": "Baseline chilled water loops that do not use purchased chilled water and do serve computer rooms (baseline system type 11) shall have a condenser water pump power of 22 W/gpm at design conditions.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",

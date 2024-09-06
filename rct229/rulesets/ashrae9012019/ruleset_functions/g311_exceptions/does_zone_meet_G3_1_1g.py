@@ -16,7 +16,7 @@ def does_zone_meet_g3_1_1g(rmd: dict, zone_id: str) -> bool:
 
     Parameters
     ----------
-    rmi: dict
+    rmd: dict
         A dictionary representing a RuleModelInstance object as defined by the ASHRAE229 schema
     zone_id: string
         zone id
