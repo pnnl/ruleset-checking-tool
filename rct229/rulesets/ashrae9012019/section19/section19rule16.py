@@ -114,12 +114,8 @@ class Section19Rule16((RuleDefinitionListIndexedBase)):
             hvac_has_non_mech_cooling_list_p = data["hvac_has_non_mech_cooling_list_p"]
             baseline_system_types_dict = data["baseline_system_types_dict"]
 
-            hvac_has_non_mech_cooling = any(
-                [
-                    hvac_id in hvac_has_non_mech_cooling_list_p
-                    for hvac_id in hvac_sys_list_b
-                ]
-            )
+            hvac_has_non_mech_cooling = any(hvac_has_non_mech_cooling_list_p)
+
             zone_non_mechanical_cooling_fan_airflow_p = find_one(
                 "$.non_mechanical_cooling_fan_airflow", zone_p
             )
@@ -150,10 +146,7 @@ class Section19Rule16((RuleDefinitionListIndexedBase)):
             hvac_has_non_mech_cooling = calc_vals["hvac_has_non_mech_cooling"]
             zone_served_by_sys_9_or_10 = calc_vals["zone_served_by_sys_9_or_10"]
 
-            return (
-                (hvac_has_non_mech_cooling and hvac_has_non_mech_cooling > ZERO.FLOW)
-                or hvac_has_non_mech_cooling
-            ) and zone_served_by_sys_9_or_10
+            return hvac_has_non_mech_cooling and zone_served_by_sys_9_or_10
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
             zone_p = context.PROPOSED

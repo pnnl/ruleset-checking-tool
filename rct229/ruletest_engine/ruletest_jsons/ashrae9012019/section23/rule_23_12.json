@@ -3,7 +3,7 @@
         "Section": 23,
         "Rule": 12,
         "Test": "a",
-        "test_description": "The project has one building segment with one zone served by System 11.1 and therefore is applicable to this rule. The expected result is: undetermined",
+        "test_description": "The project has one building segment with one zone served by baseline system type 11.",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "23-12",
@@ -14,9 +14,9 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "System 11 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -117,7 +117,7 @@
         "Section": 23,
         "Rule": 12,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones served by System 7. Therefore, this rule no longer applies. The expected result is: not_applicable",
+        "test_description": "The project has one building segment with two zones served by baseline system type 7.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "23-12",
@@ -128,9 +128,9 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "System 11 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",

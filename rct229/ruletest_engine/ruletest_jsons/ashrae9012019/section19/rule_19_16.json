@@ -3,19 +3,20 @@
         "Section": 19,
         "Rule": 16,
         "Test": "a",
-        "test_description": "The project has one building segment with one zone. Proposed system type 9 includes a fan to provide non-mechanical cooling. The baseline system design has a separate fan to provide nonmechanical cooling sized and controlled the same as proposed case. This results in an undetermined per 19-16 Expected outcome: UNDETERMINED",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 9. The corresponding proposed system includes a fan to provide non-mechanical cooling. The baseline system design has a separate fan to provide nonmechanical cooling.",
         "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "has non-mechanical cooling in the proposed design and the zone is served by either system 9 or 10 in the baseline, conduct a manual check that the baseline building design includes a separate fan to provide nonmechanical cooling, sized and controlled the same as the proposed design.",
         "standard": {
             "rule_id": "19-16",
             "ruleset_reference": "G3.1.2.8.2",
             "rule_description": "For zones served by baseline system types 9 & 10, if the proposed design includes a fan or fans sized and controlled to provide non-mechanical cooling, the baseline building design shall include a separate fan to provide nonmechanical cooling, sized and controlled the same as the proposed design.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -57,7 +58,8 @@
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan 1"
+                                                            "id": "Supply Fan 1",
+                                                            "design_airflow": 117.98686079999996
                                                         }
                                                     ],
                                                     "return_fans": [
@@ -122,7 +124,8 @@
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan 1"
+                                                            "id": "Supply Fan 1",
+                                                            "design_airflow": 117.98686079999996
                                                         }
                                                     ],
                                                     "return_fans": [
@@ -152,19 +155,20 @@
         "Section": 19,
         "Rule": 16,
         "Test": "b",
-        "test_description": "The project has one building segment with one zone. Proposed system type 10 includes a fan to provide non-mechanical cooling. The baseline system design has a separate fan to provide nonmechanical cooling sized and controlled the same as proposed case. This results in an undetermined per 19-16 Expected outcome: UNDETERMINED",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 10. The corresponding proposed system includes a fan to provide non-mechanical cooling. The baseline system design has a separate fan to provide nonmechanical cooling.",
         "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "has non-mechanical cooling in the proposed design and the zone is served by either system 9 or 10 in the baseline, conduct a manual check that the baseline building design includes a separate fan to provide nonmechanical cooling, sized and controlled the same as the proposed design.",
         "standard": {
             "rule_id": "19-16",
             "ruleset_reference": "G3.1.2.8.2",
             "rule_description": "For zones served by baseline system types 9 & 10, if the proposed design includes a fan or fans sized and controlled to provide non-mechanical cooling, the baseline building design shall include a separate fan to provide nonmechanical cooling, sized and controlled the same as the proposed design.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -200,17 +204,13 @@
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "System 10",
-                                                "heating_system": {
-                                                    "id": "Heating Coil 1",
-                                                    "type": "FURNACE",
-                                                    "energy_source_type": "ELECTRICITY"
-                                                },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan 1"
+                                                            "id": "Supply Fan 1",
+                                                            "design_airflow": 117.98686079999996
                                                         }
                                                     ],
                                                     "return_fans": [
@@ -269,17 +269,13 @@
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "System 10",
-                                                "heating_system": {
-                                                    "id": "Heating Coil 1",
-                                                    "type": "FURNACE",
-                                                    "energy_source_type": "ELECTRICITY"
-                                                },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan 1"
+                                                            "id": "Supply Fan 1",
+                                                            "design_airflow": 117.98686079999996
                                                         }
                                                     ],
                                                     "return_fans": [
@@ -309,19 +305,19 @@
         "Section": 19,
         "Rule": 16,
         "Test": "c",
-        "test_description": "The project has one building segment with one zone. Proposed system type 10 doesn't include non-mechanical cooling. The baseline system design doesn't have a separate fan to provide nonmechanical cooling. This results in a not applicable per 19-16 Expected outcome: NOT_APPLICABLE",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 1. The corresponding proposed system does not include non-mechanical cooling.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "19-16",
             "ruleset_reference": "G3.1.2.8.2",
             "rule_description": "For zones served by baseline system types 9 & 10, if the proposed design includes a fan or fans sized and controlled to provide non-mechanical cooling, the baseline building design shall include a separate fan to provide nonmechanical cooling, sized and controlled the same as the proposed design.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",

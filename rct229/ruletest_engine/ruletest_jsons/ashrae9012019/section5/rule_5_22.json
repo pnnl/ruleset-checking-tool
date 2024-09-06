@@ -15,7 +15,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "weather": {
@@ -105,8 +105,9 @@
         "Section": 5,
         "Rule": 22,
         "Test": "b",
-        "test_description": "Project has one building segment and includes a space with an above-grade wall surface. The space is conditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. Fenestration is modeled as flush with the exterior wall with no shading projections.",
+        "test_description": "Project has one building segment and includes a space with an above-grade wall surface. The space is conditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. The baseline model contains overhangs casting shade.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "Baseline fenestration was modeled with shading projections and/or overhangs, which is incorrect.",
         "standard": {
             "rule_id": "5-22",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance(d)",
@@ -117,7 +118,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "weather": {
@@ -219,7 +220,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "weather": {

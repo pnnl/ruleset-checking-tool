@@ -59,7 +59,7 @@ class Section22Rule30(RuleDefinitionListIndexedBase):
             chiller["condensing_loop"]: find_exactly_one_fluid_loop(
                 rmd_b, chiller["condensing_loop"]
             ).get("pump_power_per_flow_rate")
-            for chiller in find_all("chillers[*]", rmd_b)
+            for chiller in find_all("$.chillers[*]", rmd_b)
         }
         return {"condenser_loop_pump_power_dict": condenser_loop_pump_power_dict}
 

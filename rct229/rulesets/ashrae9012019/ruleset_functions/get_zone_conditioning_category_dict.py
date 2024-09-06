@@ -51,11 +51,11 @@ GET_ZONE_CONDITIONING_CATEGORY_DICT__REQUIRED_FIELDS = {
 }
 
 
-def get_zone_conditioning_category_rmi_dict(
+def get_zone_conditioning_category_rmd_dict(
     climate_zone: str, rmd: dict
 ) -> dict[str, ZoneConditioningCategory]:
     """
-    Determines the zone conditioning category for every zone in an RMI.
+    Determines the zone conditioning category for every zone in an RMD.
 
     Parameters
     ----------
@@ -70,13 +70,13 @@ def get_zone_conditioning_category_rmi_dict(
         CONDITIONED_MIXED, CONDITIONED_NON_RESIDENTIAL, CONDITIONED_RESIDENTIAL,
         SEMI_HEATED, UNCONDITIONED, UNENCOLOSED
     """
-    zone_conditioning_category_rmi_dict = {}
+    zone_conditioning_category_rmd_dict = {}
     for building in find_all("$.buildings[*]", rmd):
         zone_conditioning_category_dict = get_zone_conditioning_category_dict(
             climate_zone, building
         )
-        zone_conditioning_category_rmi_dict.update(zone_conditioning_category_dict)
-    return zone_conditioning_category_rmi_dict
+        zone_conditioning_category_rmd_dict.update(zone_conditioning_category_dict)
+    return zone_conditioning_category_rmd_dict
 
 
 def get_zone_conditioning_category_dict(
@@ -243,7 +243,7 @@ def get_zone_conditioning_category_dict(
                     find_all("surfaces[*]", zone), f"zone:{zone_id} has no surfaces"
                 )
                 for surface in zone["surfaces"]:
-                    subsurfaces = find_all("subsurfaces[*]", surface)
+                    subsurfaces = find_all("$.subsurfaces[*]", surface)
                     # Calculate the total area of all subsurfaces
                     subsurfaces_area = sum(
                         [
@@ -266,7 +266,7 @@ def get_zone_conditioning_category_dict(
                         ],
                         ZERO.UA,  # value used if there are no subsurfaces
                     )
-                    # Calculate the are of the surface that is not part of a subsurface
+                    # Calculate the area of the surface that is not part of a subsurface
                     non_subsurfaces_area = (
                         getattr_(surface, "surface", "area") - subsurfaces_area
                     )

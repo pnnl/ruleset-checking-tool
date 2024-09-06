@@ -94,7 +94,7 @@ def get_building_scc_skylight_roof_ratios_dict(
 
 def _helper_calculate_skylight_area(surface: dict) -> Quantity:
     total_glazed_area = ZERO.AREA
-    for subsurface in find_all("subsurfaces[*]", surface):
+    for subsurface in find_all("$.subsurfaces[*]", surface):
         glazed_area = getattr_(subsurface, "subsurface", "glazed_area")
         opaque_area = getattr_(subsurface, "subsurface", "opaque_area")
         if getattr_(subsurface, "subsurface", "classification") == DOOR:

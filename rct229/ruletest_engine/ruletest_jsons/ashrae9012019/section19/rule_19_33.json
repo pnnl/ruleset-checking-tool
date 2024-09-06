@@ -3,19 +3,20 @@
         "Section": 19,
         "Rule": 33,
         "Test": "a",
-        "test_description": "The project has one building segment with one zone. Project contains a NONE cooling system type served by a baseline system 1. The cooling system type is correctly modeled. Expected outcome: UNDETERMINED",
+        "test_description": "The project has one building segment with one zone. The zone does not have a cooling system in the user model, and is served by a packaged terminal air conditioner in the proposed.",
         "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "is only being simulated in the P_RMI to meet the requirements described in Section G3.1-10 HVAC Systems proposed column c and d for heating and/or cooling. Check that the heating and/or cooling system fans are simulated to be cycled ON and OFF to meet heating and/or cooling loads during occupied hours as applicable. Note that per the RMD the fan associated with",
         "standard": {
             "rule_id": "19-33",
             "ruleset_reference": "Table G3.1 Section 4 Exception #1",
             "rule_description": "Where no heating and/or cooling system is to be installed, and a heating or cooling system is being simulated only to meet the requirements described in this table, heating and/or cooling system fans shall not be simulated as running continuously during occupied hours but shall be cycled ON and OFF to meet heating and cooling loads during all hours in the proposed design. \n",
-            "applicable_rmr": "User RMR",
+            "applicable_rmd": "User RMD",
             "rule_assertion": "=",
-            "comparison_value": "Proposed RMR",
+            "comparison_value": "Proposed RMD",
             "primary_rule": "Applicability",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "user": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -167,19 +168,20 @@
         "Section": 19,
         "Rule": 33,
         "Test": "b",
-        "test_description": "The project has one building segment with one zone. Project contains a NONE heating system type served by a baseline system 1. The heating system type is correctly modeled. Expected outcome: UNDETERMINED",
+        "test_description": "The project has one building segment with one zone. The zone does not have a heating system in the user model, and is served by a hot water coil in the proposed.",
         "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "is only being simulated in the P_RMI to meet the requirements described in Section G3.1-10 HVAC Systems proposed column c and d for heating and/or cooling. Check that the heating and/or cooling system fans are simulated to be cycled ON and OFF to meet heating and/or cooling loads during occupied hours as applicable. Note that per the RMD the fan associated with",
         "standard": {
             "rule_id": "19-33",
             "ruleset_reference": "Table G3.1 Section 4 Exception #1",
             "rule_description": "Where no heating and/or cooling system is to be installed, and a heating or cooling system is being simulated only to meet the requirements described in this table, heating and/or cooling system fans shall not be simulated as running continuously during occupied hours but shall be cycled ON and OFF to meet heating and cooling loads during all hours in the proposed design. \n",
-            "applicable_rmr": "User RMR",
+            "applicable_rmd": "User RMD",
             "rule_assertion": "=",
-            "comparison_value": "Proposed RMR",
+            "comparison_value": "Proposed RMD",
             "primary_rule": "Applicability",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "user": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -331,19 +333,19 @@
         "Section": 19,
         "Rule": 33,
         "Test": "c",
-        "test_description": "The project has one building segment with one zone. Project contains the DIRECT_EXPANSION cooling system type served by a baseline system 1. The heating and cooling system types are left as they are. Expected outcome: NOT_APPLICABLE",
+        "test_description": "The project has one building segment with one zone. The zone has a heating and cooling system in the user model.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "19-33",
             "ruleset_reference": "Table G3.1 Section 4 Exception #1",
             "rule_description": "Where no heating and/or cooling system is to be installed, and a heating or cooling system is being simulated only to meet the requirements described in this table, heating and/or cooling system fans shall not be simulated as running continuously during occupied hours but shall be cycled ON and OFF to meet heating and cooling loads during all hours in the proposed design. \n",
-            "applicable_rmr": "User RMR",
+            "applicable_rmd": "User RMD",
             "rule_assertion": "=",
-            "comparison_value": "Proposed RMR",
+            "comparison_value": "Proposed RMD",
             "primary_rule": "Applicability",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "user": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",

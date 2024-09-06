@@ -72,7 +72,7 @@ class SchemaEnums:
         }
 
 
-# Convert the enumerations as dictionaries to classess for easier access
+# Convert the enumerations as dictionaries to classes for easier access
 
 
 def print_schema_enums():
