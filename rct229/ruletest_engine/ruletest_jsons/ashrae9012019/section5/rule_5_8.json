@@ -3,7 +3,7 @@
         "Section": 5,
         "Rule": 8,
         "Test": "a",
-        "test_description": "Project has one building segment with an above-grade wall surface. Building is located in climate zone 4A and includes a space that has residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline above-grade wall U-factor for the zone is established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment with an above-grade wall surface. The project includes a space that has residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline above-grade wall U-factor for the zone is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-8",
@@ -15,7 +15,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "weather": {
@@ -92,7 +92,7 @@
         "Section": 5,
         "Rule": 8,
         "Test": "b",
-        "test_description": "Project has one building segment with an above-grade wall surface. Building is located in climate zone 4A and includes a space that has residential occupancy type and is conditioned based on cooling capacity of the HVAC system that serves the parent zone. The baseline above-grade wall U-factor for the zone is established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment with an above-grade wall surface. The project includes a space that has residential occupancy type and is conditioned based on cooling capacity of the HVAC system that serves the parent zone. The baseline above-grade wall U-factor for the zone is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-8",
@@ -104,7 +104,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "weather": {
@@ -181,7 +181,7 @@
         "Section": 5,
         "Rule": 8,
         "Test": "c",
-        "test_description": "Project has one building segment with an above-grade wall surface. Building is located in climate zone 4A and includes a space that has residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline above-grade wall U-factor for the zone is not established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment with an above-grade wall surface. The project includes a space that has residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline above-grade wall U-factor for the zone is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-8",
@@ -193,7 +193,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "weather": {
@@ -270,7 +270,7 @@
         "Section": 5,
         "Rule": 8,
         "Test": "d",
-        "test_description": "Project has one building segment with an above-grade wall surface. Building is located in climate zone 4A and includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline above-grade wall U-factor for the zone is established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment with an above-grade wall surface. The project includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline above-grade wall U-factor for the zone is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-8",
@@ -282,7 +282,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "weather": {
@@ -359,7 +359,7 @@
         "Section": 5,
         "Rule": 8,
         "Test": "e",
-        "test_description": "Project has one building segment with an above-grade wall surface. Building is located in climate zone 4A and includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline above-grade wall U-factor for the zone is not established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment with an above-grade wall surface. The project includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline above-grade wall U-factor for the zone is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-8",
@@ -371,7 +371,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "weather": {
@@ -448,7 +448,7 @@
         "Section": 5,
         "Rule": 8,
         "Test": "f",
-        "test_description": "Project has one building segment with an above-grade wall surface. A zone is semiheated based on heating and cooling capacity of the HVAC system that serves the parent zone. Building is located in climate zone 4A. The baseline above-grade wall U-factor for the zone is established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment with an above-grade wall surface. The project includes a space that is semiheated based on heating and cooling capacity of the HVAC system that serves the parent zone. The baseline above-grade wall U-factor for the zone is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-8",
@@ -460,7 +460,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "weather": {
@@ -538,7 +538,7 @@
         "Section": 5,
         "Rule": 8,
         "Test": "g",
-        "test_description": "Project has one building segment with an above-grade wall surface. A zone is semiheated based on heating and cooling capacity of the HVAC system that serves the parent zone. Building is located in climate zone 4A. The baseline above-grade wall U-factor for the zone is not established correctly.",
+        "test_description": "Project located in climate zone 4A has one building segment with an above-grade wall surface. The project includes a space that is semiheated based on heating and cooling capacity of the HVAC system that serves the parent zone. The baseline above-grade wall U-factor for the zone is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-8",
@@ -550,7 +550,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "weather": {
@@ -628,7 +628,7 @@
         "Section": 5,
         "Rule": 8,
         "Test": "h",
-        "test_description": "Project has one building segment with an above-grade wall surface. Building is located in climate zone 8 and includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline above-grade wall U-factor for the zone is established correctly.",
+        "test_description": "Project located in climate zone 8 has one building segment with an above-grade wall surface. The project includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline above-grade wall U-factor for the zone is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-8",
@@ -640,7 +640,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "weather": {
@@ -718,7 +718,7 @@
         "Section": 5,
         "Rule": 8,
         "Test": "i",
-        "test_description": "Project has one building segment with an above-grade wall surface. Building is located in climate zone 8 and includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline above-grade wall U-factor for the zone is not established correctly.",
+        "test_description": "Project located in climate zone 8 has one building segment with an above-grade wall surface. The project includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline above-grade wall U-factor for the zone is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-8",
@@ -730,7 +730,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "weather": {

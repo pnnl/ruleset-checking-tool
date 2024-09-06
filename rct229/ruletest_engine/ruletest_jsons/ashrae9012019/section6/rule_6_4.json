@@ -3,8 +3,9 @@
         "Section": 6,
         "Rule": 4,
         "Test": "a",
-        "test_description": "Project has one building segment with one zone and one space. The lighting system is as-designed or as-existing but the lighting space type has not been specified in the baseline ruleset project description. The lighting power density in the baseline ruleset project description cannot be verified. Expected result: FAIL",
+        "test_description": "Project has one building segment with one zone and one space. The lighting system is as-designed or as-existing but the lighting space type has not been specified in the baseline ruleset project description. The lighting power density in the baseline ruleset project description cannot be verified.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "P_RMD lighting status type is as-designed or as-existing. But lighting space type in B_RMD is not specified.",
         "standard": {
             "rule_id": "6-4",
             "ruleset_reference": "Table G3.1(6) Baseline Building Performance",
@@ -16,7 +17,7 @@
             "mandatory_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -114,7 +115,7 @@
         "Section": 6,
         "Rule": 4,
         "Test": "b",
-        "test_description": "Project has one building segment with one zone and one space. The lighting system is as-designed or as-existing and the lighting space type has been specified in the baseline ruleset project description. The lighting power density in the baseline ruleset project description is equal to the value specified in Standard 90.1-2019 Table G3.7 for the specified lighting space type. Expected result: PASS",
+        "test_description": "Project has one building segment with one zone and one space. The lighting system is as-designed or as-existing and the lighting space type has been specified in the baseline ruleset project description. The lighting power density in the baseline ruleset project description is equal to the value specified in Standard 90.1-2019 Table G3.7 for the specified lighting space type.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "6-4",
@@ -127,7 +128,7 @@
             "mandatory_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -226,7 +227,7 @@
         "Section": 6,
         "Rule": 4,
         "Test": "c",
-        "test_description": "Project has one building segment with one zone and one space. The lighting system is as-designed or as-existing and the lighting space type has been specified in the baseline ruleset project description. The lighting power density in the baseline ruleset project description is not equal to the value specified in Standard 90.1-2019 Table G3.7 for the specified lighting space type. Expected result: FAIL",
+        "test_description": "Project has one building segment with one zone and one space. The lighting system is as-designed or as-existing and the lighting space type has been specified in the baseline ruleset project description. The lighting power density in the baseline ruleset project description is not equal to the value specified in Standard 90.1-2019 Table G3.7 for the specified lighting space type.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "6-4",
@@ -239,7 +240,7 @@
             "mandatory_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -338,7 +339,7 @@
         "Section": 6,
         "Rule": 4,
         "Test": "d",
-        "test_description": "Project has one building segment with one zone and one space. The lighting system is not-yet-designed and the lighting space type has not been specified in the baseline ruleset project description. The lighting power density in the baseline ruleset project description is equal to the value specified in Standard 90.1-2019 Table G3.7 for the lighting systems not-yet-designed. Expected result: PASS",
+        "test_description": "Project has one building segment with one zone and one space. The lighting system is not-yet-designed and the lighting space type has not been specified in the baseline ruleset project description. The lighting power density in the baseline ruleset project description is equal to the value specified in Standard 90.1-2019 Table G3.7 for the lighting systems not-yet-designed.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "6-4",
@@ -351,7 +352,7 @@
             "mandatory_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -448,8 +449,9 @@
         "Section": 6,
         "Rule": 4,
         "Test": "e",
-        "test_description": "Project has one building segment with one zone and one space. The lighting system is not-yet-designed and the lighting space type has not been specified in the baseline ruleset project description. The lighting power density in the baseline ruleset project description is not equal to the value specified in Standard 90.1-2019 Table G3.7 for the lighting systems not-yet-designed.  Expected result: FAIL",
+        "test_description": "Project has one building segment with one zone and one space. The lighting system is not-yet-designed and the lighting space type has not been specified in the baseline ruleset project description. The lighting power density in the baseline ruleset project description is not equal to the value specified in Standard 90.1-2019 Table G3.7 for the lighting systems not-yet-designed.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "P_RMD lighting status type is as-designed or as-existing. But lighting space type in B_RMD is not specified.",
         "standard": {
             "rule_id": "6-4",
             "ruleset_reference": "Table G3.1(6) Baseline Building Performance",
@@ -461,7 +463,7 @@
             "mandatory_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",

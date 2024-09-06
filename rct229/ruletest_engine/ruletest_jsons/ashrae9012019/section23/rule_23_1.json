@@ -3,7 +3,7 @@
         "Section": 23,
         "Rule": 1,
         "Test": "a",
-        "test_description": "The project has one building segment with one zone served by baseline system 2 with a heatpump low shut off of less than 17 F. The expected result is: pass",
+        "test_description": "The project has one building segment with one zone served by baseline system 2.  with a heat pump low shut off of less than 17 F.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "23-1",
@@ -14,9 +14,9 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "none",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -82,7 +82,7 @@
         "Section": 23,
         "Rule": 1,
         "Test": "b",
-        "test_description": "The project has one building segment with one zone served by baseline system 2 with a heatpump low shut off greater than 25 F. The expected result is: fail",
+        "test_description": "The project has one building segment with one zone served by baseline system 2 with a heat pump low shut off greater than 25 F. The expected result is: fail",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "23-1",
@@ -93,9 +93,9 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "none",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -161,7 +161,7 @@
         "Section": 23,
         "Rule": 1,
         "Test": "c",
-        "test_description": "The project has one building segment with one zone served by baseline system 2 with a heatpump low shut off between 17 F and 25 F. The expected result is: undetermined",
+        "test_description": "The project has one building segment with one zone served by baseline system 2 with a heat pump low shut off between 17 F and 25 F. The expected result is: undetermined",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "23-1",
@@ -172,9 +172,9 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "none",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -251,9 +251,9 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "none",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -335,9 +335,9 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "none",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",

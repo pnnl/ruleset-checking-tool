@@ -3,7 +3,7 @@
         "Section": 21,
         "Rule": 9,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones.  Baseline ruleset project description utilizes system 7 with total pump power per flow rate correctly set to 19 W/gpm.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The hot water loop pump power is 19 W/gpm.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-9",
@@ -15,7 +15,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -151,7 +151,7 @@
         "Section": 21,
         "Rule": 9,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones.  Baseline ruleset project description utilizes system 7 with total pump power per flow rate incorrectly set to 21 W/gpm. Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The hot water loop pump power is 21 W/gpm.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-9",
@@ -163,7 +163,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -299,7 +299,7 @@
         "Section": 21,
         "Rule": 9,
         "Test": "c",
-        "test_description": "The project has one building segment with one zone.  Baseline ruleset project description utilizes system 1a with total pump power per flow rate correctly set to 19 W/gpm.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 1 with a hot water loop. The hot water loop pump power is 19 W/gpm.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-9",
@@ -311,7 +311,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -395,7 +395,7 @@
         "Section": 21,
         "Rule": 9,
         "Test": "d",
-        "test_description": "The project has one building segment with one zone.  Baseline ruleset project description utilizes system 1a with total pump power per flow rate incorrectly set to 21 W/gpm. Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 1 with a hot water loop. The hot water loop pump power is 21 W/gpm.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-9",
@@ -407,7 +407,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -491,7 +491,7 @@
         "Section": 21,
         "Rule": 9,
         "Test": "e",
-        "test_description": "The project has one building segment with one zone.  Baseline ruleset project description utilizes system 1b. Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 1 with a purchased hot water loop.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-9",
@@ -503,7 +503,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",

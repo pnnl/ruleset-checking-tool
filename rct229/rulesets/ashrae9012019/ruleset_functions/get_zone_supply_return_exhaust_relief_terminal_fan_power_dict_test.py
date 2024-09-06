@@ -219,17 +219,17 @@ TEST_RMD = {
     "type": "BASELINE_0",
 }
 
-TEST_RMD_FULL = {
+TEST_RPD_FULL = {
     "id": "229",
     "ruleset_model_descriptions": [TEST_RMD],
     "data_timestamp": "2024-02-12T09:00Z",
 }
 
-TEST_RMI = quantify_rmd(TEST_RMD_FULL)["ruleset_model_descriptions"][0]
+TEST_RMD = quantify_rmd(TEST_RPD_FULL)["ruleset_model_descriptions"][0]
 
 
-def test__TEST_RMD__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RMD_FULL)
+def test__TEST_RPD__is_valid():
+    schema_validation_result = schema_validate_rmd(TEST_RPD_FULL)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
@@ -237,7 +237,7 @@ def test__TEST_RMD__is_valid():
 
 def test__get_zone_supply_return_exhaust_relief_terminal_fan_power_dict_one_zone_one_terminal_success():
     zone_supply_return_exhaust_relief_terminal_fan_power_dict = (
-        get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(TEST_RMI)
+        get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(TEST_RMD)
     )
     # check supply fans
     assert (
@@ -278,7 +278,7 @@ def test__get_zone_supply_return_exhaust_relief_terminal_fan_power_dict_one_zone
 
 def test__get_zone_supply_return_exhaust_relief_terminal_fan_power_dict_two_zone_one_terminal_success():
     zone_supply_return_exhaust_relief_terminal_fan_power_dict = (
-        get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(TEST_RMI)
+        get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(TEST_RMD)
     )
     # check supply fans
     assert (
@@ -353,7 +353,7 @@ def test__get_zone_supply_return_exhaust_relief_terminal_fan_power_dict_two_zone
 
 def test__get_zone_supply_return_exhaust_relief_terminal_fan_power_dict_no_central_fan_success():
     zone_supply_return_exhaust_relief_terminal_fan_power_dict = (
-        get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(TEST_RMI)
+        get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(TEST_RMD)
     )
     assert (
         zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 4"][

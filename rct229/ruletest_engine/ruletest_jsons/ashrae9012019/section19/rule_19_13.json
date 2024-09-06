@@ -3,19 +3,19 @@
         "Section": 19,
         "Rule": 13,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones. Baseline system type 7, supply-air-to-room temperature set-point difference of 20F, required ventilation or makeup air does not exceed. Airflow rate is correctly sized from temperature difference. Expected outcome: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with one terminal in each zone. The system minimum outdoor airflow does not exceed the sum of the terminal primary airflow and terminal supply-air-to-room-air temperature difference is 20F.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-13",
             "ruleset_reference": "G3.1.2.8.1 and Exception 1",
             "rule_description": "For baseline system types 1-8 and 11-13, system design supply airflow rates shall be based on a supply-air-to-room temperature set-point difference of 20\u00b0F or the minimum outdoor airflow rate, or the airflow rate required to comply with applicable codes or accreditation standards, whichever is greater. For systems with multiple zone thermostat setpoints, use the design set point that will result in the lowest supply air cooling set point or highest supply air heating set point. \nExceptions:\n1. For baseline systems serving laboratory spaces, airflow rate shall be based on a supply-air-to-room temperature set-point difference of 17\u00b0F or the required ventilation air or makeup air, whichever is greater.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -313,19 +313,19 @@
         "Section": 19,
         "Rule": 13,
         "Test": "b",
-        "test_description": "The project has one building segment with one zone. Baseline system type 11, serving lab space, supply-air-to-room temperature set-point difference of 17F, required ventilation or makeup air does not exceed. Airflow rate is correctly sized from temperature difference. Expected outcome: PASS",
+        "test_description": "The project has one building segment with one zone with laboratory space served by a baseline system type 11. The system minimum outdoor airflow does not exceed the sum of the terminal primary airflow and terminal supply-air-to-room-air temperature difference is 17F.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-13",
             "ruleset_reference": "G3.1.2.8.1 and Exception 1",
             "rule_description": "For baseline system types 1-8 and 11-13, system design supply airflow rates shall be based on a supply-air-to-room temperature set-point difference of 20\u00b0F or the minimum outdoor airflow rate, or the airflow rate required to comply with applicable codes or accreditation standards, whichever is greater. For systems with multiple zone thermostat setpoints, use the design set point that will result in the lowest supply air cooling set point or highest supply air heating set point. \nExceptions:\n1. For baseline systems serving laboratory spaces, airflow rate shall be based on a supply-air-to-room temperature set-point difference of 17\u00b0F or the required ventilation air or makeup air, whichever is greater.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -543,19 +543,19 @@
         "Section": 19,
         "Rule": 13,
         "Test": "c",
-        "test_description": "The project has one building segment with two zones. Baseline system type 7, supply-air-to-room temperature set-point difference of 20F, required ventilation exceeds sizing based on temperature difference. Airflow rate incorrectly based on temperature difference instead of required ventilation. Expected outcome: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7. The sytem minimum outdoor airflow exceeds the sum of the terminal primary airflow and terminal suppy-air-to-room-air temperature difference is 20F.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-13",
             "ruleset_reference": "G3.1.2.8.1 and Exception 1",
             "rule_description": "For baseline system types 1-8 and 11-13, system design supply airflow rates shall be based on a supply-air-to-room temperature set-point difference of 20\u00b0F or the minimum outdoor airflow rate, or the airflow rate required to comply with applicable codes or accreditation standards, whichever is greater. For systems with multiple zone thermostat setpoints, use the design set point that will result in the lowest supply air cooling set point or highest supply air heating set point. \nExceptions:\n1. For baseline systems serving laboratory spaces, airflow rate shall be based on a supply-air-to-room temperature set-point difference of 17\u00b0F or the required ventilation air or makeup air, whichever is greater.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -853,19 +853,19 @@
         "Section": 19,
         "Rule": 13,
         "Test": "d",
-        "test_description": "The project has one building segment with one zone. Baseline system type 11, serving lab space, supply-air-to-room temperature set-point difference of 20F, required ventilation or makeup air does not exceed sizing. Airflow rate is sized from the incorrect temperature difference. Expected outcome: FAIL",
+        "test_description": "The project has one building segment with one zone with laboratory space served by a baseline system type 11. The system minimum outdoor airflow does not exceed the sum of the terminal primary airflow and terminal supply-air-to-room-air temperature difference is 20F.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-13",
             "ruleset_reference": "G3.1.2.8.1 and Exception 1",
             "rule_description": "For baseline system types 1-8 and 11-13, system design supply airflow rates shall be based on a supply-air-to-room temperature set-point difference of 20\u00b0F or the minimum outdoor airflow rate, or the airflow rate required to comply with applicable codes or accreditation standards, whichever is greater. For systems with multiple zone thermostat setpoints, use the design set point that will result in the lowest supply air cooling set point or highest supply air heating set point. \nExceptions:\n1. For baseline systems serving laboratory spaces, airflow rate shall be based on a supply-air-to-room temperature set-point difference of 17\u00b0F or the required ventilation air or makeup air, whichever is greater.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -1083,19 +1083,20 @@
         "Section": 19,
         "Rule": 13,
         "Test": "e",
-        "test_description": "The project has one building segment with two zones. Baseline system type 7, supply-air-to-room temperature set-point difference of 15F. The sum of zone terminal primary airflow from zones served by the system is identical to the corresponding sum of terminal primary flow in the proposed model. Expected outcome: UNDETERMINED",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7. The terminal supply-air-to-room-air temperature difference is 15F and the sum of the terminal primary airflow in the baseline is identical to the corresponding sum of terminal primary flow in the proposed model.",
         "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "was not modeled based on a supply-air-to-room temperature set-point difference of 20\u00b0F (or 17\u00b0F, if lab). The baseline and proposed supply airflow was modeled identically at ",
         "standard": {
             "rule_id": "19-13",
             "ruleset_reference": "G3.1.2.8.1 and Exception 1",
             "rule_description": "For baseline system types 1-8 and 11-13, system design supply airflow rates shall be based on a supply-air-to-room temperature set-point difference of 20\u00b0F or the minimum outdoor airflow rate, or the airflow rate required to comply with applicable codes or accreditation standards, whichever is greater. For systems with multiple zone thermostat setpoints, use the design set point that will result in the lowest supply air cooling set point or highest supply air heating set point. \nExceptions:\n1. For baseline systems serving laboratory spaces, airflow rate shall be based on a supply-air-to-room temperature set-point difference of 17\u00b0F or the required ventilation air or makeup air, whichever is greater.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",

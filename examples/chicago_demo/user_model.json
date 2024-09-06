@@ -4940,7 +4940,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "lighting_building_area_type": "OFFICE"
             }
           ],
           "exterior_lighting": [
@@ -101406,7 +101407,30 @@
           "hourly_heating_design_day": [],
           "hourly_cooling_design_day": []
         }
-      ]
+      ],
+      "output": {
+        "id": "Proposed Output",
+        "reporting_name": "Simulation Output",
+        "output_instance": {
+          "id": "Outputs",
+          "ruleset_model_type": "PROPOSED",
+          "rotation_angle": 0,
+          "unmet_load_hours": 352.34,
+          "unmet_load_hours_heating": 152.67,
+          "unmet_occupied_load_hours_heating": 75.33,
+          "unmet_load_hours_cooling": 2.50,
+          "unmet_occupied_load_hours_cooling": 199.67,
+          "building_peak_cooling_load": 2620298.85
+        },
+        "total_area_weighted_building_performance_factor": 0.51,
+        "performance_cost_index_target": 0.89,
+        "performance_cost_index": 0.89,
+        "total_proposed_building_energy_cost_including_renewable_energy": 225477.24,
+        "total_proposed_building_energy_cost_excluding_renewable_energy": 243332.63,
+        "baseline_building_performance_energy_cost": 253345.21,
+        "baseline_building_unregulated_energy_cost": 14453.34,
+        "baseline_building_regulated_energy_cost": 334178.98
+      }
     }
   ],
   "weather": {
