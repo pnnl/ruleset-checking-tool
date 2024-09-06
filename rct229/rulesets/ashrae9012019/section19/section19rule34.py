@@ -4,7 +4,7 @@ from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedB
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_zone_list_w_area_dict import (
-    get_hvac_zone_list_w_area_by_rmi_dict,
+    get_hvac_zone_list_w_area_by_rmd_dict,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_list_hvac_systems_associated_with_zone import (
     get_list_hvac_systems_associated_with_zone,
@@ -57,7 +57,7 @@ class Section19Rule34(RuleDefinitionListIndexedBase):
             )
         )
 
-        hvac_sys_zones_served_dict_p = get_hvac_zone_list_w_area_by_rmi_dict(rmd_p)
+        hvac_sys_zones_served_dict_p = get_hvac_zone_list_w_area_by_rmd_dict(rmd_p)
 
         zones_virtual_heating_cooling_list = list(
             set(
@@ -112,8 +112,8 @@ class Section19Rule34(RuleDefinitionListIndexedBase):
             )
 
             return (
-                f"t appears that {hvac_id_b} is only being simulated in the P_RMI to meet the requirements described in Section G3.1-10 HVAC Systems proposed column c and d for heating and/or cooling. "
+                f"It appears that {hvac_id_b} is only being simulated in the proposed model to meet the requirements described in Section G3.1-10 HVAC Systems proposed column c and d for heating and/or cooling. "
                 f"Check that the hvac system fan is simulated to be cycled ON and OFF to meet heating and/or cooling loads during occupied hours as applicable. "
-                f"Note that per the RMD the fan associated with {hvac_id_b} is operating as {operation_during_occupied_b} during occupied hours. "
+                f"Note that per the RMD, the fan associated with {hvac_id_b} is operating as {operation_during_occupied_b} during occupied hours. "
                 f"This may require further investigation if only heating or cooling is being simulated to meet Section G3.1-10 HVAC Systems proposed column c or d because different fan operation will be required depending on whether the system is operating in heating or cooling mode."
             )

@@ -296,6 +296,6 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
                 not more_than_one_supply_fan_b
                 and fan_power_per_flow_b < REQ_FAN_POWER_FLOW_RATIO
             ):
-                fail_msg = f"ule evaluation fails with a conservative outcome. The fan power airflow (W/cfm) for {hvac_id_b} is modeled as {fan_power_per_flow_b.magnitude} W/cfm which is less than the expected W/cfm."
+                fail_msg = f"Rule evaluation fails with a conservative outcome. The fan power airflow (W/cfm) for {hvac_id_b} is modeled as {fan_power_per_flow_b.magnitude} W/cfm which is less than the expected W/cfm."
 
             return fail_msg
