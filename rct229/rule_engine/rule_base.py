@@ -324,7 +324,7 @@ class RuleDefinitionBase:
         -------
         RulesetModelTypes or str
             The return value from self._get_context() when the context exists
-            in each RMD for which the correponding self.rmds_used flag is set;
+            in each RMD for which the corresponding self.rmds_used flag is set;
             otherwise retrns a string such as "MISSING_BASELINE" that indicates all
             the RMDs that are missing.
         """

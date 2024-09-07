@@ -149,7 +149,7 @@ class Section21Rule5(RuleDefinitionListIndexedBase):
                         ZERO.AREA,
                     )
 
-            num_boilers = len(find_all(".boilers[*]", rmd_b))
+            num_boilers = len(find_all("$.boilers[*]", rmd_b))
             boiler_capacity_list = [
                 CalcQ("capacity", getattr_(boiler, "boiler", "rated_capacity"))
                 for boiler in find_all("$.boilers[*]", rmd_b)
