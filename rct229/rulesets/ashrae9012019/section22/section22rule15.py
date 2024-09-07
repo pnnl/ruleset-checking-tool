@@ -49,6 +49,12 @@ class Section22Rule15(RuleDefinitionListIndexedBase):
                 required_fields={
                     "$": ["approach", "loop", "design_wetbulb_temperature"],
                 },
+                precision={
+                    "approach_b": {
+                        "precision": 1,
+                        "unit": "K",
+                    },
+                },
             )
 
         def is_applicable(self, context, data=None):
@@ -78,4 +84,6 @@ class Section22Rule15(RuleDefinitionListIndexedBase):
             approach_b = calc_vals["approach_b"]
             target_approach_b = calc_vals["target_approach_b"]
 
-            return std_equal(target_approach_b.to(ureg.kelvin), approach_b)
+            return self.precision_comparison["approach_b"](
+                target_approach_b.to(ureg.kelvin), approach_b
+            )

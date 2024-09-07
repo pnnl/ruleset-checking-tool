@@ -71,6 +71,12 @@ class Section22Rule14(RuleDefinitionListIndexedBase):
                 required_fields={
                     "$": ["range"],
                 },
+                precision={
+                    "heat_rejection_range": {
+                        "precision": 1,
+                        "unit": "K",
+                    },
+                },
             )
 
         def get_calc_vals(self, context, data=None):
@@ -95,7 +101,8 @@ class Section22Rule14(RuleDefinitionListIndexedBase):
         def is_tolerance_fail(self, context, calc_vals=None, data=None):
             heat_rejection_range = calc_vals["heat_rejection_range"]
             required_heat_rejection_range = calc_vals["required_heat_rejection_range"]
-            return std_equal(
+
+            return self.precision_comparison["heat_rejection_range"](
                 heat_rejection_range.to(ureg.kelvin),
                 required_heat_rejection_range.to(ureg.kelvin),
             )

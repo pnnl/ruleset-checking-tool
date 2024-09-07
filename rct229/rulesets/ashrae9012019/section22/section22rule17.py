@@ -54,6 +54,12 @@ class Section22Rule17(RuleDefinitionListIndexedBase):
                 required_fields={
                     "$": ["loop", "rated_water_flowrate"],
                 },
+                precision={
+                    "heat_rejection_efficiency_b": {
+                        "precision": 0.1,
+                        "unit": "gpm/hp",
+                    },
+                },
             )
 
         def is_applicable(self, context, data=None):

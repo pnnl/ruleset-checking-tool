@@ -82,6 +82,12 @@ class Section22Rule20(RuleDefinitionListIndexedBase):
                 required_fields={
                     "$": ["leaving_water_setpoint_temperature"],
                 },
+                precision={
+                    "tower_leaving_temperature_b": {
+                        "precision": 1,
+                        "unit": "K",
+                    },
+                },
             )
 
         def get_calc_vals(self, context, data=None):
@@ -117,7 +123,8 @@ class Section22Rule20(RuleDefinitionListIndexedBase):
             leaving_water_setpoint_temperature_b = calc_vals[
                 "leaving_water_setpoint_temperature_b"
             ]
-            return std_equal(
+
+            return self.precision_comparison["tower_leaving_temperature_b"](
                 tower_leaving_temperature_b.to(ureg.kelvin),
                 leaving_water_setpoint_temperature_b.to(ureg.kelvin),
             )
