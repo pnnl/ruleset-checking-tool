@@ -56,6 +56,24 @@ class Section19Rule20(RuleDefinitionListIndexedBase):
                 required_fields={
                     "$": ["fan_system"],
                 },
+                precision={
+                    "hvac_sys_total_supply_fan_power_b": {
+                        "precision": 10,
+                        "unit": "W",
+                    },
+                    "hvac_sys_total_return_fan_power_b": {
+                        "precision": 10,
+                        "unit": "W",
+                    },
+                    "hvac_sys_total_exhaust_fan_power_b": {
+                        "precision": 10,
+                        "unit": "W",
+                    },
+                    "hvac_sys_total_relief_fan_power_b": {
+                        "precision": 10,
+                        "unit": "W",
+                    },
+                },
             )
 
         def get_calc_vals(self, context, data=None):
@@ -188,13 +206,22 @@ class Section19Rule20(RuleDefinitionListIndexedBase):
                 "expected_baseline_fan_power_relief"
             ]
             return (
-                hvac_sys_total_supply_fan_power_b == expected_baseline_fan_power_supply
-                and hvac_sys_total_return_fan_power_b
-                == expected_baseline_fan_power_return
-                and hvac_sys_total_exhaust_fan_power_b
-                == expected_baseline_fan_power_exhaust
-                and hvac_sys_total_relief_fan_power_b
-                == expected_baseline_fan_power_relief
+                self.precision_comparison["hvac_sys_total_supply_fan_power_b"](
+                    hvac_sys_total_supply_fan_power_b,
+                    expected_baseline_fan_power_supply,
+                )
+                and self.precision_comparison["hvac_sys_total_supply_fan_power_b"](
+                    hvac_sys_total_return_fan_power_b,
+                    expected_baseline_fan_power_return,
+                )
+                and self.precision_comparison["hvac_sys_total_exhaust_fan_power_b"](
+                    hvac_sys_total_exhaust_fan_power_b,
+                    expected_baseline_fan_power_exhaust,
+                )
+                and self.precision_comparison["hvac_sys_total_relief_fan_power_b"](
+                    hvac_sys_total_relief_fan_power_b,
+                    expected_baseline_fan_power_relief,
+                )
             )
 
         def is_tolerance_fail(self, context, calc_vals=None, data=None):

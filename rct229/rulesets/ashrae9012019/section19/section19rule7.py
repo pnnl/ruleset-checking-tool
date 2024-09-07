@@ -172,6 +172,12 @@ class Section19Rule7(RuleDefinitionListIndexedBase):
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
+                precision={
+                    "aggregated_min_OA_schedule_across_zones_b": {
+                        "precision": 1,
+                        "unit": "cfm",
+                    },
+                },
             )
 
         def is_applicable(self, context, data=None):
@@ -203,9 +209,11 @@ class Section19Rule7(RuleDefinitionListIndexedBase):
                 "zone_air_distribution_effectiveness_greater_than_1"
             ]
 
-            OA_CFM_schedule_match = (
-                aggregated_min_OA_schedule_across_zones_b
-                == aggregated_min_OA_schedule_across_zones_p
+            OA_CFM_schedule_match = self.precision_comparison[
+                "aggregated_min_OA_schedule_across_zones_b"
+            ](
+                aggregated_min_OA_schedule_across_zones_b,
+                aggregated_min_OA_schedule_across_zones_p,
             )
 
             modeled_baseline_total_zone_min_OA_CFM = sum(

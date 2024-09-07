@@ -154,13 +154,17 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
                                 "all_design_setpoints_delta_Ts_are_per_reqs"
                             ] = all(
                                 [
-                                    std_equal(
-                                        LABORATORY_TEMP_DELTA,
+                                    self.precision_comparison[
+                                        "delta_supply_and_design_heating_temp"
+                                    ](
                                         delta_supply_and_design_heating_temp,
-                                    ),
-                                    std_equal(
                                         LABORATORY_TEMP_DELTA,
+                                    ),
+                                    self.precision_comparison[
+                                        "delta_supply_and_design_cooling_temp"
+                                    ](
                                         delta_supply_and_design_cooling_temp,
+                                        LABORATORY_TEMP_DELTA,
                                     ),
                                 ]
                             )
@@ -169,13 +173,17 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
                                 "all_design_setpoints_delta_Ts_are_per_reqs"
                             ] = all(
                                 [
-                                    std_equal(
-                                        GENERAL_TEMP_DELTA,
+                                    self.precision_comparison[
+                                        "delta_supply_and_design_heating_temp"
+                                    ](
                                         delta_supply_and_design_heating_temp,
-                                    ),
-                                    std_equal(
                                         GENERAL_TEMP_DELTA,
+                                    ),
+                                    self.precision_comparison[
+                                        "delta_supply_and_design_cooling_temp"
+                                    ](
                                         delta_supply_and_design_cooling_temp,
+                                        GENERAL_TEMP_DELTA,
                                     ),
                                 ]
                             )
@@ -210,6 +218,20 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
                 required_fields={
                     "$": ["fan_system"],
                     "fan_system": ["minimum_outdoor_airflow"],
+                },
+                precision={
+                    "delta_supply_and_design_heating_temp": {
+                        "precision": 1,
+                        "unit": "K",
+                    },
+                    "delta_supply_and_design_cooling_temp": {
+                        "precision": 1,
+                        "unit": "K",
+                    },
+                    "supply_fans_airflow_b": {
+                        "precision": 1,
+                        "unit": "cfm",
+                    },
                 },
             )
 
