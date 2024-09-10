@@ -1,4 +1,6 @@
-from rct229.rule_engine.rule_base import RuleDefinitionBase
+from typing import Mapping
+
+from rct229.rule_engine.rule_base import RCTPrecision, RuleDefinitionBase
 
 
 class PartialRuleDefinition(RuleDefinitionBase):
@@ -14,6 +16,7 @@ class PartialRuleDefinition(RuleDefinitionBase):
         required_fields=None,
         manual_check_required_msg="",
         not_applicable_msg="",
+        precision: Mapping[str, RCTPrecision] = None,
     ):
         """Base class for all Partial Rule definitions (secondary)
 

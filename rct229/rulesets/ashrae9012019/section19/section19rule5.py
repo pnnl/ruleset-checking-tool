@@ -71,7 +71,7 @@ class Section19Rule5(RuleDefinitionBase):
         return (
             coincident_unmet_load_hours_p is not None
             and (
-                coincident_unmet_load_hours_p <= MAX_COINCIDENT_UNMET_LOAD_HOUR
+                coincident_unmet_load_hours_p < MAX_COINCIDENT_UNMET_LOAD_HOUR
                 or self.precision_comparison["coincident_unmet_load_hours_p"](
                     coincident_unmet_load_hours_p,
                     MAX_COINCIDENT_UNMET_LOAD_HOUR,
