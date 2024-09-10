@@ -143,7 +143,9 @@ class Section23Rule1(RuleDefinitionListIndexedBase):
             )
 
         def rule_check(self, context, calc_vals=None, data=None):
-            heatpump_low_shutoff_b = calc_vals["heatpump_low_shutoff_temperature"].to(ureg.kelvin)
+            heatpump_low_shutoff_b = calc_vals["heatpump_low_shutoff_temperature"].to(
+                ureg.kelvin
+            )
             hvac_type_b = calc_vals["hvac_type"]
 
             return (
