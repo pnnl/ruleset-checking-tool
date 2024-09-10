@@ -19,11 +19,11 @@ Data Lookup: None
 
 Logic:
 
-- get the schedule: `hourly_schedule = swh_use.use_multiplier_schedule`
-- get the distribution system: `distribution_system = swh_use.served_by_distribution_system`
+- get the schedule id: `hourly_schedule_id = swh_use.use_multiplier_schedule`
+- get the distribution system id: `distribution_system_id = swh_use.served_by_distribution_system`
 - get the temperature at fixture: `supply_temperature = distribution_system.design_supply_temperature`
 - get the water used: `swh_use_value = swh_use.use`
-- get the inlet water temperature: `inlet_T_sched = distribution_system.entering_water_mains_temperature_schedule`
+- get the inlet water temperature schedule id: `inlet_temperature_schedule_id = distribution_system.entering_water_mains_temperature_schedule`
 - set the drain heat recovery efficiency to 0: `drain_heat_recovery_efficiency = 0`
 - get the drain heat recovery efficiency if heat is recovered by drain: `if(swh_use.is_heat_recovered_by_drain): drain_heat_recovery_efficiency = distribution_system.drain_heat_recovery_efficiency`
 - get the use_units: `use_units = swh_use.use_units`
@@ -61,7 +61,7 @@ Logic:
   - iterate through each hourly value of the hourly_schedule: `for index, hourly_value in enumerate(hourly_schedule):`
     - set volume_this_hour equal to volume_flow_rate * hourly_value: `volume_this_hour = volume_flow_rate * hourly_value`
     - reduce volume_this hour by the recovery efficiency: `volume_this_hour = volume_this_hour * (1-drain_heat_recovery_efficiency)`
-    - calculate the dT for the hour: `dT = supply_temperature - inlet_T_sched[index]`
+    - calculate the dT for the hour: `dT = supply_temperature - inlet_temperature_schedule_id[index]`
     - now calculate the energy use to heat volume (gallons) of water - 1 Btu/lb/°F and 8.34 lb/gal of water: `energy_to_heat_water = volume_this_hour * 8.3452 * dT`
     - add the energy_to_heat_water to energy_required: `energy_required += energy_to_heat_water`
   - set the add this energy_required to energy_required_by_space: `energy_required_by_space[space.id] = energy_required`
@@ -75,7 +75,7 @@ Logic:
     - iterate through each hourly value of the hourly_schedule: `for index, hourly_value in enumerate(hourly_schedule):`
       - set volume_this_hour equal to volume_flow_rate * hourly_value: `volume_this_hour = volume_flow_rate * hourly_value`
       - reduce volume_this hour by the recovery efficiency: `volume_this_hour = volume_this_hour * (1-drain_heat_recovery_efficiency)`
-      - calculate the dT for the hour: `dT = supply_temperature - inlet_T_sched[index]`
+      - calculate the dT for the hour: `dT = supply_temperature - inlet_temperature_schedule_id[index]`
       - now calculate the energy use to heat volume (gallons) of water - 1 Btu/lb/°F and 8.34 lb/gal of water: `energy_to_heat_water = volume_this_hour * 8.3452 * dT`
       - add the energy_to_heat_water to energy_required: `energy_required += energy_to_heat_water`
     - set the add this energy_required to energy_required_by_space: `energy_required_by_space["NO_SPACES_ASSIGNED"] = energy_required`
