@@ -94,15 +94,17 @@ class Section22Rule14(RuleDefinitionListIndexedBase):
         def rule_check(self, context, calc_vals=None, data=None):
             heat_rejection_range = calc_vals["heat_rejection_range"]
             required_heat_rejection_range = calc_vals["required_heat_rejection_range"]
-            return heat_rejection_range.to(
-                ureg.kelvin
-            ) == required_heat_rejection_range.to(ureg.kelvin)
+
+            return self.precision_comparison["heat_rejection_range"](
+                heat_rejection_range.to(ureg.kelvin),
+                required_heat_rejection_range.to(ureg.kelvin),
+            )
 
         def is_tolerance_fail(self, context, calc_vals=None, data=None):
             heat_rejection_range = calc_vals["heat_rejection_range"]
             required_heat_rejection_range = calc_vals["required_heat_rejection_range"]
 
-            return self.precision_comparison["heat_rejection_range"](
+            return std_equal(
                 heat_rejection_range.to(ureg.kelvin),
                 required_heat_rejection_range.to(ureg.kelvin),
             )

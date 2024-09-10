@@ -73,6 +73,12 @@ class Section22Rule30(RuleDefinitionListIndexedBase):
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
+                precision={
+                    "pump_power_per_flow_rate": {
+                        "precision": 1,
+                        "unit": "W/gpm",
+                    },
+                },
             )
 
         def get_calc_vals(self, context, data=None):
@@ -93,7 +99,10 @@ class Section22Rule30(RuleDefinitionListIndexedBase):
             pump_power_per_flow_rate = calc_vals["pump_power_per_flow_rate"]
             required_pump_power = calc_vals["required_pump_power"]
 
-            return pump_power_per_flow_rate == required_pump_power
+            return self.precision_comparison["pump_power_per_flow_rate"](
+                pump_power_per_flow_rate,
+                required_pump_power,
+            )
 
         def is_tolerance_fail(self, context, calc_vals=None, data=None):
             pump_power_per_flow_rate = calc_vals["pump_power_per_flow_rate"]
