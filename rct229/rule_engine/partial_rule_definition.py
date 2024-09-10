@@ -61,6 +61,7 @@ class PartialRuleDefinition(RuleDefinitionBase):
             ruleset_section_title=ruleset_section_title,
             standard_section=standard_section,
             is_primary_rule=is_primary_rule,
+            precision=precision,
         )
 
     def rule_check(self, context, calc_vals=None, data={}):

@@ -116,9 +116,7 @@ class Section22Rule17(RuleDefinitionListIndexedBase):
                 )
             )
             heat_rejection_efficiency_b = calc_vals["heat_rejection_efficiency_b"]
-            heat_rejection_efficiency_in_gpm_per_hp_b = round(
-                heat_rejection_efficiency_b.to(ureg("gpm/hp")).magnitude, 1
-            )
+            heat_rejection_efficiency_in_gpm_per_hp_b = heat_rejection_efficiency_b
 
             if self.precision_comparison["heat_rejection_efficiency_b"](
                 heat_rejection_efficiency_b,
