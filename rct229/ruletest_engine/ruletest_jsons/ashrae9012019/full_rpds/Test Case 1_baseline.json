@@ -547,7 +547,7 @@
                                                     "multiplier_schedule": "Plug Load Schedule",
                                                     "sensible_fraction": 1.0,
                                                     "latent_fraction": 0.0,
-                                                    "power": 7941.8
+                                                    "power": 7947.7
                                                 }
                                             ],
                                             "ventilation_space_type": "OFFICE_BUILDINGS_OFFICE_SPACE",
@@ -796,7 +796,7 @@
                                                     "multiplier_schedule": "Plug Load Schedule",
                                                     "sensible_fraction": 1.0,
                                                     "latent_fraction": 0.0,
-                                                    "power": 1673.4
+                                                    "power": 1674.0
                                                 }
                                             ],
                                             "ventilation_space_type": "OFFICE_BUILDINGS_OFFICE_SPACE",
@@ -1243,7 +1243,7 @@
                                                     "multiplier_schedule": "Plug Load Schedule",
                                                     "sensible_fraction": 1.0,
                                                     "latent_fraction": 0.0,
-                                                    "power": 1673.4
+                                                    "power": 1674.0
                                                 }
                                             ],
                                             "ventilation_space_type": "OFFICE_BUILDINGS_OFFICE_SPACE",
