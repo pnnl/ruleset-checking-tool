@@ -1,3 +1,4 @@
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_spaces_served_by_swh_use import get_spaces_served_by_swh_use
 from rct229.schema.config import ureg
 from rct229.schema.schema_enums import SchemaEnums
 from pint import Quantity
@@ -86,7 +87,6 @@ def get_energy_required_to_heat_swh_use(
         spaces = find_all("$zones[*].spaces[*]", building_segment)
 
     energy_required_by_space = {}
-    # energy_required = 0 * ureg("Btu")
     volume_flow_rate = 0
     for space in spaces:
         if use_units == SERVICE_WATER_HEATING_USE_UNIT.POWER_PER_PERSON:
@@ -114,6 +114,7 @@ def get_energy_required_to_heat_swh_use(
                 swh_use_value
                 * sum(hourly_schedule)
                 * (1 - drain_heat_recovery_efficiency)
+                * ureg("Btu")
             )
 
         elif use_units == SERVICE_WATER_HEATING_USE_UNIT.VOLUME_PER_PERSON:
