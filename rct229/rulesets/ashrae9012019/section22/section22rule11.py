@@ -104,6 +104,12 @@ class Section22Rule11(RuleDefinitionListIndexedBase):
                     required_fields={
                         "$": ["pump_power_per_flow_rate"],
                     },
+                    precision={
+                        "secondary_loop_pump_power_per_flow_rate": {
+                            "precision": 1,
+                            "unit": "W/gpm",
+                        },
+                    },
                 )
 
             def get_calc_vals(self, context, data=None):
@@ -129,7 +135,12 @@ class Section22Rule11(RuleDefinitionListIndexedBase):
                 ]
                 req_pump_flow_rate = calc_vals["req_pump_flow_rate"]
 
-                return secondary_loop_pump_power_per_flow_rate == req_pump_flow_rate
+                return self.precision_comparison[
+                    "secondary_loop_pump_power_per_flow_rate"
+                ](
+                    secondary_loop_pump_power_per_flow_rate,
+                    req_pump_flow_rate,
+                )
 
             def is_tolerance_fail(self, context, calc_vals=None, data=None):
                 secondary_loop_pump_power_per_flow_rate = calc_vals[
