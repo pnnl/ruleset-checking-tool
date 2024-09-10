@@ -76,7 +76,7 @@ class Section21Rule17(RuleDefinitionListIndexedBase):
                     "$": ["rated_capacity", "efficiency_metric", "efficiency"],
                 },
                 precision={
-                    "boiler_efficiency": {
+                    "boiler_efficiency_b": {
                         "precision": 0.01,
                     },
                 },
