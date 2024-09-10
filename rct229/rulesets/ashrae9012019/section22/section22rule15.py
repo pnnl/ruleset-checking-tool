@@ -51,7 +51,7 @@ class Section22Rule15(RuleDefinitionListIndexedBase):
                 },
                 precision={
                     "approach_b": {
-                        "precision": 1,
+                        "precision": 0.1,
                         "unit": "K",
                     },
                 },

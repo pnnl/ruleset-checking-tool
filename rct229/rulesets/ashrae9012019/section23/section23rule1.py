@@ -92,7 +92,7 @@ class Section23Rule1(RuleDefinitionListIndexedBase):
                 },
                 precision={
                     "heatpump_low_shutoff_b": {
-                        "precision": 1,
+                        "precision": 0.1,
                         "unit": "K",
                     },
                 },

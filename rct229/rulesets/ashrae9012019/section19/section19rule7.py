@@ -209,12 +209,17 @@ class Section19Rule7(RuleDefinitionListIndexedBase):
                 "zone_air_distribution_effectiveness_greater_than_1"
             ]
 
-            OA_CFM_schedule_match = all([self.precision_comparison[
-                "aggregated_min_OA_schedule_across_zones_b"
-            ](
-                aggregated_min_OA_schedule_across_zones_b[i],
-                aggregated_min_OA_schedule_across_zones_p[i])
-            for i in range(len(aggregated_min_OA_schedule_across_zones_b))])
+            OA_CFM_schedule_match = all(
+                [
+                    self.precision_comparison[
+                        "aggregated_min_OA_schedule_across_zones_b"
+                    ](
+                        aggregated_min_OA_schedule_across_zones_b[i],
+                        aggregated_min_OA_schedule_across_zones_p[i],
+                    )
+                    for i in range(len(aggregated_min_OA_schedule_across_zones_b))
+                ]
+            )
 
             modeled_baseline_total_zone_min_OA_CFM = sum(
                 aggregated_min_OA_schedule_across_zones_b

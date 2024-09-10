@@ -57,7 +57,7 @@ class Section19Rule12(RuleDefinitionListIndexedBase):
                 },
                 precision={
                     "high_limit_temp_b": {
-                        "precision": 1,
+                        "precision": 0.1,
                         "unit": "K",
                     },
                 },
