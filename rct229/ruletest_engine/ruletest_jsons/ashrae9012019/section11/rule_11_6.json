@@ -38,7 +38,12 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "floor_area": 929.0303999999999
+                                                        "service_water_heating_uses": [
+                                                            {
+                                                                "id": "SHW 1",
+                                                                "served_by_distribution_system": "SHW Distribution 1"
+                                                            }
+                                                        ]
                                                     }
                                                 ]
                                             }
@@ -49,7 +54,7 @@
                         ],
                         "service_water_heating_distribution_systems": [
                             {
-                                "id": "SHW 1",
+                                "id": "SHW Distribution 1",
                                 "service_water_piping": [
                                     {
                                         "id": "SHW Piping 1",
@@ -102,7 +107,13 @@
                                                 "floor_name": "Floor1",
                                                 "spaces": [
                                                     {
-                                                        "id": "Space 1"
+                                                        "id": "Space 1",
+                                                        "service_water_heating_uses": [
+                                                            {
+                                                                "id": "SHW 1",
+                                                                "served_by_distribution_system": "SHW Distribution 1"
+                                                            }
+                                                        ]
                                                     }
                                                 ]
                                             }
@@ -113,7 +124,7 @@
                         ],
                         "service_water_heating_distribution_systems": [
                             {
-                                "id": "SHW 1",
+                                "id": "SHW Distribution 1",
                                 "service_water_piping": [
                                     {
                                         "id": "SHW Piping 1",
