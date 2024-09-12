@@ -1,4 +1,6 @@
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_spaces_served_by_swh_use import get_spaces_served_by_swh_use
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_spaces_served_by_swh_use import (
+    get_spaces_served_by_swh_use,
+)
 from rct229.schema.config import ureg
 from rct229.schema.schema_enums import SchemaEnums
 from pint import Quantity
@@ -36,16 +38,13 @@ def get_energy_required_to_heat_swh_use(
     """
 
     hourly_schedule_id = swh_use.get("use_multiplier_schedule")
-    assert_(
-        hourly_schedule_id is not None, "A service hot water schedule must be provided"
+    hourly_schedule = (
+        find_exactly_one_schedule(rmd, hourly_schedule_id)
+        if hourly_schedule_id is not None
+        else None
     )
-    hourly_schedule = find_exactly_one_schedule(rmd, hourly_schedule_id)
 
-    distribution_system_id = swh_use.get("served_by_distribution_system")
-    assert_(
-        distribution_system_id is not None,
-        "A service water heating use must be served by one distribution system",
-    )
+    distribution_system_id = swh_use.get("served_by_distribution_system", "")
     distribution_system = find_exactly_one_with_field_value(
         "$.service_water_heating_distribution_systems[*]",
         "id",
@@ -64,8 +63,9 @@ def get_energy_required_to_heat_swh_use(
     inlet_temperature_schedule = find_exactly_one_schedule(
         rmd, inlet_temperature_schedule_id
     )
+
     drain_heat_recovery_efficiency = (
-        distribution_system.get("distribution_system.drain_heat_recovery_efficiency")
+        distribution_system.get("drain_heat_recovery_efficiency")
         if (swh_use.get("is_heat_recovered_by_drain"))
         else 0
     )
@@ -73,6 +73,9 @@ def get_energy_required_to_heat_swh_use(
     assert_(use_units is not None, "A use unit must be provided")
 
     space_ids = get_spaces_served_by_swh_use(rmd, swh_use["id"])
+    space_within_building_segment_ids = [
+        space["id"] for space in find_all("$.zones[*].spaces[*]", building_segment)
+    ]
     spaces = [
         find_exactly_one_with_field_value(
             "$.buildings[*].building_segments[*].zones[*].spaces[*]",
@@ -81,19 +84,25 @@ def get_energy_required_to_heat_swh_use(
             rmd,
         )
         for space_id in space_ids
+        if space_id in space_within_building_segment_ids
     ]
 
     if len(spaces) == 0 and use_units not in REQUIRED_USE_UNIT:
-        spaces = find_all("$zones[*].spaces[*]", building_segment)
+        spaces = find_all("$.zones[*].spaces[*]", building_segment)
 
     energy_required_by_space = {}
     volume_flow_rate = 0
+    hourly_value = (
+        hourly_schedule.get("hourly_values")
+        if hourly_schedule is not None
+        else [1] * len(inlet_temperature_schedule)
+    )
     for space in spaces:
         if use_units == SERVICE_WATER_HEATING_USE_UNIT.POWER_PER_PERSON:
             power = swh_use_value * space.get("number_of_occupants", 0)
             energy_required = (
                 power
-                * sum(hourly_schedule)
+                * sum(hourly_value)
                 * (1 - drain_heat_recovery_efficiency)
                 * ureg("Btu")
             )
