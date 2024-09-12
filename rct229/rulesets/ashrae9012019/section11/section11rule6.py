@@ -39,7 +39,7 @@ class Section11Rule6(RuleDefinitionListIndexedBase):
 
             swh_distribution_and_eq_dict = (
                 get_swh_uses_associated_with_each_building_segment(rmd_b)
-            )
+            )  # TODO: Need to check with Jiarong
 
             piping_losses_modeled = False
             for piping_id in swh_distribution_and_eq_dict:
