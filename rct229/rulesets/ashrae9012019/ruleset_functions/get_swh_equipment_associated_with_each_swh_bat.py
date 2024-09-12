@@ -1,3 +1,6 @@
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_uses_associated_with_each_building_segment import (
+    get_swh_uses_associated_with_each_building_segment,
+)
 from rct229.utils.jsonpath_utils import find_all, find_exactly_one_with_field_value
 
 
@@ -33,7 +36,7 @@ def get_swh_equipment_associated_with_each_swh_bat(
         )
 
         service_water_heating_use_ids = (
-            get_SWH_uses_associated_with_each_building_segment(
+            get_swh_uses_associated_with_each_building_segment(
                 rmd, building_segment["id"]
             )
         )
@@ -49,7 +52,7 @@ def get_swh_equipment_associated_with_each_swh_bat(
                 swh_use, rmd, building_segment
             )
             swh_and_equip_dict[swh_bat]["EnergyRequired"] += energy_required
-            swh_and_equip_dict[swh_bat]["SWH_Uses"].append(swh_use.id)
+            swh_and_equip_dict[swh_bat]["SWH_Uses"].append(swh_use_id)
             distribution_id = swh_use.get("served_by_distribution_system")
             if distribution_id not in swh_and_equip_dict[swh_bat]["SWHDistribution"]:
                 swh_and_equip_dict[swh_bat]["SWHDistribution"].append(distribution_id)
@@ -64,8 +67,15 @@ def get_swh_equipment_associated_with_each_swh_bat(
                 for tank in tanks:
                     swh_and_equip_dict[swh_bat]["Tanks"].append(tank["id"])
 
-                for piping_id in distribution.get("service_water_piping"):
-                    piping_ids = get_all_child_SWH_piping_ids(rmd, piping_id)
+                for piping in distribution.get("service_water_piping", []):
+                    queue = [piping]
+                    piping_ids = []
+                    # BFS approach
+                    while queue:
+                        current_piping = queue.pop(0)
+                        piping_ids.append(current_piping["id"])
+                        if current_piping.get("child"):
+                            queue.extend(current_piping["child"])
                     swh_and_equip_dict[swh_bat]["Piping"].extend(piping_ids)
 
         for swh_bat in swh_and_equip_dict:
