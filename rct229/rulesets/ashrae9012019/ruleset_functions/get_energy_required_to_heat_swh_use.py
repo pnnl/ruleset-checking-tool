@@ -163,25 +163,24 @@ def get_energy_required_to_heat_swh_use(
                 energy_required += energy_to_heat_water
             energy_required_by_space[space["id"]] = energy_required
 
-        if len(spaces) == 0:
-            if swh_use.get("use_units") == "OTHER":
-                energy_required_by_space["NO_SPACES_ASSIGNED"] = "UNDETERMINED"
-            elif swh_use.get("use_units") == "POWER":
-                energy_required_by_space["NO_SPACES_ASSIGNED"] = swh_use_value * ureg(
-                    "Btu"
+    if len(spaces) == 0:
+        if swh_use.get("use_units") == "OTHER":
+            energy_required_by_space["NO_SPACES_ASSIGNED"] = "UNDETERMINED"
+        elif swh_use.get("use_units") == "POWER":
+            energy_required_by_space["NO_SPACES_ASSIGNED"] = swh_use_value * ureg("Btu")
+        elif swh_use.get("use_units") == "VOLUME":
+            energy_required = 0 * ureg("Btu")
+            for index, hourly_value in enumerate(hourly_values):
+                volume_this_hour = swh_use_value * hourly_value
+                volume_this_hour = volume_this_hour * (
+                    1 - drain_heat_recovery_efficiency
                 )
-            elif swh_use.get("use_units") == "VOLUME":
-                energy_required = 0 * ureg("Btu")
-                for index, hourly_value in enumerate(hourly_values):
-                    volume_this_hour = volume_flow_rate * hourly_value
-                    volume_this_hour = volume_this_hour * (
-                        1 - drain_heat_recovery_efficiency
-                    )
-                    dT = supply_temperature - inlet_temperature_hourly_values[index]
-                    energy_to_heat_water = (
-                        volume_this_hour * 8.3452 * dT * ureg("Btu") * 1.8
-                    )
-                    energy_required += energy_to_heat_water
-                energy_required_by_space["NO_SPACES_ASSIGNED"] = energy_required
+                dT = (
+                    supply_temperature.magnitude
+                    - inlet_temperature_hourly_values[index]
+                ) * 1.8
+                energy_to_heat_water = volume_this_hour * 8.3452 * dT * ureg("Btu")
+                energy_required += energy_to_heat_water
+            energy_required_by_space["NO_SPACES_ASSIGNED"] = energy_required
 
     return energy_required_by_space
