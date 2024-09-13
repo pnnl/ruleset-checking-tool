@@ -346,7 +346,7 @@ def test__get_energy_required_to_heat_swh_use_no_space_assigned_power():
                                                             1000000)
 
 
-def test__get_energy_required_to_heat_swh_use_no_space_assigned_volume():
+def test__get_energy_required_to_heat_swh_use_no_spacesigned_volume():
     energy_required_by_space = get_energy_required_to_heat_swh_use(
         TEST_SWH_USE_NO_SPACE_ASSIGNED_VOLUME, TEST_RMD, TEST_BUILDING_SEGMENT_NO_SWH_USE
     )
