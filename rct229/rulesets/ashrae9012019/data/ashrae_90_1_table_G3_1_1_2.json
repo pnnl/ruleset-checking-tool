@@ -1,0 +1,148 @@
+{
+    "Baseline_Service_Water_Heating_System": [
+        {
+            "building_area_type": "Automotive facility",
+            "baseline_heating_method": "Gas storage water heater"
+        },
+        {
+            "building_area_type": "Convenience store",
+            "baseline_heating_method": "Electric resistance water heater"
+        },
+        {
+            "building_area_type": "Convention center",
+            "baseline_heating_method": "Electric resistance storage water heater"
+        },
+        {
+            "building_area_type": "Courthouse",
+            "baseline_heating_method": "Electric resistance storage water heater"
+        },
+        {
+            "building_area_type": "Dining: Bar lounge/leisure",
+            "baseline_heating_method": "Gas storage water heater"
+        },
+        {
+            "building_area_type": "Dining: Cafeteria/fast food",
+            "baseline_heating_method": "Gas storage water heater"
+        },
+        {
+            "building_area_type": "Dining: Family",
+            "baseline_heating_method": "Gas storage water heater"
+        },
+        {
+            "building_area_type": "Dormitory",
+            "baseline_heating_method": "Gas storage water heater"
+        },
+        {
+            "building_area_type": "Exercise center",
+            "baseline_heating_method": "Gas storage water heater"
+        },
+        {
+            "building_area_type": "Fire station",
+            "baseline_heating_method": "Gas storage water heater"
+        },
+        {
+            "building_area_type": "Grocery store",
+            "baseline_heating_method": "Gas storage water heater"
+        },
+        {
+            "building_area_type": "Gymnasium",
+            "baseline_heating_method": "Gas storage water heater"
+        },
+        {
+            "building_area_type": "Health-care clinic",
+            "baseline_heating_method": "Electric resistance storage water heater"
+        },
+        {
+            "building_area_type": "Hospital and outpatient surgery center",
+            "baseline_heating_method": "Gas storage water heater"
+        },
+        {
+            "building_area_type": "Hotel",
+            "baseline_heating_method": "Gas storage water heater"
+        },
+        {
+            "building_area_type": "Library",
+            "baseline_heating_method": "Electric resistance storage water heater"
+        },
+        {
+            "building_area_type": "Manufacturing facility",
+            "baseline_heating_method": "Gas storage water heater"
+        },
+        {
+            "building_area_type": "Motel",
+            "baseline_heating_method": "Gas storage water heater"
+        },
+        {
+            "building_area_type": "Motion picture theater",
+            "baseline_heating_method": "Electric resistance storage water heater"
+        },
+        {
+            "building_area_type": "Multifamily",
+            "baseline_heating_method": "Gas storage water heater"
+        },
+        {
+            "building_area_type": "Museum",
+            "baseline_heating_method": "Electric resistance storage water heater"
+        },
+        {
+            "building_area_type": "Office",
+            "baseline_heating_method": "Electric resistance storage water heater"
+        },
+        {
+            "building_area_type": "Parking garage",
+            "baseline_heating_method": "Electric resistance storage water heater"
+        },
+        {
+            "building_area_type": "Penitentiary",
+            "baseline_heating_method": "Gas storage water heater"
+        },
+        {
+            "building_area_type": "Performing arts theater",
+            "baseline_heating_method": "Gas storage water heater"
+        },
+        {
+            "building_area_type": "Police station",
+            "baseline_heating_method": "Electric resistance storage water heater"
+        },
+        {
+            "building_area_type": "Post office",
+            "baseline_heating_method": "Electric resistance storage water heater"
+        },
+        {
+            "building_area_type": "Religious facility",
+            "baseline_heating_method": "Electric resistance storage water heater"
+        },
+        {
+            "building_area_type": "Retail",
+            "baseline_heating_method": "Electric resistance storage water heater"
+        },
+        {
+            "building_area_type": "School/university",
+            "baseline_heating_method": "Gas storage water heater"
+        },
+        {
+            "building_area_type": "Sports arena",
+            "baseline_heating_method": "Gas storage water heater"
+        },
+        {
+            "building_area_type": "Town hall",
+            "baseline_heating_method": "Electric resistance storage water heater"
+        },
+        {
+            "building_area_type": "Transportation",
+            "baseline_heating_method": "Electric resistance storage water heater"
+        },
+        {
+            "building_area_type": "Warehouse",
+            "baseline_heating_method": "Electric resistance storage water heater"
+        },
+        {
+            "building_area_type": "Workshop",
+            "baseline_heating_method": "Electric resistance storage water heater"
+        },
+        {
+            "building_area_type": "All others",
+            "baseline_heating_method": "Gas storage water heater"
+        }
+    ]
+}
