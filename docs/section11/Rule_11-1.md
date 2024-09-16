@@ -30,10 +30,15 @@
     - get the distribution system: `p_distribution = get_component_by_id(P_RMD, distribution_id)`
     - for each swh use in the dictionary, check to see that the swh use exists in the user model: `for swh_use_id in p_swh_system_and_equip_dict[distribution_id]["USES"]:`
         - get the user swh_use: `u_swh_use = get_component_by_id(U_RMD, swh_use_id)`
-        - if the u_swh_use exists, continue to rule logic as we only need one SWH use to have this rule be applicable: `if(u_swh_use): CONTINUE TO RULE LOGIC`
+        - if the u_swh_use exists, continue to rule logic as we only need one SWH use to have this rule be applicable: `if(u_swh_use): CONTINUE TO RULE LOGIC #1`
+    - if the program reaches this line without going to the rule logic, the project is not applicable for this SWH heating distribution system: `NOT_APPLICABLE`
+- we also need to look at the distribution systems in the user model and ensure that all of them have been covered by the above checks.  If any exist (and have SWH use), but do not exist in the proposed model, then there is an issue: `for distribution_id in u_swh_system_and_equip_dict:`
+    - check whether there are SWH uses connected to the distribution system: `if len(u_swh_system_and_equip_dict[distribution_id]["USES"]) > ):`
+        - if uses exist, continue to rule logic #2: `CONTINUE TO RULE LOGIC #2`
     - if the program reaches this line without going to the rule logic, the project is not applicable for this SWH heating distribution system: `NOT_APPLICABLE`
 
-    ## Rule Logic: 
+
+    ## Rule Logic #1: 
   - create a list that the compare_context_pair function will use to send errors back tot he rule: `errors = []`
   - create the compare context string: `compare_context_str = "AppG 11-1 P_RMD Equals U_RMD"`
   - get a dictionary of all SWH equipment in the proposed model (pumps, distribution, tanks, SWH use, etc): `p_swh_equipment_dict = p_swh_system_and_equip_dict[distribution_id]`
@@ -46,6 +51,10 @@
   - next, check Pumps - this will also recursively check PumpOutputValidationPointPumpOutputValidationPoint: `if len(p_swh_equipment_dict["Pumps"]) == len(u_swh_equipment_dict["Pumps"]):`
     - look at each SWHEquipment in the proposed model: `for pump_id in p_swh_equipment_dict["Pumps"]:`
       - compare the two pumps using compare_context_pair, if the result is false, set all_match equal to false.  We won't exit early if all_match is false as we allow the function to keep running so errors is fully populated and available to the user: `if !compare_context_pair(pump_id, pump_id, $, extra_schema_for_SWH_comparison.json, true, compare_context_str, error_str): all_match = false`
+     
+        
+    ## Rule Logic #2: 
+  - The equipment exists in the user model, but not in the proposed model, all match is false: `all_match = false`
     
 
 ## Rule Assertion: 
