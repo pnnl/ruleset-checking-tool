@@ -1,0 +1,36 @@
+
+# Section 1 - Rule 1-6 
+
+**Rule ID:** 1-6   
+**Rule Description:** On-site renewable energy shall not be included in the baseline building performance.  
+**Rule Assertion:** Baseline RMD = expected value  
+**Appendix G Section:** G3.11 18 Baseline 
+
+**Mandatory Rule:** True    
+**Evaluation Context:** Each RMD  
+**Function Call:**  
+
+## Applicability Check:  
+- All projects are applicable
+
+
+## Rule Logic:
+- get the baseline output schema: `output = B_RMD.output`
+- get the output instance: `output_instance = output.output_instance`
+- set a boolean has_renewables and set it to false: `has_renewables = false`
+- look at each end use result: `for end_use_result in output_instance.annual_end_use_results:`
+    - check if the energy source for the end_use_result is "ON_SITE_RENEWABLES": `if end_use_result.energy_source == "ON_SITE_RENEWABLES":`
+        - set has_renewables to true and continue to rule assertion: `has_renewables = true; CONTINUE TO RULE ASSERTION`
+- if we get here without going to the rule assertion, continue to rule assertion: `CONTINUE TO RULE ASSERTION`
+
+    **Rule Assertion:**
+    - Case 1: If has_renewables is true, then FAIL: `if has_renewables == true: FAIL`
+    - Case 2: otherwise, there are no renewables, PASS: `else: PASS`
+
+
+**Notes:**
+1.  
+
+**[Back](../_toc.md)**
+
+
