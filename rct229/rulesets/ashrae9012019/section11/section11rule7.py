@@ -79,6 +79,52 @@ class Section11Rule7(RuleDefinitionListIndexedBase):
                     else:
                         return False
 
+        def manual_check_required(self, context, calc_vals=None, data=None):
+            rmd_p = context.PROPOSED
+
+            swh_bats_and_uses_p = get_swh_bats_and_swh_use(rmd_p)
+
+            for swh_bat in swh_bats_and_uses_p:
+                for swh_use_id in swh_bats_and_uses_p[swh_bat]:
+                    swh_uses = find_exactly_one_with_field_value(
+                        "$.buildings[*].building_segments[*].zones[*].spaces[*].service_water_heating_uses[*]",
+                        "id",
+                        swh_use_id,
+                        rmd_p,
+                    )
+                    if (
+                        getattr_(swh_uses, "service_water_heating_uses", "use")
+                        == ZERO.VOLUME
+                    ):
+                        return True
+                    else:
+                        return False
+
+        def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
+            rmd_p = context.PROPOSED
+
+            swh_bats_and_uses_p = get_swh_bats_and_swh_use(rmd_p)
+
+            zero_swh_use_list = []
+            for swh_bat in swh_bats_and_uses_p:
+                for swh_use_id in swh_bats_and_uses_p[swh_bat]:
+                    swh_uses = find_exactly_one_with_field_value(
+                        "$.buildings[*].building_segments[*].zones[*].spaces[*].service_water_heating_uses[*]",
+                        "id",
+                        swh_use_id,
+                        rmd_p,
+                    )
+                    if (
+                        getattr_(swh_uses, "service_water_heating_uses", "use")
+                        == ZERO.VOLUME
+                    ):
+                        zero_swh_use_list.append(swh_bat)
+
+            zero_swh_use_list = list(set(zero_swh_use_list))
+            swh_bat = ",".join(zero_swh_use_list)
+
+            return f"Building area type {swh_bat} has no service water heating use. Confirm that this is correct for this building area type."
+
         def get_calc_vals(self, context, data=None):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
