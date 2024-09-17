@@ -7,7 +7,7 @@ Inputs:
 - **building_segment_id** - the id of the building segment
 
 Returns:
-- **swh_uses**: A list containing the ids of all service water heating uses associated with a building segment  
+- **swh_uses**: A list containing the distribution system ids of all service water heating uses associated with a building segment  
 
 Function Call:
 - get_obj_by_id  
@@ -18,7 +18,7 @@ Logic:
 - get the building segment: `building_segment = get_obj_by_id(RMD, building_segment_id)`
 - create a blank list: `swh_uses = []`
 - look at each swh use: `for swh_use in building_segment.service_water_heating_uses:`
-    - append the use to the list: `swh_uses.append(swh_use)`
+    - append the use to the list: `swh_uses.append(swh_use.served_by_distribution_system)`
 
 
 **Returns** swh_uses

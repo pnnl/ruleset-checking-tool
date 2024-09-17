@@ -5,7 +5,7 @@ from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_uses_associated_with_each_building_segment import (
     get_swh_uses_associated_with_each_building_segment,
 )
-from rct229.utils.jsonpath_utils import find_exactly_one_with_field_value
+from rct229.utils.jsonpath_utils import find_all, find_exactly_one_with_field_value
 
 
 class Section11Rule6(RuleDefinitionListIndexedBase):
@@ -62,22 +62,24 @@ class Section11Rule6(RuleDefinitionListIndexedBase):
                     )
                 )
 
-                piping_losses_modeled = False
                 for piping_id in swh_distribution_and_eq_list:
-                    service_water_piping = find_exactly_one_with_field_value(
+                    service_water_piping_b = find_exactly_one_with_field_value(
                         "$.service_water_heating_distribution_systems[*]",
                         "id",
                         piping_id,
                         rmd_b,
                     )
-                    if service_water_piping.get("are_thermal_losses_modeled"):
-                        piping_losses_modeled = service_water_piping[
-                            "are_thermal_losses_modeled"
-                        ]
 
-                return {"piping_losses_modeled": piping_losses_modeled}
+                    piping_losses_modeled_b = any(
+                        find_all(
+                            "$.service_water_piping[*].are_thermal_losses_modeled",
+                            service_water_piping_b,
+                        )
+                    )
+
+                return {"piping_losses_modeled_b": piping_losses_modeled_b}
 
             def rule_check(self, context, calc_vals=None, data=None):
-                piping_losses_modeled = calc_vals["piping_losses_modeled"]
+                piping_losses_modeled_b = calc_vals["piping_losses_modeled_b"]
 
-                return not piping_losses_modeled
+                return not piping_losses_modeled_b
