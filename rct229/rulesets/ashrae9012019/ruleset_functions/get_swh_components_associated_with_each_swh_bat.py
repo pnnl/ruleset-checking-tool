@@ -4,7 +4,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_uses_associated_wit
 from rct229.utils.jsonpath_utils import find_all, find_exactly_one_with_field_value
 
 
-def get_swh_equipment_associated_with_each_swh_bat(
+def get_swh_components_associated_with_each_swh_bat(
     rmd: dict,
 ) -> dict[str, dict]:
     """
