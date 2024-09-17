@@ -1,3 +1,4 @@
+from collections import deque
 from dataclasses import dataclass, field
 from typing import List
 
@@ -40,19 +41,18 @@ def get_swh_equipment_associated_with_each_swh_distribution_system(
         "$.service_water_heating_distribution_systems[*]", rmd
     ):
         swh_and_equip_dict[distribution["id"]] = SWHDistributionAssociations()
-
-        for tank in distribution.get("tanks", []):
-            swh_and_equip_dict[distribution["id"]].tanks.append(tank["id"])
-
+        swh_and_equip_dict[distribution["id"]].tanks = [
+            tank["id"] for tank in find_all("$.tanks[*]", distribution)
+        ]
         for piping in distribution.get("service_water_piping", []):
-            queue = [piping]
+            queue = deque([piping])
             piping_ids = []
             # BFS approach
             while queue:
-                current_piping = queue.pop(0)
+                current_piping = queue.popleft()
                 piping_ids.append(current_piping["id"])
-                if current_piping.get("child"):
-                    queue.extend(current_piping["child"])
+                children = current_piping.get("child", [])
+                queue.extend(children)
             swh_and_equip_dict[distribution["id"]].piping.extend(piping_ids)
 
         for pump in find_all("$.pumps[*]", rmd):
@@ -72,6 +72,7 @@ def get_swh_equipment_associated_with_each_swh_distribution_system(
                         solar_t["id"]
                     )
 
+    # TODO revise the json path if the service_water_heating_uses is relocated in the schema
     for swh_use in find_all(
         "$.buildings[*].building_segments[*].zones[*].spaces[*].service_water_heating_uses[*]",
         rmd,
@@ -79,7 +80,7 @@ def get_swh_equipment_associated_with_each_swh_distribution_system(
         distribution_id = swh_use.get("served_by_distribution_system")
         if distribution_id:
             swh_and_equip_dict[distribution_id].uses.append(swh_use["id"])
-            swh_and_equip_dict[distribution_id].spaces_served.extend(
-                get_spaces_served_by_swh_use(rmd, swh_use["id"])
-            )
+            for space_id in get_spaces_served_by_swh_use(rmd, swh_use["id"]):
+                if space_id not in swh_and_equip_dict[distribution_id].spaces_served:
+                    swh_and_equip_dict[distribution_id].spaces_served.append(space_id)
     return swh_and_equip_dict
