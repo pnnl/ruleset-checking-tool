@@ -108,7 +108,9 @@ def std_equal_with_precision(
     std_val_rounded = std_val_magnitude.quantize(
         Decimal(rounding_precision), rounding=ROUND_HALF_UP
     )
-    print(f"val_magnitude: {val_magnitude}, std_val_magnitude: {std_val_magnitude}, val_rounded: {val_rounded}, std_val_rounded: {std_val_rounded}")
+    print(
+        f"val_magnitude: {val_magnitude}, std_val_magnitude: {std_val_magnitude}, val_rounded: {val_rounded}, std_val_rounded: {std_val_rounded}"
+    )
     # Compare the rounded values
     return val_rounded == std_val_rounded
 
