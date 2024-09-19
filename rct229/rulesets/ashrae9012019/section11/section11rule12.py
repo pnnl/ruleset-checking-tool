@@ -7,7 +7,6 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_uses_associated_wit
     get_swh_uses_associated_with_each_building_segment,
 )
 from rct229.utils.assertions import getattr_
-from rct229.utils.pint_utils import ZERO
 from rct229.utils.utility_functions import find_exactly_one_schedule
 
 APPLICABILITY_MSG = (
@@ -153,6 +152,5 @@ class Section11Rule12(RuleDefinitionListIndexedBase):
                         swh_use_p = context.PROPOSED
 
                         return (
-                            getattr_(swh_use_p, "service_water_heating_uses", "use")
-                            > ZERO.VOLUME
+                            getattr_(swh_use_p, "service_water_heating_uses", "use") > 0
                         )

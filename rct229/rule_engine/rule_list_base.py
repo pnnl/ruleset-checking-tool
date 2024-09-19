@@ -167,7 +167,7 @@ class RuleDefinitionListBase(RuleDefinitionBase):
             if self.list_filter(context_item, data)
         ]
 
-        # Evalutate the subrule for each item in the context list
+        # Evaluate the subrule for each item in the context list
         outcomes = []
         for ubp in filtered_context_list:
             item_outcome = self.each_rule.evaluate(ubp, data)
