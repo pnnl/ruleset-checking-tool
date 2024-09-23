@@ -7,7 +7,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_uses_associated_wit
 )
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import getattr_
-from rct229.utils.jsonpath_utils import find_all, find_one
+from rct229.utils.jsonpath_utils import find_all, find_exactly_one_with_field_value
 from rct229.utils.pint_utils import ZERO
 
 SERVICE_WATERH_EATING_USE_UNIT = SchemaEnums.schema_enums[
@@ -49,14 +49,15 @@ def get_building_segment_swh_bat(rmd: dict, building_segment_id: str) -> str:
         )
 
         for swh_use_id in service_water_heating_use_ids:
-            swh_use = find_one(
-                f'$.zones[*].spaces[*].service_water_heating_uses[*][?(@.id="{swh_use_id}")]',
+            swh_use = find_exactly_one_with_field_value(
+                f"$.zones[*].spaces[*].service_water_heating_uses[*]",
+                "id",
+                swh_use_id,
                 building_segment,
             )
 
             if (
-                swh_use
-                and getattr_(swh_use, "service_water_heating_uses", "use_units")
+                getattr_(swh_use, "service_water_heating_uses", "use_units")
                 == SERVICE_WATERH_EATING_USE_UNIT.OTHER
             ):
                 return RCTOutcomeLabel.UNDETERMINED
@@ -72,8 +73,10 @@ def get_building_segment_swh_bat(rmd: dict, building_segment_id: str) -> str:
                 )
             else:
                 for space_id in swh_use_energy_by_space:
-                    space = find_one(
-                        f'$.zones[*].spaces[*][?(@.id="{space_id}")]',
+                    space = find_exactly_one_with_field_value(
+                        "$.zones[*].spaces[*]",
+                        "id",
+                        space_id,
                         building_segment,
                     )
                     if space.get("service_water_heating_bat"):
