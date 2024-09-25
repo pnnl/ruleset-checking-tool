@@ -28,7 +28,16 @@
 
       - For each space in zone: `space_p in zone_p.spaces:`  
 
-        - For each interior lighting in space, add lighting power to building segment total: `building_segment_design_lighting_wattage += sum(interior_lighting.power_per_area for interior_lighting in space_p.interior_lighting) * space_p.floor_area`  
+        - the total modeled interior lighting power is the total lighting power EXCEPT for retail display lighting (as defined in Rule 6-10). Create a variable building_segment_design_lighting_wattage and set it to 0: `building_segment_design_lighting_wattage = 0`
+       
+        - Look at each interior lighting in the space: `for int_lighting in space:`
+          
+          - create a boolean part_of_total and set it to true: `part_of_total = TRUE`
+          
+          - Check whether the lighting type is `if interior_lighting.purpose_type == "RETAIL_DISPLAY":`
+            - Check whether the space lighting space type is one of the retail type spaces.  If it is, we don't add the wattage of this lighting to the total: `if space.lighting_space_type in? ["RETAIL_FACILITIES_DRESSING_FITTING_ROOM", "RETAIL_FACILITIES_MALL_CONCOURSE", "RETAIL"]: part_of_total = FALSE`
+         
+          - Add this lighting to the total if it is NOT retail lighting in a retail space type: `if part_of_total: building_segment_design_lighting_wattage += interior_lighting.power_per_area * space_p.floor_area`
 
         - If building segment specifies lighting building area type , add space floor area to the total building segment floor area: `if allowable_LPD_BAM: total_building_segment_area_p += space_p.floor_area`  
 
