@@ -27,7 +27,7 @@
     - For each zone in thermal block: `zone_p in thermal_block_p.zones:`  
 
       - For each space in zone: `space_p in zone_p.spaces:`  
-       
+
         - For each interior lighting in space, add lighting power to building segment total: `building_segment_design_lighting_wattage += sum(interior_lighting.power_per_area for interior_lighting in space_p.interior_lighting) * space_p.floor_area` 
 
         - If building segment specifies lighting building area type , add space floor area to the total building segment floor area: `if allowable_LPD_BAM: total_building_segment_area_p += space_p.floor_area`  
