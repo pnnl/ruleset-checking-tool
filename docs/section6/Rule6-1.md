@@ -27,8 +27,6 @@
     - For each zone in thermal block: `zone_p in thermal_block_p.zones:`  
 
       - For each space in zone: `space_p in zone_p.spaces:`  
-
-        - the total modeled interior lighting power is the total lighting power EXCEPT for retail display lighting (as defined in Rule 6-10). Create a variable building_segment_design_lighting_wattage and set it to 0: `building_segment_design_lighting_wattage = 0`
        
         - For each interior lighting in space, add lighting power to building segment total: `building_segment_design_lighting_wattage += sum(interior_lighting.power_per_area for interior_lighting in space_p.interior_lighting) * space_p.floor_area` 
 
