@@ -38,7 +38,7 @@
           - Get total lighting power density in space, EXCLUDING retail display lighting located in Sales Area space types: `total_space_LPD_b = 0`
           - Look at each lighting object in the space: `for interior_lighting in space_b.interior_lighting:`
             - create a boolean is_part_of_total and set it to true: `is_part_of_total = TRUE`
-            - check whether the space type is one of the retail space types: `if space.lighting_space_type == "SALES AREA":`
+            - check whether the space type is one of the retail space types: `if space_b.lighting_space_type == "SALES AREA":`
               - check whether this specific interior_lighting object is Retail display.  If it is, set is_part_of_total to FALSE: `if interior_lighting.purpose_type == "RETAIL_DISPLAY": is_part_of_total = FALSE`
             - Add the LPD of this interior_lighting if it is not retail display lighting located in a retail space: `if is_part_of_total: total_space_LPD_b += interior_lighting.power_per_area`
 
