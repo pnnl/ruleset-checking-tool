@@ -3,19 +3,20 @@
         "Section": 19,
         "Rule": 11,
         "Test": "a",
-        "test_description": "The project has one building segment with one zone. Baseline building  with computer room utilizese baseline System 11. The system includes an integrated fluid economizer. Expected outcome: UNDETERMINED",
+        "test_description": "The project has one building segment with one zone. The zone includes a computer room and is served by a baseline system type 11. The system includes an integrated fluid economizer.",
         "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "was modeled as baseline system type 11-1, conduct a manual check that an integrated fluid economizer meeting the requirements of Section 6.5.1.2 was modeled in the baseline building design.",
         "standard": {
             "rule_id": "19-11",
             "ruleset_reference": "G3.1.2.6.1",
-            "rule_description": "For systems that serve computer rooms, if the  baseline system is HVAC System 11, it shall include an integrated fluid economizer meeting the requirements of Section 6.5.1.2 in the baseline building design.",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "For systems that serve computer rooms, if the baseline system is HVAC System 11, it shall include an integrated fluid economizer meeting the requirements of Section 6.5.1.2 in the baseline building design.",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -127,19 +128,19 @@
         "Section": 19,
         "Rule": 11,
         "Test": "b",
-        "test_description": "The project has one building segment with one zone. Baseline building  with computer room does not utilize baseline System 11. Therefore this building does not apply. Expected outcome: NOT APPLICABLE",
+        "test_description": "The project has one building segment with one zone. The zone includes a computer room but it is not served by a baseline system type 1. Requirements for an integrated fluid economizer do not apply.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "19-11",
             "ruleset_reference": "G3.1.2.6.1",
-            "rule_description": "For systems that serve computer rooms, if the  baseline system is HVAC System 11, it shall include an integrated fluid economizer meeting the requirements of Section 6.5.1.2 in the baseline building design.",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "For systems that serve computer rooms, if the baseline system is HVAC System 11, it shall include an integrated fluid economizer meeting the requirements of Section 6.5.1.2 in the baseline building design.",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -225,19 +226,20 @@
         "Section": 19,
         "Rule": 11,
         "Test": "c",
-        "test_description": "The project has one building segment with one zone. Baseline building  with computer room utilizese baseline System 11. The system does not include an integrated fluid economizer. Expected outcome: UNDETERMINED",
+        "test_description": "The project has one building segment with one zone. The zone includes a computer room and is served by a baseline system type 11. The system does not include an integrated fluid economizer.",
         "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "was modeled as baseline system type 11-1, conduct a manual check that an integrated fluid economizer meeting the requirements of Section 6.5.1.2 was modeled in the baseline building design.",
         "standard": {
             "rule_id": "19-11",
             "ruleset_reference": "G3.1.2.6.1",
-            "rule_description": "For systems that serve computer rooms, if the  baseline system is HVAC System 11, it shall include an integrated fluid economizer meeting the requirements of Section 6.5.1.2 in the baseline building design.",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "For systems that serve computer rooms, if the baseline system is HVAC System 11, it shall include an integrated fluid economizer meeting the requirements of Section 6.5.1.2 in the baseline building design.",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",

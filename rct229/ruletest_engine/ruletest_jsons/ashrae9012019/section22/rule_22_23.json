@@ -3,7 +3,7 @@
         "Section": 22,
         "Rule": 23,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is correctly modeled with the is_chilled_water_pump_interlocked set to true  and one pump per chiller.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. There is one chiller and one chilled water pump interlocked with the chiller operation.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-23",
@@ -15,7 +15,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -151,7 +151,7 @@
         "Section": 22,
         "Rule": 23,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is incorrectly modeled with the is_chilled_water_pump_interlocked set to false for associated chiller pump.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system.  There is one chiller and one chilled water pump but it is not interlocked with the chiller operation.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-23",
@@ -163,7 +163,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -299,7 +299,7 @@
         "Section": 22,
         "Rule": 23,
         "Test": "c",
-        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is incorrectly modeled with two chillers and only one pump.  The is_chilled_water_pump_interlocked set to true for both chillers.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. There are two chillers but only one chilled water pump interlocked with the chiller operation.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-23",
@@ -311,7 +311,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -452,7 +452,7 @@
         "Section": 22,
         "Rule": 23,
         "Test": "d",
-        "test_description": "The project has one building segment with two zones.  HVAC is system type 8 and is correctly modeled with the is_chilled_water_pump_interlocked set to true  and one pump per chiller.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 8 with a chilled water system. There is one chiller and one chilled water pump interlocked with the chiller operation.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-23",
@@ -464,7 +464,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -490,7 +490,6 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
                                                         "heating_source": "ELECTRIC",
-                                                        "heating_from_loop": "Boiler Loop 1",
                                                         "fan": {
                                                             "id": "Fan 1"
                                                         },
@@ -509,7 +508,6 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
                                                         "heating_source": "ELECTRIC",
-                                                        "heating_from_loop": "Boiler Loop 1",
                                                         "fan": {
                                                             "id": "Fan 2"
                                                         },
@@ -550,13 +548,6 @@
                                 ]
                             }
                         ],
-                        "boilers": [
-                            {
-                                "id": "Boiler 1",
-                                "loop": "Boiler Loop 1",
-                                "energy_source_type": "NATURAL_GAS"
-                            }
-                        ],
                         "chillers": [
                             {
                                 "id": "Chiller 1",
@@ -565,11 +556,6 @@
                             }
                         ],
                         "pumps": [
-                            {
-                                "id": "Boiler Pump 1",
-                                "loop_or_piping": "Boiler Loop 1",
-                                "speed_control": "FIXED_SPEED"
-                            },
                             {
                                 "id": "Chiller Pump 1",
                                 "loop_or_piping": "Chiller Loop 1",
@@ -582,10 +568,6 @@
                             }
                         ],
                         "fluid_loops": [
-                            {
-                                "id": "Boiler Loop 1",
-                                "type": "HEATING"
-                            },
                             {
                                 "id": "Chiller Loop 1",
                                 "type": "COOLING",
@@ -607,7 +589,7 @@
         "Section": 22,
         "Rule": 23,
         "Test": "e",
-        "test_description": "The project has one building segment with two zones.  HVAC is system type 8 and is incorrectly modeled with two primary chilled water pumps and one chiller.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 8 with a chilled water system. There is one chiller but two chilled water pumps.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-23",
@@ -619,7 +601,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -645,7 +627,6 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
                                                         "heating_source": "ELECTRIC",
-                                                        "heating_from_loop": "Boiler Loop 1",
                                                         "fan": {
                                                             "id": "Fan 1"
                                                         },
@@ -664,7 +645,6 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
                                                         "heating_source": "ELECTRIC",
-                                                        "heating_from_loop": "Boiler Loop 1",
                                                         "fan": {
                                                             "id": "Fan 2"
                                                         },
@@ -705,13 +685,6 @@
                                 ]
                             }
                         ],
-                        "boilers": [
-                            {
-                                "id": "Boiler 1",
-                                "loop": "Boiler Loop 1",
-                                "energy_source_type": "NATURAL_GAS"
-                            }
-                        ],
                         "chillers": [
                             {
                                 "id": "Chiller 1",
@@ -720,11 +693,6 @@
                             }
                         ],
                         "pumps": [
-                            {
-                                "id": "Boiler Pump 1",
-                                "loop_or_piping": "Boiler Loop 1",
-                                "speed_control": "FIXED_SPEED"
-                            },
                             {
                                 "id": "Chiller Pump 1",
                                 "loop_or_piping": "Chiller Loop 1",
@@ -742,10 +710,6 @@
                             }
                         ],
                         "fluid_loops": [
-                            {
-                                "id": "Boiler Loop 1",
-                                "type": "HEATING"
-                            },
                             {
                                 "id": "Chiller Loop 1",
                                 "type": "COOLING",
@@ -767,7 +731,7 @@
         "Section": 22,
         "Rule": 23,
         "Test": "f",
-        "test_description": "The project has one building segment with one zone.  HVAC is system type 2 and does not have chilled water.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 2. There is no chilled water system.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-23",
@@ -779,7 +743,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",

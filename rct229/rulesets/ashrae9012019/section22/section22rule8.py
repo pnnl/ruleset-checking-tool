@@ -53,13 +53,13 @@ class Section22Rule8(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmr_baseline = context.BASELINE_0
-        rmd_b = rmr_baseline["ruleset_model_descriptions"][0]
+        rmd_baseline = context.BASELINE_0
+        rmd_b = rmd_baseline["ruleset_model_descriptions"][0]
         baseline_system_types_dict = get_baseline_system_types(rmd_b)
         # create a list containing all HVAC systems that are modeled in the rmd_b
         available_type_list = [
             hvac_type
-            for hvac_type in baseline_system_types_dict.keys()
+            for hvac_type in baseline_system_types_dict
             if len(baseline_system_types_dict[hvac_type]) > 0
         ]
 
@@ -76,26 +76,26 @@ class Section22Rule8(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmr_baseline = context.BASELINE_0
-        rmd_b = rmr_baseline["ruleset_model_descriptions"][0]
+        rmd_baseline = context.BASELINE_0
+        rmd_b = rmd_baseline["ruleset_model_descriptions"][0]
 
         loop_pump_dict = {}
         for pump in find_all("$.pumps[*]", rmd_b):
-            if pump["loop_or_piping"] not in loop_pump_dict.keys():
+            if pump["loop_or_piping"] not in loop_pump_dict:
                 loop_pump_dict[pump["loop_or_piping"]] = []
             loop_pump_dict[pump["loop_or_piping"]].append(pump)
 
         chw_loop_capacity_dict = {}
         for chiller in find_all("$.chillers[*]", rmd_b):
             cooling_loop_id = chiller["cooling_loop"]
-            if chiller["cooling_loop"] not in chw_loop_capacity_dict.keys():
+            if chiller["cooling_loop"] not in chw_loop_capacity_dict:
                 chw_loop_capacity_dict[cooling_loop_id] = ZERO.POWER
             chw_loop_capacity_dict[cooling_loop_id] += getattr_(
                 chiller, "chiller", "rated_capacity"
             )
 
         primary_secondary_loop_dict = get_primary_secondary_loops_dict(rmd_b)
-        primary_loop_ids = primary_secondary_loop_dict.keys()
+        primary_loop_ids = primary_secondary_loop_dict
 
         return {
             "loop_pump_dict": loop_pump_dict,

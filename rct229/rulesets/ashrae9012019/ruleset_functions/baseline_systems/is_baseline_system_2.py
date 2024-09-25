@@ -44,7 +44,7 @@ def is_baseline_system_2(rmd_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
     Parameters
     ----------
     rmd_b json
-        To evaluate if the hvac system is modeled as Sys-2 in the B_RMI.
+        To evaluate if the hvac system is modeled as Sys-2 in the B_RMD.
 
     hvac_b_id list
         The id of the hvac system to evaluate.

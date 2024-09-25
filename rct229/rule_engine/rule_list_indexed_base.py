@@ -1,5 +1,6 @@
 from rct229.rule_engine.rule_list_base import RuleDefinitionListBase
 from rct229.rule_engine.ruleset_model_factory import get_rmd_instance
+from rct229.utils.assertions import assert_
 from rct229.utils.json_utils import slash_prefix_guarantee
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.match_lists import match_lists
@@ -107,7 +108,7 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
         ----------
         context : RuleSetModels
             Object containing the contexts for RMDs required by the ruleset.
-            The base implementation here takes the list context from the rmr context
+            The base implementation here takes the list context from the rmd context
             and assumes each part is a list.
         data : An optional data object. It is ignored by this base implementation.
 
@@ -116,16 +117,16 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
         list of RuleSetModels
             A list of context
         """
-        UNKNOWN_INDEX_RMR = "Unknown index_rmd"
+        UNKNOWN_INDEX_RMD = "Unknown index_rmd"
         CONTEXT_NOT_LIST = "The list contexts must be lists"
 
         match_by = self.match_by
 
-        # The index RMR must be either user, baseline, or proposed
+        # The index RMD must be either user, baseline, or proposed
         if self.index_rmd not in context.get_ruleset_model_types():
-            raise ValueError(UNKNOWN_INDEX_RMR)
+            raise ValueError(UNKNOWN_INDEX_RMD)
 
-        # The index RMR must be used
+        # The index RMD must be used
         context_on_list = any(
             map(
                 lambda ruleset_model: self.index_rmd == ruleset_model
@@ -140,9 +141,19 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
         list_context = get_rmd_instance()
         for ruleset_model in list_context.get_ruleset_model_types():
             if self.rmds_used[ruleset_model]:
-                list_context.__setitem__(
-                    ruleset_model, find_all(self.list_path, context[ruleset_model])
+                tmp_context_list = find_all(self.list_path, context[ruleset_model])
+                # handles a case when there is no element available to the target list path.
+                # This is set to an internal error handling since list_path is defined as part of rule logic.
+                assert_(
+                    len(tmp_context_list) > 0
+                    or (
+                        self.rmds_used_optional
+                        and self.rmds_used_optional[ruleset_model]
+                    ),
+                    f"List path {self.list_path} in rule {self.id} is either incorrect or has no data.",
                 )
+
+                list_context.__setitem__(ruleset_model, tmp_context_list)
             else:
                 list_context.__setitem__(ruleset_model, None)
 
