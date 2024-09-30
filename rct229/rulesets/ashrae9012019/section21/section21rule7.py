@@ -86,6 +86,16 @@ class Section21Rule7(RuleDefinitionListIndexedBase):
                         "design_return_temperature",
                     ],
                 },
+                precision={
+                    "design_supply_temperature": {
+                        "precision": 0.1,
+                        "unit": "K",
+                    },
+                    "design_return_temperature": {
+                        "precision": 0.1,
+                        "unit": "K",
+                    },
+                },
             )
 
         def get_calc_vals(self, context, data=None):
@@ -112,6 +122,7 @@ class Section21Rule7(RuleDefinitionListIndexedBase):
             design_return_temperature = calc_vals["design_return_temperature"]
             required_supply_temperature = calc_vals["required_supply_temperature"]
             required_return_temperature = calc_vals["required_return_temperature"]
+
             return design_supply_temperature.to(
                 ureg.kelvin
             ) == required_supply_temperature.to(
@@ -127,6 +138,7 @@ class Section21Rule7(RuleDefinitionListIndexedBase):
             design_return_temperature = calc_vals["design_return_temperature"]
             required_supply_temperature = calc_vals["required_supply_temperature"]
             required_return_temperature = calc_vals["required_return_temperature"]
+
             return std_equal(
                 design_supply_temperature.to(ureg.kelvin),
                 required_supply_temperature.to(ureg.kelvin),

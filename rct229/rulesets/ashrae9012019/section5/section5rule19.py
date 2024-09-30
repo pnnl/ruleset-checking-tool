@@ -50,19 +50,19 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data=None):
-        rmr_baseline = context.BASELINE_0
-        climate_zone = rmr_baseline["weather"]["climate_zone"]
+        rmd_baseline = context.BASELINE_0
+        climate_zone = rmd_baseline["weather"]["climate_zone"]
 
         # TODO It is determined later we will modify this function to RMD level -
         # The implementation is temporary
         bldg_scc_wwr_ratio_dict = {}
-        for building_b in find_all(self.list_path, rmr_baseline):
+        for building_b in find_all(self.list_path, rmd_baseline):
             bldg_scc_wwr_ratio_dict[
                 building_b["id"]
             ] = get_building_scc_window_wall_ratios_dict(climate_zone, building_b)
 
         return {
-            "climate_zone": rmr_baseline["weather"]["climate_zone"],
+            "climate_zone": rmd_baseline["weather"]["climate_zone"],
             "bldg_scc_wwr_ratio_dict": bldg_scc_wwr_ratio_dict,
         }
 

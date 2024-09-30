@@ -19,6 +19,7 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_6,
     HVAC_SYS.SYS_8,
 ]
+REQUIRED_DESIGN_ELEC_POWER_DESIGN_AIRFLOW_RATIO = 0.35 * ureg("W/cfm")
 
 
 class Section23Rule6(RuleDefinitionListIndexedBase):
@@ -91,6 +92,16 @@ class Section23Rule6(RuleDefinitionListIndexedBase):
                         "design_electric_power",
                     ],
                 },
+                precision={
+                    "design_airflow_b": {
+                        "precision": 0.1,
+                        "unit": "cfm",
+                    },
+                    "design_electric_power_b/design_airflow_b": {
+                        "precision": 0.01,
+                        "unit": "W/cfm",
+                    },
+                },
             )
 
         def get_calc_vals(self, context, data=None):
@@ -112,9 +123,12 @@ class Section23Rule6(RuleDefinitionListIndexedBase):
             primary_airflow_b = calc_vals["primary_airflow_b"]
             design_electric_power_b = calc_vals["design_electric_power_b"]
 
-            return (
-                design_airflow_b == 0.5 * primary_airflow_b
-                and design_electric_power_b / design_airflow_b == 0.35 * ureg("W/cfm")
+            return self.precision_comparison["design_airflow_b"](
+                design_airflow_b,
+                0.5 * primary_airflow_b,
+            ) and self.precision_comparison["design_electric_power_b/design_airflow_b"](
+                design_electric_power_b / design_airflow_b,
+                REQUIRED_DESIGN_ELEC_POWER_DESIGN_AIRFLOW_RATIO,
             )
 
         def is_tolerance_fail(self, context, calc_vals=None, data=None):

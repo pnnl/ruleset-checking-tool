@@ -108,7 +108,7 @@ class Section6Rule8(RuleDefinitionListIndexedBase):
                     zone_p = context.PROPOSED
                     return {
                         "avg_space_height": zone_p.get("volume", ZERO.VOLUME)
-                        / sum(find_all("spaces[*].floor_area", zone_p), ZERO.AREA),
+                        / sum(find_all("$.spaces[*].floor_area", zone_p), ZERO.AREA),
                     }
 
                 class SpaceRule(RuleDefinitionBase):
@@ -163,14 +163,17 @@ class Section6Rule8(RuleDefinitionListIndexedBase):
                             "total_hours_matched": schedule_comparison_result[
                                 "total_hours_matched"
                             ],
+                            "eflh_difference": schedule_comparison_result[
+                                "eflh_difference"
+                            ],
                         }
 
                     def manual_check_required(self, context, calc_vals=None, data=None):
-                        total_hours_compared = calc_vals["total_hours_compared"]
-                        total_hours_matched = calc_vals["total_hours_matched"]
-                        return total_hours_matched > total_hours_compared
+                        eflh_difference = calc_vals["eflh_difference"]
+                        return eflh_difference > 0
 
                     def rule_check(self, context, calc_vals=None, data=None):
                         total_hours_compared = calc_vals["total_hours_compared"]
                         total_hours_matched = calc_vals["total_hours_matched"]
+                        # match means eflh_difference = 0
                         return total_hours_matched == total_hours_compared

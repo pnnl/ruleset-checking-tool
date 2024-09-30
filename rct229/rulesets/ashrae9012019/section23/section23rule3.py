@@ -92,6 +92,12 @@ class Section23Rule3(RuleDefinitionListIndexedBase):
                         "primary_airflow",
                     ],
                 },
+                precision={
+                    "minimum_airflow_b": {
+                        "precision": 0.1,
+                        "unit": "cfm",
+                    },
+                },
             )
 
         def get_calc_vals(self, context, data=None):
@@ -113,8 +119,9 @@ class Section23Rule3(RuleDefinitionListIndexedBase):
             primary_airflow_b = calc_vals["primary_airflow_b"]
             minimum_outdoor_airflow_b = calc_vals["minimum_outdoor_airflow_b"]
 
-            return minimum_airflow_b == max(
-                primary_airflow_b * 0.3, minimum_outdoor_airflow_b
+            return self.precision_comparison["minimum_airflow_b"](
+                minimum_airflow_b,
+                max(primary_airflow_b * 0.3, minimum_outdoor_airflow_b),
             )
 
         def is_tolerance_fail(self, context, calc_vals=None, data=None):

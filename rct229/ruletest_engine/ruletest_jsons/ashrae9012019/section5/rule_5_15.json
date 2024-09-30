@@ -15,7 +15,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "RPD 1",
                 "weather": {
@@ -234,7 +234,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "RPD 1",
                 "weather": {
@@ -443,6 +443,7 @@
         "Test": "c",
         "test_description": "  Project has one building segment and includes a space that has two exterior walls with windows. The building segment includes existing components and the building area type is not included in Table G3.1.1-1. The outcome cannot be determined.",
         "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "Building is not all new and baseline WWR matches values prescribed in Table G3.1.1-1. However, the fenestration area prescribed in Table G3.1.1-1 does not apply to the existing envelope per TABLE G3.1 baseline column #5 (c). For existing Envelope, the baseline fenestration area must equal the existing fenestration area prior to the proposed work. A manual check is required to verify compliance.",
         "standard": {
             "rule_id": "5-15",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (c) ",
@@ -453,7 +454,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "RPD 1",
                 "weather": {

@@ -3,19 +3,19 @@
         "Section": 19,
         "Rule": 17,
         "Test": "a",
-        "test_description": "The project has one building segment with one zone. System 1 with `SIMPLE` specification method for supply/return/exhaust/relief fans and each of the 5 fans has 59 W design electric power for a total of 295 W with 1000 cfm design supply airflow. Expected outcome: PASS",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 1. Supply, return, exhaust, relief, and zone exhaust fans each have 59 W design electric power for a total of 295 W with 1,000 cfm design supply airflow.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-17",
             "ruleset_reference": "G3.1.2.9",
             "rule_description": "For baseline system 1 and 2, the total fan electrical power (Pfan) for supply, return, exhaust, and relief shall be = CFMs x 0.3, where, CFMs = the baseline system maximum design supply fan airflow rate, cfm",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -123,19 +123,19 @@
         "Section": 19,
         "Rule": 17,
         "Test": "a2",
-        "test_description": "The project has one building segment with one zone. In baseline system 7, the system fan electrical power for supply, return, exhaust, and relief equals the bhp/fan motor efficiency.  Baseline fan electric power  = 13 HP (per Table G3.1.29), motor eff = 0.91 (per Table G3.9.1), CFM = 10,000. There is no MERV13 or ERV on this air loop. Expected outcome: PASS",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 1. The fan electrical power for the supply, return, exhaust, relief, and zone exhaust fans is calculated with the brake horsepower and motor efficiency. The total fan power is about 280 W with 1,000 cfm design supply airflow.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-17",
             "ruleset_reference": "G3.1.2.9",
             "rule_description": "For baseline system 1 and 2, the total fan electrical power (Pfan) for supply, return, exhaust, and relief shall be = CFMs x 0.3, where, CFMs = the baseline system maximum design supply fan airflow rate, cfm",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -243,19 +243,19 @@
         "Section": 19,
         "Rule": 17,
         "Test": "b",
-        "test_description": "The project has one building segment with one zone. In baseline system 3, the system fan electrical power for supply, return, exhaust, and relief equals the bhp/fan motor efficiency.  Baseline electric fan power = 0.94 HP (per Table G3.1.29), motor eff = 0.825 (per Table G3.9.1), CFM = 1,000. There is no MERV13 or ERV on this air loop. Expected outcome: FAIL",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 1. The fan electrical power for the supply, return, exhaust, relief, and zone exhaust fans is calculated with the brake horsepower and motor efficiency. The total fan power is about 500 W with 1,000 cfm design supply airflow.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-17",
             "ruleset_reference": "G3.1.2.9",
             "rule_description": "For baseline system 1 and 2, the total fan electrical power (Pfan) for supply, return, exhaust, and relief shall be = CFMs x 0.3, where, CFMs = the baseline system maximum design supply fan airflow rate, cfm",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",

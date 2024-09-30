@@ -16,10 +16,7 @@ from rct229.utils.std_comparisons import std_equal
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_11_1,
     HVAC_SYS.SYS_11_2,
-    HVAC_SYS.SYS_11_1A,
-    HVAC_SYS.SYS_11_2A,
     HVAC_SYS.SYS_11_1B,
-    HVAC_SYS.SYS_11_1C,
 ]
 REQUIRED_LOOP_SUPPLY_TEMP_AT_LOW_LOAD = ureg("54 degF")
 
@@ -61,7 +58,7 @@ class Section22Rule6(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data):
         rmd_b = context.BASELINE_0
-        chiller_loop_ids_list = find_all("chillers[*].cooling_loop", rmd_b)
+        chiller_loop_ids_list = find_all("$.chillers[*].cooling_loop", rmd_b)
         return {"chiller_loop_ids_list": chiller_loop_ids_list}
 
     def list_filter(self, context_item, data):
@@ -80,6 +77,12 @@ class Section22Rule6(RuleDefinitionListIndexedBase):
                     "cooling_or_condensing_design_and_control": [
                         "loop_supply_temperature_at_low_load",
                     ],
+                },
+                precision={
+                    "loop_supply_temperature_at_low_load": {
+                        "precision": 1,
+                        "unit": "K",
+                    },
                 },
             )
 
@@ -106,9 +109,10 @@ class Section22Rule6(RuleDefinitionListIndexedBase):
                 "required_loop_supply_temperature_at_low_load"
             ]
 
-            return loop_supply_temperature_at_low_load.to(
-                ureg.kelvin
-            ) == required_loop_supply_temperature_at_low_load.to(ureg.kelvin)
+            return self.precision_comparison["loop_supply_temperature_at_low_load"](
+                loop_supply_temperature_at_low_load.to(ureg.kelvin),
+                required_loop_supply_temperature_at_low_load.to(ureg.kelvin),
+            )
 
         def is_tolerance_fail(self, context, calc_vals=None, data=None):
             loop_supply_temperature_at_low_load = calc_vals[

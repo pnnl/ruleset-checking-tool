@@ -3,7 +3,7 @@
         "Section": 5,
         "Rule": 13,
         "Test": "a",
-        "test_description": "Project has one building segment and includes one space with an exterior wall surface. The space is unconditioned based on heating and cooling capacity of the HVAC system that serves the parent zone. The baseline exterior envelope U-factor for the surface correctly matches the proposed.",
+        "test_description": "Project has one building segment and includes one space with an unregulated exterior wall surface. The space is unconditioned based on heating and cooling capacity of the HVAC system that serves the parent zone. The baseline exterior envelope U-factor for the surface correctly matches the proposed.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-13",
@@ -15,7 +15,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "RPD 1",
                 "weather": {
@@ -126,7 +126,7 @@
         "Section": 5,
         "Rule": 13,
         "Test": "b",
-        "test_description": "Project has one building segment and includes one space with an exterior wall surface. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. The baseline exterior envelope U-factor for the surface does not match the proposed.",
+        "test_description": "Project has one building segment and includes one space with an unregulated exterior wall surface. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. The baseline exterior envelope U-factor for the surface does not match the proposed.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-13",
@@ -138,7 +138,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "RPD 1",
                 "weather": {
@@ -249,7 +249,7 @@
         "Section": 5,
         "Rule": 13,
         "Test": "c",
-        "test_description": "Project has one building segment and includes a space with an exterior wall surface. The space is semiheated based on heating capacity of the HVAC system that serves the parent zone. The baseline exterior envelope U-factor for the surface correctly matches the proposed.",
+        "test_description": "Project has one building segment and includes a space with an unregulated exterior wall surface. The space is semiheated based on heating capacity of the HVAC system that serves the parent zone. The baseline exterior envelope U-factor for the surface correctly matches the proposed.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-13",
@@ -261,7 +261,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "RPD 1",
                 "weather": {
@@ -400,7 +400,7 @@
         "Section": 5,
         "Rule": 13,
         "Test": "d",
-        "test_description": "Project has one building segment and includes a space with an exterior wall surface. The space is semiheated based on heating capacity of the HVAC system that serves the parent zone. The baseline exterior envelope U-factor for the surface does not match the proposed.",
+        "test_description": "Project has one building segment and includes a space with an unregulated exterior wall surface. The space is semiheated based on heating capacity of the HVAC system that serves the parent zone. The baseline exterior envelope U-factor for the surface does not match the proposed.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-13",
@@ -412,7 +412,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "RPD 1",
                 "weather": {
@@ -551,7 +551,7 @@
         "Section": 5,
         "Rule": 13,
         "Test": "e",
-        "test_description": "Project has one building segment and includes a space with a below-grade wall surface. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. The baseline below-grade wall C-factor correctly matches the proposed.",
+        "test_description": "Project has one building segment and includes a space with an unregulated below-grade wall surface. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. The baseline below-grade wall C-factor correctly matches the proposed.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-13",
@@ -563,7 +563,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "RPD 1",
                 "weather": {
@@ -674,7 +674,7 @@
         "Section": 5,
         "Rule": 13,
         "Test": "f",
-        "test_description": "Project has one building segment and includes a space with a below-grade wall surface. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. The baseline below-grade wall C-factor does not match the proposed.",
+        "test_description": "Project has one building segment and includes a space with an unregulated below-grade wall surface. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. The baseline below-grade wall C-factor does not match the proposed.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-13",
@@ -686,7 +686,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "RPD 1",
                 "weather": {
@@ -797,7 +797,7 @@
         "Section": 5,
         "Rule": 13,
         "Test": "g",
-        "test_description": "Project has one building segment and includes a space with a below-grade wall surface. The space is semiheated based on the heating capacity of the HVAC system that serves the parent zone. The baseline below-grade wall C-factor correctly matches the proposed.",
+        "test_description": "Project has one building segment and includes a space with an unregulated below-grade wall surface. The space is semiheated based on the heating capacity of the HVAC system that serves the parent zone. The baseline below-grade wall C-factor correctly matches the proposed.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-13",
@@ -809,7 +809,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "RPD 1",
                 "weather": {
@@ -948,7 +948,7 @@
         "Section": 5,
         "Rule": 13,
         "Test": "h",
-        "test_description": "Project has one building segment and includes a space with a below-grade wall surface. The space is semiheated based on the heating capacity of the HVAC system that serves the parent zone. The baseline below-grade wall C-factor does not match the proposed.",
+        "test_description": "Project has one building segment and includes a space with an unregulated below-grade wall surface. The space is semiheated based on the heating capacity of the HVAC system that serves the parent zone. The baseline below-grade wall C-factor does not match the proposed.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-13",
@@ -960,7 +960,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "RPD 1",
                 "weather": {
@@ -1099,7 +1099,7 @@
         "Section": 5,
         "Rule": 13,
         "Test": "i",
-        "test_description": "Project has one building segment and includes a space with a slab-on-grade floor surface. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. The baseline slab-on-grade F-factor correctly matches the proposed.",
+        "test_description": "Project has one building segment and includes a space with an unregulated slab-on-grade floor surface. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. The baseline slab-on-grade F-factor correctly matches the proposed.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-13",
@@ -1111,7 +1111,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "RPD 1",
                 "weather": {
@@ -1222,7 +1222,7 @@
         "Section": 5,
         "Rule": 13,
         "Test": "j",
-        "test_description": "Project has one building segment and includes a space with a slab-on-grade floor surface. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. The baseline slab-on-grade F-factor does not match the proposed.",
+        "test_description": "Project has one building segment and includes a space with an unregulated slab-on-grade floor surface. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. The baseline slab-on-grade F-factor does not match the proposed.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-13",
@@ -1234,7 +1234,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "RPD 1",
                 "weather": {
@@ -1345,7 +1345,7 @@
         "Section": 5,
         "Rule": 13,
         "Test": "k",
-        "test_description": "Project has one building segment and includes a space with a slab-on-grade floor surface. The space is semiheated based on the heating capacity of the HVAC system that serves the parent zone. The baseline slab-on-grade F-factor correctly matches the proposed.",
+        "test_description": "Project has one building segment and includes a space with an unregulated slab-on-grade floor surface. The space is semiheated based on the heating capacity of the HVAC system that serves the parent zone. The baseline slab-on-grade F-factor correctly matches the proposed.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-13",
@@ -1357,7 +1357,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "RPD 1",
                 "weather": {
@@ -1470,7 +1470,7 @@
         "Section": 5,
         "Rule": 13,
         "Test": "l",
-        "test_description": "Project has one building segment and includes a space with a slab-on-grade floor surface. The space is semiheated based on the heating capacity of the HVAC system that serves the parent zone. The baseline slab-on-grade F-factor does not match the proposed.",
+        "test_description": "Project has one building segment and includes a space with an unregulated slab-on-grade floor surface. The space is semiheated based on the heating capacity of the HVAC system that serves the parent zone. The baseline slab-on-grade F-factor does not match the proposed.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-13",
@@ -1482,7 +1482,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "RPD 1",
                 "weather": {

@@ -93,7 +93,7 @@ class Section6Rule4(RuleDefinitionListIndexedBase):
                     space_b = context.BASELINE_0
                     space_p = context.PROPOSED
                     total_space_lpd_b = sum(
-                        find_all("interior_lighting[*].power_per_area", space_b)
+                        find_all("$.interior_lighting[*].power_per_area", space_b)
                     )
                     space_lighting_status_type_p = data[
                         "building_segment_lighting_status_type_dict_p"

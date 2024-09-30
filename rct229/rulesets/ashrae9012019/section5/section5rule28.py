@@ -216,7 +216,7 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
                     manual_check_required_flag = data["manual_check_required_flag"]
                     # if exterior mixed and required manual check
                     return (
-                        data["surface_id_b"] == SCC.EXTERIOR_MIXED
+                        data["scc_dict_b"][data["surface_id_b"]] == SCC.EXTERIOR_MIXED
                         and manual_check_required_flag
                     )
 

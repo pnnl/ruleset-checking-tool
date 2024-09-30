@@ -3,19 +3,19 @@
         "Section": 21,
         "Rule": 11,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 7 with child loop value correctly set to null.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The hot water loop configuration is primary-only.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-11",
             "ruleset_reference": "G3.1.3.5",
-            "rule_description": "When the baseline building users boiler(s) or purchased hot water, the HW loop shall be modeled as primary only",
+            "rule_description": "When the baseline building uses boiler(s) or purchased hot water, the HW loop shall be modeled as primary only",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -150,19 +150,19 @@
         "Section": 21,
         "Rule": 11,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 7 with child loop incorrectly referencing to  FluidLoop 2. Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The hot water loop configuration is primary-secondary.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-11",
             "ruleset_reference": "G3.1.3.5",
-            "rule_description": "When the baseline building users boiler(s) or purchased hot water, the HW loop shall be modeled as primary only",
+            "rule_description": "When the baseline building uses boiler(s) or purchased hot water, the HW loop shall be modeled as primary only",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -303,19 +303,19 @@
         "Section": 21,
         "Rule": 11,
         "Test": "c",
-        "test_description": "The project has one building segment with one zone. Baseline ruleset project description has system 12a with child loop value correctly set to null.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 12 with a hot water loop. The hot water loop configuration is primary-only.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-11",
             "ruleset_reference": "G3.1.3.5",
-            "rule_description": "When the baseline building users boiler(s) or purchased hot water, the HW loop shall be modeled as primary only",
+            "rule_description": "When the baseline building uses boiler(s) or purchased hot water, the HW loop shall be modeled as primary only",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -423,19 +423,19 @@
         "Section": 21,
         "Rule": 11,
         "Test": "d",
-        "test_description": "The project has one building segment with one zone. Baseline ruleset project description has system 12a with child loop incorrectly referencing to  FluidLoop 2. Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 12 with a hot water loop. The hot water loop configuration is primary-secondary.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-11",
             "ruleset_reference": "G3.1.3.5",
-            "rule_description": "When the baseline building users boiler(s) or purchased hot water, the HW loop shall be modeled as primary only",
+            "rule_description": "When the baseline building uses boiler(s) or purchased hot water, the HW loop shall be modeled as primary only",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -549,19 +549,19 @@
         "Section": 21,
         "Rule": 11,
         "Test": "e",
-        "test_description": "The project has one building segment with one zone. Baseline ruleset project description has system 10. Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 10. There is no hot water loop.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-11",
             "ruleset_reference": "G3.1.3.5",
-            "rule_description": "When the baseline building users boiler(s) or purchased hot water, the HW loop shall be modeled as primary only",
+            "rule_description": "When the baseline building uses boiler(s) or purchased hot water, the HW loop shall be modeled as primary only",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",

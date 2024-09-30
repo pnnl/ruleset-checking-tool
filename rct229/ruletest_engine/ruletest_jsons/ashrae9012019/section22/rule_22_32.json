@@ -3,7 +3,7 @@
         "Section": 22,
         "Rule": 32,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is correctly modeled with the chiller part_load_efficiency correctly matching the value in Table G3.5.3 part_load_efficiency_metric set to INTEGRATED_PART_LOAD_VALUE.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The baseline chiller efficiency matches the prescibed efficiency based on the capacity range in table G3.5.3.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-32",
@@ -15,7 +15,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -154,7 +154,7 @@
         "Section": 22,
         "Rule": 32,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is incorrectly modeled with the part_load_efficiency_metric set to NONSTANDARD_PART_LOAD_VALUE.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The baseline chiller efficiency metric does not match the prescibed efficiency based on the capacity range in table G3.5.3.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-32",
@@ -166,7 +166,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -305,7 +305,7 @@
         "Section": 22,
         "Rule": 32,
         "Test": "c",
-        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 and is modeled with the part_load_efficiency_metric correctly set to INTEGRATED_PART_LOAD_VALUE, but an incorrect part_load_efficiency.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The baseline chiller efficiency does not match the prescibed efficiency based on the capacity range in table G3.5.3.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-32",
@@ -317,7 +317,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -456,7 +456,7 @@
         "Section": 22,
         "Rule": 32,
         "Test": "d",
-        "test_description": "The project has one building segment with two zones.  HVAC is system type 8 and is correctly modeled with the chiller part_load_efficiency correctly matching the value in Table G3.5.3 part_load_efficiency_metric set to INTEGRATED_PART_LOAD_VALUE.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 8 with a chilled water system. The baseline chiller efficiency matches the prescibed efficiency based on the capacity range in table G3.5.3.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-32",
@@ -468,7 +468,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -494,7 +494,6 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
                                                         "heating_source": "ELECTRIC",
-                                                        "heating_from_loop": "Boiler Loop 1",
                                                         "fan": {
                                                             "id": "Fan 1"
                                                         },
@@ -513,7 +512,6 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
                                                         "heating_source": "ELECTRIC",
-                                                        "heating_from_loop": "Boiler Loop 1",
                                                         "fan": {
                                                             "id": "Fan 2"
                                                         },
@@ -554,13 +552,6 @@
                                 ]
                             }
                         ],
-                        "boilers": [
-                            {
-                                "id": "Boiler 1",
-                                "loop": "Boiler Loop 1",
-                                "energy_source_type": "NATURAL_GAS"
-                            }
-                        ],
                         "chillers": [
                             {
                                 "id": "Chiller 1",
@@ -573,11 +564,6 @@
                         ],
                         "pumps": [
                             {
-                                "id": "Boiler Pump 1",
-                                "loop_or_piping": "Boiler Loop 1",
-                                "speed_control": "FIXED_SPEED"
-                            },
-                            {
                                 "id": "Chiller Pump 1",
                                 "loop_or_piping": "Chiller Loop 1",
                                 "speed_control": "FIXED_SPEED"
@@ -589,10 +575,6 @@
                             }
                         ],
                         "fluid_loops": [
-                            {
-                                "id": "Boiler Loop 1",
-                                "type": "HEATING"
-                            },
                             {
                                 "id": "Chiller Loop 1",
                                 "type": "COOLING",
@@ -614,7 +596,7 @@
         "Section": 22,
         "Rule": 32,
         "Test": "e",
-        "test_description": "The project has one building segment with two zones.  HVAC is system type 8 and is incorrectly modeled with the part_load_efficiency_metric set to NONSTANDARD_PART_LOAD_VALUE.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 8 with a chilled water system. The baseline chiller efficiency metric does not match the prescibed efficiency based on the capacity range in table G3.5.3.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-32",
@@ -626,7 +608,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -652,7 +634,6 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
                                                         "heating_source": "ELECTRIC",
-                                                        "heating_from_loop": "Boiler Loop 1",
                                                         "fan": {
                                                             "id": "Fan 1"
                                                         },
@@ -671,7 +652,6 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
                                                         "heating_source": "ELECTRIC",
-                                                        "heating_from_loop": "Boiler Loop 1",
                                                         "fan": {
                                                             "id": "Fan 2"
                                                         },
@@ -712,13 +692,6 @@
                                 ]
                             }
                         ],
-                        "boilers": [
-                            {
-                                "id": "Boiler 1",
-                                "loop": "Boiler Loop 1",
-                                "energy_source_type": "NATURAL_GAS"
-                            }
-                        ],
                         "chillers": [
                             {
                                 "id": "Chiller 1",
@@ -731,11 +704,6 @@
                         ],
                         "pumps": [
                             {
-                                "id": "Boiler Pump 1",
-                                "loop_or_piping": "Boiler Loop 1",
-                                "speed_control": "FIXED_SPEED"
-                            },
-                            {
                                 "id": "Chiller Pump 1",
                                 "loop_or_piping": "Chiller Loop 1",
                                 "speed_control": "FIXED_SPEED"
@@ -747,10 +715,6 @@
                             }
                         ],
                         "fluid_loops": [
-                            {
-                                "id": "Boiler Loop 1",
-                                "type": "HEATING"
-                            },
                             {
                                 "id": "Chiller Loop 1",
                                 "type": "COOLING",
@@ -772,7 +736,7 @@
         "Section": 22,
         "Rule": 32,
         "Test": "f",
-        "test_description": "The project has one building segment with two zones.  HVAC is system type 8 and is modeled with the part_load_efficiency_metric correctly set to INTEGRATED_PART_LOAD_VALUE, but an incorrect part_load_efficiency.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 8 with a chilled water system. The baseline chiller efficiency does not match the prescibed efficiency based on the capacity range in table G3.5.3.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-32",
@@ -784,7 +748,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -810,7 +774,6 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
                                                         "heating_source": "ELECTRIC",
-                                                        "heating_from_loop": "Boiler Loop 1",
                                                         "fan": {
                                                             "id": "Fan 1"
                                                         },
@@ -829,7 +792,6 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
                                                         "heating_source": "ELECTRIC",
-                                                        "heating_from_loop": "Boiler Loop 1",
                                                         "fan": {
                                                             "id": "Fan 2"
                                                         },
@@ -870,13 +832,6 @@
                                 ]
                             }
                         ],
-                        "boilers": [
-                            {
-                                "id": "Boiler 1",
-                                "loop": "Boiler Loop 1",
-                                "energy_source_type": "NATURAL_GAS"
-                            }
-                        ],
                         "chillers": [
                             {
                                 "id": "Chiller 1",
@@ -889,11 +844,6 @@
                         ],
                         "pumps": [
                             {
-                                "id": "Boiler Pump 1",
-                                "loop_or_piping": "Boiler Loop 1",
-                                "speed_control": "FIXED_SPEED"
-                            },
-                            {
                                 "id": "Chiller Pump 1",
                                 "loop_or_piping": "Chiller Loop 1",
                                 "speed_control": "FIXED_SPEED"
@@ -905,10 +855,6 @@
                             }
                         ],
                         "fluid_loops": [
-                            {
-                                "id": "Boiler Loop 1",
-                                "type": "HEATING"
-                            },
                             {
                                 "id": "Chiller Loop 1",
                                 "type": "COOLING",
@@ -930,7 +876,7 @@
         "Section": 22,
         "Rule": 32,
         "Test": "g",
-        "test_description": "The project has one building segment with two zones.  HVAC is system type 6 and does not have a chilled water plant.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 2. There are no chillers.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-32",
@@ -942,7 +888,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -963,53 +909,31 @@
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
-                                                        "id": "VAV Air Terminal 1",
-                                                        "is_supply_ducted": true,
-                                                        "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 6",
-                                                        "heating_source": "ELECTRIC",
-                                                        "fan_configuration": "PARALLEL"
-                                                    }
-                                                ]
-                                            },
-                                            {
-                                                "id": "Thermal Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "terminals": [
-                                                    {
-                                                        "id": "VAV Air Terminal 2",
-                                                        "is_supply_ducted": true,
-                                                        "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 6",
-                                                        "heating_source": "ELECTRIC",
-                                                        "fan_configuration": "PARALLEL"
+                                                        "id": "PTHP Terminal 1",
+                                                        "is_supply_ducted": false,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "PTHP 1"
                                                     }
                                                 ]
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System 6",
+                                                "id": "PTHP 1",
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1",
+                                                    "id": "HP Cooling Coil 1",
                                                     "type": "DIRECT_EXPANSION"
                                                 },
-                                                "preheat_system": {
-                                                    "id": "Preheat Coil 1",
-                                                    "type": "ELECTRIC_RESISTANCE"
+                                                "heating_system": {
+                                                    "id": "HP Heating Coil 1",
+                                                    "type": "HEAT_PUMP"
                                                 },
                                                 "fan_system": {
-                                                    "id": "VAV Fan System 1",
-                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1"
-                                                        }
-                                                    ],
-                                                    "return_fans": [
-                                                        {
-                                                            "id": "Return Fan 1"
                                                         }
                                                     ]
                                                 }

@@ -44,8 +44,8 @@ APPLICABLE_SYS_TYPES = [
 ]
 
 LIGHTING_SPACE = SchemaEnums.schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
-LABORATORY_TEMP_DELTA = 17.0 * ureg("degF")
-GENERAL_TEMP_DELTA = 20.0 * ureg("degF")
+LABORATORY_TEMP_DELTA = 17.0 * ureg("delta_degF")
+GENERAL_TEMP_DELTA = 20.0 * ureg("delta_degF")
 
 
 class Section19Rule13(RuleDefinitionListIndexedBase):
@@ -65,6 +65,16 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
             is_primary_rule=True,
             rmd_context="ruleset_model_descriptions/0",
             list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
+            precision={
+                "delta_supply_and_design_heating_temp": {
+                    "precision": 1,
+                    "unit": "delta_degF",
+                },
+                "delta_supply_and_design_cooling_temp": {
+                    "precision": 1,
+                    "unit": "delta_degF",
+                },
+            },
         )
 
     def is_applicable(self, context, data=None):
@@ -154,13 +164,17 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
                                 "all_design_setpoints_delta_Ts_are_per_reqs"
                             ] = all(
                                 [
-                                    std_equal(
-                                        LABORATORY_TEMP_DELTA,
+                                    self.precision_comparison[
+                                        "delta_supply_and_design_heating_temp"
+                                    ](
                                         delta_supply_and_design_heating_temp,
-                                    ),
-                                    std_equal(
                                         LABORATORY_TEMP_DELTA,
+                                    ),
+                                    self.precision_comparison[
+                                        "delta_supply_and_design_cooling_temp"
+                                    ](
                                         delta_supply_and_design_cooling_temp,
+                                        LABORATORY_TEMP_DELTA,
                                     ),
                                 ]
                             )
@@ -169,13 +183,17 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
                                 "all_design_setpoints_delta_Ts_are_per_reqs"
                             ] = all(
                                 [
-                                    std_equal(
-                                        GENERAL_TEMP_DELTA,
+                                    self.precision_comparison[
+                                        "delta_supply_and_design_heating_temp"
+                                    ](
                                         delta_supply_and_design_heating_temp,
-                                    ),
-                                    std_equal(
                                         GENERAL_TEMP_DELTA,
+                                    ),
+                                    self.precision_comparison[
+                                        "delta_supply_and_design_cooling_temp"
+                                    ](
                                         delta_supply_and_design_cooling_temp,
+                                        GENERAL_TEMP_DELTA,
                                     ),
                                 ]
                             )
@@ -210,6 +228,12 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
                 required_fields={
                     "$": ["fan_system"],
                     "fan_system": ["minimum_outdoor_airflow"],
+                },
+                precision={
+                    "supply_fans_airflow_b": {
+                        "precision": 1,
+                        "unit": "cfm",
+                    },
                 },
             )
 
@@ -250,8 +274,12 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
                 "all_design_setpoints_delta_Ts_are_per_reqs_b"
             ]
 
-            return not all_design_setpoints_delta_Ts_are_per_reqs_b and std_equal(
-                zone_info["supply_flow_p"], supply_fans_airflow_b
+            return (
+                not all_design_setpoints_delta_Ts_are_per_reqs_b
+                and self.precision_comparison["supply_fans_airflow_b"](
+                    supply_fans_airflow_b,
+                    zone_info["supply_flow_p"],
+                )
             )
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
