@@ -63,7 +63,7 @@ class Section22Rule20(RuleDefinitionListIndexedBase):
         # create a list containing all HVAC systems that are modeled in the rmd_b
         available_type_list = [
             hvac_type
-            for hvac_type in baseline_system_types_dict.keys()
+            for hvac_type in baseline_system_types_dict
             if len(baseline_system_types_dict[hvac_type]) > 0
         ]
         return any(
@@ -81,6 +81,12 @@ class Section22Rule20(RuleDefinitionListIndexedBase):
                 ),
                 required_fields={
                     "$": ["leaving_water_setpoint_temperature"],
+                },
+                precision={
+                    "tower_leaving_temperature_b": {
+                        "precision": 0.1,
+                        "unit": "K",
+                    },
                 },
             )
 
@@ -108,15 +114,18 @@ class Section22Rule20(RuleDefinitionListIndexedBase):
             leaving_water_setpoint_temperature_b = calc_vals[
                 "leaving_water_setpoint_temperature_b"
             ]
-            return tower_leaving_temperature_b.to(
-                ureg.kelvin
-            ) == leaving_water_setpoint_temperature_b.to(ureg.kelvin)
+
+            return self.precision_comparison["tower_leaving_temperature_b"](
+                tower_leaving_temperature_b.to(ureg.kelvin),
+                leaving_water_setpoint_temperature_b.to(ureg.kelvin),
+            )
 
         def is_tolerance_fail(self, context, calc_vals=None, data=None):
             tower_leaving_temperature_b = calc_vals["tower_leaving_temperature_b"]
             leaving_water_setpoint_temperature_b = calc_vals[
                 "leaving_water_setpoint_temperature_b"
             ]
+
             return std_equal(
                 tower_leaving_temperature_b.to(ureg.kelvin),
                 leaving_water_setpoint_temperature_b.to(ureg.kelvin),

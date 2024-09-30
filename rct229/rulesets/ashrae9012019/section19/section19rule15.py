@@ -137,6 +137,16 @@ class Section19Rule15(RuleDefinitionListIndexedBase):
                     "$": ["fan_system"],
                     "fan_system": ["minimum_outdoor_airflow"],
                 },
+                precision={
+                    "supply_fan_airflow_b": {
+                        "precision": 1,
+                        "unit": "cfm",
+                    },
+                    "proposed_supply_flow": {
+                        "precision": 1,
+                        "unit": "cfm",
+                    },
+                },
             )
 
         def is_applicable(self, context, data=None):
@@ -188,7 +198,7 @@ class Section19Rule15(RuleDefinitionListIndexedBase):
             return (
                 supply_fan_qty_b == 1
                 and not all_design_setpoints_105
-                and std_equal(
+                and self.precision_comparison["proposed_supply_flow"](
                     proposed_supply_flow,
                     supply_fan_airflow_b,
                 )
@@ -208,7 +218,7 @@ class Section19Rule15(RuleDefinitionListIndexedBase):
             if (
                 supply_fan_qty_b == 1
                 and not all_design_setpoints_105
-                and std_equal(
+                and self.precision_comparison["proposed_supply_flow"](
                     proposed_supply_flow,
                     supply_fan_airflow_b,
                 )

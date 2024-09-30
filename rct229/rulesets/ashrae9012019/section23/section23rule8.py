@@ -104,6 +104,16 @@ class Section23Rule8(RuleDefinitionListIndexedBase):
                             "output_validation_points",
                         ],
                     },
+                    precision={
+                        "airflow": {
+                            "precision": 1,
+                            "unit": "cfm",
+                        },
+                        "result": {
+                            "precision": 10,
+                            "unit": "W",
+                        },
+                    },
                 )
 
             def get_calc_vals(self, context, data=None):
@@ -143,7 +153,14 @@ class Section23Rule8(RuleDefinitionListIndexedBase):
                     output_validation_points
                 ) == VALIDATION_POINTS_LENGTH and all(
                     [
-                        ovp[0] == tvp[0] and ovp[1] == tvp[1]
+                        self.precision_comparison["airflow"](
+                            ovp[0],
+                            tvp[0],
+                        )
+                        and self.precision_comparison["result"](
+                            ovp[1],
+                            tvp[1],
+                        )
                         for ovp, tvp in zip(
                             output_validation_points, target_validation_points
                         )
