@@ -148,6 +148,29 @@ def find_exactly_one_fluid_loop(rmd: dict, loop_id: str) -> dict:
     )
 
 
+def find_exactly_one_service_water_heating_distribution_system(
+    rmd: dict, swh_distribution_system_id: str
+) -> dict:
+    """
+    Search for the swh distribution system data group in a ruleset model description by matching swh_distribution_system_id:
+    Raise exception if no matching distribution system
+    Parameters
+    ----------
+    rmd: dict
+    swh_distribution_system_id: str
+
+    Returns: json
+    -------
+
+    """
+    return find_exactly_one_with_field_value(
+        "$.service_water_heating_distribution_systems[*]",
+        "id",
+        swh_distribution_system_id,
+        rmd,
+    )
+
+
 def has_heating_system(rmd: dict, hvac_id: str) -> bool:
     """
     Check whether the specified hvac system has a heating system.
