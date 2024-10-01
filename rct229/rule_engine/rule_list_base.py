@@ -25,6 +25,7 @@ class RuleDefinitionListBase(RuleDefinitionBase):
         # An example data object:
         #    {"cliimate_zone": ("baseline", weather/climate_zone")}
         data_items=None,
+        precision=None,
     ):
         self.each_rule = each_rule
         self.data_items = data_items
@@ -40,6 +41,7 @@ class RuleDefinitionListBase(RuleDefinitionBase):
             ruleset_section_title=ruleset_section_title,
             standard_section=standard_section,
             is_primary_rule=is_primary_rule,
+            precision=precision,
         )
 
     def create_context_list(self, context, data):
