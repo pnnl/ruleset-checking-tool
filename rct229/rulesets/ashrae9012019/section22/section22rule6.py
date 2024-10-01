@@ -78,6 +78,12 @@ class Section22Rule6(RuleDefinitionListIndexedBase):
                         "loop_supply_temperature_at_low_load",
                     ],
                 },
+                precision={
+                    "loop_supply_temperature_at_low_load": {
+                        "precision": 1,
+                        "unit": "K",
+                    },
+                },
             )
 
         def get_calc_vals(self, context, data=None):
@@ -96,6 +102,19 @@ class Section22Rule6(RuleDefinitionListIndexedBase):
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
+            loop_supply_temperature_at_low_load = calc_vals[
+                "loop_supply_temperature_at_low_load"
+            ]
+            required_loop_supply_temperature_at_low_load = calc_vals[
+                "required_loop_supply_temperature_at_low_load"
+            ]
+
+            return self.precision_comparison["loop_supply_temperature_at_low_load"](
+                loop_supply_temperature_at_low_load.to(ureg.kelvin),
+                required_loop_supply_temperature_at_low_load.to(ureg.kelvin),
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
             loop_supply_temperature_at_low_load = calc_vals[
                 "loop_supply_temperature_at_low_load"
             ]

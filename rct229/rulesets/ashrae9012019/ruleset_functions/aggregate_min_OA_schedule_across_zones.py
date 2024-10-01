@@ -38,7 +38,7 @@ def aggregate_min_OA_schedule_across_zones(
     )
 
     if len(zone_OA_CFM_list_of_schedules) == 1:
-        # one schedule sceanrio
+        # one schedule scenario
         hourly_zone_running_OA_CFM_total = zone_OA_CFM_list_of_schedules[0]
     else:
         # multi-schedule scenario
