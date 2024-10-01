@@ -50,8 +50,7 @@ class Section11Rule11(RuleDefinitionListIndexedBase):
                 )
                 for swh_use_id in service_water_heating_use_ids:
                     swh_use = find_exactly_one_with_field_value(
-                        "$.buildings[*].building_segments[*]zones[*]spaces["
-                        "*]service_water_heating_uses[*]",
+                        "$.buildings[*].building_segments[*].zones[*].spaces[*].service_water_heating_uses[*]",
                         "id",
                         swh_use_id,
                         rmd_p,
@@ -74,8 +73,8 @@ class Section11Rule11(RuleDefinitionListIndexedBase):
                 )
                 for swh_use_id in service_water_heating_use_ids:
                     swh_use = find_exactly_one_with_field_value(
-                        "$.buildings[*].building_segments[*]zones[*]spaces["
-                        "*]service_water_heating_uses[*]",
+                        "$.buildings[*].building_segments[*].zones[*].spaces["
+                        "*].service_water_heating_uses[*]",
                         "id",
                         swh_use_id,
                         rmd_b,
@@ -83,4 +82,8 @@ class Section11Rule11(RuleDefinitionListIndexedBase):
                     if swh_use.get("use", 0) > 0:
                         has_swh_loads = True
                         break
+            return {"has_swh_loads": has_swh_loads}
+
+        def rule_check(self, context, calc_vals=None, data=None):
+            has_swh_loads = calc_vals["has_swh_loads"]
             return not has_swh_loads
