@@ -270,9 +270,9 @@ def test__get_energy_required_to_heat_swh_use_power_per_person():
         TEST_SWH_USE_POWER_PER_PERSON, TEST_RMD, TEST_BUILDING_SEGMENT
     )
     assert (
-            len(energy_required_by_space) == 2
-            and std_equal(energy_required_by_space["Space 1"].magnitude, 2452800)
-            and std_equal(energy_required_by_space["Space 2"].magnitude, 2452800)
+        len(energy_required_by_space) == 2
+        and std_equal(energy_required_by_space["Space 1"].magnitude, 2452800)
+        and std_equal(energy_required_by_space["Space 2"].magnitude, 2452800)
     )
 
 
@@ -326,8 +326,8 @@ def test__get_energy_required_to_heat_swh_use_other():
         TEST_SWH_USE_OTHER, TEST_RMD, TEST_BUILDING_SEGMENT
     )
     assert (
-            len(energy_required_by_space) == 1
-            and energy_required_by_space["Space 2"] == "UNDETERMINED"
+        len(energy_required_by_space) == 1
+        and energy_required_by_space["Space 2"] == "UNDETERMINED"
     )
 
 
@@ -335,20 +335,27 @@ def test__get_energy_required_to_heat_swh_use_no_space_assigned_other():
     energy_required_by_space = get_energy_required_to_heat_swh_use(
         TEST_SWH_USE_NO_SPACE_ASSIGNED_OTHER, TEST_RMD, TEST_BUILDING_SEGMENT_NO_SWH_USE
     )
-    assert len(energy_required_by_space) == 1 and energy_required_by_space["NO_SPACES_ASSIGNED"] == "UNDETERMINED"
+    assert (
+        len(energy_required_by_space) == 1
+        and energy_required_by_space["NO_SPACES_ASSIGNED"] == "UNDETERMINED"
+    )
 
 
 def test__get_energy_required_to_heat_swh_use_no_space_assigned_power():
     energy_required_by_space = get_energy_required_to_heat_swh_use(
         TEST_SWH_USE_NO_SPACE_ASSIGNED_POWER, TEST_RMD, TEST_BUILDING_SEGMENT_NO_SWH_USE
     )
-    assert len(energy_required_by_space) == 1 and std_equal(energy_required_by_space["NO_SPACES_ASSIGNED"].magnitude,
-                                                            1000000)
+    assert len(energy_required_by_space) == 1 and std_equal(
+        energy_required_by_space["NO_SPACES_ASSIGNED"].magnitude, 1000000
+    )
 
 
 def test__get_energy_required_to_heat_swh_use_no_spacesigned_volume():
     energy_required_by_space = get_energy_required_to_heat_swh_use(
-        TEST_SWH_USE_NO_SPACE_ASSIGNED_VOLUME, TEST_RMD, TEST_BUILDING_SEGMENT_NO_SWH_USE
+        TEST_SWH_USE_NO_SPACE_ASSIGNED_VOLUME,
+        TEST_RMD,
+        TEST_BUILDING_SEGMENT_NO_SWH_USE,
     )
-    assert len(energy_required_by_space) == 1 and std_equal(energy_required_by_space["NO_SPACES_ASSIGNED"].magnitude,
-                                                            1052696908.8)
+    assert len(energy_required_by_space) == 1 and std_equal(
+        energy_required_by_space["NO_SPACES_ASSIGNED"].magnitude, 1052696908.8
+    )

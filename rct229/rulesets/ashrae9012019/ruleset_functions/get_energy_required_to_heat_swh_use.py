@@ -32,7 +32,7 @@ VOLUME_BASED_USE_UNIT = [
 
 def get_energy_required_to_heat_swh_use(
     swh_use: dict, rmd: dict, building_segment: dict
-) -> dict[str, Quantity | str]:
+) -> dict[str, Quantity | None]:
     """
     This function calculates the total energy required to heat the SWH use over the course of a year in btu.  Note - this function does not work for service water heating uses with use_units == "OTHER".  In this case, it will return 0.
 
@@ -166,13 +166,13 @@ def get_energy_required_to_heat_swh_use(
                 volume_this_hour = (
                     volume_this_hour
                     * (1 - drain_heat_recovery_efficiency)
-                    * ureg("lb/gal")
+
                 )
                 dT = (
                     supply_temperature.magnitude
                     - inlet_temperature_hourly_values[index]
                 )
-                energy_to_heat_water = volume_this_hour * 8.3452 * dT * ureg("Btu")
+                energy_to_heat_water = volume_this_hour * 8.3452 * ureg("lb/gallon") * dT * ureg("Btu")
                 energy_required += energy_to_heat_water
             energy_required_by_space[space["id"]] = energy_required
 
@@ -188,7 +188,7 @@ def get_energy_required_to_heat_swh_use(
                 volume_this_hour = (
                     volume_this_hour
                     * (1 - drain_heat_recovery_efficiency)
-                    * ureg("lb/gal")
+                    * ureg("lb/gallon")
                 )
                 dT = (
                     supply_temperature.magnitude
