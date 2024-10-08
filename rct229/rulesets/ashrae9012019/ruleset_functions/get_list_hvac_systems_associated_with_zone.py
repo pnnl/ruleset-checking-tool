@@ -8,7 +8,7 @@ def get_list_hvac_systems_associated_with_zone(rmd: dict, zone_id: str) -> list[
 
     Parameters
     ----------
-    rmd: dict RMI at RuleSetModelDescription level
+    rmd: dict RMD at RuleSetModelDescription level
     zone_id: str Zone id
 
     Returns: list  A list that saves all the HVAC systems associated with the zone.

@@ -63,6 +63,12 @@ class Section5Rule25(RuleDefinitionListIndexedBase):
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
+                    precision={
+                        "skylight_roof_ratio_b": {
+                            "precision": 0.01,
+                            "unit": "",
+                        }
+                    },
                 )
 
             def is_applicable(self, context, data=None):
@@ -110,5 +116,10 @@ class Section5Rule25(RuleDefinitionListIndexedBase):
                 }
 
             def rule_check(self, context, calc_vals=None, data=None):
+                return self.precision_comparison["skylight_roof_ratio_b"](
+                    calc_vals["skylight_roof_ratio_b"].magnitude, SKYLIGHT_THRESHOLD
+                )
+
+            def is_tolerance_fail(self, context, calc_vals=None, data=None):
                 skylight_roof_ratio_b = calc_vals["skylight_roof_ratio_b"]
-                return std_equal(skylight_roof_ratio_b, 0.03)
+                return std_equal(skylight_roof_ratio_b, SKYLIGHT_THRESHOLD)
