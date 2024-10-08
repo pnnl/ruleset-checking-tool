@@ -279,6 +279,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [11-12](section11/Rule11-12.md): For large, 24-hour-per-day facilities that meet the prescriptive criteria for use of condenser heat recovery systems described in Section 6.5.6.2, a system meeting the requirements of that section shall be included in the baseline building design regardless of the exceptions to Section 6.5.6.2.
   * [11-13](section11/Rule11-13.md): Service water-heating energy consumption shall be calculated explicitly based upon the volume of service water heating required and the entering makeup water and the leaving service water-heating temperatures. Entering water temperatures shall be estimated based upon the location. Leaving temperatures shall be based upon the end-use requirements.
   * [11-15](section11/Rule11-15.md): Service water loads and use shall be the same for both the proposed design and baseline building design.
+  * [11-16](section11/Rule11-16.md): Gas water heaters shall be modeled using natural gas as their fuel.  Exceptions: Where natural gas is not available for the proposed building site, as determined by the rating authority, gas water heaters shall be modeled using propane as their fuel.
   * [11-17](section11/Rule11-17.md): All buildings that will have service water heating loads must include those loads in the simulation
 
 ## Section 12 - Receptacles and Other Loads
