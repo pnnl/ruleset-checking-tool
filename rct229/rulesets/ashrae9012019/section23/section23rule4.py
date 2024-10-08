@@ -65,9 +65,10 @@ class Section23Rule4(RuleDefinitionListIndexedBase):
             baseline_system_types_dict = get_baseline_system_types(rmd_b)
 
             hvac_sys_5_or_7_list = [
-                system_type
+                value
                 for system_type in baseline_system_types_dict
                 for applicable_sys_type in APPLICABLE_SYS_TYPES
+                for value in baseline_system_types_dict[system_type]
                 if baseline_system_type_compare(system_type, applicable_sys_type, False)
             ]
 
