@@ -3,7 +3,7 @@
         "Section": 21,
         "Rule": 12,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 7 with flow control and operation correctly. Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The loop has continuous operation with variable flow control.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-12",
@@ -15,7 +15,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -155,7 +155,7 @@
         "Section": 21,
         "Rule": 12,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 7 with flow control specified correctly, and operation incorrectly.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The loop has intermittent operation with variable flow control.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-12",
@@ -167,7 +167,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -307,7 +307,7 @@
         "Section": 21,
         "Rule": 12,
         "Test": "c",
-        "test_description": "The project has one building segment with two zones. Baseline ruleset project description has system 7 with flow control specified incorrectly, and operation correctly.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The loop has continuous operation with fixed flow control.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-12",
@@ -319,7 +319,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -459,7 +459,7 @@
         "Section": 21,
         "Rule": 12,
         "Test": "d",
-        "test_description": "The project has one building segment with one zone. Baseline ruleset project description has system 1b with flow control and operation correctly. Expected result: PASS",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 1 with a hot water loop. The loop has continuous operation with variable flow control.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-12",
@@ -471,7 +471,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -555,7 +555,7 @@
         "Section": 21,
         "Rule": 12,
         "Test": "e",
-        "test_description": "The project has one building segment with one zone. Baseline ruleset project description has system 1b with flow control specified correctly, and operation incorrectly.  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 1 with a hot water loop. The loop has intermittent operation with variable flow control.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-12",
@@ -567,7 +567,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -651,7 +651,7 @@
         "Section": 21,
         "Rule": 12,
         "Test": "f",
-        "test_description": "The project has one building segment with one zone. Baseline ruleset project description has system 1b with flow control specified incorrectly, and operation correctly.  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 1 with a hot water loop. The loop has continuous operation with fixed flow control.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-12",
@@ -663,7 +663,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -747,7 +747,7 @@
         "Section": 21,
         "Rule": 12,
         "Test": "g",
-        "test_description": "The project has one building segment with one zone. Baseline ruleset project description has system 9.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 9. There is no hot water loop.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-12",
@@ -759,7 +759,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",

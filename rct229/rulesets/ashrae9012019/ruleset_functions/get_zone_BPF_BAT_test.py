@@ -86,7 +86,7 @@ TEST_RPD = {
 TEST_RMD = quantify_rmd(TEST_RPD)["ruleset_model_descriptions"][0]
 
 
-def test__TEST_RMD__is_valid():
+def test__TEST_RPD__is_valid():
     schema_validation_result = schema_validate_rmd(TEST_RPD)
     assert schema_validation_result[
         "passed"

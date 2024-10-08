@@ -77,7 +77,7 @@ TEST_RMD = {
 }
 
 
-def test__TEST_RMD__is_valid():
+def test__TEST_RPD__is_valid():
     schema_validation_result = schema_validate_rmd(TEST_RMD)
     assert schema_validation_result[
         "passed"

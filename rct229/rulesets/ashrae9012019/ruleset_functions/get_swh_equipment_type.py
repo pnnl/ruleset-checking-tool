@@ -1,0 +1,100 @@
+from rct229.schema.schema_enums import SchemaEnums
+from rct229.utils.assertions import assert_, getattr_
+from rct229.utils.jsonpath_utils import find_exactly_one_with_field_value
+
+SERVICE_WATER_HEATER_TANK = SchemaEnums.schema_enums["ServiceWaterHeaterTankOptions"]
+SERVICE_WATER_HEATER = SchemaEnums.schema_enums["ServiceWaterHeaterOptions"]
+ENERGY_SOURCE = SchemaEnums.schema_enums["EnergySourceOptions"]
+
+INSTANTANEOUS_TYPE = [
+    SERVICE_WATER_HEATER_TANK.CONSUMER_INSTANTANEOUS,
+    SERVICE_WATER_HEATER_TANK.COMMERCIAL_INSTANTANEOUS,
+    SERVICE_WATER_HEATER_TANK.RESIDENTIAL_DUTY_COMMERCIAL_INSTANTANEOUS,
+]
+STORAGE_TYPE = [
+    SERVICE_WATER_HEATER_TANK.CONSUMER_STORAGE,
+    SERVICE_WATER_HEATER_TANK.COMMERCIAL_STORAGE,
+]
+
+
+class GetSWHEquipmentType:
+    ELECTRIC_RESISTANCE_INSTANTANEOUS = "ELECTRIC_RESISTANCE_INSTANTANEOUS"
+    ELECTRIC_RESISTANCE_STORAGE = "ELECTRIC_RESISTANCE_STORAGE"
+    GAS_INSTANTANEOUS = "GAS_INSTANTANEOUS"
+    GAS_STORAGE = "GAS_STORAGE"
+    OIL_INSTANTANEOUS = "OIL_INSTANTANEOUS"
+    OIL_STORAGE = "OIL_STORAGE"
+    OTHER = "OTHER"
+
+
+def get_swh_equipment_type(rmd: dict, service_water_heating_equipment_id: str) -> str:
+    """
+    This function determines whether the swh equipment type is one of: (ELECTRIC_RESISTANCE_INSTANTANEOUS, ELECTRIC_RESISTANCE_STORAGE, GAS_STORAGE, OTHER)
+
+    Parameters
+    ----------
+    rmd: dict
+        RMD at RuleSetModelDescription level
+    service_water_heating_equipment_id: str
+        service water heating equipment id
+
+    Returns
+    -------
+    type: string
+        ex: type = "ELECTRIC_RESISTANCE_INSTANTANEOUS"
+    """
+
+    service_water_heating_equipment = find_exactly_one_with_field_value(
+        "$.service_water_heating_equipment[*]",
+        "id",
+        service_water_heating_equipment_id,
+        rmd,
+    )
+
+    swh_tank_type = getattr_(
+        service_water_heating_equipment,
+        "service_water_heating_equipment",
+        "tank",
+        "type",
+    )
+    swh_type = getattr_(
+        service_water_heating_equipment,
+        "service_water_heating_equipment",
+        "heater_type",
+    )
+    fuel_type = getattr_(
+        service_water_heating_equipment,
+        "service_water_heating_equipment",
+        "heater_fuel_type",
+    )
+
+    assert_(
+        fuel_type
+        in [
+            ENERGY_SOURCE.ELECTRICITY,
+            ENERGY_SOURCE.NATURAL_GAS,
+            ENERGY_SOURCE.FUEL_OIL,
+        ],
+        "Fuel type must be one of `ELECTRICITY`, `NATURAL_GAS`, `FUEL_OIL`.",
+    )
+
+    if swh_type == SERVICE_WATER_HEATER.CONVENTIONAL:
+        if swh_tank_type in INSTANTANEOUS_TYPE:
+            if fuel_type == ENERGY_SOURCE.ELECTRICITY:
+                type = GetSWHEquipmentType.ELECTRIC_RESISTANCE_INSTANTANEOUS
+            elif fuel_type == ENERGY_SOURCE.NATURAL_GAS:
+                type = GetSWHEquipmentType.GAS_INSTANTANEOUS
+            elif fuel_type == ENERGY_SOURCE.FUEL_OIL:
+                type = GetSWHEquipmentType.OIL_INSTANTANEOUS
+
+        elif swh_tank_type in STORAGE_TYPE:
+            if fuel_type == ENERGY_SOURCE.ELECTRICITY:
+                type = GetSWHEquipmentType.ELECTRIC_RESISTANCE_STORAGE
+            elif fuel_type == ENERGY_SOURCE.NATURAL_GAS:
+                type = GetSWHEquipmentType.GAS_STORAGE
+            elif fuel_type == ENERGY_SOURCE.FUEL_OIL:
+                type = GetSWHEquipmentType.OIL_STORAGE
+    else:
+        type = GetSWHEquipmentType.OTHER
+
+    return type

@@ -246,6 +246,12 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                             "maximum_outdoor_airflow",
                         ],
                     },
+                    precision={
+                        "OA_fraction_b": {
+                            "precision": 0.01,
+                        },
+                        "supply_airflow_b": {"precision": 1, "unit": "cfm"},
+                    },
                 )
 
             def get_calc_vals(self, context, data=None):
@@ -358,7 +364,9 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                 }
 
             def manual_check_required(self, context, calc_vals=None, data=None):
-                OA_fraction_b = calc_vals["OA_fraction_b"]
+                OA_fraction_b = calc_vals[
+                    "OA_fraction_b"
+                ].magnitude  # .magnitude is because `OA_fraction_b` is a `dimensionless` unit in pint
                 supply_airflow_b = calc_vals["supply_airflow_b"]
                 ER_modeled_b = calc_vals["ER_modeled_b"]
                 ER_modeled_p = calc_vals["ER_modeled_p"]
@@ -369,8 +377,20 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                 maximum_hvac_exhaust_b = calc_vals["maximum_hvac_exhaust_b"]
 
                 return (
-                    OA_fraction_b >= OA_fraction_b_70
-                    and supply_airflow_b >= SUPPLY_AIRFLOW_5000CFM
+                    (
+                        OA_fraction_b > OA_fraction_b_70
+                        or self.precision_comparison["OA_fraction_b"](
+                            OA_fraction_b,
+                            OA_fraction_b_70,
+                        )
+                    )
+                    and (
+                        supply_airflow_b > SUPPLY_AIRFLOW_5000CFM
+                        or self.precision_comparison["supply_airflow_b"](
+                            supply_airflow_b,
+                            SUPPLY_AIRFLOW_5000CFM,
+                        )
+                    )
                     and not ER_modeled_b
                 ) and (
                     # Case 7
@@ -399,7 +419,9 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                 return UNDETERMINED_MSG
 
             def rule_check(self, context, calc_vals=None, data=None):
-                OA_fraction_b = calc_vals["OA_fraction_b"]
+                OA_fraction_b = calc_vals[
+                    "OA_fraction_b"
+                ].magnitude  # .magnitude is because `OA_fraction_b` is a `dimensionless` unit in pint
                 supply_airflow_b = calc_vals["supply_airflow_b"]
                 ER_modeled_b = calc_vals["ER_modeled_b"]
                 exception_1_applies = calc_vals["exception_1_applies"]
@@ -418,8 +440,20 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
 
                 return (
                     (
-                        OA_fraction_b >= OA_fraction_b_70
-                        and supply_airflow_b >= SUPPLY_AIRFLOW_5000CFM
+                        (
+                            OA_fraction_b > OA_fraction_b_70
+                            or self.precision_comparison["OA_fraction_b"](
+                                OA_fraction_b,
+                                OA_fraction_b_70,
+                            )
+                        )
+                        and (
+                            supply_airflow_b > SUPPLY_AIRFLOW_5000CFM
+                            or self.precision_comparison["supply_airflow_b"](
+                                supply_airflow_b,
+                                SUPPLY_AIRFLOW_5000CFM,
+                            )
+                        )
                         and (
                             # CASE 1
                             (ER_modeled_b)

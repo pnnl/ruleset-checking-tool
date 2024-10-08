@@ -76,7 +76,7 @@ class Section22Rule29(RuleDefinitionListIndexedBase):
             chiller["condensing_loop"]: find_exactly_one_fluid_loop(
                 rmd_b, getattr_(chiller, "Chiller", "condensing_loop")
             ).get("pump_power_per_flow_rate")
-            for chiller in find_all("chillers[*]", rmd_b)
+            for chiller in find_all("$.chillers[*]", rmd_b)
         }
         return {"condenser_loop_pump_power_dict": condenser_loop_pump_power_dict}
 
@@ -92,6 +92,12 @@ class Section22Rule29(RuleDefinitionListIndexedBase):
                 ),
                 required_fields={
                     "$": ["pump_power_per_flow_rate"],
+                },
+                precision={
+                    "pump_power_per_flow_rate": {
+                        "precision": 1,
+                        "unit": "W/gpm",
+                    },
                 },
             )
 
@@ -110,6 +116,15 @@ class Section22Rule29(RuleDefinitionListIndexedBase):
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
+            pump_power_per_flow_rate = calc_vals["pump_power_per_flow_rate"]
+            required_pump_power = calc_vals["required_pump_power"]
+
+            return self.precision_comparison["pump_power_per_flow_rate"](
+                pump_power_per_flow_rate,
+                required_pump_power,
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
             pump_power_per_flow_rate = calc_vals["pump_power_per_flow_rate"]
             required_pump_power = calc_vals["required_pump_power"]
 

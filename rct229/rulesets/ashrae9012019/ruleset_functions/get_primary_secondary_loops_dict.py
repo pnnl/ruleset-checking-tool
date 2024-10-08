@@ -26,7 +26,7 @@ APPLICABLE_SYS_TYPES = [
 
 def get_primary_secondary_loops_dict(rmd_b: dict) -> dict[str, list[str]]:
     """
-    Get the list of primary and secondary loops for CHW for a B-RMI.
+    Get the list of primary and secondary loops for CHW for a B-RMD.
 
     Parameters
     ----------
@@ -35,7 +35,7 @@ def get_primary_secondary_loops_dict(rmd_b: dict) -> dict[str, list[str]]:
     Returns: primary_secondary_loops_dict
     A dictionary that saves pairs of primary and secondary loops for
     baseline chilled water system, e.g. {primary_loop_1.id: [secondary_loop_1.id,
-    secondary_loop2.id], primary_loop_2.id: [secondary_loop3.id]]}. If B-RMI does
+    secondary_loop2.id], primary_loop_2.id: [secondary_loop3.id]]}. If B-RMD does
     not have primary-secondary loop configuration setup, return an empty dictionary.
     """
     baseline_hvac_system_dict = get_baseline_system_types(rmd_b)
@@ -72,8 +72,9 @@ def get_primary_secondary_loops_dict(rmd_b: dict) -> dict[str, list[str]]:
     ):
         cfl_id = chilled_fluid_loop["id"]
         if cfl_id in chiller_loop_ids and cfl_id in non_process_chw_coil_loop_ids:
-            # No loop in baseline shall be
+            # No loop in baseline shall be primary only
             tmp_primary_secondary_loops_dict = dict()
+            primary_loops = []
             break
         elif cfl_id in chiller_loop_ids:
             if all(

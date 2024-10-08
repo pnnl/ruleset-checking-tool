@@ -283,16 +283,16 @@ def check_unique_ids_in_ruleset_model_descriptions(rmd):
     ruleset_model_descriptions = rmd.get("ruleset_model_descriptions", [])
 
     bad_paths = []
-    for rmi_index, rmi in enumerate(ruleset_model_descriptions):
+    for rmd_index, rmd in enumerate(ruleset_model_descriptions):
         # Collect all jsonpaths to lists
-        paths = json_paths_to_lists(rmi)
+        paths = json_paths_to_lists(rmd)
 
         for list_path in paths:
-            ids = find_all(list_path + "[*].id", rmi)
+            ids = find_all(list_path + "[*].id", rmd)
             if len(ids) != len(set(ids)):
                 # The ids are not unique
                 # list_path starts with "$" that must be removed
-                bad_path = f"ruleset_model_descriptions[{rmi_index}]{list_path[1:]}"
+                bad_path = f"ruleset_model_descriptions[{rmd_index}]{list_path[1:]}"
                 bad_paths.append(bad_path)
 
     error_msg = f"Non-unique ids for paths: {'; '.join(bad_paths)}" if bad_paths else ""
