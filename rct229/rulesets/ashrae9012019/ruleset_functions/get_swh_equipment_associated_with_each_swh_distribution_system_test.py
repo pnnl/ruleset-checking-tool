@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 from typing import List
 
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_equipment_associated_with_each_swh_distrubtion_system import (
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_equipment_associated_with_each_swh_distriubtion_system import (
     get_swh_equipment_associated_with_each_swh_distribution_system,
 )
 from rct229.schema.schema_utils import quantify_rmd
