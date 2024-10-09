@@ -1,6 +1,7 @@
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_energy_required_to_heat_swh_use import (
     get_energy_required_to_heat_swh_use,
 )
+from rct229.schema.config import ureg
 from rct229.schema.schema_utils import quantify_rmd
 from rct229.schema.validate import schema_validate_rmd
 from rct229.utils.jsonpath_utils import (
@@ -271,8 +272,8 @@ def test__get_energy_required_to_heat_swh_use_power_per_person():
     )
     assert (
         len(energy_required_by_space) == 2
-        and std_equal(energy_required_by_space["Space 1"].magnitude, 2452800)
-        and std_equal(energy_required_by_space["Space 2"].magnitude, 2452800)
+        and std_equal(energy_required_by_space["Space 1"], 8830080000 * ureg("J"))
+        and std_equal(energy_required_by_space["Space 2"], 8830080000 * ureg("J"))
     )
 
 
@@ -281,7 +282,7 @@ def test__get_energy_required_to_heat_swh_use_power_per_area():
         TEST_SWH_USE_POWER_PER_AREA, TEST_RMD, TEST_BUILDING_SEGMENT
     )
     assert len(energy_required_by_space) == 1 and std_equal(
-        energy_required_by_space["Space 1"].magnitude, 7008000
+        energy_required_by_space["Space 1"], 25228800000 * ureg("J")
     )
 
 
@@ -290,7 +291,7 @@ def test__get_energy_required_to_heat_swh_use_power():
         TEST_SWH_USE_POWER, TEST_RMD, TEST_BUILDING_SEGMENT
     )
     assert len(energy_required_by_space) == 1 and std_equal(
-        energy_required_by_space["Space 1"].magnitude, 7008000
+        energy_required_by_space["Space 1"], 25228800000 * ureg("J")
     )
 
 
@@ -299,7 +300,7 @@ def test__get_energy_required_to_heat_swh_use_volume_per_person():
         TEST_SWH_USE_VOLUME_PER_PERSON, TEST_RMD, TEST_BUILDING_SEGMENT
     )
     assert len(energy_required_by_space) == 1 and std_equal(
-        energy_required_by_space["Space 1"].magnitude, 526348454.4
+        energy_required_by_space["Space 1"], 146865133289.21106 * ureg("J")
     )
 
 
@@ -308,7 +309,7 @@ def test__get_energy_required_to_heat_swh_use_volume_per_area():
         TEST_SWH_USE_VOLUME_PER_AREA, TEST_RMD, TEST_BUILDING_SEGMENT
     )
     assert len(energy_required_by_space) == 1 and std_equal(
-        energy_required_by_space["Space 2"].magnitude, 1052696908.8
+        energy_required_by_space["Space 2"], 293730266578.4221 * ureg("J")
     )
 
 
@@ -317,7 +318,7 @@ def test__get_energy_required_to_heat_swh_use_volume():
         TEST_SWH_USE_VOLUME, TEST_RMD, TEST_BUILDING_SEGMENT
     )
     assert len(energy_required_by_space) == 1 and std_equal(
-        energy_required_by_space["Space 2"].magnitude, 1052696908.8
+        energy_required_by_space["Space 2"], 293730266578.4221 * ureg("J")
     )
 
 
@@ -327,7 +328,7 @@ def test__get_energy_required_to_heat_swh_use_other():
     )
     assert (
         len(energy_required_by_space) == 1
-        and energy_required_by_space["Space 2"] == "UNDETERMINED"
+        and energy_required_by_space["Space 2"] is None
     )
 
 
@@ -337,7 +338,7 @@ def test__get_energy_required_to_heat_swh_use_no_space_assigned_other():
     )
     assert (
         len(energy_required_by_space) == 1
-        and energy_required_by_space["NO_SPACES_ASSIGNED"] == "UNDETERMINED"
+        and energy_required_by_space["NO_SPACES_ASSIGNED"] is None
     )
 
 
@@ -346,16 +347,16 @@ def test__get_energy_required_to_heat_swh_use_no_space_assigned_power():
         TEST_SWH_USE_NO_SPACE_ASSIGNED_POWER, TEST_RMD, TEST_BUILDING_SEGMENT_NO_SWH_USE
     )
     assert len(energy_required_by_space) == 1 and std_equal(
-        energy_required_by_space["NO_SPACES_ASSIGNED"].magnitude, 1000000
+        energy_required_by_space["NO_SPACES_ASSIGNED"], 3600000000 * ureg("J")
     )
 
 
-def test__get_energy_required_to_heat_swh_use_no_spacesigned_volume():
+def test__get_energy_required_to_heat_swh_use_no_space_assigned_volume():
     energy_required_by_space = get_energy_required_to_heat_swh_use(
         TEST_SWH_USE_NO_SPACE_ASSIGNED_VOLUME,
         TEST_RMD,
         TEST_BUILDING_SEGMENT_NO_SWH_USE,
     )
     assert len(energy_required_by_space) == 1 and std_equal(
-        energy_required_by_space["NO_SPACES_ASSIGNED"].magnitude, 1052696908.8
+        energy_required_by_space["NO_SPACES_ASSIGNED"], 293730266578.4221 * ureg("J")
     )
