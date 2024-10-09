@@ -364,7 +364,11 @@
                     "description": "Classification used for HVAC",
                     "$ref": "Enumerations2019ASHRAE901.schema.json#/definitions/HeatingVentilatingAirConditioningBuildingAreaOptions2019ASHRAE901",
                     "notes": "The enumeration is based on the standard used."
-                }
+				}
+                "service_water_heating_building_area_type": {
+					"description": "Temporary service water heating building area type.",
+                    "type": "string"
+				}
             },
             "required": [
                 "id"
