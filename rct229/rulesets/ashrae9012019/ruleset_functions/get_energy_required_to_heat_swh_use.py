@@ -1,5 +1,4 @@
 from pint import Quantity
-from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_spaces_served_by_swh_use import (
     get_spaces_served_by_swh_use,
 )
@@ -62,6 +61,7 @@ def get_energy_required_to_heat_swh_use(
 
     inlet_temperature_hourly_values = None  # need to be careful. When the `use_multiplier_schedule` key doesn't exist and `use_units` is not in VOLUME_BASED_USE_UNIT, this logic causes an error in line 119
     drain_heat_recovery_efficiency = 0.0
+    supply_temperature = None
     if use_units in VOLUME_BASED_USE_UNIT or is_heat_recovered_by_drain:
         distribution_system_id = getattr_(
             swh_use, "service_water_heating_uses", "served_by_distribution_system"
@@ -154,16 +154,16 @@ def get_energy_required_to_heat_swh_use(
             )
 
         elif use_units == SERVICE_WATER_HEATING_USE_UNIT.VOLUME_PER_PERSON:
-            volume += swh_use_value * ureg("m3") * space.get("number_of_occupants", 0)
+            volume += swh_use_value * ureg("L") * space.get("number_of_occupants", 0)
 
         elif use_units == SERVICE_WATER_HEATING_USE_UNIT.VOLUME_PER_AREA:
-            volume += swh_use_value * ureg("m3/m2") * space.get("floor_area", ZERO.AREA)
+            volume += swh_use_value * ureg("L/m2") * space.get("floor_area", ZERO.AREA)
 
         elif use_units == SERVICE_WATER_HEATING_USE_UNIT.VOLUME:
-            volume += swh_use_value * ureg("m3")
+            volume += swh_use_value * ureg("L")
 
         else:
-            energy_required_by_space[space_id] = RCTOutcomeLabel.UNDETERMINED
+            energy_required_by_space[space_id] = None
 
         # If unit is volume based
         if space_id not in energy_required_by_space:
@@ -185,13 +185,15 @@ def get_energy_required_to_heat_swh_use(
         if use_units == SERVICE_WATER_HEATING_USE_UNIT.OTHER:
             energy_required_by_space["NO_SPACES_ASSIGNED"] = None
         elif use_units == SERVICE_WATER_HEATING_USE_UNIT.POWER:
-            energy_required_by_space["NO_SPACES_ASSIGNED"] = swh_use_value * ureg("W")
+            energy_required_by_space["NO_SPACES_ASSIGNED"] = (
+                swh_use_value * ureg("W") * ureg("hr")
+            )
         elif use_units == SERVICE_WATER_HEATING_USE_UNIT.VOLUME:
             energy_required_by_space["NO_SPACES_ASSIGNED"] = sum(
                 [
                     (
                         swh_use_value
-                        * ureg("m3")
+                        * ureg("L")
                         * hourly_value
                         * (1 - drain_heat_recovery_efficiency)
                     )
