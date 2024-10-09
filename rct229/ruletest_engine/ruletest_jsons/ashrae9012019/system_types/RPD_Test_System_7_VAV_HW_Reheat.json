@@ -107,7 +107,7 @@
                                             "id": "Air Economizer 1",
                                             "type": "TEMPERATURE",
                                             "high_limit_shutoff_temperature": 21.1111,
-                                            "is_integrated": false
+                                            "is_integrated": true
                                         },
                                         "air_energy_recovery": {
                                             "id": "Air Energy Recovery 1",
