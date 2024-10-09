@@ -35,7 +35,7 @@
                                     "fan_system": {
                                         "id": "VAV Fan System 1",
                                         "fan_control": "VARIABLE_SPEED_DRIVE",
-                                        "temperature_control": "LOAD_RESET_TO_SPACE_TEMPERATURE",
+                                        "temperature_control": "ZONE_RESET",
                                         "reset_differential_temperature": 2.777778,
                                         "fan_volume_reset_type": "OPERATING_CAPACITY_RESET",
                                         "operation_during_occupied": "CONTINUOUS",
