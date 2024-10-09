@@ -45108,7 +45108,7 @@
                     "design_capacity": 85000,
                     "minimum_load_ratio": 0.25,
                     "rated_entering_condenser_temperature": 29.4,
-                    "rated_leaving_evaporator_temperature": 10,
+                    "rated_leaving_evaporator_temperature": 6.7,
                     "part_load_efficiency": 0.5,
                     "part_load_efficiency_metric": "INTEGRATED_PART_LOAD_VALUE",
                     "capacity_validation_points": [
@@ -45149,7 +45149,7 @@
                     "rated_capacity": 85000,
                     "design_capacity": 85000,
                     "minimum_load_ratio": 0.25,
-                    "rated_entering_condenser_temperature": 13.3333,
+                    "rated_entering_condenser_temperature": 29.4,
                     "rated_leaving_evaporator_temperature": 6.7,
                     "part_load_efficiency": 0.5,
                     "part_load_efficiency_metric": "INTEGRATED_PART_LOAD_VALUE",
