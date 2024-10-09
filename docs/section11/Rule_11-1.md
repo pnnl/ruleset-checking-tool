@@ -11,7 +11,7 @@
 
 **Appendix G Section Reference:** Table G3.1 #11, proposed column, a & b
 
-**Evaluation Context:** P-RMD each SWH Distribution  
+**Evaluation Context:** each SWH Distribution system in either the P-RMD or U-RMD  
 **Data Lookup:**   
 **Function Call:**  
 - **get_component_by_id**  
@@ -26,16 +26,18 @@
 - only projects with SWH in the user model are expected to have a SWH system in the proposed model.  If there is no SWH in the user model, we assume there is no SWH system designed, and instead rule 11-3 Applies and P_RMD matches B_RMD.
 - use the function get_SWH_equipment_associated_with_each_swh_distribution_system to get a dictionary of SWH equipment associated with each Distribution System for the Proposed model (pumps, tanks, SWH use, distribution system, etc): `p_swh_system_and_equip_dict = get_SWH_equipment_associated_with_each_swh_distribution_system(P_RMD)`
 - use the function get_SWH_equipment_associated_with_each_swh_distribution_system to get a dictionary of SWH equipment associated with each Distribution System for the User model (pumps, tanks, SWH use, distribution system, etc): `u_swh_system_and_equip_dict = get_SWH_equipment_associated_with_each_swh_distribution_system(U_RMD)`
+- create a list of the distribution ids that have been checked: `checked_dist_ids = []`
 - for each distribution system: `for distribution_id in p_swh_system_and_equip_dict:`
     - get the distribution system: `p_distribution = get_component_by_id(P_RMD, distribution_id)`
     - for each swh use in the dictionary, check to see that the swh use exists in the user model: `for swh_use_id in p_swh_system_and_equip_dict[distribution_id]["USES"]:`
         - get the user swh_use: `u_swh_use = get_component_by_id(U_RMD, swh_use_id)`
-        - if the u_swh_use exists, continue to rule logic as we only need one SWH use to have this rule be applicable: `if(u_swh_use): CONTINUE TO RULE LOGIC #1`
-    - if the program reaches this line without going to the rule logic, the project is not applicable for this SWH heating distribution system: `NOT_APPLICABLE`
+        - if the u_swh_use exists, continue to rule logic as we only need one SWH use to have this rule be applicable, also append the id to the list of systems that have been checked: `if(u_swh_use): CONTINUE TO RULE LOGIC #1; checked_dist_ids.append(distribution_id)`
+    - if the program reaches this line without going to the rule logic, the project is not applicable for this SWH heating distribution system id: `NOT_APPLICABLE`
 - we also need to look at the distribution systems in the user model and ensure that all of them have been covered by the above checks.  If any exist (and have SWH use), but do not exist in the proposed model, then there is an issue: `for distribution_id in u_swh_system_and_equip_dict:`
     - check whether there are SWH uses connected to the distribution system: `if len(u_swh_system_and_equip_dict[distribution_id]["USES"]) > ):`
-        - if uses exist, continue to rule logic #2: `CONTINUE TO RULE LOGIC #2`
-    - if the program reaches this line without going to the rule logic, the project is not applicable for this SWH heating distribution system: `NOT_APPLICABLE`
+        - continue if the distribution_id is not the id of a system that has already been checked: `if !distribution_id in? checked_dist_ids:`
+          - if uses exist, continue to rule logic #2: `CONTINUE TO RULE LOGIC #2`
+    - if the program reaches this line without going to the rule logic, the project is not applicable for this SWH heating distribution system id: `NOT_APPLICABLE`
 
 
     ## Rule Logic #1: 
