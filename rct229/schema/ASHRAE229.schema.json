@@ -1440,7 +1440,13 @@
                 "has_automatic_control": {
                     "description": "Indicates that the receptacles have automatic controls",
                     "type": "boolean"
-                }
+                },
+				"automatic_controlled_percentage": {
+					"description": "THIS ELEMENT IS NOT YET IN THE SCHEMA. Manually added for rule 12-3 testing",
+                    "type": "number",
+                    "minimum": 0.0,
+                    "maximum": 1.0
+				}
             },
             "required": [
                 "id"

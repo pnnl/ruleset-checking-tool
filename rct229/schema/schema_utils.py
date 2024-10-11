@@ -18,7 +18,7 @@ def clean_schema_units(schema_unit_str):
      Parameters
      ----------
      schema_unit_str : str
-         String representing a display or service name representation that may be misunderstood by pint. This funciton
+         String representing a display or service name representation that may be misunderstood by pint. This function
          cleans up this unit (e.g., W/K-m2)
 
      Returns
