@@ -5,12 +5,13 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_spaces_served_by_swh_us
 from rct229.schema.config import ureg
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import assert_, getattr_
-from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.jsonpath_utils import find_all, find_exactly_one_with_field_value
 from rct229.utils.pint_utils import ZERO
 from rct229.utils.utility_functions import (
     find_exactly_one_schedule,
     find_exactly_one_service_water_heating_distribution_system,
     find_exactly_one_space,
+    find_exactly_one_service_water_heating_use,
 )
 
 SERVICE_WATER_HEATING_USE_UNIT = SchemaEnums.schema_enums[
@@ -33,22 +34,26 @@ WATER_SPECIFIC_HEAT = 1.001 * ureg("Btu/lb/delta_degF")
 
 
 def get_energy_required_to_heat_swh_use(
-    swh_use: dict, rmd: dict, building_segment: dict
+    swh_use_id: str, rmd: dict, building_segment_id: str
 ) -> dict[str, Quantity | None]:
     """
-    This function calculates the total energy required to heat the SWH use over the course of a year.  Note - this function does not work for service water heating uses with use_units == "OTHER".  In this case, it will return 0.
+    This function calculates the total energy required to heat the SWH use over the course of a year.  Note - this function does not work for service water heating uses with use_units == "OTHER".  In this case, it will return 0 Btu.
 
     Parameters
     ----------
-    swh_use: dict, service_water_heating_uses
+    swh_use_id: str, id of service_water_heating_uses
     rmd: dict, RMD at RuleSetModelDescription level
-    building_segment: dict, building_segment
+    building_segment_id: str, id of building_segment
 
     Returns
     ----------
     energy_required_by_space: A dict where the keys are space_ids and values are the total energy required to heat the swh_use for that space.  If a swh_use is not assigned to any spaces, the key will be "NO_SPACES_ASSIGNED; if the swh_use.use_units == 'OTHER', the total energy required will be set to None"
 
     """
+    swh_use = find_exactly_one_service_water_heating_use(rmd, swh_use_id)
+    building_segment = find_exactly_one_with_field_value(
+        "$.buildings[*].building_segments[*]", "id", building_segment_id, rmd
+    )
     hourly_schedule_id = swh_use.get("use_multiplier_schedule")
     hourly_schedule = (
         find_exactly_one_schedule(rmd, hourly_schedule_id)
@@ -88,7 +93,7 @@ def get_energy_required_to_heat_swh_use(
             inlet_temperature_hourly_values = getattr_(
                 inlet_temperature_schedule, "schedules", "hourly_values"
             )
-        else:
+        if is_heat_recovered_by_drain:
             drain_heat_recovery_efficiency = getattr_(
                 distribution_system,
                 "service_water_heating_distribution_systems",
@@ -101,9 +106,9 @@ def get_energy_required_to_heat_swh_use(
             )
 
     space_ids = get_spaces_served_by_swh_use(rmd, swh_use["id"])
-    space_within_building_segment_ids = [
-        space["id"] for space in find_all("$.zones[*].spaces[*]", building_segment)
-    ]
+    space_within_building_segment_ids = find_all(
+        "$.zones[*].spaces[*].id", building_segment
+    )
     spaces = [
         find_exactly_one_space(rmd, space_id)
         for space_id in space_ids
@@ -114,7 +119,7 @@ def get_energy_required_to_heat_swh_use(
         spaces = find_all("$.zones[*].spaces[*]", building_segment)
 
     hourly_values = (
-        hourly_schedule.get("hourly_values")
+        getattr_(hourly_schedule, "hourly_schedule", "hourly_values")
         if hourly_schedule is not None
         else [1] * len(inlet_temperature_hourly_values)
     )
@@ -186,7 +191,11 @@ def get_energy_required_to_heat_swh_use(
             energy_required_by_space["NO_SPACES_ASSIGNED"] = None
         elif use_units == SERVICE_WATER_HEATING_USE_UNIT.POWER:
             energy_required_by_space["NO_SPACES_ASSIGNED"] = (
-                swh_use_value * ureg("W") * ureg("hr")
+                swh_use_value
+                * ureg("W")
+                * sum(hourly_values)
+                * ureg("hr")
+                * (1 - drain_heat_recovery_efficiency)
             )
         elif use_units == SERVICE_WATER_HEATING_USE_UNIT.VOLUME:
             energy_required_by_space["NO_SPACES_ASSIGNED"] = sum(
