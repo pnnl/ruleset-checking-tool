@@ -36,7 +36,7 @@ def get_energy_required_to_heat_swh_use(
     swh_use: dict, rmd: dict, building_segment: dict
 ) -> dict[str, Quantity | None]:
     """
-    This function calculates the total energy required to heat the SWH use over the course of a year.  Note - this function does not work for service water heating uses with use_units == "OTHER".  In this case, it will return 0.
+    This function calculates the total energy required to heat the SWH use over the course of a year.  Note - this function does not work for service water heating uses with use_units == "OTHER".  In this case, it will return 0 Btu.
 
     Parameters
     ----------
@@ -88,7 +88,7 @@ def get_energy_required_to_heat_swh_use(
             inlet_temperature_hourly_values = getattr_(
                 inlet_temperature_schedule, "schedules", "hourly_values"
             )
-        else:
+        if is_heat_recovered_by_drain:
             drain_heat_recovery_efficiency = getattr_(
                 distribution_system,
                 "service_water_heating_distribution_systems",
@@ -101,9 +101,9 @@ def get_energy_required_to_heat_swh_use(
             )
 
     space_ids = get_spaces_served_by_swh_use(rmd, swh_use["id"])
-    space_within_building_segment_ids = [
-        space["id"] for space in find_all("$.zones[*].spaces[*]", building_segment)
-    ]
+    space_within_building_segment_ids = find_all(
+        "$.zones[*].spaces[*].id", building_segment
+    )
     spaces = [
         find_exactly_one_space(rmd, space_id)
         for space_id in space_ids
@@ -114,7 +114,7 @@ def get_energy_required_to_heat_swh_use(
         spaces = find_all("$.zones[*].spaces[*]", building_segment)
 
     hourly_values = (
-        hourly_schedule.get("hourly_values")
+        getattr_(hourly_schedule, "hourly_schedule", "hourly_values")
         if hourly_schedule is not None
         else [1] * len(inlet_temperature_hourly_values)
     )
@@ -186,7 +186,11 @@ def get_energy_required_to_heat_swh_use(
             energy_required_by_space["NO_SPACES_ASSIGNED"] = None
         elif use_units == SERVICE_WATER_HEATING_USE_UNIT.POWER:
             energy_required_by_space["NO_SPACES_ASSIGNED"] = (
-                swh_use_value * ureg("W") * ureg("hr")
+                swh_use_value
+                * ureg("W")
+                * sum(hourly_values)
+                * ureg("hr")
+                * (1 - drain_heat_recovery_efficiency)
             )
         elif use_units == SERVICE_WATER_HEATING_USE_UNIT.VOLUME:
             energy_required_by_space["NO_SPACES_ASSIGNED"] = sum(

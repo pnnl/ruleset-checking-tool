@@ -347,7 +347,8 @@ def test__get_energy_required_to_heat_swh_use_no_space_assigned_power():
         TEST_SWH_USE_NO_SPACE_ASSIGNED_POWER, TEST_RMD, TEST_BUILDING_SEGMENT_NO_SWH_USE
     )
     assert len(energy_required_by_space) == 1 and std_equal(
-        energy_required_by_space["NO_SPACES_ASSIGNED"], 3600000000 * ureg("J")
+        energy_required_by_space["NO_SPACES_ASSIGNED"],
+        7008000000 * ureg("W") * ureg("h"),
     )
 
 
