@@ -6,7 +6,6 @@ from rct229.schema.schema_utils import quantify_rmd
 from rct229.schema.validate import schema_validate_rmd
 from rct229.utils.jsonpath_utils import (
     find_exactly_one_with_field_value,
-    find_one_with_field_value,
 )
 from rct229.utils.std_comparisons import std_equal
 
@@ -61,14 +60,6 @@ TEST_RMD = {
                                 {
                                     "id": "Space 2",
                                     "service_water_heating_uses": [
-                                        {
-                                            "id": "SWH Use 1",
-                                            "use": 100,
-                                            "use_units": "POWER_PER_PERSON",
-                                            "is_heat_recovered_by_drain": True,
-                                            "served_by_distribution_system": "SWH Distribution 1",
-                                            "use_multiplier_schedule": "SWH Schedule 1",
-                                        },
                                         {
                                             "id": "SWH Use 5",
                                             "use": 10,
@@ -184,80 +175,6 @@ TEST_BUILDING_SEGMENT_NO_SWH_USE = find_exactly_one_with_field_value(
     TEST_RMD,
 )
 
-TEST_SWH_USE_POWER_PER_PERSON = find_one_with_field_value(
-    "$.buildings[*].building_segments[*].zones[*].spaces[*].service_water_heating_uses[*]",
-    "id",
-    "SWH Use 1",
-    TEST_RMD,
-)
-
-TEST_SWH_USE_POWER_PER_AREA = find_one_with_field_value(
-    "$.buildings[*].building_segments[*].zones[*].spaces[*].service_water_heating_uses[*]",
-    "id",
-    "SWH Use 2",
-    TEST_RMD,
-)
-
-TEST_SWH_USE_POWER = find_one_with_field_value(
-    "$.buildings[*].building_segments[*].zones[*].spaces[*].service_water_heating_uses[*]",
-    "id",
-    "SWH Use 3",
-    TEST_RMD,
-)
-
-TEST_SWH_USE_VOLUME_PER_PERSON = find_one_with_field_value(
-    "$.buildings[*].building_segments[*].zones[*].spaces[*].service_water_heating_uses[*]",
-    "id",
-    "SWH Use 4",
-    TEST_RMD,
-)
-
-TEST_SWH_USE_VOLUME_PER_AREA = find_one_with_field_value(
-    "$.buildings[*].building_segments[*].zones[*].spaces[*].service_water_heating_uses[*]",
-    "id",
-    "SWH Use 5",
-    TEST_RMD,
-)
-
-TEST_SWH_USE_VOLUME = find_one_with_field_value(
-    "$.buildings[*].building_segments[*].zones[*].spaces[*].service_water_heating_uses[*]",
-    "id",
-    "SWH Use 6",
-    TEST_RMD,
-)
-
-TEST_SWH_USE_OTHER = find_one_with_field_value(
-    "$.buildings[*].building_segments[*].zones[*].spaces[*].service_water_heating_uses[*]",
-    "id",
-    "SWH Use 7",
-    TEST_RMD,
-)
-
-TEST_SWH_USE_NO_SPACE_ASSIGNED_OTHER = {
-    "id": "SWH Use 8",
-    "use": 1000,
-    "use_units": "OTHER",
-    "is_heat_recovered_by_drain": True,
-    "served_by_distribution_system": "SWH Distribution 1",
-    "use_multiplier_schedule": "SWH Schedule 1",
-}
-
-TEST_SWH_USE_NO_SPACE_ASSIGNED_POWER = {
-    "id": "SWH Use 9",
-    "use": 1000000,
-    "use_units": "POWER",
-    "served_by_distribution_system": "SWH Distribution 1",
-    "use_multiplier_schedule": "SWH Schedule 1",
-}
-
-TEST_SWH_USE_NO_SPACE_ASSIGNED_VOLUME = {
-    "id": "SWH Use 10",
-    "use": 1000,
-    "use_units": "VOLUME",
-    "served_by_distribution_system": "SWH Distribution 1",
-    "use_multiplier_schedule": "SWH Schedule 1",
-}
-
 
 def test__TEST_RPD__is_valid():
     schema_validation_result = schema_validate_rmd(TEST_RPD_FULL)
@@ -268,18 +185,16 @@ def test__TEST_RPD__is_valid():
 
 def test__get_energy_required_to_heat_swh_use_power_per_person():
     energy_required_by_space = get_energy_required_to_heat_swh_use(
-        TEST_SWH_USE_POWER_PER_PERSON, TEST_RMD, TEST_BUILDING_SEGMENT
+        "SWH Use 1", TEST_RMD, "Building Segment 1"
     )
-    assert (
-        len(energy_required_by_space) == 2
-        and std_equal(energy_required_by_space["Space 1"], 8830080000 * ureg("J"))
-        and std_equal(energy_required_by_space["Space 2"], 8830080000 * ureg("J"))
+    assert len(energy_required_by_space) == 1 and std_equal(
+        energy_required_by_space["Space 1"], 8830080000 * ureg("J")
     )
 
 
 def test__get_energy_required_to_heat_swh_use_power_per_area():
     energy_required_by_space = get_energy_required_to_heat_swh_use(
-        TEST_SWH_USE_POWER_PER_AREA, TEST_RMD, TEST_BUILDING_SEGMENT
+        "SWH Use 2", TEST_RMD, "Building Segment 1"
     )
     assert len(energy_required_by_space) == 1 and std_equal(
         energy_required_by_space["Space 1"], 25228800000 * ureg("J")
@@ -288,7 +203,7 @@ def test__get_energy_required_to_heat_swh_use_power_per_area():
 
 def test__get_energy_required_to_heat_swh_use_power():
     energy_required_by_space = get_energy_required_to_heat_swh_use(
-        TEST_SWH_USE_POWER, TEST_RMD, TEST_BUILDING_SEGMENT
+        "SWH Use 3", TEST_RMD, "Building Segment 1"
     )
     assert len(energy_required_by_space) == 1 and std_equal(
         energy_required_by_space["Space 1"], 25228800000 * ureg("J")
@@ -297,7 +212,7 @@ def test__get_energy_required_to_heat_swh_use_power():
 
 def test__get_energy_required_to_heat_swh_use_volume_per_person():
     energy_required_by_space = get_energy_required_to_heat_swh_use(
-        TEST_SWH_USE_VOLUME_PER_PERSON, TEST_RMD, TEST_BUILDING_SEGMENT
+        "SWH Use 4", TEST_RMD, "Building Segment 1"
     )
     assert len(energy_required_by_space) == 1 and std_equal(
         energy_required_by_space["Space 1"], 146865133289.21106 * ureg("J")
@@ -306,7 +221,7 @@ def test__get_energy_required_to_heat_swh_use_volume_per_person():
 
 def test__get_energy_required_to_heat_swh_use_volume_per_area():
     energy_required_by_space = get_energy_required_to_heat_swh_use(
-        TEST_SWH_USE_VOLUME_PER_AREA, TEST_RMD, TEST_BUILDING_SEGMENT
+        "SWH Use 5", TEST_RMD, "Building Segment 1"
     )
     assert len(energy_required_by_space) == 1 and std_equal(
         energy_required_by_space["Space 2"], 293730266578.4221 * ureg("J")
@@ -315,7 +230,7 @@ def test__get_energy_required_to_heat_swh_use_volume_per_area():
 
 def test__get_energy_required_to_heat_swh_use_volume():
     energy_required_by_space = get_energy_required_to_heat_swh_use(
-        TEST_SWH_USE_VOLUME, TEST_RMD, TEST_BUILDING_SEGMENT
+        "SWH Use 6", TEST_RMD, "Building Segment 1"
     )
     assert len(energy_required_by_space) == 1 and std_equal(
         energy_required_by_space["Space 2"], 293730266578.4221 * ureg("J")
@@ -324,40 +239,9 @@ def test__get_energy_required_to_heat_swh_use_volume():
 
 def test__get_energy_required_to_heat_swh_use_other():
     energy_required_by_space = get_energy_required_to_heat_swh_use(
-        TEST_SWH_USE_OTHER, TEST_RMD, TEST_BUILDING_SEGMENT
+        "SWH Use 7", TEST_RMD, "Building Segment 1"
     )
     assert (
         len(energy_required_by_space) == 1
         and energy_required_by_space["Space 2"] is None
-    )
-
-
-def test__get_energy_required_to_heat_swh_use_no_space_assigned_other():
-    energy_required_by_space = get_energy_required_to_heat_swh_use(
-        TEST_SWH_USE_NO_SPACE_ASSIGNED_OTHER, TEST_RMD, TEST_BUILDING_SEGMENT_NO_SWH_USE
-    )
-    assert (
-        len(energy_required_by_space) == 1
-        and energy_required_by_space["NO_SPACES_ASSIGNED"] is None
-    )
-
-
-def test__get_energy_required_to_heat_swh_use_no_space_assigned_power():
-    energy_required_by_space = get_energy_required_to_heat_swh_use(
-        TEST_SWH_USE_NO_SPACE_ASSIGNED_POWER, TEST_RMD, TEST_BUILDING_SEGMENT_NO_SWH_USE
-    )
-    assert len(energy_required_by_space) == 1 and std_equal(
-        energy_required_by_space["NO_SPACES_ASSIGNED"],
-        7008000000 * ureg("W") * ureg("h"),
-    )
-
-
-def test__get_energy_required_to_heat_swh_use_no_space_assigned_volume():
-    energy_required_by_space = get_energy_required_to_heat_swh_use(
-        TEST_SWH_USE_NO_SPACE_ASSIGNED_VOLUME,
-        TEST_RMD,
-        TEST_BUILDING_SEGMENT_NO_SWH_USE,
-    )
-    assert len(energy_required_by_space) == 1 and std_equal(
-        energy_required_by_space["NO_SPACES_ASSIGNED"], 293730266578.4221 * ureg("J")
     )
