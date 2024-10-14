@@ -3,7 +3,7 @@
 **Schema Version:** 0.0.37  
 **Mandatory Rule:** True  
 **Rule ID:** 11-6  
-**Rule Description:** Piping losses shall not be modeled. 
+**Rule Description:** Piping losses shall not be modeled.   
 **Rule Assertion:** Options are PASS/FAIL/NOT_APPLICABLE/UNDETERMINED  
 **Appendix G Section Reference:** Table G3.1 #11, baseline column, i
 
@@ -26,7 +26,7 @@
             - set the piping_losses_modeled to true and go directly to rule assertion: `piping_losses_modeled = true: GO TO RULE_ASSERTION`
 
     - **Rule Assertion - Zone:**
-    - Case1: piping losses are not modeled, PASS: `if !piping_losses_modeled: PASS`
+    - Case1: piping losses are not modeled, PASS: `if piping_losses_modeled == False: PASS`
     - Case2: piping losses are modeled, FAIL: `else: FAIL`
 
 
