@@ -24,16 +24,13 @@ def get_swh_equipment_associated_with_each_swh_distribution_system(
 ) -> dict[str, SWHDistributionAssociations]:
     """
     This function gets all the SWH equipment connected to a SWH distribution system.  The information is stored in a dictionary where the keys are the SWH Distribution System Ids and values are a dictionary giving the ServiceWaterHeatingEquipment, and Pumps connected to the particular SWH distribution system.
-
     Parameters
     ----------
     rmd: dict, RMD at RuleSetModelDescription level
-
     Returns
     -------
     swh_and_equip_dict: A dictionary containing where the keys are the SWH Distribution System IDs and values are dictionaries where keys are the type of SWH equipment and values are the ids of the connected equipment.
                         Example:  {"swh_distribution1":{"swh_heating_eq":["swh_eq1","swh_eq2"], "pumps":["p1"], "tanks":["t1"], "piping":["piping1"], "solar_thermal":[], "uses":["sp1_use","sp2_use"], "spaces_served":[sp1,sp2]}}
-
     """
 
     swh_and_equip_dict = {}
