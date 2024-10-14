@@ -7,7 +7,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_uses_associated_wit
     get_swh_uses_associated_with_each_building_segment,
 )
 from rct229.utils.assertions import getattr_
-from rct229.utils.utility_functions import find_exactly_one_schedule
+from rct229.utils.jsonpath_utils import find_all, find_one, find_one_with_field_value
 
 APPLICABILITY_MSG = (
     "This building is a 24hr-facility with service water heating loads. If the building meets the prescriptive criteria for use of condenser heat recovery systems described in 90.1 Section 6.5.6.2, a system meeting the requirements of that section shall be included in the baseline building design regardless of the exceptions to Section 6.5.6.2. "
@@ -50,31 +50,57 @@ class Section11Rule12(RuleDefinitionListIndexedBase):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
 
-            return {"rmd_b": rmd_b, "rmd_p": rmd_p}
+            swh_uses_associated_with_each_building_segment_p = {
+                building_segment_id: get_swh_uses_associated_with_each_building_segment(
+                    rmd_p, building_segment_id
+                )
+                for building_segment_id in find_all(
+                    "$.buildings[*].building_segments[*].id", rmd_p
+                )
+            }
 
-        class BuildingRule(RuleDefinitionListIndexedBase):
+            return {
+                "is_leap_year_b": data["is_leap_year_b"],
+                "schedules_b": find_all("$.schedules[*]", rmd_b),
+                "schedules_p": find_all("$.schedules[*]", rmd_p),
+                "swh_uses_associated_with_each_building_segment_p": swh_uses_associated_with_each_building_segment_p,
+            }
+
+        class BuildingRule(PartialRuleDefinition):
             def __init__(self):
                 super(Section11Rule12.RMDRule.BuildingRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
-                    each_rule=Section11Rule12.RMDRule.BuildingRule.BuildingSegmentRule(),
-                    index_rmd=BASELINE_0,
-                    list_path="$.building_segments[*]",
+                    manual_check_required_msg=APPLICABILITY_MSG,
                 )
 
-            def create_data(self, context, data):
+            def is_applicable(self, context, data=None):
                 building_b = context.BASELINE_0
-                rmd_b = data["rmd_b"]
+                building_p = context.PROPOSED
+                schedules_b = data["schedules_b"]
                 is_leap_year_b = data["is_leap_year_b"]
+
+                service_water_heating_uses_p = find_all(
+                    "$.building_segments[*].zones[*].spaces[*].service_water_heating_uses[*]",
+                    building_p,
+                )
+                building_open_schedule_p = find_one(
+                    "$.building_open_schedule", building_p
+                )
 
                 bldg_open_sch_id_b = getattr_(
                     building_b, "buildings", "building_open_schedule"
                 )
 
-                bldg_open_sch_b = find_exactly_one_schedule(rmd_b, bldg_open_sch_id_b)[
-                    "hourly_values"
-                ]
+                bldg_open_sch_b = next(
+                    (
+                        schedule_b["hourly_values"]
+                        for schedule_b in schedules_b
+                        if schedule_b["id"] == bldg_open_sch_id_b
+                    ),
+                    [],
+                )
 
                 hours_this_year = (
                     LeapYear.LEAP_YEAR_HOURS
@@ -82,75 +108,43 @@ class Section11Rule12(RuleDefinitionListIndexedBase):
                     else LeapYear.REGULAR_YEAR_HOURS
                 )
 
+                return (
+                    service_water_heating_uses_p
+                    and building_open_schedule_p is not None
+                    and sum(bldg_open_sch_b) == hours_this_year
+                )
+
+            def get_calc_vals(self, context, data=None):
+                swh_uses_associated_with_each_building_segment_p = data[
+                    "swh_uses_associated_with_each_building_segment_p"
+                ]
+
                 return {
-                    "bldg_open_sch_b": bldg_open_sch_b,
-                    "hours_this_year": hours_this_year,
+                    "swh_uses_associated_with_each_building_segment_p": swh_uses_associated_with_each_building_segment_p
                 }
 
-            def list_filter(self, context_item, data):
-                bldg_open_sch_b = data["bldg_open_sch_b"]
-                hours_this_year = data["hours_this_year"]
+            def applicability_check(self, context, calc_vals, data):
+                building_p = context.PROPOSED
 
-                return sum(bldg_open_sch_b) == hours_this_year
+                swh_uses_associated_with_each_building_segment_p = calc_vals[
+                    "swh_uses_associated_with_each_building_segment_p"
+                ]
 
-            class BuildingSegmentRule(RuleDefinitionListIndexedBase):
-                def __init__(self):
-                    super(
-                        Section11Rule12.RMDRule.BuildingRule.BuildingSegmentRule, self
-                    ).__init__(
-                        rmds_used=produce_ruleset_model_description(
-                            USER=False, BASELINE_0=True, PROPOSED=True
-                        ),
-                        each_rule=Section11Rule12.RMDRule.BuildingRule.BuildingSegmentRule.SWHRule(),
-                        index_rmd=BASELINE_0,
-                        list_path="$.zones[*].spaces[*].service_water_heating_uses[*]",
-                    )
-
-                def create_data(self, context, data):
-                    building_segment_p = context.PROPOSED
-                    rmd_p = data["rmd_p"]
-
-                    service_water_heating_use_ids_list_p = (
-                        get_swh_uses_associated_with_each_building_segment(
-                            rmd_p, building_segment_p["id"]
+                service_water_heating_uses_list_p = []
+                for bldg_segment_id in swh_uses_associated_with_each_building_segment_p:
+                    for (
+                        served_by_distribution_system_id
+                    ) in swh_uses_associated_with_each_building_segment_p[
+                        bldg_segment_id
+                    ]:
+                        swh_use_p = find_one_with_field_value(
+                            "$.building_segments[*].zones[*].spaces[*].service_water_heating_uses[*]",
+                            "served_by_distribution_system",
+                            served_by_distribution_system_id,
+                            building_p,
                         )
-                    )
-
-                    return {
-                        "service_water_heating_use_ids_list_p": service_water_heating_use_ids_list_p
-                    }
-
-                def list_filter(self, context_item, data):
-                    swh_use_p = context_item.PROPOSED
-                    served_by_distribution_system_p = getattr_(
-                        swh_use_p,
-                        "service_water_heating_uses",
-                        "served_by_distribution_system",
-                    )
-                    service_water_heating_use_ids_list_p = data[
-                        "service_water_heating_use_ids_list_p"
-                    ]
-
-                    return (
-                        served_by_distribution_system_p
-                        in service_water_heating_use_ids_list_p
-                    )
-
-                class SWHRule(PartialRuleDefinition):
-                    def __init__(self):
-                        super(
-                            Section11Rule12.RMDRule.BuildingRule.BuildingSegmentRule.SWHRule,
-                            self,
-                        ).__init__(
-                            rmds_used=produce_ruleset_model_description(
-                                USER=False, BASELINE_0=False, PROPOSED=True
-                            ),
-                            manual_check_required_msg=APPLICABILITY_MSG,
+                        service_water_heating_uses_list_p.append(
+                            swh_use_p.get("use", 0)
                         )
 
-                    def applicability_check(self, context, calc_vals, data):
-                        swh_use_p = context.PROPOSED
-
-                        return (
-                            getattr_(swh_use_p, "service_water_heating_uses", "use") > 0
-                        )
+                return all(service_water_heating_uses_list_p)
