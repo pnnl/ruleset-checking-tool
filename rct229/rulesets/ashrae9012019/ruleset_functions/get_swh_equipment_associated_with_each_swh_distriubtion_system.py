@@ -12,12 +12,7 @@ def get_SWH_equipment_associated_with_each_swh_distribution_system(
     Returns
     -------
     swh_and_equip_dict: A dictionary containing where the keys are the SWH Distribution System IDs and values are dictionaries where keys are the type of SWH equipment and values are the ids of the connected equipment.
-<<<<<<< HEAD:rct229/rulesets/ashrae9012019/ruleset_functions/get_swh_equipment_associated_with_each_swh_distribution_system.py
-                        Example:  {"SWH_Distribution1":{"SWHHeatingEq":["swh_eq1","swh_eq2"], "Pumps":["p1"], "Tanks":["t1"], "Piping":["piping1"], "SolarThermal":[], "USES":["sp1_use","sp2_use"], "SPACES_SERVED":[sp1,sp2]}}
-
-=======
                         Example:  {"swh_distribution1":{"swh_heating_eq":["swh_eq1","swh_eq2"], "pumps":["p1"], "tanks":["t1"], "piping":["piping1"], "solar_thermal":[], "uses":["sp1_use","sp2_use"], "spaces_served":[sp1,sp2]}}
->>>>>>> f8b4708258645cd38ed422ef886c317464f229b9:rct229/rulesets/ashrae9012019/ruleset_functions/get_swh_equipment_associated_with_each_swh_distriubtion_system.py
     """
 
     swh_and_equip_dict = {}
