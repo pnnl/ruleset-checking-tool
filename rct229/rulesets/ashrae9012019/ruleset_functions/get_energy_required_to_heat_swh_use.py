@@ -137,7 +137,7 @@ def get_energy_required_to_heat_swh_use(
                 * ureg("hr")
                 * (1 - drain_heat_recovery_efficiency)
             )
-            energy_required_by_space[space_id] = energy_required
+            energy_required_by_space[space_id] = energy_required.to("Btu")
 
         elif use_units == SERVICE_WATER_HEATING_USE_UNIT.POWER_PER_AREA:
             power = swh_use_value * ureg("W/m2") * space.get("floor_area", ZERO.AREA)
@@ -147,7 +147,7 @@ def get_energy_required_to_heat_swh_use(
                 * ureg("hr")
                 * (1 - drain_heat_recovery_efficiency)
             )
-            energy_required_by_space[space_id] = energy_required
+            energy_required_by_space[space_id] = energy_required.to("Btu")
 
         elif use_units == SERVICE_WATER_HEATING_USE_UNIT.POWER:
             energy_required_by_space[space_id] = (
@@ -156,7 +156,7 @@ def get_energy_required_to_heat_swh_use(
                 * sum(hourly_values)
                 * ureg("hr")
                 * (1 - drain_heat_recovery_efficiency)
-            )
+            ).to("Btu")
 
         elif use_units == SERVICE_WATER_HEATING_USE_UNIT.VOLUME_PER_PERSON:
             volume += swh_use_value * ureg("L") * space.get("number_of_occupants", 0)
@@ -196,7 +196,7 @@ def get_energy_required_to_heat_swh_use(
                 * sum(hourly_values)
                 * ureg("hr")
                 * (1 - drain_heat_recovery_efficiency)
-            )
+            ).to("Btu")
         elif use_units == SERVICE_WATER_HEATING_USE_UNIT.VOLUME:
             energy_required_by_space["NO_SPACES_ASSIGNED"] = sum(
                 [
