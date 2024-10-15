@@ -197,6 +197,7 @@ def get_energy_required_to_heat_swh_use(
                 * ureg("hr")
                 * (1 - drain_heat_recovery_efficiency)
             ).to("Btu")
+
         elif use_units == SERVICE_WATER_HEATING_USE_UNIT.VOLUME:
             energy_required_by_space["NO_SPACES_ASSIGNED"] = sum(
                 [
