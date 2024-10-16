@@ -1,4 +1,6 @@
 from pint import Quantity
+
+from rct229.rule_engine.rulesets import LeapYear
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_spaces_served_by_swh_use import (
     get_spaces_served_by_swh_use,
 )
@@ -34,7 +36,7 @@ WATER_SPECIFIC_HEAT = 1.001 * ureg("Btu/lb/delta_degF")
 
 
 def get_energy_required_to_heat_swh_use(
-    swh_use_id: str, rmd: dict, building_segment_id: str
+    swh_use_id: str, rmd: dict, building_segment_id: str, is_leap_year: bool
 ) -> dict[str, Quantity | None]:
     """
     This function calculates the total energy required to heat the SWH use over the course of a year.  Note - this function does not work for service water heating uses with use_units == "OTHER".  In this case, it will return 0 Btu.
@@ -44,6 +46,8 @@ def get_energy_required_to_heat_swh_use(
     swh_use_id: str, id of service_water_heating_uses
     rmd: dict, RMD at RuleSetModelDescription level
     building_segment_id: str, id of building_segment
+    is_leap_year: bool, default: False
+        Whether the year is a leap year or not.
 
     Returns
     ----------
@@ -63,8 +67,8 @@ def get_energy_required_to_heat_swh_use(
 
     is_heat_recovered_by_drain = swh_use.get("is_heat_recovered_by_drain", False)
     use_units = getattr_(swh_use, "service_water_heating_uses", "use_units")
-
-    inlet_temperature_hourly_values = None  # need to be careful. When the `use_multiplier_schedule` key doesn't exist and `use_units` is not in VOLUME_BASED_USE_UNIT, this logic causes an error in line 119
+    distribution_system = None
+    inlet_temperature_hourly_values = None
     drain_heat_recovery_efficiency = 0.0
     supply_temperature = None
     if use_units in VOLUME_BASED_USE_UNIT or is_heat_recovered_by_drain:
@@ -76,34 +80,34 @@ def get_energy_required_to_heat_swh_use(
                 rmd, distribution_system_id
             )
         )
-        if use_units in VOLUME_BASED_USE_UNIT:
-            supply_temperature = getattr_(
-                distribution_system,
-                "service_water_heating_distribution_systems",
-                "design_supply_temperature",
-            )
-            inlet_temperature_schedule_id = getattr_(
-                distribution_system,
-                "service_water_heating_distribution_systems",
-                "entering_water_mains_temperature_schedule",
-            )
-            inlet_temperature_schedule = find_exactly_one_schedule(
-                rmd, inlet_temperature_schedule_id
-            )
-            inlet_temperature_hourly_values = getattr_(
-                inlet_temperature_schedule, "schedules", "hourly_values"
-            )
-        if is_heat_recovered_by_drain:
-            drain_heat_recovery_efficiency = getattr_(
-                distribution_system,
-                "service_water_heating_distribution_systems",
-                "drain_heat_recovery_efficiency",
-            )
+    if use_units in VOLUME_BASED_USE_UNIT:
+        supply_temperature = getattr_(
+            distribution_system,
+            "service_water_heating_distribution_systems",
+            "design_supply_temperature",
+        )
+        inlet_temperature_schedule_id = getattr_(
+            distribution_system,
+            "service_water_heating_distribution_systems",
+            "entering_water_mains_temperature_schedule",
+        )
+        inlet_temperature_schedule = find_exactly_one_schedule(
+            rmd, inlet_temperature_schedule_id
+        )
+        inlet_temperature_hourly_values = getattr_(
+            inlet_temperature_schedule, "schedules", "hourly_values"
+        )
+    if is_heat_recovered_by_drain:
+        drain_heat_recovery_efficiency = getattr_(
+            distribution_system,
+            "service_water_heating_distribution_systems",
+            "drain_heat_recovery_efficiency",
+        )
 
-            assert_(
-                0.0 <= drain_heat_recovery_efficiency <= 1.0,
-                "`drain_heat_recovery_efficiency` value must be between 0 and 1.",
-            )
+        assert_(
+            0.0 <= drain_heat_recovery_efficiency <= 1.0,
+            "`drain_heat_recovery_efficiency` value must be between 0 and 1.",
+        )
 
     space_ids = get_spaces_served_by_swh_use(rmd, swh_use["id"])
     space_within_building_segment_ids = find_all(
@@ -118,10 +122,13 @@ def get_energy_required_to_heat_swh_use(
     if not spaces and use_units not in REQUIRED_USE_UNIT:
         spaces = find_all("$.zones[*].spaces[*]", building_segment)
 
+    num_hours = (
+        LeapYear.LEAP_YEAR_HOURS if is_leap_year else LeapYear.REGULAR_YEAR_HOURS
+    )
     hourly_values = (
         getattr_(hourly_schedule, "hourly_schedule", "hourly_values")
         if hourly_schedule is not None
-        else [1] * len(inlet_temperature_hourly_values)
+        else [1] * num_hours
     )
 
     swh_use_value = swh_use.get("use", 0.0)
@@ -137,7 +144,7 @@ def get_energy_required_to_heat_swh_use(
                 * ureg("hr")
                 * (1 - drain_heat_recovery_efficiency)
             )
-            energy_required_by_space[space_id] = energy_required.to("Btu")
+            energy_required_by_space[space_id] = energy_required
 
         elif use_units == SERVICE_WATER_HEATING_USE_UNIT.POWER_PER_AREA:
             power = swh_use_value * ureg("W/m2") * space.get("floor_area", ZERO.AREA)
@@ -147,7 +154,7 @@ def get_energy_required_to_heat_swh_use(
                 * ureg("hr")
                 * (1 - drain_heat_recovery_efficiency)
             )
-            energy_required_by_space[space_id] = energy_required.to("Btu")
+            energy_required_by_space[space_id] = energy_required
 
         elif use_units == SERVICE_WATER_HEATING_USE_UNIT.POWER:
             energy_required_by_space[space_id] = (
@@ -156,7 +163,7 @@ def get_energy_required_to_heat_swh_use(
                 * sum(hourly_values)
                 * ureg("hr")
                 * (1 - drain_heat_recovery_efficiency)
-            ).to("Btu")
+            )
 
         elif use_units == SERVICE_WATER_HEATING_USE_UNIT.VOLUME_PER_PERSON:
             volume += swh_use_value * ureg("L") * space.get("number_of_occupants", 0)
@@ -196,7 +203,7 @@ def get_energy_required_to_heat_swh_use(
                 * sum(hourly_values)
                 * ureg("hr")
                 * (1 - drain_heat_recovery_efficiency)
-            ).to("Btu")
+            )
 
         elif use_units == SERVICE_WATER_HEATING_USE_UNIT.VOLUME:
             energy_required_by_space["NO_SPACES_ASSIGNED"] = sum(

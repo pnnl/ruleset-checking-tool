@@ -156,6 +156,7 @@ TEST_RMD = {
 TEST_RPD_FULL = {
     "id": "229",
     "ruleset_model_descriptions": [TEST_RMD],
+    "calendar": {"is_leap_year": False},
     "data_timestamp": "2024-02-12T09:00Z",
 }
 
@@ -185,7 +186,7 @@ def test__TEST_RPD__is_valid():
 
 def test__get_energy_required_to_heat_swh_use_power_per_person():
     energy_required_by_space = get_energy_required_to_heat_swh_use(
-        "SWH Use 1", TEST_RMD, "Building Segment 1"
+        "SWH Use 1", TEST_RMD, "Building Segment 1", False
     )
     assert len(energy_required_by_space) == 1 and std_equal(
         energy_required_by_space["Space 1"], 8362628.17 * ureg("Btu")
@@ -194,7 +195,7 @@ def test__get_energy_required_to_heat_swh_use_power_per_person():
 
 def test__get_energy_required_to_heat_swh_use_power_per_area():
     energy_required_by_space = get_energy_required_to_heat_swh_use(
-        "SWH Use 2", TEST_RMD, "Building Segment 1"
+        "SWH Use 2", TEST_RMD, "Building Segment 1", False
     )
     assert len(energy_required_by_space) == 1 and std_equal(
         energy_required_by_space["Space 1"], 23912285.2 * ureg("Btu")
@@ -203,7 +204,7 @@ def test__get_energy_required_to_heat_swh_use_power_per_area():
 
 def test__get_energy_required_to_heat_swh_use_power():
     energy_required_by_space = get_energy_required_to_heat_swh_use(
-        "SWH Use 3", TEST_RMD, "Building Segment 1"
+        "SWH Use 3", TEST_RMD, "Building Segment 1", False
     )
     assert len(energy_required_by_space) == 1 and std_equal(
         energy_required_by_space["Space 1"], 23912285.2 * ureg("Btu")
@@ -212,7 +213,7 @@ def test__get_energy_required_to_heat_swh_use_power():
 
 def test__get_energy_required_to_heat_swh_use_volume_per_person():
     energy_required_by_space = get_energy_required_to_heat_swh_use(
-        "SWH Use 4", TEST_RMD, "Building Segment 1"
+        "SWH Use 4", TEST_RMD, "Building Segment 1", False
     )
     assert len(energy_required_by_space) == 1 and std_equal(
         energy_required_by_space["Space 1"], 139200741 * ureg("Btu")
@@ -221,7 +222,7 @@ def test__get_energy_required_to_heat_swh_use_volume_per_person():
 
 def test__get_energy_required_to_heat_swh_use_volume_per_area():
     energy_required_by_space = get_energy_required_to_heat_swh_use(
-        "SWH Use 5", TEST_RMD, "Building Segment 1"
+        "SWH Use 5", TEST_RMD, "Building Segment 1", False
     )
     assert len(energy_required_by_space) == 1 and std_equal(
         energy_required_by_space["Space 2"], 278401481.1 * ureg("Btu")
@@ -230,7 +231,7 @@ def test__get_energy_required_to_heat_swh_use_volume_per_area():
 
 def test__get_energy_required_to_heat_swh_use_volume():
     energy_required_by_space = get_energy_required_to_heat_swh_use(
-        "SWH Use 6", TEST_RMD, "Building Segment 1"
+        "SWH Use 6", TEST_RMD, "Building Segment 1", False
     )
     assert len(energy_required_by_space) == 1 and std_equal(
         energy_required_by_space["Space 2"], 278401481 * ureg("Btu")
@@ -239,7 +240,7 @@ def test__get_energy_required_to_heat_swh_use_volume():
 
 def test__get_energy_required_to_heat_swh_use_other():
     energy_required_by_space = get_energy_required_to_heat_swh_use(
-        "SWH Use 7", TEST_RMD, "Building Segment 1"
+        "SWH Use 7", TEST_RMD, "Building Segment 1", False
     )
     assert (
         len(energy_required_by_space) == 1
