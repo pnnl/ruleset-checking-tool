@@ -3,6 +3,7 @@ from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedB
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.std_comparisons import std_equal
 
 MANUAL_CHECK_MSG = "Surface in P-RMD has subsurfaces modeled with different manual shade status. Verify if subsurfaces manual shade status in B-RMD are modeled the same as in P-RMD"
 

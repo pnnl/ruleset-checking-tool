@@ -18,6 +18,7 @@ def get_spaces_served_by_swh_use(rmd: dict, swh_use_id: str) -> list[str]:
     spaces_served: list of str
         list of space ids that has the sane service_water_heating_uses value
     """
+    # TODO: Moving the `service_water_heating_uses` key to the `building_segments` level is being discussed. If the `service_water_heating_uses` key is moved, this function needs to be revisited.
 
     spaces_served = [
         space["id"]

@@ -29,7 +29,7 @@ class Section21Rule8(RuleDefinitionListIndexedBase):
             each_rule=Section21Rule8.HeatingFluidLoopRule(),
             index_rmd=BASELINE_0,
             id="21-8",
-            description="When the baseline building requires boilers, (for baseline system type = 1,5,7,11 and 12), HWST for the baseline building shall be reset using an outdoor air dry-bulb reset schedule. 180F at 20F OAT, 150Fat 50F OAT, ramped linerarly between 150F and 180F.",
+            description="When the baseline building requires boilers, (for baseline system type = 1,5,7,11 and 12), HWST for the baseline building shall be reset using an outdoor air dry-bulb reset schedule. 180F at 20F OAT, 150Fat 50F OAT, ramped linearly between 150F and 180F.",
             ruleset_section_title="HVAC - Water Side",
             standard_section="Section G3.1.3.3 Building System-Specific Modeling Requirements for the Baseline model",
             is_primary_rule=True,
@@ -79,6 +79,24 @@ class Section21Rule8(RuleDefinitionListIndexedBase):
                         "loop_supply_temperature_at_outdoor_high",
                         "loop_supply_temperature_at_outdoor_low",
                     ],
+                },
+                precision={
+                    "design_outdoor_high_for_loop_supply_reset_temperature_b": {
+                        "precision": 0.1,
+                        "unit": "K",
+                    },
+                    "design_outdoor_low_for_loop_supply_reset_temperature_b": {
+                        "precision": 0.1,
+                        "unit": "K",
+                    },
+                    "design_supply_temperature_at_outdoor_high_b": {
+                        "precision": 0.1,
+                        "unit": "K",
+                    },
+                    "design_supply_temperature_at_outdoor_low_b": {
+                        "precision": 0.1,
+                        "unit": "K",
+                    },
                 },
             )
 
@@ -156,8 +174,10 @@ class Section21Rule8(RuleDefinitionListIndexedBase):
                 "required_supply_temperature_at_outdoor_low_b"
             ]
             return (
-                (temperature_reset_type_b == DESIGN_TEMP_RESET_TYPE.OUTSIDE_AIR_RESET)
-                and std_equal(
+                temperature_reset_type_b == DESIGN_TEMP_RESET_TYPE.OUTSIDE_AIR_RESET
+                and self.precision_comparison[
+                    "design_outdoor_high_for_loop_supply_reset_temperature_b"
+                ](
                     design_outdoor_high_for_loop_supply_reset_temperature_b.to(
                         ureg.kelvin
                     ),
@@ -165,7 +185,9 @@ class Section21Rule8(RuleDefinitionListIndexedBase):
                         ureg.kelvin
                     ),
                 )
-                and std_equal(
+                and self.precision_comparison[
+                    "design_outdoor_low_for_loop_supply_reset_temperature_b"
+                ](
                     design_outdoor_low_for_loop_supply_reset_temperature_b.to(
                         ureg.kelvin
                     ),
@@ -173,11 +195,15 @@ class Section21Rule8(RuleDefinitionListIndexedBase):
                         ureg.kelvin
                     ),
                 )
-                and std_equal(
+                and self.precision_comparison[
+                    "design_supply_temperature_at_outdoor_high_b"
+                ](
                     design_supply_temperature_at_outdoor_high_b.to(ureg.kelvin),
                     required_supply_temperature_at_outdoor_high_b.to(ureg.kelvin),
                 )
-                and std_equal(
+                and self.precision_comparison[
+                    "design_supply_temperature_at_outdoor_low_b"
+                ](
                     design_supply_temperature_at_outdoor_low_b.to(ureg.kelvin),
                     required_supply_temperature_at_outdoor_low_b.to(ureg.kelvin),
                 )
