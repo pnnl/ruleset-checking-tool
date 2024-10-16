@@ -139,14 +139,18 @@ def get_energy_required_to_heat_swh_use(
         space_id = space["id"]
         if use_units == SERVICE_WATER_HEATING_USE_UNIT.POWER_PER_PERSON:
             energy_required_by_space[space_id] = (
-                swh_use_value * ureg("W") * space.get("number_of_occupants", 0)
+                swh_use_value
+                * ureg("W")
+                * space.get("number_of_occupants", 0)
                 * equivalent_load_hours
                 * (1 - drain_heat_recovery_efficiency)
             )
 
         elif use_units == SERVICE_WATER_HEATING_USE_UNIT.POWER_PER_AREA:
             energy_required_by_space[space_id] = (
-                swh_use_value * ureg("W/m2") * space.get("floor_area", ZERO.AREA)
+                swh_use_value
+                * ureg("W/m2")
+                * space.get("floor_area", ZERO.AREA)
                 * equivalent_load_hours
                 * (1 - drain_heat_recovery_efficiency)
             )
@@ -159,13 +163,15 @@ def get_energy_required_to_heat_swh_use(
             )
 
         elif use_units == SERVICE_WATER_HEATING_USE_UNIT.VOLUME_PER_PERSON:
-            volume = swh_use_value * ureg("L") * space.get("number_of_occupants", 0)
+            volume = swh_use_value * ureg("L/hr") * space.get("number_of_occupants", 0)
 
         elif use_units == SERVICE_WATER_HEATING_USE_UNIT.VOLUME_PER_AREA:
-            volume = swh_use_value * ureg("L/m2") * space.get("floor_area", ZERO.AREA)
+            volume = (
+                swh_use_value * ureg("L/hr/m2") * space.get("floor_area", ZERO.AREA)
+            )
 
         elif use_units == SERVICE_WATER_HEATING_USE_UNIT.VOLUME:
-            volume = swh_use_value * ureg("L")
+            volume = swh_use_value * ureg("L/h")
 
         else:
             energy_required_by_space[space_id] = None
@@ -174,7 +180,12 @@ def get_energy_required_to_heat_swh_use(
         if space_id not in energy_required_by_space:
             energy_required_by_space[space_id] = sum(
                 [
-                    (volume * hourly_value * (1 - drain_heat_recovery_efficiency))
+                    (
+                        volume
+                        * hourly_value
+                        * ureg("hr")
+                        * (1 - drain_heat_recovery_efficiency)
+                    )
                     * WATER_DENSITY
                     * WATER_SPECIFIC_HEAT
                     * (
@@ -203,6 +214,7 @@ def get_energy_required_to_heat_swh_use(
                         swh_use_value
                         * ureg("L")
                         * hourly_value
+                        * ureg("hr")
                         * (1 - drain_heat_recovery_efficiency)
                     )
                     * WATER_DENSITY
