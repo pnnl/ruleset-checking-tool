@@ -158,10 +158,8 @@ def get_energy_required_to_heat_swh_use(
 
         elif use_units == SERVICE_WATER_HEATING_USE_UNIT.POWER:
             energy_required_by_space[space_id] = (
-                swh_use_value
-                * ureg("W")
-                * sum(hourly_values)
-                * ureg("hr")
+                (swh_use_value * ureg("W"))
+                * (sum(hourly_values) * ureg("hr"))
                 * (1 - drain_heat_recovery_efficiency)
             )
 
@@ -198,10 +196,8 @@ def get_energy_required_to_heat_swh_use(
             energy_required_by_space["NO_SPACES_ASSIGNED"] = None
         elif use_units == SERVICE_WATER_HEATING_USE_UNIT.POWER:
             energy_required_by_space["NO_SPACES_ASSIGNED"] = (
-                swh_use_value
-                * ureg("W")
-                * sum(hourly_values)
-                * ureg("hr")
+                (swh_use_value * ureg("W"))
+                * (sum(hourly_values) * ureg("hr"))
                 * (1 - drain_heat_recovery_efficiency)
             )
 
