@@ -14,8 +14,8 @@ Returns:
 
 Function Call:
 
-- compare_context_pair
-- get_component_by_id
+- **compare_context_pair** - there is no RDS for this function, but it is a function developed for Rule 1-6 that compares two elements  
+- **get_component_by_id**
 
 Data Lookup: None
 
