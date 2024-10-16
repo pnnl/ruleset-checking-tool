@@ -148,6 +148,28 @@ def find_exactly_one_fluid_loop(rmd: dict, loop_id: str) -> dict:
     )
 
 
+def find_exactly_one_swh_use(rmd: dict, swh_id: str) -> dict:
+    """
+    Search for the loop data group in a ruleset model description by matching swh_id
+    Raise exception if no matching zone
+    Parameters
+    ----------
+    rmd: dict
+    swh_id: str
+
+    Returns: json
+    -------
+
+    """
+    return find_exactly_one_with_field_value(
+        # TODO: need to update the path if schema updates
+        "$.buildings[*].building_segments[*].zones[*].spaces[*].service_water_heating_uses[*]",
+        "id",
+        swh_id,
+        rmd,
+    )
+
+
 def has_heating_system(rmd: dict, hvac_id: str) -> bool:
     """
     Check whether the specified hvac system has a heating system.

@@ -6,6 +6,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_uses_associated_wit
     get_swh_uses_associated_with_each_building_segment,
 )
 from rct229.utils.jsonpath_utils import find_all, find_exactly_one_with_field_value
+from rct229.utils.utility_functions import find_exactly_one_swh_use
 
 
 class Section11Rule11(RuleDefinitionListIndexedBase):
@@ -41,14 +42,12 @@ class Section11Rule11(RuleDefinitionListIndexedBase):
             rmd_p = context.PROPOSED
             swh_use_loads_p = sum(
                 [
-                    swh_use.get("use", 0.0)
-                    # The json path needs to update if schema changes.
+                    find_exactly_one_swh_use(rmd_p, swh_use_id).get("use", 0.0)
                     for building_segment in find_all(
                         "$.buildings[*].building_segments[*]", rmd_p
                     )
-                    for swh_use in find_all(
-                        "$.zones[*].spaces[*].service_water_heating_uses[*]",
-                        building_segment,
+                    for swh_use_id in get_swh_uses_associated_with_each_building_segment(
+                        rmd_p, building_segment["id"]
                     )
                 ]
             )
@@ -59,17 +58,16 @@ class Section11Rule11(RuleDefinitionListIndexedBase):
             rmd_b = context.BASELINE_0
             swh_use_loads_b = sum(
                 [
-                    swh_use.get("use", 0.0)
-                    # The json path needs to update if schema changes.
+                    find_exactly_one_swh_use(rmd_b, swh_use_id).get("use", 0.0)
                     for building_segment in find_all(
                         "$.buildings[*].building_segments[*]", rmd_b
                     )
-                    for swh_use in find_all(
-                        "$.zones[*].spaces[*].service_water_heating_uses[*]",
-                        building_segment,
+                    for swh_use_id in get_swh_uses_associated_with_each_building_segment(
+                        rmd_b, building_segment["id"]
                     )
                 ]
             )
+
             return {"swh_use_loads_b": swh_use_loads_b}
 
         def rule_check(self, context, calc_vals=None, data=None):
