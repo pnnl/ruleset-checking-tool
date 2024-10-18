@@ -1,23 +1,23 @@
 {
     "Baseline_Service_Water_Heating_System": [
         {
-            "building_area_type": "Automotive facility",
+            "building_area_type": "AUTOMOTIVE_FACILITY",
             "baseline_heating_method": "Gas storage water heater"
         },
         {
-            "building_area_type": "Convenience store",
+            "building_area_type": "CONVENIENCE_STORE",
             "baseline_heating_method": "Electric resistance water heater"
         },
         {
-            "building_area_type": "Convention center",
+            "building_area_type": "CONVENTION_CENTER",
             "baseline_heating_method": "Electric resistance storage water heater"
         },
         {
-            "building_area_type": "Courthouse",
+            "building_area_type": "COURTHOUSE",
             "baseline_heating_method": "Electric resistance storage water heater"
         },
         {
-            "building_area_type": "Dining: Bar lounge/leisure",
+            "building_area_type": "DINING:_BAR_LOUNGE/LEISURE",
             "baseline_heating_method": "Gas storage water heater"
         },
         {
@@ -29,11 +29,11 @@
             "baseline_heating_method": "Gas storage water heater"
         },
         {
-            "building_area_type": "Dormitory",
+            "building_area_type": "DORMITORY",
             "baseline_heating_method": "Gas storage water heater"
         },
         {
-            "building_area_type": "Exercise center",
+            "building_area_type": "EXERCISE_CENTER",
             "baseline_heating_method": "Gas storage water heater"
         },
         {
@@ -57,19 +57,19 @@
             "baseline_heating_method": "Gas storage water heater"
         },
         {
-            "building_area_type": "Hotel",
+            "building_area_type": "HOTEL",
             "baseline_heating_method": "Gas storage water heater"
         },
         {
-            "building_area_type": "Library",
+            "building_area_type": "LIBRARY",
             "baseline_heating_method": "Electric resistance storage water heater"
         },
         {
-            "building_area_type": "Manufacturing facility",
+            "building_area_type": "MANUFACTURING_FACILITY",
             "baseline_heating_method": "Gas storage water heater"
         },
         {
-            "building_area_type": "Motel",
+            "building_area_type": "MOTEL",
             "baseline_heating_method": "Gas storage water heater"
         },
         {
@@ -77,7 +77,7 @@
             "baseline_heating_method": "Electric resistance storage water heater"
         },
         {
-            "building_area_type": "Multifamily",
+            "building_area_type": "MULTIFAMILY",
             "baseline_heating_method": "Gas storage water heater"
         },
         {
@@ -85,11 +85,11 @@
             "baseline_heating_method": "Electric resistance storage water heater"
         },
         {
-            "building_area_type": "Office",
+            "building_area_type": "OFFICE",
             "baseline_heating_method": "Electric resistance storage water heater"
         },
         {
-            "building_area_type": "Parking garage",
+            "building_area_type": "PARKING_GARAGE",
             "baseline_heating_method": "Electric resistance storage water heater"
         },
         {
