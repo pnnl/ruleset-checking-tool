@@ -66,7 +66,7 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
         rmd_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmd_b)
         baseline_sys_5_6_serve_more_than_one_flr_list = (
-            get_hvac_systems_5_6_serving_multiple_floors(rmd_b).keys()
+            get_hvac_systems_5_6_serving_multiple_floors(rmd_b)
         )
         # create a list containing all HVAC systems that are modeled in the rmd_b
         available_types_list_excl_5_6_multifloor = [
@@ -89,7 +89,7 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
         rmd_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmd_b)
         baseline_sys_5_6_serve_more_than_one_flr_list = (
-            get_hvac_systems_5_6_serving_multiple_floors(rmd_b).keys()
+            get_hvac_systems_5_6_serving_multiple_floors(rmd_b)
         )
         baseline_system_zones_served_dict = {
             hvac_id: [

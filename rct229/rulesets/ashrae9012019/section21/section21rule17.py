@@ -75,6 +75,11 @@ class Section21Rule17(RuleDefinitionListIndexedBase):
                 required_fields={
                     "$": ["rated_capacity", "efficiency_metric", "efficiency"],
                 },
+                precision={
+                    "boiler_efficiency_b": {
+                        "precision": 0.01,
+                    },
+                },
             )
 
         def get_calc_vals(self, context, data=None):
@@ -99,17 +104,26 @@ class Section21Rule17(RuleDefinitionListIndexedBase):
                     boiler_rated_capacity_b < BOILER_RATED_CAPACITY_LOW_LIMIT
                     and boiler_efficiency_metric_b
                     == BOILER_EFFICIENCY_METRIC.ANNUAL_FUEL_UTILIZATION
-                    and boiler_efficiency_b == BOILER_EFFICIENCY_80
+                    and self.precision_comparison["boiler_efficiency_b"](
+                        boiler_efficiency_b,
+                        BOILER_EFFICIENCY_80,
+                    )
                 )
                 or (
                     boiler_rated_capacity_b <= BOILER_RATED_CAPACITY_HIGH_LIMIT
                     and boiler_efficiency_metric_b == BOILER_EFFICIENCY_METRIC.THERMAL
-                    and boiler_efficiency_b == BOILER_EFFICIENCY_75
+                    and self.precision_comparison["boiler_efficiency_b"](
+                        boiler_efficiency_b,
+                        BOILER_EFFICIENCY_75,
+                    )
                 )
                 or (
                     boiler_rated_capacity_b > BOILER_RATED_CAPACITY_HIGH_LIMIT
                     and boiler_efficiency_metric_b
                     == BOILER_EFFICIENCY_METRIC.COMBUSTION
-                    and boiler_efficiency_b == BOILER_EFFICIENCY_80
+                    and self.precision_comparison["boiler_efficiency_b"](
+                        boiler_efficiency_b,
+                        BOILER_EFFICIENCY_80,
+                    )
                 )
             )

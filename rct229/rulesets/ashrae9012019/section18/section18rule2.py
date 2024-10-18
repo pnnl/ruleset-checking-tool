@@ -357,13 +357,13 @@ class Section18Rule2(RuleDefinitionListIndexedBase):
                 if does_sys_only_serve_lab_b:
                     undetermined_msg = (
                         "This system serves only lab zones, which is correct if the building has total lab exhaust greater than 15,000 cfm. "
-                        "However, we could not determine with accuracy the total building exhuast."
+                        "However, we could not determine with accuracy the total building exhaust."
                     )
                 elif does_sys_serve_lab_and_other_b:
                     undetermined_msg = "This system serves some lab zones and some non-lab zones in a building which may have more than 15,000 cfm.  In buildings with > 15,000 cfm of lab exhaust, ALL and only lab zones should be served by system type 5 or 7."
                 elif does_two_sys_exist_on_same_fl_b == "undetermined":
                     undetermined_msg = (
-                        f"This HVAC system is on the same floor as {hvac_sys2_id_b}, which servese lab zones in the building. "
+                        f"This HVAC system is on the same floor as {hvac_sys2_id_b}, which serves lab zones in the building. "
                         f"If the building has greater than 15,000 cfm of lab exhaust and {hvac_sys2_id_b} is System type 5 or 7 serving only lab zones, this system passes, otherwise it fails."
                     )
 

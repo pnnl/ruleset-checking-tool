@@ -35,7 +35,7 @@ def generate_test_rmds(test_dict):
         The rmd_transformations field has optional user, baseline,
         and proposed fields. If any of these fields is present, its
         corresponding RMD will be referenced. If the user, baseline,
-        or proposed fields are missing, then its correponding RMD is
+        or proposed fields are missing, then its corresponding RMD is
         set to None.
 
 
