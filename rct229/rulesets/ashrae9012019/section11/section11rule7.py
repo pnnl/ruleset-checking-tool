@@ -5,6 +5,9 @@ from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_1_1_2_fns import (
     table_g3_1_2_lookup,
 )
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_bats_and_swh_use import (
+    get_swh_bats_and_swh_use,
+)
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_equipment_type import (
     get_swh_equipment_type,
 )
@@ -12,21 +15,11 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_uses_associated_wit
     get_swh_uses_associated_with_each_building_segment,
 )
 from rct229.schema.schema_enums import SchemaEnums
-from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_exactly_one_with_field_value
-from rct229.utils.pint_utils import ZERO
 
 SERVICE_WATER_HEATING_SPACE = SchemaEnums.schema_enums[
     "ServiceWaterHeatingSpaceOptions2019ASHRAE901"
 ]
-
-
-def get_swh_bats_and_swh_use():
-    """
-    This function will be removed once the function is developed
-    """
-
-    return {}
 
 
 class Section11Rule7(RuleDefinitionListIndexedBase):
@@ -64,15 +57,14 @@ class Section11Rule7(RuleDefinitionListIndexedBase):
 
             for swh_bat in swh_bats_and_uses_p:
                 for swh_use_id in swh_bats_and_uses_p[swh_bat]:
-                    swh_uses = find_exactly_one_with_field_value(
+                    swh_use = find_exactly_one_with_field_value(
                         "$.buildings[*].building_segments[*].zones[*].spaces[*].service_water_heating_uses[*]",
                         "id",
                         swh_use_id,
                         rmd_p,
                     )
                     if (
-                        getattr_(swh_uses, "service_water_heating_uses", "use")
-                        > ZERO.VOLUME
+                        swh_use.get("use", 0.0) > 0.0
                         or swh_bat != SERVICE_WATER_HEATING_SPACE.PARKING_GARAGE
                     ):
                         return True
@@ -86,16 +78,13 @@ class Section11Rule7(RuleDefinitionListIndexedBase):
 
             for swh_bat in swh_bats_and_uses_p:
                 for swh_use_id in swh_bats_and_uses_p[swh_bat]:
-                    swh_uses = find_exactly_one_with_field_value(
+                    swh_use = find_exactly_one_with_field_value(
                         "$.buildings[*].building_segments[*].zones[*].spaces[*].service_water_heating_uses[*]",
                         "id",
                         swh_use_id,
                         rmd_p,
                     )
-                    if (
-                        getattr_(swh_uses, "service_water_heating_uses", "use")
-                        == ZERO.VOLUME
-                    ):
+                    if swh_use.get("use", 0.0) == 0.0:
                         return True
                     else:
                         return False
@@ -108,16 +97,13 @@ class Section11Rule7(RuleDefinitionListIndexedBase):
             zero_swh_use_list = []
             for swh_bat in swh_bats_and_uses_p:
                 for swh_use_id in swh_bats_and_uses_p[swh_bat]:
-                    swh_uses = find_exactly_one_with_field_value(
+                    swh_use = find_exactly_one_with_field_value(
                         "$.buildings[*].building_segments[*].zones[*].spaces[*].service_water_heating_uses[*]",
                         "id",
                         swh_use_id,
                         rmd_p,
                     )
-                    if (
-                        getattr_(swh_uses, "service_water_heating_uses", "use")
-                        == ZERO.VOLUME
-                    ):
+                    if swh_use.get("use", 0.0) == 0.0:
                         zero_swh_use_list.append(swh_bat)
 
             zero_swh_use_list = list(set(zero_swh_use_list))
