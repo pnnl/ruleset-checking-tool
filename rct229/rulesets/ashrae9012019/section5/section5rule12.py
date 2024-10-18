@@ -91,6 +91,12 @@ class Section5Rule12(RuleDefinitionListIndexedBase):
                     },
                     manual_check_required_msg=MANUAL_CHECK_REQUIRED_MSG,
                     fail_msg=FAIL_MSG,
+                    precision={
+                        "floor_f_factor_b": {
+                            "precision": 0.001,
+                            "unit": "Btu/(hr*ft*R)",
+                        }
+                    },
                 )
 
             def get_calc_vals(self, context, data=None):
@@ -147,9 +153,14 @@ class Section5Rule12(RuleDefinitionListIndexedBase):
                 return target_f_factor_res != target_f_factor_nonres
 
             def rule_check(self, context, calc_vals=None, data=None):
+                return self.precision_comparison["floor_f_factor_b"](
+                    calc_vals["target_f_factor"],
+                    calc_vals["slab_on_grade_floor_f_factor"],
+                )
+
+            def is_tolerance_fail(self, context, calc_vals=None, data=None):
                 target_f_factor = calc_vals["target_f_factor"]
                 slab_on_grade_floor_f_factor = calc_vals["slab_on_grade_floor_f_factor"]
-
                 return std_equal(
                     std_val=target_f_factor, val=slab_on_grade_floor_f_factor
                 )

@@ -27,7 +27,7 @@ def compare_schedules(
         if hourly value is 1, schedule_1 is evaluated to be equal to schedule_2;
         if hourly value is 2, schedule_1 is evaluated to be equal to schedule_2 times the comparison factor;
         if hourly value is 0, comparison was skipped for that particular hour
-        (example when evaluating shut off controls, only he building closed hrs are evaluated) exmaple: [1,1,1,1,1...]
+        (example when evaluating shut off controls, only he building closed hrs are evaluated) example: [1,1,1,1,1...]
     is_leap_year: bool, indicate whether the comparison is in a leap year or not. True / False
 
     Returns

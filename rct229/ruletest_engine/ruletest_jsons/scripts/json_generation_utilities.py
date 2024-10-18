@@ -29,7 +29,7 @@ def get_nested_dict(dic, keys):
         # Parse key and determine if this key references a list or a value. If list_index returns an integer (i.e., a
         # reference index in a list) this key represents a list in the dictionary and needs to be set differently
         # EXAMPLE: The key "buildings[0]" implies the "buildings" key represents a list. We set the value at
-        # element 0 in the this list
+        # element 0 in this list
 
         key, list_index = parse_key_string(key)
         is_list = isinstance(list_index, int)
@@ -37,7 +37,7 @@ def get_nested_dict(dic, keys):
         # If this is the first key, set the reference dictionary to the highest level dictionary and work down from
         # there.
         if key == first_key:
-            # If first key isnt initialized, set it as a dictionary
+            # If first key isn't initialized, set it as a dictionary
             if key not in dic:
                 if first_index == None:
                     dic[key] = {}
@@ -106,7 +106,7 @@ def element_exists_at_key_address_in_dictionary(dic, keys):
         # Parse key and determine if this key references a list or a value. If list_index returns an integer (i.e., a
         # reference index in a list) this key represents a list in the dictionary and needs to be set differently
         # EXAMPLE: The key "buildings[0]" implies the "buildings" key represents a list. We set the value at
-        # element 0 in the this list
+        # element 0 in this list
 
         key, list_index = parse_key_string(key)
         is_list = isinstance(list_index, int)
