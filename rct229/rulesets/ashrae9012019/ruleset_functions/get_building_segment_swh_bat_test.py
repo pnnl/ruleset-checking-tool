@@ -1,3 +1,4 @@
+from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_building_segment_swh_bat import (
     get_building_segment_swh_bat,
 )
@@ -13,20 +14,188 @@ TEST_RMD = {
             "building_segments": [
                 {
                     "id": "Building Segment 1",
+                    "service_water_heating_building_area_type": "LIBRARY",
+                },
+                {
+                    "id": "Building Segment 2",
                     "zones": [
                         {
-                            "id": "Zone 1",
+                            "id": "Zone 2",
                             "spaces": [
                                 {
-                                    "id": "Space 1",
+                                    "id": "Space 2_1",
                                     "service_water_heating_uses": [
-                                        {"id": "service water heating uses 1"}
+                                        {
+                                            "id": "service water heating uses 2_1",
+                                            "use": 10,
+                                            "use_units": "VOLUME_PER_PERSON",
+                                            "area_type": "OFFICE",
+                                            "is_heat_recovered_by_drain": True,
+                                            "served_by_distribution_system": "SWH Distribution 1",
+                                            "use_multiplier_schedule": "SWH Schedule 1",
+                                        },
+                                    ],
+                                },
+                                {
+                                    "id": "Space 2_2",
+                                    "service_water_heating_uses": [
+                                        {
+                                            "id": "service water heating uses 2_2",
+                                            "use": 100,
+                                            "use_units": "POWER",
+                                            "area_type": "CONVENIENCE_STORE",
+                                            "is_heat_recovered_by_drain": True,
+                                            "served_by_distribution_system": "SWH Distribution 1",
+                                            "use_multiplier_schedule": "SWH Schedule 1",
+                                        },
                                     ],
                                 },
                             ],
                         }
                     ],
-                }
+                },
+                {
+                    "id": "Building Segment 3",
+                    "zones": [
+                        {
+                            "id": "Zone 3",
+                            "spaces": [
+                                {
+                                    "id": "Space 3_1",
+                                    "service_water_heating_uses": [
+                                        {
+                                            "id": "service water heating uses 3_1",
+                                            "use": 5,
+                                            "use_units": "OTHER",
+                                        },
+                                    ],
+                                },
+                            ],
+                        }
+                    ],
+                },
+                {
+                    "id": "Building Segment 4",
+                    "zones": [
+                        {
+                            "id": "Zone 4",
+                            "spaces": [
+                                {
+                                    "id": "Space 4_1",
+                                    "service_water_heating_building_area_type": "MUSEUM",
+                                    "service_water_heating_uses": [
+                                        {
+                                            "id": "service water heating uses 4_1",
+                                            "use": 100,
+                                            "use_units": "VOLUME_PER_PERSON",
+                                            "is_heat_recovered_by_drain": True,
+                                            "served_by_distribution_system": "SWH Distribution 1",
+                                            "use_multiplier_schedule": "SWH Schedule 1",
+                                        },
+                                    ],
+                                },
+                                {
+                                    "id": "Space 4_2",
+                                    "service_water_heating_uses": [
+                                        {
+                                            "id": "service water heating uses 4_2",
+                                            "use": 300,
+                                            "use_units": "POWER",
+                                            "is_heat_recovered_by_drain": True,
+                                            "served_by_distribution_system": "SWH Distribution 1",
+                                            "use_multiplier_schedule": "SWH Schedule 1",
+                                        },
+                                    ],
+                                },
+                            ],
+                        }
+                    ],
+                },
+                {
+                    "id": "Building Segment 5",
+                    "zones": [
+                        {
+                            "id": "Zone 5",
+                            "spaces": [
+                                {
+                                    "id": "Space 5_1",
+                                    "service_water_heating_building_area_type": "HOTEL",
+                                    "service_water_heating_uses": [
+                                        {
+                                            "id": "service water heating uses 5_1",
+                                            "use": 400,
+                                            "use_units": "POWER",
+                                            "is_heat_recovered_by_drain": True,
+                                            "served_by_distribution_system": "SWH Distribution 1",
+                                            "use_multiplier_schedule": "SWH Schedule 1",
+                                        },
+                                    ],
+                                },
+                                {
+                                    "id": "Space 5_2",
+                                    "service_water_heating_building_area_type": "CONVENIENCE_STORE",
+                                    "service_water_heating_uses": [
+                                        {
+                                            "id": "service water heating uses 5_2",
+                                            "use": 300,
+                                            "use_units": "POWER",
+                                            "is_heat_recovered_by_drain": True,
+                                            "served_by_distribution_system": "SWH Distribution 1",
+                                            "use_multiplier_schedule": "SWH Schedule 1",
+                                        },
+                                    ],
+                                },
+                            ],
+                        }
+                    ],
+                },
+            ],
+        }
+    ],
+    "schedules": [
+        {
+            "id": "SWH Schedule 1",
+            "hourly_values": [0.8] * 8760,
+        },
+        {
+            "id": "SWH Entering Water Temp Schedule 1",
+            "hourly_values": [50] * 8760,
+        },
+    ],
+    "service_water_heating_distribution_systems": [
+        {
+            "id": "SWH Distribution 1",
+            "design_supply_temperature": 60,
+            "drain_heat_recovery_efficiency": 0.3,
+            "entering_water_mains_temperature_schedule": "SWH Entering Water Temp Schedule 1",
+            "tanks": [
+                {
+                    "id": "Tank 1",
+                },
+                {
+                    "id": "Tank 2",
+                },
+            ],
+            "service_water_piping": [
+                {
+                    "id": "SWH Piping 1",
+                    "child": [
+                        {
+                            "id": "SWH Piping Child 1",
+                            "child": [
+                                {
+                                    "id": "SWH Piping 1-a",
+                                },
+                                {
+                                    "id": "SWH Piping 1-b",
+                                },
+                            ],
+                        }
+                    ],
+                },
+                {
+                    "id": "SWH Piping 2",
+                },
             ],
         }
     ],
@@ -47,3 +216,32 @@ def test__TEST_RPD__is_valid():
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
+
+
+def test__TEST_RPD__bldg_segment_swh_bat():
+    assert get_building_segment_swh_bat(TEST_RMD, "Building Segment 1") == "LIBRARY"
+
+
+def test__TEST_RPD__area_type():
+    assert (
+        get_building_segment_swh_bat(TEST_RMD, "Building Segment 2")
+        == "CONVENIENCE_STORE"
+    )
+
+
+def test__TEST_RPD__other_use_unit():
+    assert (
+        get_building_segment_swh_bat(TEST_RMD, "Building Segment 3")
+        == RCTOutcomeLabel.UNDETERMINED
+    )
+
+
+def test__TEST_RPD__two_spaces_one_undetermined():
+    assert (
+        get_building_segment_swh_bat(TEST_RMD, "Building Segment 4")
+        == RCTOutcomeLabel.UNDETERMINED
+    )
+
+
+def test__TEST_RPD__two_spaces_none_undetermined():
+    assert get_building_segment_swh_bat(TEST_RMD, "Building Segment 5") == "HOTEL"
