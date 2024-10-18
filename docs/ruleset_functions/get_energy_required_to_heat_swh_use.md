@@ -1,11 +1,12 @@
 ## get_energy_required_to_heat_swh_use
 
-Description: This function calculates the total energy required to heat the SWH use over the course of a year in btu.  Note - this function does not work for service water heating uses with use_units == "OTHER".  In this case, it will return 0.
+Description: This function calculates the total energy required to heat the SWH use over the course of a year in btu.  Note - this function does not work for service water heating uses with use_units == "OTHER".  In this case, it will return 0 Btu.
 
 Inputs:
-- **swh_use**
+- **swh_use_id**
 - **RMD**
-- **building_segment**
+- **building_segment_id**
+- **is_leap_year**
 
 Returns:
 - **energy_required_by_space**: A dict where the keys are space_ids and values are the total energy required to heat the swh_use for that space.  If a swh_use is not assigned to any spaces, the key will be "NO_SPACES_ASSIGNED"
@@ -69,7 +70,7 @@ Logic:
 
 - we still have a case where swh_use with VOLUME or POWER and not assigned to any spaces needs to be calculated.  Check if there are no spaces: `if len(spaces) == 0:`
   - check if swh_use.use_units is OTHER, if so, set value to UNDETERMINED: `if swh_use.use_units == "OTHER": energy_required_by_space["NO_SPACES_ASSIGNED"] = "UNDETERMINED"`
-  - else, check if swh_use.use_units is POWER, if so, set value to POWER: `if swh_use.use_units == "POWER": energy_required_by_space["NO_SPACES_ASSIGNED"] = swh_use_value`
+  - else, check if swh_use.use_units is POWER, if so, set value to POWER: `if swh_use.use_units == "POWER": energy_required_by_space["NO_SPACES_ASSIGNED"] = swh_use_value * sum(hourly_schedule) * (1-drain_heat_recovery_efficiency)`
   - else, check if swh_use.use_units is VOLUME, if so, we need to do the volume calculation: `if swh_use.use_units == "VOLUME":`
     - set energy_required to 0: `energy_required = 0`
     - iterate through each hourly value of the hourly_schedule: `for index, hourly_value in enumerate(hourly_schedule):`
