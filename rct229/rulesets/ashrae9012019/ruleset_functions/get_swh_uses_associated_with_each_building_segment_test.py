@@ -20,8 +20,14 @@ TEST_RMD = {
                                 {
                                     "id": "Space 1",
                                     "service_water_heating_uses": [
-                                        {"id": "service water heating uses 1"},
-                                        {"id": "service water heating uses 2"},
+                                        {
+                                            "id": "service water heating uses 1",
+                                            "served_by_distribution_system": "service water heating uses distribution 1",
+                                        },
+                                        {
+                                            "id": "service water heating uses 2",
+                                            "served_by_distribution_system": "service water heating uses distribution 2",
+                                        },
                                     ],
                                 },
                             ],
@@ -53,7 +59,10 @@ def test__TEST_RPD__is_valid():
 def test__get_swh_uses_associated_with_each_building_segment__bldg_segment_ids_exist():
     assert get_swh_uses_associated_with_each_building_segment(
         TEST_RMD, "Building Segment 1"
-    ) == ["service water heating uses 1", "service water heating uses 2"]
+    ) == [
+        "service water heating uses distribution 1",
+        "service water heating uses distribution 2",
+    ]
 
 
 def test__get_swh_uses_associated_with_each_building_segment__bldg_segment_id_not_exist():
