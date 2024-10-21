@@ -18,11 +18,11 @@ def get_swh_uses_associated_with_each_building_segment(
     Returns
     -------
     swh_uses_list: list
-        A list containing the ids of all service water heating uses associated with a building segment
+        A list containing the served_by_distribution_systems of all service water heating uses associated with a building segment
     """
 
     swh_uses_list = find_all(
-        f'$.buildings[*].building_segments[*][?(@.id="{building_segment_id}")].zones[*].spaces[*].service_water_heating_uses[*].id',
+        f'$.buildings[*].building_segments[*][?(@.id="{building_segment_id}")].zones[*].spaces[*].service_water_heating_uses[*].served_by_distribution_system',
         rmd,
     )
     return swh_uses_list
