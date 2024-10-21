@@ -1,19 +1,17 @@
+from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import PROPOSED
-from rct229.utils.jsonpath_utils import (
-    find_all,
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_building_segment_swh_bat import (
+    get_building_segment_swh_bat,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_uses_associated_with_each_building_segment import (
     get_swh_uses_associated_with_each_building_segment,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_building_segment_swh_bat import (
-    get_building_segment_swh_bat,
-)
-from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
-from rct229.utils.assertions import getattr_
 from rct229.schema.schema_enums import SchemaEnums
+from rct229.utils.assertions import getattr_
+from rct229.utils.jsonpath_utils import find_all
 
 SERVICE_WATER_HEATING_SPACE = SchemaEnums.schema_enums[
     "ServiceWaterHeatingSpaceOptions2019ASHRAE901"
