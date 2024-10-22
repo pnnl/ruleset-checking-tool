@@ -18,7 +18,7 @@ class Section22Rule41(PartialRuleDefinition):
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section 22 CHW&CW Loop",
             is_primary_rule=False,
-            rmd_context="ruleset_model_descriptions/0/heat_rejections",
+            rmd_context="ruleset_model_descriptions/0",
             manual_check_required_msg="B-RMD SHOULD BE MODELED WITH PURCHASED CHILLED WATER. VERIFY THAT THERE IS ONLY ONE PURCHASED CHILLED WATER LOOP IN THE BASELINE MODEL.",
         )
 
@@ -26,4 +26,4 @@ class Section22Rule41(PartialRuleDefinition):
         rmd_b = context.BASELINE_0
         purchased_chw_hhw_status_dict_b = check_purchased_chw_hhw_status_dict(rmd_b)
 
-        return not purchased_chw_hhw_status_dict_b["purchased_cooling"]
+        return purchased_chw_hhw_status_dict_b["purchased_cooling"]

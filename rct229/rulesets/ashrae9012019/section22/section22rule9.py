@@ -128,6 +128,11 @@ class Section22Rule9(RuleDefinitionListIndexedBase):
                             "minimum_flow_fraction"
                         ],
                     },
+                    precision={
+                        "min_flow_fraction": {
+                            "precision": 0.1,
+                        },
+                    },
                 )
 
             def get_calc_vals(self, context, data=None):
@@ -141,4 +146,9 @@ class Section22Rule9(RuleDefinitionListIndexedBase):
             def rule_check(self, context, calc_vals=None, data=None):
                 min_flow_fraction = calc_vals["min_flow_fraction"]
 
-                return min_flow_fraction == REQUIRED_MIN_FLOW_FRACTION
+                # return min_flow_fraction == REQUIRED_MIN_FLOW_FRACTION
+
+                return self.precision_comparison["min_flow_fraction"](
+                    min_flow_fraction,
+                    REQUIRED_MIN_FLOW_FRACTION,
+                )

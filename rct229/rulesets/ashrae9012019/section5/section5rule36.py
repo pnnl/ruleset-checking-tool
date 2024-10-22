@@ -34,8 +34,8 @@ class Section5Rule36(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data=None):
-        rmr_baseline = context.BASELINE_0
-        return {"climate_zone": rmr_baseline["weather"]["climate_zone"]}
+        rmd_baseline = context.BASELINE_0
+        return {"climate_zone": rmd_baseline["weather"]["climate_zone"]}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -71,6 +71,12 @@ class Section5Rule36(RuleDefinitionListIndexedBase):
                         "$": ["infiltration"],
                         "infiltration": ["flow_rate"],
                     },
+                    precision={
+                        "total_infiltration_rate_b": {
+                            "precision": 0.1,
+                            "unit": "cfm",
+                        }
+                    },
                 )
 
             def get_calc_vals(self, context, data=None):
@@ -82,15 +88,15 @@ class Section5Rule36(RuleDefinitionListIndexedBase):
 
                 return {
                     "baseline_infiltration": CalcQ(
-                        "volumetric_flow_rate", zone_infiltration_flow_rate_b
+                        "air_flow_rate", zone_infiltration_flow_rate_b
                     ),
                     "proposed_infiltration": CalcQ(
-                        "volumetric_flow_rate", zone_infiltration_flow_rate_p
+                        "air_flow_rate", zone_infiltration_flow_rate_p
                     ),
                 }
 
             def rule_check(self, context, calc_vals=None, data=None):
-                return (
-                    calc_vals["baseline_infiltration"]
-                    == calc_vals["proposed_infiltration"]
+                return self.precision_comparison["total_infiltration_rate_b"](
+                    calc_vals["baseline_infiltration"],
+                    calc_vals["proposed_infiltration"],
                 )

@@ -14,10 +14,7 @@ from rct229.utils.jsonpath_utils import find_all
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_11_1,
     HVAC_SYS.SYS_11_2,
-    HVAC_SYS.SYS_11_1A,
-    HVAC_SYS.SYS_11_2A,
     HVAC_SYS.SYS_11_1B,
-    HVAC_SYS.SYS_11_1C,
 ]
 TEMP_RESET = SchemaEnums.schema_enums["TemperatureResetOptions"]
 

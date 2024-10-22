@@ -3,8 +3,9 @@
         "Section": 10,
         "Rule": 14,
         "Test": "a",
-        "test_description": "A one story building utilizes system 3. The capacity is undefined and the Ec of the system matches the most conservative heating value of Table G3.5.5(80% Ec). Expected: UNDETERMINED",
+        "test_description": "A one story building includes a baseline system 3. The capacity is undefined and the heating efficiency of the system matches the most conservative heating efficiency from Table G3.5.5.",
         "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "Check if the modeled baseline heating efficiency was established correctly based upon equipment capacity and type. The modeled efficiency matches the capacity bracket in Appendix G efficiency tables with the highest efficiency (i.e., most conservative efficiency has been modeled).",
         "standard": {
             "rule_id": "10-14",
             "ruleset_reference": "G3.1.2.1",
@@ -15,7 +16,7 @@
             "mandatory_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "calendar": {
@@ -99,8 +100,9 @@
         "Section": 10,
         "Rule": 14,
         "Test": "b",
-        "test_description": "A one story building utilizes system 4. The capacity is undefined and the COPh of the system matches the most conservative heating value of Table G3.5.2(COPh=3.4). Expected: UNDETERMINED",
+        "test_description": "A one story building includes a baseline system 4. The capacity is undefined and the heating efficiency of the system matches the most conservative heating efficiency from Table G3.5.2.",
         "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "Check if the modeled baseline heating efficiency was established correctly based upon equipment capacity and type. The modeled efficiency at Tdb 47F was modeled with an efficiency per the capacity bracket in Appendix G efficiency tables with the highest efficiency (i.e., most conservative efficiency has been modeled). It is often the case that the Tdb 17F efficiency is captured in the model via the performance curves as opposed to an explicit efficiency value entry. If there is no explicit option to enter an efficiency value at Tdb 17F check that appropriate performance curves were modeled.",
         "standard": {
             "rule_id": "10-14",
             "ruleset_reference": "G3.1.2.1",
@@ -111,7 +113,7 @@
             "mandatory_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "calendar": {
@@ -195,7 +197,7 @@
         "Section": 10,
         "Rule": 14,
         "Test": "c",
-        "test_description": "A one story building utilizes system 3. The capacity is known and the AFUE of the system matches the  heating value of Table G3.5.5 for a system with <225,000 Btu/hr (78% AFUE). Expected: PASS",
+        "test_description": "A one story building includes a baseline system 3. The capacity is 200,000 Btu/hr and the heating efficiency of the system matches the expected efficiency based on the capacity range from Table G3.5.5.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "10-14",
@@ -207,7 +209,7 @@
             "mandatory_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "calendar": {
@@ -292,8 +294,8 @@
         "Section": 10,
         "Rule": 14,
         "Test": "d",
-        "test_description": "A one story building utilizes system 4. The capacity is undefined and the COPh of the system does not match the most conservative heating value of Table G3.5.2(COPh=3.4). Expected: UNDETERMINED",
-        "expected_rule_outcome": "undetermined",
+        "test_description": "A one story building includes a baseline system 4. The capacity is undefined and the heating efficiency of the system does not match the most conservative heating efficiency from Table G3.5.2.",
+        "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "10-14",
             "ruleset_reference": "G3.1.2.1",
@@ -304,7 +306,7 @@
             "mandatory_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "calendar": {
@@ -388,7 +390,7 @@
         "Section": 10,
         "Rule": 14,
         "Test": "e",
-        "test_description": "A one story building utilizes system 4. The capacity is less than 65,000 Btu/hr and the COPh of the system matches the  heating value of Table G3.5.2(COPh=3.4). Expected: PASS",
+        "test_description": "A one story building includes a baseline system 4. The capacity is 50,000 Btu/hr and the heating efficiency of the system matches the expected efficiency based on the capacity range from Table G3.5.2.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "10-14",
@@ -400,7 +402,7 @@
             "mandatory_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "calendar": {
@@ -485,7 +487,7 @@
         "Section": 10,
         "Rule": 14,
         "Test": "f",
-        "test_description": "A one story building utilizes system 4. The capacity is less than 65,000 Btu/hr and the COPh of the system does not match the heating value of Table G3.5.2(COPh=3.4). Expected: FAIL",
+        "test_description": "A one story building includes a baseline system 4. The capacity is 50,000 Btu/hr and the heating efficiency of the system does not match the expected efficiency based on the capacity range from Table G3.5.2.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "10-14",
@@ -497,7 +499,7 @@
             "mandatory_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "calendar": {
@@ -582,7 +584,7 @@
         "Section": 10,
         "Rule": 14,
         "Test": "g",
-        "test_description": "A one story building utilizes system 4. The capacity is greater than 65,000 Btu/hr and less than 135,000 Btu/hr the COPh of the system matches the heating value of Table G3.5.2(COPnf47=3.4) and the cooling value (COPnf17 = 2.3). Expected: PASS",
+        "test_description": "A one story building includes a baseline system 4. The capacity is 100,000 Btu/hr and the (high and low-temperature) heating efficiencies of the system match the expected efficiencies based on the capacity range from Table G3.5.2.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "10-14",
@@ -594,7 +596,7 @@
             "mandatory_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "calendar": {
@@ -682,7 +684,7 @@
         "Section": 10,
         "Rule": 14,
         "Test": "h",
-        "test_description": "A one story building utilizes system 4. The capacity is greater than 65,000 Btu/hr and less than 135,000 Btu/hr the COPh of the system does not match the heating value of Table G3.5.2(COPnf47=3.4) and but does match the cooling value (COPnf17 = 2.3). Expected: FAIL",
+        "test_description": "A one story building includes a baseline system 4. The capacity is 100,000 Btu/hr and the high-temperature heating efficiency of the system does not match the expected high-temperature heating efficiency based on the capacity range from Table G3.5.2 but the low-temperature heating efficiency does match.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "10-14",
@@ -694,7 +696,7 @@
             "mandatory_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "calendar": {
@@ -782,7 +784,7 @@
         "Section": 10,
         "Rule": 14,
         "Test": "i",
-        "test_description": "A one story building utilizes system 4. The capacity is greater than 65,000 Btu/hr and less than 135,000 Btu/hr the COPh of the system matches the heating value of Table G3.5.2(COPnf47=3.4) and but not the cooling value (COPnf17 = 2.3). Expected: FAIL",
+        "test_description": "A one story building includes a baseline system 4. The capacity is 100,000 Btu/hr and the high-temperature heating efficiency of the system matches the expected high-temperature heating efficiency based on the capacity range from Table G3.5.2 but the low-temperature heating efficiency does not match.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "10-14",
@@ -794,7 +796,7 @@
             "mandatory_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "calendar": {
@@ -882,7 +884,7 @@
         "Section": 10,
         "Rule": 14,
         "Test": "j",
-        "test_description": "A one story building utilizes system 4. The capacity is greater than 65,000 Btu/hr and less than 135,000 Btu/hr the COPh of the system matches the heating value of Table G3.5.2(COPnf47=3.4) and the cooling value (COPnf17 = 2.3). However the efficiency metric is incorrect. Expected: FAIL",
+        "test_description": "A one story building includes a baseline system 4. The capacity is 100,000 Btu/hr and the (high and low-temperature) heating efficiency values of the system match the expected heating efficiencies based on the capacity range from Table G3.5.2, however the efficiency metric is incorrect.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "10-14",
@@ -894,7 +896,7 @@
             "mandatory_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "calendar": {
@@ -982,7 +984,7 @@
         "Section": 10,
         "Rule": 14,
         "Test": "k",
-        "test_description": "A one story building utilizes system 4. The capacity is greater than 135,000 Btu/hr the COPh of the system matches the heating value of Table G3.5.2(COPnf47=3.4) and the cooling value (COPnf17 = 2.3). Expected: PASS",
+        "test_description": "A one story building includes a baseline system 4. The capacity is 100,000 Btu/hr the (high and low-temperature) heating efficiencies of the system match the expected heating efficiencies based on the capacity range from Table G3.5.2.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "10-14",
@@ -994,7 +996,7 @@
             "mandatory_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "calendar": {
@@ -1082,7 +1084,7 @@
         "Section": 10,
         "Rule": 14,
         "Test": "l",
-        "test_description": "A two story building utilizes system 5. The system serves more than 1 floor and is therefore not applicable Expected: NOT APPLICABLE",
+        "test_description": "A two story building includes a baseline system 5. The system serves more than 1 floor.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "10-14",
@@ -1094,7 +1096,7 @@
             "mandatory_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "calendar": {
@@ -1215,7 +1217,7 @@
         "Section": 10,
         "Rule": 14,
         "Test": "m",
-        "test_description": "A one story building utilizes system 9. The capacity is undefined and the COPh of the system matches the heating value of Table G3.5.2(Ec=80%). Expected: PASS",
+        "test_description": "A one story building includes a baseline system 9. The capacity is undefined and the heating efficiency of the system matches the most conservative heating efficiency from Table G3.5.5.",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "10-14",
@@ -1227,7 +1229,7 @@
             "mandatory_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "calendar": {
@@ -1308,7 +1310,7 @@
         "Section": 10,
         "Rule": 14,
         "Test": "n",
-        "test_description": "A one story building utilizes system 9. The capacity is undefined and the COPh of the system does not match the heating value of Table G3.5.2(Ec=80%). Expected: FAIL",
+        "test_description": "A one story building includes a baseline system 9. The capacity is undefined and the heating efficiency of the system does not match the heating efficiency from Table G3.5.5.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "10-14",
@@ -1320,7 +1322,7 @@
             "mandatory_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "calendar": {
@@ -1401,8 +1403,8 @@
         "Section": 10,
         "Rule": 14,
         "Test": "o",
-        "test_description": "A one story building utilizes system 3 with a zone that incorporate aggregation factors. The  heating capacity/aggregation factor value is known and the AFUE of the system matches the  heating value of Table G3.5.5 for a system with with less than 225,000 Btuh per zone (78% AFUE). Expected: UNDETERMINED",
-        "expected_rule_outcome": "undetermined",
+        "test_description": "A one story building includes a baseline system 3 with a zone that has defined an aggregation factor greater than 1. The heating capacity is 1,000,000 Btu/hr and the heating efficiency of the system matches the expected heating efficiency from Table G3.5.5 based on the capacity range associated with the average heating capacity per disaggregated zone.",
+        "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "10-14",
             "ruleset_reference": "G3.1.2.1",
@@ -1413,7 +1415,7 @@
             "mandatory_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "calendar": {
@@ -1499,7 +1501,7 @@
         "Section": 10,
         "Rule": 14,
         "Test": "p",
-        "test_description": "A one story building utilizes system 4. The capacity is greater than 65,000 Btu/hr and less than 135,000 Btu/hr the COPh of the system matches the heating value of Table G3.5.2(COPnf47=3.4) and the cooling value (COPnf17 = 2.3). The zone aggregation factor is undefined. Expected: UNDETERMINED",
+        "test_description": "A one story building utilizes system 4. The capacity is 80,000 Btu/hr and the (high and low-temperature) heating efficiencies of the system are defined but the zone aggregation factor is undefined so it cannot be determined if the correct capacity range was used to establish the baseline efficiency.",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "10-14",
@@ -1511,7 +1513,7 @@
             "mandatory_rule": "Yes",
             "schema_version": "0.0.34"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "calendar": {

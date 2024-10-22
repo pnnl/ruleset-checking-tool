@@ -179,6 +179,62 @@ def run_sys_zone_assignment_tests():
     return run_test_helper(json_tests, RuleSet.ASHRAE9012019_RULESET)
 
 
+def run_elevator_tests():
+    """Runs all tests found in the elevator tests JSON.
+    Returns
+    -------
+    None
+    Results of system zone assignments test are spit out to console
+    """
+
+    json_tests = _helper_get_all_test_file_by_section(
+        RuleSet.ASHRAE9012019_RULESET, "section16"
+    )
+    return run_test_helper(json_tests, RuleSet.ASHRAE9012019_RULESET)
+
+
+def run_performance_calculation_tests():
+    """Runs all tests found in the performance calculation tests JSON.
+    Returns
+    -------
+    None
+    Results of system zone assignments test are spit out to console
+    """
+
+    json_tests = _helper_get_all_test_file_by_section(
+        RuleSet.ASHRAE9012019_RULESET, "section1"
+    )
+    return run_test_helper(json_tests, RuleSet.ASHRAE9012019_RULESET)
+
+
+def run_schedule_tests():
+    """Runs all tests found in the schedule tests JSON.
+    Returns
+    -------
+    None
+    Results of system zone assignments test are spit out to console
+    """
+
+    json_tests = _helper_get_all_test_file_by_section(
+        RuleSet.ASHRAE9012019_RULESET, "section4"
+    )
+    return run_test_helper(json_tests, RuleSet.ASHRAE9012019_RULESET)
+
+
+def run_general_hvac_tests():
+    """Runs all tests found in section 10 tests JSON.
+    Returns
+    -------
+    None
+    Results of system zone assignments test are spit out to console
+    """
+
+    json_tests = _helper_get_all_test_file_by_section(
+        RuleSet.ASHRAE9012019_RULESET, "section10"
+    )
+    return run_test_helper(json_tests, RuleSet.ASHRAE9012019_RULESET)
+
+
 def run_test_helper(test_list, ruleset_doc):
     # sort the list in a human order
     test_list.sort(key=natural_keys)
@@ -208,6 +264,11 @@ def run_test_one_jsontest(test_json):
 # run_airside_tests()
 # run_sys_zone_assignment_tests()
 # run_hvac_general_tests()
+# run_elevator_tests()
+# run_performance_calculation_tests()
+# run_schedule_tests()
+# run_general_hvac_tests()
+
 
 # run_test_one_jsontest("ashrae9012019/section16/rule_16_7.json")
 # run_ashrae9012019_tests()

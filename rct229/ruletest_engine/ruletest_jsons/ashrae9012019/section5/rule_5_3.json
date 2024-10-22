@@ -15,7 +15,7 @@
             "primary_rule": "Applicability",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "weather": {
@@ -54,7 +54,7 @@
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
-                                                        "adjacent_to": "INTERIOR",
+                                                        "adjacent_to": "EXTERIOR",
                                                         "tilt": 90,
                                                         "construction": {
                                                             "id": "Construction 1"
@@ -102,7 +102,7 @@
             "primary_rule": "Applicability",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "weather": {

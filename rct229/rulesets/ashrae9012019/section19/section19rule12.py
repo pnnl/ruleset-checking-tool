@@ -55,6 +55,12 @@ class Section19Rule12(RuleDefinitionListIndexedBase):
                 required_fields={
                     "$": ["fan_system"],
                 },
+                precision={
+                    "high_limit_temp_b": {
+                        "precision": 0.1,
+                        "unit": "K",
+                    },
+                },
             )
 
         def is_applicable(self, context, data=None):
@@ -99,6 +105,19 @@ class Section19Rule12(RuleDefinitionListIndexedBase):
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
+            req_high_limit_temp = calc_vals["req_high_limit_temp"]
+            high_limit_temp_b = calc_vals["high_limit_temp_b"]
+            air_economizer_type_b = calc_vals["air_economizer_type_b"]
+
+            return (
+                self.precision_comparison["high_limit_temp_b"](
+                    high_limit_temp_b.to(ureg.kelvin),
+                    req_high_limit_temp.to(ureg.kelvin),
+                )
+                and air_economizer_type_b == AIR_ECONOMIZER.TEMPERATURE
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
             req_high_limit_temp = calc_vals["req_high_limit_temp"]
             high_limit_temp_b = calc_vals["high_limit_temp_b"]
             air_economizer_type_b = calc_vals["air_economizer_type_b"]

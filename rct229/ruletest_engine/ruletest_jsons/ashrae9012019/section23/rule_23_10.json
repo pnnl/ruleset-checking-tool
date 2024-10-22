@@ -3,7 +3,7 @@
         "Section": 23,
         "Rule": 10,
         "Test": "a",
-        "test_description": "The project has one building segment with one zone served by System 11 set to minimum airflow at 50% load.The expected result is: pass",
+        "test_description": "The project has one building segment with one zone served by baseline system type 11 set to minimum airflow at 50% load.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "23-10",
@@ -14,9 +14,9 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "System 11 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -119,7 +119,7 @@
         "Section": 23,
         "Rule": 10,
         "Test": "b",
-        "test_description": "The project has one building segment with one zone served by System 11 set to minimum airflow set at 25% load. The expected result is: fail",
+        "test_description": "The project has one building segment with one zone served by baseline system type 11 set to minimum airflow at 25% load.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "23-10",
@@ -130,9 +130,9 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "System 11 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -235,7 +235,7 @@
         "Section": 23,
         "Rule": 10,
         "Test": "c",
-        "test_description": "The project has one building segment with two zones served by System 7 set to minimum airflow at 25% load. The expected result is: not_applicable",
+        "test_description": "The project has one building segment with two zones served by baseline system type 7 set to minimum airflow at 25% load.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "23-10",
@@ -246,9 +246,9 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "System 11 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.29"
+            "schema_version": "0.0.37"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",

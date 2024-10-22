@@ -695,7 +695,7 @@ TEST_BUILDING_BRANCH_COVERAGE2 = quantify_rmd(TEST_RMD_BRANCH_COVERAGE2)[
 ][0]["buildings"][0]
 
 
-def test__TEST_RMD__is_valid():
+def test__TEST_RPD__is_valid():
     schema_validation_result = schema_validate_rmd(TEST_RMD_12)
     assert schema_validation_result[
         "passed"

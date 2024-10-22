@@ -78,7 +78,7 @@ class Section22Rule4(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data):
         rmd_b = context.BASELINE_0
-        chiller_loop_ids_list = find_all("chillers[*].cooling_loop", rmd_b)
+        chiller_loop_ids_list = find_all("$.chillers[*].cooling_loop", rmd_b)
         return {"chiller_loop_ids_list": chiller_loop_ids_list}
 
     def list_filter(self, context_item, data):
@@ -100,6 +100,24 @@ class Section22Rule4(RuleDefinitionListIndexedBase):
                         "loop_supply_temperature_at_outdoor_high",
                         "loop_supply_temperature_at_outdoor_low",
                     ],
+                },
+                precision={
+                    "outdoor_high_for_loop_supply_reset_temperature": {
+                        "precision": 0.1,
+                        "unit": "K",
+                    },
+                    "outdoor_low_for_loop_supply_reset_temperature": {
+                        "precision": 0.1,
+                        "unit": "K",
+                    },
+                    "loop_supply_temperature_at_outdoor_high": {
+                        "precision": 0.1,
+                        "unit": "K",
+                    },
+                    "loop_supply_temperature_at_outdoor_low": {
+                        "precision": 0.1,
+                        "unit": "K",
+                    },
                 },
             )
 
@@ -146,6 +164,61 @@ class Section22Rule4(RuleDefinitionListIndexedBase):
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
+            outdoor_high_for_loop_supply_reset_temperature = calc_vals[
+                "outdoor_high_for_loop_supply_reset_temperature"
+            ]
+            required_outdoor_high_for_loop_supply_reset_temperature = calc_vals[
+                "required_outdoor_high_for_loop_supply_reset_temperature"
+            ]
+            outdoor_low_for_loop_supply_reset_temperature = calc_vals[
+                "outdoor_low_for_loop_supply_reset_temperature"
+            ]
+            required_outdoor_low_for_loop_supply_reset_temperature = calc_vals[
+                "required_outdoor_low_for_loop_supply_reset_temperature"
+            ]
+            loop_supply_temperature_at_outdoor_high = calc_vals[
+                "loop_supply_temperature_at_outdoor_high"
+            ]
+            required_loop_supply_temperature_at_outdoor_high = calc_vals[
+                "required_loop_supply_temperature_at_outdoor_high"
+            ]
+            loop_supply_temperature_at_outdoor_low = calc_vals[
+                "loop_supply_temperature_at_outdoor_low"
+            ]
+            required_loop_supply_temperature_at_outdoor_low = calc_vals[
+                "required_loop_supply_temperature_at_outdoor_low"
+            ]
+
+            return (
+                self.precision_comparison[
+                    "outdoor_high_for_loop_supply_reset_temperature"
+                ](
+                    outdoor_high_for_loop_supply_reset_temperature.to(ureg.kelvin),
+                    required_outdoor_high_for_loop_supply_reset_temperature.to(
+                        ureg.kelvin
+                    ),
+                )
+                and self.precision_comparison[
+                    "outdoor_low_for_loop_supply_reset_temperature"
+                ](
+                    outdoor_low_for_loop_supply_reset_temperature.to(ureg.kelvin),
+                    required_outdoor_low_for_loop_supply_reset_temperature.to(
+                        ureg.kelvin
+                    ),
+                )
+                and self.precision_comparison[
+                    "loop_supply_temperature_at_outdoor_high"
+                ](
+                    loop_supply_temperature_at_outdoor_high.to(ureg.kelvin),
+                    required_loop_supply_temperature_at_outdoor_high.to(ureg.kelvin),
+                )
+                and self.precision_comparison["loop_supply_temperature_at_outdoor_low"](
+                    loop_supply_temperature_at_outdoor_low.to(ureg.kelvin),
+                    required_loop_supply_temperature_at_outdoor_low.to(ureg.kelvin),
+                )
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
             outdoor_high_for_loop_supply_reset_temperature = calc_vals[
                 "outdoor_high_for_loop_supply_reset_temperature"
             ]

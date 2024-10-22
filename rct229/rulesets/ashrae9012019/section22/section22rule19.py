@@ -68,7 +68,7 @@ class Section22Rule19(RuleDefinitionListIndexedBase):
             heat_rejection_loop_id: find_exactly_one_with_field_value(
                 "$.fluid_loops[*]", "id", heat_rejection_loop_id, rmd_b
             )
-            for heat_rejection_loop_id in find_all("heat_rejections[*].loop", rmd_b)
+            for heat_rejection_loop_id in find_all("$.heat_rejections[*].loop", rmd_b)
         }
         return {"heat_rejection_loop_dict": heat_rejection_loop_dict}
 
