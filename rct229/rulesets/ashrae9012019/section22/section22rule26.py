@@ -35,7 +35,7 @@ class Section22Rule26(RuleDefinitionListIndexedBase):
             each_rule=Section22Rule26.PrimaryCoolingFluidLoop(),
             index_rmd=BASELINE_0,
             id="22-26",
-            description="Baseline chilled water loops that do not use purchased chilled water and do serve computer rooms (baseline system type 11) shall have a constant-flow primary pump power of 12 W/gpm at design conditions.",
+            description="Baseline chilled water loops that do not use purchased chilled water and do serve computer rooms (i.e., baseline system type 11) shall have a constant-flow primary pump power of 12 W/gpm at design conditions.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.10 Chilled-water pumps (Systems 7, 8, 11, 12, and 13)",
             is_primary_rule=True,

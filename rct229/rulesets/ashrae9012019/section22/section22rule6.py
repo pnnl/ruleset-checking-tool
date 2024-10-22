@@ -35,7 +35,7 @@ class Section22Rule6(RuleDefinitionListIndexedBase):
             each_rule=Section22Rule6.ChillerFluidLoopRule(),
             index_rmd=BASELINE_0,
             id="22-6",
-            description="Baseline chilled water loops that do not use purchased chilled water and do serve computer rooms (baseline system type 11) shall have a maximum reset chilled water supply temperature setpoint of 54F.",
+            description="Baseline chilled water loops that do not use purchased chilled water and do serve computer rooms (i.e., baseline system type 11) shall have a maximum reset chilled water supply temperature setpoint of 54F.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.9 Chilled-water supply temperature reset (System 7, 8, 11, 12 and 13)",
             is_primary_rule=True,

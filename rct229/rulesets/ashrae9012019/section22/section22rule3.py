@@ -42,7 +42,7 @@ class Section22Rule3(RuleDefinitionListIndexedBase):
             each_rule=Section22Rule3.ChillerFluidLoopRule(),
             index_rmd=BASELINE_0,
             id="22-3",
-            description="Baseline chilled water loops that do not use purchased cooling and do not serve any computer rooms (baseline system type 11) shall have the chilled water supply temperature reset based on outdoor dry-bulb temperature.",
+            description="Baseline chilled water loops that do not use purchased cooling and do not serve any computer rooms (i.e., do not serve baseline system type 11) shall have the chilled water supply temperature reset based on outdoor dry-bulb temperature.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.9 Chilled-water supply temperature reset (System 7, 8, 11, 12 and 13)",
             is_primary_rule=True,
