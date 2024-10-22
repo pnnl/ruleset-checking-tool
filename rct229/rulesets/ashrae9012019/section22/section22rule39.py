@@ -24,7 +24,7 @@ class Section22Rule39(RuleDefinitionListIndexedBase):
             is_primary_rule=False,
             list_path="ruleset_model_descriptions[0]",
             manual_check_required_msg="Manual Check Required - Baseline is modeled with purchased chilled water. Make sure "
-            "baseline systems served by purchased chilled water are modeled with a distribution pump whose pump power is 16W/gpm.",
+            "baseline systems served by purchased chilled water are modeled with a distribution pump whose pump power is 16 W/gpm.",
             not_applicable_msg="Rule 22-39 Not Applicable - the baseline is not modeled with Purchased Chilled Water",
         )
 
