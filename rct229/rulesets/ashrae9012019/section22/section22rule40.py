@@ -44,12 +44,7 @@ class Section22Rule40(RuleDefinitionBase):
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             id="22-40",
-            description="For systems using purchased chilled water, the cooling source "
-            "shall be modeled as purchased chilled water in both the proposed design "
-            "and baseline building design. If any system in the proposed design "
-            "uses purchased chilled water, all baseline systems with chilled water "
-            "coils shall use purchased chilled water. On-site chillers and direct "
-            "expansion equipment shall not be modeled in the baseline building design.",
+            description="Chilled water loops that use purchased chilled water in the proposed design shall also use purchased chilled water in the baseline. On-site chillers and direct expansion equipment shall not be modeled in the baseline.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.1.1 & G3.1.1.3.1 Building System-Specific Modeling Requirements for the Baseline model",
             is_primary_rule=True,

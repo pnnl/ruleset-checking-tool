@@ -38,7 +38,7 @@ class Section22Rule19(RuleDefinitionListIndexedBase):
             each_rule=Section22Rule19.HeatRejectionRule(),
             index_rmd=BASELINE_0,
             id="22-19",
-            description="The tower shall be controlled to maintain a leaving water temperature, where weather permits.",
+            description="The baseline heat rejection device shall be controlled to maintain a constant leaving water temperature.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.11 Heat Rejection (System 7, 8, 11, 12 and 13)",
             is_primary_rule=True,

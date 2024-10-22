@@ -24,7 +24,7 @@ class Section22Rule28(RuleDefinitionListIndexedBase):
             each_rule=Section22Rule28.HeatRejectionRule(),
             index_rmd=BASELINE_0,
             id="22-28",
-            description="The baseline building design condenser-water pump shall be modeled as constant volume.",
+            description="The baseline building design condenser water pump shall be modeled as constant volume.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section 22 CHW&CW Loop",
             is_primary_rule=True,

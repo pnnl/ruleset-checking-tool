@@ -14,7 +14,7 @@ class Section22Rule41(PartialRuleDefinition):
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             id="22-41",
-            description="Purchased CHW systems must be modeled with only one external fluid loop in the baseline design.",
+            description="Baseline chilled water systems that use purchased chilled water shall be modeled with a single chilled water loop.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section 22 CHW&CW Loop",
             is_primary_rule=False,
