@@ -4,6 +4,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_components_associat
 from rct229.schema.schema_utils import quantify_rmd
 from rct229.schema.validate import schema_validate_rmd
 from rct229.schema.config import ureg
+from rct229.utils.std_comparisons import std_equal
 
 TEST_RMD = {
     "id": "test_rmd",
@@ -159,21 +160,25 @@ def test__TEST_RPD__is_valid():
 
 
 def test__get_swh_components_associated_with_each_swh_bat():
-    assert get_swh_components_associated_with_each_swh_bat(TEST_RMD, False) == {
-        "LIBRARY": {
-            "SWHDistribution": ["SWH Distribution 1"],
-            "SWHHeatingEq": ["SWH Equipment 1"],
-            "Pumps": ["Pump 1", "Pump 2"],
-            "Tanks": ["Tank 1", "Tank 2"],
-            "Piping": [
-                "SWH Piping 1",
-                "SWH Piping Child 1",
-                "SWH Piping 1-a",
-                "SWH Piping 1-b",
-                "SWH Piping 2",
-            ],
-            "SolarThermal": ["Solar Thermal System 1", "Solar Thermal System 2"],
-            "SWH_Uses": ["SWH Use 1", "SWH Use 2"],
-            "EnergyRequired": 11956142.6 * ureg("Btu"),
-        }
-    }
+    actual_result = get_swh_components_associated_with_each_swh_bat(TEST_RMD, False)
+    assert (
+        len(actual_result) == 1
+        and std_equal(
+            actual_result["LIBRARY"]["energy_required"], 11956142.6 * ureg("Btu")
+        )
+        and actual_result["LIBRARY"]["swh_distribution"] == ["SWH Distribution 1"]
+        and actual_result["LIBRARY"]["swh_heating_eq"] == ["SWH Equipment 1"]
+        and actual_result["LIBRARY"]["pumps"] == ["Pump 1", "Pump 2"]
+        and actual_result["LIBRARY"]["tanks"] == ["Tank 1", "Tank 2"]
+        and actual_result["LIBRARY"]["piping"]
+        == [
+            "SWH Piping 1",
+            "SWH Piping Child 1",
+            "SWH Piping 1-a",
+            "SWH Piping 1-b",
+            "SWH Piping 2",
+        ]
+        and actual_result["LIBRARY"]["solar_thermal"]
+        == ["Solar Thermal System 1", "Solar Thermal System 2"]
+        and actual_result["LIBRARY"]["swh_uses"] == ["SWH Use 1", "SWH Use 2"]
+    )
