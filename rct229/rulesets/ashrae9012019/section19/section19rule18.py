@@ -139,6 +139,12 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
                 required_fields={
                     "$": ["fan_system"],
                 },
+                precision={
+                    "total_fan_power_b": {
+                        "precision": 10,
+                        "unit": "W",
+                    },
+                },
             )
 
         def is_applicable(self, context, data=None):
@@ -321,7 +327,10 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
             total_fan_power_b = calc_vals["total_fan_power_b"]
             expected_fan_wattage_b = calc_vals["expected_fan_wattage_b"]
 
-            return std_equal(expected_fan_wattage_b, total_fan_power_b)
+            return self.precision_comparison["total_fan_power_b"](
+                total_fan_power_b,
+                expected_fan_wattage_b,
+            )
 
         def get_fail_msg(self, context, calc_vals=None, data=None):
             total_fan_power_b = calc_vals["total_fan_power_b"]
