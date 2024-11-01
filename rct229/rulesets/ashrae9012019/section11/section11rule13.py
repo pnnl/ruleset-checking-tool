@@ -30,8 +30,15 @@ class Section11Rule13(RuleDefinitionListIndexedBase):
             ),
             ruleset_section_title="Service Water Heating",
             standard_section="Table G3.1 #11, baseline column, (e)",
-            is_primary_rule=True,
+            is_primary_rule=False,
             list_path="ruleset_model_descriptions[0]",
+            required_fields={
+                "$": ["calendar"],
+                "calendar": ["is_leap_year"],
+            },
+            data_items={
+                "is_leap_year": (BASELINE_0, "calendar/is_leap_year"),
+            },
         )
 
     class RMDRule(RuleDefinitionListIndexedBase):
@@ -42,16 +49,10 @@ class Section11Rule13(RuleDefinitionListIndexedBase):
                 ),
                 index_rmd=BASELINE_0,
                 each_rule=Section11Rule13.RMDRule.BuildingRule(),
-                required_fields={
-                    "$": ["calendar"],
-                    "calendar": ["is_leap_year"],
-                },
-                data_items={
-                    "is_leap_year": (BASELINE_0, "calendar/is_leap_year"),
-                },
+                list_path="$.buildings[*]",
             )
 
-        def get_calc_vals(self, context, data=None):
+        def create_data(self, context, data):
             rmd_b = context.BASELINE_0
             is_leap_year_b = data["is_leap_year"]
             energy_required_to_heat_swh_use_dict = {}
@@ -76,7 +77,9 @@ class Section11Rule13(RuleDefinitionListIndexedBase):
                             swh_use["id"], rmd_b, building_segment["id"], is_leap_year_b
                         )
                     )
-                    energy_required_to_heat_swh_use_dict[swh_use][
+                    if swh_use["id"] not in energy_required_to_heat_swh_use_dict:
+                        energy_required_to_heat_swh_use_dict[swh_use["id"]] = {}
+                    energy_required_to_heat_swh_use_dict[swh_use["id"]][
                         building_segment["id"]
                     ] = energy_required_to_heat_swh_use
             return {
@@ -113,7 +116,7 @@ class Section11Rule13(RuleDefinitionListIndexedBase):
                         if swh_use.get("use", 0.0) > 0:
                             is_applicable = True
                             energy_required_by_space = (
-                                energy_required_to_heat_swh_use_dict[swh_use][
+                                energy_required_to_heat_swh_use_dict[swh_use["id"]][
                                     building_segment["id"]
                                 ]
                             )
@@ -145,5 +148,5 @@ class Section11Rule13(RuleDefinitionListIndexedBase):
                 }
 
             def applicability_check(self, context, calc_vals, data):
-                is_applicable = data["is_applicable"]
+                is_applicable = calc_vals["is_applicable"]
                 return is_applicable
