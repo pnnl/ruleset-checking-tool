@@ -2,6 +2,9 @@ from rct229.rule_engine.partial_rule_definition import PartialRuleDefinition
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
+from rct229.utils.pint_utils import ZERO
+from rct229.schema.config import ureg
+from rct229.utils.assertions import assert_
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_energy_required_to_heat_swh_use import (
     get_energy_required_to_heat_swh_use,
 )
@@ -105,8 +108,8 @@ class Section11Rule13(RuleDefinitionListIndexedBase):
                     "service_water_heating_use_ids_dict"
                 ]
                 service_water_heating_info = {
-                    "btu_per_year": 0,
-                    "btu_per_sf_per_year": 0,
+                    "btu_per_year": ZERO.ENERGY,
+                    "btu_per_sf_per_year": 0 * ureg("Btu/ft2"),
                 }
                 is_applicable = False
                 for building_segment in find_all("$.building_segments[*]", building_b):
@@ -131,20 +134,30 @@ class Section11Rule13(RuleDefinitionListIndexedBase):
                                 service_water_heating_info["btu_per_year"] += sum(
                                     energy_required_by_space.values()
                                 )
-                if service_water_heating_info["btu_per_year"] != "UNDETERMINED":
+                if (
+                    service_water_heating_info["btu_per_year"] != "UNDETERMINED"
+                    and service_water_heating_info["btu_per_year"] != ZERO.ENERGY
+                ):
                     floor_area = sum(
-                        space.get("floor_area", 0)
-                        for space in find_all(
-                            "$.building_segments[*]zones[*]spaces[*]", building_b
-                        )
+                        find_all(
+                            "$.building_segments[*].zones[*].spaces[*].floor_area",
+                            building_b,
+                        ),
+                        ZERO.AREA,
                     )
-                    if floor_area > 0:
-                        service_water_heating_info["btu_per_sf_per_year"] = (
-                            service_water_heating_info["btu_per_year"] / floor_area
-                        )
+                    assert_(
+                        floor_area > ZERO.AREA,
+                        f"Floor area for building: {building_b['id']} is 0, check inputs.",
+                    )
+                    service_water_heating_info["btu_per_sf_per_year"] = (
+                        service_water_heating_info["btu_per_year"] / floor_area
+                    )
+
                 return {
                     "is_applicable": is_applicable,
-                    "service_water_heating_info": service_water_heating_info,
+                    "service_water_heating_btu_per_sf_per_year": service_water_heating_info[
+                        "btu_per_sf_per_year"
+                    ],
                 }
 
             def applicability_check(self, context, calc_vals, data):
