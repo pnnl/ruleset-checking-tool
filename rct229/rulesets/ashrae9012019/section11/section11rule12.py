@@ -50,14 +50,9 @@ class Section11Rule12(RuleDefinitionListIndexedBase):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
 
-            swh_uses_associated_with_each_building_segment_p = {
-                building_segment_id: get_swh_uses_associated_with_each_building_segment(
-                    rmd_p, building_segment_id
-                )
-                for building_segment_id in find_all(
-                    "$.buildings[*].building_segments[*].id", rmd_p
-                )
-            }
+            swh_uses_associated_with_each_building_segment_p = (
+                get_swh_uses_associated_with_each_building_segment(rmd_p)
+            )
 
             return {
                 "is_leap_year_b": data["is_leap_year_b"],
@@ -130,21 +125,12 @@ class Section11Rule12(RuleDefinitionListIndexedBase):
                     "swh_uses_associated_with_each_building_segment_p"
                 ]
 
-                service_water_heating_uses_list_p = []
-                for bldg_segment_id in swh_uses_associated_with_each_building_segment_p:
-                    for (
-                        served_by_distribution_system_id
-                    ) in swh_uses_associated_with_each_building_segment_p[
-                        bldg_segment_id
-                    ]:
-                        swh_use_p = find_one_with_field_value(
-                            "$.building_segments[*].zones[*].spaces[*].service_water_heating_uses[*]",
-                            "served_by_distribution_system",
-                            served_by_distribution_system_id,
-                            building_p,
-                        )
-                        service_water_heating_uses_list_p.append(
-                            swh_use_p.get("use", 0)
-                        )
+                service_water_heating_uses_list_p = [
+                    shw_use
+                    for bldg_seg_id in find_all("$.building_segments[*].id", building_p)
+                    for shw_use in swh_uses_associated_with_each_building_segment_p[
+                        bldg_seg_id
+                    ]
+                ]
 
-                return all(service_water_heating_uses_list_p)
+                return all(shw_use > 0 for shw_use in service_water_heating_uses_list_p)
