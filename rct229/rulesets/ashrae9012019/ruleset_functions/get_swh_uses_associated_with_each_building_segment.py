@@ -3,11 +3,7 @@ from rct229.utils.jsonpath_utils import find_all
 
 def get_swh_uses_associated_with_each_building_segment(
     rmd: dict,
-<<<<<<< HEAD
-) -> list[str]:
-=======
 ) -> dict[str : list[str]]:
->>>>>>> 12fbe5e22150d465ebf778206458350c0ccabc19
     """
     This function gets all the SWH uses connected to a building segment or an empty list if no service water heating uses are found in the building segment. This function is primarily to encapsulate getting service water heating uses in one function so that if a change is made in the schema as to how service water heating use is specified,
     the RCT only needs to change in one place.
