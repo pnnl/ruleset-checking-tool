@@ -4,9 +4,6 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_building_segment_swh_ba
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_energy_required_to_heat_swh_use import (
     get_energy_required_to_heat_swh_use,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_uses_associated_with_each_building_segment import (
-    get_swh_uses_associated_with_each_building_segment,
-)
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
 from rct229.utils.utility_functions import (
@@ -49,12 +46,10 @@ def get_swh_components_associated_with_each_swh_bat(
             },
         )
 
-        service_water_heating_use_ids = (
-            get_swh_uses_associated_with_each_building_segment(
-                rmd, building_segment["id"]
-            )
-        )
-        for swh_use_id in service_water_heating_use_ids:
+        for swh_use_id in find_all(
+            f'$.buildings[*].building_segments[*][?(@.id="{building_segment["id"]}")].zones[*].spaces[*].service_water_heating_uses[*].id',
+            rmd,
+        ):
             swh_use = find_exactly_one_service_water_heating_use(rmd, swh_use_id)
             energy_required = get_energy_required_to_heat_swh_use(
                 swh_use_id, rmd, building_segment["id"], is_leap_year
