@@ -202,6 +202,7 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
                                 "unit": "",
                             }
                         },
+                        manual_check_required_msg=MANUAL_CHECK_MSG,
                     )
 
                 def is_applicable(self, context, data=None):
