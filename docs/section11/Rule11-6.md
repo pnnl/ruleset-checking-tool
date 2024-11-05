@@ -10,7 +10,6 @@
 **Evaluation Context:** Each SWH Distribution System  
 **Data Lookup:**   
 **Function Call:**
-
 1. get_swh_components_associated_with_each_swh_distribution_system()
 
 **Applicability Checks:**

@@ -18,7 +18,6 @@ Logic:
 - look at each swh use: `for bldg_seg in find_all("$.buildings[*].building_segments[*]", rmd)`  
     - append the use to the list: `swh_uses_dict = {bldg_seg["id"]: find_all("$.zones[*].spaces[*].service_water_heating_uses[*].use", rmd)}`   
 
-
 **Returns** swh_uses_dict
 
 **[Back](../_toc.md)**
