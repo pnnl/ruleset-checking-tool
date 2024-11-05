@@ -4,9 +4,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_building_segment_swh_ba
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_energy_required_to_heat_swh_use import (
     get_energy_required_to_heat_swh_use,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_uses_associated_with_each_building_segment import (
-    get_swh_uses_associated_with_each_building_segment,
-)
+
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
 from rct229.utils.utility_functions import (
@@ -29,7 +27,7 @@ def get_swh_components_associated_with_each_swh_bat(
     Returns
     -------
     swh_and_equip_dict: A dictionary containing where the keys are the ServiceWaterHeatingSpaceOptions2019ASHRAE901 in the RMD and values are dictionaries where keys are the type of SWH equipment and values are the ids of the connected equipment.
-                        Example:  {"DORMITORY":{"SWHDistribution":["swhd1","swhd2"], "SWHHeatingEq":["swh_eq1","swh_eq2"], "Pumps":["p1"], "Tanks":["t1"], "Piping":["piping1"], "SolarThermal":[], "SWH_Uses":["swh_use1","swh_use2"], "EnergyRequired": 100000 Btu}}
+                        Example:  {"DORMITORY":{"swh_distribution":["swhd1","swhd2"], "swh_heating_eq":["swh_eq1","swh_eq2"], "pumps":["p1"], "tanks":["t1"], "piping":["piping1"], "solar_thermal":[], "swh_uses":["swh_use1","swh_use2"], "energy_required": 100000 Btu}}
     """
 
     swh_and_equip_dict = {}
@@ -49,12 +47,11 @@ def get_swh_components_associated_with_each_swh_bat(
             },
         )
 
-        service_water_heating_use_ids = (
-            get_swh_uses_associated_with_each_building_segment(
-                rmd, building_segment["id"]
-            )
-        )
-        for swh_use_id in service_water_heating_use_ids:
+        for swh_use_id in find_all(
+                f'$.buildings[*].building_segments[*][?(@.id="{building_segment["id"]}")].zones[*].spaces['
+                f'*].service_water_heating_uses[*].id',
+                rmd,
+        ):
             swh_use = find_exactly_one_service_water_heating_use(rmd, swh_use_id)
             energy_required = get_energy_required_to_heat_swh_use(
                 swh_use_id, rmd, building_segment["id"], is_leap_year
