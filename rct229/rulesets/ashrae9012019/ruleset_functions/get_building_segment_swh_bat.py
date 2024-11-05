@@ -1,20 +1,18 @@
-from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_energy_required_to_heat_swh_use import (
     get_energy_required_to_heat_swh_use,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_uses_associated_with_each_building_segment import (
-    get_swh_uses_associated_with_each_building_segment,
-)
 from rct229.schema.schema_enums import SchemaEnums
-from rct229.utils.jsonpath_utils import find_exactly_one_with_field_value
+from rct229.utils.jsonpath_utils import find_all, find_exactly_one_with_field_value
 from rct229.utils.pint_utils import ZERO
 
-SERVICE_WATERH_EATING_USE_UNIT = SchemaEnums.schema_enums[
+SERVICE_WATER_HEATING_USE_UNIT = SchemaEnums.schema_enums[
     "ServiceWaterHeatingUseUnitOptions"
 ]
 
 
-def get_building_segment_swh_bat(rmd: dict, building_segment_id: str) -> str:
+def get_building_segment_swh_bat(
+    rmd: dict, building_segment_id: str, is_leap_year: bool = False
+) -> str:
     """
     This function determines the SWH BAT for the given building segment.
 
@@ -24,10 +22,12 @@ def get_building_segment_swh_bat(rmd: dict, building_segment_id: str) -> str:
         RMD at RuleSetModelDescription level
     building_segment_id: str
         building segment id
+    is_leap_year: bool, default: False
+        Whether the year is a leap year or not.
 
     Returns
     -------
-    building_segment_swh_bat: dict
+    building_segment_swh_bat: str
         one of the ServiceWaterHeatingSpaceOptions2019ASHRAE901 options
 
     """
@@ -45,11 +45,10 @@ def get_building_segment_swh_bat(rmd: dict, building_segment_id: str) -> str:
         ]
     else:
         swh_use_dict = {}
-        service_water_heating_use_ids = (
-            get_swh_uses_associated_with_each_building_segment(rmd, building_segment_id)
-        )
-
-        for swh_use_id in service_water_heating_use_ids:
+        for swh_use_id in find_all(
+            f'$.buildings[*].building_segments[*][?(@.id="{building_segment["id"]}")].zones[*].spaces[*].service_water_heating_uses[*].id',
+            rmd,
+        ):
             swh_use = find_exactly_one_with_field_value(
                 f"$.zones[*].spaces[*].service_water_heating_uses[*]",
                 "id",
@@ -57,11 +56,14 @@ def get_building_segment_swh_bat(rmd: dict, building_segment_id: str) -> str:
                 building_segment,
             )
 
-            if swh_use.get("use_units") == SERVICE_WATERH_EATING_USE_UNIT.OTHER:
-                return RCTOutcomeLabel.UNDETERMINED
+            if (
+                not swh_use
+                or swh_use.get("use_units") == SERVICE_WATER_HEATING_USE_UNIT.OTHER
+            ):
+                return None
 
             swh_use_energy_by_space = get_energy_required_to_heat_swh_use(
-                swh_use["id"], rmd, building_segment["id"], False
+                swh_use["id"], rmd, building_segment["id"], is_leap_year
             )
 
             if swh_use.get("area_type"):
@@ -70,54 +72,31 @@ def get_building_segment_swh_bat(rmd: dict, building_segment_id: str) -> str:
                 swh_use_dict[area_type] += sum(swh_use_energy_by_space.values())
             else:
                 for space_id in swh_use_energy_by_space:
-                    space = find_exactly_one_with_field_value(
-                        "$.zones[*].spaces[*]",
-                        "id",
-                        space_id,
-                        building_segment,
-                    )
-                    if space.get("service_water_heating_building_area_type"):
-                        service_water_heating_bat = space[
-                            "service_water_heating_building_area_type"
-                        ]
-                        swh_use_dict.setdefault(service_water_heating_bat, ZERO.ENERGY)
-                        swh_use_dict[
-                            service_water_heating_bat
-                        ] += swh_use_energy_by_space[space_id]
-                    else:
-                        swh_use_dict.setdefault(
-                            RCTOutcomeLabel.UNDETERMINED, ZERO.ENERGY
+                    if space_id != "no_spaces_assigned":
+                        space = find_exactly_one_with_field_value(
+                            "$.zones[*].spaces[*]",
+                            "id",
+                            space_id,
+                            building_segment,
                         )
-                        swh_use_dict[
-                            RCTOutcomeLabel.UNDETERMINED
-                        ] += swh_use_energy_by_space[space_id]
+                        if space.get("service_water_heating_building_area_type"):
+                            service_water_heating_bat = space[
+                                "service_water_heating_building_area_type"
+                            ]
+                            swh_use_dict.setdefault(
+                                service_water_heating_bat, ZERO.ENERGY
+                            )
+                            swh_use_dict[
+                                service_water_heating_bat
+                            ] += swh_use_energy_by_space[space_id]
+                        else:
+                            swh_use_dict.setdefault("UNDETERMINED", ZERO.ENERGY)
+                            swh_use_dict["UNDETERMINED"] += swh_use_energy_by_space[
+                                space_id
+                            ]
 
-        swh_use_dict_len = len(swh_use_dict)
-        if swh_use_dict_len == 1 and RCTOutcomeLabel.UNDETERMINED not in swh_use_dict:
-            building_segment_swh_bat = next(iter(swh_use_dict))  # get the key
-        elif swh_use_dict_len == 1 and RCTOutcomeLabel.UNDETERMINED in swh_use_dict:
-            building_segment_swh_bat = RCTOutcomeLabel.UNDETERMINED
-        elif swh_use_dict_len == 2:
-            if RCTOutcomeLabel.UNDETERMINED in swh_use_dict:
-                # find a key name other than `UNDETERMINED`
-                other_key = [
-                    key
-                    for key in list(swh_use_dict)
-                    if key != RCTOutcomeLabel.UNDETERMINED
-                ][0]
-                building_segment_swh_bat = (
-                    other_key
-                    if swh_use_dict[RCTOutcomeLabel.UNDETERMINED]
-                    < swh_use_dict[other_key]
-                    else RCTOutcomeLabel.UNDETERMINED
-                )
-            else:
-                # Extract the keys and values
-                keys = list(swh_use_dict.keys())
-                values = list(swh_use_dict.values())
-
-                building_segment_swh_bat = keys[0] if values[0] > values[1] else keys[1]
-
-        # TODO: what if swh_use_dict_len >= 3?
+        building_segment_swh_bat = (
+            max(swh_use_dict, key=swh_use_dict.get) if swh_use_dict else None
+        )
 
     return building_segment_swh_bat
