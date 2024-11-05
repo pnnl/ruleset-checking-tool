@@ -26582,6 +26582,7 @@
                                                             {
                                                                 "id": "SHW 1",
                                                                 "served_by_distribution_system": "SHW Distribution 1",
+                                                                "use_units": "POWER",
                                                                 "use_multiplier_schedule": "Water Use Schedule",
                                                                 "is_heat_recovered_by_drain": true
                                                             }
