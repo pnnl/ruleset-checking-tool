@@ -75,6 +75,9 @@ class Section11Rule13(RuleDefinitionListIndexedBase):
                     building_segment["id"]
                 ] = service_water_heating_use_list
                 for swh_use in service_water_heating_use_list:
+                    # If no swh use specified or swh use is 0, skip
+                    if swh_use.get("use", 0) == 0:
+                        continue
                     energy_required_to_heat_swh_use = (
                         get_energy_required_to_heat_swh_use(
                             swh_use["id"], rmd_b, building_segment["id"], is_leap_year_b
