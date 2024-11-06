@@ -20,7 +20,8 @@
 - set a boolean has_renewables and set it to false: `has_renewables = false`
 - look at each end use result: `for end_use_result in output_instance.annual_end_use_results:`
     - check if the energy source for the end_use_result is "ON_SITE_RENEWABLES": `if end_use_result.energy_source == "ON_SITE_RENEWABLES":`
-        - set has_renewables to true and continue to rule assertion: `has_renewables = true; CONTINUE TO RULE ASSERTION`
+        - check if the energy end use is greater than 0: `if end_us_result.annual_site_energy_use > 0:`
+            - set has_renewables to true and continue to rule assertion: `has_renewables = true; CONTINUE TO RULE ASSERTION`
 - if we get here without going to the rule assertion, continue to rule assertion: `CONTINUE TO RULE ASSERTION`
 
     **Rule Assertion:**
