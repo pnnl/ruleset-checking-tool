@@ -4226,6 +4226,10 @@
                     "description": "Indicates if service water heating piping is a loop and recirculates",
                     "type": "boolean"
                 },
+                "are_thermal_losses_modeled": {
+                    "description": "Indicates if thermal losses from the service water heating piping are modeled",
+                    "type": "boolean"
+                },
                 "insulation_thickness": {
                     "description": "Pipe insulation thickness",
                     "type": "number",
