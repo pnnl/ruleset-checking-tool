@@ -5,7 +5,7 @@ from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_uses_associated_with_each_building_segment import (
     get_swh_uses_associated_with_each_building_segment,
 )
-from rct229.utils.jsonpath_utils import find_all, find_one
+from rct229.utils.jsonpath_utils import find_all
 
 
 class Section11Rule15(RuleDefinitionListIndexedBase):
@@ -28,15 +28,15 @@ class Section11Rule15(RuleDefinitionListIndexedBase):
             list_path="ruleset_model_descriptions[0]",
         )
 
-    class RMDRule(RuleDefinitionBase):
+    class RMDRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section11Rule15.RMDRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
-                # each_rule=Section11Rule15.RMDRule.BuildingRule(),
-                # index_rmd=BASELINE_0,
-                # list_path="$.buildings[*]",
+                each_rule=Section11Rule15.RMDRule.SWHUseRule(),
+                index_rmd=BASELINE_0,
+                list_path="$.buildings[*].building_segments[*].zones[*].spaces[*].service_water_heating_uses[*]",
             )
 
         def is_applicable(self, context, data=None):
@@ -52,7 +52,7 @@ class Section11Rule15(RuleDefinitionListIndexedBase):
                         rmd_b, building_segment["id"]
                     )
                 )
-                swh_use_ids.append(service_water_heating_use_ids_b)
+                swh_use_ids.extend(service_water_heating_use_ids_b)
 
             for building_segment in find_all(
                 "$.buildings[*].building_segments[*]", rmd_p
@@ -62,69 +62,57 @@ class Section11Rule15(RuleDefinitionListIndexedBase):
                         rmd_p, building_segment["id"]
                     )
                 )
-                swh_use_ids.extend(
-                    [
-                        swh_use_id
-                        for swh_use_id in service_water_heating_use_ids_p
-                        if swh_use_id not in swh_use_ids
-                    ]
-                )
-            return len(swh_use_ids) > 0
+                swh_use_ids.extend(service_water_heating_use_ids_p)
+            return len(set(swh_use_ids)) > 0
 
-        def get_calc_vals(self, context, data=None):
-            rule_status = "pass"
-            rule_note = ""
-            manual_check_msg = ""
+        def create_data(self, context, data):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
-            swh_use_ids = []
-
-            for building_segment in find_all(
-                "$.buildings[*].building_segments[*]", rmd_b
+            swh_dist_sys_dict_b = {}
+            swh_dist_sys_dict_p = {}
+            for swh_dist_sys_b in find_all(
+                "$.buildings[*].building_segments[*].zones[*].spaces[*].service_water_heating_uses[*]",
+                rmd_b,
             ):
-                service_water_heating_use_ids_b = (
-                    get_swh_uses_associated_with_each_building_segment(
-                        rmd_b, building_segment["id"]
-                    )
-                )
-                swh_use_ids.append(service_water_heating_use_ids_b)
-
-            for building_segment in find_all(
-                "$.buildings[*].building_segments[*]", rmd_p
+                swh_dist_sys_dict_b[swh_dist_sys_b["id"]] = swh_dist_sys_b
+            for swh_dist_sys_p in find_all(
+                "$.buildings[*].building_segments[*].zones[*].spaces[*].service_water_heating_uses[*]",
+                rmd_p,
             ):
-                service_water_heating_use_ids_p = (
-                    get_swh_uses_associated_with_each_building_segment(
-                        rmd_p, building_segment["id"]
-                    )
+                swh_dist_sys_dict_p[swh_dist_sys_p["id"]] = swh_dist_sys_p
+            return {
+                "swh_dist_sys_dict_b": swh_dist_sys_dict_b,
+                "swh_dist_sys_dict_p": swh_dist_sys_dict_p,
+            }
+
+        class SWHUseRule(RuleDefinitionBase):
+            def __init__(self):
+                super(Section11Rule15.RMDRule.SWHUseRule, self).__init__(
+                    rmds_used=produce_ruleset_model_description(
+                        USER=False, BASELINE_0=True, PROPOSED=True
+                    ),
                 )
-                swh_use_ids.extend(
-                    [
-                        swh_use_id
-                        for swh_use_id in service_water_heating_use_ids_p
-                        if swh_use_id not in swh_use_ids
-                    ]
-                )
-            for swh_use_id in swh_use_ids:
-                swh_use_b = find_one(
-                    "$.buildings[*].building_segments[*].zones[*].spaces[*].service_water_heating_uses[*]",
-                    rmd_b,
-                )
-                swh_use_p = find_one(
-                    "$.buildings[*].building_segments[*].zones[*].spaces[*].service_water_heating_uses[*]",
-                    rmd_p,
-                )
+
+            def get_calc_vals(self, context, data=None):
+                swh_dist_sys_dict_b = data["swh_dist_sys_dict_b"]
+                swh_dist_sys_dict_p = data["swh_dist_sys_dict_p"]
+                rule_status = "pass"
+                rule_note = ""
+                manual_check_msg = ""
+                swh_use_b = context.BASELINE_0
+                swh_use_p = context.PROPOSED
                 if not swh_use_b and swh_use_p:
                     rule_status = "fail"
                     rule_note = (
                         rule_note
-                        + swh_use_id
+                        + swh_use_b["id"]
                         + " exists in the proposed model, but not in the baseline."
                     )
                 elif swh_use_b and not swh_use_p:
                     rule_status = "fail"
                     rule_note = (
                         rule_note
-                        + swh_use_id
+                        + swh_use_b["id"]
                         + " exists in the baseline, but not in the proposed model."
                     )
                 else:
@@ -132,7 +120,7 @@ class Section11Rule15(RuleDefinitionListIndexedBase):
                         rule_status = "fail"
                         rule_note = (
                             rule_note
-                            + swh_use_id
+                            + swh_use_b["id"]
                             + " Service water heating use units are inconsistent between proposed and baseline models. "
                         )
                     if swh_use_b.get("use_multiplier_schedule") != swh_use_p.get(
@@ -141,7 +129,7 @@ class Section11Rule15(RuleDefinitionListIndexedBase):
                         rule_status = "fail"
                         rule_note = (
                             rule_note
-                            + swh_use_id
+                            + swh_use_b["id"]
                             + " Service Water Heating Use schedules do not match. "
                         )
 
@@ -151,7 +139,7 @@ class Section11Rule15(RuleDefinitionListIndexedBase):
                         rule_status = "fail"
                         rule_note = (
                             rule_note
-                            + swh_use_id
+                            + swh_use_b["id"]
                             + " The temperature at fixture is not the same between Proposed and Baseline. "
                         )
                     if swh_use_b.get(
@@ -160,28 +148,30 @@ class Section11Rule15(RuleDefinitionListIndexedBase):
                         rule_status = "fail"
                         rule_note = (
                             rule_note
-                            + swh_use_id
+                            + swh_use_b["id"]
                             + " Service Water Heating Distribution System entering main water temperature schedules do not match. "
                         )
-                    swh_dist_sys_b = swh_use_b.get("served_by_distribution_system")
-                    swh_dist_sys_p = swh_use_p.get("served_by_distribution_system")
-                    if swh_dist_sys_b != swh_dist_sys_p:
+                    swh_dist_sys_id_b = swh_use_b.get("served_by_distribution_system")
+                    swh_dist_sys_id_p = swh_use_p.get("served_by_distribution_system")
+                    if swh_dist_sys_id_b != swh_dist_sys_id_p:
                         rule_status = "fail"
                         rule_note = (
                             rule_note
-                            + swh_use_id
+                            + swh_use_b["id"]
                             + " Service water heating distribution system that serves this water heating use units are "
                             "inconsistent between proposed and baseline models. "
                         )
-
-                    if swh_dist_sys_b and swh_dist_sys_p:
+                    # do we require swh_dist_sys_id_p and swh_dist_sys_id_b not None?
+                    if not swh_dist_sys_id_b and swh_dist_sys_id_b == swh_dist_sys_id_p:
+                        swh_dist_sys_b = swh_dist_sys_dict_b[swh_dist_sys_id_b]
+                        swh_dist_sys_p = swh_dist_sys_dict_p[swh_dist_sys_id_p]
                         if swh_dist_sys_b.get(
                             "design_supply_water_temperature"
                         ) != swh_dist_sys_p.get("design_supply_water_temperature"):
                             rule_status = "fail"
                             rule_note = (
                                 rule_note
-                                + swh_use_id
+                                + swh_use_b["id"]
                                 + " Service Water Heating Distribution System design water supply temperatures do not "
                                 "match. "
                             )
@@ -190,34 +180,34 @@ class Section11Rule15(RuleDefinitionListIndexedBase):
                             rule_status = "undetermined"
                             manual_check_msg = (
                                 manual_check_msg
-                                + swh_use_id
+                                + swh_use_b["id"]
                                 + " Proposed Service Water Heating Use is less than the baseline.  Manually verify that reduction is due to an ECM that reduces service water heating use, such as low-flow fixtures. "
                             )
                         elif swh_use_p.get("use", 0) > swh_use_b.get("use", 0):
                             rule_status = "fail"
                             rule_note = (
                                 rule_note
-                                + swh_use_id
+                                + swh_use_b["id"]
                                 + " Proposed Service Water Heating Use is greater than the baseline. "
                             )
-            return {
-                "rule_status": rule_status,
-                "rule_note": rule_note,
-                "manual_check_msg": manual_check_msg,
-            }
+                return {
+                    "rule_status": rule_status,
+                    "rule_note": rule_note,
+                    "manual_check_msg": manual_check_msg,
+                }
 
-        def manual_check_required(self, context, calc_vals=None, data=None):
-            rule_status = calc_vals["rule_status"]
-            return rule_status == "undetermined"
+            def manual_check_required(self, context, calc_vals=None, data=None):
+                rule_status = calc_vals["rule_status"]
+                return rule_status == "undetermined"
 
-        def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
-            manual_check_msg = calc_vals["manual_check_msg"]
-            return manual_check_msg
+            def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
+                manual_check_msg = calc_vals["manual_check_msg"]
+                return manual_check_msg
 
-        def rule_check(self, context, calc_vals=None, data=None):
-            rule_status = calc_vals["rule_status"]
-            return rule_status == "pass"
+            def rule_check(self, context, calc_vals=None, data=None):
+                rule_status = calc_vals["rule_status"]
+                return rule_status == "pass"
 
-        def get_fail_msg(self, context, calc_vals=None, data=None):
-            rule_note = calc_vals["rule_note"]
-            return rule_note
+            def get_fail_msg(self, context, calc_vals=None, data=None):
+                rule_note = calc_vals["rule_note"]
+                return rule_note
