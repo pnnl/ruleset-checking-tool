@@ -6,7 +6,7 @@ Inputs:
 - **RMD**  
 
 Returns:
-- **swh_uses_dict**:  A dictionary where the keys are all the building segment ids and the summation of the `use` values under the `service_water_heating_uses`.  
+- **swh_uses_dict**:  A dictionary where the keys are all the building segment ids and the value is `service_water_heating_uses` object under the `service_water_heating_uses`.   
 
 Function Call:
 - get_obj_by_id  
@@ -16,7 +16,7 @@ Data Lookup: None
 Logic:
 - define `swh_uses_dict`: `swh_uses_dict = {}`
 - look at each swh use: `for bldg_seg in find_all("$.buildings[*].building_segments[*]", rmd)`  
-    - append the use to the list: `swh_uses_dict = {bldg_seg["id"]: sum(find_all("$.zones[*].spaces[*].service_water_heating_uses[*]", rmd))}`   
+    - append the use to the list: `swh_uses_dict = {bldg_seg["id"]: find_all("$.zones[*].spaces[*].service_water_heating_uses[*]", rmd)}`   
 
 **Returns** swh_uses_dict
 

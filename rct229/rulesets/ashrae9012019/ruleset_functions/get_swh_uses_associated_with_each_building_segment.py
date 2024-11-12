@@ -15,7 +15,7 @@ def get_swh_uses_associated_with_each_building_segment(
     Returns
     -------
     swh_uses_dict: dict
-        A dictionary where the keys are all the building segment ids and the summation of the `use` values under the `service_water_heating_uses`.
+        A dictionary where the keys are all the building segment ids and the value is `service_water_heating_uses` object under the `service_water_heating_uses`.
     """
 
     swh_uses_dict = {
