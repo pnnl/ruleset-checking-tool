@@ -42,11 +42,11 @@ class Section11Rule6(RuleDefinitionListIndexedBase):
         def is_applicable(self, context, data=None):
             rmd_b = context.BASELINE_0
 
-            swh_dist_sys_b = find_all(
+            swh_dist_sys_list_b = find_all(
                 "$.service_water_heating_distribution_systems[*]", rmd_b
             )
 
-            return swh_dist_sys_b
+            return swh_dist_sys_list_b
 
         def create_data(self, context, data):
             rmd_b = context.BASELINE_0
