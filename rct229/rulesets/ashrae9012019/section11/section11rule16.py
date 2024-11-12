@@ -81,8 +81,8 @@ class Section11Rule16(RuleDefinitionListIndexedBase):
             return heater_fuel_type_b == ENERGY_SOURCE.NATURAL_GAS
 
         def get_fail_msg(self, context, calc_vals=None, data=None):
-            heater_fuel_type_b = calc_vals["heater_fuel_type"]
-            heater_fuel_type_p = calc_vals["heater_fuel_type"]
+            heater_fuel_type_b = calc_vals["heater_fuel_type_b"]
+            heater_fuel_type_p = calc_vals["heater_fuel_type_p"]
 
             return (
                 heater_fuel_type_b == ENERGY_SOURCE.PROPANE
