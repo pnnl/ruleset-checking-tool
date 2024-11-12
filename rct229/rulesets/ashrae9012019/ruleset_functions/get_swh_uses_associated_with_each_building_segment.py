@@ -19,11 +19,9 @@ def get_swh_uses_associated_with_each_building_segment(
     """
 
     swh_uses_dict = {
-        bldg_seg["id"]: sum(
-            find_all(
-                "$.zones[*].spaces[*].service_water_heating_uses[*].use",
-                bldg_seg,
-            )
+        bldg_seg["id"]: find_all(
+            "$.zones[*].spaces[*].service_water_heating_uses[*]",
+            bldg_seg,
         )
         for bldg_seg in find_all("$.buildings[*].building_segments[*]", rmd)
     }
