@@ -7,7 +7,8 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_uses_associated_wit
     get_swh_uses_associated_with_each_building_segment,
 )
 from rct229.utils.assertions import getattr_
-from rct229.utils.jsonpath_utils import find_all, find_one, find_one_with_field_value
+from rct229.utils.jsonpath_utils import find_all, find_one
+from rct229.utils.utility_functions import find_exactly_one_schedule
 
 APPLICABILITY_MSG = (
     "This building is a 24hr-facility with service water heating loads. If the building meets the prescriptive criteria for use of condenser heat recovery systems described in 90.1 Section 6.5.6.2, a system meeting the requirements of that section shall be included in the baseline building design regardless of the exceptions to Section 6.5.6.2. "
@@ -76,11 +77,13 @@ class Section11Rule12(RuleDefinitionListIndexedBase):
                 schedules_b = data["schedules_b"]
                 is_leap_year_b = data["is_leap_year_b"]
 
+                # TODO revise the json path if the service_water_heating_uses is relocated in the schema
                 service_water_heating_uses_p = find_all(
                     "$.building_segments[*].zones[*].spaces[*].service_water_heating_uses[*]",
                     building_p,
                 )
-                building_open_schedule_p = find_one(
+
+                building_open_schedule_id_p = find_one(
                     "$.building_open_schedule", building_p
                 )
 
@@ -105,7 +108,7 @@ class Section11Rule12(RuleDefinitionListIndexedBase):
 
                 return (
                     service_water_heating_uses_p
-                    and building_open_schedule_p is not None
+                    and building_open_schedule_id_p is not None
                     and sum(bldg_open_sch_b) == hours_this_year
                 )
 
@@ -114,23 +117,26 @@ class Section11Rule12(RuleDefinitionListIndexedBase):
                     "swh_uses_associated_with_each_building_segment_p"
                 ]
 
+                uses_associated_with_each_building_segment_p = {
+                    bldg_seg_id: sum(
+                        swh_uses
+                        for swh_uses in swh_uses_associated_with_each_building_segment_p[
+                            bldg_seg_id
+                        ]
+                    )
+                    for bldg_seg_id in swh_uses_associated_with_each_building_segment_p
+                }
+
                 return {
-                    "swh_uses_associated_with_each_building_segment_p": swh_uses_associated_with_each_building_segment_p
+                    "uses_associated_with_each_building_segment_p": uses_associated_with_each_building_segment_p
                 }
 
             def applicability_check(self, context, calc_vals, data):
-                building_p = context.PROPOSED
-
-                swh_uses_associated_with_each_building_segment_p = calc_vals[
-                    "swh_uses_associated_with_each_building_segment_p"
+                uses_associated_with_each_building_segment_p = calc_vals[
+                    "uses_associated_with_each_building_segment_p"
                 ]
 
-                service_water_heating_uses_list_p = [
-                    shw_use
-                    for bldg_seg_id in find_all("$.building_segments[*].id", building_p)
-                    for shw_use in swh_uses_associated_with_each_building_segment_p[
-                        bldg_seg_id
-                    ]
-                ]
-
-                return all(shw_use > 0 for shw_use in service_water_heating_uses_list_p)
+                return (
+                    sum(list(uses_associated_with_each_building_segment_p.values()))
+                    > 0.0
+                )

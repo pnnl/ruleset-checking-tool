@@ -1,3 +1,7 @@
+from dataclasses import dataclass, field
+from typing import List
+
+from pint import Quantity
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_building_segment_swh_bat import (
     get_building_segment_swh_bat,
 )
@@ -7,14 +11,26 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_energy_required_to_heat
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
 from rct229.utils.utility_functions import (
-    find_exactly_one_service_water_heating_use,
     find_exactly_one_service_water_heating_distribution_system,
+    find_exactly_one_service_water_heating_use,
 )
+
+
+@dataclass
+class SWH_Equipment_Dict:
+    swh_distribution: List[str] = field(default_factory=list)
+    swh_heating_eq: List[str] = field(default_factory=list)
+    pumps: List[str] = field(default_factory=list)
+    tanks: List[str] = field(default_factory=list)
+    piping: List[str] = field(default_factory=list)
+    solar_thermal: List[str] = field(default_factory=list)
+    swh_uses: List[str] = field(default_factory=list)
+    energy_required: Quantity = ZERO.ENERGY
 
 
 def get_swh_components_associated_with_each_swh_bat(
     rmd: dict, is_leap_year: bool
-) -> dict[str, dict]:
+) -> dict[str, SWH_Equipment_Dict]:
     """
     This function gets all the SWH equipment connected to a particular SWH use type.  The information is stored in a dictionary where the keys are the ServiceWaterHeatingSpaceOptions2019ASHRAE901 and values are a dictionary giving the ServiceWaterHeatingDistributionSystem, ServiceWaterHeatingEquipment, and Pumps connected to the particular use type.  There is also an entry for the total energy required to heat all SWH uses for a year: "EnergyRequired" .
 
@@ -32,36 +48,25 @@ def get_swh_components_associated_with_each_swh_bat(
     swh_and_equip_dict = {}
     for building_segment in find_all("$.buildings[*].building_segments[*]", rmd):
         swh_bat = get_building_segment_swh_bat(rmd, building_segment["id"])
-        swh_and_equip_dict.setdefault(
-            swh_bat,
-            {
-                "swh_distribution": [],
-                "swh_heating_eq": [],
-                "pumps": [],
-                "tanks": [],
-                "piping": [],
-                "solar_thermal": [],
-                "swh_uses": [],
-                "energy_required": ZERO.ENERGY,
-            },
-        )
+        swh_and_equip_dict.setdefault(swh_bat, SWH_Equipment_Dict())
 
-        for swh_use_id in find_all(
-            f'$.buildings[*].building_segments[*][?(@.id="{building_segment["id"]}")].zones[*].spaces[*].service_water_heating_uses[*].id',
+        for swh_use in find_all(
+            f'$.buildings[*].building_segments[*][?(@.id="{building_segment["id"]}")].zones[*].spaces[*].service_water_heating_uses[*]',
             rmd,
         ):
+            swh_use_id = swh_use["id"]
             swh_use = find_exactly_one_service_water_heating_use(rmd, swh_use_id)
-            energy_required = get_energy_required_to_heat_swh_use(
+            energy_required_dict = get_energy_required_to_heat_swh_use(
                 swh_use_id, rmd, building_segment["id"], is_leap_year
             )
-            if list(energy_required.values())[0] is not None:
-                swh_and_equip_dict[swh_bat]["energy_required"] += list(
-                    energy_required.values()
+            if list(energy_required_dict.values())[0] is not None:
+                swh_and_equip_dict[swh_bat].energy_required += list(
+                    energy_required_dict.values()
                 )[0]
-            swh_and_equip_dict[swh_bat]["swh_uses"].append(swh_use_id)
+            swh_and_equip_dict[swh_bat].swh_uses.append(swh_use_id)
             distribution_id = swh_use.get("served_by_distribution_system")
-            if distribution_id not in swh_and_equip_dict[swh_bat]["swh_distribution"]:
-                swh_and_equip_dict[swh_bat]["swh_distribution"].append(distribution_id)
+            if distribution_id not in swh_and_equip_dict[swh_bat].swh_distribution:
+                swh_and_equip_dict[swh_bat].swh_distribution.append(distribution_id)
                 distribution = (
                     find_exactly_one_service_water_heating_distribution_system(
                         rmd, distribution_id
@@ -69,7 +74,7 @@ def get_swh_components_associated_with_each_swh_bat(
                 )
                 tanks = distribution.get("tanks")
                 for tank in tanks:
-                    swh_and_equip_dict[swh_bat]["tanks"].append(tank["id"])
+                    swh_and_equip_dict[swh_bat].tanks.append(tank["id"])
 
                 for piping in distribution.get("service_water_piping", []):
                     queue = [piping]
@@ -80,24 +85,32 @@ def get_swh_components_associated_with_each_swh_bat(
                         piping_ids.append(current_piping["id"])
                         if current_piping.get("child"):
                             queue.extend(current_piping["child"])
-                    swh_and_equip_dict[swh_bat]["piping"].extend(piping_ids)
+                    swh_and_equip_dict[swh_bat].piping.extend(piping_ids)
 
         for swh_bat in swh_and_equip_dict:
             for pump in find_all("$.pumps[*]", rmd):
-                if pump.get("loop_or_piping") in swh_and_equip_dict[swh_bat]["piping"]:
-                    swh_and_equip_dict[swh_bat]["pumps"].append(pump["id"])
+                if pump.get("loop_or_piping") in swh_and_equip_dict[swh_bat].piping:
+                    swh_and_equip_dict[swh_bat].pumps.append(pump["id"])
 
             for swh_equip in find_all("$.service_water_heating_equipment[*]", rmd):
                 if (
                     swh_equip.get("distribution_system")
-                    in swh_and_equip_dict[swh_bat]["swh_distribution"]
+                    in swh_and_equip_dict[swh_bat].swh_distribution
                 ):
-                    swh_and_equip_dict[swh_bat]["swh_heating_eq"].append(
+                    if (
                         swh_equip["id"]
-                    )
-                    for solar_t in swh_equip.get("solar_thermal_systems"):
-                        swh_and_equip_dict[swh_bat]["solar_thermal"].append(
-                            solar_t["id"]
+                        not in swh_and_equip_dict[swh_bat].swh_heating_eq
+                    ):
+                        swh_and_equip_dict[swh_bat].swh_heating_eq.append(
+                            swh_equip["id"]
                         )
+                    for solar_t in swh_equip.get("solar_thermal_systems"):
+                        if (
+                            solar_t["id"]
+                            not in swh_and_equip_dict[swh_bat].solar_thermal
+                        ):
+                            swh_and_equip_dict[swh_bat].solar_thermal.append(
+                                solar_t["id"]
+                            )
 
     return swh_and_equip_dict

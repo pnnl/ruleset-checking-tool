@@ -1,3 +1,5 @@
+from collections import deque
+
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
@@ -55,12 +57,6 @@ class Section11Rule6(RuleDefinitionListIndexedBase):
 
             return {"swh_distribution_and_eq_list_b": swh_distribution_and_eq_list_b}
 
-        def list_filter(self, context, data=None):
-            swh_dist_sys_b = context.BASELINE_0
-            swh_distribution_and_eq_list_b = data["swh_distribution_and_eq_list_b"]
-
-            return swh_dist_sys_b["id"] in swh_distribution_and_eq_list_b
-
         class SWHDistRule(RuleDefinitionBase):
             def __init__(self):
                 super(Section11Rule6.RMDRule.SWHDistRule, self).__init__(
@@ -77,10 +73,17 @@ class Section11Rule6(RuleDefinitionListIndexedBase):
             def get_calc_vals(self, context, data=None):
                 swh_dist_sys_b = context.BASELINE_0
 
-                piping_losses_modeled_b = [
-                    service_water_piping.get("are_thermal_losses_modeled")
-                    for service_water_piping in swh_dist_sys_b["service_water_piping"]
-                ]
+                piping_losses_modeled_b = []
+                for service_water_piping in swh_dist_sys_b["service_water_piping"]:
+                    queue = deque([service_water_piping])
+                    while queue:
+                        current_piping = queue.popleft()
+                        children_piping = current_piping.get("child", [])
+                        queue.extend(children_piping)
+
+                        piping_losses_modeled_b.append(
+                            current_piping.get("are_thermal_losses_modeled")
+                        )
 
                 return {"piping_losses_modeled_b": piping_losses_modeled_b}
 
