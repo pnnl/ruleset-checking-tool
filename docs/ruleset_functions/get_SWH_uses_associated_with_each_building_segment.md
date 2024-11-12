@@ -16,7 +16,7 @@ Data Lookup: None
 Logic:
 - define `swh_uses_dict`: `swh_uses_dict = {}`
 - look at each swh use: `for bldg_seg in find_all("$.buildings[*].building_segments[*]", rmd)`  
-    - append the use to the list: `swh_uses_dict = {bldg_seg["id"]: sum(find_all("$.zones[*].spaces[*].service_water_heating_uses[*].use", rmd))}`   
+    - append the use to the list: `swh_uses_dict = {bldg_seg["id"]: sum(find_all("$.zones[*].spaces[*].service_water_heating_uses[*]", rmd))}`   
 
 **Returns** swh_uses_dict
 
