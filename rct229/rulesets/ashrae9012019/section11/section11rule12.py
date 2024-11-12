@@ -117,12 +117,9 @@ class Section11Rule12(RuleDefinitionListIndexedBase):
                 ]
 
                 uses_associated_with_each_building_segment_p = {
-                    bldg_seg_id: sum(
-                        swh_uses
-                        for swh_uses in swh_uses_associated_with_each_building_segment_p[
-                            bldg_seg_id
-                        ]
-                    )
+                    bldg_seg_id: swh_uses_associated_with_each_building_segment_p[
+                        bldg_seg_id
+                    ]
                     for bldg_seg_id in swh_uses_associated_with_each_building_segment_p
                 }
 
