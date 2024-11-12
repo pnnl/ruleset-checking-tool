@@ -229,7 +229,9 @@ def test__TEST_RPD__area_type():
 
 
 def test__TEST_RPD__other_use_unit():
-    assert get_building_segment_swh_bat(TEST_RMD, "Building Segment 3") == None
+    assert (
+        get_building_segment_swh_bat(TEST_RMD, "Building Segment 3") == "UNDETERMINED"
+    )
 
 
 def test__TEST_RPD__two_spaces_one_undetermined():
