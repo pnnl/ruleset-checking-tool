@@ -33,7 +33,6 @@
     2.  Otherwise, expect the distribution system to match between proposed and baseline
     3.  Systems that don't do 1 or 2 fail
   
-  - create an list called errors, which is used to collect errors from the compare_swh_dist_systems_and_components function: `errors = []`
   - create a variable user_proposed_str, which is the string lookup used by compare_context_pair for comparing elements between the user and proposed RMDS: `user_proposed_str = "AppG 11-1 P_RMD Equals U_RMD"`
   - create a variable base_proposed_str, which is the string lookup used by compare_context_pair for comparing elements between the user and proposed RMDS: `base_proposed_str = "AppG 11-1 P_RMD Equals B_RMD"`
   - set a boolean user_proposed_comparison to FALSE: `user_proposed_comparison = FALSE`
@@ -43,16 +42,16 @@
     - check whether the system has SWH uses in the user model: `if u_swh_system_and_equip_dict[swh_dist_system_id]["USES"]:`
       - get the user swh_use: `u_swh_use = get_component_by_id(U_RMD, swh_use_id)`
       - if the u_swh_use exists, and is greater than zero: `if u_swh_use != NULL and u_swh_use.use > 0:`
-        - compare the proposed and user models using the function compare_swh_dist_systems_and_components: `user_proposed_comparison = compare_swh_dist_systems_and_components(P_RMD,U_RMD,user_proposed_str,swh_dist_system_id,errors)`
+        - compare the proposed and user models using the function compare_swh_dist_systems_and_components.  This function returns a list of errors.  If the list of errors has a length of 0, then the comparison encountered no issues: `user_proposed_comparison = compare_swh_dist_systems_and_components(P_RMD,U_RMD,user_proposed_str,swh_dist_system_id)`
         - from here, go directly to the rule assertion: `GO TO RULE ASSERTION`
 
-  - if we got to this line without going to the rule assertion, it means that there is no equivalent system in the user model, or that the user model does not have SWH use.  Compare the proposed and baseline models using the function compare_swh_dist_systems_and_components: `user_baseline_comparison = compare_swh_dist_systems_and_components(P_RMD,B_RMD,user_proposed_str,swh_dist_system_id,errors)`
+  - if we got to this line without going to the rule assertion, it means that there is no equivalent system in the user model, or that the user model does not have SWH use.  Compare the proposed and baseline models using the function compare_swh_dist_systems_and_components.  This function returns a list of errors.  If the list of errors has a length of 0, then the comparison encountered no issues: `user_baseline_comparison = compare_swh_dist_systems_and_components(P_RMD,B_RMD,user_proposed_str,swh_dist_system_id)`
   
   - now go to rule assertion: `GO TO RULE ASSERTION`
     
 
 ## Rule Assertion: 
-- Case1: if either the user_proposed_comparison or the user_baseline comparison is TRUE, then the rule passes: `if user_proposed_comparison || comparison: PASS`
+- Case1: if the length of either user_proposed_comparison or user_baseline comparison is 0, then the rule passes: `if (len(user_proposed_comparison) == 0) || (len(user_baseline_comparison) == 0): PASS`
 - Case2: all other cases, FAIL: `else: FAIL`
 
 
