@@ -39,7 +39,7 @@ def get_building_segment_swh_bat(
     building_segment = find_exactly_one_building_segment(rmd, building_segment_id)
 
     building_segment_swh_bat = building_segment.get(
-        "service_water_heating_building_area_type", None
+        "service_water_heating_building_area_type"
     )
 
     if building_segment_swh_bat is None:
@@ -57,6 +57,8 @@ def get_building_segment_swh_bat(
                 swh_use_energy_by_space = get_energy_required_to_heat_swh_use(
                     swh_use["id"], rmd, building_segment["id"], is_leap_year
                 )
+                if swh_use_energy_by_space is None:
+                    swh_use_energy_by_space = ZERO.ENERGY
 
                 if swh_use.get("area_type"):
                     area_type = swh_use["area_type"]
