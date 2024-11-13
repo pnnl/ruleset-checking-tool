@@ -57,13 +57,15 @@ def get_building_segment_swh_bat(
                 swh_use_energy_by_space = get_energy_required_to_heat_swh_use(
                     swh_use["id"], rmd, building_segment["id"], is_leap_year
                 )
-                if swh_use_energy_by_space is None:
-                    swh_use_energy_by_space = ZERO.ENERGY
 
                 if swh_use.get("area_type"):
                     area_type = swh_use["area_type"]
                     swh_use_dict.setdefault(area_type, ZERO.ENERGY)
-                    swh_use_dict[area_type] += sum(swh_use_energy_by_space.values())
+                    swh_use_dict[area_type] += sum(
+                        energy_req_space
+                        for energy_req_space in swh_use_energy_by_space.values()
+                        if energy_req_space is not None
+                    )
                 else:
                     for space_id in swh_use_energy_by_space:
                         if space_id != "no_spaces_assigned":
@@ -75,9 +77,10 @@ def get_building_segment_swh_bat(
                                 swh_use_dict.setdefault(
                                     service_water_heating_bat, ZERO.ENERGY
                                 )
-                                swh_use_dict[
-                                    service_water_heating_bat
-                                ] += swh_use_energy_by_space[space_id]
+                                if swh_use_energy_by_space[space_id] is not None:
+                                    swh_use_dict[
+                                        service_water_heating_bat
+                                    ] += swh_use_energy_by_space[space_id]
                             else:
                                 swh_use_dict.setdefault("UNDETERMINED", ZERO.ENERGY)
                                 swh_use_dict["UNDETERMINED"] += swh_use_energy_by_space[
