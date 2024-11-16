@@ -73,8 +73,7 @@
                                         "hot_water_loop": "Boiler Loop 1",
                                         "rated_capacity": 87921,
                                         "design_capacity": 87921,
-                                        "heating_coil_setpoint": 10,
-                                        "humidification_type": "OTHER"
+                                        "heating_coil_setpoint": 10
                                     },
                                     "fan_system": {
                                         "id": "VAV Fan System 1",
@@ -117,7 +116,8 @@
                                             "design_sensible_effectiveness": 0.5,
                                             "design_latent_effectiveness": 0.5
                                         }
-                                    }
+                                    },
+                                    "humidification_type": "OTHER"
                                 }
                             ]
                         }

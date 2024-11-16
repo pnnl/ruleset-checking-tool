@@ -94,8 +94,7 @@
                                         "hot_water_loop": "Primary HW Loop",
                                         "rated_capacity": 43960.6605,
                                         "design_capacity": 40000,
-                                        "heating_coil_setpoint": 10,
-                                        "humidification_type": "ADIABATIC"
+                                        "heating_coil_setpoint": 10
                                     },
                                     "fan_system": {
                                         "id": "VAV Fan System 1",
@@ -139,7 +138,8 @@
                                         },
                                         "has_fully_ducted_return": true,
                                         "air_filter_merv_rating": 13
-                                    }
+                                    },
+                                    "humidification_type": "ADIABATIC"
                                 }
                             ]
                         }

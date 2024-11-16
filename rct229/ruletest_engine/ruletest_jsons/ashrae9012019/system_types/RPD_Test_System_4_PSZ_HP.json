@@ -46,14 +46,14 @@
                                     "heating_system": {
                                         "id": "HP Coil 1",
                                         "type": "HEAT_PUMP",
-                                        "heatpump_auxilliary_heat_type": "ELECTRIC_RESISTANCE",
+                                        "heatpump_auxiliary_heat_type": "ELECTRIC_RESISTANCE",
                                         "design_capacity": 11723,
                                         "rated_capacity": 17584,
                                         "is_sized_based_on_design_day": true,
                                         "oversizing_factor": 0.25,
                                         "efficiency_metric_types": ["HEAT_PUMP_COEFFICIENT_OF_PERFORMANCE_LOW_TEMPERATURE_NO_FAN"],
                                         "efficiency_metric_values": [3.1],
-                                        "heatpump_auxilliary_heat_high_shutoff_temperature": 4.4,
+                                        "heatpump_auxiliary_heat_high_shutoff_temperature": 4.4,
                                         "heatpump_low_shutoff_temperature": -23.3
                                     },
                                     "fan_system": {

@@ -46,7 +46,7 @@
                                     "heating_system": {
                                         "id": "HP Heating Coil 1",
                                         "type": "HEAT_PUMP",
-                                        "heatpump_auxilliary_heat_type": "FURNACE",
+                                        "heatpump_auxiliary_heat_type": "FURNACE",
                                         "design_capacity": 17500,
                                         "rated_capacity": 17584,
                                         "efficiency_metric_values": [8.0],
