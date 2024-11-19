@@ -5,7 +5,7 @@ from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_uses_associated_with_each_building_segment import (
     get_swh_uses_associated_with_each_building_segment,
 )
-from rct229.utils.jsonpath_utils import find_all, find_exactly_one_with_field_value
+from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.utility_functions import find_exactly_one_swh_use
 
 
@@ -30,12 +30,15 @@ class Section11Rule11(RuleDefinitionListIndexedBase):
             list_path="ruleset_model_descriptions[0]",
         )
 
-    class RMDRule(RuleDefinitionBase):
+    class RMDRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section11Rule11.RMDRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
+                each_rule=Section11Rule11.RMDRule.BuildingSegmentRule(),
+                index_rmd=BASELINE_0,
+                list_path="$.buildings[*].building_segments[*]",
             )
 
         def is_applicable(self, context, data=None):
@@ -54,22 +57,49 @@ class Section11Rule11(RuleDefinitionListIndexedBase):
 
             return swh_use_loads_p <= 0.0
 
-        def get_calc_vals(self, context, data=None):
+        def create_data(self, context, data):
             rmd_b = context.BASELINE_0
-            swh_use_loads_b = sum(
-                [
-                    find_exactly_one_swh_use(rmd_b, swh_use_id).get("use", 0.0)
-                    for building_segment in find_all(
-                        "$.buildings[*].building_segments[*]", rmd_b
-                    )
+            building_segment_associated_swh_use_dict_b = {}
+            for building_segment_b in find_all(
+                "$.buildings[*].building_segments[*]", rmd_b
+            ):
+                swh_use_list_b = [
+                    find_exactly_one_swh_use(rmd_b, swh_use_id)
                     for swh_use_id in get_swh_uses_associated_with_each_building_segment(
-                        rmd_b, building_segment["id"]
+                        rmd_b, building_segment_b["id"]
                     )
                 ]
-            )
+                building_segment_associated_swh_use_dict_b.setdefault(
+                    building_segment_b["id"], []
+                ).extend(swh_use_list_b)
+            return {
+                "building_segment_associated_swh_use_dict_b": building_segment_associated_swh_use_dict_b
+            }
 
-            return {"swh_use_loads_b": swh_use_loads_b}
+        class BuildingSegmentRule(RuleDefinitionBase):
+            def __init__(self):
+                super(Section11Rule11.RMDRule.BuildingSegmentRule, self).__init__(
+                    rmds_used=produce_ruleset_model_description(
+                        USER=False, BASELINE_0=True, PROPOSED=False
+                    ),
+                )
 
-        def rule_check(self, context, calc_vals=None, data=None):
-            swh_use_loads_b = calc_vals["swh_use_loads_b"]
-            return swh_use_loads_b <= 0.0
+            def get_calc_vals(self, context, data=None):
+                building_segment_b = context.BASELINE_0
+                building_segment_associated_swh_use_dict_b = data[
+                    "building_segment_associated_swh_use_dict_b"
+                ]
+
+                swh_use_loads_b = sum(
+                    [
+                        swh_use_b.get("use", 0.0)
+                        for swh_use_b in building_segment_associated_swh_use_dict_b[
+                            building_segment_b["id"]
+                        ]
+                    ]
+                )
+                return {"swh_use_loads_b": swh_use_loads_b}
+
+            def rule_check(self, context, calc_vals=None, data=None):
+                swh_use_loads_b = calc_vals["swh_use_loads_b"]
+                return swh_use_loads_b <= 0.0
