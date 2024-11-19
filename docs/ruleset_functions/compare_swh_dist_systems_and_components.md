@@ -26,12 +26,12 @@ Logic:
   - check if this distribution ID is in model 1: `if RMD1_swh_system_and_equip_dict[swh_distribution_id]:`
     - get the dictionary of all SWH equipment (pumps, tanks, SWH use, dist system, etc) for the given swh_distribution_id for RMD1: `RMD1_swh_equipment_dict = RMD1_swh_system_and_equip_dict[swh_distribution_id]`
     - get the actual distribution equipment associated with this ID from model 1: `RMD1_swh_distribution = get_component_by_id(RMD1, swh_distribution_id)`
-  - otherwise, return FALSE: `else: errors << "SWH Distribution System " + swh_distribution_id + " not found in one of the two RMDs"; return FALSE`
+  - otherwise, return FALSE by adding an error to the list: `else: errors << "SWH Distribution System " + swh_distribution_id + " not found in one of the two RMDs"`
 
   - check if this distribution ID is in model 2: `if RMD2_swh_system_and_equip_dict[swh_distribution_id]:`
     - get the dictionary of all SWH equipment (pumps, tanks, SWH use, dist system, etc) for the given swh_distribution_id for RMD2: `RMD2_swh_equipment_dict = RMD2_swh_system_and_equip_dict[swh_distribution_id]`
     - get the actual distribution equipment associated with this ID from model 1: `RMD2_swh_distribution = get_component_by_id(RMD2, swh_distribution_id)`
-  - otherwise, add an error and return FALSE: `else: errors << "SWH Distribution System " + swh_distribution_id + " not found in one of the two RMDs"; return FALSE`
+  - otherwise, add an error and return FALSE by adding an error to the list: `else: errors << "SWH Distribution System " + swh_distribution_id + " not found in one of the two RMDs"`
 
 
   - Compare the distribution in the two models using the function compare_context_pair.  compare_context_pair is recursive, so by sending the function the distribution systems, it is also checking the tanks and piping that are child objects of the distribution systems.  If the comparison fails, we add an error to the errors list indicating the id of the swh distribution system that failed comparison: `if !compare_context_pair(RMD1_swh_distribution, RMD2_swh_distribution, $, extra_schema_for_SWH_comparison.json, true, compare_context_str, errors): errors << "Comparison of SWH Distribution System: " + swh_distribution_id + " failed."`
