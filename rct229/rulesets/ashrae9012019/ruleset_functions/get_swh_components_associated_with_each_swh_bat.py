@@ -48,7 +48,7 @@ def get_swh_components_associated_with_each_swh_bat(
     for building_segment in find_all("$.buildings[*].building_segments[*]", rmd):
         swh_bat = get_building_segment_swh_bat(rmd, building_segment["id"])
         swh_and_equip_dict[swh_bat] = SWHEquipmentAssociations(
-            # energy_required=ZERO.ENERGY
+            energy_required=ZERO.ENERGY
         )
         # TODO Need to update json path if schema changes
         for swh_use in find_all(
