@@ -84,6 +84,8 @@
                                     "fan_system": {
                                         "id": "VAV Fan System 1",
                                         "fan_control": "VARIABLE_SPEED_DRIVE",
+                                        "operation_during_occupied": "CONTINUOUS",
+                                        "operation_during_unoccupied": "KEEP_OFF",
                                         "has_lock_out_central_heat_during_unoccupied": true,
                                         "supply_fans": [
                                             {
