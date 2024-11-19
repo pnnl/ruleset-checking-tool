@@ -446,7 +446,7 @@
         "Test": "d",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The hot water boiler uses propane as the fuel source.",
         "expected_rule_outcome": "undetermined",
-        "expected_raised_message_includes": "Basline boiler fuel source is modeled as propane. Verify if natural gas is not available for the proposed building site as determined by the rating authority.",
+        "expected_raised_message_includes": "Baseline boiler fuel source is modeled as propane. Verify if natural gas is not available for the proposed building site as determined by the rating authority.",
         "standard": {
             "rule_id": "21-18",
             "ruleset_reference": "G3.1.2.1",
