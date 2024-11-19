@@ -5,7 +5,7 @@
 **Rule Description:** Automatic fenestration shading devices shall not be modeled in the Baseline.  
 **Rule Assertion:** Baseline RMD = expected value  
 **Appendix G Section:** Section G3.1-5(d) Building Envelope Modeling Requirements for the Baseline building  
-**Appendix G Section Reference:** Tables G3.4-1 to G3.4-8  
+**Mandatory Rule:** True
 
 **Manual Check:** None  
 **Evaluation Context:** Each SubSurface  
@@ -25,7 +25,7 @@ NONE
 
             **Rule Assertion:**
             - Case 1: If the baseline subsurface does not have shading devices, then pass: `if not automatic_shades_modeled: PASS`
-            - Case 2: If the baseline subsurface has shading devices, then fail: `if not automatic_shades_modeled: FAIL`
+            - Case 2: If the baseline subsurface has shading devices, then fail: `if automatic_shades_modeled: FAIL`
 
 
 **Notes:**
