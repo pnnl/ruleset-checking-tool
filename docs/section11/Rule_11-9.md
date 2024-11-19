@@ -14,20 +14,20 @@
 **Evaluation Context:** B-RMD each SHW BAT
 **Data Lookup:**   
 **Function Call:** 
-- **get_spaces_associated_with_each_SWH_bat**
+- **get_SWH_bats_and_SWH_use**
 
 **Applicability Checks:**
 - check that the SHW BAT in the B_RMD has SHW loads
 
 ## Applicability Checks:
-- only projects with SHW for the SHW space BAT in the baseline model are applicable
+- only projects with SHW use for the SHW space BAT in the baseline model are applicable
 
-- use the function get_spaces_associated_with_each_SWH_bat to get a list of spaces for each SHW BAT: `shw_and_spaces_dict = get_spaces_associated_with_each_SWH_bat(U_RMD)`
-- look at each SHW space BAT: `for swh_bat in shw_and_spaces_dict:`
-  - create a boolean rule_is_applicable and set it to false: `rule_is_applicable = false`
-  - look at each space: `for space_id in shw_and_spaces_dict[swh_bat]:`
-    - get the space using get_component_by_id: `space = get_component_by_id(U_RMD, space_id)`
-    - look for the ServiceWaterHeatingUse in the space.  If even one space has a ServiceWaterHeatingUse, this rule is applicable: `if len(u.space.service_water_heating_uses) > 0: rule_is_applicable = true`
+- use the function get_SWH_bats_and_SWH_use to get a list of SWH uses for each BAT: `shw_bat_uses_dict = get_SWH_bats_and_SWH_use(U_RMD)`
+- look at each SHW BAT: `for swh_bat in shw_bat_uses_dict:`
+  - look at the uses in this swh bat: `for swh_use_id in shw_bat_uses_dict[swh_bat]:`
+    - get the swh use: `swh_use = get_component_by_id(B_RMD, ServiceWaterHeatingUse)`
+    - if even one use is greater than zero, go to rule assertion: `if swh_use.use > 0: GO TO RULE ASSERTION`
+      
   ## Rule Assertion:
   - if the boolean rule_is_applicable is equal to true, the rule is applicable, return UNDETERMINED and a note letting the reviewer know what to check: `if rule_is_applicable: UNDETERMINED raise_message: "Check that the baseline Service Water Heating System for Building Area Type " + swh_bat + " is sized according to ASHRAE Standard 90.1 2019, Section 7.4.1."`
   - otherwise, rule is not applicable: `else: NOT_APPLICABLE`
