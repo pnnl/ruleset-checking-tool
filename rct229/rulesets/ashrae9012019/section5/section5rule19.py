@@ -2,6 +2,7 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_4_fns import table_G34_lookup
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_building_scc_window_wall_ratios_dict import (
     get_building_scc_window_wall_ratios_dict,
@@ -18,7 +19,6 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_ca
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
-from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO, CalcQ
 from rct229.utils.std_comparisons import std_equal
@@ -264,6 +264,12 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
                         rmds_used=produce_ruleset_model_description(
                             USER=False, BASELINE_0=True, PROPOSED=False
                         ),
+                        precision={
+                            "subsurface_u_factor_b": {
+                                "precision": 0.01,
+                                "unit": "Btu/(hr*ft2*R)",
+                            }
+                        },
                     )
 
                 def get_calc_vals(self, context, data=None):
@@ -293,6 +299,11 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
                     }
 
                 def rule_check(self, context, calc_vals=None, data=None):
+                    return self.precision_comparison["subsurface_u_factor_b"](
+                        calc_vals["target_u_factor"], calc_vals["subsurface_u_factor"]
+                    )
+
+                def is_tolerance_fail(self, context, calc_vals=None, data=None):
                     target_u_factor = calc_vals["target_u_factor"]
                     subsurface_u_factor = calc_vals["subsurface_u_factor"]
                     return std_equal(std_val=target_u_factor, val=subsurface_u_factor)

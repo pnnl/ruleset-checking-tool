@@ -45,6 +45,12 @@ class Section22Rule31(RuleDefinitionBase):
             required_fields={
                 "$": ["output"],
             },
+            precision={
+                "building_peak_load_b": {
+                    "precision": 1,
+                    "unit": "ton",
+                },
+            },
         )
 
     def is_applicable(self, context, data=None):
@@ -75,7 +81,13 @@ class Section22Rule31(RuleDefinitionBase):
             "building_peak_cooling_load",
         )
 
-        if building_peak_load_b <= REQUIRED_BUILDING_PEAK_LOAD_300:
+        if (
+            building_peak_load_b < REQUIRED_BUILDING_PEAK_LOAD_300
+            or self.precision_comparison["building_peak_load_b"](
+                building_peak_load_b,
+                REQUIRED_BUILDING_PEAK_LOAD_300,
+            )
+        ):
             target_chiller_number = 1
         elif building_peak_load_b < REQUIRED_BUILDING_PEAK_LOAD_600:
             target_chiller_number = 2

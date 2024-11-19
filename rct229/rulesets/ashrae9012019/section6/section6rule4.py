@@ -142,6 +142,34 @@ class Section6Rule4(RuleDefinitionListIndexedBase):
                                 LightingStatusType.AS_DESIGNED_OR_AS_EXISTING,
                                 LightingStatusType.NOT_YET_DESIGNED_OR_MATCH_TABLE_9_5_1,
                             ]
+                            and total_space_lpd_b == lpd_allowance_b
+                        )
+                    )
+
+                def is_tolerance_fail(self, context, calc_vals=None, data=None):
+                    space_b = context.BASELINE_0
+                    lighting_space_type_b = space_b.get("lighting_space_type")
+
+                    space_lighting_status_type_p = calc_vals[
+                        "space_lighting_status_type_p"
+                    ]
+                    total_space_lpd_b = calc_vals["total_space_lpd_b"]
+                    lpd_allowance_b = calc_vals["lpd_allowance_b"]
+
+                    return (
+                        # Not Case 1
+                        not (
+                            space_lighting_status_type_p
+                            == LightingStatusType.AS_DESIGNED_OR_AS_EXISTING
+                            and not lighting_space_type_b
+                        )
+                        # Passes for both values of space_lighting_status_type_p
+                        and (
+                            space_lighting_status_type_p
+                            in [
+                                LightingStatusType.AS_DESIGNED_OR_AS_EXISTING,
+                                LightingStatusType.NOT_YET_DESIGNED_OR_MATCH_TABLE_9_5_1,
+                            ]
                             and std_equal(total_space_lpd_b, lpd_allowance_b)
                         )
                     )
