@@ -81,13 +81,28 @@ class Section19Rule35(RuleDefinitionListIndexedBase):
                         f'$.buildings[*].building_segments[*].zones[*][?(@.id="{zone_id_b}")].spaces[*].lighting_space_type',
                         rmd_b,
                     )
+
+                    # Count this zone's spaces and the number of light space types
+                    space_count = len(
+                        find_all(
+                            f'$.buildings[*].building_segments[*].zones[*][?(@.id="{zone_id_b}")].spaces[*]',
+                            rmd_b,
+                        )
+                    )
+                    lighting_space_type_count = len(lighting_space_types_b)
+
+                    # Evaluate is all of this zone's lighting space types are defined (i.e., does each space have
+                    # an associated lighting space type)
+                    all_zone_types_defined = space_count == lighting_space_type_count
+
                     all_lighting_space_types_defined = (
-                        all(lighting_space_types_b) and all_lighting_space_types_defined
+                        all(lighting_space_types_b)
+                        and all_zone_types_defined
+                        and all_lighting_space_types_defined
                     )
                     are_any_lighting_space_types_defined = (
-                        any(lighting_space_types_b)
-                        or are_any_lighting_space_types_defined
-                    )
+                        any(lighting_space_types_b) or lighting_space_type_count > 0
+                    ) or are_any_lighting_space_types_defined
                     hvac_system_serves_only_labs = (
                         all(
                             map(
@@ -96,8 +111,8 @@ class Section19Rule35(RuleDefinitionListIndexedBase):
                                 lighting_space_types_b,
                             )
                         )
-                        and hvac_system_serves_only_labs
-                    )
+                        and lighting_space_type_count > 0
+                    ) and hvac_system_serves_only_labs
 
                     zone_OA_flow_list_of_schedules_b.append(
                         get_min_oa_cfm_sch_zone(rmd_b, zone_id_b, leap_year_b)
