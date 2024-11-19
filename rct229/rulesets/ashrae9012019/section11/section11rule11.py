@@ -6,7 +6,6 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_uses_associated_wit
     get_swh_uses_associated_with_each_building_segment,
 )
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.utility_functions import find_exactly_one_swh_use
 
 
 class Section11Rule11(RuleDefinitionListIndexedBase):
@@ -45,13 +44,13 @@ class Section11Rule11(RuleDefinitionListIndexedBase):
             rmd_p = context.PROPOSED
             swh_use_loads_p = sum(
                 [
-                    find_exactly_one_swh_use(rmd_p, swh_use_id).get("use", 0.0)
-                    for building_segment in find_all(
+                    swh_use_p.get("use", 0.0)
+                    for building_segment_p in find_all(
                         "$.buildings[*].building_segments[*]", rmd_p
                     )
-                    for swh_use_id in get_swh_uses_associated_with_each_building_segment(
-                        rmd_p, building_segment["id"]
-                    )
+                    for swh_use_p in get_swh_uses_associated_with_each_building_segment(
+                        rmd_p
+                    )[building_segment_p["id"]]
                 ]
             )
 
@@ -63,12 +62,9 @@ class Section11Rule11(RuleDefinitionListIndexedBase):
             for building_segment_b in find_all(
                 "$.buildings[*].building_segments[*]", rmd_b
             ):
-                swh_use_list_b = [
-                    find_exactly_one_swh_use(rmd_b, swh_use_id)
-                    for swh_use_id in get_swh_uses_associated_with_each_building_segment(
-                        rmd_b, building_segment_b["id"]
-                    )
-                ]
+                swh_use_list_b = get_swh_uses_associated_with_each_building_segment(
+                    rmd_b
+                )[building_segment_b["id"]]
                 building_segment_associated_swh_use_dict_b.setdefault(
                     building_segment_b["id"], []
                 ).extend(swh_use_list_b)
