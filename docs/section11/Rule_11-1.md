@@ -35,8 +35,8 @@
   
   - create a variable user_proposed_str, which is the string lookup used by compare_context_pair for comparing elements between the user and proposed RMDS: `user_proposed_str = "AppG 11-1 P_RMD Equals U_RMD"`
   - create a variable base_proposed_str, which is the string lookup used by compare_context_pair for comparing elements between the user and proposed RMDS: `base_proposed_str = "AppG 11-1 P_RMD Equals B_RMD"`
-  - set a boolean user_proposed_comparison to FALSE: `user_proposed_comparison = FALSE`
-  - set a boolean user_baseline_comparison to FALSE: `user_baseline_comparison = FALSE`
+  - set a list user_proposed_comparison to [].  If the end of the rule is reached and this list (and the corresponding baseline list) still have zero length, then the rule passes.  Otherwise the list will include a series of messages for the user about why it didn't pass: `user_proposed_comparison = []`
+  - set a list user_baseline_comparison to [].  If the end of the rule is reached and this list (and the corresponding proposed list) still have zero length, then the rule passes.  Otherwise the list will include a series of messages for the user about why it didn't pass: `user_baseline_comparison = []`
   
   - Check whether the system exists in the user model: `if u_swh_system_and_equip_dict[swh_dist_system_id]:`
     - check whether the system has SWH uses in the user model: `if u_swh_system_and_equip_dict[swh_dist_system_id]["USES"]:`
@@ -45,7 +45,11 @@
         - compare the proposed and user models using the function compare_swh_dist_systems_and_components.  This function returns a list of errors.  If the list of errors has a length of 0, then the comparison encountered no issues: `user_proposed_comparison = compare_swh_dist_systems_and_components(P_RMD,U_RMD,user_proposed_str,swh_dist_system_id)`
         - from here, go directly to the rule assertion: `GO TO RULE ASSERTION`
 
-  - if we got to this line without going to the rule assertion, it means that there is no equivalent system in the user model, or that the user model does not have SWH use.  Compare the proposed and baseline models using the function compare_swh_dist_systems_and_components.  This function returns a list of errors.  If the list of errors has a length of 0, then the comparison encountered no issues: `user_baseline_comparison = compare_swh_dist_systems_and_components(P_RMD,B_RMD,user_proposed_str,swh_dist_system_id)`
+  -  If the system doesn't exist in the proposed model, we need to return an error: `if swh_dist_system_id not in p_swh_system_and_equip_dict: errors << swh_dist_system_id + " was not found in the Proposed model. 
+ Because there are no SWH loads in the User model, we are expecting the Proposed and Baseline systems to match."`
+  -  If the system doesn't exist in the baseline model, we need to return an error: `if swh_dist_system_id not in b_swh_system_and_equip_dict: errors << swh_dist_system_id + " was not found in the Baseline model. 
+ Because there are no SWH loads in the User model, we are expecting the Proposed and Baseline systems to match."`
+  -  if we got to this line without going to the rule assertion, it means that there is no equivalent system in the user model, or that the user model does not have SWH use.  Compare the proposed and baseline models using the function compare_swh_dist_systems_and_components.  This function returns a list of errors.  If the list of errors has a length of 0, then the comparison encountered no issues: `user_baseline_comparison = compare_swh_dist_systems_and_components(P_RMD,B_RMD,user_proposed_str,swh_dist_system_id)`
   
   - now go to rule assertion: `GO TO RULE ASSERTION`
     
