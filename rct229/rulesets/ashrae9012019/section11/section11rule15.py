@@ -36,6 +36,7 @@ class Section11Rule15(RuleDefinitionListIndexedBase):
                 ),
                 each_rule=Section11Rule15.RMDRule.SWHUseRule(),
                 index_rmd=BASELINE_0,
+                # TODO, change the path if the service_water_heating_uses moved to building_segment level
                 list_path="$.buildings[*].building_segments[*].zones[*].spaces[*].service_water_heating_uses[*]",
             )
 
@@ -44,25 +45,30 @@ class Section11Rule15(RuleDefinitionListIndexedBase):
             rmd_p = context.PROPOSED
             swh_use_ids = []
 
-            for building_segment in find_all(
+            for building_segment_b in find_all(
                 "$.buildings[*].building_segments[*]", rmd_b
             ):
-                service_water_heating_use_ids_b = (
-                    get_swh_uses_associated_with_each_building_segment(
-                        rmd_b, building_segment["id"]
-                    )
-                )
-                swh_use_ids.extend(service_water_heating_use_ids_b)
+                swh_use_list_b = get_swh_uses_associated_with_each_building_segment(
+                    rmd_b
+                )[building_segment_b["id"]]
+                swh_use_ids += [
+                    swh_use_b["id"]
+                    for swh_use_b in swh_use_list_b
+                    if swh_use_b["id"] not in swh_use_ids
+                ]
 
-            for building_segment in find_all(
+            for building_segment_p in find_all(
                 "$.buildings[*].building_segments[*]", rmd_p
             ):
-                service_water_heating_use_ids_p = (
-                    get_swh_uses_associated_with_each_building_segment(
-                        rmd_p, building_segment["id"]
-                    )
-                )
-                swh_use_ids.extend(service_water_heating_use_ids_p)
+                swh_use_list_p = get_swh_uses_associated_with_each_building_segment(
+                    rmd_p
+                )[building_segment_p["id"]]
+                swh_use_ids += [
+                    swh_use_p["id"]
+                    for swh_use_p in swh_use_list_p
+                    if swh_use_p["id"] not in swh_use_ids
+                ]
+
             return len(set(swh_use_ids)) > 0
 
         def create_data(self, context, data):
@@ -101,6 +107,7 @@ class Section11Rule15(RuleDefinitionListIndexedBase):
                 manual_check_msg = ""
                 swh_use_b = context.BASELINE_0
                 swh_use_p = context.PROPOSED
+
                 if not swh_use_b and swh_use_p:
                     rule_status = "fail"
                     rule_note = (
@@ -151,6 +158,24 @@ class Section11Rule15(RuleDefinitionListIndexedBase):
                             + swh_use_b["id"]
                             + " Service Water Heating Distribution System entering main water temperature schedules do not match. "
                         )
+                    if swh_use_b.get("is_heat_recovered_by_drain") != swh_use_p.get(
+                        "is_heat_recovered_by_drain"
+                    ):
+                        rule_status = "fail"
+                        rule_note = (
+                            rule_note
+                            + swh_use_b["id"]
+                            + " Heat recovered by drain do not match. "
+                        )
+                    if swh_use_b.get(
+                        "is_recovered_heat_used_by_cold_side_feed"
+                    ) != swh_use_p.get("is_recovered_heat_used_by_cold_side_feed"):
+                        rule_status = "fail"
+                        rule_note = (
+                            rule_note
+                            + swh_use_b["id"]
+                            + " Recovered heat used by cold side feed do not match. "
+                        )
                     swh_dist_sys_id_b = swh_use_b.get("served_by_distribution_system")
                     swh_dist_sys_id_p = swh_use_p.get("served_by_distribution_system")
                     if swh_dist_sys_id_b != swh_dist_sys_id_p:
@@ -161,7 +186,7 @@ class Section11Rule15(RuleDefinitionListIndexedBase):
                             + " Service water heating distribution system that serves this water heating use units are "
                             "inconsistent between proposed and baseline models. "
                         )
-                    # do we require swh_dist_sys_id_p and swh_dist_sys_id_b not None?
+
                     if not swh_dist_sys_id_b and swh_dist_sys_id_b == swh_dist_sys_id_p:
                         swh_dist_sys_b = swh_dist_sys_dict_b[swh_dist_sys_id_b]
                         swh_dist_sys_p = swh_dist_sys_dict_p[swh_dist_sys_id_p]
