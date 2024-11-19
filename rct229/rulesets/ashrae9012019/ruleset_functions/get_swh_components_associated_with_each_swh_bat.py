@@ -11,7 +11,6 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_energy_required_to_heat
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
 from rct229.utils.utility_functions import (
-    find_exactly_one_service_water_heating_use,
     find_exactly_one_service_water_heating_distribution_system,
 )
 
@@ -49,23 +48,25 @@ def get_swh_components_associated_with_each_swh_bat(
     for building_segment in find_all("$.buildings[*].building_segments[*]", rmd):
         swh_bat = get_building_segment_swh_bat(rmd, building_segment["id"])
         swh_and_equip_dict[swh_bat] = SWHEquipmentAssociations(
-            energy_required=ZERO.ENERGY
+            # energy_required=ZERO.ENERGY
         )
-
-        for swh_use_id in find_all(
+        # TODO Need to update json path if schema changes
+        for swh_use in find_all(
             f'$.buildings[*].building_segments[*][?(@.id="{building_segment["id"]}")].zones[*].spaces['
-            f"*].service_water_heating_uses[*].id",
+            f"*].service_water_heating_uses[*]",
             rmd,
         ):
-            swh_use = find_exactly_one_service_water_heating_use(rmd, swh_use_id)
-            energy_required = get_energy_required_to_heat_swh_use(
-                swh_use_id, rmd, building_segment["id"], is_leap_year
+            swh_use_energy_by_space_dict = get_energy_required_to_heat_swh_use(
+                swh_use["id"], rmd, building_segment["id"], is_leap_year
             )
-            if list(energy_required.values())[0] is not None:
-                swh_and_equip_dict[swh_bat].energy_required += list(
-                    energy_required.values()
-                )[0]
-            swh_and_equip_dict[swh_bat].swh_uses.append(swh_use_id)
+
+            swh_and_equip_dict[swh_bat].energy_required += sum(
+                swh_use_energy_by_space_dict[space_id]
+                for space_id in swh_use_energy_by_space_dict
+                if swh_use_energy_by_space_dict[space_id]
+            )
+
+            swh_and_equip_dict[swh_bat].swh_uses.append(swh_use["id"])
             distribution_id = swh_use.get("served_by_distribution_system")
             if distribution_id not in swh_and_equip_dict[swh_bat].swh_distribution:
                 swh_and_equip_dict[swh_bat].swh_distribution.append(distribution_id)
