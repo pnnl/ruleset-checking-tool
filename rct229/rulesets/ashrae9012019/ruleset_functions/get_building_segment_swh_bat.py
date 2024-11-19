@@ -44,6 +44,7 @@ def get_building_segment_swh_bat(
 
     if building_segment_swh_bat is None:
         swh_use_dict = {}
+        # TODO: Moving the `service_water_heating_uses` key to the `building_segments` level is being discussed. If the `service_water_heating_uses` key is moved, this function needs to be revisited.
         for swh_use in find_all(
             f'$.buildings[*].building_segments[*][?(@.id="{building_segment["id"]}")].zones[*].spaces[*].service_water_heating_uses[*]',
             rmd,
@@ -62,9 +63,7 @@ def get_building_segment_swh_bat(
                     area_type = swh_use["area_type"]
                     swh_use_dict.setdefault(area_type, ZERO.ENERGY)
                     swh_use_dict[area_type] += sum(
-                        energy_req_space
-                        for energy_req_space in swh_use_energy_by_space.values()
-                        if energy_req_space is not None
+                        filter(None, list(swh_use_energy_by_space.values()))
                     )
                 else:
                     for space_id in swh_use_energy_by_space:
