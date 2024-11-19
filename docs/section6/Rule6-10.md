@@ -4,7 +4,7 @@
 **Rule ID:** 6-10   
 **Rule Description:** Where retail display lighting is included in the proposed building design in accordance with Section 9.5.2.2(b), the baseline building design retail display lighting additional power shall be equal to the limits established by Section 9.5.2.2(b) or same as proposed, whichever is less.  
 **Rule Assertion:** Baseline RMD = expected value  
-**Appendix G Section:** G3.1 6 Baseline 
+**Appendix G Section:** G3.1 #6 Baseline column  
 
 **Mandatory Rule:** True  
 **Evaluation Context:** Each Space  
