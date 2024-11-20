@@ -1,13 +1,12 @@
 import glob
 import json
-from typing import Optional
 
 # from jsonpointer import JsonPointer
 import os
 from copy import deepcopy
+from typing import Optional
 
 from pint import Quantity
-
 from rct229.reports.ashrae9012019.ashrae901_2019_software_test_report import (
     ASHRAE9012019SoftwareTestReport,
 )
@@ -149,7 +148,7 @@ def process_test_result(test_result, raised_message, test_dict, test_id):
     # Check if the test results agree with the expected outcome. Write an appropriate response based on their agreement
     received_expected_outcome = test_result == test_dict["expected_rule_outcome"]
 
-    #TODO - ask about tests where a raised message exists but is not captured. Code written to catch those.
+    # TODO - ask about tests where a raised message exists but is not captured. Code written to catch those.
 
     # Check for any raised message in the rule test. If none exists, return empty string ""
     expected_raised_message = test_dict.get("expected_raised_message_includes", "")
@@ -191,10 +190,10 @@ def process_test_result(test_result, raised_message, test_dict, test_id):
 
     # Check if exception messages matched. If not, append that to the outcome message.
     if not messages_matched:
-        outcome_text += (f"\rMessages did not match. Expected outcome message was '{expected_raised_message}' and "
-                         f"instead received '{raised_message}'")
-        #outcome_text += f"\r'{expected_raised_message}' | '{raised_message}'"
-
+        outcome_text += (
+            f"\rMessages did not match. Expected outcome message was '{expected_raised_message}' and "
+            f"instead received '{raised_message}'"
+        )
 
     return outcome_text, overall_outcome
 
