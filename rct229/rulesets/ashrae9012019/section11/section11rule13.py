@@ -12,7 +12,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_uses_associated_wit
     get_swh_uses_associated_with_each_building_segment,
 )
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.utility_functions import find_exactly_one_service_water_heating_use
+
 
 APPLICABILITY_MSG = "This building has service water heating loads.  Confirm that service water heating energy consumption is calculated explicitly based upon the volume of service water heating required and the entering makeup water and leaving service water heating temperatures.  Entering water temperatures shall be estimated based upon the location. Leaving temperatures shall be based upon the end-use requirements."
 
@@ -64,13 +64,11 @@ class Section11Rule13(RuleDefinitionListIndexedBase):
             for building_segment in find_all(
                 "$.buildings[*].building_segments[*]", rmd_b
             ):
-                service_water_heating_use_list = [
-                    find_exactly_one_service_water_heating_use(rmd_b, swh_use_id)
-                    for swh_use_id in get_swh_uses_associated_with_each_building_segment(
-                        rmd_b, building_segment["id"]
-                    )
-                ]
-
+                service_water_heating_use_list = (
+                    get_swh_uses_associated_with_each_building_segment(rmd_b)[
+                        building_segment["id"]
+                    ]
+                )
                 service_water_heating_use_dict[
                     building_segment["id"]
                 ] = service_water_heating_use_list
