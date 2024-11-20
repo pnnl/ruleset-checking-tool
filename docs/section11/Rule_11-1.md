@@ -29,9 +29,9 @@
 
   ## Rule Logic #
   - there are a couple cases here:
-    1.  If the swh distribution exists in the user model, AND has swh use, then expect user and proposed systems to be match
-    2.  Otherwise, expect the distribution system to match between proposed and baseline
-    3.  Systems that don't do 1 or 2 fail
+    `1.  `If the swh distribution exists in the user model, AND has swh use, then expect user and proposed systems to be match
+    `2.  `Otherwise, expect the distribution system to match between proposed and baseline
+    `3.  `Systems that don't do 1 or 2 fail
   
   - create a variable user_proposed_str, which is the string lookup used by compare_context_pair for comparing elements between the user and proposed RMDS: `user_proposed_str = "AppG 11-1 P_RMD Equals U_RMD"`
   - create a variable base_proposed_str, which is the string lookup used by compare_context_pair for comparing elements between the user and proposed RMDS: `base_proposed_str = "AppG 11-1 P_RMD Equals B_RMD"`
