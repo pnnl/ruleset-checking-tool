@@ -7,7 +7,7 @@
 **Appendix G Section:** G3.11 18 Baseline 
 
 **Mandatory Rule:** True    
-**Evaluation Context:** Each RMD  
+**Evaluation Context:** Each baseline RMD  
 **Function Call:**  
 
 ## Applicability Check:  
