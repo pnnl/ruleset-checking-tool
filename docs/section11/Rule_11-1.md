@@ -19,10 +19,6 @@
 - **compare_context_pair** - there is no RDS for this function, but it is a function developed for Rule 1-6 that compares two elements  
 - **get_swh_components_associated_with_each_swh_distribution_system**  
 
-
-**Applicability Checks:**
-- check that the U_RMD has SWH Uses with loads
-
 ## Applicability Checks:
 - in this case, all of the SWH Distribution IDs identified when the custom context was created are applicable to this rule.
 - Look at each swh distribution system id: `for swh_dist_system_id in context: CONTINUE TO RULE LOGIC`
@@ -45,17 +41,17 @@
         - compare the proposed and user models using the function compare_swh_dist_systems_and_components.  This function returns a list of errors.  If the list of errors has a length of 0, then the comparison encountered no issues: `user_proposed_comparison = compare_swh_dist_systems_and_components(P_RMD,U_RMD,user_proposed_str,swh_dist_system_id)`
         - from here, go directly to the rule assertion: `GO TO RULE ASSERTION`
 
-  -  If the system doesn't exist in the proposed model, we need to return an error: `if swh_dist_system_id not in p_swh_system_and_equip_dict: errors << swh_dist_system_id + " was not found in the Proposed model. 
- Because there are no SWH loads in the User model, we are expecting the Proposed and Baseline systems to match."`
-  -  If the system doesn't exist in the baseline model, we need to return an error: `if swh_dist_system_id not in b_swh_system_and_equip_dict: errors << swh_dist_system_id + " was not found in the Baseline model. 
- Because there are no SWH loads in the User model, we are expecting the Proposed and Baseline systems to match."`
+  -  If the system doesn't exist in the proposed model, we need to return an error: `if swh_dist_system_id not in p_swh_system_and_equip_dict: errors.append(swh_dist_system_id + " was not found in the Proposed model. 
+ Because there are no SWH loads in the User model, we are expecting the Proposed and Baseline systems to match.")`
+  -  If the system doesn't exist in the baseline model, we need to return an error: `if swh_dist_system_id not in b_swh_system_and_equip_dict: errors.append(swh_dist_system_id + " was not found in the Baseline model. 
+ Because there are no SWH loads in the User model, we are expecting the Proposed and Baseline systems to match.")`
   -  if we got to this line without going to the rule assertion, it means that there is no equivalent system in the user model, or that the user model does not have SWH use.  Compare the proposed and baseline models using the function compare_swh_dist_systems_and_components.  This function returns a list of errors.  If the list of errors has a length of 0, then the comparison encountered no issues: `user_baseline_comparison = compare_swh_dist_systems_and_components(P_RMD,B_RMD,user_proposed_str,swh_dist_system_id)`
   
   - now go to rule assertion: `GO TO RULE ASSERTION`
     
 
 ## Rule Assertion: 
-- Case1: if the length of either user_proposed_comparison or user_baseline comparison is 0, then the rule passes: `if (len(user_proposed_comparison) == 0) || (len(user_baseline_comparison) == 0): PASS`
+- Case1: if the length of either user_proposed_comparison or user_baseline comparison is 0, then the rule passes: `if (len(user_proposed_comparison) == 0) and (len(user_baseline_comparison) == 0): PASS`
 - Case2: all other cases, FAIL: `else: FAIL`
 
 
