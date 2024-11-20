@@ -7,6 +7,8 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_uses_associated_wit
 )
 from rct229.utils.jsonpath_utils import find_all
 
+MANUAL_CHECK_REQUIRED_MSG = "Proposed Service Water Heating Use is less than the baseline.  Manually verify that reduction is due to an ECM that reduces service water heating use, such as low-flow fixtures. "
+
 
 class Section11Rule15(RuleDefinitionListIndexedBase):
     """Rule 15 of ASHRAE 90.1-2019 Appendix G Section 11 (Service Water Heating)"""
@@ -77,12 +79,12 @@ class Section11Rule15(RuleDefinitionListIndexedBase):
             swh_dist_sys_dict_b = {}
             swh_dist_sys_dict_p = {}
             for swh_dist_sys_b in find_all(
-                "$.buildings[*].building_segments[*].zones[*].spaces[*].service_water_heating_uses[*]",
+                "$.service_water_heating_distribution_systems[*]",
                 rmd_b,
             ):
                 swh_dist_sys_dict_b[swh_dist_sys_b["id"]] = swh_dist_sys_b
             for swh_dist_sys_p in find_all(
-                "$.buildings[*].building_segments[*].zones[*].spaces[*].service_water_heating_uses[*]",
+                "$.service_water_heating_distribution_systems[*]",
                 rmd_p,
             ):
                 swh_dist_sys_dict_p[swh_dist_sys_p["id"]] = swh_dist_sys_p
@@ -97,142 +99,296 @@ class Section11Rule15(RuleDefinitionListIndexedBase):
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
+                    manual_check_required_msg=MANUAL_CHECK_REQUIRED_MSG,
                 )
 
             def get_calc_vals(self, context, data=None):
                 swh_dist_sys_dict_b = data["swh_dist_sys_dict_b"]
                 swh_dist_sys_dict_p = data["swh_dist_sys_dict_p"]
-                rule_status = "pass"
-                rule_note = ""
-                manual_check_msg = ""
                 swh_use_b = context.BASELINE_0
                 swh_use_p = context.PROPOSED
+                swh_use_id_b = swh_use_b["id"] if swh_use_b else None
+                swh_use_id_p = swh_use_p["id"] if swh_use_p else None
 
-                if not swh_use_b and swh_use_p:
-                    rule_status = "fail"
-                    rule_note = (
-                        rule_note
-                        + swh_use_b["id"]
-                        + " exists in the proposed model, but not in the baseline."
+                swh_use_served_by_distribution_system_id_b = (
+                    swh_use_b.get("served_by_distribution_system")
+                    if swh_use_b
+                    else None
+                )
+                swh_use_served_by_distribution_system_id_p = (
+                    swh_use_p.get("served_by_distribution_system")
+                    if swh_use_p
+                    else None
+                )
+                swh_use_served_by_distribution_system_b = swh_dist_sys_dict_b[
+                    swh_use_served_by_distribution_system_id_b
+                ]
+                swh_use_served_by_distribution_system_p = swh_dist_sys_dict_p[
+                    swh_use_served_by_distribution_system_id_p
+                ]
+                swh_use_design_supply_water_temperature_b = (
+                    swh_use_served_by_distribution_system_b.get(
+                        "design_supply_water_temperature"
                     )
-                elif swh_use_b and not swh_use_p:
-                    rule_status = "fail"
-                    rule_note = (
-                        rule_note
-                        + swh_use_b["id"]
-                        + " exists in the baseline, but not in the proposed model."
+                    if swh_use_served_by_distribution_system_b
+                    else None
+                )
+                swh_use_design_supply_water_temperature_p = (
+                    swh_use_served_by_distribution_system_p.get(
+                        "design_supply_water_temperature"
                     )
-                else:
-                    if swh_use_b.get("use_units") != swh_use_p.get("use_units"):
-                        rule_status = "fail"
-                        rule_note = (
-                            rule_note
-                            + swh_use_b["id"]
-                            + " Service water heating use units are inconsistent between proposed and baseline models. "
-                        )
-                    if swh_use_b.get("use_multiplier_schedule") != swh_use_p.get(
-                        "use_multiplier_schedule"
-                    ):
-                        rule_status = "fail"
-                        rule_note = (
-                            rule_note
-                            + swh_use_b["id"]
-                            + " Service Water Heating Use schedules do not match. "
-                        )
+                    if swh_use_served_by_distribution_system_p
+                    else None
+                )
 
-                    if swh_use_b.get("temperature_at_fixture") != swh_use_p.get(
-                        "temperature_at_fixture"
-                    ):
-                        rule_status = "fail"
-                        rule_note = (
-                            rule_note
-                            + swh_use_b["id"]
-                            + " The temperature at fixture is not the same between Proposed and Baseline. "
-                        )
-                    if swh_use_b.get(
-                        "entering_water_mains_temperature_schedule"
-                    ) != swh_use_p.get("entering_water_mains_temperature_schedule"):
-                        rule_status = "fail"
-                        rule_note = (
-                            rule_note
-                            + swh_use_b["id"]
-                            + " Service Water Heating Distribution System entering main water temperature schedules do not match. "
-                        )
-                    if swh_use_b.get("is_heat_recovered_by_drain") != swh_use_p.get(
-                        "is_heat_recovered_by_drain"
-                    ):
-                        rule_status = "fail"
-                        rule_note = (
-                            rule_note
-                            + swh_use_b["id"]
-                            + " Heat recovered by drain do not match. "
-                        )
-                    if swh_use_b.get(
-                        "is_recovered_heat_used_by_cold_side_feed"
-                    ) != swh_use_p.get("is_recovered_heat_used_by_cold_side_feed"):
-                        rule_status = "fail"
-                        rule_note = (
-                            rule_note
-                            + swh_use_b["id"]
-                            + " Recovered heat used by cold side feed do not match. "
-                        )
-                    swh_dist_sys_id_b = swh_use_b.get("served_by_distribution_system")
-                    swh_dist_sys_id_p = swh_use_p.get("served_by_distribution_system")
-                    if swh_dist_sys_id_b != swh_dist_sys_id_p:
-                        rule_status = "fail"
-                        rule_note = (
-                            rule_note
-                            + swh_use_b["id"]
-                            + " Service water heating distribution system that serves this water heating use units are "
-                            "inconsistent between proposed and baseline models. "
-                        )
-
-                    if not swh_dist_sys_id_b and swh_dist_sys_id_b == swh_dist_sys_id_p:
-                        swh_dist_sys_b = swh_dist_sys_dict_b[swh_dist_sys_id_b]
-                        swh_dist_sys_p = swh_dist_sys_dict_p[swh_dist_sys_id_p]
-                        if swh_dist_sys_b.get(
-                            "design_supply_water_temperature"
-                        ) != swh_dist_sys_p.get("design_supply_water_temperature"):
-                            rule_status = "fail"
-                            rule_note = (
-                                rule_note
-                                + swh_use_b["id"]
-                                + " Service Water Heating Distribution System design water supply temperatures do not "
-                                "match. "
-                            )
-                    if rule_status == "pass":
-                        if swh_use_p.get("use", 0) < swh_use_b.get("use", 0):
-                            rule_status = "undetermined"
-                            manual_check_msg = (
-                                manual_check_msg
-                                + swh_use_b["id"]
-                                + " Proposed Service Water Heating Use is less than the baseline.  Manually verify that reduction is due to an ECM that reduces service water heating use, such as low-flow fixtures. "
-                            )
-                        elif swh_use_p.get("use", 0) > swh_use_b.get("use", 0):
-                            rule_status = "fail"
-                            rule_note = (
-                                rule_note
-                                + swh_use_b["id"]
-                                + " Proposed Service Water Heating Use is greater than the baseline. "
-                            )
                 return {
-                    "rule_status": rule_status,
-                    "rule_note": rule_note,
-                    "manual_check_msg": manual_check_msg,
+                    "is_swh_use_none_b": swh_use_b is None,
+                    "is_swh_use_none_p": swh_use_p is None,
+                    "swh_use_id_b": swh_use_id_b,
+                    "swh_use_id_p": swh_use_id_p,
+                    "swh_use_use_units_b": swh_use_b.get("use_units"),
+                    "swh_use_use_units_p": swh_use_p.get("use_units"),
+                    "swh_use_multiplier_schedule_b": swh_use_b.get(
+                        "use_multiplier_schedule"
+                    ),
+                    "swh_use_multiplier_schedule_p": swh_use_p.get(
+                        "use_multiplier_schedule"
+                    ),
+                    "swh_use_temperature_at_fixture_b": swh_use_b.get(
+                        "temperature_at_fixture"
+                    ),
+                    "swh_use_temperature_at_fixture_p": swh_use_p.get(
+                        "temperature_at_fixture"
+                    ),
+                    "swh_use_water_mains_temperature_schedule_b": swh_use_b.get(
+                        "entering_water_mains_temperature_schedule"
+                    ),
+                    "swh_use_water_mains_temperature_schedule_p": swh_use_p.get(
+                        "entering_water_mains_temperature_schedule"
+                    ),
+                    "swh_use_served_by_distribution_system_b": swh_use_served_by_distribution_system_b,
+                    "swh_use_served_by_distribution_system_p": swh_use_served_by_distribution_system_p,
+                    "swh_use_design_supply_water_temperature_b": swh_use_design_supply_water_temperature_b,
+                    "swh_use_design_supply_water_temperature_p": swh_use_design_supply_water_temperature_p,
+                    "is_heat_recovered_by_drain_b": swh_use_b.get(
+                        "is_heat_recovered_by_drain"
+                    ),
+                    "is_heat_recovered_by_drain_p": swh_use_p.get(
+                        "is_heat_recovered_by_drain"
+                    ),
+                    "is_recovered_heat_used_by_cold_side_feed_b": swh_use_b.get(
+                        "is_recovered_heat_used_by_cold_side_feed"
+                    ),
+                    "is_recovered_heat_used_by_cold_side_feed_p": swh_use_p.get(
+                        "is_recovered_heat_used_by_cold_side_feed"
+                    ),
+                    "swh_use_use_b": swh_use_b.get("use", 0),
+                    "swh_use_use_p": swh_use_p.get("use", 0),
                 }
 
             def manual_check_required(self, context, calc_vals=None, data=None):
-                rule_status = calc_vals["rule_status"]
-                return rule_status == "undetermined"
+                is_swh_use_none_b = calc_vals["is_swh_use_none_b"]
+                is_swh_use_none_p = calc_vals["is_swh_use_none_p"]
+                swh_use_use_units_b = calc_vals["swh_use_use_units_b"]
+                swh_use_use_units_p = calc_vals["swh_use_use_units_p"]
+                swh_use_multiplier_schedule_b = calc_vals[
+                    "swh_use_multiplier_schedule_b"
+                ]
+                swh_use_multiplier_schedule_p = calc_vals[
+                    "swh_use_multiplier_schedule_p"
+                ]
+                swh_use_temperature_at_fixture_b = calc_vals[
+                    "swh_use_temperature_at_fixture_b"
+                ]
+                swh_use_temperature_at_fixture_p = calc_vals[
+                    "swh_use_temperature_at_fixture_p"
+                ]
+                swh_use_water_mains_temperature_schedule_b = calc_vals[
+                    "swh_use_water_mains_temperature_schedule_b"
+                ]
+                swh_use_water_mains_temperature_schedule_p = calc_vals[
+                    "swh_use_water_mains_temperature_schedule_p"
+                ]
+                swh_use_served_by_distribution_system_b = calc_vals[
+                    "swh_use_served_by_distribution_system_b"
+                ]
+                swh_use_served_by_distribution_system_p = calc_vals[
+                    "swh_use_served_by_distribution_system_p"
+                ]
+                swh_use_design_supply_water_temperature_b = calc_vals[
+                    "swh_use_design_supply_water_temperature_b"
+                ]
+                swh_use_design_supply_water_temperature_p = calc_vals[
+                    "swh_use_design_supply_water_temperature_p"
+                ]
+                is_heat_recovered_by_drain_b = calc_vals["is_heat_recovered_by_drain_b"]
+                is_heat_recovered_by_drain_p = calc_vals["is_heat_recovered_by_drain_p"]
+                is_recovered_heat_used_by_cold_side_feed_b = calc_vals[
+                    "is_recovered_heat_used_by_cold_side_feed_b"
+                ]
+                is_recovered_heat_used_by_cold_side_feed_p = calc_vals[
+                    "is_recovered_heat_used_by_cold_side_feed_p"
+                ]
+                swh_use_use_b = calc_vals["swh_use_use_b"]
+                swh_use_use_p = calc_vals["swh_use_use_p"]
+                return (
+                    is_swh_use_none_b == is_swh_use_none_p
+                    and swh_use_use_units_b == swh_use_use_units_p
+                    and swh_use_multiplier_schedule_b == swh_use_multiplier_schedule_p
+                    and swh_use_temperature_at_fixture_b
+                    == swh_use_temperature_at_fixture_p
+                    and swh_use_water_mains_temperature_schedule_b
+                    == swh_use_water_mains_temperature_schedule_p
+                    and swh_use_served_by_distribution_system_b
+                    == swh_use_served_by_distribution_system_p
+                    and swh_use_design_supply_water_temperature_b
+                    == swh_use_design_supply_water_temperature_p
+                    and is_heat_recovered_by_drain_b == is_heat_recovered_by_drain_p
+                    and is_recovered_heat_used_by_cold_side_feed_b
+                    == is_recovered_heat_used_by_cold_side_feed_p
+                    and swh_use_use_b > swh_use_use_p
+                )
 
-            def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
-                manual_check_msg = calc_vals["manual_check_msg"]
-                return manual_check_msg
+            # def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
+            #     swh_use_id_b = calc_vals["swh_use_id_b"]
+            #     swh_use_use_b = calc_vals["swh_use_use_b"]
+            #     swh_use_use_p = calc_vals["swh_use_use_p"]
+            #     manual_check_msg
+            #     return
 
             def rule_check(self, context, calc_vals=None, data=None):
-                rule_status = calc_vals["rule_status"]
-                return rule_status == "pass"
+                rule_note = ""
+                swh_use_id_b = calc_vals["swh_use_id_b"]
+                swh_use_id_p = calc_vals["swh_use_id_p"]
+                is_swh_use_none_b = calc_vals["is_swh_use_none_b"]
+                is_swh_use_none_p = calc_vals["is_swh_use_none_p"]
+                swh_use_use_units_b = calc_vals["swh_use_use_units_b"]
+                swh_use_use_units_p = calc_vals["swh_use_use_units_p"]
+                swh_use_multiplier_schedule_b = calc_vals[
+                    "swh_use_multiplier_schedule_b"
+                ]
+                swh_use_multiplier_schedule_p = calc_vals[
+                    "swh_use_multiplier_schedule_p"
+                ]
+                swh_use_temperature_at_fixture_b = calc_vals[
+                    "swh_use_temperature_at_fixture_b"
+                ]
+                swh_use_temperature_at_fixture_p = calc_vals[
+                    "swh_use_temperature_at_fixture_p"
+                ]
+                swh_use_water_mains_temperature_schedule_b = calc_vals[
+                    "swh_use_water_mains_temperature_schedule_b"
+                ]
+                swh_use_water_mains_temperature_schedule_p = calc_vals[
+                    "swh_use_water_mains_temperature_schedule_p"
+                ]
+                swh_use_served_by_distribution_system_b = calc_vals[
+                    "swh_use_served_by_distribution_system_b"
+                ]
+                swh_use_served_by_distribution_system_p = calc_vals[
+                    "swh_use_served_by_distribution_system_p"
+                ]
+                swh_use_design_supply_water_temperature_b = calc_vals[
+                    "swh_use_design_supply_water_temperature_b"
+                ]
+                swh_use_design_supply_water_temperature_p = calc_vals[
+                    "swh_use_design_supply_water_temperature_p"
+                ]
+                is_heat_recovered_by_drain_b = calc_vals["is_heat_recovered_by_drain_b"]
+                is_heat_recovered_by_drain_p = calc_vals["is_heat_recovered_by_drain_p"]
+                is_recovered_heat_used_by_cold_side_feed_b = calc_vals[
+                    "is_recovered_heat_used_by_cold_side_feed_b"
+                ]
+                is_recovered_heat_used_by_cold_side_feed_p = calc_vals[
+                    "is_recovered_heat_used_by_cold_side_feed_p"
+                ]
+                swh_use_use_b = calc_vals["swh_use_use_b"]
+                swh_use_use_p = calc_vals["swh_use_use_p"]
 
-            def get_fail_msg(self, context, calc_vals=None, data=None):
-                rule_note = calc_vals["rule_note"]
-                return rule_note
+                if not is_swh_use_none_b and is_swh_use_none_p:
+                    rule_note = (
+                        rule_note
+                        + swh_use_id_p
+                        + " exists in the proposed model, but not in the baseline."
+                    )
+                elif is_swh_use_none_b and not is_swh_use_none_p:
+                    rule_note = (
+                        rule_note
+                        + swh_use_id_b
+                        + " exists in the baseline, but not in the proposed model."
+                    )
+                elif is_swh_use_none_b and is_swh_use_none_p:
+                    return not rule_note
+                else:
+                    if swh_use_use_units_b != swh_use_use_units_p:
+                        rule_note = (
+                            rule_note
+                            + swh_use_id_b
+                            + " Service water heating use units are inconsistent between proposed and baseline models. "
+                        )
+                    if swh_use_multiplier_schedule_b != swh_use_multiplier_schedule_p:
+                        rule_note = (
+                            rule_note
+                            + swh_use_id_b
+                            + " Service Water Heating Use schedules do not match. "
+                        )
+                    if (
+                        swh_use_temperature_at_fixture_b
+                        != swh_use_temperature_at_fixture_p
+                    ):
+                        rule_note = (
+                            rule_note
+                            + swh_use_id_b
+                            + " The temperature at fixture is not the same between Proposed and Baseline. "
+                        )
+                    if (
+                        swh_use_water_mains_temperature_schedule_b
+                        != swh_use_water_mains_temperature_schedule_p
+                    ):
+                        rule_note = (
+                            rule_note
+                            + swh_use_id_b
+                            + " Service Water Heating Distribution System entering main water temperature schedules do not match. "
+                        )
+                    if is_heat_recovered_by_drain_b != is_heat_recovered_by_drain_p:
+                        rule_note = (
+                            rule_note
+                            + swh_use_id_b
+                            + " Heat recovered by drain do not match. "
+                        )
+                    if (
+                        is_recovered_heat_used_by_cold_side_feed_b
+                        != is_recovered_heat_used_by_cold_side_feed_p
+                    ):
+                        rule_note = (
+                            rule_note
+                            + swh_use_id_b
+                            + " Recovered heat used by cold side feed do not match. "
+                        )
+                    if (
+                        swh_use_served_by_distribution_system_b
+                        != swh_use_served_by_distribution_system_p
+                    ):
+                        rule_note = (
+                            rule_note
+                            + swh_use_id_b
+                            + " Service water heating distribution system that serves this water heating use units are "
+                            "inconsistent between proposed and baseline models. "
+                        )
+                    if (
+                        swh_use_design_supply_water_temperature_b
+                        != swh_use_design_supply_water_temperature_p
+                    ):
+                        rule_note = (
+                            rule_note
+                            + swh_use_id_b
+                            + " Service Water Heating Distribution System design water supply temperatures do not "
+                            "match. "
+                        )
+                    if swh_use_use_b < swh_use_use_p:
+                        rule_note = (
+                            rule_note
+                            + swh_use_id_b
+                            + " Proposed Service Water Heating Use is greater than the baseline. "
+                        )
+                return not rule_note
