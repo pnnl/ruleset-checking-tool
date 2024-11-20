@@ -34,7 +34,7 @@
                                     "id": "System 10",
                                     "heating_system": {
                                         "id": "Furnace Coil 1",
-                                        "type": "FURNACE",
+                                        "type": "ELECTRIC_RESISTANCE",
                                         "energy_source_type": "ELECTRICITY",
                                         "design_capacity": 17500,
                                         "rated_capacity": 17584,

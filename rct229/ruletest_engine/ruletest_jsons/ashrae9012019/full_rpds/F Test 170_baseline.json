@@ -16,7 +16,7 @@
                                     "id": "RPD_Test_System_10_Warm_air_Furnace_Elec Core Zone 1",
                                     "heating_system": {
                                         "id": "Heating Sys - Core Zone 1",
-                                        "type": "FURNACE",
+                                        "type": "ELECTRIC_RESISTANCE",
                                         "energy_source_type": "ELECTRICITY",
                                         "design_capacity": 17500,
                                         "rated_capacity": 17584,
@@ -47,7 +47,7 @@
                                     "id": "RPD_Test_System_10_Warm_air_Furnace_Elec Prm Zone 1 (South)",
                                     "heating_system": {
                                         "id": "Heating Sys - Prm Zone 1 (South)",
-                                        "type": "FURNACE",
+                                        "type": "ELECTRIC_RESISTANCE",
                                         "energy_source_type": "ELECTRICITY",
                                         "design_capacity": 17500,
                                         "rated_capacity": 17584,
@@ -78,7 +78,7 @@
                                     "id": "RPD_Test_System_10_Warm_air_Furnace_Elec Prm Zone 2 (East)",
                                     "heating_system": {
                                         "id": "Heating Sys - Prm Zone 2 (East)",
-                                        "type": "FURNACE",
+                                        "type": "ELECTRIC_RESISTANCE",
                                         "energy_source_type": "ELECTRICITY",
                                         "design_capacity": 17500,
                                         "rated_capacity": 17584,
@@ -109,7 +109,7 @@
                                     "id": "RPD_Test_System_10_Warm_air_Furnace_Elec Prm Zone 3 (North)",
                                     "heating_system": {
                                         "id": "Heating Sys - Prm Zone 3 (North)",
-                                        "type": "FURNACE",
+                                        "type": "ELECTRIC_RESISTANCE",
                                         "energy_source_type": "ELECTRICITY",
                                         "design_capacity": 17500,
                                         "rated_capacity": 17584,
@@ -140,7 +140,7 @@
                                     "id": "RPD_Test_System_10_Warm_air_Furnace_Elec Prm Zone 4 (West)",
                                     "heating_system": {
                                         "id": "Heating Sys - Prm Zone 4 (West)",
-                                        "type": "FURNACE",
+                                        "type": "ELECTRIC_RESISTANCE",
                                         "energy_source_type": "ELECTRICITY",
                                         "design_capacity": 17500,
                                         "rated_capacity": 17584,
