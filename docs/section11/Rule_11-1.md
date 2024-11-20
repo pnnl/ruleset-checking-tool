@@ -11,7 +11,7 @@
 
 **Appendix G Section Reference:** Table G3.1 #11, proposed column, a & b
 
-**Evaluation Context:** custom evaluation context created for this rule of all SWH Distribution system ids located in the proposed, baseline and user RMDs  
+**Evaluation Context:** custom evaluation context created for this rule of all SWH Distribution system ids located in the proposed, baseline and user RMDs.  This rule will be evaluated for **each** SWH Distribution id found accross the three RMDs.  
 **Data Lookup:**   
 **Function Call:**  
 - **get_component_by_id**  
