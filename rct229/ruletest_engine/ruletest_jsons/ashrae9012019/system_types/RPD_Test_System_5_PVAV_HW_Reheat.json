@@ -78,7 +78,7 @@
                                     "fan_system": {
                                         "id": "VAV Fan System 1",
                                         "fan_control": "VARIABLE_SPEED_DRIVE",
-                                        "temperature_control": "SCHEDULED",
+                                        "temperature_control": "CONSTANT",
                                         "operation_during_occupied": "CONTINUOUS",
                                         "operation_during_unoccupied": "KEEP_OFF",
                                         "supply_fans": [
