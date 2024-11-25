@@ -334,7 +334,7 @@
                 {
                     "id": "Boiler Loop 1",
                     "type": "HEATING",
-                    "pump_power_per_flow_rate": 301,
+                    "pump_power_per_flow_rate": 301.2,
                     "heating_design_and_control": {
                         "id": "Heating Design and Control",
                         "design_supply_temperature": 82.2,
@@ -387,7 +387,7 @@
                 {
                     "id": "CW Loop",
                     "type": "CONDENSER",
-                    "pump_power_per_flow_rate": 301,
+                    "pump_power_per_flow_rate": 301.2,
                     "cooling_or_condensing_design_and_control": {
                         "id": "CW Loop Design and Control",
                         "is_sized_using_coincident_load": true,

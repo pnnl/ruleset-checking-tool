@@ -29,6 +29,7 @@
                                             },
                                             "fan_configuration": "PARALLEL",
                                             "primary_airflow": 943.9,
+                                            "secondary_airflow": 2831.7,
                                             "supply_design_heating_setpoint_temperature": 32.2,
                                             "supply_design_cooling_setpoint_temperature": 12.8,
                                             "minimum_airflow": 141.6,
@@ -54,6 +55,7 @@
                                             },
                                             "fan_configuration": "PARALLEL",
                                             "primary_airflow": 943.9,
+                                            "secondary_airflow": 2831.7,
                                             "supply_design_heating_setpoint_temperature": 32.2,
                                             "supply_design_cooling_setpoint_temperature": 12.8,
                                             "minimum_airflow": 141.6,
@@ -78,7 +80,7 @@
                                     "preheat_system": {
                                         "id": "Preheat Coil 1",
                                         "type": "ELECTRIC_RESISTANCE",
-                                        "rated_capacity": 87921,
+                                        "rated_capacity": 43961,
                                         "heating_coil_setpoint": 10
                                     },
                                     "fan_system": {
@@ -127,7 +129,8 @@
                     "is_chilled_water_pump_interlocked": false,
                     "compressor_type": "SCREW",
                     "energy_source_type": "ELECTRICITY",
-                    "design_capacity": 87921,
+                    "rated_capacity": 87921,
+                    "design_capacity": 98765,
                     "minimum_load_ratio": 0.25,
                     "rated_entering_condenser_temperature": 29.4,
                     "rated_leaving_evaporator_temperature": 10,
@@ -176,7 +179,7 @@
                 {
                     "id": "CHW Loop 1",
                     "type": "COOLING",
-                    "pump_power_per_flow_rate": 349,
+                    "pump_power_per_flow_rate": 348.7,
                     "cooling_or_condensing_design_and_control": {
                         "id": "Primary CHW Design and Control",
                         "design_supply_temperature": 6.7,

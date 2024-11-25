@@ -184,7 +184,7 @@
                 {
                     "id": "Primary HW Loop",
                     "type": "HEATING",
-                    "pump_power_per_flow_rate": 301,
+                    "pump_power_per_flow_rate": 301.2,
                     "heating_design_and_control": {
                         "id": "Heating Design and Control",
                         "design_supply_temperature": 82.2,
