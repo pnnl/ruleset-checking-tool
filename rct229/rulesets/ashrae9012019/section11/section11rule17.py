@@ -78,23 +78,10 @@ class Section11Rule17(RuleDefinitionListIndexedBase):
                     )
                 )
 
-            def create_data(self, context, data):
-                bldg_seg_p = context.PROPOSED
-                bldg_seg_id_p = bldg_seg_p["id"]
-
-                swh_bat = data["swh_bat"]
-                service_water_heating_use_ids = data["service_water_heating_use_ids"]
-
-                return {
-                    "swh_bat": swh_bat[bldg_seg_id_p],
-                    "service_water_heating_use_ids": service_water_heating_use_ids[
-                        bldg_seg_id_p
-                    ],
-                }
-
             def get_calc_vals(self, context, data=None):
-                swh_use_p = context.PROPOSED
+                bldg_seg_p = context.PROPOSED
                 service_water_heating_use_ids = data["service_water_heating_use_ids"]
+                swh_bat = data["swh_bat"][bldg_seg_p["id"]]
 
                 has_swh_loads = any(
                     [
@@ -102,16 +89,18 @@ class Section11Rule17(RuleDefinitionListIndexedBase):
                         for service_water_heating_use_id in service_water_heating_use_ids
                         for swh_use in find_all(
                             f'$.zones[*].spaces[*].service_water_heating_uses[*][?(@.id="{service_water_heating_use_id}")]',
-                            swh_use_p,
+                            bldg_seg_p,
                         )
                     ]
                 )
 
-                return {"has_swh_loads": has_swh_loads}
+                return {
+                    "has_swh_loads": has_swh_loads,
+                    "swh_bat": swh_bat,
+                }
 
             def manual_check_required(self, context, calc_vals=None, data=None):
-                bldg_seg_p = context.PROPOSED
-                swh_bat = data["swh_bat"][bldg_seg_p["id"]]
+                swh_bat = calc_vals["swh_bat"]
 
                 return swh_bat in (
                     "UNDETERMINED",
@@ -121,8 +110,7 @@ class Section11Rule17(RuleDefinitionListIndexedBase):
                 )
 
             def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
-                bldg_seg_p = context.PROPOSED
-                swh_bat = data["swh_bat"][bldg_seg_p["id"]]
+                swh_bat = calc_vals["swh_bat"]
 
                 manual_check_msg = ""
                 if swh_bat == "UNDETERMINED":
@@ -149,7 +137,7 @@ class Section11Rule17(RuleDefinitionListIndexedBase):
                 return has_swh_loads
 
             def get_fail_msg(self, context, calc_vals=None, data=None):
-                swh_bat = data["swh_bat"]
+                swh_bat = calc_vals["swh_bat"]
 
                 return (
                     f"There were no service water heating loads simulated in this building segment. "
