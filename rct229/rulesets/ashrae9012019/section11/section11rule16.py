@@ -3,6 +3,7 @@ from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedB
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.schema.schema_enums import SchemaEnums
+from rct229.utils.jsonpath_utils import find_all
 
 ENERGY_SOURCE = SchemaEnums.schema_enums["EnergySourceOptions"]
 
@@ -10,6 +11,10 @@ MANUAL_CHECK_REQUIRED_MSG = (
     "The baseline service water heating has propane as a fuel source. "
     "Natural gas is the required fuel source for the baseline model except in cases where natural gas is not available on-site. "
     "Verify that natural gas is not available for the proposed building site as determined by the rating authority."
+)
+FAIL_MSG = (
+    "The fuel source for the baseline is propane, however the fuel source for the proposed is Natural Gas. "
+    "When natural gas is available on-site, natural gas is the required fuel source for the baseline model."
 )
 
 
@@ -31,6 +36,16 @@ class Section11Rule16(RuleDefinitionListIndexedBase):
             list_path="ruleset_model_descriptions[0].service_water_heating_equipment[*]",
         )
 
+    def create_data(self, context, data):
+        rmd_p = context.PROPOSED
+
+        return {
+            "proposed_fuels": find_all(
+                "$.ruleset_model_descriptions[0].service_water_heating_equipment[*].heater_fuel_type",
+                rmd_p,
+            )
+        }
+
     class SWHEquipRule(RuleDefinitionBase):
         def __init__(self):
             super(Section11Rule16.SWHEquipRule, self).__init__(
@@ -43,6 +58,7 @@ class Section11Rule16(RuleDefinitionListIndexedBase):
                     "$": ["heater_fuel_type"],
                 },
                 manual_check_required_msg=MANUAL_CHECK_REQUIRED_MSG,
+                fail_msg=FAIL_MSG,
             )
 
         def is_applicable(self, context, data=None):
@@ -53,26 +69,17 @@ class Section11Rule16(RuleDefinitionListIndexedBase):
 
         def manual_check_required(self, context, calc_vals=None, data=None):
             swh_equip_b = context.BASELINE_0
-            swh_equip_p = context.PROPOSED
-
             heater_fuel_type_b = swh_equip_b["heater_fuel_type"]
-            heater_fuel_type_p = swh_equip_p["heater_fuel_type"]
 
-            return (
-                heater_fuel_type_b == ENERGY_SOURCE.PROPANE
-                and heater_fuel_type_p != ENERGY_SOURCE.NATURAL_GAS
-            )
+            return heater_fuel_type_b == ENERGY_SOURCE.PROPANE
 
         def get_calc_vals(self, context, data=None):
             swh_equip_b = context.BASELINE_0
-            swh_equip_P = context.PROPOSED
 
             heater_fuel_type_b = swh_equip_b["heater_fuel_type"]
-            heater_fuel_type_p = swh_equip_P["heater_fuel_type"]
 
             return {
                 "heater_fuel_type_b": heater_fuel_type_b,
-                "heater_fuel_type_p": heater_fuel_type_p,
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
@@ -82,9 +89,12 @@ class Section11Rule16(RuleDefinitionListIndexedBase):
 
         def get_fail_msg(self, context, calc_vals=None, data=None):
             heater_fuel_type_b = calc_vals["heater_fuel_type_b"]
-            heater_fuel_type_p = calc_vals["heater_fuel_type_p"]
+            proposed_fuels = data["proposed_fuels"]
 
-            return (
+            if (
                 heater_fuel_type_b == ENERGY_SOURCE.PROPANE
-                and heater_fuel_type_p == ENERGY_SOURCE.NATURAL_GAS
-            )
+                and ENERGY_SOURCE.NATURAL_GAS in proposed_fuels
+            ):
+                return FAIL_MSG
+            else:
+                return ""
