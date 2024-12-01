@@ -142,6 +142,7 @@
                     "pump_power_per_flow_rate": 348.7,
                     "cooling_or_condensing_design_and_control": {
                         "id": "Primary CHW Design and Control",
+                        "minimum_flow_fraction": 0.25,
                         "design_supply_temperature": 6.7,
                         "design_return_temperature": 12.8,
                         "outdoor_high_for_loop_supply_reset_temperature": 26.7,
