@@ -192,6 +192,7 @@
                     "pump_power_per_flow_rate": 301.2,
                     "heating_design_and_control": {
                         "id": "HW Design and Control",
+                        "minimum_flow_fraction": 0.25,
                         "design_supply_temperature": 82.2,
                         "design_return_temperature": 54.4,
                         "outdoor_high_for_loop_supply_reset_temperature": 10,
