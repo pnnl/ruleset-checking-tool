@@ -110,7 +110,7 @@
                     "cooling_or_condensing_design_and_control": {
                         "id": "Primary CHW Design and Control",
                         "design_supply_temperature": 6.7,
-                        "design_return_temperature": 12.8,
+                        "design_return_temperature": 13.3,
                         "outdoor_high_for_loop_supply_reset_temperature": 26.7,
                         "outdoor_low_for_loop_supply_reset_temperature": 15.6,
                         "loop_supply_temperature_at_outdoor_high": 6.7,
