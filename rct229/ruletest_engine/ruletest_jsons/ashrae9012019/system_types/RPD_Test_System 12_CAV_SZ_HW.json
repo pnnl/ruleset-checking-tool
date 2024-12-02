@@ -200,7 +200,8 @@
                         "loop_supply_temperature_at_outdoor_low": 82.2,
                         "is_sized_using_coincident_load": true,
                         "operation": "CONTINUOUS",
-                        "flow_control": "VARIABLE_FLOW"
+                        "flow_control": "VARIABLE_FLOW",
+                        "temperature_reset_type": "OUTSIDE_AIR_RESET"
                     }
                 },
                 {
