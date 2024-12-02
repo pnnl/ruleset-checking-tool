@@ -1,4 +1,3 @@
-from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_building_segment_swh_bat import (
     get_building_segment_swh_bat,
 )
@@ -231,15 +230,13 @@ def test__TEST_RPD__area_type():
 
 def test__TEST_RPD__other_use_unit():
     assert (
-        get_building_segment_swh_bat(TEST_RMD, "Building Segment 3")
-        == RCTOutcomeLabel.UNDETERMINED
+        get_building_segment_swh_bat(TEST_RMD, "Building Segment 3") == "UNDETERMINED"
     )
 
 
 def test__TEST_RPD__two_spaces_one_undetermined():
     assert (
-        get_building_segment_swh_bat(TEST_RMD, "Building Segment 4")
-        == RCTOutcomeLabel.UNDETERMINED
+        get_building_segment_swh_bat(TEST_RMD, "Building Segment 4") == "UNDETERMINED"
     )
 
 

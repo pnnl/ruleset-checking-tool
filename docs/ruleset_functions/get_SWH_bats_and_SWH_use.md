@@ -10,7 +10,6 @@ Returns:
 {"DORMITORY":["swh1","swh2","swh3"], "AUTOMOTIVE_FACILITY":["swhg1","swhg2","swhg3"]}
 
 Function Call:
-- **get_SWH_uses_associated_with_each_building_segment**  
 - **get_building_segment_SWH_bat**  
 - **get_component_by_id**  
 
@@ -19,7 +18,7 @@ Logic:
 - look at each building segment: `for building_segment in RMD.building_segments:`
     - get the swh_bat by using the function: get_building_segment_SWH_bat: `swh_bat = get_building_segment_SWH_bat(RMD,building_segment["id"])`
     - add this bat to swh_and_SWH_use_dict if it doesnt exist yet: `swh_and_SWH_use_dict.setdefault(swh_bat,[])`
-    - get the service water heating use ids in the building segment `service_water_heating_use_ids = get_SWH_uses_associated_with_each_building_segment(RMD, building_segment.id)`
+    - get the service water heating use ids in the building segment `service_water_heating_use_ids = find_all(               f'$.buildings[*].building_segments[*][?(@.id="{bldg_seg_id}")].zones[*].spaces[*].service_water_heating_uses[*].id', rmd)`
     - add all of the swh_use ids in the building segment to the list: `service_water_heating_use_ids[swh_bat].extend(service_water_heating_use_ids) `
 
 **Returns** swh_and_SWH_use_dict

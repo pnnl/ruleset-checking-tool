@@ -66,34 +66,6 @@ TEST_RMD = {
             ],
         }
     ],
-    "schedules": [
-        {
-            "id": "SWH Schedule 1",
-            "hourly_values": [0.8] * 8760,
-        },
-        {
-            "id": "SWH Entering Water Temp Schedule 1",
-            "hourly_values": [50] * 8760,
-        },
-    ],
-    "service_water_heating_distribution_systems": [
-        {
-            "id": "SWH Distribution 1",
-            "design_supply_temperature": 60,
-            "drain_heat_recovery_efficiency": 0.3,
-            "entering_water_mains_temperature_schedule": "SWH Entering Water Temp Schedule 1",
-            "tanks": [
-                {
-                    "id": "Tank 1",
-                }
-            ],
-            "service_water_piping": [
-                {
-                    "id": "SWH Piping 1",
-                }
-            ],
-        }
-    ],
     "type": "BASELINE_0",
 }
 

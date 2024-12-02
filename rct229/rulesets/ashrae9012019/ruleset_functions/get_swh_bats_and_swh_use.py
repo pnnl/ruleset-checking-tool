@@ -1,9 +1,6 @@
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_building_segment_swh_bat import (
     get_building_segment_swh_bat,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_uses_associated_with_each_building_segment import (
-    get_swh_uses_associated_with_each_building_segment,
-)
 from rct229.utils.jsonpath_utils import find_all
 
 
@@ -30,10 +27,12 @@ def get_swh_bats_and_swh_use(rmd: dict) -> dict:
         swh_bat = get_building_segment_swh_bat(rmd, bldg_seg_id)
         swh_and_swh_use_dict.setdefault(swh_bat, [])
 
-        service_water_heating_use_ids = (
-            get_swh_uses_associated_with_each_building_segment(rmd, bldg_seg_id)
+        # TODO: Moving the `service_water_heating_uses` key to the `building_segments` level is being discussed. If the `service_water_heating_uses` key is moved, this function needs
+        swh_and_swh_use_dict[swh_bat].extend(
+            find_all(
+                f'$.buildings[*].building_segments[*][?(@.id="{bldg_seg_id}")].zones[*].spaces[*].service_water_heating_uses[*].id',
+                rmd,
+            )
         )
-
-        swh_and_swh_use_dict[swh_bat].extend(service_water_heating_use_ids)
 
     return swh_and_swh_use_dict
