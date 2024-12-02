@@ -4,9 +4,6 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_equipment_associated_with_each_swh_distriubtion_system import (
-    get_swh_equipment_associated_with_each_swh_distribution_system,
-)
 from rct229.utils.jsonpath_utils import find_all
 
 
@@ -47,15 +44,6 @@ class Section11Rule6(RuleDefinitionListIndexedBase):
             )
 
             return swh_dist_sys_list_b
-
-        def create_data(self, context, data):
-            rmd_b = context.BASELINE_0
-
-            swh_distribution_and_eq_list_b = (
-                get_swh_equipment_associated_with_each_swh_distribution_system(rmd_b)
-            )
-
-            return {"swh_distribution_and_eq_list_b": swh_distribution_and_eq_list_b}
 
         class SWHDistRule(RuleDefinitionBase):
             def __init__(self):
