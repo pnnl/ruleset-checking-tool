@@ -34,6 +34,7 @@
                                         "water_source_heat_pump_loop": "CW Loop 1",
                                         "design_capacity": 17500,
                                         "rated_capacity": 17584,
+                                        "is_sized_based_on_design_day": false,
                                         "efficiency_metric_values": [
                                             4.3
                                         ],
@@ -80,6 +81,7 @@
                                         "water_source_heat_pump_loop": "CW Loop 1",
                                         "design_capacity": 17500,
                                         "rated_capacity": 17584,
+                                        "is_sized_based_on_design_day": false,
                                         "efficiency_metric_values": [
                                             4.3
                                         ],
@@ -126,6 +128,7 @@
                                         "water_source_heat_pump_loop": "CW Loop 1",
                                         "design_capacity": 17500,
                                         "rated_capacity": 17584,
+                                        "is_sized_based_on_design_day": false,
                                         "efficiency_metric_values": [
                                             4.3
                                         ],
@@ -172,6 +175,7 @@
                                         "water_source_heat_pump_loop": "CW Loop 1",
                                         "design_capacity": 17500,
                                         "rated_capacity": 17584,
+                                        "is_sized_based_on_design_day": false,
                                         "efficiency_metric_values": [
                                             4.3
                                         ],
@@ -218,6 +222,7 @@
                                         "water_source_heat_pump_loop": "CW Loop 1",
                                         "design_capacity": 17500,
                                         "rated_capacity": 17584,
+                                        "is_sized_based_on_design_day": false,
                                         "efficiency_metric_values": [
                                             4.3
                                         ],
