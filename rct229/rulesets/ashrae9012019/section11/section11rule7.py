@@ -160,9 +160,8 @@ class Section11Rule7(RuleDefinitionListIndexedBase):
             def manual_check_required(self, context, calc_vals=None, data=None):
                 swh_uses_ids_p = context.PROPOSED
                 service_water_heating_uses_p = data["service_water_heating_uses_p"]
-                shw_bat_p = swh_uses_ids_p["id"]
 
-                return shw_bat_p == SERVICE_WATER_HEATING_SPACE.PARKING_GARAGE or any(
+                return any(
                     [
                         service_water_heating_uses_p[swh_uses_id_p] == 0.0
                         for swh_uses_id_p in swh_uses_ids_p["swh_bats_and_uses_p"]
