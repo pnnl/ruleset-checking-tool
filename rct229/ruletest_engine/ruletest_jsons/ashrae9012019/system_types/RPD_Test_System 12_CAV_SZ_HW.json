@@ -105,7 +105,6 @@
                     "cooling_loop": "CHW Loop 1",
                     "condensing_loop": "CW Loop 1",
                     "is_chilled_water_pump_interlocked": false,
-                    "is_condenser_water_pump_interlocked": true,
                     "compressor_type": "SCREW",
                     "energy_source_type": "ELECTRICITY",
                     "design_capacity": 87921,
