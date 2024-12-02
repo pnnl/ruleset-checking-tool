@@ -5,21 +5,17 @@ from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_1_1_2_fns import (
     table_g3_1_2_lookup,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_components_associated_with_each_swh_bat import (
-    get_swh_components_associated_with_each_swh_bat,
-)
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_bats_and_swh_use import (
     get_swh_bats_and_swh_use,
+)
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_components_associated_with_each_swh_bat import (
+    get_swh_components_associated_with_each_swh_bat,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_equipment_type import (
     get_swh_equipment_type,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_uses_associated_with_each_building_segment import (
-    get_swh_uses_associated_with_each_building_segment,
-)
-from rct229.utils.jsonpath_utils import find_all
 from rct229.schema.schema_enums import SchemaEnums
-
+from rct229.utils.jsonpath_utils import find_all
 
 SERVICE_WATER_HEATING_SPACE = SchemaEnums.schema_enums[
     "ServiceWaterHeatingSpaceOptions2019ASHRAE901"
@@ -71,9 +67,9 @@ class Section11Rule7(RuleDefinitionListIndexedBase):
             }
 
             swh_equip_type_b = {
-                get_swh_equipment_type(rmd_b, swh_equip_id)
+                swh_equip_id: get_swh_equipment_type(rmd_b, swh_equip_id)
                 for swh_equip_id in find_all(
-                    "$.service_water_heating_equipment[*]", rmd_b
+                    "$.service_water_heating_equipment[*].id", rmd_b
                 )
             }
 
@@ -92,11 +88,26 @@ class Section11Rule7(RuleDefinitionListIndexedBase):
             )
             swh_bats_and_uses_p = get_swh_bats_and_swh_use(rmd_p)
 
+            building_area_type_SWH_equip_dict = {}
+            building_area_type_and_uses = {}
+            for bat_type, SWH_Equipment_Associations in swh_bats_and_uses_b.items():
+                building_area_type_SWH_equip_dict[bat_type] = {}
+                building_area_type_SWH_equip_dict[bat_type]["id"] = bat_type
+                building_area_type_SWH_equip_dict[bat_type][
+                    "SWH_Equipment_Associations"
+                ] = SWH_Equipment_Associations
+
+                building_area_type_and_uses[bat_type] = {}
+                building_area_type_and_uses[bat_type]["id"] = bat_type
+                building_area_type_and_uses[bat_type][
+                    "swh_bats_and_uses_p"
+                ] = swh_bats_and_uses_p[bat_type]
+
             return [
                 produce_ruleset_model_description(
                     USER=False,
-                    BASELINE_0={bat_type: SWH_Equipment_Associations},
-                    PROPOSED={bat_type: swh_bats_and_uses_p[bat_type]},
+                    BASELINE_0=building_area_type_SWH_equip_dict[bat_type],
+                    PROPOSED=building_area_type_and_uses[bat_type],
                 )
                 for bat_type, SWH_Equipment_Associations in swh_bats_and_uses_b.items()
             ]
@@ -105,59 +116,67 @@ class Section11Rule7(RuleDefinitionListIndexedBase):
             def __init__(self):
                 super(Section11Rule7.RMDRule.SWHBATRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
-                        USER=False, BASELINE_0=True, PROPOSED=False
+                        USER=False, BASELINE_0=True, PROPOSED=True
                     ),
                 )
 
             def is_applicable(self, context, data=None):
-                swh_uses_ids_p = context.PROPOSED
+                building_area_type_and_uses_b = context.PROPOSED
                 service_water_heating_uses_p = data["service_water_heating_uses_p"]
+                shw_bat_p = building_area_type_and_uses_b["id"]
 
-                for swh_uses_id_p in swh_uses_ids_p:
-                    if (
+                return all(
+                    [
                         service_water_heating_uses_p[swh_uses_id_p] > 0.0
-                        or service_water_heating_uses_p
-                        != SERVICE_WATER_HEATING_SPACE.PARKING_GARAGE
-                    ):
-                        return True
-                    else:
-                        return False
+                        or shw_bat_p != SERVICE_WATER_HEATING_SPACE.PARKING_GARAGE
+                        for swh_uses_id_p in building_area_type_and_uses_b[
+                            "swh_bats_and_uses_p"
+                        ]
+                    ]
+                )
+
+            def get_calc_vals(self, context, data=None):
+                building_area_type_SWH_equip_b = context.BASELINE_0
+                swh_equip_type_b = data["swh_equip_type_b"]
+                swh_bat_b = building_area_type_SWH_equip_b["id"]
+
+                expected_swh_equip_type_list = []
+                swh_equip_type_list_b = []
+                for swh_heating_equipment_id in building_area_type_SWH_equip_b[
+                    "SWH_Equipment_Associations"
+                ].swh_heating_eq:
+                    expected_swh_equip_type_list.append(
+                        table_g3_1_2_lookup(swh_bat_b)["baseline_heating_method"]
+                    )
+                    swh_equip_type_list_b.append(
+                        swh_equip_type_b[swh_heating_equipment_id]
+                    )
+
+                return {
+                    "expected_swh_equip_type_list": expected_swh_equip_type_list,
+                    "swh_equip_type_list_b": swh_equip_type_list_b,
+                }
 
             def manual_check_required(self, context, calc_vals=None, data=None):
                 swh_uses_ids_p = context.PROPOSED
                 service_water_heating_uses_p = data["service_water_heating_uses_p"]
+                shw_bat_p = swh_uses_ids_p["id"]
 
-                for swh_uses_id_p in swh_uses_ids_p:
-                    if service_water_heating_uses_p[swh_uses_id_p] > 0.0:
-                        has_swh = True
-                    else:
-                        has_swh = False
-
-                return has_swh
+                return shw_bat_p == SERVICE_WATER_HEATING_SPACE.PARKING_GARAGE or any(
+                    [
+                        service_water_heating_uses_p[swh_uses_id_p] == 0.0
+                        for swh_uses_id_p in swh_uses_ids_p["swh_bats_and_uses_p"]
+                    ]
+                )
 
             def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
                 swh_uses_ids_p = context.PROPOSED
-                swh_bat = next(iter(swh_uses_ids_p))
+                swh_bat_p = swh_uses_ids_p["id"]
 
-                return f"Building area type {swh_bat} has no service water heating use. Confirm that this is correct for this building area type."
-
-            def get_calc_vals(self, context, data=None):
-                SWH_Equipment_Association = context.BASELINE_0
-                swh_equip_type_b = data["swh_equip_type_b"]
-
-                for (
-                    swh_heating_equipment_id
-                ) in SWH_Equipment_Association.swh_heating_eq:
-                    expected_swh_equip_type = table_g3_1_2_lookup(swh_bat)
-                    swh_equip_type_b = swh_equip_type_b[swh_heating_equipment_id]
-
-                return {
-                    "expected_swh_equip_type": expected_swh_equip_type,
-                    "swh_equip_type_b": swh_equip_type_b,
-                }
+                return f"Building area type {swh_bat_p} has no service water heating use. Confirm that this is correct for this building area type."
 
             def rule_check(self, context, calc_vals=None, data=None):
-                swh_equip_type_b = calc_vals["swh_equip_type_b"]
-                expected_swh_equip_type = calc_vals["expected_swh_equip_type"]
+                expected_swh_equip_type_list = calc_vals["expected_swh_equip_type_list"]
+                swh_equip_type_list_b = calc_vals["swh_equip_type_list_b"]
 
-                return swh_equip_type_b == expected_swh_equip_type
+                return expected_swh_equip_type_list == swh_equip_type_list_b
