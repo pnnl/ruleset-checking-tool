@@ -211,6 +211,52 @@ def find_exactly_one_service_water_heating_use(rmd: dict, swh_use_id: str) -> di
     )
 
 
+def find_exactly_one_service_water_heating_equipment(
+    rmd: dict, swh_equipment_id: str
+) -> dict:
+    """
+    Search for the service water heating equipment data group in a ruleset model description by matching swh_equipment_id:
+    Raise exception if no matching swh equipment system
+
+    Parameters
+    ----------
+    rmd: dict
+    swh_equipment_id: str
+
+    Returns: json
+    -------
+
+    """
+    return find_exactly_one_with_field_value(
+        "$.service_water_heating_equipment[*]",
+        "id",
+        swh_equipment_id,
+        rmd,
+    )
+
+
+def find_exactly_one_pump(rmd: dict, pump_id: str) -> dict:
+    """
+    Search for the pump data group in a ruleset model description by matching pump_id:
+    Raise exception if no matching pump
+
+    Parameters
+    ----------
+    rmd: dict
+    pump_id: str
+
+    Returns: json
+    -------
+
+    """
+    return find_exactly_one_with_field_value(
+        "$.service_water_heating_equipment[*]",
+        "id",
+        pump_id,
+        rmd,
+    )
+
+
 def has_heating_system(rmd: dict, hvac_id: str) -> bool:
     """
     Check whether the specified hvac system has a heating system.
