@@ -232,7 +232,9 @@
                         "design_supply_temperature": 21.1,
                         "is_sized_using_coincident_load": true,
                         "operation": "CONTINUOUS",
-                        "flow_control": "VARIABLE_FLOW"
+                        "flow_control": "VARIABLE_FLOW",
+                        "minimum_flow_fraction": 0.25,
+                        "temperature_reset_type": "NO_RESET"
                     }
                 }
             ]
