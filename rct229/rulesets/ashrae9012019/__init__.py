@@ -21,7 +21,6 @@ __all__ = [
     "section23",
 ]
 
-
 if SchemaEnums.schema_enums.get("RulesetModelOptions2019ASHRAE901"):
     RMT = SchemaEnums.schema_enums.get("RulesetModelOptions2019ASHRAE901")
 else:
