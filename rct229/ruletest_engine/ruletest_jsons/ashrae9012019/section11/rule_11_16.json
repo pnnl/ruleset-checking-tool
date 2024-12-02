@@ -375,7 +375,7 @@
                             {
                                 "id": "SHW Equipment 1",
                                 "distribution_system": "SHW Distribution 1",
-                                "heater_fuel_type": "PROPANE",
+                                "heater_fuel_type": "FUEL_OIL",
                                 "heater_type": "CONVENTIONAL",
                                 "tank": {
                                     "id": "SHW Tank",
