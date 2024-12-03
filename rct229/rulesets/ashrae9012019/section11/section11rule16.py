@@ -2,8 +2,10 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_fuels_modeled_in_rmd import (
+    get_fuels_modeled_in_rmd,
+)
 from rct229.schema.schema_enums import SchemaEnums
-from rct229.utils.jsonpath_utils import find_all
 
 ENERGY_SOURCE = SchemaEnums.schema_enums["EnergySourceOptions"]
 
@@ -39,12 +41,9 @@ class Section11Rule16(RuleDefinitionListIndexedBase):
     def create_data(self, context, data):
         rmd_p = context.PROPOSED
 
-        return {
-            "proposed_fuels": find_all(
-                "$.ruleset_model_descriptions[0].service_water_heating_equipment[*].heater_fuel_type",
-                rmd_p,
-            )
-        }
+        proposed_fuels = get_fuels_modeled_in_rmd(rmd_p)
+
+        return {"proposed_fuels": proposed_fuels}
 
     class SWHEquipRule(RuleDefinitionBase):
         def __init__(self):
@@ -52,7 +51,7 @@ class Section11Rule16(RuleDefinitionListIndexedBase):
                 rmds_used=produce_ruleset_model_description(
                     USER=False,
                     BASELINE_0=True,
-                    PROPOSED=True,
+                    PROPOSED=False,
                 ),
                 required_fields={
                     "$": ["heater_fuel_type"],
