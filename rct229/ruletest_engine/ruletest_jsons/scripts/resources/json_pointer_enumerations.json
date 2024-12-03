@@ -25,6 +25,7 @@
 	"schedules": "ruleset_model_descriptions[0]/schedules",
 	"sensible_cool_capacity": "ruleset_model_descriptions[0]/buildings[0]/building_segments[0]/heating_ventilating_air_conditioning_systems[0]/cooling_system/sensible_cool_capacity",
 	"service_water_heating_distribution_systems": "ruleset_model_descriptions[0]/service_water_heating_distribution_systems",
+    "service_water_heating_equipment": "ruleset_model_descriptions[0]/service_water_heating_equipment",
 	"service_water_piping":"ruleset_model_descriptions[0]/service_water_heating_distribution_systems[0]/service_water_piping",
 	"service_water_heating_uses":"ruleset_model_descriptions[0]/buildings[0]/building_segments[0]/zones[0]/spaces[0]/service_water_heating_uses",
 	"spaces": "ruleset_model_descriptions[0]/buildings[0]/building_segments[0]/zones[0]/spaces",
