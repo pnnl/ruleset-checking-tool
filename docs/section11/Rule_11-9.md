@@ -5,7 +5,7 @@
 
 **Rule ID:** 11-9
 
-**Rule Description:** "The baseline system must be sized according to Standard 90.1 2019, Section 7.4.1."  
+**Rule Description:** The baseline system must be sized according to Standard 90.1 2019, Section 7.4.1.  
 
 **Rule Assertion:** UNDETERMINED / NOT_APPLICABLE
 
