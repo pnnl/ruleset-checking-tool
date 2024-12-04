@@ -18,7 +18,7 @@
 
 ## Rule Logic:  
 - create a list automatic_shades_modeled and initialize it as an empty list: `automatic_shades_modeled = []`
-- look at each surface: `for surface in B_RMD...zones:`
+- look at each surface: `for surface in B_RMD...surfaces:`
     - check if the surface is an exterior surface type: `if surface.adjacent_to == "EXTERIOR":`
         - look at each subsurface: `for sub_surface in surface.subsurfaces:`
             - check whether the subsurface has the data element has_automatic_shades: `if sub_surface.has_automatic_shades != NULL:`
