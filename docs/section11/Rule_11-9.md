@@ -9,9 +9,9 @@
 
 **Rule Assertion:** UNDETERMINED / NOT_APPLICABLE
 
-**Appendix G Section Reference:** Table G3.1 #11, proposed column, a
+**Appendix G Section Reference:** Table G3.1 #11, baseline column, a
 
-**Evaluation Context:** B-RMD each SHW BAT
+**Evaluation Context:** B-RMD each SHW BAT  
 **Data Lookup:**   
 **Function Call:** 
 - **get_SWH_bats_and_SWH_use**
