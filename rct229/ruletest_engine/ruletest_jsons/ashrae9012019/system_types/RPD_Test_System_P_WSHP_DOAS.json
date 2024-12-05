@@ -55,9 +55,8 @@
                                 {
                                     "id": "DOAS System",
                                     "cooling_system": {
-                                        "id": "HP Cooling Coil 1",
+                                        "id": "DX Cooling Coil 1",
                                         "type": "DIRECT_EXPANSION",
-                                        "condenser_water_loop": "CW Loop 1",
                                         "design_sensible_cool_capacity": 11723,
                                         "rated_total_cool_capacity": 17584,
                                         "is_sized_based_on_design_day": false,
@@ -66,16 +65,15 @@
                                     },
                                     "heating_system": {
                                         "id": "HP Heating Coil 1",
-                                        "type": "HEAT_PUMP",
-                                        "water_source_heat_pump_loop": "CW Loop 1",
+                                        "type": "FURNACE",
                                         "design_capacity": 17500,
                                         "rated_capacity": 17584,
-                                        "efficiency_metric_values": [4.3],
-                                        "efficiency_metric_types": ["HEAT_PUMP_COEFFICIENT_OF_PERFORMANCE_HIGH_TEMPERATURE_NO_FAN"]
+                                        "efficiency_metric_values": [0.78],
+                                        "efficiency_metric_types": ["ANNUAL_FUEL_UTILIZATION_EFFICIENCY"]
                                     },
                                     "fan_system": {
                                         "id": "CAV Fan System 1",
-                                        "fan_control": "VARIABLE_SPEED_DRIVE",
+                                        "fan_control": "CONSTANT",
                                         "temperature_control": "CONSTANT",
                                         "operation_during_occupied": "CONTINUOUS",
                                         "operation_during_unoccupied": "KEEP_OFF",

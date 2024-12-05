@@ -59,7 +59,7 @@
                                         "fan_control": "CONSTANT",
                                         "operation_during_occupied": "CONTINUOUS",
                                         "operation_during_unoccupied": "KEEP_OFF",
-                                        "minimum_outdoor_airflow": 472.0,
+                                        "minimum_outdoor_airflow": 94.4,
                                         "supply_fans": [
                                             {
                                                 "id": "Supply Fan 1",
