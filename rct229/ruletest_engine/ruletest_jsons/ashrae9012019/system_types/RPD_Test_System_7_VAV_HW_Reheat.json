@@ -29,8 +29,7 @@
                                             "heating_capacity": 1758.42642,
                                             "primary_airflow": 943.9,
                                             "supply_design_heating_setpoint_temperature": 32.2,
-                                            "supply_design_cooling_setpoint_temperature": 12.8,
-                                            "minimum_outdoor_airflow": 94.4
+                                            "supply_design_cooling_setpoint_temperature": 12.8
                                         }
                                     ]
                                 },
@@ -51,7 +50,6 @@
                                             "supply_design_heating_setpoint_temperature": 32.2,
                                             "supply_design_cooling_setpoint_temperature": 12.8,
                                             "minimum_airflow": 141.6,
-                                            "minimum_outdoor_airflow": 94.4,
                                             "heating_capacity": 8792.1321
                                         }
                                     ]
