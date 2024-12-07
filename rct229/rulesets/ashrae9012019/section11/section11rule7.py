@@ -61,6 +61,7 @@ class Section11Rule7(RuleDefinitionListIndexedBase):
             service_water_heating_uses_p = {
                 swh_use["id"]: swh_use.get("use", 0.0)
                 for swh_use in find_all(
+                    # TODO: Moving the `service_water_heating_uses` key to the `building_segments` level is being discussed. If the `service_water_heating_uses` key is moved, this function needs to be revisited.
                     "$.buildings[*].building_segments[*].zones[*].spaces[*].service_water_heating_uses[*]",
                     rmd_p,
                 )
@@ -83,14 +84,17 @@ class Section11Rule7(RuleDefinitionListIndexedBase):
             rmd_p = context.PROPOSED
             is_leap_year_b = data["is_leap_year"]
 
-            swh_bats_and_uses_b = get_swh_components_associated_with_each_swh_bat(
-                rmd_b, is_leap_year_b
+            swh_bats_and_equip_association_b = (
+                get_swh_components_associated_with_each_swh_bat(rmd_b, is_leap_year_b)
             )
             swh_bats_and_uses_p = get_swh_bats_and_swh_use(rmd_p)
 
             building_area_type_SWH_equip_dict = {}
             building_area_type_and_uses = {}
-            for bat_type, SWH_Equipment_Associations in swh_bats_and_uses_b.items():
+            for (
+                bat_type,
+                SWH_Equipment_Associations,
+            ) in swh_bats_and_equip_association_b.items():
                 building_area_type_SWH_equip_dict[bat_type] = {}
                 building_area_type_SWH_equip_dict[bat_type]["id"] = bat_type
                 building_area_type_SWH_equip_dict[bat_type][
@@ -109,7 +113,7 @@ class Section11Rule7(RuleDefinitionListIndexedBase):
                     BASELINE_0=building_area_type_SWH_equip_dict[bat_type],
                     PROPOSED=building_area_type_and_uses[bat_type],
                 )
-                for bat_type, SWH_Equipment_Associations in swh_bats_and_uses_b.items()
+                for bat_type, SWH_Equipment_Associations in swh_bats_and_equip_association_b.items()
             ]
 
         class SWHBATRule(RuleDefinitionBase):
@@ -121,17 +125,14 @@ class Section11Rule7(RuleDefinitionListIndexedBase):
                 )
 
             def is_applicable(self, context, data=None):
-                building_area_type_and_uses_b = context.PROPOSED
+                building_area_type_and_uses_p = context.PROPOSED
                 service_water_heating_uses_p = data["service_water_heating_uses_p"]
-                shw_bat_p = building_area_type_and_uses_b["id"]
+                swh_bat_p = building_area_type_and_uses_p["id"]
 
-                return all(
-                    [
-                        service_water_heating_uses_p[swh_uses_id_p] > 0.0
-                        or shw_bat_p != SERVICE_WATER_HEATING_SPACE.PARKING_GARAGE
-                        for swh_uses_id_p in building_area_type_and_uses_b[
-                            "swh_bats_and_uses_p"
-                        ]
+                return swh_bat_p != SERVICE_WATER_HEATING_SPACE.PARKING_GARAGE or all(
+                    service_water_heating_uses_p[swh_uses_id_p] > 0.0
+                    for swh_uses_id_p in building_area_type_and_uses_p[
+                        "swh_bats_and_uses_p"
                     ]
                 )
 
@@ -158,13 +159,15 @@ class Section11Rule7(RuleDefinitionListIndexedBase):
                 }
 
             def manual_check_required(self, context, calc_vals=None, data=None):
-                swh_uses_ids_p = context.PROPOSED
+                building_area_type_and_uses_p = context.PROPOSED
                 service_water_heating_uses_p = data["service_water_heating_uses_p"]
 
                 return any(
                     [
-                        service_water_heating_uses_p[swh_uses_id_p] == 0.0
-                        for swh_uses_id_p in swh_uses_ids_p["swh_bats_and_uses_p"]
+                        service_water_heating_uses_p[swh_uses_id_p] <= 0.0
+                        for swh_uses_id_p in building_area_type_and_uses_p[
+                            "swh_bats_and_uses_p"
+                        ]
                     ]
                 )
 
