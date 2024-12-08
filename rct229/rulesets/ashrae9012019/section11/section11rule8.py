@@ -2,6 +2,9 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_building_segment_swh_bat import (
+    get_building_segment_swh_bat,
+)
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_bats_and_swh_use import (
     get_swh_bats_and_swh_use,
 )
@@ -70,6 +73,17 @@ class Section11Rule8(RuleDefinitionListIndexedBase):
                 find_all("$.buildings[*].building_segments[*]", rmd_b)
             )
 
+            num_other_swh_bat_segment_b = len(
+                [
+                    True
+                    for bldg_seg_b in find_all(
+                        "$.buildings[*].building_segments[*]", rmd_b
+                    )
+                    if get_building_segment_swh_bat(rmd_b, bldg_seg_b["id"])
+                    == SERVICE_WATER_HEATING_SPACE.ALL_OTHERS
+                ]
+            )
+
             service_water_heating_uses_p = {
                 swh_use["id"]: swh_use.get("use", 0.0)
                 for swh_use in find_all(
@@ -117,6 +131,7 @@ class Section11Rule8(RuleDefinitionListIndexedBase):
 
             return {
                 "num_of_bldg_segment_b": num_of_bldg_segment_b,
+                "num_other_swh_bat_segment_b": num_other_swh_bat_segment_b,
                 "num_swh_systems_b": num_swh_systems_b,
                 "num_swh_equipment_this_use_b": num_swh_equipment_this_use_b,
                 "swh_bats_and_uses_b": swh_bats_and_uses_b,
@@ -173,8 +188,9 @@ class Section11Rule8(RuleDefinitionListIndexedBase):
                 num_swh_equipment_this_use_b = data["num_swh_equipment_this_use_b"][
                     swh_bat_b
                 ]
+                num_other_swh_bat_segment_b = data["num_other_swh_bat_segment_b"]
 
-                is_referenced_in_other_bats = False
+                is_referenced_in_other_bats_b = False
                 if num_swh_systems_b == 1:
                     swh_dist_id = swh_bats_and_uses_b[swh_bat_b].swh_distribution[0]
                     for other_swh_bat in swh_bats_and_uses_b:
@@ -183,44 +199,51 @@ class Section11Rule8(RuleDefinitionListIndexedBase):
                                 swh_dist_id
                                 in swh_bats_and_uses_b[swh_bat_b].swh_distribution
                             ):
-                                is_referenced_in_other_bats = True
+                                is_referenced_in_other_bats_b = True
 
-                if swh_bat_b == SERVICE_WATER_HEATING_SPACE.ALL_OTHERS:
-                    multiple_segments_with_bat_other = False
+                multiple_segments_with_bat_other_b = (
+                    True if num_other_swh_bat_segment_b > 1 else False
+                )
 
                 return {
+                    "num_swh_systems_b": num_swh_systems_b,
                     "num_of_bldg_segment_b": num_of_bldg_segment_b,
-                    "is_referenced_in_other_bats": is_referenced_in_other_bats,
-                    "multiple_segments_with_bat_other": multiple_segments_with_bat_other,
+                    "is_referenced_in_other_bats_b": is_referenced_in_other_bats_b,
+                    "multiple_segments_with_bat_other_b": multiple_segments_with_bat_other_b,
                 }
 
             def manual_check_required(self, context, calc_vals=None, data=None):
                 shw_bat_b = calc_vals["shw_bat_b"]
-                multiple_segments_with_bat_other = calc_vals[
-                    "multiple_segments_with_bat_other"
+                multiple_segments_with_bat_other_b = calc_vals[
+                    "multiple_segments_with_bat_other_b"
                 ]
 
-                return shw_bat_b == "UNDETERMINED" or multiple_segments_with_bat_other
+                return shw_bat_b == "UNDETERMINED" or multiple_segments_with_bat_other_b
 
             def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
                 shw_bat_b = calc_vals["shw_bat_b"]
-                multiple_segments_with_bat_other = calc_vals[
-                    "multiple_segments_with_bat_other"
+                multiple_segments_with_bat_other_b = calc_vals[
+                    "multiple_segments_with_bat_other_b"
                 ]
 
                 UNDETERMINED_MSG = ""
                 if shw_bat_b == "UNDETERMINED":
                     UNDETERMINED_MSG = CASE3_MSG
-                elif not multiple_segments_with_bat_other:
+                elif not multiple_segments_with_bat_other_b:
                     UNDETERMINED_MSG = CASE4_MSG
 
                 return UNDETERMINED_MSG
 
             def rule_check(self, context, calc_vals=None, data=None):
+                num_swh_systems_b = calc_vals["num_swh_systems_b"]
                 shw_bat = calc_vals["shw_bat"]
                 num_of_bldg_segment_b = calc_vals["num_of_bldg_segment_b"]
-                is_referenced_in_other_bats = calc_vals["is_referenced_in_other_bats "]
+                is_referenced_in_other_bats_b = calc_vals[
+                    "is_referenced_in_other_bats_b"
+                ]
 
                 return (
-                    shw_bat == "UNDETERMINED" and num_of_bldg_segment_b == 1
-                ) or not is_referenced_in_other_bats
+                    num_swh_systems_b == 1
+                    or (shw_bat == "UNDETERMINED" and num_of_bldg_segment_b == 1)
+                    or not is_referenced_in_other_bats_b
+                )
