@@ -250,7 +250,7 @@ def find_exactly_one_pump(rmd: dict, pump_id: str) -> dict:
 
     """
     return find_exactly_one_with_field_value(
-        "$.service_water_heating_equipment[*]",
+        "$.pumps[*]",
         "id",
         pump_id,
         rmd,

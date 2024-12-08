@@ -1,10 +1,9 @@
 from rct229.rulesets.ashrae9012019.ruleset_functions.compare_swh_dist_systems_and_components import (
     compare_swh_dist_systems_and_components,
 )
-from rct229.schema.config import ureg
 from rct229.schema.schema_utils import quantify_rmd
 from rct229.schema.validate import schema_validate_rmd
-
+import copy
 
 TEST_RMD = {
     "id": "test_rmd",
@@ -88,10 +87,6 @@ TEST_RMD = {
         {
             "id": "Pump 2",
             "loop_or_piping": "SWH Piping 2",
-        },
-        {
-            "id": "Pump 3",
-            "loop_or_piping": "HVAC Piping 1",
         },
     ],
     "service_water_heating_equipment": [
