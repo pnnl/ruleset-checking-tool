@@ -13,6 +13,7 @@ from rct229.utils.pint_utils import ZERO
 from rct229.utils.utility_functions import (
     find_exactly_one_service_water_heating_distribution_system,
 )
+from rct229.utils.assertions import getattr_
 
 
 @dataclass
@@ -75,7 +76,9 @@ def get_swh_components_associated_with_each_swh_bat(
                         rmd, distribution_id
                     )
                 )
-                tanks = distribution.get("tanks")
+                tanks = getattr_(
+                    distribution, "service_water_heating_distribution_systems", "tanks"
+                )
                 for tank in tanks:
                     swh_and_equip_dict[swh_bat].tanks.append(tank["id"])
 
@@ -101,7 +104,12 @@ def get_swh_components_associated_with_each_swh_bat(
                     in swh_and_equip_dict[swh_bat].swh_distribution
                 ):
                     swh_and_equip_dict[swh_bat].swh_heating_eq.append(swh_equip["id"])
-                    for solar_t in swh_equip.get("solar_thermal_systems"):
+                    getattr_(
+                        swh_equip,
+                        "service_water_heating_equipment",
+                        "solar_thermal_systems",
+                    )
+                    for solar_t in swh_equip["solar_thermal_systems"]:
                         swh_and_equip_dict[swh_bat].solar_thermal.append(solar_t["id"])
 
     return swh_and_equip_dict
