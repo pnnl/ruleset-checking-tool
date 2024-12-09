@@ -50,8 +50,8 @@ class Section5Rule20(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data=None):
-        rmr_baseline = context.BASELINE_0
-        climate_zone = rmr_baseline["weather"]["climate_zone"]
+        rmd_baseline = context.BASELINE_0
+        climate_zone = rmd_baseline["weather"]["climate_zone"]
 
         # TODO It is determined that later we will modify this function to RMD level -
         # This implementation is temporary
@@ -59,11 +59,11 @@ class Section5Rule20(RuleDefinitionListIndexedBase):
             building_b["id"]: get_building_scc_window_wall_ratios_dict(
                 climate_zone, building_b
             )
-            for building_b in find_all(self.list_path, rmr_baseline)
+            for building_b in find_all(self.list_path, rmd_baseline)
         }
 
         return {
-            "climate_zone": rmr_baseline["weather"]["climate_zone"],
+            "climate_zone": rmd_baseline["weather"]["climate_zone"],
             "bldg_scc_wwr_ratio_dict": bldg_scc_wwr_ratio_dict,
         }
 
@@ -251,6 +251,12 @@ class Section5Rule20(RuleDefinitionListIndexedBase):
                         rmds_used=produce_ruleset_model_description(
                             USER=False, BASELINE_0=True, PROPOSED=False
                         ),
+                        precision={
+                            "subsurface_shgc_b": {
+                                "precision": 0.01,
+                                "unit": "",
+                            }
+                        },
                     )
 
                 def manual_check_required(self, context, calc_vals=None, data=None):
@@ -280,6 +286,14 @@ class Section5Rule20(RuleDefinitionListIndexedBase):
                     }
 
                 def rule_check(self, context, calc_vals=None, data=None):
+                    target_shgc = calc_vals["target_shgc"]
+                    subsurface_shgc = calc_vals["subsurface_shgc"]
+
+                    return target_shgc is not None and self.precision_comparison[
+                        "subsurface_shgc_b"
+                    ](subsurface_shgc, target_shgc)
+
+                def is_tolerance_fail(self, context, calc_vals=None, data=None):
                     target_shgc = calc_vals["target_shgc"]
                     subsurface_shgc = calc_vals["subsurface_shgc"]
                     return target_shgc is not None and std_equal(

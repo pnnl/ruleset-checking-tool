@@ -82,6 +82,11 @@ class Section23Rule10(RuleDefinitionListIndexedBase):
                 required_fields={
                     "$": ["fan_system"],
                 },
+                precision={
+                    "fan_volume_reset_fraction_b": {
+                        "precision": 0.1,
+                    },
+                },
             )
 
         def is_applicable(self, context, data=None):
@@ -103,9 +108,12 @@ class Section23Rule10(RuleDefinitionListIndexedBase):
         def rule_check(self, context, calc_vals=None, data=None):
             fan_volume_reset_fraction_b = calc_vals["fan_volume_reset_fraction"]
             fan_volume_reset_type_b = calc_vals["fan_volume_reset_type"]
+
             return (
                 fan_volume_reset_type_b
                 == FAN_SYSTEM_SUPPLY_FAN_VOLUME_RESET.DESIGN_LOAD_RESET
-                and fan_volume_reset_fraction_b
-                == FAN_SYSTEM_SUPPLY_FAN_VOLUME_RESET_FRACTION
+                and self.precision_comparison["fan_volume_reset_fraction_b"](
+                    fan_volume_reset_fraction_b,
+                    FAN_SYSTEM_SUPPLY_FAN_VOLUME_RESET_FRACTION,
+                )
             )

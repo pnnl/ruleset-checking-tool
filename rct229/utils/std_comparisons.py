@@ -1,6 +1,7 @@
 import operator
 from pint import Quantity
 from decimal import Decimal, ROUND_HALF_UP
+from rct229.schema.config import ureg
 
 
 """
@@ -33,7 +34,17 @@ def std_equal(
     bool
         True iff the val is within percent_tolerance of std_val
     """
-    return abs(std_val - val) <= (percent_tolerance / 100) * abs(std_val)
+
+    tolerance = (percent_tolerance / 100) * abs(std_val)
+
+    # If the units of std_value are absolute temperature, the tolerance must be in differential temperature
+    if (
+        isinstance(std_val, Quantity)
+        and std_val.dimensionality == ureg.kelvin.dimensionality
+    ):
+        tolerance = tolerance.magnitude * ureg("delta_degC")
+
+    return abs(std_val - val) <= tolerance
 
 
 def std_equal_with_precision(

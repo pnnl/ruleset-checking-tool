@@ -3,19 +3,20 @@
         "Section": 19,
         "Rule": 36,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones. Baseline system 7 with air capacity > 5,000 CFM and a minimum supply air ratio greater than 70% has an ERV greater than 50% enthalpy recovery ratio  Expected outcome: UNDETERMINED",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7. The supply fan capacity is greater than 5,000 CFM and the minimum outside air ratio is greater than 70%. The baseline HVAC system has an ERV with an enthalpy recovery ratio greater than 50%.",
         "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "Verify that it is equivalent to 50% enthalpy recovery ratio required by G3.1.2.10.",
         "standard": {
             "rule_id": "19-36",
             "ruleset_reference": "G3.1.2.10",
             "rule_description": "Baseline systems required to model energy recovery per G3.1.2.10 shall be modeled with a 50% enthalpy recovery ratio. ",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -290,19 +291,19 @@
         "Section": 19,
         "Rule": 36,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones. Baseline system 7 did not have ERV Expected outcome: NOT_APPLICABLE",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7. The supply fan capacity is less than 5,000 CFM.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "19-36",
             "ruleset_reference": "G3.1.2.10",
             "rule_description": "Baseline systems required to model energy recovery per G3.1.2.10 shall be modeled with a 50% enthalpy recovery ratio. ",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
