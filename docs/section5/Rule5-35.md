@@ -2,43 +2,47 @@
 # Envelope - Rule 5-35  
 
 **Rule ID:** 5-35  
-**Rule Description:**  If the skylight area of the proposed design is greater than 3%, baseline skylight area shall be decreased in all roof components in which skylights are located to reach 3%.  
-**Rule Assertion:** B-RMR total (subsurface.glazed_area+subsurface.opaque_area) = expected value for each zone  
-**Appendix G Section:** Section G3.1-5(e) Building Envelope Modeling Requirements for the Baseline building  
-**Appendix G Section Reference:** None  
+**Rule Description:** The baseline air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1 cfm/ft2.  The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section G3.1.1.4.  
+**Rule Assertion:** Sum of B-RMD infiltration.infiltration.air_leakage_rate = expected value.  
+**Appendix G Section:** Section 5 Envelope  
+**Appendix G Section Reference:** Section G3.1-5(h) Building Envelope Modeling Requirements for the Baseline building  
 
-**Applicability:** All required data elements exist for B_RMR  
-**Applicability Checks:**
-1. the skylight area in the proposed design is 3% or greater.  
+**Applicability:** All required data elements exist for B_RMD  
+**Applicability Checks:**  None  
 
 **Manual Check:** None  
 **Evaluation Context:** Each Data Element  
 **Data Lookup:** None  
-**Function Call:**  
+**Function Call:** 
 
-  1. get_building_segment_skylight_roof_areas()  
-  2. match_data_element()
+  1. get_surface_conditioning_category()
+  2. get_zone_conditioning_category()
 
-## Rule Logic:
+## Rule Logic:  
 
-- Get skylight roof areas dictionary for B_RMR: `skylight_roof_areas_dictionary_b = get_building_segment_skylight_roof_areas(B_RMR)`
+- Get surface conditioning category dictionary for B_RMD: `scc_dict_b = get_surface_conditioning_category(B_RMD)`
 
-- Get skylight roof areas dictionary for P_RMR: `skylight_roof_areas_dictionary_p = get_building_segment_skylight_roof_areas(P_RMR)`
+- Get zone conditioning category dictionary for B_RMD: `zone_conditioning_category_dict_b = get_zone_conditioning_category(B_RMD)`
 
-- For each building segment in B_RMR: `for building_segment_b in B_RMR.building.building_segments:`
+- For each zone in the Baseline model: `for zone_b in B_RMD...zones:`
 
-  - Calculate skylight roof ratio for building segment: `skylight_roof_ratio_b = skylight_roof_areas_dictionary_b[building_segment_b.id]["total_skylight_area"] / skylight_roof_areas_dictionary_b[building_segment_b.id]["total_envelope_roof_area"]`
+  - For each surface in zone: `for surface_b in zone_b.surfaces:`
 
-  - Get matching building segment in P_RMR: `building_segment_p = match_data_element(P_RMR, BuildingSegments, building_segment_b.id)`
+    - Check if surface is regulated, add zone total area of building envelope to building total: `if scc_dict_b[surface_b.id] != "UNREGULATED": building_total_envelope_area += sum(surface.area for surface in zone_b.surfaces)`
 
-    - Calculate skylight roof ratio for building segment in P_RMR: `skylight_roof_ratio_p = skylight_roof_areas_dictionary_p[building_segment_p.id][0] / skylight_roof_areas_dictionary_p[building_segment_p.id][1]`
+  - Check if zone is conditioned or semi-heated, add zone infiltration flow rate to building total: `if zone_conditioning_category_dict_b[zone.id] in [CONDITIONED RESIDENTIAL, CONDITIONED NON-RESIDENTIAL, CONDITIONED MIXED, SEMI-HEATED]: building_total_air_leakage_rate_b += zone_b.infiltration.infiltration_flow_rate`
 
-      - Check if skylight roof ratio in P_RMR is greater than 3%: `if skylight_roof_ratio_p > 0.03:`
+- Calculate the required baseline air leakage rate at 75Pa in cfm: `target_air_leakage_rate_75pa_b = 1.0 * building_total_envelope_area`
 
-        **Rule Assertion:**
+**Rule Assertion:**  
 
-        - Case 1: For each building segment in B_RMR, the skylight to roof ratio is equal to 3%: `if skylight_roof_ratio_b == 0.03: PASS`  
+- Case 1: For B_RMD, if the total zone infiltration rate for conditioned and semi-heated zones is equal to the required baseline infiltration rate at 75Pa with a conversion factor of 0.112 as per Section G3.1.1.4: `if building_total_air_leakage_rate_b == target_air_leakage_rate_75pa_b * 0.112: PASS`
 
-        - Case 2: Else: `Else: FAIL`
+- Case 2: Else: `else: FAIL`
+
+**Notes:**
+
+1. Update Rule ID from 5-47 to 5-36 on 10/26/2023
+2. Update Rule ID from 5-36 to 5-35 on 12/22/2023
 
 **[Back](../_toc.md)**

@@ -1,46 +1,49 @@
 
 # Envelope - Rule 5-17  
 
+**Schema Version:** 0.0.23
 **Rule ID:** 5-17  
-**Rule Description:** Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same in the baseline as in the proposed design.  
-**Appendix G Section:** Section G3.1-5 Building Envelope Modeling Requirements for the Baseline building  
-**Appendix G Section Reference:** None  
+**Rule Description:** The baseline fenestration area for an existing building shall equal the existing fenestration area prior to the proposed work.  
+**Rule Assertion:** B-RMD total (subsurface.glazed_area+subsurface.opaque_area) = expected value  
+**Appendix G Section:** Section 5 Envelope  
+**Appendix G Section Reference:** Section G3.1-5(c) Building Envelope Modeling Requirements for the Baseline building  
 
-**Applicability:** All required data elements exist for B_RMR  
-**Applicability Checks:** None  
-
-**Manual Check:** None  
-**Evaluation Context:** Each Data Element  
 **Data Lookup:** None  
-**Function Call:**
+**Evaluation Context:**  Each Data Element  
 
-  - get_surface_conditioning_category()
-  - get_opaque_surface_type()
-  - match_data_element()
+**Applicability Checks:** 
 
-## Rule Logic:  
+1. The baseline building has existing or altered spaces
 
-- Get surface conditioning category dictionary for B_RMR: `scc_dictionary_b = get_surface_conditioning_category(B_RMR)`  
+**Manual Checks:** Yes  
+**Function Call:**  None  
 
-- For each building segment in the Proposed model: `for building_segment_b in B_RMR.building.building_segments:`  
+## Rule Logic:
+- create undetermined_zone_list: `undetermined_zone_list = []`
 
-  - For each zone in thermal block: `for zone_b in building_segment_b.zones:`  
+- For each zone in B_RMR: `for zone_b in B_RMR...zones:`
 
-    - For each surface in zone: `for surface_b in zone_b.surfaces:`  
+  - For each space in zone: `for space_b in zone_b.spaces:`
 
-      - Check if surface is unregulated: `if ( scc_dictionary_b[surface_b.id] == UNREGULATED ):`  
+    - Check if space is existing or altered, set rule applicability check to True: `if ( space_b.status_type == EXISTING ) OR ( space_b.status_type == ALTERED ): rule_applicability_check = TRUE`
 
-        - Get surface type: `surface_type_b = get_opaque_surface_type(surface_b)`
+      - Add to total number of existing or altered spaces in zone: `num_space_existing_altered += 1`
 
-        - Get matching surface from P_RMR: `surface_p = match_data_element(P_RMR, surfaces, surface_b.id)`  
+      - Add to array of zones with existing or altered spaces if not already saved: `if NOT zone_b in undetermined_zone_list: undetermined_zone_list.append(zone_b)`
 
-          **Rule Assertion:**  
+**Rule Assertion - Component:**
 
-          - Case 1: If surface type is roof, floor or above-grade wall, and surface construction U-factor in B_RMR matches P_RMR: `if ( surface_type_b in ["ROOF", "FLOOR", "ABOVE-GRADE WALL"] ) AND ( surface_b.construction.u_factor == surface_p.construction.u_factor ): PASS`
+    - For each zone, if any space in zone is existing or altered: `if num_space_existing_altered > 0: UNDETERMINED"`
 
-          - Case 2: Else if surface type is heated slab-on-grade or unheated slab-on-grade, and surface construction F-factor in B_RMR matches P_RMR: `if ( surface_type_b in ["HEATED SLAB-ON-GRADE", "UNHEATED SLAB-ON-GRADE"] ) AND ( surface_b.construction.f_factor == surface_p.construction.f_factor ): PASS`
+**Rule Assertion - RMR:**
 
-          - Case 3: Else if surface type is below-grade wall, and surface construction C-factor in B_RMR matches P_RMR: `if ( surface_type_b =="BELOW-GRADE WALL" ) AND ( surface_b.construction.c_factor == surface_p.construction.c_factor ): PASS`
+- Case 1: If any zone in B-RMR is ruled as "UNDETERMINED": `UNDETERMINED and raise_message "PART OR ALL OF ZONES LISTED BELOW IS EXISTING OR ALTERED. THE BASELINE VERTICAL FENESTRATION AREA FOR EXISTING ZONES MUST EQUAL TO THE FENESTRATION AREA PRIOR TO THE PROPOSED SCOPE OF WORK. THE BASELINE FENESTRATION AREA IN ZONE MUST BE CHECKED MANUALLY. ${undetermined_zone_list}"`
 
-          - Case 4: Else: `else: FAIL`
+**Applicability Check:** For each building, if no space is existing or altered, rule is not applicable: `if NOT rule_applicability_check: is_applicable = FALSE`
 
+**Notes:**
+
+1. Update Rule ID from 5-22 to 5-18 on 10/26/2023
+2. Update Rule ID from 5-18 to 5-17 on 12/22/2023
+
+**[Back](../_toc.md)**

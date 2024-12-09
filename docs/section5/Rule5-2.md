@@ -2,32 +2,38 @@
 # Envelope - Rule 5-2  
 
 **Rule ID:** 5-2  
-**Rule Description:** Orientation is the same in user model and proposed model.  
-**Appendix G Section:** Section G3.1-5(a) Building Envelope Modeling Requirements for the Proposed building  
-**Appendix G Section Reference:** None  
+**Rule Description:** The building shall be modeled so that it does not shade itself.  
+**Rule Assertion:** Baseline RMD Building: surface.does_cast_shade = expected value  
+**Appendix G Section:** Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building  
+**Appendix G Section Reference:** Table G3.1 Section 5a  
 
-**Applicability:** All required data elements exist for P_RMR  
-**Applicability Checks:** None  
+**Applicability:** All required data elements exist for B_RMD  
+**Applicability Checks:**  None  
 
 **Manual Check:** None  
-**Evaluation Context:** Building  
+**Evaluation Context:** Each Data Element  
 **Data Lookup:** None  
 
 ## Rule Logic:  
 
-- For each building segment in the Proposed model: ```for building_segment_p in P_RMR.building.building_segments:```  
+- For each building segment in the Baseline model: ```for building_segment_b in B_RMD.building.building_segments:```  
+ 
+  - For each zone in building segment: ```zone_b in building_segment_b.zones:```  
 
-  - For each thermal_block in building segment: ```for thermal_block_p in building_segment_p.thermal_blocks:```  
+      - For each surface in zone: ```for surface_b in zone_b.surfaces:```  
 
-    - For each zone in thermal block: ```for zone_p in thermal_block_p.zones:```  
+        - Check that surface is exterior: ```if ( surface_b.adjacent_to == "EXTERIOR" ): exterior_vertical_surface_b = surface_b```  
 
-      - For each surface in zone: ```for surface_p in zone_p.surfaces:```  
+        **Rule Assertion:** Baseline exterior surface does not cast shade:  
 
-        - Get matching surface from U_RMR: ```surface_u = match_data_element(U_RMR, surfaces, surface_p.id)```  
+        - Case 1: ```exterior_vertical_surface_b.does_cast_shade == FALSE: PASS```  
 
-          - If surface azimuth in P_RMR does not match U_RMR, flag surface: ```if surface_p.azimuth != surface_u.azimuth: surface_check.append(surface)```  
+        - Case 2: ```exterior_vertical_surface_b.does_cast_shade == TRUE: FAIL```  
 
-- **Rule Assertion:**  
-  Case 1: All surface azimuth in P_RMR matches U-RMR: ```if len(surface_check) == 0: PASS```  
 
-  Case 2: Else: ```else: FAIL```  
+
+**Notes:**
+
+1. Update Rule ID from 5-3 to 5-2 on 10/26/2023
+
+**[Back](../_toc.md)**
