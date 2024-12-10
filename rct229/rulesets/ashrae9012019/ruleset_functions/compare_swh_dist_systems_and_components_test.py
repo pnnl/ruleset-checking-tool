@@ -1,9 +1,10 @@
+import copy
+
 from rct229.rulesets.ashrae9012019.ruleset_functions.compare_swh_dist_systems_and_components import (
     compare_swh_dist_systems_and_components,
 )
 from rct229.schema.schema_utils import quantify_rmd
 from rct229.schema.validate import schema_validate_rmd
-import copy
 
 TEST_RMD = {
     "id": "test_rmd",
@@ -35,9 +36,6 @@ TEST_RMD = {
                                         }
                                     ],
                                 },
-                                {
-                                    "id": "Space 3",
-                                },
                             ],
                         }
                     ],
@@ -51,9 +49,6 @@ TEST_RMD = {
             "tanks": [
                 {
                     "id": "Tank 1",
-                },
-                {
-                    "id": "Tank 2",
                 },
             ],
             "service_water_piping": [
@@ -77,7 +72,30 @@ TEST_RMD = {
                     "id": "SWH Piping 2",
                 },
             ],
-        }
+        },
+        {
+            "id": "SWH Distribution 2",
+            "tanks": [
+                {
+                    "id": "Tank 2",
+                },
+            ],
+            "service_water_piping": [
+                {
+                    "id": "SWH Piping 2",
+                    "child": [
+                        {
+                            "id": "SWH Piping Child 2",
+                            "child": [
+                                {
+                                    "id": "SWH Piping 2-a",
+                                }
+                            ],
+                        }
+                    ],
+                },
+            ],
+        },
     ],
     "pumps": [
         {
@@ -127,17 +145,55 @@ TEST_RPD_FULL = {
 TEST_RMD = quantify_rmd(TEST_RPD_FULL)["ruleset_model_descriptions"][0]
 
 
-def test__TEST_RPD_FIXED_TYPE__is_valid():
+TEST_RMD_COPIED = copy.deepcopy(TEST_RMD)
+
+# Change the IDs
+TEST_RMD_COPIED["service_water_heating_distribution_systems"][1][
+    "service_water_piping"
+][0]["id"] = "SWH Piping a"
+TEST_RMD_COPIED["pumps"][1]["loop_or_piping"] = "SWH Piping a"
+TEST_RMD_COPIED["service_water_heating_distribution_systems"][1][
+    "service_water_piping"
+][0]["child"][0]["id"] = "SWH Piping Child a"
+TEST_RMD_COPIED["service_water_heating_equipment"][1]["solar_thermal_systems"][0][
+    "id"
+] = "Solar Thermal System a"
+
+TEST_RPD_COPIED_FULL = {
+    "id": "229",
+    "ruleset_model_descriptions": [TEST_RMD_COPIED],
+    "data_timestamp": "2024-02-12T09:00Z",
+}
+
+TEST_RMD_COPIED = quantify_rmd(TEST_RPD_COPIED_FULL)["ruleset_model_descriptions"][0]
+
+
+def test__TEST_RPD__is_valid():
     schema_validation_result = schema_validate_rmd(TEST_RPD_FULL)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
 
 
-def test__get_aggregated_zone_hvac_fan_operating_schedule__correct_mapping():
+def test__TEST_RPD_Copied__is_valid():
+    schema_validation_result = schema_validate_rmd(TEST_RPD_COPIED_FULL)
+    assert schema_validation_result[
+        "passed"
+    ], f"Schema error: {schema_validation_result['error']}"
+
+
+def test__compare_swh_dist_systems_and_components__all_match():
     assert (
         compare_swh_dist_systems_and_components(
-            TEST_RMD, TEST_RMD, "test", "SWH Distribution 1"
+            TEST_RMD, TEST_RMD, "AppG Used By TCDs", "SWH Distribution 1"
         )
         == []
     )
+
+
+def test__compare_swh_dist_systems_and_components__pump_not_matched():
+    assert compare_swh_dist_systems_and_components(
+        TEST_RMD, TEST_RMD_COPIED, "AppG Used By TCDs", "SWH Distribution 2"
+    ) == [
+        "path: $.pumps[*].loop_or_piping: index context data: SWH Piping a does not equal to compare context data: SWH Piping 2"
+    ]  # Although solar_thermal_system id doesn't match, this error message isn't included in the output list because the value of `AppG Used By TCDs` under the `service_water_heating_equipment` in the extra schema is `unknown`

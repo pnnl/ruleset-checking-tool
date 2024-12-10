@@ -24,8 +24,9 @@ def compare_swh_dist_systems_and_components(
     rmd2: dict
         RMD at RuleSetModelDescription level
     compare_context_str: str
+        compare context value from the extra schema (e.g., RMD Test, AppG Used By TCDs, AppG P_RMD Equals U_RMD, AppG B_RMD Equals P_RMD, AppG B_RMDs Same)
     swh_distribution_id: str
-
+        id of the `service_water_heating_distribution_systems` key to compare
 
     Returns
     -------
@@ -34,7 +35,7 @@ def compare_swh_dist_systems_and_components(
 
     """
 
-    errors = []
+    errors_list = []
     rmd1_swh_system_and_equip_dict = (
         get_swh_equipment_associated_with_each_swh_distribution_system(rmd1)
     )
@@ -60,20 +61,20 @@ def compare_swh_dist_systems_and_components(
         rmd2, swh_distribution_id
     )
 
-    index_content_list, compare_context_list = (
+    index_content_dict, compare_context_dict = (
         (rmd1_swh_distribution, rmd2_swh_distribution)
         if len(rmd1_swh_distribution) > len(rmd2_swh_distribution)
         else (rmd2_swh_distribution, rmd1_swh_distribution)
     )
 
     compare_context_pair(
-        index_context=index_content_list,
-        compare_context=compare_context_list,
-        element_json_path="",
+        index_context=index_content_dict,
+        compare_context=compare_context_dict,
+        element_json_path="$.service_water_heating_distribution_systems[*]",
         extra_schema=EXTRA_SCHEMA["ServiceWaterHeatingDistributionSystem"][
             "Data Elements"
         ],
-        error_msg_list=errors,
+        error_msg_list=errors_list,
         search_key=compare_context_str,
         required_equal=True,
     )
@@ -89,18 +90,18 @@ def compare_swh_dist_systems_and_components(
         swh_eq_1 = find_exactly_one_service_water_heating_equipment(rmd1, swh_eq_id)
         swh_eq_2 = find_exactly_one_service_water_heating_equipment(rmd2, swh_eq_id)
 
-        index_content_list, compare_context_list = (
+        index_content_dict, compare_context_dict = (
             (swh_eq_1, swh_eq_2)
             if len(swh_eq_1) > len(swh_eq_2)
             else (swh_eq_2, swh_eq_1)
         )
 
         compare_context_pair(
-            index_context=index_content_list,
-            compare_context=compare_context_list,
-            element_json_path="",
+            index_context=index_content_dict,
+            compare_context=compare_context_dict,
+            element_json_path="$.service_water_heating_equipment[*]",
             extra_schema=EXTRA_SCHEMA["ServiceWaterHeatingEquipment"]["Data Elements"],
-            error_msg_list=errors,
+            error_msg_list=errors_list,
             search_key=compare_context_str,
             required_equal=True,
         )
@@ -115,18 +116,18 @@ def compare_swh_dist_systems_and_components(
         pump_1 = find_exactly_one_pump(rmd1, pump_id)
         pump_2 = find_exactly_one_pump(rmd2, pump_id)
 
-        index_content_list, compare_context_list = (
+        index_content_dict, compare_context_dict = (
             (pump_1, pump_2) if len(pump_1) > len(pump_2) else (pump_2, pump_1)
         )
 
         compare_context_pair(
-            index_context=index_content_list,
-            compare_context=compare_context_list,
-            element_json_path="",
+            index_context=index_content_dict,
+            compare_context=compare_context_dict,
+            element_json_path="$.pumps[*]",
             extra_schema=EXTRA_SCHEMA["Pump"]["Data Elements"],
-            error_msg_list=errors,
+            error_msg_list=errors_list,
             search_key=compare_context_str,
             required_equal=True,
         )
 
-    return errors
+    return errors_list
