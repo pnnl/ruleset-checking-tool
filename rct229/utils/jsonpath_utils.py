@@ -101,5 +101,5 @@ def format_jsonpath_with_id(input_list):
     if not input_list:
         return
     # Replace the last item in the list with 'id'
-    input_list = input_list[:-1] + ['id']
+    input_list = input_list[:-1] + ["id"]
     return convert_absolute_path_list_to_jsonpath(input_list)

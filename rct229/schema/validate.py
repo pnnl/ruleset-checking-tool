@@ -9,7 +9,7 @@ from rct229.utils.jsonpath_utils import (
     find_all,
     find_all_by_jsonpaths,
     convert_absolute_path_list_to_jsonpath,
-    format_jsonpath_with_id
+    format_jsonpath_with_id,
 )
 
 file_dir = os.path.dirname(__file__)
@@ -464,9 +464,18 @@ def schema_validate_rpd(rpd):
     registry = Registry().with_resources(
         [
             ("ASHRAE229.schema.json", DRAFT7.create_resource(schema)),
-            ("Enumerations2019ASHRAE901.schema.json", DRAFT7.create_resource(schema_enum)),
-            ("Enumerations2019T24.schema.json", DRAFT7.create_resource(schema_t24_enum)),
-            ("EnumerationsRESNET.schema.json", DRAFT7.create_resource(schema_resnet_enum)),
+            (
+                "Enumerations2019ASHRAE901.schema.json",
+                DRAFT7.create_resource(schema_enum),
+            ),
+            (
+                "Enumerations2019T24.schema.json",
+                DRAFT7.create_resource(schema_t24_enum),
+            ),
+            (
+                "EnumerationsRESNET.schema.json",
+                DRAFT7.create_resource(schema_resnet_enum),
+            ),
             ("Output2019ASHRAE901.schema.json", DRAFT7.create_resource(schema_output)),
         ]
     )
@@ -480,17 +489,21 @@ def schema_validate_rpd(rpd):
             error_details = []
             for error in errors:
                 # Convert absolute paths to JSONPath format
-                error_path = convert_absolute_path_list_to_jsonpath(list(error.absolute_path))
+                error_path = convert_absolute_path_list_to_jsonpath(
+                    list(error.absolute_path)
+                )
                 parent_id_path = format_jsonpath_with_id(list(error.absolute_path))
                 parent_id = find_all(parent_id_path, rpd) if parent_id_path else ""
 
                 # Construct the error message
                 parent_id = parent_id[0] if parent_id else parent_id
-                truncated_message = (error.message[:20] + '..........' + error.message[-130:]) if len(
-                    error.message) > 160 else error.message
-                error_message = (
-                        f"{truncated_message}. Path: {error_path}." +
-                        (f" Parent ID: {parent_id}" if parent_id else "")
+                truncated_message = (
+                    (error.message[:20] + ".........." + error.message[-130:])
+                    if len(error.message) > 160
+                    else error.message
+                )
+                error_message = f"{truncated_message}. Path: {error_path}." + (
+                    f" Parent ID: {parent_id}" if parent_id else ""
                 )
                 error_details.append(error_message)
 
