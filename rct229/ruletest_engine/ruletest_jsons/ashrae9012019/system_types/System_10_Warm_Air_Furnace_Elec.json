@@ -36,9 +36,11 @@
                                     "fan_system": {
                                         "id": "Fan System 1",
                                         "fan_control": "CONSTANT",
-                                        "fan": {
-                                            "id": "Fan 1"
-                                        }
+                                        "supply_fans": [
+                                            {
+                                                "id": "Fan 1"
+                                            }
+                                        ]
                                     }
                                 }
                             ]
