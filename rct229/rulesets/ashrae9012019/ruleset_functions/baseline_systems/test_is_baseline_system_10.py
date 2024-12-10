@@ -7,7 +7,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_s
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.is_baseline_system_10 import (
     is_baseline_system_10,
 )
-from rct229.schema.validate import schema_validate_rmd
+from rct229.schema.validate import schema_validate_rpd
 
 # The first logic means the first half of the `is_baseline_system_10'. The first logic is used when there are NO preheat/heating and fan systems.
 # The second logic means the second half of the `is_baseline_system_10'. The second logic is used when there is NO preheat system and there is heating/fan systems.
@@ -114,14 +114,14 @@ SYS_10_SECOND_LOGIC_TEST_RMD = {
 
 
 def test__TEST_RMD_baseline_system_10__is_first_logic_valid():
-    schema_validation_result = schema_validate_rmd(SYS_10_FIRST_LOGIC_TEST_RMD)
+    schema_validation_result = schema_validate_rpd(SYS_10_FIRST_LOGIC_TEST_RMD)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
 
 
 def test__TEST_RMD_baseline_system_10__is_second_logic_valid():
-    schema_validation_result = schema_validate_rmd(SYS_10_FIRST_LOGIC_TEST_RMD)
+    schema_validation_result = schema_validate_rpd(SYS_10_FIRST_LOGIC_TEST_RMD)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"

@@ -2,7 +2,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_lab_zone_hvac_systems i
     get_lab_zone_hvac_systems,
 )
 from rct229.schema.schema_utils import quantify_rmd
-from rct229.schema.validate import schema_validate_rmd
+from rct229.schema.validate import schema_validate_rpd
 
 TEST_RMD_B_ALL_ZONES_G311D_ONE_SYSTEM = {
     "id": "test_rmd",
@@ -515,21 +515,21 @@ TEST_RMD_UNIT_P = quantify_rmd(TEST_RMD_P)["ruleset_model_descriptions"][0]
 
 
 def test__TEST_RMD_B_ALL_ZONES_G311D_ONE_SYSTEM__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RMD_B_FULL_G311D_ONE_SYS)
+    schema_validation_result = schema_validate_rpd(TEST_RMD_B_FULL_G311D_ONE_SYS)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
 
 
 def test__TEST_RMD_B_ALL_ZONES_G311D_ONE_SYSTEM2_TWO_SYSTEMS__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RMD_B_FULL_G311D_TWO_SYS)
+    schema_validation_result = schema_validate_rpd(TEST_RMD_B_FULL_G311D_TWO_SYS)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
 
 
 def test__TEST_RMD_P_is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RMD_P)
+    schema_validation_result = schema_validate_rpd(TEST_RMD_P)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
