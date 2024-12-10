@@ -48,6 +48,25 @@ def find_exactly_one_terminal_unit(rmd: dict, terminal_unit_id: str) -> dict:
     )
 
 
+def find_exactly_one_building_segment(rmd: dict, bldg_seg_id: str) -> dict:
+    """
+    Search for the building segment data group in a ruleset model description by matching bldg_seg_id
+    Raise exception if no matching building segment
+
+    Parameters
+    ----------
+    rmd: json
+    bldg_seg_id: str
+
+    Returns: json
+    -------
+
+    """
+    return find_exactly_one_with_field_value(
+        "$.buildings[*].building_segments[*]", "id", bldg_seg_id, rmd
+    )
+
+
 def find_exactly_one_zone(rmd: dict, zone_id: str) -> dict:
     """
     Search for the zone data group in a ruleset model description by matching zone_id
