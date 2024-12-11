@@ -33,7 +33,6 @@ Logic:
     - get the actual distribution equipment associated with this ID from model 2: `RMD2_swh_distribution = get_component_by_id(RMD2, swh_distribution_id)`
   - otherwise...: `else:`
     -  add an error an error to the list: `errors.append("SWH Distribution System " + swh_distribution_id + " not found in one of the two RMDs")`
-    -  Go to rule evaluation: `GO TO RULE EVALUATION`
 
 
   - the following two lines set the longer of the two swh_distribution lists to the index_content_list and the shorter to the compare_context_list
