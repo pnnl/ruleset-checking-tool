@@ -23,7 +23,8 @@ class Section22Rule35(RuleDefinitionListIndexedBase):
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.10 Chilled-Water Pumps (Systems 7, 8, 11, 12, and 13)",
             is_primary_rule=False,
-            list_path="ruleset_model_descriptions[0]")
+            list_path="ruleset_model_descriptions[0]",
+        )
 
     class RulesetModelInstanceRule(PartialRuleDefinition):
         def __init__(self):
@@ -34,7 +35,6 @@ class Section22Rule35(RuleDefinitionListIndexedBase):
                 manual_check_required_msg="Manual Check Required - Baseline is modeled with purchased chilled water. Make "
                 "sure baseline systems served by purchased chilled water are not modeled with chilled water reset.",
                 not_applicable_msg="Rule 22-35 Not Applicable - the baseline is not modeled with Purchased Chilled Water",
-
             )
 
         def applicability_check(self, context, calc_vals, data):
