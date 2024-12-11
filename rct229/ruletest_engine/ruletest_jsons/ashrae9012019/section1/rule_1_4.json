@@ -511,8 +511,8 @@
                         ],
                         "output": {
                             "id": "Output 1",
-                            "performance_cost_index": 0.5,
-                            "performance_cost_index_target": 0.65
+                            "performance_cost_index": 0.57,
+                            "performance_cost_index_target": 0.7
                         },
                         "type": "USER"
                     }
@@ -555,8 +555,8 @@
                         ],
                         "output": {
                             "id": "Output 1",
-                            "performance_cost_index": 0.5,
-                            "performance_cost_index_target": 0.75
+                            "performance_cost_index": 0.55,
+                            "performance_cost_index_target": 0.7
                         },
                         "type": "PROPOSED"
                     }
@@ -600,7 +600,7 @@
                         "output": {
                             "id": "Output 1",
                             "performance_cost_index": 0.5,
-                            "performance_cost_index_target": 0.6
+                            "performance_cost_index_target": 0.7
                         },
                         "type": "BASELINE_0"
                     }
