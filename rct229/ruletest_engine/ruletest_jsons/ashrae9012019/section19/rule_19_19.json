@@ -193,11 +193,7 @@
                                                         "id": "Air Terminal",
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10",
-                                                        "heating_source": "ELECTRIC",
-                                                        "fan": {
-                                                            "id": "Terminal Fan 1"
-                                                        }
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10"
                                                     }
                                                 ]
                                             }
@@ -205,6 +201,11 @@
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "System 10",
+                                                "heating_system": {
+                                                    "id": "Furnace Coil 1",
+                                                    "type": "ELECTRIC_RESISTANCE",
+                                                    "energy_source_type": "ELECTRICITY"
+                                                },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
@@ -249,11 +250,7 @@
                                                         "id": "Air Terminal",
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10",
-                                                        "heating_source": "ELECTRIC",
-                                                        "fan": {
-                                                            "id": "Terminal Fan 1"
-                                                        }
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10"
                                                     }
                                                 ],
                                                 "zonal_exhaust_fan": {
@@ -266,6 +263,11 @@
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "System 10",
+                                                "heating_system": {
+                                                    "id": "Furnace Coil 1",
+                                                    "type": "ELECTRIC_RESISTANCE",
+                                                    "energy_source_type": "ELECTRICITY"
+                                                },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
@@ -349,11 +351,7 @@
                                                         "id": "Air Terminal",
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10",
-                                                        "heating_source": "ELECTRIC",
-                                                        "fan": {
-                                                            "id": "Terminal Fan 1"
-                                                        }
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10"
                                                     }
                                                 ]
                                             }
@@ -361,6 +359,11 @@
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "System 10",
+                                                "heating_system": {
+                                                    "id": "Furnace Coil 1",
+                                                    "type": "ELECTRIC_RESISTANCE",
+                                                    "energy_source_type": "ELECTRICITY"
+                                                },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
@@ -405,11 +408,7 @@
                                                         "id": "Air Terminal",
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10",
-                                                        "heating_source": "ELECTRIC",
-                                                        "fan": {
-                                                            "id": "Terminal Fan 1"
-                                                        }
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10"
                                                     }
                                                 ],
                                                 "zonal_exhaust_fan": {
@@ -422,6 +421,11 @@
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "System 10",
+                                                "heating_system": {
+                                                    "id": "Furnace Coil 1",
+                                                    "type": "ELECTRIC_RESISTANCE",
+                                                    "energy_source_type": "ELECTRICITY"
+                                                },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
@@ -511,11 +515,7 @@
                                                         "id": "Air Terminal",
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10",
-                                                        "heating_source": "ELECTRIC",
-                                                        "fan": {
-                                                            "id": "Terminal Fan 1"
-                                                        }
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10"
                                                     }
                                                 ],
                                                 "non_mechanical_cooling_fan_airflow": 117.98686079999996
@@ -524,6 +524,11 @@
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "System 10",
+                                                "heating_system": {
+                                                    "id": "Furnace Coil 1",
+                                                    "type": "ELECTRIC_RESISTANCE",
+                                                    "energy_source_type": "ELECTRICITY"
+                                                },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
@@ -568,11 +573,7 @@
                                                         "id": "Air Terminal",
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10",
-                                                        "heating_source": "ELECTRIC",
-                                                        "fan": {
-                                                            "id": "Terminal Fan 1"
-                                                        }
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10"
                                                     }
                                                 ],
                                                 "zonal_exhaust_fan": {
@@ -585,6 +586,11 @@
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "System 10",
+                                                "heating_system": {
+                                                    "id": "Furnace Coil 1",
+                                                    "type": "ELECTRIC_RESISTANCE",
+                                                    "energy_source_type": "ELECTRICITY"
+                                                },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
@@ -634,7 +640,7 @@
         "Section": 19,
         "Rule": 19,
         "Test": "e",
-        "test_description": "The project has one building segment with one zone served by a baseline system type 10. The system has one of each of a supply, return, exhaust, and relief fan as well as a zonal exhaust fan. Each of the 5 fans has 80 W design electric power for a total of 400 W with 800 cfm of design supply airflow.",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 10. The system has one of each of a supply, return, exhaust, and relief fan as well as a zonal exhaust fan. Each of the 5 fans has 80 W design electric power for a total of 400 W with 2000 cfm of design supply airflow.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "fails with a conservative outcome. The fan power airflow (W/cfm) for",
         "standard": {
@@ -668,11 +674,7 @@
                                                         "id": "Air Terminal",
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10",
-                                                        "heating_source": "ELECTRIC",
-                                                        "fan": {
-                                                            "id": "Terminal Fan 1"
-                                                        }
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10"
                                                     }
                                                 ]
                                             }
@@ -680,6 +682,11 @@
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "System 10",
+                                                "heating_system": {
+                                                    "id": "Furnace Coil 1",
+                                                    "type": "ELECTRIC_RESISTANCE",
+                                                    "energy_source_type": "ELECTRICITY"
+                                                },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
@@ -724,11 +731,7 @@
                                                         "id": "Air Terminal",
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10",
-                                                        "heating_source": "ELECTRIC",
-                                                        "fan": {
-                                                            "id": "Terminal Fan 1"
-                                                        }
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10"
                                                     }
                                                 ],
                                                 "zonal_exhaust_fan": {
@@ -741,6 +744,11 @@
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "System 10",
+                                                "heating_system": {
+                                                    "id": "Furnace Coil 1",
+                                                    "type": "ELECTRIC_RESISTANCE",
+                                                    "energy_source_type": "ELECTRICITY"
+                                                },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
@@ -749,7 +757,7 @@
                                                             "id": "Supply Fan 1",
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 80,
-                                                            "design_airflow": 755.1159091199997
+                                                            "design_airflow": 943.8948863999997
                                                         }
                                                     ],
                                                     "return_fans": [
