@@ -24,8 +24,7 @@ class Section21Rule2(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1.1.3 Baseline HVAC System Requirements for Systems Utilizing Purchased "
             "Chilled Water and/or Purchased Heat",
             is_primary_rule=False,
-            list_path="ruleset_model_descriptions[0]"
-
+            list_path="ruleset_model_descriptions[0]",
         )
 
     class RulesetModelInstanceRule(PartialRuleDefinition):
@@ -35,9 +34,9 @@ class Section21Rule2(RuleDefinitionListIndexedBase):
                     USER=False, BASELINE_0=False, PROPOSED=True
                 ),
                 manual_check_required_msg="Manual Check Required - Proposed is modeled with purchased hot water or steam.  "
-                                          "Make sure the baseline model uses the same number of pumps for the heating loop.",
+                "Make sure the baseline model uses the same number of pumps for the heating loop.",
                 not_applicable_msg="Rule 21-2 Not Applicable - the proposed is not modeled with Purchased Hot Water or "
-                                   "Steam"
+                "Steam",
             )
 
         def applicability_check(self, context, calc_vals, data):
