@@ -702,7 +702,8 @@ def evaluate_outcome_object(outcome_dict, test_result_dict, test_dict, test_id):
             )
 
             test_result_dict["log"].append(
-                f"{outcome_result_context}: Calculated values - {outcome_calc_vals_string}"
+                # Append calculations but cap length of string to avoid printing long arrays
+                f"{outcome_result_context}: Calculated values - {outcome_calc_vals_string[:300]}"
             )
 
         test_result_dict[f"{test_id}"].append(received_expected_outcome)
