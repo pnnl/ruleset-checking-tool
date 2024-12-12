@@ -147,7 +147,7 @@ TEST_RMD = quantify_rmd(TEST_RPD_FULL)["ruleset_model_descriptions"][0]
 
 TEST_RMD_COPIED = copy.deepcopy(TEST_RMD)
 
-# Change the IDs
+# Change the values
 TEST_RMD_COPIED["service_water_heating_distribution_systems"][1][
     "service_water_piping"
 ][0]["id"] = "SWH Piping a"
@@ -167,6 +167,35 @@ TEST_RPD_COPIED_FULL = {
 
 TEST_RMD_COPIED = quantify_rmd(TEST_RPD_COPIED_FULL)["ruleset_model_descriptions"][0]
 
+# Make a copy of another RMD to test the different swh_equipment length
+TEST_RMD_COPIED_DIFF_SWH_EQUIP_LEN = copy.deepcopy(TEST_RMD)
+
+TEST_RMD_COPIED_DIFF_SWH_EQUIP_LEN["service_water_heating_equipment"].append(
+    {
+        "id": "SWH Equipment 3",
+        "distribution_system": "SWH Distribution 2",
+        "solar_thermal_systems": [
+            {
+                "id": "Solar Thermal System 3",
+            },
+            {
+                "id": "Solar Thermal System 4",
+            },
+        ],
+    }
+)
+
+
+TEST_RPD_COPIED_DIFF_SWH_EQUIP_LEN_FULL = {
+    "id": "229",
+    "ruleset_model_descriptions": [TEST_RMD_COPIED_DIFF_SWH_EQUIP_LEN],
+    "data_timestamp": "2024-02-12T09:00Z",
+}
+
+TEST_RMD_COPIED_DIFF_SWH_EQUIP_LEN_FULL = quantify_rmd(
+    TEST_RPD_COPIED_DIFF_SWH_EQUIP_LEN_FULL
+)["ruleset_model_descriptions"][0]
+
 
 def test__TEST_RPD__is_valid():
     schema_validation_result = schema_validate_rmd(TEST_RPD_FULL)
@@ -177,6 +206,15 @@ def test__TEST_RPD__is_valid():
 
 def test__TEST_RPD_Copied__is_valid():
     schema_validation_result = schema_validate_rmd(TEST_RPD_COPIED_FULL)
+    assert schema_validation_result[
+        "passed"
+    ], f"Schema error: {schema_validation_result['error']}"
+
+
+def test__TEST_RPD_Copied_diff_len__is_valid():
+    schema_validation_result = schema_validate_rmd(
+        TEST_RPD_COPIED_DIFF_SWH_EQUIP_LEN_FULL
+    )
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
@@ -195,5 +233,16 @@ def test__compare_swh_dist_systems_and_components__pump_not_matched():
     assert compare_swh_dist_systems_and_components(
         TEST_RMD, TEST_RMD_COPIED, "AppG Used By TCDs", "SWH Distribution 2"
     ) == [
-        "path: $.pumps[*].loop_or_piping: index context data: SWH Piping a does not equal to compare context data: SWH Piping 2"
+        "path: $.pumps[Pump 2].loop_or_piping: index context data: SWH Piping 2 does not equal to compare context data: SWH Piping a"
     ]  # Although solar_thermal_system id doesn't match, this error message isn't included in the output list because the value of `AppG Used By TCDs` under the `service_water_heating_equipment` in the extra schema is `unknown`
+
+
+def test__compare_swh_dist_systems_and_components__diff_swh_equipment_length():
+    assert compare_swh_dist_systems_and_components(
+        TEST_RMD,
+        TEST_RMD_COPIED_DIFF_SWH_EQUIP_LEN,
+        "AppG Used By TCDs",
+        "SWH Distribution 2",
+    ) == [
+        "Unequal numbers of SWH Equipment between the two models for SWH Distribution 2"
+    ]
