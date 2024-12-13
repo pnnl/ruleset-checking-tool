@@ -103,7 +103,6 @@ def compare_swh_dist_systems_and_components(
             )
 
     # pumps
-
     if len(rmd1_swh_equipment_dict.pumps) != len(rmd2_swh_equipment_dict.pumps):
         errors_list.append(
             f"Unequal number of pumps in the two models for SWH Distribution System {swh_distribution_id}"
