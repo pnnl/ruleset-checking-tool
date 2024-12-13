@@ -45190,7 +45190,6 @@
                 {
                     "id": "HW Pump 1",
                     "loop_or_piping": "Boiler Loop 1",
-                    "specification_method": "SIMPLE",
                     "design_electric_power": 380,
                     "speed_control": "VARIABLE_SPEED",
                     "design_flow": 1.26,
@@ -45199,7 +45198,6 @@
                 {
                     "id": "HW Pump 2",
                     "loop_or_piping": "Boiler Loop 1",
-                    "specification_method": "SIMPLE",
                     "design_electric_power": 380,
                     "speed_control": "VARIABLE_SPEED",
                     "design_flow": 1.26,
@@ -45208,7 +45206,6 @@
                 {
                     "id": "Primary CHW Pump 1",
                     "loop_or_piping": "Primary CHW Loop",
-                    "specification_method": "SIMPLE",
                     "design_electric_power": 380,
                     "speed_control": "FIXED_SPEED",
                     "design_flow": 2.66,
@@ -45217,7 +45214,6 @@
                 {
                     "id": "Primary CHW Pump 2",
                     "loop_or_piping": "Primary CHW Loop",
-                    "specification_method": "SIMPLE",
                     "design_electric_power": 380,
                     "speed_control": "FIXED_SPEED",
                     "design_flow": 2.66,
@@ -45226,7 +45222,6 @@
                 {
                     "id": "Secondary CHW Pump",
                     "loop_or_piping": "Secondary CHW Loop",
-                    "specification_method": "SIMPLE",
                     "design_electric_power": 1096,
                     "speed_control": "VARIABLE_SPEED",
                     "design_flow": 5.32,
@@ -45235,7 +45230,6 @@
                 {
                     "id": "CW Pump",
                     "loop_or_piping": "CW Loop",
-                    "specification_method": "SIMPLE",
                     "design_electric_power": 380,
                     "speed_control": "VARIABLE_SPEED",
                     "design_flow": 1.26,
