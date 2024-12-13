@@ -3,19 +3,19 @@
         "Section": 19,
         "Rule": 15,
         "Test": "a",
-        "test_description": "The project has one building segment with one zone. Baseline system type 10, minimum ventilation does not exceed auto-sized airflow rates. Supply airflow rates are correctly based on the temperature difference between 105F and the design space-heating temperature set point. Expected outcome: PASS",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 10. The system minimum outdoor airflow does not exceed auto-sized supply airflow rates. Supply airflow rates are based on the temperature difference between 105F and the design space-heating temperature set point.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-15",
             "ruleset_reference": "G3.1.2.8.2",
-            "rule_description": "For baseline system types 9 & 10, the system design supply airflow rates  shall be based on the temperature difference between a supply air temperature set point of 105\u00b0F and the design space-heating temperature set point, the minimum outdoor airflow rate, or the airflow rate required to comply with applicable codes or accreditation standards, whichever is greater.",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "For baseline system types 9 & 10, the system design supply airflow rates shall be based on the temperature difference between a supply air temperature set point of 105\u00b0F and the design space-heating temperature set point, the minimum outdoor airflow rate, or the airflow rate required to comply with applicable codes or accreditation standards, whichever is greater.",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -25,25 +25,18 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10",
-                                                        "heating_source": "ELECTRIC",
-                                                        "fan": {
-                                                            "id": "Terminal Fan 1"
-                                                        }
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10"
                                                     }
                                                 ]
                                             }
@@ -52,8 +45,8 @@
                                             {
                                                 "id": "System 10",
                                                 "heating_system": {
-                                                    "id": "Heating Coil 1",
-                                                    "type": "FURNACE",
+                                                    "id": "Furnace Coil 1",
+                                                    "type": "ELECTRIC_RESISTANCE",
                                                     "energy_source_type": "ELECTRICITY"
                                                 },
                                                 "fan_system": {
@@ -94,27 +87,18 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 10",
-                                                        "heating_source": "ELECTRIC",
-                                                        "fan": {
-                                                            "id": "Terminal Fan 1",
-                                                            "specification_method": "SIMPLE",
-                                                            "design_electric_power": 25
-                                                        },
                                                         "primary_airflow": 117.98686079999996,
                                                         "supply_design_heating_setpoint_temperature": 40.5555555555556
                                                     }
@@ -132,8 +116,8 @@
                                             {
                                                 "id": "System 10",
                                                 "heating_system": {
-                                                    "id": "Heating Coil 1",
-                                                    "type": "FURNACE",
+                                                    "id": "Furnace Coil 1",
+                                                    "type": "ELECTRIC_RESISTANCE",
                                                     "energy_source_type": "ELECTRICITY"
                                                 },
                                                 "fan_system": {
@@ -173,19 +157,19 @@
         "Section": 19,
         "Rule": 15,
         "Test": "b",
-        "test_description": "The project has one building segment with one zone. Baseline system type 10, minimum ventilation does not exceed auto-sized airflow rates. Supply airflow rates are incorrectly based on a supply-air-to-room temperature set-point difference of 20F. Expected outcome: FAIL",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 10. The system minimum outdoor airflow does not exceed auto-sized supply airflow rates. Supply airflow rates are based on a supply-air-to-room temperature set-point difference of 20F.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-15",
             "ruleset_reference": "G3.1.2.8.2",
-            "rule_description": "For baseline system types 9 & 10, the system design supply airflow rates  shall be based on the temperature difference between a supply air temperature set point of 105\u00b0F and the design space-heating temperature set point, the minimum outdoor airflow rate, or the airflow rate required to comply with applicable codes or accreditation standards, whichever is greater.",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "For baseline system types 9 & 10, the system design supply airflow rates shall be based on the temperature difference between a supply air temperature set point of 105\u00b0F and the design space-heating temperature set point, the minimum outdoor airflow rate, or the airflow rate required to comply with applicable codes or accreditation standards, whichever is greater.",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -195,25 +179,18 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10",
-                                                        "heating_source": "ELECTRIC",
-                                                        "fan": {
-                                                            "id": "Terminal Fan 1"
-                                                        }
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10"
                                                     }
                                                 ]
                                             }
@@ -222,8 +199,8 @@
                                             {
                                                 "id": "System 10",
                                                 "heating_system": {
-                                                    "id": "Heating Coil 1",
-                                                    "type": "FURNACE",
+                                                    "id": "Furnace Coil 1",
+                                                    "type": "ELECTRIC_RESISTANCE",
                                                     "energy_source_type": "ELECTRICITY"
                                                 },
                                                 "fan_system": {
@@ -264,27 +241,18 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 10",
-                                                        "heating_source": "ELECTRIC",
-                                                        "fan": {
-                                                            "id": "Terminal Fan 1",
-                                                            "specification_method": "SIMPLE",
-                                                            "design_electric_power": 25
-                                                        },
                                                         "primary_airflow": 117.98686079999996,
                                                         "supply_design_heating_setpoint_temperature": 29.444444444444457
                                                     }
@@ -302,8 +270,8 @@
                                             {
                                                 "id": "System 10",
                                                 "heating_system": {
-                                                    "id": "Heating Coil 1",
-                                                    "type": "FURNACE",
+                                                    "id": "Furnace Coil 1",
+                                                    "type": "ELECTRIC_RESISTANCE",
                                                     "energy_source_type": "ELECTRICITY"
                                                 },
                                                 "fan_system": {
@@ -343,19 +311,19 @@
         "Section": 19,
         "Rule": 15,
         "Test": "c",
-        "test_description": "The project has one building segment with one zone. Baseline system type 9, minimum ventilation exceeds the auto-sized airflow rates. Supply airflow rates are correctly based on the minimum ventilation airflow rates. Expected outcome: PASS",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 9. The system minimum outdoor airflow exceeds the auto-sized supply airflow rates. Supply airflow rates are based on the system minimum outdoor airflow rates.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-15",
             "ruleset_reference": "G3.1.2.8.2",
-            "rule_description": "For baseline system types 9 & 10, the system design supply airflow rates  shall be based on the temperature difference between a supply air temperature set point of 105\u00b0F and the design space-heating temperature set point, the minimum outdoor airflow rate, or the airflow rate required to comply with applicable codes or accreditation standards, whichever is greater.",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "For baseline system types 9 & 10, the system design supply airflow rates shall be based on the temperature difference between a supply air temperature set point of 105\u00b0F and the design space-heating temperature set point, the minimum outdoor airflow rate, or the airflow rate required to comply with applicable codes or accreditation standards, whichever is greater.",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -365,15 +333,12 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -430,15 +395,12 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -503,19 +465,19 @@
         "Section": 19,
         "Rule": 15,
         "Test": "d",
-        "test_description": "The project has one building segment with one zone. Baseline system type 9, minimum ventilation exceeds the auto-sized airflow rates. Supply airflow rates are incorrectly based on the temperature difference between 105F and the design space-heating temperature set point. Expected outcome: FAIL",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 9. The system minimum outdoor airflow exceeds the auto-sized supply airflow rates. Supply airflow rates are based on the temperature difference between 105F and the design space-heating temperature set point.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-15",
             "ruleset_reference": "G3.1.2.8.2",
-            "rule_description": "For baseline system types 9 & 10, the system design supply airflow rates  shall be based on the temperature difference between a supply air temperature set point of 105\u00b0F and the design space-heating temperature set point, the minimum outdoor airflow rate, or the airflow rate required to comply with applicable codes or accreditation standards, whichever is greater.",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "For baseline system types 9 & 10, the system design supply airflow rates shall be based on the temperature difference between a supply air temperature set point of 105\u00b0F and the design space-heating temperature set point, the minimum outdoor airflow rate, or the airflow rate required to comply with applicable codes or accreditation standards, whichever is greater.",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -525,15 +487,12 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -590,15 +549,12 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -663,19 +619,20 @@
         "Section": 19,
         "Rule": 15,
         "Test": "e",
-        "test_description": "The project has one building segment with one zone. Baseline system type 9 with more than one supply fan. Expected outcome: UNDETERMINED",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 9. The baseline system includes more than one supply fan.",
         "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "doesn't have one supply fan associated with the HVAC system in the baseline and therefore this check could not be conducted for this HVAC sytem. Conduct manual check for compliance with G3.1.2.8.2.",
         "standard": {
             "rule_id": "19-15",
             "ruleset_reference": "G3.1.2.8.2",
-            "rule_description": "For baseline system types 9 & 10, the system design supply airflow rates  shall be based on the temperature difference between a supply air temperature set point of 105\u00b0F and the design space-heating temperature set point, the minimum outdoor airflow rate, or the airflow rate required to comply with applicable codes or accreditation standards, whichever is greater.",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "For baseline system types 9 & 10, the system design supply airflow rates shall be based on the temperature difference between a supply air temperature set point of 105\u00b0F and the design space-heating temperature set point, the minimum outdoor airflow rate, or the airflow rate required to comply with applicable codes or accreditation standards, whichever is greater.",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -685,15 +642,12 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -750,15 +704,12 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -808,7 +759,8 @@
                                                         {
                                                             "id": "Return Fan 1",
                                                             "specification_method": "SIMPLE",
-                                                            "design_electric_power": 25
+                                                            "design_electric_power": 25,
+                                                            "is_airflow_sized_based_on_design_day": true
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 0.0

@@ -11,13 +11,15 @@ __all__ = [
     "section5",
     "section6",
     "section10",
+    "section11",
+    "section12",
+    "section16",
     "section18",
     "section19",
     "section21",
     "section22",
     "section23",
 ]
-
 
 if SchemaEnums.schema_enums.get("RulesetModelOptions2019ASHRAE901"):
     RMT = SchemaEnums.schema_enums.get("RulesetModelOptions2019ASHRAE901")

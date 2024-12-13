@@ -88,10 +88,12 @@ class ZERO:
     """Class holding zero values for various pint quantities"""
 
     LENGTH: Quantity = 0 * ureg("ft")
+    WEIGHT: Quantity = 0 * ureg("lb")
     AREA: Quantity = LENGTH * LENGTH
     VOLUME: Quantity = AREA * LENGTH
 
     POWER: Quantity = 0 * ureg("Btu/hr")
+    ENERGY: Quantity = 0 * ureg("Btu")
     THERMAL_CAPACITY: Quantity = POWER / ureg("ft2")
     POWER_PER_AREA: Quantity = THERMAL_CAPACITY
     POWER_PER_FLOW: Quantity = 0 * ureg("Btu/hr/cfm")
