@@ -54,4 +54,19 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                         BASELINE_0=True,
                         PROPOSED=False,
                     ),
+                    required_fields={
+                        "$": ["efficiency_metric_types", "efficiency_metric_values"],
+                    },
                 )
+
+            def get_calc_vals(self, context, data=None):
+                pass
+
+            def manual_check_required(self, context, calc_vals=None, data=None):
+                pass
+
+            def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
+                pass
+
+            def rule_check(self, context, calc_vals=None, data=None):
+                pass
