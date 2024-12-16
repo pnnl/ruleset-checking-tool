@@ -6,11 +6,15 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_uses_associated_wit
     get_swh_uses_associated_with_each_building_segment,
 )
 from rct229.utils.jsonpath_utils import find_all
+from pydash import curry
 
 MANUAL_CHECK_REQUIRED_MSG = (
     "Proposed Service Water Heating Use is less than the baseline. "
     "Manually verify that reduction is due to an ECM that reduces service water heating use, such as low-flow fixtures."
 )
+
+# get either - success will get the data, failed will return default value
+getEither = curry(lambda o, k: o.get(k) if isinstance(o, dict) else None)
 
 
 class Section11Rule15(RuleDefinitionListIndexedBase):
@@ -111,94 +115,98 @@ class Section11Rule15(RuleDefinitionListIndexedBase):
                 )
 
             def get_calc_vals(self, context, data=None):
+                # the swh_use object type can be dict or None
                 swh_use_b = context.BASELINE_0
                 swh_use_p = context.PROPOSED
 
-                swh_use_id_b = swh_use_b["id"] if swh_use_b else None
-                swh_use_id_p = swh_use_p["id"] if swh_use_p else None
+                # curry function that help to extract the data from swh_use object
+                get_swh_use_b = getEither(swh_use_b)
+                get_swh_use_p = getEither(swh_use_p)
+
+                swh_use_id_b = get_swh_use_b("id")
+                swh_use_id_p = get_swh_use_p("id")
 
                 swh_dist_sys_dict_b = data["swh_dist_sys_dict_b"]
                 swh_dist_sys_dict_p = data["swh_dist_sys_dict_p"]
 
-                swh_use_served_by_distribution_system_id_b = (
-                    swh_use_b.get("served_by_distribution_system")
-                    if swh_use_b
+                swh_use_served_by_distribution_system_id_b = get_swh_use_b(
+                    "served_by_distribution_system"
+                )
+                swh_use_served_by_distribution_system_id_p = get_swh_use_p(
+                    "served_by_distribution_system"
+                )
+
+                swh_use_served_by_distribution_system_b = (
+                    swh_dist_sys_dict_b[swh_use_served_by_distribution_system_id_b]
+                    if swh_use_served_by_distribution_system_id_b
                     else None
                 )
-                swh_use_served_by_distribution_system_id_p = (
-                    swh_use_p.get("served_by_distribution_system")
-                    if swh_use_p
+
+                swh_use_served_by_distribution_system_p = (
+                    swh_dist_sys_dict_p[swh_use_served_by_distribution_system_id_p]
+                    if swh_use_served_by_distribution_system_id_p
                     else None
                 )
-                swh_use_served_by_distribution_system_b = swh_dist_sys_dict_b[
-                    swh_use_served_by_distribution_system_id_b
-                ]
-                swh_use_served_by_distribution_system_p = swh_dist_sys_dict_p[
-                    swh_use_served_by_distribution_system_id_p
-                ]
-                swh_use_design_supply_water_temperature_b = (
-                    swh_use_served_by_distribution_system_b.get(
-                        "design_supply_water_temperature"
-                    )
-                    if swh_use_served_by_distribution_system_b
-                    else None
+
+                # Curry function to extract data from distribution system object
+                get_swh_dist_sys_b = getEither(swh_use_served_by_distribution_system_b)
+                get_swh_dist_sys_p = getEither(swh_use_served_by_distribution_system_p)
+
+                swh_use_design_supply_water_temperature_b = get_swh_dist_sys_b(
+                    "design_supply_water_temperature"
                 )
-                swh_use_design_supply_water_temperature_p = (
-                    swh_use_served_by_distribution_system_p.get(
-                        "design_supply_water_temperature"
-                    )
-                    if swh_use_served_by_distribution_system_p
-                    else None
+                swh_use_design_supply_water_temperature_p = get_swh_dist_sys_p(
+                    "design_supply_water_temperature"
                 )
 
                 return {
                     "is_swh_use_none_b": swh_use_b is None,
                     "is_swh_use_none_p": swh_use_p is None,
-                    "swh_use_b": swh_use_b.get("use", 0),
-                    "swh_use_p": swh_use_p.get("use", 0),
+                    "swh_use_b": get_swh_use_b("use"),
+                    "swh_use_p": get_swh_use_p("use"),
                     "swh_use_id_b": swh_use_id_b,
                     "swh_use_id_p": swh_use_id_p,
-                    "swh_use_use_units_b": swh_use_b.get("use_units"),
+                    "swh_use_use_units_b": get_swh_use_b("use_units"),
                     "swh_use_use_units_p": swh_use_p.get("use_units"),
-                    "swh_use_multiplier_schedule_b": swh_use_b.get(
+                    "swh_use_multiplier_schedule_b": get_swh_use_b(
                         "use_multiplier_schedule"
                     ),
-                    "swh_use_multiplier_schedule_p": swh_use_p.get(
+                    "swh_use_multiplier_schedule_p": get_swh_use_p(
                         "use_multiplier_schedule"
                     ),
-                    "swh_use_temperature_at_fixture_b": swh_use_b.get(
+                    "swh_use_temperature_at_fixture_b": get_swh_use_b(
                         "temperature_at_fixture"
                     ),
-                    "swh_use_temperature_at_fixture_p": swh_use_p.get(
+                    "swh_use_temperature_at_fixture_p": get_swh_use_p(
                         "temperature_at_fixture"
                     ),
-                    "swh_use_water_mains_temperature_schedule_b": swh_use_b.get(
+                    "swh_use_water_mains_temperature_schedule_b": get_swh_use_b(
                         "entering_water_mains_temperature_schedule"
                     ),
-                    "swh_use_water_mains_temperature_schedule_p": swh_use_p.get(
+                    "swh_use_water_mains_temperature_schedule_p": get_swh_use_p(
                         "entering_water_mains_temperature_schedule"
                     ),
                     "swh_use_served_by_distribution_system_b": swh_use_served_by_distribution_system_b,
                     "swh_use_served_by_distribution_system_p": swh_use_served_by_distribution_system_p,
                     "swh_use_design_supply_water_temperature_b": swh_use_design_supply_water_temperature_b,
                     "swh_use_design_supply_water_temperature_p": swh_use_design_supply_water_temperature_p,
-                    "is_heat_recovered_by_drain_b": swh_use_b.get(
+                    "is_heat_recovered_by_drain_b": get_swh_use_b(
                         "is_heat_recovered_by_drain"
                     ),
-                    "is_heat_recovered_by_drain_p": swh_use_p.get(
+                    "is_heat_recovered_by_drain_p": get_swh_use_p(
                         "is_heat_recovered_by_drain"
                     ),
-                    "is_recovered_heat_used_by_cold_side_feed_b": swh_use_b.get(
+                    "is_recovered_heat_used_by_cold_side_feed_b": get_swh_use_b(
                         "is_recovered_heat_used_by_cold_side_feed"
                     ),
-                    "is_recovered_heat_used_by_cold_side_feed_p": swh_use_p.get(
+                    "is_recovered_heat_used_by_cold_side_feed_p": get_swh_use_p(
                         "is_recovered_heat_used_by_cold_side_feed"
                     ),
                 }
 
             def manual_check_required(self, context, calc_vals=None, data=None):
-                swh_use_b = calc_vals["swh_use_b"]
-                swh_use_p = calc_vals["swh_use_p"]
+                swh_use_b = calc_vals["swh_use_b"] if calc_vals["swh_use_b"] else 0.0
+                swh_use_p = calc_vals["swh_use_p"] if calc_vals["swh_use_p"] else 0.0
 
                 is_swh_use_none_b = calc_vals["is_swh_use_none_b"]
                 is_swh_use_none_p = calc_vals["is_swh_use_none_p"]
@@ -264,8 +272,9 @@ class Section11Rule15(RuleDefinitionListIndexedBase):
                 )
 
             def rule_check(self, context, calc_vals=None, data=None):
-                swh_use_b = calc_vals["swh_use_b"]
-                swh_use_p = calc_vals["swh_use_p"]
+                # it is for sure that this is either scenario which means there is no None.
+                swh_use_b = calc_vals["swh_use_b"] if calc_vals["swh_use_b"] else 0.0
+                swh_use_p = calc_vals["swh_use_p"] if calc_vals["swh_use_p"] else 0.0
 
                 is_swh_use_none_b = calc_vals["is_swh_use_none_b"]
                 is_swh_use_none_p = calc_vals["is_swh_use_none_p"]
@@ -356,8 +365,8 @@ class Section11Rule15(RuleDefinitionListIndexedBase):
                 return rule_result
 
             def get_fail_msg(self, context, calc_vals=None, data=None):
-                swh_use_b = calc_vals["swh_use_b"]
-                swh_use_p = calc_vals["swh_use_p"]
+                swh_use_b = calc_vals["swh_use_b"] if calc_vals["swh_use_b"] else 0.0
+                swh_use_p = calc_vals["swh_use_p"] if calc_vals["swh_use_p"] else 0.0
 
                 swh_use_id_b = calc_vals["swh_use_id_b"]
                 swh_use_id_p = calc_vals["swh_use_id_p"]
