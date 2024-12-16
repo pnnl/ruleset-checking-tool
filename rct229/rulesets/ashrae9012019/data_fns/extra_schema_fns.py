@@ -21,14 +21,14 @@ def if_required(required) -> bool:
 
     Parameters
     ----------
-    required: boolean | str
+    required: boolean | str | None
 
     Returns
     -------
     boolean
 
     """
-    if isinstance(required, str):
+    if required is None or isinstance(required, str):
         # unknown
         return False
     else:
