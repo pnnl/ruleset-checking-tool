@@ -126,204 +126,205 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
 
                 table_7_8 = [
                     {
-                        "Equipment Type": "Electric storage water heaters",
-                        "Size Category (min threshold, inclusive?)": (0*ureg("kW"), True),
-                        "Size Category (max threshold, inclusive?)": (12*ureg("kW"), False),
+                        "Equipment Type": "Electric storage water heater",
+                        "Capacity min. (threshold, inclusive?)": (0*ureg("kW"), True),
+                        "Capacity max. (threshold, inclusive?)": (12*ureg("kW"), False),
+                        "Draw Pattern": "",
                         "Efficiency (value/equation, metric)": (lambda v_m: 0.3 + 27 / v_m, SWHEfficiencyMetricOptions.STANDBY_LOSS_FRACTION),
                     },
                     {
-                        "Equipment Type": "Gas storage water heaters",
-                        "Size Category (min threshold, inclusive?)": (75000*ureg("Btu/h"), False),
-                        "Size Category (max threshold, inclusive?)": (105000*ureg("Btu/h"), True),
+                        "Equipment Type": "Gas storage water heater",
+                        "Capacity min. (threshold, inclusive?)": (75000*ureg("Btu/h"), False),
+                        "Capacity max. (threshold, inclusive?)": (105000*ureg("Btu/h"), True),
                         "Draw Pattern": "Very small",
                         "Efficiency (value/equation, metric)": (
                             lambda v_r: 0.2674 - (0.0009 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR
                         ),
                     },
                     {
-                        "Equipment Type": "Gas storage water heaters",
-                        "Size Category (min threshold, inclusive?)": (75000 * ureg("Btu/h"), False),
-                        "Size Category (max threshold, inclusive?)": (105000 * ureg("Btu/h"), True),
+                        "Equipment Type": "Gas storage water heater",
+                        "Capacity min. (threshold, inclusive?)": (75000 * ureg("Btu/h"), False),
+                        "Capacity max. (threshold, inclusive?)": (105000 * ureg("Btu/h"), True),
                         "Draw Pattern": "Low",
                         "Efficiency (value/equation, metric)": (
                             lambda v_r: 0.5362 - (0.0012 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR
                         ),
                     },
                     {
-                        "Equipment Type": "Gas storage water heaters",
-                        "Size Category (min threshold, inclusive?)": (75000 * ureg("Btu/h"), False),
-                        "Size Category (max threshold, inclusive?)": (105000 * ureg("Btu/h"), True),
+                        "Equipment Type": "Gas storage water heater",
+                        "Capacity min. (threshold, inclusive?)": (75000 * ureg("Btu/h"), False),
+                        "Capacity max. (threshold, inclusive?)": (105000 * ureg("Btu/h"), True),
                         "Draw Pattern": "Medium",
                         "Efficiency (value/equation, metric)": (
                             lambda v_r: 0.6002 - (0.0011 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR
                         ),
                     },
                     {
-                        "Equipment Type": "Gas storage water heaters",
-                        "Size Category (min threshold, inclusive?)": (75000 * ureg("Btu/h"), False),
-                        "Size Category (max threshold, inclusive?)": (105000 * ureg("Btu/h"), True),
+                        "Equipment Type": "Gas storage water heater",
+                        "Capacity min. (threshold, inclusive?)": (75000 * ureg("Btu/h"), False),
+                        "Capacity max. (threshold, inclusive?)": (105000 * ureg("Btu/h"), True),
                         "Draw Pattern": "High",
                         "Efficiency (value/equation, metric)": (
                             lambda v_r: 0.6597 - (0.0009 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR
                         ),
                     },
                     {
-                        "Equipment Type": "Gas storage water heaters",
-                        "Size Category (min threshold, inclusive?)": (105000 * ureg("Btu/h"), False),
-                        "Size Category (max threshold, inclusive?)": (9999999 * ureg("Btu/h"), True),
+                        "Equipment Type": "Gas storage water heater",
+                        "Capacity min. (threshold, inclusive?)": (105000 * ureg("Btu/h"), False),
+                        "Capacity max. (threshold, inclusive?)": (9999999 * ureg("Btu/h"), True),
                         "Draw Pattern": "",
                         "Efficiency (value/equation, metric)": (
                             lambda q, v: q / 800 + 110 * v ** 0.5, SWHEfficiencyMetricOptions.STANDBY_LOSS_ENERGY
                         ),
                     },
                     {
-                        "Equipment Type": "Gas storage water heaters",
-                        "Size Category (min threshold, inclusive?)": (105000 * ureg("Btu/h"), False),
-                        "Size Category (max threshold, inclusive?)": (9999999 * ureg("Btu/h"), True),
+                        "Equipment Type": "Gas storage water heater",
+                        "Capacity min. (threshold, inclusive?)": (105000 * ureg("Btu/h"), False),
+                        "Capacity max. (threshold, inclusive?)": (9999999 * ureg("Btu/h"), True),
                         "Draw Pattern": "",
                         "Efficiency (value/equation, metric)": (0.80, SWHEfficiencyMetricOptions.THERMAL_EFFICIENCY),
                     }
                 ]
                 table_f_2 = [
                     {
-                        "Product Class": "Gas-fired storage water heater",
-                        "Storage Volume (min threshold, inclusive?)": (20*ureg("gal"), True),
-                        "Storage Volume (max threshold, inclusive?)": (55*ureg("gal"), True),
+                        "Equipment Type": "Gas storage water heater",
+                        "Capacity min. (threshold, inclusive?)": (20*ureg("gal"), True),
+                        "Capacity max. (threshold, inclusive?)": (55*ureg("gal"), True),
                         "Draw Pattern": "Very small",
                         "Efficiency (value/equation, metric)": (
                             lambda v_r: 0.3456 - (0.0020 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR
                         ),
                     },
                     {
-                        "Product Class": "Gas-fired storage water heater",
-                        "Storage Volume (min threshold, inclusive?)": (20*ureg("gal"), True),
-                        "Storage Volume (max threshold, inclusive?)": (55*ureg("gal"), True),
+                        "Equipment Type": "Gas storage water heater",
+                        "Capacity min. (threshold, inclusive?)": (20*ureg("gal"), True),
+                        "Capacity max. (threshold, inclusive?)": (55*ureg("gal"), True),
                         "Draw Pattern": "Low",
                         "Efficiency (value/equation, metric)": (
                             lambda v_r: 0.5982 - (0.0019 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR
                         ),
                     },
                     {
-                        "Product Class": "Gas-fired storage water heater",
-                        "Storage Volume (min threshold, inclusive?)": (20*ureg("gal"), True),
-                        "Storage Volume (max threshold, inclusive?)": (55*ureg("gal"), True),
+                        "Equipment Type": "Gas storage water heater",
+                        "Capacity min. (threshold, inclusive?)": (20*ureg("gal"), True),
+                        "Capacity max. (threshold, inclusive?)": (55*ureg("gal"), True),
                         "Draw Pattern": "Medium",
                         "Efficiency (value/equation, metric)": (
                             lambda v_r: 0.6483 - (0.0017 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR
                         ),
                     },
                     {
-                        "Product Class": "Gas-fired storage water heater",
-                        "Storage Volume (min threshold, inclusive?)": (20*ureg("gal"), True),
-                        "Storage Volume (max threshold, inclusive?)": (55*ureg("gal"), True),
+                        "Equipment Type": "Gas storage water heater",
+                        "Capacity min. (threshold, inclusive?)": (20*ureg("gal"), True),
+                        "Capacity max. (threshold, inclusive?)": (55*ureg("gal"), True),
                         "Draw Pattern": "High",
                         "Efficiency (value/equation, metric)": (
                             lambda v_r: 0.6920 - (0.0013 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR
                         ),
                     },
                     {
-                        "Product Class": "Gas-fired storage water heater",
-                        "Storage Volume (min threshold, inclusive?)": (55*ureg("gal"), False),
-                        "Storage Volume (max threshold, inclusive?)": (100*ureg("gal"), True),
+                        "Equipment Type": "Gas storage water heater",
+                        "Capacity min. (threshold, inclusive?)": (55*ureg("gal"), False),
+                        "Capacity max. (threshold, inclusive?)": (100*ureg("gal"), True),
                         "Draw Pattern": "Very small",
                         "Efficiency (value/equation, metric)": (
                             lambda v_r: 0.6470 - (0.0006 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR
                         ),
                     },
                     {
-                        "Product Class": "Gas-fired storage water heater",
-                        "Storage Volume (min threshold, inclusive?)": (55*ureg("gal"), False),
-                        "Storage Volume (max threshold, inclusive?)": (100*ureg("gal"), True),
+                        "Equipment Type": "Gas storage water heater",
+                        "Capacity min. (threshold, inclusive?)": (55*ureg("gal"), False),
+                        "Capacity max. (threshold, inclusive?)": (100*ureg("gal"), True),
                         "Draw Pattern": "Low",
                         "Efficiency (value/equation, metric)": (
                             lambda v_r: 0.7689 - (0.0005 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR
                         ),
                     },
                     {
-                        "Product Class": "Gas-fired storage water heater",
-                        "Storage Volume (min threshold, inclusive?)": (55*ureg("gal"), False),
-                        "Storage Volume (max threshold, inclusive?)": (100*ureg("gal"), True),
+                        "Equipment Type": "Gas storage water heater",
+                        "Capacity min. (threshold, inclusive?)": (55*ureg("gal"), False),
+                        "Capacity max. (threshold, inclusive?)": (100*ureg("gal"), True),
                         "Draw Pattern": "Medium",
                         "Efficiency (value/equation, metric)": (
                             lambda v_r: 0.7897 - (0.0004 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR
                         ),
                     },
                     {
-                        "Product Class": "Gas-fired storage water heater",
-                        "Storage Volume (min threshold, inclusive?)": (55*ureg("gal"), False),
-                        "Storage Volume (max threshold, inclusive?)": (100*ureg("gal"), True),
+                        "Equipment Type": "Gas storage water heater",
+                        "Capacity min. (threshold, inclusive?)": (55*ureg("gal"), False),
+                        "Capacity max. (threshold, inclusive?)": (100*ureg("gal"), True),
                         "Draw Pattern": "High",
                         "Efficiency (value/equation, metric)": (
                             lambda v_r: 0.8072 - (0.0003 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR
                         ),
                     },
                     {
-                        "Product Class": "Electric storage water heaters",
-                        "Storage Volume (min threshold, inclusive?)": (20*ureg("gal"), True),
-                        "Storage Volume (max threshold, inclusive?)": (55*ureg("gal"), True),
+                        "Equipment Type": "Electric storage water heater",
+                        "Capacity min. (threshold, inclusive?)": (20*ureg("gal"), True),
+                        "Capacity max. (threshold, inclusive?)": (55*ureg("gal"), True),
                         "Draw Pattern": "Very small",
                         "Efficiency (value/equation, metric)": (
                             lambda v_r: 0.8808 - (0.0008 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR
                         ),
                     },
                     {
-                        "Product Class": "Electric storage water heaters",
-                        "Storage Volume (min threshold, inclusive?)": (20*ureg("gal"), True),
-                        "Storage Volume (max threshold, inclusive?)": (55*ureg("gal"), True),
+                        "Equipment Type": "Electric storage water heater",
+                        "Capacity min. (threshold, inclusive?)": (20*ureg("gal"), True),
+                        "Capacity max. (threshold, inclusive?)": (55*ureg("gal"), True),
                         "Draw Pattern": "Low",
                         "Efficiency (value/equation, metric)": (
                             lambda v_r: 0.9254 - (0.0003 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR
                         ),
                     },
                     {
-                        "Product Class": "Electric storage water heaters",
-                        "Storage Volume (min threshold, inclusive?)": (20*ureg("gal"), True),
-                        "Storage Volume (max threshold, inclusive?)": (55*ureg("gal"), True),
+                        "Equipment Type": "Electric storage water heater",
+                        "Capacity min. (threshold, inclusive?)": (20*ureg("gal"), True),
+                        "Capacity max. (threshold, inclusive?)": (55*ureg("gal"), True),
                         "Draw Pattern": "Medium",
                         "Efficiency (value/equation, metric)": (
                             lambda v_r: 0.9307 - (0.0002 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR
                         ),
                     },
                     {
-                        "Product Class": "Electric storage water heaters",
-                        "Storage Volume (min threshold, inclusive?)": (20*ureg("gal"), True),
-                        "Storage Volume (max threshold, inclusive?)": (55*ureg("gal"), True),
+                        "Equipment Type": "Electric storage water heater",
+                        "Capacity min. (threshold, inclusive?)": (20*ureg("gal"), True),
+                        "Capacity max. (threshold, inclusive?)": (55*ureg("gal"), True),
                         "Draw Pattern": "High",
                         "Efficiency (value/equation, metric)": (
                             lambda v_r: 0.9349 - (0.0001 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR
                         ),
                     },
                     {
-                        "Product Class": "Electric storage water heaters",
-                        "Storage Volume (min threshold, inclusive?)": (55*ureg("gal"), False),
-                        "Storage Volume (max threshold, inclusive?)": (100*ureg("gal"), True),
+                        "Equipment Type": "Electric storage water heater",
+                        "Capacity min. (threshold, inclusive?)": (55*ureg("gal"), False),
+                        "Capacity max. (threshold, inclusive?)": (100*ureg("gal"), True),
                         "Draw Pattern": "Very small",
                         "Efficiency (value/equation, metric)": (
                             lambda v_r: 1.9236 - (0.0011 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR
                         ),
                     },
                     {
-                        "Product Class": "Electric storage water heaters",
-                        "Storage Volume (min threshold, inclusive?)": (55*ureg("gal"), False),
-                        "Storage Volume (max threshold, inclusive?)": (100*ureg("gal"), True),
+                        "Equipment Type": "Electric storage water heater",
+                        "Capacity min. (threshold, inclusive?)": (55*ureg("gal"), False),
+                        "Capacity max. (threshold, inclusive?)": (100*ureg("gal"), True),
                         "Draw Pattern": "Low",
                         "Efficiency (value/equation, metric)": (
                             lambda v_r: 2.0440 - (0.0011 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR
                         ),
                     },
                     {
-                        "Product Class": "Electric storage water heaters",
-                        "Storage Volume (min threshold, inclusive?)": (55*ureg("gal"), False),
-                        "Storage Volume (max threshold, inclusive?)": (100*ureg("gal"), True),
+                        "Equipment Type": "Electric storage water heater",
+                        "Capacity min. (threshold, inclusive?)": (55*ureg("gal"), False),
+                        "Capacity max. (threshold, inclusive?)": (100*ureg("gal"), True),
                         "Draw Pattern": "Medium",
                         "Efficiency (value/equation, metric)": (
                             lambda v_r: 2.1171 - (0.0011 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR
                         ),
                     },
                     {
-                        "Product Class": "Electric storage water heaters",
-                        "Storage Volume (min threshold, inclusive?)": (55*ureg("gal"), False),
-                        "Storage Volume (max threshold, inclusive?)": (100*ureg("gal"), True),
+                        "Equipment Type": "Electric storage water heater",
+                        "Capacity min. (threshold, inclusive?)": (55*ureg("gal"), False),
+                        "Capacity max. (threshold, inclusive?)": (100*ureg("gal"), True),
                         "Draw Pattern": "High",
                         "Efficiency (value/equation, metric)": (
                             lambda v_r: 2.2418 - (0.0011 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR
