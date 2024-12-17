@@ -3,12 +3,12 @@
     {
       "Equipment Type": "Electric storage water heater",
       "Capacity min": {
-        "value": 0,
+        "value": 12,
         "unit": "kW",
         "inclusive": true
       },
       "Capacity max": {
-        "value": 12,
+        "value": 9999,
         "unit": "kW",
         "inclusive": false
       },
@@ -109,9 +109,9 @@
       },
       "Draw Pattern": "",
       "Efficiency": {
-        "equation": "q/800 + 110*v**0.5",
-        "variables": ["q", "v"],
-        "metric": "STANDBY_LOSS_ENERGY"
+        "equation": "0.80",
+        "variables": [],
+        "metric": "THERMAL_EFFICIENCY"
       }
     },
     {
@@ -128,9 +128,9 @@
       },
       "Draw Pattern": "",
       "Efficiency": {
-        "equation": "0.80",
-        "variables": [],
-        "metric": "THERMAL_EFFICIENCY"
+        "equation": "q/800 + 110*v**0.5",
+        "variables": ["q", "v"],
+        "metric": "STANDBY_LOSS_ENERGY"
       }
     }
   ]
