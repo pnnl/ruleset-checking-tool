@@ -7,9 +7,12 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_components_associat
 )
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.jsonpath_utils import find_all
+from rct229.schema.config import ureg
 
 
+EnergySourceOptions = SchemaEnums.schema_enums["EnergySourceOptions"]
 SWHEfficiencyMetricOptions = SchemaEnums.schema_enums["ServiceWaterHeatingEfficiencyMetricOptions"]
+SWHTankOptions = SchemaEnums.schema_enums["ServiceWaterHeatingTankOptions"]
 
 
 class Section11Rule10(RuleDefinitionListIndexedBase):
@@ -50,6 +53,14 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
 
             return swh_equipment_list_b
 
+        def get_calc_vals(self, context, data=None):
+            rmd_b = context.BASELINE_0
+            is_leap_year_b = data["is_leap_year"]
+            shw_bats_and_equip_dict_b = get_swh_components_associated_with_each_swh_bat(rmd_b, is_leap_year_b)
+            return {
+                "shw_bats_and_equip_dict_b": shw_bats_and_equip_dict_b,
+            }
+
         class SWHEquipRule(RuleDefinitionBase):
             def __init__(self):
                 super(Section11Rule10.RMDRule.SWHEquipRule, self).__init__(
@@ -59,134 +70,271 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                         PROPOSED=False,
                     ),
                     required_fields={
-                        "$": ["efficiency_metric_types", "efficiency_metric_values"],
+                        "$": ["tank", "efficiency_metric_types", "efficiency_metric_values"],
+                        "tank": ["type", "storage_capacity"],
                     },
                 )
 
             def get_calc_vals(self, context, data=None):
+                swh_equip_b = context.BASELINE_0
+                swh_fuel_type = swh_equip_b.get("heater_fuel_type")
+                swh_tank_type = swh_equip_b["tank"]["type"]
+                storage_volume_b = swh_equip_b["tank"]["storage_capacity"]
+                swh_input_power_b = swh_equip_b.get("input_power")
+                swh_capacity_per_volume = swh_input_power_b / storage_volume_b if swh_input_power_b else None
+
+                # Determine swh_type
+                INSTANTANEOUS_TYPES = [
+                    SWHTankOptions.CONSUMER_INSTANTANEOUS,
+                    SWHTankOptions.COMMERCIAL_INSTANTANEOUS,
+                    SWHTankOptions.RESIDENTIAL_DUTY_COMMERCIAL_INSTANTANEOUS
+                ]
+                STORAGE_TYPES = [
+                    SWHTankOptions.CONSUMER_STORAGE,
+                    SWHTankOptions.COMMERCIAL_STORAGE
+                ]
+                if swh_tank_type in INSTANTANEOUS_TYPES:
+                    swh_type = "INSTANTANEOUS"
+                elif swh_tank_type in STORAGE_TYPES:
+                    if swh_fuel_type == EnergySourceOptions.ELECTRICITY:
+                        swh_type = "ELECTRIC_RESISTANCE_STORAGE"
+                    elif swh_fuel_type in [EnergySourceOptions.NATURAL_GAS, EnergySourceOptions.PROPANE]:
+                        swh_type = "GAS_STORAGE"
+                    else:
+                        swh_type = "OTHER"
+                else:
+                    swh_type = "OTHER"
+
+                # Determine draw_pattern_b
+                draw_pattern_b = swh_equip_b.get("draw_pattern")
+                if not draw_pattern_b:
+                    first_hour_rating_b = swh_equip_b.get("first_hour_rating")
+                    if first_hour_rating_b is not None:
+                        first_hour_rating_gal = (first_hour_rating_b * ureg("L")).to("gal").magnitude
+                        if first_hour_rating_gal < 18:
+                            draw_pattern_b = "Very small"
+                        elif first_hour_rating_gal < 51:
+                            draw_pattern_b = "Low"
+                        elif first_hour_rating_gal < 75:
+                            draw_pattern_b = "Medium"
+                        else:
+                            draw_pattern_b = "High"
+
+                # draw_pattern_b will be None if the SWH draw pattern is not defined and the first hour rating is not defined
+
+                shw_bats_and_equip_dict_b = data["shw_bats_and_equip_dict_b"]
+
+                table_7_8 = [
+                    {
+                        "Equipment Type": "Electric storage water heaters",
+                        "Size Category (min threshold, inclusive?)": (0*ureg("kW"), True),
+                        "Size Category (max threshold, inclusive?)": (12*ureg("kW"), False),
+                        "Efficiency (value/equation, metric)": (lambda v_m: 0.3 + 27 / v_m, SWHEfficiencyMetricOptions.STANDBY_LOSS_FRACTION),
+                    },
+                    {
+                        "Equipment Type": "Gas storage water heaters",
+                        "Size Category (min threshold, inclusive?)": (75000*ureg("Btu/h"), False),
+                        "Size Category (max threshold, inclusive?)": (105000*ureg("Btu/h"), True),
+                        "Draw Pattern": "Very small",
+                        "Efficiency (value/equation, metric)": (
+                            lambda v_r: 0.2674 - (0.0009 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR
+                        ),
+                    },
+                    {
+                        "Equipment Type": "Gas storage water heaters",
+                        "Size Category (min threshold, inclusive?)": (75000 * ureg("Btu/h"), False),
+                        "Size Category (max threshold, inclusive?)": (105000 * ureg("Btu/h"), True),
+                        "Draw Pattern": "Low",
+                        "Efficiency (value/equation, metric)": (
+                            lambda v_r: 0.5362 - (0.0012 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR
+                        ),
+                    },
+                    {
+                        "Equipment Type": "Gas storage water heaters",
+                        "Size Category (min threshold, inclusive?)": (75000 * ureg("Btu/h"), False),
+                        "Size Category (max threshold, inclusive?)": (105000 * ureg("Btu/h"), True),
+                        "Draw Pattern": "Medium",
+                        "Efficiency (value/equation, metric)": (
+                            lambda v_r: 0.6002 - (0.0011 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR
+                        ),
+                    },
+                    {
+                        "Equipment Type": "Gas storage water heaters",
+                        "Size Category (min threshold, inclusive?)": (75000 * ureg("Btu/h"), False),
+                        "Size Category (max threshold, inclusive?)": (105000 * ureg("Btu/h"), True),
+                        "Draw Pattern": "High",
+                        "Efficiency (value/equation, metric)": (
+                            lambda v_r: 0.6597 - (0.0009 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR
+                        ),
+                    },
+                    {
+                        "Equipment Type": "Gas storage water heaters",
+                        "Size Category (min threshold, inclusive?)": (105000 * ureg("Btu/h"), False),
+                        "Size Category (max threshold, inclusive?)": (9999999 * ureg("Btu/h"), True),
+                        "Draw Pattern": "",
+                        "Efficiency (value/equation, metric)": (
+                            lambda q, v: q / 800 + 110 * v ** 0.5, SWHEfficiencyMetricOptions.STANDBY_LOSS_ENERGY
+                        ),
+                    },
+                    {
+                        "Equipment Type": "Gas storage water heaters",
+                        "Size Category (min threshold, inclusive?)": (105000 * ureg("Btu/h"), False),
+                        "Size Category (max threshold, inclusive?)": (9999999 * ureg("Btu/h"), True),
+                        "Draw Pattern": "",
+                        "Efficiency (value/equation, metric)": (0.80, SWHEfficiencyMetricOptions.THERMAL_EFFICIENCY),
+                    }
+                ]
                 table_f_2 = [
                     {
                         "Product Class": "Gas-fired storage water heater",
-                        "Storage Volume (min threshold, inclusive?)": (20, True),
-                        "Storage Volume (max threshold, inclusive?)": (55, True),
+                        "Storage Volume (min threshold, inclusive?)": (20*ureg("gal"), True),
+                        "Storage Volume (max threshold, inclusive?)": (55*ureg("gal"), True),
                         "Draw Pattern": "Very small",
-                        "Efficiency (value/equation, metric)": (lambda v_r: 0.3456 - (0.0020 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR),
+                        "Efficiency (value/equation, metric)": (
+                            lambda v_r: 0.3456 - (0.0020 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR
+                        ),
                     },
                     {
                         "Product Class": "Gas-fired storage water heater",
-                        "Storage Volume (min threshold, inclusive?)": (20, True),
-                        "Storage Volume (max threshold, inclusive?)": (55, True),
+                        "Storage Volume (min threshold, inclusive?)": (20*ureg("gal"), True),
+                        "Storage Volume (max threshold, inclusive?)": (55*ureg("gal"), True),
                         "Draw Pattern": "Low",
-                        "Efficiency (value/equation, metric)": (lambda v_r: 0.5982 - (0.0019 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR),
+                        "Efficiency (value/equation, metric)": (
+                            lambda v_r: 0.5982 - (0.0019 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR
+                        ),
                     },
                     {
                         "Product Class": "Gas-fired storage water heater",
-                        "Storage Volume (min threshold, inclusive?)": (20, True),
-                        "Storage Volume (max threshold, inclusive?)": (55, True),
+                        "Storage Volume (min threshold, inclusive?)": (20*ureg("gal"), True),
+                        "Storage Volume (max threshold, inclusive?)": (55*ureg("gal"), True),
                         "Draw Pattern": "Medium",
-                        "Efficiency (value/equation, metric)": (lambda v_r: 0.6483 - (0.0017 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR),
+                        "Efficiency (value/equation, metric)": (
+                            lambda v_r: 0.6483 - (0.0017 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR
+                        ),
                     },
                     {
                         "Product Class": "Gas-fired storage water heater",
-                        "Storage Volume (min threshold, inclusive?)": (20, True),
-                        "Storage Volume (max threshold, inclusive?)": (55, True),
+                        "Storage Volume (min threshold, inclusive?)": (20*ureg("gal"), True),
+                        "Storage Volume (max threshold, inclusive?)": (55*ureg("gal"), True),
                         "Draw Pattern": "High",
-                        "Efficiency (value/equation, metric)": (lambda v_r: 0.6920 - (0.0013 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR),
+                        "Efficiency (value/equation, metric)": (
+                            lambda v_r: 0.6920 - (0.0013 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR
+                        ),
                     },
                     {
                         "Product Class": "Gas-fired storage water heater",
-                        "Storage Volume (min threshold, inclusive?)": (55, False),
-                        "Storage Volume (max threshold, inclusive?)": (100, True),
+                        "Storage Volume (min threshold, inclusive?)": (55*ureg("gal"), False),
+                        "Storage Volume (max threshold, inclusive?)": (100*ureg("gal"), True),
                         "Draw Pattern": "Very small",
-                        "Efficiency (value/equation, metric)": (lambda v_r: 0.6470 - (0.0006 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR),
+                        "Efficiency (value/equation, metric)": (
+                            lambda v_r: 0.6470 - (0.0006 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR
+                        ),
                     },
                     {
                         "Product Class": "Gas-fired storage water heater",
-                        "Storage Volume (min threshold, inclusive?)": (55, False),
-                        "Storage Volume (max threshold, inclusive?)": (100, True),
+                        "Storage Volume (min threshold, inclusive?)": (55*ureg("gal"), False),
+                        "Storage Volume (max threshold, inclusive?)": (100*ureg("gal"), True),
                         "Draw Pattern": "Low",
-                        "Efficiency (value/equation, metric)": (lambda v_r: 0.7689 - (0.0005 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR),
+                        "Efficiency (value/equation, metric)": (
+                            lambda v_r: 0.7689 - (0.0005 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR
+                        ),
                     },
                     {
                         "Product Class": "Gas-fired storage water heater",
-                        "Storage Volume (min threshold, inclusive?)": (55, False),
-                        "Storage Volume (max threshold, inclusive?)": (100, True),
+                        "Storage Volume (min threshold, inclusive?)": (55*ureg("gal"), False),
+                        "Storage Volume (max threshold, inclusive?)": (100*ureg("gal"), True),
                         "Draw Pattern": "Medium",
-                        "Efficiency (value/equation, metric)": (lambda v_r: 0.7897 - (0.0004 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR),
+                        "Efficiency (value/equation, metric)": (
+                            lambda v_r: 0.7897 - (0.0004 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR
+                        ),
                     },
                     {
                         "Product Class": "Gas-fired storage water heater",
-                        "Storage Volume (min threshold, inclusive?)": (55, False),
-                        "Storage Volume (max threshold, inclusive?)": (100, True),
+                        "Storage Volume (min threshold, inclusive?)": (55*ureg("gal"), False),
+                        "Storage Volume (max threshold, inclusive?)": (100*ureg("gal"), True),
                         "Draw Pattern": "High",
-                        "Efficiency (value/equation, metric)": (lambda v_r: 0.8072 - (0.0003 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR),
+                        "Efficiency (value/equation, metric)": (
+                            lambda v_r: 0.8072 - (0.0003 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR
+                        ),
                     },
                     {
                         "Product Class": "Electric storage water heaters",
-                        "Storage Volume (min threshold, inclusive?)": (20, True),
-                        "Storage Volume (max threshold, inclusive?)": (55, True),
+                        "Storage Volume (min threshold, inclusive?)": (20*ureg("gal"), True),
+                        "Storage Volume (max threshold, inclusive?)": (55*ureg("gal"), True),
                         "Draw Pattern": "Very small",
-                        "Efficiency (value/equation, metric)": (lambda v_r: 0.8808 - (0.0008 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR),
+                        "Efficiency (value/equation, metric)": (
+                            lambda v_r: 0.8808 - (0.0008 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR
+                        ),
                     },
                     {
                         "Product Class": "Electric storage water heaters",
-                        "Storage Volume (min threshold, inclusive?)": (20, True),
-                        "Storage Volume (max threshold, inclusive?)": (55, True),
+                        "Storage Volume (min threshold, inclusive?)": (20*ureg("gal"), True),
+                        "Storage Volume (max threshold, inclusive?)": (55*ureg("gal"), True),
                         "Draw Pattern": "Low",
-                        "Efficiency (value/equation, metric)": (lambda v_r: 0.9254 - (0.0003 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR),
+                        "Efficiency (value/equation, metric)": (
+                            lambda v_r: 0.9254 - (0.0003 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR
+                        ),
                     },
                     {
                         "Product Class": "Electric storage water heaters",
-                        "Storage Volume (min threshold, inclusive?)": (20, True),
-                        "Storage Volume (max threshold, inclusive?)": (55, True),
+                        "Storage Volume (min threshold, inclusive?)": (20*ureg("gal"), True),
+                        "Storage Volume (max threshold, inclusive?)": (55*ureg("gal"), True),
                         "Draw Pattern": "Medium",
-                        "Efficiency (value/equation, metric)": (lambda v_r: 0.9307 - (0.0002 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR),
+                        "Efficiency (value/equation, metric)": (
+                            lambda v_r: 0.9307 - (0.0002 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR
+                        ),
                     },
                     {
                         "Product Class": "Electric storage water heaters",
-                        "Storage Volume (min threshold, inclusive?)": (20, True),
-                        "Storage Volume (max threshold, inclusive?)": (55, True),
+                        "Storage Volume (min threshold, inclusive?)": (20*ureg("gal"), True),
+                        "Storage Volume (max threshold, inclusive?)": (55*ureg("gal"), True),
                         "Draw Pattern": "High",
-                        "Efficiency (value/equation, metric)": (lambda v_r: 0.9349 - (0.0001 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR),
+                        "Efficiency (value/equation, metric)": (
+                            lambda v_r: 0.9349 - (0.0001 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR
+                        ),
                     },
                     {
                         "Product Class": "Electric storage water heaters",
-                        "Storage Volume (min threshold, inclusive?)": (55, False),
-                        "Storage Volume (max threshold, inclusive?)": (100, True),
+                        "Storage Volume (min threshold, inclusive?)": (55*ureg("gal"), False),
+                        "Storage Volume (max threshold, inclusive?)": (100*ureg("gal"), True),
                         "Draw Pattern": "Very small",
-                        "Efficiency (value/equation, metric)": (lambda v_r: 1.9236 - (0.0011 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR),
+                        "Efficiency (value/equation, metric)": (
+                            lambda v_r: 1.9236 - (0.0011 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR
+                        ),
                     },
                     {
                         "Product Class": "Electric storage water heaters",
-                        "Storage Volume (min threshold, inclusive?)": (55, False),
-                        "Storage Volume (max threshold, inclusive?)": (100, True),
+                        "Storage Volume (min threshold, inclusive?)": (55*ureg("gal"), False),
+                        "Storage Volume (max threshold, inclusive?)": (100*ureg("gal"), True),
                         "Draw Pattern": "Low",
-                        "Efficiency (value/equation, metric)": (lambda v_r: 2.0440 - (0.0011 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR),
+                        "Efficiency (value/equation, metric)": (
+                            lambda v_r: 2.0440 - (0.0011 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR
+                        ),
                     },
                     {
                         "Product Class": "Electric storage water heaters",
-                        "Storage Volume (min threshold, inclusive?)": (55, False),
-                        "Storage Volume (max threshold, inclusive?)": (100, True),
+                        "Storage Volume (min threshold, inclusive?)": (55*ureg("gal"), False),
+                        "Storage Volume (max threshold, inclusive?)": (100*ureg("gal"), True),
                         "Draw Pattern": "Medium",
-                        "Efficiency (value/equation, metric)": (lambda v_r: 2.1171 - (0.0011 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR),
+                        "Efficiency (value/equation, metric)": (
+                            lambda v_r: 2.1171 - (0.0011 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR
+                        ),
                     },
                     {
                         "Product Class": "Electric storage water heaters",
-                        "Storage Volume (min threshold, inclusive?)": (55, False),
-                        "Storage Volume (max threshold, inclusive?)": (100, True),
+                        "Storage Volume (min threshold, inclusive?)": (55*ureg("gal"), False),
+                        "Storage Volume (max threshold, inclusive?)": (100*ureg("gal"), True),
                         "Draw Pattern": "High",
-                        "Efficiency (value/equation, metric)": (lambda v_r: 2.2418 - (0.0011 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR),
+                        "Efficiency (value/equation, metric)": (
+                            lambda v_r: 2.2418 - (0.0011 * v_r), SWHEfficiencyMetricOptions.UNIFORM_ENERGY_FACTOR
+                        ),
                     }
                 ]
-
-
-
-
 
                 pass
                 # return {
                 #     "tank_type_b": tank_type_b,
-                #     "storage_volume_b": storage_volume_b,
+                #     "storage_volume_b": CalcQ(storage_volume_b),
                 #     "expected_efficiency_b": expected_efficiency_b,
                 #     "standby_loss_target_b": standby_loss_target_b,
                 #     "modeled_efficiency_b": modeled_efficiency_b,
