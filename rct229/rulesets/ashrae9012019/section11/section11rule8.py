@@ -185,13 +185,11 @@ class Section11Rule8(RuleDefinitionListIndexedBase):
                 swh_bat_b = swh_bats_and_equip_dict_this_use["id"]
 
                 num_swh_systems_b = data["num_swh_systems_b"][swh_bat_b]
-                num_swh_equipment_this_use_b = data["num_swh_equipment_this_use_b"][
-                    swh_bat_b
-                ]
                 num_other_swh_bat_segment_b = data["num_other_swh_bat_segment_b"]
 
-                is_referenced_in_other_bats_b = False
+                is_referenced_in_other_bats_b = True
                 if num_swh_systems_b == 1:
+                    is_referenced_in_other_bats_b = False
                     swh_dist_id = swh_bats_and_uses_b[swh_bat_b].swh_distribution[0]
                     for other_swh_bat in swh_bats_and_uses_b:
                         if other_swh_bat != swh_bat_b:
@@ -206,6 +204,7 @@ class Section11Rule8(RuleDefinitionListIndexedBase):
                 )
 
                 return {
+                    "swh_bat_b": swh_bat_b,
                     "num_swh_systems_b": num_swh_systems_b,
                     "num_of_bldg_segment_b": num_of_bldg_segment_b,
                     "is_referenced_in_other_bats_b": is_referenced_in_other_bats_b,
@@ -213,21 +212,21 @@ class Section11Rule8(RuleDefinitionListIndexedBase):
                 }
 
             def manual_check_required(self, context, calc_vals=None, data=None):
-                shw_bat_b = calc_vals["shw_bat_b"]
+                swh_bat_b = calc_vals["swh_bat_b"]
                 multiple_segments_with_bat_other_b = calc_vals[
                     "multiple_segments_with_bat_other_b"
                 ]
 
-                return shw_bat_b == "UNDETERMINED" or multiple_segments_with_bat_other_b
+                return swh_bat_b == "UNDETERMINED" or multiple_segments_with_bat_other_b
 
             def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
-                shw_bat_b = calc_vals["shw_bat_b"]
+                swh_bat_b = calc_vals["swh_bat_b"]
                 multiple_segments_with_bat_other_b = calc_vals[
                     "multiple_segments_with_bat_other_b"
                 ]
 
                 UNDETERMINED_MSG = ""
-                if shw_bat_b == "UNDETERMINED":
+                if swh_bat_b == "UNDETERMINED":
                     UNDETERMINED_MSG = CASE3_MSG
                 elif not multiple_segments_with_bat_other_b:
                     UNDETERMINED_MSG = CASE4_MSG
@@ -236,7 +235,7 @@ class Section11Rule8(RuleDefinitionListIndexedBase):
 
             def rule_check(self, context, calc_vals=None, data=None):
                 num_swh_systems_b = calc_vals["num_swh_systems_b"]
-                shw_bat = calc_vals["shw_bat"]
+                swh_bat_b = calc_vals["swh_bat_b"]
                 num_of_bldg_segment_b = calc_vals["num_of_bldg_segment_b"]
                 is_referenced_in_other_bats_b = calc_vals[
                     "is_referenced_in_other_bats_b"
@@ -244,6 +243,6 @@ class Section11Rule8(RuleDefinitionListIndexedBase):
 
                 return (
                     num_swh_systems_b == 1
-                    or (shw_bat == "UNDETERMINED" and num_of_bldg_segment_b == 1)
+                    or (swh_bat_b == "UNDETERMINED" and num_of_bldg_segment_b == 1)
                     or not is_referenced_in_other_bats_b
                 )
