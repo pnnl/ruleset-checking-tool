@@ -12,7 +12,7 @@
         "unit": "kW",
         "inclusive": false
       },
-      "Draw Pattern": "",
+      "Draw Pattern": null,
       "Efficiency": {
         "equation": "0.3 + 27/v_m",
         "variables": ["v_m"],
@@ -107,7 +107,7 @@
         "unit": "Btu/h",
         "inclusive": true
       },
-      "Draw Pattern": "",
+      "Draw Pattern": null,
       "Efficiency": {
         "equation": "0.80",
         "variables": [],
@@ -126,7 +126,7 @@
         "unit": "Btu/h",
         "inclusive": true
       },
-      "Draw Pattern": "",
+      "Draw Pattern": null,
       "Efficiency": {
         "equation": "q/800 + 110*v**0.5",
         "variables": ["q", "v"],

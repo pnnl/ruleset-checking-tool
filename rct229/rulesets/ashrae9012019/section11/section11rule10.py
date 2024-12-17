@@ -1,18 +1,34 @@
+from rct229.schema.schema_enums import SchemaEnums
+from rct229.schema.config import ureg
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_components_associated_with_each_swh_bat import (
-    get_swh_components_associated_with_each_swh_bat
+from rct229.rulesets.ashrae9012019.data_fns.table_F_2_fns import (
+    table_f_2_lookup
 )
-from rct229.schema.schema_enums import SchemaEnums
+from rct229.rulesets.ashrae9012019.data_fns.table_7_8_fns import (
+    table_7_8_lookup
+)
 from rct229.utils.jsonpath_utils import find_all
-from rct229.schema.config import ureg
-
+from rct229.utils.pint_utils import CalcQ
+from rct229.utils.assertions import assert_
 
 EnergySourceOptions = SchemaEnums.schema_enums["EnergySourceOptions"]
 SWHEfficiencyMetricOptions = SchemaEnums.schema_enums["ServiceWaterHeatingEfficiencyMetricOptions"]
 SWHTankOptions = SchemaEnums.schema_enums["ServiceWaterHeatingTankOptions"]
+
+
+CAPACITY_PER_VOLUME_LIMIT = 4000*ureg("Btu/h/gallon")
+INSTANTANEOUS_TYPES = [
+    SWHTankOptions.CONSUMER_INSTANTANEOUS,
+    SWHTankOptions.COMMERCIAL_INSTANTANEOUS,
+    SWHTankOptions.RESIDENTIAL_DUTY_COMMERCIAL_INSTANTANEOUS
+]
+STORAGE_TYPES = [
+    SWHTankOptions.CONSUMER_STORAGE,
+    SWHTankOptions.COMMERCIAL_STORAGE
+]
 
 
 class Section11Rule10(RuleDefinitionListIndexedBase):
@@ -53,14 +69,6 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
 
             return swh_equipment_list_b
 
-        def get_calc_vals(self, context, data=None):
-            rmd_b = context.BASELINE_0
-            is_leap_year_b = data["is_leap_year"]
-            shw_bats_and_equip_dict_b = get_swh_components_associated_with_each_swh_bat(rmd_b, is_leap_year_b)
-            return {
-                "shw_bats_and_equip_dict_b": shw_bats_and_equip_dict_b,
-            }
-
         class SWHEquipRule(RuleDefinitionBase):
             def __init__(self):
                 super(Section11Rule10.RMDRule.SWHEquipRule, self).__init__(
@@ -70,35 +78,26 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                         PROPOSED=False,
                     ),
                     required_fields={
-                        "$": ["tank", "efficiency_metric_types", "efficiency_metric_values"],
+                        "$": ["tank", "input_power", "efficiency_metric_types", "efficiency_metric_values"],
                         "tank": ["type", "storage_capacity"],
                     },
                 )
 
             def get_calc_vals(self, context, data=None):
                 swh_equip_b = context.BASELINE_0
-                swh_fuel_type = swh_equip_b.get("heater_fuel_type")
-                swh_tank_type = swh_equip_b["tank"]["type"]
-                storage_volume_b = swh_equip_b["tank"]["storage_capacity"]
-                swh_input_power_b = swh_equip_b.get("input_power")
-                swh_capacity_per_volume = swh_input_power_b / storage_volume_b if swh_input_power_b else None
+                swh_fuel_type_b = swh_equip_b.get("heater_fuel_type")
+                swh_tank_type_b = swh_equip_b["tank"]["type"]
+                swh_tank_storage_volume_b = swh_equip_b["tank"]["storage_capacity"]
+                swh_input_power_b = swh_equip_b["input_power"]
+                swh_capacity_per_volume_b = swh_input_power_b / swh_tank_storage_volume_b if swh_input_power_b else None
 
                 # Determine swh_type
-                INSTANTANEOUS_TYPES = [
-                    SWHTankOptions.CONSUMER_INSTANTANEOUS,
-                    SWHTankOptions.COMMERCIAL_INSTANTANEOUS,
-                    SWHTankOptions.RESIDENTIAL_DUTY_COMMERCIAL_INSTANTANEOUS
-                ]
-                STORAGE_TYPES = [
-                    SWHTankOptions.CONSUMER_STORAGE,
-                    SWHTankOptions.COMMERCIAL_STORAGE
-                ]
-                if swh_tank_type in INSTANTANEOUS_TYPES:
+                if swh_tank_type_b in INSTANTANEOUS_TYPES:
                     swh_type = "INSTANTANEOUS"
-                elif swh_tank_type in STORAGE_TYPES:
-                    if swh_fuel_type == EnergySourceOptions.ELECTRICITY:
+                elif swh_tank_type_b in STORAGE_TYPES:
+                    if swh_fuel_type_b == EnergySourceOptions.ELECTRICITY:
                         swh_type = "ELECTRIC_RESISTANCE_STORAGE"
-                    elif swh_fuel_type in [EnergySourceOptions.NATURAL_GAS, EnergySourceOptions.PROPANE]:
+                    elif swh_fuel_type_b in [EnergySourceOptions.NATURAL_GAS, EnergySourceOptions.PROPANE]:
                         swh_type = "GAS_STORAGE"
                     else:
                         swh_type = "OTHER"
@@ -119,21 +118,55 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                             draw_pattern_b = "Medium"
                         else:
                             draw_pattern_b = "High"
+                draw_pattern_b = "" if swh_input_power_b and swh_input_power_b*ureg("W") > 105000*ureg("Btu/h") else draw_pattern_b
+                # draw_pattern_b = None if the SWH draw pattern is not defined and the first hour rating is not defined
 
-                # draw_pattern_b will be None if the SWH draw pattern is not defined and the first hour rating is not defined
+                # Get Electric Storage Water Heater Efficiency
+                if swh_type == "ELECTRIC_RESISTANCE_STORAGE":
+                    if swh_input_power_b and swh_input_power_b < 12*ureg("kW"):
+                        # Lookup the expected efficiency from Appendix F-2
+                        assert_(draw_pattern_b is not None, "Draw pattern must be defined for table F-2 lookup")
+                        efficiency_data = table_f_2_lookup(
+                            "Electric storage water heater",
+                            swh_tank_storage_volume_b,
+                            draw_pattern_b,
+                        )
+                    else:
+                        # Lookup the expected efficiency from Table 7.8
+                        # Note: Draw pattern is not used in this lookup
+                        efficiency_data = table_7_8_lookup(
+                            "Electric storage water heater",
+                            swh_input_power_b,
+                        )
 
-                shw_bats_and_equip_dict_b = data["shw_bats_and_equip_dict_b"]
+                # Get Gas Storage Water Heater Efficiency
+                elif swh_type == "GAS_STORAGE":
+                    if swh_input_power_b and swh_input_power_b <= 75000*ureg("Btu/h"):
+                        # Lookup the expected efficiency from Appendix F-2
+                        assert_(draw_pattern_b is not None, "Draw pattern must be defined for table F-2 lookup")
+                        efficiency_data = table_f_2_lookup(
+                            "Gas storage water heater",
+                            swh_tank_storage_volume_b,
+                            draw_pattern_b
+                        )
+                    else:
+                        # Lookup the expected efficiency from Table 7.8
+                        assert_(draw_pattern_b is not None, "Draw pattern must be defined for table 7-8 lookup")
+                        efficiency_data = table_7_8_lookup(
+                            "Gas storage water heater",
+                            swh_input_power_b,
+                            draw_pattern_b
+                        )
 
-
-                pass
-                # return {
-                #     "tank_type_b": tank_type_b,
-                #     "storage_volume_b": CalcQ(storage_volume_b),
-                #     "expected_efficiency_b": expected_efficiency_b,
-                #     "standby_loss_target_b": standby_loss_target_b,
-                #     "modeled_efficiency_b": modeled_efficiency_b,
-                #     "modeled_standby_loss_b": modeled_standby_loss_b,
-                # }
+                return {
+                    "swh_tank_type_b": swh_tank_type_b,
+                    "storage_volume_b": CalcQ(storage_volume_b),
+                    "expected_efficiency_b": expected_efficiency_b,
+                    "standby_loss_target_b": standby_loss_target_b,
+                    "modeled_efficiency_b": modeled_efficiency_b,
+                    "modeled_standby_loss_b": modeled_standby_loss_b,
+                    "swh_capacity_per_volume_b": swh_capacity_per_volume_b,
+                }
 
             def manual_check_required(self, context, calc_vals=None, data=None):
                 pass
