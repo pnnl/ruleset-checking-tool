@@ -46,7 +46,7 @@ def table_f_2_lookup(equipment_type: str, storage_capacity: Quantity, draw_patte
     type_pattern_matched = find_osstd_table_entries(filters, osstd_table=data["ashrae_90_1_table_F_2"])
 
     # Intersect the two filtered sets: only those that match capacity and type/pattern
-    return [entry for entry in type_pattern_matched if entry in capacity_matched]
+    return [entry["Efficiency"] for entry in type_pattern_matched if entry in capacity_matched]
 
 
 def find_capacity_matched_entries(capacity: Quantity, data_table):

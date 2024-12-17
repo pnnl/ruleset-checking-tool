@@ -18,15 +18,8 @@ def test__table_7_8_lookup_elec_over12kw():
         12.0 * ureg.kilowatt,
     ) == [
         {
-            'Equipment Type': 'Electric storage water heater',
-            'Capacity min': {'inclusive': True, 'unit': 'kW', 'value': 12},
-            'Capacity max': {'inclusive': False, 'unit': 'kW', 'value': 9999},
-            'Draw Pattern': '',
-            'Efficiency': {
-                'equation': '0.3 + 27/v_m',
-                'metric': 'STANDBY_LOSS_FRACTION',
-                'variables': ['v_m']
-            },
+            'equation': '0.3 + 27/v',
+            'metric': 'STANDBY_LOSS_FRACTION',
         }
     ]
 
@@ -45,15 +38,8 @@ def test__table_7_8_lookup_gas_105kbtuh_low():
         "Low",
     ) == [
         {
-            'Equipment Type': 'Gas storage water heater',
-            'Capacity min': {'inclusive': False, 'unit': 'Btu/h', 'value': 75000},
-            'Capacity max': {'inclusive': True, 'unit': 'Btu/h', 'value': 105000},
-            'Draw Pattern': 'Low',
-            'Efficiency': {
-                'equation': '0.5362 - 0.0012*v_r',
-                'metric': 'UNIFORM_ENERGY_FACTOR',
-                'variables': ['v_r']
-            },
+            'equation': '0.5362 - 0.0012*v',
+            'metric': 'UNIFORM_ENERGY_FACTOR',
          }
     ]
 
@@ -65,15 +51,8 @@ def test__table_7_8_lookup_gas_105kbtuh_high():
         "High",
     ) == [
         {
-            'Equipment Type': 'Gas storage water heater',
-            'Capacity min': {'inclusive': False, 'unit': 'Btu/h', 'value': 75000},
-            'Capacity max': {'inclusive': True, 'unit': 'Btu/h', 'value': 105000},
-            'Draw Pattern': 'High',
-            'Efficiency': {
-                'equation': '0.6597 - 0.0009*v_r',
-                'metric': 'UNIFORM_ENERGY_FACTOR',
-                'variables': ['v_r']
-            },
+            'equation': '0.6597 - 0.0009*v',
+            'metric': 'UNIFORM_ENERGY_FACTOR',
          }
     ]
 
@@ -84,26 +63,12 @@ def test__table_7_8_lookup_gas_over105kbtuh():
         106.0 * ureg("kBtu/h"),
     ) == [
         {
-            'Equipment Type': 'Gas storage water heater',
-            'Capacity min': {'inclusive': False, 'unit': 'Btu/h', 'value': 105000},
-            'Capacity max': {'inclusive': True, 'unit': 'Btu/h', 'value': 9999999},
-            'Draw Pattern': '',
-            'Efficiency': {
-                'equation': '0.80',
-                'metric': 'THERMAL_EFFICIENCY',
-                'variables': []
-            },
-         },
+            'equation': '0.80',
+            'metric': 'THERMAL_EFFICIENCY',
+        },
         {
-            'Equipment Type': 'Gas storage water heater',
-            'Capacity min': {'inclusive': False, 'unit': 'Btu/h', 'value': 105000},
-            'Capacity max': {'inclusive': True, 'unit': 'Btu/h', 'value': 9999999},
-            'Draw Pattern': '',
-            'Efficiency': {
-                'equation': 'q/800 + 110*v**0.5',
-                'metric': 'STANDBY_LOSS_ENERGY',
-                'variables': ['q', 'v']
-            },
+            'equation': 'q/800 + 110*v**0.5',
+            'metric': 'STANDBY_LOSS_ENERGY',
         }
     ]
 

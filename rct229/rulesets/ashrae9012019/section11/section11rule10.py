@@ -85,11 +85,13 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
 
             def get_calc_vals(self, context, data=None):
                 swh_equip_b = context.BASELINE_0
-                swh_fuel_type_b = swh_equip_b.get("heater_fuel_type")
                 swh_tank_type_b = swh_equip_b["tank"]["type"]
                 swh_tank_storage_volume_b = swh_equip_b["tank"]["storage_capacity"]
                 swh_input_power_b = swh_equip_b["input_power"]
-                swh_capacity_per_volume_b = swh_input_power_b / swh_tank_storage_volume_b if swh_input_power_b else None
+                swh_efficiency_b = dict(zip(swh_equip_b["efficiency_metric_types"], swh_equip_b["efficiency_metric_values"]))
+                swh_capacity_per_volume_b = swh_input_power_b / swh_tank_storage_volume_b
+
+                swh_fuel_type_b = swh_equip_b.get("heater_fuel_type")
 
                 # Determine swh_type
                 if swh_tank_type_b in INSTANTANEOUS_TYPES:
@@ -119,9 +121,18 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                         else:
                             draw_pattern_b = "High"
                 draw_pattern_b = "" if swh_input_power_b and swh_input_power_b*ureg("W") > 105000*ureg("Btu/h") else draw_pattern_b
-                # draw_pattern_b = None if the SWH draw pattern is not defined and the first hour rating is not defined
+                # draw_pattern_b will be None if the SWH draw pattern is not defined and the first hour rating is not defined
+                # this will cause efficiency_data to be empty if the draw_pattern is required for the lookup
 
-                # Get Electric Storage Water Heater Efficiency
+                efficiency_data = None
+                expected_efficiency_b = None
+                expected_efficiency_metric_b = None
+                standby_loss_target_b = None
+                standby_loss_target_metric_b = None
+                modeled_efficiency_b = None
+                modeled_standby_loss_b = None
+
+                # Get Electric Storage Water Heater Efficiency Data
                 if swh_type == "ELECTRIC_RESISTANCE_STORAGE":
                     if swh_input_power_b and swh_input_power_b < 12*ureg("kW"):
                         # Lookup the expected efficiency from Appendix F-2
@@ -139,7 +150,7 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                             swh_input_power_b,
                         )
 
-                # Get Gas Storage Water Heater Efficiency
+                # Get Gas Storage Water Heater Efficiency Data
                 elif swh_type == "GAS_STORAGE":
                     if swh_input_power_b and swh_input_power_b <= 75000*ureg("Btu/h"):
                         # Lookup the expected efficiency from Appendix F-2
@@ -157,15 +168,36 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                             swh_input_power_b,
                             draw_pattern_b
                         )
+                        # Note: If the input power is greater than 105,000 Btu/h, there will be a thermal efficiency and standby loss target
+
+                if efficiency_data:
+                    to_remove = None
+                    for efficiency in efficiency_data:
+                        if "STANDBY" in efficiency["metric"]:
+                            standby_loss_target_b = eval(efficiency["equation"], {"__builtins__": None}, {"v": swh_tank_storage_volume_b, "q": swh_input_power_b})
+                            standby_loss_target_metric_b = efficiency["metric"]
+                            modeled_standby_loss_b = swh_efficiency_b.get(standby_loss_target_metric_b)
+                            to_remove = efficiency
+                            break
+
+                    if to_remove is not None:
+                        efficiency_data.remove(to_remove)
+
+                    if len(efficiency_data) == 1:
+                        expected_efficiency_metric_b = efficiency_data[0]["metric"]
+                        expected_efficiency_b = eval(efficiency_data[0]["equation"], {"__builtins__": None}, {"v": swh_tank_storage_volume_b, "q": swh_input_power_b})
+                        modeled_efficiency_b = swh_efficiency_b.get(expected_efficiency_metric_b)
 
                 return {
                     "swh_tank_type_b": swh_tank_type_b,
-                    "storage_volume_b": CalcQ(storage_volume_b),
-                    "expected_efficiency_b": expected_efficiency_b,
-                    "standby_loss_target_b": standby_loss_target_b,
+                    "storage_volume_b": CalcQ("volume", swh_tank_storage_volume_b),
                     "modeled_efficiency_b": modeled_efficiency_b,
                     "modeled_standby_loss_b": modeled_standby_loss_b,
                     "swh_capacity_per_volume_b": swh_capacity_per_volume_b,
+                    "expected_efficiency_b": expected_efficiency_b,
+                    "expected_efficiency_metric_b": expected_efficiency_metric_b,
+                    "standby_loss_target_b": standby_loss_target_b,
+                    "standby_loss_target_metric_b": standby_loss_target_metric_b,
                 }
 
             def manual_check_required(self, context, calc_vals=None, data=None):

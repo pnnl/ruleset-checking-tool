@@ -12,10 +12,9 @@
         "unit": "kW",
         "inclusive": false
       },
-      "Draw Pattern": null,
+      "Draw Pattern": "",
       "Efficiency": {
-        "equation": "0.3 + 27/v_m",
-        "variables": ["v_m"],
+        "equation": "0.3 + 27/v",
         "metric": "STANDBY_LOSS_FRACTION"
       }
     },
@@ -33,8 +32,7 @@
       },
       "Draw Pattern": "Very small",
       "Efficiency": {
-        "equation": "0.2674 - 0.0009*v_r",
-        "variables": ["v_r"],
+        "equation": "0.2674 - 0.0009*v",
         "metric": "UNIFORM_ENERGY_FACTOR"
       }
     },
@@ -52,8 +50,7 @@
       },
       "Draw Pattern": "Low",
       "Efficiency": {
-        "equation": "0.5362 - 0.0012*v_r",
-        "variables": ["v_r"],
+        "equation": "0.5362 - 0.0012*v",
         "metric": "UNIFORM_ENERGY_FACTOR"
       }
     },
@@ -71,8 +68,7 @@
       },
       "Draw Pattern": "Medium",
       "Efficiency": {
-        "equation": "0.6002 - 0.0011*v_r",
-        "variables": ["v_r"],
+        "equation": "0.6002 - 0.0011*v",
         "metric": "UNIFORM_ENERGY_FACTOR"
       }
     },
@@ -90,8 +86,7 @@
       },
       "Draw Pattern": "High",
       "Efficiency": {
-        "equation": "0.6597 - 0.0009*v_r",
-        "variables": ["v_r"],
+        "equation": "0.6597 - 0.0009*v",
         "metric": "UNIFORM_ENERGY_FACTOR"
       }
     },
@@ -107,10 +102,9 @@
         "unit": "Btu/h",
         "inclusive": true
       },
-      "Draw Pattern": null,
+      "Draw Pattern": "",
       "Efficiency": {
         "equation": "0.80",
-        "variables": [],
         "metric": "THERMAL_EFFICIENCY"
       }
     },
@@ -126,10 +120,9 @@
         "unit": "Btu/h",
         "inclusive": true
       },
-      "Draw Pattern": null,
+      "Draw Pattern": "",
       "Efficiency": {
         "equation": "q/800 + 110*v**0.5",
-        "variables": ["q", "v"],
         "metric": "STANDBY_LOSS_ENERGY"
       }
     }

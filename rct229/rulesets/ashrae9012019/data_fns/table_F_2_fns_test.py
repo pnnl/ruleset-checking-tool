@@ -21,15 +21,8 @@ def test__table_f_2_lookup_gas_20to55gal_low():
         "Low"
     ) == [
         {
-            'Equipment Type': 'Gas storage water heater',
-            'Capacity min': {'inclusive': True, 'unit': 'gallon', 'value': 20},
-            'Capacity max': {'inclusive': True, 'unit': 'gallon', 'value': 55},
-            'Draw Pattern': 'Low',
-            'Efficiency': {
-                'equation': '0.5982 - 0.0019*v_r',
-                'metric': 'UNIFORM_ENERGY_FACTOR',
-                'variables': ['v_r']
-            },
+            'equation': '0.5982 - 0.0019*v',
+            'metric': 'UNIFORM_ENERGY_FACTOR',
          }
     ]
 
@@ -41,15 +34,8 @@ def test__table_f_2_lookup_gas_20to55gal_high():
         "High"
     ) == [
         {
-            'Equipment Type': 'Gas storage water heater',
-            'Capacity min': {'inclusive': True, 'unit': 'gallon', 'value': 20},
-            'Capacity max': {'inclusive': True, 'unit': 'gallon', 'value': 55},
-            'Draw Pattern': 'High',
-            'Efficiency': {
-                'equation': '0.6920 - 0.0013*v_r',
-                'metric': 'UNIFORM_ENERGY_FACTOR',
-                'variables': ['v_r']
-            },
+            'equation': '0.6920 - 0.0013*v',
+            'metric': 'UNIFORM_ENERGY_FACTOR',
         }
     ]
 
@@ -61,15 +47,8 @@ def test__table_f_2_lookup_gas_55to100gal_low():
         "Low"
     ) == [
         {
-            'Equipment Type': 'Gas storage water heater',
-            'Capacity min': {'inclusive': False, 'unit': 'gallon', 'value': 55},
-            'Capacity max': {'inclusive': True, 'unit': 'gallon', 'value': 100},
-            'Draw Pattern': 'Low',
-            'Efficiency': {
-                'equation': '0.7689 - 0.0005*v_r',
-                'metric': 'UNIFORM_ENERGY_FACTOR',
-                'variables': ['v_r']
-            },
+            'equation': '0.7689 - 0.0005*v',
+            'metric': 'UNIFORM_ENERGY_FACTOR',
         }
     ]
 
@@ -81,15 +60,8 @@ def test__table_f_2_lookup_gas_55to100gal_high():
         "High"
     ) == [
         {
-            'Equipment Type': 'Gas storage water heater',
-            'Capacity min': {'inclusive': False, 'unit': 'gallon', 'value': 55},
-            'Capacity max': {'inclusive': True, 'unit': 'gallon', 'value': 100},
-            'Draw Pattern': 'High',
-            'Efficiency': {
-                'equation': '0.8072 - 0.0003*v_r',
-                'metric': 'UNIFORM_ENERGY_FACTOR',
-                'variables': ['v_r']
-            },
+            'equation': '0.8072 - 0.0003*v',
+            'metric': 'UNIFORM_ENERGY_FACTOR',
          }
     ]
 
@@ -119,15 +91,8 @@ def test__table_f_2_lookup_elec_20to55gal_low():
         "Low"
     ) == [
         {
-            'Equipment Type': 'Electric storage water heater',
-            'Capacity min': {'inclusive': True, 'unit': 'gallon', 'value': 20},
-            'Capacity max': {'inclusive': True, 'unit': 'gallon', 'value': 55},
-            'Draw Pattern': 'Low',
-            'Efficiency': {
-                'equation': '0.9254 - 0.0003*v_r',
-                'metric': 'UNIFORM_ENERGY_FACTOR',
-                'variables': ['v_r']
-            },
+            'equation': '0.9254 - 0.0003*v',
+            'metric': 'UNIFORM_ENERGY_FACTOR',
         }
     ]
 
@@ -139,15 +104,8 @@ def test__table_f_2_lookup_elec_20to55gal_high():
         "High"
     ) == [
         {
-            'Equipment Type': 'Electric storage water heater',
-            'Capacity min': {'inclusive': True, 'unit': 'gallon', 'value': 20},
-            'Capacity max': {'inclusive': True, 'unit': 'gallon', 'value': 55},
-            'Draw Pattern': 'High',
-            'Efficiency': {
-                'equation': '0.9349 - 0.0001*v_r',
-                'metric': 'UNIFORM_ENERGY_FACTOR',
-                'variables': ['v_r']
-            },
+            'equation': '0.9349 - 0.0001*v',
+            'metric': 'UNIFORM_ENERGY_FACTOR',
          }
     ]
 
@@ -159,15 +117,8 @@ def test__table_f_2_lookup_elec_55to100gal_low():
         "Low"
     ) == [
         {
-            'Equipment Type': 'Electric storage water heater',
-            'Capacity min': {'inclusive': False, 'unit': 'gallon', 'value': 55},
-            'Capacity max': {'inclusive': True, 'unit': 'gallon', 'value': 100},
-            'Draw Pattern': 'Low',
-            'Efficiency': {
-                'equation': '2.0440 - 0.0011*v_r',
-                'metric': 'UNIFORM_ENERGY_FACTOR',
-                'variables': ['v_r']
-            },
+            'equation': '2.0440 - 0.0011*v',
+            'metric': 'UNIFORM_ENERGY_FACTOR',
         }
     ]
 
@@ -179,15 +130,8 @@ def test__table_f_2_lookup_elec_55to100gal_high():
         "High"
     ) == [
         {
-            'Equipment Type': 'Electric storage water heater',
-            'Capacity min': {'inclusive': False, 'unit': 'gallon', 'value': 55},
-            'Capacity max': {'inclusive': True, 'unit': 'gallon', 'value': 100},
-            'Draw Pattern': 'High',
-            'Efficiency': {
-                'equation': '2.2418 - 0.0011*v_r',
-                'metric': 'UNIFORM_ENERGY_FACTOR',
-                'variables': ['v_r']
-            },
+            'equation': '2.2418 - 0.0011*v',
+            'metric': 'UNIFORM_ENERGY_FACTOR',
         }
     ]
 
