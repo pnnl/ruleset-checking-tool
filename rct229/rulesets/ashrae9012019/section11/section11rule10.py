@@ -191,7 +191,7 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
 
                 return {
                     "swh_tank_type_b": swh_tank_type_b,
-                    "storage_volume_b": CalcQ("volume", swh_tank_storage_volume_b),
+                    "swh_tank_storage_volume_b": CalcQ("volume", swh_tank_storage_volume_b),
                     "modeled_efficiency_b": modeled_efficiency_b,
                     "modeled_standby_loss_b": modeled_standby_loss_b,
                     "swh_input_power_per_volume_b": CalcQ("power/volume", swh_input_power_per_volume_b),
@@ -202,7 +202,26 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                 }
 
             def manual_check_required(self, context, calc_vals=None, data=None):
-                pass
+                swh_tank_type_b = calc_vals["swh_tank_type_b"]
+                swh_input_power_per_volume_b = calc_vals["swh_input_power_per_volume_b"]
+                swh_tank_storage_volume_b = calc_vals["swh_tank_storage_volume_b"]
+                modeled_efficiency_b = calc_vals["modeled_efficiency_b"]
+                modeled_standby_loss_b = calc_vals["modeled_standby_loss_b"]
+                expected_efficiency_metric_b = calc_vals["expected_efficiency_metric_b"]
+                standby_loss_target_b = calc_vals["standby_loss_target_b"]
+
+                return (
+                        # Input power per volume is greater than the capacity per volume limit
+                        swh_input_power_per_volume_b > CAPACITY_PER_VOLUME_LIMIT
+                        # Electric resistance storage water heater with a storage volume in the range that produces an unreliable efficiency lookup
+                        or (swh_tank_type_b == "ELECTRIC_RESISTANCE_STORAGE" and 55*ureg("gallon") < swh_tank_storage_volume_b <= 100*ureg("gallon"))
+                        # Lookup values do not match any of the table entries
+                        or (expected_efficiency_metric_b is None and standby_loss_target_b is None)
+                        # Efficiency metric for the SWHEquip does not match the expected metric when only one of efficiency/SL is required
+                        or (modeled_efficiency_b is None and modeled_standby_loss_b is None)
+                        # Either efficiency metric for the SWHEquip does not match the expected values when both of efficiency/SL are required
+                        or (expected_efficiency_metric_b and standby_loss_target_b and (modeled_efficiency_b is None or modeled_standby_loss_b is None))
+                )
 
             def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
                 pass
