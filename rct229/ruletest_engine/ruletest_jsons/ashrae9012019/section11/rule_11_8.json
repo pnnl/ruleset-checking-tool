@@ -47,10 +47,10 @@
                                                                 "use": 100,
                                                                 "use_units": "POWER_PER_AREA"
                                                             }
-														]
-													},
-													{
-														"id": "Space 2",
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": "Space 2",
                                                         "floor_area": 92.90303999999999,
                                                         "service_water_heating_building_area_type": "OFFICE",
                                                         "service_water_heating_uses": [
@@ -148,7 +148,7 @@
                                                                 "use": 10,
                                                                 "use_units": "POWER_PER_AREA"
                                                             },
-															{
+                                                            {
                                                                 "id": "SHW 2",
                                                                 "served_by_distribution_system": "SHW Distribution 2",
                                                                 "use": 10,
@@ -256,7 +256,7 @@
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 92.90303999999999,
-														"service_water_heating_building_area_type": "OFFICE",
+                                                        "service_water_heating_building_area_type": "OFFICE",
                                                         "service_water_heating_uses": [
                                                             {
                                                                 "id": "SHW 1",
@@ -305,7 +305,7 @@
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 92.90303999999999,
-														"service_water_heating_building_area_type": "OFFICE",
+                                                        "service_water_heating_building_area_type": "OFFICE",
                                                         "service_water_heating_uses": [
                                                             {
                                                                 "id": "SHW 1",
@@ -744,7 +744,7 @@
                                                                 "id": "SHW 2",
                                                                 "served_by_distribution_system": "SHW Distribution 1",
                                                                 "use": 100,
-																"use_units": "POWER_PER_AREA"
+                                                                "use_units": "POWER_PER_AREA"
                                                             }
                                                         ]
                                                     }
@@ -815,7 +815,7 @@
                                                                 "id": "SHW 2",
                                                                 "served_by_distribution_system": "SHW Distribution 1",
                                                                 "use": 100,
-																"use_units": "POWER_PER_AREA"
+                                                                "use_units": "POWER_PER_AREA"
                                                             }
                                                         ]
                                                     }
@@ -916,13 +916,13 @@
                                                                 "id": "SHW 3",
                                                                 "served_by_distribution_system": "SHW Distribution 1",
                                                                 "use": 100,
-																"use_units": "POWER_PER_AREA"
+                                                                "use_units": "POWER_PER_AREA"
                                                             },
 															{
                                                                 "id": "SHW 4",
                                                                 "served_by_distribution_system": "SHW Distribution 1",
                                                                 "use": 100,
-																"use_units": "POWER_PER_AREA"
+                                                                "use_units": "POWER_PER_AREA"
                                                             }
                                                         ]
                                                     }
@@ -998,13 +998,13 @@
                                                             {
                                                                 "id": "SHW 3",
                                                                 "served_by_distribution_system": "SHW Distribution 1",
-																"use": 10,
+                                                                "use": 10,
                                                                 "use_units": "POWER_PER_AREA"
                                                             },
 															{
                                                                 "id": "SHW 4",
                                                                 "served_by_distribution_system": "SHW Distribution 2",
-																"use": 10,
+                                                                "use": 10,
                                                                 "use_units": "POWER_PER_AREA"
                                                             }
                                                         ]
