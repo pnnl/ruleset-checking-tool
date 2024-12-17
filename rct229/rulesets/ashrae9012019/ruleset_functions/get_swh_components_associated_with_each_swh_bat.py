@@ -13,6 +13,7 @@ from rct229.utils.pint_utils import ZERO
 from rct229.utils.utility_functions import (
     find_exactly_one_service_water_heating_distribution_system,
 )
+from rct229.utils.assertions import getattr_
 
 
 @dataclass

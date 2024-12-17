@@ -1,11 +1,10 @@
+from collections import deque
+
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_uses_associated_with_each_building_segment import (
-    get_swh_uses_associated_with_each_building_segment,
-)
-from rct229.utils.jsonpath_utils import find_all, find_exactly_one_with_field_value
+from rct229.utils.jsonpath_utils import find_all
 
 
 class Section11Rule6(RuleDefinitionListIndexedBase):
@@ -32,54 +31,51 @@ class Section11Rule6(RuleDefinitionListIndexedBase):
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
-                each_rule=Section11Rule6.RMDRule.BuildingSegmentRule(),
+                each_rule=Section11Rule6.RMDRule.SWHDistRule(),
                 index_rmd=BASELINE_0,
-                list_path="buildings[*].building_segments[*]",
+                list_path="$.service_water_heating_distribution_systems[*]",
             )
 
-        def create_data(self, context, data):
+        def is_applicable(self, context, data=None):
             rmd_b = context.BASELINE_0
 
-            return {"rmd_b": rmd_b}
+            swh_dist_sys_list_b = find_all(
+                "$.service_water_heating_distribution_systems[*]", rmd_b
+            )
 
-        class BuildingSegmentRule(RuleDefinitionBase):
+            return swh_dist_sys_list_b
+
+        class SWHDistRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section11Rule6.RMDRule.BuildingSegmentRule, self).__init__(
+                super(Section11Rule6.RMDRule.SWHDistRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False,
                         BASELINE_0=True,
                         PROPOSED=False,
                     ),
+                    required_fields={
+                        "$": ["service_water_piping"],
+                    },
                 )
 
             def get_calc_vals(self, context, data=None):
-                rmd_b = data["rmd_b"]
-                building_segment_b = context.BASELINE_0
+                swh_dist_sys_b = context.BASELINE_0
 
-                swh_distribution_and_eq_list = (
-                    get_swh_uses_associated_with_each_building_segment(
-                        rmd_b, building_segment_b["id"]
-                    )
-                )
+                piping_losses_modeled_b = []
+                for service_water_piping in swh_dist_sys_b["service_water_piping"]:
+                    queue = deque([service_water_piping])
+                    while queue:
+                        current_piping = queue.popleft()
+                        children_piping = current_piping.get("child", [])
+                        queue.extend(children_piping)
 
-                for piping_id in swh_distribution_and_eq_list:
-                    service_water_piping_b = find_exactly_one_with_field_value(
-                        "$.service_water_heating_distribution_systems[*]",
-                        "id",
-                        piping_id,
-                        rmd_b,
-                    )
-
-                    piping_losses_modeled_b = any(
-                        find_all(
-                            "$.service_water_piping[*].are_thermal_losses_modeled",
-                            service_water_piping_b,
+                        piping_losses_modeled_b.append(
+                            current_piping.get("are_thermal_losses_modeled")
                         )
-                    )
 
                 return {"piping_losses_modeled_b": piping_losses_modeled_b}
 
             def rule_check(self, context, calc_vals=None, data=None):
                 piping_losses_modeled_b = calc_vals["piping_losses_modeled_b"]
 
-                return not piping_losses_modeled_b
+                return not any(piping_losses_modeled_b)
