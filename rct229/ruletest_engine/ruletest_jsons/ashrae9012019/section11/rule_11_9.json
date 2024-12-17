@@ -6,50 +6,16 @@
         "test_description": "A one story, one zone building has one service hot water systems serving no service water heating use types.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "11-8",
-            "ruleset_reference": "Table G3.1 #11, baseline column, a & b",
-            "rule_description": "One system per building area type shall be modeled in the baseline.",
+            "rule_id": "11-9",
+            "ruleset_reference": "Table G3.1 #11, baseline column, a",
+            "rule_description": "The baseline system must be sized according to Standard 90.1 2019, Section 7.4.1.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
-            "comparison_value": "Proposed Model",
-            "mandatory_rule": "Yes",
+            "comparison_value": "Expected Value",
+            "mandatory_rule": "No",
             "schema_version": "0.0.34"
         },
         "rmd_transformations": {
-            "proposed": {
-                "id": "ASHRAE229 1",
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
-                "ruleset_model_descriptions": [
-                    {
-                        "id": "RMD 1",
-                        "buildings": [
-                            {
-                                "id": "Building 1",
-                                "building_segments": [
-                                    {
-                                        "id": "Building Segment 1",
-                                        "zones": [
-                                            {
-                                                "id": "Thermal Zone 1",
-                                                "floor_name": "Floor1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ],
-                        "type": "PROPOSED"
-                    }
-                ]
-            },
             "baseline": {
                 "id": "ASHRAE229 1",
                 "calendar": {
@@ -76,7 +42,7 @@
                                                             {
                                                                 "id": "SHW 1",
                                                                 "served_by_distribution_system": "SHW Distribution 1",
-                                                                "use": 100
+                                                                "use": 0
                                                             }
                                                         ]
                                                     }
@@ -106,50 +72,16 @@
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "Check that the baseline Service Water Heating System for Building Area Type",
         "standard": {
-            "rule_id": "11-8",
-            "ruleset_reference": "Table G3.1 #11, baseline column, a & b",
-            "rule_description": "One system per building area type shall be modeled in the baseline.",
+            "rule_id": "11-9",
+            "ruleset_reference": "Table G3.1 #11, baseline column, a",
+            "rule_description": "The baseline system must be sized according to Standard 90.1 2019, Section 7.4.1.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
-            "comparison_value": "Proposed Model",
-            "mandatory_rule": "Yes",
+            "comparison_value": "Expected Value",
+            "mandatory_rule": "No",
             "schema_version": "0.0.34"
         },
         "rmd_transformations": {
-            "proposed": {
-                "id": "ASHRAE229 1",
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
-                "ruleset_model_descriptions": [
-                    {
-                        "id": "RMD 1",
-                        "buildings": [
-                            {
-                                "id": "Building 1",
-                                "building_segments": [
-                                    {
-                                        "id": "Building Segment 1",
-                                        "zones": [
-                                            {
-                                                "id": "Thermal Zone 1",
-                                                "floor_name": "Floor1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ],
-                        "type": "PROPOSED"
-                    }
-                ]
-            },
             "baseline": {
                 "id": "ASHRAE229 1",
                 "calendar": {
