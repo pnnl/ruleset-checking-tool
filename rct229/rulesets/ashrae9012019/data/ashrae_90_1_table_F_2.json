@@ -4,12 +4,12 @@
       "Equipment Type": "Gas storage water heater",
       "Capacity min": {
         "value": 20,
-        "unit": "gal",
+        "unit": "gallon",
         "inclusive": true
       },
       "Capacity max": {
         "value": 55,
-        "unit": "gal",
+        "unit": "gallon",
         "inclusive": true
       },
       "Draw Pattern": "Very small",
@@ -23,12 +23,12 @@
       "Equipment Type": "Gas storage water heater",
       "Capacity min": {
         "value": 20,
-        "unit": "gal",
+        "unit": "gallon",
         "inclusive": true
       },
       "Capacity max": {
         "value": 55,
-        "unit": "gal",
+        "unit": "gallon",
         "inclusive": true
       },
       "Draw Pattern": "Low",
@@ -42,12 +42,12 @@
       "Equipment Type": "Gas storage water heater",
       "Capacity min": {
         "value": 20,
-        "unit": "gal",
+        "unit": "gallon",
         "inclusive": true
       },
       "Capacity max": {
         "value": 55,
-        "unit": "gal",
+        "unit": "gallon",
         "inclusive": true
       },
       "Draw Pattern": "Medium",
@@ -61,12 +61,12 @@
       "Equipment Type": "Gas storage water heater",
       "Capacity min": {
         "value": 20,
-        "unit": "gal",
+        "unit": "gallon",
         "inclusive": true
       },
       "Capacity max": {
         "value": 55,
-        "unit": "gal",
+        "unit": "gallon",
         "inclusive": true
       },
       "Draw Pattern": "High",
@@ -80,12 +80,12 @@
       "Equipment Type": "Gas storage water heater",
       "Capacity min": {
         "value": 55,
-        "unit": "gal",
+        "unit": "gallon",
         "inclusive": false
       },
       "Capacity max": {
         "value": 100,
-        "unit": "gal",
+        "unit": "gallon",
         "inclusive": true
       },
       "Draw Pattern": "Very small",
@@ -99,12 +99,12 @@
       "Equipment Type": "Gas storage water heater",
       "Capacity min": {
         "value": 55,
-        "unit": "gal",
+        "unit": "gallon",
         "inclusive": false
       },
       "Capacity max": {
         "value": 100,
-        "unit": "gal",
+        "unit": "gallon",
         "inclusive": true
       },
       "Draw Pattern": "Low",
@@ -118,12 +118,12 @@
       "Equipment Type": "Gas storage water heater",
       "Capacity min": {
         "value": 55,
-        "unit": "gal",
+        "unit": "gallon",
         "inclusive": false
       },
       "Capacity max": {
         "value": 100,
-        "unit": "gal",
+        "unit": "gallon",
         "inclusive": true
       },
       "Draw Pattern": "Medium",
@@ -137,12 +137,12 @@
       "Equipment Type": "Gas storage water heater",
       "Capacity min": {
         "value": 55,
-        "unit": "gal",
+        "unit": "gallon",
         "inclusive": false
       },
       "Capacity max": {
         "value": 100,
-        "unit": "gal",
+        "unit": "gallon",
         "inclusive": true
       },
       "Draw Pattern": "High",
@@ -156,12 +156,12 @@
       "Equipment Type": "Electric storage water heater",
       "Capacity min": {
         "value": 20,
-        "unit": "gal",
+        "unit": "gallon",
         "inclusive": true
       },
       "Capacity max": {
         "value": 55,
-        "unit": "gal",
+        "unit": "gallon",
         "inclusive": true
       },
       "Draw Pattern": "Very small",
@@ -175,12 +175,12 @@
       "Equipment Type": "Electric storage water heater",
       "Capacity min": {
         "value": 20,
-        "unit": "gal",
+        "unit": "gallon",
         "inclusive": true
       },
       "Capacity max": {
         "value": 55,
-        "unit": "gal",
+        "unit": "gallon",
         "inclusive": true
       },
       "Draw Pattern": "Low",
@@ -194,12 +194,12 @@
       "Equipment Type": "Electric storage water heater",
       "Capacity min": {
         "value": 20,
-        "unit": "gal",
+        "unit": "gallon",
         "inclusive": true
       },
       "Capacity max": {
         "value": 55,
-        "unit": "gal",
+        "unit": "gallon",
         "inclusive": true
       },
       "Draw Pattern": "Medium",
@@ -213,12 +213,12 @@
       "Equipment Type": "Electric storage water heater",
       "Capacity min": {
         "value": 20,
-        "unit": "gal",
+        "unit": "gallon",
         "inclusive": true
       },
       "Capacity max": {
         "value": 55,
-        "unit": "gal",
+        "unit": "gallon",
         "inclusive": true
       },
       "Draw Pattern": "High",
@@ -232,12 +232,12 @@
       "Equipment Type": "Electric storage water heater",
       "Capacity min": {
         "value": 55,
-        "unit": "gal",
+        "unit": "gallon",
         "inclusive": false
       },
       "Capacity max": {
         "value": 100,
-        "unit": "gal",
+        "unit": "gallon",
         "inclusive": true
       },
       "Draw Pattern": "Very small",
@@ -251,12 +251,12 @@
       "Equipment Type": "Electric storage water heater",
       "Capacity min": {
         "value": 55,
-        "unit": "gal",
+        "unit": "gallon",
         "inclusive": false
       },
       "Capacity max": {
         "value": 100,
-        "unit": "gal",
+        "unit": "gallon",
         "inclusive": true
       },
       "Draw Pattern": "Low",
@@ -270,12 +270,12 @@
       "Equipment Type": "Electric storage water heater",
       "Capacity min": {
         "value": 55,
-        "unit": "gal",
+        "unit": "gallon",
         "inclusive": false
       },
       "Capacity max": {
         "value": 100,
-        "unit": "gal",
+        "unit": "gallon",
         "inclusive": true
       },
       "Draw Pattern": "Medium",
@@ -289,12 +289,12 @@
       "Equipment Type": "Electric storage water heater",
       "Capacity min": {
         "value": 55,
-        "unit": "gal",
+        "unit": "gallon",
         "inclusive": false
       },
       "Capacity max": {
         "value": 100,
-        "unit": "gal",
+        "unit": "gallon",
         "inclusive": true
       },
       "Draw Pattern": "High",
