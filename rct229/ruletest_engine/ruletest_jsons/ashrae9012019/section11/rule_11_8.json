@@ -177,7 +177,7 @@
                                                                 "use": 100,
                                                                 "use_units": "POWER_PER_AREA"
                                                             },
-															{
+                                                            {
                                                                 "id": "SHW 4",
                                                                 "served_by_distribution_system": "SHW Distribution 2",
                                                                 "use": 100,
@@ -918,7 +918,7 @@
                                                                 "use": 100,
                                                                 "use_units": "POWER_PER_AREA"
                                                             },
-															{
+                                                            {
                                                                 "id": "SHW 4",
                                                                 "served_by_distribution_system": "SHW Distribution 1",
                                                                 "use": 100,
@@ -1001,7 +1001,7 @@
                                                                 "use": 10,
                                                                 "use_units": "POWER_PER_AREA"
                                                             },
-															{
+                                                            {
                                                                 "id": "SHW 4",
                                                                 "served_by_distribution_system": "SHW Distribution 2",
                                                                 "use": 10,
@@ -1025,7 +1025,7 @@
                                     }
                                 ]
                             },
-							{
+                            {
                                 "id": "SHW Distribution 2",
                                 "tanks": [
                                     {
