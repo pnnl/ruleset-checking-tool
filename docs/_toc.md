@@ -272,12 +272,18 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [10-14](section10/10-14.md): Baseline shall be modeled with the heating HVAC system efficiency per Tables G3.5.1-G3.5.6 (applies only to the heating efficiency of baseline furnaces and heat pumps).  Where multiple HVAC zones or residential spaces are combined into a single thermal block the heating efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the  equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces.
 
 ## Section 11 - Service Hot Water System
+  * [11-1](section11/Rule11-1.md): Where a complete service water-heating system exists, the proposed design shall reflect the actual system type. Where a service water-heating system has been designed the service waterheating type shall be consistent with design documents.  Where no service water-heating system exists or has been designed and submitted with design documents but the building will have service water-heating loads, a service water-heating system shall be modeled that matches the system type in the baseline building design.
   * [11-6](section11/Rule11-6.md): Piping losses shall not be modeled.
   * [11-7](section11/Rule11-7.md): Except in buildings that will have no service water heating loads, the service water heating system type in the baseline building design shall be as specified in Table G3.1.1-2 for each building area type in the proposed design.
   * [11-8](section11/Rule11-8.md): One system per building area type shall be modeled in the baseline.
+  * [11-9](section11/Rule11-9.md): The baseline system must be sized according to Standard 90.1 2019, Section 7.4.1.
   * [11-11](section11/Rule11-11.md): For buildings that will have no service water-heating loads, no service water-heating shall be modeled in baseline building model.
   * [11-12](section11/Rule11-12.md): For large, 24-hour-per-day facilities that meet the prescriptive criteria for use of condenser heat recovery systems described in Section 6.5.6.2, a system meeting the requirements of that section shall be included in the baseline building design regardless of the exceptions to Section 6.5.6.2.
   * [11-13](section11/Rule11-13.md): Service water-heating energy consumption shall be calculated explicitly based upon the volume of service water heating required and the entering makeup water and the leaving service water-heating temperatures. Entering water temperatures shall be estimated based upon the location. Leaving temperatures shall be based upon the end-use requirements.
+  * [11-14](section11/Rule11-14.md): Where recirculation pumps are used to ensure prompt availability of service water-heating at the end use, the energy consumption of such pumps shall be calculated explicitly.
+  * [11-15](section11/Rule11-15.md): Service water loads and use shall be the same for both the proposed design and baseline building design.
+  * [11-16](section11/Rule11-16.md): Gas water heaters shall be modeled using natural gas as their fuel.  Exceptions: Where natural gas is not available for the proposed building site, as determined by the rating authority, gas water heaters shall be modeled using propane as their fuel.
+  * [11-17](section11/Rule11-17.md): All buildings that will have service water heating loads must include those loads in the simulation
 
 ## Section 12 - Receptacles and Other Loads
   * [12-1](section12/Rule12-1.md): Receptacle and process power shall be modeled as identical to the proposed design
