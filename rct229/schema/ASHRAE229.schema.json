@@ -4506,6 +4506,33 @@
             ],
             "additionalProperties": false
         },
+        "ServiceWaterHeatingEfficiencyMetricOptions": {
+            "type": "string",
+            "enum": [
+                "ENERGY_FACTOR",
+                "UNIFORM_ENERGY_FACTOR",
+                "THERMAL_EFFICIENCY",
+                "STANDBY_LOSS_FRACTION",
+                "STANDBY_LOSS_ENERGY",
+                "OTHER"
+            ],
+            "descriptions": [
+                "Energy factor",
+                "Uniform energy factor",
+                "Thermal efficiency",
+                "Standby loss fraction",
+                "Standby loss fraction",
+                "Other"
+            ],
+            "notes": [
+                null,
+                "See 10 CFR 430 Appendix E Uniform Test Method for Measuring the Energy Consumption of Water Heaters for more information.",
+                null,
+                null,
+                "Units are watts and can be converted from STANDBY_LOSS_FRACTION based forumulat found in CBECC-Res User Manual",
+                null
+            ]
+        },
         "ServiceWaterHeaterOptions": {
             "type": "string",
             "enum": [
