@@ -5,7 +5,9 @@ from rct229.rulesets.ashrae9012019.data import data
 from rct229.rulesets.ashrae9012019.data_fns.table_utils import find_osstd_table_entries
 
 
-def table_f_2_lookup(equipment_type: str, storage_capacity: Quantity, draw_pattern: str = "") -> list:
+def table_f_2_lookup(
+    equipment_type: str, storage_capacity: Quantity, draw_pattern: str = ""
+) -> list:
     """Returns the service water heater efficiency value(s) and metrics for a baseline service water heater as
     required by ASHRAE 90.1 Appendix F Table F-2
 
@@ -34,7 +36,9 @@ def table_f_2_lookup(equipment_type: str, storage_capacity: Quantity, draw_patte
 
     """
     # Filter entries by capacity thresholds
-    capacity_matched = find_capacity_matched_entries(storage_capacity, data["ashrae_90_1_table_F_2"])
+    capacity_matched = find_capacity_matched_entries(
+        storage_capacity, data["ashrae_90_1_table_F_2"]
+    )
 
     # Build table filters based on equipment type and draw pattern
     filters = [("Equipment Type", equipment_type)]
@@ -43,15 +47,21 @@ def table_f_2_lookup(equipment_type: str, storage_capacity: Quantity, draw_patte
         filters.append(("Draw Pattern", draw_pattern))
 
     # Filter the entire table by equipment type (and draw pattern if provided)
-    type_pattern_matched = find_osstd_table_entries(filters, osstd_table=data["ashrae_90_1_table_F_2"])
+    type_pattern_matched = find_osstd_table_entries(
+        filters, osstd_table=data["ashrae_90_1_table_F_2"]
+    )
 
     # Intersect the two filtered sets: only those that match capacity and type/pattern
-    return [entry["Efficiency"] for entry in type_pattern_matched if entry in capacity_matched]
+    return [
+        entry["Efficiency"]
+        for entry in type_pattern_matched
+        if entry in capacity_matched
+    ]
 
 
 def find_capacity_matched_entries(capacity: Quantity, data_table):
     """Return entries that match the given capacity based on their min/max thresholds and inclusivity.
-       This function assumes 'capacity' is a Pint Quantity and that all table entries have units specified.
+    This function assumes 'capacity' is a Pint Quantity and that all table entries have units specified.
     """
     keys = list(data_table.keys())
     data_list = data_table[keys[0]]
