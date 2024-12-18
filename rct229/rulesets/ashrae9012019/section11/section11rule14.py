@@ -5,7 +5,10 @@ from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_equipment_associated_with_each_swh_distriubtion_system import (
     get_swh_equipment_associated_with_each_swh_distribution_system,
 )
+from rct229.schema.config import ureg
 from rct229.utils.jsonpath_utils import find_all, find_one_with_field_value
+
+REQ_PUMP_POWER = 0.0 * ureg("Btu/hr")
 
 
 class Section11Rule14(RuleDefinitionListIndexedBase):
@@ -39,6 +42,30 @@ class Section11Rule14(RuleDefinitionListIndexedBase):
                 index_rmd=BASELINE_0,
                 list_path="$.service_water_heating_distribution_systems[*]",
             )
+
+        def is_applicable(self, context, data=None):
+            rmd_b = context.BASELINE_0
+            rmd_p = context.PROPOSED
+
+            swh_comps_dict_b = (
+                get_swh_equipment_associated_with_each_swh_distribution_system(rmd_b)
+            )
+
+            swh_use_loads_p = all(
+                [
+                    True if swh_use_p > 0.0 else False
+                    for swh_dist_id_b in find_all(
+                        "$.service_water_heating_distribution_systems[*].id", rmd_b
+                    )
+                    for swh_dist_sys_id_b in swh_comps_dict_b[swh_dist_id_b].uses
+                    for swh_use_p in find_all(
+                        f'$.buildings[*].building_segments[*].zones[*].spaces[*].service_water_heating_uses[*][?(@.id="{swh_dist_sys_id_b}")].use',
+                        rmd_p,
+                    )
+                ]
+            )
+
+            return swh_use_loads_p
 
         def create_data(self, context, data):
             rmd_b = context.BASELINE_0
@@ -81,28 +108,6 @@ class Section11Rule14(RuleDefinitionListIndexedBase):
                 "piping_info_b": piping_info_b,
             }
 
-        def is_applicable(self, context, data=None):
-            rmd_b = context.BASELINE_0
-            rmd_p = context.PROPOSED
-
-            swh_comps_dict_b = data["swh_comps_dict_b"]
-
-            swh_use_loads_p = all(
-                [
-                    True if swh_use_p.get("use", 0.0) > 0.0 else False
-                    for swh_dist_id_b in find_all(
-                        "$.service_water_heating_distribution_systems[*].id", rmd_b
-                    )
-                    for swh_dist_sys_id_b in swh_comps_dict_b[swh_dist_id_b].uses
-                    for swh_use_p in find_all(
-                        f'$.buildings[*].building_segments[*].zones[*].spaces[*].service_water_heating_uses[*][?(@.id="{swh_dist_sys_id_b}")].use',
-                        rmd_p,
-                    )
-                ]
-            )
-
-            return swh_use_loads_p
-
         class SWHDistributionRule(RuleDefinitionBase):
             def __init__(self):
                 super(Section11Rule14.RMDRule.SWHDistributionRule, self).__init__(
@@ -119,13 +124,14 @@ class Section11Rule14(RuleDefinitionListIndexedBase):
             def get_calc_vals(self, context, data=None):
                 piping_info_b = data["piping_info_b"]
 
-                return {"piping_info_b": piping_info_b}
+                return {"piping_info_id_b": piping_info_b}
 
             def rule_check(self, context, calc_vals=None, data=None):
-                piping_info_b = calc_vals["piping_info_b"]
+                piping_info_b = data["piping_info_b"]
 
                 return all(
                     piping["IS_RECIRC"] for piping in piping_info_b.values()
                 ) and all(
-                    piping["PUMP_POWER"] > 10 for piping in piping_info_b.values()
+                    piping["PUMP_POWER"] > REQ_PUMP_POWER
+                    for piping in piping_info_b.values()
                 )
