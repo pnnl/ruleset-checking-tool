@@ -8,7 +8,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_equipment_associate
 from rct229.schema.config import ureg
 from rct229.utils.jsonpath_utils import find_all, find_one_with_field_value
 
-REQ_PUMP_POWER = 0.0 * ureg("Btu/hr")
+MIN_PUMP_POWER = 0.0 * ureg("Btu/hr")
 
 
 class Section11Rule14(RuleDefinitionListIndexedBase):
@@ -132,6 +132,6 @@ class Section11Rule14(RuleDefinitionListIndexedBase):
                 return all(
                     piping["IS_RECIRC"] for piping in piping_info_b.values()
                 ) and all(
-                    piping["PUMP_POWER"] > REQ_PUMP_POWER
+                    piping["PUMP_POWER"] > MIN_PUMP_POWER
                     for piping in piping_info_b.values()
                 )
