@@ -93,18 +93,18 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
 
                 swh_fuel_type_b = swh_equip_b.get("heater_fuel_type")
 
-                # Determine swh_type
+                # Determine swh_type_b
                 if swh_tank_type_b in INSTANTANEOUS_TYPES:
-                    swh_type = "INSTANTANEOUS"
+                    swh_type_b = "INSTANTANEOUS"
                 elif swh_tank_type_b in STORAGE_TYPES:
                     if swh_fuel_type_b == EnergySourceOptions.ELECTRICITY:
-                        swh_type = "ELECTRIC_RESISTANCE_STORAGE"
+                        swh_type_b = "ELECTRIC_RESISTANCE_STORAGE"
                     elif swh_fuel_type_b in [EnergySourceOptions.NATURAL_GAS, EnergySourceOptions.PROPANE]:
-                        swh_type = "GAS_STORAGE"
+                        swh_type_b = "GAS_STORAGE"
                     else:
-                        swh_type = "OTHER"
+                        swh_type_b = "OTHER"
                 else:
-                    swh_type = "OTHER"
+                    swh_type_b = "OTHER"
 
                 # Determine draw_pattern_b
                 draw_pattern_b = swh_equip_b.get("draw_pattern")
@@ -134,7 +134,7 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                 modeled_standby_loss_b = None
 
                 # Get Electric Storage Water Heater Efficiency Data
-                if swh_type == "ELECTRIC_RESISTANCE_STORAGE":
+                if swh_type_b == "ELECTRIC_RESISTANCE_STORAGE":
                     if swh_input_power_b < 12*ureg("kW"):
                         # Lookup the expected efficiency from Appendix F-2
                         assert_(draw_pattern_b is not None, "Draw pattern must be defined for table F-2 lookup")
@@ -152,7 +152,7 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                         )
 
                 # Get Gas Storage Water Heater Efficiency Data
-                elif swh_type == "GAS_STORAGE":
+                elif swh_type_b == "GAS_STORAGE":
                     if swh_input_power_b <= 75000*ureg("Btu/h"):
                         # Lookup the expected efficiency from Appendix F-2
                         assert_(draw_pattern_b is not None, "Draw pattern must be defined for table F-2 lookup")
@@ -190,6 +190,7 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                         modeled_efficiency_b = swh_efficiency_b.get(expected_efficiency_metric_b)
 
                 return {
+                    "swh_type_b": swh_type_b,
                     "swh_tank_type_b": swh_tank_type_b,
                     "swh_input_power_b": swh_input_power_b,
                     "swh_tank_storage_volume_b": CalcQ("volume", swh_tank_storage_volume_b),
@@ -203,6 +204,7 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                 }
 
             def manual_check_required(self, context, calc_vals=None, data=None):
+                swh_type_b = calc_vals["swh_type_b"]
                 swh_tank_type_b = calc_vals["swh_tank_type_b"]
                 swh_input_power_per_volume_b = calc_vals["swh_input_power_per_volume_b"]
                 swh_tank_storage_volume_b = calc_vals["swh_tank_storage_volume_b"]
@@ -212,8 +214,9 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                 standby_loss_target_metric_b = calc_vals["standby_loss_target_metric_b"]
 
                 return (
+                        swh_type_b == "INSTANTANEOUS"
                         # Input power per volume is greater than the capacity per volume limit
-                        swh_input_power_per_volume_b > CAPACITY_PER_VOLUME_LIMIT
+                        or swh_input_power_per_volume_b > CAPACITY_PER_VOLUME_LIMIT
                         # Electric resistance storage water heater with a storage volume in the range that produces an unreliable efficiency lookup
                         or (swh_tank_type_b == "ELECTRIC_RESISTANCE_STORAGE" and 55*ureg("gallon") < swh_tank_storage_volume_b <= 100*ureg("gallon"))
                         # Lookup values do not match any of the table entries
@@ -225,6 +228,7 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                 )
 
             def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
+                swh_type_b = calc_vals["swh_type_b"]
                 swh_tank_type_b = calc_vals["swh_tank_type_b"]
                 swh_input_power_b = calc_vals["swh_input_power_b"]
                 swh_tank_storage_volume_b = calc_vals["swh_tank_storage_volume_b"]
@@ -235,6 +239,11 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                 standby_loss_target_metric_b = calc_vals["standby_loss_target_metric_b"]
 
                 manual_check_msg = []
+
+                if swh_type_b == "INSTANTANEOUS":
+                    manual_check_msg.append(
+                        "There baseline water heater is of an Instantaneous type. Only electric resistance and gas storage water heaters are applicable to the Appendix G baseline acccording to Table G3.1 #11 Baseline Building Performance column and Table G3.1.1-2. Consequently, the efficiency of the modeled water heater was not assessed."
+                    )
 
                 if swh_input_power_per_volume_b > CAPACITY_PER_VOLUME_LIMIT:
                     manual_check_msg.append(
@@ -258,15 +267,21 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
 
                 if expected_efficiency_metric_b is not None and modeled_efficiency_b is None:
                     manual_check_msg.append(
-                        f"The expected efficiency metric is {expected_efficiency_metric_b}. {expected_efficiency_metric_b} was not provided for this water heater.  Note that the specific requirements of 10 CFR 430 can be found in ASHRAE 90.1 Appendix F Table F-2."
+                        f"Based on the provided details, {expected_efficiency_metric_b} is an expected efficiency metric for this water heater, however it was not provided. Note that the specific requirements of 10 CFR 430 can be found in ASHRAE 90.1 Appendix F Table F-2."
                     )
 
                 if standby_loss_target_metric_b is not None and modeled_standby_loss_b is None:
                     manual_check_msg.append(
-                        f"The expected standby loss metric is {standby_loss_target_metric_b}. {standby_loss_target_metric_b} was not provided for this water heater.  Note that the specific requirements of 10 CFR 430 can be found in ASHRAE 90.1 Appendix F Table F-2."
+                        f"The expected standby loss metric is {standby_loss_target_metric_b}. {standby_loss_target_metric_b} was not provided for this water heater. Note that the specific requirements of 10 CFR 430 can be found in ASHRAE 90.1 Appendix F Table F-2."
                     )
 
                 return "\n".join(manual_check_msg)
 
             def rule_check(self, context, calc_vals=None, data=None):
-                pass
+                swh_type_b = calc_vals["swh_type_b"]
+                modeled_efficiency_b = calc_vals["modeled_efficiency_b"]
+                modeled_standby_loss_b = calc_vals["modeled_standby_loss_b"]
+                expected_efficiency_b = calc_vals["expected_efficiency_b"]
+                standby_loss_target_b = calc_vals["standby_loss_target_b"]
+
+                return swh_type_b != "OTHER" and modeled_efficiency_b == expected_efficiency_b and modeled_standby_loss_b <= standby_loss_target_b
