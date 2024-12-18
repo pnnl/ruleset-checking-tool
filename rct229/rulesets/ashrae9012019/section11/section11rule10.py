@@ -85,11 +85,11 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                     },
                     precision={
                         "swh_efficiency_b": {
-                            "precision": .01,
+                            "precision": 0.01,
                             "unit": "",
                         },
                         "swh_standby_loss_fraction_b": {
-                            "precision": .01,
+                            "precision": 0.01,
                             "unit": "",
                         },
                         "swh_standby_loss_energy_b": {
@@ -396,15 +396,32 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                 standby_loss_target_metric_b = calc_vals["standby_loss_target_metric_b"]
 
                 standby_loss_complies = (
-                        (standby_loss_target_b is None) or
-                        (standby_loss_target_metric_b == SWHEfficiencyMetricOptions.STANDBY_LOSS_FRACTION and self.precision_comparison["swh_standby_loss_fraction_b"](modeled_standby_loss_b, standby_loss_target_b)) or
-                        (standby_loss_target_metric_b == SWHEfficiencyMetricOptions.STANDBY_LOSS_ENERGY and self.precision_comparison["swh_standby_loss_energy_b"](modeled_standby_loss_b, standby_loss_target_b)) or
-                        (standby_loss_target_b is not None and modeled_standby_loss_b < standby_loss_target_b)
+                    (standby_loss_target_b is None)
+                    or (
+                        standby_loss_target_metric_b
+                        == SWHEfficiencyMetricOptions.STANDBY_LOSS_FRACTION
+                        and self.precision_comparison["swh_standby_loss_fraction_b"](
+                            modeled_standby_loss_b, standby_loss_target_b
+                        )
+                    )
+                    or (
+                        standby_loss_target_metric_b
+                        == SWHEfficiencyMetricOptions.STANDBY_LOSS_ENERGY
+                        and self.precision_comparison["swh_standby_loss_energy_b"](
+                            modeled_standby_loss_b, standby_loss_target_b
+                        )
+                    )
+                    or (
+                        standby_loss_target_b is not None
+                        and modeled_standby_loss_b < standby_loss_target_b
+                    )
                 )
 
                 return (
                     swh_type_b in STORAGE_TYPES
-                    and self.precision_comparison["swh_efficiency_b"](modeled_efficiency_b, expected_efficiency_b)
+                    and self.precision_comparison["swh_efficiency_b"](
+                        modeled_efficiency_b, expected_efficiency_b
+                    )
                     and standby_loss_complies
                 )
 
@@ -424,12 +441,17 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                 standby_loss_target_b = calc_vals["standby_loss_target_b"]
 
                 standby_loss_complies = (
-                        (standby_loss_target_b is None) or
-                        (std_equal(modeled_standby_loss_b, standby_loss_target_b)) or
-                        (standby_loss_target_b is not None and std_le(val=modeled_standby_loss_b, std_val=standby_loss_target_b))
+                    (standby_loss_target_b is None)
+                    or (std_equal(modeled_standby_loss_b, standby_loss_target_b))
+                    or (
+                        standby_loss_target_b is not None
+                        and std_le(
+                            val=modeled_standby_loss_b, std_val=standby_loss_target_b
+                        )
+                    )
                 )
                 return (
-                        swh_type_b in STORAGE_TYPES
-                        and std_equal(modeled_efficiency_b, expected_efficiency_b)
-                        and standby_loss_complies
+                    swh_type_b in STORAGE_TYPES
+                    and std_equal(modeled_efficiency_b, expected_efficiency_b)
+                    and standby_loss_complies
                 )
