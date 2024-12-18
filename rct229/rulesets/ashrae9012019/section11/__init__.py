@@ -10,7 +10,7 @@ __all__ = [
     "section11rule6",
     "section11rule7",
     "section11rule8",
-    # "section11rule9",
+    "section11rule9",
     # "section11rule10",
     "section11rule11",
     "section11rule12",
