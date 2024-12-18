@@ -1,3 +1,5 @@
+from collections import deque
+
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
@@ -6,6 +8,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_equipment_associate
     get_swh_equipment_associated_with_each_swh_distribution_system,
 )
 from rct229.schema.config import ureg
+from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all, find_one_with_field_value
 from rct229.utils.pint_utils import ZERO
 from rct229.utils.utility_functions import find_exactly_one_service_water_heating_use
@@ -79,33 +82,42 @@ class Section11Rule14(RuleDefinitionListIndexedBase):
             for swh_dist_sys_b in find_all(
                 "$.service_water_heating_distribution_systems[*]", rmd_b
             ):
-                for piping_id_b in swh_comps_dict_b[swh_dist_sys_b["id"]].piping:
-                    piping = find_one_with_field_value(
-                        "$.service_water_heating_distribution_systems[*].service_water_piping[*]",
-                        "id",
-                        piping_id_b,
-                        rmd_b,
-                    )
-                    piping_id = piping["id"]
-                    piping_info_b[piping_id] = {}
-                    piping_info_b[piping_id]["IS_RECIRC"] = piping.get(
-                        "is_recirculation_loop"
-                    )
+                for service_water_piping in getattr_(
+                    swh_dist_sys_b,
+                    "service_water_heating_distribution_systems",
+                    "service_water_piping",
+                ):
+                    queue = deque([service_water_piping])
+                    while queue:
+                        current_piping = queue.popleft()
+                        children_piping = current_piping.get("child", [])
+                        queue.extend(children_piping)
 
-                    if piping_info_b[piping_id]["IS_RECIRC"]:
-                        for pump_id in swh_comps_dict_b[swh_dist_sys_b["id"]].pumps:
-                            pump = find_one_with_field_value(
-                                "$.pumps[*]",
-                                "id",
-                                pump_id,
-                                rmd_b,
-                            )
-                            piping_info_b[piping_id].setdefault(
-                                "PUMP_POWER", ZERO.POWER
-                            )
-                            piping_info_b[piping_id]["PUMP_POWER"] += pump.get(
-                                "design_electric_power", ZERO.POWER
-                            )
+                        current_piping_id = current_piping["id"]
+                        if (
+                            current_piping_id
+                            in swh_comps_dict_b[swh_dist_sys_b["id"]].piping
+                        ):
+                            piping_info_b[current_piping_id] = {}
+                            piping_info_b[current_piping_id][
+                                "IS_RECIRC"
+                            ] = current_piping.get("is_recirculation_loop")
+
+                        piping_info_b[current_piping_id].setdefault(
+                            "PUMP_POWER", ZERO.POWER
+                        )
+                        if piping_info_b[current_piping_id]["IS_RECIRC"]:
+                            for pump_id in swh_comps_dict_b[swh_dist_sys_b["id"]].pumps:
+                                pump = find_one_with_field_value(
+                                    "$.pumps[*]",
+                                    "id",
+                                    pump_id,
+                                    rmd_b,
+                                )
+
+                                piping_info_b[current_piping_id][
+                                    "PUMP_POWER"
+                                ] += pump.get("design_electric_power", ZERO.POWER)
 
             return {
                 "swh_comps_dict_b": swh_comps_dict_b,
