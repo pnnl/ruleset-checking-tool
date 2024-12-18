@@ -302,7 +302,8 @@
                                                         "service_water_heating_uses": [
                                                             {
                                                                 "id": "SHW 2",
-                                                                "served_by_distribution_system": "SHW Distribution 2"
+                                                                "served_by_distribution_system": "SHW Distribution 2",
+                                                                "use": 100
                                                             }
                                                         ]
                                                     }
@@ -394,33 +395,7 @@
                     }
                 ]
             }
-        },
-        "ruleset_model_descriptions": [
-            {
-                "buildings": [
-                    {
-                        "building_segments": [
-                            {},
-                            {
-                                "zones": [
-                                    {
-                                        "spaces": [
-                                            {
-                                                "service_water_heating_uses": [
-                                                    {
-                                                        "use": 100
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
+        }
     },
     "rule-11-8-d": {
         "Section": 11,
@@ -487,7 +462,8 @@
                                                         "service_water_heating_uses": [
                                                             {
                                                                 "id": "SHW 2",
-                                                                "served_by_distribution_system": "SHW Distribution 2"
+                                                                "served_by_distribution_system": "SHW Distribution 2",
+                                                                "use": 100
                                                             }
                                                         ]
                                                     }
@@ -581,33 +557,7 @@
                     }
                 ]
             }
-        },
-        "ruleset_model_descriptions": [
-            {
-                "buildings": [
-                    {
-                        "building_segments": [
-                            {},
-                            {
-                                "zones": [
-                                    {
-                                        "spaces": [
-                                            {
-                                                "service_water_heating_uses": [
-                                                    {
-                                                        "use": 100
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
+        }
     },
     "rule-11-8-e": {
         "Section": 11,
@@ -673,7 +623,8 @@
                                                         "service_water_heating_uses": [
                                                             {
                                                                 "id": "SHW 2",
-                                                                "served_by_distribution_system": "SHW Distribution 1"
+                                                                "served_by_distribution_system": "SHW Distribution 1",
+                                                                "use": 100
                                                             }
                                                         ]
                                                     }
@@ -761,33 +712,7 @@
                     }
                 ]
             }
-        },
-        "ruleset_model_descriptions": [
-            {
-                "buildings": [
-                    {
-                        "building_segments": [
-                            {},
-                            {
-                                "zones": [
-                                    {
-                                        "spaces": [
-                                            {
-                                                "service_water_heating_uses": [
-                                                    {
-                                                        "use": 100
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
+        }
     },
     "rule-11-8-f": {
         "Section": 11,
@@ -853,7 +778,8 @@
                                                         "service_water_heating_uses": [
                                                             {
                                                                 "id": "SHW 2",
-                                                                "served_by_distribution_system": "SHW Distribution 1"
+                                                                "served_by_distribution_system": "SHW Distribution 1",
+                                                                "use": 100
                                                             }
                                                         ]
                                                     }
@@ -940,32 +866,6 @@
                     }
                 ]
             }
-        },
-        "ruleset_model_descriptions": [
-            {
-                "buildings": [
-                    {
-                        "building_segments": [
-                            {},
-                            {
-                                "zones": [
-                                    {
-                                        "spaces": [
-                                            {
-                                                "service_water_heating_uses": [
-                                                    {
-                                                        "use": 100
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
+        }
     }
 }
