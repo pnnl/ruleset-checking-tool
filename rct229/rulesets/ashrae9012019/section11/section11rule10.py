@@ -366,7 +366,7 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                     and modeled_standby_loss_b is None
                 ):
                     manual_check_msg.append(
-                        f"The expected standby loss metric is {standby_loss_target_metric_b}. {standby_loss_target_metric_b} was not provided for this water heater. Note that the specific requirements of 10 CFR 430 can be found in ASHRAE 90.1 Appendix F Table F-2."
+                        f"Based on the provided details, {standby_loss_target_metric_b} is an expected efficiency metric for this water heater, however it was not provided. Note that the specific requirements of 10 CFR 430 can be found in ASHRAE 90.1 Appendix F Table F-2."
                     )
 
                 return "\n".join(manual_check_msg)
@@ -383,3 +383,11 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                     and modeled_efficiency_b == expected_efficiency_b
                     and modeled_standby_loss_b <= standby_loss_target_b
                 )
+
+            def get_fail_msg(self, context, calc_vals=None, data=None):
+                swh_type_b = calc_vals["swh_type_b"]
+
+                if swh_type_b == "OTHER":
+                    return "The water heater type was not recognized, and does not match any of the expected baseline water heater types."
+                else:
+                    return "The modeled efficiency or standby loss for the water heater does not match the expected values."
