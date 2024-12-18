@@ -6,6 +6,8 @@ from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_descr
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.data_fns.table_F_2_fns import table_f_2_lookup
 from rct229.rulesets.ashrae9012019.data_fns.table_7_8_fns import table_7_8_lookup
+from rct229.utils.compare_standard_val import std_le
+from rct229.utils.std_comparisons import std_equal
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import CalcQ
 from rct229.utils.assertions import assert_
@@ -80,6 +82,20 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                             "efficiency_metric_values",
                         ],
                         "tank": ["type", "storage_capacity"],
+                    },
+                    precision={
+                        "swh_efficiency_b": {
+                            "precision": .01,
+                            "unit": "",
+                        },
+                        "swh_standby_loss_fraction_b": {
+                            "precision": .01,
+                            "unit": "",
+                        },
+                        "swh_standby_loss_energy_b": {
+                            "precision": 1,
+                            "unit": "Btu/h",
+                        },
                     },
                 )
 
@@ -377,11 +393,19 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                 modeled_standby_loss_b = calc_vals["modeled_standby_loss_b"]
                 expected_efficiency_b = calc_vals["expected_efficiency_b"]
                 standby_loss_target_b = calc_vals["standby_loss_target_b"]
+                standby_loss_target_metric_b = calc_vals["standby_loss_target_metric_b"]
+
+                standby_loss_complies = (
+                        (standby_loss_target_b is None) or
+                        (standby_loss_target_metric_b == SWHEfficiencyMetricOptions.STANDBY_LOSS_FRACTION and self.precision_comparison["swh_standby_loss_fraction_b"](modeled_standby_loss_b, standby_loss_target_b)) or
+                        (standby_loss_target_metric_b == SWHEfficiencyMetricOptions.STANDBY_LOSS_ENERGY and self.precision_comparison["swh_standby_loss_energy_b"](modeled_standby_loss_b, standby_loss_target_b)) or
+                        (standby_loss_target_b is not None and modeled_standby_loss_b < standby_loss_target_b)
+                )
 
                 return (
-                    swh_type_b != "OTHER"
-                    and modeled_efficiency_b == expected_efficiency_b
-                    and modeled_standby_loss_b <= standby_loss_target_b
+                    swh_type_b in STORAGE_TYPES
+                    and self.precision_comparison["swh_efficiency_b"](modeled_efficiency_b, expected_efficiency_b)
+                    and standby_loss_complies
                 )
 
             def get_fail_msg(self, context, calc_vals=None, data=None):
@@ -391,3 +415,21 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                     return "The water heater type was not recognized, and does not match any of the expected baseline water heater types."
                 else:
                     return "The modeled efficiency or standby loss for the water heater does not match the expected values."
+
+            def is_tolerance_fail(self, context, calc_vals=None, data=None):
+                swh_type_b = calc_vals["swh_type_b"]
+                modeled_efficiency_b = calc_vals["modeled_efficiency_b"]
+                modeled_standby_loss_b = calc_vals["modeled_standby_loss_b"]
+                expected_efficiency_b = calc_vals["expected_efficiency_b"]
+                standby_loss_target_b = calc_vals["standby_loss_target_b"]
+
+                standby_loss_complies = (
+                        (standby_loss_target_b is None) or
+                        (std_equal(modeled_standby_loss_b, standby_loss_target_b)) or
+                        (standby_loss_target_b is not None and std_le(val=modeled_standby_loss_b, std_val=standby_loss_target_b))
+                )
+                return (
+                        swh_type_b in STORAGE_TYPES
+                        and std_equal(modeled_efficiency_b, expected_efficiency_b)
+                        and standby_loss_complies
+                )
