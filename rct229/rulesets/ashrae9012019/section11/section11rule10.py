@@ -265,6 +265,11 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                         "The storage tank volume falls outside the supported range based on the size categories in ASHRAE 90.1 Table 7.8 and in 10 CFR 430. Consequently, this rule was not assessed for this service water heater. Note that the specific requirements of 10 CFR 430 can be found in ASHRAE 90.1 Appendix F Table F-2."
                     )
 
+                elif expected_efficiency_metric_b is None and standby_loss_target_metric_b is None:
+                    manual_check_msg.append(
+                        "The expected efficiency for this water heater could not be determined based on the provided details."
+                    )
+
                 if expected_efficiency_metric_b is not None and modeled_efficiency_b is None:
                     manual_check_msg.append(
                         f"Based on the provided details, {expected_efficiency_metric_b} is an expected efficiency metric for this water heater, however it was not provided. Note that the specific requirements of 10 CFR 430 can be found in ASHRAE 90.1 Appendix F Table F-2."
