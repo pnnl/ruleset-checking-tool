@@ -322,7 +322,7 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
 
                 if swh_type_b == "INSTANTANEOUS":
                     manual_check_msg.append(
-                        "There baseline water heater is of an Instantaneous type. Only electric resistance and gas storage water heaters are applicable to the Appendix G baseline acccording to Table G3.1 #11 Baseline Building Performance column and Table G3.1.1-2. Consequently, the efficiency of the modeled water heater was not assessed."
+                        "The baseline water heater is of an Instantaneous type. All service water heaters in the baseline should be storage water heaters, according to Table G3.1 #11 Baseline Building Performance column and Table G3.1.1-2. Consequently, the efficiency of the modeled water heater was not assessed."
                     )
 
                 if swh_input_power_per_volume_b > CAPACITY_PER_VOLUME_LIMIT:
