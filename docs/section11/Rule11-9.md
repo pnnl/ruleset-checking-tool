@@ -22,8 +22,8 @@
 ## Applicability Checks:
 - only projects with SHW use for the SHW space BAT in the baseline model are applicable
 - create boolean rule_is_applicable and set it to false: `rule_is_applicable = FALSE`
-- use the function get_SWH_bats_and_SWH_use to get a list of SWH uses for each BAT: `shw_bat_uses_dict = get_SWH_bats_and_SWH_use(U_RMD)`
-- look at each SHW BAT: `for swh_bat in shw_bat_uses_dict.keys():`
+- use the function get_SWH_bats_and_SWH_use to get a list of SWH uses for each BAT: `shw_bat_uses_dict = get_SWH_bats_and_SWH_use(B_RMD)`
+- look at each SHW BAT: `for swh_bat in shw_bat_uses_dict:`
   - look at the uses in this swh bat: `for swh_use_id in shw_bat_uses_dict[swh_bat]:`
     - get the swh use: `swh_use = get_component_by_id(B_RMD, ServiceWaterHeatingUse)`
     - if even one use is greater than zero, go to rule assertion: `if swh_use.use > 0: `
