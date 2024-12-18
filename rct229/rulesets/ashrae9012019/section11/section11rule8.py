@@ -87,6 +87,7 @@ class Section11Rule8(RuleDefinitionListIndexedBase):
             service_water_heating_uses_p = {
                 swh_use["id"]: swh_use.get("use", 0.0)
                 for swh_use in find_all(
+                    # TODO: Moving the `service_water_heating_uses` key to the `building_segments` level is being discussed. If the `service_water_heating_uses` key is moved, this function needs to be revisited.
                     "$.buildings[*].building_segments[*].zones[*].spaces[*].service_water_heating_uses[*]",
                     rmd_p,
                 )
@@ -200,7 +201,8 @@ class Section11Rule8(RuleDefinitionListIndexedBase):
                                 is_referenced_in_other_bats_b = True
 
                 multiple_segments_with_bat_other_b = (
-                    True if num_other_swh_bat_segment_b > 1 else False
+                    num_other_swh_bat_segment_b > 1
+                    and swh_bat_b == SERVICE_WATER_HEATING_SPACE.ALL_OTHERS
                 )
 
                 return {
@@ -213,11 +215,15 @@ class Section11Rule8(RuleDefinitionListIndexedBase):
 
             def manual_check_required(self, context, calc_vals=None, data=None):
                 swh_bat_b = calc_vals["swh_bat_b"]
+                num_of_bldg_segment_b = calc_vals["num_of_bldg_segment_b"]
                 multiple_segments_with_bat_other_b = calc_vals[
                     "multiple_segments_with_bat_other_b"
                 ]
 
-                return swh_bat_b == "UNDETERMINED" or multiple_segments_with_bat_other_b
+                return (swh_bat_b == "UNDETERMINED" and num_of_bldg_segment_b > 1) or (
+                    swh_bat_b == SERVICE_WATER_HEATING_SPACE.ALL_OTHERS
+                    and multiple_segments_with_bat_other_b > 1
+                )
 
             def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
                 swh_bat_b = calc_vals["swh_bat_b"]
