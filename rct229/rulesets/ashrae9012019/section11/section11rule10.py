@@ -14,7 +14,7 @@ EnergySourceOptions = SchemaEnums.schema_enums["EnergySourceOptions"]
 SWHEfficiencyMetricOptions = SchemaEnums.schema_enums[
     "ServiceWaterHeatingEfficiencyMetricOptions"
 ]
-SWHTankOptions = SchemaEnums.schema_enums["ServiceWaterHeatingTankOptions"]
+SWHTankOptions = SchemaEnums.schema_enums["ServiceWaterHeaterTankOptions"]
 
 
 CAPACITY_PER_VOLUME_LIMIT = 4000 * ureg("Btu/h/gallon")
