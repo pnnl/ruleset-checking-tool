@@ -191,6 +191,7 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
 
                 return {
                     "swh_tank_type_b": swh_tank_type_b,
+                    "swh_input_power_b": swh_input_power_b,
                     "swh_tank_storage_volume_b": CalcQ("volume", swh_tank_storage_volume_b),
                     "modeled_efficiency_b": modeled_efficiency_b,
                     "modeled_standby_loss_b": modeled_standby_loss_b,
@@ -208,7 +209,7 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                 modeled_efficiency_b = calc_vals["modeled_efficiency_b"]
                 modeled_standby_loss_b = calc_vals["modeled_standby_loss_b"]
                 expected_efficiency_metric_b = calc_vals["expected_efficiency_metric_b"]
-                standby_loss_target_b = calc_vals["standby_loss_target_b"]
+                standby_loss_target_metric_b = calc_vals["standby_loss_target_metric_b"]
 
                 return (
                         # Input power per volume is greater than the capacity per volume limit
@@ -216,15 +217,56 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                         # Electric resistance storage water heater with a storage volume in the range that produces an unreliable efficiency lookup
                         or (swh_tank_type_b == "ELECTRIC_RESISTANCE_STORAGE" and 55*ureg("gallon") < swh_tank_storage_volume_b <= 100*ureg("gallon"))
                         # Lookup values do not match any of the table entries
-                        or (expected_efficiency_metric_b is None and standby_loss_target_b is None)
+                        or (expected_efficiency_metric_b is None and standby_loss_target_metric_b is None)
                         # Efficiency metric for the SWHEquip does not match the expected metric when only one of efficiency/SL is required
                         or (modeled_efficiency_b is None and modeled_standby_loss_b is None)
                         # Either efficiency metric for the SWHEquip does not match the expected values when both of efficiency/SL are required
-                        or (expected_efficiency_metric_b and standby_loss_target_b and (modeled_efficiency_b is None or modeled_standby_loss_b is None))
+                        or (expected_efficiency_metric_b and standby_loss_target_metric_b and (modeled_efficiency_b is None or modeled_standby_loss_b is None))
                 )
 
             def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
-                pass
+                swh_tank_type_b = calc_vals["swh_tank_type_b"]
+                swh_input_power_b = calc_vals["swh_input_power_b"]
+                swh_tank_storage_volume_b = calc_vals["swh_tank_storage_volume_b"]
+                swh_input_power_per_volume_b = calc_vals["swh_input_power_per_volume_b"]
+                modeled_efficiency_b = calc_vals["modeled_efficiency_b"]
+                modeled_standby_loss_b = calc_vals["modeled_standby_loss_b"]
+                expected_efficiency_metric_b = calc_vals["expected_efficiency_metric_b"]
+                standby_loss_target_metric_b = calc_vals["standby_loss_target_metric_b"]
+
+                manual_check_msg = []
+
+                if swh_input_power_per_volume_b > CAPACITY_PER_VOLUME_LIMIT:
+                    manual_check_msg.append(
+                        "Capacity per volume exceeds the limit of 4000 (Btu/hr)/gallon given for storage water heaters in ASHRAE 90.1 Table 7.8."
+                    )
+
+                if swh_tank_type_b == "ELECTRIC_RESISTANCE_STORAGE" and 55*ureg("gallon") < swh_tank_storage_volume_b <= 100*ureg("gallon"):
+                    manual_check_msg.append(
+                        "The storage tank is between 55 and 100 gallons with a capacity <= 12kW (40945 btu/hr). The minimum efficiency requirements in 90.1 Section 7.4.2 point to 10 CFR 430 which provides a heat pump efficiency for water heaters in this capacity range which is not consistent with the efficiency of an electric resistance storage water heater which is the only electric SWH system type associated with the baseline for ASHRAE 90.1 Appendix G. Consequently, this rule was not able to be assessed for this service water heater. Note that the specific requirements of 10 CFR 430 can be found in ASHRAE 90.1 Appendix F Table F-2."
+                    )
+
+                elif swh_tank_type_b == "ELECTRIC_RESISTANCE_STORAGE" and swh_input_power_b <= 12*ureg("kW") and (swh_tank_storage_volume_b > 100*ureg("gallon") or swh_tank_storage_volume_b < 20*ureg("gallon")):
+                    manual_check_msg.append(
+                        "The storage tank volume falls outside the supported range based on the size categories in ASHRAE 90.1 Table 7.8 and in 10 CFR 430. Consequently, this rule was not assessed for this service water heater. Note that the specific requirements of 10 CFR 430 can be found in ASHRAE 90.1 Appendix F Table F-2."
+                    )
+
+                elif swh_tank_type_b == "GAS_STORAGE" and swh_input_power_b <= 75000*ureg("Btu/h") and (swh_tank_storage_volume_b > 100*ureg("gallon") or swh_tank_storage_volume_b < 20*ureg("gallon")):
+                    manual_check_msg.append(
+                        "The storage tank volume falls outside the supported range based on the size categories in ASHRAE 90.1 Table 7.8 and in 10 CFR 430. Consequently, this rule was not assessed for this service water heater. Note that the specific requirements of 10 CFR 430 can be found in ASHRAE 90.1 Appendix F Table F-2."
+                    )
+
+                if expected_efficiency_metric_b is not None and modeled_efficiency_b is None:
+                    manual_check_msg.append(
+                        f"The expected efficiency metric is {expected_efficiency_metric_b}. {expected_efficiency_metric_b} was not provided for this water heater.  Note that the specific requirements of 10 CFR 430 can be found in ASHRAE 90.1 Appendix F Table F-2."
+                    )
+
+                if standby_loss_target_metric_b is not None and modeled_standby_loss_b is None:
+                    manual_check_msg.append(
+                        f"The expected standby loss metric is {standby_loss_target_metric_b}. {standby_loss_target_metric_b} was not provided for this water heater.  Note that the specific requirements of 10 CFR 430 can be found in ASHRAE 90.1 Appendix F Table F-2."
+                    )
+
+                return "\n".join(manual_check_msg)
 
             def rule_check(self, context, calc_vals=None, data=None):
                 pass
