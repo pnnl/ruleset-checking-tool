@@ -123,7 +123,15 @@ class Section11Rule14(RuleDefinitionListIndexedBase):
             def manual_check_required(self, context, calc_vals=None, data=None):
                 piping_info_b = data["piping_info_b"]
 
-                return any(not piping["IS_RECIRC"] for piping in piping_info_b.values())
+                return all(
+                    not piping["IS_RECIRC"] or piping["PUMP_POWER"] > MIN_PUMP_POWER
+                    for piping in piping_info_b.values()
+                ) and not all(
+                    [
+                        piping["IS_RECIRC"] and piping["PUMP_POWER"] > MIN_PUMP_POWER
+                        for piping in piping_info_b.values()
+                    ]
+                )
 
             def get_calc_vals(self, context, data=None):
                 piping_info_b = data["piping_info_b"]
