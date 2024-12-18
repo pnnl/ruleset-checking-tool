@@ -36,7 +36,7 @@ class Section11Rule1(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section11Rule1.RMDRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
-                    USER=False, BASELINE_0=True, PROPOSED=True
+                    USER=True, BASELINE_0=True, PROPOSED=True
                 ),
                 each_rule=Section11Rule1.RMDRule.SWHDistributionRule(),
                 index_rmd=BASELINE_0,
@@ -44,7 +44,7 @@ class Section11Rule1(RuleDefinitionListIndexedBase):
             )
 
         def create_data(self, context, data):
-            rmd_u = context.user
+            rmd_u = context.USER
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
 
@@ -66,7 +66,7 @@ class Section11Rule1(RuleDefinitionListIndexedBase):
             ):
                 if swh_and_equip_dict_u[swh_dist_id_u].uses:
                     swh_use_u = find_one(
-                        f'$.buildings[*].building_segments[*].zones[*].spaces[*].service_water_heating_uses[*][?(@.id="{swh_dist_id_u}")]',
+                        f'$.buildings[*].building_segments[*].zones[*].spaces[*].service_water_heating_uses[*][?(@.served_by_distribution_system="{swh_dist_id_u}")]',
                         rmd_u,
                     )
                     if swh_use_u is not None and swh_use_u.get("use") > 0.0:
@@ -113,5 +113,14 @@ class Section11Rule1(RuleDefinitionListIndexedBase):
             def get_calc_vals(self, context, data=None):
                 user_proposed_comparison = data["user_proposed_comparison"]
                 user_baseline_comparison = data["user_baseline_comparison"]
+
+                return {
+                    "user_proposed_comparison": user_proposed_comparison,
+                    "user_baseline_comparison": user_baseline_comparison,
+                }
+
+            def rule_check(self, context, calc_vals=None, data=None):
+                user_proposed_comparison = calc_vals["user_proposed_comparison"]
+                user_baseline_comparison = calc_vals["user_baseline_comparison"]
 
                 return not user_proposed_comparison and not user_baseline_comparison
