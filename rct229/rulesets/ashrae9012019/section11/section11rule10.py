@@ -443,7 +443,8 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                     )
                     or (
                         standby_loss_target_b is not None
-                        and modeled_standby_loss_b * ureg("W") < standby_loss_target_b * ureg("Btu/h")
+                        and modeled_standby_loss_b * ureg("W")
+                        < standby_loss_target_b * ureg("Btu/h")
                     )
                 )
 
