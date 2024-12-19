@@ -55,7 +55,6 @@ class Section11Rule1(RuleDefinitionListIndexedBase):
             errors = []
             proposed_user_comparison = []
             proposed_baseline_comparison = []
-            user_baseline_comparison = []
             swh_dist_systems_u = find_all(
                 "$.service_water_heating_distribution_systems[*].id", rmd_u
             )
@@ -122,17 +121,11 @@ class Section11Rule1(RuleDefinitionListIndexedBase):
 
             return {
                 "proposed_user_comparison": proposed_user_comparison,
-                "user_baseline_comparison": user_baseline_comparison,
                 "proposed_baseline_comparison": proposed_baseline_comparison,
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
             proposed_user_comparison = calc_vals["proposed_user_comparison"]
-            user_baseline_comparison = calc_vals["user_baseline_comparison"]
             proposed_baseline_comparison = calc_vals["proposed_baseline_comparison"]
 
-            return not (
-                proposed_user_comparison
-                or user_baseline_comparison
-                or proposed_baseline_comparison
-            )
+            return not (proposed_user_comparison or proposed_baseline_comparison)
