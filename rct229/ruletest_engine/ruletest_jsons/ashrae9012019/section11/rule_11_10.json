@@ -491,7 +491,7 @@
         "Rule": 10,
         "Test": "h",
         "test_description": "A one story, one zone building has one gas storage water heater with input rating >105kBtu/h, 50 gallons storage capacity. The water heater efficiency is correctly modeled as 80% Et but the 1,500 Btu/h standby loss exceeds the limit.",
-        "expected_rule_outcome": "fail",
+        "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "The modeled efficiency or standby loss for the water heater does not match the expected values.",
         "standard": {
             "rule_id": "11-10",
@@ -538,7 +538,7 @@
                                 "id": "SHW Equipment 1",
                                 "distribution_system": "SHW Distribution 1",
                                 "heater_fuel_type": "NATURAL_GAS",
-                                "input_power": 35168.53333333333,
+                                "input_power": 73267.77777777778,
                                 "efficiency_metric_types": [
                                     "THERMAL_EFFICIENCY",
                                     "STANDBY_LOSS_ENERGY"

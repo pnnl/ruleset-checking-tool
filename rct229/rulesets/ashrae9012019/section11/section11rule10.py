@@ -264,7 +264,7 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                     "swh_tank_type_b": swh_tank_type_b,
                     "swh_input_power_b": swh_input_power_b,
                     "swh_tank_storage_volume_b": CalcQ(
-                        "volume", swh_tank_storage_volume_b
+                        "tank_volume", swh_tank_storage_volume_b
                     ),
                     "modeled_efficiency_b": modeled_efficiency_b,
                     "modeled_standby_loss_b": modeled_standby_loss_b,
