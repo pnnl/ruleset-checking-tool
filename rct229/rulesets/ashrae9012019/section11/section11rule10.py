@@ -34,6 +34,7 @@ draw_pattern_enum_to_lookup_str_map = {
     DrawPatternOptions.HIGH: "High",
 }
 
+
 class Section11Rule10(RuleDefinitionListIndexedBase):
     """Rule 10 of ASHRAE 90.1-2019 Appendix G Section 11 (Service Water Heating)"""
 
@@ -112,9 +113,7 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
             def get_calc_vals(self, context, data=None):
                 swh_equip_b = context.BASELINE_0
                 swh_tank_type_b = swh_equip_b["tank"]["type"]
-                swh_tank_storage_volume_b = swh_equip_b["tank"][
-                    "storage_capacity"
-                ]
+                swh_tank_storage_volume_b = swh_equip_b["tank"]["storage_capacity"]
                 swh_input_power_b = swh_equip_b["input_power"]
                 swh_efficiency_b = dict(
                     zip(
@@ -128,18 +127,28 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                 swh_fuel_type_b = swh_equip_b.get("heater_fuel_type")
 
                 # Determine draw_pattern_b
-                draw_pattern_b = draw_pattern_enum_to_lookup_str_map.get(swh_equip_b.get("draw_pattern"))
+                draw_pattern_b = draw_pattern_enum_to_lookup_str_map.get(
+                    swh_equip_b.get("draw_pattern")
+                )
                 if not draw_pattern_b:
                     first_hour_rating_b = swh_equip_b.get("first_hour_rating")
                     if first_hour_rating_b is not None:
-                        if first_hour_rating_b < 18*ureg("gallon"):
-                            draw_pattern_b = draw_pattern_enum_to_lookup_str_map[DrawPatternOptions.VERY_SMALL]
-                        elif first_hour_rating_b < 51*ureg("gallon"):
-                            draw_pattern_b = draw_pattern_enum_to_lookup_str_map[DrawPatternOptions.LOW]
-                        elif first_hour_rating_b < 75*ureg("gallon"):
-                            draw_pattern_b = draw_pattern_enum_to_lookup_str_map[DrawPatternOptions.MEDIUM]
+                        if first_hour_rating_b < 18 * ureg("gallon"):
+                            draw_pattern_b = draw_pattern_enum_to_lookup_str_map[
+                                DrawPatternOptions.VERY_SMALL
+                            ]
+                        elif first_hour_rating_b < 51 * ureg("gallon"):
+                            draw_pattern_b = draw_pattern_enum_to_lookup_str_map[
+                                DrawPatternOptions.LOW
+                            ]
+                        elif first_hour_rating_b < 75 * ureg("gallon"):
+                            draw_pattern_b = draw_pattern_enum_to_lookup_str_map[
+                                DrawPatternOptions.MEDIUM
+                            ]
                         else:
-                            draw_pattern_b = draw_pattern_enum_to_lookup_str_map[DrawPatternOptions.HIGH]
+                            draw_pattern_b = draw_pattern_enum_to_lookup_str_map[
+                                DrawPatternOptions.HIGH
+                            ]
                 # Overwrite draw pattern to empty string if the input power is greater than 105,000 Btu/h
                 draw_pattern_b = (
                     "" if swh_input_power_b > 105000 * ureg("Btu/h") else draw_pattern_b
@@ -156,7 +165,10 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                 modeled_standby_loss_b = None
 
                 # Get Electric Storage Water Heater Efficiency Data
-                if swh_fuel_type_b == EnergySourceOptions.ELECTRICITY and swh_tank_type_b in STORAGE_TYPES:
+                if (
+                    swh_fuel_type_b == EnergySourceOptions.ELECTRICITY
+                    and swh_tank_type_b in STORAGE_TYPES
+                ):
                     if swh_input_power_b < 12 * ureg("kW"):
                         # Lookup the expected efficiency from Appendix F-2
                         assert_(
@@ -177,10 +189,14 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                         )
 
                 # Get Gas Storage Water Heater Efficiency Data
-                elif swh_fuel_type_b in [
+                elif (
+                    swh_fuel_type_b
+                    in [
                         EnergySourceOptions.NATURAL_GAS,
                         EnergySourceOptions.PROPANE,
-                    ] and swh_tank_type_b in STORAGE_TYPES:
+                    ]
+                    and swh_tank_type_b in STORAGE_TYPES
+                ):
                     if swh_input_power_b <= 75000 * ureg("Btu/h"):
                         # Lookup the expected efficiency from Appendix F-2
                         assert_(
@@ -277,7 +293,8 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                     or swh_input_power_per_volume_b > CAPACITY_PER_VOLUME_LIMIT
                     # Electric resistance storage water heater with a storage volume in the range that produces an unreliable efficiency lookup
                     or (
-                        swh_fuel_type_b == EnergySourceOptions.ELECTRICITY and swh_tank_type_b in STORAGE_TYPES
+                        swh_fuel_type_b == EnergySourceOptions.ELECTRICITY
+                        and swh_tank_type_b in STORAGE_TYPES
                         and 55 * ureg("gallon")
                         < swh_tank_storage_volume_b
                         <= 100 * ureg("gallon")
@@ -323,15 +340,20 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                         "Capacity per volume exceeds the limit of 4000 (Btu/hr)/gallon given for storage water heaters in ASHRAE 90.1 Table 7.8."
                     )
 
-                if swh_fuel_type_b == EnergySourceOptions.ELECTRICITY and swh_tank_type_b in STORAGE_TYPES and 55 * ureg(
-                    "gallon"
-                ) < swh_tank_storage_volume_b <= 100 * ureg("gallon"):
+                if (
+                    swh_fuel_type_b == EnergySourceOptions.ELECTRICITY
+                    and swh_tank_type_b in STORAGE_TYPES
+                    and 55 * ureg("gallon")
+                    < swh_tank_storage_volume_b
+                    <= 100 * ureg("gallon")
+                ):
                     manual_check_msg.append(
                         "The storage tank is between 55 and 100 gallons with a capacity <= 12kW (40945 btu/hr). The minimum efficiency requirements in 90.1 Section 7.4.2 point to 10 CFR 430 which provides a heat pump efficiency for water heaters in this capacity range which is not consistent with the efficiency of an electric resistance storage water heater which is the only electric SWH system type associated with the baseline for ASHRAE 90.1 Appendix G. Consequently, this rule was not able to be assessed for this service water heater. Note that the specific requirements of 10 CFR 430 can be found in ASHRAE 90.1 Appendix F Table F-2."
                     )
 
                 elif (
-                    swh_fuel_type_b == EnergySourceOptions.ELECTRICITY and swh_tank_type_b in STORAGE_TYPES
+                    swh_fuel_type_b == EnergySourceOptions.ELECTRICITY
+                    and swh_tank_type_b in STORAGE_TYPES
                     and swh_input_power_b <= 12 * ureg("kW")
                     and (
                         swh_tank_storage_volume_b > 100 * ureg("gallon")
@@ -343,16 +365,17 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                     )
 
                 elif (
-                        swh_fuel_type_b in [
-                            EnergySourceOptions.NATURAL_GAS,
-                            EnergySourceOptions.PROPANE,
-                        ]
-                        and swh_tank_type_b in STORAGE_TYPES
-                        and swh_input_power_b <= 75000 * ureg("Btu/h")
-                        and (
-                            swh_tank_storage_volume_b > 100 * ureg("gallon")
-                            or swh_tank_storage_volume_b < 20 * ureg("gallon")
-                        )
+                    swh_fuel_type_b
+                    in [
+                        EnergySourceOptions.NATURAL_GAS,
+                        EnergySourceOptions.PROPANE,
+                    ]
+                    and swh_tank_type_b in STORAGE_TYPES
+                    and swh_input_power_b <= 75000 * ureg("Btu/h")
+                    and (
+                        swh_tank_storage_volume_b > 100 * ureg("gallon")
+                        or swh_tank_storage_volume_b < 20 * ureg("gallon")
+                    )
                 ):
                     manual_check_msg.append(
                         "The storage tank volume falls outside the supported range based on the size categories in ASHRAE 90.1 Table 7.8 and in 10 CFR 430. Consequently, this rule was not assessed for this service water heater. Note that the specific requirements of 10 CFR 430 can be found in ASHRAE 90.1 Appendix F Table F-2."
@@ -393,7 +416,12 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                 standby_loss_target_b = calc_vals["standby_loss_target_b"]
                 standby_loss_target_metric_b = calc_vals["standby_loss_target_metric_b"]
 
-                precision_entry = "swh_efficiency_b" if expected_efficiency_metric_b == SWHEfficiencyMetricOptions.THERMAL_EFFICIENCY else "swh_efficiency_uef_b"
+                precision_entry = (
+                    "swh_efficiency_b"
+                    if expected_efficiency_metric_b
+                    == SWHEfficiencyMetricOptions.THERMAL_EFFICIENCY
+                    else "swh_efficiency_uef_b"
+                )
                 standby_loss_complies = (
                     (standby_loss_target_b is None)
                     or (
@@ -407,7 +435,8 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                         standby_loss_target_metric_b
                         == SWHEfficiencyMetricOptions.STANDBY_LOSS_ENERGY
                         and self.precision_comparison["swh_standby_loss_energy_b"](
-                            modeled_standby_loss_b*ureg("W"), standby_loss_target_b*ureg("W")
+                            modeled_standby_loss_b * ureg("W"),
+                            standby_loss_target_b * ureg("W"),
                         )
                     )
                     or (
@@ -418,9 +447,12 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
 
                 return (
                     swh_tank_type_b in STORAGE_TYPES
-                    and (expected_efficiency_b is None or self.precision_comparison[precision_entry](
-                        modeled_efficiency_b, expected_efficiency_b
-                    ))
+                    and (
+                        expected_efficiency_b is None
+                        or self.precision_comparison[precision_entry](
+                            modeled_efficiency_b, expected_efficiency_b
+                        )
+                    )
                     and standby_loss_complies
                 )
 
@@ -428,11 +460,15 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                 swh_fuel_type_b = calc_vals["swh_fuel_type_b"]
                 swh_tank_type_b = calc_vals["swh_tank_type_b"]
 
-                if swh_tank_type_b not in STORAGE_TYPES + INSTANTANEOUS_TYPES or swh_fuel_type_b not in [
-                    EnergySourceOptions.ELECTRICITY,
-                    EnergySourceOptions.NATURAL_GAS,
-                    EnergySourceOptions.PROPANE,
-                ]:
+                if (
+                    swh_tank_type_b not in STORAGE_TYPES + INSTANTANEOUS_TYPES
+                    or swh_fuel_type_b
+                    not in [
+                        EnergySourceOptions.ELECTRICITY,
+                        EnergySourceOptions.NATURAL_GAS,
+                        EnergySourceOptions.PROPANE,
+                    ]
+                ):
                     return "The water heater type was not recognized, and does not match any of the expected baseline water heater types."
                 else:
                     return "The modeled efficiency or standby loss for the water heater does not match the expected values."
