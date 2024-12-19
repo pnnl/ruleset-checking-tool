@@ -200,29 +200,22 @@ class Section11Rule8(RuleDefinitionListIndexedBase):
                             ):
                                 is_referenced_in_other_bats_b = True
 
-                multiple_segments_with_bat_other_b = (
-                    num_other_swh_bat_segment_b > 1
-                    and swh_bat_b == SERVICE_WATER_HEATING_SPACE.ALL_OTHERS
-                )
-
                 return {
                     "swh_bat_b": swh_bat_b,
                     "num_swh_systems_b": num_swh_systems_b,
                     "num_of_bldg_segment_b": num_of_bldg_segment_b,
                     "is_referenced_in_other_bats_b": is_referenced_in_other_bats_b,
-                    "multiple_segments_with_bat_other_b": multiple_segments_with_bat_other_b,
+                    "num_other_swh_bat_segment_b": num_other_swh_bat_segment_b,
                 }
 
             def manual_check_required(self, context, calc_vals=None, data=None):
                 swh_bat_b = calc_vals["swh_bat_b"]
                 num_of_bldg_segment_b = calc_vals["num_of_bldg_segment_b"]
-                multiple_segments_with_bat_other_b = calc_vals[
-                    "multiple_segments_with_bat_other_b"
-                ]
+                num_other_swh_bat_segment_b = calc_vals["num_other_swh_bat_segment_b"]
 
                 return (swh_bat_b == "UNDETERMINED" and num_of_bldg_segment_b > 1) or (
                     swh_bat_b == SERVICE_WATER_HEATING_SPACE.ALL_OTHERS
-                    and multiple_segments_with_bat_other_b > 1
+                    and num_other_swh_bat_segment_b > 1
                 )
 
             def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
