@@ -435,8 +435,8 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                         standby_loss_target_metric_b
                         == SWHEfficiencyMetricOptions.STANDBY_LOSS_ENERGY
                         and self.precision_comparison["swh_standby_loss_energy_b"](
-                            modeled_standby_loss_b * ureg("W"),
-                            standby_loss_target_b * ureg("W"),
+                            modeled_standby_loss_b * ureg("Btu/h"),
+                            standby_loss_target_b * ureg("Btu/h"),
                         )
                     )
                     or (
