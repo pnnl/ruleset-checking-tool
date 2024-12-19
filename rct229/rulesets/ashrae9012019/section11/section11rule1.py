@@ -32,25 +32,19 @@ class Section11Rule1(RuleDefinitionListIndexedBase):
             list_path="ruleset_model_descriptions[0]",
         )
 
-    class RMDRule(RuleDefinitionListIndexedBase):
+    class RMDRule(RuleDefinitionBase):
         def __init__(self):
             super(Section11Rule1.RMDRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=True, BASELINE_0=True, PROPOSED=True
                 ),
-                each_rule=Section11Rule1.RMDRule.SWHDistributionRule(),
-                index_rmd=BASELINE_0,
-                list_path="$.service_water_heating_distribution_systems[*]",
             )
 
-        def create_data(self, context, data):
+        def get_calc_vals(self, context, data=None):
             rmd_u = context.USER
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
 
-            swh_and_equip_dict_u = (
-                get_swh_equipment_associated_with_each_swh_distribution_system(rmd_u)
-            )
             swh_and_equip_dict_b = (
                 get_swh_equipment_associated_with_each_swh_distribution_system(rmd_b)
             )
@@ -59,68 +53,78 @@ class Section11Rule1(RuleDefinitionListIndexedBase):
             )
 
             errors = []
-            user_proposed_comparison = []
+            proposed_user_comparison = []
+            proposed_baseline_comparison = []
             user_baseline_comparison = []
-            for swh_dist_id_u in find_all(
+            swh_dist_systems_u = find_all(
                 "$.service_water_heating_distribution_systems[*].id", rmd_u
-            ):
-                if swh_and_equip_dict_u[swh_dist_id_u].uses:
-                    swh_use_u = find_one(
-                        f'$.buildings[*].building_segments[*].zones[*].spaces[*].service_water_heating_uses[*][?(@.served_by_distribution_system="{swh_dist_id_u}")]',
-                        rmd_u,
-                    )
-                    if swh_use_u is not None and swh_use_u.get("use") > 0.0:
-                        user_proposed_comparison = (
-                            compare_swh_dist_systems_and_components(
-                                rmd1=rmd_p,
-                                rmd2=rmd_u,
-                                compare_context_str="AppG 11-1 P_RMD Equals U_RMD",
-                                swh_distribution_id=swh_dist_id_u,
-                            )
+            )
+            for swh_dist_sys_id_u in swh_dist_systems_u:
+                swh_use_load_u = sum(
+                    [
+                        swh_use_u.get("use", 0.0)
+                        for swh_use_u in find_all(
+                            # TODO: Moving the `service_water_heating_uses` key to the `building_segments` level is being discussed. If the `service_water_heating_uses` key is moved, this function needs to be revisited.
+                            f'$.buildings[*].building_segments[*].zones[*].spaces[*].service_water_heating_uses[*][?(@.served_by_distribution_system="{swh_dist_sys_id_u}")]',
+                            rmd_u,
                         )
-                else:
-                    user_baseline_comparison = compare_swh_dist_systems_and_components(
+                    ]
+                )
+
+                if swh_use_load_u > 0.0:
+                    proposed_user_comparison = compare_swh_dist_systems_and_components(
                         rmd1=rmd_p,
-                        rmd2=rmd_b,
-                        compare_context_str="AppG 11-1 P_RMD Equals B_RMD",
-                        swh_distribution_id=swh_dist_id_u,
+                        rmd2=rmd_u,
+                        compare_context_str="AppG 11-1 P_RMD Equals U_RMD",
+                        swh_distribution_id=swh_dist_sys_id_u,
+                    )
+                else:
+                    proposed_baseline_comparison = (
+                        compare_swh_dist_systems_and_components(
+                            rmd1=rmd_p,
+                            rmd2=rmd_b,
+                            compare_context_str="AppG 11-1 P_RMD Equals B_RMD",
+                            swh_distribution_id=swh_dist_sys_id_u,
+                        )
                     )
 
-                if swh_dist_id_u not in swh_and_equip_dict_p:
+                if swh_dist_sys_id_u not in swh_and_equip_dict_p:
                     errors.append(
-                        f"{swh_dist_id_u} was not found in the Proposed model. Because there are no SWH loads in the User model, "
+                        f"'{swh_dist_sys_id_u}' was not found in the Proposed model. Because there are no SWH loads in the User model, "
                         f"we are expecting the Proposed and Baseline systems to match."
                     )
-                if swh_dist_id_u not in swh_and_equip_dict_b:
+                if swh_dist_sys_id_u not in swh_and_equip_dict_b:
                     errors.append(
-                        f"{swh_dist_id_u} was not found in the Baseline model. Because there are no SWH loads in the User model, "
+                        f"'{swh_dist_sys_id_u}' was not found in the Baseline model. Because there are no SWH loads in the User model, "
                         f"we are expecting the Proposed and Baseline systems to match."
+                    )
+
+            if not swh_dist_systems_u:
+                for swh_dist_sys_id_p in find_all(
+                    "$.service_water_heating_distribution_systems[*].id", rmd_p
+                ):
+                    proposed_baseline_comparison = (
+                        compare_swh_dist_systems_and_components(
+                            rmd1=rmd_p,
+                            rmd2=rmd_b,
+                            compare_context_str="AppG 11-1 B_RMD Equals P_RMD",
+                            swh_distribution_id=swh_dist_sys_id_p,
+                        )
                     )
 
             return {
-                "user_proposed_comparison": user_proposed_comparison,
+                "proposed_user_comparison": proposed_user_comparison,
                 "user_baseline_comparison": user_baseline_comparison,
+                "proposed_baseline_comparison": proposed_baseline_comparison,
             }
 
-        class SWHDistributionRule(RuleDefinitionBase):
-            def __init__(self):
-                super(Section11Rule1.RMDRule.SWHDistributionRule, self).__init__(
-                    rmds_used=produce_ruleset_model_description(
-                        USER=True, BASELINE_0=True, PROPOSED=True
-                    ),
-                )
+        def rule_check(self, context, calc_vals=None, data=None):
+            proposed_user_comparison = calc_vals["proposed_user_comparison"]
+            user_baseline_comparison = calc_vals["user_baseline_comparison"]
+            proposed_baseline_comparison = calc_vals["proposed_baseline_comparison"]
 
-            def get_calc_vals(self, context, data=None):
-                user_proposed_comparison = data["user_proposed_comparison"]
-                user_baseline_comparison = data["user_baseline_comparison"]
-
-                return {
-                    "user_proposed_comparison": user_proposed_comparison,
-                    "user_baseline_comparison": user_baseline_comparison,
-                }
-
-            def rule_check(self, context, calc_vals=None, data=None):
-                user_proposed_comparison = calc_vals["user_proposed_comparison"]
-                user_baseline_comparison = calc_vals["user_baseline_comparison"]
-
-                return not user_proposed_comparison and not user_baseline_comparison
+            return not (
+                proposed_user_comparison
+                or user_baseline_comparison
+                or proposed_baseline_comparison
+            )
