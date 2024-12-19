@@ -425,26 +425,34 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                 standby_loss_complies = (
                     (standby_loss_target_b is None)
                     or (
-                        standby_loss_target_metric_b
-                        == SWHEfficiencyMetricOptions.STANDBY_LOSS_FRACTION
-                        and self.precision_comparison["swh_standby_loss_fraction_b"](
-                            modeled_standby_loss_b, standby_loss_target_b
+                        (
+                            standby_loss_target_metric_b
+                            == SWHEfficiencyMetricOptions.STANDBY_LOSS_FRACTION
+                            and self.precision_comparison[
+                                "swh_standby_loss_fraction_b"
+                            ](modeled_standby_loss_b, standby_loss_target_b)
+                        )
+                        or (
+                            standby_loss_target_b is not None
+                            and modeled_standby_loss_b < standby_loss_target_b
                         )
                     )
                     or (
-                        standby_loss_target_metric_b
-                        == SWHEfficiencyMetricOptions.STANDBY_LOSS_ENERGY
-                        and self.precision_comparison["swh_standby_loss_energy_b"](
-                            # Schema specifies units as Watts
-                            modeled_standby_loss_b * ureg("W"),
-                            # Lookup table calculation results in Btu/h
-                            standby_loss_target_b * ureg("Btu/h"),
+                        (
+                            standby_loss_target_metric_b
+                            == SWHEfficiencyMetricOptions.STANDBY_LOSS_ENERGY
+                            and self.precision_comparison["swh_standby_loss_energy_b"](
+                                # Schema specifies units as Watts
+                                modeled_standby_loss_b * ureg("W"),
+                                # Lookup table calculation results in Btu/h
+                                standby_loss_target_b * ureg("Btu/h"),
+                            )
                         )
-                    )
-                    or (
-                        standby_loss_target_b is not None
-                        and modeled_standby_loss_b * ureg("W")
-                        < standby_loss_target_b * ureg("Btu/h")
+                        or (
+                            standby_loss_target_b is not None
+                            and modeled_standby_loss_b * ureg("W")
+                            < standby_loss_target_b * ureg("Btu/h")
+                        )
                     )
                 )
 
