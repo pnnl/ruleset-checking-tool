@@ -60,6 +60,7 @@ _UNIT_CONVENTIONS = {
         "liquid_flow_rate_per_power": "L/(s*W)",
         "power_per_air_flow_rate": "W-s/L",
         "power_per_liquid_flow_rate": "W-s/L",
+        "power_per_volume": "W/L3",
         "air_flow_rate": "L/s",
     },
     UNIT_SYSTEM.IP: {
@@ -79,6 +80,7 @@ _UNIT_CONVENTIONS = {
         "liquid_flow_rate_per_power": "gpm/hp",
         "power_per_air_flow_rate": "W/cfm",
         "power_per_liquid_flow_rate": "W/gpm",
+        "power_per_volume": "Btu/h/gallon",
         "air_flow_rate": "cfm",
     },
 }
