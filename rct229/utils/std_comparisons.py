@@ -86,7 +86,7 @@ def std_equal_with_precision(
         std_val = std_val.to(units)
         val_magnitude = Decimal(str(val.magnitude))
         std_val_magnitude = Decimal(str(std_val.magnitude))
-        precision_magnitude = Decimal(str(precision.magnitude))
+        precision_magnitude = Decimal(str(int(precision.magnitude)))
     else:
         val_magnitude = Decimal(str(val))
         std_val_magnitude = Decimal(str(std_val))
