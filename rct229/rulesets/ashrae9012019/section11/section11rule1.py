@@ -78,6 +78,14 @@ class Section11Rule1(RuleDefinitionListIndexedBase):
                         compare_context_str="AppG 11-1 P_RMD Equals U_RMD",
                         swh_distribution_id=swh_dist_sys_id_u,
                     )
+                    proposed_baseline_comparison = (
+                        compare_swh_dist_systems_and_components(
+                            rmd1=rmd_p,
+                            rmd2=rmd_b,
+                            compare_context_str="AppG 11-1 P_RMD Equals B_RMD",
+                            swh_distribution_id=swh_dist_sys_id_u,
+                        )
+                    )
                 else:
                     proposed_baseline_comparison = (
                         compare_swh_dist_systems_and_components(
