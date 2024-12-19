@@ -107,7 +107,7 @@ class Section11Rule1(RuleDefinitionListIndexedBase):
                         compare_swh_dist_systems_and_components(
                             rmd1=rmd_p,
                             rmd2=rmd_b,
-                            compare_context_str="AppG 11-1 B_RMD Equals P_RMD",
+                            compare_context_str="AppG 11-1 P_RMD Equals B_RMD",
                             swh_distribution_id=swh_dist_sys_id_p,
                         )
                     )
