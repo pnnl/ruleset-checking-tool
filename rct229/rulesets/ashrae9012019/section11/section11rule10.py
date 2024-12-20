@@ -153,8 +153,7 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                 draw_pattern_b = (
                     "" if swh_input_power_b > 105000 * ureg("Btu/h") else draw_pattern_b
                 )
-                # draw_pattern_b will be None if the SWH draw pattern is not defined and the first hour rating is not defined
-                # this will cause efficiency_data to be empty if the draw_pattern is required for the lookup
+                # Note: draw_pattern_b will be None if the SWH draw pattern is not defined and the first hour rating is not defined
 
                 efficiency_data = None
                 expected_efficiency_b = None
