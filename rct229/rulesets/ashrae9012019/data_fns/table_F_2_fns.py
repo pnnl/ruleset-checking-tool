@@ -3,6 +3,7 @@ from pint import Quantity
 from rct229.schema.config import ureg
 from rct229.rulesets.ashrae9012019.data import data
 from rct229.rulesets.ashrae9012019.data_fns.table_utils import find_osstd_table_entries
+from rct229.utils.assertions import assert_
 
 
 def table_f_2_lookup(
@@ -35,6 +36,17 @@ def table_f_2_lookup(
         ]
 
     """
+    # Validate equipment type
+    valid_equipment_types = [
+        "Electric storage water heater",
+        "Gas storage water heater"
+    ]
+    assert_(equipment_type in valid_equipment_types, f"Invalid equipment type. Must be one of {valid_equipment_types}")
+
+    # Validate draw pattern
+    valid_draw_patterns = ["Very Small", "Low", "Medium", "High"]
+    assert_(draw_pattern in valid_draw_patterns, f"Invalid draw pattern. Must be one of {valid_draw_patterns}")
+
     # Filter entries by capacity thresholds
     capacity_matched = find_capacity_matched_entries(
         storage_capacity, data["ashrae_90_1_table_F_2"]
