@@ -1,5 +1,8 @@
+import pytest
+import re
 from rct229.rulesets.ashrae9012019.data_fns.table_F_2_fns import table_f_2_lookup
 from rct229.schema.config import ureg
+from rct229.utils.assertions import RCTFailureException
 
 
 # Testing table_7_8------------------------------------------
@@ -121,3 +124,17 @@ def test__table_f_2_lookup_elec_over100gal():
         )
         == []
     )
+
+
+def test__table_7_8_invalid_draw_pattern():
+    expected_message = (
+        "Invalid draw pattern. Must be one of ['Very Small', 'Low', 'Medium', 'High']"
+    )
+    with pytest.raises(RCTFailureException, match=re.escape(expected_message)):
+        table_f_2_lookup("Gas storage water heater", 106.0 * ureg("kBtu/h"), "Invalid")
+
+
+def test__table_7_8_invalid_equipment_type():
+    expected_message = "Invalid equipment type. Must be one of ['Electric storage water heater', 'Gas storage water heater']"
+    with pytest.raises(RCTFailureException, match=re.escape(expected_message)):
+        table_f_2_lookup("Storage water heater", 106.0 * ureg("kBtu/h"), "High")
