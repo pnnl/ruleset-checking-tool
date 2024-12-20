@@ -75,7 +75,7 @@ def test__table_7_8_lookup_gas_over105kbtuh():
 
 
 def test__table_7_8_invalid_draw_pattern():
-    expected_message = "Invalid draw pattern. Must be one of ['', 'Very Small', 'Low', 'Medium', 'High']"
+    expected_message = "Invalid draw pattern. Must be one of ['', 'Very small', 'Low', 'Medium', 'High']"
     with pytest.raises(RCTFailureException, match=re.escape(expected_message)):
         table_7_8_lookup("Gas storage water heater", 106.0 * ureg("kBtu/h"), "Invalid")
 

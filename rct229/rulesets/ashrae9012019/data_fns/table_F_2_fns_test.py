@@ -5,12 +5,13 @@ from rct229.schema.config import ureg
 from rct229.utils.assertions import RCTFailureException
 
 
-# Testing table_7_8------------------------------------------
+# Testing 90.1 Appendix F Table F-2------------------------------------------
 def test__table_f_2_lookup_gas_under20gal():
     assert (
         table_f_2_lookup(
             "Gas storage water heater",
             19.9 * ureg.gallon,
+            "Very small",
         )
         == []
     )
@@ -57,6 +58,7 @@ def test__table_f_2_lookup_gas_over100gal():
         table_f_2_lookup(
             "Gas storage water heater",
             100.1 * ureg.gallon,
+            "Very small",
         )
         == []
     )
@@ -67,6 +69,7 @@ def test__table_f_2_lookup_elec_under20gal():
         table_f_2_lookup(
             "Electric storage water heater",
             19.9 * ureg.gallon,
+            "Very small",
         )
         == []
     )
@@ -121,6 +124,7 @@ def test__table_f_2_lookup_elec_over100gal():
         table_f_2_lookup(
             "Electric storage water heater",
             100.1 * ureg.gallon,
+            "Very small",
         )
         == []
     )
@@ -128,7 +132,7 @@ def test__table_f_2_lookup_elec_over100gal():
 
 def test__table_7_8_invalid_draw_pattern():
     expected_message = (
-        "Invalid draw pattern. Must be one of ['Very Small', 'Low', 'Medium', 'High']"
+        "Invalid draw pattern. Must be one of ['Very small', 'Low', 'Medium', 'High']"
     )
     with pytest.raises(RCTFailureException, match=re.escape(expected_message)):
         table_f_2_lookup("Gas storage water heater", 106.0 * ureg("kBtu/h"), "Invalid")

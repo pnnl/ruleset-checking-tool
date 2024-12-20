@@ -19,7 +19,7 @@ def table_7_8_lookup(
     input_power : Quantity
         The input power of the service water heater, in kW for Electric and in Btu/h for Gas
     draw_pattern : str
-        One of: "Very Small", "Low", "Medium", "High", or "" if not applicable
+        One of: "Very small", "Low", "Medium", "High", or "" if not applicable
 
     Returns
     -------
@@ -47,7 +47,7 @@ def table_7_8_lookup(
     )
 
     # Validate draw pattern
-    valid_draw_patterns = ["", "Very Small", "Low", "Medium", "High"]
+    valid_draw_patterns = ["", "Very small", "Low", "Medium", "High"]
     assert_(
         draw_pattern in valid_draw_patterns,
         f"Invalid draw pattern. Must be one of {valid_draw_patterns}",

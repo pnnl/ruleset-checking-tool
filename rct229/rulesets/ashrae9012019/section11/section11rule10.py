@@ -28,7 +28,7 @@ INSTANTANEOUS_TYPES = [
 ]
 STORAGE_TYPES = [SWHTankOptions.CONSUMER_STORAGE, SWHTankOptions.COMMERCIAL_STORAGE]
 draw_pattern_enum_to_lookup_str_map = {
-    DrawPatternOptions.VERY_SMALL: "Very Small",
+    DrawPatternOptions.VERY_SMALL: "Very small",
     DrawPatternOptions.LOW: "Low",
     DrawPatternOptions.MEDIUM: "Medium",
     DrawPatternOptions.HIGH: "High",

@@ -19,7 +19,7 @@ def table_f_2_lookup(
     storage_capacity : Quantity
         The storage capacity of the service water heater tank, in gallons
     draw_pattern : str
-        One of: "Very Small", "Low", "Medium", "High"
+        One of: "Very small", "Low", "Medium", "High"
 
     Returns
     -------
@@ -47,7 +47,7 @@ def table_f_2_lookup(
     )
 
     # Validate draw pattern
-    valid_draw_patterns = ["Very Small", "Low", "Medium", "High"]
+    valid_draw_patterns = ["Very small", "Low", "Medium", "High"]
     assert_(
         draw_pattern in valid_draw_patterns,
         f"Invalid draw pattern. Must be one of {valid_draw_patterns}",
