@@ -1,5 +1,5 @@
 import pytest
-from jsonpath_utils import (
+from rct229.utils.jsonpath_utils import (
     create_jsonpath_value_dict,
     find_all,
     find_all_by_jsonpaths,
