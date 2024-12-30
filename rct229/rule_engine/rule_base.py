@@ -1,10 +1,20 @@
+from functools import partial
+from typing import TypedDict, Mapping
+
 from jsonpointer import resolve_pointer
 from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
 from rct229.rule_engine.ruleset_model_factory import RuleSetModels, get_rmd_instance
+from rct229.schema.config import ureg
 from rct229.utils.assertions import MissingKeyException, RCTFailureException
 from rct229.utils.json_utils import slash_prefix_guarantee
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import calcq_to_q
+from rct229.utils.std_comparisons import std_equal_with_precision
+
+
+class RCTPrecision(TypedDict):
+    precision: float
+    unit: str | None
 
 
 class RuleDefinitionBase:
@@ -14,17 +24,18 @@ class RuleDefinitionBase:
         self,
         rmds_used,
         rmds_used_optional=None,
-        id=None,
-        description=None,
-        ruleset_section_title=None,
-        standard_section=None,
-        is_primary_rule=None,
-        rmd_context="",
+        id: str = None,
+        description: str = None,
+        ruleset_section_title: str = None,
+        standard_section: str = None,
+        is_primary_rule: bool = None,
+        rmd_context: str = "",
         required_fields=None,
-        manual_check_required_msg="",
-        fail_msg="",
-        pass_msg="",
-        not_applicable_msg="",
+        manual_check_required_msg: str = "",
+        fail_msg: str = "",
+        pass_msg: str = "",
+        not_applicable_msg: str = "",
+        precision: Mapping[str, RCTPrecision] = None,
     ):
         """Base class for all Rule definitions
 
@@ -67,6 +78,15 @@ class RuleDefinitionBase:
             default message for PASS outcome
         not_applicable_msg: string
             default message for NOT_APPLICABLE outcome
+        precision: dict
+            precision value(s) in a dictionary
+            e.g.,
+            {
+                "subsurface_u_factor_b": {
+                    "precision": 0.01,
+                    "unit": "Btu/(hr*ft2*R)"
+                }
+            }
         """
         self.rmds_used = rmds_used
         self.rmds_used_optional = rmds_used_optional
@@ -85,13 +105,29 @@ class RuleDefinitionBase:
         self.not_applicable_msg = not_applicable_msg
         self.fail_msg = fail_msg
         self.pass_msg = pass_msg
+        self.precision_comparison = None
+
+        if precision:
+            self.precision_comparison = {
+                # if no unit, handle it as a dimensionless value.
+                key: partial(
+                    std_equal_with_precision,
+                    precision=val["precision"] * ureg(val["unit"])
+                    if val.get("unit")
+                    else val["precision"],
+                )
+                for key, val in precision.items()
+            }
+        else:
+            # default comparison to be strict equality comparison
+            self.precision_comparison = lambda val, std_val: val == std_val
 
     def evaluate(self, rmds, data={}):
         """Generates the outcome dictionary for the rule
 
         This method also orchestrates the high-level workflow for any rule.
         Namely:
-            - Call get_context(rmrs); check for any missing RMD contexts
+            - Call get_context(rmds); check for any missing RMD contexts
             - Call is_applicable(context)
             - Call manual_check_required()
             - Call rule_check()
@@ -172,8 +208,17 @@ class RuleDefinitionBase:
                             # Evaluate the actual rule check
                             result = self.rule_check(context, calc_vals, data)
                             if isinstance(result, list):
-                                # The result is a list of outcomes
-                                outcome["result"] = result
+                                if len(result) == 0:
+                                    # empty list:
+                                    outcome["result"] = RCTOutcomeLabel.NOT_APPLICABLE
+                                    not_applicable_msg = self.get_not_applicable_msg(
+                                        context, data
+                                    )
+                                    if not_applicable_msg:
+                                        outcome["message"] = not_applicable_msg
+                                    # The result is a list of outcomes
+                                else:
+                                    outcome["result"] = result
                             # using is False to include the None case.
                             elif self.is_primary_rule is False:
                                 # secondary rule applicability check true-> undetermined, false -> not_applicable
@@ -214,7 +259,7 @@ class RuleDefinitionBase:
                     outcome["result"] = RCTOutcomeLabel.UNDETERMINED
                     outcome["message"] = str(ke)
                 except RCTFailureException as fe:
-                    outcome["result"] = RCTOutcomeLabel.FAILED
+                    outcome["result"] = RCTOutcomeLabel.UNDETERMINED
                     outcome["message"] = str(fe)
             else:
                 outcome["result"] = RCTOutcomeLabel.UNDETERMINED
@@ -243,7 +288,7 @@ class RuleDefinitionBase:
         Returns
         -------
         RuleSetModels
-            Object containing the contexts for RMDs; an RMR's context is set to None if the corresponding flag
+            Object containing the contexts for RMDs; an RMD's context is set to None if the corresponding flag
             in self.rmds_used is not set
         """
         rmd_context = self.rmd_context if rmd_context is None else rmd_context
@@ -263,7 +308,7 @@ class RuleDefinitionBase:
         return ruleset_models
 
     def get_context(self, rmds, data=None):
-        """Gets the context for each RMR
+        """Gets the context for each RMD
 
         May be be overridden for different behavior
 
@@ -272,16 +317,16 @@ class RuleDefinitionBase:
         rmds : RuleSetModels
             Object containing the RMDs for each required ruleset model types
             A return value of None indicates that the context
-            does not exist in one or more of the RMRs used.
+            does not exist in one or more of the RMDs used.
         data : An optional data object. It is ignored by this base implementation.
 
         Returns
         -------
         RulesetModelTypes or str
             The return value from self._get_context() when the context exists
-            in each RMR for which the correponding self.rmds_used flag is set;
+            in each RMD for which the corresponding self.rmds_used flag is set;
             otherwise retrns a string such as "MISSING_BASELINE" that indicates all
-            the RMRs that are missing.
+            the RMDs that are missing.
         """
 
         context = self._get_context(rmds)
@@ -289,10 +334,10 @@ class RuleDefinitionBase:
         ruleset_model_types = rmds.get_ruleset_model_types()
         for ruleset_model in ruleset_model_types:
             if (
-                # rmr used
+                # rmd used
                 self.rmds_used[ruleset_model]
                 and not (
-                    # and rmr is not optional
+                    # and rmd is not optional
                     self.rmds_used_optional
                     and self.rmds_used_optional[ruleset_model]
                 )
@@ -430,7 +475,7 @@ class RuleDefinitionBase:
         Parameters
         ----------
         context : RuleSetModels
-            Object containing the contexts for RMRs
+            Object containing the contexts for RMDs
         data : An optional data object. It is ignored by this base implementation.
 
         Returns
@@ -454,7 +499,7 @@ class RuleDefinitionBase:
         Parameters
         ----------
         context : RuleSetModels
-            Object containing the contexts for RMRs
+            Object containing the contexts for RMDs
         calc_vals : dict | None
         data : dict | None
             An optional data dictionary
@@ -477,7 +522,7 @@ class RuleDefinitionBase:
         Parameters
         ----------
         context : RuleSetModels
-            Object containing the contexts for RMRs
+            Object containing the contexts for RMDs
         data : An optional data object. It is ignored by this base implementation.
 
         Returns
@@ -500,7 +545,7 @@ class RuleDefinitionBase:
         Parameters
         ----------
         context : RuleSetModels
-            Object containing the contexts for RMRs
+            Object containing the contexts for RMDs
         calc_vals : dict or None
 
         data : An optional data object. It is ignored by this base implementation.
@@ -526,7 +571,7 @@ class RuleDefinitionBase:
         Parameters
         ----------
         context : RuleSetModels
-            Object containing the contexts for RMRs
+            Object containing the contexts for RMDs
         calc_vals : dict or None
 
         data : An optional data object. It is ignored by this base implementation.
@@ -548,7 +593,7 @@ class RuleDefinitionBase:
         Parameters
         ----------
         context : RuleSetModels
-            Object containing the contexts for RMRs
+            Object containing the contexts for RMDs
         calc_vals: dictionary
             Dictionary contains calculated values for rule check and reporting.
         data : An optional data object. It is ignored by this base implementation.
@@ -570,7 +615,7 @@ class RuleDefinitionBase:
         Parameters
         ----------
         context : RuleSetModels
-            Object containing the contexts for RMRs
+            Object containing the contexts for RMDs
         calc_vals : dict or None
 
         data : An optional data object. It is ignored by this base implementation.
@@ -595,7 +640,7 @@ class RuleDefinitionBase:
         Parameters
         ----------
         context : RuleSetModels
-            Object containing the contexts for RMRs
+            Object containing the contexts for RMDs
         calc_vals : dict or None
 
         data : An optional data object. It is ignored by this base implementation.
@@ -621,7 +666,7 @@ class RuleDefinitionBase:
         Parameters
         ----------
         context : RuleSetModels
-            Object containing the contexts for RMRs
+            Object containing the contexts for RMDs
         calc_vals : dict or None
 
         data : An optional data object. It is ignored by this base implementation.

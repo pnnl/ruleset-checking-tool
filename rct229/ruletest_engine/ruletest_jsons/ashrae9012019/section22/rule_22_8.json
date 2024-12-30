@@ -3,19 +3,19 @@
         "Section": 22,
         "Rule": 8,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 having more than 300 ton capacity and is correctly modeled with the secondary pump having a vfd.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The chilled water system has a 400 ton cooling capacity and the secondary chilled water pump uses variable speed control.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-8",
             "ruleset_reference": "G3.1.3.10",
-            "rule_description": "For baseline chilled water system with cooling capacity of 300 tons or more, the secondary pump shall be modeled with variable-speed drives.",
+            "rule_description": "Baseline chilled water systems with a cooling capacity of 300 tons or more shall have the secondary chilled water pump modeled with variable-speed drives.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -151,19 +151,19 @@
         "Section": 22,
         "Rule": 8,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 having more than 300 ton capacity and is incorrectly modeled with the secondary pump operating without vfd.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The chilled water system has a 400 ton cooling capacity and the secondary chilled water pump uses fixed speed control.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-8",
             "ruleset_reference": "G3.1.3.10",
-            "rule_description": "For baseline chilled water system with cooling capacity of 300 tons or more, the secondary pump shall be modeled with variable-speed drives.",
+            "rule_description": "Baseline chilled water systems with a cooling capacity of 300 tons or more shall have the secondary chilled water pump modeled with variable-speed drives.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -299,19 +299,19 @@
         "Section": 22,
         "Rule": 8,
         "Test": "c",
-        "test_description": "The project has one building segment with two zones.  HVAC is system type 7 having less than 300 ton capacity.  Expected result: Not Applicable",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The chilled water system has a 299 ton cooling capacity.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-8",
             "ruleset_reference": "G3.1.3.10",
-            "rule_description": "For baseline chilled water system with cooling capacity of 300 tons or more, the secondary pump shall be modeled with variable-speed drives.",
+            "rule_description": "Baseline chilled water systems with a cooling capacity of 300 tons or more shall have the secondary chilled water pump modeled with variable-speed drives.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -447,19 +447,19 @@
         "Section": 22,
         "Rule": 8,
         "Test": "d",
-        "test_description": "The project has one building segment with one zone.  HVAC is system type 7 having more than 300 ton capacity and is correctly modeled with the secondary pump having a vfd.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 12 with a chilled water system. The chilled water system has a 400 ton cooling capacity and the secondary chilled water pump uses variable speed control.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-8",
             "ruleset_reference": "G3.1.3.10",
-            "rule_description": "For baseline chilled water system with cooling capacity of 300 tons or more, the secondary pump shall be modeled with variable-speed drives.",
+            "rule_description": "Baseline chilled water systems with a cooling capacity of 300 tons or more shall have the secondary chilled water pump modeled with variable-speed drives.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -578,19 +578,19 @@
         "Section": 22,
         "Rule": 8,
         "Test": "e",
-        "test_description": "The project has one building segment with one zone.  HVAC is system type 12 having more than 300 ton capacity and is incorrectly modeled with the secondary pump operating without vfd.  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 12 with a chilled water system. The chilled water system has a 400 ton cooling capacity and the secondary chilled water pump uses fixed speed control.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-8",
             "ruleset_reference": "G3.1.3.10",
-            "rule_description": "For baseline chilled water system with cooling capacity of 300 tons or more, the secondary pump shall be modeled with variable-speed drives.",
+            "rule_description": "Baseline chilled water systems with a cooling capacity of 300 tons or more shall have the secondary chilled water pump modeled with variable-speed drives.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",

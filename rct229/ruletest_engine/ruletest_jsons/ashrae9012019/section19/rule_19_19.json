@@ -3,19 +3,19 @@
         "Section": 19,
         "Rule": 19,
         "Test": "a",
-        "test_description": "The project has one building segment with one zone. System 9 with `SIMPLE` specification method for supply/return/exhaust/relief fans and each of 5 fans have 59 W design electric power for a total of 295 W with 1000 cfm design supply airflow. Expected outcome: PASS",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 9. The system has one of each of a supply, return, exhaust, and relief fan as well as a zonal exhaust fan. Each of the 5 fans has 59 W design electric power for a total of 295 W with 1000 cfm of design supply airflow.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-19",
             "ruleset_reference": "G3.1.2.9",
-            "rule_description": "For baseline systems 9 and 10 the system fan electrical power (Pfan) for supply, return, exhaust, and relief shall be  CFMs \u00d7 0.3, where, CFMs = the baseline system maximum design supply fan airflow rate, cfm. If modeling a non-mechanical cooling fan is required by Section G3.1.2.8.2, there is a fan power allowance of Pfan = CFMnmc \u00d7 0.054, where, CFMnmc = the baseline non-mechanical cooling fan airflow, cfm for the non-mechanical cooling. ",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "For baseline systems 9 and 10 the system fan electrical power (Pfan) for supply, return, exhaust, and relief shall be CFMs \u00d7 0.3, where, CFMs = the baseline system maximum design supply fan airflow rate, cfm. If modeling a non-mechanical cooling fan is required by Section G3.1.2.8.2, there is a fan power allowance of Pfan = CFMnmc \u00d7 0.054, where, CFMnmc = the baseline non-mechanical cooling fan airflow, cfm for the non-mechanical cooling. ",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -25,15 +25,12 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -85,15 +82,12 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -166,19 +160,19 @@
         "Section": 19,
         "Rule": 19,
         "Test": "b",
-        "test_description": "The project has one building segment with one zone. System 10 with `SIMPLE` specification method for supply/return/exhaust/relief fans and each fans have 80 W design electric power with 800 cfm design supply airflow. Expected outcome: FAIL",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 10. The system has one of each of a supply, return, exhaust, and relief fan as well as a zonal exhaust fan. Each of the 5 fans has 80 W design electric power for a total of 400 W with 800 cfm of design supply airflow.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-19",
             "ruleset_reference": "G3.1.2.9",
-            "rule_description": "For baseline systems 9 and 10 the system fan electrical power (Pfan) for supply, return, exhaust, and relief shall be  CFMs \u00d7 0.3, where, CFMs = the baseline system maximum design supply fan airflow rate, cfm. If modeling a non-mechanical cooling fan is required by Section G3.1.2.8.2, there is a fan power allowance of Pfan = CFMnmc \u00d7 0.054, where, CFMnmc = the baseline non-mechanical cooling fan airflow, cfm for the non-mechanical cooling. ",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "For baseline systems 9 and 10 the system fan electrical power (Pfan) for supply, return, exhaust, and relief shall be CFMs \u00d7 0.3, where, CFMs = the baseline system maximum design supply fan airflow rate, cfm. If modeling a non-mechanical cooling fan is required by Section G3.1.2.8.2, there is a fan power allowance of Pfan = CFMnmc \u00d7 0.054, where, CFMnmc = the baseline non-mechanical cooling fan airflow, cfm for the non-mechanical cooling. ",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -188,25 +182,18 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10",
-                                                        "heating_source": "ELECTRIC",
-                                                        "fan": {
-                                                            "id": "Terminal Fan 1"
-                                                        }
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10"
                                                     }
                                                 ]
                                             }
@@ -215,8 +202,8 @@
                                             {
                                                 "id": "System 10",
                                                 "heating_system": {
-                                                    "id": "Heating Coil 1",
-                                                    "type": "FURNACE",
+                                                    "id": "Furnace Coil 1",
+                                                    "type": "ELECTRIC_RESISTANCE",
                                                     "energy_source_type": "ELECTRICITY"
                                                 },
                                                 "fan_system": {
@@ -252,25 +239,18 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10",
-                                                        "heating_source": "ELECTRIC",
-                                                        "fan": {
-                                                            "id": "Terminal Fan 1"
-                                                        }
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10"
                                                     }
                                                 ],
                                                 "zonal_exhaust_fan": {
@@ -284,8 +264,8 @@
                                             {
                                                 "id": "System 10",
                                                 "heating_system": {
-                                                    "id": "Heating Coil 1",
-                                                    "type": "FURNACE",
+                                                    "id": "Furnace Coil 1",
+                                                    "type": "ELECTRIC_RESISTANCE",
                                                     "energy_source_type": "ELECTRICITY"
                                                 },
                                                 "fan_system": {
@@ -337,19 +317,20 @@
         "Section": 19,
         "Rule": 19,
         "Test": "c",
-        "test_description": "The project has one building segment with one zone. There is more than one supply fan in the baseline HVAC system Expected outcome: UNDETERMINED",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 10. There is more than one supply fan in the baseline HVAC system.",
         "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "has more than one supply fan associated with the HVAC system in the baseline and therefore this check could not be conducted for this HVAC sytem. Conduct manual check for compliance with G3.1.2.9.",
         "standard": {
             "rule_id": "19-19",
             "ruleset_reference": "G3.1.2.9",
-            "rule_description": "For baseline systems 9 and 10 the system fan electrical power (Pfan) for supply, return, exhaust, and relief shall be  CFMs \u00d7 0.3, where, CFMs = the baseline system maximum design supply fan airflow rate, cfm. If modeling a non-mechanical cooling fan is required by Section G3.1.2.8.2, there is a fan power allowance of Pfan = CFMnmc \u00d7 0.054, where, CFMnmc = the baseline non-mechanical cooling fan airflow, cfm for the non-mechanical cooling. ",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "For baseline systems 9 and 10 the system fan electrical power (Pfan) for supply, return, exhaust, and relief shall be CFMs \u00d7 0.3, where, CFMs = the baseline system maximum design supply fan airflow rate, cfm. If modeling a non-mechanical cooling fan is required by Section G3.1.2.8.2, there is a fan power allowance of Pfan = CFMnmc \u00d7 0.054, where, CFMnmc = the baseline non-mechanical cooling fan airflow, cfm for the non-mechanical cooling. ",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -359,25 +340,18 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10",
-                                                        "heating_source": "ELECTRIC",
-                                                        "fan": {
-                                                            "id": "Terminal Fan 1"
-                                                        }
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10"
                                                     }
                                                 ]
                                             }
@@ -386,8 +360,8 @@
                                             {
                                                 "id": "System 10",
                                                 "heating_system": {
-                                                    "id": "Heating Coil 1",
-                                                    "type": "FURNACE",
+                                                    "id": "Furnace Coil 1",
+                                                    "type": "ELECTRIC_RESISTANCE",
                                                     "energy_source_type": "ELECTRICITY"
                                                 },
                                                 "fan_system": {
@@ -423,25 +397,18 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10",
-                                                        "heating_source": "ELECTRIC",
-                                                        "fan": {
-                                                            "id": "Terminal Fan 1"
-                                                        }
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10"
                                                     }
                                                 ],
                                                 "zonal_exhaust_fan": {
@@ -455,8 +422,8 @@
                                             {
                                                 "id": "System 10",
                                                 "heating_system": {
-                                                    "id": "Heating Coil 1",
-                                                    "type": "FURNACE",
+                                                    "id": "Furnace Coil 1",
+                                                    "type": "ELECTRIC_RESISTANCE",
                                                     "energy_source_type": "ELECTRICITY"
                                                 },
                                                 "fan_system": {
@@ -514,19 +481,20 @@
         "Section": 19,
         "Rule": 19,
         "Test": "d",
-        "test_description": "The project has one building segment with one zone. There is non-mechanical cooling associated with the zone served by the baseline HVAC system in the proposed model Expected outcome: UNDETERMINED",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 10. There is non-mechanical cooling associated with the zone served by the baseline HVAC system in the proposed model.",
         "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "has zone(s) with non-mechanical cooling in the proposed design, conduct a manual check that the baseline building design includes a fan power allowance of",
         "standard": {
             "rule_id": "19-19",
             "ruleset_reference": "G3.1.2.9",
-            "rule_description": "For baseline systems 9 and 10 the system fan electrical power (Pfan) for supply, return, exhaust, and relief shall be  CFMs \u00d7 0.3, where, CFMs = the baseline system maximum design supply fan airflow rate, cfm. If modeling a non-mechanical cooling fan is required by Section G3.1.2.8.2, there is a fan power allowance of Pfan = CFMnmc \u00d7 0.054, where, CFMnmc = the baseline non-mechanical cooling fan airflow, cfm for the non-mechanical cooling. ",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "For baseline systems 9 and 10 the system fan electrical power (Pfan) for supply, return, exhaust, and relief shall be CFMs \u00d7 0.3, where, CFMs = the baseline system maximum design supply fan airflow rate, cfm. If modeling a non-mechanical cooling fan is required by Section G3.1.2.8.2, there is a fan power allowance of Pfan = CFMnmc \u00d7 0.054, where, CFMnmc = the baseline non-mechanical cooling fan airflow, cfm for the non-mechanical cooling. ",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -536,25 +504,18 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10",
-                                                        "heating_source": "ELECTRIC",
-                                                        "fan": {
-                                                            "id": "Terminal Fan 1"
-                                                        }
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10"
                                                     }
                                                 ],
                                                 "non_mechanical_cooling_fan_airflow": 117.98686079999996
@@ -564,8 +525,8 @@
                                             {
                                                 "id": "System 10",
                                                 "heating_system": {
-                                                    "id": "Heating Coil 1",
-                                                    "type": "FURNACE",
+                                                    "id": "Furnace Coil 1",
+                                                    "type": "ELECTRIC_RESISTANCE",
                                                     "energy_source_type": "ELECTRICITY"
                                                 },
                                                 "fan_system": {
@@ -601,25 +562,18 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10",
-                                                        "heating_source": "ELECTRIC",
-                                                        "fan": {
-                                                            "id": "Terminal Fan 1"
-                                                        }
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10"
                                                     }
                                                 ],
                                                 "zonal_exhaust_fan": {
@@ -633,8 +587,8 @@
                                             {
                                                 "id": "System 10",
                                                 "heating_system": {
-                                                    "id": "Heating Coil 1",
-                                                    "type": "FURNACE",
+                                                    "id": "Furnace Coil 1",
+                                                    "type": "ELECTRIC_RESISTANCE",
                                                     "energy_source_type": "ELECTRICITY"
                                                 },
                                                 "fan_system": {

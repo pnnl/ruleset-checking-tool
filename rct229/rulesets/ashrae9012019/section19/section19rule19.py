@@ -163,6 +163,12 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
                 required_fields={
                     "$": ["fan_system"],
                 },
+                precision={
+                    "fan_power_per_flow_b": {
+                        "precision": 0.1,
+                        "unit": "W/cfm",
+                    },
+                },
             )
 
         def is_applicable(self, context, data=None):
@@ -250,7 +256,13 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
             ]
 
             return more_than_one_supply_fan_b or (
-                fan_power_per_flow_b >= REQ_FAN_POWER_FLOW_RATIO
+                (
+                    fan_power_per_flow_b > REQ_FAN_POWER_FLOW_RATIO
+                    or self.precision_comparison["fan_power_per_flow_b"](
+                        fan_power_per_flow_b,
+                        REQ_FAN_POWER_FLOW_RATIO,
+                    )
+                )
                 and (
                     zone_hvac_has_non_mech_cooling_p
                     or zones_served_by_hvac_has_non_mech_cooling_bool_p
@@ -281,6 +293,24 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
             return (
                 not zone_hvac_has_non_mech_cooling_p
                 and not zones_served_by_hvac_has_non_mech_cooling_bool_p
+                and self.precision_comparison["fan_power_per_flow_b"](
+                    fan_power_per_flow_b,
+                    REQ_FAN_POWER_FLOW_RATIO,
+                )
+            ) or (fan_power_per_flow_b < REQ_FAN_POWER_FLOW_RATIO)
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            zones_served_by_hvac_has_non_mech_cooling_bool_p = calc_vals[
+                "zones_served_by_hvac_has_non_mech_cooling_bool_p"
+            ]
+            zone_hvac_has_non_mech_cooling_p = calc_vals[
+                "zone_hvac_has_non_mech_cooling_p"
+            ]
+            fan_power_per_flow_b = calc_vals["fan_power_per_flow_b"]
+
+            return (
+                not zone_hvac_has_non_mech_cooling_p
+                and not zones_served_by_hvac_has_non_mech_cooling_bool_p
                 and std_equal(REQ_FAN_POWER_FLOW_RATIO, fan_power_per_flow_b)
             ) or (fan_power_per_flow_b < REQ_FAN_POWER_FLOW_RATIO)
 
@@ -296,6 +326,6 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
                 not more_than_one_supply_fan_b
                 and fan_power_per_flow_b < REQ_FAN_POWER_FLOW_RATIO
             ):
-                fail_msg = f"ule evaluation fails with a conservative outcome. The fan power airflow (W/cfm) for {hvac_id_b} is modeled as {fan_power_per_flow_b.magnitude} W/cfm which is less than the expected W/cfm."
+                fail_msg = f"Rule evaluation fails with a conservative outcome. The fan power airflow (W/cfm) for {hvac_id_b} is modeled as {fan_power_per_flow_b.magnitude} W/cfm which is less than the expected W/cfm."
 
             return fail_msg

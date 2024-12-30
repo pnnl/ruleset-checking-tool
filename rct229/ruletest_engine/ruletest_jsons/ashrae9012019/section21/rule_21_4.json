@@ -3,7 +3,7 @@
         "Section": 21,
         "Rule": 4,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones.  Space conditioning is provided by system type 7 with boiler and is correctly modeled with a natural draft boiler.  Expected result: PASS",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a natural draft boiler.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-4",
@@ -15,7 +15,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -151,7 +151,7 @@
         "Section": 21,
         "Rule": 4,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones.  Space conditioning is provided by system type 7 with boiler and is incorrectly modeled with a forced draft boiler.  Expected result: FAIL",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a forced boiler.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-4",
@@ -163,7 +163,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -299,7 +299,7 @@
         "Section": 21,
         "Rule": 4,
         "Test": "c",
-        "test_description": "The project has one building segment with one zone.  Space conditioning is provided by system type 11.2 with boiler and is correctly modeled with a natural draft boiler.  Expected result: PASS",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 11 with a natural draft boiler.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-4",
@@ -311,7 +311,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -430,7 +430,7 @@
         "Section": 21,
         "Rule": 4,
         "Test": "d",
-        "test_description": "The project has one building segment with one zone.  Space conditioning is provided by system type 11.2 with boiler and is incorrectly modeled with a forced draft boiler.  Expected result: FAIL",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 11 with a forced draft boiler.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-4",
@@ -442,7 +442,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",
@@ -561,7 +561,7 @@
         "Section": 21,
         "Rule": 4,
         "Test": "e",
-        "test_description": "The project has one building segment with one zone.  Space conditioning is provided by system type 3 with no hot water loops.  Expected result: NOT APPLICABLE",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 3. There are no boilers.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "21-4",
@@ -573,7 +573,7 @@
             "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
                 "data_timestamp": "2024-02-12T09:00Z",

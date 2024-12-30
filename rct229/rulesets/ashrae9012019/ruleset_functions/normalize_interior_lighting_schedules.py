@@ -38,7 +38,7 @@ def normalize_interior_lighting_schedules(
     adjust_for_credit: Boolean - indicate whether the function needs to adjust schedule value by control credit
     Returns
     -------
-    A list containing 8760/8784 hourly values of a noralized schedule of the space data element
+    A list containing 8760/8784 hourly values of a normalized schedule of the space data element
     """
 
     # Implementation note:

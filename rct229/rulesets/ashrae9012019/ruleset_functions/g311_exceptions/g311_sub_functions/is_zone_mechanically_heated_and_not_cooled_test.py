@@ -3,7 +3,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_fu
 )
 from rct229.schema.schema_utils import quantify_rmd
 
-TEST_RMI = {
+TEST_RMD = {
     "id": "test_rmd",
     "buildings": [
         {
@@ -113,7 +113,7 @@ TEST_RMI = {
 
 TEST_RPD_FULL = {
     "id": "229",
-    "ruleset_model_descriptions": [TEST_RMI],
+    "ruleset_model_descriptions": [TEST_RMD],
     "data_timestamp": "2024-02-12T09:00Z",
 }
 

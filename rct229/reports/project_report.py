@@ -25,10 +25,10 @@ def print_rule_report(report):
 
 
 def print_summary_report(report):
-    invalid_rmrs = report["invalid_rmrs"]
-    if invalid_rmrs:
+    invalid_rmds = report["invalid_rmds"]
+    if invalid_rmds:
         print("----------------------------------")
-        print(f"Invalid RMDs: {str(invalid_rmrs)}")
+        print(f"Invalid RMDs: {str(invalid_rmds)}")
     else:
         outcomes = report["outcomes"]
         summary_dict = aggregate_outcomes(outcomes)

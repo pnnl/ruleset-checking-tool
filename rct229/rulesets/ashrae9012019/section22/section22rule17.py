@@ -8,6 +8,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_heat_rejection_loops_co
 from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_
 from rct229.utils.pint_utils import ZERO, CalcQ
+from rct229.utils.jsonpath_utils import find_all
 
 FAN_SHAFT_POWER_FACTOR = 0.9
 HEAT_REJ_EFF_LIMIT = 38.2 * ureg("gpm/hp")
@@ -32,6 +33,11 @@ class Section22Rule17(RuleDefinitionListIndexedBase):
             list_path="$.heat_rejections[*]",
         )
 
+    def is_applicable(self, context, data=None):
+        rmd_b = context.BASELINE_0
+
+        return bool(find_all("$.heat_rejections[*]", rmd_b))
+
     def create_data(self, context, data):
         rmd_b = context.BASELINE_0
         heat_rejection_loop_ids_b = (
@@ -48,6 +54,12 @@ class Section22Rule17(RuleDefinitionListIndexedBase):
                 ),
                 required_fields={
                     "$": ["loop", "rated_water_flowrate"],
+                },
+                precision={
+                    "heat_rejection_efficiency_b": {
+                        "precision": 0.1,
+                        "unit": "gpm/hp",
+                    },
                 },
             )
 
@@ -104,11 +116,12 @@ class Section22Rule17(RuleDefinitionListIndexedBase):
                 )
             )
             heat_rejection_efficiency_b = calc_vals["heat_rejection_efficiency_b"]
-            heat_rejection_efficiency_in_gpm_per_hp_b = round(
-                heat_rejection_efficiency_b.to(ureg("gpm/hp")).magnitude, 1
-            )
+            heat_rejection_efficiency_in_gpm_per_hp_b = heat_rejection_efficiency_b
 
-            if HEAT_REJ_EFF_LIMIT == heat_rejection_efficiency_b:
+            if self.precision_comparison["heat_rejection_efficiency_b"](
+                heat_rejection_efficiency_b,
+                HEAT_REJ_EFF_LIMIT,
+            ):
                 undetermined_msg = (
                     f"The project includes a cooling tower. We calculated the cooling tower efficiency to be correct at 38.2 gpm/hp. "
                     f"However, it was not possible to verify that the modeling inputs correspond to the rating conditions in Table 6.8.1-7. "
