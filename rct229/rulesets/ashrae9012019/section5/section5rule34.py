@@ -52,20 +52,20 @@ class Section5Rule34(RuleDefinitionListIndexedBase):
             matched_baseline_zones = match_lists_by_id(proposed_zones, baseline_zones)
             proposed_baseline_zone_pairs = zip(proposed_zones, matched_baseline_zones)
             for p_zone, b_zone in proposed_baseline_zone_pairs:
-                # need a method like match object
-                p_zone_infiltration = p_zone["infiltration"]
-                # b_zone could be NONE - add a check.
-                b_zone_infiltration = b_zone["infiltration"]
+                if b_zone is not None:
+                    # need a method like match object
+                    p_zone_infiltration = p_zone["infiltration"]
+                    b_zone_infiltration = b_zone["infiltration"]
 
-                if (
-                    p_zone_infiltration["algorithm_name"]
-                    != b_zone_infiltration["algorithm_name"]
-                    or p_zone_infiltration["modeling_method"]
-                    != b_zone_infiltration["modeling_method"]
-                ):
-                    failing_infiltration_zone_ids.append(p_zone["id"])
+                    if (
+                        p_zone_infiltration["algorithm_name"]
+                        != b_zone_infiltration["algorithm_name"]
+                        or p_zone_infiltration["modeling_method"]
+                        != b_zone_infiltration["modeling_method"]
+                    ):
+                        failing_infiltration_zone_ids.append(p_zone["id"])
 
             return {"failing_infiltration_zone_ids": failing_infiltration_zone_ids}
 
         def rule_check(self, context, calc_vals=None, data=None):
-            return len(calc_vals["failing_infiltration_zone_ids"]) == 0
+            return not calc_vals["failing_infiltration_zone_ids"]
