@@ -155,6 +155,7 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                 )
                 # Note: draw_pattern_b will be None if the SWH draw pattern is not defined and the first hour rating is not defined
 
+                # efficiency_data data type should be None | List. If it is list, the maximum length is limited to 2 due to the dataset design.
                 efficiency_data = None
                 expected_efficiency_b = None
                 expected_efficiency_metric_b = None

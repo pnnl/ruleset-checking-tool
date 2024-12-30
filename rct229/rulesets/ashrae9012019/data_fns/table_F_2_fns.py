@@ -41,17 +41,15 @@ def table_f_2_lookup(
         "Electric storage water heater",
         "Gas storage water heater",
     ]
-    assert_(
-        equipment_type in valid_equipment_types,
-        f"Invalid equipment type. Must be one of {valid_equipment_types}",
-    )
+    assert (
+        equipment_type in valid_equipment_types
+    ), f"Invalid equipment type. Must be one of {valid_equipment_types}"
 
     # Validate draw pattern
     valid_draw_patterns = ["Very small", "Low", "Medium", "High"]
-    assert_(
-        draw_pattern in valid_draw_patterns,
-        f"Invalid draw pattern. Must be one of {valid_draw_patterns}",
-    )
+    assert (
+        draw_pattern in valid_draw_patterns
+    ), f"Invalid draw pattern. Must be one of {valid_draw_patterns}"
 
     # Filter entries by capacity thresholds
     capacity_matched = find_capacity_matched_entries(

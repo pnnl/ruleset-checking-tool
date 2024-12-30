@@ -134,11 +134,11 @@ def test__table_7_8_invalid_draw_pattern():
     expected_message = (
         "Invalid draw pattern. Must be one of ['Very small', 'Low', 'Medium', 'High']"
     )
-    with pytest.raises(RCTFailureException, match=re.escape(expected_message)):
+    with pytest.raises(AssertionError, match=re.escape(expected_message)):
         table_f_2_lookup("Gas storage water heater", 106.0 * ureg("kBtu/h"), "Invalid")
 
 
 def test__table_7_8_invalid_equipment_type():
     expected_message = "Invalid equipment type. Must be one of ['Electric storage water heater', 'Gas storage water heater']"
-    with pytest.raises(RCTFailureException, match=re.escape(expected_message)):
+    with pytest.raises(AssertionError, match=re.escape(expected_message)):
         table_f_2_lookup("Storage water heater", 106.0 * ureg("kBtu/h"), "High")
