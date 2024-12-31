@@ -275,11 +275,11 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
             more_than_one_supply_fan_b = calc_vals["more_than_one_supply_fan_b"]
 
             if more_than_one_supply_fan_b:
-                UNDERMINED_MSG = f"{hvac_id_b} has more than one supply fan associated with the HVAC system in the baseline and therefore this check could not be conducted for this HVAC sytem. Conduct manual check for compliance with G3.1.2.9."
+                UNDETERMINED_MSG = f"{hvac_id_b} has more than one supply fan associated with the HVAC system in the baseline and therefore this check could not be conducted for this HVAC sytem. Conduct manual check for compliance with G3.1.2.9."
             else:
-                UNDERMINED_MSG = f"{hvac_id_b} has zone(s) with non-mechanical cooling in the proposed design, conduct a manual check that the baseline building design includes a fan power allowance of <insert IP or SI version as applicable Pfan = CFMnmc × 0.054, where, CFMnmc = the baseline non-mechanical cooling fan airflow, cfm for the non-mechanical cooling fan in additional to the 0.3 W/CFM allowance for the HVAC system>."
+                UNDETERMINED_MSG = f"{hvac_id_b} has zone(s) with non-mechanical cooling in the proposed design, conduct a manual check that the baseline building design includes a fan power allowance of <insert IP or SI version as applicable Pfan = CFMnmc × 0.054, where, CFMnmc = the baseline non-mechanical cooling fan airflow, cfm for the non-mechanical cooling fan in additional to the 0.3 W/CFM allowance for the HVAC system>."
 
-            return UNDERMINED_MSG
+            return UNDETERMINED_MSG
 
         def rule_check(self, context, calc_vals=None, data=None):
             zones_served_by_hvac_has_non_mech_cooling_bool_p = calc_vals[
@@ -297,7 +297,7 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
                     fan_power_per_flow_b,
                     REQ_FAN_POWER_FLOW_RATIO,
                 )
-            ) or (fan_power_per_flow_b < REQ_FAN_POWER_FLOW_RATIO)
+            )
 
         def is_tolerance_fail(self, context, calc_vals=None, data=None):
             zones_served_by_hvac_has_non_mech_cooling_bool_p = calc_vals[
