@@ -187,7 +187,7 @@ def evaluate_rules(
         if rmds_used[ruleset_model]:
             rmd_validation = validate_rpd(rmds[ruleset_model], test)
             if rmd_validation["passed"] is not True:
-                invalid_rmds[ruleset_model] = rmd_validation["error"]
+                invalid_rmds[ruleset_model] = rmd_validation["errors"]
 
     assert_(
         len(invalid_rmds) == 0,
@@ -201,7 +201,7 @@ def evaluate_rules(
         if not rmds_used[ruleset_model] and rmds.__getitem__(ruleset_model):
             rmd_validation = validate_rpd(rmds[ruleset_model], test)
             if rmd_validation["passed"] is not True:
-                invalid_rmds[ruleset_model] = rmd_validation["error"]
+                invalid_rmds[ruleset_model] = rmd_validation["errors"]
 
     assert_(
         len(invalid_rmds) == 0,
