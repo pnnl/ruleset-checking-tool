@@ -3,6 +3,7 @@
         "transformer_capacity": "V-A",
         "electric_power": "W",
         "volume": "m3",
+        "tank_volume": "L",
         "area": "m2",
         "power_density": "W/m2",
         "thermal_transmittance": "W/m2-K",
@@ -28,12 +29,14 @@
         "weight": "kg",
         "elevator_speed": "m/s",
         "power_per_volumetric_flow_rate": "W-s/L",
-        "power_per_flow_rate": "W-s/L"
+        "power_per_flow_rate": "W-s/L",
+        "power": "W"
     },
     "ip": {
         "transformer_capacity": "V-A",
         "electric_power": "W",
         "volume": "ft3",
+        "tank_volume": "gallon",
         "area": "ft2",
         "power_density": "W/ft2",
         "thermal_transmittance": "Btu/hr-ft2-R",
@@ -59,6 +62,7 @@
         "weight": "lb",
         "elevator_speed": "ft/min",
         "power_per_volumetric_flow_rate": "W/gpm",
-        "power_per_flow_rate": "W/gpm"
+        "power_per_flow_rate": "W/gpm",
+        "power": "Btu/h"
     }
 }

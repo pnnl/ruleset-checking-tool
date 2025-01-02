@@ -11,7 +11,7 @@ from rct229.schema.validate import (
     validate_rpd,
 )
 
-EXAMPLES_PATH = "examples"
+EXAMPLES_PATH = "../../examples"
 
 # Testing validate_rmd; intended to make sure the referenced schemas are connected
 # properly and that the example rmd files are schema valid
@@ -111,7 +111,7 @@ def test__check_unique_ids_in_ruleset_model_descriptions__unique():
 # -----------------------------------------------
 
 
-def test__non_schema_validate_rmd__not_unique():
+def test__non_schema_validate_rpd__not_unique():
     assert non_schema_validate_rpd(TEST_IDS_RMD) == {
         "passed": False,
         "error": [
@@ -120,7 +120,7 @@ def test__non_schema_validate_rmd__not_unique():
     }
 
 
-def test__non_schema_validate_rmd__unique():
+def test__non_schema_validate_rpd__unique():
     assert non_schema_validate_rpd(TEST_UNIQUE_IDS_RMD) == {
         "passed": True,
         "error": None,
