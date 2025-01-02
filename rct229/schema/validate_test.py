@@ -7,8 +7,8 @@ from rct229.schema.validate import (
     json_paths_to_lists,
     json_paths_to_lists_from_dict,
     json_paths_to_lists_from_list,
-    non_schema_validate_rmd,
-    validate_rmd,
+    non_schema_validate_rpd,
+    validate_rpd,
 )
 
 EXAMPLES_PATH = "examples"
@@ -20,19 +20,19 @@ EXAMPLES_PATH = "examples"
 def test__validate_rmd__with_baseline_rmd():
     with open(os.path.join(EXAMPLES_PATH, "baseline_rmd.json")) as rmd_file:
         rmd_obj = json.load(rmd_file)
-    assert validate_rmd(rmd_obj) == {"passed": True, "error": None}
+    assert validate_rpd(rmd_obj) == {"passed": True, "error": None}
 
 
 def test__validate_rmd__with_proposed_rmd():
     with open(os.path.join(EXAMPLES_PATH, "proposed_rmd.json")) as rmd_file:
         rmd_obj = json.load(rmd_file)
-    assert validate_rmd(rmd_obj) == {"passed": True, "error": None}
+    assert validate_rpd(rmd_obj) == {"passed": True, "error": None}
 
 
 def test__validate_rmd__with_user_rmd():
     with open(os.path.join(EXAMPLES_PATH, "user_rmd.json")) as rmd_file:
         rmd_obj = json.load(rmd_file)
-    assert validate_rmd(rmd_obj) == {"passed": True, "error": None}
+    assert validate_rpd(rmd_obj) == {"passed": True, "error": None}
 
 
 ## Testing the three companion functions that find json paths to list
@@ -111,8 +111,8 @@ def test__check_unique_ids_in_ruleset_model_descriptions__unique():
 # -----------------------------------------------
 
 
-def test__non_schema_validate_rmd__not_unique():
-    assert non_schema_validate_rmd(TEST_IDS_RMD) == {
+def test__non_schema_validate_rpd__not_unique():
+    assert non_schema_validate_rpd(TEST_IDS_RMD) == {
         "passed": False,
         "error": [
             "Non-unique ids for paths: ruleset_model_descriptions[0].buildings[*].building_segments",
@@ -120,8 +120,8 @@ def test__non_schema_validate_rmd__not_unique():
     }
 
 
-def test__non_schema_validate_rmd__unique():
-    assert non_schema_validate_rmd(TEST_UNIQUE_IDS_RMD) == {
+def test__non_schema_validate_rpd__unique():
+    assert non_schema_validate_rpd(TEST_UNIQUE_IDS_RMD) == {
         "passed": True,
         "error": None,
     }

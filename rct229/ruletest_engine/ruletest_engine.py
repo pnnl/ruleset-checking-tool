@@ -18,7 +18,7 @@ from rct229.rulesets import rulesets
 from rct229.ruletest_engine.ruletest_rmd_factory import get_ruletest_rmd_models
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.schema.schema_store import SchemaStore
-from rct229.schema.validate import validate_rmd
+from rct229.schema.validate import validate_rpd
 
 
 # Generates the RMD triplet dictionaries from a test_dictionary's "rmd_transformation" element.
@@ -574,9 +574,9 @@ def validate_test_json_schema(test_json_path):
         user_rmd, baseline_rmd, proposed_rmd = generate_test_rmds(test_dict)
 
         # Evaluate RMDs against the schema
-        user_result = validate_rmd(user_rmd) if user_rmd != None else None
-        baseline_result = validate_rmd(baseline_rmd) if baseline_rmd != None else None
-        proposed_result = validate_rmd(proposed_rmd) if proposed_rmd != None else None
+        user_result = validate_rpd(user_rmd) if user_rmd != None else None
+        baseline_result = validate_rpd(baseline_rmd) if baseline_rmd != None else None
+        proposed_result = validate_rpd(proposed_rmd) if proposed_rmd != None else None
 
         results_list = [user_result, baseline_result, proposed_result]
         rmd_type_list = ["User", "Baseline", "Proposed"]
@@ -787,7 +787,7 @@ def validate_229_rmd(rmd_name, rmd_path):
     with open(rmd_path) as f:
         rmd = json.load(f)
 
-    result = validate_rmd(rmd)
+    result = validate_rpd(rmd)
 
     # If result contains a dictionary with failure information, append failure to failure list
     if isinstance(result, dict):

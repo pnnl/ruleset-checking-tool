@@ -1,5 +1,5 @@
 import pytest
-from json_utils import slash_prefix_guarantee
+from rct229.utils.json_utils import slash_prefix_guarantee
 
 
 # Testing slash_prefix_guarantee
