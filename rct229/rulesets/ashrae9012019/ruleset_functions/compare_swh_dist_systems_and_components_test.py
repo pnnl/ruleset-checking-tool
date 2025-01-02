@@ -4,7 +4,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.compare_swh_dist_systems_an
     compare_swh_dist_systems_and_components,
 )
 from rct229.schema.schema_utils import quantify_rmd
-from rct229.schema.validate import schema_validate_rmd
+from rct229.schema.validate import schema_validate_rpd
 
 TEST_RMD = {
     "id": "test_rmd",
@@ -198,21 +198,21 @@ TEST_RMD_COPIED_DIFF_SWH_EQUIP_LEN_FULL = quantify_rmd(
 
 
 def test__TEST_RPD__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RPD_FULL)
+    schema_validation_result = schema_validate_rpd(TEST_RPD_FULL)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
 
 
 def test__TEST_RPD_Copied__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RPD_COPIED_FULL)
+    schema_validation_result = schema_validate_rpd(TEST_RPD_COPIED_FULL)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
 
 
 def test__TEST_RPD_Copied_diff_len__is_valid():
-    schema_validation_result = schema_validate_rmd(
+    schema_validation_result = schema_validate_rpd(
         TEST_RPD_COPIED_DIFF_SWH_EQUIP_LEN_FULL
     )
     assert schema_validation_result[
