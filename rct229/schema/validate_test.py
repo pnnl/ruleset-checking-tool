@@ -11,7 +11,7 @@ from rct229.schema.validate import (
     validate_rpd,
 )
 
-EXAMPLES_PATH = "examples"
+EXAMPLES_PATH = "../../examples"
 
 # Testing validate_rmd; intended to make sure the referenced schemas are connected
 # properly and that the example rmd files are schema valid
