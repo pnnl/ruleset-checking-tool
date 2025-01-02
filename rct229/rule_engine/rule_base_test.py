@@ -1,14 +1,15 @@
 import pytest
-
 from rct229.rule_engine.rule_base import RuleDefinitionBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
+from rct229.rule_engine.rulesets import RuleSet
 
 # Constants ###############################################
 # Note: It is important that these constants are not mutated by any of the tests
 # so that the tests can run independently and in any order.
+from rct229.schema.schema_enums import SchemaEnums
+from rct229.schema.schema_store import SchemaStore
 
-
-RMR_1 = {
+RMD_1 = {
     "transformers": [
         {
             "id": 1,
@@ -32,7 +33,7 @@ RMR_1 = {
 }
 
 
-RMR_2 = {
+RMD_2 = {
     "transformers": [
         {
             "id": 1,
@@ -47,19 +48,25 @@ RMR_2 = {
 }
 
 
-RMR_EMPTY = {}
+RMD_EMPTY = {}
+
+SchemaStore.set_ruleset(RuleSet.ASHRAE9012019_RULESET)
+SchemaEnums.update_schema_enum()
+
+DERIVED_RULE_OUTCOME_BASE = produce_ruleset_model_description(
+    USER=RMD_1, BASELINE_0=RMD_EMPTY, PROPOSED=RMD_2
+)
 
 
-DERIVED_RULE_OUTCOME_BASE = UserBaselineProposedVals(RMR_1, RMR_EMPTY, RMR_2)
-
-
-RMRS_WITH_MATCHING_USER_AND_BASELINE = UserBaselineProposedVals(RMR_1, RMR_1, RMR_EMPTY)
+RMDS_WITH_MATCHING_USER_AND_BASELINE = produce_ruleset_model_description(
+    USER=RMD_1, BASELINE_0=RMD_1, PROPOSED=RMD_EMPTY
+)
 
 
 BASE_RULE_1_OUTCOME_BASE = {
     "id": "1",
     "description": "Basic Rule",
-    "rmr_context": "/transformers",
+    "rmd_context": "/transformers",
 }
 
 
@@ -67,7 +74,9 @@ BASE_RULE_ARGS = {
     **BASE_RULE_1_OUTCOME_BASE,
     "not_applicable_msg": "Not applicable message",
     "manual_check_required_msg": "Manual check required message",
-    "rmrs_used": UserBaselineProposedVals(True, True, False),
+    "rmds_used": produce_ruleset_model_description(
+        USER=True, BASELINE_0=True, PROPOSED=False
+    ),
 }
 
 
@@ -104,12 +113,13 @@ DERIVED_RULE_outcome_base = {**BASE_RULE_1_OUTCOME_BASE, "calc_vals": [{"a": 0},
 def test__rule_definition_base__evaluate__with_missing_baseline():
     assert BASE_RULE_1.evaluate(DERIVED_RULE_OUTCOME_BASE) == {
         **BASE_RULE_1_OUTCOME_BASE,
-        "result": "MISSING_BASELINE",
+        "result": "UNDETERMINED",
+        "message": "MISSING_BASELINE_0",
     }
 
 
 def test__rule_definition_base__evaluate__with_false_is_applicable():
-    assert DERIVED_RULE.evaluate(RMRS_WITH_MATCHING_USER_AND_BASELINE, data="NA") == {
+    assert DERIVED_RULE.evaluate(RMDS_WITH_MATCHING_USER_AND_BASELINE, data="NA") == {
         **BASE_RULE_1_OUTCOME_BASE,
         "result": "NOT_APPLICABLE",
         "message": "Not applicable message",
@@ -118,7 +128,7 @@ def test__rule_definition_base__evaluate__with_false_is_applicable():
 
 def test__rule_definition_base__evaluate__with_true_manual_check_required():
     assert DERIVED_RULE.evaluate(
-        RMRS_WITH_MATCHING_USER_AND_BASELINE, data="MANUAL_CHECK_REQUIRED"
+        RMDS_WITH_MATCHING_USER_AND_BASELINE, data="MANUAL_CHECK_REQUIRED"
     ) == {
         **DERIVED_RULE_outcome_base,
         "result": "UNDETERMINED",
@@ -127,41 +137,57 @@ def test__rule_definition_base__evaluate__with_true_manual_check_required():
 
 
 def test__rule_definition_base__evaluate__with_true_rule_check():
-    assert DERIVED_RULE.evaluate(RMRS_WITH_MATCHING_USER_AND_BASELINE, data=True) == {
+    assert DERIVED_RULE.evaluate(RMDS_WITH_MATCHING_USER_AND_BASELINE, data=True) == {
         **DERIVED_RULE_outcome_base,
         "result": "PASSED",
     }
 
 
 def test__rule_definition_base__evaluate__with_true_rule_check():
-    assert DERIVED_RULE.evaluate(RMRS_WITH_MATCHING_USER_AND_BASELINE, data=False) == {
+    assert DERIVED_RULE.evaluate(RMDS_WITH_MATCHING_USER_AND_BASELINE, data=False) == {
         **DERIVED_RULE_outcome_base,
         "result": "FAILED",
     }
 
 
 # Testing RuleDefinitionBase get_context method ------------------
-def test__rule_definition_base__get_context__with_missing_rmrs():
+def test__rule_definition_base__get_context__with_missing_rmds():
     assert (
-        BASE_RULE_1.get_context(UserBaselineProposedVals(RMR_1, RMR_EMPTY, RMR_2))
-        == "MISSING_BASELINE"
+        BASE_RULE_1.get_context(
+            produce_ruleset_model_description(
+                USER=RMD_1, BASELINE_0=RMD_EMPTY, PROPOSED=RMD_2
+            )
+        )
+        == "MISSING_BASELINE_0"
     )
     assert (
-        BASE_RULE_1.get_context(UserBaselineProposedVals(RMR_EMPTY, RMR_1, RMR_2))
+        BASE_RULE_1.get_context(
+            produce_ruleset_model_description(
+                USER=RMD_EMPTY, BASELINE_0=RMD_1, PROPOSED=RMD_2
+            )
+        )
         == "MISSING_USER"
     )
     assert (
-        BASE_RULE_1.get_context(UserBaselineProposedVals(RMR_EMPTY, RMR_EMPTY, RMR_2))
-        == "MISSING_USER_BASELINE"
+        BASE_RULE_1.get_context(
+            produce_ruleset_model_description(
+                USER=RMD_EMPTY, BASELINE_0=RMD_EMPTY, PROPOSED=RMD_2
+            )
+        )
+        == "MISSING_USER_BASELINE_0"
     )
 
 
-def test__rule_definition_base__get_context__with_rmrs_present():
-    context = BASE_RULE_1.get_context(UserBaselineProposedVals(RMR_1, RMR_2, RMR_EMPTY))
+def test__rule_definition_base__get_context__with_rmds_present():
+    context = BASE_RULE_1.get_context(
+        produce_ruleset_model_description(
+            USER=RMD_1, BASELINE_0=RMD_2, PROPOSED=RMD_EMPTY
+        )
+    )
     assert (
-        context.user == RMR_1["transformers"]
-        and context.baseline == RMR_2["transformers"]
-        and context.proposed == None
+        context.USER == RMD_1["transformers"]
+        and context.BASELINE_0 == RMD_2["transformers"]
+        and context.PROPOSED == None
     )
 
 

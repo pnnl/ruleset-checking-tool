@@ -1,0 +1,292 @@
+{
+  "service_water_heater_efficiency": [
+    {
+      "Equipment Type": "Gas storage water heater",
+      "Capacity min": {
+        "value": 20,
+        "unit": "gallon",
+        "inclusive": true
+      },
+      "Capacity max": {
+        "value": 55,
+        "unit": "gallon",
+        "inclusive": true
+      },
+      "Draw Pattern": "Very small",
+      "Efficiency": {
+        "equation": "0.3456 - 0.0020*v",
+        "metric": "UNIFORM_ENERGY_FACTOR"
+      }
+    },
+    {
+      "Equipment Type": "Gas storage water heater",
+      "Capacity min": {
+        "value": 20,
+        "unit": "gallon",
+        "inclusive": true
+      },
+      "Capacity max": {
+        "value": 55,
+        "unit": "gallon",
+        "inclusive": true
+      },
+      "Draw Pattern": "Low",
+      "Efficiency": {
+        "equation": "0.5982 - 0.0019*v",
+        "metric": "UNIFORM_ENERGY_FACTOR"
+      }
+    },
+    {
+      "Equipment Type": "Gas storage water heater",
+      "Capacity min": {
+        "value": 20,
+        "unit": "gallon",
+        "inclusive": true
+      },
+      "Capacity max": {
+        "value": 55,
+        "unit": "gallon",
+        "inclusive": true
+      },
+      "Draw Pattern": "Medium",
+      "Efficiency": {
+        "equation": "0.6483 - 0.0017*v",
+        "metric": "UNIFORM_ENERGY_FACTOR"
+      }
+    },
+    {
+      "Equipment Type": "Gas storage water heater",
+      "Capacity min": {
+        "value": 20,
+        "unit": "gallon",
+        "inclusive": true
+      },
+      "Capacity max": {
+        "value": 55,
+        "unit": "gallon",
+        "inclusive": true
+      },
+      "Draw Pattern": "High",
+      "Efficiency": {
+        "equation": "0.6920 - 0.0013*v",
+        "metric": "UNIFORM_ENERGY_FACTOR"
+      }
+    },
+    {
+      "Equipment Type": "Gas storage water heater",
+      "Capacity min": {
+        "value": 55,
+        "unit": "gallon",
+        "inclusive": false
+      },
+      "Capacity max": {
+        "value": 100,
+        "unit": "gallon",
+        "inclusive": true
+      },
+      "Draw Pattern": "Very small",
+      "Efficiency": {
+        "equation": "0.6470 - 0.0006*v",
+        "metric": "UNIFORM_ENERGY_FACTOR"
+      }
+    },
+    {
+      "Equipment Type": "Gas storage water heater",
+      "Capacity min": {
+        "value": 55,
+        "unit": "gallon",
+        "inclusive": false
+      },
+      "Capacity max": {
+        "value": 100,
+        "unit": "gallon",
+        "inclusive": true
+      },
+      "Draw Pattern": "Low",
+      "Efficiency": {
+        "equation": "0.7689 - 0.0005*v",
+        "metric": "UNIFORM_ENERGY_FACTOR"
+      }
+    },
+    {
+      "Equipment Type": "Gas storage water heater",
+      "Capacity min": {
+        "value": 55,
+        "unit": "gallon",
+        "inclusive": false
+      },
+      "Capacity max": {
+        "value": 100,
+        "unit": "gallon",
+        "inclusive": true
+      },
+      "Draw Pattern": "Medium",
+      "Efficiency": {
+        "equation": "0.7897 - 0.0004*v",
+        "metric": "UNIFORM_ENERGY_FACTOR"
+      }
+    },
+    {
+      "Equipment Type": "Gas storage water heater",
+      "Capacity min": {
+        "value": 55,
+        "unit": "gallon",
+        "inclusive": false
+      },
+      "Capacity max": {
+        "value": 100,
+        "unit": "gallon",
+        "inclusive": true
+      },
+      "Draw Pattern": "High",
+      "Efficiency": {
+        "equation": "0.8072 - 0.0003*v",
+        "metric": "UNIFORM_ENERGY_FACTOR"
+      }
+    },
+    {
+      "Equipment Type": "Electric storage water heater",
+      "Capacity min": {
+        "value": 20,
+        "unit": "gallon",
+        "inclusive": true
+      },
+      "Capacity max": {
+        "value": 55,
+        "unit": "gallon",
+        "inclusive": true
+      },
+      "Draw Pattern": "Very small",
+      "Efficiency": {
+        "equation": "0.8808 - 0.0008*v",
+        "metric": "UNIFORM_ENERGY_FACTOR"
+      }
+    },
+    {
+      "Equipment Type": "Electric storage water heater",
+      "Capacity min": {
+        "value": 20,
+        "unit": "gallon",
+        "inclusive": true
+      },
+      "Capacity max": {
+        "value": 55,
+        "unit": "gallon",
+        "inclusive": true
+      },
+      "Draw Pattern": "Low",
+      "Efficiency": {
+        "equation": "0.9254 - 0.0003*v",
+        "metric": "UNIFORM_ENERGY_FACTOR"
+      }
+    },
+    {
+      "Equipment Type": "Electric storage water heater",
+      "Capacity min": {
+        "value": 20,
+        "unit": "gallon",
+        "inclusive": true
+      },
+      "Capacity max": {
+        "value": 55,
+        "unit": "gallon",
+        "inclusive": true
+      },
+      "Draw Pattern": "Medium",
+      "Efficiency": {
+        "equation": "0.9307 - 0.0002*v",
+        "metric": "UNIFORM_ENERGY_FACTOR"
+      }
+    },
+    {
+      "Equipment Type": "Electric storage water heater",
+      "Capacity min": {
+        "value": 20,
+        "unit": "gallon",
+        "inclusive": true
+      },
+      "Capacity max": {
+        "value": 55,
+        "unit": "gallon",
+        "inclusive": true
+      },
+      "Draw Pattern": "High",
+      "Efficiency": {
+        "equation": "0.9349 - 0.0001*v",
+        "metric": "UNIFORM_ENERGY_FACTOR"
+      }
+    },
+    {
+      "Equipment Type": "Electric storage water heater",
+      "Capacity min": {
+        "value": 55,
+        "unit": "gallon",
+        "inclusive": false
+      },
+      "Capacity max": {
+        "value": 100,
+        "unit": "gallon",
+        "inclusive": true
+      },
+      "Draw Pattern": "Very small",
+      "Efficiency": {
+        "equation": "1.9236 - 0.0011*v",
+        "metric": "UNIFORM_ENERGY_FACTOR"
+      }
+    },
+    {
+      "Equipment Type": "Electric storage water heater",
+      "Capacity min": {
+        "value": 55,
+        "unit": "gallon",
+        "inclusive": false
+      },
+      "Capacity max": {
+        "value": 100,
+        "unit": "gallon",
+        "inclusive": true
+      },
+      "Draw Pattern": "Low",
+      "Efficiency": {
+        "equation": "2.0440 - 0.0011*v",
+        "metric": "UNIFORM_ENERGY_FACTOR"
+      }
+    },
+    {
+      "Equipment Type": "Electric storage water heater",
+      "Capacity min": {
+        "value": 55,
+        "unit": "gallon",
+        "inclusive": false
+      },
+      "Capacity max": {
+        "value": 100,
+        "unit": "gallon",
+        "inclusive": true
+      },
+      "Draw Pattern": "Medium",
+      "Efficiency": {
+        "equation": "2.1171 - 0.0011*v",
+        "metric": "UNIFORM_ENERGY_FACTOR"
+      }
+    },
+    {
+      "Equipment Type": "Electric storage water heater",
+      "Capacity min": {
+        "value": 55,
+        "unit": "gallon",
+        "inclusive": false
+      },
+      "Capacity max": {
+        "value": 100,
+        "unit": "gallon",
+        "inclusive": true
+      },
+      "Draw Pattern": "High",
+      "Efficiency": {
+        "equation": "2.2418 - 0.0011*v",
+        "metric": "UNIFORM_ENERGY_FACTOR"
+      }
+    }
+  ]
+}

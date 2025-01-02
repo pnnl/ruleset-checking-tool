@@ -18,6 +18,7 @@
 **Function Call:**  
 
 1. get_baseline_system_types()
+2. find_all()
 
 **Applicability Checks:**  
 
@@ -29,7 +30,7 @@
 
 ## Rule Logic:  
 
-- For each boiler in B_RMR, save boiler to loop boiler dictionary: `for boiler_b in B_RMR.RulesetModelInstance.boilers: loop_boiler_dict[boiler_b.loop].append(boiler_b)`
+- For each boiler in B_RMI, save boiler to loop boiler dictionary: `loop_boiler_dict = find_all(B-RMD)`
 
 - For each fluid loop in B_RMR: `for fluid_loop_b in B_RMR.RulesetModelInstance.fluid_loops:`
 
@@ -40,9 +41,9 @@
     - Case 1: For heating hot water loop that boiler serves, if total pump power per flow rate is equal to 19W/gpm: `if fluid_loop_b.pump_power_per_flow_rate == 19: PASS`
 
     - Case 2: Else: `else: FAIL`
-    
+
 **Notes:**
 
-1. This rule does not check any pump power on heating loop that is not connected to boiler(s). If RMR has heating loop not connected to boiler(s), it will fail the one HHW loop rule. 
+1. This rule does not check any pump power on heating loop that is not connected to boiler(s). If RMR has heating loop not connected to boiler(s), it will fail the one HHW loop rule.
 
 **[Back](../_toc.md)**

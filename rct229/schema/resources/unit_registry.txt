@@ -128,6 +128,8 @@ square_degree = (π / 180) ** 2 * sr = sq_deg = sqdeg
 # Length
 
 # Mass
+lb = 0.4536 * kilogram
+
 
 # Time
 minute = 60 * second = min
@@ -153,8 +155,9 @@ cubic_centimeter = centimeter ** 3 = cc
 m3 = meter ** 3
 gallon = 3.785 * L
 
-# Volumetric Flow Rtae
+# Volumetric Flow Rate
 cfm = ft ** 3 / min
+gpm = gallon / min
 
 # Frequency
 [frequency] = 1 / [time]
