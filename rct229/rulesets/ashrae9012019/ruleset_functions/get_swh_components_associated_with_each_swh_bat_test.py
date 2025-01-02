@@ -3,7 +3,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_components_associat
 )
 
 from rct229.schema.schema_utils import quantify_rmd
-from rct229.schema.validate import schema_validate_rmd
+from rct229.schema.validate import schema_validate_rpd
 from rct229.schema.config import ureg
 from rct229.utils.std_comparisons import std_equal
 
@@ -154,7 +154,7 @@ TEST_RMD = quantify_rmd(TEST_RPD_FULL)["ruleset_model_descriptions"][0]
 
 
 def test__TEST_RPD__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RPD_FULL)
+    schema_validation_result = schema_validate_rpd(TEST_RPD_FULL)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"

@@ -10,7 +10,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_categ
 )
 from rct229.schema.config import ureg
 from rct229.schema.schema_utils import quantify_rmd
-from rct229.schema.validate import schema_validate_rmd
+from rct229.schema.validate import schema_validate_rpd
 
 CLIMATE_ZONE = "CZ0A"
 POWER_DELTA = 1
@@ -723,7 +723,7 @@ TEST_BUILDING = quantify_rmd(TEST_RPD_12)["ruleset_model_descriptions"][0]["buil
 
 
 def test__TEST_RPD__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RPD_12)
+    schema_validation_result = schema_validate_rpd(TEST_RPD_12)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
