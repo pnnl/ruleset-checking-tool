@@ -51,12 +51,13 @@ class Section5Rule34(RuleDefinitionListIndexedBase):
 
             # This assumes that the surfaces all match
             matched_baseline_zones = match_lists_by_id(proposed_zones, baseline_zones)
-            proposed_baseline_zone_pairs = zip(proposed_zones, matched_baseline_zones)
 
             assert_(
                 None not in matched_baseline_zones,
                 "The 'zones' objects between baseline and proposed don't match.",
             )
+
+            proposed_baseline_zone_pairs = zip(proposed_zones, matched_baseline_zones)
 
             for p_zone, b_zone in proposed_baseline_zone_pairs:
                 # need a method like match object
