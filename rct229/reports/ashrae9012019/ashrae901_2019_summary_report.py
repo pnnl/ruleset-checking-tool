@@ -21,8 +21,10 @@ class ASHRAE9012019SummaryReport(RCTReport):
             "Envelope",
             "Lighting",
             "HVAC General",
+            "Service Hot Water",
             "Receptacles",
             "Transformers",
+            "Elevator",
             "HVAC-Baseline",
             "HVAC-General",
             "HVAC-HotWaterSide",
@@ -35,8 +37,10 @@ class ASHRAE9012019SummaryReport(RCTReport):
             "5": "Envelope",
             "6": "Lighting",
             "10": "HVAC General",
+            "11": "Service Hot Water",
             "12": "Receptacles",
             "15": "Transformers",
+            "16": "Elevator",
             "18": "HVAC-Baseline",
             "19": "HVAC-General",
             "21": "HVAC-HotWaterSide",
@@ -81,13 +85,13 @@ class ASHRAE9012019SummaryReport(RCTReport):
 - user: {user_match["file_name"] if user_match else "N/A"}
 - proposed: {proposed_match["file_name"] if proposed_match else "N/A"}
 - baseline_0: {baseline_0_match["file_name"] if baseline_0_match else "N/A"}
-- baseline_90: {baseline_90_match["file_name"] if baseline_90_match else ""}
+- baseline_90: {baseline_90_match["file_name"] if baseline_90_match else "N/A"}
 - baseline_180: {baseline_180_match["file_name"] if baseline_180_match else "N/A"}
 - baseline_270: {baseline_270_match["file_name"] if baseline_270_match else "N/A"}
 
 ### Summary: All Primary Rules
-|                              | All | Performance Calculations | Schedules Setpoints | Envelope | Lighting | HVAC General |  Receptacles | Transformers | HVAC-HotWaterSide | HVAC - ChilledWaterSide | HVAC-AirSide | HVAC-General| HVAC-Baseline
-|:----------------------------:|:---:|:--------:|:--------:|:--------:|:--------:|:-----------:|:------------:|:------------:|:--------------:|:--------------:|:--------------:|:--------------:|:-----------:|
+|                              | All | Performance Calculations | Schedules Setpoints | Envelope | Lighting | HVAC General |  Service Hot Water | Receptacles | Transformers | Elevator | HVAC-HotWaterSide | HVAC - ChilledWaterSide | HVAC-AirSide | HVAC-General| HVAC-Baseline
+|:----------------------------:|:---:|:--------:|:--------:|:--------:|:--------:|:-----------:|:------------:|:------------:|:--------------:|:--------------:|:--------------:|:--------------:|:--------------:|:--------------:|:-----------:|
 Replace-Rules
 Replace-Pass
 Replace-Fail
