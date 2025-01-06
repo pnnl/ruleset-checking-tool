@@ -25,6 +25,9 @@ def get_swh_bats_and_swh_use(rmd: dict) -> dict:
     for building_segment in find_all("$.buildings[*].building_segments[*]", rmd):
         bldg_seg_id = building_segment["id"]
         swh_bat = get_building_segment_swh_bat(rmd, bldg_seg_id)
+        if swh_bat is None:
+            # This means there is no service water uses and no types at building segments
+            swh_bat = "UNDETERMINED"
         swh_and_swh_use_dict.setdefault(swh_bat, [])
 
         # TODO: Moving the `service_water_heating_uses` key to the `building_segments` level is being discussed. If the `service_water_heating_uses` key is moved, this function needs
