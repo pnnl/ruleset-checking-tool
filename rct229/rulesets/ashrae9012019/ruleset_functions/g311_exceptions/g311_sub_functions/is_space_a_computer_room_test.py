@@ -31,11 +31,13 @@ TEST_RMD = {
                                             "id": "misc_equipment 1",
                                             "energy_type": "ELECTRICITY",
                                             "power": 1000,
+                                            "type": "INFORMATION_TECHNOLOGY_EQUIPMENT",
                                         },
                                         {
                                             "id": "misc_equipment 2",
                                             "energy_type": "ELECTRICITY",
                                             "power": 2000,
+                                            "type": "INFORMATION_TECHNOLOGY_EQUIPMENT",
                                         },
                                     ],
                                 },
