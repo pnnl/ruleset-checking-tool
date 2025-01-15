@@ -1,6 +1,6 @@
 ## get_swh_equipment_type
 
-Description: This function determines whether the swh equipment type is one of: (ELECTRIC_RESISTANCE_INSTANTANEOUS, ELECTRIC_RESISTANCE_STORAGE, GAS_STORAGE, OTHER)
+Description: This function determines whether the swh equipment type is one of: (ELECTRIC_RESISTANCE_INSTANTANEOUS, ELECTRIC_RESISTANCE_STORAGE, GAS_STORAGE, PROPANE_INSTANTANEOUS, PROPANE_STORAGE, OTHER)
 
 ## Inputs:
 - **RMD**
