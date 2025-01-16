@@ -2,8 +2,8 @@
 import importlib
 
 __all__ = [
-    "section10rule7",
-    "section10rule14",
+    'prm9012019rule10p28',
+    'prm9012019rule34l50',
 ]
 
 
