@@ -139,7 +139,8 @@ class PRM9012019Rule41z21(RuleDefinitionListIndexedBase):
         class SecondaryChildLoopRule(RuleDefinitionListIndexedBase):
             def __init__(self):
                 super(
-                    PRM9012019Rule41z21.PrimaryFluidLoopRule.SecondaryChildLoopRule, self
+                    PRM9012019Rule41z21.PrimaryFluidLoopRule.SecondaryChildLoopRule,
+                    self,
                 ).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False

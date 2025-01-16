@@ -117,7 +117,8 @@ class PRM9012019Rule78g49(RuleDefinitionListIndexedBase):
         class SecondaryChildLoopRule(RuleDefinitionBase):
             def __init__(self):
                 super(
-                    PRM9012019Rule78g49.ChillerFluidLoopRule.SecondaryChildLoopRule, self
+                    PRM9012019Rule78g49.ChillerFluidLoopRule.SecondaryChildLoopRule,
+                    self,
                 ).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False

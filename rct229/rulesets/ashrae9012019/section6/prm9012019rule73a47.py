@@ -57,7 +57,10 @@ class PRM9012019Rule73a47(RuleDefinitionListIndexedBase):
 
         class SpaceRule(RuleDefinitionBase):
             def __init__(self):
-                super(PRM9012019Rule73a47.BuildingSegmentRule.SpaceRule, self,).__init__(
+                super(
+                    PRM9012019Rule73a47.BuildingSegmentRule.SpaceRule,
+                    self,
+                ).__init__(
                     fail_msg=FAIL_MSG,
                     manual_check_required_msg=MANUAL_CHECK_REQUIRED_MSG,
                     rmds_used=produce_ruleset_model_description(

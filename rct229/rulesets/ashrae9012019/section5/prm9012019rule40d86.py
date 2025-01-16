@@ -81,7 +81,9 @@ class PRM9012019Rule40d86(RuleDefinitionListIndexedBase):
 
         class SlabOnGradeFloorRule(RuleDefinitionBase):
             def __init__(self):
-                super(PRM9012019Rule40d86.BuildingRule.SlabOnGradeFloorRule, self).__init__(
+                super(
+                    PRM9012019Rule40d86.BuildingRule.SlabOnGradeFloorRule, self
+                ).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),

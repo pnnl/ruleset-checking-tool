@@ -73,7 +73,9 @@ class PRM9012019Rule34b75(RuleDefinitionListIndexedBase):
 
         class BuildingSegmentRule(RuleDefinitionListIndexedBase):
             def __init__(self):
-                super(PRM9012019Rule34b75.BuildingRule.BuildingSegmentRule, self).__init__(
+                super(
+                    PRM9012019Rule34b75.BuildingRule.BuildingSegmentRule, self
+                ).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),

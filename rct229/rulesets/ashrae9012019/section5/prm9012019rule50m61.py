@@ -102,7 +102,8 @@ class PRM9012019Rule50m61(RuleDefinitionListIndexedBase):
             class SubSurfaceRule(RuleDefinitionBase):
                 def __init__(self):
                     super(
-                        PRM9012019Rule50m61.BuildingRule.SurfaceRule.SubSurfaceRule, self
+                        PRM9012019Rule50m61.BuildingRule.SurfaceRule.SubSurfaceRule,
+                        self,
                     ).__init__(
                         rmds_used=produce_ruleset_model_description(
                             USER=False, BASELINE_0=True, PROPOSED=False

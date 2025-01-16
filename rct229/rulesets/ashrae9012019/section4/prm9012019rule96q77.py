@@ -17,10 +17,7 @@ CONDITIONED_ZONE_TYPE = [
     ZCC.CONDITIONED_NON_RESIDENTIAL,
     ZCC.CONDITIONED_RESIDENTIAL,
 ]
-MANUAL_CHECK_MSG = (
-    "There is a temperature schedule mismatch between the baseline and proposed rmds. Fail unless "
-    "Table G3.1 #4 baseline column exception #s 1 and/or 2 are applicable "
-)
+MANUAL_CHECK_MSG = "There is a temperature schedule mismatch between the baseline and proposed rmds. Fail unless Table G3.1 #4 baseline column exception #s 1 and/or 2 are applicable "
 
 
 class PRM9012019Rule96q77(RuleDefinitionListIndexedBase):
@@ -80,7 +77,9 @@ class PRM9012019Rule96q77(RuleDefinitionListIndexedBase):
 
         class ZoneRule(RuleDefinitionBase):
             def __init__(self):
-                super(PRM9012019Rule96q77.RuleSetModelInstanceRule.ZoneRule, self,).__init__(
+                super(
+                    PRM9012019Rule96q77.RuleSetModelInstanceRule.ZoneRule, self
+                ).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
@@ -94,17 +93,13 @@ class PRM9012019Rule96q77(RuleDefinitionListIndexedBase):
                     if is_leap_year
                     else LeapYear.REGULAR_YEAR_HOURS
                 )
-
                 zone_b = context.BASELINE_0
                 zone_p = context.PROPOSED
-
                 schedules_b = data["schedules_b"]
                 schedules_p = data["schedules_p"]
-
                 thermostat_cooling_stpt_sch_id_b = zone_b.get(
                     "thermostat_cooling_setpoint_schedule"
                 )
-
                 thermostat_cooling_stpt_sch_id_p = zone_p.get(
                     "thermostat_cooling_setpoint_schedule"
                 )
@@ -114,7 +109,6 @@ class PRM9012019Rule96q77(RuleDefinitionListIndexedBase):
                 thermostat_heating_stpt_sch_id_p = zone_p.get(
                     "thermostat_heating_setpoint_schedule"
                 )
-
                 thermostat_cooling_stpt_hourly_values_b = (
                     getattr_(
                         find_exactly_one(
@@ -132,12 +126,10 @@ class PRM9012019Rule96q77(RuleDefinitionListIndexedBase):
                     ]
                     * number_of_hours
                 )
-
                 assert_(
                     len(thermostat_cooling_stpt_hourly_values_b) == number_of_hours,
                     f"Schedule id: {thermostat_cooling_stpt_sch_id_b} has number of hours of {len(thermostat_cooling_stpt_hourly_values_b)}, expecting {number_of_hours}",
                 )
-
                 thermostat_cooling_stpt_hourly_values_p = (
                     getattr_(
                         find_exactly_one(
@@ -155,12 +147,10 @@ class PRM9012019Rule96q77(RuleDefinitionListIndexedBase):
                     ]
                     * number_of_hours
                 )
-
                 assert_(
                     len(thermostat_cooling_stpt_hourly_values_p) == number_of_hours,
                     f"Schedule id: {thermostat_cooling_stpt_sch_id_p} has number of hours of {len(thermostat_cooling_stpt_hourly_values_p)}, expecting {number_of_hours}",
                 )
-
                 thermostat_heating_stpt_hourly_values_b = (
                     getattr_(
                         find_exactly_one(
@@ -178,12 +168,10 @@ class PRM9012019Rule96q77(RuleDefinitionListIndexedBase):
                     ]
                     * number_of_hours
                 )
-
                 assert_(
                     len(thermostat_heating_stpt_hourly_values_b) == number_of_hours,
                     f"Schedule id: {thermostat_heating_stpt_sch_id_b} has number of hours of {len(thermostat_heating_stpt_hourly_values_b)}, expecting {number_of_hours}",
                 )
-
                 thermostat_heating_stpt_hourly_values_p = (
                     getattr_(
                         find_exactly_one(
@@ -201,12 +189,10 @@ class PRM9012019Rule96q77(RuleDefinitionListIndexedBase):
                     ]
                     * number_of_hours
                 )
-
                 assert_(
                     len(thermostat_heating_stpt_hourly_values_p) == number_of_hours,
                     f"Schedule id: {thermostat_heating_stpt_sch_id_p} has number of hours of {len(thermostat_heating_stpt_hourly_values_p)}, expecting {number_of_hours}",
                 )
-
                 cooling_schedule_matched = (
                     thermostat_cooling_stpt_hourly_values_b
                     == thermostat_cooling_stpt_hourly_values_p
@@ -215,7 +201,6 @@ class PRM9012019Rule96q77(RuleDefinitionListIndexedBase):
                     thermostat_heating_stpt_hourly_values_b
                     == thermostat_heating_stpt_hourly_values_p
                 )
-
                 return {
                     "cooling_schedule_matched": cooling_schedule_matched,
                     "heating_schedule_matched": heating_schedule_matched,

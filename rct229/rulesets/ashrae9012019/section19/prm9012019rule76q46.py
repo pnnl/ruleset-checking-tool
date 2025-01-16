@@ -130,7 +130,9 @@ class PRM9012019Rule76q46(RuleDefinitionListIndexedBase):
 
         class HVACRule(RuleDefinitionBase):
             def __init__(self):
-                super(PRM9012019Rule76q46.RulesetModelInstanceRule.HVACRule, self).__init__(
+                super(
+                    PRM9012019Rule76q46.RulesetModelInstanceRule.HVACRule, self
+                ).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),

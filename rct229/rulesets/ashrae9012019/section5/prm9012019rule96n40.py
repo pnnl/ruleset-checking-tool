@@ -215,7 +215,9 @@ class PRM9012019Rule96n40(RuleDefinitionListIndexedBase):
 
         class AboveGradeWallRule(RuleDefinitionListIndexedBase):
             def __init__(self):
-                super(PRM9012019Rule96n40.BuildingRule.AboveGradeWallRule, self).__init__(
+                super(
+                    PRM9012019Rule96n40.BuildingRule.AboveGradeWallRule, self
+                ).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
