@@ -4904,6 +4904,7 @@
                 "NATURAL_GAS",
                 "PROPANE",
                 "FUEL_OIL",
+                "ON_SITE_RENEWABLE",
                 "NONE",
                 "OTHER"
             ],
@@ -4912,6 +4913,7 @@
                 "Natural gas",
                 "Propane",
                 "Fuel oil",
+                "On-site renewable",
                 "None",
                 "Other"
             ],
