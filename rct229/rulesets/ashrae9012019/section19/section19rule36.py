@@ -64,10 +64,10 @@ class Section19Rule36(RuleDefinitionListIndexedBase):
                 energy_recovery_b, "air_energy_recovery", "design_latent_effectiveness"
             )
             ERV_OA_airflow_b = getattr_(
-                energy_recovery_b, "air_energy_recovery", "outside_air_flow"
+                energy_recovery_b, "air_energy_recovery", "outdoor_airflow"
             )
             ERV_EA_airflow_b = getattr_(
-                energy_recovery_b, "air_energy_recovery", "exhaust_air_flow"
+                energy_recovery_b, "air_energy_recovery", "exhaust_airflow"
             )
             hvac_min_oa_flow_b = getattr_(
                 hvac_b, "HVAC", "fan_system", "minimum_outdoor_airflow"
