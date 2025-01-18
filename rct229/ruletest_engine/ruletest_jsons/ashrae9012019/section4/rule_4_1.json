@@ -31,15 +31,12 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space ID 1",
@@ -52,7 +49,9 @@
                                                         "id": "Terminal 1",
                                                         "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
                                                     }
-                                                ]
+                                                ],
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1"
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
@@ -17625,15 +17624,12 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space ID 1",
@@ -17646,7 +17642,9 @@
                                                         "id": "Terminal 1",
                                                         "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
                                                     }
-                                                ]
+                                                ],
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1"
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
@@ -35239,15 +35237,12 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space ID 1",
@@ -35260,7 +35255,9 @@
                                                         "id": "Terminal 1",
                                                         "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
                                                     }
-                                                ]
+                                                ],
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1"
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
@@ -52833,15 +52830,12 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space ID 1",
@@ -52854,7 +52848,9 @@
                                                         "id": "Terminal 1",
                                                         "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
                                                     }
-                                                ]
+                                                ],
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1"
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
