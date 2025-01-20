@@ -6,7 +6,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_building_segment_lighti
 )
 from rct229.schema.config import ureg
 from rct229.schema.schema_utils import quantify_rmd
-from rct229.schema.validate import schema_validate_rmd
+from rct229.schema.validate import schema_validate_rpd
 
 # Convert LPD value to schema units
 FIRE_STATION_ALLOWED_LPD = (0.56 * ureg("W/(foot**2)")).to("W/(m**2)").magnitude
@@ -110,7 +110,7 @@ test_building_segments = TEST_BUILDING["building_segments"]
 
 
 def test__TEST_RPD__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RMD)
+    schema_validation_result = schema_validate_rpd(TEST_RMD)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"

@@ -2,6 +2,7 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import PROPOSED
+from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.match_lists import match_lists_by_id
 
@@ -50,11 +51,17 @@ class Section5Rule34(RuleDefinitionListIndexedBase):
 
             # This assumes that the surfaces all match
             matched_baseline_zones = match_lists_by_id(proposed_zones, baseline_zones)
+
+            assert_(
+                None not in matched_baseline_zones,
+                "The 'zones' objects between baseline and proposed don't match.",
+            )
+
             proposed_baseline_zone_pairs = zip(proposed_zones, matched_baseline_zones)
+
             for p_zone, b_zone in proposed_baseline_zone_pairs:
                 # need a method like match object
                 p_zone_infiltration = p_zone["infiltration"]
-                # b_zone could be NONE - add a check.
                 b_zone_infiltration = b_zone["infiltration"]
 
                 if (
@@ -68,4 +75,4 @@ class Section5Rule34(RuleDefinitionListIndexedBase):
             return {"failing_infiltration_zone_ids": failing_infiltration_zone_ids}
 
         def rule_check(self, context, calc_vals=None, data=None):
-            return len(calc_vals["failing_infiltration_zone_ids"]) == 0
+            return not calc_vals["failing_infiltration_zone_ids"]

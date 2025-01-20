@@ -2,7 +2,7 @@ import pytest
 from rct229.rulesets.ashrae9012019.ruleset_functions.are_all_hvac_sys_fan_objects_autosized import (
     are_all_hvac_sys_fan_objs_autosized,
 )
-from rct229.schema.validate import schema_validate_rmd
+from rct229.schema.validate import schema_validate_rpd
 from rct229.utils.assertions import MissingKeyException
 
 TEST_RMD = {
@@ -152,7 +152,7 @@ TEST_RPD = {
 
 
 def test__TEST_RPD__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RPD)
+    schema_validation_result = schema_validate_rpd(TEST_RPD)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"

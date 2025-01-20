@@ -29,7 +29,7 @@ test_short_help_text = """
     Software test workflow, add sections to do test. \n
     --ruleset or -rs: default is ashrae9012019, available: ashrae9012019\n
     argument (optional): section string, \n
-    currently available: section1, section4, section5, section6, section10, section12, section16, section18, section19, section21, section22 and section23"""
+    currently available: section1, section4, section5, section6, section10, section11, section12, section16, section18, section19, section21, section22 and section23"""
 
 
 @cli.command(
@@ -69,7 +69,7 @@ help_text = short_help_text
 @cli.command("evaluate", short_help=short_help_text, help=help_text, hidden=True)
 @click.option("--rpds", "-f", multiple=True, default=[])
 @click.option("--ruleset", "-rs", multiple=False, default="ashrae9012019")
-@click.option("--reports", "-r", multiple=True, default=["RAW_OUTPUT"])
+@click.option("--reports", "-r", multiple=True, default=["EngineRawSummary"])
 @click.option(
     "--reports_directory", "-rd", multiple=False, default="./examples/output/"
 )

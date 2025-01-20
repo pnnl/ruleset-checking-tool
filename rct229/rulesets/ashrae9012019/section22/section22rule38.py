@@ -18,8 +18,7 @@ class Section22Rule38(RuleDefinitionListIndexedBase):
             each_rule=Section22Rule38.RulesetModelInstanceRule(),
             index_rmd=BASELINE_0,
             id="22-38",
-            description="Baseline systems served by purchased chilled water loop shall have a "
-            "minimum flow setpoint of 25%",
+            description="Baseline chilled water loops that use purchased chilled water shall have a minimum flow setpoint of 25%.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.10 Chilled-Water Pumps (Systems 7, 8, 11, 12, and 13)",
             is_primary_rule=False,

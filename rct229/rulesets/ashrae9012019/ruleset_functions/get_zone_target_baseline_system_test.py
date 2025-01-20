@@ -10,7 +10,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_target_baseline_sy
 )
 from rct229.schema.config import ureg
 from rct229.schema.schema_utils import quantify_rmd
-from rct229.schema.validate import schema_validate_rmd
+from rct229.schema.validate import schema_validate_rpd
 
 POWER_DELTA = 1
 POWER_THRESHOLD_100 = (CAPACITY_THRESHOLD_QUANTITY * 100 * ureg("m2")).to("W").magnitude
@@ -777,49 +777,49 @@ TEST_RMD_UNIT_P = quantify_rmd(TEST_RMD_P)["ruleset_model_descriptions"][0]
 
 
 def test__TEST_RMD_G311B_is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RMD_B_FULL_G311B)
+    schema_validation_result = schema_validate_rpd(TEST_RMD_B_FULL_G311B)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
 
 
 def test__TEST_RMD_G311C_is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RMD_B_FULL_G311C)
+    schema_validation_result = schema_validate_rpd(TEST_RMD_B_FULL_G311C)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
 
 
 def test__TEST_RMD_G311D_is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RMD_B_FULL_G311D)
+    schema_validation_result = schema_validate_rpd(TEST_RMD_B_FULL_G311D)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
 
 
 def test__TEST_RMD_G311E_is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RMD_B_FULL_G311E)
+    schema_validation_result = schema_validate_rpd(TEST_RMD_B_FULL_G311E)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
 
 
 def test__TEST_RMD_G311F_is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RMD_B_FULL_G311F)
+    schema_validation_result = schema_validate_rpd(TEST_RMD_B_FULL_G311F)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
 
 
 def test__TEST_RMD_G311G_is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RMD_B_FULL_G311G)
+    schema_validation_result = schema_validate_rpd(TEST_RMD_B_FULL_G311G)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
 
 
 def test__TEST_RMD_P_is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RMD_P)
+    schema_validation_result = schema_validate_rpd(TEST_RMD_P)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"

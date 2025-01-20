@@ -68,9 +68,18 @@ class Section1Rule5(RuleDefinitionBase):
         bbp_set = list(set(filter(lambda x: x is not None, bbp_set)))
         pbp_nre_set = list(set(filter(lambda x: x is not None, pbp_nre_set)))
 
-        assert_(len(pbp_set) >= 1, "Ruleset expects exactly one PBP value to be used in the project.")
-        assert_(len(bbp_set) >= 1, "Ruleset expects exactly one BBP value to be used in the project.")
-        assert_(len(pbp_nre_set) >= 1,  "Ruleset expects exactly one PBP_nre value to be used in the project.")
+        assert_(
+            len(pbp_set) >= 1,
+            "Ruleset expects exactly one PBP value to be used in the project.",
+        )
+        assert_(
+            len(bbp_set) >= 1,
+            "Ruleset expects exactly one BBP value to be used in the project.",
+        )
+        assert_(
+            len(pbp_nre_set) >= 1,
+            "Ruleset expects exactly one PBP_nre value to be used in the project.",
+        )
         assert_(
             bbp_set[0] > 0,
             "The `baseline_building_performance_energy_cost` value must be greater than 0.",
@@ -130,9 +139,13 @@ class Section1Rule5(RuleDefinitionBase):
         pci_set = list(set(filter(lambda x: x is not None, pci_set)))
         pci_target_set = list(set(filter(lambda x: x is not None, pci_target_set)))
 
-        assert_(len(pci_set) >= 1, "Ruleset expects exactly one PCI value to be used in the project.")
         assert_(
-            len(pci_target_set) >= 1, "Ruleset expects exactly one PCI Target value to be used in the project."
+            len(pci_set) >= 1,
+            "Ruleset expects exactly one PCI value to be used in the project.",
+        )
+        assert_(
+            len(pci_target_set) >= 1,
+            "Ruleset expects exactly one PCI Target value to be used in the project.",
         )
 
         return {

@@ -18,8 +18,7 @@ class Section22Rule39(RuleDefinitionListIndexedBase):
             each_rule=Section22Rule39.RulesetModelInstanceRule(),
             index_rmd=BASELINE_0,
             id="22-39",
-            description="Baseline systems served by purchased chilled water loop shall be modeled "
-            "with a distribution pump whose pump power is 16W/gpm",
+            description="Baseline chilled water loops that use purchased chilled water shall have a chilled water pump power of 16 W/gpm at design conditions.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.10 Chilled-Water Pumps (Systems 7, 8, 11, 12, and 13)",
             is_primary_rule=False,

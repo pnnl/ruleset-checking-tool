@@ -18,8 +18,7 @@ class Section22Rule35(RuleDefinitionListIndexedBase):
             each_rule=Section22Rule35.RulesetModelInstanceRule(),
             index_rmd=BASELINE_0,
             id="22-35",
-            description="Baseline systems served by purchased chilled water shall not be modeled with"
-            " chilled water reset",
+            description="Baseline chilled water loops that use purchased chilled water shall not be modeled with chilled water reset.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.10 Chilled-Water Pumps (Systems 7, 8, 11, 12, and 13)",
             is_primary_rule=False,

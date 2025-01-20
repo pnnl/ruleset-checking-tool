@@ -5,7 +5,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_equipment_associate
     get_swh_equipment_associated_with_each_swh_distribution_system,
 )
 from rct229.schema.schema_utils import quantify_rmd
-from rct229.schema.validate import schema_validate_rmd
+from rct229.schema.validate import schema_validate_rpd
 
 TEST_RMD = {
     "id": "test_rmd",
@@ -145,7 +145,7 @@ class SWHDistributionAssociations:
 
 
 def test__TEST_RPD__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RPD_FULL)
+    schema_validation_result = schema_validate_rpd(TEST_RPD_FULL)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"

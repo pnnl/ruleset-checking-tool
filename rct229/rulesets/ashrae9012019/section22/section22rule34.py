@@ -37,7 +37,7 @@ class Section22Rule34(RuleDefinitionListIndexedBase):
             each_rule=Section22Rule34.CoolingFluidLoopRule(),
             index_rmd=BASELINE_0,
             id="22-34",
-            description="For baseline cooling chilled water plant that is served by chiller(s), the capacity shall be based on coincident loads.",
+            description="Baseline chilled water loops that do not use purchased chilled water shall have the plant equipment capacity sized based on coincident loads.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.2.2 Building System-Specific Modeling Requirements for the Baseline model",
             is_primary_rule=True,

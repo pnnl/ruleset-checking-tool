@@ -18,8 +18,7 @@ class Section22Rule37(RuleDefinitionListIndexedBase):
             each_rule=Section22Rule37.RulesetModelInstanceRule(),
             index_rmd=BASELINE_0,
             id="22-37",
-            description="Baseline systems served by purchased chilled water loop shall be modeled "
-            "with a distribution pump with a variable speed drive",
+            description="Baseline chilled water loops that use purchased chilled water shall be modeled with a variable-speed distribution pump.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.10 Chilled-Water Pumps (Systems 7, 8, 11, 12, and 13)",
             is_primary_rule=False,

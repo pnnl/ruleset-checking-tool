@@ -115,11 +115,11 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
             zone_b_hvac_zone_list_dict = {
                 hvac_id: find_all(
                     f'$.buildings[*].building_segments[*].zones[*][?(@.terminals[*].served_by_heating_ventilating_air_conditioning_system = "{hvac_id}")].id',
-                    rmd_b
+                    rmd_b,
                 )
                 for hvac_id in find_all(
-                    '$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].id',
-                    rmd_b
+                    "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].id",
+                    rmd_b,
                 )
             }
 
@@ -210,8 +210,10 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
                         hvac_sys_type_b = sys_type
 
                 # Check if the system type is an applicable system type and serves multiple zones
-                baseline_served_by_multizone = (hvac_sys_type_b in APPLICABLE_SYS_TYPES and
-                                                len(next(iter(zone_b_hvac_zone_list_dict.values()))) > 1)
+                baseline_served_by_multizone = (
+                    hvac_sys_type_b in APPLICABLE_SYS_TYPES
+                    and len(next(iter(zone_b_hvac_zone_list_dict.values()))) > 1
+                )
                 list_hvac_systems_p = zone_p_hvac_list_dict[zone_p["id"]]
 
                 for hvac_id_p in list_hvac_systems_p:
