@@ -73,9 +73,16 @@ TEST_RMD = {
         {
             "id": "swh equipment 8",
             "distribution_system": "distribution system 8",
-            "tank": {"id": "Tank 8", "type": "OTHER"},
-            "heater_type": "OTHER",
+            "tank": {"id": "Tank 8", "type": "CONSUMER_STORAGE"},
+            "heater_type": "CONVENTIONAL",
             "heater_fuel_type": "PROPANE",
+        },
+        {
+            "id": "swh equipment 9",
+            "distribution_system": "distribution system 9",
+            "tank": {"id": "Tank 9", "type": "OTHER"},
+            "heater_type": "OTHER",
+            "heater_fuel_type": "OTHER",
         },
     ],
     "type": "BASELINE_0",
@@ -167,12 +174,22 @@ def test__get_swh_equipment_type__other():
     )
 
 
-def test__get_swh_equipment_type__wrong_fuel_type():
-    with pytest.raises(
-        RCTFailureException,
-        match="Fuel type must be one of `ELECTRICITY`, `NATURAL_GAS`, `FUEL_OIL`.",
-    ):
+def test__get_swh_equipment_type__propane_storage():
+    assert (
         get_swh_equipment_type(
             TEST_RMD,
             "swh equipment 8",
+        )
+        == GetSWHEquipmentType.PROPANE_STORAGE
+    )
+
+
+def test__get_swh_equipment_type__wrong_fuel_type():
+    with pytest.raises(
+        RCTFailureException,
+        match="Fuel type must be one of `ELECTRICITY`, `NATURAL_GAS`, `PROPANE`, `FUEL_OIL`.",
+    ):
+        get_swh_equipment_type(
+            TEST_RMD,
+            "swh equipment 9",
         )
