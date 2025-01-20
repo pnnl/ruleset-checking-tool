@@ -58,7 +58,7 @@ def is_space_a_computer_room(rmd: dict, space_id: str) -> bool:
             ZERO.POWER,
         )
 
-        space_floor_area = getattr_(space, "Space", "floor_area")
+        space_floor_area = getattr_(space, "spaces", "floor_area")
         # exception handling if the space has zero floor area
         assert_(space_floor_area > ZERO.AREA, f"Space {space_id} has zero floor area")
 

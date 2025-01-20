@@ -36,8 +36,8 @@ def get_zone_computer_rooms(
         The values associated with each key are in a dict form. The dict associated with each key contains the computer room
         floor area as the first item and the total zone floor area as the second item.
     """
-    zone_with_computer_room_dict = {}
 
+    zone_with_computer_room_dict = {}
     for zone in find_all("$.buildings[*].building_segments[*].zones[*]", rmd):
         zone_has_computer_room_check = any(
             [
