@@ -602,7 +602,11 @@ def validate_test_json_schema(test_json_path):
             # If result contains a dictionary with failure information, append failure to failure list
             if isinstance(result, dict):
                 if result["passed"] is not True:
-                    error_message = result["error"]
+                    if "error" in result:
+                        error_message = result["error"]
+                    else:
+                        error_message = result["errors"]
+
                     failure_message = f"Schema validation in {test_id} for the {rmd_type} RMD: {error_message}"
                     failure_list.append(failure_message)
 
