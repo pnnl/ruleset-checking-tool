@@ -48,10 +48,6 @@
                                                     {
                                                         "id": "Space 1",
                                                         "lighting_space_type": "LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM"
-                                                    },
-                                                    {
-                                                        "id": "Space 2",
-                                                        "lighting_space_type": "LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM"
                                                     }
                                                 ]
                                             },
@@ -67,6 +63,12 @@
                                                         "heating_from_loop": "Boiler Loop 1",
                                                         "minimum_outdoor_airflow": 14.158423295999995,
                                                         "minimum_outdoor_airflow_multiplier_schedule": "Min OA CFM Schedule"
+                                                    }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 2",
+                                                        "lighting_space_type": "LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM"
                                                     }
                                                 ]
                                             }
