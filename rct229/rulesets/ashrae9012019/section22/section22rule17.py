@@ -76,7 +76,7 @@ class Section22Rule17(RuleDefinitionListIndexedBase):
             heat_rejection_efficiency_b = None
             if heat_rejection_b.get("fan_motor_nameplate_power"):
                 rated_water_flowrate_b = heat_rejection_b.get(
-                    "rated_water_flowrate"
+                    "rated_water_flowrate", ZERO.FLOW
                 ) * ureg("gpm")
 
                 fan_motor_nameplate_power_b = heat_rejection_b[
@@ -92,12 +92,16 @@ class Section22Rule17(RuleDefinitionListIndexedBase):
 
             elif heat_rejection_b.get("fan_shaft_power"):
                 motor_nameplate_hp_b = (
-                    heat_rejection_b.get["fan_shaft_power"].ureg("hp")
+                    heat_rejection_b["fan_shaft_power"]
+                    * ureg("hp")
                     / FAN_SHAFT_POWER_FACTOR
                 )
 
                 heat_rejection_efficiency_b = (
-                    heat_rejection_b["rated_water_flowrate"].ureg("gpm")
+                    0.0
+                    if motor_nameplate_hp_b == ZERO.POWER
+                    else heat_rejection_b.get("rated_water_flowrate", ZERO.FLOW)
+                    * ureg("gpm")
                     / motor_nameplate_hp_b
                 )
 
