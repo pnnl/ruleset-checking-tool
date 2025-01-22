@@ -491,8 +491,8 @@
         "Rule": 10,
         "Test": "h",
         "test_description": "A one story, one zone building has one gas storage water heater with input rating between 75k-105kBtu/h, 130 gallons storage capacity, and low draw pattern. The water heater efficiency is supposed to follow Table 7.8 footnote d, but is incorrectly modeled as 0.4162 UEF.",
-        "expected_rule_outcome": "fail",
-        "expected_raised_message_includes": "The modeled efficiency or standby loss for the water heater does not match the expected values.",
+        "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "Based on the provided details, THERMAL_EFFICIENCY is an expected efficiency metric for this water heater, however it was not provided. Note that the specific requirements of 10 CFR 430 can be found in ASHRAE 90.1 Appendix F Table F-2.",
         "standard": {
             "rule_id": "11-10",
             "ruleset_reference": "Table G3.1 #11, baseline column, a & b",
@@ -549,7 +549,7 @@
                                 "tank": {
                                     "id": "SHW Tank",
                                     "type": "COMMERCIAL_STORAGE",
-                                    "storage_capacity": 378.50000000000006
+                                    "storage_capacity": 492.05000000000007
                                 }
                             }
                         ],

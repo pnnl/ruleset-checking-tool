@@ -215,15 +215,14 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                             draw_pattern_b is not None,
                             "Draw pattern must be defined for table 7-8 lookup",
                         )
-                        if (
-                            75000 * ureg("Btu/h")
-                            < swh_input_power_b
-                            <= 105000 * ureg("Btu/h")
-                            and swh_setpoint_temperature_b
-                            and (
-                                swh_setpoint_temperature_b > 180 * ureg("degF")
-                                or swh_tank_storage_volume_b > 120 * ureg("gallon")
+                        if 75000 * ureg("Btu/h") < swh_input_power_b <= 105000 * ureg(
+                            "Btu/h"
+                        ) and (
+                            (
+                                swh_setpoint_temperature_b
+                                and swh_setpoint_temperature_b > 180 * ureg("degF")
                             )
+                            or swh_tank_storage_volume_b > 120 * ureg("gallon")
                         ):
                             # Override the input power to follow Table 7-8 footnote d
                             efficiency_data = table_7_8_lookup(
