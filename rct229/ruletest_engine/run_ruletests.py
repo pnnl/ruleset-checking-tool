@@ -248,6 +248,7 @@ def run_general_hvac_tests():
     )
     return run_test_helper(json_tests, RuleSet.ASHRAE9012019_RULESET)
 
+
 def run_receptacle_tests():
     """Runs all tests found in the schedule tests JSON.
     Returns
