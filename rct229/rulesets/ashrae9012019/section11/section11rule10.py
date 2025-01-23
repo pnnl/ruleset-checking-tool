@@ -125,6 +125,7 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                     swh_input_power_b / swh_tank_storage_volume_b
                 )
                 swh_fuel_type_b = swh_equip_b.get("heater_fuel_type")
+                swh_setpoint_temperature_b = swh_equip_b.get("setpoint_temperature")
 
                 # Determine draw_pattern_b
                 draw_pattern_b = draw_pattern_enum_to_lookup_str_map.get(
@@ -214,11 +215,27 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                             draw_pattern_b is not None,
                             "Draw pattern must be defined for table 7-8 lookup",
                         )
-                        efficiency_data = table_7_8_lookup(
-                            "Gas storage water heater",
-                            swh_input_power_b,
-                            draw_pattern_b,
-                        )
+                        if 75000 * ureg("Btu/h") < swh_input_power_b <= 105000 * ureg(
+                            "Btu/h"
+                        ) and (
+                            (
+                                swh_setpoint_temperature_b
+                                and swh_setpoint_temperature_b > 180 * ureg("degF")
+                            )
+                            or swh_tank_storage_volume_b > 120 * ureg("gallon")
+                        ):
+                            # Override the input power to follow Table 7-8 footnote d
+                            efficiency_data = table_7_8_lookup(
+                                "Gas storage water heater",
+                                105001 * ureg("Btu/h"),
+                                draw_pattern_b,
+                            )
+                        else:
+                            efficiency_data = table_7_8_lookup(
+                                "Gas storage water heater",
+                                swh_input_power_b,
+                                draw_pattern_b,
+                            )
                         # Note: If the input power is greater than 105,000 Btu/h, there will be a thermal efficiency and standby loss target
 
                 if efficiency_data:
@@ -266,6 +283,7 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                     "swh_tank_storage_volume_b": CalcQ(
                         "tank_volume", swh_tank_storage_volume_b
                     ),
+                    "swh_setpoint_temperature_b": swh_setpoint_temperature_b,
                     "modeled_efficiency_b": modeled_efficiency_b,
                     "modeled_standby_loss_b": modeled_standby_loss_b,
                     "swh_input_power_per_volume_b": CalcQ(
