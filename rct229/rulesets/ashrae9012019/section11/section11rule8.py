@@ -220,14 +220,14 @@ class Section11Rule8(RuleDefinitionListIndexedBase):
 
             def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
                 swh_bat_b = calc_vals["swh_bat_b"]
-                multiple_segments_with_bat_other_b = calc_vals[
-                    "multiple_segments_with_bat_other_b"
-                ]
+                multiple_segments_with_bat_other_b = (
+                    calc_vals["num_other_swh_bat_segment_b"] > 1
+                )
 
                 UNDETERMINED_MSG = ""
                 if swh_bat_b == "UNDETERMINED":
                     UNDETERMINED_MSG = CASE3_MSG
-                elif not multiple_segments_with_bat_other_b:
+                elif multiple_segments_with_bat_other_b:
                     UNDETERMINED_MSG = CASE4_MSG
 
                 return UNDETERMINED_MSG
