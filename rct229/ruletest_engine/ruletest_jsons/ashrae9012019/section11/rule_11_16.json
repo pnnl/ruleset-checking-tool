@@ -247,7 +247,7 @@
         "Test": "c",
         "test_description": "A one story single zone building has service water heating systems. The baseline and proposed building's SHW system utilize a gas water heater and the heating system has a gas boiler. The baseline system utilizes propane while the proposed uses natural gas.",
         "expected_rule_outcome": "fail",
-        "expected_raised_message_includes": "The fuel source for the baseline is propane, however the fuel source for the proposed is Natural Gas.  When natural gas is available on-site, natural gas is the required fuel source for the baseline model.",
+        "expected_raised_message_includes": "The fuel source for the baseline is propane, however the fuel source for the proposed is Natural Gas. When natural gas is available on-site, natural gas is the required fuel source for the baseline model.",
         "standard": {
             "rule_id": "11-16",
             "ruleset_reference": "Table G3.1 #11, baseline column, (h)",
@@ -375,7 +375,7 @@
                             {
                                 "id": "SHW Equipment 1",
                                 "distribution_system": "SHW Distribution 1",
-                                "heater_fuel_type": "FUEL_OIL",
+                                "heater_fuel_type": "PROPANE",
                                 "heater_type": "CONVENTIONAL",
                                 "tank": {
                                     "id": "SHW Tank",
@@ -395,7 +395,7 @@
         "Test": "d",
         "test_description": "A one story single zone building has service water heating systems. The baseline and proposed building's SHW system utilize a gas water heater and the heating system has a gas boiler. Both baseline and proposed buildings utilize propane as their fuel type.",
         "expected_rule_outcome": "undetermined",
-        "expected_raised_message_includes": "The baseline service water heating has propane as a fuel source.  Natural gas is the required fuel source for the baseline model except in cases where natural gas is not available on-site.  Verify that natural gas is not available for the proposed building site as determined by the rating authority.",
+        "expected_raised_message_includes": "The baseline service water heating has propane as a fuel source. Natural gas is the required fuel source for the baseline model except in cases where natural gas is not available on-site. Verify that natural gas is not available for the proposed building site as determined by the rating authority.",
         "standard": {
             "rule_id": "11-16",
             "ruleset_reference": "Table G3.1 #11, baseline column, (h)",
