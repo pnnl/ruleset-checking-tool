@@ -228,7 +228,7 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                             efficiency_data = table_7_8_lookup(
                                 "Gas storage water heater",
                                 105001 * ureg("Btu/h"),
-                                draw_pattern_b,
+                                ""
                             )
                         else:
                             efficiency_data = table_7_8_lookup(
@@ -305,10 +305,19 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                 expected_efficiency_metric_b = calc_vals["expected_efficiency_metric_b"]
                 standby_loss_target_metric_b = calc_vals["standby_loss_target_metric_b"]
 
+                invalid_fuel_type = (
+                    swh_fuel_type_b
+                    not in [
+                        EnergySourceOptions.ELECTRICITY,
+                        EnergySourceOptions.NATURAL_GAS,
+                        EnergySourceOptions.PROPANE,
+                    ]
+                )
                 return (
-                    swh_tank_type_b in INSTANTANEOUS_TYPES
+                    # The baseline water heater is of an Instantaneous type
+                    swh_tank_type_b in INSTANTANEOUS_TYPES and not invalid_fuel_type
                     # Input power per volume is greater than the capacity per volume limit
-                    or swh_input_power_per_volume_b > CAPACITY_PER_VOLUME_LIMIT
+                    or swh_input_power_per_volume_b > CAPACITY_PER_VOLUME_LIMIT and not invalid_fuel_type
                     # Electric resistance storage water heater with a storage volume in the range that produces an unreliable efficiency lookup
                     or (
                         swh_fuel_type_b == EnergySourceOptions.ELECTRICITY
@@ -321,9 +330,10 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                     or (
                         expected_efficiency_metric_b is None
                         and standby_loss_target_metric_b is None
+                        and not invalid_fuel_type
                     )
                     # Efficiency metric for the SWHEquip does not match the expected metric when only one of efficiency/SL is required
-                    or (modeled_efficiency_b is None and modeled_standby_loss_b is None)
+                    or (modeled_efficiency_b is None and modeled_standby_loss_b is None and not invalid_fuel_type)
                     # Either efficiency metric for the SWHEquip does not match the expected values when both of efficiency/SL are required
                     or (
                         expected_efficiency_metric_b
@@ -332,6 +342,7 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                             modeled_efficiency_b is None
                             or modeled_standby_loss_b is None
                         )
+                        and not invalid_fuel_type
                     )
                 )
 
@@ -426,6 +437,7 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                 return "\n".join(manual_check_msg)
 
             def rule_check(self, context, calc_vals=None, data=None):
+                swh_fuel_type_b = calc_vals["swh_fuel_type_b"]
                 swh_tank_type_b = calc_vals["swh_tank_type_b"]
                 modeled_efficiency_b = calc_vals["modeled_efficiency_b"]
                 modeled_standby_loss_b = calc_vals["modeled_standby_loss_b"]
@@ -433,6 +445,17 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                 expected_efficiency_metric_b = calc_vals["expected_efficiency_metric_b"]
                 standby_loss_target_b = calc_vals["standby_loss_target_b"]
                 standby_loss_target_metric_b = calc_vals["standby_loss_target_metric_b"]
+
+                invalid_fuel_type = (
+                    swh_fuel_type_b
+                    not in [
+                        EnergySourceOptions.ELECTRICITY,
+                        EnergySourceOptions.NATURAL_GAS,
+                        EnergySourceOptions.PROPANE,
+                    ]
+                )
+                if invalid_fuel_type:
+                    return False
 
                 precision_entry = (
                     "swh_efficiency_b"
@@ -498,7 +521,7 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                         EnergySourceOptions.PROPANE,
                     ]
                 ):
-                    return "The water heater type was not recognized, and does not match any of the expected baseline water heater types."
+                    return f"Fuel type: {swh_fuel_type_b} is not a valid fuel type for a service water heating baseline system. According to ASHRAE 90.1 Table G3.1.1-2 service water heating equipment shall be either electric resistance or natural gas. According to ASHRAE 90.1 Table G3.1 #11 h, in cases where natural gas is specified as the baseline system, but there is no natural gas available on site, a propane system may be modeled."
                 else:
                     return "The modeled efficiency or standby loss for the water heater does not match the expected values."
 
@@ -521,6 +544,9 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                 )
                 return (
                     swh_tank_type_b in STORAGE_TYPES
-                    and std_equal(modeled_efficiency_b, expected_efficiency_b)
+                    and (
+                            expected_efficiency_b is None
+                            or std_equal(modeled_efficiency_b, expected_efficiency_b)
+                    )
                     and standby_loss_complies
                 )

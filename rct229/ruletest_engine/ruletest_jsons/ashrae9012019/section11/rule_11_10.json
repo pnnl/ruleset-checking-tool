@@ -492,7 +492,7 @@
         "Test": "h",
         "test_description": "A one story, one zone building has one gas storage water heater with input rating between 75k-105kBtu/h, 130 gallons storage capacity, and low draw pattern. The water heater efficiency is supposed to follow Table 7.8 footnote d, but is incorrectly modeled as 0.4162 UEF.",
         "expected_rule_outcome": "undetermined",
-        "expected_raised_message_includes": "Based on the provided details, THERMAL_EFFICIENCY is an expected efficiency metric for this water heater, however it was not provided. Note that the specific requirements of 10 CFR 430 can be found in ASHRAE 90.1 Appendix F Table F-2.",
+        "expected_raised_message_includes": "Based on the provided details, THERMAL_EFFICIENCY is an expected efficiency metric for this water heater, however it was not provided. Note that the specific requirements of 10 CFR 430 can be found in ASHRAE 90.1 Appendix F Table F-2.\nBased on the provided details, STANDBY_LOSS_ENERGY is an expected efficiency metric for this water heater, however it was not provided. Note that the specific requirements of 10 CFR 430 can be found in ASHRAE 90.1 Appendix F Table F-2.",
         "standard": {
             "rule_id": "11-10",
             "ruleset_reference": "Table G3.1 #11, baseline column, a & b",
@@ -638,8 +638,8 @@
         "Rule": 10,
         "Test": "j",
         "test_description": "A one story, one zone building has one oil-fired storage water heater. The water heater fuel type does not align with the fuel types to determine expected efficiency.",
-        "expected_rule_outcome": "undetermined",
-        "expected_raised_message_includes": "The water heater type was not recognized, and does not match any of the expected baseline water heater types.",
+        "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "Fuel type: FUEL_OIL is not a valid fuel type for a service water heating baseline system. According to ASHRAE 90.1 Table G3.1.1-2 service water heating equipment shall be either electric resistance or natural gas. According to ASHRAE 90.1 Table G3.1 #11 h, in cases where natural gas is specified as the baseline system, but there is no natural gas available on site, a propane system may be modeled.",
         "standard": {
             "rule_id": "11-10",
             "ruleset_reference": "Table G3.1 #11, baseline column, a & b",
@@ -756,7 +756,7 @@
                             {
                                 "id": "SHW Equipment 1",
                                 "distribution_system": "SHW Distribution 1",
-                                "heater_fuel_type": "FUEL_OIL",
+                                "heater_fuel_type": "NATURAL_GAS",
                                 "input_power": 35168.53333333333,
                                 "efficiency_metric_types": [
                                     "THERMAL_EFFICIENCY"
@@ -831,6 +831,12 @@
                                 "heater_fuel_type": "ELECTRICITY",
                                 "input_power": 9964.417777777779,
                                 "draw_pattern": "MEDIUM",
+                                "efficiency_metric_types": [
+                                    "THERMAL_EFFICIENCY"
+                                ],
+                                "efficiency_metric_values": [
+                                    0.8
+                                ],
                                 "tank": {
                                     "id": "SHW Tank",
                                     "type": "COMMERCIAL_STORAGE",
@@ -897,6 +903,13 @@
                                 "distribution_system": "SHW Distribution 1",
                                 "heater_fuel_type": "ELECTRICITY",
                                 "input_power": 9964.417777777779,
+                                "draw_pattern": "MEDIUM",
+                                "efficiency_metric_types": [
+                                    "THERMAL_EFFICIENCY"
+                                ],
+                                "efficiency_metric_values": [
+                                    0.8
+                                ],
                                 "tank": {
                                     "id": "SHW Tank",
                                     "type": "COMMERCIAL_STORAGE",
@@ -963,6 +976,13 @@
                                 "distribution_system": "SHW Distribution 1",
                                 "heater_fuel_type": "ELECTRICITY",
                                 "input_power": 73267.77777777778,
+                                "draw_pattern": "MEDIUM",
+                                "efficiency_metric_types": [
+                                    "THERMAL_EFFICIENCY"
+                                ],
+                                "efficiency_metric_values": [
+                                    0.8
+                                ],
                                 "tank": {
                                     "id": "SHW Tank",
                                     "type": "COMMERCIAL_STORAGE",
@@ -1028,6 +1048,13 @@
                                 "id": "SHW Equipment 1",
                                 "distribution_system": "SHW Distribution 1",
                                 "heater_fuel_type": "ELECTRICITY",
+                                "input_power": 29307.111111111113,
+                                "efficiency_metric_types": [
+                                    "THERMAL_EFFICIENCY"
+                                ],
+                                "efficiency_metric_values": [
+                                    0.8
+                                ],
                                 "tank": {
                                     "id": "SHW Tank",
                                     "type": "COMMERCIAL_INSTANTANEOUS",
