@@ -226,9 +226,7 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                         ):
                             # Override the input power to follow Table 7-8 footnote d
                             efficiency_data = table_7_8_lookup(
-                                "Gas storage water heater",
-                                105001 * ureg("Btu/h"),
-                                ""
+                                "Gas storage water heater", 105001 * ureg("Btu/h"), ""
                             )
                         else:
                             efficiency_data = table_7_8_lookup(
@@ -305,19 +303,18 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                 expected_efficiency_metric_b = calc_vals["expected_efficiency_metric_b"]
                 standby_loss_target_metric_b = calc_vals["standby_loss_target_metric_b"]
 
-                invalid_fuel_type = (
-                    swh_fuel_type_b
-                    not in [
-                        EnergySourceOptions.ELECTRICITY,
-                        EnergySourceOptions.NATURAL_GAS,
-                        EnergySourceOptions.PROPANE,
-                    ]
-                )
+                invalid_fuel_type = swh_fuel_type_b not in [
+                    EnergySourceOptions.ELECTRICITY,
+                    EnergySourceOptions.NATURAL_GAS,
+                    EnergySourceOptions.PROPANE,
+                ]
                 return (
                     # The baseline water heater is of an Instantaneous type
-                    swh_tank_type_b in INSTANTANEOUS_TYPES and not invalid_fuel_type
+                    swh_tank_type_b in INSTANTANEOUS_TYPES
+                    and not invalid_fuel_type
                     # Input power per volume is greater than the capacity per volume limit
-                    or swh_input_power_per_volume_b > CAPACITY_PER_VOLUME_LIMIT and not invalid_fuel_type
+                    or swh_input_power_per_volume_b > CAPACITY_PER_VOLUME_LIMIT
+                    and not invalid_fuel_type
                     # Electric resistance storage water heater with a storage volume in the range that produces an unreliable efficiency lookup
                     or (
                         swh_fuel_type_b == EnergySourceOptions.ELECTRICITY
@@ -333,7 +330,11 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                         and not invalid_fuel_type
                     )
                     # Efficiency metric for the SWHEquip does not match the expected metric when only one of efficiency/SL is required
-                    or (modeled_efficiency_b is None and modeled_standby_loss_b is None and not invalid_fuel_type)
+                    or (
+                        modeled_efficiency_b is None
+                        and modeled_standby_loss_b is None
+                        and not invalid_fuel_type
+                    )
                     # Either efficiency metric for the SWHEquip does not match the expected values when both of efficiency/SL are required
                     or (
                         expected_efficiency_metric_b
@@ -446,14 +447,11 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                 standby_loss_target_b = calc_vals["standby_loss_target_b"]
                 standby_loss_target_metric_b = calc_vals["standby_loss_target_metric_b"]
 
-                invalid_fuel_type = (
-                    swh_fuel_type_b
-                    not in [
-                        EnergySourceOptions.ELECTRICITY,
-                        EnergySourceOptions.NATURAL_GAS,
-                        EnergySourceOptions.PROPANE,
-                    ]
-                )
+                invalid_fuel_type = swh_fuel_type_b not in [
+                    EnergySourceOptions.ELECTRICITY,
+                    EnergySourceOptions.NATURAL_GAS,
+                    EnergySourceOptions.PROPANE,
+                ]
                 if invalid_fuel_type:
                     return False
 
@@ -545,8 +543,8 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
                 return (
                     swh_tank_type_b in STORAGE_TYPES
                     and (
-                            expected_efficiency_b is None
-                            or std_equal(modeled_efficiency_b, expected_efficiency_b)
+                        expected_efficiency_b is None
+                        or std_equal(modeled_efficiency_b, expected_efficiency_b)
                     )
                     and standby_loss_complies
                 )
