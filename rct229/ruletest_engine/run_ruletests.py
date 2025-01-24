@@ -249,6 +249,20 @@ def run_general_hvac_tests():
     return run_test_helper(json_tests, RuleSet.ASHRAE9012019_RULESET)
 
 
+def run_receptacle_tests():
+    """Runs all tests found in the schedule tests JSON.
+    Returns
+    -------
+    None
+    Results of system zone assignments test are spit out to console
+    """
+
+    json_tests = _helper_get_all_test_file_by_section(
+        RuleSet.ASHRAE9012019_RULESET, "section12"
+    )
+    return run_test_helper(json_tests, RuleSet.ASHRAE9012019_RULESET)
+
+
 def run_test_helper(test_list, ruleset_doc):
     # sort the list in a human order
     test_list.sort(key=natural_keys)

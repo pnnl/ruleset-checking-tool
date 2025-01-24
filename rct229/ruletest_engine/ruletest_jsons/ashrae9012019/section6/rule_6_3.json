@@ -26,7 +26,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Building Open Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -34,17 +33,13 @@
                                             {
                                                 "id": "Thermal Zone 1",
                                                 "volume": 33.98021591039999,
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 9.290303999999999,
-                                                        "occupant_multiplier_schedule": "Occupancy Schedule 1",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Guest Room Lighting",
-                                                                "lighting_multiplier_schedule": "Guest Room Lighting Schedule 1",
                                                                 "power_per_area": 3.767368645848403
                                                             }
                                                         ],
@@ -53,11 +48,9 @@
                                                     {
                                                         "id": "Space 2",
                                                         "floor_area": 92.90303999999999,
-                                                        "occupant_multiplier_schedule": "Occupancy Schedule 2",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Hotel Lobby Lighting",
-                                                                "lighting_multiplier_schedule": "Hotel Lobby Lighting Schedule",
                                                                 "power_per_area": 9.149323854203265
                                                             }
                                                         ],
@@ -84,7 +77,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Building Open Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -92,17 +84,13 @@
                                             {
                                                 "id": "Thermal Zone 1",
                                                 "volume": 33.98021591039999,
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 9.290303999999999,
-                                                        "occupant_multiplier_schedule": "Occupancy Schedule 1",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Guest Room Lighting",
-                                                                "lighting_multiplier_schedule": "Guest Room Lighting Schedule 1",
                                                                 "power_per_area": 3.767368645848403
                                                             }
                                                         ],
@@ -111,11 +99,9 @@
                                                     {
                                                         "id": "Space 2",
                                                         "floor_area": 92.90303999999999,
-                                                        "occupant_multiplier_schedule": "Occupancy Schedule 2",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Hotel Lobby Lighting",
-                                                                "lighting_multiplier_schedule": "Hotel Lobby Lighting Schedule",
                                                                 "power_per_area": 9.149323854203265
                                                             }
                                                         ],
@@ -163,7 +149,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Building Open Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -171,17 +156,13 @@
                                             {
                                                 "id": "Thermal Zone 1",
                                                 "volume": 33.98021591039999,
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 9.290303999999999,
-                                                        "occupant_multiplier_schedule": "Occupancy Schedule 1",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Guest Room Lighting",
-                                                                "lighting_multiplier_schedule": "Guest Room Lighting Schedule 1",
                                                                 "power_per_area": 2.368060291676139
                                                             }
                                                         ],
@@ -190,11 +171,9 @@
                                                     {
                                                         "id": "Space 2",
                                                         "floor_area": 92.90303999999999,
-                                                        "occupant_multiplier_schedule": "Occupancy Schedule 2",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Hotel Lobby Lighting",
-                                                                "lighting_multiplier_schedule": "Hotel Lobby Lighting Schedule",
                                                                 "power_per_area": 6.99654177086132
                                                             }
                                                         ],
@@ -221,7 +200,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Building Open Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -229,17 +207,13 @@
                                             {
                                                 "id": "Thermal Zone 1",
                                                 "volume": 33.98021591039999,
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 9.290303999999999,
-                                                        "occupant_multiplier_schedule": "Occupancy Schedule 1",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Guest Room Lighting",
-                                                                "lighting_multiplier_schedule": "Guest Room Lighting Schedule 1",
                                                                 "power_per_area": 3.767368645848403
                                                             }
                                                         ],
@@ -248,11 +222,9 @@
                                                     {
                                                         "id": "Space 2",
                                                         "floor_area": 92.90303999999999,
-                                                        "occupant_multiplier_schedule": "Occupancy Schedule 2",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Hotel Lobby Lighting",
-                                                                "lighting_multiplier_schedule": "Hotel Lobby Lighting Schedule",
                                                                 "power_per_area": 9.149323854203265
                                                             }
                                                         ],
@@ -300,7 +272,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Building Open Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -308,17 +279,13 @@
                                             {
                                                 "id": "Thermal Zone 1",
                                                 "volume": 33.98021591039999,
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 9.290303999999999,
-                                                        "occupant_multiplier_schedule": "Occupancy Schedule 1",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Guest Room Lighting",
-                                                                "lighting_multiplier_schedule": "Guest Room Lighting Schedule 1",
                                                                 "power_per_area": 4.736120583352278
                                                             }
                                                         ],
@@ -327,11 +294,9 @@
                                                     {
                                                         "id": "Space 2",
                                                         "floor_area": 92.90303999999999,
-                                                        "occupant_multiplier_schedule": "Occupancy Schedule 2",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Hotel Lobby Lighting",
-                                                                "lighting_multiplier_schedule": "Hotel Lobby Lighting Schedule",
                                                                 "power_per_area": 4.736120583352278
                                                             }
                                                         ],
@@ -358,7 +323,6 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Building Open Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -366,17 +330,13 @@
                                             {
                                                 "id": "Thermal Zone 1",
                                                 "volume": 33.98021591039999,
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 9.290303999999999,
-                                                        "occupant_multiplier_schedule": "Occupancy Schedule 1",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Guest Room Lighting",
-                                                                "lighting_multiplier_schedule": "Guest Room Lighting Schedule 1",
                                                                 "power_per_area": 6.027789833357446
                                                             }
                                                         ],
@@ -385,11 +345,9 @@
                                                     {
                                                         "id": "Space 2",
                                                         "floor_area": 92.90303999999999,
-                                                        "occupant_multiplier_schedule": "Occupancy Schedule 2",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Hotel Lobby Lighting",
-                                                                "lighting_multiplier_schedule": "Hotel Lobby Lighting Schedule",
                                                                 "power_per_area": 6.027789833357446
                                                             }
                                                         ],

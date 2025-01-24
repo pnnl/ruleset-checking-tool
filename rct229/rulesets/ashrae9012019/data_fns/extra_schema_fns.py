@@ -95,43 +95,45 @@ def compare_context_pair(
     matched = True
     if isinstance(index_context, dict) and isinstance(compare_context, dict):
         # context shall be aligned and have the same data type.
-        if (
-            compare_context.get("id")
-            and required_equal
-            and index_context["id"] != compare_context["id"]
-        ):
+        if compare_context.get("id") and index_context["id"] != compare_context["id"]:
             error_msg_list.append(
                 f'path: {element_json_path}: data object {index_context["id"]} in index context does not match the one {compare_context["id"]} in compare context'
             )
             matched = False
 
         for key in index_context:
-            key_schema = extra_schema[key]
-            extra_schema_data_group = get_extra_schema_by_data_type(
-                key_schema["Data Type"]
-            )
-            new_extra_schema = (
-                extra_schema_data_group
-                if extra_schema_data_group
-                else key_schema["Data Type"]
-            )
-            if isinstance(new_extra_schema, str) and new_extra_schema in exception_list:
-                # avoid processing data outside the master schema
-                continue
-            if compare_context is None:
-                print(index_context)
-            matched = (
-                compare_context_pair(
-                    index_context[key],
-                    compare_context.get(key),
-                    f"{element_json_path}.{key}",
-                    new_extra_schema,
-                    if_required(key_schema.get(search_key)),
-                    search_key,
-                    error_msg_list,
+            # id check is performed at the beginning so it should be excluded here.
+            if key != "id":
+                key_schema = extra_schema[key]
+                extra_schema_data_group = get_extra_schema_by_data_type(
+                    key_schema["Data Type"]
                 )
-                and matched
-            )
+                new_extra_schema = (
+                    extra_schema_data_group
+                    if extra_schema_data_group
+                    else key_schema["Data Type"]
+                )
+                if (
+                    isinstance(new_extra_schema, str)
+                    and new_extra_schema in exception_list
+                ):
+                    # avoid processing data outside the master schema
+                    continue
+                # if compare_context is None:
+                # Not possible due to the if else condition
+                #    print(index_context)
+                matched = (
+                    compare_context_pair(
+                        index_context[key],
+                        compare_context.get(key),
+                        f"{element_json_path}.{key}",
+                        new_extra_schema,
+                        if_required(key_schema.get(search_key)),
+                        search_key,
+                        error_msg_list,
+                    )
+                    and matched
+                )
 
     elif isinstance(index_context, list) and isinstance(compare_context, list):
         if required_equal and len(compare_context) != len(index_context):
