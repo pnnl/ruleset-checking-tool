@@ -3,9 +3,8 @@
         "Section": 22,
         "Rule": 17,
         "Test": "a",
-        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a cooling tower. The cooling tower fan is more efficient than the requirement.",
-        "expected_rule_outcome": "undetermined",
-        "expected_raised_message_includes": "which is greater than the required efficiency of 38.2 gpm/hp, resulting in a more stringent baseline. However, it was not possible to verify that the modeling inputs correspond to the rating conditions in Table 6.8.1-7.",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a cooling tower. The cooling tower fan performance is fully described with nameplate power and matches the expected 38.2 gpm/hp.",
+        "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-17",
             "ruleset_reference": "G3.1.3.11",
@@ -26,15 +25,12 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 1",
@@ -48,8 +44,6 @@
                                             },
                                             {
                                                 "id": "Thermal Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 2",
@@ -150,8 +144,9 @@
                             {
                                 "id": "Heat Rejection 1",
                                 "loop": "Condenser Loop 1",
-                                "fan_shaft_power": 14914.0,
-                                "rated_water_flowrate": 50.46666666666668
+                                "fan_motor_nameplate_power": 7457.0,
+                                "fan_shaft_power": 6711.3,
+                                "rated_water_flowrate": 24.09783333333334
                             }
                         ],
                         "type": "BASELINE_0"
@@ -164,9 +159,8 @@
         "Section": 22,
         "Rule": 17,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a cooling tower. The cooling tower fan efficiency is equal to the requirement.",
-        "expected_rule_outcome": "undetermined",
-        "expected_raised_message_includes": "The project includes a cooling tower. We calculated the cooling tower efficiency to be correct at 38.2 gpm/hp. However, it was not possible to verify that the modeling inputs correspond to the rating conditions in Table 6.8.1-7.",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a cooling tower. The cooling tower fan performance is fully described with nameplate power but does not match the expected 38.2 gpm/hp.",
+        "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-17",
             "ruleset_reference": "G3.1.3.11",
@@ -187,15 +181,12 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 1",
@@ -209,8 +200,6 @@
                                             },
                                             {
                                                 "id": "Thermal Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 2",
@@ -311,8 +300,9 @@
                             {
                                 "id": "Heat Rejection 1",
                                 "loop": "Condenser Loop 1",
-                                "fan_shaft_power": 14914.0,
-                                "rated_water_flowrate": 48.19566666666668
+                                "fan_motor_nameplate_power": 7457.0,
+                                "fan_shaft_power": 6711.3,
+                                "rated_water_flowrate": 18.925000000000004
                             }
                         ],
                         "type": "BASELINE_0"
@@ -325,9 +315,9 @@
         "Section": 22,
         "Rule": 17,
         "Test": "c",
-        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a cooling tower. The cooling tower fan is less efficient than the requirement.",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a cooling tower. The cooling tower fan does not have nameplate power defined but matches the expected 38.2 gpm/hp when calculated if calculated with a loss factor of 10% between the fan shaft power and motor power.",
         "expected_rule_outcome": "undetermined",
-        "expected_raised_message_includes": "which is less than the required efficiency of 38.2 gpm / hp.  However, it was not possible to verify that the modeling inputs correspond to the rating conditions in Table 6.8.1-7. Please review the efficiency and ensure that it is correct at the rating conditions as specified in the Table 6.8.1-7.",
+        "expected_raised_message_includes": "Based on this calculation for motor nameplate power, we calculated a correct efficiency of 38.2 gpm/hp.",
         "standard": {
             "rule_id": "22-17",
             "ruleset_reference": "G3.1.3.11",
@@ -348,15 +338,12 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 1",
@@ -370,8 +357,6 @@
                                             },
                                             {
                                                 "id": "Thermal Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 2",
@@ -472,8 +457,8 @@
                             {
                                 "id": "Heat Rejection 1",
                                 "loop": "Condenser Loop 1",
-                                "fan_shaft_power": 14914.0,
-                                "rated_water_flowrate": 25.23333333333334
+                                "fan_shaft_power": 6711.3,
+                                "rated_water_flowrate": 24.09783333333334
                             }
                         ],
                         "type": "BASELINE_0"
@@ -486,8 +471,9 @@
         "Section": 22,
         "Rule": 17,
         "Test": "d",
-        "test_description": "The project has one building segment with one zone served by a baseline system type 2. The project does not have a cooling tower.",
-        "expected_rule_outcome": "not_applicable",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a cooling tower. The cooling tower fan does not have nameplate power defined and does not match the expected 38.2 gpm/hp when calculated if calculated with a loss factor of 10% between the fan shaft power and motor power. Instead, the calculated value is 30.0 gpm/hp.",
+        "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "Based on this calculation for motor nameplate power, we calculated a correct efficiency of 30",
         "standard": {
             "rule_id": "22-17",
             "ruleset_reference": "G3.1.3.11",
@@ -508,42 +494,61 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
-                                                        "id": "PTHP Terminal 1",
-                                                        "is_supply_ducted": false,
-                                                        "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "PTHP 1"
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
                                                     }
                                                 ]
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "PTHP 1",
+                                                "id": "System 7",
                                                 "cooling_system": {
-                                                    "id": "HP Cooling Coil 1",
-                                                    "type": "DIRECT_EXPANSION"
+                                                    "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
                                                 },
-                                                "heating_system": {
-                                                    "id": "HP Heating Coil 1",
-                                                    "type": "HEAT_PUMP"
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
-                                                    "id": "CAV Fan System 1",
-                                                    "fan_control": "CONSTANT",
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
                                                         }
                                                     ]
                                                 }
@@ -551,6 +556,220 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "chillers": [
+                            {
+                                "id": "Chiller 1",
+                                "cooling_loop": "Chiller Loop 1",
+                                "condensing_loop": "Condenser Loop 1"
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Boiler Pump 1",
+                                "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Chiller Pump 1",
+                                "loop_or_piping": "Chiller Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            },
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
+                            }
+                        ],
+                        "heat_rejections": [
+                            {
+                                "id": "Heat Rejection 1",
+                                "loop": "Condenser Loop 1",
+                                "fan_shaft_power": 6711.3,
+                                "rated_water_flowrate": 18.925000000000004
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-17-e": {
+        "Section": 22,
+        "Rule": 17,
+        "Test": "e",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a cooling tower. The cooling tower fan has neither motor nameplate power nor shaft power defined.",
+        "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "The heat rejection fan motor nameplate power was not given, nor was the fan shaft power. We were unable to calculate the efficiency.",
+        "standard": {
+            "rule_id": "22-17",
+            "ruleset_reference": "G3.1.3.11",
+            "rule_description": "The baseline heat rejection device shall have an efficiency of 38.2 gpm/hp.",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "No",
+            "schema_version": "0.0.36"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "data_timestamp": "2024-02-12T09:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 7",
+                                                "cooling_system": {
+                                                    "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "chillers": [
+                            {
+                                "id": "Chiller 1",
+                                "cooling_loop": "Chiller Loop 1",
+                                "condensing_loop": "Condenser Loop 1"
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Boiler Pump 1",
+                                "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Chiller Pump 1",
+                                "loop_or_piping": "Chiller Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            },
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
+                            }
+                        ],
+                        "heat_rejections": [
+                            {
+                                "id": "Heat Rejection 1",
+                                "loop": "Condenser Loop 1",
+                                "rated_water_flowrate": 24.09783333333334
                             }
                         ],
                         "type": "BASELINE_0"
