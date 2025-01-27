@@ -41,9 +41,7 @@ def get_building_segment_swh_bat(
 
     building_segment = find_exactly_one_building_segment(rmd, building_segment_id)
 
-    building_segment_swh_bat = building_segment.get(
-        "service_water_heating_area_type"
-    )
+    building_segment_swh_bat = building_segment.get("service_water_heating_area_type")
 
     if building_segment_swh_bat is None:
         swh_use_dict = {}
@@ -96,8 +94,6 @@ def get_building_segment_swh_bat(
                 )
 
     else:
-        building_segment_swh_bat = building_segment[
-            "service_water_heating_area_type"
-        ]
+        building_segment_swh_bat = building_segment["service_water_heating_area_type"]
 
     return building_segment_swh_bat
