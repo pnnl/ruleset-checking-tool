@@ -47,7 +47,6 @@ class Section5Rule37(RuleDefinitionListIndexedBase):
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].buildings[*]",
             data_items={"climate_zone": (PROPOSED, "weather/climate_zone")},
-            manual_check_required_msg=MANUAL_CHECK_MSG,
         )
 
     class BuildingRule(RuleDefinitionBase):
@@ -63,6 +62,7 @@ class Section5Rule37(RuleDefinitionListIndexedBase):
                         "unit": "cfm",
                     }
                 },
+                manual_check_required_msg=MANUAL_CHECK_MSG,
             )
 
         def get_calc_vals(self, context, data=None):

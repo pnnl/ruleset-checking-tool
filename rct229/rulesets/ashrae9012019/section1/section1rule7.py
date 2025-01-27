@@ -42,4 +42,4 @@ class Section1Rule7(RuleDefinitionBase):
         return result
 
     def get_fail_msg(self, context, calc_vals=None, data=None):
-        return calc_vals["error_msg_list"]
+        return "; ".join(calc_vals["error_msg_list"])

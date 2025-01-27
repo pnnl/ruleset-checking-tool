@@ -1,6 +1,6 @@
 ## get_swh_equipment_type
 
-Description: This function determines whether the swh equipment type is one of: (ELECTRIC_RESISTANCE_INSTANTANEOUS, ELECTRIC_RESISTANCE_STORAGE, GAS_STORAGE, OTHER)
+Description: This function determines whether the swh equipment type is one of: (ELECTRIC_RESISTANCE_INSTANTANEOUS, ELECTRIC_RESISTANCE_STORAGE, GAS_STORAGE, PROPANE_INSTANTANEOUS, PROPANE_STORAGE, OTHER)
 
 ## Inputs:
 - **RMD**
@@ -31,6 +31,9 @@ Description: This function determines whether the swh equipment type is one of: 
   - `elsif fule_type == "NATURAL_GAS":`
     - `if swh_tank_type == "INSTANTANEOUS": type = "GAS_INSTANTANEOUS"`
     - `elsif swh_tank_type == "STORAGE": type = "GAS_STORAGE"`
+  - `elsif fule_type == "PROPANE":`
+    - `if swh_tank_type == "INSTANTANEOUS": type = "PROPANE_INSTANTANEOUS"`
+    - `elsif swh_tank_type == "STORAGE": type = "PROPANE_STORAGE"`
   - `elsif fule_type == "FUEL_OIL":`
     - `if swh_tank_type == "INSTANTANEOUS": type = "OIL_INSTANTANEOUS"`
     - `elsif swh_tank_type == "STORAGE": type = "OIL_STORAGE"`

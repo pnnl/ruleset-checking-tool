@@ -28,72 +28,88 @@ class Section11Rule16(RuleDefinitionListIndexedBase):
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section11Rule16.SWHEquipRule(),
+            each_rule=Section11Rule16.RMDRule(),
             index_rmd=BASELINE_0,
             id="11-16",
             description="Gas water heaters shall be modeled using natural gas as their fuel. Exceptions: Where natural gas is not available for the proposed building site, as determined by the rating authority, gas water heaters shall be modeled using propane as their fuel.",
             ruleset_section_title="Service Water Heating",
             standard_section="Table G3.1 #11, baseline column, (h)",
             is_primary_rule=True,
-            list_path="ruleset_model_descriptions[0].service_water_heating_equipment[*]",
+            list_path="ruleset_model_descriptions[0]",
         )
 
-    def create_data(self, context, data):
-        rmd_p = context.PROPOSED
-
-        proposed_fuels = get_fuels_modeled_in_rmd(rmd_p)
-
-        return {"proposed_fuels": proposed_fuels}
-
-    class SWHEquipRule(RuleDefinitionBase):
+    class RMDRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section11Rule16.SWHEquipRule, self).__init__(
+            super(Section11Rule16.RMDRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
-                    USER=False,
-                    BASELINE_0=True,
-                    PROPOSED=False,
+                    USER=False, BASELINE_0=True, PROPOSED=True
                 ),
-                required_fields={
-                    "$": ["heater_fuel_type"],
-                },
-                manual_check_required_msg=MANUAL_CHECK_REQUIRED_MSG,
-                fail_msg=FAIL_MSG,
+                each_rule=Section11Rule16.RMDRule.SWHEquipRule(),
+                index_rmd=BASELINE_0,
+                # TODO, change the path if the service_water_heating_uses moved to building_segment level
+                list_path="$.service_water_heating_equipment[*]",
             )
 
-        def is_applicable(self, context, data=None):
-            swh_equip_b = context.BASELINE_0
-            heater_fuel_type_b = swh_equip_b["heater_fuel_type"]
+        def create_data(self, context, data):
+            rmd_p = context.PROPOSED
 
-            return heater_fuel_type_b != ENERGY_SOURCE.ELECTRICITY
+            proposed_fuels = get_fuels_modeled_in_rmd(rmd_p)
 
-        def manual_check_required(self, context, calc_vals=None, data=None):
-            swh_equip_b = context.BASELINE_0
-            heater_fuel_type_b = swh_equip_b["heater_fuel_type"]
+            return {"proposed_fuels": proposed_fuels}
 
-            return heater_fuel_type_b == ENERGY_SOURCE.PROPANE
+        class SWHEquipRule(RuleDefinitionBase):
+            def __init__(self):
+                super(Section11Rule16.RMDRule.SWHEquipRule, self).__init__(
+                    rmds_used=produce_ruleset_model_description(
+                        USER=False,
+                        BASELINE_0=True,
+                        PROPOSED=False,
+                    ),
+                    required_fields={
+                        "$": ["heater_fuel_type"],
+                    },
+                    manual_check_required_msg=MANUAL_CHECK_REQUIRED_MSG,
+                    fail_msg=FAIL_MSG,
+                )
 
-        def get_calc_vals(self, context, data=None):
-            swh_equip_b = context.BASELINE_0
+            def is_applicable(self, context, data=None):
+                swh_equip_b = context.BASELINE_0
+                heater_fuel_type_b = swh_equip_b["heater_fuel_type"]
 
-            heater_fuel_type_b = swh_equip_b["heater_fuel_type"]
+                return heater_fuel_type_b != ENERGY_SOURCE.ELECTRICITY
 
-            return {
-                "heater_fuel_type_b": heater_fuel_type_b,
-            }
+            def manual_check_required(self, context, calc_vals=None, data=None):
+                swh_equip_b = context.BASELINE_0
+                heater_fuel_type_b = swh_equip_b["heater_fuel_type"]
+                proposed_fuels = data["proposed_fuels"]
+                return (
+                    heater_fuel_type_b == ENERGY_SOURCE.PROPANE
+                    and ENERGY_SOURCE.NATURAL_GAS not in proposed_fuels
+                )
 
-        def rule_check(self, context, calc_vals=None, data=None):
-            heater_fuel_type_b = calc_vals["heater_fuel_type_b"]
+            def get_calc_vals(self, context, data=None):
+                swh_equip_b = context.BASELINE_0
 
-            return heater_fuel_type_b == ENERGY_SOURCE.NATURAL_GAS
+                heater_fuel_type_b = swh_equip_b["heater_fuel_type"]
 
-        def get_fail_msg(self, context, calc_vals=None, data=None):
-            heater_fuel_type_b = calc_vals["heater_fuel_type_b"]
-            proposed_fuels = data["proposed_fuels"]
+                return {
+                    "heater_fuel_type_b": heater_fuel_type_b,
+                    "proposed_fuels": data["proposed_fuels"],
+                }
 
-            if (
-                heater_fuel_type_b == ENERGY_SOURCE.PROPANE
-                and ENERGY_SOURCE.NATURAL_GAS in proposed_fuels
-            ):
-                return FAIL_MSG
-            else:
-                return ""
+            def rule_check(self, context, calc_vals=None, data=None):
+                heater_fuel_type_b = calc_vals["heater_fuel_type_b"]
+
+                return heater_fuel_type_b == ENERGY_SOURCE.NATURAL_GAS
+
+            def get_fail_msg(self, context, calc_vals=None, data=None):
+                heater_fuel_type_b = calc_vals["heater_fuel_type_b"]
+                proposed_fuels = data["proposed_fuels"]
+
+                if (
+                    heater_fuel_type_b == ENERGY_SOURCE.PROPANE
+                    and ENERGY_SOURCE.NATURAL_GAS in proposed_fuels
+                ):
+                    return FAIL_MSG
+                else:
+                    return ""
