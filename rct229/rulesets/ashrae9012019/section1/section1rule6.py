@@ -72,9 +72,11 @@ class Section1Rule6(RuleDefinitionListIndexedBase):
         rmd_b180 = context.BASELINE_180
         rmd_b270 = context.BASELINE_270
         renewable_annual_site_energy_use_list = [
-            find_all(
-                f'$.output.output_instance.annual_end_use_results[*][?(@.energy_source="{ENERGY_SOURCE_OPTIONS.ON_SITE_RENEWABLE}")].annual_site_energy_use',
-                rmd,
+            sum(
+                find_all(
+                    f'$.output.output_instance.annual_end_use_results[*][?(@.energy_source="{ENERGY_SOURCE_OPTIONS.ON_SITE_RENEWABLE}")].annual_site_energy_use',
+                    rmd,
+                )
             )
             for rmd in (rmd_b0, rmd_b90, rmd_b180, rmd_b270)
         ]
