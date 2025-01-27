@@ -459,10 +459,19 @@ def disaggregate_master_ruletest_json(master_json_name, ruleset_doc):
     master_json_path = os.path.join(
         file_dir, "..", ruleset_doc, master_json_name
     )  # os.path.join(file_dir, "..", ruleset_doc, master_json_name)
+    master_dict = None
+    try:
+        # Check if the master JSON file exists
+        if not os.path.exists(master_json_path):
+            raise FileNotFoundError(f"File not found: {master_json_path}")
 
-    # Initialize master JSON dictionary
-    with open(master_json_path) as f:
-        master_dict = json.load(f)
+        # Initialize master JSON dictionary
+        with open(master_json_path) as f:
+            master_dict = json.load(f)
+    except FileNotFoundError as e:
+        print(f"Error: {e}")
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
     # Initialize dictionary used to break out master dictionary into sections and rules
     rule_dictionary = {}
@@ -521,6 +530,8 @@ def disaggregate_master_ruletest_json(master_json_name, ruleset_doc):
 
     # Write out final rule dictionary
     write_ruletest_json(prev_section, prev_rule, ruleset_doc)
+    # Remove the master json file:
+    os.remove(master_json_path)
 
 
 def disaggregate_master_rmd_json(master_json_name, output_dir, ruleset_doc):
