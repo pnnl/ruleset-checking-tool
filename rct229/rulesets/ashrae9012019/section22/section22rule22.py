@@ -11,6 +11,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types i
 )
 from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
+from rct229.schema.schema_enums import SchemaEnums
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_7,
@@ -24,6 +25,8 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_11_1B,
     HVAC_SYS.SYS_12B,
 ]
+
+EFFICIENCY_METRIC_TYPES = SchemaEnums.schema_enums["ChillerEfficiencyMetricOptions"]
 
 
 class Section22Rule22(RuleDefinitionListIndexedBase):
@@ -68,7 +71,12 @@ class Section22Rule22(RuleDefinitionListIndexedBase):
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={
-                    "$": ["compressor_type", "rated_capacity", "full_load_efficiency"],
+                    "$": [
+                        "compressor_type",
+                        "rated_capacity",
+                        "efficiency_metric_types",
+                        "efficiency_metric_values",
+                    ],
                 },
                 precision={
                     "full_load_efficiency_b": {
@@ -79,7 +87,12 @@ class Section22Rule22(RuleDefinitionListIndexedBase):
 
         def get_calc_vals(self, context, data=None):
             chiller_b = context.BASELINE_0
-            full_load_efficiency_b = chiller_b["full_load_efficiency"]
+            full_load_efficiency_index = chiller_b["efficiency_metric_types"].index(
+                EFFICIENCY_METRIC_TYPES.FULL_LOAD_EFFICIENCY
+            )
+            full_load_efficiency_b = chiller_b["efficiency_metric_values"][
+                full_load_efficiency_index
+            ]
 
             compressor_type_b = chiller_b["compressor_type"]
             rated_capacity_b = chiller_b["rated_capacity"]
