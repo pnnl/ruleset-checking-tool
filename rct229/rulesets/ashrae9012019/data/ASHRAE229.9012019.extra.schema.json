@@ -4695,7 +4695,7 @@
         "AppG B_RMD Equals P_RMD": false,
         "AppG B_RMDs Same": "unknown"
       },
-      "max_heating_airflow": {
+      "maximum_heating_airflow": {
         "Description": "Zone terminal maximum heating airflow",
         "Data Type": "Numeric",
         "Units": "L/s",
