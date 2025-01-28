@@ -4385,7 +4385,7 @@
         "AppG B_RMD Equals P_RMD": false,
         "AppG B_RMDs Same": "unknown"
       },
-      "is_airflow_sized_based_on_design_day": {
+      "is_airflow_calculated": {
         "Description": "True if the airflow is sized by the simulation software for the design day",
         "Data Type": "Boolean",
         "RMD Test": "unknown",

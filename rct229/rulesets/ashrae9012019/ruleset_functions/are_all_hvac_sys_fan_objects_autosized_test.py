@@ -22,7 +22,7 @@ TEST_RMD = {
                                     "served_by_heating_ventilating_air_conditioning_system": "hvac_4",
                                     "fan": {
                                         "id": "Terminal Fan 1",
-                                        "is_airflow_sized_based_on_design_day": True,
+                                        "is_airflow_calculated": True,
                                     },
                                 },
                                 {
@@ -30,7 +30,7 @@ TEST_RMD = {
                                     "served_by_heating_ventilating_air_conditioning_system": "hvac_5",
                                     "fan": {
                                         "id": "Terminal Fan 2",
-                                        "is_airflow_sized_based_on_design_day": True,
+                                        "is_airflow_calculated": True,
                                     },
                                 },
                                 {
@@ -38,7 +38,7 @@ TEST_RMD = {
                                     "served_by_heating_ventilating_air_conditioning_system": "hvac_5",
                                     "fan": {
                                         "id": "Terminal Fan 3",
-                                        "is_airflow_sized_based_on_design_day": False,
+                                        "is_airflow_calculated": False,
                                     },
                                 },
                                 {
@@ -46,7 +46,7 @@ TEST_RMD = {
                                     "served_by_heating_ventilating_air_conditioning_system": "hvac_6",
                                     "fan": {
                                         "id": "Terminal Fan 4",
-                                        "is_airflow_sized_based_on_design_day": True,
+                                        "is_airflow_calculated": True,
                                     },
                                 },
                                 {
@@ -67,7 +67,7 @@ TEST_RMD = {
                                     "served_by_heating_ventilating_air_conditioning_system": "hvac_2",
                                     "fan": {
                                         "id": "Terminal Fan 6",
-                                        "is_airflow_sized_based_on_design_day": True,
+                                        "is_airflow_calculated": True,
                                     },
                                 }
                             ],
@@ -75,7 +75,7 @@ TEST_RMD = {
                     ],
                     "heating_ventilating_air_conditioning_systems": [
                         {
-                            # Success case - is_airflow_sized_based_on_design_day => True
+                            # Success case - is_airflow_calculated => True
                             "id": "hvac_1",
                             "fan_system": {
                                 "id": "VAV Fan System 1",
@@ -83,13 +83,13 @@ TEST_RMD = {
                                 "supply_fans": [
                                     {
                                         "id": "Supply Fan 1",
-                                        "is_airflow_sized_based_on_design_day": True,
+                                        "is_airflow_calculated": True,
                                     }
                                 ],
                             },
                         },
                         {
-                            # Failed case - is_airflow_sized_based_on_design_day => False (at least one one)
+                            # Failed case - is_airflow_calculated => False (at least one one)
                             "id": "hvac_2",
                             "fan_system": {
                                 "id": "VAV Fan System 2",
@@ -97,17 +97,17 @@ TEST_RMD = {
                                 "supply_fans": [
                                     {
                                         "id": "Supply Fan 2-1",
-                                        "is_airflow_sized_based_on_design_day": True,
+                                        "is_airflow_calculated": True,
                                     },
                                     {
                                         "id": "Supply Fan 2-2",
-                                        "is_airflow_sized_based_on_design_day": False,
+                                        "is_airflow_calculated": False,
                                     },
                                 ],
                             },
                         },
                         {
-                            # Raise exception case - is_airflow_sized_based_on_design_day => Missing
+                            # Raise exception case - is_airflow_calculated => Missing
                             "id": "hvac_3",
                             "fan_system": {
                                 "id": "VAV Fan System 3",
@@ -115,7 +115,7 @@ TEST_RMD = {
                                 "supply_fans": [
                                     {
                                         "id": "Supply Fan 3-1",
-                                        "is_airflow_sized_based_on_design_day": True,
+                                        "is_airflow_calculated": True,
                                     },
                                     {
                                         "id": "Supply Fan 3-2",

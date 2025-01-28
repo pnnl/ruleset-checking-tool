@@ -48,7 +48,7 @@
                         "design_airflow": 38717.08308614894,
                         "design_electric_power":84189.91,
                         "specification_method": "SIMPLE",
-                        "is_airflow_sized_based_on_design_day": true
+                        "is_airflow_calculated": true
                       }
                     ]
                   }
@@ -83,7 +83,7 @@
                         "design_airflow": 36364.02558760905,
                         "design_electric_power":79073.21,
                         "specification_method": "SIMPLE",
-                        "is_airflow_sized_based_on_design_day": true
+                        "is_airflow_calculated": true
                       }
                     ]
                   }
@@ -118,7 +118,7 @@
                         "design_airflow": 51222.64960426067,
                         "design_electric_power":110796.64,
                         "specification_method": "SIMPLE",
-                        "is_airflow_sized_based_on_design_day": true
+                        "is_airflow_calculated": true
                       }
                     ]
                   }
