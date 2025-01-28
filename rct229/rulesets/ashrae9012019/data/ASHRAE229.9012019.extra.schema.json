@@ -5313,7 +5313,7 @@
       "design_head": {
         "Description": "Head of the pump at design flow conditions",
         "Data Type": "Numeric",
-        "Units": "m",
+        "Units": "Pa",
         "Notes": "Only used when specification_method is set to Detailed",
         "RMD Test": "unknown",
         "AppG Used By TCDs": false,
@@ -5373,7 +5373,7 @@
         "AppG 11-1 P_RMD Equals U_RMD": true,
         "AppG 11-3 P_RMD Equals B_RMD": false
       },
-      "is_flow_sized_based_on_design_day": {
+      "is_flow_calculated": {
         "Description": "True if the design_flow is sized by the simulation software for the design day",
         "Data Type": "Boolean",
         "RMD Test": "unknown",
