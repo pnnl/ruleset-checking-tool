@@ -47,7 +47,7 @@
                                                         "id": "System_3_PSZ_AC_Gas_Furnace - Terminal for Thermal Zone 1",
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_3_PSZ_AC_Gas_Furnace Thermal Zone 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_3_PSZ_AC_Gas_Furnace"
                                                     }
                                                 ],
                                                 "aggregation_factor": 1
@@ -55,9 +55,9 @@
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System_3_PSZ_AC_Gas_Furnace Thermal Zone 1",
+                                                "id": "System_3_PSZ_AC_Gas_Furnace",
                                                 "cooling_system": {
-                                                    "id": "Cooling Sys - Thermal Zone 1",
+                                                    "id": "DX Coil 1",
                                                     "type": "DIRECT_EXPANSION",
                                                     "design_total_cool_capacity": 20514.977777777778,
                                                     "efficiency_metric_values": [
@@ -68,20 +68,20 @@
                                                     ]
                                                 },
                                                 "heating_system": {
-                                                    "id": "Heating Sys - Thermal Zone 1",
+                                                    "id": "Furnace Coil 1",
                                                     "type": "FURNACE"
                                                 },
                                                 "fan_system": {
-                                                    "id": "Fan System - Thermal Zone 1",
+                                                    "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan - Thermal Zone 1"
+                                                            "id": "System_3_PSZ_AC_Gas_Furnace Supply Fan"
                                                         }
                                                     ],
                                                     "return_fans": [
                                                         {
-                                                            "id": "Return Fan - Thermal Zone 1"
+                                                            "id": "System_3_PSZ_AC_Gas_Furnace Return Fan"
                                                         }
                                                     ]
                                                 }
@@ -145,7 +145,7 @@
                                                         "id": "System_4_PSZ_HP - Terminal for Thermal Zone 1",
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP Thermal Zone 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP"
                                                     }
                                                 ],
                                                 "aggregation_factor": 1
@@ -153,9 +153,9 @@
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System_4_PSZ_HP Thermal Zone 1",
+                                                "id": "System_4_PSZ_HP",
                                                 "cooling_system": {
-                                                    "id": "Cooling Sys - Thermal Zone 1",
+                                                    "id": "DX Coil 1",
                                                     "type": "DIRECT_EXPANSION",
                                                     "design_total_cool_capacity": 20514.977777777778,
                                                     "efficiency_metric_values": [
@@ -166,20 +166,20 @@
                                                     ]
                                                 },
                                                 "heating_system": {
-                                                    "id": "Heating Sys - Thermal Zone 1",
+                                                    "id": "HP Coil 1",
                                                     "type": "HEAT_PUMP"
                                                 },
                                                 "fan_system": {
-                                                    "id": "Fan System - Thermal Zone 1",
+                                                    "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan - Thermal Zone 1"
+                                                            "id": "System_4_PSZ_HP Supply Fan"
                                                         }
                                                     ],
                                                     "return_fans": [
                                                         {
-                                                            "id": "Return Fan - Thermal Zone 1"
+                                                            "id": "System_4_PSZ_HP Return Fan"
                                                         }
                                                     ]
                                                 }
@@ -243,7 +243,7 @@
                                                         "id": "System_4_PSZ_HP - Terminal for Thermal Zone 1",
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP Thermal Zone 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP"
                                                     }
                                                 ],
                                                 "aggregation_factor": 1
@@ -251,9 +251,9 @@
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System_4_PSZ_HP Thermal Zone 1",
+                                                "id": "System_4_PSZ_HP",
                                                 "cooling_system": {
-                                                    "id": "Cooling Sys - Thermal Zone 1",
+                                                    "id": "DX Coil 1",
                                                     "type": "DIRECT_EXPANSION",
                                                     "design_total_cool_capacity": 43960.666666666664,
                                                     "efficiency_metric_values": [
@@ -264,20 +264,20 @@
                                                     ]
                                                 },
                                                 "heating_system": {
-                                                    "id": "Heating Sys - Thermal Zone 1",
+                                                    "id": "HP Coil 1",
                                                     "type": "HEAT_PUMP"
                                                 },
                                                 "fan_system": {
-                                                    "id": "Fan System - Thermal Zone 1",
+                                                    "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan - Thermal Zone 1"
+                                                            "id": "System_4_PSZ_HP Supply Fan"
                                                         }
                                                     ],
                                                     "return_fans": [
                                                         {
-                                                            "id": "Return Fan - Thermal Zone 1"
+                                                            "id": "System_4_PSZ_HP Return Fan"
                                                         }
                                                     ]
                                                 }
@@ -297,8 +297,106 @@
         "Section": 10,
         "Rule": 7,
         "Test": "d",
-        "test_description": "A one story building includes a baseline system 4. The cooling capacity is undefined and the cooling efficiency of the system does not match the most conservative cooling efficiency from Table G3.5.2.",
+        "test_description": "A one story building includes a baseline system 4. The cooling capacity is 150 kBtu/hr and the cooling efficiency of the system does not match the expected efficiency based on the capacity range from Table G3.5.2.",
         "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "10-7",
+            "ruleset_reference": "G3.1.2.1",
+            "rule_description": "Baseline shall be modeled with the COPnfcooling HVAC system efficiency per Tables G3.5.1-G3.5.6.  Where multiple HVAC zones or residential spaces are combined into a single thermal block the cooling efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the  equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces. ",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.34"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 929.0303999999999
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "System_4_PSZ_HP - Terminal for Thermal Zone 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP"
+                                                    }
+                                                ],
+                                                "aggregation_factor": 1
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System_4_PSZ_HP",
+                                                "cooling_system": {
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_total_cool_capacity": 43960.666666666664,
+                                                    "efficiency_metric_values": [
+                                                        2.4
+                                                    ],
+                                                    "efficiency_metric_types": [
+                                                        "FULL_LOAD_COEFFICIENT_OF_PERFORMANCE_NO_FAN"
+                                                    ]
+                                                },
+                                                "heating_system": {
+                                                    "id": "HP Coil 1",
+                                                    "type": "HEAT_PUMP"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "System_4_PSZ_HP Supply Fan"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "System_4_PSZ_HP Return Fan"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-10-7-e": {
+        "Section": 10,
+        "Rule": 7,
+        "Test": "e",
+        "test_description": "A one story building includes a baseline system 4. The cooling capacity is undefined and the cooling efficiency of the system does not match the most conservative cooling efficiency from Table G3.5.2.",
+        "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "The cooling capacity of the system could not be determined. Check if the modeled baseline DX cooling efficiency was established correctly based upon equipment capacity and type while accounting for the potential aggregation of zones.",
         "standard": {
             "rule_id": "10-7",
@@ -342,18 +440,17 @@
                                                         "id": "System_4_PSZ_HP - Terminal for Thermal Zone 1",
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP Thermal Zone 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP"
                                                     }
                                                 ]
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System_4_PSZ_HP Thermal Zone 1",
+                                                "id": "System_4_PSZ_HP",
                                                 "cooling_system": {
-                                                    "id": "Cooling Sys - Thermal Zone 1",
+                                                    "id": "DX Coil 1",
                                                     "type": "DIRECT_EXPANSION",
-                                                    "design_total_cool_capacity": 19049.329151111113,
                                                     "efficiency_metric_values": [
                                                         2.8
                                                     ],
@@ -362,20 +459,20 @@
                                                     ]
                                                 },
                                                 "heating_system": {
-                                                    "id": "Heating Sys - Thermal Zone 1",
+                                                    "id": "HP Coil 1",
                                                     "type": "HEAT_PUMP"
                                                 },
                                                 "fan_system": {
-                                                    "id": "Fan System - Thermal Zone 1",
+                                                    "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan - Thermal Zone 1"
+                                                            "id": "System_4_PSZ_HP Supply Fan"
                                                         }
                                                     ],
                                                     "return_fans": [
                                                         {
-                                                            "id": "Return Fan - Thermal Zone 1"
+                                                            "id": "System_4_PSZ_HP Return Fan"
                                                         }
                                                     ]
                                                 }
@@ -391,10 +488,10 @@
             }
         }
     },
-    "rule-10-7-e": {
+    "rule-10-7-f": {
         "Section": 10,
         "Rule": 7,
-        "Test": "e",
+        "Test": "f",
         "test_description": "A two story building includes a baseline system 5. The system serves more than 1 floor.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
@@ -579,20 +676,20 @@
                                                         "id": "System_3_PSZ_AC_Gas_Furnace - Terminal for Thermal Zone 1",
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_3_PSZ_AC_Gas_Furnace Thermal Zone 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_3_PSZ_AC_Gas_Furnace"
                                                     }
                                                 ]
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System_3_PSZ_AC_Gas_Furnace Thermal Zone 1",
+                                                "id": "System_3_PSZ_AC_Gas_Furnace",
                                                 "cooling_system": {
-                                                    "id": "Cooling Sys - Thermal Zone 1",
+                                                    "id": "DX Coil 1",
                                                     "type": "DIRECT_EXPANSION"
                                                 },
                                                 "heating_system": {
-                                                    "id": "Heating Sys - Thermal Zone 1",
+                                                    "id": "Furnace Coil 1",
                                                     "type": "FURNACE",
                                                     "efficiency_metric_values": [
                                                         0.8
@@ -602,16 +699,16 @@
                                                     ]
                                                 },
                                                 "fan_system": {
-                                                    "id": "Fan System - Thermal Zone 1",
+                                                    "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan - Thermal Zone 1"
+                                                            "id": "System_3_PSZ_AC_Gas_Furnace Supply Fan"
                                                         }
                                                     ],
                                                     "return_fans": [
                                                         {
-                                                            "id": "Return Fan - Thermal Zone 1"
+                                                            "id": "System_3_PSZ_AC_Gas_Furnace Return Fan"
                                                         }
                                                     ]
                                                 }
@@ -676,20 +773,20 @@
                                                         "id": "System_4_PSZ_HP - Terminal for Thermal Zone 1",
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP Thermal Zone 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP"
                                                     }
                                                 ]
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System_4_PSZ_HP Thermal Zone 1",
+                                                "id": "System_4_PSZ_HP",
                                                 "cooling_system": {
-                                                    "id": "Cooling Sys - Thermal Zone 1",
+                                                    "id": "DX Coil 1",
                                                     "type": "DIRECT_EXPANSION"
                                                 },
                                                 "heating_system": {
-                                                    "id": "Heating Sys - Thermal Zone 1",
+                                                    "id": "HP Coil 1",
                                                     "type": "HEAT_PUMP",
                                                     "efficiency_metric_values": [
                                                         3.4
@@ -699,16 +796,16 @@
                                                     ]
                                                 },
                                                 "fan_system": {
-                                                    "id": "Fan System - Thermal Zone 1",
+                                                    "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan - Thermal Zone 1"
+                                                            "id": "System_4_PSZ_HP Supply Fan"
                                                         }
                                                     ],
                                                     "return_fans": [
                                                         {
-                                                            "id": "Return Fan - Thermal Zone 1"
+                                                            "id": "System_4_PSZ_HP Return Fan"
                                                         }
                                                     ]
                                                 }
@@ -772,20 +869,20 @@
                                                         "id": "System_3_PSZ_AC_Gas_Furnace - Terminal for Thermal Zone 1",
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_3_PSZ_AC_Gas_Furnace Thermal Zone 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_3_PSZ_AC_Gas_Furnace"
                                                     }
                                                 ]
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System_3_PSZ_AC_Gas_Furnace Thermal Zone 1",
+                                                "id": "System_3_PSZ_AC_Gas_Furnace",
                                                 "cooling_system": {
-                                                    "id": "Cooling Sys - Thermal Zone 1",
+                                                    "id": "DX Coil 1",
                                                     "type": "DIRECT_EXPANSION"
                                                 },
                                                 "heating_system": {
-                                                    "id": "Heating Sys - Thermal Zone 1",
+                                                    "id": "Furnace Coil 1",
                                                     "type": "FURNACE",
                                                     "rated_capacity": 58614.222222222226,
                                                     "efficiency_metric_values": [
@@ -796,16 +893,16 @@
                                                     ]
                                                 },
                                                 "fan_system": {
-                                                    "id": "Fan System - Thermal Zone 1",
+                                                    "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan - Thermal Zone 1"
+                                                            "id": "System_3_PSZ_AC_Gas_Furnace Supply Fan"
                                                         }
                                                     ],
                                                     "return_fans": [
                                                         {
-                                                            "id": "Return Fan - Thermal Zone 1"
+                                                            "id": "System_3_PSZ_AC_Gas_Furnace Return Fan"
                                                         }
                                                     ]
                                                 }
@@ -869,20 +966,20 @@
                                                         "id": "System_4_PSZ_HP - Terminal for Thermal Zone 1",
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP Thermal Zone 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP"
                                                     }
                                                 ]
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System_4_PSZ_HP Thermal Zone 1",
+                                                "id": "System_4_PSZ_HP",
                                                 "cooling_system": {
-                                                    "id": "Cooling Sys - Thermal Zone 1",
+                                                    "id": "DX Coil 1",
                                                     "type": "DIRECT_EXPANSION"
                                                 },
                                                 "heating_system": {
-                                                    "id": "Heating Sys - Thermal Zone 1",
+                                                    "id": "HP Coil 1",
                                                     "type": "HEAT_PUMP",
                                                     "efficiency_metric_values": [
                                                         3.2
@@ -892,16 +989,16 @@
                                                     ]
                                                 },
                                                 "fan_system": {
-                                                    "id": "Fan System - Thermal Zone 1",
+                                                    "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan - Thermal Zone 1"
+                                                            "id": "System_4_PSZ_HP Supply Fan"
                                                         }
                                                     ],
                                                     "return_fans": [
                                                         {
-                                                            "id": "Return Fan - Thermal Zone 1"
+                                                            "id": "System_4_PSZ_HP Return Fan"
                                                         }
                                                     ]
                                                 }
@@ -965,21 +1062,21 @@
                                                         "id": "System_4_PSZ_HP - Terminal for Thermal Zone 1",
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP Thermal Zone 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP"
                                                     }
                                                 ]
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System_4_PSZ_HP Thermal Zone 1",
+                                                "id": "System_4_PSZ_HP",
                                                 "cooling_system": {
-                                                    "id": "Cooling Sys - Thermal Zone 1",
+                                                    "id": "DX Coil 1",
                                                     "type": "DIRECT_EXPANSION",
                                                     "design_total_cool_capacity": 14653.555555555557
                                                 },
                                                 "heating_system": {
-                                                    "id": "Heating Sys - Thermal Zone 1",
+                                                    "id": "HP Coil 1",
                                                     "type": "HEAT_PUMP",
                                                     "efficiency_metric_values": [
                                                         3.4
@@ -989,16 +1086,16 @@
                                                     ]
                                                 },
                                                 "fan_system": {
-                                                    "id": "Fan System - Thermal Zone 1",
+                                                    "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan - Thermal Zone 1"
+                                                            "id": "System_4_PSZ_HP Supply Fan"
                                                         }
                                                     ],
                                                     "return_fans": [
                                                         {
-                                                            "id": "Return Fan - Thermal Zone 1"
+                                                            "id": "System_4_PSZ_HP Return Fan"
                                                         }
                                                     ]
                                                 }
@@ -1062,21 +1159,21 @@
                                                         "id": "System_4_PSZ_HP - Terminal for Thermal Zone 1",
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP Thermal Zone 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP"
                                                     }
                                                 ]
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System_4_PSZ_HP Thermal Zone 1",
+                                                "id": "System_4_PSZ_HP",
                                                 "cooling_system": {
-                                                    "id": "Cooling Sys - Thermal Zone 1",
+                                                    "id": "DX Coil 1",
                                                     "type": "DIRECT_EXPANSION",
                                                     "design_total_cool_capacity": 14653.555555555557
                                                 },
                                                 "heating_system": {
-                                                    "id": "Heating Sys - Thermal Zone 1",
+                                                    "id": "HP Coil 1",
                                                     "type": "HEAT_PUMP",
                                                     "efficiency_metric_values": [
                                                         2.3
@@ -1086,16 +1183,16 @@
                                                     ]
                                                 },
                                                 "fan_system": {
-                                                    "id": "Fan System - Thermal Zone 1",
+                                                    "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan - Thermal Zone 1"
+                                                            "id": "System_4_PSZ_HP Supply Fan"
                                                         }
                                                     ],
                                                     "return_fans": [
                                                         {
-                                                            "id": "Return Fan - Thermal Zone 1"
+                                                            "id": "System_4_PSZ_HP Return Fan"
                                                         }
                                                     ]
                                                 }
@@ -1159,7 +1256,7 @@
                                                         "id": "System_4_PSZ_HP - Terminal for Thermal Zone 1",
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP Thermal Zone 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP"
                                                     }
                                                 ],
                                                 "aggregation_factor": 1
@@ -1167,14 +1264,14 @@
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System_4_PSZ_HP Thermal Zone 1",
+                                                "id": "System_4_PSZ_HP",
                                                 "cooling_system": {
-                                                    "id": "Cooling Sys - Thermal Zone 1",
+                                                    "id": "DX Coil 1",
                                                     "type": "DIRECT_EXPANSION",
                                                     "design_total_cool_capacity": 23445.68888888889
                                                 },
                                                 "heating_system": {
-                                                    "id": "Heating Sys - Thermal Zone 1",
+                                                    "id": "HP Coil 1",
                                                     "type": "HEAT_PUMP",
                                                     "efficiency_metric_values": [
                                                         3.4,
@@ -1186,16 +1283,16 @@
                                                     ]
                                                 },
                                                 "fan_system": {
-                                                    "id": "Fan System - Thermal Zone 1",
+                                                    "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan - Thermal Zone 1"
+                                                            "id": "System_4_PSZ_HP Supply Fan"
                                                         }
                                                     ],
                                                     "return_fans": [
                                                         {
-                                                            "id": "Return Fan - Thermal Zone 1"
+                                                            "id": "System_4_PSZ_HP Return Fan"
                                                         }
                                                     ]
                                                 }
@@ -1259,7 +1356,7 @@
                                                         "id": "System_4_PSZ_HP - Terminal for Thermal Zone 1",
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP Thermal Zone 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP"
                                                     }
                                                 ],
                                                 "aggregation_factor": 1
@@ -1267,14 +1364,14 @@
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System_4_PSZ_HP Thermal Zone 1",
+                                                "id": "System_4_PSZ_HP",
                                                 "cooling_system": {
-                                                    "id": "Cooling Sys - Thermal Zone 1",
+                                                    "id": "DX Coil 1",
                                                     "type": "DIRECT_EXPANSION",
                                                     "design_total_cool_capacity": 23445.68888888889
                                                 },
                                                 "heating_system": {
-                                                    "id": "Heating Sys - Thermal Zone 1",
+                                                    "id": "HP Coil 1",
                                                     "type": "HEAT_PUMP",
                                                     "efficiency_metric_values": [
                                                         3.1,
@@ -1286,16 +1383,16 @@
                                                     ]
                                                 },
                                                 "fan_system": {
-                                                    "id": "Fan System - Thermal Zone 1",
+                                                    "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan - Thermal Zone 1"
+                                                            "id": "System_4_PSZ_HP Supply Fan"
                                                         }
                                                     ],
                                                     "return_fans": [
                                                         {
-                                                            "id": "Return Fan - Thermal Zone 1"
+                                                            "id": "System_4_PSZ_HP Return Fan"
                                                         }
                                                     ]
                                                 }
@@ -1359,7 +1456,7 @@
                                                         "id": "System_4_PSZ_HP - Terminal for Thermal Zone 1",
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP Thermal Zone 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP"
                                                     }
                                                 ],
                                                 "aggregation_factor": 1
@@ -1367,14 +1464,14 @@
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System_4_PSZ_HP Thermal Zone 1",
+                                                "id": "System_4_PSZ_HP",
                                                 "cooling_system": {
-                                                    "id": "Cooling Sys - Thermal Zone 1",
+                                                    "id": "DX Coil 1",
                                                     "type": "DIRECT_EXPANSION",
                                                     "design_total_cool_capacity": 23445.68888888889
                                                 },
                                                 "heating_system": {
-                                                    "id": "Heating Sys - Thermal Zone 1",
+                                                    "id": "HP Coil 1",
                                                     "type": "HEAT_PUMP",
                                                     "efficiency_metric_values": [
                                                         3.4,
@@ -1386,16 +1483,16 @@
                                                     ]
                                                 },
                                                 "fan_system": {
-                                                    "id": "Fan System - Thermal Zone 1",
+                                                    "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan - Thermal Zone 1"
+                                                            "id": "System_4_PSZ_HP Supply Fan"
                                                         }
                                                     ],
                                                     "return_fans": [
                                                         {
-                                                            "id": "Return Fan - Thermal Zone 1"
+                                                            "id": "System_4_PSZ_HP Return Fan"
                                                         }
                                                     ]
                                                 }
@@ -1459,7 +1556,7 @@
                                                         "id": "System_4_PSZ_HP - Terminal for Thermal Zone 1",
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP Thermal Zone 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP"
                                                     }
                                                 ],
                                                 "aggregation_factor": 1
@@ -1467,14 +1564,14 @@
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System_4_PSZ_HP Thermal Zone 1",
+                                                "id": "System_4_PSZ_HP",
                                                 "cooling_system": {
-                                                    "id": "Cooling Sys - Thermal Zone 1",
+                                                    "id": "DX Coil 1",
                                                     "type": "DIRECT_EXPANSION",
                                                     "design_total_cool_capacity": 23445.68888888889
                                                 },
                                                 "heating_system": {
-                                                    "id": "Heating Sys - Thermal Zone 1",
+                                                    "id": "HP Coil 1",
                                                     "type": "HEAT_PUMP",
                                                     "efficiency_metric_values": [
                                                         3.4,
@@ -1486,16 +1583,16 @@
                                                     ]
                                                 },
                                                 "fan_system": {
-                                                    "id": "Fan System - Thermal Zone 1",
+                                                    "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan - Thermal Zone 1"
+                                                            "id": "System_4_PSZ_HP Supply Fan"
                                                         }
                                                     ],
                                                     "return_fans": [
                                                         {
-                                                            "id": "Return Fan - Thermal Zone 1"
+                                                            "id": "System_4_PSZ_HP Return Fan"
                                                         }
                                                     ]
                                                 }
@@ -1559,7 +1656,7 @@
                                                         "id": "System_4_PSZ_HP - Terminal for Thermal Zone 1",
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP Thermal Zone 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP"
                                                     }
                                                 ],
                                                 "aggregation_factor": 1
@@ -1567,14 +1664,14 @@
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System_4_PSZ_HP Thermal Zone 1",
+                                                "id": "System_4_PSZ_HP",
                                                 "cooling_system": {
-                                                    "id": "Cooling Sys - Thermal Zone 1",
+                                                    "id": "DX Coil 1",
                                                     "type": "DIRECT_EXPANSION",
                                                     "design_total_cool_capacity": 43960.666666666664
                                                 },
                                                 "heating_system": {
-                                                    "id": "Heating Sys - Thermal Zone 1",
+                                                    "id": "HP Coil 1",
                                                     "type": "HEAT_PUMP",
                                                     "efficiency_metric_values": [
                                                         3.4,
@@ -1586,16 +1683,16 @@
                                                     ]
                                                 },
                                                 "fan_system": {
-                                                    "id": "Fan System - Thermal Zone 1",
+                                                    "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan - Thermal Zone 1"
+                                                            "id": "System_4_PSZ_HP Supply Fan"
                                                         }
                                                     ],
                                                     "return_fans": [
                                                         {
-                                                            "id": "Return Fan - Thermal Zone 1"
+                                                            "id": "System_4_PSZ_HP Return Fan"
                                                         }
                                                     ]
                                                 }
@@ -1792,16 +1889,16 @@
                                                         "id": "System_9_Warm_Air_Furnace_Gas - Terminal for Thermal Zone 1",
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_9_Warm_Air_Furnace_Gas Thermal Zone 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_9_Warm_Air_Furnace_Gas"
                                                     }
                                                 ]
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System_9_Warm_Air_Furnace_Gas Thermal Zone 1",
+                                                "id": "System_9_Warm_Air_Furnace_Gas",
                                                 "heating_system": {
-                                                    "id": "Heating Sys - Thermal Zone 1",
+                                                    "id": "Furnace Coil 1",
                                                     "type": "FURNACE",
                                                     "energy_source_type": "NATURAL_GAS",
                                                     "efficiency_metric_values": [
@@ -1812,16 +1909,16 @@
                                                     ]
                                                 },
                                                 "fan_system": {
-                                                    "id": "Fan System - Thermal Zone 1",
+                                                    "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan - Thermal Zone 1"
+                                                            "id": "System_9_Warm_Air_Furnace_Gas Supply Fan"
                                                         }
                                                     ],
                                                     "return_fans": [
                                                         {
-                                                            "id": "Return Fan - Thermal Zone 1"
+                                                            "id": "System_9_Warm_Air_Furnace_Gas Return Fan"
                                                         }
                                                     ]
                                                 }
@@ -1885,16 +1982,16 @@
                                                         "id": "System_9_Warm_Air_Furnace_Gas - Terminal for Thermal Zone 1",
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_9_Warm_Air_Furnace_Gas Thermal Zone 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_9_Warm_Air_Furnace_Gas"
                                                     }
                                                 ]
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System_9_Warm_Air_Furnace_Gas Thermal Zone 1",
+                                                "id": "System_9_Warm_Air_Furnace_Gas",
                                                 "heating_system": {
-                                                    "id": "Heating Sys - Thermal Zone 1",
+                                                    "id": "Furnace Coil 1",
                                                     "type": "FURNACE",
                                                     "energy_source_type": "NATURAL_GAS",
                                                     "efficiency_metric_values": [
@@ -1905,16 +2002,16 @@
                                                     ]
                                                 },
                                                 "fan_system": {
-                                                    "id": "Fan System - Thermal Zone 1",
+                                                    "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan - Thermal Zone 1"
+                                                            "id": "System_9_Warm_Air_Furnace_Gas Supply Fan"
                                                         }
                                                     ],
                                                     "return_fans": [
                                                         {
-                                                            "id": "Return Fan - Thermal Zone 1"
+                                                            "id": "System_9_Warm_Air_Furnace_Gas Return Fan"
                                                         }
                                                     ]
                                                 }
@@ -1978,7 +2075,7 @@
                                                         "id": "System_3_PSZ_AC_Gas_Furnace - Terminal for Thermal Zone 1",
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_3_PSZ_AC_Gas_Furnace Thermal Zone 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_3_PSZ_AC_Gas_Furnace"
                                                     }
                                                 ],
                                                 "aggregation_factor": 5
@@ -1986,13 +2083,13 @@
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System_3_PSZ_AC_Gas_Furnace Thermal Zone 1",
+                                                "id": "System_3_PSZ_AC_Gas_Furnace",
                                                 "cooling_system": {
-                                                    "id": "Cooling Sys - Thermal Zone 1",
+                                                    "id": "DX Coil 1",
                                                     "type": "DIRECT_EXPANSION"
                                                 },
                                                 "heating_system": {
-                                                    "id": "Heating Sys - Thermal Zone 1",
+                                                    "id": "Furnace Coil 1",
                                                     "type": "FURNACE",
                                                     "rated_capacity": 293071.1111111111,
                                                     "efficiency_metric_values": [
@@ -2003,16 +2100,16 @@
                                                     ]
                                                 },
                                                 "fan_system": {
-                                                    "id": "Fan System - Thermal Zone 1",
+                                                    "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan - Thermal Zone 1"
+                                                            "id": "System_3_PSZ_AC_Gas_Furnace Supply Fan"
                                                         }
                                                     ],
                                                     "return_fans": [
                                                         {
-                                                            "id": "Return Fan - Thermal Zone 1"
+                                                            "id": "System_3_PSZ_AC_Gas_Furnace Return Fan"
                                                         }
                                                     ]
                                                 }
@@ -2076,21 +2173,21 @@
                                                         "id": "System_4_PSZ_HP - Terminal for Thermal Zone 1",
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP Thermal Zone 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP"
                                                     }
                                                 ]
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System_4_PSZ_HP Thermal Zone 1",
+                                                "id": "System_4_PSZ_HP",
                                                 "cooling_system": {
-                                                    "id": "Cooling Sys - Thermal Zone 1",
+                                                    "id": "DX Coil 1",
                                                     "type": "DIRECT_EXPANSION",
                                                     "design_total_cool_capacity": 23445.68888888889
                                                 },
                                                 "heating_system": {
-                                                    "id": "Heating Sys - Thermal Zone 1",
+                                                    "id": "HP Coil 1",
                                                     "type": "HEAT_PUMP",
                                                     "efficiency_metric_values": [
                                                         3.4,
@@ -2102,16 +2199,16 @@
                                                     ]
                                                 },
                                                 "fan_system": {
-                                                    "id": "Fan System - Thermal Zone 1",
+                                                    "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan - Thermal Zone 1"
+                                                            "id": "System_4_PSZ_HP Supply Fan"
                                                         }
                                                     ],
                                                     "return_fans": [
                                                         {
-                                                            "id": "Return Fan - Thermal Zone 1"
+                                                            "id": "System_4_PSZ_HP Return Fan"
                                                         }
                                                     ]
                                                 }

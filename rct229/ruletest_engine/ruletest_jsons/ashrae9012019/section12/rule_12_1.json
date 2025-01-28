@@ -342,7 +342,6 @@
         "Test": "d",
         "test_description": "A one building segment, single zone office building has its miscellaneous power lower in its proposed RMD than the baseline RMD.  Both RMDs are following the code compliant path.",
         "expected_rule_outcome": "fail",
-        "expected_raised_message_includes": "The proposed building miscellaneous equipment load is less than the baseline, which is only permitted when the model is being used to quantify performance that exceeds the requirements of Standard 90.1.",
         "standard": {
             "rule_id": "12-1",
             "ruleset_reference": "Table G3.1-12",

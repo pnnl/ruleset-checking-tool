@@ -202,18 +202,14 @@ class Section19Rule15(RuleDefinitionListIndexedBase):
                     proposed_supply_flow,
                     supply_fan_airflow_b,
                 )
-            ) and (supply_fan_qty_b != 1)
+            ) or (supply_fan_qty_b != 1)
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
             hvac_id_b = calc_vals["hvac_id_b"]
             supply_fan_qty_b = calc_vals["supply_fan_qty_b"]
             supply_fan_airflow_b = calc_vals["supply_fan_airflow_b"]
-            all_design_setpoints_105 = calc_vals["hvac_info_dict_b"][hvac_id_b][
-                "all_design_setpoints_105"
-            ]
-            proposed_supply_flow = calc_vals["hvac_info_dict_b"][hvac_id_b][
-                "proposed_supply_flow"
-            ]
+            all_design_setpoints_105 = calc_vals["all_design_setpoints_105"]
+            proposed_supply_flow = calc_vals["proposed_supply_flow"]
 
             if (
                 supply_fan_qty_b == 1

@@ -18,7 +18,7 @@ CONDITIONED_ZONE_TYPE = [
     ZCC.CONDITIONED_RESIDENTIAL,
 ]
 MANUAL_CHECK_MSG = (
-    "There is a temperature schedule mismatch between the baseline and proposed rmds. Fail unless "
+    "There is a temperature schedule mismatch between the baseline and proposed. Fail unless "
     "Table G3.1 #4 baseline column exception #s 1 and/or 2 are applicable "
 )
 
