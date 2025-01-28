@@ -105,8 +105,8 @@ class Section19Rule1(RuleDefinitionListIndexedBase):
 
             heating_oversizing_factor = 0.0
             cooling_oversizing_factor = 0.0
-            heating_is_sized_based_on_design_day = False
-            cooling_is_sized_based_on_design_day = False
+            is_calculated_size = False
+            cooling_is_calculated_size = False
             heating_oversizing_applicable = True
             cooling_oversizing_applicable = True
             if (
@@ -116,11 +116,11 @@ class Section19Rule1(RuleDefinitionListIndexedBase):
                 heating_oversizing_factor = getattr_(
                     hvac_b, "oversizing_factor", "heating_system", "oversizing_factor"
                 )
-                heating_is_sized_based_on_design_day = getattr_(
+                is_calculated_size = getattr_(
                     hvac_b,
-                    "is_sized_based_on_design_day",
+                    "is_calculated_size",
                     "heating_system",
-                    "is_sized_based_on_design_day",
+                    "is_calculated_size",
                 )
             else:
                 heating_oversizing_applicable = False
@@ -129,11 +129,11 @@ class Section19Rule1(RuleDefinitionListIndexedBase):
                 cooling_oversizing_factor = getattr_(
                     hvac_b, "oversizing_factor", "cooling_system", "oversizing_factor"
                 )
-                cooling_is_sized_based_on_design_day = getattr_(
+                cooling_is_calculated_size = getattr_(
                     hvac_b,
-                    "is_sized_based_on_design_day",
+                    "is_calculated_size",
                     "cooling_system",
-                    "is_sized_based_on_design_day",
+                    "is_calculated_size",
                 )
             else:
                 cooling_oversizing_applicable = False
@@ -141,8 +141,8 @@ class Section19Rule1(RuleDefinitionListIndexedBase):
             return {
                 "heating_oversizing_factor": heating_oversizing_factor,
                 "cooling_oversizing_factor": cooling_oversizing_factor,
-                "heating_is_sized_based_on_design_day": heating_is_sized_based_on_design_day,
-                "cooling_is_sized_based_on_design_day": cooling_is_sized_based_on_design_day,
+                "is_calculated_size": is_calculated_size,
+                "cooling_is_calculated_size": cooling_is_calculated_size,
                 "heating_oversizing_applicable": heating_oversizing_applicable,
                 "cooling_oversizing_applicable": cooling_oversizing_applicable,
             }
@@ -150,11 +150,11 @@ class Section19Rule1(RuleDefinitionListIndexedBase):
         def rule_check(self, context, calc_vals=None, data=None):
             heating_oversizing_factor = calc_vals["heating_oversizing_factor"]
             cooling_oversizing_factor = calc_vals["cooling_oversizing_factor"]
-            heating_is_sized_based_on_design_day = calc_vals[
-                "heating_is_sized_based_on_design_day"
+            is_calculated_size = calc_vals[
+                "is_calculated_size"
             ]
-            cooling_is_sized_based_on_design_day = calc_vals[
-                "cooling_is_sized_based_on_design_day"
+            cooling_is_calculated_size = calc_vals[
+                "cooling_is_calculated_size"
             ]
             heating_oversizing_applicable = calc_vals["heating_oversizing_applicable"]
             cooling_oversizing_applicable = calc_vals["cooling_oversizing_applicable"]
@@ -169,15 +169,15 @@ class Section19Rule1(RuleDefinitionListIndexedBase):
                         cooling_oversizing_factor,
                         REQ_COOLING_OVERSIZING_FACTOR,
                     )
-                    and heating_is_sized_based_on_design_day
-                    and cooling_is_sized_based_on_design_day
+                    and is_calculated_size
+                    and cooling_is_calculated_size
                 )
                 or (
                     self.precision_comparison["heating_oversizing_factor"](
                         heating_oversizing_factor,
                         REQ_HEATING_OVERSIZING_FACTOR,
                     )
-                    and heating_is_sized_based_on_design_day
+                    and is_calculated_size
                     and not cooling_oversizing_applicable
                 )
                 or (
@@ -185,7 +185,7 @@ class Section19Rule1(RuleDefinitionListIndexedBase):
                         cooling_oversizing_factor,
                         REQ_COOLING_OVERSIZING_FACTOR,
                     )
-                    and cooling_is_sized_based_on_design_day
+                    and cooling_is_calculated_size
                     and not heating_oversizing_applicable
                 )
             )

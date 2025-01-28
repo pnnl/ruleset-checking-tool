@@ -3267,8 +3267,8 @@
         "AppG B_RMD Equals P_RMD": false,
         "AppG B_RMDs Same": "unknown"
       },
-      "is_sized_based_on_design_day": {
-        "Description": "True if the component is sized by the simulation software for the design day",
+      "is_calculated_size": {
+        "Description": "True if the component is sized by software",
         "Data Type": "Boolean",
         "RMD Test": "Primary",
         "AppG Used By TCDs": true,
@@ -3560,8 +3560,8 @@
         "AppG B_RMD Equals P_RMD": false,
         "AppG B_RMDs Same": "unknown"
       },
-      "is_sized_based_on_design_day": {
-        "Description": "True if the component is sized by the simulation software for the design day",
+      "is_calculated_size": {
+        "Description": "True if the component is sized by software",
         "Data Type": "Boolean",
         "RMD Test": "Primary",
         "AppG Used By TCDs": true,
