@@ -5544,7 +5544,7 @@
         "AppG B_RMD Equals P_RMD": false,
         "AppG B_RMDs Same": "unknown"
       },
-      "efficiency_metric": {
+      "efficiency_metric_types": {
         "Description": "The type of efficiency metric used",
         "Data Type": "<BoilerEfficiencyMetricOptions>",
         "RMD Test": "Primary",
