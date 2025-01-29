@@ -52,13 +52,13 @@ class Section11Rule1(RuleDefinitionListIndexedBase):
                 get_swh_equipment_associated_with_each_swh_distribution_system(rmd_p)
             )
 
-            errors = []
             proposed_user_comparison = []
             proposed_baseline_comparison = []
             swh_dist_systems_u = find_all(
                 "$.service_water_heating_distribution_systems[*].id", rmd_u
             )
             for swh_dist_sys_id_u in swh_dist_systems_u:
+                # has distribution system
                 swh_use_load_u = sum(
                     [
                         swh_use_u.get("use", 0.0)
@@ -71,6 +71,7 @@ class Section11Rule1(RuleDefinitionListIndexedBase):
                 )
 
                 if swh_use_load_u > 0.0:
+                    # has loads
                     proposed_user_comparison = compare_swh_dist_systems_and_components(
                         rmd1=rmd_p,
                         rmd2=rmd_u,
@@ -86,6 +87,7 @@ class Section11Rule1(RuleDefinitionListIndexedBase):
                         )
                     )
                 else:
+                    # no loads
                     proposed_baseline_comparison = (
                         compare_swh_dist_systems_and_components(
                             rmd1=rmd_p,
@@ -95,29 +97,56 @@ class Section11Rule1(RuleDefinitionListIndexedBase):
                         )
                     )
 
-                if swh_dist_sys_id_u not in swh_and_equip_dict_p:
-                    errors.append(
-                        f"'{swh_dist_sys_id_u}' was not found in the Proposed model. Because there are no SWH loads in the User model, "
-                        f"we are expecting the Proposed and Baseline systems to match."
-                    )
-                if swh_dist_sys_id_u not in swh_and_equip_dict_b:
-                    errors.append(
-                        f"'{swh_dist_sys_id_u}' was not found in the Baseline model. Because there are no SWH loads in the User model, "
-                        f"we are expecting the Proposed and Baseline systems to match."
-                    )
+                    if (
+                        swh_dist_sys_id_u not in swh_and_equip_dict_p
+                        and swh_dist_sys_id_u in swh_and_equip_dict_b
+                    ):
+                        proposed_baseline_comparison.append(
+                            f"'{swh_dist_sys_id_u}' was not found in the Proposed model. Because there are no SWH loads in the User model, "
+                            f"we are expecting the Proposed and Baseline systems to match."
+                        )
+
+                    if (
+                        swh_dist_sys_id_u not in swh_and_equip_dict_b
+                        and swh_dist_sys_id_u in swh_and_equip_dict_p
+                    ):
+                        proposed_baseline_comparison.append(
+                            f"'{swh_dist_sys_id_u}' was not found in the Baseline model. Because there are no SWH loads in the User model, "
+                            f"we are expecting the Proposed and Baseline systems to match."
+                        )
 
             if not swh_dist_systems_u:
-                for swh_dist_sys_id_p in find_all(
+                # if no distribution systems in user model
+                swh_dist_systems_p = find_all(
                     "$.service_water_heating_distribution_systems[*].id", rmd_p
-                ):
-                    proposed_baseline_comparison = (
-                        compare_swh_dist_systems_and_components(
-                            rmd1=rmd_p,
-                            rmd2=rmd_b,
-                            compare_context_str="AppG 11-1 P_RMD Equals B_RMD",
-                            swh_distribution_id=swh_dist_sys_id_p,
+                )
+                if swh_dist_systems_p:
+                    # propose has distribution system
+                    for swh_dist_sys_id_p in swh_dist_systems_p:
+                        proposed_baseline_comparison = (
+                            compare_swh_dist_systems_and_components(
+                                rmd1=rmd_p,
+                                rmd2=rmd_b,
+                                compare_context_str="AppG 11-1 P_RMD Equals B_RMD",
+                                swh_distribution_id=swh_dist_sys_id_p,
+                            )
                         )
+                        if swh_dist_sys_id_p not in swh_and_equip_dict_b:
+                            proposed_baseline_comparison.append(
+                                f"'{swh_dist_sys_id_p}' was not found in the Baseline model. Because there are no SWH loads in the User model, "
+                                f"we are expecting the Proposed and Baseline systems to match."
+                            )
+                else:
+                    # proposed has no distribution system
+                    swh_dist_systems_b = find_all(
+                        "$.service_water_heating_distribution_systems[*].id", rmd_b
                     )
+                    if swh_dist_systems_b:
+                        for swh_dist_sys_id_b in swh_dist_systems_b:
+                            proposed_baseline_comparison.append(
+                                f"'{swh_dist_sys_id_b}' was not found in the Proposed model. Because there are no SWH loads in the User model, "
+                                f"we are expecting the Proposed and Baseline systems to match."
+                            )
 
             return {
                 "proposed_user_comparison": proposed_user_comparison,
@@ -129,3 +158,9 @@ class Section11Rule1(RuleDefinitionListIndexedBase):
             proposed_baseline_comparison = calc_vals["proposed_baseline_comparison"]
 
             return not (proposed_user_comparison or proposed_baseline_comparison)
+
+        def get_fail_msg(self, context, calc_vals=None, data=None):
+            proposed_baseline_comparison = calc_vals["proposed_baseline_comparison"]
+            return (
+                proposed_baseline_comparison[-1] if proposed_baseline_comparison else ""
+            )

@@ -5,7 +5,7 @@
         "Test": "a",
         "test_description": "The project has one building segment with one zone. The zone does not have a cooling system in the user model, and is served by a packaged terminal air conditioner in the proposed.",
         "expected_rule_outcome": "undetermined",
-        "expected_raised_message_includes": "is only being simulated in the P_RMI to meet the requirements described in Section G3.1-10 HVAC Systems proposed column c and d for heating and/or cooling. Check that the heating and/or cooling system fans are simulated to be cycled ON and OFF to meet heating and/or cooling loads during occupied hours as applicable. Note that per the RMD the fan associated with",
+        "expected_raised_message_includes": "is only being simulated in the proposed model to meet the requirements described in Section G3.1-10 HVAC Systems proposed column c and d for heating and/or cooling. Check that the heating and/or cooling system fans are simulated to be cycled ON and OFF to meet heating and/or cooling loads during occupied hours as applicable. Note that per the RMD the fan associated with",
         "standard": {
             "rule_id": "19-33",
             "ruleset_reference": "Table G3.1 Section 4 Exception #1",
@@ -26,15 +26,12 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "PTAC Terminal 1",
@@ -98,15 +95,12 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "PTAC Terminal 1",
@@ -170,7 +164,7 @@
         "Test": "b",
         "test_description": "The project has one building segment with one zone. The zone does not have a heating system in the user model, and is served by a hot water coil in the proposed.",
         "expected_rule_outcome": "undetermined",
-        "expected_raised_message_includes": "is only being simulated in the P_RMI to meet the requirements described in Section G3.1-10 HVAC Systems proposed column c and d for heating and/or cooling. Check that the heating and/or cooling system fans are simulated to be cycled ON and OFF to meet heating and/or cooling loads during occupied hours as applicable. Note that per the RMD the fan associated with",
+        "expected_raised_message_includes": "is only being simulated in the proposed model to meet the requirements described in Section G3.1-10 HVAC Systems proposed column c and d for heating and/or cooling. Check that the heating and/or cooling system fans are simulated to be cycled ON and OFF to meet heating and/or cooling loads during occupied hours as applicable. Note that per the RMD the fan associated with",
         "standard": {
             "rule_id": "19-33",
             "ruleset_reference": "Table G3.1 Section 4 Exception #1",
@@ -191,15 +185,12 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "PTAC Terminal 1",
@@ -263,15 +254,12 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "PTAC Terminal 1",
@@ -355,15 +343,12 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "PTAC Terminal 1",
@@ -427,15 +412,12 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "PTAC Terminal 1",

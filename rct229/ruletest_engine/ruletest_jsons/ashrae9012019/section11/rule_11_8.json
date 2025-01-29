@@ -404,7 +404,8 @@
                                                             {
                                                                 "id": "SHW 2",
                                                                 "served_by_distribution_system": "SHW Distribution 2",
-                                                                "use": 100
+                                                                "use": 100,
+                                                                "use_units": "POWER_PER_AREA"
                                                             }
                                                         ]
                                                     }
@@ -417,10 +418,20 @@
                         ],
                         "service_water_heating_distribution_systems": [
                             {
-                                "id": "SHW Distribution 1"
+                                "id": "SHW Distribution 1",
+                                "tanks": [
+                                    {
+                                        "id": "SHW Dist Tank 1"
+                                    }
+                                ]
                             },
                             {
-                                "id": "SHW Distribution 2"
+                                "id": "SHW Distribution 2",
+                                "tanks": [
+                                    {
+                                        "id": "SHW Dist Tank 2"
+                                    }
+                                ]
                             }
                         ],
                         "type": "PROPOSED"
@@ -475,7 +486,8 @@
                                                             {
                                                                 "id": "SHW 2",
                                                                 "served_by_distribution_system": "SHW Distribution 2",
-                                                                "use": 100
+                                                                "use": 100,
+                                                                "use_units": "POWER_PER_AREA"
                                                             }
                                                         ]
                                                     }
@@ -496,7 +508,12 @@
                                 ]
                             },
                             {
-                                "id": "SHW Distribution 2"
+                                "id": "SHW Distribution 2",
+                                "tanks": [
+                                    {
+                                        "id": "SHW Dist Tank 2"
+                                    }
+                                ]
                             }
                         ],
                         "type": "BASELINE_0"
@@ -573,7 +590,8 @@
                                                             {
                                                                 "id": "SHW 2",
                                                                 "served_by_distribution_system": "SHW Distribution 2",
-                                                                "use": 100
+                                                                "use": 100,
+                                                                "use_units": "POWER_PER_AREA"
                                                             }
                                                         ]
                                                     }
@@ -586,10 +604,20 @@
                         ],
                         "service_water_heating_distribution_systems": [
                             {
-                                "id": "SHW Distribution 1"
+                                "id": "SHW Distribution 1",
+                                "tanks": [
+                                    {
+                                        "id": "SHW Dist Tank 1"
+                                    }
+                                ]
                             },
                             {
-                                "id": "SHW Distribution 2"
+                                "id": "SHW Distribution 2",
+                                "tanks": [
+                                    {
+                                        "id": "SHW Dist Tank 2"
+                                    }
+                                ]
                             }
                         ],
                         "type": "PROPOSED"
@@ -646,7 +674,8 @@
                                                             {
                                                                 "id": "SHW 2",
                                                                 "served_by_distribution_system": "SHW Distribution 2",
-                                                                "use": 100
+                                                                "use": 100,
+                                                                "use_units": "POWER_PER_AREA"
                                                             }
                                                         ]
                                                     }
@@ -667,7 +696,12 @@
                                 ]
                             },
                             {
-                                "id": "SHW Distribution 2"
+                                "id": "SHW Distribution 2",
+                                "tanks": [
+                                    {
+                                        "id": "SHW Dist Tank 2"
+                                    }
+                                ]
                             }
                         ],
                         "type": "BASELINE_0"
