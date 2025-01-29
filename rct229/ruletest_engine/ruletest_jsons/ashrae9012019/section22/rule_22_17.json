@@ -9,10 +9,10 @@
             "rule_id": "22-17",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat rejection device shall have an efficiency of 38.2 gpm/hp.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "No",
+            "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
         "rmd_transformations": {
@@ -165,10 +165,10 @@
             "rule_id": "22-17",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat rejection device shall have an efficiency of 38.2 gpm/hp.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "No",
+            "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
         "rmd_transformations": {
@@ -322,10 +322,10 @@
             "rule_id": "22-17",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat rejection device shall have an efficiency of 38.2 gpm/hp.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "No",
+            "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
         "rmd_transformations": {
@@ -473,15 +473,15 @@
         "Test": "d",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a cooling tower. The cooling tower fan does not have nameplate power defined and does not match the expected 38.2 gpm/hp when calculated if calculated with a loss factor of 10% between the fan shaft power and motor power. Instead, the calculated value is 30.0 gpm/hp.",
         "expected_rule_outcome": "undetermined",
-        "expected_raised_message_includes": "Based on this calculation for motor nameplate power, we calculated a correct efficiency of 30",
+        "expected_raised_message_includes": "Based on this calculation for motor nameplate power, we calculated an efficiency of 30",
         "standard": {
             "rule_id": "22-17",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat rejection device shall have an efficiency of 38.2 gpm/hp.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "No",
+            "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
         "rmd_transformations": {
@@ -634,10 +634,10 @@
             "rule_id": "22-17",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat rejection device shall have an efficiency of 38.2 gpm/hp.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "No",
+            "primary_rule": "Full",
             "schema_version": "0.0.36"
         },
         "rmd_transformations": {
