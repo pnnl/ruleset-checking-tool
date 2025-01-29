@@ -74,6 +74,7 @@ class Section22Rule17(RuleDefinitionListIndexedBase):
 
             fully_calculated = False
             heat_rejection_efficiency_b = None
+            fan_shaft_power_defined_b = False
             if heat_rejection_b.get("fan_motor_nameplate_power"):
                 rated_water_flowrate_b = heat_rejection_b.get(
                     "rated_water_flowrate", ZERO.FLOW
@@ -91,6 +92,9 @@ class Section22Rule17(RuleDefinitionListIndexedBase):
                 fully_calculated = True
 
             elif heat_rejection_b.get("fan_shaft_power"):
+
+                fan_shaft_power_defined_b = True
+
                 motor_nameplate_hp_b = (
                     heat_rejection_b["fan_shaft_power"].to("hp")
                     / FAN_SHAFT_POWER_FACTOR
@@ -109,6 +113,7 @@ class Section22Rule17(RuleDefinitionListIndexedBase):
                 "heat_rejection_efficiency_b": CalcQ(
                     "liquid_flow_rate_per_power", heat_rejection_efficiency_b
                 ),
+                "fan_shaft_power_defined_b": fan_shaft_power_defined_b,
                 "fully_calculated": fully_calculated,
             }
 
@@ -120,6 +125,7 @@ class Section22Rule17(RuleDefinitionListIndexedBase):
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
             heat_rejection_efficiency_b = calc_vals["heat_rejection_efficiency_b"]
+            fan_shaft_power_defined_b = calc_vals["fan_shaft_power_defined_b"]
             fully_calculated = calc_vals["fully_calculated"]
 
             undetermined_msg = ""
@@ -134,13 +140,13 @@ class Section22Rule17(RuleDefinitionListIndexedBase):
                         "The heat rejection fan motor nameplate power was not given, so we calculated the fan motor nameplate power based on the equation: Motor Nameplate Power = Fan Shaft Power / LF, where LF = 90%. "
                         "Based on this calculation for motor nameplate power, we calculated a correct efficiency of 38.2 gpm/hp."
                     )
-                else:
+                elif heat_rejection_efficiency_b is not None:
                     undetermined_msg = (
                         f"The heat rejection fan motor nameplate power was not given, so we calculated the fan motor nameplate power based on the equation: Motor Nameplate Power = Fan Shaft Power / LF, where LF = 90%. "
-                        "Based on this calculation for motor nameplate power, we calculated an efficiency of {heat_rejection_efficiency_b} gpm/hp."
+                        f"Based on this calculation for motor nameplate power, we calculated an efficiency of {heat_rejection_efficiency_b} gpm/hp."
                     )
-            elif heat_rejection_efficiency_b is None:
-                undetermined_msg = "The heat rejection fan motor nameplate power was not given, nor was the fan shaft power. We were unable to calculate the efficiency."
+                elif fan_shaft_power_defined_b is False:
+                    undetermined_msg = "The heat rejection fan motor nameplate power was not given, nor was the fan shaft power. We were unable to calculate the efficiency."
 
             return undetermined_msg
 
