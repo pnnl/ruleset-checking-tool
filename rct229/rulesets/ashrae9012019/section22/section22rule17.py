@@ -1,4 +1,4 @@
-from rct229.rule_engine.partial_rule_definition import PartialRuleDefinition
+from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
@@ -6,8 +6,8 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_heat_rejection_loops_co
     get_heat_rejection_loops_connected_to_baseline_systems,
 )
 from rct229.schema.config import ureg
-from rct229.utils.pint_utils import ZERO, CalcQ
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.pint_utils import ZERO, CalcQ
 
 FAN_SHAFT_POWER_FACTOR = 0.9
 HEAT_REJ_EFF_LIMIT = 38.2 * ureg("gpm/hp")
@@ -45,7 +45,7 @@ class Section22Rule17(RuleDefinitionListIndexedBase):
 
         return {"heat_rejection_loop_ids_b": heat_rejection_loop_ids_b}
 
-    class HeatRejectionRule(PartialRuleDefinition):
+    class HeatRejectionRule(RuleDefinitionBase):
         def __init__(self):
             super(Section22Rule17.HeatRejectionRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
@@ -77,11 +77,11 @@ class Section22Rule17(RuleDefinitionListIndexedBase):
             if heat_rejection_b.get("fan_motor_nameplate_power"):
                 rated_water_flowrate_b = heat_rejection_b.get(
                     "rated_water_flowrate", ZERO.FLOW
-                ) * ureg("gpm")
+                ).to("gpm")
 
                 fan_motor_nameplate_power_b = heat_rejection_b[
                     "fan_motor_nameplate_power"
-                ] * ureg("hp")
+                ].to("hp")
 
                 heat_rejection_efficiency_b = (
                     0.0
@@ -92,16 +92,16 @@ class Section22Rule17(RuleDefinitionListIndexedBase):
 
             elif heat_rejection_b.get("fan_shaft_power"):
                 motor_nameplate_hp_b = (
-                    heat_rejection_b["fan_shaft_power"]
-                    * ureg("hp")
+                    heat_rejection_b["fan_shaft_power"].to("hp")
                     / FAN_SHAFT_POWER_FACTOR
                 )
 
                 heat_rejection_efficiency_b = (
                     0.0
                     if motor_nameplate_hp_b == ZERO.POWER
-                    else heat_rejection_b.get("rated_water_flowrate", ZERO.FLOW)
-                    * ureg("gpm")
+                    else heat_rejection_b.get("rated_water_flowrate", ZERO.FLOW).to(
+                        "gpm"
+                    )
                     / motor_nameplate_hp_b
                 )
 
@@ -124,8 +124,11 @@ class Section22Rule17(RuleDefinitionListIndexedBase):
 
             undetermined_msg = ""
             if not fully_calculated:
-                if self.precision_comparison["heat_rejection_efficiency_b"](
-                    heat_rejection_efficiency_b, HEAT_REJ_EFF_LIMIT
+                if (
+                    heat_rejection_efficiency_b is not None
+                    and self.precision_comparison["heat_rejection_efficiency_b"](
+                        heat_rejection_efficiency_b, HEAT_REJ_EFF_LIMIT
+                    )
                 ):
                     undetermined_msg = (
                         "The heat rejection fan motor nameplate power was not given, so we calculated the fan motor nameplate power based on the equation: Motor Nameplate Power = Fan Shaft Power / LF, where LF = 90%. "
