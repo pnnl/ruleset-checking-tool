@@ -25,10 +25,6 @@ class Section21Rule2(RuleDefinitionListIndexedBase):
             "Chilled Water and/or Purchased Heat",
             is_primary_rule=False,
             list_path="ruleset_model_descriptions[0]",
-            manual_check_required_msg="Manual Check Required - Proposed is modeled with purchased hot water or steam.  "
-            "Make sure the baseline model uses the same number of pumps for the heating loop.",
-            not_applicable_msg="Rule 21-1 Not Applicable - the proposed is not modeled with Purchased Hot Water or "
-            "Steam",
         )
 
     class RulesetModelInstanceRule(PartialRuleDefinition):
@@ -37,6 +33,10 @@ class Section21Rule2(RuleDefinitionListIndexedBase):
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=False, PROPOSED=True
                 ),
+                manual_check_required_msg="Manual Check Required - Proposed is modeled with purchased hot water or steam.  "
+                "Make sure the baseline model uses the same number of pumps for the heating loop.",
+                not_applicable_msg="Rule 21-2 Not Applicable - the proposed is not modeled with Purchased Hot Water or "
+                "Steam",
             )
 
         def applicability_check(self, context, calc_vals, data):
