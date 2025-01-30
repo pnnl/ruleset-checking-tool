@@ -127,7 +127,7 @@ class Section23Rule1(RuleDefinitionListIndexedBase):
 
             return (
                 heatpump_aux_high_temp_shutoff
-                < HEATPUMP_AUX_HEAT_HIGH_SHUTOFF_THRESHOLD
+                <= HEATPUMP_AUX_HEAT_HIGH_SHUTOFF_THRESHOLD
                 and heatpump_aux_heat_energy_source
                 == HeatpumpAuxilliaryHeatOptions.ELECTRIC_RESISTANCE
             )
