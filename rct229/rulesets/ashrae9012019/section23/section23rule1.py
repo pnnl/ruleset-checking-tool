@@ -95,14 +95,13 @@ class Section23Rule1(RuleDefinitionListIndexedBase):
                 precision={
                     "heatpump_auxilliary_heat_high_shutoff_temperature": {
                         "precision": 0.1,
-                        "unit": "K",
+                        "unit": "F",
                     },
                 },
             )
 
         def get_calc_vals(self, context, data=None):
             hvac_b = context.BASELINE_0
-            baseline_system_types_dict = data["baseline_system_types_dict"]
 
             heating_system_b = hvac_b["heating_system"]
             heatpump_aux_high_temp_shutoff = getattr_(
@@ -121,9 +120,7 @@ class Section23Rule1(RuleDefinitionListIndexedBase):
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
-            heatpump_aux_high_temp_shutoff = calc_vals[
-                "heatpump_aux_high_temp_shutoff"
-            ].to(ureg.kelvin)
+            heatpump_aux_high_temp_shutoff = calc_vals["heatpump_aux_high_temp_shutoff"]
             heatpump_aux_heat_energy_source = calc_vals[
                 "heatpump_aux_heat_energy_source"
             ]
