@@ -134,11 +134,19 @@ class Section12Rule2(RuleDefinitionListIndexedBase):
                         misc_equip_schedule_id_p
                     )
 
-                    auto_receptacle_control_b = misc_equip_b.get(
-                        "has_automatic_control"
+                    automatic_controlled_percentage_b = misc_equip_b.get(
+                        "automatic_controlled_percentage"
                     )
-                    auto_receptacle_control_p = misc_equip_p.get(
-                        "has_automatic_control"
+                    automatic_controlled_percentage_p = misc_equip_p.get(
+                        "automatic_controlled_percentage"
+                    )
+                    auto_receptacle_control_b = (
+                        automatic_controlled_percentage_b
+                        and automatic_controlled_percentage_b > 0.0
+                    )
+                    auto_receptacle_control_p = (
+                        automatic_controlled_percentage_p
+                        and automatic_controlled_percentage_p > 0.0
                     )
 
                     mask_schedule = (
