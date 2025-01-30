@@ -14,7 +14,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": 0,
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.34"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
@@ -66,10 +66,10 @@
                                     {
                                         "id": "End Result 1",
                                         "type": "MISC_EQUIPMENT",
-                                        "energy_source": "ON_SITE_RENEWABLES",
+                                        "energy_source": "ON_SITE_RENEWABLE",
                                         "annual_site_energy_use": 100000,
-                                        "annual_site_coincident_load": 0,
-                                        "annual_site_non_coincident_load": 0
+                                        "annual_site_coincident_demand": 0,
+                                        "annual_site_non_coincident_demand": 0
                                     }
                                 ]
                             }
@@ -95,7 +95,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": 0,
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.34"
+            "schema_version": "0.0.37"
         },
         "rmd_transformations": {
             "baseline": {
@@ -147,10 +147,10 @@
                                     {
                                         "id": "End Result 1",
                                         "type": "MISC_EQUIPMENT",
-                                        "energy_source": "ON_SITE_RENEWABLES",
+                                        "energy_source": "ON_SITE_RENEWABLE",
                                         "annual_site_energy_use": 0,
-                                        "annual_site_coincident_load": 0,
-                                        "annual_site_non_coincident_load": 0
+                                        "annual_site_coincident_demand": 0,
+                                        "annual_site_non_coincident_demand": 0
                                     }
                                 ]
                             }

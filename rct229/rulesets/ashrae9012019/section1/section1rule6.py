@@ -35,6 +35,7 @@ class Section1Rule6(RuleDefinitionListIndexedBase):
             ruleset_section_title="Performance Calculation",
             standard_section="G3.11 18 Baseline",
             is_primary_rule=True,
+            rmd_context="ruleset_model_descriptions/0",
             index_rmd=BASELINE_0,
             each_rule=Section1Rule6.RMDRule(),
             list_path="ruleset_model_descriptions[0]",
