@@ -109,9 +109,7 @@ class Section23Rule17(RuleDefinitionListIndexedBase):
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
-            heatpump_low_shutoff_b = calc_vals["heatpump_low_shutoff_temperature"].to(
-                ureg.kelvin
-            )
+            heatpump_low_shutoff_b = calc_vals["heatpump_low_shutoff_temperature"]
             # The heat pump low shutoff temperature equal to the flag of -999, which indicates that there is no low-temperature shutoff for the heatpump
             # The minimum temperature is not finalized and is up for discussion.  Must coordinate with the note provided in the schema element: HeatingSystem.heatpump_low_shutoff_temperature
-            return heatpump_low_shutoff_b.m <= -999
+            return heatpump_low_shutoff_b <= -999 * ureg("F")
