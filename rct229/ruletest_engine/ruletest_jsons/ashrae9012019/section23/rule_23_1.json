@@ -53,7 +53,7 @@
                                                     "id": "HP Heating Coil 1",
                                                     "type": "HEAT_PUMP",
                                                     "heatpump_auxilliary_heat_type": "ELECTRIC_RESISTANCE",
-                                                    "heatpump_low_shutoff_temperature": 7.222222222222285
+                                                    "heatpump_auxilliary_heat_high_shutoff_temperature": 4.444444444444457
                                                 },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
@@ -130,7 +130,7 @@
                                                     "id": "HP Heating Coil 1",
                                                     "type": "HEAT_PUMP",
                                                     "heatpump_auxilliary_heat_type": "OTHER",
-                                                    "heatpump_low_shutoff_temperature": 1.6666666666666856
+                                                    "heatpump_auxilliary_heat_high_shutoff_temperature": 1.6666666666666856
                                                 },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
@@ -207,7 +207,7 @@
                                                     "id": "HP Heating Coil 1",
                                                     "type": "HEAT_PUMP",
                                                     "heatpump_auxilliary_heat_type": "ELECTRIC_RESISTANCE",
-                                                    "heatpump_low_shutoff_temperature": 1.6666666666666856
+                                                    "heatpump_auxilliary_heat_high_shutoff_temperature": 1.6666666666666856
                                                 },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
