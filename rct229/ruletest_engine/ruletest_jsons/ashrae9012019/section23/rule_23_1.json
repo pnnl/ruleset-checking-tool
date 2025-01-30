@@ -157,7 +157,7 @@
         "Section": 23,
         "Rule": 1,
         "Test": "c",
-        "test_description": "The project has one building segment with one zone served by baseline system 2.  The auxiliary heat fuel type is electric resistance and the high temperature shutoff for the auxiliary heat is less than 40 F.",
+        "test_description": "The project has one building segment with one zone served by baseline system 2.  The auxiliary heat fuel type is electric resistance and the high temperature shutoff for the auxiliary heat is equal to 40 F.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "23-1",
