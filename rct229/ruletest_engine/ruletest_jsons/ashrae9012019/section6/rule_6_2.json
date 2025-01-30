@@ -26,24 +26,19 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Building Open Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 85.47079679999999,
-                                                        "occupant_multiplier_schedule": "Occupancy Schedule 1",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 1 Lighting 1",
-                                                                "lighting_multiplier_schedule": "Space 1 Lighting Schedule 1",
                                                                 "power_per_area": 11.947940562547794
                                                             }
                                                         ],
@@ -52,11 +47,9 @@
                                                     {
                                                         "id": "Space 2",
                                                         "floor_area": 92.90303999999999,
-                                                        "occupant_multiplier_schedule": "Required Schedule 1",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 2 Lighting 1",
-                                                                "lighting_multiplier_schedule": "Required Schedule 1",
                                                                 "power_per_area": 9.902797583372946
                                                             }
                                                         ],
@@ -82,24 +75,19 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Building Open Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 85.47079679999999,
-                                                        "occupant_multiplier_schedule": "Occupancy Schedule 1",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 1 Lighting 1",
-                                                                "lighting_multiplier_schedule": "Space 1 Lighting Schedule 1",
                                                                 "power_per_area": 11.947940562547794
                                                             }
                                                         ],
@@ -108,11 +96,9 @@
                                                     {
                                                         "id": "Space 2",
                                                         "floor_area": 92.90303999999999,
-                                                        "occupant_multiplier_schedule": "Required Schedule 1",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 2 Lighting 1",
-                                                                "lighting_multiplier_schedule": "Required Schedule 1",
                                                                 "power_per_area": 9.902797583372946
                                                             }
                                                         ],
@@ -158,24 +144,19 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Building Open Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 85.47079679999999,
-                                                        "occupant_multiplier_schedule": "Occupancy Schedule 1",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 1 Lighting 1",
-                                                                "lighting_multiplier_schedule": "Space 1 Lighting Schedule 1",
                                                                 "power_per_area": 11.947940562547794
                                                             }
                                                         ],
@@ -184,11 +165,9 @@
                                                     {
                                                         "id": "Space 2",
                                                         "floor_area": 92.90303999999999,
-                                                        "occupant_multiplier_schedule": "Required Schedule 1",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 2 Lighting 1",
-                                                                "lighting_multiplier_schedule": "Required Schedule 1",
                                                                 "power_per_area": 9.902797583372946
                                                             }
                                                         ],
@@ -214,24 +193,19 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Building Open Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 85.47079679999999,
-                                                        "occupant_multiplier_schedule": "Occupancy Schedule 1",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 1 Lighting 1",
-                                                                "lighting_multiplier_schedule": "Space 1 Lighting Schedule 1",
                                                                 "power_per_area": 13.024331604218766
                                                             }
                                                         ],
@@ -240,11 +214,9 @@
                                                     {
                                                         "id": "Space 2",
                                                         "floor_area": 92.90303999999999,
-                                                        "occupant_multiplier_schedule": "Required Schedule 1",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 2 Lighting 1",
-                                                                "lighting_multiplier_schedule": "Required Schedule 1",
                                                                 "power_per_area": 10.87154952087682
                                                             }
                                                         ],
@@ -290,24 +262,19 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Building Open Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 85.47079679999999,
-                                                        "occupant_multiplier_schedule": "Occupancy Schedule 1",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 1 Lighting 1",
-                                                                "lighting_multiplier_schedule": "Space 1 Lighting Schedule 1",
                                                                 "power_per_area": 6.458346250025834
                                                             }
                                                         ],
@@ -316,11 +283,9 @@
                                                     {
                                                         "id": "Space 2",
                                                         "floor_area": 92.90303999999999,
-                                                        "occupant_multiplier_schedule": "Required Schedule 1",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 2 Lighting 1",
-                                                                "lighting_multiplier_schedule": "Required Schedule 1",
                                                                 "power_per_area": 9.687519375038752
                                                             }
                                                         ],
@@ -346,24 +311,19 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Building Open Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 85.47079679999999,
-                                                        "occupant_multiplier_schedule": "Occupancy Schedule 1",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 1 Lighting 1",
-                                                                "lighting_multiplier_schedule": "Space 1 Lighting Schedule 1",
                                                                 "power_per_area": 6.458346250025834
                                                             }
                                                         ],
@@ -372,11 +332,9 @@
                                                     {
                                                         "id": "Space 2",
                                                         "floor_area": 92.90303999999999,
-                                                        "occupant_multiplier_schedule": "Required Schedule 1",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 2 Lighting 1",
-                                                                "lighting_multiplier_schedule": "Required Schedule 1",
                                                                 "power_per_area": 9.687519375038752
                                                             }
                                                         ],
@@ -422,24 +380,19 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Building Open Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 85.47079679999999,
-                                                        "occupant_multiplier_schedule": "Occupancy Schedule 1",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 1 Lighting 1",
-                                                                "lighting_multiplier_schedule": "Space 1 Lighting Schedule 1",
                                                                 "power_per_area": 6.458346250025834
                                                             }
                                                         ],
@@ -448,11 +401,9 @@
                                                     {
                                                         "id": "Space 2",
                                                         "floor_area": 92.90303999999999,
-                                                        "occupant_multiplier_schedule": "Required Schedule 1",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 2 Lighting 1",
-                                                                "lighting_multiplier_schedule": "Required Schedule 1",
                                                                 "power_per_area": 9.687519375038752
                                                             }
                                                         ],
@@ -478,24 +429,19 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Building Open Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 85.47079679999999,
-                                                        "occupant_multiplier_schedule": "Occupancy Schedule 1",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 1 Lighting 1",
-                                                                "lighting_multiplier_schedule": "Space 1 Lighting Schedule 1",
                                                                 "power_per_area": 6.458346250025834
                                                             }
                                                         ],
@@ -504,11 +450,9 @@
                                                     {
                                                         "id": "Space 2",
                                                         "floor_area": 92.90303999999999,
-                                                        "occupant_multiplier_schedule": "Required Schedule 1",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 2 Lighting 1",
-                                                                "lighting_multiplier_schedule": "Required Schedule 1",
                                                                 "power_per_area": 9.687519375038752
                                                             }
                                                         ],
