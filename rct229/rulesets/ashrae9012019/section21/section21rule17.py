@@ -28,7 +28,9 @@ BOILER_RATED_CAPACITY_LOW_LIMIT = 300_000 * ureg("Btu/hr")
 BOILER_RATED_CAPACITY_HIGH_LIMIT = 2_500_000 * ureg("Btu/hr")
 BOILER_EFFICIENCY_80 = 0.8
 BOILER_EFFICIENCY_75 = 0.75
-BOILER_EFFICIENCY_METRIC_TYPE = SchemaEnums.schema_enums["BoilerEfficiencyMetricOptions"]
+BOILER_EFFICIENCY_METRIC_TYPE = SchemaEnums.schema_enums[
+    "BoilerEfficiencyMetricOptions"
+]
 
 
 class Section21Rule17(RuleDefinitionListIndexedBase):
@@ -73,7 +75,11 @@ class Section21Rule17(RuleDefinitionListIndexedBase):
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={
-                    "$": ["rated_capacity", "efficiency_metric_types", "efficiency_metric_values"],
+                    "$": [
+                        "rated_capacity",
+                        "efficiency_metric_types",
+                        "efficiency_metric_values",
+                    ],
                 },
                 precision={
                     "boiler_efficiency_b": {
@@ -96,7 +102,9 @@ class Section21Rule17(RuleDefinitionListIndexedBase):
 
         def rule_check(self, context, calc_vals=None, data=None):
             boiler_rated_capacity_b = calc_vals["boiler_rated_capacity_b"]
-            boiler_efficiency_metric_types_b = calc_vals["boiler_efficiency_metric_types_b"]
+            boiler_efficiency_metric_types_b = calc_vals[
+                "boiler_efficiency_metric_types_b"
+            ]
             boiler_efficiency_b = calc_vals["boiler_efficiency_b"]
 
             return (
@@ -111,7 +119,8 @@ class Section21Rule17(RuleDefinitionListIndexedBase):
                 )
                 or (
                     boiler_rated_capacity_b <= BOILER_RATED_CAPACITY_HIGH_LIMIT
-                    and boiler_efficiency_metric_types_b == BOILER_EFFICIENCY_METRIC_TYPE.THERMAL
+                    and boiler_efficiency_metric_types_b
+                    == BOILER_EFFICIENCY_METRIC_TYPE.THERMAL
                     and self.precision_comparison["boiler_efficiency_b"](
                         boiler_efficiency_b,
                         BOILER_EFFICIENCY_75,
