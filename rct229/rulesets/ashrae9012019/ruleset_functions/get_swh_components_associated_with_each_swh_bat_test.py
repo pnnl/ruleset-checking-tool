@@ -21,7 +21,7 @@ TEST_RMD = {
                             "spaces": [
                                 {
                                     "id": "Space 1",
-                                    "service_water_heating_building_area_type": "LIBRARY",
+                                    "service_water_heating_area_type": "LIBRARY",
                                     "service_water_heating_uses": [
                                         {
                                             "id": "SWH Use 1",
@@ -35,7 +35,7 @@ TEST_RMD = {
                                 },
                                 {
                                     "id": "Space 2",
-                                    "service_water_heating_building_area_type": "CONVENIENCE_STORE",
+                                    "service_water_heating_area_type": "CONVENIENCE_STORE",
                                     "service_water_heating_uses": [
                                         {
                                             "id": "SWH Use 2",
