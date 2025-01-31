@@ -150,12 +150,8 @@ class Section19Rule1(RuleDefinitionListIndexedBase):
         def rule_check(self, context, calc_vals=None, data=None):
             heating_oversizing_factor = calc_vals["heating_oversizing_factor"]
             cooling_oversizing_factor = calc_vals["cooling_oversizing_factor"]
-            is_calculated_size = calc_vals[
-                "is_calculated_size"
-            ]
-            cooling_is_calculated_size = calc_vals[
-                "cooling_is_calculated_size"
-            ]
+            is_calculated_size = calc_vals["is_calculated_size"]
+            cooling_is_calculated_size = calc_vals["cooling_is_calculated_size"]
             heating_oversizing_applicable = calc_vals["heating_oversizing_applicable"]
             cooling_oversizing_applicable = calc_vals["cooling_oversizing_applicable"]
 
