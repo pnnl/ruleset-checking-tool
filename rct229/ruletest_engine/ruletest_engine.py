@@ -155,7 +155,7 @@ def process_test_result(test_result, raised_message, test_dict, test_id):
 
     # Check if the raised message is a substring in the expected raised message (tests often don't have the full
     # message)
-    messages_matched = expected_raised_message in raised_message
+    messages_matched = expected_raised_message in str(raised_message)
 
     # Success and failure tied to
     overall_outcome = messages_matched and received_expected_outcome
