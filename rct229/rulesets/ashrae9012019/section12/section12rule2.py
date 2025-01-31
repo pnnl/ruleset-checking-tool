@@ -153,7 +153,8 @@ class Section12Rule2(RuleDefinitionListIndexedBase):
                         is_leap_year,
                     )
                     return {
-                        "mis_equip_schedule_b_dict": mis_equip_schedule_b_dict,
+                        # No need to report full schedule values.
+                        # "mis_equip_schedule_b_dict": mis_equip_schedule_b_dict,
                         "space_type_b": space_type_b,
                         "auto_receptacle_control_b": auto_receptacle_control_b,
                         "auto_receptacle_control_p": auto_receptacle_control_p,

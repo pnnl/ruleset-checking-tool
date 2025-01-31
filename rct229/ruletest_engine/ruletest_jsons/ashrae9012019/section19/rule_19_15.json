@@ -752,7 +752,8 @@
                                                             "id": "Supply Fan 2",
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 75,
-                                                            "design_airflow": 117.98686079999996
+                                                            "design_airflow": 117.98686079999996,
+                                                            "is_airflow_sized_based_on_design_day": true
                                                         }
                                                     ],
                                                     "return_fans": [

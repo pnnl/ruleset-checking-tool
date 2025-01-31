@@ -1,7 +1,7 @@
 from rct229.rulesets.ashrae9012019.ruleset_functions.check_purchased_chw_hhw_status_dict import (
     check_purchased_chw_hhw_status_dict,
 )
-from rct229.schema.validate import schema_validate_rmd
+from rct229.schema.validate import schema_validate_rpd
 
 TEST_BUILDING_NO_EXT_FLUID_SOURCE = {
     "id": "RMD 1",
@@ -338,21 +338,21 @@ TEST_RMD_FALSE = {
 
 
 def test__TEST_RMD_HEATING_TRUE__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RMD_HEATING_SYS)
+    schema_validation_result = schema_validate_rpd(TEST_RMD_HEATING_SYS)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
 
 
 def test__TEST_RMD_PREHEAT_TRUE__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RMD_TERMINAL_SYS)
+    schema_validation_result = schema_validate_rpd(TEST_RMD_TERMINAL_SYS)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
 
 
 def test__TEST_RMD_FALSE__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RMD_FALSE)
+    schema_validation_result = schema_validate_rpd(TEST_RMD_FALSE)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"

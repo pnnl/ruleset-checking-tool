@@ -3,7 +3,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_energy_required_to_heat
 )
 from rct229.schema.config import ureg
 from rct229.schema.schema_utils import quantify_rmd
-from rct229.schema.validate import schema_validate_rmd
+from rct229.schema.validate import schema_validate_rpd
 from rct229.utils.jsonpath_utils import (
     find_exactly_one_with_field_value,
 )
@@ -178,7 +178,7 @@ TEST_BUILDING_SEGMENT_NO_SWH_USE = find_exactly_one_with_field_value(
 
 
 def test__TEST_RPD__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RPD_FULL)
+    schema_validation_result = schema_validate_rpd(TEST_RPD_FULL)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"

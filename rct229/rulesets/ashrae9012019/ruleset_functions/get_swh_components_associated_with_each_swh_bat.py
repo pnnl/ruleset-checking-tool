@@ -48,6 +48,9 @@ def get_swh_components_associated_with_each_swh_bat(
     swh_and_equip_dict = {}
     for building_segment in find_all("$.buildings[*].building_segments[*]", rmd):
         swh_bat = get_building_segment_swh_bat(rmd, building_segment["id"])
+        if swh_bat is None:
+            # if returns None, it means there is no swh system in the RPD.
+            swh_bat = "UNDETERMINED"
         swh_and_equip_dict[swh_bat] = SWHEquipmentAssociations(
             energy_required=ZERO.ENERGY
         )

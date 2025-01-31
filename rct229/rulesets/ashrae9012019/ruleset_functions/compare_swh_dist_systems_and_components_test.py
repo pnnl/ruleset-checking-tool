@@ -4,7 +4,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.compare_swh_dist_systems_an
     compare_swh_dist_systems_and_components,
 )
 from rct229.schema.schema_utils import quantify_rmd
-from rct229.schema.validate import schema_validate_rmd
+from rct229.schema.validate import schema_validate_rpd
 
 TEST_RMD = {
     "id": "test_rmd",
@@ -185,6 +185,9 @@ TEST_RMD_COPIED_DIFF_SWH_EQUIP_LEN["service_water_heating_equipment"].append(
     }
 )
 
+TEST_RMD_NO_MATCH = copy.deepcopy(TEST_RMD)
+TEST_RMD_NO_MATCH["pumps"][1]["loop_or_piping"] = "SWH Piping a"
+
 
 TEST_RPD_COPIED_DIFF_SWH_EQUIP_LEN_FULL = {
     "id": "229",
@@ -198,21 +201,21 @@ TEST_RMD_COPIED_DIFF_SWH_EQUIP_LEN_FULL = quantify_rmd(
 
 
 def test__TEST_RPD__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RPD_FULL)
+    schema_validation_result = schema_validate_rpd(TEST_RPD_FULL)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
 
 
 def test__TEST_RPD_Copied__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RPD_COPIED_FULL)
+    schema_validation_result = schema_validate_rpd(TEST_RPD_COPIED_FULL)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
 
 
 def test__TEST_RPD_Copied_diff_len__is_valid():
-    schema_validation_result = schema_validate_rmd(
+    schema_validation_result = schema_validate_rpd(
         TEST_RPD_COPIED_DIFF_SWH_EQUIP_LEN_FULL
     )
     assert schema_validation_result[
@@ -233,8 +236,12 @@ def test__compare_swh_dist_systems_and_components__pump_not_matched():
     assert compare_swh_dist_systems_and_components(
         TEST_RMD, TEST_RMD_COPIED, "AppG Used By TCDs", "SWH Distribution 2"
     ) == [
-        "path: $.pumps[Pump 2].loop_or_piping: index context data: SWH Piping 2 does not equal to compare context data: SWH Piping a"
-    ]  # Although solar_thermal_system id doesn't match, this error message isn't included in the output list because the value of `AppG Used By TCDs` under the `service_water_heating_equipment` in the extra schema is `unknown`
+        "path: $.service_water_heating_distribution_systems[SWH Distribution 2].service_water_piping[0]: data object SWH Piping 2 in index context does not match the one SWH Piping a in compare context",
+        "path: $.service_water_heating_distribution_systems[SWH Distribution 2].service_water_piping[0].child[0]: data object SWH Piping Child 2 in index context does not match the one SWH Piping Child a in compare context",
+        "path: $.service_water_heating_equipment[SWH Equipment 2].solar_thermal_systems[0]: data object Solar Thermal System 3 in index context does not match the one Solar Thermal System 4 in compare context",
+        "path: $.service_water_heating_equipment[SWH Equipment 2].solar_thermal_systems[1]: data object Solar Thermal System 4 in index context does not match the one Solar Thermal System a in compare context",
+        "path: $.pumps[Pump 2].loop_or_piping: index context data: SWH Piping 2 does not equal to compare context data: SWH Piping a",
+    ]  # The change was because we added index to match the id - if id failed matching, the object will be reported in the mismatch report.
 
 
 def test__compare_swh_dist_systems_and_components__diff_swh_equipment_length():

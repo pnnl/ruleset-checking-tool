@@ -2,7 +2,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_fu
     get_number_of_floors,
 )
 from rct229.schema.schema_utils import quantify_rmd
-from rct229.schema.validate import schema_validate_rmd
+from rct229.schema.validate import schema_validate_rpd
 
 TEST_RMD_HAS_NOF = {
     "id": "test_rmd",
@@ -139,7 +139,7 @@ TEST_RMD_FLOOR_NAMES_UNIT = quantify_rmd(TEST_RMD_FLOOR_NAMES)[
 
 
 def test__TEST_RPD__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RMD_FLOOR_NAMES)
+    schema_validation_result = schema_validate_rpd(TEST_RMD_FLOOR_NAMES)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"

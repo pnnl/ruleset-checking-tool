@@ -3,7 +3,7 @@ import os
 from pathlib import Path
 
 from rct229.schema.schema_utils import quantify_rmd
-from rct229.schema.validate import schema_validate_rmd
+from rct229.schema.validate import schema_validate_rpd
 from rct229.utils.utility_functions import (
     has_cooling_system,
     has_fan_system,
@@ -127,7 +127,7 @@ TEST_RMD_FAIL = {
 
 
 def test__TEST_RPD__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RMD_PASS)
+    schema_validation_result = schema_validate_rpd(TEST_RMD_PASS)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"

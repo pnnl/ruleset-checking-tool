@@ -4,7 +4,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_equipment_type impo
     get_swh_equipment_type,
 )
 from rct229.schema.schema_utils import quantify_rmd
-from rct229.schema.validate import schema_validate_rmd
+from rct229.schema.validate import schema_validate_rpd
 from rct229.utils.assertions import RCTFailureException
 
 TEST_RMD = {
@@ -73,9 +73,16 @@ TEST_RMD = {
         {
             "id": "swh equipment 8",
             "distribution_system": "distribution system 8",
-            "tank": {"id": "Tank 8", "type": "OTHER"},
-            "heater_type": "OTHER",
+            "tank": {"id": "Tank 8", "type": "CONSUMER_STORAGE"},
+            "heater_type": "CONVENTIONAL",
             "heater_fuel_type": "PROPANE",
+        },
+        {
+            "id": "swh equipment 9",
+            "distribution_system": "distribution system 9",
+            "tank": {"id": "Tank 9", "type": "OTHER"},
+            "heater_type": "OTHER",
+            "heater_fuel_type": "OTHER",
         },
     ],
     "type": "BASELINE_0",
@@ -91,7 +98,7 @@ TEST_RMD = quantify_rmd(TEST_RPD_FULL)["ruleset_model_descriptions"][0]
 
 
 def test__TEST_RPD__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RPD_FULL)
+    schema_validation_result = schema_validate_rpd(TEST_RPD_FULL)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
@@ -167,12 +174,22 @@ def test__get_swh_equipment_type__other():
     )
 
 
-def test__get_swh_equipment_type__wrong_fuel_type():
-    with pytest.raises(
-        RCTFailureException,
-        match="Fuel type must be one of `ELECTRICITY`, `NATURAL_GAS`, `FUEL_OIL`.",
-    ):
+def test__get_swh_equipment_type__propane_storage():
+    assert (
         get_swh_equipment_type(
             TEST_RMD,
             "swh equipment 8",
+        )
+        == GetSWHEquipmentType.PROPANE_STORAGE
+    )
+
+
+def test__get_swh_equipment_type__wrong_fuel_type():
+    with pytest.raises(
+        RCTFailureException,
+        match="Fuel type must be one of `ELECTRICITY`, `NATURAL_GAS`, `PROPANE`, `FUEL_OIL`.",
+    ):
+        get_swh_equipment_type(
+            TEST_RMD,
+            "swh equipment 9",
         )

@@ -41,7 +41,7 @@ class Section22Rule29(RuleDefinitionListIndexedBase):
             each_rule=Section22Rule29.CondensingFluidLoopRule(),
             index_rmd=BASELINE_0,
             id="22-29",
-            description="For chilled-water systems served by chiller(s) and does not serve baseline System-11, condenser-water pump power shall be 19 W/gpm.",
+            description="Baseline chilled water loops that do not use purchased chilled water and do not serve computer rooms (i.e., do not serve baseline system type 11) shall have a condenser water pump power of 19 W/gpm at design conditions.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.11 Heat Rejection (Systems 7, 8, 11, 12, and 13)",
             is_primary_rule=True,

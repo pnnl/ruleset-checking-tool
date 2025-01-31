@@ -62,10 +62,11 @@ class Section11Rule9(RuleDefinitionListIndexedBase):
             building_area_type_and_uses = {}
             for (
                 bat_type,
-                SWH_use_id,
+                SWH_use_ids,
             ) in shw_bat_uses_dict_b.items():
                 building_area_type_and_uses[bat_type] = {}
-                building_area_type_and_uses[bat_type]["id"] = SWH_use_id
+                building_area_type_and_uses[bat_type]["id"] = bat_type
+                building_area_type_and_uses[bat_type]["swh_use_ids"] = SWH_use_ids
 
             return [
                 produce_ruleset_model_description(
@@ -85,7 +86,7 @@ class Section11Rule9(RuleDefinitionListIndexedBase):
                 )
 
             def applicability_check(self, context, calc_vals, data):
-                swh_BAT_id_list_b = context.BASELINE_0["id"]
+                swh_bat_id_list_b = context.BASELINE_0["swh_use_ids"]
                 service_water_heating_uses_dict_b = data[
                     "service_water_heating_uses_dict_b"
                 ]
@@ -93,21 +94,21 @@ class Section11Rule9(RuleDefinitionListIndexedBase):
                 return all(
                     [
                         True
-                        if service_water_heating_uses_dict_b[swh_bat_id] > 0.0
+                        if service_water_heating_uses_dict_b[swh_use_id] > 0.0
                         else False
-                        for swh_bat_id in swh_BAT_id_list_b
+                        for swh_use_id in swh_bat_id_list_b
                     ]
                 )
 
             def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
-                swh_BAT_id_list_b = context.BASELINE_0["id"]
+                swh_bat_id_list_b = context.BASELINE_0["swh_use_ids"]
                 service_water_heating_uses_dict_b = data[
                     "service_water_heating_uses_dict_b"
                 ]
 
                 swh_bat = ", ".join(
                     swh_bat_id
-                    for swh_bat_id in swh_BAT_id_list_b
+                    for swh_bat_id in swh_bat_id_list_b
                     if service_water_heating_uses_dict_b[swh_bat_id] > 0.0
                 )
 

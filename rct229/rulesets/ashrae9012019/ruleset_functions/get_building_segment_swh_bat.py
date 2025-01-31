@@ -19,6 +19,9 @@ def get_building_segment_swh_bat(
 ) -> str:
     """
     This function determines the SWH BAT for the given building segment.
+    Returns None if there is no service water heating uses and no service_water_heating_building_area_type under building segment,
+    UNDETERMINED if there are service water heating uses but no service_water_heating_building_area_type under building segment,
+    A bat type if there is service_water_heating_building_area_type under building segment
 
     Parameters
     ----------

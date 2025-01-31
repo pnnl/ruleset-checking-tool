@@ -27,7 +27,7 @@ class Section11Rule17(RuleDefinitionListIndexedBase):
             ),
             each_rule=Section11Rule17.RMDRule(),
             index_rmd=PROPOSED,
-            id="11-6",
+            id="11-17",
             description="All buildings that will have service water heating loads must include those loads in the simulation.",
             ruleset_section_title="Service Water Heating",
             standard_section="Table G3.1 #1, proposed column, (a)",
