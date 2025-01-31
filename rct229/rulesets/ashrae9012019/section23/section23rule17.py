@@ -12,7 +12,6 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types i
     get_baseline_system_types,
 )
 from rct229.schema.config import ureg
-from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import getattr_
 from rct229.utils.pint_utils import CalcQ
 
@@ -21,24 +20,19 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_4,
 ]
 
-HEATPUMP_AUX_HEAT_HIGH_SHUTOFF_THRESHOLD = 40 * ureg("F")
-HeatpumpAuxilliaryHeatOptions = SchemaEnums.schema_enums[
-    "HeatpumpAuxilliaryHeatOptions"
-]
 
-
-class Section23Rule1(RuleDefinitionListIndexedBase):
-    """Rule 1 of ASHRAE 90.1-2019 Appendix G Section 23 (Air-side)"""
+class Section23Rule17(RuleDefinitionListIndexedBase):
+    """Rule 17 of ASHRAE 90.1-2019 Appendix G Section 23 (Air-side)"""
 
     def __init__(self):
-        super(Section23Rule1, self).__init__(
+        super(Section23Rule17, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section23Rule1.HVACRule(),
+            each_rule=Section23Rule17.HVACRule(),
             index_rmd=BASELINE_0,
-            id="23-1",
-            description="System 2 and 4 - Electric air-source heat pumps shall be modeled with electric auxiliary heat and an outdoor air thermostat. The systems shall be controlled to energize auxiliary heat only when the outdoor air temperature is less than 40°F.",
+            id="23-17",
+            description="System 2 and 4 - Electric air-source heat pumps shall shall be modeled to continue to operate while auxiliary heat is energized.",
             ruleset_section_title="HVAC - Airside",
             standard_section="G3.1.3.1 Heat Pumps (Systems 2 and 4)",
             is_primary_rule=True,
@@ -85,7 +79,7 @@ class Section23Rule1(RuleDefinitionListIndexedBase):
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section23Rule1.HVACRule, self).__init__(
+            super(Section23Rule17.HVACRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
@@ -93,41 +87,29 @@ class Section23Rule1(RuleDefinitionListIndexedBase):
                     "$": ["heating_system"],
                 },
                 precision={
-                    "heatpump_auxilliary_heat_high_shutoff_temperature": {
+                    "heatpump_low_shutoff_b": {
                         "precision": 0.1,
-                        "unit": "F",
+                        "unit": "K",
                     },
                 },
             )
 
         def get_calc_vals(self, context, data=None):
             hvac_b = context.BASELINE_0
+            baseline_system_types_dict = data["baseline_system_types_dict"]
 
             heating_system_b = hvac_b["heating_system"]
-            heatpump_aux_high_temp_shutoff = getattr_(
-                heating_system_b,
-                "HeatingSystem",
-                "heatpump_auxilliary_heat_high_shutoff_temperature",
-            )
-            heatpump_aux_heat_energy_source = getattr_(
-                heating_system_b, "HeatingSystem", "heatpump_auxilliary_heat_type"
+            heatpump_low_shutoff_b = getattr_(
+                heating_system_b, "HeatingSystem", "heatpump_low_shutoff_temperature"
             )
             return {
-                "heatpump_aux_high_temp_shutoff": CalcQ(
-                    "temperature", heatpump_aux_high_temp_shutoff
+                "heatpump_low_shutoff_temperature": CalcQ(
+                    "temperature", heatpump_low_shutoff_b
                 ),
-                "heatpump_aux_heat_energy_source": heatpump_aux_heat_energy_source,
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
-            heatpump_aux_high_temp_shutoff = calc_vals["heatpump_aux_high_temp_shutoff"]
-            heatpump_aux_heat_energy_source = calc_vals[
-                "heatpump_aux_heat_energy_source"
-            ]
-
-            return (
-                heatpump_aux_high_temp_shutoff
-                <= HEATPUMP_AUX_HEAT_HIGH_SHUTOFF_THRESHOLD
-                and heatpump_aux_heat_energy_source
-                == HeatpumpAuxilliaryHeatOptions.ELECTRIC_RESISTANCE
-            )
+            heatpump_low_shutoff_b = calc_vals["heatpump_low_shutoff_temperature"]
+            # The heat pump low shutoff temperature equal to the flag of -999, which indicates that there is no low-temperature shutoff for the heatpump
+            # The minimum temperature is not finalized and is up for discussion.  Must coordinate with the note provided in the schema element: HeatingSystem.heatpump_low_shutoff_temperature
+            return heatpump_low_shutoff_b <= -999 * ureg("F")
