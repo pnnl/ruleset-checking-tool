@@ -3336,15 +3336,6 @@
         "AppG P_RMD Equals U_RMD": true,
         "AppG B_RMD Equals P_RMD": false,
         "AppG B_RMDs Same": "unknown"
-      },
-      "humidification_type": {
-        "Description": "Humidification type",
-        "Data Type": "<HumidificationOptions>",
-        "RMD Test": false,
-        "AppG Used By TCDs": true,
-        "AppG P_RMD Equals U_RMD": true,
-        "AppG B_RMD Equals P_RMD": false,
-        "AppG B_RMDs Same": "unknown"
       }
     }
   },
@@ -7199,17 +7190,6 @@
         "Description": "Indicates whether the water heater has electrical ignition",
         "Data Type": "Boolean",
         "Notes": "From CBECC-Com.",
-        "RMD Test": "unknown",
-        "AppG Used By TCDs": "unknown",
-        "AppG P_RMD Equals U_RMD": "unknown",
-        "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown",
-        "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
-      },
-      "heater_type": {
-        "Description": "Service water heater type",
-        "Data Type": "<ServiceWaterHeaterOptions>",
         "RMD Test": "unknown",
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
