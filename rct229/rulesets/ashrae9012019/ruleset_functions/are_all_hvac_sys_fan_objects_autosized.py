@@ -31,9 +31,7 @@ def are_all_hvac_sys_fan_objs_autosized(rmd: dict, hvac_id: str) -> bool:
     return (
         all(
             [
-                getattr_(
-                    supply_fan, "supply_fan", "is_airflow_calculated"
-                )
+                getattr_(supply_fan, "supply_fan", "is_airflow_calculated")
                 for supply_fan in find_all("$.fan_system.supply_fans[*]", hvac)
             ]
         )
