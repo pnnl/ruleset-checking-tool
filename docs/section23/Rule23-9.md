@@ -54,7 +54,7 @@
           - get the terminal minimum volume flowrate: `min_volume_p = terminal_p.minimum_airflow`
           - multiply each value in the hourly schedule by the minimum airflow rate, and append this to the list of minimum volume flowrates: `minimum_volume_list_p.append([i * min_volume_p for i in operation_schedule_hourly_values_p]`
         - sum all of the values for each hour, so that the resulting list is a list of the sum of minimum flowrates across all terminals each hour of the year: `min_volume_flow_tot_p = [sum(values) for values in zip(*minimum_volume_list_p)]`
-        - find the maximum value in the list: `min_volume_p = max(min_volume_flow_tot_p)`
+        - find the minimum non-zero value in the list: `min_volume_p = min(filter(lambda x: x != 0, min_volume_flow_tot_p))`
  
   **Rule Assertion:**  
   
