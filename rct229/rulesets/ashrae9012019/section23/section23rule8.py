@@ -37,7 +37,7 @@ class PRM9012019Rule45r08(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule45r08.HVACRule(),
             index_rmd=BASELINE_0,
-            id="section23rule8",
+            id="23-8",
             description="System 5-8 and 11 - part load VAV fan power shall be modeled using either method 1 or 2 in Table G3.1.3.15. This rule will only validate data points from Method-1 Part-load Fan Power Data. However, both methods are equivalent. When modeling inputs are based on Method 2, values should be converted to Method 1 when writing to RMD.",
             ruleset_section_title="HVAC - Airside",
             standard_section="Section G3.1.3.15 VAV Fan Part-Load Performance (Systems 5 through 8 and 11)",

@@ -36,7 +36,7 @@ class PRM9012019Rule36t85(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule36t85.CoolingFluidLoopRule(),
             index_rmd=BASELINE_0,
-            id="section22rule34",
+            id="22-34",
             description="Baseline chilled water loops that do not use purchased chilled water shall have the plant equipment capacity sized based on coincident loads.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.2.2 Building System-Specific Modeling Requirements for the Baseline model",

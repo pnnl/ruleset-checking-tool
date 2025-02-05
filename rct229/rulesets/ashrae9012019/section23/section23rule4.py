@@ -28,7 +28,7 @@ class PRM9012019Rule68z84(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule68z84.RuleSetModelInstanceRule(),
             index_rmd=BASELINE_0,
-            id="section23rule4",
+            id="23-4",
             description="Baseline systems 5 & 7 serving lab spaces per G3.1.1c shall reduce lab exhaust and makeup air during unoccupied periods to 50% of zone peak airflow, the minimum outdoor airflow, or rate required to comply with minimum accreditation standards whichever is larger.",
             ruleset_section_title="HVAC - Airside",
             standard_section="Exception to G3.1.3.13 VAV Minimum Flow Set Points (Systems 5 and 7)",

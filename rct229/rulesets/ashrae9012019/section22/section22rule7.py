@@ -32,7 +32,7 @@ class PRM9012019Rule52s13(RuleDefinitionBase):
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            id="section22rule7",
+            id="22-7",
             description="Baseline chilled water systems that do not use purchased chilled water shall be modeled as primary/secondary systems.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.10 Chilled-Water Pumps (Systems 7, 8, 11, 12, and 13)",

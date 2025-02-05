@@ -21,7 +21,7 @@ class PRM9012019Rule28i68(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule28i68.HVACRule(),
             index_rmd=PROPOSED,
-            id="section19rule33",
+            id="19-33",
             description="Where no heating and/or cooling system is to be installed, and a heating or cooling system is being simulated only to meet the requirements described in Section G3.1-10 HVAC Systems proposed column c and d, heating and/or cooling system fans shall simulated to be cycled ON and OFF to meet heating and cooling loads during occupied hours in the proposed design.",
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1-10 HVAC Systems proposed column c and d",

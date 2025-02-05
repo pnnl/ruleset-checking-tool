@@ -37,7 +37,7 @@ class PRM9012019Rule68h16(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule68h16.HeatRejectionRule(),
             index_rmd=BASELINE_0,
-            id="section22rule19",
+            id="22-19",
             description="The baseline heat rejection device shall be controlled to maintain a constant leaving water temperature.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.11 Heat Rejection (System 7, 8, 11, 12 and 13)",

@@ -34,7 +34,7 @@ class PRM9012019Rule50m61(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule50m61.BuildingRule(),
             index_rmd=BASELINE_0,
-            id="section5rule39",
+            id="5-39",
             description="U-factor of the baseline door is based on Tables G3.4-1 through G3.4-8 for the applicable door type (swinging or non-swinging) and envelope conditioning category.",
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline model",

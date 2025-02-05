@@ -28,7 +28,7 @@ class PRM9012019Rule79u84(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule79u84.CondensingFluidLoopRule(),
             index_rmd=BASELINE_0,
-            id="section22rule30",
+            id="22-30",
             description="Baseline chilled water loops that do not use purchased chilled water and do serve computer rooms (i.e., baseline system type 11) shall have a condenser water pump power of 22 W/gpm at design conditions.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.11 Heat Rejection (Systems 7, 8, 11, 12, and 13)",

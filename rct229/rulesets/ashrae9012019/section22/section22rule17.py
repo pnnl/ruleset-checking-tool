@@ -24,7 +24,7 @@ class PRM9012019Rule04g06(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule04g06.HeatRejectionRule(),
             index_rmd=BASELINE_0,
-            id="section22rule17",
+            id="22-17",
             description="The baseline heat rejection device shall have an efficiency of 38.2 gpm/hp.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section 22 CHW&CW Loop",

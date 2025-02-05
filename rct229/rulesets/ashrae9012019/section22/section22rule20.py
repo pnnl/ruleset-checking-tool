@@ -40,7 +40,7 @@ class PRM9012019Rule71o81(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule71o81.HeatRejectionRule(),
             index_rmd=BASELINE_0,
-            id="section22rule20",
+            id="22-20",
             description="The baseline heat rejection device leaving water temperature shall be modeled as specified in Table G3.1.3.11.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.11 Heat Rejection (System 7, 8, 11, 12 and 13)",

@@ -43,7 +43,7 @@ class PRM9012019Rule71f87(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule71f87.HVACRule(),
             index_rmd=PROPOSED,
-            id="section23rule15",
+            id="23-15",
             description="Dehumidification reheat shall be the same as the system heating type.",
             ruleset_section_title="HVAC - Airside",
             standard_section="G3.1.3.18 Dehumidification (Systems 3 through 8 and 11, 12, and 13)",

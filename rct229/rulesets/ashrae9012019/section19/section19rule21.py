@@ -61,7 +61,7 @@ class PRM9012019Rule07w16(RuleDefinitionListIndexedBase):
             },
             each_rule=PRM9012019Rule07w16.RMDRule(),
             index_rmd=BASELINE_0,
-            id="section19rule21",
+            id="19-21",
             description="Baseline systems with >= 5,000 CFM supply air and >= 70 %OA shall have energy recovery modeled in the baseline design model. The following exceptions apply:1. Systems serving spaces that are not cooled and that are heated to less than 60°F.2. Systems exhausting toxic, flammable, or corrosive fumes or paint or dust. This exception shall only be used if exhaust air energy recovery is not used in the proposed design.3. Commercial kitchen hoods (grease) classified as Type 1 by NFPA 96. This exception shall only be used if exhaust air energy recovery is not used in the proposed design.4. Heating systems in Climate Zones 0 through 3.5. Cooling systems in Climate Zones 3C, 4C, 5B, 5C, 6B, 7, and 8.6. Where the largest exhaust source is less than 75% of the design outdoor airflow. This exception shall only be used if exhaust air energy recovery is not used in the proposed design.7. Systems requiring dehumidification that employ energy recovery in series with the cooling coil. This exception shall only be used if exhaust air energy recovery and series-style energy recovery coils are not used in the proposed design.",
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1.2.10 and exceptions 1-7",

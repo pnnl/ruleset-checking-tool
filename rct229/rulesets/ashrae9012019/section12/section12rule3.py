@@ -35,7 +35,7 @@ class PRM9012019rule79w60(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019rule79w60.RuleSetModelDescriptionRule(),
             index_rmd=PROPOSED,
-            id="section12rule3",
+            id="12-3",
             description="When receptacle controls are specified in the proposed building design for spaces where not required by Standard 90.1 2019 Section 8.4.2, the hourly receptacle schedule shall be reduced as specified in Standard 90.1-2019 Table G3.1 Section 12 Proposed Building Performance column.",
             ruleset_section_title="Receptacle",
             standard_section="Table G3.1-12 Proposed Building Performance column",

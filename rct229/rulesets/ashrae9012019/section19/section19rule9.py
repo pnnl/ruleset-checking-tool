@@ -28,7 +28,7 @@ class PRM9012019Rule23q51(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule23q51.HVACRule(),
             index_rmd=BASELINE_0,
-            id="section19rule9",
+            id="19-9",
             description="Air economizers shall not be included in baseline HVAC Systems 1, 2, 9, and 10.",
             ruleset_section_title="HVAC - General",
             standard_section="G3.1.2.6",

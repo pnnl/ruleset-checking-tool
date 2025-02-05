@@ -45,7 +45,7 @@ class PRM9012019Rule03q09(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule03q09.PrimaryCoolingFluidLoopRule(),
             index_rmd=BASELINE_0,
-            id="section22rule25",
+            id="22-25",
             description="Baseline chilled water loops that do not use purchased chilled water and do not serve computer rooms (i.e., do not serve baseline system type 11) shall have a constant-flow primary pump power of 9 W/gpm at design conditions.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.10 Chilled-water pumps (Systems 7, 8, 11, 12, and 13)",

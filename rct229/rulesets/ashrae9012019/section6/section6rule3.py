@@ -28,7 +28,7 @@ class PRM9012019Rule73a47(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule73a47.BuildingSegmentRule(),
             index_rmd=PROPOSED,
-            id="section6rule3",
+            id="6-3",
             description="Where a complete lighting system exists, the actual lighting power for each building_segment shall be used in the model. Where a lighting system has been designed and submitted with design documents, lighting power shall be determined in accordance with Sections 9.1.3 and 9.1.4. Where lighting neither exists nor is submitted with design documents, lighting shall comply with but not exceed the requirements of Section 9. Lighting power shall be determined in accordance with the Building Area Method (Section 9.5.1).",
             ruleset_section_title="Lighting",
             standard_section="Section G3.1-6(a)(b)(c) Modeling Requirements for the Proposed Design",

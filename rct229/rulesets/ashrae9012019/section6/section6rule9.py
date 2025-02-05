@@ -26,7 +26,7 @@ class PRM9012019Rule22c86(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule22c86.RulesetModelInstanceRule(),
             index_rmd=PROPOSED,
-            id="section6rule9",
+            id="6-9",
             description="Proposed building is modeled with other programmable lighting controls through a 10% schedule reduction in buildings less than 5,000sq.ft.",
             ruleset_section_title="Lighting",
             standard_section="Section G3.1-6(i) Modeling Requirements for the Proposed design",

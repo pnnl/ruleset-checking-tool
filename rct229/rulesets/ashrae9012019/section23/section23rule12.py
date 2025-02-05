@@ -21,7 +21,7 @@ class PRM9012019Rule71k98(PartialRuleDefinition):
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            id="section23rule12",
+            id="23-12",
             description="System 11 in heating mode supply air temperature shall be modulated to maintain space temp and airflow shall be fixed at minimum airflow.",
             ruleset_section_title="HVAC - Airside",
             standard_section="G3.1.3.17 System 11 Supply Air Temperature and Fan Control",

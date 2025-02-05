@@ -19,7 +19,7 @@ class PRM9012019Rule72a03(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule72a03.BuildingRule(),
             index_rmd=BASELINE_0,
-            id="section5rule2",
+            id="5-2",
             description="The building shall be modeled so that it does not shade itself",
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building",

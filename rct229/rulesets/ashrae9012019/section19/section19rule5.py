@@ -15,7 +15,7 @@ class PRM9012019Rule75k92(RuleDefinitionBase):
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=False, PROPOSED=True
             ),
-            id="section19rule5",
+            id="19-5",
             description="Unmet load hours for the proposed design shall not exceed 300 (of the 8760 hours simulated).",
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1.2.3",

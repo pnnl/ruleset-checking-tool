@@ -21,7 +21,7 @@ class PRM9012019Rule03a79(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule03a79.RuleSetModelDescriptionRule(),
             index_rmd=PROPOSED,
-            id="section16rule4",
+            id="16-4",
             description="The elevator cab lights shall be modeled with the same schedule as the elevator motor.",
             ruleset_section_title="Elevators",
             standard_section="Section G3.1",

@@ -29,7 +29,7 @@ class PRM9012019Rule73r04(RuleDefinitionListIndexedBase):
             required_fields={"$": ["weather"], "weather": ["climate_zone"]},
             each_rule=PRM9012019Rule73r04.BuildingRule(),
             index_rmd=BASELINE_0,
-            id="section5rule13",
+            id="5-13",
             description="Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same in the baseline as in the proposed design. ",
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5 Building Envelope Modeling Requirements for the Baseline building",

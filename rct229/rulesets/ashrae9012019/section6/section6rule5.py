@@ -25,7 +25,7 @@ class PRM9012019Rule08a45(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(PRM9012019Rule08a45, self).__init__(
-            id="section6rule5",
+            id="6-5",
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),

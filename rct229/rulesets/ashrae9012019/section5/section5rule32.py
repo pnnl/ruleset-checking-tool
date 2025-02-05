@@ -31,7 +31,7 @@ class PRM9012019Rule78r30(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule78r30.BuildingRule(),
             index_rmd=PROPOSED,
-            id="section5rule32",
+            id="5-32",
             description="The proposed roof surfaces shall be modeled using the same solar reflectance as in the user model if the aged test data are available, or equal to 0.7 default reflectance",
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-1(a) Building Envelope Modeling Requirements for the Proposed design",

@@ -21,7 +21,7 @@ class PRM9012019Rule55z67(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule55z67.RuleSetModelDescriptionRule(),
             index_rmd=BASELINE_0,
-            id="section16rule5",
+            id="16-5",
             description="When included in the proposed design, the baseline elevator cab ventilation fan and lights shall operate continuously",
             ruleset_section_title="Elevators",
             standard_section="Section G3.1",

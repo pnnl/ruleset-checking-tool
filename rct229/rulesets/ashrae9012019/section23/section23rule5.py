@@ -27,7 +27,7 @@ class PRM9012019Rule69z86(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule69z86.TerminalRule(),
             index_rmd=BASELINE_0,
-            id="section23rule5",
+            id="23-5",
             description="For baseline systems 6 and 8, Fans in parallel VAV fan-powered boxes shall run as the first stage of heating before the reheat coil is energized.",
             ruleset_section_title="HVAC - Airside",
             standard_section="G3.1.3.14 Fan Power and Control (Systems 6 and 8)",

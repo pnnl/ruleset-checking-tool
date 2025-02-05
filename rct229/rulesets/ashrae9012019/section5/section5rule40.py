@@ -28,7 +28,7 @@ class PRM9012019Rule33l08(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule33l08.BuildingRule(),
             index_rmd=BASELINE_0,
-            id="section5rule40",
+            id="5-40",
             description="Opaque roof surfaces that are not regulated (not part of opaque building envelope) must be modeled with the same thermal emittance and solar reflectance in the baseline as in the proposed design. ",
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5 Building Envelope Modeling Requirements for the Baseline building",

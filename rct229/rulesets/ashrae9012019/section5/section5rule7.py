@@ -27,7 +27,7 @@ class PRM9012019Rule20r05(RuleDefinitionListIndexedBase):
             required_fields={"$": ["weather"], "weather": ["climate_zone"]},
             each_rule=PRM9012019Rule20r05.BuildingRule(),
             index_rmd=BASELINE_0,
-            id="section5rule7",
+            id="5-7",
             description="Baseline above-grade wall assemblies must conform with assemblies detailed in  Appendix A (Steel-framed A3.3) ",
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building",

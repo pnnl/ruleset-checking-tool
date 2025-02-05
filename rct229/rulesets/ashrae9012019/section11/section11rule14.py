@@ -25,7 +25,7 @@ class PRM9012019Rule62z26(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule62z26.RMDRule(),
             index_rmd=BASELINE_0,
-            id="section11rule14",
+            id="11-14",
             description="Where recirculation pumps are used to ensure prompt availability of service water-heating at the end use, the energy consumption of such pumps shall be calculated explicitly.",
             ruleset_section_title="Service Water Heating",
             standard_section="Table G3.1 #11, baseline column, (f)",

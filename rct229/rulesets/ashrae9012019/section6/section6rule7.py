@@ -23,7 +23,7 @@ class PRM9012019Rule66m62(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule66m62.ZoneRule(),
             index_rmd=PROPOSED,
-            id="section6rule7",
+            id="6-7",
             description="Proposed building is modeled with daylighting controls directly or through schedule adjustments.",
             ruleset_section_title="Lighting",
             standard_section="Section G3.1-6(h) Lighting: Modeling Requirements for the Proposed design",

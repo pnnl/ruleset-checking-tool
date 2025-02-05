@@ -17,7 +17,7 @@ class PRM9012019Rule34f57(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule34f57.RulesetModelInstanceRule(),
             index_rmd=PROPOSED,
-            id="section21rule1",
+            id="21-1",
             description="For systems using purchased hot water or steam, the heating source shall be modeled as purchased hot water or steam in both the proposed design and baseline building design. If any system in the proposed design uses purchased hot water or steam, all baseline systems with hot water coils shall use the same type of purchased hot water or steam.",
             ruleset_section_title="HVAC - Water Side",
             standard_section="Section G3.1.1.3 Baseline HVAC System Requirements for Systems Utilizing Purchased Chilled Water and/or Purchased Heat",

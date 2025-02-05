@@ -30,7 +30,7 @@ class PRM9012019Rule29j06(RuleDefinitionListIndexedBase):
             required_fields={"$": ["weather"], "weather": ["climate_zone"]},
             each_rule=PRM9012019Rule29j06.BuildingRule(),
             index_rmd=BASELINE_0,
-            id="section5rule10",
+            id="5-10",
             description="Baseline floor assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-9.",
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building",

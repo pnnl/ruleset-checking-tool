@@ -35,7 +35,7 @@ class PRM9012019Rule86n98(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule86n98.HeatingFluidLoopRule(),
             index_rmd=BASELINE_0,
-            id="section21rule3",
+            id="21-3",
             description="Heating hot water plant capacity shall be based on coincident loads.",
             ruleset_section_title="HVAC - Water Side",
             standard_section="Section G3.1.2.2 Building System-Specific Modeling Requirements for the Baseline model",

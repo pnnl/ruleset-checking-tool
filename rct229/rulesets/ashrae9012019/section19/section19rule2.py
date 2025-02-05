@@ -45,7 +45,7 @@ class PRM9012019Rule93f21(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule93f21.FluidLoopRule(),
             index_rmd=BASELINE_0,
-            id="section19rule2",
+            id="19-2",
             description="Baseline building plant capacities shall be based on coincident loads.",
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1.2.2",

@@ -15,7 +15,7 @@ class PRM9012019Rule97a53(RuleDefinitionBase):
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            id="section19rule6",
+            id="19-6",
             description=" Unmet load hours for the baseline design shall not exceed 300 (of the 8760 hours simulated).",
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1.2.3",

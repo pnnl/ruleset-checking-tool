@@ -28,7 +28,7 @@ class PRM9012019Rule58s22(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule58s22.HeatingFluidLoopRule(),
             index_rmd=BASELINE_0,
-            id="section21rule8",
+            id="21-8",
             description="When the baseline building requires boilers, (for baseline system type = 1,5,7,11 and 12), HWST for the baseline building shall be reset using an outdoor air dry-bulb reset schedule. 180F at 20F OAT, 150Fat 50F OAT, ramped linearly between 150F and 180F.",
             ruleset_section_title="HVAC - Water Side",
             standard_section="Section G3.1.3.3 Building System-Specific Modeling Requirements for the Baseline model",

@@ -18,7 +18,7 @@ class PRM9012019Rule45p36(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule45p36.BuildingRule(),
             index_rmd=BASELINE_0,
-            id="section5rule33",
+            id="5-33",
             description="The infiltration modeling method in the baseline includes adjustment for weather and building operation.",
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(b) Building Envelope Modeling Requirements for the Proposed design and Baseline",

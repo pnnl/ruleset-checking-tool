@@ -20,7 +20,7 @@ class PRM9012019Rule40i28(PartialRuleDefinition):
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            id="section5rule38",
+            id="5-38",
             description="It is acceptable to use either an annual average ground temperature or monthly average ground temperatures for calculation of heat loss through below-grade walls and basement floors.",
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-14(b) Building Envelope Modeling Requirements for the Proposed design and Baseline",

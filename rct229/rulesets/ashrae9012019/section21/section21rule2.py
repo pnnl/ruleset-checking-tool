@@ -17,7 +17,7 @@ class PRM9012019Rule83m55(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule83m55.RulesetModelInstanceRule(),
             index_rmd=PROPOSED,
-            id="section21rule2",
+            id="21-2",
             description="For purchased HW/steam in the proposed model, the baseline shall have the same number of pumps as proposed.",
             ruleset_section_title="HVAC - Water Side",
             standard_section="Section G3.1.1.3 Baseline HVAC System Requirements for Systems Utilizing Purchased Chilled Water and/or Purchased Heat",

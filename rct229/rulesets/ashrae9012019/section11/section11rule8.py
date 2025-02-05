@@ -34,7 +34,7 @@ class PRM9012019Rule40i48(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule40i48.RMDRule(),
             index_rmd=BASELINE_0,
-            id="section11rule8",
+            id="11-8",
             description="One system per building area type shall be modeled in the baseline.",
             ruleset_section_title="Service Water Heating",
             standard_section="Table G3.1 #11, baseline column, a + b",

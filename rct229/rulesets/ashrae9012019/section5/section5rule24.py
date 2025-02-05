@@ -22,7 +22,7 @@ class PRM9012019Rule78j13(RuleDefinitionListIndexedBase):
             required_fields={"$": ["weather"], "weather": ["climate_zone"]},
             each_rule=PRM9012019Rule78j13.BuildingRule(),
             index_rmd=BASELINE_0,
-            id="section5rule24",
+            id="5-24",
             description="If skylight area in the proposed design is 3% or less of the roof surface, the skylight area in baseline shall be equal to that in the proposed design.",
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(e) Building Envelope Modeling Requirements for the Baseline building",

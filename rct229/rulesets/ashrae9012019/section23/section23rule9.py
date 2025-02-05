@@ -29,7 +29,7 @@ class PRM9012019Rule46w18(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule46w18.HVACRule(),
             index_rmd=BASELINE_0,
-            id="section23rule9",
+            id="23-9",
             description="System 11 Minimum volume setpoint shall be the largest of 50% of the maximum design airflow rate, the minimum ventilation airflow rate or the airflow required to comply with codes or accredidation standards.",
             ruleset_section_title="HVAC - Airside",
             standard_section="Exception to G3.1.3.13",

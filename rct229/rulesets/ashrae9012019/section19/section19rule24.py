@@ -25,7 +25,7 @@ class PRM9012019Rule54e25(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule54e25.HVACRule(),
             index_rmd=PROPOSED,
-            id="section19rule24",
+            id="19-24",
             description="Schedules for HVAC fans that provide outdoor air for ventilation shall run continuously whenever spaces are occupied in the proposed design.",
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1-4 Schedules for the proposed building excluding exception #1 and Section G3.1.2.4.",

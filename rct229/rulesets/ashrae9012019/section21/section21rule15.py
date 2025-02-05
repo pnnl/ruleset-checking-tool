@@ -17,7 +17,7 @@ class PRM9012019Rule62u16(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule62u16.RulesetModelInstanceRule(),
             index_rmd=BASELINE_0,
-            id="section21rule15",
+            id="21-15",
             description="When the baseline building is modeled with a hot water plant, served by purchased HW system, the hot water pump power shall be 14 W/gpm.",
             ruleset_section_title="HVAC - Water Side",
             standard_section="Section G3.1.1.3 Baseline HVAC System Requirements for Systems Utilizing Purchased Chilled Water and/or Purchased Heat",

@@ -27,7 +27,7 @@ class PRM9012019Rule44u85(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule44u85.TerminalRule(),
             index_rmd=BASELINE_0,
-            id="section23rule3",
+            id="23-3",
             description="System 5, 6, 7 and 8 minimum volume setpoint shall be 30% of zone peak airflow, minimum outdoor airflow, or rate required to comply with minium accreditation standards whichever is larger.",
             ruleset_section_title="HVAC - Airside",
             standard_section="Section G3.1.3.13 VAV Minimum Flow Set Points (Systems 5 and 7) and Section G3.1.3.14 Fan Power and Control (Systems 6 and 8)",

@@ -18,7 +18,7 @@ class PRM9012019Rule82y74(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule82y74.SubsurfaceRule(),
             index_rmd=PROPOSED,
-            id="section5rule18",
+            id="5-18",
             description="Manually controlled dynamic glazing shall use the average of the minimum and maximum SHGC and VT.",
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(a)5 Building Envelope Modeling Requirements for the Proposed design",

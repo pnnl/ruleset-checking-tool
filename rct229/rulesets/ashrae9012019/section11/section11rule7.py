@@ -32,7 +32,7 @@ class PRM9012019Rule49y39(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule49y39.RMDRule(),
             index_rmd=BASELINE_0,
-            id="section11rule7",
+            id="11-7",
             description="Except in buildings that will have no service water heating loads, the service water heating system type in the baseline building design shall be as specified in Table G3.1.1-2 for each building area type in the proposed design.",
             ruleset_section_title="Service Water Heating",
             standard_section="Table G3.1 #11, baseline column, a & b",

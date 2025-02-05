@@ -40,7 +40,7 @@ class PRM9012019rule66e91(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019rule66e91.RMDRule(),
             index_rmd=BASELINE_0,
-            id="section12rule2",
+            id="12-2",
             description="Depending on the space type, receptacle controls may be required by 90.1 Section 8.4.2. Receptacle schedules shall be modeled identically to the proposed design except when receptacle controls are specified in the proposed design for spaces where not required by Section 8.4.2.",
             ruleset_section_title="Receptacle",
             standard_section="Table G3.1-12 Proposed Building Performance column",

@@ -54,7 +54,7 @@ class PRM9012019Rule06a67(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule06a67.PumpRule(),
             index_rmd=BASELINE_0,
-            id="section21rule10",
+            id="21-10",
             description="When the building is modeled with HHW plant (served by either boiler(s) or purchased hot water/steam), the hot water pump shall be modeled as riding the pump curve if the hot water system serves less than 120,000 ft^2 otherwise it shall be modeled with a VFD.",
             ruleset_section_title="HVAC - Water Side",
             standard_section="Section G3.1.3.5 Building System-Specific Modeling Requirements for the Baseline model",

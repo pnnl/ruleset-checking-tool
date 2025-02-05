@@ -43,7 +43,7 @@ class PRM9012019Rule41z21(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule41z21.PrimaryFluidLoopRule(),
             index_rmd=BASELINE_0,
-            id="section22rule10",
+            id="22-10",
             description="Baseline chilled water systems with a cooling capacity less than 300 tons shall have the secondary pump modeled as riding the pump curve. Baseline chilled water systems with a cooling capacity of 300 tons or more shall have the secondary pump modeled with variable-speed drives.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.10 Chilled-water pumps (System 7, 8, 11, 12 and 13)",

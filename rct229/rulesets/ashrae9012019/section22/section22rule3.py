@@ -41,7 +41,7 @@ class PRM9012019Rule58a51(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule58a51.ChillerFluidLoopRule(),
             index_rmd=BASELINE_0,
-            id="section22rule3",
+            id="22-3",
             description="Baseline chilled water loops that do not use purchased cooling and do not serve any computer rooms (i.e., do not serve baseline system type 11) shall have the chilled water supply temperature reset based on outdoor dry-bulb temperature.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.9 Chilled-water supply temperature reset (System 7, 8, 11, 12 and 13)",

@@ -43,7 +43,7 @@ class PRM9012019Rule76q85(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule76q85.RMDRule(),
             index_rmd=BASELINE_0,
-            id="section11rule10",
+            id="11-10",
             description="The service water heating system type in the baseline building design shall match the minimum efficiency requirements in Section 7.4.2.",
             ruleset_section_title="Service Water Heating",
             standard_section="Table G3.1 #11, baseline column, a & b",

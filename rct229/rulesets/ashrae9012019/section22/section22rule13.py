@@ -22,7 +22,7 @@ class PRM9012019Rule92d16(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule92d16.HeatRejectionRule(),
             index_rmd=BASELINE_0,
-            id="section22rule13",
+            id="22-13",
             description="The baseline heat rejection device shall be an axial-fan open circuit cooling tower.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section 22 CHW&CW Loop",

@@ -25,7 +25,7 @@ class PRM9012019Rule95r49(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule95r49.HVACRule(),
             index_rmd=BASELINE_0,
-            id="section19rule30",
+            id="19-30",
             description="For Systems 6 and 8, only the terminal-unit fan and reheat coil shall be energized to meet heating set point during unoccupied hours in the baseline design.",
             ruleset_section_title="HVAC - General",
             standard_section="Exception to Section G3.1.2.4",

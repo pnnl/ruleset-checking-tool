@@ -20,7 +20,7 @@ class PRM9012019Rule60m79(RuleDefinitionBase):
             rmds_used_optional=produce_ruleset_model_description(
                 BASELINE_90=True, BASELINE_180=True, BASELINE_270=True
             ),
-            id="section1rule4",
+            id="1-4",
             description="The PCI shall be less than or equal to the PCIt when calculated in accordance with Standard 90.1 2019, Section 4.2.1.1",
             ruleset_section_title="Performance Calculations",
             standard_section="Section 4.2.1.1",

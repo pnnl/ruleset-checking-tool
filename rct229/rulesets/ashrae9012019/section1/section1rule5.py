@@ -22,7 +22,7 @@ class PRM9012019Rule86h31(RuleDefinitionBase):
             rmds_used_optional=produce_ruleset_model_description(
                 BASELINE_90=True, BASELINE_180=True, BASELINE_270=True
             ),
-            id="section1rule5",
+            id="1-5",
             description="When on-site renewable energy generation exceeds the thresholds defined in Section 4.2.1.1, the methodology defined in this section shall be used to calculate the PCI.",
             ruleset_section_title="Performance Calculations",
             standard_section="Section 4.2.1.1",

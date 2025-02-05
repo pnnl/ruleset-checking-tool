@@ -34,7 +34,7 @@ class PRM9012019Rule47f22(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule47f22.HVACRule(),
             index_rmd=BASELINE_0,
-            id="section23rule11",
+            id="23-11",
             description="System 11 Supply air temperature shall be reset from minimum supply air temp at 50% cooling load to room temp at 0% cooling load.  OR the SAT is reset higher by 5F under minimum cooling load conditions.",
             ruleset_section_title="HVAC - Airside",
             standard_section="G3.1.3.17 System 11 Supply Air Temperature and Fan Control & G3.1.3.12 OR Section G3.1.3.12 Supply Air Temperature Reset.",

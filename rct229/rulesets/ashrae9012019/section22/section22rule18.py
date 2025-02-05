@@ -23,7 +23,7 @@ class PRM9012019Rule38d92(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule38d92.HeatRejectionRule(),
             index_rmd=BASELINE_0,
-            id="section22rule18",
+            id="22-18",
             description="The baseline heat rejection device shall be modeled with variable speed fan control.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section 22 CHW&CW Loop",

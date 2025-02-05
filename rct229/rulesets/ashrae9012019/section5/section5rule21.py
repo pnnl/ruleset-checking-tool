@@ -24,7 +24,7 @@ class PRM9012019Rule44m70(RuleDefinitionListIndexedBase):
             required_fields={"$": ["weather"], "weather": ["climate_zone"]},
             each_rule=PRM9012019Rule44m70.BuildingRule(),
             index_rmd=BASELINE_0,
-            id="section5rule21",
+            id="5-21",
             description="Subsurface that is not regulated (not part of building envelope) must be modeled with the same area, U-factor and SHGC in the baseline as in the proposed design.",
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(a) Building Envelope Modeling Requirements for the Baseline building",

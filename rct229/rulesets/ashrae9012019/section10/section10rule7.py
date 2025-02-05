@@ -50,7 +50,7 @@ class PRM9012019Rule34l50(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule34l50.HVACRule(),
             index_rmd=BASELINE_0,
-            id="section10rule7",
+            id="10-7",
             description="Baseline shall be modeled with the COPnfcooling HVAC system efficiency per Tables G3.5.1-G3.5.6.  Where multiple HVAC zones or residential spaces are combined into a single thermal block the cooling efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces.",
             ruleset_section_title="HVAC General",
             standard_section="Section Table G3.5.1-G3.5.6 Performance Rating Method Minimum Efficiency Requirements",

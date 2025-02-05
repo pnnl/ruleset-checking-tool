@@ -39,7 +39,7 @@ class PRM9012019Rule01b91(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule01b91.PrimaryFluidlLoop(),
             index_rmd=BASELINE_0,
-            id="section22rule36",
+            id="22-36",
             description="Baseline chilled water loops that do not use purchased chilled water shall be modeled with a constant flow primary loop and a variable flow secondary loop.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.10 Chilled-Water Pumps (Systems 7, 8, 11, 12, and 13)",

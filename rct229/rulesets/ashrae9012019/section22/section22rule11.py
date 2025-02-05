@@ -37,7 +37,7 @@ class PRM9012019Rule57w94(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule57w94.ChillerFluidLoopRule(),
             index_rmd=BASELINE_0,
-            id="section22rule11",
+            id="22-11",
             description="Baseline chilled water systems that do not use purchased chilled water shall have a variable-flow secondary pump power of 13 W/gpm at design conditions.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.10 Chilled-water pumps (System 7, 8, 11, 12 and 13)",

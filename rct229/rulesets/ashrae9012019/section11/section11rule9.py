@@ -18,7 +18,7 @@ class PRM9012019Rule93n40(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule93n40.RMDRule(),
             index_rmd=BASELINE_0,
-            id="section11rule9",
+            id="11-9",
             description="The baseline system must be sized according to Standard 90.1 2019, Section 7.4.1.",
             ruleset_section_title="Service Water Heating",
             standard_section="Table G3.1 #11, baseline column, a",

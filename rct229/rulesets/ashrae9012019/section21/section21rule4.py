@@ -34,7 +34,7 @@ class PRM9012019Rule63n48(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule63n48.BoilerRule(),
             index_rmd=BASELINE_0,
-            id="section21rule4",
+            id="21-4",
             description="When baseline building does not use purchased heat, baseline systems 1,5,7,11,12 shall be modeled with natural draft boilers.",
             ruleset_section_title="HVAC - Water Side",
             standard_section="Section G3.1.3.2 Building System-Specific Modeling Requirements for the Baseline model",

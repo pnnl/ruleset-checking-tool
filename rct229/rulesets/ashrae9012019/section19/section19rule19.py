@@ -49,7 +49,7 @@ class PRM9012019Rule51d17(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule51d17.HVACRule(),
             index_rmd=BASELINE_0,
-            id="section19rule19",
+            id="19-19",
             description="For baseline systems 9 and 10 the system fan electrical power (Pfan) for supply, return, exhaust, and relief shall be CFMs × 0.3, where, CFMs = the baseline system maximum design supply fan airflow rate, cfm. If modeling a non-mechanical cooling fan is required by Section G3.1.2.8.2, there is a fan power allowance of Pfan = CFMnmc × 0.054, where, CFMnmc = the baseline non-mechanical cooling fan airflow, cfm for the non-mechanical cooling.",
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1.2.9",

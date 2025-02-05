@@ -21,7 +21,7 @@ class PRM9012019Rule58x03(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule58x03.HVACRule(),
             index_rmd=PROPOSED,
-            id="section19rule31",
+            id="19-31",
             description="HVAC fans in the proposed design model shall remain on during unoccupied hours in systems primarily serving computer rooms.",
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1-4 Schedules exception #3 for the proposed building",

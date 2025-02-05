@@ -15,7 +15,7 @@ class PRM9012019Rule99f07(RuleDefinitionBase):
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            id="section22rule12",
+            id="22-12",
             description="The heat rejection system shall be a single loop, modeled with a single cooling tower.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section 22 CHW&CW Loop",

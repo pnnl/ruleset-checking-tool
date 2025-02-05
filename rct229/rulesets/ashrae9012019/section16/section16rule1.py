@@ -22,7 +22,7 @@ class PRM9012019Rule98t42(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule98t42.ElevatorRule(),
             index_rmd=BASELINE_0,
-            id="section16rule1",
+            id="16-1",
             description="The elevator peak motor power shall be calculated according to the equation in Table G3.1-16.",
             ruleset_section_title="Elevators",
             standard_section="Section G3.1",

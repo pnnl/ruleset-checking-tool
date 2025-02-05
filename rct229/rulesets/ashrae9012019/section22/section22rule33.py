@@ -32,7 +32,7 @@ class PRM9012019Rule88r57(RuleDefinitionBase):
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            id="section22rule33",
+            id="22-33",
             description="Baseline chilled water systems that do not use purchased chilled water shall have only one set of primary/secondary chilled water loops.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.2 Building System-Specific Modeling Requirements for the Baseline model",

@@ -50,7 +50,7 @@ class PRM9012019Rule92r39(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule92r39.ChillerFluidLoopRule(),
             index_rmd=BASELINE_0,
-            id="section22rule1",
+            id="22-1",
             description="Baseline chilled water design supply temperature shall be modeled at 44F.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.8 Chilled-water design supply temperature (System 7, 8, 11, 12 and 13)",

@@ -13,7 +13,7 @@ class PRM9012019Rule68r93(PartialRuleDefinition):
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            id="section22rule41",
+            id="22-41",
             description="Baseline chilled water systems that use purchased chilled water shall be modeled with a single chilled water loop.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section 22 CHW&CW Loop",

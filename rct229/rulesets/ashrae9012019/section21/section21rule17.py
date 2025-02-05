@@ -40,7 +40,7 @@ class PRM9012019Rule35d81(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule35d81.BoilerRule(),
             index_rmd=BASELINE_0,
-            id="section21rule17",
+            id="21-17",
             description="All boilers in the baseline building design shall be modeled at the minimum efficiency levels, both part load and full load, in accordance with Tables G3.5.6.",
             ruleset_section_title="HVAC - Water Side",
             standard_section="Section G3.1.2.1 General Baseline HVAC System Requirements - Equipment Efficiencies",

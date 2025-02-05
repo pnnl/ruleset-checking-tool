@@ -67,7 +67,7 @@ class PRM9012019Rule18y74(RuleDefinitionListIndexedBase):
             },
             each_rule=PRM9012019Rule18y74.RuleSetModelInstanceRule(),
             index_rmd=BASELINE_0,
-            id="section4rule11",
+            id="4-11",
             description="Fan schedules shall be modeled identically in the baseline and proposed unless Table G3.1 Section 4 baseline exceptions are applicable. Fan Schedules may be allowed to differ when Section 4 Baseline Column Exceptions #1, #2 Or #3 are applicable.",
             ruleset_section_title="Schedules Setpoints",
             standard_section="Section G3.1-4 Schedule Modeling Requirements for the Proposed design and Baseline building",

@@ -40,7 +40,7 @@ class PRM9012019Rule52x31(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule52x31.HVACRule(),
             index_rmd=BASELINE_0,
-            id="section23rule2",
+            id="23-2",
             description="For baseline systems 5-8 and 11, the SAT is reset higher by 5F under minimum cooling load conditions.",
             ruleset_section_title="HVAC - Airside",
             standard_section="Section G3.1.3.12 Supply Air Temperature Reset (Systems 5 through 8 and 11)",

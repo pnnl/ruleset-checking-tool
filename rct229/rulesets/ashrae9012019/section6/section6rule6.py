@@ -15,7 +15,7 @@ class PRM9012019Rule02c29(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule02c29.BuildingRule(),
             index_rmd=BASELINE_0,
-            id="section6rule6",
+            id="6-6",
             description="Baseline building is not modeled with daylighting control",
             ruleset_section_title="Lighting",
             standard_section="Section G3.1-6 Modeling Requirements for the baseline building",

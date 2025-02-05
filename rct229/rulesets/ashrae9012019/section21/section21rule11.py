@@ -49,7 +49,7 @@ class PRM9012019Rule59p62(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule59p62.HeatingFluidLoopRule(),
             index_rmd=BASELINE_0,
-            id="section21rule11",
+            id="21-11",
             description="The baseline building design uses boilers or purchased hot water, the hot water pumping system shall be modeled as primary-only.",
             ruleset_section_title="HVAC - Water Side",
             standard_section="Section G3.1.3.5 Building System-Specific Modeling Requirements for the Baseline model",

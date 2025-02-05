@@ -34,7 +34,7 @@ class PRM9012019Rule04f07(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule04f07.ZoneRule(),
             index_rmd=BASELINE_0,
-            id="section19rule16",
+            id="19-16",
             description="For zones served by baseline system types 9 & 10, if the proposed design includes a fan or fans sized and controlled to provide non-mechanical cooling, the baseline building design shall include a separate fan to provide nonmechanical cooling, sized and controlled the same as the proposed design.",
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1.2.8.2",

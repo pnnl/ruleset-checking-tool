@@ -30,7 +30,7 @@ class PRM9012019Rule62j00(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule62j00.HVACRule(),
             index_rmd=BASELINE_0,
-            id="section23rule7",
+            id="23-7",
             description="Systems 6&8: Supply air temperature setpoint shall be constant at the design condition.",
             ruleset_section_title="HVAC - Airside",
             standard_section="Section G3.1.3.14 Fan Power and Control (Systems 6 and 8)",

@@ -21,7 +21,7 @@ class PRM9012019Rule88f26(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule88f26.HVACRule(),
             index_rmd=BASELINE_0,
-            id="section19rule27",
+            id="19-27",
             description="HVAC fans shall remain on during unoccupied hours in spaces that have health and safety mandated minimum ventilation requirements during unoccupied hours in the baseline design.",
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1-4 Schedules exception #2 for the proposed building and Section G3.1.2.4",

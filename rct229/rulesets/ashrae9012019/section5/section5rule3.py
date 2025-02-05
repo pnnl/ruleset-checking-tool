@@ -27,7 +27,7 @@ class PRM9012019Rule73o42(RuleDefinitionListIndexedBase):
             required_fields={"$": ["weather"], "weather": ["climate_zone"]},
             each_rule=PRM9012019Rule73o42.BuildingRule(),
             index_rmd=BASELINE_0,
-            id="section5rule3",
+            id="5-3",
             description="Baseline roof assemblies must conform with assemblies detailed in Appendix A",
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building",

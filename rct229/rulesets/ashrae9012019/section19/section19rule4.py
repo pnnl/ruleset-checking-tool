@@ -26,7 +26,7 @@ class PRM9012019Rule74p61(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule74p61.RuleSetModelInstanceRule(),
             index_rmd=BASELINE_0,
-            id="section19rule4",
+            id="19-4",
             description="For baseline cooling sizing runs in residential dwelling units, the infiltration, occupants, lighting, gas and electricity using equipment hourly schedule shall be the same as the most used hourly weekday schedule from the annual simulation.",
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1.2.2.1 Exception",

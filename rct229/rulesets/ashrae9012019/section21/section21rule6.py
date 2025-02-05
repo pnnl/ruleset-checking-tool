@@ -38,7 +38,7 @@ class PRM9012019Rule47b05(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule47b05.HeatingFluidLoopRule(),
             index_rmd=BASELINE_0,
-            id="section21rule6",
+            id="21-6",
             description="When baseline building includes two boilers each shall stage as required by load.",
             ruleset_section_title="HVAC - Water Side",
             standard_section="Section G3.1.3.2 Building System-Specific Modeling Requirements for the Baseline model",

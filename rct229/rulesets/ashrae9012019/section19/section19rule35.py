@@ -27,7 +27,7 @@ class PRM9012019Rule40n43(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule40n43.RMDRule(),
             index_rmd=BASELINE_0,
-            id="section19rule35",
+            id="19-35",
             description="For baseline systems serving only laboratory spaces that are prohibited from recirculating return air by code or accreditation standards, the baseline system shall be modeled as 100% outdoor air. Rule only applies when baseline outdoor air CFM is modeled as greater than proposed design outdoor air CFM.",
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1-10 HVAC Systems proposed column c and d",

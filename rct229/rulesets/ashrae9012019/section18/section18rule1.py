@@ -37,7 +37,7 @@ class PRM9012019Rule77j55(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule77j55.RMDRule(),
             index_rmd=BASELINE_0,
-            id="section18rule1",
+            id="18-1",
             description="HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h).",
             ruleset_section_title="HVAC - System Zone Assignment",
             standard_section="Table G3.1.1",

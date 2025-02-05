@@ -21,7 +21,7 @@ class PRM9012019Rule09g49(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule09g49.HVACRule(),
             index_rmd=PROPOSED,
-            id="section19rule26",
+            id="19-26",
             description="HVAC fans shall remain on during unoccupied hours in spaces that have health and safety mandated minimum ventilation requirements during unoccupied hours in the proposed design.",
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1-4 Schedules exception #2 for the proposed building and Section G3.1.2.4 Appendix G Section Reference: None",

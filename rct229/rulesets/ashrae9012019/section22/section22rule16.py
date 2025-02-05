@@ -40,7 +40,7 @@ class PRM9012019Rule81f32(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule81f32.HeatRejectionRule(),
             index_rmd=BASELINE_0,
-            id="section22rule16",
+            id="22-16",
             description="The baseline condenser water design supply temperature shall be calculated using the cooling tower approach to the 0.4% evaporation design wet-bulb temperature, valid for evaporation design wet-bulb temperatures from 55°F to 90°F.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.11 Heat Rejection (System 7, 8, 11, 12 and 13)",

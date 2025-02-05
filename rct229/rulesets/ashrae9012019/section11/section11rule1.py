@@ -21,7 +21,7 @@ class PRM9012019Rule72v93(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule72v93.RMDRule(),
             index_rmd=BASELINE_0,
-            id="section11rule1",
+            id="11-1",
             description="Where a complete service water-heating system exists, the proposed design shall reflect the actual system type.Where a service water-heating system has been designed the service waterheating type shall be consistent with design documents. Where no service water-heating system exists or has been designed and submitted with design documents but the building will have service water-heating loads,a service water-heating system shall be modeled that matches the system type in the baseline building design",
             ruleset_section_title="Service Water Heating",
             standard_section="Table G3.1 #11, proposed column, a & b",

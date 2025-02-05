@@ -30,7 +30,7 @@ class PRM9012019Rule18u93(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule18u93.HVACRule(),
             index_rmd=BASELINE_0,
-            id="section23rule10",
+            id="23-10",
             description="System 11 Fan volume shall be reset from 100% airflow at 100% cooling load to minimum airflow at 50% cooling load. ",
             ruleset_section_title="HVAC - Airside",
             standard_section="G3.1.3.17 System 11 Supply Air Temperature and Fan Control",

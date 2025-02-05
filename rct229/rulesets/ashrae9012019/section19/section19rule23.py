@@ -34,7 +34,7 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule60o81.RMDRule(),
             index_rmd=BASELINE_0,
-            id="section19rule23",
+            id="19-23",
             description="For cooling sizing runs, schedules for internal loads, including those used for infiltration, occupants, lighting, gas and electricity using equipment, shall be equal to the highest hourly value used in the annual simulation runs and applied to the entire design day. For heating sizing runs, schedules for internal loads, including those used for occupants, lighting, gas and electricity using equipment, shall be equal to the lowest hourly value used in the annual simulation runs, and schedules for infiltration shall be equal to the highest hourly value used in the annual simulation runs and applied to the entire design day.",
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1.2.2.1 excluding exception",

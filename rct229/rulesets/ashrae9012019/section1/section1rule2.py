@@ -21,7 +21,7 @@ class PRM9012019Rule63e94(RuleDefinitionBase):
             rmds_used_optional=produce_ruleset_model_description(
                 BASELINE_90=True, BASELINE_180=True, BASELINE_270=True
             ),
-            id="section1rule2",
+            id="1-2",
             description="The performance of the proposed design is calculated in accordance with Standard 90.1-2019 Appendix G, where Performance Cost Index = Proposed building performance (PBP) /Baseline building performance (BBP), where both the PBP and the BBP include all end-use load components associated with the building when calculating the Performance Cost Index (PCI).",
             ruleset_section_title="Performance Calculations",
             standard_section="Section G1.2.2",

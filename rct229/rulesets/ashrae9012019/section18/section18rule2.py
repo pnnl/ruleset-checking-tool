@@ -69,7 +69,7 @@ class PRM9012019Rule51v53(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule51v53.RMDRule(),
             index_rmd=BASELINE_0,
-            id="section18rule2",
+            id="18-2",
             description="Does the modeled system serve the appropriate zones (one system per zone for system types 1, 2, 3, 4, 9, 10, 11, 12, and 13 and one system per floor for system types 5, 6, 7, and 8, with the exception of system types 5 or 7 serving laboratory spaces - these systems should serve ALL laboratory zones in the buidling).",
             ruleset_section_title="HVAC - System Zone Assignment",
             standard_section="Section 18 HVAC_SystemZoneAssignment",

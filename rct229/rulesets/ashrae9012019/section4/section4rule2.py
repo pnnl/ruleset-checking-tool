@@ -37,7 +37,7 @@ class PRM9012019Rule85i93(RuleDefinitionListIndexedBase):
             },
             each_rule=PRM9012019Rule85i93.RuleSetModelInstanceRule(),
             index_rmd=BASELINE_0,
-            id="section4rule2",
+            id="4-2",
             description="Humidity Control Setpoints shall be the same for proposed design and baseline building design.",
             ruleset_section_title="Schedules Setpoints",
             standard_section="Section G3.1-4 Schedule Modeling Requirements for the Proposed design and Baseline building",

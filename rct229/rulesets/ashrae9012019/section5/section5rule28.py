@@ -35,7 +35,7 @@ class PRM9012019Rule42c42(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule42c42.BuildingRule(),
             index_rmd=BASELINE_0,
-            id="section5rule28",
+            id="5-28",
             description="Skylight SHGC properties shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value and the applicable skylight percentage.",
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(e) Building Envelope Modeling Requirements for the Baseline building",

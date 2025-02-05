@@ -18,7 +18,7 @@ FAIL_MSG = "More than one BPF value was used in the project."
 
 
 class PRM9012019Rule73j65(RuleDefinitionListIndexedBase):
-    """Rule 73j65 of ASHRAE 90.1-2019 Appendix G"""
+    """Rule 73j65 of ASHRAE 90.1-2019 Appendix G Section 1 (Performance Calculations)"""
 
     def __init__(self):
         super(PRM9012019Rule73j65, self).__init__(
@@ -39,7 +39,7 @@ class PRM9012019Rule73j65(RuleDefinitionListIndexedBase):
             },
             index_rmd=BASELINE_0,
             each_rule=PRM9012019Rule73j65.RMDRule(),
-            id="section1rule1",
+            id="1-1",
             description="Building performance factors shall be from Standard 90.1-2019, Table 4.2.1.1, based on the building area type and climate zone. For building area types not listed in Table 4.2.1.1 “All others.” shall be used to determine the BPF.",
             ruleset_section_title="Performance Calculations",
             standard_section="Section G4.2.1.1",
@@ -103,6 +103,11 @@ class PRM9012019Rule73j65(RuleDefinitionListIndexedBase):
                     bpf_bat_dict_area = bpf_building_area_type_dict[bpf_bat]["area"]
                     total_area += bpf_bat_dict_area
                     bpf_bat_sum_prod += expected_bpf * bpf_bat_dict_area
+            only_undetermined = (
+                len(bpf_building_area_type_dict) == 1
+                and "UNDETERMINED" in bpf_building_area_type_dict
+            )
+            if not only_undetermined:
                 assert_(
                     total_area > 0, "The `total_area ` value must be greater than 0."
                 )

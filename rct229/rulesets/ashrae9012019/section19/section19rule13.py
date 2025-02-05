@@ -57,7 +57,7 @@ class PRM9012019Rule77j17(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule77j17.HVACRule(),
             index_rmd=BASELINE_0,
-            id="section19rule13",
+            id="19-13",
             description="For baseline system types 1-8 and 11-13, system design supply airflow rates shall be based on a supply-air-to-room temperature set-point difference of 20°F or the minimum outdoor airflow rate, or the airflow rate required to comply with applicable codes or accreditation standards, whichever is greater. For systems with multiple zone thermostat setpoints, use the design set point that will result in the lowest supply air cooling set point or highest supply air heating set point.",
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1.2.8.1 and Exception 1",

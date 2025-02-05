@@ -24,7 +24,7 @@ class PRM9012019Rule45j93(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule45j93.HVACRule(),
             index_rmd=BASELINE_0,
-            id="section19rule36",
+            id="19-36",
             description="Baseline systems required to model energy recovery per G3.1.2.10 shall be modeled with a 50% enthalpy recovery ratio.",
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1-5(a)5 Building Envelope Modeling Requirements for the Proposed design",

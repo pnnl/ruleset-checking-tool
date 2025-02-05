@@ -33,7 +33,7 @@ class PRM9012019Rule79i34(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule79i34.HVACRule(),
             index_rmd=BASELINE_0,
-            id="section23rule16",
+            id="23-16",
             description="Systems 5 - 8, the baseline system shall be modeled with preheat coils controlled to a fixed set point 20F less than the design room heating temperature setpoint.",
             ruleset_section_title="HVAC - Airside",
             standard_section="Section G3.1.3.19 Preheat Coils (Systems 5 through 8)",

@@ -54,7 +54,7 @@ class PRM9012019rule60e48(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019rule60e48.RuleSetModelDescriptionRule(),
             index_rmd=BASELINE_0,
-            id="section12rule4",
+            id="12-4",
             description="Computer room equipment schedules shall be modeled as a constant fraction of the peak design load per the following monthly schedule: Months 1, 5, 9 — 25%; Months 2, 6, 10 — 50%; Months 3, 7, 11 — 75%; Months 4, 8, 12 — 100%",
             ruleset_section_title="Receptacle",
             standard_section="Section G3.1.3.16",

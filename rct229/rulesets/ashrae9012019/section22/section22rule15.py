@@ -23,7 +23,7 @@ class PRM9012019Rule79g01(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule79g01.HeatRejectionRule(),
             index_rmd=BASELINE_0,
-            id="section22rule15",
+            id="22-15",
             description="The baseline heat rejection device shall have the approach calculated according to the equation 25.72 - (0.24*WB), valid for evaporation design wet-bulb temperatures from 55°F to 90°F.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section 22 CHW&CW Loop",

@@ -25,7 +25,7 @@ class PRM9012019Rule60d49(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule60d49.HVACRule(),
             index_rmd=BASELINE_0,
-            id="section19rule20",
+            id="19-20",
             description="The calculated system fan power shall be distributed to supply, return, exhaust, and relief fans in the same proportion as the proposed design.",
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1.2.9",

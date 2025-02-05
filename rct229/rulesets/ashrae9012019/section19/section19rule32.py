@@ -21,7 +21,7 @@ class PRM9012019Rule31y73(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule31y73.HVACRule(),
             index_rmd=BASELINE_0,
-            id="section19rule32",
+            id="19-32",
             description="HVAC fans in the baseline design model shall remain on during unoccupied hours in systems primarily serving computer rooms in the B_RMD.",
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1-4 Schedules exception #3 in the proposed column",

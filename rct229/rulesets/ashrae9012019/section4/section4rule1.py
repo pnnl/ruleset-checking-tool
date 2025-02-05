@@ -35,7 +35,7 @@ class PRM9012019Rule96q77(RuleDefinitionListIndexedBase):
             },
             each_rule=PRM9012019Rule96q77.RuleSetModelInstanceRule(),
             index_rmd=BASELINE_0,
-            id="section4rule1",
+            id="4-1",
             description="Temperature Control Setpoints shall be the same for proposed design and baseline building design.",
             ruleset_section_title="Schedules Setpoints",
             standard_section="Section G3.1-4 Schedule Modeling Requirements for the Proposed design and Baseline building",

@@ -17,7 +17,7 @@ class PRM9012019Rule29g28(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule29g28.RulesetModelInstanceRule(),
             index_rmd=BASELINE_0,
-            id="section21rule14",
+            id="21-14",
             description="When the baseline building is modeled with a hot water plant, served by purchased HW system, hot water supply temperature reset is not modeled.",
             ruleset_section_title="HVAC - Water Side",
             standard_section="Section G3.1.1.3 Baseline HVAC System Requirements for Systems Utilizing Purchased Chilled Water and/or Purchased Heat",

@@ -51,7 +51,7 @@ class PRM9012019Rule22a24(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule22a24.HeatingFluidLoopRule(),
             index_rmd=BASELINE_0,
-            id="section21rule12",
+            id="21-12",
             description="The baseline building design uses boilers or purchased hot water, the hot water pumping system shall be modeled with continuous variable flow.",
             ruleset_section_title="HVAC - Water Side",
             standard_section="Section G3.1.3.5 Building System-Specific Modeling Requirements for the Baseline model",

@@ -16,7 +16,7 @@ class PRM9012019Rule29n09(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule29n09.RMDRule(),
             index_rmd=BASELINE_0,
-            id="section11rule6",
+            id="11-6",
             description="Piping losses shall not be modeled.",
             ruleset_section_title="Service Water Heating",
             standard_section="Table G3.1 #11, baseline column, i",

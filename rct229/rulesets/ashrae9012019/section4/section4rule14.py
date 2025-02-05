@@ -23,7 +23,7 @@ class PRM9012019Rule66c61(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule66c61.SpaceRule(),
             index_rmd=PROPOSED,
-            id="section4rule14",
+            id="4-14",
             description="A computer room is defined as a room whose primary function is to house equipment for the processing and storage of electronic data and that has a design electronic data equipment power density exceeding 20 W/ft2 of conditioned floor area.",
             ruleset_section_title="Schedules Setpoints",
             standard_section="Section 3 Definitions",

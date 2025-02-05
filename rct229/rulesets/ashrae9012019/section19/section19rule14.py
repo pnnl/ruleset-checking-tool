@@ -50,7 +50,7 @@ class PRM9012019Rule60f12(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule60f12.HVACRule(),
             index_rmd=BASELINE_0,
-            id="section19rule14",
+            id="19-14",
             description="For baseline system types 1-8 and 11-13, if return or relief fans are specified in the proposed design, the baseline building design shall also be modeled with fans serving the same functions and sized for the baseline system supply fan air quantity less the minimum outdoor air, or 90% of the supply fan air quantity, whichever is larger.",
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1.2.8.1 Excluding Exceptions 1 and 2",

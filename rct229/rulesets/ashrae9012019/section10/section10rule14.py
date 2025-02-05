@@ -52,7 +52,7 @@ class PRM9012019Rule10p28(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule10p28.HVACRule(),
             index_rmd=BASELINE_0,
-            id="section10rule14",
+            id="10-14",
             description="Baseline shall be modeled with the heating HVAC system efficiency per Tables G3.5.1-G3.5.6 (applies only to the heating efficiency of baseline furnaces and heat pumps). Where multiple HVAC zones or residential spaces are combined into a single thermal block the heating efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces.",
             ruleset_section_title="HVAC General",
             standard_section="Section G3.1.2.1 Equipment Efficiencies",

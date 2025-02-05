@@ -34,7 +34,7 @@ class PRM9012019Rule82a90(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule82a90.BoilerRule(),
             index_rmd=BASELINE_0,
-            id="section21rule18",
+            id="21-18",
             description="For baseline building, fossil fuel systems shall be modeled using natural gas as their fuel source. Exception: For fossil fuel systems where natural gas is not available for the proposed building site as determined by the rating authority, the baseline HVAC systems shall be modeled using propane as their fuel.",
             ruleset_section_title="HVAC - Water Side",
             standard_section="Section G3.1.2.1 General Baseline HVAC System Requirements - Equipment Efficiencies",

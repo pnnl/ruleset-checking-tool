@@ -22,7 +22,7 @@ class PRM9012019Rule34h06(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule34h06.ElevatorRule(),
             index_rmd=BASELINE_0,
-            id="section16rule6",
+            id="16-6",
             description="When included in the proposed design, the baseline elevator cab ventilation fan power shall be 0.33 W/cfm.",
             ruleset_section_title="Elevators",
             standard_section="Table G3.1-16 Baseline Building Performance",

@@ -27,7 +27,7 @@ class PRM9012019Rule46p73(RuleDefinitionListIndexedBase):
             required_fields={"$": ["weather"], "weather": ["climate_zone"]},
             each_rule=PRM9012019Rule46p73.BuildingRule(),
             index_rmd=BASELINE_0,
-            id="section5rule11",
+            id="5-11",
             description=" Baseline slab-on-grade assemblies must conform with assemblies detailed in Appendix A (Unheated Slabs A6).",
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building",

@@ -18,7 +18,7 @@ class PRM9012019Rule44t17(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule44t17.HVACRule(),
             index_rmd=BASELINE_0,
-            id="section19rule22",
+            id="19-22",
             description="Baseline systems modeled with exhaust air energy recovery shall allow bypass or control heat recovery system to permit air economizer operation.",
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1.2.2",

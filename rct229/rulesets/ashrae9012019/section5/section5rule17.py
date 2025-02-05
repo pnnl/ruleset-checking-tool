@@ -17,7 +17,7 @@ class PRM9012019Rule87g56(RuleDefinitionListIndexedBase):
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            id="section5rule17",
+            id="5-17",
             description="The baseline fenestration area for an existing building shall equal the existing fenestration area prior to the proposed work.",
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(c) Building Envelope Modeling Requirements for the Baseline building",

@@ -38,7 +38,7 @@ class PRM9012019Rule80o45(RuleDefinitionListIndexedBase):
             required_fields={"$": ["weather"], "weather": ["climate_zone"]},
             each_rule=PRM9012019Rule80o45.BuildingRule(),
             index_rmd=BASELINE_0,
-            id="section5rule16",
+            id="5-16",
             description="The vertical fenestration shall be distributed on each face of the building in the same proportion as in the proposed design.",
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(c) Building Envelope Modeling Requirements for the Baseline building",

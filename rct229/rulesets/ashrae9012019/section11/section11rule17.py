@@ -27,7 +27,7 @@ class PRM9012019rule63z32(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019rule63z32.RMDRule(),
             index_rmd=PROPOSED,
-            id="section11rule17",
+            id="11-17",
             description="All buildings that will have service water heating loads must include those loads in the simulation.",
             ruleset_section_title="Service Water Heating",
             standard_section="Table G3.1 #1, proposed column, (a)",

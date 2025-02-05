@@ -26,7 +26,7 @@ class PRM9012019Rule51s51(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule51s51.RMDRule(),
             index_rmd=BASELINE_0,
-            id="section11rule13",
+            id="11-13",
             description="Service water-heating energy consumption shall be calculated explicitly based upon the volume of service water heating required and the entering makeup water and the leaving service water-heating temperatures. Entering water temperatures shall be estimated based upon the location. Leaving temperatures shall be based upon the end-use requirements.",
             ruleset_section_title="Service Water Heating",
             standard_section="Table G3.1 #11, baseline column, (e)",

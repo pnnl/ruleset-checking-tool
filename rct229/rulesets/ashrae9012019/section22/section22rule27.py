@@ -33,7 +33,7 @@ class PRM9012019Rule86p62(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule86p62.ChillerRule(),
             index_rmd=BASELINE_0,
-            id="section22rule27",
+            id="22-27",
             description="Each baseline chiller shall be modeled with separate condenser water pump interlocked to operate with the associated chiller.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.11 Heat Rejection (Systems 7, 8, 11, 12, and 13)",

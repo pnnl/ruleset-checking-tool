@@ -30,7 +30,7 @@ class PRM9012019Rule39f24(RuleDefinitionListIndexedBase):
             required_fields={"$": ["weather"], "weather": ["climate_zone"]},
             each_rule=PRM9012019Rule39f24.BuildingRule(),
             index_rmd=BASELINE_0,
-            id="section5rule29",
+            id="5-29",
             description="The baseline roof surfaces shall be modeled using a thermal emittance of 0.9",
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(f) Building Envelope Modeling Requirements for the Baseline building",

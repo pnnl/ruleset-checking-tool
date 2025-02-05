@@ -50,7 +50,7 @@ class PRM9012019Rule43l11(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule43l11.HeatingFluidLoopRule(),
             index_rmd=BASELINE_0,
-            id="section21rule13",
+            id="21-13",
             description="The baseline building design uses boilers or purchased hot water, the hot water pumping system shall be modeled with a minimum turndown ratio of 0.25.",
             ruleset_section_title="HVAC - Water Side",
             standard_section="Section G3.1.3.5 Building System-Specific Modeling Requirements for the Baseline model",

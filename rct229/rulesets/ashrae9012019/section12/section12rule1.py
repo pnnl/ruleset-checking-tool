@@ -21,7 +21,7 @@ class PRM9012019rule88h78(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019rule88h78.RMDRule(),
             index_rmd=BASELINE_0,
-            id="section12rule1",
+            id="12-1",
             description="Receptacle and process power shall be modeled as identical to the proposed design",
             ruleset_section_title="Receptacle",
             standard_section="Section Table G3.1-12 Modeling Requirements for the Proposed design",

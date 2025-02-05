@@ -22,7 +22,7 @@ class PRM9012019Rule84u02(RuleDefinitionListIndexedBase):
             required_fields={"$": ["weather"], "weather": ["climate_zone"]},
             each_rule=PRM9012019Rule84u02.BuildingRule(),
             index_rmd=BASELINE_0,
-            id="section5rule25",
+            id="5-25",
             description="If the skylight area of the proposed design is greater than 3%, baseline skylight area shall be decreased in all roof components in which skylights are located to reach 3%.",
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(e) Building Envelope Modeling Requirements for the Baseline building",

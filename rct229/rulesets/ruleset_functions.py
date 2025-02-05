@@ -1,4 +1,4 @@
-import os
+import subprocess
 import ast
 import astor
 from pathlib import Path
@@ -8,30 +8,42 @@ from rct229.schema.schema_enums import SchemaEnums
 from rct229.schema.schema_store import SchemaStore
 
 
-def renumber_rule_ids(ruleset_doc):
+def renumber_rules(ruleset_doc):
     SchemaStore.set_ruleset(ruleset_doc)
     SchemaEnums.update_schema_enum()
     available_rule_definitions = rulesets.__getrules__()
     rule_map = rulesets.__getrulemap__()
+    if not rule_map:
+        raise ValueError(
+            "Rule map not found. Please define 'rules_dict' mapping in rulesets/[ruleset_name]/__init__.py"
+        )
+
+    rulesets_path = Path(__file__).parent
     for rule in available_rule_definitions:
-        rulesets_path = Path(__file__).parent
         rule_unique_id_string = str(rule[0]).lower()
         rule_name = rule_map.get(rule_unique_id_string)
+        original_module_name = rule[1].__module__.split(".")[-1]
         if not rule_name:
             print(f"Rule {rule_unique_id_string} not found in rule_map")
             continue
-        if rule[1].__module__.split(".")[-1] != rule_name:
+        if original_module_name != rule_name:
             print(
                 f"Rule {rule[1].__module__.split('.')[-1]} does not match rule name {rule_name}"
             )
 
-            path_relative_to_rulesets = (
+            path_relative_to_rulesets = Path(
                 "\\".join(rule[1].__module__.split(".")[2:]) + ".py"
             )
-            process_file(
-                str(rulesets_path / path_relative_to_rulesets),
-                rule_name,
-            )
+            process_file(rulesets_path / path_relative_to_rulesets, rule_name)
+
+    for file_path in rulesets_path.rglob("*"):
+        if file_path.is_file() and file_path.stem.endswith("-new"):
+            new_name = file_path.stem[:-4] + file_path.suffix
+            new_path = file_path.with_name(new_name)
+            file_path.rename(new_path)
+
+    # Run black on the rulesets directory
+    subprocess.run(["black", str(rulesets_path)], check=True)
 
 
 def process_file(file_path, rule_name):
@@ -40,8 +52,8 @@ def process_file(file_path, rule_name):
         + "-"
         + rule_name.split("rule")[1]
     )
-    with open(file_path, "r", encoding="utf-8") as file:
-        tree = ast.parse(file.read(), filename=file_path)
+    with file_path.open("r", encoding="utf-8") as file:
+        tree = ast.parse(file.read(), filename=str(file_path))
         modified = False
 
         for node in ast.walk(tree):
@@ -59,15 +71,13 @@ def process_file(file_path, rule_name):
                     modified = update_class_id_attributes(node, rule_id) or modified
 
     if modified:
-        with open(file_path, "w", encoding="utf-8") as file:
+        # Rename the file based on rule_name
+        new_file_path = file_path.with_name(f"{rule_name}-new.py")
+        file_path.rename(new_file_path)
+
+        with new_file_path.open("w", encoding="utf-8") as file:
             file.write(astor.to_source(tree))
             print(f"Updated file: {file_path}")
-
-        # Rename the file based on rule_name
-        directory, old_filename = os.path.split(file_path)
-        new_filename = f"{rule_name}.py"
-        new_file_path = os.path.join(directory, new_filename)
-        os.rename(file_path, new_file_path)
 
 
 def update_class_id_attributes(class_node, correct_id):
@@ -90,4 +100,4 @@ def update_class_id_attributes(class_node, correct_id):
 
 
 if __name__ == "__main__":
-    renumber_rule_ids(rulesets.RuleSet.ASHRAE9012019_RULESET)
+    renumber_rules(rulesets.RuleSet.ASHRAE9012019_RULESET)

@@ -12,7 +12,7 @@ class PRM9012019Rule37e66(RuleDefinitionBase):
             rmds_used=produce_ruleset_model_description(
                 USER=True, BASELINE_0=False, PROPOSED=True
             ),
-            id="section1rule7",
+            id="1-7",
             description="The proposed design shall be the same as the user design for all data elements identified in the schema hosted at data.standards.ashrae {{https://github.com/open229/ruleset-model-description-schema/blob/main/docs229/ASHRAE229_extra.schema.json}}",
             ruleset_section_title="Performance Calculation",
             standard_section="Table G3.1(1) Proposed Building Performance (a)",

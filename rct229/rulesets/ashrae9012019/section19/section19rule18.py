@@ -64,7 +64,7 @@ class PRM9012019Rule49c09(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule49c09.HVACRule(),
             index_rmd=BASELINE_0,
-            id="section19rule18",
+            id="19-18",
             description="For baseline systems 3 through 8, and 11, 12, and 13, the system fan electrical power for supply, return, exhaust, and relief shall be Pfan = bhp × 746/fan motor efficiency. Where, bhp = brake horsepower of baseline fan motor from Table G3.1.2.9; fan motor efficiency = the efficiency from Table G3.9.1 for the next motor size greater than the bhp using a totally enclosed fan cooled motor at 1800 rpm..",
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1.2.9",

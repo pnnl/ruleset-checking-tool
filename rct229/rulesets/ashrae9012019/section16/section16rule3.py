@@ -21,7 +21,7 @@ class PRM9012019Rule92n36(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule92n36.RuleSetModelDescriptionRule(),
             index_rmd=PROPOSED,
-            id="section16rule3",
+            id="16-3",
             description="The elevator cab ventilation fan shall be modeled with the same schedule as the elevator motor.",
             ruleset_section_title="Elevators",
             standard_section="Section G3.1",

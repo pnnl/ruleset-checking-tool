@@ -38,7 +38,7 @@ class PRM9012019Rule92f56(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule92f56.HeatingFluidLoopRule(),
             index_rmd=BASELINE_0,
-            id="section21rule7",
+            id="21-7",
             description="When baseline building requires boilers, systems 1,5,7,11 and 12 - Model HWST = 180F and return design temp = 130F.",
             ruleset_section_title="HVAC - Water Side",
             standard_section="Section G3.1.3.3 Building System-Specific Modeling Requirements for the Baseline model",

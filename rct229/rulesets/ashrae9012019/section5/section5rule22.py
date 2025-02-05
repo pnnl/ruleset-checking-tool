@@ -30,7 +30,7 @@ class PRM9012019Rule50p59(RuleDefinitionListIndexedBase):
             required_fields={"$": ["weather"], "weather": ["climate_zone"]},
             each_rule=PRM9012019Rule50p59.BuildingRule(),
             index_rmd=BASELINE_0,
-            id="section5rule22",
+            id="5-22",
             description="Baseline fenestration shall be assumed to be flush with the exterior wall, and no shading projections shall be modeled.",
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(d) Building Modeling Requirements for the Baseline building",

@@ -22,7 +22,7 @@ class PRM9012019Rule23m90(RuleDefinitionListIndexedBase):
             required_fields={"$": ["weather"], "weather": ["climate_zone"]},
             each_rule=PRM9012019Rule23m90.BuildingRule(),
             index_rmd=BASELINE_0,
-            id="section5rule36",
+            id="5-36",
             description="The air leakage rate in unconditioned and unenclosed spaces must be the same the baseline and proposed design.",
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-1 Building Envelope Modeling Requirements for the Proposed design and Baseline building",

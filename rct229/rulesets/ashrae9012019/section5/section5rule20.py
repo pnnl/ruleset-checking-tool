@@ -38,7 +38,7 @@ class PRM9012019Rule96n40(RuleDefinitionListIndexedBase):
             required_fields={"$": ["weather"], "weather": ["climate_zone"]},
             each_rule=PRM9012019Rule96n40.BuildingRule(),
             index_rmd=BASELINE_0,
-            id="section5rule20",
+            id="5-20",
             description="Vertical fenestration SHGC shall match the appropriate requirements in Tables G3.4-1 through G3.4-8.",
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(d) Building Envelope Modeling Requirements for the Baseline building",

@@ -45,7 +45,7 @@ class PRM9012019Rule31d63(RuleDefinitionBase):
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            id="section21rule16",
+            id="21-16",
             description="Baseline shall have only one heating hot water plant.",
             ruleset_section_title="HVAC - Water Side",
             standard_section="Section G3.1.3.2 Building System-Specific Modeling Requirements for the Baseline model",

@@ -36,7 +36,7 @@ class PRM9012019Rule29n92(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule29n92.HVACRule(),
             index_rmd=BASELINE_0,
-            id="section19rule7",
+            id="19-7",
             description="Minimum ventilation system outdoor air intake flow shall be the same for the proposed design and baseline building design except when any of the 4 exceptions defined in Section G3.1.2.5 are met.Exceptions included in this RDS: 2. When designing systems in accordance with Standard 62.1, Section 6.2, `Ventilation Rate Procedure,`reduced ventilation airflow rates may be calculated for each HVAC zone in the proposed design with a zone air distribution effectiveness (Ez) > 1.0 as defined by Standard 62.1, Table 6-2. Baseline ventilation airflow rates in those zones shall be calculated using the proposed design Ventilation Rate Procedure calculation with the following change only. Zone air distribution effectiveness shall be changed to (Ez) = 1.0 in each zone having a zone air distribution effectiveness (Ez) > 1.0. Proposed design and baseline build-ing design Ventilation Rate Procedure calculations, as described in Standard 62.1, shall be submitted to the rating authority to claim credit for this exception.",
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1.2.5 and Exception 2",

@@ -14,7 +14,7 @@ class PRM9012019Rule16j07(PartialRuleDefinition):
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            id="section19rule3",
+            id="19-3",
             description="Weather conditions used in sizing runs to determine baseline equipment capacities shall be based either on design days developed using 99.6% heating design temperatures and 1% dry-bulb and 1% wet-bulb cooling design temperatures.",
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1.2.2.1",

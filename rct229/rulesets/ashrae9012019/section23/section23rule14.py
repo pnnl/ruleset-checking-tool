@@ -43,7 +43,7 @@ class PRM9012019Rule14m33(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule14m33.HVACRule(),
             index_rmd=PROPOSED,
-            id="section23rule14",
+            id="23-14",
             description="If the baseline system does not comply with exceptions in Section 6.5.2.3 then only 25% of the system reheat energy shall be included in the baseline building performance.",
             ruleset_section_title="HVAC - Airside",
             standard_section="G3.1.3.18 Dehumidification (Systems 3 through 8 and 11, 12, and 13)",

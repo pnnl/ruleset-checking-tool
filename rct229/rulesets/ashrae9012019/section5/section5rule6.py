@@ -30,7 +30,7 @@ class PRM9012019Rule70u00(RuleDefinitionListIndexedBase):
             each_rule=PRM9012019Rule70u00.BuildingRule(),
             index_rmd=BASELINE_0,
             list_path="ruleset_model_descriptions[0].buildings[*]",
-            id="section5rule6",
+            id="5-6",
             description="Baseline below-grade walls shall match the appropriate assembly maximum C-factors in Table G3.4-1 through G3.4-8.",
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building",

@@ -26,7 +26,7 @@ class PRM9012019Rule16x33(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule16x33.RulesetModelInstanceRule(),
             index_rmd=PROPOSED,
-            id="section6rule8",
+            id="6-8",
             description="Additional occupancy sensor controls in the proposed building are modeled through schedule adjustments based on factors defined in Table G3.7.",
             ruleset_section_title="Lighting",
             standard_section="Section G3.1-6(i) Modeling Requirements for the Proposed design",

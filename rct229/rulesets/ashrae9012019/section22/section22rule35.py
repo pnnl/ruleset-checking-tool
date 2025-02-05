@@ -17,7 +17,7 @@ class PRM9012019Rule20a97(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule20a97.RulesetModelInstanceRule(),
             index_rmd=BASELINE_0,
-            id="section22rule35",
+            id="22-35",
             description="Baseline chilled water loops that use purchased chilled water shall not be modeled with chilled water reset.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.10 Chilled-Water Pumps (Systems 7, 8, 11, 12, and 13)",

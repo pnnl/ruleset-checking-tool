@@ -22,7 +22,7 @@ class PRM9012019rule23k17(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019rule23k17.SWHEquipRule(),
             index_rmd=BASELINE_0,
-            id="section11rule16",
+            id="11-16",
             description="Gas water heaters shall be modeled using natural gas as their fuel. Exceptions: Where natural gas is not available for the proposed building site, as determined by the rating authority, gas water heaters shall be modeled using propane as their fuel.",
             ruleset_section_title="Service Water Heating",
             standard_section="Table G3.1 #11, baseline column, (h)",

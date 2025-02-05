@@ -17,7 +17,7 @@ class PRM9012019Rule69u47(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule69u47.BuildingRule(),
             index_rmd=PROPOSED,
-            id="section5rule34",
+            id="5-34",
             description="The infiltration shall be modeled using the same methodology and adjustments for weather and building operation in both the proposed design and the baseline building design.",
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(b) Building Envelope Modeling Requirements for the Proposed design and Baseline",

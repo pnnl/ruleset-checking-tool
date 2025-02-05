@@ -18,7 +18,7 @@ class PRM9012019Rule00u91(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule00u91.RuleModelDescriptionRule(),
             index_rmd=BASELINE_0,
-            id="section18rule3",
+            id="18-3",
             description="The lab exhaust fan shall be modeled as constant horsepower (kilowatts) reflecting constant-volume stack discharge with outdoor air bypass in the baseline",
             ruleset_section_title="HVAC",
             standard_section="Section G3.1-10 HVAC Systems for the baseline building",

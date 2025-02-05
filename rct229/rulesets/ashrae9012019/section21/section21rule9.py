@@ -37,7 +37,7 @@ class PRM9012019Rule39a29(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule39a29.HeatingFluidLoopRule(),
             index_rmd=BASELINE_0,
-            id="section21rule9",
+            id="21-9",
             description="When baseline building includes boilers, Hot Water Pump Power = 19W/gpm.",
             ruleset_section_title="HVAC - Water Side",
             standard_section="Section G3.1.3.5 Building System-Specific Modeling Requirements for the Baseline model",

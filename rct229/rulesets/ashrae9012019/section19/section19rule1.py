@@ -28,7 +28,7 @@ class PRM9012019Rule73r44(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule73r44.HVACRule(),
             index_rmd=BASELINE_0,
-            id="section19rule1",
+            id="19-1",
             description="HVAC system coil capacities for the baseline building design shall be oversized by 15% for cooling and 25% for heating.",
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1.2.2",

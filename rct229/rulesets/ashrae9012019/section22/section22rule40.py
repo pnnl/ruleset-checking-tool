@@ -43,7 +43,7 @@ class PRM9012019Rule48h16(RuleDefinitionBase):
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            id="section22rule40",
+            id="22-40",
             description="Chilled water loops that use purchased chilled water in the proposed design shall also use purchased chilled water in the baseline. On-site chillers and direct expansion equipment shall not be modeled in the baseline.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.1.1 & G3.1.1.3.1 Building System-Specific Modeling Requirements for the Baseline model",

@@ -40,7 +40,7 @@ class PRM9012019Rule69v04(RuleDefinitionListIndexedBase):
             required_fields={"$": ["weather"], "weather": ["climate_zone"]},
             each_rule=PRM9012019Rule69v04.BuildingRule(),
             index_rmd=BASELINE_0,
-            id="section5rule27",
+            id="5-27",
             description="Skylight U-factors for residential, non-residential and semi-heated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8.",
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(e) Building Envelope Modeling Requirements for the Baseline building",

@@ -22,7 +22,7 @@ class PRM9012019Rule06k20(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule06k20.RMDRule(),
             index_rmd=BASELINE_0,
-            id="section11rule15",
+            id="11-15",
             description="Service water loads and use shall be the same for both the proposed design and baseline building design.Exceptions:(1) Energy Efficiency Measures approved by the Authority Having Jurisdiction are used in the proposed model (2) SWH energy consumption can be demonstrated to be reduced by reducing the required temperature of service mixed water, by increasing the temperature, or by increasing the temperature of the entering makeup water.",
             ruleset_section_title="Service Water Heating",
             standard_section="Table G3.1 #11, baseline column, (g)",

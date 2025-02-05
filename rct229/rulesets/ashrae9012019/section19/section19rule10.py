@@ -62,7 +62,7 @@ class PRM9012019Rule76q46(RuleDefinitionListIndexedBase):
             },
             each_rule=PRM9012019Rule76q46.RulesetModelInstanceRule(),
             index_rmd=BASELINE_0,
-            id="section19rule10",
+            id="19-10",
             description="Air economizers shall be included in baseline HVAC Systems 3 through 8, and 11, 12, and 13 based on climate as specified in Section G3.1.2.6 with exceptions.1. Systems that include gas-phase air cleaning to meet the requirements of Standard 62.1, Section 6.1.2. This exception shall be used only if the system in the proposed design does not match the building design.2. Where the use of outdoor air for cooling will affect supermarket open refrigerated case-work systems. This exception shall only be used if the system in the proposed design does not use an economizer. If the exception is used, an economizer shall not be included in the baseline building design.3. Systems that serve computer rooms complying with Section G3.1.2.6.1.",
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1.2.6 including exceptions 1-3",

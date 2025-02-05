@@ -22,7 +22,7 @@ class PRM9012019Rule30t80(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule30t80.ElevatorRule(),
             index_rmd=BASELINE_0,
-            id="section16rule7",
+            id="16-7",
             description="When included in the proposed design, the baseline elevator cab lighting power density shall be 3.14 W/ft2.",
             ruleset_section_title="Elevators",
             standard_section="Table G3.1-16 Baseline Building Performance",

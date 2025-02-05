@@ -32,7 +32,7 @@ class PRM9012019Rule22l93(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule22l93.BuildingSegmentRule(),
             index_rmd=BASELINE_0,
-            id="section6rule4",
+            id="6-4",
             description='Where a complete lighting system exists and where a lighting system has been designed and submitted with design documents, the baseline LPD is equal to expected value in Table G3.7. Where lighting neither exists nor is submitted with design documents, baseline LPD shall be determined in accordance with Table G3-7 for "Office-Open Plan" space type.',
             ruleset_section_title="Lighting",
             standard_section="Section G3.1-6 Modeling Requirements for the Baseline",

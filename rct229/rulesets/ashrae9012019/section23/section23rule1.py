@@ -31,7 +31,7 @@ class PRM9012019Rule79m01(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule79m01.HVACRule(),
             index_rmd=BASELINE_0,
-            id="section23rule1",
+            id="23-1",
             description="System 2 and 4 - Electric air-source heat pumps shall be modeled with electric auxiliary heat and an outdoor air thermostat. The systems shall be controlled to energize auxiliary heat only when the outdoor air temperature is less than 40°F. The air-source heat pump shall be modeled to continue to operate while auxiliary heat is energized.",
             ruleset_section_title="HVAC - Airside",
             standard_section="G3.1.3.1 Heat Pumps (Systems 2 and 4)",

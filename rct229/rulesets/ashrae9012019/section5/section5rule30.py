@@ -31,7 +31,7 @@ class PRM9012019Rule18s99(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule18s99.BuildingRule(),
             index_rmd=PROPOSED,
-            id="section5rule30",
+            id="5-30",
             description="The proposed roof surfaces shall be modeled using the same thermal emittance as in the user model.",
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-1(a) Building Envelope Modeling Requirements for the Proposed design",

@@ -23,7 +23,7 @@ class PRM9012019Rule18u58(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule18u58.HVACRule(),
             index_rmd=BASELINE_0,
-            id="section19rule11",
+            id="19-11",
             description="For systems that serve computer rooms, if the baseline system is HVAC System 11, it shall include an integrated fluid economizer meeting the requirements of Section 6.5.1.2 in the baseline building design.",
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1.2.6.1",

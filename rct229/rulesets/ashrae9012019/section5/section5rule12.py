@@ -33,7 +33,7 @@ class PRM9012019Rule40d86(RuleDefinitionListIndexedBase):
             required_fields={"$": ["weather"], "weather": ["climate_zone"]},
             each_rule=PRM9012019Rule40d86.BuildingRule(),
             index_rmd=BASELINE_0,
-            id="section5rule12",
+            id="5-12",
             description="Baseline slab-on-grade floor assemblies must match the appropriate assembly maximum F-factors in Tables G3.4-1 through G3.4-9.",
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building",

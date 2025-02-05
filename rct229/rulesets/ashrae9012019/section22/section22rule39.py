@@ -17,7 +17,7 @@ class PRM9012019Rule33w37(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule33w37.RulesetModelInstanceRule(),
             index_rmd=BASELINE_0,
-            id="section22rule39",
+            id="22-39",
             description="Baseline chilled water loops that use purchased chilled water shall have a chilled water pump power of 16 W/gpm at design conditions.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.10 Chilled-Water Pumps (Systems 7, 8, 11, 12, and 13)",

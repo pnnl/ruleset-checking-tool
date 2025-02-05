@@ -36,7 +36,7 @@ class PRM9012019Rule55f82(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule55f82.ChillerRule(),
             index_rmd=BASELINE_0,
-            id="section22rule22",
+            id="22-22",
             description="The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for full load, in accordance with Tables G3.5.3.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.2.1 Equipment Efficiencies",

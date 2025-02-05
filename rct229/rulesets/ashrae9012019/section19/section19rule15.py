@@ -42,7 +42,7 @@ class PRM9012019Rule03j97(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule03j97.HVACRule(),
             index_rmd=BASELINE_0,
-            id="section19rule15",
+            id="19-15",
             description="For baseline system types 9 & 10, the system design supply airflow rates shall be based on the temperature difference between a supply air temperature set point of 105°F and the design space-heating temperature set point, the minimum outdoor airflow rate, or the airflow rate required to comply with applicable codes or accreditation standards, whichever is greater.",
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1.2.8.2",

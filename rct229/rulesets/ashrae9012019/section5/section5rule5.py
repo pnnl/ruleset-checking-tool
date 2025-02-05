@@ -27,7 +27,7 @@ class PRM9012019Rule02s62(RuleDefinitionListIndexedBase):
             required_fields={"$": ["weather"], "weather": ["climate_zone"]},
             each_rule=PRM9012019Rule02s62.BuildingRule(),
             index_rmd=BASELINE_0,
-            id="section5rule5",
+            id="5-5",
             description="Baseline below-grade walls shall conform with assemblies detailed in Appendix A Concrete block, A4)",
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building",

@@ -18,7 +18,7 @@ class PRM9012019Rule29i55(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule29i55.RMDRule(),
             index_rmd=BASELINE_0,
-            id="section11rule11",
+            id="11-11",
             description="For buildings that will have no service water-heating loads, no service water-heating shall be modeled in baseline building model",
             ruleset_section_title="Service Water Heating",
             standard_section="Table G3.1 #11, baseline column, c",

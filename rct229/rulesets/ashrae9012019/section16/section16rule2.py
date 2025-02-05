@@ -21,7 +21,7 @@ class PRM9012019Rule66a48(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule66a48.RuleSetModelDescriptionRule(),
             index_rmd=BASELINE_0,
-            id="section16rule2",
+            id="16-2",
             description="The baseline elevator motor use shall be modeled with the same schedule as the proposed design. Rule Assertion: B-RMD = P-RMD",
             ruleset_section_title="Elevators",
             standard_section="Section G3.1",

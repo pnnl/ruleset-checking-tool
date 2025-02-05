@@ -22,7 +22,7 @@ class PRM9012019rule52y79(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019rule52y79.RMDRule(),
             index_rmd=BASELINE_0,
-            id="section11rule12",
+            id="11-12",
             description="For large, 24-hour-per-day facilities that meet the prescriptive criteria for use of condenser heat recovery systems described in Section 6.5.6.2, a system meeting the requirements of that section shall be included in the baseline building design regardless of the exceptions to Section 6.5.6.2.",
             ruleset_section_title="Service Water Heating",
             standard_section="Table G3.1 #11, baseline column, d + exception",

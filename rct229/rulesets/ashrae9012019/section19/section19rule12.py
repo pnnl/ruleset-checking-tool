@@ -33,7 +33,7 @@ class PRM9012019Rule98o22(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule98o22.HVACRule(),
             index_rmd=BASELINE_0,
-            id="section19rule12",
+            id="19-12",
             description="The baseline system economizer high-limit shutoff shall be a dry-bulb fixed switch with set-point temperatures in accordance with the values in Table G3.1.2.7.",
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1.2.7",

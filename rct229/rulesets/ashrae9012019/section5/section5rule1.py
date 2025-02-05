@@ -43,7 +43,7 @@ class PRM9012019Rule77j30(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012019Rule77j30.RMDRule(),
             index_rmd=BASELINE_0,
-            id="section5rule1",
+            id="5-1",
             description="There are four baseline rotations (i.e., four baseline models differing in azimuth by 90 degrees and four sets of baseline model results) if vertical fenestration area per each orientation differ by more than 5%.",
             ruleset_section_title="Envelope",
             standard_section="Table G3.1#5a baseline column",
