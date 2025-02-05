@@ -2,10 +2,10 @@
 import importlib
 
 __all__ = [
-    "prm9012019rule18y74",
-    "prm9012019rule66c61",
-    "prm9012019rule85i93",
-    "prm9012019rule96q77",
+    "section4rule1",
+    "section4rule2",
+    "section4rule11",
+    "section4rule14",
 ]
 
 

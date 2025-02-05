@@ -2,13 +2,13 @@ import importlib
 
 # Add all available rule modules in __all__
 __all__ = [
-    "prm9012019rule10d53",
-    "prm9012019rule37e66",
-    "prm9012019rule60m79",
-    "prm9012019rule63e94",
-    "prm9012019rule73j65",
-    "prm9012019rule86h31",
-    "prm9012019rule88z11",
+    "section1rule1",
+    "section1rule2",
+    "section1rule3",
+    "section1rule4",
+    "section1rule5",
+    "section1rule6",
+    "section1rule7",
 ]
 
 

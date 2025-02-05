@@ -2,15 +2,15 @@
 import importlib
 
 __all__ = [
-    "prm9012019rule02c29",
-    "prm9012019rule08a45",
-    "prm9012019rule16x33",
-    "prm9012019rule22c86",
-    "prm9012019rule22l93",
-    "prm9012019rule37d98",
-    "prm9012019rule66m62",
-    "prm9012019rule73a47",
-    "prm9012019rule99c05",
+    "section6rule1",
+    "section6rule2",
+    "section6rule3",
+    "section6rule4",
+    "section6rule5",
+    "section6rule6",
+    "section6rule7",
+    "section6rule8",
+    "section6rule9",
 ]
 
 
