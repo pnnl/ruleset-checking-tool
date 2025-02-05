@@ -4,9 +4,9 @@
 **Rule ID:** 5-44  
 **Rule Description:** Space Conditioning Categories. Space conditioning categories used to determine applicability of the envelope requirements in Tables G3.4-1 through G3.4-8 shall be the same as in the proposed design.
 
-Exception: Envelope components of the HVAC zones that are semiheated in the proposed design must meet conditioned envelope requirements in Tables G3.4-1 through G3.4-8 if, based on the sizing runs, these zones are served by a baseline system with sensible cooling output capacity 5 Btu/h·ft2 of floor area, or with heating output capacity greater than or equal to the criteria in Table G3.4-9, or that are indirectly conditioned spaces.  
+Exception: Envelope components of the HVAC zones that are semiheated in the proposed design must meet conditioned envelope requirements in Tables G3.4-1 through G3.4-8 if, based on the sizing runs, these zones are served by a baseline system with sensible cooling output capacity >= 5 Btu/h·ft2 of floor area, or with heating output capacity greater than or equal to the criteria in Table G3.4-9, or that are indirectly conditioned spaces.  
 
-**Rule Assertion:** Baseline baseline equals proposed  
+**Rule Assertion:** Baseline equals proposed, except defined exceptions  
 **Appendix G Section:** Table G3.1 Section 5(b) Baseline  
 **Schema Version:** 0.0.39  
 
@@ -34,7 +34,7 @@ Exception: Envelope components of the HVAC zones that are semiheated in the prop
   
 - Get surface conditioning category dictionary for P_RMD: ```scc_dictionary_p = get_surface_conditioning_category(P_RMD)```  
 
-- For each building segment in the Baseline model: ```for building_surface_b in B_RMD...surfaces:```
+- For each building surface in the Baseline model: ```for building_surface_b in B_RMD...surfaces:```
   - if the surface does not have the same surface conditioning category in the proposed and baseline, need to check if the exception applies: ```if scc_dictionary_b[building_surface_b.id] != scc_dictionary_p[building_surface_b.id]:```
     - according to the exception, if the surface is semi-heated ("SEMI-EXTERIOR") in the proposed design, it might be classified as fully-conditioned in the baseline, if, according to sizing runs, the zone is served by HVAC equipment that meets the requirements of a fully-conditioned space.  The function get_surface_conditioning_category runs these checks, so we just need to check the conditioning types.  First, check whether the proposed conditioning type is SEMI-EXTERIOR: ```if scc_dictionary_p[building_surface_b.id] == "SEMI-EXTERIOR":```
       - if the baseline is NOT one of the fully-conditioned surface types ("EXTERIOR MIXED", "EXTERIOR RESIDENTIAL", "EXTERIOR NON-RESIDENTIAL"), add this surface ID to the list of non compliant surface ids: ```if !(scc_dictionary_b[building_surface_b.id] in ["EXTERIOR MIXED", "EXTERIOR RESIDENTIAL", "EXTERIOR NON-RESIDENTIAL"]: non_compliant_surface_ids.append(building_surface_b.id)```
