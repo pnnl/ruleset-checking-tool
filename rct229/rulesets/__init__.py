@@ -87,7 +87,7 @@ def __getrulemap__():
     ruleset_list = inspect.getmembers(rulesets, inspect.ismodule)
     for ruleset in ruleset_list:
         if ruleset[0] == SchemaStore.SELECTED_RULESET:
-            rules_dict = getattr(ruleset[1], 'rules_dict', None)
+            rules_dict = getattr(ruleset[1], "rules_dict", None)
             return rules_dict
 
 

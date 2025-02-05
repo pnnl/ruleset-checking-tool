@@ -21,9 +21,13 @@ def renumber_rule_ids(ruleset_doc):
             print(f"Rule {rule_unique_id_string} not found in rule_map")
             continue
         if rule[1].__module__.split(".")[-1] != rule_name:
-            print(f"Rule {rule[1].__module__.split('.')[-1]} does not match rule name {rule_name}")
+            print(
+                f"Rule {rule[1].__module__.split('.')[-1]} does not match rule name {rule_name}"
+            )
 
-            path_relative_to_rulesets = "\\".join(rule[1].__module__.split(".")[2:]) + ".py"
+            path_relative_to_rulesets = (
+                "\\".join(rule[1].__module__.split(".")[2:]) + ".py"
+            )
             process_file(
                 str(rulesets_path / path_relative_to_rulesets),
                 rule_name,
@@ -32,9 +36,9 @@ def renumber_rule_ids(ruleset_doc):
 
 def process_file(file_path, rule_name):
     rule_id = (
-            rule_name.split("section")[1].split("rule")[0]
-            + "-"
-            + rule_name.split("rule")[1]
+        rule_name.split("section")[1].split("rule")[0]
+        + "-"
+        + rule_name.split("rule")[1]
     )
     with open(file_path, "r", encoding="utf-8") as file:
         tree = ast.parse(file.read(), filename=file_path)
