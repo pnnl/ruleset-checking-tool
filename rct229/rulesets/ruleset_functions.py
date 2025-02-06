@@ -15,7 +15,7 @@ def renumber_rules(ruleset_doc):
     rule_map = rulesets.__getrulemap__()
     if not rule_map:
         raise ValueError(
-            "Rule map not found. Please define 'rules_dict' mapping in rulesets/[ruleset_name]/__init__.py"
+            f"Rule map not found. Please define 'rules_dict' mapping in rulesets/{SchemaStore.SELECTED_RULESET}/__init__.py"
         )
 
     rulesets_path = Path(__file__).parent

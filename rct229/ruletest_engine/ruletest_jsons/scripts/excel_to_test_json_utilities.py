@@ -6,9 +6,7 @@ import os
 import pandas as pd
 import pint
 from rct229.rule_engine.rulesets import RuleSet
-from rct229.ruletest_engine.ruletest_jsons.scripts.excel_generation_utilities import (
-    generate_rule_test_dictionary,
-)
+from rct229.rulesets.ashrae9012019 import rules_dict
 from rct229.ruletest_engine.ruletest_jsons.scripts.json_generation_utilities import *
 from rct229.schema.config import ureg
 from rct229.schema.schema_enums import SchemaEnums
