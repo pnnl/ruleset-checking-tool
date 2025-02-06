@@ -250,7 +250,8 @@ def run_section_tests(
     SchemaEnums.update_schema_enum()
     available_rule_definitions = rulesets.__getrules__()
     available_rule_definitions_dict = {
-        rule_class[1].__module__.split(".")[-1]: rule_class[1] for rule_class in available_rule_definitions
+        rule_class[1].__module__.split(".")[-1]: rule_class[1]
+        for rule_class in available_rule_definitions
     }
 
     # Cycle through tests in test JSON and run each individually
