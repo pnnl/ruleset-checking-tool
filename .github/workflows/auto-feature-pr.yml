@@ -27,7 +27,6 @@ jobs:
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           base: develop
           branch: ${{ env.TARGET_BRANCH }}
-          delete-branch: true
           title: "Auto PR: Sync develop -> ${{ env.TARGET_BRANCH }}"
           body: "This PR is automatically created to sync the latest changes from develop branch"
           labels: automated
