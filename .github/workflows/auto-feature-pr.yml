@@ -17,36 +17,16 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-
-      - name: Ensure Develop Branch is Up-to-Date
-        run: |
-          git fetch origin
-          git checkout develop
-          git pull origin develop
-
-      - name: Create or Update Sync Branch
-        run: |
-          git fetch origin
-          git checkout -B update/develop-to-${{ env.TARGET_BRANCH }} origin/${{ env.TARGET_BRANCH }} || git checkout -B update/develop-to-${{ env.TARGET_BRANCH }}
-          git merge --no-edit develop || echo "No changes to merge"
-
-      - name: Push Sync Branch
-        run: |
-          git push origin update/develop-to-${{ env.TARGET_BRANCH }}
-
-      - name: Create Pull Request to Feature Branch
-        uses: peter-evans/create-pull-request@v7
         with:
-          token: ${{ secrets.AUTO_PAT }}
-          commit-message: "Auto PR: Sync develop -> ${{ env.TARGET_BRANCH }}"
-          committer: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
-          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-          base: ${{ env.TARGET_BRANCH }}
-          branch: update/develop-to-${{ env.TARGET_BRANCH }}
-          delete-branch: true
-          title: "Auto PR: Sync develop -> ${{ env.TARGET_BRANCH }}"
-          body: "This PR is automatically created to sync the latest changes from develop branch"
-          labels: automated
-          assignees: weilixu
-          reviewers: weilixu
+          fetch-depth: 0
+
+      - name: Create Pull Request from develop to feature/ashrae-9012022
+        uses: peter-evans/create-pull-request@v4
+        with:
+          base: feature/ashrae-9012022
+          head: develop
+          title: "Merge develop into feature/update_tool"
+          body: "This PR merges the latest chagens from the develop branch into the feature/ashrae-9012022 branch"
+          reviewer: weilixu
           draft: false
+          labels: "auto-pr"
