@@ -19,6 +19,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          token: ${{ secrets.AUTO_PAT }}
 
       - name: Create Pull Request from develop to feature/ashrae-9012022
         uses: peter-evans/create-pull-request@v4
@@ -30,3 +31,4 @@ jobs:
           reviewers: weilixu
           draft: false
           labels: "auto-pr"
+          token: ${{ secrets.AUTO_PAT }}
