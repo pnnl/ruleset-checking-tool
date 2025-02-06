@@ -8,7 +8,7 @@ on:
       - develop
 
 env:
-  BASE_BRANCH: feature/ashrae-9012022 #define the target branch when in parallel developing a feature
+  TARGET_BRANCH: feature/ashrae-9012022 #define the target branch when in parallel developing a feature
 
 jobs:
   create-pr:
@@ -24,11 +24,11 @@ jobs:
           token: ${{ secrets.AUTO_PAT }}
           commit-message: Update feature branch
           committer: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
-          author: ${{ github.actor }} <${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com>
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           base: develop
-          branch: ${{ env.BASE_BRANCH }}
+          branch: ${{ env.TARGET_BRANCH }}
           delete-branch: true
-          title: "Auto PR: Sync develop -> ${{ env.BASE_BRANCH }}"
+          title: "Auto PR: Sync develop -> ${{ env.TARGET_BRANCH }}"
           body: "This PR is automatically created to sync the latest changes from develop branch"
           labels: automated
           assignees: weilixu
