@@ -19,12 +19,18 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Create Pull Request to Feature Branch
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@v7
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.AUTO_PAT }}
+          commit-message: Update feature branch
+          committer: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
+          author: ${{ github.actor }} <${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com>
           base: develop
           branch: ${{ env.BASE_BRANCH }}
+          delete-branch: true
           title: "Auto PR: Sync develop -> ${{ env.BASE_BRANCH }}"
           body: "This PR is automatically created to sync the latest changes from develop branch"
           labels: automated
+          assignees: weilixu
+          reviewers: weilixu
           draft: false
