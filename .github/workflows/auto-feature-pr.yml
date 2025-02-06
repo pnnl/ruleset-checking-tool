@@ -1,0 +1,30 @@
+name: Auto PR from develop branch to a feature branch
+
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - develop
+
+env:
+  BASE_BRANCH: feature/ashrae-9012022 #define the target branch when in parallel developing a feature
+
+jobs:
+  create-pr:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Create Pull Request to Feature Branch
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          base: ${{ env.BASE_BRANCH }}
+          branch: develop
+          title: "Auto PR: Sync develop -> ${{ env.BASE_BRANCH }}"
+          body: "This PR is automatically created to sync the latest changes from develop branch"
+          labels: automated
+          draft: false
