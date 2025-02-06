@@ -95,6 +95,12 @@ class Section19Rule17(RuleDefinitionListIndexedBase):
                 required_fields={
                     "$": ["fan_system"],
                 },
+                precision={
+                    "fan_power_airflow": {
+                        "precision": 0.1,
+                        "unit": "W/cfm",
+                    },
+                },
             )
 
         def is_applicable(self, context, data=None):
@@ -142,4 +148,10 @@ class Section19Rule17(RuleDefinitionListIndexedBase):
         def rule_check(self, context, calc_vals=None, data=None):
             fan_power_airflow = calc_vals["fan_power_airflow"]
 
-            return fan_power_airflow <= FAN_POWER_AIRFLOW_LIMIT
+            return (
+                fan_power_airflow < FAN_POWER_AIRFLOW_LIMIT
+                or self.precision_comparison["fan_power_airflow"](
+                    fan_power_airflow,
+                    FAN_POWER_AIRFLOW_LIMIT,
+                )
+            )

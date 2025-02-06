@@ -492,7 +492,9 @@
         "AppG Used By TCDs": true,
         "AppG P_RMD Equals U_RMD": true,
         "AppG B_RMD Equals P_RMD": true,
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "reporting_name": {
         "Description": "Descriptive name used in RCT reports if id is not already a descriptive name",
@@ -594,6 +596,18 @@
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": "unknown"
+      },
+      "service_water_heating_area_type": {
+        "Description": "Service water heating area type classification",
+        "Data Type": "<ServiceWaterHeatingSpaceOptions2019ASHRAE901>",
+        "Notes": "The enumeration is based on the standard used.",
+        "RMD Test": false,
+        "AppG Used By TCDs": "unknown",
+        "AppG P_RMD Equals U_RMD": "unknown",
+        "AppG B_RMD Equals P_RMD": "unknown",
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       }
     }
   },
@@ -5219,7 +5233,9 @@
         "AppG Used By TCDs": true,
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "reporting_name": {
         "Description": "Descriptive name used in RCT reports if id is not already a descriptive name",
@@ -5228,7 +5244,9 @@
         "AppG Used By TCDs": false,
         "AppG P_RMD Equals U_RMD": false,
         "AppG B_RMD Equals P_RMD": false,
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": false,
+        "AppG 11-3 P_RMD Equals B_RMD": false
       },
       "notes": {
         "Description": "Supplementary information to provide context to the model reviewer",
@@ -5238,7 +5256,9 @@
         "AppG Used By TCDs": false,
         "AppG P_RMD Equals U_RMD": false,
         "AppG B_RMD Equals P_RMD": false,
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": false,
+        "AppG 11-3 P_RMD Equals B_RMD": false
       },
       "loop_or_piping": {
         "Description": "Referenced to the fluid loop or service water heating piping",
@@ -5249,7 +5269,9 @@
         "AppG Used By TCDs": true,
         "AppG P_RMD Equals U_RMD": true,
         "AppG B_RMD Equals P_RMD": false,
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "specification_method": {
         "Description": "Options for how the pump is specified",
@@ -5258,7 +5280,9 @@
         "AppG Used By TCDs": true,
         "AppG P_RMD Equals U_RMD": true,
         "AppG B_RMD Equals P_RMD": false,
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "design_electric_power": {
         "Description": "Pump design electric power",
@@ -5269,7 +5293,9 @@
         "AppG Used By TCDs": true,
         "AppG P_RMD Equals U_RMD": true,
         "AppG B_RMD Equals P_RMD": false,
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "motor_nameplate_power": {
         "Description": "Pump motor nameplate power",
@@ -5280,7 +5306,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": false,
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "design_head": {
         "Description": "Head of the pump at design flow conditions",
@@ -5291,7 +5319,9 @@
         "AppG Used By TCDs": false,
         "AppG P_RMD Equals U_RMD": false,
         "AppG B_RMD Equals P_RMD": false,
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "impeller_efficiency": {
         "Description": "Full load efficiency of the impeller",
@@ -5302,7 +5332,9 @@
         "AppG Used By TCDs": false,
         "AppG P_RMD Equals U_RMD": false,
         "AppG B_RMD Equals P_RMD": false,
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "motor_efficiency": {
         "Description": "Full load efficiency of the pump motor",
@@ -5313,7 +5345,9 @@
         "AppG Used By TCDs": false,
         "AppG P_RMD Equals U_RMD": false,
         "AppG B_RMD Equals P_RMD": false,
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "speed_control": {
         "Description": "Options for pump speed control",
@@ -5322,7 +5356,9 @@
         "AppG Used By TCDs": true,
         "AppG P_RMD Equals U_RMD": true,
         "AppG B_RMD Equals P_RMD": false,
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "design_flow": {
         "Description": "Design Pump Flowrate",
@@ -5333,7 +5369,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": false
       },
       "is_flow_sized_based_on_design_day": {
         "Description": "True if the design_flow is sized by the simulation software for the design day",
@@ -5342,7 +5380,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "output_validation_points": {
         "Description": "Energy validation points",
@@ -5352,7 +5392,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       }
     }
   },
@@ -5392,7 +5434,9 @@
         "AppG Used By TCDs": true,
         "AppG P_RMD Equals U_RMD": true,
         "AppG B_RMD Equals P_RMD": false,
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "result": {
         "Description": "Result",
@@ -5403,7 +5447,9 @@
         "AppG Used By TCDs": true,
         "AppG P_RMD Equals U_RMD": true,
         "AppG B_RMD Equals P_RMD": false,
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       }
     }
   },
@@ -6361,7 +6407,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "reporting_name": {
         "Description": "Descriptive name used in RCT reports if id is not already a descriptive name",
@@ -6370,7 +6418,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": false,
+        "AppG 11-3 P_RMD Equals B_RMD": false
       },
       "notes": {
         "Description": "Supplementary information to provide context to the model reviewer",
@@ -6380,7 +6430,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": false,
+        "AppG 11-3 P_RMD Equals B_RMD": false
       },
       "design_supply_temperature": {
         "Description": "Design supply temperature setpoint of service water heating loop",
@@ -6391,7 +6443,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "design_supply_temperature_difference": {
         "Description": "Design supply temperature difference (deltaT) of service water heating loop",
@@ -6402,7 +6456,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "tanks": {
         "Description": "Tanks within service water heating distribution system",
@@ -6412,7 +6468,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "is_central_system": {
         "Description": "Indicates whether it is a central service water heater distribution system",
@@ -6422,7 +6480,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "service_water_piping": {
         "Description": "Other service water piping connected to this one as children.",
@@ -6431,7 +6491,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "distribution_compactness": {
         "Description": "Type of compact distribution system",
@@ -6441,7 +6503,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "control_type": {
         "Description": "Type of distribution system",
@@ -6451,7 +6515,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "configuration_type": {
         "Description": "Type of configuration",
@@ -6461,7 +6527,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "is_recovered_heat_from_drain_used_by_water_heater": {
         "Description": "Indicates whether the recovered heat from the shower drain used by the service water heater",
@@ -6471,7 +6539,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": false
       },
       "drain_heat_recovery_efficiency": {
         "Description": "Shower heat drain recovery efficiency",
@@ -6482,7 +6552,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": false
       },
       "drain_heat_recovery_type": {
         "Description": "Drain heat recovery type",
@@ -6492,7 +6564,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": false
       },
       "flow_multiplier_schedule": {
         "Description": "service water heating Loop flow muliplier schedule name",
@@ -6502,7 +6576,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "entering_water_mains_temperature_schedule": {
         "Description": "Temperature schedule for unheated entering water to the building site often referenced as mains temperature.",
@@ -6512,7 +6588,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "is_ground_temperature_used_for_entering_water": {
         "Description": "Indicates whether ground temperature is the source of the entering water temperature",
@@ -6521,7 +6599,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       }
     }
   },
@@ -6600,7 +6680,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "reporting_name": {
         "Description": "Descriptive name used in RCT reports if id is not already a descriptive name",
@@ -6609,7 +6691,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": false,
+        "AppG 11-3 P_RMD Equals B_RMD": false
       },
       "notes": {
         "Description": "Supplementary information to provide context to the model reviewer",
@@ -6619,7 +6703,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": false,
+        "AppG 11-3 P_RMD Equals B_RMD": false
       },
       "is_recirculation_loop": {
         "Description": "Indicates if service water heating piping is a loop and recirculates",
@@ -6628,7 +6714,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "insulation_thickness": {
         "Description": "Pipe insulation thickness",
@@ -6640,7 +6728,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": false,
+        "AppG 11-3 P_RMD Equals B_RMD": false
       },
       "loop_pipe_location": {
         "Description": "Loop pipe location",
@@ -6650,7 +6740,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "location_zone": {
         "Description": "Zone reference of where the component is located when IN_ZONE is selected from ComponentLocationOptions",
@@ -6660,7 +6752,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "length": {
         "Description": "Pipe length",
@@ -6672,7 +6766,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "diameter": {
         "Description": "Pipe section diameter",
@@ -6684,7 +6780,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "child": {
         "Description": "Other service water piping connected to this one as children.",
@@ -6693,7 +6791,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       }
     }
   },
@@ -6708,7 +6808,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "reporting_name": {
         "Description": "Descriptive name used in RCT reports if id is not already a descriptive name",
@@ -6717,7 +6819,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": false,
+        "AppG 11-3 P_RMD Equals B_RMD": false
       },
       "notes": {
         "Description": "Supplementary information to provide context to the model reviewer",
@@ -6727,7 +6831,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": false,
+        "AppG 11-3 P_RMD Equals B_RMD": false
       },
       "angle_from_true_north": {
         "Description": "Solar heater angle from true north, clockwise",
@@ -6737,7 +6843,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "solar_savings_fraction": {
         "Description": "Solar savings fraction",
@@ -6747,7 +6855,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "collector_area": {
         "Description": "Solar collector area",
@@ -6757,7 +6867,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "collector_type_description": {
         "Description": "Description of solar collector type",
@@ -6767,7 +6879,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "collector_slope": {
         "Description": "Solar slope from horizontal",
@@ -6777,7 +6891,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "tank": {
         "Description": "Tank that is part of the solar thermal system",
@@ -6787,7 +6903,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       }
     }
   },
@@ -6802,7 +6920,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "reporting_name": {
         "Description": "Descriptive name used in RCT reports if id is not already a descriptive name",
@@ -6811,7 +6931,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": false,
+        "AppG 11-3 P_RMD Equals B_RMD": false
       },
       "notes": {
         "Description": "Supplementary information to provide context to the model reviewer",
@@ -6821,7 +6943,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": false,
+        "AppG 11-3 P_RMD Equals B_RMD": false
       },
       "heater_fuel_type": {
         "Description": "Service water heating heater fuel type",
@@ -6830,7 +6954,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "distribution_system": {
         "Description": "Referenced to the service water heating distribution system",
@@ -6841,7 +6967,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "energy_factor": {
         "Description": "Energy factor",
@@ -6852,7 +6980,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "thermal_efficiency": {
         "Description": "Service water heating heater thermal efficiency",
@@ -6862,7 +6992,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "standby_loss_fraction": {
         "Description": "Standby loss fraction",
@@ -6872,7 +7004,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "uniform_energy_factor": {
         "Description": "Uniform energy factor",
@@ -6883,7 +7017,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "first_hour_rating": {
         "Description": "First hour rating volume",
@@ -6895,7 +7031,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "output_validation_points": {
         "Description": "Capacity validation points",
@@ -6904,7 +7042,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "input_power": {
         "Description": "Input power",
@@ -6916,7 +7056,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "rated_capacity": {
         "Description": "Rated capacity",
@@ -6927,7 +7069,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "minimum_capacity": {
         "Description": "Minimum capacity",
@@ -6939,7 +7083,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "recovery_efficiency": {
         "Description": "Recovery efficiency",
@@ -6949,7 +7095,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "setpoint_temperature": {
         "Description": "Set point temperature",
@@ -6959,7 +7107,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "compressor_location": {
         "Description": "Description of where the heat pump for the water heater is located",
@@ -6969,7 +7119,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "compressor_zone": {
         "Description": "Zone reference of where the heat pump for the water heater is located",
@@ -6979,7 +7131,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "compressor_heat_rejection_source": {
         "Description": "Heat pump heat rejection source",
@@ -6989,7 +7143,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "compressor_heat_rejection_zone": {
         "Description": "Heat pump heat rejection zone",
@@ -6999,7 +7155,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "compressor_capacity_validation_points": {
         "Description": "Capacity validation points",
@@ -7008,7 +7166,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "compressor_power_validation_points": {
         "Description": "Coefficient of performance validation points",
@@ -7017,7 +7177,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "draft_fan_power": {
         "Description": "Power for the draft fan ",
@@ -7029,7 +7191,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "has_electrical_ignition": {
         "Description": "Indicates whether the water heater has electrical ignition",
@@ -7039,7 +7203,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "heater_type": {
         "Description": "Service water heater type",
@@ -7048,7 +7214,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "tank": {
         "Description": "Tank that is part of the service water heating equipment",
@@ -7058,7 +7226,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "status_type": {
         "Description": "Choice of new, existing, addition, alteration, etc. for each ruleset.",
@@ -7067,7 +7237,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "solar_thermal_systems": {
         "Description": "Solar thermal systems used for heating service water",
@@ -7077,7 +7249,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "hot_water_loop": {
         "Description": "Referenced to the hot water fluid loop",
@@ -7087,7 +7261,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       }
     }
   },
@@ -7163,7 +7339,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "result": {
         "Description": "Result",
@@ -7173,7 +7351,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       }
     }
   },
@@ -7189,7 +7369,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "condenser_water_temperature": {
         "Description": "Entering condenser temperature of water",
@@ -7199,7 +7381,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "evaporator_air_flow": {
         "Description": "Air flow across evaporator",
@@ -7209,7 +7393,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "condenser_water_flow": {
         "Description": "Water flow across condenser",
@@ -7219,7 +7405,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "result": {
         "Description": "Result",
@@ -7229,7 +7417,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       }
     }
   },
@@ -7245,7 +7435,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "condenser_water_temperature": {
         "Description": "Entering condenser temperature of water",
@@ -7255,7 +7447,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "evaporator_air_flow": {
         "Description": "Air flow across evaporator",
@@ -7265,7 +7459,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "condenser_water_flow": {
         "Description": "Water flow across condenser",
@@ -7275,7 +7471,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "load": {
         "Description": "Load",
@@ -7285,7 +7483,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "result": {
         "Description": "Result",
@@ -7295,7 +7495,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       }
     }
   },
@@ -7310,7 +7512,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "reporting_name": {
         "Description": "Descriptive name used in RCT reports if id is not already a descriptive name",
@@ -7319,7 +7523,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": false,
+        "AppG 11-3 P_RMD Equals B_RMD": false
       },
       "notes": {
         "Description": "Supplementary information to provide context to the model reviewer",
@@ -7329,7 +7535,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": false,
+        "AppG 11-3 P_RMD Equals B_RMD": false
       },
       "storage_capacity": {
         "Description": "Storage capacity of tank in distribution system",
@@ -7341,7 +7549,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "type": {
         "Description": "Service water heater tank type",
@@ -7350,7 +7560,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "height": {
         "Description": "Tank height",
@@ -7362,7 +7574,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "interior_insulation": {
         "Description": "Tank interior insulation R-value",
@@ -7374,7 +7588,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "exterior_insulation": {
         "Description": "Tank exterior insulation R-value",
@@ -7386,7 +7602,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "location": {
         "Description": "Location",
@@ -7396,7 +7614,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "location_zone": {
         "Description": "Tank zone location",
@@ -7406,7 +7626,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       }
     }
   },
@@ -7458,7 +7680,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "reporting_name": {
         "Description": "Descriptive name used in RCT reports if id is not already a descriptive name",
@@ -7467,7 +7691,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": false,
+        "AppG 11-3 P_RMD Equals B_RMD": false
       },
       "notes": {
         "Description": "Supplementary information to provide context to the model reviewer",
@@ -7477,7 +7703,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": false,
+        "AppG 11-3 P_RMD Equals B_RMD": false
       },
       "area_type": {
         "Description": "Service Water Heating Loop Area Type",
@@ -7487,7 +7715,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "water_serves_type": {
         "Description": "The use of the water serves the type",
@@ -7496,7 +7726,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "served_by_distribution_system": {
         "Description": "ID fo the ServiceWaterHeatingDistributionSystem that serves this end use",
@@ -7506,7 +7738,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "use": {
         "Description": "Usage of service hot water",
@@ -7516,7 +7750,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": false
       },
       "use_units": {
         "Description": "Type of units for use of service hot water",
@@ -7525,7 +7761,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": false
       },
       "use_multiplier_schedule": {
         "Description": "Reference to the schedule containing the multiplier for the use of service hot water",
@@ -7535,7 +7773,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "temperature_at_fixture": {
         "Description": "Reference to the schedule containing the multiplier for the use of service hot water",
@@ -7546,7 +7786,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "is_heat_recovered_by_drain": {
         "Description": "Indicates if heat is being recovered from the drain",
@@ -7556,7 +7798,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": false
       },
       "is_recovered_heat_used_by_cold_side_feed": {
         "Description": "Indicates if heat is being recovered from the drain is used on the cold side feed",
@@ -7566,7 +7810,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": false
       }
     }
   },

@@ -1,10 +1,20 @@
+from functools import partial
+from typing import TypedDict, Mapping
+
 from jsonpointer import resolve_pointer
 from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
 from rct229.rule_engine.ruleset_model_factory import RuleSetModels, get_rmd_instance
+from rct229.schema.config import ureg
 from rct229.utils.assertions import MissingKeyException, RCTFailureException
 from rct229.utils.json_utils import slash_prefix_guarantee
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import calcq_to_q
+from rct229.utils.std_comparisons import std_equal_with_precision
+
+
+class RCTPrecision(TypedDict):
+    precision: float
+    unit: str | None
 
 
 class RuleDefinitionBase:
@@ -14,17 +24,18 @@ class RuleDefinitionBase:
         self,
         rmds_used,
         rmds_used_optional=None,
-        id=None,
-        description=None,
-        ruleset_section_title=None,
-        standard_section=None,
-        is_primary_rule=None,
-        rmd_context="",
+        id: str = None,
+        description: str = None,
+        ruleset_section_title: str = None,
+        standard_section: str = None,
+        is_primary_rule: bool = None,
+        rmd_context: str = "",
         required_fields=None,
-        manual_check_required_msg="",
-        fail_msg="",
-        pass_msg="",
-        not_applicable_msg="",
+        manual_check_required_msg: str = "",
+        fail_msg: str = "",
+        pass_msg: str = "",
+        not_applicable_msg: str = "",
+        precision: Mapping[str, RCTPrecision] = None,
     ):
         """Base class for all Rule definitions
 
@@ -67,6 +78,15 @@ class RuleDefinitionBase:
             default message for PASS outcome
         not_applicable_msg: string
             default message for NOT_APPLICABLE outcome
+        precision: dict
+            precision value(s) in a dictionary
+            e.g.,
+            {
+                "subsurface_u_factor_b": {
+                    "precision": 0.01,
+                    "unit": "Btu/(hr*ft2*R)"
+                }
+            }
         """
         self.rmds_used = rmds_used
         self.rmds_used_optional = rmds_used_optional
@@ -85,6 +105,22 @@ class RuleDefinitionBase:
         self.not_applicable_msg = not_applicable_msg
         self.fail_msg = fail_msg
         self.pass_msg = pass_msg
+        self.precision_comparison = None
+
+        if precision:
+            self.precision_comparison = {
+                # if no unit, handle it as a dimensionless value.
+                key: partial(
+                    std_equal_with_precision,
+                    precision=val["precision"] * ureg(val["unit"])
+                    if val.get("unit")
+                    else val["precision"],
+                )
+                for key, val in precision.items()
+            }
+        else:
+            # default comparison to be strict equality comparison
+            self.precision_comparison = lambda val, std_val: val == std_val
 
     def evaluate(self, rmds, data={}):
         """Generates the outcome dictionary for the rule

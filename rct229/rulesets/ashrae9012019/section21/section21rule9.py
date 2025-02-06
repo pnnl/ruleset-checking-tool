@@ -100,6 +100,13 @@ class Section21Rule9(RuleDefinitionListIndexedBase):
             required_pump_power_per_flow_rate = calc_vals[
                 "required_pump_power_per_flow_rate"
             ]
+            return required_pump_power_per_flow_rate == pump_power_per_flow_rate
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            pump_power_per_flow_rate = calc_vals["pump_power_per_flow_rate"]
+            required_pump_power_per_flow_rate = calc_vals[
+                "required_pump_power_per_flow_rate"
+            ]
             return std_equal(
                 required_pump_power_per_flow_rate, pump_power_per_flow_rate
             )

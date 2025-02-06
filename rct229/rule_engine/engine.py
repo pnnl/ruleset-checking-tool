@@ -4,7 +4,7 @@ import inspect
 import rct229.rulesets as rulesets
 from rct229.rule_engine.ruleset_model_factory import RuleSetModels, get_rmd_instance
 from rct229.schema.schema_utils import quantify_rmd
-from rct229.schema.validate import validate_rmd
+from rct229.schema.validate import validate_rpd
 from rct229.utils.assertions import RCTException, assert_
 from rct229.utils.file import deserialize_rpd_file
 from rct229.utils.jsonpath_utils import find_all, find_exactly_one
@@ -185,9 +185,9 @@ def evaluate_rules(
 
     for ruleset_model in rmds.get_ruleset_model_types():
         if rmds_used[ruleset_model]:
-            rmd_validation = validate_rmd(rmds[ruleset_model], test)
+            rmd_validation = validate_rpd(rmds[ruleset_model], test)
             if rmd_validation["passed"] is not True:
-                invalid_rmds[ruleset_model] = rmd_validation["error"]
+                invalid_rmds[ruleset_model] = rmd_validation["errors"]
 
     assert_(
         len(invalid_rmds) == 0,
@@ -199,9 +199,9 @@ def evaluate_rules(
     for ruleset_model in rmds.get_ruleset_model_types():
         # used is None but rmds contain this ruleset model
         if not rmds_used[ruleset_model] and rmds.__getitem__(ruleset_model):
-            rmd_validation = validate_rmd(rmds[ruleset_model], test)
+            rmd_validation = validate_rpd(rmds[ruleset_model], test)
             if rmd_validation["passed"] is not True:
-                invalid_rmds[ruleset_model] = rmd_validation["error"]
+                invalid_rmds[ruleset_model] = rmd_validation["errors"]
 
     assert_(
         len(invalid_rmds) == 0,

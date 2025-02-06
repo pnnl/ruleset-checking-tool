@@ -364,7 +364,12 @@
                     "description": "Classification used for HVAC",
                     "$ref": "Enumerations2019ASHRAE901.schema.json#/definitions/HeatingVentilatingAirConditioningBuildingAreaOptions2019ASHRAE901",
                     "notes": "The enumeration is based on the standard used."
-                }
+				},
+                "service_water_heating_building_area_type": {
+                    "description": "Temporary service water heating building area type.",
+                    "$ref": "Enumerations2019ASHRAE901.schema.json#/definitions/ServiceWaterHeatingSpaceOptions2019ASHRAE901",
+                    "notes": "(Temporary) The enumeration is based on the standard used."
+				}
             },
             "required": [
                 "id"
@@ -627,7 +632,12 @@
                     "items": {
                         "$ref": "ASHRAE229.schema.json#/definitions/ServiceWaterHeatingUse"
                     }
-                }
+                },
+                "service_water_heating_building_area_type": {
+                     "description": "Temporary service water heating building area type.",
+                     "$ref": "Enumerations2019ASHRAE901.schema.json#/definitions/ServiceWaterHeatingSpaceOptions2019ASHRAE901",
+                     "notes": "(Temporary) The enumeration is based on the standard used."
+				}
             },
             "required": [
                 "id"
@@ -4226,6 +4236,10 @@
                     "description": "Indicates if service water heating piping is a loop and recirculates",
                     "type": "boolean"
                 },
+                "are_thermal_losses_modeled": {
+                    "description": "Indicates if thermal losses from the service water heating piping are modeled",
+                    "type": "boolean"
+                },
                 "insulation_thickness": {
                     "description": "Pipe insulation thickness",
                     "type": "number",
@@ -4347,27 +4361,24 @@
                     "type": "string",
                     "notes": "Data elements linking data groups by reference that don't make sense without the reference are shown as required. Few other data elements than this type and id data elements are shown as required. Other data elements may be required by specific rulesets. Constraint to use when implemented :ServiceWaterHeatingDistributionSystem:"
                 },
-                "energy_factor": {
-                    "description": "Energy factor",
-                    "type": "number",
-                    "minimum": 0.0,
-                    "notes": "From CBECC-Com."
+                "efficiency_metric_types": {
+                    "description": "List of efficiency metrics that correspond to the values in efficiency_metric_values list",
+                    "type": "array",
+                    "items": {
+                        "$ref": "ASHRAE229.schema.json#/definitions/ServiceWaterHeatingEfficiencyMetricOptions"
+                    }
                 },
-                "thermal_efficiency": {
-                    "description": "Service water heating heater thermal efficiency",
-                    "type": "number",
-                    "minimum": 0.0
+                "efficiency_metric_values": {
+                    "description": "List of efficiency metric values that correspond to the descriptors in efficiency_metric_types list",
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
                 },
-                "standby_loss_fraction": {
-                    "description": "Standby loss fraction",
-                    "type": "number",
-                    "notes": "From CBECC-Com."
-                },
-                "uniform_energy_factor": {
-                    "description": "Uniform energy factor",
-                    "type": "number",
-                    "minimum": 0.0,
-                    "notes": "From CBECC-Com."
+                "draw_pattern": {
+                    "description": "Draw pattern",
+                    "$ref": "ASHRAE229.schema.json#/definitions/DrawPatternOptions",
+                    "notes": "Draw pattern refers to the water draw profile in the uniform energy factor test. See 10 CFR 430 Appendix E Uniform Test Method for Measuring the Energy Consumption of Water Heaters for more information."
                 },
                 "first_hour_rating": {
                     "description": "First hour rating volume",
@@ -4492,6 +4503,33 @@
             ],
             "additionalProperties": false
         },
+        "ServiceWaterHeatingEfficiencyMetricOptions": {
+            "type": "string",
+            "enum": [
+                "ENERGY_FACTOR",
+                "UNIFORM_ENERGY_FACTOR",
+                "THERMAL_EFFICIENCY",
+                "STANDBY_LOSS_FRACTION",
+                "STANDBY_LOSS_ENERGY",
+                "OTHER"
+            ],
+            "descriptions": [
+                "Energy factor",
+                "Uniform energy factor",
+                "Thermal efficiency",
+                "Standby loss fraction",
+                "Standby loss fraction",
+                "Other"
+            ],
+            "notes": [
+                null,
+                "See 10 CFR 430 Appendix E Uniform Test Method for Measuring the Energy Consumption of Water Heaters for more information.",
+                null,
+                null,
+                "Units are watts and can be converted from STANDBY_LOSS_FRACTION based forumulat found in CBECC-Res User Manual",
+                null
+            ]
+        },
         "ServiceWaterHeaterOptions": {
             "type": "string",
             "enum": [
@@ -4543,6 +4581,23 @@
                 "Crawl space",
                 "Underground",
                 "Unconditioned",
+                "Other"
+            ]
+        },
+        "DrawPatternOptions": {
+            "type": "string",
+            "enum": [
+                "VERY_SMALL",
+                "LOW",
+                "MEDIUM",
+                "HIGH",
+                "OTHER"
+            ],
+            "descriptions": [
+                "Very small",
+                "Low",
+                "Medium",
+                "High",
                 "Other"
             ]
         },
@@ -4849,6 +4904,7 @@
                 "NATURAL_GAS",
                 "PROPANE",
                 "FUEL_OIL",
+                "ON_SITE_RENEWABLE",
                 "NONE",
                 "OTHER"
             ],
@@ -4857,6 +4913,7 @@
                 "Natural gas",
                 "Propane",
                 "Fuel oil",
+                "On-site renewable",
                 "None",
                 "Other"
             ],

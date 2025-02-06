@@ -32,7 +32,7 @@ class Section22Rule6(RuleDefinitionListIndexedBase):
             each_rule=Section22Rule6.ChillerFluidLoopRule(),
             index_rmd=BASELINE_0,
             id="22-6",
-            description="For Baseline chilled water loop that is not purchased chilled water and serves computer room HVAC systems (System Type-11), The maximum reset chilled-water supply temperature shall be 54F.",
+            description="Baseline chilled water loops that do not use purchased chilled water and do serve computer rooms (i.e., baseline system type 11) shall have a maximum reset chilled water supply temperature setpoint of 54F.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.9 Chilled-water supply temperature reset (System 7, 8, 11, 12 and 13)",
             is_primary_rule=True,
@@ -78,6 +78,12 @@ class Section22Rule6(RuleDefinitionListIndexedBase):
                         "loop_supply_temperature_at_low_load",
                     ],
                 },
+                precision={
+                    "loop_supply_temperature_at_low_load": {
+                        "precision": 1,
+                        "unit": "K",
+                    },
+                },
             )
 
         def get_calc_vals(self, context, data=None):
@@ -96,6 +102,19 @@ class Section22Rule6(RuleDefinitionListIndexedBase):
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
+            loop_supply_temperature_at_low_load = calc_vals[
+                "loop_supply_temperature_at_low_load"
+            ]
+            required_loop_supply_temperature_at_low_load = calc_vals[
+                "required_loop_supply_temperature_at_low_load"
+            ]
+
+            return self.precision_comparison["loop_supply_temperature_at_low_load"](
+                loop_supply_temperature_at_low_load.to(ureg.kelvin),
+                required_loop_supply_temperature_at_low_load.to(ureg.kelvin),
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
             loop_supply_temperature_at_low_load = calc_vals[
                 "loop_supply_temperature_at_low_load"
             ]

@@ -33,7 +33,7 @@ class Section22Rule33(RuleDefinitionBase):
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             id="22-33",
-            description="Baseline chilled water system that does not use purchased chilled water must have no more than one CHW plant.",
+            description="Baseline chilled water systems that do not use purchased chilled water shall have only one set of primary/secondary chilled water loops.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.2 Building System-Specific Modeling Requirements for the Baseline model",
             is_primary_rule=True,

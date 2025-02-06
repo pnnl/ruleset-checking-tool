@@ -41,7 +41,7 @@ class Section22Rule16(RuleDefinitionListIndexedBase):
             each_rule=Section22Rule16.HeatRejectionRule(),
             index_rmd=BASELINE_0,
             id="22-16",
-            description="The baseline condenser-water design supply temperature shall be calculated using the cooling tower approach to the 0.4% evaporation design wet-bulb temperature, valid for wet-bulbs from 55°F to 90°F.",
+            description="The baseline condenser water design supply temperature shall be calculated using the cooling tower approach to the 0.4% evaporation design wet-bulb temperature, valid for evaporation design wet-bulb temperatures from 55°F to 90°F.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.11 Heat Rejection (System 7, 8, 11, 12 and 13)",
             is_primary_rule=True,
@@ -88,6 +88,12 @@ class Section22Rule16(RuleDefinitionListIndexedBase):
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
+                precision={
+                    "design_supply_temperature_b": {
+                        "precision": 0.1,
+                        "unit": "K",
+                    },
+                },
             )
 
         def get_calc_vals(self, context, data=None):
@@ -118,7 +124,8 @@ class Section22Rule16(RuleDefinitionListIndexedBase):
             design_wetbulb_temperature = calc_vals["design_wetbulb_temperature_b"]
             approach_b = calc_vals["approach_b"]
             design_supply_temperature_b = calc_vals["design_supply_temperature_b"]
-            return std_equal(
+
+            return self.precision_comparison["design_supply_temperature_b"](
                 design_supply_temperature_b.to(ureg.kelvin),
                 design_wetbulb_temperature.to(ureg.kelvin) + approach_b.to(ureg.kelvin),
             )

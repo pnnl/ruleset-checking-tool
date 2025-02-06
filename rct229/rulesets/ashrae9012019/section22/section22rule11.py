@@ -38,7 +38,7 @@ class Section22Rule11(RuleDefinitionListIndexedBase):
             each_rule=Section22Rule11.ChillerFluidLoopRule(),
             index_rmd=BASELINE_0,
             id="22-11",
-            description="For Baseline chilled-water system that does not use purchased chilled water, variable-flow secondary pump shall be modeled as 13W/gpm at design conditions.",
+            description="Baseline chilled water systems that do not use purchased chilled water shall have a variable-flow secondary pump power of 13 W/gpm at design conditions.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.10 Chilled-water pumps (System 7, 8, 11, 12 and 13)",
             is_primary_rule=True,
@@ -104,6 +104,12 @@ class Section22Rule11(RuleDefinitionListIndexedBase):
                     required_fields={
                         "$": ["pump_power_per_flow_rate"],
                     },
+                    precision={
+                        "secondary_loop_pump_power_per_flow_rate": {
+                            "precision": 1,
+                            "unit": "W/gpm",
+                        },
+                    },
                 )
 
             def get_calc_vals(self, context, data=None):
@@ -124,6 +130,19 @@ class Section22Rule11(RuleDefinitionListIndexedBase):
                 }
 
             def rule_check(self, context, calc_vals=None, data=None):
+                secondary_loop_pump_power_per_flow_rate = calc_vals[
+                    "secondary_loop_pump_power_per_flow_rate"
+                ]
+                req_pump_flow_rate = calc_vals["req_pump_flow_rate"]
+
+                return self.precision_comparison[
+                    "secondary_loop_pump_power_per_flow_rate"
+                ](
+                    secondary_loop_pump_power_per_flow_rate,
+                    req_pump_flow_rate,
+                )
+
+            def is_tolerance_fail(self, context, calc_vals=None, data=None):
                 secondary_loop_pump_power_per_flow_rate = calc_vals[
                     "secondary_loop_pump_power_per_flow_rate"
                 ]

@@ -68,10 +68,18 @@ class Section1Rule5(RuleDefinitionBase):
         bbp_set = list(set(filter(lambda x: x is not None, bbp_set)))
         pbp_nre_set = list(set(filter(lambda x: x is not None, pbp_nre_set)))
 
-        assert_(len(pbp_set) >= 1, "At least one `pbp_set` value must exist.")
-        assert_(len(bbp_set) >= 1, "At least one `bbp_set` value must exist.")
-        assert_(len(pbp_nre_set) >= 1, "At least one `pbp_nre_set` value must exist.")
-
+        assert_(
+            len(pbp_set) >= 1,
+            "Ruleset expects exactly one PBP value to be used in the project.",
+        )
+        assert_(
+            len(bbp_set) >= 1,
+            "Ruleset expects exactly one BBP value to be used in the project.",
+        )
+        assert_(
+            len(pbp_nre_set) >= 1,
+            "Ruleset expects exactly one PBP_nre value to be used in the project.",
+        )
         assert_(
             bbp_set[0] > 0,
             "The `baseline_building_performance_energy_cost` value must be greater than 0.",
@@ -131,9 +139,13 @@ class Section1Rule5(RuleDefinitionBase):
         pci_set = list(set(filter(lambda x: x is not None, pci_set)))
         pci_target_set = list(set(filter(lambda x: x is not None, pci_target_set)))
 
-        assert_(len(pci_set) >= 1, "At least one `pci_set` value must exist.")
         assert_(
-            len(pci_target_set) >= 1, "At least one `pci_target_set` value must exist."
+            len(pci_set) >= 1,
+            "Ruleset expects exactly one PCI value to be used in the project.",
+        )
+        assert_(
+            len(pci_target_set) >= 1,
+            "Ruleset expects exactly one PCI Target value to be used in the project.",
         )
 
         return {
@@ -162,32 +174,3 @@ class Section1Rule5(RuleDefinitionBase):
             - APPLICABLE_LIMIT
             <= pci_target_set[0]
         )
-
-    def get_fail_msg(self, context, calc_vals=None, data=None):
-        pbp_set = calc_vals["pbp_set"]
-        bbp_set = calc_vals["bbp_set"]
-        pbp_nre_set = calc_vals["pbp_nre_set"]
-        pci_set = calc_vals["pci_set"]
-        pci_target_set = calc_vals["pci_target_set"]
-
-        FAIL_MSG = ""
-        if len(pbp_set) != 1:
-            FAIL_MSG = (
-                "Ruleset expects exactly one PBP value to be used in the project."
-            )
-        elif len(bbp_set) != 1:
-            FAIL_MSG = (
-                "Ruleset expects exactly one BBP value to be used in the project."
-            )
-        elif len(pbp_nre_set) != 1:
-            FAIL_MSG = (
-                "Ruleset expects exactly one PBP_nre value to be used in the project."
-            )
-        elif len(pci_set) != 1:
-            FAIL_MSG = (
-                "Ruleset expects exactly one PCI value to be used in the project."
-            )
-        elif len(pci_target_set) != 1:
-            FAIL_MSG = "Ruleset expects exactly one PCI Target value to be used in the project."
-
-        return FAIL_MSG

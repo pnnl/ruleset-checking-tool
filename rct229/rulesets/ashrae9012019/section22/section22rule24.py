@@ -40,7 +40,7 @@ class Section22Rule24(RuleDefinitionListIndexedBase):
             each_rule=Section22Rule24.PrimaryPumpRule(),
             index_rmd=BASELINE_0,
             id="22-24",
-            description="For baseline chilled-water systems served by chiller(s), the primary pump shall be modeled as constant volume.",
+            description="Baseline chilled water loops that do not use purchased chilled water shall have the primary pump modeled as constant volume.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.10 Chilled-water pumps (Systems 7, 8, 11, 12, and 13)",
             is_primary_rule=True,

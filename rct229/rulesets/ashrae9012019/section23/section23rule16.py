@@ -15,7 +15,6 @@ from rct229.schema.config import ureg
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO, CalcQ
-from rct229.utils.std_comparisons import std_equal
 from rct229.utils.utility_functions import find_exactly_one_fluid_loop
 
 APPLICABLE_SYS_TYPES = [
@@ -134,6 +133,12 @@ class Section23Rule16(RuleDefinitionListIndexedBase):
                         "heating_coil_setpoint",
                     ],
                 },
+                precision={
+                    "heating_coil_setpoint": {
+                        "precision": 0.1,
+                        "unit": "delta_degC",
+                    },
+                },
             )
 
         def get_calc_vals(self, context, data=None):
@@ -167,7 +172,7 @@ class Section23Rule16(RuleDefinitionListIndexedBase):
             return (
                 heating_system_type_b == HEATING_SYSTEM.FLUID_LOOP
                 and hot_water_loop_type == FLUID_LOOP.HEATING
-                and std_equal(
+                and self.precision_comparison["heating_coil_setpoint"](
                     heating_coil_setpoint,
                     hvac_max_zone_setpoint - REQUIRED_SET_POINT_REDUCTION,
                 )

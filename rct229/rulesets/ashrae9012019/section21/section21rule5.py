@@ -64,6 +64,12 @@ class Section21Rule5(RuleDefinitionListIndexedBase):
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
+                precision={
+                    "heating_loop_conditioned_zone_area": {
+                        "precision": 1,
+                        "unit": "ft2",
+                    }
+                },
             )
 
         def is_applicable(self, context, data=None):
@@ -162,8 +168,14 @@ class Section21Rule5(RuleDefinitionListIndexedBase):
             num_boilers = calc_vals["num_boilers"]
             boiler_capacity_list = calc_vals["boiler_capacity_list"]
             return (
-                heating_loop_conditioned_zone_area
-                <= HEATING_LOOP_CONDITIONED_AREA_THRESHOLD
+                (
+                    heating_loop_conditioned_zone_area
+                    < HEATING_LOOP_CONDITIONED_AREA_THRESHOLD
+                    or self.precision_comparison["heating_loop_conditioned_zone_area"](
+                        heating_loop_conditioned_zone_area,
+                        HEATING_LOOP_CONDITIONED_AREA_THRESHOLD,
+                    )
+                )
                 and num_boilers == 1
             ) or (
                 heating_loop_conditioned_zone_area

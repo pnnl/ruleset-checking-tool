@@ -45,11 +45,17 @@ class Section22Rule8(RuleDefinitionListIndexedBase):
             each_rule=Section22Rule8.PrimaryFluidLoopRule(),
             index_rmd=BASELINE_0,
             id="22-8",
-            description="For Baseline chilled water system with cooling capacity of 300 tons or more, the secondary pump shall be modeled with variable-speed drives.",
+            description="Baseline chilled water systems with a cooling capacity of 300 tons or more shall have the secondary chilled water pump modeled with variable-speed drives.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.10 Chilled-water pumps (System 7, 8, 11, 12 and 13)",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].fluid_loops[*]",
+            precision={
+                "chw_loop_capacity": {
+                    "precision": 1,
+                    "unit": "ton",
+                },
+            },
         )
 
     def is_applicable(self, context, data=None):
@@ -108,10 +114,13 @@ class Section22Rule8(RuleDefinitionListIndexedBase):
         primary_loop_ids = data["primary_loop_ids"]
         chw_loop_capacity_dict = data["chw_loop_capacity_dict"]
 
-        return (
-            fluid_loop_b["id"] in primary_loop_ids
-            and chw_loop_capacity_dict[fluid_loop_b["id"]]
-            >= MIN_CHW_PRIMARY_LOOP_COOLING_CAPACITY
+        return fluid_loop_b["id"] in primary_loop_ids and (
+            chw_loop_capacity_dict[fluid_loop_b["id"]]
+            > MIN_CHW_PRIMARY_LOOP_COOLING_CAPACITY
+            or self.precision_comparison["chw_loop_capacity"](
+                chw_loop_capacity_dict[fluid_loop_b["id"]],
+                MIN_CHW_PRIMARY_LOOP_COOLING_CAPACITY,
+            )
         )
 
     class PrimaryFluidLoopRule(RuleDefinitionListIndexedBase):

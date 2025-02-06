@@ -110,6 +110,12 @@ class Section5Rule14(RuleDefinitionListIndexedBase):
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
+                    precision={
+                        "area_type_wwr_b": {
+                            "precision": 0.01,
+                            "unit": "",
+                        }
+                    },
                 )
 
             def get_calc_vals(self, context, data=None):
@@ -156,6 +162,12 @@ class Section5Rule14(RuleDefinitionListIndexedBase):
                 return manual_check_msg
 
             def rule_check(self, context, calc_vals=None, data=None):
+                return self.precision_comparison["area_type_wwr_b"](
+                    calc_vals["area_type_wwr"].magnitude,
+                    calc_vals["area_type_target_wwr"],
+                )
+
+            def is_tolerance_fail(self, context, calc_vals=None, data=None):
                 area_type_wwr = calc_vals["area_type_wwr"]
                 area_type_target_wwr = calc_vals["area_type_target_wwr"]
-                return std_equal(area_type_target_wwr, area_type_wwr)
+                return std_equal(area_type_wwr, area_type_target_wwr)

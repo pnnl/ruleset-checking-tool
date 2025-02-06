@@ -10,6 +10,7 @@ class RuleSetTest:
         "section5",
         "section6",
         "section10",
+        "section11",
         "section12",
         "section16",
         "section18",

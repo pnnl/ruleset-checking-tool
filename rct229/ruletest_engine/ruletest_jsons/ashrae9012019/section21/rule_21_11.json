@@ -25,15 +25,12 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 1",
@@ -47,8 +44,6 @@
                                             },
                                             {
                                                 "id": "Thermal Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 2",
@@ -172,15 +167,12 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 1",
@@ -194,8 +186,6 @@
                                             },
                                             {
                                                 "id": "Thermal Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 2",
@@ -325,15 +315,12 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "CAV Air Terminal 1",
@@ -445,15 +432,12 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "CAV Air Terminal 1",
@@ -571,25 +555,18 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
                                                         "is_supply_ducted": true,
-                                                        "heating_source": "ELECTRIC",
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10",
-                                                        "fan": {
-                                                            "id": "Terminal Fan 1"
-                                                        }
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10"
                                                     }
                                                 ]
                                             }
@@ -599,8 +576,22 @@
                                                 "id": "System 10",
                                                 "heating_system": {
                                                     "id": "Furnace Coil 1",
-                                                    "type": "FURNACE",
+                                                    "type": "ELECTRIC_RESISTANCE",
                                                     "energy_source_type": "ELECTRICITY"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
                                                 }
                                             }
                                         ]

@@ -185,7 +185,6 @@ class Section6Rule5(RuleDefinitionListIndexedBase):
                         schedule_comparison_result = calc_vals[
                             "schedule_comparison_result"
                         ]
-
                         return (
                             schedule_comparison_result["total_hours_compared"]
                             == schedule_comparison_result["total_hours_matched"]

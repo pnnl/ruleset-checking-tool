@@ -40,6 +40,16 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
                     USER=False, BASELINE_0=False, PROPOSED=True
                 ),
                 required_fields={"$.zones[*]": ["volume"]},
+                precision={
+                    "building_segment_design_lighting_wattage_area": {
+                        "precision": 0.01,
+                        "unit": "W",
+                    },
+                    "building_segment_design_lighting_wattage_space": {
+                        "precision": 0.01,
+                        "unit": "W",
+                    },
+                },
             )
 
         def get_calc_vals(self, context, data=None):
@@ -118,10 +128,22 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
 
             return (
                 (allowable_LPD_BAM or not check_BAM_flag)
-                and building_segment_design_lighting_wattage
-                <= allowable_LPD_wattage_BAM
-                or building_segment_design_lighting_wattage
-                <= allowable_lighting_wattage_SBS
+                and (
+                    building_segment_design_lighting_wattage < allowable_LPD_wattage_BAM
+                )
+                or self.precision_comparison[
+                    "building_segment_design_lighting_wattage_area"
+                ](building_segment_design_lighting_wattage, allowable_LPD_wattage_BAM)
+                or (
+                    building_segment_design_lighting_wattage
+                    < allowable_lighting_wattage_SBS
+                    or self.precision_comparison[
+                        "building_segment_design_lighting_wattage_space"
+                    ](
+                        building_segment_design_lighting_wattage,
+                        allowable_lighting_wattage_SBS,
+                    )
+                )
             )
 
         def get_pass_msg(self, context, calc_vals=None, data=None):

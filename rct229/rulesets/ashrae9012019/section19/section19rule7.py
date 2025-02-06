@@ -172,6 +172,12 @@ class Section19Rule7(RuleDefinitionListIndexedBase):
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
+                precision={
+                    "aggregated_min_OA_schedule_across_zones_b": {
+                        "precision": 1,
+                        "unit": "cfm",
+                    },
+                },
             )
 
         def is_applicable(self, context, data=None):
@@ -203,9 +209,16 @@ class Section19Rule7(RuleDefinitionListIndexedBase):
                 "zone_air_distribution_effectiveness_greater_than_1"
             ]
 
-            OA_CFM_schedule_match = (
-                aggregated_min_OA_schedule_across_zones_b
-                == aggregated_min_OA_schedule_across_zones_p
+            OA_CFM_schedule_match = all(
+                [
+                    self.precision_comparison[
+                        "aggregated_min_OA_schedule_across_zones_b"
+                    ](
+                        aggregated_min_OA_schedule_across_zones_b[i],
+                        aggregated_min_OA_schedule_across_zones_p[i],
+                    )
+                    for i in range(len(aggregated_min_OA_schedule_across_zones_b))
+                ]
             )
 
             modeled_baseline_total_zone_min_OA_CFM = sum(
@@ -316,7 +329,6 @@ class Section19Rule7(RuleDefinitionListIndexedBase):
             was_DCV_modeled_baseline = calc_vals["was_DCV_modeled_baseline"]
             was_DCV_modeled_proposed = calc_vals["was_DCV_modeled_proposed"]
 
-            Fail_msg = ""
             if (
                 modeled_baseline_total_zone_min_OA_CFM
                 > modeled_proposed_total_zone_min_OA_CFM
@@ -335,7 +347,7 @@ class Section19Rule7(RuleDefinitionListIndexedBase):
                 # Case 9
                 Fail_msg = f"For {hvac_id_b} the modeled baseline minimum ventilation system outdoor air intake flow CFM is higher than the minimum ventilation system outdoor air intake flow CFM modeled in the proposed design which does not meet the requirements of Section G3.1.2.5."
 
-            elif std_equal(
+            elif not std_equal(
                 modeled_baseline_total_zone_min_OA_CFM,
                 modeled_proposed_total_zone_min_OA_CFM,
             ):

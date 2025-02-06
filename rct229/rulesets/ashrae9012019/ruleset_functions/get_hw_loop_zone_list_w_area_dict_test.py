@@ -3,7 +3,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_hw_loop_zone_list_w_are
 )
 from rct229.schema.config import ureg
 from rct229.schema.schema_utils import quantify_rmd
-from rct229.schema.validate import schema_validate_rmd
+from rct229.schema.validate import schema_validate_rpd
 
 GET_HW_LOOP_ZONE_LIST_W_AREA_RMD = {
     "id": "ASHRAE229 1",
@@ -186,7 +186,7 @@ TEST_RMD = quantify_rmd(GET_HW_LOOP_ZONE_LIST_W_AREA_RMD)["ruleset_model_descrip
 
 
 def test__TEST_RPD__is_valid():
-    schema_validation_result = schema_validate_rmd(GET_HW_LOOP_ZONE_LIST_W_AREA_RMD)
+    schema_validation_result = schema_validate_rpd(GET_HW_LOOP_ZONE_LIST_W_AREA_RMD)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"

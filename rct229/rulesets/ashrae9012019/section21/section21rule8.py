@@ -80,6 +80,24 @@ class Section21Rule8(RuleDefinitionListIndexedBase):
                         "loop_supply_temperature_at_outdoor_low",
                     ],
                 },
+                precision={
+                    "design_outdoor_high_for_loop_supply_reset_temperature_b": {
+                        "precision": 0.1,
+                        "unit": "K",
+                    },
+                    "design_outdoor_low_for_loop_supply_reset_temperature_b": {
+                        "precision": 0.1,
+                        "unit": "K",
+                    },
+                    "design_supply_temperature_at_outdoor_high_b": {
+                        "precision": 0.1,
+                        "unit": "K",
+                    },
+                    "design_supply_temperature_at_outdoor_low_b": {
+                        "precision": 0.1,
+                        "unit": "K",
+                    },
+                },
             )
 
         def get_calc_vals(self, context, data=None):
@@ -156,8 +174,10 @@ class Section21Rule8(RuleDefinitionListIndexedBase):
                 "required_supply_temperature_at_outdoor_low_b"
             ]
             return (
-                (temperature_reset_type_b == DESIGN_TEMP_RESET_TYPE.OUTSIDE_AIR_RESET)
-                and std_equal(
+                temperature_reset_type_b == DESIGN_TEMP_RESET_TYPE.OUTSIDE_AIR_RESET
+                and self.precision_comparison[
+                    "design_outdoor_high_for_loop_supply_reset_temperature_b"
+                ](
                     design_outdoor_high_for_loop_supply_reset_temperature_b.to(
                         ureg.kelvin
                     ),
@@ -165,7 +185,9 @@ class Section21Rule8(RuleDefinitionListIndexedBase):
                         ureg.kelvin
                     ),
                 )
-                and std_equal(
+                and self.precision_comparison[
+                    "design_outdoor_low_for_loop_supply_reset_temperature_b"
+                ](
                     design_outdoor_low_for_loop_supply_reset_temperature_b.to(
                         ureg.kelvin
                     ),
@@ -173,11 +195,15 @@ class Section21Rule8(RuleDefinitionListIndexedBase):
                         ureg.kelvin
                     ),
                 )
-                and std_equal(
+                and self.precision_comparison[
+                    "design_supply_temperature_at_outdoor_high_b"
+                ](
                     design_supply_temperature_at_outdoor_high_b.to(ureg.kelvin),
                     required_supply_temperature_at_outdoor_high_b.to(ureg.kelvin),
                 )
-                and std_equal(
+                and self.precision_comparison[
+                    "design_supply_temperature_at_outdoor_low_b"
+                ](
                     design_supply_temperature_at_outdoor_low_b.to(ureg.kelvin),
                     required_supply_temperature_at_outdoor_low_b.to(ureg.kelvin),
                 )

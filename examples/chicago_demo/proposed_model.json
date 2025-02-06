@@ -299,7 +299,17 @@
                         }
                       ],
                       "ventilation_space_type": "OFFICE_BUILDINGS_OFFICE_SPACE",
-                      "service_water_heating_space_type": "OFFICE"
+                      "service_water_heating_space_type": "OFFICE",
+                      "service_water_heating_uses": [
+                        {
+                          "id": "SHW 1",
+                          "served_by_distribution_system": "SHW Distribution 1",
+                          "use": 5000,
+                          "use_units": "POWER",
+                          "use_multiplier_schedule": "ALWAYS ON DISCRETE",
+                          "temperature_at_fixture": 54.44444444444446
+                        }
+                      ]
                     }
                   ]
                 },
@@ -535,7 +545,17 @@
                         }
                       ],
                       "ventilation_space_type": "OFFICE_BUILDINGS_OFFICE_SPACE",
-                      "service_water_heating_space_type": "OFFICE"
+                      "service_water_heating_space_type": "OFFICE",
+                      "service_water_heating_uses": [
+                        {
+                          "id": "SHW 2",
+                          "served_by_distribution_system": "SHW Distribution 1",
+                          "use": 5000,
+                          "use_units": "POWER",
+                          "use_multiplier_schedule": "ALWAYS ON DISCRETE",
+                          "temperature_at_fixture": 54.44444444444446
+                        }
+                      ]
                     }
                   ]
                 },
@@ -771,7 +791,17 @@
                         }
                       ],
                       "ventilation_space_type": "OFFICE_BUILDINGS_OFFICE_SPACE",
-                      "service_water_heating_space_type": "OFFICE"
+                      "service_water_heating_space_type": "OFFICE",
+                      "service_water_heating_uses": [
+                        {
+                          "id": "SHW 3",
+                          "served_by_distribution_system": "SHW Distribution 1",
+                          "use": 5000,
+                          "use_units": "POWER",
+                          "use_multiplier_schedule": "ALWAYS ON DISCRETE",
+                          "temperature_at_fixture": 54.44444444444446
+                        }
+                      ]
                     }
                   ]
                 },
@@ -5061,6 +5091,13 @@
               "multiplier_schedule": "uses_astronomical_clock_not_schedule"
             }
           ]
+        }
+      ],
+      "pumps": [
+        {
+          "id": "SHW Pump 1",
+          "loop_or_piping": "SHW Piping 1",
+          "design_electric_power": 100
         }
       ],
       "schedules": [
@@ -110303,7 +110340,41 @@
         "baseline_building_performance_energy_cost": 253345.21,
         "baseline_building_unregulated_energy_cost": 14453.34,
         "baseline_building_regulated_energy_cost": 334178.98
-      }
+      },
+      "service_water_heating_equipment": [
+        {
+          "id": "SHW Equipment 1",
+          "distribution_system": "SHW Distribution 1",
+          "heater_fuel_type": "NATURAL_GAS",
+          "heater_type": "CONVENTIONAL",
+          "input_power": 29307.111111111113,
+          "first_hour_rating": 189.25000000000003,
+          "efficiency_metric_types": [
+            "UNIFORM_ENERGY_FACTOR"
+          ],
+          "efficiency_metric_values": [
+            0.4162
+          ],
+          "tank": {
+            "id": "SHW Tank",
+            "type": "COMMERCIAL_STORAGE",
+            "storage_capacity": 378.50000000000006
+          }
+        }
+      ],
+      "service_water_heating_distribution_systems": [
+        {
+          "id": "SHW Distribution 1",
+          "drain_heat_recovery_efficiency": 0.5,
+          "service_water_piping": [
+            {
+              "id": "SHW Piping 1",
+              "are_thermal_losses_modeled": false,
+              "is_recirculation_loop": true
+            }
+          ]
+        }
+      ]
     }
   ],
   "weather": {

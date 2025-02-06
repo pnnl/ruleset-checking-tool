@@ -15,7 +15,7 @@ from rct229.schema.config import ureg
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import getattr_
 from rct229.utils.pint_utils import CalcQ
-from rct229.utils.std_comparisons import std_equal
+
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_11_1,
@@ -92,6 +92,15 @@ class Section23Rule11(RuleDefinitionListIndexedBase):
                 required_fields={
                     "$": ["fan_system"],
                 },
+                precision={
+                    "supply_air_temp_reset_load_frac_b": {
+                        "precision": 0.1,
+                    },
+                    "reset_differential_temperature_b": {
+                        "precision": 0.1,
+                        "unit": "K",
+                    },
+                },
             )
 
         def get_calc_vals(self, context, data=None):
@@ -139,11 +148,14 @@ class Section23Rule11(RuleDefinitionListIndexedBase):
             return (
                 temperature_control_b
                 == FanSystemTemperatureControlOptions.LOAD_RESET_TO_SPACE_TEMPERATURE
-                and supply_air_temp_reset_load_frac_b
-                == TARGET_SUPPLY_AIR_TEMP_RESET_LOAD_FRAC
+                and self.precision_comparison["supply_air_temp_reset_load_frac_b"](
+                    supply_air_temp_reset_load_frac_b,
+                    TARGET_SUPPLY_AIR_TEMP_RESET_LOAD_FRAC,
+                )
             ) or (
                 temperature_control_b == FanSystemTemperatureControlOptions.ZONE_RESET
-                and std_equal(
-                    TARGET_RESET_DIFFERENTIAL_TEMP, reset_differential_temperature_b
+                and self.precision_comparison["reset_differential_temperature_b"](
+                    TARGET_RESET_DIFFERENTIAL_TEMP,
+                    reset_differential_temperature_b,
                 )
             )

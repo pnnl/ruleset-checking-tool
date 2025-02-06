@@ -97,6 +97,12 @@ class Section22Rule1(RuleDefinitionListIndexedBase):
                         "design_supply_temperature"
                     ],
                 },
+                precision={
+                    "design_supply_temperature": {
+                        "precision": 0.1,
+                        "unit": "K",
+                    },
+                },
             )
 
         def get_calc_vals(self, context, data=None):
@@ -113,6 +119,15 @@ class Section22Rule1(RuleDefinitionListIndexedBase):
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
+            design_supply_temperature = calc_vals["design_supply_temperature"]
+            required_supply_temperature = calc_vals["required_supply_temperature"]
+
+            return self.precision_comparison["design_supply_temperature"](
+                design_supply_temperature.to(ureg.kelvin),
+                required_supply_temperature.to(ureg.kelvin),
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
             design_supply_temperature = calc_vals["design_supply_temperature"]
             required_supply_temperature = calc_vals["required_supply_temperature"]
             return std_equal(

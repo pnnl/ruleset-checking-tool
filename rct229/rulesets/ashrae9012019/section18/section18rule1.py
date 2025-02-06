@@ -128,6 +128,12 @@ class Section18Rule1(RuleDefinitionListIndexedBase):
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
+                    precision={
+                        "building_total_lab_exhaust_p": {
+                            "precision": 1,
+                            "unit": "cfm",
+                        },
+                    },
                 )
 
             def get_calc_vals(self, context, data=None):
@@ -169,7 +175,11 @@ class Section18Rule1(RuleDefinitionListIndexedBase):
                 is_undetermined = False
                 if system_origin_b == SYSTEMORIGIN.G311D:
                     is_undetermined = (
-                        building_total_lab_exhaust_p <= EXHAUST_AIRFLOW_15000
+                        building_total_lab_exhaust_p < EXHAUST_AIRFLOW_15000
+                        or self.precision_comparison["building_total_lab_exhaust_p"](
+                            building_total_lab_exhaust_p,
+                            EXHAUST_AIRFLOW_15000,
+                        )
                     )
                 elif system_origin_b == SYSTEMORIGIN.G311E:
                     is_undetermined = is_zone_likely_a_vestibule_b[zone_id_b]

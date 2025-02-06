@@ -2,7 +2,7 @@ import pytest
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_min_oa_cfm_sch_zone import (
     get_min_oa_cfm_sch_zone,
 )
-from rct229.schema.validate import schema_validate_rmd
+from rct229.schema.validate import schema_validate_rpd
 from rct229.utils.assertions import RCTFailureException
 
 
@@ -89,14 +89,14 @@ TEST_RPD_FULL_WRONG_LENGTH = {
 
 
 def test__TEST_RMD_CORRECT_LENGTH__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RPD_FULL_CORRECT_LENGTH)
+    schema_validation_result = schema_validate_rpd(TEST_RPD_FULL_CORRECT_LENGTH)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
 
 
 def test__TEST_RMD_WRONG_LENGTH__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RPD_FULL_WRONG_LENGTH)
+    schema_validation_result = schema_validate_rpd(TEST_RPD_FULL_WRONG_LENGTH)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"

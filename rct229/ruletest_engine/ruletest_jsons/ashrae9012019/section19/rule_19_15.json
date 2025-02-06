@@ -25,25 +25,18 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10",
-                                                        "heating_source": "ELECTRIC",
-                                                        "fan": {
-                                                            "id": "Terminal Fan 1"
-                                                        }
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10"
                                                     }
                                                 ]
                                             }
@@ -51,6 +44,11 @@
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "System 10",
+                                                "heating_system": {
+                                                    "id": "Furnace Coil 1",
+                                                    "type": "ELECTRIC_RESISTANCE",
+                                                    "energy_source_type": "ELECTRICITY"
+                                                },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
@@ -89,27 +87,18 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 10",
-                                                        "heating_source": "ELECTRIC",
-                                                        "fan": {
-                                                            "id": "Terminal Fan 1",
-                                                            "specification_method": "SIMPLE",
-                                                            "design_electric_power": 25
-                                                        },
                                                         "primary_airflow": 117.98686079999996,
                                                         "supply_design_heating_setpoint_temperature": 40.5555555555556
                                                     }
@@ -126,6 +115,11 @@
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "System 10",
+                                                "heating_system": {
+                                                    "id": "Furnace Coil 1",
+                                                    "type": "ELECTRIC_RESISTANCE",
+                                                    "energy_source_type": "ELECTRICITY"
+                                                },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
@@ -185,25 +179,18 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10",
-                                                        "heating_source": "ELECTRIC",
-                                                        "fan": {
-                                                            "id": "Terminal Fan 1"
-                                                        }
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10"
                                                     }
                                                 ]
                                             }
@@ -211,6 +198,11 @@
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "System 10",
+                                                "heating_system": {
+                                                    "id": "Furnace Coil 1",
+                                                    "type": "ELECTRIC_RESISTANCE",
+                                                    "energy_source_type": "ELECTRICITY"
+                                                },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
@@ -249,27 +241,18 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 10",
-                                                        "heating_source": "ELECTRIC",
-                                                        "fan": {
-                                                            "id": "Terminal Fan 1",
-                                                            "specification_method": "SIMPLE",
-                                                            "design_electric_power": 25
-                                                        },
                                                         "primary_airflow": 117.98686079999996,
                                                         "supply_design_heating_setpoint_temperature": 29.444444444444457
                                                     }
@@ -286,6 +269,11 @@
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "System 10",
+                                                "heating_system": {
+                                                    "id": "Furnace Coil 1",
+                                                    "type": "ELECTRIC_RESISTANCE",
+                                                    "energy_source_type": "ELECTRICITY"
+                                                },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
@@ -345,15 +333,12 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -410,15 +395,12 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -505,15 +487,12 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -570,15 +549,12 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -666,15 +642,12 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -731,15 +704,12 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -782,14 +752,16 @@
                                                             "id": "Supply Fan 2",
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 75,
-                                                            "design_airflow": 117.98686079999996
+                                                            "design_airflow": 117.98686079999996,
+                                                            "is_airflow_sized_based_on_design_day": true
                                                         }
                                                     ],
                                                     "return_fans": [
                                                         {
                                                             "id": "Return Fan 1",
                                                             "specification_method": "SIMPLE",
-                                                            "design_electric_power": 25
+                                                            "design_electric_power": 25,
+                                                            "is_airflow_sized_based_on_design_day": true
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 0.0

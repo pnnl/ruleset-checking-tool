@@ -13,11 +13,27 @@ COMPUTER_ROOM_MISC_POWER_DENSITY_THRESHOLD = 20 * ureg("watt/ft2")
 LightingSpaceOptions2019ASHRAE901TG37 = SchemaEnums.schema_enums[
     "LightingSpaceOptions2019ASHRAE901TG37"
 ]
+MISCELLANEOUS_EQUIPMENT = SchemaEnums.schema_enums["MiscellaneousEquipmentOptions"]
 
 EnergySourceOptions = SchemaEnums.schema_enums["EnergySourceOptions"]
 
 
 def is_space_a_computer_room(rmd: dict, space_id: str) -> bool:
+    """
+    Returns true or false as to whether space is a computer room. The criteria is such that it is considered a computer room if the total of misc INFORMATION_TECHNOLOGY_EQUIPMENT Power density in W/sf exceeds 20 W/sf per the definition of a computer room in 90.1 Section 3.
+
+    Parameters
+    ----------
+    rmd: dict
+        RMD at RuleSetModelDescription level
+    space_id: str
+        space id
+
+    Returns
+    -------
+    is_space_a_computer_room_flag: bool
+        The function returns true or false as to whether space is a computer room. The criteria is such that it is considered a computer room if the total of misc INFORMATION_TECHNOLOGY_EQUIPMENT Power density in W/sf exceeds 20 W/sf per the definition of a computer room in 90.1 Section 3.
+    """
     space = find_exactly_one_space(rmd, space_id)
     is_space_a_computer_room_flag = (
         space.get("lighting_space_type")
@@ -36,11 +52,13 @@ def is_space_a_computer_room(rmd: dict, space_id: str) -> bool:
                 )
                 for misc_equip in find_all("$.miscellaneous_equipment[*]", space)
                 if misc_equip.get("energy_type") == EnergySourceOptions.ELECTRICITY
+                and misc_equip.get("type")
+                == MISCELLANEOUS_EQUIPMENT.INFORMATION_TECHNOLOGY_EQUIPMENT
             ],
             ZERO.POWER,
         )
 
-        space_floor_area = getattr_(space, "Space", "floor_area")
+        space_floor_area = getattr_(space, "spaces", "floor_area")
         # exception handling if the space has zero floor area
         assert_(space_floor_area > ZERO.AREA, f"Space {space_id} has zero floor area")
 

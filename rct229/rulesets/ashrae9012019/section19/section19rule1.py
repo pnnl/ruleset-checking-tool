@@ -66,6 +66,14 @@ class Section19Rule1(RuleDefinitionListIndexedBase):
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
+                precision={
+                    "heating_oversizing_factor": {
+                        "precision": 0.01,
+                    },
+                    "cooling_oversizing_factor": {
+                        "precision": 0.01,
+                    },
+                },
             )
 
         def is_applicable(self, context, data=None):
@@ -153,18 +161,30 @@ class Section19Rule1(RuleDefinitionListIndexedBase):
 
             return (
                 (
-                    REQ_HEATING_OVERSIZING_FACTOR == heating_oversizing_factor
-                    and REQ_COOLING_OVERSIZING_FACTOR == cooling_oversizing_factor
+                    self.precision_comparison["heating_oversizing_factor"](
+                        heating_oversizing_factor,
+                        REQ_HEATING_OVERSIZING_FACTOR,
+                    )
+                    and self.precision_comparison["cooling_oversizing_factor"](
+                        cooling_oversizing_factor,
+                        REQ_COOLING_OVERSIZING_FACTOR,
+                    )
                     and heating_is_sized_based_on_design_day
                     and cooling_is_sized_based_on_design_day
                 )
                 or (
-                    REQ_HEATING_OVERSIZING_FACTOR == heating_oversizing_factor
+                    self.precision_comparison["heating_oversizing_factor"](
+                        heating_oversizing_factor,
+                        REQ_HEATING_OVERSIZING_FACTOR,
+                    )
                     and heating_is_sized_based_on_design_day
                     and not cooling_oversizing_applicable
                 )
                 or (
-                    REQ_COOLING_OVERSIZING_FACTOR == cooling_oversizing_factor
+                    self.precision_comparison["cooling_oversizing_factor"](
+                        cooling_oversizing_factor,
+                        REQ_COOLING_OVERSIZING_FACTOR,
+                    )
                     and cooling_is_sized_based_on_design_day
                     and not heating_oversizing_applicable
                 )

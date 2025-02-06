@@ -2,7 +2,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.normalize_interior_lighting
     normalize_interior_lighting_schedules,
 )
 from rct229.schema.schema_utils import quantify_rmd
-from rct229.schema.validate import schema_validate_rmd
+from rct229.schema.validate import schema_validate_rpd
 
 TEST_RMD = {
     "id": "building_1",
@@ -83,7 +83,7 @@ TEST_SPACES = quantify_rmd(TEST_SPACE_RMD)["ruleset_model_descriptions"][0][
 
 
 def test__TEST_RPD__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_SPACE_RMD)
+    schema_validation_result = schema_validate_rpd(TEST_SPACE_RMD)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"

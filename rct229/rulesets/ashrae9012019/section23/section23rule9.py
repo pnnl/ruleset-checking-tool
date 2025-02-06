@@ -97,6 +97,12 @@ class Section23Rule9(RuleDefinitionListIndexedBase):
                 "to this value.  We are not able to determine the airflow required to comply with codes or "
                 "accreditation standards at this time, please double check that there are no additional "
                 "codes or accreditation standards in regards to airflow. ",
+                precision={
+                    "minimum_airflow_b": {
+                        "precision": 1,
+                        "unit": "cfm",
+                    },
+                },
             )
 
         def get_calc_vals(self, context, data=None):
@@ -127,6 +133,7 @@ class Section23Rule9(RuleDefinitionListIndexedBase):
             minimum_airflow_b = calc_vals["minimum_airflow"]
             minimum_ventilation_airflow_b = calc_vals["minimum_ventilation_airflow"]
             max_supply_airflow_b = calc_vals["max_supply_airflow"]
+
             return minimum_airflow_b > max(
                 minimum_ventilation_airflow_b,
                 VENT_THRESHOLD_FACTOR * max_supply_airflow_b,
@@ -136,7 +143,11 @@ class Section23Rule9(RuleDefinitionListIndexedBase):
             minimum_airflow_b = calc_vals["minimum_airflow"]
             minimum_ventilation_airflow_b = calc_vals["minimum_ventilation_airflow"]
             max_supply_airflow_b = calc_vals["max_supply_airflow"]
-            return minimum_airflow_b == max(
-                minimum_ventilation_airflow_b,
-                VENT_THRESHOLD_FACTOR * max_supply_airflow_b,
+
+            return self.precision_comparison["minimum_airflow_b"](
+                minimum_airflow_b,
+                max(
+                    minimum_ventilation_airflow_b,
+                    VENT_THRESHOLD_FACTOR * max_supply_airflow_b,
+                ),
             )

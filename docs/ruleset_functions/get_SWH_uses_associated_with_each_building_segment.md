@@ -1,13 +1,12 @@
 ## get_SWH_uses_associated_with_each_building_segment
 
-Description: This function gets all the SWH uses connected to a building segment.  This function is primarily to encapsulate getting service water heating uses in one function so that if a change is made in the schema as to how service water heating use is specified, the RCT only needs to change in one place.   
+Description: This function gets all the SWH uses connected to a building segment. This function is primarily to encapsulate getting service water heating uses in one function so that if a change is made in the schema as to how service water heating use is specified, the RCT only needs to change in one place.   
 
 Inputs:
-- **RMD**
-- **building_segment_id** - the id of the building segment
+- **RMD**  
 
 Returns:
-- **swh_uses**: A list containing the ids of all service water heating uses associated with a building segment  
+- **swh_uses_dict**:  A dictionary where the keys are all the building segment ids and the value is `service_water_heating_uses` object under the `service_water_heating_uses`.   
 
 Function Call:
 - get_obj_by_id  
@@ -15,13 +14,11 @@ Function Call:
 Data Lookup: None
 
 Logic:
-- get the building segment: `building_segment = get_obj_by_id(RMD, building_segment_id)`
-- create a blank list: `swh_uses = []`
-- look at each swh use: `for swh_use in building_segment.service_water_heating_uses:`
-    - append the use to the list: `swh_uses.append(swh_use)`
+- define `swh_uses_dict`: `swh_uses_dict = {}`
+- look at each swh use: `for bldg_seg in find_all("$.buildings[*].building_segments[*]", rmd)`  
+    - append the use to the list: `swh_uses_dict = {bldg_seg["id"]: find_all("$.zones[*].spaces[*].service_water_heating_uses[*]", rmd)}`   
 
-
-**Returns** swh_uses
+**Returns** swh_uses_dict
 
 **[Back](../_toc.md)**
 

@@ -47,7 +47,7 @@ class Section22Rule25(RuleDefinitionListIndexedBase):
             each_rule=Section22Rule25.PrimaryCoolingFluidLoopRule(),
             index_rmd=BASELINE_0,
             id="22-25",
-            description="For chilled-water systems served by chiller(s) and does not serve baseline System-11, the baseline building constant-volume primary pump power shall be modeled as 9 W/gpm.",
+            description="Baseline chilled water loops that do not use purchased chilled water and do not serve computer rooms (i.e., do not serve baseline system type 11) shall have a constant-flow primary pump power of 9 W/gpm at design conditions.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.10 Chilled-water pumps (Systems 7, 8, 11, 12, and 13)",
             is_primary_rule=True,
@@ -102,6 +102,12 @@ class Section22Rule25(RuleDefinitionListIndexedBase):
                 required_fields={
                     "$": ["pump_power_per_flow_rate"],
                 },
+                precision={
+                    "primary_pump_power_per_flow_rate": {
+                        "precision": 1,
+                        "unit": "W/gpm",
+                    },
+                },
             )
 
         def get_calc_vals(self, context, data=None):
@@ -119,6 +125,19 @@ class Section22Rule25(RuleDefinitionListIndexedBase):
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
+            primary_pump_power_per_flow_rate = calc_vals[
+                "primary_pump_power_per_flow_rate"
+            ]
+            required_pump_power_per_flow_rate = calc_vals[
+                "required_pump_power_per_flow_rate"
+            ]
+
+            return self.precision_comparison["primary_pump_power_per_flow_rate"](
+                required_pump_power_per_flow_rate,
+                primary_pump_power_per_flow_rate,
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
             primary_pump_power_per_flow_rate = calc_vals[
                 "primary_pump_power_per_flow_rate"
             ]

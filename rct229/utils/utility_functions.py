@@ -48,6 +48,25 @@ def find_exactly_one_terminal_unit(rmd: dict, terminal_unit_id: str) -> dict:
     )
 
 
+def find_exactly_one_building_segment(rmd: dict, bldg_seg_id: str) -> dict:
+    """
+    Search for the building segment data group in a ruleset model description by matching bldg_seg_id
+    Raise exception if no matching building segment
+
+    Parameters
+    ----------
+    rmd: json
+    bldg_seg_id: str
+
+    Returns: json
+    -------
+
+    """
+    return find_exactly_one_with_field_value(
+        "$.buildings[*].building_segments[*]", "id", bldg_seg_id, rmd
+    )
+
+
 def find_exactly_one_zone(rmd: dict, zone_id: str) -> dict:
     """
     Search for the zone data group in a ruleset model description by matching zone_id
@@ -144,6 +163,97 @@ def find_exactly_one_fluid_loop(rmd: dict, loop_id: str) -> dict:
         "$.fluid_loops[*]",
         "id",
         loop_id,
+        rmd,
+    )
+
+
+def find_exactly_one_service_water_heating_distribution_system(
+    rmd: dict, swh_distribution_system_id: str
+) -> dict:
+    """
+    Search for the swh distribution system data group in a ruleset model description by matching swh_distribution_system_id:
+    Raise exception if no matching distribution system
+    Parameters
+    ----------
+    rmd: dict
+    swh_distribution_system_id: str
+
+    Returns: json
+    -------
+
+    """
+    return find_exactly_one_with_field_value(
+        "$.service_water_heating_distribution_systems[*]",
+        "id",
+        swh_distribution_system_id,
+        rmd,
+    )
+
+
+def find_exactly_one_service_water_heating_use(rmd: dict, swh_use_id: str) -> dict:
+    """
+    Search for the service water heating use data group in a ruleset model description by matching swh_id:
+    Raise exception if no matching distribution system
+    Parameters
+    ----------
+    rmd: dict
+    swh_use_id: str
+
+    Returns: json
+    -------
+
+    """
+    return find_exactly_one_with_field_value(
+        # TODO: Moving the `service_water_heating_uses` key to the `building_segments` level is being discussed. If the `service_water_heating_uses` key is moved, this function needs to be revisited.
+        "$.buildings[*].building_segments[*].zones[*].spaces[*].service_water_heating_uses[*]",
+        "id",
+        swh_use_id,
+        rmd,
+    )
+
+
+def find_exactly_one_service_water_heating_equipment(
+    rmd: dict, swh_equipment_id: str
+) -> dict:
+    """
+    Search for the service water heating equipment data group in a ruleset model description by matching swh_equipment_id:
+    Raise exception if no matching swh equipment system
+
+    Parameters
+    ----------
+    rmd: dict
+    swh_equipment_id: str
+
+    Returns: json
+    -------
+
+    """
+    return find_exactly_one_with_field_value(
+        "$.service_water_heating_equipment[*]",
+        "id",
+        swh_equipment_id,
+        rmd,
+    )
+
+
+def find_exactly_one_pump(rmd: dict, pump_id: str) -> dict:
+    """
+    Search for the pump data group in a ruleset model description by matching pump_id:
+    Raise exception if no matching pump
+
+    Parameters
+    ----------
+    rmd: dict
+    pump_id: str
+
+    Returns: json
+    -------
+
+    """
+    return find_exactly_one_with_field_value(
+        "$.pumps[*]",
+        "id",
+        pump_id,
         rmd,
     )
 

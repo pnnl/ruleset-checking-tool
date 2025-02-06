@@ -112,6 +112,17 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
                 )
             }
 
+            zone_b_hvac_zone_list_dict = {
+                hvac_id: find_all(
+                    f'$.buildings[*].building_segments[*].zones[*][?(@.terminals[*].served_by_heating_ventilating_air_conditioning_system = "{hvac_id}")].id',
+                    rmd_b,
+                )
+                for hvac_id in find_all(
+                    "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].id",
+                    rmd_b,
+                )
+            }
+
             zone_b_fan_schedule_dict = {
                 zone_id: get_aggregated_zone_hvac_fan_operating_schedule(
                     rmd_b, zone_id, is_leap_year
@@ -133,6 +144,7 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
             return {
                 "baseline_hvac_sys_type_ids_dict_b": get_baseline_system_types(rmd_b),
                 "zone_p_hvac_list_dict": zone_p_hvac_list_dict,
+                "zone_b_hvac_zone_list_dict": zone_b_hvac_zone_list_dict,
                 "zone_p_fan_schedule_dict": zone_p_fan_schedule_dict,
                 "zone_b_fan_schedule_dict": zone_b_fan_schedule_dict,
                 "floor_b_hvac_list_dict": floor_b_hvac_list_dict,
@@ -171,6 +183,7 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
                 zone_p_fan_schedule_dict = data["zone_p_fan_schedule_dict"]
                 zone_b_fan_schedule_dict = data["zone_b_fan_schedule_dict"]
                 floor_b_hvac_list_dict = data["floor_b_hvac_list_dict"]
+                zone_b_hvac_zone_list_dict = data["zone_b_hvac_zone_list_dict"]
 
                 baseline_hvac_sys_type_ids_dict_b = data[
                     "baseline_hvac_sys_type_ids_dict_b"
@@ -196,7 +209,11 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
                     if hvac_id_b in baseline_hvac_sys_type_ids_dict_b[sys_type]:
                         hvac_sys_type_b = sys_type
 
-                baseline_served_by_multizone = hvac_sys_type_b in APPLICABLE_SYS_TYPES
+                # Check if the system type is an applicable system type and serves multiple zones
+                baseline_served_by_multizone = (
+                    hvac_sys_type_b in APPLICABLE_SYS_TYPES
+                    and len(next(iter(zone_b_hvac_zone_list_dict.values()))) > 1
+                )
                 list_hvac_systems_p = zone_p_hvac_list_dict[zone_p["id"]]
 
                 for hvac_id_p in list_hvac_systems_p:

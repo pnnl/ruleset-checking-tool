@@ -79,6 +79,10 @@ class Section19Rule8(RuleDefinitionListIndexedBase):
                         "$": ["fan_system"],
                         "fan_system": ["minimum_outdoor_airflow"],
                     },
+                    precision={
+                        "hvac_min_OA_flow": {"precision": 0.1, "unit": "cfm"},
+                        "avg_occ_density": {"precision": 0.1, "unit": "1/ft2"},
+                    },
                 )
 
             def get_calc_vals(self, context, data=None):
@@ -132,11 +136,29 @@ class Section19Rule8(RuleDefinitionListIndexedBase):
                 is_DCV_modeled_b = calc_vals["is_DCV_modeled_b"]
 
                 return (
-                    hvac_min_OA_flow > MIN_OA_CFM
+                    (
+                        hvac_min_OA_flow > MIN_OA_CFM
+                        or self.precision_comparison["hvac_min_OA_flow"](
+                            hvac_min_OA_flow,
+                            MIN_OA_CFM,
+                        )
+                    )
                     and avg_occ_density > OCCUPANT_DENSITY_LIMIT
                     and is_DCV_modeled_b
                 ) or (
-                    hvac_min_OA_flow <= MIN_OA_CFM
-                    and avg_occ_density >= OCCUPANT_DENSITY_LIMIT
+                    (
+                        hvac_min_OA_flow < MIN_OA_CFM
+                        or self.precision_comparison["hvac_min_OA_flow"](
+                            hvac_min_OA_flow,
+                            MIN_OA_CFM,
+                        )
+                    )
+                    and (
+                        avg_occ_density > OCCUPANT_DENSITY_LIMIT
+                        or self.precision_comparison["avg_occ_density"](
+                            avg_occ_density,
+                            OCCUPANT_DENSITY_LIMIT,
+                        )
+                    )
                     and not is_DCV_modeled_b
                 )

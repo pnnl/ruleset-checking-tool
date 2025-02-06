@@ -1,7 +1,7 @@
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_dict_of_zones_and_terminal_units_served_by_hvac_sys import (
     get_dict_of_zones_and_terminal_units_served_by_hvac_sys,
 )
-from rct229.schema.validate import schema_validate_rmd
+from rct229.schema.validate import schema_validate_rpd
 
 TEST_BUILDING = {
     "id": "test_rmd",
@@ -78,7 +78,7 @@ TEST_RMD = {
 
 
 def test__TEST_RPD__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RMD)
+    schema_validation_result = schema_validate_rpd(TEST_RMD)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"

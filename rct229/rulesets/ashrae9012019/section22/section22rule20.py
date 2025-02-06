@@ -41,7 +41,7 @@ class Section22Rule20(RuleDefinitionListIndexedBase):
             each_rule=Section22Rule20.HeatRejectionRule(),
             index_rmd=BASELINE_0,
             id="22-20",
-            description="The baseline minimum condenser water reset temperature is per Table G3.1.3.11.",
+            description="The baseline heat rejection device leaving water temperature shall be modeled as specified in Table G3.1.3.11.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.11 Heat Rejection (System 7, 8, 11, 12 and 13)",
             is_primary_rule=True,
@@ -82,6 +82,12 @@ class Section22Rule20(RuleDefinitionListIndexedBase):
                 required_fields={
                     "$": ["leaving_water_setpoint_temperature"],
                 },
+                precision={
+                    "tower_leaving_temperature_b": {
+                        "precision": 0.1,
+                        "unit": "K",
+                    },
+                },
             )
 
         def get_calc_vals(self, context, data=None):
@@ -108,6 +114,18 @@ class Section22Rule20(RuleDefinitionListIndexedBase):
             leaving_water_setpoint_temperature_b = calc_vals[
                 "leaving_water_setpoint_temperature_b"
             ]
+
+            return self.precision_comparison["tower_leaving_temperature_b"](
+                tower_leaving_temperature_b.to(ureg.kelvin),
+                leaving_water_setpoint_temperature_b.to(ureg.kelvin),
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            tower_leaving_temperature_b = calc_vals["tower_leaving_temperature_b"]
+            leaving_water_setpoint_temperature_b = calc_vals[
+                "leaving_water_setpoint_temperature_b"
+            ]
+
             return std_equal(
                 tower_leaving_temperature_b.to(ureg.kelvin),
                 leaving_water_setpoint_temperature_b.to(ureg.kelvin),

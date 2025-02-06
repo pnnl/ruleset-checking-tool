@@ -37,13 +37,19 @@ class Section22Rule31(RuleDefinitionBase):
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             id="22-31",
-            description="The baseline building design's chiller plant shall be modeled with chillers having the number as indicated in Table G3.1.3.7 as a function of building peak cooling load.",
+            description="The baseline chiller plant shall be modeled with the chiller quantity specified in Table G3.1.3.7, as a function of building peak cooling load.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.1 Type and Number of Chillers (System 7, 8, 11, 12 and 13)",
             is_primary_rule=True,
             rmd_context="ruleset_model_descriptions/0",
             required_fields={
                 "$": ["output"],
+            },
+            precision={
+                "building_peak_load_b": {
+                    "precision": 1,
+                    "unit": "ton",
+                },
             },
         )
 
@@ -75,7 +81,13 @@ class Section22Rule31(RuleDefinitionBase):
             "building_peak_cooling_load",
         )
 
-        if building_peak_load_b <= REQUIRED_BUILDING_PEAK_LOAD_300:
+        if (
+            building_peak_load_b < REQUIRED_BUILDING_PEAK_LOAD_300
+            or self.precision_comparison["building_peak_load_b"](
+                building_peak_load_b,
+                REQUIRED_BUILDING_PEAK_LOAD_300,
+            )
+        ):
             target_chiller_number = 1
         elif building_peak_load_b < REQUIRED_BUILDING_PEAK_LOAD_600:
             target_chiller_number = 2

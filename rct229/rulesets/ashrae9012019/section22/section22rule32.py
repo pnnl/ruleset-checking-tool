@@ -43,8 +43,7 @@ class Section22Rule32(RuleDefinitionListIndexedBase):
             each_rule=Section22Rule32.ChillerRule(),
             index_rmd=BASELINE_0,
             id="22-32",
-            description="The baseline chiller efficiencies shall be modeled at the "
-            "minimum efficiency levels for part load, in accordance with Tables G3.5.3.",
+            description="The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for part load, in accordance with Tables G3.5.3.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.2.1 Equipment Efficiencies",
             is_primary_rule=True,
@@ -74,6 +73,11 @@ class Section22Rule32(RuleDefinitionListIndexedBase):
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
+                precision={
+                    "chiller_part_load_efficiency": {
+                        "precision": 0.001,
+                    },
+                },
             )
 
         def get_calc_vals(self, context, data=None):
@@ -102,6 +106,25 @@ class Section22Rule32(RuleDefinitionListIndexedBase):
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
+            chiller_part_load_efficiency = calc_vals[
+                "chiller_part_load_efficiency"
+            ].magnitude
+            target_part_load_efficiency = calc_vals["target_part_load_efficiency"]
+            target_cop_part_load_efficiency = (
+                1.0 / target_part_load_efficiency.to("kilowatt / kilowatt").magnitude
+            )  # .magnitude is becuase `target_cop_part_load_efficiency` is still a `dimensionless` pint quantity
+            part_load_efficiency_metric = calc_vals["part_load_efficiency_metric"]
+
+            return (
+                self.precision_comparison["chiller_part_load_efficiency"](
+                    chiller_part_load_efficiency,
+                    target_cop_part_load_efficiency,
+                )
+                and part_load_efficiency_metric
+                == CHILLER_PART_LOAD_EFFICIENCY_METRIC.INTEGRATED_PART_LOAD_VALUE
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
             chiller_part_load_efficiency = calc_vals["chiller_part_load_efficiency"]
             target_part_load_efficiency = calc_vals["target_part_load_efficiency"]
             target_cop_part_load_efficiency = 1.0 / target_part_load_efficiency.to(

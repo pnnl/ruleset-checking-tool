@@ -2,7 +2,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_proposed_hvac_modeled_w
     get_proposed_hvac_modeled_with_virtual_heating,
 )
 from rct229.schema.schema_utils import quantify_rmd
-from rct229.schema.validate import schema_validate_rmd
+from rct229.schema.validate import schema_validate_rpd
 
 TEST_RPD_P_HEATING_SYSTEM = {
     "id": "ashrae229",
@@ -193,19 +193,19 @@ TEST_RMD_U_PREHEAT_SYSTEM = quantify_rmd(TEST_RPD_U_PREHEAT_SYSTEM)[
 
 
 def test__TEST_RPD__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RPD_P_HEATING_SYSTEM)
+    schema_validation_result = schema_validate_rpd(TEST_RPD_P_HEATING_SYSTEM)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
-    schema_validation_result = schema_validate_rmd(TEST_RPD_U_HEATING_SYSTEM)
+    schema_validation_result = schema_validate_rpd(TEST_RPD_U_HEATING_SYSTEM)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
-    schema_validation_result = schema_validate_rmd(TEST_RPD_P_PREHEAT_SYSTEM)
+    schema_validation_result = schema_validate_rpd(TEST_RPD_P_PREHEAT_SYSTEM)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
-    schema_validation_result = schema_validate_rmd(TEST_RPD_U_PREHEAT_SYSTEM)
+    schema_validation_result = schema_validate_rpd(TEST_RPD_U_PREHEAT_SYSTEM)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"

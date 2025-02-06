@@ -8,7 +8,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_building_segment_lighti
 )
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.pint_utils import CalcQ
+from rct229.utils.pint_utils import ZERO, CalcQ
 from rct229.utils.std_comparisons import std_equal
 
 OFFICE_OPEN_PLAN = SchemaEnums.schema_enums[
@@ -63,16 +63,24 @@ class Section6Rule3(RuleDefinitionListIndexedBase):
                     rmds_used=produce_ruleset_model_description(
                         USER=True, BASELINE_0=False, PROPOSED=True
                     ),
+                    precision={
+                        "total_space_lpd_p": {
+                            "precision": 0.01,
+                            "unit": "W/ft2",
+                        }
+                    },
                 )
 
             def get_calc_vals(self, context, data=None):
                 space_u = context.USER
                 space_p = context.PROPOSED
-                total_space_lpd_u = sum(
-                    find_all("$.interior_lighting[*].power_per_area", space_u)
+                total_space_lpd_u = (
+                    sum(find_all("$.interior_lighting[*].power_per_area", space_u))
+                    or ZERO.POWER_PER_AREA
                 )
-                total_space_lpd_p = sum(
-                    find_all("$.interior_lighting[*].power_per_area", space_p)
+                total_space_lpd_p = (
+                    sum(find_all("$.interior_lighting[*].power_per_area", space_p))
+                    or ZERO.POWER_PER_AREA
                 )
 
                 space_lighting_status_type_p = data[
@@ -96,6 +104,6 @@ class Section6Rule3(RuleDefinitionListIndexedBase):
                 )
 
             def rule_check(self, context, calc_vals=None, data=None):
-                total_space_lpd_u = calc_vals["total_space_lpd_u"]
-                total_space_lpd_p = calc_vals["total_space_lpd_p"]
-                return std_equal(total_space_lpd_u, total_space_lpd_p)
+                return self.precision_comparison["total_space_lpd_p"](
+                    calc_vals["total_space_lpd_p"], calc_vals["total_space_lpd_u"]
+                )

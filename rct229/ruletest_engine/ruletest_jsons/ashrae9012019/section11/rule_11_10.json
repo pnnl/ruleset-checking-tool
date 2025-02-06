@@ -1,0 +1,1071 @@
+{
+    "rule-11-10-a": {
+        "Section": 11,
+        "Rule": 10,
+        "Test": "a",
+        "test_description": "A one story, one zone building has no service water heaters",
+        "expected_rule_outcome": "not_applicable",
+        "standard": {
+            "rule_id": "11-10",
+            "ruleset_reference": "Table G3.1 #11, baseline column, a & b",
+            "rule_description": "The service water heating system type in the baseline building design shall match the minimum efficiency requirements in Section 7.4.2.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.34"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-11-10-b": {
+        "Section": 11,
+        "Rule": 10,
+        "Test": "b",
+        "test_description": "A one story, one zone building has one gas storage water heater with input rating between 75k-105kBtu/h, 100 gallons storage capacity, and low draw pattern. The water heater efficiency is correctly modeled as 0.4162 UEF.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "11-10",
+            "ruleset_reference": "Table G3.1 #11, baseline column, a & b",
+            "rule_description": "The service water heating system type in the baseline building design shall match the minimum efficiency requirements in Section 7.4.2.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.34"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "service_water_heating_equipment": [
+                            {
+                                "id": "SHW Equipment 1",
+                                "distribution_system": "SHW Distribution 1",
+                                "heater_fuel_type": "NATURAL_GAS",
+                                "input_power": 29307.111111111113,
+                                "first_hour_rating": 189.25000000000003,
+                                "efficiency_metric_types": [
+                                    "UNIFORM_ENERGY_FACTOR"
+                                ],
+                                "efficiency_metric_values": [
+                                    0.4162
+                                ],
+                                "tank": {
+                                    "id": "SHW Tank",
+                                    "type": "COMMERCIAL_STORAGE",
+                                    "storage_capacity": 378.50000000000006
+                                }
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-11-10-c": {
+        "Section": 11,
+        "Rule": 10,
+        "Test": "c",
+        "test_description": "A one story, one zone building has one gas storage water heater with input rating >105kBtu/h, 50 gallons storage capacity. The water heater efficiency is correctly modeled as 80% Et and 928 Btu/h standby loss.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "11-10",
+            "ruleset_reference": "Table G3.1 #11, baseline column, a & b",
+            "rule_description": "The service water heating system type in the baseline building design shall match the minimum efficiency requirements in Section 7.4.2.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "mandatory_rule": "Yes"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "service_water_heating_equipment": [
+                            {
+                                "id": "SHW Equipment 1",
+                                "distribution_system": "SHW Distribution 1",
+                                "heater_fuel_type": "NATURAL_GAS",
+                                "input_power": 35168.53333333333,
+                                "efficiency_metric_types": [
+                                    "THERMAL_EFFICIENCY",
+                                    "STANDBY_LOSS_ENERGY"
+                                ],
+                                "efficiency_metric_values": [
+                                    0.8,
+                                    272
+                                ],
+                                "tank": {
+                                    "id": "SHW Tank",
+                                    "type": "COMMERCIAL_STORAGE",
+                                    "storage_capacity": 189.25000000000003
+                                }
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-11-10-d": {
+        "Section": 11,
+        "Rule": 10,
+        "Test": "d",
+        "test_description": "A one story, one zone building has one electric storage water heater with input rating >12kW, 100 gallons storage capacity. The water heater efficiency is correctly modeled with 0.57% per hour standby loss.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "11-10",
+            "ruleset_reference": "Table G3.1 #11, baseline column, a & b",
+            "rule_description": "The service water heating system type in the baseline building design shall match the minimum efficiency requirements in Section 7.4.2.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "mandatory_rule": "Yes"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "service_water_heating_equipment": [
+                            {
+                                "id": "SHW Equipment 1",
+                                "distribution_system": "SHW Distribution 1",
+                                "heater_fuel_type": "ELECTRICITY",
+                                "input_power": 14946.626666666667,
+                                "efficiency_metric_types": [
+                                    "STANDBY_LOSS_FRACTION"
+                                ],
+                                "efficiency_metric_values": [
+                                    0.0057
+                                ],
+                                "tank": {
+                                    "id": "SHW Tank",
+                                    "type": "COMMERCIAL_STORAGE",
+                                    "storage_capacity": 378.50000000000006
+                                }
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-11-10-e": {
+        "Section": 11,
+        "Rule": 10,
+        "Test": "e",
+        "test_description": "A one story, one zone building has one electric storage water heater with input rating <=12kW, 50 gallons storage capacity, medium draw pattern. The water heater efficiency is correctly modeled with 0.9207 UEF.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "11-10",
+            "ruleset_reference": "Table G3.1 #11, baseline column, a & b",
+            "rule_description": "The service water heating system type in the baseline building design shall match the minimum efficiency requirements in Section 7.4.2.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "mandatory_rule": "Yes"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "service_water_heating_equipment": [
+                            {
+                                "id": "SHW Equipment 1",
+                                "distribution_system": "SHW Distribution 1",
+                                "heater_fuel_type": "ELECTRICITY",
+                                "input_power": 9964.417777777779,
+                                "draw_pattern": "MEDIUM",
+                                "efficiency_metric_types": [
+                                    "UNIFORM_ENERGY_FACTOR"
+                                ],
+                                "efficiency_metric_values": [
+                                    0.9207
+                                ],
+                                "tank": {
+                                    "id": "SHW Tank",
+                                    "type": "COMMERCIAL_STORAGE",
+                                    "storage_capacity": 189.25000000000003
+                                }
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-11-10-f": {
+        "Section": 11,
+        "Rule": 10,
+        "Test": "f",
+        "test_description": "A one story, one zone building has one gas storage water heater with input rating <75kBtu/h, 50 gallons storage capacity, and medium draw pattern. The water heater efficiency is correctly modeled as 0.5633 UEF.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "11-10",
+            "ruleset_reference": "Table G3.1 #11, baseline column, a & b",
+            "rule_description": "The service water heating system type in the baseline building design shall match the minimum efficiency requirements in Section 7.4.2.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "mandatory_rule": "Yes"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "service_water_heating_equipment": [
+                            {
+                                "id": "SHW Equipment 1",
+                                "distribution_system": "SHW Distribution 1",
+                                "heater_fuel_type": "NATURAL_GAS",
+                                "input_power": 17584.266666666666,
+                                "draw_pattern": "MEDIUM",
+                                "efficiency_metric_types": [
+                                    "UNIFORM_ENERGY_FACTOR"
+                                ],
+                                "efficiency_metric_values": [
+                                    0.5633
+                                ],
+                                "tank": {
+                                    "id": "SHW Tank",
+                                    "type": "COMMERCIAL_STORAGE",
+                                    "storage_capacity": 189.25000000000003
+                                }
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-11-10-g": {
+        "Section": 11,
+        "Rule": 10,
+        "Test": "g",
+        "test_description": "A one story, one zone building has one gas storage water heater with input rating between 75k-105kBtu/h, 100 gallons storage capacity, and low draw pattern. The water heater efficiency is incorrectly modeled as 0.5 UEF.",
+        "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "The modeled efficiency or standby loss for the water heater does not match the expected values.",
+        "standard": {
+            "rule_id": "11-10",
+            "ruleset_reference": "Table G3.1 #11, baseline column, a & b",
+            "rule_description": "The service water heating system type in the baseline building design shall match the minimum efficiency requirements in Section 7.4.2.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "mandatory_rule": "Yes"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "service_water_heating_equipment": [
+                            {
+                                "id": "SHW Equipment 1",
+                                "distribution_system": "SHW Distribution 1",
+                                "heater_fuel_type": "NATURAL_GAS",
+                                "input_power": 29307.111111111113,
+                                "draw_pattern": "LOW",
+                                "efficiency_metric_types": [
+                                    "UNIFORM_ENERGY_FACTOR"
+                                ],
+                                "efficiency_metric_values": [
+                                    0.5
+                                ],
+                                "tank": {
+                                    "id": "SHW Tank",
+                                    "type": "COMMERCIAL_STORAGE",
+                                    "storage_capacity": 378.50000000000006
+                                }
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-11-10-h": {
+        "Section": 11,
+        "Rule": 10,
+        "Test": "h",
+        "test_description": "A one story, one zone building has one gas storage water heater with input rating between 75k-105kBtu/h, 130 gallons storage capacity, and low draw pattern. The water heater efficiency is supposed to follow Table 7.8 footnote d, but is incorrectly modeled as 0.4162 UEF.",
+        "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "Based on the provided details, THERMAL_EFFICIENCY is an expected efficiency metric for this water heater, however it was not provided. Note that the specific requirements of 10 CFR 430 can be found in ASHRAE 90.1 Appendix F Table F-2.\nBased on the provided details, STANDBY_LOSS_ENERGY is an expected efficiency metric for this water heater, however it was not provided. Note that the specific requirements of 10 CFR 430 can be found in ASHRAE 90.1 Appendix F Table F-2.",
+        "standard": {
+            "rule_id": "11-10",
+            "ruleset_reference": "Table G3.1 #11, baseline column, a & b",
+            "rule_description": "The service water heating system type in the baseline building design shall match the minimum efficiency requirements in Section 7.4.2.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "mandatory_rule": "Yes"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "service_water_heating_equipment": [
+                            {
+                                "id": "SHW Equipment 1",
+                                "distribution_system": "SHW Distribution 1",
+                                "heater_fuel_type": "NATURAL_GAS",
+                                "input_power": 29307.111111111113,
+                                "draw_pattern": "LOW",
+                                "efficiency_metric_types": [
+                                    "UNIFORM_ENERGY_FACTOR"
+                                ],
+                                "efficiency_metric_values": [
+                                    0.5
+                                ],
+                                "tank": {
+                                    "id": "SHW Tank",
+                                    "type": "COMMERCIAL_STORAGE",
+                                    "storage_capacity": 492.05000000000007
+                                }
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-11-10-i": {
+        "Section": 11,
+        "Rule": 10,
+        "Test": "i",
+        "test_description": "A one story, one zone building has one gas storage water heater with input rating >105kBtu/h, 50 gallons storage capacity. The water heater efficiency is correctly modeled as 80% Et but the 1,500 Btu/h standby loss exceeds the limit.",
+        "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "The modeled efficiency or standby loss for the water heater does not match the expected values.",
+        "standard": {
+            "rule_id": "11-10",
+            "ruleset_reference": "Table G3.1 #11, baseline column, a & b",
+            "rule_description": "The service water heating system type in the baseline building design shall match the minimum efficiency requirements in Section 7.4.2.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "mandatory_rule": "Yes"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "service_water_heating_equipment": [
+                            {
+                                "id": "SHW Equipment 1",
+                                "distribution_system": "SHW Distribution 1",
+                                "heater_fuel_type": "NATURAL_GAS",
+                                "input_power": 73267.77777777778,
+                                "efficiency_metric_types": [
+                                    "THERMAL_EFFICIENCY",
+                                    "STANDBY_LOSS_ENERGY"
+                                ],
+                                "efficiency_metric_values": [
+                                    0.8,
+                                    7500
+                                ],
+                                "tank": {
+                                    "id": "SHW Tank",
+                                    "type": "COMMERCIAL_STORAGE",
+                                    "storage_capacity": 946.2500000000001
+                                }
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-11-10-j": {
+        "Section": 11,
+        "Rule": 10,
+        "Test": "j",
+        "test_description": "A one story, one zone building has one oil-fired storage water heater. The water heater fuel type does not align with the fuel types to determine expected efficiency.",
+        "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "Fuel type: FUEL_OIL is not a valid fuel type for a service water heating baseline system. According to ASHRAE 90.1 Table G3.1.1-2 service water heating equipment shall be either electric resistance or natural gas. According to ASHRAE 90.1 Table G3.1 #11 h, in cases where natural gas is specified as the baseline system, but there is no natural gas available on site, a propane system may be modeled.",
+        "standard": {
+            "rule_id": "11-10",
+            "ruleset_reference": "Table G3.1 #11, baseline column, a & b",
+            "rule_description": "The service water heating system type in the baseline building design shall match the minimum efficiency requirements in Section 7.4.2.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "mandatory_rule": "Yes"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "service_water_heating_equipment": [
+                            {
+                                "id": "SHW Equipment 1",
+                                "distribution_system": "SHW Distribution 1",
+                                "heater_fuel_type": "FUEL_OIL",
+                                "input_power": 29307.111111111113,
+                                "efficiency_metric_types": [
+                                    "THERMAL_EFFICIENCY"
+                                ],
+                                "efficiency_metric_values": [
+                                    0.8
+                                ],
+                                "tank": {
+                                    "id": "SHW Tank",
+                                    "type": "COMMERCIAL_STORAGE",
+                                    "storage_capacity": 189.25000000000003
+                                }
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-11-10-k": {
+        "Section": 11,
+        "Rule": 10,
+        "Test": "k",
+        "test_description": "A one story, one zone building has one gas storage water heater with input rating >105kBtu/h, 50 gallons storage capacity. The water heater efficiency is modeled with 80% Et but no standby loss is specified.",
+        "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "is an expected efficiency metric for this water heater, however it was not provided. Note that the specific requirements of 10 CFR 430 can be found in ASHRAE 90.1 Appendix F Table F-2.",
+        "standard": {
+            "rule_id": "11-10",
+            "ruleset_reference": "Table G3.1 #11, baseline column, a & b",
+            "rule_description": "The service water heating system type in the baseline building design shall match the minimum efficiency requirements in Section 7.4.2.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "mandatory_rule": "Yes"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "service_water_heating_equipment": [
+                            {
+                                "id": "SHW Equipment 1",
+                                "distribution_system": "SHW Distribution 1",
+                                "heater_fuel_type": "NATURAL_GAS",
+                                "input_power": 35168.53333333333,
+                                "efficiency_metric_types": [
+                                    "THERMAL_EFFICIENCY"
+                                ],
+                                "efficiency_metric_values": [
+                                    0.8
+                                ],
+                                "tank": {
+                                    "id": "SHW Tank",
+                                    "type": "COMMERCIAL_STORAGE",
+                                    "storage_capacity": 189.25000000000003
+                                }
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-11-10-l": {
+        "Section": 11,
+        "Rule": 10,
+        "Test": "l",
+        "test_description": "A one story, one zone building has one electric storage water heater with input rating <=12kW, 100 gallons storage capacity, medium draw pattern. The water heater efficiency is not enforcable for the system type.",
+        "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "The storage tank is between 55 and 100 gallons with a capacity <= 12kW (40945 btu/hr). The minimum efficiency requirements in 90.1 Section 7.4.2 point to 10 CFR 430 which provides a heat pump efficiency for water heaters in this capacity range which is not consistent with the efficiency of an electric resistance storage water heater which is the only electric SWH system type associated with the baseline for ASHRAE 90.1 Appendix G. Consequently, this rule was not able to be assessed for this service water heater. Note that the specific requirements of 10 CFR 430 can be found in ASHRAE 90.1 Appendix F Table F-2.",
+        "standard": {
+            "rule_id": "11-10",
+            "ruleset_reference": "Table G3.1 #11, baseline column, a & b",
+            "rule_description": "The service water heating system type in the baseline building design shall match the minimum efficiency requirements in Section 7.4.2.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "mandatory_rule": "Yes"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "service_water_heating_equipment": [
+                            {
+                                "id": "SHW Equipment 1",
+                                "distribution_system": "SHW Distribution 1",
+                                "heater_fuel_type": "ELECTRICITY",
+                                "input_power": 9964.417777777779,
+                                "draw_pattern": "MEDIUM",
+                                "efficiency_metric_types": [
+                                    "THERMAL_EFFICIENCY"
+                                ],
+                                "efficiency_metric_values": [
+                                    0.8
+                                ],
+                                "tank": {
+                                    "id": "SHW Tank",
+                                    "type": "COMMERCIAL_STORAGE",
+                                    "storage_capacity": 378.1215000000001
+                                }
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-11-10-m": {
+        "Section": 11,
+        "Rule": 10,
+        "Test": "m",
+        "test_description": "A one story, one zone building has one electric storage water heater with input rating <=12kW, 19 gallons storage capacity. The water heater details fall outside the range enforced by 90.1.",
+        "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "The storage tank volume falls outside the supported range based on the size categories in ASHRAE 90.1 Table 7.8 and in 10 CFR 430. Consequently, this rule was not assessed for this service water heater. Note that the specific requirements of 10 CFR 430 can be found in ASHRAE 90.1 Appendix F Table F-2.",
+        "standard": {
+            "rule_id": "11-10",
+            "ruleset_reference": "Table G3.1 #11, baseline column, a & b",
+            "rule_description": "The service water heating system type in the baseline building design shall match the minimum efficiency requirements in Section 7.4.2.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "mandatory_rule": "Yes"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "service_water_heating_equipment": [
+                            {
+                                "id": "SHW Equipment 1",
+                                "distribution_system": "SHW Distribution 1",
+                                "heater_fuel_type": "ELECTRICITY",
+                                "input_power": 9964.417777777779,
+                                "draw_pattern": "MEDIUM",
+                                "efficiency_metric_types": [
+                                    "THERMAL_EFFICIENCY"
+                                ],
+                                "efficiency_metric_values": [
+                                    0.8
+                                ],
+                                "tank": {
+                                    "id": "SHW Tank",
+                                    "type": "COMMERCIAL_STORAGE",
+                                    "storage_capacity": 71.915
+                                }
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-11-10-n": {
+        "Section": 11,
+        "Rule": 10,
+        "Test": "n",
+        "test_description": "A one story, one zone building has one electric storage water heater with input rating per storage volume greater than 4,000 (Btu/h)/gallon. The water heater does not qualify as a storage water heater based on these details.",
+        "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "Capacity per volume exceeds the limit of 4000 (Btu/hr)/gallon given for storage water heaters in ASHRAE 90.1 Table 7.8.",
+        "standard": {
+            "rule_id": "11-10",
+            "ruleset_reference": "Table G3.1 #11, baseline column, a & b",
+            "rule_description": "The service water heating system type in the baseline building design shall match the minimum efficiency requirements in Section 7.4.2.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "mandatory_rule": "Yes"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "service_water_heating_equipment": [
+                            {
+                                "id": "SHW Equipment 1",
+                                "distribution_system": "SHW Distribution 1",
+                                "heater_fuel_type": "ELECTRICITY",
+                                "input_power": 73267.77777777778,
+                                "draw_pattern": "MEDIUM",
+                                "efficiency_metric_types": [
+                                    "THERMAL_EFFICIENCY"
+                                ],
+                                "efficiency_metric_values": [
+                                    0.8
+                                ],
+                                "tank": {
+                                    "id": "SHW Tank",
+                                    "type": "COMMERCIAL_STORAGE",
+                                    "storage_capacity": 189.25000000000003
+                                }
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-11-10-o": {
+        "Section": 11,
+        "Rule": 10,
+        "Test": "o",
+        "test_description": "A one story, one zone building has one electric storage water heater with an instantaneous heater tank type. The water heater does not qualify as a storage water heater based on these details.",
+        "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "The baseline water heater is of an Instantaneous type. All service water heaters in the baseline should be storage water heaters, according to Table G3.1 #11 Baseline Building Performance column and Table G3.1.1-2. Consequently, the efficiency of the modeled water heater was not assessed.",
+        "standard": {
+            "rule_id": "11-10",
+            "ruleset_reference": "Table G3.1 #11, baseline column, a & b",
+            "rule_description": "The service water heating system type in the baseline building design shall match the minimum efficiency requirements in Section 7.4.2.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "mandatory_rule": "Yes"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "calendar": {
+                    "is_leap_year": false
+                },
+                "data_timestamp": "2024-02-12T12:00Z",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "service_water_heating_equipment": [
+                            {
+                                "id": "SHW Equipment 1",
+                                "distribution_system": "SHW Distribution 1",
+                                "heater_fuel_type": "ELECTRICITY",
+                                "input_power": 29307.111111111113,
+                                "efficiency_metric_types": [
+                                    "THERMAL_EFFICIENCY"
+                                ],
+                                "efficiency_metric_values": [
+                                    0.8
+                                ],
+                                "tank": {
+                                    "id": "SHW Tank",
+                                    "type": "COMMERCIAL_INSTANTANEOUS",
+                                    "storage_capacity": 189.25000000000003
+                                }
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    }
+}

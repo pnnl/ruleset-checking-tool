@@ -72,6 +72,7 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
         manual_check_required_msg="Manual Check Required",
         not_applicable_msg="Not Applicable",
         data_items=None,
+        precision=None,
     ):
         self.index_rmd = index_rmd
         self.list_path = list_path
@@ -90,6 +91,7 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
             ruleset_section_title=ruleset_section_title,
             standard_section=standard_section,
             is_primary_rule=is_primary_rule,
+            precision=precision,
         )
 
     def create_context_list(self, context, data):

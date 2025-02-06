@@ -47,7 +47,7 @@ class Section22Rule4(RuleDefinitionListIndexedBase):
             each_rule=Section22Rule4.ChillerFluidLoopRule(),
             index_rmd=BASELINE_0,
             id="22-4",
-            description="For Baseline chilled water loop that is not purchased chilled water and does not serve any computer room HVAC systems, chilled-water supply temperature shall be reset using the following schedule: 44F at outdoor dry-bulb temperature of 80F and above, 54F at 60F and below, and ramped linearly between 44F and 54F at temperature between 80F and 60F.",
+            description="Baseline chilled water loops that do not use purchased cooling and do not serve any computer rooms (i.e., do not serve baseline system type 11) shall have the chilled water supply temperature reset using the following schedule: 44F at outdoor dry-bulb temperature of 80F and above, 54F at 60F and below, and ramped linearly between 44F and 54F at temperature between 80F and 60F.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.9 Chilled-water supply temperature reset (System 7, 8, 11, 12 and 13)",
             is_primary_rule=True,
@@ -101,6 +101,24 @@ class Section22Rule4(RuleDefinitionListIndexedBase):
                         "loop_supply_temperature_at_outdoor_low",
                     ],
                 },
+                precision={
+                    "outdoor_high_for_loop_supply_reset_temperature": {
+                        "precision": 0.1,
+                        "unit": "K",
+                    },
+                    "outdoor_low_for_loop_supply_reset_temperature": {
+                        "precision": 0.1,
+                        "unit": "K",
+                    },
+                    "loop_supply_temperature_at_outdoor_high": {
+                        "precision": 0.1,
+                        "unit": "K",
+                    },
+                    "loop_supply_temperature_at_outdoor_low": {
+                        "precision": 0.1,
+                        "unit": "K",
+                    },
+                },
             )
 
         def get_calc_vals(self, context, data=None):
@@ -146,6 +164,61 @@ class Section22Rule4(RuleDefinitionListIndexedBase):
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
+            outdoor_high_for_loop_supply_reset_temperature = calc_vals[
+                "outdoor_high_for_loop_supply_reset_temperature"
+            ]
+            required_outdoor_high_for_loop_supply_reset_temperature = calc_vals[
+                "required_outdoor_high_for_loop_supply_reset_temperature"
+            ]
+            outdoor_low_for_loop_supply_reset_temperature = calc_vals[
+                "outdoor_low_for_loop_supply_reset_temperature"
+            ]
+            required_outdoor_low_for_loop_supply_reset_temperature = calc_vals[
+                "required_outdoor_low_for_loop_supply_reset_temperature"
+            ]
+            loop_supply_temperature_at_outdoor_high = calc_vals[
+                "loop_supply_temperature_at_outdoor_high"
+            ]
+            required_loop_supply_temperature_at_outdoor_high = calc_vals[
+                "required_loop_supply_temperature_at_outdoor_high"
+            ]
+            loop_supply_temperature_at_outdoor_low = calc_vals[
+                "loop_supply_temperature_at_outdoor_low"
+            ]
+            required_loop_supply_temperature_at_outdoor_low = calc_vals[
+                "required_loop_supply_temperature_at_outdoor_low"
+            ]
+
+            return (
+                self.precision_comparison[
+                    "outdoor_high_for_loop_supply_reset_temperature"
+                ](
+                    outdoor_high_for_loop_supply_reset_temperature.to(ureg.kelvin),
+                    required_outdoor_high_for_loop_supply_reset_temperature.to(
+                        ureg.kelvin
+                    ),
+                )
+                and self.precision_comparison[
+                    "outdoor_low_for_loop_supply_reset_temperature"
+                ](
+                    outdoor_low_for_loop_supply_reset_temperature.to(ureg.kelvin),
+                    required_outdoor_low_for_loop_supply_reset_temperature.to(
+                        ureg.kelvin
+                    ),
+                )
+                and self.precision_comparison[
+                    "loop_supply_temperature_at_outdoor_high"
+                ](
+                    loop_supply_temperature_at_outdoor_high.to(ureg.kelvin),
+                    required_loop_supply_temperature_at_outdoor_high.to(ureg.kelvin),
+                )
+                and self.precision_comparison["loop_supply_temperature_at_outdoor_low"](
+                    loop_supply_temperature_at_outdoor_low.to(ureg.kelvin),
+                    required_loop_supply_temperature_at_outdoor_low.to(ureg.kelvin),
+                )
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
             outdoor_high_for_loop_supply_reset_temperature = calc_vals[
                 "outdoor_high_for_loop_supply_reset_temperature"
             ]

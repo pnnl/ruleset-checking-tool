@@ -31,6 +31,13 @@ class Section19Rule5(RuleDefinitionBase):
                 ],
             },
             manual_check_required_msg=UNDETERMINED_MSG,
+            precision={
+                "coincident_unmet_load_hours_p": {"precision": 1, "unit": "hour"},
+                "unmet_load_hours_heating_p + unmet_load_hours_cooling_p": {
+                    "precision": 1,
+                    "unit": "hour",
+                },
+            },
         )
 
     def get_calc_vals(self, context, data=None):
@@ -63,9 +70,21 @@ class Section19Rule5(RuleDefinitionBase):
 
         return (
             coincident_unmet_load_hours_p is not None
-            and coincident_unmet_load_hours_p <= MAX_COINCIDENT_UNMET_LOAD_HOUR
+            and (
+                coincident_unmet_load_hours_p < MAX_COINCIDENT_UNMET_LOAD_HOUR
+                or self.precision_comparison["coincident_unmet_load_hours_p"](
+                    coincident_unmet_load_hours_p,
+                    MAX_COINCIDENT_UNMET_LOAD_HOUR,
+                )
+            )
         ) or (
             # we are certain at this step, both unmet_load_hours_heating_p and unmet_load_hours_cooling_p can't be None
             unmet_load_hours_heating_p + unmet_load_hours_cooling_p
-            <= MAX_SUM_HEATING_COOLING_UNMET_HOUR
+            < MAX_SUM_HEATING_COOLING_UNMET_HOUR
+            or self.precision_comparison[
+                "unmet_load_hours_heating_p + unmet_load_hours_cooling_p"
+            ](
+                unmet_load_hours_heating_p + unmet_load_hours_cooling_p,
+                MAX_SUM_HEATING_COOLING_UNMET_HOUR,
+            )
         )

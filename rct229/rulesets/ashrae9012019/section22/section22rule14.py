@@ -38,7 +38,7 @@ class Section22Rule14(RuleDefinitionListIndexedBase):
             each_rule=Section22Rule14.HeatRejectionRule(),
             index_rmd=BASELINE_0,
             id="22-14",
-            description="The baseline heat-rejection device shall have a design temperature rise of 10°F.",
+            description="The baseline heat rejection device shall have a design temperature rise of 10°F.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.11 Heat Rejection (System 7, 8, 11, 12 and 13)",
             is_primary_rule=True,
@@ -71,6 +71,12 @@ class Section22Rule14(RuleDefinitionListIndexedBase):
                 required_fields={
                     "$": ["range"],
                 },
+                precision={
+                    "heat_rejection_range": {
+                        "precision": 0.1,
+                        "unit": "K",
+                    },
+                },
             )
 
         def get_calc_vals(self, context, data=None):
@@ -88,6 +94,16 @@ class Section22Rule14(RuleDefinitionListIndexedBase):
         def rule_check(self, context, calc_vals=None, data=None):
             heat_rejection_range = calc_vals["heat_rejection_range"]
             required_heat_rejection_range = calc_vals["required_heat_rejection_range"]
+
+            return self.precision_comparison["heat_rejection_range"](
+                heat_rejection_range.to(ureg.kelvin),
+                required_heat_rejection_range.to(ureg.kelvin),
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            heat_rejection_range = calc_vals["heat_rejection_range"]
+            required_heat_rejection_range = calc_vals["required_heat_rejection_range"]
+
             return std_equal(
                 heat_rejection_range.to(ureg.kelvin),
                 required_heat_rejection_range.to(ureg.kelvin),

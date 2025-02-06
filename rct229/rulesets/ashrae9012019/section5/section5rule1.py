@@ -146,6 +146,12 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
                     required_fields={
                         "$.building_segments[*].zones[*].surfaces[*]": ["azimuth"],
                     },
+                    precision={
+                        "percent_difference_max_min_fen_area_per_orientation": {
+                            "precision": 0.01,
+                            "unit": "",
+                        }
+                    },
                     fail_msg="Fail unless Table G3.1#5a exception #2 is applicable and it can be demonstrated that the building orientation is dictated by site considerations.",
                 )
 
@@ -223,7 +229,13 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
                 )
 
                 rotation_expected_b = (
-                    percent_difference >= ACCEPTABLE_FEN_PERCENTAGE_DIFFERENCE
+                    percent_difference > ACCEPTABLE_FEN_PERCENTAGE_DIFFERENCE
+                    or self.precision_comparison[
+                        "percent_difference_max_min_fen_area_per_orientation"
+                    ](
+                        percent_difference.magnitude,
+                        ACCEPTABLE_FEN_PERCENTAGE_DIFFERENCE,
+                    )
                 )
 
                 return {

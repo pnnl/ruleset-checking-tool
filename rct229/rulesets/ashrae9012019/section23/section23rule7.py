@@ -19,8 +19,8 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_8,
 ]
 
-TERMINAL_TEMPERATURE_CONTROL = SchemaEnums.schema_enums[
-    "TerminalTemperatureControlOptions"
+FANSYSTEM_TEMPERATURE_CONTROL = SchemaEnums.schema_enums[
+    "FanSystemTemperatureControlOptions"
 ]
 
 
@@ -103,4 +103,4 @@ class Section23Rule7(RuleDefinitionListIndexedBase):
         def rule_check(self, context, calc_vals=None, data=None):
             temperature_control_b = calc_vals["temperature_control_b"]
 
-            return temperature_control_b == TERMINAL_TEMPERATURE_CONTROL.CONSTANT
+            return temperature_control_b == FANSYSTEM_TEMPERATURE_CONTROL.CONSTANT

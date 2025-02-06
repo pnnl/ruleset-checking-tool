@@ -110,6 +110,12 @@ class Section5Rule39(RuleDefinitionListIndexedBase):
                         required_fields={
                             "$": ["subclassification", "u_factor"],
                         },
+                        precision={
+                            "subsurface_u_factor_b": {
+                                "precision": 0.01,
+                                "unit": "Btu/(hr*ft2*R)",
+                            }
+                        },
                     )
 
                 def get_calc_vals(self, context, data=None):
@@ -223,6 +229,11 @@ class Section5Rule39(RuleDefinitionListIndexedBase):
                     return manual_check_required_msg
 
                 def rule_check(self, context, calc_vals=None, data=None):
+                    return self.precision_comparison["subsurface_u_factor_b"](
+                        calc_vals["u_factor_b"], calc_vals["target_u_factor_b"]
+                    )
+
+                def is_tolerance_fail(self, context, calc_vals=None, data=None):
                     u_factor_b = calc_vals["u_factor_b"]
                     target_u_factor_b = calc_vals["target_u_factor_b"]
                     return std_equal(target_u_factor_b, u_factor_b)
