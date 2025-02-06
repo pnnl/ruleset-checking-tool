@@ -31,6 +31,7 @@ CASE4_MSG = (
     "Confirm that Service Water Heating Building Area Type is provided with one and only one service water heating system."
 )
 
+
 class PRM9012019Rule40i48(RuleDefinitionListIndexedBase):
     """Rule 8 of ASHRAE 90.1-2019 Appendix G Section 11 (Service Water Heating)"""
 
