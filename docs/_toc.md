@@ -186,9 +186,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   *[1-4](section1/Rule1-4.md): The PCI shall be less than or equal to the PCIt when calculated in accordance with Standard 90.1 2019, Section 4.2.1.1.
   *[1-5](section1/Rule1-5.md): When on-site renewable energy generation exceeds the thresholds defined in Section 4.2.1.1, the methodology defined in this section shall be used to calculate the PCIt.
   *[1-6](section1/Rule1-6.md): On-site renewable energy shall not be included in the baseline building performance.
-
-## Section 3 - Space Use Classification
-  
+ 
 ## Section 4 - Schedules
   * [4-1](section4/4-1.md): Temperature Control Setpoints shall be the same for proposed design and baseline building design.  
   * [4-2](section4/4-2.md): Humidity Control Setpoints shall be the same for proposed design and baseline building design. 
