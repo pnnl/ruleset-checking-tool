@@ -47,7 +47,7 @@ def count_number_of_rules(ruleset_standard):
     count_dict = {}
 
     for rule_definition_tuple in available_rule_definitions:
-        section_rule_name = rules_dict.get(rule_definition_tuple[0])
+        section_rule_name = rules_dict.get(rule_definition_tuple[0].lower())
 
         if section_rule_name is None:
             print(f"Rule {rule_definition_tuple[0]} not found in rules_dict")
