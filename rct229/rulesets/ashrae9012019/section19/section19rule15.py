@@ -28,7 +28,11 @@ from rct229.utils.pint_utils import ZERO
 from rct229.utils.std_comparisons import std_equal
 from rct229.utils.utility_functions import find_exactly_one_terminal_unit
 
-APPLICABLE_SYS_TYPES = [HVAC_SYS.SYS_9, HVAC_SYS.SYS_10]
+APPLICABLE_SYS_TYPES = [
+    HVAC_SYS.SYS_9,
+    HVAC_SYS.SYS_10,
+]
+
 REQ_DESIGN_SUPPLY_AIR_TEMP_SETPOINT = 105.0 * ureg("degF")
 
 
@@ -55,9 +59,11 @@ class PRM9012019Rule03j97(RuleDefinitionListIndexedBase):
         rmd_b = context.BASELINE_0
         rmd_p = context.PROPOSED
         baseline_system_types_dict = get_baseline_system_types(rmd_b)
+
         zones_and_terminal_units_served_by_hvac_sys_dict = (
             get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmd_b)
         )
+
         hvac_info_dict_b = {}
         for hvac_id_b in find_all(
             "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].id",
@@ -100,6 +106,7 @@ class PRM9012019Rule03j97(RuleDefinitionListIndexedBase):
                     ZERO.FLOW,
                 ),
             }
+
         return {
             "baseline_system_types_dict": baseline_system_types_dict,
             "hvac_info_dict_b": hvac_info_dict_b,
@@ -108,13 +115,12 @@ class PRM9012019Rule03j97(RuleDefinitionListIndexedBase):
     def is_applicable(self, context, data=None):
         rmd_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmd_b)
+
         return any(
             [
-                (
-                    baseline_system_types_dict[system_type]
-                    and baseline_system_type_compare(
-                        system_type, applicable_sys_type, False
-                    )
+                baseline_system_types_dict[system_type]
+                and baseline_system_type_compare(
+                    system_type, applicable_sys_type, False
                 )
                 for system_type in baseline_system_types_dict
                 for applicable_sys_type in APPLICABLE_SYS_TYPES
@@ -132,8 +138,14 @@ class PRM9012019Rule03j97(RuleDefinitionListIndexedBase):
                     "fan_system": ["minimum_outdoor_airflow"],
                 },
                 precision={
-                    "supply_fan_airflow_b": {"precision": 1, "unit": "cfm"},
-                    "proposed_supply_flow": {"precision": 1, "unit": "cfm"},
+                    "supply_fan_airflow_b": {
+                        "precision": 1,
+                        "unit": "cfm",
+                    },
+                    "proposed_supply_flow": {
+                        "precision": 1,
+                        "unit": "cfm",
+                    },
                 },
             )
 
@@ -141,6 +153,7 @@ class PRM9012019Rule03j97(RuleDefinitionListIndexedBase):
             hvac_b = context.BASELINE_0
             hvac_id_b = hvac_b["id"]
             baseline_system_types_dict = data["baseline_system_types_dict"]
+
             return any(
                 hvac_id_b in baseline_system_types_dict[system_type]
                 for system_type in baseline_system_types_dict
@@ -149,15 +162,20 @@ class PRM9012019Rule03j97(RuleDefinitionListIndexedBase):
         def get_calc_vals(self, context, data=None):
             hvac_b = context.BASELINE_0
             hvac_id_b = hvac_b["id"]
+
             fan_system_b = hvac_b["fan_system"]
+
             fan_info_b = (
                 get_fan_system_object_supply_return_exhaust_relief_total_power_flow(
                     fan_system_b
                 )
             )
+
             supply_fan_qty_b = fan_info_b["supply_fans_qty"]
             supply_fan_airflow_b = fan_info_b["supply_fans_airflow"]
+
             minimum_outdoor_airflow_b = fan_system_b["minimum_outdoor_airflow"]
+
             return {
                 "hvac_id_b": hvac_id_b,
                 "supply_fan_qty_b": supply_fan_qty_b,
@@ -176,34 +194,37 @@ class PRM9012019Rule03j97(RuleDefinitionListIndexedBase):
             supply_fan_airflow_b = calc_vals["supply_fan_airflow_b"]
             all_design_setpoints_105 = calc_vals["all_design_setpoints_105"]
             proposed_supply_flow = calc_vals["proposed_supply_flow"]
+
             return (
                 supply_fan_qty_b == 1
                 and not all_design_setpoints_105
                 and self.precision_comparison["proposed_supply_flow"](
-                    proposed_supply_flow, supply_fan_airflow_b
+                    proposed_supply_flow,
+                    supply_fan_airflow_b,
                 )
-            ) and supply_fan_qty_b != 1
+            ) or (supply_fan_qty_b != 1)
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
             hvac_id_b = calc_vals["hvac_id_b"]
             supply_fan_qty_b = calc_vals["supply_fan_qty_b"]
             supply_fan_airflow_b = calc_vals["supply_fan_airflow_b"]
-            all_design_setpoints_105 = calc_vals["hvac_info_dict_b"][hvac_id_b][
-                "all_design_setpoints_105"
-            ]
-            proposed_supply_flow = calc_vals["hvac_info_dict_b"][hvac_id_b][
-                "proposed_supply_flow"
-            ]
+            all_design_setpoints_105 = calc_vals["all_design_setpoints_105"]
+            proposed_supply_flow = calc_vals["proposed_supply_flow"]
+
             if (
                 supply_fan_qty_b == 1
                 and not all_design_setpoints_105
                 and self.precision_comparison["proposed_supply_flow"](
-                    proposed_supply_flow, supply_fan_airflow_b
+                    proposed_supply_flow,
+                    supply_fan_airflow_b,
                 )
             ):
+                # Case 3
                 undetermined_msg = f"{hvac_id_b} was not modeled with a supply air temperature set point of 105°F. The baseline and proposed supply cfm was modeled identically at {proposed_supply_flow * ureg('cfm')} CFM. Manual review is required to determine if the airflow rate was modeled to comply with applicable codes or accreditation standards. If not, fail."
             else:
+                # Case 4
                 undetermined_msg = f"{hvac_id_b} doesn't have one supply fan associated with the HVAC system in the baseline and therefore this check could not be conducted for this HVAC sytem. Conduct manual check for compliance with G3.1.2.8.2."
+
             return undetermined_msg
 
         def rule_check(self, context, calc_vals=None, data=None):
@@ -214,11 +235,16 @@ class PRM9012019Rule03j97(RuleDefinitionListIndexedBase):
             all_design_setpoints_105 = data["hvac_info_dict_b"][hvac_id_b][
                 "all_design_setpoints_105"
             ]
+
             return supply_fan_qty_b == 1 and (
-                all_design_setpoints_105
-                and supply_fan_airflow_b > minimum_outdoor_airflow_b
-                or not all_design_setpoints_105
-                and minimum_outdoor_airflow_b == supply_fan_airflow_b
+                (
+                    all_design_setpoints_105
+                    and supply_fan_airflow_b > minimum_outdoor_airflow_b
+                )
+                or (
+                    not all_design_setpoints_105
+                    and minimum_outdoor_airflow_b == supply_fan_airflow_b
+                )
             )
 
         def is_tolerance_fail(self, context, calc_vals=None, data=None):
@@ -229,9 +255,16 @@ class PRM9012019Rule03j97(RuleDefinitionListIndexedBase):
             all_design_setpoints_105 = data["hvac_info_dict_b"][hvac_id_b][
                 "all_design_setpoints_105"
             ]
+
             return supply_fan_qty_b == 1 and (
-                all_design_setpoints_105
-                and std_lt(val=supply_fan_airflow_b, std_val=minimum_outdoor_airflow_b)
-                or not all_design_setpoints_105
-                and std_equal(minimum_outdoor_airflow_b, supply_fan_airflow_b)
+                (
+                    all_design_setpoints_105
+                    and std_lt(
+                        val=supply_fan_airflow_b, std_val=minimum_outdoor_airflow_b
+                    )
+                )
+                or (
+                    not all_design_setpoints_105
+                    and std_equal(minimum_outdoor_airflow_b, supply_fan_airflow_b)
+                )
             )

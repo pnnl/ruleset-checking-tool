@@ -43,7 +43,6 @@ class PRM9012019Rule67a77(RuleDefinitionListIndexedBase):
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].buildings[*]",
             data_items={"climate_zone": (PROPOSED, "weather/climate_zone")},
-            manual_check_required_msg=MANUAL_CHECK_MSG,
         )
 
     class BuildingRule(RuleDefinitionBase):
@@ -56,6 +55,7 @@ class PRM9012019Rule67a77(RuleDefinitionListIndexedBase):
                 precision={
                     "building_total_air_leakage_rate_b": {"precision": 1, "unit": "cfm"}
                 },
+                manual_check_required_msg=MANUAL_CHECK_MSG,
             )
 
         def get_calc_vals(self, context, data=None):

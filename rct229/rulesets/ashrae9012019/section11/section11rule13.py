@@ -13,7 +13,8 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_uses_associated_wit
 )
 from rct229.utils.jsonpath_utils import find_all
 
-APPLICABILITY_MSG = "This building has service water heating loads.  Confirm that service water heating energy consumption is calculated explicitly based upon the volume of service water heating required and the entering makeup water and leaving service water heating temperatures.  Entering water temperatures shall be estimated based upon the location. Leaving temperatures shall be based upon the end-use requirements."
+
+APPLICABILITY_MSG = "This building has service water heating loads. Confirm that service water heating energy consumption is calculated explicitly based upon the volume of service water heating required and the entering makeup water and leaving service water heating temperatures.  Entering water temperatures shall be estimated based upon the location. Leaving temperatures shall be based upon the end-use requirements."
 
 
 class PRM9012019Rule51s51(RuleDefinitionListIndexedBase):
@@ -27,13 +28,20 @@ class PRM9012019Rule51s51(RuleDefinitionListIndexedBase):
             each_rule=PRM9012019Rule51s51.RMDRule(),
             index_rmd=BASELINE_0,
             id="11-13",
-            description="Service water-heating energy consumption shall be calculated explicitly based upon the volume of service water heating required and the entering makeup water and the leaving service water-heating temperatures. Entering water temperatures shall be estimated based upon the location. Leaving temperatures shall be based upon the end-use requirements.",
+            description=(
+                "Service water-heating energy consumption shall be calculated explicitly based upon the volume of service water heating required and the entering makeup water and the leaving service water-heating temperatures. Entering water temperatures shall be estimated based upon the location. Leaving temperatures shall be based upon the end-use requirements."
+            ),
             ruleset_section_title="Service Water Heating",
             standard_section="Table G3.1 #11, baseline column, (e)",
             is_primary_rule=False,
             list_path="ruleset_model_descriptions[0]",
-            required_fields={"$": ["calendar"], "calendar": ["is_leap_year"]},
-            data_items={"is_leap_year": (BASELINE_0, "calendar/is_leap_year")},
+            required_fields={
+                "$": ["calendar"],
+                "calendar": ["is_leap_year"],
+            },
+            data_items={
+                "is_leap_year": (BASELINE_0, "calendar/is_leap_year"),
+            },
         )
 
     class RMDRule(RuleDefinitionListIndexedBase):
@@ -52,6 +60,7 @@ class PRM9012019Rule51s51(RuleDefinitionListIndexedBase):
             is_leap_year_b = data["is_leap_year"]
             energy_required_to_heat_swh_use_dict = {}
             service_water_heating_use_dict = {}
+
             for building_segment in find_all(
                 "$.buildings[*].building_segments[*]", rmd_b
             ):
@@ -64,6 +73,7 @@ class PRM9012019Rule51s51(RuleDefinitionListIndexedBase):
                     building_segment["id"]
                 ] = service_water_heating_use_list
                 for swh_use in service_water_heating_use_list:
+                    # If no swh use specified or swh use is 0, skip
                     if swh_use.get("use", 0) == 0:
                         continue
                     energy_required_to_heat_swh_use = (
@@ -143,6 +153,7 @@ class PRM9012019Rule51s51(RuleDefinitionListIndexedBase):
                     service_water_heating_info["btu_per_sf_per_year"] = (
                         service_water_heating_info["btu_per_year"] / floor_area
                     )
+
                 return {
                     "is_applicable": is_applicable,
                     "service_water_heating_btu_per_sf_per_year": service_water_heating_info[

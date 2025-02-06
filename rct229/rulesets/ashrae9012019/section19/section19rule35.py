@@ -28,7 +28,8 @@ class PRM9012019Rule40n43(RuleDefinitionListIndexedBase):
             each_rule=PRM9012019Rule40n43.RMDRule(),
             index_rmd=BASELINE_0,
             id="19-35",
-            description="For baseline systems serving only laboratory spaces that are prohibited from recirculating return air by code or accreditation standards, the baseline system shall be modeled as 100% outdoor air. Rule only applies when baseline outdoor air CFM is modeled as greater than proposed design outdoor air CFM.",
+            description="For baseline systems serving only laboratory spaces that are prohibited from recirculating return air by code or accreditation standards, "
+            "the baseline system shall be modeled as 100% outdoor air. Rule only applies when baseline outdoor air CFM is modeled as greater than proposed design outdoor air CFM.",
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1-10 HVAC Systems proposed column c and d",
             is_primary_rule=False,
@@ -59,10 +60,13 @@ class PRM9012019Rule40n43(RuleDefinitionListIndexedBase):
             rmd_p = context.PROPOSED
             leap_year_b = data["is_leap_year_b"]
             leap_year_p = data["is_leap_year_p"]
+
             dict_of_zones_and_terminal_units_served_by_hvac_sys_b = (
                 get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmd_b)
             )
+
             hvac_system_serves_only_labs = True
+            hvac_system_serves_no_space_types = True
             are_any_lighting_space_types_defined = False
             all_lighting_space_types_defined = True
             zone_OA_flow_list_of_schedules_b = []
@@ -78,13 +82,34 @@ class PRM9012019Rule40n43(RuleDefinitionListIndexedBase):
                         f'$.buildings[*].building_segments[*].zones[*][?(@.id="{zone_id_b}")].spaces[*].lighting_space_type',
                         rmd_b,
                     )
+
+                    # Count this zone's spaces and the number of light space types
+                    space_count = len(
+                        find_all(
+                            f'$.buildings[*].building_segments[*].zones[*][?(@.id="{zone_id_b}")].spaces[*]',
+                            rmd_b,
+                        )
+                    )
+                    lighting_space_type_count = len(lighting_space_types_b)
+
+                    # Evaluate is all of this zone's lighting space types are defined (i.e., does each space have
+                    # an associated lighting space type)
+                    all_zone_types_defined = space_count == lighting_space_type_count
+
+                    # If no space types are served, this is valuable for undetermined checks
+                    hvac_system_serves_no_space_types = (
+                        len(lighting_space_types_b) == 0
+                        and hvac_system_serves_no_space_types
+                    )
+
                     all_lighting_space_types_defined = (
-                        all(lighting_space_types_b) and all_lighting_space_types_defined
+                        all(lighting_space_types_b)
+                        and all_zone_types_defined
+                        and all_lighting_space_types_defined
                     )
                     are_any_lighting_space_types_defined = (
-                        any(lighting_space_types_b)
-                        or are_any_lighting_space_types_defined
-                    )
+                        any(lighting_space_types_b) or lighting_space_type_count > 0
+                    ) or are_any_lighting_space_types_defined
                     hvac_system_serves_only_labs = (
                         all(
                             map(
@@ -93,29 +118,34 @@ class PRM9012019Rule40n43(RuleDefinitionListIndexedBase):
                                 lighting_space_types_b,
                             )
                         )
-                        and hvac_system_serves_only_labs
-                    )
+                        and not hvac_system_serves_no_space_types
+                    ) and hvac_system_serves_only_labs
+
                     zone_OA_flow_list_of_schedules_b.append(
                         get_min_oa_cfm_sch_zone(rmd_b, zone_id_b, leap_year_b)
                     )
                     zone_OA_flow_list_of_schedules_p.append(
                         get_min_oa_cfm_sch_zone(rmd_p, zone_id_b, leap_year_p)
                     )
+
             aggregated_min_OA_schedule_across_zones_b = (
                 aggregate_min_OA_schedule_across_zones(zone_OA_flow_list_of_schedules_b)
             )
             aggregated_min_OA_schedule_across_zones_p = (
                 aggregate_min_OA_schedule_across_zones(zone_OA_flow_list_of_schedules_p)
             )
+
             modeled_baseline_total_zone_min_OA_flow = sum(
                 aggregated_min_OA_schedule_across_zones_b
             )
             modeled_proposed_total_zone_min_OA_flow = sum(
                 aggregated_min_OA_schedule_across_zones_p
             )
+
             return {
                 "dict_of_zones_and_terminal_units_served_by_hvac_sys_b": dict_of_zones_and_terminal_units_served_by_hvac_sys_b,
                 "hvac_system_serves_only_labs": hvac_system_serves_only_labs,
+                "hvac_system_serves_no_space_types": hvac_system_serves_no_space_types,
                 "are_any_lighting_space_types_defined": are_any_lighting_space_types_defined,
                 "all_lighting_space_types_defined": all_lighting_space_types_defined,
                 "modeled_baseline_total_zone_min_OA_flow": modeled_baseline_total_zone_min_OA_flow,
@@ -127,19 +157,23 @@ class PRM9012019Rule40n43(RuleDefinitionListIndexedBase):
                 super(PRM9012019Rule40n43.RMDRule.HVACRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
-                    )
+                    ),
                 )
 
             def is_applicable(self, context, data=None):
                 hvac_system_serves_only_labs = data["hvac_system_serves_only_labs"]
+                hvac_system_serves_no_space_types = data[
+                    "hvac_system_serves_no_space_types"
+                ]
                 modeled_baseline_total_zone_min_OA_flow = data[
                     "modeled_baseline_total_zone_min_OA_flow"
                 ]
                 modeled_proposed_total_zone_min_OA_flow = data[
                     "modeled_proposed_total_zone_min_OA_flow"
                 ]
+
                 return (
-                    hvac_system_serves_only_labs
+                    (hvac_system_serves_only_labs or hvac_system_serves_no_space_types)
                     and modeled_baseline_total_zone_min_OA_flow
                     > modeled_proposed_total_zone_min_OA_flow
                 )
@@ -158,22 +192,28 @@ class PRM9012019Rule40n43(RuleDefinitionListIndexedBase):
                 are_any_lighting_space_types_defined = data[
                     "are_any_lighting_space_types_defined"
                 ]
+                hvac_system_serves_no_space_types = data[
+                    "hvac_system_serves_no_space_types"
+                ]
+
                 return (
                     modeled_baseline_total_zone_min_OA_flow
                     > modeled_proposed_total_zone_min_OA_flow
-                    and (
+                ) and (
+                    (
                         hvac_system_serves_only_labs
                         and (
                             all_lighting_space_types_defined
                             or are_any_lighting_space_types_defined
                         )
-                        or not are_any_lighting_space_types_defined
                     )
+                    or hvac_system_serves_no_space_types
                 )
 
             def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
                 hvac_b = context.BASELINE_0
                 hvac_id_b = hvac_b["id"]
+
                 hvac_system_serves_only_labs = data["hvac_system_serves_only_labs"]
                 are_any_lighting_space_types_defined = data[
                     "are_any_lighting_space_types_defined"
@@ -181,12 +221,23 @@ class PRM9012019Rule40n43(RuleDefinitionListIndexedBase):
                 all_lighting_space_types_defined = data[
                     "all_lighting_space_types_defined"
                 ]
+
                 undetermined_msg = ""
                 if hvac_system_serves_only_labs:
                     if all_lighting_space_types_defined:
-                        undetermined_msg = f"Baseline hvac system {hvac_id_b} serves only lab spaces and the modeled baseline outdoor air flow was modeled as greater than the proposed outdoor air flow. Conduct a manual check that these spaces meet G3.1.2.5 Exception 4 and that they are prohibited from recirculating return air by code or accreditation standards and confirm that the hvac system was modeled as a 100% outdoor air system."
+                        undetermined_msg = (
+                            f"Baseline hvac system {hvac_id_b} serves only lab spaces and the modeled baseline outdoor air flow was modeled as greater than the proposed outdoor air flow. "
+                            "Conduct a manual check that these spaces meet G3.1.2.5 Exception 4 and that they are prohibited from recirculating return air by code or accreditation standards and confirm that the hvac system was modeled as a 100% outdoor air system."
+                        )
                     elif are_any_lighting_space_types_defined:
-                        undetermined_msg = f"Baseline hvac system {hvac_id_b} serves some lab spaces (not all space types were defined in the RMD so all space types associated with this hvac system could not be checked) and the modeled baseline outdoor air flow was modeled as greater than the proposed outdoor air flow. Conduct a manual check that these spaces meet G3.1.2.5 Exception 4 and that they are prohibited from recirculating return air by code or accreditation standards and, if so, confirm that the hvac system was modeled as a 100% outdoor air system."
+                        undetermined_msg = (
+                            f"Baseline hvac system {hvac_id_b} serves some lab spaces (not all space types were defined in the RMD so all space types associated with this hvac system could not be checked) and the modeled baseline outdoor air flow was modeled as greater than the proposed outdoor air flow. "
+                            f"Conduct a manual check that these spaces meet G3.1.2.5 Exception 4 and that they are prohibited from recirculating return air by code or accreditation standards and, if so, confirm that the hvac system was modeled as a 100% outdoor air system."
+                        )
                 elif not are_any_lighting_space_types_defined:
-                    undetermined_msg = f"No space types were defined in the RMD for baseline system {hvac_id_b} and the modeled baseline outdoor air flow was modeled as greater than the proposed outdoor air flow. Conduct a manual check to determine if these spaces meet G3.1.2.5 Exception 4 and that they are prohibited from recirculating return air by code or accreditation standards and, if so, confirm that the hvac system was modeled as a 100% outdoor air system. If this exception does not apply then outcome is fail unless another exception to G3.1.2.5 applies."
+                    undetermined_msg = (
+                        f"No space types were defined in the RMD for baseline system {hvac_id_b} and the modeled baseline outdoor air flow was modeled as greater than the proposed outdoor air flow. Conduct a manual check to determine if these spaces meet G3.1.2.5 Exception 4 and that they are prohibited from recirculating return air by code or accreditation standards and, if so, confirm that the hvac system was modeled as a 100% outdoor air system. "
+                        f"If this exception does not apply then outcome is fail unless another exception to G3.1.2.5 applies."
+                    )
+
                 return undetermined_msg

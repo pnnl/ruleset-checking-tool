@@ -18,6 +18,8 @@ SWHEfficiencyMetricOptions = SchemaEnums.schema_enums[
 ]
 SWHTankOptions = SchemaEnums.schema_enums["ServiceWaterHeaterTankOptions"]
 DrawPatternOptions = SchemaEnums.schema_enums["DrawPatternOptions"]
+
+
 CAPACITY_PER_VOLUME_LIMIT = 4000 * ureg("Btu/h/gallon")
 INSTANTANEOUS_TYPES = [
     SWHTankOptions.CONSUMER_INSTANTANEOUS,
@@ -64,16 +66,20 @@ class PRM9012019Rule76q85(RuleDefinitionListIndexedBase):
 
         def is_applicable(self, context, data=None):
             rmd_b = context.BASELINE_0
+
             swh_equipment_list_b = find_all(
                 "$.service_water_heating_equipment[*]", rmd_b
             )
+
             return swh_equipment_list_b
 
         class SWHEquipRule(RuleDefinitionBase):
             def __init__(self):
                 super(PRM9012019Rule76q85.RMDRule.SWHEquipRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
-                        USER=False, BASELINE_0=True, PROPOSED=False
+                        USER=False,
+                        BASELINE_0=True,
+                        PROPOSED=False,
                     ),
                     required_fields={
                         "$": [
@@ -85,10 +91,22 @@ class PRM9012019Rule76q85(RuleDefinitionListIndexedBase):
                         "tank": ["type", "storage_capacity"],
                     },
                     precision={
-                        "swh_efficiency_b": {"precision": 0.01, "unit": ""},
-                        "swh_efficiency_uef_b": {"precision": 0.0001, "unit": ""},
-                        "swh_standby_loss_fraction_b": {"precision": 0.01, "unit": ""},
-                        "swh_standby_loss_energy_b": {"precision": 1, "unit": "Btu/h"},
+                        "swh_efficiency_b": {
+                            "precision": 0.01,
+                            "unit": "",
+                        },
+                        "swh_efficiency_uef_b": {
+                            "precision": 0.0001,
+                            "unit": "",
+                        },
+                        "swh_standby_loss_fraction_b": {
+                            "precision": 0.01,
+                            "unit": "",
+                        },
+                        "swh_standby_loss_energy_b": {
+                            "precision": 1,
+                            "unit": "Btu/h",
+                        },
                     },
                 )
 
@@ -107,6 +125,9 @@ class PRM9012019Rule76q85(RuleDefinitionListIndexedBase):
                     swh_input_power_b / swh_tank_storage_volume_b
                 )
                 swh_fuel_type_b = swh_equip_b.get("heater_fuel_type")
+                swh_setpoint_temperature_b = swh_equip_b.get("setpoint_temperature")
+
+                # Determine draw_pattern_b
                 draw_pattern_b = draw_pattern_enum_to_lookup_str_map.get(
                     swh_equip_b.get("draw_pattern")
                 )
@@ -129,9 +150,13 @@ class PRM9012019Rule76q85(RuleDefinitionListIndexedBase):
                             draw_pattern_b = draw_pattern_enum_to_lookup_str_map[
                                 DrawPatternOptions.HIGH
                             ]
+                # Overwrite draw pattern to empty string if the input power is greater than 105,000 Btu/h
                 draw_pattern_b = (
                     "" if swh_input_power_b > 105000 * ureg("Btu/h") else draw_pattern_b
                 )
+                # Note: draw_pattern_b will be None if the SWH draw pattern is not defined and the first hour rating is not defined
+
+                # efficiency_data data type should be None | List. If it is list, the maximum length is limited to 2 due to the dataset design.
                 efficiency_data = None
                 expected_efficiency_b = None
                 expected_efficiency_metric_b = None
@@ -139,11 +164,14 @@ class PRM9012019Rule76q85(RuleDefinitionListIndexedBase):
                 standby_loss_target_metric_b = None
                 modeled_efficiency_b = None
                 modeled_standby_loss_b = None
+
+                # Get Electric Storage Water Heater Efficiency Data
                 if (
                     swh_fuel_type_b == EnergySourceOptions.ELECTRICITY
                     and swh_tank_type_b in STORAGE_TYPES
                 ):
                     if swh_input_power_b < 12 * ureg("kW"):
+                        # Lookup the expected efficiency from Appendix F-2
                         assert_(
                             draw_pattern_b is not None,
                             "Draw pattern must be defined for table F-2 lookup",
@@ -154,15 +182,24 @@ class PRM9012019Rule76q85(RuleDefinitionListIndexedBase):
                             draw_pattern_b,
                         )
                     else:
+                        # Lookup the expected efficiency from Table 7.8
+                        # Note: Draw pattern is not used in this lookup
                         efficiency_data = table_7_8_lookup(
-                            "Electric storage water heater", swh_input_power_b
+                            "Electric storage water heater",
+                            swh_input_power_b,
                         )
+
+                # Get Gas Storage Water Heater Efficiency Data
                 elif (
                     swh_fuel_type_b
-                    in [EnergySourceOptions.NATURAL_GAS, EnergySourceOptions.PROPANE]
+                    in [
+                        EnergySourceOptions.NATURAL_GAS,
+                        EnergySourceOptions.PROPANE,
+                    ]
                     and swh_tank_type_b in STORAGE_TYPES
                 ):
                     if swh_input_power_b <= 75000 * ureg("Btu/h"):
+                        # Lookup the expected efficiency from Appendix F-2
                         assert_(
                             draw_pattern_b is not None,
                             "Draw pattern must be defined for table F-2 lookup",
@@ -173,15 +210,32 @@ class PRM9012019Rule76q85(RuleDefinitionListIndexedBase):
                             draw_pattern_b,
                         )
                     else:
+                        # Lookup the expected efficiency from Table 7.8
                         assert_(
                             draw_pattern_b is not None,
                             "Draw pattern must be defined for table 7-8 lookup",
                         )
-                        efficiency_data = table_7_8_lookup(
-                            "Gas storage water heater",
-                            swh_input_power_b,
-                            draw_pattern_b,
-                        )
+                        if 75000 * ureg("Btu/h") < swh_input_power_b <= 105000 * ureg(
+                            "Btu/h"
+                        ) and (
+                            (
+                                swh_setpoint_temperature_b
+                                and swh_setpoint_temperature_b > 180 * ureg("degF")
+                            )
+                            or swh_tank_storage_volume_b > 120 * ureg("gallon")
+                        ):
+                            # Override the input power to follow Table 7-8 footnote d
+                            efficiency_data = table_7_8_lookup(
+                                "Gas storage water heater", 105001 * ureg("Btu/h"), ""
+                            )
+                        else:
+                            efficiency_data = table_7_8_lookup(
+                                "Gas storage water heater",
+                                swh_input_power_b,
+                                draw_pattern_b,
+                            )
+                        # Note: If the input power is greater than 105,000 Btu/h, there will be a thermal efficiency and standby loss target
+
                 if efficiency_data:
                     to_remove = None
                     for efficiency in efficiency_data:
@@ -202,8 +256,10 @@ class PRM9012019Rule76q85(RuleDefinitionListIndexedBase):
                             )
                             to_remove = efficiency
                             break
+
                     if to_remove is not None:
                         efficiency_data.remove(to_remove)
+
                     if len(efficiency_data) == 1:
                         expected_efficiency_metric_b = efficiency_data[0]["metric"]
                         expected_efficiency_b = eval(
@@ -217,6 +273,7 @@ class PRM9012019Rule76q85(RuleDefinitionListIndexedBase):
                         modeled_efficiency_b = swh_efficiency_b.get(
                             expected_efficiency_metric_b
                         )
+
                 return {
                     "swh_fuel_type_b": swh_fuel_type_b,
                     "swh_tank_type_b": swh_tank_type_b,
@@ -224,6 +281,7 @@ class PRM9012019Rule76q85(RuleDefinitionListIndexedBase):
                     "swh_tank_storage_volume_b": CalcQ(
                         "tank_volume", swh_tank_storage_volume_b
                     ),
+                    "swh_setpoint_temperature_b": swh_setpoint_temperature_b,
                     "modeled_efficiency_b": modeled_efficiency_b,
                     "modeled_standby_loss_b": modeled_standby_loss_b,
                     "swh_input_power_per_volume_b": CalcQ(
@@ -244,21 +302,49 @@ class PRM9012019Rule76q85(RuleDefinitionListIndexedBase):
                 modeled_standby_loss_b = calc_vals["modeled_standby_loss_b"]
                 expected_efficiency_metric_b = calc_vals["expected_efficiency_metric_b"]
                 standby_loss_target_metric_b = calc_vals["standby_loss_target_metric_b"]
+
+                invalid_fuel_type = swh_fuel_type_b not in [
+                    EnergySourceOptions.ELECTRICITY,
+                    EnergySourceOptions.NATURAL_GAS,
+                    EnergySourceOptions.PROPANE,
+                ]
                 return (
+                    # The baseline water heater is of an Instantaneous type
                     swh_tank_type_b in INSTANTANEOUS_TYPES
+                    and not invalid_fuel_type
+                    # Input power per volume is greater than the capacity per volume limit
                     or swh_input_power_per_volume_b > CAPACITY_PER_VOLUME_LIMIT
-                    or swh_fuel_type_b == EnergySourceOptions.ELECTRICITY
-                    and swh_tank_type_b in STORAGE_TYPES
-                    and 55 * ureg("gallon")
-                    < swh_tank_storage_volume_b
-                    <= 100 * ureg("gallon")
-                    or expected_efficiency_metric_b is None
-                    and standby_loss_target_metric_b is None
-                    or modeled_efficiency_b is None
-                    and modeled_standby_loss_b is None
-                    or expected_efficiency_metric_b
-                    and standby_loss_target_metric_b
-                    and (modeled_efficiency_b is None or modeled_standby_loss_b is None)
+                    and not invalid_fuel_type
+                    # Electric resistance storage water heater with a storage volume in the range that produces an unreliable efficiency lookup
+                    or (
+                        swh_fuel_type_b == EnergySourceOptions.ELECTRICITY
+                        and swh_tank_type_b in STORAGE_TYPES
+                        and 55 * ureg("gallon")
+                        < swh_tank_storage_volume_b
+                        <= 100 * ureg("gallon")
+                    )
+                    # Lookup values do not match any of the table entries
+                    or (
+                        expected_efficiency_metric_b is None
+                        and standby_loss_target_metric_b is None
+                        and not invalid_fuel_type
+                    )
+                    # Efficiency metric for the SWHEquip does not match the expected metric when only one of efficiency/SL is required
+                    or (
+                        modeled_efficiency_b is None
+                        and modeled_standby_loss_b is None
+                        and not invalid_fuel_type
+                    )
+                    # Either efficiency metric for the SWHEquip does not match the expected values when both of efficiency/SL are required
+                    or (
+                        expected_efficiency_metric_b
+                        and standby_loss_target_metric_b
+                        and (
+                            modeled_efficiency_b is None
+                            or modeled_standby_loss_b is None
+                        )
+                        and not invalid_fuel_type
+                    )
                 )
 
             def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
@@ -271,15 +357,19 @@ class PRM9012019Rule76q85(RuleDefinitionListIndexedBase):
                 modeled_standby_loss_b = calc_vals["modeled_standby_loss_b"]
                 expected_efficiency_metric_b = calc_vals["expected_efficiency_metric_b"]
                 standby_loss_target_metric_b = calc_vals["standby_loss_target_metric_b"]
+
                 manual_check_msg = []
+
                 if swh_tank_type_b in INSTANTANEOUS_TYPES:
                     manual_check_msg.append(
                         "The baseline water heater is of an Instantaneous type. All service water heaters in the baseline should be storage water heaters, according to Table G3.1 #11 Baseline Building Performance column and Table G3.1.1-2. Consequently, the efficiency of the modeled water heater was not assessed."
                     )
+
                 if swh_input_power_per_volume_b > CAPACITY_PER_VOLUME_LIMIT:
                     manual_check_msg.append(
                         "Capacity per volume exceeds the limit of 4000 (Btu/hr)/gallon given for storage water heaters in ASHRAE 90.1 Table 7.8."
                     )
+
                 if (
                     swh_fuel_type_b == EnergySourceOptions.ELECTRICITY
                     and swh_tank_type_b in STORAGE_TYPES
@@ -290,6 +380,7 @@ class PRM9012019Rule76q85(RuleDefinitionListIndexedBase):
                     manual_check_msg.append(
                         "The storage tank is between 55 and 100 gallons with a capacity <= 12kW (40945 btu/hr). The minimum efficiency requirements in 90.1 Section 7.4.2 point to 10 CFR 430 which provides a heat pump efficiency for water heaters in this capacity range which is not consistent with the efficiency of an electric resistance storage water heater which is the only electric SWH system type associated with the baseline for ASHRAE 90.1 Appendix G. Consequently, this rule was not able to be assessed for this service water heater. Note that the specific requirements of 10 CFR 430 can be found in ASHRAE 90.1 Appendix F Table F-2."
                     )
+
                 elif (
                     swh_fuel_type_b == EnergySourceOptions.ELECTRICITY
                     and swh_tank_type_b in STORAGE_TYPES
@@ -302,9 +393,13 @@ class PRM9012019Rule76q85(RuleDefinitionListIndexedBase):
                     manual_check_msg.append(
                         "The storage tank volume falls outside the supported range based on the size categories in ASHRAE 90.1 Table 7.8 and in 10 CFR 430. Consequently, this rule was not assessed for this service water heater. Note that the specific requirements of 10 CFR 430 can be found in ASHRAE 90.1 Appendix F Table F-2."
                     )
+
                 elif (
                     swh_fuel_type_b
-                    in [EnergySourceOptions.NATURAL_GAS, EnergySourceOptions.PROPANE]
+                    in [
+                        EnergySourceOptions.NATURAL_GAS,
+                        EnergySourceOptions.PROPANE,
+                    ]
                     and swh_tank_type_b in STORAGE_TYPES
                     and swh_input_power_b <= 75000 * ureg("Btu/h")
                     and (
@@ -315,6 +410,7 @@ class PRM9012019Rule76q85(RuleDefinitionListIndexedBase):
                     manual_check_msg.append(
                         "The storage tank volume falls outside the supported range based on the size categories in ASHRAE 90.1 Table 7.8 and in 10 CFR 430. Consequently, this rule was not assessed for this service water heater. Note that the specific requirements of 10 CFR 430 can be found in ASHRAE 90.1 Appendix F Table F-2."
                     )
+
                 elif (
                     expected_efficiency_metric_b is None
                     and standby_loss_target_metric_b is None
@@ -322,6 +418,7 @@ class PRM9012019Rule76q85(RuleDefinitionListIndexedBase):
                     manual_check_msg.append(
                         "The expected efficiency for this water heater could not be determined based on the provided details."
                     )
+
                 if (
                     expected_efficiency_metric_b is not None
                     and modeled_efficiency_b is None
@@ -329,6 +426,7 @@ class PRM9012019Rule76q85(RuleDefinitionListIndexedBase):
                     manual_check_msg.append(
                         f"Based on the provided details, {expected_efficiency_metric_b} is an expected efficiency metric for this water heater, however it was not provided. Note that the specific requirements of 10 CFR 430 can be found in ASHRAE 90.1 Appendix F Table F-2."
                     )
+
                 if (
                     standby_loss_target_metric_b is not None
                     and modeled_standby_loss_b is None
@@ -336,9 +434,11 @@ class PRM9012019Rule76q85(RuleDefinitionListIndexedBase):
                     manual_check_msg.append(
                         f"Based on the provided details, {standby_loss_target_metric_b} is an expected efficiency metric for this water heater, however it was not provided. Note that the specific requirements of 10 CFR 430 can be found in ASHRAE 90.1 Appendix F Table F-2."
                     )
+
                 return "\n".join(manual_check_msg)
 
             def rule_check(self, context, calc_vals=None, data=None):
+                swh_fuel_type_b = calc_vals["swh_fuel_type_b"]
                 swh_tank_type_b = calc_vals["swh_tank_type_b"]
                 modeled_efficiency_b = calc_vals["modeled_efficiency_b"]
                 modeled_standby_loss_b = calc_vals["modeled_standby_loss_b"]
@@ -346,6 +446,15 @@ class PRM9012019Rule76q85(RuleDefinitionListIndexedBase):
                 expected_efficiency_metric_b = calc_vals["expected_efficiency_metric_b"]
                 standby_loss_target_b = calc_vals["standby_loss_target_b"]
                 standby_loss_target_metric_b = calc_vals["standby_loss_target_metric_b"]
+
+                invalid_fuel_type = swh_fuel_type_b not in [
+                    EnergySourceOptions.ELECTRICITY,
+                    EnergySourceOptions.NATURAL_GAS,
+                    EnergySourceOptions.PROPANE,
+                ]
+                if invalid_fuel_type:
+                    return False
+
                 precision_entry = (
                     "swh_efficiency_b"
                     if expected_efficiency_metric_b
@@ -353,28 +462,39 @@ class PRM9012019Rule76q85(RuleDefinitionListIndexedBase):
                     else "swh_efficiency_uef_b"
                 )
                 standby_loss_complies = (
-                    standby_loss_target_b is None
+                    (standby_loss_target_b is None)
                     or (
-                        standby_loss_target_metric_b
-                        == SWHEfficiencyMetricOptions.STANDBY_LOSS_FRACTION
-                        and self.precision_comparison["swh_standby_loss_fraction_b"](
-                            modeled_standby_loss_b, standby_loss_target_b
+                        (
+                            standby_loss_target_metric_b
+                            == SWHEfficiencyMetricOptions.STANDBY_LOSS_FRACTION
+                            and self.precision_comparison[
+                                "swh_standby_loss_fraction_b"
+                            ](modeled_standby_loss_b, standby_loss_target_b)
                         )
-                        or standby_loss_target_b is not None
-                        and modeled_standby_loss_b < standby_loss_target_b
+                        or (
+                            standby_loss_target_b is not None
+                            and modeled_standby_loss_b < standby_loss_target_b
+                        )
                     )
                     or (
-                        standby_loss_target_metric_b
-                        == SWHEfficiencyMetricOptions.STANDBY_LOSS_ENERGY
-                        and self.precision_comparison["swh_standby_loss_energy_b"](
-                            modeled_standby_loss_b * ureg("W"),
-                            standby_loss_target_b * ureg("Btu/h"),
+                        (
+                            standby_loss_target_metric_b
+                            == SWHEfficiencyMetricOptions.STANDBY_LOSS_ENERGY
+                            and self.precision_comparison["swh_standby_loss_energy_b"](
+                                # Schema specifies units as Watts
+                                modeled_standby_loss_b * ureg("W"),
+                                # Lookup table calculation results in Btu/h
+                                standby_loss_target_b * ureg("Btu/h"),
+                            )
                         )
-                        or standby_loss_target_b is not None
-                        and modeled_standby_loss_b * ureg("W")
-                        < standby_loss_target_b * ureg("Btu/h")
+                        or (
+                            standby_loss_target_b is not None
+                            and modeled_standby_loss_b * ureg("W")
+                            < standby_loss_target_b * ureg("Btu/h")
+                        )
                     )
                 )
+
                 return (
                     swh_tank_type_b in STORAGE_TYPES
                     and (
@@ -389,6 +509,7 @@ class PRM9012019Rule76q85(RuleDefinitionListIndexedBase):
             def get_fail_msg(self, context, calc_vals=None, data=None):
                 swh_fuel_type_b = calc_vals["swh_fuel_type_b"]
                 swh_tank_type_b = calc_vals["swh_tank_type_b"]
+
                 if (
                     swh_tank_type_b not in STORAGE_TYPES + INSTANTANEOUS_TYPES
                     or swh_fuel_type_b
@@ -398,7 +519,7 @@ class PRM9012019Rule76q85(RuleDefinitionListIndexedBase):
                         EnergySourceOptions.PROPANE,
                     ]
                 ):
-                    return "The water heater type was not recognized, and does not match any of the expected baseline water heater types."
+                    return f"Fuel type: {swh_fuel_type_b} is not a valid fuel type for a service water heating baseline system. According to ASHRAE 90.1 Table G3.1.1-2 service water heating equipment shall be either electric resistance or natural gas. According to ASHRAE 90.1 Table G3.1 #11 h, in cases where natural gas is specified as the baseline system, but there is no natural gas available on site, a propane system may be modeled."
                 else:
                     return "The modeled efficiency or standby loss for the water heater does not match the expected values."
 
@@ -408,16 +529,22 @@ class PRM9012019Rule76q85(RuleDefinitionListIndexedBase):
                 modeled_standby_loss_b = calc_vals["modeled_standby_loss_b"]
                 expected_efficiency_b = calc_vals["expected_efficiency_b"]
                 standby_loss_target_b = calc_vals["standby_loss_target_b"]
+
                 standby_loss_complies = (
-                    standby_loss_target_b is None
-                    or std_equal(modeled_standby_loss_b, standby_loss_target_b)
-                    or standby_loss_target_b is not None
-                    and std_le(
-                        val=modeled_standby_loss_b, std_val=standby_loss_target_b
+                    (standby_loss_target_b is None)
+                    or (std_equal(modeled_standby_loss_b, standby_loss_target_b))
+                    or (
+                        standby_loss_target_b is not None
+                        and std_le(
+                            val=modeled_standby_loss_b, std_val=standby_loss_target_b
+                        )
                     )
                 )
                 return (
                     swh_tank_type_b in STORAGE_TYPES
-                    and std_equal(modeled_efficiency_b, expected_efficiency_b)
+                    and (
+                        expected_efficiency_b is None
+                        or std_equal(modeled_efficiency_b, expected_efficiency_b)
+                    )
                     and standby_loss_complies
                 )

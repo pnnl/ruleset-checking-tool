@@ -20,7 +20,9 @@ class PRM9012019Rule86h31(RuleDefinitionBase):
                 PROPOSED=True,
             ),
             rmds_used_optional=produce_ruleset_model_description(
-                BASELINE_90=True, BASELINE_180=True, BASELINE_270=True
+                BASELINE_90=True,
+                BASELINE_180=True,
+                BASELINE_270=True,
             ),
             id="1-5",
             description="When on-site renewable energy generation exceeds the thresholds defined in Section 4.2.1.1, the methodology defined in this section shall be used to calculate the PCI.",
@@ -37,6 +39,7 @@ class PRM9012019Rule86h31(RuleDefinitionBase):
         rmd_b180 = context.BASELINE_180
         rmd_b270 = context.BASELINE_270
         rmd_p = context.PROPOSED
+
         pbp_set = []
         bbp_set = []
         pbp_nre_set = []
@@ -49,7 +52,10 @@ class PRM9012019Rule86h31(RuleDefinitionBase):
                     )
                 )
                 bbp_set.append(
-                    find_one("$.output.baseline_building_performance_energy_cost", rmd)
+                    find_one(
+                        "$.output.baseline_building_performance_energy_cost",
+                        rmd,
+                    )
                 )
                 pbp_nre_set.append(
                     find_one(
@@ -57,16 +63,28 @@ class PRM9012019Rule86h31(RuleDefinitionBase):
                         rmd,
                     )
                 )
+
         pbp_set = list(set(filter(lambda x: x is not None, pbp_set)))
         bbp_set = list(set(filter(lambda x: x is not None, bbp_set)))
         pbp_nre_set = list(set(filter(lambda x: x is not None, pbp_nre_set)))
-        assert_(len(pbp_set) >= 1, "At least one `pbp_set` value must exist.")
-        assert_(len(bbp_set) >= 1, "At least one `bbp_set` value must exist.")
-        assert_(len(pbp_nre_set) >= 1, "At least one `pbp_nre_set` value must exist.")
+
+        assert_(
+            len(pbp_set) >= 1,
+            "Ruleset expects exactly one PBP value to be used in the project.",
+        )
+        assert_(
+            len(bbp_set) >= 1,
+            "Ruleset expects exactly one BBP value to be used in the project.",
+        )
+        assert_(
+            len(pbp_nre_set) >= 1,
+            "Ruleset expects exactly one PBP_nre value to be used in the project.",
+        )
         assert_(
             bbp_set[0] > 0,
             "The `baseline_building_performance_energy_cost` value must be greater than 0.",
         )
+
         return (pbp_nre_set[0] - pbp_set[0]) / bbp_set[0] > APPLICABLE_LIMIT
 
     def get_calc_vals(self, context, data=None):
@@ -76,6 +94,7 @@ class PRM9012019Rule86h31(RuleDefinitionBase):
         rmd_b180 = context.BASELINE_180
         rmd_b270 = context.BASELINE_270
         rmd_p = context.PROPOSED
+
         pbp_set = []
         bbp_set = []
         pbp_nre_set = []
@@ -90,7 +109,10 @@ class PRM9012019Rule86h31(RuleDefinitionBase):
                     )
                 )
                 bbp_set.append(
-                    find_one("$.output.baseline_building_performance_energy_cost", rmd)
+                    find_one(
+                        "$.output.baseline_building_performance_energy_cost",
+                        rmd,
+                    )
                 )
                 pbp_nre_set.append(
                     find_one(
@@ -98,19 +120,34 @@ class PRM9012019Rule86h31(RuleDefinitionBase):
                         rmd,
                     )
                 )
-                pci_set.append(find_one("$.output.performance_cost_index", rmd))
-                pci_target_set.append(
-                    find_one("$.output.performance_cost_index_target", rmd)
+                pci_set.append(
+                    find_one(
+                        "$.output.performance_cost_index",
+                        rmd,
+                    )
                 )
+                pci_target_set.append(
+                    find_one(
+                        "$.output.performance_cost_index_target",
+                        rmd,
+                    )
+                )
+
         pbp_set = list(set(filter(lambda x: x is not None, pbp_set)))
         bbp_set = list(set(filter(lambda x: x is not None, bbp_set)))
         pbp_nre_set = list(set(filter(lambda x: x is not None, pbp_nre_set)))
         pci_set = list(set(filter(lambda x: x is not None, pci_set)))
         pci_target_set = list(set(filter(lambda x: x is not None, pci_target_set)))
-        assert_(len(pci_set) >= 1, "At least one `pci_set` value must exist.")
+
         assert_(
-            len(pci_target_set) >= 1, "At least one `pci_target_set` value must exist."
+            len(pci_set) >= 1,
+            "Ruleset expects exactly one PCI value to be used in the project.",
         )
+        assert_(
+            len(pci_target_set) >= 1,
+            "Ruleset expects exactly one PCI Target value to be used in the project.",
+        )
+
         return {
             "pbp_set": pbp_set,
             "bbp_set": bbp_set,
@@ -125,6 +162,7 @@ class PRM9012019Rule86h31(RuleDefinitionBase):
         pbp_nre_set = calc_vals["pbp_nre_set"]
         pci_set = calc_vals["pci_set"]
         pci_target_set = calc_vals["pci_target_set"]
+
         return (
             len(pbp_set)
             == len(bbp_set)
@@ -132,35 +170,7 @@ class PRM9012019Rule86h31(RuleDefinitionBase):
             == len(pci_set)
             == len(pci_target_set)
             == 1
-            and pci_set[0]
-            + (pbp_nre_set[0] - pbp_set[0]) / bbp_set[0]
+            and (pci_set[0] + ((pbp_nre_set[0] - pbp_set[0]) / bbp_set[0]))
             - APPLICABLE_LIMIT
             <= pci_target_set[0]
         )
-
-    def get_fail_msg(self, context, calc_vals=None, data=None):
-        pbp_set = calc_vals["pbp_set"]
-        bbp_set = calc_vals["bbp_set"]
-        pbp_nre_set = calc_vals["pbp_nre_set"]
-        pci_set = calc_vals["pci_set"]
-        pci_target_set = calc_vals["pci_target_set"]
-        FAIL_MSG = ""
-        if len(pbp_set) != 1:
-            FAIL_MSG = (
-                "Ruleset expects exactly one PBP value to be used in the project."
-            )
-        elif len(bbp_set) != 1:
-            FAIL_MSG = (
-                "Ruleset expects exactly one BBP value to be used in the project."
-            )
-        elif len(pbp_nre_set) != 1:
-            FAIL_MSG = (
-                "Ruleset expects exactly one PBP_nre value to be used in the project."
-            )
-        elif len(pci_set) != 1:
-            FAIL_MSG = (
-                "Ruleset expects exactly one PCI value to be used in the project."
-            )
-        elif len(pci_target_set) != 1:
-            FAIL_MSG = "Ruleset expects exactly one PCI Target value to be used in the project."
-        return FAIL_MSG

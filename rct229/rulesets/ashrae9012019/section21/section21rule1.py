@@ -18,13 +18,16 @@ class PRM9012019Rule34f57(RuleDefinitionListIndexedBase):
             each_rule=PRM9012019Rule34f57.RulesetModelInstanceRule(),
             index_rmd=PROPOSED,
             id="21-1",
-            description="For systems using purchased hot water or steam, the heating source shall be modeled as purchased hot water or steam in both the proposed design and baseline building design. If any system in the proposed design uses purchased hot water or steam, all baseline systems with hot water coils shall use the same type of purchased hot water or steam.",
+            description="For systems using purchased hot water or steam, the heating source shall be "
+            "modeled as purchased hot water or steam in both the proposed design and "
+            "baseline building design. If any system in the proposed design uses purchased "
+            "hot water or steam, all baseline systems with hot water coils shall use the "
+            "same type of purchased hot water or steam.",
             ruleset_section_title="HVAC - Water Side",
-            standard_section="Section G3.1.1.3 Baseline HVAC System Requirements for Systems Utilizing Purchased Chilled Water and/or Purchased Heat",
+            standard_section="Section G3.1.1.3 Baseline HVAC System Requirements for Systems Utilizing Purchased "
+            "Chilled Water and/or Purchased Heat",
             is_primary_rule=False,
             list_path="ruleset_model_descriptions[0]",
-            manual_check_required_msg="Manual Check Required - Proposed is modeled with purchased hot water or steam.  Make sure the heating source in the baseline building is also purchased hot water or steam.",
-            not_applicable_msg="Rule 21-1 Not Applicable - the proposed is not modeled with Purchased Hot Water or Steam",
         )
 
     class RulesetModelInstanceRule(PartialRuleDefinition):
@@ -32,7 +35,11 @@ class PRM9012019Rule34f57(RuleDefinitionListIndexedBase):
             super(PRM9012019Rule34f57.RulesetModelInstanceRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=False, PROPOSED=True
-                )
+                ),
+                manual_check_required_msg="Manual Check Required - Proposed is modeled with purchased hot water or steam.  "
+                "Make sure the heating source in the baseline building is also purchased hot water or steam.",
+                not_applicable_msg="Rule 21-1 Not Applicable - the proposed is not modeled with Purchased Hot Water or "
+                "Steam",
             )
 
         def applicability_check(self, context, calc_vals, data):

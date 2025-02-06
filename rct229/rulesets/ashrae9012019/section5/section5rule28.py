@@ -165,6 +165,7 @@ class PRM9012019Rule42c42(RuleDefinitionListIndexedBase):
                         precision={
                             "subsurface_shgc_b": {"precision": 0.01, "unit": ""}
                         },
+                        manual_check_required_msg=MANUAL_CHECK_MSG,
                     )
 
                 def is_applicable(self, context, data=None):

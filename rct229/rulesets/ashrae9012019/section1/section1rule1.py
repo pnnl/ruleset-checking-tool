@@ -13,7 +13,12 @@ from rct229.utils.jsonpath_utils import find_one
 from rct229.utils.pint_utils import ZERO
 from rct229.utils.std_comparisons import std_equal
 
-MANUAL_CHECK_REQUIRED_MSG = "One or more building area types could not be determined for the project's building segments. Assigning a lighting building area type to all building segments will fix this issue. "
+MANUAL_CHECK_REQUIRED_MSG = (
+    "One or more building area types could not be determined for the project's building "
+    "segments. Assigning a lighting building area type to all building segments will fix this"
+    " issue. "
+)
+
 FAIL_MSG = "More than one BPF value was used in the project."
 
 
@@ -31,7 +36,9 @@ class PRM9012019Rule73j65(RuleDefinitionListIndexedBase):
                 PROPOSED=True,
             ),
             rmds_used_optional=produce_ruleset_model_description(
-                BASELINE_90=True, BASELINE_180=True, BASELINE_270=True
+                BASELINE_90=True,
+                BASELINE_180=True,
+                BASELINE_270=True,
             ),
             required_fields={
                 "$": ["weather", "ruleset_model_descriptions"],
@@ -40,7 +47,9 @@ class PRM9012019Rule73j65(RuleDefinitionListIndexedBase):
             index_rmd=BASELINE_0,
             each_rule=PRM9012019Rule73j65.RMDRule(),
             id="1-1",
-            description="Building performance factors shall be from Standard 90.1-2019, Table 4.2.1.1, based on the building area type and climate zone. For building area types not listed in Table 4.2.1.1 “All others.” shall be used to determine the BPF.",
+            description="Building performance factors shall be from Standard 90.1-2019, Table 4.2.1.1, based on the "
+            "building area type and climate zone. For building area types not listed in Table 4.2.1.1 "
+            "“All others.” shall be used to determine the BPF.",
             ruleset_section_title="Performance Calculations",
             standard_section="Section G4.2.1.1",
             is_primary_rule=True,
@@ -60,7 +69,9 @@ class PRM9012019Rule73j65(RuleDefinitionListIndexedBase):
                     PROPOSED=True,
                 ),
                 rmds_used_optional=produce_ruleset_model_description(
-                    BASELINE_90=True, BASELINE_180=True, BASELINE_270=True
+                    BASELINE_90=True,
+                    BASELINE_180=True,
+                    BASELINE_270=True,
                 ),
                 required_fields={
                     "$": ["output"],
@@ -79,10 +90,12 @@ class PRM9012019Rule73j65(RuleDefinitionListIndexedBase):
             rmd_p = context.PROPOSED
             output_bpf_list = [
                 find_one(
-                    "$.output.total_area_weighted_building_performance_factor", rmd
+                    "$.output.total_area_weighted_building_performance_factor",
+                    rmd,
                 )
                 for rmd in (rmd_u, rmd_b0, rmd_b90, rmd_b180, rmd_b270, rmd_p)
             ]
+
             output_bpf_list = list(
                 set(filter(lambda x: x is not None, output_bpf_list))
             )
@@ -103,14 +116,19 @@ class PRM9012019Rule73j65(RuleDefinitionListIndexedBase):
                     bpf_bat_dict_area = bpf_building_area_type_dict[bpf_bat]["area"]
                     total_area += bpf_bat_dict_area
                     bpf_bat_sum_prod += expected_bpf * bpf_bat_dict_area
+
+            # Checks if only undetermined was returned. If so, skip check for total area.
             only_undetermined = (
                 len(bpf_building_area_type_dict) == 1
                 and "UNDETERMINED" in bpf_building_area_type_dict
             )
+
             if not only_undetermined:
                 assert_(
-                    total_area > 0, "The `total_area ` value must be greater than 0."
+                    total_area > 0,
+                    "The `total_area ` value must be greater than 0.",
                 )
+
             return {
                 "output_bpf_list": output_bpf_list,
                 "bpf_bat_sum_prod": bpf_bat_sum_prod,
@@ -126,6 +144,7 @@ class PRM9012019Rule73j65(RuleDefinitionListIndexedBase):
             output_bpf_list = calc_vals["output_bpf_list"]
             bpf_bat_sum_prod = calc_vals["bpf_bat_sum_prod"]
             total_area = calc_vals["total_area"]
+
             return len(output_bpf_list) == 1 and std_equal(
                 bpf_bat_sum_prod / total_area, output_bpf_list[0]
             )
