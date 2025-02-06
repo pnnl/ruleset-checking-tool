@@ -24,9 +24,9 @@ jobs:
         uses: peter-evans/create-pull-request@v4
         with:
           base: feature/ashrae-9012022
-          head: develop
+          branch: develop
           title: "Merge develop into feature/update_tool"
           body: "This PR merges the latest chagens from the develop branch into the feature/ashrae-9012022 branch"
-          reviewer: weilixu
+          reviewers: weilixu
           draft: false
           labels: "auto-pr"
