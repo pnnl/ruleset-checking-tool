@@ -230,6 +230,7 @@ rules_dict = {
     "prm9012019rule14m33": "section23rule14",
     "prm9012019rule71f87": "section23rule15",
     "prm9012019rule79i34": "section23rule16",
+    "prm9012019rule40y63": "section23rule17",
 }
 
 if SchemaEnums.schema_enums.get("RulesetModelOptions2019ASHRAE901"):
