@@ -61,9 +61,7 @@ def renumber_rules(ruleset_doc):
         / "ruletest_jsons"
         / "ashrae9012019"
     )
-    section_master_ruletest_files = list(
-        ruletest_jsons_dir.glob("section*master.json")
-    )
+    section_master_ruletest_files = list(ruletest_jsons_dir.glob("section*master.json"))
 
     # Disaggregate the master ruletest json files, effectively renumbering each of the individual ruletest json files
     for file in section_master_ruletest_files:

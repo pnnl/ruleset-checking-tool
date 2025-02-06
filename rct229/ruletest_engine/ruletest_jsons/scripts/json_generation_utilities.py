@@ -497,8 +497,10 @@ def disaggregate_master_ruletest_json(master_json_name, ruleset_doc):
         # Initialize this ruletest's dictionary
         ruletest_dict = master_dict[ruletest]
 
-        if len(ruletest.split('-')) != 3:
-            raise ValueError(f"Ruletest {ruletest} does not have a valid rule id format. Expected format, for example: rule-73j65-a")
+        if len(ruletest.split("-")) != 3:
+            raise ValueError(
+                f"Ruletest {ruletest} does not have a valid rule id format. Expected format, for example: rule-73j65-a"
+            )
 
         # Map the rule ID to the rule name
         rule_name = rules_dict.get(f"prm9012019rule{ruletest.split('-')[1]}")

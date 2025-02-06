@@ -80,7 +80,9 @@ def find_schema_unit_for_json_path(key_list):
 
         # If reference string references a secondary json reference, update root JSON dictionary to new secondary schema
         if reference_string.split("#")[0] in secondary_schema_files:
-            schema_dict = get_secondary_schema_root_dictionary(reference_string.split("#")[0])
+            schema_dict = get_secondary_schema_root_dictionary(
+                reference_string.split("#")[0]
+            )
 
             # Split out root dictionary object key. It's found in the schema object's file name
             # (e.g., 'Output2019ASHRAE901' in 'Output2019ASHRAE901.schema.json')
