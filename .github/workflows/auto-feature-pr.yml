@@ -22,8 +22,8 @@ jobs:
         uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          base: ${{ env.BASE_BRANCH }}
-          branch: develop
+          base: develop
+          branch: ${{ env.BASE_BRANCH }}
           title: "Auto PR: Sync develop -> ${{ env.BASE_BRANCH }}"
           body: "This PR is automatically created to sync the latest changes from develop branch"
           labels: automated
