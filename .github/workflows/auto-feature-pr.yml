@@ -18,15 +18,22 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
+      - name: Ensure Develop Branch is Up-to-Date
+        run: |
+          git fetch origin
+          git checkout develop
+          git pull origin develop
+
       - name: Create Pull Request to Feature Branch
         uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.AUTO_PAT }}
-          commit-message: Update feature branch
+          commit-message: "Auto PR: Sync develop -> ${{ env.TARGET_BRANCH }}"
           committer: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-          base: develop
-          branch: ${{ env.TARGET_BRANCH }}
+          base: ${{ env.TARGET_BRANCH }}
+          branch: update/develop-to-${{ env.TARGET_BRANCH }}
+          delete-branch: true
           title: "Auto PR: Sync develop -> ${{ env.TARGET_BRANCH }}"
           body: "This PR is automatically created to sync the latest changes from develop branch"
           labels: automated
