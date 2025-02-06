@@ -1,6 +1,9 @@
 import json
 import os
 import re
+from collections import OrderedDict
+
+from rct229.rulesets.ashrae9012019 import rules_dict
 
 
 def get_nested_dict(dic, keys):
@@ -494,11 +497,32 @@ def disaggregate_master_ruletest_json(master_json_name, ruleset_doc):
         # Initialize this ruletest's dictionary
         ruletest_dict = master_dict[ruletest]
 
-        # Pull out rule and section
-        section = ruletest_dict["Section"]
-        rule = ruletest_dict["Rule"]
+        if len(ruletest.split('-')) != 3:
+            raise ValueError(f"Ruletest {ruletest} does not have a valid rule id format. Expected format, for example: rule-73j65-a")
+
+        # Map the rule ID to the rule name
+        rule_name = rules_dict.get(f"prm9012019rule{ruletest.split('-')[1]}")
+
+        if not rule_name:
+            raise ValueError(f"Rule {ruletest.split('-')[1]} not found in rule_map")
+
+        # Extract section and rule number from rule name
+        section = int(rule_name.split("rule")[0].split("section")[1])
+        rule = int(rule_name.split("rule")[1])
         test_case = ruletest_dict["Test"]
 
+        ordered_ruletest_dict = OrderedDict()
+        ordered_ruletest_dict["Section"] = section
+        ordered_ruletest_dict["Rule"] = rule
+        ordered_ruletest_dict["Test"] = test_case
+
+        # Add remaining keys, preserving their original order
+        for key, value in ruletest_dict.items():
+            if key not in {"Test", "Section", "Rule"}:  # Avoid duplicating keys
+                ordered_ruletest_dict[key] = value
+
+        # Replace the standard rule_id
+        ordered_ruletest_dict["standard"]["rule_id"] = f"{section}-{rule}"
         # Create unique ID for this rule and previous
         rule_id = f"{section}-{rule}"
         prev_rule_id = f"{prev_section}-{prev_rule}"
@@ -513,7 +537,7 @@ def disaggregate_master_ruletest_json(master_json_name, ruleset_doc):
                 rule_dictionary = {}
 
         # Add this test case to the existing rule_dictionary
-        rule_dictionary[f"rule-{rule_id}-{test_case}"] = ruletest_dict
+        rule_dictionary[f"rule-{rule_id}-{test_case}"] = ordered_ruletest_dict
 
         # Record previous section
         prev_section = section
