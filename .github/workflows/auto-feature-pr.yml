@@ -24,6 +24,16 @@ jobs:
           git checkout develop
           git pull origin develop
 
+      - name: Create or Update Sync Branch
+        run: |
+          git fetch origin
+          git checkout -B update/develop-to-${{ env.TARGET_BRANCH }} origin/${{ env.TARGET_BRANCH }} || git checkout -B update/develop-to-${{ env.TARGET_BRANCH }}
+          git merge --no-edit develop || echo "No changes to merge"
+
+      - name: Push Sync Branch
+        run: |
+          git push origin update/develop-to-${{ env.TARGET_BRANCH }}
+
       - name: Create Pull Request to Feature Branch
         uses: peter-evans/create-pull-request@v7
         with:
