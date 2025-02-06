@@ -185,6 +185,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   *[1-3](section1/Rule1-3.md): The Performance Cost Index-Target (PCIt) shall be calculated using the procedures defined in Section 4.2.1.1. The PCIt shall be equal to [baseline building unregulated energy cost (BBUEC) + BPF x baseline building regulated energy cost (BBREC)]/ BBP
   *[1-4](section1/Rule1-4.md): The PCI shall be less than or equal to the PCIt when calculated in accordance with Standard 90.1 2019, Section 4.2.1.1.
   *[1-5](section1/Rule1-5.md): When on-site renewable energy generation exceeds the thresholds defined in Section 4.2.1.1, the methodology defined in this section shall be used to calculate the PCIt.
+  *[1-6](section1/Rule1-6.md): On-site renewable energy shall not be included in the baseline building performance.
 
 ## Section 3 - Space Use Classification
   
