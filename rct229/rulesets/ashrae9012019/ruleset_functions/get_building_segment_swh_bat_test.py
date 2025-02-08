@@ -13,7 +13,7 @@ TEST_RMD = {
             "building_segments": [
                 {
                     "id": "Building Segment 1",
-                    "service_water_heating_building_area_type": "LIBRARY",
+                    "service_water_heating_area_type": "LIBRARY",
                 },
                 {
                     "id": "Building Segment 2",
@@ -81,7 +81,7 @@ TEST_RMD = {
                             "spaces": [
                                 {
                                     "id": "Space 4_1",
-                                    "service_water_heating_building_area_type": "MUSEUM",
+                                    "service_water_heating_area_type": "MUSEUM",
                                     "service_water_heating_uses": [
                                         {
                                             "id": "service water heating uses 4_1",
@@ -118,7 +118,7 @@ TEST_RMD = {
                             "spaces": [
                                 {
                                     "id": "Space 5_1",
-                                    "service_water_heating_building_area_type": "HOTEL",
+                                    "service_water_heating_area_type": "HOTEL",
                                     "service_water_heating_uses": [
                                         {
                                             "id": "service water heating uses 5_1",
@@ -132,7 +132,7 @@ TEST_RMD = {
                                 },
                                 {
                                     "id": "Space 5_2",
-                                    "service_water_heating_building_area_type": "CONVENIENCE_STORE",
+                                    "service_water_heating_area_type": "CONVENIENCE_STORE",
                                     "service_water_heating_uses": [
                                         {
                                             "id": "service water heating uses 5_2",

@@ -74,7 +74,14 @@ class Section12Rule3(RuleDefinitionListIndexedBase):
                     for misc_equip_p in find_all(
                         "$.miscellaneous_equipment[*]", space_p
                     ):
-                        if misc_equip_p.get("has_automatic_control"):
+                        automatic_controlled_percentage_p = misc_equip_p.get(
+                            "automatic_controlled_percentage"
+                        )
+                        auto_receptacle_control_p = (
+                            automatic_controlled_percentage_p
+                            and automatic_controlled_percentage_p > 0.0
+                        )
+                        if auto_receptacle_control_p:
                             spaces_with_receptacle_controls_beyond_req.append(
                                 misc_equip_p["id"]
                             )
@@ -140,7 +147,6 @@ class Section12Rule3(RuleDefinitionListIndexedBase):
                         ),
                         required_fields={
                             "$": [
-                                "has_automatic_control",
                                 "multiplier_schedule",
                             ]
                         },
@@ -149,7 +155,14 @@ class Section12Rule3(RuleDefinitionListIndexedBase):
 
                 def is_applicable(self, context, data=None):
                     misc_equip_p = context.PROPOSED
-                    return misc_equip_p.get("has_automatic_control")
+                    automatic_controlled_percentage_p = misc_equip_p.get(
+                        "automatic_controlled_percentage"
+                    )
+                    auto_receptacle_control_p = (
+                        automatic_controlled_percentage_p
+                        and automatic_controlled_percentage_p > 0.0
+                    )
+                    return auto_receptacle_control_p
 
                 def get_not_applicable_msg(self, context, data=None):
                     misc_equip_p = context.PROPOSED

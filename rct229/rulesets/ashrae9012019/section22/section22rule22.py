@@ -9,8 +9,10 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_s
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types import (
     get_baseline_system_types,
 )
+from rct229.utils.assertions import assert_
 from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
+from rct229.schema.schema_enums import SchemaEnums
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_7,
@@ -23,6 +25,10 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_8B,
     HVAC_SYS.SYS_11_1B,
     HVAC_SYS.SYS_12B,
+]
+
+CHILLER_EFFICIENCY_METRIC_TYPES = SchemaEnums.schema_enums[
+    "ChillerEfficiencyMetricOptions"
 ]
 
 
@@ -68,7 +74,12 @@ class Section22Rule22(RuleDefinitionListIndexedBase):
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={
-                    "$": ["compressor_type", "rated_capacity", "full_load_efficiency"],
+                    "$": [
+                        "compressor_type",
+                        "rated_capacity",
+                        "efficiency_metric_types",
+                        "efficiency_metric_values",
+                    ],
                 },
                 precision={
                     "full_load_efficiency_b": {
@@ -79,10 +90,32 @@ class Section22Rule22(RuleDefinitionListIndexedBase):
 
         def get_calc_vals(self, context, data=None):
             chiller_b = context.BASELINE_0
-            full_load_efficiency_b = chiller_b["full_load_efficiency"]
-
             compressor_type_b = chiller_b["compressor_type"]
             rated_capacity_b = chiller_b["rated_capacity"]
+            efficiency_metric_types_b = chiller_b["efficiency_metric_types"]
+            efficiency_metric_values_b = chiller_b["efficiency_metric_values"]
+
+            assert_(
+                len(efficiency_metric_types_b) == len(efficiency_metric_values_b)
+                and 1 <= len(efficiency_metric_types_b) <= 4,
+                "`efficiency_metric_types` and `efficiency_metric_values` must have the same length between 1 to 4",
+            )
+
+            full_load_efficiency_b = next(
+                (
+                    value.to("Watt / Watt")
+                    for metric, value in zip(
+                        efficiency_metric_types_b, efficiency_metric_values_b
+                    )
+                    if metric == CHILLER_EFFICIENCY_METRIC_TYPES.FULL_LOAD_EFFICIENCY
+                ),
+                None,
+            )
+
+            assert_(
+                full_load_efficiency_b is not None,
+                "Baseline chiller `full_load_efficiency_b` should provided",
+            )
 
             required_kw_ton_full_load_b = table_g3_5_3_lookup(
                 compressor_type_b, rated_capacity_b
