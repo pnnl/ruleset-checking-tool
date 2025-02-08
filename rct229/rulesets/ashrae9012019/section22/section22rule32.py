@@ -92,8 +92,8 @@ class Section22Rule32(RuleDefinitionListIndexedBase):
             )
             assert_(
                 len(efficiency_metric_types_b) == len(efficiency_metric_values_b)
-                and 1 <= len(efficiency_metric_types_b) <= 4,
-                "`efficiency_metric_types` and `efficiency_metric_values` must have the same length between 1 to 4",
+                and 1 <= len(efficiency_metric_types_b) <= 5,
+                "`efficiency_metric_types` and `efficiency_metric_values` must have the same length between 1 to 5",
             )
 
             chiller_part_load_efficiency = next(
