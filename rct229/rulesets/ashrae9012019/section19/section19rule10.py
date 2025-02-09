@@ -26,7 +26,6 @@ LIGHTING_BUILDING_AREA = SchemaEnums.schema_enums[
     "LightingBuildingAreaOptions2019ASHRAE901T951TG38"
 ]
 
-
 NOT_APPLICABLE_CLIMATE_ZONE = [
     ClimateZoneOption.CZ0A,
     ClimateZoneOption.CZ0B,
@@ -60,32 +59,35 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             required_fields={
-                "$": ["weather", "ruleset_model_descriptions"],
-                "weather": ["climate_zone"],
+                "$": ["ruleset_model_descriptions"],
             },
             each_rule=Section19Rule10.RulesetModelInstanceRule(),
             index_rmd=BASELINE_0,
             id="19-10",
             description="Air economizers shall be included in baseline HVAC Systems 3 through 8, and 11, 12, and 13 based on climate as specified in Section G3.1.2.6 with exceptions."
-            "1. Systems that include gas-phase air cleaning to meet the requirements of Standard 62.1, Section 6.1.2. This exception shall be used only if the system in the proposed design does not match the building design."
-            "2. Where the use of outdoor air for cooling will affect supermarket open refrigerated case-work systems. This exception shall only be used if the system in the proposed design does not use an economizer. If the exception is used, an economizer shall not be included in the baseline building design."
-            "3. Systems that serve computer rooms complying with Section G3.1.2.6.1.",
+                        "1. Systems that include gas-phase air cleaning to meet the requirements of Standard 62.1, Section 6.1.2. This exception shall be used only if the system in the proposed design does not match the building design."
+                        "2. Where the use of outdoor air for cooling will affect supermarket open refrigerated case-work systems. This exception shall only be used if the system in the proposed design does not use an economizer. If the exception is used, an economizer shall not be included in the baseline building design."
+                        "3. Systems that serve computer rooms complying with Section G3.1.2.6.1.",
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1.2.6 including exceptions 1-3",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
         )
 
     class RulesetModelInstanceRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section19Rule10.RulesetModelInstanceRule, self,).__init__(
+            super(Section19Rule10.RulesetModelInstanceRule, self, ).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
                 each_rule=Section19Rule10.RulesetModelInstanceRule.HVACRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
+                required_fields={
+                    "$": ["weather"],
+                    "weather": ["climate_zone"],
+                },
+                data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
             )
 
         def is_applicable(self, context, data=None):
@@ -187,16 +189,16 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
                 hvac_system_exception_2_list = data["hvac_system_exception_2_list"]
 
                 return (
-                    (
-                        fan_air_economizer_b is None
-                        or fan_air_economizer_type_b
-                        in [None, AIR_ECONOMIZER.FIXED_FRACTION]
-                    )
-                    and hvac_id_b in hvac_system_exception_2_list
+                        (
+                                fan_air_economizer_b is None
+                                or fan_air_economizer_type_b
+                                in [None, AIR_ECONOMIZER.FIXED_FRACTION]
+                        )
+                        and hvac_id_b in hvac_system_exception_2_list
                 ) or (
-                    fan_air_economizer_b is not None
-                    and fan_air_economizer_type_b != AIR_ECONOMIZER.FIXED_FRACTION
-                    and hvac_id_b in hvac_system_exception_2_list
+                        fan_air_economizer_b is not None
+                        and fan_air_economizer_type_b != AIR_ECONOMIZER.FIXED_FRACTION
+                        and hvac_id_b in hvac_system_exception_2_list
                 )
 
             def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
@@ -207,16 +209,16 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
                 hvac_system_exception_2_list = data["hvac_system_exception_2_list"]
 
                 if (
-                    fan_air_economizer_b is None
-                    or fan_air_economizer_type_b
-                    in [None, AIR_ECONOMIZER.FIXED_FRACTION]
+                        fan_air_economizer_b is None
+                        or fan_air_economizer_type_b
+                        in [None, AIR_ECONOMIZER.FIXED_FRACTION]
                 ) and hvac_id_b in hvac_system_exception_2_list:
                     # Case 2 msg
                     undetermined_msg = f"Undetermined unless any of the zones served by the baseline system {hvac_id_b} in the proposed design include supermarket open refrigerated case-work systems that will be affected by using outdoor air for cooling (G3.1.2.6 exception #2)."
                 elif (
-                    fan_air_economizer_b is not None
-                    and fan_air_economizer_type_b != AIR_ECONOMIZER.FIXED_FRACTION
-                    and hvac_id_b in hvac_system_exception_2_list
+                        fan_air_economizer_b is not None
+                        and fan_air_economizer_type_b != AIR_ECONOMIZER.FIXED_FRACTION
+                        and hvac_id_b in hvac_system_exception_2_list
                 ):
                     # Case 4 msg
                     undetermined_msg = f"This system {hvac_id_b} appears to meet the criteria associated with Section G3.1.2.6 exception #2 which is that an economizer shall not be modeled in the baseline for systems where the use of outdoor air for cooling will affect supermarket open refrigerated case-work systems and the proposed system does not include an economizer. An economizer has been modeled in the baseline when it appears this exception may apply. Manual check recommended."
@@ -233,18 +235,18 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
                 ]
 
                 return (
-                    (
-                        fan_air_economizer_b is None
-                        or fan_air_economizer_type_b
-                        in [None, AIR_ECONOMIZER.FIXED_FRACTION]
-                    )
-                    and baseline_system_types_b in SYSTEM_3_4_TYPES
-                    and hvac_id_b in HVAC_systems_primarily_serving_comp_rooms_list
+                        (
+                                fan_air_economizer_b is None
+                                or fan_air_economizer_type_b
+                                in [None, AIR_ECONOMIZER.FIXED_FRACTION]
+                        )
+                        and baseline_system_types_b in SYSTEM_3_4_TYPES
+                        and hvac_id_b in HVAC_systems_primarily_serving_comp_rooms_list
                 ) or (
-                    fan_air_economizer_b is not None
-                    and fan_air_economizer_type_b != AIR_ECONOMIZER.FIXED_FRACTION
-                    and baseline_system_types_b not in SYSTEM_3_4_TYPES
-                    and hvac_id_b not in HVAC_systems_primarily_serving_comp_rooms_list
+                        fan_air_economizer_b is not None
+                        and fan_air_economizer_type_b != AIR_ECONOMIZER.FIXED_FRACTION
+                        and baseline_system_types_b not in SYSTEM_3_4_TYPES
+                        and hvac_id_b not in HVAC_systems_primarily_serving_comp_rooms_list
                 )
 
             def get_fail_msg(self, context, calc_vals=None, data=None):
@@ -257,17 +259,17 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
                 ]
 
                 if (
-                    fan_air_economizer_b is not None
-                    and fan_air_economizer_type_b != AIR_ECONOMIZER.FIXED_FRACTION
-                    and baseline_system_types_b in SYSTEM_3_4_TYPES
-                    and hvac_id_b in HVAC_systems_primarily_serving_comp_rooms_list
+                        fan_air_economizer_b is not None
+                        and fan_air_economizer_type_b != AIR_ECONOMIZER.FIXED_FRACTION
+                        and baseline_system_types_b in SYSTEM_3_4_TYPES
+                        and hvac_id_b in HVAC_systems_primarily_serving_comp_rooms_list
                 ):
                     # Case 3 msg
                     fail_msg = f"This system {hvac_id_b} appears to meet the criteria associated with Section G3.1.2.6 exception #3 which is that an economizer shall not be modeled in the baseline for systems that serve computer rooms complying with Section G3.1.2.6.1."
 
                 elif (
-                    fan_air_economizer_b is None
-                    or fan_air_economizer_type_b == AIR_ECONOMIZER.FIXED_FRACTION
+                        fan_air_economizer_b is None
+                        or fan_air_economizer_type_b == AIR_ECONOMIZER.FIXED_FRACTION
                 ):
                     # case 6 msg
                     fail_msg = f"Fail unless any of the zones served by the baseline system {hvac_id_b} are served in the proposed design by systems with a gas-phase air cleaning where such air cleaning is requirements of Standard 62.1, Section 6.1.2 (G3.1.2.6 exception #1) or where the use of outdoor air for cooling will affect supermarket open refrigerated case-work systems (G3.1.2.6 exception #2)."

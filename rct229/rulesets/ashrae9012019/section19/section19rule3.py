@@ -21,7 +21,7 @@ class Section19Rule3(PartialRuleDefinition):
             standard_section="Section G3.1.2.2.1",
             is_primary_rule=False,
             required_fields={
-                "$": ["weather"],
+                "$.ruleset_model_descriptions[*]": ["weather"],
             },
         )
 

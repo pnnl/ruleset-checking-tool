@@ -48,8 +48,6 @@ class Section11Rule8(RuleDefinitionListIndexedBase):
             standard_section="Table G3.1 #11, baseline column, a + b",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
-            data_items={"is_leap_year": (BASELINE_0, "calendar/is_leap_year")},
         )
 
     class RMDRule(RuleDefinitionListIndexedBase):
@@ -62,6 +60,8 @@ class Section11Rule8(RuleDefinitionListIndexedBase):
                 ),
                 index_rmd=BASELINE_0,
                 each_rule=Section11Rule8.RMDRule.SWHBATRule(),
+                required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
+                data_items={"is_leap_year": (BASELINE_0, "calendar/is_leap_year")},
             )
 
         def create_data(self, context, data):
@@ -77,10 +77,10 @@ class Section11Rule8(RuleDefinitionListIndexedBase):
                 [
                     True
                     for bldg_seg_b in find_all(
-                        "$.buildings[*].building_segments[*]", rmd_b
-                    )
+                    "$.buildings[*].building_segments[*]", rmd_b
+                )
                     if get_building_segment_swh_bat(rmd_b, bldg_seg_b["id"])
-                    == SERVICE_WATER_HEATING_SPACE.ALL_OTHERS
+                       == SERVICE_WATER_HEATING_SPACE.ALL_OTHERS
                 ]
             )
 
@@ -173,8 +173,8 @@ class Section11Rule8(RuleDefinitionListIndexedBase):
                     [
                         service_water_heating_uses_p[swh_uses_id_p] > 0.0
                         for swh_uses_id_p in building_area_type_and_uses_p_b[
-                            "swh_bats_and_uses_p"
-                        ]
+                        "swh_bats_and_uses_p"
+                    ]
                     ]
                 )
 
@@ -195,8 +195,8 @@ class Section11Rule8(RuleDefinitionListIndexedBase):
                     for other_swh_bat in swh_bats_and_uses_b:
                         if other_swh_bat != swh_bat_b:
                             if (
-                                swh_dist_id
-                                in swh_bats_and_uses_b[swh_bat_b].swh_distribution
+                                    swh_dist_id
+                                    in swh_bats_and_uses_b[swh_bat_b].swh_distribution
                             ):
                                 is_referenced_in_other_bats_b = True
 
@@ -214,14 +214,14 @@ class Section11Rule8(RuleDefinitionListIndexedBase):
                 num_other_swh_bat_segment_b = calc_vals["num_other_swh_bat_segment_b"]
 
                 return (swh_bat_b == "UNDETERMINED" and num_of_bldg_segment_b > 1) or (
-                    swh_bat_b == SERVICE_WATER_HEATING_SPACE.ALL_OTHERS
-                    and num_other_swh_bat_segment_b > 1
+                        swh_bat_b == SERVICE_WATER_HEATING_SPACE.ALL_OTHERS
+                        and num_other_swh_bat_segment_b > 1
                 )
 
             def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
                 swh_bat_b = calc_vals["swh_bat_b"]
                 multiple_segments_with_bat_other_b = (
-                    calc_vals["num_other_swh_bat_segment_b"] > 1
+                        calc_vals["num_other_swh_bat_segment_b"] > 1
                 )
 
                 UNDETERMINED_MSG = ""
@@ -241,7 +241,7 @@ class Section11Rule8(RuleDefinitionListIndexedBase):
                 ]
 
                 return (
-                    num_swh_systems_b == 1
-                    or (swh_bat_b == "UNDETERMINED" and num_of_bldg_segment_b == 1)
-                    or not is_referenced_in_other_bats_b
+                        num_swh_systems_b == 1
+                        or (swh_bat_b == "UNDETERMINED" and num_of_bldg_segment_b == 1)
+                        or not is_referenced_in_other_bats_b
                 )

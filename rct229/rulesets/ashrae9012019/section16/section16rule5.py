@@ -29,8 +29,6 @@ class Section16Rule5(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
-            data_items={"is_leap_year_b": (BASELINE_0, "calendar/is_leap_year")},
         )
 
     class RuleSetModelDescriptionRule(RuleDefinitionListIndexedBase):
@@ -42,6 +40,8 @@ class Section16Rule5(RuleDefinitionListIndexedBase):
                 each_rule=Section16Rule5.RuleSetModelDescriptionRule.ElevatorRule(),
                 index_rmd=BASELINE_0,
                 list_path="buildings[*].elevators[*]",
+                required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
+                data_items={"is_leap_year_b": (BASELINE_0, "calendar/is_leap_year")},
             )
 
         def is_applicable(self, context, data=None):
@@ -139,5 +139,5 @@ class Section16Rule5(RuleDefinitionListIndexedBase):
                 total_hours = calc_vals["total_hours"]
 
                 return (
-                    vent_sched_compare_data == light_sched_compare_data == total_hours
+                        vent_sched_compare_data == light_sched_compare_data == total_hours
                 )

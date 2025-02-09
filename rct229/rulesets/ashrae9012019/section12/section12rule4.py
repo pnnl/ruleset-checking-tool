@@ -57,13 +57,11 @@ class Section12Rule4(RuleDefinitionListIndexedBase):
             index_rmd=BASELINE_0,
             id="12-4",
             description="Computer room equipment schedules shall be modeled as a constant fraction of the peak design load per the following monthly schedule: "
-            "Months 1, 5, 9 — 25%; Months 2, 6, 10 — 50%; Months 3, 7, 11 — 75%; Months 4, 8, 12 — 100%",
+                        "Months 1, 5, 9 — 25%; Months 2, 6, 10 — 50%; Months 3, 7, 11 — 75%; Months 4, 8, 12 — 100%",
             ruleset_section_title="Receptacle",
             standard_section="Section G3.1.3.16",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            required_fields={"$": ["calendar"], "calendar": ["is_leap_year"]},
-            data_items={"is_leap_year": (BASELINE_0, "calendar/is_leap_year")},
         )
 
     class RuleSetModelDescriptionRule(RuleDefinitionListIndexedBase):
@@ -75,6 +73,8 @@ class Section12Rule4(RuleDefinitionListIndexedBase):
                 each_rule=Section12Rule4.RuleSetModelDescriptionRule.MiscEquipRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].zones[*].spaces[*].miscellaneous_equipment[*]",
+                required_fields={"$": ["calendar"], "calendar": ["is_leap_year"]},
+                data_items={"is_leap_year": (BASELINE_0, "calendar/is_leap_year")},
             )
 
         def is_applicable(self, context, data=None):
@@ -84,8 +84,8 @@ class Section12Rule4(RuleDefinitionListIndexedBase):
                 [
                     is_space_a_computer_room(rmd_b, space_b["id"])
                     for space_b in find_all(
-                        "$.buildings[*].building_segments[*].zones[*].spaces[*]", rmd_b
-                    )
+                    "$.buildings[*].building_segments[*].zones[*].spaces[*]", rmd_b
+                )
                 ]
             )
 

@@ -43,15 +43,6 @@ class Section18Rule1(RuleDefinitionListIndexedBase):
             standard_section="Table G3.1.1",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            required_fields={
-                "$": ["weather", "calendar", "ruleset_model_descriptions"],
-                "weather": ["climate_zone"],
-                "calendar": ["is_leap_year"],
-            },
-            data_items={
-                "climate_zone": (BASELINE_0, "weather/climate_zone"),
-                "is_leap_year": (BASELINE_0, "calendar/is_leap_year"),
-            },
         )
 
     class RMDRule(RuleDefinitionListIndexedBase):
@@ -63,6 +54,15 @@ class Section18Rule1(RuleDefinitionListIndexedBase):
                 each_rule=Section18Rule1.RMDRule.ZoneRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].zones[*]",
+                required_fields={
+                    "$": ["weather", "calendar", "ruleset_model_descriptions"],
+                    "weather": ["climate_zone"],
+                    "calendar": ["is_leap_year"],
+                },
+                data_items={
+                    "climate_zone": (BASELINE_0, "weather/climate_zone"),
+                    "is_leap_year": (BASELINE_0, "calendar/is_leap_year"),
+                },
             )
 
         def is_applicable(self, context, data=None):
@@ -175,11 +175,11 @@ class Section18Rule1(RuleDefinitionListIndexedBase):
                 is_undetermined = False
                 if system_origin_b == SYSTEMORIGIN.G311D:
                     is_undetermined = (
-                        building_total_lab_exhaust_p < EXHAUST_AIRFLOW_15000
-                        or self.precision_comparison["building_total_lab_exhaust_p"](
-                            building_total_lab_exhaust_p,
-                            EXHAUST_AIRFLOW_15000,
-                        )
+                            building_total_lab_exhaust_p < EXHAUST_AIRFLOW_15000
+                            or self.precision_comparison["building_total_lab_exhaust_p"](
+                        building_total_lab_exhaust_p,
+                        EXHAUST_AIRFLOW_15000,
+                    )
                     )
                 elif system_origin_b == SYSTEMORIGIN.G311E:
                     is_undetermined = is_zone_likely_a_vestibule_b[zone_id_b]

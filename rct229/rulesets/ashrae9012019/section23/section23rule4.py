@@ -38,13 +38,13 @@ class Section23Rule4(RuleDefinitionListIndexedBase):
             is_primary_rule=False,
             list_path="ruleset_model_descriptions[0]",
             required_fields={
-                "$": ["calendar", "weather"],
+                "$.ruleset_model_descriptions[*]": ["calendar", "weather"],
                 "weather": ["climate_zone"],
                 "calendar": ["is_leap_year"],
             },
             data_items={
-                "climate_zone_b": (BASELINE_0, "weather/climate_zone"),
-                "is_leap_year_b": (BASELINE_0, "calendar/is_leap_year"),
+                "climate_zone_b": (BASELINE_0, "ruleset_model_descriptions[0]/weather/climate_zone"),
+                "is_leap_year_b": (BASELINE_0, "ruleset_model_descriptions[0]/calendar/is_leap_year"),
             },
         )
 

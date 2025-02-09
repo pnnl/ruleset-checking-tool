@@ -13,7 +13,6 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_uses_associated_wit
 )
 from rct229.utils.jsonpath_utils import find_all
 
-
 APPLICABILITY_MSG = "This building has service water heating loads. Confirm that service water heating energy consumption is calculated explicitly based upon the volume of service water heating required and the entering makeup water and leaving service water heating temperatures.  Entering water temperatures shall be estimated based upon the location. Leaving temperatures shall be based upon the end-use requirements."
 
 
@@ -35,13 +34,6 @@ class Section11Rule13(RuleDefinitionListIndexedBase):
             standard_section="Table G3.1 #11, baseline column, (e)",
             is_primary_rule=False,
             list_path="ruleset_model_descriptions[0]",
-            required_fields={
-                "$": ["calendar"],
-                "calendar": ["is_leap_year"],
-            },
-            data_items={
-                "is_leap_year": (BASELINE_0, "calendar/is_leap_year"),
-            },
         )
 
     class RMDRule(RuleDefinitionListIndexedBase):
@@ -53,6 +45,13 @@ class Section11Rule13(RuleDefinitionListIndexedBase):
                 index_rmd=BASELINE_0,
                 each_rule=Section11Rule13.RMDRule.BuildingRule(),
                 list_path="$.buildings[*]",
+                required_fields={
+                    "$": ["calendar"],
+                    "calendar": ["is_leap_year"],
+                },
+                data_items={
+                    "is_leap_year": (BASELINE_0, "calendar/is_leap_year"),
+                },
             )
 
         def create_data(self, context, data):
@@ -62,7 +61,7 @@ class Section11Rule13(RuleDefinitionListIndexedBase):
             service_water_heating_use_dict = {}
 
             for building_segment in find_all(
-                "$.buildings[*].building_segments[*]", rmd_b
+                    "$.buildings[*].building_segments[*]", rmd_b
             ):
                 service_water_heating_use_list = (
                     get_swh_uses_associated_with_each_building_segment(rmd_b)[
@@ -136,8 +135,8 @@ class Section11Rule13(RuleDefinitionListIndexedBase):
                                     energy_required_by_space.values()
                                 )
                 if (
-                    service_water_heating_info["btu_per_year"] != "UNDETERMINED"
-                    and service_water_heating_info["btu_per_year"] != ZERO.ENERGY
+                        service_water_heating_info["btu_per_year"] != "UNDETERMINED"
+                        and service_water_heating_info["btu_per_year"] != ZERO.ENERGY
                 ):
                     floor_area = sum(
                         find_all(
@@ -151,7 +150,7 @@ class Section11Rule13(RuleDefinitionListIndexedBase):
                         f"Floor area for building: {building_b['id']} is 0, check inputs.",
                     )
                     service_water_heating_info["btu_per_sf_per_year"] = (
-                        service_water_heating_info["btu_per_year"] / floor_area
+                            service_water_heating_info["btu_per_year"] / floor_area
                     )
 
                 return {

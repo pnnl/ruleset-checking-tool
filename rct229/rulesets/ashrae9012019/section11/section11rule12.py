@@ -32,7 +32,6 @@ class Section11Rule12(RuleDefinitionListIndexedBase):
             standard_section="Table G3.1 #11, baseline column, d + exception",
             is_primary_rule=False,
             list_path="ruleset_model_descriptions[0]",
-            data_items={"is_leap_year_b": (BASELINE_0, "calendar/is_leap_year")},
         )
 
     class RMDRule(RuleDefinitionListIndexedBase):
@@ -44,6 +43,7 @@ class Section11Rule12(RuleDefinitionListIndexedBase):
                 each_rule=Section11Rule12.RMDRule.BuildingRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.buildings[*]",
+                data_items={"is_leap_year_b": (BASELINE_0, "calendar/is_leap_year")},
             )
 
         def create_data(self, context, data):
@@ -106,9 +106,9 @@ class Section11Rule12(RuleDefinitionListIndexedBase):
                 )
 
                 return (
-                    service_water_heating_uses_p
-                    and building_open_schedule_id_p is not None
-                    and sum(bldg_open_sch_b) == hours_this_year
+                        service_water_heating_uses_p
+                        and building_open_schedule_id_p is not None
+                        and sum(bldg_open_sch_b) == hours_this_year
                 )
 
             def get_calc_vals(self, context, data=None):
@@ -136,6 +136,6 @@ class Section11Rule12(RuleDefinitionListIndexedBase):
                 ]
 
                 return (
-                    sum(list(uses_associated_with_each_building_segment_p.values()))
-                    > 0.0
+                        sum(list(uses_associated_with_each_building_segment_p.values()))
+                        > 0.0
                 )

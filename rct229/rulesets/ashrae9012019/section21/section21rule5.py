@@ -55,7 +55,6 @@ class Section21Rule5(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1.3.2 Building System-Specific Modeling Requirements for the Baseline model",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
         )
 
     class RulesetModelInstanceRule(RuleDefinitionBase):

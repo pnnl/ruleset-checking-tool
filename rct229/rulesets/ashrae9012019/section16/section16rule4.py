@@ -29,8 +29,6 @@ class Section16Rule4(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
-            data_items={"is_leap_year_p": (PROPOSED, "calendar/is_leap_year")},
         )
 
     class RuleSetModelDescriptionRule(RuleDefinitionListIndexedBase):
@@ -42,6 +40,8 @@ class Section16Rule4(RuleDefinitionListIndexedBase):
                 each_rule=Section16Rule4.RuleSetModelDescriptionRule.ElevatorRule(),
                 index_rmd=PROPOSED,
                 list_path="buildings[*].elevators[*]",
+                required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
+                data_items={"is_leap_year_p": (PROPOSED, "calendar/is_leap_year")},
             )
 
         def is_applicable(self, context, data=None):
@@ -127,7 +127,7 @@ class Section16Rule4(RuleDefinitionListIndexedBase):
                 motor_use_schedule_len_p = calc_vals["motor_use_schedule_len_p"]
 
                 return (
-                    sch_total_hours_matched
-                    == cab_lighting_schedule_len_p
-                    == motor_use_schedule_len_p
+                        sch_total_hours_matched
+                        == cab_lighting_schedule_len_p
+                        == motor_use_schedule_len_p
                 )

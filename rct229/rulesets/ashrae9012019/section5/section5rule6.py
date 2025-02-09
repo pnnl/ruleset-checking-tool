@@ -36,10 +36,10 @@ class Section5Rule6(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
             required_fields={
-                "$": ["weather"],
+                "$.ruleset_model_descriptions[*]": ["weather"],
                 "weather": ["climate_zone"],
             },
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
+            data_items={"climate_zone": (BASELINE_0, "ruleset_model_descriptions[0]/weather/climate_zone")},
         )
 
     class BuildingRule(RuleDefinitionListIndexedBase):

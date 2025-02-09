@@ -13,7 +13,6 @@ from rct229.utils.utility_functions import find_exactly_one_schedule
 
 LIGHTING_SPACE = SchemaEnums.schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
 
-
 EXPECTED_RECEPTACLE_CONTROL_SPACE_TYPES = [
     LIGHTING_SPACE.OFFICE_ENCLOSED,
     LIGHTING_SPACE.CONFERENCE_MEETING_MULTIPURPOSE_ROOM,
@@ -39,13 +38,11 @@ class Section12Rule3(RuleDefinitionListIndexedBase):
             index_rmd=PROPOSED,
             id="12-3",
             description="When receptacle controls are specified in the proposed building design for spaces where not required by Standard 90.1 2019 Section 8.4.2, "
-            "the hourly receptacle schedule shall be reduced as specified in Standard 90.1-2019 Table G3.1 Section 12 Proposed Building Performance column.",
+                        "the hourly receptacle schedule shall be reduced as specified in Standard 90.1-2019 Table G3.1 Section 12 Proposed Building Performance column.",
             ruleset_section_title="Receptacle",
             standard_section="Table G3.1-12 Proposed Building Performance column",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
-            data_items={"is_leap_year": (PROPOSED, "calendar/is_leap_year")},
         )
 
     class RuleSetModelDescriptionRule(RuleDefinitionListIndexedBase):
@@ -57,6 +54,8 @@ class Section12Rule3(RuleDefinitionListIndexedBase):
                 each_rule=Section12Rule3.RuleSetModelDescriptionRule.SpaceRule(),
                 index_rmd=PROPOSED,
                 list_path="$.buildings[*].building_segments[*].zones[*].spaces[*]",
+                required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
+                data_items={"is_leap_year": (PROPOSED, "calendar/is_leap_year")},
             )
 
         def is_applicable(self, context, data=None):
@@ -64,22 +63,22 @@ class Section12Rule3(RuleDefinitionListIndexedBase):
 
             spaces_with_receptacle_controls_beyond_req = []
             for space_p in find_all(
-                "$.buildings[*].building_segments[*].zones[*].spaces[*]",
-                rmd_p,
+                    "$.buildings[*].building_segments[*].zones[*].spaces[*]",
+                    rmd_p,
             ):
                 lighting_space_type_p = getattr_(
                     space_p, "spaces", "lighting_space_type"
                 )
                 if lighting_space_type_p not in EXPECTED_RECEPTACLE_CONTROL_SPACE_TYPES:
                     for misc_equip_p in find_all(
-                        "$.miscellaneous_equipment[*]", space_p
+                            "$.miscellaneous_equipment[*]", space_p
                     ):
                         automatic_controlled_percentage_p = misc_equip_p.get(
                             "automatic_controlled_percentage"
                         )
                         auto_receptacle_control_p = (
-                            automatic_controlled_percentage_p
-                            and automatic_controlled_percentage_p > 0.0
+                                automatic_controlled_percentage_p
+                                and automatic_controlled_percentage_p > 0.0
                         )
                         if auto_receptacle_control_p:
                             spaces_with_receptacle_controls_beyond_req.append(
@@ -159,8 +158,8 @@ class Section12Rule3(RuleDefinitionListIndexedBase):
                         "automatic_controlled_percentage"
                     )
                     auto_receptacle_control_p = (
-                        automatic_controlled_percentage_p
-                        and automatic_controlled_percentage_p > 0.0
+                            automatic_controlled_percentage_p
+                            and automatic_controlled_percentage_p > 0.0
                     )
                     return auto_receptacle_control_p
 
@@ -236,9 +235,9 @@ class Section12Rule3(RuleDefinitionListIndexedBase):
                     ]
 
                     return (
-                        no_credit_comparison_total_hours_matched
-                        == hourly_multiplier_schedule_len_b
-                        == hourly_multiplier_schedule_len_p
+                            no_credit_comparison_total_hours_matched
+                            == hourly_multiplier_schedule_len_b
+                            == hourly_multiplier_schedule_len_p
                     )
 
                 def rule_check(self, context, calc_vals=None, data=None):
@@ -251,7 +250,7 @@ class Section12Rule3(RuleDefinitionListIndexedBase):
                     ]
 
                     return (
-                        credit_comparison_total_hours_matched
-                        == hourly_multiplier_schedule_len_p
-                        == expected_hourly_values_len
+                            credit_comparison_total_hours_matched
+                            == hourly_multiplier_schedule_len_p
+                            == expected_hourly_values_len
                     )

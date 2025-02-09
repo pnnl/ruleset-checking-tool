@@ -49,7 +49,7 @@ class Section22Rule20(RuleDefinitionListIndexedBase):
             required_fields={
                 "$": ["ruleset_model_descriptions", "weather"],
             },
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
+            data_items={"climate_zone": (BASELINE_0, "ruleset_model_descriptions[0]/weather/climate_zone")},
         )
 
     def is_applicable(self, context, data=None):

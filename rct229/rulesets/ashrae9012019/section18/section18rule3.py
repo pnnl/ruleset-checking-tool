@@ -25,13 +25,13 @@ class Section18Rule3(RuleDefinitionListIndexedBase):
             is_primary_rule=False,
             list_path="ruleset_model_descriptions[0]",
             required_fields={
-                "$": ["calendar", "weather"],
+                "$.ruleset_model_descriptions[*]": ["calendar", "weather"],
                 "weather": ["climate_zone"],
                 "calendar": ["is_leap_year"],
             },
             data_items={
-                "climate_zone": (BASELINE_0, "weather/climate_zone"),
-                "is_leap_year": (BASELINE_0, "calendar/is_leap_year"),
+                "climate_zone": (BASELINE_0, "ruleset_model_descriptions[0]/weather/climate_zone"),
+                "is_leap_year": (BASELINE_0, "ruleset_model_descriptions[0]/calendar/is_leap_year"),
             },
         )
 
@@ -40,7 +40,7 @@ class Section18Rule3(RuleDefinitionListIndexedBase):
             super(Section18Rule3.RuleModelDescriptionRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
-                )
+                ),
             )
 
         def get_calc_vals(self, context, data=None):

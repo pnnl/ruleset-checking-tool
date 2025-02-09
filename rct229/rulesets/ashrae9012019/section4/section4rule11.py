@@ -61,11 +61,6 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            required_fields={
-                "$": ["weather", "calendar"],
-                "weather": ["climate_zone"],
-                "calendar": ["is_leap_year"],
-            },
             each_rule=Section4Rule11.RuleSetModelInstanceRule(),
             index_rmd=BASELINE_0,
             id="4-11",
@@ -74,10 +69,6 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-4 Schedule Modeling Requirements for the Proposed design and Baseline building",
             is_primary_rule=True,
             list_path="$.ruleset_model_descriptions[0]",
-            data_items={
-                "climate_zone": (BASELINE_0, "weather/climate_zone"),
-                "is_leap_year": (BASELINE_0, "calendar/is_leap_year"),
-            },
         )
 
     class RuleSetModelInstanceRule(RuleDefinitionListIndexedBase):
@@ -89,6 +80,15 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
                 each_rule=Section4Rule11.RuleSetModelInstanceRule.ZoneRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].zones[*]",
+                required_fields={
+                    "$": ["weather", "calendar"],
+                    "weather": ["climate_zone"],
+                    "calendar": ["is_leap_year"],
+                },
+                data_items={
+                    "climate_zone": (BASELINE_0, "weather/climate_zone"),
+                    "is_leap_year": (BASELINE_0, "calendar/is_leap_year"),
+                },
             )
 
         def create_data(self, context, data=None):
@@ -163,7 +163,7 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
 
         class ZoneRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section4Rule11.RuleSetModelInstanceRule.ZoneRule, self,).__init__(
+                super(Section4Rule11.RuleSetModelInstanceRule.ZoneRule, self, ).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
@@ -194,7 +194,7 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
                 fan_schedule_hourly_values_p = zone_p_fan_schedule_dict[zone_p["id"]]
 
                 schedule_mismatch = (
-                    fan_schedule_hourly_values_b != fan_schedule_hourly_values_p
+                        fan_schedule_hourly_values_b != fan_schedule_hourly_values_p
                 )
                 proposed_served_by_multizone = False
                 assert_(
@@ -211,8 +211,8 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
 
                 # Check if the system type is an applicable system type and serves multiple zones
                 baseline_served_by_multizone = (
-                    hvac_sys_type_b in APPLICABLE_SYS_TYPES
-                    and len(next(iter(zone_b_hvac_zone_list_dict.values()))) > 1
+                        hvac_sys_type_b in APPLICABLE_SYS_TYPES
+                        and len(next(iter(zone_b_hvac_zone_list_dict.values()))) > 1
                 )
                 list_hvac_systems_p = zone_p_hvac_list_dict[zone_p["id"]]
 
@@ -220,17 +220,17 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
                     if len(dict_hvac_sys_zones_served_p[hvac_id_p]["zone_list"]) > 1:
                         for terminal_p in zone_p["terminals"]:
                             if (
-                                terminal_p[
-                                    "served_by_heating_ventilating_air_conditioning_system"
-                                ]
-                                == hvac_id_p
+                                    terminal_p[
+                                        "served_by_heating_ventilating_air_conditioning_system"
+                                    ]
+                                    == hvac_id_p
                             ) and terminal_p.get(
                                 "heating_capacity", ZERO.POWER
                             ) > ZERO.POWER:
                                 proposed_served_by_multizone = True
 
                 system_type_match_baseline_proposed = (
-                    proposed_served_by_multizone == baseline_served_by_multizone
+                        proposed_served_by_multizone == baseline_served_by_multizone
                 )
                 floor_name_b = zone_b["floor_name"]
                 dict_of_zones_hvac_systems_serving_specific_floor_b = (
@@ -250,8 +250,8 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
                 for hvac_flr_b in list_hvac_sys_serving_floor_b:
                     for sys_type, sys_list in baseline_hvac_sys_type_ids_dict_b.items():
                         if (
-                            hvac_flr_b in baseline_hvac_sys_type_ids_dict_b[sys_type]
-                            and sys_type in APPLICABLE_SYS_TYPES
+                                hvac_flr_b in baseline_hvac_sys_type_ids_dict_b[sys_type]
+                                and sys_type in APPLICABLE_SYS_TYPES
                         ):
                             hvac_type_check = True
 
@@ -276,10 +276,10 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
                 proposed_served_by_multizone = calc_vals["proposed_served_by_multizone"]
                 hvac_type_check = calc_vals["hvac_type_check"]
                 if (
-                    schedule_mismatch
-                    and not baseline_served_by_multizone
-                    and hvac_type_check
-                    and proposed_served_by_multizone
+                        schedule_mismatch
+                        and not baseline_served_by_multizone
+                        and hvac_type_check
+                        and proposed_served_by_multizone
                 ):
                     return "There is a fan operating schedule mismatch between the baseline and proposed but section g3.1.1(c) appears applicable. Verify mismatch is appropriate per section G3.1.1(c) and that the fan operating schedule in the baseline is in alignment with the occupancy schedules."
                 elif schedule_mismatch:

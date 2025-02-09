@@ -37,7 +37,7 @@ class Section5Rule12(RuleDefinitionListIndexedBase):
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             required_fields={
-                "$": ["weather"],
+                "$.ruleset_model_descriptions[*]": ["weather"],
                 "weather": ["climate_zone"],
             },
             each_rule=Section5Rule12.BuildingRule(),
@@ -48,7 +48,7 @@ class Section5Rule12(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].buildings[*]",
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
+            data_items={"climate_zone": (BASELINE_0, "ruleset_model_descriptions[0]/weather/climate_zone")},
         )
 
     class BuildingRule(RuleDefinitionListIndexedBase):
@@ -75,8 +75,8 @@ class Section5Rule12(RuleDefinitionListIndexedBase):
             surface_b = context_item.BASELINE_0
             scc = data["surface_conditioning_category_dict"][surface_b["id"]]
             return (
-                get_opaque_surface_type(surface_b) == OST.UNHEATED_SOG
-                and scc is not SCC.UNREGULATED
+                    get_opaque_surface_type(surface_b) == OST.UNHEATED_SOG
+                    and scc is not SCC.UNREGULATED
             )
 
         class SlabOnGradeFloorRule(RuleDefinitionBase):

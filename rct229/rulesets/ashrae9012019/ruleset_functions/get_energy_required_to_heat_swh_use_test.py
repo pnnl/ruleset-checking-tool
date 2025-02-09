@@ -11,6 +11,7 @@ from rct229.utils.std_comparisons import std_equal
 
 TEST_RMD = {
     "id": "test_rmd",
+    "calendar": {"is_leap_year": False},
     "buildings": [
         {
             "id": "Building 1",
@@ -156,7 +157,6 @@ TEST_RMD = {
 TEST_RPD_FULL = {
     "id": "229",
     "ruleset_model_descriptions": [TEST_RMD],
-    "calendar": {"is_leap_year": False},
     "data_timestamp": "2024-02-12T09:00Z",
 }
 

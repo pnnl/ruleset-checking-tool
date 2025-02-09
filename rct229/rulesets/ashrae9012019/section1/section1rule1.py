@@ -41,8 +41,7 @@ class Section1Rule1(RuleDefinitionListIndexedBase):
                 BASELINE_270=True,
             ),
             required_fields={
-                "$": ["weather", "ruleset_model_descriptions"],
-                "weather": ["climate_zone"],
+                "$": ["ruleset_model_descriptions"],
             },
             index_rmd=BASELINE_0,
             each_rule=Section1Rule1.RMDRule(),
@@ -54,7 +53,7 @@ class Section1Rule1(RuleDefinitionListIndexedBase):
             standard_section="Section G4.2.1.1",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
+            data_items={"climate_zone": (BASELINE_0, "ruleset_model_descriptions[0]/weather/climate_zone")},
         )
 
     class RMDRule(RuleDefinitionBase):
@@ -74,8 +73,9 @@ class Section1Rule1(RuleDefinitionListIndexedBase):
                     BASELINE_270=True,
                 ),
                 required_fields={
-                    "$": ["output"],
+                    "$": ["output", "weather"],
                     "output": ["total_area_weighted_building_performance_factor"],
+                    "weather": ["climate_zone"],
                 },
                 manual_check_required_msg=MANUAL_CHECK_REQUIRED_MSG,
                 fail_msg=FAIL_MSG,
