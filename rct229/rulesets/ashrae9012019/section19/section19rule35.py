@@ -29,7 +29,7 @@ class Section19Rule35(RuleDefinitionListIndexedBase):
             index_rmd=BASELINE_0,
             id="19-35",
             description="For baseline systems serving only laboratory spaces that are prohibited from recirculating return air by code or accreditation standards, "
-                        "the baseline system shall be modeled as 100% outdoor air. Rule only applies when baseline outdoor air CFM is modeled as greater than proposed design outdoor air CFM.",
+            "the baseline system shall be modeled as 100% outdoor air. Rule only applies when baseline outdoor air CFM is modeled as greater than proposed design outdoor air CFM.",
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1-10 HVAC Systems proposed column c and d",
             is_primary_rule=False,
@@ -72,8 +72,8 @@ class Section19Rule35(RuleDefinitionListIndexedBase):
             zone_OA_flow_list_of_schedules_b = []
             zone_OA_flow_list_of_schedules_p = []
             for hvac_id_b in find_all(
-                    "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].id",
-                    rmd_b,
+                "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].id",
+                rmd_b,
             ):
                 for zone_id_b in dict_of_zones_and_terminal_units_served_by_hvac_sys_b[
                     hvac_id_b
@@ -98,28 +98,28 @@ class Section19Rule35(RuleDefinitionListIndexedBase):
 
                     # If no space types are served, this is valuable for undetermined checks
                     hvac_system_serves_no_space_types = (
-                            len(lighting_space_types_b) == 0
-                            and hvac_system_serves_no_space_types
+                        len(lighting_space_types_b) == 0
+                        and hvac_system_serves_no_space_types
                     )
 
                     all_lighting_space_types_defined = (
-                            all(lighting_space_types_b)
-                            and all_zone_types_defined
-                            and all_lighting_space_types_defined
+                        all(lighting_space_types_b)
+                        and all_zone_types_defined
+                        and all_lighting_space_types_defined
                     )
                     are_any_lighting_space_types_defined = (
-                                                                   any(lighting_space_types_b) or lighting_space_type_count > 0
-                                                           ) or are_any_lighting_space_types_defined
+                        any(lighting_space_types_b) or lighting_space_type_count > 0
+                    ) or are_any_lighting_space_types_defined
                     hvac_system_serves_only_labs = (
-                                                           all(
-                                                               map(
-                                                                   lambda space_type: space_type
-                                                                                      == LIGHTING_SPACE.LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM,
-                                                                   lighting_space_types_b,
-                                                               )
-                                                           )
-                                                           and not hvac_system_serves_no_space_types
-                                                   ) and hvac_system_serves_only_labs
+                        all(
+                            map(
+                                lambda space_type: space_type
+                                == LIGHTING_SPACE.LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM,
+                                lighting_space_types_b,
+                            )
+                        )
+                        and not hvac_system_serves_no_space_types
+                    ) and hvac_system_serves_only_labs
 
                     zone_OA_flow_list_of_schedules_b.append(
                         get_min_oa_cfm_sch_zone(rmd_b, zone_id_b, leap_year_b)
@@ -173,9 +173,9 @@ class Section19Rule35(RuleDefinitionListIndexedBase):
                 ]
 
                 return (
-                        (hvac_system_serves_only_labs or hvac_system_serves_no_space_types)
-                        and modeled_baseline_total_zone_min_OA_flow
-                        > modeled_proposed_total_zone_min_OA_flow
+                    (hvac_system_serves_only_labs or hvac_system_serves_no_space_types)
+                    and modeled_baseline_total_zone_min_OA_flow
+                    > modeled_proposed_total_zone_min_OA_flow
                 )
 
             def applicability_check(self, context, calc_vals, data):
@@ -197,17 +197,17 @@ class Section19Rule35(RuleDefinitionListIndexedBase):
                 ]
 
                 return (
-                        modeled_baseline_total_zone_min_OA_flow
-                        > modeled_proposed_total_zone_min_OA_flow
+                    modeled_baseline_total_zone_min_OA_flow
+                    > modeled_proposed_total_zone_min_OA_flow
                 ) and (
-                        (
-                                hvac_system_serves_only_labs
-                                and (
-                                        all_lighting_space_types_defined
-                                        or are_any_lighting_space_types_defined
-                                )
+                    (
+                        hvac_system_serves_only_labs
+                        and (
+                            all_lighting_space_types_defined
+                            or are_any_lighting_space_types_defined
                         )
-                        or hvac_system_serves_no_space_types
+                    )
+                    or hvac_system_serves_no_space_types
                 )
 
             def get_manual_check_required_msg(self, context, calc_vals=None, data=None):

@@ -53,7 +53,12 @@ class Section1Rule1(RuleDefinitionListIndexedBase):
             standard_section="Section G4.2.1.1",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            data_items={"climate_zone": (BASELINE_0, "ruleset_model_descriptions[0]/weather/climate_zone")},
+            data_items={
+                "climate_zone": (
+                    BASELINE_0,
+                    "ruleset_model_descriptions[0]/weather/climate_zone",
+                )
+            },
         )
 
     class RMDRule(RuleDefinitionBase):

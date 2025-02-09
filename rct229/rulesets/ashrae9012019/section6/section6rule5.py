@@ -47,12 +47,14 @@ class Section6Rule5(RuleDefinitionListIndexedBase):
                 each_rule=Section6Rule5.RulesetModelInstanceRule.BuildingRule(),
                 index_rmd=BASELINE_0,
                 list_path="buildings[*]",
-                required_fields={"$": ["schedules", "calendar"],
-                                 "calendar": ["is_leap_year"],},
+                required_fields={
+                    "$": ["schedules", "calendar"],
+                    "calendar": ["is_leap_year"],
+                },
                 data_items={
                     "schedules_b": (BASELINE_0, "schedules"),
                     "schedules_p": (PROPOSED, "schedules"),
-                    "is_leap_year_b": (BASELINE_0, "calendar/is_leap_year")
+                    "is_leap_year_b": (BASELINE_0, "calendar/is_leap_year"),
                 },
             )
 

@@ -40,7 +40,12 @@ class Section5Rule22(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-5(d) Building Modeling Requirements for the Baseline building",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].buildings[*]",
-            data_items={"climate_zone": (BASELINE_0, "ruleset_model_descriptions[0]/weather/climate_zone")},
+            data_items={
+                "climate_zone": (
+                    BASELINE_0,
+                    "ruleset_model_descriptions[0]/weather/climate_zone",
+                )
+            },
         )
 
     class BuildingRule(RuleDefinitionListIndexedBase):

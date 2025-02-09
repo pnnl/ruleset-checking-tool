@@ -30,8 +30,14 @@ class Section18Rule3(RuleDefinitionListIndexedBase):
                 "calendar": ["is_leap_year"],
             },
             data_items={
-                "climate_zone": (BASELINE_0, "ruleset_model_descriptions[0]/weather/climate_zone"),
-                "is_leap_year": (BASELINE_0, "ruleset_model_descriptions[0]/calendar/is_leap_year"),
+                "climate_zone": (
+                    BASELINE_0,
+                    "ruleset_model_descriptions[0]/weather/climate_zone",
+                ),
+                "is_leap_year": (
+                    BASELINE_0,
+                    "ruleset_model_descriptions[0]/calendar/is_leap_year",
+                ),
             },
         )
 

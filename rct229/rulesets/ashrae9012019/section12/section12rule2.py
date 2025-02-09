@@ -141,12 +141,12 @@ class Section12Rule2(RuleDefinitionListIndexedBase):
                         "automatic_controlled_percentage"
                     )
                     auto_receptacle_control_b = (
-                            automatic_controlled_percentage_b
-                            and automatic_controlled_percentage_b > 0.0
+                        automatic_controlled_percentage_b
+                        and automatic_controlled_percentage_b > 0.0
                     )
                     auto_receptacle_control_p = (
-                            automatic_controlled_percentage_p
-                            and automatic_controlled_percentage_p > 0.0
+                        automatic_controlled_percentage_p
+                        and automatic_controlled_percentage_p > 0.0
                     )
 
                     mask_schedule = (
@@ -182,18 +182,18 @@ class Section12Rule2(RuleDefinitionListIndexedBase):
                     auto_receptacle_control_p = calc_vals["auto_receptacle_control_p"]
                     space_type_b = calc_vals["space_type_b"]
                     return (
-                            eflh_difference > 0
-                            and (
-                                    auto_receptacle_control_p
-                                    and space_type_b in EXPECTED_RECEPTACLE_CONTROL_SPACE_TYPES
-                                    and not auto_receptacle_control_b
-                            )
-                            or space_type_b is None
-                            or auto_receptacle_control_p is None
+                        eflh_difference > 0
+                        and (
+                            auto_receptacle_control_p
+                            and space_type_b in EXPECTED_RECEPTACLE_CONTROL_SPACE_TYPES
+                            and not auto_receptacle_control_b
+                        )
+                        or space_type_b is None
+                        or auto_receptacle_control_p is None
                     )
 
                 def get_manual_check_required_msg(
-                        self, context, calc_vals=None, data=None
+                    self, context, calc_vals=None, data=None
                 ):
                     auto_receptacle_control_p = calc_vals["auto_receptacle_control_p"]
                     return (
@@ -214,12 +214,12 @@ class Section12Rule2(RuleDefinitionListIndexedBase):
                     space_type_b = data["space_type_b"]
                     auto_receptacle_control_p = calc_vals["auto_receptacle_control_p"]
                     return (
-                            total_hours_matched
-                            == hours_misc_equip_schedule_b
-                            == hours_misc_equip_schedule_p
-                            or eflh_difference > 0
-                            and auto_receptacle_control_p
-                            and space_type_b not in EXPECTED_RECEPTACLE_CONTROL_SPACE_TYPES
+                        total_hours_matched
+                        == hours_misc_equip_schedule_b
+                        == hours_misc_equip_schedule_p
+                        or eflh_difference > 0
+                        and auto_receptacle_control_p
+                        and space_type_b not in EXPECTED_RECEPTACLE_CONTROL_SPACE_TYPES
                     )
 
                 def get_fail_msg(self, context, calc_vals=None, data=None):
@@ -227,9 +227,9 @@ class Section12Rule2(RuleDefinitionListIndexedBase):
                     eflh_difference = calc_vals["eflh_difference"]
                     auto_receptacle_control_p = calc_vals["auto_receptacle_control_p"]
                     if (
-                            auto_receptacle_control_p
-                            and auto_receptacle_control_b
-                            and eflh_difference != 0
+                        auto_receptacle_control_p
+                        and auto_receptacle_control_b
+                        and eflh_difference != 0
                     ):
                         return FAIL_MSG_CASE_2
                     elif eflh_difference < 0:

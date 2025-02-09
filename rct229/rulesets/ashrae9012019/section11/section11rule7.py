@@ -92,8 +92,8 @@ class Section11Rule7(RuleDefinitionListIndexedBase):
             building_area_type_SWH_equip_dict = {}
             building_area_type_and_uses = {}
             for (
-                    bat_type,
-                    SWH_Equipment_Associations,
+                bat_type,
+                SWH_Equipment_Associations,
             ) in swh_bats_and_equip_association_b.items():
                 building_area_type_SWH_equip_dict[bat_type] = {}
                 building_area_type_SWH_equip_dict[bat_type]["id"] = bat_type
@@ -166,8 +166,8 @@ class Section11Rule7(RuleDefinitionListIndexedBase):
                     [
                         service_water_heating_uses_p[swh_uses_id_p] <= 0.0
                         for swh_uses_id_p in building_area_type_and_uses_p[
-                        "swh_bats_and_uses_p"
-                    ]
+                            "swh_bats_and_uses_p"
+                        ]
                     ]
                 )
 

@@ -50,10 +50,11 @@ class Section4Rule1(RuleDefinitionListIndexedBase):
                 each_rule=Section4Rule1.RuleSetModelInstanceRule.ZoneRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].zones[*]",
-                required_fields={"$": ["schedules", "weather", "calendar"],
-                                 "weather": ["climate_zone"],
-                                 "calendar": ["is_leap_year"],
-                                 },
+                required_fields={
+                    "$": ["schedules", "weather", "calendar"],
+                    "weather": ["climate_zone"],
+                    "calendar": ["is_leap_year"],
+                },
                 data_items={
                     "climate_zone_b": (BASELINE_0, "weather/climate_zone"),
                     "is_leap_year_b": (BASELINE_0, "calendar/is_leap_year"),
@@ -78,7 +79,7 @@ class Section4Rule1(RuleDefinitionListIndexedBase):
 
         class ZoneRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section4Rule1.RuleSetModelInstanceRule.ZoneRule, self, ).__init__(
+                super(Section4Rule1.RuleSetModelInstanceRule.ZoneRule, self,).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
@@ -124,11 +125,11 @@ class Section4Rule1(RuleDefinitionListIndexedBase):
                     )
                     if thermostat_cooling_stpt_sch_id_b
                     else [
-                             getattr_(
-                                 zone_b, "zones", "design_thermostat_cooling_setpoint"
-                             ).magnitude
-                         ]
-                         * number_of_hours
+                        getattr_(
+                            zone_b, "zones", "design_thermostat_cooling_setpoint"
+                        ).magnitude
+                    ]
+                    * number_of_hours
                 )
 
                 assert_(
@@ -147,11 +148,11 @@ class Section4Rule1(RuleDefinitionListIndexedBase):
                     )
                     if thermostat_cooling_stpt_sch_id_p
                     else [
-                             zone_p.getattr_(
-                                 zone_p, "design_thermostat_cooling_setpoint"
-                             ).magnitude
-                         ]
-                         * number_of_hours
+                        zone_p.getattr_(
+                            zone_p, "design_thermostat_cooling_setpoint"
+                        ).magnitude
+                    ]
+                    * number_of_hours
                 )
 
                 assert_(
@@ -170,11 +171,11 @@ class Section4Rule1(RuleDefinitionListIndexedBase):
                     )
                     if thermostat_heating_stpt_sch_id_b
                     else [
-                             zone_b.getattr_(
-                                 zone_b, "design_thermostat_heating_setpoint"
-                             ).magnitude
-                         ]
-                         * number_of_hours
+                        zone_b.getattr_(
+                            zone_b, "design_thermostat_heating_setpoint"
+                        ).magnitude
+                    ]
+                    * number_of_hours
                 )
 
                 assert_(
@@ -193,11 +194,11 @@ class Section4Rule1(RuleDefinitionListIndexedBase):
                     )
                     if thermostat_heating_stpt_sch_id_p
                     else [
-                             zone_p.getattr_(
-                                 zone_p, "design_thermostat_heating_setpoint"
-                             ).magnitude
-                         ]
-                         * number_of_hours
+                        zone_p.getattr_(
+                            zone_p, "design_thermostat_heating_setpoint"
+                        ).magnitude
+                    ]
+                    * number_of_hours
                 )
 
                 assert_(
@@ -206,12 +207,12 @@ class Section4Rule1(RuleDefinitionListIndexedBase):
                 )
 
                 cooling_schedule_matched = (
-                        thermostat_cooling_stpt_hourly_values_b
-                        == thermostat_cooling_stpt_hourly_values_p
+                    thermostat_cooling_stpt_hourly_values_b
+                    == thermostat_cooling_stpt_hourly_values_p
                 )
                 heating_schedule_matched = (
-                        thermostat_heating_stpt_hourly_values_b
-                        == thermostat_heating_stpt_hourly_values_p
+                    thermostat_heating_stpt_hourly_values_b
+                    == thermostat_heating_stpt_hourly_values_p
                 )
 
                 return {

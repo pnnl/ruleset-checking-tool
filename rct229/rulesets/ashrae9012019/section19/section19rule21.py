@@ -68,13 +68,13 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
             index_rmd=BASELINE_0,
             id="19-21",
             description="Baseline systems with >= 5,000 CFM supply air and >= 70 %OA shall have energy recovery modeled in the baseline design model. The following exceptions apply:"
-                        "1. Systems serving spaces that are not cooled and that are heated to less than 60°F."
-                        "2. Systems exhausting toxic, flammable, or corrosive fumes or paint or dust. This exception shall only be used if exhaust air energy recovery is not used in the proposed design."
-                        "3. Commercial kitchen hoods (grease) classified as Type 1 by NFPA 96. This exception shall only be used if exhaust air energy recovery is not used in the proposed design."
-                        "4. Heating systems in Climate Zones 0 through 3."
-                        "5. Cooling systems in Climate Zones 3C, 4C, 5B, 5C, 6B, 7, and 8."
-                        "6. Where the largest exhaust source is less than 75% of the design outdoor airflow. This exception shall only be used if exhaust air energy recovery is not used in the proposed design."
-                        "7. Systems requiring dehumidification that employ energy recovery in series with the cooling coil. This exception shall only be used if exhaust air energy recovery and series-style energy recovery coils are not used in the proposed design.",
+            "1. Systems serving spaces that are not cooled and that are heated to less than 60°F."
+            "2. Systems exhausting toxic, flammable, or corrosive fumes or paint or dust. This exception shall only be used if exhaust air energy recovery is not used in the proposed design."
+            "3. Commercial kitchen hoods (grease) classified as Type 1 by NFPA 96. This exception shall only be used if exhaust air energy recovery is not used in the proposed design."
+            "4. Heating systems in Climate Zones 0 through 3."
+            "5. Cooling systems in Climate Zones 3C, 4C, 5B, 5C, 6B, 7, and 8."
+            "6. Where the largest exhaust source is less than 75% of the design outdoor airflow. This exception shall only be used if exhaust air energy recovery is not used in the proposed design."
+            "7. Systems requiring dehumidification that employ energy recovery in series with the cooling coil. This exception shall only be used if exhaust air energy recovery and series-style energy recovery coils are not used in the proposed design.",
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1.2.10 and exceptions 1-7",
             is_primary_rule=True,
@@ -109,8 +109,8 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
 
             zone_data = {}
             for hvac_id_b in find_all(
-                    "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].id",
-                    rmd_b,
+                "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].id",
+                rmd_b,
             ):
                 zone_data[hvac_id_b] = {
                     "serves_zones_with_systems_likely_exhausting_toxic_etc_p": False,
@@ -136,8 +136,8 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                     ]
 
                     zone_data[hvac_id_b]["serves_kitchen_space_p"] = (
-                            LIGHTING_SPACE.FOOD_PREPARATION_AREA
-                            in space_lighting_space_type_list_p
+                        LIGHTING_SPACE.FOOD_PREPARATION_AREA
+                        in space_lighting_space_type_list_p
                     )
 
                     zone_data[hvac_id_b]["all_lighting_space_types_defined_p"] = all(
@@ -151,16 +151,16 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                     zone_data[hvac_id_b][
                         "serves_zones_with_systems_likely_exhausting_toxic_etc_p"
                     ] = (
-                                LIGHTING_SPACE.LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM
-                                in space_lighting_space_type_list_p
-                        ) or (
-                                VENTILATION_SPACE.MISCELLANEOUS_SPACES_MANUFACTURING_WHERE_HAZARDOUS_MATERIALS_ARE_USED_EXCLUDES_HEAVY_INDUSTRIAL_AND_CHEMICAL_PROCESSES
-                                in space_ventilation_space_type_list_p
-                        )
+                        LIGHTING_SPACE.LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM
+                        in space_lighting_space_type_list_p
+                    ) or (
+                        VENTILATION_SPACE.MISCELLANEOUS_SPACES_MANUFACTURING_WHERE_HAZARDOUS_MATERIALS_ARE_USED_EXCLUDES_HEAVY_INDUSTRIAL_AND_CHEMICAL_PROCESSES
+                        in space_ventilation_space_type_list_p
+                    )
 
                     zone_data[hvac_id_b]["serves_kitchen_space_p"] = (
-                            VENTILATION_SPACE.FOOD_AND_BEVERAGE_SERVICE_KITCHEN_COOKING
-                            in space_ventilation_space_type_list_p
+                        VENTILATION_SPACE.FOOD_AND_BEVERAGE_SERVICE_KITCHEN_COOKING
+                        in space_ventilation_space_type_list_p
                     )
 
                     zone_data[hvac_id_b]["all_ventilation_space_types_defined_p"] = all(
@@ -168,7 +168,7 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                     )
 
                     for hvac_id_p in get_list_hvac_systems_associated_with_zone(
-                            rmd_p, zone_id_b
+                        rmd_p, zone_id_b
                     ):
                         hvac_p = find_one(
                             f'$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*][?(@.id = "{hvac_id_p}")]',
@@ -178,8 +178,8 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                         zone_data[hvac_id_b][
                             "serves_zones_that_have_dehumid_heat_recovery_p"
                         ] = (
-                                find_one("$.cooling_system.dehumidification_type", hvac_p)
-                                == DEHUMIDIFICATION.SERIES_HEAT_RECOVERY
+                            find_one("$.cooling_system.dehumidification_type", hvac_p)
+                            == DEHUMIDIFICATION.SERIES_HEAT_RECOVERY
                         )
 
                     zone_data[hvac_id_b].update(
@@ -227,7 +227,7 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                 ) * ureg("degC")
 
                 zone_data[hvac_id_b]["serves_zones_heated_to_60_or_higher_p"] = (
-                        max_thermostat_heating_setpoint_schedule_p > REQ_HEATING_SETPOINT
+                    max_thermostat_heating_setpoint_schedule_p > REQ_HEATING_SETPOINT
                 )
 
             return {
@@ -309,33 +309,33 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                     "$.fan_system.air_energy_recovery.energy_recovery_operation",
                     hvac_b,
                 ) not in (
-                                   None,
-                                   ENERGY_RECOVERY.NONE,
-                               )
+                    None,
+                    ENERGY_RECOVERY.NONE,
+                )
 
                 ER_modeled_p = find_one(
                     "$.fan_system.air_energy_recovery.energy_recovery_operation",
                     hvac_p,
                 ) not in (
-                                   None,
-                                   ENERGY_RECOVERY.NONE,
-                               )
+                    None,
+                    ENERGY_RECOVERY.NONE,
+                )
 
                 exception_1_applies = (
-                        sys_type_heating_only_b
-                        and not serves_zones_heated_to_60_or_higher_p
+                    sys_type_heating_only_b
+                    and not serves_zones_heated_to_60_or_higher_p
                 )
                 exception_2_applies = (
-                        not ER_modeled_p
-                        and serves_zones_with_systems_likely_exhausting_toxic_etc_p
+                    not ER_modeled_p
+                    and serves_zones_with_systems_likely_exhausting_toxic_etc_p
                 )
                 exception_6_applies = (
-                        not ER_modeled_p
-                        and max(hvac_fan_sys_exhaust_sum_b, maximum_zone_exhaust_b)
-                        < 0.75 * max_outdoor_airflow_b
+                    not ER_modeled_p
+                    and max(hvac_fan_sys_exhaust_sum_b, maximum_zone_exhaust_b)
+                    < 0.75 * max_outdoor_airflow_b
                 )
                 exception_7_applies = (
-                        not ER_modeled_p and serves_zones_that_have_dehumid_heat_recovery_p
+                    not ER_modeled_p and serves_zones_that_have_dehumid_heat_recovery_p
                 )
 
                 return {
@@ -379,31 +379,31 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                 maximum_hvac_exhaust_b = calc_vals["maximum_hvac_exhaust_b"]
 
                 return (
-                        (
-                                OA_fraction_b > OA_fraction_b_70
-                                or self.precision_comparison["OA_fraction_b"](
+                    (
+                        OA_fraction_b > OA_fraction_b_70
+                        or self.precision_comparison["OA_fraction_b"](
                             OA_fraction_b,
                             OA_fraction_b_70,
                         )
-                        )
-                        and (
-                                supply_airflow_b > SUPPLY_AIRFLOW_5000CFM
-                                or self.precision_comparison["supply_airflow_b"](
+                    )
+                    and (
+                        supply_airflow_b > SUPPLY_AIRFLOW_5000CFM
+                        or self.precision_comparison["supply_airflow_b"](
                             supply_airflow_b,
                             SUPPLY_AIRFLOW_5000CFM,
                         )
-                        )
-                        and not ER_modeled_b
+                    )
+                    and not ER_modeled_b
                 ) and (
                     # Case 7
-                        (not ER_modeled_p and serves_kitchen_space_p)
-                        or
-                        # Case 8
-                        (
-                                num_hvac_exhaust_fans_b > 1
-                                and max(hvac_fan_sys_exhaust_sum_b, maximum_hvac_exhaust_b)
-                                < 0.75 * max_outdoor_airflow_b
-                        )
+                    (not ER_modeled_p and serves_kitchen_space_p)
+                    or
+                    # Case 8
+                    (
+                        num_hvac_exhaust_fans_b > 1
+                        and max(hvac_fan_sys_exhaust_sum_b, maximum_hvac_exhaust_b)
+                        < 0.75 * max_outdoor_airflow_b
+                    )
                 )
 
             def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
@@ -441,57 +441,57 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                 ER_modeled_p = calc_vals["ER_modeled_p"]
 
                 return (
+                    (
                         (
-                                (
-                                        OA_fraction_b > OA_fraction_b_70
-                                        or self.precision_comparison["OA_fraction_b"](
-                                    OA_fraction_b,
-                                    OA_fraction_b_70,
-                                )
-                                )
-                                and (
-                                        supply_airflow_b > SUPPLY_AIRFLOW_5000CFM
-                                        or self.precision_comparison["supply_airflow_b"](
-                                    supply_airflow_b,
-                                    SUPPLY_AIRFLOW_5000CFM,
-                                )
-                                )
-                                and (
-                                    # CASE 1
-                                        (ER_modeled_b)
-                                        or
-                                        # CASE 2
-                                        (exception_1_applies)
-                                        or
-                                        # CASE 3
-                                        (exception_2_applies)
-                                        or
-                                        # CASE 4
-                                        (ER_not_req_for_heating_sys_b and sys_type_heating_only_b)
-                                        or
-                                        # CASE 5
-                                        (exception_6_applies)
-                                        or
-                                        # CASE 6
-                                        (exception_7_applies)
-                                )
-                        )
-                        or (
-                            # CASE 9 and 10
-                            (
-                                    OA_fraction_b < OA_fraction_b_70
-                                    or supply_airflow_b < SUPPLY_AIRFLOW_5000CFM
+                            OA_fraction_b > OA_fraction_b_70
+                            or self.precision_comparison["OA_fraction_b"](
+                                OA_fraction_b,
+                                OA_fraction_b_70,
                             )
                         )
-                        or
-                        # Case 11
-                        (
-                                (
-                                        all_lighting_space_types_defined_p
-                                        and all_ventilation_space_types_defined_p
-                                )
-                                or ER_modeled_p
+                        and (
+                            supply_airflow_b > SUPPLY_AIRFLOW_5000CFM
+                            or self.precision_comparison["supply_airflow_b"](
+                                supply_airflow_b,
+                                SUPPLY_AIRFLOW_5000CFM,
+                            )
                         )
+                        and (
+                            # CASE 1
+                            (ER_modeled_b)
+                            or
+                            # CASE 2
+                            (exception_1_applies)
+                            or
+                            # CASE 3
+                            (exception_2_applies)
+                            or
+                            # CASE 4
+                            (ER_not_req_for_heating_sys_b and sys_type_heating_only_b)
+                            or
+                            # CASE 5
+                            (exception_6_applies)
+                            or
+                            # CASE 6
+                            (exception_7_applies)
+                        )
+                    )
+                    or (
+                        # CASE 9 and 10
+                        (
+                            OA_fraction_b < OA_fraction_b_70
+                            or supply_airflow_b < SUPPLY_AIRFLOW_5000CFM
+                        )
+                    )
+                    or
+                    # Case 11
+                    (
+                        (
+                            all_lighting_space_types_defined_p
+                            and all_ventilation_space_types_defined_p
+                        )
+                        or ER_modeled_p
+                    )
                 )
 
             def get_fail_msg(self, context, calc_vals=None, data=None):
@@ -507,11 +507,11 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                     "Not all lighting or ventilation space types were defined in the RMD and therefore the potential applicability of exceptions 2 and 3 could not be fully assessed. Fail unless exceptions 2 and 3 are applicable. "
                     "Exception 2 is that systems exhausting toxic, flammable, or corrosive fumes or paint or dust shall not require exhaust air energy recovery to be modeled in the baseline if it is not included in the proposed design. Exception 3 is that commercial kitchen hoods (grease) classified as Type 1 by NFPA 96 shall not require exhaust air energy recovery to be modeled in the baseline if it is not included in the proposed design."
                     if not (
-                            (
-                                    all_lighting_space_types_defined_p
-                                    and all_ventilation_space_types_defined_p
-                            )
-                            or ER_modeled_p
+                        (
+                            all_lighting_space_types_defined_p
+                            and all_ventilation_space_types_defined_p
+                        )
+                        or ER_modeled_p
                     )
                     else ""
                 )

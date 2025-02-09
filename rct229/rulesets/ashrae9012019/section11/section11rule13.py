@@ -61,7 +61,7 @@ class Section11Rule13(RuleDefinitionListIndexedBase):
             service_water_heating_use_dict = {}
 
             for building_segment in find_all(
-                    "$.buildings[*].building_segments[*]", rmd_b
+                "$.buildings[*].building_segments[*]", rmd_b
             ):
                 service_water_heating_use_list = (
                     get_swh_uses_associated_with_each_building_segment(rmd_b)[
@@ -135,8 +135,8 @@ class Section11Rule13(RuleDefinitionListIndexedBase):
                                     energy_required_by_space.values()
                                 )
                 if (
-                        service_water_heating_info["btu_per_year"] != "UNDETERMINED"
-                        and service_water_heating_info["btu_per_year"] != ZERO.ENERGY
+                    service_water_heating_info["btu_per_year"] != "UNDETERMINED"
+                    and service_water_heating_info["btu_per_year"] != ZERO.ENERGY
                 ):
                     floor_area = sum(
                         find_all(
@@ -150,7 +150,7 @@ class Section11Rule13(RuleDefinitionListIndexedBase):
                         f"Floor area for building: {building_b['id']} is 0, check inputs.",
                     )
                     service_water_heating_info["btu_per_sf_per_year"] = (
-                            service_water_heating_info["btu_per_year"] / floor_area
+                        service_water_heating_info["btu_per_year"] / floor_area
                     )
 
                 return {

@@ -139,5 +139,5 @@ class Section16Rule5(RuleDefinitionListIndexedBase):
                 total_hours = calc_vals["total_hours"]
 
                 return (
-                        vent_sched_compare_data == light_sched_compare_data == total_hours
+                    vent_sched_compare_data == light_sched_compare_data == total_hours
                 )

@@ -127,7 +127,7 @@ class Section16Rule4(RuleDefinitionListIndexedBase):
                 motor_use_schedule_len_p = calc_vals["motor_use_schedule_len_p"]
 
                 return (
-                        sch_total_hours_matched
-                        == cab_lighting_schedule_len_p
-                        == motor_use_schedule_len_p
+                    sch_total_hours_matched
+                    == cab_lighting_schedule_len_p
+                    == motor_use_schedule_len_p
                 )

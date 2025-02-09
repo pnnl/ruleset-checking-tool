@@ -39,7 +39,12 @@ class Section5Rule6(RuleDefinitionListIndexedBase):
                 "$.ruleset_model_descriptions[*]": ["weather"],
                 "weather": ["climate_zone"],
             },
-            data_items={"climate_zone": (BASELINE_0, "ruleset_model_descriptions[0]/weather/climate_zone")},
+            data_items={
+                "climate_zone": (
+                    BASELINE_0,
+                    "ruleset_model_descriptions[0]/weather/climate_zone",
+                )
+            },
         )
 
     class BuildingRule(RuleDefinitionListIndexedBase):

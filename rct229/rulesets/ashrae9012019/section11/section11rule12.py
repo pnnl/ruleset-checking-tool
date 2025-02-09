@@ -106,9 +106,9 @@ class Section11Rule12(RuleDefinitionListIndexedBase):
                 )
 
                 return (
-                        service_water_heating_uses_p
-                        and building_open_schedule_id_p is not None
-                        and sum(bldg_open_sch_b) == hours_this_year
+                    service_water_heating_uses_p
+                    and building_open_schedule_id_p is not None
+                    and sum(bldg_open_sch_b) == hours_this_year
                 )
 
             def get_calc_vals(self, context, data=None):
@@ -136,6 +136,6 @@ class Section11Rule12(RuleDefinitionListIndexedBase):
                 ]
 
                 return (
-                        sum(list(uses_associated_with_each_building_segment_p.values()))
-                        > 0.0
+                    sum(list(uses_associated_with_each_building_segment_p.values()))
+                    > 0.0
                 )

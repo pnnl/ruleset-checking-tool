@@ -78,7 +78,7 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
 
         class ZoneRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section4Rule2.RuleSetModelInstanceRule.ZoneRule, self, ).__init__(
+                super(Section4Rule2.RuleSetModelInstanceRule.ZoneRule, self,).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
@@ -190,22 +190,22 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
 
                 # None matches None or hourly values matched exactly.
                 minimum_humidity_schedule_matched = (
-                        minimum_humidity_stpt_hourly_values_b
-                        == minimum_humidity_stpt_hourly_values_p
+                    minimum_humidity_stpt_hourly_values_b
+                    == minimum_humidity_stpt_hourly_values_p
                 )
 
                 # ^ comparison for data type.
                 minimum_humidity_schedule_type_matched = (
-                                                                 minimum_humidity_stpt_hourly_values_b is None
-                                                         ) == (minimum_humidity_stpt_hourly_values_p is None)
+                    minimum_humidity_stpt_hourly_values_b is None
+                ) == (minimum_humidity_stpt_hourly_values_p is None)
 
                 maximum_humidity_schedule_matched = (
-                        maximum_humidity_stpt_hourly_values_b
-                        == maximum_humidity_stpt_hourly_values_p
+                    maximum_humidity_stpt_hourly_values_b
+                    == maximum_humidity_stpt_hourly_values_p
                 )
                 maximum_humidity_schedule_type_matched = (
-                                                                 maximum_humidity_stpt_hourly_values_b is None
-                                                         ) == (maximum_humidity_stpt_hourly_values_p is None)
+                    maximum_humidity_stpt_hourly_values_b is None
+                ) == (maximum_humidity_stpt_hourly_values_p is None)
 
                 return {
                     "minimum_humidity_stpt_sch_id_b": minimum_humidity_stpt_sch_id_b,
@@ -233,12 +233,12 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
                 ]
 
                 return (
-                        minimum_humidity_schedule_type_matched
-                        and maximum_humidity_schedule_type_matched
-                        and not (
+                    minimum_humidity_schedule_type_matched
+                    and maximum_humidity_schedule_type_matched
+                    and not (
                         minimum_humidity_schedule_matched
                         and maximum_humidity_schedule_matched
-                )
+                    )
                 )
 
             def rule_check(self, context, calc_vals=None, data=None):
@@ -250,8 +250,8 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
                 ]
 
                 return (
-                        minimum_humidity_schedule_matched
-                        and maximum_humidity_schedule_matched
+                    minimum_humidity_schedule_matched
+                    and maximum_humidity_schedule_matched
                 )
 
             def get_fail_msg(self, context, calc_vals=None, data=None):
@@ -266,7 +266,7 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
                 return (
                     FAIL_MSG_B
                     if (
-                            minimum_humidity_stpt_sch_id_b or maximum_humidity_stpt_sch_id_b
+                        minimum_humidity_stpt_sch_id_b or maximum_humidity_stpt_sch_id_b
                     )
                     else FAIL_MSG_P
                 )

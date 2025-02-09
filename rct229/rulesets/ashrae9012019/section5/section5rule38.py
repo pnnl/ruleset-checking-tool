@@ -33,7 +33,9 @@ class Section5Rule38(PartialRuleDefinition):
 
     def get_calc_vals(self, context, data=None):
         rpd = context.BASELINE_0
-        ground_temperature_schedule = rpd["ruleset_model_descriptions"][0]["weather"].get("ground_temperature_schedule")
+        ground_temperature_schedule = rpd["ruleset_model_descriptions"][0][
+            "weather"
+        ].get("ground_temperature_schedule")
         return {"ground_temperature_schedule": ground_temperature_schedule}
 
     def applicability_check(self, context, calc_vals, data):
