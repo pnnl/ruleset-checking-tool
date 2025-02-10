@@ -226,7 +226,7 @@ SYS_8_TEST_RMD = {
             "type": "BASELINE_0",
         }
     ],
-    "data_timestamp": "2024-02-12T09:00Z",
+    "time_of_creation": "2024-02-12T09:00Z",
 }
 
 SYS_8_TEST_UNMATCHED_RMD = {
@@ -441,7 +441,7 @@ SYS_8_TEST_UNMATCHED_RMD = {
             "type": "BASELINE_0",
         }
     ],
-    "data_timestamp": "2024-02-12T09:00Z",
+    "time_of_creation": "2024-02-12T09:00Z",
 }
 
 

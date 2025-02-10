@@ -139,7 +139,14 @@ TEST_RMD = {
 TEST_RPD_FULL = {
     "id": "229",
     "ruleset_model_descriptions": [TEST_RMD],
-    "data_timestamp": "2024-02-12T09:00Z",
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
 }
 
 TEST_RMD = quantify_rmd(TEST_RPD_FULL)["ruleset_model_descriptions"][0]
@@ -162,7 +169,14 @@ TEST_RMD_COPIED["service_water_heating_equipment"][1]["solar_thermal_systems"][0
 TEST_RPD_COPIED_FULL = {
     "id": "229",
     "ruleset_model_descriptions": [TEST_RMD_COPIED],
-    "data_timestamp": "2024-02-12T09:00Z",
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
 }
 
 TEST_RMD_COPIED = quantify_rmd(TEST_RPD_COPIED_FULL)["ruleset_model_descriptions"][0]
@@ -192,7 +206,14 @@ TEST_RMD_NO_MATCH["pumps"][1]["loop_or_piping"] = "SWH Piping a"
 TEST_RPD_COPIED_DIFF_SWH_EQUIP_LEN_FULL = {
     "id": "229",
     "ruleset_model_descriptions": [TEST_RMD_COPIED_DIFF_SWH_EQUIP_LEN],
-    "data_timestamp": "2024-02-12T09:00Z",
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
 }
 
 TEST_RMD_COPIED_DIFF_SWH_EQUIP_LEN_FULL = quantify_rmd(

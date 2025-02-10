@@ -117,13 +117,27 @@ TEST_BUILDING_WITHOUT_LGT_BAT = {
 TEST_RPD_WITH_LGT_BAT = {
     "id": "ASHRAE229",
     "ruleset_model_descriptions": [TEST_BUILDING_WITH_LGT_BAT],
-    "data_timestamp": "2024-02-12T09:00Z",
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
 }
 
 TEST_RPD_WITHOUT_LGT_BAT = {
     "id": "ASHRAE229",
     "ruleset_model_descriptions": [TEST_BUILDING_WITHOUT_LGT_BAT],
-    "data_timestamp": "2024-02-12T09:00Z",
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
 }
 
 

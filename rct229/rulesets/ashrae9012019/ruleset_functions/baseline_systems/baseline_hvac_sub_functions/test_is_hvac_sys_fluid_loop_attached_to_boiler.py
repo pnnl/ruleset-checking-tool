@@ -70,7 +70,7 @@ TEST_RMD = {
 TEST_RPD_FULL = {
     "id": "229_01",
     "ruleset_model_descriptions": [TEST_RMD],
-    "data_timestamp": "2024-02-12T09:00Z",
+    "time_of_creation": "2024-02-12T09:00Z",
 }
 
 

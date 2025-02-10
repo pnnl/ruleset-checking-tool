@@ -115,7 +115,7 @@
         "AppG B_RMD Equals P_RMD": false,
         "AppG B_RMDs Same": "unknown"
       },
-      "data_timestamp": {
+      "time_of_creation": {
         "Description": "Date and time of data publication",
         "Data Type": "Timestamp",
         "Required": true,
