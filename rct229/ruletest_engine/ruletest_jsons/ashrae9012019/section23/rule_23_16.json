@@ -14,12 +14,11 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "Rule 13 is true",
             "mandatory_rule": "Full",
-            "schema_version": "0.0.37"
+            "schema_version": "0.1.3"
         },
         "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -149,7 +148,7 @@
         "Section": 23,
         "Rule": 16,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones served by baseline system type 7. The preheat coil is incorrectly controlled to only 13 F less than the design room heating temperature setpoint.",
+        "test_description": "The project has one building segment with two zones served by baseline system type 7. The preheat coil is incorrectly controled to only 13 F less than the design room heating temperature setpoint.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "23-16",
@@ -160,12 +159,11 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "Rule 13 is true",
             "mandatory_rule": "Full",
-            "schema_version": "0.0.37"
+            "schema_version": "0.1.3"
         },
         "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -215,7 +213,7 @@
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
-                                                    "type": "FLUID_LOOP",
+                                                    "type": "ELECTRIC_RESISTANCE",
                                                     "hot_water_loop": "Boiler Loop 1",
                                                     "heating_coil_setpoint": 12.777777777777828
                                                 },
