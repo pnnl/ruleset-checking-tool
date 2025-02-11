@@ -22,9 +22,7 @@ APPLICABLE_SYS_TYPES = [
 ]
 
 HEATPUMP_AUX_HEAT_HIGH_SHUTOFF_THRESHOLD = 40 * ureg("F")
-HeatpumpAuxilliaryHeatOptions = SchemaEnums.schema_enums[
-    "HeatpumpAuxilliaryHeatOptions"
-]
+HeatpumpAuxiliaryHeatOptions = SchemaEnums.schema_enums["HeatpumpAuxiliaryHeatOptions"]
 
 
 class Section23Rule1(RuleDefinitionListIndexedBase):
@@ -129,5 +127,5 @@ class Section23Rule1(RuleDefinitionListIndexedBase):
                 heatpump_aux_high_temp_shutoff
                 <= HEATPUMP_AUX_HEAT_HIGH_SHUTOFF_THRESHOLD
                 and heatpump_aux_heat_energy_source
-                == HeatpumpAuxilliaryHeatOptions.ELECTRIC_RESISTANCE
+                == HeatpumpAuxiliaryHeatOptions.ELECTRIC_RESISTANCE
             )
