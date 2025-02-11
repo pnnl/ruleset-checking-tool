@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ruleset-checking-tool"
-version = "0.3.0"
+version = "0.3.1"
 description = "PNNL ruleset checking tool"
 authors = ["Weili Xu <weili.xu@pnnl.gov>", "Charlie Holly <charlie.holly@pnnl.gov>", "Juan Gonzalez <juan.gonzalez@pnnl.gov>", "Yun Joon Jung <yunjoon.jung@pnnl.gov>", "Jiarong Xie <jiarong.xie@pnnl.gov>", "Jackson Jarbose <jackson@karpmanconsulting.net>", "Karen Walkerman <kwalkerman@gard.com>"]
 license = "MIT"

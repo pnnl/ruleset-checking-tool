@@ -167,7 +167,7 @@
                 },
                 "type": {
                     "description": "Describes the current ruleset model description for rulesets with multiple simulation models",
-                    "oneOf": [
+                    "anyOf": [
                         {
                             "$ref": "ASHRAE229.schema.json#/definitions/CommonRulesetModelOptions"
                         },
@@ -306,7 +306,7 @@
                     "description": "Model output for a single instance",
                     "oneOf": [
                         {
-                            "$ref": "Output2019ASHRAE901.schema.json#/definitions/OutputInstance2019ASHRAE901"
+                            "$ref": "Output2019ASHRAE901.schema.json#/definitions/Output2019ASHRAE901"
                         }
                     ]
                 }
@@ -479,7 +479,9 @@
                 "service_water_heating_uses": {
                     "description": "List of service water heating uses",
                     "type": "array",
-                    "items": {},
+                    "items": {
+                        "$ref": "ASHRAE229.schema.json#/definitions/ServiceWaterHeatingUse"
+                    },
                     "notes": "This data element also appears in Space. A list of ServiceWaterHeatingUse data groups can either appear here or a list of references to IDs of a ServiceWaterHeatingUse already defined somewhere else or a mixture of both. When a reference is used, the constraint to use when implemented is to :ServiceWaterHeatingUse:"
                 }
             },
@@ -741,7 +743,9 @@
                 "service_water_heating_uses": {
                     "description": "List of service water heating uses",
                     "type": "array",
-                    "items": {},
+                    "items": {
+                        "$ref": "ASHRAE229.schema.json#/definitions/ServiceWaterHeatingUse"
+                    },
                     "notes": "This data element also appears in BuildingSegment. A list of ServiceWaterHeatingUse data groups can either appear here or a list of references to IDs of a ServiceWaterHeatingUse already defined somewhere else or a mixture of both. When a reference is used, the constraint to use when implemented is to :ServiceWaterHeatingUse:"
                 }
             },
