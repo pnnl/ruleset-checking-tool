@@ -18,7 +18,7 @@
   1. get_area_type_window_wall_areas()  
   2. match_data_element()
   3. get_opaque_surface_type()
-  4. get_surface_conditioning_category()
+  4. get_more_stringent_surface_conditioning_category()
 
 ## Rule Logic:
 
@@ -34,7 +34,7 @@
   
     - Calculate total fenestration area for B_RMD: `total_fenestration_area_p += window_wall_areas_dictionary_p[area_type_p]["TOTAL_WINDOW_AREA"]`
 
-- Get surface conditioning category dictionary for B_RMD: `scc_dictionary_b = get_surface_conditioning_category(B_RMD)`
+- Get surface conditioning category dictionary for B_RMD: `scc_dictionary_b = get_more_stringent_surface_conditioning_category(B_RMD, P_RMD)`
 
 - For each building segment in the Baseline model: `For building_segment_b in B_RMD.building.building_segments:`
 
