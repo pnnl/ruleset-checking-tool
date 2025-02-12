@@ -13,13 +13,13 @@
 **Data Lookup:** Tables G3.4-1 to G3.4-8  
 **Function Call:**  
 
-  1. get_surface_conditioning_category()
+  1. get_more_stringent_surface_conditioning_category()
 
 ## Rule Logic:  
 
 - Get building climate zone: ```climate_zone = B_RMR.weather.climate_zone```
 
-- Get surface conditioning category dictionary for B_RMR: ```scc_dictionary_b = get_surface_conditioning_category_dict(climate_zone, B_RMR.building)```
+- Get surface conditioning category dictionary for B_RMR: ```scc_dictionary_b = get_more_stringent_surface_conditioning_category(B_RMD, P_RMD)```
 
 - For each building segment in the Proposed model: ```for building_segment_b in B_RMR.building.building_segments:```
 
