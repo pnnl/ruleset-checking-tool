@@ -14,7 +14,7 @@
 **Data Lookup:** Tables G3.4-1 to G3.4-8  
 **Function Call:**
 
-  1. get_surface_conditioning_category()
+  1. get_more_stringent_surface_conditioning_category()
   2. get_opaque_surface_type()
   3. get_building_scc_skylight_roof_ratios_dict()
   4. data_lookup()
@@ -23,7 +23,7 @@
 
 - Get RMR climate zone: `climate_zone = ASHRAE229.weather.climate_zone`  
 
-- Get surface conditioning category dictionary for B_RMR: `scc_dictionary_b = get_surface_conditioning_category(B_RMR)`  
+- Get surface conditioning category dictionary for B_RMR: `scc_dictionary_b = get_more_stringent_surface_conditioning_category(B_RMD, P_RMD)`  
 
 - Get B_RMR skylight roof ratios dictionary: `get_building_scc_skylight_roof_ratios_dict = get_building_scc_skylight_roof_ratios_dict(B_RMR)`
 
