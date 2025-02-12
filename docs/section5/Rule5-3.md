@@ -13,12 +13,12 @@
 **Evaluation Context:** Each Data Element  
 **Data Lookup:** None  
 **Function Call:**
-  1. get_surface_conditioning_category()  
+  1. get_more_stringent_surface_conditioning_category()  
   2. get_opaque_surface_type()  
 
 ## Rule Logic:  
 
-- Get surface conditioning category dictionary for B_RMR: ```scc_dictionary_b = get_surface_conditioning_category(B_RMR)```  
+- Get surface conditioning category dictionary for B_RMR: ```scc_dictionary_b = get_more_stringent_surface_conditioning_category(B_RMD, P_RMD)```  
 
 - For each building segment in the Baseline model: ```for building_segment_b in B_RMR.building.building_segments:```  
 
