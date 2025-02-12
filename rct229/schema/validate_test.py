@@ -185,9 +185,9 @@ TEST_MISMATCHED_LISTS_RMD = {
 
 def test__non_schema_validate_rpd__missing_associated_swh_use_lists_1():
     test_rmd = deepcopy(TEST_MISMATCHED_LISTS_RMD)
-    test_rmd["ruleset_model_descriptions"][0]["buildings"][0][
-        "building_segments"
-    ][0]["service_water_heating_uses"][0]["use"] = [3]
+    test_rmd["ruleset_model_descriptions"][0]["buildings"][0]["building_segments"][0][
+        "service_water_heating_uses"
+    ][0]["use"] = [3]
     assert non_schema_validate_rpd(test_rmd) == {
         "passed": False,
         "error": ["'Typical SWH Use' has populated 'use' but is missing 'use_units'."],
@@ -196,12 +196,12 @@ def test__non_schema_validate_rpd__missing_associated_swh_use_lists_1():
 
 def test__non_schema_validate_rpd__mismatched_associated_swh_use_lists_1():
     test_rmd = deepcopy(TEST_MISMATCHED_LISTS_RMD)
-    test_rmd["ruleset_model_descriptions"][0]["buildings"][0][
-        "building_segments"
-    ][0]["service_water_heating_uses"][0]["use"] = [3, 4, 5]
-    test_rmd["ruleset_model_descriptions"][0]["buildings"][0][
-        "building_segments"
-    ][0]["service_water_heating_uses"][0]["use_units"] = [
+    test_rmd["ruleset_model_descriptions"][0]["buildings"][0]["building_segments"][0][
+        "service_water_heating_uses"
+    ][0]["use"] = [3, 4, 5]
+    test_rmd["ruleset_model_descriptions"][0]["buildings"][0]["building_segments"][0][
+        "service_water_heating_uses"
+    ][0]["use_units"] = [
         ServiceWaterHeatingUseUnitOptions.POWER,
         ServiceWaterHeatingUseUnitOptions.VOLUME,
     ]
@@ -216,12 +216,12 @@ def test__non_schema_validate_rpd__mismatched_associated_swh_use_lists_1():
 
 def test__non_schema_validate_rpd__mismatched_associated_swh_use_lists_2():
     test_rmd = deepcopy(TEST_MISMATCHED_LISTS_RMD)
-    test_rmd["ruleset_model_descriptions"][0]["buildings"][0][
-        "building_segments"
-    ][0]["zones"][0]["spaces"][0]["service_water_heating_uses"][0]["use"] = [3, 4, 5]
-    test_rmd["ruleset_model_descriptions"][0]["buildings"][0][
-        "building_segments"
-    ][0]["zones"][0]["spaces"][0]["service_water_heating_uses"][0]["use_units"] = [
+    test_rmd["ruleset_model_descriptions"][0]["buildings"][0]["building_segments"][0][
+        "zones"
+    ][0]["spaces"][0]["service_water_heating_uses"][0]["use"] = [3, 4, 5]
+    test_rmd["ruleset_model_descriptions"][0]["buildings"][0]["building_segments"][0][
+        "zones"
+    ][0]["spaces"][0]["service_water_heating_uses"][0]["use_units"] = [
         ServiceWaterHeatingUseUnitOptions.POWER,
         ServiceWaterHeatingUseUnitOptions.VOLUME,
     ]
@@ -236,18 +236,14 @@ def test__non_schema_validate_rpd__mismatched_associated_swh_use_lists_2():
 
 def test__non_schema_validate_rpd__mismatched_associated_efficiency_lists_1():
     test_rmd = deepcopy(TEST_MISMATCHED_LISTS_RMD)
-    test_rmd["ruleset_model_descriptions"][0]["buildings"][0][
-        "building_segments"
-    ][0]["heating_ventilating_air_conditioning_systems"][0]["preheat_system"][
-        "efficiency_metric_types"
-    ] = [
+    test_rmd["ruleset_model_descriptions"][0]["buildings"][0]["building_segments"][0][
+        "heating_ventilating_air_conditioning_systems"
+    ][0]["preheat_system"]["efficiency_metric_types"] = [
         HeatingMetricOptions.THERMAL_EFFICIENCY
     ]
-    test_rmd["ruleset_model_descriptions"][0]["buildings"][0][
-        "building_segments"
-    ][0]["heating_ventilating_air_conditioning_systems"][0]["preheat_system"][
-        "efficiency_metric_values"
-    ] = [
+    test_rmd["ruleset_model_descriptions"][0]["buildings"][0]["building_segments"][0][
+        "heating_ventilating_air_conditioning_systems"
+    ][0]["preheat_system"]["efficiency_metric_values"] = [
         0.8,
         3.4,
     ]
@@ -262,18 +258,14 @@ def test__non_schema_validate_rpd__mismatched_associated_efficiency_lists_1():
 
 def test__non_schema_validate_rpd__mismatched_associated_efficiency_lists_2():
     test_rmd = deepcopy(TEST_MISMATCHED_LISTS_RMD)
-    test_rmd["ruleset_model_descriptions"][0]["buildings"][0][
-        "building_segments"
-    ][0]["heating_ventilating_air_conditioning_systems"][0]["cooling_system"][
-        "efficiency_metric_types"
-    ] = [
+    test_rmd["ruleset_model_descriptions"][0]["buildings"][0]["building_segments"][0][
+        "heating_ventilating_air_conditioning_systems"
+    ][0]["cooling_system"]["efficiency_metric_types"] = [
         CoolingMetricOptions.FULL_LOAD_COEFFICIENT_OF_PERFORMANCE
     ]
-    test_rmd["ruleset_model_descriptions"][0]["buildings"][0][
-        "building_segments"
-    ][0]["heating_ventilating_air_conditioning_systems"][0]["cooling_system"][
-        "efficiency_metric_values"
-    ] = [
+    test_rmd["ruleset_model_descriptions"][0]["buildings"][0]["building_segments"][0][
+        "heating_ventilating_air_conditioning_systems"
+    ][0]["cooling_system"]["efficiency_metric_values"] = [
         3.4,
         3.2,
     ]
