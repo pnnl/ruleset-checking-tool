@@ -16,7 +16,7 @@
 **Function Call:**  
 
   1. get_building_segment_skylight_roof_areas()  
-  2. get_surface_conditioning_category()
+  2. get_more_stringent_surface_conditioning_category()
   3. get_opaque_surface_type()
   4. match_data_element()
 
@@ -26,7 +26,7 @@
 
 - Get building segment skylight roof areas dictionary for P_RMD: `skylight_roof_areas_dictionary_p = get_building_segment_skylight_roof_areas(P_RMD)`
 
-- Get surface conditioning category dictionary for B_RMD: `scc_dictionary_b = get_surface_conditioning_category(B_RMD)`  
+- Get surface conditioning category dictionary for B_RMD: `scc_dictionary_b = get_more_stringent_surface_conditioning_category(B_RMD, P_RMD)`  
 
 - For each building segment in the Baseline model: `For building_segment_b in B_RMD.building.building_segments:`
 
