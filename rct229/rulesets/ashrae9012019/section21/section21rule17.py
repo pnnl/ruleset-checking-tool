@@ -102,40 +102,17 @@ class Section21Rule17(RuleDefinitionListIndexedBase):
                 "`efficiency_metric_types` and `efficiency_metric_values` must have the same length between 1 to 3",
             )
 
-            boiler_annual_fuel_utilization_efficiency_b = next(
-                (
-                    value
-                    for metric, value in zip(
-                        boiler_efficiency_metric_types_b,
-                        boiler_efficiency_metric_values_b,
-                    )
-                    if metric == BOILER_EFFICIENCY_METRIC_TYPE.ANNUAL_FUEL_UTILIZATION
-                ),
-                None,
+            efficiency_dict = dict(
+                zip(boiler_efficiency_metric_types_b, boiler_efficiency_metric_values_b)
             )
-
-            boiler_thermal_efficiency_b = next(
-                (
-                    value
-                    for metric, value in zip(
-                        boiler_efficiency_metric_types_b,
-                        boiler_efficiency_metric_values_b,
-                    )
-                    if metric == BOILER_EFFICIENCY_METRIC_TYPE.THERMAL
-                ),
-                None,
+            boiler_annual_fuel_utilization_efficiency_b = efficiency_dict.get(
+                BOILER_EFFICIENCY_METRIC_TYPE.ANNUAL_FUEL_UTILIZATION, None
             )
-
-            boiler_combustion_efficiency_b = next(
-                (
-                    value
-                    for metric, value in zip(
-                        boiler_efficiency_metric_types_b,
-                        boiler_efficiency_metric_values_b,
-                    )
-                    if metric == BOILER_EFFICIENCY_METRIC_TYPE.COMBUSTION
-                ),
-                None,
+            boiler_thermal_efficiency_b = efficiency_dict.get(
+                BOILER_EFFICIENCY_METRIC_TYPE.THERMAL, None
+            )
+            boiler_combustion_efficiency_b = efficiency_dict.get(
+                BOILER_EFFICIENCY_METRIC_TYPE.COMBUSTION, None
             )
 
             return {
@@ -154,18 +131,15 @@ class Section21Rule17(RuleDefinitionListIndexedBase):
             boiler_combustion_efficiency_b = calc_vals["boiler_combustion_efficiency_b"]
 
             return (
-                (
-                    boiler_rated_capacity_b < BOILER_RATED_CAPACITY_LOW_LIMIT
-                    and boiler_annual_fuel_utilization_efficiency_b
-                    and self.precision_comparison["boiler_efficiency_b"](
-                        boiler_annual_fuel_utilization_efficiency_b,
-                        BOILER_EFFICIENCY_80,
-                    )
+                boiler_rated_capacity_b < BOILER_RATED_CAPACITY_LOW_LIMIT
+                and boiler_annual_fuel_utilization_efficiency_b
+                and self.precision_comparison["boiler_efficiency_b"](
+                    boiler_annual_fuel_utilization_efficiency_b,
+                    BOILER_EFFICIENCY_80,
                 )
                 or (
                     boiler_rated_capacity_b <= BOILER_RATED_CAPACITY_HIGH_LIMIT
                     and boiler_thermal_efficiency_b
-                    == BOILER_EFFICIENCY_METRIC_TYPE.THERMAL
                     and self.precision_comparison["boiler_efficiency_b"](
                         boiler_thermal_efficiency_b,
                         BOILER_EFFICIENCY_75,
@@ -174,7 +148,6 @@ class Section21Rule17(RuleDefinitionListIndexedBase):
                 or (
                     boiler_rated_capacity_b > BOILER_RATED_CAPACITY_HIGH_LIMIT
                     and boiler_combustion_efficiency_b
-                    == BOILER_EFFICIENCY_METRIC_TYPE.COMBUSTION
                     and self.precision_comparison["boiler_efficiency_b"](
                         boiler_combustion_efficiency_b,
                         BOILER_EFFICIENCY_80,
