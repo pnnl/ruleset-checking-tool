@@ -15,12 +15,12 @@
 **Data Lookup:** None  
 **Function Call:**
 
-  1. get_surface_conditioning_category()
+  1. get_more_stringent_surface_conditioning_category()
   2. get_zone_conditioning_category()
 
 ## Rule Logic:  
 
-- Get surface conditioning category dictionary for P_RMR: `scc_dict_p = get_surface_conditioning_category(P_RMR)`
+- Get surface conditioning category dictionary for P_RMR: `scc_dict_p = get_more_stringent_surface_conditioning_category(B_RMD, P_RMD)`
 
 - Get zone conditioning category dictionary for P_RMR: `zone_conditioning_category_dict_p = get_zone_conditioning_category(P_RMR)`
 
