@@ -46,13 +46,12 @@ class Section5Rule37(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-5(b) Building Envelope Modeling Requirements for the Proposed design",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].buildings[*]",
-            data_items={
-                "climate_zone": (
-                    PROPOSED,
-                    "ruleset_model_descriptions[0]/weather/climate_zone",
-                )
-            },
         )
+
+    def create_data(self, context, data=None):
+        rpd_p = context.PROPOSED
+        climate_zone = rpd_p["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
+        return {"climate_zone": climate_zone}
 
     class BuildingRule(RuleDefinitionBase):
         def __init__(self):

@@ -65,9 +65,7 @@ class Section5Rule20(RuleDefinitionListIndexedBase):
         }
 
         return {
-            "climate_zone": rmd_baseline["ruleset_model_descriptions"][0]["weather"][
-                "climate_zone"
-            ],
+            "climate_zone": climate_zone,
             "bldg_scc_wwr_ratio_dict": bldg_scc_wwr_ratio_dict,
         }
 

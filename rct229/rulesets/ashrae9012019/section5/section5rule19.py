@@ -35,10 +35,6 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            required_fields={
-                "$.ruleset_model_descriptions[*]": ["weather"],
-                "weather": ["climate_zone"],
-            },
             each_rule=Section5Rule19.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-19",
@@ -64,9 +60,7 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
             ] = get_building_scc_window_wall_ratios_dict(climate_zone, building_b)
 
         return {
-            "climate_zone": rmd_baseline["ruleset_model_descriptions"][0]["weather"][
-                "climate_zone"
-            ],
+            "climate_zone": climate_zone,
             "bldg_scc_wwr_ratio_dict": bldg_scc_wwr_ratio_dict,
         }
 

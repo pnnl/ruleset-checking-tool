@@ -39,6 +39,11 @@ class Section5Rule25(RuleDefinitionListIndexedBase):
             },
         )
 
+    def create_data(self, context, data=None):
+        rpd_b = context.BASELINE_0
+        climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
+        return {"climate_zone": climate_zone}
+
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule25.BuildingRule, self).__init__(

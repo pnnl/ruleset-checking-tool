@@ -34,12 +34,9 @@ class Section5Rule36(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data=None):
-        rmd_baseline = context.BASELINE_0
-        return {
-            "climate_zone": rmd_baseline["ruleset_model_descriptions"][0]["weather"][
-                "climate_zone"
-            ]
-        }
+        rpd_b = context.BASELINE_0
+        climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
+        return {"climate_zone": climate_zone}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):

@@ -27,7 +27,6 @@ class Section5Rule38(PartialRuleDefinition):
             is_primary_rule=False,
             required_fields={
                 "$.ruleset_model_descriptions[*]": ["weather"],
-                "weather": ["climate_zone"],
             },
         )
 
