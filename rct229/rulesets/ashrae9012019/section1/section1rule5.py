@@ -47,19 +47,19 @@ class Section1Rule5(RuleDefinitionBase):
             if rmd is not None:
                 pbp_set.append(
                     find_one(
-                        "$.output.total_proposed_building_energy_cost_including_renewable_energy",
+                        "$.model_output.total_proposed_building_energy_cost_including_renewable_energy",
                         rmd,
                     )
                 )
                 bbp_set.append(
                     find_one(
-                        "$.output.baseline_building_performance_energy_cost",
+                        "$.model_output.baseline_building_performance_energy_cost",
                         rmd,
                     )
                 )
                 pbp_nre_set.append(
                     find_one(
-                        "$.output.total_proposed_building_energy_cost_excluding_renewable_energy",
+                        "$.model_output.total_proposed_building_energy_cost_excluding_renewable_energy",
                         rmd,
                     )
                 )
@@ -104,31 +104,31 @@ class Section1Rule5(RuleDefinitionBase):
             if rmd is not None:
                 pbp_set.append(
                     find_one(
-                        "$.output.total_proposed_building_energy_cost_including_renewable_energy",
+                        "$.model_output.total_proposed_building_energy_cost_including_renewable_energy",
                         rmd,
                     )
                 )
                 bbp_set.append(
                     find_one(
-                        "$.output.baseline_building_performance_energy_cost",
+                        "$.model_output.baseline_building_performance_energy_cost",
                         rmd,
                     )
                 )
                 pbp_nre_set.append(
                     find_one(
-                        "$.output.total_proposed_building_energy_cost_excluding_renewable_energy",
+                        "$.model_output.total_proposed_building_energy_cost_excluding_renewable_energy",
                         rmd,
                     )
                 )
                 pci_set.append(
                     find_one(
-                        "$.output.performance_cost_index",
+                        "$.model_output.performance_cost_index",
                         rmd,
                     )
                 )
                 pci_target_set.append(
                     find_one(
-                        "$.output.performance_cost_index_target",
+                        "$.model_output.performance_cost_index_target",
                         rmd,
                     )
                 )
