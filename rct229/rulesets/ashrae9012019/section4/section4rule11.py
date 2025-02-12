@@ -85,16 +85,13 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
                     "weather": ["climate_zone"],
                     "calendar": ["is_leap_year"],
                 },
-                data_items={
-                    "climate_zone": (BASELINE_0, "weather/climate_zone"),
-                    "is_leap_year": (BASELINE_0, "calendar/is_leap_year"),
-                },
             )
 
         def create_data(self, context, data=None):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
-            is_leap_year = data["is_leap_year"]
+            is_leap_year = rmd_b["calendar"]["is_leap_year"]
+            climate_zone = rmd_b["weather"]["climate_zone"]
 
             zone_p_hvac_list_dict = {
                 zone_id: get_list_hvac_systems_associated_with_zone(rmd_p, zone_id)
@@ -142,6 +139,8 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
             }
 
             return {
+                "climate_zone": climate_zone,
+                "is_leap_year": is_leap_year,
                 "baseline_hvac_sys_type_ids_dict_b": get_baseline_system_types(rmd_b),
                 "zone_p_hvac_list_dict": zone_p_hvac_list_dict,
                 "zone_b_hvac_zone_list_dict": zone_b_hvac_zone_list_dict,
@@ -152,7 +151,7 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
                     rmd_p
                 ),
                 "zcc_dict_b": get_zone_conditioning_category_rmd_dict(
-                    data["climate_zone"], rmd_b
+                    climate_zone, rmd_b
                 ),
             }
 

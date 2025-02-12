@@ -92,21 +92,17 @@ class Section18Rule2(RuleDefinitionListIndexedBase):
                 index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
                 required_fields={
-                    "$": ["weather", "calendar", "ruleset_model_descriptions"],
+                    "$": ["weather", "calendar"],
                     "weather": ["climate_zone"],
                     "calendar": ["is_leap_year"],
-                },
-                data_items={
-                    "climate_zone": (BASELINE_0, "weather/climate_zone"),
-                    "is_leap_year": (BASELINE_0, "calendar/is_leap_year"),
                 },
             )
 
         def create_data(self, context, data):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
-            climate_zone_b = data["climate_zone"]
-            is_leap_year_b = data["is_leap_year"]
+            climate_zone_b = rmd_b["weather"]["climate_zone"]
+            is_leap_year_b = rmd_b["calendar"]["is_leap_year"]
 
             baseline_system_types_dict_b = get_baseline_system_types(rmd_b)
             applicable_hvac_sys_ids_b = [

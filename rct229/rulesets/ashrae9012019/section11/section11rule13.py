@@ -49,14 +49,11 @@ class Section11Rule13(RuleDefinitionListIndexedBase):
                     "$": ["calendar"],
                     "calendar": ["is_leap_year"],
                 },
-                data_items={
-                    "is_leap_year": (BASELINE_0, "calendar/is_leap_year"),
-                },
             )
 
         def create_data(self, context, data):
             rmd_b = context.BASELINE_0
-            is_leap_year_b = data["is_leap_year"]
+            is_leap_year_b = rmd_b["calendar"]["is_leap_year"]
             energy_required_to_heat_swh_use_dict = {}
             service_water_heating_use_dict = {}
 

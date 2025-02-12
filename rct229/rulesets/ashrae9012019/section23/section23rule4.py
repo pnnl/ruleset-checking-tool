@@ -42,16 +42,6 @@ class Section23Rule4(RuleDefinitionListIndexedBase):
                 "weather": ["climate_zone"],
                 "calendar": ["is_leap_year"],
             },
-            data_items={
-                "climate_zone_b": (
-                    BASELINE_0,
-                    "ruleset_model_descriptions[0]/weather/climate_zone",
-                ),
-                "is_leap_year_b": (
-                    BASELINE_0,
-                    "ruleset_model_descriptions[0]/calendar/is_leap_year",
-                ),
-            },
         )
 
     class RuleSetModelInstanceRule(PartialRuleDefinition):
@@ -65,8 +55,8 @@ class Section23Rule4(RuleDefinitionListIndexedBase):
         def get_calc_vals(self, context, data=None):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
-            climate_zone_b = data["climate_zone_b"]
-            is_leap_year_b = data["is_leap_year_b"]
+            climate_zone_b = rmd_b["weather"]["climate_zone"]
+            is_leap_year_b = rmd_b["calendar"]["is_leap_year"]
 
             baseline_system_types_dict = get_baseline_system_types(rmd_b)
 

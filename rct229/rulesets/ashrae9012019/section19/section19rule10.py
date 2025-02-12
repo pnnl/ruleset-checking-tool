@@ -87,12 +87,11 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
                     "$": ["weather"],
                     "weather": ["climate_zone"],
                 },
-                data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
             )
 
         def is_applicable(self, context, data=None):
-            climate_zone = data["climate_zone"]
             rmd_b = context.BASELINE_0
+            climate_zone = rmd_b["weather"]["climate_zone"]
 
             baseline_system_types_dict_b = get_baseline_system_types(rmd_b)
 

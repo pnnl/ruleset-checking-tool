@@ -41,7 +41,6 @@ class Section16Rule3(RuleDefinitionListIndexedBase):
                 index_rmd=PROPOSED,
                 list_path="buildings[*].elevators[*]",
                 required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
-                data_items={"is_leap_year_p": (PROPOSED, "calendar/is_leap_year")},
             )
 
         def is_applicable(self, context, data=None):
@@ -51,6 +50,7 @@ class Section16Rule3(RuleDefinitionListIndexedBase):
 
         def create_data(self, context, data):
             rmd_p = context.PROPOSED
+            is_leap_year_p = rmd_p["calendar"]["is_leap_year"]
 
             cab_ventilation_schedule_p = {
                 sch_id: find_exactly_one_schedule(rmd_p, sch_id)["hourly_values"]
@@ -70,6 +70,7 @@ class Section16Rule3(RuleDefinitionListIndexedBase):
             return {
                 "cab_ventilation_schedule_p": cab_ventilation_schedule_p,
                 "motor_use_schedule_p": motor_use_schedule_p,
+                "is_leap_year_p": is_leap_year_p,
             }
 
         class ElevatorRule(RuleDefinitionBase):

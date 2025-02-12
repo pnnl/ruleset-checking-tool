@@ -55,7 +55,6 @@ class Section12Rule3(RuleDefinitionListIndexedBase):
                 index_rmd=PROPOSED,
                 list_path="$.buildings[*].building_segments[*].zones[*].spaces[*]",
                 required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
-                data_items={"is_leap_year": (PROPOSED, "calendar/is_leap_year")},
             )
 
         def is_applicable(self, context, data=None):
@@ -110,7 +109,11 @@ class Section12Rule3(RuleDefinitionListIndexedBase):
                 )
             }
 
-            return {"schedule_b": schedule_b, "schedule_p": schedule_p}
+            return {
+                "schedule_b": schedule_b,
+                "schedule_p": schedule_p,
+                "is_leap_year": rmd_b["calendar"]["is_leap_year"],
+            }
 
         def list_filter(self, context_item, data):
             space_p = context_item.PROPOSED

@@ -89,7 +89,7 @@ class Section21Rule5(RuleDefinitionListIndexedBase):
 
         def get_calc_vals(self, context, data=None):
             rmd_b = context.BASELINE_0
-            climate_zone = data["climate_zone"]
+            climate_zone = rmd_b["weather"]["climate_zone"]
 
             # get zone conditions from buildings
             zone_conditioning_category_dict = {}

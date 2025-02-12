@@ -53,12 +53,6 @@ class Section1Rule1(RuleDefinitionListIndexedBase):
             standard_section="Section G4.2.1.1",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            data_items={
-                "climate_zone": (
-                    BASELINE_0,
-                    "ruleset_model_descriptions[0]/weather/climate_zone",
-                )
-            },
         )
 
     class RMDRule(RuleDefinitionBase):
@@ -112,7 +106,7 @@ class Section1Rule1(RuleDefinitionListIndexedBase):
             has_undetermined = "UNDETERMINED" in bpf_building_area_type_dict
             bpf_bat_sum_prod = ZERO.AREA
             total_area = ZERO.AREA
-            climate_zone = data["climate_zone"]
+            climate_zone = rmd_b0["weather"]["climate_zone"]
             for bpf_bat in bpf_building_area_type_dict:
                 if bpf_bat != "UNDETERMINED":
                     expected_bpf = table_4_2_1_1_lookup(bpf_bat, climate_zone)[

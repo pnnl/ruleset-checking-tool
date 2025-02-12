@@ -74,7 +74,6 @@ class Section12Rule4(RuleDefinitionListIndexedBase):
                 index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].zones[*].spaces[*].miscellaneous_equipment[*]",
                 required_fields={"$": ["calendar"], "calendar": ["is_leap_year"]},
-                data_items={"is_leap_year": (BASELINE_0, "calendar/is_leap_year")},
             )
 
         def is_applicable(self, context, data=None):
@@ -91,7 +90,7 @@ class Section12Rule4(RuleDefinitionListIndexedBase):
 
         def create_data(self, context, data):
             rmd_b = context.BASELINE_0
-            is_leap_year = data["is_leap_year"]
+            is_leap_year = rmd_b["calendar"]["is_leap_year"]
 
             schedule_b = {
                 mult_sch_b: find_exactly_one_schedule(rmd_b, mult_sch_b)[
@@ -108,7 +107,11 @@ class Section12Rule4(RuleDefinitionListIndexedBase):
                 else LeapYear.REGULAR_YEAR_HOURS
             )
 
-            return {"schedule_b": schedule_b, "hours_in_a_year": hours_in_a_year}
+            return {
+                "schedule_b": schedule_b,
+                "hours_in_a_year": hours_in_a_year,
+                "is_leap_year": is_leap_year,
+            }
 
         class MiscEquipRule(RuleDefinitionBase):
             def __init__(self):

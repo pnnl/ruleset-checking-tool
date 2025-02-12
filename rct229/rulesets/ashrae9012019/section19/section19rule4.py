@@ -57,8 +57,12 @@ class Section19Rule4(RuleDefinitionListIndexedBase):
 
         def create_data(self, context, data):
             rmd_b = context.BASELINE_0
+            day_of_week_for_january_1 = rmd_b["calendar"]["day_of_week_for_january_1"]
 
-            return {"schedule_b": getattr_(rmd_b, "RMI", "schedules")}
+            return {
+                "schedule_b": getattr_(rmd_b, "RMI", "schedules"),
+                "day_of_week_for_january_1": day_of_week_for_january_1,
+            }
 
         class BuildingSegmentRule(RuleDefinitionListIndexedBase):
             def __init__(self):

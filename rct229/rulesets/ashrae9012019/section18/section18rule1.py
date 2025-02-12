@@ -55,21 +55,17 @@ class Section18Rule1(RuleDefinitionListIndexedBase):
                 index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].zones[*]",
                 required_fields={
-                    "$": ["weather", "calendar", "ruleset_model_descriptions"],
+                    "$": ["weather", "calendar"],
                     "weather": ["climate_zone"],
                     "calendar": ["is_leap_year"],
-                },
-                data_items={
-                    "climate_zone": (BASELINE_0, "weather/climate_zone"),
-                    "is_leap_year": (BASELINE_0, "calendar/is_leap_year"),
                 },
             )
 
         def is_applicable(self, context, data=None):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
-            climate_zone_b = data["climate_zone"]
-            is_leap_year_b = data["is_leap_year"]
+            climate_zone_b = rmd_b["weather"]["climate_zone"]
+            is_leap_year_b = rmd_b["calendar"]["is_leap_year"]
 
             zone_target_baseline_system_dict_b = get_zone_target_baseline_system(
                 rmd_b, rmd_p, climate_zone_b, is_leap_year_b
@@ -80,8 +76,8 @@ class Section18Rule1(RuleDefinitionListIndexedBase):
         def create_data(self, context, data):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
-            climate_zone_b = data["climate_zone"]
-            is_leap_year_b = data["is_leap_year"]
+            climate_zone_b = rmd_b["weather"]["climate_zone"]
+            is_leap_year_b = rmd_b["calendar"]["is_leap_year"]
 
             zone_target_baseline_system_dict_b = get_zone_target_baseline_system(
                 rmd_b, rmd_p, climate_zone_b, is_leap_year_b

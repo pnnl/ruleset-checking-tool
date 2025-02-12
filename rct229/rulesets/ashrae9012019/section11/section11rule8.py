@@ -61,13 +61,12 @@ class Section11Rule8(RuleDefinitionListIndexedBase):
                 index_rmd=BASELINE_0,
                 each_rule=Section11Rule8.RMDRule.SWHBATRule(),
                 required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
-                data_items={"is_leap_year": (BASELINE_0, "calendar/is_leap_year")},
             )
 
         def create_data(self, context, data):
             rmd_p = context.PROPOSED
             rmd_b = context.BASELINE_0
-            is_leap_year_b = data["is_leap_year"]
+            is_leap_year_b = rmd_b["calendar"]["is_leap_year"]
 
             num_of_bldg_segment_b = len(
                 find_all("$.buildings[*].building_segments[*]", rmd_b)

@@ -47,13 +47,7 @@ class Section22Rule20(RuleDefinitionListIndexedBase):
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].heat_rejections[*]",
             required_fields={
-                "$": ["ruleset_model_descriptions", "weather"],
-            },
-            data_items={
-                "climate_zone": (
-                    BASELINE_0,
-                    "ruleset_model_descriptions[0]/weather/climate_zone",
-                )
+                "$": ["ruleset_model_descriptions"],
             },
         )
 
@@ -77,6 +71,11 @@ class Section22Rule20(RuleDefinitionListIndexedBase):
                 for available_type in available_type_list
             ]
         )
+
+    def create_data(self, context, data=None):
+        rpd_b = context.BASELINE_0
+        climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
+        return {"climate_zone": climate_zone}
 
     class HeatRejectionRule(RuleDefinitionBase):
         def __init__(self):

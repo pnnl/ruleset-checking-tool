@@ -32,6 +32,7 @@ class Section11Rule17(RuleDefinitionListIndexedBase):
             ruleset_section_title="Service Water Heating",
             standard_section="Table G3.1 #1, proposed column, (a)",
             is_primary_rule=True,
+            list_path="ruleset_model_descriptions[0]",
         )
 
     class RMDRule(RuleDefinitionListIndexedBase):
@@ -43,12 +44,11 @@ class Section11Rule17(RuleDefinitionListIndexedBase):
                 each_rule=Section11Rule17.RMDRule.BuildingSegmentRule(),
                 index_rmd=PROPOSED,
                 list_path="$.buildings[*].building_segments[*]",
-                required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
             )
 
         def create_data(self, context, data):
             rmd_p = context.PROPOSED
-            is_leap_year_p = data["is_leap_year"]
+            is_leap_year_p = rmd_p["calendar"]["is_leap_year"]
 
             swh_bat = {
                 bldg_seg_id: get_building_segment_swh_bat(

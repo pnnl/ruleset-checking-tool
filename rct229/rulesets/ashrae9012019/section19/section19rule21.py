@@ -94,12 +94,12 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                     "$": ["weather"],
                     "weather": ["climate_zone"],
                 },
-                data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
             )
 
         def create_data(self, context, data):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
+            climate_zone = rmd_b["weather"]["climate_zone"]
 
             dict_of_zones_and_terminal_units_served_by_hvac_sys_b = (
                 get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmd_b)
@@ -231,6 +231,7 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                 )
 
             return {
+                "climate_zone": climate_zone,
                 "zone_data": zone_data,
             }
 

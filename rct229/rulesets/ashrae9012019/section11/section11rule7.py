@@ -51,12 +51,12 @@ class Section11Rule7(RuleDefinitionListIndexedBase):
                 index_rmd=BASELINE_0,
                 each_rule=Section11Rule7.RMDRule.SWHBATRule(),
                 required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
-                data_items={"is_leap_year": (BASELINE_0, "calendar/is_leap_year")},
             )
 
         def create_data(self, context, data):
             rmd_p = context.PROPOSED
             rmd_b = context.BASELINE_0
+            is_leap_year_b = rmd_b["calendar"]["is_leap_year"]
 
             service_water_heating_uses_p = {
                 swh_use["id"]: swh_use.get("use", 0.0)
@@ -77,6 +77,7 @@ class Section11Rule7(RuleDefinitionListIndexedBase):
             return {
                 "service_water_heating_uses_p": service_water_heating_uses_p,
                 "swh_equip_type_b": swh_equip_type_b,
+                "is_leap_year_b": is_leap_year_b,
             }
 
         def create_context_list(self, context, data=None):

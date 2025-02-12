@@ -61,7 +61,6 @@ class Section12Rule2(RuleDefinitionListIndexedBase):
                 index_rmd=BASELINE_0,
                 list_path="buildings[*].building_segments[*].zones[*].spaces[*]",
                 required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
-                data_items={"is_leap_year": (BASELINE_0, "calendar/is_leap_year")},
             )
 
         def create_data(self, context, data):
@@ -85,6 +84,7 @@ class Section12Rule2(RuleDefinitionListIndexedBase):
             return {
                 "mis_equip_schedule_b_dict": mis_equip_schedule_b_dict,
                 "mis_equip_schedule_p_dict": mis_equip_schedule_p_dict,
+                "is_leap_year": rmd_b["calendar"]["is_leap_year"],
             }
 
         class SpaceRule(RuleDefinitionListIndexedBase):
