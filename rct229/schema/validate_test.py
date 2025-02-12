@@ -18,7 +18,9 @@ SchemaStore.set_ruleset(RuleSet.ASHRAE9012019_RULESET)
 SchemaEnums.update_schema_enum()
 EXAMPLES_PATH = "examples"
 
-ServiceWaterHeatingUseUnitOptions = SchemaEnums.schema_enums["ServiceWaterHeatingUseUnitOptions"]
+ServiceWaterHeatingUseUnitOptions = SchemaEnums.schema_enums[
+    "ServiceWaterHeatingUseUnitOptions"
+]
 HeatingMetricOptions = SchemaEnums.schema_enums["HeatingMetricOptions"]
 CoolingMetricOptions = SchemaEnums.schema_enums["CoolingMetricOptions"]
 
@@ -152,70 +154,55 @@ TEST_MISMATCHED_LISTS_RMD = {
                                         {
                                             "id": "Space 1",
                                             "service_water_heating_uses": [
-                                                {
-                                                    "id": "SWH Use 1"
-                                                },
+                                                {"id": "SWH Use 1"},
                                             ],
                                         }
-                                    ]
+                                    ],
                                 }
                             ],
                             "heating_ventilating_air_conditioning_systems": [
                                 {
                                     "id": "HVAC 1",
-                                    "preheat_system": {
-                                        "id": "Preheat 1"
-                                    },
-                                    "heating_system": {
-                                        "id": "Heating 1"
-                                    },
-                                    "cooling_system": {
-                                        "id": "Cooling 1"
-                                    },
+                                    "preheat_system": {"id": "Preheat 1"},
+                                    "heating_system": {"id": "Heating 1"},
+                                    "cooling_system": {"id": "Cooling 1"},
                                 }
                             ],
                             "service_water_heating_uses": [
-                                {
-                                    "id": "Typical SWH Use"
-                                },
+                                {"id": "Typical SWH Use"},
                             ],
                         },
                     ],
                 }
             ],
-            "boilers": [
-                {
-                    "id": "Boiler 1"
-                }
-            ],
-            "chillers": [
-                {
-                    "id": "Chiller 1"
-                }
-            ],
-            "service_water_heating_equipment": [
-                {
-                    "id": "SWH Equipment 1"
-                }
-            ],
+            "boilers": [{"id": "Boiler 1"}],
+            "chillers": [{"id": "Chiller 1"}],
+            "service_water_heating_equipment": [{"id": "SWH Equipment 1"}],
         }
     ]
 }
 
 
 def test__non_schema_validate_rpd__missing_associated_swh_use_lists_1():
-    TEST_MISMATCHED_LISTS_RMD["ruleset_model_descriptions"][0]["buildings"][0]["building_segments"][0]["service_water_heating_uses"][0]["use"] = [3]
+    TEST_MISMATCHED_LISTS_RMD["ruleset_model_descriptions"][0]["buildings"][0][
+        "building_segments"
+    ][0]["service_water_heating_uses"][0]["use"] = [3]
     assert non_schema_validate_rpd(TEST_MISMATCHED_LISTS_RMD) == {
         "passed": False,
-        "error": [
-            "'Typical SWH Use' has populated 'use' but is missing 'use_units'."
-        ],
+        "error": ["'Typical SWH Use' has populated 'use' but is missing 'use_units'."],
     }
 
 
 def test__non_schema_validate_rpd__mismatched_associated_swh_use_lists_1():
-    TEST_MISMATCHED_LISTS_RMD["ruleset_model_descriptions"][0]["buildings"][0]["building_segments"][0]["service_water_heating_uses"][0]["use"] = [3, 4, 5]
-    TEST_MISMATCHED_LISTS_RMD["ruleset_model_descriptions"][0]["buildings"][0]["building_segments"][0]["service_water_heating_uses"][0]["use_units"] = [ServiceWaterHeatingUseUnitOptions.POWER, ServiceWaterHeatingUseUnitOptions.VOLUME]
+    TEST_MISMATCHED_LISTS_RMD["ruleset_model_descriptions"][0]["buildings"][0][
+        "building_segments"
+    ][0]["service_water_heating_uses"][0]["use"] = [3, 4, 5]
+    TEST_MISMATCHED_LISTS_RMD["ruleset_model_descriptions"][0]["buildings"][0][
+        "building_segments"
+    ][0]["service_water_heating_uses"][0]["use_units"] = [
+        ServiceWaterHeatingUseUnitOptions.POWER,
+        ServiceWaterHeatingUseUnitOptions.VOLUME,
+    ]
 
     assert non_schema_validate_rpd(TEST_MISMATCHED_LISTS_RMD) == {
         "passed": False,
@@ -226,8 +213,15 @@ def test__non_schema_validate_rpd__mismatched_associated_swh_use_lists_1():
 
 
 def test__non_schema_validate_rpd__mismatched_associated_swh_use_lists_2():
-    TEST_MISMATCHED_LISTS_RMD["ruleset_model_descriptions"][0]["buildings"][0]["building_segments"][0]["zones"][0]["spaces"][0]["service_water_heating_uses"][0]["use"] = [3, 4, 5]
-    TEST_MISMATCHED_LISTS_RMD["ruleset_model_descriptions"][0]["buildings"][0]["building_segments"][0]["zones"][0]["spaces"][0]["service_water_heating_uses"][0]["use_units"] = [ServiceWaterHeatingUseUnitOptions.POWER, ServiceWaterHeatingUseUnitOptions.VOLUME]
+    TEST_MISMATCHED_LISTS_RMD["ruleset_model_descriptions"][0]["buildings"][0][
+        "building_segments"
+    ][0]["zones"][0]["spaces"][0]["service_water_heating_uses"][0]["use"] = [3, 4, 5]
+    TEST_MISMATCHED_LISTS_RMD["ruleset_model_descriptions"][0]["buildings"][0][
+        "building_segments"
+    ][0]["zones"][0]["spaces"][0]["service_water_heating_uses"][0]["use_units"] = [
+        ServiceWaterHeatingUseUnitOptions.POWER,
+        ServiceWaterHeatingUseUnitOptions.VOLUME,
+    ]
 
     assert non_schema_validate_rpd(TEST_MISMATCHED_LISTS_RMD) == {
         "passed": False,
@@ -238,8 +232,21 @@ def test__non_schema_validate_rpd__mismatched_associated_swh_use_lists_2():
 
 
 def test__non_schema_validate_rpd__mismatched_associated_efficiency_lists_1():
-    TEST_MISMATCHED_LISTS_RMD["ruleset_model_descriptions"][0]["buildings"][0]["building_segments"][0]["heating_ventilating_air_conditioning_systems"][0]["preheat_system"]["efficiency_metric_types"] = [HeatingMetricOptions.THERMAL_EFFICIENCY]
-    TEST_MISMATCHED_LISTS_RMD["ruleset_model_descriptions"][0]["buildings"][0]["building_segments"][0]["heating_ventilating_air_conditioning_systems"][0]["preheat_system"]["efficiency_metric_values"] = [0.8, 3.4]
+    TEST_MISMATCHED_LISTS_RMD["ruleset_model_descriptions"][0]["buildings"][0][
+        "building_segments"
+    ][0]["heating_ventilating_air_conditioning_systems"][0]["preheat_system"][
+        "efficiency_metric_types"
+    ] = [
+        HeatingMetricOptions.THERMAL_EFFICIENCY
+    ]
+    TEST_MISMATCHED_LISTS_RMD["ruleset_model_descriptions"][0]["buildings"][0][
+        "building_segments"
+    ][0]["heating_ventilating_air_conditioning_systems"][0]["preheat_system"][
+        "efficiency_metric_values"
+    ] = [
+        0.8,
+        3.4,
+    ]
 
     assert non_schema_validate_rpd(TEST_MISMATCHED_LISTS_RMD) == {
         "passed": False,
@@ -250,8 +257,21 @@ def test__non_schema_validate_rpd__mismatched_associated_efficiency_lists_1():
 
 
 def test__non_schema_validate_rpd__mismatched_associated_efficiency_lists_2():
-    TEST_MISMATCHED_LISTS_RMD["ruleset_model_descriptions"][0]["buildings"][0]["building_segments"][0]["heating_ventilating_air_conditioning_systems"][0]["cooling_system"]["efficiency_metric_types"] = [CoolingMetricOptions.FULL_LOAD_COEFFICIENT_OF_PERFORMANCE]
-    TEST_MISMATCHED_LISTS_RMD["ruleset_model_descriptions"][0]["buildings"][0]["building_segments"][0]["heating_ventilating_air_conditioning_systems"][0]["cooling_system"]["efficiency_metric_values"] = [3.4, 3.2]
+    TEST_MISMATCHED_LISTS_RMD["ruleset_model_descriptions"][0]["buildings"][0][
+        "building_segments"
+    ][0]["heating_ventilating_air_conditioning_systems"][0]["cooling_system"][
+        "efficiency_metric_types"
+    ] = [
+        CoolingMetricOptions.FULL_LOAD_COEFFICIENT_OF_PERFORMANCE
+    ]
+    TEST_MISMATCHED_LISTS_RMD["ruleset_model_descriptions"][0]["buildings"][0][
+        "building_segments"
+    ][0]["heating_ventilating_air_conditioning_systems"][0]["cooling_system"][
+        "efficiency_metric_values"
+    ] = [
+        3.4,
+        3.2,
+    ]
 
     assert non_schema_validate_rpd(TEST_MISMATCHED_LISTS_RMD) == {
         "passed": False,

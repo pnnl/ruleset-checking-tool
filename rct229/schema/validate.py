@@ -51,7 +51,7 @@ def check_associated_list_length(rpd: dict) -> list[str]:
         "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].cooling_system",
         "$.ruleset_model_descriptions[*].boilers[*]",
         "$.ruleset_model_descriptions[*].chillers[*]",
-        "$.ruleset_model_descriptions[*].service_water_heating_equipment[*]"
+        "$.ruleset_model_descriptions[*].service_water_heating_equipment[*]",
     ]
 
     for jsonpath in associated_list_jsonpaths:
@@ -64,13 +64,21 @@ def check_associated_list_length(rpd: dict) -> list[str]:
 
                 if has_key_1 or has_key_2:
                     if not (has_key_1 and has_key_2):  # One key is missing
-                        mismatch_errors.append(f"'{obj['id']}' has populated '{key_1 if has_key_1 else key_2}' but is missing '{key_1 if not has_key_1 else key_2}'.")
+                        mismatch_errors.append(
+                            f"'{obj['id']}' has populated '{key_1 if has_key_1 else key_2}' but is missing '{key_1 if not has_key_1 else key_2}'."
+                        )
                         continue
 
                     # Ensure when both are lists they have the same length
                     val_1, val_2 = obj[key_1], obj[key_2]
-                    if isinstance(val_1, list) and isinstance(val_2, list) and len(val_1) != len(val_2):
-                        mismatch_errors.append(f"'{obj['id']}' lists at '{key_1}' and '{key_2}' are not the same length.")
+                    if (
+                        isinstance(val_1, list)
+                        and isinstance(val_2, list)
+                        and len(val_1) != len(val_2)
+                    ):
+                        mismatch_errors.append(
+                            f"'{obj['id']}' lists at '{key_1}' and '{key_2}' are not the same length."
+                        )
 
     return mismatch_errors
 
