@@ -17,14 +17,14 @@
 
   1. data_lookup()
   2. get_opaque_surface_type()
-  3. get_surface_conditioning_category()
+  3. get_more_stringent_surface_conditioning_category()
   4. get_building_scc_skylight_roof_ratios_dict()
 
 ## Rule Logic:  
 
 - Get RMD climate zone: `climate_zone = ASHRAE229.weather.climate_zone`
 
-- Get surface conditioning category dictionary for B_RMD: `scc_dictionary_b = get_surface_conditioning_category(B_RMD)`
+- Get surface conditioning category dictionary for B_RMD: `scc_dictionary_b = get_more_stringent_surface_conditioning_category(B_RMD, P_RMD)`
 
 - Get window wall ratio ratios dictionary for B_RMD: `get_building_scc_skylight_roof_ratios_dict = get_building_scc_skylight_roof_ratios_dict(B_RMD)`
 
