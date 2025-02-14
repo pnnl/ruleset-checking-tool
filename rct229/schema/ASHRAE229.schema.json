@@ -31,8 +31,7 @@
                 },
                 "data_version": {
                     "description": "Integer version identifier for the data",
-                    "type": "integer",
-                    "minimum": 1,
+                    "type": "string",
                     "notes": "Used by data publisher to track revisions of the data and shall be incremented for each data revision"
                 },
                 "ruleset_model_descriptions": {
@@ -145,6 +144,14 @@
                 "is_measured_infiltration_based_on_test": {
                     "description": "Indicates whether the differential pressure difference used during measurement for infiltration values is based on pressure testing of the building.",
                     "type": "boolean"
+                },
+                "altitude": {
+                    "description": "Altitude of the building at ground level.",
+                    "type": "number",
+                    "exclusiveMinimum": -1000.0,
+                    "exclusiveMaximum": 10000.0,
+                    "units": "m",
+                    "notes": "Altitude of the building site above sea level and used for adjusting airflows. If the altitude is not provided, it is assumed to be zero and airflows are already normalized to sea level."
                 },
                 "fluid_loops": {
                     "description": "Fluid loops on the site",
@@ -2088,12 +2095,12 @@
                     },
                     "notes": "Used for furnace or heat pump."
                 },
-                "heatpump_auxilliary_heat_type": {
-                    "description": "Heatpump auxilliary heat type used for backup",
+                "heatpump_auxiliary_heat_type": {
+                    "description": "Heatpump auxiliary heat type used for backup",
                     "$ref": "ASHRAE229.schema.json#/definitions/HeatpumpAuxilliaryHeatOptions"
                 },
-                "heatpump_auxilliary_heat_high_shutoff_temperature": {
-                    "description": "Heatpump auxilliary heat high temperature shutoff",
+                "heatpump_auxiliary_heat_high_shutoff_temperature": {
+                    "description": "Heatpump auxiliary heat high temperature shutoff",
                     "type": "number",
                     "units": "C"
                 },
@@ -3526,15 +3533,20 @@
                     "description": "Source of energy for the boiler",
                     "$ref": "Output2019ASHRAE901.schema.json#/definitions/EnergySourceOptions"
                 },
-                "efficiency_metric": {
-                    "description": "The type of efficiency metric used",
-                    "$ref": "ASHRAE229.schema.json#/definitions/BoilerEfficiencyMetricOptions"
+                "efficiency_metric_types": {
+                    "description": "List of efficiency metrics that correspond to the values in efficiency_metric_values list",
+                    "type": "array",
+                    "items": {
+                        "$ref": "ASHRAE229.schema.json#/definitions/BoilerEfficiencyMetricOptions"
+                    }
                 },
-                "efficiency": {
-                    "description": "Efficiency value based on the selected efficiency_metric",
-                    "type": "number",
-                    "minimum": 0.0,
-                    "maximum": 1.0
+                "efficiency_metric_values": {
+                    "description": "List of efficiency metric values that correspond to the descriptors in efficiency_metric_types list",
+                    "type": "array",
+                    "items": {
+                        "type": "number",
+                        "minimum": 0.0
+                    }
                 },
                 "output_validation_points": {
                     "description": "Energy validation points",
@@ -4277,6 +4289,11 @@
                     "items": {
                         "$ref": "ASHRAE229.schema.json#/definitions/ServiceWaterPiping"
                     }
+                },
+                "service_water_heating_design_and_control": {
+                    "description": "Design and control used for service heating piping",
+                    "$ref": "ASHRAE229.schema.json#/definitions/FluidLoopDesignAndControl",
+                    "notes": "References a FluidLoopDesignAndControl data group which describes how the service water piping is sized and controlled"
                 }
             },
             "required": [

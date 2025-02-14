@@ -269,6 +269,17 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": "unknown"
       },
+      "altitude": {
+        "Description": "Altitude of the building at ground level.",
+        "Data Type": "Numeric",
+        "Range": ">-1000, <10000",
+        "Units": "m",
+        "RMD Test": true,
+        "AppG Used By TCDs": true,
+        "AppG P_RMD Equals U_RMD": true,
+        "AppG B_RMD Equals P_RMD": true,
+        "AppG B_RMDs Same": "unknown"
+      },
       "fluid_loops": {
         "Description": "Fluid loops on the site",
         "Data Type": "[{FluidLoop}]",
@@ -3308,8 +3319,8 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": "unknown"
       },
-      "heatpump_auxilliary_heat_type": {
-        "Description": "Heatpump auxilliary heat type used for backup",
+      "heatpump_auxiliary_heat_type": {
+        "Description": "Heatpump auxiliary heat type used for backup",
         "Data Type": "<HeatpumpAuxilliaryHeatOptions>",
         "RMD Test": "Primary",
         "AppG Used By TCDs": true,
@@ -3317,8 +3328,8 @@
         "AppG B_RMD Equals P_RMD": false,
         "AppG B_RMDs Same": "unknown"
       },
-      "heatpump_auxilliary_heat_high_shutoff_temperature": {
-        "Description": "Heatpump auxilliary heat high temperature shutoff",
+      "heatpump_auxiliary_heat_high_shutoff_temperature": {
+        "Description": "Heatpump auxiliary heat high temperature shutoff",
         "Data Type": "Numeric",
         "Units": "C",
         "RMD Test": "Primary",
@@ -5544,19 +5555,19 @@
         "AppG B_RMD Equals P_RMD": false,
         "AppG B_RMDs Same": "unknown"
       },
-      "efficiency_metric": {
+      "efficiency_metric_types": {
         "Description": "The type of efficiency metric used",
-        "Data Type": "<BoilerEfficiencyMetricOptions>",
+        "Data Type": "[<BoilerEfficiencyMetricOptions>]",
         "RMD Test": "Primary",
         "AppG Used By TCDs": true,
         "AppG P_RMD Equals U_RMD": true,
         "AppG B_RMD Equals P_RMD": false,
         "AppG B_RMDs Same": "unknown"
       },
-      "efficiency": {
+      "efficiency_metric_values": {
         "Description": "Efficiency value based on the selected efficiency_metric",
-        "Data Type": "Numeric",
-        "Range": ">=0, <=1",
+        "Data Type": "[Numeric]",
+        "Range": ">=0",
         "RMD Test": "Primary",
         "AppG Used By TCDs": true,
         "AppG P_RMD Equals U_RMD": true,
@@ -6718,6 +6729,17 @@
         "AppG 11-1 P_RMD Equals U_RMD": true,
         "AppG 11-3 P_RMD Equals B_RMD": true
       },
+      "are_thermal_losses_modeled": {
+        "Description": "Indicates if thermal losses from the service water heating piping are modeled",
+        "Data Type": "Boolean",
+        "RMD Test": "unknown",
+        "AppG Used By TCDs": "unknown",
+        "AppG P_RMD Equals U_RMD": "unknown",
+        "AppG B_RMD Equals P_RMD": "unknown",
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
+      },
       "insulation_thickness": {
         "Description": "Pipe insulation thickness",
         "Data Type": "Numeric",
@@ -6794,6 +6816,18 @@
         "AppG B_RMDs Same": "unknown",
         "AppG 11-1 P_RMD Equals U_RMD": true,
         "AppG 11-3 P_RMD Equals B_RMD": true
+      },
+      "service_water_heating_design_and_control": {
+        "Description": "Design and control used for service heating piping",
+        "Data Type": "{FluidLoopDesignAndControl}",
+        "Notes": "References a FluidLoopDesignAndControl data group which describes how the service water piping is sized and controlled",
+        "RMD Test": "unknown",
+        "AppG Used By TCDs": "unknown",
+        "AppG P_RMD Equals U_RMD": "unknown",
+        "AppG B_RMD Equals P_RMD": "unknown",
+        "AppG B_RMDs Same": "unknown",
+        "AppG 11-1 P_RMD Equals U_RMD": false,
+        "AppG 11-3 P_RMD Equals B_RMD": false
       }
     }
   },
@@ -6971,55 +7005,23 @@
         "AppG 11-1 P_RMD Equals U_RMD": true,
         "AppG 11-3 P_RMD Equals B_RMD": true
       },
-      "energy_factor": {
-        "Description": "Energy factor",
-        "Data Type": "Numeric",
-        "Range": ">=0",
-        "Notes": "From CBECC-Com.",
+      "efficiency_metric_types": {
+        "Description": "List of efficiency metrics that correspond to the values in efficiency_metric_values list",
+        "Data Type": "[<ServiceWaterHeatingEfficiencyMetricOptions>]",
         "RMD Test": "unknown",
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown",
-        "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG B_RMDs Same": "unknown"
       },
-      "thermal_efficiency": {
-        "Description": "Service water heating heater thermal efficiency",
-        "Data Type": "Numeric",
-        "Range": ">=0",
+      "efficiency_metric_values": {
+        "Description": "List of efficiency metric values that correspond to the descriptors in efficiency_metric_types list",
+        "Data Type": "[Numeric]",
         "RMD Test": "unknown",
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown",
-        "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
-      },
-      "standby_loss_fraction": {
-        "Description": "Standby loss fraction",
-        "Data Type": "Numeric",
-        "Notes": "From CBECC-Com.",
-        "RMD Test": "unknown",
-        "AppG Used By TCDs": "unknown",
-        "AppG P_RMD Equals U_RMD": "unknown",
-        "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown",
-        "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
-      },
-      "uniform_energy_factor": {
-        "Description": "Uniform energy factor",
-        "Data Type": "Numeric",
-        "Range": ">=0",
-        "Notes": "From CBECC-Com.",
-        "RMD Test": "unknown",
-        "AppG Used By TCDs": "unknown",
-        "AppG P_RMD Equals U_RMD": "unknown",
-        "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown",
-        "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG B_RMDs Same": "unknown"
       },
       "first_hour_rating": {
         "Description": "First hour rating volume",
