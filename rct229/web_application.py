@@ -11,7 +11,6 @@ from rct229.ruletest_engine.ruletest_jsons.scripts.excel_to_test_json_utilities 
 from rct229.ruletest_engine.run_ruletests import (
     generate_ashrae9012019_software_test_report,
 )
-from rct229.rulesets.ashrae9012019 import rules_dict
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.schema.schema_store import SchemaStore
 from rct229.utils.assertions import assert_
@@ -47,14 +46,9 @@ def count_number_of_rules(ruleset_standard):
     count_dict = {}
 
     for rule_definition_tuple in available_rule_definitions:
-        section_rule_name = rules_dict.get(rule_definition_tuple[0].lower())
 
-        if section_rule_name is None:
-            print(f"Rule {rule_definition_tuple[0]} not found in rules_dict")
-            continue
-
-        # Parse section name from section{N}rule{N}, then add it to the dictionary count
-        section_name = section_rule_name.split("rule")[0].lower()
+        # Parse section name from Section{N}Rule{N}, then add it to the dictionary count
+        section_name = rule_definition_tuple[0].split("Rule")[0].lower()
         count_dict[section_name] = count_dict.get(section_name, 0) + 1
 
     # Get total number of rules
