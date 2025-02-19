@@ -108,7 +108,7 @@ class Section22Rule22(RuleDefinitionListIndexedBase):
                         efficiency_metric_types_b, efficiency_metric_values_b
                     )
                     if metric
-                    == CHILLER_EFFICIENCY_METRIC_TYPES.FULL_LOAD_EFFICIENCY_DESIGN
+                    == CHILLER_EFFICIENCY_METRIC_TYPES.FULL_LOAD_EFFICIENCY_RATED
                 ),
                 None,
             )
