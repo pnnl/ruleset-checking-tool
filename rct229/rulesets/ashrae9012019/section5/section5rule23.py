@@ -2,15 +2,6 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
-from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.std_comparisons import std_equal
-
-MANUAL_CHECK_MSG = "Surface in P-RMD has subsurfaces modeled with different manual shade status. Verify if subsurfaces manual shade status in B-RMD are modeled the same as in P-RMD"
-
-# Json path for subsurfaces with has_manual_interior_shades set to True
-MANUALLY_SHADED_SUBSURFACES_JSON = (
-    "$.subsurfaces[*][?(@.has_manual_interior_shades=true)]"
-)
 
 
 class Section5Rule23(RuleDefinitionListIndexedBase):
@@ -37,11 +28,15 @@ class Section5Rule23(RuleDefinitionListIndexedBase):
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
-                # Make sure surfaces are matched in SurfaceRule
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
                 each_rule=Section5Rule23.BuildingRule.SurfaceRule(),
                 index_rmd=BASELINE_0,
             )
+
+        def list_filter(self, context_item, data):
+            surface_b = context_item.BASELINE_0
+            subsurfaces_b = surface_b.get("subsurfaces", [])
+            return len(subsurfaces_b) > 0
 
         class SurfaceRule(RuleDefinitionListIndexedBase):
             def __init__(self):
@@ -51,38 +46,8 @@ class Section5Rule23(RuleDefinitionListIndexedBase):
                     ),
                     each_rule=Section5Rule23.BuildingRule.SurfaceRule.SubsurfaceRule(),
                     index_rmd=BASELINE_0,
-                    # Make sure subsurfaces are matched
-                    # List_path will be evaluated after manual check
                     list_path="subsurfaces[*]",
-                    manual_check_required_msg=MANUAL_CHECK_MSG,
                 )
-
-            def manual_check_required(self, context, calc_vals=None, data=None):
-                surface_p = context.PROPOSED
-                subsurfaces_p = find_all("$.subsurfaces[*]", surface_p)
-                subsurfaces_with_manual_interior_shades_p = find_all(
-                    MANUALLY_SHADED_SUBSURFACES_JSON, surface_p
-                )
-
-                return len(subsurfaces_with_manual_interior_shades_p) != 0 and len(
-                    subsurfaces_with_manual_interior_shades_p
-                ) != len(subsurfaces_p)
-
-            def create_data(self, context, data=None):
-                surface_p = context.PROPOSED
-                subsurfaces_with_manual_interior_shades_p = find_all(
-                    MANUALLY_SHADED_SUBSURFACES_JSON, surface_p
-                )
-                # None - if no subsurfaces, then the code wont evaluate the subsurface rule
-                return {
-                    "proposed_subsurface_manual_shade": subsurfaces_with_manual_interior_shades_p[
-                        0
-                    ][
-                        "has_manual_interior_shades"
-                    ]
-                    if subsurfaces_with_manual_interior_shades_p
-                    else None,
-                }
 
             class SubsurfaceRule(RuleDefinitionBase):
                 def __init__(self):
@@ -97,9 +62,10 @@ class Section5Rule23(RuleDefinitionListIndexedBase):
 
                 def get_calc_vals(self, context, data=None):
                     subsurface_b = context.BASELINE_0
+                    subsurface_p = context.PROPOSED
                     return {
-                        "subsurface_p_manual_shade": data[
-                            "proposed_subsurface_manual_shade"
+                        "subsurface_p_manual_shade": subsurface_p[
+                            "has_manual_interior_shades"
                         ],
                         "subsurface_b_manual_shade": subsurface_b[
                             "has_manual_interior_shades"
