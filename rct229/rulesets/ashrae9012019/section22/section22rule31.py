@@ -43,7 +43,7 @@ class Section22Rule31(RuleDefinitionBase):
             is_primary_rule=True,
             rmd_context="ruleset_model_descriptions/0",
             required_fields={
-                "$": ["output"],
+                "$": ["model_output"],
             },
             precision={
                 "building_peak_load_b": {
@@ -73,7 +73,7 @@ class Section22Rule31(RuleDefinitionBase):
         rmd_b = context.BASELINE_0
         chiller_number = len(rmd_b["chillers"])
 
-        output_b = rmd_b["output"]
+        output_b = rmd_b["model_output"]
         building_peak_load_b = getattr_(
             output_b,
             "building_peak_cooling_load",
