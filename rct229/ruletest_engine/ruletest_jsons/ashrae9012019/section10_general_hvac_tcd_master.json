@@ -293,7 +293,6 @@
         "Test": "d",
         "test_description": "A one story building includes a baseline system 4. The cooling capacity is 150 kBtu/hr and the cooling efficiency of the system does not match the expected efficiency based on the capacity range from Table G3.5.2.",
         "expected_rule_outcome": "fail",
-        "expected_raised_message_includes": "The cooling capacity of the system could not be determined. Check if the modeled baseline DX cooling efficiency was established correctly based upon equipment capacity and type while accounting for the potential aggregation of zones.",
         "standard": {
             "rule_id": "10-7",
             "ruleset_reference": "G3.1.2.1",

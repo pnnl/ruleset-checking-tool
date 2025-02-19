@@ -18,11 +18,10 @@
         "rmd_transformations": {
             "user": {
                 "id": "ASHRAE229",
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
-                        "output": {
+                        "model_output": {
                             "id": "Output 1",
                             "output_instance": {
                                 "id": "Output Instance 1",
@@ -88,11 +87,10 @@
             },
             "proposed": {
                 "id": "ASHRAE229",
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
-                        "output": {
+                        "model_output": {
                             "id": "Output 1",
                             "output_instance": {
                                 "id": "Output Instance 1",
@@ -158,11 +156,10 @@
             },
             "baseline": {
                 "id": "ASHRAE229",
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
-                        "output": {
+                        "model_output": {
                             "id": "Output 1",
                             "output_instance": {
                                 "id": "Output Instance 1",
@@ -226,7 +223,7 @@
                     },
                     {
                         "id": "RMD 1",
-                        "output": {
+                        "model_output": {
                             "id": "Output 1",
                             "output_instance": {
                                 "id": "Output Instance 1",
@@ -290,7 +287,7 @@
                     },
                     {
                         "id": "RMD 1",
-                        "output": {
+                        "model_output": {
                             "id": "Output 1",
                             "output_instance": {
                                 "id": "Output Instance 1",
@@ -354,7 +351,7 @@
                     },
                     {
                         "id": "RMD 1",
-                        "output": {
+                        "model_output": {
                             "id": "Output 1",
                             "output_instance": {
                                 "id": "Output Instance 1",
@@ -439,11 +436,10 @@
         "rmd_transformations": {
             "user": {
                 "id": "ASHRAE229",
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
-                        "output": {
+                        "model_output": {
                             "id": "Output 1",
                             "output_instance": {
                                 "id": "Output Instance 1",
@@ -509,11 +505,10 @@
             },
             "proposed": {
                 "id": "ASHRAE229",
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
-                        "output": {
+                        "model_output": {
                             "id": "Output 1",
                             "output_instance": {
                                 "id": "Output Instance 1",
@@ -579,11 +574,10 @@
             },
             "baseline": {
                 "id": "ASHRAE229",
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
-                        "output": {
+                        "model_output": {
                             "id": "Output 1",
                             "output_instance": {
                                 "id": "Output Instance 1",
@@ -668,11 +662,10 @@
         "rmd_transformations": {
             "user": {
                 "id": "ASHRAE229",
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
-                        "output": {
+                        "model_output": {
                             "id": "Output 1",
                             "output_instance": {
                                 "id": "Output Instance 1",
@@ -738,11 +731,10 @@
             },
             "proposed": {
                 "id": "ASHRAE229",
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
-                        "output": {
+                        "model_output": {
                             "id": "Output 1",
                             "output_instance": {
                                 "id": "Output Instance 1",
@@ -808,11 +800,10 @@
             },
             "baseline": {
                 "id": "ASHRAE229",
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
-                        "output": {
+                        "model_output": {
                             "id": "Output 1",
                             "output_instance": {
                                 "id": "Output Instance 1",
