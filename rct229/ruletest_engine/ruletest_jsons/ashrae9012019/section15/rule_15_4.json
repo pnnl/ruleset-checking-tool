@@ -3,20 +3,20 @@
         "Section": 15,
         "Rule": 4,
         "Test": "a",
-        "test_description": "User RMR transformer name is in the Baseline RMR",
+        "test_description": "User RMD transformer name is in the Baseline RMD",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "15-4",
             "ruleset_reference": "-",
-            "rule_description": "User RMR transformer Name in Baseline RMR? ",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "User RMD transformer Name in Baseline RMD? ",
+            "applicable_RMD": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "User RMR Transformer Count > 0",
+            "rule_dependency": "User RMD Transformer Count > 0",
             "mandatory_rule": 0,
-            "schema_version": "0.0.29"
+            "schema_version": "0.1.3"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "user": {
                 "id": "ashrae229",
                 "ruleset_model_descriptions": [
@@ -57,20 +57,20 @@
         "Section": 15,
         "Rule": 4,
         "Test": "b",
-        "test_description": "User RMR transformer name is not in the Baseline RMR",
+        "test_description": "User RMD transformer name is not in the Baseline RMD",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "15-4",
             "ruleset_reference": "-",
-            "rule_description": "User RMR transformer Name in Baseline RMR? ",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "User RMD transformer Name in Baseline RMD? ",
+            "applicable_RMD": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "User RMR Transformer Count > 0",
+            "rule_dependency": "User RMD Transformer Count > 0",
             "mandatory_rule": 0,
-            "schema_version": "0.0.29"
+            "schema_version": "0.1.3"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "user": {
                 "id": "ashrae229",
                 "ruleset_model_descriptions": [

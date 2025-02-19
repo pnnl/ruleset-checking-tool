@@ -5354,7 +5354,7 @@
         "Section": 23,
         "Rule": 16,
         "Test": "b",
-        "test_description": "The project has one building segment with two zones served by baseline system type 7. The preheat coil is incorrectly controled to only 13 F less than the design room heating temperature setpoint.",
+        "test_description": "The project has one building segment with two zones served by baseline system type 7. The preheat coil is incorrectly controlled to only 13 F less than the design room heating temperature setpoint.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "23-16",
@@ -5419,7 +5419,7 @@
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
-                                                    "type": "ELECTRIC_RESISTANCE",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1",
                                                     "heating_coil_setpoint": 12.777777777777828
                                                 },

@@ -6969,7 +6969,7 @@
                                                                 "id": "SubSurface 1",
                                                                 "classification": "WINDOW",
                                                                 "u_factor": 3.2366105565544463,
-                                                                "glazed_area": 2.7870912,
+                                                                "glazed_area": 5.5741824,
                                                                 "opaque_area": 7.432243199999999
                                                             }
                                                         ],
@@ -6988,7 +6988,7 @@
                                                                 "id": "SubSurface 2",
                                                                 "classification": "WINDOW",
                                                                 "u_factor": 3.2366105565544463,
-                                                                "glazed_area": 2.7870912,
+                                                                "glazed_area": 5.5741824,
                                                                 "opaque_area": 7.432243199999999
                                                             }
                                                         ],
