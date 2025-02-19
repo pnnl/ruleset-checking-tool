@@ -59,10 +59,21 @@ def get_swh_equipment_type(rmd: dict, service_water_heating_equipment_id: str) -
         "tank",
         "type",
     )
-    swh_type = getattr_(
-        service_water_heating_equipment,
-        "service_water_heating_equipment",
-        "heater_type",
+    compressor_heat_rejection_source = service_water_heating_equipment.get(
+        "compressor_heat_rejection_source"
+    )
+    compressor_capacity_validation_points = service_water_heating_equipment.get(
+        "compressor_capacity_validation_points"
+    )
+    compressor_power_validation_points = service_water_heating_equipment.get(
+        "compressor_power_validation_points"
+    )
+    swh_type = (
+        "CONVENTIONAL"
+        if not compressor_heat_rejection_source
+        and not compressor_capacity_validation_points
+        and not compressor_power_validation_points
+        else "HEAT PUMP"
     )
     fuel_type = getattr_(
         service_water_heating_equipment,
@@ -81,7 +92,7 @@ def get_swh_equipment_type(rmd: dict, service_water_heating_equipment_id: str) -
         "Fuel type must be one of `ELECTRICITY`, `NATURAL_GAS`, `PROPANE`, `FUEL_OIL`.",
     )
 
-    if swh_type == SERVICE_WATER_HEATER.CONVENTIONAL:
+    if swh_type == "CONVENTIONAL":
         if swh_tank_type in INSTANTANEOUS_TYPE:
             if fuel_type == ENERGY_SOURCE.ELECTRICITY:
                 type = GetSWHEquipmentType.ELECTRIC_RESISTANCE_INSTANTANEOUS
