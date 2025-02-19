@@ -3,7 +3,6 @@ from rct229.utils.assertions import assert_, getattr_
 from rct229.utils.jsonpath_utils import find_exactly_one_with_field_value
 
 SERVICE_WATER_HEATER_TANK = SchemaEnums.schema_enums["ServiceWaterHeaterTankOptions"]
-SERVICE_WATER_HEATER = SchemaEnums.schema_enums["ServiceWaterHeaterOptions"]
 ENERGY_SOURCE = SchemaEnums.schema_enums["EnergySourceOptions"]
 
 INSTANTANEOUS_TYPE = [
