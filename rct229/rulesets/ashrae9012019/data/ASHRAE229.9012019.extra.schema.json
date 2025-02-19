@@ -137,24 +137,6 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": "unknown"
       },
-      "calendar": {
-        "Description": "Information on the calendar used with the simulation.",
-        "Data Type": "{Calendar}",
-        "RMD Test": false,
-        "AppG Used By TCDs": true,
-        "AppG P_RMD Equals U_RMD": true,
-        "AppG B_RMD Equals P_RMD": true,
-        "AppG B_RMDs Same": "unknown"
-      },
-      "weather": {
-        "Description": "Information on the local weather conditions used with the simulation.",
-        "Data Type": "{Weather}",
-        "RMD Test": "secondary",
-        "AppG Used By TCDs": true,
-        "AppG P_RMD Equals U_RMD": true,
-        "AppG B_RMD Equals P_RMD": true,
-        "AppG B_RMDs Same": "unknown"
-      },
       "compliance_path": {
         "Description": "Indicates the chosen compliance path if the ruleset has multiple compliance paths such as 90.1 Appendix G has code compliance and beyond code",
         "Data Type": "<CompliancePathOptions2019ASHRAE901>",
@@ -350,6 +332,24 @@
         "Data Type": "<ExteriorLightingZoneOptions2019ASHRAE901>",
         "Notes": "The site designation type for exterior lighting classification.",
         "RMD Test": false,
+        "AppG Used By TCDs": true,
+        "AppG P_RMD Equals U_RMD": true,
+        "AppG B_RMD Equals P_RMD": true,
+        "AppG B_RMDs Same": "unknown"
+      },
+      "calendar": {
+        "Description": "Information on the calendar used with the simulation.",
+        "Data Type": "{Calendar}",
+        "RMD Test": false,
+        "AppG Used By TCDs": true,
+        "AppG P_RMD Equals U_RMD": true,
+        "AppG B_RMD Equals P_RMD": true,
+        "AppG B_RMDs Same": "unknown"
+      },
+      "weather": {
+        "Description": "Information on the local weather conditions used with the simulation.",
+        "Data Type": "{Weather}",
+        "RMD Test": "secondary",
         "AppG Used By TCDs": true,
         "AppG P_RMD Equals U_RMD": true,
         "AppG B_RMD Equals P_RMD": true,
