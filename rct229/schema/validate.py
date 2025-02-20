@@ -439,7 +439,7 @@ def non_schema_validate_rpd(rmd_obj):
             f"Cannot find service water heating {mismatch_service_water_heating_errors} in the ServiceWaterHeatingDistributionSystems data group."
         )
 
-    return {"passed": passed, "error": error if error else None}
+    return {"passed": passed, "errors": error if error else None}
 
 
 def schema_validate_rpd(rpd):

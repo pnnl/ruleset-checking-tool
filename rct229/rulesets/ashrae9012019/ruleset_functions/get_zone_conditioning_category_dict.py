@@ -43,10 +43,7 @@ GET_ZONE_CONDITIONING_CATEGORY_DICT__REQUIRED_FIELDS = {
         ],
         "building_segments[*].zones[*].surfaces[*].subsurfaces[*]": [
             "u_factor",
-        ],
-        "building_segments[*].zones[*].terminals[*]": [
-            "served_by_heating_ventilating_air_conditioning_system"
-        ],
+        ]
     }
 }
 
@@ -125,7 +122,7 @@ def get_zone_conditioning_category_dict(
                 ]
                 if assert_(
                     hvac_systems_dict.get(hvac_sys_id),
-                    f"HVAC system {hvac_sys_id} is missing in the HeatingVentilatingAiConditioningSystems data group.",
+                    f"HVAC system {hvac_sys_id} is missing in the HeatingVentilatingAirConditioningSystems data group.",
                 )
                 and find_one(
                     "$.cooling_system.design_sensible_cool_capacity",
@@ -146,7 +143,7 @@ def get_zone_conditioning_category_dict(
                 hvac_systems_dict[hvac_sys_id]["heating_system"]["design_capacity"]
                 if assert_(
                     hvac_systems_dict.get(hvac_sys_id),
-                    f"HVAC system {hvac_sys_id} is missing in the HeatingVentilatingAiConditioningSystems data group.",
+                    f"HVAC system {hvac_sys_id} is missing in the HeatingVentilatingAirConditioningSystems data group.",
                 )
                 and find_one(
                     "$.heating_system.design_capacity", hvac_systems_dict[hvac_sys_id]
@@ -158,7 +155,7 @@ def get_zone_conditioning_category_dict(
                 hvac_systems_dict[hvac_sys_id]["preheat_system"]["design_capacity"]
                 if assert_(
                     hvac_systems_dict.get(hvac_sys_id),
-                    f"HVAC system {hvac_sys_id} is missing in the HeatingVentilatingAiConditioningSystems data group.",
+                    f"HVAC system {hvac_sys_id} is missing in the HeatingVentilatingAirConditioningSystems data group.",
                 )
                 and find_one(
                     "$.preheat_system.design_capacity", hvac_systems_dict[hvac_sys_id]
@@ -192,9 +189,11 @@ def get_zone_conditioning_category_dict(
         for terminal in find_all("terminals[*]", zone):
             # Note: there is only one hvac system even though the field name is plural
             # This will change to singular in schema version 0.0.8
-            hvac_sys_id = terminal[
+            hvac_sys_id = terminal.get(
                 "served_by_heating_ventilating_air_conditioning_system"
-            ]
+            )
+            if not hvac_sys_id:
+                continue
 
             # Add cooling and heating capacites for the terminal
             zone_capacity["sensible_cooling"] += hvac_cool_capacity_dict.get(
