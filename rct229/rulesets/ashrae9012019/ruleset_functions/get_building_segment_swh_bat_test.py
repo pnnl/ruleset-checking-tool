@@ -66,6 +66,7 @@ TEST_RMD = {
                                             "id": "service water heating uses 3_1",
                                             "use": 5,
                                             "use_units": "OTHER",
+                                            "served_by_distribution_system": "SWH Distribution 1",
                                         },
                                     ],
                                 },

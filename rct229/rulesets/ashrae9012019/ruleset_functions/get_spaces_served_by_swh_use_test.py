@@ -18,15 +18,30 @@ TEST_RMD = {
                             "spaces": [
                                 {
                                     "id": "Space 1",
-                                    "service_water_heating_uses": [{"id": "SWH use 1"}],
+                                    "service_water_heating_uses": [
+                                        {
+                                            "id": "SWH use 1",
+                                            "served_by_distribution_system": "SWH Distribution 1",
+                                        }
+                                    ],
                                 },
                                 {
                                     "id": "Space 2",
-                                    "service_water_heating_uses": [{"id": "SWH use 1"}],
+                                    "service_water_heating_uses": [
+                                        {
+                                            "id": "SWH use 1",
+                                            "served_by_distribution_system": "SWH Distribution 1",
+                                        },
+                                    ],
                                 },
                                 {
                                     "id": "Space 3",
-                                    "service_water_heating_uses": [{"id": "SWH use 2"}],
+                                    "service_water_heating_uses": [
+                                        {
+                                            "id": "SWH use 2",
+                                            "served_by_distribution_system": "SWH Distribution 1",
+                                        }
+                                    ],
                                 },
                                 {
                                     "id": "Space 4",
@@ -39,6 +54,11 @@ TEST_RMD = {
         }
     ],
     "type": "BASELINE_0",
+    "service_water_heating_distribution_systems": [
+        {
+            "id": "SWH Distribution 1",
+        }
+    ],
 }
 
 TEST_RPD_FULL = {
