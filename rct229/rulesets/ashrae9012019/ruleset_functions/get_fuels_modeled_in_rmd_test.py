@@ -68,14 +68,6 @@ TEST_RPD_NG_ELEC = {
             "type": "BASELINE_0",
         }
     ],
-    "metadata": {
-        "schema_author": "ASHRAE SPC 229 Schema Working Group",
-        "schema_name": "Ruleset Evaluation Schema",
-        "schema_version": "0.1.3",
-        "author": "author_example",
-        "description": "description_example",
-        "time_of_creation": "2024-02-12T09:00Z",
-    },
 }
 
 
@@ -143,14 +135,6 @@ TEST_RPD_PROPANE_NG_ELEC = {
             "type": "BASELINE_0",
         }
     ],
-    "metadata": {
-        "schema_author": "ASHRAE SPC 229 Schema Working Group",
-        "schema_name": "Ruleset Evaluation Schema",
-        "schema_version": "0.1.3",
-        "author": "author_example",
-        "description": "description_example",
-        "time_of_creation": "2024-02-12T09:00Z",
-    },
 }
 
 
@@ -225,14 +209,6 @@ TEST_RPD_ALL_ENERGY_SOURCE = {
             "type": "BASELINE_0",
         }
     ],
-    "metadata": {
-        "schema_author": "ASHRAE SPC 229 Schema Working Group",
-        "schema_name": "Ruleset Evaluation Schema",
-        "schema_version": "0.1.3",
-        "author": "author_example",
-        "description": "description_example",
-        "time_of_creation": "2024-02-12T09:00Z",
-    },
 }
 
 
