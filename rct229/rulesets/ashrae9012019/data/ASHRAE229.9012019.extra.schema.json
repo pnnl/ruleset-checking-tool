@@ -115,12 +115,6 @@
         "AppG B_RMD Equals P_RMD": false,
         "AppG B_RMDs Same": "unknown"
       },
-      "time_of_creation": {
-        "Description": "Date and time of data publication",
-        "Data Type": "Timestamp",
-        "Required": true,
-        "Notes": "Date and time of publication of the data"
-      },
       "data_version": {
         "Description": "Integer version identifier for the data",
         "Data Type": "Integer",
@@ -137,6 +131,15 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": "unknown"
       },
+      "metadata": {
+        "description": "Metadata",
+        "Data Type": "{Metadata}",
+        "RMD Test": "unknown",
+        "AppG Used By TCDs": "unknown",
+        "AppG P_RMD Equals U_RMD": "unknown",
+        "AppG B_RMD Equals P_RMD": "unknown",
+        "AppG B_RMDs Same": "unknown"
+            },
       "compliance_path": {
         "Description": "Indicates the chosen compliance path if the ruleset has multiple compliance paths such as 90.1 Appendix G has code compliance and beyond code",
         "Data Type": "<CompliancePathOptions2019ASHRAE901>",
@@ -366,6 +369,131 @@
       }
     }
   },
+  "Metadata": {
+    "Object Type": "Data Group",
+    "Data Elements": {
+      "id": {
+        "Description": "Unique data set identifier",
+        "Data Type": "ID",
+        "Required": true,
+        "RMD Test": "Secondary",
+        "AppG Used By TCDs": true,
+        "AppG P_RMD Equals U_RMD": true,
+        "AppG B_RMD Equals P_RMD": true,
+        "AppG B_RMDs Same": "unknown"
+      },
+      "schema_author": {
+        "Description": "Name of the organization that published the schema",
+        "Data Type": "string",
+        "Required": true,
+        "RMD Test": "Secondary",
+        "AppG Used By TCDs": false,
+        "AppG P_RMD Equals U_RMD": true,
+        "AppG B_RMD Equals P_RMD": true,
+        "AppG B_RMDs Same": "unknown"
+      },
+      "schema_name": {
+        "Description": "Schema name or identifier",
+        "Data Type": "string",
+        "Required": false,
+        "RMD Test": "Secondary",
+        "AppG Used By TCDs": false,
+        "AppG P_RMD Equals U_RMD": true,
+        "AppG B_RMD Equals P_RMD": true,
+        "AppG B_RMDs Same": "unknown"
+      },
+      "schema_version": {
+        "Description": "The version of the schema the data complies with",
+        "Data Type": "string",
+        "Required": true,
+        "RMD Test": "Secondary",
+        "AppG Used By TCDs": false,
+        "AppG P_RMD Equals U_RMD": true,
+        "AppG B_RMD Equals P_RMD": true,
+        "AppG B_RMDs Same": "unknown"
+      },
+      "schema_url": {
+        "Description": "The Uniform Resource Locator (url) for the schema definition and/or documentation",
+        "Data Type": "string",
+        "Required": false,
+        "RMD Test": "Secondary",
+        "AppG Used By TCDs": false,
+        "AppG P_RMD Equals U_RMD": true,
+        "AppG B_RMD Equals P_RMD": true,
+        "AppG B_RMDs Same": "unknown"
+      },
+      "author": {
+        "Description": "Name of the entity creating the serialization",
+        "Data Type": "string",
+        "Required": true,
+        "RMD Test": "Secondary",
+        "AppG Used By TCDs": false,
+        "AppG P_RMD Equals U_RMD": true,
+        "AppG B_RMD Equals P_RMD": true,
+        "AppG B_RMDs Same": "unknown"
+      },
+      "description": {
+        "Description": "Description of data content (suitable for display)",
+        "Data Type": "string",
+        "Required": true,
+        "RMD Test": "Secondary",
+        "AppG Used By TCDs": false,
+        "AppG P_RMD Equals U_RMD": true,
+        "AppG B_RMD Equals P_RMD": true,
+        "AppG B_RMDs Same": "unknown"
+      },
+      "time_of_creation": {
+        "Description": "Timestamp indicating when the serialization was created",
+        "Data Type": "{Timestamp}",
+        "Required": true,
+        "RMD Test": "Secondary",
+        "AppG Used By TCDs": false,
+        "AppG P_RMD Equals U_RMD": true,
+        "AppG B_RMD Equals P_RMD": true,
+        "AppG B_RMDs Same": "unknown"
+      },
+      "version": {
+        "Description": "Integer version identifier for the data",
+        "Data Type": "integer",
+        "Required": false,
+        "RMD Test": "Secondary",
+        "AppG Used By TCDs": false,
+        "AppG P_RMD Equals U_RMD": true,
+        "AppG B_RMD Equals P_RMD": true,
+        "AppG B_RMDs Same": "unknown"
+      },
+      "source": {
+        "Description": "Source(s) of the data",
+        "Data Type": "string",
+        "Required": false,
+        "RMD Test": "Secondary",
+        "AppG Used By TCDs": false,
+        "AppG P_RMD Equals U_RMD": true,
+        "AppG B_RMD Equals P_RMD": true,
+        "AppG B_RMDs Same": "unknown"
+      },
+      "disclaimer": {
+        "Description": "Characterization of accuracy, limitations, and applicability of this data",
+        "Data Type": "string",
+        "Required": false,
+        "RMD Test": "Secondary",
+        "AppG Used By TCDs": false,
+        "AppG P_RMD Equals U_RMD": true,
+        "AppG B_RMD Equals P_RMD": true,
+        "AppG B_RMDs Same": "unknown"
+      },
+      "notes": {
+        "Description": "Additional Information",
+        "Data Type": "string",
+        "Required": false,
+        "RMD Test": "Secondary",
+        "AppG Used By TCDs": false,
+        "AppG P_RMD Equals U_RMD": true,
+        "AppG B_RMD Equals P_RMD": true,
+        "AppG B_RMDs Same": "unknown"
+      }
+    }
+},
   "Building": {
     "Object Type": "Data Group",
     "Data Elements": {
