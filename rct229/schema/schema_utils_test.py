@@ -55,5 +55,4 @@ def test__quantify_rmd():
                 "type": "BASELINE_0",
             },
         ],
-        "data_timestamp": "2024-02-12T09:00Z",
     }
