@@ -728,7 +728,6 @@ TEST_RMD_B_G311G = {
 TEST_RMD_B_FULL_G311B = {
     "id": "229",
     "ruleset_model_descriptions": [TEST_RMD_B_G311B],
-    "time_of_creation": "2024-02-12T09:00Z",
 }
 TEST_RMD_B_UNIT_G311B = quantify_rmd(TEST_RMD_B_FULL_G311B)[
     "ruleset_model_descriptions"
@@ -737,7 +736,6 @@ TEST_RMD_B_UNIT_G311B = quantify_rmd(TEST_RMD_B_FULL_G311B)[
 TEST_RMD_B_FULL_G311C = {
     "id": "229",
     "ruleset_model_descriptions": [TEST_RMD_B_G311C],
-    "time_of_creation": "2024-02-12T09:00Z",
 }
 TEST_RMD_B_UNIT_G311C = quantify_rmd(TEST_RMD_B_FULL_G311C)[
     "ruleset_model_descriptions"
@@ -746,7 +744,6 @@ TEST_RMD_B_UNIT_G311C = quantify_rmd(TEST_RMD_B_FULL_G311C)[
 TEST_RMD_B_FULL_G311D = {
     "id": "229",
     "ruleset_model_descriptions": [TEST_RMD_B_G311D],
-    "time_of_creation": "2024-02-12T09:00Z",
 }
 TEST_RMD_B_UNIT_G311D = quantify_rmd(TEST_RMD_B_FULL_G311D)[
     "ruleset_model_descriptions"
@@ -755,7 +752,6 @@ TEST_RMD_B_UNIT_G311D = quantify_rmd(TEST_RMD_B_FULL_G311D)[
 TEST_RMD_B_FULL_G311E = {
     "id": "229",
     "ruleset_model_descriptions": [TEST_RMD_B_G311E],
-    "time_of_creation": "2024-02-12T09:00Z",
 }
 TEST_RMD_B_UNIT_G311E = quantify_rmd(TEST_RMD_B_FULL_G311E)[
     "ruleset_model_descriptions"
@@ -764,7 +760,6 @@ TEST_RMD_B_UNIT_G311E = quantify_rmd(TEST_RMD_B_FULL_G311E)[
 TEST_RMD_B_FULL_G311F = {
     "id": "229",
     "ruleset_model_descriptions": [TEST_RMD_B_G311F],
-    "time_of_creation": "2024-02-12T09:00Z",
 }
 TEST_RMD_B_UNIT_G311F = quantify_rmd(TEST_RMD_B_FULL_G311F)[
     "ruleset_model_descriptions"
@@ -773,7 +768,6 @@ TEST_RMD_B_UNIT_G311F = quantify_rmd(TEST_RMD_B_FULL_G311F)[
 TEST_RMD_B_FULL_G311G = {
     "id": "229",
     "ruleset_model_descriptions": [TEST_RMD_B_G311G],
-    "time_of_creation": "2024-02-12T09:00Z",
 }
 TEST_RMD_B_UNIT_G311G = quantify_rmd(TEST_RMD_B_FULL_G311G)[
     "ruleset_model_descriptions"
