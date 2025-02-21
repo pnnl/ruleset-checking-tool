@@ -176,27 +176,22 @@ TEST_RMD = {
                     "id": "Tank 2",
                 },
             ],
-            "service_water_piping": [
-                {
-                    "id": "SWH Piping 1",
-                    "child": [
-                        {
-                            "id": "SWH Piping Child 1",
-                            "child": [
-                                {
-                                    "id": "SWH Piping 1-a",
-                                },
-                                {
-                                    "id": "SWH Piping 1-b",
-                                },
-                            ],
-                        }
-                    ],
-                },
-                {
-                    "id": "SWH Piping 2",
-                },
-            ],
+            "service_water_piping": {
+                "id": "SWH Piping 1",
+                "child": [
+                    {
+                        "id": "SWH Piping Child 1",
+                        "child": [
+                            {
+                                "id": "SWH Piping 1-a",
+                            },
+                            {
+                                "id": "SWH Piping 1-b",
+                            },
+                        ],
+                    }
+                ],
+            },
         }
     ],
     "type": "BASELINE_0",

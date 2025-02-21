@@ -58,37 +58,28 @@ TEST_RMD = {
                     "id": "Tank 2",
                 },
             ],
-            "service_water_piping": [
-                {
-                    "id": "SWH Piping 1",
-                    "child": [
-                        {
-                            "id": "SWH Piping Child 1",
-                            "child": [
-                                {
-                                    "id": "SWH Piping 1-a",
-                                },
-                                {
-                                    "id": "SWH Piping 1-b",
-                                },
-                            ],
-                        }
-                    ],
-                },
-                {
-                    "id": "SWH Piping 2",
-                },
-            ],
+            "service_water_piping": {
+                "id": "SWH Piping 1",
+                "child": [
+                    {
+                        "id": "SWH Piping Child 1",
+                        "child": [
+                            {
+                                "id": "SWH Piping 1-a",
+                            },
+                            {
+                                "id": "SWH Piping 1-b",
+                            },
+                        ],
+                    }
+                ],
+            },
         }
     ],
     "pumps": [
         {
             "id": "Pump 1",
             "loop_or_piping": "SWH Piping 1",
-        },
-        {
-            "id": "Pump 2",
-            "loop_or_piping": "SWH Piping 2",
         },
         {
             "id": "Pump 3",
@@ -166,14 +157,13 @@ def test_get_swh_equipment_associated_with_each_swh_distribution_system():
     assert swh_and_equip_dict["SWH Distribution 1"].swh_heating_eq == [
         "SWH Equipment 1"
     ]
-    assert swh_and_equip_dict["SWH Distribution 1"].pumps == ["Pump 1", "Pump 2"]
+    assert swh_and_equip_dict["SWH Distribution 1"].pumps == ["Pump 1"]
     assert swh_and_equip_dict["SWH Distribution 1"].tanks == ["Tank 1", "Tank 2"]
     assert swh_and_equip_dict["SWH Distribution 1"].piping == [
         "SWH Piping 1",
         "SWH Piping Child 1",
         "SWH Piping 1-a",
         "SWH Piping 1-b",
-        "SWH Piping 2",
     ]
     assert swh_and_equip_dict["SWH Distribution 1"].solar_thermal == [
         "Solar Thermal System 1",

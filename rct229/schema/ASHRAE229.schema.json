@@ -4338,11 +4338,9 @@
                     "notes": "From CBECC-Com."
                 },
                 "service_water_piping": {
-                    "description": "Other service water piping connected to this one as children.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "ASHRAE229.schema.json#/definitions/ServiceWaterPiping"
-                    }
+                    "description": "Connected service water piping",
+                    "$ref": "ASHRAE229.schema.json#/definitions/ServiceWaterPiping",
+                    "notes": "Contains the service water piping that is associated with this service water heater distribution system."
                 },
                 "distribution_compactness": {
                     "description": "Type of compact distribution system",

@@ -51,27 +51,22 @@ TEST_RMD = {
                     "id": "Tank 1",
                 },
             ],
-            "service_water_piping": [
-                {
-                    "id": "SWH Piping 1",
-                    "child": [
-                        {
-                            "id": "SWH Piping Child 1",
-                            "child": [
-                                {
-                                    "id": "SWH Piping 1-a",
-                                },
-                                {
-                                    "id": "SWH Piping 1-b",
-                                },
-                            ],
-                        }
-                    ],
-                },
-                {
-                    "id": "SWH Piping 2",
-                },
-            ],
+            "service_water_piping": {
+                "id": "SWH Piping 1",
+                "child": [
+                    {
+                        "id": "SWH Piping Child 1",
+                        "child": [
+                            {
+                                "id": "SWH Piping 1-a",
+                            },
+                            {
+                                "id": "SWH Piping 1-b",
+                            },
+                        ],
+                    }
+                ],
+            },
         },
         {
             "id": "SWH Distribution 2",
@@ -80,21 +75,19 @@ TEST_RMD = {
                     "id": "Tank 2",
                 },
             ],
-            "service_water_piping": [
-                {
-                    "id": "SWH Piping 2",
-                    "child": [
-                        {
-                            "id": "SWH Piping Child 2",
-                            "child": [
-                                {
-                                    "id": "SWH Piping 2-a",
-                                }
-                            ],
-                        }
-                    ],
-                },
-            ],
+            "service_water_piping": {
+                "id": "SWH Piping 2",
+                "child": [
+                    {
+                        "id": "SWH Piping Child 2",
+                        "child": [
+                            {
+                                "id": "SWH Piping 2-a",
+                            }
+                        ],
+                    }
+                ],
+            },
         },
     ],
     "pumps": [
@@ -149,11 +142,11 @@ TEST_RMD_COPIED = copy.deepcopy(TEST_RMD)
 # Change the values
 TEST_RMD_COPIED["service_water_heating_distribution_systems"][1][
     "service_water_piping"
-][0]["id"] = "SWH Piping a"
+]["id"] = "SWH Piping a"
 TEST_RMD_COPIED["pumps"][1]["loop_or_piping"] = "SWH Piping a"
 TEST_RMD_COPIED["service_water_heating_distribution_systems"][1][
     "service_water_piping"
-][0]["child"][0]["id"] = "SWH Piping Child a"
+]["child"][0]["id"] = "SWH Piping Child a"
 TEST_RMD_COPIED["service_water_heating_equipment"][1]["solar_thermal_systems"][0][
     "id"
 ] = "Solar Thermal System a"
@@ -241,8 +234,8 @@ def test__compare_swh_dist_systems_and_components__pump_not_matched():
     assert compare_swh_dist_systems_and_components(
         TEST_RMD, TEST_RMD_COPIED, "AppG Used By TCDs", "SWH Distribution 2"
     ) == [
-        "path: $.service_water_heating_distribution_systems[SWH Distribution 2].service_water_piping[0]: data object SWH Piping 2 in index context does not match the one SWH Piping a in compare context",
-        "path: $.service_water_heating_distribution_systems[SWH Distribution 2].service_water_piping[0].child[0]: data object SWH Piping Child 2 in index context does not match the one SWH Piping Child a in compare context",
+        "path: $.service_water_heating_distribution_systems[SWH Distribution 2].service_water_piping: data object SWH Piping 2 in index context does not match the one SWH Piping a in compare context",
+        "path: $.service_water_heating_distribution_systems[SWH Distribution 2].service_water_piping.child[0]: data object SWH Piping Child 2 in index context does not match the one SWH Piping Child a in compare context",
         "path: $.service_water_heating_equipment[SWH Equipment 2].solar_thermal_systems[0]: data object Solar Thermal System 3 in index context does not match the one Solar Thermal System 4 in compare context",
         "path: $.service_water_heating_equipment[SWH Equipment 2].solar_thermal_systems[1]: data object Solar Thermal System 4 in index context does not match the one Solar Thermal System a in compare context",
         "path: $.pumps[Pump 2].loop_or_piping: index context data: SWH Piping 2 does not equal to compare context data: SWH Piping a",
