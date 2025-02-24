@@ -110,7 +110,7 @@ class Section19Rule17(RuleDefinitionListIndexedBase):
 
             return any(
                 hvac_id_b in baseline_system_types_dict[system_type]
-                for system_type in baseline_system_types_dict
+                for system_type in APPLICABLE_SYS_TYPES
             )
 
         def get_calc_vals(self, context, data=None):

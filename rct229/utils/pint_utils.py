@@ -49,6 +49,7 @@ _UNIT_CONVENTIONS = {
         "volume": "m3",
         "tank_volume": "L",
         "area": "m2",
+        "area_density": "1/m2",
         "power_density": "W/m2",
         "thermal_transmittance": "W/(m2*K)",
         "linear_thermal_transmittance": "W/(m*K)",
@@ -70,6 +71,7 @@ _UNIT_CONVENTIONS = {
         "volume": "ft3",
         "tank_volume": "gallon",
         "area": "ft2",
+        "area_density": "1/ft2",
         "power_density": "W/ft2",
         "thermal_transmittance": "Btu/(hr*ft2*R)",
         "linear_thermal_transmittance": "Btu/(hr*ft*R)",
@@ -118,6 +120,11 @@ class CalcQ:
 
     def to_str(self, unit_system=UNIT_SYSTEM.IP) -> str:
         units = _UNIT_CONVENTIONS[unit_system][self.q_type]
+        if self.q_type == "area_density" and unit_system == UNIT_SYSTEM.IP:
+            converted_value = self.q.to("1/ft2").magnitude * 1000
+            return f"{converted_value} people/1000 ft²"
+        if "foot ** 3 / minute" in units:
+            return f"{self.q.to(units).magnitude} {units.replace('foot ** 3 / minute', 'cfm')}" if isinstance(self.q, Quantity) else str(self.q)
         return (
             f"{self.q.to(units).magnitude} {units}"
             if isinstance(self.q, Quantity)

@@ -731,7 +731,7 @@
                     "description": "Design infiltration flow rate",
                     "type": "number",
                     "minimum": 0.0,
-                    "units": "m3/s",
+                    "units": "L/s",
                     "notes": "Infiltration flow rate for simulation infiltration models unadjusted for temperature difference or windspeed or schedule often with a windspeed at 10 mph (4.5 m/s).  This may vary in meaning between simulation engines. If a zone includes multiple spaces and infiltration is specified at the space level the rates should be aggregated to the zone."
                 },
                 "multiplier_schedule": {
