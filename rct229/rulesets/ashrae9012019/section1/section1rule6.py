@@ -75,7 +75,7 @@ class Section1Rule6(RuleDefinitionListIndexedBase):
         renewable_annual_site_energy_use_list = [
             sum(
                 find_all(
-                    f'$.model_output.output_instance.annual_end_use_results[*][?(@.energy_source="{ENERGY_SOURCE_OPTIONS.ON_SITE_RENEWABLE}")].annual_site_energy_use',
+                    f'$.model_output.output_instance.annual_end_use_results[*][?(@.energy_source="{ENERGY_SOURCE_OPTIONS.ON_SITE_RENEWABLES}")].annual_site_energy_use',
                     rmd,
                 )
             )
