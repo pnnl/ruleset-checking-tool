@@ -530,8 +530,6 @@ def disaggregate_master_ruletest_json(master_json_name, ruleset_doc):
 
     # Write out final rule dictionary
     write_ruletest_json(prev_section, prev_rule, ruleset_doc)
-    # Remove the master json file:
-    os.remove(master_json_path)
 
 
 def disaggregate_master_rmd_json(master_json_name, output_dir, ruleset_doc):
