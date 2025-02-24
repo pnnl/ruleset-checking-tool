@@ -296,7 +296,7 @@ def run_test_one_jsontest(test_json):
 # run_performance_calculation_tests()
 # run_schedule_tests()
 # run_general_hvac_tests()
-run_service_water_heater_tests()
+# run_service_water_heater_tests()
 
 
 # run_test_one_jsontest("ashrae9012019/section11/rule_11_7.json")
