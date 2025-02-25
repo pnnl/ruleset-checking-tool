@@ -83,7 +83,7 @@ class Section11Rule7(RuleDefinitionListIndexedBase):
         def create_context_list(self, context, data=None):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
-            is_leap_year_b = data["is_leap_year"]
+            is_leap_year_b = data["is_leap_year_b"]
 
             swh_bats_and_equip_association_b = (
                 get_swh_components_associated_with_each_swh_bat(rmd_b, is_leap_year_b)
