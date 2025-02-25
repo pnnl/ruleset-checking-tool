@@ -92,8 +92,8 @@ class Section22Rule32(RuleDefinitionListIndexedBase):
             )
             assert_(
                 len(efficiency_metric_types_b) == len(efficiency_metric_values_b)
-                and 1 <= len(efficiency_metric_types_b) <= 4,
-                "`efficiency_metric_types` and `efficiency_metric_values` must have the same length between 1 to 4",
+                and 1 <= len(efficiency_metric_types_b) <= 5,
+                "`efficiency_metric_types` and `efficiency_metric_values` must have the same length between 1 to 5",
             )
 
             chiller_part_load_efficiency = next(
@@ -107,6 +107,8 @@ class Section22Rule32(RuleDefinitionListIndexedBase):
                 ),
                 None,
             )
+            # add to prevent failure
+            # assert_(chiller_part_load_efficiency, "Missing Integrated part load value from chiller efficiency metric type.")
 
             target_part_load_efficiency = table_g3_5_3_lookup(
                 compressor_type_b, rated_capacity_b
@@ -122,9 +124,15 @@ class Section22Rule32(RuleDefinitionListIndexedBase):
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
-            chiller_part_load_efficiency = calc_vals[
+            chiller_part_load_efficiency_quantity = calc_vals[
                 "chiller_part_load_efficiency"
-            ].magnitude
+            ]
+            # it is possible that the chiller part load efficiency is none
+            chiller_part_load_efficiency = (
+                chiller_part_load_efficiency_quantity.magnitude
+                if chiller_part_load_efficiency_quantity
+                else None
+            )
             target_part_load_efficiency = calc_vals["target_part_load_efficiency"]
             target_cop_part_load_efficiency = (
                 1.0 / target_part_load_efficiency.to("kilowatt / kilowatt").magnitude

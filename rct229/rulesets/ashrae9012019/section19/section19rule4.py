@@ -32,16 +32,6 @@ class Section19Rule4(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1.2.2.1 Exception",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            required_fields={
-                "$": ["calendar"],
-                "calendar": ["day_of_week_for_january_1"],
-            },
-            data_items={
-                "day_of_week_for_january_1": (
-                    BASELINE_0,
-                    "calendar/day_of_week_for_january_1",
-                ),
-            },
         )
 
     class RuleSetModelInstanceRule(RuleDefinitionListIndexedBase):
@@ -53,12 +43,26 @@ class Section19Rule4(RuleDefinitionListIndexedBase):
                 each_rule=Section19Rule4.RuleSetModelInstanceRule.BuildingSegmentRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*]",
+                required_fields={
+                    "$": ["calendar"],
+                    "calendar": ["day_of_week_for_january_1"],
+                },
+                data_items={
+                    "day_of_week_for_january_1": (
+                        BASELINE_0,
+                        "calendar/day_of_week_for_january_1",
+                    ),
+                },
             )
 
         def create_data(self, context, data):
             rmd_b = context.BASELINE_0
+            day_of_week_for_january_1 = rmd_b["calendar"]["day_of_week_for_january_1"]
 
-            return {"schedule_b": getattr_(rmd_b, "RMI", "schedules")}
+            return {
+                "schedule_b": getattr_(rmd_b, "RMI", "schedules"),
+                "day_of_week_for_january_1": day_of_week_for_january_1,
+            }
 
         class BuildingSegmentRule(RuleDefinitionListIndexedBase):
             def __init__(self):

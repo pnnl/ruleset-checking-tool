@@ -86,22 +86,22 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
             has_user = rmd_u is not None
 
             has_baseline_0_output = has_baseline_0 and bool(
-                find_one("$.output.output_instance", rmd_b0)
+                find_one("$.model_output.output_instance", rmd_b0)
             )
             has_baseline_90_output = has_baseline_90 and bool(
-                find_one("$.output.output_instance", rmd_b90)
+                find_one("$.model_output.output_instance", rmd_b90)
             )
             has_baseline_180_output = has_baseline_180 and bool(
-                find_one("$.output.output_instance", rmd_b180)
+                find_one("$.model_output.output_instance", rmd_b180)
             )
             has_baseline_270_output = has_baseline_270 and bool(
-                find_one("$.output.output_instance", rmd_b270)
+                find_one("$.model_output.output_instance", rmd_b270)
             )
             has_proposed_output = has_proposed and bool(
-                find_one("$.output.output_instance", rmd_p)
+                find_one("$.model_output.output_instance", rmd_p)
             )
             has_user_output = has_user and bool(
-                find_one("$.output.output_instance", rmd_u)
+                find_one("$.model_output.output_instance", rmd_u)
             )
 
             rmd_list = [rmd_b0, rmd_b90, rmd_b180, rmd_b270, rmd_p, rmd_u]
@@ -114,7 +114,7 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
             no_of_output_instance = len(
                 compact(
                     [
-                        find_one("$.output.output_instance", rmd)
+                        find_one("$.model_output.output_instance", rmd)
                         for rmd in rmd_list_no_user
                     ]
                 )

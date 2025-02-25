@@ -482,13 +482,27 @@ TEST_RMD_P = {
             "type": "PROPOSED",
         }
     ],
-    "data_timestamp": "2024-02-12T09:00Z",
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
 }
 
 TEST_RMD_B_FULL_G311D_ONE_SYS = {
     "id": "229",
     "ruleset_model_descriptions": [TEST_RMD_B_ALL_ZONES_G311D_ONE_SYSTEM],
-    "data_timestamp": "2024-02-12T09:00Z",
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
 }
 TEST_RMD_B_UNIT_G311D_ONE_SYS = quantify_rmd(TEST_RMD_B_FULL_G311D_ONE_SYS)[
     "ruleset_model_descriptions"
@@ -496,7 +510,14 @@ TEST_RMD_B_UNIT_G311D_ONE_SYS = quantify_rmd(TEST_RMD_B_FULL_G311D_ONE_SYS)[
 TEST_RMD_B_FULL_G311D_TWO_SYS = {
     "id": "229",
     "ruleset_model_descriptions": [TEST_RMD_B_ALL_ZONES_G311D_ONE_SYSTEM2_TWO_SYSTEMS],
-    "data_timestamp": "2024-02-12T09:00Z",
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
 }
 TEST_RMD_B_UNIT_G311D_TWO_SYS = quantify_rmd(TEST_RMD_B_FULL_G311D_TWO_SYS)[
     "ruleset_model_descriptions"
@@ -505,7 +526,14 @@ TEST_RMD_B_UNIT_G311D_TWO_SYS = quantify_rmd(TEST_RMD_B_FULL_G311D_TWO_SYS)[
 TEST_RMD_B_FULL_G311D_G311F = {
     "id": "229",
     "ruleset_model_descriptions": [TEST_RMD_B_G311D_G311F],
-    "data_timestamp": "2024-02-12T09:00Z",
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
 }
 TEST_RMD_B_UNIT_G311D_G311F = quantify_rmd(TEST_RMD_B_FULL_G311D_G311F)[
     "ruleset_model_descriptions"

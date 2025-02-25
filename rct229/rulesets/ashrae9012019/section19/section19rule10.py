@@ -26,7 +26,6 @@ LIGHTING_BUILDING_AREA = SchemaEnums.schema_enums[
     "LightingBuildingAreaOptions2019ASHRAE901T951TG38"
 ]
 
-
 NOT_APPLICABLE_CLIMATE_ZONE = [
     ClimateZoneOption.CZ0A,
     ClimateZoneOption.CZ0B,
@@ -60,8 +59,7 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             required_fields={
-                "$": ["weather", "ruleset_model_descriptions"],
-                "weather": ["climate_zone"],
+                "$": ["ruleset_model_descriptions"],
             },
             each_rule=Section19Rule10.RulesetModelInstanceRule(),
             index_rmd=BASELINE_0,
@@ -74,7 +72,6 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1.2.6 including exceptions 1-3",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
         )
 
     class RulesetModelInstanceRule(RuleDefinitionListIndexedBase):
@@ -86,11 +83,15 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
                 each_rule=Section19Rule10.RulesetModelInstanceRule.HVACRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
+                required_fields={
+                    "$": ["weather"],
+                    "weather": ["climate_zone"],
+                },
             )
 
         def is_applicable(self, context, data=None):
-            climate_zone = data["climate_zone"]
             rmd_b = context.BASELINE_0
+            climate_zone = rmd_b["weather"]["climate_zone"]
 
             baseline_system_types_dict_b = get_baseline_system_types(rmd_b)
 

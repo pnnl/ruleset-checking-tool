@@ -97,8 +97,8 @@ class Section22Rule22(RuleDefinitionListIndexedBase):
 
             assert_(
                 len(efficiency_metric_types_b) == len(efficiency_metric_values_b)
-                and 1 <= len(efficiency_metric_types_b) <= 4,
-                "`efficiency_metric_types` and `efficiency_metric_values` must have the same length between 1 to 4",
+                and 1 <= len(efficiency_metric_types_b) <= 5,
+                "`efficiency_metric_types` and `efficiency_metric_values` must have the same length between 1 to 5",
             )
 
             full_load_efficiency_b = next(
@@ -107,7 +107,8 @@ class Section22Rule22(RuleDefinitionListIndexedBase):
                     for metric, value in zip(
                         efficiency_metric_types_b, efficiency_metric_values_b
                     )
-                    if metric == CHILLER_EFFICIENCY_METRIC_TYPES.FULL_LOAD_EFFICIENCY
+                    if metric
+                    == CHILLER_EFFICIENCY_METRIC_TYPES.FULL_LOAD_EFFICIENCY_RATED
                 ),
                 None,
             )

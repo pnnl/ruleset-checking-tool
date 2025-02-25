@@ -25,11 +25,13 @@ TEST_RMD = {
                                             "id": "service water heating uses 1_1",
                                             "use": 400,
                                             "use_units": "POWER",
+                                            "served_by_distribution_system": "SWH Distribution 1",
                                         },
                                         {
                                             "id": "service water heating uses 1_2",
                                             "use": 500,
                                             "use_units": "POWER",
+                                            "served_by_distribution_system": "SWH Distribution 1",
                                         },
                                     ],
                                 }
@@ -51,11 +53,13 @@ TEST_RMD = {
                                             "id": "service water heating uses 2_1",
                                             "use": 400,
                                             "use_units": "POWER",
+                                            "served_by_distribution_system": "SWH Distribution 1",
                                         },
                                         {
                                             "id": "service water heating uses 2_2",
                                             "use": 500,
                                             "use_units": "POWER",
+                                            "served_by_distribution_system": "SWH Distribution 1",
                                         },
                                     ],
                                 }
@@ -66,13 +70,25 @@ TEST_RMD = {
             ],
         }
     ],
+    "service_water_heating_distribution_systems": [
+        {
+            "id": "SWH Distribution 1",
+        }
+    ],
     "type": "BASELINE_0",
 }
 
 TEST_RPD_FULL = {
     "id": "229",
     "ruleset_model_descriptions": [TEST_RMD],
-    "data_timestamp": "2024-02-12T09:00Z",
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
 }
 
 TEST_RMD = quantify_rmd(TEST_RPD_FULL)["ruleset_model_descriptions"][0]
