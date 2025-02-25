@@ -71,6 +71,7 @@ class Section6Rule8(RuleDefinitionListIndexedBase):
                     each_rule=Section6Rule8.RulesetModelInstanceRule.BuildingRule.ZoneRule(),
                     index_rmd=PROPOSED,
                     list_path="$..zones[*]",
+                    required_fields={"$": ["building_open_schedule"]},
                 )
 
             def create_data(self, context, data=None):

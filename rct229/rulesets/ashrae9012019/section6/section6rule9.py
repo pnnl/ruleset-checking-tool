@@ -64,6 +64,7 @@ class Section6Rule9(RuleDefinitionListIndexedBase):
                     each_rule=Section6Rule9.RulesetModelInstanceRule.BuildingRule.ZoneRule(),
                     index_rmd=PROPOSED,
                     list_path="$..zones[*]",
+                    required_fields={"$": ["building_open_schedule"]},
                 )
 
             def is_applicable(self, context, data=None):

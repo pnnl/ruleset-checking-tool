@@ -7,11 +7,27 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_heat_rejection_loops_co
 )
 from rct229.schema.config import ureg
 from rct229.utils.pint_utils import CalcQ
-from rct229.utils.std_comparisons import std_equal
+from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
+    HVAC_SYS,
+)
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types import (
+    get_baseline_system_types,
+)
 
 TEMP_LOW_LIMIT_55F = 55 * ureg("degF")
 TEMP_HIGH_LIMIT_90F = 90 * ureg("degF")
-
+APPLICABLE_SYS_TYPES = [
+    HVAC_SYS.SYS_7,
+    HVAC_SYS.SYS_8,
+    HVAC_SYS.SYS_11_1,
+    HVAC_SYS.SYS_11_2,
+    HVAC_SYS.SYS_12,
+    HVAC_SYS.SYS_13,
+    HVAC_SYS.SYS_7B,
+    HVAC_SYS.SYS_8B,
+    HVAC_SYS.SYS_11_1B,
+    HVAC_SYS.SYS_12B,
+]
 
 class Section22Rule15(RuleDefinitionListIndexedBase):
     """Rule 15 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
@@ -30,6 +46,22 @@ class Section22Rule15(RuleDefinitionListIndexedBase):
             is_primary_rule=True,
             rmd_context="ruleset_model_descriptions/0",
             list_path="$.heat_rejections[*]",
+        )
+
+    def is_applicable(self, context, data=None):
+        rmd_b = context.BASELINE_0
+        baseline_system_types_dict = get_baseline_system_types(rmd_b)
+        # create a list containing all HVAC systems that are modeled in the rmd_b
+        available_type_list = [
+            hvac_type
+            for hvac_type in baseline_system_types_dict
+            if len(baseline_system_types_dict[hvac_type]) > 0
+        ]
+        return any(
+            [
+                available_type in APPLICABLE_SYS_TYPES
+                for available_type in available_type_list
+            ]
         )
 
     def create_data(self, context, data):

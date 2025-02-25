@@ -24,7 +24,7 @@ class Section19Rule6(RuleDefinitionBase):
             required_fields={
                 "$": ["output"],
                 "output": ["output_instance"],
-                "output_instance": [
+                "output.output_instance": [
                     "unmet_load_hours_heating",
                     "unmet_load_hours_cooling",
                     "unmet_load_hours",

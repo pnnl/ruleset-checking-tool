@@ -5,11 +5,29 @@ from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_heat_rejection_loops_connected_to_baseline_systems import (
     get_heat_rejection_loops_connected_to_baseline_systems,
 )
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types import (
+    get_baseline_system_types,
+)
+from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
+    HVAC_SYS,
+)
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import getattr_
 
 HEATREJECTIONFAN = SchemaEnums.schema_enums["HeatRejectionFanOptions"]
 HEATREJECTION = SchemaEnums.schema_enums["HeatRejectionOptions"]
+APPLICABLE_SYS_TYPES = [
+    HVAC_SYS.SYS_7,
+    HVAC_SYS.SYS_8,
+    HVAC_SYS.SYS_11_1,
+    HVAC_SYS.SYS_11_2,
+    HVAC_SYS.SYS_12,
+    HVAC_SYS.SYS_13,
+    HVAC_SYS.SYS_7B,
+    HVAC_SYS.SYS_8B,
+    HVAC_SYS.SYS_11_1B,
+    HVAC_SYS.SYS_12B,
+]
 
 
 class Section22Rule13(RuleDefinitionListIndexedBase):
@@ -29,6 +47,22 @@ class Section22Rule13(RuleDefinitionListIndexedBase):
             is_primary_rule=True,
             rmd_context="ruleset_model_descriptions/0",
             list_path="$.heat_rejections[*]",
+        )
+
+    def is_applicable(self, context, data=None):
+        rmd_b = context.BASELINE_0
+        baseline_system_types_dict = get_baseline_system_types(rmd_b)
+        # create a list containing all HVAC systems that are modeled in the rmd_b
+        available_type_list = [
+            hvac_type
+            for hvac_type in baseline_system_types_dict
+            if len(baseline_system_types_dict[hvac_type]) > 0
+        ]
+        return any(
+            [
+                available_type in APPLICABLE_SYS_TYPES
+                for available_type in available_type_list
+            ]
         )
 
     def create_data(self, context, data=None):

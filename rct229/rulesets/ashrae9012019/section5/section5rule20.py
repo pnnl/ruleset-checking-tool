@@ -211,7 +211,7 @@ class Section5Rule20(RuleDefinitionListIndexedBase):
             scc_dict_b = data["scc_dict_b"]
             return (get_opaque_surface_type(surface_b) == OST.ABOVE_GRADE_WALL) and (
                 scc_dict_b[surface_b["id"]] != SCC.UNREGULATED
-            )
+            ) and len(surface_b.get("subsurfaces", [])) > 0
 
         class AboveGradeWallRule(RuleDefinitionListIndexedBase):
             def __init__(self):

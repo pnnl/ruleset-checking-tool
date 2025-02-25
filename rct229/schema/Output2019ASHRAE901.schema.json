@@ -148,13 +148,7 @@
                 }
             },
             "required": [
-                "id",
-                "unmet_load_hours",
-                "unmet_load_hours_heating",
-                "unmet_occupied_load_hours_heating",
-                "unmet_load_hours_cooling",
-                "unmet_occupied_load_hours_cooling",
-                "building_peak_cooling_load"
+                "id"
             ],
             "additionalProperties": false
         },
@@ -196,11 +190,7 @@
                 }
             },
             "required": [
-                "id",
-                "energy_source",
-                "annual_consumption",
-                "annual_demand",
-                "annual_cost"
+                "id"
             ],
             "additionalProperties": false
         },
@@ -248,12 +238,7 @@
                 }
             },
             "required": [
-                "id",
-                "type",
-                "energy_source",
-                "annual_site_energy_use",
-                "annual_site_coincident_demand",
-                "annual_site_non_coincident_demand"
+                "id"
             ],
             "additionalProperties": false
         },
