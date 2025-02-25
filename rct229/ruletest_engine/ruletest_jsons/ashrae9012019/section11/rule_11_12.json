@@ -14,7 +14,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "mandatory_rule": "No",
-            "schema_version": "0.1.3"
+            "schema_version": "0.0.34"
         },
         "rmd_transformations": {
             "proposed": {
@@ -17659,7 +17659,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "mandatory_rule": "No",
-            "schema_version": "0.1.3"
+            "schema_version": "0.0.34"
         },
         "rmd_transformations": {
             "proposed": {
