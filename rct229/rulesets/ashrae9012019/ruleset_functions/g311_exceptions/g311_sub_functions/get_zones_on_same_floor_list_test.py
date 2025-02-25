@@ -32,7 +32,6 @@ TEST_RMD = {
 TEST_RPD = {
     "id": "229_01",
     "ruleset_model_descriptions": [TEST_RMD],
-    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 

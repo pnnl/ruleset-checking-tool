@@ -41,7 +41,9 @@ def get_swh_equipment_associated_with_each_swh_distribution_system(
         swh_and_equip_dict[distribution["id"]].tanks = [
             tank["id"] for tank in find_all("$.tanks[*]", distribution)
         ]
-        for piping in distribution.get("service_water_piping", []):
+
+        piping = distribution.get("service_water_piping")
+        if piping:
             queue = deque([piping])
             piping_ids = []
             # BFS approach

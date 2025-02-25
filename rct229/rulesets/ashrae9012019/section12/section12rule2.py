@@ -49,8 +49,6 @@ class Section12Rule2(RuleDefinitionListIndexedBase):
             standard_section="Table G3.1-12 Proposed Building Performance column",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
-            data_items={"is_leap_year": (BASELINE_0, "calendar/is_leap_year")},
         )
 
     class RMDRule(RuleDefinitionListIndexedBase):
@@ -62,6 +60,7 @@ class Section12Rule2(RuleDefinitionListIndexedBase):
                 each_rule=Section12Rule2.RMDRule.SpaceRule(),
                 index_rmd=BASELINE_0,
                 list_path="buildings[*].building_segments[*].zones[*].spaces[*]",
+                required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
             )
 
         def create_data(self, context, data):
@@ -85,6 +84,7 @@ class Section12Rule2(RuleDefinitionListIndexedBase):
             return {
                 "mis_equip_schedule_b_dict": mis_equip_schedule_b_dict,
                 "mis_equip_schedule_p_dict": mis_equip_schedule_p_dict,
+                "is_leap_year": rmd_b["calendar"]["is_leap_year"],
             }
 
         class SpaceRule(RuleDefinitionListIndexedBase):
@@ -134,11 +134,19 @@ class Section12Rule2(RuleDefinitionListIndexedBase):
                         misc_equip_schedule_id_p
                     )
 
-                    auto_receptacle_control_b = misc_equip_b.get(
-                        "has_automatic_control"
+                    automatic_controlled_percentage_b = misc_equip_b.get(
+                        "automatic_controlled_percentage"
                     )
-                    auto_receptacle_control_p = misc_equip_p.get(
-                        "has_automatic_control"
+                    automatic_controlled_percentage_p = misc_equip_p.get(
+                        "automatic_controlled_percentage"
+                    )
+                    auto_receptacle_control_b = (
+                        automatic_controlled_percentage_b
+                        and automatic_controlled_percentage_b > 0.0
+                    )
+                    auto_receptacle_control_p = (
+                        automatic_controlled_percentage_p
+                        and automatic_controlled_percentage_p > 0.0
                     )
 
                     mask_schedule = (

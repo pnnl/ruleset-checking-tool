@@ -68,7 +68,6 @@ TEST_RPD_NG_ELEC = {
             "type": "BASELINE_0",
         }
     ],
-    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 
@@ -136,7 +135,6 @@ TEST_RPD_PROPANE_NG_ELEC = {
             "type": "BASELINE_0",
         }
     ],
-    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 
@@ -211,7 +209,6 @@ TEST_RPD_ALL_ENERGY_SOURCE = {
             "type": "BASELINE_0",
         }
     ],
-    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 

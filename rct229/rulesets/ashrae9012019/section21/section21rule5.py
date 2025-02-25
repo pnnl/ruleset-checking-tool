@@ -55,7 +55,6 @@ class Section21Rule5(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1.3.2 Building System-Specific Modeling Requirements for the Baseline model",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
         )
 
     class RulesetModelInstanceRule(RuleDefinitionBase):
@@ -90,7 +89,7 @@ class Section21Rule5(RuleDefinitionListIndexedBase):
 
         def get_calc_vals(self, context, data=None):
             rmd_b = context.BASELINE_0
-            climate_zone = data["climate_zone"]
+            climate_zone = rmd_b["weather"]["climate_zone"]
 
             # get zone conditions from buildings
             zone_conditioning_category_dict = {}

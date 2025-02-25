@@ -43,11 +43,11 @@ class Section1Rule4(RuleDefinitionBase):
         for rmd in (rmd_u, rmd_b0, rmd_b90, rmd_b180, rmd_b270, rmd_p):
             if rmd is not None:
                 pci_target_set.append(
-                    find_one("$.output.performance_cost_index_target", rmd)
+                    find_one("$.model_output.performance_cost_index_target", rmd)
                 )
                 pci_set.append(
                     find_one(
-                        "$.output.performance_cost_index",
+                        "$.model_output.performance_cost_index",
                         rmd,
                     )
                 )
