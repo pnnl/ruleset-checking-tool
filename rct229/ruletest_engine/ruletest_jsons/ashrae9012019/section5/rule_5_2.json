@@ -4,7 +4,7 @@
         "Rule": 2,
         "Test": "a",
         "test_description": "Project has one building segment with two zones. Zones include both interior and exterior surfaces. All exterior surfaces are correctly modeled as not casting shade in the baseline.",
-        "expected_rule_outcome": "not_applicable",
+        "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-2",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (a)",
@@ -40,22 +40,22 @@
                                                         "id": "Surface 2",
                                                         "adjacent_to": "INTERIOR",
                                                         "adjacent_zone": "Zone 2",
-                                                        "does_cast_shade": true
+                                                        "does_cast_shade": false
                                                     },
                                                     {
                                                         "id": "Surface 3",
                                                         "adjacent_to": "IDENTICAL",
-                                                        "does_cast_shade": true
+                                                        "does_cast_shade": false
                                                     },
                                                     {
                                                         "id": "Surface 4",
                                                         "adjacent_to": "GROUND",
-                                                        "does_cast_shade": true
+                                                        "does_cast_shade": false
                                                     },
                                                     {
                                                         "id": "Surface 5",
                                                         "adjacent_to": "UNDEFINED",
-                                                        "does_cast_shade": true
+                                                        "does_cast_shade": false
                                                     }
                                                 ]
                                             },
@@ -78,7 +78,7 @@
         "Rule": 2,
         "Test": "b",
         "test_description": "Project has one building segment with two zones. Zones include both interior and exterior surfaces. One exterior surface is incorrectly modeled as casting shade in the baseline.",
-        "expected_rule_outcome": "undetermined",
+        "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-2",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (a)",
