@@ -15,8 +15,13 @@ Data Lookup: None
 
 Logic:
 - define `swh_uses_dict`: `swh_uses_dict = {}`
-- look at each swh use: `for bldg_seg in find_all("$.buildings[*].building_segments[*]", rmd)`  
-    - append the use to the list: `swh_uses_dict = {bldg_seg["id"]: find_all("$.zones[*].spaces[*].service_water_heating_uses[*]", rmd)}`   
+- in each building segment, the service water heating uses can be defined at the building segment level or at the space level.  Look at each building segment: `for bldg_seg in RMD....building_segments:`
+    - create the list for this building segment: `swh_uses_dict[bldg_seg.id] = []`
+    - at the building segment level, service_water_heating_uses gives a list: [({ServiceWaterHeatingUse}, Reference)] - look at each service water heating use: `for swh_use in bldg_seg.service_water_heating_uses:`
+        - append the use to the list if it is an actual use, and not a reference - if it is a reference, it'll be located at the space level, and we'll add it when we look at each space: `if type(swh_use) == ServiceWaterHeatingUse: swh_uses_dict[bldg_seg.id].append(swh_use)`
+    - look at each space within the building segment: `for space in bldg_seg...spaces:`
+        - at the space level, service_water_heating_uses gives a list: [({ServiceWaterHeatingUse}, Reference)] - look at each service water heating use: `for swh_use in space.service_water_heating_uses:`
+            - append the use to the list if it is an actual use, and not a reference - if it is a reference it should've been stored at the building segment level and should already be in the list: `if type(swh_use) == ServiceWaterHeatingUse: swh_uses_dict[bldg_seg.id].append(swh_use)`
 
 **Returns** swh_uses_dict
 
