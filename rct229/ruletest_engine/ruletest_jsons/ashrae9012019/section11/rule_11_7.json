@@ -3,7 +3,7 @@
         "Section": 11,
         "Rule": 7,
         "Test": "a",
-        "test_description": "A one story office, single zone building has no service hot water systems. Returns undetermined.",
+        "test_description": "A one story office, single zone building has a proposed buildign with service hot water system use. The baseline building does have service hot water use. Returns undetermined.",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "11-7",
@@ -36,13 +36,38 @@
                                                 "floor_name": "Floor1",
                                                 "spaces": [
                                                     {
-                                                        "id": "Space 1"
+                                                        "id": "Space 1",
+                                                        "service_water_heating_area_type": "OFFICE",
+                                                        "service_water_heating_uses": [
+                                                            {
+                                                                "id": "SHW 1",
+                                                                "served_by_distribution_system": "SHW Distribution 1",
+                                                                "use": 0,
+                                                                "use_units": "POWER_PER_AREA"
+                                                            }
+                                                        ]
                                                     }
                                                 ]
                                             }
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1"
+                            }
+                        ],
+                        "service_water_heating_equipment": [
+                            {
+                                "id": "SHW Equipment 1",
+                                "distribution_system": "SHW Distribution 1",
+                                "heater_fuel_type": "ELECTRICITY",
+                                "tank": {
+                                    "id": "SHW Tank",
+                                    "type": "COMMERCIAL_STORAGE"
+                                }
                             }
                         ],
                         "type": "PROPOSED"
@@ -69,11 +94,46 @@
                                                 "floor_name": "Floor1",
                                                 "spaces": [
                                                     {
-                                                        "id": "Space 1"
+                                                        "id": "Space 1",
+                                                        "service_water_heating_area_type": "OFFICE",
+                                                        "service_water_heating_uses": [
+                                                            {
+                                                                "id": "SHW 1",
+                                                                "served_by_distribution_system": "SHW Distribution 1",
+                                                                "use": 10,
+                                                                "use_units": "POWER_PER_AREA"
+                                                            }
+                                                        ]
                                                     }
                                                 ]
                                             }
                                         ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1",
+                                "tanks": [
+                                    {
+                                        "id": "SHW Dist Tank 1"
+                                    }
+                                ]
+                            }
+                        ],
+                        "service_water_heating_equipment": [
+                            {
+                                "id": "SHW Equipment 1",
+                                "distribution_system": "SHW Distribution 1",
+                                "heater_fuel_type": "ELECTRICITY",
+                                "tank": {
+                                    "id": "SHW Tank",
+                                    "type": "COMMERCIAL_STORAGE"
+                                },
+                                "solar_thermal_systems": [
+                                    {
+                                        "id": "SHW Equipment Solar Thermal Sys 1"
                                     }
                                 ]
                             }
@@ -126,7 +186,9 @@
                                                         "service_water_heating_uses": [
                                                             {
                                                                 "id": "SHW 1",
-                                                                "served_by_distribution_system": "SHW Distribution 1"
+                                                                "served_by_distribution_system": "SHW Distribution 1",
+                                                                "use": 10,
+                                                                "use_units": "POWER_PER_AREA"
                                                             }
                                                         ]
                                                     }
@@ -182,7 +244,9 @@
                                                         "service_water_heating_uses": [
                                                             {
                                                                 "id": "SHW 1",
-                                                                "served_by_distribution_system": "SHW Distribution 1"
+                                                                "served_by_distribution_system": "SHW Distribution 1",
+                                                                "use": 10,
+                                                                "use_units": "POWER_PER_AREA"
                                                             }
                                                         ]
                                                     }
@@ -195,7 +259,12 @@
                         ],
                         "service_water_heating_distribution_systems": [
                             {
-                                "id": "SHW Distribution 1"
+                                "id": "SHW Distribution 1",
+                                "tanks": [
+                                    {
+                                        "id": "SHW Dist Tank 1"
+                                    }
+                                ]
                             }
                         ],
                         "service_water_heating_equipment": [
@@ -206,7 +275,12 @@
                                 "tank": {
                                     "id": "SHW Tank",
                                     "type": "COMMERCIAL_STORAGE"
-                                }
+                                },
+                                "solar_thermal_systems": [
+                                    {
+                                        "id": "SHW Equipment Solar Thermal Sys 1"
+                                    }
+                                ]
                             }
                         ],
                         "type": "BASELINE_0"
@@ -257,7 +331,9 @@
                                                         "service_water_heating_uses": [
                                                             {
                                                                 "id": "SHW 1",
-                                                                "served_by_distribution_system": "SHW Distribution 1"
+                                                                "served_by_distribution_system": "SHW Distribution 1",
+                                                                "use": 10,
+                                                                "use_units": "POWER_PER_AREA"
                                                             }
                                                         ]
                                                     }
@@ -313,7 +389,9 @@
                                                         "service_water_heating_uses": [
                                                             {
                                                                 "id": "SHW 1",
-                                                                "served_by_distribution_system": "SHW Distribution 1"
+                                                                "served_by_distribution_system": "SHW Distribution 1",
+                                                                "use": 10,
+                                                                "use_units": "POWER_PER_AREA"
                                                             }
                                                         ]
                                                     }
@@ -326,7 +404,12 @@
                         ],
                         "service_water_heating_distribution_systems": [
                             {
-                                "id": "SHW Distribution 1"
+                                "id": "SHW Distribution 1",
+                                "tanks": [
+                                    {
+                                        "id": "SHW Dist Tank 1"
+                                    }
+                                ]
                             }
                         ],
                         "service_water_heating_equipment": [
@@ -337,7 +420,12 @@
                                 "tank": {
                                     "id": "SHW Tank",
                                     "type": "COMMERCIAL_STORAGE"
-                                }
+                                },
+                                "solar_thermal_systems": [
+                                    {
+                                        "id": "SHW Equipment Solar Thermal Sys 1"
+                                    }
+                                ]
                             }
                         ],
                         "type": "BASELINE_0"
@@ -388,7 +476,9 @@
                                                         "service_water_heating_uses": [
                                                             {
                                                                 "id": "SHW 1",
-                                                                "served_by_distribution_system": "SHW Distribution 1"
+                                                                "served_by_distribution_system": "SHW Distribution 1",
+                                                                "use": 0,
+                                                                "use_units": "POWER_PER_AREA"
                                                             }
                                                         ]
                                                     }
@@ -444,7 +534,9 @@
                                                         "service_water_heating_uses": [
                                                             {
                                                                 "id": "SHW 1",
-                                                                "served_by_distribution_system": "SHW Distribution 1"
+                                                                "served_by_distribution_system": "SHW Distribution 1",
+                                                                "use": 10,
+                                                                "use_units": "POWER_PER_AREA"
                                                             }
                                                         ]
                                                     }
@@ -457,7 +549,12 @@
                         ],
                         "service_water_heating_distribution_systems": [
                             {
-                                "id": "SHW Distribution 1"
+                                "id": "SHW Distribution 1",
+                                "tanks": [
+                                    {
+                                        "id": "SHW Dist Tank 1"
+                                    }
+                                ]
                             }
                         ],
                         "service_water_heating_equipment": [
@@ -468,7 +565,12 @@
                                 "tank": {
                                     "id": "SHW Tank",
                                     "type": "COMMERCIAL_STORAGE"
-                                }
+                                },
+                                "solar_thermal_systems": [
+                                    {
+                                        "id": "SHW Equipment Solar Thermal Sys 1"
+                                    }
+                                ]
                             }
                         ],
                         "type": "BASELINE_0"
