@@ -323,17 +323,22 @@ TEST_BUILDING_TERMINAL_SYS = {
 TEST_RMD_HEATING_SYS = {
     "id": "ASHRAE229",
     "ruleset_model_descriptions": [TEST_BUILDING_HEATING_SYS],
-    "data_timestamp": "2024-02-12T09:00Z",
 }
 TEST_RMD_TERMINAL_SYS = {
     "id": "ASHRAE229",
     "ruleset_model_descriptions": [TEST_BUILDING_TERMINAL_SYS],
-    "data_timestamp": "2024-02-12T09:00Z",
 }
 TEST_RMD_FALSE = {
     "id": "ASHRAE229",
     "ruleset_model_descriptions": [TEST_BUILDING_NO_EXT_FLUID_SOURCE],
-    "data_timestamp": "2024-02-12T09:00Z",
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
 }
 
 

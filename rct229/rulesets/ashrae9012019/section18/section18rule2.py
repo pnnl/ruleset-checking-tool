@@ -30,7 +30,6 @@ from rct229.utils.jsonpath_utils import find_all
 
 FAN_SYSTEM_OPERATION = SchemaEnums.schema_enums["FanSystemOperationOptions"]
 
-
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_1,
     HVAC_SYS.SYS_2,
@@ -81,15 +80,6 @@ class Section18Rule2(RuleDefinitionListIndexedBase):
             standard_section="Section 18 HVAC_SystemZoneAssignment",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            required_fields={
-                "$": ["weather", "calendar", "ruleset_model_descriptions"],
-                "weather": ["climate_zone"],
-                "calendar": ["is_leap_year"],
-            },
-            data_items={
-                "climate_zone": (BASELINE_0, "weather/climate_zone"),
-                "is_leap_year": (BASELINE_0, "calendar/is_leap_year"),
-            },
         )
 
     class RMDRule(RuleDefinitionListIndexedBase):
@@ -101,13 +91,18 @@ class Section18Rule2(RuleDefinitionListIndexedBase):
                 each_rule=Section18Rule2.RMDRule.HVACRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
+                required_fields={
+                    "$": ["weather", "calendar"],
+                    "weather": ["climate_zone"],
+                    "calendar": ["is_leap_year"],
+                },
             )
 
         def create_data(self, context, data):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
-            climate_zone_b = data["climate_zone"]
-            is_leap_year_b = data["is_leap_year"]
+            climate_zone_b = rmd_b["weather"]["climate_zone"]
+            is_leap_year_b = rmd_b["calendar"]["is_leap_year"]
 
             baseline_system_types_dict_b = get_baseline_system_types(rmd_b)
             applicable_hvac_sys_ids_b = [

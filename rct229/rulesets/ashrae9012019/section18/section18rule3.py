@@ -24,15 +24,6 @@ class Section18Rule3(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-10 HVAC Systems for the baseline building",
             is_primary_rule=False,
             list_path="ruleset_model_descriptions[0]",
-            required_fields={
-                "$": ["calendar", "weather"],
-                "weather": ["climate_zone"],
-                "calendar": ["is_leap_year"],
-            },
-            data_items={
-                "climate_zone": (BASELINE_0, "weather/climate_zone"),
-                "is_leap_year": (BASELINE_0, "calendar/is_leap_year"),
-            },
         )
 
     class RuleModelDescriptionRule(PartialRuleDefinition):
@@ -40,14 +31,19 @@ class Section18Rule3(RuleDefinitionListIndexedBase):
             super(Section18Rule3.RuleModelDescriptionRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
-                )
+                ),
+                required_fields={
+                    "$": ["calendar", "weather"],
+                    "weather": ["climate_zone"],
+                    "calendar": ["is_leap_year"],
+                },
             )
 
         def get_calc_vals(self, context, data=None):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
-            climate_zone_b = data["climate_zone"]
-            is_leap_year_b = data["is_leap_year"]
+            climate_zone_b = rmd_b["weather"]["climate_zone"]
+            is_leap_year_b = rmd_b["calendar"]["is_leap_year"]
 
             target_baseline_systems_b = get_zone_target_baseline_system(
                 rmd_b, rmd_p, climate_zone_b, is_leap_year_b

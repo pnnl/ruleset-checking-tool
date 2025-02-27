@@ -32,7 +32,6 @@ class Section11Rule12(RuleDefinitionListIndexedBase):
             standard_section="Table G3.1 #11, baseline column, d + exception",
             is_primary_rule=False,
             list_path="ruleset_model_descriptions[0]",
-            data_items={"is_leap_year_b": (BASELINE_0, "calendar/is_leap_year")},
         )
 
     class RMDRule(RuleDefinitionListIndexedBase):
@@ -49,13 +48,13 @@ class Section11Rule12(RuleDefinitionListIndexedBase):
         def create_data(self, context, data):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
-
+            is_leap_year_b = rmd_b["calendar"]["is_leap_year"]
             swh_uses_associated_with_each_building_segment_p = (
                 get_swh_uses_associated_with_each_building_segment(rmd_p)
             )
 
             return {
-                "is_leap_year_b": data["is_leap_year_b"],
+                "is_leap_year_b": is_leap_year_b,
                 "schedules_b": find_all("$.schedules[*]", rmd_b),
                 "schedules_p": find_all("$.schedules[*]", rmd_p),
                 "swh_uses_associated_with_each_building_segment_p": swh_uses_associated_with_each_building_segment_p,

@@ -13,7 +13,6 @@ from rct229.utils.utility_functions import find_exactly_one_schedule
 
 LIGHTING_SPACE = SchemaEnums.schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
 
-
 EXPECTED_RECEPTACLE_CONTROL_SPACE_TYPES = [
     LIGHTING_SPACE.OFFICE_ENCLOSED,
     LIGHTING_SPACE.CONFERENCE_MEETING_MULTIPURPOSE_ROOM,
@@ -44,8 +43,6 @@ class Section12Rule3(RuleDefinitionListIndexedBase):
             standard_section="Table G3.1-12 Proposed Building Performance column",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
-            data_items={"is_leap_year": (PROPOSED, "calendar/is_leap_year")},
         )
 
     class RuleSetModelDescriptionRule(RuleDefinitionListIndexedBase):
@@ -57,6 +54,7 @@ class Section12Rule3(RuleDefinitionListIndexedBase):
                 each_rule=Section12Rule3.RuleSetModelDescriptionRule.SpaceRule(),
                 index_rmd=PROPOSED,
                 list_path="$.buildings[*].building_segments[*].zones[*].spaces[*]",
+                required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
             )
 
         def is_applicable(self, context, data=None):
@@ -74,7 +72,14 @@ class Section12Rule3(RuleDefinitionListIndexedBase):
                     for misc_equip_p in find_all(
                         "$.miscellaneous_equipment[*]", space_p
                     ):
-                        if misc_equip_p.get("has_automatic_control"):
+                        automatic_controlled_percentage_p = misc_equip_p.get(
+                            "automatic_controlled_percentage"
+                        )
+                        auto_receptacle_control_p = (
+                            automatic_controlled_percentage_p
+                            and automatic_controlled_percentage_p > 0.0
+                        )
+                        if auto_receptacle_control_p:
                             spaces_with_receptacle_controls_beyond_req.append(
                                 misc_equip_p["id"]
                             )
@@ -104,7 +109,11 @@ class Section12Rule3(RuleDefinitionListIndexedBase):
                 )
             }
 
-            return {"schedule_b": schedule_b, "schedule_p": schedule_p}
+            return {
+                "schedule_b": schedule_b,
+                "schedule_p": schedule_p,
+                "is_leap_year": rmd_b["calendar"]["is_leap_year"],
+            }
 
         def list_filter(self, context_item, data):
             space_p = context_item.PROPOSED
@@ -140,7 +149,6 @@ class Section12Rule3(RuleDefinitionListIndexedBase):
                         ),
                         required_fields={
                             "$": [
-                                "has_automatic_control",
                                 "multiplier_schedule",
                             ]
                         },
@@ -149,7 +157,14 @@ class Section12Rule3(RuleDefinitionListIndexedBase):
 
                 def is_applicable(self, context, data=None):
                     misc_equip_p = context.PROPOSED
-                    return misc_equip_p.get("has_automatic_control")
+                    automatic_controlled_percentage_p = misc_equip_p.get(
+                        "automatic_controlled_percentage"
+                    )
+                    auto_receptacle_control_p = (
+                        automatic_controlled_percentage_p
+                        and automatic_controlled_percentage_p > 0.0
+                    )
+                    return auto_receptacle_control_p
 
                 def get_not_applicable_msg(self, context, data=None):
                     misc_equip_p = context.PROPOSED
