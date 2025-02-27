@@ -46,7 +46,7 @@ class Section22Rule21(RuleDefinitionListIndexedBase):
             rmd_context="ruleset_model_descriptions/0",
             list_path="$.chillers[*]",
             required_fields={
-                "$": ["output"],
+                "$": ["model_output"],
             },
         )
 
@@ -69,7 +69,7 @@ class Section22Rule21(RuleDefinitionListIndexedBase):
     def create_data(self, context, data):
         rmd_b = context.BASELINE_0
 
-        output_b = rmd_b["output"]
+        output_b = rmd_b["model_output"]
         building_cooling_peak_load = getattr_(
             output_b,
             "building_peak_cooling_load",

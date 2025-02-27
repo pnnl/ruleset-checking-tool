@@ -5,7 +5,7 @@
         "Test": "a",
         "test_description": "The project has one building segment with one zone. The zone does not have a cooling system in the user model, and is served by a packaged terminal air conditioner in the baseline.",
         "expected_rule_outcome": "undetermined",
-        "expected_raised_message_includes": "is only being simulated in the P_RMI to meet the requirements described in Section G3.1-10 HVAC Systems proposed column c and d for heating and/or cooling. Check that the hvac system fan is simulated to be cycled ON and OFF to meet heating and/or cooling loads during occupied hours as applicable. Note that per the RMD the fan associated with",
+        "expected_raised_message_includes": "is only being simulated in the proposed model to meet the requirements described in Section G3.1-10 HVAC Systems proposed column c and d for heating and/or cooling. Check that the hvac system fan is simulated to be cycled ON and OFF to meet heating and/or cooling loads during occupied hours as applicable. Note that per the RMD, the fan associated with",
         "standard": {
             "rule_id": "19-34",
             "ruleset_reference": "Table G3.1 Section 4 Exception #1",
@@ -14,27 +14,23 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.3"
         },
         "rmd_transformations": {
             "user": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "PTAC Terminal 1",
@@ -97,22 +93,18 @@
             },
             "proposed": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "PTAC Terminal 1",
@@ -175,22 +167,18 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "PTAC Terminal 1",
@@ -268,27 +256,23 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.3"
         },
         "rmd_transformations": {
             "user": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "PTAC Terminal 1",
@@ -351,22 +335,18 @@
             },
             "proposed": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "PTAC Terminal 1",
@@ -429,22 +409,18 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "PTAC Terminal 1",

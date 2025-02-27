@@ -13,27 +13,23 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.3"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 1",
@@ -48,8 +44,6 @@
                                             },
                                             {
                                                 "id": "Thermal Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 2",
@@ -149,22 +143,18 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 1",
@@ -190,8 +180,6 @@
                                             },
                                             {
                                                 "id": "Thermal Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 2",
@@ -237,7 +225,7 @@
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 3000,
                                                             "design_airflow": 2359.737215999999,
-                                                            "is_airflow_sized_based_on_design_day": true
+                                                            "is_airflow_calculated": true
                                                         }
                                                     ],
                                                     "return_fans": [
@@ -246,7 +234,7 @@
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 2250,
                                                             "design_airflow": 2123.763494399999,
-                                                            "is_airflow_sized_based_on_design_day": true
+                                                            "is_airflow_calculated": true
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 471.94744319999984
@@ -323,27 +311,23 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.3"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 1",
@@ -424,22 +408,18 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 1",
@@ -483,7 +463,7 @@
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 3000,
                                                             "design_airflow": 2359.737215999999,
-                                                            "is_airflow_sized_based_on_design_day": true
+                                                            "is_airflow_calculated": true
                                                         }
                                                     ],
                                                     "return_fans": [
@@ -492,7 +472,7 @@
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 2250,
                                                             "design_airflow": 2123.763494399999,
-                                                            "is_airflow_sized_based_on_design_day": true
+                                                            "is_airflow_calculated": true
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 2359.737215999999
@@ -553,27 +533,23 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.3"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 1",
@@ -588,8 +564,6 @@
                                             },
                                             {
                                                 "id": "Thermal Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 2",
@@ -689,22 +663,18 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 1",
@@ -730,8 +700,6 @@
                                             },
                                             {
                                                 "id": "Thermal Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 2",
@@ -777,7 +745,7 @@
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 3000,
                                                             "design_airflow": 2359.737215999999,
-                                                            "is_airflow_sized_based_on_design_day": true
+                                                            "is_airflow_calculated": true
                                                         }
                                                     ],
                                                     "return_fans": [
@@ -786,7 +754,7 @@
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 2250,
                                                             "design_airflow": 2123.763494399999,
-                                                            "is_airflow_sized_based_on_design_day": true
+                                                            "is_airflow_calculated": true
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 4719.474431999998
@@ -863,27 +831,23 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.3"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 1",
@@ -964,22 +928,18 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 1",
@@ -1023,7 +983,7 @@
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 3000,
                                                             "design_airflow": 2359.737215999999,
-                                                            "is_airflow_sized_based_on_design_day": true
+                                                            "is_airflow_calculated": true
                                                         }
                                                     ],
                                                     "return_fans": [
@@ -1032,7 +992,7 @@
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 2250,
                                                             "design_airflow": 2123.763494399999,
-                                                            "is_airflow_sized_based_on_design_day": true
+                                                            "is_airflow_calculated": true
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 471.94744319999984
@@ -1094,27 +1054,23 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.3"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 1",
@@ -1129,8 +1085,6 @@
                                             },
                                             {
                                                 "id": "Thermal Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 2",
@@ -1230,22 +1184,18 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 1",
@@ -1271,8 +1221,6 @@
                                             },
                                             {
                                                 "id": "Thermal Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 2",
@@ -1318,7 +1266,7 @@
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 600,
                                                             "design_airflow": 471.94744319999984,
-                                                            "is_airflow_sized_based_on_design_day": true
+                                                            "is_airflow_calculated": true
                                                         }
                                                     ],
                                                     "return_fans": [
@@ -1327,7 +1275,7 @@
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 450,
                                                             "design_airflow": 424.75269887999985,
-                                                            "is_airflow_sized_based_on_design_day": true
+                                                            "is_airflow_calculated": true
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 117.98686079999996

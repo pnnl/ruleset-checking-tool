@@ -184,7 +184,7 @@ def check_fluid_loop_or_piping_association(rpd: dict) -> list:
     mismatch_list = []
     fluid_loop_or_piping_id_jsonpaths = [
         "$.ruleset_model_descriptions[*].fluid_loops[*].id",
-        "$.ruleset_model_descriptions[*].service_water_heating_distribution_systems[*].service_water_piping[*].id",
+        "$.ruleset_model_descriptions[*].service_water_heating_distribution_systems[*].service_water_piping.id",
         "$.ruleset_model_descriptions[*].fluid_loops[*].child_loops[*].id",
     ]
 

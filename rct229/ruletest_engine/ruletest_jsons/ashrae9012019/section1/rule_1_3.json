@@ -14,20 +14,19 @@
             "comparison_value": "Baseline RMD",
             "rule_dependency": 0,
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.34"
+            "schema_version": "0.1.3"
         },
         "rmd_transformations": {
             "user": {
                 "id": "ASHRAE229 1",
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "calendar": {
+                            "is_leap_year": false
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -52,7 +51,7 @@
                                 ]
                             }
                         ],
-                        "output": {
+                        "model_output": {
                             "id": "Output 1",
                             "total_area_weighted_building_performance_factor": 0.4,
                             "baseline_building_performance_energy_cost": 300000,
@@ -66,15 +65,14 @@
             },
             "proposed": {
                 "id": "ASHRAE229 1",
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "calendar": {
+                            "is_leap_year": false
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -99,7 +97,7 @@
                                 ]
                             }
                         ],
-                        "output": {
+                        "model_output": {
                             "id": "Output 1",
                             "total_area_weighted_building_performance_factor": 0.4,
                             "baseline_building_performance_energy_cost": 300000,
@@ -113,15 +111,14 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "calendar": {
+                            "is_leap_year": false
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -146,7 +143,7 @@
                                 ]
                             }
                         ],
-                        "output": {
+                        "model_output": {
                             "id": "Output 1",
                             "total_area_weighted_building_performance_factor": 0.4,
                             "baseline_building_performance_energy_cost": 300000,
@@ -175,20 +172,19 @@
             "comparison_value": "Baseline RMD",
             "rule_dependency": 0,
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.34"
+            "schema_version": "0.1.3"
         },
         "rmd_transformations": {
             "user": {
                 "id": "ASHRAE229 1",
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "calendar": {
+                            "is_leap_year": false
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -213,7 +209,7 @@
                                 ]
                             }
                         ],
-                        "output": {
+                        "model_output": {
                             "id": "Output 1",
                             "total_area_weighted_building_performance_factor": 0.4,
                             "baseline_building_performance_energy_cost": 300000,
@@ -227,15 +223,14 @@
             },
             "proposed": {
                 "id": "ASHRAE229 1",
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "calendar": {
+                            "is_leap_year": false
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -260,7 +255,7 @@
                                 ]
                             }
                         ],
-                        "output": {
+                        "model_output": {
                             "id": "Output 1",
                             "total_area_weighted_building_performance_factor": 0.4,
                             "baseline_building_performance_energy_cost": 300000,
@@ -274,15 +269,14 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "calendar": {
+                            "is_leap_year": false
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -307,7 +301,7 @@
                                 ]
                             }
                         ],
-                        "output": {
+                        "model_output": {
                             "id": "Output 1",
                             "total_area_weighted_building_performance_factor": 0.4,
                             "baseline_building_performance_energy_cost": 300000,
@@ -337,20 +331,19 @@
             "comparison_value": "Baseline RMD",
             "rule_dependency": 0,
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.34"
+            "schema_version": "0.1.3"
         },
         "rmd_transformations": {
             "user": {
                 "id": "ASHRAE229 1",
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "calendar": {
+                            "is_leap_year": false
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -375,7 +368,7 @@
                                 ]
                             }
                         ],
-                        "output": {
+                        "model_output": {
                             "id": "Output 1",
                             "total_area_weighted_building_performance_factor": 0.4,
                             "baseline_building_performance_energy_cost": 300000,
@@ -389,15 +382,14 @@
             },
             "proposed": {
                 "id": "ASHRAE229 1",
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "calendar": {
+                            "is_leap_year": false
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -422,7 +414,7 @@
                                 ]
                             }
                         ],
-                        "output": {
+                        "model_output": {
                             "id": "Output 1",
                             "total_area_weighted_building_performance_factor": 0.4,
                             "baseline_building_performance_energy_cost": 300000,
@@ -436,15 +428,14 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "calendar": {
+                            "is_leap_year": false
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -469,7 +460,7 @@
                                 ]
                             }
                         ],
-                        "output": {
+                        "model_output": {
                             "id": "Output 1",
                             "total_area_weighted_building_performance_factor": 0.8,
                             "baseline_building_performance_energy_cost": 300000,
@@ -499,20 +490,19 @@
             "comparison_value": "Baseline RMD",
             "rule_dependency": 0,
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.34"
+            "schema_version": "0.1.3"
         },
         "rmd_transformations": {
             "user": {
                 "id": "ASHRAE229 1",
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "calendar": {
+                            "is_leap_year": false
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -537,7 +527,7 @@
                                 ]
                             }
                         ],
-                        "output": {
+                        "model_output": {
                             "id": "Output 1",
                             "total_area_weighted_building_performance_factor": 0.4,
                             "baseline_building_performance_energy_cost": 300000,
@@ -550,15 +540,14 @@
             },
             "proposed": {
                 "id": "ASHRAE229 1",
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "calendar": {
+                            "is_leap_year": false
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -583,7 +572,7 @@
                                 ]
                             }
                         ],
-                        "output": {
+                        "model_output": {
                             "id": "Output 1",
                             "total_area_weighted_building_performance_factor": 0.4,
                             "baseline_building_performance_energy_cost": 300000,
@@ -596,15 +585,14 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "calendar": {
+                            "is_leap_year": false
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -629,7 +617,7 @@
                                 ]
                             }
                         ],
-                        "output": {
+                        "model_output": {
                             "id": "Output 1",
                             "total_area_weighted_building_performance_factor": 0.4,
                             "baseline_building_performance_energy_cost": 300000,
@@ -658,20 +646,19 @@
             "comparison_value": "Baseline RMD",
             "rule_dependency": 0,
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.34"
+            "schema_version": "0.1.3"
         },
         "rmd_transformations": {
             "user": {
                 "id": "ASHRAE229 1",
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "calendar": {
+                            "is_leap_year": false
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -696,7 +683,7 @@
                                 ]
                             }
                         ],
-                        "output": {
+                        "model_output": {
                             "id": "Output 1",
                             "baseline_building_performance_energy_cost": 300000,
                             "performance_cost_index_target": 0.5,
@@ -709,15 +696,14 @@
             },
             "proposed": {
                 "id": "ASHRAE229 1",
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "calendar": {
+                            "is_leap_year": false
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -742,7 +728,7 @@
                                 ]
                             }
                         ],
-                        "output": {
+                        "model_output": {
                             "id": "Output 1",
                             "baseline_building_performance_energy_cost": 300000,
                             "performance_cost_index_target": 0.5,
@@ -755,15 +741,14 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "calendar": {
+                            "is_leap_year": false
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -788,7 +773,7 @@
                                 ]
                             }
                         ],
-                        "output": {
+                        "model_output": {
                             "id": "Output 1",
                             "baseline_building_performance_energy_cost": 300000,
                             "performance_cost_index_target": 0.5,
@@ -817,20 +802,19 @@
             "comparison_value": "Baseline RMD",
             "rule_dependency": 0,
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.34"
+            "schema_version": "0.1.3"
         },
         "rmd_transformations": {
             "user": {
                 "id": "ASHRAE229 1",
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "calendar": {
+                            "is_leap_year": false
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -855,7 +839,7 @@
                                 ]
                             }
                         ],
-                        "output": {
+                        "model_output": {
                             "id": "Output 1",
                             "total_area_weighted_building_performance_factor": 0.4,
                             "baseline_building_performance_energy_cost": 300000,
@@ -868,15 +852,14 @@
             },
             "proposed": {
                 "id": "ASHRAE229 1",
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "calendar": {
+                            "is_leap_year": false
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -901,7 +884,7 @@
                                 ]
                             }
                         ],
-                        "output": {
+                        "model_output": {
                             "id": "Output 1",
                             "total_area_weighted_building_performance_factor": 0.4,
                             "baseline_building_performance_energy_cost": 300000,
@@ -914,15 +897,14 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "calendar": {
+                            "is_leap_year": false
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -947,7 +929,7 @@
                                 ]
                             }
                         ],
-                        "output": {
+                        "model_output": {
                             "id": "Output 1",
                             "total_area_weighted_building_performance_factor": 0.4,
                             "baseline_building_performance_energy_cost": 300000,
@@ -976,20 +958,19 @@
             "comparison_value": "Baseline RMD",
             "rule_dependency": 0,
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.34"
+            "schema_version": "0.1.3"
         },
         "rmd_transformations": {
             "user": {
                 "id": "ASHRAE229 1",
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "calendar": {
+                            "is_leap_year": false
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -1014,7 +995,7 @@
                                 ]
                             }
                         ],
-                        "output": {
+                        "model_output": {
                             "id": "Output 1",
                             "total_area_weighted_building_performance_factor": 0.4,
                             "baseline_building_performance_energy_cost": 300000,
@@ -1027,15 +1008,14 @@
             },
             "proposed": {
                 "id": "ASHRAE229 1",
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "calendar": {
+                            "is_leap_year": false
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -1060,7 +1040,7 @@
                                 ]
                             }
                         ],
-                        "output": {
+                        "model_output": {
                             "id": "Output 1",
                             "total_area_weighted_building_performance_factor": 0.4,
                             "baseline_building_performance_energy_cost": 300000,
@@ -1073,15 +1053,14 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "calendar": {
+                            "is_leap_year": false
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -1106,7 +1085,7 @@
                                 ]
                             }
                         ],
-                        "output": {
+                        "model_output": {
                             "id": "Output 1",
                             "total_area_weighted_building_performance_factor": 0.4,
                             "baseline_building_performance_energy_cost": 300000,
@@ -1135,20 +1114,19 @@
             "comparison_value": "Baseline RMD",
             "rule_dependency": 0,
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.34"
+            "schema_version": "0.1.3"
         },
         "rmd_transformations": {
             "user": {
                 "id": "ASHRAE229 1",
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "calendar": {
+                            "is_leap_year": false
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -1173,7 +1151,7 @@
                                 ]
                             }
                         ],
-                        "output": {
+                        "model_output": {
                             "id": "Output 1",
                             "total_area_weighted_building_performance_factor": 0.4,
                             "performance_cost_index_target": 0.5,
@@ -1186,15 +1164,14 @@
             },
             "proposed": {
                 "id": "ASHRAE229 1",
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "calendar": {
+                            "is_leap_year": false
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -1219,7 +1196,7 @@
                                 ]
                             }
                         ],
-                        "output": {
+                        "model_output": {
                             "id": "Output 1",
                             "total_area_weighted_building_performance_factor": 0.4,
                             "performance_cost_index_target": 0.5,
@@ -1232,15 +1209,14 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "calendar": {
+                            "is_leap_year": false
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -1265,7 +1241,7 @@
                                 ]
                             }
                         ],
-                        "output": {
+                        "model_output": {
                             "id": "Output 1",
                             "total_area_weighted_building_performance_factor": 0.4,
                             "performance_cost_index_target": 0.5,

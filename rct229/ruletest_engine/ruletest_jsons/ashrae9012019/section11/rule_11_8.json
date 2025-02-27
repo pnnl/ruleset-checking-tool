@@ -13,17 +13,16 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.34"
+            "schema_version": "0.1.3"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "calendar": {
+                            "is_leap_year": false
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -39,7 +38,7 @@
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 92.90303999999999,
-                                                        "service_water_heating_building_area_type": "OFFICE",
+                                                        "service_water_heating_area_type": "OFFICE",
                                                         "service_water_heating_uses": [
                                                             {
                                                                 "id": "SHW 1",
@@ -52,7 +51,7 @@
                                                     {
                                                         "id": "Space 2",
                                                         "floor_area": 92.90303999999999,
-                                                        "service_water_heating_building_area_type": "OFFICE",
+                                                        "service_water_heating_area_type": "OFFICE",
                                                         "service_water_heating_uses": [
                                                             {
                                                                 "id": "SHW 2",
@@ -75,7 +74,7 @@
                                                     {
                                                         "id": "Space 3",
                                                         "floor_area": 92.90303999999999,
-                                                        "service_water_heating_building_area_type": "LIBRARY",
+                                                        "service_water_heating_area_type": "LIBRARY",
                                                         "service_water_heating_uses": [
                                                             {
                                                                 "id": "SHW 3",
@@ -88,7 +87,7 @@
                                                     {
                                                         "id": "Space 4",
                                                         "floor_area": 92.90303999999999,
-                                                        "service_water_heating_building_area_type": "LIBRARY",
+                                                        "service_water_heating_area_type": "LIBRARY",
                                                         "service_water_heating_uses": [
                                                             {
                                                                 "id": "SHW 4",
@@ -119,12 +118,11 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "calendar": {
+                            "is_leap_year": false
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -140,7 +138,7 @@
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 92.90303999999999,
-                                                        "service_water_heating_building_area_type": "OFFICE",
+                                                        "service_water_heating_area_type": "OFFICE",
                                                         "service_water_heating_uses": [
                                                             {
                                                                 "id": "SHW 1",
@@ -169,7 +167,7 @@
                                                     {
                                                         "id": "Space 3",
                                                         "floor_area": 92.90303999999999,
-                                                        "service_water_heating_building_area_type": "LIBRARY",
+                                                        "service_water_heating_area_type": "LIBRARY",
                                                         "service_water_heating_uses": [
                                                             {
                                                                 "id": "SHW 3",
@@ -230,17 +228,16 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.34"
+            "schema_version": "0.1.3"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "calendar": {
+                            "is_leap_year": false
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -256,7 +253,7 @@
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 92.90303999999999,
-                                                        "service_water_heating_building_area_type": "OFFICE",
+                                                        "service_water_heating_area_type": "OFFICE",
                                                         "service_water_heating_uses": [
                                                             {
                                                                 "id": "SHW 1",
@@ -284,12 +281,11 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "calendar": {
+                            "is_leap_year": false
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -305,7 +301,7 @@
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 92.90303999999999,
-                                                        "service_water_heating_building_area_type": "OFFICE",
+                                                        "service_water_heating_area_type": "OFFICE",
                                                         "service_water_heating_uses": [
                                                             {
                                                                 "id": "SHW 1",
@@ -353,17 +349,16 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.34"
+            "schema_version": "0.1.3"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "calendar": {
+                            "is_leap_year": false
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -404,7 +399,8 @@
                                                             {
                                                                 "id": "SHW 2",
                                                                 "served_by_distribution_system": "SHW Distribution 2",
-                                                                "use": 100
+                                                                "use": 100,
+                                                                "use_units": "POWER_PER_AREA"
                                                             }
                                                         ]
                                                     }
@@ -417,10 +413,20 @@
                         ],
                         "service_water_heating_distribution_systems": [
                             {
-                                "id": "SHW Distribution 1"
+                                "id": "SHW Distribution 1",
+                                "tanks": [
+                                    {
+                                        "id": "SHW Dist Tank 1"
+                                    }
+                                ]
                             },
                             {
-                                "id": "SHW Distribution 2"
+                                "id": "SHW Distribution 2",
+                                "tanks": [
+                                    {
+                                        "id": "SHW Dist Tank 2"
+                                    }
+                                ]
                             }
                         ],
                         "type": "PROPOSED"
@@ -429,12 +435,11 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "calendar": {
+                            "is_leap_year": false
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -475,7 +480,8 @@
                                                             {
                                                                 "id": "SHW 2",
                                                                 "served_by_distribution_system": "SHW Distribution 2",
-                                                                "use": 100
+                                                                "use": 100,
+                                                                "use_units": "POWER_PER_AREA"
                                                             }
                                                         ]
                                                     }
@@ -496,7 +502,12 @@
                                 ]
                             },
                             {
-                                "id": "SHW Distribution 2"
+                                "id": "SHW Distribution 2",
+                                "tanks": [
+                                    {
+                                        "id": "SHW Dist Tank 2"
+                                    }
+                                ]
                             }
                         ],
                         "type": "BASELINE_0"
@@ -520,17 +531,16 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.34"
+            "schema_version": "0.1.3"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "calendar": {
+                            "is_leap_year": false
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -546,7 +556,7 @@
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 92.90303999999999,
-                                                        "service_water_heating_building_area_type": "ALL_OTHERS",
+                                                        "service_water_heating_area_type": "ALL_OTHERS",
                                                         "service_water_heating_uses": [
                                                             {
                                                                 "id": "SHW 1",
@@ -568,12 +578,13 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 2",
-                                                        "service_water_heating_building_area_type": "ALL_OTHERS",
+                                                        "service_water_heating_area_type": "ALL_OTHERS",
                                                         "service_water_heating_uses": [
                                                             {
                                                                 "id": "SHW 2",
                                                                 "served_by_distribution_system": "SHW Distribution 2",
-                                                                "use": 100
+                                                                "use": 100,
+                                                                "use_units": "POWER_PER_AREA"
                                                             }
                                                         ]
                                                     }
@@ -586,10 +597,20 @@
                         ],
                         "service_water_heating_distribution_systems": [
                             {
-                                "id": "SHW Distribution 1"
+                                "id": "SHW Distribution 1",
+                                "tanks": [
+                                    {
+                                        "id": "SHW Dist Tank 1"
+                                    }
+                                ]
                             },
                             {
-                                "id": "SHW Distribution 2"
+                                "id": "SHW Distribution 2",
+                                "tanks": [
+                                    {
+                                        "id": "SHW Dist Tank 2"
+                                    }
+                                ]
                             }
                         ],
                         "type": "PROPOSED"
@@ -598,12 +619,11 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "calendar": {
+                            "is_leap_year": false
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -619,7 +639,7 @@
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 92.90303999999999,
-                                                        "service_water_heating_building_area_type": "ALL_OTHERS",
+                                                        "service_water_heating_area_type": "ALL_OTHERS",
                                                         "service_water_heating_uses": [
                                                             {
                                                                 "id": "SHW 1",
@@ -641,12 +661,13 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 2",
-                                                        "service_water_heating_building_area_type": "ALL_OTHERS",
+                                                        "service_water_heating_area_type": "ALL_OTHERS",
                                                         "service_water_heating_uses": [
                                                             {
                                                                 "id": "SHW 2",
                                                                 "served_by_distribution_system": "SHW Distribution 2",
-                                                                "use": 100
+                                                                "use": 100,
+                                                                "use_units": "POWER_PER_AREA"
                                                             }
                                                         ]
                                                     }
@@ -667,7 +688,12 @@
                                 ]
                             },
                             {
-                                "id": "SHW Distribution 2"
+                                "id": "SHW Distribution 2",
+                                "tanks": [
+                                    {
+                                        "id": "SHW Dist Tank 2"
+                                    }
+                                ]
                             }
                         ],
                         "type": "BASELINE_0"
@@ -690,17 +716,16 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.34"
+            "schema_version": "0.1.3"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "calendar": {
+                            "is_leap_year": false
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -716,7 +741,7 @@
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 92.90303999999999,
-                                                        "service_water_heating_building_area_type": "OFFICE",
+                                                        "service_water_heating_area_type": "OFFICE",
                                                         "service_water_heating_uses": [
                                                             {
                                                                 "id": "SHW 1",
@@ -738,7 +763,7 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 2",
-                                                        "service_water_heating_building_area_type": "OFFICE",
+                                                        "service_water_heating_area_type": "OFFICE",
                                                         "service_water_heating_uses": [
                                                             {
                                                                 "id": "SHW 2",
@@ -766,12 +791,11 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "calendar": {
+                            "is_leap_year": false
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -787,7 +811,7 @@
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 92.90303999999999,
-                                                        "service_water_heating_building_area_type": "OFFICE",
+                                                        "service_water_heating_area_type": "OFFICE",
                                                         "service_water_heating_uses": [
                                                             {
                                                                 "id": "SHW 1",
@@ -809,7 +833,7 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 2",
-                                                        "service_water_heating_building_area_type": "OFFICE",
+                                                        "service_water_heating_area_type": "OFFICE",
                                                         "service_water_heating_uses": [
                                                             {
                                                                 "id": "SHW 2",
@@ -856,17 +880,16 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.34"
+            "schema_version": "0.1.3"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "calendar": {
+                            "is_leap_year": false
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -882,7 +905,7 @@
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 92.90303999999999,
-                                                        "service_water_heating_building_area_type": "RETAIL",
+                                                        "service_water_heating_area_type": "RETAIL",
                                                         "service_water_heating_uses": [
                                                             {
                                                                 "id": "SHW 1",
@@ -890,7 +913,7 @@
                                                                 "use": 100,
                                                                 "use_units": "POWER_PER_AREA"
                                                             },
-															{
+                                                            {
                                                                 "id": "SHW 2",
                                                                 "served_by_distribution_system": "SHW Distribution 1",
                                                                 "use": 100,
@@ -910,7 +933,7 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 2",
-                                                        "service_water_heating_building_area_type": "OFFICE",
+                                                        "service_water_heating_area_type": "OFFICE",
                                                         "service_water_heating_uses": [
                                                             {
                                                                 "id": "SHW 3",
@@ -944,12 +967,11 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "calendar": {
+                            "is_leap_year": false
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -965,7 +987,7 @@
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 92.90303999999999,
-                                                        "service_water_heating_building_area_type": "RETAIL",
+                                                        "service_water_heating_area_type": "RETAIL",
                                                         "service_water_heating_uses": [
                                                             {
                                                                 "id": "SHW 1",
@@ -973,7 +995,7 @@
                                                                 "use": 10,
                                                                 "use_units": "POWER_PER_AREA"
                                                             },
-															{
+                                                            {
                                                                 "id": "SHW 2",
                                                                 "served_by_distribution_system": "SHW Distribution 2",
                                                                 "use": 10,
@@ -993,7 +1015,7 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 2",
-                                                        "service_water_heating_building_area_type": "OFFICE",
+                                                        "service_water_heating_area_type": "OFFICE",
                                                         "service_water_heating_uses": [
                                                             {
                                                                 "id": "SHW 3",

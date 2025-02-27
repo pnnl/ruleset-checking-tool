@@ -22,8 +22,8 @@ class Section19Rule5(RuleDefinitionBase):
             is_primary_rule=True,
             rmd_context="ruleset_model_descriptions/0",
             required_fields={
-                "$": ["output"],
-                "output": ["output_instance"],
+                "$": ["model_output"],
+                "model_output": ["output_instance"],
                 "output_instance": [
                     "unmet_load_hours_heating",
                     "unmet_load_hours_cooling",
@@ -42,7 +42,7 @@ class Section19Rule5(RuleDefinitionBase):
 
     def get_calc_vals(self, context, data=None):
         rmd_p = context.PROPOSED
-        output_instance_p = rmd_p["output"]["output_instance"]
+        output_instance_p = rmd_p["model_output"]["output_instance"]
 
         unmet_load_hours_heating_p = output_instance_p["unmet_load_hours_heating"]
         unmet_load_hours_cooling_p = output_instance_p["unmet_load_hours_cooling"]

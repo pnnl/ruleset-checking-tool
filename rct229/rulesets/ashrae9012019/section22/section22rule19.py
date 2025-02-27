@@ -93,4 +93,4 @@ class Section22Rule19(RuleDefinitionListIndexedBase):
 
         def rule_check(self, context, calc_vals=None, data=None):
             temperature_reset_type = calc_vals["temperature_reset_type"]
-            return temperature_reset_type == TEMPERATURE_RESET.CONSTANT
+            return temperature_reset_type == TEMPERATURE_RESET.NO_RESET

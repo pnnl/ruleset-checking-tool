@@ -1,13 +1,12 @@
 import glob
 import json
-from typing import Optional
 
 # from jsonpointer import JsonPointer
 import os
 from copy import deepcopy
+from typing import Optional
 
 from pint import Quantity
-
 from rct229.reports.ashrae9012019.ashrae901_2019_software_test_report import (
     ASHRAE9012019SoftwareTestReport,
 )
@@ -107,18 +106,22 @@ def evaluate_outcome_enumeration_str(outcome_enumeration_str):
     return test_result
 
 
-def process_test_result(test_result, test_dict, test_id):
+def process_test_result(test_result, raised_message, test_dict, test_id):
     """Returns a string describing whether or not a test resulted in its expected outcome
 
     Parameters
     ----------
     test_result : str
 
-        String describing rule outcome. OPTIONS: 'pass', 'fail', 'undetermined'
+        String describing rule outcome. OPTIONS: 'pass', 'fail', 'undetermined', 'not_applicable'
+
+    raised_message : str
+
+        String describing any outcome or exception message from running the rule.
 
     test_dict : dict
 
-        Python dictionary containing the a test's expected outcome and description
+        Python dictionary containing the test's expected outcome and description
 
     test_id: str
 
@@ -145,13 +148,23 @@ def process_test_result(test_result, test_dict, test_id):
     # Check if the test results agree with the expected outcome. Write an appropriate response based on their agreement
     received_expected_outcome = test_result == test_dict["expected_rule_outcome"]
 
+    # TODO - ask about tests where a raised message exists but is not captured. Code written to catch those.
+
+    # Check for any raised message in the rule test. If none exists, return empty string ""
+    expected_raised_message = test_dict.get("expected_raised_message_includes", "")
+
+    # Check if the raised message is a substring in the expected raised message (tests often don't have the full
+    # message)
+    messages_matched = expected_raised_message in str(raised_message)
+
+    # Success and failure tied to
+    overall_outcome = messages_matched and received_expected_outcome
+
     # Check if the test results agree with the expected outcome. Write an appropriate response based on their agreement
     if received_expected_outcome:
         if test_result == "pass":
-            # f"SUCCESS: Test {test_id} passed as expected. The following condition was identified: {description}"
             outcome_text = "PASS"
         elif test_result == "fail":
-            # f"SUCCESS: Test {test_id} failed as expected. The following condition was identified: {description}"
             outcome_text = "FAIL"
         elif test_result == "undetermined":
             outcome_text = "UNDETERMINED"
@@ -175,7 +188,14 @@ def process_test_result(test_result, test_dict, test_id):
                 f"FAILURE: Test {test_id} returned '{test_result}' unexpectedly"
             )
 
-    return outcome_text, received_expected_outcome
+    # Check if exception messages matched. If not, append that to the outcome message.
+    if not messages_matched:
+        outcome_text += (
+            f"\rMessages did not match. Expected outcome message was '{expected_raised_message}' and "
+            f"instead received '{raised_message}'"
+        )
+
+    return outcome_text, overall_outcome
 
 
 def run_section_tests(
@@ -344,9 +364,6 @@ def run_section_tests(
         print("All tests passed!")
 
     print("")  # Buffer line
-
-    # Return whether or not all tests in this test JSON received their expected outcome as a boolean
-    all_tests_successful = all(test_result_dict["results"])
 
     return all_tests_pass
 
@@ -585,7 +602,11 @@ def validate_test_json_schema(test_json_path):
             # If result contains a dictionary with failure information, append failure to failure list
             if isinstance(result, dict):
                 if result["passed"] is not True:
-                    error_message = result["error"]
+                    if "error" in result:
+                        error_message = result["error"]
+                    else:
+                        error_message = result["errors"]
+
                     failure_message = f"Schema validation in {test_id} for the {rmd_type} RMD: {error_message}"
                     failure_list.append(failure_message)
 
@@ -660,9 +681,12 @@ def evaluate_outcome_object(outcome_dict, test_result_dict, test_dict, test_id):
         # (e.g., "PASSED" => "pass")
         test_result = evaluate_outcome_enumeration_str(outcome_enumeration_str)
 
+        # Check for any raised message in the outcome results. If none exists, return empty string ""
+        raised_message = outcome_dict.get("message", "")
+
         # Write outcome text based and "receive_expected_outcome" boolean based on the test result
         outcome_text, received_expected_outcome = process_test_result(
-            test_result, test_dict, test_id
+            test_result, raised_message, test_dict, test_id
         )
 
         # Append results if expected outcome not received
@@ -682,7 +706,8 @@ def evaluate_outcome_object(outcome_dict, test_result_dict, test_dict, test_id):
             )
 
             test_result_dict["log"].append(
-                f"{outcome_result_context}: Calculated values - {outcome_calc_vals_string}"
+                # Append calculations but cap length of string to avoid printing long arrays
+                f"{outcome_result_context}: Calculated values - {outcome_calc_vals_string[:300]}"
             )
 
         test_result_dict[f"{test_id}"].append(received_expected_outcome)

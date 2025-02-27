@@ -117,13 +117,11 @@ TEST_BUILDING_WITHOUT_LGT_BAT = {
 TEST_RPD_WITH_LGT_BAT = {
     "id": "ASHRAE229",
     "ruleset_model_descriptions": [TEST_BUILDING_WITH_LGT_BAT],
-    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 TEST_RPD_WITHOUT_LGT_BAT = {
     "id": "ASHRAE229",
     "ruleset_model_descriptions": [TEST_BUILDING_WITHOUT_LGT_BAT],
-    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 

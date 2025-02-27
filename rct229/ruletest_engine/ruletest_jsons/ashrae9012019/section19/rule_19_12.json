@@ -13,27 +13,23 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.3"
         },
         "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -77,12 +73,12 @@
                                 ]
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ3C"
+                        },
                         "type": "BASELINE_0"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ3C"
-                }
+                ]
             }
         }
     },
@@ -100,27 +96,23 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.3"
         },
         "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -164,12 +156,12 @@
                                 ]
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ3C"
+                        },
                         "type": "BASELINE_0"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ3C"
-                }
+                ]
             }
         }
     },
@@ -187,27 +179,23 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.3"
         },
         "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -251,12 +239,12 @@
                                 ]
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ3C"
+                        },
                         "type": "BASELINE_0"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ3C"
-                }
+                ]
             }
         }
     },
@@ -274,27 +262,23 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.3"
         },
         "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -333,12 +317,12 @@
                                 ]
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ3C"
+                        },
                         "type": "BASELINE_0"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ3C"
-                }
+                ]
             }
         }
     },
@@ -356,27 +340,23 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.3"
         },
         "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -420,12 +400,12 @@
                                 ]
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ0A"
+                        },
                         "type": "BASELINE_0"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ0A"
-                }
+                ]
             }
         }
     }

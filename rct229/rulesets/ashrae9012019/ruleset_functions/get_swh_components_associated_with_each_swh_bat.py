@@ -85,7 +85,8 @@ def get_swh_components_associated_with_each_swh_bat(
                 for tank in tanks:
                     swh_and_equip_dict[swh_bat].tanks.append(tank["id"])
 
-                for piping in distribution.get("service_water_piping", []):
+                piping = distribution.get("service_water_piping")
+                if piping:
                     queue = [piping]
                     piping_ids = []
                     # BFS approach

@@ -14,37 +14,31 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "-",
             "mandatory_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.3"
         },
         "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Building Open Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 92.90303999999999,
-                                                        "occupant_multiplier_schedule": "Occupancy Schedule 1",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Lighting 1",
-                                                                "daylighting_control_type": "NONE",
-                                                                "lighting_multiplier_schedule": "Lighting Schedule"
+                                                                "daylighting_control_type": "NONE"
                                                             }
                                                         ]
                                                     }
@@ -76,37 +70,31 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "-",
             "mandatory_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.3"
         },
         "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Building Open Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 92.90303999999999,
-                                                        "occupant_multiplier_schedule": "Occupancy Schedule 1",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Lighting 1",
-                                                                "daylighting_control_type": "STEPPED",
-                                                                "lighting_multiplier_schedule": "Lighting Schedule"
+                                                                "daylighting_control_type": "STEPPED"
                                                             }
                                                         ]
                                                     }

@@ -61,11 +61,6 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            required_fields={
-                "$": ["weather", "calendar"],
-                "weather": ["climate_zone"],
-                "calendar": ["is_leap_year"],
-            },
             each_rule=Section4Rule11.RuleSetModelInstanceRule(),
             index_rmd=BASELINE_0,
             id="4-11",
@@ -74,10 +69,6 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-4 Schedule Modeling Requirements for the Proposed design and Baseline building",
             is_primary_rule=True,
             list_path="$.ruleset_model_descriptions[0]",
-            data_items={
-                "climate_zone": (BASELINE_0, "weather/climate_zone"),
-                "is_leap_year": (BASELINE_0, "calendar/is_leap_year"),
-            },
         )
 
     class RuleSetModelInstanceRule(RuleDefinitionListIndexedBase):
@@ -89,12 +80,18 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
                 each_rule=Section4Rule11.RuleSetModelInstanceRule.ZoneRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].zones[*]",
+                required_fields={
+                    "$": ["weather", "calendar"],
+                    "weather": ["climate_zone"],
+                    "calendar": ["is_leap_year"],
+                },
             )
 
         def create_data(self, context, data=None):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
-            is_leap_year = data["is_leap_year"]
+            is_leap_year = rmd_b["calendar"]["is_leap_year"]
+            climate_zone = rmd_b["weather"]["climate_zone"]
 
             zone_p_hvac_list_dict = {
                 zone_id: get_list_hvac_systems_associated_with_zone(rmd_p, zone_id)
@@ -109,6 +106,17 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
                 )
                 for zone_id in find_all(
                     "$.buildings[*].building_segments[*].zones[*].id", rmd_p
+                )
+            }
+
+            zone_b_hvac_zone_list_dict = {
+                hvac_id: find_all(
+                    f'$.buildings[*].building_segments[*].zones[*][?(@.terminals[*].served_by_heating_ventilating_air_conditioning_system = "{hvac_id}")].id',
+                    rmd_b,
+                )
+                for hvac_id in find_all(
+                    "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].id",
+                    rmd_b,
                 )
             }
 
@@ -131,8 +139,11 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
             }
 
             return {
+                "climate_zone": climate_zone,
+                "is_leap_year": is_leap_year,
                 "baseline_hvac_sys_type_ids_dict_b": get_baseline_system_types(rmd_b),
                 "zone_p_hvac_list_dict": zone_p_hvac_list_dict,
+                "zone_b_hvac_zone_list_dict": zone_b_hvac_zone_list_dict,
                 "zone_p_fan_schedule_dict": zone_p_fan_schedule_dict,
                 "zone_b_fan_schedule_dict": zone_b_fan_schedule_dict,
                 "floor_b_hvac_list_dict": floor_b_hvac_list_dict,
@@ -140,7 +151,7 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
                     rmd_p
                 ),
                 "zcc_dict_b": get_zone_conditioning_category_rmd_dict(
-                    data["climate_zone"], rmd_b
+                    climate_zone, rmd_b
                 ),
             }
 
@@ -171,6 +182,7 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
                 zone_p_fan_schedule_dict = data["zone_p_fan_schedule_dict"]
                 zone_b_fan_schedule_dict = data["zone_b_fan_schedule_dict"]
                 floor_b_hvac_list_dict = data["floor_b_hvac_list_dict"]
+                zone_b_hvac_zone_list_dict = data["zone_b_hvac_zone_list_dict"]
 
                 baseline_hvac_sys_type_ids_dict_b = data[
                     "baseline_hvac_sys_type_ids_dict_b"
@@ -196,7 +208,11 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
                     if hvac_id_b in baseline_hvac_sys_type_ids_dict_b[sys_type]:
                         hvac_sys_type_b = sys_type
 
-                baseline_served_by_multizone = hvac_sys_type_b in APPLICABLE_SYS_TYPES
+                # Check if the system type is an applicable system type and serves multiple zones
+                baseline_served_by_multizone = (
+                    hvac_sys_type_b in APPLICABLE_SYS_TYPES
+                    and len(next(iter(zone_b_hvac_zone_list_dict.values()))) > 1
+                )
                 list_hvac_systems_p = zone_p_hvac_list_dict[zone_p["id"]]
 
                 for hvac_id_p in list_hvac_systems_p:

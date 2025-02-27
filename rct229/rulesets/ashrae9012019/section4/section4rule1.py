@@ -18,7 +18,7 @@ CONDITIONED_ZONE_TYPE = [
     ZCC.CONDITIONED_RESIDENTIAL,
 ]
 MANUAL_CHECK_MSG = (
-    "There is a temperature schedule mismatch between the baseline and proposed rmds. Fail unless "
+    "There is a temperature schedule mismatch between the baseline and proposed. Fail unless "
     "Table G3.1 #4 baseline column exception #s 1 and/or 2 are applicable "
 )
 
@@ -31,11 +31,6 @@ class Section4Rule1(RuleDefinitionListIndexedBase):
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            required_fields={
-                "$": ["weather", "calendar"],
-                "weather": ["climate_zone"],
-                "calendar": ["is_leap_year"],
-            },
             each_rule=Section4Rule1.RuleSetModelInstanceRule(),
             index_rmd=BASELINE_0,
             id="4-1",
@@ -44,10 +39,6 @@ class Section4Rule1(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-4 Schedule Modeling Requirements for the Proposed design and Baseline building",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            data_items={
-                "climate_zone_b": (BASELINE_0, "weather/climate_zone"),
-                "is_leap_year_b": (BASELINE_0, "calendar/is_leap_year"),
-            },
         )
 
     class RuleSetModelInstanceRule(RuleDefinitionListIndexedBase):
@@ -59,17 +50,25 @@ class Section4Rule1(RuleDefinitionListIndexedBase):
                 each_rule=Section4Rule1.RuleSetModelInstanceRule.ZoneRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].zones[*]",
-                required_fields={"$": ["schedules"]},
+                required_fields={
+                    "$": ["schedules", "weather", "calendar"],
+                    "weather": ["climate_zone"],
+                    "calendar": ["is_leap_year"],
+                },
             )
 
         def create_data(self, context, data=None):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
+            climate_zone_b = rmd_b["weather"]["climate_zone"]
+            is_leap_year_b = rmd_b["calendar"]["is_leap_year"]
             return {
                 "schedules_b": rmd_b["schedules"],
                 "schedules_p": rmd_p["schedules"],
+                "climate_zone_b": climate_zone_b,
+                "is_leap_year_b": is_leap_year_b,
                 "zcc_dict_b": get_zone_conditioning_category_rmd_dict(
-                    data["climate_zone_b"], rmd_b
+                    climate_zone_b, rmd_b
                 ),
             }
 

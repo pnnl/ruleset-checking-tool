@@ -14,20 +14,19 @@
             "comparison_value": "Proposed RMD",
             "rule_dependency": 0,
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.34"
+            "schema_version": "0.1.3"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "calendar": {
+                            "is_leap_year": false
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -65,15 +64,14 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "calendar": {
+                            "is_leap_year": false
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -126,20 +124,19 @@
             "comparison_value": "Proposed RMD",
             "rule_dependency": 0,
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.34"
+            "schema_version": "0.1.3"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "calendar": {
+                            "is_leap_year": false
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -177,15 +174,14 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "calendar": {
+                            "is_leap_year": false
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -239,20 +235,19 @@
             "comparison_value": "Proposed RMD",
             "rule_dependency": 0,
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.34"
+            "schema_version": "0.1.3"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "calendar": {
+                            "is_leap_year": false
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -290,15 +285,14 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "calendar": {
+                            "is_leap_year": false
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -342,7 +336,6 @@
         "Test": "d",
         "test_description": "A one building segment, single zone office building has its miscellaneous power lower in its proposed RMD than the baseline RMD.  Both RMDs are following the code compliant path.",
         "expected_rule_outcome": "fail",
-        "expected_raised_message_includes": "The proposed building miscellaneous equipment load is less than the baseline, which is only permitted when the model is being used to quantify performance that exceeds the requirements of Standard 90.1.",
         "standard": {
             "rule_id": "12-1",
             "ruleset_reference": "Table G3.1-12",
@@ -352,20 +345,19 @@
             "comparison_value": "Proposed RMD",
             "rule_dependency": 0,
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.34"
+            "schema_version": "0.1.3"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "calendar": {
+                            "is_leap_year": false
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -403,15 +395,14 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "calendar": {
+                            "is_leap_year": false
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {

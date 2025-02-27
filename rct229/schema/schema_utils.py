@@ -225,8 +225,14 @@ def return_json_schema_reference(object_dict, key):
         if "$ref" in properties_dict["oneOf"][0]:
             secondary_json = properties_dict["oneOf"][0]["$ref"].split("#")[0]
 
+            # If it's a secondary schema file, return it
             if secondary_json in secondary_schema_files:
                 return secondary_json
+
+            # If it's actually just referencing the main schema, return the reference (the last element separated by
+            # the '/'s)
+            elif secondary_json == SchemaStore.SCHEMA_KEY:
+                return properties_dict["oneOf"][0]["$ref"].split("/")[-1]
 
             else:
                 raise ValueError(
