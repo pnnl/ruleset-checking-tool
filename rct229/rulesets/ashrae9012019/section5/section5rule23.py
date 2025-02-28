@@ -28,52 +28,36 @@ class Section5Rule23(RuleDefinitionListIndexedBase):
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
-                list_path="$.building_segments[*].zones[*].surfaces[*]",
-                each_rule=Section5Rule23.BuildingRule.SurfaceRule(),
+                list_path="$.building_segments[*].zones[*].surfaces[*].subsurfaces[*]",
+                each_rule=Section5Rule23.BuildingRule.SubsurfaceRule(),
                 index_rmd=BASELINE_0,
             )
 
-        def list_filter(self, context_item, data):
-            surface_b = context_item.BASELINE_0
-            subsurfaces_b = surface_b.get("subsurfaces", [])
-            return len(subsurfaces_b) > 0
-
-        class SurfaceRule(RuleDefinitionListIndexedBase):
+        class SubsurfaceRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section5Rule23.BuildingRule.SurfaceRule, self).__init__(
+                super(
+                    Section5Rule23.BuildingRule.SubsurfaceRule, self
+                ).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
-                    each_rule=Section5Rule23.BuildingRule.SurfaceRule.SubsurfaceRule(),
-                    index_rmd=BASELINE_0,
-                    list_path="subsurfaces[*]",
+                    required_fields={"$": ["has_manual_interior_shades"]},
                 )
 
-            class SubsurfaceRule(RuleDefinitionBase):
-                def __init__(self):
-                    super(
-                        Section5Rule23.BuildingRule.SurfaceRule.SubsurfaceRule, self
-                    ).__init__(
-                        rmds_used=produce_ruleset_model_description(
-                            USER=False, BASELINE_0=True, PROPOSED=True
-                        ),
-                        required_fields={"$": ["has_manual_interior_shades"]},
-                    )
+            def get_calc_vals(self, context, data=None):
+                subsurface_b = context.BASELINE_0
+                subsurface_p = context.PROPOSED
+                return {
+                    "subsurface_p_manual_shade": subsurface_p[
+                        "has_manual_interior_shades"
+                    ],
+                    "subsurface_b_manual_shade": subsurface_b[
+                        "has_manual_interior_shades"
+                    ],
+                }
 
-                def get_calc_vals(self, context, data=None):
-                    subsurface_b = context.BASELINE_0
-                    subsurface_p = context.PROPOSED
-                    return {
-                        "subsurface_p_manual_shade": subsurface_p[
-                            "has_manual_interior_shades"
-                        ],
-                        "subsurface_b_manual_shade": subsurface_b[
-                            "has_manual_interior_shades"
-                        ],
-                    }
-
-                def rule_check(self, context, calc_vals=None, data=None):
-                    return (
-                        calc_vals["subsurface_p_manual_shade"]
-                        == calc_vals["subsurface_b_manual_shade"]
-                    )
+            def rule_check(self, context, calc_vals=None, data=None):
+                return (
+                    calc_vals["subsurface_p_manual_shade"]
+                    == calc_vals["subsurface_b_manual_shade"]
+                )

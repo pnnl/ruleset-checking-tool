@@ -25,15 +25,15 @@
 
     - For each surface in zone: `for surface_b in zone_b.surfaces:`
 
-      - Get matching surface in P_RMD: `surface_p = match_data_element(P_RMD, Surfaces, surface_b.id)`
+      - For each subsurface in surface in B_RMD: `for subsurface_b in surface_b.subsurfaces:`
+    
+        - Get matching subsurface in P_RMD: subsurface_p = match_data_element(P_RMD, Subsurfaces, subsurface_b.id)
+              
+        - **Rule Assertion:**
 
-        - For each subsurface in surface in P_RMD: `for subsurface_p in surface_p.subsurfaces:`
+           - Case 1: If subsurface is modeled with the same manual shade status as in P_RMD: `if subsurface_b.has_manual_interior_shades == subsurface_p.has_manual_interior_shades: PASS`
 
-        **Rule Assertion:**
-
-        - Case 1: If subsurface is modeled with the same manual shade status as in P_RMD: `if subsurface_b.has_manual_interior_shades == subsurface_p.has_manual_interior_shades: PASS`
-
-        - Case 2: Else: `else: FAIL`
+           - Case 2: Else: `else: FAIL`
 
 **Notes:**
 
