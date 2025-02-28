@@ -35,9 +35,7 @@ class Section5Rule23(RuleDefinitionListIndexedBase):
 
         class SubsurfaceRule(RuleDefinitionBase):
             def __init__(self):
-                super(
-                    Section5Rule23.BuildingRule.SubsurfaceRule, self
-                ).__init__(
+                super(Section5Rule23.BuildingRule.SubsurfaceRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
