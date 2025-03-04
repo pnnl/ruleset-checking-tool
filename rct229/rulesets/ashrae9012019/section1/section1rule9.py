@@ -1,8 +1,6 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
-from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019.data_fns.extra_schema_fns import (
-    proposed_equals_user,
     baseline_equals_baseline,
 )
 
@@ -38,7 +36,7 @@ class Section1Rule9(RuleDefinitionBase):
         baseline_90 = context.BASELINE_90
         baseline_180 = context.BASELINE_180
         baseline_270 = context.BASELINE_270
-        return all[baseline_0, baseline_90, baseline_180, baseline_270]
+        return all([baseline_0, baseline_90, baseline_180, baseline_270])
 
     def get_calc_vals(self, context, data=None):
         baseline_0 = context.BASELINE_0
@@ -47,14 +45,14 @@ class Section1Rule9(RuleDefinitionBase):
         baseline_270 = context.BASELINE_270
 
         error_msg_list = []
-        comparison_result = True
-        for baseline in [baseline_90, baseline_180, baseline_270]:
-            comparison_result = comparison_result and baseline_equals_baseline(
+        comparison_result = all(
+            baseline_equals_baseline(
                 index_context=baseline_0,
                 compare_context=baseline,
                 error_msg_list=error_msg_list,
             )
-
+            for baseline in [baseline_90, baseline_180, baseline_270]
+        )
         return {
             "comparison_result": comparison_result,
             "error_msg_list": error_msg_list,
