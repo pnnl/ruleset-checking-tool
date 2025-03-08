@@ -23,11 +23,12 @@ def get_building_lab_zones_list(rmd: dict) -> list[str]:
         if any(
             [
                 space.get("function") == SpaceFunctionOptions.LABORATORY
-                and space.get("lighting_space_type")
-                != LightingSpaceOptions.LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM
-                or space.get("function") != SpaceFunctionOptions.LABORATORY
+                and space.get("lighting_space_type") is None
+                or space.get("function") is None
                 and space.get("lighting_space_type")
                 == LightingSpaceOptions.LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM
+                or space.get("function") == SpaceFunctionOptions.LABORATORY
+                and LightingSpaceOptions.LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM
                 for space in find_all("$.spaces[*]", zone)
             ]
         ):

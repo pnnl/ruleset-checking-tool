@@ -108,4 +108,5 @@ def test__get_building_lab_zone_list__success():
         "Thermal Zone 2",
         "Thermal Zone 3",
         "Thermal Zone 5",
+        "Thermal Zone 6",
     ]
