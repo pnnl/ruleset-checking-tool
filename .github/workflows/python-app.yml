@@ -30,12 +30,13 @@ jobs:
         with:
           python-version: '3.10'
       - name: Install Poetry
-        uses: snok/install-poetry@v1
-        with:
-          version: 1.8.4
-          virtualenvs-create: true
-          virtualenvs-in-project: true
-          installer-parallel: true
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 - --version 1.8.4 --debug || (
+            echo "Poetry installation failed."; 
+            ls /home/runner/work/ruleset-checking-tool/ruleset-checking-tool/poetry-installer-error-*.log;
+            cat /home/runner/work/ruleset-checking-tool/ruleset-checking-tool/poetry-installer-error-*.log;
+            exit 1
+          )
       - name: Install venv
         run: poetry install
       - name: Run pytests
