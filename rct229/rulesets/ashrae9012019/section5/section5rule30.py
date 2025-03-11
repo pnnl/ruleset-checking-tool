@@ -125,7 +125,10 @@ class Section5Rule30(RuleDefinitionListIndexedBase):
                     and absorptance_thermal_exterior_p != ABSORPTION_THERMAL_EXTERIOR
                 ) or (
                     absorptance_thermal_exterior_p != absorptance_thermal_exterior_u
-                    and absorptance_thermal_exterior_p == ABSORPTION_THERMAL_EXTERIOR
+                    and self.precision_comparison["absorptance_thermal_exterior_p"](
+                        absorptance_thermal_exterior_p,
+                        ABSORPTION_THERMAL_EXTERIOR,
+                    )
                 )
 
             def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
@@ -145,7 +148,10 @@ class Section5Rule30(RuleDefinitionListIndexedBase):
                     )
                 elif (
                     absorptance_thermal_exterior_p != absorptance_thermal_exterior_u
-                    and absorptance_thermal_exterior_p == ABSORPTION_THERMAL_EXTERIOR
+                    and self.precision_comparison["absorptance_thermal_exterior_p"](
+                        absorptance_thermal_exterior_p,
+                        ABSORPTION_THERMAL_EXTERIOR,
+                    )
                 ):
                     UNDETERMINED_MSG = CASE3_UNDETERMINED__MSG
 
