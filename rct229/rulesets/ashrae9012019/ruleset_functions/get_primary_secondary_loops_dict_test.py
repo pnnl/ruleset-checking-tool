@@ -2,7 +2,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_primary_secondary_loops
     get_primary_secondary_loops_dict,
 )
 from rct229.schema.schema_utils import quantify_rmd
-from rct229.schema.validate import schema_validate_rmd
+from rct229.schema.validate import schema_validate_rpd
 
 TEST_RPD = {
     "id": "ASHRAE229 1",
@@ -104,7 +104,14 @@ TEST_RPD = {
             "type": "BASELINE_0",
         }
     ],
-    "data_timestamp": "2024-02-12T09:00Z",
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
 }
 
 
@@ -112,7 +119,7 @@ TEST_RMD = quantify_rmd(TEST_RPD)["ruleset_model_descriptions"][0]
 
 
 def test__TEST_RPD__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RPD)
+    schema_validation_result = schema_validate_rpd(TEST_RPD)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"

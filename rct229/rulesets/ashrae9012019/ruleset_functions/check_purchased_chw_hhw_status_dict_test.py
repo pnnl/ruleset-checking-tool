@@ -1,7 +1,7 @@
 from rct229.rulesets.ashrae9012019.ruleset_functions.check_purchased_chw_hhw_status_dict import (
     check_purchased_chw_hhw_status_dict,
 )
-from rct229.schema.validate import schema_validate_rmd
+from rct229.schema.validate import schema_validate_rpd
 
 TEST_BUILDING_NO_EXT_FLUID_SOURCE = {
     "id": "RMD 1",
@@ -323,36 +323,41 @@ TEST_BUILDING_TERMINAL_SYS = {
 TEST_RMD_HEATING_SYS = {
     "id": "ASHRAE229",
     "ruleset_model_descriptions": [TEST_BUILDING_HEATING_SYS],
-    "data_timestamp": "2024-02-12T09:00Z",
 }
 TEST_RMD_TERMINAL_SYS = {
     "id": "ASHRAE229",
     "ruleset_model_descriptions": [TEST_BUILDING_TERMINAL_SYS],
-    "data_timestamp": "2024-02-12T09:00Z",
 }
 TEST_RMD_FALSE = {
     "id": "ASHRAE229",
     "ruleset_model_descriptions": [TEST_BUILDING_NO_EXT_FLUID_SOURCE],
-    "data_timestamp": "2024-02-12T09:00Z",
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
 }
 
 
 def test__TEST_RMD_HEATING_TRUE__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RMD_HEATING_SYS)
+    schema_validation_result = schema_validate_rpd(TEST_RMD_HEATING_SYS)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
 
 
 def test__TEST_RMD_PREHEAT_TRUE__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RMD_TERMINAL_SYS)
+    schema_validation_result = schema_validate_rpd(TEST_RMD_TERMINAL_SYS)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
 
 
 def test__TEST_RMD_FALSE__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RMD_FALSE)
+    schema_validation_result = schema_validate_rpd(TEST_RMD_FALSE)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"

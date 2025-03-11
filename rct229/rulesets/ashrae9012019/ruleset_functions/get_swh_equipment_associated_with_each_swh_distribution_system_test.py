@@ -5,7 +5,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_equipment_associate
     get_swh_equipment_associated_with_each_swh_distribution_system,
 )
 from rct229.schema.schema_utils import quantify_rmd
-from rct229.schema.validate import schema_validate_rmd
+from rct229.schema.validate import schema_validate_rpd
 
 TEST_RMD = {
     "id": "test_rmd",
@@ -58,37 +58,28 @@ TEST_RMD = {
                     "id": "Tank 2",
                 },
             ],
-            "service_water_piping": [
-                {
-                    "id": "SWH Piping 1",
-                    "child": [
-                        {
-                            "id": "SWH Piping Child 1",
-                            "child": [
-                                {
-                                    "id": "SWH Piping 1-a",
-                                },
-                                {
-                                    "id": "SWH Piping 1-b",
-                                },
-                            ],
-                        }
-                    ],
-                },
-                {
-                    "id": "SWH Piping 2",
-                },
-            ],
+            "service_water_piping": {
+                "id": "SWH Piping 1",
+                "child": [
+                    {
+                        "id": "SWH Piping Child 1",
+                        "child": [
+                            {
+                                "id": "SWH Piping 1-a",
+                            },
+                            {
+                                "id": "SWH Piping 1-b",
+                            },
+                        ],
+                    }
+                ],
+            },
         }
     ],
     "pumps": [
         {
             "id": "Pump 1",
             "loop_or_piping": "SWH Piping 1",
-        },
-        {
-            "id": "Pump 2",
-            "loop_or_piping": "SWH Piping 2",
         },
         {
             "id": "Pump 3",
@@ -127,7 +118,14 @@ TEST_RMD = {
 TEST_RPD_FULL = {
     "id": "229",
     "ruleset_model_descriptions": [TEST_RMD],
-    "data_timestamp": "2024-02-12T09:00Z",
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
 }
 
 TEST_RMD = quantify_rmd(TEST_RPD_FULL)["ruleset_model_descriptions"][0]
@@ -145,7 +143,7 @@ class SWHDistributionAssociations:
 
 
 def test__TEST_RPD__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RPD_FULL)
+    schema_validation_result = schema_validate_rpd(TEST_RPD_FULL)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
@@ -159,14 +157,13 @@ def test_get_swh_equipment_associated_with_each_swh_distribution_system():
     assert swh_and_equip_dict["SWH Distribution 1"].swh_heating_eq == [
         "SWH Equipment 1"
     ]
-    assert swh_and_equip_dict["SWH Distribution 1"].pumps == ["Pump 1", "Pump 2"]
+    assert swh_and_equip_dict["SWH Distribution 1"].pumps == ["Pump 1"]
     assert swh_and_equip_dict["SWH Distribution 1"].tanks == ["Tank 1", "Tank 2"]
     assert swh_and_equip_dict["SWH Distribution 1"].piping == [
         "SWH Piping 1",
         "SWH Piping Child 1",
         "SWH Piping 1-a",
         "SWH Piping 1-b",
-        "SWH Piping 2",
     ]
     assert swh_and_equip_dict["SWH Distribution 1"].solar_thermal == [
         "Solar Thermal System 1",

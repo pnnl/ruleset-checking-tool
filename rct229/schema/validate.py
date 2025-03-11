@@ -1,10 +1,16 @@
 import json
 import os
-
-import jsonschema
+from referencing import Registry
+from jsonschema import Draft7Validator
+from referencing.jsonschema import DRAFT7
 
 from rct229.schema.schema_store import SchemaStore
-from rct229.utils.jsonpath_utils import find_all, find_all_by_jsonpaths
+from rct229.utils.jsonpath_utils import (
+    find_all,
+    find_all_by_jsonpaths,
+    convert_absolute_path_list_to_jsonpath,
+    format_jsonpath_with_id,
+)
 
 file_dir = os.path.dirname(__file__)
 
@@ -178,7 +184,7 @@ def check_fluid_loop_or_piping_association(rpd: dict) -> list:
     mismatch_list = []
     fluid_loop_or_piping_id_jsonpaths = [
         "$.ruleset_model_descriptions[*].fluid_loops[*].id",
-        "$.ruleset_model_descriptions[*].service_water_heating_distribution_systems[*].service_water_piping[*].id",
+        "$.ruleset_model_descriptions[*].service_water_heating_distribution_systems[*].service_water_piping.id",
         "$.ruleset_model_descriptions[*].fluid_loops[*].child_loops[*].id",
     ]
 
@@ -237,7 +243,7 @@ def check_hvac_association(rpd: dict) -> list:
     Check the association between hvac systems and the terminals served by HVAC systems.
     Parameters
     ----------
-    rmd
+    rpd
 
     Returns list of mismatched hvac ids
     -------
@@ -258,7 +264,7 @@ def check_hvac_association(rpd: dict) -> list:
     return mismatch_list
 
 
-def check_unique_ids_in_ruleset_model_descriptions(rmd):
+def check_unique_ids_in_ruleset_model_descriptions(rpd):
     """Checks that the ids within each group inside a
     RuleSetModelInstance are unique
 
@@ -270,8 +276,8 @@ def check_unique_ids_in_ruleset_model_descriptions(rmd):
 
     Parameters
     ----------
-    rmd : dict
-        A dictionary representing an RMD
+    rpd : dict
+        A dictionary representing an RPD
 
     Returns
     -------
@@ -280,7 +286,7 @@ def check_unique_ids_in_ruleset_model_descriptions(rmd):
         indicates that all appropriate ids are unique.
     """
     # The schema does not require the ruleset_model_descriptions field, default to []
-    ruleset_model_descriptions = rmd.get("ruleset_model_descriptions", [])
+    ruleset_model_descriptions = rpd.get("ruleset_model_descriptions", [])
 
     bad_paths = []
     for rmd_index, rmd in enumerate(ruleset_model_descriptions):
@@ -298,10 +304,6 @@ def check_unique_ids_in_ruleset_model_descriptions(rmd):
     error_msg = f"Non-unique ids for paths: {'; '.join(bad_paths)}" if bad_paths else ""
 
     return error_msg
-
-
-# json_paths_to_lists, json_paths_to_lists_from_dict, and json_paths_to_lists_from_list
-# work together
 
 
 def json_paths_to_lists(val, path="$"):
@@ -385,7 +387,7 @@ def json_paths_to_lists_from_list(rmd_list, path):
     return paths
 
 
-def non_schema_validate_rmd(rmd_obj):
+def non_schema_validate_rpd(rmd_obj):
     """Provides non-schema validation for an RMD"""
     error = []
     unique_id_error = check_unique_ids_in_ruleset_model_descriptions(rmd_obj)
@@ -440,7 +442,7 @@ def non_schema_validate_rmd(rmd_obj):
     return {"passed": passed, "error": error if error else None}
 
 
-def schema_validate_rmd(rmd_obj):
+def schema_validate_rpd(rpd):
     """Validates an RMD against the schema
 
     This code follows the outline given in
@@ -459,36 +461,68 @@ def schema_validate_rmd(rmd_obj):
     with open(SCHEMA_OUTPUT_PATH) as json_file:
         schema_output = json.load(json_file)
 
-    # Create a resolver which maps schema references to schema objects
-    schema_store = {
-        SCHEMA_KEY: schema,
-        SCHEMA_ENUM_KEY: schema_enum,
-        SCHEMA_T24_ENUM_KEY: schema_t24_enum,
-        SCHEMA_RESNET_ENUM_KEY: schema_resnet_enum,
-        SCHEMA_OUTPUT_KEY: schema_output,
-    }
-    resolver = jsonschema.RefResolver.from_schema(schema, store=schema_store)
-
-    # Create a validator
-    Validator = jsonschema.validators.validator_for(schema)
-    validator = Validator(schema, resolver=resolver)
-
+    registry = Registry().with_resources(
+        [
+            ("ASHRAE229.schema.json", DRAFT7.create_resource(schema)),
+            (
+                "Enumerations2019ASHRAE901.schema.json",
+                DRAFT7.create_resource(schema_enum),
+            ),
+            (
+                "Enumerations2019T24.schema.json",
+                DRAFT7.create_resource(schema_t24_enum),
+            ),
+            (
+                "EnumerationsRESNET.schema.json",
+                DRAFT7.create_resource(schema_resnet_enum),
+            ),
+            ("Output2019ASHRAE901.schema.json", DRAFT7.create_resource(schema_output)),
+        ]
+    )
     try:
-        # Throws ValidationError on failure
-        validator.validate(rmd_obj)
-        return {"passed": True, "error": None}
-    except jsonschema.exceptions.ValidationError as err:
-        return {"passed": False, "error": "schema invalid: " + err.message}
+        # Validate the RPD against the schema
+        validator = Draft7Validator(schema, registry=registry)
+        Draft7Validator.check_schema(schema)
+        errors = list(validator.iter_errors(rpd))
+
+        if errors:
+            error_details = []
+            for error in errors:
+                # Convert absolute paths to JSONPath format
+                error_path = convert_absolute_path_list_to_jsonpath(
+                    list(error.absolute_path)
+                )
+                parent_id_path = format_jsonpath_with_id(list(error.absolute_path))
+                parent_id = find_all(parent_id_path, rpd) if parent_id_path else ""
+
+                # Construct the error message
+                parent_id = parent_id[0] if parent_id else parent_id
+                truncated_message = (
+                    (error.message[:20] + ".........." + error.message[-130:])
+                    if len(error.message) > 160
+                    else error.message
+                )
+                error_message = f"{truncated_message}. Path: {error_path}." + (
+                    f" Parent ID: {parent_id}" if parent_id else ""
+                )
+                error_details.append(error_message)
+
+            return {"passed": False, "errors": error_details}
+
+        return {"passed": True, "errors": []}  # No errors found
+
+    except Exception as error:
+        return {"passed": False, "errors": [f"Unexpected error: {str(error)}"]}
 
 
-def validate_rmd(rmd_obj, test=False):
+def validate_rpd(rpd, test=False):
     """Validate an RMD against the schema and other high-level checks"""
     # Validate against the schema
-    result = schema_validate_rmd(rmd_obj)
+    result = schema_validate_rpd(rpd)
 
     if result["passed"] and not test:
         # Only check if it is not software test workflow.
         # Provide non-schema validation
-        result = non_schema_validate_rmd(rmd_obj)
+        result = non_schema_validate_rpd(rpd)
 
     return result

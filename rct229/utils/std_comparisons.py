@@ -92,6 +92,8 @@ def std_equal_with_precision(
         std_val_magnitude = Decimal(str(std_val))
         precision_magnitude = Decimal(str(precision))
 
+    precision_magnitude = precision_magnitude.normalize()
+
     # Determine rounding precision based on whether precision is a whole number or a decimal
     if precision_magnitude.as_tuple().exponent < 0:
         # Decimal places (e.g., 0.01)

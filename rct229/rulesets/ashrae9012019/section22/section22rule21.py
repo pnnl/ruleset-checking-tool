@@ -39,14 +39,14 @@ class Section22Rule21(RuleDefinitionListIndexedBase):
             each_rule=Section22Rule21.ChillerRule(),
             index_rmd=BASELINE_0,
             id="22-21",
-            description="The baseline building design’s chiller plant shall be modeled with chillers having the type as indicated in Table G3.1.3.7 as a function of building peak cooling load.",
+            description="The baseline chiller plant shall be modeled with chiller(s) having the type as indicated in Table G3.1.3.7 as a function of building peak cooling load.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.1 Type and Number of Chillers (System 7, 8, 11, 12 and 13)",
             is_primary_rule=True,
             rmd_context="ruleset_model_descriptions/0",
             list_path="$.chillers[*]",
             required_fields={
-                "$": ["output"],
+                "$": ["model_output"],
             },
         )
 
@@ -69,7 +69,7 @@ class Section22Rule21(RuleDefinitionListIndexedBase):
     def create_data(self, context, data):
         rmd_b = context.BASELINE_0
 
-        output_b = rmd_b["output"]
+        output_b = rmd_b["model_output"]
         building_cooling_peak_load = getattr_(
             output_b,
             "building_peak_cooling_load",

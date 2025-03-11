@@ -7,12 +7,13 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_building_segment_swh_ba
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_energy_required_to_heat_swh_use import (
     get_energy_required_to_heat_swh_use,
 )
-
+from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
 from rct229.utils.utility_functions import (
     find_exactly_one_service_water_heating_distribution_system,
 )
+from rct229.utils.assertions import getattr_
 
 
 @dataclass
@@ -47,6 +48,9 @@ def get_swh_components_associated_with_each_swh_bat(
     swh_and_equip_dict = {}
     for building_segment in find_all("$.buildings[*].building_segments[*]", rmd):
         swh_bat = get_building_segment_swh_bat(rmd, building_segment["id"])
+        if swh_bat is None:
+            # if returns None, it means there is no swh system in the RPD.
+            swh_bat = "UNDETERMINED"
         swh_and_equip_dict[swh_bat] = SWHEquipmentAssociations(
             energy_required=ZERO.ENERGY
         )
@@ -75,11 +79,14 @@ def get_swh_components_associated_with_each_swh_bat(
                         rmd, distribution_id
                     )
                 )
-                tanks = distribution.get("tanks")
+                tanks = getattr_(
+                    distribution, "service_water_heating_distribution_systems", "tanks"
+                )
                 for tank in tanks:
                     swh_and_equip_dict[swh_bat].tanks.append(tank["id"])
 
-                for piping in distribution.get("service_water_piping", []):
+                piping = distribution.get("service_water_piping")
+                if piping:
                     queue = [piping]
                     piping_ids = []
                     # BFS approach
@@ -101,7 +108,12 @@ def get_swh_components_associated_with_each_swh_bat(
                     in swh_and_equip_dict[swh_bat].swh_distribution
                 ):
                     swh_and_equip_dict[swh_bat].swh_heating_eq.append(swh_equip["id"])
-                    for solar_t in swh_equip.get("solar_thermal_systems"):
+                    getattr_(
+                        swh_equip,
+                        "service_water_heating_equipment",
+                        "solar_thermal_systems",
+                    )
+                    for solar_t in swh_equip["solar_thermal_systems"]:
                         swh_and_equip_dict[swh_bat].solar_thermal.append(solar_t["id"])
 
     return swh_and_equip_dict

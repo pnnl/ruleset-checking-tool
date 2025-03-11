@@ -7,7 +7,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_s
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.is_baseline_system_13 import (
     is_baseline_system_13,
 )
-from rct229.schema.validate import schema_validate_rmd
+from rct229.schema.validate import schema_validate_rpd
 
 SYS_13_TEST_RMD = {
     "id": "ASHRAE229 1",
@@ -122,7 +122,14 @@ SYS_13_TEST_RMD = {
             "type": "BASELINE_0",
         }
     ],
-    "data_timestamp": "2024-02-12T09:00Z",
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
 }
 
 SYS_13_TEST_UNMATCHED_RMD = {
@@ -207,19 +214,26 @@ SYS_13_TEST_UNMATCHED_RMD = {
             "type": "BASELINE_0",
         }
     ],
-    "data_timestamp": "2024-02-12T09:00Z",
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
 }
 
 
 def test__TEST_RMD_baseline_system_13__is_valid():
-    schema_validation_result = schema_validate_rmd(SYS_13_TEST_RMD)
+    schema_validation_result = schema_validate_rpd(SYS_13_TEST_RMD)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
 
 
 def test__TEST_RMD_baseline_system_13__is_unmatched_valid():
-    schema_validation_result = schema_validate_rmd(SYS_13_TEST_UNMATCHED_RMD)
+    schema_validation_result = schema_validate_rpd(SYS_13_TEST_UNMATCHED_RMD)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"

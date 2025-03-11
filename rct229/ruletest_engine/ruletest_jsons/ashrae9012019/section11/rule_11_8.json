@@ -1,0 +1,1065 @@
+{
+    "rule-11-8-a": {
+        "Section": 11,
+        "Rule": 8,
+        "Test": "a",
+        "test_description": "A one story office, single zone building has two service hot water systems serving the same building segment.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "11-8",
+            "ruleset_reference": "Table G3.1 #11, baseline column, a & b",
+            "rule_description": "One system per building area type shall be modeled in the baseline.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed Model",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "calendar": {
+                            "is_leap_year": false
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 92.90303999999999,
+                                                        "service_water_heating_area_type": "OFFICE",
+                                                        "service_water_heating_uses": [
+                                                            {
+                                                                "id": "SHW 1",
+                                                                "served_by_distribution_system": "SHW Distribution 1",
+                                                                "use": 100,
+                                                                "use_units": "POWER_PER_AREA"
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": "Space 2",
+                                                        "floor_area": 92.90303999999999,
+                                                        "service_water_heating_area_type": "OFFICE",
+                                                        "service_water_heating_uses": [
+                                                            {
+                                                                "id": "SHW 2",
+                                                                "served_by_distribution_system": "SHW Distribution 2",
+                                                                "use": 100,
+                                                                "use_units": "POWER_PER_AREA"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "Building Segment 2",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 3",
+                                                        "floor_area": 92.90303999999999,
+                                                        "service_water_heating_area_type": "LIBRARY",
+                                                        "service_water_heating_uses": [
+                                                            {
+                                                                "id": "SHW 3",
+                                                                "served_by_distribution_system": "SHW Distribution 1",
+                                                                "use": 100,
+                                                                "use_units": "POWER_PER_AREA"
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": "Space 4",
+                                                        "floor_area": 92.90303999999999,
+                                                        "service_water_heating_area_type": "LIBRARY",
+                                                        "service_water_heating_uses": [
+                                                            {
+                                                                "id": "SHW 4",
+                                                                "served_by_distribution_system": "SHW Distribution 2",
+                                                                "use": 100,
+                                                                "use_units": "POWER_PER_AREA"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1"
+                            },
+                            {
+                                "id": "SHW Distribution 2"
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "calendar": {
+                            "is_leap_year": false
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 92.90303999999999,
+                                                        "service_water_heating_area_type": "OFFICE",
+                                                        "service_water_heating_uses": [
+                                                            {
+                                                                "id": "SHW 1",
+                                                                "served_by_distribution_system": "SHW Distribution 1",
+                                                                "use": 10,
+                                                                "use_units": "POWER_PER_AREA"
+                                                            },
+                                                            {
+                                                                "id": "SHW 2",
+                                                                "served_by_distribution_system": "SHW Distribution 2",
+                                                                "use": 10,
+                                                                "use_units": "POWER_PER_AREA"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "Building Segment 2",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 3",
+                                                        "floor_area": 92.90303999999999,
+                                                        "service_water_heating_area_type": "LIBRARY",
+                                                        "service_water_heating_uses": [
+                                                            {
+                                                                "id": "SHW 3",
+                                                                "served_by_distribution_system": "SHW Distribution 1",
+                                                                "use": 100,
+                                                                "use_units": "POWER_PER_AREA"
+                                                            },
+                                                            {
+                                                                "id": "SHW 4",
+                                                                "served_by_distribution_system": "SHW Distribution 2",
+                                                                "use": 100,
+                                                                "use_units": "POWER_PER_AREA"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1",
+                                "tanks": [
+                                    {
+                                        "id": "SHW Dist Tank 1"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "SHW Distribution 2",
+                                "tanks": [
+                                    {
+                                        "id": "SHW Dist Tank 2"
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-11-8-b": {
+        "Section": 11,
+        "Rule": 8,
+        "Test": "b",
+        "test_description": "A one story single zone building has one service hot water systems serving its building segment with an undefined service water heating space type.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "11-8",
+            "ruleset_reference": "Table G3.1 #11, baseline column, a & b",
+            "rule_description": "One system per building area type shall be modeled in the baseline.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed Model",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "calendar": {
+                            "is_leap_year": false
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 92.90303999999999,
+                                                        "service_water_heating_area_type": "OFFICE",
+                                                        "service_water_heating_uses": [
+                                                            {
+                                                                "id": "SHW 1",
+                                                                "served_by_distribution_system": "SHW Distribution 1",
+                                                                "use": 100,
+                                                                "use_units": "POWER_PER_AREA"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1"
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "calendar": {
+                            "is_leap_year": false
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 92.90303999999999,
+                                                        "service_water_heating_area_type": "OFFICE",
+                                                        "service_water_heating_uses": [
+                                                            {
+                                                                "id": "SHW 1",
+                                                                "served_by_distribution_system": "SHW Distribution 1",
+                                                                "use": 10,
+                                                                "use_units": "POWER_PER_AREA"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1",
+                                "tanks": [
+                                    {
+                                        "id": "SHW Dist Tank 1"
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-11-8-c": {
+        "Section": 11,
+        "Rule": 8,
+        "Test": "c",
+        "test_description": "A one story, two zone building has two service hot water systems serving its two building segments with undefined service water heating space types.",
+        "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "The Service Water Heating Building Area type for this building segment is undetermined, and there are multiple building segments in the project",
+        "standard": {
+            "rule_id": "11-8",
+            "ruleset_reference": "Table G3.1 #11, baseline column, a & b",
+            "rule_description": "One system per building area type shall be modeled in the baseline.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed Model",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "calendar": {
+                            "is_leap_year": false
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 92.90303999999999,
+                                                        "service_water_heating_uses": [
+                                                            {
+                                                                "id": "SHW 1",
+                                                                "served_by_distribution_system": "SHW Distribution 1",
+                                                                "use": 100,
+                                                                "use_units": "POWER_PER_AREA"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "Building Segment 2",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 2",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 2",
+                                                        "service_water_heating_uses": [
+                                                            {
+                                                                "id": "SHW 2",
+                                                                "served_by_distribution_system": "SHW Distribution 2",
+                                                                "use": 100,
+                                                                "use_units": "POWER_PER_AREA"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1",
+                                "tanks": [
+                                    {
+                                        "id": "SHW Dist Tank 1"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "SHW Distribution 2",
+                                "tanks": [
+                                    {
+                                        "id": "SHW Dist Tank 2"
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "calendar": {
+                            "is_leap_year": false
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 92.90303999999999,
+                                                        "service_water_heating_uses": [
+                                                            {
+                                                                "id": "SHW 1",
+                                                                "served_by_distribution_system": "SHW Distribution 1",
+                                                                "use": 10,
+                                                                "use_units": "POWER_PER_AREA"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "Building Segment 2",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 2",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 2",
+                                                        "service_water_heating_uses": [
+                                                            {
+                                                                "id": "SHW 2",
+                                                                "served_by_distribution_system": "SHW Distribution 2",
+                                                                "use": 100,
+                                                                "use_units": "POWER_PER_AREA"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1",
+                                "tanks": [
+                                    {
+                                        "id": "SHW Dist Tank 1"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "SHW Distribution 2",
+                                "tanks": [
+                                    {
+                                        "id": "SHW Dist Tank 2"
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-11-8-d": {
+        "Section": 11,
+        "Rule": 8,
+        "Test": "d",
+        "test_description": "A one story, two zone building has two service hot water systems serving its two building segments with \"ALL_OTHER\" service water heating space types.",
+        "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "Confirm that Service Water Heating Building Area Type is provided with one and only one service water heating system.",
+        "standard": {
+            "rule_id": "11-8",
+            "ruleset_reference": "Table G3.1 #11, baseline column, a & b",
+            "rule_description": "One system per building area type shall be modeled in the baseline.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed Model",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "calendar": {
+                            "is_leap_year": false
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 92.90303999999999,
+                                                        "service_water_heating_area_type": "ALL_OTHERS",
+                                                        "service_water_heating_uses": [
+                                                            {
+                                                                "id": "SHW 1",
+                                                                "served_by_distribution_system": "SHW Distribution 1",
+                                                                "use": 100,
+                                                                "use_units": "POWER_PER_AREA"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "Building Segment 2",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 2",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 2",
+                                                        "service_water_heating_area_type": "ALL_OTHERS",
+                                                        "service_water_heating_uses": [
+                                                            {
+                                                                "id": "SHW 2",
+                                                                "served_by_distribution_system": "SHW Distribution 2",
+                                                                "use": 100,
+                                                                "use_units": "POWER_PER_AREA"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1",
+                                "tanks": [
+                                    {
+                                        "id": "SHW Dist Tank 1"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "SHW Distribution 2",
+                                "tanks": [
+                                    {
+                                        "id": "SHW Dist Tank 2"
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "calendar": {
+                            "is_leap_year": false
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 92.90303999999999,
+                                                        "service_water_heating_area_type": "ALL_OTHERS",
+                                                        "service_water_heating_uses": [
+                                                            {
+                                                                "id": "SHW 1",
+                                                                "served_by_distribution_system": "SHW Distribution 1",
+                                                                "use": 10,
+                                                                "use_units": "POWER_PER_AREA"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "Building Segment 2",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 2",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 2",
+                                                        "service_water_heating_area_type": "ALL_OTHERS",
+                                                        "service_water_heating_uses": [
+                                                            {
+                                                                "id": "SHW 2",
+                                                                "served_by_distribution_system": "SHW Distribution 2",
+                                                                "use": 100,
+                                                                "use_units": "POWER_PER_AREA"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1",
+                                "tanks": [
+                                    {
+                                        "id": "SHW Dist Tank 1"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "SHW Distribution 2",
+                                "tanks": [
+                                    {
+                                        "id": "SHW Dist Tank 2"
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-11-8-e": {
+        "Section": 11,
+        "Rule": 8,
+        "Test": "e",
+        "test_description": "A one story, two zone building has one service hot water systems serving its two building segments with that share the office space type.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "11-8",
+            "ruleset_reference": "Table G3.1 #11, baseline column, a & b",
+            "rule_description": "One system per building area type shall be modeled in the baseline.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed Model",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "calendar": {
+                            "is_leap_year": false
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 92.90303999999999,
+                                                        "service_water_heating_area_type": "OFFICE",
+                                                        "service_water_heating_uses": [
+                                                            {
+                                                                "id": "SHW 1",
+                                                                "served_by_distribution_system": "SHW Distribution 1",
+                                                                "use": 100,
+                                                                "use_units": "POWER_PER_AREA"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "Building Segment 2",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 2",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 2",
+                                                        "service_water_heating_area_type": "OFFICE",
+                                                        "service_water_heating_uses": [
+                                                            {
+                                                                "id": "SHW 2",
+                                                                "served_by_distribution_system": "SHW Distribution 1",
+                                                                "use": 100,
+                                                                "use_units": "POWER_PER_AREA"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1"
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "calendar": {
+                            "is_leap_year": false
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 92.90303999999999,
+                                                        "service_water_heating_area_type": "OFFICE",
+                                                        "service_water_heating_uses": [
+                                                            {
+                                                                "id": "SHW 1",
+                                                                "served_by_distribution_system": "SHW Distribution 1",
+                                                                "use": 10,
+                                                                "use_units": "POWER_PER_AREA"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "Building Segment 2",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 2",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 2",
+                                                        "service_water_heating_area_type": "OFFICE",
+                                                        "service_water_heating_uses": [
+                                                            {
+                                                                "id": "SHW 2",
+                                                                "served_by_distribution_system": "SHW Distribution 1",
+                                                                "use": 100,
+                                                                "use_units": "POWER_PER_AREA"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1",
+                                "tanks": [
+                                    {
+                                        "id": "SHW Dist Tank 1"
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-11-8-f": {
+        "Section": 11,
+        "Rule": 8,
+        "Test": "f",
+        "test_description": "A one story, two zone building has one service hot water systems serving its two building segments with different space types.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "11-8",
+            "ruleset_reference": "Table G3.1 #11, baseline column, a & b",
+            "rule_description": "One system per building area type shall be modeled in the baseline.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed Model",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "calendar": {
+                            "is_leap_year": false
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 92.90303999999999,
+                                                        "service_water_heating_area_type": "RETAIL",
+                                                        "service_water_heating_uses": [
+                                                            {
+                                                                "id": "SHW 1",
+                                                                "served_by_distribution_system": "SHW Distribution 1",
+                                                                "use": 100,
+                                                                "use_units": "POWER_PER_AREA"
+                                                            },
+                                                            {
+                                                                "id": "SHW 2",
+                                                                "served_by_distribution_system": "SHW Distribution 1",
+                                                                "use": 100,
+                                                                "use_units": "POWER_PER_AREA"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "Building Segment 2",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 2",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 2",
+                                                        "service_water_heating_area_type": "OFFICE",
+                                                        "service_water_heating_uses": [
+                                                            {
+                                                                "id": "SHW 3",
+                                                                "served_by_distribution_system": "SHW Distribution 1",
+                                                                "use": 100,
+                                                                "use_units": "POWER_PER_AREA"
+                                                            },
+                                                            {
+                                                                "id": "SHW 4",
+                                                                "served_by_distribution_system": "SHW Distribution 1",
+                                                                "use": 100,
+                                                                "use_units": "POWER_PER_AREA"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1"
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "calendar": {
+                            "is_leap_year": false
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 92.90303999999999,
+                                                        "service_water_heating_area_type": "RETAIL",
+                                                        "service_water_heating_uses": [
+                                                            {
+                                                                "id": "SHW 1",
+                                                                "served_by_distribution_system": "SHW Distribution 1",
+                                                                "use": 10,
+                                                                "use_units": "POWER_PER_AREA"
+                                                            },
+                                                            {
+                                                                "id": "SHW 2",
+                                                                "served_by_distribution_system": "SHW Distribution 2",
+                                                                "use": 10,
+                                                                "use_units": "POWER_PER_AREA"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "Building Segment 2",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 2",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 2",
+                                                        "service_water_heating_area_type": "OFFICE",
+                                                        "service_water_heating_uses": [
+                                                            {
+                                                                "id": "SHW 3",
+                                                                "served_by_distribution_system": "SHW Distribution 1",
+                                                                "use": 10,
+                                                                "use_units": "POWER_PER_AREA"
+                                                            },
+                                                            {
+                                                                "id": "SHW 4",
+                                                                "served_by_distribution_system": "SHW Distribution 2",
+                                                                "use": 10,
+                                                                "use_units": "POWER_PER_AREA"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1",
+                                "tanks": [
+                                    {
+                                        "id": "SHW Dist Tank 1"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "SHW Distribution 2",
+                                "tanks": [
+                                    {
+                                        "id": "SHW Dist Tank 2"
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    }
+}

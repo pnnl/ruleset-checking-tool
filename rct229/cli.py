@@ -69,7 +69,7 @@ help_text = short_help_text
 @cli.command("evaluate", short_help=short_help_text, help=help_text, hidden=True)
 @click.option("--rpds", "-f", multiple=True, default=[])
 @click.option("--ruleset", "-rs", multiple=False, default="ashrae9012019")
-@click.option("--reports", "-r", multiple=True, default=["RAW_OUTPUT"])
+@click.option("--reports", "-r", multiple=True, default=["EngineRawSummary"])
 @click.option(
     "--reports_directory", "-rd", multiple=False, default="./examples/output/"
 )

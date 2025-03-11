@@ -8,7 +8,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_building_segment_lighti
 )
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.pint_utils import CalcQ
+from rct229.utils.pint_utils import ZERO, CalcQ
 from rct229.utils.std_comparisons import std_equal
 
 OFFICE_OPEN_PLAN = SchemaEnums.schema_enums[
@@ -74,11 +74,13 @@ class Section6Rule3(RuleDefinitionListIndexedBase):
             def get_calc_vals(self, context, data=None):
                 space_u = context.USER
                 space_p = context.PROPOSED
-                total_space_lpd_u = sum(
-                    find_all("$.interior_lighting[*].power_per_area", space_u)
+                total_space_lpd_u = (
+                    sum(find_all("$.interior_lighting[*].power_per_area", space_u))
+                    or ZERO.POWER_PER_AREA
                 )
-                total_space_lpd_p = sum(
-                    find_all("$.interior_lighting[*].power_per_area", space_p)
+                total_space_lpd_p = (
+                    sum(find_all("$.interior_lighting[*].power_per_area", space_p))
+                    or ZERO.POWER_PER_AREA
                 )
 
                 space_lighting_status_type_p = data[

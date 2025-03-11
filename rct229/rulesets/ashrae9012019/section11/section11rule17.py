@@ -27,14 +27,12 @@ class Section11Rule17(RuleDefinitionListIndexedBase):
             ),
             each_rule=Section11Rule17.RMDRule(),
             index_rmd=PROPOSED,
-            id="11-6",
+            id="11-17",
             description="All buildings that will have service water heating loads must include those loads in the simulation.",
             ruleset_section_title="Service Water Heating",
             standard_section="Table G3.1 #1, proposed column, (a)",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
-            data_items={"is_leap_year": (PROPOSED, "calendar/is_leap_year")},
         )
 
     class RMDRule(RuleDefinitionListIndexedBase):
@@ -50,7 +48,7 @@ class Section11Rule17(RuleDefinitionListIndexedBase):
 
         def create_data(self, context, data):
             rmd_p = context.PROPOSED
-            is_leap_year_p = data["is_leap_year"]
+            is_leap_year_p = rmd_p["calendar"]["is_leap_year"]
 
             swh_bat = {
                 bldg_seg_id: get_building_segment_swh_bat(

@@ -34,7 +34,6 @@ OA_fraction_b_70 = 0.7
 SUPPLY_AIRFLOW_5000CFM = 5000 * ureg("cfm")
 REQ_HEATING_SETPOINT = 60 * ureg("degF")
 
-
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_9,
     HVAC_SYS.SYS_9B,
@@ -63,8 +62,7 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             required_fields={
-                "$": ["weather", "ruleset_model_descriptions"],
-                "weather": ["climate_zone"],
+                "$": ["ruleset_model_descriptions"],
             },
             each_rule=Section19Rule21.RMDRule(),
             index_rmd=BASELINE_0,
@@ -81,7 +79,6 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1.2.10 and exceptions 1-7",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
         )
 
     class RMDRule(RuleDefinitionListIndexedBase):
@@ -93,11 +90,16 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                 each_rule=Section19Rule21.RMDRule.HVACRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
+                required_fields={
+                    "$": ["weather"],
+                    "weather": ["climate_zone"],
+                },
             )
 
         def create_data(self, context, data):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
+            climate_zone = rmd_b["weather"]["climate_zone"]
 
             dict_of_zones_and_terminal_units_served_by_hvac_sys_b = (
                 get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmd_b)
@@ -229,6 +231,7 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                 )
 
             return {
+                "climate_zone": climate_zone,
                 "zone_data": zone_data,
             }
 

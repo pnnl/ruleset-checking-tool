@@ -2,7 +2,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_fu
     get_building_lab_zones_list,
 )
 from rct229.schema.schema_utils import quantify_rmd
-from rct229.schema.validate import schema_validate_rmd
+from rct229.schema.validate import schema_validate_rpd
 
 TEST_RMD = {
     "id": "test_rmd",
@@ -59,6 +59,25 @@ TEST_RMD = {
                                 },
                             ],
                         },
+                        {
+                            "id": "Thermal Zone 5",
+                            "spaces": [
+                                {
+                                    "id": "Space 8",
+                                    "lighting_space_type": "LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM",
+                                },
+                            ],
+                        },
+                        {
+                            "id": "Thermal Zone 6",
+                            "spaces": [
+                                {
+                                    "id": "Space 9",
+                                    "function": "LABORATORY",
+                                    "lighting_space_type": "LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM",
+                                },
+                            ],
+                        },
                     ],
                 },
             ],
@@ -71,14 +90,13 @@ TEST_RMD = {
 TEST_RPD_FULL = {
     "id": "229",
     "ruleset_model_descriptions": [TEST_RMD],
-    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 TEST_RMD_UNIT = quantify_rmd(TEST_RPD_FULL)["ruleset_model_descriptions"][0]
 
 
 def test__TEST_RPD__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RPD_FULL)
+    schema_validation_result = schema_validate_rpd(TEST_RPD_FULL)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
@@ -89,4 +107,6 @@ def test__get_building_lab_zone_list__success():
         "Thermal Zone 1",
         "Thermal Zone 2",
         "Thermal Zone 3",
+        "Thermal Zone 5",
+        "Thermal Zone 6",
     ]

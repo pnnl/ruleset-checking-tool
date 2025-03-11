@@ -204,9 +204,56 @@ def find_exactly_one_service_water_heating_use(rmd: dict, swh_use_id: str) -> di
 
     """
     return find_exactly_one_with_field_value(
+        # TODO: Moving the `service_water_heating_uses` key to the `building_segments` level is being discussed. If the `service_water_heating_uses` key is moved, this function needs to be revisited.
         "$.buildings[*].building_segments[*].zones[*].spaces[*].service_water_heating_uses[*]",
         "id",
         swh_use_id,
+        rmd,
+    )
+
+
+def find_exactly_one_service_water_heating_equipment(
+    rmd: dict, swh_equipment_id: str
+) -> dict:
+    """
+    Search for the service water heating equipment data group in a ruleset model description by matching swh_equipment_id:
+    Raise exception if no matching swh equipment system
+
+    Parameters
+    ----------
+    rmd: dict
+    swh_equipment_id: str
+
+    Returns: json
+    -------
+
+    """
+    return find_exactly_one_with_field_value(
+        "$.service_water_heating_equipment[*]",
+        "id",
+        swh_equipment_id,
+        rmd,
+    )
+
+
+def find_exactly_one_pump(rmd: dict, pump_id: str) -> dict:
+    """
+    Search for the pump data group in a ruleset model description by matching pump_id:
+    Raise exception if no matching pump
+
+    Parameters
+    ----------
+    rmd: dict
+    pump_id: str
+
+    Returns: json
+    -------
+
+    """
+    return find_exactly_one_with_field_value(
+        "$.pumps[*]",
+        "id",
+        pump_id,
         rmd,
     )
 

@@ -21,13 +21,13 @@ class Section19Rule3(PartialRuleDefinition):
             standard_section="Section G3.1.2.2.1",
             is_primary_rule=False,
             required_fields={
-                "$": ["weather"],
+                "$.ruleset_model_descriptions[*]": ["weather"],
             },
         )
 
     def get_calc_vals(self, context, data=None):
         rpd_b = context.BASELINE_0
-        weather_b = rpd_b["weather"]
+        weather_b = rpd_b["ruleset_model_descriptions"][0]["weather"]
         return {
             "cooling_design_day_type": weather_b.get("cooling_design_day_type"),
             "heating_design_day_type": weather_b.get("heating_design_day_type"),

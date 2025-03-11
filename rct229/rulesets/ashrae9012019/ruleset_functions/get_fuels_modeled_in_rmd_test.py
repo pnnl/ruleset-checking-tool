@@ -2,7 +2,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_fuels_modeled_in_rmd im
     get_fuels_modeled_in_rmd,
 )
 from rct229.schema.schema_utils import quantify_rmd
-from rct229.schema.validate import schema_validate_rmd
+from rct229.schema.validate import schema_validate_rpd
 
 TEST_RPD_NG_ELEC = {
     "id": "ASHRAE229 1",
@@ -68,7 +68,6 @@ TEST_RPD_NG_ELEC = {
             "type": "BASELINE_0",
         }
     ],
-    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 
@@ -136,7 +135,6 @@ TEST_RPD_PROPANE_NG_ELEC = {
             "type": "BASELINE_0",
         }
     ],
-    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 
@@ -211,7 +209,6 @@ TEST_RPD_ALL_ENERGY_SOURCE = {
             "type": "BASELINE_0",
         }
     ],
-    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 
@@ -225,21 +222,21 @@ TEST_RMD_ALL_ENERGY_SOURCE = quantify_rmd(TEST_RPD_ALL_ENERGY_SOURCE)[
 
 
 def test__TEST_RPD_NG_ELEC__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RPD_NG_ELEC)
+    schema_validation_result = schema_validate_rpd(TEST_RPD_NG_ELEC)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
 
 
 def test__TEST_RPD_PROPANE_NG_ELEC__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RPD_PROPANE_NG_ELEC)
+    schema_validation_result = schema_validate_rpd(TEST_RPD_PROPANE_NG_ELEC)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
 
 
 def test__TEST_all_energy_source__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RPD_ALL_ENERGY_SOURCE)
+    schema_validation_result = schema_validate_rpd(TEST_RPD_ALL_ENERGY_SOURCE)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"

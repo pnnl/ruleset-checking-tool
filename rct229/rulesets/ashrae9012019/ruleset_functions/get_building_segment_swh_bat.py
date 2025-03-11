@@ -19,6 +19,9 @@ def get_building_segment_swh_bat(
 ) -> str:
     """
     This function determines the SWH BAT for the given building segment.
+    Returns None if there is no service water heating uses and no service_water_heating_area_type under building segment,
+    UNDETERMINED if there are service water heating uses but no service_water_heating_area_type under building segment,
+    A bat type if there is service_water_heating_area_type under building segment
 
     Parameters
     ----------
@@ -38,9 +41,7 @@ def get_building_segment_swh_bat(
 
     building_segment = find_exactly_one_building_segment(rmd, building_segment_id)
 
-    building_segment_swh_bat = building_segment.get(
-        "service_water_heating_building_area_type"
-    )
+    building_segment_swh_bat = building_segment.get("service_water_heating_area_type")
 
     if building_segment_swh_bat is None:
         swh_use_dict = {}
@@ -69,9 +70,9 @@ def get_building_segment_swh_bat(
                     for space_id in swh_use_energy_by_space:
                         if space_id != "no_spaces_assigned":
                             space = find_exactly_one_space(rmd, space_id)
-                            if space.get("service_water_heating_building_area_type"):
+                            if space.get("service_water_heating_area_type"):
                                 service_water_heating_bat = space[
-                                    "service_water_heating_building_area_type"
+                                    "service_water_heating_area_type"
                                 ]
                                 swh_use_dict.setdefault(
                                     service_water_heating_bat, ZERO.ENERGY
@@ -93,8 +94,6 @@ def get_building_segment_swh_bat(
                 )
 
     else:
-        building_segment_swh_bat = building_segment[
-            "service_water_heating_building_area_type"
-        ]
+        building_segment_swh_bat = building_segment["service_water_heating_area_type"]
 
     return building_segment_swh_bat

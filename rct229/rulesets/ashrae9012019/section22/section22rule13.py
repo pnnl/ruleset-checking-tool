@@ -23,7 +23,7 @@ class Section22Rule13(RuleDefinitionListIndexedBase):
             each_rule=Section22Rule13.HeatRejectionRule(),
             index_rmd=BASELINE_0,
             id="22-13",
-            description="The baseline heat rejection loop shall be an axial-fan open circuit cooling tower.",
+            description="The baseline heat rejection device shall be an axial-fan open circuit cooling tower.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section 22 CHW&CW Loop",
             is_primary_rule=True,

@@ -32,15 +32,10 @@ class Section6Rule5(RuleDefinitionListIndexedBase):
             each_rule=Section6Rule5.RulesetModelInstanceRule(),
             index_rmd=BASELINE_0,
             description="Baseline building is modeled with automatic shutoff controls in buildings >5000 sq.ft.",
-            required_fields={
-                "$": ["calendar"],
-                "calendar": ["is_leap_year"],
-            },
             ruleset_section_title="Lighting",
             standard_section="Section G3.1-6 Modeling Requirements for the Baseline building",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            data_items={"is_leap_year_b": (BASELINE_0, "calendar/is_leap_year")},
         )
 
     class RulesetModelInstanceRule(RuleDefinitionListIndexedBase):
@@ -52,10 +47,14 @@ class Section6Rule5(RuleDefinitionListIndexedBase):
                 each_rule=Section6Rule5.RulesetModelInstanceRule.BuildingRule(),
                 index_rmd=BASELINE_0,
                 list_path="buildings[*]",
-                required_fields={"$": ["schedules"]},
+                required_fields={
+                    "$": ["schedules", "calendar"],
+                    "calendar": ["is_leap_year"],
+                },
                 data_items={
                     "schedules_b": (BASELINE_0, "schedules"),
                     "schedules_p": (PROPOSED, "schedules"),
+                    "is_leap_year_b": (BASELINE_0, "calendar/is_leap_year"),
                 },
             )
 

@@ -3,8 +3,9 @@
 	"boilers": "ruleset_model_descriptions[0]/boilers",
 	"buildings": "ruleset_model_descriptions[0]/buildings",
 	"building_segments": "ruleset_model_descriptions[0]/buildings[0]/building_segments",
+	"calendar": "ruleset_model_descriptions[0]/calendar",
 	"chillers": "ruleset_model_descriptions[0]/chillers",
-	"climate_zone": "weather/climate_zone",
+	"climate_zone": "ruleset_model_descriptions[0]/weather/climate_zone",
 	"construction": "ruleset_model_descriptions[0]/buildings[0]/building_segments[0]/zones[0]/surfaces[0]/construction",
 	"cooling_system": "ruleset_model_descriptions[0]/buildings[0]/building_segments[0]/heating_ventilating_air_conditioning_systems[0]/cooling_system",
 	"elevators": "ruleset_model_descriptions[0]/buildings[0]/elevators",
@@ -18,7 +19,8 @@
 	"infiltration": "ruleset_model_descriptions[0]/buildings[0]/building_segments[0]/zones[0]/infiltration",
 	"interior_lighting": "ruleset_model_descriptions[0]/buildings[0]/building_segments[0]/zones[0]/spaces[0]/interior_lighting",
 	"miscellaneous_equipment": "ruleset_model_descriptions[0]/buildings[0]/building_segments[0]/zones[0]/spaces[0]/miscellaneous_equipment",
-	"output": "ruleset_model_descriptions[0]/output",
+	"output": "ruleset_model_descriptions[0]/model_output",
+	"output_instance": "ruleset_model_descriptions[0]/model_output/output_instance",
 	"output_validation_points": "ruleset_model_descriptions[0]/buildings[0]/building_segments[0]/zones[0]/terminals[0]/fan/output_validation_points",
 	"preheat_system": "ruleset_model_descriptions[0]/buildings[0]/building_segments[0]/heating_ventilating_air_conditioning_systems[0]/preheat_system",
 	"pumps": "ruleset_model_descriptions[0]/pumps",
@@ -34,5 +36,6 @@
 	"surface_optics": "ruleset_model_descriptions[0]/buildings[0]/building_segments[0]/zones[0]/surfaces[0]/surface_optics",
 	"terminals": "ruleset_model_descriptions[0]/buildings[0]/building_segments[0]/zones[0]/terminals",
 	"transformers": "ruleset_model_descriptions[0]/transformers",
+	"weather": "ruleset_model_descriptions[0]/weather",
 	"zones": "ruleset_model_descriptions[0]/buildings[0]/building_segments[0]/zones"
 }

@@ -3,6 +3,7 @@
         "transformer_capacity": "V-A",
         "electric_power": "W",
         "volume": "m3",
+        "tank_volume": "L",
         "area": "m2",
         "power_density": "W/m2",
         "thermal_transmittance": "W/m2-K",
@@ -11,7 +12,6 @@
         "capacity": "W",
         "volumetric_flow_rate": "m3/s",
         "fluid_flow_rate": "L/s",
-        "pump_head": "m",
         "temperature": "C",
         "cooling_efficiency": "W/W",
         "temperature_difference": "K",
@@ -28,12 +28,15 @@
         "weight": "kg",
         "elevator_speed": "m/s",
         "power_per_volumetric_flow_rate": "W-s/L",
-        "power_per_flow_rate": "W-s/L"
+        "power_per_flow_rate": "W-s/L",
+        "power": "W",
+        "pump_head": "Pa"
     },
     "ip": {
         "transformer_capacity": "V-A",
         "electric_power": "W",
         "volume": "ft3",
+        "tank_volume": "gallon",
         "area": "ft2",
         "power_density": "W/ft2",
         "thermal_transmittance": "Btu/hr-ft2-R",
@@ -42,7 +45,6 @@
         "capacity": "Btu/hr",
         "volumetric_flow_rate": "cfm",
         "fluid_flow_rate": "gallon/min",
-        "pump_head": "ft",
         "temperature": "F",
         "cooling_efficiency": "kW/ton",
         "temperature_difference": "R",
@@ -59,6 +61,8 @@
         "weight": "lb",
         "elevator_speed": "ft/min",
         "power_per_volumetric_flow_rate": "W/gpm",
-        "power_per_flow_rate": "W/gpm"
+        "power_per_flow_rate": "W/gpm",
+        "power": "Btu/h",
+        "pump_head": "ft"
     }
 }

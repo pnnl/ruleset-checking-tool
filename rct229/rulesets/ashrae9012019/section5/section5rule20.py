@@ -36,7 +36,7 @@ class Section5Rule20(RuleDefinitionListIndexedBase):
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             required_fields={
-                "$": ["weather"],
+                "$.ruleset_model_descriptions[*]": ["weather"],
                 "weather": ["climate_zone"],
             },
             each_rule=Section5Rule20.BuildingRule(),
@@ -51,7 +51,9 @@ class Section5Rule20(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data=None):
         rmd_baseline = context.BASELINE_0
-        climate_zone = rmd_baseline["weather"]["climate_zone"]
+        climate_zone = rmd_baseline["ruleset_model_descriptions"][0]["weather"][
+            "climate_zone"
+        ]
 
         # TODO It is determined that later we will modify this function to RMD level -
         # This implementation is temporary
@@ -63,7 +65,7 @@ class Section5Rule20(RuleDefinitionListIndexedBase):
         }
 
         return {
-            "climate_zone": rmd_baseline["weather"]["climate_zone"],
+            "climate_zone": climate_zone,
             "bldg_scc_wwr_ratio_dict": bldg_scc_wwr_ratio_dict,
         }
 
