@@ -142,7 +142,10 @@ class Section5Rule32(RuleDefinitionListIndexedBase):
                     )
                 elif (
                     absorptance_solar_exterior_p != absorptance_solar_exterior_u
-                    and absorptance_solar_exterior_p == ABSORPTANCE_SOLAR_EXTERIOR
+                    and self.precision_comparison["absorptance_solar_exterior_p"](
+                        absorptance_solar_exterior_p,
+                        ABSORPTANCE_SOLAR_EXTERIOR,
+                    )
                 ):
                     UNDETERMINED_MSG = CASE3_UNDETERMINED_MSG.format(
                         absorptance_solar_exterior=absorptance_solar_exterior_p
