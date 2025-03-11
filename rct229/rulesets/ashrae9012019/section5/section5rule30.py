@@ -17,10 +17,14 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_ca
 from rct229.utils.std_comparisons import std_equal
 
 ABSORPTION_THERMAL_EXTERIOR = 0.9
-UNDETERMINED_MSG = (
+CASE2_UNDETERMINED__MSG = (
     "Roof surface emittance in the proposed model {absorptance_thermal_exterior} matches that in the "
     "user model but is not equal to the prescribed default value of 0.9. Verify that the modeled value "
     "is based on testing in accordance with section 5.5.3.1.1(a). "
+)
+CASE3_UNDETERMINED__MSG = (
+    "Fail if the thermal emittance in the user model is based on aged test data. roof thermal emittance is equal to the prescribed default value of 0.9  "
+    "but differs from the thermal emittance in the user model {absorptance_thermal_exterior}."
 )
 PASS_DIFFERS_MSG = (
     "Roof thermal emittance is equal to the prescribed default value of 0.9 but differs from the "
@@ -119,15 +123,33 @@ class Section5Rule30(RuleDefinitionListIndexedBase):
                 return (
                     absorptance_thermal_exterior_p == absorptance_thermal_exterior_u
                     and absorptance_thermal_exterior_p != ABSORPTION_THERMAL_EXTERIOR
+                ) or (
+                    absorptance_thermal_exterior_p != absorptance_thermal_exterior_u
+                    and absorptance_thermal_exterior_p == ABSORPTION_THERMAL_EXTERIOR
                 )
 
             def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
                 absorptance_thermal_exterior_p = calc_vals[
                     "absorptance_thermal_exterior_p"
                 ]
-                return UNDETERMINED_MSG.format(
-                    absorptance_thermal_exterior=absorptance_thermal_exterior_p
-                )
+                absorptance_thermal_exterior_u = calc_vals[
+                    "absorptance_thermal_exterior_u"
+                ]
+                UNDETERMINED_MSG = ""
+                if (
+                    absorptance_thermal_exterior_p == absorptance_thermal_exterior_u
+                    and absorptance_thermal_exterior_p != ABSORPTION_THERMAL_EXTERIOR
+                ):
+                    UNDETERMINED_MSG = CASE2_UNDETERMINED__MSG.format(
+                        absorptance_thermal_exterior=absorptance_thermal_exterior_p
+                    )
+                elif (
+                    absorptance_thermal_exterior_p != absorptance_thermal_exterior_u
+                    and absorptance_thermal_exterior_p == ABSORPTION_THERMAL_EXTERIOR
+                ):
+                    UNDETERMINED_MSG = CASE3_UNDETERMINED__MSG
+
+                return UNDETERMINED_MSG
 
             def rule_check(self, context, calc_vals=None, data=None):
                 return self.precision_comparison["absorptance_thermal_exterior_p"](
