@@ -162,10 +162,7 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
 
         class ZoneRule(RuleDefinitionBase):
             def __init__(self):
-                super(
-                    Section4Rule11.RuleSetModelInstanceRule.ZoneRule,
-                    self,
-                ).__init__(
+                super(Section4Rule11.RuleSetModelInstanceRule.ZoneRule, self,).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
