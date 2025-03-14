@@ -148,17 +148,19 @@ class Section19Rule8(RuleDefinitionListIndexedBase):
                     and is_DCV_modeled_b
                 ) or (
                     (
-                        hvac_min_OA_flow < MIN_OA_CFM
-                        or self.precision_comparison["hvac_min_OA_flow"](
-                            hvac_min_OA_flow,
-                            MIN_OA_CFM,
+                        (
+                            hvac_min_OA_flow < MIN_OA_CFM
+                            or self.precision_comparison["hvac_min_OA_flow"](
+                                hvac_min_OA_flow,
+                                MIN_OA_CFM,
+                            )
                         )
-                    )
-                    and (
-                        avg_occ_density > OCCUPANT_DENSITY_LIMIT
-                        or self.precision_comparison["avg_occ_density"](
-                            avg_occ_density,
-                            OCCUPANT_DENSITY_LIMIT,
+                        or (
+                            avg_occ_density < OCCUPANT_DENSITY_LIMIT
+                            or self.precision_comparison["avg_occ_density"](
+                                avg_occ_density,
+                                OCCUPANT_DENSITY_LIMIT,
+                            )
                         )
                     )
                     and not is_DCV_modeled_b
