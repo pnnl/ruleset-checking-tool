@@ -180,13 +180,16 @@ class Section19Rule15(RuleDefinitionListIndexedBase):
                 "hvac_id_b": hvac_id_b,
                 "supply_fan_qty_b": supply_fan_qty_b,
                 "supply_fan_airflow_b": CalcQ("air_flow_rate", supply_fan_airflow_b),
-                "minimum_outdoor_airflow_b": CalcQ("air_flow_rate", minimum_outdoor_airflow_b),
+                "minimum_outdoor_airflow_b": CalcQ(
+                    "air_flow_rate", minimum_outdoor_airflow_b
+                ),
                 "all_design_setpoints_105": data["hvac_info_dict_b"][hvac_id_b][
                     "all_design_setpoints_105"
                 ],
-                "proposed_supply_flow": CalcQ("air_flow_rate", data["hvac_info_dict_b"][hvac_id_b][
-                    "proposed_supply_flow"
-                ]),
+                "proposed_supply_flow": CalcQ(
+                    "air_flow_rate",
+                    data["hvac_info_dict_b"][hvac_id_b]["proposed_supply_flow"],
+                ),
             }
 
         def manual_check_required(self, context, calc_vals=None, data=None):

@@ -143,7 +143,9 @@ class Section19Rule17(RuleDefinitionListIndexedBase):
                 else ZERO.POWER_PER_FLOW
             )
 
-            return {"fan_power_airflow": CalcQ("power_per_air_flow_rate", fan_power_airflow)}
+            return {
+                "fan_power_airflow": CalcQ("power_per_air_flow_rate", fan_power_airflow)
+            }
 
         def rule_check(self, context, calc_vals=None, data=None):
             fan_power_airflow = calc_vals["fan_power_airflow"]
