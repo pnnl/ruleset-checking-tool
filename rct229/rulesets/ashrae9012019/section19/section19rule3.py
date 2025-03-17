@@ -15,11 +15,11 @@ class Section19Rule3(PartialRuleDefinition):
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             id="19-3",
-            description="Weather conditions used in sizing runs to determine baseline equipment capacities shall be based either on design days developed using 99.6% heating design temperatures "
-            "and 1% dry-bulb and 1% wet-bulb cooling design temperatures.",
+            description="Weather conditions used in sizing runs to determine baseline equipment capacities shall be based either on design days developed "
+            "using 99.6% heating design temperatures and 1% dry-bulb and 1% wet-bulb cooling design temperatures.",
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1.2.2.1",
-            is_primary_rule=False,
+            is_primary_rule=True,
             required_fields={
                 "$.ruleset_model_descriptions[*]": ["weather"],
             },
@@ -28,33 +28,29 @@ class Section19Rule3(PartialRuleDefinition):
     def get_calc_vals(self, context, data=None):
         rpd_b = context.BASELINE_0
         weather_b = rpd_b["ruleset_model_descriptions"][0]["weather"]
+
         return {
-            "cooling_design_day_type": weather_b.get("cooling_design_day_type"),
-            "heating_design_day_type": weather_b.get("heating_design_day_type"),
+            "cooling_design_day_type_b": weather_b.get(
+                "cooling_dry_bulb_design_day_type"
+            ),
+            "heating_design_day_type_b": weather_b.get(
+                "heating_dry_bulb_design_day_type"
+            ),
+            "evaporation_wet_bulb_design_day_type_b": weather_b.get(
+                "evaporation_wet_bulb_design_day_type_b"
+            ),
         }
 
-    def applicability_check(self, context, calc_vals, data):
-        cooling_design_day_type = calc_vals["cooling_design_day_type"]
-        heating_design_day_type = calc_vals["heating_design_day_type"]
+    def rule_check(self, context, calc_vals=None, data={}):
+        cooling_design_day_type_b = calc_vals["cooling_design_day_type_b"]
+        heating_design_day_type_b = calc_vals["heating_design_day_type_b"]
+        evaporation_wet_bulb_design_day_type_b = calc_vals[
+            "evaporation_wet_bulb_design_day_type_b"
+        ]
 
-        return (cooling_design_day_type is None or heating_design_day_type is None) or (
-            cooling_design_day_type == COOLING_DESIGN_DAY.COOLING_1_0
-            and heating_design_day_type == HEATING_DESIGN_DAY.HEATING_99_6
+        return (
+            cooling_design_day_type_b
+            == evaporation_wet_bulb_design_day_type_b
+            == COOLING_DESIGN_DAY.COOLING_1_0
+            and heating_design_day_type_b == HEATING_DESIGN_DAY.HEATING_99_6
         )
-
-    def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
-        cooling_design_day_type = calc_vals["cooling_design_day_type"]
-        heating_design_day_type = calc_vals["heating_design_day_type"]
-
-        if cooling_design_day_type is None or heating_design_day_type is None:
-            undetermined_msg = (
-                "The Heating & Cooling Design Day types were not defined. Check that the weather conditions used in sizing runs to determine baseline equipment capacities is based on design days developed using 99.6% heating design temperatures "
-                "and 1% dry-bulb and 1% wet-bulb cooling design temperatures."
-            )
-        else:
-            undetermined_msg = (
-                "Check that the weather conditions used in sizing runs to determine baseline equipment capacities is based on design days developed using 99.6% heating design temperatures "
-                "and 1% dry-bulb and 1% wet-bulb cooling design temperatures."
-            )
-
-        return undetermined_msg
