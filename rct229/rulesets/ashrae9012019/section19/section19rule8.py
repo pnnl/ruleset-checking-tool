@@ -93,37 +93,34 @@ class Section19Rule8(RuleDefinitionListIndexedBase):
 
                 hvac_id_b = hvac_b["id"]
                 fan_system_b = hvac_b["fan_system"]
-
-                is_DCV_modeled_b = False
-                avg_occ_density = 0.0 / ureg("ft2")
                 hvac_min_OA_flow = fan_system_b["minimum_outdoor_airflow"]
-
+                zone_id_list_b = hvac_zone_list_w_area_dict_b[hvac_id_b][
+                    "zone_list"
+                ]
+                hvac_area_b = hvac_zone_list_w_area_dict_b[hvac_id_b][
+                    "total_area"
+                ]
                 demand_control_ventilation_control_b = fan_system_b.get(
                     "demand_control_ventilation_control"
                 )
 
+                avg_occ_density = (
+                    sum(
+                        [
+                            zone_total_occupant_dict_b[zone_id_b]
+                            for zone_id_b in zone_id_list_b
+                        ]
+                    )
+                    / hvac_area_b
+                )
+
+                is_DCV_modeled_b = False
                 if (
                     demand_control_ventilation_control_b
                     and demand_control_ventilation_control_b
                     != DEMAND_CONTROL_VENTILATION_CONTROL.NONE
                 ):
                     is_DCV_modeled_b = True
-                    if hvac_min_OA_flow > MIN_OA_CFM:
-                        zone_id_list_b = hvac_zone_list_w_area_dict_b[hvac_id_b][
-                            "zone_list"
-                        ]
-                        hvac_area_b = hvac_zone_list_w_area_dict_b[hvac_id_b][
-                            "total_area"
-                        ]
-                        avg_occ_density = (
-                            sum(
-                                [
-                                    zone_total_occupant_dict_b[zone_id_b]
-                                    for zone_id_b in zone_id_list_b
-                                ]
-                            )
-                            / hvac_area_b
-                        )
 
                 return {
                     "hvac_min_OA_flow": CalcQ("air_flow_rate", hvac_min_OA_flow),
