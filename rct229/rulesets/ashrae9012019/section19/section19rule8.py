@@ -94,12 +94,8 @@ class Section19Rule8(RuleDefinitionListIndexedBase):
                 hvac_id_b = hvac_b["id"]
                 fan_system_b = hvac_b["fan_system"]
                 hvac_min_OA_flow = fan_system_b["minimum_outdoor_airflow"]
-                zone_id_list_b = hvac_zone_list_w_area_dict_b[hvac_id_b][
-                    "zone_list"
-                ]
-                hvac_area_b = hvac_zone_list_w_area_dict_b[hvac_id_b][
-                    "total_area"
-                ]
+                zone_id_list_b = hvac_zone_list_w_area_dict_b[hvac_id_b]["zone_list"]
+                hvac_area_b = hvac_zone_list_w_area_dict_b[hvac_id_b]["total_area"]
                 demand_control_ventilation_control_b = fan_system_b.get(
                     "demand_control_ventilation_control"
                 )
