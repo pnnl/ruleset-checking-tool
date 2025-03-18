@@ -5,9 +5,9 @@ from rct229.schema.config import ureg
 
 
 """
-Global tolerance for equality comparison. Default allows 0.5% variations of generated baseline/proposed from the standard specify value.
+Global tolerance for equality comparison. Default allows no variations of generated baseline/proposed from the standard specify value.
 """
-DEFAULT_PERCENT_TOLERANCE = 0.5  # %
+DEFAULT_PERCENT_TOLERANCE = 0.0  # %
 
 
 def std_equal(
