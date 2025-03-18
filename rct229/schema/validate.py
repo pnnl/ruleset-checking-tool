@@ -60,6 +60,8 @@ def check_associated_list_length(rpd: dict) -> list[str]:
         for obj in object_list:
             for key_1, key_2 in associated_list_data_elements:
                 val_1, val_2 = obj.get(key_1, None), obj.get(key_2, None)
+                if val_1 is None and val_2 is None:
+                    continue
                 # XOR operation
                 if (val_1 is None) != (val_2 is None):
                     mismatch_errors.append(
