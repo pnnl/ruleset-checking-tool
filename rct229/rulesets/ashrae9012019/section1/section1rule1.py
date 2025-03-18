@@ -144,6 +144,14 @@ class Section1Rule1(RuleDefinitionListIndexedBase):
             bpf_bat_sum_prod = calc_vals["bpf_bat_sum_prod"]
             total_area = calc_vals["total_area"]
 
+            return len(model_output_bpf_list) == 1 and self.precision_comparison(
+                bpf_bat_sum_prod / total_area, model_output_bpf_list[0]
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            model_output_bpf_list = calc_vals["model_output_bpf_list"]
+            bpf_bat_sum_prod = calc_vals["bpf_bat_sum_prod"]
+            total_area = calc_vals["total_area"]
             return len(model_output_bpf_list) == 1 and std_equal(
                 bpf_bat_sum_prod / total_area, model_output_bpf_list[0]
             )

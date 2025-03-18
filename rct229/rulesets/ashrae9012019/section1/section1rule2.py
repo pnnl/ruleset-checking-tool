@@ -90,6 +90,15 @@ class Section1Rule2(RuleDefinitionBase):
         pbp_set = calc_vals["pbp_set"]
         bbp_set = calc_vals["bbp_set"]
 
+        return len(pci_set) == len(pbp_set) == len(
+            bbp_set
+        ) == 1 and self.precision_comparison(pbp_set[0] / bbp_set[0], pci_set[0])
+
+    def is_tolerance_fail(self, context, calc_vals=None, data=None):
+        pci_set = calc_vals["pci_set"]
+        pbp_set = calc_vals["pbp_set"]
+        bbp_set = calc_vals["bbp_set"]
+
         return len(pci_set) == len(pbp_set) == len(bbp_set) == 1 and std_equal(
             pbp_set[0] / bbp_set[0], pci_set[0]
         )
