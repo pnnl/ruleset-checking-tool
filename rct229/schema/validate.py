@@ -59,26 +59,20 @@ def check_associated_list_length(rpd: dict) -> list[str]:
 
         for obj in object_list:
             for key_1, key_2 in associated_list_data_elements:
-                has_key_1 = key_1 in obj
-                has_key_2 = key_2 in obj
+                val_1, val_2 = obj.get(key_1, None), obj.get(key_2, None)
+                # XOR operation
+                if (val_1 is None) != (val_2 is None):
+                    mismatch_errors.append(
+                        f"'{obj['id']}' has populated '{key_1 if val_1 else key_2}' but is missing '{key_1 if not val_1 else key_2}'."
+                    )
+                    continue
 
-                if has_key_1 or has_key_2:
-                    if not (has_key_1 and has_key_2):  # One key is missing
-                        mismatch_errors.append(
-                            f"'{obj['id']}' has populated '{key_1 if has_key_1 else key_2}' but is missing '{key_1 if not has_key_1 else key_2}'."
-                        )
-                        continue
-
-                    # Ensure when both are lists they have the same length
-                    val_1, val_2 = obj[key_1], obj[key_2]
-                    if (
-                        isinstance(val_1, list)
-                        and isinstance(val_2, list)
-                        and len(val_1) != len(val_2)
-                    ):
-                        mismatch_errors.append(
-                            f"'{obj['id']}' lists at '{key_1}' and '{key_2}' are not the same length."
-                        )
+                # Ensure when both are lists they have the same length
+                val_1, val_2 = obj[key_1], obj[key_2]
+                if val_1 and val_2 and len(val_1) != len(val_2):
+                    mismatch_errors.append(
+                        f"'{obj['id']}' lists at '{key_1}' and '{key_2}' are not the same length."
+                    )
 
     return mismatch_errors
 
