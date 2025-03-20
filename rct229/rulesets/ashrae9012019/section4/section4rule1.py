@@ -230,5 +230,5 @@ class Section4Rule1(RuleDefinitionListIndexedBase):
 
                 return (
                     "There is a temperature schedule mismatch between the baseline and proposed RMDs. "
-                    "Fail unless table g3.1 #4 baseline column exception #s 1 and/or 2 are applicable"
+                    "Fail unless table G3.1 #4 baseline column exception #s 1 and/or 2 are applicable"
                 )
