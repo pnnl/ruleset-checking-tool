@@ -92,7 +92,6 @@ class Section22Rule17(RuleDefinitionListIndexedBase):
                 fully_calculated = True
 
             elif heat_rejection_b.get("fan_shaft_power"):
-
                 fan_shaft_power_defined_b = True
 
                 motor_nameplate_hp_b = (
@@ -125,28 +124,25 @@ class Section22Rule17(RuleDefinitionListIndexedBase):
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
             heat_rejection_efficiency_b = calc_vals["heat_rejection_efficiency_b"]
-            fan_shaft_power_defined_b = calc_vals["fan_shaft_power_defined_b"]
             fully_calculated = calc_vals["fully_calculated"]
 
             undetermined_msg = ""
             if not fully_calculated:
-                if (
-                    heat_rejection_efficiency_b is not None
-                    and self.precision_comparison["heat_rejection_efficiency_b"](
-                        heat_rejection_efficiency_b, HEAT_REJ_EFF_LIMIT
-                    )
+                if self.precision_comparison["heat_rejection_efficiency_b"](
+                    heat_rejection_efficiency_b, HEAT_REJ_EFF_LIMIT
                 ):
                     undetermined_msg = (
                         "The heat rejection fan motor nameplate power was not given, so we calculated the fan motor nameplate power based on the equation: Motor Nameplate Power = Fan Shaft Power / LF, where LF = 90%. "
                         "Based on this calculation for motor nameplate power, we calculated a correct efficiency of 38.2 gpm/hp."
                     )
-                elif heat_rejection_efficiency_b is not None:
+                else:
                     undetermined_msg = (
                         f"The heat rejection fan motor nameplate power was not given, so we calculated the fan motor nameplate power based on the equation: Motor Nameplate Power = Fan Shaft Power / LF, where LF = 90%. "
                         f"Based on this calculation for motor nameplate power, we calculated an efficiency of {heat_rejection_efficiency_b} gpm/hp."
                     )
-                elif fan_shaft_power_defined_b is False:
-                    undetermined_msg = "The heat rejection fan motor nameplate power was not given, nor was the fan shaft power. We were unable to calculate the efficiency."
+
+            elif heat_rejection_efficiency_b is None:
+                undetermined_msg = "The heat rejection fan motor nameplate power was not given, nor was the fan shaft power. We were unable to calculate the efficiency."
 
             return undetermined_msg
 
