@@ -110,8 +110,9 @@ class Section5Rule15(RuleDefinitionListIndexedBase):
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
             manual_check_msg = ""
             if calc_vals["manual_check_flag"]:
-                if std_equal(
-                    calc_vals["wwr_b"], min(calc_vals["wwr_p"], WWR_THRESHOLD)
+                if self.precision_comparison["wwr_b"](
+                    calc_vals["wwr_b"].magnitude,
+                    min(calc_vals["wwr_p"].magnitude, WWR_THRESHOLD),
                 ):
                     manual_check_msg = MSG_WARN_MATCHED
                 else:
@@ -125,4 +126,6 @@ class Section5Rule15(RuleDefinitionListIndexedBase):
             )
 
         def is_tolerance_fail(self, context, calc_vals=None, data=None):
-            return std_equal(calc_vals["wwr_b"], min(calc_vals["wwr_p"], WWR_THRESHOLD))
+            return std_equal(
+                calc_vals["wwr_b"].magnitude, min(calc_vals["wwr_p"].magnitude, WWR_THRESHOLD)
+            )

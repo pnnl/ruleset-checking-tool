@@ -153,5 +153,5 @@ class Section1Rule1(RuleDefinitionListIndexedBase):
             bpf_bat_sum_prod = calc_vals["bpf_bat_sum_prod"]
             total_area = calc_vals["total_area"]
             return len(model_output_bpf_list) == 1 and std_equal(
-                bpf_bat_sum_prod / total_area, model_output_bpf_list[0]
+                model_output_bpf_list[0], bpf_bat_sum_prod / total_area
             )

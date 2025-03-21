@@ -124,8 +124,7 @@ class Section1Rule3(RuleDefinitionBase):
         return len(pci_target_set) == len(bpf_set) == len(bbp_set) == len(
             bbrec_set
         ) == len(bbuec_set) == 1 and std_equal(
-            (bbuec_set[0] + (bpf_set[0] * bbrec_set[0])) / bbp_set[0],
-            pci_target_set[0],
+            pci_target_set[0], (bbuec_set[0] + (bpf_set[0] * bbrec_set[0])) / bbp_set[0]
         )
 
     def get_fail_msg(self, context, calc_vals=None, data=None):

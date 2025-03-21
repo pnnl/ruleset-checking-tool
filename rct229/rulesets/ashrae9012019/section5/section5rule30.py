@@ -135,6 +135,12 @@ class Section5Rule30(RuleDefinitionListIndexedBase):
                     ABSORPTION_THERMAL_EXTERIOR,
                 )
 
+            def is_tolerance_fail(self, context, calc_vals=None, data=None):
+                return std_equal(
+                    ABSORPTION_THERMAL_EXTERIOR,
+                    calc_vals["absorptance_thermal_exterior_p"],
+                )
+
             def get_pass_msg(self, context, calc_vals=None, data=None):
                 """Pre-condition: see rule_check"""
                 absorptance_thermal_exterior_p = calc_vals[
@@ -148,14 +154,10 @@ class Section5Rule30(RuleDefinitionListIndexedBase):
                     PASS_DIFFERS_MSG.format(
                         absorptance_thermal_exterior=absorptance_thermal_exterior_u
                     )
-                    if absorptance_thermal_exterior_p != absorptance_thermal_exterior_u
+                    if not self.precision_comparison["absorptance_thermal_exterior_p"](
+                        absorptance_thermal_exterior_p, absorptance_thermal_exterior_u
+                    )
                     else ""
                 )
 
                 return pass_msg
-
-            def is_tolerance_fail(self, context, calc_vals=None, data=None):
-                return std_equal(
-                    calc_vals["absorptance_thermal_exterior_p"],
-                    ABSORPTION_THERMAL_EXTERIOR,
-                )

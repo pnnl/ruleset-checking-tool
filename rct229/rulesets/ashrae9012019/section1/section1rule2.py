@@ -100,7 +100,7 @@ class Section1Rule2(RuleDefinitionBase):
         bbp_set = calc_vals["bbp_set"]
 
         return len(pci_set) == len(pbp_set) == len(bbp_set) == 1 and std_equal(
-            pbp_set[0] / bbp_set[0], pci_set[0]
+            pci_set[0], pbp_set[0] / bbp_set[0]
         )
 
     def get_fail_msg(self, context, calc_vals=None, data=None):

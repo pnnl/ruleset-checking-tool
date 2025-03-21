@@ -111,7 +111,9 @@ class Section5Rule32(RuleDefinitionListIndexedBase):
                 absorptance_solar_exterior_u = calc_vals["absorptance_solar_exterior_u"]
                 return (
                     absorptance_solar_exterior_p == absorptance_solar_exterior_u
-                    and absorptance_solar_exterior_p != ABSORPTANCE_SOLAR_EXTERIOR
+                    and not self.precision_comparison["absorptance_solar_exterior_p"](
+                        absorptance_solar_exterior_p, ABSORPTANCE_SOLAR_EXTERIOR
+                    )
                 )
 
             def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
@@ -128,8 +130,8 @@ class Section5Rule32(RuleDefinitionListIndexedBase):
 
             def is_tolerance_fail(self, context, calc_vals=None, data=None):
                 return std_equal(
-                    calc_vals["absorptance_solar_exterior_p"],
                     ABSORPTANCE_SOLAR_EXTERIOR,
+                    calc_vals["absorptance_solar_exterior_p"],
                 )
 
             def get_pass_msg(self, context, calc_vals=None, data=None):
@@ -142,7 +144,9 @@ class Section5Rule32(RuleDefinitionListIndexedBase):
                     PASS_DIFFERS_MSG_REGULATED.format(
                         absorptance_solar_exterior=(1 - absorptance_solar_exterior_u)
                     )
-                    if absorptance_solar_exterior_p != absorptance_solar_exterior_u
+                    if not self.precision_comparison["absorptance_solar_exterior_p"](
+                        absorptance_solar_exterior_p, absorptance_solar_exterior_u
+                    )
                     else ""
                 )
                 return pass_msg

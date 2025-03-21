@@ -116,7 +116,7 @@ class Section5Rule40(RuleDefinitionListIndexedBase):
                     "absorptance_thermal_exterior_p"
                 ]
                 return any(
-                    absorptance_property == None
+                    absorptance_property is None
                     for absorptance_property in [
                         absorptance_solar_exterior_b,
                         absorptance_solar_exterior_p,
@@ -137,5 +137,20 @@ class Section5Rule40(RuleDefinitionListIndexedBase):
                 return self.precision_comparison["absorptance_solar_exterior_b"](
                     absorptance_solar_exterior_b, absorptance_solar_exterior_p
                 ) and self.precision_comparison["absorptance_thermal_exterior_b"](
+                    absorptance_thermal_exterior_b, absorptance_thermal_exterior_p
+                )
+
+            def is_tolerance_fail(self, context, calc_vals=None, data=None):
+                absorptance_solar_exterior_b = calc_vals["absorptance_solar_exterior_b"]
+                absorptance_solar_exterior_p = calc_vals["absorptance_solar_exterior_p"]
+                absorptance_thermal_exterior_b = calc_vals[
+                    "absorptance_thermal_exterior_b"
+                ]
+                absorptance_thermal_exterior_p = calc_vals[
+                    "absorptance_thermal_exterior_p"
+                ]
+                return std_equal(
+                    absorptance_solar_exterior_b, absorptance_solar_exterior_p
+                ) and std_equal(
                     absorptance_thermal_exterior_b, absorptance_thermal_exterior_p
                 )

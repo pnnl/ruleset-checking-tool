@@ -225,8 +225,12 @@ class Section5Rule39(RuleDefinitionListIndexedBase):
                         f"the baseline door u-factor (${u_factor_b}) is modeled correctly."
                         if manual_check_required_flag
                         and (
-                            std_equal(u_factor_b, target_u_factor_nonres_b)
-                            or std_equal(u_factor_b, target_u_factor_res_b)
+                            self.precision_comparison["subsurface_u_factor_b"](
+                                u_factor_b, target_u_factor_nonres_b
+                            )
+                            or self.precision_comparison["subsurface_u_factor_b"](
+                                u_factor_b, target_u_factor_res_b
+                            )
                         )
                         else ""
                     )
@@ -247,7 +251,12 @@ class Section5Rule39(RuleDefinitionListIndexedBase):
                     target_u_factor_b = calc_vals["target_u_factor_b"]
                     fail_msg = (
                         "Rule evaluation fails with a conservative outcome."
-                        if std_le(std_val=target_u_factor_b, val=u_factor_b)
+                        if (
+                            self.precision_comparison["subsurface_u_factor_b"](
+                                u_factor_b, target_u_factor_b
+                            )
+                            or u_factor_b < target_u_factor_b
+                        )
                         else ""
                     )
                     return fail_msg
