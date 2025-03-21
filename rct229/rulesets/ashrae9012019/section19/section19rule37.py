@@ -2,12 +2,8 @@ from rct229.rule_engine.partial_rule_definition import PartialRuleDefinition
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.schema.schema_enums import SchemaEnums
 
-HEATING_DRY_BULB_DESIGN_DAY = SchemaEnums.schema_enums[
-    "heating_dry_bulb_design_day_type"
-]
-COOLING_DRY_BULB_DESIGN_DAY = SchemaEnums.schema_enums[
-    "cooling_dry_bulb_design_day_type"
-]
+HEATING_DESIGN_DAY = SchemaEnums.schema_enums["HeatingDesignDayOptions"]
+COOLING_DESIGN_DAY = SchemaEnums.schema_enums["CoolingDesignDayOptions"]
 
 
 class Section19Rule37(PartialRuleDefinition):
@@ -66,8 +62,8 @@ class Section19Rule37(PartialRuleDefinition):
         return (
             cooling_design_day_type_b
             == evaporation_wet_bulb_design_day_type_b
-            == COOLING_DRY_BULB_DESIGN_DAY.COOLING_1_0
-            and heating_design_day_type_b == HEATING_DRY_BULB_DESIGN_DAY.HEATING_99_6
+            == COOLING_DESIGN_DAY.COOLING_1_0
+            and heating_design_day_type_b == HEATING_DESIGN_DAY.HEATING_99_6
         )
 
     def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
@@ -88,10 +84,10 @@ class Section19Rule37(PartialRuleDefinition):
             == evaporation_wet_bulb_design_day_type_b
             == cooling_design_day_type_p
             == evaporation_wet_bulb_design_day_type_p
-            == COOLING_DRY_BULB_DESIGN_DAY.COOLING_1_0
+            == COOLING_DESIGN_DAY.COOLING_1_0
             and heating_design_day_type_b
             == heating_design_day_type_p
-            == HEATING_DRY_BULB_DESIGN_DAY.HEATING_99_6
+            == HEATING_DESIGN_DAY.HEATING_99_6
         ):
             UNDETERMINED_MSG = (
                 "Check that the actual temperatures used in sizing runs to determine yet to be designed proposed equipment capacities is based on design days developed using 99.6% heating design temperatures and "
