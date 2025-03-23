@@ -282,10 +282,7 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
             return (
                 not exactly_one_supply_fan
                 or more_than_one_exhaust_fan_and_energy_rec_is_relevant_b
-                or (
-                    not std_equal(total_fan_power_b, expected_fan_wattage_b)
-                    and total_fan_power_b > expected_fan_wattage_b
-                )
+                or (total_fan_power_b > expected_fan_wattage_b)
             )
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
@@ -328,6 +325,15 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
             expected_fan_wattage_b = calc_vals["expected_fan_wattage_b"]
 
             return self.precision_comparison["total_fan_power_b"](
+                total_fan_power_b,
+                expected_fan_wattage_b,
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            total_fan_power_b = calc_vals["total_fan_power_b"]
+            expected_fan_wattage_b = calc_vals["expected_fan_wattage_b"]
+
+            return std_equal(
                 total_fan_power_b,
                 expected_fan_wattage_b,
             )

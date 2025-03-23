@@ -13,6 +13,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_h
 )
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.std_comparisons import std_equal
 
 REQ_HEATING_OVERSIZING_FACTOR = 0.25
 REQ_COOLING_OVERSIZING_FACTOR = 0.15
@@ -178,6 +179,45 @@ class Section19Rule1(RuleDefinitionListIndexedBase):
                 )
                 or (
                     self.precision_comparison["cooling_oversizing_factor"](
+                        cooling_oversizing_factor,
+                        REQ_COOLING_OVERSIZING_FACTOR,
+                    )
+                    and cooling_is_calculated_size
+                    and not heating_oversizing_applicable
+                )
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            heating_oversizing_factor = calc_vals["heating_oversizing_factor"]
+            cooling_oversizing_factor = calc_vals["cooling_oversizing_factor"]
+            is_calculated_size = calc_vals["is_calculated_size"]
+            cooling_is_calculated_size = calc_vals["cooling_is_calculated_size"]
+            heating_oversizing_applicable = calc_vals["heating_oversizing_applicable"]
+            cooling_oversizing_applicable = calc_vals["cooling_oversizing_applicable"]
+
+            return (
+                (
+                    std_equal(
+                        heating_oversizing_factor,
+                        REQ_HEATING_OVERSIZING_FACTOR,
+                    )
+                    and std_equal(
+                        cooling_oversizing_factor,
+                        REQ_COOLING_OVERSIZING_FACTOR,
+                    )
+                    and is_calculated_size
+                    and cooling_is_calculated_size
+                )
+                or (
+                    std_equal(
+                        heating_oversizing_factor,
+                        REQ_HEATING_OVERSIZING_FACTOR,
+                    )
+                    and is_calculated_size
+                    and not cooling_oversizing_applicable
+                )
+                or (
+                    std_equal(
                         cooling_oversizing_factor,
                         REQ_COOLING_OVERSIZING_FACTOR,
                     )

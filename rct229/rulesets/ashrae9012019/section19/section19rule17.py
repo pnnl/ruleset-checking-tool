@@ -19,6 +19,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_fan_object_electric_pow
 )
 from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_
+from rct229.utils.compare_standard_val import std_le
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
 
@@ -155,3 +156,8 @@ class Section19Rule17(RuleDefinitionListIndexedBase):
                     FAN_POWER_AIRFLOW_LIMIT,
                 )
             )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            fan_power_airflow = calc_vals["fan_power_airflow"]
+
+            return std_le(val=fan_power_airflow, std_val=FAN_POWER_AIRFLOW_LIMIT)

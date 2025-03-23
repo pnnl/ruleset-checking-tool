@@ -127,5 +127,6 @@ class Section5Rule15(RuleDefinitionListIndexedBase):
 
         def is_tolerance_fail(self, context, calc_vals=None, data=None):
             return std_equal(
-                calc_vals["wwr_b"].magnitude, min(calc_vals["wwr_p"].magnitude, WWR_THRESHOLD)
+                calc_vals["wwr_b"].magnitude,
+                min(calc_vals["wwr_p"].magnitude, WWR_THRESHOLD),
             )
