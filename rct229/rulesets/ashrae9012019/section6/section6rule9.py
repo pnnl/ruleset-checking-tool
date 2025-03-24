@@ -70,9 +70,12 @@ class Section6Rule9(RuleDefinitionListIndexedBase):
 
             def is_applicable(self, context, data=None):
                 building_p = context.PROPOSED
+                total_floor_area_p = sum(
+                    find_all("$.spaces[*].floor_area", building_p), ZERO.AREA
+                )
                 return (
-                    sum(find_all("$.spaces[*].floor_area", building_p), ZERO.AREA)
-                    <= FLOOR_AREA_LIMIT
+                    self.precision_comparison(total_floor_area_p, FLOOR_AREA_LIMIT)
+                    or total_floor_area_p < FLOOR_AREA_LIMIT
                 )
 
             def create_data(self, context, data=None):

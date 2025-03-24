@@ -142,7 +142,9 @@ class Section6Rule4(RuleDefinitionListIndexedBase):
                                 LightingStatusType.AS_DESIGNED_OR_AS_EXISTING,
                                 LightingStatusType.NOT_YET_DESIGNED_OR_MATCH_TABLE_9_5_1,
                             ]
-                            and total_space_lpd_b == lpd_allowance_b
+                            and self.precision_comparison(
+                                total_space_lpd_b, lpd_allowance_b
+                            )
                         )
                     )
 
@@ -170,7 +172,7 @@ class Section6Rule4(RuleDefinitionListIndexedBase):
                                 LightingStatusType.AS_DESIGNED_OR_AS_EXISTING,
                                 LightingStatusType.NOT_YET_DESIGNED_OR_MATCH_TABLE_9_5_1,
                             ]
-                            and std_equal(total_space_lpd_b, lpd_allowance_b)
+                            and std_equal(lpd_allowance_b, total_space_lpd_b)
                         )
                     )
 
