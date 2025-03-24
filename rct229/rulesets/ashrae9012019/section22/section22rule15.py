@@ -51,7 +51,7 @@ class Section22Rule15(RuleDefinitionListIndexedBase):
                 },
                 precision={
                     "approach_b": {
-                        "precision": 0.1,
+                        "precision": 0.01,
                         "unit": "K",
                     },
                 },
@@ -87,3 +87,9 @@ class Section22Rule15(RuleDefinitionListIndexedBase):
             return self.precision_comparison["approach_b"](
                 target_approach_b.to(ureg.kelvin), approach_b
             )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            approach_b = calc_vals["approach_b"]
+            target_approach_b = calc_vals["target_approach_b"]
+
+            return std_equal(target_approach_b.to(ureg.kelvin), approach_b)

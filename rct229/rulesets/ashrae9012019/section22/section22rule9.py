@@ -15,6 +15,7 @@ from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
+from rct229.utils.std_comparisons import std_equal
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_7,
@@ -146,9 +147,12 @@ class Section22Rule9(RuleDefinitionListIndexedBase):
             def rule_check(self, context, calc_vals=None, data=None):
                 min_flow_fraction = calc_vals["min_flow_fraction"]
 
-                # return min_flow_fraction == REQUIRED_MIN_FLOW_FRACTION
-
                 return self.precision_comparison["min_flow_fraction"](
                     min_flow_fraction,
                     REQUIRED_MIN_FLOW_FRACTION,
                 )
+
+            def is_tolerance_fail(self, context, calc_vals=None, data=None):
+                min_flow_fraction = calc_vals["min_flow_fraction"]
+
+                return std_equal(REQUIRED_MIN_FLOW_FRACTION, min_flow_fraction)
