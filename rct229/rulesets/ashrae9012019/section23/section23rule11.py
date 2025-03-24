@@ -15,7 +15,7 @@ from rct229.schema.config import ureg
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import getattr_
 from rct229.utils.pint_utils import CalcQ
-
+from rct229.utils.std_comparisons import std_equal
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_11_1,
@@ -155,6 +155,29 @@ class Section23Rule11(RuleDefinitionListIndexedBase):
             ) or (
                 temperature_control_b == FanSystemTemperatureControlOptions.ZONE_RESET
                 and self.precision_comparison["reset_differential_temperature_b"](
+                    TARGET_RESET_DIFFERENTIAL_TEMP,
+                    reset_differential_temperature_b,
+                )
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            temperature_control_b = calc_vals["temperature_control"]
+            supply_air_temp_reset_load_frac_b = calc_vals[
+                "supply_air_temperature_reset_load_fraction"
+            ]
+            reset_differential_temperature_b = calc_vals[
+                "reset_differential_temperature"
+            ]
+            return (
+                temperature_control_b
+                == FanSystemTemperatureControlOptions.LOAD_RESET_TO_SPACE_TEMPERATURE
+                and std_equal(
+                    supply_air_temp_reset_load_frac_b,
+                    TARGET_SUPPLY_AIR_TEMP_RESET_LOAD_FRAC,
+                )
+            ) or (
+                temperature_control_b == FanSystemTemperatureControlOptions.ZONE_RESET
+                and std_equal(
                     TARGET_RESET_DIFFERENTIAL_TEMP,
                     reset_differential_temperature_b,
                 )

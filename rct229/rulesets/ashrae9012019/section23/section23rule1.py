@@ -91,8 +91,8 @@ class Section23Rule1(RuleDefinitionListIndexedBase):
                     "$": ["heating_system"],
                 },
                 precision={
-                    "heatpump_auxiliary_heat_high_shutoff_temperature": {
-                        "precision": 0.1,
+                    "heatpump_low_shutoff_b": {
+                        "precision": 1,
                         "unit": "F",
                     },
                 },
@@ -124,8 +124,14 @@ class Section23Rule1(RuleDefinitionListIndexedBase):
             ]
 
             return (
-                heatpump_aux_high_temp_shutoff
-                <= HEATPUMP_AUX_HEAT_HIGH_SHUTOFF_THRESHOLD
+                (
+                    heatpump_aux_high_temp_shutoff
+                    < HEATPUMP_AUX_HEAT_HIGH_SHUTOFF_THRESHOLD
+                    or self.precision_comparison["heatpump_low_shutoff_b"](
+                        heatpump_aux_high_temp_shutoff,
+                        HEATPUMP_AUX_HEAT_HIGH_SHUTOFF_THRESHOLD,
+                    )
+                )
                 and heatpump_aux_heat_energy_source
                 == HeatpumpAuxiliaryHeatOptions.ELECTRIC_RESISTANCE
             )
