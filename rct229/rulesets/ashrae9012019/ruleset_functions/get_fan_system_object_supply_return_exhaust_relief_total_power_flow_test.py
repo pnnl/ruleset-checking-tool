@@ -165,80 +165,44 @@ def test__get_fan_system_object_supply_return_exhaust_relief_total_kW_CFM():
         TEST_FAN_SYSTEM
     )
     # check supply fans
-    assert std_equal(
-        all_fan_info["supply_fans_power"],
-        135 * ureg("W"), 0.5
-    )
+    assert std_equal(all_fan_info["supply_fans_power"], 135 * ureg("W"), 0.5)
 
-    assert std_equal(
-        all_fan_info["supply_fans_airflow"],
-        1200 * ureg("L/s"), 0.5
-    )
+    assert std_equal(all_fan_info["supply_fans_airflow"], 1200 * ureg("L/s"), 0.5)
 
-    assert std_equal(
-        all_fan_info["supply_fans_qty"],
-        3, 0.5
-    )
+    assert std_equal(all_fan_info["supply_fans_qty"], 3, 0.5)
 
     assert (
         all_fan_info["supply_fans_pressure"] == FanPressureDropCompareCategory.UNDEFINED
     )
 
     # return fans
-    assert std_equal(
-        all_fan_info["return_fans_power"],
-        35 * ureg("W"), 0.5
-    )
+    assert std_equal(all_fan_info["return_fans_power"], 35 * ureg("W"), 0.5)
 
-    assert std_equal(
-        all_fan_info["return_fans_airflow"],
-        760 * ureg("L/s"), 0.5
-    )
+    assert std_equal(all_fan_info["return_fans_airflow"], 760 * ureg("L/s"), 0.5)
 
-    assert std_equal(
-        all_fan_info["return_fans_qty"],
-        2, 0.5
-    )
+    assert std_equal(all_fan_info["return_fans_qty"], 2, 0.5)
 
     assert (
         all_fan_info["return_fans_pressure"] == FanPressureDropCompareCategory.IDENTICAL
     )
 
     # relief fans
-    assert std_equal(
-        all_fan_info["relief_fans_power"],
-        50 * ureg("W"), 0.5
-    )
+    assert std_equal(all_fan_info["relief_fans_power"], 50 * ureg("W"), 0.5)
 
-    assert std_equal(
-        all_fan_info["relief_fans_airflow"],
-        300 * ureg("L/s"), 0.5
-    )
+    assert std_equal(all_fan_info["relief_fans_airflow"], 300 * ureg("L/s"), 0.5)
 
-    assert std_equal(
-        all_fan_info["relief_fans_qty"],
-        2, 0.5
-    )
+    assert std_equal(all_fan_info["relief_fans_qty"], 2, 0.5)
 
     assert (
         all_fan_info["relief_fans_pressure"] == FanPressureDropCompareCategory.DIFFERENT
     )
 
     # exhaust fans
-    assert std_equal(
-        all_fan_info["exhaust_fans_power"],
-        60 * ureg("W"), 0.5
-    )
+    assert std_equal(all_fan_info["exhaust_fans_power"], 60 * ureg("W"), 0.5)
 
-    assert std_equal(
-        all_fan_info["exhaust_fans_airflow"],
-        150 * ureg("L/s"), 0.5
-    )
+    assert std_equal(all_fan_info["exhaust_fans_airflow"], 150 * ureg("L/s"), 0.5)
 
-    assert std_equal(
-        all_fan_info["exhaust_fans_qty"],
-        2, 0.5
-    )
+    assert std_equal(all_fan_info["exhaust_fans_qty"], 2, 0.5)
 
     assert (
         all_fan_info["exhaust_fans_pressure"]
