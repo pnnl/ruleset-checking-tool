@@ -183,7 +183,7 @@ def test__get_energy_required_to_heat_swh_use_power_per_person():
         "SWH Use 1", TEST_RMD, "Building Segment 1", False
     )
     assert len(energy_required_by_space) == 1 and std_equal(
-        energy_required_by_space["Space 1"], 8362628.17 * ureg("Btu")
+        energy_required_by_space["Space 1"], 8362628.17 * ureg("Btu"), 0.5
     )
 
 
@@ -192,7 +192,7 @@ def test__get_energy_required_to_heat_swh_use_power_per_area():
         "SWH Use 2", TEST_RMD, "Building Segment 1", False
     )
     assert len(energy_required_by_space) == 1 and std_equal(
-        energy_required_by_space["Space 1"], 23912285.2 * ureg("Btu")
+        energy_required_by_space["Space 1"], 23912285.2 * ureg("Btu"), 0.5
     )
 
 
@@ -201,7 +201,7 @@ def test__get_energy_required_to_heat_swh_use_power():
         "SWH Use 3", TEST_RMD, "Building Segment 1", False
     )
     assert len(energy_required_by_space) == 1 and std_equal(
-        energy_required_by_space["Space 1"], 23912285.2 * ureg("Btu")
+        energy_required_by_space["Space 1"], 23912285.2 * ureg("Btu"), 0.5
     )
 
 
@@ -210,7 +210,7 @@ def test__get_energy_required_to_heat_swh_use_volume_per_person():
         "SWH Use 4", TEST_RMD, "Building Segment 1", False
     )
     assert len(energy_required_by_space) == 1 and std_equal(
-        energy_required_by_space["Space 1"], 139200741 * ureg("Btu")
+        energy_required_by_space["Space 1"], 139200741 * ureg("Btu"), 0.5
     )
 
 
@@ -219,7 +219,7 @@ def test__get_energy_required_to_heat_swh_use_volume_per_area():
         "SWH Use 5", TEST_RMD, "Building Segment 1", False
     )
     assert len(energy_required_by_space) == 1 and std_equal(
-        energy_required_by_space["Space 2"], 278401481.1 * ureg("Btu")
+        energy_required_by_space["Space 2"], 278401481.1 * ureg("Btu"), 0.5
     )
 
 
@@ -228,7 +228,7 @@ def test__get_energy_required_to_heat_swh_use_volume():
         "SWH Use 6", TEST_RMD, "Building Segment 1", False
     )
     assert len(energy_required_by_space) == 1 and std_equal(
-        energy_required_by_space["Space 2"], 278401481 * ureg("Btu")
+        energy_required_by_space["Space 2"], 278401481 * ureg("Btu"), 0.5
     )
 
 

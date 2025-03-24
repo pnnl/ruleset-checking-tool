@@ -163,7 +163,7 @@ def test__get_swh_components_associated_with_each_swh_bat():
     assert (
         len(actual_result) == 1
         and std_equal(
-            actual_result["LIBRARY"].energy_required, 11956142.6 * ureg("Btu")
+            actual_result["LIBRARY"].energy_required, 11956142.6 * ureg("Btu"), 0.5
         )
         and actual_result["LIBRARY"].swh_distribution == ["SWH Distribution 1"]
         and actual_result["LIBRARY"].swh_heating_eq == ["SWH Equipment 1"]
