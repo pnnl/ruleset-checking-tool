@@ -50,6 +50,12 @@ class Section16Rule1(RuleDefinitionListIndexedBase):
                     BASELINE_0=True,
                     PROPOSED=False,
                 ),
+                precision={
+                    "elevator_motor_power_b": {
+                        "precision": 100,
+                        "unit": "W",
+                    }
+                },
             )
 
         def get_calc_vals(self, context, data=None):
@@ -131,7 +137,7 @@ class Section16Rule1(RuleDefinitionListIndexedBase):
             expected_peak_motor_power_b = calc_vals["expected_peak_motor_power_b"]
             elevator_motor_power_b = calc_vals["elevator_motor_power_b"]
 
-            return self.precision_comparison(
+            return self.precision_comparison["elevator_motor_power_b"](
                 elevator_motor_power_b, expected_peak_motor_power_b
             )
 

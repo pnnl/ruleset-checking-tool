@@ -50,6 +50,12 @@ class Section16Rule7(RuleDefinitionListIndexedBase):
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={"$": ["cab_lighting_power", "cab_area"]},
+                precision={
+                    "elevator_cab_lighting_power_b/elevator_cab_area_b": {
+                        "precision": 0.01,
+                        "unit": "W/ft2",
+                    }
+                },
             )
 
         def get_calc_vals(self, context, data=None):
@@ -76,7 +82,9 @@ class Section16Rule7(RuleDefinitionListIndexedBase):
         def rule_check(self, context, calc_vals=None, data=None):
             elevator_cab_lighting_power_b = calc_vals["elevator_cab_lighting_power_b"]
             elevator_cab_area_b = calc_vals["elevator_cab_area_b"]
-            return elevator_cab_area_b != ZERO.AREA and self.precision_comparison(
+            return elevator_cab_area_b != ZERO.AREA and self.precision_comparison[
+                "elevator_cab_lighting_power_b/elevator_cab_area_b"
+            ](
                 elevator_cab_lighting_power_b / elevator_cab_area_b,
                 REQ_ELEVATOR_CAB_LIGHTING_POWER_DENSITY,
             )

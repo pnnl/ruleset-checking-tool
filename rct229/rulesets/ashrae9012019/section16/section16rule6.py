@@ -52,6 +52,12 @@ class Section16Rule6(RuleDefinitionListIndexedBase):
                 required_fields={
                     "$": ["cab_ventilation_fan_power", "cab_ventilation_fan_flow"]
                 },
+                precision={
+                    "elevator_cab_ventilation_fan_power_b/elevator_cab_ventilation_fan_flow_b": {
+                        "precision": 0.01,
+                        "unit": "W/cfm",
+                    }
+                },
             )
 
         def get_calc_vals(self, context, data=None):
@@ -87,7 +93,9 @@ class Section16Rule6(RuleDefinitionListIndexedBase):
             elevator_cab_ventilation_fan_flow_b = calc_vals[
                 "elevator_cab_ventilation_fan_flow_b"
             ]
-            return self.precision_comparison(
+            return self.precision_comparison[
+                "elevator_cab_ventilation_fan_power_b/elevator_cab_ventilation_fan_flow_b"
+            ](
                 elevator_cab_ventilation_fan_power_b
                 / elevator_cab_ventilation_fan_flow_b,
                 REQ_ELEVATOR_CAB_VENTILATION_FAN_POWER,
