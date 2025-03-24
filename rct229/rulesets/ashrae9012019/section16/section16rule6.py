@@ -87,8 +87,21 @@ class Section16Rule6(RuleDefinitionListIndexedBase):
             elevator_cab_ventilation_fan_flow_b = calc_vals[
                 "elevator_cab_ventilation_fan_flow_b"
             ]
-            return std_equal(
+            return self.precision_comparison(
                 elevator_cab_ventilation_fan_power_b
                 / elevator_cab_ventilation_fan_flow_b,
                 REQ_ELEVATOR_CAB_VENTILATION_FAN_POWER,
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            elevator_cab_ventilation_fan_power_b = calc_vals[
+                "elevator_cab_ventilation_fan_power_b"
+            ]
+            elevator_cab_ventilation_fan_flow_b = calc_vals[
+                "elevator_cab_ventilation_fan_flow_b"
+            ]
+            return std_equal(
+                REQ_ELEVATOR_CAB_VENTILATION_FAN_POWER,
+                elevator_cab_ventilation_fan_power_b
+                / elevator_cab_ventilation_fan_flow_b,
             )

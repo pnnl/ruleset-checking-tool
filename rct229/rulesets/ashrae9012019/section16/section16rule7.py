@@ -76,7 +76,15 @@ class Section16Rule7(RuleDefinitionListIndexedBase):
         def rule_check(self, context, calc_vals=None, data=None):
             elevator_cab_lighting_power_b = calc_vals["elevator_cab_lighting_power_b"]
             elevator_cab_area_b = calc_vals["elevator_cab_area_b"]
-            return elevator_cab_area_b != ZERO.AREA and std_equal(
+            return elevator_cab_area_b != ZERO.AREA and self.precision_comparison(
                 elevator_cab_lighting_power_b / elevator_cab_area_b,
                 REQ_ELEVATOR_CAB_LIGHTING_POWER_DENSITY,
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            elevator_cab_lighting_power_b = calc_vals["elevator_cab_lighting_power_b"]
+            elevator_cab_area_b = calc_vals["elevator_cab_area_b"]
+            return elevator_cab_area_b != ZERO.AREA and std_equal(
+                REQ_ELEVATOR_CAB_LIGHTING_POWER_DENSITY,
+                elevator_cab_lighting_power_b / elevator_cab_area_b,
             )

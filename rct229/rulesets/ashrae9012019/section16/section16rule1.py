@@ -131,4 +131,12 @@ class Section16Rule1(RuleDefinitionListIndexedBase):
             expected_peak_motor_power_b = calc_vals["expected_peak_motor_power_b"]
             elevator_motor_power_b = calc_vals["elevator_motor_power_b"]
 
+            return self.precision_comparison(
+                elevator_motor_power_b, expected_peak_motor_power_b
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            expected_peak_motor_power_b = calc_vals["expected_peak_motor_power_b"]
+            elevator_motor_power_b = calc_vals["elevator_motor_power_b"]
+
             return std_equal(expected_peak_motor_power_b, elevator_motor_power_b)
