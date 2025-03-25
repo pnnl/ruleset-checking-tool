@@ -120,6 +120,7 @@ class Section5Rule30(RuleDefinitionListIndexedBase):
                 absorptance_thermal_exterior_u = calc_vals[
                     "absorptance_thermal_exterior_u"
                 ]
+
                 return (
                     absorptance_thermal_exterior_p == absorptance_thermal_exterior_u
                     and absorptance_thermal_exterior_p != ABSORPTION_THERMAL_EXTERIOR
@@ -138,6 +139,7 @@ class Section5Rule30(RuleDefinitionListIndexedBase):
                 absorptance_thermal_exterior_u = calc_vals[
                     "absorptance_thermal_exterior_u"
                 ]
+
                 UNDETERMINED_MSG = ""
                 if (
                     absorptance_thermal_exterior_p == absorptance_thermal_exterior_u
@@ -153,7 +155,9 @@ class Section5Rule30(RuleDefinitionListIndexedBase):
                         ABSORPTION_THERMAL_EXTERIOR,
                     )
                 ):
-                    UNDETERMINED_MSG = CASE3_UNDETERMINED__MSG
+                    UNDETERMINED_MSG = CASE3_UNDETERMINED__MSG.format(
+                        absorptance_thermal_exterior=absorptance_thermal_exterior_u
+                    )
 
                 return UNDETERMINED_MSG
 
