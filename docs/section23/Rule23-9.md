@@ -4,7 +4,7 @@
 **Schema Version:** 0.0.34  
 **Mandatory Rule:** True  
 **Rule ID:** 23-9  
-**Rule Description:** System 11 Minimum volume setpoint shall be the largest of 50% of the maximum design airflow rate, the minimum ventilation airflow rate or the airflow required to comply with codes or accredidation standards.    
+**Rule Description:** System 11 Minimum volume setpoint shall be the largest of 50% of the maximum design airflow rate and the minimum ventilation airflow rate or the airflow required to comply with codes or accredidation standards.      
 **Rule Assertion:** B-RMR = expected value  
 **Appendix G Section:** Section 23 Air-side  
 **90.1 Section Reference:** Exception to G3.1.3.13  
@@ -52,19 +52,16 @@
           - get the fan system: `fan_system_p = hvac_p.fan_system`
           - get the operation schedule hourly values: `operation_schedule_hourly_values_p = fan_system_p.operating_schedule.hourly_values`
           - get the terminal minimum volume flowrate: `min_volume_p = terminal_p.minimum_airflow`
-          - multiply each value in the hourly schedule by the minimum airflow rate, and append this to the list of minimum volume flowrates: `minimum_volume_list_p.append([i * min_volume_p for i in operation_schedule_hourly_values_p]`
-        - sum all of the values for each hour, so that the resulting list is a list of the sum of minimum flowrates across all terminals each hour of the year: `min_volume_flow_tot_p = [sum(values) for values in zip(*minimum_volume_list_p)]`
-        - find the minimum non-zero value in the list: `min_volume_p = min(filter(lambda x: x != 0, min_volume_flow_tot_p))`
  
   **Rule Assertion:**  
   
-    - Case 1: the minimum volume flow rate is equal to the maximum of the min_ventilation_flowrate, 50% of the maximum_supply_flowrate and the minimum supply air flowrate in the proposed model: PASS: `if min_volume_flowrate == max(min_ventilation_flowrate, 0.5 * maximum_supply_flowrate, min_volume_p): PASS`
+    - Case 1: If the proposed minimum volume flowrate (min_volume_p) is less than or equal tothe maximum of the other two values max(min_ventilation_flowrate and 0.5 * maximum_supply_flowrate), AND the minimum volume flowrate equals the maximum of (min_ventilation_flowrate and 0.5 * maximum_supply_flowrate) then we can provide a definite pass: `if(min_volume_p <= max(min_ventilation_flowrate and 0.5 * maximum_supply_flowrate) and min_volume_flowrate == max(min_ventilation_flowrate, 0.5 * maximum_supply_flowrate, min_volume_p): PASS`
 
-    - Case 2: Else the minimum volume flow rate is equal to the maximum of the min_ventilation_flowrate and 50% of the maximum_supply_flowrate.  Due to the previous check, we know that the minimum volume flow rate is less than the proposed minimum volume flow: UNDETERMINED with note: `if min_volume_flowrate == max(min_ventilation_flowrate, 0.5 * maximum_supply_flowrate): UNDETERMINED; note = "The minimum volume flowrate is equal to the maximum of the minimum ventilation flowrate and 50% of the maximum supply flow rate, however it is less than the minimum volume flowrate in the proposed model.  Please double check that there are no additional codes or accreditation standards in regards to airflow." `  
-    
-    - Case 3: all other cases, the rule fails: `else: FAIL`
+    - Case 3: else if the min_volume_flowrate is less than the maximum of (min_ventilation_flowrate, 0.5 * maximum_supply_flowrate, min_volume_p), then FAIL: `elif min_volume_flowrate < max((min_ventilation_flowrate, 0.5 * maximum_supply_flowrate, min_volume_p)): FAIL`
 
+    - Case 3: Else if proposed minimum volume flow rate is greater than the maximum of (min_ventilation_flowrate and 0.5 * maximum_supply_flowrate), then the minimum flow required by codes & standards might be between the max(min_ventilation_flowrate, 0.5 * maximum_supply_flowrate, min_volume_p) and min_volume_p: UNDETERMINED; note = "The airflow provided in the proposed model is greater than the maximum of the minimum ventilation flowrate and 50% of the maximum supply flowrate.  We cannot determine whether your minimum volume flowrate meets the minimum airflow required to comply with codes or accrediation standards."`
 
+    - Case 4: Else all other cases fail: `Else: Fail`
 **Notes:**
 
 **[Back](../_toc.md)**
