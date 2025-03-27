@@ -117,15 +117,11 @@ class Section19Rule1(RuleDefinitionListIndexedBase):
             cooling_not_applicable = calc_vals["cooling_not_applicable"]
             if not heating_not_applicable:
                 heating_oversizing_factor = calc_vals["heating_oversizing_factor"]
-                heating_is_calculated_size = calc_vals[
-                    "heating_is_calculated_size"
-                ]
+                heating_is_calculated_size = calc_vals["heating_is_calculated_size"]
 
             if not cooling_not_applicable:
                 cooling_oversizing_factor = calc_vals["cooling_oversizing_factor"]
-                cooling_is_calculated_size = calc_vals[
-                    "cooling_is_calculated_size"
-                ]
+                cooling_is_calculated_size = calc_vals["cooling_is_calculated_size"]
 
             return (
                 (
