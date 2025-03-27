@@ -67,14 +67,8 @@ class Section19Rule1(RuleDefinitionListIndexedBase):
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 precision={
-                    "heating_oversizing_factor": {
-                        "precision": 0.01,
-                        "unit": None
-                    },
-                    "cooling_oversizing_factor": {
-                        "precision": 0.01,
-                        "unit": None
-                    },
+                    "heating_oversizing_factor": {"precision": 0.01, "unit": None},
+                    "cooling_oversizing_factor": {"precision": 0.01, "unit": None},
                 },
             )
 
@@ -129,15 +123,19 @@ class Section19Rule1(RuleDefinitionListIndexedBase):
                 ]
 
             return (
-                (heating_not_applicable or
-                    self.precision_comparison["heating_oversizing_factor"](
+                (
+                    heating_not_applicable
+                    or self.precision_comparison["heating_oversizing_factor"](
                         heating_oversizing_factor,
                         REQ_HEATING_OVERSIZING_FACTOR,
                     )
-                    and (cooling_not_applicable or self.precision_comparison["cooling_oversizing_factor"](
-                        cooling_oversizing_factor,
-                        REQ_COOLING_OVERSIZING_FACTOR,
-                    ))
+                    and (
+                        cooling_not_applicable
+                        or self.precision_comparison["cooling_oversizing_factor"](
+                            cooling_oversizing_factor,
+                            REQ_COOLING_OVERSIZING_FACTOR,
+                        )
+                    )
                     and (heating_not_applicable or heating_is_sized_based_on_design_day)
                     and (cooling_not_applicable or cooling_is_sized_based_on_design_day)
                 )
