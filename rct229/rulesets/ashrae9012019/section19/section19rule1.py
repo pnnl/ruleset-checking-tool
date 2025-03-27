@@ -72,6 +72,11 @@ class Section19Rule1(RuleDefinitionListIndexedBase):
                 },
             )
 
+        def is_applicable(self, context, data=None):
+            hvac_b = context.BASELINE_0
+
+            return bool(hvac_b.get("heating_system") or hvac_b.get("cooling_system"))
+
         def get_calc_vals(self, context, data=None):
             calc_vals = {}
             hvac_b = context.BASELINE_0
@@ -82,11 +87,11 @@ class Section19Rule1(RuleDefinitionListIndexedBase):
                 calc_vals["heating_oversizing_factor"] = getattr_(
                     hvac_b, "oversizing_factor", "heating_system", "oversizing_factor"
                 )
-                calc_vals["heating_is_sized_based_on_design_day"] = getattr_(
+                calc_vals["heating_is_calculated_size"] = getattr_(
                     hvac_b,
-                    "is_sized_based_on_design_day",
+                    "is_calculated_size",
                     "heating_system",
-                    "is_sized_based_on_design_day",
+                    "is_calculated_size",
                 )
             else:
                 calc_vals["heating_not_applicable"] = True
@@ -96,11 +101,11 @@ class Section19Rule1(RuleDefinitionListIndexedBase):
                 calc_vals["cooling_oversizing_factor"] = getattr_(
                     hvac_b, "oversizing_factor", "cooling_system", "oversizing_factor"
                 )
-                calc_vals["cooling_is_sized_based_on_design_day"] = getattr_(
+                calc_vals["cooling_is_calculated_size"] = getattr_(
                     hvac_b,
-                    "is_sized_based_on_design_day",
+                    "is_calculated_size",
                     "cooling_system",
-                    "is_sized_based_on_design_day",
+                    "is_calculated_size",
                 )
             else:
                 calc_vals["cooling_not_applicable"] = True
@@ -112,14 +117,14 @@ class Section19Rule1(RuleDefinitionListIndexedBase):
             cooling_not_applicable = calc_vals["cooling_not_applicable"]
             if not heating_not_applicable:
                 heating_oversizing_factor = calc_vals["heating_oversizing_factor"]
-                heating_is_sized_based_on_design_day = calc_vals[
-                    "heating_is_sized_based_on_design_day"
+                heating_is_calculated_size = calc_vals[
+                    "heating_is_calculated_size"
                 ]
 
             if not cooling_not_applicable:
                 cooling_oversizing_factor = calc_vals["cooling_oversizing_factor"]
-                cooling_is_sized_based_on_design_day = calc_vals[
-                    "cooling_is_sized_based_on_design_day"
+                cooling_is_calculated_size = calc_vals[
+                    "cooling_is_calculated_size"
                 ]
 
             return (
@@ -136,21 +141,21 @@ class Section19Rule1(RuleDefinitionListIndexedBase):
                             REQ_COOLING_OVERSIZING_FACTOR,
                         )
                     )
-                    and (heating_not_applicable or heating_is_sized_based_on_design_day)
-                    and (cooling_not_applicable or cooling_is_sized_based_on_design_day)
+                    and (heating_not_applicable or heating_is_calculated_size)
+                    and (cooling_not_applicable or cooling_is_calculated_size)
                 )
                 or (
                     self.precision_comparison["heating_oversizing_factor"](
                         heating_oversizing_factor,
                         REQ_HEATING_OVERSIZING_FACTOR,
                     )
-                    and heating_is_sized_based_on_design_day
+                    and heating_is_calculated_size
                 )
                 or (
                     self.precision_comparison["cooling_oversizing_factor"](
                         cooling_oversizing_factor,
                         REQ_COOLING_OVERSIZING_FACTOR,
                     )
-                    and cooling_is_sized_based_on_design_day
+                    and cooling_is_calculated_size
                 )
             )

@@ -125,9 +125,6 @@
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "Airside System 1",
-                                                "cooling_system": {
-                                                    "id": "Cooling System 1"
-                                                },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
                                                     "type": "FURNACE",
@@ -208,9 +205,6 @@
                                                     "type": "DIRECT_EXPANSION",
                                                     "is_calculated_size": true,
                                                     "oversizing_factor": 0.15
-                                                },
-                                                "heating_system": {
-                                                    "id": "Heating System 1"
                                                 },
                                                 "fan_system": {
                                                     "id": "Fan System 1",
@@ -363,13 +357,6 @@
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "Airside System 1",
-                                                "cooling_system": {
-                                                    "id": "Cooling System 1"
-                                                },
-                                                "heating_system": {
-                                                    "id": "Heating System 1",
-                                                    "type": "OTHER"
-                                                },
                                                 "fan_system": {
                                                     "id": "Fan System 1",
                                                     "supply_fans": [
