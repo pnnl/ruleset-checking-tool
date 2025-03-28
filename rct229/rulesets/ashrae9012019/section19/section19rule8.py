@@ -8,9 +8,10 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_zone_list_w_area_d
 from rct229.schema.config import ureg
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.pint_utils import CalcQ
 
 MIN_OA_CFM = 3000 * ureg("cfm")
-OCCUPANT_DENSITY_LIMIT = 0.1 / ureg("ft2")
+OCCUPANT_DENSITY_LIMIT = 0.1 * ureg("people/ft2")
 DEMAND_CONTROL_VENTILATION_CONTROL = SchemaEnums.schema_enums[
     "DemandControlVentilationControlOptions"
 ]
@@ -54,6 +55,7 @@ class Section19Rule8(RuleDefinitionListIndexedBase):
                     find_all("$.spaces[*].number_of_occupants", zone_b),
                     0,
                 )
+                * ureg("people")
                 for zone_b in find_all("$.building_segments[*].zones[*]", building_b)
             }
 
@@ -81,7 +83,7 @@ class Section19Rule8(RuleDefinitionListIndexedBase):
                     },
                     precision={
                         "hvac_min_OA_flow": {"precision": 0.1, "unit": "cfm"},
-                        "avg_occ_density": {"precision": 0.1, "unit": "1/ft2"},
+                        "avg_occ_density": {"precision": 0.1, "unit": "people/ft2"},
                     },
                 )
 
@@ -92,42 +94,35 @@ class Section19Rule8(RuleDefinitionListIndexedBase):
 
                 hvac_id_b = hvac_b["id"]
                 fan_system_b = hvac_b["fan_system"]
-
-                is_DCV_modeled_b = False
-                avg_occ_density = 0.0 / ureg("ft2")
                 hvac_min_OA_flow = fan_system_b["minimum_outdoor_airflow"]
-
+                zone_id_list_b = hvac_zone_list_w_area_dict_b[hvac_id_b]["zone_list"]
+                hvac_area_b = hvac_zone_list_w_area_dict_b[hvac_id_b]["total_area"]
                 demand_control_ventilation_control_b = fan_system_b.get(
                     "demand_control_ventilation_control"
                 )
 
+                avg_occ_density = (
+                    sum(
+                        [
+                            zone_total_occupant_dict_b[zone_id_b]
+                            for zone_id_b in zone_id_list_b
+                        ]
+                    )
+                    / hvac_area_b
+                )
+
+                is_DCV_modeled_b = False
                 if (
                     demand_control_ventilation_control_b
                     and demand_control_ventilation_control_b
                     != DEMAND_CONTROL_VENTILATION_CONTROL.NONE
                 ):
                     is_DCV_modeled_b = True
-                    if hvac_min_OA_flow > MIN_OA_CFM:
-                        zone_id_list_b = hvac_zone_list_w_area_dict_b[hvac_id_b][
-                            "zone_list"
-                        ]
-                        hvac_area_b = hvac_zone_list_w_area_dict_b[hvac_id_b][
-                            "total_area"
-                        ]
-                        avg_occ_density = (
-                            sum(
-                                [
-                                    zone_total_occupant_dict_b[zone_id_b]
-                                    for zone_id_b in zone_id_list_b
-                                ]
-                            )
-                            / hvac_area_b
-                        )
 
                 return {
-                    "hvac_min_OA_flow": hvac_min_OA_flow,
+                    "hvac_min_OA_flow": CalcQ("air_flow_rate", hvac_min_OA_flow),
                     "is_DCV_modeled_b": is_DCV_modeled_b,
-                    "avg_occ_density": avg_occ_density,
+                    "avg_occ_density": CalcQ("area_occ_density", avg_occ_density),
                 }
 
             def rule_check(self, context, calc_vals=None, data=None):
@@ -147,17 +142,19 @@ class Section19Rule8(RuleDefinitionListIndexedBase):
                     and is_DCV_modeled_b
                 ) or (
                     (
-                        hvac_min_OA_flow < MIN_OA_CFM
-                        or self.precision_comparison["hvac_min_OA_flow"](
-                            hvac_min_OA_flow,
-                            MIN_OA_CFM,
+                        (
+                            hvac_min_OA_flow < MIN_OA_CFM
+                            or self.precision_comparison["hvac_min_OA_flow"](
+                                hvac_min_OA_flow,
+                                MIN_OA_CFM,
+                            )
                         )
-                    )
-                    and (
-                        avg_occ_density > OCCUPANT_DENSITY_LIMIT
-                        or self.precision_comparison["avg_occ_density"](
-                            avg_occ_density,
-                            OCCUPANT_DENSITY_LIMIT,
+                        or (
+                            avg_occ_density < OCCUPANT_DENSITY_LIMIT
+                            or self.precision_comparison["avg_occ_density"](
+                                avg_occ_density,
+                                OCCUPANT_DENSITY_LIMIT,
+                            )
                         )
                     )
                     and not is_DCV_modeled_b

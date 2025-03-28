@@ -24,7 +24,7 @@ from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_
 from rct229.utils.compare_standard_val import std_lt
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.pint_utils import ZERO
+from rct229.utils.pint_utils import ZERO, CalcQ
 from rct229.utils.std_comparisons import std_equal
 from rct229.utils.utility_functions import find_exactly_one_terminal_unit
 
@@ -156,7 +156,7 @@ class Section19Rule15(RuleDefinitionListIndexedBase):
 
             return any(
                 hvac_id_b in baseline_system_types_dict[system_type]
-                for system_type in baseline_system_types_dict
+                for system_type in APPLICABLE_SYS_TYPES
             )
 
         def get_calc_vals(self, context, data=None):
@@ -179,14 +179,17 @@ class Section19Rule15(RuleDefinitionListIndexedBase):
             return {
                 "hvac_id_b": hvac_id_b,
                 "supply_fan_qty_b": supply_fan_qty_b,
-                "supply_fan_airflow_b": supply_fan_airflow_b,
-                "minimum_outdoor_airflow_b": minimum_outdoor_airflow_b,
+                "supply_fan_airflow_b": CalcQ("air_flow_rate", supply_fan_airflow_b),
+                "minimum_outdoor_airflow_b": CalcQ(
+                    "air_flow_rate", minimum_outdoor_airflow_b
+                ),
                 "all_design_setpoints_105": data["hvac_info_dict_b"][hvac_id_b][
                     "all_design_setpoints_105"
                 ],
-                "proposed_supply_flow": data["hvac_info_dict_b"][hvac_id_b][
-                    "proposed_supply_flow"
-                ],
+                "proposed_supply_flow": CalcQ(
+                    "air_flow_rate",
+                    data["hvac_info_dict_b"][hvac_id_b]["proposed_supply_flow"],
+                ),
             }
 
         def manual_check_required(self, context, calc_vals=None, data=None):

@@ -20,7 +20,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_fan_object_electric_pow
 from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.pint_utils import ZERO
+from rct229.utils.pint_utils import ZERO, CalcQ
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_1,
@@ -110,7 +110,7 @@ class Section19Rule17(RuleDefinitionListIndexedBase):
 
             return any(
                 hvac_id_b in baseline_system_types_dict[system_type]
-                for system_type in baseline_system_types_dict
+                for system_type in APPLICABLE_SYS_TYPES
             )
 
         def get_calc_vals(self, context, data=None):
@@ -143,7 +143,9 @@ class Section19Rule17(RuleDefinitionListIndexedBase):
                 else ZERO.POWER_PER_FLOW
             )
 
-            return {"fan_power_airflow": fan_power_airflow}
+            return {
+                "fan_power_airflow": CalcQ("power_per_air_flow_rate", fan_power_airflow)
+            }
 
         def rule_check(self, context, calc_vals=None, data=None):
             fan_power_airflow = calc_vals["fan_power_airflow"]
