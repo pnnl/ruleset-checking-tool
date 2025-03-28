@@ -11,7 +11,7 @@ from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import CalcQ
 
 MIN_OA_CFM = 3000 * ureg("cfm")
-OCCUPANT_DENSITY_LIMIT = 0.1 / ureg("ft2")
+OCCUPANT_DENSITY_LIMIT = 0.1 * ureg("people/ft2")
 DEMAND_CONTROL_VENTILATION_CONTROL = SchemaEnums.schema_enums[
     "DemandControlVentilationControlOptions"
 ]
@@ -55,6 +55,7 @@ class Section19Rule8(RuleDefinitionListIndexedBase):
                     find_all("$.spaces[*].number_of_occupants", zone_b),
                     0,
                 )
+                * ureg("people")
                 for zone_b in find_all("$.building_segments[*].zones[*]", building_b)
             }
 
@@ -82,7 +83,7 @@ class Section19Rule8(RuleDefinitionListIndexedBase):
                     },
                     precision={
                         "hvac_min_OA_flow": {"precision": 0.1, "unit": "cfm"},
-                        "avg_occ_density": {"precision": 0.1, "unit": "1/ft2"},
+                        "avg_occ_density": {"precision": 0.1, "unit": "people/ft2"},
                     },
                 )
 
@@ -121,7 +122,7 @@ class Section19Rule8(RuleDefinitionListIndexedBase):
                 return {
                     "hvac_min_OA_flow": CalcQ("air_flow_rate", hvac_min_OA_flow),
                     "is_DCV_modeled_b": is_DCV_modeled_b,
-                    "avg_occ_density": CalcQ("area_density", avg_occ_density),
+                    "avg_occ_density": CalcQ("area_occ_density", avg_occ_density),
                 }
 
             def rule_check(self, context, calc_vals=None, data=None):
