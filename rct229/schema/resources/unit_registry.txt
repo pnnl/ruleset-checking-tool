@@ -290,7 +290,7 @@ reciprocal_square_foot = people / foot**2 = 1 people/ft2
 # Define the unit 'people'
 people = [dimensionless]
 # Define people per 1000 square feet unit
-people_per_1000_square_feet = 1000 people / foot**2 = 1 people/kft2
+people_per_1000_square_feet = 1 people/kft2
 
 #### UNIT GROUPS ####
 # Mostly for length, area, volume, mass, force
