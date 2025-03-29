@@ -72,8 +72,9 @@
                             }
                         ],
                         "weather": {
-                            "cooling_design_day_type": "COOLING_1_0",
-                            "heating_design_day_type": "HEATING_99_6"
+                            "cooling_dry_bulb_design_day_type": "COOLING_1_0",
+                            "heating_dry_bulb_design_day_type": "HEATING_99_6",
+                            "evaporation_wet_bulb_design_day_type": "COOLING_1_0"
                         },
                         "type": "PROPOSED"
                     }
@@ -135,8 +136,9 @@
                             }
                         ],
                         "weather": {
-                            "cooling_design_day_type": "COOLING_1_0",
-                            "heating_design_day_type": "HEATING_99_6"
+                            "cooling_dry_bulb_design_day_type": "COOLING_1_0",
+                            "heating_dry_bulb_design_day_type": "HEATING_99_6",
+                            "evaporation_wet_bulb_design_day_type": "COOLING_1_0"
                         },
                         "type": "BASELINE_0"
                     }
@@ -218,8 +220,9 @@
                             }
                         ],
                         "weather": {
-                            "cooling_design_day_type": "COOLING_0_4",
-                            "heating_design_day_type": "HEATING_99_0"
+                            "cooling_dry_bulb_design_day_type": "COOLING_0_4",
+                            "heating_dry_bulb_design_day_type": "HEATING_99_0",
+                            "evaporation_wet_bulb_design_day_type": "COOLING_0_4"
                         },
                         "type": "PROPOSED"
                     }
@@ -281,8 +284,9 @@
                             }
                         ],
                         "weather": {
-                            "cooling_design_day_type": "COOLING_1_0",
-                            "heating_design_day_type": "HEATING_99_6"
+                            "cooling_dry_bulb_design_day_type": "COOLING_1_0",
+                            "heating_dry_bulb_design_day_type": "HEATING_99_6",
+                            "evaporation_wet_bulb_design_day_type": "COOLING_1_0"
                         },
                         "type": "BASELINE_0"
                     }
@@ -363,8 +367,9 @@
                             }
                         ],
                         "weather": {
-                            "cooling_design_day_type": "COOLING_1_0",
-                            "heating_design_day_type": "HEATING_99_6"
+                            "cooling_dry_bulb_design_day_type": "COOLING_1_0",
+                            "heating_dry_bulb_design_day_type": "HEATING_99_6",
+                            "evaporation_wet_bulb_design_day_type": "COOLING_1_0"
                         },
                         "type": "PROPOSED"
                     }
@@ -426,8 +431,9 @@
                             }
                         ],
                         "weather": {
-                            "cooling_design_day_type": "COOLING_0_4",
-                            "heating_design_day_type": "HEATING_99_0"
+                            "cooling_dry_bulb_design_day_type": "COOLING_0_4",
+                            "heating_dry_bulb_design_day_type": "HEATING_99_0",
+                            "evaporation_wet_bulb_design_day_type": "COOLING_0_4"
                         },
                         "type": "BASELINE_0"
                     }
