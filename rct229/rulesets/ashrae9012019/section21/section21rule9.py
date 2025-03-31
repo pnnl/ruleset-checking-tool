@@ -83,9 +83,9 @@ class Section21Rule9(RuleDefinitionListIndexedBase):
                 },
                 precision={
                     "pump_power_per_flow_rate": {
-                        "precision": 1,
+                        "precision": 0.1,
                         "unit": "W/gpm",
-                    }
+                    },
                 },
             )
 
