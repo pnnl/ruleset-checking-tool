@@ -116,6 +116,10 @@ class Section19Rule1(RuleDefinitionListIndexedBase):
         def rule_check(self, context, calc_vals=None, data=None):
             heating_not_applicable = calc_vals["heating_not_applicable"]
             cooling_not_applicable = calc_vals["cooling_not_applicable"]
+            heating_oversizing_factor = None
+            cooling_oversizing_factor = None
+            heating_is_calculated_size = None
+            cooling_is_calculated_size = None
             if not heating_not_applicable:
                 heating_oversizing_factor = calc_vals["heating_oversizing_factor"]
                 heating_is_calculated_size = calc_vals["heating_is_calculated_size"]
@@ -158,40 +162,49 @@ class Section19Rule1(RuleDefinitionListIndexedBase):
             )
 
         def is_tolerance_fail(self, context, calc_vals=None, data=None):
-            heating_oversizing_factor = calc_vals["heating_oversizing_factor"]
-            cooling_oversizing_factor = calc_vals["cooling_oversizing_factor"]
-            is_calculated_size = calc_vals["is_calculated_size"]
-            cooling_is_calculated_size = calc_vals["cooling_is_calculated_size"]
-            heating_oversizing_applicable = calc_vals["heating_oversizing_applicable"]
-            cooling_oversizing_applicable = calc_vals["cooling_oversizing_applicable"]
+            heating_not_applicable = calc_vals["heating_not_applicable"]
+            cooling_not_applicable = calc_vals["cooling_not_applicable"]
+            heating_oversizing_factor = None
+            cooling_oversizing_factor = None
+            heating_is_calculated_size = None
+            cooling_is_calculated_size = None
+            if not heating_not_applicable:
+                heating_oversizing_factor = calc_vals["heating_oversizing_factor"]
+                heating_is_calculated_size = calc_vals["heating_is_calculated_size"]
+
+            if not cooling_not_applicable:
+                cooling_oversizing_factor = calc_vals["cooling_oversizing_factor"]
+                cooling_is_calculated_size = calc_vals["cooling_is_calculated_size"]
 
             return (
                 (
-                    std_equal(
-                        heating_oversizing_factor,
-                        REQ_HEATING_OVERSIZING_FACTOR,
+                    heating_not_applicable
+                    or std_equal(
+                        val=heating_oversizing_factor,
+                        std_val=REQ_HEATING_OVERSIZING_FACTOR,
                     )
-                    and std_equal(
-                        cooling_oversizing_factor,
-                        REQ_COOLING_OVERSIZING_FACTOR,
+                    and (
+                        cooling_not_applicable
+                        or std_equal(
+                            val=cooling_oversizing_factor,
+                            std_val=REQ_COOLING_OVERSIZING_FACTOR,
+                        )
                     )
-                    and is_calculated_size
-                    and cooling_is_calculated_size
+                    and (heating_not_applicable or heating_is_calculated_size)
+                    and (cooling_not_applicable or cooling_is_calculated_size)
                 )
                 or (
                     std_equal(
-                        heating_oversizing_factor,
-                        REQ_HEATING_OVERSIZING_FACTOR,
+                        val=heating_oversizing_factor,
+                        std_val=REQ_HEATING_OVERSIZING_FACTOR,
                     )
-                    and is_calculated_size
-                    and not cooling_oversizing_applicable
+                    and heating_is_calculated_size
                 )
                 or (
                     std_equal(
-                        cooling_oversizing_factor,
-                        REQ_COOLING_OVERSIZING_FACTOR,
+                        val=cooling_oversizing_factor,
+                        std_val=REQ_COOLING_OVERSIZING_FACTOR,
                     )
                     and cooling_is_calculated_size
-                    and not heating_oversizing_applicable
                 )
             )
