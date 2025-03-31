@@ -53,7 +53,11 @@ def get_building_segment_lighting_status_type_dict(
             )
             building_segment_lighting_status_type_dict[space["id"]] = (
                 LightingStatusType.NOT_YET_DESIGNED_OR_MATCH_TABLE_9_5_1
-                if std_equal(val=total_space_lpd, std_val=allowable_lpd, percent_tolerance=TOTAL_SPACE_LPD_TOLERANCE/allowable_lpd*100)
+                if std_equal(
+                    val=total_space_lpd,
+                    std_val=allowable_lpd,
+                    percent_tolerance=TOTAL_SPACE_LPD_TOLERANCE / allowable_lpd * 100,
+                )
                 else LightingStatusType.AS_DESIGNED_OR_AS_EXISTING
             )
 
