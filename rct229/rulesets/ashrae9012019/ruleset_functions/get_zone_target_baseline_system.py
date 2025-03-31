@@ -49,10 +49,12 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.is_cz_0_to_3a_bool import (
 )
 from rct229.schema.config import ureg
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.std_comparisons import std_equal
 
 BUILDING_AREA_20000_ft2 = 20000 * ureg("ft2")
 BUILDING_AREA_40000_ft2 = 40000 * ureg("ft2")
 BUILDING_AREA_150000_ft2 = 150000 * ureg("ft2")
+BUILDING_AREA_THRESHOLD = 1 * ureg("ft2")
 REQ_FL_6 = 6
 COMPUTER_ROOM_PEAK_COOLING_LOAD_600000_BTUH = 600000 * ureg("Btu/hr")
 COMPUTER_ROOM_PEAK_COOLING_LOAD_3000000_BTUH = 3000000 * ureg("Btu/hr")
@@ -141,7 +143,16 @@ def get_zone_target_baseline_system(
         for building_area_type in list_building_area_types_and_zones_b:
             if building_area_type != predominant_building_area_type_b and (
                 list_building_area_types_and_zones_b[building_area_type]["floor_area"]
-                >= BUILDING_AREA_20000_ft2
+                > BUILDING_AREA_20000_ft2
+                or std_equal(
+                    std_val=BUILDING_AREA_20000_ft2,
+                    val=list_building_area_types_and_zones_b[building_area_type][
+                        "floor_area"
+                    ],
+                    percent_tolerance=BUILDING_AREA_THRESHOLD
+                    / BUILDING_AREA_20000_ft2
+                    * 100,
+                )
             ):
                 secondary_system_type_b = expected_system_type_from_table_g3_1_1_dict(
                     building_area_type,

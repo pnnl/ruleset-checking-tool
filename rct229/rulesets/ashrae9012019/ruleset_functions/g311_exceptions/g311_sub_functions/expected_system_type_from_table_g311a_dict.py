@@ -10,6 +10,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.is_cz_0_to_3a_bool import (
 )
 from rct229.schema.config import ureg
 from rct229.schema.schema_enums import SchemaEnums
+from rct229.utils.std_comparisons import std_equal
 
 PUBLIC_ASSEMBLY_BUILDING_AREA_THRESHOLD = 120_000 * ureg("ft2")
 RETAIL_FLOOR_NUMBER_THRESHOLD = 3
@@ -19,6 +20,9 @@ OTHER_NON_RESIDENTIAL_BUILDING_AREA_LOWER_THRESHOLD = 25_000 * ureg("ft2")
 OTHER_NON_RESIDENTIAL_BUILDING_AREA_HIGHER_THRESHOLD = 150_000 * ureg("ft2")
 OTHER_NON_RESIDENTIAL_FLOOR_NUMBER_LOWER_THRESHOLD = 4
 OTHER_NON_RESIDENTIAL_FLOOR_NUMBER_HIGHER_THRESHOLD = 5
+BUILDING_AREA_TOLERANCE = 1 * ureg("ft2")
+OTHER_NON_RESIDENTIAL_BUILDING_AREA_TOLERANCE = 1 * ureg("ft2")
+
 HVAC_BUILDING_AREA_TYPE_OPTIONS = SchemaEnums.schema_enums[
     "HeatingVentilatingAirConditioningBuildingAreaOptions2019ASHRAE901"
 ]
@@ -110,9 +114,23 @@ def expected_system_type_from_table_g3_1_1_dict(
             building_area < OTHER_NON_RESIDENTIAL_BUILDING_AREA_LOWER_THRESHOLD
         )
         building_area_medium_area_flag = (
-            OTHER_NON_RESIDENTIAL_BUILDING_AREA_LOWER_THRESHOLD
-            <= building_area
-            <= OTHER_NON_RESIDENTIAL_BUILDING_AREA_HIGHER_THRESHOLD
+            OTHER_NON_RESIDENTIAL_BUILDING_AREA_LOWER_THRESHOLD < building_area
+            or std_equal(
+                val=building_area,
+                std_val=OTHER_NON_RESIDENTIAL_BUILDING_AREA_LOWER_THRESHOLD,
+                percent_tolerance=BUILDING_AREA_TOLERANCE
+                / OTHER_NON_RESIDENTIAL_BUILDING_AREA_LOWER_THRESHOLD
+                * 100,
+            )
+        ) and (
+            building_area < OTHER_NON_RESIDENTIAL_BUILDING_AREA_HIGHER_THRESHOLD
+            or std_equal(
+                val=building_area,
+                std_val=OTHER_NON_RESIDENTIAL_BUILDING_AREA_HIGHER_THRESHOLD,
+                percent_tolerance=BUILDING_AREA_TOLERANCE
+                / OTHER_NON_RESIDENTIAL_BUILDING_AREA_HIGHER_THRESHOLD
+                * 100,
+            )
         )
         building_area_large_area_flag = (
             building_area > OTHER_NON_RESIDENTIAL_BUILDING_AREA_HIGHER_THRESHOLD

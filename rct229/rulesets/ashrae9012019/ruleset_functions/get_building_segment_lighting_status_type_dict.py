@@ -2,8 +2,10 @@ from rct229.rulesets.ashrae9012019.data_fns.table_9_5_1_fns import table_9_5_1_l
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.std_comparisons import std_equal
+from rct229.schema.config import ureg
 
 NONE = SchemaEnums.schema_enums["LightingBuildingAreaOptions2019ASHRAE901T951TG38"].NONE
+TOTAL_SPACE_LPD_TOLERANCE = 0.01 * ureg("W/ft2")
 
 
 # Intended for export and internal use
@@ -51,7 +53,7 @@ def get_building_segment_lighting_status_type_dict(
             )
             building_segment_lighting_status_type_dict[space["id"]] = (
                 LightingStatusType.NOT_YET_DESIGNED_OR_MATCH_TABLE_9_5_1
-                if std_equal(total_space_lpd, allowable_lpd)
+                if std_equal(val=total_space_lpd, std_val=allowable_lpd, percent_tolerance=TOTAL_SPACE_LPD_TOLERANCE/allowable_lpd*100)
                 else LightingStatusType.AS_DESIGNED_OR_AS_EXISTING
             )
 

@@ -219,7 +219,8 @@ def get_zone_conditioning_category_dict(
                 std_val=system_min_heating_output,
                 val=zone_capacity_dict[zone_id]["heating"],
                 percent_tolerance=ZONE_HEAT_CAPACITY_DENSITY_TOLERANCE
-                / system_min_heating_output,
+                / system_min_heating_output
+                * 100,
             )
         ):
             directly_conditioned_zone_ids.append(zone_id)
