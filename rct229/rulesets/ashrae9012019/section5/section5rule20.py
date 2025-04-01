@@ -211,8 +211,10 @@ class Section5Rule20(RuleDefinitionListIndexedBase):
         def list_filter(self, context_item, data=None):
             surface_b = context_item.BASELINE_0
             scc_dict_b = data["scc_dict_b"]
-            return (get_opaque_surface_type(surface_b) == OST.ABOVE_GRADE_WALL) and (
-                scc_dict_b[surface_b["id"]] != SCC.UNREGULATED
+            return (
+                (get_opaque_surface_type(surface_b) == OST.ABOVE_GRADE_WALL)
+                and (scc_dict_b[surface_b["id"]] != SCC.UNREGULATED)
+                and len(surface_b.get("subsurfaces", [])) > 0
             )
 
         class AboveGradeWallRule(RuleDefinitionListIndexedBase):
