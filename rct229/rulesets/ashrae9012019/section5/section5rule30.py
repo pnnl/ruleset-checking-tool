@@ -23,7 +23,7 @@ CASE2_UNDETERMINED__MSG = (
     "is based on testing in accordance with section 5.5.3.1.1(a). "
 )
 CASE3_UNDETERMINED__MSG = (
-    "Fail if the thermal emittance in the user model is based on aged test data. roof thermal emittance is equal to the prescribed default value of 0.9  "
+    "Fail if the thermal emittance in the user model is based on aged test data. Roof thermal emittance is equal to the prescribed default value of 0.9 "
     "but differs from the thermal emittance in the user model {absorptance_thermal_exterior}."
 )
 PASS_DIFFERS_MSG = (

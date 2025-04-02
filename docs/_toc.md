@@ -418,7 +418,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [22-41](section22/Rule22-41.md): Purchased CHW systems must be modeled with only one external fluid loop in the baseline design.
 
 ## Section 23 - Chilled Water Systems and Condenser Water Systems
-  * [23-2](section23/Rule23-1.md): System 2 and 4 - Electric air-source heat pumps shall be modeled with electric auxiliary heat and an outdoor air thermostat. The systems shall be controlled to energize auxiliary heat only when the outdoor air temperature is less than 40°F. The air-source heat pump shall be modeled to continue to operate while auxiliary heat is energized.
+  * [23-1](section23/Rule23-1.md): System 2 and 4 - Electric air-source heat pumps shall be modeled with electric auxiliary heat and an outdoor air thermostat. The systems shall be controlled to energize auxiliary heat only when the outdoor air temperature is less than 40°F.  
   * [23-2](section23/Rule23-2.md): For baseline systems 5-8 and 11, the SAT is reset higher by 5F under minimum cooling load conditions.
   * [23-3](section23/Rule23-3.md): System 5, 6, 7 and 8 minimum volume setpoint shall be 30% of zone peak airflow, minimum outdoor airflow, or rate required to comply with minimum accreditation standards whichever is larger.
   * [23-4](section23/Rule23-4.md): Baseline systems 5 & 7 serving lab spaces per G3.1.1c shall reduce lab exhaust and makeup air during unoccupied periods to 50% of zone peak airflow, the minimum outdoor airflow, or rate required to comply with minimum accreditation standards whichever is larger.
@@ -434,3 +434,4 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [23-14](section23/Rule23-14.md): If the baseline system does not comply with exceptions in Section 6.5.2.3 then only 25% of the system reheat energy shall be included in the baseline building performance.
   * [23-15](section23/Rule23-15.md): Dehumidification reheat shall be the same as the system heating type.
   * [23-16](section23/Rule23-16.md): Systems 5 - 8, the baseline system shall be modeled with preheat coils controlled to a fixed set point 20F less than the design room heating temperature setpoint.
+  * [23-17](section23/Rule23-17.md): System 2 and 4 - Electric air-source heat pumps shall be modeled to continue to operate while auxiliary heat is energized.
