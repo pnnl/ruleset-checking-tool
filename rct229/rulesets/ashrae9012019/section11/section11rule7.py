@@ -153,12 +153,11 @@ class Section11Rule7(RuleDefinitionListIndexedBase):
 
                     if (
                         swh_equip_type_b[swh_heating_equipment_id]
-                        == "PROPANE_INSTANTANEOUS_WATER_HEATER"
+                        == "PROPANE_INSTANTANEOUS"
                     ):
                         swh_equip_type_list_b.append("GAS_INSTANTANEOUS_WATER_HEATER")
                     elif (
-                        swh_equip_type_b[swh_heating_equipment_id]
-                        == "PROPANE_INSTANTANEOUS_WATER_HEATER"
+                        swh_equip_type_b[swh_heating_equipment_id] == "PROPANE_STORAGE"
                     ):
                         swh_equip_type_list_b.append("GAS_STORAGE_WATER_HEATER")
                     else:
