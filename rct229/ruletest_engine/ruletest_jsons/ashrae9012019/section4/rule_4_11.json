@@ -71105,9 +71105,9 @@
         "Section": 4,
         "Rule": 11,
         "Test": "e",
-        "test_description": "A building has one building segment and one zone. The proposed building is served by a system 3 HVAC and the baseline building is served by a system 4 HVAC. The systems fan schedules match.",
+        "test_description": "A building has one building segment and two zones. The proposed building is served by a modified, multizone system 3 HVAC and the baseline building served by two system 3 HVACs. The systems fan schedules match.",
         "expected_rule_outcome": "undetermined",
-        "expected_raised_message_includes": "Fan schedules match between the baseline and proposed for the hvac system(s) serving this zone. Verify that matching schedules are appropriate in that none of the section 4 baseline column exceptions #1, #2 or #3 are applicable.\"",
+        "expected_raised_message_includes": "Fan schedules match between the baseline and proposed for the hvac system(s) serving this zone. Verify that matching schedules are appropriate in that none of the section 4 baseline column exceptions #1, #2 or #3 are applicable.",
         "standard": {
             "rule_id": "4-11",
             "ruleset_reference": "Table G3.1 Section 4 Exception 3",
@@ -71139,37 +71139,44 @@
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "terminals": [
-                                                    {
-                                                        "id": "Air Terminal",
-                                                        "is_supply_ducted": true,
-                                                        "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System Type 3",
-                                                        "heating_capacity": 3516.8533333333335
-                                                    }
-                                                ],
                                                 "floor_name": "Floor 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 929.0303999999999
                                                     }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System Type 3",
+                                                        "heating_capacity": 3516.8533333333335
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 2",
+                                                        "floor_area": 929.0303999999999
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System Type 3"
+                                                    }
                                                 ]
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System Type 3",
-                                                "cooling_system": {
-                                                    "id": "DX Coil 1",
-                                                    "type": "DIRECT_EXPANSION",
-                                                    "design_sensible_cool_capacity": 42204.0
-                                                },
-                                                "heating_system": {
-                                                    "id": "Furnace Coil 1",
-                                                    "type": "FURNACE",
-                                                    "design_capacity": 8792.133333333333
-                                                },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
@@ -71184,6 +71191,17 @@
                                                         }
                                                     ],
                                                     "operating_schedule": "Fan Schedule 1"
+                                                },
+                                                "id": "System Type 3",
+                                                "cooling_system": {
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_sensible_cool_capacity": 42204.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Furnace Coil 1",
+                                                    "design_capacity": 8792.133333333333,
+                                                    "type": "FURNACE"
                                                 }
                                             }
                                         ]
@@ -79983,36 +80001,43 @@
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "terminals": [
-                                                    {
-                                                        "id": "Air Terminal",
-                                                        "is_supply_ducted": true,
-                                                        "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System Type 4"
-                                                    }
-                                                ],
                                                 "floor_name": "Floor 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 929.0303999999999
                                                     }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System Type 3"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 2",
+                                                        "floor_area": 929.0303999999999
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System Type 3 -1 "
+                                                    }
                                                 ]
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System Type 4",
-                                                "cooling_system": {
-                                                    "id": "DX Coil 1",
-                                                    "type": "DIRECT_EXPANSION",
-                                                    "design_sensible_cool_capacity": 42204.0
-                                                },
-                                                "heating_system": {
-                                                    "id": "HP Coil 1",
-                                                    "type": "HEAT_PUMP",
-                                                    "design_capacity": 8792.133333333333
-                                                },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
@@ -80024,6 +80049,45 @@
                                                     "return_fans": [
                                                         {
                                                             "id": "Return Fan 1"
+                                                        }
+                                                    ],
+                                                    "operating_schedule": "Fan Schedule 1"
+                                                },
+                                                "id": "System Type 3",
+                                                "cooling_system": {
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_sensible_cool_capacity": 42204.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Furnace Coil 1",
+                                                    "design_capacity": 8792.133333333333,
+                                                    "type": "FURNACE"
+                                                }
+                                            },
+                                            {
+                                                "id": "System Type 3 -1 ",
+                                                "cooling_system": {
+                                                    "id": "DX Coil 2",
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_sensible_cool_capacity": 42204.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Furnace Coil 2",
+                                                    "design_capacity": 8792.133333333333,
+                                                    "type": "FURNACE"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 2",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 2"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 2"
                                                         }
                                                     ],
                                                     "operating_schedule": "Fan Schedule 1"
