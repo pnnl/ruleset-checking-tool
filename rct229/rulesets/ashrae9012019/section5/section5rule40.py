@@ -15,7 +15,9 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_ca
     get_surface_conditioning_category_dict,
 )
 from rct229.utils.jsonpath_utils import find_one
-from rct229.utils.std_comparisons import std_equal
+from rct229.schema.schema_enums import SchemaEnums
+
+EXTERIOR = SchemaEnums.schema_enums["SurfaceAdjacencyOptions"].EXTERIOR
 
 
 class Section5Rule40(RuleDefinitionListIndexedBase):
@@ -67,6 +69,7 @@ class Section5Rule40(RuleDefinitionListIndexedBase):
             scc = data["scc_dict_b"][surface_b["id"]]
             return (
                 get_opaque_surface_type(surface_b) == OST.ROOF
+                and surface_b.get("adjacent_to") == EXTERIOR
                 and scc is SCC.UNREGULATED
             )
 
