@@ -34,7 +34,7 @@ class Section4Rule1(RuleDefinitionListIndexedBase):
             each_rule=Section4Rule1.RuleSetModelInstanceRule(),
             index_rmd=BASELINE_0,
             id="4-1",
-            description="Temperature Control Setpoints shall be the same for proposed design and baseline building design.",
+            description="Temperature control setpoints shall be the same for proposed design and baseline building design.",
             ruleset_section_title="Schedules Setpoints",
             standard_section="Section G3.1-4 Schedule Modeling Requirements for the Proposed design and Baseline building",
             is_primary_rule=True,
@@ -220,10 +220,15 @@ class Section4Rule1(RuleDefinitionListIndexedBase):
                     "heating_schedule_matched": heating_schedule_matched,
                 }
 
-            def manual_check_required(self, context, calc_vals=None, data=None):
+            def rule_check(self, context, calc_vals=None, data=None):
                 cooling_schedule_matched = calc_vals["cooling_schedule_matched"]
                 heating_schedule_matched = calc_vals["heating_schedule_matched"]
-                return not (cooling_schedule_matched and heating_schedule_matched)
 
-            def rule_check(self, context, calc_vals=None, data=None):
-                return True
+                return cooling_schedule_matched and heating_schedule_matched
+
+            def get_fail_msg(self, context, calc_vals=None, data=None):
+
+                return (
+                    "There is a temperature schedule mismatch between the baseline and proposed RMDs. "
+                    "Fail unless table G3.1 #4 baseline column exception #s 1 and/or 2 are applicable"
+                )

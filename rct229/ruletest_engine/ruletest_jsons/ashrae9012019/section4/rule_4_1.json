@@ -35207,8 +35207,8 @@
         "Rule": 1,
         "Test": "b",
         "test_description": "A building has one building segment and one zone with an HVAC system that provides heating and cooling. The zone heating and cooling thermostat schedules do not match between the baseline and proposed ruleset model descriptions.",
-        "expected_rule_outcome": "undetermined",
-        "expected_raised_message_includes": "There is a temperature schedule mismatch between the baseline and proposed. Fail unless Table G3.1 #4 baseline column exception #s 1 and/or 2 are applicable",
+        "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "There is a temperature schedule mismatch between the baseline and proposed RMDs.",
         "standard": {
             "rule_id": "4-1",
             "ruleset_reference": "Table G3.1 Section 4",
