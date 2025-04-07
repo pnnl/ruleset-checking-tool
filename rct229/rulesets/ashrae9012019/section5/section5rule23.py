@@ -29,7 +29,7 @@ class PRM9012019Rule11q41(RuleDefinitionListIndexedBase):
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
                 list_path="$.building_segments[*].zones[*].surfaces[*].subsurfaces[*]",
-                each_rule=PRM9012019Rule11q41.BuildingRule.SurfaceRule(),
+                each_rule=PRM9012019Rule11q41.BuildingRule.SubsurfaceRule(),
                 index_rmd=BASELINE_0,
             )
 
