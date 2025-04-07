@@ -263,12 +263,11 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
                 }
 
             def manual_check_required(self, context, calc_vals=None, data=None):
-                schedule_mismatch = calc_vals["schedule_mismatch"]
                 system_type_match_baseline_proposed = calc_vals[
                     "system_type_match_baseline_proposed"
                 ]
 
-                return not (schedule_mismatch or system_type_match_baseline_proposed)
+                return not system_type_match_baseline_proposed
 
             def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
                 schedule_mismatch = calc_vals["schedule_mismatch"]
