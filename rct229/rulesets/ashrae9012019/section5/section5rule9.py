@@ -24,7 +24,10 @@ class PRM9012019Rule38m70(RuleDefinitionListIndexedBase):
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            required_fields={"$": ["weather"], "weather": ["climate_zone"]},
+            required_fields={
+                "$.ruleset_model_descriptions[*]": ["weather"],
+                "weather": ["climate_zone"],
+            },
             each_rule=PRM9012019Rule38m70.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-9",
@@ -33,8 +36,12 @@ class PRM9012019Rule38m70(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=False,
             list_path="ruleset_model_descriptions[0].buildings[*]",
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
         )
+
+    def create_data(self, context, data=None):
+        rpd_b = context.BASELINE_0
+        climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
+        return {"climate_zone": climate_zone}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -52,7 +59,7 @@ class PRM9012019Rule38m70(RuleDefinitionListIndexedBase):
             return {
                 "surface_conditioning_category_dict": get_surface_conditioning_category_dict(
                     data["climate_zone"], building_b
-                )
+                ),
             }
 
         def list_filter(self, context_item, data):
@@ -64,7 +71,7 @@ class PRM9012019Rule38m70(RuleDefinitionListIndexedBase):
                 super(PRM9012019Rule38m70.BuildingRule.SurfaceRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False
-                    )
+                    ),
                 )
 
             def get_calc_vals(self, context, data=None):
@@ -73,7 +80,9 @@ class PRM9012019Rule38m70(RuleDefinitionListIndexedBase):
                     "surface_conditioning_category_dict"
                 ]
                 surface_category = surface_conditioning_category_dict[surface_b["id"]]
-                return {"surface_category": surface_category}
+                return {
+                    "surface_category": surface_category,
+                }
 
             def applicability_check(self, context, calc_vals, data):
                 surface_category = calc_vals["surface_category"]
@@ -82,4 +91,5 @@ class PRM9012019Rule38m70(RuleDefinitionListIndexedBase):
             def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
                 surface_b = context.BASELINE_0
                 surface_id_b = surface_b["id"]
+
                 return f"{surface_id_b} is a regulated floor surface. Conduct a manual check to confirm that Baseline floor assemblies conform with assemblies detailed in Appendix A."

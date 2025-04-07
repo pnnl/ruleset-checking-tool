@@ -38,49 +38,58 @@ class PRM9012019Rule49y39(RuleDefinitionListIndexedBase):
             standard_section="Table G3.1 #11, baseline column, a & b",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
-            data_items={"is_leap_year": (BASELINE_0, "calendar/is_leap_year")},
         )
 
     class RMDRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(PRM9012019Rule49y39.RMDRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
-                    USER=False, BASELINE_0=True, PROPOSED=True
+                    USER=False,
+                    BASELINE_0=True,
+                    PROPOSED=True,
                 ),
                 index_rmd=BASELINE_0,
                 each_rule=PRM9012019Rule49y39.RMDRule.SWHBATRule(),
+                required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
             )
 
         def create_data(self, context, data):
             rmd_p = context.PROPOSED
             rmd_b = context.BASELINE_0
+            is_leap_year_b = rmd_b["calendar"]["is_leap_year"]
+
             service_water_heating_uses_p = {
                 swh_use["id"]: swh_use.get("use", 0.0)
                 for swh_use in find_all(
+                    # TODO: Moving the `service_water_heating_uses` key to the `building_segments` level is being discussed. If the `service_water_heating_uses` key is moved, this function needs to be revisited.
                     "$.buildings[*].building_segments[*].zones[*].spaces[*].service_water_heating_uses[*]",
                     rmd_p,
                 )
             }
+
             swh_equip_type_b = {
                 swh_equip_id: get_swh_equipment_type(rmd_b, swh_equip_id)
                 for swh_equip_id in find_all(
                     "$.service_water_heating_equipment[*].id", rmd_b
                 )
             }
+
             return {
                 "service_water_heating_uses_p": service_water_heating_uses_p,
                 "swh_equip_type_b": swh_equip_type_b,
+                "is_leap_year_b": is_leap_year_b,
             }
 
         def create_context_list(self, context, data=None):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
-            is_leap_year_b = data["is_leap_year"]
+            is_leap_year_b = data["is_leap_year_b"]
+
             swh_bats_and_equip_association_b = (
                 get_swh_components_associated_with_each_swh_bat(rmd_b, is_leap_year_b)
             )
             swh_bats_and_uses_p = get_swh_bats_and_swh_use(rmd_p)
+
             building_area_type_SWH_equip_dict = {}
             building_area_type_and_uses = {}
             for (
@@ -92,11 +101,13 @@ class PRM9012019Rule49y39(RuleDefinitionListIndexedBase):
                 building_area_type_SWH_equip_dict[bat_type][
                     "SWH_Equipment_Associations"
                 ] = SWH_Equipment_Associations
+
                 building_area_type_and_uses[bat_type] = {}
                 building_area_type_and_uses[bat_type]["id"] = bat_type
                 building_area_type_and_uses[bat_type][
                     "swh_bats_and_uses_p"
                 ] = swh_bats_and_uses_p[bat_type]
+
             return [
                 produce_ruleset_model_description(
                     USER=False,
@@ -111,13 +122,14 @@ class PRM9012019Rule49y39(RuleDefinitionListIndexedBase):
                 super(PRM9012019Rule49y39.RMDRule.SWHBATRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
-                    )
+                    ),
                 )
 
             def is_applicable(self, context, data=None):
                 building_area_type_and_uses_p = context.PROPOSED
                 service_water_heating_uses_p = data["service_water_heating_uses_p"]
                 swh_bat_p = building_area_type_and_uses_p["id"]
+
                 return swh_bat_p != SERVICE_WATER_HEATING_SPACE.PARKING_GARAGE or all(
                     service_water_heating_uses_p[swh_uses_id_p] > 0.0
                     for swh_uses_id_p in building_area_type_and_uses_p[
@@ -129,6 +141,7 @@ class PRM9012019Rule49y39(RuleDefinitionListIndexedBase):
                 building_area_type_SWH_equip_b = context.BASELINE_0
                 swh_equip_type_b = data["swh_equip_type_b"]
                 swh_bat_b = building_area_type_SWH_equip_b["id"]
+
                 expected_swh_equip_type_list = []
                 swh_equip_type_list_b = []
                 for swh_heating_equipment_id in building_area_type_SWH_equip_b[
@@ -140,6 +153,7 @@ class PRM9012019Rule49y39(RuleDefinitionListIndexedBase):
                     swh_equip_type_list_b.append(
                         swh_equip_type_b[swh_heating_equipment_id]
                     )
+
                 return {
                     "expected_swh_equip_type_list": expected_swh_equip_type_list,
                     "swh_equip_type_list_b": swh_equip_type_list_b,
@@ -148,9 +162,10 @@ class PRM9012019Rule49y39(RuleDefinitionListIndexedBase):
             def manual_check_required(self, context, calc_vals=None, data=None):
                 building_area_type_and_uses_p = context.PROPOSED
                 service_water_heating_uses_p = data["service_water_heating_uses_p"]
+
                 return any(
                     [
-                        (service_water_heating_uses_p[swh_uses_id_p] <= 0.0)
+                        service_water_heating_uses_p[swh_uses_id_p] <= 0.0
                         for swh_uses_id_p in building_area_type_and_uses_p[
                             "swh_bats_and_uses_p"
                         ]
@@ -160,9 +175,11 @@ class PRM9012019Rule49y39(RuleDefinitionListIndexedBase):
             def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
                 swh_uses_ids_p = context.PROPOSED
                 swh_bat_p = swh_uses_ids_p["id"]
+
                 return f"Building area type {swh_bat_p} has no service water heating use. Confirm that this is correct for this building area type."
 
             def rule_check(self, context, calc_vals=None, data=None):
                 expected_swh_equip_type_list = calc_vals["expected_swh_equip_type_list"]
                 swh_equip_type_list_b = calc_vals["swh_equip_type_list_b"]
+
                 return expected_swh_equip_type_list == swh_equip_type_list_b

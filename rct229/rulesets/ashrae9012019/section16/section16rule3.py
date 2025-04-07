@@ -17,7 +17,9 @@ class PRM9012019Rule92n36(RuleDefinitionListIndexedBase):
     def __init__(self):
         super(PRM9012019Rule92n36, self).__init__(
             rmds_used=produce_ruleset_model_description(
-                USER=False, BASELINE_0=False, PROPOSED=True
+                USER=False,
+                BASELINE_0=False,
+                PROPOSED=True,
             ),
             each_rule=PRM9012019Rule92n36.RuleSetModelDescriptionRule(),
             index_rmd=PROPOSED,
@@ -27,8 +29,6 @@ class PRM9012019Rule92n36(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
-            data_items={"is_leap_year_p": (PROPOSED, "calendar/is_leap_year")},
         )
 
     class RuleSetModelDescriptionRule(RuleDefinitionListIndexedBase):
@@ -40,14 +40,18 @@ class PRM9012019Rule92n36(RuleDefinitionListIndexedBase):
                 each_rule=PRM9012019Rule92n36.RuleSetModelDescriptionRule.ElevatorRule(),
                 index_rmd=PROPOSED,
                 list_path="buildings[*].elevators[*]",
+                required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
             )
 
         def is_applicable(self, context, data=None):
             rmd_p = context.PROPOSED
+
             return find_all("$.buildings[*].elevators[*]", rmd_p)
 
         def create_data(self, context, data):
             rmd_p = context.PROPOSED
+            is_leap_year_p = rmd_p["calendar"]["is_leap_year"]
+
             cab_ventilation_schedule_p = {
                 sch_id: find_exactly_one_schedule(rmd_p, sch_id)["hourly_values"]
                 for sch_id in find_all(
@@ -58,12 +62,15 @@ class PRM9012019Rule92n36(RuleDefinitionListIndexedBase):
             motor_use_schedule_p = {
                 sch_id: find_exactly_one_schedule(rmd_p, sch_id)["hourly_values"]
                 for sch_id in find_all(
-                    "buildings[*].elevators[*].cab_motor_multiplier_schedule", rmd_p
+                    "buildings[*].elevators[*].cab_motor_multiplier_schedule",
+                    rmd_p,
                 )
             }
+
             return {
                 "cab_ventilation_schedule_p": cab_ventilation_schedule_p,
                 "motor_use_schedule_p": motor_use_schedule_p,
+                "is_leap_year_p": is_leap_year_p,
             }
 
         class ElevatorRule(RuleDefinitionBase):
@@ -72,36 +79,43 @@ class PRM9012019Rule92n36(RuleDefinitionListIndexedBase):
                     PRM9012019Rule92n36.RuleSetModelDescriptionRule.ElevatorRule, self
                 ).__init__(
                     rmds_used=produce_ruleset_model_description(
-                        USER=False, BASELINE_0=False, PROPOSED=True
-                    )
+                        USER=False,
+                        BASELINE_0=False,
+                        PROPOSED=True,
+                    ),
                 )
 
             def get_calc_vals(self, context, data=None):
                 elevator_p = context.PROPOSED
                 is_leap_year_p = data["is_leap_year_p"]
+
                 cab_ventilation_fan_multiplier_schedule_p = getattr_(
                     elevator_p, "elevators", "cab_ventilation_fan_multiplier_schedule"
                 )
                 cab_ventilation_schedule_p = data["cab_ventilation_schedule_p"][
                     cab_ventilation_fan_multiplier_schedule_p
                 ]
+
                 cab_motor_multiplier_schedule_p = getattr_(
                     elevator_p, "elevators", "cab_motor_multiplier_schedule"
                 )
                 motor_use_schedule_p = data["motor_use_schedule_p"][
                     cab_motor_multiplier_schedule_p
                 ]
+
                 mask_schedule = (
                     [1] * LeapYear.LEAP_YEAR_HOURS
                     if is_leap_year_p
                     else [1] * LeapYear.REGULAR_YEAR_HOURS
                 )
+
                 sch_total_hours_matched = compare_schedules(
                     cab_ventilation_schedule_p,
                     motor_use_schedule_p,
                     mask_schedule,
                     is_leap_year_p,
                 )["total_hours_matched"]
+
                 return {
                     "sch_total_hours_matched": sch_total_hours_matched,
                     "cab_ventilation_schedule_len_p": len(cab_ventilation_schedule_p),
@@ -114,6 +128,7 @@ class PRM9012019Rule92n36(RuleDefinitionListIndexedBase):
                     "cab_ventilation_schedule_len_p"
                 ]
                 motor_use_schedule_len_p = calc_vals["motor_use_schedule_len_p"]
+
                 return (
                     sch_total_hours_matched
                     == cab_ventilation_schedule_len_p

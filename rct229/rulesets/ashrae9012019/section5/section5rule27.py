@@ -37,7 +37,10 @@ class PRM9012019Rule69v04(RuleDefinitionListIndexedBase):
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            required_fields={"$": ["weather"], "weather": ["climate_zone"]},
+            required_fields={
+                "$.ruleset_model_descriptions[*]": ["weather"],
+                "weather": ["climate_zone"],
+            },
             each_rule=PRM9012019Rule69v04.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-27",
@@ -46,8 +49,12 @@ class PRM9012019Rule69v04(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-5(e) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].buildings[*]",
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
         )
+
+    def create_data(self, context, data=None):
+        rpd_b = context.BASELINE_0
+        climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
+        return {"climate_zone": climate_zone}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -62,22 +69,37 @@ class PRM9012019Rule69v04(RuleDefinitionListIndexedBase):
             )
 
         def manual_check_required(self, context, calc_vals=None, data=None):
+            # If building segment exterior mixed skylight to roof ratio is greater than 0
+            # and residential, nonresidential and <=2% and > 2% u_factors are identical
+            # then set the manual check required and stop execution.
             building_b = context.BASELINE_0
             climate_zone = data["climate_zone"]
             building_scc_skylight_roof_ratios_dict_b = (
                 get_building_scc_skylight_roof_ratios_dict(climate_zone, building_b)
             )
             target_exterior_2per_residential = table_G34_lookup(
-                climate_zone, SCC.EXTERIOR_RESIDENTIAL, "SKYLIGHT", skylit_wwr=0.02
+                climate_zone,
+                SCC.EXTERIOR_RESIDENTIAL,
+                "SKYLIGHT",
+                skylit_wwr=0.02,
             )
             target_exterior_2per_nonresidential = table_G34_lookup(
-                climate_zone, SCC.EXTERIOR_NON_RESIDENTIAL, "SKYLIGHT", skylit_wwr=0.02
+                climate_zone,
+                SCC.EXTERIOR_NON_RESIDENTIAL,
+                "SKYLIGHT",
+                skylit_wwr=0.02,
             )
             target_exterior_above2_residential = table_G34_lookup(
-                climate_zone, SCC.EXTERIOR_RESIDENTIAL, "SKYLIGHT", skylit_wwr=0.03
+                climate_zone,
+                SCC.EXTERIOR_RESIDENTIAL,
+                "SKYLIGHT",
+                skylit_wwr=0.03,
             )
             target_exterior_above2_nonresidential = table_G34_lookup(
-                climate_zone, SCC.EXTERIOR_NON_RESIDENTIAL, "SKYLIGHT", skylit_wwr=0.03
+                climate_zone,
+                SCC.EXTERIOR_NON_RESIDENTIAL,
+                "SKYLIGHT",
+                skylit_wwr=0.03,
             )
             return building_scc_skylight_roof_ratios_dict_b[
                 SCC.EXTERIOR_MIXED
@@ -96,16 +118,25 @@ class PRM9012019Rule69v04(RuleDefinitionListIndexedBase):
             building_scc_skylight_roof_ratios_dict_b = (
                 get_building_scc_skylight_roof_ratios_dict(climate_zone, building_b)
             )
+
+            # Process target_u_factor_res
             srr_res = building_scc_skylight_roof_ratios_dict_b[SCC.EXTERIOR_RESIDENTIAL]
             target_u_factor_res = (
                 table_G34_lookup(
-                    climate_zone, SCC.EXTERIOR_RESIDENTIAL, "SKYLIGHT", skylit_wwr=0.02
+                    climate_zone,
+                    SCC.EXTERIOR_RESIDENTIAL,
+                    "SKYLIGHT",
+                    skylit_wwr=0.02,
                 )
                 if srr_res > 0.02
                 else table_G34_lookup(
-                    climate_zone, SCC.EXTERIOR_RESIDENTIAL, "SKYLIGHT", skylit_wwr=0.03
+                    climate_zone,
+                    SCC.EXTERIOR_RESIDENTIAL,
+                    "SKYLIGHT",
+                    skylit_wwr=0.03,
                 )
             )
+            # Process target_u_factor_nonres
             srr_nonres = building_scc_skylight_roof_ratios_dict_b[
                 SCC.EXTERIOR_NON_RESIDENTIAL
             ]
@@ -124,29 +155,41 @@ class PRM9012019Rule69v04(RuleDefinitionListIndexedBase):
                     skylit_wwr=0.03,
                 )
             )
+            # Process target_u_factor_semiheated
             srr_semi_exterior = building_scc_skylight_roof_ratios_dict_b[
                 SCC.SEMI_EXTERIOR
             ]
             target_u_factor_semiheated = (
                 table_G34_lookup(
-                    climate_zone, SCC.SEMI_EXTERIOR, "SKYLIGHT", skylit_wwr=0.02
+                    climate_zone,
+                    SCC.SEMI_EXTERIOR,
+                    "SKYLIGHT",
+                    skylit_wwr=0.02,
                 )
                 if srr_semi_exterior > 0.02
                 else table_G34_lookup(
-                    climate_zone, SCC.SEMI_EXTERIOR, "SKYLIGHT", skylit_wwr=0.03
+                    climate_zone,
+                    SCC.SEMI_EXTERIOR,
+                    "SKYLIGHT",
+                    skylit_wwr=0.03,
                 )
             )
+
             return {
                 "surface_conditioning_category_dict_b": get_surface_conditioning_category_dict(
                     climate_zone, building_b
                 ),
+                # at this point, target_u_factor_mixed should be same regardless of
+                # residential <2% or >2%, skylight.
                 "target_u_factor_res_b": target_u_factor_res["u_value"],
                 "target_u_factor_nonres_b": target_u_factor_nonres["u_value"],
                 "target_u_factor_semiheated_b": target_u_factor_semiheated["u_value"],
             }
 
         def list_filter(self, context_item, data=None):
+            # context_item shall be the list of the list_path element
             surface_b = context_item.BASELINE_0
+            # roof with subsurfaces, and the roof is not unregulated
             return (
                 get_opaque_surface_type(surface_b) == OST.ROOF
                 and surface_b.get("subsurfaces", None)
@@ -205,6 +248,7 @@ class PRM9012019Rule69v04(RuleDefinitionListIndexedBase):
                 def get_calc_vals(self, context, data=None):
                     subsurface_b = context.BASELINE_0
                     subsurface_b_u_factor = subsurface_b["u_factor"]
+
                     scc_type = data["scc_type"]
                     target_u_factor_res_b = data["target_u_factor_res_b"]
                     target_u_factor_nonres_b = data["target_u_factor_nonres_b"]
@@ -219,6 +263,7 @@ class PRM9012019Rule69v04(RuleDefinitionListIndexedBase):
                         target_u_factor = target_u_factor_nonres_b
                     else:
                         target_u_factor = target_u_factor_semiheated_b
+
                     return {
                         "subsurface_b_u_factor": CalcQ(
                             "thermal_transmittance", subsurface_b_u_factor

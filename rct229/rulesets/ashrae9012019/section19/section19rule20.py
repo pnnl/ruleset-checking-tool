@@ -11,7 +11,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_fan_system_object_suppl
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_supply_return_exhaust_relief_terminal_fan_power_dict import (
     get_zone_supply_return_exhaust_relief_terminal_fan_power_dict,
 )
-from rct229.utils.pint_utils import ZERO
+from rct229.utils.pint_utils import ZERO, CalcQ
 from rct229.utils.std_comparisons import std_equal
 
 
@@ -146,18 +146,34 @@ class PRM9012019Rule60d49(RuleDefinitionListIndexedBase):
                     proposed_total_relief_fan_power / total_modeled_fan_power_p
                 )
             return {
-                "hvac_sys_total_supply_fan_power_b": hvac_sys_total_supply_fan_power_b,
-                "hvac_sys_total_return_fan_power_b": hvac_sys_total_return_fan_power_b,
-                "hvac_sys_total_exhaust_fan_power_b": hvac_sys_total_exhaust_fan_power_b,
-                "hvac_sys_total_relief_fan_power_b": hvac_sys_total_relief_fan_power_b,
-                "expected_baseline_fan_power_supply": total_modeled_fan_power_b
-                * fraction_of_total_supply_p,
-                "expected_baseline_fan_power_return": total_modeled_fan_power_b
-                * fraction_of_total_return_p,
-                "expected_baseline_fan_power_exhaust": total_modeled_fan_power_b
-                * fraction_of_total_exhaust_p,
-                "expected_baseline_fan_power_relief": total_modeled_fan_power_b
-                * fraction_of_total_relief_p,
+                "hvac_sys_total_supply_fan_power_b": CalcQ(
+                    "electric_power", hvac_sys_total_supply_fan_power_b
+                ),
+                "hvac_sys_total_return_fan_power_b": CalcQ(
+                    "electric_power", hvac_sys_total_return_fan_power_b
+                ),
+                "hvac_sys_total_exhaust_fan_power_b": CalcQ(
+                    "electric_power", hvac_sys_total_exhaust_fan_power_b
+                ),
+                "hvac_sys_total_relief_fan_power_b": CalcQ(
+                    "electric_power", hvac_sys_total_relief_fan_power_b
+                ),
+                "expected_baseline_fan_power_supply": CalcQ(
+                    "electric_power",
+                    total_modeled_fan_power_b * fraction_of_total_supply_p,
+                ),
+                "expected_baseline_fan_power_return": CalcQ(
+                    "electric_power",
+                    total_modeled_fan_power_b * fraction_of_total_return_p,
+                ),
+                "expected_baseline_fan_power_exhaust": CalcQ(
+                    "electric_power",
+                    total_modeled_fan_power_b * fraction_of_total_exhaust_p,
+                ),
+                "expected_baseline_fan_power_relief": CalcQ(
+                    "electric_power",
+                    total_modeled_fan_power_b * fraction_of_total_relief_p,
+                ),
             }
 
         def rule_check(self, context, calc_vals=None, data=None):

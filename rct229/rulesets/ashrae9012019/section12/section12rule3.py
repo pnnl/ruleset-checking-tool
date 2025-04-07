@@ -12,6 +12,7 @@ from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.utility_functions import find_exactly_one_schedule
 
 LIGHTING_SPACE = SchemaEnums.schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
+
 EXPECTED_RECEPTACLE_CONTROL_SPACE_TYPES = [
     LIGHTING_SPACE.OFFICE_ENCLOSED,
     LIGHTING_SPACE.CONFERENCE_MEETING_MULTIPURPOSE_ROOM,
@@ -36,13 +37,12 @@ class PRM9012019rule79w60(RuleDefinitionListIndexedBase):
             each_rule=PRM9012019rule79w60.RuleSetModelDescriptionRule(),
             index_rmd=PROPOSED,
             id="12-3",
-            description="When receptacle controls are specified in the proposed building design for spaces where not required by Standard 90.1 2019 Section 8.4.2, the hourly receptacle schedule shall be reduced as specified in Standard 90.1-2019 Table G3.1 Section 12 Proposed Building Performance column.",
+            description="When receptacle controls are specified in the proposed building design for spaces where not required by Standard 90.1 2019 Section 8.4.2, "
+            "the hourly receptacle schedule shall be reduced as specified in Standard 90.1-2019 Table G3.1 Section 12 Proposed Building Performance column.",
             ruleset_section_title="Receptacle",
             standard_section="Table G3.1-12 Proposed Building Performance column",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
-            data_items={"is_leap_year": (PROPOSED, "calendar/is_leap_year")},
         )
 
     class RuleSetModelDescriptionRule(RuleDefinitionListIndexedBase):
@@ -54,13 +54,16 @@ class PRM9012019rule79w60(RuleDefinitionListIndexedBase):
                 each_rule=PRM9012019rule79w60.RuleSetModelDescriptionRule.SpaceRule(),
                 index_rmd=PROPOSED,
                 list_path="$.buildings[*].building_segments[*].zones[*].spaces[*]",
+                required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
             )
 
         def is_applicable(self, context, data=None):
             rmd_p = context.PROPOSED
+
             spaces_with_receptacle_controls_beyond_req = []
             for space_p in find_all(
-                "$.buildings[*].building_segments[*].zones[*].spaces[*]", rmd_p
+                "$.buildings[*].building_segments[*].zones[*].spaces[*]",
+                rmd_p,
             ):
                 lighting_space_type_p = getattr_(
                     space_p, "spaces", "lighting_space_type"
@@ -69,15 +72,24 @@ class PRM9012019rule79w60(RuleDefinitionListIndexedBase):
                     for misc_equip_p in find_all(
                         "$.miscellaneous_equipment[*]", space_p
                     ):
-                        if misc_equip_p.get("has_automatic_control"):
+                        automatic_controlled_percentage_p = misc_equip_p.get(
+                            "automatic_controlled_percentage"
+                        )
+                        auto_receptacle_control_p = (
+                            automatic_controlled_percentage_p
+                            and automatic_controlled_percentage_p > 0.0
+                        )
+                        if auto_receptacle_control_p:
                             spaces_with_receptacle_controls_beyond_req.append(
                                 misc_equip_p["id"]
                             )
+
             return spaces_with_receptacle_controls_beyond_req
 
         def create_data(self, context, data):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
+
             schedule_b = {
                 mult_sch_b: find_exactly_one_schedule(rmd_b, mult_sch_b)[
                     "hourly_values"
@@ -96,7 +108,12 @@ class PRM9012019rule79w60(RuleDefinitionListIndexedBase):
                     rmd_p,
                 )
             }
-            return {"schedule_b": schedule_b, "schedule_p": schedule_p}
+
+            return {
+                "schedule_b": schedule_b,
+                "schedule_p": schedule_p,
+                "is_leap_year": rmd_b["calendar"]["is_leap_year"],
+            }
 
         def list_filter(self, context_item, data):
             space_p = context_item.PROPOSED
@@ -118,6 +135,7 @@ class PRM9012019rule79w60(RuleDefinitionListIndexedBase):
 
             def create_data(self, context, data):
                 space_p = context.PROPOSED
+
                 return {"space_type_p": space_p["lighting_space_type"]}
 
             class MiscEquipRule(RuleDefinitionBase):
@@ -130,14 +148,23 @@ class PRM9012019rule79w60(RuleDefinitionListIndexedBase):
                             USER=False, BASELINE_0=True, PROPOSED=True
                         ),
                         required_fields={
-                            "$": ["has_automatic_control", "multiplier_schedule"]
+                            "$": [
+                                "multiplier_schedule",
+                            ]
                         },
                         manual_check_required_msg="Credit for automatic receptacle controls was expected, but baseline and proposed miscellaneous equipment schedules are identical.",
                     )
 
                 def is_applicable(self, context, data=None):
                     misc_equip_p = context.PROPOSED
-                    return misc_equip_p.get("has_automatic_control")
+                    automatic_controlled_percentage_p = misc_equip_p.get(
+                        "automatic_controlled_percentage"
+                    )
+                    auto_receptacle_control_p = (
+                        automatic_controlled_percentage_p
+                        and automatic_controlled_percentage_p > 0.0
+                    )
+                    return auto_receptacle_control_p
 
                 def get_not_applicable_msg(self, context, data=None):
                     misc_equip_p = context.PROPOSED
@@ -147,38 +174,46 @@ class PRM9012019rule79w60(RuleDefinitionListIndexedBase):
                 def get_calc_vals(self, context, data=None):
                     misc_equip_b = context.BASELINE_0
                     misc_equip_p = context.PROPOSED
+
                     is_leap_year = data["is_leap_year"]
                     space_type_p = data["space_type_p"]
                     schedule_b = data["schedule_b"]
                     schedule_p = data["schedule_p"]
+
                     expected_receptacle_power_credit = 0.1 * getattr_(
                         misc_equip_p,
                         "miscellaneous_equipment",
                         "automatic_controlled_percentage",
                     )
+
                     hourly_multiplier_schedule_b = misc_equip_b["multiplier_schedule"]
                     hourly_multiplier_schedule_p = misc_equip_p["multiplier_schedule"]
+
                     expected_hourly_values = [
-                        (hour_value * (1 - expected_receptacle_power_credit))
+                        hour_value * (1 - expected_receptacle_power_credit)
                         for hour_value in schedule_b[hourly_multiplier_schedule_b]
                     ]
+
                     mask_schedule = (
                         [1] * LeapYear.LEAP_YEAR_HOURS
                         if is_leap_year
                         else [1] * LeapYear.REGULAR_YEAR_HOURS
                     )
+
                     credit_comparison_data = compare_schedules(
                         expected_hourly_values,
                         schedule_p[hourly_multiplier_schedule_p],
                         mask_schedule,
                         is_leap_year,
                     )["total_hours_matched"]
+
                     no_credit_comparison_data = compare_schedules(
                         schedule_b[hourly_multiplier_schedule_b],
                         schedule_p[hourly_multiplier_schedule_p],
                         mask_schedule,
                         is_leap_year,
                     )["total_hours_matched"]
+
                     return {
                         "expected_hourly_values_len": len(expected_hourly_values),
                         "credit_comparison_total_hours_matched": credit_comparison_data,
@@ -201,6 +236,7 @@ class PRM9012019rule79w60(RuleDefinitionListIndexedBase):
                     hourly_multiplier_schedule_len_p = calc_vals[
                         "hourly_multiplier_schedule_len_p"
                     ]
+
                     return (
                         no_credit_comparison_total_hours_matched
                         == hourly_multiplier_schedule_len_b
@@ -215,6 +251,7 @@ class PRM9012019rule79w60(RuleDefinitionListIndexedBase):
                     hourly_multiplier_schedule_len_p = calc_vals[
                         "hourly_multiplier_schedule_len_p"
                     ]
+
                     return (
                         credit_comparison_total_hours_matched
                         == hourly_multiplier_schedule_len_p

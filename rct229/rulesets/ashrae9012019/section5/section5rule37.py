@@ -22,6 +22,7 @@ from rct229.utils.std_comparisons import std_equal
 
 TARGET_AIR_LEAKAGE_COEFF = 0.6 * ureg("cfm / foot**2")
 TOTAL_AIR_LEAKAGE_COEFF = 0.112
+
 MANUAL_CHECK_MSG = "The building total air leakage rate is not equal to the required proposed design air leakage rate at 75Pa with a Conversion Factor of 0.112 as per section G3.1.1.4. and Measured air leakage rate is not entered for all conditioned and semi-heated zones. Verify the proposed air leakage rate is modeled correctly."
 
 
@@ -33,7 +34,10 @@ class PRM9012019Rule67a77(RuleDefinitionListIndexedBase):
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=False, PROPOSED=True
             ),
-            required_fields={"$": ["weather"], "weather": ["climate_zone"]},
+            required_fields={
+                "$.ruleset_model_descriptions[*]": ["weather"],
+                "weather": ["climate_zone"],
+            },
             each_rule=PRM9012019Rule67a77.BuildingRule(),
             index_rmd=PROPOSED,
             id="5-37",
@@ -42,8 +46,12 @@ class PRM9012019Rule67a77(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-5(b) Building Envelope Modeling Requirements for the Proposed design",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].buildings[*]",
-            data_items={"climate_zone": (PROPOSED, "weather/climate_zone")},
         )
+
+    def create_data(self, context, data=None):
+        rpd_p = context.PROPOSED
+        climate_zone = rpd_p["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
+        return {"climate_zone": climate_zone}
 
     class BuildingRule(RuleDefinitionBase):
         def __init__(self):
@@ -53,22 +61,28 @@ class PRM9012019Rule67a77(RuleDefinitionListIndexedBase):
                 ),
                 required_fields={"$..zones[*]": ["surfaces"]},
                 precision={
-                    "building_total_air_leakage_rate_b": {"precision": 1, "unit": "cfm"}
+                    "building_total_air_leakage_rate_b": {
+                        "precision": 1,
+                        "unit": "cfm",
+                    }
                 },
                 manual_check_required_msg=MANUAL_CHECK_MSG,
             )
 
         def get_calc_vals(self, context, data=None):
             building_p = context.PROPOSED
+
             scc_dict_p = get_surface_conditioning_category_dict(
                 data["climate_zone"], building_p
             )
             zcc_dict_p = get_zone_conditioning_category_dict(
                 data["climate_zone"], building_p
             )
+
             building_total_air_leakage_rate = ZERO.FLOW
             building_total_measured_air_leakage_rate = ZERO.FLOW
             empty_measured_air_leakage_rate_flow_flag = False
+
             building_total_envelope_area = sum(
                 [
                     getattr_(surface, "surface", "area")
@@ -77,6 +91,7 @@ class PRM9012019Rule67a77(RuleDefinitionListIndexedBase):
                 ],
                 ZERO.AREA,
             )
+
             for zone in find_all("$..zones[*]", building_p):
                 if zcc_dict_p[zone["id"]] in [
                     ZCC.CONDITIONED_RESIDENTIAL,
@@ -87,6 +102,7 @@ class PRM9012019Rule67a77(RuleDefinitionListIndexedBase):
                     building_total_air_leakage_rate += getattr_(
                         zone["infiltration"], "infiltration", "flow_rate"
                     )
+
                 measured_air_leakage_rate = zone["infiltration"].get(
                     "measured_air_leakage_rate"
                 )
@@ -96,9 +112,11 @@ class PRM9012019Rule67a77(RuleDefinitionListIndexedBase):
                     )
                 else:
                     empty_measured_air_leakage_rate_flow_flag = True
+
             target_air_leakage_rate_75pa_p = (
-                TARGET_AIR_LEAKAGE_COEFF * building_total_envelope_area
-            )
+                TARGET_AIR_LEAKAGE_COEFF
+            ) * building_total_envelope_area
+
             return {
                 "building_total_air_leakage_rate": CalcQ(
                     "air_flow_rate", building_total_air_leakage_rate
@@ -120,6 +138,7 @@ class PRM9012019Rule67a77(RuleDefinitionListIndexedBase):
             empty_measured_air_leakage_rate_flow_flag = calc_vals[
                 "empty_measured_air_leakage_rate_flow_flag"
             ]
+
             return (
                 not self.precision_comparison["building_total_air_leakage_rate_b"](
                     building_total_air_leakage_rate,
@@ -139,12 +158,12 @@ class PRM9012019Rule67a77(RuleDefinitionListIndexedBase):
             empty_measured_air_leakage_rate_flow_flag = calc_vals[
                 "empty_measured_air_leakage_rate_flow_flag"
             ]
-            return (
-                self.precision_comparison["building_total_air_leakage_rate_b"](
-                    building_total_air_leakage_rate,
-                    TOTAL_AIR_LEAKAGE_COEFF * target_air_leakage_rate_75pa_p,
-                )
-                or empty_measured_air_leakage_rate_flow_flag == False
+
+            return self.precision_comparison["building_total_air_leakage_rate_b"](
+                building_total_air_leakage_rate,
+                TOTAL_AIR_LEAKAGE_COEFF * target_air_leakage_rate_75pa_p,
+            ) or (
+                empty_measured_air_leakage_rate_flow_flag == False
                 and self.precision_comparison["building_total_air_leakage_rate_b"](
                     building_total_air_leakage_rate,
                     TOTAL_AIR_LEAKAGE_COEFF * building_total_measured_air_leakage_rate,
@@ -162,12 +181,12 @@ class PRM9012019Rule67a77(RuleDefinitionListIndexedBase):
             empty_measured_air_leakage_rate_flow_flag = calc_vals[
                 "empty_measured_air_leakage_rate_flow_flag"
             ]
-            return (
-                std_equal(
-                    building_total_air_leakage_rate,
-                    TOTAL_AIR_LEAKAGE_COEFF * target_air_leakage_rate_75pa_p,
-                )
-                or not std_equal(
+
+            return std_equal(
+                building_total_air_leakage_rate,
+                TOTAL_AIR_LEAKAGE_COEFF * target_air_leakage_rate_75pa_p,
+            ) or (
+                not std_equal(
                     building_total_air_leakage_rate,
                     TOTAL_AIR_LEAKAGE_COEFF * target_air_leakage_rate_75pa_p,
                 )

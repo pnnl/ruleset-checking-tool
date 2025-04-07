@@ -34,14 +34,6 @@ class PRM9012019Rule40n43(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-10 HVAC Systems proposed column c and d",
             is_primary_rule=False,
             list_path="ruleset_model_descriptions[0]",
-            required_fields={
-                "$": ["calendar", "ruleset_model_descriptions"],
-                "calendar": ["is_leap_year"],
-            },
-            data_items={
-                "is_leap_year_b": (BASELINE_0, "calendar/is_leap_year"),
-                "is_leap_year_p": (PROPOSED, "calendar/is_leap_year"),
-            },
         )
 
     class RMDRule(RuleDefinitionListIndexedBase):
@@ -53,13 +45,17 @@ class PRM9012019Rule40n43(RuleDefinitionListIndexedBase):
                 each_rule=PRM9012019Rule40n43.RMDRule.HVACRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
+                required_fields={
+                    "$": ["calendar"],
+                    "calendar": ["is_leap_year"],
+                },
             )
 
         def create_data(self, context, data):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
-            leap_year_b = data["is_leap_year_b"]
-            leap_year_p = data["is_leap_year_p"]
+            is_leap_year_b = rmd_b["calendar"]["is_leap_year"]
+            is_leap_year_p = rmd_p["calendar"]["is_leap_year"]
 
             dict_of_zones_and_terminal_units_served_by_hvac_sys_b = (
                 get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmd_b)
@@ -122,10 +118,10 @@ class PRM9012019Rule40n43(RuleDefinitionListIndexedBase):
                     ) and hvac_system_serves_only_labs
 
                     zone_OA_flow_list_of_schedules_b.append(
-                        get_min_oa_cfm_sch_zone(rmd_b, zone_id_b, leap_year_b)
+                        get_min_oa_cfm_sch_zone(rmd_b, zone_id_b, is_leap_year_b)
                     )
                     zone_OA_flow_list_of_schedules_p.append(
-                        get_min_oa_cfm_sch_zone(rmd_p, zone_id_b, leap_year_p)
+                        get_min_oa_cfm_sch_zone(rmd_p, zone_id_b, is_leap_year_p)
                     )
 
             aggregated_min_OA_schedule_across_zones_b = (

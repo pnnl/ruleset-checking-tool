@@ -245,6 +245,11 @@ class PRM9012019Rule29n92(RuleDefinitionListIndexedBase):
             }
 
         def manual_check_required(self, context, calc_vals=None, data=None):
+            OA_CFM_schedule_match = calc_vals["OA_CFM_schedule_match"]
+            hvac_system_serves_only_labs = calc_vals["hvac_system_serves_only_labs"]
+            are_any_lighting_space_types_defined = calc_vals[
+                "are_any_lighting_space_types_defined"
+            ]
             zone_air_distribution_effectiveness_greater_than_1 = calc_vals[
                 "zone_air_distribution_effectiveness_greater_than_1"
             ]
@@ -256,16 +261,33 @@ class PRM9012019Rule29n92(RuleDefinitionListIndexedBase):
             ]
 
             return (
-                modeled_baseline_total_zone_min_OA_CFM
-                > modeled_proposed_total_zone_min_OA_CFM
-                and zone_air_distribution_effectiveness_greater_than_1
-            ) or (
-                modeled_baseline_total_zone_min_OA_CFM
-                < modeled_proposed_total_zone_min_OA_CFM
+                (
+                    # Case 2
+                    OA_CFM_schedule_match
+                    and hvac_system_serves_only_labs
+                    and are_any_lighting_space_types_defined
+                )
+                or (
+                    # Case 6 & 7
+                    modeled_baseline_total_zone_min_OA_CFM
+                    > modeled_proposed_total_zone_min_OA_CFM
+                    and zone_air_distribution_effectiveness_greater_than_1
+                )
+                or (
+                    # Case 8
+                    modeled_baseline_total_zone_min_OA_CFM
+                    < modeled_proposed_total_zone_min_OA_CFM
+                )
             )
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
             hvac_id_b = calc_vals["hvac_id_b"]
+
+            OA_CFM_schedule_match = calc_vals["OA_CFM_schedule_match"]
+            hvac_system_serves_only_labs = calc_vals["hvac_system_serves_only_labs"]
+            are_any_lighting_space_types_defined = calc_vals[
+                "are_any_lighting_space_types_defined"
+            ]
             hvac_system_serves_only_labs = calc_vals["hvac_system_serves_only_labs"]
             modeled_baseline_total_zone_min_OA_CFM = calc_vals[
                 "modeled_baseline_total_zone_min_OA_CFM"
@@ -274,8 +296,17 @@ class PRM9012019Rule29n92(RuleDefinitionListIndexedBase):
                 "modeled_proposed_total_zone_min_OA_CFM"
             ]
 
-            undetermined_msg = ""
             if (
+                OA_CFM_schedule_match
+                and hvac_system_serves_only_labs
+                and are_any_lighting_space_types_defined
+            ):
+                # Case 2
+                undetermined_msg = (
+                    f"{hvac_id_b} passes this check unless it only serves labs. This hvac system serves some labs but it could not be determined from the RMD "
+                    f"if it only serves labs. Conduct manual check if the HVAC system only serves lab spaces due to G3.1.2.5 Exception 4."
+                )
+            elif (
                 modeled_baseline_total_zone_min_OA_CFM
                 > modeled_proposed_total_zone_min_OA_CFM
             ):
@@ -299,7 +330,6 @@ class PRM9012019Rule29n92(RuleDefinitionListIndexedBase):
 
         def get_pass_msg(self, context, calc_vals=None, data=None):
             hvac_id_b = calc_vals["hvac_id_b"]
-            hvac_system_serves_only_labs = calc_vals["hvac_system_serves_only_labs"]
             are_any_lighting_space_types_defined = calc_vals[
                 "are_any_lighting_space_types_defined"
             ]
@@ -307,10 +337,10 @@ class PRM9012019Rule29n92(RuleDefinitionListIndexedBase):
             pass_msg = ""
             if not are_any_lighting_space_types_defined:
                 # Case 3
-                pass_msg = f"{hvac_id_b} passes this check unless it only serves lab spaces (no space types were defined in the RMD so this could not be determined). Outcome is UNDETERMINED if the HVAC system only serves lab spaces due to G3.1.2.5 Exception 4."
-            elif hvac_system_serves_only_labs and are_any_lighting_space_types_defined:
-                # Case 2
-                pass_msg = f"{hvac_id_b} passes this check unless it only serves labs. This hvac system serves some labs but it could not be determined from the RMD if it only serves labs. Outcome is UNDETERMINED if the HVAC system only serves lab spaces due to G3.1.2.5 Exception 4."
+                pass_msg = (
+                    f"{hvac_id_b} passes this check unless it only serves lab spaces (no space types were defined in the RMD so this could not be determined). "
+                    f"Outcome is UNDETERMINED if the HVAC system only serves lab spaces due to G3.1.2.5 Exception 4."
+                )
 
             return pass_msg
 

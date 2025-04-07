@@ -39,9 +39,16 @@ class PRM9012019Rule98o22(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1.2.7",
             is_primary_rule=True,
             list_path="$.ruleset_model_descriptions[*].buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
-            required_fields={"$": ["weather"], "weather": ["climate_zone"]},
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
+            required_fields={
+                "$.ruleset_model_descriptions[*]": ["weather"],
+                "weather": ["climate_zone"],
+            },
         )
+
+    def create_data(self, context, data=None):
+        rpd_b = context.BASELINE_0
+        climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
+        return {"climate_zone": climate_zone}
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
@@ -49,15 +56,24 @@ class PRM9012019Rule98o22(RuleDefinitionListIndexedBase):
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
-                required_fields={"$": ["fan_system"]},
-                precision={"high_limit_temp_b": {"precision": 0.1, "unit": "K"}},
+                required_fields={
+                    "$": ["fan_system"],
+                },
+                precision={
+                    "high_limit_temp_b": {
+                        "precision": 0.1,
+                        "unit": "K",
+                    },
+                },
             )
 
         def is_applicable(self, context, data=None):
             hvac_b = context.BASELINE_0
             climate_zone_b = data["climate_zone"]
             fan_system_b = hvac_b["fan_system"]
+
             air_economizer_b = fan_system_b.get("air_economizer")
+
             return air_economizer_b is not None and (
                 climate_zone_b in CLIMATE_ZONE_70F or climate_zone_b in CLIMATE_ZONE_75F
             )
@@ -66,19 +82,26 @@ class PRM9012019Rule98o22(RuleDefinitionListIndexedBase):
             hvac_b = context.BASELINE_0
             climate_zone_b = data["climate_zone"]
             fan_system_b = hvac_b["fan_system"]
+
             high_limit_temp_b = getattr_(
                 fan_system_b,
                 "fan_system",
                 "air_economizer",
                 "high_limit_shutoff_temperature",
             )
+
             air_economizer_type_b = getattr_(
-                fan_system_b, "fan_system", "air_economizer", "type"
+                fan_system_b,
+                "fan_system",
+                "air_economizer",
+                "type",
             )
+
             if climate_zone_b in CLIMATE_ZONE_70F:
                 req_high_limit_temp = 70 * ureg("degF")
             elif climate_zone_b in CLIMATE_ZONE_75F:
                 req_high_limit_temp = 75 * ureg("degF")
+
             return {
                 "high_limit_temp_b": high_limit_temp_b,
                 "req_high_limit_temp": req_high_limit_temp,
@@ -89,6 +112,7 @@ class PRM9012019Rule98o22(RuleDefinitionListIndexedBase):
             req_high_limit_temp = calc_vals["req_high_limit_temp"]
             high_limit_temp_b = calc_vals["high_limit_temp_b"]
             air_economizer_type_b = calc_vals["air_economizer_type_b"]
+
             return (
                 self.precision_comparison["high_limit_temp_b"](
                     high_limit_temp_b.to(ureg.kelvin),
@@ -101,6 +125,7 @@ class PRM9012019Rule98o22(RuleDefinitionListIndexedBase):
             req_high_limit_temp = calc_vals["req_high_limit_temp"]
             high_limit_temp_b = calc_vals["high_limit_temp_b"]
             air_economizer_type_b = calc_vals["air_economizer_type_b"]
+
             return (
                 std_equal(
                     req_high_limit_temp.to(ureg.kelvin),

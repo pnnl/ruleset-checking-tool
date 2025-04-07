@@ -22,6 +22,7 @@ from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.std_comparisons import std_equal
 
 MANUAL_CHECK_MSG = "MANUAL REVIEW IS REQUESTED TO VERIFY SKYLIGHT MEETS SHGC REQUIREMENT AS PER TABLE G3.4."
+
 SURFACE_CLASSIFICATION = SchemaEnums.schema_enums["SubsurfaceClassificationOptions"]
 
 
@@ -41,9 +42,16 @@ class PRM9012019Rule42c42(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-5(e) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].buildings[*]",
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
-            required_fields={"$": ["weather"], "weather": ["climate_zone"]},
+            required_fields={
+                "$.ruleset_model_descriptions[*]": ["weather"],
+                "weather": ["climate_zone"],
+            },
         )
+
+    def create_data(self, context, data=None):
+        rpd_b = context.BASELINE_0
+        climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
+        return {"climate_zone": climate_zone}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -63,21 +71,40 @@ class PRM9012019Rule42c42(RuleDefinitionListIndexedBase):
             scc_skylight_roof_ratios_dict_b = (
                 get_building_scc_skylight_roof_ratios_dict(climate_zone, building_b)
             )
+
             building_scc_skylight_roof_ratios_dict_b = (
                 get_building_scc_skylight_roof_ratios_dict(climate_zone, building_b)
             )
+
             target_shgc_2per_residential = table_G34_lookup(
-                climate_zone, "EXTERIOR RESIDENTIAL", "SKYLIGHT", skylit_wwr=0.0
+                climate_zone,
+                "EXTERIOR RESIDENTIAL",
+                "SKYLIGHT",
+                skylit_wwr=0.0,
             )["solar_heat_gain_coefficient"]
+
             target_shgc_above2_residential = table_G34_lookup(
-                climate_zone, "EXTERIOR RESIDENTIAL", "SKYLIGHT", skylit_wwr=0.021
+                climate_zone,
+                "EXTERIOR RESIDENTIAL",
+                "SKYLIGHT",
+                skylit_wwr=0.021,
             )["solar_heat_gain_coefficient"]
+
             target_shgc_2per_nonresidential = table_G34_lookup(
-                climate_zone, "EXTERIOR NON-RESIDENTIAL", "SKYLIGHT", skylit_wwr=0.021
+                climate_zone,
+                "EXTERIOR NON-RESIDENTIAL",
+                "SKYLIGHT",
+                skylit_wwr=0.021,
             )["solar_heat_gain_coefficient"]
+
             target_shgc_above2_nonresidential = table_G34_lookup(
-                climate_zone, "EXTERIOR NON-RESIDENTIAL", "SKYLIGHT", skylit_wwr=0.021
+                climate_zone,
+                "EXTERIOR NON-RESIDENTIAL",
+                "SKYLIGHT",
+                skylit_wwr=0.021,
             )["solar_heat_gain_coefficient"]
+
+            # manual flag required?
             manual_check_required_flag = all(
                 [
                     building_scc_skylight_roof_ratios_dict_b[SCC.EXTERIOR_MIXED] > 0,
@@ -93,22 +120,32 @@ class PRM9012019Rule42c42(RuleDefinitionListIndexedBase):
                     ),
                 ]
             )
+
             if scc_skylight_roof_ratios_dict_b[SCC.EXTERIOR_RESIDENTIAL] > 0.02:
                 target_shgc_res = target_shgc_above2_residential
             else:
                 target_shgc_res = target_shgc_2per_residential
+
             if scc_skylight_roof_ratios_dict_b[SCC.EXTERIOR_NON_RESIDENTIAL] > 0.02:
                 target_shgc_nonres = target_shgc_above2_nonresidential
             else:
                 target_shgc_nonres = target_shgc_2per_nonresidential
+
             if scc_skylight_roof_ratios_dict_b[SCC.SEMI_EXTERIOR]:
                 target_shgc_semiheated = table_G34_lookup(
-                    climate_zone, "SEMI-EXTERIOR", "SKYLIGHT", skylit_wwr=0.021
+                    climate_zone,
+                    "SEMI-EXTERIOR",
+                    "SKYLIGHT",
+                    skylit_wwr=0.021,
                 )["solar_heat_gain_coefficient"]
             else:
                 target_shgc_semiheated = table_G34_lookup(
-                    climate_zone, "SEMI-EXTERIOR", "SKYLIGHT", skylit_wwr=0
+                    climate_zone,
+                    "SEMI-EXTERIOR",
+                    "SKYLIGHT",
+                    skylit_wwr=0,
                 )["solar_heat_gain_coefficient"]
+
             return {
                 "scc_dict_b": get_surface_conditioning_category_dict(
                     climate_zone, building_b
@@ -122,6 +159,7 @@ class PRM9012019Rule42c42(RuleDefinitionListIndexedBase):
         def list_filter(self, context_item, data=None):
             surface_b = context_item.BASELINE_0
             scc = data["scc_dict_b"][surface_b["id"]]
+
             return (
                 get_opaque_surface_type(surface_b) == OST.ROOF
                 and surface_b.get("subsurfaces")
@@ -163,21 +201,25 @@ class PRM9012019Rule42c42(RuleDefinitionListIndexedBase):
                             "$": ["classification", "glazed_area", "opaque_area"]
                         },
                         precision={
-                            "subsurface_shgc_b": {"precision": 0.01, "unit": ""}
+                            "subsurface_shgc_b": {
+                                "precision": 0.01,
+                                "unit": "",
+                            }
                         },
                         manual_check_required_msg=MANUAL_CHECK_MSG,
                     )
 
                 def is_applicable(self, context, data=None):
                     subsurface_b = context.BASELINE_0
+
                     return (
                         subsurface_b["classification"] == SURFACE_CLASSIFICATION.DOOR
                         and subsurface_b["glazed_area"] > subsurface_b["opaque_area"]
-                        or subsurface_b["classification"] != SURFACE_CLASSIFICATION.DOOR
-                    )
+                    ) or subsurface_b["classification"] != SURFACE_CLASSIFICATION.DOOR
 
                 def manual_check_required(self, context, calc_vals=None, data=None):
                     manual_check_required_flag = data["manual_check_required_flag"]
+                    # if exterior mixed and required manual check
                     return (
                         data["scc_dict_b"][data["surface_id_b"]] == SCC.EXTERIOR_MIXED
                         and manual_check_required_flag
@@ -186,11 +228,13 @@ class PRM9012019Rule42c42(RuleDefinitionListIndexedBase):
                 def get_calc_vals(self, context, data=None):
                     subsurface_b = context.BASELINE_0
                     subsurface_shgc_b = subsurface_b["solar_heat_gain_coefficient"]
+
                     subsurface_type_b = data["scc_dict_b"][data["surface_id_b"]]
                     target_shgc_res_b = data["target_shgc_res"]
                     target_shgc_nonres_b = data["target_shgc_nonres"]
                     target_shgc_semiheated_b = data["target_shgc_semiheated"]
                     target_shgc = 0.0
+
                     if (
                         subsurface_type_b == SCC.EXTERIOR_MIXED
                         or subsurface_type_b == SCC.EXTERIOR_RESIDENTIAL
@@ -200,6 +244,7 @@ class PRM9012019Rule42c42(RuleDefinitionListIndexedBase):
                         target_shgc = target_shgc_nonres_b
                     else:
                         target_shgc = target_shgc_semiheated_b
+
                     return {
                         "subsurface_shgc_b": subsurface_shgc_b,
                         "target_shgc": target_shgc,

@@ -35,7 +35,6 @@ class PRM9012019Rule80o45(RuleDefinitionListIndexedBase):
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            required_fields={"$": ["weather"], "weather": ["climate_zone"]},
             each_rule=PRM9012019Rule80o45.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-16",
@@ -44,8 +43,16 @@ class PRM9012019Rule80o45(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-5(c) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].buildings[*]",
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
+            required_fields={
+                "$.ruleset_model_descriptions[*]": ["weather"],
+                "weather": ["climate_zone"],
+            },
         )
+
+    def create_data(self, context, data=None):
+        rpd_b = context.BASELINE_0
+        climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
+        return {"climate_zone": climate_zone}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -56,6 +63,8 @@ class PRM9012019Rule80o45(RuleDefinitionListIndexedBase):
                 required_fields={},
                 each_rule=PRM9012019Rule80o45.BuildingRule.AboveGradeWallRule(),
                 index_rmd=BASELINE_0,
+                # list_path and list_filter together determine the list of
+                # above grade walls to be passed to AboveGradeWallRule
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
 
@@ -63,12 +72,14 @@ class PRM9012019Rule80o45(RuleDefinitionListIndexedBase):
             building_b = context.BASELINE_0
             building_p = context.PROPOSED
             climate_zone = data["climate_zone"]
+
             window_wall_areas_dictionary_b = get_area_type_window_wall_area_dict(
                 climate_zone, building_b
             )
             window_wall_areas_dictionary_p = get_area_type_window_wall_area_dict(
                 climate_zone, building_p
             )
+
             return {
                 "total_fenestration_area_b": sum(
                     find_all("$..total_window_area", window_wall_areas_dictionary_b),
@@ -85,6 +96,7 @@ class PRM9012019Rule80o45(RuleDefinitionListIndexedBase):
 
         def list_filter(self, context_item, data=None):
             surface_b = context_item.BASELINE_0
+
             return (
                 get_opaque_surface_type(surface_b) == OST.ABOVE_GRADE_WALL
                 and data["surface_conditioning_category_dict_b"][surface_b["id"]]
@@ -120,19 +132,23 @@ class PRM9012019Rule80o45(RuleDefinitionListIndexedBase):
                     """Helper function for calculating the total fenestration area for an above grade wall"""
                     return sum(
                         [
-                            (
-                                subsurface.get("glazed_area", ZERO.AREA)
-                                + subsurface.get("opaque_area", ZERO.AREA)
-                            )
+                            subsurface.get("glazed_area", ZERO.AREA)
+                            + subsurface.get("opaque_area", ZERO.AREA)
                             for subsurface in find_all(
                                 "subsurfaces[*]", above_grade_wall
                             )
-                            if getattr_(subsurface, "subsurface", "classification")
-                            == DOOR
-                            and subsurface.get("glazed_area", ZERO.AREA)
-                            > subsurface.get("opaque_area", ZERO.AREA)
-                            or getattr_(subsurface, "subsurface", "classification")
-                            != DOOR
+                            if (
+                                getattr_(subsurface, "subsurface", "classification")
+                                == DOOR
+                                and (
+                                    subsurface.get("glazed_area", ZERO.AREA)
+                                    > subsurface.get("opaque_area", ZERO.AREA)
+                                )
+                                or (
+                                    getattr_(subsurface, "subsurface", "classification")
+                                    != DOOR
+                                )
+                            )
                         ],
                         ZERO.AREA,
                     )
@@ -161,10 +177,12 @@ class PRM9012019Rule80o45(RuleDefinitionListIndexedBase):
                 ]
                 total_fenestration_area_b = calc_vals["total_fenestration_area_b"]
                 total_fenestration_area_p = calc_vals["total_fenestration_area_p"]
+
                 return (
                     total_fenestration_area_b == ZERO.AREA
                     and total_fenestration_area_p == ZERO.AREA
-                    or self.precision_comparison[
+                ) or (
+                    self.precision_comparison[
                         "total_fenestration_area_surface_b / total_fenstration_area_b"
                     ](
                         (

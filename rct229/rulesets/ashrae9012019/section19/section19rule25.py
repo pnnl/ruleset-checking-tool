@@ -16,7 +16,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_proposed_hvac_modeled_w
     get_proposed_hvac_modeled_with_virtual_heating,
 )
 from rct229.schema.schema_enums import SchemaEnums
-from rct229.utils.pint_utils import ZERO
+from rct229.utils.pint_utils import ZERO, CalcQ
 
 FAN_SYSTEM_OPERATION = SchemaEnums.schema_enums["FanSystemOperationOptions"]
 
@@ -109,7 +109,9 @@ class PRM9012019Rule10q01(RuleDefinitionListIndexedBase):
             minimum_outdoor_airflow_b = hvac_b["fan_system"]["minimum_outdoor_airflow"]
             return {
                 "operation_during_occupied_b": operation_during_occupied_b,
-                "minimum_outdoor_airflow_b": minimum_outdoor_airflow_b,
+                "minimum_outdoor_airflow_b": CalcQ(
+                    "air_flow_rate", minimum_outdoor_airflow_b
+                ),
             }
 
         def rule_check(self, context, calc_vals=None, data=None):

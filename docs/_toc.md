@@ -185,6 +185,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   *[1-3](section1/Rule1-3.md): The Performance Cost Index-Target (PCIt) shall be calculated using the procedures defined in Section 4.2.1.1. The PCIt shall be equal to [baseline building unregulated energy cost (BBUEC) + BPF x baseline building regulated energy cost (BBREC)]/ BBP
   *[1-4](section1/Rule1-4.md): The PCI shall be less than or equal to the PCIt when calculated in accordance with Standard 90.1 2019, Section 4.2.1.1.
   *[1-5](section1/Rule1-5.md): When on-site renewable energy generation exceeds the thresholds defined in Section 4.2.1.1, the methodology defined in this section shall be used to calculate the PCIt.
+  *[1-6](section1/Rule1-6.md): On-site renewable energy shall not be included in the baseline building performance.
 
 ## Section 3 - Space Use Classification
   
@@ -417,7 +418,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [22-41](section22/Rule22-41.md): Purchased CHW systems must be modeled with only one external fluid loop in the baseline design.
 
 ## Section 23 - Chilled Water Systems and Condenser Water Systems
-  * [23-2](section23/Rule23-1.md): System 2 and 4 - Electric air-source heat pumps shall be modeled with electric auxiliary heat and an outdoor air thermostat. The systems shall be controlled to energize auxiliary heat only when the outdoor air temperature is less than 40°F. The air-source heat pump shall be modeled to continue to operate while auxiliary heat is energized.
+  * [23-1](section23/Rule23-1.md): System 2 and 4 - Electric air-source heat pumps shall be modeled with electric auxiliary heat and an outdoor air thermostat. The systems shall be controlled to energize auxiliary heat only when the outdoor air temperature is less than 40°F.  
   * [23-2](section23/Rule23-2.md): For baseline systems 5-8 and 11, the SAT is reset higher by 5F under minimum cooling load conditions.
   * [23-3](section23/Rule23-3.md): System 5, 6, 7 and 8 minimum volume setpoint shall be 30% of zone peak airflow, minimum outdoor airflow, or rate required to comply with minimum accreditation standards whichever is larger.
   * [23-4](section23/Rule23-4.md): Baseline systems 5 & 7 serving lab spaces per G3.1.1c shall reduce lab exhaust and makeup air during unoccupied periods to 50% of zone peak airflow, the minimum outdoor airflow, or rate required to comply with minimum accreditation standards whichever is larger.
@@ -433,3 +434,4 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [23-14](section23/Rule23-14.md): If the baseline system does not comply with exceptions in Section 6.5.2.3 then only 25% of the system reheat energy shall be included in the baseline building performance.
   * [23-15](section23/Rule23-15.md): Dehumidification reheat shall be the same as the system heating type.
   * [23-16](section23/Rule23-16.md): Systems 5 - 8, the baseline system shall be modeled with preheat coils controlled to a fixed set point 20F less than the design room heating temperature setpoint.
+  * [23-17](section23/Rule23-17.md): System 2 and 4 - Electric air-source heat pumps shall be modeled to continue to operate while auxiliary heat is energized.

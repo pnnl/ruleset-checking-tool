@@ -40,8 +40,12 @@ class PRM9012019Rule50m61(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline model",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].buildings[*]",
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
         )
+
+    def create_data(self, context, data=None):
+        rpd_b = context.BASELINE_0
+        climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
+        return {"climate_zone": climate_zone}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -64,7 +68,10 @@ class PRM9012019Rule50m61(RuleDefinitionListIndexedBase):
 
         def list_filter(self, context_item, data=None):
             surface_b = context_item.BASELINE_0
-            return data["scc_dict_b"][surface_b["id"]] != SCC.UNREGULATED
+            return (
+                data["scc_dict_b"][surface_b["id"]] != SCC.UNREGULATED
+                and len(surface_b.get("subsurfaces", [])) > 0
+            )
 
         class SurfaceRule(RuleDefinitionListIndexedBase):
             def __init__(self):

@@ -18,8 +18,14 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_ca
 from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
 
-MANUAL_CHECK_REQUIRED_MSG = "Zone has both residential and non-residential spaces and the construction requirements for slab-on-grade floor are different. Verify construction is modeled correctly. "
-FAIL_MSG = 'Baseline slab F-factor is not as expected for slabs that are less than 24" below grade. verify that the slab is more than 24" below grade and is unregulated. '
+MANUAL_CHECK_REQUIRED_MSG = (
+    "Zone has both residential and non-residential spaces and the construction requirements "
+    "for slab-on-grade floor are different. Verify construction is modeled correctly. "
+)
+FAIL_MSG = (
+    'Baseline slab F-factor is not as expected for slabs that are less than 24" below grade. verify that the '
+    'slab is more than 24" below grade and is unregulated. '
+)
 
 
 class PRM9012019Rule40d86(RuleDefinitionListIndexedBase):
@@ -30,7 +36,10 @@ class PRM9012019Rule40d86(RuleDefinitionListIndexedBase):
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            required_fields={"$": ["weather"], "weather": ["climate_zone"]},
+            required_fields={
+                "$.ruleset_model_descriptions[*]": ["weather"],
+                "weather": ["climate_zone"],
+            },
             each_rule=PRM9012019Rule40d86.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-12",
@@ -39,8 +48,12 @@ class PRM9012019Rule40d86(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].buildings[*]",
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
         )
+
+    def create_data(self, context, data=None):
+        rpd_b = context.BASELINE_0
+        climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
+        return {"climate_zone": climate_zone}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -59,7 +72,7 @@ class PRM9012019Rule40d86(RuleDefinitionListIndexedBase):
             return {
                 "surface_conditioning_category_dict": get_surface_conditioning_category_dict(
                     data["climate_zone"], building
-                )
+                ),
             }
 
         def list_filter(self, context_item, data=None):
@@ -101,9 +114,11 @@ class PRM9012019Rule40d86(RuleDefinitionListIndexedBase):
                 slab_on_grade_floor_f_factor = slab_on_grade_floor["construction"][
                     "f_factor"
                 ]
+
                 target_f_factor = None
                 target_f_factor_res = None
                 target_f_factor_nonres = None
+
                 if scc in [
                     SCC.EXTERIOR_RESIDENTIAL,
                     SCC.EXTERIOR_NON_RESIDENTIAL,
@@ -121,6 +136,7 @@ class PRM9012019Rule40d86(RuleDefinitionListIndexedBase):
                     )["f_factor"]
                     if target_f_factor_res == target_f_factor_nonres:
                         target_f_factor = target_f_factor_res
+
                 return {
                     "slab_on_grade_floor_f_factor": CalcQ(
                         "linear_thermal_transmittance", slab_on_grade_floor_f_factor
@@ -139,6 +155,7 @@ class PRM9012019Rule40d86(RuleDefinitionListIndexedBase):
             def manual_check_required(self, context, calc_vals=None, data=None):
                 target_f_factor_res = calc_vals["target_f_factor_res"]
                 target_f_factor_nonres = calc_vals["target_f_factor_nonres"]
+
                 return target_f_factor_res != target_f_factor_nonres
 
             def rule_check(self, context, calc_vals=None, data=None):

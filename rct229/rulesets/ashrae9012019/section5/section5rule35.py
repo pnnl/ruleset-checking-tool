@@ -32,7 +32,10 @@ class PRM9012019Rule39k65(RuleDefinitionListIndexedBase):
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            required_fields={"$": ["weather"], "weather": ["climate_zone"]},
+            required_fields={
+                "$.ruleset_model_descriptions[*]": ["weather"],
+                "weather": ["climate_zone"],
+            },
             each_rule=PRM9012019Rule39k65.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-35",
@@ -41,8 +44,12 @@ class PRM9012019Rule39k65(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-5(h) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].buildings[*]",
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
         )
+
+    def create_data(self, context, data=None):
+        rpd_b = context.BASELINE_0
+        climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
+        return {"climate_zone": climate_zone}
 
     class BuildingRule(RuleDefinitionBase):
         def __init__(self):
@@ -52,19 +59,25 @@ class PRM9012019Rule39k65(RuleDefinitionListIndexedBase):
                 ),
                 required_fields={"$.building_segments[*].zones[*]": ["surfaces"]},
                 precision={
-                    "building_total_air_leakage_rate": {"precision": 1, "unit": "cfm"}
+                    "building_total_air_leakage_rate": {
+                        "precision": 1,
+                        "unit": "cfm",
+                    }
                 },
             )
 
         def get_calc_vals(self, context, data=None):
             building_b = context.BASELINE_0
+
             scc_dict_b = get_surface_conditioning_category_dict(
                 data["climate_zone"], building_b
             )
             zcc_dict_b = get_zone_conditioning_category_dict(
                 data["climate_zone"], building_b
             )
+
             building_total_air_leakage_rate = ZERO.FLOW
+
             building_total_envelope_area = sum(
                 [
                     getattr_(surface, "surface", "area")
@@ -75,9 +88,11 @@ class PRM9012019Rule39k65(RuleDefinitionListIndexedBase):
                 ],
                 ZERO.AREA,
             )
+
             target_air_leakage_rate_75pa_b = (
-                TARGET_AIR_LEAKAGE_COEFF * building_total_envelope_area
-            )
+                TARGET_AIR_LEAKAGE_COEFF
+            ) * building_total_envelope_area
+
             for zone in find_all("$.building_segments[*].zones[*]", building_b):
                 if zcc_dict_b[zone["id"]] in [
                     ZCC.CONDITIONED_RESIDENTIAL,
@@ -88,6 +103,7 @@ class PRM9012019Rule39k65(RuleDefinitionListIndexedBase):
                     building_total_air_leakage_rate += getattr_(
                         zone["infiltration"], "infiltration", "flow_rate"
                     )
+
             return {
                 "building_total_air_leakage_rate": CalcQ(
                     "air_flow_rate", building_total_air_leakage_rate

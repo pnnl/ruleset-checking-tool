@@ -32,8 +32,6 @@ class PRM9012019Rule16x33(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-6(i) Modeling Requirements for the Proposed design",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            required_fields={"$": ["calendar"], "calendar": ["is_leap_year"]},
-            data_items={"is_leap_year": (BASELINE_0, "calendar/is_leap_year")},
         )
 
     class RulesetModelInstanceRule(RuleDefinitionListIndexedBase):
@@ -45,10 +43,14 @@ class PRM9012019Rule16x33(RuleDefinitionListIndexedBase):
                 each_rule=PRM9012019Rule16x33.RulesetModelInstanceRule.BuildingRule(),
                 index_rmd=PROPOSED,
                 list_path="buildings[*]",
-                required_fields={"$": ["schedules"]},
+                required_fields={
+                    "$": ["schedules", "calendar"],
+                    "calendar": ["is_leap_year"],
+                },
                 data_items={
                     "schedules_b": (BASELINE_0, "schedules"),
                     "schedules_p": (PROPOSED, "schedules"),
+                    "is_leap_year": (BASELINE_0, "calendar/is_leap_year"),
                 },
             )
 

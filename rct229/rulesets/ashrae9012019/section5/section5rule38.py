@@ -25,22 +25,24 @@ class PRM9012019Rule40i28(PartialRuleDefinition):
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-14(b) Building Envelope Modeling Requirements for the Proposed design and Baseline",
             is_primary_rule=False,
-            required_fields={"$": ["weather"]},
+            required_fields={
+                "$.ruleset_model_descriptions[*]": ["weather"],
+            },
         )
 
     def get_calc_vals(self, context, data=None):
         rpd = context.BASELINE_0
-        ground_temperature_schedule = rpd["weather"].get("ground_temperature_schedule")
+        ground_temperature_schedule = rpd["ruleset_model_descriptions"][0][
+            "weather"
+        ].get("ground_temperature_schedule")
         return {"ground_temperature_schedule": ground_temperature_schedule}
 
     def applicability_check(self, context, calc_vals, data):
         rpd = context.BASELINE_0
         return any(
             [
-                (
-                    get_opaque_surface_type(surface_b)
-                    in [OST.BELOW_GRADE_WALL, OST.UNHEATED_SOG, OST.HEATED_SOG]
-                )
+                get_opaque_surface_type(surface_b)
+                in [OST.BELOW_GRADE_WALL, OST.UNHEATED_SOG, OST.HEATED_SOG]
                 for surface_b in find_all(
                     "$.ruleset_model_descriptions[0].buildings[*].building_segments[*].zones[*].surfaces[*]",
                     rpd,

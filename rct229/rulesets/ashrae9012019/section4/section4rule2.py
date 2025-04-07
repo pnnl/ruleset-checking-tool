@@ -30,11 +30,6 @@ class PRM9012019Rule85i93(RuleDefinitionListIndexedBase):
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            required_fields={
-                "$": ["weather", "calendar"],
-                "weather": ["climate_zone"],
-                "calendar": ["is_leap_year"],
-            },
             each_rule=PRM9012019Rule85i93.RuleSetModelInstanceRule(),
             index_rmd=BASELINE_0,
             id="4-2",
@@ -43,10 +38,6 @@ class PRM9012019Rule85i93(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-4 Schedule Modeling Requirements for the Proposed design and Baseline building",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            data_items={
-                "climate_zone": (BASELINE_0, "weather/climate_zone"),
-                "is_leap_year": (BASELINE_0, "calendar/is_leap_year"),
-            },
         )
 
     class RuleSetModelInstanceRule(RuleDefinitionListIndexedBase):
@@ -58,16 +49,25 @@ class PRM9012019Rule85i93(RuleDefinitionListIndexedBase):
                 each_rule=PRM9012019Rule85i93.RuleSetModelInstanceRule.ZoneRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].zones[*]",
+                required_fields={
+                    "$": ["weather", "calendar"],
+                    "weather": ["climate_zone"],
+                    "calendar": ["is_leap_year"],
+                },
             )
 
         def create_data(self, context, data=None):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
+            climate_zone = rmd_b["weather"]["climate_zone"]
+            is_leap_year = rmd_b["calendar"]["is_leap_year"]
             return {
+                "climate_zone": climate_zone,
+                "is_leap_year": is_leap_year,
                 "schedules_b": rmd_b.get("schedules"),
                 "schedules_p": rmd_p.get("schedules"),
                 "zcc_dict_b": get_zone_conditioning_category_rmd_dict(
-                    data["climate_zone"], rmd_b
+                    climate_zone, rmd_b
                 ),
             }
 
@@ -94,10 +94,13 @@ class PRM9012019Rule85i93(RuleDefinitionListIndexedBase):
                     if is_leap_year
                     else LeapYear.REGULAR_YEAR_HOURS
                 )
+
                 zone_b = context.BASELINE_0
                 zone_p = context.PROPOSED
+
                 schedules_b = data["schedules_b"]
                 schedules_p = data["schedules_p"]
+
                 minimum_humidity_stpt_sch_id_b = zone_b.get(
                     "minimum_humidity_setpoint_schedule"
                 )
@@ -110,6 +113,7 @@ class PRM9012019Rule85i93(RuleDefinitionListIndexedBase):
                 maximum_humidity_stpt_sch_id_p = zone_p.get(
                     "maximum_humidity_setpoint_schedule"
                 )
+
                 minimum_humidity_stpt_hourly_values_b = None
                 if minimum_humidity_stpt_sch_id_b:
                     assert_(
@@ -125,8 +129,11 @@ class PRM9012019Rule85i93(RuleDefinitionListIndexedBase):
                     )
                     assert_(
                         len(minimum_humidity_stpt_hourly_values_b) == number_of_hours,
-                        f"minimum humidity setpoint hourly schedule {minimum_humidity_stpt_sch_id_b} have unexpected number of hours. The hours should be {number_of_hours}, but got {len(minimum_humidity_stpt_hourly_values_b)} instead. ",
+                        f"minimum humidity setpoint hourly schedule {minimum_humidity_stpt_sch_id_b} have unexpected "
+                        f"number of hours. The hours should be {number_of_hours}, but got "
+                        f"{len(minimum_humidity_stpt_hourly_values_b)} instead. ",
                     )
+
                 minimum_humidity_stpt_hourly_values_p = None
                 if minimum_humidity_stpt_sch_id_p:
                     assert_(schedules_p, f"schedules is missing in the RMD: {PROPOSED}")
@@ -140,8 +147,11 @@ class PRM9012019Rule85i93(RuleDefinitionListIndexedBase):
                     )
                     assert_(
                         len(minimum_humidity_stpt_hourly_values_p) == number_of_hours,
-                        f"minimum humidity setpoint hourly schedule {minimum_humidity_stpt_sch_id_p} have unexpected number of hours. The hours should be {number_of_hours}, but got {len(minimum_humidity_stpt_hourly_values_p)} instead. ",
+                        f"minimum humidity setpoint hourly schedule {minimum_humidity_stpt_sch_id_p} have unexpected "
+                        f"number of hours. The hours should be {number_of_hours}, but got "
+                        f"{len(minimum_humidity_stpt_hourly_values_p)} instead. ",
                     )
+
                 maximum_humidity_stpt_hourly_values_b = None
                 if maximum_humidity_stpt_sch_id_b:
                     assert_(
@@ -157,8 +167,11 @@ class PRM9012019Rule85i93(RuleDefinitionListIndexedBase):
                     )
                     assert_(
                         len(maximum_humidity_stpt_hourly_values_b) == number_of_hours,
-                        f"maximum humidity setpoint hourly schedule {maximum_humidity_stpt_sch_id_b} have unexpected number of hours. The hours should be {number_of_hours}, but got {len(maximum_humidity_stpt_hourly_values_b)} instead. ",
+                        f"maximum humidity setpoint hourly schedule {maximum_humidity_stpt_sch_id_b} have unexpected "
+                        f"number of hours. The hours should be {number_of_hours}, but got "
+                        f"{len(maximum_humidity_stpt_hourly_values_b)} instead. ",
                     )
+
                 maximum_humidity_stpt_hourly_values_p = None
                 if maximum_humidity_stpt_sch_id_p:
                     assert_(schedules_p, f"schedules is missing in the RMD: {PROPOSED}")
@@ -172,15 +185,22 @@ class PRM9012019Rule85i93(RuleDefinitionListIndexedBase):
                     )
                     assert_(
                         len(maximum_humidity_stpt_hourly_values_p) == number_of_hours,
-                        f"maximum humidity setpoint hourly schedule {maximum_humidity_stpt_sch_id_p} have unexpected number of hours. The hours should be {number_of_hours}, but got {len(maximum_humidity_stpt_hourly_values_p)} instead. ",
+                        f"maximum humidity setpoint hourly schedule {maximum_humidity_stpt_sch_id_p} have unexpected "
+                        f"number of hours. The hours should be {number_of_hours}, but got "
+                        f"{len(maximum_humidity_stpt_hourly_values_p)} instead. ",
                     )
+
+                # None matches None or hourly values matched exactly.
                 minimum_humidity_schedule_matched = (
                     minimum_humidity_stpt_hourly_values_b
                     == minimum_humidity_stpt_hourly_values_p
                 )
+
+                # ^ comparison for data type.
                 minimum_humidity_schedule_type_matched = (
                     minimum_humidity_stpt_hourly_values_b is None
                 ) == (minimum_humidity_stpt_hourly_values_p is None)
+
                 maximum_humidity_schedule_matched = (
                     maximum_humidity_stpt_hourly_values_b
                     == maximum_humidity_stpt_hourly_values_p
@@ -188,6 +208,7 @@ class PRM9012019Rule85i93(RuleDefinitionListIndexedBase):
                 maximum_humidity_schedule_type_matched = (
                     maximum_humidity_stpt_hourly_values_b is None
                 ) == (maximum_humidity_stpt_hourly_values_p is None)
+
                 return {
                     "minimum_humidity_stpt_sch_id_b": minimum_humidity_stpt_sch_id_b,
                     "minimum_humidity_stpt_sch_id_p": minimum_humidity_stpt_sch_id_p,
@@ -212,6 +233,7 @@ class PRM9012019Rule85i93(RuleDefinitionListIndexedBase):
                 maximum_humidity_schedule_type_matched = calc_vals[
                     "maximum_humidity_schedule_type_matched"
                 ]
+
                 return (
                     minimum_humidity_schedule_type_matched
                     and maximum_humidity_schedule_type_matched
@@ -228,6 +250,7 @@ class PRM9012019Rule85i93(RuleDefinitionListIndexedBase):
                 maximum_humidity_schedule_matched = calc_vals[
                     "maximum_humidity_schedule_matched"
                 ]
+
                 return (
                     minimum_humidity_schedule_matched
                     and maximum_humidity_schedule_matched
@@ -240,8 +263,12 @@ class PRM9012019Rule85i93(RuleDefinitionListIndexedBase):
                 maximum_humidity_stpt_sch_id_b = calc_vals[
                     "maximum_humidity_stpt_sch_id_b"
                 ]
+
+                # guaranteed that either b or p has Null
                 return (
                     FAIL_MSG_B
-                    if minimum_humidity_stpt_sch_id_b or maximum_humidity_stpt_sch_id_b
+                    if (
+                        minimum_humidity_stpt_sch_id_b or maximum_humidity_stpt_sch_id_b
+                    )
                     else FAIL_MSG_P
                 )

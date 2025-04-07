@@ -17,7 +17,15 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_ca
 from rct229.utils.std_comparisons import std_equal
 
 ABSORPTANCE_SOLAR_EXTERIOR = 0.7
-UNDETERMINED_MSG = "Roof surface solar reflectance in the proposed model {absorptance_solar_exterior} matches that in the user model but is not equal to the prescribed default value of 0.3. Verify that reflectance was established using aged test data as required in section 5.5.3.1(a)."
+
+CASE2_UNDETERMINED_MSG = (
+    "Roof surface solar reflectance in the proposed model {absorptance_solar_exterior} matches that in the user model but is not equal to the prescribed default value of 0.3. "
+    "Verify that reflectance was established using aged test data as required in section 5.5.3.1(a)."
+)
+CASE3_UNDETERMINED_MSG = (
+    "Fail if the thermal emittance in the user model is based on aged test data. roof surface solar reflectance is equal to the prescribed default value of 0.3 "
+    "but differs from the solar reflectance in the user model 1-{absorptance_solar_exterior}."
+)
 PASS_DIFFERS_MSG_REGULATED = "Roof surface solar reflectance is equal to the prescribed default value of 0.3 but differs from the solar reflectance in the user model {absorptance_solar_exterior}"
 
 
@@ -32,13 +40,18 @@ class PRM9012019Rule78r30(RuleDefinitionListIndexedBase):
             each_rule=PRM9012019Rule78r30.BuildingRule(),
             index_rmd=PROPOSED,
             id="5-32",
-            description="The proposed roof surfaces shall be modeled using the same solar reflectance as in the user model if the aged test data are available, or equal to 0.7 default reflectance",
+            description="The proposed roof surfaces shall be modeled using the same solar reflectance as in the user "
+            "model if the aged test data are available, or equal to 0.7 default reflectance",
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-1(a) Building Envelope Modeling Requirements for the Proposed design",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].buildings[*]",
-            data_items={"climate_zone": (PROPOSED, "weather/climate_zone")},
         )
+
+    def create_data(self, context, data=None):
+        rpd_p = context.PROPOSED
+        climate_zone = rpd_p["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
+        return {"climate_zone": climate_zone}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -56,7 +69,7 @@ class PRM9012019Rule78r30(RuleDefinitionListIndexedBase):
             return {
                 "scc_dict_p": get_surface_conditioning_category_dict(
                     data["climate_zone"], building_p
-                )
+                ),
             }
 
         def list_filter(self, context_item, data=None):
@@ -78,7 +91,10 @@ class PRM9012019Rule78r30(RuleDefinitionListIndexedBase):
                         "optical_properties": ["absorptance_solar_exterior"],
                     },
                     precision={
-                        "absorptance_solar_exterior_p": {"precision": 0.01, "unit": ""}
+                        "absorptance_solar_exterior_p": {
+                            "precision": 0.01,
+                            "unit": "",
+                        }
                     },
                 )
 
@@ -86,6 +102,7 @@ class PRM9012019Rule78r30(RuleDefinitionListIndexedBase):
                 roof_p = context.PROPOSED
                 roof_u = context.USER
                 scc_dict_p = data["scc_dict_p"]
+
                 return {
                     "absorptance_solar_exterior_p": roof_p["optical_properties"][
                         "absorptance_solar_exterior"
@@ -99,16 +116,42 @@ class PRM9012019Rule78r30(RuleDefinitionListIndexedBase):
             def manual_check_required(self, context, calc_vals=None, data=None):
                 absorptance_solar_exterior_p = calc_vals["absorptance_solar_exterior_p"]
                 absorptance_solar_exterior_u = calc_vals["absorptance_solar_exterior_u"]
+
                 return (
                     absorptance_solar_exterior_p == absorptance_solar_exterior_u
                     and absorptance_solar_exterior_p != ABSORPTANCE_SOLAR_EXTERIOR
+                ) or (
+                    absorptance_solar_exterior_p != absorptance_solar_exterior_u
+                    and self.precision_comparison["absorptance_solar_exterior_p"](
+                        absorptance_solar_exterior_p,
+                        ABSORPTANCE_SOLAR_EXTERIOR,
+                    )
                 )
 
             def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
                 absorptance_solar_exterior_p = calc_vals["absorptance_solar_exterior_p"]
-                return UNDETERMINED_MSG.format(
-                    absorptance_solar_exterior=absorptance_solar_exterior_p
-                )
+                absorptance_solar_exterior_u = calc_vals["absorptance_solar_exterior_u"]
+
+                UNDETERMINED_MSG = ""
+                if (
+                    absorptance_solar_exterior_p == absorptance_solar_exterior_u
+                    and absorptance_solar_exterior_p != ABSORPTANCE_SOLAR_EXTERIOR
+                ):
+                    UNDETERMINED_MSG = CASE2_UNDETERMINED_MSG.format(
+                        absorptance_solar_exterior=absorptance_solar_exterior_p
+                    )
+                elif (
+                    absorptance_solar_exterior_p != absorptance_solar_exterior_u
+                    and self.precision_comparison["absorptance_solar_exterior_p"](
+                        absorptance_solar_exterior_p,
+                        ABSORPTANCE_SOLAR_EXTERIOR,
+                    )
+                ):
+                    UNDETERMINED_MSG = CASE3_UNDETERMINED_MSG.format(
+                        absorptance_solar_exterior=absorptance_solar_exterior_p
+                    )
+
+                return UNDETERMINED_MSG
 
             def rule_check(self, context, calc_vals=None, data=None):
                 return self.precision_comparison["absorptance_solar_exterior_p"](
@@ -126,11 +169,13 @@ class PRM9012019Rule78r30(RuleDefinitionListIndexedBase):
                 """Pre-condition: see rule_check"""
                 absorptance_solar_exterior_p = calc_vals["absorptance_solar_exterior_p"]
                 absorptance_solar_exterior_u = calc_vals["absorptance_solar_exterior_u"]
-                pass_msg = (
+
+                # this condition only applies when P-RMD = 0.7 and P-RMD surface is regulated.
+                PASS_MSG = (
                     PASS_DIFFERS_MSG_REGULATED.format(
-                        absorptance_solar_exterior=1 - absorptance_solar_exterior_u
+                        absorptance_solar_exterior=(1 - absorptance_solar_exterior_u)
                     )
                     if absorptance_solar_exterior_p != absorptance_solar_exterior_u
                     else ""
                 )
-                return pass_msg
+                return PASS_MSG

@@ -15,7 +15,9 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_ca
     get_surface_conditioning_category_dict,
 )
 from rct229.utils.jsonpath_utils import find_one
-from rct229.utils.std_comparisons import std_equal
+from rct229.schema.schema_enums import SchemaEnums
+
+EXTERIOR = SchemaEnums.schema_enums["SurfaceAdjacencyOptions"].EXTERIOR
 
 
 class PRM9012019Rule33l08(RuleDefinitionListIndexedBase):
@@ -34,8 +36,12 @@ class PRM9012019Rule33l08(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-5 Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].buildings[*]",
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
         )
+
+    def create_data(self, context, data=None):
+        rpd_b = context.BASELINE_0
+        climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
+        return {"climate_zone": climate_zone}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -61,6 +67,7 @@ class PRM9012019Rule33l08(RuleDefinitionListIndexedBase):
             scc = data["scc_dict_b"][surface_b["id"]]
             return (
                 get_opaque_surface_type(surface_b) == OST.ROOF
+                and surface_b.get("adjacent_to") == EXTERIOR
                 and scc is SCC.UNREGULATED
             )
 

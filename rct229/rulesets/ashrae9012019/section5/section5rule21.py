@@ -10,6 +10,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_ca
 )
 from rct229.utils.pint_utils import CalcQ
 
+
 FAIL_MSG = "Subsurface that is not regulated (Not part of building envelope) is not modeled with the same area, U-factor and SHGC in the baseline as in the propsoed design."
 
 
@@ -21,7 +22,10 @@ class PRM9012019Rule44m70(RuleDefinitionListIndexedBase):
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            required_fields={"$": ["weather"], "weather": ["climate_zone"]},
+            required_fields={
+                "$.ruleset_model_descriptions[*]": ["weather"],
+                "weather": ["climate_zone"],
+            },
             each_rule=PRM9012019Rule44m70.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-21",
@@ -30,8 +34,12 @@ class PRM9012019Rule44m70(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-5(a) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].buildings[*]",
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
         )
+
+    def create_data(self, context, data=None):
+        rpd_b = context.BASELINE_0
+        climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
+        return {"climate_zone": climate_zone}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -49,12 +57,16 @@ class PRM9012019Rule44m70(RuleDefinitionListIndexedBase):
             return {
                 "scc_dict_b": get_surface_conditioning_category_dict(
                     data["climate_zone"], building
-                )
+                ),
             }
 
         def list_filter(self, context_item, data=None):
             surface_b = context_item.BASELINE_0
-            return data["scc_dict_b"][surface_b["id"]] == SCC.UNREGULATED
+
+            return (
+                data["scc_dict_b"][surface_b["id"]] == SCC.UNREGULATED
+                and len(surface_b.get("subsurfaces", [])) > 0
+            )
 
         class UnregulatedSurfaceRule(RuleDefinitionListIndexedBase):
             def __init__(self):
@@ -83,9 +95,18 @@ class PRM9012019Rule44m70(RuleDefinitionListIndexedBase):
                                 "precision": 0.01,
                                 "unit": "Btu/(hr*ft2*R)",
                             },
-                            "subsurface_shgc_b": {"precision": 0.01, "unit": ""},
-                            "subsurface_glazed_area_b": {"precision": 1, "unit": "ft2"},
-                            "subsurface_opaque_area_b": {"precision": 1, "unit": "ft2"},
+                            "subsurface_shgc_b": {
+                                "precision": 0.01,
+                                "unit": "",
+                            },
+                            "subsurface_glazed_area_b": {
+                                "precision": 1,
+                                "unit": "ft2",
+                            },
+                            "subsurface_opaque_area_b": {
+                                "precision": 1,
+                                "unit": "ft2",
+                            },
                         },
                         fail_msg=FAIL_MSG,
                     )
@@ -93,6 +114,7 @@ class PRM9012019Rule44m70(RuleDefinitionListIndexedBase):
                 def get_calc_vals(self, context, data=None):
                     subsurface_b = context.BASELINE_0
                     subsurface_p = context.PROPOSED
+
                     return {
                         "subsurface_u_factor_b": CalcQ(
                             "thermal_transmittance", subsurface_b.get("u_factor")

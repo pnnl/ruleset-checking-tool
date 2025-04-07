@@ -33,8 +33,6 @@ class PRM9012019rule63z32(RuleDefinitionListIndexedBase):
             standard_section="Table G3.1 #1, proposed column, (a)",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
-            data_items={"is_leap_year": (PROPOSED, "calendar/is_leap_year")},
         )
 
     class RMDRule(RuleDefinitionListIndexedBase):
@@ -50,7 +48,8 @@ class PRM9012019rule63z32(RuleDefinitionListIndexedBase):
 
         def create_data(self, context, data):
             rmd_p = context.PROPOSED
-            is_leap_year_p = data["is_leap_year"]
+            is_leap_year_p = rmd_p["calendar"]["is_leap_year"]
+
             swh_bat = {
                 bldg_seg_id: get_building_segment_swh_bat(
                     rmd_p, bldg_seg_id, is_leap_year_p
@@ -59,9 +58,11 @@ class PRM9012019rule63z32(RuleDefinitionListIndexedBase):
                     "$.buildings[*].building_segments[*].id", rmd_p
                 )
             }
+
             service_water_heating_use_ids = (
                 get_swh_uses_associated_with_each_building_segment(rmd_p)
             )
+
             return {
                 "swh_bat": swh_bat,
                 "service_water_heating_use_ids": service_water_heating_use_ids,
@@ -79,9 +80,10 @@ class PRM9012019rule63z32(RuleDefinitionListIndexedBase):
                 bldg_seg_p = context.PROPOSED
                 service_water_heating_use_ids = data["service_water_heating_use_ids"]
                 swh_bat = data["swh_bat"][bldg_seg_p["id"]]
+
                 has_swh_loads = any(
                     [
-                        (getattr_(swh_use, "service_water_heating_uses", "use") > 0.0)
+                        getattr_(swh_use, "service_water_heating_uses", "use") > 0.0
                         for service_water_heating_use_id in service_water_heating_use_ids
                         for swh_use in find_all(
                             f'$.zones[*].spaces[*].service_water_heating_uses[*][?(@.id="{service_water_heating_use_id}")]',
@@ -89,10 +91,15 @@ class PRM9012019rule63z32(RuleDefinitionListIndexedBase):
                         )
                     ]
                 )
-                return {"has_swh_loads": has_swh_loads, "swh_bat": swh_bat}
+
+                return {
+                    "has_swh_loads": has_swh_loads,
+                    "swh_bat": swh_bat,
+                }
 
             def manual_check_required(self, context, calc_vals=None, data=None):
                 swh_bat = calc_vals["swh_bat"]
+
                 return swh_bat in (
                     "UNDETERMINED",
                     SERVICE_WATER_HEATING_SPACE.ALL_OTHERS,
@@ -102,21 +109,35 @@ class PRM9012019rule63z32(RuleDefinitionListIndexedBase):
 
             def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
                 swh_bat = calc_vals["swh_bat"]
+
                 manual_check_msg = ""
                 if swh_bat == "UNDETERMINED":
-                    manual_check_msg = f"No SWH loads were simulated. The SWH Building Area type is UNDETERMINED, so this rule cannot assess whether building type is likely to have SWH loads. Recommend manual check to determine if SWH loads should have been simulated based on whether the building will have SWH loads."
+                    manual_check_msg = (
+                        f"No SWH loads were simulated. The SWH Building Area type is UNDETERMINED, "
+                        f"so this rule cannot assess whether building type is likely to have SWH loads. Recommend manual check "
+                        f"to determine if SWH loads should have been simulated based on whether the building will have SWH loads."
+                    )
                 elif swh_bat in (
                     SERVICE_WATER_HEATING_SPACE.ALL_OTHERS,
                     SERVICE_WATER_HEATING_SPACE.WAREHOUSE,
                     SERVICE_WATER_HEATING_SPACE.PARKING_GARAGE,
                 ):
-                    manual_check_msg = f"There are no service water heating loads simulated in this building segment. SWH Building Area type is {swh_bat}. Confirm that there will be no service water heating loads in this building segment."
+                    manual_check_msg = (
+                        f"There are no service water heating loads simulated in this building segment. "
+                        f"SWH Building Area type is {swh_bat}. Confirm that there will be no service water heating loads in this building segment."
+                    )
+
                 return manual_check_msg
 
             def rule_check(self, context, calc_vals=None, data=None):
                 has_swh_loads = calc_vals["has_swh_loads"]
+
                 return has_swh_loads
 
             def get_fail_msg(self, context, calc_vals=None, data=None):
                 swh_bat = calc_vals["swh_bat"]
-                return f"There were no service water heating loads simulated in this building segment. Service water heating loads are expected for Building Area Type: {swh_bat}"
+
+                return (
+                    f"There were no service water heating loads simulated in this building segment. "
+                    f"Service water heating loads are expected for Building Area Type: {swh_bat}"
+                )

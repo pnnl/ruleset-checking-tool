@@ -25,7 +25,10 @@ class PRM9012019Rule04o58(RuleDefinitionListIndexedBase):
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            required_fields={"$": ["weather"], "weather": ["climate_zone"]},
+            required_fields={
+                "$.ruleset_model_descriptions[*]": ["weather"],
+                "weather": ["climate_zone"],
+            },
             each_rule=PRM9012019Rule04o58.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-15",
@@ -34,8 +37,12 @@ class PRM9012019Rule04o58(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-5(c) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].buildings[*]",
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
         )
+
+    def create_data(self, context, data=None):
+        rpd_b = context.BASELINE_0
+        climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
+        return {"climate_zone": climate_zone}
 
     class BuildingRule(RuleDefinitionBase):
         def __init__(self):
@@ -50,7 +57,12 @@ class PRM9012019Rule04o58(RuleDefinitionListIndexedBase):
                         "area_type_vertical_fenestration",
                     ],
                 },
-                precision={"wwr_b": {"precision": 0.01, "unit": ""}},
+                precision={
+                    "wwr_b": {
+                        "precision": 0.01,
+                        "unit": "",
+                    }
+                },
             )
 
         def is_applicable(self, context, data=None):
@@ -63,12 +75,14 @@ class PRM9012019Rule04o58(RuleDefinitionListIndexedBase):
         def get_calc_vals(self, context, data=None):
             building_b = context.BASELINE_0
             building_p = context.PROPOSED
+
             area_type_window_wall_area_dict_b = get_area_type_window_wall_area_dict(
                 data["climate_zone"], building_b
             )
             area_type_window_wall_area_dict_p = get_area_type_window_wall_area_dict(
                 data["climate_zone"], building_p
             )
+
             wwr_b = (
                 area_type_window_wall_area_dict_b[OTHER]["total_window_area"]
                 / area_type_window_wall_area_dict_b[OTHER]["total_wall_area"]
@@ -77,11 +91,13 @@ class PRM9012019Rule04o58(RuleDefinitionListIndexedBase):
                 area_type_window_wall_area_dict_p[OTHER]["total_window_area"]
                 / area_type_window_wall_area_dict_p[OTHER]["total_wall_area"]
             )
+
             manual_check_flag = False
             for building_segment in find_all("$.building_segments[*]", building_b):
                 if building_segment["area_type_vertical_fenestration"] == OTHER:
                     if not building_segment["is_all_new"]:
                         manual_check_flag = True
+
             return {
                 "wwr_b": wwr_b,
                 "wwr_p": wwr_p,

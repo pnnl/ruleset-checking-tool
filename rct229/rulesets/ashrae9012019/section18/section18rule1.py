@@ -43,15 +43,6 @@ class PRM9012019Rule77j55(RuleDefinitionListIndexedBase):
             standard_section="Table G3.1.1",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            required_fields={
-                "$": ["weather", "calendar", "ruleset_model_descriptions"],
-                "weather": ["climate_zone"],
-                "calendar": ["is_leap_year"],
-            },
-            data_items={
-                "climate_zone": (BASELINE_0, "weather/climate_zone"),
-                "is_leap_year": (BASELINE_0, "calendar/is_leap_year"),
-            },
         )
 
     class RMDRule(RuleDefinitionListIndexedBase):
@@ -63,28 +54,37 @@ class PRM9012019Rule77j55(RuleDefinitionListIndexedBase):
                 each_rule=PRM9012019Rule77j55.RMDRule.ZoneRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].zones[*]",
+                required_fields={
+                    "$": ["weather", "calendar"],
+                    "weather": ["climate_zone"],
+                    "calendar": ["is_leap_year"],
+                },
             )
 
         def is_applicable(self, context, data=None):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
-            climate_zone_b = data["climate_zone"]
-            is_leap_year_b = data["is_leap_year"]
+            climate_zone_b = rmd_b["weather"]["climate_zone"]
+            is_leap_year_b = rmd_b["calendar"]["is_leap_year"]
+
             zone_target_baseline_system_dict_b = get_zone_target_baseline_system(
                 rmd_b, rmd_p, climate_zone_b, is_leap_year_b
             )
+
             return bool(zone_target_baseline_system_dict_b)
 
         def create_data(self, context, data):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
-            climate_zone_b = data["climate_zone"]
-            is_leap_year_b = data["is_leap_year"]
+            climate_zone_b = rmd_b["weather"]["climate_zone"]
+            is_leap_year_b = rmd_b["calendar"]["is_leap_year"]
+
             zone_target_baseline_system_dict_b = get_zone_target_baseline_system(
                 rmd_b, rmd_p, climate_zone_b, is_leap_year_b
             )
             baseline_hvac_system_dict_b = get_baseline_system_types(rmd_b)
             get_building_lab_zones_list_b = get_building_lab_zones_list(rmd_p)
+
             zone_ids_list_b = find_all(
                 "$.buildings[*].building_segments[*].zones[*].id", rmd_b
             )
@@ -99,6 +99,7 @@ class PRM9012019Rule77j55(RuleDefinitionListIndexedBase):
             building_total_lab_exhaust_p = (
                 get_building_total_lab_exhaust_from_zone_exhaust_fans(rmd_p)
             )
+
             return {
                 "zone_target_baseline_system_dict_b": zone_target_baseline_system_dict_b,
                 "baseline_hvac_system_dict_b": baseline_hvac_system_dict_b,
@@ -114,6 +115,7 @@ class PRM9012019Rule77j55(RuleDefinitionListIndexedBase):
             zone_target_baseline_system_dict_b = data[
                 "zone_target_baseline_system_dict_b"
             ]
+
             return zone_id_b in zone_target_baseline_system_dict_b
 
         class ZoneRule(RuleDefinitionBase):
@@ -123,13 +125,17 @@ class PRM9012019Rule77j55(RuleDefinitionListIndexedBase):
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
                     precision={
-                        "building_total_lab_exhaust_p": {"precision": 1, "unit": "cfm"}
+                        "building_total_lab_exhaust_p": {
+                            "precision": 1,
+                            "unit": "cfm",
+                        },
                     },
                 )
 
             def get_calc_vals(self, context, data=None):
                 zone_b = context.BASELINE_0
                 zone_id_b = zone_b["id"]
+
                 expected_system_type_b = data["zone_target_baseline_system_dict_b"][
                     zone_id_b
                 ]["expected_system_type"]
@@ -139,12 +145,15 @@ class PRM9012019Rule77j55(RuleDefinitionListIndexedBase):
                 systems_of_expected_type_list_b = data["baseline_hvac_system_dict_b"][
                     expected_system_type_b
                 ]
+
+                # any HVAC system serving this zone is in the `systems_of_expected_type_list_b`
                 is_system_part_of_expected_sys_type_b = any(
                     [
-                        (sys_b in systems_of_expected_type_list_b)
+                        sys_b in systems_of_expected_type_list_b
                         for sys_b in hvac_systems_serving_zone_b
                     ]
                 )
+
                 return {
                     "is_system_part_of_expected_sys_type_b": is_system_part_of_expected_sys_type_b
                 }
@@ -154,46 +163,66 @@ class PRM9012019Rule77j55(RuleDefinitionListIndexedBase):
                 zone_id_b = zone_b["id"]
                 is_zone_likely_a_vestibule_b = data["is_zone_likely_a_vestibule_b"]
                 building_total_lab_exhaust_p = data["building_total_lab_exhaust_p"]
+
                 system_origin_b = data["zone_target_baseline_system_dict_b"][zone_id_b][
                     "system_origin"
                 ]
+
                 is_undetermined = False
                 if system_origin_b == SYSTEMORIGIN.G311D:
                     is_undetermined = (
                         building_total_lab_exhaust_p < EXHAUST_AIRFLOW_15000
                         or self.precision_comparison["building_total_lab_exhaust_p"](
-                            building_total_lab_exhaust_p, EXHAUST_AIRFLOW_15000
+                            building_total_lab_exhaust_p,
+                            EXHAUST_AIRFLOW_15000,
                         )
                     )
                 elif system_origin_b == SYSTEMORIGIN.G311E:
                     is_undetermined = is_zone_likely_a_vestibule_b[zone_id_b]
+
                 return is_undetermined
 
             def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
                 zone_b = context.BASELINE_0
                 zone_id_b = zone_b["id"]
+
                 system_origin_b = data["zone_target_baseline_system_dict_b"][zone_id_b][
                     "system_origin"
                 ]
                 expected_system_type_b = data["zone_target_baseline_system_dict_b"][
                     zone_id_b
                 ]["expected_system_type"]
+
                 advisory_note = ""
                 if system_origin_b == SYSTEMORIGIN.G311D:
-                    advisory_note = f"HVAC system type {expected_system_type_b} was selected for this zone based on ASHRAE 90.1 Appendix G3.1.1.d, which reads: For laboratory spaces in a building having a total laboratory exhaust rate greater than 15,000 cfm, use a single system of type 5 or 7 serving only those spaces. We have determined that laboratory spaces in this building have a total exhaust greater than 15,000 cfm, but we cannot determine with certainty that at least 15,000cfm of the exhaust is dedicated to laboratory purposes. If the building laboratory exhaust is greater than 15,000cfm, the system type for this zone should be {expected_system_type_b}."
+                    advisory_note = (
+                        f"HVAC system type {expected_system_type_b} was selected for this zone based on ASHRAE 90.1 Appendix G3.1.1.d, which reads: "
+                        f"For laboratory spaces in a building having a total laboratory exhaust rate greater than 15,000 cfm, use a single system of type 5 or 7 serving only those spaces. "
+                        f"We have determined that laboratory spaces in this building have a total exhaust greater than 15,000 cfm, but we cannot determine with certainty that at least 15,000cfm of the exhaust is dedicated to laboratory purposes. "
+                        f"If the building laboratory exhaust is greater than 15,000cfm, the system type for this zone should be {expected_system_type_b}."
+                    )
+
                 elif system_origin_b == SYSTEMORIGIN.G311E:
-                    advisory_note = f"HVAC system type {expected_system_type_b} was selected for this zone based on ASHRAE 90.1 Appendix G.3.1.1.e which reads: Thermal zones designed with heating-only systems in the proposed design serving storage rooms, stairwells, vestibules, electrical/mechanical rooms, and restrooms not exhausting or transferring air from mechanically cooled thermal zones in the proposed design shall use system type 9 or 10 in the baseline building design.` We expect that this space is a vestibule, but cannot make a determination with 100% accuracy. If the zone is one of the listed space types, then the system type should be {expected_system_type_b}."
+                    advisory_note = (
+                        f"HVAC system type {expected_system_type_b} was selected for this zone based on ASHRAE 90.1 Appendix G.3.1.1.e which reads: "
+                        f"Thermal zones designed with heating-only systems in the proposed design serving storage rooms, stairwells, vestibules, electrical/mechanical rooms, "
+                        f"and restrooms not exhausting or transferring air from mechanically cooled thermal zones in the proposed design shall use system type 9 or 10 in the baseline building design.` "
+                        f"We expect that this space is a vestibule, but cannot make a determination with 100% accuracy. If the zone is one of the listed space types, then the system type should be {expected_system_type_b}."
+                    )
+
                 return advisory_note
 
             def rule_check(self, context, calc_vals=None, data=None):
                 is_system_part_of_expected_sys_type_b = calc_vals[
                     "is_system_part_of_expected_sys_type_b"
                 ]
+
                 return is_system_part_of_expected_sys_type_b
 
             def get_fail_msg(self, context, calc_vals=None, data=None):
                 zone_b = context.BASELINE_0
                 zone_id_b = zone_b["id"]
+
                 zone_target_baseline_system_dict_b = data[
                     "zone_target_baseline_system_dict_b"
                 ][zone_id_b]
@@ -203,11 +232,13 @@ class PRM9012019Rule77j55(RuleDefinitionListIndexedBase):
                 expected_system_type_b = zone_target_baseline_system_dict_b[
                     "expected_system_type"
                 ]
+
                 return f"HVAC system type {expected_system_type_b} was selected based on {system_type_origin_b}."
 
             def get_pass_msg(self, context, calc_vals=None, data=None):
                 zone_b = context.BASELINE_0
                 zone_id_b = zone_b["id"]
+
                 zone_target_baseline_system_dict_b = data[
                     "zone_target_baseline_system_dict_b"
                 ][zone_id_b]
@@ -217,4 +248,5 @@ class PRM9012019Rule77j55(RuleDefinitionListIndexedBase):
                 expected_system_type_b = zone_target_baseline_system_dict_b[
                     "expected_system_type"
                 ]
+
                 return f"HVAC system type {expected_system_type_b} was selected based on {system_type_origin_b}."

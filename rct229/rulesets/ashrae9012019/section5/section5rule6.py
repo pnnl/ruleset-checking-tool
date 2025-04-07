@@ -35,9 +35,16 @@ class PRM9012019Rule70u00(RuleDefinitionListIndexedBase):
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
-            required_fields={"$": ["weather"], "weather": ["climate_zone"]},
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
+            required_fields={
+                "$.ruleset_model_descriptions[*]": ["weather"],
+                "weather": ["climate_zone"],
+            },
         )
+
+    def create_data(self, context, data=None):
+        rpd_b = context.BASELINE_0
+        climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
+        return {"climate_zone": climate_zone}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -56,7 +63,7 @@ class PRM9012019Rule70u00(RuleDefinitionListIndexedBase):
             return {
                 "surface_conditioning_category_dict": get_surface_conditioning_category_dict(
                     data["climate_zone"], building
-                )
+                ),
             }
 
         def list_filter(self, context_item, data=None):
@@ -94,9 +101,11 @@ class PRM9012019Rule70u00(RuleDefinitionListIndexedBase):
                     below_grade_wall["id"]
                 ]
                 wall_c_factor = below_grade_wall["construction"]["c_factor"]
+
                 target_c_factor = None
                 target_c_factor_res = None
                 target_c_factor_nonres = None
+
                 if scc in [
                     SCC.SEMI_EXTERIOR,
                     SCC.EXTERIOR_RESIDENTIAL,
@@ -112,8 +121,10 @@ class PRM9012019Rule70u00(RuleDefinitionListIndexedBase):
                     target_c_factor_nonres = table_G34_lookup(
                         climate_zone, SCC.EXTERIOR_NON_RESIDENTIAL, OST.BELOW_GRADE_WALL
                     )["c_factor"]
+
                     if target_c_factor_res == target_c_factor_nonres:
                         target_c_factor = target_c_factor_res
+
                 return {
                     "below_grade_wall_c_factor": CalcQ(
                         "thermal_transmittance", wall_c_factor

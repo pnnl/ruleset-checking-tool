@@ -54,8 +54,9 @@ class PRM9012019Rule29n09(RuleDefinitionListIndexedBase):
             def get_calc_vals(self, context, data=None):
                 swh_dist_sys_b = context.BASELINE_0
                 piping_losses_modeled_b = []
-                for service_water_piping in swh_dist_sys_b["service_water_piping"]:
-                    queue = deque([service_water_piping])
+                piping = swh_dist_sys_b.get("service_water_piping")
+                if piping:
+                    queue = deque([piping])
                     while queue:
                         current_piping = queue.popleft()
                         children_piping = current_piping.get("child", [])

@@ -19,7 +19,10 @@ class PRM9012019Rule84u02(RuleDefinitionListIndexedBase):
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            required_fields={"$": ["weather"], "weather": ["climate_zone"]},
+            required_fields={
+                "$.ruleset_model_descriptions[*]": ["weather"],
+                "weather": ["climate_zone"],
+            },
             each_rule=PRM9012019Rule84u02.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-25",
@@ -28,8 +31,18 @@ class PRM9012019Rule84u02(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-5(e) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].buildings[*]",
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
+            data_items={
+                "climate_zone": (
+                    BASELINE_0,
+                    "ruleset_model_descriptions[0]/weather/climate_zone",
+                )
+            },
         )
+
+    def create_data(self, context, data=None):
+        rpd_b = context.BASELINE_0
+        climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
+        return {"climate_zone": climate_zone}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -63,7 +76,10 @@ class PRM9012019Rule84u02(RuleDefinitionListIndexedBase):
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
                     precision={
-                        "skylight_roof_ratio_b": {"precision": 0.01, "unit": ""}
+                        "skylight_roof_ratio_b": {
+                            "precision": 0.01,
+                            "unit": "",
+                        }
                     },
                 )
 
@@ -78,6 +94,7 @@ class PRM9012019Rule84u02(RuleDefinitionListIndexedBase):
                 total_envelope_roof_area = skylight_roof_areas_dictionary_p[
                     building_p["id"]
                 ]["total_envelope_roof_area"]
+                # avoid zero division
                 return (
                     total_envelope_roof_area > ZERO.AREA
                     and total_skylight_area / total_envelope_roof_area
@@ -92,6 +109,7 @@ class PRM9012019Rule84u02(RuleDefinitionListIndexedBase):
                 skylight_roof_areas_dictionary_p = data[
                     "skylight_roof_areas_dictionary_p"
                 ]
+
                 return {
                     "skylight_roof_ratio_b": skylight_roof_areas_dictionary_b[
                         building_segment_b["id"]

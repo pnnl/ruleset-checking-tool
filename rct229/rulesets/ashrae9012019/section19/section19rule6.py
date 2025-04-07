@@ -22,8 +22,8 @@ class PRM9012019Rule97a53(RuleDefinitionBase):
             is_primary_rule=True,
             rmd_context="ruleset_model_descriptions/0",
             required_fields={
-                "$": ["output"],
-                "output": ["output_instance"],
+                "$": ["model_output"],
+                "model_output": ["output_instance"],
                 "output_instance": [
                     "unmet_load_hours_heating",
                     "unmet_load_hours_cooling",
@@ -42,10 +42,12 @@ class PRM9012019Rule97a53(RuleDefinitionBase):
 
     def get_calc_vals(self, context, data=None):
         rmd_b = context.BASELINE_0
-        output_instance_b = rmd_b["output"]["output_instance"]
+        output_instance_b = rmd_b["model_output"]["output_instance"]
+
         unmet_load_hours_heating_b = output_instance_b["unmet_load_hours_heating"]
         unmet_load_hours_cooling_b = output_instance_b["unmet_load_hours_cooling"]
         coincident_unmet_load_hours_b = output_instance_b["unmet_load_hours"]
+
         return {
             "unmet_load_hours_heating_b": unmet_load_hours_heating_b,
             "unmet_load_hours_cooling_b": unmet_load_hours_cooling_b,
@@ -56,6 +58,7 @@ class PRM9012019Rule97a53(RuleDefinitionBase):
         unmet_load_hours_heating_b = calc_vals["unmet_load_hours_heating_b"]
         unmet_load_hours_cooling_b = calc_vals["unmet_load_hours_cooling_b"]
         coincident_unmet_load_hours_b = calc_vals["coincident_unmet_load_hours_b"]
+
         return coincident_unmet_load_hours_b is None and (
             unmet_load_hours_heating_b is None or unmet_load_hours_cooling_b is None
         )
@@ -64,22 +67,24 @@ class PRM9012019Rule97a53(RuleDefinitionBase):
         unmet_load_hours_heating_b = calc_vals["unmet_load_hours_heating_b"]
         unmet_load_hours_cooling_b = calc_vals["unmet_load_hours_cooling_b"]
         coincident_unmet_load_hours_b = calc_vals["coincident_unmet_load_hours_b"]
+
         return (
             coincident_unmet_load_hours_b is not None
             and (
                 coincident_unmet_load_hours_b < MAX_COINCIDENT_UNMET_LOAD_HOUR
                 or self.precision_comparison["coincident_unmet_load_hours_b"](
-                    coincident_unmet_load_hours_b, MAX_COINCIDENT_UNMET_LOAD_HOUR
+                    coincident_unmet_load_hours_b,
+                    MAX_COINCIDENT_UNMET_LOAD_HOUR,
                 )
             )
-            or (
-                unmet_load_hours_heating_b + unmet_load_hours_cooling_b
-                < MAX_SUM_HEATING_COOLING_UNMET_HOUR
-                or self.precision_comparison[
-                    "unmet_load_hours_heating_b + unmet_load_hours_cooling_b"
-                ](
-                    unmet_load_hours_heating_b + unmet_load_hours_cooling_b,
-                    MAX_SUM_HEATING_COOLING_UNMET_HOUR,
-                )
+        ) or (
+            # we are certain at this step, both unmet_load_hours_heating_b and unmet_load_hours_cooling_b can't be None
+            unmet_load_hours_heating_b + unmet_load_hours_cooling_b
+            < MAX_SUM_HEATING_COOLING_UNMET_HOUR
+            or self.precision_comparison[
+                "unmet_load_hours_heating_b + unmet_load_hours_cooling_b"
+            ](
+                unmet_load_hours_heating_b + unmet_load_hours_cooling_b,
+                MAX_SUM_HEATING_COOLING_UNMET_HOUR,
             )
         )

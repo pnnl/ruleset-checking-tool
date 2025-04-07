@@ -49,9 +49,13 @@ def get_extra_schema_by_data_type(data_type):
     dict | str | None
 
     """
-    if data_type.startswith("[") or data_type.startswith("{"):
+    if (
+        data_type.startswith("[")
+        or data_type.startswith("{")
+        or data_type.startswith("(")
+    ):
         # this is a data group
-        data_type = "".join(re.findall(r"[\w\s]+", data_type))
+        data_type = "".join(re.findall(r"\{([^}]+)\}", data_type))
         if (
             EXTRA_SCHEMA.get(data_type)
             and EXTRA_SCHEMA[data_type]["Object Type"] == "Data Group"
@@ -108,6 +112,7 @@ def compare_context_pair(
                 extra_schema_data_group = get_extra_schema_by_data_type(
                     key_schema["Data Type"]
                 )
+
                 new_extra_schema = (
                     extra_schema_data_group
                     if extra_schema_data_group
@@ -178,9 +183,14 @@ def compare_context_pair(
                 f"path: {element_json_path}: index context data: {index_context} does not equal to compare context data: {compare_context}"
             )
             matched = False
-
     else:
-        matched = False
+        # if the two index_context and compare_context are identical at this point, then it pass, otherwise it failed
+        if (
+            type(index_context) != type(compare_context)
+            or index_context != compare_context
+        ):
+            # accomodating to mix reference and object type data - in this case, it is a string referenced.
+            matched = False
     return matched
 
 

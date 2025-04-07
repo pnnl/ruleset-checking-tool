@@ -32,12 +32,10 @@ class PRM9012019Rule08a45(RuleDefinitionListIndexedBase):
             each_rule=PRM9012019Rule08a45.RulesetModelInstanceRule(),
             index_rmd=BASELINE_0,
             description="Baseline building is modeled with automatic shutoff controls in buildings >5000 sq.ft.",
-            required_fields={"$": ["calendar"], "calendar": ["is_leap_year"]},
             ruleset_section_title="Lighting",
             standard_section="Section G3.1-6 Modeling Requirements for the Baseline building",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            data_items={"is_leap_year_b": (BASELINE_0, "calendar/is_leap_year")},
         )
 
     class RulesetModelInstanceRule(RuleDefinitionListIndexedBase):
@@ -49,10 +47,14 @@ class PRM9012019Rule08a45(RuleDefinitionListIndexedBase):
                 each_rule=PRM9012019Rule08a45.RulesetModelInstanceRule.BuildingRule(),
                 index_rmd=BASELINE_0,
                 list_path="buildings[*]",
-                required_fields={"$": ["schedules"]},
+                required_fields={
+                    "$": ["schedules", "calendar"],
+                    "calendar": ["is_leap_year"],
+                },
                 data_items={
                     "schedules_b": (BASELINE_0, "schedules"),
                     "schedules_p": (PROPOSED, "schedules"),
+                    "is_leap_year_b": (BASELINE_0, "calendar/is_leap_year"),
                 },
             )
 
@@ -72,7 +74,7 @@ class PRM9012019Rule08a45(RuleDefinitionListIndexedBase):
                         "building_open_schedule_id_b": (
                             BASELINE_0,
                             "building_open_schedule",
-                        )
+                        ),
                     },
                 )
 
@@ -85,6 +87,7 @@ class PRM9012019Rule08a45(RuleDefinitionListIndexedBase):
                     ),
                     ZERO.AREA,
                 )
+
                 return building_total_area_b > BUILDING_AREA_CUTTOFF
 
             class ZoneRule(RuleDefinitionListIndexedBase):
@@ -117,10 +120,11 @@ class PRM9012019Rule08a45(RuleDefinitionListIndexedBase):
                         ).__init__(
                             rmds_used=produce_ruleset_model_description(
                                 USER=False, BASELINE_0=True, PROPOSED=True
-                            )
+                            ),
                         )
 
                     def is_applicable(self, context, data=None):
+                        # set space has no lighting space type to not applicable
                         space_b = context.BASELINE_0
                         return space_b.get("lighting_space_type") is not None
 
@@ -147,6 +151,7 @@ class PRM9012019Rule08a45(RuleDefinitionListIndexedBase):
                         schedules_p = data["schedules_p"]
                         space_height_b = data["avg_zone_height_b"]
                         space_height_p = data["avg_zone_height_p"]
+
                         normalized_interior_lighting_schedule_b = (
                             normalize_interior_lighting_schedules(
                                 space_b,
@@ -163,12 +168,14 @@ class PRM9012019Rule08a45(RuleDefinitionListIndexedBase):
                                 adjust_for_credit=False,
                             )
                         )
+
                         schedule_comparison_result = compare_schedules(
                             normalized_interior_lighting_schedule_b,
                             normalized_interior_lighting_schedule_p,
                             mask_schedule=invert_mask(hourly_building_open_schedule_b),
                             is_leap_year=is_leap_year_b,
                         )
+
                         return {
                             "schedule_comparison_result": schedule_comparison_result
                         }

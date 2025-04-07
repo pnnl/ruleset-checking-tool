@@ -9,7 +9,11 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_uses_associated_wit
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all, find_one
 
-APPLICABILITY_MSG = "This building is a 24hr-facility with service water heating loads. If the building meets the prescriptive criteria for use of condenser heat recovery systems described in 90.1 Section 6.5.6.2, a system meeting the requirements of that section shall be included in the baseline building design regardless of the exceptions to Section 6.5.6.2. (Exceptions: 1. Facilities that employ condenser heat recovery for space heating with a heat recovery design exceeding 30% of the peak water-cooled condenser load at design conditions. 2. Facilities that provide 60% of their service water heating from site-solar energy or siterecovered energy or from other sources.) Recommend manual review to determine if project complies."
+APPLICABILITY_MSG = (
+    "This building is a 24hr-facility with service water heating loads. If the building meets the prescriptive criteria for use of condenser heat recovery systems described in 90.1 Section 6.5.6.2, a system meeting the requirements of that section shall be included in the baseline building design regardless of the exceptions to Section 6.5.6.2. "
+    "(Exceptions: 1. Facilities that employ condenser heat recovery for space heating with a heat recovery design exceeding 30% of the peak water-cooled condenser load at design conditions."
+    " 2. Facilities that provide 60% of their service water heating from site-solar energy or siterecovered energy or from other sources.) Recommend manual review to determine if project complies."
+)
 
 
 class PRM9012019rule52y79(RuleDefinitionListIndexedBase):
@@ -28,7 +32,6 @@ class PRM9012019rule52y79(RuleDefinitionListIndexedBase):
             standard_section="Table G3.1 #11, baseline column, d + exception",
             is_primary_rule=False,
             list_path="ruleset_model_descriptions[0]",
-            data_items={"is_leap_year_b": (BASELINE_0, "calendar/is_leap_year")},
         )
 
     class RMDRule(RuleDefinitionListIndexedBase):
@@ -45,11 +48,13 @@ class PRM9012019rule52y79(RuleDefinitionListIndexedBase):
         def create_data(self, context, data):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
+            is_leap_year_b = rmd_b["calendar"]["is_leap_year"]
             swh_uses_associated_with_each_building_segment_p = (
                 get_swh_uses_associated_with_each_building_segment(rmd_p)
             )
+
             return {
-                "is_leap_year_b": data["is_leap_year_b"],
+                "is_leap_year_b": is_leap_year_b,
                 "schedules_b": find_all("$.schedules[*]", rmd_b),
                 "schedules_p": find_all("$.schedules[*]", rmd_p),
                 "swh_uses_associated_with_each_building_segment_p": swh_uses_associated_with_each_building_segment_p,
@@ -69,16 +74,21 @@ class PRM9012019rule52y79(RuleDefinitionListIndexedBase):
                 building_p = context.PROPOSED
                 schedules_b = data["schedules_b"]
                 is_leap_year_b = data["is_leap_year_b"]
+
+                # TODO revise the json path if the service_water_heating_uses is relocated in the schema
                 service_water_heating_uses_p = find_all(
                     "$.building_segments[*].zones[*].spaces[*].service_water_heating_uses[*]",
                     building_p,
                 )
+
                 building_open_schedule_id_p = find_one(
                     "$.building_open_schedule", building_p
                 )
+
                 bldg_open_sch_id_b = getattr_(
                     building_b, "buildings", "building_open_schedule"
                 )
+
                 bldg_open_sch_b = next(
                     (
                         schedule_b["hourly_values"]
@@ -87,11 +97,13 @@ class PRM9012019rule52y79(RuleDefinitionListIndexedBase):
                     ),
                     [],
                 )
+
                 hours_this_year = (
                     LeapYear.LEAP_YEAR_HOURS
                     if is_leap_year_b
                     else LeapYear.REGULAR_YEAR_HOURS
                 )
+
                 return (
                     service_water_heating_uses_p
                     and building_open_schedule_id_p is not None
@@ -102,6 +114,7 @@ class PRM9012019rule52y79(RuleDefinitionListIndexedBase):
                 swh_uses_associated_with_each_building_segment_p = data[
                     "swh_uses_associated_with_each_building_segment_p"
                 ]
+
                 uses_associated_with_each_building_segment_p = {
                     bldg_seg_id: sum(
                         swh_uses.get("use", 0.0)
@@ -111,6 +124,7 @@ class PRM9012019rule52y79(RuleDefinitionListIndexedBase):
                     )
                     for bldg_seg_id in swh_uses_associated_with_each_building_segment_p
                 }
+
                 return {
                     "uses_associated_with_each_building_segment_p": uses_associated_with_each_building_segment_p
                 }
@@ -119,6 +133,7 @@ class PRM9012019rule52y79(RuleDefinitionListIndexedBase):
                 uses_associated_with_each_building_segment_p = calc_vals[
                     "uses_associated_with_each_building_segment_p"
                 ]
+
                 return (
                     sum(list(uses_associated_with_each_building_segment_p.values()))
                     > 0.0

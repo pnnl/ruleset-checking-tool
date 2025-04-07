@@ -1,4 +1,5 @@
 import math
+
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
@@ -41,13 +42,21 @@ class PRM9012019Rule30m88(RuleDefinitionBase):
             standard_section="Section G3.1.3.1 Type and Number of Chillers (System 7, 8, 11, 12 and 13)",
             is_primary_rule=True,
             rmd_context="ruleset_model_descriptions/0",
-            required_fields={"$": ["output"]},
-            precision={"building_peak_load_b": {"precision": 1, "unit": "ton"}},
+            required_fields={
+                "$": ["model_output"],
+            },
+            precision={
+                "building_peak_load_b": {
+                    "precision": 1,
+                    "unit": "ton",
+                },
+            },
         )
 
     def is_applicable(self, context, data=None):
         rmd_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmd_b)
+        # create a list containing all HVAC systems that are modeled in the rmd_b
         available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict
@@ -55,7 +64,7 @@ class PRM9012019Rule30m88(RuleDefinitionBase):
         ]
         return any(
             [
-                (available_type in APPLICABLE_SYS_TYPES)
+                available_type in APPLICABLE_SYS_TYPES
                 for available_type in available_type_list
             ]
         )
@@ -63,17 +72,20 @@ class PRM9012019Rule30m88(RuleDefinitionBase):
     def get_calc_vals(self, context, data=None):
         rmd_b = context.BASELINE_0
         chiller_number = len(rmd_b["chillers"])
-        output_b = rmd_b["output"]
+
+        output_b = rmd_b["model_output"]
         building_peak_load_b = getattr_(
             output_b,
             "building_peak_cooling_load",
             "output_instance",
             "building_peak_cooling_load",
         )
+
         if (
             building_peak_load_b < REQUIRED_BUILDING_PEAK_LOAD_300
             or self.precision_comparison["building_peak_load_b"](
-                building_peak_load_b, REQUIRED_BUILDING_PEAK_LOAD_300
+                building_peak_load_b,
+                REQUIRED_BUILDING_PEAK_LOAD_300,
             )
         ):
             target_chiller_number = 1
@@ -83,6 +95,7 @@ class PRM9012019Rule30m88(RuleDefinitionBase):
             target_chiller_number = max(
                 2, math.ceil(building_peak_load_b / CHILLER_SIZE_800)
             )
+
         return {
             "chiller_number": chiller_number,
             "target_chiller_number": target_chiller_number,
@@ -91,4 +104,5 @@ class PRM9012019Rule30m88(RuleDefinitionBase):
     def rule_check(self, context, calc_vals=None, data=None):
         chiller_number = calc_vals["chiller_number"]
         target_chiller_number = calc_vals["target_chiller_number"]
+
         return chiller_number == target_chiller_number

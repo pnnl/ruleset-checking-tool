@@ -26,7 +26,10 @@ class PRM9012019Rule73r04(RuleDefinitionListIndexedBase):
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            required_fields={"$": ["weather"], "weather": ["climate_zone"]},
+            required_fields={
+                "$.ruleset_model_descriptions[*]": ["weather"],
+                "weather": ["climate_zone"],
+            },
             each_rule=PRM9012019Rule73r04.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-13",
@@ -35,8 +38,12 @@ class PRM9012019Rule73r04(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-5 Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].buildings[*]",
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
         )
+
+    def create_data(self, context, data=None):
+        rpd_b = context.BASELINE_0
+        climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
+        return {"climate_zone": climate_zone}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -55,7 +62,7 @@ class PRM9012019Rule73r04(RuleDefinitionListIndexedBase):
             return {
                 "surface_conditioning_category_dict": get_surface_conditioning_category_dict(
                     data["climate_zone"], building
-                )
+                ),
             }
 
         def list_filter(self, context_item, data=None):
@@ -91,14 +98,17 @@ class PRM9012019Rule73r04(RuleDefinitionListIndexedBase):
             def get_calc_vals(self, context, data=None):
                 surface_b = context.BASELINE_0
                 surface_p = context.PROPOSED
+
                 surface_b_type = get_opaque_surface_type(surface_b)
                 surface_b_construction = surface_b["construction"]
                 surface_p_type = get_opaque_surface_type(surface_p)
                 surface_p_construction = surface_p["construction"]
+
                 calc_vals = {
                     "baseline_surface_type": surface_b_type,
                     "proposed_surface_type": surface_p_type,
                 }
+
                 if surface_b_type in [OST.ABOVE_GRADE_WALL, OST.FLOOR, OST.ROOF]:
                     return {
                         **calc_vals,
@@ -148,27 +158,35 @@ class PRM9012019Rule73r04(RuleDefinitionListIndexedBase):
                         ),
                     }
                 else:
+                    # Will never reach this line
+                    # The OST defaults all unidentifiable surfaces to above wall grade
+                    # Serve code completeness
                     raise Exception(f"Unrecognized surface type: {surface_b_type}")
 
             def rule_check(self, context, calc_vals=None, data=None):
                 baseline_surface_type = calc_vals["baseline_surface_type"]
                 proposed_surface_type = calc_vals["proposed_surface_type"]
+                # Check 1. surface type needs to be matched
                 if (
                     proposed_surface_type is None
                     or baseline_surface_type != proposed_surface_type
                 ):
                     return False
+
                 if baseline_surface_type in [OST.ABOVE_GRADE_WALL, OST.FLOOR, OST.ROOF]:
                     return self.precision_comparison["surface_u_factor_b"](
                         calc_vals["baseline_surface_u_factor"],
                         calc_vals["proposed_surface_u_factor"],
                     )
+
                 elif baseline_surface_type in [OST.UNHEATED_SOG, OST.HEATED_SOG]:
                     return self.precision_comparison["surface_f_factor_b"](
                         calc_vals["baseline_surface_f_factor"],
                         calc_vals["proposed_surface_f_factor"],
                     )
+
                 elif baseline_surface_type == OST.BELOW_GRADE_WALL:
+
                     return self.precision_comparison["surface_c_factor_b"](
                         calc_vals["baseline_surface_c_factor"],
                         calc_vals["proposed_surface_c_factor"],

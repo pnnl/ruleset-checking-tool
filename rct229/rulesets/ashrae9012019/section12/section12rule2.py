@@ -13,6 +13,7 @@ from rct229.utils.utility_functions import find_exactly_one_schedule
 LIGHTING_SPACE_OPTIONS = SchemaEnums.schema_enums[
     "LightingSpaceOptions2019ASHRAE901TG37"
 ]
+
 EXPECTED_RECEPTACLE_CONTROL_SPACE_TYPES = [
     LIGHTING_SPACE_OPTIONS.OFFICE_ENCLOSED,
     LIGHTING_SPACE_OPTIONS.CONFERENCE_MEETING_MULTIPURPOSE_ROOM,
@@ -41,13 +42,13 @@ class PRM9012019rule66e91(RuleDefinitionListIndexedBase):
             each_rule=PRM9012019rule66e91.RMDRule(),
             index_rmd=BASELINE_0,
             id="12-2",
-            description="Depending on the space type, receptacle controls may be required by 90.1 Section 8.4.2. Receptacle schedules shall be modeled identically to the proposed design except when receptacle controls are specified in the proposed design for spaces where not required by Section 8.4.2.",
+            description=(
+                "Depending on the space type, receptacle controls may be required by 90.1 Section 8.4.2. Receptacle schedules shall be modeled identically to the proposed design except when receptacle controls are specified in the proposed design for spaces where not required by Section 8.4.2."
+            ),
             ruleset_section_title="Receptacle",
             standard_section="Table G3.1-12 Proposed Building Performance column",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
-            data_items={"is_leap_year": (BASELINE_0, "calendar/is_leap_year")},
         )
 
     class RMDRule(RuleDefinitionListIndexedBase):
@@ -59,6 +60,7 @@ class PRM9012019rule66e91(RuleDefinitionListIndexedBase):
                 each_rule=PRM9012019rule66e91.RMDRule.SpaceRule(),
                 index_rmd=BASELINE_0,
                 list_path="buildings[*].building_segments[*].zones[*].spaces[*]",
+                required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
             )
 
         def create_data(self, context, data):
@@ -71,6 +73,7 @@ class PRM9012019rule66e91(RuleDefinitionListIndexedBase):
                     rmd_b,
                 )
             }
+
             mis_equip_schedule_p_dict = {
                 sch_id: find_exactly_one_schedule(rmd_p, sch_id)["hourly_values"]
                 for sch_id in find_all(
@@ -81,6 +84,7 @@ class PRM9012019rule66e91(RuleDefinitionListIndexedBase):
             return {
                 "mis_equip_schedule_b_dict": mis_equip_schedule_b_dict,
                 "mis_equip_schedule_p_dict": mis_equip_schedule_p_dict,
+                "is_leap_year": rmd_b["calendar"]["is_leap_year"],
             }
 
         class SpaceRule(RuleDefinitionListIndexedBase):
@@ -97,7 +101,9 @@ class PRM9012019rule66e91(RuleDefinitionListIndexedBase):
             def create_data(self, context, data):
                 space_b = context.BASELINE_0
                 space_type_b = space_b.get("lighting_space_type")
-                return {"space_type_b": space_type_b}
+                return {
+                    "space_type_b": space_type_b,
+                }
 
             class MiscellaneousEquipmentRule(RuleDefinitionBase):
                 def __init__(self):
@@ -107,30 +113,42 @@ class PRM9012019rule66e91(RuleDefinitionListIndexedBase):
                     ).__init__(
                         rmds_used=produce_ruleset_model_description(
                             USER=False, BASELINE_0=True, PROPOSED=True
-                        )
+                        ),
                     )
 
                 def get_calc_vals(self, context, data=None):
                     is_leap_year = data["is_leap_year"]
                     misc_equip_b = context.BASELINE_0
                     misc_equip_p = context.PROPOSED
+
                     space_type_b = data["space_type_b"]
                     mis_equip_schedule_b_dict = data["mis_equip_schedule_b_dict"]
                     mis_equip_schedule_p_dict = data["mis_equip_schedule_p_dict"]
                     misc_equip_schedule_id_b = misc_equip_b.get("multiplier_schedule")
                     misc_equip_schedule_id_p = misc_equip_p.get("multiplier_schedule")
+
                     misc_equip_schedule_b = mis_equip_schedule_b_dict.get(
                         misc_equip_schedule_id_b
                     )
                     misc_equip_schedule_p = mis_equip_schedule_p_dict.get(
                         misc_equip_schedule_id_p
                     )
-                    auto_receptacle_control_b = misc_equip_b.get(
-                        "has_automatic_control"
+
+                    automatic_controlled_percentage_b = misc_equip_b.get(
+                        "automatic_controlled_percentage"
                     )
-                    auto_receptacle_control_p = misc_equip_p.get(
-                        "has_automatic_control"
+                    automatic_controlled_percentage_p = misc_equip_p.get(
+                        "automatic_controlled_percentage"
                     )
+                    auto_receptacle_control_b = (
+                        automatic_controlled_percentage_b
+                        and automatic_controlled_percentage_b > 0.0
+                    )
+                    auto_receptacle_control_p = (
+                        automatic_controlled_percentage_p
+                        and automatic_controlled_percentage_p > 0.0
+                    )
+
                     mask_schedule = (
                         [1] * LeapYear.LEAP_YEAR_HOURS
                         if is_leap_year
@@ -143,6 +161,8 @@ class PRM9012019rule66e91(RuleDefinitionListIndexedBase):
                         is_leap_year,
                     )
                     return {
+                        # No need to report full schedule values.
+                        # "mis_equip_schedule_b_dict": mis_equip_schedule_b_dict,
                         "space_type_b": space_type_b,
                         "auto_receptacle_control_b": auto_receptacle_control_b,
                         "auto_receptacle_control_p": auto_receptacle_control_p,

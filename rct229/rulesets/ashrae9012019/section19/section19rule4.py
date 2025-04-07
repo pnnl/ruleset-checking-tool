@@ -32,16 +32,6 @@ class PRM9012019Rule74p61(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1.2.2.1 Exception",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            required_fields={
-                "$": ["calendar"],
-                "calendar": ["day_of_week_for_january_1"],
-            },
-            data_items={
-                "day_of_week_for_january_1": (
-                    BASELINE_0,
-                    "calendar/day_of_week_for_january_1",
-                )
-            },
         )
 
     class RuleSetModelInstanceRule(RuleDefinitionListIndexedBase):
@@ -53,11 +43,26 @@ class PRM9012019Rule74p61(RuleDefinitionListIndexedBase):
                 each_rule=PRM9012019Rule74p61.RuleSetModelInstanceRule.BuildingSegmentRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*]",
+                required_fields={
+                    "$": ["calendar"],
+                    "calendar": ["day_of_week_for_january_1"],
+                },
+                data_items={
+                    "day_of_week_for_january_1": (
+                        BASELINE_0,
+                        "calendar/day_of_week_for_january_1",
+                    ),
+                },
             )
 
         def create_data(self, context, data):
             rmd_b = context.BASELINE_0
-            return {"schedule_b": getattr_(rmd_b, "RMI", "schedules")}
+            day_of_week_for_january_1 = rmd_b["calendar"]["day_of_week_for_january_1"]
+
+            return {
+                "schedule_b": getattr_(rmd_b, "RMI", "schedules"),
+                "day_of_week_for_january_1": day_of_week_for_january_1,
+            }
 
         class BuildingSegmentRule(RuleDefinitionListIndexedBase):
             def __init__(self):
@@ -75,6 +80,7 @@ class PRM9012019Rule74p61(RuleDefinitionListIndexedBase):
 
             def create_data(self, context, data):
                 building_segment_b = context.BASELINE_0
+
                 is_lighting_bldg_area_defined_b = False
                 is_building_area_MF_dormitory_or_hotel_b = False
                 lighting_bldg_type_b = building_segment_b.get(
@@ -88,6 +94,7 @@ class PRM9012019Rule74p61(RuleDefinitionListIndexedBase):
                     LIGHTING_BUILDING_AREA.MULTIFAMILY,
                 ]:
                     is_building_area_MF_dormitory_or_hotel_b = True
+
                 return {
                     "is_lighting_bldg_area_defined_b": is_lighting_bldg_area_defined_b,
                     "is_building_area_MF_dormitory_or_hotel_b": is_building_area_MF_dormitory_or_hotel_b,
@@ -111,25 +118,36 @@ class PRM9012019Rule74p61(RuleDefinitionListIndexedBase):
                     day_of_week_for_january_1 = data["day_of_week_for_january_1"]
                     schedule_b = data["schedule_b"]
                     zone_b = context.BASELINE_0
+
+                    # check infiltration
                     inf_pass_cooling_b = True
+                    # TODO: need add log here if zone has no infiltration (add TODO lighting, occ, equip)
                     if zone_b.get("infiltration"):
                         multiplier_sch_inf_b = getattr_(
                             zone_b, "Zone", "infiltration", "multiplier_schedule"
                         )
                         multiplier_sch_hourly_value_b = getattr_(
                             find_exactly_one_with_field_value(
-                                "$[*]", "id", multiplier_sch_inf_b, schedule_b
+                                "$[*]",
+                                "id",
+                                multiplier_sch_inf_b,
+                                schedule_b,
                             ),
                             "schedule",
                             "hourly_values",
                         )
+
                         design_cooling_multiplier_sch_b = getattr_(
                             find_exactly_one_with_field_value(
-                                "$[*]", "id", multiplier_sch_inf_b, schedule_b
+                                "$[*]",
+                                "id",
+                                multiplier_sch_inf_b,
+                                schedule_b,
                             ),
                             "schedule",
                             "hourly_cooling_design_day",
                         )
+
                         most_used_weekday_hourly_schedule_b = (
                             get_most_used_weekday_hourly_schedule(
                                 multiplier_sch_hourly_value_b, day_of_week_for_january_1
@@ -139,6 +157,7 @@ class PRM9012019Rule74p61(RuleDefinitionListIndexedBase):
                             design_cooling_multiplier_sch_b
                             == most_used_weekday_hourly_schedule_b
                         )
+
                     return {"inf_pass_cooling_b": inf_pass_cooling_b}
 
                 class SpaceRule(RuleDefinitionBase):
@@ -149,13 +168,14 @@ class PRM9012019Rule74p61(RuleDefinitionListIndexedBase):
                         ).__init__(
                             rmds_used=produce_ruleset_model_description(
                                 USER=False, BASELINE_0=True, PROPOSED=False
-                            )
+                            ),
                         )
 
                     def is_applicable(self, context, data=None):
                         space_b = context.BASELINE_0
                         lighting_space_type_b = space_b.get("lighting_space_type")
                         ventilation_space_type_b = space_b.get("ventilation_space_type")
+
                         return (
                             lighting_space_type_b == LIGHTING_SPACE.DWELLING_UNIT
                             or ventilation_space_type_b
@@ -167,7 +187,10 @@ class PRM9012019Rule74p61(RuleDefinitionListIndexedBase):
                         day_of_week_for_january_1 = data["day_of_week_for_january_1"]
                         schedule_b = data["schedule_b"]
                         space_b = context.BASELINE_0
+
+                        # check occupancy schedule
                         occ_pass_cooling_b = False
+                        # TODO: need add log here if zone has no infiltration (add TODO lighting, occ, equip)
                         if space_b.get("occupant_multiplier_schedule"):
                             multiplier_sch_occ_hourly_value_b = getattr_(
                                 find_exactly_one_with_field_value(
@@ -189,6 +212,7 @@ class PRM9012019Rule74p61(RuleDefinitionListIndexedBase):
                                 "schedule",
                                 "hourly_cooling_design_day",
                             )
+
                             most_used_weekday_hourly_schedule_b = (
                                 get_most_used_weekday_hourly_schedule(
                                     multiplier_sch_occ_hourly_value_b,
@@ -199,6 +223,8 @@ class PRM9012019Rule74p61(RuleDefinitionListIndexedBase):
                                 most_used_weekday_hourly_schedule_b
                                 == design_cooling_multiplier_sch_b
                             )
+
+                        # check interior lighting
                         int_lgt_pass_cooling_b = False
                         for interior_lighting_b in find_all(
                             "$.interior_lighting[*]", space_b
@@ -209,20 +235,29 @@ class PRM9012019Rule74p61(RuleDefinitionListIndexedBase):
                                     "Interior Lighting",
                                     "lighting_multiplier_schedule",
                                 )
+
                                 multiplier_sch_hourly_value_b = getattr_(
                                     find_exactly_one_with_field_value(
-                                        "$[*]", "id", multiplier_sch_light_b, schedule_b
+                                        "$[*]",
+                                        "id",
+                                        multiplier_sch_light_b,
+                                        schedule_b,
                                     ),
                                     "schedule",
                                     "hourly_values",
                                 )
+
                                 design_cooling_multiplier_sch_b = getattr_(
                                     find_exactly_one_with_field_value(
-                                        "$[*]", "id", multiplier_sch_light_b, schedule_b
+                                        "$[*]",
+                                        "id",
+                                        multiplier_sch_light_b,
+                                        schedule_b,
                                     ),
                                     "schedule",
                                     "hourly_cooling_design_day",
                                 )
+
                                 most_used_weekday_hourly_schedule_b = (
                                     get_most_used_weekday_hourly_schedule(
                                         multiplier_sch_hourly_value_b,
@@ -233,6 +268,8 @@ class PRM9012019Rule74p61(RuleDefinitionListIndexedBase):
                                     design_cooling_multiplier_sch_b
                                     == most_used_weekday_hourly_schedule_b
                                 )
+
+                        # check misc equipment
                         misc_pass_cooling_b = False
                         for misc_equip_b in find_all(
                             "$.miscellaneous_equipment[*]", space_b
@@ -243,20 +280,29 @@ class PRM9012019Rule74p61(RuleDefinitionListIndexedBase):
                                     "miscellaneous_equipment",
                                     "multiplier_schedule",
                                 )
+
                                 multiplier_sch_hourly_value_b = getattr_(
                                     find_exactly_one_with_field_value(
-                                        "$[*]", "id", multiplier_sch_light_b, schedule_b
+                                        "$[*]",
+                                        "id",
+                                        multiplier_sch_light_b,
+                                        schedule_b,
                                     ),
                                     "schedule",
                                     "hourly_values",
                                 )
+
                                 design_cooling_multiplier_sch_b = getattr_(
                                     find_exactly_one_with_field_value(
-                                        "$[*]", "id", multiplier_sch_light_b, schedule_b
+                                        "$[*]",
+                                        "id",
+                                        multiplier_sch_light_b,
+                                        schedule_b,
                                     ),
                                     "schedule",
                                     "hourly_cooling_design_day",
                                 )
+
                                 most_used_weekday_hourly_schedule_b = (
                                     get_most_used_weekday_hourly_schedule(
                                         multiplier_sch_hourly_value_b,
@@ -267,6 +313,7 @@ class PRM9012019Rule74p61(RuleDefinitionListIndexedBase):
                                     design_cooling_multiplier_sch_b
                                     == most_used_weekday_hourly_schedule_b
                                 )
+
                         return {
                             "inf_pass_cooling_b": inf_pass_cooling_b,
                             "occ_pass_cooling_b": occ_pass_cooling_b,
@@ -276,16 +323,19 @@ class PRM9012019Rule74p61(RuleDefinitionListIndexedBase):
 
                     def manual_check_required(self, context, calc_vals=None, data=None):
                         space_b = context.BASELINE_0
+
                         is_lighting_bldg_area_defined_b = data[
                             "is_lighting_bldg_area_defined_b"
                         ]
                         is_building_area_MF_dormitory_or_hotel_b = data[
                             "is_building_area_MF_dormitory_or_hotel_b"
                         ]
+
                         space_lighting_or_vent_space_type_not_defined = (
                             space_b.get("lighting_space_type") is None
                             or space_b.get("ventilation_space_type") is None
                         )
+
                         return space_lighting_or_vent_space_type_not_defined and (
                             not is_lighting_bldg_area_defined_b
                             or is_building_area_MF_dormitory_or_hotel_b
@@ -296,10 +346,12 @@ class PRM9012019Rule74p61(RuleDefinitionListIndexedBase):
                     ):
                         space_b = context.BASELINE_0
                         space_id_b = space_b["id"]
+
                         inf_pass_cooling_b = calc_vals["inf_pass_cooling_b"]
                         occ_pass_cooling_b = calc_vals["occ_pass_cooling_b"]
                         int_lgt_pass_cooling_b = calc_vals["int_lgt_pass_cooling_b"]
                         misc_pass_cooling_b = calc_vals["misc_pass_cooling_b"]
+
                         if all(
                             [
                                 inf_pass_cooling_b,
@@ -311,6 +363,7 @@ class PRM9012019Rule74p61(RuleDefinitionListIndexedBase):
                             be_verb = "was"
                         else:
                             be_verb = "was not"
+
                         return f"It is not clear from the RMD if {space_id_b} is a dwelling unit. If it is a dwelling unit it is required that it be modeled following the rule that for baseline cooling sizing runs in residential dwelling units, the infiltration, occupants, lighting, gas and electricity design day cooling schedules shalled be modeled using an equipment hourly schedule that is the same as the most used hourly weekday schedule from the annual simulation. This rule {be_verb} followed for this space if applicable."
 
                     def rule_check(self, context, calc_vals=None, data=None):
@@ -318,6 +371,7 @@ class PRM9012019Rule74p61(RuleDefinitionListIndexedBase):
                         occ_pass_cooling_b = calc_vals["occ_pass_cooling_b"]
                         int_lgt_pass_cooling_b = calc_vals["int_lgt_pass_cooling_b"]
                         misc_pass_cooling_b = calc_vals["misc_pass_cooling_b"]
+
                         return all(
                             [
                                 inf_pass_cooling_b,
@@ -330,10 +384,12 @@ class PRM9012019Rule74p61(RuleDefinitionListIndexedBase):
                     def get_fail_msg(self, context, calc_vals=None, data=None):
                         space_b = context.BASELINE_0
                         space_id_b = space_b["id"]
+
                         inf_pass_cooling_b = calc_vals["inf_pass_cooling_b"]
                         occ_pass_cooling_b = calc_vals["occ_pass_cooling_b"]
                         int_lgt_pass_cooling_b = calc_vals["int_lgt_pass_cooling_b"]
                         misc_pass_cooling_b = calc_vals["misc_pass_cooling_b"]
+
                         inf_msg = "" if inf_pass_cooling_b else "infiltration"
                         occ_msg = "" if occ_pass_cooling_b else "occupants"
                         light_msg = "" if int_lgt_pass_cooling_b else "lighting"
@@ -342,7 +398,9 @@ class PRM9012019Rule74p61(RuleDefinitionListIndexedBase):
                             if misc_pass_cooling_b
                             else "gas and/or electricity miscellaneous"
                         )
+
                         agg_msg = " ".join(
                             [inf_msg, occ_msg, light_msg, misc_msg]
                         ).replace(" ", ", ")
+
                         return f"{space_id_b} does not appear to have been modeled following the rule that for baseline cooling sizing runs in residential dwelling units hourly schedules shall be the same as the most used hourly weekday schedule from the annual simulation for the following schedules: {agg_msg}."

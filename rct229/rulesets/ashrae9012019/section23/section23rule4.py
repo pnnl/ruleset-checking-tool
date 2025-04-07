@@ -15,7 +15,10 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_lab_zone_hvac_systems i
     get_lab_zone_hvac_systems,
 )
 
-APPLICABLE_SYS_TYPES = [HVAC_SYS.SYS_5, HVAC_SYS.SYS_7]
+APPLICABLE_SYS_TYPES = [
+    HVAC_SYS.SYS_5,
+    HVAC_SYS.SYS_7,
+]
 
 
 class PRM9012019Rule68z84(RuleDefinitionListIndexedBase):
@@ -35,13 +38,9 @@ class PRM9012019Rule68z84(RuleDefinitionListIndexedBase):
             is_primary_rule=False,
             list_path="ruleset_model_descriptions[0]",
             required_fields={
-                "$": ["calendar", "weather"],
+                "$.ruleset_model_descriptions[*]": ["calendar", "weather"],
                 "weather": ["climate_zone"],
                 "calendar": ["is_leap_year"],
-            },
-            data_items={
-                "climate_zone_b": (BASELINE_0, "weather/climate_zone"),
-                "is_leap_year_b": (BASELINE_0, "calendar/is_leap_year"),
             },
         )
 
@@ -50,15 +49,17 @@ class PRM9012019Rule68z84(RuleDefinitionListIndexedBase):
             super(PRM9012019Rule68z84.RuleSetModelInstanceRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
-                )
+                ),
             )
 
         def get_calc_vals(self, context, data=None):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
-            climate_zone_b = data["climate_zone_b"]
-            is_leap_year_b = data["is_leap_year_b"]
+            climate_zone_b = rmd_b["weather"]["climate_zone"]
+            is_leap_year_b = rmd_b["calendar"]["is_leap_year"]
+
             baseline_system_types_dict = get_baseline_system_types(rmd_b)
+
             hvac_sys_5_or_7_list = [
                 value
                 for system_type in baseline_system_types_dict
@@ -66,9 +67,11 @@ class PRM9012019Rule68z84(RuleDefinitionListIndexedBase):
                 for value in baseline_system_types_dict[system_type]
                 if baseline_system_type_compare(system_type, applicable_sys_type, False)
             ]
+
             hvac_systems_serving_lab_zones = get_lab_zone_hvac_systems(
                 rmd_b, rmd_p, climate_zone_b, is_leap_year_b
             )
+
             return {
                 "hvac_sys_5_or_7_list": hvac_sys_5_or_7_list,
                 "hvac_systems_serving_lab_zones": hvac_systems_serving_lab_zones,
@@ -77,6 +80,7 @@ class PRM9012019Rule68z84(RuleDefinitionListIndexedBase):
         def applicability_check(self, context, calc_vals, data):
             hvac_sys_5_or_7_list = calc_vals["hvac_sys_5_or_7_list"]
             hvac_systems_serving_lab_zones = calc_vals["hvac_systems_serving_lab_zones"]
+
             return any(
                 [
                     hvac_sys_id

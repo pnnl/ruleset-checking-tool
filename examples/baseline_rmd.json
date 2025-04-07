@@ -1,11 +1,11 @@
 {
     "id": "ashrae_229_1",
-    "weather": {
-        "climate_zone": "CZ4A",
-        "data_source_type": "HISTORIC_AGGREGATION"
-    },
     "ruleset_model_descriptions": [
         {"id": "987",
+        "weather": {
+            "climate_zone": "CZ4A",
+            "data_source_type": "HISTORIC_AGGREGATION"
+        },
         "buildings": [
             {
                 "id": "0",
@@ -148,6 +148,5 @@
         ],
         "type": "BASELINE_0"
         }
-    ],
-    "data_timestamp": "2024-02-12T09:00Z"
+    ]
 }

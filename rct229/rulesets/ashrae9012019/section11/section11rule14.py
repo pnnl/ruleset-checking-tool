@@ -75,11 +75,12 @@ class PRM9012019Rule62z26(RuleDefinitionListIndexedBase):
             for swh_dist_sys_b in find_all(
                 "$.service_water_heating_distribution_systems[*]", rmd_b
             ):
-                for service_water_piping in getattr_(
+                service_water_piping = getattr_(
                     swh_dist_sys_b,
                     "service_water_heating_distribution_systems",
                     "service_water_piping",
-                ):
+                )
+                if service_water_piping:
                     queue = deque([service_water_piping])
                     while queue:
                         current_piping = queue.popleft()

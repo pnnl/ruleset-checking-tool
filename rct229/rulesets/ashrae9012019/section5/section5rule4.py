@@ -27,7 +27,10 @@ class PRM9012019Rule43n21(RuleDefinitionListIndexedBase):
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            required_fields={"$": ["weather"], "weather": ["climate_zone"]},
+            required_fields={
+                "$.ruleset_model_descriptions[*]": ["weather"],
+                "weather": ["climate_zone"],
+            },
             each_rule=PRM9012019Rule43n21.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-4",
@@ -36,8 +39,12 @@ class PRM9012019Rule43n21(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].buildings[*]",
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
         )
+
+    def create_data(self, context, data=None):
+        rpd_b = context.BASELINE_0
+        climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
+        return {"climate_zone": climate_zone}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -53,10 +60,11 @@ class PRM9012019Rule43n21(RuleDefinitionListIndexedBase):
 
         def create_data(self, context, data):
             building = context.BASELINE_0
+
             return {
                 "surface_conditioning_category_dict": get_surface_conditioning_category_dict(
                     data["climate_zone"], building
-                )
+                ),
             }
 
         def list_filter(self, context_item, data=None):
@@ -90,9 +98,11 @@ class PRM9012019Rule43n21(RuleDefinitionListIndexedBase):
                 roof = context.BASELINE_0
                 scc: str = data["surface_conditioning_category_dict"][roof["id"]]
                 roof_u_factor = roof["construction"]["u_factor"]
+
                 target_u_factor = None
                 target_u_factor_res = None
                 target_u_factor_nonres = None
+
                 if scc in [
                     SCC.EXTERIOR_RESIDENTIAL,
                     SCC.EXTERIOR_NON_RESIDENTIAL,
@@ -110,6 +120,7 @@ class PRM9012019Rule43n21(RuleDefinitionListIndexedBase):
                     )["u_value"]
                     if target_u_factor_res == target_u_factor_nonres:
                         target_u_factor = target_u_factor_res
+
                 return {
                     "roof_u_factor": CalcQ("thermal_transmittance", roof_u_factor),
                     "target_u_factor": CalcQ("thermal_transmittance", target_u_factor),
@@ -124,6 +135,7 @@ class PRM9012019Rule43n21(RuleDefinitionListIndexedBase):
             def manual_check_required(self, context=None, calc_vals=None, data=None):
                 target_u_factor_res = calc_vals["target_u_factor_res"]
                 target_u_factor_nonres = calc_vals["target_u_factor_nonres"]
+
                 return (
                     target_u_factor_res is not None
                     and target_u_factor_nonres is not None

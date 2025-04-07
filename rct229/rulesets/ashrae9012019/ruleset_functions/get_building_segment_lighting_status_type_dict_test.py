@@ -102,7 +102,6 @@ TEST_RMD = {
             "type": "BASELINE_0",
         }
     ],
-    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 TEST_BUILDING = quantify_rmd(TEST_RMD)["ruleset_model_descriptions"][0]["buildings"][0]

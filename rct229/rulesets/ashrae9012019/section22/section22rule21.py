@@ -45,12 +45,15 @@ class PRM9012019Rule96z66(RuleDefinitionListIndexedBase):
             is_primary_rule=True,
             rmd_context="ruleset_model_descriptions/0",
             list_path="$.chillers[*]",
-            required_fields={"$": ["output"]},
+            required_fields={
+                "$": ["model_output"],
+            },
         )
 
     def is_applicable(self, context, data=None):
         rmd_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmd_b)
+        # create a list containing all HVAC systems that are modeled in the rmd_b
         available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict
@@ -58,20 +61,22 @@ class PRM9012019Rule96z66(RuleDefinitionListIndexedBase):
         ]
         return any(
             [
-                (available_type in APPLICABLE_SYS_TYPES)
+                available_type in APPLICABLE_SYS_TYPES
                 for available_type in available_type_list
             ]
         )
 
     def create_data(self, context, data):
         rmd_b = context.BASELINE_0
-        output_b = rmd_b["output"]
+
+        output_b = rmd_b["model_output"]
         building_cooling_peak_load = getattr_(
             output_b,
             "building_peak_cooling_load",
             "output_instance",
             "building_peak_cooling_load",
         )
+
         return {"building_cooling_peak_load": building_cooling_peak_load}
 
     class ChillerRule(RuleDefinitionBase):
@@ -80,18 +85,22 @@ class PRM9012019Rule96z66(RuleDefinitionListIndexedBase):
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
-                required_fields={"$": ["compressor_type"]},
+                required_fields={
+                    "$": ["compressor_type"],
+                },
             )
 
         def get_calc_vals(self, context, data=None):
             chiller_b = context.BASELINE_0
             compressor_type = chiller_b["compressor_type"]
+
             building_cooling_peak_load = data["building_cooling_peak_load"]
             target_chiller_type = (
                 CHILLER_COMPRESSOR.SCREW
                 if building_cooling_peak_load < REQUIRED_BUILDING_PEAK_LOAD_600
                 else CHILLER_COMPRESSOR.CENTRIFUGAL
             )
+
             return {
                 "compressor_type": compressor_type,
                 "target_chiller_type": target_chiller_type,
@@ -100,4 +109,5 @@ class PRM9012019Rule96z66(RuleDefinitionListIndexedBase):
         def rule_check(self, context, calc_vals=None, data=None):
             compressor_type = calc_vals["compressor_type"]
             target_chiller_type = calc_vals["target_chiller_type"]
+
             return compressor_type == target_chiller_type

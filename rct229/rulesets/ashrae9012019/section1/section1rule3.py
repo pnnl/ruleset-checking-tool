@@ -19,7 +19,9 @@ class PRM9012019Rule88z11(RuleDefinitionBase):
                 PROPOSED=True,
             ),
             rmds_used_optional=produce_ruleset_model_description(
-                BASELINE_90=True, BASELINE_180=True, BASELINE_270=True
+                BASELINE_90=True,
+                BASELINE_180=True,
+                BASELINE_270=True,
             ),
             id="1-3",
             description="The Performance Cost Index-Target (PCIt) shall be calculated using the procedures defined in Section 4.2.1.1. The PCIt shall be equal to [baseline building unregulated energy cost (BBUEC) + BPF x baseline building regulated energy cost (BBREC)]/ BBP",
@@ -36,6 +38,7 @@ class PRM9012019Rule88z11(RuleDefinitionBase):
         rmd_b180 = context.BASELINE_180
         rmd_b270 = context.BASELINE_270
         rmd_p = context.PROPOSED
+
         pci_target_set = []
         bpf_set = []
         bbp_set = []
@@ -44,27 +47,36 @@ class PRM9012019Rule88z11(RuleDefinitionBase):
         for rmd in (rmd_u, rmd_b0, rmd_b90, rmd_b180, rmd_b270, rmd_p):
             if rmd is not None:
                 pci_target_set.append(
-                    find_one("$.output.performance_cost_index_target", rmd)
+                    find_one("$.model_output.performance_cost_index_target", rmd)
                 )
                 bpf_set.append(
                     find_one(
-                        "$.output.total_area_weighted_building_performance_factor", rmd
+                        "$.model_output.total_area_weighted_building_performance_factor",
+                        rmd,
                     )
                 )
                 bbp_set.append(
-                    find_one("$.output.baseline_building_performance_energy_cost", rmd)
+                    find_one(
+                        "$.model_output.baseline_building_performance_energy_cost", rmd
+                    )
                 )
                 bbrec_set.append(
-                    find_one("$.output.baseline_building_regulated_energy_cost", rmd)
+                    find_one(
+                        "$.model_output.baseline_building_regulated_energy_cost", rmd
+                    )
                 )
                 bbuec_set.append(
-                    find_one("$.output.baseline_building_unregulated_energy_cost", rmd)
+                    find_one(
+                        "$.model_output.baseline_building_unregulated_energy_cost", rmd
+                    )
                 )
+
         pci_target_set = list(set(filter(lambda x: x is not None, pci_target_set)))
         bpf_set = list(set(filter(lambda x: x is not None, bpf_set)))
         bbp_set = list(set(filter(lambda x: x is not None, bbp_set)))
         bbrec_set = list(set(filter(lambda x: x is not None, bbrec_set)))
         bbuec_set = list(set(filter(lambda x: x is not None, bbuec_set)))
+
         assert_(
             len(pci_target_set) >= 1,
             "At least one `performance_cost_index_target` value must exist.",
@@ -73,10 +85,12 @@ class PRM9012019Rule88z11(RuleDefinitionBase):
         assert_(len(bbp_set) >= 1, "At least one `bbp_set` value must exist.")
         assert_(len(bbrec_set) >= 1, "At least one `bbrec_set` value must exist.")
         assert_(len(bbuec_set) >= 1, "At least one `bbuec_set` value must exist.")
+
         assert_(
             bbp_set[0] > 0,
             "The `baseline_building_performance_energy_cost` value must be greater than 0.",
         )
+
         return {
             "pci_target_set": pci_target_set,
             "bpf_set": bpf_set,
@@ -91,10 +105,12 @@ class PRM9012019Rule88z11(RuleDefinitionBase):
         bbp_set = calc_vals["bbp_set"]
         bbrec_set = calc_vals["bbrec_set"]
         bbuec_set = calc_vals["bbuec_set"]
+
         return len(pci_target_set) == len(bpf_set) == len(bbp_set) == len(
             bbrec_set
         ) == len(bbuec_set) == 1 and std_equal(
-            (bbuec_set[0] + bpf_set[0] * bbrec_set[0]) / bbp_set[0], pci_target_set[0]
+            (bbuec_set[0] + (bpf_set[0] * bbrec_set[0])) / bbp_set[0],
+            pci_target_set[0],
         )
 
     def get_fail_msg(self, context, calc_vals=None, data=None):
@@ -103,6 +119,7 @@ class PRM9012019Rule88z11(RuleDefinitionBase):
         bbp_set = calc_vals["bbp_set"]
         bbrec_set = calc_vals["bbrec_set"]
         bbuec_set = calc_vals["bbuec_set"]
+
         FAIL_MSG = ""
         if len(pci_target_set) != 1:
             FAIL_MSG = "Ruleset expects exactly one PCI Target value to be used in the project."
@@ -122,4 +139,5 @@ class PRM9012019Rule88z11(RuleDefinitionBase):
             FAIL_MSG = (
                 "Ruleset expects exactly one BBUEC value to be used in the project."
             )
+
         return FAIL_MSG

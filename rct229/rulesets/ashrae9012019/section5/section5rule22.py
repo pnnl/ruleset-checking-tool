@@ -27,17 +27,25 @@ class PRM9012019Rule50p59(RuleDefinitionListIndexedBase):
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            required_fields={"$": ["weather"], "weather": ["climate_zone"]},
+            required_fields={
+                "$.ruleset_model_descriptions[*]": ["weather"],
+                "weather": ["climate_zone"],
+            },
             each_rule=PRM9012019Rule50p59.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-22",
-            description="Baseline fenestration shall be assumed to be flush with the exterior wall, and no shading projections shall be modeled.",
+            description="Baseline fenestration shall be assumed to be flush with the exterior wall, and no shading "
+            "projections shall be modeled.",
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(d) Building Modeling Requirements for the Baseline building",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].buildings[*]",
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
         )
+
+    def create_data(self, context, data=None):
+        rpd_b = context.BASELINE_0
+        climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
+        return {"climate_zone": climate_zone}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -55,7 +63,7 @@ class PRM9012019Rule50p59(RuleDefinitionListIndexedBase):
             return {
                 "scc_dict_b": get_surface_conditioning_category_dict(
                     data["climate_zone"], building_b
-                )
+                ),
             }
 
         def list_filter(self, context_item, data):
@@ -63,6 +71,7 @@ class PRM9012019Rule50p59(RuleDefinitionListIndexedBase):
             return (
                 get_opaque_surface_type(surface_b) == OST.ABOVE_GRADE_WALL
                 and data["scc_dict_b"][surface_b["id"]] != SCC.UNREGULATED
+                and len(surface_b.get("subsurfaces", [])) > 0
             )
 
         class AboveGradeWallRule(RuleDefinitionListIndexedBase):

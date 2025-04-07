@@ -18,6 +18,7 @@ CASE4_WARN_MESSAGE = "Building is not all new and baseline WWR does not match va
 NONE_WARN_MESSAGE = (
     "Building vertical fenestration area type is missing, manual check is required."
 )
+
 OTHER = SchemaEnums.schema_enums[
     "VerticalFenestrationBuildingAreaOptions2019ASHRAE901"
 ].OTHER
@@ -31,7 +32,10 @@ class PRM9012019Rule67j71(RuleDefinitionListIndexedBase):
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            required_fields={"$": ["weather"], "weather": ["climate_zone"]},
+            required_fields={
+                "$.ruleset_model_descriptions[*]": ["weather"],
+                "weather": ["climate_zone"],
+            },
             each_rule=PRM9012019Rule67j71.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-14",
@@ -40,8 +44,12 @@ class PRM9012019Rule67j71(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-5(c) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].buildings[*]",
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
         )
+
+    def create_data(self, context, data=None):
+        rpd_b = context.BASELINE_0
+        climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
+        return {"climate_zone": climate_zone}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -68,15 +76,19 @@ class PRM9012019Rule67j71(RuleDefinitionListIndexedBase):
             is_area_type_all_new_dict = {}
             for building_segment in find_all("$.building_segments[*]", building):
                 area_type = building_segment["area_type_vertical_fenestration"]
+                # add key-value pair or override the existing value
                 is_area_type_all_new_dict[area_type] = building_segment["is_all_new"]
+
             return {
                 "is_area_type_all_new_dict": is_area_type_all_new_dict,
                 "area_type_window_wall_ratio_dict": area_type_window_wall_area_dict_b,
             }
 
         def create_context_list(self, context, data=None):
+            # EXAMPLE of reorganizing the context.
             building = context.BASELINE_0
             area_type_to_building_segment_dict = {}
+            # dict map area_type with list of building_segment
             for building_segment in find_all("$.building_segments[*]", building):
                 area_type = building_segment["area_type_vertical_fenestration"]
                 if area_type not in area_type_to_building_segment_dict:
@@ -87,6 +99,7 @@ class PRM9012019Rule67j71(RuleDefinitionListIndexedBase):
                 area_type_to_building_segment_dict[area_type][
                     "building_segments"
                 ].append(building_segment)
+            # create list based on area_type
             return [
                 produce_ruleset_model_description(
                     USER=None, BASELINE_0=building_segments, PROPOSED=None
@@ -101,13 +114,21 @@ class PRM9012019Rule67j71(RuleDefinitionListIndexedBase):
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
-                    precision={"area_type_wwr_b": {"precision": 0.01, "unit": ""}},
+                    precision={
+                        "area_type_wwr_b": {
+                            "precision": 0.01,
+                            "unit": "",
+                        }
+                    },
                 )
 
             def get_calc_vals(self, context, data=None):
                 building_segments_b = context.BASELINE_0["building_segments"]
                 is_area_type_all_new_dict = data["is_area_type_all_new_dict"]
                 area_type_window_wall_ratio_b = data["area_type_window_wall_ratio_dict"]
+
+                # all building segments in AreaType rule has the same area type
+                # (see create_context_list function in the parent class)
                 area_type = building_segments_b[0]["area_type_vertical_fenestration"]
                 area_type_target_wwr = 0.0
                 area_type_wwr = (
@@ -116,6 +137,7 @@ class PRM9012019Rule67j71(RuleDefinitionListIndexedBase):
                 )
                 if area_type != NONE_AREA_TYPE:
                     area_type_target_wwr = table_G3_1_1_1_lookup(area_type)
+
                 return {
                     "area_type": area_type,
                     "is_all_new": is_area_type_all_new_dict[area_type],
@@ -124,6 +146,7 @@ class PRM9012019Rule67j71(RuleDefinitionListIndexedBase):
                 }
 
             def manual_check_required(self, context, calc_vals=None, data=None):
+                # Raise warning...based on checks?
                 return (
                     not calc_vals["is_all_new"]
                     or calc_vals["area_type"] == NONE_AREA_TYPE

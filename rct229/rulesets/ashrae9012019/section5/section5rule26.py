@@ -30,7 +30,10 @@ class PRM9012019Rule34b75(RuleDefinitionListIndexedBase):
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            required_fields={"$": ["weather"], "weather": ["climate_zone"]},
+            required_fields={
+                "$.ruleset_model_descriptions[*]": ["weather"],
+                "weather": ["climate_zone"],
+            },
             each_rule=PRM9012019Rule34b75.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-26",
@@ -39,8 +42,12 @@ class PRM9012019Rule34b75(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-5(e) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].buildings[*]",
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
         )
+
+    def create_data(self, context, data=None):
+        rpd_b = context.BASELINE_0
+        climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
+        return {"climate_zone": climate_zone}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -86,12 +93,15 @@ class PRM9012019Rule34b75(RuleDefinitionListIndexedBase):
                 skylight_roof_areas_dictionary_p = data[
                     "skylight_roof_areas_dictionary_p"
                 ]
+                # Add applicability check to make sure the building segment contains
+                # skylight elements
                 total_skylight_area_p = skylight_roof_areas_dictionary_p[
                     building_segment_p["id"]
                 ]["total_skylight_area"]
                 total_envelope_roof_area_p = skylight_roof_areas_dictionary_p[
                     building_segment_p["id"]
                 ]["total_envelope_roof_area"]
+                # avoid zero division
                 return (
                     total_envelope_roof_area_p > ZERO.AREA
                     and total_skylight_area_p / total_envelope_roof_area_p > 0
@@ -138,28 +148,27 @@ class PRM9012019Rule34b75(RuleDefinitionListIndexedBase):
                 def get_calc_vals(self, context, data=None):
                     total_skylight_area_b = data["total_skylight_area_b"]
                     total_skylight_area_p = data["total_skylight_area_p"]
+
                     roof_b = context.BASELINE_0
                     roof_p = context.PROPOSED
+
                     total_skylight_area_surface_b = sum(
                         [
-                            (
-                                subsurface.get("glazed_area", ZERO.AREA)
-                                + subsurface.get("opaque_area", ZERO.AREA)
-                            )
+                            subsurface.get("glazed_area", ZERO.AREA)
+                            + subsurface.get("opaque_area", ZERO.AREA)
                             for subsurface in find_all("subsurfaces[*]", roof_b)
                         ],
                         ZERO.AREA,
                     )
                     total_skylight_area_surface_p = sum(
                         [
-                            (
-                                subsurface.get("glazed_area", ZERO.AREA)
-                                + subsurface.get("opaque_area", ZERO.AREA)
-                            )
+                            subsurface.get("glazed_area", ZERO.AREA)
+                            + subsurface.get("opaque_area", ZERO.AREA)
                             for subsurface in find_all("subsurfaces[*]", roof_p)
                         ],
                         ZERO.AREA,
                     )
+
                     return {
                         "total_skylight_area_b": CalcQ("area", total_skylight_area_b),
                         "total_skylight_area_p": CalcQ("area", total_skylight_area_p),
@@ -180,12 +189,17 @@ class PRM9012019Rule34b75(RuleDefinitionListIndexedBase):
                     total_skylight_area_surface_p = calc_vals[
                         "total_skylight_area_surface_p"
                     ]
+
                     return (
+                        # both segments have no skylight area
                         total_skylight_area_b == 0
                         and total_skylight_area_p == 0
                         and total_skylight_area_surface_b == 0
                         and total_skylight_area_surface_p == 0
-                        or total_skylight_area_b * total_skylight_area_p > 0
+                    ) or (
+                        # product to ensure neither is 0 & short-circuit logic if either of them is 0.
+                        total_skylight_area_b * total_skylight_area_p > 0
+                        # both segments' skylight area ratios are the same
                         and self.precision_comparison[
                             "total_skylight_area_surface_b / total_skylight_area_b"
                         ](

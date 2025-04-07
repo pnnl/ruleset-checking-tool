@@ -34,8 +34,9 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_11_2A,
     HVAC_SYS.SYS_12A,
 ]
+
 FLUID_LOOP = SchemaEnums.schema_enums["FluidLoopOptions"]
-HEATING_LOOP_CONDITIONED_AREA_THRESHOLD = 15000 * ureg("ft2")
+HEATING_LOOP_CONDITIONED_AREA_THRESHOLD = 15_000 * ureg("ft2")
 
 
 class PRM9012019Rule34r52(RuleDefinitionListIndexedBase):
@@ -54,7 +55,6 @@ class PRM9012019Rule34r52(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1.3.2 Building System-Specific Modeling Requirements for the Baseline model",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
         )
 
     class RulesetModelInstanceRule(RuleDefinitionBase):
@@ -74,6 +74,7 @@ class PRM9012019Rule34r52(RuleDefinitionListIndexedBase):
         def is_applicable(self, context, data=None):
             rmd_b = context.BASELINE_0
             baseline_system_types_dict = get_baseline_system_types(rmd_b)
+            # create a list containing all HVAC systems that are modeled in the rmd_b
             available_types_list = [
                 hvac_type
                 for hvac_type in baseline_system_types_dict
@@ -81,28 +82,39 @@ class PRM9012019Rule34r52(RuleDefinitionListIndexedBase):
             ]
             return any(
                 [
-                    (available_type in APPLICABLE_SYS_TYPES)
+                    available_type in APPLICABLE_SYS_TYPES
                     for available_type in available_types_list
                 ]
             )
 
         def get_calc_vals(self, context, data=None):
             rmd_b = context.BASELINE_0
-            climate_zone = data["climate_zone"]
+            climate_zone = rmd_b["weather"]["climate_zone"]
+
+            # get zone conditions from buildings
             zone_conditioning_category_dict = {}
             for bldg in find_all("$.buildings[*]", rmd_b):
                 zone_conditioning_category_dict = {
                     **zone_conditioning_category_dict,
                     **get_zone_conditioning_category_dict(climate_zone, bldg),
                 }
+
             loop_zone_list_w_area_dict = get_hw_loop_zone_list_w_area(rmd_b)
+
+            # loop to boiler dict
             boiler_loop_ids = [
                 getattr_(boiler, "boiler", "loop")
                 for boiler in find_all("$.boilers[*]", rmd_b)
             ]
+
+            # Initialize the variables
+            # The heating_loop_conditioned_zone_area will include sum of all connected zones and indirectly zone areas.
             heating_loop_conditioned_zone_area = ZERO.AREA
+            # The connected zones list, zones in this list can be residential, nonresidential, mixed or semi-heated
             loop_zone_list = []
+
             for fluid_loop in find_all("$.fluid_loops[*]", rmd_b):
+                # Make sure heating loop, and its heating is supplied by a boiler(s)
                 if (
                     getattr_(fluid_loop, "fluid_loops", "type") == FLUID_LOOP.HEATING
                     and fluid_loop["id"] in boiler_loop_ids
@@ -114,6 +126,8 @@ class PRM9012019Rule34r52(RuleDefinitionListIndexedBase):
                     heating_loop_conditioned_zone_area += loop_zone_list_w_area_dict[
                         boiler_loop_id
                     ]["total_area"]
+
+            # check indirectly conditioned zones, add them to the total area
             for zone_id in zone_conditioning_category_dict:
                 if (
                     zone_conditioning_category_dict[zone_id]
@@ -133,11 +147,13 @@ class PRM9012019Rule34r52(RuleDefinitionListIndexedBase):
                         ),
                         ZERO.AREA,
                     )
+
             num_boilers = len(find_all("$.boilers[*]", rmd_b))
             boiler_capacity_list = [
                 CalcQ("capacity", getattr_(boiler, "boiler", "rated_capacity"))
                 for boiler in find_all("$.boilers[*]", rmd_b)
             ]
+
             return {
                 "heating_loop_conditioned_zone_area": heating_loop_conditioned_zone_area,
                 "num_boilers": num_boilers,
@@ -160,7 +176,8 @@ class PRM9012019Rule34r52(RuleDefinitionListIndexedBase):
                     )
                 )
                 and num_boilers == 1
-                or heating_loop_conditioned_zone_area
+            ) or (
+                heating_loop_conditioned_zone_area
                 > HEATING_LOOP_CONDITIONED_AREA_THRESHOLD
                 and num_boilers == 2
                 and len(boiler_capacity_list) == 2

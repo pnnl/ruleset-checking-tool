@@ -35,7 +35,6 @@ class PRM9012019Rule57c26(RuleDefinitionListIndexedBase):
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            required_fields={"$": ["weather"], "weather": ["climate_zone"]},
             each_rule=PRM9012019Rule57c26.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-19",
@@ -48,14 +47,20 @@ class PRM9012019Rule57c26(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data=None):
         rmd_baseline = context.BASELINE_0
-        climate_zone = rmd_baseline["weather"]["climate_zone"]
+        climate_zone = rmd_baseline["ruleset_model_descriptions"][0]["weather"][
+            "climate_zone"
+        ]
+
+        # TODO It is determined later we will modify this function to RMD level -
+        # The implementation is temporary
         bldg_scc_wwr_ratio_dict = {}
         for building_b in find_all(self.list_path, rmd_baseline):
             bldg_scc_wwr_ratio_dict[
                 building_b["id"]
             ] = get_building_scc_window_wall_ratios_dict(climate_zone, building_b)
+
         return {
-            "climate_zone": rmd_baseline["weather"]["climate_zone"],
+            "climate_zone": climate_zone,
             "bldg_scc_wwr_ratio_dict": bldg_scc_wwr_ratio_dict,
         }
 
@@ -74,55 +79,78 @@ class PRM9012019Rule57c26(RuleDefinitionListIndexedBase):
             building_b = context.BASELINE_0
             climate_zone = data["climate_zone"]
             bldg_scc_wwr_ratio = data["bldg_scc_wwr_ratio_dict"][building_b["id"]]
+            # manual flag required?
             manual_check_required_flag = bldg_scc_wwr_ratio[
                 SCC.EXTERIOR_MIXED
             ] > 0 and not (
-                table_G34_lookup(
-                    climate_zone, SCC.EXTERIOR_RESIDENTIAL, "VERTICAL GLAZING", wwr=0.1
-                )["u_value"]
-                == table_G34_lookup(
-                    climate_zone, SCC.EXTERIOR_RESIDENTIAL, "VERTICAL GLAZING", wwr=10.1
-                )["u_value"]
-                == table_G34_lookup(
-                    climate_zone, SCC.EXTERIOR_RESIDENTIAL, "VERTICAL GLAZING", wwr=20.1
-                )["u_value"]
-                == table_G34_lookup(
-                    climate_zone, SCC.EXTERIOR_RESIDENTIAL, "VERTICAL GLAZING", wwr=30.1
-                )["u_value"]
-                and table_G34_lookup(
-                    climate_zone,
-                    SCC.EXTERIOR_NON_RESIDENTIAL,
-                    "VERTICAL GLAZING",
-                    wwr=0.1,
-                )["u_value"]
-                == table_G34_lookup(
-                    climate_zone,
-                    SCC.EXTERIOR_NON_RESIDENTIAL,
-                    "VERTICAL GLAZING",
-                    wwr=10.1,
-                )["u_value"]
-                == table_G34_lookup(
-                    climate_zone,
-                    SCC.EXTERIOR_NON_RESIDENTIAL,
-                    "VERTICAL GLAZING",
-                    wwr=20.1,
-                )["u_value"]
-                == table_G34_lookup(
-                    climate_zone,
-                    SCC.EXTERIOR_NON_RESIDENTIAL,
-                    "VERTICAL GLAZING",
-                    wwr=30.1,
-                )["u_value"]
-                and table_G34_lookup(
-                    climate_zone, SCC.EXTERIOR_RESIDENTIAL, "VERTICAL GLAZING", wwr=0.1
-                )["u_value"]
-                == table_G34_lookup(
-                    climate_zone,
-                    SCC.EXTERIOR_NON_RESIDENTIAL,
-                    "VERTICAL GLAZING",
-                    wwr=0.1,
-                )["u_value"]
+                (
+                    table_G34_lookup(
+                        climate_zone,
+                        SCC.EXTERIOR_RESIDENTIAL,
+                        "VERTICAL GLAZING",
+                        wwr=0.1,
+                    )["u_value"]
+                    == table_G34_lookup(
+                        climate_zone,
+                        SCC.EXTERIOR_RESIDENTIAL,
+                        "VERTICAL GLAZING",
+                        wwr=10.1,
+                    )["u_value"]
+                    == table_G34_lookup(
+                        climate_zone,
+                        SCC.EXTERIOR_RESIDENTIAL,
+                        "VERTICAL GLAZING",
+                        wwr=20.1,
+                    )["u_value"]
+                    == table_G34_lookup(
+                        climate_zone,
+                        SCC.EXTERIOR_RESIDENTIAL,
+                        "VERTICAL GLAZING",
+                        wwr=30.1,
+                    )["u_value"]
+                )
+                and (
+                    table_G34_lookup(
+                        climate_zone,
+                        SCC.EXTERIOR_NON_RESIDENTIAL,
+                        "VERTICAL GLAZING",
+                        wwr=0.1,
+                    )["u_value"]
+                    == table_G34_lookup(
+                        climate_zone,
+                        SCC.EXTERIOR_NON_RESIDENTIAL,
+                        "VERTICAL GLAZING",
+                        wwr=10.1,
+                    )["u_value"]
+                    == table_G34_lookup(
+                        climate_zone,
+                        SCC.EXTERIOR_NON_RESIDENTIAL,
+                        "VERTICAL GLAZING",
+                        wwr=20.1,
+                    )["u_value"]
+                    == table_G34_lookup(
+                        climate_zone,
+                        SCC.EXTERIOR_NON_RESIDENTIAL,
+                        "VERTICAL GLAZING",
+                        wwr=30.1,
+                    )["u_value"]
+                )
+                and (
+                    table_G34_lookup(
+                        climate_zone,
+                        SCC.EXTERIOR_RESIDENTIAL,
+                        "VERTICAL GLAZING",
+                        wwr=0.1,
+                    )["u_value"]
+                    == table_G34_lookup(
+                        climate_zone,
+                        SCC.EXTERIOR_NON_RESIDENTIAL,
+                        "VERTICAL GLAZING",
+                        wwr=0.1,
+                    )["u_value"]
+                )
             )
+            # get standard code data
             target_u_factor_mix = (
                 table_G34_lookup(
                     climate_zone,
@@ -163,7 +191,9 @@ class PRM9012019Rule57c26(RuleDefinitionListIndexedBase):
                 if bldg_scc_wwr_ratio[SCC.SEMI_EXTERIOR] > 0
                 else ZERO.U_FACTOR
             )
+
             return {
+                # TODO this function will likely need to be revised to RMD level later.
                 "scc_dict_b": get_surface_conditioning_category_dict(
                     climate_zone, building_b
                 ),
@@ -178,8 +208,9 @@ class PRM9012019Rule57c26(RuleDefinitionListIndexedBase):
             surface_b = context_item.BASELINE_0
             scc_dict_b = data["scc_dict_b"]
             return (
-                get_opaque_surface_type(surface_b) == OST.ABOVE_GRADE_WALL
-                and scc_dict_b[surface_b["id"]] != SCC.UNREGULATED
+                (get_opaque_surface_type(surface_b) == OST.ABOVE_GRADE_WALL)
+                and (scc_dict_b[surface_b["id"]] != SCC.UNREGULATED)
+                and len(surface_b.get("subsurfaces", [])) > 0
             )
 
         class AboveGradeWallRule(RuleDefinitionListIndexedBase):
@@ -208,6 +239,7 @@ class PRM9012019Rule57c26(RuleDefinitionListIndexedBase):
                 scc_dict_b = data["scc_dict_b"]
                 manual_check_required_flag = data["manual_check_required_flag"]
                 surface_b = context.BASELINE_0
+                # if exterior mixed and required manual check
                 return (
                     scc_dict_b[surface_b["id"]] == SCC.EXTERIOR_MIXED
                     and manual_check_required_flag
@@ -258,6 +290,7 @@ class PRM9012019Rule57c26(RuleDefinitionListIndexedBase):
                         assert (
                             False
                         ), f"Severe Error: No matching surface category for: {scc}"
+
                     return {
                         "target_u_factor": CalcQ(
                             "thermal_transmittance", target_u_factor

@@ -13,12 +13,11 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.3"
         },
         "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -91,7 +90,7 @@
         "Section": 19,
         "Rule": 8,
         "Test": "b",
-        "test_description": "The project has one building segment with one 1,000 ft2 zone served by a baseline system type 3. The system has a minimum outdoor airflow of 2,800 cfm and 20 occupants. The baseline system is not modeled with demand control ventilation.",
+        "test_description": "The project has one building segment with one 1,000 ft2 zone served by a baseline system type 3. The system has a minimum outdoor airflow of 3,500 cfm and 150 occupants. The baseline system is not modeled with demand control ventilation.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-8",
@@ -101,12 +100,11 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.3"
         },
         "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -130,7 +128,7 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "number_of_occupants": 20,
+                                                        "number_of_occupants": 150,
                                                         "floor_area": 92.90303999999999
                                                     }
                                                 ]
@@ -160,7 +158,7 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ],
-                                                    "minimum_outdoor_airflow": 1321.4528409599995,
+                                                    "minimum_outdoor_airflow": 1651.8160511999993,
                                                     "demand_control_ventilation_control": "NONE"
                                                 }
                                             }

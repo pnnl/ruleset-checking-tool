@@ -46,15 +46,20 @@ class PRM9012019Rule71o81(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1.3.11 Heat Rejection (System 7, 8, 11, 12 and 13)",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].heat_rejections[*]",
-            required_fields={"$": ["ruleset_model_descriptions", "weather"]},
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
+            required_fields={
+                "$": ["ruleset_model_descriptions"],
+            },
         )
 
     def is_applicable(self, context, data=None):
         rmd_b = context.BASELINE_0
-        assert_(rmd_b, "ruleset_model_instance list is empty")
+        assert_(
+            rmd_b,
+            "ruleset_model_instance list is empty",
+        )
         rmd_b = rmd_b["ruleset_model_descriptions"][0]
         baseline_system_types_dict = get_baseline_system_types(rmd_b)
+        # create a list containing all HVAC systems that are modeled in the rmd_b
         available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict
@@ -62,10 +67,15 @@ class PRM9012019Rule71o81(RuleDefinitionListIndexedBase):
         ]
         return any(
             [
-                (available_type in APPLICABLE_SYS_TYPES)
+                available_type in APPLICABLE_SYS_TYPES
                 for available_type in available_type_list
             ]
         )
+
+    def create_data(self, context, data=None):
+        rpd_b = context.BASELINE_0
+        climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
+        return {"climate_zone": climate_zone}
 
     class HeatRejectionRule(RuleDefinitionBase):
         def __init__(self):
@@ -73,17 +83,24 @@ class PRM9012019Rule71o81(RuleDefinitionListIndexedBase):
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
-                required_fields={"$": ["leaving_water_setpoint_temperature"]},
+                required_fields={
+                    "$": ["leaving_water_setpoint_temperature"],
+                },
                 precision={
-                    "tower_leaving_temperature_b": {"precision": 0.1, "unit": "K"}
+                    "tower_leaving_temperature_b": {
+                        "precision": 0.1,
+                        "unit": "K",
+                    },
                 },
             )
 
         def get_calc_vals(self, context, data=None):
             heat_rejection_b = context.BASELINE_0
+
             tower_leaving_temperature_b = table_3_1_3_11_lookup(data["climate_zone"])[
                 "leaving_water_temperature"
             ]
+
             leaving_water_setpoint_temperature_b = heat_rejection_b[
                 "leaving_water_setpoint_temperature"
             ]
@@ -101,6 +118,7 @@ class PRM9012019Rule71o81(RuleDefinitionListIndexedBase):
             leaving_water_setpoint_temperature_b = calc_vals[
                 "leaving_water_setpoint_temperature_b"
             ]
+
             return self.precision_comparison["tower_leaving_temperature_b"](
                 tower_leaving_temperature_b.to(ureg.kelvin),
                 leaving_water_setpoint_temperature_b.to(ureg.kelvin),
@@ -111,6 +129,7 @@ class PRM9012019Rule71o81(RuleDefinitionListIndexedBase):
             leaving_water_setpoint_temperature_b = calc_vals[
                 "leaving_water_setpoint_temperature_b"
             ]
+
             return std_equal(
                 tower_leaving_temperature_b.to(ureg.kelvin),
                 leaving_water_setpoint_temperature_b.to(ureg.kelvin),

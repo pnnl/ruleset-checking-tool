@@ -45,7 +45,14 @@ TEST_RPD_P_HEATING_SYSTEM = {
             "type": "PROPOSED",
         }
     ],
-    "data_timestamp": "2024-02-12T09:00Z",
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
 }
 
 TEST_RPD_U_HEATING_SYSTEM = {
@@ -88,7 +95,14 @@ TEST_RPD_U_HEATING_SYSTEM = {
             "type": "USER",
         }
     ],
-    "data_timestamp": "2024-02-12T09:00Z",
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
 }
 
 TEST_RPD_P_PREHEAT_SYSTEM = {
@@ -132,7 +146,14 @@ TEST_RPD_P_PREHEAT_SYSTEM = {
             "type": "PROPOSED",
         }
     ],
-    "data_timestamp": "2024-02-12T09:00Z",
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
 }
 
 TEST_RPD_U_PREHEAT_SYSTEM = {
@@ -175,7 +196,14 @@ TEST_RPD_U_PREHEAT_SYSTEM = {
             "type": "USER",
         }
     ],
-    "data_timestamp": "2024-02-12T09:00Z",
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
 }
 
 TEST_RMD_P_HEATING_SYSTEM = quantify_rmd(TEST_RPD_P_HEATING_SYSTEM)[

@@ -13,7 +13,6 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_uses_associated_wit
 )
 from rct229.utils.jsonpath_utils import find_all
 
-
 APPLICABILITY_MSG = "This building has service water heating loads. Confirm that service water heating energy consumption is calculated explicitly based upon the volume of service water heating required and the entering makeup water and leaving service water heating temperatures.  Entering water temperatures shall be estimated based upon the location. Leaving temperatures shall be based upon the end-use requirements."
 
 
@@ -35,13 +34,6 @@ class PRM9012019Rule51s51(RuleDefinitionListIndexedBase):
             standard_section="Table G3.1 #11, baseline column, (e)",
             is_primary_rule=False,
             list_path="ruleset_model_descriptions[0]",
-            required_fields={
-                "$": ["calendar"],
-                "calendar": ["is_leap_year"],
-            },
-            data_items={
-                "is_leap_year": (BASELINE_0, "calendar/is_leap_year"),
-            },
         )
 
     class RMDRule(RuleDefinitionListIndexedBase):
@@ -53,11 +45,15 @@ class PRM9012019Rule51s51(RuleDefinitionListIndexedBase):
                 index_rmd=BASELINE_0,
                 each_rule=PRM9012019Rule51s51.RMDRule.BuildingRule(),
                 list_path="$.buildings[*]",
+                required_fields={
+                    "$": ["calendar"],
+                    "calendar": ["is_leap_year"],
+                },
             )
 
         def create_data(self, context, data):
             rmd_b = context.BASELINE_0
-            is_leap_year_b = data["is_leap_year"]
+            is_leap_year_b = rmd_b["calendar"]["is_leap_year"]
             energy_required_to_heat_swh_use_dict = {}
             service_water_heating_use_dict = {}
 
