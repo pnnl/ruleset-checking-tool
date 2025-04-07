@@ -31,11 +31,6 @@ class PRM9012019Rule96q77(RuleDefinitionListIndexedBase):
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            required_fields={
-                "$": ["weather", "calendar"],
-                "weather": ["climate_zone"],
-                "calendar": ["is_leap_year"],
-            },
             each_rule=PRM9012019Rule96q77.RuleSetModelInstanceRule(),
             index_rmd=BASELINE_0,
             id="4-1",
