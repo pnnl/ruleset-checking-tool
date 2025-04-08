@@ -150,9 +150,20 @@ class PRM9012019Rule49y39(RuleDefinitionListIndexedBase):
                     expected_swh_equip_type_list.append(
                         table_g3_1_2_lookup(swh_bat_b)["baseline_heating_method"]
                     )
-                    swh_equip_type_list_b.append(
+
+                    if (
                         swh_equip_type_b[swh_heating_equipment_id]
-                    )
+                        == "PROPANE_INSTANTANEOUS"
+                    ):
+                        swh_equip_type_list_b.append("GAS_INSTANTANEOUS_WATER_HEATER")
+                    elif (
+                        swh_equip_type_b[swh_heating_equipment_id] == "PROPANE_STORAGE"
+                    ):
+                        swh_equip_type_list_b.append("GAS_STORAGE_WATER_HEATER")
+                    else:
+                        swh_equip_type_list_b.append(
+                            swh_equip_type_b[swh_heating_equipment_id]
+                        )
 
                 return {
                     "expected_swh_equip_type_list": expected_swh_equip_type_list,
