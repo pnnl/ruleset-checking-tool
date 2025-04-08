@@ -53401,7 +53401,7 @@
         "Test": "d",
         "test_description": "A building has one building segment and two zones. Zones are served by single-zone HVAC systems in both the baseline and proposed ruleset model descriptions but fan schedules do not match between the baseline and proposed ruleset model descriptions.",
         "expected_rule_outcome": "fail",
-        "expected_raised_message_includes": "There is a fan schedule mismatch between the baseline and proposed for the hvac system(s) serving this zone. Fail unless table G3.1 section 4 baseline column exceptions #1, #2 or #3 is applicable.",
+        "expected_raised_message_includes": "There is a fan schedule mismatch between the baseline and proposed RMDs for the hvac system(s) serving this zone. Fail unless table G3.1 section 4 baseline column exceptions #1, #2 or #3 is applicable.",
         "standard": {
             "rule_id": "4-11",
             "ruleset_reference": "Table G3.1 Section 4 Exception 3",
