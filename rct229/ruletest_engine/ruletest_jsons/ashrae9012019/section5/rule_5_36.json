@@ -8,7 +8,7 @@
         "standard": {
             "rule_id": "5-36",
             "ruleset_reference": "Table G3.1(5) Proposed Building Performance (b)",
-            "rule_description": "The air leakage rate in unconditioned and unenclosed spaces must be the same in the baseline and proposed design",
+            "rule_description": "The air leakage rate in unconditioned and unenclosed spaces must be the same in the baseline and proposed design.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
@@ -129,7 +129,7 @@
         "standard": {
             "rule_id": "5-36",
             "ruleset_reference": "Table G3.1(5) Proposed Building Performance (b)",
-            "rule_description": "The air leakage rate in unconditioned and unenclosed spaces must be the same in the baseline and proposed design",
+            "rule_description": "The air leakage rate in unconditioned and unenclosed spaces must be the same in the baseline and proposed design.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",

@@ -8,7 +8,7 @@
         "standard": {
             "rule_id": "21-6",
             "ruleset_reference": "G3.1.3.2",
-            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1,5,7,11 and 12), and is modeled with two boilers, each boiler shall be staged based on load.",
+            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1, 5, 7, 11 and 12), and is modeled with two boilers, each boiler shall be staged based on load.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -171,7 +171,7 @@
         "standard": {
             "rule_id": "21-6",
             "ruleset_reference": "G3.1.3.2",
-            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1,5,7,11 and 12), and is modeled with two boilers, each boiler shall be staged based on load.",
+            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1, 5, 7, 11 and 12), and is modeled with two boilers, each boiler shall be staged based on load.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -334,7 +334,7 @@
         "standard": {
             "rule_id": "21-6",
             "ruleset_reference": "G3.1.3.2",
-            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1,5,7,11 and 12), and is modeled with two boilers, each boiler shall be staged based on load.",
+            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1, 5, 7, 11 and 12), and is modeled with two boilers, each boiler shall be staged based on load.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -485,7 +485,7 @@
         "standard": {
             "rule_id": "21-6",
             "ruleset_reference": "G3.1.3.2",
-            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1,5,7,11 and 12), and is modeled with two boilers, each boiler shall be staged based on load.",
+            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1, 5, 7, 11 and 12), and is modeled with two boilers, each boiler shall be staged based on load.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -597,7 +597,7 @@
         "standard": {
             "rule_id": "21-6",
             "ruleset_reference": "G3.1.3.2",
-            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1,5,7,11 and 12), and is modeled with two boilers, each boiler shall be staged based on load.",
+            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1, 5, 7, 11 and 12), and is modeled with two boilers, each boiler shall be staged based on load.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -709,7 +709,7 @@
         "standard": {
             "rule_id": "21-6",
             "ruleset_reference": "G3.1.3.2",
-            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1,5,7,11 and 12), and is modeled with two boilers, each boiler shall be staged based on load.",
+            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1, 5, 7, 11 and 12), and is modeled with two boilers, each boiler shall be staged based on load.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -806,7 +806,7 @@
         "standard": {
             "rule_id": "21-6",
             "ruleset_reference": "G3.1.3.2",
-            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1,5,7,11 and 12), and is modeled with two boilers, each boiler shall be staged based on load.",
+            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1, 5, 7, 11 and 12), and is modeled with two boilers, each boiler shall be staged based on load.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
