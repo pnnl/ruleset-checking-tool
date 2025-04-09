@@ -54,6 +54,14 @@ class Section22Rule15(RuleDefinitionListIndexedBase):
                         "precision": 0.01,
                         "unit": "K",
                     },
+                    "design_wetbulb_temp_b_low_limit": {
+                        "precision": 0.01,
+                        "unit": "K",
+                    },
+                    "design_wetbulb_temp_b_high_limit": {
+                        "precision": 0.01,
+                        "unit": "K",
+                    },
                 },
             )
 
@@ -65,7 +73,18 @@ class Section22Rule15(RuleDefinitionListIndexedBase):
 
             return (
                 heat_rejection_loop_b in heat_rejection_loop_ids_b
-                and TEMP_LOW_LIMIT_55F <= design_wetbulb_temp_b <= TEMP_HIGH_LIMIT_90F
+                and (
+                    design_wetbulb_temp_b > TEMP_LOW_LIMIT_55F
+                    or self.precision_comparison["design_wetbulb_temp_b_low_limit"](
+                        design_wetbulb_temp_b, TEMP_LOW_LIMIT_55F
+                    )
+                )
+                and (
+                    design_wetbulb_temp_b < TEMP_HIGH_LIMIT_90F
+                    or self.precision_comparison["design_wetbulb_temp_b_high_limit"](
+                        design_wetbulb_temp_b, TEMP_HIGH_LIMIT_90F
+                    )
+                )
             )
 
         def get_calc_vals(self, context, data=None):

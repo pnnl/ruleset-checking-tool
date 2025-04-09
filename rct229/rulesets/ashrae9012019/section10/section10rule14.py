@@ -133,6 +133,12 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
                         "efficiency_metric_values",
                     ],
                 },
+                precision={
+                    "total_space_lpd_b": {
+                        "precision": 1,
+                        "unit": "W/m2",
+                    },
+                },
             )
 
         def get_calc_vals(self, context, data=None):

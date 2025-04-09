@@ -54,7 +54,7 @@ class Section16Rule6(RuleDefinitionListIndexedBase):
                 },
                 precision={
                     "elevator_cab_ventilation_fan_power_b/elevator_cab_ventilation_fan_flow_b": {
-                        "precision": 0.01,
+                        "precision": 0.1,
                         "unit": "W/cfm",
                     }
                 },

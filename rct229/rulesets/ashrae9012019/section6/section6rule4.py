@@ -87,6 +87,12 @@ class Section6Rule4(RuleDefinitionListIndexedBase):
                         rmds_used=produce_ruleset_model_description(
                             USER=False, BASELINE_0=True, PROPOSED=True
                         ),
+                        precision={
+                            "total_space_lpd_b": {
+                                "precision": 1,
+                                "unit": "W/m2",
+                            },
+                        },
                     )
 
                 def get_calc_vals(self, context, data=None):
@@ -142,7 +148,7 @@ class Section6Rule4(RuleDefinitionListIndexedBase):
                                 LightingStatusType.AS_DESIGNED_OR_AS_EXISTING,
                                 LightingStatusType.NOT_YET_DESIGNED_OR_MATCH_TABLE_9_5_1,
                             ]
-                            and self.precision_comparison(
+                            and self.precision_comparison["total_space_lpd_b"](
                                 total_space_lpd_b, lpd_allowance_b
                             )
                         )

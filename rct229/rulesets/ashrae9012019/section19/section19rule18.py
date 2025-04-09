@@ -141,7 +141,7 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
                 },
                 precision={
                     "total_fan_power_b": {
-                        "precision": 10,
+                        "precision": 1,
                         "unit": "W",
                     },
                 },
