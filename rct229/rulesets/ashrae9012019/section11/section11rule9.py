@@ -93,9 +93,11 @@ class Section11Rule9(RuleDefinitionListIndexedBase):
 
                 return all(
                     [
-                        True
-                        if service_water_heating_uses_dict_b[swh_use_id] > 0.0
-                        else False
+                        (
+                            True
+                            if service_water_heating_uses_dict_b[swh_use_id] > 0.0
+                            else False
+                        )
                         for swh_use_id in swh_bat_id_list_b
                     ]
                 )
