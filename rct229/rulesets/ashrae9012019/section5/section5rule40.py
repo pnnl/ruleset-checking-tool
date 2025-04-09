@@ -16,6 +16,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_ca
 )
 from rct229.utils.jsonpath_utils import find_one
 from rct229.schema.schema_enums import SchemaEnums
+from rct229.utils.std_comparisons import std_equal
 
 EXTERIOR = SchemaEnums.schema_enums["SurfaceAdjacencyOptions"].EXTERIOR
 
