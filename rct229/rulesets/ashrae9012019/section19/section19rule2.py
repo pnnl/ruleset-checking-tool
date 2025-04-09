@@ -56,6 +56,7 @@ class PRM9012019Rule93f21(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data):
         rmd_b = context.BASELINE_0
+
         HW_fluid_loop_list = []
         CW_fluid_loop_list = []
         CHW_fluid_loop_list = []
@@ -75,6 +76,7 @@ class PRM9012019Rule93f21(RuleDefinitionListIndexedBase):
                         "hot_water_loop",
                     )
                 )
+
             if is_hvac_sys_preheating_type_fluid_loop(
                 rmd_b, hvac_id_b
             ) and is_hvac_sys_preheat_fluid_loop_attached_to_boiler(rmd_b, hvac_id_b):
@@ -86,6 +88,7 @@ class PRM9012019Rule93f21(RuleDefinitionListIndexedBase):
                         "hot_water_loop",
                     )
                 )
+
             if is_hvac_sys_cooling_type_fluid_loop(
                 rmd_b, hvac_id_b
             ) and is_hvac_sys_fluid_loop_attached_to_chiller(rmd_b, hvac_id_b):
@@ -96,6 +99,7 @@ class PRM9012019Rule93f21(RuleDefinitionListIndexedBase):
                     "chilled_water_loop",
                 )
                 CHW_fluid_loop_list.append(chilled_water_loop_b)
+
                 if chilled_water_loop_b in find_all(
                     f'$.fluid_loops[*][?(@.cooling_loop = "{FLUID_LOOP.COOLING}")]',
                     rmd_b,
@@ -108,36 +112,53 @@ class PRM9012019Rule93f21(RuleDefinitionListIndexedBase):
                         ),
                         rmd_b,
                     )
+
                 else:
+                    # when the fluid loop is the secondary loop, find the primary loop and add its id to the CHW_fluid_loop_list
+                    # find out the primary loop from the secondary loop
                     child_loop_id_b = find_exactly_one_child_loop(
                         rmd_b, chilled_water_loop_b
                     )["id"]
                     primary_loop_id_b = find_one_with_field_value(
-                        "$.fluid_loops[*]", "child_loops[*].id", child_loop_id_b, rmd_b
+                        "$.fluid_loops[*]",
+                        "child_loops[*].id",
+                        child_loop_id_b,
+                        rmd_b,
                     )["id"]
                     CHW_fluid_loop_list.append(primary_loop_id_b)
+
                     chiller_b = find_one_with_field_value(
-                        "$.chillers[*]", "cooling_loop", primary_loop_id_b, rmd_b
+                        "$.chillers[*]",
+                        "cooling_loop",
+                        primary_loop_id_b,
+                        rmd_b,
                     )
+
                 if chiller_b.get("condensing_loop"):
                     CW_fluid_loop_list.append(chiller_b["condensing_loop"])
+
         for CHW_child_loop in find_all(
             "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].cooling_system.chilled_water_loop",
             rmd_b,
         ):
             CHW_fluid_loop_list.append(CHW_child_loop)
+
+        # extend `HW_fluid_loop_list` with terminals
         HW_fluid_loop_list.extend(
             [
                 terminal["heating_from_loop"]
                 for terminal in find_all(
                     "$.buildings[*].building_segments[*].zones[*].terminals[*]", rmd_b
                 )
-                if terminal.get("heating_source") == HEATING_SOURCE.HOT_WATER
-                and are_all_terminal_heating_loops_attached_to_boiler(
-                    rmd_b, [terminal["id"]]
+                if (
+                    terminal.get("heating_source") == HEATING_SOURCE.HOT_WATER
+                    and are_all_terminal_heating_loops_attached_to_boiler(
+                        rmd_b, [terminal["id"]]
+                    )
                 )
             ]
         )
+
         return {
             "HW_fluid_loop_list": list(set(HW_fluid_loop_list)),
             "CHW_fluid_loop_list": list(set(CHW_fluid_loop_list)),
@@ -150,18 +171,21 @@ class PRM9012019Rule93f21(RuleDefinitionListIndexedBase):
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
-                required_fields={"$": ["type"]},
+                required_fields={
+                    "$": ["type"],
+                },
             )
 
         def is_applicable(self, context, data=None):
             fluid_loop_b = context.BASELINE_0
             fluid_loop_id_b = fluid_loop_b["id"]
+
             HW_fluid_loop_list = data["HW_fluid_loop_list"]
             CHW_fluid_loop_list = data["CHW_fluid_loop_list"]
             CW_fluid_loop_list = data["CW_fluid_loop_list"]
-            return (
-                fluid_loop_id_b
-                in HW_fluid_loop_list + CHW_fluid_loop_list + CW_fluid_loop_list
+
+            return fluid_loop_id_b in (
+                HW_fluid_loop_list + CHW_fluid_loop_list + CW_fluid_loop_list
             )
 
         def get_calc_vals(self, context, data=None):
@@ -169,11 +193,13 @@ class PRM9012019Rule93f21(RuleDefinitionListIndexedBase):
             HW_fluid_loop_list = data["HW_fluid_loop_list"]
             CHW_fluid_loop_list = data["CHW_fluid_loop_list"]
             CW_fluid_loop_list = data["CW_fluid_loop_list"]
+
             is_sized_using_coincident_load = False
             if (
                 fluid_loop_b["type"] == FLUID_LOOP.COOLING
                 and fluid_loop_b["id"] in CHW_fluid_loop_list
-                or fluid_loop_b["type"] == FLUID_LOOP.CONDENSER
+            ) or (
+                fluid_loop_b["type"] == FLUID_LOOP.CONDENSER
                 and fluid_loop_b["id"] in CW_fluid_loop_list
             ):
                 is_sized_using_coincident_load = getattr_(
@@ -192,8 +218,10 @@ class PRM9012019Rule93f21(RuleDefinitionListIndexedBase):
                     "heating_design_and_control",
                     "is_sized_using_coincident_load",
                 )
+
             return {"is_sized_using_coincident_load": is_sized_using_coincident_load}
 
         def rule_check(self, context, calc_vals=None, data=None):
             is_sized_using_coincident_load = calc_vals["is_sized_using_coincident_load"]
+
             return is_sized_using_coincident_load

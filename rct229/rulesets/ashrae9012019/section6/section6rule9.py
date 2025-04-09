@@ -13,7 +13,7 @@ from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all, find_exactly_one_with_field_value
 from rct229.utils.pint_utils import ZERO
 
-FLOOR_AREA_LIMIT = 5000 * ureg("ft2")
+FLOOR_AREA_LIMIT = 5000 * ureg("ft2")  # square foot
 
 
 class PRM9012019Rule22c86(RuleDefinitionListIndexedBase):
@@ -27,7 +27,8 @@ class PRM9012019Rule22c86(RuleDefinitionListIndexedBase):
             each_rule=PRM9012019Rule22c86.RulesetModelInstanceRule(),
             index_rmd=PROPOSED,
             id="6-9",
-            description="Proposed building is modeled with other programmable lighting controls through a 10% schedule reduction in buildings less than 5,000sq.ft.",
+            description="Proposed building is modeled with other programmable lighting controls through a 10% "
+            "schedule reduction in buildings less than 5,000sq.ft.",
             ruleset_section_title="Lighting",
             standard_section="Section G3.1-6(i) Modeling Requirements for the Proposed design",
             is_primary_rule=True,
@@ -87,7 +88,7 @@ class PRM9012019Rule22c86(RuleDefinitionListIndexedBase):
                         ),
                         "schedule",
                         "hourly_values",
-                    )
+                    ),
                 }
 
             class ZoneRule(RuleDefinitionListIndexedBase):
@@ -108,7 +109,7 @@ class PRM9012019Rule22c86(RuleDefinitionListIndexedBase):
                     zone_p = context.PROPOSED
                     return {
                         "avg_space_height": zone_p.get("volume", ZERO.VOLUME)
-                        / sum(find_all("$.spaces[*].floor_area", zone_p), ZERO.AREA)
+                        / sum(find_all("$.spaces[*].floor_area", zone_p), ZERO.AREA),
                     }
 
                 class SpaceRule(RuleDefinitionBase):
@@ -119,7 +120,7 @@ class PRM9012019Rule22c86(RuleDefinitionListIndexedBase):
                         ).__init__(
                             rmds_used=produce_ruleset_model_description(
                                 USER=False, BASELINE_0=True, PROPOSED=True
-                            )
+                            ),
                         )
 
                     def get_calc_vals(self, context, data=None):
@@ -130,6 +131,7 @@ class PRM9012019Rule22c86(RuleDefinitionListIndexedBase):
                         schedules_p = data["schedules_p"]
                         building_open_schedule_p = data["building_open_schedule_p"]
                         is_leap_year = data["is_leap_year"]
+
                         normalized_schedule_b = normalize_interior_lighting_schedules(
                             space_b,
                             avg_space_height,
@@ -154,6 +156,7 @@ class PRM9012019Rule22c86(RuleDefinitionListIndexedBase):
                                 space_p,
                             )
                         )
+
                         return {
                             "daylight_control": daylight_control,
                             "total_hours_compared": schedule_comparison_result_dictionary[
@@ -175,7 +178,11 @@ class PRM9012019Rule22c86(RuleDefinitionListIndexedBase):
                         self, context, calc_vals=None, data=None
                     ):
                         elfh_differeces = calc_vals["eflh_difference"]
-                        return f"Space models at least one daylight control using schedule. Verify if other programmable lighting control is modeled correctly using schedule. Lighting schedule EFLH in P-RMD is {elfh_differeces} of that in B-RMD. "
+                        return (
+                            f"Space models at least one daylight control using schedule. Verify if other "
+                            f"programmable lighting control is modeled correctly using schedule. Lighting schedule "
+                            f"EFLH in P-RMD is {elfh_differeces} of that in B-RMD. "
+                        )
 
                     def rule_check(self, context, calc_vals=None, data=None):
                         total_hours_compared = calc_vals["total_hours_compared"]

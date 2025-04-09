@@ -44,6 +44,7 @@ class PRM9012019Rule93n40(RuleDefinitionListIndexedBase):
             service_water_heating_uses_dict_b = {
                 swh_use["id"]: swh_use.get("use", 0.0)
                 for swh_use in find_all(
+                    # TODO: Moving the `service_water_heating_uses` key to the `building_segments` level is being discussed. If the `service_water_heating_uses` key is moved, this function needs to be revisited.
                     "$.buildings[*].building_segments[*].zones[*].spaces[*].service_water_heating_uses[*]",
                     rmd_b,
                 )
