@@ -43,6 +43,7 @@ class PRM9012019Rule45j93(RuleDefinitionListIndexedBase):
 
         def is_applicable(self, context, data=None):
             hvac_b = context.BASELINE_0
+
             return (
                 hvac_b.get("fan_system")
                 and find_one("$.fan_system.air_energy_recovery", hvac_b)
@@ -53,6 +54,7 @@ class PRM9012019Rule45j93(RuleDefinitionListIndexedBase):
         def get_calc_vals(self, context, data=None):
             hvac_b = context.BASELINE_0
             energy_recovery_b = find_one("$.fan_system.air_energy_recovery", hvac_b)
+
             sensible_eff_b = getattr_(
                 energy_recovery_b,
                 "air_energy_recovery",
@@ -70,6 +72,7 @@ class PRM9012019Rule45j93(RuleDefinitionListIndexedBase):
             hvac_min_oa_flow_b = getattr_(
                 hvac_b, "HVAC", "fan_system", "minimum_outdoor_airflow"
             )
+
             return {
                 "sensible_eff_b": sensible_eff_b,
                 "latent_eff_b": latent_eff_b,
@@ -84,6 +87,7 @@ class PRM9012019Rule45j93(RuleDefinitionListIndexedBase):
             ERV_OA_airflow_b = calc_vals["ERV_OA_airflow_b"]
             ERV_EA_airflow_b = calc_vals["ERV_EA_airflow_b"]
             hvac_min_oa_flow_b = calc_vals["hvac_min_oa_flow_b"]
+
             return (
                 REQ_SENSIBLE_EFFECTIVENESS == sensible_eff_b
                 and REQ_LATENT_EFFECTIVENESS == latent_eff_b
@@ -94,9 +98,14 @@ class PRM9012019Rule45j93(RuleDefinitionListIndexedBase):
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
             hvac_b = context.BASELINE_0
             hvac_id_b = hvac_b["id"]
+
             sensible_eff_b = calc_vals["sensible_eff_b"]
             latent_eff_b = calc_vals["latent_eff_b"]
             ERV_OA_airflow_b = calc_vals["ERV_OA_airflow_b"]
             ERV_EA_airflow_b = calc_vals["ERV_EA_airflow_b"]
             hvac_min_oa_flow_b = calc_vals["hvac_min_oa_flow_b"]
-            return f"{hvac_id_b} was modeled with a design sensible effectiveness of {sensible_eff_b}, a design latent effectiveness of {latent_eff_b}, and with {ERV_OA_airflow_b.to(ureg.cfm).m} outdoor air cfm and with {ERV_EA_airflow_b.to(ureg.cfm).m} exhaust air cfm going through the energy recovery device. The HVAC system's minimum outside air CFM is {hvac_min_oa_flow_b.to(ureg.cfm).m}. Verify that it is equivalent to 50% enthalpy recovery ratio required by G3.1.2.10."
+
+            return (
+                f"{hvac_id_b} was modeled with a design sensible effectiveness of {sensible_eff_b}, a design latent effectiveness of {latent_eff_b}, and with {ERV_OA_airflow_b.to(ureg.cfm).m} outdoor air cfm and with {ERV_EA_airflow_b.to(ureg.cfm).m} exhaust air cfm going through the energy recovery device. "
+                f"The HVAC system's minimum outside air CFM is {hvac_min_oa_flow_b.to(ureg.cfm).m}. Verify that it is equivalent to 50% enthalpy recovery ratio required by G3.1.2.10."
+            )

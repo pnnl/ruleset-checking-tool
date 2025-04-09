@@ -36,6 +36,7 @@ class PRM9012019Rule92d16(RuleDefinitionListIndexedBase):
         heat_rejection_loop_ids_b = (
             get_heat_rejection_loops_connected_to_baseline_systems(rmd_b)
         )
+
         return {"heat_rejection_loop_ids_b": heat_rejection_loop_ids_b}
 
     class HeatRejectionRule(RuleDefinitionBase):
@@ -44,7 +45,9 @@ class PRM9012019Rule92d16(RuleDefinitionListIndexedBase):
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
-                required_fields={"$": ["fan_type", "type"]},
+                required_fields={
+                    "$": ["fan_type", "type"],
+                },
             )
 
         def is_applicable(self, context, data=None):
@@ -53,12 +56,14 @@ class PRM9012019Rule92d16(RuleDefinitionListIndexedBase):
                 heat_rejection_b, "heat_rejections", "loop"
             )
             heat_rejection_loop_ids_b = data["heat_rejection_loop_ids_b"]
+
             return heat_rejection_loop_b in heat_rejection_loop_ids_b
 
         def get_calc_vals(self, context, data=None):
             heat_rejection_b = context.BASELINE_0
             fan_type_b = heat_rejection_b["fan_type"]
             heat_rejection_type_b = heat_rejection_b["type"]
+
             return {
                 "fan_type_b": fan_type_b,
                 "heat_rejection_type_b": heat_rejection_type_b,
@@ -67,6 +72,7 @@ class PRM9012019Rule92d16(RuleDefinitionListIndexedBase):
         def rule_check(self, context, calc_vals=None, data=None):
             fan_type_b = calc_vals["fan_type_b"]
             heat_rejection_type_b = calc_vals["heat_rejection_type_b"]
+
             return (
                 fan_type_b == HEATREJECTIONFAN.AXIAL
                 and heat_rejection_type_b == HEATREJECTION.OPEN_CIRCUIT_COOLING_TOWER

@@ -6,7 +6,11 @@ from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.jsonpath_utils import find_all
 
 GENERAL_STATUS = SchemaEnums.schema_enums["StatusOptions"]
-APPLICABLE_GENERAL_STATUS = [GENERAL_STATUS.EXISTING, GENERAL_STATUS.ALTERED]
+
+APPLICABLE_GENERAL_STATUS = [
+    GENERAL_STATUS.EXISTING,
+    GENERAL_STATUS.ALTERED,
+]
 
 
 class PRM9012019Rule87g56(RuleDefinitionListIndexedBase):
@@ -18,7 +22,8 @@ class PRM9012019Rule87g56(RuleDefinitionListIndexedBase):
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             id="5-17",
-            description="The baseline fenestration area for an existing building shall equal the existing fenestration area prior to the proposed work.",
+            description="The baseline fenestration area for an existing building shall equal the existing "
+            "fenestration area prior to the proposed work.",
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(c) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=False,
@@ -32,25 +37,27 @@ class PRM9012019Rule87g56(RuleDefinitionListIndexedBase):
             super(PRM9012019Rule87g56.ZoneRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
-                )
+                ),
             )
 
         def is_applicable(self, context, data=None):
             zone_b = context.BASELINE_0
             return any(
                 [
-                    (status_type_b in APPLICABLE_GENERAL_STATUS)
+                    status_type_b in APPLICABLE_GENERAL_STATUS
                     for status_type_b in find_all("$.spaces[*].status_type", zone_b)
                 ]
             )
 
         def get_calc_vals(self, context, data=None):
             zone_b = context.BASELINE_0
+
             existing_or_altered_space_list_b = [
                 space_b["id"]
                 for space_b in find_all("$.spaces[*]", zone_b)
                 if space_b.get("status_type") in APPLICABLE_GENERAL_STATUS
             ]
+
             return {
                 "existing_or_altered_space_list_b": existing_or_altered_space_list_b
             }
@@ -59,10 +66,12 @@ class PRM9012019Rule87g56(RuleDefinitionListIndexedBase):
             existing_or_altered_space_list_b = calc_vals[
                 "existing_or_altered_space_list_b"
             ]
+
             return len(existing_or_altered_space_list_b) > 0
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
             existing_or_altered_space_list_b = calc_vals[
                 "existing_or_altered_space_list_b"
             ]
+
             return f"Part or all of spaces listed below is existing or altered. The baseline vertical fenestration area for a existing zone must equal to the fenestration area prior to the proposed scope of work. The baseline fenestration area in zone must be checked manually. ${existing_or_altered_space_list_b}"

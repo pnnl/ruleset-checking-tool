@@ -25,6 +25,7 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_11_1B,
     HVAC_SYS.SYS_12B,
 ]
+
 PumpSpeedControl = SchemaEnums.schema_enums["PumpSpeedControlOptions"]
 
 
@@ -50,16 +51,18 @@ class PRM9012019Rule47d94(RuleDefinitionListIndexedBase):
     def is_applicable(self, context, data=None):
         rmd_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmd_b)
+        # create a list contains all HVAC systems that are modeled in the rmd_b
         available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict
             if len(baseline_system_types_dict[hvac_type]) > 0
         ]
         primary_secondary_loop_dict = get_primary_secondary_loops_dict(rmd_b)
+
         return (
             any(
                 [
-                    (available_type in APPLICABLE_SYS_TYPES)
+                    available_type in APPLICABLE_SYS_TYPES
                     for available_type in available_type_list
                 ]
             )
@@ -71,6 +74,7 @@ class PRM9012019Rule47d94(RuleDefinitionListIndexedBase):
         primary_secondary_loops_dict = get_primary_secondary_loops_dict(rmd_b)
         return {"primary_secondary_loops_dict": primary_secondary_loops_dict}
 
+    # filter to only keep loops that have secondary loop(s)
     def list_filter(self, context_item, data):
         pump_b = context_item.BASELINE_0
         primary_loop_ids = data["primary_secondary_loops_dict"]
@@ -82,7 +86,9 @@ class PRM9012019Rule47d94(RuleDefinitionListIndexedBase):
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
-                required_fields={"$": ["speed_control"]},
+                required_fields={
+                    "$": ["speed_control"],
+                },
             )
 
         def get_calc_vals(self, context, data=None):

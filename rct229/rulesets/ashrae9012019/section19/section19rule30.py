@@ -36,6 +36,7 @@ class PRM9012019Rule95r49(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data):
         rmd_b = context.BASELINE_0
+
         return {"baseline_system_types_dict": get_baseline_system_types(rmd_b)}
 
     class HVACRule(PartialRuleDefinition):
@@ -43,13 +44,14 @@ class PRM9012019Rule95r49(RuleDefinitionListIndexedBase):
             super(PRM9012019Rule95r49.HVACRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
-                )
+                ),
             )
 
         def applicability_check(self, context, calc_vals, data):
             hvac_b = context.BASELINE_0
             hvac_b_id = hvac_b["id"]
             baseline_system_types_dict = data["baseline_system_types_dict"]
+
             system_type_b = next(
                 (
                     key
@@ -58,6 +60,7 @@ class PRM9012019Rule95r49(RuleDefinitionListIndexedBase):
                 ),
                 None,
             )
+
             return any(
                 [
                     baseline_system_type_compare(
@@ -70,4 +73,5 @@ class PRM9012019Rule95r49(RuleDefinitionListIndexedBase):
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
             hvac_b = context.BASELINE_0
             hvac_id_b = hvac_b["id"]
+
             return f"For {hvac_id_b} perform manual check that only the terminal-unit fan and reheat coil are being energized to meet the heating set point during unoccupied hours."

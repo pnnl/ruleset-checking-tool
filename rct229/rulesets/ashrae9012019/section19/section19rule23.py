@@ -15,6 +15,7 @@ VENTILATION_SPACE = SchemaEnums.schema_enums["VentilationSpaceOptions2019ASHRAE9
 LIGHTING_BUILDING_AREA = SchemaEnums.schema_enums[
     "LightingBuildingAreaOptions2019ASHRAE901T951TG38"
 ]
+
 find_schedule = curry(
     lambda schedules, schedule_id, schedule_type: getattr_(
         find_exactly_one(f'$[*][?(@.id="{schedule_id}")]', schedules),
@@ -35,7 +36,14 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
             each_rule=PRM9012019Rule60o81.RMDRule(),
             index_rmd=BASELINE_0,
             id="19-23",
-            description="For cooling sizing runs, schedules for internal loads, including those used for infiltration, occupants, lighting, gas and electricity using equipment, shall be equal to the highest hourly value used in the annual simulation runs and applied to the entire design day. For heating sizing runs, schedules for internal loads, including those used for occupants, lighting, gas and electricity using equipment, shall be equal to the lowest hourly value used in the annual simulation runs, and schedules for infiltration shall be equal to the highest hourly value used in the annual simulation runs and applied to the entire design day.",
+            description="For cooling sizing runs, schedules for internal loads, including those used for "
+            "infiltration, occupants, lighting, gas and electricity using equipment, shall be equal to "
+            "the highest hourly value used in the annual simulation runs and applied to the entire design "
+            "day. For heating sizing runs, schedules for internal loads, including those used for "
+            "occupants, lighting, gas and electricity using equipment, shall be equal to the lowest "
+            "hourly value used in the annual simulation runs, and schedules for infiltration shall be "
+            "equal to the highest hourly value used in the annual simulation runs and applied to the "
+            "entire design day.",
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1.2.2.1 excluding exception",
             is_primary_rule=True,
@@ -56,6 +64,7 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
         def create_data(self, context, data):
             rmd_b = context.BASELINE_0
             schedules_b = getattr_(rmd_b, "rmd", "schedules")
+
             return {"find_schedule_from_schedules": find_schedule(schedules_b)}
 
         class BuildingSegmentRule(RuleDefinitionListIndexedBase):
@@ -71,17 +80,21 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
 
             def create_data(self, context, data):
                 building_segment_b = context.BASELINE_0
+
                 is_lighting_bldg_area_defined_b = False
                 lighting_bldg_type_b = building_segment_b.get(
                     "lighting_building_area_type"
                 )
+
                 if lighting_bldg_type_b is not None:
                     is_lighting_bldg_area_defined_b = True
+
                 is_building_area_MF_dormitory_or_hotel_b = lighting_bldg_type_b in [
                     LIGHTING_BUILDING_AREA.DORMITORY,
                     LIGHTING_BUILDING_AREA.HOTEL_MOTEL,
                     LIGHTING_BUILDING_AREA.MULTIFAMILY,
                 ]
+
                 return {
                     **data,
                     "is_lighting_bldg_area_defined_b": is_lighting_bldg_area_defined_b,
@@ -104,6 +117,11 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
                 def create_data(self, context, data):
                     zone_b = context.BASELINE_0
                     find_schedule_from_schedules = data["find_schedule_from_schedules"]
+
+                    # check infiltration
+                    # TODO: need add log here if zone has no infiltration (add TODO lighting, occ, equip)
+                    # set default to true in case some zones do not have infiltration
+                    # and we do not want to fail those zones.
                     inf_pass_cooling_b = True
                     inf_pass_heating_b = True
                     if zone_b.get("infiltration"):
@@ -122,6 +140,7 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
                         design_heating_multiplier_sch_b = multiplier_sch_inf_b(
                             "hourly_heating_design_day"
                         )
+
                         max_inf_multiplier_b = max(multiplier_sch_hourly_value_b)
                         inf_pass_cooling_b = every(
                             design_cooling_multiplier_sch_b,
@@ -131,6 +150,7 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
                             design_heating_multiplier_sch_b,
                             lambda multiplier: multiplier == max_inf_multiplier_b,
                         )
+
                     return {
                         **data,
                         "inf_pass_cooling_b": inf_pass_cooling_b,
@@ -145,7 +165,7 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
                         ).__init__(
                             rmds_used=produce_ruleset_model_description(
                                 USER=False, BASELINE_0=True, PROPOSED=False
-                            )
+                            ),
                         )
 
                     def get_calc_vals(self, context, data=None):
@@ -153,6 +173,7 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
                         find_schedule_from_schedules = data[
                             "find_schedule_from_schedules"
                         ]
+
                         lighting_space_type_b = space_b.get("lighting_space_type")
                         ventilation_space_type_b = space_b.get("ventilation_space_type")
                         is_space_type_defined_b = (
@@ -163,8 +184,12 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
                             or ventilation_space_type_b
                             == VENTILATION_SPACE.TRANSIENT_RESIDENTIAL_DWELLING_UNIT
                         )
+
+                        # check occupancy - set to True as default
+                        # do not fail spaces with no schedules
                         occ_pass_cooling_b = True
                         occ_pass_heating_b = True
+                        # TODO: need add log here if zone has no infiltration (add TODO lighting, occ, equip)
                         if space_b.get("occupant_multiplier_schedule"):
                             multiplier_sch_occ_b = find_schedule_from_schedules(
                                 space_b["occupant_multiplier_schedule"]
@@ -178,6 +203,7 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
                             multiplier_sch_design_heating_occ_b = multiplier_sch_occ_b(
                                 "hourly_heating_design_day"
                             )
+
                             max_multiplier_occ = max(multiplier_sch_occ_hourly_value_b)
                             min_multiplier_occ = min(multiplier_sch_occ_hourly_value_b)
                             occ_pass_cooling_b = every(
@@ -188,6 +214,8 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
                                 multiplier_sch_design_heating_occ_b,
                                 lambda multiplier: multiplier == min_multiplier_occ,
                             )
+
+                        # check interior lighting
                         int_lgt_pass_cooling_b = True
                         int_lgt_pass_heating_b = True
                         for interior_lighting_b in find_all(
@@ -199,6 +227,7 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
                                     "Interior Lighting",
                                     "lighting_multiplier_schedule",
                                 )
+
                                 multiplier_sch_light_b = find_schedule_from_schedules(
                                     multiplier_sch_light_id_b
                                 )
@@ -217,6 +246,7 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
                                 min_multiplier_light = min(
                                     multiplier_sch_light_hourly_value_b
                                 )
+
                                 int_lgt_pass_cooling_b = (
                                     int_lgt_pass_cooling_b
                                     and every(
@@ -231,6 +261,8 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
                                         lambda x: x == min_multiplier_light,
                                     )
                                 )
+
+                        # check misc equipment
                         misc_pass_cooling_b = True
                         misc_pass_heating_b = True
                         for misc_equip_b in find_all(
@@ -260,6 +292,7 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
                                 min_multiplier_misc = min(
                                     multiplier_sch_misc_hourly_value_b
                                 )
+
                                 misc_pass_cooling_b = misc_pass_cooling_b and every(
                                     multiplier_sch_design_cooling_misc_b,
                                     lambda x: x == max_multiplier_misc,
@@ -268,6 +301,7 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
                                     multiplier_sch_design_heating_misc_b,
                                     lambda x: x == min_multiplier_misc,
                                 )
+
                         return {
                             "is_space_type_defined_b": is_space_type_defined_b,
                             "is_dwelling_unit_b": is_dwelling_unit_b,
@@ -293,6 +327,7 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
                         is_building_area_MF_dormitory_or_hotel_b = calc_vals[
                             "is_building_area_MF_dormitory_or_hotel_b"
                         ]
+
                         is_heating_schedule_pass = all(
                             [
                                 calc_vals["inf_pass_heating_b"],
@@ -301,6 +336,7 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
                                 calc_vals["misc_pass_heating_b"],
                             ]
                         )
+
                         return (
                             not (
                                 is_dwelling_unit_b
@@ -321,14 +357,31 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
                                 calc_vals["misc_pass_cooling_b"],
                             ]
                         )
+
                         return (
-                            "The space type was not defined in the RMD and the building area type is multifamily. Heating design schedules were modeled per the rules of G3.1.2.2.1 and PASS; however, cooling design schedules may fall under the exception to Section G3.1.2.2.1 for dwelling units and could not be fully assessed for this check. Conduct manual check to determine if the space is a dwelling unit. If the space is not a dwelling unit then the cooling design schedules pass. If it is a dwelling unit then the cooling design schedules fail this check."
+                            "The space type was not defined in the RMD and the building area type is multifamily. "
+                            "Heating design schedules were modeled per the rules of G3.1.2.2.1 and PASS; however, "
+                            "cooling design schedules may fall under the exception to Section G3.1.2.2.1 for "
+                            "dwelling units and could not be fully assessed for this check. Conduct manual check "
+                            "to determine if the space is a dwelling unit. If the space is not a dwelling unit "
+                            "then the cooling design schedules pass. If it is a dwelling unit then the cooling "
+                            "design schedules fail this check."
                             if is_cooling_schedule_pass
-                            else "The space type was not defined in the RMD and the building area type is multifamily. Heating design schedules were modeled per the rules of G3.1.2.2.1 and PASS; however, cooling design schedules may fall under the exception to Section G3.1.2.2.1 for dwelling units and could not be fully assessed for this check. Conduct manual check to determine if the space is a dwelling unit. If the space is not a dwelling unit then the cooling design schedules fail. If it is a dwelling unit then conduct a manual check that the schedules meet the requirements under the exception to Section G3.1.2.2.1. "
+                            else "The space type was not defined in the RMD and the building area type is multifamily. "
+                            "Heating design schedules were modeled per the rules of G3.1.2.2.1 and PASS; however, "
+                            "cooling design schedules may fall under the exception to Section G3.1.2.2.1 for dwelling "
+                            "units and could not be fully assessed for this check. Conduct manual check to determine "
+                            "if the space is a dwelling unit. If the space is not a dwelling unit then the cooling "
+                            "design schedules fail. If it is a dwelling unit then conduct a manual check that the "
+                            "schedules meet the requirements under the exception to Section G3.1.2.2.1. "
                         )
 
                     def rule_check(self, context, calc_vals=None, data=None):
                         is_dwelling_unit_b = calc_vals["is_dwelling_unit_b"]
+                        # is_space_type_defined_b is not important in the pass validation because
+                        # if is_dwelling_unit_b is true or both heating and cooling schedule passed,
+                        # the result is true.
+                        # is_space_type_defined_b = calc_vals["is_space_type_defined_b"]
                         is_building_area_MF_dormitory_or_hotel_b = calc_vals[
                             "is_building_area_MF_dormitory_or_hotel_b"
                         ]
@@ -348,10 +401,9 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
                                 calc_vals["misc_pass_cooling_b"],
                             ]
                         )
-                        return (
-                            is_dwelling_unit_b
-                            and is_heating_schedule_pass
-                            or not is_building_area_MF_dormitory_or_hotel_b
+
+                        return (is_dwelling_unit_b and is_heating_schedule_pass) or (
+                            not is_building_area_MF_dormitory_or_hotel_b
                             and is_heating_schedule_pass
                             and is_cooling_schedule_pass
                         )
@@ -380,9 +432,11 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
                                 calc_vals["misc_pass_cooling_b"],
                             ]
                         )
+
                         confirmed_non_dwelling_heat_cool_failed = f"{space_id_b} does not appear to have followed this rule per Section G3.1.2.2.1 for one more more of the following heating or cooling design schedules: infiltration, occupants, lighting, gas and electricity using equipment"
                         deduced_non_dwelling_heat_cool_failed = "The space type nor the building area type were defined in the RMD. The space type was assumed not to be a dwelling unit. Heating design schedules were modeled per the rules of G3.1.2.2.1 and PASS; however, cooling design schedules appear not to meet the requirements of Section G3.1.2.2.1. Fail for the cooling design schedules unless the space type is a dwelling unit. If the space type is a dwelling unit conduct a manual check for the cooling design schedules for compliance with the exception to Section G3.1.2.2.1."
                         dwelling_heat_failed = f"{space_id_b} appears to be a dwelling unit and does not appear to have followed this rule per Section G3.1.2.2.1 for one more more of the following heating design schedules (cooling design schedules fall under the exception to Section G3.1.2.2.1 and were not assessed for dwelling units in this check): infiltration, occupants, lighting, gas and electricity using equipment."
+
                         failed_msg = ""
                         if is_dwelling_unit_b:
                             if is_heating_schedule_pass:

@@ -30,6 +30,7 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_12,
     HVAC_SYS.SYS_13,
 ]
+
 DehumidificationOptions = SchemaEnums.schema_enums["DehumidificationOptions"]
 
 
@@ -55,13 +56,12 @@ class PRM9012019Rule50v48(RuleDefinitionListIndexedBase):
     def is_applicable(self, context, data=None):
         rmd_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmd_b)
+        # if baseline does not have system 3-8 or 11, 12, 13, then this rule is not applicable
         return any(
             [
-                (
-                    baseline_system_types_dict[system_type]
-                    and baseline_system_type_compare(
-                        system_type, applicable_sys_type, False
-                    )
+                baseline_system_types_dict[system_type]
+                and baseline_system_type_compare(
+                    system_type, applicable_sys_type, False
                 )
                 for system_type in baseline_system_types_dict
                 for applicable_sys_type in APPLICABLE_SYS_TYPES
@@ -70,6 +70,7 @@ class PRM9012019Rule50v48(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data):
         rmd_p = context.PROPOSED
+        # Create a new dict that maps hvac_id to zones with humidity setpoints
         hvac_systems_and_zones_p = (
             get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmd_p)
         )
@@ -83,8 +84,9 @@ class PRM9012019Rule50v48(RuleDefinitionListIndexedBase):
             )
             for key in hvac_systems_and_zones_p
         }
+
         return {
-            "hvac_system_zone_with_humidistatic_dict": hvac_system_zone_with_humidistatic_dict
+            "hvac_system_zone_with_humidistatic_dict": hvac_system_zone_with_humidistatic_dict,
         }
 
     class HVACRule(PartialRuleDefinition):
@@ -105,6 +107,7 @@ class PRM9012019Rule50v48(RuleDefinitionListIndexedBase):
             zones_with_humidity_schedules_list_p = hvac_systems_and_zones_p[
                 hvac_p["id"]
             ]
+
             return {
                 "dehumidification_type": dehumidification_type_p,
                 "zones_with_humidity_schedules_list": zones_with_humidity_schedules_list_p,

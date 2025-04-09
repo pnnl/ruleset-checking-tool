@@ -24,7 +24,8 @@ class PRM9012019Rule88z11(RuleDefinitionBase):
                 BASELINE_270=True,
             ),
             id="1-3",
-            description="The Performance Cost Index-Target (PCIt) shall be calculated using the procedures defined in Section 4.2.1.1. The PCIt shall be equal to [baseline building unregulated energy cost (BBUEC) + BPF x baseline building regulated energy cost (BBREC)]/ BBP",
+            description="The Performance Cost Index-Target (PCIt) shall be calculated using the procedures defined in Section 4.2.1.1. "
+            "The PCIt shall be equal to [baseline building unregulated energy cost (BBUEC) + BPF x baseline building regulated energy cost (BBREC)]/ BBP",
             ruleset_section_title="Performance Calculations",
             standard_section="Section 4.2.1.1",
             is_primary_rule=True,

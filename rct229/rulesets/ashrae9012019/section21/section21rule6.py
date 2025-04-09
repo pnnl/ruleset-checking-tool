@@ -61,6 +61,7 @@ class PRM9012019Rule47b05(RuleDefinitionListIndexedBase):
     def is_applicable(self, context, data=None):
         rmd_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmd_b)
+        # create a list containing all HVAC systems that are modeled in the rmd_b
         available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict
@@ -68,7 +69,7 @@ class PRM9012019Rule47b05(RuleDefinitionListIndexedBase):
         ]
         return any(
             [
-                (available_type in APPLICABLE_SYS_TYPES)
+                available_type in APPLICABLE_SYS_TYPES
                 for available_type in available_type_list
             ]
         )
@@ -103,8 +104,10 @@ class PRM9012019Rule47b05(RuleDefinitionListIndexedBase):
         def get_calc_vals(self, context, data=None):
             fluid_loop_b = context.BASELINE_0
             boiler_list = data["loop_boiler_dict"][fluid_loop_b["id"]]
+            # Guarantee two boilers in this list.
             boiler_1 = boiler_list[0]
             boiler_2 = boiler_list[1]
+
             return {
                 "boiler_1_operation_lower_limit": CalcQ(
                     "capacity", getattr_(boiler_1, "boiler", "operation_lower_limit")
@@ -133,6 +136,7 @@ class PRM9012019Rule47b05(RuleDefinitionListIndexedBase):
             boiler_2_operation_lower_limit = calc_vals["boiler_2_operation_lower_limit"]
             boiler_2_operation_upper_limit = calc_vals["boiler_2_operation_upper_limit"]
             boiler_2_rated_capacity = calc_vals["boiler_2_rated_capacity"]
+
             return (
                 boiler_1_operation_lower_limit == ZERO.POWER
                 and boiler_1_operation_upper_limit == boiler_1_rated_capacity
@@ -141,7 +145,8 @@ class PRM9012019Rule47b05(RuleDefinitionListIndexedBase):
                     boiler_2_operation_upper_limit,
                     boiler_1_rated_capacity + boiler_2_rated_capacity,
                 )
-                or boiler_2_operation_lower_limit == ZERO.POWER
+            ) or (
+                boiler_2_operation_lower_limit == ZERO.POWER
                 and boiler_2_operation_upper_limit == boiler_2_rated_capacity
                 and boiler_1_operation_lower_limit == boiler_2_rated_capacity
                 and self.precision_comparison["boiler_1_operation_upper_limit"](
@@ -157,6 +162,7 @@ class PRM9012019Rule47b05(RuleDefinitionListIndexedBase):
             boiler_2_operation_lower_limit = calc_vals["boiler_2_operation_lower_limit"]
             boiler_2_operation_upper_limit = calc_vals["boiler_2_operation_upper_limit"]
             boiler_2_rated_capacity = calc_vals["boiler_2_rated_capacity"]
+
             return (
                 boiler_1_operation_lower_limit == ZERO.POWER
                 and std_equal(boiler_1_operation_upper_limit, boiler_1_rated_capacity)
@@ -165,7 +171,8 @@ class PRM9012019Rule47b05(RuleDefinitionListIndexedBase):
                     boiler_2_operation_upper_limit,
                     boiler_1_rated_capacity + boiler_2_rated_capacity,
                 )
-                or boiler_2_operation_lower_limit == ZERO.POWER
+            ) or (
+                boiler_2_operation_lower_limit == ZERO.POWER
                 and std_equal(boiler_2_operation_upper_limit, boiler_2_rated_capacity)
                 and std_equal(boiler_1_operation_lower_limit, boiler_2_rated_capacity)
                 and std_equal(

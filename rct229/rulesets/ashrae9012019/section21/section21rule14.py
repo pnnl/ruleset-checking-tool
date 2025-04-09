@@ -18,13 +18,17 @@ class PRM9012019Rule29g28(RuleDefinitionListIndexedBase):
             each_rule=PRM9012019Rule29g28.RulesetModelInstanceRule(),
             index_rmd=BASELINE_0,
             id="21-14",
-            description="When the baseline building is modeled with a hot water plant, served by purchased HW system, hot water supply temperature reset is not modeled.",
+            description="When the baseline building is modeled with a hot water plant, served by purchased HW "
+            "system, hot water supply temperature reset is not modeled.",
             ruleset_section_title="HVAC - Water Side",
-            standard_section="Section G3.1.1.3 Baseline HVAC System Requirements for Systems Utilizing Purchased Chilled Water and/or Purchased Heat",
+            standard_section="Section G3.1.1.3 Baseline HVAC System Requirements for Systems Utilizing Purchased "
+            "Chilled Water and/or Purchased Heat",
             is_primary_rule=False,
             list_path="ruleset_model_descriptions[0]",
-            manual_check_required_msg="Manual Check Required - Baseline is modeled with purchased hot water or steam.  Make sure that a hot water supply reset temperature is not modeled.",
-            not_applicable_msg="Rule 21-14 Not Applicable - the baseline is not modeled with Purchased Hot Water or Steam",
+            manual_check_required_msg="Manual Check Required - Baseline is modeled with purchased hot water or steam.  "
+            "Make sure that a hot water supply reset temperature is not modeled.",
+            not_applicable_msg="Rule 21-14 Not Applicable - the baseline is not modeled with Purchased Hot Water or "
+            "Steam",
         )
 
     class RulesetModelInstanceRule(PartialRuleDefinition):
@@ -32,7 +36,7 @@ class PRM9012019Rule29g28(RuleDefinitionListIndexedBase):
             super(PRM9012019Rule29g28.RulesetModelInstanceRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
-                )
+                ),
             )
 
         def applicability_check(self, context, calc_vals, data):

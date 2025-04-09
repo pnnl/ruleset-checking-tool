@@ -53,17 +53,21 @@ class PRM9012019Rule78g49(RuleDefinitionListIndexedBase):
 
     def is_applicable(self, context, data=None):
         rmd_b = context.BASELINE_0
+
         baseline_system_types_dict = get_baseline_system_types(rmd_b)
+        # create a list containing all HVAC systems that are modeled in the rmd_b
         available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict
             if len(baseline_system_types_dict[hvac_type]) > 0
         ]
+
         primary_secondary_loop_dict = get_primary_secondary_loops_dict(rmd_b)
+
         return (
             any(
                 [
-                    (available_type in APPLICABLE_SYS_TYPES)
+                    available_type in APPLICABLE_SYS_TYPES
                     for available_type in available_type_list
                 ]
             )
@@ -72,6 +76,7 @@ class PRM9012019Rule78g49(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data):
         rmd_b = context.BASELINE_0
+
         chw_loop_capacity_dict = {}
         for chiller in find_all("$.chillers[*]", rmd_b):
             if chiller["cooling_loop"] not in chw_loop_capacity_dict:
@@ -79,7 +84,9 @@ class PRM9012019Rule78g49(RuleDefinitionListIndexedBase):
             chw_loop_capacity_dict[chiller["cooling_loop"]] += getattr_(
                 chiller, "chiller", "rated_capacity"
             )
+
         primary_secondary_loop_dict = get_primary_secondary_loops_dict(rmd_b)
+
         return {
             "chw_loop_capacity_dict": chw_loop_capacity_dict,
             "primary_secondary_loop_dict": primary_secondary_loop_dict,
@@ -89,6 +96,7 @@ class PRM9012019Rule78g49(RuleDefinitionListIndexedBase):
         fluid_loop_b = context_item.BASELINE_0
         primary_secondary_loop_dict = data["primary_secondary_loop_dict"]
         chw_loop_capacity_dict = data["chw_loop_capacity_dict"]
+
         return (
             fluid_loop_b["id"] in primary_secondary_loop_dict
             and chw_loop_capacity_dict[fluid_loop_b["id"]]
@@ -121,7 +129,11 @@ class PRM9012019Rule78g49(RuleDefinitionListIndexedBase):
                             "minimum_flow_fraction"
                         ],
                     },
-                    precision={"min_flow_fraction": {"precision": 0.1}},
+                    precision={
+                        "min_flow_fraction": {
+                            "precision": 0.1,
+                        },
+                    },
                 )
 
             def get_calc_vals(self, context, data=None):
@@ -129,10 +141,15 @@ class PRM9012019Rule78g49(RuleDefinitionListIndexedBase):
                 min_flow_fraction = child_loop_b[
                     "cooling_or_condensing_design_and_control"
                 ]["minimum_flow_fraction"]
+
                 return {"min_flow_fraction": min_flow_fraction}
 
             def rule_check(self, context, calc_vals=None, data=None):
                 min_flow_fraction = calc_vals["min_flow_fraction"]
+
+                # return min_flow_fraction == REQUIRED_MIN_FLOW_FRACTION
+
                 return self.precision_comparison["min_flow_fraction"](
-                    min_flow_fraction, REQUIRED_MIN_FLOW_FRACTION
+                    min_flow_fraction,
+                    REQUIRED_MIN_FLOW_FRACTION,
                 )

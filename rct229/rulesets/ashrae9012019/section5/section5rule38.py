@@ -44,7 +44,8 @@ class PRM9012019Rule40i28(PartialRuleDefinition):
                 get_opaque_surface_type(surface_b)
                 in [OST.BELOW_GRADE_WALL, OST.UNHEATED_SOG, OST.HEATED_SOG]
                 for surface_b in find_all(
-                    "$.ruleset_model_descriptions[0].buildings[*].building_segments[*].zones[*].surfaces[*]",
+                    "$.ruleset_model_descriptions[0].buildings[*].building_segments[*].zones["
+                    "*].surfaces[*]",
                     rpd,
                 )
             ]

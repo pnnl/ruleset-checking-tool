@@ -41,12 +41,14 @@ class PRM9012019Rule41d32(RuleDefinitionListIndexedBase):
         heat_rejection_loop_ids_b = (
             get_heat_rejection_loops_connected_to_baseline_systems(rmd_b)
         )
+
         fluid_loop_b = {
             heat_rej_b["id"]: find_exactly_one_fluid_loop(
                 rmd_b, getattr_(heat_rej_b, "heat_rejections", "loop")
             )
             for heat_rej_b in find_all("$.heat_rejections[*]", rmd_b)
         }
+
         return {
             "heat_rejection_loop_ids_b": heat_rejection_loop_ids_b,
             "fluid_loop_b": fluid_loop_b,
@@ -64,20 +66,26 @@ class PRM9012019Rule41d32(RuleDefinitionListIndexedBase):
             heat_rej_b = context.BASELINE_0
             heat_rejection_loop_ids_b = data["heat_rejection_loop_ids_b"]
             heat_rejection_loop_b = heat_rej_b["loop"]
+
             return heat_rejection_loop_b in heat_rejection_loop_ids_b
 
         def get_calc_vals(self, context, data=None):
             heat_rej_b = context.BASELINE_0
             heat_rej_id_b = heat_rej_b["id"]
             heat_rej_fluid_loop_b = data["fluid_loop_b"][heat_rej_id_b]
+
             heat_rejection_flow_ctrl_b = getattr_(
                 heat_rej_fluid_loop_b,
                 "heat_rejections",
                 "cooling_or_condensing_design_and_control",
                 "flow_control",
             )
-            return {"heat_rejection_flow_ctrl_b": heat_rejection_flow_ctrl_b}
+
+            return {
+                "heat_rejection_flow_ctrl_b": heat_rejection_flow_ctrl_b,
+            }
 
         def rule_check(self, context, calc_vals=None, data=None):
             heat_rejection_flow_ctrl_b = calc_vals["heat_rejection_flow_ctrl_b"]
+
             return heat_rejection_flow_ctrl_b == FLUID_LOOP_FLOW_CONTROL.FIXED_FLOW

@@ -14,7 +14,10 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types i
 )
 from rct229.utils.assertions import getattr_
 
-APPLICABLE_SYS_TYPES = [HVAC_SYS.SYS_6, HVAC_SYS.SYS_8]
+APPLICABLE_SYS_TYPES = [
+    HVAC_SYS.SYS_6,
+    HVAC_SYS.SYS_8,
+]
 
 
 class PRM9012019Rule69z86(RuleDefinitionListIndexedBase):
@@ -38,7 +41,9 @@ class PRM9012019Rule69z86(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data):
         rmd_b = context.BASELINE_0
+
         baseline_system_types_dict = get_baseline_system_types(rmd_b)
+
         hvac_sys_6_or_8_list = flatten(
             [
                 baseline_system_types_dict[system_type]
@@ -50,14 +55,17 @@ class PRM9012019Rule69z86(RuleDefinitionListIndexedBase):
                 )
             ]
         )
-        return {"hvac_sys_6_or_8_list": hvac_sys_6_or_8_list}
+
+        return {
+            "hvac_sys_6_or_8_list": hvac_sys_6_or_8_list,
+        }
 
     class TerminalRule(RuleDefinitionBase):
         def __init__(self):
             super(PRM9012019Rule69z86.TerminalRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
-                )
+                ),
             )
 
         def is_applicable(self, context, data=None):
@@ -68,6 +76,7 @@ class PRM9012019Rule69z86(RuleDefinitionListIndexedBase):
                 "terminals",
                 "served_by_heating_ventilating_air_conditioning_system",
             )
+
             return served_by_hvac_b in hvac_sys_6_or_8_list
 
         def get_calc_vals(self, context, data=None):
@@ -75,8 +84,10 @@ class PRM9012019Rule69z86(RuleDefinitionListIndexedBase):
             is_fan_first_stage_heat_b = getattr_(
                 terminal_b, "terminals", "is_fan_first_stage_heat"
             )
+
             return {"is_fan_first_stage_heat_b": is_fan_first_stage_heat_b}
 
         def rule_check(self, context, calc_vals=None, data={}):
             is_fan_first_stage_heat_b = calc_vals["is_fan_first_stage_heat_b"]
+
             return is_fan_first_stage_heat_b

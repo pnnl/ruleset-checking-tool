@@ -63,6 +63,7 @@ class PRM9012019Rule22a24(RuleDefinitionListIndexedBase):
     def is_applicable(self, context, data=None):
         rmd_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmd_b)
+        # create a list containing all HVAC systems that are modeled in the rmd_b
         available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict
@@ -70,7 +71,7 @@ class PRM9012019Rule22a24(RuleDefinitionListIndexedBase):
         ]
         return any(
             [
-                (available_type in APPLICABLE_SYS_TYPES)
+                available_type in APPLICABLE_SYS_TYPES
                 for available_type in available_type_list
             ]
         )
@@ -102,6 +103,7 @@ class PRM9012019Rule22a24(RuleDefinitionListIndexedBase):
         def rule_check(self, context, calc_vals=None, data=None):
             flow_control = calc_vals["flow_control"]
             operation = calc_vals["operation"]
+
             return (
                 flow_control == FLUID_LOOP_FLOW_CONTROL.VARIABLE_FLOW
                 and operation == FLUID_LOOP_FLOW_OPERATION.CONTINUOUS

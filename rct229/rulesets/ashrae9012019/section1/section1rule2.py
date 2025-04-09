@@ -19,10 +19,13 @@ class PRM9012019Rule63e94(RuleDefinitionBase):
                 PROPOSED=True,
             ),
             rmds_used_optional=produce_ruleset_model_description(
-                BASELINE_90=True, BASELINE_180=True, BASELINE_270=True
+                BASELINE_90=True,
+                BASELINE_180=True,
+                BASELINE_270=True,
             ),
             id="1-2",
-            description="The performance of the proposed design is calculated in accordance with Standard 90.1-2019 Appendix G, where Performance Cost Index = Proposed building performance (PBP) /Baseline building performance (BBP), where both the PBP and the BBP include all end-use load components associated with the building when calculating the Performance Cost Index (PCI).",
+            description="The performance of the proposed design is calculated in accordance with Standard 90.1-2019 Appendix G, where Performance Cost Index = Proposed building performance (PBP) /Baseline building performance (BBP), "
+            "where both the PBP and the BBP include all end-use load components associated with the building when calculating the Performance Cost Index (PCI).",
             ruleset_section_title="Performance Calculations",
             standard_section="Section G1.2.2",
             is_primary_rule=True,
@@ -36,6 +39,7 @@ class PRM9012019Rule63e94(RuleDefinitionBase):
         rmd_b180 = context.BASELINE_180
         rmd_b270 = context.BASELINE_270
         rmd_p = context.PROPOSED
+
         pci_set = []
         pbp_set = []
         bbp_set = []
@@ -53,9 +57,11 @@ class PRM9012019Rule63e94(RuleDefinitionBase):
                         "$.model_output.baseline_building_performance_energy_cost", rmd
                     )
                 )
+
         pci_set = list(set(filter(lambda x: x is not None, pci_set)))
         pbp_set = list(set(filter(lambda x: x is not None, pbp_set)))
         bbp_set = list(set(filter(lambda x: x is not None, bbp_set)))
+
         assert_(
             len(pci_set) >= 1, "At least one `performance_cost_index` value must exist."
         )
@@ -67,16 +73,23 @@ class PRM9012019Rule63e94(RuleDefinitionBase):
             len(bbp_set) >= 1,
             "At least one `baseline_building_performance_energy_cost` value must exist.",
         )
+
         assert_(
             bbp_set[0] > 0,
             "The `baseline_building_performance_energy_cost` value must be greater than 0.",
         )
-        return {"pci_set": pci_set, "pbp_set": pbp_set, "bbp_set": bbp_set}
+
+        return {
+            "pci_set": pci_set,
+            "pbp_set": pbp_set,
+            "bbp_set": bbp_set,
+        }
 
     def rule_check(self, context, calc_vals=None, data=None):
         pci_set = calc_vals["pci_set"]
         pbp_set = calc_vals["pbp_set"]
         bbp_set = calc_vals["bbp_set"]
+
         return len(pci_set) == len(pbp_set) == len(bbp_set) == 1 and std_equal(
             pbp_set[0] / bbp_set[0], pci_set[0]
         )
@@ -85,6 +98,7 @@ class PRM9012019Rule63e94(RuleDefinitionBase):
         pci_set = calc_vals["pci_set"]
         pbp_set = calc_vals["pbp_set"]
         bbp_set = calc_vals["bbp_set"]
+
         FAIL_MSG = ""
         if len(pci_set) != 1:
             FAIL_MSG = (
@@ -98,4 +112,5 @@ class PRM9012019Rule63e94(RuleDefinitionBase):
             FAIL_MSG = (
                 "Ruleset expects exactly one BBP value to be used in the project."
             )
+
         return FAIL_MSG

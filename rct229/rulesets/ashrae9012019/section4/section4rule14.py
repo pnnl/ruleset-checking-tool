@@ -10,6 +10,7 @@ from rct229.utils.pint_utils import ZERO, CalcQ
 
 LIGHTING_SPACE = SchemaEnums.schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
 ENERGY_SOURCE = SchemaEnums.schema_enums["EnergySourceOptions"]
+
 REQ_EQUIP_POWER_DENSITY = 20 * ureg("W/ft2")
 
 
@@ -34,6 +35,7 @@ class PRM9012019Rule66c61(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
+        # not applicable if there are no spaces identified as computer room in the RMD
         rmd_p = context.PROPOSED
         spaces_p = find_all(
             f'$.buildings[*].building_segments[*].zones[*].spaces[*][?(@.lighting_space_type="{LIGHTING_SPACE.COMPUTER_ROOM}")]',
@@ -46,6 +48,7 @@ class PRM9012019Rule66c61(RuleDefinitionListIndexedBase):
         return {"schedules_p": rmd_p["schedules"]}
 
     def list_filter(self, context_item, data):
+        # filter out none computer rooms
         space_p = context_item.PROPOSED
         return space_p.get("lighting_space_type") == LIGHTING_SPACE.COMPUTER_ROOM
 
@@ -55,23 +58,30 @@ class PRM9012019Rule66c61(RuleDefinitionListIndexedBase):
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=False, PROPOSED=True
                 ),
-                fail_msg="The space has been classed as a computer room in terms of the lighting space type but the electronic data equipment power density does not appear to exceed 20 w/sf.",
+                fail_msg="The space has been classed as a computer room in terms of the lighting space type but the "
+                "electronic data equipment power density does not appear to exceed 20 w/sf.",
             )
 
         def get_calc_vals(self, context, data=None):
             space_p = context.PROPOSED
             total_space_misc_wattage_including_multiplier_p = ZERO.POWER
+
             schedules_p = data["schedules_p"]
             floor_area_p = getattr_(space_p, "space", "floor_area")
+
             assert_(
                 floor_area_p > ZERO.AREA, f"Space floor area is smaller or equal to 0."
             )
+            # skip undetermined outcome for no misc equipment, the reasoning behind it is assuming that the room is
+            # identified as a computer room but there is 0 EPD, will generate failed outcome in rule check.
             for misc_equip_p in find_all(f"$.miscellaneous_equipment[*]", space_p):
                 if misc_equip_p.get("energy_type") == ENERGY_SOURCE.ELECTRICITY:
                     misc_equip_power_p = getattr_(
                         misc_equip_p, "miscellaneous_equipment", "power"
                     )
                     mis_multiplier_id_p = misc_equip_p.get("multiplier_schedule")
+
+                    # default value, used when no schedule is present in the misc equipment
                     misc_multiplier_value_p = 1.0
                     if mis_multiplier_id_p:
                         multiplier_schedule_p = find_exactly_one(
@@ -85,6 +95,7 @@ class PRM9012019Rule66c61(RuleDefinitionListIndexedBase):
                                 )
                             ),
                         )
+
                     total_space_misc_wattage_including_multiplier_p += (
                         misc_equip_power_p * misc_multiplier_value_p
                     )

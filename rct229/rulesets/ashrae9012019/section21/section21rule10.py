@@ -40,8 +40,9 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_8C,
     HVAC_SYS.SYS_11_1C,
 ]
+
 PUMP_SPEED_CONTROL = SchemaEnums.schema_enums["PumpSpeedControlOptions"]
-PUMP_CONFIGURATION_THRESHOLD = 120000 * ureg("ft2")
+PUMP_CONFIGURATION_THRESHOLD = 120_000 * ureg("ft2")
 
 
 class PRM9012019Rule06a67(RuleDefinitionListIndexedBase):
@@ -55,7 +56,9 @@ class PRM9012019Rule06a67(RuleDefinitionListIndexedBase):
             each_rule=PRM9012019Rule06a67.PumpRule(),
             index_rmd=BASELINE_0,
             id="21-10",
-            description="When the building is modeled with HHW plant (served by either boiler(s) or purchased hot water/steam), the hot water pump shall be modeled as riding the pump curve if the hot water system serves less than 120,000 ft^2 otherwise it shall be modeled with a VFD.",
+            description="When the building is modeled with HHW plant (served by either boiler(s) or purchased hot "
+            "water/steam), the hot water pump shall be modeled as riding the pump curve if the hot water "
+            "system serves less than 120,000 ft^2 otherwise it shall be modeled with a VFD.",
             ruleset_section_title="HVAC - Water Side",
             standard_section="Section G3.1.3.5 Building System-Specific Modeling Requirements for the Baseline model",
             is_primary_rule=True,
@@ -66,6 +69,7 @@ class PRM9012019Rule06a67(RuleDefinitionListIndexedBase):
     def is_applicable(self, context, data=None):
         rmd_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmd_b)
+        # create a list containing all HVAC systems that are modeled in the rmd_b
         available_types_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict
@@ -73,19 +77,22 @@ class PRM9012019Rule06a67(RuleDefinitionListIndexedBase):
         ]
         return any(
             [
-                (available_type in APPLICABLE_SYS_TYPES)
+                available_type in APPLICABLE_SYS_TYPES
                 for available_type in available_types_list
             ]
         )
 
     def create_data(self, context, data):
         rmd_b = context.BASELINE_0
+        # to avoid pumps in service water heating system
         loop_zone_list_w_area_dict = get_hw_loop_zone_list_w_area(rmd_b)
+
         return {"loop_zone_list_w_area_dict": loop_zone_list_w_area_dict}
 
     def list_filter(self, context_item, data):
         pump = context_item.BASELINE_0
         loop_zone_list_w_area_dict = data["loop_zone_list_w_area_dict"]
+        # filter and select pumps with heating loops (loop_zone_list_w_area_dict keys are heating loops)
         return pump["loop_or_piping"] in loop_zone_list_w_area_dict
 
     class PumpRule(RuleDefinitionBase):
@@ -93,7 +100,7 @@ class PRM9012019Rule06a67(RuleDefinitionListIndexedBase):
             super(PRM9012019Rule06a67.PumpRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
-                )
+                ),
             )
 
         def get_calc_vals(self, context, data=None):
@@ -103,11 +110,13 @@ class PRM9012019Rule06a67(RuleDefinitionListIndexedBase):
             total_area = loop_zone_list_w_area_dict[pump_loop_or_piping_id][
                 "total_area"
             ]
+
             target_pump_type = (
                 PUMP_SPEED_CONTROL.FIXED_SPEED
                 if total_area < PUMP_CONFIGURATION_THRESHOLD
                 else PUMP_SPEED_CONTROL.VARIABLE_SPEED
             )
+
             return {
                 "pump_speed_control_type": getattr_(pump_b, "Pump", "speed_control"),
                 "target_speed_control_type": target_pump_type,

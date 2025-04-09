@@ -17,7 +17,13 @@ from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO, CalcQ
 from rct229.utils.utility_functions import find_exactly_one_fluid_loop
 
-APPLICABLE_SYS_TYPES = [HVAC_SYS.SYS_5, HVAC_SYS.SYS_6, HVAC_SYS.SYS_7, HVAC_SYS.SYS_8]
+APPLICABLE_SYS_TYPES = [
+    HVAC_SYS.SYS_5,
+    HVAC_SYS.SYS_6,
+    HVAC_SYS.SYS_7,
+    HVAC_SYS.SYS_8,
+]
+
 HEATING_SYSTEM = SchemaEnums.schema_enums["HeatingSystemOptions"]
 FLUID_LOOP = SchemaEnums.schema_enums["FluidLoopOptions"]
 REQUIRED_SET_POINT_REDUCTION = 20.0 * ureg("delta_degF")
@@ -45,13 +51,12 @@ class PRM9012019Rule79i34(RuleDefinitionListIndexedBase):
     def is_applicable(self, context, data=None):
         rmd_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmd_b)
+
         return any(
             [
-                (
-                    baseline_system_types_dict[system_type]
-                    and baseline_system_type_compare(
-                        system_type, applicable_sys_type, False
-                    )
+                baseline_system_types_dict[system_type]
+                and baseline_system_type_compare(
+                    system_type, applicable_sys_type, False
                 )
                 for system_type in baseline_system_types_dict
                 for applicable_sys_type in APPLICABLE_SYS_TYPES
@@ -60,8 +65,11 @@ class PRM9012019Rule79i34(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data):
         rmd_b = context.BASELINE_0
+
+        # set hvac_id with highest zone_design_heating_setpoint
         hvac_max_zone_setpoint_dict = {}
         for zone in find_all("$.buildings[*].building_segments[*].zones[*]", rmd_b):
+            # handle indirectly conditioned zones, which do not have terminals.
             zone_design_heating_setpoint = zone.get(
                 "design_thermostat_heating_setpoint", ZERO.TEMPERATURE
             )
@@ -77,6 +85,8 @@ class PRM9012019Rule79i34(RuleDefinitionListIndexedBase):
                     )
                 }
             )
+
+        # find preheat_system's hot water loop type
         hot_water_loop_type_dict = {
             preheat_system["hot_water_loop"]: find_exactly_one_fluid_loop(
                 rmd_b, preheat_system["hot_water_loop"]
@@ -86,6 +96,8 @@ class PRM9012019Rule79i34(RuleDefinitionListIndexedBase):
                 rmd_b,
             )
         }
+
+        # find applicable hvac sys ids
         baseline_system_types_dict = get_baseline_system_types(rmd_b)
         applicable_hvac_sys_ids = [
             hvac_id
@@ -94,6 +106,7 @@ class PRM9012019Rule79i34(RuleDefinitionListIndexedBase):
             if baseline_system_type_compare(sys_type, target_sys_type, False)
             for hvac_id in baseline_system_types_dict[sys_type]
         ]
+
         return {
             "hvac_max_zone_setpoint_dict": hvac_max_zone_setpoint_dict,
             "hot_water_loop_type_dict": hot_water_loop_type_dict,
@@ -103,6 +116,7 @@ class PRM9012019Rule79i34(RuleDefinitionListIndexedBase):
     def list_filter(self, context_item, data):
         hvac_sys_b = context_item.BASELINE_0
         applicable_hvac_sys_ids = data["applicable_hvac_sys_ids"]
+
         return hvac_sys_b["id"] in applicable_hvac_sys_ids
 
     class HVACRule(RuleDefinitionBase):
@@ -120,12 +134,16 @@ class PRM9012019Rule79i34(RuleDefinitionListIndexedBase):
                     ],
                 },
                 precision={
-                    "heating_coil_setpoint": {"precision": 0.1, "unit": "delta_degC"}
+                    "heating_coil_setpoint": {
+                        "precision": 0.1,
+                        "unit": "delta_degC",
+                    },
                 },
             )
 
         def get_calc_vals(self, context, data=None):
             heating_ventilating_air_conditioning_systems_b = context.BASELINE_0
+
             hvac_id = heating_ventilating_air_conditioning_systems_b["id"]
             preheat_system_b = heating_ventilating_air_conditioning_systems_b[
                 "preheat_system"
@@ -136,6 +154,7 @@ class PRM9012019Rule79i34(RuleDefinitionListIndexedBase):
             ]
             heating_coil_setpoint = preheat_system_b["heating_coil_setpoint"]
             hvac_max_zone_setpoint = data["hvac_max_zone_setpoint_dict"][hvac_id]
+
             return {
                 "hvac_id": hvac_id,
                 "heating_system_type_b": heating_system_type,
@@ -149,6 +168,7 @@ class PRM9012019Rule79i34(RuleDefinitionListIndexedBase):
             hot_water_loop_type = calc_vals["hot_water_loop_type"]
             heating_coil_setpoint = calc_vals["heating_coil_setpoint"]
             hvac_max_zone_setpoint = calc_vals["hvac_max_zone_setpoint"]
+
             return (
                 heating_system_type_b == HEATING_SYSTEM.FLUID_LOOP
                 and hot_water_loop_type == FLUID_LOOP.HEATING

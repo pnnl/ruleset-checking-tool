@@ -11,7 +11,11 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types i
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.jsonpath_utils import find_all
 
-APPLICABLE_SYS_TYPES = [HVAC_SYS.SYS_11_1, HVAC_SYS.SYS_11_2, HVAC_SYS.SYS_11_1B]
+APPLICABLE_SYS_TYPES = [
+    HVAC_SYS.SYS_11_1,
+    HVAC_SYS.SYS_11_2,
+    HVAC_SYS.SYS_11_1B,
+]
 TEMP_RESET = SchemaEnums.schema_enums["TemperatureResetOptions"]
 
 
@@ -37,6 +41,7 @@ class PRM9012019Rule38u90(RuleDefinitionListIndexedBase):
     def is_applicable(self, context, data=None):
         rmd_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmd_b)
+        # create a list containing all HVAC systems that are modeled in the rmd_b
         available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict
@@ -44,7 +49,7 @@ class PRM9012019Rule38u90(RuleDefinitionListIndexedBase):
         ]
         return any(
             [
-                (available_type in APPLICABLE_SYS_TYPES)
+                available_type in APPLICABLE_SYS_TYPES
                 for available_type in available_type_list
             ]
         )
@@ -68,7 +73,7 @@ class PRM9012019Rule38u90(RuleDefinitionListIndexedBase):
                 required_fields={
                     "$": ["cooling_or_condensing_design_and_control"],
                     "cooling_or_condensing_design_and_control": [
-                        "temperature_reset_type"
+                        "temperature_reset_type",
                     ],
                 },
             )
@@ -78,8 +83,10 @@ class PRM9012019Rule38u90(RuleDefinitionListIndexedBase):
             temperature_reset_type = fluid_loop_b[
                 "cooling_or_condensing_design_and_control"
             ]["temperature_reset_type"]
+
             return {"temperature_reset_type": temperature_reset_type}
 
         def rule_check(self, context, calc_vals=None, data=None):
             temperature_reset_type = calc_vals["temperature_reset_type"]
+
             return temperature_reset_type == TEMP_RESET.LOAD_RESET

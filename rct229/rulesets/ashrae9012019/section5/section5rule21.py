@@ -10,7 +10,6 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_ca
 )
 from rct229.utils.pint_utils import CalcQ
 
-
 FAIL_MSG = "Subsurface that is not regulated (Not part of building envelope) is not modeled with the same area, U-factor and SHGC in the baseline as in the propsoed design."
 
 

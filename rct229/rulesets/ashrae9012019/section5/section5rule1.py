@@ -77,12 +77,14 @@ class PRM9012019Rule77j30(RuleDefinitionListIndexedBase):
             rmd_b270 = context.BASELINE_270
             rmd_p = context.PROPOSED
             rmd_u = context.USER
+
             has_baseline_0 = rmd_b0 is not None
             has_baseline_90 = rmd_b90 is not None
             has_baseline_180 = rmd_b180 is not None
             has_baseline_270 = rmd_b270 is not None
             has_proposed = rmd_p is not None
             has_user = rmd_u is not None
+
             has_baseline_0_output = has_baseline_0 and bool(
                 find_one("$.model_output.output_instance", rmd_b0)
             )
@@ -101,9 +103,14 @@ class PRM9012019Rule77j30(RuleDefinitionListIndexedBase):
             has_user_output = has_user and bool(
                 find_one("$.model_output.output_instance", rmd_u)
             )
+
             rmd_list = [rmd_b0, rmd_b90, rmd_b180, rmd_b270, rmd_p, rmd_u]
             rmd_list_no_user = [rmd_b0, rmd_b90, rmd_b180, rmd_b270, rmd_p]
+
+            # count the rmds that aren't None
             no_of_rmds = len(compact(rmd_list))
+
+            # filter out rmds that aren't None then count the length
             no_of_output_instance = len(
                 compact(
                     [
@@ -112,6 +119,7 @@ class PRM9012019Rule77j30(RuleDefinitionListIndexedBase):
                     ]
                 )
             )
+
             return {
                 "has_baseline_0": has_baseline_0,
                 "has_baseline_90": has_baseline_90,
@@ -132,9 +140,11 @@ class PRM9012019Rule77j30(RuleDefinitionListIndexedBase):
         class BuildingRule(RuleDefinitionBase):
             def __init__(self):
                 super(PRM9012019Rule77j30.RMDRule.BuildingRule, self).__init__(
-                    rmds_used=produce_ruleset_model_description(BASELINE_0=True),
+                    rmds_used=produce_ruleset_model_description(
+                        BASELINE_0=True,
+                    ),
                     required_fields={
-                        "$.building_segments[*].zones[*].surfaces[*]": ["azimuth"]
+                        "$.building_segments[*].zones[*].surfaces[*]": ["azimuth"],
                     },
                     precision={
                         "percent_difference_max_min_fen_area_per_orientation": {
@@ -147,6 +157,7 @@ class PRM9012019Rule77j30(RuleDefinitionListIndexedBase):
 
             def get_calc_vals(self, context, data=None):
                 building_b0 = context.BASELINE_0
+
                 has_baseline_0 = data["has_baseline_0"]
                 has_baseline_90 = data["has_baseline_90"]
                 has_baseline_180 = data["has_baseline_180"]
@@ -162,9 +173,10 @@ class PRM9012019Rule77j30(RuleDefinitionListIndexedBase):
                 no_of_rmds = data["no_of_rmds"]
                 no_of_output_instance = data["no_of_output_instance"]
 
+                # define a function to get the azimuth's corresponding key
                 def get_key_for_azi(azi):
                     azi_value = azi.to("degrees").m
-                    low_bound = azi_value - azi_value % 3
+                    low_bound = azi_value - (azi_value % 3)
                     high_bound = low_bound + 3
                     return f"{low_bound}-{high_bound}"
 
@@ -176,11 +188,14 @@ class PRM9012019Rule77j30(RuleDefinitionListIndexedBase):
                         surface_azimuth_b = surface_b["azimuth"]
                         total_surface_fenestration_area_b = ZERO.AREA
                         surface_azimuth_bin = get_key_for_azi(surface_azimuth_b)
+
                         if surface_azimuth_bin not in azimuth_fen_area_dict_b:
                             azimuth_fen_area_dict_b[surface_azimuth_bin] = ZERO.AREA
+
                         for subsurface_b in find_all("$.subsurfaces[*]", surface_b):
                             glazed_area_b = subsurface_b.get("glazed_area", ZERO.AREA)
                             opaque_area_b = subsurface_b.get("opaque_area", ZERO.AREA)
+
                             if (
                                 subsurface_b["classification"]
                                 == SUBSURFACE_CLASSIFICATION.DOOR
@@ -196,12 +211,14 @@ class PRM9012019Rule77j30(RuleDefinitionListIndexedBase):
                         azimuth_fen_area_dict_b[
                             surface_azimuth_bin
                         ] += total_surface_fenestration_area_b
+
                 max_fen_area_b = azimuth_fen_area_dict_b[
                     max(azimuth_fen_area_dict_b, key=azimuth_fen_area_dict_b.get)
                 ]
                 min_fen_area_b = azimuth_fen_area_dict_b[
                     min(azimuth_fen_area_dict_b, key=azimuth_fen_area_dict_b.get)
                 ]
+
                 percent_difference = max(
                     abs(max_fen_area_b - min_fen_area_b) / max_fen_area_b
                     if max_fen_area_b != ZERO.AREA
@@ -210,6 +227,7 @@ class PRM9012019Rule77j30(RuleDefinitionListIndexedBase):
                     if min_fen_area_b != ZERO.AREA
                     else 0.0,
                 )
+
                 rotation_expected_b = (
                     percent_difference > ACCEPTABLE_FEN_PERCENTAGE_DIFFERENCE
                     or self.precision_comparison[
@@ -219,6 +237,7 @@ class PRM9012019Rule77j30(RuleDefinitionListIndexedBase):
                         ACCEPTABLE_FEN_PERCENTAGE_DIFFERENCE,
                     )
                 )
+
                 return {
                     "no_of_rmds": no_of_rmds,
                     "no_of_output_instance": no_of_output_instance,
@@ -239,19 +258,23 @@ class PRM9012019Rule77j30(RuleDefinitionListIndexedBase):
 
             def rule_check(self, context, calc_vals=None, data=None):
                 rotation_expected_b = calc_vals["rotation_expected_b"]
+
                 no_of_rmds = calc_vals["no_of_rmds"]
                 no_of_output_instance = calc_vals["no_of_output_instance"]
+
                 has_baseline_0 = calc_vals["has_baseline_0"]
                 has_baseline_90 = calc_vals["has_baseline_90"]
                 has_baseline_180 = calc_vals["has_baseline_180"]
                 has_baseline_270 = calc_vals["has_baseline_270"]
                 has_proposed = calc_vals["has_proposed"]
                 has_user = calc_vals["has_user"]
+
                 has_baseline_0_output = calc_vals["has_baseline_0_output"]
                 has_baseline_90_output = calc_vals["has_baseline_90_output"]
                 has_baseline_180_output = calc_vals["has_baseline_180_output"]
                 has_baseline_270_output = calc_vals["has_baseline_270_output"]
                 has_proposed_output = calc_vals["has_proposed_output"]
+
                 return (
                     has_user
                     and has_proposed
@@ -259,14 +282,16 @@ class PRM9012019Rule77j30(RuleDefinitionListIndexedBase):
                     and has_proposed_output
                     and has_baseline_0_output
                 ) and (
-                    rotation_expected_b
-                    and has_baseline_90
-                    and has_baseline_180
-                    and has_baseline_270
-                    and has_baseline_90_output
-                    and has_baseline_180_output
-                    and has_baseline_270_output
-                    and no_of_rmds == 6
-                    and no_of_output_instance == 5
-                    or not rotation_expected_b
+                    (
+                        rotation_expected_b
+                        and has_baseline_90
+                        and has_baseline_180
+                        and has_baseline_270
+                        and has_baseline_90_output
+                        and has_baseline_180_output
+                        and has_baseline_270_output
+                        and no_of_rmds == 6
+                        and no_of_output_instance == 5
+                    )
+                    or (not rotation_expected_b)
                 )

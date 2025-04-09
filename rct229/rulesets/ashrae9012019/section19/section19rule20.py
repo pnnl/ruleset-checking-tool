@@ -37,6 +37,7 @@ class PRM9012019Rule60d49(RuleDefinitionListIndexedBase):
     def create_data(self, context, data):
         rmd_b = context.BASELINE_0
         rmd_p = context.PROPOSED
+
         return {
             "zone_supply_return_exhaust_relief_terminal_fan_power_dict_p": get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(
                 rmd_p
@@ -52,15 +53,26 @@ class PRM9012019Rule60d49(RuleDefinitionListIndexedBase):
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
-                required_fields={"$": ["fan_system"]},
+                required_fields={
+                    "$": ["fan_system"],
+                },
                 precision={
-                    "hvac_sys_total_supply_fan_power_b": {"precision": 10, "unit": "W"},
-                    "hvac_sys_total_return_fan_power_b": {"precision": 10, "unit": "W"},
+                    "hvac_sys_total_supply_fan_power_b": {
+                        "precision": 10,
+                        "unit": "W",
+                    },
+                    "hvac_sys_total_return_fan_power_b": {
+                        "precision": 10,
+                        "unit": "W",
+                    },
                     "hvac_sys_total_exhaust_fan_power_b": {
                         "precision": 10,
                         "unit": "W",
                     },
-                    "hvac_sys_total_relief_fan_power_b": {"precision": 10, "unit": "W"},
+                    "hvac_sys_total_relief_fan_power_b": {
+                        "precision": 10,
+                        "unit": "W",
+                    },
                 },
             )
 
@@ -73,12 +85,15 @@ class PRM9012019Rule60d49(RuleDefinitionListIndexedBase):
             list_zones_served_b = data[
                 "dict_of_zones_and_terminal_units_served_by_hvac_sys_b"
             ][hvac_id_b]["zone_list"]
+
             fan_sys_b = hvac_b["fan_system"]
+
             fan_sys_power_flow_info_dict_b = (
                 get_fan_system_object_supply_return_exhaust_relief_total_power_flow(
                     fan_sys_b
                 )
             )
+
             hvac_sys_total_supply_fan_power_b = fan_sys_power_flow_info_dict_b[
                 "supply_fans_power"
             ]
@@ -91,12 +106,14 @@ class PRM9012019Rule60d49(RuleDefinitionListIndexedBase):
             hvac_sys_total_relief_fan_power_b = fan_sys_power_flow_info_dict_b[
                 "relief_fans_power"
             ]
+
             total_modeled_fan_power_b = (
                 hvac_sys_total_supply_fan_power_b
                 + hvac_sys_total_return_fan_power_b
                 + hvac_sys_total_exhaust_fan_power_b
                 + hvac_sys_total_relief_fan_power_b
             )
+
             proposed_total_supply_fan_power = ZERO.POWER
             proposed_total_return_fan_power = ZERO.POWER
             proposed_total_exhaust_fan_power = ZERO.POWER
@@ -122,16 +139,19 @@ class PRM9012019Rule60d49(RuleDefinitionListIndexedBase):
                         zone_id_b
                     ]["relief_fans_power"]
                 )
+
             total_modeled_fan_power_p = (
                 proposed_total_supply_fan_power
                 + proposed_total_return_fan_power
                 + proposed_total_exhaust_fan_power
                 + proposed_total_relief_fan_power
             )
+
             fraction_of_total_supply_p = 0.0
             fraction_of_total_return_p = 0.0
             fraction_of_total_exhaust_p = 0.0
             fraction_of_total_relief_p = 0.0
+
             if total_modeled_fan_power_p > ZERO.POWER:
                 fraction_of_total_supply_p = (
                     proposed_total_supply_fan_power / total_modeled_fan_power_p
@@ -279,4 +299,5 @@ class PRM9012019Rule60d49(RuleDefinitionListIndexedBase):
             expected_baseline_fan_power_relief = calc_vals[
                 "expected_baseline_fan_power_relief"
             ]
+
             return f"The calculated system fan power doesn't appear to be distributed to the supply, return, exhaust, and relief fans in the same proportion as the proposed design for {hvac_id_b}.The expected modeled baseline supply, return, exhaust, and relief kW is {expected_baseline_fan_power_supply}, {expected_baseline_fan_power_return}, {expected_baseline_fan_power_exhaust}, {expected_baseline_fan_power_relief} respectively."

@@ -43,6 +43,7 @@ class PRM9012019Rule52s13(RuleDefinitionBase):
     def is_applicable(self, context, data=None):
         rmd_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmd_b)
+        # create a list containing all HVAC systems that are modeled in the rmd_b
         available_types_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict
@@ -50,7 +51,7 @@ class PRM9012019Rule52s13(RuleDefinitionBase):
         ]
         return any(
             [
-                (available_type in APPLICABLE_SYS_TYPES)
+                available_type in APPLICABLE_SYS_TYPES
                 for available_type in available_types_list
             ]
         )
@@ -58,8 +59,10 @@ class PRM9012019Rule52s13(RuleDefinitionBase):
     def get_calc_vals(self, context, data=None):
         rmd_b = context.BASELINE_0
         num_primary_loops = len(get_primary_secondary_loops_dict(rmd_b))
+
         return {"num_primary_loops": num_primary_loops}
 
     def rule_check(self, context, calc_vals=None, data=None):
         num_primary_loops = calc_vals["num_primary_loops"]
+
         return num_primary_loops != 0

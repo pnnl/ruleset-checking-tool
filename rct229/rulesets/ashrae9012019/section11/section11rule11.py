@@ -19,7 +19,10 @@ class PRM9012019Rule29i55(RuleDefinitionListIndexedBase):
             each_rule=PRM9012019Rule29i55.RMDRule(),
             index_rmd=BASELINE_0,
             id="11-11",
-            description="For buildings that will have no service water-heating loads, no service water-heating shall be modeled in baseline building model",
+            description=(
+                "For buildings that will have no service water-heating loads, no service water-heating shall be "
+                "modeled in baseline building model"
+            ),
             ruleset_section_title="Service Water Heating",
             standard_section="Table G3.1 #11, baseline column, c",
             is_primary_rule=True,
@@ -50,6 +53,7 @@ class PRM9012019Rule29i55(RuleDefinitionListIndexedBase):
                     )[building_segment_p["id"]]
                 ]
             )
+
             return swh_use_loads_p <= 0.0
 
         def create_data(self, context, data):
@@ -73,7 +77,7 @@ class PRM9012019Rule29i55(RuleDefinitionListIndexedBase):
                 super(PRM9012019Rule29i55.RMDRule.BuildingSegmentRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False
-                    )
+                    ),
                 )
 
             def get_calc_vals(self, context, data=None):
@@ -81,6 +85,7 @@ class PRM9012019Rule29i55(RuleDefinitionListIndexedBase):
                 building_segment_associated_swh_use_dict_b = data[
                     "building_segment_associated_swh_use_dict_b"
                 ]
+
                 swh_use_loads_b = sum(
                     [
                         swh_use_b.get("use", 0.0)

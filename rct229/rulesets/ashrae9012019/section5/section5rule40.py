@@ -31,7 +31,9 @@ class PRM9012019Rule33l08(RuleDefinitionListIndexedBase):
             each_rule=PRM9012019Rule33l08.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-40",
-            description="Opaque roof surfaces that are not regulated (not part of opaque building envelope) must be modeled with the same thermal emittance and solar reflectance in the baseline as in the proposed design. ",
+            description="Opaque roof surfaces that are not regulated (not part of opaque building envelope) must be "
+            "modeled with the same thermal emittance and solar reflectance in the baseline as in the "
+            "proposed design. ",
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5 Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
@@ -59,7 +61,7 @@ class PRM9012019Rule33l08(RuleDefinitionListIndexedBase):
             return {
                 "scc_dict_b": get_surface_conditioning_category_dict(
                     data["climate_zone"], building_b
-                )
+                ),
             }
 
         def list_filter(self, context_item, data=None):
@@ -82,7 +84,10 @@ class PRM9012019Rule33l08(RuleDefinitionListIndexedBase):
                             "precision": 0.01,
                             "unit": "",
                         },
-                        "absorptance_solar_exterior_b": {"precision": 0.01, "unit": ""},
+                        "absorptance_solar_exterior_b": {
+                            "precision": 0.01,
+                            "unit": "",
+                        },
                     },
                 )
 

@@ -50,23 +50,31 @@ class PRM9012019Rule37a05(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1.3.10 Chilled-water pumps (System 7, 8, 11, 12 and 13)",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].fluid_loops[*]",
-            precision={"chw_loop_capacity": {"precision": 1, "unit": "ton"}},
+            precision={
+                "chw_loop_capacity": {
+                    "precision": 1,
+                    "unit": "ton",
+                },
+            },
         )
 
     def is_applicable(self, context, data=None):
         rmd_baseline = context.BASELINE_0
         rmd_b = rmd_baseline["ruleset_model_descriptions"][0]
         baseline_system_types_dict = get_baseline_system_types(rmd_b)
+        # create a list containing all HVAC systems that are modeled in the rmd_b
         available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict
             if len(baseline_system_types_dict[hvac_type]) > 0
         ]
+
         primary_secondary_loop_dict = get_primary_secondary_loops_dict(rmd_b)
+
         return (
             any(
                 [
-                    (available_type in APPLICABLE_SYS_TYPES)
+                    available_type in APPLICABLE_SYS_TYPES
                     for available_type in available_type_list
                 ]
             )
@@ -76,11 +84,13 @@ class PRM9012019Rule37a05(RuleDefinitionListIndexedBase):
     def create_data(self, context, data):
         rmd_baseline = context.BASELINE_0
         rmd_b = rmd_baseline["ruleset_model_descriptions"][0]
+
         loop_pump_dict = {}
         for pump in find_all("$.pumps[*]", rmd_b):
             if pump["loop_or_piping"] not in loop_pump_dict:
                 loop_pump_dict[pump["loop_or_piping"]] = []
             loop_pump_dict[pump["loop_or_piping"]].append(pump)
+
         chw_loop_capacity_dict = {}
         for chiller in find_all("$.chillers[*]", rmd_b):
             cooling_loop_id = chiller["cooling_loop"]
@@ -89,8 +99,10 @@ class PRM9012019Rule37a05(RuleDefinitionListIndexedBase):
             chw_loop_capacity_dict[cooling_loop_id] += getattr_(
                 chiller, "chiller", "rated_capacity"
             )
+
         primary_secondary_loop_dict = get_primary_secondary_loops_dict(rmd_b)
         primary_loop_ids = primary_secondary_loop_dict
+
         return {
             "loop_pump_dict": loop_pump_dict,
             "chw_loop_capacity_dict": chw_loop_capacity_dict,
@@ -101,6 +113,7 @@ class PRM9012019Rule37a05(RuleDefinitionListIndexedBase):
         fluid_loop_b = context_item.BASELINE_0
         primary_loop_ids = data["primary_loop_ids"]
         chw_loop_capacity_dict = data["chw_loop_capacity_dict"]
+
         return fluid_loop_b["id"] in primary_loop_ids and (
             chw_loop_capacity_dict[fluid_loop_b["id"]]
             > MIN_CHW_PRIMARY_LOOP_COOLING_CAPACITY
@@ -137,6 +150,7 @@ class PRM9012019Rule37a05(RuleDefinitionListIndexedBase):
             def create_context_list(self, context, data=None):
                 child_loop_b = context.BASELINE_0
                 loop_pump_dict = data["loop_pump_dict"]
+
                 return [
                     produce_ruleset_model_description(
                         USER=None, BASELINE_0=pump_type, PROPOSED=None
@@ -152,12 +166,13 @@ class PRM9012019Rule37a05(RuleDefinitionListIndexedBase):
                     ).__init__(
                         rmds_used=produce_ruleset_model_description(
                             USER=False, BASELINE_0=True, PROPOSED=False
-                        )
+                        ),
                     )
 
                 def get_calc_vals(self, context, data=None):
                     pump_type_b = context.BASELINE_0
                     secondary_pump_speed_control = pump_type_b["speed_control"]
+
                     return {
                         "secondary_pump_speed_control": secondary_pump_speed_control
                     }
@@ -166,6 +181,7 @@ class PRM9012019Rule37a05(RuleDefinitionListIndexedBase):
                     secondary_pump_speed_control = calc_vals[
                         "secondary_pump_speed_control"
                     ]
+
                     return (
                         secondary_pump_speed_control
                         == PUMP_SPEED_CONTROL.VARIABLE_SPEED

@@ -32,6 +32,7 @@ NOT_APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_11_1B,
     HVAC_SYS.SYS_11_1C,
 ]
+
 REQUIRED_PUMP_POWER_PER_FLOW_RATE = 9 * ureg("W/gpm")
 
 
@@ -57,22 +58,24 @@ class PRM9012019Rule03q09(RuleDefinitionListIndexedBase):
     def is_applicable(self, context, data=None):
         rmd_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmd_b)
+        # create a list containing all HVAC systems that are modeled in the rmd_b
         available_sys_types = [
             hvac_type
             for hvac_type in baseline_system_types_dict
             if len(baseline_system_types_dict[hvac_type]) > 0
         ]
         primary_secondary_loop_dict = get_primary_secondary_loops_dict(rmd_b)
+
         return (
             any(
                 [
-                    (available_type in APPLICABLE_SYS_TYPES)
+                    available_type in APPLICABLE_SYS_TYPES
                     for available_type in available_sys_types
                 ]
             )
             and not any(
                 [
-                    (available_type in NOT_APPLICABLE_SYS_TYPES)
+                    available_type in NOT_APPLICABLE_SYS_TYPES
                     for available_type in available_sys_types
                 ]
             )
@@ -96,12 +99,14 @@ class PRM9012019Rule03q09(RuleDefinitionListIndexedBase):
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
-                required_fields={"$": ["pump_power_per_flow_rate"]},
+                required_fields={
+                    "$": ["pump_power_per_flow_rate"],
+                },
                 precision={
                     "primary_pump_power_per_flow_rate": {
                         "precision": 1,
                         "unit": "W/gpm",
-                    }
+                    },
                 },
             )
 
@@ -126,8 +131,10 @@ class PRM9012019Rule03q09(RuleDefinitionListIndexedBase):
             required_pump_power_per_flow_rate = calc_vals[
                 "required_pump_power_per_flow_rate"
             ]
+
             return self.precision_comparison["primary_pump_power_per_flow_rate"](
-                required_pump_power_per_flow_rate, primary_pump_power_per_flow_rate
+                required_pump_power_per_flow_rate,
+                primary_pump_power_per_flow_rate,
             )
 
         def is_tolerance_fail(self, context, calc_vals=None, data=None):

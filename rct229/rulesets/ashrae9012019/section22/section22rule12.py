@@ -28,6 +28,7 @@ class PRM9012019Rule99f07(RuleDefinitionBase):
         heat_rejection_loop_ids_b = (
             get_heat_rejection_loops_connected_to_baseline_systems(rmd_b)
         )
+
         return heat_rejection_loop_ids_b
 
     def get_calc_vals(self, context, data=None):
@@ -35,6 +36,7 @@ class PRM9012019Rule99f07(RuleDefinitionBase):
         heat_rejection_loop_ids_b = (
             get_heat_rejection_loops_connected_to_baseline_systems(rmd_b)
         )
+
         number_of_baseline_heat_rejections_b = len(
             [
                 heat_rejection_b
@@ -43,6 +45,7 @@ class PRM9012019Rule99f07(RuleDefinitionBase):
                 in heat_rejection_loop_ids_b
             ]
         )
+
         return {
             "heat_rejection_loop_ids_b": heat_rejection_loop_ids_b,
             "number_of_baseline_heat_rejections_b": number_of_baseline_heat_rejections_b,
@@ -53,6 +56,7 @@ class PRM9012019Rule99f07(RuleDefinitionBase):
         number_of_baseline_heat_rejections_b = calc_vals[
             "number_of_baseline_heat_rejections_b"
         ]
+
         return (
             number_of_baseline_heat_rejections_b == 1
             and len(heat_rejection_loop_ids_b) == 1
@@ -64,6 +68,7 @@ class PRM9012019Rule99f07(RuleDefinitionBase):
             "number_of_baseline_heat_rejections_b"
         ]
         len_heat_rejection_loop_ids_b = len(heat_rejection_loop_ids_b)
+
         if (
             number_of_baseline_heat_rejections_b == 1
             and len_heat_rejection_loop_ids_b > 1
@@ -75,5 +80,9 @@ class PRM9012019Rule99f07(RuleDefinitionBase):
         ):
             FAIL_MSG = "There is more than one cooling tower for the baseline chiller plant. There should only be one cooling tower attached to the condenser loop."
         else:
-            FAIL_MSG = "There is more than one cooling tower on this loop and there is more than one condenser loop for the chiller plant. For the baseline chiller plant, there should be only one condenser loop with only one cooling tower."
+            FAIL_MSG = (
+                "There is more than one cooling tower on this loop and there is more than one condenser loop for the chiller plant. "
+                "For the baseline chiller plant, there should be only one condenser loop with only one cooling tower."
+            )
+
         return FAIL_MSG

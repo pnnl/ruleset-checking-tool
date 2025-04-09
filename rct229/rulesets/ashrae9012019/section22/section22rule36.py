@@ -26,6 +26,7 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_11_1B,
     HVAC_SYS.SYS_12B,
 ]
+
 FluidLoopFlowControl = SchemaEnums.schema_enums["FluidLoopFlowControlOptions"]
 
 
@@ -51,16 +52,20 @@ class PRM9012019Rule01b91(RuleDefinitionListIndexedBase):
     def is_applicable(self, context, data=None):
         rmd_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmd_b)
+        # create a list containing all HVAC systems that are modeled in the rmd_b
         available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict
             if len(baseline_system_types_dict[hvac_type]) > 0
         ]
+
+        # primary secondary loop
         primary_secondary_loop_dict = get_primary_secondary_loops_dict(rmd_b)
+
         return (
             any(
                 [
-                    (available_type in APPLICABLE_SYS_TYPES)
+                    available_type in APPLICABLE_SYS_TYPES
                     for available_type in available_type_list
                 ]
             )
@@ -69,6 +74,7 @@ class PRM9012019Rule01b91(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data):
         rmd_b = context.BASELINE_0
+        # create primary secondary loop
         primary_secondary_loop_dict = get_primary_secondary_loops_dict(rmd_b)
         return {"primary_secondary_loop_dict": primary_secondary_loop_dict}
 
@@ -94,7 +100,10 @@ class PRM9012019Rule01b91(RuleDefinitionListIndexedBase):
             primary_loop_flow_control = primary_loop_b[
                 "cooling_or_condensing_design_and_control"
             ]["flow_control"]
+
+            # The logic in list_filter ensures this primary loop has child loops
             secondary_loops = primary_loop_b["child_loops"]
+            # For reporting purpose
             secondary_loop_ids = [
                 secondary_loop["id"] for secondary_loop in secondary_loops
             ]
@@ -107,6 +116,7 @@ class PRM9012019Rule01b91(RuleDefinitionListIndexedBase):
                 )
                 for secondary_loop in secondary_loops
             ]
+
             return {
                 "primary_loop_flow_control": primary_loop_flow_control,
                 "secondary_loop_ids": secondary_loop_ids,

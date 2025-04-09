@@ -40,6 +40,7 @@ class PRM9012019Rule79u84(RuleDefinitionListIndexedBase):
     def is_applicable(self, context, data=None):
         rmd_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmd_b)
+        # create a list containing all HVAC systems that are modeled in the rmd_b
         available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict
@@ -47,7 +48,7 @@ class PRM9012019Rule79u84(RuleDefinitionListIndexedBase):
         ]
         return any(
             [
-                (available_type in APPLICABLE_SYS_TYPES)
+                available_type in APPLICABLE_SYS_TYPES
                 for available_type in available_type_list
             ]
         )
@@ -73,7 +74,10 @@ class PRM9012019Rule79u84(RuleDefinitionListIndexedBase):
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 precision={
-                    "pump_power_per_flow_rate": {"precision": 1, "unit": "W/gpm"}
+                    "pump_power_per_flow_rate": {
+                        "precision": 1,
+                        "unit": "W/gpm",
+                    },
                 },
             )
 
@@ -81,6 +85,7 @@ class PRM9012019Rule79u84(RuleDefinitionListIndexedBase):
             fluid_loop_b = context.BASELINE_0
             pump_power_per_flow_rate = fluid_loop_b["pump_power_per_flow_rate"]
             required_pump_power = REQUIRED_PUMP_POWER
+
             return {
                 "pump_power_per_flow_rate": CalcQ(
                     "power_per_liquid_flow_rate", pump_power_per_flow_rate
@@ -93,11 +98,14 @@ class PRM9012019Rule79u84(RuleDefinitionListIndexedBase):
         def rule_check(self, context, calc_vals=None, data=None):
             pump_power_per_flow_rate = calc_vals["pump_power_per_flow_rate"]
             required_pump_power = calc_vals["required_pump_power"]
+
             return self.precision_comparison["pump_power_per_flow_rate"](
-                pump_power_per_flow_rate, required_pump_power
+                pump_power_per_flow_rate,
+                required_pump_power,
             )
 
         def is_tolerance_fail(self, context, calc_vals=None, data=None):
             pump_power_per_flow_rate = calc_vals["pump_power_per_flow_rate"]
             required_pump_power = calc_vals["required_pump_power"]
+
             return std_equal(pump_power_per_flow_rate, required_pump_power)

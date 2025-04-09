@@ -32,17 +32,21 @@ class PRM9012019Rule44t17(RuleDefinitionListIndexedBase):
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
-                required_fields={"$": ["fan_system"]},
+                required_fields={
+                    "$": ["fan_system"],
+                },
             )
 
         def is_applicable(self, context, data=None):
             hvac_b = context.BASELINE_0
             fan_sys_b = hvac_b["fan_system"]
+
             return fan_sys_b.get("air_energy_recovery") is not None
 
         def get_calc_vals(self, context, data=None):
             hvac_b = context.BASELINE_0
             fan_sys_b = hvac_b["fan_system"]
+
             ER_operation = getattr_(
                 fan_sys_b,
                 "Fan System",
@@ -53,4 +57,5 @@ class PRM9012019Rule44t17(RuleDefinitionListIndexedBase):
 
         def rule_check(self, context, calc_vals=None, data=None):
             ER_operation = calc_vals["ER_operation"]
+
             return ER_operation == ENERGY_RECOVERY_OPERATION.WHEN_MINIMUM_OUTSIDE_AIR

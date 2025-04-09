@@ -17,8 +17,15 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_ca
 from rct229.utils.std_comparisons import std_equal
 
 ABSORPTION_THERMAL_EXTERIOR = 0.9
-UNDETERMINED_MSG = "Roof surface emittance in the proposed model {absorptance_thermal_exterior} matches that in the user model but is not equal to the prescribed default value of 0.9. Verify that the modeled value is based on testing in accordance with section 5.5.3.1.1(a). "
-PASS_DIFFERS_MSG = "Roof thermal emittance is equal to the prescribed default value of 0.9 but differs from the thermal emittance in the user model {absorptance_thermal_exterior} "
+UNDETERMINED_MSG = (
+    "Roof surface emittance in the proposed model {absorptance_thermal_exterior} matches that in the "
+    "user model but is not equal to the prescribed default value of 0.9. Verify that the modeled value "
+    "is based on testing in accordance with section 5.5.3.1.1(a). "
+)
+PASS_DIFFERS_MSG = (
+    "Roof thermal emittance is equal to the prescribed default value of 0.9 but differs from the "
+    "thermal emittance in the user model {absorptance_thermal_exterior} "
+)
 
 
 class PRM9012019Rule18s99(RuleDefinitionListIndexedBase):
@@ -60,7 +67,7 @@ class PRM9012019Rule18s99(RuleDefinitionListIndexedBase):
             return {
                 "scc_dict_p": get_surface_conditioning_category_dict(
                     data["climate_zone"], building_p
-                )
+                ),
             }
 
         def list_filter(self, context_item, data=None):
@@ -92,6 +99,7 @@ class PRM9012019Rule18s99(RuleDefinitionListIndexedBase):
             def get_calc_vals(self, context, data=None):
                 roof_p = context.PROPOSED
                 roof_u = context.USER
+
                 return {
                     "absorptance_thermal_exterior_p": roof_p["optical_properties"][
                         "absorptance_thermal_exterior"
@@ -135,6 +143,7 @@ class PRM9012019Rule18s99(RuleDefinitionListIndexedBase):
                 absorptance_thermal_exterior_u = calc_vals[
                     "absorptance_thermal_exterior_u"
                 ]
+
                 pass_msg = (
                     PASS_DIFFERS_MSG.format(
                         absorptance_thermal_exterior=absorptance_thermal_exterior_u
@@ -142,6 +151,7 @@ class PRM9012019Rule18s99(RuleDefinitionListIndexedBase):
                     if absorptance_thermal_exterior_p != absorptance_thermal_exterior_u
                     else ""
                 )
+
                 return pass_msg
 
             def is_tolerance_fail(self, context, calc_vals=None, data=None):

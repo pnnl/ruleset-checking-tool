@@ -33,12 +33,14 @@ class PRM9012019Rule34h06(RuleDefinitionListIndexedBase):
     def is_applicable(self, context, data=None):
         rmd_b = context.BASELINE_0
         rmd_p = context.PROPOSED
+
         elevators_list_b = find_all(
             "$.ruleset_model_descriptions[0].buildings[*].elevators[*]", rmd_b
         )
         elevators_list_p = find_all(
             "$.ruleset_model_descriptions[0].buildings[*].elevators[*]", rmd_p
         )
+
         return elevators_list_p and elevators_list_b
 
     class ElevatorRule(RuleDefinitionBase):
@@ -59,13 +61,16 @@ class PRM9012019Rule34h06(RuleDefinitionListIndexedBase):
             ]
             assert_(
                 elevator_cab_ventilation_fan_power_b > ZERO.POWER,
-                "Elevator cab ventilation fan power should be greater than 0 W.",
+                "Elevator cab ventilation fan power should be " "greater than 0 W.",
             )
+
             elevator_cab_ventilation_fan_flow_b = elevator_b["cab_ventilation_fan_flow"]
             assert_(
                 elevator_cab_ventilation_fan_flow_b > ZERO.FLOW,
-                "Elevator cab ventilation fan flow rate should be greater than 0 cfm.",
+                "Elevator cab ventilation fan flow rate should "
+                "be greater than 0 cfm.",
             )
+
             return {
                 "elevator_cab_ventilation_fan_power_b": CalcQ(
                     "electric_power", elevator_cab_ventilation_fan_power_b

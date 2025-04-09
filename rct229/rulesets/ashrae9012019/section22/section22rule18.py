@@ -38,6 +38,7 @@ class PRM9012019Rule38d92(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data):
         rmd_b = context.BASELINE_0
+
         return {
             "heat_rejection_loop_ids_b": get_heat_rejection_loops_connected_to_baseline_systems(
                 rmd_b
@@ -50,20 +51,27 @@ class PRM9012019Rule38d92(RuleDefinitionListIndexedBase):
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
-                required_fields={"$": ["fan_speed_control", "loop"]},
+                required_fields={
+                    "$": ["fan_speed_control", "loop"],
+                },
             )
 
         def is_applicable(self, context, data=None):
             heat_rejection_b = context.BASELINE_0
             heat_rejection_loop_ids_b = data["heat_rejection_loop_ids_b"]
             heat_rejection_loop_b = heat_rejection_b["loop"]
+
             return heat_rejection_loop_b in heat_rejection_loop_ids_b
 
         def get_calc_vals(self, context, data=None):
             heat_rejection_b = context.BASELINE_0
             fan_speed_control_b = heat_rejection_b["fan_speed_control"]
-            return {"fan_speed_control_b": fan_speed_control_b}
+
+            return {
+                "fan_speed_control_b": fan_speed_control_b,
+            }
 
         def rule_check(self, context, calc_vals=None, data=None):
             fan_speed_control_b = calc_vals["fan_speed_control_b"]
+
             return fan_speed_control_b == HEATREJECTIONFANSPEEDCONTROL.VARIABLE_SPEED

@@ -24,7 +24,9 @@ class PRM9012019Rule20g60(RuleDefinitionListIndexedBase):
             each_rule=PRM9012019Rule20g60.HVACRule(),
             index_rmd=PROPOSED,
             id="19-28",
-            description="Schedules for HVAC fans that provide outdoor air for ventilation in the proposed design shall be cycled ON and OFF to meet heating and cooling loads during unoccupied hours excluding HVAC systems that meet Table G3.1-4 Schedules for the proposed building exceptions #2 and #3.#2 HVAC fans shall remain on during occupied and unoccupied hours in spaces that have health- and safety mandated minimum ventilation requirements during unoccupied hours.#3 HVAC fans shall remain on during occupied and unoccupied hours in systems primarily serving computer rooms.",
+            description="Schedules for HVAC fans that provide outdoor air for ventilation in the proposed design shall be cycled ON and OFF to meet heating and cooling loads during unoccupied hours excluding HVAC systems that meet Table G3.1-4 Schedules for the proposed building exceptions #2 and #3."
+            "#2 HVAC fans shall remain on during occupied and unoccupied hours in spaces that have health- and safety mandated minimum ventilation requirements during unoccupied hours."
+            "#3 HVAC fans shall remain on during occupied and unoccupied hours in systems primarily serving computer rooms.",
             ruleset_section_title="HVAC - General",
             standard_section="Table G3.1-4 Schedules for the proposed building excluding exceptions #s 2 and 3 and Section G3.1.2.4.",
             is_primary_rule=True,
@@ -34,12 +36,14 @@ class PRM9012019Rule20g60(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data):
         rmd_p = context.PROPOSED
+
         inapplicable_hvac_sys_list_p = list(
             set(
                 get_hvac_systems_primarily_serving_comp_room(rmd_p)
                 + get_hvac_systems_serving_zone_health_safety_vent_reqs(rmd_p)
             )
         )
+
         return {"inapplicable_hvac_sys_list_p": inapplicable_hvac_sys_list_p}
 
     class HVACRule(RuleDefinitionBase):
@@ -50,7 +54,9 @@ class PRM9012019Rule20g60(RuleDefinitionListIndexedBase):
                 ),
                 required_fields={
                     "$": ["fan_system"],
-                    "fan_system": ["operation_during_unoccupied"],
+                    "fan_system": [
+                        "operation_during_unoccupied",
+                    ],
                 },
             )
 
@@ -58,15 +64,19 @@ class PRM9012019Rule20g60(RuleDefinitionListIndexedBase):
             hvac_p = context.PROPOSED
             hvac_id_p = hvac_p["id"]
             inapplicable_hvac_sys_list_p = data["inapplicable_hvac_sys_list_p"]
+
             return hvac_id_p not in inapplicable_hvac_sys_list_p
 
         def get_calc_vals(self, context, data=None):
             hvac_p = context.PROPOSED
+
             operation_during_unoccupied_p = hvac_p["fan_system"][
                 "operation_during_unoccupied"
             ]
+
             return {"operation_during_unoccupied_p": operation_during_unoccupied_p}
 
         def rule_check(self, context, calc_vals=None, data=None):
             operation_during_unoccupied_p = calc_vals["operation_during_unoccupied_p"]
+
             return operation_during_unoccupied_p == FAN_SYSTEM_OPERATION.CYCLING

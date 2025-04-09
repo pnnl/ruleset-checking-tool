@@ -54,11 +54,13 @@ class PRM9012019Rule48h16(RuleDefinitionBase):
     def is_applicable(self, context, data=None):
         rmd_p = context.PROPOSED
         purchased_chw_hhw_status_dict_p = check_purchased_chw_hhw_status_dict(rmd_p)
+
         return purchased_chw_hhw_status_dict_p["purchased_cooling"]
 
     def get_calc_vals(self, context, data=None):
         rmd_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmd_b)
+
         return {"baseline_system_types_dict": baseline_system_types_dict}
 
     def rule_check(self, context, calc_vals=None, data=None):
@@ -70,10 +72,8 @@ class PRM9012019Rule48h16(RuleDefinitionBase):
         ]
         return not any(
             [
-                (
-                    available_type
-                    in AIR_SIDE_SYSTEMS_USING_COOLING_SOURCE_OTHER_THAN_PURCHASED_CHILLED_WATER
-                )
+                available_type
+                in AIR_SIDE_SYSTEMS_USING_COOLING_SOURCE_OTHER_THAN_PURCHASED_CHILLED_WATER
                 for available_type in available_type_list
             ]
         )

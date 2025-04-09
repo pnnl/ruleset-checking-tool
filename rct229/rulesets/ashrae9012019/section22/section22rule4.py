@@ -58,6 +58,7 @@ class PRM9012019Rule13x50(RuleDefinitionListIndexedBase):
     def is_applicable(self, context, data=None):
         rmd_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmd_b)
+        # create a list containing all HVAC systems that are modeled in the rmd_b
         available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict
@@ -65,12 +66,12 @@ class PRM9012019Rule13x50(RuleDefinitionListIndexedBase):
         ]
         return any(
             [
-                (available_type in APPLICABLE_SYS_TYPES)
+                available_type in APPLICABLE_SYS_TYPES
                 for available_type in available_type_list
             ]
         ) and any(
             [
-                (available_type not in NOT_APPLICABLE_SYS_TYPES)
+                available_type not in NOT_APPLICABLE_SYS_TYPES
                 for available_type in available_type_list
             ]
         )
@@ -134,6 +135,7 @@ class PRM9012019Rule13x50(RuleDefinitionListIndexedBase):
             loop_supply_temperature_at_outdoor_low = fluid_loop_b[
                 "cooling_or_condensing_design_and_control"
             ]["loop_supply_temperature_at_outdoor_low"]
+
             return {
                 "outdoor_high_for_loop_supply_reset_temperature": CalcQ(
                     "temperature", outdoor_high_for_loop_supply_reset_temperature
@@ -186,6 +188,7 @@ class PRM9012019Rule13x50(RuleDefinitionListIndexedBase):
             required_loop_supply_temperature_at_outdoor_low = calc_vals[
                 "required_loop_supply_temperature_at_outdoor_low"
             ]
+
             return (
                 self.precision_comparison[
                     "outdoor_high_for_loop_supply_reset_temperature"
@@ -240,6 +243,7 @@ class PRM9012019Rule13x50(RuleDefinitionListIndexedBase):
             required_loop_supply_temperature_at_outdoor_low = calc_vals[
                 "required_loop_supply_temperature_at_outdoor_low"
             ]
+
             return (
                 std_equal(
                     outdoor_high_for_loop_supply_reset_temperature.to(ureg.kelvin),

@@ -32,9 +32,11 @@ class PRM9012019Rule58x03(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data):
         rmd_p = context.PROPOSED
+
         hvac_systems_primarily_serving_comp_room_p = (
             get_hvac_systems_primarily_serving_comp_room(rmd_p)
         )
+
         return {
             "hvac_systems_primarily_serving_comp_room_p": hvac_systems_primarily_serving_comp_room_p
         }
@@ -60,14 +62,17 @@ class PRM9012019Rule58x03(RuleDefinitionListIndexedBase):
             hvac_systems_primarily_serving_comp_room_p = data[
                 "hvac_systems_primarily_serving_comp_room_p"
             ]
+
             return hvac_id_p in hvac_systems_primarily_serving_comp_room_p
 
         def get_calc_vals(self, context, data=None):
             hvac_p = context.PROPOSED
+
             operation_during_unoccupied_p = hvac_p["fan_system"][
                 "operation_during_unoccupied"
             ]
             minimum_outdoor_airflow_p = hvac_p["fan_system"]["minimum_outdoor_airflow"]
+
             return {
                 "operation_during_unoccupied_p": operation_during_unoccupied_p,
                 "minimum_outdoor_airflow_p": minimum_outdoor_airflow_p,
@@ -76,9 +81,11 @@ class PRM9012019Rule58x03(RuleDefinitionListIndexedBase):
         def rule_check(self, context, calc_vals=None, data=None):
             operation_during_unoccupied_p = calc_vals["operation_during_unoccupied_p"]
             minimum_outdoor_airflow_p = calc_vals["minimum_outdoor_airflow_p"]
+
             return (
                 operation_during_unoccupied_p == FAN_SYSTEM_OPERATION.CONTINUOUS
                 and minimum_outdoor_airflow_p > ZERO.FLOW
-                or operation_during_unoccupied_p == FAN_SYSTEM_OPERATION.CYCLING
+            ) or (
+                operation_during_unoccupied_p == FAN_SYSTEM_OPERATION.CYCLING
                 and minimum_outdoor_airflow_p == ZERO.FLOW
             )

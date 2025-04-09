@@ -18,6 +18,7 @@ DORMITORY_LIVING_QUARTERS = SchemaEnums.schema_enums[
 DWELLING_UNIT = SchemaEnums.schema_enums[
     "LightingSpaceOptions2019ASHRAE901TG37"
 ].DWELLING_UNIT
+
 DWELLING_UNIT_MIN_LIGHTING_POWER_PER_AREA = 0.6 * ureg("W/ft2")
 
 
@@ -41,7 +42,9 @@ class PRM9012019Rule37d98(RuleDefinitionListIndexedBase):
 
     def list_filter(self, context_item, data=None):
         space_p = context_item.PROPOSED
+        # skip spaces has no lighting_space_type
         lighting_space_type_p = space_p.get("lighting_space_type")
+
         return lighting_space_type_p in [
             GUEST_ROOM,
             DWELLING_UNIT,
@@ -68,12 +71,15 @@ class PRM9012019Rule37d98(RuleDefinitionListIndexedBase):
             )
 
         def is_applicable(self, context, data=None):
+            # Set space not applicable if no lighting space type
             space_p = context.PROPOSED
             return space_p.get("lighting_space_type") is not None
 
         def get_calc_vals(self, context, data=None):
             space_p = context.PROPOSED
             space_u = context.USER
+
+            # get allowance
             if space_p["lighting_space_type"] in [
                 GUEST_ROOM,
                 DORMITORY_LIVING_QUARTERS,
@@ -83,6 +89,7 @@ class PRM9012019Rule37d98(RuleDefinitionListIndexedBase):
                 )["lpd"]
             else:
                 lighting_power_allowance_p = DWELLING_UNIT_MIN_LIGHTING_POWER_PER_AREA
+
             space_lighting_power_per_area_p = sum(
                 find_all("$.interior_lighting[*].power_per_area", space_p),
                 ZERO.POWER_PER_AREA,
@@ -91,6 +98,7 @@ class PRM9012019Rule37d98(RuleDefinitionListIndexedBase):
                 find_all("$.interior_lighting[*].power_per_area", space_u),
                 ZERO.POWER_PER_AREA,
             )
+
             return {
                 "lighting_power_allowance_p": CalcQ(
                     "power_density", lighting_power_allowance_p
@@ -111,6 +119,7 @@ class PRM9012019Rule37d98(RuleDefinitionListIndexedBase):
             space_lighting_power_per_area_u = calc_vals[
                 "space_lighting_power_per_area_u"
             ]
+
             return self.precision_comparison["space_lighting_power_per_area_p"](
                 space_lighting_power_per_area_p,
                 max(lighting_power_allowance_p, space_lighting_power_per_area_u),
@@ -124,6 +133,7 @@ class PRM9012019Rule37d98(RuleDefinitionListIndexedBase):
             space_lighting_power_per_area_u = calc_vals[
                 "space_lighting_power_per_area_u"
             ]
+
             return std_equal(
                 space_lighting_power_per_area_p,
                 max(lighting_power_allowance_p, space_lighting_power_per_area_u),

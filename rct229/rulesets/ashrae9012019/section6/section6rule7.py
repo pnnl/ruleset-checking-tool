@@ -8,6 +8,7 @@ from rct229.utils.jsonpath_utils import find_all
 MSG_WARN_DAYLIGHT_NO_SCHEDULE = "Some of the spaces in zone are modeled with window(s) and/or skylight(s) and have daylighting controls modeled explicitly in the simulation tool. Verify that the mandatory lighting control requirements are met."
 MSG_WARN_DAYLIGHT = "Some of the spaces in zone are modeled with window(s) and/or skylight(s) and have daylighting controls modeled via schedule adjustment. Verify that the mandatory lighting control requirements are met, and that the supporting documentation is provided for the schedule adjustment."
 MSG_WARN_NO_DAYLIGHT = "Some of the spaces in zone are modeled with fenestration but no daylighting controls. The design must include mandatory daylighting controls unless any of the exceptions to 90.1 section 9.4.1.1 apply."
+
 DOOR = SchemaEnums.schema_enums["SubsurfaceClassificationOptions"].DOOR
 EXTERIOR = SchemaEnums.schema_enums["SurfaceAdjacencyOptions"].EXTERIOR
 NONE = SchemaEnums.schema_enums["LightingDaylightingControlOptions"].NONE
@@ -42,30 +43,37 @@ class PRM9012019Rule66m62(RuleDefinitionListIndexedBase):
 
         def get_calc_vals(self, context, data=None):
             zone_p = context.PROPOSED
+
             daylight_flag_p = (
                 len(
                     find_all(
+                        # Doors in a surface adjacent to exterior
                         f'$.surfaces[*][?(@.adjacent_to = "{EXTERIOR}")].subsurfaces[*][?(@.classification != "{DOOR}")]',
                         zone_p,
                     )
                 )
                 > 0
             )
+
             has_daylight_control_flag = (
                 len(
                     find_all(
+                        # interior_lighting instances with daylighting_control_type set to NONE
                         f'$.spaces[*].interior_lighting[*][?(@.daylighting_control_type!= "{NONE}")]',
                         zone_p,
                     )
                 )
                 > 0
             )
+
             daylight_schedule_adjustment_flag = any(
                 find_all(
+                    # interior_lighting instances with are_schedules_used_for_modeling_daylighting_control set to True
                     "$.spaces[*].interior_lighting[*][?(@.are_schedules_used_for_modeling_daylighting_control = true)]",
                     zone_p,
                 )
             )
+
             return {
                 "daylight_flag_p": daylight_flag_p,
                 "has_daylight_control_flag": has_daylight_control_flag,
@@ -75,12 +83,14 @@ class PRM9012019Rule66m62(RuleDefinitionListIndexedBase):
         def manual_check_required(self, context, calc_vals=None, data=None):
             daylight_flag_p = calc_vals["daylight_flag_p"]
             has_daylight_control_flag = calc_vals["has_daylight_control_flag"]
+
             return daylight_flag_p and has_daylight_control_flag
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
             daylight_schedule_adjustment_flag = calc_vals[
                 "daylight_schedule_adjustment_flag"
             ]
+
             return (
                 MSG_WARN_DAYLIGHT
                 if daylight_schedule_adjustment_flag
@@ -90,11 +100,13 @@ class PRM9012019Rule66m62(RuleDefinitionListIndexedBase):
         def rule_check(self, context, calc_vals, data=None):
             daylight_flag_p = calc_vals["daylight_flag_p"]
             has_daylight_control_flag = calc_vals["has_daylight_control_flag"]
+
             return not daylight_flag_p and not has_daylight_control_flag
 
         def get_fail_msg(self, context, calc_vals=None, data=None):
             daylight_flag_p = calc_vals["daylight_flag_p"]
             has_daylight_control_flag = calc_vals["has_daylight_control_flag"]
+
             return (
                 MSG_WARN_NO_DAYLIGHT
                 if daylight_flag_p and not has_daylight_control_flag

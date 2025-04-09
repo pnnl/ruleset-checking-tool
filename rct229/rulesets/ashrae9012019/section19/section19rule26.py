@@ -35,6 +35,7 @@ class PRM9012019Rule09g49(RuleDefinitionListIndexedBase):
         applicable_hvac_systems_list_p = (
             get_hvac_systems_serving_zone_health_safety_vent_reqs(rmd_p)
         )
+
         return {"applicable_hvac_systems_list_p": applicable_hvac_systems_list_p}
 
     class HVACRule(RuleDefinitionBase):
@@ -56,14 +57,17 @@ class PRM9012019Rule09g49(RuleDefinitionListIndexedBase):
             hvac_p = context.PROPOSED
             hvac_id_p = hvac_p["id"]
             applicable_hvac_systems_list_p = data["applicable_hvac_systems_list_p"]
+
             return hvac_id_p in applicable_hvac_systems_list_p
 
         def get_calc_vals(self, context, data=None):
             hvac_p = context.PROPOSED
+
             operation_during_unoccupied_p = hvac_p["fan_system"][
                 "operation_during_unoccupied"
             ]
             minimum_outdoor_airflow_p = hvac_p["fan_system"]["minimum_outdoor_airflow"]
+
             return {
                 "operation_during_unoccupied_p": operation_during_unoccupied_p,
                 "minimum_outdoor_airflow_p": minimum_outdoor_airflow_p,
@@ -72,6 +76,7 @@ class PRM9012019Rule09g49(RuleDefinitionListIndexedBase):
         def rule_check(self, context, calc_vals=None, data=None):
             operation_during_unoccupied_p = calc_vals["operation_during_unoccupied_p"]
             minimum_outdoor_airflow_p = calc_vals["minimum_outdoor_airflow_p"]
+
             return (
                 operation_during_unoccupied_p == FAN_SYSTEM_OPERATION.CONTINUOUS
                 and minimum_outdoor_airflow_p > ZERO.FLOW
@@ -80,4 +85,5 @@ class PRM9012019Rule09g49(RuleDefinitionListIndexedBase):
         def get_fail_msg(self, context, calc_vals=None, data=None):
             hvac_p = context.PROPOSED
             hvac_id_p = hvac_p["id"]
+
             return f"{hvac_id_p} SERVES ZONE(S) THAT APPEAR LIKELY TO HAVE HEALTH AND SAFETY MANDATED MINIMUM VENTILATION REQUIREMENTS DURING UNOCCUPIED HOURS AND THEREFORE (IF THE HVAC SYSTEM SUPPLIES OA CFM) MAY WARRANT CONTINUOUS OPERATION DURING UNOCCUPIED HOURS PER SECTION G3.1-4 SCHEDULES EXCEPTION #2 FOR THE PROPOSED BUILDING AND PER SECTION G3.1.2.4."

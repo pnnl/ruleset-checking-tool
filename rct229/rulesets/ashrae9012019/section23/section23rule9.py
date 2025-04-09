@@ -15,7 +15,11 @@ from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO, CalcQ
 
-APPLICABLE_SYS_TYPES = [HVAC_SYS.SYS_11_1, HVAC_SYS.SYS_11_2]
+APPLICABLE_SYS_TYPES = [
+    HVAC_SYS.SYS_11_1,
+    HVAC_SYS.SYS_11_2,
+]
+
 VENT_THRESHOLD_FACTOR = 0.5
 
 
@@ -41,13 +45,12 @@ class PRM9012019Rule46w18(RuleDefinitionListIndexedBase):
     def is_applicable(self, context, data=None):
         rmd_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmd_b)
+
         return any(
             [
-                (
-                    baseline_system_types_dict[system_type]
-                    and baseline_system_type_compare(
-                        system_type, applicable_sys_type, False
-                    )
+                baseline_system_types_dict[system_type]
+                and baseline_system_type_compare(
+                    system_type, applicable_sys_type, False
                 )
                 for system_type in baseline_system_types_dict
                 for applicable_sys_type in APPLICABLE_SYS_TYPES
@@ -64,11 +67,13 @@ class PRM9012019Rule46w18(RuleDefinitionListIndexedBase):
             if baseline_system_type_compare(sys_type, target_sys_type, False)
             for hvac_id in baseline_system_types_dict[sys_type]
         ]
+
         return {"applicable_hvac_sys_ids": applicable_hvac_sys_ids}
 
     def list_filter(self, context_item, data):
         hvac_sys_b = context_item.BASELINE_0
         applicable_hvac_sys_ids = data["applicable_hvac_sys_ids"]
+
         return hvac_sys_b["id"] in applicable_hvac_sys_ids
 
     class HVACRule(RuleDefinitionBase):
@@ -77,10 +82,27 @@ class PRM9012019Rule46w18(RuleDefinitionListIndexedBase):
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
-                required_fields={"$": ["fan_system"]},
-                manual_check_required_msg="The minimum volume flowrate is greater than the maximum of the minimum ventilation flowrate and 50% of the maximum supply flow rate.  This is correct IF the minimum volume flowrate is equal to any airflow required to comply with codes or accredidation standards, the system passes, otherwise it fails.  We are not able to determine the airflow required to comply with codes or accreditation standards at this time.",
-                pass_msg="The minimum volume flowrate is equal to the maximum of the minimum ventilation flowrate and 50% of the maximum supply flow rate.  If any airflow required to comply with codes or accredidation standards is MORE than this value, the minimum volume airflow should be set to this value.  We are not able to determine the airflow required to comply with codes or accreditation standards at this time, please double check that there are no additional codes or accreditation standards in regards to airflow. ",
-                precision={"minimum_airflow_b": {"precision": 1, "unit": "cfm"}},
+                required_fields={
+                    "$": ["fan_system"],
+                },
+                manual_check_required_msg="The minimum volume flowrate is greater than the maximum of the minimum "
+                "ventilation flowrate and 50% of the maximum supply flow rate.  This is "
+                "correct IF the minimum volume flowrate is equal to any airflow required to "
+                "comply with codes or accredidation standards, the system passes, "
+                "otherwise it fails.  We are not able to determine the airflow required to "
+                "comply with codes or accreditation standards at this time.",
+                pass_msg="The minimum volume flowrate is equal to the maximum of the minimum ventilation flowrate and "
+                "50% of the maximum supply flow rate.  If any airflow required to comply with codes or "
+                "accredidation standards is MORE than this value, the minimum volume airflow should be set "
+                "to this value.  We are not able to determine the airflow required to comply with codes or "
+                "accreditation standards at this time, please double check that there are no additional "
+                "codes or accreditation standards in regards to airflow. ",
+                precision={
+                    "minimum_airflow_b": {
+                        "precision": 1,
+                        "unit": "cfm",
+                    },
+                },
             )
 
         def get_calc_vals(self, context, data=None):
@@ -98,6 +120,7 @@ class PRM9012019Rule46w18(RuleDefinitionListIndexedBase):
                     for supply_fan in find_all("$.supply_fans[*]", fan_system_b)
                 ]
             )
+
             return {
                 "minimum_airflow": CalcQ("air_flow_rate", min_volume_flowrate_b),
                 "minimum_ventilation_airflow": CalcQ(
@@ -110,6 +133,7 @@ class PRM9012019Rule46w18(RuleDefinitionListIndexedBase):
             minimum_airflow_b = calc_vals["minimum_airflow"]
             minimum_ventilation_airflow_b = calc_vals["minimum_ventilation_airflow"]
             max_supply_airflow_b = calc_vals["max_supply_airflow"]
+
             return minimum_airflow_b > max(
                 minimum_ventilation_airflow_b,
                 VENT_THRESHOLD_FACTOR * max_supply_airflow_b,
@@ -119,6 +143,7 @@ class PRM9012019Rule46w18(RuleDefinitionListIndexedBase):
             minimum_airflow_b = calc_vals["minimum_airflow"]
             minimum_ventilation_airflow_b = calc_vals["minimum_ventilation_airflow"]
             max_supply_airflow_b = calc_vals["max_supply_airflow"]
+
             return self.precision_comparison["minimum_airflow_b"](
                 minimum_airflow_b,
                 max(

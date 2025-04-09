@@ -52,6 +52,7 @@ class PRM9012019Rule81f32(RuleDefinitionListIndexedBase):
     def is_applicable(self, context, data=None):
         rmd_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmd_b)
+        # create a list containing all HVAC systems that are modeled in the rmd_b
         available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict
@@ -59,7 +60,7 @@ class PRM9012019Rule81f32(RuleDefinitionListIndexedBase):
         ]
         return any(
             [
-                (available_type in APPLICABLE_SYS_TYPES)
+                available_type in APPLICABLE_SYS_TYPES
                 for available_type in available_type_list
             ]
         ) and any(
@@ -88,7 +89,10 @@ class PRM9012019Rule81f32(RuleDefinitionListIndexedBase):
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 precision={
-                    "design_supply_temperature_b": {"precision": 0.1, "unit": "K"}
+                    "design_supply_temperature_b": {
+                        "precision": 0.1,
+                        "unit": "K",
+                    },
                 },
             )
 
@@ -120,6 +124,7 @@ class PRM9012019Rule81f32(RuleDefinitionListIndexedBase):
             design_wetbulb_temperature = calc_vals["design_wetbulb_temperature_b"]
             approach_b = calc_vals["approach_b"]
             design_supply_temperature_b = calc_vals["design_supply_temperature_b"]
+
             return self.precision_comparison["design_supply_temperature_b"](
                 design_supply_temperature_b.to(ureg.kelvin),
                 design_wetbulb_temperature.to(ureg.kelvin) + approach_b.to(ureg.kelvin),

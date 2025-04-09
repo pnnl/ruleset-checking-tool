@@ -62,6 +62,7 @@ class PRM9012019Rule59b18(RuleDefinitionListIndexedBase):
     def is_applicable(self, context, data=None):
         rmd_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmd_b)
+        # create a list containing all HVAC systems that are modeled in the rmd_b
         available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict
@@ -69,7 +70,7 @@ class PRM9012019Rule59b18(RuleDefinitionListIndexedBase):
         ]
         return any(
             [
-                (available_type in APPLICABLE_SYS_TYPES)
+                available_type in APPLICABLE_SYS_TYPES
                 for available_type in available_type_list
             ]
         )
@@ -96,7 +97,12 @@ class PRM9012019Rule59b18(RuleDefinitionListIndexedBase):
                         "design_return_temperature"
                     ],
                 },
-                precision={"design_return_temperature": {"precision": 1, "unit": "K"}},
+                precision={
+                    "design_return_temperature": {
+                        "precision": 1,
+                        "unit": "K",
+                    },
+                },
             )
 
         def get_calc_vals(self, context, data=None):
@@ -104,6 +110,7 @@ class PRM9012019Rule59b18(RuleDefinitionListIndexedBase):
             design_return_temperature = fluid_loop_b[
                 "cooling_or_condensing_design_and_control"
             ]["design_return_temperature"]
+
             return {
                 "design_return_temperature": CalcQ(
                     "temperature", design_return_temperature
@@ -114,6 +121,7 @@ class PRM9012019Rule59b18(RuleDefinitionListIndexedBase):
         def rule_check(self, context, calc_vals=None, data=None):
             design_return_temperature = calc_vals["design_return_temperature"]
             required_return_temperature = calc_vals["required_return_temperature"]
+
             return self.precision_comparison["design_return_temperature"](
                 design_return_temperature.to(ureg.kelvin),
                 required_return_temperature.to(ureg.kelvin),

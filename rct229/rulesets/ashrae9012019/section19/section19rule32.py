@@ -32,9 +32,11 @@ class PRM9012019Rule31y73(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data):
         rmd_b = context.BASELINE_0
+
         hvac_systems_primarily_serving_comp_room_b = (
             get_hvac_systems_primarily_serving_comp_room(rmd_b)
         )
+
         return {
             "hvac_systems_primarily_serving_comp_room_b": hvac_systems_primarily_serving_comp_room_b
         }
@@ -44,7 +46,7 @@ class PRM9012019Rule31y73(RuleDefinitionListIndexedBase):
             super(PRM9012019Rule31y73.HVACRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
-                )
+                ),
             )
 
         def is_applicable(self, context, data=None):
@@ -53,14 +55,17 @@ class PRM9012019Rule31y73(RuleDefinitionListIndexedBase):
             hvac_systems_primarily_serving_comp_room_b = data[
                 "hvac_systems_primarily_serving_comp_room_b"
             ]
+
             return hvac_id_b in hvac_systems_primarily_serving_comp_room_b
 
         def get_calc_vals(self, context, data=None):
             hvac_b = context.BASELINE_0
+
             operation_during_unoccupied_b = hvac_b["fan_system"][
                 "operation_during_unoccupied"
             ]
             minimum_outdoor_airflow_b = hvac_b["fan_system"]["minimum_outdoor_airflow"]
+
             return {
                 "operation_during_unoccupied_b": operation_during_unoccupied_b,
                 "minimum_outdoor_airflow_b": minimum_outdoor_airflow_b,
@@ -69,9 +74,11 @@ class PRM9012019Rule31y73(RuleDefinitionListIndexedBase):
         def rule_check(self, context, calc_vals=None, data=None):
             operation_during_unoccupied_b = calc_vals["operation_during_unoccupied_b"]
             minimum_outdoor_airflow_b = calc_vals["minimum_outdoor_airflow_b"]
+
             return (
                 operation_during_unoccupied_b == FAN_SYSTEM_OPERATION.CONTINUOUS
                 and minimum_outdoor_airflow_b > ZERO.FLOW
-                or operation_during_unoccupied_b == FAN_SYSTEM_OPERATION.CYCLING
+            ) or (
+                operation_during_unoccupied_b == FAN_SYSTEM_OPERATION.CYCLING
                 and minimum_outdoor_airflow_b == ZERO.FLOW
             )

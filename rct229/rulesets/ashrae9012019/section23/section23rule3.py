@@ -14,7 +14,12 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types i
 from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
 
-APPLICABLE_SYS_TYPES = [HVAC_SYS.SYS_5, HVAC_SYS.SYS_6, HVAC_SYS.SYS_7, HVAC_SYS.SYS_8]
+APPLICABLE_SYS_TYPES = [
+    HVAC_SYS.SYS_5,
+    HVAC_SYS.SYS_6,
+    HVAC_SYS.SYS_7,
+    HVAC_SYS.SYS_8,
+]
 
 
 class PRM9012019Rule44u85(RuleDefinitionListIndexedBase):
@@ -39,13 +44,12 @@ class PRM9012019Rule44u85(RuleDefinitionListIndexedBase):
     def is_applicable(self, context, data=None):
         rmd_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmd_b)
+
         return any(
             [
-                (
-                    baseline_system_types_dict[system_type]
-                    and baseline_system_type_compare(
-                        system_type, applicable_sys_type, False
-                    )
+                baseline_system_types_dict[system_type]
+                and baseline_system_type_compare(
+                    system_type, applicable_sys_type, False
                 )
                 for system_type in baseline_system_types_dict
                 for applicable_sys_type in APPLICABLE_SYS_TYPES
@@ -62,10 +66,12 @@ class PRM9012019Rule44u85(RuleDefinitionListIndexedBase):
             if baseline_system_type_compare(sys_type, target_sys_type, False)
             for hvac_id in baseline_system_types_dict[sys_type]
         ]
+
         return {"applicable_hvac_sys_ids": applicable_hvac_sys_ids}
 
     def list_filter(self, context_item, data):
         applicable_hvac_sys_ids = data["applicable_hvac_sys_ids"]
+
         return (
             context_item.BASELINE_0[
                 "served_by_heating_ventilating_air_conditioning_system"
@@ -84,9 +90,14 @@ class PRM9012019Rule44u85(RuleDefinitionListIndexedBase):
                         "minimum_airflow",
                         "minimum_outdoor_airflow",
                         "primary_airflow",
-                    ]
+                    ],
                 },
-                precision={"minimum_airflow_b": {"precision": 0.1, "unit": "cfm"}},
+                precision={
+                    "minimum_airflow_b": {
+                        "precision": 0.1,
+                        "unit": "cfm",
+                    },
+                },
             )
 
         def get_calc_vals(self, context, data=None):
@@ -94,6 +105,7 @@ class PRM9012019Rule44u85(RuleDefinitionListIndexedBase):
             minimum_airflow_b = terminal_b["minimum_airflow"]
             primary_airflow_b = terminal_b["primary_airflow"]
             minimum_outdoor_airflow_b = terminal_b["minimum_outdoor_airflow"]
+
             return {
                 "minimum_airflow_b": CalcQ("volumetric_flow_rate", minimum_airflow_b),
                 "primary_airflow_b": CalcQ("volumetric_flow_rate", primary_airflow_b),
@@ -106,6 +118,7 @@ class PRM9012019Rule44u85(RuleDefinitionListIndexedBase):
             minimum_airflow_b = calc_vals["minimum_airflow_b"]
             primary_airflow_b = calc_vals["primary_airflow_b"]
             minimum_outdoor_airflow_b = calc_vals["minimum_outdoor_airflow_b"]
+
             return self.precision_comparison["minimum_airflow_b"](
                 minimum_airflow_b,
                 max(primary_airflow_b * 0.3, minimum_outdoor_airflow_b),
@@ -115,6 +128,7 @@ class PRM9012019Rule44u85(RuleDefinitionListIndexedBase):
             minimum_airflow_b = calc_vals["minimum_airflow_b"]
             primary_airflow_b = calc_vals["primary_airflow_b"]
             minimum_outdoor_airflow_b = calc_vals["minimum_outdoor_airflow_b"]
+
             return std_equal(
                 minimum_airflow_b,
                 max(primary_airflow_b * 0.3, minimum_outdoor_airflow_b),

@@ -13,7 +13,11 @@ from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
 
-APPLICABLE_SYS_TYPES = [HVAC_SYS.SYS_11_1, HVAC_SYS.SYS_11_2, HVAC_SYS.SYS_11_1B]
+APPLICABLE_SYS_TYPES = [
+    HVAC_SYS.SYS_11_1,
+    HVAC_SYS.SYS_11_2,
+    HVAC_SYS.SYS_11_1B,
+]
 REQUIRED_LOOP_SUPPLY_TEMP_AT_LOW_LOAD = ureg("54 degF")
 
 
@@ -39,6 +43,7 @@ class PRM9012019Rule52t53(RuleDefinitionListIndexedBase):
     def is_applicable(self, context, data=None):
         rmd_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmd_b)
+        # create a list containing all HVAC systems that are modeled in the rmd_b
         available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict
@@ -46,7 +51,7 @@ class PRM9012019Rule52t53(RuleDefinitionListIndexedBase):
         ]
         return any(
             [
-                (available_type in APPLICABLE_SYS_TYPES)
+                available_type in APPLICABLE_SYS_TYPES
                 for available_type in available_type_list
             ]
         )
@@ -70,11 +75,14 @@ class PRM9012019Rule52t53(RuleDefinitionListIndexedBase):
                 required_fields={
                     "$": ["cooling_or_condensing_design_and_control"],
                     "cooling_or_condensing_design_and_control": [
-                        "loop_supply_temperature_at_low_load"
+                        "loop_supply_temperature_at_low_load",
                     ],
                 },
                 precision={
-                    "loop_supply_temperature_at_low_load": {"precision": 1, "unit": "K"}
+                    "loop_supply_temperature_at_low_load": {
+                        "precision": 1,
+                        "unit": "K",
+                    },
                 },
             )
 
@@ -83,6 +91,7 @@ class PRM9012019Rule52t53(RuleDefinitionListIndexedBase):
             loop_supply_temperature_at_low_load = fluid_loop_b[
                 "cooling_or_condensing_design_and_control"
             ]["loop_supply_temperature_at_low_load"]
+
             return {
                 "loop_supply_temperature_at_low_load": CalcQ(
                     "temperature", loop_supply_temperature_at_low_load
@@ -99,6 +108,7 @@ class PRM9012019Rule52t53(RuleDefinitionListIndexedBase):
             required_loop_supply_temperature_at_low_load = calc_vals[
                 "required_loop_supply_temperature_at_low_load"
             ]
+
             return self.precision_comparison["loop_supply_temperature_at_low_load"](
                 loop_supply_temperature_at_low_load.to(ureg.kelvin),
                 required_loop_supply_temperature_at_low_load.to(ureg.kelvin),
@@ -111,6 +121,7 @@ class PRM9012019Rule52t53(RuleDefinitionListIndexedBase):
             required_loop_supply_temperature_at_low_load = calc_vals[
                 "required_loop_supply_temperature_at_low_load"
             ]
+
             return std_equal(
                 loop_supply_temperature_at_low_load.to(ureg.kelvin),
                 required_loop_supply_temperature_at_low_load.to(ureg.kelvin),

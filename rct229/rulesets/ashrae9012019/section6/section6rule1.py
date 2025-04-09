@@ -25,7 +25,8 @@ class PRM9012019Rule99c05(RuleDefinitionListIndexedBase):
             each_rule=PRM9012019Rule99c05.BuildingSegmentRule(),
             index_rmd=RMD.PROPOSED,
             id="6-1",
-            description="The total building interior lighting power shall not exceed the interior lighting power allowance determined using either Table G3.7 or G3.8",
+            description="The total building interior lighting power shall not exceed the interior lighting power "
+            "allowance determined using either Table G3.7 or G3.8",
             ruleset_section_title="Lighting",
             standard_section="Section G1.2.1(b) Mandatory Provisions related to interior lighting power",
             is_primary_rule=True,
@@ -53,6 +54,7 @@ class PRM9012019Rule99c05(RuleDefinitionListIndexedBase):
 
         def get_calc_vals(self, context, data=None):
             building_segment_p = context.PROPOSED
+
             allowable_LPD_BAM = (
                 table_G3_8_lookup(building_segment_p["lighting_building_area_type"])[
                     "lpd"
@@ -60,6 +62,7 @@ class PRM9012019Rule99c05(RuleDefinitionListIndexedBase):
                 if building_segment_p.get("lighting_building_area_type") != None
                 else None
             )
+
             building_segment_design_lighting_wattage = ZERO.POWER
             total_building_segment_area_p = ZERO.AREA
             check_BAM_flag = False
@@ -68,6 +71,7 @@ class PRM9012019Rule99c05(RuleDefinitionListIndexedBase):
                 zone_avg_height = zone_p["volume"] / sum(
                     find_all("$.spaces[*].floor_area", zone_p)
                 )
+
                 for space_p in find_all("$.spaces[*]", zone_p):
                     building_segment_design_lighting_wattage += (
                         sum(
@@ -76,8 +80,10 @@ class PRM9012019Rule99c05(RuleDefinitionListIndexedBase):
                         )
                         * space_p["floor_area"]
                     )
+
                     if allowable_LPD_BAM != None:
                         total_building_segment_area_p += space_p["floor_area"]
+
                     lighting_space_type = space_p.get("lighting_space_type")
                     if lighting_space_type is None:
                         check_BAM_flag = True
@@ -90,6 +96,7 @@ class PRM9012019Rule99c05(RuleDefinitionListIndexedBase):
                         allowable_lighting_wattage_SBS += (
                             allowable_LPD_space * space_p["floor_area"]
                         )
+
             return {
                 "allowable_LPD_BAM": CalcQ("power_density", allowable_LPD_BAM),
                 "building_segment_design_lighting_wattage": CalcQ(
@@ -112,14 +119,18 @@ class PRM9012019Rule99c05(RuleDefinitionListIndexedBase):
             ]
             total_building_segment_area_p = calc_vals["total_building_segment_area_p"]
             allowable_lighting_wattage_SBS = calc_vals["allowable_lighting_wattage_SBS"]
+
             allowable_LPD_wattage_BAM = (
                 allowable_LPD_BAM * total_building_segment_area_p
                 if allowable_LPD_BAM
                 else ZERO.POWER
             )
+
             return (
                 (allowable_LPD_BAM or not check_BAM_flag)
-                and building_segment_design_lighting_wattage < allowable_LPD_wattage_BAM
+                and (
+                    building_segment_design_lighting_wattage < allowable_LPD_wattage_BAM
+                )
                 or self.precision_comparison[
                     "building_segment_design_lighting_wattage_area"
                 ](building_segment_design_lighting_wattage, allowable_LPD_wattage_BAM)
@@ -138,6 +149,7 @@ class PRM9012019Rule99c05(RuleDefinitionListIndexedBase):
         def get_pass_msg(self, context, calc_vals=None, data=None):
             allowable_LPD_BAM = calc_vals["allowable_LPD_BAM"]
             check_BAM_flag = calc_vals["check_BAM_flag"]
+
             if not allowable_LPD_BAM and not check_BAM_flag:
                 return CASE3_WARNING
             else:
@@ -146,6 +158,7 @@ class PRM9012019Rule99c05(RuleDefinitionListIndexedBase):
         def get_fail_msg(self, context, calc_vals=None, data=None):
             allowable_LPD_BAM = calc_vals["allowable_LPD_BAM"]
             check_BAM_flag = calc_vals["check_BAM_flag"]
+
             if not allowable_LPD_BAM and not check_BAM_flag:
                 return CASE4_WARNING
             elif allowable_LPD_BAM and check_BAM_flag:

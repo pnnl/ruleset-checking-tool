@@ -22,7 +22,9 @@ class PRM9012019rule88h78(RuleDefinitionListIndexedBase):
             each_rule=PRM9012019rule88h78.RMDRule(),
             index_rmd=BASELINE_0,
             id="12-1",
-            description="Receptacle and process power shall be modeled as identical to the proposed design",
+            description=(
+                "Receptacle and process power shall be modeled as identical to the proposed design"
+            ),
             ruleset_section_title="Receptacle",
             standard_section="Section Table G3.1-12 Modeling Requirements for the Proposed design",
             is_primary_rule=True,
@@ -52,12 +54,14 @@ class PRM9012019rule88h78(RuleDefinitionListIndexedBase):
                 "$.buildings[*].building_segments[*].zones[*].spaces[*].miscellaneous_equipment[*]",
                 rmd_p,
             )
+            # This assumes that the miscellaneous_equipment all match
             matched_misc_equipment_list_p = match_lists_by_id(
                 misc_equipment_list_b, misc_equipment_list_p
             )
             proposed_baseline_misc_equipment_pairs = zip(
                 misc_equipment_list_b, matched_misc_equipment_list_p
             )
+
             for (
                 misc_equipment_b,
                 misc_equipment_p,
@@ -80,6 +84,7 @@ class PRM9012019rule88h78(RuleDefinitionListIndexedBase):
                             "proposed_power": misc_equipment_power_p,
                         }
                     )
+
             return {
                 "reduced_misc_equipment_power": reduced_misc_equipment_power,
                 "unexpected_misc_equipment_power": unexpected_misc_equipment_power,
@@ -91,9 +96,8 @@ class PRM9012019rule88h78(RuleDefinitionListIndexedBase):
                 "unexpected_misc_equipment_power"
             ]
             compliance_path = calc_vals["compliance_path"]
-            return (
-                len(unexpected_misc_equipment_power) == 0
-                and compliance_path != COMPLIANCE_PATH_TYPE.CODE_COMPLIANT
+            return len(unexpected_misc_equipment_power) == 0 and (
+                compliance_path != COMPLIANCE_PATH_TYPE.CODE_COMPLIANT
             )
 
         def rule_check(self, context, calc_vals=None, data=None):

@@ -33,12 +33,14 @@ class PRM9012019Rule30t80(RuleDefinitionListIndexedBase):
     def is_applicable(self, context, data=None):
         rmd_b = context.BASELINE_0
         rmd_p = context.PROPOSED
+
         elevators_list_b = find_all(
             "$.ruleset_model_descriptions[0].buildings[*].elevators[*]", rmd_b
         )
         elevators_list_p = find_all(
             "$.ruleset_model_descriptions[0].buildings[*].elevators[*]", rmd_p
         )
+
         return elevators_list_p and elevators_list_b
 
     class ElevatorRule(RuleDefinitionBase):
@@ -57,11 +59,13 @@ class PRM9012019Rule30t80(RuleDefinitionListIndexedBase):
                 elevator_cab_lighting_power_b > ZERO.POWER,
                 "Elevator cab lighting power shall be greater than 0 W",
             )
+
             elevator_cab_area_b = elevator_b["cab_area"]
             assert_(
                 elevator_cab_area_b > ZERO.AREA,
                 "Elevator cab FLOOR AREA shall be greater than 0 ft2",
             )
+
             return {
                 "elevator_cab_lighting_power_b": CalcQ(
                     "electric_power", elevator_cab_lighting_power_b

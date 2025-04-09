@@ -10,7 +10,10 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types i
     get_baseline_system_types,
 )
 
-APPLICABLE_SYS_TYPES = [HVAC_SYS.SYS_11_1, HVAC_SYS.SYS_11_2]
+APPLICABLE_SYS_TYPES = [
+    HVAC_SYS.SYS_11_1,
+    HVAC_SYS.SYS_11_2,
+]
 
 
 class PRM9012019Rule71k98(PartialRuleDefinition):
@@ -32,13 +35,12 @@ class PRM9012019Rule71k98(PartialRuleDefinition):
     def applicability_check(self, context, calc_vals, data):
         rmd_b = context.BASELINE_0
         baseline_system_types_dict_b = get_baseline_system_types(rmd_b)
+
         return any(
             [
-                (
-                    baseline_system_types_dict_b[system_type]
-                    and baseline_system_type_compare(
-                        system_type, applicable_sys_type, False
-                    )
+                baseline_system_types_dict_b[system_type]
+                and baseline_system_type_compare(
+                    system_type, applicable_sys_type, False
                 )
                 for system_type in baseline_system_types_dict_b
                 for applicable_sys_type in APPLICABLE_SYS_TYPES

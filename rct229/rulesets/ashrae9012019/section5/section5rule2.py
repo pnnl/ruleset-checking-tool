@@ -6,6 +6,8 @@ from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.jsonpath_utils import find_all
 
 SurfaceAdjacency = SchemaEnums.schema_enums["SurfaceAdjacencyOptions"]
+
+# Json path for surfaces filtered to those with adjacent_to set to exterior
 EXTERIOR_SURFACES_JSONPATH = f'$.building_segments[*].zones[*].surfaces[*][?(@.adjacent_to="{SurfaceAdjacency.EXTERIOR}")]'
 
 
@@ -44,6 +46,7 @@ class PRM9012019Rule72a03(RuleDefinitionListIndexedBase):
             for surface in find_all(EXTERIOR_SURFACES_JSONPATH, context.BASELINE_0):
                 if surface["does_cast_shade"]:
                     baseline_surfaces_casting_shade_ids.append(surface["id"])
+
             return {
                 "baseline_surfaces_casting_shade_ids": baseline_surfaces_casting_shade_ids
             }

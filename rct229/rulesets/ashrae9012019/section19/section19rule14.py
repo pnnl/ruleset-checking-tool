@@ -62,13 +62,12 @@ class PRM9012019Rule60f12(RuleDefinitionListIndexedBase):
     def is_applicable(self, context, data=None):
         rmd_b = context.BASELINE_0
         baseline_system_types_dict_b = get_baseline_system_types(rmd_b)
+
         return any(
             [
-                (
-                    baseline_system_types_dict_b[system_type]
-                    and baseline_system_type_compare(
-                        system_type, applicable_sys_type, False
-                    )
+                baseline_system_types_dict_b[system_type]
+                and baseline_system_type_compare(
+                    system_type, applicable_sys_type, False
                 )
                 for system_type in baseline_system_types_dict_b
                 for applicable_sys_type in APPLICABLE_SYS_TYPES
@@ -78,9 +77,11 @@ class PRM9012019Rule60f12(RuleDefinitionListIndexedBase):
     def create_data(self, context, data):
         rmd_b = context.BASELINE_0
         rmd_p = context.PROPOSED
+
         zone_supply_return_exhaust_relief_terminal_fan_power_dict = (
             get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(rmd_p)
         )
+
         hvac_info_b = {}
         for hvac_b in find_all(
             "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
@@ -88,11 +89,13 @@ class PRM9012019Rule60f12(RuleDefinitionListIndexedBase):
         ):
             hvac_id_b = hvac_b["id"]
             hvac_info_b[hvac_id_b] = {}
+
             hvac_info_b[hvac_id_b][
                 "fan_system_info_b"
             ] = get_fan_system_object_supply_return_exhaust_relief_total_power_flow(
                 getattr_(hvac_b, "HVAC", "fan_system")
             )
+
         zone_fan_power_dict_b = {}
         for zone_id_b in find_all(
             "$.buildings[*].building_segments[*].zones[*].id", rmd_b
@@ -104,6 +107,7 @@ class PRM9012019Rule60f12(RuleDefinitionListIndexedBase):
                 )["id"]
             ]
             zone_fan_power_dict_b[zone_id_b] = modeled_fan_power_list_p
+
         return {
             "dict_of_zones_and_terminal_units_served_by_hvac_sys_b": get_dict_of_zones_and_terminal_units_served_by_hvac_sys(
                 rmd_b
@@ -119,14 +123,22 @@ class PRM9012019Rule60f12(RuleDefinitionListIndexedBase):
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
-                required_fields={"$": ["fan_system"]},
-                precision={"modeled_cfm": {"precision": 1, "unit": "cfm"}},
+                required_fields={
+                    "$": ["fan_system"],
+                },
+                precision={
+                    "modeled_cfm": {
+                        "precision": 1,
+                        "unit": "cfm",
+                    },
+                },
             )
 
         def is_applicable(self, context, data=None):
             hvac_b = context.BASELINE_0
             hvac_id_b = hvac_b["id"]
             baseline_system_types_dict_b = data["baseline_system_types_dict_b"]
+
             return any(
                 hvac_id_b in baseline_system_types_dict_b[system_type]
                 for system_type in baseline_system_types_dict_b
@@ -135,12 +147,15 @@ class PRM9012019Rule60f12(RuleDefinitionListIndexedBase):
         def get_calc_vals(self, context, data=None):
             hvac_b = context.BASELINE_0
             hvac_id_b = hvac_b["id"]
+
             hvac_info_b = data["hvac_info_b"][hvac_id_b]
+
             fan_system_info_b = hvac_info_b["fan_system_info_b"]
             more_than_one_supply_and_return_fan = (
                 fan_system_info_b["supply_fans_qty"] > 1
                 or fan_system_info_b["return_fans_qty"] > 1
             )
+
             dict_of_zones_and_terminal_units_served_by_hvac_sys_b = data[
                 "dict_of_zones_and_terminal_units_served_by_hvac_sys_b"
             ]
@@ -148,29 +163,33 @@ class PRM9012019Rule60f12(RuleDefinitionListIndexedBase):
             zone_id_list = dict_of_zones_and_terminal_units_served_by_hvac_sys_b[
                 hvac_id_b
             ]["zone_list"]
+
             is_modeled_with_return_fan_p = any(
                 [
-                    (zone_fan_power_dict_b[zone_id_p]["return_fans_power"] > ZERO.POWER)
+                    zone_fan_power_dict_b[zone_id_p]["return_fans_power"] > ZERO.POWER
                     for zone_id_p in zone_id_list
                 ]
             )
             is_modeled_with_relief_fan_p = any(
                 [
-                    (zone_fan_power_dict_b[zone_id_p]["relief_fans_power"] > ZERO.POWER)
+                    zone_fan_power_dict_b[zone_id_p]["relief_fans_power"] > ZERO.POWER
                     for zone_id_p in zone_id_list
                 ]
             )
+
             fan_sys_b = hvac_b["fan_system"]
             fan_sys_cfm = (
                 get_fan_system_object_supply_return_exhaust_relief_total_power_flow(
                     fan_sys_b
                 )
             )
+
             hvac_sys_total_supply_fan_cfm_b = fan_sys_cfm["supply_fans_airflow"]
             supply_cfm_90_percent = 0.9 * hvac_sys_total_supply_fan_cfm_b
             supply_minus_OA_flow = hvac_sys_total_supply_fan_cfm_b - getattr_(
                 fan_sys_b, "Fan System", "minimum_outdoor_airflow"
             )
+
             return_fans_airflow = fan_sys_cfm["return_fans_airflow"]
             relief_fans_airflow = fan_sys_cfm["relief_fans_airflow"]
             modeled_cfm = (
@@ -178,18 +197,15 @@ class PRM9012019Rule60f12(RuleDefinitionListIndexedBase):
                 if is_modeled_with_return_fan_p or is_modeled_with_relief_fan_p
                 else ZERO.FLOW
             )
+
             baseline_modeled_return_as_expected = (
-                is_modeled_with_return_fan_p
-                and return_fans_airflow > ZERO.FLOW
-                or not is_modeled_with_return_fan_p
-                and return_fans_airflow == ZERO.FLOW
-            )
+                is_modeled_with_return_fan_p and return_fans_airflow > ZERO.FLOW
+            ) or (not is_modeled_with_return_fan_p and return_fans_airflow == ZERO.FLOW)
+
             baseline_modeled_relief_as_expected = (
-                is_modeled_with_relief_fan_p
-                and relief_fans_airflow > ZERO.FLOW
-                or not is_modeled_with_relief_fan_p
-                and relief_fans_airflow == ZERO.FLOW
-            )
+                is_modeled_with_relief_fan_p and relief_fans_airflow > ZERO.FLOW
+            ) or (not is_modeled_with_relief_fan_p and relief_fans_airflow == ZERO.FLOW)
+
             return {
                 "more_than_one_supply_and_return_fan": more_than_one_supply_and_return_fan,
                 "is_modeled_with_return_fan_p": is_modeled_with_return_fan_p,
@@ -209,6 +225,7 @@ class PRM9012019Rule60f12(RuleDefinitionListIndexedBase):
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
             hvac_b = context.BASELINE_0
             hvac_id_b = hvac_b["id"]
+
             return f"{hvac_id_b} has more than one supply or return fan associated with the HVAC system in the baseline and therefore this check could not be conducted for this HVAC system. Conduct manual check for compliance with G3.1.2.8.1."
 
         def rule_check(self, context, calc_vals=None, data=None):
@@ -225,14 +242,17 @@ class PRM9012019Rule60f12(RuleDefinitionListIndexedBase):
             supply_cfm_90_percent = calc_vals["supply_cfm_90_percent"]
             is_modeled_with_return_fan_in_p = calc_vals["is_modeled_with_return_fan_p"]
             is_modeled_with_relief_fan_p = calc_vals["is_modeled_with_relief_fan_p"]
+
             return (
                 baseline_modeled_return_as_expected
                 and baseline_modeled_relief_as_expected
                 and (is_modeled_with_return_fan_in_p or is_modeled_with_relief_fan_p)
                 and self.precision_comparison["modeled_cfm"](
-                    modeled_cfm, max(supply_minus_OA_flow, supply_cfm_90_percent)
+                    modeled_cfm,
+                    max(supply_minus_OA_flow, supply_cfm_90_percent),
                 )
-                or not is_modeled_with_return_fan_in_p
+            ) or (
+                not is_modeled_with_return_fan_in_p
                 and not is_modeled_with_relief_fan_p
                 and std_equal(ZERO.FLOW, return_fans_airflow)
                 and std_equal(ZERO.FLOW, relief_fans_airflow)
@@ -252,6 +272,7 @@ class PRM9012019Rule60f12(RuleDefinitionListIndexedBase):
             supply_cfm_90_percent = calc_vals["supply_cfm_90_percent"]
             is_modeled_with_return_fan_in_p = calc_vals["is_modeled_with_return_fan_p"]
             is_modeled_with_relief_fan_p = calc_vals["is_modeled_with_relief_fan_p"]
+
             return (
                 baseline_modeled_return_as_expected
                 and baseline_modeled_relief_as_expected
@@ -259,7 +280,8 @@ class PRM9012019Rule60f12(RuleDefinitionListIndexedBase):
                 and std_equal(
                     modeled_cfm, max(supply_minus_OA_flow, supply_cfm_90_percent)
                 )
-                or not is_modeled_with_return_fan_in_p
+            ) or (
+                not is_modeled_with_return_fan_in_p
                 and not is_modeled_with_relief_fan_p
                 and std_equal(ZERO.FLOW, return_fans_airflow)
                 and std_equal(ZERO.FLOW, relief_fans_airflow)

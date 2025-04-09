@@ -37,6 +37,7 @@ class PRM9012019Rule79g01(RuleDefinitionListIndexedBase):
         heat_rejection_loop_ids_b = (
             get_heat_rejection_loops_connected_to_baseline_systems(rmd_b)
         )
+
         return {"heat_rejection_loop_ids_b": heat_rejection_loop_ids_b}
 
     class HeatRejectionRule(RuleDefinitionBase):
@@ -46,9 +47,14 @@ class PRM9012019Rule79g01(RuleDefinitionListIndexedBase):
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={
-                    "$": ["approach", "loop", "design_wetbulb_temperature"]
+                    "$": ["approach", "loop", "design_wetbulb_temperature"],
                 },
-                precision={"approach_b": {"precision": 0.1, "unit": "K"}},
+                precision={
+                    "approach_b": {
+                        "precision": 0.1,
+                        "unit": "K",
+                    },
+                },
             )
 
         def is_applicable(self, context, data=None):
@@ -56,6 +62,7 @@ class PRM9012019Rule79g01(RuleDefinitionListIndexedBase):
             heat_rejection_loop_ids_b = data["heat_rejection_loop_ids_b"]
             heat_rejection_loop_b = heat_rejection_b["loop"]
             design_wetbulb_temp_b = heat_rejection_b["design_wetbulb_temperature"]
+
             return (
                 heat_rejection_loop_b in heat_rejection_loop_ids_b
                 and TEMP_LOW_LIMIT_55F <= design_wetbulb_temp_b <= TEMP_HIGH_LIMIT_90F
@@ -64,9 +71,10 @@ class PRM9012019Rule79g01(RuleDefinitionListIndexedBase):
         def get_calc_vals(self, context, data=None):
             heat_rejection_b = context.BASELINE_0
             approach_b = heat_rejection_b["approach"]
-            target_approach_b = 25.72 * ureg("degF") - 0.24 * heat_rejection_b[
-                "design_wetbulb_temperature"
-            ].to(ureg.F)
+            target_approach_b = 25.72 * ureg("degF") - (
+                0.24 * heat_rejection_b["design_wetbulb_temperature"].to(ureg.F)
+            )
+
             return {
                 "approach_b": CalcQ("temperature_difference", approach_b),
                 "target_approach_b": CalcQ("temperature_difference", target_approach_b),
@@ -75,6 +83,7 @@ class PRM9012019Rule79g01(RuleDefinitionListIndexedBase):
         def rule_check(self, context, calc_vals=None, data=None):
             approach_b = calc_vals["approach_b"]
             target_approach_b = calc_vals["target_approach_b"]
+
             return self.precision_comparison["approach_b"](
                 target_approach_b.to(ureg.kelvin), approach_b
             )

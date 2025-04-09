@@ -48,15 +48,22 @@ class PRM9012019Rule69u47(RuleDefinitionListIndexedBase):
             proposed_zones = find_all(
                 "$.building_segments[*].zones[*]", context.PROPOSED
             )
+
+            # This assumes that the surfaces all match
             matched_baseline_zones = match_lists_by_id(proposed_zones, baseline_zones)
+
             assert_(
                 None not in matched_baseline_zones,
                 "The 'zones' objects between baseline and proposed don't match.",
             )
+
             proposed_baseline_zone_pairs = zip(proposed_zones, matched_baseline_zones)
+
             for p_zone, b_zone in proposed_baseline_zone_pairs:
+                # need a method like match object
                 p_zone_infiltration = p_zone["infiltration"]
                 b_zone_infiltration = b_zone["infiltration"]
+
                 if (
                     p_zone_infiltration["algorithm_name"]
                     != b_zone_infiltration["algorithm_name"]
@@ -64,6 +71,7 @@ class PRM9012019Rule69u47(RuleDefinitionListIndexedBase):
                     != b_zone_infiltration["modeling_method"]
                 ):
                     failing_infiltration_zone_ids.append(p_zone["id"])
+
             return {"failing_infiltration_zone_ids": failing_infiltration_zone_ids}
 
         def rule_check(self, context, calc_vals=None, data=None):

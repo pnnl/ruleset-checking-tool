@@ -28,7 +28,7 @@ class PRM9012019Rule02c29(RuleDefinitionListIndexedBase):
             super(PRM9012019Rule02c29.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
-                )
+                ),
             )
 
         def get_calc_vals(self, context, data=None):
@@ -41,6 +41,7 @@ class PRM9012019Rule02c29(RuleDefinitionListIndexedBase):
                 instance["id"]
                 for instance in interior_lighting_instances_with_daylighting_control
             ]
+
             return {
                 "ids_for_interior_lighting_instances_with_daylighting_control": ids_for_interior_lighting_instances_with_daylighting_control
             }

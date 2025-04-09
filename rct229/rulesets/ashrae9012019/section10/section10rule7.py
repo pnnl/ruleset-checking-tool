@@ -37,6 +37,7 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_6,
     HVAC_SYS.SYS_6B,
 ]
+
 CAPACITY_LOW_THRESHOLD = 65000
 
 
@@ -51,7 +52,9 @@ class PRM9012019Rule34l50(RuleDefinitionListIndexedBase):
             each_rule=PRM9012019Rule34l50.HVACRule(),
             index_rmd=BASELINE_0,
             id="10-7",
-            description="Baseline shall be modeled with the COPnfcooling HVAC system efficiency per Tables G3.5.1-G3.5.6.  Where multiple HVAC zones or residential spaces are combined into a single thermal block the cooling efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces.",
+            description=(
+                "Baseline shall be modeled with the COPnfcooling HVAC system efficiency per Tables G3.5.1-G3.5.6.  Where multiple HVAC zones or residential spaces are combined into a single thermal block the cooling efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces."
+            ),
             ruleset_section_title="HVAC General",
             standard_section="Section Table G3.5.1-G3.5.6 Performance Rating Method Minimum Efficiency Requirements",
             is_primary_rule=True,
@@ -65,6 +68,7 @@ class PRM9012019Rule34l50(RuleDefinitionListIndexedBase):
         baseline_sys_5_6_serve_more_than_one_flr_list = (
             get_hvac_systems_5_6_serving_multiple_floors(rmd_b)
         )
+        # create a list containing all HVAC systems that are modeled in the rmd_b
         available_types_list_excl_5_6_multifloor = [
             system_type
             for system_type, system_ids in baseline_system_types_dict.items()
@@ -73,9 +77,10 @@ class PRM9012019Rule34l50(RuleDefinitionListIndexedBase):
                 for system_id in system_ids
             )
         ]
+
         return any(
             [
-                (available_type in APPLICABLE_SYS_TYPES)
+                available_type in APPLICABLE_SYS_TYPES
                 for available_type in available_types_list_excl_5_6_multifloor
             ]
         )
@@ -116,6 +121,7 @@ class PRM9012019Rule34l50(RuleDefinitionListIndexedBase):
             for sys_list in baseline_system_types_dict.values()
             for hvac_id in sys_list
         ]
+
         return hvac_b["id"] in applicable_hvac_sys_ids
 
     class HVACRule(RuleDefinitionBase):
@@ -140,6 +146,7 @@ class PRM9012019Rule34l50(RuleDefinitionListIndexedBase):
             hvac_zone_list_w_area_dict_b = data["baseline_system_zones_served_dict"]
             zone_list_b = hvac_zone_list_w_area_dict_b[hvac_b["id"]]
             is_zone_agg_factor_undefined_and_needed = False
+
             hvac_system_type_b = next(
                 (
                     system_type
@@ -148,15 +155,18 @@ class PRM9012019Rule34l50(RuleDefinitionListIndexedBase):
                 ),
                 None,
             )
+
             total_cool_capacity_b = cooling_system_b.get("rated_total_cool_capacity")
             if total_cool_capacity_b is None:
                 total_cool_capacity_b = cooling_system_b.get(
                     "design_total_cool_capacity"
                 )
+
             if total_cool_capacity_b is not None:
                 total_cool_capacity_mag_b = total_cool_capacity_b.to("Btu/h").magnitude
             else:
                 total_cool_capacity_mag_b = None
+
             if total_cool_capacity_b is not None and hvac_system_type_b in [
                 HVAC_SYS.SYS_3,
                 HVAC_SYS.SYS_3B,
@@ -170,11 +180,13 @@ class PRM9012019Rule34l50(RuleDefinitionListIndexedBase):
                     )
                 elif total_cool_capacity_mag_b >= CAPACITY_LOW_THRESHOLD:
                     is_zone_agg_factor_undefined_and_needed = True
+
             if hvac_system_type_b in [HVAC_SYS.SYS_1, HVAC_SYS.SYS_1B, HVAC_SYS.SYS_2]:
                 expected_baseline_eff_data = table_g3_5_4_lookup(hvac_system_type_b)
                 most_conservative_eff_b = expected_baseline_eff_data[
                     "minimum_efficiency"
                 ]
+
             elif total_cool_capacity_b is not None and hvac_system_type_b in [
                 HVAC_SYS.SYS_3,
                 HVAC_SYS.SYS_3B,
@@ -189,7 +201,8 @@ class PRM9012019Rule34l50(RuleDefinitionListIndexedBase):
                 most_conservative_eff_b = expected_baseline_eff_data[
                     "most_conservative_efficiency"
                 ]
-            elif total_cool_capacity_b is not None:
+
+            elif total_cool_capacity_b is not None:  # HVAC_SYS.SYS_4
                 assert_(
                     hvac_system_type_b == HVAC_SYS.SYS_4,
                     f"System type {hvac_system_type_b} does not match any of the applicable system types: 1, 1B, 2, 3, 3B, 4, 5, 5B, 6, 6B",
@@ -202,16 +215,19 @@ class PRM9012019Rule34l50(RuleDefinitionListIndexedBase):
                 most_conservative_eff_b = expected_baseline_eff_data[
                     "most_conservative_efficiency"
                 ]
-            else:
+
+            else:  # total_cool_capacity_b is None and outcome is undetermined
                 expected_baseline_eff_data = {
                     "minimum_efficiency": None,
                     "efficiency_metric": None,
                 }
                 most_conservative_eff_b = None
+
             expected_eff_b = expected_baseline_eff_data["minimum_efficiency"]
             expected_eff_metric_b = expected_baseline_eff_data["efficiency_metric"]
             modeled_efficiency_values = cooling_system_b["efficiency_metric_values"]
             modeled_efficiency_metrics = cooling_system_b["efficiency_metric_types"]
+
             modeled_efficiency_b = next(
                 (
                     eff
@@ -222,6 +238,7 @@ class PRM9012019Rule34l50(RuleDefinitionListIndexedBase):
                 ),
                 None,
             )
+
             return {
                 "total_cool_capacity_b": CalcQ("capacity", total_cool_capacity_b),
                 "is_zone_agg_factor_undefined_and_needed": is_zone_agg_factor_undefined_and_needed,
@@ -235,6 +252,7 @@ class PRM9012019Rule34l50(RuleDefinitionListIndexedBase):
             is_zone_agg_factor_undefined_and_needed = calc_vals[
                 "is_zone_agg_factor_undefined_and_needed"
             ]
+
             return (
                 total_cool_capacity_b is None or is_zone_agg_factor_undefined_and_needed
             )
@@ -242,13 +260,16 @@ class PRM9012019Rule34l50(RuleDefinitionListIndexedBase):
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
             most_conservative_eff_b = calc_vals["most_conservative_eff_b"]
             modeled_efficiency_b = calc_vals["modeled_efficiency_b"]
+
             if modeled_efficiency_b == most_conservative_eff_b:
                 undetermined_msg = "The cooling capacity of the system could not be determined. Check if the modeled baseline DX cooling efficiency was established correctly based upon equipment capacity and type while accounting for the potential aggregation of zones. The modeled efficiency matches the capacity bracket in Appendix G efficiency tables with the highest efficiency (i.e., most conservative efficiency has been modeled)."
             else:
                 undetermined_msg = "The cooling capacity of the system could not be determined. Check if the modeled baseline DX cooling efficiency was established correctly based upon equipment capacity and type while accounting for the potential aggregation of zones."
+
             return undetermined_msg
 
         def rule_check(self, context, calc_vals=None, data=None):
             expected_baseline_eff_b = calc_vals["expected_baseline_eff_b"]
             modeled_efficiency_b = calc_vals["modeled_efficiency_b"]
+
             return modeled_efficiency_b == expected_baseline_eff_b

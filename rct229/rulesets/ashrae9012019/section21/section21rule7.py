@@ -50,6 +50,7 @@ class PRM9012019Rule92f56(RuleDefinitionListIndexedBase):
     def is_applicable(self, context, data=None):
         rmd_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmd_b)
+        # create a list containing all HVAC systems that are modeled in the rmd_b
         available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict
@@ -57,7 +58,7 @@ class PRM9012019Rule92f56(RuleDefinitionListIndexedBase):
         ]
         return any(
             [
-                (available_type in APPLICABLE_SYS_TYPES)
+                available_type in APPLICABLE_SYS_TYPES
                 for available_type in available_type_list
             ]
         )
@@ -86,8 +87,14 @@ class PRM9012019Rule92f56(RuleDefinitionListIndexedBase):
                     ],
                 },
                 precision={
-                    "design_supply_temperature": {"precision": 0.1, "unit": "K"},
-                    "design_return_temperature": {"precision": 0.1, "unit": "K"},
+                    "design_supply_temperature": {
+                        "precision": 0.1,
+                        "unit": "K",
+                    },
+                    "design_return_temperature": {
+                        "precision": 0.1,
+                        "unit": "K",
+                    },
                 },
             )
 
@@ -115,6 +122,7 @@ class PRM9012019Rule92f56(RuleDefinitionListIndexedBase):
             design_return_temperature = calc_vals["design_return_temperature"]
             required_supply_temperature = calc_vals["required_supply_temperature"]
             required_return_temperature = calc_vals["required_return_temperature"]
+
             return design_supply_temperature.to(
                 ureg.kelvin
             ) == required_supply_temperature.to(
@@ -130,6 +138,7 @@ class PRM9012019Rule92f56(RuleDefinitionListIndexedBase):
             design_return_temperature = calc_vals["design_return_temperature"]
             required_supply_temperature = calc_vals["required_supply_temperature"]
             required_return_temperature = calc_vals["required_return_temperature"]
+
             return std_equal(
                 design_supply_temperature.to(ureg.kelvin),
                 required_supply_temperature.to(ureg.kelvin),

@@ -42,6 +42,7 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_12,
     HVAC_SYS.SYS_13,
 ]
+
 LIGHTING_SPACE = SchemaEnums.schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
 LABORATORY_TEMP_DELTA = 17.0 * ureg("delta_degF")
 GENERAL_TEMP_DELTA = 20.0 * ureg("delta_degF")
@@ -79,13 +80,12 @@ class PRM9012019Rule77j17(RuleDefinitionListIndexedBase):
     def is_applicable(self, context, data=None):
         rmd_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmd_b)
+
         return any(
             [
-                (
-                    baseline_system_types_dict[system_type]
-                    and baseline_system_type_compare(
-                        system_type, applicable_sys_type, False
-                    )
+                baseline_system_types_dict[system_type]
+                and baseline_system_type_compare(
+                    system_type, applicable_sys_type, False
                 )
                 for system_type in baseline_system_types_dict
                 for applicable_sys_type in APPLICABLE_SYS_TYPES
@@ -95,9 +95,11 @@ class PRM9012019Rule77j17(RuleDefinitionListIndexedBase):
     def create_data(self, context, data):
         rmd_b = context.BASELINE_0
         rmd_p = context.PROPOSED
+
         dict_of_zones_and_terminal_units_served_by_hvac_sys_b = (
             get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmd_b)
         )
+
         zone_info = {}
         design_thermostat_cooling_setpoint = []
         design_thermostat_heating_setpoint = []
@@ -110,6 +112,7 @@ class PRM9012019Rule77j17(RuleDefinitionListIndexedBase):
                 "all_design_setpoints_delta_Ts_are_per_reqs": False,
                 "supply_flow_p": ZERO.FLOW,
             }
+
             for zone_id_b in dict_of_zones_and_terminal_units_served_by_hvac_sys_b[
                 hvac_id_b
             ]["zone_list"]:
@@ -123,15 +126,15 @@ class PRM9012019Rule77j17(RuleDefinitionListIndexedBase):
                 design_thermostat_heating_setpoint.append(
                     getattr_(zone_b, "zones", "design_thermostat_heating_setpoint")
                 )
+
                 zone_info[hvac_id_b]["zone_has_lab_space"] = any(
                     [
-                        (
-                            space_b.get("lighting_space_type")
-                            == LIGHTING_SPACE.LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM
-                        )
+                        space_b.get("lighting_space_type")
+                        == LIGHTING_SPACE.LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM
                         for space_b in find_all("$.spaces[*]", zone_b)
                     ]
                 )
+
                 for terminal_b in getattr_(zone_b, "zones", "terminals"):
                     if (
                         terminal_b["id"]
@@ -155,6 +158,7 @@ class PRM9012019Rule77j17(RuleDefinitionListIndexedBase):
                                 "supply_design_cooling_setpoint_temperature",
                             )
                         )
+
                         if zone_info[hvac_id_b]["zone_has_lab_space"]:
                             zone_info[hvac_id_b][
                                 "all_design_setpoints_delta_Ts_are_per_reqs"
@@ -193,6 +197,7 @@ class PRM9012019Rule77j17(RuleDefinitionListIndexedBase):
                                     ),
                                 ]
                             )
+
                 zone_info[hvac_id_b]["supply_flow_p"] += sum(
                     [
                         terminal_p.get("primary_airflow", ZERO.FLOW)
@@ -202,13 +207,17 @@ class PRM9012019Rule77j17(RuleDefinitionListIndexedBase):
                         )
                     ]
                 )
+
             zone_info[hvac_id_b]["design_thermostat_cooling_setpoint"] = min(
                 design_thermostat_cooling_setpoint
             )
             zone_info[hvac_id_b]["design_thermostat_heating_setpoint"] = max(
                 design_thermostat_heating_setpoint
             )
-        return {"zone_info": zone_info}
+
+        return {
+            "zone_info": zone_info,
+        }
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
@@ -220,7 +229,12 @@ class PRM9012019Rule77j17(RuleDefinitionListIndexedBase):
                     "$": ["fan_system"],
                     "fan_system": ["minimum_outdoor_airflow"],
                 },
-                precision={"supply_fans_airflow_b": {"precision": 1, "unit": "cfm"}},
+                precision={
+                    "supply_fans_airflow_b": {
+                        "precision": 1,
+                        "unit": "cfm",
+                    },
+                },
             )
 
         def get_calc_vals(self, context, data=None):
@@ -228,12 +242,14 @@ class PRM9012019Rule77j17(RuleDefinitionListIndexedBase):
             fan_sys_b = hvac_b["fan_system"]
             hvac_id_b = hvac_b["id"]
             zone_info = data["zone_info"][hvac_id_b]
+
             all_design_setpoints_delta_Ts_are_per_reqs_b = zone_info[
                 "all_design_setpoints_delta_Ts_are_per_reqs"
             ]
             are_all_hvac_sys_fan_objs_autosized_b = zone_info[
                 "are_all_hvac_sys_fan_objs_autosized"
             ]
+
             return {
                 "all_design_setpoints_delta_Ts_are_per_reqs_b": all_design_setpoints_delta_Ts_are_per_reqs_b,
                 "are_all_hvac_sys_fan_objs_autosized_b": are_all_hvac_sys_fan_objs_autosized_b,
@@ -257,10 +273,12 @@ class PRM9012019Rule77j17(RuleDefinitionListIndexedBase):
             all_design_setpoints_delta_Ts_are_per_reqs_b = calc_vals[
                 "all_design_setpoints_delta_Ts_are_per_reqs_b"
             ]
+
             return (
                 not all_design_setpoints_delta_Ts_are_per_reqs_b
                 and self.precision_comparison["supply_fans_airflow_b"](
-                    supply_fans_airflow_b, zone_info["supply_flow_p"]
+                    supply_fans_airflow_b,
+                    zone_info["supply_flow_p"],
                 )
             )
 
@@ -268,6 +286,7 @@ class PRM9012019Rule77j17(RuleDefinitionListIndexedBase):
             hvac_b = context.BASELINE_0
             hvac_id_b = hvac_b["id"]
             supply_airflow_p = calc_vals["supply_airflow_p"]
+
             return f"{hvac_id_b} was not modeled based on a supply-air-to-room temperature set-point difference of 20°F (or 17°F, if lab). The baseline and proposed supply airflow was modeled identically at {supply_airflow_p.to('cfm')} CFM. Manual review is required to determine if the airflow rate was modeled to comply with applicable codes or accreditation standards. If not, fail."
 
         def rule_check(self, context, calc_vals=None, data=None):
@@ -279,12 +298,16 @@ class PRM9012019Rule77j17(RuleDefinitionListIndexedBase):
             ]
             supply_fans_airflow_b = calc_vals["supply_fans_airflow_b"]
             fan_minimum_outdoor_airflow_b = calc_vals["fan_minimum_outdoor_airflow_b"]
+
             return (
                 all_design_setpoints_delta_Ts_are_per_reqs_b
                 and are_all_hvac_sys_fan_objs_autosized_b
                 and supply_fans_airflow_b >= fan_minimum_outdoor_airflow_b
-                or not all_design_setpoints_delta_Ts_are_per_reqs_b
-                and fan_minimum_outdoor_airflow_b == supply_fans_airflow_b
+            ) or (
+                (
+                    not all_design_setpoints_delta_Ts_are_per_reqs_b
+                    and fan_minimum_outdoor_airflow_b == supply_fans_airflow_b
+                )
             )
 
         def is_tolerance_fail(self, context, calc_vals=None, data=None):
@@ -296,12 +319,16 @@ class PRM9012019Rule77j17(RuleDefinitionListIndexedBase):
             ]
             supply_fans_airflow_b = calc_vals["supply_fans_airflow_b"]
             fan_minimum_outdoor_airflow_b = calc_vals["fan_minimum_outdoor_airflow_b"]
+
             return (
                 all_design_setpoints_delta_Ts_are_per_reqs_b
                 and are_all_hvac_sys_fan_objs_autosized_b
                 and std_le(
                     val=supply_fans_airflow_b, std_val=fan_minimum_outdoor_airflow_b
                 )
-                or not all_design_setpoints_delta_Ts_are_per_reqs_b
-                and std_equal(fan_minimum_outdoor_airflow_b, supply_fans_airflow_b)
+            ) or (
+                (
+                    not all_design_setpoints_delta_Ts_are_per_reqs_b
+                    and std_equal(fan_minimum_outdoor_airflow_b, supply_fans_airflow_b)
+                )
             )

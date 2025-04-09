@@ -1,4 +1,5 @@
 import itertools
+
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
@@ -44,13 +45,16 @@ class PRM9012019Rule10q01(RuleDefinitionListIndexedBase):
         rmd_u = context.USER
         rmd_b = context.BASELINE_0
         rmd_p = context.PROPOSED
+
         HVAC_systems_virtual_list_p = list(
             set(
                 get_proposed_hvac_modeled_with_virtual_cooling(rmd_u, rmd_p)
                 + get_proposed_hvac_modeled_with_virtual_heating(rmd_u, rmd_p)
             )
         )
+
         hvac_zone_list_w_area_dict_p = get_hvac_zone_list_w_area_by_rmd_dict(rmd_p)
+
         zones_virtual_heating_cooling_list_p = list(
             set(
                 [
@@ -62,6 +66,7 @@ class PRM9012019Rule10q01(RuleDefinitionListIndexedBase):
                 ]
             )
         )
+
         inapplicable_hvac_with_virtual_heating_cooling_list_b = list(
             set(
                 itertools.chain(
@@ -72,6 +77,7 @@ class PRM9012019Rule10q01(RuleDefinitionListIndexedBase):
                 )
             )
         )
+
         return {
             "inapplicable_hvac_with_virtual_heating_cooling_list_b": inapplicable_hvac_with_virtual_heating_cooling_list_b
         }
@@ -97,16 +103,19 @@ class PRM9012019Rule10q01(RuleDefinitionListIndexedBase):
             inapplicable_hvac_with_virtual_heating_cooling_list_b = data[
                 "inapplicable_hvac_with_virtual_heating_cooling_list_b"
             ]
+
             return (
                 hvac_id_b not in inapplicable_hvac_with_virtual_heating_cooling_list_b
             )
 
         def get_calc_vals(self, context, data=None):
             hvac_b = context.BASELINE_0
+
             operation_during_occupied_b = hvac_b["fan_system"][
                 "operation_during_occupied"
             ]
             minimum_outdoor_airflow_b = hvac_b["fan_system"]["minimum_outdoor_airflow"]
+
             return {
                 "operation_during_occupied_b": operation_during_occupied_b,
                 "minimum_outdoor_airflow_b": CalcQ(
@@ -117,9 +126,11 @@ class PRM9012019Rule10q01(RuleDefinitionListIndexedBase):
         def rule_check(self, context, calc_vals=None, data=None):
             operation_during_occupied_b = calc_vals["operation_during_occupied_b"]
             minimum_outdoor_airflow_b = calc_vals["minimum_outdoor_airflow_b"]
+
             return (
                 operation_during_occupied_b == FAN_SYSTEM_OPERATION.CONTINUOUS
                 and minimum_outdoor_airflow_b > ZERO.FLOW
-                or operation_during_occupied_b == FAN_SYSTEM_OPERATION.CYCLING
+            ) or (
+                operation_during_occupied_b == FAN_SYSTEM_OPERATION.CYCLING
                 and minimum_outdoor_airflow_b == ZERO.FLOW
             )

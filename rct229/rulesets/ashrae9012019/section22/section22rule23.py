@@ -41,6 +41,7 @@ class PRM9012019Rule67l25(RuleDefinitionBase):
     def is_applicable(self, context, data=None):
         rmd_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmd_b)
+        # create a list containing all HVAC systems that are modeled in the rmd_b
         available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict
@@ -48,7 +49,7 @@ class PRM9012019Rule67l25(RuleDefinitionBase):
         ]
         return any(
             [
-                (available_type in APPLICABLE_SYS_TYPES)
+                available_type in APPLICABLE_SYS_TYPES
                 for available_type in available_type_list
             ]
         )
@@ -60,6 +61,7 @@ class PRM9012019Rule67l25(RuleDefinitionBase):
         interlock_flag = all(
             find_all("$.chillers[*].is_chilled_water_pump_interlocked", rmd_b)
         )
+
         primary_chw_loop_pump_num = len(
             [
                 pump_b
@@ -67,6 +69,7 @@ class PRM9012019Rule67l25(RuleDefinitionBase):
                 if pump_b["loop_or_piping"] in primary_chw_loop_id_array
             ]
         )
+
         return {
             "num_of_chillers_b": num_of_chillers_b,
             "primary_chw_loop_pump_num": primary_chw_loop_pump_num,
@@ -77,4 +80,5 @@ class PRM9012019Rule67l25(RuleDefinitionBase):
         num_of_chillers_b = calc_vals["num_of_chillers_b"]
         primary_chw_loop_pump_num = calc_vals["primary_chw_loop_pump_num"]
         interlock_flag = calc_vals["interlock_flag"]
+
         return num_of_chillers_b == primary_chw_loop_pump_num and interlock_flag

@@ -25,4 +25,5 @@ class PRM9012019Rule68r93(PartialRuleDefinition):
     def applicability_check(self, context, calc_vals, data):
         rmd_b = context.BASELINE_0
         purchased_chw_hhw_status_dict_b = check_purchased_chw_hhw_status_dict(rmd_b)
+
         return purchased_chw_hhw_status_dict_b["purchased_cooling"]

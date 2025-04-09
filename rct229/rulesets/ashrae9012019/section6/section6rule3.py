@@ -64,7 +64,10 @@ class PRM9012019Rule73a47(RuleDefinitionListIndexedBase):
                         USER=True, BASELINE_0=False, PROPOSED=True
                     ),
                     precision={
-                        "total_space_lpd_p": {"precision": 0.01, "unit": "W/ft2"}
+                        "total_space_lpd_p": {
+                            "precision": 0.01,
+                            "unit": "W/ft2",
+                        }
                     },
                 )
 
@@ -79,9 +82,11 @@ class PRM9012019Rule73a47(RuleDefinitionListIndexedBase):
                     sum(find_all("$.interior_lighting[*].power_per_area", space_p))
                     or ZERO.POWER_PER_AREA
                 )
+
                 space_lighting_status_type_p = data[
                     "building_segment_lighting_status_type_dict_p"
                 ][space_p["id"]]
+
                 return {
                     "total_space_lpd_u": CalcQ("power_density", total_space_lpd_u),
                     "total_space_lpd_p": CalcQ("power_density", total_space_lpd_p),

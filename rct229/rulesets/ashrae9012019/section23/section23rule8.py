@@ -23,8 +23,8 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_11_2,
 ]
 VALIDATION_POINTS_LENGTH = 11
-SUPPLY_AIRFLOW_COEFFS = [(0.1 * i) for i in range(VALIDATION_POINTS_LENGTH)]
-DESIGN_POWER_COEFFS = [0.0, 0.03, 0.07, 0.13, 0.21, 0.3, 0.41, 0.54, 0.68, 0.83, 1.0]
+SUPPLY_AIRFLOW_COEFFS = [0.1 * i for i in range(VALIDATION_POINTS_LENGTH)]
+DESIGN_POWER_COEFFS = [0.0, 0.03, 0.07, 0.13, 0.21, 0.30, 0.41, 0.54, 0.68, 0.83, 1.0]
 
 
 class PRM9012019Rule45r08(RuleDefinitionListIndexedBase):
@@ -49,13 +49,12 @@ class PRM9012019Rule45r08(RuleDefinitionListIndexedBase):
     def is_applicable(self, context, data=None):
         rmd_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmd_b)
+
         return any(
             [
-                (
-                    baseline_system_types_dict[system_type]
-                    and baseline_system_type_compare(
-                        system_type, applicable_sys_type, False
-                    )
+                baseline_system_types_dict[system_type]
+                and baseline_system_type_compare(
+                    system_type, applicable_sys_type, False
                 )
                 for system_type in baseline_system_types_dict
                 for applicable_sys_type in APPLICABLE_SYS_TYPES
@@ -72,11 +71,13 @@ class PRM9012019Rule45r08(RuleDefinitionListIndexedBase):
             if baseline_system_type_compare(sys_type, target_sys_type, False)
             for hvac_id in baseline_system_types_dict[sys_type]
         ]
+
         return {"applicable_hvac_sys_ids": applicable_hvac_sys_ids}
 
     def list_filter(self, context_item, data):
         hvac_sys_b = context_item.BASELINE_0
         applicable_hvac_sys_ids = data["applicable_hvac_sys_ids"]
+
         return hvac_sys_b["id"] in applicable_hvac_sys_ids
 
     class HVACRule(RuleDefinitionListIndexedBase):
@@ -101,23 +102,32 @@ class PRM9012019Rule45r08(RuleDefinitionListIndexedBase):
                             "design_airflow",
                             "design_electric_power",
                             "output_validation_points",
-                        ]
+                        ],
                     },
                     precision={
-                        "airflow": {"precision": 1, "unit": "cfm"},
-                        "result": {"precision": 10, "unit": "W"},
+                        "airflow": {
+                            "precision": 1,
+                            "unit": "cfm",
+                        },
+                        "result": {
+                            "precision": 10,
+                            "unit": "W",
+                        },
                     },
                 )
 
             def get_calc_vals(self, context, data=None):
                 supply_fan_b = context.BASELINE_0
+
                 design_airflow_b = supply_fan_b["design_airflow"]
                 design_electric_power_b = supply_fan_b["design_electric_power"]
                 output_validation_points_b = supply_fan_b["output_validation_points"]
+
                 output_validation_points = [
                     [output["airflow"], output["result"]]
                     for output in output_validation_points_b
                 ]
+
                 target_validation_points = [
                     [
                         SUPPLY_AIRFLOW_COEFFS[idx] * design_airflow_b,
@@ -125,6 +135,7 @@ class PRM9012019Rule45r08(RuleDefinitionListIndexedBase):
                     ]
                     for idx in range(VALIDATION_POINTS_LENGTH)
                 ]
+
                 return {
                     "design_airflow_b": CalcQ("air_flow_rate", design_airflow_b),
                     "design_electric_power_b": CalcQ(
@@ -137,13 +148,18 @@ class PRM9012019Rule45r08(RuleDefinitionListIndexedBase):
             def rule_check(self, context, calc_vals=None, data=None):
                 output_validation_points = calc_vals["output_validation_points"]
                 target_validation_points = calc_vals["target_validation_points"]
+
                 return len(
                     output_validation_points
                 ) == VALIDATION_POINTS_LENGTH and all(
                     [
-                        (
-                            self.precision_comparison["airflow"](ovp[0], tvp[0])
-                            and self.precision_comparison["result"](ovp[1], tvp[1])
+                        self.precision_comparison["airflow"](
+                            ovp[0],
+                            tvp[0],
+                        )
+                        and self.precision_comparison["result"](
+                            ovp[1],
+                            tvp[1],
                         )
                         for ovp, tvp in zip(
                             output_validation_points, target_validation_points
@@ -154,11 +170,12 @@ class PRM9012019Rule45r08(RuleDefinitionListIndexedBase):
             def is_tolerance_fail(self, context, calc_vals=None, data=None):
                 output_validation_points = calc_vals["output_validation_points"]
                 target_validation_points = calc_vals["target_validation_points"]
+
                 return len(
                     output_validation_points
                 ) == VALIDATION_POINTS_LENGTH and all(
                     [
-                        (std_equal(ovp[0], tvp[0]) and std_equal(ovp[1], tvp[1]))
+                        std_equal(ovp[0], tvp[0]) and std_equal(ovp[1], tvp[1])
                         for ovp, tvp in zip(
                             output_validation_points, target_validation_points
                         )

@@ -43,14 +43,20 @@ class PRM9012019Rule88r57(RuleDefinitionBase):
     def is_applicable(self, context, data=None):
         rmd_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmd_b)
+        # create a list containing all HVAC systems that are modeled in the rmd_b
         available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict
             if len(baseline_system_types_dict[hvac_type]) > 0
         ]
+        # There is no point to check primary secondary loop in the applicable function
+        # because the get_primary_secondary_loops_dict returns nothing if any cooling loop is
+        # modeled as a primary only loop
+        # primary_secondary_loop_dict = get_primary_secondary_loops_dict(rmd_b)
+
         return any(
             [
-                (available_type in APPLICABLE_SYS_TYPES)
+                available_type in APPLICABLE_SYS_TYPES
                 for available_type in available_type_list
             ]
         )
@@ -65,6 +71,7 @@ class PRM9012019Rule88r57(RuleDefinitionBase):
                 for primary_loop in primary_secondary_loop_dict
             ]
         )
+
         return {
             "num_primary_loops": num_primary_loops,
             "num_secondary_loops": num_secondary_loops,
@@ -73,4 +80,5 @@ class PRM9012019Rule88r57(RuleDefinitionBase):
     def rule_check(self, context, calc_vals=None, data=None):
         num_primary_loops = calc_vals["num_primary_loops"]
         num_secondary_loops = calc_vals["num_secondary_loops"]
+
         return num_primary_loops == 1 and num_secondary_loops == 1

@@ -15,12 +15,15 @@ from rct229.utils.pint_utils import ZERO, CalcQ
 from rct229.utils.std_comparisons import std_equal
 
 DOOR = SchemaEnums.schema_enums["SubsurfaceClassificationOptions"].DOOR
+
 SUBSURFACE_SUBCLASSIFICATION_OPTIONS = SchemaEnums.schema_enums[
     "SubsurfaceSubclassificationOptions2019ASHRAE901"
 ]
+
 SPANDREL_GLASS = SUBSURFACE_SUBCLASSIFICATION_OPTIONS.SPANDREL_GLASS
 GLASS_BLOCK = SUBSURFACE_SUBCLASSIFICATION_OPTIONS.GLASS_BLOCK
 OTHER = SUBSURFACE_SUBCLASSIFICATION_OPTIONS.OTHER
+
 UNEXPECTED_DOOR = [SPANDREL_GLASS, GLASS_BLOCK, OTHER]
 
 
@@ -35,7 +38,8 @@ class PRM9012019Rule50m61(RuleDefinitionListIndexedBase):
             each_rule=PRM9012019Rule50m61.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-39",
-            description="U-factor of the baseline door is based on Tables G3.4-1 through G3.4-8 for the applicable door type (swinging or non-swinging) and envelope conditioning category.",
+            description="U-factor of the baseline door is based on Tables G3.4-1 through G3.4-8 for the applicable door "
+            "type (swinging or non-swinging) and envelope conditioning category.",
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline model",
             is_primary_rule=True,
@@ -63,7 +67,7 @@ class PRM9012019Rule50m61(RuleDefinitionListIndexedBase):
             return {
                 "scc_dict_b": get_surface_conditioning_category_dict(
                     data["climate_zone"], building_b
-                )
+                ),
             }
 
         def list_filter(self, context_item, data=None):
@@ -87,7 +91,7 @@ class PRM9012019Rule50m61(RuleDefinitionListIndexedBase):
                             "classification",
                             "glazed_area",
                             "opaque_area",
-                        ]
+                        ],
                     },
                 )
 
@@ -111,7 +115,9 @@ class PRM9012019Rule50m61(RuleDefinitionListIndexedBase):
                         rmds_used=produce_ruleset_model_description(
                             USER=False, BASELINE_0=True, PROPOSED=False
                         ),
-                        required_fields={"$": ["subclassification", "u_factor"]},
+                        required_fields={
+                            "$": ["subclassification", "u_factor"],
+                        },
                         precision={
                             "subsurface_u_factor_b": {
                                 "precision": 0.01,
@@ -127,6 +133,7 @@ class PRM9012019Rule50m61(RuleDefinitionListIndexedBase):
                     u_factor_b = subsurface_b["u_factor"]
                     subsurface_class_b = subsurface_b["subclassification"]
                     target_u_factor_b = ZERO.U_FACTOR
+
                     target_u_factor_nonres_b = (
                         table_G34_lookup(
                             climate_zone,
@@ -137,6 +144,7 @@ class PRM9012019Rule50m61(RuleDefinitionListIndexedBase):
                         if subsurface_class_b not in UNEXPECTED_DOOR
                         else ZERO.U_FACTOR
                     )
+
                     target_u_factor_res_b = (
                         table_G34_lookup(
                             climate_zone,
@@ -147,6 +155,7 @@ class PRM9012019Rule50m61(RuleDefinitionListIndexedBase):
                         if subsurface_class_b not in UNEXPECTED_DOOR
                         else ZERO.U_FACTOR
                     )
+
                     target_u_factor_semiheated_b = (
                         table_G34_lookup(
                             climate_zone,
@@ -157,6 +166,7 @@ class PRM9012019Rule50m61(RuleDefinitionListIndexedBase):
                         if subsurface_class_b not in UNEXPECTED_DOOR
                         else ZERO.U_FACTOR
                     )
+
                     if scc_dict_b == SCC.EXTERIOR_NON_RESIDENTIAL:
                         target_u_factor_b = target_u_factor_nonres_b
                     elif scc_dict_b == SCC.EXTERIOR_RESIDENTIAL:
@@ -166,13 +176,16 @@ class PRM9012019Rule50m61(RuleDefinitionListIndexedBase):
                     elif target_u_factor_nonres_b == target_u_factor_res_b:
                         target_u_factor_b = target_u_factor_nonres_b
                     else:
-                        assert (
-                            scc_dict_b == SCC.EXTERIOR_MIXED
-                        ), f"Surface conditioning category is not one of the five types: EXTERIOR_NON_RESIDENTIAL, EXTERIOR_RESIDENTIAL, SEMI_EXTERIOR, EXTERIOR_MIXED, UNREGULATED, got {scc_dict_b} instead "
+                        assert scc_dict_b == SCC.EXTERIOR_MIXED, (
+                            f"Surface conditioning category is not one of the five types: EXTERIOR_NON_RESIDENTIAL, "
+                            f"EXTERIOR_RESIDENTIAL, SEMI_EXTERIOR, EXTERIOR_MIXED, UNREGULATED, "
+                            f"got {scc_dict_b} instead "
+                        )
                     manual_check_required_flag = (
                         scc_dict_b == SCC.EXTERIOR_MIXED
                         and target_u_factor_nonres_b != target_u_factor_res_b
                     )
+
                     return {
                         "scc_dict_b": scc_dict_b,
                         "subsurface_class_b": subsurface_class_b,
@@ -195,9 +208,9 @@ class PRM9012019Rule50m61(RuleDefinitionListIndexedBase):
                     target_u_factor_nonres_b = calc_vals["target_u_factor_nonres_b"]
                     subsurface_class_b = calc_vals["subsurface_class_b"]
                     u_factor_b = calc_vals["u_factor_b"]
-                    return (
-                        subsurface_class_b in UNEXPECTED_DOOR
-                        or manual_check_required_flag
+
+                    return subsurface_class_b in UNEXPECTED_DOOR or (
+                        manual_check_required_flag
                         and (
                             std_equal(u_factor_b, target_u_factor_nonres_b)
                             or std_equal(u_factor_b, target_u_factor_res_b)
@@ -212,7 +225,8 @@ class PRM9012019Rule50m61(RuleDefinitionListIndexedBase):
                     target_u_factor_res_b = calc_vals["target_u_factor_res_b"]
                     target_u_factor_nonres_b = calc_vals["target_u_factor_nonres_b"]
                     manual_check_required_msg = (
-                        f"Prescribed u-factor requirement could not be determined. Verify the baseline door u-factor (${u_factor_b}) is modeled correctly."
+                        f"Prescribed u-factor requirement could not be determined. Verify "
+                        f"the baseline door u-factor (${u_factor_b}) is modeled correctly."
                         if manual_check_required_flag
                         and (
                             std_equal(u_factor_b, target_u_factor_nonres_b)

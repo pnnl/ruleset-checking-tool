@@ -35,6 +35,7 @@ class PRM9012019Rule88f26(RuleDefinitionListIndexedBase):
         applicable_hvac_systems_list_b = (
             get_hvac_systems_serving_zone_health_safety_vent_reqs(rmd_b)
         )
+
         return {"applicable_hvac_systems_list_b": applicable_hvac_systems_list_b}
 
     class HVACRule(RuleDefinitionBase):
@@ -56,14 +57,17 @@ class PRM9012019Rule88f26(RuleDefinitionListIndexedBase):
             hvac_b = context.BASELINE_0
             hvac_id_b = hvac_b["id"]
             applicable_hvac_systems_list_b = data["applicable_hvac_systems_list_b"]
+
             return hvac_id_b in applicable_hvac_systems_list_b
 
         def get_calc_vals(self, context, data=None):
             hvac_b = context.BASELINE_0
+
             operation_during_unoccupied_b = hvac_b["fan_system"][
                 "operation_during_unoccupied"
             ]
             minimum_outdoor_airflow_b = hvac_b["fan_system"]["minimum_outdoor_airflow"]
+
             return {
                 "operation_during_unoccupied_b": operation_during_unoccupied_b,
                 "minimum_outdoor_airflow_b": minimum_outdoor_airflow_b,
@@ -72,6 +76,7 @@ class PRM9012019Rule88f26(RuleDefinitionListIndexedBase):
         def rule_check(self, context, calc_vals=None, data=None):
             operation_during_unoccupied_b = calc_vals["operation_during_unoccupied_b"]
             minimum_outdoor_airflow_b = calc_vals["minimum_outdoor_airflow_b"]
+
             return (
                 operation_during_unoccupied_b == FAN_SYSTEM_OPERATION.CONTINUOUS
                 and minimum_outdoor_airflow_b > ZERO.FLOW
@@ -80,4 +85,5 @@ class PRM9012019Rule88f26(RuleDefinitionListIndexedBase):
         def get_fail_msg(self, context, calc_vals=None, data=None):
             hvac_b = context.BASELINE_0
             hvac_id_b = hvac_b["id"]
+
             return f"{hvac_id_b} SERVES ZONE(S) THAT APPEAR LIKELY TO HAVE HEALTH AND SAFETY MANDATED MINIMUM VENTILATION REQUIREMENTS DURING UNOCCUPIED HOURS AND THEREFORE (IF THE HVAC SYSTEM SUPPLIES OA CFM) MAY WARRANT CONTINUOUS OPERATION DURING UNOCCUPIED HOURS PER SECTION G3.1-4 SCHEDULES EXCEPTION #2 FOR THE BASELINE BUILDING AND PER SECTION G3.1.2.4."

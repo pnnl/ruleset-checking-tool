@@ -49,6 +49,7 @@ class PRM9012019Rule95f90(RuleDefinitionListIndexedBase):
     def is_applicable(self, context, data=None):
         rmd_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmd_b)
+        # create a list containing all HVAC systems that are modeled in the rmd_b
         available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict
@@ -56,7 +57,7 @@ class PRM9012019Rule95f90(RuleDefinitionListIndexedBase):
         ]
         return any(
             [
-                (available_type in APPLICABLE_SYS_TYPES)
+                available_type in APPLICABLE_SYS_TYPES
                 for available_type in available_type_list
             ]
         )
@@ -67,8 +68,15 @@ class PRM9012019Rule95f90(RuleDefinitionListIndexedBase):
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
-                required_fields={"$": ["range"]},
-                precision={"heat_rejection_range": {"precision": 0.1, "unit": "K"}},
+                required_fields={
+                    "$": ["range"],
+                },
+                precision={
+                    "heat_rejection_range": {
+                        "precision": 0.1,
+                        "unit": "K",
+                    },
+                },
             )
 
         def get_calc_vals(self, context, data=None):
@@ -86,6 +94,7 @@ class PRM9012019Rule95f90(RuleDefinitionListIndexedBase):
         def rule_check(self, context, calc_vals=None, data=None):
             heat_rejection_range = calc_vals["heat_rejection_range"]
             required_heat_rejection_range = calc_vals["required_heat_rejection_range"]
+
             return self.precision_comparison["heat_rejection_range"](
                 heat_rejection_range.to(ureg.kelvin),
                 required_heat_rejection_range.to(ureg.kelvin),
@@ -94,6 +103,7 @@ class PRM9012019Rule95f90(RuleDefinitionListIndexedBase):
         def is_tolerance_fail(self, context, calc_vals=None, data=None):
             heat_rejection_range = calc_vals["heat_rejection_range"]
             required_heat_rejection_range = calc_vals["required_heat_rejection_range"]
+
             return std_equal(
                 heat_rejection_range.to(ureg.kelvin),
                 required_heat_rejection_range.to(ureg.kelvin),

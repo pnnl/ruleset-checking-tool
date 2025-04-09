@@ -48,17 +48,21 @@ class PRM9012019Rule57w94(RuleDefinitionListIndexedBase):
 
     def is_applicable(self, context, data=None):
         rmd_b = context.BASELINE_0
+
         baseline_system_types_dict = get_baseline_system_types(rmd_b)
+        # create a list contains all HVAC systems that are modeled in the rmd_b
         available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict
             if len(baseline_system_types_dict[hvac_type]) > 0
         ]
+
         primary_secondary_loop_dict = get_primary_secondary_loops_dict(rmd_b)
+
         return (
             any(
                 [
-                    (available_type in APPLICABLE_SYS_TYPES)
+                    available_type in APPLICABLE_SYS_TYPES
                     for available_type in available_type_list
                 ]
             )
@@ -67,12 +71,15 @@ class PRM9012019Rule57w94(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data):
         rmd_b = context.BASELINE_0
+
         primary_secondary_loop_dict = get_primary_secondary_loops_dict(rmd_b)
+
         return {"primary_secondary_loop_dict": primary_secondary_loop_dict}
 
     def list_filter(self, context_item, data):
         fluid_loop_b = context_item.BASELINE_0
         primary_secondary_loop_dict = data["primary_secondary_loop_dict"]
+
         return fluid_loop_b["id"] in primary_secondary_loop_dict
 
     class ChillerFluidLoopRule(RuleDefinitionListIndexedBase):
@@ -95,12 +102,14 @@ class PRM9012019Rule57w94(RuleDefinitionListIndexedBase):
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
-                    required_fields={"$": ["pump_power_per_flow_rate"]},
+                    required_fields={
+                        "$": ["pump_power_per_flow_rate"],
+                    },
                     precision={
                         "secondary_loop_pump_power_per_flow_rate": {
                             "precision": 1,
                             "unit": "W/gpm",
-                        }
+                        },
                     },
                 )
 
@@ -110,6 +119,7 @@ class PRM9012019Rule57w94(RuleDefinitionListIndexedBase):
                     "pump_power_per_flow_rate"
                 ]
                 req_pump_flow_rate = REQUIRED_PUMP_FLOW_RATE
+
                 return {
                     "secondary_loop_pump_power_per_flow_rate": CalcQ(
                         "power_per_liquid_flow_rate",
@@ -125,15 +135,20 @@ class PRM9012019Rule57w94(RuleDefinitionListIndexedBase):
                     "secondary_loop_pump_power_per_flow_rate"
                 ]
                 req_pump_flow_rate = calc_vals["req_pump_flow_rate"]
+
                 return self.precision_comparison[
                     "secondary_loop_pump_power_per_flow_rate"
-                ](secondary_loop_pump_power_per_flow_rate, req_pump_flow_rate)
+                ](
+                    secondary_loop_pump_power_per_flow_rate,
+                    req_pump_flow_rate,
+                )
 
             def is_tolerance_fail(self, context, calc_vals=None, data=None):
                 secondary_loop_pump_power_per_flow_rate = calc_vals[
                     "secondary_loop_pump_power_per_flow_rate"
                 ]
                 req_pump_flow_rate = calc_vals["req_pump_flow_rate"]
+
                 return std_equal(
                     secondary_loop_pump_power_per_flow_rate, req_pump_flow_rate
                 )
