@@ -13,7 +13,7 @@ from rct229.utils.std_comparisons import std_equal
 
 CAPACITY_THRESHOLD = 3.4 * ureg("Btu/(hr * ft2)")
 CRAWLSPACE_HEIGHT_THRESHOLD = 7 * ureg("ft")
-ZONE_HEAT_CAPACITY_DENSITY_TOLERANCE = 0.1 * ureg("Btu/(hr * ft2)")
+ZONE_HEAT_CAPACITY_DENSITY_TOLERANCE = 3.4 * ureg("Btu/(hr * ft2)")
 
 
 # Intended for export and internal use
@@ -227,7 +227,9 @@ def get_zone_conditioning_category_dict(
         elif zone_capacity_dict[zone_id]["heating"] > CAPACITY_THRESHOLD or std_equal(
             std_val=CAPACITY_THRESHOLD,
             val=zone_capacity_dict[zone_id]["heating"],
-            percent_tolerance=ZONE_HEAT_CAPACITY_DENSITY_TOLERANCE / CAPACITY_THRESHOLD,
+            percent_tolerance=ZONE_HEAT_CAPACITY_DENSITY_TOLERANCE
+            / CAPACITY_THRESHOLD
+            * 100,
         ):
             semiheated_zone_ids.append(zone_id)
 
