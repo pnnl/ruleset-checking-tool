@@ -116,9 +116,10 @@ class Section5Rule30(RuleDefinitionListIndexedBase):
                 absorptance_thermal_exterior_u = calc_vals[
                     "absorptance_thermal_exterior_u"
                 ]
-                return (
-                    absorptance_thermal_exterior_p == absorptance_thermal_exterior_u
-                    and absorptance_thermal_exterior_p != ABSORPTION_THERMAL_EXTERIOR
+                return self.precision_comparison["absorptance_thermal_exterior_p"](
+                    absorptance_thermal_exterior_p, absorptance_thermal_exterior_u
+                ) and not self.precision_comparison["absorptance_thermal_exterior_p"](
+                    absorptance_thermal_exterior_p, ABSORPTION_THERMAL_EXTERIOR
                 )
 
             def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
