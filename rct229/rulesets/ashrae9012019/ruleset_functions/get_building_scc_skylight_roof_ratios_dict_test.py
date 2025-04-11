@@ -713,7 +713,7 @@ def test__get_building_scc_skylight_roof_ratios_dict():
     assert get_building_scc_skylight_roof_ratios_dict(CLIMATE_ZONE, TEST_BUILDING) == {
         SCC.EXTERIOR_RESIDENTIAL: 0.2,
         SCC.EXTERIOR_NON_RESIDENTIAL: 0.2,
-        SCC.SEMI_EXTERIOR: 0.0,
+        SCC.SEMI_EXTERIOR: 0.2,
         SCC.EXTERIOR_MIXED: 0.2,
     }
 

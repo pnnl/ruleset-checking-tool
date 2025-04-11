@@ -11,7 +11,7 @@ from rct229.utils.jsonpath_utils import find_all, find_exactly_required_fields, 
 from rct229.utils.pint_utils import ZERO
 from rct229.utils.std_comparisons import std_equal
 
-CAPACITY_THRESHOLD = 3.4 * ureg("Btu/(hr * ft2)")
+CAPACITY_THRESHOLD = 0.1 * ureg("Btu/(hr * ft2)")
 CRAWLSPACE_HEIGHT_THRESHOLD = 7 * ureg("ft")
 ZONE_HEAT_CAPACITY_DENSITY_TOLERANCE = 0.1 * ureg("Btu/(hr * ft2)")
 
