@@ -52,7 +52,7 @@ class Section16Rule1(RuleDefinitionListIndexedBase):
                 ),
                 precision={
                     "elevator_motor_power_b": {
-                        "precision": 100,
+                        "precision": 0.1,
                         "unit": "W",
                     }
                 },
