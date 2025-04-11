@@ -13,7 +13,7 @@ from rct229.utils.std_comparisons import std_equal
 
 CAPACITY_THRESHOLD = 3.4 * ureg("Btu/(hr * ft2)")
 CRAWLSPACE_HEIGHT_THRESHOLD = 7 * ureg("ft")
-ZONE_HEAT_CAPACITY_DENSITY_TOLERANCE = 3.4 * ureg("Btu/(hr * ft2)")
+ZONE_HEAT_CAPACITY_DENSITY_TOLERANCE = 0.1 * ureg("Btu/(hr * ft2)")
 
 
 # Intended for export and internal use
