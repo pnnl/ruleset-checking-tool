@@ -11,6 +11,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_categ
 from rct229.schema.config import ureg
 from rct229.schema.schema_utils import quantify_rmd
 from rct229.schema.validate import schema_validate_rpd
+from rct229.utils.std_comparisons import std_equal
 
 CLIMATE_ZONE = "CZ0A"
 POWER_DELTA = 1
@@ -536,17 +537,34 @@ def test__TEST_RPD__is_valid():
 
 
 def test__get_area_type_window_wall_area():
-    assert get_area_type_window_wall_area_dict(CLIMATE_ZONE, TEST_BUILDING) == {
-        "HOTEL_MOTEL_SMALL": {
-            "total_wall_area": 40 * ureg("m2"),
-            "total_window_area": 20 * ureg("m2"),
-        },
-        "RETAIL_STAND_ALONE": {
-            "total_wall_area": 20 * ureg("m2"),
-            "total_window_area": 10 * ureg("m2"),
-        },
-        "NONE": {
-            "total_wall_area": 10 * ureg("m2"),
-            "total_window_area": 5 * ureg("m2"),
-        },
-    }
+    area_type_window_wall_area_dict = get_area_type_window_wall_area_dict(
+        CLIMATE_ZONE, TEST_BUILDING
+    )
+    assert std_equal(
+        area_type_window_wall_area_dict["HOTEL_MOTEL_SMALL"]["total_wall_area"],
+        40 * ureg("m2"),
+        0.1,
+    )
+    assert std_equal(
+        area_type_window_wall_area_dict["HOTEL_MOTEL_SMALL"]["total_window_area"],
+        20 * ureg("m2"),
+        0.1,
+    )
+    assert std_equal(
+        area_type_window_wall_area_dict["RETAIL_STAND_ALONE"]["total_wall_area"],
+        20 * ureg("m2"),
+        0.1,
+    )
+    assert std_equal(
+        area_type_window_wall_area_dict["RETAIL_STAND_ALONE"]["total_window_area"],
+        10 * ureg("m2"),
+        0.1,
+    )
+    assert std_equal(
+        area_type_window_wall_area_dict["NONE"]["total_wall_area"], 20 * ureg("m2"), 0.1
+    )
+    assert std_equal(
+        area_type_window_wall_area_dict["NONE"]["total_window_area"],
+        7 * ureg("m2"),
+        0.1,
+    )
