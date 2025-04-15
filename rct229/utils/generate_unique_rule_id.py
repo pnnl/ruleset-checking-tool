@@ -7,7 +7,7 @@ import rct229.rulesets as rulesets
 rule_map = rulesets.__getrulemap__()
 
 
-def generate_unique_rule_id():
+def generate_9012019_unique_rule_id():
     """
     Generate a unique rule ID for a rule. The rule ID is generated in the format of:
     prm9012019rule + 2 digits + 1 lowercase letter + 2 digits
