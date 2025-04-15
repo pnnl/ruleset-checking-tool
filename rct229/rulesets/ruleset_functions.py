@@ -54,12 +54,12 @@ def renumber_rules(ruleset_doc):
                     f"Tried to remove the -new suffix but {new_path} already exists. You must resolve {file_path}."
                 )
 
-    # collect the files in the ashrae9012019 ruletest_jsons directory that start with section and end with master.json
+    # collect the files in the ruleset's ruletest_jsons directory that start with section and end with master.json
     ruletest_jsons_dir = (
         Path(__file__).parent.parent
         / "ruletest_engine"
         / "ruletest_jsons"
-        / "ashrae9012019"
+        / SchemaStore.SELECTED_RULESET
     )
     section_master_ruletest_files = list(ruletest_jsons_dir.glob("section*master.json"))
 
@@ -97,7 +97,16 @@ def process_file(file_path, rule_name):
 
     if modified:
         # Rename the file based on rule_name
-        new_file_path = file_path.with_name(f"{rule_name}-new.py")
+        rule_section = rule_name.split("section")[1].split("rule")[0]
+        current_section = file_path.parent.name
+
+        if rule_section != current_section:
+            correct_dir = file_path.parent.parent / f"section{rule_section}"
+            correct_dir.mkdir(parents=True, exist_ok=True)
+        else:
+            correct_dir = file_path.parent
+
+        new_file_path = correct_dir / f"{rule_name}-new.py"
         file_path.rename(new_file_path)
 
         with new_file_path.open("w", encoding="utf-8") as file:
