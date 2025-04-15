@@ -26,10 +26,6 @@ CASE3_UNDETERMINED__MSG = (
     "Fail if the thermal emittance in the user model is based on aged test data. Roof thermal emittance is equal to the prescribed default value of 0.9 "
     "but differs from the thermal emittance in the user model {absorptance_thermal_exterior}."
 )
-PASS_DIFFERS_MSG = (
-    "Roof thermal emittance is equal to the prescribed default value of 0.9 but differs from the "
-    "thermal emittance in the user model {absorptance_thermal_exterior} "
-)
 
 
 class Section5Rule30(RuleDefinitionListIndexedBase):
@@ -96,7 +92,7 @@ class Section5Rule30(RuleDefinitionListIndexedBase):
                         "absorptance_thermal_exterior_p": {
                             "precision": 0.01,
                             "unit": "",
-                        }
+                        },
                     },
                 )
 
@@ -122,10 +118,16 @@ class Section5Rule30(RuleDefinitionListIndexedBase):
                 ]
 
                 return (
-                    absorptance_thermal_exterior_p == absorptance_thermal_exterior_u
-                    and absorptance_thermal_exterior_p != ABSORPTION_THERMAL_EXTERIOR
+                    self.precision_comparison["absorptance_thermal_exterior_p"](
+                        absorptance_thermal_exterior_p, absorptance_thermal_exterior_u
+                    )
+                    and not self.precision_comparison["absorptance_thermal_exterior_p"](
+                        absorptance_thermal_exterior_p, ABSORPTION_THERMAL_EXTERIOR
+                    )
                 ) or (
-                    absorptance_thermal_exterior_p != absorptance_thermal_exterior_u
+                    not self.precision_comparison["absorptance_thermal_exterior_p"](
+                        absorptance_thermal_exterior_p, absorptance_thermal_exterior_u
+                    )
                     and self.precision_comparison["absorptance_thermal_exterior_p"](
                         absorptance_thermal_exterior_p,
                         ABSORPTION_THERMAL_EXTERIOR,
@@ -140,24 +142,17 @@ class Section5Rule30(RuleDefinitionListIndexedBase):
                     "absorptance_thermal_exterior_u"
                 ]
 
-                UNDETERMINED_MSG = ""
-                if (
-                    absorptance_thermal_exterior_p == absorptance_thermal_exterior_u
-                    and absorptance_thermal_exterior_p != ABSORPTION_THERMAL_EXTERIOR
-                ):
-                    UNDETERMINED_MSG = CASE2_UNDETERMINED__MSG.format(
-                        absorptance_thermal_exterior=absorptance_thermal_exterior_p
-                    )
-                elif (
-                    absorptance_thermal_exterior_p != absorptance_thermal_exterior_u
-                    and self.precision_comparison["absorptance_thermal_exterior_p"](
-                        absorptance_thermal_exterior_p,
-                        ABSORPTION_THERMAL_EXTERIOR,
-                    )
-                ):
-                    UNDETERMINED_MSG = CASE3_UNDETERMINED__MSG.format(
+                UNDETERMINED_MSG = (
+                    CASE3_UNDETERMINED__MSG.format(
                         absorptance_thermal_exterior=absorptance_thermal_exterior_u
                     )
+                    if not self.precision_comparison["absorptance_thermal_exterior_p"](
+                        absorptance_thermal_exterior_p, absorptance_thermal_exterior_u
+                    )
+                    else CASE2_UNDETERMINED__MSG.format(
+                        absorptance_thermal_exterior=absorptance_thermal_exterior_p
+                    )
+                )
 
                 return UNDETERMINED_MSG
 
@@ -166,25 +161,6 @@ class Section5Rule30(RuleDefinitionListIndexedBase):
                     calc_vals["absorptance_thermal_exterior_p"],
                     ABSORPTION_THERMAL_EXTERIOR,
                 )
-
-            def get_pass_msg(self, context, calc_vals=None, data=None):
-                """Pre-condition: see rule_check"""
-                absorptance_thermal_exterior_p = calc_vals[
-                    "absorptance_thermal_exterior_p"
-                ]
-                absorptance_thermal_exterior_u = calc_vals[
-                    "absorptance_thermal_exterior_u"
-                ]
-
-                pass_msg = (
-                    PASS_DIFFERS_MSG.format(
-                        absorptance_thermal_exterior=absorptance_thermal_exterior_u
-                    )
-                    if absorptance_thermal_exterior_p != absorptance_thermal_exterior_u
-                    else ""
-                )
-
-                return pass_msg
 
             def is_tolerance_fail(self, context, calc_vals=None, data=None):
                 return std_equal(
