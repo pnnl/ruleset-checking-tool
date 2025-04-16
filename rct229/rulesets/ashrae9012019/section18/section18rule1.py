@@ -154,8 +154,14 @@ class Section18Rule1(RuleDefinitionListIndexedBase):
                     ]
                 )
 
+                hvac_system_types_serving_zone_b = [
+                    system_type_str for system_type_str, system_list in data["baseline_hvac_system_dict_b"].items()
+                    if any(sys_b in system_list for sys_b in hvac_systems_serving_zone_b)
+                ]
+
                 return {
                     "is_system_part_of_expected_sys_type_b": is_system_part_of_expected_sys_type_b,
+                    "hvac_system_types_serving_zone_b": hvac_system_types_serving_zone_b,
                     "expected_system_type_b": expected_system_type_b,
                 }
 
