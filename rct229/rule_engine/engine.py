@@ -239,8 +239,8 @@ def evaluate_rules(
         for rule in rules_list:
             if rule.id in ["1-6", "1-7", "1-8"]:
                 continue
-            # if rule.id != "5-35":
-            #     continue
+            if rule.id != "18-1":
+                continue
             print(f"Processing Rule {rule.id}")
             outcome = rule.evaluate(copied_rmds)
             outcomes.append(outcome)
