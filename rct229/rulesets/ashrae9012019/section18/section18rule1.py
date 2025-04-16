@@ -142,7 +142,13 @@ class Section18Rule1(RuleDefinitionListIndexedBase):
                 hvac_systems_serving_zone_b = data["hvac_systems_serving_zone_b"][
                     zone_id_b
                 ]
-
+                hvac_system_types_b = {
+                    system_type: system_list
+                    for system_type, system_list in data[
+                        "baseline_hvac_system_dict_b"
+                    ].items()
+                    if system_list
+                }
                 hvac_system_types_serving_zone_b = [
                     system_type_str
                     for system_type_str, system_list in data[
@@ -154,6 +160,7 @@ class Section18Rule1(RuleDefinitionListIndexedBase):
                 ]
 
                 return {
+                    "hvac_system_types_b": hvac_system_types_b,
                     "hvac_system_types_serving_zone_b": hvac_system_types_serving_zone_b,
                     "expected_system_type_b": expected_system_type_b,
                 }
