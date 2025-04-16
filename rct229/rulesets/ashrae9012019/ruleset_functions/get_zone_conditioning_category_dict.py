@@ -218,18 +218,11 @@ def get_zone_conditioning_category_dict(
             or std_equal(
                 std_val=system_min_heating_output,
                 val=zone_capacity_dict[zone_id]["heating"],
-                percent_tolerance=ZONE_HEAT_CAPACITY_DENSITY_TOLERANCE
-                / system_min_heating_output
-                * 100,
             )
         ):
             directly_conditioned_zone_ids.append(zone_id)
         elif zone_capacity_dict[zone_id]["heating"] > CAPACITY_THRESHOLD or std_equal(
-            std_val=CAPACITY_THRESHOLD,
-            val=zone_capacity_dict[zone_id]["heating"],
-            percent_tolerance=ZONE_HEAT_CAPACITY_DENSITY_TOLERANCE
-            / CAPACITY_THRESHOLD
-            * 100,
+            std_val=CAPACITY_THRESHOLD, val=zone_capacity_dict[zone_id]["heating"]
         ):
             semiheated_zone_ids.append(zone_id)
 

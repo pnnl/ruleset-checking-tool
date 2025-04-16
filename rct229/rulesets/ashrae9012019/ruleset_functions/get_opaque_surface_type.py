@@ -60,18 +60,10 @@ def get_opaque_surface_type(surface: dict) -> str:
     elif (
         MIN_FLOOR_TILT < surface_tilt
         # compare the magnitude to avoid runtime error in std_comparisons.py
-        or std_equal(
-            val=surface_tilt.magnitude,
-            std_val=MIN_FLOOR_TILT.magnitude,
-            percent_tolerance=MIN_FLOOR_TILT_TOLERANCE / MIN_FLOOR_TILT * 100,
-        )
+        or std_equal(val=surface_tilt.magnitude, std_val=MIN_FLOOR_TILT.magnitude)
     ) and (
         surface_tilt < MAX_FLOOR_TILT
-        or std_equal(
-            val=surface_tilt.magnitude,
-            std_val=MAX_FLOOR_TILT.magnitude,
-            percent_tolerance=MAX_FLOOR_TILT_TOLERANCE / MAX_FLOOR_TILT * 100,
-        )
+        or std_equal(val=surface_tilt.magnitude, std_val=MAX_FLOOR_TILT.magnitude)
     ):
         if (
             getattr_(surface, "surface", "construction").get(
