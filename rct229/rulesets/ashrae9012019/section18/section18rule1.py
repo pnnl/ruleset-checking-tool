@@ -155,7 +155,8 @@ class Section18Rule1(RuleDefinitionListIndexedBase):
                 )
 
                 return {
-                    "is_system_part_of_expected_sys_type_b": is_system_part_of_expected_sys_type_b
+                    "is_system_part_of_expected_sys_type_b": is_system_part_of_expected_sys_type_b,
+                    "expected_system_type_b": expected_system_type_b,
                 }
 
             def manual_check_required(self, context, calc_vals=None, data=None):
