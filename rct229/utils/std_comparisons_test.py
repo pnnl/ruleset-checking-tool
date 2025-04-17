@@ -20,7 +20,7 @@ def test__std_equal__true_with_units():
 
 
 def test__std_equal__true_without_units():
-    assert std_equal(1.01, 1.0101, 0.05)
+    assert std_equal(1.01, 1.0101)
 
 
 def test__std_equal__false_with_units():
@@ -44,7 +44,7 @@ def test__compare_standard_val_le__true_with_units_tolerance():
     # case less equal -> greater within tolerance
     assert compare_standard_val(
         val=1.0102 * _M2,
-        std_val=1.0103 * _M2,
+        std_val=1.0101 * _M2,
         operator=operator.le,
     )
 
@@ -59,7 +59,7 @@ def test__compare_standard_val_lt_true_with_units():
 def test__compare_standard_val_lt_true_with_units_tolerance():
     # case less than -> greater within tolerance
     assert compare_standard_val(
-        val=1.0102 * _M2, std_val=1.0103 * _M2, operator=operator.lt
+        val=1.0102 * _M2, std_val=1.0101 * _M2, operator=operator.lt
     )
 
 
@@ -70,10 +70,24 @@ def test__compare_standard_val_ge_true_with_units():
     )
 
 
+def test__compare_standard_val_ge_true_with_units_tolerance():
+    # case greater equal -> lesser within tolerance
+    assert compare_standard_val(
+        val=1.01 * _M2, std_val=1.0101 * _M2, operator=operator.ge
+    )
+
+
 def test__compare_standard_val_gt_true_with_units():
     # case greater equal -> greater
     assert compare_standard_val(
         val=1.1 * _M2, std_val=1.0101 * _M2, operator=operator.ge
+    )
+
+
+def test__compare_standard_val_gt_true_with_units_tolerance():
+    # case greater equal -> lesser within tolerance
+    assert compare_standard_val(
+        val=1.01 * _M2, std_val=1.0101 * _M2, operator=operator.ge
     )
 
 

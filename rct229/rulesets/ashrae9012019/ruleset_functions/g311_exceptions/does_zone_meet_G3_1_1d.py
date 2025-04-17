@@ -14,7 +14,6 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_list_hvac_systems_assoc
 from rct229.schema.config import ureg
 from rct229.utils.jsonpath_utils import find_all, find_one
 from rct229.utils.pint_utils import ZERO
-from rct229.utils.std_comparisons import std_equal
 from rct229.utils.utility_functions import (
     find_exactly_one_hvac_system,
     find_exactly_one_terminal_unit,
@@ -22,7 +21,6 @@ from rct229.utils.utility_functions import (
 )
 
 BUILDING_TOTAL_LAB_EXHAUST_CFM_THRESHOLD = 15_000 * ureg("ft^3 / min")
-BUILDING_TOTAL_LAB_EXHAUST_CFM_TOLERANCE = 1 * ureg("cfm")
 
 
 def does_zone_meet_g3_1_1d(rmd: dict, zone_id: str) -> bool:
@@ -96,16 +94,7 @@ def does_zone_meet_g3_1_1d(rmd: dict, zone_id: str) -> bool:
         get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmd)
     )
 
-    if (
-        building_total_lab_exhaust < BUILDING_TOTAL_LAB_EXHAUST_CFM_THRESHOLD
-        or std_equal(
-            val=building_total_lab_exhaust,
-            std_val=BUILDING_TOTAL_LAB_EXHAUST_CFM_THRESHOLD,
-            percent_tolerance=BUILDING_TOTAL_LAB_EXHAUST_CFM_TOLERANCE
-            / BUILDING_TOTAL_LAB_EXHAUST_CFM_THRESHOLD
-            * 100,
-        )
-    ):
+    if building_total_lab_exhaust <= BUILDING_TOTAL_LAB_EXHAUST_CFM_THRESHOLD:
         for lab_zone_id in laboratory_zones_list:
             lab_zone = find_exactly_one_zone(rmd, lab_zone_id)
             hvac_sys_list_serving_zone = get_list_hvac_systems_associated_with_zone(

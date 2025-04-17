@@ -1,6 +1,5 @@
 from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_
-from rct229.utils.std_comparisons import std_equal
 
 DEGREES = ureg("degrees")
 MIN_FLOOR_TILT = 120 * DEGREES
@@ -8,8 +7,6 @@ MAX_FLOOR_TILT = 180 * DEGREES
 MIN_ROOF_TILT = 0 * DEGREES
 MAX_ROOF_TILT = 60 * DEGREES
 
-MIN_FLOOR_TILT_TOLERANCE = 1 * DEGREES
-MAX_FLOOR_TILT_TOLERANCE = 1 * DEGREES
 
 # Intended for export and internal use
 class OpaqueSurfaceType:
@@ -49,30 +46,11 @@ def get_opaque_surface_type(surface: dict) -> str:
     surface_tilt = getattr_(surface, "surface", "tilt")
 
     # Check for roof
-    if (
-        # std_equal is not used here as MIN_ROOF_TILT is 0 degrees
-        surface_tilt
-        >= MIN_ROOF_TILT
-    ) and surface_tilt < MAX_ROOF_TILT:
+    if MIN_ROOF_TILT <= surface_tilt < MAX_ROOF_TILT:
         surface_type = OpaqueSurfaceType.ROOF
 
     # Check for a floor type
-    elif (
-        MIN_FLOOR_TILT < surface_tilt
-        # compare the magnitude to avoid runtime error in std_comparisons.py
-        or std_equal(
-            val=surface_tilt.magnitude,
-            std_val=MIN_FLOOR_TILT.magnitude,
-            percent_tolerance=MIN_FLOOR_TILT_TOLERANCE / MIN_FLOOR_TILT * 100,
-        )
-    ) and (
-        surface_tilt < MAX_FLOOR_TILT
-        or std_equal(
-            val=surface_tilt.magnitude,
-            std_val=MAX_FLOOR_TILT.magnitude,
-            percent_tolerance=MAX_FLOOR_TILT_TOLERANCE / MAX_FLOOR_TILT * 100,
-        )
-    ):
+    elif MIN_FLOOR_TILT <= surface_tilt <= MAX_FLOOR_TILT:
         if (
             getattr_(surface, "surface", "construction").get(
                 "has_radiant_heating"

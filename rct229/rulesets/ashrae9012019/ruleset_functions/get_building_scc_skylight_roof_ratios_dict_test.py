@@ -735,6 +735,6 @@ def test__get_building_scc_skylight_roof_ratios_dict__branch_coverage2():
     ) == {
         SCC.EXTERIOR_RESIDENTIAL: 0.0,
         SCC.EXTERIOR_NON_RESIDENTIAL: 0.0,
-        SCC.SEMI_EXTERIOR: 0.4,
+        SCC.SEMI_EXTERIOR: 0.0,
         SCC.EXTERIOR_MIXED: 0.0,
     }
