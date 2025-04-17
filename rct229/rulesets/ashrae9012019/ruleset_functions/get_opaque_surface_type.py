@@ -50,7 +50,18 @@ def get_opaque_surface_type(surface: dict) -> str:
         surface_type = OpaqueSurfaceType.ROOF
 
     # Check for a floor type
+<<<<<<< HEAD
     elif MIN_FLOOR_TILT <= surface_tilt <= MAX_FLOOR_TILT:
+=======
+    elif (
+        MIN_FLOOR_TILT < surface_tilt
+        # compare the magnitude to avoid runtime error in std_comparisons.py
+        or std_equal(val=surface_tilt.magnitude, std_val=MIN_FLOOR_TILT.magnitude)
+    ) and (
+        surface_tilt < MAX_FLOOR_TILT
+        or std_equal(val=surface_tilt.magnitude, std_val=MAX_FLOOR_TILT.magnitude)
+    ):
+>>>>>>> 54124958ffc54c35417f58f572d78d4094a901b7
         if (
             getattr_(surface, "surface", "construction").get(
                 "has_radiant_heating"

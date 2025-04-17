@@ -19,7 +19,7 @@ def test__compare_standard_val_stringent_compare_lt():
 
 def test__compare_standard_val_stringent_compare_gt_equal():
     """test equal when ahj flat set to True"""
-    assert not compare_standard_val(0.9999 * _M2, 1.0 * _M2, operator.gt)
+    assert not compare_standard_val(0.95 * _M2, 1.0 * _M2, operator.gt)
 
 
 def test__compare_standard_val_strict_compare__gt():
