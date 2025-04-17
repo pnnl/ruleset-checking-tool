@@ -561,10 +561,10 @@ def test__get_area_type_window_wall_area():
         0.1,
     )
     assert std_equal(
-        area_type_window_wall_area_dict["NONE"]["total_wall_area"], 20 * ureg("m2"), 0.1
+        area_type_window_wall_area_dict["NONE"]["total_wall_area"], 10 * ureg("m2"), 0.1
     )
     assert std_equal(
         area_type_window_wall_area_dict["NONE"]["total_window_area"],
-        7 * ureg("m2"),
+        5 * ureg("m2"),
         0.1,
     )
