@@ -212,16 +212,10 @@ def get_zone_conditioning_category_dict(
         zone_id = zone["id"]
 
         if (zone_capacity_dict[zone_id]["sensible_cooling"] > CAPACITY_THRESHOLD) or (
-            zone_capacity_dict[zone_id]["heating"] > system_min_heating_output
-            or std_equal(
-                std_val=system_min_heating_output,
-                val=zone_capacity_dict[zone_id]["heating"],
-            )
+            zone_capacity_dict[zone_id]["heating"] >= system_min_heating_output
         ):
             directly_conditioned_zone_ids.append(zone_id)
-        elif zone_capacity_dict[zone_id]["heating"] > CAPACITY_THRESHOLD or std_equal(
-            std_val=CAPACITY_THRESHOLD, val=zone_capacity_dict[zone_id]["heating"]
-        ):
+        elif zone_capacity_dict[zone_id]["heating"] >= CAPACITY_THRESHOLD:
             semiheated_zone_ids.append(zone_id)
 
     # Determine eligibility for indirectly conditioned zones

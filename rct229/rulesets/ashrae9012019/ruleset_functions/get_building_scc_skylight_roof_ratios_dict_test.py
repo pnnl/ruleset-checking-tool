@@ -629,15 +629,16 @@ TEST_RMD_BRANCH_COVERAGE2 = {
                     "heating_ventilating_air_conditioning_systems": [
                         {
                             "id": "hvac_1_1",
-                            "heating_system": {
-                                "id": "hsys_1_1",
-                                "design_capacity": POWER_THRESHOLD_100 + POWER_DELTA,
+                            "cooling_system": {
+                                "id": "csys_1_1_1",
+                                "design_sensible_cool_capacity": 2 * POWER_THRESHOLD_100
+                                + POWER_DELTA,
                             },
                         },
                     ],
                     "zones": [
-                        # hvac_1_1 => heating only
-                        #   => zone_conditioning_category is "SEMI_HEATED"
+                        # hvac_1_1 => directly_conditioned_zone
+                        #   => zone_conditioning_category is "UNREGULATED"
                         # total_res_roof_area = 10
                         # total_res_skylight_area = 4
                         {
@@ -672,12 +673,6 @@ TEST_RMD_BRANCH_COVERAGE2 = {
                                             "u_factor": 2.4,  # W/(m2 * K)
                                         }
                                     ],
-                                }
-                            ],
-                            "terminals": [
-                                {
-                                    "id": "terminal_1",
-                                    "served_by_heating_ventilating_air_conditioning_system": "hvac_1_1",
                                 }
                             ],
                         },
