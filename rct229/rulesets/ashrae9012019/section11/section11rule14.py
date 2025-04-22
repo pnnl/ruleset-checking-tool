@@ -10,7 +10,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_equipment_associate
 from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all, find_one_with_field_value
-from rct229.utils.pint_utils import ZERO
+from rct229.utils.pint_utils import ZERO, CalcQ, calcq_to_q
 from rct229.utils.utility_functions import find_exactly_one_service_water_heating_use
 
 MIN_PUMP_POWER = 0.0 * ureg("Btu/hr")
@@ -119,6 +119,12 @@ class Section11Rule14(RuleDefinitionListIndexedBase):
                                     "PUMP_POWER"
                                 ] += pump.get("design_electric_power", ZERO.POWER)
 
+            # post-processing the piping info b to convert all quantities to CalcQ.
+            for piping_id in piping_info_b:
+                if piping_info_b[piping_id]["PUMP_POWER"]:
+                    piping_info_b[piping_id]["PUMP_POWER"] = CalcQ(
+                        "capacity", piping_info_b[piping_id]["PUMP_POWER"]
+                    )
             return {
                 "swh_comps_dict_b": swh_comps_dict_b,
                 "piping_info_b": piping_info_b,
@@ -132,30 +138,33 @@ class Section11Rule14(RuleDefinitionListIndexedBase):
                     ),
                 )
 
-            def manual_check_required(self, context, calc_vals=None, data=None):
-                piping_info_b = data["piping_info_b"]
-
-                return all(
-                    not piping["IS_RECIRC"] or piping["PUMP_POWER"] > MIN_PUMP_POWER
-                    for piping in piping_info_b.values()
-                ) and not all(
-                    [
-                        piping["IS_RECIRC"] and piping["PUMP_POWER"] > MIN_PUMP_POWER
-                        for piping in piping_info_b.values()
-                    ]
-                )
-
             def get_calc_vals(self, context, data=None):
                 piping_info_b = data["piping_info_b"]
 
                 return {"piping_info_b": piping_info_b}
+
+            def manual_check_required(self, context, calc_vals=None, data=None):
+                piping_info_b = data["piping_info_b"]
+
+                return all(
+                    not piping["IS_RECIRC"]
+                    or calcq_to_q(piping["PUMP_POWER"]) > MIN_PUMP_POWER
+                    for piping in piping_info_b.values()
+                ) and not all(
+                    [
+                        piping["IS_RECIRC"]
+                        and calcq_to_q(piping["PUMP_POWER"]) > MIN_PUMP_POWER
+                        for piping in piping_info_b.values()
+                    ]
+                )
 
             def rule_check(self, context, calc_vals=None, data=None):
                 piping_info_b = calc_vals["piping_info_b"]
 
                 return all(
                     [
-                        piping["IS_RECIRC"] and piping["PUMP_POWER"] > MIN_PUMP_POWER
+                        piping["IS_RECIRC"]
+                        and calcq_to_q(piping["PUMP_POWER"]) > MIN_PUMP_POWER
                         for piping in piping_info_b.values()
                     ]
                 )
