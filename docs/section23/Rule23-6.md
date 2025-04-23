@@ -41,9 +41,8 @@
 
 - get a dictionary of hvac systems, their zones and terminal units using the function get_dict_of_zones_and_terminal_units_served_by_hvac_sys : `dict_of_zones_and_terminal_units_served_by_hvac_sys = get_dict_of_zones_and_terminal_units_served_by_hvac_sys(B_RMI)`
 - loop through the hvac systems in the dictionary: `for hvac_b_id in dict_of_zones_and_terminal_units_served_by_hvac_sys:`
-  - Check if HVAC system is type 6, 8, 8a, 6b, 8b: `if hvac_b_id in eligible_systems:`
-    - we do the rule check for each terminal: `for terminal_b_id in dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_b_id]["Terminal_Unit_List"]:`
-      - get the terminal unit associated with the id: `terminal_b = match_data_element(B_RMI,Terminal,terminal_b_id)`
+  - we do the rule check for each terminal: `for terminal_b_id in dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_b_id]["Terminal_Unit_List"]:`
+    - get the terminal unit associated with the id: `terminal_b = match_data_element(B_RMI,Terminal,terminal_b_id)`
 
 **Rule Assertion:**
 
