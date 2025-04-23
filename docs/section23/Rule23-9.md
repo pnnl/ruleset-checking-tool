@@ -55,7 +55,7 @@
  
   **Rule Assertion:**  
   
-    - Case 1: If the proposed minimum volume flowrate (min_volume_p) is less than or equal tothe maximum of the other two values max(min_ventilation_flowrate and 0.5 * maximum_supply_flowrate), AND the minimum volume flowrate equals the maximum of (min_ventilation_flowrate and 0.5 * maximum_supply_flowrate) then we can provide a definite pass: `if(min_volume_p <= max(min_ventilation_flowrate and 0.5 * maximum_supply_flowrate) and min_volume_flowrate == max(min_ventilation_flowrate, 0.5 * maximum_supply_flowrate, min_volume_p): PASS`
+    - Case 1: If the proposed minimum volume flowrate (min_volume_p) is less than or equal to the maximum of the other two values max(min_ventilation_flowrate and 0.5 * maximum_supply_flowrate), AND the minimum volume flowrate equals the maximum of (min_ventilation_flowrate and 0.5 * maximum_supply_flowrate) then we can provide a definite pass: `if(min_volume_p <= max(min_ventilation_flowrate and 0.5 * maximum_supply_flowrate) and min_volume_flowrate == max(min_ventilation_flowrate, 0.5 * maximum_supply_flowrate): PASS`
 
     - Case 3: else if the min_volume_flowrate is less than the maximum of (min_ventilation_flowrate, 0.5 * maximum_supply_flowrate, min_volume_p), then FAIL: `elif min_volume_flowrate < max((min_ventilation_flowrate, 0.5 * maximum_supply_flowrate, min_volume_p)): FAIL`
 
