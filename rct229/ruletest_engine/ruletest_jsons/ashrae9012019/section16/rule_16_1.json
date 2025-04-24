@@ -491,7 +491,7 @@
                                     {
                                         "id": "Elevator 1",
                                         "number_of_floors_served": 4,
-                                        "motor_power": 24984.593950111193,
+                                        "motor_power": 24974.546526270668,
                                         "cab_counterweight": 226.80000000000004,
                                         "cab_weight": 680.4000000000001,
                                         "design_load": 1814.4000000000003,

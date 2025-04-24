@@ -103,19 +103,19 @@ class Section22Rule4(RuleDefinitionListIndexedBase):
                 },
                 precision={
                     "outdoor_high_for_loop_supply_reset_temperature": {
-                        "precision": 0.1,
+                        "precision": 1,
                         "unit": "K",
                     },
                     "outdoor_low_for_loop_supply_reset_temperature": {
-                        "precision": 0.1,
+                        "precision": 1,
                         "unit": "K",
                     },
                     "loop_supply_temperature_at_outdoor_high": {
-                        "precision": 0.1,
+                        "precision": 1,
                         "unit": "K",
                     },
                     "loop_supply_temperature_at_outdoor_low": {
-                        "precision": 0.1,
+                        "precision": 1,
                         "unit": "K",
                     },
                 },

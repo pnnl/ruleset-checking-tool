@@ -73,7 +73,7 @@ class Section22Rule14(RuleDefinitionListIndexedBase):
                 },
                 precision={
                     "heat_rejection_range": {
-                        "precision": 0.1,
+                        "precision": 1,
                         "unit": "K",
                     },
                 },

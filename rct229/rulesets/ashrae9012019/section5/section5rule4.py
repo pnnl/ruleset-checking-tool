@@ -143,11 +143,13 @@ class Section5Rule4(RuleDefinitionListIndexedBase):
                 )
 
             def rule_check(self, context=None, calc_vals=None, data=None):
+                roof_u_factor = calc_vals["roof_u_factor"]
+                target_u_factor = calc_vals["target_u_factor"]
                 return self.precision_comparison["roof_u_factor_b"](
-                    calc_vals["roof_u_factor"], calc_vals["target_u_factor"]
+                    roof_u_factor, target_u_factor
                 )
 
             def is_tolerance_fail(self, context, calc_vals=None, data=None):
                 roof_u_factor = calc_vals["roof_u_factor"]
                 target_u_factor = calc_vals["target_u_factor"]
-                return std_equal(roof_u_factor, target_u_factor)
+                return std_equal(target_u_factor, roof_u_factor)

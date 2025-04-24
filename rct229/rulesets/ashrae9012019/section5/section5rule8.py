@@ -146,4 +146,4 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
             def is_tolerance_fail(self, context, calc_vals=None, data=None):
                 above_grade_wall_u_factor = calc_vals["above_grade_wall_u_factor"]
                 target_u_factor = calc_vals["target_u_factor"]
-                return std_equal(above_grade_wall_u_factor, target_u_factor)
+                return std_equal(target_u_factor, above_grade_wall_u_factor)
