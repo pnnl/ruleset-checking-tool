@@ -10600,91 +10600,6 @@
             }
         }
     },
-    "rule-5-22-d": {
-        "Section": 5,
-        "Rule": 22,
-        "Test": "d",
-        "test_description": "Project has one building segment and includes a space with an unregulated above-grade wall surface but no windows or other subsurfaces. ",
-        "expected_rule_outcome": "not_applicable",
-        "standard": {
-            "rule_id": "5-22",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance(d)",
-            "rule_description": "Baseline vertical fenestration shall be assumed to be flush with the exterior wall, and no shading projections shall be modeled.",
-            "applicable_rmr": "Baseline Model",
-            "rule_assertion": "=",
-            "comparison_value": "Expected Value",
-            "primary_rule": "Full",
-            "schema_version": "0.1.3"
-        },
-        "rmd_transformations": {
-            "baseline": {
-                "id": "RPD 1",
-                "ruleset_model_descriptions": [
-                    {
-                        "weather": {
-                            "climate_zone": "CZ4A",
-                            "data_source_type": "OTHER"
-                        },
-                        "id": "RMD 1",
-                        "buildings": [
-                            {
-                                "id": "Building 1",
-                                "building_segments": [
-                                    {
-                                        "id": "Building Segment 1",
-                                        "zones": [
-                                            {
-                                                "id": "Zone 1",
-                                                "volume": 21.237634943999996,
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1",
-                                                        "floor_area": 23.225759999999998
-                                                    }
-                                                ],
-                                                "terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
-                                                    }
-                                                ],
-                                                "surfaces": [
-                                                    {
-                                                        "id": "Surface 1",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 90,
-                                                        "area": 92.90303999999999,
-                                                        "construction": {
-                                                            "id": "Construction 1",
-                                                            "u_factor": 3.2366105565544463
-                                                        }
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        "heating_ventilating_air_conditioning_systems": [
-                                            {
-                                                "id": "HVAC 1",
-                                                "cooling_system": {
-                                                    "id": "Cooling System 1",
-                                                    "design_sensible_cool_capacity": 0.0
-                                                },
-                                                "heating_system": {
-                                                    "id": "Heating System 1",
-                                                    "design_capacity": 0.0
-                                                }
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ],
-                        "type": "BASELINE_0"
-                    }
-                ]
-            }
-        }
-    },
     "rule-50p59-d": {
         "Test": "d",
         "test_description": "Project has one building segment and includes a space with an unregulated above-grade wall surface but no windows or other subsurfaces. ",
@@ -13476,8 +13391,8 @@
     "rule-18s99-c": {
         "Test": "c",
         "test_description": "Project has one building segment and includes a space with a roof surface. The roof surface thermal emittance in the proposed model is equal to 0.9, but the roof surface thermal emittance in the user model is equal to 0.7.",
-        "expected_rule_outcome": "undetermined",
-        "expected_raised_message_includes": "Fail if the thermal emittance in the user model is based on aged test data. roof thermal emittance is equal to the prescribed default value of 0.9 but differs from the thermal emittance in the user model",
+        "expected_rule_outcome": "pass",
+        "expected_raised_message_includes": "Roof thermal emittance is equal to the prescribed default value of 0.9 but differs from the thermal emittance in the user model 0.7",
         "standard": {
             "rule_id": "18s99",
             "ruleset_reference": "Table G3.1(5) Proposed Building Performance  (a)(3)",
