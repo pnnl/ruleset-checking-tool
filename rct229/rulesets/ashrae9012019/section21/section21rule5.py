@@ -20,8 +20,10 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_categ
 from rct229.schema.config import ureg
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import getattr_
+from rct229.utils.compare_standard_val import std_le
 from rct229.utils.jsonpath_utils import find_all, find_exactly_one_with_field_value
 from rct229.utils.pint_utils import ZERO, CalcQ
+from rct229.utils.std_comparisons import std_equal
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_1,
@@ -67,7 +69,12 @@ class PRM9012019Rule34r52(RuleDefinitionListIndexedBase):
                     "heating_loop_conditioned_zone_area": {
                         "precision": 1,
                         "unit": "ft2",
-                    }
+                    },
+                    # add this as a workaround to avoid error
+                    "boiler_capacity": {
+                        "precision": 0.0001,
+                        "unit": "Btu/hr",
+                    },
                 },
             )
 
@@ -181,5 +188,29 @@ class PRM9012019Rule34r52(RuleDefinitionListIndexedBase):
                 > HEATING_LOOP_CONDITIONED_AREA_THRESHOLD
                 and num_boilers == 2
                 and len(boiler_capacity_list) == 2
-                and boiler_capacity_list[0] == boiler_capacity_list[1]
+                and self.precision_comparison["boiler_capacity"](
+                    boiler_capacity_list[0], boiler_capacity_list[1]
+                )
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            heating_loop_conditioned_zone_area = calc_vals[
+                "heating_loop_conditioned_zone_area"
+            ]
+            num_boilers = calc_vals["num_boilers"]
+            boiler_capacity_list = calc_vals["boiler_capacity_list"]
+            return (
+                (
+                    std_le(
+                        val=heating_loop_conditioned_zone_area,
+                        std_val=HEATING_LOOP_CONDITIONED_AREA_THRESHOLD,
+                    )
+                )
+                and num_boilers == 1
+            ) or (
+                heating_loop_conditioned_zone_area
+                > HEATING_LOOP_CONDITIONED_AREA_THRESHOLD
+                and num_boilers == 2
+                and len(boiler_capacity_list) == 2
+                and std_equal(boiler_capacity_list[0], boiler_capacity_list[1])
             )

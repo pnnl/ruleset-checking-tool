@@ -149,4 +149,4 @@ class PRM9012019Rule29j06(RuleDefinitionListIndexedBase):
             def is_tolerance_fail(self, context, calc_vals=None, data=None):
                 floor_u_factor = calc_vals["floor_u_factor"]
                 target_u_factor = calc_vals["target_u_factor"]
-                return std_equal(floor_u_factor, target_u_factor)
+                return std_equal(target_u_factor, floor_u_factor)

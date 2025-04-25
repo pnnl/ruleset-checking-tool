@@ -307,8 +307,8 @@
         "Rule": 30,
         "Test": "c",
         "test_description": "Project has one building segment and includes a space with a roof surface. The roof surface thermal emittance in the proposed model is equal to 0.9, but the roof surface thermal emittance in the user model is equal to 0.7.",
-        "expected_rule_outcome": "pass",
-        "expected_raised_message_includes": "Roof thermal emittance is equal to the prescribed default value of 0.9 but differs from the thermal emittance in the user model 0.7",
+        "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "Fail if the thermal emittance in the user model is based on aged test data. Roof thermal emittance is equal to the prescribed default value of 0.9 but differs from the thermal emittance in the user model",
         "standard": {
             "rule_id": "5-30",
             "ruleset_reference": "Table G3.1(5) Proposed Building Performance  (a)(3)",

@@ -133,6 +133,16 @@ class PRM9012019Rule10p28(RuleDefinitionListIndexedBase):
                         "efficiency_metric_values",
                     ],
                 },
+                precision={
+                    "modeled_high_temp_eff_b": {
+                        "precision": 0.1,
+                        "unit": "",
+                    },
+                    "modeled_low_temp_eff_b": {
+                        "precision": 0.1,
+                        "unit": "",
+                    },
+                },
             )
 
         def get_calc_vals(self, context, data=None):
@@ -387,9 +397,13 @@ class PRM9012019Rule10p28(RuleDefinitionListIndexedBase):
             if (
                 hvac_system_type_b == HVAC_SYS.SYS_4
                 and modeled_high_temp_eff_b is not None
-                and modeled_high_temp_eff_b == expected_high_temp_eff_b
+                and self.precision_comparison["modeled_high_temp_eff_b"](
+                    modeled_high_temp_eff_b.magnitude, expected_high_temp_eff_b
+                )
                 and modeled_low_temp_eff_b is not None
-                and modeled_low_temp_eff_b == expected_low_temp_eff_b
+                and self.precision_comparison["modeled_low_temp_eff_b"](
+                    modeled_low_temp_eff_b.magnitude, expected_low_temp_eff_b
+                )
                 and total_capacity_b is None
                 or is_zone_agg_factor_undefined_and_needed
             ):
@@ -398,7 +412,10 @@ class PRM9012019Rule10p28(RuleDefinitionListIndexedBase):
             # Case 6
             if (
                 hvac_system_type_b == HVAC_SYS.SYS_4
-                and modeled_high_temp_eff_b == expected_high_temp_eff_b
+                and modeled_high_temp_eff_b is not None
+                and self.precision_comparison["modeled_high_temp_eff_b"](
+                    modeled_high_temp_eff_b.magnitude, expected_high_temp_eff_b
+                )
                 and modeled_low_temp_eff_b is None
                 and total_capacity_b is not None
                 and not is_zone_agg_factor_undefined_and_needed
@@ -408,7 +425,10 @@ class PRM9012019Rule10p28(RuleDefinitionListIndexedBase):
             # Case 9 and 12 satisfied here
             if (
                 hvac_system_type_b == HVAC_SYS.SYS_4
-                and modeled_high_temp_eff_b == expected_high_temp_eff_b
+                and modeled_high_temp_eff_b is not None
+                and self.precision_comparison["modeled_high_temp_eff_b"](
+                    modeled_high_temp_eff_b.magnitude, expected_high_temp_eff_b
+                )
                 and modeled_low_temp_eff_b is None
                 and total_capacity_b is None
                 or is_zone_agg_factor_undefined_and_needed
@@ -444,7 +464,12 @@ class PRM9012019Rule10p28(RuleDefinitionListIndexedBase):
             # Case 6
             elif (
                 hvac_system_type_b == HVAC_SYS.SYS_4
-                and modeled_high_temp_eff_b == expected_high_temp_eff_b
+                and (
+                    modeled_high_temp_eff_b is None
+                    or self.precision_comparison["modeled_high_temp_eff_b"](
+                        modeled_high_temp_eff_b.magnitude, expected_high_temp_eff_b
+                    )
+                )
                 and modeled_low_temp_eff_b is None
                 and total_capacity_b is not None
                 and not is_zone_agg_factor_undefined_and_needed
@@ -456,7 +481,9 @@ class PRM9012019Rule10p28(RuleDefinitionListIndexedBase):
             elif (
                 hvac_system_type_b == HVAC_SYS.SYS_4
                 and modeled_high_temp_eff_b is not None
-                and modeled_high_temp_eff_b == expected_high_temp_eff_b
+                and self.precision_comparison["modeled_high_temp_eff_b"](
+                    modeled_high_temp_eff_b.magnitude, expected_high_temp_eff_b
+                )
                 and total_capacity_b is None
             ):
                 return MOST_CONSERVATIVE_HP_HIGH_TEMP_MSG
@@ -492,8 +519,13 @@ class PRM9012019Rule10p28(RuleDefinitionListIndexedBase):
 
                 # Case 5
                 return (
-                    modeled_high_temp_eff_b == expected_high_temp_eff_b
-                    and modeled_low_temp_eff_b == expected_low_temp_eff_b
+                    modeled_high_temp_eff_b is not None
+                    and self.precision_comparison["modeled_high_temp_eff_b"](
+                        modeled_high_temp_eff_b.magnitude, expected_high_temp_eff_b
+                    )
+                    and self.precision_comparison["modeled_low_temp_eff_b"](
+                        modeled_low_temp_eff_b.magnitude, expected_low_temp_eff_b
+                    )
                     and total_capacity_b is not None
                     and not is_zone_agg_factor_undefined_and_needed
                 )

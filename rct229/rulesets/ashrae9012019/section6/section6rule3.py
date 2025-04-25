@@ -98,12 +98,21 @@ class PRM9012019Rule73a47(RuleDefinitionListIndexedBase):
                 total_space_lpd_u = calc_vals["total_space_lpd_u"]
                 total_space_lpd_p = calc_vals["total_space_lpd_p"]
                 return (
-                    not std_equal(total_space_lpd_u, total_space_lpd_p)
+                    not self.precision_comparison["total_space_lpd_p"](
+                        total_space_lpd_u, total_space_lpd_p
+                    )
                     and space_lighting_status_type_p
                     is not LightingStatusType.AS_DESIGNED_OR_AS_EXISTING
                 )
 
             def rule_check(self, context, calc_vals=None, data=None):
+                total_space_lpd_u = calc_vals["total_space_lpd_u"]
+                total_space_lpd_p = calc_vals["total_space_lpd_p"]
                 return self.precision_comparison["total_space_lpd_p"](
-                    calc_vals["total_space_lpd_p"], calc_vals["total_space_lpd_u"]
+                    total_space_lpd_u, total_space_lpd_p
                 )
+
+            def is_tolerance_fail(self, context, calc_vals=None, data=None):
+                total_space_lpd_u = calc_vals["total_space_lpd_u"]
+                total_space_lpd_p = calc_vals["total_space_lpd_p"]
+                return std_equal(total_space_lpd_u, total_space_lpd_p)

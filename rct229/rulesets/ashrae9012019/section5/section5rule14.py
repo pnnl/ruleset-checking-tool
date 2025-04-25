@@ -141,7 +141,7 @@ class PRM9012019Rule67j71(RuleDefinitionListIndexedBase):
                 return {
                     "area_type": area_type,
                     "is_all_new": is_area_type_all_new_dict[area_type],
-                    "area_type_wwr": area_type_wwr,
+                    "area_type_wwr": area_type_wwr.magnitude,
                     "area_type_target_wwr": area_type_target_wwr["wwr"],
                 }
 
@@ -155,7 +155,7 @@ class PRM9012019Rule67j71(RuleDefinitionListIndexedBase):
             def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
                 manual_check_msg = ""
                 if not calc_vals["is_all_new"]:
-                    if std_equal(
+                    if self.precision_comparison["area_type_wwr_b"](
                         calc_vals["area_type_wwr"], calc_vals["area_type_target_wwr"]
                     ):
                         manual_check_msg = CASE3_WARN_MESSAGE
@@ -167,11 +167,11 @@ class PRM9012019Rule67j71(RuleDefinitionListIndexedBase):
 
             def rule_check(self, context, calc_vals=None, data=None):
                 return self.precision_comparison["area_type_wwr_b"](
-                    calc_vals["area_type_wwr"].magnitude,
+                    calc_vals["area_type_wwr"],
                     calc_vals["area_type_target_wwr"],
                 )
 
             def is_tolerance_fail(self, context, calc_vals=None, data=None):
                 area_type_wwr = calc_vals["area_type_wwr"]
                 area_type_target_wwr = calc_vals["area_type_target_wwr"]
-                return std_equal(area_type_wwr, area_type_target_wwr)
+                return std_equal(area_type_target_wwr, area_type_wwr)

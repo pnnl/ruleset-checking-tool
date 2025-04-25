@@ -1,6 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.utils.assertions import assert_
+from rct229.utils.compare_standard_val import std_le
 from rct229.utils.jsonpath_utils import find_one
 
 
@@ -69,7 +70,18 @@ class PRM9012019Rule60m79(RuleDefinitionBase):
         pci_target_set = calc_vals["pci_target_set"]
         pci_set = calc_vals["pci_set"]
 
-        return len(pci_target_set) == len(pci_set) == 1 and pci_set <= pci_target_set
+        return len(pci_target_set) == len(pci_set) == 1 and (
+            pci_set[0] < pci_target_set[0]
+            or self.precision_comparison(pci_set[0], pci_target_set[0])
+        )
+
+    def is_tolerance_fail(self, context, calc_vals=None, data=None):
+        pci_target_set = calc_vals["pci_target_set"]
+        pci_set = calc_vals["pci_set"]
+
+        return len(pci_target_set) == len(pci_set) == 1 and std_le(
+            pci_set[0], pci_target_set[0]
+        )
 
     def get_fail_msg(self, context, calc_vals=None, data=None):
         pci_target_set = calc_vals["pci_target_set"]

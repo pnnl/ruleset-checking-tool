@@ -9,6 +9,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_categ
     get_zone_conditioning_category_dict,
 )
 from rct229.utils.pint_utils import CalcQ
+from rct229.utils.std_comparisons import std_equal
 
 
 class PRM9012019Rule23m90(RuleDefinitionListIndexedBase):
@@ -98,6 +99,12 @@ class PRM9012019Rule23m90(RuleDefinitionListIndexedBase):
 
             def rule_check(self, context, calc_vals=None, data=None):
                 return self.precision_comparison["total_infiltration_rate_b"](
+                    calc_vals["baseline_infiltration"],
+                    calc_vals["proposed_infiltration"],
+                )
+
+            def is_tolerance_fail(self, context, calc_vals=None, data=None):
+                return std_equal(
                     calc_vals["baseline_infiltration"],
                     calc_vals["proposed_infiltration"],
                 )

@@ -253,7 +253,6 @@ class PRM9012019Rule69v04(RuleDefinitionListIndexedBase):
                     target_u_factor_res_b = data["target_u_factor_res_b"]
                     target_u_factor_nonres_b = data["target_u_factor_nonres_b"]
                     target_u_factor_semiheated_b = data["target_u_factor_semiheated_b"]
-                    target_u_factor = ZERO.U_FACTOR
                     if (
                         scc_type == SCC.EXTERIOR_MIXED
                         or scc_type == SCC.EXTERIOR_RESIDENTIAL

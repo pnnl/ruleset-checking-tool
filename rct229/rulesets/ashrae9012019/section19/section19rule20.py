@@ -58,19 +58,19 @@ class PRM9012019Rule60d49(RuleDefinitionListIndexedBase):
                 },
                 precision={
                     "hvac_sys_total_supply_fan_power_b": {
-                        "precision": 10,
+                        "precision": 1,
                         "unit": "W",
                     },
                     "hvac_sys_total_return_fan_power_b": {
-                        "precision": 10,
+                        "precision": 1,
                         "unit": "W",
                     },
                     "hvac_sys_total_exhaust_fan_power_b": {
-                        "precision": 10,
+                        "precision": 1,
                         "unit": "W",
                     },
                     "hvac_sys_total_relief_fan_power_b": {
-                        "precision": 10,
+                        "precision": 1,
                         "unit": "W",
                     },
                 },

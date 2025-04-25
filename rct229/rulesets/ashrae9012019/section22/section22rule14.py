@@ -73,7 +73,7 @@ class PRM9012019Rule95f90(RuleDefinitionListIndexedBase):
                 },
                 precision={
                     "heat_rejection_range": {
-                        "precision": 0.1,
+                        "precision": 1,
                         "unit": "K",
                     },
                 },

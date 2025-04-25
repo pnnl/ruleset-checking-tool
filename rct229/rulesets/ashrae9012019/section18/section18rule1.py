@@ -142,20 +142,27 @@ class PRM9012019Rule77j55(RuleDefinitionListIndexedBase):
                 hvac_systems_serving_zone_b = data["hvac_systems_serving_zone_b"][
                     zone_id_b
                 ]
-                systems_of_expected_type_list_b = data["baseline_hvac_system_dict_b"][
-                    expected_system_type_b
+                hvac_system_types_b = {
+                    system_type: system_list
+                    for system_type, system_list in data[
+                        "baseline_hvac_system_dict_b"
+                    ].items()
+                    if system_list
+                }
+                hvac_system_types_serving_zone_b = [
+                    system_type_str
+                    for system_type_str, system_list in data[
+                        "baseline_hvac_system_dict_b"
+                    ].items()
+                    if any(
+                        sys_b in system_list for sys_b in hvac_systems_serving_zone_b
+                    )
                 ]
 
-                # any HVAC system serving this zone is in the `systems_of_expected_type_list_b`
-                is_system_part_of_expected_sys_type_b = any(
-                    [
-                        sys_b in systems_of_expected_type_list_b
-                        for sys_b in hvac_systems_serving_zone_b
-                    ]
-                )
-
                 return {
-                    "is_system_part_of_expected_sys_type_b": is_system_part_of_expected_sys_type_b
+                    "hvac_system_types_b": hvac_system_types_b,
+                    "hvac_system_types_serving_zone_b": hvac_system_types_serving_zone_b,
+                    "expected_system_type_b": expected_system_type_b,
                 }
 
             def manual_check_required(self, context, calc_vals=None, data=None):
@@ -213,11 +220,12 @@ class PRM9012019Rule77j55(RuleDefinitionListIndexedBase):
                 return advisory_note
 
             def rule_check(self, context, calc_vals=None, data=None):
-                is_system_part_of_expected_sys_type_b = calc_vals[
-                    "is_system_part_of_expected_sys_type_b"
+                hvac_system_types_serving_zone_b = calc_vals[
+                    "hvac_system_types_serving_zone_b"
                 ]
+                expected_system_type_b = calc_vals["expected_system_type_b"]
 
-                return is_system_part_of_expected_sys_type_b
+                return expected_system_type_b in hvac_system_types_serving_zone_b
 
             def get_fail_msg(self, context, calc_vals=None, data=None):
                 zone_b = context.BASELINE_0

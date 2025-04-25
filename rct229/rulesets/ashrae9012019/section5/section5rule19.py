@@ -302,7 +302,7 @@ class PRM9012019Rule57c26(RuleDefinitionListIndexedBase):
 
                 def rule_check(self, context, calc_vals=None, data=None):
                     return self.precision_comparison["subsurface_u_factor_b"](
-                        calc_vals["target_u_factor"], calc_vals["subsurface_u_factor"]
+                        calc_vals["subsurface_u_factor"], calc_vals["target_u_factor"]
                     )
 
                 def is_tolerance_fail(self, context, calc_vals=None, data=None):

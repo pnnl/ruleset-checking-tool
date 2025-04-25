@@ -128,3 +128,9 @@ class PRM9012019Rule78j13(RuleDefinitionListIndexedBase):
                     calc_vals["skylight_roof_ratio_b"].magnitude,
                     calc_vals["skylight_total_roof_ratio_p"].magnitude,
                 )
+
+            def is_tolerance_fail(self, context, calc_vals=None, data=None):
+                return std_equal(
+                    calc_vals["skylight_roof_ratio_b"].magnitude,
+                    calc_vals["skylight_total_roof_ratio_p"].magnitude,
+                )

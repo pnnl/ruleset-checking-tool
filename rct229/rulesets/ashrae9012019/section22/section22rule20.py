@@ -88,7 +88,7 @@ class PRM9012019Rule71o81(RuleDefinitionListIndexedBase):
                 },
                 precision={
                     "tower_leaving_temperature_b": {
-                        "precision": 0.1,
+                        "precision": 1,
                         "unit": "K",
                     },
                 },

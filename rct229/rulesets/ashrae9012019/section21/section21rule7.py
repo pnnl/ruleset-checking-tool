@@ -88,11 +88,11 @@ class PRM9012019Rule92f56(RuleDefinitionListIndexedBase):
                 },
                 precision={
                     "design_supply_temperature": {
-                        "precision": 0.1,
+                        "precision": 1,
                         "unit": "K",
                     },
                     "design_return_temperature": {
-                        "precision": 0.1,
+                        "precision": 1,
                         "unit": "K",
                     },
                 },
@@ -118,19 +118,23 @@ class PRM9012019Rule92f56(RuleDefinitionListIndexedBase):
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
-            design_supply_temperature = calc_vals["design_supply_temperature"]
-            design_return_temperature = calc_vals["design_return_temperature"]
-            required_supply_temperature = calc_vals["required_supply_temperature"]
-            required_return_temperature = calc_vals["required_return_temperature"]
+            design_supply_temperature = calc_vals["design_supply_temperature"].to(
+                ureg.kelvin
+            )
+            design_return_temperature = calc_vals["design_return_temperature"].to(
+                ureg.kelvin
+            )
+            required_supply_temperature = calc_vals["required_supply_temperature"].to(
+                ureg.kelvin
+            )
+            required_return_temperature = calc_vals["required_return_temperature"].to(
+                ureg.kelvin
+            )
 
-            return design_supply_temperature.to(
-                ureg.kelvin
-            ) == required_supply_temperature.to(
-                ureg.kelvin
-            ) and design_return_temperature.to(
-                ureg.kelvin
-            ) == required_return_temperature.to(
-                ureg.kelvin
+            return self.precision_comparison["design_supply_temperature"](
+                design_supply_temperature, required_supply_temperature
+            ) and self.precision_comparison["design_return_temperature"](
+                design_return_temperature, required_return_temperature
             )
 
         def is_tolerance_fail(self, context, calc_vals=None, data=None):

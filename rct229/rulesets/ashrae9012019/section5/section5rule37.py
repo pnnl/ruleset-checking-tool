@@ -163,7 +163,7 @@ class PRM9012019Rule67a77(RuleDefinitionListIndexedBase):
                 building_total_air_leakage_rate,
                 TOTAL_AIR_LEAKAGE_COEFF * target_air_leakage_rate_75pa_p,
             ) or (
-                empty_measured_air_leakage_rate_flow_flag == False
+                not empty_measured_air_leakage_rate_flow_flag
                 and self.precision_comparison["building_total_air_leakage_rate_b"](
                     building_total_air_leakage_rate,
                     TOTAL_AIR_LEAKAGE_COEFF * building_total_measured_air_leakage_rate,
@@ -183,14 +183,16 @@ class PRM9012019Rule67a77(RuleDefinitionListIndexedBase):
             ]
 
             return std_equal(
-                building_total_air_leakage_rate,
                 TOTAL_AIR_LEAKAGE_COEFF * target_air_leakage_rate_75pa_p,
+                building_total_air_leakage_rate,
             ) or (
                 not std_equal(
                     building_total_air_leakage_rate,
                     TOTAL_AIR_LEAKAGE_COEFF * target_air_leakage_rate_75pa_p,
                 )
-                and empty_measured_air_leakage_rate_flow_flag == False
-                and building_total_air_leakage_rate
-                == TOTAL_AIR_LEAKAGE_COEFF * building_total_measured_air_leakage_rate
+                and not empty_measured_air_leakage_rate_flow_flag
+                and std_equal(
+                    TOTAL_AIR_LEAKAGE_COEFF * building_total_measured_air_leakage_rate,
+                    building_total_air_leakage_rate,
+                )
             )

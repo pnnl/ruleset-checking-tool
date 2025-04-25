@@ -8,6 +8,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_heat_rejection_loops_co
 from rct229.schema.config import ureg
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO, CalcQ
+from rct229.utils.std_comparisons import std_equal
 
 FAN_SHAFT_POWER_FACTOR = 0.9
 HEAT_REJ_EFF_LIMIT = 38.2 * ureg("gpm/hp")
@@ -156,3 +157,8 @@ class PRM9012019Rule04g06(RuleDefinitionListIndexedBase):
             return self.precision_comparison["heat_rejection_efficiency_b"](
                 heat_rejection_efficiency_b, HEAT_REJ_EFF_LIMIT
             )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            heat_rejection_efficiency_b = calc_vals["heat_rejection_efficiency_b"]
+
+            return std_equal(heat_rejection_efficiency_b, HEAT_REJ_EFF_LIMIT)

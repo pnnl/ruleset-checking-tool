@@ -23,6 +23,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_zone_list_w_area_d
 )
 from rct229.utils.assertions import assert_
 from rct229.utils.pint_utils import CalcQ
+from rct229.utils.std_comparisons import std_equal
 from rct229.utils.utility_functions import find_exactly_one_zone
 
 APPLICABLE_SYS_TYPES = [
@@ -261,7 +262,7 @@ class PRM9012019Rule34l50(RuleDefinitionListIndexedBase):
             most_conservative_eff_b = calc_vals["most_conservative_eff_b"]
             modeled_efficiency_b = calc_vals["modeled_efficiency_b"]
 
-            if modeled_efficiency_b == most_conservative_eff_b:
+            if self.precision_comparison(modeled_efficiency_b, most_conservative_eff_b):
                 undetermined_msg = "The cooling capacity of the system could not be determined. Check if the modeled baseline DX cooling efficiency was established correctly based upon equipment capacity and type while accounting for the potential aggregation of zones. The modeled efficiency matches the capacity bracket in Appendix G efficiency tables with the highest efficiency (i.e., most conservative efficiency has been modeled)."
             else:
                 undetermined_msg = "The cooling capacity of the system could not be determined. Check if the modeled baseline DX cooling efficiency was established correctly based upon equipment capacity and type while accounting for the potential aggregation of zones."
@@ -271,5 +272,11 @@ class PRM9012019Rule34l50(RuleDefinitionListIndexedBase):
         def rule_check(self, context, calc_vals=None, data=None):
             expected_baseline_eff_b = calc_vals["expected_baseline_eff_b"]
             modeled_efficiency_b = calc_vals["modeled_efficiency_b"]
+            return self.precision_comparison(
+                modeled_efficiency_b, expected_baseline_eff_b
+            )
 
-            return modeled_efficiency_b == expected_baseline_eff_b
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            expected_baseline_eff_b = calc_vals["expected_baseline_eff_b"]
+            modeled_efficiency_b = calc_vals["modeled_efficiency_b"]
+            return std_equal(expected_baseline_eff_b, modeled_efficiency_b)

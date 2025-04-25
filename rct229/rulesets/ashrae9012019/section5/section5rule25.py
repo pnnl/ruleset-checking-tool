@@ -134,4 +134,4 @@ class PRM9012019Rule84u02(RuleDefinitionListIndexedBase):
 
             def is_tolerance_fail(self, context, calc_vals=None, data=None):
                 skylight_roof_ratio_b = calc_vals["skylight_roof_ratio_b"]
-                return std_equal(skylight_roof_ratio_b, SKYLIGHT_THRESHOLD)
+                return std_equal(SKYLIGHT_THRESHOLD, skylight_roof_ratio_b)

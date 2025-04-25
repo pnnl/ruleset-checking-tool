@@ -93,6 +93,14 @@ class PRM9012019Rule47b05(RuleDefinitionListIndexedBase):
                         "precision": 1,
                         "unit": "Btu/hr",
                     },
+                    "boiler_1_rated_capacity": {
+                        "precision": 0.001,
+                        "unit": "Btu/hr",
+                    },
+                    "boiler_2_rated_capacity": {
+                        "precision": 0.001,
+                        "unit": "Btu/hr",
+                    },
                 },
             )
 
@@ -139,16 +147,24 @@ class PRM9012019Rule47b05(RuleDefinitionListIndexedBase):
 
             return (
                 boiler_1_operation_lower_limit == ZERO.POWER
-                and boiler_1_operation_upper_limit == boiler_1_rated_capacity
-                and boiler_2_operation_lower_limit == boiler_1_rated_capacity
+                and self.precision_comparison["boiler_1_rated_capacity"](
+                    boiler_1_rated_capacity, boiler_1_operation_upper_limit
+                )
+                and self.precision_comparison["boiler_1_rated_capacity"](
+                    boiler_1_rated_capacity, boiler_2_operation_lower_limit
+                )
                 and self.precision_comparison["boiler_2_operation_upper_limit"](
                     boiler_2_operation_upper_limit,
                     boiler_1_rated_capacity + boiler_2_rated_capacity,
                 )
             ) or (
                 boiler_2_operation_lower_limit == ZERO.POWER
-                and boiler_2_operation_upper_limit == boiler_2_rated_capacity
-                and boiler_1_operation_lower_limit == boiler_2_rated_capacity
+                and self.precision_comparison["boiler_2_rated_capacity"](
+                    boiler_2_rated_capacity, boiler_2_operation_upper_limit
+                )
+                and self.precision_comparison["boiler_2_rated_capacity"](
+                    boiler_2_rated_capacity, boiler_1_operation_lower_limit
+                )
                 and self.precision_comparison["boiler_1_operation_upper_limit"](
                     boiler_1_operation_upper_limit,
                     boiler_2_rated_capacity + boiler_1_rated_capacity,

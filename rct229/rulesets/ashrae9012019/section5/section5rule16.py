@@ -195,3 +195,29 @@ class PRM9012019Rule80o45(RuleDefinitionListIndexedBase):
                         ).magnitude,
                     )
                 )
+
+            def is_tolerance_fail(self, context, calc_vals=None, data=None):
+                total_fenestration_area_surface_b = calc_vals[
+                    "total_fenestration_area_surface_b"
+                ]
+                total_fenestration_area_surface_p = calc_vals[
+                    "total_fenestration_area_surface_p"
+                ]
+                total_fenestration_area_b = calc_vals["total_fenestration_area_b"]
+                total_fenestration_area_p = calc_vals["total_fenestration_area_p"]
+
+                return (
+                    total_fenestration_area_b == ZERO.AREA
+                    and total_fenestration_area_p == ZERO.AREA
+                ) or (
+                    std_equal(
+                        (
+                            total_fenestration_area_surface_b
+                            / total_fenestration_area_b
+                        ).magnitude,
+                        (
+                            total_fenestration_area_surface_p
+                            / total_fenestration_area_p
+                        ).magnitude,
+                    )
+                )

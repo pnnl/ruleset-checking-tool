@@ -10,6 +10,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types i
 )
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import getattr_
+from rct229.utils.std_comparisons import std_equal
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_1,
@@ -89,6 +90,12 @@ class PRM9012019Rule43l11(RuleDefinitionListIndexedBase):
                     "$": ["heating_design_and_control"],
                     "heating_design_and_control": ["minimum_flow_fraction"],
                 },
+                precision={
+                    "minimum_flow_fraction": {
+                        "precision": 0.0001,
+                        "unit": "",
+                    }
+                },
             )
 
         def get_calc_vals(self, context, data=None):
@@ -104,4 +111,11 @@ class PRM9012019Rule43l11(RuleDefinitionListIndexedBase):
         def rule_check(self, context, calc_vals=None, data=None):
             minimum_flow_fraction = calc_vals["minimum_flow_fraction"]
             required_minimum_flow_fraction = calc_vals["required_minimum_flow_fraction"]
-            return minimum_flow_fraction == required_minimum_flow_fraction
+            return self.precision_comparison["minimum_flow_fraction"](
+                minimum_flow_fraction, required_minimum_flow_fraction
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            minimum_flow_fraction = calc_vals["minimum_flow_fraction"]
+            required_minimum_flow_fraction = calc_vals["required_minimum_flow_fraction"]
+            return std_equal(required_minimum_flow_fraction, minimum_flow_fraction)

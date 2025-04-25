@@ -211,3 +211,33 @@ class PRM9012019Rule34b75(RuleDefinitionListIndexedBase):
                             ).magnitude,
                         )
                     )
+
+                def is_tolerance_fail(self, context, calc_vals=None, data=None):
+                    total_skylight_area_b = calc_vals["total_skylight_area_b"]
+                    total_skylight_area_p = calc_vals["total_skylight_area_p"]
+                    total_skylight_area_surface_b = calc_vals[
+                        "total_skylight_area_surface_b"
+                    ]
+                    total_skylight_area_surface_p = calc_vals[
+                        "total_skylight_area_surface_p"
+                    ]
+
+                    return (
+                        # both segments have no skylight area
+                        total_skylight_area_b == 0
+                        and total_skylight_area_p == 0
+                        and total_skylight_area_surface_b == 0
+                        and total_skylight_area_surface_p == 0
+                    ) or (
+                        # product to ensure neither is 0 & short-circuit logic if either of them is 0.
+                        total_skylight_area_b * total_skylight_area_p > 0
+                        # both segments' skylight area ratios are the same
+                        and std_equal(
+                            (
+                                total_skylight_area_surface_b / total_skylight_area_b
+                            ).magnitude,
+                            (
+                                total_skylight_area_surface_p / total_skylight_area_p
+                            ).magnitude,
+                        )
+                    )

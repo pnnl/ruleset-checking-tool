@@ -246,7 +246,9 @@ class PRM9012019Rule03j97(RuleDefinitionListIndexedBase):
                 )
                 or (
                     not all_design_setpoints_105
-                    and minimum_outdoor_airflow_b == supply_fan_airflow_b
+                    and self.precision_comparison["supply_fan_airflow_b"](
+                        minimum_outdoor_airflow_b, supply_fan_airflow_b
+                    )
                 )
             )
 

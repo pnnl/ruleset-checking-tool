@@ -12,6 +12,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types i
     get_baseline_system_types,
 )
 from rct229.schema.schema_enums import SchemaEnums
+from rct229.utils.std_comparisons import std_equal
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_11_1,
@@ -113,6 +114,19 @@ class PRM9012019Rule18u93(RuleDefinitionListIndexedBase):
                 fan_volume_reset_type_b
                 == FAN_SYSTEM_SUPPLY_FAN_VOLUME_RESET.DESIGN_LOAD_RESET
                 and self.precision_comparison["fan_volume_reset_fraction_b"](
+                    fan_volume_reset_fraction_b,
+                    FAN_SYSTEM_SUPPLY_FAN_VOLUME_RESET_FRACTION,
+                )
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            fan_volume_reset_fraction_b = calc_vals["fan_volume_reset_fraction"]
+            fan_volume_reset_type_b = calc_vals["fan_volume_reset_type"]
+
+            return (
+                fan_volume_reset_type_b
+                == FAN_SYSTEM_SUPPLY_FAN_VOLUME_RESET.DESIGN_LOAD_RESET
+                and std_equal(
                     fan_volume_reset_fraction_b,
                     FAN_SYSTEM_SUPPLY_FAN_VOLUME_RESET_FRACTION,
                 )

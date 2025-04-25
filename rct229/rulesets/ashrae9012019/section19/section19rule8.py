@@ -7,6 +7,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_zone_list_w_area_d
 )
 from rct229.schema.config import ureg
 from rct229.schema.schema_enums import SchemaEnums
+from rct229.utils.compare_standard_val import std_ge
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import CalcQ
 
@@ -157,5 +158,26 @@ class PRM9012019Rule02h13(RuleDefinitionListIndexedBase):
                             )
                         )
                     )
+                    and not is_DCV_modeled_b
+                )
+
+            def is_tolerance_fail(self, context, calc_vals=None, data=None):
+                hvac_min_OA_flow = calc_vals["hvac_min_OA_flow"]
+                avg_occ_density = calc_vals["avg_occ_density"]
+                is_DCV_modeled_b = calc_vals["is_DCV_modeled_b"]
+
+                return (
+                    (std_ge(hvac_min_OA_flow, MIN_OA_CFM))
+                    and avg_occ_density > OCCUPANT_DENSITY_LIMIT
+                    and is_DCV_modeled_b
+                ) or (
+                    (
+                        hvac_min_OA_flow < MIN_OA_CFM
+                        or self.precision_comparison["hvac_min_OA_flow"](
+                            hvac_min_OA_flow,
+                            MIN_OA_CFM,
+                        )
+                    )
+                    and (std_ge(avg_occ_density, OCCUPANT_DENSITY_LIMIT))
                     and not is_DCV_modeled_b
                 )

@@ -15,6 +15,7 @@ from rct229.schema.config import ureg
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO, CalcQ
+from rct229.utils.std_comparisons import std_equal
 from rct229.utils.utility_functions import find_exactly_one_fluid_loop
 
 APPLICABLE_SYS_TYPES = [
@@ -173,6 +174,21 @@ class PRM9012019Rule79i34(RuleDefinitionListIndexedBase):
                 heating_system_type_b == HEATING_SYSTEM.FLUID_LOOP
                 and hot_water_loop_type == FLUID_LOOP.HEATING
                 and self.precision_comparison["heating_coil_setpoint"](
+                    heating_coil_setpoint,
+                    hvac_max_zone_setpoint - REQUIRED_SET_POINT_REDUCTION,
+                )
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            heating_system_type_b = calc_vals["heating_system_type_b"]
+            hot_water_loop_type = calc_vals["hot_water_loop_type"]
+            heating_coil_setpoint = calc_vals["heating_coil_setpoint"]
+            hvac_max_zone_setpoint = calc_vals["hvac_max_zone_setpoint"]
+
+            return (
+                heating_system_type_b == HEATING_SYSTEM.FLUID_LOOP
+                and hot_water_loop_type == FLUID_LOOP.HEATING
+                and std_equal(
                     heating_coil_setpoint,
                     hvac_max_zone_setpoint - REQUIRED_SET_POINT_REDUCTION,
                 )

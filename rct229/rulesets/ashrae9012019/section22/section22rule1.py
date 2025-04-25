@@ -99,7 +99,7 @@ class PRM9012019Rule92r39(RuleDefinitionListIndexedBase):
                 },
                 precision={
                     "design_supply_temperature": {
-                        "precision": 0.1,
+                        "precision": 1,
                         "unit": "K",
                     },
                 },

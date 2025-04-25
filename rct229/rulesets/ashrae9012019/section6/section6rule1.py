@@ -6,6 +6,7 @@ from rct229.rulesets.ashrae9012019.data_fns.table_G3_7_fns import table_G3_7_loo
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_8_fns import table_G3_8_lookup
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO, CalcQ
+from rct229.utils.std_comparisons import std_equal
 
 CASE3_WARNING = "Project passes based on space-by-space method. Verify if project sues space-by-space method."
 CASE4_WARNING = "Project fails based on space-by-space method. LIGHTING_BUILDING_AREA_TYPE is not known to determine building area method allowance."
@@ -142,6 +143,39 @@ class PRM9012019Rule99c05(RuleDefinitionListIndexedBase):
                     ](
                         building_segment_design_lighting_wattage,
                         allowable_lighting_wattage_SBS,
+                    )
+                )
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            allowable_LPD_BAM = calc_vals["allowable_LPD_BAM"]
+            check_BAM_flag = calc_vals["check_BAM_flag"]
+            building_segment_design_lighting_wattage = calc_vals[
+                "building_segment_design_lighting_wattage"
+            ]
+            total_building_segment_area_p = calc_vals["total_building_segment_area_p"]
+            allowable_lighting_wattage_SBS = calc_vals["allowable_lighting_wattage_SBS"]
+
+            allowable_LPD_wattage_BAM = (
+                allowable_LPD_BAM * total_building_segment_area_p
+                if allowable_LPD_BAM
+                else ZERO.POWER
+            )
+
+            return (
+                (allowable_LPD_BAM or not check_BAM_flag)
+                and (
+                    building_segment_design_lighting_wattage < allowable_LPD_wattage_BAM
+                )
+                or std_equal(
+                    allowable_LPD_wattage_BAM, building_segment_design_lighting_wattage
+                )
+                or (
+                    building_segment_design_lighting_wattage
+                    < allowable_lighting_wattage_SBS
+                    or std_equal(
+                        allowable_lighting_wattage_SBS,
+                        building_segment_design_lighting_wattage,
                     )
                 )
             )

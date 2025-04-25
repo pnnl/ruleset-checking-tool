@@ -89,10 +89,10 @@ class PRM9012019Rule45j93(RuleDefinitionListIndexedBase):
             hvac_min_oa_flow_b = calc_vals["hvac_min_oa_flow_b"]
 
             return (
-                REQ_SENSIBLE_EFFECTIVENESS == sensible_eff_b
-                and REQ_LATENT_EFFECTIVENESS == latent_eff_b
-                and std_equal(ERV_OA_airflow_b, hvac_min_oa_flow_b)
-                and std_equal(ERV_OA_airflow_b, ERV_EA_airflow_b)
+                self.precision_comparison(sensible_eff_b, REQ_SENSIBLE_EFFECTIVENESS)
+                and self.precision_comparison(latent_eff_b, REQ_LATENT_EFFECTIVENESS)
+                and self.precision_comparison(ERV_OA_airflow_b, hvac_min_oa_flow_b)
+                and self.precision_comparison(ERV_OA_airflow_b, ERV_EA_airflow_b)
             )
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):

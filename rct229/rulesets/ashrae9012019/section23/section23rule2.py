@@ -98,7 +98,7 @@ class PRM9012019Rule52x31(RuleDefinitionListIndexedBase):
                 },
                 precision={
                     "reset_differential_temperature_b": {
-                        "precision": 0.1,
+                        "precision": 1,
                         "unit": "K",
                     },
                 },

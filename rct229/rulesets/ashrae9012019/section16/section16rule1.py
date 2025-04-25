@@ -50,6 +50,12 @@ class PRM9012019Rule98t42(RuleDefinitionListIndexedBase):
                     BASELINE_0=True,
                     PROPOSED=False,
                 ),
+                precision={
+                    "elevator_motor_power_b": {
+                        "precision": 0.1,
+                        "unit": "W",
+                    }
+                },
             )
 
         def get_calc_vals(self, context, data=None):
@@ -128,6 +134,14 @@ class PRM9012019Rule98t42(RuleDefinitionListIndexedBase):
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
+            expected_peak_motor_power_b = calc_vals["expected_peak_motor_power_b"]
+            elevator_motor_power_b = calc_vals["elevator_motor_power_b"]
+
+            return self.precision_comparison["elevator_motor_power_b"](
+                elevator_motor_power_b, expected_peak_motor_power_b
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
             expected_peak_motor_power_b = calc_vals["expected_peak_motor_power_b"]
             elevator_motor_power_b = calc_vals["elevator_motor_power_b"]
 
