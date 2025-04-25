@@ -155,6 +155,7 @@ rules_dict = {
     "prm9012019rule87f72": "section19rule34",
     "prm9012019rule40n43": "section19rule35",
     "prm9012019rule45j93": "section19rule36",
+    "prm9012019rule86o02": "section19rule37",
     "prm9012019rule34f57": "section21rule1",
     "prm9012019rule83m55": "section21rule2",
     "prm9012019rule86n98": "section21rule3",
