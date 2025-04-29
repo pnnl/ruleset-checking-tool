@@ -76,27 +76,8 @@
                         "type": "PROPOSED"
                     }
                 ]
-            }
-        }
-    },
-    "rule-19-37-b": {
-        "Section": 19,
-        "Rule": 37,
-        "Test": "b",
-        "test_description": "A user and baseline RMD set have cooling drybulb design day type of COOLING_1_0, evaporation wet bulb design day type of COOLING_1_0, and heating dry bulb temperature design day type of 99_6",
-        "expected_rule_outcome": "undetermined",
-        "standard": {
-            "rule_id": "19-37",
-            "ruleset_reference": "G3.1.2.2.1",
-            "rule_description": "Weather conditions used in sizing runs for the 99.6% heating design temperature and 1% dry-bulb and 1% wet-bulb cooling design temperatures are consistent with the site location.",
-            "applicable_rmd": "Baseline RMD",
-            "rule_assertion": "=",
-            "comparison_value": "Proposed RMD",
-            "primary_rule": "Applicability",
-            "schema_version": "0.1.3"
-        },
-        "rmd_transformations": {
-            "user": {
+            },
+            "baseline": {
                 "id": "ASHRAE229 1",
                 "ruleset_model_descriptions": [
                     {
@@ -153,7 +134,87 @@
                                 ]
                             }
                         ],
-                        "type": "USER"
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-19-37-b": {
+        "Section": 19,
+        "Rule": 37,
+        "Test": "b",
+        "test_description": "A user and baseline RMD set have cooling drybulb design day type of COOLING_1_0, evaporation wet bulb design day type of COOLING_1_0, and heating dry bulb temperature design day type of 99_6",
+        "expected_rule_outcome": "undetermined",
+        "standard": {
+            "rule_id": "19-37",
+            "ruleset_reference": "G3.1.2.2.1",
+            "rule_description": "Weather conditions used in sizing runs for the 99.6% heating design temperature and 1% dry-bulb and 1% wet-bulb cooling design temperatures are consistent with the site location.",
+            "applicable_rmd": "Baseline RMD",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed RMD",
+            "primary_rule": "Applicability",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "cooling_dry_bulb_design_day_type": "COOLING_1_0",
+                            "heating_dry_bulb_design_day_type": "HEATING_99_6",
+                            "evaporation_wet_bulb_design_day_type": "COOLING_1_0"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "Air Terminal",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "Airside System 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "Airside System 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1"
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "Fan System 1",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             },
@@ -225,7 +286,7 @@
         "Rule": 37,
         "Test": "c",
         "test_description": "A user, baseline, and proposed RMD set have cooling drybulb design day type of COOLING_0_4, evaporation wet bulb design day type of COOLING_0_4, and heating dry bulb temperature design day type of 99_0",
-        "expected_rule_outcome": "undetermined",
+        "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "19-37",
             "ruleset_reference": "G3.1.2.2.1",
@@ -237,67 +298,6 @@
             "schema_version": "0.1.3"
         },
         "rmd_transformations": {
-            "user": {
-                "id": "ASHRAE229 1",
-                "ruleset_model_descriptions": [
-                    {
-                        "weather": {
-                            "cooling_dry_bulb_design_day_type": "COOLING_0_4",
-                            "heating_dry_bulb_design_day_type": "HEATING_99_0",
-                            "evaporation_wet_bulb_design_day_type": "COOLING_0_4"
-                        },
-                        "id": "RMD 1",
-                        "buildings": [
-                            {
-                                "id": "Building 1",
-                                "building_segments": [
-                                    {
-                                        "id": "Building Segment 1",
-                                        "zones": [
-                                            {
-                                                "id": "Thermal Zone 1",
-                                                "terminals": [
-                                                    {
-                                                        "id": "Air Terminal",
-                                                        "is_supply_ducted": true,
-                                                        "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "Airside System 1"
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        "heating_ventilating_air_conditioning_systems": [
-                                            {
-                                                "id": "Airside System 1",
-                                                "cooling_system": {
-                                                    "id": "Cooling System 1"
-                                                },
-                                                "heating_system": {
-                                                    "id": "Heating System 1"
-                                                },
-                                                "fan_system": {
-                                                    "id": "Fan System 1",
-                                                    "supply_fans": [
-                                                        {
-                                                            "id": "Supply Fan 1"
-                                                        }
-                                                    ],
-                                                    "return_fans": [
-                                                        {
-                                                            "id": "Return Fan 1"
-                                                        }
-                                                    ]
-                                                }
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ],
-                        "type": "USER"
-                    }
-                ]
-            },
             "proposed": {
                 "id": "ASHRAE229 1",
                 "ruleset_model_descriptions": [
