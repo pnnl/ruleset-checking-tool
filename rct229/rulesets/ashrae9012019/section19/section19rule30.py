@@ -16,7 +16,7 @@ APPLICABLE_SYS_TYPES = [HVAC_SYS.SYS_6, HVAC_SYS.SYS_8]
 
 
 class Section19Rule30(RuleDefinitionListIndexedBase):
-    """Rule 30 of ASHRAE 90.1-2019 Appendix G Section 19 (Envelope)"""
+    """Rule 30 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
 
     def __init__(self):
         super(Section19Rule30, self).__init__(
