@@ -52,20 +52,6 @@ class Section19Rule37(PartialRuleDefinition):
             ),
         }
 
-    def applicability_check(self, context, calc_vals, data):
-        heating_design_day_type_p = calc_vals["heating_design_day_type_p"]
-        cooling_design_day_type_p = calc_vals["cooling_design_day_type_p"]
-        evaporation_wet_bulb_design_day_type_p = calc_vals[
-            "evaporation_wet_bulb_design_day_type_p"
-        ]
-
-        return (
-            cooling_design_day_type_p
-            == evaporation_wet_bulb_design_day_type_p
-            == COOLING_DESIGN_DAY.COOLING_1_0
-            and heating_design_day_type_p == HEATING_DESIGN_DAY.HEATING_99_6
-        )
-
     def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
         heating_design_day_type_b = calc_vals["heating_design_day_type_b"]
         cooling_design_day_type_b = calc_vals["cooling_design_day_type_b"]
@@ -101,3 +87,17 @@ class Section19Rule37(PartialRuleDefinition):
             )
 
         return UNDETERMINED_MSG
+
+    def applicability_check(self, context, calc_vals, data):
+        heating_design_day_type_p = calc_vals["heating_design_day_type_p"]
+        cooling_design_day_type_p = calc_vals["cooling_design_day_type_p"]
+        evaporation_wet_bulb_design_day_type_p = calc_vals[
+            "evaporation_wet_bulb_design_day_type_p"
+        ]
+
+        return (
+            cooling_design_day_type_p
+            == evaporation_wet_bulb_design_day_type_p
+            == COOLING_DESIGN_DAY.COOLING_1_0
+            and heating_design_day_type_p == HEATING_DESIGN_DAY.HEATING_99_6
+        )
