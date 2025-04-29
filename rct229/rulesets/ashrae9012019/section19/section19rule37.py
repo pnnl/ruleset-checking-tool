@@ -41,29 +41,29 @@ class Section19Rule37(PartialRuleDefinition):
             "evaporation_wet_bulb_design_day_type_b": weather_b.get(
                 "evaporation_wet_bulb_design_day_type"
             ),
-            "heating_design_day_type_P": weather_p.get(
+            "heating_design_day_type_p": weather_p.get(
                 "heating_dry_bulb_temp_design_day_type"
             ),
-            "cooling_design_day_type_P": weather_p.get(
+            "cooling_design_day_type_p": weather_p.get(
                 "cooling_dry_bulb_temp_design_day_type"
             ),
-            "evaporation_wet_bulb_design_day_type_P": weather_p.get(
+            "evaporation_wet_bulb_design_day_type_p": weather_p.get(
                 "evaporation_wet_bulb_design_day_type"
             ),
         }
 
     def applicability_check(self, context, calc_vals, data):
-        heating_design_day_type_b = calc_vals["heating_design_day_type_b"]
-        cooling_design_day_type_b = calc_vals["cooling_design_day_type_b"]
-        evaporation_wet_bulb_design_day_type_b = calc_vals[
-            "evaporation_wet_bulb_design_day_type_b"
+        heating_design_day_type_p = calc_vals["heating_design_day_type_p"]
+        cooling_design_day_type_p = calc_vals["cooling_design_day_type_p"]
+        evaporation_wet_bulb_design_day_type_p = calc_vals[
+            "evaporation_wet_bulb_design_day_type_p"
         ]
 
         return (
-            cooling_design_day_type_b
-            == evaporation_wet_bulb_design_day_type_b
+            cooling_design_day_type_p
+            == evaporation_wet_bulb_design_day_type_p
             == COOLING_DESIGN_DAY.COOLING_1_0
-            and heating_design_day_type_b == HEATING_DESIGN_DAY.HEATING_99_6
+            and heating_design_day_type_p == HEATING_DESIGN_DAY.HEATING_99_6
         )
 
     def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
@@ -80,20 +80,21 @@ class Section19Rule37(PartialRuleDefinition):
         ]
 
         if (
-            cooling_design_day_type_b
-            == evaporation_wet_bulb_design_day_type_b
-            == cooling_design_day_type_p
+            cooling_design_day_type_p
             == evaporation_wet_bulb_design_day_type_p
             == COOLING_DESIGN_DAY.COOLING_1_0
-            and heating_design_day_type_b
-            == heating_design_day_type_p
-            == HEATING_DESIGN_DAY.HEATING_99_6
+            and heating_design_day_type_p == HEATING_DESIGN_DAY.HEATING_99_6
         ):
             UNDETERMINED_MSG = (
                 "Check that the actual temperatures used in sizing runs to determine yet to be designed proposed equipment capacities is based on design days developed using 99.6% heating design temperatures and "
                 "1% dry-bulb and 1% wet-bulb cooling design temperatures appropriate for the site location. Note that this rule is only applicable to yet to be designed HVAC systems in the proposed design."
             )
-        else:
+        elif (
+            cooling_design_day_type_b
+            == evaporation_wet_bulb_design_day_type_b
+            == COOLING_DESIGN_DAY.COOLING_1_0
+            and heating_design_day_type_b == HEATING_DESIGN_DAY.HEATING_99_6
+        ):
             UNDETERMINED_MSG = (
                 "Check that the actual temperatures used in sizing runs to determine baseline equipment capacities is based on design days developed using 99.6% heating design temperatures "
                 "and 1% dry-bulb and 1% wet-bulb cooling design temperatures appropriate for the site location."
