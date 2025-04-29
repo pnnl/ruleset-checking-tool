@@ -17,14 +17,14 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_ca
 from rct229.utils.std_comparisons import std_equal
 
 ABSORPTION_THERMAL_EXTERIOR = 0.9
-UNDETERMINED_MSG = (
+CASE2_UNDETERMINED__MSG = (
     "Roof surface emittance in the proposed model {absorptance_thermal_exterior} matches that in the "
     "user model but is not equal to the prescribed default value of 0.9. Verify that the modeled value "
     "is based on testing in accordance with section 5.5.3.1.1(a). "
 )
-PASS_DIFFERS_MSG = (
-    "Roof thermal emittance is equal to the prescribed default value of 0.9 but differs from the "
-    "thermal emittance in the user model {absorptance_thermal_exterior} "
+CASE3_UNDETERMINED__MSG = (
+    "Fail if the thermal emittance in the user model is based on aged test data. Roof thermal emittance is equal to the prescribed default value of 0.9 "
+    "but differs from the thermal emittance in the user model {absorptance_thermal_exterior}."
 )
 
 
@@ -44,8 +44,12 @@ class Section5Rule30(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-1(a) Building Envelope Modeling Requirements for the Proposed design",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].buildings[*]",
-            data_items={"climate_zone": (PROPOSED, "weather/climate_zone")},
         )
+
+    def create_data(self, context, data=None):
+        rpd_p = context.PROPOSED
+        climate_zone = rpd_p["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
+        return {"climate_zone": climate_zone}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -88,7 +92,7 @@ class Section5Rule30(RuleDefinitionListIndexedBase):
                         "absorptance_thermal_exterior_p": {
                             "precision": 0.01,
                             "unit": "",
-                        }
+                        },
                     },
                 )
 
@@ -112,27 +116,25 @@ class Section5Rule30(RuleDefinitionListIndexedBase):
                 absorptance_thermal_exterior_u = calc_vals[
                     "absorptance_thermal_exterior_u"
                 ]
+
                 return (
-                    absorptance_thermal_exterior_p == absorptance_thermal_exterior_u
-                    and absorptance_thermal_exterior_p != ABSORPTION_THERMAL_EXTERIOR
+                    self.precision_comparison["absorptance_thermal_exterior_p"](
+                        absorptance_thermal_exterior_p, absorptance_thermal_exterior_u
+                    )
+                    and not self.precision_comparison["absorptance_thermal_exterior_p"](
+                        absorptance_thermal_exterior_p, ABSORPTION_THERMAL_EXTERIOR
+                    )
+                ) or (
+                    not self.precision_comparison["absorptance_thermal_exterior_p"](
+                        absorptance_thermal_exterior_p, absorptance_thermal_exterior_u
+                    )
+                    and self.precision_comparison["absorptance_thermal_exterior_p"](
+                        absorptance_thermal_exterior_p,
+                        ABSORPTION_THERMAL_EXTERIOR,
+                    )
                 )
 
             def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
-                absorptance_thermal_exterior_p = calc_vals[
-                    "absorptance_thermal_exterior_p"
-                ]
-                return UNDETERMINED_MSG.format(
-                    absorptance_thermal_exterior=absorptance_thermal_exterior_p
-                )
-
-            def rule_check(self, context, calc_vals=None, data=None):
-                return self.precision_comparison["absorptance_thermal_exterior_p"](
-                    calc_vals["absorptance_thermal_exterior_p"],
-                    ABSORPTION_THERMAL_EXTERIOR,
-                )
-
-            def get_pass_msg(self, context, calc_vals=None, data=None):
-                """Pre-condition: see rule_check"""
                 absorptance_thermal_exterior_p = calc_vals[
                     "absorptance_thermal_exterior_p"
                 ]
@@ -140,15 +142,25 @@ class Section5Rule30(RuleDefinitionListIndexedBase):
                     "absorptance_thermal_exterior_u"
                 ]
 
-                pass_msg = (
-                    PASS_DIFFERS_MSG.format(
+                UNDETERMINED_MSG = (
+                    CASE3_UNDETERMINED__MSG.format(
                         absorptance_thermal_exterior=absorptance_thermal_exterior_u
                     )
-                    if absorptance_thermal_exterior_p != absorptance_thermal_exterior_u
-                    else ""
+                    if not self.precision_comparison["absorptance_thermal_exterior_p"](
+                        absorptance_thermal_exterior_p, absorptance_thermal_exterior_u
+                    )
+                    else CASE2_UNDETERMINED__MSG.format(
+                        absorptance_thermal_exterior=absorptance_thermal_exterior_p
+                    )
                 )
 
-                return pass_msg
+                return UNDETERMINED_MSG
+
+            def rule_check(self, context, calc_vals=None, data=None):
+                return self.precision_comparison["absorptance_thermal_exterior_p"](
+                    calc_vals["absorptance_thermal_exterior_p"],
+                    ABSORPTION_THERMAL_EXTERIOR,
+                )
 
             def is_tolerance_fail(self, context, calc_vals=None, data=None):
                 return std_equal(

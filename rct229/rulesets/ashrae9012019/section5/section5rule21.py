@@ -9,7 +9,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_ca
     get_surface_conditioning_category_dict,
 )
 from rct229.utils.pint_utils import CalcQ
-
+from rct229.utils.std_comparisons import std_equal
 
 FAIL_MSG = "Subsurface that is not regulated (Not part of building envelope) is not modeled with the same area, U-factor and SHGC in the baseline as in the propsoed design."
 
@@ -23,7 +23,7 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             required_fields={
-                "$": ["weather"],
+                "$.ruleset_model_descriptions[*]": ["weather"],
                 "weather": ["climate_zone"],
             },
             each_rule=Section5Rule21.BuildingRule(),
@@ -34,8 +34,12 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-5(a) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].buildings[*]",
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
         )
+
+    def create_data(self, context, data=None):
+        rpd_b = context.BASELINE_0
+        climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
+        return {"climate_zone": climate_zone}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -59,7 +63,10 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
         def list_filter(self, context_item, data=None):
             surface_b = context_item.BASELINE_0
 
-            return data["scc_dict_b"][surface_b["id"]] == SCC.UNREGULATED
+            return (
+                data["scc_dict_b"][surface_b["id"]] == SCC.UNREGULATED
+                and len(surface_b.get("subsurfaces", [])) > 0
+            )
 
         class UnregulatedSurfaceRule(RuleDefinitionListIndexedBase):
             def __init__(self):
@@ -150,6 +157,26 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
                             calc_vals["subsurface_glazed_area_p"],
                         )
                         and self.precision_comparison["subsurface_opaque_area_b"](
+                            calc_vals["subsurface_opaque_area_b"],
+                            calc_vals["subsurface_opaque_area_p"],
+                        )
+                    )
+
+                def is_tolerance_fail(self, context, calc_vals=None, data=None):
+                    return (
+                        std_equal(
+                            calc_vals["subsurface_u_factor_b"],
+                            calc_vals["subsurface_u_factor_p"],
+                        )
+                        and std_equal(
+                            calc_vals["subsurface_shgc_b"],
+                            calc_vals["subsurface_shgc_p"],
+                        )
+                        and std_equal(
+                            calc_vals["subsurface_glazed_area_b"],
+                            calc_vals["subsurface_glazed_area_p"],
+                        )
+                        and std_equal(
                             calc_vals["subsurface_opaque_area_b"],
                             calc_vals["subsurface_opaque_area_p"],
                         )

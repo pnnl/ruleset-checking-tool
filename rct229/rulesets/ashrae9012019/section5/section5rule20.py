@@ -36,7 +36,7 @@ class Section5Rule20(RuleDefinitionListIndexedBase):
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             required_fields={
-                "$": ["weather"],
+                "$.ruleset_model_descriptions[*]": ["weather"],
                 "weather": ["climate_zone"],
             },
             each_rule=Section5Rule20.BuildingRule(),
@@ -51,7 +51,9 @@ class Section5Rule20(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data=None):
         rmd_baseline = context.BASELINE_0
-        climate_zone = rmd_baseline["weather"]["climate_zone"]
+        climate_zone = rmd_baseline["ruleset_model_descriptions"][0]["weather"][
+            "climate_zone"
+        ]
 
         # TODO It is determined that later we will modify this function to RMD level -
         # This implementation is temporary
@@ -63,7 +65,7 @@ class Section5Rule20(RuleDefinitionListIndexedBase):
         }
 
         return {
-            "climate_zone": rmd_baseline["weather"]["climate_zone"],
+            "climate_zone": climate_zone,
             "bldg_scc_wwr_ratio_dict": bldg_scc_wwr_ratio_dict,
         }
 
@@ -209,8 +211,10 @@ class Section5Rule20(RuleDefinitionListIndexedBase):
         def list_filter(self, context_item, data=None):
             surface_b = context_item.BASELINE_0
             scc_dict_b = data["scc_dict_b"]
-            return (get_opaque_surface_type(surface_b) == OST.ABOVE_GRADE_WALL) and (
-                scc_dict_b[surface_b["id"]] != SCC.UNREGULATED
+            return (
+                (get_opaque_surface_type(surface_b) == OST.ABOVE_GRADE_WALL)
+                and (scc_dict_b[surface_b["id"]] != SCC.UNREGULATED)
+                and len(surface_b.get("subsurfaces", [])) > 0
             )
 
         class AboveGradeWallRule(RuleDefinitionListIndexedBase):

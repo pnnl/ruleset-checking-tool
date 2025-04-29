@@ -33,7 +33,7 @@ class Section5Rule14(RuleDefinitionListIndexedBase):
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             required_fields={
-                "$": ["weather"],
+                "$.ruleset_model_descriptions[*]": ["weather"],
                 "weather": ["climate_zone"],
             },
             each_rule=Section5Rule14.BuildingRule(),
@@ -44,8 +44,12 @@ class Section5Rule14(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-5(c) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].buildings[*]",
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
         )
+
+    def create_data(self, context, data=None):
+        rpd_b = context.BASELINE_0
+        climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
+        return {"climate_zone": climate_zone}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -137,7 +141,7 @@ class Section5Rule14(RuleDefinitionListIndexedBase):
                 return {
                     "area_type": area_type,
                     "is_all_new": is_area_type_all_new_dict[area_type],
-                    "area_type_wwr": area_type_wwr,
+                    "area_type_wwr": area_type_wwr.magnitude,
                     "area_type_target_wwr": area_type_target_wwr["wwr"],
                 }
 
@@ -151,7 +155,7 @@ class Section5Rule14(RuleDefinitionListIndexedBase):
             def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
                 manual_check_msg = ""
                 if not calc_vals["is_all_new"]:
-                    if std_equal(
+                    if self.precision_comparison["area_type_wwr_b"](
                         calc_vals["area_type_wwr"], calc_vals["area_type_target_wwr"]
                     ):
                         manual_check_msg = CASE3_WARN_MESSAGE
@@ -163,11 +167,11 @@ class Section5Rule14(RuleDefinitionListIndexedBase):
 
             def rule_check(self, context, calc_vals=None, data=None):
                 return self.precision_comparison["area_type_wwr_b"](
-                    calc_vals["area_type_wwr"].magnitude,
+                    calc_vals["area_type_wwr"],
                     calc_vals["area_type_target_wwr"],
                 )
 
             def is_tolerance_fail(self, context, calc_vals=None, data=None):
                 area_type_wwr = calc_vals["area_type_wwr"]
                 area_type_target_wwr = calc_vals["area_type_target_wwr"]
-                return std_equal(area_type_wwr, area_type_target_wwr)
+                return std_equal(area_type_target_wwr, area_type_wwr)

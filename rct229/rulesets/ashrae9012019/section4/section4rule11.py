@@ -61,11 +61,6 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            required_fields={
-                "$": ["weather", "calendar"],
-                "weather": ["climate_zone"],
-                "calendar": ["is_leap_year"],
-            },
             each_rule=Section4Rule11.RuleSetModelInstanceRule(),
             index_rmd=BASELINE_0,
             id="4-11",
@@ -74,10 +69,6 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-4 Schedule Modeling Requirements for the Proposed design and Baseline building",
             is_primary_rule=True,
             list_path="$.ruleset_model_descriptions[0]",
-            data_items={
-                "climate_zone": (BASELINE_0, "weather/climate_zone"),
-                "is_leap_year": (BASELINE_0, "calendar/is_leap_year"),
-            },
         )
 
     class RuleSetModelInstanceRule(RuleDefinitionListIndexedBase):
@@ -89,12 +80,18 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
                 each_rule=Section4Rule11.RuleSetModelInstanceRule.ZoneRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].zones[*]",
+                required_fields={
+                    "$": ["weather", "calendar"],
+                    "weather": ["climate_zone"],
+                    "calendar": ["is_leap_year"],
+                },
             )
 
         def create_data(self, context, data=None):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
-            is_leap_year = data["is_leap_year"]
+            is_leap_year = rmd_b["calendar"]["is_leap_year"]
+            climate_zone = rmd_b["weather"]["climate_zone"]
 
             zone_p_hvac_list_dict = {
                 zone_id: get_list_hvac_systems_associated_with_zone(rmd_p, zone_id)
@@ -142,6 +139,8 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
             }
 
             return {
+                "climate_zone": climate_zone,
+                "is_leap_year": is_leap_year,
                 "baseline_hvac_sys_type_ids_dict_b": get_baseline_system_types(rmd_b),
                 "zone_p_hvac_list_dict": zone_p_hvac_list_dict,
                 "zone_b_hvac_zone_list_dict": zone_b_hvac_zone_list_dict,
@@ -152,7 +151,7 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
                     rmd_p
                 ),
                 "zcc_dict_b": get_zone_conditioning_category_rmd_dict(
-                    data["climate_zone"], rmd_b
+                    climate_zone, rmd_b
                 ),
             }
 
@@ -264,28 +263,45 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
                 }
 
             def manual_check_required(self, context, calc_vals=None, data=None):
-                schedule_mismatch = calc_vals["schedule_mismatch"]
                 system_type_match_baseline_proposed = calc_vals[
                     "system_type_match_baseline_proposed"
                 ]
-                return schedule_mismatch or not system_type_match_baseline_proposed
+
+                return not system_type_match_baseline_proposed
 
             def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
                 schedule_mismatch = calc_vals["schedule_mismatch"]
                 baseline_served_by_multizone = calc_vals["baseline_served_by_multizone"]
                 proposed_served_by_multizone = calc_vals["proposed_served_by_multizone"]
                 hvac_type_check = calc_vals["hvac_type_check"]
+
                 if (
                     schedule_mismatch
                     and not baseline_served_by_multizone
                     and hvac_type_check
                     and proposed_served_by_multizone
                 ):
-                    return "There is a fan operating schedule mismatch between the baseline and proposed but section g3.1.1(c) appears applicable. Verify mismatch is appropriate per section G3.1.1(c) and that the fan operating schedule in the baseline is in alignment with the occupancy schedules."
-                elif schedule_mismatch:
-                    return "There is a fan schedule mismatch between the baseline and proposed for the hvac system(s) serving this zone. Fail unless table G3.1 section 4 baseline column exceptions #1, #2 or #3 is applicable."
+                    return (
+                        "There is a fan operating schedule mismatch between the baseline and proposed but section g3.1.1(c) appears applicable. "
+                        "Verify mismatch is appropriate per section G3.1.1(c) and that the fan operating schedule in the baseline is in alignment with the occupancy schedules."
+                    )
                 else:
-                    return "Fan schedules match between the baseline and proposed for the hvac system(s) serving this zone. Verify that matching schedules are appropriate in that none of the section 4 baseline column exceptions #1, #2 or #3 are applicable."
+                    return (
+                        "Fan schedules match between the baseline and proposed for the hvac system(s) serving this zone. "
+                        "Verify that matching schedules are appropriate in that none of the section 4 baseline column exceptions #1, #2 or #3 are applicable."
+                    )
 
             def rule_check(self, context, calc_vals=None, data=None):
-                return True
+                schedule_mismatch = calc_vals["schedule_mismatch"]
+                system_type_match_baseline_proposed = calc_vals[
+                    "system_type_match_baseline_proposed"
+                ]
+
+                return not schedule_mismatch and system_type_match_baseline_proposed
+
+            def get_fail_msg(self, context, calc_vals=None, data=None):
+
+                return (
+                    "There is a fan schedule mismatch between the baseline and proposed RMDs for the hvac system(s) serving this zone. "
+                    "Fail unless table G3.1 section 4 baseline column exceptions #1, #2 or #3 is applicable."
+                )

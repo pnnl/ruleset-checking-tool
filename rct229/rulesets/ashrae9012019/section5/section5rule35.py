@@ -33,7 +33,7 @@ class Section5Rule35(RuleDefinitionListIndexedBase):
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             required_fields={
-                "$": ["weather"],
+                "$.ruleset_model_descriptions[*]": ["weather"],
                 "weather": ["climate_zone"],
             },
             each_rule=Section5Rule35.BuildingRule(),
@@ -44,8 +44,12 @@ class Section5Rule35(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-5(h) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].buildings[*]",
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
         )
+
+    def create_data(self, context, data=None):
+        rpd_b = context.BASELINE_0
+        climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
+        return {"climate_zone": climate_zone}
 
     class BuildingRule(RuleDefinitionBase):
         def __init__(self):
@@ -110,9 +114,13 @@ class Section5Rule35(RuleDefinitionListIndexedBase):
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
+            building_total_air_leakage_rate = calc_vals[
+                "building_total_air_leakage_rate"
+            ]
+            target_air_leakage_rate_75pa_b = calc_vals["target_air_leakage_rate_75pa_b"]
             return self.precision_comparison["building_total_air_leakage_rate"](
-                calc_vals["building_total_air_leakage_rate"],
-                calc_vals["target_air_leakage_rate_75pa_b"] * TOTAL_AIR_LEAKAGE_FACTOR,
+                building_total_air_leakage_rate,
+                target_air_leakage_rate_75pa_b * TOTAL_AIR_LEAKAGE_FACTOR,
             )
 
         def is_tolerance_fail(self, context, calc_vals=None, data=None):

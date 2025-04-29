@@ -35,10 +35,6 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            required_fields={
-                "$": ["weather"],
-                "weather": ["climate_zone"],
-            },
             each_rule=Section5Rule19.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-19",
@@ -51,7 +47,9 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data=None):
         rmd_baseline = context.BASELINE_0
-        climate_zone = rmd_baseline["weather"]["climate_zone"]
+        climate_zone = rmd_baseline["ruleset_model_descriptions"][0]["weather"][
+            "climate_zone"
+        ]
 
         # TODO It is determined later we will modify this function to RMD level -
         # The implementation is temporary
@@ -62,7 +60,7 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
             ] = get_building_scc_window_wall_ratios_dict(climate_zone, building_b)
 
         return {
-            "climate_zone": rmd_baseline["weather"]["climate_zone"],
+            "climate_zone": climate_zone,
             "bldg_scc_wwr_ratio_dict": bldg_scc_wwr_ratio_dict,
         }
 
@@ -209,8 +207,10 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
         def list_filter(self, context_item, data=None):
             surface_b = context_item.BASELINE_0
             scc_dict_b = data["scc_dict_b"]
-            return (get_opaque_surface_type(surface_b) == OST.ABOVE_GRADE_WALL) and (
-                scc_dict_b[surface_b["id"]] != SCC.UNREGULATED
+            return (
+                (get_opaque_surface_type(surface_b) == OST.ABOVE_GRADE_WALL)
+                and (scc_dict_b[surface_b["id"]] != SCC.UNREGULATED)
+                and len(surface_b.get("subsurfaces", [])) > 0
             )
 
         class AboveGradeWallRule(RuleDefinitionListIndexedBase):
@@ -300,7 +300,7 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
 
                 def rule_check(self, context, calc_vals=None, data=None):
                     return self.precision_comparison["subsurface_u_factor_b"](
-                        calc_vals["target_u_factor"], calc_vals["subsurface_u_factor"]
+                        calc_vals["subsurface_u_factor"], calc_vals["target_u_factor"]
                     )
 
                 def is_tolerance_fail(self, context, calc_vals=None, data=None):

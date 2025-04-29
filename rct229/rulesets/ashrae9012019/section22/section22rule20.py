@@ -47,9 +47,8 @@ class Section22Rule20(RuleDefinitionListIndexedBase):
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].heat_rejections[*]",
             required_fields={
-                "$": ["ruleset_model_descriptions", "weather"],
+                "$": ["ruleset_model_descriptions"],
             },
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
         )
 
     def is_applicable(self, context, data=None):
@@ -73,6 +72,11 @@ class Section22Rule20(RuleDefinitionListIndexedBase):
             ]
         )
 
+    def create_data(self, context, data=None):
+        rpd_b = context.BASELINE_0
+        climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
+        return {"climate_zone": climate_zone}
+
     class HeatRejectionRule(RuleDefinitionBase):
         def __init__(self):
             super(Section22Rule20.HeatRejectionRule, self).__init__(
@@ -84,7 +88,7 @@ class Section22Rule20(RuleDefinitionListIndexedBase):
                 },
                 precision={
                     "tower_leaving_temperature_b": {
-                        "precision": 0.1,
+                        "precision": 1,
                         "unit": "K",
                     },
                 },

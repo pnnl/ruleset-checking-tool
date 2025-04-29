@@ -21,6 +21,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_list_hvac_systems_assoc
 from rct229.schema.config import ureg
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import assert_
+from rct229.utils.compare_standard_val import std_ge
 from rct229.utils.jsonpath_utils import find_all, find_one
 from rct229.utils.pint_utils import ZERO, CalcQ
 from rct229.utils.utility_functions import find_exactly_one_schedule
@@ -33,7 +34,6 @@ ClimateZoneOption = SchemaEnums.schema_enums["ClimateZoneOptions2019ASHRAE901"]
 OA_fraction_b_70 = 0.7
 SUPPLY_AIRFLOW_5000CFM = 5000 * ureg("cfm")
 REQ_HEATING_SETPOINT = 60 * ureg("degF")
-
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_9,
@@ -63,8 +63,7 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             required_fields={
-                "$": ["weather", "ruleset_model_descriptions"],
-                "weather": ["climate_zone"],
+                "$": ["ruleset_model_descriptions"],
             },
             each_rule=Section19Rule21.RMDRule(),
             index_rmd=BASELINE_0,
@@ -81,7 +80,6 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1.2.10 and exceptions 1-7",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
         )
 
     class RMDRule(RuleDefinitionListIndexedBase):
@@ -93,11 +91,16 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                 each_rule=Section19Rule21.RMDRule.HVACRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
+                required_fields={
+                    "$": ["weather"],
+                    "weather": ["climate_zone"],
+                },
             )
 
         def create_data(self, context, data):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
+            climate_zone = rmd_b["weather"]["climate_zone"]
 
             dict_of_zones_and_terminal_units_served_by_hvac_sys_b = (
                 get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmd_b)
@@ -229,6 +232,7 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                 )
 
             return {
+                "climate_zone": climate_zone,
                 "zone_data": zone_data,
             }
 
@@ -453,6 +457,70 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                                 supply_airflow_b,
                                 SUPPLY_AIRFLOW_5000CFM,
                             )
+                        )
+                        and (
+                            # CASE 1
+                            (ER_modeled_b)
+                            or
+                            # CASE 2
+                            (exception_1_applies)
+                            or
+                            # CASE 3
+                            (exception_2_applies)
+                            or
+                            # CASE 4
+                            (ER_not_req_for_heating_sys_b and sys_type_heating_only_b)
+                            or
+                            # CASE 5
+                            (exception_6_applies)
+                            or
+                            # CASE 6
+                            (exception_7_applies)
+                        )
+                    )
+                    or (
+                        # CASE 9 and 10
+                        (
+                            OA_fraction_b < OA_fraction_b_70
+                            or supply_airflow_b < SUPPLY_AIRFLOW_5000CFM
+                        )
+                    )
+                    or
+                    # Case 11
+                    (
+                        (
+                            all_lighting_space_types_defined_p
+                            and all_ventilation_space_types_defined_p
+                        )
+                        or ER_modeled_p
+                    )
+                )
+
+            def is_tolerance_fail(self, context, calc_vals=None, data=None):
+                OA_fraction_b = calc_vals[
+                    "OA_fraction_b"
+                ].magnitude  # .magnitude is because `OA_fraction_b` is a `dimensionless` unit in pint
+                supply_airflow_b = calc_vals["supply_airflow_b"]
+                ER_modeled_b = calc_vals["ER_modeled_b"]
+                exception_1_applies = calc_vals["exception_1_applies"]
+                exception_2_applies = calc_vals["exception_2_applies"]
+                exception_6_applies = calc_vals["exception_6_applies"]
+                exception_7_applies = calc_vals["exception_7_applies"]
+                ER_not_req_for_heating_sys_b = calc_vals["ER_not_req_for_heating_sys_b"]
+                sys_type_heating_only_b = calc_vals["sys_type_heating_only_b"]
+                all_lighting_space_types_defined_p = calc_vals[
+                    "all_lighting_space_types_defined_p"
+                ]
+                all_ventilation_space_types_defined_p = calc_vals[
+                    "all_ventilation_space_types_defined_p"
+                ]
+                ER_modeled_p = calc_vals["ER_modeled_p"]
+
+                return (
+                    (
+                        (std_ge(val=OA_fraction_b, std_val=OA_fraction_b_70))
+                        and (
+                            std_ge(val=supply_airflow_b, std_val=SUPPLY_AIRFLOW_5000CFM)
                         )
                         and (
                             # CASE 1

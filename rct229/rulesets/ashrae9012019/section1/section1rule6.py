@@ -2,9 +2,6 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
-from rct229.rulesets.ashrae9012019.data_fns.extra_schema_fns import (
-    baseline_equals_proposed,
-)
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
@@ -58,10 +55,10 @@ class Section1Rule6(RuleDefinitionListIndexedBase):
                     BASELINE_270=True,
                 ),
                 required_fields={
-                    "$": ["output"],
-                    "$.output": ["output_instance"],
-                    "$.output.output_instance": ["annual_end_use_results"],
-                    "$.output.output_instance.annual_end_use_results[*]": [
+                    "$": ["model_output"],
+                    "$.model_output": ["output_instance"],
+                    "$.model_output.output_instance": ["annual_end_use_results"],
+                    "$.model_output.output_instance.annual_end_use_results[*]": [
                         "energy_source"
                     ],
                 },
@@ -75,7 +72,7 @@ class Section1Rule6(RuleDefinitionListIndexedBase):
         renewable_annual_site_energy_use_list = [
             sum(
                 find_all(
-                    f'$.output.output_instance.annual_end_use_results[*][?(@.energy_source="{ENERGY_SOURCE_OPTIONS.ON_SITE_RENEWABLE}")].annual_site_energy_use',
+                    f'$.model_output.output_instance.annual_end_use_results[*][?(@.energy_source="{ENERGY_SOURCE_OPTIONS.ON_SITE_RENEWABLES}")].annual_site_energy_use',
                     rmd,
                 )
             )

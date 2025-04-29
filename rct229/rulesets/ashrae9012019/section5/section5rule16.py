@@ -35,10 +35,6 @@ class Section5Rule16(RuleDefinitionListIndexedBase):
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            required_fields={
-                "$": ["weather"],
-                "weather": ["climate_zone"],
-            },
             each_rule=Section5Rule16.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-16",
@@ -47,8 +43,16 @@ class Section5Rule16(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-5(c) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].buildings[*]",
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
+            required_fields={
+                "$.ruleset_model_descriptions[*]": ["weather"],
+                "weather": ["climate_zone"],
+            },
         )
+
+    def create_data(self, context, data=None):
+        rpd_b = context.BASELINE_0
+        climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
+        return {"climate_zone": climate_zone}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -179,6 +183,32 @@ class Section5Rule16(RuleDefinitionListIndexedBase):
                     self.precision_comparison[
                         "total_fenestration_area_surface_b / total_fenstration_area_b"
                     ](
+                        (
+                            total_fenestration_area_surface_b
+                            / total_fenestration_area_b
+                        ).magnitude,
+                        (
+                            total_fenestration_area_surface_p
+                            / total_fenestration_area_p
+                        ).magnitude,
+                    )
+                )
+
+            def is_tolerance_fail(self, context, calc_vals=None, data=None):
+                total_fenestration_area_surface_b = calc_vals[
+                    "total_fenestration_area_surface_b"
+                ]
+                total_fenestration_area_surface_p = calc_vals[
+                    "total_fenestration_area_surface_p"
+                ]
+                total_fenestration_area_b = calc_vals["total_fenestration_area_b"]
+                total_fenestration_area_p = calc_vals["total_fenestration_area_p"]
+
+                return (
+                    total_fenestration_area_b == ZERO.AREA
+                    and total_fenestration_area_p == ZERO.AREA
+                ) or (
+                    std_equal(
                         (
                             total_fenestration_area_surface_b
                             / total_fenestration_area_b

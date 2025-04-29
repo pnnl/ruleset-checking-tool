@@ -22,9 +22,7 @@ APPLICABLE_SYS_TYPES = [
 ]
 
 HEATPUMP_AUX_HEAT_HIGH_SHUTOFF_THRESHOLD = 40 * ureg("F")
-HeatpumpAuxilliaryHeatOptions = SchemaEnums.schema_enums[
-    "HeatpumpAuxilliaryHeatOptions"
-]
+HeatpumpAuxiliaryHeatOptions = SchemaEnums.schema_enums["HeatpumpAuxiliaryHeatOptions"]
 
 
 class Section23Rule1(RuleDefinitionListIndexedBase):
@@ -93,8 +91,8 @@ class Section23Rule1(RuleDefinitionListIndexedBase):
                     "$": ["heating_system"],
                 },
                 precision={
-                    "heatpump_auxilliary_heat_high_shutoff_temperature": {
-                        "precision": 0.1,
+                    "heatpump_low_shutoff_b": {
+                        "precision": 1,
                         "unit": "F",
                     },
                 },
@@ -107,10 +105,10 @@ class Section23Rule1(RuleDefinitionListIndexedBase):
             heatpump_aux_high_temp_shutoff = getattr_(
                 heating_system_b,
                 "HeatingSystem",
-                "heatpump_auxilliary_heat_high_shutoff_temperature",
+                "heatpump_auxiliary_heat_high_shutoff_temperature",
             )
             heatpump_aux_heat_energy_source = getattr_(
-                heating_system_b, "HeatingSystem", "heatpump_auxilliary_heat_type"
+                heating_system_b, "HeatingSystem", "heatpump_auxiliary_heat_type"
             )
             return {
                 "heatpump_aux_high_temp_shutoff": CalcQ(
@@ -126,8 +124,14 @@ class Section23Rule1(RuleDefinitionListIndexedBase):
             ]
 
             return (
-                heatpump_aux_high_temp_shutoff
-                <= HEATPUMP_AUX_HEAT_HIGH_SHUTOFF_THRESHOLD
+                (
+                    heatpump_aux_high_temp_shutoff
+                    < HEATPUMP_AUX_HEAT_HIGH_SHUTOFF_THRESHOLD
+                    or self.precision_comparison["heatpump_low_shutoff_b"](
+                        heatpump_aux_high_temp_shutoff,
+                        HEATPUMP_AUX_HEAT_HIGH_SHUTOFF_THRESHOLD,
+                    )
+                )
                 and heatpump_aux_heat_energy_source
-                == HeatpumpAuxilliaryHeatOptions.ELECTRIC_RESISTANCE
+                == HeatpumpAuxiliaryHeatOptions.ELECTRIC_RESISTANCE
             )

@@ -79,12 +79,26 @@ TEST_RMD_WRONG_LENGTH = create_flexible_schedule_length(8700)
 TEST_RPD_FULL_CORRECT_LENGTH = {
     "id": "229_01",
     "ruleset_model_descriptions": [TEST_RMD_CORRECT_LENGTH],
-    "data_timestamp": "2024-02-12T09:00Z",
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
 }
 TEST_RPD_FULL_WRONG_LENGTH = {
     "id": "229_01",
     "ruleset_model_descriptions": [TEST_RMD_WRONG_LENGTH],
-    "data_timestamp": "2024-02-12T09:00Z",
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
 }
 
 

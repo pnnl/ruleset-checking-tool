@@ -7,6 +7,7 @@ from rct229.rulesets.ashrae9012019.data_fns.table_8_4_4_fns import (
     table_8_4_4_lookup,
 )
 from rct229.schema.schema_enums import SchemaEnums
+from rct229.utils.compare_standard_val import std_ge
 
 _DRY_TYPE = SchemaEnums.schema_enums["TransformerOptions"].DRY_TYPE
 
@@ -66,7 +67,25 @@ class Section15Rule6(RuleDefinitionListIndexedBase):
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
+            user_transformer_efficiency = calc_vals["user_transformer_efficiency"]
+            required_user_transformer_min_efficiency = calc_vals[
+                "required_user_transformer_min_efficiency"
+            ]
+
             return (
-                calc_vals["user_transformer_efficiency"]
-                >= calc_vals["required_user_transformer_min_efficiency"]
+                user_transformer_efficiency > required_user_transformer_min_efficiency
+                or self.precision_comparison(
+                    required_user_transformer_min_efficiency,
+                    user_transformer_efficiency,
+                )
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            user_transformer_efficiency = calc_vals["user_transformer_efficiency"]
+            required_user_transformer_min_efficiency = calc_vals[
+                "required_user_transformer_min_efficiency"
+            ]
+
+            return std_ge(
+                required_user_transformer_min_efficiency, user_transformer_efficiency
             )

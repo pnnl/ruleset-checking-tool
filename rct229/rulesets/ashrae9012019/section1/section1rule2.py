@@ -45,15 +45,17 @@ class Section1Rule2(RuleDefinitionBase):
         bbp_set = []
         for rmd in (rmd_u, rmd_b0, rmd_b90, rmd_b180, rmd_b270, rmd_p):
             if rmd is not None:
-                pci_set.append(find_one("$.output.performance_cost_index", rmd))
+                pci_set.append(find_one("$.model_output.performance_cost_index", rmd))
                 pbp_set.append(
                     find_one(
-                        "$.output.total_proposed_building_energy_cost_including_renewable_energy",
+                        "$.model_output.total_proposed_building_energy_cost_including_renewable_energy",
                         rmd,
                     )
                 )
                 bbp_set.append(
-                    find_one("$.output.baseline_building_performance_energy_cost", rmd)
+                    find_one(
+                        "$.model_output.baseline_building_performance_energy_cost", rmd
+                    )
                 )
 
         pci_set = list(set(filter(lambda x: x is not None, pci_set)))
@@ -88,8 +90,17 @@ class Section1Rule2(RuleDefinitionBase):
         pbp_set = calc_vals["pbp_set"]
         bbp_set = calc_vals["bbp_set"]
 
+        return len(pci_set) == len(pbp_set) == len(
+            bbp_set
+        ) == 1 and self.precision_comparison(pbp_set[0] / bbp_set[0], pci_set[0])
+
+    def is_tolerance_fail(self, context, calc_vals=None, data=None):
+        pci_set = calc_vals["pci_set"]
+        pbp_set = calc_vals["pbp_set"]
+        bbp_set = calc_vals["bbp_set"]
+
         return len(pci_set) == len(pbp_set) == len(bbp_set) == 1 and std_equal(
-            pbp_set[0] / bbp_set[0], pci_set[0]
+            pci_set[0], pbp_set[0] / bbp_set[0]
         )
 
     def get_fail_msg(self, context, calc_vals=None, data=None):

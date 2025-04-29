@@ -37,7 +37,7 @@ class Section5Rule12(RuleDefinitionListIndexedBase):
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             required_fields={
-                "$": ["weather"],
+                "$.ruleset_model_descriptions[*]": ["weather"],
                 "weather": ["climate_zone"],
             },
             each_rule=Section5Rule12.BuildingRule(),
@@ -48,8 +48,12 @@ class Section5Rule12(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].buildings[*]",
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
         )
+
+    def create_data(self, context, data=None):
+        rpd_b = context.BASELINE_0
+        climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
+        return {"climate_zone": climate_zone}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -153,9 +157,10 @@ class Section5Rule12(RuleDefinitionListIndexedBase):
                 return target_f_factor_res != target_f_factor_nonres
 
             def rule_check(self, context, calc_vals=None, data=None):
+                target_f_factor = calc_vals["target_f_factor"]
+                slab_on_grade_floor_f_factor = calc_vals["slab_on_grade_floor_f_factor"]
                 return self.precision_comparison["floor_f_factor_b"](
-                    calc_vals["target_f_factor"],
-                    calc_vals["slab_on_grade_floor_f_factor"],
+                    slab_on_grade_floor_f_factor, target_f_factor
                 )
 
             def is_tolerance_fail(self, context, calc_vals=None, data=None):
