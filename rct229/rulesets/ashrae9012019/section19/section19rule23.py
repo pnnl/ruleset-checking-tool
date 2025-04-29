@@ -192,7 +192,7 @@ class Section19Rule23(RuleDefinitionListIndexedBase):
 
                         lighting_space_type_b = space_b.get("lighting_space_type")
                         ventilation_space_type_b = space_b.get("ventilation_space_type")
-                        is_space_type_defined_b = (
+                        is_space_type_defined_b = bool(
                             lighting_space_type_b or ventilation_space_type_b
                         )
                         is_dwelling_unit_b = (
