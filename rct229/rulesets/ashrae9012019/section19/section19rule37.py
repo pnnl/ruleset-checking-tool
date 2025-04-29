@@ -33,19 +33,19 @@ class Section19Rule37(PartialRuleDefinition):
 
         return {
             "heating_design_day_type_b": weather_b.get(
-                "heating_dry_bulb_temp_design_day_type"
+                "heating_dry_bulb_design_day_type"
             ),
             "cooling_design_day_type_b": weather_b.get(
-                "cooling_dry_bulb_temp_design_day_type"
+                "cooling_dry_bulb_esign_day_type"
             ),
             "evaporation_wet_bulb_design_day_type_b": weather_b.get(
                 "evaporation_wet_bulb_design_day_type"
             ),
             "heating_design_day_type_p": weather_p.get(
-                "heating_dry_bulb_temp_design_day_type"
+                "heating_dry_bulb_design_day_type"
             ),
             "cooling_design_day_type_p": weather_p.get(
-                "cooling_dry_bulb_temp_design_day_type"
+                "cooling_dry_bulb_design_day_type"
             ),
             "evaporation_wet_bulb_design_day_type_p": weather_p.get(
                 "evaporation_wet_bulb_design_day_type"
