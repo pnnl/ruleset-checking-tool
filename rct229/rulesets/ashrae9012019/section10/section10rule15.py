@@ -41,16 +41,12 @@ class Section10Rule15(RuleDefinitionListIndexedBase):
 
         hvac_zone_list_w_area_dict_p = get_hvac_zone_list_w_area_dict(rmd_p)
 
-        hvac_has_humidication_p = False
         zones_have_humidification_list_p = []
         for hvac_p in find_all(
             "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
             rmd_p,
         ):
             if hvac_p.get("humidification_type") not in (None, HUMIDIFICATION.NONE):
-                hvac_has_humidication_p = True
-
-            if hvac_has_humidication_p:
                 zone_list_p = hvac_zone_list_w_area_dict_p[hvac_p["id"]]["zone_list"]
                 zones_have_humidification_list_p = (
                     zones_have_humidification_list_p.extend(zone_list_p)
