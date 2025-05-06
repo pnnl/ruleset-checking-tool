@@ -21,7 +21,10 @@
         - if the lighting_space_type is NULL, set the lighting_space_type equal to the building_segment_lighting_type: `if lighting_space_type == NULL: lighting_space_type = building_segment_lighting_type`
         - if the lighting space type is one of the retail space types, look at each InteriorLighting object in the model: `if lighting_space_type == "SALES AREA":`
             - look at each interior lighting: `for interior_lighting in space.interior_lighting:`
-     
+                - if the interior lighting purpose_type is RETAIL_DISPLAY, set applicable to true - we don't go to the rule logic for each interior lighting because the evaluation context is at the space level: `if interior_lighting.purpose_type == "RETAIL_DISPLAY": applicable = true`
+        - if the boolean applicable is true, continue to rule logic: `if applicable: CONTINUE TO RULE LOGIC`
+        - otherwise, rule is not applicable: `else: RULE NOT APPLICABLE`
+
           
             ## Rule Logic:  
                 - 9.5.2.2(b) gives a formula (750 W + (Retail Area 1 × 0.40 W/ft2) + (Retail Area 2 × 0.40 W/ft2) + (Retail Area 3 × 0.70 W/ft2) + (Retail Area 4 × 1.00 W/ft2)) for retail display lighting that is based on four area categories.  We don't have access to these four area categories in the schema, so we will calculate the maximum and minimum values possible based on this function.  The maximum is calculated based on 100% of the space floor area being type 4: `maximum_retail_display_W = 750 + space.floor_area * (1)`
@@ -35,9 +38,9 @@
                     - if the interior lighting purpose_type is RETAIL_DISPLAY, add the lighting wattage to baseline_interior_display_W: `if interior_lighting.purpose_type == "RETAIL_DISPLAY": baseline_interior_display_W = baseline_interior_display_W + interior_lighting.power_per_area * space_b.floor_area`
 
                 **Rule Assertion:**
-                - Case 1: If the proposed_interior_display_W is less than the minimum AND the baseline_interior_display_W is equal to the proposed, then PASS: `if((proposed_interior_display_W < minimum_retail_display_W) and (baseline_interior_display_W == proposed_interior_display_W)): PASS`
-                - Case 2: Otherwise, if the baseline_interior_display_W is greater than the maximum of proposed_interior_display_W and maximum_retail_display_W, then FAIL: `elif baseline_interior_display_W > max(proposed_interior_display_W,maximum_retail_display_W): FAIL`
-                - Case 3: All other cases UNDETERMINED and provide note: `else: UNDETERMINED; note = "The RCT could not determine whether the baseline retail display lighting power is correctly the minimum of the proposed retail display lighting power and the result of the formula given by ASRAE 90.1 9.5.2.2(b)."`
+                - Case 1: If the proposed_interior_display_W is less than or equal to the minimum AND the baseline_interior_display_W is equal to the proposed, then PASS: `if((proposed_interior_display_W <= minimum_retail_display_W) and (baseline_interior_display_W == proposed_interior_display_W)): PASS`
+                - Case 2: Otherwise, if the baseline_interior_display_W is greater than the minimum of proposed_interior_display_W and maximum_retail_display_W, then FAIL: `elif baseline_interior_display_W > min(proposed_interior_display_W,maximum_retail_display_W): FAIL`
+                - Case 3: All other cases UNDETERMINED and provide note: `else: UNDETERMINED; note = "It could not be determined whether the baseline retail display lighting power is modeled correctly as the minimum of the proposed retail display lighting power and the allowance calculated according to the formulas in ASHRAE 90.1 Section 9.5.2.2(b)."`
 
 
 **Notes:**
