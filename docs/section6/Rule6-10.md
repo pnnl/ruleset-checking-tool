@@ -21,9 +21,10 @@
         - if the lighting_space_type is NULL, set the lighting_space_type equal to the building_segment_lighting_type: `if lighting_space_type == NULL: lighting_space_type = building_segment_lighting_type`
         - if the lighting space type is one of the retail space types, look at each InteriorLighting object in the model: `if lighting_space_type == "SALES AREA":`
             - look at each interior lighting: `for interior_lighting in space.interior_lighting:`
-                - if the interior lighting purpose_type is RETAIL_DISPLAY, set applicable to true - we don't go to the rule logic for each interior lighting because the evaluation context is at the space level: `if interior_lighting.purpose_type == "RETAIL_DISPLAY": applicable = true`
-        - if the boolean applicable is true, continue to rule logic: `if applicable: CONTINUE TO RULE LOGIC`
-
+     
+          
+            ## Rule Logic:  
+                - 9.5.2.2(b) gives a formula (750 W + (Retail Area 1 × 0.40 W/ft2) + (Retail Area 2 × 0.40 W/ft2) + (Retail Area 3 × 0.70 W/ft2) + (Retail Area 4 × 1.00 W/ft2)) for retail display lighting that is based on four area categories.  We don't have access to these four area categories in the schema, so we will calculate the maximum and minimum values possible based on this function.  The maximum is calculated based on 100% of the space floor area being type 4: `maximum_retail_display_W = 750 + space.floor_area * (1)`
                 - the minimum is calculated based on none of the floor area being a retail area: `minimum_retail_display_W = 750`
                 - now calculate the total proposed interior display lighting power for this space - initialize at 0: `proposed_interior_display_W = 0`
                 - look at each lighting in the space: `for interior_lighting in space.interior_lighting:`
