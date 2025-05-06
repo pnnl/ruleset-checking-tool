@@ -6,6 +6,7 @@
 **Rule Description:** Automatic fenestration shading devices shall not be modeled in the Baseline.  
 **Rule Assertion:** Baseline RMD = expected value  
 **Appendix G Section:** Section G3.1-5(f) Building Envelope Modeling Requirements for the Baseline building  
+**Schema Version** 0.1.3
 
 **Manual Check:** None  
 **Evaluation Context:** Each Building  
