@@ -14,11 +14,9 @@
 
 ## Applicability Check:  
 - look at each building segment: `for building_segment in P_RMD.building_segments:`
-    - get the building segment lighting type: `building_segment_lighting_type = building_segment.lighting_building_area_type`
     - look at each space: `for space in building_segment...spaces:`
         - set a boolean called applicable to false: `applicable = false`
         - set lighting_space_type equal to the space.lighting_space_type: `lighting_space_type = space.lighting_space_type`
-        - if the lighting_space_type is NULL, set the lighting_space_type equal to the building_segment_lighting_type: `if lighting_space_type == NULL: lighting_space_type = building_segment_lighting_type`
         - if the lighting space type is a Sales Area, look at each InteriorLighting object in the model: `if lighting_space_type == "SALES AREA":`
             - look at each interior lighting: `for interior_lighting in space.interior_lighting:`
                 - if the interior lighting purpose_type is RETAIL_DISPLAY, set applicable to true - we don't go to the rule logic for each interior lighting because the evaluation context is at the space level: `if interior_lighting.purpose_type == "RETAIL_DISPLAY": applicable = true`
