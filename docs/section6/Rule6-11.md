@@ -33,7 +33,9 @@
                 **Rule Assertion:**
                 - Case 1: If the proposed_interior_display_W is less than the minimum, then PASS: `if(proposed_interior_display_W < minimum_retail_display_W): PASS`
                 - Case 2: Otherwise, if the proposed_interior_display_W is greater than maximum_retail_display_W, then FAIL: `elif proposed_interior_display_W > maximum_retail_display_W: FAIL`
-                - Case 3: All other cases UNDETERMINED and provide note: `else: UNDETERMINED; note = "The RCT could not determine whether the proposed retail display lighting power is correctly modeled based on the result of the formula given by ASRAE 90.1 9.5.2.2(b)."`
+                - Case 3: All other cases UNDETERMINED and provide note: `else: UNDETERMINED; note = "It could not be determined whether the proposed retail display lighting power is less than or equal to the allowance calculated according to the formulas in ASHRAE 90.1 Section 9.5.2.2(b)."
+
+`
 
 
 **Notes:**
