@@ -3,7 +3,7 @@ from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedB
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_zone_list_w_area_dict import (
-    get_hvac_zone_list_w_area_dict,
+    get_hvac_zone_list_w_area_by_rmd_dict,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_list_hvac_systems_associated_with_zone import (
     get_list_hvac_systems_associated_with_zone,
@@ -11,7 +11,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_list_hvac_systems_assoc
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.utility_functions import find_exactly_one_zone
+from rct229.utils.utility_functions import find_exactly_one_hvac_system
 
 HUMIDIFICATION = SchemaEnums.schema_enums["HumidificationOptions"]
 
@@ -39,7 +39,7 @@ class Section10Rule15(RuleDefinitionListIndexedBase):
         rmd_b = context.BASELINE_0
         rmd_p = context.PROPOSED
 
-        hvac_zone_list_w_area_dict_p = get_hvac_zone_list_w_area_dict(rmd_p)
+        hvac_zone_list_w_area_dict_p = get_hvac_zone_list_w_area_by_rmd_dict(rmd_p)
 
         zones_have_humidification_list_p = []
         for hvac_p in find_all(
@@ -48,9 +48,7 @@ class Section10Rule15(RuleDefinitionListIndexedBase):
         ):
             if hvac_p.get("humidification_type") not in (None, HUMIDIFICATION.NONE):
                 zone_list_p = hvac_zone_list_w_area_dict_p[hvac_p["id"]]["zone_list"]
-                zones_have_humidification_list_p = (
-                    zones_have_humidification_list_p.extend(zone_list_p)
-                )
+                zones_have_humidification_list_p.extend(zone_list_p)
         zones_have_humidification_list_p = list(set(zones_have_humidification_list_p))
 
         has_humidification_b = {}
@@ -64,9 +62,9 @@ class Section10Rule15(RuleDefinitionListIndexedBase):
                 "There must be one system serving each zone in the baseline RMD.",
             )
 
-            has_humidification_b[zone_id_b] = find_exactly_one_zone(
-                rmd_b, zone_id_b
-            ) not in (None, HUMIDIFICATION.NONE)
+            has_humidification_b[zone_id_b] = find_exactly_one_hvac_system(
+                rmd_b, hvac_list_b[0]
+            ).get("humidification_type") not in (None, HUMIDIFICATION.NONE)
             has_humidification_p[zone_id_b] = (
                 zone_b["id"] in zones_have_humidification_list_p
             )
@@ -88,37 +86,38 @@ class Section10Rule15(RuleDefinitionListIndexedBase):
             zone_b = context.BASELINE_0
             zone_id_b = zone_b["id"]
 
-            hvac_system_type_b = data["hvac_system_type_b"][zone_id_b]
+            has_humidification_b = data["has_humidification_b"][zone_id_b]
             has_humidification_p = data["has_humidification_p"][zone_id_b]
 
-            return not (hvac_system_type_b or has_humidification_p)
+            # if one or two of the variables are True, the rule is applicable
+            return has_humidification_b or has_humidification_p
 
         def get_calc_vals(self, context, data=None):
             zone_b = context.BASELINE_0
             zone_id_b = zone_b["id"]
 
-            hvac_system_type_b = data["hvac_system_type_b"][zone_id_b]
+            has_humidification_b = data["has_humidification_b"][zone_id_b]
             has_humidification_p = data["has_humidification_p"][zone_id_b]
 
             return {
-                "hvac_system_type_b": hvac_system_type_b,
+                "has_humidification_b": has_humidification_b,
                 "has_humidification_p": has_humidification_p,
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
-            hvac_system_type_b = calc_vals["hvac_system_type_b"]
+            has_humidification_b = calc_vals["has_humidification_b"]
             has_humidification_p = calc_vals["has_humidification_p"]
 
-            return hvac_system_type_b and has_humidification_p
+            return has_humidification_b and has_humidification_p
 
         def get_fail_msg(self, context, calc_vals=None, data=None):
-            hvac_system_type_b = calc_vals["hvac_system_type_b"]
+            has_humidification_b = calc_vals["has_humidification_b"]
             has_humidification_p = calc_vals["has_humidification_p"]
 
             FAIL_MSG = ""
-            if hvac_system_type_b and not has_humidification_p:
+            if has_humidification_b and not has_humidification_p:
                 FAIL_MSG = "The baseline was modeled with humidification when humidification was not modeled in the proposed design model."
-            elif not hvac_system_type_b and has_humidification_p:
+            elif not has_humidification_b and has_humidification_p:
                 FAIL_MSG = "The baseline was NOT modeled with humidification when humidification was modeled in the proposed design model."
 
             return FAIL_MSG
