@@ -70,11 +70,12 @@ def check_associated_list_length(rpd: dict) -> list[str]:
                     continue
 
                 # Ensure when both are lists they have the same length
-                val_1, val_2 = obj[key_1], obj[key_2]
-                if val_1 and val_2 and len(val_1) != len(val_2):
-                    mismatch_errors.append(
-                        f"'{obj['id']}' lists at '{key_1}' and '{key_2}' are not the same length."
-                    )
+                if isinstance(val_1, list) and isinstance(val_2, list):
+                    val_1, val_2 = obj[key_1], obj[key_2]
+                    if val_1 and val_2 and len(val_1) != len(val_2):
+                        mismatch_errors.append(
+                            f"'{obj['id']}' lists at '{key_1}' and '{key_2}' are not the same length."
+                        )
 
     return mismatch_errors
 
