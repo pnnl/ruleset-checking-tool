@@ -26,9 +26,12 @@ SCHEMA_RESNET_ENUM_PATH = os.path.join(file_dir, SCHEMA_RESNET_ENUM_KEY)
 SCHEMA_OUTPUT_PATH = os.path.join(file_dir, SCHEMA_OUTPUT_KEY)
 
 
-def check_associated_list_length(rpd: dict) -> list[str]:
+def check_associated_data_elements(rpd: dict) -> list[str]:
     """
-    Check the length of the lists associated with the given jsonpaths.
+    Check validity of separate data elements that are associated with each other.
+    e.g. if SWH use is populated, SWH use_units must also be populated.
+    e.g. if efficiency_metric_values is populated, it must have the same length as efficiency_metric_types
+
     Parameters
     ----------
     rpd
@@ -493,7 +496,7 @@ def non_schema_validate_rpd(rmd_obj):
             f"Cannot find service water heating {mismatch_service_water_heating_errors} in the ServiceWaterHeatingDistributionSystems data group."
         )
 
-    mismatch_associated_data_elements_errors = check_associated_list_length(rmd_obj)
+    mismatch_associated_data_elements_errors = check_associated_data_elements(rmd_obj)
     passed = passed and not mismatch_associated_data_elements_errors
     if mismatch_associated_data_elements_errors:
         error.extend(mismatch_associated_data_elements_errors)
