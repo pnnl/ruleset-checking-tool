@@ -8,7 +8,7 @@ from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_2_fns import (
     RatingCondition,
     table_g3_5_2_lookup,
 )
-from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_4_fns import table_g3_5_4_lookup
+from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_4_fns import table_g3_5_4_lookup, EquipmentType
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
@@ -40,6 +40,11 @@ APPLICABLE_SYS_TYPES = [
 ]
 
 CAPACITY_LOW_THRESHOLD = 65000
+TYPE_TO_ENUM_STRING_MAP = {
+    HVAC_SYS.SYS_1: EquipmentType.PTAC_COOLING,
+    HVAC_SYS.SYS_1B: EquipmentType.PTAC_COOLING,
+    HVAC_SYS.SYS_2: EquipmentType.PTHP_COOLING,
+}
 
 
 class Section10Rule7(RuleDefinitionListIndexedBase):
@@ -183,7 +188,7 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
                     is_zone_agg_factor_undefined_and_needed = True
 
             if hvac_system_type_b in [HVAC_SYS.SYS_1, HVAC_SYS.SYS_1B, HVAC_SYS.SYS_2]:
-                expected_baseline_eff_data = table_g3_5_4_lookup(hvac_system_type_b)
+                expected_baseline_eff_data = table_g3_5_4_lookup(TYPE_TO_ENUM_STRING_MAP[hvac_system_type_b])
                 most_conservative_eff_b = expected_baseline_eff_data[
                     "minimum_efficiency"
                 ]
