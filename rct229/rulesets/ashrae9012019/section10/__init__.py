@@ -4,6 +4,7 @@ import importlib
 __all__ = [
     "section10rule7",
     "section10rule14",
+    "section10rule15",
 ]
 
 
