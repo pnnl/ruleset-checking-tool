@@ -37,7 +37,8 @@
                                                 "floor_name": "Floor1",
                                                 "spaces": [
                                                     {
-                                                        "id": "Space 1"
+                                                        "id": "Space 1",
+                                                        "floor_area": 929.0303999999999
                                                     }
                                                 ],
                                                 "terminals": [
@@ -106,7 +107,8 @@
                                                 "floor_name": "Floor1",
                                                 "spaces": [
                                                     {
-                                                        "id": "Space 1"
+                                                        "id": "Space 1",
+                                                        "floor_area": 929.0303999999999
                                                     }
                                                 ],
                                                 "terminals": [
@@ -196,7 +198,8 @@
                                                 "floor_name": "Floor1",
                                                 "spaces": [
                                                     {
-                                                        "id": "Space 1"
+                                                        "id": "Space 1",
+                                                        "floor_area": 929.0303999999999
                                                     }
                                                 ],
                                                 "terminals": [
@@ -264,7 +267,8 @@
                                                 "floor_name": "Floor1",
                                                 "spaces": [
                                                     {
-                                                        "id": "Space 1"
+                                                        "id": "Space 1",
+                                                        "floor_area": 929.0303999999999
                                                     }
                                                 ],
                                                 "terminals": [
@@ -354,7 +358,8 @@
                                                 "floor_name": "Floor1",
                                                 "spaces": [
                                                     {
-                                                        "id": "Space 1"
+                                                        "id": "Space 1",
+                                                        "floor_area": 929.0303999999999
                                                     }
                                                 ],
                                                 "terminals": [
@@ -423,7 +428,8 @@
                                                 "floor_name": "Floor1",
                                                 "spaces": [
                                                     {
-                                                        "id": "Space 1"
+                                                        "id": "Space 1",
+                                                        "floor_area": 929.0303999999999
                                                     }
                                                 ],
                                                 "terminals": [
@@ -511,9 +517,46 @@
                                                 "floor_name": "Floor1",
                                                 "spaces": [
                                                     {
-                                                        "id": "Space 1"
+                                                        "id": "Space 1",
+                                                        "floor_area": 929.0303999999999
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "System_4_PSZ_HP - Terminal for Thermal Zone 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP"
                                                     }
                                                 ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System_4_PSZ_HP",
+                                                "cooling_system": {
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
+                                                },
+                                                "heating_system": {
+                                                    "id": "HP Coil 1",
+                                                    "type": "HEAT_PUMP"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "System_4_PSZ_HP Supply Fan"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "System_4_PSZ_HP Return Fan"
+                                                        }
+                                                    ]
+                                                },
+                                                "humidification_type": "NONE"
                                             }
                                         ]
                                     }
@@ -544,9 +587,46 @@
                                                 "floor_name": "Floor1",
                                                 "spaces": [
                                                     {
-                                                        "id": "Space 1"
+                                                        "id": "Space 1",
+                                                        "floor_area": 929.0303999999999
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "System_4_PSZ_HP - Terminal for Thermal Zone 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP"
                                                     }
                                                 ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System_4_PSZ_HP",
+                                                "cooling_system": {
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
+                                                },
+                                                "heating_system": {
+                                                    "id": "HP Coil 1",
+                                                    "type": "HEAT_PUMP"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "System_4_PSZ_HP Supply Fan"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "System_4_PSZ_HP Return Fan"
+                                                        }
+                                                    ]
+                                                },
+                                                "humidification_type": "NONE"
                                             }
                                         ]
                                     }
