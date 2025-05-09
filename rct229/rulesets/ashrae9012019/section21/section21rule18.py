@@ -25,15 +25,15 @@ APPLICABLE_SYS_TYPES = [
 FUEL_SOURCE = SchemaEnums.schema_enums["EnergySourceOptions"]
 
 
-class Section21Rule18(RuleDefinitionListIndexedBase):
+class PRM9012019Rule82a90(RuleDefinitionListIndexedBase):
     """Rule 18 of ASHRAE 90.1-2019 Appendix G Section 21 (Hot water loop)"""
 
     def __init__(self):
-        super(Section21Rule18, self).__init__(
+        super(PRM9012019Rule82a90, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section21Rule18.BoilerRule(),
+            each_rule=PRM9012019Rule82a90.BoilerRule(),
             index_rmd=BASELINE_0,
             id="21-18",
             description="For baseline building, fossil fuel systems shall be modeled using natural gas as their fuel source. Exception: For fossil fuel systems where natural gas is not available for the proposed building site as determined by the rating authority, the baseline HVAC systems shall be modeled using propane as their fuel.",
@@ -62,7 +62,7 @@ class Section21Rule18(RuleDefinitionListIndexedBase):
 
     class BoilerRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section21Rule18.BoilerRule, self).__init__(
+            super(PRM9012019Rule82a90.BoilerRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

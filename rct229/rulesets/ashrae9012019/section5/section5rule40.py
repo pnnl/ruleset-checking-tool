@@ -16,19 +16,20 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_ca
 )
 from rct229.utils.jsonpath_utils import find_one
 from rct229.schema.schema_enums import SchemaEnums
+from rct229.utils.std_comparisons import std_equal
 
 EXTERIOR = SchemaEnums.schema_enums["SurfaceAdjacencyOptions"].EXTERIOR
 
 
-class Section5Rule40(RuleDefinitionListIndexedBase):
+class PRM9012019Rule33l08(RuleDefinitionListIndexedBase):
     """Rule 40 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule40, self).__init__(
+        super(PRM9012019Rule33l08, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section5Rule40.BuildingRule(),
+            each_rule=PRM9012019Rule33l08.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-40",
             description="Opaque roof surfaces that are not regulated (not part of opaque building envelope) must be "
@@ -47,11 +48,11 @@ class Section5Rule40(RuleDefinitionListIndexedBase):
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section5Rule40.BuildingRule, self).__init__(
+            super(PRM9012019Rule33l08.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
-                each_rule=Section5Rule40.BuildingRule.RoofRule(),
+                each_rule=PRM9012019Rule33l08.BuildingRule.RoofRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
@@ -75,7 +76,7 @@ class Section5Rule40(RuleDefinitionListIndexedBase):
 
         class RoofRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section5Rule40.BuildingRule.RoofRule, self).__init__(
+                super(PRM9012019Rule33l08.BuildingRule.RoofRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
@@ -119,7 +120,7 @@ class Section5Rule40(RuleDefinitionListIndexedBase):
                     "absorptance_thermal_exterior_p"
                 ]
                 return any(
-                    absorptance_property == None
+                    absorptance_property is None
                     for absorptance_property in [
                         absorptance_solar_exterior_b,
                         absorptance_solar_exterior_p,
@@ -140,5 +141,20 @@ class Section5Rule40(RuleDefinitionListIndexedBase):
                 return self.precision_comparison["absorptance_solar_exterior_b"](
                     absorptance_solar_exterior_b, absorptance_solar_exterior_p
                 ) and self.precision_comparison["absorptance_thermal_exterior_b"](
+                    absorptance_thermal_exterior_b, absorptance_thermal_exterior_p
+                )
+
+            def is_tolerance_fail(self, context, calc_vals=None, data=None):
+                absorptance_solar_exterior_b = calc_vals["absorptance_solar_exterior_b"]
+                absorptance_solar_exterior_p = calc_vals["absorptance_solar_exterior_p"]
+                absorptance_thermal_exterior_b = calc_vals[
+                    "absorptance_thermal_exterior_b"
+                ]
+                absorptance_thermal_exterior_p = calc_vals[
+                    "absorptance_thermal_exterior_p"
+                ]
+                return std_equal(
+                    absorptance_solar_exterior_b, absorptance_solar_exterior_p
+                ) and std_equal(
                     absorptance_thermal_exterior_b, absorptance_thermal_exterior_p
                 )

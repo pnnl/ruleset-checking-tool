@@ -5,15 +5,15 @@ from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.utils.jsonpath_utils import find_all
 
 
-class Section6Rule6(RuleDefinitionListIndexedBase):
+class PRM9012019Rule02c29(RuleDefinitionListIndexedBase):
     """Rule 6 of ASHRAE 90.1-2019 Appendix G Section 6 (Lighting)"""
 
     def __init__(self):
-        super(Section6Rule6, self).__init__(
+        super(PRM9012019Rule02c29, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section6Rule6.BuildingRule(),
+            each_rule=PRM9012019Rule02c29.BuildingRule(),
             index_rmd=BASELINE_0,
             id="6-6",
             description="Baseline building is not modeled with daylighting control",
@@ -25,7 +25,7 @@ class Section6Rule6(RuleDefinitionListIndexedBase):
 
     class BuildingRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section6Rule6.BuildingRule, self).__init__(
+            super(PRM9012019Rule02c29.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

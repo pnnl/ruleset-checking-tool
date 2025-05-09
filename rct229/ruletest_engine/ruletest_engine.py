@@ -250,7 +250,8 @@ def run_section_tests(
     SchemaEnums.update_schema_enum()
     available_rule_definitions = rulesets.__getrules__()
     available_rule_definitions_dict = {
-        rule_class[0]: rule_class[1] for rule_class in available_rule_definitions
+        rule_class[1].__module__.split(".")[-1]: rule_class[1]
+        for rule_class in available_rule_definitions
     }
 
     # Cycle through tests in test JSON and run each individually
@@ -268,7 +269,7 @@ def run_section_tests(
 
         # Construction function name for Section and rule
         # section_name = f"section{section}rule{rule}"
-        function_name = f"Section{section}Rule{rule}"
+        function_name = f"section{section}rule{rule}"
 
         test_result_dict["log"] = []  # Initialize log for this test result
         test_result_dict[

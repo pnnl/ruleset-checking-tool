@@ -19,6 +19,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_fan_object_electric_pow
 )
 from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_
+from rct229.utils.compare_standard_val import std_le
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO, CalcQ
 
@@ -30,15 +31,15 @@ APPLICABLE_SYS_TYPES = [
 FAN_POWER_AIRFLOW_LIMIT = 0.3 * ureg("W/cfm")
 
 
-class Section19Rule17(RuleDefinitionListIndexedBase):
+class PRM9012019Rule84b07(RuleDefinitionListIndexedBase):
     """Rule 17 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
 
     def __init__(self):
-        super(Section19Rule17, self).__init__(
+        super(PRM9012019Rule84b07, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section19Rule17.HVACRule(),
+            each_rule=PRM9012019Rule84b07.HVACRule(),
             index_rmd=BASELINE_0,
             id="19-17",
             description="For baseline system 1 and 2, the total fan electrical power (Pfan) for supply, return, exhaust, and relief shall be = CFMs × 0.3, where, CFMs = the baseline system maximum design supply fan airflow rate, cfm.",
@@ -88,7 +89,7 @@ class Section19Rule17(RuleDefinitionListIndexedBase):
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section19Rule17.HVACRule, self).__init__(
+            super(PRM9012019Rule84b07.HVACRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
@@ -157,3 +158,8 @@ class Section19Rule17(RuleDefinitionListIndexedBase):
                     FAN_POWER_AIRFLOW_LIMIT,
                 )
             )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            fan_power_airflow = calc_vals["fan_power_airflow"]
+
+            return std_le(val=fan_power_airflow, std_val=FAN_POWER_AIRFLOW_LIMIT)

@@ -22,15 +22,15 @@ DWELLING_UNIT = SchemaEnums.schema_enums[
 DWELLING_UNIT_MIN_LIGHTING_POWER_PER_AREA = 0.6 * ureg("W/ft2")
 
 
-class Section6Rule2(RuleDefinitionListIndexedBase):
+class PRM9012019Rule37d98(RuleDefinitionListIndexedBase):
     """Rule 2 of ASHRAE 90.1-2019 Appendix G Section 6 (Lighting)"""
 
     def __init__(self):
-        super(Section6Rule2, self).__init__(
+        super(PRM9012019Rule37d98, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=True, BASELINE_0=False, PROPOSED=True
             ),
-            each_rule=Section6Rule2.SpaceRule(),
+            each_rule=PRM9012019Rule37d98.SpaceRule(),
             index_rmd=PROPOSED,
             id="6-2",
             description="Spaces in proposed building with hardwired lighting, including Hotel/Motel Guest Rooms, Dormitory Living Quarters, Interior Lighting Power >= Table 9.6.1; For Dwelling Units, Interior Lighting Power >= 0.6W/sq.ft.",
@@ -54,7 +54,7 @@ class Section6Rule2(RuleDefinitionListIndexedBase):
 
     class SpaceRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section6Rule2.SpaceRule, self).__init__(
+            super(PRM9012019Rule37d98.SpaceRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=True, BASELINE_0=False, PROPOSED=True
                 ),

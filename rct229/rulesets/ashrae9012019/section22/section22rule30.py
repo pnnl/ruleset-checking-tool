@@ -18,15 +18,15 @@ APPLICABLE_SYS_TYPES = [HVAC_SYS.SYS_11_1, HVAC_SYS.SYS_11_2, HVAC_SYS.SYS_11_1B
 REQUIRED_PUMP_POWER = 22 * ureg("W/gpm")
 
 
-class Section22Rule30(RuleDefinitionListIndexedBase):
+class PRM9012019Rule79u84(RuleDefinitionListIndexedBase):
     """Rule 30 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
-        super(Section22Rule30, self).__init__(
+        super(PRM9012019Rule79u84, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section22Rule30.CondensingFluidLoopRule(),
+            each_rule=PRM9012019Rule79u84.CondensingFluidLoopRule(),
             index_rmd=BASELINE_0,
             id="22-30",
             description="Baseline chilled water loops that do not use purchased chilled water and do serve computer rooms (i.e., baseline system type 11) shall have a condenser water pump power of 22 W/gpm at design conditions.",
@@ -69,7 +69,7 @@ class Section22Rule30(RuleDefinitionListIndexedBase):
 
     class CondensingFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section22Rule30.CondensingFluidLoopRule, self).__init__(
+            super(PRM9012019Rule79u84.CondensingFluidLoopRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

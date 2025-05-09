@@ -7,15 +7,15 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.check_purchased_chw_hhw_sta
 )
 
 
-class Section21Rule1(RuleDefinitionListIndexedBase):
+class PRM9012019Rule34f57(RuleDefinitionListIndexedBase):
     """Rule 1 of ASHRAE 90.1-2019 Appendix G Section 21 (HVAC - Water Side)"""
 
     def __init__(self):
-        super(Section21Rule1, self).__init__(
+        super(PRM9012019Rule34f57, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=False, PROPOSED=True
             ),
-            each_rule=Section21Rule1.RulesetModelInstanceRule(),
+            each_rule=PRM9012019Rule34f57.RulesetModelInstanceRule(),
             index_rmd=PROPOSED,
             id="21-1",
             description="For systems using purchased hot water or steam, the heating source shall be "
@@ -32,7 +32,7 @@ class Section21Rule1(RuleDefinitionListIndexedBase):
 
     class RulesetModelInstanceRule(PartialRuleDefinition):
         def __init__(self):
-            super(Section21Rule1.RulesetModelInstanceRule, self,).__init__(
+            super(PRM9012019Rule34f57.RulesetModelInstanceRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=False, PROPOSED=True
                 ),

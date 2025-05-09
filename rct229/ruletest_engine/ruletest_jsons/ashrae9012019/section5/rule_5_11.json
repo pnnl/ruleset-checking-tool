@@ -8,7 +8,7 @@
         "standard": {
             "rule_id": "5-11",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b) ",
-            "rule_description": "Baseline slab-on-grade assemblies must conform with assemblies detailed in Appendix A ( unheated slabs from tables (A6).)",
+            "rule_description": "Baseline slab-on-grade assemblies must conform with assemblies detailed in Appendix A (unheated slabs from tables (A6))",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -91,7 +91,7 @@
         "standard": {
             "rule_id": "5-11",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b) ",
-            "rule_description": "Baseline slab-on-grade assemblies must conform with assemblies detailed in Appendix A ( unheated slabs from tables (A6).)",
+            "rule_description": "Baseline slab-on-grade assemblies must conform with assemblies detailed in Appendix A (unheated slabs from tables (A6))",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",

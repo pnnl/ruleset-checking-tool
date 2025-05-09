@@ -18,15 +18,15 @@ FAIL_MSG = "Lighting exists or is submitted with design documents. Lighting powe
 MANUAL_CHECK_REQUIRED_MSG = "Lighting is not yet designed, or lighting is as-designed or as-existing but matches Table 9.5.1. Lighting power density in P_RMD does not match U_RMD."
 
 
-class Section6Rule3(RuleDefinitionListIndexedBase):
+class PRM9012019Rule73a47(RuleDefinitionListIndexedBase):
     """Rule 3 of ASHRAE 90.1-2019 Appendix G Section 6 (Lighting)"""
 
     def __init__(self):
-        super(Section6Rule3, self).__init__(
+        super(PRM9012019Rule73a47, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=True, BASELINE_0=False, PROPOSED=True
             ),
-            each_rule=Section6Rule3.BuildingSegmentRule(),
+            each_rule=PRM9012019Rule73a47.BuildingSegmentRule(),
             index_rmd=PROPOSED,
             id="6-3",
             description="Where a complete lighting system exists, the actual lighting power for each building_segment shall be used in the model. Where a lighting system has been designed and submitted with design documents, lighting power shall be determined in accordance with Sections 9.1.3 and 9.1.4. Where lighting neither exists nor is submitted with design documents, lighting shall comply with but not exceed the requirements of Section 9. Lighting power shall be determined in accordance with the Building Area Method (Section 9.5.1).",
@@ -38,11 +38,11 @@ class Section6Rule3(RuleDefinitionListIndexedBase):
 
     class BuildingSegmentRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section6Rule3.BuildingSegmentRule, self).__init__(
+            super(PRM9012019Rule73a47.BuildingSegmentRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=True, BASELINE_0=False, PROPOSED=True
                 ),
-                each_rule=Section6Rule3.BuildingSegmentRule.SpaceRule(),
+                each_rule=PRM9012019Rule73a47.BuildingSegmentRule.SpaceRule(),
                 index_rmd=PROPOSED,
                 list_path="zones[*].spaces[*]",
             )
@@ -57,7 +57,7 @@ class Section6Rule3(RuleDefinitionListIndexedBase):
 
         class SpaceRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section6Rule3.BuildingSegmentRule.SpaceRule, self,).__init__(
+                super(PRM9012019Rule73a47.BuildingSegmentRule.SpaceRule, self).__init__(
                     fail_msg=FAIL_MSG,
                     manual_check_required_msg=MANUAL_CHECK_REQUIRED_MSG,
                     rmds_used=produce_ruleset_model_description(
@@ -98,12 +98,21 @@ class Section6Rule3(RuleDefinitionListIndexedBase):
                 total_space_lpd_u = calc_vals["total_space_lpd_u"]
                 total_space_lpd_p = calc_vals["total_space_lpd_p"]
                 return (
-                    not std_equal(total_space_lpd_u, total_space_lpd_p)
+                    not self.precision_comparison["total_space_lpd_p"](
+                        total_space_lpd_u, total_space_lpd_p
+                    )
                     and space_lighting_status_type_p
                     is not LightingStatusType.AS_DESIGNED_OR_AS_EXISTING
                 )
 
             def rule_check(self, context, calc_vals=None, data=None):
+                total_space_lpd_u = calc_vals["total_space_lpd_u"]
+                total_space_lpd_p = calc_vals["total_space_lpd_p"]
                 return self.precision_comparison["total_space_lpd_p"](
-                    calc_vals["total_space_lpd_p"], calc_vals["total_space_lpd_u"]
+                    total_space_lpd_u, total_space_lpd_p
                 )
+
+            def is_tolerance_fail(self, context, calc_vals=None, data=None):
+                total_space_lpd_u = calc_vals["total_space_lpd_u"]
+                total_space_lpd_p = calc_vals["total_space_lpd_p"]
+                return std_equal(total_space_lpd_u, total_space_lpd_p)

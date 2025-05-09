@@ -8,7 +8,7 @@
         "standard": {
             "rule_id": "5-39",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
-            "rule_description": "U-factor of the baseline door is based on Tables G3.4-1 through G3.4-8 for the applicable door type (swinging or non-swinging) and envelope conditioning category",
+            "rule_description": "U-factor of the baseline door is based on Tables G3.4-1 through G3.4-8 for the applicable door type (swinging or non-swinging) and envelope conditioning category.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -101,7 +101,7 @@
         "standard": {
             "rule_id": "5-39",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
-            "rule_description": "U-factor of the baseline door is based on Tables G3.4-1 through G3.4-8 for the applicable door type (swinging or non-swinging) and envelope conditioning category",
+            "rule_description": "U-factor of the baseline door is based on Tables G3.4-1 through G3.4-8 for the applicable door type (swinging or non-swinging) and envelope conditioning category.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -198,7 +198,7 @@
         "standard": {
             "rule_id": "5-39",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
-            "rule_description": "U-factor of the baseline door is based on Tables G3.4-1 through G3.4-8 for the applicable door type (swinging or non-swinging) and envelope conditioning category",
+            "rule_description": "U-factor of the baseline door is based on Tables G3.4-1 through G3.4-8 for the applicable door type (swinging or non-swinging) and envelope conditioning category.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -291,7 +291,7 @@
         "standard": {
             "rule_id": "5-39",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
-            "rule_description": "U-factor of the baseline door is based on Tables G3.4-1 through G3.4-8 for the applicable door type (swinging or non-swinging) and envelope conditioning category",
+            "rule_description": "U-factor of the baseline door is based on Tables G3.4-1 through G3.4-8 for the applicable door type (swinging or non-swinging) and envelope conditioning category.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",

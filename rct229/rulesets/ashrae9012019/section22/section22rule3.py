@@ -31,15 +31,15 @@ NOT_APPLICABLE_SYS_TYPES = [
 TEMP_RESET_TYPE = SchemaEnums.schema_enums["TemperatureResetOptions"]
 
 
-class Section22Rule3(RuleDefinitionListIndexedBase):
+class PRM9012019Rule58a51(RuleDefinitionListIndexedBase):
     """Rule 3 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
-        super(Section22Rule3, self).__init__(
+        super(PRM9012019Rule58a51, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section22Rule3.ChillerFluidLoopRule(),
+            each_rule=PRM9012019Rule58a51.ChillerFluidLoopRule(),
             index_rmd=BASELINE_0,
             id="22-3",
             description="Baseline chilled water loops that do not use purchased cooling and do not serve any computer rooms (i.e., do not serve baseline system type 11) shall have the chilled water supply temperature reset based on outdoor dry-bulb temperature.",
@@ -83,7 +83,7 @@ class Section22Rule3(RuleDefinitionListIndexedBase):
 
     class ChillerFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section22Rule3.ChillerFluidLoopRule, self).__init__(
+            super(PRM9012019Rule58a51.ChillerFluidLoopRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

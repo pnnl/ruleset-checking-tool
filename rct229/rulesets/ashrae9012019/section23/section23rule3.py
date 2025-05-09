@@ -22,15 +22,15 @@ APPLICABLE_SYS_TYPES = [
 ]
 
 
-class Section23Rule3(RuleDefinitionListIndexedBase):
+class PRM9012019Rule44u85(RuleDefinitionListIndexedBase):
     """Rule 3 of ASHRAE 90.1-2019 Appendix G Section 23 (Air-side)"""
 
     def __init__(self):
-        super(Section23Rule3, self).__init__(
+        super(PRM9012019Rule44u85, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section23Rule3.TerminalRule(),
+            each_rule=PRM9012019Rule44u85.TerminalRule(),
             index_rmd=BASELINE_0,
             id="23-3",
             description="System 5, 6, 7 and 8 minimum volume setpoint shall be 30% of zone peak airflow, minimum outdoor airflow, or rate required to comply with minium accreditation standards whichever is larger.",
@@ -81,7 +81,7 @@ class Section23Rule3(RuleDefinitionListIndexedBase):
 
     class TerminalRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section23Rule3.TerminalRule, self).__init__(
+            super(PRM9012019Rule44u85.TerminalRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

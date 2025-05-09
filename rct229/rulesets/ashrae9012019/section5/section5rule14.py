@@ -24,11 +24,11 @@ OTHER = SchemaEnums.schema_enums[
 ].OTHER
 
 
-class Section5Rule14(RuleDefinitionListIndexedBase):
+class PRM9012019Rule67j71(RuleDefinitionListIndexedBase):
     """Rule 14 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule14, self).__init__(
+        super(PRM9012019Rule67j71, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
@@ -36,7 +36,7 @@ class Section5Rule14(RuleDefinitionListIndexedBase):
                 "$.ruleset_model_descriptions[*]": ["weather"],
                 "weather": ["climate_zone"],
             },
-            each_rule=Section5Rule14.BuildingRule(),
+            each_rule=PRM9012019Rule67j71.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-14",
             description="For building area types included in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table G3.1.1-1 based on the area of gross above-grade walls that separate conditioned spaces and semi-heated spaces from the exterior.",
@@ -53,7 +53,7 @@ class Section5Rule14(RuleDefinitionListIndexedBase):
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section5Rule14.BuildingRule, self).__init__(
+            super(PRM9012019Rule67j71.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
@@ -65,7 +65,7 @@ class Section5Rule14(RuleDefinitionListIndexedBase):
                     ],
                 },
                 index_rmd=BASELINE_0,
-                each_rule=Section5Rule14.BuildingRule.AreaTypeRule(),
+                each_rule=PRM9012019Rule67j71.BuildingRule.AreaTypeRule(),
             )
 
         def create_data(self, context, data=None):
@@ -110,7 +110,7 @@ class Section5Rule14(RuleDefinitionListIndexedBase):
 
         class AreaTypeRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section5Rule14.BuildingRule.AreaTypeRule, self).__init__(
+                super(PRM9012019Rule67j71.BuildingRule.AreaTypeRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
@@ -141,7 +141,7 @@ class Section5Rule14(RuleDefinitionListIndexedBase):
                 return {
                     "area_type": area_type,
                     "is_all_new": is_area_type_all_new_dict[area_type],
-                    "area_type_wwr": area_type_wwr,
+                    "area_type_wwr": area_type_wwr.magnitude,
                     "area_type_target_wwr": area_type_target_wwr["wwr"],
                 }
 
@@ -155,7 +155,7 @@ class Section5Rule14(RuleDefinitionListIndexedBase):
             def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
                 manual_check_msg = ""
                 if not calc_vals["is_all_new"]:
-                    if std_equal(
+                    if self.precision_comparison["area_type_wwr_b"](
                         calc_vals["area_type_wwr"], calc_vals["area_type_target_wwr"]
                     ):
                         manual_check_msg = CASE3_WARN_MESSAGE
@@ -167,11 +167,11 @@ class Section5Rule14(RuleDefinitionListIndexedBase):
 
             def rule_check(self, context, calc_vals=None, data=None):
                 return self.precision_comparison["area_type_wwr_b"](
-                    calc_vals["area_type_wwr"].magnitude,
+                    calc_vals["area_type_wwr"],
                     calc_vals["area_type_target_wwr"],
                 )
 
             def is_tolerance_fail(self, context, calc_vals=None, data=None):
                 area_type_wwr = calc_vals["area_type_wwr"]
                 area_type_target_wwr = calc_vals["area_type_target_wwr"]
-                return std_equal(area_type_wwr, area_type_target_wwr)
+                return std_equal(area_type_target_wwr, area_type_wwr)

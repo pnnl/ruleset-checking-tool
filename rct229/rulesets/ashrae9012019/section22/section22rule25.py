@@ -36,15 +36,15 @@ NOT_APPLICABLE_SYS_TYPES = [
 REQUIRED_PUMP_POWER_PER_FLOW_RATE = 9 * ureg("W/gpm")
 
 
-class Section22Rule25(RuleDefinitionListIndexedBase):
+class PRM9012019Rule03q09(RuleDefinitionListIndexedBase):
     """Rule 25 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
-        super(Section22Rule25, self).__init__(
+        super(PRM9012019Rule03q09, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section22Rule25.PrimaryCoolingFluidLoopRule(),
+            each_rule=PRM9012019Rule03q09.PrimaryCoolingFluidLoopRule(),
             index_rmd=BASELINE_0,
             id="22-25",
             description="Baseline chilled water loops that do not use purchased chilled water and do not serve computer rooms (i.e., do not serve baseline system type 11) shall have a constant-flow primary pump power of 9 W/gpm at design conditions.",
@@ -95,7 +95,7 @@ class Section22Rule25(RuleDefinitionListIndexedBase):
 
     class PrimaryCoolingFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section22Rule25.PrimaryCoolingFluidLoopRule, self).__init__(
+            super(PRM9012019Rule03q09.PrimaryCoolingFluidLoopRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

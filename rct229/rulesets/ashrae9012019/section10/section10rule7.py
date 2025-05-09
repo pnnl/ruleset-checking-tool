@@ -23,6 +23,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_zone_list_w_area_d
 )
 from rct229.utils.assertions import assert_
 from rct229.utils.pint_utils import CalcQ
+from rct229.utils.std_comparisons import std_equal
 from rct229.utils.utility_functions import find_exactly_one_zone
 
 APPLICABLE_SYS_TYPES = [
@@ -41,15 +42,15 @@ APPLICABLE_SYS_TYPES = [
 CAPACITY_LOW_THRESHOLD = 65000
 
 
-class Section10Rule7(RuleDefinitionListIndexedBase):
+class PRM9012019Rule34l50(RuleDefinitionListIndexedBase):
     """Rule 7 of ASHRAE 90.1-2019 Appendix G Section 10 (HVAC General)"""
 
     def __init__(self):
-        super(Section10Rule7, self).__init__(
+        super(PRM9012019Rule34l50, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section10Rule7.HVACRule(),
+            each_rule=PRM9012019Rule34l50.HVACRule(),
             index_rmd=BASELINE_0,
             id="10-7",
             description=(
@@ -126,7 +127,7 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section10Rule7.HVACRule, self).__init__(
+            super(PRM9012019Rule34l50.HVACRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
@@ -261,7 +262,7 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
             most_conservative_eff_b = calc_vals["most_conservative_eff_b"]
             modeled_efficiency_b = calc_vals["modeled_efficiency_b"]
 
-            if modeled_efficiency_b == most_conservative_eff_b:
+            if self.precision_comparison(modeled_efficiency_b, most_conservative_eff_b):
                 undetermined_msg = "The cooling capacity of the system could not be determined. Check if the modeled baseline DX cooling efficiency was established correctly based upon equipment capacity and type while accounting for the potential aggregation of zones. The modeled efficiency matches the capacity bracket in Appendix G efficiency tables with the highest efficiency (i.e., most conservative efficiency has been modeled)."
             else:
                 undetermined_msg = "The cooling capacity of the system could not be determined. Check if the modeled baseline DX cooling efficiency was established correctly based upon equipment capacity and type while accounting for the potential aggregation of zones."
@@ -271,5 +272,11 @@ class Section10Rule7(RuleDefinitionListIndexedBase):
         def rule_check(self, context, calc_vals=None, data=None):
             expected_baseline_eff_b = calc_vals["expected_baseline_eff_b"]
             modeled_efficiency_b = calc_vals["modeled_efficiency_b"]
+            return self.precision_comparison(
+                modeled_efficiency_b, expected_baseline_eff_b
+            )
 
-            return modeled_efficiency_b == expected_baseline_eff_b
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            expected_baseline_eff_b = calc_vals["expected_baseline_eff_b"]
+            modeled_efficiency_b = calc_vals["modeled_efficiency_b"]
+            return std_equal(expected_baseline_eff_b, modeled_efficiency_b)

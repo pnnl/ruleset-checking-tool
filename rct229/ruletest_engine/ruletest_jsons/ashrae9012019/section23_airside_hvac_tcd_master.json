@@ -1,12 +1,10 @@
 {
-    "rule-23-1-a": {
-        "Section": 23,
-        "Rule": 1,
+    "rule-79m01-a": {
         "Test": "a",
         "test_description": "The project has one building segment with one zone served by baseline system 2.  The auxiliary heat high temperature shutoff is greater than 40 F.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "23-1",
+            "rule_id": "79m01",
             "ruleset_reference": "G3.1.3.1",
             "rule_description": "For baseline systems 2 and 4, the electric air-source heat pumps shall be modeled with electric auxiliary heat and an outdoor air thermostat. The systems shall be controlled to energize auxiliary heat only when the outdoor air temperature is less than 40\u00b0F. The air-source heat pump shall be modeled to continue to operate while auxiliary heat is energized.",
             "applicable_rmr": "Baseline Model",
@@ -75,14 +73,12 @@
             }
         }
     },
-    "rule-23-1-b": {
-        "Section": 23,
-        "Rule": 1,
+    "rule-79m01-b": {
         "Test": "b",
         "test_description": "The project has one building segment with one zone served by baseline system 2.  The auxiliary heat fuel type is not electric resistance.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "23-1",
+            "rule_id": "79m01",
             "ruleset_reference": "G3.1.3.1",
             "rule_description": "For baseline systems 2 and 4, the electric air-source heat pumps shall be modeled with electric auxiliary heat and an outdoor air thermostat. The systems shall be controlled to energize auxiliary heat only when the outdoor air temperature is less than 40\u00b0F. The air-source heat pump shall be modeled to continue to operate while auxiliary heat is energized.",
             "applicable_rmr": "Baseline Model",
@@ -151,14 +147,12 @@
             }
         }
     },
-    "rule-23-1-c": {
-        "Section": 23,
-        "Rule": 1,
+    "rule-79m01-c": {
         "Test": "c",
         "test_description": "The project has one building segment with one zone served by baseline system 2.  The auxiliary heat fuel type is electric resistance and the high temperature shutoff for the auxiliary heat is equal to 40 F.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "23-1",
+            "rule_id": "79m01",
             "ruleset_reference": "G3.1.3.1",
             "rule_description": "For baseline systems 2 and 4, the electric air-source heat pumps shall be modeled with electric auxiliary heat and an outdoor air thermostat. The systems shall be controlled to energize auxiliary heat only when the outdoor air temperature is less than 40\u00b0F. The air-source heat pump shall be modeled to continue to operate while auxiliary heat is energized.",
             "applicable_rmr": "Baseline Model",
@@ -227,14 +221,12 @@
             }
         }
     },
-    "rule-23-2-a": {
-        "Section": 23,
-        "Rule": 2,
+    "rule-52x31-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by baseline system type 7 with a supply air temperature reset higher by 5\u00b0F under minimum cooling load conditions.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "23-2",
+            "rule_id": "52x31",
             "ruleset_reference": "G3.1.3.12",
             "rule_description": "For baseline systems 5-8 and 11, the supply air temperature shall be reset higher by 5\u00b0F under minimum cooling load conditions.",
             "applicable_rmr": "Baseline Model",
@@ -371,14 +363,12 @@
             }
         }
     },
-    "rule-23-2-b": {
-        "Section": 23,
-        "Rule": 2,
+    "rule-52x31-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by baseline system type 7 with a supply air temperature reset higher by 10\u00b0F under minimum cooling load conditions",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "23-2",
+            "rule_id": "52x31",
             "ruleset_reference": "G3.1.3.12",
             "rule_description": "For baseline systems 5-8 and 11, the supply air temperature shall be reset higher by 5\u00b0F under minimum cooling load conditions.",
             "applicable_rmr": "Baseline Model",
@@ -515,14 +505,12 @@
             }
         }
     },
-    "rule-23-2-c": {
-        "Section": 23,
-        "Rule": 2,
+    "rule-52x31-c": {
         "Test": "c",
         "test_description": "The project has one building segment with two zones served by baseline system type 7 without supply air temperature reset controls.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "23-2",
+            "rule_id": "52x31",
             "ruleset_reference": "G3.1.3.12",
             "rule_description": "For baseline systems 5-8 and 11, the supply air temperature shall be reset higher by 5\u00b0F under minimum cooling load conditions.",
             "applicable_rmr": "Baseline Model",
@@ -659,14 +647,12 @@
             }
         }
     },
-    "rule-23-3-a": {
-        "Section": 23,
-        "Rule": 3,
+    "rule-44u85-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by baseline system type 7. The minimum airflow is 30% of the zone peak primary airflow in both zones.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "23-3",
+            "rule_id": "44u85",
             "ruleset_reference": "G3.1.3.13 and G3.1.3.14",
             "rule_description": "For baseline systems 5-8, the minimum volume setpoint shall be 30% of zone peak airflow, minimum outdoor airflow, or rate required to comply with minium accrediidation standards, whichever is larger.",
             "applicable_rmr": "Baseline Model",
@@ -807,14 +793,12 @@
             }
         }
     },
-    "rule-23-3-b": {
-        "Section": 23,
-        "Rule": 3,
+    "rule-44u85-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by baseline system type 5. The minimum outdoor airflow exceeds 30% of the zone peak airflow and the minimum airflow is equal to the minimum outdoor airflow in both zones.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "23-3",
+            "rule_id": "44u85",
             "ruleset_reference": "G3.1.3.13 and G3.1.3.14",
             "rule_description": "For baseline systems 5-8, the minimum volume setpoint shall be 30% of zone peak airflow, minimum outdoor airflow, or rate required to comply with minium accrediidation standards, whichever is larger.",
             "applicable_rmr": "Baseline Model",
@@ -928,14 +912,12 @@
             }
         }
     },
-    "rule-23-3-c": {
-        "Section": 23,
-        "Rule": 3,
+    "rule-44u85-c": {
         "Test": "c",
         "test_description": "The project has one building segment with two zones served by baseline system type 7. The minimum airflow is less than 30% of the zone peak primary airflow in both zones.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "23-3",
+            "rule_id": "44u85",
             "ruleset_reference": "G3.1.3.13 and G3.1.3.14",
             "rule_description": "For baseline systems 5-8, the minimum volume setpoint shall be 30% of zone peak airflow, minimum outdoor airflow, or rate required to comply with minium accrediidation standards, whichever is larger.",
             "applicable_rmr": "Baseline Model",
@@ -1064,14 +1046,12 @@
             }
         }
     },
-    "rule-23-3-d": {
-        "Section": 23,
-        "Rule": 3,
+    "rule-44u85-d": {
         "Test": "d",
         "test_description": "The project has one building segment with one zone served by baseline system type 9.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "23-3",
+            "rule_id": "44u85",
             "ruleset_reference": "G3.1.3.13 and G3.1.3.14",
             "rule_description": "For baseline systems 5-8, the minimum volume setpoint shall be 30% of zone peak airflow, minimum outdoor airflow, or rate required to comply with minium accrediidation standards, whichever is larger.",
             "applicable_rmr": "Baseline Model",
@@ -1140,14 +1120,12 @@
             }
         }
     },
-    "rule-23-4-a": {
-        "Section": 23,
-        "Rule": 4,
+    "rule-68z84-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones and one laboratory space served by baseline system type 7. Per G3.1.1c, these systems must adjust lab exhaust and makeup air.",
         "expected_rule_outcome": "undetermined",
         "standard": {
-            "rule_id": "23-4",
+            "rule_id": "68z84",
             "ruleset_reference": "G3.1.3.13",
             "rule_description": "For baseline systems 5 and 7 serving lab spaces per Standard 90.1-2019 G3.1.1(c), lab exhaust and makeup air during unoccupied periods shall be reduced to 50% of zone peak airflow, the minimum outdoor airflow, or rate required to comply with minimum accreditation standards, whichever is larger.",
             "applicable_rmr": "Baseline Model",
@@ -1371,14 +1349,12 @@
             }
         }
     },
-    "rule-23-4-b": {
-        "Section": 23,
-        "Rule": 4,
+    "rule-68z84-b": {
         "Test": "b",
         "test_description": "The project has one building segment with one zone and one laboratory space served by baseline System 3.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "23-4",
+            "rule_id": "68z84",
             "ruleset_reference": "G3.1.3.13",
             "rule_description": "For baseline systems 5 and 7 serving lab spaces per Standard 90.1-2019 G3.1.1(c), lab exhaust and makeup air during unoccupied periods shall be reduced to 50% of zone peak airflow, the minimum outdoor airflow, or rate required to comply with minimum accreditation standards, whichever is larger.",
             "applicable_rmr": "Baseline Model",
@@ -1530,14 +1506,12 @@
             }
         }
     },
-    "rule-23-5-a": {
-        "Section": 23,
-        "Rule": 5,
+    "rule-69z86-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by baseline system type 6 with a terminal fan set to run as the first stage of heating before the reheat coil is turned on.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "23-5",
+            "rule_id": "69z86",
             "ruleset_reference": "G3.1.3.14",
             "rule_description": "For baseline systems 6 and 8, fans in parallel VAV fan-powered boxes shall run as the first stage of heating before the reheat coil is energized. ",
             "applicable_rmr": "Baseline Model",
@@ -1632,14 +1606,12 @@
             }
         }
     },
-    "rule-23-5-b": {
-        "Section": 23,
-        "Rule": 5,
+    "rule-69z86-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by baseline system type 8 with a terminal fan set to run as the first stage of heating before the reheat coil is turned on.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "23-5",
+            "rule_id": "69z86",
             "ruleset_reference": "G3.1.3.14",
             "rule_description": "For baseline systems 6 and 8, fans in parallel VAV fan-powered boxes shall run as the first stage of heating before the reheat coil is energized. ",
             "applicable_rmr": "Baseline Model",
@@ -1765,14 +1737,12 @@
             }
         }
     },
-    "rule-23-5-c": {
-        "Section": 23,
-        "Rule": 5,
+    "rule-69z86-c": {
         "Test": "c",
         "test_description": "The project has one building segment with two zones served by baseline system type 6 with a terminal fan NOT set to run as the first stage of heating before the reheat coil is turned on.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "23-5",
+            "rule_id": "69z86",
             "ruleset_reference": "G3.1.3.14",
             "rule_description": "For baseline systems 6 and 8, fans in parallel VAV fan-powered boxes shall run as the first stage of heating before the reheat coil is energized. ",
             "applicable_rmr": "Baseline Model",
@@ -1867,14 +1837,12 @@
             }
         }
     },
-    "rule-23-5-d": {
-        "Section": 23,
-        "Rule": 5,
+    "rule-69z86-d": {
         "Test": "d",
         "test_description": "The project has one building segment with two zones served by baseline system type 8 with a terminal fan NOT set to run at the first stage of heating before the reheat coil is turned on.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "23-5",
+            "rule_id": "69z86",
             "ruleset_reference": "G3.1.3.14",
             "rule_description": "For baseline systems 6 and 8, fans in parallel VAV fan-powered boxes shall run as the first stage of heating before the reheat coil is energized. ",
             "applicable_rmr": "Baseline Model",
@@ -2000,14 +1968,12 @@
             }
         }
     },
-    "rule-23-6-a": {
-        "Section": 23,
-        "Rule": 6,
+    "rule-98g04-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by baseline system type 6. Parallel fans are correctly sized to 50% of the peak design primary airflow with 0.35 W/cfm of terminal supply fan power.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "23-6",
+            "rule_id": "98g04",
             "ruleset_reference": "G3.1.3.14",
             "rule_description": "For baseline systems 6 and 8, fans in parallel VAV fan-powered boxes shall be sized for 50% of the peak design primary air (from the VAV air-handling unit) flow rate and shall be modeled with 0.35 W/cfm fan power.",
             "applicable_rmr": "Baseline Model",
@@ -2106,14 +2072,12 @@
             }
         }
     },
-    "rule-23-6-b": {
-        "Section": 23,
-        "Rule": 6,
+    "rule-98g04-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by baseline system type 6. Parallel fans are not sized to 50% of the peak design primary airflow and do not have 0.35 W/cfm of terminal supply fan power.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "23-6",
+            "rule_id": "98g04",
             "ruleset_reference": "G3.1.3.14",
             "rule_description": "For baseline systems 6 and 8, fans in parallel VAV fan-powered boxes shall be sized for 50% of the peak design primary air (from the VAV air-handling unit) flow rate and shall be modeled with 0.35 W/cfm fan power.",
             "applicable_rmr": "Baseline Model",
@@ -2212,14 +2176,12 @@
             }
         }
     },
-    "rule-23-6-c": {
-        "Section": 23,
-        "Rule": 6,
+    "rule-98g04-c": {
         "Test": "c",
         "test_description": "The project has one building segment with two zones served by baseline system type 8. Parallel fans are sized to 50% of the peak design primary airflow and have 0.35 W/cfm of terminal supply fan power.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "23-6",
+            "rule_id": "98g04",
             "ruleset_reference": "G3.1.3.14",
             "rule_description": "For baseline systems 6 and 8, fans in parallel VAV fan-powered boxes shall be sized for 50% of the peak design primary air (from the VAV air-handling unit) flow rate and shall be modeled with 0.35 W/cfm fan power.",
             "applicable_rmr": "Baseline Model",
@@ -2349,14 +2311,12 @@
             }
         }
     },
-    "rule-23-6-d": {
-        "Section": 23,
-        "Rule": 6,
+    "rule-98g04-d": {
         "Test": "d",
         "test_description": "The project has one building segment with two zones served by baseline system type 8. Parallel fans are sized to 50% of the peak design primary airflow but do not have 0.35 W/cfm of terminal supply fan power.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "23-6",
+            "rule_id": "98g04",
             "ruleset_reference": "G3.1.3.14",
             "rule_description": "For baseline systems 6 and 8, fans in parallel VAV fan-powered boxes shall be sized for 50% of the peak design primary air (from the VAV air-handling unit) flow rate and shall be modeled with 0.35 W/cfm fan power.",
             "applicable_rmr": "Baseline Model",
@@ -2486,14 +2446,12 @@
             }
         }
     },
-    "rule-23-7-a": {
-        "Section": 23,
-        "Rule": 7,
+    "rule-62j00-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by baseline system type 6. The baseline system supply air temperature is constant at the design conditions.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "23-7",
+            "rule_id": "62j00",
             "ruleset_reference": "G3.1.3.14",
             "rule_description": "For baseline systems 6 and 8, supply air temperature setpoint shall be constant at the design condition.",
             "applicable_rmr": "Baseline Model",
@@ -2587,14 +2545,12 @@
             }
         }
     },
-    "rule-23-7-b": {
-        "Section": 23,
-        "Rule": 7,
+    "rule-62j00-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by baseline system type 6. The baseline system supply air temperature has outdoor air reset controls.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "23-7",
+            "rule_id": "62j00",
             "ruleset_reference": "G3.1.3.14",
             "rule_description": "For baseline systems 6 and 8, supply air temperature setpoint shall be constant at the design condition.",
             "applicable_rmr": "Baseline Model",
@@ -2688,14 +2644,12 @@
             }
         }
     },
-    "rule-23-8-a": {
-        "Section": 23,
-        "Rule": 8,
+    "rule-45r08-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by baseline system type 7. The part load VAV fan power is modeled as defined by method 1 in Table G3.1.3.15.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "23-8",
+            "rule_id": "45r08",
             "ruleset_reference": "G3.1.3.15",
             "rule_description": "For baseline systems 5-8 and 11, part load VAV fan power shall be modeled using either method 1 or 2 in Standard 90.1-2019 Table G3.1.3.15.",
             "applicable_rmr": "Baseline Model",
@@ -2866,14 +2820,12 @@
             }
         }
     },
-    "rule-23-8-b": {
-        "Section": 23,
-        "Rule": 8,
+    "rule-45r08-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by baseline system type 7. The part load VAV fan power is not modeled as defined by method 1 or 2 in Table G3.1.3.15.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "23-8",
+            "rule_id": "45r08",
             "ruleset_reference": "G3.1.3.15",
             "rule_description": "For baseline systems 5-8 and 11, part load VAV fan power shall be modeled using either method 1 or 2 in Standard 90.1-2019 Table G3.1.3.15.",
             "applicable_rmr": "Baseline Model",
@@ -3056,14 +3008,12 @@
             }
         }
     },
-    "rule-23-9-a": {
-        "Section": 23,
-        "Rule": 9,
+    "rule-46w18-a": {
         "Test": "a",
         "test_description": "The project has one building segment with one zone served by baseline system type 11 with minimum volume setpoint set to 50% of the maximum design airflow rate.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "23-9",
+            "rule_id": "46w18",
             "ruleset_reference": "G3.1.3.17",
             "rule_description": "For baseline system 11, minimum volume setpoint shall be the largest of 50% of the maximum design airflow rate, the minimum ventilation airflow rate or the airflow required to comply with codes or accreditation standards.",
             "applicable_rmr": "Baseline Model",
@@ -3174,14 +3124,12 @@
             }
         }
     },
-    "rule-23-9-b": {
-        "Section": 23,
-        "Rule": 9,
+    "rule-46w18-b": {
         "Test": "b",
         "test_description": "The project has one building segment with one zone served by baseline system type 11 with minimum volume setpoint set to greater than 50% of the maximum design airflow rate and greater than the minimum ventilation flow rate.",
         "expected_rule_outcome": "undetermined",
         "standard": {
-            "rule_id": "23-9",
+            "rule_id": "46w18",
             "ruleset_reference": "G3.1.3.17",
             "rule_description": "For baseline system 11, minimum volume setpoint shall be the largest of 50% of the maximum design airflow rate, the minimum ventilation airflow rate or the airflow required to comply with codes or accreditation standards.",
             "applicable_rmr": "Baseline Model",
@@ -3287,14 +3235,12 @@
             }
         }
     },
-    "rule-23-9-c": {
-        "Section": 23,
-        "Rule": 9,
+    "rule-46w18-c": {
         "Test": "c",
         "test_description": "The project has one building segment with one zone served by baseline system 11 with minimum volume setpoint set to less than the minimum ventilation flow rate.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "23-9",
+            "rule_id": "46w18",
             "ruleset_reference": "G3.1.3.17",
             "rule_description": "For baseline system 11, minimum volume setpoint shall be the largest of 50% of the maximum design airflow rate, the minimum ventilation airflow rate or the airflow required to comply with codes or accreditation standards.",
             "applicable_rmr": "Baseline Model",
@@ -3400,14 +3346,12 @@
             }
         }
     },
-    "rule-23-10-a": {
-        "Section": 23,
-        "Rule": 10,
+    "rule-18u93-a": {
         "Test": "a",
         "test_description": "The project has one building segment with one zone served by baseline system type 11 set to minimum airflow at 50% load.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "23-10",
+            "rule_id": "18u93",
             "ruleset_reference": "G3.1.3.17",
             "rule_description": "For baseline system 11, fan volume shall be reset from 100% airflow at 100% load to minimum airflow at 50% load.",
             "applicable_rmr": "Baseline Model",
@@ -3512,14 +3456,12 @@
             }
         }
     },
-    "rule-23-10-b": {
-        "Section": 23,
-        "Rule": 10,
+    "rule-18u93-b": {
         "Test": "b",
         "test_description": "The project has one building segment with one zone served by baseline system type 11 set to minimum airflow at 25% load.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "23-10",
+            "rule_id": "18u93",
             "ruleset_reference": "G3.1.3.17",
             "rule_description": "For baseline system 11, fan volume shall be reset from 100% airflow at 100% load to minimum airflow at 50% load.",
             "applicable_rmr": "Baseline Model",
@@ -3624,14 +3566,12 @@
             }
         }
     },
-    "rule-23-10-c": {
-        "Section": 23,
-        "Rule": 10,
+    "rule-18u93-c": {
         "Test": "c",
         "test_description": "The project has one building segment with two zones served by baseline system type 7 set to minimum airflow at 25% load.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "23-10",
+            "rule_id": "18u93",
             "ruleset_reference": "G3.1.3.17",
             "rule_description": "For baseline system 11, fan volume shall be reset from 100% airflow at 100% load to minimum airflow at 50% load.",
             "applicable_rmr": "Baseline Model",
@@ -3768,14 +3708,12 @@
             }
         }
     },
-    "rule-23-11-a": {
-        "Section": 23,
-        "Rule": 11,
+    "rule-47f22-a": {
         "Test": "a",
         "test_description": "The project has one building segment with one zone served by baseline system type 11 with supply air temperature reset from minimum supply air temperature at 50% cooling load to room temperature at 0% cooling load.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "23-11",
+            "rule_id": "47f22",
             "ruleset_reference": "G3.1.3.17",
             "rule_description": "For baseline system 11, supply air temperature shall either 1) be reset from minimum supply air temperature at 50% cooling load to room temperature at 0% cooling load, or 2) be reset higher by 5F under minimum cooling load conditions.",
             "applicable_rmr": "Baseline Model",
@@ -3880,14 +3818,12 @@
             }
         }
     },
-    "rule-23-11-b": {
-        "Section": 23,
-        "Rule": 11,
+    "rule-47f22-b": {
         "Test": "b",
         "test_description": "The project has one building segment with one zone served by baseline system type 11 with supply air temperature reset higher by 5F under minimum cooling load conditions.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "23-11",
+            "rule_id": "47f22",
             "ruleset_reference": "G3.1.3.17",
             "rule_description": "For baseline system 11, supply air temperature shall either 1) be reset from minimum supply air temperature at 50% cooling load to room temperature at 0% cooling load, or 2) be reset higher by 5F under minimum cooling load conditions.",
             "applicable_rmr": "Baseline Model",
@@ -3992,14 +3928,12 @@
             }
         }
     },
-    "rule-23-11-c": {
-        "Section": 23,
-        "Rule": 11,
+    "rule-47f22-c": {
         "Test": "c",
         "test_description": "The project has one building segment with one zone served by baseline system type 11 with supply air temperature reset higher by 10F under minimum cooling load conditions.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "23-11",
+            "rule_id": "47f22",
             "ruleset_reference": "G3.1.3.17",
             "rule_description": "For baseline system 11, supply air temperature shall either 1) be reset from minimum supply air temperature at 50% cooling load to room temperature at 0% cooling load, or 2) be reset higher by 5F under minimum cooling load conditions.",
             "applicable_rmr": "Baseline Model",
@@ -4104,14 +4038,12 @@
             }
         }
     },
-    "rule-23-12-a": {
-        "Section": 23,
-        "Rule": 12,
+    "rule-71k98-a": {
         "Test": "a",
         "test_description": "The project has one building segment with one zone served by baseline system type 11.",
         "expected_rule_outcome": "undetermined",
         "standard": {
-            "rule_id": "23-12",
+            "rule_id": "71k98",
             "ruleset_reference": "G3.1.3.17",
             "rule_description": "For baseline system 11 in heating mode, supply air temperature shall be modulated to maintain space temperature, and fan volume shall be fixed at minimum airflow",
             "applicable_rmr": "Baseline Model",
@@ -4214,14 +4146,12 @@
             }
         }
     },
-    "rule-23-12-b": {
-        "Section": 23,
-        "Rule": 12,
+    "rule-71k98-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by baseline system type 7.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "23-12",
+            "rule_id": "71k98",
             "ruleset_reference": "G3.1.3.17",
             "rule_description": "For baseline system 11 in heating mode, supply air temperature shall be modulated to maintain space temperature, and fan volume shall be fixed at minimum airflow",
             "applicable_rmr": "Baseline Model",
@@ -4356,14 +4286,12 @@
             }
         }
     },
-    "rule-23-13-a": {
-        "Section": 23,
-        "Rule": 13,
+    "rule-50v48-a": {
         "Test": "a",
         "test_description": "The project has one building segment with one zone served by baseline system type 3. The proposed building includes humidistatic controls. The baseline system uses mechanical cooling for dehumidication with reheat to avoid overcooling.",
         "expected_rule_outcome": "undetermined",
         "standard": {
-            "rule_id": "23-13",
+            "rule_id": "50v48",
             "ruleset_reference": "G3.1.3.18",
             "rule_description": "If proposed design includes humidistatic controls then the baseline shall use mechanical cooling for dehumidification and shall reheat to avoid overcooling.",
             "applicable_rmr": "Baseline Model",
@@ -4501,14 +4429,12 @@
             }
         }
     },
-    "rule-23-13-b": {
-        "Section": 23,
-        "Rule": 13,
+    "rule-50v48-b": {
         "Test": "b",
         "test_description": "The project has one building segment with one zone served by baseline system type 3. The proposed building does not include humidistatic controls.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "23-13",
+            "rule_id": "50v48",
             "ruleset_reference": "G3.1.3.18",
             "rule_description": "If proposed design includes humidistatic controls then the baseline shall use mechanical cooling for dehumidification and shall reheat to avoid overcooling.",
             "applicable_rmr": "Baseline Model",
@@ -4639,14 +4565,12 @@
             }
         }
     },
-    "rule-23-14-a": {
-        "Section": 23,
-        "Rule": 14,
+    "rule-14m33-a": {
         "Test": "a",
         "test_description": "The project has one building segment with one zone served by baseline system type 3. The proposed building includes dehumidification.",
         "expected_rule_outcome": "undetermined",
         "standard": {
-            "rule_id": "23-14",
+            "rule_id": "14m33",
             "ruleset_reference": "G3.1.3.18",
             "rule_description": "If the baseline system does not comply with exceptions in Standard 90.1-2019, Section 6.5.2.3 then only 25% of the system reheat energy shall be included in the baseline building performance",
             "applicable_rmr": "Baseline Model",
@@ -4784,14 +4708,12 @@
             }
         }
     },
-    "rule-23-14-b": {
-        "Section": 23,
-        "Rule": 14,
+    "rule-14m33-b": {
         "Test": "b",
         "test_description": "The project has one building segment with one zone served by baseline system type 3. The proposed building does not include dehumidification.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "23-14",
+            "rule_id": "14m33",
             "ruleset_reference": "G3.1.3.18",
             "rule_description": "If the baseline system does not comply with exceptions in Standard 90.1-2019, Section 6.5.2.3 then only 25% of the system reheat energy shall be included in the baseline building performance",
             "applicable_rmr": "Baseline Model",
@@ -4922,14 +4844,12 @@
             }
         }
     },
-    "rule-23-15-a": {
-        "Section": 23,
-        "Rule": 15,
+    "rule-71f87-a": {
         "Test": "a",
         "test_description": "The project has one building segment with one zone served by base system type 3. The proposed building includes dehumidifcation.",
         "expected_rule_outcome": "undetermined",
         "standard": {
-            "rule_id": "23-15",
+            "rule_id": "71f87",
             "ruleset_reference": "G3.1.3.18",
             "rule_description": "The dehumidification reheat type in the baseline building shall be the same as the baseline system heating type.",
             "applicable_rmr": "Baseline Model",
@@ -5067,14 +4987,12 @@
             }
         }
     },
-    "rule-23-15-b": {
-        "Section": 23,
-        "Rule": 15,
+    "rule-71f87-b": {
         "Test": "b",
         "test_description": "The project has one building segment with one zone served by baseline system type 3. The proposed building does not include dehumidifcation. ",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "23-15",
+            "rule_id": "71f87",
             "ruleset_reference": "G3.1.3.18",
             "rule_description": "The dehumidification reheat type in the baseline building shall be the same as the baseline system heating type.",
             "applicable_rmr": "Baseline Model",
@@ -5205,14 +5123,12 @@
             }
         }
     },
-    "rule-23-16-a": {
-        "Section": 23,
-        "Rule": 16,
+    "rule-79i34-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by baseline system type 7. The preheat coil is correctly controlled to 20 F less than the design room heating temperature setpoint.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "23-16",
+            "rule_id": "79i34",
             "ruleset_reference": "G3.1.3.19",
             "rule_description": "For baseline systems 5-8, the baseline system shall be modeled with preheat coils controlled to a fixed set point 20\u00b0F less than the design room heating temperature setpoint.",
             "applicable_rmr": "Baseline Model",
@@ -5350,14 +5266,12 @@
             }
         }
     },
-    "rule-23-16-b": {
-        "Section": 23,
-        "Rule": 16,
+    "rule-79i34-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by baseline system type 7. The preheat coil is incorrectly controlled to only 13 F less than the design room heating temperature setpoint.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "23-16",
+            "rule_id": "79i34",
             "ruleset_reference": "G3.1.3.19",
             "rule_description": "For baseline systems 5-8, the baseline system shall be modeled with preheat coils controlled to a fixed set point 20\u00b0F less than the design room heating temperature setpoint.",
             "applicable_rmr": "Baseline Model",
@@ -5495,14 +5409,12 @@
             }
         }
     },
-    "rule-23-17-a": {
-        "Section": 23,
-        "Rule": 17,
+    "rule-40y63-a": {
         "Test": "a",
         "test_description": "The project has one building segment with one zone served by baseline system type 4. The heat pump low shutoff temperature equal to the flag of -999, which indicates that there is no low-temperature shutoff for the heatpump",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "23-17",
+            "rule_id": "40y63",
             "ruleset_reference": "G3.1.3.1 Heat Pumps (Systems 2 and 4)",
             "rule_description": "System 2 and 4 - Electric air-source heat pumps shall shall be modeled to continue to operate while auxiliary heat is energized.",
             "applicable_rmr": "Baseline Model",
@@ -5575,14 +5487,12 @@
             }
         }
     },
-    "rule-23-17-b": {
-        "Section": 23,
-        "Rule": 17,
+    "rule-40y63-b": {
         "Test": "b",
         "test_description": "The project has one building segment with one zone served by baseline system type 4. The heat pump low shutoff temperature does not equal -999, thereby not indicating that there is no low-temperature shutoff for the heatpump",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "23-17",
+            "rule_id": "40y63",
             "ruleset_reference": "G3.1.3.1 Heat Pumps (Systems 2 and 4)",
             "rule_description": "System 2 and 4 - Electric air-source heat pumps shall shall be modeled to continue to operate while auxiliary heat is energized.",
             "applicable_rmr": "Baseline Model",
@@ -5655,14 +5565,12 @@
             }
         }
     },
-    "rule-23-17-c": {
-        "Section": 23,
-        "Rule": 17,
+    "rule-40y63-c": {
         "Test": "c",
         "test_description": "The project has one building segment with two zones served by baseline system type 7. This rule is for system types 2 and 4 so this is not applicable.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "23-17",
+            "rule_id": "40y63",
             "ruleset_reference": "G3.1.3.1 Heat Pumps (Systems 2 and 4)",
             "rule_description": "System 2 and 4 - Electric air-source heat pumps shall shall be modeled to continue to operate while auxiliary heat is energized.",
             "applicable_rmr": "Baseline Model",

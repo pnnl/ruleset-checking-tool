@@ -11,11 +11,11 @@ from rct229.utils.std_comparisons import std_equal
 SKYLIGHT_THRESHOLD = 0.03
 
 
-class Section5Rule24(RuleDefinitionListIndexedBase):
+class PRM9012019Rule78j13(RuleDefinitionListIndexedBase):
     """Rule 24 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule24, self).__init__(
+        super(PRM9012019Rule78j13, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
@@ -23,7 +23,7 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
                 "$.ruleset_model_descriptions[*]": ["weather"],
                 "weather": ["climate_zone"],
             },
-            each_rule=Section5Rule24.BuildingRule(),
+            each_rule=PRM9012019Rule78j13.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-24",
             description="If skylight area in the proposed design is 3% or less of the roof surface, the skylight area in baseline shall be equal to that in the proposed design.",
@@ -40,11 +40,11 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section5Rule24.BuildingRule, self).__init__(
+            super(PRM9012019Rule78j13.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
-                each_rule=Section5Rule24.BuildingRule.BuildingSegmentRule(),
+                each_rule=PRM9012019Rule78j13.BuildingRule.BuildingSegmentRule(),
                 index_rmd=BASELINE_0,
                 list_path="building_segments[*]",
             )
@@ -63,7 +63,9 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
 
         class BuildingSegmentRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section5Rule24.BuildingRule.BuildingSegmentRule, self).__init__(
+                super(
+                    PRM9012019Rule78j13.BuildingRule.BuildingSegmentRule, self
+                ).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
@@ -123,6 +125,12 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
 
             def rule_check(self, context, calc_vals=None, data=None):
                 return self.precision_comparison["skylight_roof_ratio_b"](
+                    calc_vals["skylight_roof_ratio_b"].magnitude,
+                    calc_vals["skylight_total_roof_ratio_p"].magnitude,
+                )
+
+            def is_tolerance_fail(self, context, calc_vals=None, data=None):
+                return std_equal(
                     calc_vals["skylight_roof_ratio_b"].magnitude,
                     calc_vals["skylight_total_roof_ratio_p"].magnitude,
                 )

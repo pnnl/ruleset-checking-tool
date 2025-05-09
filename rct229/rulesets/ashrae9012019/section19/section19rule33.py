@@ -11,15 +11,15 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_proposed_hvac_modeled_w
 from rct229.utils.assertions import getattr_
 
 
-class Section19Rule33(RuleDefinitionListIndexedBase):
+class PRM9012019Rule28i68(RuleDefinitionListIndexedBase):
     """Rule 33 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
 
     def __init__(self):
-        super(Section19Rule33, self).__init__(
+        super(PRM9012019Rule28i68, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=True, BASELINE_0=False, PROPOSED=True
             ),
-            each_rule=Section19Rule33.HVACRule(),
+            each_rule=PRM9012019Rule28i68.HVACRule(),
             index_rmd=PROPOSED,
             id="19-33",
             description="Where no heating and/or cooling system is to be installed, and a heating or cooling system is being simulated only to meet the requirements described in Section G3.1-10 HVAC Systems proposed column c and d, "
@@ -54,7 +54,7 @@ class Section19Rule33(RuleDefinitionListIndexedBase):
 
     class HVACRule(PartialRuleDefinition):
         def __init__(self):
-            super(Section19Rule33.HVACRule, self).__init__(
+            super(PRM9012019Rule28i68.HVACRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=False, PROPOSED=True
                 ),
