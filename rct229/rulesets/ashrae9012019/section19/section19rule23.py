@@ -399,7 +399,7 @@ class Section19Rule23(RuleDefinitionListIndexedBase):
                                 "is_building_area_MF_dormitory_or_hotel_b"
                             ],
                             "inf_pass_cooling_b": data["inf_pass_cooling_b"],
-                            "inf_pass_heating_b": data["inf_pass_cooling_b"],
+                            "inf_pass_heating_b": data["inf_pass_heating_b"],
                             "occ_pass_cooling_b": occ_pass_cooling_b,
                             "occ_pass_heating_b": occ_pass_heating_b,
                             "int_lgt_pass_cooling_b": int_lgt_pass_cooling_b,
