@@ -157,9 +157,10 @@ class Section5Rule12(RuleDefinitionListIndexedBase):
                 return target_f_factor_res != target_f_factor_nonres
 
             def rule_check(self, context, calc_vals=None, data=None):
+                target_f_factor = calc_vals["target_f_factor"]
+                slab_on_grade_floor_f_factor = calc_vals["slab_on_grade_floor_f_factor"]
                 return self.precision_comparison["floor_f_factor_b"](
-                    calc_vals["target_f_factor"],
-                    calc_vals["slab_on_grade_floor_f_factor"],
+                    slab_on_grade_floor_f_factor, target_f_factor
                 )
 
             def is_tolerance_fail(self, context, calc_vals=None, data=None):

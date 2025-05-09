@@ -302,11 +302,18 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
             return (
                 all_design_setpoints_delta_Ts_are_per_reqs_b
                 and are_all_hvac_sys_fan_objs_autosized_b
-                and supply_fans_airflow_b >= fan_minimum_outdoor_airflow_b
+                and (
+                    self.precision_comparison["supply_fans_airflow_b"](
+                        supply_fans_airflow_b, fan_minimum_outdoor_airflow_b
+                    )
+                    or supply_fans_airflow_b > fan_minimum_outdoor_airflow_b
+                )
             ) or (
                 (
                     not all_design_setpoints_delta_Ts_are_per_reqs_b
-                    and fan_minimum_outdoor_airflow_b == supply_fans_airflow_b
+                    and self.precision_comparison["supply_fans_airflow_b"](
+                        fan_minimum_outdoor_airflow_b, supply_fans_airflow_b
+                    )
                 )
             )
 

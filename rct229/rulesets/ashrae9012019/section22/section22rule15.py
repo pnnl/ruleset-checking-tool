@@ -51,7 +51,15 @@ class Section22Rule15(RuleDefinitionListIndexedBase):
                 },
                 precision={
                     "approach_b": {
-                        "precision": 0.1,
+                        "precision": 0.01,
+                        "unit": "K",
+                    },
+                    "design_wetbulb_temp_b_low_limit": {
+                        "precision": 0.01,
+                        "unit": "K",
+                    },
+                    "design_wetbulb_temp_b_high_limit": {
+                        "precision": 0.01,
                         "unit": "K",
                     },
                 },
@@ -65,7 +73,18 @@ class Section22Rule15(RuleDefinitionListIndexedBase):
 
             return (
                 heat_rejection_loop_b in heat_rejection_loop_ids_b
-                and TEMP_LOW_LIMIT_55F <= design_wetbulb_temp_b <= TEMP_HIGH_LIMIT_90F
+                and (
+                    design_wetbulb_temp_b > TEMP_LOW_LIMIT_55F
+                    or self.precision_comparison["design_wetbulb_temp_b_low_limit"](
+                        design_wetbulb_temp_b, TEMP_LOW_LIMIT_55F
+                    )
+                )
+                and (
+                    design_wetbulb_temp_b < TEMP_HIGH_LIMIT_90F
+                    or self.precision_comparison["design_wetbulb_temp_b_high_limit"](
+                        design_wetbulb_temp_b, TEMP_HIGH_LIMIT_90F
+                    )
+                )
             )
 
         def get_calc_vals(self, context, data=None):
@@ -87,3 +106,9 @@ class Section22Rule15(RuleDefinitionListIndexedBase):
             return self.precision_comparison["approach_b"](
                 target_approach_b.to(ureg.kelvin), approach_b
             )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            approach_b = calc_vals["approach_b"]
+            target_approach_b = calc_vals["target_approach_b"]
+
+            return std_equal(target_approach_b.to(ureg.kelvin), approach_b)

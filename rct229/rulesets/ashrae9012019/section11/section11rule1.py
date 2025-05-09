@@ -8,7 +8,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.compare_swh_dist_systems_an
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_equipment_associated_with_each_swh_distriubtion_system import (
     get_swh_equipment_associated_with_each_swh_distribution_system,
 )
-from rct229.utils.jsonpath_utils import find_all, find_one
+from rct229.utils.jsonpath_utils import find_all
 
 
 class Section11Rule1(RuleDefinitionListIndexedBase):

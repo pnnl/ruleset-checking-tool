@@ -7,6 +7,7 @@ from rct229.rulesets.ashrae9012019.data_fns.table_8_4_4_fns import (
     table_8_4_4_lookup,
 )
 from rct229.schema.schema_enums import SchemaEnums
+from rct229.utils.std_comparisons import std_equal
 
 _DRY_TYPE = SchemaEnums.schema_enums["TransformerOptions"].DRY_TYPE
 
@@ -81,7 +82,13 @@ class Section15Rule5(RuleDefinitionListIndexedBase):
 
         def rule_check(self, context, calc_vals=None, data=None):
             # TODO: Allow tolerance?
-            return (
-                calc_vals["baseline_transformer_efficiency"]
-                == calc_vals["required_baseline_transformer_efficiency"]
+            return self.precision_comparison(
+                calc_vals["baseline_transformer_efficiency"],
+                calc_vals["required_baseline_transformer_efficiency"],
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            return std_equal(
+                calc_vals["required_baseline_transformer_efficiency"],
+                calc_vals["baseline_transformer_efficiency"],
             )

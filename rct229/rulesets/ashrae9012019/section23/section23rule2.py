@@ -98,7 +98,7 @@ class Section23Rule2(RuleDefinitionListIndexedBase):
                 },
                 precision={
                     "reset_differential_temperature_b": {
-                        "precision": 0.1,
+                        "precision": 1,
                         "unit": "K",
                     },
                 },
