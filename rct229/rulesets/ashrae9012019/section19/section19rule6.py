@@ -1,6 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.schema.config import ureg
+from rct229.utils.compare_standard_val import std_le
 
 MAX_COINCIDENT_UNMET_LOAD_HOUR = 300 * ureg("hr")
 MAX_SUM_HEATING_COOLING_UNMET_HOUR = 300 * ureg("hr")
@@ -84,6 +85,22 @@ class Section19Rule6(RuleDefinitionBase):
             or self.precision_comparison[
                 "unmet_load_hours_heating_b + unmet_load_hours_cooling_b"
             ](
+                unmet_load_hours_heating_b + unmet_load_hours_cooling_b,
+                MAX_SUM_HEATING_COOLING_UNMET_HOUR,
+            )
+        )
+
+    def is_tolerance_fail(self, context, calc_vals=None, data=None):
+        unmet_load_hours_heating_b = calc_vals["unmet_load_hours_heating_b"]
+        unmet_load_hours_cooling_b = calc_vals["unmet_load_hours_cooling_b"]
+        coincident_unmet_load_hours_b = calc_vals["coincident_unmet_load_hours_b"]
+
+        return (
+            coincident_unmet_load_hours_b is not None
+            and (std_le(coincident_unmet_load_hours_b, MAX_COINCIDENT_UNMET_LOAD_HOUR))
+        ) or (
+            # we are certain at this step, both unmet_load_hours_heating_b and unmet_load_hours_cooling_b can't be None
+            std_le(
                 unmet_load_hours_heating_b + unmet_load_hours_cooling_b,
                 MAX_SUM_HEATING_COOLING_UNMET_HOUR,
             )

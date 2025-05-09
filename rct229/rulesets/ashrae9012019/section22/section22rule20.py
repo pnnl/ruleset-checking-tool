@@ -88,7 +88,7 @@ class Section22Rule20(RuleDefinitionListIndexedBase):
                 },
                 precision={
                     "tower_leaving_temperature_b": {
-                        "precision": 0.1,
+                        "precision": 1,
                         "unit": "K",
                     },
                 },

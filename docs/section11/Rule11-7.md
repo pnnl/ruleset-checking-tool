@@ -37,6 +37,8 @@
   - use get_SWH_components_associated_with_each_SWH_bat to get the SWH use types and SWH use in the building: `swh_bats_and_uses_b = get_SWH_components_associated_with_each_SWH_bat(B_RMD)`
   - look at each SWH Equipment in the swh_bat.  Appendix G requires only one system per bat, but this is covered in rule 11-8, so here we will allow multiple SWH equipment: `for swh_equip_id in swh_bats_and_uses_b[swh_bat]["SWHHeatingEq"]:`
     - get the SWH equipment type using the function get_SWH_equipment_type: `swh_equip_type = get_SWH_equipment_type(B_RMD, swh_equip_id)`
+    - if the swh_equip type is PROPANE_INSTANTANEOUS, change it to GAS_INSTANTANEOUS for the purposes of this rule (whether Propane is an appropriate fuel source is covered in rule 11-16): `if swh_equip_type == "PROPANE_INSTANTANEOUS": swh_equip_type = "GAS_INSTANTANEOUS"
+    - if the swh_equip type is PROPANE_STORAGE, change it to GAS_STORAGE for the purposes of this rule (whether Propane is an appropriate fuel source is covered in rule 11-16): `if swh_equip_type == "PROPANE_STORAGE": swh_equip_type = "GAS_STORAGE"
     - get the expected SWH equipment type by looking it up in the table G3.1.1-2: `expected_swh_equip_type = data_lookup(Table G3.1.1-2, swh_bat)`
 
 

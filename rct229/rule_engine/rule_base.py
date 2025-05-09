@@ -9,7 +9,7 @@ from rct229.utils.assertions import MissingKeyException, RCTFailureException
 from rct229.utils.json_utils import slash_prefix_guarantee
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import calcq_to_q
-from rct229.utils.std_comparisons import std_equal_with_precision
+from rct229.utils.std_comparisons import std_equal_with_precision, std_equal
 
 
 class RCTPrecision(TypedDict):
@@ -120,7 +120,7 @@ class RuleDefinitionBase:
             }
         else:
             # default comparison to be strict equality comparison
-            self.precision_comparison = lambda val, std_val: val == std_val
+            self.precision_comparison = lambda val, std_val: std_equal(std_val, val)
 
     def evaluate(self, rmds, data={}):
         """Generates the outcome dictionary for the rule

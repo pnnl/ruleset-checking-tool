@@ -21,6 +21,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_list_hvac_systems_assoc
 from rct229.schema.config import ureg
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import assert_
+from rct229.utils.compare_standard_val import std_ge
 from rct229.utils.jsonpath_utils import find_all, find_one
 from rct229.utils.pint_utils import ZERO, CalcQ
 from rct229.utils.utility_functions import find_exactly_one_schedule
@@ -456,6 +457,70 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                                 supply_airflow_b,
                                 SUPPLY_AIRFLOW_5000CFM,
                             )
+                        )
+                        and (
+                            # CASE 1
+                            (ER_modeled_b)
+                            or
+                            # CASE 2
+                            (exception_1_applies)
+                            or
+                            # CASE 3
+                            (exception_2_applies)
+                            or
+                            # CASE 4
+                            (ER_not_req_for_heating_sys_b and sys_type_heating_only_b)
+                            or
+                            # CASE 5
+                            (exception_6_applies)
+                            or
+                            # CASE 6
+                            (exception_7_applies)
+                        )
+                    )
+                    or (
+                        # CASE 9 and 10
+                        (
+                            OA_fraction_b < OA_fraction_b_70
+                            or supply_airflow_b < SUPPLY_AIRFLOW_5000CFM
+                        )
+                    )
+                    or
+                    # Case 11
+                    (
+                        (
+                            all_lighting_space_types_defined_p
+                            and all_ventilation_space_types_defined_p
+                        )
+                        or ER_modeled_p
+                    )
+                )
+
+            def is_tolerance_fail(self, context, calc_vals=None, data=None):
+                OA_fraction_b = calc_vals[
+                    "OA_fraction_b"
+                ].magnitude  # .magnitude is because `OA_fraction_b` is a `dimensionless` unit in pint
+                supply_airflow_b = calc_vals["supply_airflow_b"]
+                ER_modeled_b = calc_vals["ER_modeled_b"]
+                exception_1_applies = calc_vals["exception_1_applies"]
+                exception_2_applies = calc_vals["exception_2_applies"]
+                exception_6_applies = calc_vals["exception_6_applies"]
+                exception_7_applies = calc_vals["exception_7_applies"]
+                ER_not_req_for_heating_sys_b = calc_vals["ER_not_req_for_heating_sys_b"]
+                sys_type_heating_only_b = calc_vals["sys_type_heating_only_b"]
+                all_lighting_space_types_defined_p = calc_vals[
+                    "all_lighting_space_types_defined_p"
+                ]
+                all_ventilation_space_types_defined_p = calc_vals[
+                    "all_ventilation_space_types_defined_p"
+                ]
+                ER_modeled_p = calc_vals["ER_modeled_p"]
+
+                return (
+                    (
+                        (std_ge(val=OA_fraction_b, std_val=OA_fraction_b_70))
+                        and (
+                            std_ge(val=supply_airflow_b, std_val=SUPPLY_AIRFLOW_5000CFM)
                         )
                         and (
                             # CASE 1
