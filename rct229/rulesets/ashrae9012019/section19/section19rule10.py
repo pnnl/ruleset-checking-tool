@@ -207,6 +207,7 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
                 proposed_has_economizer = calc_vals["proposed_has_economizer"]
 
                 return (
+                    # Case 2
                     (
                         (
                             fan_air_economizer_b is None
@@ -215,15 +216,21 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
                         )
                         and hvac_id_b in hvac_system_exception_2_list_b
                     )
-                    or (
+                    or
+                    # Case 4
+                    (
                         fan_air_economizer_b is not None
                         and fan_air_economizer_type_b != AIR_ECONOMIZER.FIXED_FRACTION
                         and hvac_id_b in hvac_system_exception_2_list_b
                     )
-                    or (
-                        fan_air_economizer_b is None
-                        or fan_air_economizer_type_b
-                        in [None, AIR_ECONOMIZER.FIXED_FRACTION]
+                    or
+                    # Case 6
+                    (
+                        (
+                            fan_air_economizer_b is None
+                            or fan_air_economizer_type_b
+                            in [None, AIR_ECONOMIZER.FIXED_FRACTION]
+                        )
                         and not proposed_has_economizer
                     )
                 )
