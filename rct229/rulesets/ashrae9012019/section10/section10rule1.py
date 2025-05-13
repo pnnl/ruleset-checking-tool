@@ -3,7 +3,7 @@ from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedB
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_zone_list_w_area_dict import (
-    get_hvac_zone_list_w_area_dict,
+    get_hvac_zone_list_w_area_by_rmd_dict,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_list_hvac_systems_associated_with_zone import (
     get_list_hvac_systems_associated_with_zone,
@@ -40,7 +40,7 @@ class Section10Rule1(RuleDefinitionListIndexedBase):
         rmd_b = context.BASELINE_0
         rmd_p = context.PROPOSED
 
-        hvac_zone_list_w_area_dict_p = get_hvac_zone_list_w_area_dict(rmd_p)
+        hvac_zone_list_w_area_dict_p = get_hvac_zone_list_w_area_by_rmd_dict(rmd_p)
 
         zones_have_humidification_list_p = []
         for hvac_p in find_all(
@@ -49,9 +49,8 @@ class Section10Rule1(RuleDefinitionListIndexedBase):
         ):
             if hvac_p.get("humidification_type") not in (None, HUMIDIFICATION.NONE):
                 zone_list_p = hvac_zone_list_w_area_dict_p[hvac_p["id"]]["zone_list"]
-                zones_have_humidification_list_p = (
-                    zones_have_humidification_list_p.extend(zone_list_p)
-                )
+                zones_have_humidification_list_p.extend(zone_list_p)
+
         zones_have_humidification_list_p = list(set(zones_have_humidification_list_p))
 
         has_humidification_b = {}
@@ -89,26 +88,26 @@ class Section10Rule1(RuleDefinitionListIndexedBase):
             zone_b = context.BASELINE_0
             zone_id_b = zone_b["id"]
 
-            hvac_system_type_b = data["hvac_system_type_b"][zone_id_b]
+            has_humidification_b = data["has_humidification_b"][zone_id_b]
             has_humidification_p = data["has_humidification_p"][zone_id_b]
 
             return {
-                "hvac_system_type_b": hvac_system_type_b,
+                "has_humidification_b": has_humidification_b,
                 "has_humidification_p": has_humidification_p,
             }
 
         def applicability_check(self, context, calc_vals, data):
-            hvac_system_type_b = calc_vals["hvac_system_type_b"]
+            has_humidification_b = calc_vals["has_humidification_b"]
             has_humidification_p = calc_vals["has_humidification_p"]
 
-            return hvac_system_type_b and has_humidification_p
+            return has_humidification_b and has_humidification_p
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
-            hvac_system_type_b = calc_vals["hvac_system_type_b"]
+            has_humidification_b = calc_vals["has_humidification_b"]
             has_humidification_p = calc_vals["has_humidification_p"]
 
             UNDETERMINED_MSG = ""
-            if hvac_system_type_b and has_humidification_p:
+            if has_humidification_b and has_humidification_p:
                 UNDETERMINED_MSG = (
                     "This zone is modeled with humidification in the baseline and proposed. Check that the baseline system serving this zone is modeled with adiabatic humidification "
                     "if the specified humidification system complies with 90.1 - 2019 Section 6.5.2.4, and that the baseline system serving this zone is modeled with non-adiabatic humidification "
