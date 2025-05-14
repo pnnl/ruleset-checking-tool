@@ -15,7 +15,6 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types i
 APPLICABLE_SYS_TYPES = [HVAC_SYS.SYS_6, HVAC_SYS.SYS_8]
 
 
-
 class PRM9012019Rule95r49(RuleDefinitionListIndexedBase):
     """Rule 30 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
 
