@@ -288,12 +288,21 @@ def get_zone_conditioning_category_dict(
                     # Add the surface UA to one of the running totals for the zone
                     # according to whether the surface is adjacent to a directly conditioned
                     # zone or not
-                    if (
-                        getattr_(surface, "surface", "adjacent_to") == "INTERIOR"
-                        and getattr_(surface, "surface", "adjacent_zone")
-                        in directly_conditioned_zone_ids
-                    ):
-                        zone_directly_conditioned_ua += surface_ua  # zone_1_4
+                    if getattr_(surface, "surface", "adjacent_to") == "INTERIOR":
+                        if (
+                            len(find_all("$.spaces[*]", zone)) <= 1
+                            and getattr_(surface, "surface", "adjacent_zone")
+                            in directly_conditioned_zone_ids
+                        ):
+                            # 1. check zone has only one space, if yes, use getattr_, if more than 1, can skip the ua calculation.
+                            zone_directly_conditioned_ua += surface_ua  # zone_1_4
+                        elif (
+                            surface.get("adjacent_zone")
+                            in directly_conditioned_zone_ids
+                        ):
+                            zone_directly_conditioned_ua += surface_ua  # zone_1_4
+                        else:
+                            zone_other_ua += surface_ua
                     else:
                         zone_other_ua += surface_ua  # zone_1_4
 
