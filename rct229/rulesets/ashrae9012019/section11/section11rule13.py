@@ -16,15 +16,15 @@ from rct229.utils.jsonpath_utils import find_all
 APPLICABILITY_MSG = "This building has service water heating loads. Confirm that service water heating energy consumption is calculated explicitly based upon the volume of service water heating required and the entering makeup water and leaving service water heating temperatures.  Entering water temperatures shall be estimated based upon the location. Leaving temperatures shall be based upon the end-use requirements."
 
 
-class Section11Rule13(RuleDefinitionListIndexedBase):
+class PRM9012019Rule51s51(RuleDefinitionListIndexedBase):
     """Rule 13 of ASHRAE 90.1-2019 Appendix G Section 11 (Service Water Heating)"""
 
     def __init__(self):
-        super(Section11Rule13, self).__init__(
+        super(PRM9012019Rule51s51, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section11Rule13.RMDRule(),
+            each_rule=PRM9012019Rule51s51.RMDRule(),
             index_rmd=BASELINE_0,
             id="11-13",
             description=(
@@ -38,12 +38,12 @@ class Section11Rule13(RuleDefinitionListIndexedBase):
 
     class RMDRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section11Rule13.RMDRule, self).__init__(
+            super(PRM9012019Rule51s51.RMDRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 index_rmd=BASELINE_0,
-                each_rule=Section11Rule13.RMDRule.BuildingRule(),
+                each_rule=PRM9012019Rule51s51.RMDRule.BuildingRule(),
                 list_path="$.buildings[*]",
                 required_fields={
                     "$": ["calendar"],
@@ -89,7 +89,7 @@ class Section11Rule13(RuleDefinitionListIndexedBase):
 
         class BuildingRule(PartialRuleDefinition):
             def __init__(self):
-                super(Section11Rule13.RMDRule.BuildingRule, self).__init__(
+                super(PRM9012019Rule51s51.RMDRule.BuildingRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),

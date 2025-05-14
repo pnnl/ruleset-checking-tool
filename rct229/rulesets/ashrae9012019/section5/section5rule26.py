@@ -22,11 +22,11 @@ from rct229.utils.pint_utils import ZERO, CalcQ
 from rct229.utils.std_comparisons import std_equal
 
 
-class Section5Rule26(RuleDefinitionListIndexedBase):
+class PRM9012019Rule34b75(RuleDefinitionListIndexedBase):
     """Rule 26 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule26, self).__init__(
+        super(PRM9012019Rule34b75, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
@@ -34,7 +34,7 @@ class Section5Rule26(RuleDefinitionListIndexedBase):
                 "$.ruleset_model_descriptions[*]": ["weather"],
                 "weather": ["climate_zone"],
             },
-            each_rule=Section5Rule26.BuildingRule(),
+            each_rule=PRM9012019Rule34b75.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-26",
             description="Skylight area must be allocated to surfaces in the same proportion in the baseline as in the proposed design.",
@@ -51,11 +51,11 @@ class Section5Rule26(RuleDefinitionListIndexedBase):
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section5Rule26.BuildingRule, self).__init__(
+            super(PRM9012019Rule34b75.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
-                each_rule=Section5Rule26.BuildingRule.BuildingSegmentRule(),
+                each_rule=PRM9012019Rule34b75.BuildingRule.BuildingSegmentRule(),
                 index_rmd=BASELINE_0,
                 list_path="building_segments[*]",
             )
@@ -77,11 +77,13 @@ class Section5Rule26(RuleDefinitionListIndexedBase):
 
         class BuildingSegmentRule(RuleDefinitionListIndexedBase):
             def __init__(self):
-                super(Section5Rule26.BuildingRule.BuildingSegmentRule, self).__init__(
+                super(
+                    PRM9012019Rule34b75.BuildingRule.BuildingSegmentRule, self
+                ).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
-                    each_rule=Section5Rule26.BuildingRule.BuildingSegmentRule.RoofRule(),
+                    each_rule=PRM9012019Rule34b75.BuildingRule.BuildingSegmentRule.RoofRule(),
                     index_rmd=BASELINE_0,
                     list_path="$.zones[*].surfaces[*]",
                 )
@@ -129,7 +131,7 @@ class Section5Rule26(RuleDefinitionListIndexedBase):
             class RoofRule(RuleDefinitionBase):
                 def __init__(self):
                     super(
-                        Section5Rule26.BuildingRule.BuildingSegmentRule.RoofRule,
+                        PRM9012019Rule34b75.BuildingRule.BuildingSegmentRule.RoofRule,
                         self,
                     ).__init__(
                         rmds_used=produce_ruleset_model_description(
@@ -201,6 +203,36 @@ class Section5Rule26(RuleDefinitionListIndexedBase):
                         and self.precision_comparison[
                             "total_skylight_area_surface_b / total_skylight_area_b"
                         ](
+                            (
+                                total_skylight_area_surface_b / total_skylight_area_b
+                            ).magnitude,
+                            (
+                                total_skylight_area_surface_p / total_skylight_area_p
+                            ).magnitude,
+                        )
+                    )
+
+                def is_tolerance_fail(self, context, calc_vals=None, data=None):
+                    total_skylight_area_b = calc_vals["total_skylight_area_b"]
+                    total_skylight_area_p = calc_vals["total_skylight_area_p"]
+                    total_skylight_area_surface_b = calc_vals[
+                        "total_skylight_area_surface_b"
+                    ]
+                    total_skylight_area_surface_p = calc_vals[
+                        "total_skylight_area_surface_p"
+                    ]
+
+                    return (
+                        # both segments have no skylight area
+                        total_skylight_area_b == 0
+                        and total_skylight_area_p == 0
+                        and total_skylight_area_surface_b == 0
+                        and total_skylight_area_surface_p == 0
+                    ) or (
+                        # product to ensure neither is 0 & short-circuit logic if either of them is 0.
+                        total_skylight_area_b * total_skylight_area_p > 0
+                        # both segments' skylight area ratios are the same
+                        and std_equal(
                             (
                                 total_skylight_area_surface_b / total_skylight_area_b
                             ).magnitude,

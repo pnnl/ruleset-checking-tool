@@ -19,11 +19,11 @@ from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
 
 
-class Section5Rule8(RuleDefinitionListIndexedBase):
+class PRM9012019Rule48v87(RuleDefinitionListIndexedBase):
     """Rule 8 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule8, self).__init__(
+        super(PRM9012019Rule48v87, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
@@ -31,7 +31,7 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
                 "$.ruleset_model_descriptions[*]": ["weather"],
                 "weather": ["climate_zone"],
             },
-            each_rule=Section5Rule8.BuildingRule(),
+            each_rule=PRM9012019Rule48v87.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-8",
             description="Baseline above-grade wall assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8.",
@@ -48,12 +48,12 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section5Rule8.BuildingRule, self).__init__(
+            super(PRM9012019Rule48v87.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={},
-                each_rule=Section5Rule8.BuildingRule.AboveGradeWallRule(),
+                each_rule=PRM9012019Rule48v87.BuildingRule.AboveGradeWallRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
@@ -76,7 +76,9 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
 
         class AboveGradeWallRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section5Rule8.BuildingRule.AboveGradeWallRule, self).__init__(
+                super(
+                    PRM9012019Rule48v87.BuildingRule.AboveGradeWallRule, self
+                ).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
@@ -146,4 +148,4 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
             def is_tolerance_fail(self, context, calc_vals=None, data=None):
                 above_grade_wall_u_factor = calc_vals["above_grade_wall_u_factor"]
                 target_u_factor = calc_vals["target_u_factor"]
-                return std_equal(above_grade_wall_u_factor, target_u_factor)
+                return std_equal(target_u_factor, above_grade_wall_u_factor)

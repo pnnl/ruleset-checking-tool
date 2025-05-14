@@ -13,20 +13,21 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_h
 )
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.std_comparisons import std_equal
 
 REQ_HEATING_OVERSIZING_FACTOR = 0.25
 REQ_COOLING_OVERSIZING_FACTOR = 0.15
 
 
-class Section19Rule1(RuleDefinitionListIndexedBase):
+class PRM9012019Rule73r44(RuleDefinitionListIndexedBase):
     """Rule 1 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
 
     def __init__(self):
-        super(Section19Rule1, self).__init__(
+        super(PRM9012019Rule73r44, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section19Rule1.HVACRule(),
+            each_rule=PRM9012019Rule73r44.HVACRule(),
             index_rmd=BASELINE_0,
             id="19-1",
             description="HVAC system coil capacities for the baseline building design shall be oversized by 15% for cooling and 25% for heating.",
@@ -62,119 +63,94 @@ class Section19Rule1(RuleDefinitionListIndexedBase):
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section19Rule1.HVACRule, self).__init__(
+            super(PRM9012019Rule73r44.HVACRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 precision={
-                    "heating_oversizing_factor": {
-                        "precision": 0.01,
-                    },
-                    "cooling_oversizing_factor": {
-                        "precision": 0.01,
-                    },
+                    "heating_oversizing_factor": {"precision": 0.01, "unit": None},
+                    "cooling_oversizing_factor": {"precision": 0.01, "unit": None},
                 },
             )
 
         def is_applicable(self, context, data=None):
             hvac_b = context.BASELINE_0
-            hvac_id_b = hvac_b["id"]
-            hvac_id_to_flags = data["hvac_id_to_flags"]
 
-            return (
-                hvac_id_to_flags[hvac_id_b]["is_hvac_sys_heating_type_furnace_flag"]
-                or hvac_id_to_flags[hvac_id_b][
-                    "is_hvac_sys_heating_type_heat_pump_flag"
-                ]
-                or hvac_id_to_flags[hvac_id_b]["is_hvac_sys_cooling_type_dx_flag"]
-            )
+            return bool(hvac_b.get("heating_system") or hvac_b.get("cooling_system"))
 
         def get_calc_vals(self, context, data=None):
+            calc_vals = {}
             hvac_b = context.BASELINE_0
-            hvac_id_b = hvac_b["id"]
-
-            is_hvac_sys_heating_type_furnace_flag = data["hvac_id_to_flags"][hvac_id_b][
-                "is_hvac_sys_heating_type_furnace_flag"
-            ]
-            is_hvac_sys_heating_type_heat_pump_flag = data["hvac_id_to_flags"][
-                hvac_id_b
-            ]["is_hvac_sys_heating_type_heat_pump_flag"]
-            is_hvac_sys_cooling_type_dx_flag = data["hvac_id_to_flags"][hvac_id_b][
-                "is_hvac_sys_cooling_type_dx_flag"
-            ]
-
-            heating_oversizing_factor = 0.0
-            cooling_oversizing_factor = 0.0
-            is_calculated_size = False
-            cooling_is_calculated_size = False
-            heating_oversizing_applicable = True
-            cooling_oversizing_applicable = True
-            if (
-                is_hvac_sys_heating_type_furnace_flag
-                or is_hvac_sys_heating_type_heat_pump_flag
-            ):
-                heating_oversizing_factor = getattr_(
+            heating_system_b = hvac_b.get("heating_system")
+            cooling_system_b = hvac_b.get("cooling_system")
+            if heating_system_b and heating_system_b.get("type") != "NONE":
+                calc_vals["heating_not_applicable"] = False
+                calc_vals["heating_oversizing_factor"] = getattr_(
                     hvac_b, "oversizing_factor", "heating_system", "oversizing_factor"
                 )
-                is_calculated_size = getattr_(
+                calc_vals["heating_is_calculated_size"] = getattr_(
                     hvac_b,
                     "is_calculated_size",
                     "heating_system",
                     "is_calculated_size",
                 )
             else:
-                heating_oversizing_applicable = False
+                calc_vals["heating_not_applicable"] = True
 
-            if is_hvac_sys_cooling_type_dx_flag:
-                cooling_oversizing_factor = getattr_(
+            if cooling_system_b and cooling_system_b.get("type") != "NONE":
+                calc_vals["cooling_not_applicable"] = False
+                calc_vals["cooling_oversizing_factor"] = getattr_(
                     hvac_b, "oversizing_factor", "cooling_system", "oversizing_factor"
                 )
-                cooling_is_calculated_size = getattr_(
+                calc_vals["cooling_is_calculated_size"] = getattr_(
                     hvac_b,
                     "is_calculated_size",
                     "cooling_system",
                     "is_calculated_size",
                 )
             else:
-                cooling_oversizing_applicable = False
+                calc_vals["cooling_not_applicable"] = True
 
-            return {
-                "heating_oversizing_factor": heating_oversizing_factor,
-                "cooling_oversizing_factor": cooling_oversizing_factor,
-                "is_calculated_size": is_calculated_size,
-                "cooling_is_calculated_size": cooling_is_calculated_size,
-                "heating_oversizing_applicable": heating_oversizing_applicable,
-                "cooling_oversizing_applicable": cooling_oversizing_applicable,
-            }
+            return calc_vals
 
         def rule_check(self, context, calc_vals=None, data=None):
-            heating_oversizing_factor = calc_vals["heating_oversizing_factor"]
-            cooling_oversizing_factor = calc_vals["cooling_oversizing_factor"]
-            is_calculated_size = calc_vals["is_calculated_size"]
-            cooling_is_calculated_size = calc_vals["cooling_is_calculated_size"]
-            heating_oversizing_applicable = calc_vals["heating_oversizing_applicable"]
-            cooling_oversizing_applicable = calc_vals["cooling_oversizing_applicable"]
+            heating_not_applicable = calc_vals["heating_not_applicable"]
+            cooling_not_applicable = calc_vals["cooling_not_applicable"]
+            heating_oversizing_factor = None
+            cooling_oversizing_factor = None
+            heating_is_calculated_size = None
+            cooling_is_calculated_size = None
+            if not heating_not_applicable:
+                heating_oversizing_factor = calc_vals["heating_oversizing_factor"]
+                heating_is_calculated_size = calc_vals["heating_is_calculated_size"]
+
+            if not cooling_not_applicable:
+                cooling_oversizing_factor = calc_vals["cooling_oversizing_factor"]
+                cooling_is_calculated_size = calc_vals["cooling_is_calculated_size"]
 
             return (
                 (
-                    self.precision_comparison["heating_oversizing_factor"](
+                    heating_not_applicable
+                    or self.precision_comparison["heating_oversizing_factor"](
                         heating_oversizing_factor,
                         REQ_HEATING_OVERSIZING_FACTOR,
                     )
-                    and self.precision_comparison["cooling_oversizing_factor"](
-                        cooling_oversizing_factor,
-                        REQ_COOLING_OVERSIZING_FACTOR,
+                    and (
+                        cooling_not_applicable
+                        or self.precision_comparison["cooling_oversizing_factor"](
+                            cooling_oversizing_factor,
+                            REQ_COOLING_OVERSIZING_FACTOR,
+                        )
                     )
-                    and is_calculated_size
-                    and cooling_is_calculated_size
+                    and (heating_not_applicable or heating_is_calculated_size)
+                    and (cooling_not_applicable or cooling_is_calculated_size)
                 )
                 or (
                     self.precision_comparison["heating_oversizing_factor"](
                         heating_oversizing_factor,
                         REQ_HEATING_OVERSIZING_FACTOR,
                     )
-                    and is_calculated_size
-                    and not cooling_oversizing_applicable
+                    and heating_is_calculated_size
                 )
                 or (
                     self.precision_comparison["cooling_oversizing_factor"](
@@ -182,6 +158,53 @@ class Section19Rule1(RuleDefinitionListIndexedBase):
                         REQ_COOLING_OVERSIZING_FACTOR,
                     )
                     and cooling_is_calculated_size
-                    and not heating_oversizing_applicable
+                )
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            heating_not_applicable = calc_vals["heating_not_applicable"]
+            cooling_not_applicable = calc_vals["cooling_not_applicable"]
+            heating_oversizing_factor = None
+            cooling_oversizing_factor = None
+            heating_is_calculated_size = None
+            cooling_is_calculated_size = None
+            if not heating_not_applicable:
+                heating_oversizing_factor = calc_vals["heating_oversizing_factor"]
+                heating_is_calculated_size = calc_vals["heating_is_calculated_size"]
+
+            if not cooling_not_applicable:
+                cooling_oversizing_factor = calc_vals["cooling_oversizing_factor"]
+                cooling_is_calculated_size = calc_vals["cooling_is_calculated_size"]
+
+            return (
+                (
+                    heating_not_applicable
+                    or std_equal(
+                        val=heating_oversizing_factor,
+                        std_val=REQ_HEATING_OVERSIZING_FACTOR,
+                    )
+                    and (
+                        cooling_not_applicable
+                        or std_equal(
+                            val=cooling_oversizing_factor,
+                            std_val=REQ_COOLING_OVERSIZING_FACTOR,
+                        )
+                    )
+                    and (heating_not_applicable or heating_is_calculated_size)
+                    and (cooling_not_applicable or cooling_is_calculated_size)
+                )
+                or (
+                    std_equal(
+                        val=heating_oversizing_factor,
+                        std_val=REQ_HEATING_OVERSIZING_FACTOR,
+                    )
+                    and heating_is_calculated_size
+                )
+                or (
+                    std_equal(
+                        val=cooling_oversizing_factor,
+                        std_val=REQ_COOLING_OVERSIZING_FACTOR,
+                    )
+                    and cooling_is_calculated_size
                 )
             )

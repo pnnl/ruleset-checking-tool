@@ -22,11 +22,11 @@ MANUAL_CHECK_REQUIRED_MSG = (
 FAIL_MSG = "More than one BPF value was used in the project."
 
 
-class Section1Rule1(RuleDefinitionListIndexedBase):
-    """Rule 1 of ASHRAE 90.1-2019 Appendix G Section 1 (Performance Calculations)"""
+class PRM9012019Rule73j65(RuleDefinitionListIndexedBase):
+    """Rule 73j65 of ASHRAE 90.1-2019 Appendix G Section 1 (Performance Calculations)"""
 
     def __init__(self):
-        super(Section1Rule1, self).__init__(
+        super(PRM9012019Rule73j65, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=True,
                 BASELINE_0=True,
@@ -44,7 +44,7 @@ class Section1Rule1(RuleDefinitionListIndexedBase):
                 "$": ["ruleset_model_descriptions"],
             },
             index_rmd=BASELINE_0,
-            each_rule=Section1Rule1.RMDRule(),
+            each_rule=PRM9012019Rule73j65.RMDRule(),
             id="1-1",
             description="Building performance factors shall be from Standard 90.1-2019, Table 4.2.1.1, based on the "
             "building area type and climate zone. For building area types not listed in Table 4.2.1.1 "
@@ -57,7 +57,7 @@ class Section1Rule1(RuleDefinitionListIndexedBase):
 
     class RMDRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section1Rule1.RMDRule, self).__init__(
+            super(PRM9012019Rule73j65.RMDRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=True,
                     BASELINE_0=True,
@@ -144,6 +144,14 @@ class Section1Rule1(RuleDefinitionListIndexedBase):
             bpf_bat_sum_prod = calc_vals["bpf_bat_sum_prod"]
             total_area = calc_vals["total_area"]
 
-            return len(model_output_bpf_list) == 1 and std_equal(
+            return len(model_output_bpf_list) == 1 and self.precision_comparison(
                 bpf_bat_sum_prod / total_area, model_output_bpf_list[0]
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            model_output_bpf_list = calc_vals["model_output_bpf_list"]
+            bpf_bat_sum_prod = calc_vals["bpf_bat_sum_prod"]
+            total_area = calc_vals["total_area"]
+            return len(model_output_bpf_list) == 1 and std_equal(
+                model_output_bpf_list[0], bpf_bat_sum_prod / total_area
             )

@@ -5,11 +5,11 @@ from rct229.utils.jsonpath_utils import find_one
 from rct229.utils.std_comparisons import std_equal
 
 
-class Section1Rule2(RuleDefinitionBase):
+class PRM9012019Rule63e94(RuleDefinitionBase):
     """Rule 2 of ASHRAE 90.1-2019 Appendix G Section 1 (Performance Calculations)"""
 
     def __init__(self):
-        super(Section1Rule2, self).__init__(
+        super(PRM9012019Rule63e94, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=True,
                 BASELINE_0=True,
@@ -90,8 +90,17 @@ class Section1Rule2(RuleDefinitionBase):
         pbp_set = calc_vals["pbp_set"]
         bbp_set = calc_vals["bbp_set"]
 
+        return len(pci_set) == len(pbp_set) == len(
+            bbp_set
+        ) == 1 and self.precision_comparison(pbp_set[0] / bbp_set[0], pci_set[0])
+
+    def is_tolerance_fail(self, context, calc_vals=None, data=None):
+        pci_set = calc_vals["pci_set"]
+        pbp_set = calc_vals["pbp_set"]
+        bbp_set = calc_vals["bbp_set"]
+
         return len(pci_set) == len(pbp_set) == len(bbp_set) == 1 and std_equal(
-            pbp_set[0] / bbp_set[0], pci_set[0]
+            pci_set[0], pbp_set[0] / bbp_set[0]
         )
 
     def get_fail_msg(self, context, calc_vals=None, data=None):

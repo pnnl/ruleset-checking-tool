@@ -27,15 +27,15 @@ DOOR = SchemaEnums.schema_enums["SubsurfaceClassificationOptions"].DOOR
 MANUAL_CHECK_REQUIRED_MSG = "Manual review is requested to verify vertical fenestration meets U-factor requirement as per Table G3.4. "
 
 
-class Section5Rule19(RuleDefinitionListIndexedBase):
+class PRM9012019Rule57c26(RuleDefinitionListIndexedBase):
     """Rule 24 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule19, self).__init__(
+        super(PRM9012019Rule57c26, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section5Rule19.BuildingRule(),
+            each_rule=PRM9012019Rule57c26.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-19",
             description="Vertical fenestration U-factors for residential, non-residential and semi-heated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8 for the appropriate WWR in the baseline RMD.",
@@ -66,11 +66,11 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section5Rule19.BuildingRule, self).__init__(
+            super(PRM9012019Rule57c26.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
-                each_rule=Section5Rule19.BuildingRule.AboveGradeWallRule(),
+                each_rule=PRM9012019Rule57c26.BuildingRule.AboveGradeWallRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
@@ -207,17 +207,21 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
         def list_filter(self, context_item, data=None):
             surface_b = context_item.BASELINE_0
             scc_dict_b = data["scc_dict_b"]
-            return (get_opaque_surface_type(surface_b) == OST.ABOVE_GRADE_WALL) and (
-                scc_dict_b[surface_b["id"]] != SCC.UNREGULATED
+            return (
+                (get_opaque_surface_type(surface_b) == OST.ABOVE_GRADE_WALL)
+                and (scc_dict_b[surface_b["id"]] != SCC.UNREGULATED)
+                and len(surface_b.get("subsurfaces", [])) > 0
             )
 
         class AboveGradeWallRule(RuleDefinitionListIndexedBase):
             def __init__(self):
-                super(Section5Rule19.BuildingRule.AboveGradeWallRule, self).__init__(
+                super(
+                    PRM9012019Rule57c26.BuildingRule.AboveGradeWallRule, self
+                ).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
-                    each_rule=Section5Rule19.BuildingRule.AboveGradeWallRule.SubsurfaceRule(),
+                    each_rule=PRM9012019Rule57c26.BuildingRule.AboveGradeWallRule.SubsurfaceRule(),
                     index_rmd=BASELINE_0,
                     list_path="subsurfaces[*]",
                     required_fields={
@@ -256,7 +260,7 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
             class SubsurfaceRule(RuleDefinitionBase):
                 def __init__(self):
                     super(
-                        Section5Rule19.BuildingRule.AboveGradeWallRule.SubsurfaceRule,
+                        PRM9012019Rule57c26.BuildingRule.AboveGradeWallRule.SubsurfaceRule,
                         self,
                     ).__init__(
                         rmds_used=produce_ruleset_model_description(
@@ -298,7 +302,7 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
 
                 def rule_check(self, context, calc_vals=None, data=None):
                     return self.precision_comparison["subsurface_u_factor_b"](
-                        calc_vals["target_u_factor"], calc_vals["subsurface_u_factor"]
+                        calc_vals["subsurface_u_factor"], calc_vals["target_u_factor"]
                     )
 
                 def is_tolerance_fail(self, context, calc_vals=None, data=None):

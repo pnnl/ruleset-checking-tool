@@ -23,15 +23,15 @@ APPLICABLE_SYS_TYPES = [
 ]
 
 
-class Section22Rule27(RuleDefinitionListIndexedBase):
+class PRM9012019Rule86p62(RuleDefinitionListIndexedBase):
     """Rule 27 of ASHRAE 90.1-2019 Appendix G Section 22 (Hot water loop)"""
 
     def __init__(self):
-        super(Section22Rule27, self).__init__(
+        super(PRM9012019Rule86p62, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section22Rule27.ChillerRule(),
+            each_rule=PRM9012019Rule86p62.ChillerRule(),
             index_rmd=BASELINE_0,
             id="22-27",
             description="Each baseline chiller shall be modeled with separate condenser water pump interlocked to operate with the associated chiller.",
@@ -60,7 +60,7 @@ class Section22Rule27(RuleDefinitionListIndexedBase):
 
     class ChillerRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section22Rule27.ChillerRule, self).__init__(
+            super(PRM9012019Rule86p62.ChillerRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

@@ -19,15 +19,15 @@ from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
 
 
-class Section5Rule6(RuleDefinitionListIndexedBase):
+class PRM9012019Rule70u00(RuleDefinitionListIndexedBase):
     """Rule 6 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule6, self).__init__(
+        super(PRM9012019Rule70u00, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section5Rule6.BuildingRule(),
+            each_rule=PRM9012019Rule70u00.BuildingRule(),
             index_rmd=BASELINE_0,
             list_path="ruleset_model_descriptions[0].buildings[*]",
             id="5-6",
@@ -48,12 +48,12 @@ class Section5Rule6(RuleDefinitionListIndexedBase):
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section5Rule6.BuildingRule, self).__init__(
+            super(PRM9012019Rule70u00.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={},
-                each_rule=Section5Rule6.BuildingRule.BelowGradeWallRule(),
+                each_rule=PRM9012019Rule70u00.BuildingRule.BelowGradeWallRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
@@ -76,7 +76,9 @@ class Section5Rule6(RuleDefinitionListIndexedBase):
 
         class BelowGradeWallRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section5Rule6.BuildingRule.BelowGradeWallRule, self).__init__(
+                super(
+                    PRM9012019Rule70u00.BuildingRule.BelowGradeWallRule, self
+                ).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
@@ -153,4 +155,4 @@ class Section5Rule6(RuleDefinitionListIndexedBase):
             def is_tolerance_fail(self, context, calc_vals=None, data=None):
                 below_grade_wall_c_factor = calc_vals["below_grade_wall_c_factor"]
                 target_c_factor = calc_vals["target_c_factor"]
-                return std_equal(below_grade_wall_c_factor, target_c_factor)
+                return std_equal(target_c_factor, below_grade_wall_c_factor)

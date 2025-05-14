@@ -39,15 +39,15 @@ APPLICABLE_SYS_TYPES = [
 FLUID_LOOP = SchemaEnums.schema_enums["FluidLoopOptions"]
 
 
-class Section21Rule11(RuleDefinitionListIndexedBase):
+class PRM9012019Rule59p62(RuleDefinitionListIndexedBase):
     """Rule 11 of ASHRAE 90.1-2019 Appendix G Section 21 (Hot water loop)"""
 
     def __init__(self):
-        super(Section21Rule11, self).__init__(
+        super(PRM9012019Rule59p62, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section21Rule11.HeatingFluidLoopRule(),
+            each_rule=PRM9012019Rule59p62.HeatingFluidLoopRule(),
             index_rmd=BASELINE_0,
             id="21-11",
             description="The baseline building design uses boilers or purchased hot water, the hot water pumping system shall be modeled as primary-only.",
@@ -80,7 +80,7 @@ class Section21Rule11(RuleDefinitionListIndexedBase):
 
     class HeatingFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section21Rule11.HeatingFluidLoopRule, self).__init__(
+            super(PRM9012019Rule59p62.HeatingFluidLoopRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

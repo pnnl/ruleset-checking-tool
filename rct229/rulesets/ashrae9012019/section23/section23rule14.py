@@ -34,15 +34,15 @@ APPLICABLE_SYS_TYPES = [
 DehumidificationOptions = SchemaEnums.schema_enums["DehumidificationOptions"]
 
 
-class Section23Rule14(RuleDefinitionListIndexedBase):
+class PRM9012019Rule14m33(RuleDefinitionListIndexedBase):
     """Rule 14 of ASHRAE 90.1-2019 Appendix G Section 23 (Air-side)"""
 
     def __init__(self):
-        super(Section23Rule14, self).__init__(
+        super(PRM9012019Rule14m33, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section23Rule14.HVACRule(),
+            each_rule=PRM9012019Rule14m33.HVACRule(),
             index_rmd=PROPOSED,
             id="23-14",
             description="If the baseline system does not comply with exceptions in Section 6.5.2.3 then only 25% of the system reheat energy shall be included in the baseline building performance.",
@@ -91,7 +91,7 @@ class Section23Rule14(RuleDefinitionListIndexedBase):
 
     class HVACRule(PartialRuleDefinition):
         def __init__(self):
-            super(Section23Rule14.HVACRule, self).__init__(
+            super(PRM9012019Rule14m33.HVACRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=False, PROPOSED=True
                 ),

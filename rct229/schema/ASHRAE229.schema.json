@@ -1940,10 +1940,25 @@
                 },
                 "cooling_design_day_type": {
                     "description": "The frequency of occurance type for cooling design day",
-                    "$ref": "ASHRAE229.schema.json#/definitions/CoolingDesignDayOptions"
+                    "$ref": "ASHRAE229.schema.json#/definitions/CoolingDesignDayOptions",
+                    "_comment": "This object must be deleted when the schema is updated."
                 },
                 "heating_design_day_type": {
                     "description": "The frequency of occurance type for heating design day",
+                    "$ref": "ASHRAE229.schema.json#/definitions/HeatingDesignDayOptions",
+                    "_comment": "This object must be deleted when the schema is updated."
+                },
+                "cooling_dry_bulb_design_day_type": {
+                    "description": "The frequency of occurance type for cooling design day based on dry-bulb temperature",
+                    "$ref": "ASHRAE229.schema.json#/definitions/CoolingDesignDayOptions"
+                },
+                "evaporation_wet_bulb_design_day_type": {
+                    "description": "The frequency of occurance type for evaporation wet-bulb design day",
+                    "$ref": "ASHRAE229.schema.json#/definitions/CoolingDesignDayOptions",
+                    "notes": "This may also be known as cooling design wet-bulb temperature day type."
+                },
+                "heating_dry_bulb_design_day_type": {
+                    "description": "The frequency of occurance type for heating design day based on dry-bulb temperature",
                     "$ref": "ASHRAE229.schema.json#/definitions/HeatingDesignDayOptions"
                 }
             },

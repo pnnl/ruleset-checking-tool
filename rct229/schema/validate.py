@@ -26,6 +26,63 @@ SCHEMA_RESNET_ENUM_PATH = os.path.join(file_dir, SCHEMA_RESNET_ENUM_KEY)
 SCHEMA_OUTPUT_PATH = os.path.join(file_dir, SCHEMA_OUTPUT_KEY)
 
 
+def check_associated_data_elements(rpd: dict) -> list[str]:
+    """
+    Check validity of separate data elements that are associated with each other.
+    e.g. if SWH use is populated, SWH use_units must also be populated.
+    e.g. if efficiency_metric_values is populated, it must have the same length as efficiency_metric_types
+
+    Parameters
+    ----------
+    rpd
+
+    Returns list of object ids where the associated lists are not the same length
+    -------
+
+    """
+    mismatch_errors = []
+
+    associated_list_data_elements = [
+        ("use_units", "use"),
+        ("efficiency_metric_types", "efficiency_metric_values"),
+    ]
+    associated_list_jsonpaths = [
+        "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].service_water_heating_uses[*]",
+        "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].spaces[*].service_water_heating_uses[*]",
+        "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].heating_system",
+        "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].preheat_system",
+        "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].cooling_system",
+        "$.ruleset_model_descriptions[*].boilers[*]",
+        "$.ruleset_model_descriptions[*].chillers[*]",
+        "$.ruleset_model_descriptions[*].service_water_heating_equipment[*]",
+    ]
+
+    for jsonpath in associated_list_jsonpaths:
+        object_list = find_all(jsonpath, rpd)
+
+        for obj in object_list:
+            for key_1, key_2 in associated_list_data_elements:
+                val_1, val_2 = obj.get(key_1, None), obj.get(key_2, None)
+                if val_1 is None and val_2 is None:
+                    continue
+                # XOR operation
+                if (val_1 is None) != (val_2 is None):
+                    mismatch_errors.append(
+                        f"'{obj['id']}' has populated '{key_1 if val_1 else key_2}' but is missing '{key_1 if not val_1 else key_2}'."
+                    )
+                    continue
+
+                # Ensure when both are lists they have the same length
+                if isinstance(val_1, list) and isinstance(val_2, list):
+                    val_1, val_2 = obj[key_1], obj[key_2]
+                    if val_1 and val_2 and len(val_1) != len(val_2):
+                        mismatch_errors.append(
+                            f"'{obj['id']}' lists at '{key_1}' and '{key_2}' are not the same length."
+                        )
+
+    return mismatch_errors
+
+
 def check_fluid_loop_association(rpd: dict) -> list:
     """
     Check the association between fluid loops and the various objects which reference them.
@@ -334,7 +391,7 @@ def json_paths_to_lists(val, path="$"):
 
 
 def json_paths_to_lists_from_dict(rmd_dict, path):
-    """Determines all the generic json paths to lists inside an dictionary
+    """Determines all the generic json paths to lists inside a dictionary
 
     If a json path has a list index, that index is replaced with [*] to make it
     generic.
@@ -368,7 +425,7 @@ def json_paths_to_lists_from_list(rmd_list, path):
 
     Parameters
     ----------
-    rmd_list : dict
+    rmd_list : list
 
     path : str
         A json path representing a generic path to rmd_list in a larger structure
@@ -438,6 +495,11 @@ def non_schema_validate_rpd(rmd_obj):
         error.append(
             f"Cannot find service water heating {mismatch_service_water_heating_errors} in the ServiceWaterHeatingDistributionSystems data group."
         )
+
+    mismatch_associated_data_elements_errors = check_associated_data_elements(rmd_obj)
+    passed = passed and not mismatch_associated_data_elements_errors
+    if mismatch_associated_data_elements_errors:
+        error.extend(mismatch_associated_data_elements_errors)
 
     return {"passed": passed, "error": error if error else None}
 

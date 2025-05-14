@@ -16,15 +16,15 @@ APPLICABILITY_MSG = (
 )
 
 
-class Section11Rule12(RuleDefinitionListIndexedBase):
+class PRM9012019rule52y79(RuleDefinitionListIndexedBase):
     """Rule 12 of ASHRAE 90.1-2019 Appendix G Section 11 (Service Water Heating)"""
 
     def __init__(self):
-        super(Section11Rule12, self).__init__(
+        super(PRM9012019rule52y79, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section11Rule12.RMDRule(),
+            each_rule=PRM9012019rule52y79.RMDRule(),
             index_rmd=BASELINE_0,
             id="11-12",
             description="For large, 24-hour-per-day facilities that meet the prescriptive criteria for use of condenser heat recovery systems described in Section 6.5.6.2, a system meeting the requirements of that section shall be included in the baseline building design regardless of the exceptions to Section 6.5.6.2.",
@@ -36,11 +36,11 @@ class Section11Rule12(RuleDefinitionListIndexedBase):
 
     class RMDRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section11Rule12.RMDRule, self).__init__(
+            super(PRM9012019rule52y79.RMDRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
-                each_rule=Section11Rule12.RMDRule.BuildingRule(),
+                each_rule=PRM9012019rule52y79.RMDRule.BuildingRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.buildings[*]",
             )
@@ -62,7 +62,7 @@ class Section11Rule12(RuleDefinitionListIndexedBase):
 
         class BuildingRule(PartialRuleDefinition):
             def __init__(self):
-                super(Section11Rule12.RMDRule.BuildingRule, self).__init__(
+                super(PRM9012019rule52y79.RMDRule.BuildingRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),

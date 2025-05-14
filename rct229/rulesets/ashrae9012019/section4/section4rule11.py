@@ -53,15 +53,15 @@ APPLICABLE_SYS_TYPES = [
 ]
 
 
-class Section4Rule11(RuleDefinitionListIndexedBase):
+class PRM9012019Rule18y74(RuleDefinitionListIndexedBase):
     """Rule 11 of ASHRAE 90.1-2019 Appendix G Section 4 (Schedules Setpoints)"""
 
     def __init__(self):
-        super(Section4Rule11, self).__init__(
+        super(PRM9012019Rule18y74, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section4Rule11.RuleSetModelInstanceRule(),
+            each_rule=PRM9012019Rule18y74.RuleSetModelInstanceRule(),
             index_rmd=BASELINE_0,
             id="4-11",
             description="Fan schedules shall be modeled identically in the baseline and proposed unless Table G3.1 Section 4 baseline exceptions are applicable. Fan Schedules may be allowed to differ when Section 4 Baseline Column Exceptions #1, #2 Or #3 are applicable.",
@@ -73,11 +73,11 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
 
     class RuleSetModelInstanceRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section4Rule11.RuleSetModelInstanceRule, self).__init__(
+            super(PRM9012019Rule18y74.RuleSetModelInstanceRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
-                each_rule=Section4Rule11.RuleSetModelInstanceRule.ZoneRule(),
+                each_rule=PRM9012019Rule18y74.RuleSetModelInstanceRule.ZoneRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].zones[*]",
                 required_fields={
@@ -162,7 +162,9 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
 
         class ZoneRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section4Rule11.RuleSetModelInstanceRule.ZoneRule, self,).__init__(
+                super(
+                    PRM9012019Rule18y74.RuleSetModelInstanceRule.ZoneRule, self
+                ).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
@@ -263,28 +265,45 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
                 }
 
             def manual_check_required(self, context, calc_vals=None, data=None):
-                schedule_mismatch = calc_vals["schedule_mismatch"]
                 system_type_match_baseline_proposed = calc_vals[
                     "system_type_match_baseline_proposed"
                 ]
-                return schedule_mismatch or not system_type_match_baseline_proposed
+
+                return not system_type_match_baseline_proposed
 
             def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
                 schedule_mismatch = calc_vals["schedule_mismatch"]
                 baseline_served_by_multizone = calc_vals["baseline_served_by_multizone"]
                 proposed_served_by_multizone = calc_vals["proposed_served_by_multizone"]
                 hvac_type_check = calc_vals["hvac_type_check"]
+
                 if (
                     schedule_mismatch
                     and not baseline_served_by_multizone
                     and hvac_type_check
                     and proposed_served_by_multizone
                 ):
-                    return "There is a fan operating schedule mismatch between the baseline and proposed but section g3.1.1(c) appears applicable. Verify mismatch is appropriate per section G3.1.1(c) and that the fan operating schedule in the baseline is in alignment with the occupancy schedules."
-                elif schedule_mismatch:
-                    return "There is a fan schedule mismatch between the baseline and proposed for the hvac system(s) serving this zone. Fail unless table G3.1 section 4 baseline column exceptions #1, #2 or #3 is applicable."
+                    return (
+                        "There is a fan operating schedule mismatch between the baseline and proposed but section g3.1.1(c) appears applicable. "
+                        "Verify mismatch is appropriate per section G3.1.1(c) and that the fan operating schedule in the baseline is in alignment with the occupancy schedules."
+                    )
                 else:
-                    return "Fan schedules match between the baseline and proposed for the hvac system(s) serving this zone. Verify that matching schedules are appropriate in that none of the section 4 baseline column exceptions #1, #2 or #3 are applicable."
+                    return (
+                        "Fan schedules match between the baseline and proposed for the hvac system(s) serving this zone. "
+                        "Verify that matching schedules are appropriate in that none of the section 4 baseline column exceptions #1, #2 or #3 are applicable."
+                    )
 
             def rule_check(self, context, calc_vals=None, data=None):
-                return True
+                schedule_mismatch = calc_vals["schedule_mismatch"]
+                system_type_match_baseline_proposed = calc_vals[
+                    "system_type_match_baseline_proposed"
+                ]
+
+                return not schedule_mismatch and system_type_match_baseline_proposed
+
+            def get_fail_msg(self, context, calc_vals=None, data=None):
+
+                return (
+                    "There is a fan schedule mismatch between the baseline and proposed RMDs for the hvac system(s) serving this zone. "
+                    "Fail unless table G3.1 section 4 baseline column exceptions #1, #2 or #3 is applicable."
+                )

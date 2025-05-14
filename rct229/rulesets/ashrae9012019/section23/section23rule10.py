@@ -12,6 +12,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types i
     get_baseline_system_types,
 )
 from rct229.schema.schema_enums import SchemaEnums
+from rct229.utils.std_comparisons import std_equal
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_11_1,
@@ -25,15 +26,15 @@ FAN_SYSTEM_SUPPLY_FAN_VOLUME_RESET = SchemaEnums.schema_enums[
 FAN_SYSTEM_SUPPLY_FAN_VOLUME_RESET_FRACTION = 0.5
 
 
-class Section23Rule10(RuleDefinitionListIndexedBase):
+class PRM9012019Rule18u93(RuleDefinitionListIndexedBase):
     """Rule 10 of ASHRAE 90.1-2019 Appendix G Section 23 (Air-side)"""
 
     def __init__(self):
-        super(Section23Rule10, self).__init__(
+        super(PRM9012019Rule18u93, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section23Rule10.HVACRule(),
+            each_rule=PRM9012019Rule18u93.HVACRule(),
             index_rmd=BASELINE_0,
             id="23-10",
             description="System 11 Fan volume shall be reset from 100% airflow at 100% cooling load to minimum "
@@ -75,7 +76,7 @@ class Section23Rule10(RuleDefinitionListIndexedBase):
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section23Rule10.HVACRule, self).__init__(
+            super(PRM9012019Rule18u93.HVACRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
@@ -113,6 +114,19 @@ class Section23Rule10(RuleDefinitionListIndexedBase):
                 fan_volume_reset_type_b
                 == FAN_SYSTEM_SUPPLY_FAN_VOLUME_RESET.DESIGN_LOAD_RESET
                 and self.precision_comparison["fan_volume_reset_fraction_b"](
+                    fan_volume_reset_fraction_b,
+                    FAN_SYSTEM_SUPPLY_FAN_VOLUME_RESET_FRACTION,
+                )
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            fan_volume_reset_fraction_b = calc_vals["fan_volume_reset_fraction"]
+            fan_volume_reset_type_b = calc_vals["fan_volume_reset_type"]
+
+            return (
+                fan_volume_reset_type_b
+                == FAN_SYSTEM_SUPPLY_FAN_VOLUME_RESET.DESIGN_LOAD_RESET
+                and std_equal(
                     fan_volume_reset_fraction_b,
                     FAN_SYSTEM_SUPPLY_FAN_VOLUME_RESET_FRACTION,
                 )

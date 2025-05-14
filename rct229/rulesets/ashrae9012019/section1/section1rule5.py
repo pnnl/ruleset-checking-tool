@@ -1,16 +1,17 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.utils.assertions import assert_
+from rct229.utils.compare_standard_val import std_le
 from rct229.utils.jsonpath_utils import find_one
 
 APPLICABLE_LIMIT = 0.05
 
 
-class Section1Rule5(RuleDefinitionBase):
+class PRM9012019Rule86h31(RuleDefinitionBase):
     """Rule 5 of ASHRAE 90.1-2019 Appendix G Section 1 (Performance Calculations)"""
 
     def __init__(self):
-        super(Section1Rule5, self).__init__(
+        super(PRM9012019Rule86h31, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=True,
                 BASELINE_0=True,
@@ -170,7 +171,32 @@ class Section1Rule5(RuleDefinitionBase):
             == len(pci_set)
             == len(pci_target_set)
             == 1
-            and (pci_set[0] + ((pbp_nre_set[0] - pbp_set[0]) / bbp_set[0]))
-            - APPLICABLE_LIMIT
-            <= pci_target_set[0]
+            and (
+                pci_set[0]
+                + ((pbp_nre_set[0] - pbp_set[0]) / bbp_set[0])
+                - APPLICABLE_LIMIT
+                < pci_target_set[0]
+            )
+            or self.precision_comparison(
+                pci_set[0]
+                + ((pbp_nre_set[0] - pbp_set[0]) / bbp_set[0])
+                - APPLICABLE_LIMIT,
+                pci_target_set[0],
+            )
+        )
+
+    def is_tolerance_fail(self, context, calc_vals=None, data=None):
+        pbp_set = calc_vals["pbp_set"]
+        bbp_set = calc_vals["bbp_set"]
+        pbp_nre_set = calc_vals["pbp_nre_set"]
+        pci_set = calc_vals["pci_set"]
+        pci_target_set = calc_vals["pci_target_set"]
+
+        return len(pbp_set) == len(bbp_set) == len(pbp_nre_set) == len(pci_set) == len(
+            pci_target_set
+        ) == 1 and std_le(
+            pci_set[0]
+            + ((pbp_nre_set[0] - pbp_set[0]) / bbp_set[0])
+            - APPLICABLE_LIMIT,
+            pci_target_set[0],
         )

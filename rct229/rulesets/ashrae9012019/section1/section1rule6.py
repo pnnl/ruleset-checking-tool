@@ -2,9 +2,6 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
-from rct229.rulesets.ashrae9012019.data_fns.extra_schema_fns import (
-    baseline_equals_proposed,
-)
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
@@ -12,11 +9,11 @@ from rct229.utils.pint_utils import ZERO
 ENERGY_SOURCE_OPTIONS = SchemaEnums.schema_enums["EnergySourceOptions"]
 
 
-class Section1Rule6(RuleDefinitionListIndexedBase):
+class PRM9012019Rule10d53(RuleDefinitionListIndexedBase):
     """Rule 6 of ASHRAE 90.1-2019 Appendix G Section 1 (Performance Calculation)"""
 
     def __init__(self):
-        super(Section1Rule6, self).__init__(
+        super(PRM9012019Rule10d53, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False,
                 BASELINE_0=True,
@@ -37,13 +34,13 @@ class Section1Rule6(RuleDefinitionListIndexedBase):
             is_primary_rule=True,
             rmd_context="ruleset_model_descriptions/0",
             index_rmd=BASELINE_0,
-            each_rule=Section1Rule6.RMDRule(),
+            each_rule=PRM9012019Rule10d53.RMDRule(),
             list_path="ruleset_model_descriptions[0]",
         )
 
     class RMDRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section1Rule6.RMDRule, self).__init__(
+            super(PRM9012019Rule10d53.RMDRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False,
                     BASELINE_0=True,

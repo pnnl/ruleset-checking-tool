@@ -21,15 +21,15 @@ APPLICABLE_SYS_TYPES = [
 ]
 
 
-class Section23Rule4(RuleDefinitionListIndexedBase):
+class PRM9012019Rule68z84(RuleDefinitionListIndexedBase):
     """Rule 4 of ASHRAE 90.1-2019 Appendix G Section 23 (Air-side)"""
 
     def __init__(self):
-        super(Section23Rule4, self).__init__(
+        super(PRM9012019Rule68z84, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section23Rule4.RuleSetModelInstanceRule(),
+            each_rule=PRM9012019Rule68z84.RuleSetModelInstanceRule(),
             index_rmd=BASELINE_0,
             id="23-4",
             description="Baseline systems 5 & 7 serving lab spaces per G3.1.1c shall reduce lab exhaust and makeup air during unoccupied periods to 50% of zone peak airflow, the minimum outdoor airflow, or rate required to comply with minimum accreditation standards whichever is larger.",
@@ -46,7 +46,7 @@ class Section23Rule4(RuleDefinitionListIndexedBase):
 
     class RuleSetModelInstanceRule(PartialRuleDefinition):
         def __init__(self):
-            super(Section23Rule4.RuleSetModelInstanceRule, self).__init__(
+            super(PRM9012019Rule68z84.RuleSetModelInstanceRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),

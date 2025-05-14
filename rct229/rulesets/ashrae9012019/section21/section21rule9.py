@@ -27,15 +27,15 @@ APPLICABLE_SYS_TYPES = [
 REQUIRED_PUMP_POWER_PER_FLOW_RATE = 19.0 * ureg("W/gpm")
 
 
-class Section21Rule9(RuleDefinitionListIndexedBase):
+class PRM9012019Rule39a29(RuleDefinitionListIndexedBase):
     """Rule 9 of ASHRAE 90.1-2019 Appendix G Section 21 (Hot water loop)"""
 
     def __init__(self):
-        super(Section21Rule9, self).__init__(
+        super(PRM9012019Rule39a29, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section21Rule9.HeatingFluidLoopRule(),
+            each_rule=PRM9012019Rule39a29.HeatingFluidLoopRule(),
             index_rmd=BASELINE_0,
             id="21-9",
             description="When baseline building includes boilers, Hot Water Pump Power = 19W/gpm.",
@@ -74,12 +74,18 @@ class Section21Rule9(RuleDefinitionListIndexedBase):
 
     class HeatingFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section21Rule9.HeatingFluidLoopRule, self).__init__(
+            super(PRM9012019Rule39a29.HeatingFluidLoopRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={
                     "$": ["pump_power_per_flow_rate"],
+                },
+                precision={
+                    "pump_power_per_flow_rate": {
+                        "precision": 0.1,
+                        "unit": "W/gpm",
+                    },
                 },
             )
 
@@ -100,7 +106,9 @@ class Section21Rule9(RuleDefinitionListIndexedBase):
             required_pump_power_per_flow_rate = calc_vals[
                 "required_pump_power_per_flow_rate"
             ]
-            return required_pump_power_per_flow_rate == pump_power_per_flow_rate
+            return self.precision_comparison["pump_power_per_flow_rate"](
+                pump_power_per_flow_rate, required_pump_power_per_flow_rate
+            )
 
         def is_tolerance_fail(self, context, calc_vals=None, data=None):
             pump_power_per_flow_rate = calc_vals["pump_power_per_flow_rate"]
