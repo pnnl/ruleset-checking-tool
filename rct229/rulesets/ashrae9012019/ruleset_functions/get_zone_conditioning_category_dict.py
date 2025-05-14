@@ -44,9 +44,6 @@ GET_ZONE_CONDITIONING_CATEGORY_DICT__REQUIRED_FIELDS = {
         "building_segments[*].zones[*].surfaces[*].subsurfaces[*]": [
             "u_factor",
         ],
-        "building_segments[*].zones[*].terminals[*]": [
-            "served_by_heating_ventilating_air_conditioning_system"
-        ],
     }
 }
 
@@ -192,17 +189,18 @@ def get_zone_conditioning_category_dict(
         for terminal in find_all("terminals[*]", zone):
             # Note: there is only one hvac system even though the field name is plural
             # This will change to singular in schema version 0.0.8
-            hvac_sys_id = terminal[
+            hvac_sys_id = terminal.get(
                 "served_by_heating_ventilating_air_conditioning_system"
-            ]
+            )
 
             # Add cooling and heating capacites for the terminal
             zone_capacity["sensible_cooling"] += hvac_cool_capacity_dict.get(
                 hvac_sys_id, ZERO.THERMAL_CAPACITY
             )
+            # Terminal heating_capacity will include baseboard capacity when hvac_sys_id is None
             zone_capacity["heating"] += hvac_heat_capacity_dict.get(
                 hvac_sys_id, ZERO.THERMAL_CAPACITY
-            ) + (terminal.get("heat_capacity", ZERO.POWER) / zone_area)
+            ) + (terminal.get("heating_capacity", ZERO.POWER) / zone_area)
 
     # Determine eligibility for directly conditioned (heated or cooled) and
     # semi-heated zones
