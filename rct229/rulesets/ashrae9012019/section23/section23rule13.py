@@ -34,15 +34,15 @@ APPLICABLE_SYS_TYPES = [
 DehumidificationOptions = SchemaEnums.schema_enums["DehumidificationOptions"]
 
 
-class Section23Rule13(RuleDefinitionListIndexedBase):
+class PRM9012019Rule50v48(RuleDefinitionListIndexedBase):
     """Rule 13 of ASHRAE 90.1-2019 Appendix G Section 23 (Air-side)"""
 
     def __init__(self):
-        super(Section23Rule13, self).__init__(
+        super(PRM9012019Rule50v48, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section23Rule13.HVACRule(),
+            each_rule=PRM9012019Rule50v48.HVACRule(),
             index_rmd=PROPOSED,
             id="23-13",
             description="If proposed design includes humidistatic controls then the baseline shall use mechanical cooling for dehumidification and shall reheat to avoid overcooling.",
@@ -91,7 +91,7 @@ class Section23Rule13(RuleDefinitionListIndexedBase):
 
     class HVACRule(PartialRuleDefinition):
         def __init__(self):
-            super(Section23Rule13.HVACRule, self).__init__(
+            super(PRM9012019Rule50v48.HVACRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=False, PROPOSED=True
                 ),

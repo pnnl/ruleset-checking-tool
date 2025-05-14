@@ -79,12 +79,14 @@ def find_schema_unit_for_json_path(key_list):
         reference_string = return_json_schema_reference(dict_ref, key)
 
         # If reference string references a secondary json reference, update root JSON dictionary to new secondary schema
-        if reference_string in secondary_schema_files:
-            schema_dict = get_secondary_schema_root_dictionary(reference_string)
+        if reference_string.split("#")[0] in secondary_schema_files:
+            schema_dict = get_secondary_schema_root_dictionary(
+                reference_string.split("#")[0]
+            )
 
             # Split out root dictionary object key. It's found in the schema object's file name
             # (e.g., 'Output2019ASHRAE901' in 'Output2019ASHRAE901.schema.json')
-            root_key = reference_string.split(".")[0]
+            root_key = reference_string.split("/")[-1].split(".")[0]
             dict_ref = schema_dict[root_key]
         else:
             dict_ref = schema_dict[reference_string]
@@ -227,7 +229,7 @@ def return_json_schema_reference(object_dict, key):
 
             # If it's a secondary schema file, return it
             if secondary_json in secondary_schema_files:
-                return secondary_json
+                return properties_dict["oneOf"][0]["$ref"]
 
             # If it's actually just referencing the main schema, return the reference (the last element separated by
             # the '/'s)

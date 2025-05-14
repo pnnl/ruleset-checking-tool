@@ -8,15 +8,15 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_target_baseline_sy
 )
 
 
-class Section18Rule3(RuleDefinitionListIndexedBase):
+class PRM9012019Rule00u91(RuleDefinitionListIndexedBase):
     """Rule 3 of ASHRAE 90.1-2019 Appendix G Section 5 (HVAC - System Zone Assignment)"""
 
     def __init__(self):
-        super(Section18Rule3, self).__init__(
+        super(PRM9012019Rule00u91, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section18Rule3.RuleModelDescriptionRule(),
+            each_rule=PRM9012019Rule00u91.RuleModelDescriptionRule(),
             index_rmd=BASELINE_0,
             id="18-3",
             description="The lab exhaust fan shall be modeled as constant horsepower (kilowatts) reflecting constant-volume stack discharge with outdoor air bypass in the baseline",
@@ -28,7 +28,7 @@ class Section18Rule3(RuleDefinitionListIndexedBase):
 
     class RuleModelDescriptionRule(PartialRuleDefinition):
         def __init__(self):
-            super(Section18Rule3.RuleModelDescriptionRule, self).__init__(
+            super(PRM9012019Rule00u91.RuleModelDescriptionRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),

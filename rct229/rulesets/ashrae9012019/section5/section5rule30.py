@@ -28,15 +28,15 @@ CASE3_UNDETERMINED__MSG = (
 )
 
 
-class Section5Rule30(RuleDefinitionListIndexedBase):
+class PRM9012019Rule18s99(RuleDefinitionListIndexedBase):
     """Rule 30 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule30, self).__init__(
+        super(PRM9012019Rule18s99, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=True, BASELINE_0=False, PROPOSED=True
             ),
-            each_rule=Section5Rule30.BuildingRule(),
+            each_rule=PRM9012019Rule18s99.BuildingRule(),
             index_rmd=PROPOSED,
             id="5-30",
             description="The proposed roof surfaces shall be modeled using the same thermal emittance as in the user model.",
@@ -53,11 +53,11 @@ class Section5Rule30(RuleDefinitionListIndexedBase):
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section5Rule30.BuildingRule, self).__init__(
+            super(PRM9012019Rule18s99.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=True, BASELINE_0=False, PROPOSED=True
                 ),
-                each_rule=Section5Rule30.BuildingRule.RoofRule(),
+                each_rule=PRM9012019Rule18s99.BuildingRule.RoofRule(),
                 index_rmd=PROPOSED,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
@@ -80,7 +80,7 @@ class Section5Rule30(RuleDefinitionListIndexedBase):
 
         class RoofRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section5Rule30.BuildingRule.RoofRule, self).__init__(
+                super(PRM9012019Rule18s99.BuildingRule.RoofRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=True, BASELINE_0=False, PROPOSED=True
                     ),

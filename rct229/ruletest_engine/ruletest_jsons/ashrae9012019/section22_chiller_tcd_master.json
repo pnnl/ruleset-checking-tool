@@ -1,12 +1,10 @@
 {
-    "rule-22-1-a": {
-        "Section": 22,
-        "Rule": 1,
+    "rule-92r39-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water loop. The chilled water supply temperature is 44 F.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-1",
+            "rule_id": "92r39",
             "ruleset_reference": "G3.1.3.8",
             "rule_description": "Baseline chilled water design supply temperature shall be modeled at 44F.",
             "applicable_rmr": "Baseline Model",
@@ -144,14 +142,12 @@
             }
         }
     },
-    "rule-22-1-b": {
-        "Section": 22,
-        "Rule": 1,
+    "rule-92r39-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water loop. The chilled water supply temperature is 50 F.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-1",
+            "rule_id": "92r39",
             "ruleset_reference": "G3.1.3.8",
             "rule_description": "Baseline chilled water design supply temperature shall be modeled at 44F.",
             "applicable_rmr": "Baseline Model",
@@ -289,14 +285,12 @@
             }
         }
     },
-    "rule-22-1-c": {
-        "Section": 22,
-        "Rule": 1,
+    "rule-92r39-c": {
         "Test": "c",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water loop. The chilled water supply temperature is 44 F.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-1",
+            "rule_id": "92r39",
             "ruleset_reference": "G3.1.3.8",
             "rule_description": "Baseline chilled water design supply temperature shall be modeled at 44F.",
             "applicable_rmr": "Baseline Model",
@@ -434,14 +428,12 @@
             }
         }
     },
-    "rule-22-1-d": {
-        "Section": 22,
-        "Rule": 1,
+    "rule-92r39-d": {
         "Test": "d",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water loop. The chilled water supply temperature is 50 F.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-1",
+            "rule_id": "92r39",
             "ruleset_reference": "G3.1.3.8",
             "rule_description": "Baseline chilled water design supply temperature shall be modeled at 44F.",
             "applicable_rmr": "Baseline Model",
@@ -579,14 +571,12 @@
             }
         }
     },
-    "rule-22-1-e": {
-        "Section": 22,
-        "Rule": 1,
+    "rule-92r39-e": {
         "Test": "e",
         "test_description": "The project has one building segment with one zone served by a baseline system type 1. There is no chilled water loop.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "22-1",
+            "rule_id": "92r39",
             "ruleset_reference": "G3.1.3.8",
             "rule_description": "Baseline chilled water design supply temperature shall be modeled at 44F.",
             "applicable_rmr": "Baseline Model",
@@ -666,14 +656,12 @@
             }
         }
     },
-    "rule-22-2-a": {
-        "Section": 22,
-        "Rule": 2,
+    "rule-59b18-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water loop.  The chilled water return temperature is 56 F.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-2",
+            "rule_id": "59b18",
             "ruleset_reference": "G3.1.3.8",
             "rule_description": "For applicable baseline system types 7, 8, 11, 12 and 13, the baseline chilled water design return temperature shall be modeled at 56F.",
             "applicable_rmr": "Baseline Model",
@@ -811,14 +799,12 @@
             }
         }
     },
-    "rule-22-2-b": {
-        "Section": 22,
-        "Rule": 2,
+    "rule-59b18-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water loop.  The chilled water return temperature is 60 F.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-2",
+            "rule_id": "59b18",
             "ruleset_reference": "G3.1.3.8",
             "rule_description": "For applicable baseline system types 7, 8, 11, 12 and 13, the baseline chilled water design return temperature shall be modeled at 56F.",
             "applicable_rmr": "Baseline Model",
@@ -956,14 +942,12 @@
             }
         }
     },
-    "rule-22-2-c": {
-        "Section": 22,
-        "Rule": 2,
+    "rule-59b18-c": {
         "Test": "c",
         "test_description": "The project has one building segment with two zones served by a baseline system type 8 with a chilled water loop.  The chilled water return temperature is 56 F.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-2",
+            "rule_id": "59b18",
             "ruleset_reference": "G3.1.3.8",
             "rule_description": "For applicable baseline system types 7, 8, 11, 12 and 13, the baseline chilled water design return temperature shall be modeled at 56F.",
             "applicable_rmr": "Baseline Model",
@@ -1090,14 +1074,12 @@
             }
         }
     },
-    "rule-22-2-d": {
-        "Section": 22,
-        "Rule": 2,
+    "rule-59b18-d": {
         "Test": "d",
         "test_description": "The project has one building segment with two zones served by a baseline system type 8 with a chilled water loop.  The chilled water return temperature is 60 F.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-2",
+            "rule_id": "59b18",
             "ruleset_reference": "G3.1.3.8",
             "rule_description": "For applicable baseline system types 7, 8, 11, 12 and 13, the baseline chilled water design return temperature shall be modeled at 56F.",
             "applicable_rmr": "Baseline Model",
@@ -1224,14 +1206,12 @@
             }
         }
     },
-    "rule-22-2-e": {
-        "Section": 22,
-        "Rule": 2,
+    "rule-59b18-e": {
         "Test": "e",
         "test_description": "The project has one building segment with one zone served by a baseline system type 2. There is no chilled water loop.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "22-2",
+            "rule_id": "59b18",
             "ruleset_reference": "G3.1.3.8",
             "rule_description": "For applicable baseline system types 7, 8, 11, 12 and 13, the baseline chilled water design return temperature shall be modeled at 56F.",
             "applicable_rmr": "Baseline Model",
@@ -1297,14 +1277,12 @@
             }
         }
     },
-    "rule-22-3-a": {
-        "Section": 22,
-        "Rule": 3,
+    "rule-58a51-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water loop. The chilled water supply temperature is reset based on outdoor dry-bulb temperature.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-3",
+            "rule_id": "58a51",
             "ruleset_reference": "G3.1.3.9",
             "rule_description": "Baseline chilled water loops that do not use purchased cooling and do not serve any computer rooms (baseline system type 11) shall have the chilled water supply temperature reset based on outdoor dry-bulb temperature.",
             "applicable_rmr": "Baseline Model",
@@ -1442,14 +1420,12 @@
             }
         }
     },
-    "rule-22-3-b": {
-        "Section": 22,
-        "Rule": 3,
+    "rule-58a51-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water loop. The chilled water supply temperature is reset based on \"other\" controls.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-3",
+            "rule_id": "58a51",
             "ruleset_reference": "G3.1.3.9",
             "rule_description": "Baseline chilled water loops that do not use purchased cooling and do not serve any computer rooms (baseline system type 11) shall have the chilled water supply temperature reset based on outdoor dry-bulb temperature.",
             "applicable_rmr": "Baseline Model",
@@ -1587,14 +1563,12 @@
             }
         }
     },
-    "rule-22-3-c": {
-        "Section": 22,
-        "Rule": 3,
+    "rule-58a51-c": {
         "Test": "c",
         "test_description": "The project has one building segment with two zones served by a baseline system type 8 with a chilled water loop. The chilled water supply temperature is reset based on outdoor dry-bulb temperature.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-3",
+            "rule_id": "58a51",
             "ruleset_reference": "G3.1.3.9",
             "rule_description": "Baseline chilled water loops that do not use purchased cooling and do not serve any computer rooms (baseline system type 11) shall have the chilled water supply temperature reset based on outdoor dry-bulb temperature.",
             "applicable_rmr": "Baseline Model",
@@ -1734,14 +1708,12 @@
             }
         }
     },
-    "rule-22-3-d": {
-        "Section": 22,
-        "Rule": 3,
+    "rule-58a51-d": {
         "Test": "d",
         "test_description": "The project has one building segment with two zones served by a baseline system type 8 with a chilled water loop. The chilled water supply temperature is reset based on \"other\" controls.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-3",
+            "rule_id": "58a51",
             "ruleset_reference": "G3.1.3.9",
             "rule_description": "Baseline chilled water loops that do not use purchased cooling and do not serve any computer rooms (baseline system type 11) shall have the chilled water supply temperature reset based on outdoor dry-bulb temperature.",
             "applicable_rmr": "Baseline Model",
@@ -1881,14 +1853,12 @@
             }
         }
     },
-    "rule-22-3-e": {
-        "Section": 22,
-        "Rule": 3,
+    "rule-58a51-e": {
         "Test": "e",
         "test_description": "The project has one building segment with one zone served by a baseline system type 11 with a chilled water loop. Baseline system type 11 causes the loop to be exempt from this requirement.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "22-3",
+            "rule_id": "58a51",
             "ruleset_reference": "G3.1.3.9",
             "rule_description": "Baseline chilled water loops that do not use purchased cooling and do not serve any computer rooms (baseline system type 11) shall have the chilled water supply temperature reset based on outdoor dry-bulb temperature.",
             "applicable_rmr": "Baseline Model",
@@ -2011,14 +1981,12 @@
             }
         }
     },
-    "rule-22-4-a": {
-        "Section": 22,
-        "Rule": 4,
+    "rule-13x50-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water loop. The chilled water supply temperature is reset according to the prescribed outdoor air dry-bulb temperature reset schedule.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-4",
+            "rule_id": "13x50",
             "ruleset_reference": "G3.1.3.9",
             "rule_description": "Baseline chilled water loops that do not use purchased cooling and do not serve any computer rooms (baseline system type 11) shall have the chilled water supply temperature reset using the following schedule: 44F at outdoor dry-bulb temperature of 80F and above, 54F at 60F and below, and ramped linearly between 44F and 54F at temperature between 80F and 60F.",
             "applicable_rmr": "Baseline Model",
@@ -2159,14 +2127,12 @@
             }
         }
     },
-    "rule-22-4-b": {
-        "Section": 22,
-        "Rule": 4,
+    "rule-13x50-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water loop. The chilled water supply temperature is not reset according to the prescribed outdoor air dry-bulb temperature reset schedule.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-4",
+            "rule_id": "13x50",
             "ruleset_reference": "G3.1.3.9",
             "rule_description": "Baseline chilled water loops that do not use purchased cooling and do not serve any computer rooms (baseline system type 11) shall have the chilled water supply temperature reset using the following schedule: 44F at outdoor dry-bulb temperature of 80F and above, 54F at 60F and below, and ramped linearly between 44F and 54F at temperature between 80F and 60F.",
             "applicable_rmr": "Baseline Model",
@@ -2307,14 +2273,12 @@
             }
         }
     },
-    "rule-22-4-c": {
-        "Section": 22,
-        "Rule": 4,
+    "rule-13x50-c": {
         "Test": "c",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water loop. The chilled water supply temperature is not reset according to the prescribed outdoor air dry-bulb temperature reset schedule.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-4",
+            "rule_id": "13x50",
             "ruleset_reference": "G3.1.3.9",
             "rule_description": "Baseline chilled water loops that do not use purchased cooling and do not serve any computer rooms (baseline system type 11) shall have the chilled water supply temperature reset using the following schedule: 44F at outdoor dry-bulb temperature of 80F and above, 54F at 60F and below, and ramped linearly between 44F and 54F at temperature between 80F and 60F.",
             "applicable_rmr": "Baseline Model",
@@ -2455,14 +2419,12 @@
             }
         }
     },
-    "rule-22-4-d": {
-        "Section": 22,
-        "Rule": 4,
+    "rule-13x50-d": {
         "Test": "d",
         "test_description": "The project has one building segment with two zones served by a baseline system type 12 with a chilled water loop. The chilled water supply temperature is reset according to the prescribed outdoor air dry-bulb temperature reset schedule.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-4",
+            "rule_id": "13x50",
             "ruleset_reference": "G3.1.3.9",
             "rule_description": "Baseline chilled water loops that do not use purchased cooling and do not serve any computer rooms (baseline system type 11) shall have the chilled water supply temperature reset using the following schedule: 44F at outdoor dry-bulb temperature of 80F and above, 54F at 60F and below, and ramped linearly between 44F and 54F at temperature between 80F and 60F.",
             "applicable_rmr": "Baseline Model",
@@ -2588,14 +2550,12 @@
             }
         }
     },
-    "rule-22-4-e": {
-        "Section": 22,
-        "Rule": 4,
+    "rule-13x50-e": {
         "Test": "e",
         "test_description": "The project has one building segment with two zones served by a baseline system type 12 with a chilled water loop. The chilled water supply temperature is not reset according to the prescribed outdoor air dry-bulb temperature reset schedule.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-4",
+            "rule_id": "13x50",
             "ruleset_reference": "G3.1.3.9",
             "rule_description": "Baseline chilled water loops that do not use purchased cooling and do not serve any computer rooms (baseline system type 11) shall have the chilled water supply temperature reset using the following schedule: 44F at outdoor dry-bulb temperature of 80F and above, 54F at 60F and below, and ramped linearly between 44F and 54F at temperature between 80F and 60F.",
             "applicable_rmr": "Baseline Model",
@@ -2721,14 +2681,12 @@
             }
         }
     },
-    "rule-22-4-f": {
-        "Section": 22,
-        "Rule": 4,
+    "rule-13x50-f": {
         "Test": "f",
         "test_description": "The project has one building segment with two zones served by a baseline system type 12 with a chilled water loop. The chilled water supply temperature is not reset according to the prescribed outdoor air dry-bulb temperature reset schedule.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-4",
+            "rule_id": "13x50",
             "ruleset_reference": "G3.1.3.9",
             "rule_description": "Baseline chilled water loops that do not use purchased cooling and do not serve any computer rooms (baseline system type 11) shall have the chilled water supply temperature reset using the following schedule: 44F at outdoor dry-bulb temperature of 80F and above, 54F at 60F and below, and ramped linearly between 44F and 54F at temperature between 80F and 60F.",
             "applicable_rmr": "Baseline Model",
@@ -2854,14 +2812,12 @@
             }
         }
     },
-    "rule-22-4-g": {
-        "Section": 22,
-        "Rule": 4,
+    "rule-13x50-g": {
         "Test": "g",
         "test_description": "The project has one building segment with one zone served by a baseline system type 11 with a chilled water loop. Baseline system type 11 causes the loop to be exempt from this requirement.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "22-4",
+            "rule_id": "13x50",
             "ruleset_reference": "G3.1.3.9",
             "rule_description": "Baseline chilled water loops that do not use purchased cooling and do not serve any computer rooms (baseline system type 11) shall have the chilled water supply temperature reset using the following schedule: 44F at outdoor dry-bulb temperature of 80F and above, 54F at 60F and below, and ramped linearly between 44F and 54F at temperature between 80F and 60F.",
             "applicable_rmr": "Baseline Model",
@@ -2953,14 +2909,12 @@
             }
         }
     },
-    "rule-22-5-a": {
-        "Section": 22,
-        "Rule": 5,
+    "rule-38u90-a": {
         "Test": "a",
         "test_description": "The project has one building segment with one zone served by a baseline system type 11 with a chilled water loop. The chilled water supply temperature is reset based on the HVAC system requiring the most cooling.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-5",
+            "rule_id": "38u90",
             "ruleset_reference": "G3.1.3.9",
             "rule_description": "Baseline chilled water loops that do not use purchased chilled water and do serve computer rooms (baseline system type 11) shall have the chilled water supply temperature reset higher based on the HVAC system requiring the most cooling.",
             "applicable_rmr": "Baseline Model",
@@ -3066,14 +3020,12 @@
             }
         }
     },
-    "rule-22-5-b": {
-        "Section": 22,
-        "Rule": 5,
+    "rule-38u90-b": {
         "Test": "b",
         "test_description": "The project has one building segment with one zone served by a baseline system type 11 with a chilled water loop. The chilled water supply temperature is not reset based on the HVAC system requiring the most cooling.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-5",
+            "rule_id": "38u90",
             "ruleset_reference": "G3.1.3.9",
             "rule_description": "Baseline chilled water loops that do not use purchased chilled water and do serve computer rooms (baseline system type 11) shall have the chilled water supply temperature reset higher based on the HVAC system requiring the most cooling.",
             "applicable_rmr": "Baseline Model",
@@ -3179,14 +3131,12 @@
             }
         }
     },
-    "rule-22-5-c": {
-        "Section": 22,
-        "Rule": 5,
+    "rule-38u90-c": {
         "Test": "c",
         "test_description": "The project has one building segment with one zone served by a baseline system type 11 with a chilled water loop. The chilled water supply temperature is reset based on the HVAC system requiring the most cooling.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-5",
+            "rule_id": "38u90",
             "ruleset_reference": "G3.1.3.9",
             "rule_description": "Baseline chilled water loops that do not use purchased chilled water and do serve computer rooms (baseline system type 11) shall have the chilled water supply temperature reset higher based on the HVAC system requiring the most cooling.",
             "applicable_rmr": "Baseline Model",
@@ -3313,14 +3263,12 @@
             }
         }
     },
-    "rule-22-5-d": {
-        "Section": 22,
-        "Rule": 5,
+    "rule-38u90-d": {
         "Test": "d",
         "test_description": "The project has one building segment with one zone served by a baseline system type 11 with a chilled water loop. The chilled water supply temperature is not reset based on the HVAC system requiring the most cooling.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-5",
+            "rule_id": "38u90",
             "ruleset_reference": "G3.1.3.9",
             "rule_description": "Baseline chilled water loops that do not use purchased chilled water and do serve computer rooms (baseline system type 11) shall have the chilled water supply temperature reset higher based on the HVAC system requiring the most cooling.",
             "applicable_rmr": "Baseline Model",
@@ -3447,14 +3395,12 @@
             }
         }
     },
-    "rule-22-6-a": {
-        "Section": 22,
-        "Rule": 6,
+    "rule-52t53-a": {
         "Test": "a",
         "test_description": "The project has one building segment with one zone served by a baseline system type 11 with a chilled water loop.  The maximum reset chilled-water supply temperature is 54 F.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-6",
+            "rule_id": "52t53",
             "ruleset_reference": "G3.1.3.9",
             "rule_description": "Baseline chilled water loops that do not use purchased chilled water and do serve computer rooms (baseline system type 11) shall have a maximum reset chilled water supply temperature setpoint of 54F.",
             "applicable_rmr": "Baseline Model",
@@ -3560,14 +3506,12 @@
             }
         }
     },
-    "rule-22-6-b": {
-        "Section": 22,
-        "Rule": 6,
+    "rule-52t53-b": {
         "Test": "b",
         "test_description": "The project has one building segment with one zone served by a baseline system type 11 with a chilled water loop.  The maximum reset chilled-water supply temperature is 64 F.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-6",
+            "rule_id": "52t53",
             "ruleset_reference": "G3.1.3.9",
             "rule_description": "Baseline chilled water loops that do not use purchased chilled water and do serve computer rooms (baseline system type 11) shall have a maximum reset chilled water supply temperature setpoint of 54F.",
             "applicable_rmr": "Baseline Model",
@@ -3673,14 +3617,12 @@
             }
         }
     },
-    "rule-22-6-c": {
-        "Section": 22,
-        "Rule": 6,
+    "rule-52t53-c": {
         "Test": "c",
         "test_description": "The project has one building segment with one zone served by a baseline system type 11 with a chilled water loop.  The maximum reset chilled-water supply temperature is 54 F.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-6",
+            "rule_id": "52t53",
             "ruleset_reference": "G3.1.3.9",
             "rule_description": "Baseline chilled water loops that do not use purchased chilled water and do serve computer rooms (baseline system type 11) shall have a maximum reset chilled water supply temperature setpoint of 54F.",
             "applicable_rmr": "Baseline Model",
@@ -3803,14 +3745,12 @@
             }
         }
     },
-    "rule-22-6-d": {
-        "Section": 22,
-        "Rule": 6,
+    "rule-52t53-d": {
         "Test": "d",
         "test_description": "The project has one building segment with one zone served by a baseline system type 11 with a chilled water loop.  The maximum reset chilled-water supply temperature is 64 F.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-6",
+            "rule_id": "52t53",
             "ruleset_reference": "G3.1.3.9",
             "rule_description": "Baseline chilled water loops that do not use purchased chilled water and do serve computer rooms (baseline system type 11) shall have a maximum reset chilled water supply temperature setpoint of 54F.",
             "applicable_rmr": "Baseline Model",
@@ -3933,14 +3873,12 @@
             }
         }
     },
-    "rule-22-6-e": {
-        "Section": 22,
-        "Rule": 6,
+    "rule-52t53-e": {
         "Test": "e",
         "test_description": "The project has one building segment with two zones served by a baseline system type 8.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "22-6",
+            "rule_id": "52t53",
             "ruleset_reference": "G3.1.3.9",
             "rule_description": "Baseline chilled water loops that do not use purchased chilled water and do serve computer rooms (baseline system type 11) shall have a maximum reset chilled water supply temperature setpoint of 54F.",
             "applicable_rmr": "Baseline Model",
@@ -4067,14 +4005,12 @@
             }
         }
     },
-    "rule-22-7-a": {
-        "Section": 22,
-        "Rule": 7,
+    "rule-52s13-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The chilled water loop configuration is primary-secondary.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-7",
+            "rule_id": "52s13",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water systems that do not use purchased chilled water shall be modeled as primary/secondary systems.",
             "applicable_rmr": "Baseline Model",
@@ -4208,14 +4144,12 @@
             }
         }
     },
-    "rule-22-7-b": {
-        "Section": 22,
-        "Rule": 7,
+    "rule-52s13-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The chilled water loop configuration is primary-only.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-7",
+            "rule_id": "52s13",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water systems that do not use purchased chilled water shall be modeled as primary/secondary systems.",
             "applicable_rmr": "Baseline Model",
@@ -4338,14 +4272,12 @@
             }
         }
     },
-    "rule-22-7-c": {
-        "Section": 22,
-        "Rule": 7,
+    "rule-52s13-c": {
         "Test": "c",
         "test_description": "The project has one building segment with two zones served by a baseline system type 8 with a chilled water system. The chilled water loop configuration is primary-secondary.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-7",
+            "rule_id": "52s13",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water systems that do not use purchased chilled water shall be modeled as primary/secondary systems.",
             "applicable_rmr": "Baseline Model",
@@ -4468,14 +4400,12 @@
             }
         }
     },
-    "rule-22-7-d": {
-        "Section": 22,
-        "Rule": 7,
+    "rule-52s13-d": {
         "Test": "d",
         "test_description": "The project has one building segment with two zones served by a baseline system type 8 with a chilled water system. The chilled water loop configuration is primary-only.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-7",
+            "rule_id": "52s13",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water systems that do not use purchased chilled water shall be modeled as primary/secondary systems.",
             "applicable_rmr": "Baseline Model",
@@ -4605,14 +4535,12 @@
             }
         }
     },
-    "rule-22-7-e": {
-        "Section": 22,
-        "Rule": 7,
+    "rule-52s13-e": {
         "Test": "e",
         "test_description": "The project has one building segment with one zone served by a baseline system type 9.  There is no chilled water loop.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "22-7",
+            "rule_id": "52s13",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water systems that do not use purchased chilled water shall be modeled as primary/secondary systems.",
             "applicable_rmr": "Baseline Model",
@@ -4680,14 +4608,12 @@
             }
         }
     },
-    "rule-22-8-a": {
-        "Section": 22,
-        "Rule": 8,
+    "rule-37a05-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The chilled water system has a 400 ton cooling capacity and the secondary chilled water pump uses variable speed control.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-8",
+            "rule_id": "37a05",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water systems with a cooling capacity of 300 tons or more shall have the secondary chilled water pump modeled with variable-speed drives.",
             "applicable_rmr": "Baseline Model",
@@ -4822,14 +4748,12 @@
             }
         }
     },
-    "rule-22-8-b": {
-        "Section": 22,
-        "Rule": 8,
+    "rule-37a05-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The chilled water system has a 400 ton cooling capacity and the secondary chilled water pump uses fixed speed control.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-8",
+            "rule_id": "37a05",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water systems with a cooling capacity of 300 tons or more shall have the secondary chilled water pump modeled with variable-speed drives.",
             "applicable_rmr": "Baseline Model",
@@ -4964,14 +4888,12 @@
             }
         }
     },
-    "rule-22-8-c": {
-        "Section": 22,
-        "Rule": 8,
+    "rule-37a05-c": {
         "Test": "c",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The chilled water system has a 299 ton cooling capacity.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "22-8",
+            "rule_id": "37a05",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water systems with a cooling capacity of 300 tons or more shall have the secondary chilled water pump modeled with variable-speed drives.",
             "applicable_rmr": "Baseline Model",
@@ -5106,14 +5028,12 @@
             }
         }
     },
-    "rule-22-8-d": {
-        "Section": 22,
-        "Rule": 8,
+    "rule-37a05-d": {
         "Test": "d",
         "test_description": "The project has one building segment with one zone served by a baseline system type 12 with a chilled water system. The chilled water system has a 400 ton cooling capacity and the secondary chilled water pump uses variable speed control.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-8",
+            "rule_id": "37a05",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water systems with a cooling capacity of 300 tons or more shall have the secondary chilled water pump modeled with variable-speed drives.",
             "applicable_rmr": "Baseline Model",
@@ -5233,14 +5153,12 @@
             }
         }
     },
-    "rule-22-8-e": {
-        "Section": 22,
-        "Rule": 8,
+    "rule-37a05-e": {
         "Test": "e",
         "test_description": "The project has one building segment with one zone served by a baseline system type 12 with a chilled water system. The chilled water system has a 400 ton cooling capacity and the secondary chilled water pump uses fixed speed control.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-8",
+            "rule_id": "37a05",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water systems with a cooling capacity of 300 tons or more shall have the secondary chilled water pump modeled with variable-speed drives.",
             "applicable_rmr": "Baseline Model",
@@ -5360,14 +5278,12 @@
             }
         }
     },
-    "rule-22-9-a": {
-        "Section": 22,
-        "Rule": 9,
+    "rule-78g49-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system.  The chilled water system has a 400 ton cooling capacity and the secondary chilled water loop has a minimum flow of 25% of the design flow rate.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-9",
+            "rule_id": "78g49",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water systems with a cooling capacity of 300 tons or more shall have the secondary loop modeled with a minimum flow of 25% of the design flow rate.",
             "applicable_rmr": "Baseline Model",
@@ -5506,14 +5422,12 @@
             }
         }
     },
-    "rule-22-9-b": {
-        "Section": 22,
-        "Rule": 9,
+    "rule-78g49-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system.  The chilled water system has a 400 ton cooling capacity and the secondary chilled water loop has a minimum flow of 35% of the design flow rate.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-9",
+            "rule_id": "78g49",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water systems with a cooling capacity of 300 tons or more shall have the secondary loop modeled with a minimum flow of 25% of the design flow rate.",
             "applicable_rmr": "Baseline Model",
@@ -5652,14 +5566,12 @@
             }
         }
     },
-    "rule-22-9-c": {
-        "Section": 22,
-        "Rule": 9,
+    "rule-78g49-c": {
         "Test": "c",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water loop.  The chilled water system has a 299 ton cooling capacity.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "22-9",
+            "rule_id": "78g49",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water systems with a cooling capacity of 300 tons or more shall have the secondary loop modeled with a minimum flow of 25% of the design flow rate.",
             "applicable_rmr": "Baseline Model",
@@ -5798,14 +5710,12 @@
             }
         }
     },
-    "rule-22-9-d": {
-        "Section": 22,
-        "Rule": 9,
+    "rule-78g49-d": {
         "Test": "d",
         "test_description": "The project has one building segment with one zone served by a baseline system type 13 with a chilled water system. The chilled water system has a 400 ton cooling capacity and the secondary chilled water loop has a minimum flow of 25% of the design flow rate.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-9",
+            "rule_id": "78g49",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water systems with a cooling capacity of 300 tons or more shall have the secondary loop modeled with a minimum flow of 25% of the design flow rate.",
             "applicable_rmr": "Baseline Model",
@@ -5912,14 +5822,12 @@
             }
         }
     },
-    "rule-22-9-e": {
-        "Section": 22,
-        "Rule": 9,
+    "rule-78g49-e": {
         "Test": "e",
         "test_description": "The project has one building segment with one zone served by a baseline system type 13 with a chilled water system. The chilled water system has a 400 ton cooling capacity and the secondary chilled water loop has a minimum flow of 35% of the design flow rate.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-9",
+            "rule_id": "78g49",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water systems with a cooling capacity of 300 tons or more shall have the secondary loop modeled with a minimum flow of 25% of the design flow rate.",
             "applicable_rmr": "Baseline Model",
@@ -6026,14 +5934,12 @@
             }
         }
     },
-    "rule-22-10-a": {
-        "Section": 22,
-        "Rule": 10,
+    "rule-41z21-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system.  The chilled water system cooling capacity is 200 tons and the secondary chilled water pump has fixed speed control (riding the pump curve).",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-10",
+            "rule_id": "41z21",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water systems with a cooling capacity less than 300 tons shall have the secondary pump modeled as riding the pump curve. Baseline chilled water systems with a cooling capacity of 300 tons or more shall have the secondary pump modeled with variable-speed drives.",
             "applicable_rmr": "Baseline Model",
@@ -6168,14 +6074,12 @@
             }
         }
     },
-    "rule-22-10-b": {
-        "Section": 22,
-        "Rule": 10,
+    "rule-41z21-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system.  The chilled water system cooling capacity is 299 tons and the secondary chilled water pump has variable speed control.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-10",
+            "rule_id": "41z21",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water systems with a cooling capacity less than 300 tons shall have the secondary pump modeled as riding the pump curve. Baseline chilled water systems with a cooling capacity of 300 tons or more shall have the secondary pump modeled with variable-speed drives.",
             "applicable_rmr": "Baseline Model",
@@ -6310,14 +6214,12 @@
             }
         }
     },
-    "rule-22-10-c": {
-        "Section": 22,
-        "Rule": 10,
+    "rule-41z21-c": {
         "Test": "c",
         "test_description": "The project has one building segment with two zones served by a baseline system type 12 with a chilled water system.  The chilled water system cooling capacity is 301 tons and the secondary chilled water pump has variable speed control.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-10",
+            "rule_id": "41z21",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water systems with a cooling capacity less than 300 tons shall have the secondary pump modeled as riding the pump curve. Baseline chilled water systems with a cooling capacity of 300 tons or more shall have the secondary pump modeled with variable-speed drives.",
             "applicable_rmr": "Baseline Model",
@@ -6437,14 +6339,12 @@
             }
         }
     },
-    "rule-22-10-d": {
-        "Section": 22,
-        "Rule": 10,
+    "rule-41z21-d": {
         "Test": "d",
         "test_description": "The project has one building segment with two zones served by a baseline system type 12 with a chilled water system.  The chilled water system cooling capacity is 301 tons and the secondary chilled water pump has fixed speed control (riding the pump curve).",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-10",
+            "rule_id": "41z21",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water systems with a cooling capacity less than 300 tons shall have the secondary pump modeled as riding the pump curve. Baseline chilled water systems with a cooling capacity of 300 tons or more shall have the secondary pump modeled with variable-speed drives.",
             "applicable_rmr": "Baseline Model",
@@ -6564,14 +6464,12 @@
             }
         }
     },
-    "rule-22-10-e": {
-        "Section": 22,
-        "Rule": 10,
+    "rule-41z21-e": {
         "Test": "e",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The rated capacity of the system is not defined.",
         "expected_rule_outcome": "undetermined",
         "standard": {
-            "rule_id": "22-10",
+            "rule_id": "41z21",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water systems with a cooling capacity less than 300 tons shall have the secondary pump modeled as riding the pump curve. Baseline chilled water systems with a cooling capacity of 300 tons or more shall have the secondary pump modeled with variable-speed drives.",
             "applicable_rmr": "Baseline Model",
@@ -6705,14 +6603,12 @@
             }
         }
     },
-    "rule-22-10-f": {
-        "Section": 22,
-        "Rule": 10,
+    "rule-41z21-f": {
         "Test": "f",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The chilled water system configuration is primary-only (there is no secondary pump).",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "22-10",
+            "rule_id": "41z21",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water systems with a cooling capacity less than 300 tons shall have the secondary pump modeled as riding the pump curve. Baseline chilled water systems with a cooling capacity of 300 tons or more shall have the secondary pump modeled with variable-speed drives.",
             "applicable_rmr": "Baseline Model",
@@ -6835,14 +6731,12 @@
             }
         }
     },
-    "rule-22-11-a": {
-        "Section": 22,
-        "Rule": 11,
+    "rule-57w94-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The secondary chilled water pump power per flow rate is 13 W/GPM.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-11",
+            "rule_id": "57w94",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water systems that do not use purchased chilled water shall have a variable-flow secondary pump power of 13 W/gpm at design conditions.",
             "applicable_rmr": "Baseline Model",
@@ -6977,14 +6871,12 @@
             }
         }
     },
-    "rule-22-11-b": {
-        "Section": 22,
-        "Rule": 11,
+    "rule-57w94-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The secondary chilled water pump power per flow rate is 15 W/GPM.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-11",
+            "rule_id": "57w94",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water systems that do not use purchased chilled water shall have a variable-flow secondary pump power of 13 W/gpm at design conditions.",
             "applicable_rmr": "Baseline Model",
@@ -7119,14 +7011,12 @@
             }
         }
     },
-    "rule-22-11-c": {
-        "Section": 22,
-        "Rule": 11,
+    "rule-57w94-c": {
         "Test": "c",
         "test_description": "The project has one building segment with two zones served by a baseline system type 13 with a chilled water system. The secondary chilled water pump power per flow rate is 13 W/GPM.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-11",
+            "rule_id": "57w94",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water systems that do not use purchased chilled water shall have a variable-flow secondary pump power of 13 W/gpm at design conditions.",
             "applicable_rmr": "Baseline Model",
@@ -7229,14 +7119,12 @@
             }
         }
     },
-    "rule-22-11-d": {
-        "Section": 22,
-        "Rule": 11,
+    "rule-57w94-d": {
         "Test": "d",
         "test_description": "The project has one building segment with two zones served by a baseline system type 13 with a chilled water system. The secondary chilled water pump power per flow rate is 15 W/GPM.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-11",
+            "rule_id": "57w94",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water systems that do not use purchased chilled water shall have a variable-flow secondary pump power of 13 W/gpm at design conditions.",
             "applicable_rmr": "Baseline Model",
@@ -7339,14 +7227,12 @@
             }
         }
     },
-    "rule-22-11-e": {
-        "Section": 22,
-        "Rule": 11,
+    "rule-57w94-e": {
         "Test": "e",
         "test_description": "The project has one building segment with one zone served by a baseline system type 10. There is no chilled water system.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "22-11",
+            "rule_id": "57w94",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water systems that do not use purchased chilled water shall have a variable-flow secondary pump power of 13 W/gpm at design conditions.",
             "applicable_rmr": "Baseline Model",
@@ -7414,14 +7300,12 @@
             }
         }
     },
-    "rule-22-12-a": {
-        "Section": 22,
-        "Rule": 12,
+    "rule-99f07-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7. The heat rejection system has a single condenser water loop with a single cooling tower.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-12",
+            "rule_id": "99f07",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The heat rejection system shall be a single loop, modeled with a single cooling tower.",
             "applicable_rmr": "Baseline Model",
@@ -7566,15 +7450,13 @@
             }
         }
     },
-    "rule-22-12-b": {
-        "Section": 22,
-        "Rule": 12,
+    "rule-99f07-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7. The heat rejection system has two condenser water loops with a single cooling tower.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "There is more than one condenser loop for this project. There should only be one condenser loop attached to all chillers in the baseline chiller plant.",
         "standard": {
-            "rule_id": "22-12",
+            "rule_id": "99f07",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The heat rejection system shall be a single loop, modeled with a single cooling tower.",
             "applicable_rmr": "Baseline Model",
@@ -7728,15 +7610,13 @@
             }
         }
     },
-    "rule-22-12-c": {
-        "Section": 22,
-        "Rule": 12,
+    "rule-99f07-c": {
         "Test": "c",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7. The heat rejection system has a single condenser water loop with two cooling towers.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "There is more than one cooling tower for the baseline chiller plant. There should only be one cooling tower attached to the condenser loop.",
         "standard": {
-            "rule_id": "22-12",
+            "rule_id": "99f07",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The heat rejection system shall be a single loop, modeled with a single cooling tower.",
             "applicable_rmr": "Baseline Model",
@@ -7885,15 +7765,13 @@
             }
         }
     },
-    "rule-22-12-d": {
-        "Section": 22,
-        "Rule": 12,
+    "rule-99f07-d": {
         "Test": "d",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7. The heat rejection system has two condenser water loops and two cooling towers.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "There is more than one cooling tower on this loop and there is more than one condenser loop for the chiller plant. For the baseline chiller plant, there should be only one condenser loop with only one cooling tower.",
         "standard": {
-            "rule_id": "22-12",
+            "rule_id": "99f07",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The heat rejection system shall be a single loop, modeled with a single cooling tower.",
             "applicable_rmr": "Baseline Model",
@@ -8051,14 +7929,12 @@
             }
         }
     },
-    "rule-22-12-e": {
-        "Section": 22,
-        "Rule": 12,
+    "rule-99f07-e": {
         "Test": "e",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7. There is no condenser water loop.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "22-12",
+            "rule_id": "99f07",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The heat rejection system shall be a single loop, modeled with a single cooling tower.",
             "applicable_rmr": "Baseline Model",
@@ -8192,14 +8068,12 @@
             }
         }
     },
-    "rule-22-13-a": {
-        "Section": 22,
-        "Rule": 13,
+    "rule-92d16-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7. The heat rejection device is an open-circuit cooling tower with an axial fan.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-13",
+            "rule_id": "92d16",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat rejection device shall be an axial-fan open circuit cooling tower.",
             "applicable_rmr": "Baseline Model",
@@ -8346,14 +8220,12 @@
             }
         }
     },
-    "rule-22-13-b": {
-        "Section": 22,
-        "Rule": 13,
+    "rule-92d16-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7. The heat rejection device is an open-circuit cooling tower with a centrifugal fan.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-13",
+            "rule_id": "92d16",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat rejection device shall be an axial-fan open circuit cooling tower.",
             "applicable_rmr": "Baseline Model",
@@ -8500,14 +8372,12 @@
             }
         }
     },
-    "rule-22-13-c": {
-        "Section": 22,
-        "Rule": 13,
+    "rule-92d16-c": {
         "Test": "c",
         "test_description": "The project has one building segment with two zones served by a baseline system type 8. The heat rejection device is an open-circuit cooling tower with an axial fan.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-13",
+            "rule_id": "92d16",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat rejection device shall be an axial-fan open circuit cooling tower.",
             "applicable_rmr": "Baseline Model",
@@ -8643,14 +8513,12 @@
             }
         }
     },
-    "rule-22-13-d": {
-        "Section": 22,
-        "Rule": 13,
+    "rule-92d16-d": {
         "Test": "d",
         "test_description": "The project has one building segment with two zones served by a baseline system type 8. The heat rejection device is an open-circuit cooling tower with a centrifugal fan.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-13",
+            "rule_id": "92d16",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat rejection device shall be an axial-fan open circuit cooling tower.",
             "applicable_rmr": "Baseline Model",
@@ -8786,14 +8654,12 @@
             }
         }
     },
-    "rule-22-14-a": {
-        "Section": 22,
-        "Rule": 14,
+    "rule-95f90-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7. The heat rejection device has a design temperature rise of 10 F.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-14",
+            "rule_id": "95f90",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat rejection device shall have a design temperature rise of 10\u00b0F.",
             "applicable_rmr": "Baseline Model",
@@ -8941,14 +8807,12 @@
             }
         }
     },
-    "rule-22-14-b": {
-        "Section": 22,
-        "Rule": 14,
+    "rule-95f90-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7. The heat rejection device has a design temperature rise of 15 F.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-14",
+            "rule_id": "95f90",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat rejection device shall have a design temperature rise of 10\u00b0F.",
             "applicable_rmr": "Baseline Model",
@@ -9096,14 +8960,12 @@
             }
         }
     },
-    "rule-22-14-c": {
-        "Section": 22,
-        "Rule": 14,
+    "rule-95f90-c": {
         "Test": "c",
         "test_description": "The project has one building segment with two zones served by a baseline system type 8. The heat rejection device has a design temperature rise of 10 F.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-14",
+            "rule_id": "95f90",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat rejection device shall have a design temperature rise of 10\u00b0F.",
             "applicable_rmr": "Baseline Model",
@@ -9240,14 +9102,12 @@
             }
         }
     },
-    "rule-22-14-d": {
-        "Section": 22,
-        "Rule": 14,
+    "rule-95f90-d": {
         "Test": "d",
         "test_description": "The project has one building segment with two zones served by a baseline system type 8. The heat rejection device has a design temperature rise of 15 F.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-14",
+            "rule_id": "95f90",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat rejection device shall have a design temperature rise of 10\u00b0F.",
             "applicable_rmr": "Baseline Model",
@@ -9384,14 +9244,12 @@
             }
         }
     },
-    "rule-22-14-e": {
-        "Section": 22,
-        "Rule": 14,
+    "rule-95f90-e": {
         "Test": "e",
         "test_description": "The project has one building segment with one zone served by a baseline system type 11. There is no heat rejection device.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "22-14",
+            "rule_id": "95f90",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat rejection device shall have a design temperature rise of 10\u00b0F.",
             "applicable_rmr": "Baseline Model",
@@ -9483,14 +9341,12 @@
             }
         }
     },
-    "rule-22-15-a": {
-        "Section": 22,
-        "Rule": 15,
+    "rule-79g01-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7. The heat rejection approach matches the expected value according to the equation in section G3.1.3.11.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-15",
+            "rule_id": "79g01",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat rejection device shall have the approach calculated according to the equation 25.72 - (0.24*WB), valid for evaporation design wet-bulb temperatures from 55\u00b0F to 90\u00b0F.",
             "applicable_rmr": "Baseline Model",
@@ -9637,14 +9493,12 @@
             }
         }
     },
-    "rule-22-15-b": {
-        "Section": 22,
-        "Rule": 15,
+    "rule-79g01-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7. The heat rejection approach does not match the expected value according to the equation in section G3.1.3.11.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-15",
+            "rule_id": "79g01",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat rejection device shall have the approach calculated according to the equation 25.72 - (0.24*WB), valid for evaporation design wet-bulb temperatures from 55\u00b0F to 90\u00b0F.",
             "applicable_rmr": "Baseline Model",
@@ -9791,14 +9645,12 @@
             }
         }
     },
-    "rule-22-15-c": {
-        "Section": 22,
-        "Rule": 15,
+    "rule-79g01-c": {
         "Test": "c",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7. The 0.4% evaporation design wet-bulb temperature falls outside the range where this rule is applicable.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "22-15",
+            "rule_id": "79g01",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat rejection device shall have the approach calculated according to the equation 25.72 - (0.24*WB), valid for evaporation design wet-bulb temperatures from 55\u00b0F to 90\u00b0F.",
             "applicable_rmr": "Baseline Model",
@@ -9945,14 +9797,12 @@
             }
         }
     },
-    "rule-22-16-a": {
-        "Section": 22,
-        "Rule": 16,
+    "rule-81f32-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7. The condenser water design supply temperature matches the expected value based on the design wet-bulb temperature and approach.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-16",
+            "rule_id": "81f32",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline condenser water design supply temperature shall be calculated using the cooling tower approach to the 0.4% evaporation design wet-bulb temperature, valid for evaporation design wet-bulb temperatures from 55\u00b0F to 90\u00b0F.",
             "applicable_rmr": "Baseline Model",
@@ -10103,14 +9953,12 @@
             }
         }
     },
-    "rule-22-16-b": {
-        "Section": 22,
-        "Rule": 16,
+    "rule-81f32-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7. The condenser water design supply temperature does not match the expected value based on the design wet-bulb temperature and approach.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-16",
+            "rule_id": "81f32",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline condenser water design supply temperature shall be calculated using the cooling tower approach to the 0.4% evaporation design wet-bulb temperature, valid for evaporation design wet-bulb temperatures from 55\u00b0F to 90\u00b0F.",
             "applicable_rmr": "Baseline Model",
@@ -10261,14 +10109,12 @@
             }
         }
     },
-    "rule-22-16-c": {
-        "Section": 22,
-        "Rule": 16,
+    "rule-81f32-c": {
         "Test": "c",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7. The 0.4% evaporation design wet-bulb temperature falls outside the range where this rule is applicable.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "22-16",
+            "rule_id": "81f32",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline condenser water design supply temperature shall be calculated using the cooling tower approach to the 0.4% evaporation design wet-bulb temperature, valid for evaporation design wet-bulb temperatures from 55\u00b0F to 90\u00b0F.",
             "applicable_rmr": "Baseline Model",
@@ -10419,14 +10265,12 @@
             }
         }
     },
-    "rule-22-16-d": {
-        "Section": 22,
-        "Rule": 16,
+    "rule-81f32-d": {
         "Test": "d",
         "test_description": "The project has one building segment with one zone served by a baseline system type 11. The condenser water design supply temperature matches the expected value based on the design wet-bulb temperature and approach.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-16",
+            "rule_id": "81f32",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline condenser water design supply temperature shall be calculated using the cooling tower approach to the 0.4% evaporation design wet-bulb temperature, valid for evaporation design wet-bulb temperatures from 55\u00b0F to 90\u00b0F.",
             "applicable_rmr": "Baseline Model",
@@ -10562,14 +10406,12 @@
             }
         }
     },
-    "rule-22-16-e": {
-        "Section": 22,
-        "Rule": 16,
+    "rule-81f32-e": {
         "Test": "e",
         "test_description": "The project has one building segment with one zone served by a baseline system type 11. The condenser water design supply temperature does not match the expected value based on the design wet-bulb temperature and approach.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-16",
+            "rule_id": "81f32",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline condenser water design supply temperature shall be calculated using the cooling tower approach to the 0.4% evaporation design wet-bulb temperature, valid for evaporation design wet-bulb temperatures from 55\u00b0F to 90\u00b0F.",
             "applicable_rmr": "Baseline Model",
@@ -10705,14 +10547,12 @@
             }
         }
     },
-    "rule-22-16-f": {
-        "Section": 22,
-        "Rule": 16,
+    "rule-81f32-f": {
         "Test": "f",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7. The 0.4% evaporation design wet-bulb temperature falls outside the range where this rule is applicable.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "22-16",
+            "rule_id": "81f32",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline condenser water design supply temperature shall be calculated using the cooling tower approach to the 0.4% evaporation design wet-bulb temperature, valid for evaporation design wet-bulb temperatures from 55\u00b0F to 90\u00b0F.",
             "applicable_rmr": "Baseline Model",
@@ -10848,14 +10688,12 @@
             }
         }
     },
-    "rule-22-17-a": {
-        "Section": 22,
-        "Rule": 17,
+    "rule-04g06-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a cooling tower. The cooling tower fan performance is fully described with nameplate power and matches the expected 38.2 gpm/hp.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-17",
+            "rule_id": "04g06",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat rejection device shall have an efficiency of 38.2 gpm/hp.",
             "applicable_rmr": "Baseline Model",
@@ -11003,14 +10841,12 @@
             }
         }
     },
-    "rule-22-17-b": {
-        "Section": 22,
-        "Rule": 17,
+    "rule-04g06-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a cooling tower. The cooling tower fan performance is fully described with nameplate power but does not match the expected 38.2 gpm/hp.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-17",
+            "rule_id": "04g06",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat rejection device shall have an efficiency of 38.2 gpm/hp.",
             "applicable_rmr": "Baseline Model",
@@ -11158,15 +10994,13 @@
             }
         }
     },
-    "rule-22-17-c": {
-        "Section": 22,
-        "Rule": 17,
+    "rule-04g06-c": {
         "Test": "c",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a cooling tower. The cooling tower fan does not have nameplate power defined but matches the expected 38.2 gpm/hp when calculated if calculated with a loss factor of 10% between the fan shaft power and motor power.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "Based on this calculation for motor nameplate power, we calculated a correct efficiency of 38.2 gpm/hp.",
         "standard": {
-            "rule_id": "22-17",
+            "rule_id": "04g06",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat rejection device shall have an efficiency of 38.2 gpm/hp.",
             "applicable_rmr": "Baseline Model",
@@ -11313,15 +11147,13 @@
             }
         }
     },
-    "rule-22-17-d": {
-        "Section": 22,
-        "Rule": 17,
+    "rule-04g06-d": {
         "Test": "d",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a cooling tower. The cooling tower fan does not have nameplate power defined and does not match the expected 38.2 gpm/hp when calculated if calculated with a loss factor of 10% between the fan shaft power and motor power. Instead, the calculated value is 30.0 gpm/hp.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "Based on this calculation for motor nameplate power, we calculated an efficiency of 30",
         "standard": {
-            "rule_id": "22-17",
+            "rule_id": "04g06",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat rejection device shall have an efficiency of 38.2 gpm/hp.",
             "applicable_rmr": "Baseline Model",
@@ -11468,15 +11300,13 @@
             }
         }
     },
-    "rule-22-17-e": {
-        "Section": 22,
-        "Rule": 17,
+    "rule-04g06-e": {
         "Test": "e",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a cooling tower. The cooling tower fan has neither motor nameplate power nor shaft power defined.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "The heat rejection fan motor nameplate power was not given, nor was the fan shaft power. We were unable to calculate the efficiency.",
         "standard": {
-            "rule_id": "22-17",
+            "rule_id": "04g06",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat rejection device shall have an efficiency of 38.2 gpm/hp.",
             "applicable_rmr": "Baseline Model",
@@ -11622,14 +11452,12 @@
             }
         }
     },
-    "rule-22-18-a": {
-        "Section": 22,
-        "Rule": 18,
+    "rule-38d92-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a cooling tower.  The cooling tower utilizes variable speed fan control.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-18",
+            "rule_id": "38d92",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat rejection device shall be modeled with variable speed fan control.",
             "applicable_rmr": "Baseline Model",
@@ -11775,14 +11603,12 @@
             }
         }
     },
-    "rule-22-18-b": {
-        "Section": 22,
-        "Rule": 18,
+    "rule-38d92-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a cooling tower. The cooling tower utilizes constant speed fan control.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-18",
+            "rule_id": "38d92",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat rejection device shall be modeled with variable speed fan control.",
             "applicable_rmr": "Baseline Model",
@@ -11928,14 +11754,12 @@
             }
         }
     },
-    "rule-22-18-c": {
-        "Section": 22,
-        "Rule": 18,
+    "rule-38d92-c": {
         "Test": "c",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7. There is no cooling tower.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "22-18",
+            "rule_id": "38d92",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat rejection device shall be modeled with variable speed fan control.",
             "applicable_rmr": "Baseline Model",
@@ -12069,14 +11893,12 @@
             }
         }
     },
-    "rule-22-19-a": {
-        "Section": 22,
-        "Rule": 19,
+    "rule-68h16-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a cooling tower.  The cooling tower is controlled to maintain a constant leaving water temperature.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-19",
+            "rule_id": "68h16",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat rejection device shall be controlled to maintain a constant leaving water temperature.",
             "applicable_rmr": "Baseline Model",
@@ -12224,14 +12046,12 @@
             }
         }
     },
-    "rule-22-19-b": {
-        "Section": 22,
-        "Rule": 19,
+    "rule-68h16-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a cooling tower.  The cooling tower is controlled to maintain a leaving water temperature that is reset based on outdoor air dry-bulb temperature.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-19",
+            "rule_id": "68h16",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat rejection device shall be controlled to maintain a constant leaving water temperature.",
             "applicable_rmr": "Baseline Model",
@@ -12379,14 +12199,12 @@
             }
         }
     },
-    "rule-22-19-c": {
-        "Section": 22,
-        "Rule": 19,
+    "rule-68h16-c": {
         "Test": "c",
         "test_description": "The project has one building segment with one zones served by a baseline system type 12 with a cooling tower.  The cooling tower is controlled to maintain a constant leaving water temperature.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-19",
+            "rule_id": "68h16",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat rejection device shall be controlled to maintain a constant leaving water temperature.",
             "applicable_rmr": "Baseline Model",
@@ -12519,14 +12337,12 @@
             }
         }
     },
-    "rule-22-19-d": {
-        "Section": 22,
-        "Rule": 19,
+    "rule-68h16-d": {
         "Test": "d",
         "test_description": "The project has one building segment with one zone served by a baseline system type 12 with a cooling tower.  The cooling tower is controlled to maintain a leaving water temperature that is reset based on outdoor air dry-bulb temperature.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-19",
+            "rule_id": "68h16",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat rejection device shall be controlled to maintain a constant leaving water temperature.",
             "applicable_rmr": "Baseline Model",
@@ -12659,14 +12475,12 @@
             }
         }
     },
-    "rule-22-19-e": {
-        "Section": 22,
-        "Rule": 19,
+    "rule-68h16-e": {
         "Test": "e",
         "test_description": "The project has one building segment with one zone served by a baseline system type 11. There is no cooling tower.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "22-19",
+            "rule_id": "68h16",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat rejection device shall be controlled to maintain a constant leaving water temperature.",
             "applicable_rmr": "Baseline Model",
@@ -12789,14 +12603,12 @@
             }
         }
     },
-    "rule-22-20-a": {
-        "Section": 22,
-        "Rule": 20,
+    "rule-71o81-a": {
         "Test": "a",
         "test_description": "The project located in climate zone 4A has one building segment with two zones served by a baseline system type 7 with a cooling tower. The cooling tower leaving water temperature setpoint matches the value specified in Table G3.1.3.11.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-20",
+            "rule_id": "71o81",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat rejection device leaving water temperature shall be modeled as specified in Table G3.1.3.11.",
             "applicable_rmr": "Baseline Model",
@@ -12944,14 +12756,12 @@
             }
         }
     },
-    "rule-22-20-b": {
-        "Section": 22,
-        "Rule": 20,
+    "rule-71o81-b": {
         "Test": "b",
         "test_description": "The project located in climate zone 4A has one building segment with two zones served by a baseline system type 7 with a cooling tower. The cooling tower leaving water temperature setpoint does not match the value specified in Table G3.1.3.11.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-20",
+            "rule_id": "71o81",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat rejection device leaving water temperature shall be modeled as specified in Table G3.1.3.11.",
             "applicable_rmr": "Baseline Model",
@@ -13099,14 +12909,12 @@
             }
         }
     },
-    "rule-22-20-c": {
-        "Section": 22,
-        "Rule": 20,
+    "rule-71o81-c": {
         "Test": "c",
         "test_description": "The project located in climate zone 6B has one building segment with two zones served by a baseline system type 8 with a cooling tower. The cooling tower leaving water temperature setpoint matches the value specified in Table G3.1.3.11.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-20",
+            "rule_id": "71o81",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat rejection device leaving water temperature shall be modeled as specified in Table G3.1.3.11.",
             "applicable_rmr": "Baseline Model",
@@ -13243,14 +13051,12 @@
             }
         }
     },
-    "rule-22-20-d": {
-        "Section": 22,
-        "Rule": 20,
+    "rule-71o81-d": {
         "Test": "d",
         "test_description": "The project located in climate zone 6B has one building segment with two zones served by a baseline system type 8 with a cooling tower. The cooling tower leaving water temperature setpoint does not match the value specified in Table G3.1.3.11.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-20",
+            "rule_id": "71o81",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat rejection device leaving water temperature shall be modeled as specified in Table G3.1.3.11.",
             "applicable_rmr": "Baseline Model",
@@ -13387,14 +13193,12 @@
             }
         }
     },
-    "rule-22-20-e": {
-        "Section": 22,
-        "Rule": 20,
+    "rule-71o81-e": {
         "Test": "e",
         "test_description": "The project has one building segment with one zone served by a baseline system type 12. There is no cooling tower.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "22-20",
+            "rule_id": "71o81",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline heat rejection device leaving water temperature shall be modeled as specified in Table G3.1.3.11.",
             "applicable_rmr": "Baseline Model",
@@ -13517,14 +13321,12 @@
             }
         }
     },
-    "rule-22-21-a": {
-        "Section": 22,
-        "Rule": 21,
+    "rule-96z66-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7. The building peak cooling load is less than 600 tons and the chiller plant is modeled with a screw chiller.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-21",
+            "rule_id": "96z66",
             "ruleset_reference": "G3.1.3.7",
             "rule_description": "The baseline chiller plant shall be modeled with chiller(s) having the type as indicated in Table G3.1.3.7 as a function of building peak cooling load.",
             "applicable_rmr": "Baseline Model",
@@ -13671,14 +13473,12 @@
             }
         }
     },
-    "rule-22-21-b": {
-        "Section": 22,
-        "Rule": 21,
+    "rule-96z66-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7. The building peak cooling load is less than 600 tons and the chiller plant is modeled with a positive displacement chiller.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-21",
+            "rule_id": "96z66",
             "ruleset_reference": "G3.1.3.7",
             "rule_description": "The baseline chiller plant shall be modeled with chiller(s) having the type as indicated in Table G3.1.3.7 as a function of building peak cooling load.",
             "applicable_rmr": "Baseline Model",
@@ -13825,14 +13625,12 @@
             }
         }
     },
-    "rule-22-21-c": {
-        "Section": 22,
-        "Rule": 21,
+    "rule-96z66-c": {
         "Test": "c",
         "test_description": "The project has one building segment with two zones served by a baseline system type 8. The building peak cooling load is greater than 600 tons and the chiller plant is modeled with a centrifugal chiller.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-21",
+            "rule_id": "96z66",
             "ruleset_reference": "G3.1.3.7",
             "rule_description": "The baseline chiller plant shall be modeled with chiller(s) having the type as indicated in Table G3.1.3.7 as a function of building peak cooling load.",
             "applicable_rmr": "Baseline Model",
@@ -13981,14 +13779,12 @@
             }
         }
     },
-    "rule-22-21-d": {
-        "Section": 22,
-        "Rule": 21,
+    "rule-96z66-d": {
         "Test": "d",
         "test_description": "The project has one building segment with two zones served by a baseline system type 8. The building peak cooling load is greater than 600 tons and the chiller plant is modeled with a screw chiller.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-21",
+            "rule_id": "96z66",
             "ruleset_reference": "G3.1.3.7",
             "rule_description": "The baseline chiller plant shall be modeled with chiller(s) having the type as indicated in Table G3.1.3.7 as a function of building peak cooling load.",
             "applicable_rmr": "Baseline Model",
@@ -14137,14 +13933,12 @@
             }
         }
     },
-    "rule-22-21-e": {
-        "Section": 22,
-        "Rule": 21,
+    "rule-96z66-e": {
         "Test": "e",
         "test_description": "The project has one building segment with one zone served by a baseline system type 1. There is no chiller.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "22-21",
+            "rule_id": "96z66",
             "ruleset_reference": "G3.1.3.7",
             "rule_description": "The baseline chiller plant shall be modeled with chiller(s) having the type as indicated in Table G3.1.3.7 as a function of building peak cooling load.",
             "applicable_rmr": "Baseline Model",
@@ -14236,14 +14030,12 @@
             }
         }
     },
-    "rule-22-22-a": {
-        "Section": 22,
-        "Rule": 22,
+    "rule-55f82-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7.  The chiller full load efficiency matches the expected value from Table G3.5.3 based on capacity.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-22",
+            "rule_id": "55f82",
             "ruleset_reference": "Table G3.5.3",
             "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for full load, in accordance with Tables G3.5.3.",
             "applicable_rmr": "Baseline Model",
@@ -14385,14 +14177,12 @@
             }
         }
     },
-    "rule-22-22-b": {
-        "Section": 22,
-        "Rule": 22,
+    "rule-55f82-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7.  The chiller full load efficiency does not match the expected value from Table G3.5.3 based on capacity.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-22",
+            "rule_id": "55f82",
             "ruleset_reference": "Table G3.5.3",
             "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for full load, in accordance with Tables G3.5.3.",
             "applicable_rmr": "Baseline Model",
@@ -14534,14 +14324,12 @@
             }
         }
     },
-    "rule-22-22-c": {
-        "Section": 22,
-        "Rule": 22,
+    "rule-55f82-c": {
         "Test": "c",
         "test_description": "The project has one building segment with one zone served by a baseline system type 13.  The chiller full load efficiency matches the expected value from Table G3.5.3 based on capacity.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-22",
+            "rule_id": "55f82",
             "ruleset_reference": "Table G3.5.3",
             "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for full load, in accordance with Tables G3.5.3.",
             "applicable_rmr": "Baseline Model",
@@ -14651,14 +14439,12 @@
             }
         }
     },
-    "rule-22-22-d": {
-        "Section": 22,
-        "Rule": 22,
+    "rule-55f82-d": {
         "Test": "d",
         "test_description": "The project has one building segment with one zone served by a baseline system type 13. The chiller full load efficiency does not match the expected value from Table G3.5.3 based on capacity.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-22",
+            "rule_id": "55f82",
             "ruleset_reference": "Table G3.5.3",
             "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for full load, in accordance with Tables G3.5.3.",
             "applicable_rmr": "Baseline Model",
@@ -14768,14 +14554,12 @@
             }
         }
     },
-    "rule-22-22-e": {
-        "Section": 22,
-        "Rule": 22,
+    "rule-55f82-e": {
         "Test": "e",
         "test_description": "The project has one building segment with one zone served by a baseline system type 2. There is no chiller.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "22-22",
+            "rule_id": "55f82",
             "ruleset_reference": "Table G3.5.3",
             "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for full load, in accordance with Tables G3.5.3.",
             "applicable_rmr": "Baseline Model",
@@ -14841,14 +14625,12 @@
             }
         }
     },
-    "rule-22-23-a": {
-        "Section": 22,
-        "Rule": 23,
+    "rule-67l25-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. There is one chiller and one chilled water pump interlocked with the chiller operation.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-23",
+            "rule_id": "67l25",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Each baseline chiller shall be modeled with separate chilled water pump interlocked to operate with the associated chiller.",
             "applicable_rmr": "Baseline Model",
@@ -14983,14 +14765,12 @@
             }
         }
     },
-    "rule-22-23-b": {
-        "Section": 22,
-        "Rule": 23,
+    "rule-67l25-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system.  There is one chiller and one chilled water pump but it is not interlocked with the chiller operation.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-23",
+            "rule_id": "67l25",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Each baseline chiller shall be modeled with separate chilled water pump interlocked to operate with the associated chiller.",
             "applicable_rmr": "Baseline Model",
@@ -15125,14 +14905,12 @@
             }
         }
     },
-    "rule-22-23-c": {
-        "Section": 22,
-        "Rule": 23,
+    "rule-67l25-c": {
         "Test": "c",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. There are two chillers but only one chilled water pump interlocked with the chiller operation.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-23",
+            "rule_id": "67l25",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Each baseline chiller shall be modeled with separate chilled water pump interlocked to operate with the associated chiller.",
             "applicable_rmr": "Baseline Model",
@@ -15272,14 +15050,12 @@
             }
         }
     },
-    "rule-22-23-d": {
-        "Section": 22,
-        "Rule": 23,
+    "rule-67l25-d": {
         "Test": "d",
         "test_description": "The project has one building segment with two zones served by a baseline system type 8 with a chilled water system. There is one chiller and one chilled water pump interlocked with the chiller operation.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-23",
+            "rule_id": "67l25",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Each baseline chiller shall be modeled with separate chilled water pump interlocked to operate with the associated chiller.",
             "applicable_rmr": "Baseline Model",
@@ -15403,14 +15179,12 @@
             }
         }
     },
-    "rule-22-23-e": {
-        "Section": 22,
-        "Rule": 23,
+    "rule-67l25-e": {
         "Test": "e",
         "test_description": "The project has one building segment with two zones served by a baseline system type 8 with a chilled water system. There is one chiller but two chilled water pumps.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-23",
+            "rule_id": "67l25",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Each baseline chiller shall be modeled with separate chilled water pump interlocked to operate with the associated chiller.",
             "applicable_rmr": "Baseline Model",
@@ -15539,14 +15313,12 @@
             }
         }
     },
-    "rule-22-23-f": {
-        "Section": 22,
-        "Rule": 23,
+    "rule-67l25-f": {
         "Test": "f",
         "test_description": "The project has one building segment with one zone served by a baseline system type 2. There is no chilled water system.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "22-23",
+            "rule_id": "67l25",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Each baseline chiller shall be modeled with separate chilled water pump interlocked to operate with the associated chiller.",
             "applicable_rmr": "Baseline Model",
@@ -15631,14 +15403,12 @@
             }
         }
     },
-    "rule-22-24-a": {
-        "Section": 22,
-        "Rule": 24,
+    "rule-47d94-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The primary chilled water pump is modeled as constant volume.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-24",
+            "rule_id": "47d94",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water loops that do not use purchased chilled water shall have the primary pump modeled as constant volume.  ",
             "applicable_rmr": "Baseline Model",
@@ -15772,14 +15542,12 @@
             }
         }
     },
-    "rule-22-24-b": {
-        "Section": 22,
-        "Rule": 24,
+    "rule-47d94-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The primary chilled water pump is modeled as variable speed.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-24",
+            "rule_id": "47d94",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water loops that do not use purchased chilled water shall have the primary pump modeled as constant volume.  ",
             "applicable_rmr": "Baseline Model",
@@ -15913,14 +15681,12 @@
             }
         }
     },
-    "rule-22-24-c": {
-        "Section": 22,
-        "Rule": 24,
+    "rule-47d94-c": {
         "Test": "c",
         "test_description": "The project has one building segment with two zones served by a baseline system type 8 with a chilled water system. The primary chilled water pump is modeled as constant volume.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-24",
+            "rule_id": "47d94",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water loops that do not use purchased chilled water shall have the primary pump modeled as constant volume.  ",
             "applicable_rmr": "Baseline Model",
@@ -16056,14 +15822,12 @@
             }
         }
     },
-    "rule-22-24-d": {
-        "Section": 22,
-        "Rule": 24,
+    "rule-47d94-d": {
         "Test": "d",
         "test_description": "The project has one building segment with two zones served by a baseline system type 8 with a chilled water system. The primary chilled water pump is modeled as variable speed.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-24",
+            "rule_id": "47d94",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water loops that do not use purchased chilled water shall have the primary pump modeled as constant volume.  ",
             "applicable_rmr": "Baseline Model",
@@ -16199,14 +15963,12 @@
             }
         }
     },
-    "rule-22-24-e": {
-        "Section": 22,
-        "Rule": 24,
+    "rule-47d94-e": {
         "Test": "e",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The chilled water system configuration is not primary-secondary.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "22-24",
+            "rule_id": "47d94",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water loops that do not use purchased chilled water shall have the primary pump modeled as constant volume.  ",
             "applicable_rmr": "Baseline Model",
@@ -16329,14 +16091,12 @@
             }
         }
     },
-    "rule-22-25-a": {
-        "Section": 22,
-        "Rule": 25,
+    "rule-03q09-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The primary chilled water pump power is 9 W/gpm at design conditions.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-25",
+            "rule_id": "03q09",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water loops that do not use purchased chilled water and do not serve computer rooms (baseline system type 11) shall have a constant-flow primary pump power of 9 W/gpm at design conditions.",
             "applicable_rmr": "Baseline Model",
@@ -16471,14 +16231,12 @@
             }
         }
     },
-    "rule-22-25-b": {
-        "Section": 22,
-        "Rule": 25,
+    "rule-03q09-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The primary chilled water pump power is 12 W/gpm at design conditions.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-25",
+            "rule_id": "03q09",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water loops that do not use purchased chilled water and do not serve computer rooms (baseline system type 11) shall have a constant-flow primary pump power of 9 W/gpm at design conditions.",
             "applicable_rmr": "Baseline Model",
@@ -16613,14 +16371,12 @@
             }
         }
     },
-    "rule-22-25-c": {
-        "Section": 22,
-        "Rule": 25,
+    "rule-03q09-c": {
         "Test": "c",
         "test_description": "The project has one building segment with two zones served by a baseline system type 12 with a chilled water system. The primary chilled water pump power is 9 W/gpm at design conditions.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-25",
+            "rule_id": "03q09",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water loops that do not use purchased chilled water and do not serve computer rooms (baseline system type 11) shall have a constant-flow primary pump power of 9 W/gpm at design conditions.",
             "applicable_rmr": "Baseline Model",
@@ -16740,14 +16496,12 @@
             }
         }
     },
-    "rule-22-25-d": {
-        "Section": 22,
-        "Rule": 25,
+    "rule-03q09-d": {
         "Test": "d",
         "test_description": "The project has one building segment with two zones served by a baseline system type 12 with a chilled water system. The primary chilled water pump power is 12 W/gpm at design conditions.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-25",
+            "rule_id": "03q09",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water loops that do not use purchased chilled water and do not serve computer rooms (baseline system type 11) shall have a constant-flow primary pump power of 9 W/gpm at design conditions.",
             "applicable_rmr": "Baseline Model",
@@ -16867,14 +16621,12 @@
             }
         }
     },
-    "rule-22-25-e": {
-        "Section": 22,
-        "Rule": 25,
+    "rule-03q09-e": {
         "Test": "e",
         "test_description": "The project has one building segment with one zone served by a baseline system type 11 with a chilled water system. The chilled water system serves a computer room.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "22-25",
+            "rule_id": "03q09",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water loops that do not use purchased chilled water and do not serve computer rooms (baseline system type 11) shall have a constant-flow primary pump power of 9 W/gpm at design conditions.",
             "applicable_rmr": "Baseline Model",
@@ -16994,14 +16746,12 @@
             }
         }
     },
-    "rule-22-26-a": {
-        "Section": 22,
-        "Rule": 26,
+    "rule-18j38-a": {
         "Test": "a",
         "test_description": "The project has one building segment with one zone served by a baseline system type 11 with a chilled water system. The primary chilled water pump power is 12 W/gpm at design conditions.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-26",
+            "rule_id": "18j38",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water loops that do not use purchased chilled water and do serve computer rooms (baseline system type 11) shall have a constant-flow primary pump power of 12 W/gpm at design conditions.",
             "applicable_rmr": "Baseline Model",
@@ -17104,14 +16854,12 @@
             }
         }
     },
-    "rule-22-26-b": {
-        "Section": 22,
-        "Rule": 26,
+    "rule-18j38-b": {
         "Test": "b",
         "test_description": "The project has one building segment with one zone served by a baseline system type 11 with a chilled water system. The primary chilled water pump power is 15 W/gpm at design conditions.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-26",
+            "rule_id": "18j38",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water loops that do not use purchased chilled water and do serve computer rooms (baseline system type 11) shall have a constant-flow primary pump power of 12 W/gpm at design conditions.",
             "applicable_rmr": "Baseline Model",
@@ -17214,14 +16962,12 @@
             }
         }
     },
-    "rule-22-26-c": {
-        "Section": 22,
-        "Rule": 26,
+    "rule-18j38-c": {
         "Test": "c",
         "test_description": "The project has one building segment with one zone served by a baseline system type 11 with a chilled water system. The primary chilled water pump power is 12 W/gpm at design conditions.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-26",
+            "rule_id": "18j38",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water loops that do not use purchased chilled water and do serve computer rooms (baseline system type 11) shall have a constant-flow primary pump power of 12 W/gpm at design conditions.",
             "applicable_rmr": "Baseline Model",
@@ -17341,14 +17087,12 @@
             }
         }
     },
-    "rule-22-26-d": {
-        "Section": 22,
-        "Rule": 26,
+    "rule-18j38-d": {
         "Test": "d",
         "test_description": "The project has one building segment with one zone served by a baseline system type 11 with a chilled water system. The primary chilled water pump power is 15 W/gpm at design conditions.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-26",
+            "rule_id": "18j38",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water loops that do not use purchased chilled water and do serve computer rooms (baseline system type 11) shall have a constant-flow primary pump power of 12 W/gpm at design conditions.",
             "applicable_rmr": "Baseline Model",
@@ -17468,14 +17212,12 @@
             }
         }
     },
-    "rule-22-26-e": {
-        "Section": 22,
-        "Rule": 26,
+    "rule-18j38-e": {
         "Test": "e",
         "test_description": "The project has one building segment with one zone served by a baseline system type 12 with a chilled water system. The chilled water system does not serve a computer room.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "22-26",
+            "rule_id": "18j38",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water loops that do not use purchased chilled water and do serve computer rooms (baseline system type 11) shall have a constant-flow primary pump power of 12 W/gpm at design conditions.",
             "applicable_rmr": "Baseline Model",
@@ -17594,14 +17336,12 @@
             }
         }
     },
-    "rule-22-27-a": {
-        "Section": 22,
-        "Rule": 27,
+    "rule-86p62-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a condenser water loop. There is one chiller and one condenser water pump interlocked with the chiller operation.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-27",
+            "rule_id": "86p62",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "Each baseline chiller shall be modeled with separate condenser water pump interlocked to operate with the associated chiller.",
             "applicable_rmr": "Baseline Model",
@@ -17736,14 +17476,12 @@
             }
         }
     },
-    "rule-22-27-b": {
-        "Section": 22,
-        "Rule": 27,
+    "rule-86p62-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a condenser water loop. There is one chiller and one condenser water pump but it is not interlocked with the chiller operation.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-27",
+            "rule_id": "86p62",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "Each baseline chiller shall be modeled with separate condenser water pump interlocked to operate with the associated chiller.",
             "applicable_rmr": "Baseline Model",
@@ -17878,14 +17616,12 @@
             }
         }
     },
-    "rule-22-27-c": {
-        "Section": 22,
-        "Rule": 27,
+    "rule-86p62-c": {
         "Test": "c",
         "test_description": "The project has one building segment with one zone served by a baseline system type 12 with a condenser water loop. There is one chiller and one condenser water pump interlocked with the chiller operation.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-27",
+            "rule_id": "86p62",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "Each baseline chiller shall be modeled with separate condenser water pump interlocked to operate with the associated chiller.",
             "applicable_rmr": "Baseline Model",
@@ -18005,14 +17741,12 @@
             }
         }
     },
-    "rule-22-27-d": {
-        "Section": 22,
-        "Rule": 27,
+    "rule-86p62-d": {
         "Test": "d",
         "test_description": "The project has one building segment with one zone served by a baseline system type 12 with a condenser water loop.  There is one chiller and one condenser water pump but it is not interlocked with the chiller operation.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-27",
+            "rule_id": "86p62",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "Each baseline chiller shall be modeled with separate condenser water pump interlocked to operate with the associated chiller.",
             "applicable_rmr": "Baseline Model",
@@ -18132,14 +17866,12 @@
             }
         }
     },
-    "rule-22-27-e": {
-        "Section": 22,
-        "Rule": 27,
+    "rule-86p62-e": {
         "Test": "e",
         "test_description": "The project has one building segment with one zone served by a baseline system type 4. There is no chilled water system.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "22-27",
+            "rule_id": "86p62",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "Each baseline chiller shall be modeled with separate condenser water pump interlocked to operate with the associated chiller.",
             "applicable_rmr": "Baseline Model",
@@ -18210,14 +17942,12 @@
             }
         }
     },
-    "rule-22-28-a": {
-        "Section": 22,
-        "Rule": 28,
+    "rule-41d32-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a condenser water loop. The condenser water pump is modeled as constant volume.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-28",
+            "rule_id": "41d32",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline building design condenser water pump shall be modeled as constant volume.",
             "applicable_rmr": "Baseline Model",
@@ -18371,14 +18101,12 @@
             }
         }
     },
-    "rule-22-28-b": {
-        "Section": 22,
-        "Rule": 28,
+    "rule-41d32-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a condenser water loop. The condenser water pump is modeled as variable speed.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-28",
+            "rule_id": "41d32",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline building design condenser water pump shall be modeled as constant volume.",
             "applicable_rmr": "Baseline Model",
@@ -18532,14 +18260,12 @@
             }
         }
     },
-    "rule-22-28-c": {
-        "Section": 22,
-        "Rule": 28,
+    "rule-41d32-c": {
         "Test": "c",
         "test_description": "The project has one building segment with one zone served by a baseline system type 4. There is no condenser water loop.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "22-28",
+            "rule_id": "41d32",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "The baseline building design condenser water pump shall be modeled as constant volume.",
             "applicable_rmr": "Baseline Model",
@@ -18610,14 +18336,12 @@
             }
         }
     },
-    "rule-22-29-a": {
-        "Section": 22,
-        "Rule": 29,
+    "rule-60w01-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a condenser water loop. The condenser water pump power is 19 W/gpm at design conditions.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-29",
+            "rule_id": "60w01",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "Baseline chilled water loops that do not use purchased chilled water and do not serve computer rooms (baseline system type 11) shall have a condenser water pump power of 19 W/gpm at design conditions.",
             "applicable_rmr": "Baseline Model",
@@ -18757,14 +18481,12 @@
             }
         }
     },
-    "rule-22-29-b": {
-        "Section": 22,
-        "Rule": 29,
+    "rule-60w01-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a condenser water loop. The condenser water pump power is 21 W/gpm at design conditions.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-29",
+            "rule_id": "60w01",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "Baseline chilled water loops that do not use purchased chilled water and do not serve computer rooms (baseline system type 11) shall have a condenser water pump power of 19 W/gpm at design conditions.",
             "applicable_rmr": "Baseline Model",
@@ -18904,14 +18626,12 @@
             }
         }
     },
-    "rule-22-29-c": {
-        "Section": 22,
-        "Rule": 29,
+    "rule-60w01-c": {
         "Test": "c",
         "test_description": "The project has one building segment with one zone served by a baseline system type 13 with a condenser water loop.  The condenser water pump power is 19 W/gpm at design conditions.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-29",
+            "rule_id": "60w01",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "Baseline chilled water loops that do not use purchased chilled water and do not serve computer rooms (baseline system type 11) shall have a condenser water pump power of 19 W/gpm at design conditions.",
             "applicable_rmr": "Baseline Model",
@@ -19019,14 +18739,12 @@
             }
         }
     },
-    "rule-22-29-d": {
-        "Section": 22,
-        "Rule": 29,
+    "rule-60w01-d": {
         "Test": "d",
         "test_description": "The project has one building segment with one zone served by a baseline system type 13 with a condenser water loop. The condenser water pump power is 21 W/gpm at design conditions.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-29",
+            "rule_id": "60w01",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "Baseline chilled water loops that do not use purchased chilled water and do not serve computer rooms (baseline system type 11) shall have a condenser water pump power of 19 W/gpm at design conditions.",
             "applicable_rmr": "Baseline Model",
@@ -19134,14 +18852,12 @@
             }
         }
     },
-    "rule-22-29-e": {
-        "Section": 22,
-        "Rule": 29,
+    "rule-60w01-e": {
         "Test": "e",
         "test_description": "The project has one building segment with one zone served by a baseline system type 11 with a chilled water loop. The chilled water loop serves a computer room.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "22-29",
+            "rule_id": "60w01",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "Baseline chilled water loops that do not use purchased chilled water and do not serve computer rooms (baseline system type 11) shall have a condenser water pump power of 19 W/gpm at design conditions.",
             "applicable_rmr": "Baseline Model",
@@ -19260,14 +18976,12 @@
             }
         }
     },
-    "rule-22-30-a": {
-        "Section": 22,
-        "Rule": 30,
+    "rule-79u84-a": {
         "Test": "a",
         "test_description": "The project has one building segment with one zone served by a baseline system type 11 with a condenser water loop. The condenser water pump power is 22 W/gpm at design conditions.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-30",
+            "rule_id": "79u84",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "Baseline chilled water loops that do not use purchased chilled water and do serve computer rooms (baseline system type 11) shall have a condenser water pump power of 22 W/gpm at design conditions.",
             "applicable_rmr": "Baseline Model",
@@ -19374,14 +19088,12 @@
             }
         }
     },
-    "rule-22-30-b": {
-        "Section": 22,
-        "Rule": 30,
+    "rule-79u84-b": {
         "Test": "b",
         "test_description": "The project has one building segment with one zone served by a baseline system type 11 with a condenser water loop. The condenser water pump power is 25 W/gpm at design conditions.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-30",
+            "rule_id": "79u84",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "Baseline chilled water loops that do not use purchased chilled water and do serve computer rooms (baseline system type 11) shall have a condenser water pump power of 22 W/gpm at design conditions.",
             "applicable_rmr": "Baseline Model",
@@ -19488,14 +19200,12 @@
             }
         }
     },
-    "rule-22-30-c": {
-        "Section": 22,
-        "Rule": 30,
+    "rule-79u84-c": {
         "Test": "c",
         "test_description": "The project has one building segment with one zone served by a baseline system type 11 with a condenser water loop. The condenser water pump power is 22 W/gpm at design conditions.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-30",
+            "rule_id": "79u84",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "Baseline chilled water loops that do not use purchased chilled water and do serve computer rooms (baseline system type 11) shall have a condenser water pump power of 22 W/gpm at design conditions.",
             "applicable_rmr": "Baseline Model",
@@ -19619,14 +19329,12 @@
             }
         }
     },
-    "rule-22-30-d": {
-        "Section": 22,
-        "Rule": 30,
+    "rule-79u84-d": {
         "Test": "d",
         "test_description": "The project has one building segment with one zone served by a baseline system type 11 with a condenser water loop. The condenser water pump power is 25 W/gpm at design conditions.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-30",
+            "rule_id": "79u84",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "Baseline chilled water loops that do not use purchased chilled water and do serve computer rooms (baseline system type 11) shall have a condenser water pump power of 22 W/gpm at design conditions.",
             "applicable_rmr": "Baseline Model",
@@ -19750,14 +19458,12 @@
             }
         }
     },
-    "rule-22-30-e": {
-        "Section": 22,
-        "Rule": 30,
+    "rule-79u84-e": {
         "Test": "e",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water loop. The chilled water loop does not serve any computer room.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "22-30",
+            "rule_id": "79u84",
             "ruleset_reference": "G3.1.3.11",
             "rule_description": "Baseline chilled water loops that do not use purchased chilled water and do serve computer rooms (baseline system type 11) shall have a condenser water pump power of 22 W/gpm at design conditions.",
             "applicable_rmr": "Baseline Model",
@@ -19891,14 +19597,12 @@
             }
         }
     },
-    "rule-22-31-a": {
-        "Section": 22,
-        "Rule": 31,
+    "rule-30m88-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The building has a peak cooling load of 200 tons and the chiller plant has 1 chiller.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-31",
+            "rule_id": "30m88",
             "ruleset_reference": "G3.1.3.7",
             "rule_description": "The baseline chiller plant shall be modeled with the chiller quantity specified in Table G3.1.3.7, as a function of building peak cooling load.",
             "applicable_rmr": "Baseline Model",
@@ -20044,14 +19748,12 @@
             }
         }
     },
-    "rule-22-31-b": {
-        "Section": 22,
-        "Rule": 31,
+    "rule-30m88-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The building has a peak cooling load of 200 tons and the chiller plant has 2 chillers.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-31",
+            "rule_id": "30m88",
             "ruleset_reference": "G3.1.3.7",
             "rule_description": "The baseline chiller plant shall be modeled with the chiller quantity specified in Table G3.1.3.7, as a function of building peak cooling load.",
             "applicable_rmr": "Baseline Model",
@@ -20201,14 +19903,12 @@
             }
         }
     },
-    "rule-22-31-c": {
-        "Section": 22,
-        "Rule": 31,
+    "rule-30m88-c": {
         "Test": "c",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The building has a peak cooling load of 450 tons and the chiller plant has 2 chillers.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-31",
+            "rule_id": "30m88",
             "ruleset_reference": "G3.1.3.7",
             "rule_description": "The baseline chiller plant shall be modeled with the chiller quantity specified in Table G3.1.3.7, as a function of building peak cooling load.",
             "applicable_rmr": "Baseline Model",
@@ -20358,14 +20058,12 @@
             }
         }
     },
-    "rule-22-31-d": {
-        "Section": 22,
-        "Rule": 31,
+    "rule-30m88-d": {
         "Test": "d",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The building has a peak cooling load of 450 tons and the chiller plant has 1 chiller.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-31",
+            "rule_id": "30m88",
             "ruleset_reference": "G3.1.3.7",
             "rule_description": "The baseline chiller plant shall be modeled with the chiller quantity specified in Table G3.1.3.7, as a function of building peak cooling load.",
             "applicable_rmr": "Baseline Model",
@@ -20511,14 +20209,12 @@
             }
         }
     },
-    "rule-22-31-e": {
-        "Section": 22,
-        "Rule": 31,
+    "rule-30m88-e": {
         "Test": "e",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The building has a peak cooling load of 2400 tons and the chiller plant has 3 chillers.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-31",
+            "rule_id": "30m88",
             "ruleset_reference": "G3.1.3.7",
             "rule_description": "The baseline chiller plant shall be modeled with the chiller quantity specified in Table G3.1.3.7, as a function of building peak cooling load.",
             "applicable_rmr": "Baseline Model",
@@ -20672,14 +20368,12 @@
             }
         }
     },
-    "rule-22-31-f": {
-        "Section": 22,
-        "Rule": 31,
+    "rule-30m88-f": {
         "Test": "f",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The building has a peak cooling load of 2400 tons and the chiller plant has 2 chillers.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-31",
+            "rule_id": "30m88",
             "ruleset_reference": "G3.1.3.7",
             "rule_description": "The baseline chiller plant shall be modeled with the chiller quantity specified in Table G3.1.3.7, as a function of building peak cooling load.",
             "applicable_rmr": "Baseline Model",
@@ -20829,14 +20523,12 @@
             }
         }
     },
-    "rule-22-31-g": {
-        "Section": 22,
-        "Rule": 31,
+    "rule-30m88-g": {
         "Test": "g",
         "test_description": "The project has one building segment with two zones served by a baseline system type 5. There is no chilled water system.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "22-31",
+            "rule_id": "30m88",
             "ruleset_reference": "G3.1.3.7",
             "rule_description": "The baseline chiller plant shall be modeled with the chiller quantity specified in Table G3.1.3.7, as a function of building peak cooling load.",
             "applicable_rmr": "Baseline Model",
@@ -20955,14 +20647,12 @@
             }
         }
     },
-    "rule-22-32-a": {
-        "Section": 22,
-        "Rule": 32,
+    "rule-48s83-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The baseline chiller efficiency matches the prescibed efficiency based on the capacity range in table G3.5.3.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-32",
+            "rule_id": "48s83",
             "ruleset_reference": "Section G3.1.2.1",
             "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for part load, in accordance with Tables G3.5.3.",
             "applicable_rmr": "Baseline Model",
@@ -21104,14 +20794,12 @@
             }
         }
     },
-    "rule-22-32-b": {
-        "Section": 22,
-        "Rule": 32,
+    "rule-48s83-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The baseline chiller efficiency metric does not match the prescibed efficiency based on the capacity range in table G3.5.3.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-32",
+            "rule_id": "48s83",
             "ruleset_reference": "Section G3.1.2.1",
             "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for part load, in accordance with Tables G3.5.3.",
             "applicable_rmr": "Baseline Model",
@@ -21253,14 +20941,12 @@
             }
         }
     },
-    "rule-22-32-c": {
-        "Section": 22,
-        "Rule": 32,
+    "rule-48s83-c": {
         "Test": "c",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The baseline chiller efficiency does not match the prescibed efficiency based on the capacity range in table G3.5.3.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-32",
+            "rule_id": "48s83",
             "ruleset_reference": "Section G3.1.2.1",
             "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for part load, in accordance with Tables G3.5.3.",
             "applicable_rmr": "Baseline Model",
@@ -21402,14 +21088,12 @@
             }
         }
     },
-    "rule-22-32-d": {
-        "Section": 22,
-        "Rule": 32,
+    "rule-48s83-d": {
         "Test": "d",
         "test_description": "The project has one building segment with two zones served by a baseline system type 8 with a chilled water system. The baseline chiller efficiency matches the prescibed efficiency based on the capacity range in table G3.5.3.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-32",
+            "rule_id": "48s83",
             "ruleset_reference": "Section G3.1.2.1",
             "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for part load, in accordance with Tables G3.5.3.",
             "applicable_rmr": "Baseline Model",
@@ -21540,14 +21224,12 @@
             }
         }
     },
-    "rule-22-32-e": {
-        "Section": 22,
-        "Rule": 32,
+    "rule-48s83-e": {
         "Test": "e",
         "test_description": "The project has one building segment with two zones served by a baseline system type 8 with a chilled water system. The baseline chiller efficiency metric does not match the prescibed efficiency based on the capacity range in table G3.5.3.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-32",
+            "rule_id": "48s83",
             "ruleset_reference": "Section G3.1.2.1",
             "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for part load, in accordance with Tables G3.5.3.",
             "applicable_rmr": "Baseline Model",
@@ -21678,14 +21360,12 @@
             }
         }
     },
-    "rule-22-32-f": {
-        "Section": 22,
-        "Rule": 32,
+    "rule-48s83-f": {
         "Test": "f",
         "test_description": "The project has one building segment with two zones served by a baseline system type 8 with a chilled water system. The baseline chiller efficiency does not match the prescibed efficiency based on the capacity range in table G3.5.3.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-32",
+            "rule_id": "48s83",
             "ruleset_reference": "Section G3.1.2.1",
             "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for part load, in accordance with Tables G3.5.3.",
             "applicable_rmr": "Baseline Model",
@@ -21816,14 +21496,12 @@
             }
         }
     },
-    "rule-22-32-g": {
-        "Section": 22,
-        "Rule": 32,
+    "rule-48s83-g": {
         "Test": "g",
         "test_description": "The project has one building segment with two zones served by a baseline system type 2. There are no chillers.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "22-32",
+            "rule_id": "48s83",
             "ruleset_reference": "Section G3.1.2.1",
             "rule_description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for part load, in accordance with Tables G3.5.3.",
             "applicable_rmr": "Baseline Model",
@@ -21889,14 +21567,12 @@
             }
         }
     },
-    "rule-22-33-a": {
-        "Section": 22,
-        "Rule": 33,
+    "rule-88r57-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 8 with a chilled water system. The chilled water system is modeled with one primary and one secondary chilled water loop.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-33",
+            "rule_id": "88r57",
             "ruleset_reference": "Section G3.1.3.2",
             "rule_description": "Baseline chilled water systems that do not use purchased chilled water shall have only one set of primary/secondary chilled water loops.",
             "applicable_rmr": "Baseline Model",
@@ -22019,14 +21695,12 @@
             }
         }
     },
-    "rule-22-33-b": {
-        "Section": 22,
-        "Rule": 33,
+    "rule-88r57-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 8 with a chilled water system. The chilled water system is modeled with two secondary chilled water loops.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-33",
+            "rule_id": "88r57",
             "ruleset_reference": "Section G3.1.3.2",
             "rule_description": "Baseline chilled water systems that do not use purchased chilled water shall have only one set of primary/secondary chilled water loops.",
             "applicable_rmr": "Baseline Model",
@@ -22209,14 +21883,12 @@
             }
         }
     },
-    "rule-22-33-c": {
-        "Section": 22,
-        "Rule": 33,
+    "rule-88r57-c": {
         "Test": "c",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The chilled water system is modeled with one primary and one secondary chilled water loop.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-33",
+            "rule_id": "88r57",
             "ruleset_reference": "Section G3.1.3.2",
             "rule_description": "Baseline chilled water systems that do not use purchased chilled water shall have only one set of primary/secondary chilled water loops.",
             "applicable_rmr": "Baseline Model",
@@ -22350,14 +22022,12 @@
             }
         }
     },
-    "rule-22-33-d": {
-        "Section": 22,
-        "Rule": 33,
+    "rule-88r57-d": {
         "Test": "d",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The chilled water system is modeled without a secondary chilled water loop.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-33",
+            "rule_id": "88r57",
             "ruleset_reference": "Section G3.1.3.2",
             "rule_description": "Baseline chilled water systems that do not use purchased chilled water shall have only one set of primary/secondary chilled water loops.",
             "applicable_rmr": "Baseline Model",
@@ -22480,14 +22150,12 @@
             }
         }
     },
-    "rule-22-33-e": {
-        "Section": 22,
-        "Rule": 33,
+    "rule-88r57-e": {
         "Test": "e",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The chilled water system is incorrectly modeled with two primary chilled water loops.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-33",
+            "rule_id": "88r57",
             "ruleset_reference": "Section G3.1.3.2",
             "rule_description": "Baseline chilled water systems that do not use purchased chilled water shall have only one set of primary/secondary chilled water loops.",
             "applicable_rmr": "Baseline Model",
@@ -22668,14 +22336,12 @@
             }
         }
     },
-    "rule-22-33-f": {
-        "Section": 22,
-        "Rule": 33,
+    "rule-88r57-f": {
         "Test": "f",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The chilled water system uses purchased chilled water.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "22-33",
+            "rule_id": "88r57",
             "ruleset_reference": "Section G3.1.3.2",
             "rule_description": "Baseline chilled water systems that do not use purchased chilled water shall have only one set of primary/secondary chilled water loops.",
             "applicable_rmr": "Baseline Model",
@@ -22799,14 +22465,12 @@
             }
         }
     },
-    "rule-22-34-a": {
-        "Section": 22,
-        "Rule": 34,
+    "rule-36t85-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The chilled water plant equipment capacity is sized based on coincident loads.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-34",
+            "rule_id": "36t85",
             "ruleset_reference": "Section G3.1.2.2",
             "rule_description": "Baseline chilled water loops that do not use purchased chilled water shall have the plant equipment capacity sized based on coincident loads.",
             "applicable_rmr": "Baseline Model",
@@ -22944,14 +22608,12 @@
             }
         }
     },
-    "rule-22-34-b": {
-        "Section": 22,
-        "Rule": 34,
+    "rule-36t85-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The chilled water plant equipment capacity is not sized based on coincident loads.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-34",
+            "rule_id": "36t85",
             "ruleset_reference": "Section G3.1.2.2",
             "rule_description": "Baseline chilled water loops that do not use purchased chilled water shall have the plant equipment capacity sized based on coincident loads.",
             "applicable_rmr": "Baseline Model",
@@ -23089,14 +22751,12 @@
             }
         }
     },
-    "rule-22-34-c": {
-        "Section": 22,
-        "Rule": 34,
+    "rule-36t85-c": {
         "Test": "c",
         "test_description": "The project has one building segment with two zones served by a baseline system type 8 with a chilled water system. The chilled water plant equipment capacity is sized based on coincident loads.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-34",
+            "rule_id": "36t85",
             "ruleset_reference": "Section G3.1.2.2",
             "rule_description": "Baseline chilled water loops that do not use purchased chilled water shall have the plant equipment capacity sized based on coincident loads.",
             "applicable_rmr": "Baseline Model",
@@ -23236,14 +22896,12 @@
             }
         }
     },
-    "rule-22-34-d": {
-        "Section": 22,
-        "Rule": 34,
+    "rule-36t85-d": {
         "Test": "d",
         "test_description": "The project has one building segment with two zones served by a baseline system type 8 with a chilled water system. The chilled water plant equipment capacity is not sized based on coincident loads.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-34",
+            "rule_id": "36t85",
             "ruleset_reference": "Section G3.1.2.2",
             "rule_description": "Baseline chilled water loops that do not use purchased chilled water shall have the plant equipment capacity sized based on coincident loads.",
             "applicable_rmr": "Baseline Model",
@@ -23383,14 +23041,12 @@
             }
         }
     },
-    "rule-22-34-e": {
-        "Section": 22,
-        "Rule": 34,
+    "rule-36t85-e": {
         "Test": "e",
         "test_description": "The project has one building segment with one zone served by a baseline system type 9. There is no chilled water system.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "22-34",
+            "rule_id": "36t85",
             "ruleset_reference": "Section G3.1.2.2",
             "rule_description": "Baseline chilled water loops that do not use purchased chilled water shall have the plant equipment capacity sized based on coincident loads.",
             "applicable_rmr": "Baseline Model",
@@ -23458,15 +23114,13 @@
             }
         }
     },
-    "rule-22-35-a": {
-        "Section": 22,
-        "Rule": 35,
+    "rule-20a97-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The chilled water system does not use purchased chilled water.",
         "expected_rule_outcome": "not_applicable",
         "expected_raised_message_includes": "Rule 22-35 Not Applicable - the baseline is not modeled with Purchased Chilled Water",
         "standard": {
-            "rule_id": "22-35",
+            "rule_id": "20a97",
             "ruleset_reference": "G3.1.3.9",
             "rule_description": "Baseline chilled water loops that use purchased chilled water shall not be modeled with chilled water reset.",
             "applicable_rmr": "Baseline RMR",
@@ -23600,15 +23254,13 @@
             }
         }
     },
-    "rule-22-35-b": {
-        "Section": 22,
-        "Rule": 35,
+    "rule-20a97-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The chilled water system uses purchased chilled water and is not modeled with chilled water reset.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "Manual Check Required - Baseline is modeled with purchased chilled water. Make sure baseline systems served by purchased chilled water are not modeled with chilled water reset.",
         "standard": {
-            "rule_id": "22-35",
+            "rule_id": "20a97",
             "ruleset_reference": "G3.1.3.9",
             "rule_description": "Baseline chilled water loops that use purchased chilled water shall not be modeled with chilled water reset.",
             "applicable_rmr": "Baseline RMR",
@@ -23732,15 +23384,13 @@
             }
         }
     },
-    "rule-22-35-c": {
-        "Section": 22,
-        "Rule": 35,
+    "rule-20a97-c": {
         "Test": "c",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The chilled water system uses purchased chilled water and is modeled with chilled water reset.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "Manual Check Required - Baseline is modeled with purchased chilled water. Make sure baseline systems served by purchased chilled water are not modeled with chilled water reset.",
         "standard": {
-            "rule_id": "22-35",
+            "rule_id": "20a97",
             "ruleset_reference": "G3.1.3.9",
             "rule_description": "Baseline chilled water loops that use purchased chilled water shall not be modeled with chilled water reset.",
             "applicable_rmr": "Baseline RMR",
@@ -23868,14 +23518,12 @@
             }
         }
     },
-    "rule-22-36-a": {
-        "Section": 22,
-        "Rule": 36,
+    "rule-01b91-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The chilled water system is modeled with a constant flow primary loop and variable flow secondary loop.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-36",
+            "rule_id": "01b91",
             "ruleset_reference": "G3.1.1.3.4 and G3.1.3.10",
             "rule_description": "Baseline chilled water systems that do not use purchased chilled water shall be modeled with constant flow primary loop and variable flow secondary loop.",
             "applicable_rmr": "Baseline RMR",
@@ -24017,14 +23665,12 @@
             }
         }
     },
-    "rule-22-36-b": {
-        "Section": 22,
-        "Rule": 36,
+    "rule-01b91-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The chilled water system is modeled with a variable flow primary loop.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-36",
+            "rule_id": "01b91",
             "ruleset_reference": "G3.1.1.3.4 and G3.1.3.10",
             "rule_description": "Baseline chilled water systems that do not use purchased chilled water shall be modeled with constant flow primary loop and variable flow secondary loop.",
             "applicable_rmr": "Baseline RMR",
@@ -24166,14 +23812,12 @@
             }
         }
     },
-    "rule-22-36-c": {
-        "Section": 22,
-        "Rule": 36,
+    "rule-01b91-c": {
         "Test": "c",
         "test_description": "The project has one building segment with one zone served by a baseline system type 13 with a chilled water system. The chilled water system is modeled with a constant flow primary loop and variable flow secondary loop.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-36",
+            "rule_id": "01b91",
             "ruleset_reference": "G3.1.1.3.4 and G3.1.3.10",
             "rule_description": "Baseline chilled water systems that do not use purchased chilled water shall be modeled with constant flow primary loop and variable flow secondary loop.",
             "applicable_rmr": "Baseline RMR",
@@ -24283,14 +23927,12 @@
             }
         }
     },
-    "rule-22-36-d": {
-        "Section": 22,
-        "Rule": 36,
+    "rule-01b91-d": {
         "Test": "d",
         "test_description": "The project has one building segment with one zone served by a baseline system type 13 with a chilled water system. The chilled water system is modeled with a constant flow secondary loop.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-36",
+            "rule_id": "01b91",
             "ruleset_reference": "G3.1.1.3.4 and G3.1.3.10",
             "rule_description": "Baseline chilled water systems that do not use purchased chilled water shall be modeled with constant flow primary loop and variable flow secondary loop.",
             "applicable_rmr": "Baseline RMR",
@@ -24400,14 +24042,12 @@
             }
         }
     },
-    "rule-22-36-e": {
-        "Section": 22,
-        "Rule": 36,
+    "rule-01b91-e": {
         "Test": "e",
         "test_description": "The project has one building segment with one zone served by a baseline system type 10. There is no chilled water system.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "22-36",
+            "rule_id": "01b91",
             "ruleset_reference": "G3.1.1.3.4 and G3.1.3.10",
             "rule_description": "Baseline chilled water systems that do not use purchased chilled water shall be modeled with constant flow primary loop and variable flow secondary loop.",
             "applicable_rmr": "Baseline RMR",
@@ -24475,15 +24115,13 @@
             }
         }
     },
-    "rule-22-37-a": {
-        "Section": 22,
-        "Rule": 37,
+    "rule-81j88-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The chilled water system does not use purchased chilled water.",
         "expected_rule_outcome": "not_applicable",
         "expected_raised_message_includes": "Rule 22-37 Not Applicable - the baseline is not modeled with Purchased Chilled Water",
         "standard": {
-            "rule_id": "22-37",
+            "rule_id": "81j88",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water loops that use purchased chilled water shall be modeled with a variable-speed distribution pump.",
             "applicable_rmr": "Baseline RMR",
@@ -24617,15 +24255,13 @@
             }
         }
     },
-    "rule-22-37-b": {
-        "Section": 22,
-        "Rule": 37,
+    "rule-81j88-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The chilled water system uses purchased chilled water and is modeled with a variable speed distribution pump.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "Manual Check Required - Baseline is modeled with purchased chilled water. Make sure baseline systems served by purchased chilled water are modeled with a variable speed drive pump.",
         "standard": {
-            "rule_id": "22-37",
+            "rule_id": "81j88",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water loops that use purchased chilled water shall be modeled with a variable-speed distribution pump.",
             "applicable_rmr": "Baseline RMR",
@@ -24749,15 +24385,13 @@
             }
         }
     },
-    "rule-22-37-c": {
-        "Section": 22,
-        "Rule": 37,
+    "rule-81j88-c": {
         "Test": "c",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The chilled water system uses purchased chilled water and the pump speed control is not defined.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "Manual Check Required - Baseline is modeled with purchased chilled water. Make sure baseline systems served by purchased chilled water are modeled with a variable speed drive pump.",
         "standard": {
-            "rule_id": "22-37",
+            "rule_id": "81j88",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water loops that use purchased chilled water shall be modeled with a variable-speed distribution pump.",
             "applicable_rmr": "Baseline RMR",
@@ -24881,15 +24515,13 @@
             }
         }
     },
-    "rule-22-38-a": {
-        "Section": 22,
-        "Rule": 38,
+    "rule-84g72-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The chilled water system does not use purchased chilled water.",
         "expected_rule_outcome": "not_applicable",
         "expected_raised_message_includes": "Rule 22-38 Not Applicable - the baseline is not modeled with Purchased Chilled Water",
         "standard": {
-            "rule_id": "22-38",
+            "rule_id": "84g72",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water loops that use purchased chilled water shall have a minimum flow setpoint of 25%.",
             "applicable_rmr": "Baseline RMR",
@@ -25023,15 +24655,13 @@
             }
         }
     },
-    "rule-22-38-b": {
-        "Section": 22,
-        "Rule": 38,
+    "rule-84g72-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The chilled water system uses purchased chilled water and has a minimum flow setpoint of 25%.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "Manual Check Required - Baseline is modeled with purchased chilled water. Make sure baseline systems served by purchased chilled water are modeled with the purchased chilled water loop having a minimum flow setpoint of 25%.",
         "standard": {
-            "rule_id": "22-38",
+            "rule_id": "84g72",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water loops that use purchased chilled water shall have a minimum flow setpoint of 25%.",
             "applicable_rmr": "Baseline RMR",
@@ -25159,15 +24789,13 @@
             }
         }
     },
-    "rule-22-38-c": {
-        "Section": 22,
-        "Rule": 38,
+    "rule-84g72-c": {
         "Test": "c",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The chilled water system uses purchased chilled water and has a minimum flow setpoint of 40%.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "Manual Check Required - Baseline is modeled with purchased chilled water. Make sure baseline systems served by purchased chilled water are modeled with the purchased chilled water loop having a minimum flow setpoint of 25%.",
         "standard": {
-            "rule_id": "22-38",
+            "rule_id": "84g72",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water loops that use purchased chilled water shall have a minimum flow setpoint of 25%.",
             "applicable_rmr": "Baseline RMR",
@@ -25295,15 +24923,13 @@
             }
         }
     },
-    "rule-22-39-a": {
-        "Section": 22,
-        "Rule": 39,
+    "rule-33w37-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The chilled water system does not use purchased chilled water.",
         "expected_rule_outcome": "not_applicable",
         "expected_raised_message_includes": "Rule 22-39 Not Applicable - the baseline is not modeled with Purchased Chilled Water",
         "standard": {
-            "rule_id": "22-39",
+            "rule_id": "33w37",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water loops that use purchased chilled water shall have a chilled water pump power of 16 W/gpm at design conditions.",
             "applicable_rmr": "Baseline RMR",
@@ -25437,15 +25063,13 @@
             }
         }
     },
-    "rule-22-39-b": {
-        "Section": 22,
-        "Rule": 39,
+    "rule-33w37-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The chilled water system uses purchased chilled water and has a chilled water pump power of 16 W/gpm at design conditions.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "Manual Check Required - Baseline is modeled with purchased chilled water. Make sure baseline systems served by purchased chilled water are modeled with a distribution pump whose pump power is 16 W/gpm.",
         "standard": {
-            "rule_id": "22-39",
+            "rule_id": "33w37",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water loops that use purchased chilled water shall have a chilled water pump power of 16 W/gpm at design conditions.",
             "applicable_rmr": "Baseline RMR",
@@ -25570,15 +25194,13 @@
             }
         }
     },
-    "rule-22-39-c": {
-        "Section": 22,
-        "Rule": 39,
+    "rule-33w37-c": {
         "Test": "c",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The chilled water system uses purchased chilled water and has a chilled water pump power of 20 W/gpm at design conditions.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "Manual Check Required - Baseline is modeled with purchased chilled water. Make sure baseline systems served by purchased chilled water are modeled with a distribution pump whose pump power is 16 W/gpm.",
         "standard": {
-            "rule_id": "22-39",
+            "rule_id": "33w37",
             "ruleset_reference": "G3.1.3.10",
             "rule_description": "Baseline chilled water loops that use purchased chilled water shall have a chilled water pump power of 16 W/gpm at design conditions.",
             "applicable_rmr": "Baseline RMR",
@@ -25703,14 +25325,12 @@
             }
         }
     },
-    "rule-22-40-a": {
-        "Section": 22,
-        "Rule": 40,
+    "rule-48h16-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by an HVAC system that uses purchased chilled water in the proposed design. The chilled water system in the baseline also uses purchased chilled water.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-40",
+            "rule_id": "48h16",
             "ruleset_reference": "Section G3.1.1.1 & G3.1.1.3.1",
             "rule_description": "Chilled water loops that use purchased chilled water in the proposed design shall also use purchased chilled water in the baseline. On-site chillers and direct expansion equipment shall not be modeled in the baseline.",
             "applicable_rmr": "Baseline Model",
@@ -25942,14 +25562,12 @@
             }
         }
     },
-    "rule-22-40-b": {
-        "Section": 22,
-        "Rule": 40,
+    "rule-48h16-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by an HVAC system that uses purchased chilled water in the proposed design. The chilled water system in the baseline does not use purchased chilled water.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-40",
+            "rule_id": "48h16",
             "ruleset_reference": "Section G3.1.1.1 & G3.1.1.3.1",
             "rule_description": "Chilled water loops that use purchased chilled water in the proposed design shall also use purchased chilled water in the baseline. On-site chillers and direct expansion equipment shall not be modeled in the baseline.",
             "applicable_rmr": "Baseline Model",
@@ -26206,14 +25824,12 @@
             }
         }
     },
-    "rule-22-40-c": {
-        "Section": 22,
-        "Rule": 40,
+    "rule-48h16-c": {
         "Test": "c",
         "test_description": "The project has one building segment with two zones served by an HVAC system that uses purchased chilled water in the proposed design. The baseline does not include a chilled water system.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-40",
+            "rule_id": "48h16",
             "ruleset_reference": "Section G3.1.1.1 & G3.1.1.3.1",
             "rule_description": "Chilled water loops that use purchased chilled water in the proposed design shall also use purchased chilled water in the baseline. On-site chillers and direct expansion equipment shall not be modeled in the baseline.",
             "applicable_rmr": "Baseline Model",
@@ -26379,14 +25995,12 @@
             }
         }
     },
-    "rule-22-40-d": {
-        "Section": 22,
-        "Rule": 40,
+    "rule-48h16-d": {
         "Test": "d",
         "test_description": "The project has one building segment with two zones served by an HVAC system that does not use purchased chilled water in the proposed design.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "22-40",
+            "rule_id": "48h16",
             "ruleset_reference": "Section G3.1.1.1 & G3.1.1.3.1",
             "rule_description": "Chilled water loops that use purchased chilled water in the proposed design shall also use purchased chilled water in the baseline. On-site chillers and direct expansion equipment shall not be modeled in the baseline.",
             "applicable_rmr": "Baseline Model",
@@ -26506,15 +26120,13 @@
             }
         }
     },
-    "rule-22-41-a": {
-        "Section": 22,
-        "Rule": 41,
+    "rule-68r93-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The chilled water system uses purchased chilled water and is modeled with a single chilled water loop.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "B-RMD SHOULD BE MODELED WITH PURCHASED CHILLED WATER. VERIFY THAT THERE IS ONLY ONE PURCHASED CHILLED WATER LOOP IN THE BASELINE MODEL.",
         "standard": {
-            "rule_id": "22-41",
+            "rule_id": "68r93",
             "ruleset_reference": "Section G3.1.3 System-Specific Baseline HVAC System Requirements",
             "rule_description": "Baseline chilled water systems that use purchased chilled water shall be modeled with a single chilled water loop.",
             "applicable_rmr": "Baseline RMR",
@@ -26638,15 +26250,13 @@
             }
         }
     },
-    "rule-22-41-b": {
-        "Section": 22,
-        "Rule": 41,
+    "rule-68r93-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The chilled water system uses purchased chilled water and is modeled with two chilled water loops.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "B-RMD SHOULD BE MODELED WITH PURCHASED CHILLED WATER. VERIFY THAT THERE IS ONLY ONE PURCHASED CHILLED WATER LOOP IN THE BASELINE MODEL.",
         "standard": {
-            "rule_id": "22-41",
+            "rule_id": "68r93",
             "ruleset_reference": "Section G3.1.3 System-Specific Baseline HVAC System Requirements",
             "rule_description": "Baseline chilled water systems that use purchased chilled water shall be modeled with a single chilled water loop.",
             "applicable_rmr": "Baseline RMR",
@@ -26775,14 +26385,12 @@
             }
         }
     },
-    "rule-22-41-c": {
-        "Section": 22,
-        "Rule": 41,
+    "rule-68r93-c": {
         "Test": "c",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The chilled water system does not use purchased chilled water.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "22-41",
+            "rule_id": "68r93",
             "ruleset_reference": "Section G3.1.3 System-Specific Baseline HVAC System Requirements",
             "rule_description": "Baseline chilled water systems that use purchased chilled water shall be modeled with a single chilled water loop.",
             "applicable_rmr": "Baseline RMR",

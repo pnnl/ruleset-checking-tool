@@ -22,15 +22,15 @@ OFFICE_OPEN_PLAN = SchemaEnums.schema_enums[
 FAIL_MSG = "P_RMD lighting status type is as-designed or as-existing. But lighting space type in B_RMD is not specified."
 
 
-class Section6Rule4(RuleDefinitionListIndexedBase):
+class PRM9012019Rule22l93(RuleDefinitionListIndexedBase):
     """Rule 4 of ASHRAE 90.1-2019 Appendix G Section 6 (Lighting)"""
 
     def __init__(self):
-        super(Section6Rule4, self).__init__(
+        super(PRM9012019Rule22l93, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section6Rule4.BuildingSegmentRule(),
+            each_rule=PRM9012019Rule22l93.BuildingSegmentRule(),
             index_rmd=BASELINE_0,
             id="6-4",
             description='Where a complete lighting system exists and where a lighting system has been designed and submitted with design documents, the baseline LPD is equal to expected value in Table G3.7. Where lighting neither exists nor is submitted with design documents, baseline LPD shall be determined in accordance with Table G3-7 for "Office-Open Plan" space type.',
@@ -42,11 +42,11 @@ class Section6Rule4(RuleDefinitionListIndexedBase):
 
     class BuildingSegmentRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section6Rule4.BuildingSegmentRule, self).__init__(
+            super(PRM9012019Rule22l93.BuildingSegmentRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
-                each_rule=Section6Rule4.BuildingSegmentRule.ZoneRule(),
+                each_rule=PRM9012019Rule22l93.BuildingSegmentRule.ZoneRule(),
                 index_rmd=BASELINE_0,
                 list_path="zones[*]",
             )
@@ -62,11 +62,11 @@ class Section6Rule4(RuleDefinitionListIndexedBase):
 
         class ZoneRule(RuleDefinitionListIndexedBase):
             def __init__(self):
-                super(Section6Rule4.BuildingSegmentRule.ZoneRule, self,).__init__(
+                super(PRM9012019Rule22l93.BuildingSegmentRule.ZoneRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
-                    each_rule=Section6Rule4.BuildingSegmentRule.ZoneRule.SpaceRule(),
+                    each_rule=PRM9012019Rule22l93.BuildingSegmentRule.ZoneRule.SpaceRule(),
                     index_rmd=BASELINE_0,
                     list_path="spaces[*]",
                 )
@@ -80,8 +80,7 @@ class Section6Rule4(RuleDefinitionListIndexedBase):
             class SpaceRule(RuleDefinitionBase):
                 def __init__(self):
                     super(
-                        Section6Rule4.BuildingSegmentRule.ZoneRule.SpaceRule,
-                        self,
+                        PRM9012019Rule22l93.BuildingSegmentRule.ZoneRule.SpaceRule, self
                     ).__init__(
                         fail_msg=FAIL_MSG,
                         rmds_used=produce_ruleset_model_description(

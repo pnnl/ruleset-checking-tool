@@ -12,15 +12,15 @@ HEATREJECTIONFAN = SchemaEnums.schema_enums["HeatRejectionFanOptions"]
 HEATREJECTION = SchemaEnums.schema_enums["HeatRejectionOptions"]
 
 
-class Section22Rule13(RuleDefinitionListIndexedBase):
+class PRM9012019Rule92d16(RuleDefinitionListIndexedBase):
     """Rule 13 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
-        super(Section22Rule13, self).__init__(
+        super(PRM9012019Rule92d16, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section22Rule13.HeatRejectionRule(),
+            each_rule=PRM9012019Rule92d16.HeatRejectionRule(),
             index_rmd=BASELINE_0,
             id="22-13",
             description="The baseline heat rejection device shall be an axial-fan open circuit cooling tower.",
@@ -41,7 +41,7 @@ class Section22Rule13(RuleDefinitionListIndexedBase):
 
     class HeatRejectionRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section22Rule13.HeatRejectionRule, self).__init__(
+            super(PRM9012019Rule92d16.HeatRejectionRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

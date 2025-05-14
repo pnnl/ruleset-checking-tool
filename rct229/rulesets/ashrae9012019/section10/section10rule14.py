@@ -50,15 +50,15 @@ UNDEFINED_LOW_TEMP_MSG = "The efficiency at Tdb 47F was modeled correctly; howev
 MOST_CONSERVATIVE_HP_HIGH_TEMP_MSG = "Check if the modeled baseline heating efficiency was established correctly based upon equipment capacity and type. The modeled efficiency at Tdb 47F was modeled with an efficiency per the capacity bracket in Appendix G efficiency tables with the highest efficiency (i.e., most conservative efficiency has been modeled). It is often the case that the Tdb 17F efficiency is captured in the model via the performance curves as opposed to an explicit efficiency value entry. If there is no explicit option to enter an efficiency value at Tdb 17F check that appropriate performance curves were modeled."
 
 
-class Section10Rule14(RuleDefinitionListIndexedBase):
+class PRM9012019Rule10p28(RuleDefinitionListIndexedBase):
     """Rule 14 of ASHRAE 90.1-2019 Appendix G Section 10 (HVAC General)"""
 
     def __init__(self):
-        super(Section10Rule14, self).__init__(
+        super(PRM9012019Rule10p28, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section10Rule14.HVACRule(),
+            each_rule=PRM9012019Rule10p28.HVACRule(),
             index_rmd=BASELINE_0,
             id="10-14",
             description=(
@@ -122,7 +122,7 @@ class Section10Rule14(RuleDefinitionListIndexedBase):
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section10Rule14.HVACRule, self).__init__(
+            super(PRM9012019Rule10p28.HVACRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

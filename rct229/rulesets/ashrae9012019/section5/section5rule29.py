@@ -19,11 +19,11 @@ from rct229.utils.std_comparisons import std_equal
 TARGET_ABSORPTANCE_THERMAL_EXTERIOR = 0.9
 
 
-class Section5Rule29(RuleDefinitionListIndexedBase):
+class PRM9012019Rule39f24(RuleDefinitionListIndexedBase):
     """Rule 29 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule29, self).__init__(
+        super(PRM9012019Rule39f24, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
@@ -31,7 +31,7 @@ class Section5Rule29(RuleDefinitionListIndexedBase):
                 "$.ruleset_model_descriptions[*]": ["weather"],
                 "weather": ["climate_zone"],
             },
-            each_rule=Section5Rule29.BuildingRule(),
+            each_rule=PRM9012019Rule39f24.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-29",
             description="The baseline roof surfaces shall be modeled using a thermal emittance of 0.9",
@@ -48,11 +48,11 @@ class Section5Rule29(RuleDefinitionListIndexedBase):
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section5Rule29.BuildingRule, self).__init__(
+            super(PRM9012019Rule39f24.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
-                each_rule=Section5Rule29.BuildingRule.RoofRule(),
+                each_rule=PRM9012019Rule39f24.BuildingRule.RoofRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
@@ -74,7 +74,7 @@ class Section5Rule29(RuleDefinitionListIndexedBase):
 
         class RoofRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section5Rule29.BuildingRule.RoofRule, self).__init__(
+                super(PRM9012019Rule39f24.BuildingRule.RoofRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),

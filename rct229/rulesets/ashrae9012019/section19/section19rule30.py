@@ -15,15 +15,15 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types i
 APPLICABLE_SYS_TYPES = [HVAC_SYS.SYS_6, HVAC_SYS.SYS_8]
 
 
-class Section19Rule30(RuleDefinitionListIndexedBase):
+class PRM9012019Rule95r49(RuleDefinitionListIndexedBase):
     """Rule 30 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
 
     def __init__(self):
-        super(Section19Rule30, self).__init__(
+        super(PRM9012019Rule95r49, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section19Rule30.HVACRule(),
+            each_rule=PRM9012019Rule95r49.HVACRule(),
             index_rmd=BASELINE_0,
             id="19-30",
             description="For Systems 6 and 8, only the terminal-unit fan and reheat coil shall be energized to meet heating set point during unoccupied hours in the baseline design.",
@@ -41,7 +41,7 @@ class Section19Rule30(RuleDefinitionListIndexedBase):
 
     class HVACRule(PartialRuleDefinition):
         def __init__(self):
-            super(Section19Rule30.HVACRule, self).__init__(
+            super(PRM9012019Rule95r49.HVACRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

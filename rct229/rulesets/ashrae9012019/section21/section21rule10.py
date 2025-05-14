@@ -45,15 +45,15 @@ PUMP_SPEED_CONTROL = SchemaEnums.schema_enums["PumpSpeedControlOptions"]
 PUMP_CONFIGURATION_THRESHOLD = 120_000 * ureg("ft2")
 
 
-class Section21Rule10(RuleDefinitionListIndexedBase):
+class PRM9012019Rule06a67(RuleDefinitionListIndexedBase):
     """Rule 10 of ASHRAE 90.1-2019 Appendix G Section 23 (Hot water loop)"""
 
     def __init__(self):
-        super(Section21Rule10, self).__init__(
+        super(PRM9012019Rule06a67, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section21Rule10.PumpRule(),
+            each_rule=PRM9012019Rule06a67.PumpRule(),
             index_rmd=BASELINE_0,
             id="21-10",
             description="When the building is modeled with HHW plant (served by either boiler(s) or purchased hot "
@@ -97,7 +97,7 @@ class Section21Rule10(RuleDefinitionListIndexedBase):
 
     class PumpRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section21Rule10.PumpRule, self).__init__(
+            super(PRM9012019Rule06a67.PumpRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

@@ -8,11 +8,11 @@ MAX_SUM_HEATING_COOLING_UNMET_HOUR = 300 * ureg("hr")
 UNDETERMINED_MSG = "Conduct manual check that unmet load hours for the proposed design do not exceed 300 (of the 8760 hours simulated)."
 
 
-class Section19Rule5(RuleDefinitionBase):
+class PRM9012019Rule75k92(RuleDefinitionBase):
     """Rule 5 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
 
     def __init__(self):
-        super(Section19Rule5, self).__init__(
+        super(PRM9012019Rule75k92, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=False, PROPOSED=True
             ),

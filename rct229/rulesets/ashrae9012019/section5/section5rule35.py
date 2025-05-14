@@ -24,11 +24,11 @@ TARGET_AIR_LEAKAGE_COEFF = 1.0 * ureg("cfm / foot**2")
 TOTAL_AIR_LEAKAGE_FACTOR = 0.112
 
 
-class Section5Rule35(RuleDefinitionListIndexedBase):
+class PRM9012019Rule39k65(RuleDefinitionListIndexedBase):
     """Rule 35 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule35, self).__init__(
+        super(PRM9012019Rule39k65, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
@@ -36,7 +36,7 @@ class Section5Rule35(RuleDefinitionListIndexedBase):
                 "$.ruleset_model_descriptions[*]": ["weather"],
                 "weather": ["climate_zone"],
             },
-            each_rule=Section5Rule35.BuildingRule(),
+            each_rule=PRM9012019Rule39k65.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-35",
             description="The baseline air leakage rate of the building envelope (I_75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1 cfm/ft2. The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section G3.1.1.4.",
@@ -53,7 +53,7 @@ class Section5Rule35(RuleDefinitionListIndexedBase):
 
     class BuildingRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section5Rule35.BuildingRule, self).__init__(
+            super(PRM9012019Rule39k65.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

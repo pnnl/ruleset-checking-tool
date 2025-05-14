@@ -41,15 +41,15 @@ FLUID_LOOP = SchemaEnums.schema_enums["FluidLoopOptions"]
 MINIMUM_TURNDOWN_RATIO = 0.25
 
 
-class Section21Rule13(RuleDefinitionListIndexedBase):
+class PRM9012019Rule43l11(RuleDefinitionListIndexedBase):
     """Rule 13 of ASHRAE 90.1-2019 Appendix G Section 21 (Hot water loop)"""
 
     def __init__(self):
-        super(Section21Rule13, self).__init__(
+        super(PRM9012019Rule43l11, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section21Rule13.HeatingFluidLoopRule(),
+            each_rule=PRM9012019Rule43l11.HeatingFluidLoopRule(),
             index_rmd=BASELINE_0,
             id="21-13",
             description="The baseline building design uses boilers or purchased hot water, the hot water pumping system shall be modeled with a minimum turndown ratio of 0.25.",
@@ -82,7 +82,7 @@ class Section21Rule13(RuleDefinitionListIndexedBase):
 
     class HeatingFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section21Rule13.HeatingFluidLoopRule, self).__init__(
+            super(PRM9012019Rule43l11.HeatingFluidLoopRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

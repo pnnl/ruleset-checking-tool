@@ -54,18 +54,18 @@ APPLICABLE_CZ_ZONES = [
 ]
 
 
-class Section19Rule21(RuleDefinitionListIndexedBase):
+class PRM9012019Rule07w16(RuleDefinitionListIndexedBase):
     """Rule 21 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
 
     def __init__(self):
-        super(Section19Rule21, self).__init__(
+        super(PRM9012019Rule07w16, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             required_fields={
                 "$": ["ruleset_model_descriptions"],
             },
-            each_rule=Section19Rule21.RMDRule(),
+            each_rule=PRM9012019Rule07w16.RMDRule(),
             index_rmd=BASELINE_0,
             id="19-21",
             description="Baseline systems with >= 5,000 CFM supply air and >= 70 %OA shall have energy recovery modeled in the baseline design model. The following exceptions apply:"
@@ -84,11 +84,11 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
 
     class RMDRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section19Rule21.RMDRule, self).__init__(
+            super(PRM9012019Rule07w16.RMDRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
-                each_rule=Section19Rule21.RMDRule.HVACRule(),
+                each_rule=PRM9012019Rule07w16.RMDRule.HVACRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
                 required_fields={
@@ -238,7 +238,7 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
 
         class HVACRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section19Rule21.RMDRule.HVACRule, self).__init__(
+                super(PRM9012019Rule07w16.RMDRule.HVACRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),

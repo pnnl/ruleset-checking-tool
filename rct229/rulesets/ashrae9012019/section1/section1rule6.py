@@ -9,11 +9,11 @@ from rct229.utils.pint_utils import ZERO
 ENERGY_SOURCE_OPTIONS = SchemaEnums.schema_enums["EnergySourceOptions"]
 
 
-class Section1Rule6(RuleDefinitionListIndexedBase):
+class PRM9012019Rule10d53(RuleDefinitionListIndexedBase):
     """Rule 6 of ASHRAE 90.1-2019 Appendix G Section 1 (Performance Calculation)"""
 
     def __init__(self):
-        super(Section1Rule6, self).__init__(
+        super(PRM9012019Rule10d53, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False,
                 BASELINE_0=True,
@@ -34,13 +34,13 @@ class Section1Rule6(RuleDefinitionListIndexedBase):
             is_primary_rule=True,
             rmd_context="ruleset_model_descriptions/0",
             index_rmd=BASELINE_0,
-            each_rule=Section1Rule6.RMDRule(),
+            each_rule=PRM9012019Rule10d53.RMDRule(),
             list_path="ruleset_model_descriptions[0]",
         )
 
     class RMDRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section1Rule6.RMDRule, self).__init__(
+            super(PRM9012019Rule10d53.RMDRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False,
                     BASELINE_0=True,
