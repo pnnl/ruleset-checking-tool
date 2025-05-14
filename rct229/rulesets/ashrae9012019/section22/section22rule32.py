@@ -32,15 +32,15 @@ APPLICABLE_SYS_TYPES = [
 ]
 
 
-class Section22Rule32(RuleDefinitionListIndexedBase):
+class PRM9012019Rule48s83(RuleDefinitionListIndexedBase):
     """Rule 32 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
-        super(Section22Rule32, self).__init__(
+        super(PRM9012019Rule48s83, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section22Rule32.ChillerRule(),
+            each_rule=PRM9012019Rule48s83.ChillerRule(),
             index_rmd=BASELINE_0,
             id="22-32",
             description="The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for part load, in accordance with Tables G3.5.3.",
@@ -69,7 +69,7 @@ class Section22Rule32(RuleDefinitionListIndexedBase):
 
     class ChillerRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section22Rule32.ChillerRule, self).__init__(
+            super(PRM9012019Rule48s83.ChillerRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

@@ -22,15 +22,15 @@ SERVICE_WATER_HEATING_SPACE = SchemaEnums.schema_enums[
 ]
 
 
-class Section11Rule7(RuleDefinitionListIndexedBase):
+class PRM9012019Rule49y39(RuleDefinitionListIndexedBase):
     """Rule 7 of ASHRAE 90.1-2019 Appendix G Section 11 (Service Water Heating)"""
 
     def __init__(self):
-        super(Section11Rule7, self).__init__(
+        super(PRM9012019Rule49y39, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section11Rule7.RMDRule(),
+            each_rule=PRM9012019Rule49y39.RMDRule(),
             index_rmd=BASELINE_0,
             id="11-7",
             description="Except in buildings that will have no service water heating loads, the service water heating system type in the baseline building design shall be as specified in Table G3.1.1-2 for each building area type in the proposed design.",
@@ -42,14 +42,14 @@ class Section11Rule7(RuleDefinitionListIndexedBase):
 
     class RMDRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section11Rule7.RMDRule, self).__init__(
+            super(PRM9012019Rule49y39.RMDRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False,
                     BASELINE_0=True,
                     PROPOSED=True,
                 ),
                 index_rmd=BASELINE_0,
-                each_rule=Section11Rule7.RMDRule.SWHBATRule(),
+                each_rule=PRM9012019Rule49y39.RMDRule.SWHBATRule(),
                 required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
             )
 
@@ -119,7 +119,7 @@ class Section11Rule7(RuleDefinitionListIndexedBase):
 
         class SWHBATRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section11Rule7.RMDRule.SWHBATRule, self).__init__(
+                super(PRM9012019Rule49y39.RMDRule.SWHBATRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),

@@ -22,15 +22,15 @@ FAIL_MSG_B = "Fail because a humidity schedule is defined in the baseline but no
 FAIL_MSG_P = "Fail because a humidity schedule is defined in the proposed but not in the baseline."
 
 
-class Section4Rule2(RuleDefinitionListIndexedBase):
+class PRM9012019Rule85i93(RuleDefinitionListIndexedBase):
     """Rule 2 of ASHRAE 90.1-2019 Appendix G Section 4 (Schedules Setpoints)"""
 
     def __init__(self):
-        super(Section4Rule2, self).__init__(
+        super(PRM9012019Rule85i93, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section4Rule2.RuleSetModelInstanceRule(),
+            each_rule=PRM9012019Rule85i93.RuleSetModelInstanceRule(),
             index_rmd=BASELINE_0,
             id="4-2",
             description="Humidity Control Setpoints shall be the same for proposed design and baseline building design.",
@@ -42,11 +42,11 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
 
     class RuleSetModelInstanceRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section4Rule2.RuleSetModelInstanceRule, self).__init__(
+            super(PRM9012019Rule85i93.RuleSetModelInstanceRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
-                each_rule=Section4Rule2.RuleSetModelInstanceRule.ZoneRule(),
+                each_rule=PRM9012019Rule85i93.RuleSetModelInstanceRule.ZoneRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].zones[*]",
                 required_fields={
@@ -78,7 +78,9 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
 
         class ZoneRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section4Rule2.RuleSetModelInstanceRule.ZoneRule, self,).__init__(
+                super(
+                    PRM9012019Rule85i93.RuleSetModelInstanceRule.ZoneRule, self
+                ).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),

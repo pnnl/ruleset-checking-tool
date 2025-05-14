@@ -8,7 +8,7 @@
         "standard": {
             "rule_id": "5-29",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (f)",
-            "rule_description": "The baseline roof surfaces shall be modeled using a thermal emittance of 0.9",
+            "rule_description": "The baseline roof surfaces shall be modeled using a thermal emittance of 0.9.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -92,7 +92,7 @@
         "standard": {
             "rule_id": "5-29",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (f)",
-            "rule_description": "The baseline roof surfaces shall be modeled using a thermal emittance of 0.9",
+            "rule_description": "The baseline roof surfaces shall be modeled using a thermal emittance of 0.9.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",

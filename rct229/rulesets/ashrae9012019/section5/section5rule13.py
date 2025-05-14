@@ -19,11 +19,11 @@ from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
 
 
-class Section5Rule13(RuleDefinitionListIndexedBase):
+class PRM9012019Rule73r04(RuleDefinitionListIndexedBase):
     """Rule 13 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule13, self).__init__(
+        super(PRM9012019Rule73r04, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
@@ -31,7 +31,7 @@ class Section5Rule13(RuleDefinitionListIndexedBase):
                 "$.ruleset_model_descriptions[*]": ["weather"],
                 "weather": ["climate_zone"],
             },
-            each_rule=Section5Rule13.BuildingRule(),
+            each_rule=PRM9012019Rule73r04.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-13",
             description="Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same in the baseline as in the proposed design. ",
@@ -48,12 +48,12 @@ class Section5Rule13(RuleDefinitionListIndexedBase):
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section5Rule13.BuildingRule, self).__init__(
+            super(PRM9012019Rule73r04.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
                 required_fields={},
-                each_rule=Section5Rule13.BuildingRule.UnregulatedSurfaceRule(),
+                each_rule=PRM9012019Rule73r04.BuildingRule.UnregulatedSurfaceRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
@@ -74,7 +74,7 @@ class Section5Rule13(RuleDefinitionListIndexedBase):
         class UnregulatedSurfaceRule(RuleDefinitionBase):
             def __init__(self):
                 super(
-                    Section5Rule13.BuildingRule.UnregulatedSurfaceRule, self
+                    PRM9012019Rule73r04.BuildingRule.UnregulatedSurfaceRule, self
                 ).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True

@@ -26,15 +26,15 @@ APPLICABLE_SYS_TYPES = [
 ]
 
 
-class Section22Rule34(RuleDefinitionListIndexedBase):
+class PRM9012019Rule36t85(RuleDefinitionListIndexedBase):
     """Rule 34 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
-        super(Section22Rule34, self).__init__(
+        super(PRM9012019Rule36t85, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section22Rule34.CoolingFluidLoopRule(),
+            each_rule=PRM9012019Rule36t85.CoolingFluidLoopRule(),
             index_rmd=BASELINE_0,
             id="22-34",
             description="Baseline chilled water loops that do not use purchased chilled water shall have the plant equipment capacity sized based on coincident loads.",
@@ -75,7 +75,7 @@ class Section22Rule34(RuleDefinitionListIndexedBase):
 
     class CoolingFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section22Rule34.CoolingFluidLoopRule, self).__init__(
+            super(PRM9012019Rule36t85.CoolingFluidLoopRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

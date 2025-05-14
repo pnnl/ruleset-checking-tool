@@ -12,15 +12,15 @@ from rct229.utils.pint_utils import CalcQ
 REQ_ELEVATOR_CAB_VENTILATION_FAN_POWER = 0.33 * ureg("W/cfm")
 
 
-class Section16Rule6(RuleDefinitionListIndexedBase):
+class PRM9012019Rule34h06(RuleDefinitionListIndexedBase):
     """Rule 6 of ASHRAE 90.1-2019 Appendix G Section 16 (Elevators)"""
 
     def __init__(self):
-        super(Section16Rule6, self).__init__(
+        super(PRM9012019Rule34h06, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section16Rule6.ElevatorRule(),
+            each_rule=PRM9012019Rule34h06.ElevatorRule(),
             index_rmd=BASELINE_0,
             id="16-6",
             description="When included in the proposed design, the baseline elevator cab ventilation fan power shall be 0.33 W/cfm.",
@@ -45,7 +45,7 @@ class Section16Rule6(RuleDefinitionListIndexedBase):
 
     class ElevatorRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section16Rule6.ElevatorRule, self).__init__(
+            super(PRM9012019Rule34h06.ElevatorRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

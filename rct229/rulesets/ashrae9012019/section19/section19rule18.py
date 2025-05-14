@@ -54,15 +54,15 @@ VARIABLE_VOLUME_SYS_TYPES = [
 ]
 
 
-class Section19Rule18(RuleDefinitionListIndexedBase):
+class PRM9012019Rule49c09(RuleDefinitionListIndexedBase):
     """Rule 18 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
 
     def __init__(self):
-        super(Section19Rule18, self).__init__(
+        super(PRM9012019Rule49c09, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section19Rule18.HVACRule(),
+            each_rule=PRM9012019Rule49c09.HVACRule(),
             index_rmd=BASELINE_0,
             id="19-18",
             description="For baseline systems 3 through 8, and 11, 12, and 13, the system fan electrical power for supply, return, exhaust, "
@@ -132,7 +132,7 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section19Rule18.HVACRule, self).__init__(
+            super(PRM9012019Rule49c09.HVACRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

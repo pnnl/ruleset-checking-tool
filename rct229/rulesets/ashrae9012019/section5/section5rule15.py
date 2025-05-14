@@ -17,11 +17,11 @@ OTHER = SchemaEnums.schema_enums[
 ].OTHER
 
 
-class Section5Rule15(RuleDefinitionListIndexedBase):
+class PRM9012019Rule04o58(RuleDefinitionListIndexedBase):
     """Rule 15 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule15, self).__init__(
+        super(PRM9012019Rule04o58, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
@@ -29,7 +29,7 @@ class Section5Rule15(RuleDefinitionListIndexedBase):
                 "$.ruleset_model_descriptions[*]": ["weather"],
                 "weather": ["climate_zone"],
             },
-            each_rule=Section5Rule15.BuildingRule(),
+            each_rule=PRM9012019Rule04o58.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-15",
             description="For building areas not shown in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in the proposed design or 40% of gross above-grade wall area, whichever is smaller.",
@@ -46,7 +46,7 @@ class Section5Rule15(RuleDefinitionListIndexedBase):
 
     class BuildingRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section5Rule15.BuildingRule, self).__init__(
+            super(PRM9012019Rule04o58.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),

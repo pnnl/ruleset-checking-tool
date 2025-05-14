@@ -27,15 +27,15 @@ APPLICABLE_SYS_TYPES = [
 REQUIRED_TEMP_RANGE = 10 * ureg("degR")
 
 
-class Section22Rule14(RuleDefinitionListIndexedBase):
+class PRM9012019Rule95f90(RuleDefinitionListIndexedBase):
     """Rule 14 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
-        super(Section22Rule14, self).__init__(
+        super(PRM9012019Rule95f90, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section22Rule14.HeatRejectionRule(),
+            each_rule=PRM9012019Rule95f90.HeatRejectionRule(),
             index_rmd=BASELINE_0,
             id="22-14",
             description="The baseline heat rejection device shall have a design temperature rise of 10°F.",
@@ -64,7 +64,7 @@ class Section22Rule14(RuleDefinitionListIndexedBase):
 
     class HeatRejectionRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section22Rule14.HeatRejectionRule, self).__init__(
+            super(PRM9012019Rule95f90.HeatRejectionRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

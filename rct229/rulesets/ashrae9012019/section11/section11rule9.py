@@ -8,15 +8,15 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_bats_and_swh_use im
 from rct229.utils.jsonpath_utils import find_all
 
 
-class Section11Rule9(RuleDefinitionListIndexedBase):
+class PRM9012019Rule93n40(RuleDefinitionListIndexedBase):
     """Rule 9 of ASHRAE 90.1-2019 Appendix G Section 11 (Service Water Heating)"""
 
     def __init__(self):
-        super(Section11Rule9, self).__init__(
+        super(PRM9012019Rule93n40, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section11Rule9.RMDRule(),
+            each_rule=PRM9012019Rule93n40.RMDRule(),
             index_rmd=BASELINE_0,
             id="11-9",
             description="The baseline system must be sized according to Standard 90.1 2019, Section 7.4.1.",
@@ -28,14 +28,14 @@ class Section11Rule9(RuleDefinitionListIndexedBase):
 
     class RMDRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section11Rule9.RMDRule, self).__init__(
+            super(PRM9012019Rule93n40.RMDRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False,
                     BASELINE_0=True,
                     PROPOSED=False,
                 ),
                 index_rmd=BASELINE_0,
-                each_rule=Section11Rule9.RMDRule.SWHBATRule(),
+                each_rule=PRM9012019Rule93n40.RMDRule.SWHBATRule(),
             )
 
         def create_data(self, context, data):
@@ -79,7 +79,7 @@ class Section11Rule9(RuleDefinitionListIndexedBase):
 
         class SWHBATRule(PartialRuleDefinition):
             def __init__(self):
-                super(Section11Rule9.RMDRule.SWHBATRule, self).__init__(
+                super(PRM9012019Rule93n40.RMDRule.SWHBATRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),

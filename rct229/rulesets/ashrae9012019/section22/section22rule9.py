@@ -33,15 +33,15 @@ REQUIRED_MIN_FLOW_FRACTION = 0.25
 MIN_CHW_PRIMARY_LOOP_COOLING_CAPACITY = 300.0 * ureg("ton")
 
 
-class Section22Rule9(RuleDefinitionListIndexedBase):
+class PRM9012019Rule78g49(RuleDefinitionListIndexedBase):
     """Rule 9 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
-        super(Section22Rule9, self).__init__(
+        super(PRM9012019Rule78g49, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section22Rule9.ChillerFluidLoopRule(),
+            each_rule=PRM9012019Rule78g49.ChillerFluidLoopRule(),
             index_rmd=BASELINE_0,
             id="22-9",
             description="Baseline chilled water systems with a cooling capacity of 300 tons or more shall have the secondary loop modeled with a minimum flow of 25% of the design flow rate.",
@@ -106,11 +106,11 @@ class Section22Rule9(RuleDefinitionListIndexedBase):
 
     class ChillerFluidLoopRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section22Rule9.ChillerFluidLoopRule, self).__init__(
+            super(PRM9012019Rule78g49.ChillerFluidLoopRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
-                each_rule=Section22Rule9.ChillerFluidLoopRule.SecondaryChildLoopRule(),
+                each_rule=PRM9012019Rule78g49.ChillerFluidLoopRule.SecondaryChildLoopRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.child_loops[*]",
             )
@@ -118,7 +118,8 @@ class Section22Rule9(RuleDefinitionListIndexedBase):
         class SecondaryChildLoopRule(RuleDefinitionBase):
             def __init__(self):
                 super(
-                    Section22Rule9.ChillerFluidLoopRule.SecondaryChildLoopRule, self
+                    PRM9012019Rule78g49.ChillerFluidLoopRule.SecondaryChildLoopRule,
+                    self,
                 ).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False

@@ -40,15 +40,15 @@ APPLICABLE_SYS_TYPES = [
 DESIGN_SUPPLY_TEMP = 44 * ureg("degF")
 
 
-class Section22Rule1(RuleDefinitionListIndexedBase):
+class PRM9012019Rule92r39(RuleDefinitionListIndexedBase):
     """Rule 1 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
-        super(Section22Rule1, self).__init__(
+        super(PRM9012019Rule92r39, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section22Rule1.ChillerFluidLoopRule(),
+            each_rule=PRM9012019Rule92r39.ChillerFluidLoopRule(),
             index_rmd=BASELINE_0,
             id="22-1",
             description="Baseline chilled water design supply temperature shall be modeled at 44F.",
@@ -87,7 +87,7 @@ class Section22Rule1(RuleDefinitionListIndexedBase):
 
     class ChillerFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section22Rule1.ChillerFluidLoopRule, self).__init__(
+            super(PRM9012019Rule92r39.ChillerFluidLoopRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

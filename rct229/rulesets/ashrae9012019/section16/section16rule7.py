@@ -12,15 +12,15 @@ from rct229.utils.pint_utils import CalcQ
 REQ_ELEVATOR_CAB_LIGHTING_POWER_DENSITY = 3.14 * ureg("W/ft2")
 
 
-class Section16Rule7(RuleDefinitionListIndexedBase):
+class PRM9012019Rule30t80(RuleDefinitionListIndexedBase):
     """Rule 7 of ASHRAE 90.1-2019 Appendix G Section 16 (Elevators)"""
 
     def __init__(self):
-        super(Section16Rule7, self).__init__(
+        super(PRM9012019Rule30t80, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section16Rule7.ElevatorRule(),
+            each_rule=PRM9012019Rule30t80.ElevatorRule(),
             index_rmd=BASELINE_0,
             id="16-7",
             description="When included in the proposed design, the baseline elevator cab lighting power density shall be 3.14 W/ft2.",
@@ -45,7 +45,7 @@ class Section16Rule7(RuleDefinitionListIndexedBase):
 
     class ElevatorRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section16Rule7.ElevatorRule, self).__init__(
+            super(PRM9012019Rule30t80.ElevatorRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

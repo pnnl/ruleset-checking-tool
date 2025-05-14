@@ -8,7 +8,7 @@
         "standard": {
             "rule_id": "5-27",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (e)",
-            "rule_description": "Skylight U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8",
+            "rule_description": "Skylight U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -99,7 +99,7 @@
         "standard": {
             "rule_id": "5-27",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (e)",
-            "rule_description": "Skylight U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8",
+            "rule_description": "Skylight U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -190,7 +190,7 @@
         "standard": {
             "rule_id": "5-27",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (e)",
-            "rule_description": "Skylight U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8",
+            "rule_description": "Skylight U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -281,7 +281,7 @@
         "standard": {
             "rule_id": "5-27",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (e)",
-            "rule_description": "Skylight U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8",
+            "rule_description": "Skylight U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -372,7 +372,7 @@
         "standard": {
             "rule_id": "5-27",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (e)",
-            "rule_description": "Skylight U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8",
+            "rule_description": "Skylight U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -466,7 +466,7 @@
         "standard": {
             "rule_id": "5-27",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (e)",
-            "rule_description": "Skylight U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8",
+            "rule_description": "Skylight U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -560,7 +560,7 @@
         "standard": {
             "rule_id": "5-27",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (e)",
-            "rule_description": "Skylight U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8",
+            "rule_description": "Skylight U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -651,7 +651,7 @@
         "standard": {
             "rule_id": "5-27",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (e)",
-            "rule_description": "Skylight U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8",
+            "rule_description": "Skylight U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",

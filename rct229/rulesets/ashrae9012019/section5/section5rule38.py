@@ -12,11 +12,11 @@ UNDETERMINED_MSG = "It cannot be determined if the ground temperature schedule f
 NOT_DEFINED_MSG = "A ground temperature schedule was not found for the project."
 
 
-class Section5Rule38(PartialRuleDefinition):
+class PRM9012019Rule40i28(PartialRuleDefinition):
     """Rule 38 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule38, self).__init__(
+        super(PRM9012019Rule40i28, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
