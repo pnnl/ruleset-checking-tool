@@ -15,15 +15,15 @@ from rct229.utils.pint_utils import ZERO, CalcQ
 from rct229.utils.std_comparisons import std_equal
 
 
-class Section19Rule20(RuleDefinitionListIndexedBase):
+class PRM9012019Rule60d49(RuleDefinitionListIndexedBase):
     """Rule 20 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
 
     def __init__(self):
-        super(Section19Rule20, self).__init__(
+        super(PRM9012019Rule60d49, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section19Rule20.HVACRule(),
+            each_rule=PRM9012019Rule60d49.HVACRule(),
             index_rmd=BASELINE_0,
             id="19-20",
             description="The calculated system fan power shall be distributed to supply, return, exhaust, and relief fans in the same proportion as the proposed design.",
@@ -49,7 +49,7 @@ class Section19Rule20(RuleDefinitionListIndexedBase):
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section19Rule20.HVACRule, self).__init__(
+            super(PRM9012019Rule60d49.HVACRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

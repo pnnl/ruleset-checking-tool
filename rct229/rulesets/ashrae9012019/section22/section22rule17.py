@@ -14,15 +14,15 @@ FAN_SHAFT_POWER_FACTOR = 0.9
 HEAT_REJ_EFF_LIMIT = 38.2 * ureg("gpm/hp")
 
 
-class Section22Rule17(RuleDefinitionListIndexedBase):
+class PRM9012019Rule04g06(RuleDefinitionListIndexedBase):
     """Rule 17 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
-        super(Section22Rule17, self).__init__(
+        super(PRM9012019Rule04g06, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section22Rule17.HeatRejectionRule(),
+            each_rule=PRM9012019Rule04g06.HeatRejectionRule(),
             index_rmd=BASELINE_0,
             id="22-17",
             description="The baseline heat rejection device shall have an efficiency of 38.2 gpm/hp.",
@@ -48,7 +48,7 @@ class Section22Rule17(RuleDefinitionListIndexedBase):
 
     class HeatRejectionRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section22Rule17.HeatRejectionRule, self).__init__(
+            super(PRM9012019Rule04g06.HeatRejectionRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

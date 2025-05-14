@@ -11,17 +11,17 @@ from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.utility_functions import find_exactly_one_schedule
 
 
-class Section16Rule3(RuleDefinitionListIndexedBase):
+class PRM9012019Rule92n36(RuleDefinitionListIndexedBase):
     """Rule 3 of ASHRAE 90.1-2019 Appendix G Section 16 (Elevators)"""
 
     def __init__(self):
-        super(Section16Rule3, self).__init__(
+        super(PRM9012019Rule92n36, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False,
                 BASELINE_0=False,
                 PROPOSED=True,
             ),
-            each_rule=Section16Rule3.RuleSetModelDescriptionRule(),
+            each_rule=PRM9012019Rule92n36.RuleSetModelDescriptionRule(),
             index_rmd=PROPOSED,
             id="16-3",
             description="The elevator cab ventilation fan shall be modeled with the same schedule as the elevator motor.",
@@ -33,11 +33,11 @@ class Section16Rule3(RuleDefinitionListIndexedBase):
 
     class RuleSetModelDescriptionRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section16Rule3.RuleSetModelDescriptionRule, self).__init__(
+            super(PRM9012019Rule92n36.RuleSetModelDescriptionRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=False, PROPOSED=True
                 ),
-                each_rule=Section16Rule3.RuleSetModelDescriptionRule.ElevatorRule(),
+                each_rule=PRM9012019Rule92n36.RuleSetModelDescriptionRule.ElevatorRule(),
                 index_rmd=PROPOSED,
                 list_path="buildings[*].elevators[*]",
                 required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
@@ -76,7 +76,7 @@ class Section16Rule3(RuleDefinitionListIndexedBase):
         class ElevatorRule(RuleDefinitionBase):
             def __init__(self):
                 super(
-                    Section16Rule3.RuleSetModelDescriptionRule.ElevatorRule, self
+                    PRM9012019Rule92n36.RuleSetModelDescriptionRule.ElevatorRule, self
                 ).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False,

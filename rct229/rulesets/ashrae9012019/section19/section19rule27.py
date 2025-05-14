@@ -11,15 +11,15 @@ from rct229.utils.pint_utils import ZERO
 FAN_SYSTEM_OPERATION = SchemaEnums.schema_enums["FanSystemOperationOptions"]
 
 
-class Section19Rule27(RuleDefinitionListIndexedBase):
+class PRM9012019Rule88f26(RuleDefinitionListIndexedBase):
     """Rule 27 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
 
     def __init__(self):
-        super(Section19Rule27, self).__init__(
+        super(PRM9012019Rule88f26, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section19Rule27.HVACRule(),
+            each_rule=PRM9012019Rule88f26.HVACRule(),
             index_rmd=BASELINE_0,
             id="19-27",
             description="HVAC fans shall remain on during unoccupied hours in spaces that have health and safety mandated minimum ventilation requirements during unoccupied hours in the baseline design.",
@@ -40,7 +40,7 @@ class Section19Rule27(RuleDefinitionListIndexedBase):
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section19Rule27.HVACRule, self).__init__(
+            super(PRM9012019Rule88f26.HVACRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

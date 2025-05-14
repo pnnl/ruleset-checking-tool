@@ -13,15 +13,15 @@ from rct229.utils.utility_functions import find_exactly_one_fluid_loop
 FLUID_LOOP_FLOW_CONTROL = SchemaEnums.schema_enums["FluidLoopFlowControlOptions"]
 
 
-class Section22Rule28(RuleDefinitionListIndexedBase):
+class PRM9012019Rule41d32(RuleDefinitionListIndexedBase):
     """Rule 28 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
-        super(Section22Rule28, self).__init__(
+        super(PRM9012019Rule41d32, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section22Rule28.HeatRejectionRule(),
+            each_rule=PRM9012019Rule41d32.HeatRejectionRule(),
             index_rmd=BASELINE_0,
             id="22-28",
             description="The baseline building design condenser water pump shall be modeled as constant volume.",
@@ -56,7 +56,7 @@ class Section22Rule28(RuleDefinitionListIndexedBase):
 
     class HeatRejectionRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section22Rule28.HeatRejectionRule, self).__init__(
+            super(PRM9012019Rule41d32.HeatRejectionRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 )

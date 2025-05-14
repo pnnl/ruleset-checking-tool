@@ -23,15 +23,15 @@ MANUAL_CHECK_MSG = (
 )
 
 
-class Section4Rule1(RuleDefinitionListIndexedBase):
+class PRM9012019Rule96q77(RuleDefinitionListIndexedBase):
     """Rule 1 of ASHRAE 90.1-2019 Appendix G Section 4 (Schedules Setpoints)"""
 
     def __init__(self):
-        super(Section4Rule1, self).__init__(
+        super(PRM9012019Rule96q77, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section4Rule1.RuleSetModelInstanceRule(),
+            each_rule=PRM9012019Rule96q77.RuleSetModelInstanceRule(),
             index_rmd=BASELINE_0,
             id="4-1",
             description="Temperature control setpoints shall be the same for proposed design and baseline building design.",
@@ -43,11 +43,11 @@ class Section4Rule1(RuleDefinitionListIndexedBase):
 
     class RuleSetModelInstanceRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section4Rule1.RuleSetModelInstanceRule, self).__init__(
+            super(PRM9012019Rule96q77.RuleSetModelInstanceRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
-                each_rule=Section4Rule1.RuleSetModelInstanceRule.ZoneRule(),
+                each_rule=PRM9012019Rule96q77.RuleSetModelInstanceRule.ZoneRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].zones[*]",
                 required_fields={
@@ -79,7 +79,9 @@ class Section4Rule1(RuleDefinitionListIndexedBase):
 
         class ZoneRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section4Rule1.RuleSetModelInstanceRule.ZoneRule, self,).__init__(
+                super(
+                    PRM9012019Rule96q77.RuleSetModelInstanceRule.ZoneRule, self
+                ).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),

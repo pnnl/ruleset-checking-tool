@@ -30,15 +30,15 @@ REQUIRED_LOW_DESIGN_WETBULB_TEMP = ureg("55 degF")
 REQUIRED_HIGH_DESIGN_WETBULB_TEMP = ureg("90 degF")
 
 
-class Section22Rule16(RuleDefinitionListIndexedBase):
+class PRM9012019Rule81f32(RuleDefinitionListIndexedBase):
     """Rule 16 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
-        super(Section22Rule16, self).__init__(
+        super(PRM9012019Rule81f32, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section22Rule16.HeatRejectionRule(),
+            each_rule=PRM9012019Rule81f32.HeatRejectionRule(),
             index_rmd=BASELINE_0,
             id="22-16",
             description="The baseline condenser water design supply temperature shall be calculated using the cooling tower approach to the 0.4% evaporation design wet-bulb temperature, valid for evaporation design wet-bulb temperatures from 55°F to 90°F.",
@@ -84,7 +84,7 @@ class Section22Rule16(RuleDefinitionListIndexedBase):
 
     class HeatRejectionRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section22Rule16.HeatRejectionRule, self).__init__(
+            super(PRM9012019Rule81f32.HeatRejectionRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

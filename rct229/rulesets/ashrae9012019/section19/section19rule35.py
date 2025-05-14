@@ -17,15 +17,15 @@ from rct229.utils.jsonpath_utils import find_all
 LIGHTING_SPACE = SchemaEnums.schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
 
 
-class Section19Rule35(RuleDefinitionListIndexedBase):
+class PRM9012019Rule40n43(RuleDefinitionListIndexedBase):
     """Rule 35 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
 
     def __init__(self):
-        super(Section19Rule35, self).__init__(
+        super(PRM9012019Rule40n43, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section19Rule35.RMDRule(),
+            each_rule=PRM9012019Rule40n43.RMDRule(),
             index_rmd=BASELINE_0,
             id="19-35",
             description="For baseline systems serving only laboratory spaces that are prohibited from recirculating return air by code or accreditation standards, "
@@ -38,11 +38,11 @@ class Section19Rule35(RuleDefinitionListIndexedBase):
 
     class RMDRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section19Rule35.RMDRule, self).__init__(
+            super(PRM9012019Rule40n43.RMDRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
-                each_rule=Section19Rule35.RMDRule.HVACRule(),
+                each_rule=PRM9012019Rule40n43.RMDRule.HVACRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
                 required_fields={
@@ -150,7 +150,7 @@ class Section19Rule35(RuleDefinitionListIndexedBase):
 
         class HVACRule(PartialRuleDefinition):
             def __init__(self):
-                super(Section19Rule35.RMDRule.HVACRule, self).__init__(
+                super(PRM9012019Rule40n43.RMDRule.HVACRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),

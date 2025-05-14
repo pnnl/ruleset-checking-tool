@@ -7,11 +7,11 @@ from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 
 
-class Section22Rule12(RuleDefinitionBase):
+class PRM9012019Rule99f07(RuleDefinitionBase):
     """Rule 12 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
-        super(Section22Rule12, self).__init__(
+        super(PRM9012019Rule99f07, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),

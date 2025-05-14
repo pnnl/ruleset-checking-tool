@@ -35,15 +35,15 @@ draw_pattern_enum_to_lookup_str_map = {
 }
 
 
-class Section11Rule10(RuleDefinitionListIndexedBase):
+class PRM9012019Rule76q85(RuleDefinitionListIndexedBase):
     """Rule 10 of ASHRAE 90.1-2019 Appendix G Section 11 (Service Water Heating)"""
 
     def __init__(self):
-        super(Section11Rule10, self).__init__(
+        super(PRM9012019Rule76q85, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section11Rule10.RMDRule(),
+            each_rule=PRM9012019Rule76q85.RMDRule(),
             index_rmd=BASELINE_0,
             id="11-10",
             description="The service water heating system type in the baseline building design shall match the minimum efficiency requirements in Section 7.4.2.",
@@ -55,11 +55,11 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
 
     class RMDRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section11Rule10.RMDRule, self).__init__(
+            super(PRM9012019Rule76q85.RMDRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
-                each_rule=Section11Rule10.RMDRule.SWHEquipRule(),
+                each_rule=PRM9012019Rule76q85.RMDRule.SWHEquipRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.service_water_heating_equipment[*]",
             )
@@ -75,7 +75,7 @@ class Section11Rule10(RuleDefinitionListIndexedBase):
 
         class SWHEquipRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section11Rule10.RMDRule.SWHEquipRule, self).__init__(
+                super(PRM9012019Rule76q85.RMDRule.SWHEquipRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False,
                         BASELINE_0=True,

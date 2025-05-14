@@ -7,15 +7,15 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.check_purchased_chw_hhw_sta
 )
 
 
-class Section22Rule38(RuleDefinitionListIndexedBase):
+class PRM9012019Rule84g72(RuleDefinitionListIndexedBase):
     """Rule 38 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
-        super(Section22Rule38, self).__init__(
+        super(PRM9012019Rule84g72, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section22Rule38.RulesetModelInstanceRule(),
+            each_rule=PRM9012019Rule84g72.RulesetModelInstanceRule(),
             index_rmd=BASELINE_0,
             id="22-38",
             description="Baseline chilled water loops that use purchased chilled water shall have a minimum flow setpoint of 25%.",
@@ -27,7 +27,7 @@ class Section22Rule38(RuleDefinitionListIndexedBase):
 
     class RulesetModelInstanceRule(PartialRuleDefinition):
         def __init__(self):
-            super(Section22Rule38.RulesetModelInstanceRule, self,).__init__(
+            super(PRM9012019Rule84g72.RulesetModelInstanceRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

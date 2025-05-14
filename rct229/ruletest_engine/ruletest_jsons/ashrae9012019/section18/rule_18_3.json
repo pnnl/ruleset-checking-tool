@@ -7,7 +7,6 @@
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "18-3",
-            "ruleset_reference": 0,
             "rule_description": "The lab exhaust fan shall be modeled as constant horsepower (kilowatts) reflecting constant-volume stack discharge with outdoor air bypass in the baseline",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -439,7 +438,6 @@
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "18-3",
-            "ruleset_reference": 0,
             "rule_description": "The lab exhaust fan shall be modeled as constant horsepower (kilowatts) reflecting constant-volume stack discharge with outdoor air bypass in the baseline",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -871,7 +869,6 @@
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "18-3",
-            "ruleset_reference": 0,
             "rule_description": "The lab exhaust fan shall be modeled as constant horsepower (kilowatts) reflecting constant-volume stack discharge with outdoor air bypass in the baseline",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",

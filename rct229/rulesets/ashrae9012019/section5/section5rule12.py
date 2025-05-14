@@ -28,11 +28,11 @@ FAIL_MSG = (
 )
 
 
-class Section5Rule12(RuleDefinitionListIndexedBase):
+class PRM9012019Rule40d86(RuleDefinitionListIndexedBase):
     """Rule 12 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule12, self).__init__(
+        super(PRM9012019Rule40d86, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
@@ -40,7 +40,7 @@ class Section5Rule12(RuleDefinitionListIndexedBase):
                 "$.ruleset_model_descriptions[*]": ["weather"],
                 "weather": ["climate_zone"],
             },
-            each_rule=Section5Rule12.BuildingRule(),
+            each_rule=PRM9012019Rule40d86.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-12",
             description="Baseline slab-on-grade floor assemblies must match the appropriate assembly maximum F-factors in Tables G3.4-1 through G3.4-9.",
@@ -57,12 +57,12 @@ class Section5Rule12(RuleDefinitionListIndexedBase):
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section5Rule12.BuildingRule, self).__init__(
+            super(PRM9012019Rule40d86.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={},
-                each_rule=Section5Rule12.BuildingRule.SlabOnGradeFloorRule(),
+                each_rule=PRM9012019Rule40d86.BuildingRule.SlabOnGradeFloorRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
@@ -85,7 +85,9 @@ class Section5Rule12(RuleDefinitionListIndexedBase):
 
         class SlabOnGradeFloorRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section5Rule12.BuildingRule.SlabOnGradeFloorRule, self).__init__(
+                super(
+                    PRM9012019Rule40d86.BuildingRule.SlabOnGradeFloorRule, self
+                ).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),

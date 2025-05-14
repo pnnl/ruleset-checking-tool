@@ -5,11 +5,11 @@ from rct229.utils.compare_standard_val import std_le
 from rct229.utils.jsonpath_utils import find_one
 
 
-class Section1Rule4(RuleDefinitionBase):
+class PRM9012019Rule60m79(RuleDefinitionBase):
     """Rule 4 of ASHRAE 90.1-2019 Appendix G Section 1 (Performance Calculations)"""
 
     def __init__(self):
-        super(Section1Rule4, self).__init__(
+        super(PRM9012019Rule60m79, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=True,
                 BASELINE_0=True,

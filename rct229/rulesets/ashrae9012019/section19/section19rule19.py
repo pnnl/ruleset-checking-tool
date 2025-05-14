@@ -44,15 +44,15 @@ COOLING_SYSTEM = SchemaEnums.schema_enums["CoolingSystemOptions"]
 REQ_FAN_POWER_FLOW_RATIO = 0.3 * ureg("W/cfm")
 
 
-class Section19Rule19(RuleDefinitionListIndexedBase):
+class PRM9012019Rule51d17(RuleDefinitionListIndexedBase):
     """Rule 19 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
 
     def __init__(self):
-        super(Section19Rule19, self).__init__(
+        super(PRM9012019Rule51d17, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section19Rule19.HVACRule(),
+            each_rule=PRM9012019Rule51d17.HVACRule(),
             index_rmd=BASELINE_0,
             id="19-19",
             description="For baseline systems 9 and 10 the system fan electrical power (Pfan) for supply, return, exhaust, and relief shall be CFMs × 0.3, where, CFMs = the baseline system maximum design supply fan airflow rate, cfm. "
@@ -156,7 +156,7 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section19Rule19.HVACRule, self).__init__(
+            super(PRM9012019Rule51d17.HVACRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),

@@ -34,15 +34,15 @@ FLUID_LOOP = SchemaEnums.schema_enums["FluidLoopOptions"]
 MIN_CHW_PRIMARY_LOOP_COOLING_CAPACITY = 300.0 * ureg("ton")
 
 
-class Section22Rule8(RuleDefinitionListIndexedBase):
+class PRM9012019Rule37a05(RuleDefinitionListIndexedBase):
     """Rule 8 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
-        super(Section22Rule8, self).__init__(
+        super(PRM9012019Rule37a05, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section22Rule8.PrimaryFluidLoopRule(),
+            each_rule=PRM9012019Rule37a05.PrimaryFluidLoopRule(),
             index_rmd=BASELINE_0,
             id="22-8",
             description="Baseline chilled water systems with a cooling capacity of 300 tons or more shall have the secondary chilled water pump modeled with variable-speed drives.",
@@ -125,11 +125,11 @@ class Section22Rule8(RuleDefinitionListIndexedBase):
 
     class PrimaryFluidLoopRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section22Rule8.PrimaryFluidLoopRule, self).__init__(
+            super(PRM9012019Rule37a05.PrimaryFluidLoopRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
-                each_rule=Section22Rule8.PrimaryFluidLoopRule.SecondaryChildLoopRule(),
+                each_rule=PRM9012019Rule37a05.PrimaryFluidLoopRule.SecondaryChildLoopRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.child_loops[*]",
             )
@@ -137,13 +137,14 @@ class Section22Rule8(RuleDefinitionListIndexedBase):
         class SecondaryChildLoopRule(RuleDefinitionListIndexedBase):
             def __init__(self):
                 super(
-                    Section22Rule8.PrimaryFluidLoopRule.SecondaryChildLoopRule, self
+                    PRM9012019Rule37a05.PrimaryFluidLoopRule.SecondaryChildLoopRule,
+                    self,
                 ).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
                     index_rmd=BASELINE_0,
-                    each_rule=Section22Rule8.PrimaryFluidLoopRule.SecondaryChildLoopRule.PumpTypeRule(),
+                    each_rule=PRM9012019Rule37a05.PrimaryFluidLoopRule.SecondaryChildLoopRule.PumpTypeRule(),
                 )
 
             def create_context_list(self, context, data=None):
@@ -160,7 +161,7 @@ class Section22Rule8(RuleDefinitionListIndexedBase):
             class PumpTypeRule(RuleDefinitionBase):
                 def __init__(self):
                     super(
-                        Section22Rule8.PrimaryFluidLoopRule.SecondaryChildLoopRule.PumpTypeRule,
+                        PRM9012019Rule37a05.PrimaryFluidLoopRule.SecondaryChildLoopRule.PumpTypeRule,
                         self,
                     ).__init__(
                         rmds_used=produce_ruleset_model_description(
