@@ -11,15 +11,15 @@ SurfaceAdjacency = SchemaEnums.schema_enums["SurfaceAdjacencyOptions"]
 EXTERIOR_SURFACES_JSONPATH = f'$.building_segments[*].zones[*].surfaces[*][?(@.adjacent_to="{SurfaceAdjacency.EXTERIOR}")]'
 
 
-class Section5Rule2(RuleDefinitionListIndexedBase):
+class PRM9012019Rule72a03(RuleDefinitionListIndexedBase):
     """Rule 2 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule2, self).__init__(
+        super(PRM9012019Rule72a03, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section5Rule2.BuildingRule(),
+            each_rule=PRM9012019Rule72a03.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-2",
             description="The building shall be modeled so that it does not shade itself",
@@ -31,7 +31,7 @@ class Section5Rule2(RuleDefinitionListIndexedBase):
 
     class BuildingRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section5Rule2.BuildingRule, self).__init__(
+            super(PRM9012019Rule72a03.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

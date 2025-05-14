@@ -25,11 +25,11 @@ RULESET_MODEL = SchemaEnums.schema_enums["RulesetModelOptions2019ASHRAE901"]
 ACCEPTABLE_FEN_PERCENTAGE_DIFFERENCE = 0.05
 
 
-class Section5Rule1(RuleDefinitionListIndexedBase):
+class PRM9012019Rule77j30(RuleDefinitionListIndexedBase):
     """Rule 1 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule1, self).__init__(
+        super(PRM9012019Rule77j30, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=True,
                 BASELINE_0=True,
@@ -41,7 +41,7 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
             rmds_used_optional=produce_ruleset_model_description(
                 BASELINE_90=True, BASELINE_180=True, BASELINE_270=True
             ),
-            each_rule=Section5Rule1.RMDRule(),
+            each_rule=PRM9012019Rule77j30.RMDRule(),
             index_rmd=BASELINE_0,
             id="5-1",
             description="There are four baseline rotations (i.e., four baseline models differing in azimuth by 90 degrees and four sets of baseline model results) if vertical fenestration area per each orientation differ by more than 5%.",
@@ -53,7 +53,7 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
 
     class RMDRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section5Rule1.RMDRule, self).__init__(
+            super(PRM9012019Rule77j30.RMDRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=True,
                     BASELINE_0=True,
@@ -65,7 +65,7 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
                 rmds_used_optional=produce_ruleset_model_description(
                     BASELINE_90=True, BASELINE_180=True, BASELINE_270=True
                 ),
-                each_rule=Section5Rule1.RMDRule.BuildingRule(),
+                each_rule=PRM9012019Rule77j30.RMDRule.BuildingRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.buildings[*]",
             )
@@ -139,7 +139,7 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
 
         class BuildingRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section5Rule1.RMDRule.BuildingRule, self).__init__(
+                super(PRM9012019Rule77j30.RMDRule.BuildingRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         BASELINE_0=True,
                     ),

@@ -24,15 +24,15 @@ APPLICABLE_SYS_TYPES = [
 BOILER_COMBUSTION_OPTION = SchemaEnums.schema_enums["BoilerCombustionOptions"]
 
 
-class Section21Rule4(RuleDefinitionListIndexedBase):
+class PRM9012019Rule63n48(RuleDefinitionListIndexedBase):
     """Rule 4 of ASHRAE 90.1-2019 Appendix G Section 21 (Hot water loop)"""
 
     def __init__(self):
-        super(Section21Rule4, self).__init__(
+        super(PRM9012019Rule63n48, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section21Rule4.BoilerRule(),
+            each_rule=PRM9012019Rule63n48.BoilerRule(),
             index_rmd=BASELINE_0,
             id="21-4",
             description="When baseline building does not use purchased heat, baseline systems 1,5,7,11,12 shall be modeled with natural draft boilers.",
@@ -61,7 +61,7 @@ class Section21Rule4(RuleDefinitionListIndexedBase):
 
     class BoilerRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section21Rule4.BoilerRule, self).__init__(
+            super(PRM9012019Rule63n48.BoilerRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

@@ -36,15 +36,15 @@ BOILER_EFFICIENCY_METRIC_TYPE = SchemaEnums.schema_enums[
 ]
 
 
-class Section21Rule17(RuleDefinitionListIndexedBase):
+class PRM9012019Rule35d81(RuleDefinitionListIndexedBase):
     """Rule 17 of ASHRAE 90.1-2019 Appendix G Section 21 (Hot water loop)"""
 
     def __init__(self):
-        super(Section21Rule17, self).__init__(
+        super(PRM9012019Rule35d81, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section21Rule17.BoilerRule(),
+            each_rule=PRM9012019Rule35d81.BoilerRule(),
             index_rmd=BASELINE_0,
             id="21-17",
             description="All boilers in the baseline building design shall be modeled at the minimum efficiency levels, both part load and full load, in accordance with Tables G3.5.6.",
@@ -73,7 +73,7 @@ class Section21Rule17(RuleDefinitionListIndexedBase):
 
     class BoilerRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section21Rule17.BoilerRule, self).__init__(
+            super(PRM9012019Rule35d81.BoilerRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

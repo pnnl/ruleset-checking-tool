@@ -21,15 +21,15 @@ APPLICABLE_SYS_TYPES = [
 REQUIRED_LOOP_SUPPLY_TEMP_AT_LOW_LOAD = ureg("54 degF")
 
 
-class Section22Rule6(RuleDefinitionListIndexedBase):
+class PRM9012019Rule52t53(RuleDefinitionListIndexedBase):
     """Rule 6 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
-        super(Section22Rule6, self).__init__(
+        super(PRM9012019Rule52t53, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section22Rule6.ChillerFluidLoopRule(),
+            each_rule=PRM9012019Rule52t53.ChillerFluidLoopRule(),
             index_rmd=BASELINE_0,
             id="22-6",
             description="Baseline chilled water loops that do not use purchased chilled water and do serve computer rooms (i.e., baseline system type 11) shall have a maximum reset chilled water supply temperature setpoint of 54F.",
@@ -68,7 +68,7 @@ class Section22Rule6(RuleDefinitionListIndexedBase):
 
     class ChillerFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section22Rule6.ChillerFluidLoopRule, self).__init__(
+            super(PRM9012019Rule52t53.ChillerFluidLoopRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

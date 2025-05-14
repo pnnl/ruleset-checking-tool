@@ -14,15 +14,15 @@ REQ_SENSIBLE_EFFECTIVENESS = 0.5
 REQ_LATENT_EFFECTIVENESS = 0.5
 
 
-class Section19Rule36(RuleDefinitionListIndexedBase):
+class PRM9012019Rule45j93(RuleDefinitionListIndexedBase):
     """Rule 36 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
 
     def __init__(self):
-        super(Section19Rule36, self).__init__(
+        super(PRM9012019Rule45j93, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section19Rule36.HVACRule(),
+            each_rule=PRM9012019Rule45j93.HVACRule(),
             index_rmd=BASELINE_0,
             id="19-36",
             description="Baseline systems required to model energy recovery per G3.1.2.10 shall be modeled with a 50% enthalpy recovery ratio.",
@@ -34,7 +34,7 @@ class Section19Rule36(RuleDefinitionListIndexedBase):
 
     class HVACRule(PartialRuleDefinition):
         def __init__(self):
-            super(Section19Rule36.HVACRule, self).__init__(
+            super(PRM9012019Rule45j93.HVACRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

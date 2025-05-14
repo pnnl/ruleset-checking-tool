@@ -8,7 +8,7 @@
         "standard": {
             "rule_id": "5-30",
             "ruleset_reference": "Table G3.1(5) Proposed Building Performance  (a)(3)",
-            "rule_description": "The proposed roof surfaces shall be modeled using the same thermal emittance as in the user model if the aged test data are available, or equal to 0.9 default emittance",
+            "rule_description": "The proposed roof surfaces shall be modeled using the same thermal emittance as in the user model if the aged test data are available, or equal to 0.9 default emittance.",
             "applicable_rmr": "Proposed Model",
             "rule_assertion": "=",
             "comparison_value": "User Model",
@@ -160,7 +160,7 @@
         "standard": {
             "rule_id": "5-30",
             "ruleset_reference": "Table G3.1(5) Proposed Building Performance  (a)(3)",
-            "rule_description": "The proposed roof surfaces shall be modeled using the same thermal emittance as in the user model if the aged test data are available, or equal to 0.9 default emittance",
+            "rule_description": "The proposed roof surfaces shall be modeled using the same thermal emittance as in the user model if the aged test data are available, or equal to 0.9 default emittance.",
             "applicable_rmr": "Proposed Model",
             "rule_assertion": "=",
             "comparison_value": "User Model",
@@ -312,7 +312,7 @@
         "standard": {
             "rule_id": "5-30",
             "ruleset_reference": "Table G3.1(5) Proposed Building Performance  (a)(3)",
-            "rule_description": "The proposed roof surfaces shall be modeled using the same thermal emittance as in the user model if the aged test data are available, or equal to 0.9 default emittance",
+            "rule_description": "The proposed roof surfaces shall be modeled using the same thermal emittance as in the user model if the aged test data are available, or equal to 0.9 default emittance.",
             "applicable_rmr": "Proposed Model",
             "rule_assertion": "=",
             "comparison_value": "User Model",
@@ -463,7 +463,7 @@
         "standard": {
             "rule_id": "5-30",
             "ruleset_reference": "Table G3.1(5) Proposed Building Performance  (a)(3)",
-            "rule_description": "The proposed roof surfaces shall be modeled using the same thermal emittance as in the user model if the aged test data are available, or equal to 0.9 default emittance",
+            "rule_description": "The proposed roof surfaces shall be modeled using the same thermal emittance as in the user model if the aged test data are available, or equal to 0.9 default emittance.",
             "applicable_rmr": "Proposed Model",
             "rule_assertion": "=",
             "comparison_value": "User Model",

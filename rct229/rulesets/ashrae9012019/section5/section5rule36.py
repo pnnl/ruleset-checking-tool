@@ -12,11 +12,11 @@ from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
 
 
-class Section5Rule36(RuleDefinitionListIndexedBase):
+class PRM9012019Rule23m90(RuleDefinitionListIndexedBase):
     """Rule 36 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule36, self).__init__(
+        super(PRM9012019Rule23m90, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
@@ -24,7 +24,7 @@ class Section5Rule36(RuleDefinitionListIndexedBase):
                 "$.ruleset_model_descriptions[*]": ["weather"],
                 "weather": ["climate_zone"],
             },
-            each_rule=Section5Rule36.BuildingRule(),
+            each_rule=PRM9012019Rule23m90.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-36",
             description="The air leakage rate in unconditioned and unenclosed spaces must be the same the baseline and proposed design.",
@@ -41,11 +41,11 @@ class Section5Rule36(RuleDefinitionListIndexedBase):
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section5Rule36.BuildingRule, self).__init__(
+            super(PRM9012019Rule23m90.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
-                each_rule=Section5Rule36.BuildingRule.ZoneRule(),
+                each_rule=PRM9012019Rule23m90.BuildingRule.ZoneRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.building_segments[*].zones[*]",
             )
@@ -65,7 +65,7 @@ class Section5Rule36(RuleDefinitionListIndexedBase):
 
         class ZoneRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section5Rule36.BuildingRule.ZoneRule, self).__init__(
+                super(PRM9012019Rule23m90.BuildingRule.ZoneRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),

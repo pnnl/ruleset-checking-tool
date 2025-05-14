@@ -14,15 +14,15 @@ EXTERIOR = SchemaEnums.schema_enums["SurfaceAdjacencyOptions"].EXTERIOR
 NONE = SchemaEnums.schema_enums["LightingDaylightingControlOptions"].NONE
 
 
-class Section6Rule7(RuleDefinitionListIndexedBase):
+class PRM9012019Rule66m62(RuleDefinitionListIndexedBase):
     """Rule 7 of ASHRAE 90.1-2019 Appendix G Section 6 (Lighting)"""
 
     def __init__(self):
-        super(Section6Rule7, self).__init__(
+        super(PRM9012019Rule66m62, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=False, PROPOSED=True
             ),
-            each_rule=Section6Rule7.ZoneRule(),
+            each_rule=PRM9012019Rule66m62.ZoneRule(),
             index_rmd=PROPOSED,
             id="6-7",
             description="Proposed building is modeled with daylighting controls directly or through schedule adjustments.",
@@ -34,7 +34,7 @@ class Section6Rule7(RuleDefinitionListIndexedBase):
 
     class ZoneRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section6Rule7.ZoneRule, self,).__init__(
+            super(PRM9012019Rule66m62.ZoneRule, self).__init__(
                 required_fields={"$": ["spaces", "surfaces"]},
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=False, PROPOSED=True

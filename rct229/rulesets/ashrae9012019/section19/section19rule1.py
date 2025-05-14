@@ -19,15 +19,15 @@ REQ_HEATING_OVERSIZING_FACTOR = 0.25
 REQ_COOLING_OVERSIZING_FACTOR = 0.15
 
 
-class Section19Rule1(RuleDefinitionListIndexedBase):
+class PRM9012019Rule73r44(RuleDefinitionListIndexedBase):
     """Rule 1 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
 
     def __init__(self):
-        super(Section19Rule1, self).__init__(
+        super(PRM9012019Rule73r44, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section19Rule1.HVACRule(),
+            each_rule=PRM9012019Rule73r44.HVACRule(),
             index_rmd=BASELINE_0,
             id="19-1",
             description="HVAC system coil capacities for the baseline building design shall be oversized by 15% for cooling and 25% for heating.",
@@ -63,7 +63,7 @@ class Section19Rule1(RuleDefinitionListIndexedBase):
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section19Rule1.HVACRule, self).__init__(
+            super(PRM9012019Rule73r44.HVACRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

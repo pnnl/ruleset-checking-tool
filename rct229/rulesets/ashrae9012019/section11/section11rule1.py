@@ -11,15 +11,15 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_equipment_associate
 from rct229.utils.jsonpath_utils import find_all
 
 
-class Section11Rule1(RuleDefinitionListIndexedBase):
+class PRM9012019Rule72v93(RuleDefinitionListIndexedBase):
     """Rule 1 of ASHRAE 90.1-2019 Appendix G Section 11 (Service Water Heating)"""
 
     def __init__(self):
-        super(Section11Rule1, self).__init__(
+        super(PRM9012019Rule72v93, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=True, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section11Rule1.RMDRule(),
+            each_rule=PRM9012019Rule72v93.RMDRule(),
             index_rmd=BASELINE_0,
             id="11-1",
             description="Where a complete service water-heating system exists, the proposed design shall reflect the actual system type."
@@ -34,7 +34,7 @@ class Section11Rule1(RuleDefinitionListIndexedBase):
 
     class RMDRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section11Rule1.RMDRule, self).__init__(
+            super(PRM9012019Rule72v93.RMDRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=True, BASELINE_0=True, PROPOSED=True
                 ),

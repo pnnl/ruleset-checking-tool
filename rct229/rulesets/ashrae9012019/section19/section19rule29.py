@@ -13,15 +13,15 @@ from rct229.schema.schema_enums import SchemaEnums
 FAN_SYSTEM_OPERATION = SchemaEnums.schema_enums["FanSystemOperationOptions"]
 
 
-class Section19Rule29(RuleDefinitionListIndexedBase):
+class PRM9012019Rule20z34(RuleDefinitionListIndexedBase):
     """Rule 29 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
 
     def __init__(self):
-        super(Section19Rule29, self).__init__(
+        super(PRM9012019Rule20z34, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section19Rule29.HVACRule(),
+            each_rule=PRM9012019Rule20z34.HVACRule(),
             index_rmd=BASELINE_0,
             id="19-29",
             description="Schedules for HVAC fans in the baseline design model that provide outdoor air for ventilation shall be cycled ON and OFF "
@@ -49,7 +49,7 @@ class Section19Rule29(RuleDefinitionListIndexedBase):
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section19Rule29.HVACRule, self).__init__(
+            super(PRM9012019Rule20z34.HVACRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

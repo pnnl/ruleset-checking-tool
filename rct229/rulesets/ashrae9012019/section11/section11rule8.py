@@ -32,15 +32,15 @@ CASE4_MSG = (
 )
 
 
-class Section11Rule8(RuleDefinitionListIndexedBase):
+class PRM9012019Rule40i48(RuleDefinitionListIndexedBase):
     """Rule 8 of ASHRAE 90.1-2019 Appendix G Section 11 (Service Water Heating)"""
 
     def __init__(self):
-        super(Section11Rule8, self).__init__(
+        super(PRM9012019Rule40i48, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section11Rule8.RMDRule(),
+            each_rule=PRM9012019Rule40i48.RMDRule(),
             index_rmd=BASELINE_0,
             id="11-8",
             description="One system per building area type shall be modeled in the baseline.",
@@ -52,14 +52,14 @@ class Section11Rule8(RuleDefinitionListIndexedBase):
 
     class RMDRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section11Rule8.RMDRule, self).__init__(
+            super(PRM9012019Rule40i48.RMDRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False,
                     BASELINE_0=True,
                     PROPOSED=True,
                 ),
                 index_rmd=BASELINE_0,
-                each_rule=Section11Rule8.RMDRule.SWHBATRule(),
+                each_rule=PRM9012019Rule40i48.RMDRule.SWHBATRule(),
                 required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
             )
 
@@ -158,7 +158,7 @@ class Section11Rule8(RuleDefinitionListIndexedBase):
 
         class SWHBATRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section11Rule8.RMDRule.SWHBATRule, self).__init__(
+                super(PRM9012019Rule40i48.RMDRule.SWHBATRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),

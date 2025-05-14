@@ -45,15 +45,15 @@ DAYS_IN_MONTH = {
 }
 
 
-class Section12Rule4(RuleDefinitionListIndexedBase):
+class PRM9012019rule60e48(RuleDefinitionListIndexedBase):
     """Rule 4 of ASHRAE 90.1-2019 Appendix G Section 12 (Receptacle)"""
 
     def __init__(self):
-        super(Section12Rule4, self).__init__(
+        super(PRM9012019rule60e48, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section12Rule4.RuleSetModelDescriptionRule(),
+            each_rule=PRM9012019rule60e48.RuleSetModelDescriptionRule(),
             index_rmd=BASELINE_0,
             id="12-4",
             description="Computer room equipment schedules shall be modeled as a constant fraction of the peak design load per the following monthly schedule: "
@@ -66,11 +66,11 @@ class Section12Rule4(RuleDefinitionListIndexedBase):
 
     class RuleSetModelDescriptionRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section12Rule4.RuleSetModelDescriptionRule, self).__init__(
+            super(PRM9012019rule60e48.RuleSetModelDescriptionRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
-                each_rule=Section12Rule4.RuleSetModelDescriptionRule.MiscEquipRule(),
+                each_rule=PRM9012019rule60e48.RuleSetModelDescriptionRule.MiscEquipRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].zones[*].spaces[*].miscellaneous_equipment[*]",
                 required_fields={"$": ["calendar"], "calendar": ["is_leap_year"]},
@@ -116,8 +116,7 @@ class Section12Rule4(RuleDefinitionListIndexedBase):
         class MiscEquipRule(RuleDefinitionBase):
             def __init__(self):
                 super(
-                    Section12Rule4.RuleSetModelDescriptionRule.MiscEquipRule,
-                    self,
+                    PRM9012019rule60e48.RuleSetModelDescriptionRule.MiscEquipRule, self
                 ).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False
