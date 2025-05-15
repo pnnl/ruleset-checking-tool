@@ -1332,7 +1332,7 @@
         "Rule": 10,
         "Test": "h",
         "test_description": "The project located in climate zone 5A has one building segment with two zones served by a baseline system type 5. It is a retail building area type with refrigerated cases and the system does not include an air economizer in the baseline nor the proposed.",
-        "expected_rule_outcome": "fail",
+        "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "in the proposed design include supermarket open refrigerated case-work systems that will be affected by using outdoor air for cooling (G3.1.2.6 exception #2).",
         "standard": {
             "rule_id": "19-10",
